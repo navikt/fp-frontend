@@ -2,10 +2,9 @@ import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Detail, Label } from '@navikt/ds-react';
+import { BodyShort, Detail, Label, VStack } from '@navikt/ds-react';
 import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { getKodeverknavnFn, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -64,45 +63,39 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   const avslagsårsak = getAvslagArsak(getKodeverknavn, vilkar, behandlingsresultat);
 
   return (
-    <>
+    <VStack gap="4">
       {avslagsårsak && (
-        <>
+        <VStack gap="1">
           <Label size="small">
             <FormattedMessage id="VedtakForm.ArsakTilAvslag" />
           </Label>
           <BodyShort size="small">{avslagsårsak}</BodyShort>
-          <VerticalSpacer sixteenPx />
-        </>
+        </VStack>
       )}
       {!skalBrukeOverstyrendeFritekstBrev && (
-        <>
-          <VerticalSpacer sixteenPx />
-          <TextAreaField
-            name="begrunnelse"
-            label={<FormattedMessage id="VedtakForm.Fritekst" />}
-            validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={erReadOnly}
-            parse={formaterFritekst}
-            badges={[
-              {
-                type: 'info',
-                titleText: getLanguageFromSprakkode(språkkode),
-              },
-            ]}
-          />
-        </>
+        <TextAreaField
+          name="begrunnelse"
+          label={<FormattedMessage id="VedtakForm.Fritekst" />}
+          validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={erReadOnly}
+          parse={formaterFritekst}
+          badges={[
+            {
+              type: 'info',
+              titleText: getLanguageFromSprakkode(språkkode),
+            },
+          ]}
+        />
       )}
       {erReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
-        <span>
-          <VerticalSpacer twentyPx />
+        <VStack gap="1">
           <Detail>
             <FormattedMessage id="VedtakForm.Fritekst" />
           </Detail>
-          <VerticalSpacer eightPx />
           <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
-        </span>
+        </VStack>
       )}
-    </>
+    </VStack>
   );
 };

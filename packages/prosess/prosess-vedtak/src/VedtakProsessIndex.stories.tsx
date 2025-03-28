@@ -1,4 +1,4 @@
-import { type ComponentProps } from 'react';
+import { type ComponentProps, useState } from 'react';
 
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
@@ -10,22 +10,27 @@ import {
   BehandlingResultatType,
   BehandlingStatus,
   BehandlingType,
+  FagsakMarkeringKode,
   FagsakYtelseType,
   KonsekvensForYtelsen,
   OppgaveType,
+  RelasjonsRolleType,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
   Behandling,
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  Fagsak,
   Vilkar,
 } from '@navikt/fp-types';
 
+import mal from '../.storybook/brevmal/mal.html?raw';
+import redigertInnhold from '../.storybook/brevmal/redigertInnhold.html?raw';
 import { VedtakProsessIndex } from './VedtakProsessIndex';
 
 const defaultAksjonspunkter = [
@@ -72,12 +77,36 @@ const defaultberegningresultatDagytelse = {
 const meta = {
   title: 'prosess/prosess-vedtak',
   component: VedtakProsessIndex,
-  decorators: [withMellomlagretFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData, withRouter],
   args: {
     vilkar: defaultVilkar,
-    previewCallback: action('button-click') as any,
+    previewCallback: action('button-click'),
+    refetchBrevOverstyring: action('button-click'),
+    mellomlagreBrevOverstyring: action('button-click') as (html: string | null) => Promise<void>,
   },
-  render: args => <VedtakProsessIndex {...args} />,
+  render: args => {
+    const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
+
+    const mellomlagreBrevOverstyring = (redigert: string | null) => {
+      setRedigertHtml(redigert);
+      return args.mellomlagreBrevOverstyring(redigert);
+    };
+
+    return (
+      <VedtakProsessIndex
+        {...args}
+        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+        brevOverstyring={
+          redigertHtml && args.brevOverstyring
+            ? {
+                opprinneligHtml: args.brevOverstyring.opprinneligHtml,
+                redigertHtml,
+              }
+            : args.brevOverstyring
+        }
+      />
+    );
+  },
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakProsessIndex>>;
 export default meta;
 
@@ -91,7 +120,10 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
   args: {
     behandling: defaultBehandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -102,8 +134,11 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
       status: BehandlingStatus.AVSLUTTET,
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -114,14 +149,15 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
         vedtaksbrev: 'FRITEKST',
-        overskrift: 'Dette er en overskrift',
-        fritekstbrev: 'Dette er innholdet i brevet',
         type: BehandlingResultatType.INNVILGET,
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
   },
 };
 
@@ -135,8 +171,11 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -150,8 +189,11 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -159,7 +201,9 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
   args: {
     behandling: defaultBehandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -172,6 +216,7 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -185,7 +230,9 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -198,6 +245,7 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -236,7 +284,9 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
       ],
     },
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -249,6 +299,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -365,8 +416,11 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ],
       },
     ],
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -381,8 +435,11 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
-    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -396,8 +453,11 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
-    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    } as Fagsak,
     isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -408,8 +468,11 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
-    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -420,7 +483,9 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
-    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -433,6 +498,7 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -449,8 +515,11 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
-    ytelseTypeKode: FagsakYtelseType.ENGANGSSTONAD,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -461,8 +530,11 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
 export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
   args: {
     behandling: defaultBehandling,
-    ytelseTypeKode: FagsakYtelseType.SVANGERSKAPSPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -484,8 +556,11 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -504,8 +579,11 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -523,8 +601,11 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -543,8 +624,11 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -556,15 +640,16 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
         vedtaksbrev: 'FRITEKST',
-        overskrift: 'Dette er en overskrift',
-        fritekstbrev: 'Dette er innholdet i brevet',
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHORER],
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -583,8 +668,11 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
         ...defaultberegningresultatDagytelse,
       },
     },
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -603,8 +691,11 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
         ...defaultberegningresultatDagytelse,
       },
     },
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -619,8 +710,11 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -635,7 +729,9 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -648,6 +744,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -663,7 +760,9 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -684,6 +783,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       },
     ],
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
 
@@ -698,7 +798,9 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -711,5 +813,73 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
       ],
     } as Beregningsgrunnlag,
     isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
+  },
+};
+
+export const LegacyOverstyring: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      status: BehandlingStatus.AVSLUTTET,
+      behandlingsresultat: {
+        vedtaksbrev: 'FRITEKST',
+        type: BehandlingResultatType.INNVILGET,
+        overskrift: 'Dette er en overskrift',
+        fritekstbrev: 'Dette er en fritekst',
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
+    isReadOnly: true,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
+  },
+};
+
+export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      status: BehandlingStatus.OPPRETTET,
+      behandlingsresultat: {
+        vedtaksbrev: 'FRITEKST',
+        type: BehandlingResultatType.INNVILGET,
+        overskrift: 'Dette er en overskrift',
+        fritekstbrev: 'Dette er en fritekst',
+      },
+    } as Behandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    fagsak: {
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    } as Fagsak,
+    isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
+  },
+};
+
+export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: Story = {
+  args: {
+    behandling: defaultBehandling,
+    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    fagsak: {
+      saksnummer: '1234567',
+      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      bruker: { navn: 'Kari Nordmann' },
+      annenPart: { navn: 'Ola Nordmann' },
+      relasjonsRolleType: RelasjonsRolleType.MOR,
+      annenpartBehandling: {
+        relasjonsRolleType: RelasjonsRolleType.FAR,
+      },
+      fagsakMarkeringer: [
+        {
+          fagsakMarkering: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+          kortNavn: 'Utsettelse',
+        },
+      ],
+    } as Fagsak,
+    isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };

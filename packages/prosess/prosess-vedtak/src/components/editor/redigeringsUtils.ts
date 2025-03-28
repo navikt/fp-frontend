@@ -1,14 +1,22 @@
 import { generate, parse, walk } from 'css-tree';
 
+import { notEmpty } from '@navikt/fp-utils';
+
+export const lagRedigerbartInnholdWrapper = (redigerbartInnhold: string, readonlyFooter: string | undefined) =>
+  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter ?? ''}</div>`;
+
 export const utledStiler = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
   const stiler = heleBrevet.querySelector('style')?.innerHTML;
+  const stilerMedJustertHeader = stiler
+    ?.replaceAll('margin-top: 48pt', 'margin-top: 0pt')
+    .replaceAll('margin-top: 26pt', 'margin-top: 0pt');
 
-  if (!stiler) {
+  if (!stilerMedJustertHeader) {
     throw new Error('Fant ikke stiler i brevet');
   }
 
-  const styleAst = parse(stiler);
+  const styleAst = parse(stilerMedJustertHeader);
 
   walk(styleAst, (nodeRef, item, list) => {
     const node = nodeRef;
@@ -38,42 +46,41 @@ export const utledStiler = (html: string) => {
   return generate(styleAst);
 };
 
-export const utledSeksjonerSomKanRedigeres = (html: string) => {
-  const heleBrevet = new DOMParser().parseFromString(html, 'application/xhtml+xml');
-  return Array.from(heleBrevet.querySelectorAll('body > *, section > *'));
+export const utledDelerFraBrev = (html: string) => {
+  const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
+  const navLogo = notEmpty(heleBrevet.getElementById('logo')?.innerHTML, 'Nav-logo finnes ikke i mal');
+  const header = notEmpty(heleBrevet.getElementById('header')?.innerHTML, 'Header finnes ikke i mal');
+  const footer = notEmpty(
+    heleBrevet.getElementById('readonly-innhold')?.innerHTML,
+    'Readonly-innhold finnes ikke i mal',
+  );
+
+  return { navLogo, header, footer };
 };
 
-export const utledPrefiksInnhold = (seksjoner: Element[]) => htmlForRedigerbartFelt(seksjoner).join('');
+export const utledRedigerbartInnhold = (html: string, harPraksisUtsettelse: boolean): string => {
+  const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
 
-export const utledSuffiksInnhold = (seksjoner: Element[]) =>
-  htmlForRedigerbartFelt(seksjoner.toReversed()).toReversed().join('');
+  const editertbartInnhold = notEmpty(
+    heleBrevet.querySelector('[data-editable]')?.innerHTML,
+    'Redigerbart innhold finnes ikke i mal',
+  );
 
-export const utledRedigerbartInnhold = (html: string) => {
-  // Bruker application/xhtml+xml som datatype, da backend bruker en xhtml parser som
-  // ikke støtter feks. <br> som ikke er self-closing (<br/>)
-  const heleBrevet = new DOMParser().parseFromString(html, 'application/xhtml+xml');
-  return heleBrevet?.querySelector('[data-editable]')?.innerHTML;
+  if (harPraksisUtsettelse) {
+    return (
+      editertbartInnhold +
+      notEmpty(heleBrevet.getElementById('readonly-innhold')?.innerHTML, 'Readonly-innhold finnes ikke i mal')
+    );
+  }
+
+  return editertbartInnhold;
 };
 
-const htmlForRedigerbartFelt = (elementer: Element[]) => {
-  let funnetRedigerbartInnhold = false;
-  const prefiks = new Array<string>();
-  elementer.forEach(el => {
-    if (el.hasAttribute('data-editable')) {
-      funnetRedigerbartInnhold = true;
-    } else if (!funnetRedigerbartInnhold && !el.hasAttribute('data-hidden')) {
-      prefiks.push(el.outerHTML);
-    }
-  });
-  return prefiks;
-};
-
-export const erRedigertHtmlGyldig = (html: string) => {
-  const innholdet = document.createElement('div');
-  innholdet.innerHTML = html;
-  const tekst = innholdet.textContent ?? innholdet.innerText ?? '';
-  //FIXME Feiltekster
-  const malInnholdStrenger = ['Fyll inn overskrift', 'Fyll inn brevtekst'];
-  const regex = new RegExp(malInnholdStrenger.join('|'), 'gi');
-  return !regex.test(tekst);
+export const erRedigertHtmlGyldig = (html: string): boolean => {
+  if (html.trim().length < 50) {
+    return false;
+  }
+  const doc = document.createElement('div');
+  doc.innerHTML = html;
+  return doc.innerHTML === html;
 };

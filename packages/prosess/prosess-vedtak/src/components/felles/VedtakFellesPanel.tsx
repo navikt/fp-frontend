@@ -1,10 +1,10 @@
-import React, { type MouseEvent, type ReactNode, useCallback, useMemo, useState } from 'react';
+import { type MouseEvent, type ReactNode, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, Label, Link } from '@navikt/ds-react';
-import { FlexColumn, FlexContainer, FlexRow, OkAvbrytModal, VerticalSpacer } from '@navikt/ft-ui-komponenter';
+import { BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
+import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
@@ -16,16 +16,18 @@ import {
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Behandlingsresultat, BrevOverstyring, Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { ManueltVedtaksbrevPanel } from './ManueltVedtaksbrevPanel';
+import type { ForhandsvisData } from '../forstegang/VedtakForm';
+import { LegacyOverstyrtVedtaksbrev } from './LegacyOverstyrtVedtaksbrev.tsx';
 import { OppgaveTabell } from './OppgaveTabell.tsx';
+import { OverstyringVedtaksbrev } from './OverstyringVedtaksbrev.tsx';
 import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 
 import styles from './vedtakFellesPanel.module.css';
 
-export const finnTekstkodeFraBehandlingstatus = (behandlingStatus: string): string =>
+const finnTekstkodeFraBehandlingstatus = (behandlingStatus: string): string =>
   behandlingStatus === behandlingStatusCode.AVSLUTTET || behandlingStatus === behandlingStatusCode.IVERKSETTER_VEDTAK
     ? 'VedtakForm.vedtak'
     : 'VedtakForm.ForslagTilVedtak';
@@ -64,52 +66,54 @@ interface Props {
     erOpphor?: boolean,
   ) => ReactNode;
   previewAutomatiskBrev: (e: MouseEvent) => void;
-  previewOverstyrtBrev: (e: MouseEvent) => void;
+  previewCallback: (data: ForhandsvisData) => void;
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
+  brevOverstyring?: BrevOverstyring;
+  refetchBrevOverstyring: () => void;
+  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
+  setHarOverstyrtVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
+  harOverstyrtVedtaksbrev: boolean;
 }
 
 export const VedtakFellesPanel = ({
   renderPanel,
   previewAutomatiskBrev,
-  previewOverstyrtBrev,
+  previewCallback,
   tilbakekrevingtekst,
   erBehandlingEtterKlage,
   vedtakstatusTekst,
   oppgaver,
+  brevOverstyring,
+  refetchBrevOverstyring,
+  mellomlagreBrevOverstyring,
+  setHarOverstyrtVedtaksbrev,
+  harOverstyrtVedtaksbrev,
 }: Props) => {
   const intl = useIntl();
 
   const { behandling, isReadOnly } = usePanelDataContext();
-
-  const { aksjonspunkt } = behandling;
+  const { aksjonspunkt, behandlingsresultat, behandlingPåVent, status, behandlingHenlagt, uuid, taskStatus } =
+    behandling;
 
   const {
-    setValue,
     formState: { isSubmitting },
   } = useFormContext();
 
-  const { behandlingsresultat, behandlingPåVent, språkkode, status, behandlingHenlagt, uuid, taskStatus } = behandling;
+  const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
 
   if (!behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
   }
 
-  const [skalBrukeManueltBrev, setSkalBrukeManueltBrev] = useState(
-    !!behandlingsresultat.vedtaksbrev && behandlingsresultat.vedtaksbrev === 'FRITEKST',
-  );
-  const [skalViseModal, setSkalViseModal] = useState(false);
-  const onToggleOverstyring = useCallback((e: React.MouseEvent) => {
-    setSkalBrukeManueltBrev(true);
-    e.preventDefault();
-  }, []);
-  const avsluttRedigering = useCallback(() => {
-    setSkalBrukeManueltBrev(false);
-    setSkalViseModal(false);
-    setValue('overskrift', undefined);
-    setValue('brødtekst', undefined);
-  }, []);
+  const forkastOverstyrtBrev = async () => {
+    setVisForkastOverstyringModal(false);
+    setHarOverstyrtVedtaksbrev(false);
+
+    await mellomlagreBrevOverstyring(null);
+    refetchBrevOverstyring();
+  };
 
   const erInnvilget = isInnvilget(behandlingsresultat.type);
   const erAvslatt = isAvslag(behandlingsresultat.type);
@@ -121,65 +125,44 @@ export const VedtakFellesPanel = ({
     taskStatus?.status !== ApiPollingStatus.HALTED &&
     taskStatus?.status !== ApiPollingStatus.DELAYED;
 
-  const harIkkeKonsekvensForYtelse = useMemo(
-    () =>
-      harIkkeKonsekvenserForYtelsen(
-        [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
-        behandlingsresultat,
-      ),
-    [behandlingsresultat],
+  const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
+    [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
+    behandlingsresultat,
   );
 
+  const harValgtÅOverstyreMenIkkeOverstyrt = harOverstyrtVedtaksbrev && !brevOverstyring?.redigertHtml;
+
   return (
-    <>
+    <VStack gap="4">
       <OkAvbrytModal
         text={intl.formatMessage({ id: 'VedtakFellesPanel.Forkast' })}
         okButtonText={intl.formatMessage({ id: 'VedtakFellesPanel.Ok' })}
-        showModal={skalViseModal}
-        cancel={() => setSkalViseModal(false)}
-        submit={avsluttRedigering}
+        showModal={visForkastOverstyringModal}
+        cancel={() => setVisForkastOverstyringModal(false)}
+        submit={forkastOverstyrtBrev}
       />
-      <FlexContainer>
-        <FlexRow>
-          {status === behandlingStatusCode.AVSLUTTET && (
-            <FlexColumn>
-              {erInnvilget && <CheckmarkCircleFillIcon className={styles.innvilgetImage} />}
-              {!erInnvilget && <XMarkOctagonFillIcon className={styles.avslattImage} />}
-            </FlexColumn>
-          )}
-          <FlexColumn>
-            <Heading size="small">
-              <FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} />
-            </Heading>
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
-      <VerticalSpacer eightPx />
-      <FlexContainer>
-        <FlexRow>
-          <FlexColumn className={styles.space}>
-            <Label size="small">
-              {vedtakstatusTekst}
-              {tilbakekrevingtekst && `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`}
-            </Label>
-          </FlexColumn>
-          <FlexColumn className={styles.space}>
-            {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
-              <Link href="#" onClick={previewAutomatiskBrev}>
-                <span>
-                  <FormattedMessage
-                    id={
-                      erBehandlingEtterKlage
-                        ? 'VedtakFellesPanel.UtkastVedtaksbrev'
-                        : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
-                    }
-                  />
-                </span>
-                <ArrowForwardIcon className={styles.pil} />
-              </Link>
-            )}
-            {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
-              <BodyShort size="small" className={styles.disabletLink}>
+      <HStack gap="2">
+        {status === behandlingStatusCode.AVSLUTTET && (
+          <>
+            {erInnvilget && <CheckmarkCircleFillIcon className={styles.innvilgetImage} />}
+            {!erInnvilget && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+          </>
+        )}
+        <Heading size="small">
+          <FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} />
+        </Heading>
+      </HStack>
+      <HStack gap="2">
+        <div className={styles.space}>
+          <Label size="small">
+            {vedtakstatusTekst}
+            {tilbakekrevingtekst && `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`}
+          </Label>
+        </div>
+        <div className={styles.space}>
+          {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
+            <Link href="#" onClick={previewAutomatiskBrev}>
+              <span>
                 <FormattedMessage
                   id={
                     erBehandlingEtterKlage
@@ -187,70 +170,77 @@ export const VedtakFellesPanel = ({
                       : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
                   }
                 />
+              </span>
+              <ArrowForwardIcon className={styles.pil} />
+            </Link>
+          )}
+          {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
+            <BodyShort size="small" className={styles.disabletLink}>
+              <FormattedMessage
+                id={
+                  erBehandlingEtterKlage
+                    ? 'VedtakFellesPanel.UtkastVedtaksbrev'
+                    : 'VedtakFellesPanel.AutomatiskVedtaksbrev'
+                }
+              />
+            </BodyShort>
+          )}
+        </div>
+        <div>
+          {!isReadOnly && !harOverstyrtVedtaksbrev && (
+            <Link
+              href="#"
+              onClick={(e: React.MouseEvent) => {
+                setHarOverstyrtVedtaksbrev(true);
+
+                e.preventDefault();
+              }}
+            >
+              <PencilIcon className={styles.blyant} />
+              <span>
+                <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
+              </span>
+            </Link>
+          )}
+          {(isReadOnly || harOverstyrtVedtaksbrev) && (
+            <>
+              <PencilIcon className={styles.blyantDisablet} />
+              <BodyShort size="small" className={styles.disabletLink}>
+                <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
               </BodyShort>
-            )}
-          </FlexColumn>
-          <FlexColumn>
-            {!isReadOnly && !skalBrukeManueltBrev && (
-              <Link href="#" onClick={onToggleOverstyring}>
-                <PencilIcon className={styles.blyant} />
-                <span>
-                  <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-                </span>
-              </Link>
-            )}
-            {(isReadOnly || skalBrukeManueltBrev) && (
-              <>
-                <PencilIcon className={styles.blyantDisablet} />
-                <BodyShort size="small" className={styles.disabletLink}>
-                  <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
-                </BodyShort>
-              </>
-            )}
-          </FlexColumn>
-        </FlexRow>
-      </FlexContainer>
+            </>
+          )}
+        </div>
+      </HStack>
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
-      <VerticalSpacer twentyPx />
       {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
-      <VerticalSpacer twentyPx />
-      {renderPanel(skalBrukeManueltBrev, erInnvilget, erAvslatt, erOpphor)}
-      {skalBrukeManueltBrev && (
-        <ManueltVedtaksbrevPanel
-          isReadOnly={isReadOnly}
-          språkkode={språkkode}
-          forhåndsvisOverstyrtBrev={previewOverstyrtBrev}
-          skalViseLink={skalViseLink}
-        />
-      )}
-      {kanSendesTilGodkjenning(status) && (
-        <>
-          <VerticalSpacer twentyPx />
-          <FlexContainer>
-            <FlexRow>
-              <FlexColumn>
-                {!isReadOnly && (
-                  <Button
-                    variant="primary"
-                    size="small"
-                    disabled={behandlingPåVent || isSubmitting}
-                    loading={isSubmitting}
-                  >
-                    <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, skalBrukeManueltBrev)} />
-                  </Button>
-                )}
-              </FlexColumn>
-              {skalBrukeManueltBrev && (
-                <FlexColumn>
-                  <Button size="small" variant="secondary" onClick={() => setSkalViseModal(true)} type="button">
-                    <FormattedMessage id="VedtakFellesPanel.ForkastManueltBrev" />
-                  </Button>
-                </FlexColumn>
-              )}
-            </FlexRow>
-          </FlexContainer>
-        </>
-      )}
-    </>
+      <VStack gap="8">
+        {renderPanel(harOverstyrtVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
+        {behandling.behandlingsresultat?.overskrift && (
+          <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={previewCallback} behandling={behandling} />
+        )}
+        {harOverstyrtVedtaksbrev && (
+          <OverstyringVedtaksbrev
+            forhåndsvisBrev={previewCallback}
+            brevOverstyring={brevOverstyring}
+            refetchBrevOverstyring={refetchBrevOverstyring}
+            mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+            setVisForkastOverstyringModal={setVisForkastOverstyringModal}
+          />
+        )}
+        {!isReadOnly && kanSendesTilGodkjenning(status) && (
+          <div>
+            <Button
+              variant="primary"
+              size="small"
+              disabled={behandlingPåVent || isSubmitting || harValgtÅOverstyreMenIkkeOverstyrt}
+              loading={isSubmitting}
+            >
+              <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, harOverstyrtVedtaksbrev)} />
+            </Button>
+          </div>
+        )}
+      </VStack>
+    </VStack>
   );
 };

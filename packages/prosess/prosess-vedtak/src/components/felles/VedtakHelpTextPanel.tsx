@@ -1,7 +1,6 @@
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort } from '@navikt/ds-react';
-import { VerticalSpacer } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
@@ -36,21 +35,18 @@ export const VedtakHelpTextPanel = ({ isReadOnly, aksjonspunkter }: Props) => {
   const helpTexts = findHelpTexts(intl, aksjonspunkter);
   if (!isReadOnly && helpTexts.length > 0) {
     return (
-      <>
-        <VerticalSpacer sixteenPx />
-        <Alert variant="info" size="small">
-          <BodyShort size="small">
-            <FormattedMessage id="VedtakHelpTextPanel.Vurder" />
-          </BodyShort>
-          <ul>
-            {helpTexts.map(text => (
-              <li key={text}>
-                <BodyShort size="small">{text}</BodyShort>
-              </li>
-            ))}
-          </ul>
-        </Alert>
-      </>
+      <Alert variant="info" size="small">
+        <BodyShort size="small">
+          <FormattedMessage id="VedtakHelpTextPanel.Vurder" />
+        </BodyShort>
+        <ul>
+          {helpTexts.map(text => (
+            <li key={text}>
+              <BodyShort size="small">{text}</BodyShort>
+            </li>
+          ))}
+        </ul>
+      </Alert>
     );
   }
   return null;

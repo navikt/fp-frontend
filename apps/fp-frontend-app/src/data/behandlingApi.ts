@@ -20,6 +20,7 @@ import type {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   BeregningsresultatTilbakekreving,
+  BrevOverstyring,
   Dokument,
   DokumentasjonVurderingBehov,
   FaktaArbeidsforhold,
@@ -198,6 +199,8 @@ export const BehandlingRel = {
   VERGE: 'soeker-verge',
   UPDATE_ON_HOLD: 'endre-pa-vent',
   HENT_OPPGAVER: 'hent-oppgaver',
+  HENT_BREV_OVERSTYRING: 'hent-brev-overstyring',
+  MELLOMLAGRE_BREV_OVERSTYRING: 'mellomlagre-brev-overstyring',
 };
 
 const getArbeidsgiverOversiktOptions =
@@ -521,6 +524,14 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
+const getHentBrevOverstyringOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
+  queryOptions({
+    queryKey: [BehandlingRel.HENT_BREV_OVERSTYRING, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('HENT_BREV_OVERSTYRING', links)).json<BrevOverstyring>(),
+    enabled: harLenke(behandling, 'HENT_BREV_OVERSTYRING') && isEnabled,
+    staleTime: Infinity,
+  });
+
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
     json: { behandlingUuid },
@@ -612,6 +623,14 @@ const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string;
   kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V1', links), {
     json: params,
   });
+
+const getMellomlagreBrevOverstyring =
+  (links: ApiLink[]) => (params: { behandlingUuid: string; redigertInnhold: string | null }) =>
+    kyExtended
+      .post<string>(getUrlFromRel('MELLOMLAGRE_BREV_OVERSTYRING', links), {
+        json: params,
+      })
+      .json<void>();
 
 const getFjernVergeV2 = (links: ApiLink[]) => () => kyExtended.post(getUrlFromRel('VERGE_FJERN_V2', links));
 
@@ -727,6 +746,8 @@ export const useBehandlingApi = (behandling: Behandling) => {
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),
     utlandDokStatusOptions: getUtlandDokStatusOptions(links),
     vergeOptions: getVergeOptions(links),
+    hentBrevOverstyringOptions: getHentBrevOverstyringOptions(links),
+    mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
     verge: {
       hent: getVerge(links),
       opprettVergeV2: getOpprettVergeV2(links),
