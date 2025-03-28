@@ -327,24 +327,25 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     oppgaver: [
       {
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
-        nyesteBeskrivelse: {
-          header: null,
-          kommentarer: ['VL: Se sto mottatt 24.02.25'],
-        },
-        eldreBeskrivelser: [],
+        beskrivelser: [
+          {
+            header: null,
+            kommentarer: ['VL: Se sto mottatt 24.02.25'],
+          },
+        ],
         dokumenter: [],
       },
       {
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
-        nyesteBeskrivelse: {
-          header: '--- 19.03.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
-          kommentarer: [
-            'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
-              'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24.',
-            'Kan dere gi tilbakemelding på dette?',
-          ],
-        },
-        eldreBeskrivelser: [
+        beskrivelser: [
+          {
+            header: '--- 19.03.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
+            kommentarer: [
+              'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
+                'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24.',
+              'Kan dere gi tilbakemelding på dette?',
+            ],
+          },
           {
             header: null,
             kommentarer: ['VL: Se sto mottatt 20.02.25'],
@@ -354,8 +355,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       },
       {
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        nyesteBeskrivelse: { header: null, kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] },
-        eldreBeskrivelser: [],
+        beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] }],
         dokumenter: [
           {
             journalpostId: '123',
@@ -376,8 +376,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       },
       {
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        nyesteBeskrivelse: { header: null, kommentarer: ['VL: Bekreftelse fra studiested/skole'] },
-        eldreBeskrivelser: [],
+        beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra studiested/skole'] }],
         dokumenter: [
           {
             journalpostId: '123',
@@ -388,14 +387,19 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       },
       {
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        nyesteBeskrivelse: {
-          header: '--- 19.01.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
-          kommentarer: [
-            'Bruker sier at han har søkt Foreldrepenger, han er i permisjon nå. Han har ikke fått svar, han skriver at saksnr er: 12341234.',
-            'Han har AAP, så det er greit å vite om han får Foreldrepenger før man evt stanser denne ytelsen.',
-          ],
-        },
-        eldreBeskrivelser: [
+        beskrivelser: [
+          {
+            header: '--- 19.01.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
+            kommentarer: [
+              'Bruker sier at han har søkt Foreldrepenger, han er i permisjon nå. Han har ikke fått svar, han skriver at saksnr er: 12341234.',
+            ],
+          },
+          {
+            header: null,
+            kommentarer: [
+              'Han har AAP, så det er greit å vite om han får Foreldrepenger før man evt stanser denne ytelsen.',
+            ],
+          },
           {
             header: '--- 19.02.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
             kommentarer: ['Må ringe bruker for å avklare AAP og Foreldrepenger', 'Undersøk dette før vi går videre'],

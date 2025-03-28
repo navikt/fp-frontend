@@ -37,7 +37,7 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
         <Table.Body>
           {oppgaver.map(oppgave => (
             <Table.Row
-              key={oppgave.nyesteBeskrivelse?.header || oppgave.nyesteBeskrivelse?.kommentarer[0]}
+              key={oppgave.beskrivelser[0].header || oppgave.beskrivelser[0].kommentarer[0]}
               className={styles.row}
             >
               <Table.DataCell>
@@ -47,10 +47,7 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
               </Table.DataCell>
               <Table.DataCell>
                 <VStack gap="2">
-                  <Beskrivelser
-                    nyesteBeskrivelse={oppgave.nyesteBeskrivelse}
-                    eldreBeskrivelser={oppgave.eldreBeskrivelser}
-                  />
+                  {oppgave.beskrivelser.length > 0 && <Beskrivelser beskrivelser={oppgave.beskrivelser} />}
                   {oppgave.dokumenter.length > 0 && <Dokumenter dokumenter={oppgave.dokumenter} />}
                 </VStack>
               </Table.DataCell>
