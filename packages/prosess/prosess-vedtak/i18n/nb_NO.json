@@ -67,6 +67,15 @@
   "OppgaveTabell.Type": "Type",
   "OppgaveTabell.Beskrivelse": "Beskrivelse",
 
+  "Beskrivelser.VisEldreBeskrivelser": "Vis eldre beskrivelser ({antall})",
+  "Beskrivelser.SkjulEldreBeskrivelser": "Skjul eldre beskrivelser ({antall})",
+
+  "DokumentVisning.FilIkon": "Åpne dokument",
+  "DokumentVisning.UkjentTittel": "Ukjent tittel",
+
+  "Dokumenter.VisDokumenter": "Vis dokumenter ({antall})",
+  "Dokumenter.SkjulDokumenter": "Skjul dokumenter ({antall})",
+
   "LegacyOverstyrtVedtaksbrev.ForhandsvisManueltVedtaksbrev": "Vis manuelt brev",
   "LegacyOverstyrtVedtaksbrev.Overskrift": "Overskrift",
   "LegacyOverstyrtVedtaksbrev.Innhold": "Innhold i brev til søker",

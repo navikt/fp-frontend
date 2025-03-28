@@ -327,22 +327,93 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     oppgaver: [
       {
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
-        beskrivelse: 'Se sto mottatt 24.02.25',
+        nyesteBeskrivelse: {
+          header: null,
+          kommentarer: ['VL: Se sto mottatt 24.02.25'],
+        },
+        eldreBeskrivelser: [],
+        dokumenter: [],
       },
       {
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
-        beskrivelse:
-          'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
-          'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24. ' +
-          'Kan dere gi tilbakemelding på dette?',
+        nyesteBeskrivelse: {
+          header: '--- 19.03.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
+          kommentarer: [
+            'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
+              'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24.',
+            'Kan dere gi tilbakemelding på dette?',
+          ],
+        },
+        eldreBeskrivelser: [
+          {
+            header: null,
+            kommentarer: ['VL: Se sto mottatt 20.02.25'],
+          },
+        ],
+        dokumenter: [],
       },
       {
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        beskrivelse: 'Bekreftelse fra arbeidsgiver',
+        nyesteBeskrivelse: { header: null, kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] },
+        eldreBeskrivelser: [],
+        dokumenter: [
+          {
+            journalpostId: '123',
+            dokumentId: '321',
+            tittel: 'Dokumentasjon av mors deltakelse i kvalifiseringsprogrammet',
+          },
+          {
+            journalpostId: '123',
+            dokumentId: '987',
+            tittel: 'Dokumentasjon på reiser til og fra Norge',
+          },
+          {
+            journalpostId: '123',
+            dokumentId: '678',
+            tittel: 'Ettersendelse til søknad om foreldrepenger ved fødsel',
+          },
+        ],
       },
       {
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        beskrivelse: 'Søknad om foreldrepenger ved fødsel',
+        nyesteBeskrivelse: { header: null, kommentarer: ['VL: Bekreftelse fra studiested/skole'] },
+        eldreBeskrivelser: [],
+        dokumenter: [
+          {
+            journalpostId: '123',
+            dokumentId: '456',
+            tittel: 'Dokumentasjon på at mor studerer på heltid',
+          },
+        ],
+      },
+      {
+        oppgavetype: OppgaveType.VUR_DOKUMENT,
+        nyesteBeskrivelse: {
+          header: '--- 19.01.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
+          kommentarer: [
+            'Bruker sier at han har søkt Foreldrepenger, han er i permisjon nå. Han har ikke fått svar, han skriver at saksnr er: 12341234.',
+            'Han har AAP, så det er greit å vite om han får Foreldrepenger før man evt stanser denne ytelsen.',
+          ],
+        },
+        eldreBeskrivelser: [
+          {
+            header: '--- 19.02.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
+            kommentarer: ['Må ringe bruker for å avklare AAP og Foreldrepenger', 'Undersøk dette før vi går videre'],
+          },
+          { header: null, kommentarer: ['VL: Søknad om foreldrepenger ved fødsel'] },
+        ],
+        dokumenter: [
+          {
+            journalpostId: '321',
+            dokumentId: '456',
+            tittel: 'Dokumentasjon av termindato (lev. kun av mor), fødsel eller dato for omsorgsovertakelse',
+          },
+          {
+            journalpostId: '321',
+            dokumentId: '678',
+            tittel: 'Ettersendelse til søknad om svangerskapspenger til selvstendig næringsdrivende og frilanser',
+          },
+        ],
       },
     ],
     fagsak: {

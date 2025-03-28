@@ -278,16 +278,59 @@ describe('<VedtakProsessIndex>', () => {
     expect(screen.getByText('Type')).toBeInTheDocument();
     expect(screen.getByText('Beskrivelse')).toBeInTheDocument();
     expect(screen.getAllByText('Vurder konsekvens for ytelse')).toHaveLength(2);
-    expect(screen.getAllByText('Vurder dokument')).toHaveLength(2);
-    expect(screen.getByText('Se sto mottatt 24.02.25')).toBeInTheDocument();
+    expect(screen.getAllByText('Vurder dokument')).toHaveLength(3);
+    expect(screen.getByText('VL: Se sto mottatt 24.02.25')).toBeInTheDocument();
+    expect(screen.getByText('--- 19.03.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---')).toBeInTheDocument();
     expect(
       screen.getByText(
-        'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. Je...',
+        'Fullmektig tar kontakt. Ber om fristutsettelse 4 uker, ettersom bruker først mottok brevet i dag. ' +
+          'Jeg har utsatt 14 dager, men han ønsker ytterligere 2 uker utover det, altså 28.09.24.',
       ),
     ).toBeInTheDocument();
-    expect(screen.getByText('Vis mer')).toBeInTheDocument();
-    expect(screen.getByText('Søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
-    expect(screen.getByText('Bekreftelse fra arbeidsgiver')).toBeInTheDocument();
+    expect(screen.getByText('Kan dere gi tilbakemelding på dette?')).toBeInTheDocument();
+    expect(screen.getByText('Vis eldre beskrivelser (1)')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Vis eldre beskrivelser (1)'));
+    expect(screen.getByText('Skjul eldre beskrivelser (1)')).toBeInTheDocument();
+    expect(screen.getByText('VL: Se sto mottatt 20.02.25')).toBeInTheDocument();
+    expect(screen.getByText('VL: Bekreftelse fra arbeidsgiver')).toBeInTheDocument();
+    expect(screen.getByText('Vis dokumenter (3)')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Vis dokumenter (3)'));
+    expect(screen.getByText('Skjul dokumenter (3)')).toBeInTheDocument();
+    expect(screen.getByText('Dokumentasjon av mors deltakelse i kvalifiseringsprogrammet')).toBeInTheDocument();
+    expect(screen.getByText('Dokumentasjon på reiser til og fra Norge')).toBeInTheDocument();
+    expect(screen.getByText('Ettersendelse til søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
+    expect(screen.getByText('VL: Bekreftelse fra studiested/skole')).toBeInTheDocument();
+    expect(screen.getByText('Dokumentasjon på at mor studerer på heltid')).toBeInTheDocument();
+    expect(screen.getByText('--- 19.01.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---')).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Bruker sier at han har søkt Foreldrepenger, han er i permisjon nå. Han har ikke fått svar, han skriver at saksnr er: 12341234.',
+      ),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        'Han har AAP, så det er greit å vite om han får Foreldrepenger før man evt stanser denne ytelsen.',
+      ),
+    ).toBeInTheDocument();
+    expect(screen.getByText('Vis eldre beskrivelser (2)')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Vis eldre beskrivelser (2)'));
+    expect(screen.getByText('Skjul eldre beskrivelser (2)')).toBeInTheDocument();
+    expect(screen.getByText('--- 19.02.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---')).toBeInTheDocument();
+    expect(screen.getByText('Må ringe bruker for å avklare AAP og Foreldrepenger')).toBeInTheDocument();
+    expect(screen.getByText('Undersøk dette før vi går videre')).toBeInTheDocument();
+    expect(screen.getByText('VL: Søknad om foreldrepenger ved fødsel')).toBeInTheDocument();
+    expect(screen.getByText('Vis dokumenter (2)')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Vis dokumenter (2)'));
+    expect(screen.getByText('Skjul dokumenter (2)')).toBeInTheDocument();
+    expect(
+      screen.getByText('Dokumentasjon av termindato (lev. kun av mor), fødsel eller dato for omsorgsovertakelse'),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText('Ettersendelse til søknad om svangerskapspenger til selvstendig næringsdrivende og frilanser'),
+    ).toBeInTheDocument();
+
+    const filIkoner = screen.getAllByLabelText('Åpne dokument');
+    expect(filIkoner).toHaveLength(6);
 
     await userEvent.click(screen.getByText('Til godkjenning'));
 
