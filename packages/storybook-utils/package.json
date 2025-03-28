@@ -24,9 +24,9 @@
     "react-router-dom": "7.3.0"
   },
   "devDependencies": {
-    "@storybook/types": "8.6.4",
-    "eslint": "9.21.0",
+    "@storybook/types": "8.6.11",
+    "eslint": "9.23.0",
     "typescript": "5.8.2",
-    "vite": "6.2.1"
+    "vite": "6.2.3"
   }
 }

@@ -41,17 +41,17 @@
   "devDependencies": {
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
-    "@storybook/addon-actions": "8.6.4",
-    "@storybook/react": "8.6.4",
-    "@storybook/react-vite": "8.6.4",
+    "@storybook/addon-actions": "8.6.11",
+    "@storybook/react": "8.6.11",
+    "@storybook/react-vite": "8.6.11",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.2.0",
     "@testing-library/user-event": "14.6.1",
     "cross-env": "7.0.3",
-    "eslint": "9.21.0",
-    "storybook": "8.6.4",
+    "eslint": "9.23.0",
+    "storybook": "8.6.11",
     "typescript": "5.8.2",
-    "vite": "6.2.1",
-    "vitest": "3.0.8"
+    "vite": "6.2.3",
+    "vitest": "3.0.9"
   }
 }
