@@ -32,7 +32,7 @@
     "@navikt/ft-utils": "3.3.0",
     "dayjs": "1.11.13",
     "react": "19.0.0",
-    "react-intl": "7.1.6"
+    "react-intl": "7.1.10"
   },
   "devDependencies": {
     "@navikt/fp-storybook-utils": "workspace:*",
