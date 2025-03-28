@@ -25,7 +25,7 @@
     "@navikt/ds-react": "7.17.0",
     "@navikt/ft-utils": "3.3.0",
     "react": "19.0.0",
-    "react-intl": "7.1.6"
+    "react-intl": "7.1.10"
   },
   "devDependencies": {
     "@storybook/addon-actions": "8.6.4",
