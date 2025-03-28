@@ -27,17 +27,9 @@ describe('FritekstRedigeringModal', () => {
   });
 
   it('skal vise redigering av opprinnelig brev', async () => {
-    const refetchBrevOverstyring = vi.fn();
-    const mellomlagreBrevOverstyring = vi.fn();
     const forhåndsvisBrev = vi.fn();
 
-    render(
-      <MedOpprinneligHtml
-        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-        refetchBrevOverstyring={refetchBrevOverstyring}
-        forhåndsvisBrev={forhåndsvisBrev}
-      />,
-    );
+    render(<MedOpprinneligHtml forhåndsvisBrev={forhåndsvisBrev} />);
 
     expect(await screen.findByText('Rediger brev')).toBeInTheDocument();
     expect(screen.getByText(/ØISTEIN SALAMANDER/)).toBeInTheDocument();

@@ -227,8 +227,7 @@ interface Props {
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
-  brevOverstyring?: BrevOverstyring;
-  refetchBrevOverstyring: () => void;
+  hentBrevOverstyring: () => Promise<BrevOverstyring>;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
 }
 
@@ -241,8 +240,7 @@ export const VedtakRevurderingForm = ({
   beregningErManueltFastsatt,
   beregningsresultatOriginalBehandling,
   oppgaver,
-  brevOverstyring,
-  refetchBrevOverstyring,
+  hentBrevOverstyring,
   mellomlagreBrevOverstyring,
 }: Props) => {
   const intl = useIntl();
@@ -250,8 +248,10 @@ export const VedtakRevurderingForm = ({
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
     usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
 
-  const [harOverstyrtVedtaksbrev, setHarOverstyrtVedtaksbrev] = useState(
-    !!brevOverstyring?.redigertHtml || behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
+  const { vedtaksbrev, harRedigertVedtaksbrev } = behandling.behandlingsresultat ?? {};
+
+  const [harValgtÅRedigereVedtaksbrev, setHarValgtÅRedigereVedtaksbrev] = useState(
+    harRedigertVedtaksbrev || vedtaksbrev === DokumentMalType.FRITEKST,
   );
 
   const { behandlingsresultat, språkkode, aksjonspunkt, behandlingÅrsaker } = behandling;
@@ -305,7 +305,9 @@ export const VedtakRevurderingForm = ({
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkt, harOverstyrtVedtaksbrev))}
+      onSubmit={(values: FormValues) =>
+        submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
+      }
       setDataOnUnmount={setMellomlagretFormData}
     >
       <VedtakFellesPanel
@@ -315,11 +317,10 @@ export const VedtakRevurderingForm = ({
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
-        brevOverstyring={brevOverstyring}
-        refetchBrevOverstyring={refetchBrevOverstyring}
+        hentBrevOverstyring={hentBrevOverstyring}
         mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-        setHarOverstyrtVedtaksbrev={setHarOverstyrtVedtaksbrev}
-        harOverstyrtVedtaksbrev={harOverstyrtVedtaksbrev}
+        setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
+        harValgtÅRedigereVedtaksbrev={harValgtÅRedigereVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {
           if (erInnvilget) {
             return (

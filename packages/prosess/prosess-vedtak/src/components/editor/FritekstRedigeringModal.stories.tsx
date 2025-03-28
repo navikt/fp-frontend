@@ -37,8 +37,7 @@ const meta = {
   component: FritekstRedigeringModal,
   decorators: [withIntl, withPanelData, withRouter],
   args: {
-    refetchBrevOverstyring: action('button-click'),
-    mellomlagreBrevOverstyring: action('button-click') as (html: string | null) => Promise<void>,
+    mellomlagreOgHentPåNytt: action('button-click') as (html: string | null) => Promise<void>,
     setVisFritekstRedigeringModal: action('button-click'),
     forhåndsvisBrev: action('button-click'),
   },
