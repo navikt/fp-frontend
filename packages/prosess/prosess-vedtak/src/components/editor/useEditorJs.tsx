@@ -28,7 +28,7 @@ const SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt ht
 export const useEditorJs = (
   editorHolderId: string,
   brevOverstyring: BrevOverstyring,
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>,
+  mellomlagreOgHentPåNytt: (redigertInnhold: string | null) => Promise<void>,
   forhåndsvisBrev: (data: ForhandsvisData) => void,
 ) => {
   const intl = useIntl();
@@ -97,7 +97,7 @@ export const useEditorJs = (
       const redigertTekst = harPraksisUtsettelse
         ? lagRedigerbartInnholdWrapper(html, undefined)
         : lagRedigerbartInnholdWrapper(html, footer);
-      mellomlagreBrevOverstyring(redigertTekst);
+      mellomlagreOgHentPåNytt(redigertTekst);
     }
   };
 
@@ -109,7 +109,7 @@ export const useEditorJs = (
     const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml, harPraksisUtsettelse);
     editor.blocks.renderFromHTML(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1'));
 
-    mellomlagreBrevOverstyring(null);
+    mellomlagreOgHentPåNytt(null);
   };
 
   const lagreEndringer = async () => {
@@ -121,7 +121,7 @@ export const useEditorJs = (
       const redigertTekst = harPraksisUtsettelse
         ? lagRedigerbartInnholdWrapper(html, undefined)
         : lagRedigerbartInnholdWrapper(html, footer);
-      mellomlagreBrevOverstyring(redigertTekst);
+      mellomlagreOgHentPåNytt(redigertTekst);
     }
   };
 
