@@ -13,16 +13,14 @@ import { useEditorJs } from './useEditorJs';
 
 interface Props {
   brevOverstyring: BrevOverstyring;
-  refetchBrevOverstyring: () => void;
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
+  mellomlagreOgHentPåNytt: (redigertInnhold: string | null) => Promise<void>;
   forhåndsvisBrev: (data: ForhandsvisData) => void;
   setVisFritekstRedigeringModal: (visRedigering: boolean) => void;
 }
 
 export const FritekstRedigeringModal = ({
   brevOverstyring,
-  refetchBrevOverstyring,
-  mellomlagreBrevOverstyring,
+  mellomlagreOgHentPåNytt,
   setVisFritekstRedigeringModal,
   forhåndsvisBrev,
 }: Props) => {
@@ -37,7 +35,7 @@ export const FritekstRedigeringModal = ({
   const { lagreEndringer, validerEndringer, tilbakestillEndringer, forhåndsvis } = useEditorJs(
     EDITOR_HOLDER_ID,
     brevOverstyring,
-    mellomlagreBrevOverstyring,
+    mellomlagreOgHentPåNytt,
     forhåndsvisBrev,
   );
 
@@ -45,11 +43,8 @@ export const FritekstRedigeringModal = ({
     const erValidertOk = await validerEndringer();
     if (erValidertOk) {
       setVisValideringsFeil(false);
-
-      await lagreEndringer();
-      refetchBrevOverstyring();
-
       setVisFritekstRedigeringModal(false);
+      lagreEndringer();
     } else {
       setVisValideringsFeil(true);
     }
@@ -70,14 +65,16 @@ export const FritekstRedigeringModal = ({
     setVisTilbakestillAdvarselModal(false);
   };
 
-  const lukkModalOgHentBrevPåNytt = () => {
-    setVisFritekstRedigeringModal(false);
-    refetchBrevOverstyring();
-  };
-
   return (
     <>
-      <Modal open onClose={lukkModalOgHentBrevPåNytt} width="53.75rem" aria-label="Rediger brev">
+      <Modal
+        open
+        onClose={() => {
+          setVisFritekstRedigeringModal(false);
+        }}
+        width="53.75rem"
+        aria-label="Rediger brev"
+      >
         <Modal.Header>
           <VStack gap="4">
             <Heading level="3" size="small">

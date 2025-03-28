@@ -177,8 +177,7 @@ interface Props {
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
-  brevOverstyring?: BrevOverstyring;
-  refetchBrevOverstyring: () => void;
+  hentBrevOverstyring: () => Promise<BrevOverstyring>;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
 }
 
@@ -190,8 +189,7 @@ export const VedtakForm = ({
   vilkar,
   beregningErManueltFastsatt,
   oppgaver,
-  brevOverstyring,
-  refetchBrevOverstyring,
+  hentBrevOverstyring,
   mellomlagreBrevOverstyring,
 }: Props) => {
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
@@ -211,8 +209,10 @@ export const VedtakForm = ({
 
   const { trigger } = formMethods;
 
-  const [harOverstyrtVedtaksbrev, setHarOverstyrtVedtaksbrev] = useState(
-    !!brevOverstyring?.redigertHtml || behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
+  const { vedtaksbrev, harRedigertVedtaksbrev } = behandlingsresultat ?? {};
+
+  const [harValgtÅRedigereVedtaksbrev, setHarValgtÅRedigereVedtaksbrev] = useState(
+    harRedigertVedtaksbrev || vedtaksbrev === DokumentMalType.FRITEKST,
   );
 
   const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker);
@@ -224,7 +224,9 @@ export const VedtakForm = ({
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkt, harOverstyrtVedtaksbrev))}
+      onSubmit={(values: FormValues) =>
+        submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
+      }
       setDataOnUnmount={setMellomlagretFormData}
     >
       <VedtakFellesPanel
@@ -234,11 +236,10 @@ export const VedtakForm = ({
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
-        brevOverstyring={brevOverstyring}
-        refetchBrevOverstyring={refetchBrevOverstyring}
+        hentBrevOverstyring={hentBrevOverstyring}
         mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-        setHarOverstyrtVedtaksbrev={setHarOverstyrtVedtaksbrev}
-        harOverstyrtVedtaksbrev={harOverstyrtVedtaksbrev}
+        setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
+        harValgtÅRedigereVedtaksbrev={harValgtÅRedigereVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {
           if (erInnvilget) {
             return (

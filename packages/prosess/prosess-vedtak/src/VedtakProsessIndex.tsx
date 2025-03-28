@@ -36,8 +36,7 @@ interface Props {
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
-  brevOverstyring?: BrevOverstyring;
-  refetchBrevOverstyring: () => void;
+  hentBrevOverstyring: () => Promise<BrevOverstyring>;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
 }
 
@@ -51,8 +50,7 @@ export const VedtakProsessIndex = ({
   beregningsresultatOriginalBehandling,
   previewCallback,
   oppgaver,
-  brevOverstyring,
-  refetchBrevOverstyring,
+  hentBrevOverstyring,
   mellomlagreBrevOverstyring,
 }: Props) => {
   const { behandling, fagsak } = usePanelDataContext();
@@ -84,8 +82,7 @@ export const VedtakProsessIndex = ({
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           oppgaver={oppgaver}
-          brevOverstyring={brevOverstyring}
-          refetchBrevOverstyring={refetchBrevOverstyring}
+          hentBrevOverstyring={hentBrevOverstyring}
           mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         />
       )}
@@ -99,8 +96,7 @@ export const VedtakProsessIndex = ({
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
           oppgaver={oppgaver}
-          brevOverstyring={brevOverstyring}
-          refetchBrevOverstyring={refetchBrevOverstyring}
+          hentBrevOverstyring={hentBrevOverstyring}
           mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         />
       )}

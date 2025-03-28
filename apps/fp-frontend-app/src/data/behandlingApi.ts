@@ -524,14 +524,6 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
-const getHentBrevOverstyringOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
-  queryOptions({
-    queryKey: [BehandlingRel.HENT_BREV_OVERSTYRING, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('HENT_BREV_OVERSTYRING', links)).json<BrevOverstyring>(),
-    enabled: harLenke(behandling, 'HENT_BREV_OVERSTYRING') && isEnabled,
-    staleTime: Infinity,
-  });
-
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
     json: { behandlingUuid },
@@ -623,6 +615,9 @@ const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string;
   kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V1', links), {
     json: params,
   });
+
+const getHentBrevOverstyring = (links: ApiLink[]) => () =>
+  kyExtended.get(getUrlFromRel('HENT_BREV_OVERSTYRING', links)).json<BrevOverstyring>();
 
 const getMellomlagreBrevOverstyring =
   (links: ApiLink[]) => (params: { behandlingUuid: string; redigertInnhold: string | null }) =>
@@ -746,7 +741,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),
     utlandDokStatusOptions: getUtlandDokStatusOptions(links),
     vergeOptions: getVergeOptions(links),
-    hentBrevOverstyringOptions: getHentBrevOverstyringOptions(links),
+    hentBrevOverstyring: getHentBrevOverstyring(links),
     mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
     verge: {
       hent: getVerge(links),
