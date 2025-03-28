@@ -40,7 +40,7 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
 
   return (
     <div className={styles.container}>
-      <div className={styles.meny}>
+      <div className={styles.meny} data-testid="prosess-meny">
         <ProcessMenu
           steps={steg}
           onClick={oppdaterProsessPanelIUrl}

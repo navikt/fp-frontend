@@ -128,7 +128,7 @@ const RisikoklassifiseringBehandling = ({
 
   return (
     <RisikoklassifiseringSakIndex
-      aksjonspunkt={risikoAksjonspunkt}
+      aksjonspunkt={risikoAksjonspunkt ?? undefined}
       risikoklassifisering={kontrollResultat}
       isPanelOpen={isRiskPanelOpen}
       readOnly={readOnly}

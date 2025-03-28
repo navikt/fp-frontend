@@ -300,6 +300,8 @@ export const FlereArbeidsforholdITabell: Story = {
           fom: '2019-12-06',
           tom: '9999-12-31',
           stillingsprosent: 100,
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
         {
           arbeidsgiverIdent: '999999998',

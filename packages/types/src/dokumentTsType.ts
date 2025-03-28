@@ -5,5 +5,5 @@ export type Dokument = Readonly<{
   tittel?: string;
   tidspunkt?: string;
   kommunikasjonsretning: string;
-  gjelderFor?: string;
+  gjelderFor: string | null;
 }>;

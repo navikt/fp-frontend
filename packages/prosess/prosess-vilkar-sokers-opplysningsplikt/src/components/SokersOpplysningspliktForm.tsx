@@ -38,8 +38,8 @@ const capitalizeFirstLetters = (navn: string): string =>
     .map((w: string) => w.charAt(0).toUpperCase() + w.substring(1))
     .join(' ');
 
-const lagArbeidsgiverNavnOgFødselsdatoTekst = (navn: string, fodselsdato: string): string =>
-  `${capitalizeFirstLetters(navn)} (${dateFormat(fodselsdato)})`;
+const lagArbeidsgiverNavnOgFødselsdatoTekst = (navn: string, fødselsdato: string): string =>
+  `${capitalizeFirstLetters(navn)} (${dateFormat(fødselsdato)})`;
 
 const lagArbeidsgiverNavnOgOrgnrTekst = (navn: string, organisasjonsnummer: string): string =>
   `${capitalizeFirstLetters(navn)} (${organisasjonsnummer})`;
@@ -69,10 +69,7 @@ export const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSokna
 const harSoknad = (soknad: Soknad): boolean => soknad !== null && isObject(soknad);
 
 const lagArbeidsgiverKey = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger): string => {
-  if (arbeidsgiverOpplysninger.erPrivatPerson) {
-    return `${aktørPrefix}${arbeidsgiverOpplysninger.referanse}`;
-  }
-  return `${orgPrefix}${arbeidsgiverOpplysninger.identifikator}`;
+  return `${arbeidsgiverOpplysninger.erPrivatPerson ? aktørPrefix : orgPrefix}${arbeidsgiverOpplysninger.referanse}`;
 };
 
 const buildInitialValues = (

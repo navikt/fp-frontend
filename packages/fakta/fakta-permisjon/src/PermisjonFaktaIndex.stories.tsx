@@ -63,6 +63,8 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
             type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
         {
           arbeidsgiverIdent: '91090909+',
@@ -76,6 +78,8 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
             permisjonTom: '2022-12-01',
             type: 'PERMITTERING',
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [],
@@ -163,6 +167,8 @@ export const FlereArbeidsforhold: Story = {
             type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
         {
           arbeidsgiverIdent: '910909090',
@@ -177,6 +183,8 @@ export const FlereArbeidsforhold: Story = {
             type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [
@@ -301,6 +309,8 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
             type: 'VELFERDSPERMISJON',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
         {
           arbeidsgiverIdent: '910909088',
@@ -314,6 +324,8 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
             type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [
@@ -403,6 +415,8 @@ export const VisFødselsdatoNårPrivatperson: Story = {
             type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
+          saksbehandlersVurdering: null,
+          begrunnelse: null,
         },
       ],
       inntektsmeldinger: [],

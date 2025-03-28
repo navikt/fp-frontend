@@ -39,15 +39,14 @@ export type Fagsak = Readonly<{
   status: string;
   dekningsgrad: number;
   aktørId: string;
-  harIkkeRegistrertAdresse: boolean;
   harVergeIÅpenBehandling: boolean;
   sakSkalTilInfotrygd: boolean;
   behandlingTypeKanOpprettes: BehandlingOppretting[];
   bruker: Person;
+  annenPart: Person | null;
+  annenpartBehandling: AnnenPartBehandling | null;
   fagsakMarkeringer?: Saksmarkering[];
-  annenPart?: Person;
   familiehendelse?: FagsakHendelse;
-  annenpartBehandling: AnnenPartBehandling;
   behandlinger: BehandlingAppKontekst[];
   brukerManglerAdresse: boolean;
   historikkinnslag: Historikkinnslag[];

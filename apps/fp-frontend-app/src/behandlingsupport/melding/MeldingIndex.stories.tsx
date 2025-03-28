@@ -16,13 +16,12 @@ import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navik
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
+import { initFetchFpsak, initFetchFptilbake } from '../../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../../data/fagsakApi';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
 import { MeldingIndex } from './MeldingIndex';
 
-import initFetchData from '../../../.storybook/testdata/initFetch.json';
-import initFetchTilbakeData from '../../../.storybook/testdata/initFetchTilbake.json';
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
@@ -30,7 +29,7 @@ const withIntl = getIntlDecorator(messages);
 const getHref = (rel: string) =>
   wrapUrl(
     notEmpty(
-      initFetchData.links.find(link => link.rel === rel) ?? initFetchTilbakeData.links.find(link => link.rel === rel),
+      initFetchFpsak.links.find(link => link.rel === rel) ?? initFetchFptilbake.links.find(link => link.rel === rel),
     ).href,
   );
 
@@ -95,8 +94,8 @@ const meta = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchTilbakeData)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
         http.post(wrapUrl(notEmpty(ALLE_BEHANDLINGER[0]?.links[0]).href), () => HttpResponse.json()),

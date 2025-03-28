@@ -7,14 +7,14 @@ import { type ForhandsvisData } from './VedtakKlageForm';
 
 interface Props {
   previewVedtakCallback: (data: ForhandsvisData) => void;
-  behandlingPaaVent: boolean;
+  behandlingPåVent: boolean;
   readOnly: boolean;
   lagreVedtak: () => void;
   isSubmitting: boolean;
 }
 
 export const VedtakKlageSubmitPanel = ({
-  behandlingPaaVent,
+  behandlingPåVent,
   previewVedtakCallback,
   readOnly,
   lagreVedtak,
@@ -34,7 +34,7 @@ export const VedtakKlageSubmitPanel = ({
           variant="primary"
           size="small"
           onClick={lagreVedtak}
-          disabled={behandlingPaaVent || isSubmitting}
+          disabled={behandlingPåVent || isSubmitting}
           loading={isSubmitting}
           type="button"
         >

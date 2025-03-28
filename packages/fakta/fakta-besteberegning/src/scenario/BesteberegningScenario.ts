@@ -1,7 +1,7 @@
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import type { Beregningsgrunnlag, BeregningsgrunnlagAndel } from '@navikt/fp-types';
+import type { Beregningsgrunnlag, BeregningsgrunnlagAndel, Besteberegninggrunnlag } from '@navikt/fp-types';
 
-export const besteberegninggrunnlag = {
+export const besteberegninggrunnlag: Besteberegninggrunnlag = {
   besteMåneder: [
     {
       fom: '2020-01-01',
@@ -98,9 +98,9 @@ export const besteberegninggrunnlag = {
   ],
 };
 
-export const beregningsgrunnlag = {
+export const beregningsgrunnlag: Beregningsgrunnlag = {
+  avklaringsbehov: [],
   skjaeringstidspunktBeregning: '2020-01-13',
-  skjæringstidspunkt: '2020-01-13',
   aktivitetStatus: ['AT', 'DP'],
   beregningsgrunnlagPeriode: [
     {
@@ -129,10 +129,7 @@ export const beregningsgrunnlag = {
             belopFraInntektsmeldingPrMnd: 30000.0,
             organisasjonstype: 'VIRKSOMHET',
           },
-          fastsattAvSaksbehandler: false,
           lagtTilAvSaksbehandler: false,
-          belopPrMndEtterAOrdningen: 10000.0,
-          belopPrAarEtterAOrdningen: 120000.0,
           erTilkommetAndel: false,
           skalFastsetteGrunnlag: false,
         },
@@ -159,10 +156,7 @@ export const beregningsgrunnlag = {
     ytelsetype: 'FP',
   },
   sammenligningsgrunnlagPrStatus: [],
-  halvG: 49929.0,
   grunnbeløp: 99858,
-  hjemmel: '-',
-  årsinntektVisningstall: 0,
   dekningsgrad: 100,
   erOverstyrtInntekt: false,
-} as Beregningsgrunnlag;
+};

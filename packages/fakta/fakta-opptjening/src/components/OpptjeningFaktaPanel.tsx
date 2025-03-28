@@ -14,7 +14,7 @@ import type {
   Opptjening,
   OpptjeningAktivitet,
 } from '@navikt/fp-types';
-import type { AvklarAktivitetsPerioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues, ValgtAktivitetForm } from './aktivitet/ValgtAktivitetForm';
@@ -107,23 +107,18 @@ export const OpptjeningFaktaPanel = ({
         )
       : [];
 
-  const formValuesAktiviteter = filtrerteOgSorterteOpptjeningsaktiviteter.map(a => ({
-    erGodkjent: a.erGodkjent,
-    begrunnelse: a.begrunnelse ?? '',
-  }));
-
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues[]>();
 
   const [formVerdierForAlleAktiviteter, setFormVerdierForAlleAktiviteter] = useState<FormValues[]>(
-    mellomlagretFormData ?? formValuesAktiviteter,
+    mellomlagretFormData ??
+      filtrerteOgSorterteOpptjeningsaktiviteter.map(a => ({
+        erGodkjent: a.erGodkjent ?? undefined,
+        begrunnelse: a.begrunnelse ?? '',
+      })),
   );
 
-  const førsteAktivitetSomIkkeErGodkjent = filtrerteOgSorterteOpptjeningsaktiviteter.findIndex(
-    a => a.erGodkjent === undefined,
-  );
-  const defaultAktivitetIndex = filtrerteOgSorterteOpptjeningsaktiviteter.length > 0 ? 0 : undefined;
-  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState<number | undefined>(
-    førsteAktivitetSomIkkeErGodkjent !== -1 ? førsteAktivitetSomIkkeErGodkjent : defaultAktivitetIndex,
+  const [valgtAktivitetIndex, setValgtAktivitetIndex] = useState(
+    finnInitialFokusAktivitet(filtrerteOgSorterteOpptjeningsaktiviteter),
   );
 
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -136,7 +131,7 @@ export const OpptjeningFaktaPanel = ({
   );
 
   useEffect(() => {
-    const index = formVerdierForAlleAktiviteter.findIndex(a => a.erGodkjent === undefined);
+    const index = formVerdierForAlleAktiviteter.findIndex(a => a.erGodkjent === undefined || a.erGodkjent === null);
     setValgtAktivitetIndex(index !== -1 ? index : undefined);
   }, [formVerdierForAlleAktiviteter]);
 
@@ -144,13 +139,13 @@ export const OpptjeningFaktaPanel = ({
     setIsSubmitting(true);
 
     const opptjeningsaktiviteterSomSkallagres = filtrerteOgSorterteOpptjeningsaktiviteter
-      .map((a, index) => ({
+      .map<OpptjeningAktivitetAp>((a, index) => ({
         arbeidsforholdRef: a.arbeidsforholdRef,
         arbeidsgiverReferanse: a.arbeidsgiverReferanse,
         opptjeningFom: a.opptjeningFom,
         opptjeningTom: a.opptjeningTom,
         aktivitetType: a.aktivitetType,
-        erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent,
+        erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent!,
         begrunnelse: formVerdierForAlleAktiviteter[index].begrunnelse,
       }))
       .filter(b => b.begrunnelse);
@@ -250,4 +245,14 @@ export const OpptjeningFaktaPanel = ({
       )}
     </VStack>
   );
+};
+
+const finnInitialFokusAktivitet = (opptjeningsAktiviteter: OpptjeningAktivitet[]) => {
+  if (opptjeningsAktiviteter.length === 0) return undefined;
+
+  const førsteAktivitetSomIkkeErGodkjent = opptjeningsAktiviteter.findIndex(
+    a => a.erGodkjent === undefined || a.erGodkjent === null,
+  );
+  if (førsteAktivitetSomIkkeErGodkjent !== -1) return førsteAktivitetSomIkkeErGodkjent;
+  return 0;
 };

@@ -29,8 +29,8 @@ export const LegacyOverstyrtVedtaksbrev = ({ forhåndsvisOverstyrtBrev, behandli
             automatiskVedtaksbrev: false,
             dokumentMal: DokumentMalType.FRITEKST,
             gjelderVedtak: true,
-            tittel: overskrift,
-            fritekst: fritekstbrev,
+            tittel: overskrift ?? undefined,
+            fritekst: fritekstbrev ?? undefined,
           });
         }}
       >

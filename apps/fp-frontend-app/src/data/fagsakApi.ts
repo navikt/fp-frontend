@@ -32,7 +32,7 @@ export type InitDataFpSak = {
   sakLinks: ApiLink[];
 };
 
-type InitDataFpTilbake = {
+export type InitDataFpTilbake = {
   links: ApiLink[];
   sakLinks: ApiLink[];
 };

@@ -2,9 +2,10 @@ import { diff } from '@navikt/ft-utils';
 
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
-const hasValue = (value: string | number | boolean | undefined): boolean => value !== null && value !== undefined;
+const hasValue = (value: string | number | boolean | undefined | null): boolean =>
+  value !== null && value !== undefined;
 
-const isNotEqual = (value1: number | string | undefined, value2: number | string | undefined): boolean =>
+const isNotEqual = (value1: number | string | undefined | null, value2: number | string | undefined | null): boolean =>
   hasValue(value2) && value1 !== value2;
 
 const getIsUtstedtDatoEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean =>

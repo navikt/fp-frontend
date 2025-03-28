@@ -145,7 +145,8 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
     .map(activity => activity.group);
 };
 
-const finnIkonGittKjønnkode = (rrType: string) => {
+const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
+  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
   if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
     return <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />;
   }
@@ -154,9 +155,6 @@ const finnIkonGittKjønnkode = (rrType: string) => {
   }
   return <FigureCombinationIcon width={20} height={20} />;
 };
-
-const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) =>
-  finnIkonGittKjønnkode(erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling.relasjonsRolleType);
 
 type PinData = {
   dato: string;
@@ -280,7 +278,7 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
 
 const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
   const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
-  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling.relasjonsRolleType;
+  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
   return kodeverk.find(k => k.kode === rrType)?.navn || '-';
 };
 

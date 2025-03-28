@@ -5,10 +5,10 @@ import { http, HttpResponse } from 'msw';
 
 import { getIntlDecorator, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 
+import { initFetchFpsak } from '../../../.storybook/testdata';
 import { FagsakUrl, initFetchOptions } from '../../data/fagsakApi';
 import { Dekorator } from './Dekorator';
 
-import initFetchData from '../../../.storybook/testdata/initFetch.json';
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
@@ -19,7 +19,7 @@ const meta = {
   component: Dekorator,
   parameters: {
     msw: {
-      handlers: [http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData))],
+      handlers: [http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak))],
     },
   },
   args: {
