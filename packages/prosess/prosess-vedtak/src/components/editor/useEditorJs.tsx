@@ -28,7 +28,7 @@ const SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt ht
 export const useEditorJs = (
   editorHolderId: string,
   brevOverstyring: BrevOverstyring,
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>,
+  mellomlagreOgHentPåNytt: (redigertInnhold: string | null) => Promise<void>,
   forhåndsvisBrev: (data: ForhandsvisData) => void,
 ) => {
   const intl = useIntl();
@@ -64,7 +64,7 @@ export const useEditorJs = (
           refEditorJs.current = editor;
           await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
         },
-        tools: TOOLS,
+        tools: getTools(intl),
         onChange: async () => {
           //Forhindrer at lagring blir gjort ved initialisering og etter tilbakestilling
           if (refCurrentHtml.current === '') {
@@ -97,7 +97,7 @@ export const useEditorJs = (
       const redigertTekst = harPraksisUtsettelse
         ? lagRedigerbartInnholdWrapper(html, undefined)
         : lagRedigerbartInnholdWrapper(html, footer);
-      mellomlagreBrevOverstyring(redigertTekst);
+      mellomlagreOgHentPåNytt(redigertTekst);
     }
   };
 
@@ -109,7 +109,7 @@ export const useEditorJs = (
     const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml, harPraksisUtsettelse);
     editor.blocks.renderFromHTML(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1'));
 
-    mellomlagreBrevOverstyring(null);
+    mellomlagreOgHentPåNytt(null);
   };
 
   const lagreEndringer = async () => {
@@ -121,7 +121,7 @@ export const useEditorJs = (
       const redigertTekst = harPraksisUtsettelse
         ? lagRedigerbartInnholdWrapper(html, undefined)
         : lagRedigerbartInnholdWrapper(html, footer);
-      mellomlagreBrevOverstyring(redigertTekst);
+      mellomlagreOgHentPåNytt(redigertTekst);
     }
   };
 
@@ -183,12 +183,12 @@ class CustomHeader extends Header {
     return super.renderSettings().map(item => ({
       ...item,
       // @ts-expect-error
-      label: item.label === 'Heading 1' ? 'Overskrift 1' : 'Overskrift 2',
+      label: item.label === 'Heading 1' ? 'Overskrift' : 'Underoverskrift',
     }));
   }
 }
 
-const TOOLS: EditorConfig['tools'] = {
+const getTools = (intl: IntlShape): EditorConfig['tools'] => ({
   paragraph: {
     class: Paragraph as unknown as ToolConstructable,
     inlineToolbar: ['bold'],
@@ -201,9 +201,23 @@ const TOOLS: EditorConfig['tools'] = {
     inlineToolbar: false,
     config: {
       levels: [2, 1],
-      defaultLevel: 1,
+      defaultLevel: 2,
       preservedBlank: true,
     },
+    toolbox: [
+      {
+        title: intl.formatMessage({ id: 'useEditorJs.Heading1' }),
+        data: {
+          level: 1,
+        },
+      },
+      {
+        title: intl.formatMessage({ id: 'useEditorJs.Heading2' }),
+        data: {
+          level: 2,
+        },
+      },
+    ],
   },
   list: {
     class: CustomList as unknown as ToolConstructable,
@@ -220,7 +234,7 @@ const TOOLS: EditorConfig['tools'] = {
       },
     ],
   },
-};
+});
 
 const lagEditorJsI18n = (intl: IntlShape): I18nConfig => ({
   messages: {

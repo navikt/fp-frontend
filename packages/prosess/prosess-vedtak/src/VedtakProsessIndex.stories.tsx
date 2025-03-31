@@ -25,6 +25,7 @@ import type {
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  BrevOverstyring,
   Fagsak,
   Vilkar,
 } from '@navikt/fp-types';
@@ -81,7 +82,7 @@ const meta = {
   args: {
     vilkar: defaultVilkar,
     previewCallback: action('button-click'),
-    refetchBrevOverstyring: action('button-click'),
+    hentBrevOverstyring: action('button-click') as () => Promise<BrevOverstyring>,
     mellomlagreBrevOverstyring: action('button-click') as (html: string | null) => Promise<void>,
   },
   render: args => {
@@ -96,18 +97,18 @@ const meta = {
       <VedtakProsessIndex
         {...args}
         mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-        brevOverstyring={
-          redigertHtml && args.brevOverstyring
-            ? {
+        hentBrevOverstyring={() => {
+          return redigertHtml && args.brevOverstyring
+            ? Promise.resolve({
                 opprinneligHtml: args.brevOverstyring.opprinneligHtml,
                 redigertHtml,
-              }
-            : args.brevOverstyring
-        }
+              })
+            : Promise.resolve(args.brevOverstyring);
+        }}
       />
     );
   },
-} satisfies Meta<PanelDataArgs & ComponentProps<typeof VedtakProsessIndex>>;
+} satisfies Meta<PanelDataArgs & { brevOverstyring: BrevOverstyring } & ComponentProps<typeof VedtakProsessIndex>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -150,6 +151,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       behandlingsresultat: {
         vedtaksbrev: 'FRITEKST',
         type: BehandlingResultatType.INNVILGET,
+        harRedigertVedtaksbrev: true,
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,

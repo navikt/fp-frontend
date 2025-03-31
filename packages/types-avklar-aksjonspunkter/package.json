@@ -14,12 +14,12 @@
   "dependencies": {
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-fakta-beregning": "8.4.4",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "9.2.10",
-    "@navikt/ft-prosess-beregningsgrunnlag": "8.2.8"
+    "@navikt/ft-fakta-beregning": "8.4.5",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "9.2.11",
+    "@navikt/ft-prosess-beregningsgrunnlag": "8.2.13"
   },
   "devDependencies": {
     "typescript": "5.8.2",
-    "vite": "6.2.1"
+    "vite": "6.2.4"
   }
 }

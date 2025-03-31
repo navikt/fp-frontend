@@ -1,8 +1,6 @@
 import type { ReactNode } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { FloatRight } from '@navikt/ft-ui-komponenter';
-
 import { SidePanelKnapp } from './SidePanelKnapp';
 
 import styles from './fagsakGrid.module.css';
@@ -76,9 +74,9 @@ const VisittkortMedKnapp = ({
   }
   return (
     <>
-      <FloatRight>
+      <span className={styles.floatRight}>
         <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
-      </FloatRight>
+      </span>
       {visittkortContent()}
     </>
   );

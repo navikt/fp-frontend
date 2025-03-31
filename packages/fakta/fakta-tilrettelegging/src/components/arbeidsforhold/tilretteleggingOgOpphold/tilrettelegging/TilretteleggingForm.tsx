@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -128,9 +128,10 @@ export const TilretteleggingForm = ({
 
   const velferdspermisjonprosent = finnVelferdspermisjonprosent(arbeidsforhold);
 
-  const prosentSvangerskapspenger = useMemo(
-    () => finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonprosent),
-    [tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonprosent],
+  const prosentSvangerskapspenger = finnProsentSvangerskapspenger(
+    tilrettelegging,
+    stillingsprosentArbeidsforhold,
+    velferdspermisjonprosent,
   );
 
   const formMethods = useForm<FormValues>({

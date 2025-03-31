@@ -8,6 +8,7 @@ export type Behandlingsresultat = Readonly<{
   vedtaksbrev?: string;
   overskrift: string | null;
   fritekstbrev: string | null;
+  harRedigertVedtaksbrev: boolean;
   erRevurderingMedUendretUtfall?: boolean;
   skjæringstidspunkt?: {
     dato: string;
