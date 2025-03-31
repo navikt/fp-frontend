@@ -34,6 +34,7 @@ export const behandling: Behandling = {
     vedtaksbrev: '-',
     overskrift: null,
     fritekstbrev: null,
+    harRedigertVedtaksbrev: false,
     erRevurderingMedUendretUtfall: false,
     skjæringstidspunkt: {
       dato: '2025-02-12',
