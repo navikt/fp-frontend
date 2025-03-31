@@ -91,6 +91,8 @@
   "useEditorJs.KlikkForFjern": "Klikk for å fjerne",
   "useEditorJs.MoveUp": "Flytt opp",
   "useEditorJs.MoveDown": "Flytt ned",
+  "useEditorJs.Heading1": "Overskrift",
+  "useEditorJs.Heading2": "Underoverskrift",
 
   "OverstyringVedtaksbrev.SkjeddEndringIBehandling": "Hvis det er skjedd en endring i saken må du kontrollere at innholdet i det redigerte brevet stemmer med den gjeldende informasjonen",
   "OverstyringVedtaksbrev.ForhandvisBrev": "Forhåndsvis brev",
