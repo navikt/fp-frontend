@@ -1844,6 +1844,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@eslint/config-helpers@npm:^0.2.0":
+  version: 0.2.0
+  resolution: "@eslint/config-helpers@npm:0.2.0"
+  checksum: 36e857165f1d4661ce1dd31e739135e49b3fc0cf1dcbd64e07e53475441640ab0b7abefa3e9718a598c570ee05a91b2f91cd74c008fa30fc3db8b05d07645fb2
+  languageName: node
+  linkType: hard
+
 "@eslint/core@npm:^0.12.0":
   version: 0.12.0
   resolution: "@eslint/core@npm:0.12.0"
@@ -1853,9 +1860,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@eslint/eslintrc@npm:3.3.0"
+"@eslint/eslintrc@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "@eslint/eslintrc@npm:3.3.1"
   dependencies:
     ajv: ^6.12.4
     debug: ^4.3.2
@@ -1866,14 +1873,14 @@ __metadata:
     js-yaml: ^4.1.0
     minimatch: ^3.1.2
     strip-json-comments: ^3.1.1
-  checksum: 1d8a4205c2db0c46dee8251800725f6c7dfd0b1594813ddcc41f2091a53223cd78334a6664efe348118cc0963c1176d4fa873b1673c853fc76031aaa1fc49b98
+  checksum: 8241f998f0857abf5a615072273b90b1244d75c1c45d217c6a8eb444c6e12bbb5506b4879c14fb262eb72b7d8e3d2f0542da2db1a7f414a12496ebb790fb4d62
   languageName: node
   linkType: hard
 
-"@eslint/js@npm:9.21.0":
-  version: 9.21.0
-  resolution: "@eslint/js@npm:9.21.0"
-  checksum: 238cf810270a13ada3db5fcc05b8031bef8a56186f795f45f1c5b89f5ae1e86240622cd5c39ae4444f34670b4896ebc8ab8e868050d174755bb4caba59c4b8d5
+"@eslint/js@npm:9.23.0":
+  version: 9.23.0
+  resolution: "@eslint/js@npm:9.23.0"
+  checksum: 5ce796f9fd4cb7b8995062bd7697bf4406560089af039fe1f548b9d0948570763fa6d9f848f87fb13558ab85d4d88152d94d82fb9f6cf091b0dc4b4d6e15cfba
   languageName: node
   linkType: hard
 
@@ -2612,24 +2619,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     fast-glob: ^3.3.3
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2651,24 +2658,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2687,22 +2694,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2722,23 +2729,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2761,13 +2768,13 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
     stylelint: ^16.15.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2788,23 +2795,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2821,22 +2828,22 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2856,23 +2863,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     lodash: ^4.17.21
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
+    storybook: 8.6.11
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2891,23 +2898,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2929,23 +2936,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
+    storybook: 8.6.11
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -2967,23 +2974,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
+    storybook: 8.6.11
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3003,24 +3010,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-dom: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3041,24 +3048,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3079,23 +3086,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3117,25 +3124,25 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     fast-glob: ^3.3.3
     react: 19.0.0
     react-dom: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3156,24 +3163,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3195,23 +3202,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3230,21 +3237,21 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
+    storybook: 8.6.11
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3259,21 +3266,21 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
+    storybook: 8.6.11
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3382,10 +3389,10 @@ __metadata:
     "@navikt/ft-utils": 3.3.0
     "@popperjs/core": 2.11.8
     "@sentry/browser": 9.5.0
-    "@storybook/addon-a11y": 8.6.4
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-a11y": 8.6.11
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@tanstack/react-query": 5.67.1
     "@tanstack/react-query-devtools": ^5.67.1
     "@testing-library/dom": 10.4.0
@@ -3394,7 +3401,7 @@ __metadata:
     classnames: 2.5.1
     core-js: 3.41.0
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     history: 5.3.0
     ky: ^1.7.5
     msw: 2.7.3
@@ -3407,13 +3414,13 @@ __metadata:
     react-responsive: 10.0.1
     react-router: 7.3.0
     react-router-dom: 7.3.0
-    react-test-renderer: 19.0.0
+    react-test-renderer: 19.1.0
     rollup-plugin-sourcemaps: 0.6.3
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3433,9 +3440,9 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@tanstack/react-query": 5.67.1
     "@tanstack/react-query-devtools": ^5.67.1
     "@testing-library/dom": 10.4.0
@@ -3443,18 +3450,18 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     ky: ^1.7.5
     msw: 2.7.3
     msw-storybook-addon: ^2.0.4
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3462,9 +3469,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-kodeverk@workspace:packages/kodeverk"
   dependencies:
-    eslint: 9.21.0
+    eslint: 9.23.0
     typescript: 5.8.2
-    vite: 6.2.1
+    vite: 6.2.4
   languageName: unknown
   linkType: soft
 
@@ -3472,9 +3479,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-konstanter@workspace:packages/konstanter"
   dependencies:
-    eslint: 9.21.0
+    eslint: 9.23.0
     typescript: 5.8.2
-    vite: 6.2.1
+    vite: 6.2.4
   languageName: unknown
   linkType: soft
 
@@ -3494,9 +3501,9 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@tanstack/react-query": 5.67.1
     "@tanstack/react-query-devtools": ^5.67.1
     "@testing-library/dom": 10.4.0
@@ -3506,7 +3513,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.13
     echarts: 5.6.0
-    eslint: 9.21.0
+    eslint: 9.23.0
     history: 5.3.0
     ky: ^1.7.5
     lodash.debounce: 4.0.8
@@ -3516,11 +3523,11 @@ __metadata:
     react-hook-form: 7.54.2
     react-intl: 7.1.6
     react-router-dom: 7.3.0
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3537,27 +3544,27 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     echarts: 5.6.0
-    eslint: 9.21.0
+    eslint: 9.23.0
     history: 5.3.0
     lodash.debounce: 4.0.8
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
     react-router-dom: 7.3.0
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3578,9 +3585,9 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@tanstack/react-query": 5.67.1
     "@tanstack/react-query-devtools": ^5.67.1
     "@testing-library/dom": 10.4.0
@@ -3589,7 +3596,7 @@ __metadata:
     cross-env: 7.0.3
     dayjs: 1.11.13
     echarts: 5.6.0
-    eslint: 9.21.0
+    eslint: 9.23.0
     history: 5.3.0
     ky: ^1.7.5
     lodash.debounce: 4.0.8
@@ -3600,11 +3607,11 @@ __metadata:
     react-hook-form: 7.54.2
     react-intl: 7.1.6
     react-router-dom: 7.3.0
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3622,22 +3629,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
+    storybook: 8.6.11
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3657,25 +3664,25 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
     react-router-dom: 7.3.0
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3693,23 +3700,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
     react-router-dom: 7.3.0
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3724,22 +3731,22 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3754,22 +3761,22 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3784,23 +3791,23 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3813,21 +3820,21 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3843,22 +3850,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3880,14 +3887,14 @@ __metadata:
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    stylelint: 16.15.0
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3907,23 +3914,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3945,24 +3952,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -3982,23 +3989,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4018,24 +4025,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4055,23 +4062,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4092,25 +4099,25 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-dom: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4131,24 +4138,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4170,24 +4177,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4208,22 +4215,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4240,21 +4247,21 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
+    storybook: 8.6.11
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4281,9 +4288,9 @@ __metadata:
     "@navikt/ft-prosess-beregningsgrunnlag": 8.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
@@ -4294,16 +4301,16 @@ __metadata:
     dayjs: 1.11.13
     editorjs-html: 4.0.5
     editorjs-undo: 2.0.28
-    eslint: 9.21.0
+    eslint: 9.23.0
     lodash.debounce: 4.0.8
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4322,22 +4329,22 @@ __metadata:
     "@navikt/ft-form-hooks": 6.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4356,22 +4363,22 @@ __metadata:
     "@navikt/ft-form-hooks": 6.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4390,22 +4397,22 @@ __metadata:
     "@navikt/ft-form-hooks": 6.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4424,22 +4431,22 @@ __metadata:
     "@navikt/ft-form-hooks": 6.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4459,24 +4466,24 @@ __metadata:
     "@navikt/ft-form-hooks": 6.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-dom: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4496,23 +4503,23 @@ __metadata:
     "@navikt/ft-form-hooks": 6.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4532,23 +4539,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4568,23 +4575,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4603,23 +4610,23 @@ __metadata:
     "@navikt/ft-form-hooks": 6.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4636,19 +4643,19 @@ __metadata:
     "@navikt/ft-plattform-komponenter": 7.2.12
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4665,23 +4672,23 @@ __metadata:
     "@navikt/ft-plattform-komponenter": 7.2.12
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     history: 5.3.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4698,21 +4705,21 @@ __metadata:
     "@navikt/ft-plattform-komponenter": 7.2.12
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4727,21 +4734,21 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
-    "@storybook/types": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
+    "@storybook/types": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4755,20 +4762,20 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4786,24 +4793,24 @@ __metadata:
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-hooks": 2.1.5
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     history: 5.3.0
     react: 19.0.0
     react-intl: 7.1.6
     react-router-dom: 7.3.0
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4814,20 +4821,20 @@ __metadata:
     "@navikt/ds-css": 7.17.0
     "@navikt/ds-react": 7.17.0
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4846,24 +4853,24 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
-    "@storybook/types": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
+    "@storybook/types": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4878,21 +4885,21 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4909,22 +4916,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4942,22 +4949,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -4974,22 +4981,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5005,22 +5012,22 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5035,21 +5042,21 @@ __metadata:
     "@navikt/ft-plattform-komponenter": 7.2.12
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5066,23 +5073,23 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5101,22 +5108,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-dom: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5134,22 +5141,22 @@ __metadata:
     "@navikt/ft-form-validators": 3.1.10
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5173,25 +5180,25 @@ __metadata:
     "@navikt/ft-prosess-beregningsgrunnlag": 8.2.8
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     history: 5.3.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
     react-router-dom: 7.3.0
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5203,22 +5210,22 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5234,20 +5241,20 @@ __metadata:
     "@navikt/fp-types": "workspace:^"
     "@navikt/ft-plattform-komponenter": 7.2.12
     "@navikt/ft-utils": 3.3.0
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     dayjs: 1.11.13
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5257,16 +5264,16 @@ __metadata:
   dependencies:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.8
-    "@storybook/types": 8.6.4
+    "@storybook/types": 8.6.11
     "@tanstack/react-query": 5.67.1
-    eslint: 9.21.0
+    eslint: 9.23.0
     history: 5.3.0
     react: 19.0.0
     react-hook-form: 7.54.2
     react-intl: 7.1.6
     react-router-dom: 7.3.0
     typescript: 5.8.2
-    vite: 6.2.1
+    vite: 6.2.4
   languageName: unknown
   linkType: soft
 
@@ -5280,7 +5287,7 @@ __metadata:
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.10
     "@navikt/ft-prosess-beregningsgrunnlag": 8.2.8
     typescript: 5.8.2
-    vite: 6.2.1
+    vite: 6.2.4
   languageName: unknown
   linkType: soft
 
@@ -5290,7 +5297,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
     typescript: 5.8.2
-    vite: 6.2.1
+    vite: 6.2.4
   languageName: unknown
   linkType: soft
 
@@ -5304,21 +5311,21 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 3.2.2
     "@navikt/ft-utils": 3.3.0
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
     cross-env: 7.0.3
-    eslint: 9.21.0
+    eslint: 9.23.0
     fast-glob: ^3.3.3
     react: 19.0.0
     react-intl: 7.1.6
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -5326,11 +5333,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utils-test@workspace:packages/utils-test"
   dependencies:
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
     react-intl: 7.1.6
     typescript: 5.8.2
-    vite: 6.2.1
+    vite: 6.2.4
   languageName: unknown
   linkType: soft
 
@@ -5340,18 +5347,18 @@ __metadata:
   dependencies:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:^"
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/react": 8.6.4
-    "@storybook/react-vite": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/react": 8.6.11
+    "@storybook/react-vite": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
-    eslint: 9.21.0
+    eslint: 9.23.0
     react: 19.0.0
-    storybook: 8.6.4
-    stylelint: 16.15.0
+    storybook: 8.6.11
+    stylelint: 16.17.0
     typescript: 5.8.2
-    vite: 6.2.1
-    vitest: 3.0.8
+    vite: 6.2.4
+    vitest: 3.1.1
   languageName: unknown
   linkType: soft
 
@@ -6803,66 +6810,74 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.42.2":
-  version: 2.42.2
-  resolution: "@sentry/cli-darwin@npm:2.42.2"
+"@sentry/cli-darwin@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli-darwin@npm:2.43.0"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.42.2":
-  version: 2.42.2
-  resolution: "@sentry/cli-linux-arm64@npm:2.42.2"
+"@sentry/cli-linux-arm64@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli-linux-arm64@npm:2.43.0"
   conditions: (os=linux | os=freebsd) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.42.2":
-  version: 2.42.2
-  resolution: "@sentry/cli-linux-arm@npm:2.42.2"
+"@sentry/cli-linux-arm@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli-linux-arm@npm:2.43.0"
   conditions: (os=linux | os=freebsd) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.42.2":
-  version: 2.42.2
-  resolution: "@sentry/cli-linux-i686@npm:2.42.2"
+"@sentry/cli-linux-i686@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli-linux-i686@npm:2.43.0"
   conditions: (os=linux | os=freebsd) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.42.2":
-  version: 2.42.2
-  resolution: "@sentry/cli-linux-x64@npm:2.42.2"
+"@sentry/cli-linux-x64@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli-linux-x64@npm:2.43.0"
   conditions: (os=linux | os=freebsd) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.42.2":
-  version: 2.42.2
-  resolution: "@sentry/cli-win32-i686@npm:2.42.2"
+"@sentry/cli-win32-arm64@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli-win32-arm64@npm:2.43.0"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@sentry/cli-win32-i686@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli-win32-i686@npm:2.43.0"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.42.2":
-  version: 2.42.2
-  resolution: "@sentry/cli-win32-x64@npm:2.42.2"
+"@sentry/cli-win32-x64@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli-win32-x64@npm:2.43.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.42.2":
-  version: 2.42.2
-  resolution: "@sentry/cli@npm:2.42.2"
+"@sentry/cli@npm:2.43.0":
+  version: 2.43.0
+  resolution: "@sentry/cli@npm:2.43.0"
   dependencies:
-    "@sentry/cli-darwin": 2.42.2
-    "@sentry/cli-linux-arm": 2.42.2
-    "@sentry/cli-linux-arm64": 2.42.2
-    "@sentry/cli-linux-i686": 2.42.2
-    "@sentry/cli-linux-x64": 2.42.2
-    "@sentry/cli-win32-i686": 2.42.2
-    "@sentry/cli-win32-x64": 2.42.2
+    "@sentry/cli-darwin": 2.43.0
+    "@sentry/cli-linux-arm": 2.43.0
+    "@sentry/cli-linux-arm64": 2.43.0
+    "@sentry/cli-linux-i686": 2.43.0
+    "@sentry/cli-linux-x64": 2.43.0
+    "@sentry/cli-win32-arm64": 2.43.0
+    "@sentry/cli-win32-i686": 2.43.0
+    "@sentry/cli-win32-x64": 2.43.0
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
     progress: ^2.0.3
@@ -6879,13 +6894,15 @@ __metadata:
       optional: true
     "@sentry/cli-linux-x64":
       optional: true
+    "@sentry/cli-win32-arm64":
+      optional: true
     "@sentry/cli-win32-i686":
       optional: true
     "@sentry/cli-win32-x64":
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: a22e4ff4a8c1891cc89028871f64f05eb4376033dba2f1ffdf0b946e4e6493a99807d640ea9580623e1c75ba181c295c93a51d00148ad45bb9343e68c2e42f90
+  checksum: 59253998381ac1555e6707ed3162fcc7aa843394b51027d1ae04296616b476b29d87e2c9a8e1cb30d748cede78bdee4a5cf366eafac9724dab0dcd506ccf4ddc
   languageName: node
   linkType: hard
 
@@ -6968,22 +6985,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-a11y@npm:8.6.4"
+"@storybook/addon-a11y@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-a11y@npm:8.6.11"
   dependencies:
-    "@storybook/addon-highlight": 8.6.4
-    "@storybook/test": 8.6.4
+    "@storybook/addon-highlight": 8.6.11
+    "@storybook/global": ^5.0.0
+    "@storybook/test": 8.6.11
     axe-core: ^4.2.0
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: 9f690f3a784f51ea8822543747d5aaaeeebaff7b2e030ae54e7deb05ff4af87d5e8bdc1d6bdefbf7410cc58247114feb751efe2d598755b950187ec67470be85
+    storybook: ^8.6.11
+  checksum: e95caf79c0fd93ee56bf2a0b840928983ddff04be458e7734a973f00b9d9fad5f1ca42c58c356b21d7f964565f54c68c819591ee3f5adfc6a1771a168e9cd0bc
   languageName: node
   linkType: hard
 
-"@storybook/addon-actions@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-actions@npm:8.6.4"
+"@storybook/addon-actions@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-actions@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
     "@types/uuid": ^9.0.1
@@ -6991,188 +7009,188 @@ __metadata:
     polished: ^4.2.2
     uuid: ^9.0.0
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: b08f73070ac90f2c0d404b63f3148ebe11d4683f0728fd04459df62b521422d8c17b3619f6c012a90571a2d5520ee34d35e02fd104c0298580177dd57e045312
+    storybook: ^8.6.11
+  checksum: 5ff351403123962af20cd572ecee699c3ebf5668c6e6edd490af6ef7023c821da679c646685a12c9e58f4f62820adac1f9cc8a0ceb7201146c9556a962bee581
   languageName: node
   linkType: hard
 
-"@storybook/addon-backgrounds@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-backgrounds@npm:8.6.4"
+"@storybook/addon-backgrounds@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-backgrounds@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
     memoizerific: ^1.11.3
     ts-dedent: ^2.0.0
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: 53a67d385d6241730d0d992552de58316cfa4c46f56fa5a81df8647c76356778164783b8a872e31b3624692f456186074e06407778cf4442ffc8596cdaded49e
+    storybook: ^8.6.11
+  checksum: 6bdd6cea74abd1965a573c17a9ce25dfd4e3dc0155e11377da96ee76b98a17a2c453491d38afa0183c391dafcf730a66bd0c6b7b1621a932f81ca699d7382f31
   languageName: node
   linkType: hard
 
-"@storybook/addon-controls@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-controls@npm:8.6.4"
+"@storybook/addon-controls@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-controls@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
     dequal: ^2.0.2
     ts-dedent: ^2.0.0
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: a25c7f2ae7c3b4aee89ba865e5a305293d54bc4723f4e8e4f22d3c42a626d09b83a69521e728e2b3b35107a7709702801c1f5a4fe96e16871d77108282b8a8a2
+    storybook: ^8.6.11
+  checksum: 44fbe904601164fd91640686bf0c3578c47402b02954c7fcfd18cf52287a98aee740f58ed83a4e391913c9bfa53fc985613db2572f5df10df4467ef406669680
   languageName: node
   linkType: hard
 
-"@storybook/addon-docs@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-docs@npm:8.6.4"
+"@storybook/addon-docs@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-docs@npm:8.6.11"
   dependencies:
     "@mdx-js/react": ^3.0.0
-    "@storybook/blocks": 8.6.4
-    "@storybook/csf-plugin": 8.6.4
-    "@storybook/react-dom-shim": 8.6.4
+    "@storybook/blocks": 8.6.11
+    "@storybook/csf-plugin": 8.6.11
+    "@storybook/react-dom-shim": 8.6.11
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     ts-dedent: ^2.0.0
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: 28705136eb3117fcc46b4038a6fb8bf24207fa39b2b5043ab3dd124a3a186d02d36afdb03a456638ec652e1944679de0721361bca27caa5920b234e92c4e9149
+    storybook: ^8.6.11
+  checksum: a1e41215c2b811f26c544bc88b585ae234cc4aafc808bdf664267b499d8ca2160e3429415d4410c534627e642c8ee538611221fe065da5226308bec9a3b18ab0
   languageName: node
   linkType: hard
 
-"@storybook/addon-essentials@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-essentials@npm:8.6.4"
+"@storybook/addon-essentials@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-essentials@npm:8.6.11"
   dependencies:
-    "@storybook/addon-actions": 8.6.4
-    "@storybook/addon-backgrounds": 8.6.4
-    "@storybook/addon-controls": 8.6.4
-    "@storybook/addon-docs": 8.6.4
-    "@storybook/addon-highlight": 8.6.4
-    "@storybook/addon-measure": 8.6.4
-    "@storybook/addon-outline": 8.6.4
-    "@storybook/addon-toolbars": 8.6.4
-    "@storybook/addon-viewport": 8.6.4
+    "@storybook/addon-actions": 8.6.11
+    "@storybook/addon-backgrounds": 8.6.11
+    "@storybook/addon-controls": 8.6.11
+    "@storybook/addon-docs": 8.6.11
+    "@storybook/addon-highlight": 8.6.11
+    "@storybook/addon-measure": 8.6.11
+    "@storybook/addon-outline": 8.6.11
+    "@storybook/addon-toolbars": 8.6.11
+    "@storybook/addon-viewport": 8.6.11
     ts-dedent: ^2.0.0
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: 564cc7e6f4559572f12c7f015e40a3995c55c681704e4082ef80d9db0c7b06433a67473e810ea9d67a46121f3a4aca8d7851953bc7f109f54e96c069b05230e0
+    storybook: ^8.6.11
+  checksum: dfdc686cb5d8aa9e2f8f2648857ce8dffd6f24d91fbd15cfdf84866b7a3b3ab3ef6a57d1a53105d03fdccefb426f9961e3832e1c2c48986fe65a44fb1a89af60
   languageName: node
   linkType: hard
 
-"@storybook/addon-highlight@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-highlight@npm:8.6.4"
+"@storybook/addon-highlight@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-highlight@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: e080b543bd3fbe0e8d6e916f2abd562b7136371dff64e96d196532dca4958016b7890c6dcd48545f11c2ac31aa0d3a713b98d6fd2cde2a1f94b1ebaf7031095d
+    storybook: ^8.6.11
+  checksum: 4f586fb87049c08ac515c3b7ecf2458b1c73d845b52f57cc84f7289730fb7e460e5c500dba926f7dd62e076defbc82a987aa287e3d92887b2feb366c14c21ffd
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-links@npm:8.6.4"
+"@storybook/addon-links@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-links@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
     ts-dedent: ^2.0.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^8.6.4
+    storybook: ^8.6.11
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 92ffa01adda87133dd97623e3beb69b1095929a8ec79c00191b816b4dcdf35d4dcad33b2dfa16791647f85357b8fa8f662cdc382772a6c9376953c8f49564dde
+  checksum: dff786e30881e2f9aaeba02675318cc5d8ae6199ebb93d5b961032d096f7b589a611f855af399ce2e1f5b5bffb043407df3307d1c1463cbf71b69ed920a8c5e2
   languageName: node
   linkType: hard
 
-"@storybook/addon-measure@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-measure@npm:8.6.4"
+"@storybook/addon-measure@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-measure@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
     tiny-invariant: ^1.3.1
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: b020d052c87aab591b4b7e31dd60764af9f70140ad4d529d468cdf0c8eb45d02ad7ec2bc01a83d88a1547cf567da8db5e4ba0b4c7294e968df2bace3f07f4fd7
+    storybook: ^8.6.11
+  checksum: 9c31af62465e532d196f960d8b69d15f9bf3034f2469f4c00a5cdb702ecf3342c7a14330d3390dca04547e1dec921596891876c88ec73bb5ecf1f1e8d28d4c38
   languageName: node
   linkType: hard
 
-"@storybook/addon-outline@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-outline@npm:8.6.4"
+"@storybook/addon-outline@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-outline@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
     ts-dedent: ^2.0.0
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: d705c2dda8fc4b9af2ecb8217a0463f0f8213f836150627f67e4702d449071e5982580617ff75ae8c48960ca27e957fe3700c17cd854e05d326ceeaf622202c2
+    storybook: ^8.6.11
+  checksum: 01f396b80147b1f9b952146908e2a33dc8429ec73d8fa2eec0c8cd0d6d6965433791893f22b0f30c73796f8a610e1c400b0fc5279d930432a7f51d419bb76272
   languageName: node
   linkType: hard
 
-"@storybook/addon-toolbars@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-toolbars@npm:8.6.4"
+"@storybook/addon-toolbars@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-toolbars@npm:8.6.11"
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: c15ef11c50ac067e5b226dba30db956405d94b5ff56d67279697bcdcc63367ef0ab523f091b8755f8b8ab5c1ac6e55c3ded9cef6f5b917261ea9a232bcf9a8dc
+    storybook: ^8.6.11
+  checksum: f0b5fe65144a4a5e49854b1b3c12ba497b0cff06df62e0c997fa30f0f5c7287f9263147b92381840ec30528dd74951faa5b41892384c95d3ca8afaf79e1666e5
   languageName: node
   linkType: hard
 
-"@storybook/addon-viewport@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/addon-viewport@npm:8.6.4"
+"@storybook/addon-viewport@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/addon-viewport@npm:8.6.11"
   dependencies:
     memoizerific: ^1.11.3
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: 746cd771f371b825da4c5b974602a1c14287212c19ddff9f593e77e9867a3efe76ccc9ee3e503efdcf91949bf3a03979c8f37aa2fe62eb888a3eb11dd208def2
+    storybook: ^8.6.11
+  checksum: c6bca8f7bb37ef1ce9ef81b044a5b3c80545bed8d7b5fa3cbd6dd8f0c1fc93bb53f7d3dbf06088e42ecbbe01bd8ffd2f4bba48dbc17c765d48c9ef3d4a1b1bda
   languageName: node
   linkType: hard
 
-"@storybook/blocks@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/blocks@npm:8.6.4"
+"@storybook/blocks@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/blocks@npm:8.6.11"
   dependencies:
     "@storybook/icons": ^1.2.12
     ts-dedent: ^2.0.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
-    storybook: ^8.6.4
+    storybook: ^8.6.11
   peerDependenciesMeta:
     react:
       optional: true
     react-dom:
       optional: true
-  checksum: fb891491f99fa63c02c90e00d166c9299cf93512d2d6036a932a1c243cd568f7ca45af961b89a19ba1c1c51c4ad76d0de8d687249f1dcb8b3411fbec2b7cf238
+  checksum: 5167025c552f82df4a6c287f5927087393f17ecb4985cdf41d3dd29b8ec6ccf08d48d3d4c1e50dfe1de47605fc878152ec648a2b60f53e704fb19be1fa66d05e
   languageName: node
   linkType: hard
 
-"@storybook/builder-vite@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/builder-vite@npm:8.6.4"
+"@storybook/builder-vite@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/builder-vite@npm:8.6.11"
   dependencies:
-    "@storybook/csf-plugin": 8.6.4
+    "@storybook/csf-plugin": 8.6.11
     browser-assert: ^1.2.1
     ts-dedent: ^2.0.0
   peerDependencies:
-    storybook: ^8.6.4
+    storybook: ^8.6.11
     vite: ^4.0.0 || ^5.0.0 || ^6.0.0
-  checksum: e3e6c1674af25a51b87c084476a2f6e07245a4206493ca7758f116588efc3986e1200b45a9e626406e31a37f001f9c8abf0c77e83f02a14a713c5ac407196775
+  checksum: e4a8355125bce78470a6c9afa000d5814054721a5b442847fa0dbfdd759ed5017267659a4b876fd6a7431680a0c09e9429ef4d74a820eabf7c03bdfd816e5aeb
   languageName: node
   linkType: hard
 
-"@storybook/cli@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/cli@npm:8.6.4"
+"@storybook/cli@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/cli@npm:8.6.11"
   dependencies:
     "@babel/core": ^7.24.4
     "@babel/types": ^7.24.0
-    "@storybook/codemod": 8.6.4
+    "@storybook/codemod": 8.6.11
     "@types/semver": ^7.3.4
     commander: ^12.1.0
-    create-storybook: 8.6.4
+    create-storybook: 8.6.11
     cross-spawn: ^7.0.3
     envinfo: ^7.7.3
     fd-package-json: ^1.2.0
@@ -7185,23 +7203,23 @@ __metadata:
     p-limit: ^6.2.0
     prompts: ^2.4.0
     semver: ^7.3.7
-    storybook: 8.6.4
+    storybook: 8.6.11
     tiny-invariant: ^1.3.1
     ts-dedent: ^2.0.0
   bin:
     cli: ./bin/index.cjs
-  checksum: 3a7435b762b5c89e1c22c6a037d2d836e4617a75673bd94b66bc7daa657457d2f54de04ea2863ef242b632615708d4aea7c9970c09f4735dc77f0c93ebb959ee
+  checksum: 464e91efd48a5977db3b50be5157321f53e9e7664adc2ffa619df673f7b2c1e02dd7bb39716ce2d21b6f235106f3a848cdcb29f021271961301907b912d69794
   languageName: node
   linkType: hard
 
-"@storybook/codemod@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/codemod@npm:8.6.4"
+"@storybook/codemod@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/codemod@npm:8.6.11"
   dependencies:
     "@babel/core": ^7.24.4
     "@babel/preset-env": ^7.24.4
     "@babel/types": ^7.24.0
-    "@storybook/core": 8.6.4
+    "@storybook/core": 8.6.11
     "@types/cross-spawn": ^6.0.2
     cross-spawn: ^7.0.3
     es-toolkit: ^1.22.0
@@ -7210,24 +7228,24 @@ __metadata:
     prettier: ^3.1.1
     recast: ^0.23.5
     tiny-invariant: ^1.3.1
-  checksum: 2fa17988ef7424331c3b3c5876ad7ade23ab42de0994714c2530f5af9920ae1652c2c88449ccc6b212eacdd691e075fd7f53d2c334cd794b58fb537247f56c43
+  checksum: beee64fc1232125d5e048d518ad2b54415024691ff24861c9a068ab99e00252c2543e85ca50a8a9ed3655bf41cf5517348fcdbd4666659563647a92d9b7d92bf
   languageName: node
   linkType: hard
 
-"@storybook/components@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/components@npm:8.6.4"
+"@storybook/components@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/components@npm:8.6.11"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: b50923e759eea99320fdf8946056fb33614b9d993ca567207cd0d714e5fae83da485b64b0d74a18b84355396b33c28b5eea050484c40967873c540f83d314b9a
+  checksum: 29b6cc758a642709df506b3520139522b35b55c31b9e670867bb76ea112ca8446a19a709bd876f7675f8809b4706771bb7f762f86fa0c37a1e103cd8056d4fae
   languageName: node
   linkType: hard
 
-"@storybook/core@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/core@npm:8.6.4"
+"@storybook/core@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/core@npm:8.6.11"
   dependencies:
-    "@storybook/theming": 8.6.4
+    "@storybook/theming": 8.6.11
     better-opn: ^3.0.2
     browser-assert: ^1.2.1
     esbuild: ^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0
@@ -7243,18 +7261,18 @@ __metadata:
   peerDependenciesMeta:
     prettier:
       optional: true
-  checksum: 8352b0f65bd7c0462471409a7f086125f4e1a93e1777fa20268beb78109f9784cc1d75536a4f9136368db87ba3c5c11987c95835937ba4c2776f968365795d8f
+  checksum: ac7455b9fdd54fb7f648921ad1ebc7e60559797b3c123d401249986e04a84523d1965121de4ab3ff6d4e45cb6bfeb01ccac2f5abffee545bd25ff680be272567
   languageName: node
   linkType: hard
 
-"@storybook/csf-plugin@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/csf-plugin@npm:8.6.4"
+"@storybook/csf-plugin@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/csf-plugin@npm:8.6.11"
   dependencies:
     unplugin: ^1.3.1
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: f1750183ad0c83438803da83d705a0e73819ad7e0cfd010182cc504d8a37ab2f500df4c6ea61ec82b464b13e992a2a4cf6756aabb2a66e12e8c2ee3f22553929
+    storybook: ^8.6.11
+  checksum: 5ed01f0a3494ee4308bb3dc3af7ad22a7453cf4a4e3644770976c1b773928e9f4af4bd347cc97b0024e4d2edc915f3db68ff826e06faf9595260cc05f21fb953
   languageName: node
   linkType: hard
 
@@ -7275,130 +7293,130 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/instrumenter@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/instrumenter@npm:8.6.4"
+"@storybook/instrumenter@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/instrumenter@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
     "@vitest/utils": ^2.1.1
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: acfc58fd5c29ec78a00498441c97d4528e8f915956c67600c75e7a30d240fb86551e9ce0dad8c0f83c78a828417a64d8aff38db754b87b854c70507d8d3638d0
+    storybook: ^8.6.11
+  checksum: a8fa3cbbf575ebd54272b946a67a1bc247ade905d99546572b95febcea096f3fa897e54cf5b76b33f8479d6fdbdf2ad2fa92ae5889cb68777d2cd8357cefae03
   languageName: node
   linkType: hard
 
-"@storybook/manager-api@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/manager-api@npm:8.6.4"
+"@storybook/manager-api@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/manager-api@npm:8.6.11"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: 50447d3961dfab2b2f36afa76aaeb779a9b51ca66a912bc763103f18f2f71514191388b101ec83093ac9dee6ab509b955da41325f15d88cfe1c480e7d7d1f9eb
+  checksum: 718f9d301b70268df413693deda206097a1d315d304a4a86ee34ec67563e35ee3bdcfaa3c87c4fbba25c2504595bc95a06dc43d21851415ca2576f0802d28e77
   languageName: node
   linkType: hard
 
-"@storybook/preview-api@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/preview-api@npm:8.6.4"
+"@storybook/preview-api@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/preview-api@npm:8.6.11"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: d8f642de8053686192e28f7ec748944c99c9e4d0cef7f13d96e840fd159c8bea2e3139b88a84eb16009fbda3152a61d9e075777211c10773e4d01fd103bf0e28
+  checksum: f599308dcb1474257c55436a5b8979d6943abc900b03bda59b5596d1ca8f429445cdf02ab6ccc7afa4e1192d34bf2c29d3f797c7499b987c725e0446e2d9fa62
   languageName: node
   linkType: hard
 
-"@storybook/react-dom-shim@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/react-dom-shim@npm:8.6.4"
+"@storybook/react-dom-shim@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/react-dom-shim@npm:8.6.11"
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^8.6.4
-  checksum: 0062191f312c0bf32e622904b9da7176c961cec99258c6b230c3fb6758c1cca95ac4142d4701628dc8eb922601d74c350549b78e146b5af1747edf8cb3def756
+    storybook: ^8.6.11
+  checksum: 5b59ff9ddac9d566d0f156849b59e4faf20f9d95be54090e60fb63cea30b7d4021d3cb52570e79d8f93a86ccb08332e36bd5ef58610f94950a366ebdf9fd27a3
   languageName: node
   linkType: hard
 
-"@storybook/react-vite@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/react-vite@npm:8.6.4"
+"@storybook/react-vite@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/react-vite@npm:8.6.11"
   dependencies:
     "@joshwooding/vite-plugin-react-docgen-typescript": 0.5.0
     "@rollup/pluginutils": ^5.0.2
-    "@storybook/builder-vite": 8.6.4
-    "@storybook/react": 8.6.4
+    "@storybook/builder-vite": 8.6.11
+    "@storybook/react": 8.6.11
     find-up: ^5.0.0
     magic-string: ^0.30.0
     react-docgen: ^7.0.0
     resolve: ^1.22.8
     tsconfig-paths: ^4.2.0
   peerDependencies:
-    "@storybook/test": 8.6.4
+    "@storybook/test": 8.6.11
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^8.6.4
+    storybook: ^8.6.11
     vite: ^4.0.0 || ^5.0.0 || ^6.0.0
   peerDependenciesMeta:
     "@storybook/test":
       optional: true
-  checksum: 877ea89891e18a860b598b48df086db58d161bb840093dc4563d470eab61a5042730de356a306d7a2b9de96afe522caa8ebceb0a4210e9e1b924a2548c451d3c
+  checksum: 7e974c6125a85a2b8c4c9de79deb3e9697a817b0fd9e19ef395cdff23844cbce24e526c03237c03182058f535671974b3a19634d3f7d9cfd51e3ee752923d27f
   languageName: node
   linkType: hard
 
-"@storybook/react@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/react@npm:8.6.4"
+"@storybook/react@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/react@npm:8.6.11"
   dependencies:
-    "@storybook/components": 8.6.4
+    "@storybook/components": 8.6.11
     "@storybook/global": ^5.0.0
-    "@storybook/manager-api": 8.6.4
-    "@storybook/preview-api": 8.6.4
-    "@storybook/react-dom-shim": 8.6.4
-    "@storybook/theming": 8.6.4
+    "@storybook/manager-api": 8.6.11
+    "@storybook/preview-api": 8.6.11
+    "@storybook/react-dom-shim": 8.6.11
+    "@storybook/theming": 8.6.11
   peerDependencies:
-    "@storybook/test": 8.6.4
+    "@storybook/test": 8.6.11
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
     react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^8.6.4
+    storybook: ^8.6.11
     typescript: ">= 4.2.x"
   peerDependenciesMeta:
     "@storybook/test":
       optional: true
     typescript:
       optional: true
-  checksum: 4e9860c8e177d0dd496e7d6c53927daa8429b82f9c02d5b004de61244573901160a936ba37ce69810fb13e3602391e18723237a901c57e1bd19cf9f58241c30c
+  checksum: f58ebb91bcffd294359ba3b44bedec5e2c0be2055451f521fd6f90a5d86587e2a510f9df014871f901dd72e2d465420903ddd640e3fccdaf2ae1b17327a0a284
   languageName: node
   linkType: hard
 
-"@storybook/test@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/test@npm:8.6.4"
+"@storybook/test@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/test@npm:8.6.11"
   dependencies:
     "@storybook/global": ^5.0.0
-    "@storybook/instrumenter": 8.6.4
+    "@storybook/instrumenter": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/jest-dom": 6.5.0
     "@testing-library/user-event": 14.5.2
     "@vitest/expect": 2.0.5
     "@vitest/spy": 2.0.5
   peerDependencies:
-    storybook: ^8.6.4
-  checksum: 2c16f1cc8e0f6e57f5972a664839885467c7a8b01cf807b32ea7cdd3508354cd408603f05b3f6d1c118e4560f4224102df6dfc0242deb0d2ea670895e8cdcc81
+    storybook: ^8.6.11
+  checksum: 67887adb833a2b696af6d6835f6b47c5987704a0f0cad89d3a86095b478b5ac0d84e0ca7996f5d42b358bd116daffe761e841083d09fefb2b7c7c23ce533d822
   languageName: node
   linkType: hard
 
-"@storybook/theming@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/theming@npm:8.6.4"
+"@storybook/theming@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/theming@npm:8.6.11"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: b7e13026c381e18e7ad2064e1528876eb01b7563ad16aababcac531ce76f5e59b985a72603f57d75465a611ea564bd46b9b1760634211faf4307f9265f06e044
+  checksum: 18ade917bd4d6c466a49b7d078cd5522c299d37cc772f4a41b0f74ef787a74d95017612cdeaa4e59f463a526ead53ca48896c11eb0817d0417194f5aa676285e
   languageName: node
   linkType: hard
 
-"@storybook/types@npm:8.6.4":
-  version: 8.6.4
-  resolution: "@storybook/types@npm:8.6.4"
+"@storybook/types@npm:8.6.11":
+  version: 8.6.11
+  resolution: "@storybook/types@npm:8.6.11"
   peerDependencies:
     storybook: ^8.2.0 || ^8.3.0-0 || ^8.4.0-0 || ^8.5.0-0 || ^8.6.0-0
-  checksum: 99c59e960b9b4500c1bfcdcaedf0070fc7eb500c1d3226e39bc17c7ab3671fca89645abe30baf4dcfd65764d4955db6b2c416049aef78ab81535a27a4c671eb5
+  checksum: 49a27d2be1654b2df84a51ca02dbb3d08b214d69472e55e82e45b3ae4e91ff03b75d05f177abe080b9a2bb2f3842c5b88286801f99fd2e50dc74524a42253984
   languageName: node
   linkType: hard
 
@@ -7881,15 +7899,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.26.0":
-  version: 8.26.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:8.26.0"
+"@typescript-eslint/eslint-plugin@npm:8.28.0":
+  version: 8.28.0
+  resolution: "@typescript-eslint/eslint-plugin@npm:8.28.0"
   dependencies:
     "@eslint-community/regexpp": ^4.10.0
-    "@typescript-eslint/scope-manager": 8.26.0
-    "@typescript-eslint/type-utils": 8.26.0
-    "@typescript-eslint/utils": 8.26.0
-    "@typescript-eslint/visitor-keys": 8.26.0
+    "@typescript-eslint/scope-manager": 8.28.0
+    "@typescript-eslint/type-utils": 8.28.0
+    "@typescript-eslint/utils": 8.28.0
+    "@typescript-eslint/visitor-keys": 8.28.0
     graphemer: ^1.4.0
     ignore: ^5.3.1
     natural-compare: ^1.4.0
@@ -7898,23 +7916,23 @@ __metadata:
     "@typescript-eslint/parser": ^8.0.0 || ^8.0.0-alpha.0
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: fbfc0e65b928ce37d51cc95d78061a752b8c2fb43e91a9c34ebf44b13e4cd5a0778f9aad9b67f6dd9dc98d9d35c41686fcf4b50e9b58bfa738639cdd71016303
+  checksum: 97e2e058642355a939537dbff7943c3ba5390443b73e6955cec696c102a60217b40060564af31e183dfa36902d0ec9e1a9882372a2e610492a59897ad9a78b67
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.26.0":
-  version: 8.26.0
-  resolution: "@typescript-eslint/parser@npm:8.26.0"
+"@typescript-eslint/parser@npm:8.28.0":
+  version: 8.28.0
+  resolution: "@typescript-eslint/parser@npm:8.28.0"
   dependencies:
-    "@typescript-eslint/scope-manager": 8.26.0
-    "@typescript-eslint/types": 8.26.0
-    "@typescript-eslint/typescript-estree": 8.26.0
-    "@typescript-eslint/visitor-keys": 8.26.0
+    "@typescript-eslint/scope-manager": 8.28.0
+    "@typescript-eslint/types": 8.28.0
+    "@typescript-eslint/typescript-estree": 8.28.0
+    "@typescript-eslint/visitor-keys": 8.28.0
     debug: ^4.3.4
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 6d8a8fcca1ff823cff4a7a6ac60bd079a0ff7261f907b19eb209d7df172bc484616a826db7f501f6a2e1fa501b5735b356cb5a1053839e26b97df58d860bd739
+  checksum: c7a90e49339aecf6d9d14eb350fee8c6158274c4f0cdedaa6c86ac657c4b24b557b29b05b2482a6a489d77d5de750d7b6114d9d7c938ecd7377d9eea88548ff6
   languageName: node
   linkType: hard
 
@@ -7928,28 +7946,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:8.26.0":
-  version: 8.26.0
-  resolution: "@typescript-eslint/scope-manager@npm:8.26.0"
+"@typescript-eslint/scope-manager@npm:8.28.0":
+  version: 8.28.0
+  resolution: "@typescript-eslint/scope-manager@npm:8.28.0"
   dependencies:
-    "@typescript-eslint/types": 8.26.0
-    "@typescript-eslint/visitor-keys": 8.26.0
-  checksum: b1d35e8b4ef8f20ee32c373b6206883253d724b07373462a9532160a46f1c125c3d08fe112c22a990f3eb010218bad851d8ee5e7834ebc046e40e2a4ec05ea59
+    "@typescript-eslint/types": 8.28.0
+    "@typescript-eslint/visitor-keys": 8.28.0
+  checksum: 27a7b60c557485a0959a3759110753c0fd42115f7a5f38681abe4141b95ff5371cc13cfead35d784c22ddf5eb82a85a9ad157bdba87b250b98a586fbf6d26ee1
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:8.26.0":
-  version: 8.26.0
-  resolution: "@typescript-eslint/type-utils@npm:8.26.0"
+"@typescript-eslint/type-utils@npm:8.28.0":
+  version: 8.28.0
+  resolution: "@typescript-eslint/type-utils@npm:8.28.0"
   dependencies:
-    "@typescript-eslint/typescript-estree": 8.26.0
-    "@typescript-eslint/utils": 8.26.0
+    "@typescript-eslint/typescript-estree": 8.28.0
+    "@typescript-eslint/utils": 8.28.0
     debug: ^4.3.4
     ts-api-utils: ^2.0.1
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: eab175e5be4b6fbb260a0ecc15e72f7ab04b796d53c114481105591f3ef07e651f5242ca91bf4d497090a445471fc04509774073dbb06f5ad39c5623a564cd66
+  checksum: 2f231cebccb2ec7fe3b46d530861a9bbb2f9e6354433be5a7bd6240633d4962d29eccd0755642b15f51377d4bc2f784d1ef0892f6b7f568d2dcfa7179826b42f
   languageName: node
   linkType: hard
 
@@ -7960,10 +7978,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:8.26.0":
-  version: 8.26.0
-  resolution: "@typescript-eslint/types@npm:8.26.0"
-  checksum: dea8535575d5bbc5f4d9b5a677a098e356db550b833e9c9a84204337c0a4302be3c328baa417b9cabdd4f6f4feb4921304f610e23cc31a9ab6faae9a8b921b5f
+"@typescript-eslint/types@npm:8.28.0":
+  version: 8.28.0
+  resolution: "@typescript-eslint/types@npm:8.28.0"
+  checksum: 555f1e7a749a29c58cba936da76fc346b0516553b7684c6b5ad019ba209b910f1208650007b49fbbf4dd24f8d5fdf0d4fb9401990a7e8d39256b622e3e1ea99a
   languageName: node
   linkType: hard
 
@@ -7986,12 +8004,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:8.26.0":
-  version: 8.26.0
-  resolution: "@typescript-eslint/typescript-estree@npm:8.26.0"
+"@typescript-eslint/typescript-estree@npm:8.28.0":
+  version: 8.28.0
+  resolution: "@typescript-eslint/typescript-estree@npm:8.28.0"
   dependencies:
-    "@typescript-eslint/types": 8.26.0
-    "@typescript-eslint/visitor-keys": 8.26.0
+    "@typescript-eslint/types": 8.28.0
+    "@typescript-eslint/visitor-keys": 8.28.0
     debug: ^4.3.4
     fast-glob: ^3.3.2
     is-glob: ^4.0.3
@@ -8000,22 +8018,22 @@ __metadata:
     ts-api-utils: ^2.0.1
   peerDependencies:
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 492ad542c1105111f67d83a3fa1acf9353d491dee059cc81890cd4c2bec58c7bfa6b6fdd1b3909d4b3be54044d7912f0c3d78a7d21dd2b902b99e79b5e33af6e
+  checksum: 7e4e3b15803d376521385e4f47877715c6efaf66ffe5a7a594edd593a60147fbd1d7fa99819d72f5c835c75ca9d02fa50bf2a3c036bd3a3405681f1f1682b6d1
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:8.26.0":
-  version: 8.26.0
-  resolution: "@typescript-eslint/utils@npm:8.26.0"
+"@typescript-eslint/utils@npm:8.28.0":
+  version: 8.28.0
+  resolution: "@typescript-eslint/utils@npm:8.28.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
-    "@typescript-eslint/scope-manager": 8.26.0
-    "@typescript-eslint/types": 8.26.0
-    "@typescript-eslint/typescript-estree": 8.26.0
+    "@typescript-eslint/scope-manager": 8.28.0
+    "@typescript-eslint/types": 8.28.0
+    "@typescript-eslint/typescript-estree": 8.28.0
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 6bb6e7c9bd532b09d4776cfc8fd94876cd8ff5698642993ea5b900d5202d73b958483e75e8066b9ad57382ef697f48188d219425695f50b3d92b774aefbb492e
+  checksum: 56e3cb6e6e32aa7920e8b54caaecbb633b85652028fdfac3813af3d84b05e894bcbe4fe88e97de01c76a60e1cc9a48d4f192b3cef45823f8e7aee202e872c4d7
   languageName: node
   linkType: hard
 
@@ -8043,13 +8061,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:8.26.0":
-  version: 8.26.0
-  resolution: "@typescript-eslint/visitor-keys@npm:8.26.0"
+"@typescript-eslint/visitor-keys@npm:8.28.0":
+  version: 8.28.0
+  resolution: "@typescript-eslint/visitor-keys@npm:8.28.0"
   dependencies:
-    "@typescript-eslint/types": 8.26.0
+    "@typescript-eslint/types": 8.28.0
     eslint-visitor-keys: ^4.2.0
-  checksum: 4209794bbdecbebb4105b00d42794bec30cffc2f4e6e6fd91b0be42fd97c73374c43ad2bb4ff1f7dcf97f7edde52b6137b8f98eb720d84f10ec03925fc5104c2
+  checksum: e95b207508066a9e556889baba4fed72fabb2ce632d6db09caf210ee6f9e3db5b161ced6697b2b2ef9b08561c59a6fa2d0b7edcfb24dce8fb673ee8f0ce17f45
   languageName: node
   linkType: hard
 
@@ -8095,23 +8113,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/expect@npm:3.0.8":
-  version: 3.0.8
-  resolution: "@vitest/expect@npm:3.0.8"
+"@vitest/expect@npm:3.1.1":
+  version: 3.1.1
+  resolution: "@vitest/expect@npm:3.1.1"
   dependencies:
-    "@vitest/spy": 3.0.8
-    "@vitest/utils": 3.0.8
+    "@vitest/spy": 3.1.1
+    "@vitest/utils": 3.1.1
     chai: ^5.2.0
     tinyrainbow: ^2.0.0
-  checksum: f3356755ff797f763d31cd6dca5a9ca9e2bb9a9da18e3154659cf9d4b7676342c45bce53e8aa76464d28797bd9a4aa7fa75a76857927706007cbe5385522fd56
+  checksum: a345dbdf60470853fc7641268bea2721ab6c117c77b2195fce74aab187284fedf81e7d1d2292336184804993139734169ee8a7af2ac8e7d67f3f8b5b89797f77
   languageName: node
   linkType: hard
 
-"@vitest/mocker@npm:3.0.8":
-  version: 3.0.8
-  resolution: "@vitest/mocker@npm:3.0.8"
+"@vitest/mocker@npm:3.1.1":
+  version: 3.1.1
+  resolution: "@vitest/mocker@npm:3.1.1"
   dependencies:
-    "@vitest/spy": 3.0.8
+    "@vitest/spy": 3.1.1
     estree-walker: ^3.0.3
     magic-string: ^0.30.17
   peerDependencies:
@@ -8122,7 +8140,7 @@ __metadata:
       optional: true
     vite:
       optional: true
-  checksum: 9769160ca5386cc46cd627bc654168f8267b873dac078bdd33e02f22baf3be2b411f65a7cd54173756a9d88ca90c43bb61e1febc58b4dcbfc96eac529ec0583a
+  checksum: a97f5b730360a13e9b6da99c110928eff9c87fe853f18578826025485dc89a42c6870d3c11c30bbe07cac40d45163d3d1b21fc7ed85035dc782b8ecbe4264b96
   languageName: node
   linkType: hard
 
@@ -8144,33 +8162,33 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/pretty-format@npm:3.0.8, @vitest/pretty-format@npm:^3.0.8":
-  version: 3.0.8
-  resolution: "@vitest/pretty-format@npm:3.0.8"
+"@vitest/pretty-format@npm:3.1.1, @vitest/pretty-format@npm:^3.1.1":
+  version: 3.1.1
+  resolution: "@vitest/pretty-format@npm:3.1.1"
   dependencies:
     tinyrainbow: ^2.0.0
-  checksum: 1c0651979b44d58203b5a508e4e09d368ea3fbf2721fc555a701a7b35921b30fc363965686e026350d0870b17fb79ddcb20d386b8a51ae42bd0e82e1fe995aa9
+  checksum: 9f036086bf46b65fb062a6e9f796b17dd64f81eeb237ea141f3bcda413bc71a1f17546cd9def4ee75ea0c47f1120a083b048e65cf877ab114a4355105f64e14d
   languageName: node
   linkType: hard
 
-"@vitest/runner@npm:3.0.8":
-  version: 3.0.8
-  resolution: "@vitest/runner@npm:3.0.8"
+"@vitest/runner@npm:3.1.1":
+  version: 3.1.1
+  resolution: "@vitest/runner@npm:3.1.1"
   dependencies:
-    "@vitest/utils": 3.0.8
+    "@vitest/utils": 3.1.1
     pathe: ^2.0.3
-  checksum: 220449385e2064be48cc75ad74824e008c4ac493d6b5422433cf4ad67745802a69e55e8b81a5cd7615243e1c33f148ea5edb63b9a2b56e7c83838143a188abcc
+  checksum: 9d05418116bd8a40415c17fa4a90c5f852b0ab0fe8403655fcaef6d6a8943d511f8e948f775a0c5e49b767c0aaa2372aea44bb0f62c68791e035717638097129
   languageName: node
   linkType: hard
 
-"@vitest/snapshot@npm:3.0.8":
-  version: 3.0.8
-  resolution: "@vitest/snapshot@npm:3.0.8"
+"@vitest/snapshot@npm:3.1.1":
+  version: 3.1.1
+  resolution: "@vitest/snapshot@npm:3.1.1"
   dependencies:
-    "@vitest/pretty-format": 3.0.8
+    "@vitest/pretty-format": 3.1.1
     magic-string: ^0.30.17
     pathe: ^2.0.3
-  checksum: 1bccaf37de698a6b73a54afdcbfa2874f75bf0dcab6c00f01994294f166448856491ddaddb406325832ceb54b7623b5c35d132dbffad5575d3e0a7a0df84fa12
+  checksum: 00079c18e21c7271a6b27198f6604645ec5e4cda8f86716ee658a0993d1baaa47ac0064a92ed0a61a29c27a7f2877f3fa6e11a90d3d597c119623732ecaf1f7b
   languageName: node
   linkType: hard
 
@@ -8183,12 +8201,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/spy@npm:3.0.8":
-  version: 3.0.8
-  resolution: "@vitest/spy@npm:3.0.8"
+"@vitest/spy@npm:3.1.1":
+  version: 3.1.1
+  resolution: "@vitest/spy@npm:3.1.1"
   dependencies:
     tinyspy: ^3.0.2
-  checksum: 2e35b0fb0434baff243b26ebf4b57665b07e6f51efedd70ebb9422cd30942893612f6aed68c32956212f3f22d4ef335ac0d12987480d536c12892e0a45255f34
+  checksum: 7ab13a9fed9fa41a2eee2d098c5026938f7899f41bd1a5ae8db6bd3ed2d3fc4ac6d9142e5028391d5d36c54f989c15450ea89d1fb326bc7fcce590cefd290a41
   languageName: node
   linkType: hard
 
@@ -8204,14 +8222,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/utils@npm:3.0.8":
-  version: 3.0.8
-  resolution: "@vitest/utils@npm:3.0.8"
+"@vitest/utils@npm:3.1.1":
+  version: 3.1.1
+  resolution: "@vitest/utils@npm:3.1.1"
   dependencies:
-    "@vitest/pretty-format": 3.0.8
+    "@vitest/pretty-format": 3.1.1
     loupe: ^3.1.3
     tinyrainbow: ^2.0.0
-  checksum: 20bac67702c8f32316dba3af165db23bd588913050cabaf8f86512a26389078c84eee7900dc2da2fcca452c540f8a55c42dd48a8cc808016a021f6dd41c1e31f
+  checksum: 6d93b0876b1c708b3b9f5a1203ab3838811798ee1f989e5b06a1de3aca2c61493075a1a44de220c77ddf914b9f0888845612c9a8175d965b98715196fc169ebe
   languageName: node
   linkType: hard
 
@@ -9659,15 +9677,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"create-storybook@npm:8.6.4":
-  version: 8.6.4
-  resolution: "create-storybook@npm:8.6.4"
+"create-storybook@npm:8.6.11":
+  version: 8.6.11
+  resolution: "create-storybook@npm:8.6.11"
   dependencies:
     recast: ^0.23.5
     semver: ^7.6.2
   bin:
     create-storybook: ./bin/index.cjs
-  checksum: 5311aafa2c278c647a2be3d8b71d4da97f721f1db293d0adab8446bd8777e9faae3abb8ea2caddaa292966e6d3aebb5b24add32b4311546937516b875210fa0c
+  checksum: f044448419b167d9ac0238f57f70fa05fd983373904d1c4181012f1f3075b0e116904b0b8096137906c4d53f43bbee0259657b7a5f4c66f96136eedc24285279
   languageName: node
   linkType: hard
 
@@ -9680,6 +9698,19 @@ __metadata:
     cross-env: src/bin/cross-env.js
     cross-env-shell: src/bin/cross-env-shell.js
   checksum: 26f2f3ea2ab32617f57effb70d329c2070d2f5630adc800985d8b30b56e8bf7f5f439dd3a0358b79cee6f930afc23cf8e23515f17ccfb30092c6b62c6b630a79
+  languageName: node
+  linkType: hard
+
+"cross-spawn@npm:^6.0.0":
+  version: 6.0.6
+  resolution: "cross-spawn@npm:6.0.6"
+  dependencies:
+    nice-try: ^1.0.4
+    path-key: ^2.0.1
+    semver: ^5.5.0
+    shebang-command: ^1.2.0
+    which: ^1.2.9
+  checksum: a6e2e5b04a0e0f806c1df45f92cd079b65f95fbe5a7650ee1ab60318c33a6c156a8a2f8b6898f57764f7363ec599a0625e9855dfa78d52d2d73dbd32eb11c25e
   languageName: node
   linkType: hard
 
@@ -10334,7 +10365,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"end-of-stream@npm:^1.4.1":
+"end-of-stream@npm:^1.1.0, end-of-stream@npm:^1.4.1":
   version: 1.4.4
   resolution: "end-of-stream@npm:1.4.4"
   dependencies:
@@ -11002,13 +11033,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint-scope@npm:^8.2.0":
-  version: 8.2.0
-  resolution: "eslint-scope@npm:8.2.0"
+"eslint-scope@npm:^8.3.0":
+  version: 8.3.0
+  resolution: "eslint-scope@npm:8.3.0"
   dependencies:
     esrecurse: ^4.3.0
     estraverse: ^5.2.0
-  checksum: 750eff4672ca2bf274ec0d1bbeae08aadd53c1907d5c6aff5564d8e047a5f49afa8ae6eee333cab637fd3ebcab2141659d8f2f040f6fdc982b0f61f8bf03136f
+  checksum: 57a58b6716533e25d527089826c4add89a047aecf75e4a88fee05f113ef5a72b85392b304a69bf670646cc3e068354aec70361b9718c2453949a05fc4d9bfe73
   languageName: node
   linkType: hard
 
@@ -11026,16 +11057,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:9.21.0":
-  version: 9.21.0
-  resolution: "eslint@npm:9.21.0"
+"eslint@npm:9.23.0":
+  version: 9.23.0
+  resolution: "eslint@npm:9.23.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.12.1
     "@eslint/config-array": ^0.19.2
+    "@eslint/config-helpers": ^0.2.0
     "@eslint/core": ^0.12.0
-    "@eslint/eslintrc": ^3.3.0
-    "@eslint/js": 9.21.0
+    "@eslint/eslintrc": ^3.3.1
+    "@eslint/js": 9.23.0
     "@eslint/plugin-kit": ^0.2.7
     "@humanfs/node": ^0.16.6
     "@humanwhocodes/module-importer": ^1.0.1
@@ -11047,7 +11079,7 @@ __metadata:
     cross-spawn: ^7.0.6
     debug: ^4.3.2
     escape-string-regexp: ^4.0.0
-    eslint-scope: ^8.2.0
+    eslint-scope: ^8.3.0
     eslint-visitor-keys: ^4.2.0
     espree: ^10.3.0
     esquery: ^1.5.0
@@ -11071,7 +11103,7 @@ __metadata:
       optional: true
   bin:
     eslint: bin/eslint.js
-  checksum: 83a493877fe1cda3a0c3028de6ebfbc16abc2b26decd304a4e424961fa1ba7fc4e950ed1d7c37f85f5c7053c7e1d990fd92c46c0cdd9dedbbb002076745b4ce5
+  checksum: 5ace40f8e508f296bfa9d3f70a78a5082b7c9d230de0e53c0dc35f7b20bb2a9c0ce99eefaa6fa01766058f2eebaa86b8fc69ab7e0fb76b6b85b6e29af88063bb
   languageName: node
   linkType: hard
 
@@ -11182,6 +11214,21 @@ __metadata:
   languageName: node
   linkType: hard
 
+"execa@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "execa@npm:1.0.0"
+  dependencies:
+    cross-spawn: ^6.0.0
+    get-stream: ^4.0.0
+    is-stream: ^1.1.0
+    npm-run-path: ^2.0.0
+    p-finally: ^1.0.0
+    signal-exit: ^3.0.0
+    strip-eof: ^1.0.0
+  checksum: ddf1342c1c7d02dd93b41364cd847640f6163350d9439071abf70bf4ceb1b9b2b2e37f54babb1d8dc1df8e0d8def32d0e81e74a2e62c3e1d70c303eb4c306bc4
+  languageName: node
+  linkType: hard
+
 "execa@npm:^8.0.1":
   version: 8.0.1
   resolution: "execa@npm:8.0.1"
@@ -11206,10 +11253,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expect-type@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "expect-type@npm:1.1.0"
-  checksum: 65d25ec10bca32bcf650dcfe734532acc4b7a73677c656f299a7cbed273b5c4d6a3dab11af76f452645d54a95c4ef39fc73772f2c8eb6684ba35672958d6f3b3
+"expect-type@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "expect-type@npm:1.2.0"
+  checksum: fb6cce8e0d8cd2d2b329afeacad08dbf01297b0363494a826cb3dad7d22d45e5283a1c2c3f8cdef5765afefab4676a7cb9a46c9c5a506fdd1ee255e429debe96
   languageName: node
   linkType: hard
 
@@ -11319,7 +11366,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"file-entry-cache@npm:^10.0.6":
+"file-entry-cache@npm:^10.0.6, file-entry-cache@npm:^10.0.7":
   version: 10.0.7
   resolution: "file-entry-cache@npm:10.0.7"
   dependencies:
@@ -11538,14 +11585,14 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@eslint/js": 9.21.0
+    "@eslint/js": 9.23.0
     "@navikt/aksel-stylelint": 7.17.4
-    "@sentry/cli": 2.42.2
-    "@storybook/addon-essentials": 8.6.4
-    "@storybook/addon-links": 8.6.4
-    "@storybook/builder-vite": 8.6.4
-    "@storybook/cli": 8.6.4
-    "@storybook/react": 8.6.4
+    "@sentry/cli": 2.43.0
+    "@storybook/addon-essentials": 8.6.11
+    "@storybook/addon-links": 8.6.11
+    "@storybook/builder-vite": 8.6.11
+    "@storybook/cli": 8.6.11
+    "@storybook/react": 8.6.11
     "@testing-library/dom": 10.4.0
     "@testing-library/jest-dom": 6.6.3
     "@testing-library/react": 16.2.0
@@ -11561,7 +11608,7 @@ __metadata:
     "@vitest/coverage-c8": 0.33.0
     cross-env: 7.0.3
     dotenv: 16.4.7
-    eslint: 9.21.0
+    eslint: 9.23.0
     eslint-config-prettier: 10.1.1
     eslint-plugin-import: 2.31.0
     eslint-plugin-jsx-a11y: 6.10.2
@@ -11573,18 +11620,18 @@ __metadata:
     husky: 9.1.7
     jsdom: 26.0.0
     lerna: 8.2.1
-    lint-staged: 15.4.3
+    lint-staged: 15.5.0
     prettier: ^3.5.3
-    react-test-renderer: 19.0.0
-    shelljs: 0.8.5
-    stylelint: 16.15.0
+    react-test-renderer: 19.1.0
+    shelljs: 0.9.2
+    stylelint: 16.17.0
     stylelint-order: 6.0.4
     typescript: 5.8.2
-    typescript-eslint: 8.26.0
-    vite: 6.2.1
+    typescript-eslint: 8.28.0
+    vite: 6.2.4
     vite-plugin-externalize-deps: 0.9.0
     vite-plugin-html: 3.2.2
-    vitest: 3.0.8
+    vitest: 3.1.1
     vitest-canvas-mock: 0.3.3
   languageName: unknown
   linkType: soft
@@ -11801,6 +11848,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"get-stream@npm:^4.0.0":
+  version: 4.1.0
+  resolution: "get-stream@npm:4.1.0"
+  dependencies:
+    pump: ^3.0.0
+  checksum: 443e1914170c15bd52ff8ea6eff6dfc6d712b031303e36302d2778e3de2506af9ee964d6124010f7818736dcfde05c04ba7ca6cc26883106e084357a17ae7d73
+  languageName: node
+  linkType: hard
+
 "get-stream@npm:^6.0.0":
   version: 6.0.1
   resolution: "get-stream@npm:6.0.1"
@@ -11970,7 +12026,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"glob@npm:^7.0.0, glob@npm:^7.1.3, glob@npm:^7.1.4":
+"glob@npm:^7.1.3, glob@npm:^7.1.4":
   version: 7.2.3
   resolution: "glob@npm:7.2.3"
   dependencies:
@@ -12996,6 +13052,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"is-stream@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "is-stream@npm:1.1.0"
+  checksum: 063c6bec9d5647aa6d42108d4c59723d2bd4ae42135a2d4db6eadbd49b7ea05b750fd69d279e5c7c45cf9da753ad2c00d8978be354d65aa9f6bb434969c6a2ae
+  languageName: node
+  linkType: hard
+
 "is-stream@npm:^2.0.0":
   version: 2.0.1
   resolution: "is-stream@npm:2.0.1"
@@ -13753,9 +13816,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:15.4.3":
-  version: 15.4.3
-  resolution: "lint-staged@npm:15.4.3"
+"lint-staged@npm:15.5.0":
+  version: 15.5.0
+  resolution: "lint-staged@npm:15.5.0"
   dependencies:
     chalk: ^5.4.1
     commander: ^13.1.0
@@ -13769,7 +13832,7 @@ __metadata:
     yaml: ^2.7.0
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: b12b246c13fc1c7b0023a234244699fa1ec9b8ee15fae71e8109e7f10aa5f43c5cfa9d7eba6aa109cae6b6ffe7a1a50244f5df84e4b30d14e3764dbb66c5f66f
+  checksum: 9d5854d1bef3b0b604b3c10e56f73ee49026ff700e5f9497522c852356b25a0a43f9897e9e336ed99bf91e6bde978279f6a6d59b9b94716c1dd6d46b6ddad462
   languageName: node
   linkType: hard
 
@@ -14552,6 +14615,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nice-try@npm:^1.0.4":
+  version: 1.0.5
+  resolution: "nice-try@npm:1.0.5"
+  checksum: 0b4af3b5bb5d86c289f7a026303d192a7eb4417231fe47245c460baeabae7277bcd8fd9c728fb6bd62c30b3e15cd6620373e2cf33353b095d8b403d3e8a15aff
+  languageName: node
+  linkType: hard
+
 "no-case@npm:^3.0.4":
   version: 3.0.4
   resolution: "no-case@npm:3.0.4"
@@ -14786,6 +14856,15 @@ __metadata:
     npm-package-arg: ^11.0.0
     proc-log: ^4.0.0
   checksum: 12452e690aa98a4504fe70a40e97877656799a66d31b8e6d5786b85d1d27aee168162cd5d78acc05a7eac5fa56f2b5ba0bdf80e83daaf5ef67e66c3d8c979c39
+  languageName: node
+  linkType: hard
+
+"npm-run-path@npm:^2.0.0":
+  version: 2.0.2
+  resolution: "npm-run-path@npm:2.0.2"
+  dependencies:
+    path-key: ^2.0.0
+  checksum: acd5ad81648ba4588ba5a8effb1d98d2b339d31be16826a118d50f182a134ac523172101b82eab1d01cb4c2ba358e857d54cfafd8163a1ffe7bd52100b741125
   languageName: node
   linkType: hard
 
@@ -15032,7 +15111,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"once@npm:^1.3.0, once@npm:^1.4.0":
+"once@npm:^1.3.0, once@npm:^1.3.1, once@npm:^1.4.0":
   version: 1.4.0
   resolution: "once@npm:1.4.0"
   dependencies:
@@ -15443,6 +15522,13 @@ __metadata:
   version: 1.0.1
   resolution: "path-is-absolute@npm:1.0.1"
   checksum: 060840f92cf8effa293bcc1bea81281bd7d363731d214cbe5c227df207c34cd727430f70c6037b5159c8a870b9157cba65e775446b0ab06fd5ecc7e54615a3b8
+  languageName: node
+  linkType: hard
+
+"path-key@npm:^2.0.0, path-key@npm:^2.0.1":
+  version: 2.0.1
+  resolution: "path-key@npm:2.0.1"
+  checksum: f7ab0ad42fe3fb8c7f11d0c4f849871e28fbd8e1add65c370e422512fc5887097b9cf34d09c1747d45c942a8c1e26468d6356e2df3f740bf177ab8ca7301ebfd
   languageName: node
   linkType: hard
 
@@ -15896,6 +15982,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"pump@npm:^3.0.0":
+  version: 3.0.2
+  resolution: "pump@npm:3.0.2"
+  dependencies:
+    end-of-stream: ^1.1.0
+    once: ^1.3.1
+  checksum: e0c4216874b96bd25ddf31a0b61a5613e26cc7afa32379217cf39d3915b0509def3565f5f6968fafdad2894c8bbdbd67d340e84f3634b2a29b950cffb6442d9f
+  languageName: node
+  linkType: hard
+
 "punycode@npm:^2.1.0, punycode@npm:^2.1.1, punycode@npm:^2.3.1":
   version: 2.3.1
   resolution: "punycode@npm:2.3.1"
@@ -16055,10 +16151,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-is@npm:^19.0.0":
-  version: 19.0.0
-  resolution: "react-is@npm:19.0.0"
-  checksum: fbb3060bcb6b3e8e525b17f0872d1cf62a40b73fa7c5de02419069e2edd3e01cf1e8e86c8888f0733cff006175ee76ae927b40b6f0c4332bdda21020505ac90b
+"react-is@npm:^19.1.0":
+  version: 19.1.0
+  resolution: "react-is@npm:19.1.0"
+  checksum: 3eb4eac7f09bf178bdc6fa98d384f5f243b85de7c99679a88b0154ead4d818ad94386ccb00ea31ec52409ffd13299057f5ec6ca2eaec06f9f7eddc1ad4832332
   languageName: node
   linkType: hard
 
@@ -16178,15 +16274,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-test-renderer@npm:19.0.0":
-  version: 19.0.0
-  resolution: "react-test-renderer@npm:19.0.0"
+"react-test-renderer@npm:19.1.0":
+  version: 19.1.0
+  resolution: "react-test-renderer@npm:19.1.0"
   dependencies:
-    react-is: ^19.0.0
-    scheduler: ^0.25.0
+    react-is: ^19.1.0
+    scheduler: ^0.26.0
   peerDependencies:
-    react: ^19.0.0
-  checksum: 2e1e527588c69e822b7aa25262c9f4a48161ede9cee5109b88228ecafbd91ce82f7afed176645efcba903ba5a43d05842a8229cdde220049e42a0cf679715dbc
+    react: ^19.1.0
+  checksum: e060239f8fbfbe54c2fa0e1d7a9eb1ee77787b0b29fd75ba6170dc22cd637c3a9052a82285db6be5a269309a65b8e8c40ddc8103620fbe1652cce693fd608acc
   languageName: node
   linkType: hard
 
@@ -16906,7 +17002,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.6.0":
+"scheduler@npm:^0.26.0":
+  version: 0.26.0
+  resolution: "scheduler@npm:0.26.0"
+  checksum: c63a9f1c0e5089b537231cff6c11f75455b5c8625ae09535c1d7cd0a1b0c77ceecdd9f1074e5e063da5d8dc11e73e8033dcac3361791088be08a6e60c0283ed9
+  languageName: node
+  linkType: hard
+
+"semver@npm:2 || 3 || 4 || 5, semver@npm:^5.5.0, semver@npm:^5.6.0":
   version: 5.7.2
   resolution: "semver@npm:5.7.2"
   bin:
@@ -17000,12 +17103,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"shebang-command@npm:^1.2.0":
+  version: 1.2.0
+  resolution: "shebang-command@npm:1.2.0"
+  dependencies:
+    shebang-regex: ^1.0.0
+  checksum: 9eed1750301e622961ba5d588af2212505e96770ec376a37ab678f965795e995ade7ed44910f5d3d3cb5e10165a1847f52d3348c64e146b8be922f7707958908
+  languageName: node
+  linkType: hard
+
 "shebang-command@npm:^2.0.0":
   version: 2.0.0
   resolution: "shebang-command@npm:2.0.0"
   dependencies:
     shebang-regex: ^3.0.0
   checksum: 6b52fe87271c12968f6a054e60f6bde5f0f3d2db483a1e5c3e12d657c488a15474121a1d55cd958f6df026a54374ec38a4a963988c213b7570e1d51575cea7fa
+  languageName: node
+  linkType: hard
+
+"shebang-regex@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "shebang-regex@npm:1.0.0"
+  checksum: 404c5a752cd40f94591dfd9346da40a735a05139dac890ffc229afba610854d8799aaa52f87f7e0c94c5007f2c6af55bdcaeb584b56691926c5eaf41dc8f1372
   languageName: node
   linkType: hard
 
@@ -17016,16 +17135,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"shelljs@npm:0.8.5":
-  version: 0.8.5
-  resolution: "shelljs@npm:0.8.5"
+"shelljs@npm:0.9.2":
+  version: 0.9.2
+  resolution: "shelljs@npm:0.9.2"
   dependencies:
-    glob: ^7.0.0
+    execa: ^1.0.0
+    fast-glob: ^3.3.2
     interpret: ^1.0.0
     rechoir: ^0.6.2
   bin:
     shjs: bin/shjs
-  checksum: 7babc46f732a98f4c054ec1f048b55b9149b98aa2da32f6cf9844c434b43c6251efebd6eec120937bd0999e13811ebd45efe17410edb3ca938f82f9381302748
+  checksum: 22ab43a710ab341edaf7ea9115d2a5c704896a8fd52bdbb99c0aeda7d51c7810726ea43e7ae8246d68f21a3f77ba59bd35825db032e6c7c2e0d050ab3cabbb52
   languageName: node
   linkType: hard
 
@@ -17096,7 +17216,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"signal-exit@npm:3.0.7, signal-exit@npm:^3.0.2, signal-exit@npm:^3.0.3":
+"signal-exit@npm:3.0.7, signal-exit@npm:^3.0.0, signal-exit@npm:^3.0.2, signal-exit@npm:^3.0.3":
   version: 3.0.7
   resolution: "signal-exit@npm:3.0.7"
   checksum: a2f098f247adc367dffc27845853e9959b9e88b01cb301658cfe4194352d8d2bb32e18467c786a7fe15f1d44b233ea35633d076d5e737870b7139949d1ab6318
@@ -17336,18 +17456,25 @@ __metadata:
   languageName: node
   linkType: hard
 
-"std-env@npm:^3.3.3, std-env@npm:^3.8.0":
+"std-env@npm:^3.3.3":
   version: 3.8.0
   resolution: "std-env@npm:3.8.0"
   checksum: ad4554485c2d09138a1d0f03944245e169510e6f5200b7d30fcdd4536e27a2a9a2fd934caff7ef58ebbe21993fa0e2b9e5b1979f431743c925305863b7ff36d5
   languageName: node
   linkType: hard
 
-"storybook@npm:8.6.4":
-  version: 8.6.4
-  resolution: "storybook@npm:8.6.4"
+"std-env@npm:^3.8.1":
+  version: 3.8.1
+  resolution: "std-env@npm:3.8.1"
+  checksum: 20114a5270aa2a3fc50d897461c6ab73329cf2d3c6bff1c124bb969577493aeebda8ee1916588b2657afcee9881bc652437cfdec6360e3f30be36c8675ea0cbb
+  languageName: node
+  linkType: hard
+
+"storybook@npm:8.6.11":
+  version: 8.6.11
+  resolution: "storybook@npm:8.6.11"
   dependencies:
-    "@storybook/core": 8.6.4
+    "@storybook/core": 8.6.11
   peerDependencies:
     prettier: ^2 || ^3
   peerDependenciesMeta:
@@ -17357,7 +17484,7 @@ __metadata:
     getstorybook: ./bin/index.cjs
     sb: ./bin/index.cjs
     storybook: ./bin/index.cjs
-  checksum: 96c59b5c6ac27dfb9fb85d110b0257a77264015454dd0ca7893ae9df04dbf31e523ff351ba45283f33a58ecb28fd985349aa9c1fb83ab51d0c781a4d5809fa15
+  checksum: 76418fa39dda92212821e70149cc7b9c62bab3c4cfefb906027d8c49be8f3401b23775b0e26a85f4cc32653d55af6ccfdfc975bafc9e4ebb9163bab14b147eab
   languageName: node
   linkType: hard
 
@@ -17561,6 +17688,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"strip-eof@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "strip-eof@npm:1.0.0"
+  checksum: 40bc8ddd7e072f8ba0c2d6d05267b4e0a4800898c3435b5fb5f5a21e6e47dfaff18467e7aa0d1844bb5d6274c3097246595841fbfeb317e541974ee992cac506
+  languageName: node
+  linkType: hard
+
 "strip-final-newline@npm:^2.0.0":
   version: 2.0.0
   resolution: "strip-final-newline@npm:2.0.0"
@@ -17634,7 +17768,55 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:16.15.0, stylelint@npm:^16.15.0":
+"stylelint@npm:16.17.0":
+  version: 16.17.0
+  resolution: "stylelint@npm:16.17.0"
+  dependencies:
+    "@csstools/css-parser-algorithms": ^3.0.4
+    "@csstools/css-tokenizer": ^3.0.3
+    "@csstools/media-query-list-parser": ^4.0.2
+    "@csstools/selector-specificity": ^5.0.0
+    "@dual-bundle/import-meta-resolve": ^4.1.0
+    balanced-match: ^2.0.0
+    colord: ^2.9.3
+    cosmiconfig: ^9.0.0
+    css-functions-list: ^3.2.3
+    css-tree: ^3.1.0
+    debug: ^4.3.7
+    fast-glob: ^3.3.3
+    fastest-levenshtein: ^1.0.16
+    file-entry-cache: ^10.0.7
+    global-modules: ^2.0.0
+    globby: ^11.1.0
+    globjoin: ^0.1.4
+    html-tags: ^3.3.1
+    ignore: ^7.0.3
+    imurmurhash: ^0.1.4
+    is-plain-object: ^5.0.0
+    known-css-properties: ^0.35.0
+    mathml-tag-names: ^2.1.3
+    meow: ^13.2.0
+    micromatch: ^4.0.8
+    normalize-path: ^3.0.0
+    picocolors: ^1.1.1
+    postcss: ^8.5.3
+    postcss-resolve-nested-selector: ^0.1.6
+    postcss-safe-parser: ^7.0.1
+    postcss-selector-parser: ^7.1.0
+    postcss-value-parser: ^4.2.0
+    resolve-from: ^5.0.0
+    string-width: ^4.2.3
+    supports-hyperlinks: ^3.2.0
+    svg-tags: ^1.0.0
+    table: ^6.9.0
+    write-file-atomic: ^5.0.1
+  bin:
+    stylelint: bin/stylelint.mjs
+  checksum: 16bcb33273d968583a545c4bdd64661a5ff97bc4b39f4e07f21a1fdb460ad15f44e8ea06628cf19b24820dc6054afdbddf94c3ab272e0f083d87350bfa0a1f64
+  languageName: node
+  linkType: hard
+
+"stylelint@npm:^16.15.0":
   version: 16.15.0
   resolution: "stylelint@npm:16.15.0"
   dependencies:
@@ -18236,17 +18418,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:8.26.0":
-  version: 8.26.0
-  resolution: "typescript-eslint@npm:8.26.0"
+"typescript-eslint@npm:8.28.0":
+  version: 8.28.0
+  resolution: "typescript-eslint@npm:8.28.0"
   dependencies:
-    "@typescript-eslint/eslint-plugin": 8.26.0
-    "@typescript-eslint/parser": 8.26.0
-    "@typescript-eslint/utils": 8.26.0
+    "@typescript-eslint/eslint-plugin": 8.28.0
+    "@typescript-eslint/parser": 8.28.0
+    "@typescript-eslint/utils": 8.28.0
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 87ac61b003e5015fd6b4e84876a74ffb77e1d97f3b35dae72174b5ad053abb65587bd5f0c0c91c8e236741b79fbb98f03c1ff991215e0cf7411c4d1bd101d9a4
+  checksum: 4cb9794451948e05a30ff7db966c4dc26a613a9dbceead4daa92454698951cc819b82e3e990c07481f9bf7430b21f2b0808e5a14c6b8bcee90febc8b784c0d58
   languageName: node
   linkType: hard
 
@@ -18546,9 +18728,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite-node@npm:3.0.8":
-  version: 3.0.8
-  resolution: "vite-node@npm:3.0.8"
+"vite-node@npm:3.1.1":
+  version: 3.1.1
+  resolution: "vite-node@npm:3.1.1"
   dependencies:
     cac: ^6.7.14
     debug: ^4.4.0
@@ -18557,7 +18739,7 @@ __metadata:
     vite: ^5.0.0 || ^6.0.0
   bin:
     vite-node: vite-node.mjs
-  checksum: 58532ba5bab923dedad7c28fb8b37afc4ef009a8b62dde31f38919958bc3cd47d580b56ad82f321873c3d0d67e691a8eac10c26b06c70843eb357ed2105a44c2
+  checksum: 34f214413cdbdf77bd2ff786934fa6c3e7c6628cfae6e6aba92fc7c0438ad0642166e43077954216b7737aed9de5dec4b6a916dea0384b791e1521e242dd2d56
   languageName: node
   linkType: hard
 
@@ -18592,9 +18774,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:6.2.1":
-  version: 6.2.1
-  resolution: "vite@npm:6.2.1"
+"vite@npm:6.2.4":
+  version: 6.2.4
+  resolution: "vite@npm:6.2.4"
   dependencies:
     esbuild: ^0.25.0
     fsevents: ~2.3.3
@@ -18640,7 +18822,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: d7379a9870c888681f7e4a861095e7f568ecd4cb99a5eed2dec65dc205ce863783d45c66a1a275868e23732087009533eadec999061c1ddef96aa8aaa0dcf6d2
+  checksum: 1b3692e1b599481c06875b462e3613b19cd5f3f3890cd418b43d4b5c2dd575e1ea6ed540448c083f1d664c912c42f80d881bc6f3f0c823f0ad2323dc762c8d6b
   languageName: node
   linkType: hard
 
@@ -18707,36 +18889,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vitest@npm:3.0.8":
-  version: 3.0.8
-  resolution: "vitest@npm:3.0.8"
+"vitest@npm:3.1.1":
+  version: 3.1.1
+  resolution: "vitest@npm:3.1.1"
   dependencies:
-    "@vitest/expect": 3.0.8
-    "@vitest/mocker": 3.0.8
-    "@vitest/pretty-format": ^3.0.8
-    "@vitest/runner": 3.0.8
-    "@vitest/snapshot": 3.0.8
-    "@vitest/spy": 3.0.8
-    "@vitest/utils": 3.0.8
+    "@vitest/expect": 3.1.1
+    "@vitest/mocker": 3.1.1
+    "@vitest/pretty-format": ^3.1.1
+    "@vitest/runner": 3.1.1
+    "@vitest/snapshot": 3.1.1
+    "@vitest/spy": 3.1.1
+    "@vitest/utils": 3.1.1
     chai: ^5.2.0
     debug: ^4.4.0
-    expect-type: ^1.1.0
+    expect-type: ^1.2.0
     magic-string: ^0.30.17
     pathe: ^2.0.3
-    std-env: ^3.8.0
+    std-env: ^3.8.1
     tinybench: ^2.9.0
     tinyexec: ^0.3.2
     tinypool: ^1.0.2
     tinyrainbow: ^2.0.0
     vite: ^5.0.0 || ^6.0.0
-    vite-node: 3.0.8
+    vite-node: 3.1.1
     why-is-node-running: ^2.3.0
   peerDependencies:
     "@edge-runtime/vm": "*"
     "@types/debug": ^4.1.12
     "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
-    "@vitest/browser": 3.0.8
-    "@vitest/ui": 3.0.8
+    "@vitest/browser": 3.1.1
+    "@vitest/ui": 3.1.1
     happy-dom: "*"
     jsdom: "*"
   peerDependenciesMeta:
@@ -18756,7 +18938,7 @@ __metadata:
       optional: true
   bin:
     vitest: vitest.mjs
-  checksum: e4786f6127a261d61fec20c1a9cc2acae514696fc382d0cd9c62d83d7d872eaadf4d7d09495a04a6c5a8879306f197a35729c7c6c1929ef870ea063e4be87847
+  checksum: 817198380f249388bebc64cdae27e64d04570bc6ca98c13b3518059a655ebf94f413e17bbe5d71bfc2ca444e9ab93d0b39e9da4f455a51600fd92d4fa6c50664
   languageName: node
   linkType: hard
 
@@ -18947,7 +19129,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"which@npm:^1.3.1":
+"which@npm:^1.2.9, which@npm:^1.3.1":
   version: 1.3.1
   resolution: "which@npm:1.3.1"
   dependencies:
