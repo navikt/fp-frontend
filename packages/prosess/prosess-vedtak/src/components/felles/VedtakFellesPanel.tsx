@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
-import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
@@ -99,19 +98,11 @@ export const VedtakFellesPanel = ({
     formState: { isSubmitting },
   } = useFormContext();
 
-  const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
   const [harRedigertBrev, setHarRedigertBrev] = useState(behandlingsresultat?.harRedigertVedtaksbrev ?? false);
 
   if (!behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
   }
-
-  const forkastOverstyrtBrev = async () => {
-    setVisForkastOverstyringModal(false);
-    setHarValgtÅRedigereVedtaksbrev(false);
-
-    await mellomlagreBrevOverstyring(null);
-  };
 
   const erInnvilget = isInnvilget(behandlingsresultat.type);
   const erAvslatt = isAvslag(behandlingsresultat.type);
@@ -132,13 +123,6 @@ export const VedtakFellesPanel = ({
 
   return (
     <VStack gap="4">
-      <OkAvbrytModal
-        text={intl.formatMessage({ id: 'VedtakFellesPanel.Forkast' })}
-        okButtonText={intl.formatMessage({ id: 'VedtakFellesPanel.Ok' })}
-        showModal={visForkastOverstyringModal}
-        cancel={() => setVisForkastOverstyringModal(false)}
-        submit={forkastOverstyrtBrev}
-      />
       <HStack gap="2">
         {status === behandlingStatusCode.AVSLUTTET && (
           <>
@@ -224,7 +208,7 @@ export const VedtakFellesPanel = ({
             setHarRedigertBrev={setHarRedigertBrev}
             harRedigertBrev={harRedigertBrev}
             mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-            setVisForkastOverstyringModal={setVisForkastOverstyringModal}
+            setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
           />
         )}
         {!isReadOnly && kanSendesTilGodkjenning(status) && (

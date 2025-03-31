@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
+import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
@@ -17,7 +18,7 @@ interface Props {
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
   setHarRedigertBrev: (harRedigert: boolean) => void;
   harRedigertBrev: boolean;
-  setVisForkastOverstyringModal: (visForkastOverstyring: boolean) => void;
+  setHarValgtÅRedigereVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
 }
 
 export const OverstyringVedtaksbrev = ({
@@ -26,9 +27,12 @@ export const OverstyringVedtaksbrev = ({
   mellomlagreBrevOverstyring,
   setHarRedigertBrev,
   harRedigertBrev,
-  setVisForkastOverstyringModal,
+  setHarValgtÅRedigereVedtaksbrev,
 }: Props) => {
+  const intl = useIntl();
   const { isReadOnly } = usePanelDataContext();
+
+  const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
 
   const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
 
@@ -49,10 +53,17 @@ export const OverstyringVedtaksbrev = ({
   };
 
   const mellomlagreOgHentPåNytt = async (html: string | null) => {
-    setHarRedigertBrev(true);
+    setHarRedigertBrev(html !== null);
     await mellomlagreBrevOverstyring(html);
     const res = await hentBrevOverstyring();
     setBrevOverstyring(res);
+  };
+
+  const forkastOverstyrtBrev = async () => {
+    setVisForkastOverstyringModal(false);
+    setHarValgtÅRedigereVedtaksbrev(false);
+
+    await mellomlagreBrevOverstyring(null);
   };
 
   const forhåndsvisRedigertHtmlBrev = () => {
@@ -68,6 +79,13 @@ export const OverstyringVedtaksbrev = ({
 
   return (
     <div style={{ maxWidth: '500px' }}>
+      <OkAvbrytModal
+        text={intl.formatMessage({ id: 'VedtakFellesPanel.Forkast' })}
+        okButtonText={intl.formatMessage({ id: 'VedtakFellesPanel.Ok' })}
+        showModal={visForkastOverstyringModal}
+        cancel={() => setVisForkastOverstyringModal(false)}
+        submit={forkastOverstyrtBrev}
+      />
       <VStack gap="4">
         <Box padding="4" borderRadius="medium" background="surface-subtle">
           <VStack gap="4">
