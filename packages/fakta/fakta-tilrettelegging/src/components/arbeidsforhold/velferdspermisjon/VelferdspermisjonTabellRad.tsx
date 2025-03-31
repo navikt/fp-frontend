@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Table, Tag } from '@navikt/ds-react';
@@ -33,7 +33,6 @@ export const VelferdspermisjonTabellRad = ({
   const erIkkeValgt = velferdspermisjon.erGyldig === undefined || velferdspermisjon.erGyldig === null;
 
   const [open, setOpen] = useState(erIkkeValgt);
-  const lukkRad = useCallback(() => setOpen(false), []);
 
   return (
     <Table.ExpandableRow
@@ -47,7 +46,7 @@ export const VelferdspermisjonTabellRad = ({
           velferdspermisjon={velferdspermisjon}
           arbeidsforholdIndex={arbeidsforholdIndex}
           readOnly={readOnly}
-          lukkRad={lukkRad}
+          lukkRad={() => setOpen(false)}
           oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
         />
       }
