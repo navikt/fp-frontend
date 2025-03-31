@@ -29,8 +29,8 @@
     "@navikt/ft-plattform-komponenter": "7.2.12",
     "@navikt/ft-utils": "3.3.0",
     "dayjs": "1.11.13",
-    "react": "19.0.0",
-    "react-intl": "7.1.6"
+    "react": "19.1.0",
+    "react-intl": "7.1.10"
   },
   "devDependencies": {
     "@navikt/fp-storybook-utils": "workspace:*",

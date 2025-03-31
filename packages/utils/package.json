@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@navikt/fp-types": "workspace:^",
-    "react": "19.0.0"
+    "react": "19.1.0"
   },
   "devDependencies": {
     "@navikt/fp-storybook-utils": "workspace:*",

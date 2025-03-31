@@ -42,9 +42,9 @@
     "editorjs-html": "4.0.5",
     "editorjs-undo": "2.0.28",
     "lodash.debounce": "4.0.8",
-    "react": "19.0.0",
-    "react-hook-form": "7.54.2",
-    "react-intl": "7.1.6"
+    "react": "19.1.0",
+    "react-hook-form": "7.55.0",
+    "react-intl": "7.1.10"
   },
   "devDependencies": {
     "@navikt/ds-css": "7.17.0",
