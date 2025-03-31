@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
-import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import {
   AksjonspunktKode,
@@ -70,11 +69,10 @@ interface Props {
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
-  brevOverstyring?: BrevOverstyring;
-  refetchBrevOverstyring: () => void;
+  hentBrevOverstyring: () => Promise<BrevOverstyring>;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
-  setHarOverstyrtVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
-  harOverstyrtVedtaksbrev: boolean;
+  setHarValgtÅRedigereVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
+  harValgtÅRedigereVedtaksbrev: boolean;
 }
 
 export const VedtakFellesPanel = ({
@@ -85,11 +83,10 @@ export const VedtakFellesPanel = ({
   erBehandlingEtterKlage,
   vedtakstatusTekst,
   oppgaver,
-  brevOverstyring,
-  refetchBrevOverstyring,
+  hentBrevOverstyring,
   mellomlagreBrevOverstyring,
-  setHarOverstyrtVedtaksbrev,
-  harOverstyrtVedtaksbrev,
+  setHarValgtÅRedigereVedtaksbrev,
+  harValgtÅRedigereVedtaksbrev,
 }: Props) => {
   const intl = useIntl();
 
@@ -101,19 +98,11 @@ export const VedtakFellesPanel = ({
     formState: { isSubmitting },
   } = useFormContext();
 
-  const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
+  const [harRedigertBrev, setHarRedigertBrev] = useState(behandlingsresultat?.harRedigertVedtaksbrev ?? false);
 
   if (!behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
   }
-
-  const forkastOverstyrtBrev = async () => {
-    setVisForkastOverstyringModal(false);
-    setHarOverstyrtVedtaksbrev(false);
-
-    await mellomlagreBrevOverstyring(null);
-    refetchBrevOverstyring();
-  };
 
   const erInnvilget = isInnvilget(behandlingsresultat.type);
   const erAvslatt = isAvslag(behandlingsresultat.type);
@@ -130,17 +119,10 @@ export const VedtakFellesPanel = ({
     behandlingsresultat,
   );
 
-  const harValgtÅOverstyreMenIkkeOverstyrt = harOverstyrtVedtaksbrev && !brevOverstyring?.redigertHtml;
+  const harValgtÅRedigereMenHarIkkeRedigert = harValgtÅRedigereVedtaksbrev && !harRedigertBrev;
 
   return (
     <VStack gap="4">
-      <OkAvbrytModal
-        text={intl.formatMessage({ id: 'VedtakFellesPanel.Forkast' })}
-        okButtonText={intl.formatMessage({ id: 'VedtakFellesPanel.Ok' })}
-        showModal={visForkastOverstyringModal}
-        cancel={() => setVisForkastOverstyringModal(false)}
-        submit={forkastOverstyrtBrev}
-      />
       <HStack gap="2">
         {status === behandlingStatusCode.AVSLUTTET && (
           <>
@@ -187,11 +169,11 @@ export const VedtakFellesPanel = ({
           )}
         </div>
         <div>
-          {!isReadOnly && !harOverstyrtVedtaksbrev && (
+          {!isReadOnly && !harValgtÅRedigereVedtaksbrev && (
             <Link
               href="#"
               onClick={(e: React.MouseEvent) => {
-                setHarOverstyrtVedtaksbrev(true);
+                setHarValgtÅRedigereVedtaksbrev(true);
 
                 e.preventDefault();
               }}
@@ -202,7 +184,7 @@ export const VedtakFellesPanel = ({
               </span>
             </Link>
           )}
-          {(isReadOnly || harOverstyrtVedtaksbrev) && (
+          {(isReadOnly || harValgtÅRedigereVedtaksbrev) && (
             <>
               <PencilIcon className={styles.blyantDisablet} />
               <BodyShort size="small" className={styles.disabletLink}>
@@ -215,17 +197,18 @@ export const VedtakFellesPanel = ({
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
       {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
       <VStack gap="8">
-        {renderPanel(harOverstyrtVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
+        {renderPanel(harValgtÅRedigereVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
         {behandling.behandlingsresultat?.overskrift && (
           <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={previewCallback} behandling={behandling} />
         )}
-        {harOverstyrtVedtaksbrev && (
+        {harValgtÅRedigereVedtaksbrev && (
           <OverstyringVedtaksbrev
             forhåndsvisBrev={previewCallback}
-            brevOverstyring={brevOverstyring}
-            refetchBrevOverstyring={refetchBrevOverstyring}
+            hentBrevOverstyring={hentBrevOverstyring}
+            setHarRedigertBrev={setHarRedigertBrev}
+            harRedigertBrev={harRedigertBrev}
             mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-            setVisForkastOverstyringModal={setVisForkastOverstyringModal}
+            setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
           />
         )}
         {!isReadOnly && kanSendesTilGodkjenning(status) && (
@@ -233,10 +216,10 @@ export const VedtakFellesPanel = ({
             <Button
               variant="primary"
               size="small"
-              disabled={behandlingPåVent || isSubmitting || harValgtÅOverstyreMenIkkeOverstyrt}
+              disabled={behandlingPåVent || isSubmitting || harValgtÅRedigereMenHarIkkeRedigert}
               loading={isSubmitting}
             >
-              <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, harOverstyrtVedtaksbrev)} />
+              <FormattedMessage id={finnKnappetekstkode(aksjonspunkt, harValgtÅRedigereVedtaksbrev)} />
             </Button>
           </div>
         )}

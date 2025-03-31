@@ -6,19 +6,13 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  BehandlingStatus,
-  isAvslag,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
 import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import { forhåndsvisMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
@@ -76,12 +70,9 @@ export const VedtakEsProsessStegInitPanel = () => {
   const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
   const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
 
-  const erAvsluttetLegacyOverstyring =
-    !!behandling.behandlingsresultat?.overskrift && behandling.status === BehandlingStatus.AVSLUTTET;
-
-  const { data: brevOverstyring, refetch: refetchBrevOverstyring } = useQuery(
-    api.hentBrevOverstyringOptions(behandling, !erAvsluttetLegacyOverstyring),
-  );
+  const { mutateAsync: hentBrevOverstyring } = useMutation({
+    mutationFn: () => api.hentBrevOverstyring(),
+  });
 
   const { mutateAsync: mellomlagreBrevOverstyring } = useMutation({
     mutationFn: (redigertInnhold: string | null) =>
@@ -100,11 +91,7 @@ export const VedtakEsProsessStegInitPanel = () => {
 
   const { aksjonspunkter } = standardPanelProps;
 
-  const harHentetBrevOverstyring = harLenke(behandling, 'HENT_BREV_OVERSTYRING')
-    ? !erAvsluttetLegacyOverstyring && !!brevOverstyring
-    : true;
-  const isNotFetching =
-    !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching && !isOFetching && harHentetBrevOverstyring;
+  const isNotFetching = !isBogFetching && !isBeFetching && !isSrFetching && !isTvFetching && !isOFetching;
 
   return (
     <ProsessDefaultInitPanel
@@ -148,8 +135,7 @@ export const VedtakEsProsessStegInitPanel = () => {
             tilbakekrevingvalg={tilbakekrevingValg}
             vilkar={vilkår}
             oppgaver={oppgaver}
-            brevOverstyring={brevOverstyring}
-            refetchBrevOverstyring={refetchBrevOverstyring}
+            hentBrevOverstyring={hentBrevOverstyring}
             mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
           />
         ) : (

@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { useEffect, useState } from 'react';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
+import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
@@ -13,40 +14,78 @@ import type { ForhandsvisData } from '../forstegang/VedtakForm';
 
 interface Props {
   forhåndsvisBrev: (data: ForhandsvisData) => void;
-  brevOverstyring?: BrevOverstyring;
-  refetchBrevOverstyring: () => void;
+  hentBrevOverstyring: () => Promise<BrevOverstyring>;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
-  setVisForkastOverstyringModal: (visForkastOverstyring: boolean) => void;
+  setHarRedigertBrev: (harRedigert: boolean) => void;
+  harRedigertBrev: boolean;
+  setHarValgtÅRedigereVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
 }
 
 export const OverstyringVedtaksbrev = ({
   forhåndsvisBrev,
-  brevOverstyring,
-  refetchBrevOverstyring,
+  hentBrevOverstyring,
   mellomlagreBrevOverstyring,
-  setVisForkastOverstyringModal,
+  setHarRedigertBrev,
+  harRedigertBrev,
+  setHarValgtÅRedigereVedtaksbrev,
 }: Props) => {
+  const intl = useIntl();
   const { isReadOnly } = usePanelDataContext();
 
-  const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
-  const [harRedigertBrev, setHarRedigertBrev] = useState(false);
+  const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
 
-  const mellomlagre = (html: string | null) => {
-    setHarRedigertBrev(true);
-    return mellomlagreBrevOverstyring(html);
+  const [visFritekstRedigeringModal, setVisFritekstRedigeringModal] = useState(false);
+
+  const [brevOverstyring, setBrevOverstyring] = useState<BrevOverstyring | null>(null);
+
+  useEffect(() => {
+    if (harRedigertBrev) {
+      hentBrevOverstyring().then(setBrevOverstyring);
+    }
+  }, []);
+
+  const visFritekstModalOgHentBrev = async () => {
+    if (!brevOverstyring) {
+      const res = await hentBrevOverstyring();
+      setBrevOverstyring(res);
+    }
+    setVisFritekstRedigeringModal(true);
   };
 
-  const forhåndsvisOverstyrtHtmlBrev = () => {
-    forhåndsvisBrev({
-      automatiskVedtaksbrev: false,
-      dokumentMal: DokumentMalType.FRITEKST_HTML,
-      gjelderVedtak: true,
-      fritekst: brevOverstyring?.redigertHtml ?? '',
-    });
+  const mellomlagreOgHentPåNytt = async (html: string | null) => {
+    setHarRedigertBrev(html !== null);
+    await mellomlagreBrevOverstyring(html);
+    const res = await hentBrevOverstyring();
+    setBrevOverstyring(res);
+  };
+
+  const forkastOverstyrtBrev = async () => {
+    setVisForkastOverstyringModal(false);
+    setHarValgtÅRedigereVedtaksbrev(false);
+
+    await mellomlagreBrevOverstyring(null);
+  };
+
+  const forhåndsvisRedigertHtmlBrev = () => {
+    if (brevOverstyring?.redigertHtml) {
+      forhåndsvisBrev({
+        automatiskVedtaksbrev: false,
+        dokumentMal: DokumentMalType.FRITEKST_HTML,
+        gjelderVedtak: true,
+        fritekst: brevOverstyring.redigertHtml,
+      });
+    }
   };
 
   return (
     <div style={{ maxWidth: '500px' }}>
+      <OkAvbrytModal
+        text={intl.formatMessage({ id: 'VedtakFellesPanel.Forkast' })}
+        okButtonText={intl.formatMessage({ id: 'VedtakFellesPanel.Ok' })}
+        showModal={visForkastOverstyringModal}
+        cancel={() => setVisForkastOverstyringModal(false)}
+        submit={forkastOverstyrtBrev}
+      />
       <VStack gap="4">
         <Box padding="4" borderRadius="medium" background="surface-subtle">
           <VStack gap="4">
@@ -69,7 +108,7 @@ export const OverstyringVedtaksbrev = ({
                   <Button
                     variant="secondary"
                     type="button"
-                    onClick={() => setVisFritekstRedigeringModal(true)}
+                    onClick={visFritekstModalOgHentBrev}
                     size="small"
                     disabled={isReadOnly}
                   >
@@ -92,8 +131,8 @@ export const OverstyringVedtaksbrev = ({
                   variant="tertiary"
                   size="small"
                   icon={<FileSearchIcon aria-hidden />}
-                  onClick={() => forhåndsvisOverstyrtHtmlBrev()}
-                  onKeyDown={e => (e.key === 'Enter' ? forhåndsvisOverstyrtHtmlBrev() : null)}
+                  onClick={() => forhåndsvisRedigertHtmlBrev()}
+                  onKeyDown={e => (e.key === 'Enter' ? forhåndsvisRedigertHtmlBrev() : null)}
                   type="button"
                 >
                   {isReadOnly ? (
@@ -116,9 +155,8 @@ export const OverstyringVedtaksbrev = ({
         <FritekstRedigeringModal
           setVisFritekstRedigeringModal={setVisFritekstRedigeringModal}
           brevOverstyring={brevOverstyring}
-          refetchBrevOverstyring={refetchBrevOverstyring}
           forhåndsvisBrev={forhåndsvisBrev}
-          mellomlagreBrevOverstyring={mellomlagre}
+          mellomlagreOgHentPåNytt={mellomlagreOgHentPåNytt}
         />
       )}
     </div>
