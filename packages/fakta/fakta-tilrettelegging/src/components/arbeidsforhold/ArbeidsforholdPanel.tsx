@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -75,9 +74,9 @@ export const ArbeidsforholdPanel = ({
 
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
 
-  const filtrerteVelferdspermisjoner = useMemo(
-    () => filtrerVelferdspermisjoner(arbeidsforhold.velferdspermisjoner, tilretteleggingBehovFom),
-    [arbeidsforhold.velferdspermisjoner, tilretteleggingBehovFom],
+  const filtrerteVelferdspermisjoner = filtrerVelferdspermisjoner(
+    arbeidsforhold.velferdspermisjoner,
+    tilretteleggingBehovFom,
   );
 
   const termindato = watch('termindato');
