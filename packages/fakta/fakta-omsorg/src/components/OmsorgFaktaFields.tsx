@@ -40,7 +40,9 @@ export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props
 
 OmsorgFaktaFields.initialValues = (ytelsefordeling: Ytelsefordeling, omsorgAp: Aksjonspunkt[]): FormValues => ({
   omsorg:
-    omsorgAp.length > 0 && omsorgAp[0].status !== AksjonspunktStatus.OPPRETTET
+    omsorgAp.length > 0 &&
+    omsorgAp[0]?.status !== AksjonspunktStatus.OPPRETTET &&
+    ytelsefordeling.overstyrtOmsorg !== null
       ? ytelsefordeling.overstyrtOmsorg
       : undefined,
 });

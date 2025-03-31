@@ -110,9 +110,11 @@ export const DekningradApForm = ({
                           <FormattedMessage
                             id="DekningradApForm.SøknadSendt"
                             values={{
-                              dato: dateFormat(dgAnnenpart.søknadsdato, {
-                                month: 'long',
-                              }),
+                              dato: dgAnnenpart
+                                ? dateFormat(dgAnnenpart.søknadsdato, {
+                                    month: 'long',
+                                  })
+                                : '-',
                             }}
                           />
                         </BodyShort>
@@ -121,7 +123,7 @@ export const DekningradApForm = ({
                     <Heading size="xsmall">
                       <FormattedMessage
                         id="DekningradApForm.HarValgt"
-                        values={{ dekningsgrad: dgAnnenpart.dekningsgrad }}
+                        values={{ dekningsgrad: dgAnnenpart?.dekningsgrad }}
                       />
                     </Heading>
                   </VStack>

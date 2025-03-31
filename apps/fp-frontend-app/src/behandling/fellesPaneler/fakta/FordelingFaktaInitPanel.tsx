@@ -13,7 +13,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, hasAksjonspunkt, VilkarType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, Vilkarperiode } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -96,17 +96,6 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagStandardPeriode = (beregningsgrunnlag: Beregningsgrunnlag, bgVilkar: Vilkar): Vilkarperiode => ({
-  avslagKode: bgVilkar.avslagKode,
-  vurderesIBehandlingen: true,
-  merknadParametere: {},
-  periode: {
-    fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
-    tom: TIDENES_ENDE,
-  },
-  vilkarStatus: bgVilkar.vilkarStatus,
-});
-
 const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   if (!vilkar) {
     // @ts-expect-error FordelBeregningsgrunnlagFaktaIndex må kunna håndtera null
@@ -117,11 +106,21 @@ const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag):
     // @ts-expect-error FordelBeregningsgrunnlagFaktaIndex må kunna håndtera null
     return null;
   }
-  const nyVK = {
+  return {
     ...bgVilkar,
-    perioder: [lagStandardPeriode(beregningsgrunnlag, bgVilkar)],
+    perioder: [
+      {
+        avslagKode: bgVilkar.avslagKode ?? undefined,
+        vurderesIBehandlingen: true,
+        merknadParametere: {},
+        periode: {
+          fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
+          tom: TIDENES_ENDE,
+        },
+        vilkarStatus: bgVilkar.vilkarStatus,
+      },
+    ],
   };
-  return nyVK;
 };
 
 const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgrunnlag[] => {

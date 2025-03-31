@@ -8,16 +8,16 @@ import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { notEmpty } from '@navikt/fp-utils';
 
+import { initFetchFpsak } from '../../../.storybook/testdata/initFetchFpsak';
 import { FagsakRel, FagsakUrl, initFetchOptions, wrapUrl } from '../../data/fagsakApi';
 import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
 import { DokumentIndex } from './DokumentIndex';
 
-import initFetchData from '../../../.storybook/testdata/initFetch.json';
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.sakLinks.find(link => link.rel === rel)).href);
+const getHref = (rel: string) => wrapUrl(notEmpty(initFetchFpsak.sakLinks.find(link => link.rel === rel)).href);
 
 const meta = {
   title: 'fagsak/DokumentIndex',
@@ -47,7 +47,7 @@ export const DetFinnesDokumenterPåSak: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
         http.get(getHref(FagsakRel.ALL_DOCUMENTS), () =>
           HttpResponse.json([
             {
@@ -86,7 +86,7 @@ export const DetFinnesIngenDokumenterPåSak: Story = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
         http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json([])),
       ],
     },

@@ -8,12 +8,11 @@ import type { FagsakEnkel } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
+import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
 
-import initFetchData from '../../.storybook/testdata/initFetch.json';
-
-const getHref = (rel: string) => wrapUrl(notEmpty(initFetchData.links.find(link => link.rel === rel)).href);
+const getHref = (rel: string) => wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href);
 
 const FAGSAK_1 = {
   saksnummer: '12345',
@@ -46,7 +45,7 @@ const meta = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchData)),
+        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
         http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
         http.post(getHref(FagsakRel.SEARCH_FAGSAK), () => HttpResponse.json(FAGSAKER)),
       ],

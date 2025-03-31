@@ -1,8 +1,9 @@
 export type AvklartBarn = Readonly<{
   fodselsdato: string;
-  dodsdato?: string;
+  dodsdato: string | null;
 }>;
 
+// TODO(siri): gjør dette til en union type basert på @type
 export type FamilieHendelse = Readonly<{
   skjaringstidspunkt: string;
   avklartBarn?: AvklartBarn[];
@@ -28,5 +29,5 @@ export type FamilieHendelse = Readonly<{
 export type FamilieHendelseSamling = Readonly<{
   oppgitt: FamilieHendelse;
   gjeldende: FamilieHendelse;
-  register: FamilieHendelse;
+  register: FamilieHendelse | null;
 }>;

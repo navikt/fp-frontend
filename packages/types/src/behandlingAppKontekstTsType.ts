@@ -16,7 +16,7 @@ export type BehandlingFellesData = Readonly<{
   behandlingsresultat?: Behandlingsresultat;
   links: ApiLink[];
   opprettet: string;
-  avsluttet?: string;
+  avsluttet?: string | null;
   erAktivPapirsoknad: boolean;
   gjeldendeVedtak: boolean;
   språkkode: string;
@@ -25,7 +25,7 @@ export type BehandlingFellesData = Readonly<{
   behandlingKøet: boolean;
   toTrinnsBehandling: boolean;
   behandlingÅrsaker: BehandlingÅrsak[];
-  ansvarligSaksbehandler?: string;
+  ansvarligSaksbehandler?: string | null;
   kanHenleggeBehandling?: boolean;
   førsteÅrsak?: BehandlingÅrsak;
 }>;
@@ -71,7 +71,7 @@ export type BehandlingAppKontekst = BehandlingFellesData &
     brevmaler: Brevmal[];
     totrinnskontrollÅrsaker: TotrinnskontrollSkjermlenkeContext[];
     totrinnskontrollReadonly: boolean;
-    risikoAksjonspunkt: Aksjonspunkt;
+    risikoAksjonspunkt: Aksjonspunkt | null;
     kontrollResultat: Risikoklassifisering;
-    ugunstAksjonspunkt: boolean;
+    ugunstAksjonspunkt: boolean | null;
   }>;

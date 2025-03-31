@@ -13,7 +13,7 @@ import styles from './mannAdoptererAleneFaktaForm.module.css';
 
 interface Props {
   readOnly: boolean;
-  farSokerType?: string;
+  farSokerType: string | undefined;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   mannAdoptererAlene?: boolean;

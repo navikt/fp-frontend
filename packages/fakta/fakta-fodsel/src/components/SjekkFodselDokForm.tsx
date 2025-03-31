@@ -130,10 +130,10 @@ const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
   return childrenArray;
 };
 
-const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): AvklartBarn[] =>
+const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp['uidentifiserteBarn'] =>
   avklartBarn.map(ab => ({
     fodselsdato: ab.fodselsdato,
-    dodsdato: ab.dodsdato === '' ? undefined : ab.dodsdato,
+    dodsdato: ab.dodsdato === '' || ab.dodsdato === null ? undefined : ab.dodsdato,
   }));
 
 SjekkFodselDokForm.buildInitialValues = (
