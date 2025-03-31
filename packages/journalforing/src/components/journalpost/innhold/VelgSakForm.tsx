@@ -16,6 +16,7 @@ import type { JournalføringFormValues } from '../../../typer/journalføringForm
 import type { Journalpost } from '../../../typer/journalpostTsType';
 
 import styles from './velgSakForm.module.css';
+import { harTittelSomTillaterOpprettelseAvSak } from '../../../kodeverk/dokumentTittel.ts';
 
 const TOM_ARRAY: JournalFagsak[] = [];
 
@@ -68,6 +69,7 @@ export const transformValues = (
 
 const lagRadioOptions = (journalpost: Journalpost): RadioOption[] => {
   const saker = journalpost.fagsaker || TOM_ARRAY;
+  const skalTillateOpprettelseAvSak = journalpost.dokumenter?.some(d => harTittelSomTillaterOpprettelseAvSak(d.tittel));
   const radioOptions = saker.map(sak => ({
     label: (
       <>
@@ -78,7 +80,7 @@ const lagRadioOptions = (journalpost: Journalpost): RadioOption[] => {
     disabled: sak.saksnummer === journalpost.eksisterendeSaksnummer,
     value: sak.saksnummer,
   }));
-  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK, disabled: false });
+  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK, disabled: !skalTillateOpprettelseAvSak });
   if (!erEndeligJournalført(journalpost.tilstand)) {
     // Om den allerede er journalført kan den ikke legges på generell sak
     radioOptions.push({
@@ -115,7 +117,6 @@ export const VelgSakForm = ({
   const finnesSaker = journalpost.fagsaker && journalpost.fagsaker.length > 0;
   const formMethods = useFormContext<JournalføringFormValues>();
   const sakValg = formMethods.watch(radioFieldName);
-
   return (
     <VStack gap="4">
       {!finnesSaker && erKlarForJournalføring && (

@@ -1,5 +1,5 @@
 export enum DokumentTittel {
-  SØKNAD_FORELDREPEMGER_ENDRING_KVOTE = 'Søknad om endring av uttak av foreldrepenger eller overføring av kvote',
+  SØKNAD_FORELDREPENGER_ENDRING_KVOTE = 'Søknad om endring av uttak av foreldrepenger eller overføring av kvote',
   SØKNAD_ENGANGSSTØNAD_ADOPSJON = 'Søknad om engangsstønad ved adopsjon',
   SØKNAD_ENGANGSSTØNAD_FØDSEL = 'Søknad om engangsstønad ved fødsel',
   SØKNAD_FORELDREPENGER_ADOPSJON = 'Søknad om foreldrepenger ved adopsjon',
@@ -32,6 +32,16 @@ export enum DokumentTittel {
   DOKUMENTASJON_MOR_AKTIVITET = 'Dokumentasjon av mors utdanning, arbeid eller sykdom',
   RETTSKJENNELSE_TRYGDERETTEN = 'Rettskjennelse fra Trygderetten',
 }
+
+const tittlerSomTillaterOpprettelseAvSak: DokumentTittel[] = [DokumentTittel.SØKNAD_FORELDREPENGER_ENDRING_KVOTE,
+  DokumentTittel.SØKNAD_ENGANGSSTØNAD_ADOPSJON,
+  DokumentTittel.SØKNAD_ENGANGSSTØNAD_FØDSEL,
+  DokumentTittel.SØKNAD_FORELDREPENGER_ADOPSJON,
+  DokumentTittel.SØKNAD_FORELDREPENGER_FØDSEL,
+  DokumentTittel.SØKNAD_SVANGERSKAPSPENGER]
+
+
+export const harTittelSomTillaterOpprettelseAvSak = (tittel: DokumentTittel): boolean => tittlerSomTillaterOpprettelseAvSak.includes(tittel);
 
 export const listeMedTittler = Object.values(DokumentTittel)
   .filter(tittel => Number.isNaN(Number(tittel)))
