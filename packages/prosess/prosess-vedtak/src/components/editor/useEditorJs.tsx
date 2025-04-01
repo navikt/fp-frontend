@@ -62,9 +62,7 @@ export const useEditorJs = (
         i18n: lagEditorJsI18n(intl),
         onReady: async () => {
           new Undo({ editor });
-
           refEditorJs.current = editor;
-          //await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
         },
         tools: getTools(intl),
         onChange: async () => {
