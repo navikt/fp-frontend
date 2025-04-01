@@ -1,9 +1,13 @@
+import type { OutputData } from '@editorjs/editorjs';
 import { generate, parse, walk } from 'css-tree';
 
 import { notEmpty } from '@navikt/fp-utils';
 
 export const lagRedigerbartInnholdWrapper = (redigerbartInnhold: string, readonlyFooter: string | undefined) =>
-  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter ?? ''}</div>`;
+  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold.replaceAll(
+    '<br>',
+    '<br />',
+  )}</div><div id="readonly-innhold">${readonlyFooter ?? ''}</div>`;
 
 export const utledStiler = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
@@ -83,4 +87,41 @@ export const erRedigertHtmlGyldig = (html: string): boolean => {
   const doc = document.createElement('div');
   doc.innerHTML = html;
   return doc.innerHTML === html;
+};
+
+// renderFromHTML frå editorjs håndterar ikkje br-tags korrekt. Såg dessutan ein kommentar på at den ikkje burde brukast i produksjonskode
+export const htmlToEditorJsFormat = (html: string): OutputData => {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(html, 'text/html');
+
+  const blocks: OutputData['blocks'] = [];
+
+  const processNode = (node: Node): void => {
+    if (node.nodeType === Node.TEXT_NODE && node.textContent?.trim()) {
+      blocks.push({ type: 'paragraph', data: { text: node.textContent.trim() } });
+    } else if (node.nodeType === Node.ELEMENT_NODE) {
+      const element = node as HTMLElement;
+      switch (element.tagName.toLowerCase()) {
+        case 'h1':
+        case 'h2':
+          blocks.push({ type: 'header', data: { text: element.innerHTML, level: parseInt(element.tagName[1]) } });
+          break;
+        case 'p':
+          blocks.push({ type: 'paragraph', data: { text: element.innerHTML } });
+          break;
+        case 'ul':
+          blocks.push({
+            type: 'list',
+            data: { style: 'unordered', items: Array.from(element.querySelectorAll('li')).map(li => li.innerHTML) },
+          });
+          break;
+        default:
+          node.childNodes.forEach(processNode);
+      }
+    }
+  };
+
+  doc.body.childNodes.forEach(processNode);
+
+  return { time: Date.now(), blocks, version: '2.30.8' };
 };

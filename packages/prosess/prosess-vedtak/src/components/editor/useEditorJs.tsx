@@ -17,6 +17,7 @@ import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import {
   erRedigertHtmlGyldig,
+  htmlToEditorJsFormat,
   lagRedigerbartInnholdWrapper,
   utledDelerFraBrev,
   utledRedigerbartInnhold,
@@ -56,13 +57,14 @@ export const useEditorJs = (
       refMounted.current = true;
       const editor = new EditorJS({
         minHeight: 20,
+        data: htmlToEditorJsFormat(redigerbartInnhold.replace(SPACE_REGEX, '$1')),
         holder: editorHolderId,
         i18n: lagEditorJsI18n(intl),
         onReady: async () => {
           new Undo({ editor });
 
           refEditorJs.current = editor;
-          await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
+          //await editor.blocks.renderFromHTML(redigerbartInnhold.replace(SPACE_REGEX, '$1'));
         },
         tools: getTools(intl),
         onChange: async () => {
@@ -107,7 +109,7 @@ export const useEditorJs = (
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     await editor.blocks.clear();
     const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml, harPraksisUtsettelse);
-    editor.blocks.renderFromHTML(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1'));
+    editor.blocks.render(htmlToEditorJsFormat(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1')));
 
     mellomlagreOgHentPåNytt(null);
   };
