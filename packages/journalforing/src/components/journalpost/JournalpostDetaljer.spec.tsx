@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { Sakstype } from '../../kodeverk/sakstype';
 import * as stories from './JournalpostDetaljer.stories';
 
-const { VisOppgaveForSubmitReservertAvMeg, VisFlyttTilGosysOmKildeGosys, VisJournalpostKlage } = composeStories(stories);
+const { VisOppgaveForSubmitReservertAvMeg, VisFlyttTilGosysOmKildeGosys } = composeStories(stories);
 
 describe('JournalpostDetaljer', () => {
   it('skal kunne journalføre på eksisterende sak', async () => {
@@ -149,32 +149,6 @@ describe('JournalpostDetaljer', () => {
           aktørId: '98594685464858',
           sakstype: Sakstype.GENERELL,
         },
-      },
-      false,
-    );
-  });
-
-  it('skal ikke kunne lage ny sak med noe annet enn søknadsdokumenter', async () => {
-    const journalfør = vi.fn();
-
-    render(<VisJournalpostKlage submitJournalføring={journalfør} />);
-    expect(await screen.getByText('Journalfør').closest('button')).toBeDisabled();
-    expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
-
-    expect(screen.getAllByRole('radio')).toHaveLength(3);
-    expect(screen.getAllByRole('radio')[1]).toBeDisabled();
-    await userEvent.click(screen.getAllByRole('radio')[0]);
-    expect(screen.getByText('Journalfør').closest('button')).toBeEnabled();
-    await userEvent.click(screen.getByText('Journalfør'));
-    await waitFor(() => expect(journalfør).toHaveBeenCalledTimes(1));
-
-    expect(journalfør).toHaveBeenNthCalledWith(
-      1,
-      {
-        enhetId: '4108',
-        oppdaterTitlerDto: undefined,
-        journalpostId: '986547336994',
-        saksnummer: '175419131',
       },
       false,
     );

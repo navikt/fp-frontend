@@ -1,9 +1,8 @@
-import type { DokumentTittel } from '../kodeverk/dokumentTittel.ts';
 import { JournalVariant } from '../kodeverk/journalVariant';
 
 export type JournalDokument = Readonly<{
   dokumentId: string;
-  tittel: DokumentTittel;
+  tittel: string;
   varianter: JournalVariant[];
   lenke: string;
 }>;
