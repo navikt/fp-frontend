@@ -23,7 +23,6 @@
   "dependencies": {
     "@navikt/aksel-icons": "7.18.0",
     "@navikt/ds-react": "7.18.0",
-    "@navikt/ds-react-internal": "3.4.3",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-form-hooks": "6.2.9",
