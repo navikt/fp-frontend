@@ -2,8 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon } from '@navikt/aksel-icons';
-import { Button } from '@navikt/ds-react';
-import { Dropdown } from '@navikt/ds-react-internal';
+import { Button, Dropdown } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 
 import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from '@navikt/fp-sak-meny';
