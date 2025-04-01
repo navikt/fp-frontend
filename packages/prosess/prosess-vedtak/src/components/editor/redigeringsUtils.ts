@@ -90,7 +90,7 @@ export const erRedigertHtmlGyldig = (html: string): boolean => {
 };
 
 // renderFromHTML frå editorjs håndterar ikkje br-tags korrekt. Såg dessutan ein kommentar på at den ikkje burde brukast i produksjonskode
-export const htmlToEditorJsFormat = (html: string): OutputData => {
+export const konverterHtmlToEditorJsFormat = (html: string): OutputData => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(html, 'text/html');
 
