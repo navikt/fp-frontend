@@ -1,185 +1,207 @@
 {
-  "AndreKriterierType": [
-    {
-      "kode": "TIL_BESLUTTER",
-      "navn": "Til beslutter",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "PAPIRSOKNAD",
-      "navn": "Registrer papirsøknad",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "UTBETALING_TIL_BRUKER",
-      "navn": "Utbetaling til bruker",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "UTLANDSSAK",
-      "navn": "Utland",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "BARE_FAR_RETT",
-      "navn": "Bare far har rett",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "VURDER_SYKDOM",
-      "navn": "Vurder sykdom",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "PLEIEPENGER",
-      "navn": "Pleiepenger",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "VURDER_FARESIGNALER",
-      "navn": "Vurder faresignaler",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "BERØRT_BEHANDLING",
-      "navn": "Berørt behandling",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "ENDRINGSSOKNAD",
-      "navn": "Endringssøknad",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "VURDER_FORMKRAV",
-      "navn": "Vurder formkrav",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "VURDER_EØS_OPPTJENING",
-      "navn": "Vurder behov for SED",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "KLAGE_PÅ_TILBAKEBETALING",
-      "navn": "Klage på tilbakebetaling",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "EØS_SAK",
-      "navn": "EØS (bosatt Norge)",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "KODE7_SAK",
-      "navn": "Kode 7",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "SAMMENSATT_KONTROLL",
-      "navn": "Sammensatt kontroll",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "ARBEID_INNTEKT",
-      "navn": "Arbeid og inntekt",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "DØD",
-      "navn": "Død eller dødfødsel",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "NÆRING",
-      "navn": "Selvstendig næringsdrivende",
-      "kodeverk": "ANDRE_KRITERIER"
-    },
-    {
-      "kode": "PRAKSIS_UTSETTELSE",
-      "navn": "Praksis utsettelse",
-      "kodeverk": "ANDRE_KRITERIER"
-    }
-  ],
   "BehandlingType": [
     {
       "kode": "BT-002",
-      "navn": "Førstegangsbehandling",
-      "kodeverk": "BEHANDLING_TYPE"
+      "kodeverk": "BEHANDLING_TYPE",
+      "navn": "Førstegangsbehandling"
     },
     {
       "kode": "BT-003",
-      "navn": "Klage",
-      "kodeverk": "BEHANDLING_TYPE"
+      "kodeverk": "BEHANDLING_TYPE",
+      "navn": "Klage"
     },
     {
       "kode": "BT-004",
-      "navn": "Revurdering",
-      "kodeverk": "BEHANDLING_TYPE"
-    },
-    {
-      "kode": "BT-005",
-      "navn": "Søknad",
-      "kodeverk": "BEHANDLING_TYPE"
+      "kodeverk": "BEHANDLING_TYPE",
+      "navn": "Revurdering"
     },
     {
       "kode": "BT-006",
-      "navn": "Innsyn",
-      "kodeverk": "BEHANDLING_TYPE"
+      "kodeverk": "BEHANDLING_TYPE",
+      "navn": "Innsyn"
     },
     {
       "kode": "BT-007",
-      "navn": "Tilbakebetaling",
-      "kodeverk": "BEHANDLING_TYPE"
+      "kodeverk": "BEHANDLING_TYPE",
+      "navn": "Tilbakebetaling"
     },
     {
       "kode": "BT-008",
-      "navn": "Anke",
-      "kodeverk": "BEHANDLING_TYPE"
+      "kodeverk": "BEHANDLING_TYPE",
+      "navn": "Anke"
     },
     {
       "kode": "BT-009",
-      "navn": "Tilbakebet-rev",
-      "kodeverk": "BEHANDLING_TYPE"
+      "kodeverk": "BEHANDLING_TYPE",
+      "navn": "Tilbakebetaling revurdering"
+    }
+  ],
+  "AndreKriterierType": [
+    {
+      "kode": "ARBEID_INNTEKT",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Arbeid og inntekt"
+    },
+    {
+      "kode": "BARE_FAR_RETT",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Bare far har rett"
+    },
+    {
+      "kode": "BERØRT_BEHANDLING",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Berørt behandling"
+    },
+    {
+      "kode": "UTLANDSSAK",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Bosatt utland"
+    },
+    {
+      "kode": "DØD",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Død eller dødfødsel"
+    },
+    {
+      "kode": "ENDRINGSSOKNAD",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Endringssøknad"
+    },
+    {
+      "kode": "EØS_SAK",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "EØS (bosatt Norge)"
+    },
+    {
+      "kode": "MOR_UKJENT_UTLAND",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Gruppe 2"
+    },
+    {
+      "kode": "KLAGE_PÅ_TILBAKEBETALING",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Klage på tilbakebetaling"
+    },
+    {
+      "kode": "KODE7_SAK",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Kode 7"
+    },
+    {
+      "kode": "PLEIEPENGER",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Pleiepenger"
+    },
+    {
+      "kode": "PRAKSIS_UTSETTELSE",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Praksis utsettelse"
+    },
+    {
+      "kode": "PAPIRSOKNAD",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Registrer papirsøknad"
+    },
+    {
+      "kode": "REVURDERING_INNTEKTSMELDING",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Revurdering inntektsmelding"
+    },
+    {
+      "kode": "SAMMENSATT_KONTROLL",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Sammensatt kontroll"
+    },
+    {
+      "kode": "NÆRING",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Selvstendig næringsdrivende"
+    },
+    {
+      "kode": "TERMINBEKREFTELSE",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Terminbekreftelse"
+    },
+    {
+      "kode": "TIL_BESLUTTER",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Til beslutter"
+    },
+    {
+      "kode": "UTBETALING_TIL_BRUKER",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Utbetaling til bruker"
+    },
+    {
+      "kode": "VURDER_EØS_OPPTJENING",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Vurder behov for SED"
+    },
+    {
+      "kode": "VURDER_FARESIGNALER",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Vurder faresignaler"
+    },
+    {
+      "kode": "VURDER_FORMKRAV",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Vurder formkrav"
+    },
+    {
+      "kode": "VURDER_SYKDOM",
+      "kodeverk": "ANDRE_KRITERIER",
+      "navn": "Vurder sykdom"
     }
   ],
   "FagsakYtelseType": [
     {
       "kode": "ES",
-      "navn": "Engangsstønad",
-      "kodeverk": "FAGSAK_YTELSE_TYPE"
+      "kodeverk": "FAGSAK_YTELSE_TYPE",
+      "navn": "Engangsstønad"
     },
     {
       "kode": "FP",
-      "navn": "Foreldrepenger",
-      "kodeverk": "FAGSAK_YTELSE_TYPE"
+      "kodeverk": "FAGSAK_YTELSE_TYPE",
+      "navn": "Foreldrepenger"
     },
     {
       "kode": "SVP",
-      "navn": "Svangerskapspenger",
-      "kodeverk": "FAGSAK_YTELSE_TYPE"
+      "kodeverk": "FAGSAK_YTELSE_TYPE",
+      "navn": "Svangerskapspenger"
     }
   ],
   "FagsakStatus": [
     {
       "kode": "OPPR",
-      "navn": "Opprettet",
-      "kodeverk": "FAGSAK_STATUS"
+      "kodeverk": "FAGSAK_STATUS",
+      "navn": "Opprettet"
     },
     {
       "kode": "UBEH",
-      "navn": "Under behandling",
-      "kodeverk": "FAGSAK_STATUS"
+      "kodeverk": "FAGSAK_STATUS",
+      "navn": "Under behandling"
     },
     {
       "kode": "LOP",
-      "navn": "Løpende",
-      "kodeverk": "FAGSAK_STATUS"
+      "kodeverk": "FAGSAK_STATUS",
+      "navn": "Løpende"
     },
     {
       "kode": "AVSLU",
-      "navn": "Avsluttet",
-      "kodeverk": "FAGSAK_STATUS"
+      "kodeverk": "FAGSAK_STATUS",
+      "navn": "Avsluttet"
+    }
+  ],
+  "BehandlingVenteStatus": [
+    {
+      "kode": "PÅ_VENT",
+      "kodeverk": "BEHANDLING_VENTE_STATUS",
+      "navn": "På vent"
+    },
+    {
+      "kode": "IKKE_PÅ_VENT",
+      "kodeverk": "BEHANDLING_VENTE_STATUS",
+      "navn": "Ikke på vent"
     }
   ],
   "KøSortering": [

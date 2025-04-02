@@ -6,7 +6,7 @@ import * as stories from './TotrinnskontrollSakIndex.stories';
 
 const { ForBeslutter, ForSaksbehandler } = composeStories(stories);
 
-describe('<TotrinnskontrollSakIndex>', () => {
+describe('TotrinnskontrollSakIndex', () => {
   it('skal godkjenne begge aksjonspunktene', async () => {
     const lagre = vi.fn();
 
@@ -14,7 +14,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
-    expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
+    expect(screen.getByText('Klageresultat NFP')).toBeInTheDocument();
 
     expect(screen.getByText('Godkjenn vedtaket').closest('button')).toBeDisabled();
     expect(screen.getByText('Send til saksbehandler')).toBeEnabled();
@@ -59,7 +59,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
-    expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
+    expect(screen.getByText('Klageresultat NFP')).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByText('Godkjent')[0]);
     await userEvent.click(screen.getAllByText('Vurder på nytt')[1]);
@@ -105,7 +105,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
-    expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
+    expect(screen.getByText('Klageresultat NFP')).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByText('Godkjent')[0]);
     await userEvent.click(screen.getAllByText('Vurder på nytt')[1]);
@@ -130,7 +130,7 @@ describe('<TotrinnskontrollSakIndex>', () => {
     expect(screen.getByText('Fakta')).toBeInTheDocument();
     expect(screen.getByText('Denne er ikke godkjent fordi...')).toBeInTheDocument();
 
-    expect(screen.getByText('Klageresultat Vedtaksinstans')).toBeInTheDocument();
+    expect(screen.getByText('Klageresultat NFP')).toBeInTheDocument();
     expect(screen.getAllByText('Godkjent')).toHaveLength(2);
   });
 });
