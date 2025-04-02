@@ -15,6 +15,7 @@ export type Journalpost = Readonly<{
   tilstand?: JournalpostTilstand;
   eksisterendeSaksnummer?: string;
   journalførendeEnhet?: string;
+  kanOppretteSak: boolean;
   avsender: JournalAvsender;
   ytelseType: FagsakYtelseType;
   dokumenter?: JournalDokument[];
