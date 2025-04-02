@@ -31,7 +31,6 @@
     "@navikt/ds-css": "7.18.0",
     "@navikt/ds-css-internal": "^3.4.3",
     "@navikt/ds-react": "7.18.0",
-    "@navikt/ds-react-internal": "^3.4.3",
     "@navikt/fp-fakta-adopsjon": "workspace:*",
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*",
     "@navikt/fp-fakta-arbeidsforhold": "workspace:*",

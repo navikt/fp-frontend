@@ -11,38 +11,42 @@ import { BeskrivelseVisning } from './BeskrivelseVisning';
 import styles from './beskrivelser.module.css';
 
 interface Props {
-  nyesteBeskrivelse: Beskrivelse | null;
-  eldreBeskrivelser: Beskrivelse[];
+  beskrivelser: Beskrivelse[];
 }
 
-export const Beskrivelser = ({ nyesteBeskrivelse, eldreBeskrivelser }: Props) => {
+export const Beskrivelser = ({ beskrivelser }: Props) => {
   const intl = useIntl();
 
-  const harEldreBeskrivelser = eldreBeskrivelser?.length > 0;
-  const [erEldreBeskrivelserSkjult, setErEldreBeskrivelserSkjult] = useState(harEldreBeskrivelser);
+  const skalSkjuleResterendeBeskrivelser = beskrivelser?.length > 1;
+  const [erResterendeBeskrivelserSkjult, setErResterendeBeskrivelserSkjult] = useState(
+    skalSkjuleResterendeBeskrivelser,
+  );
+
+  const beskrivelseForVisning = beskrivelser[0];
+  const beskrivelserSomSkjules = beskrivelser.slice(1);
 
   return (
     <VStack gap="1">
-      {nyesteBeskrivelse && <BeskrivelseVisning beskrivelse={nyesteBeskrivelse} />}
-      {harEldreBeskrivelser && (
+      {beskrivelseForVisning && <BeskrivelseVisning beskrivelse={beskrivelseForVisning} />}
+      {skalSkjuleResterendeBeskrivelser && (
         <Button
           className={styles.button}
           variant="tertiary"
           size="xsmall"
           type="button"
-          icon={erEldreBeskrivelserSkjult ? <ChevronDownIcon aria-hidden /> : <ChevronUpIcon aria-hidden />}
-          onClick={() => setErEldreBeskrivelserSkjult(!erEldreBeskrivelserSkjult)}
-          aria-expanded={!erEldreBeskrivelserSkjult}
+          icon={erResterendeBeskrivelserSkjult ? <ChevronDownIcon aria-hidden /> : <ChevronUpIcon aria-hidden />}
+          onClick={() => setErResterendeBeskrivelserSkjult(!erResterendeBeskrivelserSkjult)}
+          aria-expanded={!erResterendeBeskrivelserSkjult}
         >
-          {erEldreBeskrivelserSkjult
-            ? intl.formatMessage({ id: 'Beskrivelser.VisEldreBeskrivelser' }, { antall: eldreBeskrivelser.length })
-            : intl.formatMessage({ id: 'Beskrivelser.SkjulEldreBeskrivelser' }, { antall: eldreBeskrivelser.length })}
+          {erResterendeBeskrivelserSkjult
+            ? intl.formatMessage({ id: 'Beskrivelser.VisMer' })
+            : intl.formatMessage({ id: 'Beskrivelser.VisMindre' })}
         </Button>
       )}
-      {!erEldreBeskrivelserSkjult && (
+      {!erResterendeBeskrivelserSkjult && (
         <VStack gap="3" className={styles.eldreBeskrivelser}>
-          {eldreBeskrivelser.map(beskrivelse => (
-            <BeskrivelseVisning key={beskrivelse.header} beskrivelse={beskrivelse} />
+          {beskrivelserSomSkjules.map(beskrivelse => (
+            <BeskrivelseVisning key={beskrivelse.header + beskrivelse.kommentarer[0]} beskrivelse={beskrivelse} />
           ))}
         </VStack>
       )}
