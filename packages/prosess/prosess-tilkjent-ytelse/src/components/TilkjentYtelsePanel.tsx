@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { EditedIcon } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -16,17 +16,14 @@ import type {
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { FeriepengerIndex } from './feriepenger/FeriepengerIndex';
+import { FeriepengerPanel } from './feriepenger/FeriepengerPanel';
 import { TilkjentYtelse } from './TilkjentYtelse';
-
-const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
-  alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_TILBAKETREKK)?.begrunnelse ?? undefined;
 
 interface Props {
   beregningresultat: BeregningsresultatDagytelse;
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
-  soknad: Soknad;
+  søknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   feriepengegrunnlag?: Feriepengegrunnlag;
 }
@@ -37,14 +34,15 @@ export const TilkjentYtelsePanel = ({
   feriepengegrunnlag,
   familiehendelse,
   personoversikt,
-  soknad,
+  søknad,
 }: Props) => {
   const { alleKodeverk, fagsak, aksjonspunkterForPanel } = usePanelDataContext();
 
   // Utgått aksjonspunkt, viser kun begrunnelse hvis det er løst tidligere
   const vurderTilbaketrekkAPBegrunnelse = finnTilbaketrekkAksjonspunktBegrunnelse(aksjonspunkterForPanel);
 
-  const soknadMottattDato = soknad.søknadsfrist?.mottattDato ? soknad.søknadsfrist?.mottattDato : soknad.mottattDato;
+  const søknadMottattDato = søknad.søknadsfrist?.mottattDato ?? søknad.mottattDato;
+
   return (
     <VStack gap="4">
       <Heading size="small">
@@ -53,16 +51,16 @@ export const TilkjentYtelsePanel = ({
       {beregningresultat && (
         <TilkjentYtelse
           beregningsresultatPeriode={beregningresultat.perioder}
-          soknadDate={soknadMottattDato}
-          familieHendelseSamling={familiehendelse}
-          hovedsokerKjonnKode={personoversikt?.bruker ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
+          søknadsdato={søknadMottattDato}
+          familiehendelseSamling={familiehendelse}
+          hovedsøkerKjønnKode={personoversikt?.bruker ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           fagsak={fagsak}
         />
       )}
       {feriepengegrunnlag && (
-        <FeriepengerIndex
+        <FeriepengerPanel
           feriepengegrunnlag={feriepengegrunnlag}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           alleKodeverk={alleKodeverk}
@@ -73,11 +71,15 @@ export const TilkjentYtelsePanel = ({
           <Label>
             <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Beskrivelse" />
           </Label>
-          <BodyShort>
-            {vurderTilbaketrekkAPBegrunnelse} <EditedIcon />
-          </BodyShort>
+          <HStack gap="2">
+            <BodyShort>{vurderTilbaketrekkAPBegrunnelse}</BodyShort>
+            <EditedIcon />
+          </HStack>
         </VStack>
       )}
     </VStack>
   );
 };
+
+const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
+  alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_TILBAKETREKK)?.begrunnelse ?? undefined;

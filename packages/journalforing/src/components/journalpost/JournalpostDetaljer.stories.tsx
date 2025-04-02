@@ -38,6 +38,7 @@ const detaljertJournalpostMal = {
   journalpostId: journalpost.toString(),
   tittel: DokumentTittel.BEKREFTELSE_ARBEIDSGIVER,
   kanal: JournalKanal.EESSI,
+  kanOppretteSak: true,
   bruker: {
     navn: 'Søker Søkersen',
     fnr: '12048714373',
@@ -90,6 +91,39 @@ const detaljertJournalpostMal = {
   ],
 } as Journalpost;
 
+const journalpostKlage = {
+  journalpostId: journalpost.toString(),
+  tittel: DokumentTittel.KLAGE,
+  kanal: JournalKanal.SKAN_NETS,
+  kanOppretteSak: false,
+  bruker: {
+    navn: 'Søker Søkersen',
+    fnr: '12048714373',
+    aktørId: '98594685464858',
+  },
+  avsender: {
+    navn: 'Søker Søkersen',
+    id: '12048714373',
+  },
+  ytelseType: FagsakYtelseType.FORELDREPENGER,
+  dokumenter: [
+    {
+      dokumentId: '999999997',
+      tittel: DokumentTittel.KLAGE,
+      varianter: [],
+      lenke: '',
+    },
+  ],
+  fagsaker: [
+    {
+      saksnummer: '125416597',
+      ytelseType: FagsakYtelseType.FORELDREPENGER,
+      opprettetDato: '2022-01-02',
+      status: FagsakStatus.LOPENDE,
+    }
+  ],
+} as Journalpost;
+
 const meta = {
   title: 'journalføring/journalføring/Journalpost',
   component: JournalpostDetaljer,
@@ -112,6 +146,14 @@ export const VisOppgaveForSubmitReservertAvMeg: Story = {
   args: {
     oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
     journalpost: detaljertJournalpostMal,
+    navAnsatt: navAnsattDefault,
+  },
+};
+
+export const VisJournalpostKlage: Story = {
+  args: {
+    oppgave: { ...defaultOppgave, reservertAv: saksbehandler },
+    journalpost: journalpostKlage,
     navAnsatt: navAnsattDefault,
   },
 };

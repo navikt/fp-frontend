@@ -78,7 +78,7 @@ const lagRadioOptions = (journalpost: Journalpost): RadioOption[] => {
     disabled: sak.saksnummer === journalpost.eksisterendeSaksnummer,
     value: sak.saksnummer,
   }));
-  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK, disabled: false });
+  radioOptions.push({ label: <FormattedMessage id="Journal.Sak.Ny" />, value: LAG_NY_SAK, disabled: !journalpost.kanOppretteSak });
   if (!erEndeligJournalført(journalpost.tilstand)) {
     // Om den allerede er journalført kan den ikke legges på generell sak
     radioOptions.push({

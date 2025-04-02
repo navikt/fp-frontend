@@ -67,8 +67,8 @@
   "OppgaveTabell.Type": "Type",
   "OppgaveTabell.Beskrivelse": "Beskrivelse",
 
-  "Beskrivelser.VisEldreBeskrivelser": "Vis eldre beskrivelser ({antall})",
-  "Beskrivelser.SkjulEldreBeskrivelser": "Skjul eldre beskrivelser ({antall})",
+  "Beskrivelser.VisMer": "Vis mer",
+  "Beskrivelser.VisMindre": "Vis mindre",
 
   "DokumentVisning.FilIkon": "Åpne dokument",
   "DokumentVisning.UkjentTittel": "Ukjent tittel",
@@ -91,6 +91,8 @@
   "useEditorJs.KlikkForFjern": "Klikk for å fjerne",
   "useEditorJs.MoveUp": "Flytt opp",
   "useEditorJs.MoveDown": "Flytt ned",
+  "useEditorJs.Heading1": "Overskrift",
+  "useEditorJs.Heading2": "Underoverskrift",
 
   "OverstyringVedtaksbrev.SkjeddEndringIBehandling": "Hvis det er skjedd en endring i saken må du kontrollere at innholdet i det redigerte brevet stemmer med den gjeldende informasjonen",
   "OverstyringVedtaksbrev.ForhandvisBrev": "Forhåndsvis brev",

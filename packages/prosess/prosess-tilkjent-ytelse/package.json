@@ -13,7 +13,6 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
-    "stylelint": "stylelint \"src/**/*.module.css\"",
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build",
     "build-storybook": "storybook build -o .storybook-static-build",
@@ -32,7 +31,6 @@
     "@navikt/ft-form-validators": "3.1.11",
     "@navikt/ft-ui-komponenter": "4.0.0",
     "@navikt/ft-utils": "3.3.1",
-    "classnames": "2.5.1",
     "dayjs": "1.11.13",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -50,7 +48,6 @@
     "cross-env": "7.0.3",
     "eslint": "9.23.0",
     "storybook": "8.6.11",
-    "stylelint": "16.17.0",
     "typescript": "5.8.2",
     "vite": "6.2.4",
     "vitest": "3.0.9"
