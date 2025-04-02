@@ -19,7 +19,7 @@ const {
   LegacyOverstyringHarSendtTilbakeFraBeslutter,
 } = composeStories(stories);
 
-describe('<VedtakProsessIndex>', () => {
+describe('VedtakProsessIndex', () => {
   vi.hoisted(() => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
@@ -381,7 +381,7 @@ describe('<VedtakProsessIndex>', () => {
     render(<InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUtenOverstyring submitCallback={lagre} />);
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
-    expect(screen.getByText('Endring i beregning og uttak og Foreldrepenger opphører')).toBeInTheDocument();
+    expect(screen.getByText('Endring i beregning og Foreldrepenger opphører')).toBeInTheDocument();
     expect(screen.getByText('Automatisk vedtaksbrev')).toBeInTheDocument();
     expect(screen.getByText('Rediger vedtaksbrev')).toBeInTheDocument();
 

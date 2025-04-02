@@ -7,7 +7,7 @@ import * as stories from './VilkarresultatMedOverstyringProsessIndex.stories';
 const { OverstyringspanelForFødsel, OverstyringspanelForMedlemskap, OverstyrtAksjonspunktSomErBekreftet } =
   composeStories(stories);
 
-describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
+describe('VilkarresultatMedOverstyringProsessIndex', () => {
   it('skal overstyre og fylle ut fødselsvilkåret ikke er oppfylt og så lagre', async () => {
     const lagre = vi.fn();
 
@@ -78,7 +78,7 @@ describe('<VilkarresultatMedOverstyringProsessIndex>', () => {
     expect(screen.getByText('Velg en avslagsårsak')).toBeInTheDocument();
     expect(screen.getByText('Når opphører medlemskapet?')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByLabelText('Velg en avslagsårsak'), 'Søker er utvandret');
+    await userEvent.selectOptions(screen.getByLabelText('Velg en avslagsårsak'), 'Søker er utflyttet');
 
     const opphørDatoInput = screen.getByLabelText('Når opphører medlemskapet?');
     await userEvent.type(opphørDatoInput, '20.12.2021');

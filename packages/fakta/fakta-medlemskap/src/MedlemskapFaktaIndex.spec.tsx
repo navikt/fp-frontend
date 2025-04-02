@@ -32,7 +32,7 @@ describe('MedlemskapFaktaIndex', () => {
     expect(situasjon.getByText('Nordisk')).toBeInTheDocument();
 
     expect(situasjon.getByText('Personstatus')).toBeInTheDocument();
-    expect(situasjon.getByText('Utvandret')).toBeInTheDocument();
+    expect(situasjon.getByText('Utflyttet')).toBeInTheDocument();
 
     expect(screen.getByText('Opplysninger fra søknad')).toBeInTheDocument();
     expect(screen.getByText('Adresser til søker(2) og annen part(2)')).toBeInTheDocument();
@@ -108,9 +108,9 @@ describe('MedlemskapFaktaIndex', () => {
     expect(personstatusTabellBruker.getByText('Personstatus')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('Fra og med')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('Til og med')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('Utvandret')).toBeInTheDocument();
+    expect(personstatusTabellBruker.getByText('Utflyttet')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2024')).toBeInTheDocument();
-    expect(personstatusTabellBruker.getByText('Bosatt')).toBeInTheDocument();
+    expect(personstatusTabellBruker.getByText('Bosatt (f.reg)')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2019')).toBeInTheDocument();
     expect(personstatusTabellBruker.getByText('01.01.2022')).toBeInTheDocument();
 
@@ -132,7 +132,7 @@ describe('MedlemskapFaktaIndex', () => {
     expect(personstatusTabellAnnenpart.getByText('Personstatus')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('Fra og med')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('Til og med')).toBeInTheDocument();
-    expect(personstatusTabellAnnenpart.getByText('Bosatt')).toBeInTheDocument();
+    expect(personstatusTabellAnnenpart.getByText('Bosatt (f.reg)')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('01.01.2019')).toBeInTheDocument();
     expect(personstatusTabellAnnenpart.getByText('01.01.2020')).toBeInTheDocument();
 

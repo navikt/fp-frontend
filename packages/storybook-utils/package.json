@@ -10,7 +10,7 @@
     "tsc": "tsc --pretty",
     "eslint": "eslint \"decorators/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"decorators/**/*.ts*\" --color",
-    "prettier": "prettier --write decorators",
+    "prettier": "prettier --write decorators mocks",
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
