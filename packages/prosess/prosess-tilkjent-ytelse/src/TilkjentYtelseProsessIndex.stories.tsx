@@ -105,7 +105,7 @@ const meta = {
     beregningresultat,
     familiehendelse: defaultFamiliehendelse,
     personoversikt,
-    soknad: søknad,
+    søknad,
     arbeidsgiverOpplysningerPerId,
   },
   render: args => <TilkjentYtelseProsessIndex {...args} />,

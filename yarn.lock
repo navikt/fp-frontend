@@ -3869,7 +3869,6 @@ __metadata:
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
-    classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.23.0
@@ -3878,7 +3877,6 @@ __metadata:
     react-hook-form: 7.55.0
     react-intl: 7.1.10
     storybook: 8.6.11
-    stylelint: 16.17.0
     typescript: 5.8.2
     vite: 6.2.4
     vitest: 3.0.9

@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Accordion, Heading, VStack } from '@navikt/ds-react';
@@ -10,50 +10,37 @@ import type {
   FeriepengegrunnlagAndel,
 } from '@navikt/fp-types';
 
-import { FeriepengerPrAar } from './FeriepengerPrAar';
-
-const finnListeMedOpptjeningsår = (andeler: FeriepengegrunnlagAndel[]): number[] => {
-  const årsliste = andeler.map(andel => andel.opptjeningsår).sort((a, b) => a - b);
-  return [...new Set(årsliste)];
-};
-
-const hentTittel = (): React.ReactNode => (
-  <Heading size="small">
-    <FormattedMessage id="TilkjentYtelse.Feriepenger.Tittel" />
-  </Heading>
-);
+import { FeriepengerPrÅr } from './FeriepengerPrÅr';
 
 interface Props {
   feriepengegrunnlag: Feriepengegrunnlag;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  erPanelÅpent: boolean;
-  togglePanel: () => void;
 }
 
-export const FeriepengerPanel = ({
-  feriepengegrunnlag,
-  alleKodeverk,
-  arbeidsgiverOpplysningerPerId,
-  erPanelÅpent,
-  togglePanel,
-}: Props) => {
-  const { andeler } = feriepengegrunnlag;
-  const harIngenAndeler = !andeler || andeler.length < 1;
-  const opptjeningsår = useMemo(() => (harIngenAndeler ? [] : finnListeMedOpptjeningsår(andeler)), [andeler]);
+export const FeriepengerPanel = ({ feriepengegrunnlag, alleKodeverk, arbeidsgiverOpplysningerPerId }: Props) => {
+  const [erPanelÅpent, setErPanelÅpent] = useState(false);
 
-  if (harIngenAndeler) {
+  const { andeler } = feriepengegrunnlag;
+
+  if (!andeler || andeler.length < 1) {
     return null;
   }
+
+  const opptjeningsår = finnListeMedOpptjeningsår(andeler);
 
   return (
     <Accordion>
       <Accordion.Item open={erPanelÅpent}>
-        <Accordion.Header onClick={togglePanel}>{hentTittel()}</Accordion.Header>
+        <Accordion.Header onClick={() => setErPanelÅpent(!erPanelÅpent)}>
+          <Heading size="small">
+            <FormattedMessage id="TilkjentYtelse.Feriepenger.Tittel" />
+          </Heading>
+        </Accordion.Header>
         <Accordion.Content>
           <VStack gap="4">
             {opptjeningsår.map(år => (
-              <FeriepengerPrAar
+              <FeriepengerPrÅr
                 key={`tabell_${år}`}
                 alleAndeler={andeler}
                 opptjeningsår={år}
@@ -66,4 +53,9 @@ export const FeriepengerPanel = ({
       </Accordion.Item>
     </Accordion>
   );
+};
+
+const finnListeMedOpptjeningsår = (andeler: FeriepengegrunnlagAndel[]): number[] => {
+  const årsliste = andeler.map(andel => andel.opptjeningsår).sort((a, b) => a - b);
+  return [...new Set(årsliste)];
 };
