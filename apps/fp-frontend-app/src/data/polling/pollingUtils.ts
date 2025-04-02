@@ -11,7 +11,7 @@ import { doGetRequest } from '../fagsakApi';
 
 type PollingPendingFn = (isPending: boolean) => void;
 
-const MAX_POLLING_ATTEMPTS = 1800;
+const MAX_POLLING_ATTEMPTS = 200;
 const HTTP_ACCEPTED = 202;
 
 type PollingResponse = {
