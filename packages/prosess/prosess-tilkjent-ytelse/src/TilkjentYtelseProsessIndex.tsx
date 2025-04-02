@@ -21,7 +21,7 @@ interface Props {
   beregningresultat: BeregningsresultatDagytelse;
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
-  soknad: Soknad;
+  søknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   feriepengegrunnlag?: Feriepengegrunnlag;
 }

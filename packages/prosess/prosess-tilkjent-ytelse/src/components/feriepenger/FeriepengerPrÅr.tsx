@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label, Table } from '@navikt/ds-react';
@@ -6,6 +5,62 @@ import { dateFormat } from '@navikt/ft-utils';
 
 import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel } from '@navikt/fp-types';
+
+interface Props {
+  alleAndeler: FeriepengegrunnlagAndel[];
+  opptjeningsår: number;
+  alleKodeverk: AlleKodeverk;
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+}
+
+export const FeriepengerPrÅr = ({ alleAndeler, opptjeningsår, alleKodeverk, arbeidsgiverOpplysningerPerId }: Props) => {
+  if (!alleAndeler || alleAndeler.length < 1) {
+    return null;
+  }
+
+  const alleAndelerForÅret = finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår);
+  const andelerPrId = alleAndelerForÅret
+    ? lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk)
+    : [];
+
+  return (
+    <div>
+      <Label size="small">
+        <FormattedMessage id="TilkjentYtelse.Feriepenger.Opptjeningsår" values={{ år: opptjeningsår }} />
+      </Label>
+      <Table>
+        <Table.Header>
+          <Table.Row>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="TilkjentYtelse.Feriepenger.AndelNavn" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="TilkjentYtelse.Feriepenger.GrunnlagRefusjon" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="TilkjentYtelse.Feriepenger.GrunnlagSøker" />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {andelerPrId.map(andel => (
+            <Table.Row key={andel.identifikator}>
+              <Table.DataCell>
+                <BodyShort size="small">{andel.visningsnavn}</BodyShort>
+              </Table.DataCell>
+              <Table.DataCell>
+                <BodyShort size="small">{andel.utbetaltIRefusjon}</BodyShort>
+              </Table.DataCell>
+              <Table.DataCell>
+                <BodyShort size="small">{andel.utbetaltTilSøker}</BodyShort>
+              </Table.DataCell>
+            </Table.Row>
+          ))}
+        </Table.Body>
+      </Table>
+    </div>
+  );
+};
 
 const finnAlleAndelerForOpptjeningsår = (
   andeler: FeriepengegrunnlagAndel[],
@@ -68,72 +123,4 @@ const lagAndelerPrIdMap = (
     }
   });
   return listeMedAndelerPrId;
-};
-
-interface Props {
-  alleAndeler: FeriepengegrunnlagAndel[];
-  opptjeningsår: number;
-  alleKodeverk: AlleKodeverk;
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-}
-
-export const FeriepengerPrAar = ({
-  alleAndeler,
-  opptjeningsår,
-  alleKodeverk,
-  arbeidsgiverOpplysningerPerId,
-}: Props) => {
-  const harIngenAndeler = !alleAndeler || alleAndeler.length < 1;
-
-  const alleAndelerForÅret = useMemo(
-    () => (harIngenAndeler ? undefined : finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår)),
-    [alleAndeler, opptjeningsår],
-  );
-  const andelerPrId = useMemo(
-    () =>
-      alleAndelerForÅret ? lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk) : [],
-    [alleAndelerForÅret],
-  );
-
-  if (harIngenAndeler) {
-    return null;
-  }
-
-  return (
-    <div>
-      <Label size="small">
-        <FormattedMessage id="TilkjentYtelse.Feriepenger.Opptjeningsår" values={{ år: opptjeningsår }} />
-      </Label>
-      <Table>
-        <Table.Header>
-          <Table.Row>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="TilkjentYtelse.Feriepenger.AndelNavn" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="TilkjentYtelse.Feriepenger.GrunnlagRefusjon" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="TilkjentYtelse.Feriepenger.GrunnlagSøker" />
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {andelerPrId.map(andel => (
-            <Table.Row key={andel.identifikator}>
-              <Table.DataCell>
-                <BodyShort size="small">{andel.visningsnavn}</BodyShort>
-              </Table.DataCell>
-              <Table.DataCell>
-                <BodyShort size="small">{andel.utbetaltIRefusjon}</BodyShort>
-              </Table.DataCell>
-              <Table.DataCell>
-                <BodyShort size="small">{andel.utbetaltTilSøker}</BodyShort>
-              </Table.DataCell>
-            </Table.Row>
-          ))}
-        </Table.Body>
-      </Table>
-    </div>
-  );
 };
