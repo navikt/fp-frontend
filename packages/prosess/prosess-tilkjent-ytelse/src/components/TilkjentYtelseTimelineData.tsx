@@ -52,6 +52,8 @@ export const TilkjentYtelseTimelineData = ({
 
   const numberOfDaysAndWeeks = calcDaysAndWeeks(valgtBeregningsresultatPeriode.fom, valgtBeregningsresultatPeriode.tom);
 
+  const bold = (...chunks: [parts: React.ReactNode[]]) => <b>{chunks}</b>;
+
   return (
     <Box borderWidth="1" padding="4">
       <VStack gap="4">
@@ -108,7 +110,7 @@ export const TilkjentYtelseTimelineData = ({
             <HStack gap="2">
               <FormattedMessage
                 id="TilkjentYtelse.PeriodeData.Dagsats"
-                values={{ dagsatsVerdi: valgtBeregningsresultatPeriode.dagsats, b: (...chunks) => <b>{chunks}</b> }}
+                values={{ dagsatsVerdi: valgtBeregningsresultatPeriode.dagsats, b: bold }}
               />
             </HStack>
           </VStack>
