@@ -14,7 +14,7 @@ interface Props {
 export const DokumentVisning = ({ dokument }: Props) => {
   const { fagsak } = usePanelDataContext();
   const intl = useIntl();
-  const tittel = dokument.tittel ? dokument.tittel : intl.formatMessage({ id: 'DokumentVisning.UkjentTittel' });
+  const tittel = dokument.tittel ?? intl.formatMessage({ id: 'DokumentVisning.UkjentTittel' });
   return (
     <DokumentLink
       saksnummer={fagsak.saksnummer}
