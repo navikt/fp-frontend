@@ -30,7 +30,7 @@ export const ProsessDefaultInitOverstyringPanel = (props: Props) => {
   const { erOverstyrt } = usePanelOverstyring();
 
   const { standardPanelProps } = props;
-  const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
+  const harApentAksjonspunkt = erOverstyrt ?? standardPanelProps.isAksjonspunktOpen;
 
   return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
 };

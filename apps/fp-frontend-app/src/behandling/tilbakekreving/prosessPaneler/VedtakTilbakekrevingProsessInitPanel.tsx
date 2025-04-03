@@ -99,8 +99,8 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
             vedtaksbrev={vedtaksbrev}
             kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
             fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
-            erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage || false}
-            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt || false}
+            erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage ?? false}
+            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt ?? false}
             {...standardPanelProps}
           />
         ) : (

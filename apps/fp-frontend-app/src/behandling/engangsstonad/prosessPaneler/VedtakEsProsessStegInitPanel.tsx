@@ -100,16 +100,16 @@ export const VedtakEsProsessStegInitPanel = () => {
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny
       overstyrtStatus={findStatusForVedtak(
-        vilkår || [],
-        behandling.aksjonspunkt || [],
+        vilkår ?? [],
+        behandling.aksjonspunkt ?? [],
         aksjonspunkter,
         behandling.behandlingsresultat,
       )}
       skalMarkeresSomAktiv={
         !behandling.behandlingHenlagt &&
         findStatusForVedtak(
-          vilkår || [],
-          behandling.aksjonspunkt || [],
+          vilkår ?? [],
+          behandling.aksjonspunkt ?? [],
           aksjonspunkter,
           behandling.behandlingsresultat,
         ) !== VilkarUtfallType.IKKE_VURDERT
