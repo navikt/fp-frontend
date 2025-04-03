@@ -32,18 +32,18 @@
     "react-intl": "7.1.10"
   },
   "devDependencies": {
-    "@storybook/addon-actions": "8.6.11",
-    "@storybook/react": "8.6.11",
-    "@storybook/react-vite": "8.6.11",
-    "@storybook/types": "8.6.11",
+    "@storybook/addon-actions": "8.6.12",
+    "@storybook/react": "8.6.12",
+    "@storybook/react-vite": "8.6.12",
+    "@storybook/types": "8.6.12",
     "@testing-library/dom": "10.4.0",
-    "@testing-library/react": "16.2.0",
+    "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "eslint": "9.23.0",
-    "storybook": "8.6.11",
+    "storybook": "8.6.12",
     "stylelint": "16.17.0",
     "typescript": "5.8.2",
     "vite": "6.2.4",
-    "vitest": "3.0.9"
+    "vitest": "3.1.1"
   }
 }
