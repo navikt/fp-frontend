@@ -11,10 +11,10 @@ import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 
 export type Props = {
   skalPanelVisesIMeny: boolean;
-  hentOverstyrtStatus?: string;
+  overstyrtStatus?: string;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
-  hentSkalMarkeresSomAktiv?: boolean;
+  skalMarkeresSomAktiv?: boolean;
   standardPanelProps: StandardProsessPanelProps;
   children: ReactElement;
 };
@@ -40,8 +40,8 @@ export type ProsessPanel = {
 };
 
 const ProsessPanel = ({
-  hentOverstyrtStatus,
-  hentSkalMarkeresSomAktiv,
+  overstyrtStatus,
+  skalMarkeresSomAktiv,
   skalPanelVisesIMeny,
   prosessPanelKode,
   prosessPanelMenyTekst,
@@ -51,9 +51,9 @@ const ProsessPanel = ({
 }: Props & ProsessPanel) => {
   const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
 
-  const status = hentOverstyrtStatus ?? standardPanelProps.status;
+  const status = overstyrtStatus ?? standardPanelProps.status;
 
-  const skalMarkeresSomAktiv = !!hentSkalMarkeresSomAktiv && !behandling.behandlingHenlagt;
+  const markertSomAktiv = !!skalMarkeresSomAktiv && !behandling.behandlingHenlagt;
 
   const erPanelValgt = useProsessMenyRegistrerer(
     prosessPanelKode,
@@ -61,7 +61,7 @@ const ProsessPanel = ({
     skalPanelVisesIMeny,
     harApentAksjonspunkt,
     status,
-    skalMarkeresSomAktiv || harApentAksjonspunkt,
+    markertSomAktiv || harApentAksjonspunkt,
   );
 
   const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);

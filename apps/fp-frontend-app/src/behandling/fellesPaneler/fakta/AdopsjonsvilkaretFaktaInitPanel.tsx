@@ -24,9 +24,11 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
 
   const { behandling, fagsak } = use(BehandlingDataContext);
 
+  const skalPanelVisesIMeny = behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType));
+
   const api = useBehandlingApi(behandling);
 
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
 
   return (
@@ -34,7 +36,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.ADOPSJONSVILKARET}
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Adopsjon' })}
-      skalPanelVisesIMeny={behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType))}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {familiehendelse && søknad ? (
         <AdopsjonFaktaIndex

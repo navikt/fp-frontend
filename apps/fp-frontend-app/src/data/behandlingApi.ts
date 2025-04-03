@@ -316,10 +316,11 @@ const getBeregningsresultatDagytelseOptions = (links: ApiLink[]) => (behandling:
     staleTime: Infinity,
   });
 
-const getFamiliehendelseOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getFamiliehendelseOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.FAMILIEHENDELSE, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('FAMILIEHENDELSE', links)).json<FamilieHendelseSamling>(),
+    enabled: harLenke(behandling, 'FAMILIEHENDELSE') && isEnabled,
     staleTime: Infinity,
   });
 
@@ -330,10 +331,11 @@ const getSøknadOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
-const getFeriepengegrunnlagOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getFeriepengegrunnlagOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.FERIEPENGEGRUNNLAG, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('FERIEPENGEGRUNNLAG', links)).json<Feriepengegrunnlag>(),
+    enabled: harLenke(behandling, 'FERIEPENGEGRUNNLAG') && isEnabled,
     staleTime: Infinity,
   });
 
@@ -389,10 +391,11 @@ const getSvangerskapspengerTilretteleggingOptions = (links: ApiLink[]) => (behan
     staleTime: Infinity,
   });
 
-const getOpptjeningOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getOpptjeningOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.OPPTJENING, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('OPPTJENING', links)).json<Opptjening>(),
+    enabled: harLenke(behandling, 'OPPTJENING') && isEnabled,
     staleTime: Infinity,
   });
 

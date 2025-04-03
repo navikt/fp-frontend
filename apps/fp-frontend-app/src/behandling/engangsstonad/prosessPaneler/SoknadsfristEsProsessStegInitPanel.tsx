@@ -28,12 +28,12 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
 
   const api = useBehandlingApi(behandling);
 
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
-
   const harSoknadsfristAp = standardPanelProps.aksjonspunkter.some(
     ap => ap.definisjon === AksjonspunktKode.SOKNADSFRISTVILKARET,
   );
+
+  const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, harSoknadsfristAp));
 
   return (
     <PanelOverstyringProvider

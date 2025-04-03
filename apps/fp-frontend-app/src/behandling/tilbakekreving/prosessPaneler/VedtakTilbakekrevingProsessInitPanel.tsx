@@ -91,7 +91,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
         prosessPanelKode={ProsessStegCode.VEDTAK}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
         skalPanelVisesIMeny
-        hentOverstyrtStatus={getVedtakStatus(behandling.behandlingsresultat)}
+        overstyrtStatus={getVedtakStatus(behandling.behandlingsresultat)}
       >
         {beregningsresultat && vedtaksbrev ? (
           <Wrapper

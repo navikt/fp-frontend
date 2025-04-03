@@ -27,21 +27,22 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
+  const skalPanelVisesIMeny =
+    behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
+    behandling.vilkår.some(
+      v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === VilkarUtfallType.OPPFYLT,
+    );
+
   const api = useBehandlingApi(behandling);
 
-  const { data: opptjening, isFetching } = useQuery(api.opptjeningOptions(behandling));
+  const { data: opptjening, isFetching } = useQuery(api.opptjeningOptions(behandling, skalPanelVisesIMeny));
 
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.OPPTJENINGSVILKARET}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Opptjening' })}
-      skalPanelVisesIMeny={
-        behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
-        behandling.vilkår.some(
-          v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === VilkarUtfallType.OPPFYLT,
-        )
-      }
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {!isFetching ? (
         <OpptjeningFaktaIndex opptjening={opptjening} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />

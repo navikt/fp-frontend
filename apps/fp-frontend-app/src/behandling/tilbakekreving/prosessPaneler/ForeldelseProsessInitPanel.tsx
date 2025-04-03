@@ -48,7 +48,7 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
       prosessPanelKode={ProsessStegCode.FORELDELSE}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={
+      overstyrtStatus={
         harLenke(behandling, 'PERIODER_FORELDELSE') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >

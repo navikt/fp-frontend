@@ -100,13 +100,13 @@ export const VedtakFpProsessStegInitPanel = () => {
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={findStatusForVedtak(
+      overstyrtStatus={findStatusForVedtak(
         vilkår || [],
         behandling.aksjonspunkt || [],
         standardPanelProps.aksjonspunkter,
         standardPanelProps.behandling.behandlingsresultat,
       )}
-      hentSkalMarkeresSomAktiv={
+      skalMarkeresSomAktiv={
         !standardPanelProps.behandling.behandlingHenlagt &&
         findStatusForVedtak(
           vilkår || [],

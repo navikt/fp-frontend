@@ -32,7 +32,7 @@ export const BeregningEsProsessStegInitPanel = () => {
       prosessPanelKode={ProsessStegCode.BEREGNING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={
+      overstyrtStatus={
         harLenke(behandling, 'BEREGNINGRESULTAT_ENGANGSSTONAD')
           ? VilkarUtfallType.OPPFYLT
           : VilkarUtfallType.IKKE_VURDERT

@@ -20,11 +20,13 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const { behandling } = use(BehandlingDataContext);
 
+  const skalPanelVisesIMeny = behandling.vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType));
+
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const api = useBehandlingApi(behandling);
 
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
   const { data: familiehendelseOrigninalBehandling } = useQuery(
     api.familiehendelseOrigninalBehandlingOptions(behandling),
@@ -36,7 +38,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
-      skalPanelVisesIMeny={behandling.vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType))}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {familiehendelse && søknad ? (
         <FodselFaktaIndex

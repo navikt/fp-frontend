@@ -46,7 +46,7 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
       prosessPanelKode={ProsessStegCode.TILBAKEKREVING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Tilbakekreving' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={finnTilbakekrevingStatus(standardPanelProps.aksjonspunkter)}
+      overstyrtStatus={finnTilbakekrevingStatus(standardPanelProps.aksjonspunkter)}
     >
       {perioderForeldelse && vilkårvurderingsperioder && vilkårvurdering ? (
         <Wrapper
