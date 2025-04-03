@@ -3,19 +3,26 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import { BodyLong, Button, Modal } from '@navikt/ds-react';
+import { dateFormat } from '@navikt/ft-utils';
 
-import { hentDokumentLenke } from '@navikt/fp-konstanter';
-import type { Fagsak, Inntektsmelding } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysninger, Fagsak, Inntektsmelding } from '@navikt/fp-types';
+import { åpneDokument } from '@navikt/fp-utils';
 
-export const LastNedPdfKnapp = ({ inntektsmelding, fagsak }: { fagsak: Fagsak; inntektsmelding: Inntektsmelding }) => {
+export const LastNedPdfKnapp = ({
+  inntektsmelding,
+  fagsak,
+  arbeidsgiverOpplysninger,
+}: {
+  fagsak: Fagsak;
+  inntektsmelding: Inntektsmelding;
+  arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger;
+}) => {
+  const tittel = `IM ${arbeidsgiverOpplysninger.navn} - ${dateFormat(inntektsmelding.motattDato)}`;
   return (
     <Button
       type="button"
       onClick={() => {
-        window.open(
-          hentDokumentLenke(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId),
-          '_blank',
-        );
+        åpneDokument(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId, tittel);
       }}
       variant="secondary"
       size="small"
@@ -53,10 +60,7 @@ export const LastNedPdfModalKnapp = ({
           <Button
             type="button"
             onClick={() => {
-              window.open(
-                hentDokumentLenke(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId),
-                '_blank',
-              );
+              åpneDokument(fagsak.saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId);
               ref.current?.close();
             }}
             variant="primary"

@@ -1,0 +1,27 @@
+{
+  "name": "@navikt/fp-felles",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./index.ts"
+  },
+  "scripts": {
+    "tsc": "tsc --pretty",
+    "eslint": "eslint \"src/**/*.ts*\" --color",
+    "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
+    "prettier": "prettier --write src",
+    "clean": "rm -rf ./dist ./node_modules"
+  },
+  "dependencies": {
+    "@navikt/ds-react": "7.18.0",
+    "@navikt/fp-types": "workspace:^",
+    "@navikt/fp-utils": "workspace:^",
+    "react": "19.1.0"
+  },
+  "devDependencies": {
+    "eslint": "9.23.0",
+    "typescript": "5.8.2",
+    "vite": "6.2.4"
+  }
+}

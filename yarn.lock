@@ -2413,6 +2413,7 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
+    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
@@ -3047,6 +3048,20 @@ __metadata:
     typescript: 5.8.2
     vite: 6.2.4
     vitest: 3.0.9
+  languageName: unknown
+  linkType: soft
+
+"@navikt/fp-felles@workspace:*, @navikt/fp-felles@workspace:packages/felles":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-felles@workspace:packages/felles"
+  dependencies:
+    "@navikt/ds-react": 7.18.0
+    "@navikt/fp-types": "workspace:^"
+    "@navikt/fp-utils": "workspace:^"
+    eslint: 9.23.0
+    react: 19.1.0
+    typescript: 5.8.2
+    vite: 6.2.4
   languageName: unknown
   linkType: soft
 
@@ -3705,6 +3720,7 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
+    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
@@ -3966,6 +3982,7 @@ __metadata:
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
+    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
@@ -4038,6 +4055,7 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
+    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
@@ -4492,6 +4510,7 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
+    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 4.0.0
@@ -4548,6 +4567,7 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
+    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -5103,7 +5123,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-utils@workspace:*, @navikt/fp-utils@workspace:packages/utils":
+"@navikt/fp-utils@workspace:*, @navikt/fp-utils@workspace:^, @navikt/fp-utils@workspace:packages/utils":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utils@workspace:packages/utils"
   dependencies:

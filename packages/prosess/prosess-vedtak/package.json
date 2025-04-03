@@ -26,6 +26,7 @@
     "@editorjs/paragraph": "2.11.7",
     "@navikt/aksel-icons": "7.18.0",
     "@navikt/ds-react": "7.18.0",
+    "@navikt/fp-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-prosess-felles": "workspace:*",
