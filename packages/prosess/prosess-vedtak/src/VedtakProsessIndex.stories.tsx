@@ -556,8 +556,8 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
-          KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-          KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+          KonsekvensForYtelsen.ENDRING_I_BEREGNING,
+          KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
         ],
       },
     } as Behandling,
@@ -579,8 +579,8 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
-          KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-          KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+          KonsekvensForYtelsen.ENDRING_I_BEREGNING,
+          KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
         ],
       },
     } as Behandling,
@@ -601,8 +601,8 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
-          KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-          KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+          KonsekvensForYtelsen.ENDRING_I_BEREGNING,
+          KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
         ],
       },
     } as Behandling,
@@ -624,8 +624,8 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
-          KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK,
-          KonsekvensForYtelsen.FORELDREPENGER_OPPHORER,
+          KonsekvensForYtelsen.ENDRING_I_BEREGNING,
+          KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
         ],
       },
     } as Behandling,
@@ -647,7 +647,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       behandlingsresultat: {
         vedtaksbrev: 'FRITEKST',
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHORER],
+        konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER],
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -731,7 +731,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       type: BehandlingType.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
+        konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -761,7 +761,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       type: BehandlingType.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
-        konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING_OG_UTTAK],
+        konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
         avslagsarsak: '1007',
       },
     } as Behandling,

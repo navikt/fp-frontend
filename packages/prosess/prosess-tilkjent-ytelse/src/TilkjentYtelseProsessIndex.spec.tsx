@@ -6,7 +6,7 @@ import * as stories from './TilkjentYtelseProsessIndex.stories';
 
 const { UtenAksjonspunkt, UtførtAksjonspunkt } = composeStories(stories);
 
-describe('<TilkjentYtelseProsessIndex>', () => {
+describe('TilkjentYtelseProsessIndex', () => {
   it('skal se på tilkjent ytelse uten aksjonspunkt', async () => {
     render(<UtenAksjonspunkt />);
 

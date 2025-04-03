@@ -241,7 +241,7 @@
     },
     {
       "kode": "STONADSPERIODE_OVER_3",
-      "navn": "Stønadsperiode over 3 år",
+      "navn": "Stønadsperioden er over 3 år",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -256,7 +256,7 @@
     },
     {
       "kode": "MOTTAKER_I_ARBEID",
-      "navn": "Mottaker i arbeid heltid",
+      "navn": "Mottaker er i arbeid heltid",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -281,27 +281,27 @@
     },
     {
       "kode": "MOTTAKER_HELT_AVHENGIG",
-      "navn": "Mottaker helt avhenig av hjelp til å ta seg av barnet",
+      "navn": "Mottaker er helt avhengig av hjelp til å ta seg av barnet",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "MOTTAKER_INNLAGT",
-      "navn": "Mottaker innlagt i helseinstitusjon",
+      "navn": "Mottaker er innlagt i helseinstitusjon",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "BARN_INNLAGT",
-      "navn": "Barn innlagt i helseinstitusjon",
+      "navn": "Barn er innlagt i helseinstitusjon",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "KVO_MOTTAKER_HELT_AVHENGIG",
-      "navn": "Mottaker helt avhenig av hjelp til å ta seg av barnet",
+      "navn": "Mottaker er helt avhengig av hjelp til å ta seg av barnet",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "KVO_MOTTAKER_INNLAGT",
-      "navn": "Mottaker innlagt i helseinstitusjon",
+      "navn": "Mottaker er innlagt i helseinstitusjon",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -311,37 +311,37 @@
     },
     {
       "kode": "MOR_IKKE_ARBEID",
-      "navn": "Mor ikke arbeidet heltid",
+      "navn": "Mor er ikke i arbeid heltid",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "MOR_IKKE_STUDERT",
-      "navn": "Mor ikke studert heltid",
+      "navn": "Mor er ikke student på heltid",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "MOR_IKKE_ARBEID_OG_STUDER",
-      "navn": "Mor ikke arbeid og studier - heltid",
+      "navn": "Mor er ikke i arbeid og student - heltid",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "MOR_IKKE_HELT_AVHENGIG",
-      "navn": "Mor ikke helt avhengig av hjelp til å ta seg av barnet",
+      "navn": "Mor er ikke helt avhengig av hjelp til å ta seg av barnet",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "MOR_IKKE_INNLAGT",
-      "navn": "Mor ikke innlagt helseinstitusjon",
+      "navn": "Mor er ikke innlagt på helseinstitusjon",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "MOR_IKKE_I_IP",
-      "navn": "Mor ikke i introduksjonsprogram",
+      "navn": "Mor er ikke i introduksjonsprogram",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "MOR_IKKE_I_KP",
-      "navn": "Mor ikke i kvalifiseringsprogram",
+      "navn": "Mor er ikke i kvalifiseringsprogram",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -371,17 +371,17 @@
     },
     {
       "kode": "SVP_IKKE_HELSEFARLIG",
-      "navn": "Ikke helsefarlig for ventende barn",
+      "navn": "Ikke helsefarlig for ventet barn",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "SVP_TILRETTELEGGING_FULLT_MULIG",
-      "navn": "Tilrettelegging fullt mulig",
+      "navn": "Full tilrettelegging mulig",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "SVP_TILRETTELEGGING_DELVIS_MULIG",
-      "navn": "Tilrettelegging delvis mulig",
+      "navn": "Delvis tilrettelegging mulig",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -411,12 +411,12 @@
     },
     {
       "kode": "MOTTAKER_DØD",
-      "navn": "Mottaker død",
+      "navn": "Mottaker er død",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "MOTTAKER_IKKE_GRAVID",
-      "navn": "Mottaker ikke lenger gravid",
+      "navn": "Mottaker er ikke lenger gravid",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -426,7 +426,7 @@
     },
     {
       "kode": "ES_BARN_IKKE_REGISTRERT",
-      "navn": "Barn ikke registrert",
+      "navn": "Barn er ikke registrert",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -436,12 +436,12 @@
     },
     {
       "kode": "ES_IKKE_OPPFYLT",
-      "navn": "Adopsjonsvilkår ikke oppfylt",
+      "navn": "Adopsjonsvilkår er ikke oppfylt",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "ES_BARN_OVER_15",
-      "navn": "Barn over 15 år",
+      "navn": "Barn er over 15 år",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -456,7 +456,7 @@
     },
     {
       "kode": "ES_ANDRE_FORELDRE_DODD",
-      "navn": "Har ikke foreldreansvar ved andre foreldres død",
+      "navn": "Har ikke foreldreansvar ved andre forelders død",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -471,12 +471,12 @@
     },
     {
       "kode": "ES_FORELDREANSVAR_BARN_OVER_15",
-      "navn": "Barn over 15 år",
+      "navn": "Barn er over 15 år",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
       "kode": "ES_FAR_IKKE_OMSORG",
-      "navn": "Far ikke omsorg for barnet",
+      "navn": "Far har ikke omsorg for barnet",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -486,7 +486,7 @@
     },
     {
       "kode": "ES_FAR_IKKE_ALENE",
-      "navn": "Far overtar ikke foreldreansvar alene",
+      "navn": "Far overtar ikke foreldreansvar alene",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -501,7 +501,7 @@
     },
     {
       "kode": "ES_STONAD_FLERE_GANGER",
-      "navn": "Stønad gitt for samme barn flere ganger",
+      "navn": "Stønad er gitt for samme barn flere ganger",
       "kodeverk": "HENDELSE_UNDERTYPE"
     },
     {
@@ -566,175 +566,8 @@
     },
     {
       "kode": "FEIL_FERIEPENGER_4G",
-      "navn": "Feil i feriepenger - under 4G",
+      "navn": "Feil i feriepenger - under 4 G",
       "kodeverk": "HENDELSE_UNDERTYPE"
-    }
-  ],
-  "HistorikkinnslagType": [
-    {
-      "kode": "BEH_GJEN",
-      "navn": "Behandling gjenopptatt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "BEH_MAN_GJEN",
-      "navn": "Gjenoppta behandling",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "BEH_STARTET",
-      "navn": "Behandling startet",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "BEH_STARTET_PÅ_NYTT",
-      "navn": "Behandling startet på nytt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "BEH_STARTET_FORFRA",
-      "navn": "Behandling startet forfra",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "VEDLEGG_MOTTATT",
-      "navn": "Vedlegg mottatt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "BREV_SENT",
-      "navn": "Brev sendt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "BREV_BESTILT",
-      "navn": "Brev bestilt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "REVURD_OPPR",
-      "navn": "Tilbakekreving Revurdering opprettet",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "REGISTRER_PAPIRSØK",
-      "navn": "Registrer papirsøknad",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "MANGELFULL_SØKNAD",
-      "navn": "Mangelfull søknad",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "INNSYN_OPPR",
-      "navn": "Innsynsbehandling opprettet",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "NYE_REGOPPLYSNINGER",
-      "navn": "Nye registeropplysninger",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "KLAGEBEH_STARTET",
-      "navn": "Klage mottatt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "TILBAKEKREVING_OPPR",
-      "navn": "Tilbakekreving opprettet",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "FORSLAG_VEDTAK",
-      "navn": "Vedtak foreslått og sendt til beslutter",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "VEDTAK_FATTET",
-      "navn": "Vedtak fattet",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "VEDTAK_FATTET_AUTOMATISK",
-      "navn": "Vedtak automatisk fattet",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "REGISTRER_OM_VERGE",
-      "navn": "Registering av opplysninger om verge/fullmektig",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "SAK_RETUR",
-      "navn": "Sak retur",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "AVBRUTT_BEH",
-      "navn": "Behandling er henlagt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "BEH_VENT",
-      "navn": "Behandling på vent",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "FJERNET_VERGE",
-      "navn": "Opplysninger om verge/fullmektig fjernet",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "FAKTA_ENDRET",
-      "navn": "Fakta endret",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "BYTT_ENHET",
-      "navn": "Bytt enhet",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "KLAGE_BEH_NFP",
-      "navn": "Klagebehandling NFP",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "KLAGE_BEH_NK",
-      "navn": "Klagebehandling KA",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "NY_GRUNNLAG_MOTTATT",
-      "navn": "Kravgrunnlag Mottatt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "OVERSTYRT",
-      "navn": "Overstyrt",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "OPPTJENING",
-      "navn": "Behandlet opptjeningsperiode",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "FAKTA_OM_FEILUTBETALING",
-      "navn": "Fakta om feilutbetaling",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "TILBAKEKREVING",
-      "navn": "Tilbakekreving",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
-    },
-    {
-      "kode": "FORELDELSE",
-      "navn": "Foreldelse",
-      "kodeverk": "HISTORIKKINNSLAG_TYPE"
     }
   ],
   "VilkårResultat": [
@@ -757,43 +590,6 @@
       "kode": "GOD_TRO",
       "navn": "Nei, mottaker har mottatt beløpet i god tro (1. ledd)",
       "kodeverk": "VILKAAR_RESULTAT"
-    }
-  ],
-  "HistorikkOpplysningType": [
-    {
-      "kode": "FODSELSDATO",
-      "navn": null,
-      "kodeverk": "HISTORIKK_OPPLYSNING_TYPE"
-    },
-    {
-      "kode": "PERIODE_FOM",
-      "navn": null,
-      "kodeverk": "HISTORIKK_OPPLYSNING_TYPE"
-    },
-    {
-      "kode": "PERIODE_TOM",
-      "navn": null,
-      "kodeverk": "HISTORIKK_OPPLYSNING_TYPE"
-    },
-    {
-      "kode": "TILBAKEKREVING_OPPFYLT_BEGRUNNELSE",
-      "navn": null,
-      "kodeverk": "HISTORIKK_OPPLYSNING_TYPE"
-    },
-    {
-      "kode": "SÆRLIG_GRUNNER_BEGRUNNELSE",
-      "navn": null,
-      "kodeverk": "HISTORIKK_OPPLYSNING_TYPE"
-    },
-    {
-      "kode": "KRAVGRUNNLAG_VEDTAK_ID",
-      "navn": "ID",
-      "kodeverk": "HISTORIKK_OPPLYSNING_TYPE"
-    },
-    {
-      "kode": "KRAVGRUNNLAG_STATUS",
-      "navn": "Status",
-      "kodeverk": "HISTORIKK_OPPLYSNING_TYPE"
     }
   ],
   "Venteårsak": [
@@ -939,22 +735,42 @@
   "VurderÅrsak": [
     {
       "kode": "FEIL_FAKTA",
-      "navn": "Feil fakta",
+      "navn": "Fakta",
       "kodeverk": "VURDER_AARSAK"
     },
     {
       "kode": "FEIL_LOV",
-      "navn": "Feil lovanvendelse",
+      "navn": "Regel-/lovanvendelse",
       "kodeverk": "VURDER_AARSAK"
     },
     {
-      "kode": "FEIL_REGEL",
-      "navn": "Feil regelforståelse",
+      "kode": "SKJØNN",
+      "navn": "Skjønn",
+      "kodeverk": "VURDER_AARSAK"
+    },
+    {
+      "kode": "UTREDNING",
+      "navn": "Utredning",
+      "kodeverk": "VURDER_AARSAK"
+    },
+    {
+      "kode": "SAKSFLYT",
+      "navn": "Saksflyt",
+      "kodeverk": "VURDER_AARSAK"
+    },
+    {
+      "kode": "BEGRUNNELSE",
+      "navn": "Begrunnelse",
       "kodeverk": "VURDER_AARSAK"
     },
     {
       "kode": "ANNET",
       "navn": "Annet",
+      "kodeverk": "VURDER_AARSAK"
+    },
+    {
+      "kode": "FEIL_REGEL",
+      "navn": "Feil regelforståelse",
       "kodeverk": "VURDER_AARSAK"
     }
   ],
@@ -982,6 +798,11 @@
     {
       "kode": "RE_FEILUTBETALT_BELØP_REDUSERT",
       "navn": "Feilutbetalt beløp helt eller delvis bortfalt",
+      "kodeverk": "BEHANDLING_AARSAK"
+    },
+    {
+      "kode": "FATTET_AV_ANNEN_INSTANS",
+      "navn": "Vedtak fattet av annen instans",
       "kodeverk": "BEHANDLING_AARSAK"
     }
   ],
@@ -1115,83 +936,6 @@
       "kode": "TILBAKEKR_OPPDATER",
       "navn": "Endringer vil oppdatere eksisterende feilutbetalte perioder og beløp.",
       "kodeverk": "TILBAKEKR_VIDERE_BEH"
-    }
-  ],
-  "HistorikkEndretFeltType": [
-    {
-      "kode": "BEHANDLENDE_ENHET",
-      "navn": "",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "BEHANDLING",
-      "navn": "",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "ER_VILKARENE_TILBAKEKREVING_OPPFYLT",
-      "navn": "Er vilkårene for tilbakekreving oppfylt?",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "ER_SARLIGE_GRUNNER_TIL_REDUKSJON",
-      "navn": "Er det særlige grunner til reduksjon?",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "HENDELSE_AARSAK",
-      "navn": "Hendelse",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "HENDELSE_UNDER_AARSAK",
-      "navn": "Hendelse Under Årsak",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "MOTTAKER_UAKTSOMHET_GRAD",
-      "navn": "I hvilken grad har mottaker handlet uaktsomhet?",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "ANDEL_TILBAKEKREVES",
-      "navn": "Andel som tilbakekreves",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "BELOEP_TILBAKEKREVES",
-      "navn": "Beløp som skal tilbakekreves",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "TILBAKEKREV_SMAABELOEP",
-      "navn": "Skal beløp under 4 rettsgebyr(6.ledd) tilbakekreves?",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "BELOEP_ER_I_BEHOLD",
-      "navn": "Er beløpet i behold?",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "ILEGG_RENTER",
-      "navn": "Skal det tilegges renter?",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "FORELDELSE",
-      "navn": "Foreldelse",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "FORELDELSESFRIST",
-      "navn": "Foreldelsesfrist",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
-    },
-    {
-      "kode": "OPPDAGELSES_DATO",
-      "navn": "Dato for når feilutbetaling ble oppdaget",
-      "kodeverk": "HISTORIKK_ENDRET_FELT_TYPE"
     }
   ],
   "Fagsystem": [

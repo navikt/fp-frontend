@@ -3249,9 +3249,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-los-avdelingsleder@workspace:*, @navikt/fp-los-avdelingsleder@workspace:packages/los/los-avdelingsleder":
+"@navikt/fp-los-avdelingsleder@workspace:*, @navikt/fp-los-avdelingsleder@workspace:packages/los/avdelingsleder":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-los-avdelingsleder@workspace:packages/los/los-avdelingsleder"
+  resolution: "@navikt/fp-los-avdelingsleder@workspace:packages/los/avdelingsleder"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -3295,9 +3295,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-los-felles@workspace:*, @navikt/fp-los-felles@workspace:packages/los/los-felles":
+"@navikt/fp-los-felles@workspace:*, @navikt/fp-los-felles@workspace:packages/los/felles":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-los-felles@workspace:packages/los/los-felles"
+  resolution: "@navikt/fp-los-felles@workspace:packages/los/felles"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3332,9 +3332,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-los-saksbehandler@workspace:*, @navikt/fp-los-saksbehandler@workspace:packages/los/los-saksbehandler":
+"@navikt/fp-los-saksbehandler@workspace:*, @navikt/fp-los-saksbehandler@workspace:packages/los/saksbehandler":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-los-saksbehandler@workspace:packages/los/los-saksbehandler"
+  resolution: "@navikt/fp-los-saksbehandler@workspace:packages/los/saksbehandler"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -3869,7 +3869,6 @@ __metadata:
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.2.0
     "@testing-library/user-event": 14.6.1
-    classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
     eslint: 9.23.0
@@ -3878,7 +3877,6 @@ __metadata:
     react-hook-form: 7.55.0
     react-intl: 7.1.10
     storybook: 8.6.11
-    stylelint: 16.17.0
     typescript: 5.8.2
     vite: 6.2.4
     vitest: 3.0.9
@@ -4394,9 +4392,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-aktor@workspace:*, @navikt/fp-sak-aktor@workspace:packages/sak/sak-aktor":
+"@navikt/fp-sak-aktor@workspace:*, @navikt/fp-sak-aktor@workspace:packages/sak/aktor":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-aktor@workspace:packages/sak/sak-aktor"
+  resolution: "@navikt/fp-sak-aktor@workspace:packages/sak/aktor"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4423,9 +4421,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-behandling-velger@workspace:*, @navikt/fp-sak-behandling-velger@workspace:packages/sak/sak-behandling-velger":
+"@navikt/fp-sak-behandling-velger@workspace:*, @navikt/fp-sak-behandling-velger@workspace:packages/sak/behandling-velger":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-behandling-velger@workspace:packages/sak/sak-behandling-velger"
+  resolution: "@navikt/fp-sak-behandling-velger@workspace:packages/sak/behandling-velger"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4456,9 +4454,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-dekorator@workspace:*, @navikt/fp-sak-dekorator@workspace:packages/sak/sak-dekorator":
+"@navikt/fp-sak-dekorator@workspace:*, @navikt/fp-sak-dekorator@workspace:packages/sak/dekorator":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-dekorator@workspace:packages/sak/sak-dekorator"
+  resolution: "@navikt/fp-sak-dekorator@workspace:packages/sak/dekorator"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4487,9 +4485,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-dokumenter@workspace:*, @navikt/fp-sak-dokumenter@workspace:packages/sak/sak-dokumenter":
+"@navikt/fp-sak-dokumenter@workspace:*, @navikt/fp-sak-dokumenter@workspace:packages/sak/dokumenter":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-dokumenter@workspace:packages/sak/sak-dokumenter"
+  resolution: "@navikt/fp-sak-dokumenter@workspace:packages/sak/dokumenter"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4516,9 +4514,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-fagsak-profil@workspace:*, @navikt/fp-sak-fagsak-profil@workspace:packages/sak/sak-fagsak-profil":
+"@navikt/fp-sak-fagsak-profil@workspace:*, @navikt/fp-sak-fagsak-profil@workspace:packages/sak/fagsak-profil":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-fagsak-profil@workspace:packages/sak/sak-fagsak-profil"
+  resolution: "@navikt/fp-sak-fagsak-profil@workspace:packages/sak/fagsak-profil"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4543,9 +4541,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-historikk@workspace:*, @navikt/fp-sak-historikk@workspace:packages/sak/sak-historikk":
+"@navikt/fp-sak-historikk@workspace:*, @navikt/fp-sak-historikk@workspace:packages/sak/historikk":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-historikk@workspace:packages/sak/sak-historikk"
+  resolution: "@navikt/fp-sak-historikk@workspace:packages/sak/historikk"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4578,9 +4576,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-infosider@workspace:*, @navikt/fp-sak-infosider@workspace:packages/sak/sak-infosider":
+"@navikt/fp-sak-infosider@workspace:*, @navikt/fp-sak-infosider@workspace:packages/sak/infosider":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-infosider@workspace:packages/sak/sak-infosider"
+  resolution: "@navikt/fp-sak-infosider@workspace:packages/sak/infosider"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4602,9 +4600,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-meldinger@workspace:*, @navikt/fp-sak-meldinger@workspace:packages/sak/sak-meldinger":
+"@navikt/fp-sak-meldinger@workspace:*, @navikt/fp-sak-meldinger@workspace:packages/sak/meldinger":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-meldinger@workspace:packages/sak/sak-meldinger"
+  resolution: "@navikt/fp-sak-meldinger@workspace:packages/sak/meldinger"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4638,9 +4636,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-meny-apne-for-endringer@workspace:*, @navikt/fp-sak-meny-apne-for-endringer@workspace:packages/sak/sak-meny-apne-for-endringer":
+"@navikt/fp-sak-meny-apne-for-endringer@workspace:*, @navikt/fp-sak-meny-apne-for-endringer@workspace:packages/sak/meny-apne-for-endringer":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-meny-apne-for-endringer@workspace:packages/sak/sak-meny-apne-for-endringer"
+  resolution: "@navikt/fp-sak-meny-apne-for-endringer@workspace:packages/sak/meny-apne-for-endringer"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4667,9 +4665,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-meny-endre-utland@workspace:*, @navikt/fp-sak-meny-endre-utland@workspace:packages/sak/sak-meny-endre-utland":
+"@navikt/fp-sak-meny-endre-utland@workspace:*, @navikt/fp-sak-meny-endre-utland@workspace:packages/sak/meny-endre-utland":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-meny-endre-utland@workspace:packages/sak/sak-meny-endre-utland"
+  resolution: "@navikt/fp-sak-meny-endre-utland@workspace:packages/sak/meny-endre-utland"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4699,9 +4697,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-meny-henlegg@workspace:*, @navikt/fp-sak-meny-henlegg@workspace:packages/sak/sak-meny-henlegg":
+"@navikt/fp-sak-meny-henlegg@workspace:*, @navikt/fp-sak-meny-henlegg@workspace:packages/sak/meny-henlegg":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-meny-henlegg@workspace:packages/sak/sak-meny-henlegg"
+  resolution: "@navikt/fp-sak-meny-henlegg@workspace:packages/sak/meny-henlegg"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4732,9 +4730,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-meny-ny-behandling@workspace:*, @navikt/fp-sak-meny-ny-behandling@workspace:packages/sak/sak-meny-ny-behandling":
+"@navikt/fp-sak-meny-ny-behandling@workspace:*, @navikt/fp-sak-meny-ny-behandling@workspace:packages/sak/meny-ny-behandling":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-meny-ny-behandling@workspace:packages/sak/sak-meny-ny-behandling"
+  resolution: "@navikt/fp-sak-meny-ny-behandling@workspace:packages/sak/meny-ny-behandling"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4764,9 +4762,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-meny-sett-pa-vent@workspace:*, @navikt/fp-sak-meny-sett-pa-vent@workspace:packages/sak/sak-meny-sett-pa-vent":
+"@navikt/fp-sak-meny-sett-pa-vent@workspace:*, @navikt/fp-sak-meny-sett-pa-vent@workspace:packages/sak/meny-sett-pa-vent":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-meny-sett-pa-vent@workspace:packages/sak/sak-meny-sett-pa-vent"
+  resolution: "@navikt/fp-sak-meny-sett-pa-vent@workspace:packages/sak/meny-sett-pa-vent"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4795,9 +4793,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-meny@workspace:*, @navikt/fp-sak-meny@workspace:packages/sak/sak-meny":
+"@navikt/fp-sak-meny@workspace:*, @navikt/fp-sak-meny@workspace:packages/sak/meny":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-meny@workspace:packages/sak/sak-meny"
+  resolution: "@navikt/fp-sak-meny@workspace:packages/sak/meny"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4824,9 +4822,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-notat@workspace:*, @navikt/fp-sak-notat@workspace:packages/sak/sak-notat":
+"@navikt/fp-sak-notat@workspace:*, @navikt/fp-sak-notat@workspace:packages/sak/notat":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-notat@workspace:packages/sak/sak-notat"
+  resolution: "@navikt/fp-sak-notat@workspace:packages/sak/notat"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4857,9 +4855,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-risikoklassifisering@workspace:*, @navikt/fp-sak-risikoklassifisering@workspace:packages/sak/sak-risikoklassifisering":
+"@navikt/fp-sak-risikoklassifisering@workspace:*, @navikt/fp-sak-risikoklassifisering@workspace:packages/sak/risikoklassifisering":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-risikoklassifisering@workspace:packages/sak/sak-risikoklassifisering"
+  resolution: "@navikt/fp-sak-risikoklassifisering@workspace:packages/sak/risikoklassifisering"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4891,9 +4889,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-sok@workspace:*, @navikt/fp-sak-sok@workspace:packages/sak/sak-sok":
+"@navikt/fp-sak-sok@workspace:*, @navikt/fp-sak-sok@workspace:packages/sak/sok":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-sok@workspace:packages/sak/sak-sok"
+  resolution: "@navikt/fp-sak-sok@workspace:packages/sak/sok"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4924,9 +4922,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-totrinnskontroll@workspace:*, @navikt/fp-sak-totrinnskontroll@workspace:packages/sak/sak-totrinnskontroll":
+"@navikt/fp-sak-totrinnskontroll@workspace:*, @navikt/fp-sak-totrinnskontroll@workspace:packages/sak/totrinnskontroll":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-totrinnskontroll@workspace:packages/sak/sak-totrinnskontroll"
+  resolution: "@navikt/fp-sak-totrinnskontroll@workspace:packages/sak/totrinnskontroll"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4966,9 +4964,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-ukjent-adresse@workspace:*, @navikt/fp-sak-ukjent-adresse@workspace:packages/sak/sak-ukjent-adresse":
+"@navikt/fp-sak-ukjent-adresse@workspace:*, @navikt/fp-sak-ukjent-adresse@workspace:packages/sak/ukjent-adresse":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-ukjent-adresse@workspace:packages/sak/sak-ukjent-adresse"
+  resolution: "@navikt/fp-sak-ukjent-adresse@workspace:packages/sak/ukjent-adresse"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -4993,9 +4991,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-sak-visittkort@workspace:*, @navikt/fp-sak-visittkort@workspace:packages/sak/sak-visittkort":
+"@navikt/fp-sak-visittkort@workspace:*, @navikt/fp-sak-visittkort@workspace:packages/sak/visittkort":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-sak-visittkort@workspace:packages/sak/sak-visittkort"
+  resolution: "@navikt/fp-sak-visittkort@workspace:packages/sak/visittkort"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0

@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
@@ -13,8 +13,6 @@ import type {
   BeregningsresultatPeriodeAndel,
 } from '@navikt/fp-types';
 
-import styles from './tilkjentYtelseTimelineData.module.css';
-
 // TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
 const UttakPeriodeNavn = {
   MØDREKVOTE: 'Mødrekvote',
@@ -26,67 +24,12 @@ const UttakPeriodeNavn = {
   UDEFINERT: '-',
 } as Record<string, string>;
 
-const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
-const createVisningNavnForUttakArbeidstaker = (
-  andel: BeregningsresultatPeriodeAndel,
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): ReactElement | string => {
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
-  if (!arbeidsgiverOpplysninger?.navn) {
-    return andel.arbeidsforholdType
-      ? getKodeverknavn(andel.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE)
-      : '';
-  }
-  return arbeidsgiverOpplysninger.erPrivatPerson
-    ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.fødselsdato})`
-    : `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(
-        andel.eksternArbeidsforholdId,
-      )}`;
-};
-
-const findAndelsnavn = (
-  andel: BeregningsresultatPeriodeAndel,
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): ReactElement | string => {
-  switch (andel.aktivitetStatus) {
-    case AktivitetStatus.ARBEIDSTAKER:
-      return createVisningNavnForUttakArbeidstaker(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId);
-    case AktivitetStatus.FRILANSER:
-      return <FormattedMessage id="TilkjentYtelse.PeriodeData.Frilans" />;
-    case AktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE:
-      return <FormattedMessage id="TilkjentYtelse.PeriodeData.SelvstendigNaeringsdrivende" />;
-    case AktivitetStatus.DAGPENGER:
-      return <FormattedMessage id="TilkjentYtelse.PeriodeData.Dagpenger" />;
-    case AktivitetStatus.ARBEIDSAVKLARINGSPENGER:
-      return <FormattedMessage id="TilkjentYtelse.PeriodeData.AAP" />;
-    case AktivitetStatus.MILITAER_ELLER_SIVIL:
-      return <FormattedMessage id="TilkjentYtelse.PeriodeData.Militaer" />;
-    case AktivitetStatus.BRUKERS_ANDEL:
-      return <FormattedMessage id="TilkjentYtelse.PeriodeData.BrukersAndel" />;
-
-    default:
-      return '';
-  }
-};
-
-const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | null => {
-  if (andel === undefined) {
-    return null;
-  }
-  const stringId =
-    andel.uttak && andel.uttak.gradering === true ? 'TilkjentYtelse.PeriodeData.Ja' : 'TilkjentYtelse.PeriodeData.Nei';
-  return <FormattedMessage id={stringId} />;
-};
-
 interface Props {
-  selectedItemData: BeregningsresultatPeriode;
-  callbackForward: (...args: any[]) => any;
-  callbackBackward: (...args: any[]) => any;
+  valgtBeregningsresultatPeriode: BeregningsresultatPeriode;
+  velgNestePeriode: () => void;
+  velgForrigePeriode: () => void;
   alleKodeverk: AlleKodeverk;
-  isSoknadSvangerskapspenger: boolean;
+  erSøknadSvangerskapspenger: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   lukkPeriode: () => void;
 }
@@ -94,22 +37,22 @@ interface Props {
 /**
  * TimeLineData
  *
- * Viser opp data fra valgt periode i tilkjent ytelse-tidslinjen
+ * Viser data fra valgt periode i tilkjent ytelse-tidslinjen
  */
 export const TilkjentYtelseTimelineData = ({
-  selectedItemData,
-  callbackForward,
-  callbackBackward,
+  valgtBeregningsresultatPeriode,
+  velgNestePeriode,
+  velgForrigePeriode,
   alleKodeverk,
-  isSoknadSvangerskapspenger,
+  erSøknadSvangerskapspenger,
   arbeidsgiverOpplysningerPerId,
   lukkPeriode,
 }: Props) => {
-  const numberOfDaysAndWeeks = calcDaysAndWeeks(selectedItemData.fom, selectedItemData.tom);
   const intl = useIntl();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const numberOfDaysAndWeeks = calcDaysAndWeeks(valgtBeregningsresultatPeriode.fom, valgtBeregningsresultatPeriode.tom);
+
+  const bold = (...chunks: [parts: React.ReactNode[]]) => <b>{chunks}</b>;
 
   return (
     <Box borderWidth="1" padding="4">
@@ -120,10 +63,9 @@ export const TilkjentYtelseTimelineData = ({
           </Label>
           <HStack gap="2" align="center">
             <Button
-              className={styles.margin}
               size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
-              onClick={callbackBackward}
+              onClick={velgForrigePeriode}
               variant="secondary-neutral"
               type="button"
               title={intl.formatMessage({ id: 'Timeline.prevPeriod' })}
@@ -131,10 +73,9 @@ export const TilkjentYtelseTimelineData = ({
               <FormattedMessage id="Timeline.prevPeriodShort" />
             </Button>
             <Button
-              className={styles.margin}
               size="xsmall"
               icon={<ArrowRightIcon aria-hidden />}
-              onClick={callbackForward}
+              onClick={velgNestePeriode}
               variant="secondary-neutral"
               type="button"
               title={intl.formatMessage({ id: 'Timeline.nextPeriod' })}
@@ -152,15 +93,15 @@ export const TilkjentYtelseTimelineData = ({
             />
           </HStack>
         </HStack>
-        <div className={styles.detailsPeriode}>
+        <Box background="surface-success-subtle" padding="4" width="370px">
           <VStack gap="2">
             <HStack justify="space-between">
               <Label size="small">
                 <FormattedMessage
                   id="TilkjentYtelse.PeriodeData.Periode"
                   values={{
-                    fomVerdi: dateFormat(selectedItemData.fom),
-                    tomVerdi: dateFormat(selectedItemData.tom),
+                    fomVerdi: dateFormat(valgtBeregningsresultatPeriode.fom),
+                    tomVerdi: dateFormat(valgtBeregningsresultatPeriode.tom),
                   }}
                 />
               </Label>
@@ -169,19 +110,19 @@ export const TilkjentYtelseTimelineData = ({
             <HStack gap="2">
               <FormattedMessage
                 id="TilkjentYtelse.PeriodeData.Dagsats"
-                values={{ dagsatsVerdi: selectedItemData.dagsats, b: bTag }}
+                values={{ dagsatsVerdi: valgtBeregningsresultatPeriode.dagsats, b: bold }}
               />
             </HStack>
           </VStack>
-        </div>
-        {selectedItemData.andeler && selectedItemData.andeler.length !== 0 && (
+        </Box>
+        {valgtBeregningsresultatPeriode.andeler && valgtBeregningsresultatPeriode.andeler.length !== 0 && (
           <Table>
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell scope="col">
                   <FormattedMessage id="TilkjentYtelse.PeriodeData.Andel" />
                 </Table.HeaderCell>
-                {!isSoknadSvangerskapspenger && (
+                {!erSøknadSvangerskapspenger && (
                   <>
                     <Table.HeaderCell scope="col">
                       <FormattedMessage id="TilkjentYtelse.PeriodeData.KontoType" />
@@ -206,17 +147,15 @@ export const TilkjentYtelseTimelineData = ({
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {selectedItemData.andeler.map((andel, index: number) => (
+              {valgtBeregningsresultatPeriode.andeler.map((andel, index: number) => (
                 <Table.Row key={`index${index + 1}`}>
-                  <Table.DataCell>
-                    {findAndelsnavn(andel, getKodeverknavn, arbeidsgiverOpplysningerPerId)}
-                  </Table.DataCell>
-                  {!isSoknadSvangerskapspenger && (
+                  <Table.DataCell>{findAndelsnavn(andel, alleKodeverk, arbeidsgiverOpplysningerPerId)}</Table.DataCell>
+                  {!erSøknadSvangerskapspenger && (
                     <Table.DataCell>
                       <BodyShort size="small">{UttakPeriodeNavn[andel.uttak.stonadskontoType]}</BodyShort>
                     </Table.DataCell>
                   )}
-                  {!isSoknadSvangerskapspenger && (
+                  {!erSøknadSvangerskapspenger && (
                     <Table.DataCell>
                       <BodyShort size="small">{getGradering(andel)}</BodyShort>
                     </Table.DataCell>
@@ -245,4 +184,60 @@ export const TilkjentYtelseTimelineData = ({
       </VStack>
     </Box>
   );
+};
+
+const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
+
+const createVisningNavnForUttakArbeidstaker = (
+  andel: BeregningsresultatPeriodeAndel,
+  alleKodeverk: AlleKodeverk,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): ReactElement | string => {
+  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
+  if (!arbeidsgiverOpplysninger?.navn) {
+    return andel.arbeidsforholdType
+      ? getKodeverknavn(andel.arbeidsforholdType, KodeverkType.OPPTJENING_AKTIVITET_TYPE)
+      : '';
+  }
+  return arbeidsgiverOpplysninger.erPrivatPerson
+    ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.fødselsdato})`
+    : `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(
+        andel.eksternArbeidsforholdId,
+      )}`;
+};
+
+const findAndelsnavn = (
+  andel: BeregningsresultatPeriodeAndel,
+  alleKodeverk: AlleKodeverk,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): ReactElement | string => {
+  switch (andel.aktivitetStatus) {
+    case AktivitetStatus.ARBEIDSTAKER:
+      return createVisningNavnForUttakArbeidstaker(andel, alleKodeverk, arbeidsgiverOpplysningerPerId);
+    case AktivitetStatus.FRILANSER:
+      return <FormattedMessage id="TilkjentYtelse.PeriodeData.Frilans" />;
+    case AktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE:
+      return <FormattedMessage id="TilkjentYtelse.PeriodeData.SelvstendigNaeringsdrivende" />;
+    case AktivitetStatus.DAGPENGER:
+      return <FormattedMessage id="TilkjentYtelse.PeriodeData.Dagpenger" />;
+    case AktivitetStatus.ARBEIDSAVKLARINGSPENGER:
+      return <FormattedMessage id="TilkjentYtelse.PeriodeData.AAP" />;
+    case AktivitetStatus.MILITAER_ELLER_SIVIL:
+      return <FormattedMessage id="TilkjentYtelse.PeriodeData.Militaer" />;
+    case AktivitetStatus.BRUKERS_ANDEL:
+      return <FormattedMessage id="TilkjentYtelse.PeriodeData.BrukersAndel" />;
+
+    default:
+      return '';
+  }
+};
+
+const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | null => {
+  if (andel === undefined) {
+    return null;
+  }
+  const stringId =
+    andel.uttak && andel.uttak.gradering === true ? 'TilkjentYtelse.PeriodeData.Ja' : 'TilkjentYtelse.PeriodeData.Nei';
+  return <FormattedMessage id={stringId} />;
 };

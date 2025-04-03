@@ -36,6 +36,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
   ({
     journalpostId: '986547336994',
     tittel: 'Inntektsmelding',
+    kanOppretteSak: true,
     eksisterendeSaksnummer: erEndeligJournalført(tilstand) ? '125416597' : undefined,
     tilstand,
     journalførendeEnhet: erEndeligJournalført(tilstand) ? '4867' : undefined,

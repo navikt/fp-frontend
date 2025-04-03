@@ -51,7 +51,7 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
           personoversikt={personoversikt}
           beregningresultat={beregningsresultatDagytelse}
           familiehendelse={familiehendelse}
-          soknad={søknad}
+          søknad={søknad}
           feriepengegrunnlag={feriepengegrunnlag}
         />
       ) : (
