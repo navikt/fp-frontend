@@ -36,11 +36,15 @@ export const InntektsmeldingInnhold = ({
           <FormattedMessage id="InntektsmeldingFaktaPanel.innsendingstidspunkt" />{' '}
           <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
         </Heading>
-        <LastNedPdfKnapp fagsak={fagsak} inntektsmelding={inntektsmelding} />
+        <LastNedPdfKnapp
+          fagsak={fagsak}
+          inntektsmelding={inntektsmelding}
+          arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]}
+        />
       </HStack>
       <HGrid columns={3} gap="8">
         <Arbeidsgiver
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]}
           arbeidsgiverIdent={inntektsmelding.arbeidsgiverIdent}
         />
 
