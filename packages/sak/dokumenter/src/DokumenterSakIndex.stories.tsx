@@ -1,4 +1,3 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import type { DecoratorFunction } from '@storybook/types';
 
@@ -27,7 +26,7 @@ const meta = {
   component: DokumenterSakIndex,
   decorators: [withStyleProvider],
   args: {
-    selectDocumentCallback: action('button-click'),
+    saksnummer: '2',
     behandlingUuid: '1',
   },
 } satisfies Meta<typeof DokumenterSakIndex>;

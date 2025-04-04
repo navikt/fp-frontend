@@ -8,9 +8,14 @@ export const åpneDokument = (
 ): void => {
   const url = hentDokumentLenke(saksnummer, journalpostId, dokumentId);
   const target = `${journalpostId}-${dokumentId}`;
+  if (dokumentTittel) {
+    åpneVindu(url, target, dokumentTittel);
+  }
+};
 
+export const åpneVindu = (url: string, target: string, dokumentTittel: string): void => {
   const dokumentVindu = window.open(url, target);
-  if (dokumentTittel && dokumentVindu) {
+  if (dokumentVindu) {
     setTimeout(() => {
       dokumentVindu.document.title = dokumentTittel;
     }, 1000);

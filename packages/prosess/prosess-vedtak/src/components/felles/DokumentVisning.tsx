@@ -3,9 +3,10 @@ import { useIntl } from 'react-intl';
 import { FileIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack } from '@navikt/ds-react';
 
-import { DokumentLink } from '@navikt/fp-felles';
 import type { OppgaveDokument } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
+
+import { DokumentLink } from '../../../../../ui-komponenter';
 
 interface Props {
   dokument: OppgaveDokument;

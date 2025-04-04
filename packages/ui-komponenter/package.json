@@ -1,5 +1,5 @@
 {
-  "name": "@navikt/fp-felles",
+  "name": "@navikt/fp-ui-komponenter",
   "license": "MIT",
   "private": true,
   "type": "module",

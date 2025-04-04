@@ -1,8 +1,9 @@
 import { FileIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack } from '@navikt/ds-react';
 
-import { DokumentLink } from '@navikt/fp-felles';
 import type { HistorikkInnslagDokumentLink } from '@navikt/fp-types';
+
+import { DokumentLink } from '../../../../../ui-komponenter';
 
 interface Props {
   dokumentLenke: HistorikkInnslagDokumentLink;

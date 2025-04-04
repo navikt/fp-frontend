@@ -2413,13 +2413,13 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
-    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.9
     "@navikt/ft-form-validators": 3.1.11
@@ -3048,20 +3048,6 @@ __metadata:
     typescript: 5.8.2
     vite: 6.2.4
     vitest: 3.0.9
-  languageName: unknown
-  linkType: soft
-
-"@navikt/fp-felles@workspace:*, @navikt/fp-felles@workspace:packages/felles":
-  version: 0.0.0-use.local
-  resolution: "@navikt/fp-felles@workspace:packages/felles"
-  dependencies:
-    "@navikt/ds-react": 7.18.0
-    "@navikt/fp-types": "workspace:^"
-    "@navikt/fp-utils": "workspace:^"
-    eslint: 9.23.0
-    react: 19.1.0
-    typescript: 5.8.2
-    vite: 6.2.4
   languageName: unknown
   linkType: soft
 
@@ -3720,13 +3706,13 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
-    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.9
     "@navikt/ft-form-validators": 3.1.11
@@ -3982,13 +3968,13 @@ __metadata:
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
-    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.9
     "@navikt/ft-form-validators": 3.1.11
@@ -4055,13 +4041,13 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
-    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.9
     "@navikt/ft-form-validators": 3.1.11
@@ -4510,9 +4496,9 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
-    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/ft-ui-komponenter": 4.0.0
     "@navikt/ft-utils": 3.3.1
     "@storybook/addon-actions": 8.6.11
@@ -4567,11 +4553,11 @@ __metadata:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
-    "@navikt/fp-felles": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-hooks": 2.1.6
     "@navikt/ft-utils": 3.3.1
@@ -5078,6 +5064,20 @@ __metadata:
   resolution: "@navikt/fp-types@workspace:packages/types"
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
+    typescript: 5.8.2
+    vite: 6.2.4
+  languageName: unknown
+  linkType: soft
+
+"@navikt/fp-ui-komponenter@workspace:*, @navikt/fp-ui-komponenter@workspace:packages/ui-komponenter":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-ui-komponenter@workspace:packages/ui-komponenter"
+  dependencies:
+    "@navikt/ds-react": 7.18.0
+    "@navikt/fp-types": "workspace:^"
+    "@navikt/fp-utils": "workspace:^"
+    eslint: 9.23.0
+    react: 19.1.0
     typescript: 5.8.2
     vite: 6.2.4
   languageName: unknown

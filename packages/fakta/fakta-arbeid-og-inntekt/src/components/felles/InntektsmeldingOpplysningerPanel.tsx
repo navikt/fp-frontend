@@ -5,9 +5,10 @@ import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
-import { DokumentLink } from '@navikt/fp-felles';
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+
+import { DokumentLink } from '../../../../../ui-komponenter';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 

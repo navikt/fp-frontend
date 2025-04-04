@@ -10,10 +10,11 @@ import {
 import { BodyShort, Button, Checkbox, type SortState, Table } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import { DokumentLink } from '@navikt/fp-felles';
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import type { Dokument } from '@navikt/fp-types';
 import { åpneDokument } from '@navikt/fp-utils';
+
+import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './documentList.module.css';
 

@@ -4,8 +4,9 @@ import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
-import { DokumentLink } from '@navikt/fp-felles';
 import type { Inntektsmelding } from '@navikt/fp-types';
+
+import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 

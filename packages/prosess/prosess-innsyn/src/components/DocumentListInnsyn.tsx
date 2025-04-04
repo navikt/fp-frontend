@@ -6,9 +6,10 @@ import { BodyShort, Heading, Table } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import { DokumentLink } from '@navikt/fp-felles';
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import type { Dokument } from '@navikt/fp-types';
+
+import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './documentListInnsyn.module.css';
 

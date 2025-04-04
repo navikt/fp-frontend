@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from '@navikt/ds-react';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
+import { åpneVindu } from '@navikt/fp-utils';
 
 export const DokumentLink = ({
   saksnummer,
@@ -31,11 +32,6 @@ const openDocumentFromLink =
   (dokumentTittel?: string) =>
   (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
     if (dokumentTittel) {
-      const dokumentVindu = window.open(event.currentTarget.href, event.currentTarget.target);
-      if (dokumentVindu) {
-        setTimeout(() => {
-          dokumentVindu.document.title = dokumentTittel;
-        }, 1000);
-      }
+      åpneVindu(event.currentTarget.href, event.currentTarget.target, dokumentTittel);
     }
   };

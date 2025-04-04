@@ -2,8 +2,9 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, Table } from '@navikt/ds-react';
 
-import { DokumentLink } from '@navikt/fp-felles';
 import type { Dokument } from '@navikt/fp-types';
+
+import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './documentListVedtakInnsyn.module.css';
 
