@@ -5,7 +5,8 @@ import userEvent from '@testing-library/user-event';
 import { Sakstype } from '../../kodeverk/sakstype';
 import * as stories from './JournalpostDetaljer.stories';
 
-const { VisOppgaveForSubmitReservertAvMeg, VisFlyttTilGosysOmKildeGosys, VisJournalpostKlage  } = composeStories(stories);
+const { VisOppgaveForSubmitReservertAvMeg, VisFlyttTilGosysOmKildeGosys, VisJournalpostKlage } =
+  composeStories(stories);
 
 describe('JournalpostDetaljer', () => {
   it('skal kunne journalføre på eksisterende sak', async () => {

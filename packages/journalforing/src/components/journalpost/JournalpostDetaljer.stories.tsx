@@ -120,7 +120,7 @@ const journalpostKlage = {
       ytelseType: FagsakYtelseType.FORELDREPENGER,
       opprettetDato: '2022-01-02',
       status: FagsakStatus.LOPENDE,
-    }
+    },
   ],
 } as Journalpost;
 
