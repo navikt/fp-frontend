@@ -26,10 +26,12 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) 
 
   const { behandling } = use(BehandlingDataContext);
 
+  const skalPanelVisesIMeny = AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt));
+
   const api = useBehandlingApi(behandling);
 
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: inntektArbeidYtelse } = useQuery(api.inntektArbeidYtelseOptions(behandling));
 
   return (
@@ -37,7 +39,7 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) 
       standardPanelProps={standardPanelProps}
       faktaPanelKode={FaktaPanelCode.OMSORGSVILKARET}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgForeldreansvar' })}
-      skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {søknad && familiehendelse && inntektArbeidYtelse ? (
         <OmsorgOgForeldreansvarFaktaIndex

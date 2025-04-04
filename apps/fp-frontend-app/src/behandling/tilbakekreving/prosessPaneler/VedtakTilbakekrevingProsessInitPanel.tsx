@@ -91,7 +91,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
         prosessPanelKode={ProsessStegCode.VEDTAK}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
         skalPanelVisesIMeny
-        hentOverstyrtStatus={getVedtakStatus(behandling.behandlingsresultat)}
+        overstyrtStatus={getVedtakStatus(behandling.behandlingsresultat)}
       >
         {beregningsresultat && vedtaksbrev ? (
           <Wrapper
@@ -99,8 +99,8 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
             vedtaksbrev={vedtaksbrev}
             kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
             fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
-            erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage || false}
-            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt || false}
+            erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage ?? false}
+            erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt ?? false}
             {...standardPanelProps}
           />
         ) : (

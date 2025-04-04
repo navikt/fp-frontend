@@ -29,9 +29,7 @@ export const AnkeBehandlingProsessStegInitPanel = () => {
       prosessPanelKode={ProsessStegCode.ANKEBEHANDLING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Ankebehandling' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={
-        behandling.behandlingsresultat?.type ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
-      }
+      overstyrtStatus={behandling.behandlingsresultat?.type ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT}
     >
       {ankeVurdering ? (
         <AnkeProsessIndex

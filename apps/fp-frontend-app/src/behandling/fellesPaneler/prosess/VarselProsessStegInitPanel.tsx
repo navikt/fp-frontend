@@ -51,9 +51,11 @@ export const VarselProsessStegInitPanel = () => {
   });
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
+  const skalPanelVisesIMeny = skalViseProsessPanel(standardPanelProps.aksjonspunkter);
+
   const api = useBehandlingApi(behandling);
 
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
   const { data: familiehendelseOrigninalBehandling } = useQuery(
     api.familiehendelseOrigninalBehandlingOptions(behandling),
@@ -75,7 +77,7 @@ export const VarselProsessStegInitPanel = () => {
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.VARSEL}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.CheckVarselRevurdering' })}
-      skalPanelVisesIMeny={skalViseProsessPanel(standardPanelProps.aksjonspunkter)}
+      skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {familiehendelse && søknad && familiehendelseOrigninalBehandling && søknadOriginalBehandling ? (
         <VarselOmRevurderingProsessIndex

@@ -55,7 +55,7 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
       prosessPanelKode={ProsessStegCode.SIMULERING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
       skalPanelVisesIMeny={harLenke(behandling, 'SIMULERING_RESULTAT') || !harVedtakspanel}
-      hentOverstyrtStatus={
+      overstyrtStatus={
         harLenke(behandling, 'SIMULERING_RESULTAT') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >
