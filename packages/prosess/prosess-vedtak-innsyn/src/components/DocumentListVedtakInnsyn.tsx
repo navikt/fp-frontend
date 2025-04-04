@@ -2,8 +2,9 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, Table } from '@navikt/ds-react';
 
-import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import type { Dokument } from '@navikt/fp-types';
+
+import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './documentListVedtakInnsyn.module.css';
 
@@ -48,14 +49,12 @@ export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
             return (
               <Table.Row key={dokId}>
                 <Table.DataCell className={styles.linkCol}>
-                  <a
-                    href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
-                    className="lenke lenke--frittstaende"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {document.tittel}
-                  </a>
+                  <DokumentLink
+                    saksnummer={saksNr}
+                    journalpostId={document.journalpostId}
+                    dokumentId={document.dokumentId}
+                    dokumentTittel={document.tittel}
+                  />
                 </Table.DataCell>
               </Table.Row>
             );

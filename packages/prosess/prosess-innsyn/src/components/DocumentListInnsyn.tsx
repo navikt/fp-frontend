@@ -7,8 +7,9 @@ import { CheckboxField } from '@navikt/ft-form-hooks';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
-import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import type { Dokument } from '@navikt/fp-types';
+
+import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './documentListInnsyn.module.css';
 
@@ -102,14 +103,12 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
                 </Table.DataCell>
                 <Table.DataCell hidden={readOnly}>{img}</Table.DataCell>
                 <Table.DataCell className={styles.linkCol}>
-                  <a
-                    href={hentDokumentLenke(saksNr, document.journalpostId, document.dokumentId)}
-                    className="lenke lenke--frittstaende"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {document.tittel}
-                  </a>
+                  <DokumentLink
+                    saksnummer={saksNr}
+                    journalpostId={document.journalpostId}
+                    dokumentId={document.dokumentId}
+                    dokumentTittel={document.tittel}
+                  />
                 </Table.DataCell>
                 <Table.DataCell hidden={readOnly}>
                   {document.tidspunkt ? (

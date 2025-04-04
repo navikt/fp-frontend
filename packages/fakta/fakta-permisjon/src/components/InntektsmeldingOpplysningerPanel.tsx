@@ -1,11 +1,12 @@
 import { FormattedMessage } from 'react-intl';
 
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, HStack, Label, Link, VStack } from '@navikt/ds-react';
+import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
-import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import type { Inntektsmelding } from '@navikt/fp-types';
+
+import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
@@ -44,17 +45,18 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
       </HStack>
     )}
-    <Link
-      href={hentDokumentLenke(saksnummer, inntektsmelding.journalpostId, inntektsmelding.dokumentId)}
-      target="_blank"
+    <DokumentLink
+      saksnummer={saksnummer}
+      journalpostId={inntektsmelding.journalpostId}
+      dokumentId={inntektsmelding.dokumentId}
     >
-      <span>
+      <HStack gap="1">
         <BodyShort size="small" className={styles.inline}>
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
         </BodyShort>
-      </span>
-      <FileFillIcon className={styles.docIcon} />
-    </Link>
+        <FileFillIcon className={styles.docIcon} />
+      </HStack>
+    </DokumentLink>
     <HStack gap="4" align="center">
       <PhoneFillIcon className={styles.phoneIcon} />
       <VStack gap="1">

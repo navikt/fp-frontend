@@ -1,4 +1,3 @@
-import React from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -13,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   documents: Dokument[];
-  selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void;
+  saksnummer: string;
   behandlingUuid?: string;
 }
 

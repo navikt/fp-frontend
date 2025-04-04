@@ -1,11 +1,12 @@
 import { useIntl } from 'react-intl';
 
 import { FileIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Link } from '@navikt/ds-react';
+import { BodyShort, HStack } from '@navikt/ds-react';
 
-import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import type { OppgaveDokument } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
+
+import { DokumentLink } from '../../../../../ui-komponenter';
 
 interface Props {
   dokument: OppgaveDokument;
@@ -14,15 +15,18 @@ interface Props {
 export const DokumentVisning = ({ dokument }: Props) => {
   const { fagsak } = usePanelDataContext();
   const intl = useIntl();
-
+  const tittel = dokument.tittel ?? intl.formatMessage({ id: 'DokumentVisning.UkjentTittel' });
   return (
-    <Link href={hentDokumentLenke(fagsak.saksnummer, dokument.journalpostId, dokument.dokumentId)} target="_blank">
+    <DokumentLink
+      saksnummer={fagsak.saksnummer}
+      journalpostId={dokument.journalpostId}
+      dokumentId={dokument.dokumentId}
+      dokumentTittel={tittel}
+    >
       <HStack gap="1">
         <FileIcon width="20" height="20" aria-label={intl.formatMessage({ id: 'DokumentVisning.FilIkon' })} />
-        <BodyShort size="small">
-          {dokument.tittel ? dokument.tittel : intl.formatMessage({ id: 'DokumentVisning.UkjentTittel' })}
-        </BodyShort>
+        <BodyShort size="small">{tittel}</BodyShort>
       </HStack>
-    </Link>
+    </DokumentLink>
   );
 };

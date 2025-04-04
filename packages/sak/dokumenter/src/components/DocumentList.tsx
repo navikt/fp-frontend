@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import {
@@ -7,18 +7,21 @@ import {
   NotePencilFillIcon,
   StarFillIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Button, Checkbox, Link, type SortState, Table } from '@navikt/ds-react';
+import { BodyShort, Button, Checkbox, type SortState, Table } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import type { Dokument } from '@navikt/fp-types';
+import { åpneDokument } from '@navikt/fp-utils';
+
+import { DokumentLink } from '../../../../ui-komponenter';
 
 import styles from './documentList.module.css';
 
 interface Props {
   documents: Dokument[];
   behandlingUuid?: string;
-  selectDocumentCallback: (e: React.SyntheticEvent, id?: number | string, dokument?: Dokument) => void;
+  saksnummer: string;
 }
 
 type TableHeaders = 'kommunikasjonsretning' | 'tittel' | 'gjelderFor' | 'tidspunkt';
@@ -71,7 +74,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
  * trigget når saksbehandler velger et dokument. Finnes ingen dokumenter blir det kun vist en label
  * som viser at ingen dokumenter finnes på fagsak.
  */
-export const DocumentList = ({ documents, behandlingUuid, selectDocumentCallback }: Props) => {
+export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) => {
   const intl = useIntl();
 
   // Logikk for å toggle checkboxes tilpasset fra Aksel-eksempel: https://aksel.nav.no/komponenter/core/table#tabledemo-selectable
@@ -130,14 +133,14 @@ export const DocumentList = ({ documents, behandlingUuid, selectDocumentCallback
     <>
       {valgteDokumentIder.length > 0 && (
         <Button
-          onClick={event =>
-            valgteDokumentIder.forEach(dokumentId =>
-              selectDocumentCallback(
-                event,
-                dokumentId,
-                documents.find(document => document.dokumentId === dokumentId),
-              ),
-            )
+          onClick={() =>
+            documents
+              .filter(d => valgteDokumentIder.includes(d.dokumentId))
+              .forEach(dokument => {
+                if (dokument) {
+                  åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel);
+                }
+              })
           }
           className={styles.openDocumentButton}
           size="small"
@@ -199,14 +202,12 @@ export const DocumentList = ({ documents, behandlingUuid, selectDocumentCallback
                   document.behandlingUuidList.includes(behandlingUuid) && (
                     <StarFillIcon className={styles.image} title={intl.formatMessage({ id: 'DocumentList.IBruk' })} />
                   )}
-                {/* Ideelt sett hadde vi brukt en lenke som direkte åpnet dokumentet i ny fane.
-                Men fordi denne komponent kun har ansvar for å gi callback på ønsket dokument så må det brukes onClick */}
-                <Link
-                  className={styles.dokumentlenke}
-                  onClick={event => selectDocumentCallback(event, document.dokumentId, document)}
-                >
-                  {document.tittel}
-                </Link>
+                <DokumentLink
+                  saksnummer={saksnummer}
+                  journalpostId={document.journalpostId}
+                  dokumentId={document.dokumentId}
+                  dokumentTittel={document.tittel}
+                />
               </Table.DataCell>
               <Table.DataCell>{document.gjelderFor}</Table.DataCell>
               <Table.DataCell>
