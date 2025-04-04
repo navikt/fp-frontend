@@ -47,10 +47,14 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
 
   const { rettigheter, behandling } = use(BehandlingDataContext);
 
+  const overstyrtStatus = getStatusFromUttakresultat(behandling);
+
+  const skalHenteData = standardPanelProps.isAksjonspunktOpen || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
+
   const api = useBehandlingApi(behandling);
 
   const { data: uttaksresultat } = useQuery(api.uttaksresultatPerioderOptions(behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
   const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(behandling));
 
@@ -64,7 +68,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
       prosessPanelKode={ProsessStegCode.UTTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Uttak' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={getStatusFromUttakresultat(behandling)}
+      overstyrtStatus={overstyrtStatus}
     >
       {uttaksresultat && familiehendelse && søknad && uttakStønadskontoer ? (
         <UttakProsessIndex

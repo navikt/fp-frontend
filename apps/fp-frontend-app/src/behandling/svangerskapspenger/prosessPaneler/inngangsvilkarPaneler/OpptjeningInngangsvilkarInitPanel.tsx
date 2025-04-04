@@ -25,12 +25,13 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
   const { behandling } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
+  const harIngenAksjonspunkt = standardPanelProps.aksjonspunkter.length === 0;
 
   const api = useBehandlingApi(behandling);
 
-  const { data: opptjening } = useQuery(api.opptjeningOptions(behandling));
+  const { data: opptjening } = useQuery(api.opptjeningOptions(behandling, !harIngenAksjonspunkt));
 
-  return standardPanelProps.aksjonspunkter.length === 0 ? (
+  return harIngenAksjonspunkt ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
       vilkarKoder={VILKAR_KODER}

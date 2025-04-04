@@ -28,10 +28,16 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
 
   const api = useBehandlingApi(behandling);
 
+  const overstyrtStatus = behandling.links.find(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
+    ? VilkarUtfallType.OPPFYLT
+    : VilkarUtfallType.IKKE_VURDERT;
+
+  const skalHenteData = standardPanelProps.isAksjonspunktOpen || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
+
   const { data: beregningsresultatDagytelse } = useQuery(api.beregningsresultatDagytelseOptions(behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling));
+  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: feriepengegrunnlag } = useQuery(api.feriepengegrunnlagOptions(behandling));
+  const { data: feriepengegrunnlag } = useQuery(api.feriepengegrunnlagOptions(behandling, skalHenteData));
 
   return (
     <ProsessDefaultInitPanel
@@ -39,11 +45,7 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
       prosessPanelKode={ProsessStegCode.TILKJENT_YTELSE}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.TilkjentYtelse' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={
-        behandling.links.find(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
-          ? VilkarUtfallType.OPPFYLT
-          : VilkarUtfallType.IKKE_VURDERT
-      }
+      overstyrtStatus={overstyrtStatus}
     >
       {beregningsresultatDagytelse && familiehendelse && søknad ? (
         <TilkjentYtelseProsessIndex

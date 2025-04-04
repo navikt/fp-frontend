@@ -52,8 +52,8 @@ export const InnsynVedtakProsessStegInitPanel = () => {
       prosessPanelKode={ProsessStegCode.VEDTAK}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny
-      hentOverstyrtStatus={getVedtakStatus(behandling)}
-      hentSkalMarkeresSomAktiv={getVedtakStatus(behandling) !== VilkarUtfallType.IKKE_VURDERT}
+      overstyrtStatus={getVedtakStatus(behandling)}
+      skalMarkeresSomAktiv={getVedtakStatus(behandling) !== VilkarUtfallType.IKKE_VURDERT}
     >
       <>
         <IverksetterVedtakStatusModal

@@ -68,8 +68,8 @@ export const KlageresultatProsessStegInitPanel = () => {
         prosessPanelKode={ProsessStegCode.KLAGE_RESULTAT}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
         standardPanelProps={standardPanelProps}
-        hentOverstyrtStatus={vedtakStatus}
-        hentSkalMarkeresSomAktiv={vedtakStatus !== VilkarUtfallType.IKKE_VURDERT}
+        overstyrtStatus={vedtakStatus}
+        skalMarkeresSomAktiv={vedtakStatus !== VilkarUtfallType.IKKE_VURDERT}
       >
         {klageVurdering ? (
           <VedtakKlageProsessIndex klageVurdering={klageVurdering} previewVedtakCallback={forhåndsvis} />
