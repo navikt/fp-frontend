@@ -56,8 +56,7 @@ const lagModifisertCallback =
 const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
-    // @ts-expect-error Fiks BeregningsgrunnlagProsessIndex så den kan håndtera null
-    return null;
+    throw new Error('Vilkar eller beregningsgrunnlag er ikke oppgitt');
   }
   return {
     ...bgVilkar,
