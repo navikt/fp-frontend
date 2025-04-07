@@ -1,6 +1,5 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
@@ -28,7 +27,7 @@ export const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding
     (a, b) => new Date(a.fom).getTime() - new Date(b.fom).getTime(),
   );
   return (
-    <VStack gap="0">
+    <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}>
       <span>Krever refusjon</span>
       <span>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd ?? 0)}</span>
       <span>Endringer i perioden:</span>
@@ -47,6 +46,6 @@ export const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding
           );
         })}
       </ul>
-    </VStack>
+    </InntektsmeldingInfoBlokk>
   );
 };
