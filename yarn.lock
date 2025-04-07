@@ -2367,9 +2367,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/fp-fakta-adopsjon@workspace:*, @navikt/fp-fakta-adopsjon@workspace:packages/fakta/fakta-adopsjon":
+"@navikt/fp-fakta-adopsjon@workspace:*, @navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta/fakta-adopsjon"
+  resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon"
   dependencies:
     "@formatjs/cli-lib": 6.6.6
     "@navikt/aksel-icons": 7.18.0
@@ -2406,9 +2406,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-arbeid-og-inntekt@workspace:*, @navikt/fp-fakta-arbeid-og-inntekt@workspace:packages/fakta/fakta-arbeid-og-inntekt":
+"@navikt/fp-fakta-arbeid-og-inntekt@workspace:*, @navikt/fp-fakta-arbeid-og-inntekt@workspace:packages/fakta/arbeid-og-inntekt":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-arbeid-og-inntekt@workspace:packages/fakta/fakta-arbeid-og-inntekt"
+  resolution: "@navikt/fp-fakta-arbeid-og-inntekt@workspace:packages/fakta/arbeid-og-inntekt"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2446,9 +2446,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-arbeidsforhold@workspace:*, @navikt/fp-fakta-arbeidsforhold@workspace:packages/fakta/fakta-arbeidsforhold":
+"@navikt/fp-fakta-arbeidsforhold@workspace:*, @navikt/fp-fakta-arbeidsforhold@workspace:packages/fakta/arbeidsforhold":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-arbeidsforhold@workspace:packages/fakta/fakta-arbeidsforhold"
+  resolution: "@navikt/fp-fakta-arbeidsforhold@workspace:packages/fakta/arbeidsforhold"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2480,9 +2480,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-besteberegning@workspace:*, @navikt/fp-fakta-besteberegning@workspace:packages/fakta/fakta-besteberegning":
+"@navikt/fp-fakta-besteberegning@workspace:*, @navikt/fp-fakta-besteberegning@workspace:packages/fakta/besteberegning":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-besteberegning@workspace:packages/fakta/fakta-besteberegning"
+  resolution: "@navikt/fp-fakta-besteberegning@workspace:packages/fakta/besteberegning"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -2516,9 +2516,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-felles@workspace:*, @navikt/fp-fakta-felles@workspace:packages/fakta/fakta-felles":
+"@navikt/fp-fakta-felles@workspace:*, @navikt/fp-fakta-felles@workspace:packages/fakta/felles":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-felles@workspace:packages/fakta/fakta-felles"
+  resolution: "@navikt/fp-fakta-felles@workspace:packages/fakta/felles"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -2545,9 +2545,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-fodsel@workspace:*, @navikt/fp-fakta-fodsel@workspace:packages/fakta/fakta-fodsel":
+"@navikt/fp-fakta-fodsel@workspace:*, @navikt/fp-fakta-fodsel@workspace:packages/fakta/fodsel":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-fodsel@workspace:packages/fakta/fakta-fodsel"
+  resolution: "@navikt/fp-fakta-fodsel@workspace:packages/fakta/fodsel"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -2582,9 +2582,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-inntektsmelding@workspace:*, @navikt/fp-fakta-inntektsmelding@workspace:packages/fakta/fakta-inntektsmelding":
+"@navikt/fp-fakta-inntektsmelding@workspace:*, @navikt/fp-fakta-inntektsmelding@workspace:packages/fakta/inntektsmelding":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-inntektsmelding@workspace:packages/fakta/fakta-inntektsmelding"
+  resolution: "@navikt/fp-fakta-inntektsmelding@workspace:packages/fakta/inntektsmelding"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2614,9 +2614,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-medlemskap@workspace:*, @navikt/fp-fakta-medlemskap@workspace:packages/fakta/fakta-medlemskap":
+"@navikt/fp-fakta-medlemskap@workspace:*, @navikt/fp-fakta-medlemskap@workspace:packages/fakta/medlemskap":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-medlemskap@workspace:packages/fakta/fakta-medlemskap"
+  resolution: "@navikt/fp-fakta-medlemskap@workspace:packages/fakta/medlemskap"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2650,9 +2650,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:*, @navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/fakta-omsorg-og-foreldreansvar":
+"@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:*, @navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/fakta-omsorg-og-foreldreansvar"
+  resolution: "@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -2685,9 +2685,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-omsorg-og-rett@workspace:*, @navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta/fakta-omsorg-og-rett":
+"@navikt/fp-fakta-omsorg-og-rett@workspace:*, @navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta/omsorg-og-rett":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta/fakta-omsorg-og-rett"
+  resolution: "@navikt/fp-fakta-omsorg-og-rett@workspace:packages/fakta/omsorg-og-rett"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2723,9 +2723,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-omsorg@workspace:*, @navikt/fp-fakta-omsorg@workspace:packages/fakta/fakta-omsorg":
+"@navikt/fp-fakta-omsorg@workspace:*, @navikt/fp-fakta-omsorg@workspace:packages/fakta/omsorg":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-omsorg@workspace:packages/fakta/fakta-omsorg"
+  resolution: "@navikt/fp-fakta-omsorg@workspace:packages/fakta/omsorg"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2761,9 +2761,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-opptjening@workspace:*, @navikt/fp-fakta-opptjening@workspace:packages/fakta/fakta-opptjening":
+"@navikt/fp-fakta-opptjening@workspace:*, @navikt/fp-fakta-opptjening@workspace:packages/fakta/opptjening":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-opptjening@workspace:packages/fakta/fakta-opptjening"
+  resolution: "@navikt/fp-fakta-opptjening@workspace:packages/fakta/opptjening"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2798,9 +2798,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-permisjon@workspace:*, @navikt/fp-fakta-permisjon@workspace:packages/fakta/fakta-permisjon":
+"@navikt/fp-fakta-permisjon@workspace:*, @navikt/fp-fakta-permisjon@workspace:packages/fakta/permisjon":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-permisjon@workspace:packages/fakta/fakta-permisjon"
+  resolution: "@navikt/fp-fakta-permisjon@workspace:packages/fakta/permisjon"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2836,9 +2836,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-saken@workspace:*, @navikt/fp-fakta-saken@workspace:packages/fakta/fakta-saken":
+"@navikt/fp-fakta-saken@workspace:*, @navikt/fp-fakta-saken@workspace:packages/fakta/saken":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-saken@workspace:packages/fakta/fakta-saken"
+  resolution: "@navikt/fp-fakta-saken@workspace:packages/fakta/saken"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2873,9 +2873,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-tilrettelegging@workspace:*, @navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/fakta-tilrettelegging":
+"@navikt/fp-fakta-tilrettelegging@workspace:*, @navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/tilrettelegging":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/fakta-tilrettelegging"
+  resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/tilrettelegging"
   dependencies:
     "@formatjs/cli-lib": 6.6.6
     "@navikt/aksel-icons": 7.18.0
@@ -2913,9 +2913,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-uttak@workspace:*, @navikt/fp-fakta-uttak@workspace:packages/fakta/fakta-uttak":
+"@navikt/fp-fakta-uttak@workspace:*, @navikt/fp-fakta-uttak@workspace:packages/fakta/uttak":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-uttak@workspace:packages/fakta/fakta-uttak"
+  resolution: "@navikt/fp-fakta-uttak@workspace:packages/fakta/uttak"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2951,9 +2951,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-uttaksdokumentasjon@workspace:*, @navikt/fp-fakta-uttaksdokumentasjon@workspace:packages/fakta/fakta-uttaksdokumentasjon":
+"@navikt/fp-fakta-uttaksdokumentasjon@workspace:*, @navikt/fp-fakta-uttaksdokumentasjon@workspace:packages/fakta/uttaksdokumentasjon":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-uttaksdokumentasjon@workspace:packages/fakta/fakta-uttaksdokumentasjon"
+  resolution: "@navikt/fp-fakta-uttaksdokumentasjon@workspace:packages/fakta/uttaksdokumentasjon"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -2989,9 +2989,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-verge@workspace:*, @navikt/fp-fakta-verge@workspace:packages/fakta/fakta-verge":
+"@navikt/fp-fakta-verge@workspace:*, @navikt/fp-fakta-verge@workspace:packages/fakta/verge":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-verge@workspace:packages/fakta/fakta-verge"
+  resolution: "@navikt/fp-fakta-verge@workspace:packages/fakta/verge"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/fp-fakta-felles": "workspace:*"
@@ -3022,9 +3022,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-ytelser@workspace:*, @navikt/fp-fakta-ytelser@workspace:packages/fakta/fakta-ytelser":
+"@navikt/fp-fakta-ytelser@workspace:*, @navikt/fp-fakta-ytelser@workspace:packages/fakta/ytelser":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-fakta-ytelser@workspace:packages/fakta/fakta-ytelser"
+  resolution: "@navikt/fp-fakta-ytelser@workspace:packages/fakta/ytelser"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3485,9 +3485,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-anke-resultat@workspace:*, @navikt/fp-prosess-anke-resultat@workspace:packages/prosess/prosess-anke-resultat":
+"@navikt/fp-prosess-anke-resultat@workspace:*, @navikt/fp-prosess-anke-resultat@workspace:packages/prosess/anke-resultat":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-anke-resultat@workspace:packages/prosess/prosess-anke-resultat"
+  resolution: "@navikt/fp-prosess-anke-resultat@workspace:packages/prosess/anke-resultat"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3515,9 +3515,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-anke-trygderettsbehandling@workspace:*, @navikt/fp-prosess-anke-trygderettsbehandling@workspace:packages/prosess/prosess-anke-trygderettsbehandling":
+"@navikt/fp-prosess-anke-trygderettsbehandling@workspace:*, @navikt/fp-prosess-anke-trygderettsbehandling@workspace:packages/prosess/anke-trygderettsbehandling":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-anke-trygderettsbehandling@workspace:packages/prosess/prosess-anke-trygderettsbehandling"
+  resolution: "@navikt/fp-prosess-anke-trygderettsbehandling@workspace:packages/prosess/anke-trygderettsbehandling"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3545,9 +3545,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-anke@workspace:*, @navikt/fp-prosess-anke@workspace:packages/prosess/prosess-anke":
+"@navikt/fp-prosess-anke@workspace:*, @navikt/fp-prosess-anke@workspace:packages/prosess/anke":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-anke@workspace:packages/prosess/prosess-anke"
+  resolution: "@navikt/fp-prosess-anke@workspace:packages/prosess/anke"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3576,9 +3576,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-beregningsresultat@workspace:*, @navikt/fp-prosess-beregningsresultat@workspace:packages/prosess/prosess-beregningsresultat":
+"@navikt/fp-prosess-beregningsresultat@workspace:*, @navikt/fp-prosess-beregningsresultat@workspace:packages/prosess/beregningsresultat":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-beregningsresultat@workspace:packages/prosess/prosess-beregningsresultat"
+  resolution: "@navikt/fp-prosess-beregningsresultat@workspace:packages/prosess/beregningsresultat"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3634,9 +3634,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-felles@workspace:*, @navikt/fp-prosess-felles@workspace:packages/prosess/prosess-felles":
+"@navikt/fp-prosess-felles@workspace:*, @navikt/fp-prosess-felles@workspace:packages/prosess/felles":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-felles@workspace:packages/prosess/prosess-felles"
+  resolution: "@navikt/fp-prosess-felles@workspace:packages/prosess/felles"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -3663,9 +3663,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-formkrav@workspace:*, @navikt/fp-prosess-formkrav@workspace:packages/prosess/prosess-formkrav":
+"@navikt/fp-prosess-formkrav@workspace:*, @navikt/fp-prosess-formkrav@workspace:packages/prosess/formkrav":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-formkrav@workspace:packages/prosess/prosess-formkrav"
+  resolution: "@navikt/fp-prosess-formkrav@workspace:packages/prosess/formkrav"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3699,9 +3699,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-innsyn@workspace:*, @navikt/fp-prosess-innsyn@workspace:packages/prosess/prosess-innsyn":
+"@navikt/fp-prosess-innsyn@workspace:*, @navikt/fp-prosess-innsyn@workspace:packages/prosess/innsyn":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-innsyn@workspace:packages/prosess/prosess-innsyn"
+  resolution: "@navikt/fp-prosess-innsyn@workspace:packages/prosess/innsyn"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -3739,9 +3739,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-klagevurdering@workspace:*, @navikt/fp-prosess-klagevurdering@workspace:packages/prosess/prosess-klagevurdering":
+"@navikt/fp-prosess-klagevurdering@workspace:*, @navikt/fp-prosess-klagevurdering@workspace:packages/prosess/klagevurdering":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-klagevurdering@workspace:packages/prosess/prosess-klagevurdering"
+  resolution: "@navikt/fp-prosess-klagevurdering@workspace:packages/prosess/klagevurdering"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3775,9 +3775,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-simulering@workspace:*, @navikt/fp-prosess-simulering@workspace:packages/prosess/prosess-simulering":
+"@navikt/fp-prosess-simulering@workspace:*, @navikt/fp-prosess-simulering@workspace:packages/prosess/simulering":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-simulering@workspace:packages/prosess/prosess-simulering"
+  resolution: "@navikt/fp-prosess-simulering@workspace:packages/prosess/simulering"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -3812,9 +3812,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-soknadsfrist@workspace:*, @navikt/fp-prosess-soknadsfrist@workspace:packages/prosess/prosess-soknadsfrist":
+"@navikt/fp-prosess-soknadsfrist@workspace:*, @navikt/fp-prosess-soknadsfrist@workspace:packages/prosess/soknadsfrist":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-soknadsfrist@workspace:packages/prosess/prosess-soknadsfrist"
+  resolution: "@navikt/fp-prosess-soknadsfrist@workspace:packages/prosess/soknadsfrist"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3848,9 +3848,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-tilkjent-ytelse@workspace:*, @navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess/prosess-tilkjent-ytelse":
+"@navikt/fp-prosess-tilkjent-ytelse@workspace:*, @navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess/tilkjent-ytelse":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess/prosess-tilkjent-ytelse"
+  resolution: "@navikt/fp-prosess-tilkjent-ytelse@workspace:packages/prosess/tilkjent-ytelse"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -3885,9 +3885,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-uttak@workspace:*, @navikt/fp-prosess-uttak@workspace:packages/prosess/prosess-uttak":
+"@navikt/fp-prosess-uttak@workspace:*, @navikt/fp-prosess-uttak@workspace:packages/prosess/uttak":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-uttak@workspace:packages/prosess/prosess-uttak"
+  resolution: "@navikt/fp-prosess-uttak@workspace:packages/prosess/uttak"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -3923,9 +3923,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-varsel-om-revurdering@workspace:*, @navikt/fp-prosess-varsel-om-revurdering@workspace:packages/prosess/prosess-varsel-om-revurdering":
+"@navikt/fp-prosess-varsel-om-revurdering@workspace:*, @navikt/fp-prosess-varsel-om-revurdering@workspace:packages/prosess/varsel-om-revurdering":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-varsel-om-revurdering@workspace:packages/prosess/prosess-varsel-om-revurdering"
+  resolution: "@navikt/fp-prosess-varsel-om-revurdering@workspace:packages/prosess/varsel-om-revurdering"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3962,9 +3962,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vedtak-innsyn@workspace:*, @navikt/fp-prosess-vedtak-innsyn@workspace:packages/prosess/prosess-vedtak-innsyn":
+"@navikt/fp-prosess-vedtak-innsyn@workspace:*, @navikt/fp-prosess-vedtak-innsyn@workspace:packages/prosess/vedtak-innsyn":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vedtak-innsyn@workspace:packages/prosess/prosess-vedtak-innsyn"
+  resolution: "@navikt/fp-prosess-vedtak-innsyn@workspace:packages/prosess/vedtak-innsyn"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -3999,9 +3999,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vedtak-klage@workspace:*, @navikt/fp-prosess-vedtak-klage@workspace:packages/prosess/prosess-vedtak-klage":
+"@navikt/fp-prosess-vedtak-klage@workspace:*, @navikt/fp-prosess-vedtak-klage@workspace:packages/prosess/vedtak-klage":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vedtak-klage@workspace:packages/prosess/prosess-vedtak-klage"
+  resolution: "@navikt/fp-prosess-vedtak-klage@workspace:packages/prosess/vedtak-klage"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4030,9 +4030,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vedtak@workspace:*, @navikt/fp-prosess-vedtak@workspace:packages/prosess/prosess-vedtak":
+"@navikt/fp-prosess-vedtak@workspace:*, @navikt/fp-prosess-vedtak@workspace:packages/prosess/vedtak":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vedtak@workspace:packages/prosess/prosess-vedtak"
+  resolution: "@navikt/fp-prosess-vedtak@workspace:packages/prosess/vedtak"
   dependencies:
     "@editorjs/editorjs": 2.30.8
     "@editorjs/header": 2.8.8
@@ -4080,9 +4080,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-adopsjon@workspace:*, @navikt/fp-prosess-vilkar-adopsjon@workspace:packages/prosess/prosess-vilkar-adopsjon":
+"@navikt/fp-prosess-vilkar-adopsjon@workspace:*, @navikt/fp-prosess-vilkar-adopsjon@workspace:packages/prosess/vilkar-adopsjon":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-adopsjon@workspace:packages/prosess/prosess-vilkar-adopsjon"
+  resolution: "@navikt/fp-prosess-vilkar-adopsjon@workspace:packages/prosess/vilkar-adopsjon"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4114,9 +4114,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-fodsel@workspace:*, @navikt/fp-prosess-vilkar-fodsel@workspace:packages/prosess/prosess-vilkar-fodsel":
+"@navikt/fp-prosess-vilkar-fodsel@workspace:*, @navikt/fp-prosess-vilkar-fodsel@workspace:packages/prosess/vilkar-fodsel":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-fodsel@workspace:packages/prosess/prosess-vilkar-fodsel"
+  resolution: "@navikt/fp-prosess-vilkar-fodsel@workspace:packages/prosess/vilkar-fodsel"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4148,9 +4148,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-foreldreansvar@workspace:*, @navikt/fp-prosess-vilkar-foreldreansvar@workspace:packages/prosess/prosess-vilkar-foreldreansvar":
+"@navikt/fp-prosess-vilkar-foreldreansvar@workspace:*, @navikt/fp-prosess-vilkar-foreldreansvar@workspace:packages/prosess/vilkar-foreldreansvar":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-foreldreansvar@workspace:packages/prosess/prosess-vilkar-foreldreansvar"
+  resolution: "@navikt/fp-prosess-vilkar-foreldreansvar@workspace:packages/prosess/vilkar-foreldreansvar"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4182,9 +4182,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-omsorg@workspace:*, @navikt/fp-prosess-vilkar-omsorg@workspace:packages/prosess/prosess-vilkar-omsorg":
+"@navikt/fp-prosess-vilkar-omsorg@workspace:*, @navikt/fp-prosess-vilkar-omsorg@workspace:packages/prosess/vilkar-omsorg":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-omsorg@workspace:packages/prosess/prosess-vilkar-omsorg"
+  resolution: "@navikt/fp-prosess-vilkar-omsorg@workspace:packages/prosess/vilkar-omsorg"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4216,9 +4216,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-opptjening@workspace:*, @navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess/prosess-vilkar-opptjening":
+"@navikt/fp-prosess-vilkar-opptjening@workspace:*, @navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess/vilkar-opptjening":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess/prosess-vilkar-opptjening"
+  resolution: "@navikt/fp-prosess-vilkar-opptjening@workspace:packages/prosess/vilkar-opptjening"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4253,9 +4253,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-overstyring@workspace:*, @navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess/prosess-vilkar-overstyring":
+"@navikt/fp-prosess-vilkar-overstyring@workspace:*, @navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess/vilkar-overstyring":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess/prosess-vilkar-overstyring"
+  resolution: "@navikt/fp-prosess-vilkar-overstyring@workspace:packages/prosess/vilkar-overstyring"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -4289,9 +4289,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:*, @navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:packages/prosess/prosess-vilkar-sokers-opplysningsplikt":
+"@navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:*, @navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:packages/prosess/vilkar-sokers-opplysningsplikt":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:packages/prosess/prosess-vilkar-sokers-opplysningsplikt"
+  resolution: "@navikt/fp-prosess-vilkar-sokers-opplysningsplikt@workspace:packages/prosess/vilkar-sokers-opplysningsplikt"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4325,9 +4325,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-soknadsfrist@workspace:*, @navikt/fp-prosess-vilkar-soknadsfrist@workspace:packages/prosess/prosess-vilkar-soknadsfrist":
+"@navikt/fp-prosess-vilkar-soknadsfrist@workspace:*, @navikt/fp-prosess-vilkar-soknadsfrist@workspace:packages/prosess/vilkar-soknadsfrist":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-soknadsfrist@workspace:packages/prosess/prosess-vilkar-soknadsfrist"
+  resolution: "@navikt/fp-prosess-vilkar-soknadsfrist@workspace:packages/prosess/vilkar-soknadsfrist"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
@@ -4361,9 +4361,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-vilkar-svangerskap@workspace:*, @navikt/fp-prosess-vilkar-svangerskap@workspace:packages/prosess/prosess-vilkar-svangerskap":
+"@navikt/fp-prosess-vilkar-svangerskap@workspace:*, @navikt/fp-prosess-vilkar-svangerskap@workspace:packages/prosess/vilkar-svangerskap":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-vilkar-svangerskap@workspace:packages/prosess/prosess-vilkar-svangerskap"
+  resolution: "@navikt/fp-prosess-vilkar-svangerskap@workspace:packages/prosess/vilkar-svangerskap"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
