@@ -3603,9 +3603,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-prosess-fakta-fodsel-sammenligning@workspace:*, @navikt/fp-prosess-fakta-fodsel-sammenligning@workspace:packages/prosess/prosess-fakta-fodsel-sammenligning":
+"@navikt/fp-prosess-fakta-fodsel-sammenligning@workspace:*, @navikt/fp-prosess-fakta-fodsel-sammenligning@workspace:packages/prosess-fakta-fodsel-sammenligning":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-prosess-fakta-fodsel-sammenligning@workspace:packages/prosess/prosess-fakta-fodsel-sammenligning"
+  resolution: "@navikt/fp-prosess-fakta-fodsel-sammenligning@workspace:packages/prosess-fakta-fodsel-sammenligning"
   dependencies:
     "@navikt/ds-css": 7.18.0
     "@navikt/ds-react": 7.18.0
