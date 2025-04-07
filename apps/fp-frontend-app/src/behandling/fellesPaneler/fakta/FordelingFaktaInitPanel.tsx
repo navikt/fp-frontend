@@ -98,11 +98,13 @@ const lagModifisertCallback =
 
 const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
   if (!vilkar) {
-    throw new Error('Vilkar er ikke oppgitt');
+    // @ts-expect-error FordelBeregningsgrunnlagFaktaIndex må kunna håndtera null
+    return null;
   }
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
-    throw new Error('Vilkar eller beregningsgrunnlag er ikke oppgitt');
+    // @ts-expect-error FordelBeregningsgrunnlagFaktaIndex må kunna håndtera null
+    return null;
   }
   return {
     ...bgVilkar,
