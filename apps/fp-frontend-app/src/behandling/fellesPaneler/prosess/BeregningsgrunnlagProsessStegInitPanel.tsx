@@ -53,10 +53,9 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
+const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
-    // @ts-expect-error Fiks BeregningsgrunnlagProsessIndex så den kan håndtera null
     return null;
   }
   return {

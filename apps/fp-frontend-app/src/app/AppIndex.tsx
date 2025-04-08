@@ -28,7 +28,7 @@ import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const EMPTY_ARRAY = [] as any[];
+const EMPTY_ARRAY = new Array<FpError>();
 
 const intl = createIntl(messages);
 

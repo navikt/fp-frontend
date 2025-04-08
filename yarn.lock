@@ -3140,13 +3140,13 @@ __metadata:
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 8.4.6
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.12
+    "@navikt/ft-fakta-beregning": 8.4.7
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.13
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 3.2.10
     "@navikt/ft-form-hooks": 6.2.10
     "@navikt/ft-form-validators": 3.1.12
     "@navikt/ft-plattform-komponenter": 8.0.0
-    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.1
+    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.2
     "@navikt/ft-prosess-tilbakekreving": 4.2.10
     "@navikt/ft-prosess-tilbakekreving-foreldelse": 4.2.10
     "@navikt/ft-prosess-tilbakekreving-vedtak": 3.2.10
@@ -3158,8 +3158,8 @@ __metadata:
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12
-    "@tanstack/react-query": 5.71.10
-    "@tanstack/react-query-devtools": ^5.71.10
+    "@tanstack/react-query": 5.72.0
+    "@tanstack/react-query-devtools": ^5.72.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3207,8 +3207,8 @@ __metadata:
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12
-    "@tanstack/react-query": 5.71.10
-    "@tanstack/react-query-devtools": ^5.71.10
+    "@tanstack/react-query": 5.72.0
+    "@tanstack/react-query-devtools": ^5.72.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3268,8 +3268,8 @@ __metadata:
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12
-    "@tanstack/react-query": 5.71.10
-    "@tanstack/react-query-devtools": ^5.71.10
+    "@tanstack/react-query": 5.72.0
+    "@tanstack/react-query-devtools": ^5.72.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3352,8 +3352,8 @@ __metadata:
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12
-    "@tanstack/react-query": 5.71.10
-    "@tanstack/react-query-devtools": ^5.71.10
+    "@tanstack/react-query": 5.72.0
+    "@tanstack/react-query-devtools": ^5.72.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -4050,7 +4050,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.10
     "@navikt/ft-form-validators": 3.1.12
-    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.1
+    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.2
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
@@ -4940,11 +4940,11 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 8.4.6
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.12
+    "@navikt/ft-fakta-beregning": 8.4.7
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.13
     "@navikt/ft-form-hooks": 6.2.10
     "@navikt/ft-form-validators": 3.1.12
-    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.1
+    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.2
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
@@ -5032,7 +5032,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.10
     "@storybook/types": 8.6.12
-    "@tanstack/react-query": 5.71.10
+    "@tanstack/react-query": 5.72.0
     eslint: 9.24.0
     history: 5.3.0
     react: 19.1.0
@@ -5050,9 +5050,9 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-fakta-beregning": 8.4.6
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.12
-    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.1
+    "@navikt/ft-fakta-beregning": 8.4.7
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.13
+    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.2
     typescript: 5.8.3
     vite: 6.2.5
   languageName: unknown
@@ -5143,9 +5143,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning@npm:8.4.6":
-  version: 8.4.6
-  resolution: "@navikt/ft-fakta-beregning@npm:8.4.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F8.4.6%2Fa2be004039015b042067f5636f7a7c5f715a5eb5"
+"@navikt/ft-fakta-beregning@npm:8.4.7":
+  version: 8.4.7
+  resolution: "@navikt/ft-fakta-beregning@npm:8.4.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F8.4.7%2F18a14051fa0350dc2f7c74b6b3027c3fc66fd21f"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -5179,13 +5179,13 @@ __metadata:
     react-dom: 19.0.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: bf76d941b7d0cd7bb1b89003c257ef16ff6e4052e73a7a6fcd7f0da69079219570810134237abc741386f73e77ff7aa65f030f64ce17d627e9756353d69006c5
+  checksum: 9b8e91ace66f76e9b5ec6c5ea03298dd1eae2bc3d21472ace89e5d41eb3d8e1e6530dd2562f5359cc6324826bcb6a4d3712e19bc2162a71879cc2db9524f6a2d
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:9.2.12":
-  version: 9.2.12
-  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:9.2.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F9.2.12%2F3e45f26bdf17dddb8bc8bbea28cb15eb5575f5ce"
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:9.2.13":
+  version: 9.2.13
+  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:9.2.13::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F9.2.13%2Fc9885ddb98b1f5ad49781c2814fb14789832d9ae"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -5219,7 +5219,7 @@ __metadata:
     react-hook-form: 7.x
     react-intl: 6.x
     uuid: 9.0.1
-  checksum: 0a866ed5464bbdba21091881d3f6463099092453bf960998ab80f2e612c999137e9992431c949ac9f4a207b0453b636e4460d254b241eb0e6895fc9f72ad491a
+  checksum: e56bc6cbd21bbc8ac4e729f2f0835c3ebd77dab3dba636965ae29e43557963bc982197673c1ba9c41ca86d68e03259423062a1d35f2758e959ae3d8372f42e00
   languageName: node
   linkType: hard
 
@@ -5340,9 +5340,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregningsgrunnlag@npm:8.3.1":
-  version: 8.3.1
-  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:8.3.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F8.3.1%2F0f62d831f291f666a1ee64261b9e3a5bf642197b"
+"@navikt/ft-prosess-beregningsgrunnlag@npm:8.3.2":
+  version: 8.3.2
+  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:8.3.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F8.3.2%2F61802fefaaf73d228720fd104692d1f9c8ea6e10"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -5374,7 +5374,7 @@ __metadata:
     react: 19.0.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 6bff4a77b345acfd5d0788988325bb017576dd0f22da9f94ffd3c9eb65c97314c46f3c44684657e3bf1ad03d69c92dc666160a61e3914f8d747ae77b14698e59
+  checksum: 67a8f6793f481db7784d88875ff413e5aee130afafcd339e943f5da42668f2b79fa1f41a0b752acfec770270abaf35a8714b26d7bbe31dbe76ecd006eafeaa90
   languageName: node
   linkType: hard
 
@@ -6879,40 +6879,40 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.71.10":
-  version: 5.71.10
-  resolution: "@tanstack/query-core@npm:5.71.10"
-  checksum: 1169cd67a338149cbd7d2213fd8049f9e87e128436d3a23b99a7a9668ab6620ac0bd7c7503948468465e1209d5dcde23ee8e35adc2cf424fdf8d1e3f26d35ab2
+"@tanstack/query-core@npm:5.72.0":
+  version: 5.72.0
+  resolution: "@tanstack/query-core@npm:5.72.0"
+  checksum: 3861efa711c3664706682e195503d77a9ef9b2ef13ed3b1eb850cbf973c86e8ca2a4fc33ea286748b08ce3e6c34d70d20234f8a00f37892cb95059f04b20b185
   languageName: node
   linkType: hard
 
-"@tanstack/query-devtools@npm:5.71.5":
-  version: 5.71.5
-  resolution: "@tanstack/query-devtools@npm:5.71.5"
-  checksum: f4f8bf715be57cf2995c044d21fa27c39ae99a582a89ff0a2ca36bd737a212b6cefc3f46f7d751e5a3c756d19ff5df59d6848459aea9b055e34d89f3001650a6
+"@tanstack/query-devtools@npm:5.72.0":
+  version: 5.72.0
+  resolution: "@tanstack/query-devtools@npm:5.72.0"
+  checksum: d204f065fe9c2d7f1c117cffb7c7ed3d421b068519321c5eac53aef7692052e2b6fe3ebac320429265e179330be4ee837cb01daba900ce8b7d5f6b2c67d402f5
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:^5.71.10":
-  version: 5.71.10
-  resolution: "@tanstack/react-query-devtools@npm:5.71.10"
+"@tanstack/react-query-devtools@npm:^5.72.0":
+  version: 5.72.0
+  resolution: "@tanstack/react-query-devtools@npm:5.72.0"
   dependencies:
-    "@tanstack/query-devtools": 5.71.5
+    "@tanstack/query-devtools": 5.72.0
   peerDependencies:
-    "@tanstack/react-query": ^5.71.10
+    "@tanstack/react-query": ^5.72.0
     react: ^18 || ^19
-  checksum: 5e6e2824832618a4b9f5478ab419d39e8ae4c89dc24874c0116baff2f4b35658643cec10f16b03559ca7eb5f27165e372d90a56f53917de237076c33da7fd4f6
+  checksum: c84f95f2e52d857891b45e1da23ca44c78ba61614cfc02f440aad9c977f8355a43be5c104d154a746b57c60db4b82cc600778502bcdb8213aededde6ec6c0ab6
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.71.10":
-  version: 5.71.10
-  resolution: "@tanstack/react-query@npm:5.71.10"
+"@tanstack/react-query@npm:5.72.0":
+  version: 5.72.0
+  resolution: "@tanstack/react-query@npm:5.72.0"
   dependencies:
-    "@tanstack/query-core": 5.71.10
+    "@tanstack/query-core": 5.72.0
   peerDependencies:
     react: ^18 || ^19
-  checksum: 00817ef272226a15125696856f7dcfcb084f59b57840a54a5908d6bf27df231b06b7704237d7ba9067ba15a4ff9fcf4223abf00874bf508b410dfa42542462eb
+  checksum: 35c3a5a680345cffd5b262507041ee6e466d29fecb2eee0ee17c6209ec199ead7e01637a85d48a5452811e3a3105dbc795109ceb5fcdc9274e92d4e2f87db574
   languageName: node
   linkType: hard
 
@@ -7358,15 +7358,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.29.0":
-  version: 8.29.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:8.29.0"
+"@typescript-eslint/eslint-plugin@npm:8.29.1":
+  version: 8.29.1
+  resolution: "@typescript-eslint/eslint-plugin@npm:8.29.1"
   dependencies:
     "@eslint-community/regexpp": ^4.10.0
-    "@typescript-eslint/scope-manager": 8.29.0
-    "@typescript-eslint/type-utils": 8.29.0
-    "@typescript-eslint/utils": 8.29.0
-    "@typescript-eslint/visitor-keys": 8.29.0
+    "@typescript-eslint/scope-manager": 8.29.1
+    "@typescript-eslint/type-utils": 8.29.1
+    "@typescript-eslint/utils": 8.29.1
+    "@typescript-eslint/visitor-keys": 8.29.1
     graphemer: ^1.4.0
     ignore: ^5.3.1
     natural-compare: ^1.4.0
@@ -7375,23 +7375,23 @@ __metadata:
     "@typescript-eslint/parser": ^8.0.0 || ^8.0.0-alpha.0
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 83475d3a478703bbfb83678ad5891ead78b94e43c4364009d68a38b32639716fb72ce4be73fcc1d87f44a9f5fb0819795bbc9e9100075def3790e1cd8b44ff99
+  checksum: 7951a5c812af59fcd32f938f4019a02517739f7b4069d3a018378466a0b9a85b27608f76e6ae7c0186502d56cc7c66aa28aac6cc82642309604e461def8abc55
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.29.0":
-  version: 8.29.0
-  resolution: "@typescript-eslint/parser@npm:8.29.0"
+"@typescript-eslint/parser@npm:8.29.1":
+  version: 8.29.1
+  resolution: "@typescript-eslint/parser@npm:8.29.1"
   dependencies:
-    "@typescript-eslint/scope-manager": 8.29.0
-    "@typescript-eslint/types": 8.29.0
-    "@typescript-eslint/typescript-estree": 8.29.0
-    "@typescript-eslint/visitor-keys": 8.29.0
+    "@typescript-eslint/scope-manager": 8.29.1
+    "@typescript-eslint/types": 8.29.1
+    "@typescript-eslint/typescript-estree": 8.29.1
+    "@typescript-eslint/visitor-keys": 8.29.1
     debug: ^4.3.4
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 96a1a8cc8a23ce21cd29aec173282ca2d881d150477c4cb3acca2fb2b5119d68d588c5e0e04ebd472f52f2c9304b1cb6e5ff38c75cabda95aac60c717cf6e05d
+  checksum: 0d0f3288b7d2c61c99e30caf1f2fcb85f750eb7aadbbf94ba95bb11ed9abd2e60f52c6433d24b8afa447cfc34ff2af2ef7dde106f51a87df741737b9d4849ecc
   languageName: node
   linkType: hard
 
@@ -7405,28 +7405,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:8.29.0":
-  version: 8.29.0
-  resolution: "@typescript-eslint/scope-manager@npm:8.29.0"
+"@typescript-eslint/scope-manager@npm:8.29.1":
+  version: 8.29.1
+  resolution: "@typescript-eslint/scope-manager@npm:8.29.1"
   dependencies:
-    "@typescript-eslint/types": 8.29.0
-    "@typescript-eslint/visitor-keys": 8.29.0
-  checksum: 89a5999ba8bd303bfa4f9d76425dc717c28c69cfeb47a475fecbe89b863c440a5950116dcba9287f33d2b295eb90eb3a043b9e8d3c0bc1c1f3954b9f6bbcae16
+    "@typescript-eslint/types": 8.29.1
+    "@typescript-eslint/visitor-keys": 8.29.1
+  checksum: b560a2bc3d267c78c91fd2d03d2cf689f803132fa94a9e6cf00224803efd23e6d7c6f49c3e7ff990e30f7a8acdfd1a6b71b0ebe61f924dd19f7a48780f59cf03
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:8.29.0":
-  version: 8.29.0
-  resolution: "@typescript-eslint/type-utils@npm:8.29.0"
+"@typescript-eslint/type-utils@npm:8.29.1":
+  version: 8.29.1
+  resolution: "@typescript-eslint/type-utils@npm:8.29.1"
   dependencies:
-    "@typescript-eslint/typescript-estree": 8.29.0
-    "@typescript-eslint/utils": 8.29.0
+    "@typescript-eslint/typescript-estree": 8.29.1
+    "@typescript-eslint/utils": 8.29.1
     debug: ^4.3.4
     ts-api-utils: ^2.0.1
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 553fde7826466524e2f0c6e8487329ed827e4f89c9502120efe7767df60daa1450cded250cbb29da7e1b20d5b293531e4dd7cb1ba6f074f6ee65301aae58f9c2
+  checksum: c5b7cf3f7b097d51b505b136ae6e8fe3d9b10882d2c4a2e299234f33a8032459c0a9fd9383405e52a32eb4f92a0417fecd1a67d6a83f99d52b38f9b145bce127
   languageName: node
   linkType: hard
 
@@ -7437,10 +7437,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:8.29.0":
-  version: 8.29.0
-  resolution: "@typescript-eslint/types@npm:8.29.0"
-  checksum: 30bf710e216b8da5fd54e77231fabacdad4f05457037f3590829035c9f18ea8fe7277124e27aca9c468dac2515d574ad1d70bd818992b9dd6611b4b542657651
+"@typescript-eslint/types@npm:8.29.1":
+  version: 8.29.1
+  resolution: "@typescript-eslint/types@npm:8.29.1"
+  checksum: 3a48ad30af93388b599b08bf1bee64cac6f4d9dcdb5c3b49309ca674d1a3c4740222af83512528bb5dad7d738e07d9858f198ddce4aac751439bd024a4cb4cde
   languageName: node
   linkType: hard
 
@@ -7463,12 +7463,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:8.29.0":
-  version: 8.29.0
-  resolution: "@typescript-eslint/typescript-estree@npm:8.29.0"
+"@typescript-eslint/typescript-estree@npm:8.29.1":
+  version: 8.29.1
+  resolution: "@typescript-eslint/typescript-estree@npm:8.29.1"
   dependencies:
-    "@typescript-eslint/types": 8.29.0
-    "@typescript-eslint/visitor-keys": 8.29.0
+    "@typescript-eslint/types": 8.29.1
+    "@typescript-eslint/visitor-keys": 8.29.1
     debug: ^4.3.4
     fast-glob: ^3.3.2
     is-glob: ^4.0.3
@@ -7477,22 +7477,22 @@ __metadata:
     ts-api-utils: ^2.0.1
   peerDependencies:
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 7275c61dc5ad96c5191092775f7aad962ca8e7df1b8d5a7b29ebe43f49a8ae568721da3ec8a33c06d06d31fffe6c18efbf7b76a9659aa9cda96c5df5fe75cf36
+  checksum: a5b9af38921d75432f5dcbfb2bcd25c58b4d9ecbe749859eeff6335f4b2f1241e2b63cf90532649609227f8ff28f9774f7056f360ca4c7ca26f53b321a357ab5
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:8.29.0":
-  version: 8.29.0
-  resolution: "@typescript-eslint/utils@npm:8.29.0"
+"@typescript-eslint/utils@npm:8.29.1":
+  version: 8.29.1
+  resolution: "@typescript-eslint/utils@npm:8.29.1"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
-    "@typescript-eslint/scope-manager": 8.29.0
-    "@typescript-eslint/types": 8.29.0
-    "@typescript-eslint/typescript-estree": 8.29.0
+    "@typescript-eslint/scope-manager": 8.29.1
+    "@typescript-eslint/types": 8.29.1
+    "@typescript-eslint/typescript-estree": 8.29.1
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 81d1afc5de04a9a90b7fc52608e168f3b6a53e3e532dc30fa513f1dd50e2b9e2e7132657bd39e3d81282f33aaa78a89749eef43853f639e9f54e8a4a56497a85
+  checksum: 473915d36c0db781126400f70a6184f1daa2943b6ed4fe366a9791e15e301fb1308b92483ef9d96cc7eadf1c8aef995969192c6e15b58d306a2cce6b3f71803c
   languageName: node
   linkType: hard
 
@@ -7520,13 +7520,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:8.29.0":
-  version: 8.29.0
-  resolution: "@typescript-eslint/visitor-keys@npm:8.29.0"
+"@typescript-eslint/visitor-keys@npm:8.29.1":
+  version: 8.29.1
+  resolution: "@typescript-eslint/visitor-keys@npm:8.29.1"
   dependencies:
-    "@typescript-eslint/types": 8.29.0
+    "@typescript-eslint/types": 8.29.1
     eslint-visitor-keys: ^4.2.0
-  checksum: d306a7d96be3cb7af4ecec9e6c9a210561ba3ae04f9d6bfc798c8a5443c7206cc7d24639a0b85ddf211a42d208c10298d3529c0174cf649b96fc1ebbf33bf93c
+  checksum: 82bd4efa0ed982d80bfda85151e11da95c5c79fcf54389f37cdd168ae7a83abc6f72a5b8fb2c90f7a568f02e8bd3d7752cb5671b51faff13a06434a999ea346e
   languageName: node
   linkType: hard
 
@@ -10764,7 +10764,7 @@ __metadata:
     stylelint: 16.18.0
     stylelint-order: 6.0.4
     typescript: 5.8.3
-    typescript-eslint: 8.29.0
+    typescript-eslint: 8.29.1
     vite: 6.2.5
     vite-plugin-externalize-deps: 0.9.0
     vite-plugin-html: 3.2.2
@@ -17104,17 +17104,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:8.29.0":
-  version: 8.29.0
-  resolution: "typescript-eslint@npm:8.29.0"
+"typescript-eslint@npm:8.29.1":
+  version: 8.29.1
+  resolution: "typescript-eslint@npm:8.29.1"
   dependencies:
-    "@typescript-eslint/eslint-plugin": 8.29.0
-    "@typescript-eslint/parser": 8.29.0
-    "@typescript-eslint/utils": 8.29.0
+    "@typescript-eslint/eslint-plugin": 8.29.1
+    "@typescript-eslint/parser": 8.29.1
+    "@typescript-eslint/utils": 8.29.1
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 234b95888a37f6a35540abd4a05e40f119d3249ec5a30566ac9253750bdbe84556c03f65e35fea4f25b9e6e4c30b90d26bc615936d98c8d69d33766eb47f21b1
+  checksum: f0c4ae691928308657a943214ab761a94973ab9e7bc3b2532bc2293d6b622a1c66d4f935e6967520d09e0ea9bdc82afef8f19d044d7cdb14eed0a0ff327d1460
   languageName: node
   linkType: hard
 
