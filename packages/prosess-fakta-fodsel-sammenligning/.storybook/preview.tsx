@@ -1,1 +1,1 @@
-export { decorators } from '../../../../.storybook/preview-storybook';
+export { decorators } from '../../../.storybook/preview-storybook';
