@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './ArbeidsforholdFaktaIndex.stories';
@@ -42,7 +42,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse 3')).toBeInTheDocument();
   });
 
   it('skal vise at arbeidsforholdet er manuelt oppdatert av saksbehandler', async () => {
@@ -62,7 +62,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(screen.getByText('Arbeidsforhold er manuelt opprettet av saksbehandler')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse 4')).toBeInTheDocument();
   });
 
   it('skal vise at det er valgt at arbeidsforholdet ikke er aktivt', async () => {
@@ -83,7 +83,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(screen.getByText('31.12.9999')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse 5')).toBeInTheDocument();
   });
 
   it('skal vise at det er valgt at arbeidsforholdet skal fjernes', async () => {
@@ -102,7 +102,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(screen.getByText('Fjern arbeidsforholdet for denne behandlingen')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse 9')).toBeInTheDocument();
   });
 
   it('skal vise tabell med flere arbeidsforhold', async () => {
@@ -123,9 +123,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(screen.getByText('Vy(23232)')).toBeInTheDocument();
     expect(screen.getByText(/06.12.2020/)).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('AA-Registeret')[1]); // Klikk på rad 2
-
-    expect(await screen.findByText('Detaljer')).toBeInTheDocument();
+    expect(await screen.findAllByText('Detaljer')).toHaveLength(2);
     expect(
       screen.getByText(
         'Arbeidsforholdet er aktivt og skal benyttes i behandlingen. Nødvendig inntektsmelding er ikke mottatt.',
@@ -133,20 +131,12 @@ describe('ArbeidsforholdFaktaIndex', () => {
     ).toBeInTheDocument();
     expect(screen.getByText('Ytelsen kan avslås på grunn av manglende opplysninger.')).toBeInTheDocument();
 
-    expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getAllByText('Begrunn endringene')).toHaveLength(2);
+    expect(screen.getByText('Dette er en begrunnelse 1')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('AA-Registeret')[0]); // Klikk på rad 1
-
-    await waitFor(() => expect(screen.queryByText('Detaljer')).not.toBeInTheDocument());
-
-    await userEvent.click(screen.getAllByText('AA-Registeret')[2]); // Klikk på rad 3
-
-    expect(await screen.queryByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Fjern arbeidsforholdet for denne behandlingen')).toBeInTheDocument();
 
-    expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse 2')).toBeInTheDocument();
   });
 
   it('skal vise at ingen arbeidsforhold er registrert', async () => {
@@ -173,7 +163,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(screen.getByText('Ytelsen kan avslås på grunn av manglende opplysninger.')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse 8')).toBeInTheDocument();
   });
 
   it('skal vise at søker er i permisjon og at IM ikke er nødvendig', async () => {
@@ -190,7 +180,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(screen.getByText('Søker er i permisjon. Inntektsmelding er ikke nødvendig.')).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse 6')).toBeInTheDocument();
   });
 
   it('skal vise at søker ikke er i permisjon og at en fortsetter behandlingen uten IM', async () => {
@@ -215,6 +205,6 @@ describe('ArbeidsforholdFaktaIndex', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Begrunn endringene')).toBeInTheDocument();
-    expect(screen.getByText('Dette er en begrunnelse')).toBeInTheDocument();
+    expect(screen.getByText('Dette er en begrunnelse 7')).toBeInTheDocument();
   });
 });
