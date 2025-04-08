@@ -32,6 +32,7 @@ const openDocumentFromLink =
   (dokumentTittel?: string) =>
   (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>): void => {
     if (dokumentTittel) {
+      event.preventDefault();
       åpneVindu(event.currentTarget.href, event.currentTarget.target, dokumentTittel);
     }
   };
