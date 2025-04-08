@@ -223,76 +223,78 @@ export const SokersOpplysningspliktForm = ({
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        {sorterteManglendeVedlegg.length > 0 && (
-          <VStack gap="4">
-            <BodyShort size="small">
-              <FormattedMessage id="SokersOpplysningspliktForm.ManglendeDokumentasjon" />
-            </BodyShort>
-            <Table>
-              <Table.Header>
-                <Table.Row>
-                  <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
-                  <Table.HeaderCell scope="col">Start</Table.HeaderCell>
-                </Table.Row>
-              </Table.Header>
-              <Table.Body>
-                {sorterteManglendeVedlegg.map(vedlegg => (
-                  <Table.Row
-                    key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}
-                  >
-                    <Table.DataCell>{vedlegg.dokumentTittel}</Table.DataCell>
-                    <Table.DataCell>
-                      {!!vedlegg.arbeidsgiverReferanse &&
-                        formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
-                    </Table.DataCell>
-                  </Table.Row>
-                ))}
-              </Table.Body>
-            </Table>
-          </VStack>
-        )}
-        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-        {!isReadOnly && (
-          <RadioGroupPanel
-            name="erVilkarOk"
-            validate={[required]}
-            isHorizontal
-            isTrueOrFalseSelection
-            radios={[
-              {
-                value: 'true',
-                label: <FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />,
-                disabled: !hasSoknad,
-              },
-              {
-                value: 'false',
-                label: (
-                  <FormattedMessage
-                    id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
-                    values={{
-                      b: (chunks: any) => <b key="bold">{chunks}</b>,
-                      br: <br key="break-line" />,
-                    }}
-                  />
-                ),
-              },
-            ]}
-          />
-        )}
-        {isReadOnly && (
-          <div>
-            {originalErVilkarOk === false && behandling.behandlingsresultat?.avslagsarsak && (
+        <VStack gap="4">
+          {sorterteManglendeVedlegg.length > 0 && (
+            <VStack gap="4">
               <BodyShort size="small">
-                {getKodeverknavn(
-                  behandling.behandlingsresultat.avslagsarsak,
-                  KodeverkType.AVSLAGSARSAK,
-                  VilkarType.SOKERSOPPLYSNINGSPLIKT,
-                )}
+                <FormattedMessage id="SokersOpplysningspliktForm.ManglendeDokumentasjon" />
               </BodyShort>
-            )}
-          </div>
-        )}
+              <Table>
+                <Table.Header>
+                  <Table.Row>
+                    <Table.HeaderCell scope="col">Navn</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Fødselsnr.</Table.HeaderCell>
+                    <Table.HeaderCell scope="col">Start</Table.HeaderCell>
+                  </Table.Row>
+                </Table.Header>
+                <Table.Body>
+                  {sorterteManglendeVedlegg.map(vedlegg => (
+                    <Table.Row
+                      key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}
+                    >
+                      <Table.DataCell>{vedlegg.dokumentTittel}</Table.DataCell>
+                      <Table.DataCell>
+                        {!!vedlegg.arbeidsgiverReferanse &&
+                          formatArbeidsgiver(arbeidsgiverOpplysningerPerId, vedlegg.arbeidsgiverReferanse)}
+                      </Table.DataCell>
+                    </Table.Row>
+                  ))}
+                </Table.Body>
+              </Table>
+            </VStack>
+          )}
+          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+          {!isReadOnly && (
+            <RadioGroupPanel
+              name="erVilkarOk"
+              validate={[required]}
+              isHorizontal
+              isTrueOrFalseSelection
+              radios={[
+                {
+                  value: 'true',
+                  label: <FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />,
+                  disabled: !hasSoknad,
+                },
+                {
+                  value: 'false',
+                  label: (
+                    <FormattedMessage
+                      id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
+                      values={{
+                        b: (chunks: any) => <b key="bold">{chunks}</b>,
+                        br: <br key="break-line" />,
+                      }}
+                    />
+                  ),
+                },
+              ]}
+            />
+          )}
+          {isReadOnly && (
+            <div>
+              {originalErVilkarOk === false && behandling.behandlingsresultat?.avslagsarsak && (
+                <BodyShort size="small">
+                  {getKodeverknavn(
+                    behandling.behandlingsresultat.avslagsarsak,
+                    KodeverkType.AVSLAGSARSAK,
+                    VilkarType.SOKERSOPPLYSNINGSPLIKT,
+                  )}
+                </BodyShort>
+              )}
+            </div>
+          )}
+        </VStack>
       </ProsessPanelTemplate>
     </Form>
   );

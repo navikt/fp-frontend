@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 
 import { AksjonspunktKode, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -27,27 +27,6 @@ type FormValues = {
 };
 
 type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp>;
-
-export const buildInitialValues = (
-  aksjonspunkter: Aksjonspunkt[],
-  status: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
-): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
-});
-
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData =>
-  aksjonspunkter.map(ap => ({
-    ...VilkarResultPicker.transformValues(values),
-    ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-    kode: validerApKodeOgHentApEnum(
-      ap.definisjon,
-      AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-      AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
-    ),
-  }));
 
 interface Props {
   status: string;
@@ -105,19 +84,42 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <Label size="small">
-          <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.VilkaretOppfylt" />
-        </Label>
-        <VilkarResultPicker
-          avslagsarsaker={avslagsarsaker}
-          readOnly={isReadOnly}
-          customVilkarOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
-          customVilkarIkkeOppfyltText={
-            <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.IkkeOppfylt" values={{ b: bTag }} />
-          }
-        />
-        <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        <VStack gap="4">
+          <Label size="small">
+            <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.VilkaretOppfylt" />
+          </Label>
+          <VilkarResultPicker
+            avslagsarsaker={avslagsarsaker}
+            readOnly={isReadOnly}
+            customVilkarOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
+            customVilkarIkkeOppfyltText={
+              <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.IkkeOppfylt" values={{ b: bTag }} />
+            }
+          />
+          <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
+        </VStack>
       </ProsessPanelTemplate>
     </Form>
   );
 };
+
+export const buildInitialValues = (
+  aksjonspunkter: Aksjonspunkt[],
+  status: string,
+  behandlingsresultat?: Behandling['behandlingsresultat'],
+): FormValues => ({
+  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+});
+
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData =>
+  aksjonspunkter.map(ap => ({
+    ...VilkarResultPicker.transformValues(values),
+    ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+    kode: validerApKodeOgHentApEnum(
+      ap.definisjon,
+      AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+      AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
+    ),
+  }));

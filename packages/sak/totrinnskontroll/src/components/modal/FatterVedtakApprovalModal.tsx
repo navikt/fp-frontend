@@ -130,9 +130,14 @@ export const FatterVedtakApprovalModal = ({
   );
 
   return (
-    <Modal width="small" open aria-label={intl.formatMessage({ id: modalDescriptionTextCode })} onClose={closeEvent}>
+    <Modal
+      className={styles.modal}
+      open
+      aria-label={intl.formatMessage({ id: modalDescriptionTextCode })}
+      onClose={closeEvent}
+    >
       <Modal.Body>
-        <HStack justify="space-between" align="center">
+        <HStack justify="space-between" align="center" wrap={false}>
           <HStack gap="2">
             <CheckmarkCircleFillIcon className={styles.image} title={intl.formatMessage({ id: altImgTextCode })} />
             <VStack gap="1">
