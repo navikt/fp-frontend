@@ -3158,7 +3158,7 @@ __metadata:
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12
-    "@tanstack/react-query": 5.71.10
+    "@tanstack/react-query": 5.72.0
     "@tanstack/react-query-devtools": ^5.71.10
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
@@ -3207,7 +3207,7 @@ __metadata:
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12
-    "@tanstack/react-query": 5.71.10
+    "@tanstack/react-query": 5.72.0
     "@tanstack/react-query-devtools": ^5.71.10
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
@@ -3268,7 +3268,7 @@ __metadata:
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12
-    "@tanstack/react-query": 5.71.10
+    "@tanstack/react-query": 5.72.0
     "@tanstack/react-query-devtools": ^5.71.10
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
@@ -3352,7 +3352,7 @@ __metadata:
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12
-    "@tanstack/react-query": 5.71.10
+    "@tanstack/react-query": 5.72.0
     "@tanstack/react-query-devtools": ^5.71.10
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
@@ -5032,7 +5032,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.10
     "@storybook/types": 8.6.12
-    "@tanstack/react-query": 5.71.10
+    "@tanstack/react-query": 5.72.0
     eslint: 9.24.0
     history: 5.3.0
     react: 19.1.0
@@ -6879,10 +6879,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.71.10":
-  version: 5.71.10
-  resolution: "@tanstack/query-core@npm:5.71.10"
-  checksum: 1169cd67a338149cbd7d2213fd8049f9e87e128436d3a23b99a7a9668ab6620ac0bd7c7503948468465e1209d5dcde23ee8e35adc2cf424fdf8d1e3f26d35ab2
+"@tanstack/query-core@npm:5.72.0":
+  version: 5.72.0
+  resolution: "@tanstack/query-core@npm:5.72.0"
+  checksum: 3861efa711c3664706682e195503d77a9ef9b2ef13ed3b1eb850cbf973c86e8ca2a4fc33ea286748b08ce3e6c34d70d20234f8a00f37892cb95059f04b20b185
   languageName: node
   linkType: hard
 
@@ -6905,14 +6905,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.71.10":
-  version: 5.71.10
-  resolution: "@tanstack/react-query@npm:5.71.10"
+"@tanstack/react-query@npm:5.72.0":
+  version: 5.72.0
+  resolution: "@tanstack/react-query@npm:5.72.0"
   dependencies:
-    "@tanstack/query-core": 5.71.10
+    "@tanstack/query-core": 5.72.0
   peerDependencies:
     react: ^18 || ^19
-  checksum: 00817ef272226a15125696856f7dcfcb084f59b57840a54a5908d6bf27df231b06b7704237d7ba9067ba15a4ff9fcf4223abf00874bf508b410dfa42542462eb
+  checksum: 35c3a5a680345cffd5b262507041ee6e466d29fecb2eee0ee17c6209ec199ead7e01637a85d48a5452811e3a3105dbc795109ceb5fcdc9274e92d4e2f87db574
   languageName: node
   linkType: hard
 
