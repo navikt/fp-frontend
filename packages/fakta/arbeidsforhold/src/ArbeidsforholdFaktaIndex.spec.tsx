@@ -23,11 +23,11 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
     expect(screen.getByText('19.04.2000 -')).toBeInTheDocument();
-    expect(screen.getByText('AA-Registeret')).toBeInTheDocument();
+    expect(screen.getByText('Aa-registeret')).toBeInTheDocument();
     expect(screen.getByText('100.00 %')).toBeInTheDocument();
     expect(screen.getByTitle('Arbeidsforhold skal brukes')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
+    await userEvent.click(screen.getByText('Aa-registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(
@@ -71,11 +71,11 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
     expect(screen.getByText(/06.12.2019/)).toBeInTheDocument();
-    expect(screen.getByText('AA-Registeret')).toBeInTheDocument();
+    expect(screen.getByText('Aa-registeret')).toBeInTheDocument();
     expect(screen.getByText('100.00 %')).toBeInTheDocument();
     expect(screen.queryByAltText('Arbeidsforhold skal brukes')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
+    await userEvent.click(screen.getByText('Aa-registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Arbeidsforholdet er ikke aktivt. Inntektsmelding er ikke nødvendig.')).toBeInTheDocument();
@@ -92,11 +92,11 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
     expect(screen.getByText(/06.12.2019/)).toBeInTheDocument();
-    expect(screen.getByText('AA-Registeret')).toBeInTheDocument();
+    expect(screen.getByText('Aa-registeret')).toBeInTheDocument();
     expect(screen.getByText('100.00 %')).toBeInTheDocument();
     expect(screen.queryByAltText('Arbeidsforhold skal brukes')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
+    await userEvent.click(screen.getByText('Aa-registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Fjern arbeidsforholdet for denne behandlingen')).toBeInTheDocument();
@@ -111,7 +111,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
     expect(screen.getByText(/06.12.2019/)).toBeInTheDocument();
-    expect(screen.getAllByText('AA-Registeret')).toHaveLength(3);
+    expect(screen.getAllByText('Aa-registeret')).toHaveLength(3);
     expect(screen.getAllByText('100.00 %')).toHaveLength(3);
     expect(screen.getByText('06.12.2021')).toBeInTheDocument();
 
@@ -152,7 +152,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
+    await userEvent.click(screen.getByText('Aa-registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(
@@ -172,7 +172,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
+    await userEvent.click(screen.getByText('Aa-registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Permisjon')).toBeInTheDocument();
@@ -189,7 +189,7 @@ describe('ArbeidsforholdFaktaIndex', () => {
     expect(await screen.findByText('Arbeidsforhold som er aktive ved permisjonsstart')).toBeInTheDocument();
     expect(screen.getByText('KIWI(999999999)')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('AA-Registeret')); // Klikk på rad
+    await userEvent.click(screen.getByText('Aa-registeret')); // Klikk på rad
 
     expect(await screen.findByText('Detaljer')).toBeInTheDocument();
     expect(screen.getByText('Permisjon')).toBeInTheDocument();
