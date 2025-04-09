@@ -75,15 +75,10 @@ describe('VedtakProsessIndex', () => {
 
   it('skal åpne modal for redigering og så forhåndsvise brev', async () => {
     const lagre = vi.fn();
-    const mellomlagreBrev = vi.fn();
     const forhåndsvis = vi.fn();
 
     render(
-      <InnvilgetForeldrepengerTilGodkjenningForSaksbehandler
-        submitCallback={lagre}
-        mellomlagreBrevOverstyring={mellomlagreBrev}
-        previewCallback={forhåndsvis}
-      />,
+      <InnvilgetForeldrepengerTilGodkjenningForSaksbehandler submitCallback={lagre} previewCallback={forhåndsvis} />,
     );
 
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
