@@ -280,7 +280,6 @@ export const ArbeidOgInntektFaktaPanel = ({
               oppdaterTabell={oppdaterTabellData}
               erRadÅpen={åpneRadIndexer.includes(index)}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[radData.arbeidsgiverIdent]}
             />
           ))}
         </Table.Body>
