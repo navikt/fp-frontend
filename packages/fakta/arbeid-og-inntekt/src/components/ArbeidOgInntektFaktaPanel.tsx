@@ -103,7 +103,6 @@ const byggTabellStruktur = (
     .map<ArbeidsforholdOgInntektRadData>(im => {
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
       return {
-        //internArbeidsforholdId: im.internArbeidsforholdId,
         arbeidsgiverIdent: im.arbeidsgiverIdent,
         arbeidsgiverNavn: arbeidsgiverOpplysninger.navn,
 
