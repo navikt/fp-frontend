@@ -103,6 +103,7 @@ const byggTabellStruktur = (
     .map<ArbeidsforholdOgInntektRadData>(im => {
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
       return {
+        //internArbeidsforholdId: im.internArbeidsforholdId,
         arbeidsgiverIdent: im.arbeidsgiverIdent,
         arbeidsgiverNavn: arbeidsgiverOpplysninger.navn,
 
@@ -280,6 +281,7 @@ export const ArbeidOgInntektFaktaPanel = ({
               oppdaterTabell={oppdaterTabellData}
               erRadÅpen={åpneRadIndexer.includes(index)}
               alleKodeverk={alleKodeverk}
+              arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[radData.arbeidsgiverIdent]}
             />
           ))}
         </Table.Body>
