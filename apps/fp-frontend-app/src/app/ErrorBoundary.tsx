@@ -5,6 +5,8 @@ import { captureException, withScope } from '@sentry/browser';
 
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 
+const isDevelopment = import.meta.env.MODE === 'development';
+
 interface OwnProps {
   errorMessageCallback: (error: any) => void;
   children: ReactNode;
@@ -34,13 +36,15 @@ export class ErrorBoundary extends Component<OwnProps, State> {
   override componentDidCatch(error: Error, info: ErrorInfo): void {
     const { errorMessageCallback } = this.props;
 
-    withScope(scope => {
-      Object.keys(info).forEach(key => {
-        // @ts-expect-error Fiks
-        scope.setExtra(key, info[key]);
-        captureException(error);
+    if (!isDevelopment) {
+      withScope(scope => {
+        Object.keys(info).forEach(key => {
+          // @ts-expect-error Fiks
+          scope.setExtra(key, info[key]);
+          captureException(error);
+        });
       });
-    });
+    }
 
     const errorStrings = info.componentStack
       ? [

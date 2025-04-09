@@ -63,20 +63,17 @@ export const useEditorJs = (
         onReady: async () => {
           new Undo({ editor });
           refEditorJs.current = editor;
+
+          //Sjekk om save eksisterar for å unngå warning i test
+          if (editor.save) {
+            // Dette er for å seinare kunne finna ut om innhaldet er endra
+            const innhold = await editor.save();
+            refCurrentHtml.current = edjsHTML().parse(innhold);
+          }
         },
         tools: getTools(intl),
         onChange: async () => {
-          //Forhindrer at lagring blir gjort ved initialisering og etter tilbakestilling
-          if (refCurrentHtml.current === '') {
-            //Sjekk om save eksisterar for å unngå warning i test
-            if (editor.save) {
-              // Dette er for å seinare kunne finna ut om innhaldet er endra
-              const innhold = await editor.save();
-              refCurrentHtml.current = edjsHTML().parse(innhold);
-            }
-          } else {
-            lagreBrevDebouncer(validerOgLagre);
-          }
+          lagreBrevDebouncer(validerOgLagre);
         },
       });
     }
@@ -102,12 +99,14 @@ export const useEditorJs = (
   };
 
   const tilbakestillEndringer = async () => {
-    refCurrentHtml.current = '';
-
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     await editor.blocks.clear();
     const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml, harPraksisUtsettelse);
-    editor.blocks.render(konverterHtmlToEditorJsFormat(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1')));
+    await editor.blocks.render(konverterHtmlToEditorJsFormat(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1')));
+    await editor.isReady;
+
+    const innhold = await editor.save();
+    refCurrentHtml.current = edjsHTML().parse(innhold);
 
     mellomlagreOgHentPåNytt(null);
   };

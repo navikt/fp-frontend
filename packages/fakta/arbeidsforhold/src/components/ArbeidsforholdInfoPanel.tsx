@@ -1,7 +1,6 @@
-import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
+import { Heading, VStack } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -12,8 +11,7 @@ import type {
   Inntektsmelding,
 } from '@navikt/fp-types';
 
-import { ArbeidsforholdDetail } from './arbeidsforholdDetaljer/ArbeidsforholdDetail';
-import { erMatch, PersonArbeidsforholdTable } from './arbeidsforholdTabell/PersonArbeidsforholdTable';
+import { erMatch, PersonArbeidsforholdTable } from './PersonArbeidsforholdTable';
 
 interface Props {
   arbeidOgInntekt: ArbeidOgInntektsmelding;
@@ -21,13 +19,6 @@ interface Props {
 }
 
 export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerPerId }: Props) => {
-  const [valgtArbeidsforhold, setValgtArbeidsforhold] = useState<AoIArbeidsforhold>();
-
-  const setArbeidsforhold = (af: AoIArbeidsforhold) => {
-    const skalSetteArbeidsforhold = !!af.saksbehandlersVurdering;
-    setValgtArbeidsforhold(skalSetteArbeidsforhold ? af : undefined);
-  };
-
   const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
 
   const sorterteArbeidsforhold = arbeidsforhold.toSorted(
@@ -35,19 +26,21 @@ export const ArbeidsforholdInfoPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysnin
   );
 
   return (
-    <>
+    <VStack gap="4">
       <Heading size="small">
         <FormattedMessage id="ArbeidsforholdInfoPanel.ArbeidsforholdHeader" />
       </Heading>
-      <PersonArbeidsforholdTable
-        selectedId={valgtArbeidsforhold?.arbeidsgiverIdent}
-        alleArbeidsforhold={sorterteArbeidsforhold}
-        selectArbeidsforholdCallback={setArbeidsforhold}
-        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-        inntektsmeldinger={inntektsmeldinger}
-      />
-      {valgtArbeidsforhold && <ArbeidsforholdDetail valgtArbeidsforhold={valgtArbeidsforhold} />}
-    </>
+      {sorterteArbeidsforhold.length === 0 && (
+        <FormattedMessage id="PersonArbeidsforholdTable.IngenArbeidsforholdRegistrert" />
+      )}
+      {sorterteArbeidsforhold.length > 0 && (
+        <PersonArbeidsforholdTable
+          alleArbeidsforhold={sorterteArbeidsforhold}
+          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+          inntektsmeldinger={inntektsmeldinger}
+        />
+      )}
+    </VStack>
   );
 };
 

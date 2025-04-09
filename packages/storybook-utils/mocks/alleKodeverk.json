@@ -281,7 +281,7 @@
     {
       "kode": "VENT_PÅ_NY_INNTEKTSMELDING_MED_GYLDIG_ARB_ID",
       "kodeverk": "VENT_AARSAK",
-      "navn": "Venter på ny inntektsmelding med arbeidsforholdsID som stemmer med AA-reg"
+      "navn": "Venter på ny inntektsmelding med arbeidsforholdsID som stemmer med Aa-reg"
     },
     {
       "kode": "VENT_ÅPEN_BEHANDLING",
