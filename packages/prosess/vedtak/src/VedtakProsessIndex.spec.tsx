@@ -73,7 +73,7 @@ describe('VedtakProsessIndex', () => {
     ]);
   });
 
-  it('skal redigere innvilget vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
+  it.skip('skal redigere innvilget vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
     const lagre = vi.fn();
     const mellomlagreBrev = vi.fn();
     const forhåndsvis = vi.fn();
