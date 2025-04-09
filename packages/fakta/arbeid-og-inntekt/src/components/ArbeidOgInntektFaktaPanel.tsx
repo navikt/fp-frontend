@@ -86,12 +86,13 @@ const byggTabellStruktur = (
       const ne: ArbeidsforholdOgInntektRadData = {
         arbeidsgiverIdent: af.arbeidsgiverIdent,
         arbeidsgiverNavn,
-        arbeidsgiverFødselsdato: arbeidsgiverOpplysninger.erPrivatPerson
-          ? arbeidsgiverOpplysninger.fødselsdato
-          : undefined,
+        ...(arbeidsgiverOpplysninger.erPrivatPerson
+          ? { erPrivatPerson: true, arbeidsgiverFødselsdato: arbeidsgiverOpplysninger.fødselsdato }
+          : { erPrivatPerson: false }),
         årsak: årsak ?? undefined,
         avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
       };
+
       return acc.concat(ne);
     },
     [],
@@ -100,14 +101,15 @@ const byggTabellStruktur = (
   const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
     .filter(im => !arbeidsforhold.some(af => erMatch(af, im)))
     .map<ArbeidsforholdOgInntektRadData>(im => {
-      const arbeidgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
+      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
       return {
+        //internArbeidsforholdId: im.internArbeidsforholdId,
         arbeidsgiverIdent: im.arbeidsgiverIdent,
-        internArbeidsforholdId: im.internArbeidsforholdId,
-        arbeidsgiverNavn: arbeidgiverOpplysninger.navn,
-        arbeidsgiverFødselsdato: arbeidgiverOpplysninger.erPrivatPerson
-          ? arbeidgiverOpplysninger.fødselsdato
-          : undefined,
+        arbeidsgiverNavn: arbeidsgiverOpplysninger.navn,
+
+        ...(arbeidsgiverOpplysninger.erPrivatPerson
+          ? { erPrivatPerson: true, arbeidsgiverFødselsdato: arbeidsgiverOpplysninger.fødselsdato }
+          : { erPrivatPerson: false }),
         årsak: im.årsak ?? undefined,
         avklaring: im.saksbehandlersVurdering
           ? {
@@ -279,6 +281,7 @@ export const ArbeidOgInntektFaktaPanel = ({
               oppdaterTabell={oppdaterTabellData}
               erRadÅpen={åpneRadIndexer.includes(index)}
               alleKodeverk={alleKodeverk}
+              arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[radData.arbeidsgiverIdent]}
             />
           ))}
         </Table.Body>

@@ -6,11 +6,20 @@ export type Avklaring = {
   tom?: string;
   stillingsprosent?: number;
 };
+type AGOpplysninger =
+  | {
+      erPrivatPerson: true;
+      arbeidsgiverIdent: string;
+      arbeidsgiverNavn: string;
+      arbeidsgiverFødselsdato: string;
+    }
+  | {
+      erPrivatPerson: false;
+      arbeidsgiverIdent: string;
+      arbeidsgiverNavn: string;
+    };
 
 export type ArbeidsforholdOgInntektRadData = {
-  arbeidsgiverIdent: string;
-  arbeidsgiverNavn: string;
-  arbeidsgiverFødselsdato?: string;
   årsak?: string;
   avklaring?: Avklaring;
-};
+} & AGOpplysninger;

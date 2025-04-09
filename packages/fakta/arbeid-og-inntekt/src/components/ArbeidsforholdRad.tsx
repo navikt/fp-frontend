@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label, Table } from '@navikt/ds-react';
+import { BodyShort, Box, Label, Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
@@ -117,35 +117,34 @@ export const ArbeidsforholdRad = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { arbeidsgiverNavn, arbeidsgiverIdent, årsak, avklaring, arbeidsgiverFødselsdato } = radData;
-
   const arbeidsforholdForRad = useMemo(
-    () => arbeidOgInntekt.arbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsgiverIdent),
-    [arbeidOgInntekt, arbeidsgiverIdent],
+    () => arbeidOgInntekt.arbeidsforhold.filter(a => a.arbeidsgiverIdent === radData.arbeidsgiverIdent),
+    [arbeidOgInntekt, radData.arbeidsgiverIdent],
   );
   const inntektsmeldingerForRad = useMemo(
-    () => arbeidOgInntekt.inntektsmeldinger.filter(i => i.arbeidsgiverIdent === arbeidsgiverIdent),
-    [arbeidOgInntekt, arbeidsgiverIdent],
+    () => arbeidOgInntekt.inntektsmeldinger.filter(i => i.arbeidsgiverIdent === radData.arbeidsgiverIdent),
+    [arbeidOgInntekt, radData.arbeidsgiverIdent],
   );
 
   const erManueltOpprettet =
-    avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
+    radData.avklaring?.saksbehandlersVurdering ===
+    ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
   const harArbeidsforholdOgInntektsmelding =
-    arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length > 0 && !årsak;
-  const manglerInntektsmelding = årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
-  const manglerArbeidsforhold = årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
-  const harÅpentAksjonspunkt = !!årsak && !avklaring?.saksbehandlersVurdering;
+    arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length > 0 && !radData.årsak;
+  const manglerInntektsmelding = radData.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
+  const manglerArbeidsforhold = radData.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
+  const harÅpentAksjonspunkt = !!radData.årsak && !radData.avklaring?.saksbehandlersVurdering;
   const harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak =
-    arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length === 0 && !årsak && !erManueltOpprettet;
+    arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length === 0 && !radData.årsak && !erManueltOpprettet;
   const harKunInntektsmeldingOgIkkeÅrsak =
-    arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !årsak;
+    arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !radData.årsak;
 
   const periode = useMemo(
     () => finnPeriode(arbeidsforholdForRad, radData.avklaring),
     [erManueltOpprettet, arbeidsforholdForRad, radData.avklaring],
   );
   const inntektsposter = arbeidOgInntekt.inntekter.find(
-    inntekt => inntekt.arbeidsgiverIdent === arbeidsgiverIdent,
+    inntekt => inntekt.arbeidsgiverIdent === radData.arbeidsgiverIdent,
   )?.inntekter;
 
   return (
@@ -179,7 +178,7 @@ export const ArbeidsforholdRad = ({
               arbeidsforholdForRad={arbeidsforholdForRad}
               inntektsmeldingerForRad={inntektsmeldingerForRad}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              radData={radData}
             />
           )}
           {harKunInntektsmeldingOgIkkeÅrsak && (
@@ -192,7 +191,7 @@ export const ArbeidsforholdRad = ({
               )}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              radData={radData}
             />
           )}
           {manglerInntektsmelding && (
@@ -210,7 +209,6 @@ export const ArbeidsforholdRad = ({
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
           {manglerArbeidsforhold && (
@@ -218,7 +216,6 @@ export const ArbeidsforholdRad = ({
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               behandlingVersjon={behandlingVersjon}
-              arbeidsgiverNavn={arbeidsgiverNavn}
               inntektsmelding={inntektsmeldingerForRad[0]}
               radData={radData}
               isReadOnly={isReadOnly}
@@ -236,7 +233,7 @@ export const ArbeidsforholdRad = ({
               inntektsposter={inntektsposter}
               arbeidsforholdForRad={arbeidsforholdForRad}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              radData={radData}
             />
           )}
         </div>
@@ -254,8 +251,8 @@ export const ArbeidsforholdRad = ({
         )}
       </Table.DataCell>
       <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
-        {erRadÅpen && <Label size="small">{arbeidsgiverNavn}</Label>}
-        {!erRadÅpen && <BodyShort size="small">{arbeidsgiverNavn}</BodyShort>}
+        {erRadÅpen && <Label size="small">{radData.arbeidsgiverNavn}</Label>}
+        {!erRadÅpen && <BodyShort size="small">{radData.arbeidsgiverNavn}</BodyShort>}
       </Table.DataCell>
       <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
         <BodyShort>
