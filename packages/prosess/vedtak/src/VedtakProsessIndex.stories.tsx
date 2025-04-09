@@ -32,6 +32,7 @@ import type {
 
 import mal from '../.storybook/brevmal/mal.html?raw';
 import redigertInnhold from '../.storybook/brevmal/redigertInnhold.html?raw';
+import { VedtakEditeringProvider } from './VedtakEditeringContext';
 import { VedtakProsessIndex } from './VedtakProsessIndex';
 
 const defaultAksjonspunkter = [
@@ -82,21 +83,19 @@ const meta = {
   args: {
     vilkar: defaultVilkar,
     previewCallback: action('button-click'),
-    hentBrevOverstyring: action('button-click') as () => Promise<BrevOverstyring>,
-    mellomlagreBrevOverstyring: action('button-click') as (html: string | null) => Promise<void>,
   },
   render: args => {
     const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
 
     const mellomlagreBrevOverstyring = (redigert: string | null) => {
       setRedigertHtml(redigert);
-      return args.mellomlagreBrevOverstyring(redigert);
+      action('button-click')(redigert);
+      return Promise.resolve();
     };
 
     return (
-      <VedtakProsessIndex
-        {...args}
-        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+      <VedtakEditeringProvider
+        behandling={args.behandling ?? defaultBehandling}
         hentBrevOverstyring={() => {
           return redigertHtml && args.brevOverstyring
             ? Promise.resolve({
@@ -105,7 +104,11 @@ const meta = {
               })
             : Promise.resolve(args.brevOverstyring);
         }}
-      />
+        hentBrevOverstyringIsPending={false}
+        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+      >
+        <VedtakProsessIndex {...args} />
+      </VedtakEditeringProvider>
     );
   },
 } satisfies Meta<PanelDataArgs & { brevOverstyring: BrevOverstyring } & ComponentProps<typeof VedtakProsessIndex>>;

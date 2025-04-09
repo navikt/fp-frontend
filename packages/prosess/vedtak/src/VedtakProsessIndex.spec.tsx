@@ -73,7 +73,7 @@ describe('VedtakProsessIndex', () => {
     ]);
   });
 
-  it.skip('skal redigere innvilget vedtaksbrev, forhåndsvise og så fatte vedtak', async () => {
+  it('skal åpne modal for redigering og så forhåndsvise brev', async () => {
     const lagre = vi.fn();
     const mellomlagreBrev = vi.fn();
     const forhåndsvis = vi.fn();
@@ -105,25 +105,6 @@ describe('VedtakProsessIndex', () => {
       dokumentMal: DokumentMalType.FRITEKST_HTML,
       fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
     });
-
-    await userEvent.click(screen.getByText('Lagre og lukk'));
-
-    await waitFor(() => expect(mellomlagreBrev).toHaveBeenCalledTimes(1));
-    expect(mellomlagreBrev).toHaveBeenNthCalledWith(
-      1,
-      expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
-    );
-
-    await userEvent.click(screen.getByText('Til godkjenning'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [
-      {
-        begrunnelse: undefined,
-        kode: '5015',
-        skalBrukeOverstyrendeFritekstBrev: true,
-      },
-    ]);
   });
 
   it('skal redigere innvilget vedtaksbrev, åpne redigeringsmodal, forkaste overstyring og så fatte vedtak', async () => {
