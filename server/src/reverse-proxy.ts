@@ -61,8 +61,8 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
 
       const queryString = urlFromRequest.query;
       const newPath =
-        (pathFromApi || "") +
-        (pathFromRequest || "") +
+        (pathFromApi ?? "") +
+        (pathFromRequest ?? "") +
         (queryString ? `?${queryString}` : "");
 
       logger.info(
