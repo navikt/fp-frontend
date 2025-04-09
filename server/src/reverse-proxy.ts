@@ -111,7 +111,7 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
 export const setupProxies = (router: Router) => {
   for (const api of config.reverseProxyConfig.apis) {
     router.use(
-      `${api.path}/*`,
+      `${api.path}/*splat`,
       (request, response, next) => {
         if (request.timedout) {
           logger.warning(`Request for ${request.originalUrl} timed out!`);
