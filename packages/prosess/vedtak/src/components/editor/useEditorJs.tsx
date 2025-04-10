@@ -64,15 +64,12 @@ export const useEditorJs = (
           new Undo({ editor });
           refEditorJs.current = editor;
 
-          //Sjekk om save eksisterar for å unngå warning i test
-          if (editor.save) {
-            // Dette er for å seinare kunne finna ut om innhaldet er endra
-            const innhold = await editor.save();
-            refCurrentHtml.current = edjsHTML().parse(innhold);
-          }
+          // Dette er for å seinare kunne finna ut om innhaldet er endra
+          const innhold = await editor.save();
+          refCurrentHtml.current = edjsHTML().parse(innhold);
         },
         tools: getTools(intl),
-        onChange: async () => {
+        onChange: () => {
           lagreBrevDebouncer(validerOgLagre);
         },
       });

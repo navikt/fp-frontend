@@ -2527,7 +2527,7 @@ __metadata:
     "@navikt/fp-utils-test": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.10
     "@navikt/ft-form-validators": 3.1.12
-    "@navikt/ft-plattform-komponenter": 8.0.0
+    "@navikt/ft-plattform-komponenter": 9.0.0
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@testing-library/dom": 10.4.0
@@ -3140,13 +3140,13 @@ __metadata:
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 8.4.6
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.12
+    "@navikt/ft-fakta-beregning": 8.4.7
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.13
     "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 3.2.10
     "@navikt/ft-form-hooks": 6.2.10
     "@navikt/ft-form-validators": 3.1.12
-    "@navikt/ft-plattform-komponenter": 8.0.0
-    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.1
+    "@navikt/ft-plattform-komponenter": 9.0.0
+    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.2
     "@navikt/ft-prosess-tilbakekreving": 4.2.10
     "@navikt/ft-prosess-tilbakekreving-foreldelse": 4.2.10
     "@navikt/ft-prosess-tilbakekreving-vedtak": 3.2.10
@@ -4050,7 +4050,7 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.2.10
     "@navikt/ft-form-validators": 3.1.12
-    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.1
+    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.2
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
@@ -4405,7 +4405,7 @@ __metadata:
     "@navikt/fp-sak-visittkort": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-plattform-komponenter": 8.0.0
+    "@navikt/ft-plattform-komponenter": 9.0.0
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
@@ -4434,7 +4434,7 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-plattform-komponenter": 8.0.0
+    "@navikt/ft-plattform-komponenter": 9.0.0
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
@@ -4467,7 +4467,7 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-konstanter": 3.1.4
-    "@navikt/ft-plattform-komponenter": 8.0.0
+    "@navikt/ft-plattform-komponenter": 9.0.0
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
@@ -4806,7 +4806,7 @@ __metadata:
     "@navikt/ds-react": 7.18.0
     "@navikt/ft-form-hooks": 6.2.10
     "@navikt/ft-form-validators": 3.1.12
-    "@navikt/ft-plattform-komponenter": 8.0.0
+    "@navikt/ft-plattform-komponenter": 9.0.0
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
@@ -4940,11 +4940,11 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 8.4.6
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.12
+    "@navikt/ft-fakta-beregning": 8.4.7
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.13
     "@navikt/ft-form-hooks": 6.2.10
     "@navikt/ft-form-validators": 3.1.12
-    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.1
+    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.2
     "@navikt/ft-ui-komponenter": 4.0.1
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
@@ -5006,7 +5006,7 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:^"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:^"
-    "@navikt/ft-plattform-komponenter": 8.0.0
+    "@navikt/ft-plattform-komponenter": 9.0.0
     "@navikt/ft-utils": 3.3.2
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
@@ -5050,9 +5050,9 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-fakta-beregning": 8.4.6
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.12
-    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.1
+    "@navikt/ft-fakta-beregning": 8.4.7
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.13
+    "@navikt/ft-prosess-beregningsgrunnlag": 8.3.2
     typescript: 5.8.3
     vite: 6.2.5
   languageName: unknown
@@ -5143,9 +5143,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning@npm:8.4.6":
-  version: 8.4.6
-  resolution: "@navikt/ft-fakta-beregning@npm:8.4.6::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F8.4.6%2Fa2be004039015b042067f5636f7a7c5f715a5eb5"
+"@navikt/ft-fakta-beregning@npm:8.4.7":
+  version: 8.4.7
+  resolution: "@navikt/ft-fakta-beregning@npm:8.4.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F8.4.7%2F18a14051fa0350dc2f7c74b6b3027c3fc66fd21f"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -5179,13 +5179,13 @@ __metadata:
     react-dom: 19.0.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: bf76d941b7d0cd7bb1b89003c257ef16ff6e4052e73a7a6fcd7f0da69079219570810134237abc741386f73e77ff7aa65f030f64ce17d627e9756353d69006c5
+  checksum: 9b8e91ace66f76e9b5ec6c5ea03298dd1eae2bc3d21472ace89e5d41eb3d8e1e6530dd2562f5359cc6324826bcb6a4d3712e19bc2162a71879cc2db9524f6a2d
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:9.2.12":
-  version: 9.2.12
-  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:9.2.12::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F9.2.12%2F3e45f26bdf17dddb8bc8bbea28cb15eb5575f5ce"
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:9.2.13":
+  version: 9.2.13
+  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:9.2.13::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F9.2.13%2Fc9885ddb98b1f5ad49781c2814fb14789832d9ae"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -5219,7 +5219,7 @@ __metadata:
     react-hook-form: 7.x
     react-intl: 6.x
     uuid: 9.0.1
-  checksum: 0a866ed5464bbdba21091881d3f6463099092453bf960998ab80f2e612c999137e9992431c949ac9f4a207b0453b636e4460d254b241eb0e6895fc9f72ad491a
+  checksum: e56bc6cbd21bbc8ac4e729f2f0835c3ebd77dab3dba636965ae29e43557963bc982197673c1ba9c41ca86d68e03259423062a1d35f2758e959ae3d8372f42e00
   languageName: node
   linkType: hard
 
@@ -5317,9 +5317,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-plattform-komponenter@npm:8.0.0":
-  version: 8.0.0
-  resolution: "@navikt/ft-plattform-komponenter@npm:8.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-plattform-komponenter%2F8.0.0%2F3f038ee1381f7d450413f1b167da3e49799a00ad"
+"@navikt/ft-plattform-komponenter@npm:9.0.0":
+  version: 9.0.0
+  resolution: "@navikt/ft-plattform-komponenter@npm:9.0.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-plattform-komponenter%2F9.0.0%2Fba4ed08c681f1dd43883f316395278900799c046"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -5336,13 +5336,13 @@ __metadata:
     prop-types: 15.8.1
     react: 19.0.0
     react-dom: 19.0.0
-  checksum: f0aa1b50ff66e486c2cb3de2c9b59f6c3667258d3904812f02020e7285a5239980508fa664b0e34ce46d97782d8ef53127824748d1dc0cae63b8b1a28ad8905a
+  checksum: 814e8a6223bf9abf8b08f6a7e1a8f420d3f2fab418952e3e83f4e3819e08088afe163d5145a4dd0b16f607590f0bd460b90a3cab2b2af2b067fecf936b3ab88e
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregningsgrunnlag@npm:8.3.1":
-  version: 8.3.1
-  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:8.3.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F8.3.1%2F0f62d831f291f666a1ee64261b9e3a5bf642197b"
+"@navikt/ft-prosess-beregningsgrunnlag@npm:8.3.2":
+  version: 8.3.2
+  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:8.3.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F8.3.2%2F61802fefaaf73d228720fd104692d1f9c8ea6e10"
   dependencies:
     "@navikt/aksel-icons": 7.18.0
     "@navikt/ds-css": 7.18.0
@@ -5374,7 +5374,7 @@ __metadata:
     react: 19.0.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 6bff4a77b345acfd5d0788988325bb017576dd0f22da9f94ffd3c9eb65c97314c46f3c44684657e3bf1ad03d69c92dc666160a61e3914f8d747ae77b14698e59
+  checksum: 67a8f6793f481db7784d88875ff413e5aee130afafcd339e943f5da42668f2b79fa1f41a0b752acfec770270abaf35a8714b26d7bbe31dbe76ecd006eafeaa90
   languageName: node
   linkType: hard
 
