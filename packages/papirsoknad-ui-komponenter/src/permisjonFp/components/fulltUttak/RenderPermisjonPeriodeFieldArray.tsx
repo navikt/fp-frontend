@@ -230,8 +230,8 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) 
         periodeType: value.periodeType,
         periodeFom: value.periodeFom,
         periodeTom: value.periodeTom,
-        flerbarnsdager: value.flerbarnsdager || false,
-        harSamtidigUttak: value.harSamtidigUttak || false,
+        flerbarnsdager: value.flerbarnsdager ?? false,
+        harSamtidigUttak: value.harSamtidigUttak ?? false,
         samtidigUttaksprosent: value.samtidigUttaksprosent,
       };
     }
@@ -240,8 +240,8 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) 
       periodeFom: value.periodeFom,
       periodeTom: value.periodeTom,
       morsAktivitet: value.morsAktivitet,
-      flerbarnsdager: value.flerbarnsdager || false,
-      harSamtidigUttak: value.harSamtidigUttak || false,
+      flerbarnsdager: value.flerbarnsdager ?? false,
+      harSamtidigUttak: value.harSamtidigUttak ?? false,
       samtidigUttaksprosent: value.samtidigUttaksprosent,
     };
   });
