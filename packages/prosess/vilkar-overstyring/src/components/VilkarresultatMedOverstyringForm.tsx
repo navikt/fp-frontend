@@ -67,7 +67,7 @@ const createInitialValues = (
     if (aksjonspunkt) {
       return {
         ...felles,
-        ...createMedlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat || null),
+        ...createMedlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat ?? null),
       };
     } else {
       return felles;
@@ -149,7 +149,7 @@ export const VilkarresultatMedOverstyringForm = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const togglePa = () => toggleOverstyring();

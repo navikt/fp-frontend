@@ -157,7 +157,7 @@ export const ArbeidOgInntektFaktaPanel = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<ArbeidsforholdOgInntektRadData[]>();
 
   const [tabellRader, setTabellRader] = useState<ArbeidsforholdOgInntektRadData[]>(
-    mellomlagretFormData || byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId),
+    mellomlagretFormData ?? byggTabellStruktur(arbeidOgInntekt, arbeidsgiverOpplysningerPerId),
   );
   const [åpneRadIndexer, setÅpneRadIndexer] = useState(finnUløstArbeidsforholdIndex(tabellRader));
 

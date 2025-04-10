@@ -124,7 +124,7 @@ export const AvklarFaresignalerForm = ({
             {
               value: FaresignalVurdering.INNVIRKNING,
               label:
-                faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INNVIRKNING)?.navn || '',
+                faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INNVIRKNING)?.navn ?? '',
               element: (
                 <div style={{ paddingTop: '15px' }}>
                   {harValgtReelle && (
@@ -147,7 +147,7 @@ export const AvklarFaresignalerForm = ({
               value: FaresignalVurdering.INGEN_INNVIRKNING,
               label:
                 faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INGEN_INNVIRKNING)
-                  ?.navn || '',
+                  ?.navn ?? '',
             },
           ]}
         />

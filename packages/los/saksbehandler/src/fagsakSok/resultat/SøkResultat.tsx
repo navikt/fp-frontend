@@ -20,8 +20,8 @@ const sorterFagsaker = (fagsak1: FagsakEnkel, fagsak2: FagsakEnkel) => {
   if (fagsak1.status !== FagsakStatus.AVSLUTTET && fagsak2.status === FagsakStatus.AVSLUTTET) {
     return -1;
   }
-  const changeTimeFagsak1 = fagsak1.endret ? fagsak1.endret : fagsak1.opprettet;
-  const changeTimeFagsak2 = fagsak2.endret ? fagsak2.endret : fagsak2.opprettet;
+  const changeTimeFagsak1 = fagsak1.endret ?? fagsak1.opprettet;
+  const changeTimeFagsak2 = fagsak2.endret ?? fagsak2.opprettet;
   return dayjs(changeTimeFagsak1, ISO_DATE_FORMAT).diff(dayjs(changeTimeFagsak2, ISO_DATE_FORMAT));
 };
 

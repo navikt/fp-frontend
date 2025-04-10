@@ -20,7 +20,7 @@ const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilrettele
   if (tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING) {
     return 100;
   }
-  return tilrettelegging.overstyrtUtbetalingsgrad || 0;
+  return tilrettelegging.overstyrtUtbetalingsgrad ?? 0;
 };
 
 const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
@@ -30,7 +30,7 @@ const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato): 
   if (tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING) {
     return 0;
   }
-  return tilrettelegging.stillingsprosent || 0;
+  return tilrettelegging.stillingsprosent ?? 0;
 };
 
 interface Props {

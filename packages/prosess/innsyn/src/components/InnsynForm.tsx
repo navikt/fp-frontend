@@ -52,7 +52,7 @@ const getDefaultValues = (
   fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
   sattPaVent: aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
-  ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter || []),
+  ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
 });
 
 const getDocumentsStatus = (values: FormValues, documents: Dokument[]) =>
@@ -113,7 +113,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || defaultValues,
+    defaultValues: mellomlagretFormData ?? defaultValues,
   });
 
   const documents = getFilteredReceivedDocuments(alleDokumenter);
@@ -151,7 +151,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
           validate={[required, hasValidDate]}
         />
         <VedtakDocuments
-          vedtaksdokumenter={innsyn?.vedtaksdokumentasjon || EMPTY_ARRAY}
+          vedtaksdokumenter={innsyn?.vedtaksdokumentasjon ?? EMPTY_ARRAY}
           behandlingTypes={alleKodeverk[KodeverkType.BEHANDLING_TYPE]}
         />
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />

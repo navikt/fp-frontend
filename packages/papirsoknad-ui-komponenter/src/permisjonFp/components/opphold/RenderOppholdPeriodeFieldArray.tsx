@@ -22,7 +22,7 @@ const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${OPPHOLD_PERIODE_FIELD
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
 const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
-  const perioder = getValues(`${FA_PREFIX}`) || [];
+  const perioder = getValues(`${FA_PREFIX}`) ?? [];
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);

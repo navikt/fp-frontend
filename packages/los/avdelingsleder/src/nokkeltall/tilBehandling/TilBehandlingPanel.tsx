@@ -49,7 +49,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
 
   const formMethods = useForm<FormValues>({
-    defaultValues: lagredeVerdier || formDefaultValues,
+    defaultValues: lagredeVerdier ?? formDefaultValues,
   });
 
   const values = formMethods.watch();

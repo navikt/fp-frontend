@@ -195,7 +195,7 @@ export const SokersOpplysningspliktForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
@@ -239,9 +239,7 @@ export const SokersOpplysningspliktForm = ({
                 </Table.Header>
                 <Table.Body>
                   {sorterteManglendeVedlegg.map(vedlegg => (
-                    <Table.Row
-                      key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ? vedlegg.arbeidsgiverReferanse : '')}
-                    >
+                    <Table.Row key={vedlegg.dokumentType + (vedlegg.arbeidsgiverReferanse ?? '')}>
                       <Table.DataCell>{vedlegg.dokumentTittel}</Table.DataCell>
                       <Table.DataCell>
                         {!!vedlegg.arbeidsgiverReferanse &&
@@ -272,7 +270,7 @@ export const SokersOpplysningspliktForm = ({
                     <FormattedMessage
                       id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
                       values={{
-                        b: (chunks: any) => <b key="bold">{chunks}</b>,
+                        b: chunks => <b key="bold">{chunks}</b>,
                         br: <br key="break-line" />,
                       }}
                     />

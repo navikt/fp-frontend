@@ -70,7 +70,7 @@ export const AppIndex = () => {
     setCrashMessage(error);
   };
 
-  const errorMessages = useRestApiError() || EMPTY_ARRAY;
+  const errorMessages = useRestApiError() ?? EMPTY_ARRAY;
   const queryStrings = parseQueryString(location.search);
   const hasForbiddenErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_FORBIDDEN);
   const hasUnauthorizedErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_UNAUTHORIZED);

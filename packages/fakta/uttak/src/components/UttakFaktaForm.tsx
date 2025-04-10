@@ -82,7 +82,7 @@ const leggTilAksjonspunktMarkering = (
   });
 
 const periodeSkalVurderesIftFørsteDato = (periode: KontrollerFaktaPeriode): boolean =>
-  !(periode.utsettelseÅrsak || periode.oppholdÅrsak);
+  !(periode.utsettelseÅrsak ?? periode.oppholdÅrsak);
 
 const valider = (
   uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[],
@@ -187,7 +187,7 @@ export const UttakFaktaForm = ({
   }>();
 
   const [uttakPerioder, setUttakPerioder] = useState<KontrollerFaktaPeriodeMedApMarkering[]>(
-    mellomlagretFormData?.uttakPerioder || sortertePerioder,
+    mellomlagretFormData?.uttakPerioder ?? sortertePerioder,
   );
 
   const [valgteFomDatoer, setValgteFomDatoer] = useState<string[]>([]);

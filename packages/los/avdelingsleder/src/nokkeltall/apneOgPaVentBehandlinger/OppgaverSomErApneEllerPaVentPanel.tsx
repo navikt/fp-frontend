@@ -49,7 +49,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
   );
 
   const formMethods = useForm({
-    defaultValues: lagredeVerdier || formDefaultValues,
+    defaultValues: lagredeVerdier ?? formDefaultValues,
   });
 
   const values = formMethods.watch();

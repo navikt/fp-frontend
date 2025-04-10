@@ -47,7 +47,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || createInitialValues(ytelsefordeling, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData ?? createInitialValues(ytelsefordeling, aksjonspunkterForPanel),
   });
 
   const harAksjonspunkt = aksjonspunkterForPanel.length > 0;

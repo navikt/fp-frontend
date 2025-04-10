@@ -185,7 +185,7 @@ const hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling = (
   erOppfylt?: boolean,
 ): string | undefined => {
   if (utsettelseType && utsettelseType === UtsettelseArsakCode.ARBEID && erOppfylt && aktiviteter) {
-    const prosentIArbeid = aktiviteter.reduce((total, aktivitet): number => total + (aktivitet.prosentArbeid || 0), 0);
+    const prosentIArbeid = aktiviteter.reduce((total, aktivitet): number => total + (aktivitet.prosentArbeid ?? 0), 0);
     if (prosentIArbeid < 100) {
       return intl.formatMessage({ id: 'UttakActivity.MerEn100ProsentOgOgyldigUtsettlse' });
     }
@@ -199,7 +199,7 @@ const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
   intl: IntlShape,
 ): string | undefined => {
   const harMerEnn100 = formAktiviteter.some(
-    (aktivitet, index) => parseFloat(aktivitet.utbetalingsgrad) + (aktiviteter[index].prosentArbeid || 0) > 100,
+    (aktivitet, index) => parseFloat(aktivitet.utbetalingsgrad) + (aktiviteter[index].prosentArbeid ?? 0) > 100,
   );
   return harMerEnn100 ? intl.formatMessage({ id: 'UttakActivity.MerEn100Prosent' }) : undefined;
 };
@@ -225,7 +225,7 @@ const byggDefaultValues = (
     periodeAarsak: valgtPeriode.periodeResultatÅrsak,
     graderingInnvilget: valgtPeriode.graderingInnvilget,
     samtidigUttak: valgtPeriode.samtidigUttak,
-    graderingAvslagAarsak: valgtPeriode.graderingAvslagÅrsak ? valgtPeriode.graderingAvslagÅrsak : '-',
+    graderingAvslagAarsak: valgtPeriode.graderingAvslagÅrsak ?? '-',
     samtidigUttaksprosent: valgtPeriode.samtidigUttaksprosent
       ? valgtPeriode.samtidigUttaksprosent.toString()
       : undefined,
@@ -331,7 +331,7 @@ export const UttakPeriodeForm = ({
         erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
         årsakFilter,
         valgtPeriode.utsettelseType,
-        førsteValgteStønadskonto || valgtPeriode.periodeType,
+        førsteValgteStønadskonto ?? valgtPeriode.periodeType,
         valgtPeriode.aktiviteter.length === 1,
       ),
     [erOppfylt, årsakFilter, valgtPeriode, førsteValgteStønadskonto],
