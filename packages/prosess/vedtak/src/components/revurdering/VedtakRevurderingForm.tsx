@@ -22,7 +22,6 @@ import type {
   Behandling,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
-  BrevOverstyring,
   Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
@@ -40,6 +39,7 @@ import type {
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakResultType } from '../../kodeverk/vedtakResultType';
+import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import { buildInitialValues } from '../forstegang/VedtakForm';
@@ -227,8 +227,6 @@ interface Props {
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
-  hentBrevOverstyring: () => Promise<BrevOverstyring>;
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
 }
 
 export const VedtakRevurderingForm = ({
@@ -240,18 +238,16 @@ export const VedtakRevurderingForm = ({
   beregningErManueltFastsatt,
   beregningsresultatOriginalBehandling,
   oppgaver,
-  hentBrevOverstyring,
-  mellomlagreBrevOverstyring,
 }: Props) => {
   const intl = useIntl();
 
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
     usePanelDataContext<RevurderingVedtakAksjonspunkter[]>();
 
-  const { vedtaksbrev, harRedigertVedtaksbrev } = behandling.behandlingsresultat ?? {};
+  const { harRedigertBrev } = useVedtakEditeringContext();
 
   const [harValgtÅRedigereVedtaksbrev, setHarValgtÅRedigereVedtaksbrev] = useState(
-    harRedigertVedtaksbrev || vedtaksbrev === DokumentMalType.FRITEKST,
+    harRedigertBrev || behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
   );
 
   const { behandlingsresultat, språkkode, aksjonspunkt, behandlingÅrsaker } = behandling;
@@ -317,8 +313,6 @@ export const VedtakRevurderingForm = ({
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
-        hentBrevOverstyring={hentBrevOverstyring}
-        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
         harValgtÅRedigereVedtaksbrev={harValgtÅRedigereVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt, erOpphor) => {
