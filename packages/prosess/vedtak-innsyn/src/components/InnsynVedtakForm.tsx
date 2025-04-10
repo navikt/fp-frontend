@@ -121,7 +121,7 @@ export const InnsynVedtakForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const documents = useMemo(

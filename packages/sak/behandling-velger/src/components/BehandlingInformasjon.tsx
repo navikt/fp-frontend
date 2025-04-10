@@ -39,7 +39,7 @@ export const BehandlingInformasjon = ({
         <HStack gap="4">
           <div className={styles.arsakPadding}>
             <Label size="small">
-              {getKodeverkMedNavn(behandling.type, KodeverkType.BEHANDLING_TYPE, behandling.type)?.navn || ''}
+              {getKodeverkMedNavn(behandling.type, KodeverkType.BEHANDLING_TYPE, behandling.type)?.navn ?? ''}
             </Label>
           </div>
           {(behandling.type === BehandlingType.REVURDERING || behandling.type === BehandlingType.KLAGE) &&
@@ -51,7 +51,7 @@ export const BehandlingInformasjon = ({
                     behandling.førsteÅrsak.behandlingArsakType,
                     KodeverkType.BEHANDLING_AARSAK,
                     BehandlingType.REVURDERING,
-                  )?.navn || ''}
+                  )?.navn ?? ''}
                 </BodyShort>
               </>
             )}
@@ -97,7 +97,7 @@ export const BehandlingInformasjon = ({
             <div>
               <BodyShort size="small">
                 {getKodeverkMedNavn(behandling.status, KodeverkType.BEHANDLING_STATUS, BehandlingType.FORSTEGANGSSOKNAD)
-                  ?.navn || ''}
+                  ?.navn ?? ''}
               </BodyShort>
             </div>
           </HStack>

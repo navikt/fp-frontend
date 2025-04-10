@@ -76,7 +76,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);

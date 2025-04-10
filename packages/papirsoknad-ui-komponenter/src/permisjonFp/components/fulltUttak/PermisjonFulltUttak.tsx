@@ -19,7 +19,7 @@ interface Props {
 
 export const PermisjonFulltUttak = ({ foreldreType, readOnly, alleKodeverk }: Props) => {
   const { watch } = useFormContext<PermisjonFormValues>();
-  const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) || false;
+  const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) ?? false;
 
   return (
     <VStack gap="2">

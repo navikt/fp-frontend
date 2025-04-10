@@ -84,7 +84,7 @@ export const BehandleKlageFormNfp = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<KlageFormType>();
 
   const formMethods = useForm<KlageFormType>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
   const formValues = formMethods.watch();
 

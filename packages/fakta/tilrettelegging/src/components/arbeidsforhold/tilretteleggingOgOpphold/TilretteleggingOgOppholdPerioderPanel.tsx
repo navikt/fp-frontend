@@ -27,7 +27,7 @@ const finnTilrettelegging = (
     return undefined;
   }
   const nesteTilrettelegging = tilretteleggingDatoer.find(t => t.fom === nesteFomDato);
-  return nesteTilrettelegging || finnTilrettelegging(alleFomDatoerSortert, tilretteleggingDatoer, index + 1);
+  return nesteTilrettelegging ?? finnTilrettelegging(alleFomDatoerSortert, tilretteleggingDatoer, index + 1);
 };
 
 interface Props {

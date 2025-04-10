@@ -49,7 +49,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || buildInitialValues(verge, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(verge, aksjonspunkterForPanel),
     shouldUnregister: true,
   });
 

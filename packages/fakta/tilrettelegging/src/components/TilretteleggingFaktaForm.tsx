@@ -87,7 +87,7 @@ export const TilretteleggingFaktaForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<TilretteleggingFormValues>();
 
   const formMethods = useForm<TilretteleggingFormValues>({
-    defaultValues: mellomlagretFormData || {
+    defaultValues: mellomlagretFormData ?? {
       arbeidsforhold: sorterteArbeidsforhold,
       termindato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.termindato : '',
       fødselsdato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.fødselsdato : '',
@@ -95,7 +95,7 @@ export const TilretteleggingFaktaForm = ({
     },
   });
 
-  const fødselsdato = svangerskapspengerTilrettelegging?.fødselsdato || '';
+  const fødselsdato = svangerskapspengerTilrettelegging?.fødselsdato ?? '';
 
   const isRequiredFn = getIsBegrunnelseRequired(formMethods.formState.isDirty);
 

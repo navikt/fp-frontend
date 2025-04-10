@@ -139,8 +139,8 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
   return (
     <>
       <FagsakSøk
-        fagsaker={fagsaker || []}
-        fagsakOppgaver={fagsakOppgaver || []}
+        fagsaker={fagsaker ?? []}
+        fagsakOppgaver={fagsakOppgaver ?? []}
         searchFagsakCallback={sokFagsakFn}
         searchResultReceived={erSøkFerdig}
         åpneFagsak={åpneFagsak}

@@ -8,7 +8,6 @@ import type {
   Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
-  BrevOverstyring,
   Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
@@ -36,8 +35,6 @@ interface Props {
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
-  hentBrevOverstyring: () => Promise<BrevOverstyring>;
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
 }
 
 export const VedtakProsessIndex = ({
@@ -50,8 +47,6 @@ export const VedtakProsessIndex = ({
   beregningsresultatOriginalBehandling,
   previewCallback,
   oppgaver,
-  hentBrevOverstyring,
-  mellomlagreBrevOverstyring,
 }: Props) => {
   const { behandling, fagsak } = usePanelDataContext();
 
@@ -82,8 +77,6 @@ export const VedtakProsessIndex = ({
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           oppgaver={oppgaver}
-          hentBrevOverstyring={hentBrevOverstyring}
-          mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         />
       )}
       {behandling.type === BehandlingType.REVURDERING && (
@@ -96,8 +89,6 @@ export const VedtakProsessIndex = ({
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
           oppgaver={oppgaver}
-          hentBrevOverstyring={hentBrevOverstyring}
-          mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         />
       )}
     </RawIntlProvider>

@@ -104,7 +104,7 @@ const lagRader = (
       type?.kode === OpptjeningAktivitetType.AAP ? intl.formatMessage({ id: 'OpptjeningTidslinje.Aap' }) : type?.navn;
     return {
       id: index + 1,
-      label: label || '',
+      label: label ?? '',
       aktivitetTypeKode: activity.aktivitetType,
       arbeidsforholdRef: activity.arbeidsforholdRef,
       arbeidsgiverReferanse: activity.arbeidsgiverReferanse,

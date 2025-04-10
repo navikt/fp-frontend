@@ -101,7 +101,7 @@ export const FodselInfoPanel = ({
     isReadOnly,
   } = usePanelDataContext<AksjonspunktData>();
 
-  const avklartBarn = familiehendelse?.register?.avklartBarn || EMPTY_ARRAY;
+  const avklartBarn = familiehendelse?.register?.avklartBarn ?? EMPTY_ARRAY;
   const termindato = familiehendelse?.gjeldende?.termindato ?? undefined;
   const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke ?? undefined;
 
@@ -112,7 +112,7 @@ export const FodselInfoPanel = ({
 
   const formMethods = useForm<FormValues>({
     defaultValues:
-      mellomlagretFormData || buildInitialValues(soknad, familiehendelse, terminbekreftelseAp, manglendeFødselAp),
+      mellomlagretFormData ?? buildInitialValues(soknad, familiehendelse, terminbekreftelseAp, manglendeFødselAp),
   });
 
   return (
