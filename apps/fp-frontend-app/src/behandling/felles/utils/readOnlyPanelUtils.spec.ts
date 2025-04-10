@@ -56,7 +56,7 @@ describe('<readOnlyUtils>', () => {
 
   it('skal ikke være readonly', () => {
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling as Behandling, vilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling, vilkar, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(false);
   });
@@ -70,14 +70,14 @@ describe('<readOnlyUtils>', () => {
       },
     };
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling as Behandling, vilkar, nyRettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling, vilkar, nyRettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });
 
   it('skal være readonly når en har fetch error', () => {
     const hasFetchError = true;
-    const readOnly = erReadOnly(behandling as Behandling, vilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling, vilkar, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });
@@ -103,7 +103,7 @@ describe('<readOnlyUtils>', () => {
       },
     ];
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling as Behandling, nyeVilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling, nyeVilkar, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });

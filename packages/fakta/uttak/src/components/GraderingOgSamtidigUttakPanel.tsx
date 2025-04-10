@@ -56,7 +56,7 @@ const mapArbeidsforhold = (
 
     let periodeArbeidsforhold = '';
     if (arbeidType && arbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
-      periodeArbeidsforhold = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(k => k.kode === arbeidType)?.navn || '';
+      periodeArbeidsforhold = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(k => k.kode === arbeidType)?.navn ?? '';
     } else if (arbeidsgiverOpplysninger) {
       periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
     }

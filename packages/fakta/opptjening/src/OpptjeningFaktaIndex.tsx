@@ -18,7 +18,7 @@ interface Props {
 export const OpptjeningFaktaIndex = ({ opptjening, arbeidsgiverOpplysningerPerId }: Props) => {
   const fastsattOpptjening = opptjening ? opptjening.fastsattOpptjening : undefined;
   const opptjeningAktiviteter = opptjening ? opptjening.opptjeningAktivitetList : undefined;
-  const ferdiglignetNæring = opptjening?.ferdiglignetNæring || [];
+  const ferdiglignetNæring = opptjening?.ferdiglignetNæring ?? [];
   return (
     <RawIntlProvider value={intl}>
       <OpptjeningFaktaPanel

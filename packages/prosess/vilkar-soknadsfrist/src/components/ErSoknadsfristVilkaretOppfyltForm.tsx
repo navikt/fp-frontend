@@ -59,12 +59,10 @@ const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | un
       familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
         ? familiehendelse.avklartBarn[0].fodselsdato
         : soknadFodselsdato;
-    const termindato = familiehendelse?.termindato ? familiehendelse.termindato : soknad.termindato;
+    const termindato = familiehendelse?.termindato ?? soknad.termindato;
     return fodselsdato || termindato;
   }
-  return familiehendelse?.omsorgsovertakelseDato
-    ? familiehendelse.omsorgsovertakelseDato
-    : soknad.omsorgsovertakelseDato;
+  return familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato;
 };
 
 export const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
@@ -109,7 +107,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
@@ -169,7 +167,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
               <Detail>
                 {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
               </Detail>
-              <span className="typo-normal">{soknad.begrunnelseForSenInnsending || '-'}</span>
+              <span className="typo-normal">{soknad.begrunnelseForSenInnsending ?? '-'}</span>
             </VStack>
           </VStack>
           <VStack gap="1">

@@ -47,7 +47,7 @@ export const DokumentasjonFaktaForm = ({
   const intl = useIntl();
 
   const { watch } = useFormContext<FormValues>();
-  const fodselsdatoer = watch('fodselsdatoer') || {};
+  const fodselsdatoer = watch('fodselsdatoer') ?? {};
   const omsorgsovertakelseDato = watch('omsorgsovertakelseDato');
   const barnetsAnkomstTilNorgeDato = watch('barnetsAnkomstTilNorgeDato');
 
@@ -128,15 +128,9 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgs
   dayjs(fodselsdatoer[id]).isSameOrBefore(dayjs(omsorgsovertakelseDato).subtract(15, 'years'));
 
 DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato
-    ? familiehendelse.omsorgsovertakelseDato
-    : soknad.omsorgsovertakelseDato,
-  barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge
-    ? familiehendelse.ankomstNorge
-    : soknad.barnetsAnkomstTilNorgeDato,
-  fodselsdatoer: familiehendelse?.adopsjonFodelsedatoer
-    ? familiehendelse.adopsjonFodelsedatoer
-    : soknad.adopsjonFodelsedatoer,
+  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato,
+  barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge ?? soknad.barnetsAnkomstTilNorgeDato,
+  fodselsdatoer: familiehendelse?.adopsjonFodelsedatoer ?? soknad.adopsjonFodelsedatoer,
 });
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({

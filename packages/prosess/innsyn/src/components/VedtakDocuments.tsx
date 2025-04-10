@@ -41,7 +41,7 @@ export const VedtakDocuments = ({ vedtaksdokumenter, behandlingTypes }: Props) =
           <HStack gap="2" key={document.behandlingUuid}>
             <DateLabel dateString={document.opprettetDato} />
             <Link href={hentVedtakDokumentLenke(document.behandlingUuid)} target="_blank">
-              {behandlingTypes.find(bt => bt.kode === document.tittel)?.navn || '-'}
+              {behandlingTypes.find(bt => bt.kode === document.tittel)?.navn ?? '-'}
             </Link>
           </HStack>
         ))}

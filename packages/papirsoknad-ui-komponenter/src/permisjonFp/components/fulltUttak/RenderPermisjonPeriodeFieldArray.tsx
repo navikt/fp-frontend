@@ -64,7 +64,7 @@ const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
   !!periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
 
 const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
-  const perioder = getValues(FA_PREFIX) || [];
+  const perioder = getValues(FA_PREFIX) ?? [];
   const periodeMap = perioder
     .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
     .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
@@ -230,8 +230,8 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) 
         periodeType: value.periodeType,
         periodeFom: value.periodeFom,
         periodeTom: value.periodeTom,
-        flerbarnsdager: value.flerbarnsdager ? value.flerbarnsdager : false,
-        harSamtidigUttak: value.harSamtidigUttak ? value.harSamtidigUttak : false,
+        flerbarnsdager: value.flerbarnsdager ?? false,
+        harSamtidigUttak: value.harSamtidigUttak ?? false,
         samtidigUttaksprosent: value.samtidigUttaksprosent,
       };
     }
@@ -240,8 +240,8 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) 
       periodeFom: value.periodeFom,
       periodeTom: value.periodeTom,
       morsAktivitet: value.morsAktivitet,
-      flerbarnsdager: value.flerbarnsdager ? value.flerbarnsdager : false,
-      harSamtidigUttak: value.harSamtidigUttak ? value.harSamtidigUttak : false,
+      flerbarnsdager: value.flerbarnsdager ?? false,
+      harSamtidigUttak: value.harSamtidigUttak ?? false,
       samtidigUttaksprosent: value.samtidigUttaksprosent,
     };
   });

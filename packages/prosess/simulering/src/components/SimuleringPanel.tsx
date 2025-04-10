@@ -130,7 +130,7 @@ export const SimuleringPanel = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkterForPanel, tilbakekrevingvalg),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, tilbakekrevingvalg),
   });
 
   const { formState } = formMethods;

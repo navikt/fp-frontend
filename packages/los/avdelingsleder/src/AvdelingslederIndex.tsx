@@ -223,5 +223,5 @@ const updateQueryParams = (queryString: string, nextParams: Record<string, strin
 
 const getPanelFromUrlOrDefault = (location: Location) => {
   const panelFromUrl = parseQueryString(location.search);
-  return panelFromUrl['avdelingsleder'] ? panelFromUrl['avdelingsleder'] : AvdelingslederPanels.BEHANDLINGSKOER;
+  return panelFromUrl['avdelingsleder'] ?? AvdelingslederPanels.BEHANDLINGSKOER;
 };

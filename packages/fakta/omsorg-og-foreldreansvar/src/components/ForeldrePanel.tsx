@@ -16,7 +16,7 @@ const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: Personop
     aktoerId,
     navn,
     dødsdato,
-    adresse: postadr || bostedsadr,
+    adresse: postadr ?? bostedsadr,
     erMor: kjønn === NavBrukerKjonn.KVINNE,
   };
 };

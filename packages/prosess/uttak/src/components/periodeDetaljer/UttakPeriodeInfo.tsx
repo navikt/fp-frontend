@@ -120,7 +120,7 @@ const stonadskonto = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk, ko
   if (!kontoIkkeSatt) {
     returnText =
       alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(k => k.kode === valgtPeriode.aktiviteter[0]?.stønadskontoType)
-        ?.navn || '';
+        ?.navn ?? '';
   }
   return returnText;
 };

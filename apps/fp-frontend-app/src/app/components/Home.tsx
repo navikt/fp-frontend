@@ -45,9 +45,9 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
   const { søkInfotrygd } = useFagsakApi();
   const { addErrorMessage, removeErrorMessages } = useRestApiErrorDispatcher();
 
-  const [erLosTilgjengelig, setLosErTilgjengelig] = useState(true);
+  const [erLosTilgjengelig, setErLosTilgjengelig] = useState(true);
   const setLosErIkkeTilgjengelig = () => {
-    setLosErTilgjengelig(false);
+    setErLosTilgjengelig(false);
   };
 
   useEffect(() => {

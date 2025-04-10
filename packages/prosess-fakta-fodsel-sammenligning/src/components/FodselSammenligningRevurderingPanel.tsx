@@ -14,10 +14,10 @@ const getTermindatoEllerFodselsdato = (
     return '';
   }
 
-  const famHendelse = orginalFamiliehendelse || { termindato: undefined, avklartBarn: [] };
+  const famHendelse = orginalFamiliehendelse ?? { termindato: undefined, avklartBarn: [] };
 
   if (isTermin) {
-    const termDato = famHendelse.termindato ? famHendelse.termindato : originalSoknad?.termindato;
+    const termDato = famHendelse?.termindato ?? originalSoknad?.termindato;
     return termDato ? dateFormat(termDato) : undefined;
   }
 
@@ -38,7 +38,7 @@ const getAntallBarn = (
   if (!originalSoknad && !orginalFamiliehendelse) {
     return 0;
   }
-  const famHendelse = orginalFamiliehendelse || { termindato: undefined, antallBarnTermin: undefined, avklartBarn: [] };
+  const famHendelse = orginalFamiliehendelse ?? { termindato: undefined, antallBarnTermin: undefined, avklartBarn: [] };
 
   if (isTermin) {
     return famHendelse.termindato ? famHendelse.antallBarnTermin : originalSoknad?.antallBarn;

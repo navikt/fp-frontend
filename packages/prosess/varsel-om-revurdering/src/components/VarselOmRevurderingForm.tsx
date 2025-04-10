@@ -50,7 +50,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   sendVarsel: undefined,
 });
 
-const nullSafe = (value: FamilieHendelse | null): FamilieHendelse => value || ({} as FamilieHendelse);
+const nullSafe = (value: FamilieHendelse | null): FamilieHendelse => value ?? ({} as FamilieHendelse);
 
 const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
@@ -84,14 +84,14 @@ export const VarselOmRevurderingForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const formVerdier = formMethods.watch();
 
-  const [skalVisePåVentModal, settVisePåVentModal] = useState(false);
-  const lukkModal = () => settVisePåVentModal(false);
-  const åpneModal = () => settVisePåVentModal(true);
+  const [skalVisePåVentModal, settSkalVisePåVentModal] = useState(false);
+  const lukkModal = () => settSkalVisePåVentModal(false);
+  const åpneModal = () => settSkalVisePåVentModal(true);
 
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
     formMethods.trigger().then(isValid => {
@@ -101,7 +101,7 @@ export const VarselOmRevurderingForm = ({
           ...modalValues,
         });
       }
-      settVisePåVentModal(false);
+      settSkalVisePåVentModal(false);
     });
   };
 
@@ -110,7 +110,7 @@ export const VarselOmRevurderingForm = ({
     previewCallback({
       dokumentMal: DokumentMalType.VARSEL_OM_REVURDERING,
       arsakskode: UgunstAarsakType.ANNET,
-      fritekst: formVerdier.fritekst || ' ',
+      fritekst: formVerdier.fritekst ?? ' ',
     });
   };
 
@@ -122,7 +122,7 @@ export const VarselOmRevurderingForm = ({
     (result, current) => result || current.erAutomatiskRevurdering,
     false,
   );
-  const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] || EMPTY_ARRAY;
+  const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] ?? EMPTY_ARRAY;
   const language = getLanguageFromSprakkode(behandling.språkkode);
 
   return (
