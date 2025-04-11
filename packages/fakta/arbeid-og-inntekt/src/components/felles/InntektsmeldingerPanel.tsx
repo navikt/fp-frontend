@@ -9,6 +9,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt.ts';
 import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerPanel';
 
 import styles from './inntektsmeldingerPanel.module.css';
@@ -39,7 +40,7 @@ interface Props {
   arbeidsforholdForRad: AoIArbeidsforhold[];
   inntektsmeldingerForRad: Inntektsmelding[];
   alleKodeverk: AlleKodeverk;
-  arbeidsgiverFødselsdato?: string;
+  radData: ArbeidsforholdOgInntektRadData;
 }
 
 export const InntektsmeldingerPanel = ({
@@ -47,7 +48,7 @@ export const InntektsmeldingerPanel = ({
   arbeidsforholdForRad,
   inntektsmeldingerForRad,
   alleKodeverk,
-  arbeidsgiverFødselsdato,
+  radData,
 }: Props) => {
   const intl = useIntl();
   const [visInfoOmIm, setVisInfoOmIm] = useState<Record<string, boolean>>({});
@@ -60,24 +61,24 @@ export const InntektsmeldingerPanel = ({
 
   return (
     <VStack gap="4">
-      {arbeidsgiverFødselsdato && (
-        <HStack gap="4">
-          <Label size="small">
-            <FormattedMessage id="ArbeidsforholdInformasjonPanel.Fodselsdato" />
-          </Label>
-          <Detail>
-            <DateLabel dateString={arbeidsgiverFødselsdato} />
-          </Detail>
-        </HStack>
-      )}
-      {!arbeidsgiverFødselsdato && arbeidsforholdForRad.length > 0 && (
-        <HStack gap="4">
-          <Label size="small">
-            <FormattedMessage id="ArbeidsforholdInformasjonPanel.Orgnr" />
-          </Label>
-          <Detail>{arbeidsforholdForRad[0].arbeidsgiverIdent}</Detail>
-        </HStack>
-      )}
+      <HStack gap="4">
+        <Label size="small">
+          <FormattedMessage
+            id={
+              radData.erPrivatPerson
+                ? 'ArbeidsforholdInformasjonPanel.Fodselsdato'
+                : 'ArbeidsforholdInformasjonPanel.Orgnr'
+            }
+          />
+        </Label>
+        <Detail>
+          {radData.erPrivatPerson ? (
+            <DateLabel dateString={radData.arbeidsgiverFødselsdato} />
+          ) : (
+            radData.arbeidsgiverIdent
+          )}
+        </Detail>
+      </HStack>
       {!harEttArbeidsforhold && (
         <>
           <AvsnittSkiller dividerParagraf className={styles.skiller} />
@@ -174,6 +175,7 @@ export const InntektsmeldingerPanel = ({
                           saksnummer={saksnummer}
                           inntektsmelding={inntektsmelding}
                           skalViseArbeidsforholdId={false}
+                          radData={radData}
                         />
                       )}
                       <Link
@@ -221,6 +223,7 @@ export const InntektsmeldingerPanel = ({
       {harEttArbeidsforhold && !!inntektsmeldingForArbeidsforhold && (
         <InntektsmeldingOpplysningerPanel
           saksnummer={saksnummer}
+          radData={radData}
           arbeidsforhold={arbeidsforholdForRad[0]}
           inntektsmelding={inntektsmeldingForArbeidsforhold}
           skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
