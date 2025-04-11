@@ -8,7 +8,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
+import { VedtakEditeringProvider, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
 import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -72,7 +72,7 @@ export const VedtakFpProsessStegInitPanel = () => {
   );
   const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
 
-  const { mutateAsync: hentBrevOverstyring } = useMutation({
+  const { mutateAsync: hentBrevOverstyring, isPending } = useMutation({
     mutationFn: () => api.hentBrevOverstyring(),
   });
 
@@ -95,56 +95,61 @@ export const VedtakFpProsessStegInitPanel = () => {
     !isBdFetching && !isTvFetching && !isBgFetching && !isSrFetching && !isBdobFetching && !isOFetching;
 
   return (
-    <ProsessDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      prosessPanelKode={ProsessStegCode.VEDTAK}
-      prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
-      skalPanelVisesIMeny
-      overstyrtStatus={findStatusForVedtak(
-        vilkår ?? [],
-        behandling.aksjonspunkt ?? [],
-        standardPanelProps.aksjonspunkter,
-        standardPanelProps.behandling.behandlingsresultat,
-      )}
-      skalMarkeresSomAktiv={
-        !standardPanelProps.behandling.behandlingHenlagt &&
-        findStatusForVedtak(
+    <VedtakEditeringProvider
+      behandling={behandling}
+      hentBrevOverstyring={hentBrevOverstyring}
+      hentBrevOverstyringIsPending={isPending}
+      mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
+    >
+      <ProsessDefaultInitPanel
+        standardPanelProps={standardPanelProps}
+        prosessPanelKode={ProsessStegCode.VEDTAK}
+        prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
+        skalPanelVisesIMeny
+        overstyrtStatus={findStatusForVedtak(
           vilkår ?? [],
-          standardPanelProps.behandling.aksjonspunkt ?? [],
+          behandling.aksjonspunkt ?? [],
           standardPanelProps.aksjonspunkter,
           standardPanelProps.behandling.behandlingsresultat,
-        ) !== VilkarUtfallType.IKKE_VURDERT
-      }
-    >
-      <>
-        <IverksetterVedtakStatusModal
-          visModal={visIverksetterVedtakModal}
-          lukkModal={lukkIverksetterModal}
-          behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
-        />
-        <FatterVedtakStatusModal
-          visModal={visFatterVedtakModal}
-          lukkModal={lukkFatterModal}
-          tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
-        />
-        {isNotFetching ? (
-          <VedtakProsessIndex
-            tilbakekrevingvalg={tilbakekrevingValg}
-            beregningsresultatOriginalBehandling={beregningDagytelseOriginalBehandling}
-            simuleringResultat={simuleringResultat}
-            beregningresultatDagytelse={beregningsresultatDagytelse}
-            beregningsgrunnlag={beregningsgrunnlag}
-            previewCallback={forhandsvis}
-            vilkar={vilkår}
-            oppgaver={oppgaver}
-            hentBrevOverstyring={hentBrevOverstyring}
-            mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
-          />
-        ) : (
-          <LoadingPanel />
         )}
-      </>
-    </ProsessDefaultInitPanel>
+        skalMarkeresSomAktiv={
+          !standardPanelProps.behandling.behandlingHenlagt &&
+          findStatusForVedtak(
+            vilkår ?? [],
+            standardPanelProps.behandling.aksjonspunkt ?? [],
+            standardPanelProps.aksjonspunkter,
+            standardPanelProps.behandling.behandlingsresultat,
+          ) !== VilkarUtfallType.IKKE_VURDERT
+        }
+      >
+        <>
+          <IverksetterVedtakStatusModal
+            visModal={visIverksetterVedtakModal}
+            lukkModal={lukkIverksetterModal}
+            behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
+          />
+          <FatterVedtakStatusModal
+            visModal={visFatterVedtakModal}
+            lukkModal={lukkFatterModal}
+            tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.SendtBeslutter' })}
+          />
+          {isNotFetching ? (
+            <VedtakProsessIndex
+              tilbakekrevingvalg={tilbakekrevingValg}
+              beregningsresultatOriginalBehandling={beregningDagytelseOriginalBehandling}
+              simuleringResultat={simuleringResultat}
+              beregningresultatDagytelse={beregningsresultatDagytelse}
+              beregningsgrunnlag={beregningsgrunnlag}
+              previewCallback={forhandsvis}
+              vilkar={vilkår}
+              oppgaver={oppgaver}
+            />
+          ) : (
+            <LoadingPanel />
+          )}
+        </>
+      </ProsessDefaultInitPanel>
+    </VedtakEditeringProvider>
   );
 };
 

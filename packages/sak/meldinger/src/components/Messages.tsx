@@ -114,7 +114,7 @@ export const Messages = ({
 }: Props) => {
   const intl = useIntl();
   const formMethods = useForm<FormValues>({
-    defaultValues: meldingFormData || buildInitalValues(behandling),
+    defaultValues: meldingFormData ?? buildInitalValues(behandling),
   });
 
   const brevmalkode = formMethods.watch('brevmalkode');

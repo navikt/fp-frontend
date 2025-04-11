@@ -40,7 +40,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
   const isReadOnlyOrApIsNull = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || {
+    defaultValues: mellomlagretFormData ?? {
       harAleneomsorg: harAleneomsorg === undefined ? undefined : harAleneomsorg === Verdi.JA,
       harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === Verdi.JA,
       harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === Verdi.JA,

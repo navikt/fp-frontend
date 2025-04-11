@@ -55,7 +55,7 @@ export const JournalpostIndex = ({
       <div className={styles.oppgaveKolonne}>
         <JournalpostDetaljer
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
-          journalpost={journalpostOppdatertMedSøker || journalpost}
+          journalpost={journalpostOppdatertMedSøker ?? journalpost}
           oppgave={oppgave}
           submitJournalføring={submitJournalføring}
           knyttJournalpostTilBruker={knyttJournalpostTilBruker}

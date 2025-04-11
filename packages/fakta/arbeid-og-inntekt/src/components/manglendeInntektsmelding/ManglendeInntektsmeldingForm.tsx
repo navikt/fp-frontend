@@ -67,7 +67,6 @@ interface Props {
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   alleKodeverk: AlleKodeverk;
-  arbeidsgiverFødselsdato?: string;
 }
 
 export const ManglendeInntektsmeldingForm = ({
@@ -84,7 +83,6 @@ export const ManglendeInntektsmeldingForm = ({
   lukkArbeidsforholdRad,
   oppdaterTabell,
   alleKodeverk,
-  arbeidsgiverFødselsdato,
 }: Props) => {
   const intl = useIntl();
 
@@ -152,7 +150,7 @@ export const ManglendeInntektsmeldingForm = ({
         arbeidsforholdForRad={arbeidsforholdForRad}
         inntektsmeldingerForRad={inntektsmeldingerForRad}
         alleKodeverk={alleKodeverk}
-        arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+        radData={radData}
       />
       <Form formMethods={formMethods} onSubmit={lagre}>
         <VStack gap="4">

@@ -44,12 +44,12 @@ interface Props {
  * Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.
  */
 export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submittable, submitCallback }: Props) => {
-  const [erKnappEnabled, setKnappEnabled] = useState(false);
+  const [erKnappEnabled, setErKnappEnabled] = useState(false);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || buildInitialValues(aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(aksjonspunkt),
   });
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
@@ -74,7 +74,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
             name="besteberegningErKorrektValg"
             label={<FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.Radiotekst" />}
             readOnly={readOnly}
-            onChange={() => setKnappEnabled(!erKnappEnabled)}
+            onChange={() => setErKnappEnabled(!erKnappEnabled)}
           />
           <FaktaBegrunnelseTextField
             isSubmittable={submittable}

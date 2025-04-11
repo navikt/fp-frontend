@@ -88,7 +88,7 @@ export const finnProsentSvangerskapspenger = (
         stillingsprosentArbeidsforhold,
         velferdspermisjonprosent,
         // Har alltid stillingsprosent her. Bør fikse sjekk mot type så || 0 er unødvendig
-        tilrettelegging.stillingsprosent || 0,
+        tilrettelegging.stillingsprosent ?? 0,
       );
 };
 

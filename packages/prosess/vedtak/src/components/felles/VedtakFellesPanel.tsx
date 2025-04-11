@@ -1,4 +1,4 @@
-import { type MouseEvent, type ReactNode, useState } from 'react';
+import { type MouseEvent, type ReactNode } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -15,9 +15,10 @@ import {
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, Behandling, Behandlingsresultat, BrevOverstyring, Oppgave } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import { useVedtakEditeringContext } from '../../VedtakEditeringContext.tsx';
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { LegacyOverstyrtVedtaksbrev } from './LegacyOverstyrtVedtaksbrev.tsx';
 import { OppgaveTabell } from './OppgaveTabell.tsx';
@@ -69,8 +70,6 @@ interface Props {
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
-  hentBrevOverstyring: () => Promise<BrevOverstyring>;
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
   setHarValgtÅRedigereVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
   harValgtÅRedigereVedtaksbrev: boolean;
 }
@@ -83,8 +82,6 @@ export const VedtakFellesPanel = ({
   erBehandlingEtterKlage,
   vedtakstatusTekst,
   oppgaver,
-  hentBrevOverstyring,
-  mellomlagreBrevOverstyring,
   setHarValgtÅRedigereVedtaksbrev,
   harValgtÅRedigereVedtaksbrev,
 }: Props) => {
@@ -98,7 +95,7 @@ export const VedtakFellesPanel = ({
     formState: { isSubmitting },
   } = useFormContext();
 
-  const [harRedigertBrev, setHarRedigertBrev] = useState(behandlingsresultat?.harRedigertVedtaksbrev ?? false);
+  const { harRedigertBrev } = useVedtakEditeringContext();
 
   if (!behandlingsresultat) {
     throw new Error(`behandlingsresultat finnes ikke på behandling ${uuid}`);
@@ -204,10 +201,6 @@ export const VedtakFellesPanel = ({
         {harValgtÅRedigereVedtaksbrev && (
           <OverstyringVedtaksbrev
             forhåndsvisBrev={previewCallback}
-            hentBrevOverstyring={hentBrevOverstyring}
-            setHarRedigertBrev={setHarRedigertBrev}
-            harRedigertBrev={harRedigertBrev}
-            mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
             setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
           />
         )}

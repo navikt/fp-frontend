@@ -30,7 +30,7 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
     klageVurdering: vurdering,
     klageMedholdArsak,
     klageVurderingOmgjoer,
-  } = klageVurdering.klageVurderingResultatNK || {};
+  } = klageVurdering.klageVurderingResultatNK ?? {};
 
   const medholdReasons = alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK];
 

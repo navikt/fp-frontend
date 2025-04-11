@@ -102,7 +102,7 @@ export const ArbeidsforholdFieldArray = ({
                   <HStack gap="14" align="center">
                     <HStack gap="4" align="center">
                       <Buildings3Icon color="var(--a-blue-600)" className={styles.image} />
-                      <Heading size="small">{arbeidsgiverOpplysning?.navn || arbeidType?.navn}</Heading>
+                      <Heading size="small">{arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}</Heading>
                       {arbeidsgiverOpplysning?.identifikator && (
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       )}

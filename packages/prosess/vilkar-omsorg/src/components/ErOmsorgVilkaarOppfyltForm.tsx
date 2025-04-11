@@ -59,7 +59,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.OMSORGSVILKARET];

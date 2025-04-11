@@ -65,9 +65,8 @@ const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: 
 };
 
 const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | null => {
-  const klageResultat = behandlingKlageVurdering.klageVurderingResultatNK
-    ? behandlingKlageVurdering.klageVurderingResultatNK
-    : behandlingKlageVurdering.klageVurderingResultatNFP;
+  const klageResultat =
+    behandlingKlageVurdering.klageVurderingResultatNK ?? behandlingKlageVurdering.klageVurderingResultatNFP;
   switch (klageResultat?.klageVurdering) {
     case klageVurderingCodes.AVVIS_KLAGE:
       return 'VedtakKlageForm.KlageAvvist';
@@ -78,7 +77,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
     case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
       return 'VedtakKlageForm.HjemmsendUtenOpphev';
     case klageVurderingCodes.MEDHOLD_I_KLAGE:
-      return OMGJOER_TEKST_MAP[klageResultat?.klageVurderingOmgjoer || ''];
+      return OMGJOER_TEKST_MAP[klageResultat?.klageVurderingOmgjoer ?? ''];
     default:
       return 'VedtakKlageForm.IkkeFastsatt';
   }
@@ -98,9 +97,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
   const omgjortAarsak = getOmgjortAarsak(klageVurdering, alleKodeverk);
   const behandlingsResultatTekst = getResultatText(klageVurdering);
 
-  const klageVurderingResultat = klageVurdering.klageVurderingResultatNK
-    ? klageVurdering.klageVurderingResultatNK
-    : klageVurdering.klageVurderingResultatNFP;
+  const klageVurderingResultat = klageVurdering.klageVurderingResultatNK ?? klageVurdering.klageVurderingResultatNFP;
   const erOmgjort = isKlageOmgjort(behandlingsresultat.type);
 
   const [isSubmitting, setIsSubmitting] = useState(false);

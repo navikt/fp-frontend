@@ -41,7 +41,7 @@ export const DekningradForm = ({
   const intl = useIntl();
 
   const dekningsgrad =
-    søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ||
+    søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ??
     søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad;
 
   const defaultValues = {
@@ -78,7 +78,7 @@ export const DekningradForm = ({
             id="DekningsgradForm.DekningsgradForeldrepenger"
             values={{
               dekningsgrad:
-                søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ||
+                søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ??
                 søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad,
             }}
           />

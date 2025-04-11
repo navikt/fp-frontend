@@ -117,7 +117,7 @@ export const ArbeidsforholdRad = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { arbeidsgiverNavn, arbeidsgiverIdent, årsak, avklaring, arbeidsgiverFødselsdato } = radData;
+  const { arbeidsgiverNavn, arbeidsgiverIdent, årsak, avklaring } = radData;
 
   const arbeidsforholdForRad = useMemo(
     () => arbeidOgInntekt.arbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsgiverIdent),
@@ -141,8 +141,8 @@ export const ArbeidsforholdRad = ({
     arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !årsak;
 
   const periode = useMemo(
-    () => finnPeriode(arbeidsforholdForRad, radData.avklaring),
-    [erManueltOpprettet, arbeidsforholdForRad, radData.avklaring],
+    () => finnPeriode(arbeidsforholdForRad, avklaring),
+    [erManueltOpprettet, arbeidsforholdForRad, avklaring],
   );
   const inntektsposter = arbeidOgInntekt.inntekter.find(
     inntekt => inntekt.arbeidsgiverIdent === arbeidsgiverIdent,
@@ -179,7 +179,7 @@ export const ArbeidsforholdRad = ({
               arbeidsforholdForRad={arbeidsforholdForRad}
               inntektsmeldingerForRad={inntektsmeldingerForRad}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              radData={radData}
             />
           )}
           {harKunInntektsmeldingOgIkkeÅrsak && (
@@ -192,7 +192,7 @@ export const ArbeidsforholdRad = ({
               )}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              radData={radData}
             />
           )}
           {manglerInntektsmelding && (
@@ -210,7 +210,6 @@ export const ArbeidsforholdRad = ({
               lukkArbeidsforholdRad={toggleÅpenRad}
               oppdaterTabell={oppdaterTabell}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
             />
           )}
           {manglerArbeidsforhold && (
@@ -218,7 +217,6 @@ export const ArbeidsforholdRad = ({
               saksnummer={saksnummer}
               behandlingUuid={behandlingUuid}
               behandlingVersjon={behandlingVersjon}
-              arbeidsgiverNavn={arbeidsgiverNavn}
               inntektsmelding={inntektsmeldingerForRad[0]}
               radData={radData}
               isReadOnly={isReadOnly}
@@ -236,7 +234,7 @@ export const ArbeidsforholdRad = ({
               inntektsposter={inntektsposter}
               arbeidsforholdForRad={arbeidsforholdForRad}
               alleKodeverk={alleKodeverk}
-              arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+              radData={radData}
             />
           )}
         </div>

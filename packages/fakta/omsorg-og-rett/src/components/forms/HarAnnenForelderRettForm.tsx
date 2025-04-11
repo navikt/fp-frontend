@@ -37,7 +37,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
   const readOnly = isReadOnly || aksjonspunkt === undefined;
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || {
+    defaultValues: mellomlagretFormData ?? {
       harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === Verdi.JA,
       mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === Verdi.JA,
       harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === Verdi.JA,

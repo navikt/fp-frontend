@@ -32,7 +32,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
 
   const [erBekreftKnappTrykket, setErBekreftKnappTrykket] = useState(false);
   const [dokBehov, setDokBehov] = useState<DokumentasjonVurderingBehov[]>(
-    mellomlagretFormData?.dokBehov || dokumentasjonVurderingBehov,
+    mellomlagretFormData?.dokBehov ?? dokumentasjonVurderingBehov,
   );
 
   const bekreft = useCallback(
@@ -50,7 +50,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
   const lagretBegrunnelse = aksjonspunkterForPanel[0]?.begrunnelse ?? '';
   const formMethods = useForm<{ begrunnelse: string }>({
     defaultValues: {
-      begrunnelse: mellomlagretFormData?.begrunnelse || lagretBegrunnelse,
+      begrunnelse: mellomlagretFormData?.begrunnelse ?? lagretBegrunnelse,
     },
   });
 

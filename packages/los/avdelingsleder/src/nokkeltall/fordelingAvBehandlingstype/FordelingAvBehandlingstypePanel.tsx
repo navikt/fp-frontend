@@ -46,7 +46,7 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
 
   const formMethods = useForm<FormValues>({
-    defaultValues: lagredeVerdier || formDefaultValues,
+    defaultValues: lagredeVerdier ?? formDefaultValues,
   });
 
   const values = formMethods.watch();

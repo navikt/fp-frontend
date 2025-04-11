@@ -120,7 +120,7 @@ export const FormkravKlageFormNfp = ({
 
   const initialValues = useMemo(() => buildInitialValues(klageVurdering), [klageVurdering]);
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const formVerdier = formMethods.watch();

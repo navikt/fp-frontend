@@ -1,6 +1,6 @@
-import "dotenv/config";
+import 'dotenv/config';
 
-import logger from "./logger.js";
+import logger from './logger.js';
 
 const envVar = (name: string, required: boolean) => {
   if (!process.env[name] && required) {
@@ -27,28 +27,28 @@ const configValueAsJson = (name: string, required: boolean) => {
 
 const server = {
   // should be equivalent to the URL this application is hosted on for correct CORS origin header
-  host: envVar("HOST", false) || "localhost",
+  host: envVar('HOST', false) ?? 'localhost',
 
   // port for your application
-  port: envVar("PORT", false) || 3000,
+  port: envVar('PORT', false) ?? 3000,
 };
 
 const azureAd = {
   // automatically provided by NAIS at runtime
-  discoveryUrl: envVar("AZURE_APP_WELL_KNOWN_URL", true),
-  clientId: envVar("AZURE_APP_CLIENT_ID", true),
-  clientJwks: configValueAsJson("AZURE_APP_JWKS", true),
-  graphUrl: envVar("MS_GRAPH_URL", false),
+  discoveryUrl: envVar('AZURE_APP_WELL_KNOWN_URL', true),
+  clientId: envVar('AZURE_APP_CLIENT_ID', true),
+  clientJwks: configValueAsJson('AZURE_APP_JWKS', true),
+  graphUrl: envVar('MS_GRAPH_URL', false),
 
   // leave at default
-  tokenEndpointAuthMethod: "private_key_jwt",
-  tokenEndpointAuthSigningAlg: "RS256",
+  tokenEndpointAuthMethod: 'private_key_jwt',
+  tokenEndpointAuthSigningAlg: 'RS256',
 };
 
 const cors = {
-  allowedHeaders: envVar("CORS_ALLOWED_HEADERS", false) || "Nav-CallId",
-  exposedHeaders: envVar("CORS_EXPOSED_HEADERS", false) || "",
-  allowedMethods: envVar("CORS_ALLOWED_METHODS", false) || "",
+  allowedHeaders: envVar('CORS_ALLOWED_HEADERS', false) ?? 'Nav-CallId',
+  exposedHeaders: envVar('CORS_EXPOSED_HEADERS', false) ?? '',
+  allowedMethods: envVar('CORS_ALLOWED_METHODS', false) ?? '',
 };
 
 export type ProxyConfig = {
@@ -61,7 +61,7 @@ export type ProxyConfig = {
   ];
 };
 const getProxyConfig = () => {
-  const config = configValueAsJson("PROXY_CONFIG", false);
+  const config = configValueAsJson('PROXY_CONFIG', false);
   if (!config.apis) {
     const errorMessage = "Config: 'PROXY_CONFIG' mangler 'apis' entry.";
     logger.error(errorMessage);

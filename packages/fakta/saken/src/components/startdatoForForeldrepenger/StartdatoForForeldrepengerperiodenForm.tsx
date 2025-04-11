@@ -73,7 +73,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || buildInitialValues(soknad, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(soknad, aksjonspunkt),
   });
 
   const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);

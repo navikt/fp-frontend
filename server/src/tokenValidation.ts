@@ -14,13 +14,15 @@ export const verifyToken = async (
   const token = getToken(request);
   if (!token) {
     logger.debug("User token missing.");
-    return response.status(401).send();
+    response.status(401).send();
+    return;
   }
 
   const validation = await validateAzureToken(token);
   if (!validation.ok) {
     logger.debug("User token is NOT valid.");
-    return response.status(403).send();
+    response.status(403).send();
+    return;
   }
 
   logger.debug("User token is valid. Continue.");

@@ -66,7 +66,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || initialValues,
+    defaultValues: mellomlagretFormData ?? initialValues,
   });
 
   const alleAvslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR];

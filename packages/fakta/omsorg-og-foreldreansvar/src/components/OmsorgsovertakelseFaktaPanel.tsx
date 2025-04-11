@@ -10,8 +10,8 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
-  const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
-  return familiehendelse.antallBarnTilBeregning ? familiehendelse.antallBarnTilBeregning : antallBarn;
+  const antallBarn = soknad.antallBarn ?? NaN;
+  return familiehendelse.antallBarnTilBeregning ?? antallBarn;
 };
 
 export type FormValues = {
@@ -79,8 +79,6 @@ export const OmsorgsovertakelseFaktaPanel = ({
 };
 
 OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato
-    ? familiehendelse.omsorgsovertakelseDato
-    : soknad.omsorgsovertakelseDato,
+  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato,
   foreldreansvarDato: familiehendelse.foreldreansvarDato,
 });

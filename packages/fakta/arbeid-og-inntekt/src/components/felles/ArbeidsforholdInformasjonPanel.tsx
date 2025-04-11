@@ -8,6 +8,7 @@ import dayjs from 'dayjs';
 
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
 
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
 
 import styles from './arbeidsforholdInformasjonPanel.module.css';
@@ -51,7 +52,7 @@ interface Props {
   arbeidsforholdForRad: AoIArbeidsforhold[];
   inntektsmeldingerForRad?: Inntektsmelding[];
   alleKodeverk: AlleKodeverk;
-  arbeidsgiverFødselsdato?: string;
+  radData: ArbeidsforholdOgInntektRadData;
 }
 
 export const ArbeidsforholdInformasjonPanel = ({
@@ -61,7 +62,7 @@ export const ArbeidsforholdInformasjonPanel = ({
   arbeidsforholdForRad,
   inntektsmeldingerForRad = EMPTY_ARRAY,
   alleKodeverk,
-  arbeidsgiverFødselsdato,
+  radData,
 }: Props) => {
   const [visAlleMåneder, setVisAlleMånader] = useState(false);
 
@@ -81,7 +82,7 @@ export const ArbeidsforholdInformasjonPanel = ({
         arbeidsforholdForRad={arbeidsforholdForRad}
         inntektsmeldingerForRad={inntektsmeldingerForRad}
         alleKodeverk={alleKodeverk}
-        arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+        radData={radData}
       />
       {visInntektsposter && (
         <VStack gap="2">

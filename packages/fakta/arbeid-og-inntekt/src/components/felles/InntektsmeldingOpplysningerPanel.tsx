@@ -7,8 +7,9 @@ import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import { DokumentLink } from '@navikt/fp-ui-komponenter';
 
-import { DokumentLink } from '../../../../../ui-komponenter';
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt.ts';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
@@ -18,7 +19,7 @@ interface Props {
   inntektsmelding: Inntektsmelding;
   skalViseArbeidsforholdId: boolean;
   alleKodeverk?: AlleKodeverk;
-  arbeidsgiverFødselsdato?: string;
+  radData: ArbeidsforholdOgInntektRadData;
   ikkeVisInfo?: boolean;
 }
 
@@ -28,27 +29,29 @@ export const InntektsmeldingOpplysningerPanel = ({
   inntektsmelding,
   skalViseArbeidsforholdId,
   alleKodeverk,
-  arbeidsgiverFødselsdato,
   ikkeVisInfo,
+  radData,
 }: Props) => (
   <>
     <VStack gap="4">
-      {!ikkeVisInfo && arbeidsgiverFødselsdato && (
+      {!ikkeVisInfo && radData && (
         <HStack gap="4">
           <Label size="small">
-            <FormattedMessage id="ArbeidsforholdInformasjonPanel.Fodselsdato" />
+            <FormattedMessage
+              id={
+                radData.erPrivatPerson
+                  ? 'ArbeidsforholdInformasjonPanel.Fodselsdato'
+                  : 'ArbeidsforholdInformasjonPanel.Orgnr'
+              }
+            />
           </Label>
           <Detail>
-            <DateLabel dateString={arbeidsgiverFødselsdato} />
+            {radData.erPrivatPerson ? (
+              <DateLabel dateString={radData.arbeidsgiverFødselsdato} />
+            ) : (
+              radData.arbeidsgiverIdent
+            )}
           </Detail>
-        </HStack>
-      )}
-      {!ikkeVisInfo && !arbeidsgiverFødselsdato && (
-        <HStack gap="4">
-          <Label size="small">
-            <FormattedMessage id="ArbeidsforholdInformasjonPanel.Orgnr" />
-          </Label>
-          <Detail>{inntektsmelding.arbeidsgiverIdent}</Detail>
         </HStack>
       )}
       {skalViseArbeidsforholdId && (

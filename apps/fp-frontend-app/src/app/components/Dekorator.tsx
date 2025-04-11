@@ -192,8 +192,7 @@ const formaterFeilmeldinger = (
 const parseErrorDetails = (details: string) => {
   try {
     return JSON.parse(details);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
+  } catch {
     return 'Kunne ikke tolke feildetaljer';
   }
 };

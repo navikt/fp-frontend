@@ -85,7 +85,6 @@ interface Props {
   saksnummer: string;
   behandlingUuid: string;
   behandlingVersjon: number;
-  arbeidsgiverNavn: string;
   inntektsmelding: Inntektsmelding;
   radData: ArbeidsforholdOgInntektRadData;
   isReadOnly: boolean;
@@ -94,14 +93,12 @@ interface Props {
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
   skalViseArbeidsforholdId: boolean;
-  arbeidsgiverFødselsdato?: string;
 }
 
 export const ManglendeArbeidsforholdForm = ({
   saksnummer,
   behandlingUuid,
   behandlingVersjon,
-  arbeidsgiverNavn,
   inntektsmelding,
   radData,
   isReadOnly,
@@ -110,7 +107,6 @@ export const ManglendeArbeidsforholdForm = ({
   lukkArbeidsforholdRad,
   oppdaterTabell,
   skalViseArbeidsforholdId,
-  arbeidsgiverFødselsdato,
 }: Props) => {
   const intl = useIntl();
 
@@ -145,7 +141,7 @@ export const ManglendeArbeidsforholdForm = ({
         behandlingUuid,
         behandlingVersjon,
         internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
-        arbeidsgiverNavn,
+        arbeidsgiverNavn: radData.arbeidsgiverNavn,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
         begrunnelse: formValues.begrunnelse!,
@@ -178,7 +174,7 @@ export const ManglendeArbeidsforholdForm = ({
         saksnummer={saksnummer}
         inntektsmelding={inntektsmelding}
         skalViseArbeidsforholdId={skalViseArbeidsforholdId}
-        arbeidsgiverFødselsdato={arbeidsgiverFødselsdato}
+        radData={radData}
       />
       <div className={styles.alertStripe}>
         <Alert variant="info">

@@ -22,7 +22,6 @@ import type {
   Behandlingsresultat,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
-  BrevOverstyring,
   Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,
@@ -36,6 +35,7 @@ import type {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
+import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import { VedtakAvslagPanel } from './VedtakAvslagPanel';
@@ -177,8 +177,6 @@ interface Props {
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
-  hentBrevOverstyring: () => Promise<BrevOverstyring>;
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
 }
 
 export const VedtakForm = ({
@@ -189,8 +187,6 @@ export const VedtakForm = ({
   vilkar,
   beregningErManueltFastsatt,
   oppgaver,
-  hentBrevOverstyring,
-  mellomlagreBrevOverstyring,
 }: Props) => {
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
     usePanelDataContext<VedtakAksjonspunkter[]>();
@@ -202,17 +198,17 @@ export const VedtakForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || buildInitialValues(behandling, beregningErManueltFastsatt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling, beregningErManueltFastsatt),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
   const { trigger } = formMethods;
 
-  const { vedtaksbrev, harRedigertVedtaksbrev } = behandlingsresultat ?? {};
+  const { harRedigertBrev } = useVedtakEditeringContext();
 
   const [harValgtÅRedigereVedtaksbrev, setHarValgtÅRedigereVedtaksbrev] = useState(
-    harRedigertVedtaksbrev || vedtaksbrev === DokumentMalType.FRITEKST,
+    harRedigertBrev || behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
   );
 
   const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker);
@@ -236,8 +232,6 @@ export const VedtakForm = ({
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
-        hentBrevOverstyring={hentBrevOverstyring}
-        mellomlagreBrevOverstyring={mellomlagreBrevOverstyring}
         setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
         harValgtÅRedigereVedtaksbrev={harValgtÅRedigereVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {

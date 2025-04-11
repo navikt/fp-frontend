@@ -54,7 +54,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData || {
+    defaultValues: mellomlagretFormData ?? {
       dokStatus,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },

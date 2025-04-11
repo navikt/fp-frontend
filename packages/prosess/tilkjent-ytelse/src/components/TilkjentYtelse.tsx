@@ -217,12 +217,12 @@ export const TilkjentYtelse = ({
 };
 
 const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
-  const graderteAndeler = (periode.andeler || []).filter(andel => andel.uttak && andel.uttak.gradering === true);
+  const graderteAndeler = (periode.andeler ?? []).filter(andel => andel.uttak && andel.uttak.gradering === true);
   return graderteAndeler.length > 0;
 };
 
 const getFamiliehendelseData = (familieHendelseSamling: FamilieHendelseSamling): { dato?: string; textId: string } => {
-  const familieHendelse = familieHendelseSamling.gjeldende || familieHendelseSamling.oppgitt;
+  const familieHendelse = familieHendelseSamling.gjeldende ?? familieHendelseSamling.oppgitt;
   if (familieHendelse.soknadType === SoknadType.FODSEL) {
     if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
       return { dato: familieHendelse.avklartBarn[0].fodselsdato, textId: 'TilkjentYtelse.Fodselsdato' };
@@ -252,7 +252,7 @@ const formatPerioder = (perioder: BeregningsresultatPeriode[] = []): Periode[] =
 
 const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk): string => {
   const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
-  return kodeverk.find(k => k.kode === fagsak.relasjonsRolleType)?.navn || '';
+  return kodeverk.find(k => k.kode === fagsak.relasjonsRolleType)?.navn ?? '';
 };
 
 const finnFamiliehendelsePinDato = (familiehendelsedato: string, førstePeriodeFom: dayjs.Dayjs): dayjs.Dayjs => {

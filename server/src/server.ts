@@ -1,3 +1,5 @@
+import path from "node:path";
+
 import { serveViteMode } from "@navikt/vite-mode";
 import timeout from "connect-timeout";
 import cors from "cors";
@@ -11,7 +13,6 @@ import logger from "./logger.js";
 import { getUserGroups, getUserInfoFromGraphApi } from "./msgraph.js";
 import { setupProxies } from "./reverse-proxy.js";
 import { verifyToken } from "./tokenValidation.js";
-import path from 'node:path';
 
 const server = express();
 const { port } = config.server;
@@ -89,7 +90,8 @@ function startApp() {
       const userInfo = await getUserInfoFromGraphApi(
         req.headers.authorization ?? "Fant ikke authorization header",
       );
-      return res.json(userInfo);
+      res.json(userInfo);
+      return;
     } catch (error) {
       return next(error);
     }
@@ -101,7 +103,8 @@ function startApp() {
       const userInfo = await getUserGroups(
         req.headers.authorization ?? "Fant ikke authorization header",
       );
-      return res.json(userInfo);
+      res.json(userInfo);
+      return;
     } catch (error) {
       return next(error);
     }
@@ -113,7 +116,7 @@ function startApp() {
 
   // serve static files
   server.use(express.static("./public"));
-  server.use("*", (request, response) => {
+  server.use("*splat", (request, response) => {
     // Siden dette er et internt system med begrenset antall brukere anser vi å sette en rate-limiter som en unødvendig fallgruve. Ignorer dermed denne sonarklagen.
     response.sendFile(spaFilePath); // NOSONAR: "Missing rate limiting".
   });

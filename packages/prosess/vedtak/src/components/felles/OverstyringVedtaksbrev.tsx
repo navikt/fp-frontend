@@ -9,28 +9,26 @@ import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
 import { FritekstRedigeringModal } from '../editor/FritekstRedigeringModal';
 import type { ForhandsvisData } from '../forstegang/VedtakForm';
 
 interface Props {
   forhåndsvisBrev: (data: ForhandsvisData) => void;
-  hentBrevOverstyring: () => Promise<BrevOverstyring>;
-  mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;
-  setHarRedigertBrev: (harRedigert: boolean) => void;
-  harRedigertBrev: boolean;
   setHarValgtÅRedigereVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
 }
 
-export const OverstyringVedtaksbrev = ({
-  forhåndsvisBrev,
-  hentBrevOverstyring,
-  mellomlagreBrevOverstyring,
-  setHarRedigertBrev,
-  harRedigertBrev,
-  setHarValgtÅRedigereVedtaksbrev,
-}: Props) => {
+export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigereVedtaksbrev }: Props) => {
   const intl = useIntl();
   const { isReadOnly } = usePanelDataContext();
+
+  const {
+    harRedigertBrev,
+    setHarRedigertBrev,
+    hentBrevOverstyring,
+    hentBrevOverstyringIsPending,
+    mellomlagreBrevOverstyring,
+  } = useVedtakEditeringContext();
 
   const [visForkastOverstyringModal, setVisForkastOverstyringModal] = useState(false);
 
@@ -61,6 +59,7 @@ export const OverstyringVedtaksbrev = ({
 
   const forkastOverstyrtBrev = async () => {
     setVisForkastOverstyringModal(false);
+    setHarRedigertBrev(false);
     setHarValgtÅRedigereVedtaksbrev(false);
 
     await mellomlagreBrevOverstyring(null);
@@ -89,12 +88,12 @@ export const OverstyringVedtaksbrev = ({
       <VStack gap="4">
         <Box padding="4" borderRadius="medium" background="surface-subtle">
           <VStack gap="4">
-            {!isReadOnly && !brevOverstyring?.redigertHtml && (
+            {!isReadOnly && !brevOverstyring?.redigertHtml && !hentBrevOverstyringIsPending && (
               <Alert variant="info" size="small">
                 <FormattedMessage id="OverstyringVedtaksbrev.KanRedigeres" />
               </Alert>
             )}
-            {!!brevOverstyring?.redigertHtml && (
+            {!!brevOverstyring?.redigertHtml && !hentBrevOverstyringIsPending && (
               <Alert variant="success" size="small">
                 <FormattedMessage id="OverstyringVedtaksbrev.ErOverstyrt" />
               </Alert>
