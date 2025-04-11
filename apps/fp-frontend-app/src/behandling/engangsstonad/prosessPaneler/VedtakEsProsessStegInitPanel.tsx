@@ -9,7 +9,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, OppgaveId, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -68,7 +68,11 @@ export const VedtakEsProsessStegInitPanel = () => {
   );
   const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
   const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
-  const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
+  const {
+    data: oppgaver,
+    isFetching: isOFetching,
+    refetch: refetchOppgaver,
+  } = useQuery(api.oppgaverOptions(behandling));
 
   const { mutateAsync: hentBrevOverstyring, isPending } = useMutation({
     mutationFn: () => api.hentBrevOverstyring(),
@@ -87,6 +91,11 @@ export const VedtakEsProsessStegInitPanel = () => {
         fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
+  });
+
+  const { mutateAsync: ferdigstillOppgave } = useMutation({
+    mutationFn: (values: OppgaveId) => api.ferdigstillOppgave(values),
+    onSuccess: () => refetchOppgaver(),
   });
 
   const { aksjonspunkter } = standardPanelProps;
@@ -141,6 +150,7 @@ export const VedtakEsProsessStegInitPanel = () => {
               tilbakekrevingvalg={tilbakekrevingValg}
               vilkar={vilkår}
               oppgaver={oppgaver}
+              ferdigstillOppgave={ferdigstillOppgave}
             />
           ) : (
             <LoadingPanel />

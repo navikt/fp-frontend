@@ -3,19 +3,21 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import type { Oppgave } from '@navikt/fp-types';
+import type { Oppgave, OppgaveId } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { Beskrivelser } from './Beskrivelser.tsx';
 import { Dokumenter } from './Dokumenter.tsx';
+import { FerdigstillOppgaveKnapp } from './FerdigstillOppgaveKnapp.tsx';
 
 import styles from './oppgaveTabell.module.css';
 
 interface Props {
   oppgaver: Oppgave[];
+  ferdigstillOppgave: (oppgaveId: OppgaveId) => Promise<void>;
 }
 
-export const OppgaveTabell = ({ oppgaver }: Props) => {
+export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave }: Props) => {
   const { alleKodeverk } = usePanelDataContext();
 
   return (
@@ -32,14 +34,12 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
             <Table.HeaderCell textSize="small">
               <FormattedMessage id="OppgaveTabell.Beskrivelse" />
             </Table.HeaderCell>
+            <Table.HeaderCell className={styles.headerButton} />
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <Table.Row
-              key={oppgave.beskrivelser[0].header ?? oppgave.beskrivelser[0].kommentarer[0]}
-              className={styles.row}
-            >
+            <Table.Row key={oppgave.oppgaveId.id} className={styles.row}>
               <Table.DataCell>
                 <BodyShort size="small">
                   {alleKodeverk[KodeverkType.OPPGAVE_TYPE].find(o => o.kode === oppgave.oppgavetype)?.navn}
@@ -50,6 +50,9 @@ export const OppgaveTabell = ({ oppgaver }: Props) => {
                   {oppgave.beskrivelser.length > 0 && <Beskrivelser beskrivelser={oppgave.beskrivelser} />}
                   {oppgave.dokumenter.length > 0 && <Dokumenter dokumenter={oppgave.dokumenter} />}
                 </VStack>
+              </Table.DataCell>
+              <Table.DataCell align="right">
+                <FerdigstillOppgaveKnapp oppgave={oppgave} ferdigstillOppgave={ferdigstillOppgave} />
               </Table.DataCell>
             </Table.Row>
           ))}

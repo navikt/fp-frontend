@@ -1,4 +1,7 @@
+import type { OppgaveId } from './oppgaveIdTsType.tsx';
+
 export type Oppgave = {
+  oppgaveId: OppgaveId;
   oppgavetype: string;
   beskrivelser: Beskrivelse[];
   dokumenter: OppgaveDokument[];
