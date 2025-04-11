@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, alleKodeverkTilbakekreving, withQueryClient } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
 import { BehandlingPaVent } from './BehandlingPaVent';
