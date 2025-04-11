@@ -62,7 +62,7 @@ const finnTilgjengeligeUker = (stønadskontoer?: Stonadskonto[]): { uker: number
       type !== StonadskontoType.MINSTERETT &&
       type !== StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE
     ) {
-      return sum + (konto.maxDager ? konto.maxDager : 0);
+      return sum + (konto.maxDager ?? 0);
     }
     return sum;
   }, 0);
@@ -119,7 +119,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
 
     const konto = stønadskontoerMedNavn.find(s => s.stonadskontotype === valgtKontoType);
 
-    const aktiviteterMedNavn = (konto?.aktivitetSaldoDtoList || []).map(aktivitet => ({
+    const aktiviteterMedNavn = (konto?.aktivitetSaldoDtoList ?? []).map(aktivitet => ({
       ...aktivitet,
       navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
     }));

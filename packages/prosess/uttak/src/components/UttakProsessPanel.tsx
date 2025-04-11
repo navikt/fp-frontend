@@ -196,7 +196,7 @@ export const UttakProsessPanel = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
 
-  const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData || uttaksresultat.perioderSøker);
+  const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData ?? uttaksresultat.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
 
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);

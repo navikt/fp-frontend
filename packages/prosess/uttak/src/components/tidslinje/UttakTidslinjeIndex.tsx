@@ -28,7 +28,7 @@ const OppholdArsakMapper = {
 
 const finnSøknadsdato = (søknad: Soknad): string => {
   const { mottattDato } = søknad;
-  const søknadsdato = søknad.søknadsfrist?.mottattDato || søknad.mottattDato;
+  const søknadsdato = søknad.søknadsfrist?.mottattDato ?? søknad.mottattDato;
   if (dayjs(mottattDato) < dayjs(søknadsdato)) {
     return mottattDato;
   }
@@ -66,10 +66,12 @@ const finnTidslinjeTider = (
       ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato
       : undefined;
   const fødselsdato =
-    søknad.soknadType === SoknadType.FODSEL ? endredFodselsDato || familiehendelseDate : søknad.omsorgsovertakelseDato;
+    søknad.soknadType === SoknadType.FODSEL
+      ? (endredFodselsDato ?? familiehendelseDate)
+      : søknad.omsorgsovertakelseDato;
   const isRevurdering = behandling.type === BehandlingType.REVURDERING;
 
-  const barnFraTps = familiehendelse.register?.avklartBarn ? familiehendelse.register.avklartBarn : [];
+  const barnFraTps = familiehendelse.register?.avklartBarn ?? [];
   const dodeBarn =
     gjeldendeFamiliehendelse &&
     !gjeldendeFamiliehendelse.brukAntallBarnFraTps &&
@@ -82,7 +84,7 @@ const finnTidslinjeTider = (
     soknad: finnSøknadsdato(søknad),
     fodsel: fødselsdato,
     revurdering: isRevurdering ? endringsdato : undefined,
-    dodSoker: personoversikt?.bruker?.dødsdato ? personoversikt.bruker.dødsdato : undefined,
+    dodSoker: personoversikt?.bruker?.dødsdato ?? undefined,
   };
 
   dodeBarn.forEach((barn, index: number) => {

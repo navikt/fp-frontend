@@ -203,6 +203,8 @@ export const SokersOpplysningspliktForm = ({
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
+  const bTag = (chunks: React.ReactNode[]) => <b key="bold">{chunks}</b>;
+
   return (
     <Form
       formMethods={formMethods}
@@ -270,7 +272,7 @@ export const SokersOpplysningspliktForm = ({
                     <FormattedMessage
                       id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
                       values={{
-                        b: chunks => <b key="bold">{chunks}</b>,
+                        b: bTag,
                         br: <br key="break-line" />,
                       }}
                     />
