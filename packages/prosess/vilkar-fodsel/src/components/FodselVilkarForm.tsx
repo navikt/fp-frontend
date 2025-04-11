@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -79,7 +80,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
-  const bTag = (...chunks: any) => <b>{chunks}</b>;
+  const bTag = (...chunks: ReactNode[]) => <b>{chunks}</b>;
 
   return (
     <Form

@@ -6,7 +6,7 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingType, DokumentMalType, KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
-import { type FormValues, MeldingerSakIndex, MessagesModalSakIndex } from '@navikt/fp-sak-meldinger';
+import { MeldingerSakIndex, type MessagesFormValues, MessagesModalSakIndex } from '@navikt/fp-sak-meldinger';
 import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -22,8 +22,8 @@ const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 interface Props {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
-  meldingFormData?: any;
-  setMeldingFormData: (data?: any) => void;
+  meldingFormData?: MessagesFormValues;
+  setMeldingFormData: (data?: MessagesFormValues) => void;
   hentOgSettBehandling: () => void;
   toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
@@ -148,10 +148,10 @@ const getSubmitCallback =
     submitMessage: (params: SubmitMessageParams) => Promise<unknown>,
     hentOgSettBehandling: () => void,
     setShowSettPaVentModal: (erInnhentetEllerForlenget: boolean) => void,
-    setMeldingFormData: (data?: any) => void,
+    setMeldingFormData: (data?: MessagesFormValues) => void,
     behandling: BehandlingAppKontekst,
   ) =>
-  (values: FormValues) => {
+  (values: MessagesFormValues) => {
     const skalSettePåVent =
       values.brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
       values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING ||

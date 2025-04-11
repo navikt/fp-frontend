@@ -13,6 +13,7 @@ import type {
   KodeverkMedNavn,
 } from '@navikt/fp-types';
 
+import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { ArbeidsforholdPanel } from './ArbeidsforholdPanel';
 
 import styles from './arbeidsforholdFieldArray.module.css';
@@ -65,7 +66,7 @@ export const ArbeidsforholdFieldArray = ({
   readOnly,
   uttakArbeidTyper,
 }: Props) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext<TilretteleggingFormValues>();
   const { fields } = useFieldArray({
     control,
     name: 'arbeidsforhold',

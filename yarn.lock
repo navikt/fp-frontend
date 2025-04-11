@@ -5128,6 +5128,7 @@ __metadata:
   dependencies:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:^"
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^"
     "@storybook/addon-actions": 8.6.12
     "@storybook/react": 8.6.12
     "@storybook/react-vite": 8.6.12

@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { type ReactNode, useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, VStack } from '@navikt/ds-react';
@@ -57,7 +57,7 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
 
   const velgKonto = useCallback(() => visDagerForKonto(stønadskonto.stonadskontotype), [stønadskonto]);
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   const uker = Math.floor(stønadskonto.maxDager / 5);
 

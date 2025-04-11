@@ -129,7 +129,7 @@ const meta = {
   args: {
     arbeidsgiverOpplysningerPerId,
     simuleringResultat,
-    previewFptilbakeCallback: action('button-click') as (data: any) => Promise<void>,
+    previewFptilbakeCallback: action('button-click') as (data: { mottaker: string; fritekst: string }) => Promise<void>,
   },
   render: args => <SimuleringProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof SimuleringProsessIndex>>;

@@ -705,7 +705,7 @@ const getOppdaterStønadskontoer =
       .post(getUrlFromRel('STONADSKONTOER_GITT_UTTAKSPERIODER', links), {
         json: params,
       })
-      .json<void>();
+      .json<UttakStonadskontoer>();
 
 export const useBehandlingApi = (behandling: Behandling) => {
   const { links } = behandling;

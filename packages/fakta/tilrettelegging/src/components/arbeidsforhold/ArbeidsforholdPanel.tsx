@@ -11,6 +11,7 @@ import minMax from 'dayjs/plugin/minMax';
 
 import type { ArbeidsforholdFodselOgTilrettelegging, Permisjon } from '@navikt/fp-types';
 
+import type { TilretteleggingFormValues } from '../../types/TilretteleggingFormValues';
 import { finnProsentSvangerskapspenger } from './tilretteleggingOgOpphold/tilrettelegging/TilretteleggingForm';
 import { TilretteleggingOgOppholdPerioderPanel } from './tilretteleggingOgOpphold/TilretteleggingOgOppholdPerioderPanel';
 import { VelferdspermisjonPanel } from './velferdspermisjon/VelferdspermisjonPanel';
@@ -18,7 +19,8 @@ import { VelferdspermisjonPanel } from './velferdspermisjon/VelferdspermisjonPan
 dayjs.extend(minMax);
 
 const validerTidligereEnn =
-  (intl: IntlShape, getValues: UseFormGetValues<any>, tilretteleggingBehovFom: string) => (): string | null => {
+  (intl: IntlShape, getValues: UseFormGetValues<TilretteleggingFormValues>, tilretteleggingBehovFom: string) =>
+  (): string | null => {
     const termindato = getValues('termindato');
     const fødselsdato = getValues('fødselsdato');
 
@@ -70,7 +72,7 @@ export const ArbeidsforholdPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { getValues, watch, setValue } = useFormContext();
+  const { getValues, watch, setValue } = useFormContext<TilretteleggingFormValues>();
 
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
 

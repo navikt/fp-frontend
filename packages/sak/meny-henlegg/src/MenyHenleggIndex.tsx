@@ -16,7 +16,7 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyHenleggI
 
 interface Props {
   valgtBehandling: Behandling;
-  henleggBehandling: (params: { årsakKode: string; begrunnelse: string; fritekst?: string }) => Promise<any>;
+  henleggBehandling: (params: { årsakKode: string; begrunnelse: string; fritekst?: string }) => Promise<void>;
   forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
   ytelseType: string;
   behandlingResultatTyper: KodeverkMedNavn[];

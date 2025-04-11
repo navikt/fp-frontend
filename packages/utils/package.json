@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@navikt/fp-types": "workspace:^",
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^",
     "react": "19.1.0"
   },
   "devDependencies": {

@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { type ReactNode, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Heading, HStack, Label, VStack } from '@navikt/ds-react';
@@ -20,7 +20,7 @@ interface VurderingVisningProps {
 
 const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }: VurderingVisningProps) => {
   const vurderingstyper = alleKodeverk[KodeverkType.MEDLEMSKAP_MANUELL_VURDERING_TYPE];
-  const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
+  const bTag = useCallback((chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   return (
     <VStack gap="4">
