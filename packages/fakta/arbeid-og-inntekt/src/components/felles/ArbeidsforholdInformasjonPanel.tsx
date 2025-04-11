@@ -6,7 +6,7 @@ import { BodyShort, HStack, Label, Link, Spacer, VStack } from '@navikt/ds-react
 import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
+import type { AlleKodeverk, Inntektspost } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 import { InntektsmeldingerPanel } from './InntektsmeldingerPanel';
@@ -17,8 +17,6 @@ type ForenkletInntektspost = {
   beløp: number;
   fom: string;
 };
-
-const EMPTY_ARRAY = [] as Inntektsmelding[];
 
 const behandleInntektsposter = (
   skjæringspunktDato: string,
@@ -48,24 +46,14 @@ const behandleInntektsposter = (
 interface Props {
   saksnummer: string;
   skjæringspunktDato: string;
-  inntektsposter?: Inntektspost[];
-  arbeidsforholdForRad: AoIArbeidsforhold[];
-  inntektsmeldingerForRad?: Inntektsmelding[];
   alleKodeverk: AlleKodeverk;
   radData: ArbeidsforholdOgInntektRadData;
 }
 
-export const ArbeidsforholdInformasjonPanel = ({
-  saksnummer,
-  skjæringspunktDato,
-  inntektsposter = [],
-  arbeidsforholdForRad,
-  inntektsmeldingerForRad = EMPTY_ARRAY,
-  alleKodeverk,
-  radData,
-}: Props) => {
+export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringspunktDato, alleKodeverk, radData }: Props) => {
   const [visAlleMåneder, setVisAlleMånader] = useState(false);
 
+  const { inntektsposter, arbeidsforholdForRad } = radData;
   const sorterteInntektsposter = useMemo(
     () => behandleInntektsposter(skjæringspunktDato, inntektsposter),
     [inntektsposter],
@@ -77,13 +65,7 @@ export const ArbeidsforholdInformasjonPanel = ({
 
   return (
     <VStack gap="8">
-      <InntektsmeldingerPanel
-        saksnummer={saksnummer}
-        arbeidsforholdForRad={arbeidsforholdForRad}
-        inntektsmeldingerForRad={inntektsmeldingerForRad}
-        alleKodeverk={alleKodeverk}
-        radData={radData}
-      />
+      <InntektsmeldingerPanel saksnummer={saksnummer} alleKodeverk={alleKodeverk} radData={radData} />
       {visInntektsposter && (
         <VStack gap="2">
           <Label size="small">

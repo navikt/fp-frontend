@@ -26,6 +26,7 @@ import { useIsFormDirty } from '../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
 import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
+import { finnInntektsmeldingerForArbeidsgiver } from './inntektsmeldingUtils';
 
 import styles from './arbeidOgInntektFaktaPanel.module.css';
 
@@ -65,32 +66,43 @@ const lagAvklaring = (arbeidsforhold: AoIArbeidsforhold, arbeidsgiverNavn: strin
   };
 };
 
+const harMatchendeArbeidsgiverIdent =
+  <T extends { arbeidsgiverIdent: string }, U extends { arbeidsgiverIdent: string }>(item: T) =>
+  (b: U): boolean =>
+    b.arbeidsgiverIdent === item.arbeidsgiverIdent;
+
 const sorterGittÅrsak = (arbeidsforhold1: AoIArbeidsforhold) => (arbeidsforhold1.årsak ? -1 : 1);
 
 const byggTabellStruktur = (
   arbeidOgInntekt: ArbeidOgInntektsmelding,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ArbeidsforholdOgInntektRadData[] => {
-  const { arbeidsforhold, inntektsmeldinger } = arbeidOgInntekt;
+  const { arbeidsforhold, inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
   const alleArbeidsforhold = [...arbeidsforhold.sort(sorterGittÅrsak)].reduce<ArbeidsforholdOgInntektRadData[]>(
     (acc, af) => {
-      const tidligereAf = acc.find(a => a.arbeidsgiverIdent === af.arbeidsgiverIdent);
-
+      const tidligereAf = acc.find(harMatchendeArbeidsgiverIdent(af));
       if (tidligereAf) {
         return acc;
       }
+      const arbeidsforholdForRad = arbeidsforhold.filter(harMatchendeArbeidsgiverIdent(af));
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent];
       const arbeidsgiverNavn = arbeidsgiverOpplysninger.navn;
-      const årsak = af.årsak ?? inntektsmeldinger.find(i => erMatch(af, i))?.årsak;
+
+      const inntektsmeldingerForRad = finnInntektsmeldingerForArbeidsgiver(inntektsmeldinger, af.arbeidsgiverIdent);
+      const inntektsposterForRad = inntekter.find(harMatchendeArbeidsgiverIdent(af))?.inntekter ?? [];
+
       const ne: ArbeidsforholdOgInntektRadData = {
         arbeidsgiverIdent: af.arbeidsgiverIdent,
         arbeidsgiverNavn,
         ...(arbeidsgiverOpplysninger.erPrivatPerson
           ? { erPrivatPerson: true, arbeidsgiverFødselsdato: arbeidsgiverOpplysninger.fødselsdato }
           : { erPrivatPerson: false }),
-        årsak: årsak ?? undefined,
+        årsak: af.årsak ?? inntektsmeldinger[0]?.årsak ?? undefined,
         avklaring: af.saksbehandlersVurdering ? lagAvklaring(af, arbeidsgiverNavn) : undefined,
+        arbeidsforholdForRad: arbeidsforholdForRad,
+        inntektsmeldingerForRad,
+        inntektsposter: inntektsposterForRad,
       };
 
       return acc.concat(ne);
@@ -100,12 +112,20 @@ const byggTabellStruktur = (
 
   const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
     .filter(im => !arbeidsforhold.some(af => erMatch(af, im)))
-    .map<ArbeidsforholdOgInntektRadData>(im => {
-      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
-      return {
-        arbeidsgiverIdent: im.arbeidsgiverIdent,
-        arbeidsgiverNavn: arbeidsgiverOpplysninger.navn,
+    .reduce<ArbeidsforholdOgInntektRadData[]>((acc, im) => {
+      const tidligereIm = acc.find(harMatchendeArbeidsgiverIdent(im));
+      if (tidligereIm) {
+        return acc;
+      }
 
+      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
+      const arbeidsgiverNavn = arbeidsgiverOpplysninger.navn;
+      const inntektsposterForRad = inntekter.find(harMatchendeArbeidsgiverIdent(im))?.inntekter ?? [];
+      const inntektsmeldingerForRad = inntektsmeldinger.filter(harMatchendeArbeidsgiverIdent(im));
+
+      const ne: ArbeidsforholdOgInntektRadData = {
+        arbeidsgiverIdent: im.arbeidsgiverIdent,
+        arbeidsgiverNavn,
         ...(arbeidsgiverOpplysninger.erPrivatPerson
           ? { erPrivatPerson: true, arbeidsgiverFødselsdato: arbeidsgiverOpplysninger.fødselsdato }
           : { erPrivatPerson: false }),
@@ -116,8 +136,12 @@ const byggTabellStruktur = (
               begrunnelse: im.begrunnelse ?? undefined,
             }
           : undefined,
+        arbeidsforholdForRad: [],
+        inntektsmeldingerForRad: inntektsmeldingerForRad,
+        inntektsposter: inntektsposterForRad,
       };
-    });
+      return acc.concat(ne);
+    }, []);
 
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };
@@ -266,12 +290,12 @@ export const ArbeidOgInntektFaktaPanel = ({
         <Table.Body>
           {tabellRader.map((radData, index) => (
             <ArbeidsforholdRad
-              key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}${index}`} // nosonar
-              arbeidOgInntekt={arbeidOgInntekt}
+              key={`${radData.arbeidsgiverNavn}${radData.arbeidsgiverIdent}`}
               saksnummer={fagsak.saksnummer}
               behandlingUuid={behandling.uuid}
               behandlingVersjon={behandling.versjon}
               radData={radData}
+              skjæringstidspunkt={arbeidOgInntekt.skjæringstidspunkt}
               isReadOnly={isReadOnly || erAksjonspunktAvsluttet || harIngenAksjonspunkt}
               registrerArbeidsforhold={registrerArbeidsforhold}
               lagreVurdering={lagreVurdering}

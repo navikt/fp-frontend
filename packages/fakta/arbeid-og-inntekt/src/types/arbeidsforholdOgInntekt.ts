@@ -1,3 +1,5 @@
+import type { AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
+
 export type Avklaring = {
   saksbehandlersVurdering?: string;
   begrunnelse?: string;
@@ -20,6 +22,9 @@ type AGOpplysninger =
     };
 
 export type ArbeidsforholdOgInntektRadData = {
+  inntektsmeldingerForRad: Inntektsmelding[];
+  arbeidsforholdForRad: AoIArbeidsforhold[];
+  inntektsposter: Inntektspost[];
   årsak?: string;
   avklaring?: Avklaring;
 } & AGOpplysninger;

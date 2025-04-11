@@ -2,14 +2,13 @@ import { FormattedMessage } from 'react-intl';
 
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { dateFormat, formatCurrencyNoKr, periodFormat } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 import { DokumentLink } from '@navikt/fp-ui-komponenter';
 
-import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt.ts';
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
@@ -34,7 +33,7 @@ export const InntektsmeldingOpplysningerPanel = ({
 }: Props) => (
   <>
     <VStack gap="4">
-      {!ikkeVisInfo && radData && (
+      {!ikkeVisInfo && (
         <HStack gap="4">
           <Label size="small">
             <FormattedMessage
@@ -45,13 +44,9 @@ export const InntektsmeldingOpplysningerPanel = ({
               }
             />
           </Label>
-          <Detail>
-            {radData.erPrivatPerson ? (
-              <DateLabel dateString={radData.arbeidsgiverFødselsdato} />
-            ) : (
-              radData.arbeidsgiverIdent
-            )}
-          </Detail>
+          <BodyShort size="small">
+            {radData.erPrivatPerson ? dateFormat(radData.arbeidsgiverFødselsdato) : radData.arbeidsgiverIdent}
+          </BodyShort>
         </HStack>
       )}
       {skalViseArbeidsforholdId && (
@@ -82,10 +77,10 @@ export const InntektsmeldingOpplysningerPanel = ({
                 )}
               </Label>
               <BodyShort size="small">
-                <PeriodLabel
-                  dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
-                  dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
-                />
+                {periodFormat(
+                  arbeidsforhold.permisjonOgMangel.permisjonFom,
+                  arbeidsforhold.permisjonOgMangel.permisjonTom,
+                )}
               </BodyShort>
             </HStack>
           )}

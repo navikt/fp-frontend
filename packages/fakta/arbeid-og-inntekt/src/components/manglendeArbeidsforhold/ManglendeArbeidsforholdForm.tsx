@@ -22,7 +22,6 @@ import type { Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeids
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
-import { InntektsmeldingOpplysningerPanel } from '../felles/InntektsmeldingOpplysningerPanel';
 
 import styles from './manglendeArbeidsforholdForm.module.css';
 
@@ -82,31 +81,25 @@ const getOppdaterTabell =
   };
 
 interface Props {
-  saksnummer: string;
   behandlingUuid: string;
   behandlingVersjon: number;
-  inntektsmelding: Inntektsmelding;
   radData: ArbeidsforholdOgInntektRadData;
   isReadOnly: boolean;
   registrerArbeidsforhold: (params: ManueltArbeidsforhold) => Promise<void>;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
-  skalViseArbeidsforholdId: boolean;
 }
 
 export const ManglendeArbeidsforholdForm = ({
-  saksnummer,
   behandlingUuid,
   behandlingVersjon,
-  inntektsmelding,
   radData,
   isReadOnly,
   registrerArbeidsforhold,
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
-  skalViseArbeidsforholdId,
 }: Props) => {
   const intl = useIntl();
 
@@ -133,6 +126,8 @@ export const ManglendeArbeidsforholdForm = ({
     lukkArbeidsforholdRad();
     formMethods.reset(defaultValues);
   };
+
+  const inntektsmelding = radData.inntektsmeldingerForRad[0];
 
   const lagre = (formValues: FormValues) => {
     const oppdater = getOppdaterTabell(oppdaterTabell, radData, inntektsmelding, formValues);
@@ -170,12 +165,6 @@ export const ManglendeArbeidsforholdForm = ({
 
   return (
     <VStack gap="8">
-      <InntektsmeldingOpplysningerPanel
-        saksnummer={saksnummer}
-        inntektsmelding={inntektsmelding}
-        skalViseArbeidsforholdId={skalViseArbeidsforholdId}
-        radData={radData}
-      />
       <div className={styles.alertStripe}>
         <Alert variant="info">
           <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
