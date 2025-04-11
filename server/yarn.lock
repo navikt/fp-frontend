@@ -124,7 +124,7 @@ __metadata:
     "@eslint/eslintrc": 3.1.0
     "@eslint/js": 9.14.0
     "@navikt/oasis": ^3.4.0
-    "@navikt/vite-mode": 0.13.1
+    "@navikt/vite-mode": 0.13.3
     "@types/connect-timeout": ^0.0.39
     "@types/cors": ^2.8.17
     "@types/express": 5.0.1
@@ -199,14 +199,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/vite-mode@npm:0.13.1":
-  version: 0.13.1
-  resolution: "@navikt/vite-mode@npm:0.13.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fvite-mode%2F0.13.1%2Feb66f58753eafc7227d422280264f8562dfb6ed5"
+"@navikt/vite-mode@npm:0.13.3":
+  version: 0.13.3
+  resolution: "@navikt/vite-mode@npm:0.13.3::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fvite-mode%2F0.13.3%2Ff880257c92483835d4804d748f53a43aab4bd28f"
   dependencies:
     cookie-parser: 1.4.7
   peerDependencies:
     express: 5.x
-  checksum: fa30f5a3078145fdb1654a3942491aa684ed063be6d349801b544093e41dcdaadc4908ada95475578181a1a862aa8d414911bd7d599aff59d6554ec44dad5824
+  checksum: a5d4311d2d335916bb1c4e9b548c79bd751e8959aa8b5c8768b1f73e88e42d3be2c9edf4965e79e33b37d2fae817345f3ae61304f35e52bd1fc028a7a44ae757
   languageName: node
   linkType: hard
 
