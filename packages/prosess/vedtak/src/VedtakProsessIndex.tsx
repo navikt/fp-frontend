@@ -9,6 +9,7 @@ import type {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Oppgave,
+  OppgaveId,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -35,6 +36,7 @@ interface Props {
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
+  ferdigstillOppgave: (oppgaveId: OppgaveId) => Promise<void>;
 }
 
 export const VedtakProsessIndex = ({
@@ -47,6 +49,7 @@ export const VedtakProsessIndex = ({
   beregningsresultatOriginalBehandling,
   previewCallback,
   oppgaver,
+  ferdigstillOppgave,
 }: Props) => {
   const { behandling, fagsak } = usePanelDataContext();
 
@@ -77,6 +80,7 @@ export const VedtakProsessIndex = ({
           vilkar={vilkar}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           oppgaver={oppgaver}
+          ferdigstillOppgave={ferdigstillOppgave}
         />
       )}
       {behandling.type === BehandlingType.REVURDERING && (
@@ -89,6 +93,7 @@ export const VedtakProsessIndex = ({
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
           oppgaver={oppgaver}
+          ferdigstillOppgave={ferdigstillOppgave}
         />
       )}
     </RawIntlProvider>

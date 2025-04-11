@@ -23,6 +23,7 @@ import type {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Oppgave,
+  OppgaveId,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -177,6 +178,7 @@ interface Props {
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
+  ferdigstillOppgave: (oppgaveId: OppgaveId) => Promise<void>;
 }
 
 export const VedtakForm = ({
@@ -187,6 +189,7 @@ export const VedtakForm = ({
   vilkar,
   beregningErManueltFastsatt,
   oppgaver,
+  ferdigstillOppgave,
 }: Props) => {
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
     usePanelDataContext<VedtakAksjonspunkter[]>();
@@ -232,6 +235,7 @@ export const VedtakForm = ({
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
+        ferdigstillOppgave={ferdigstillOppgave}
         setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
         harValgtÅRedigereVedtaksbrev={harValgtÅRedigereVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {

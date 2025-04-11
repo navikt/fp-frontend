@@ -3,6 +3,10 @@
   width: 70rem;
 }
 
+.headerButton {
+  width: 224px;
+}
+
 .headerText {
   font-size: 16px;
 }

@@ -1,4 +1,4 @@
-import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type { FeilutbetalingFakta, FeilutbetalingÅrsak } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
@@ -39,6 +39,7 @@ import type {
   Medlemskap,
   OmsorgOgRett,
   Oppgave,
+  OppgaveId,
   OpprettVergeParams,
   Opptjening,
   PeriodeSoker,
@@ -199,6 +200,7 @@ export const BehandlingRel = {
   VERGE: 'soeker-verge',
   UPDATE_ON_HOLD: 'endre-pa-vent',
   HENT_OPPGAVER: 'hent-oppgaver',
+  FERDIGSTILL_OPPGAVE: 'ferdigstill-oppgave',
   HENT_BREV_OVERSTYRING: 'hent-brev-overstyring',
   MELLOMLAGRE_BREV_OVERSTYRING: 'mellomlagre-brev-overstyring',
 };
@@ -527,6 +529,13 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
+const getFerdigstillOppgave = (links: ApiLink[]) => (params: OppgaveId) =>
+  kyExtended
+    .post(getUrlFromRel('FERDIGSTILL_OPPGAVE', links), {
+      json: params,
+    })
+    .json<void>();
+
 export const hentBehandling = (behandlingUuid: string) =>
   kyExtended.post<Behandling>(BehandlingUrl.BEHANDLING, {
     json: { behandlingUuid },
@@ -752,6 +761,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
       fjernVergeV2: getFjernVergeV2(links),
     },
     oppgaverOptions: getOppgaverOptions(links),
+    ferdigstillOppgave: getFerdigstillOppgave(links),
     anke: {
       ankeVurderingOptions: getAnkeVurderingOptions(links),
     },
