@@ -2,31 +2,17 @@ import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
-import { AvsnittSkiller, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { BodyShort, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
+import { AvsnittSkiller, DateLabel, PeriodLabel} from '@navikt/ft-ui-komponenter';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
+import type { AlleKodeverk } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt.ts';
+import { grupperArbeidsforholdMedInntektsmelding } from '../inntektsmeldingUtils';
 import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerPanel';
 
 import styles from './inntektsmeldingerPanel.module.css';
-
-const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
-  inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
-  (!inntektsmelding.internArbeidsforholdId ||
-    inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
-
-const finnInntektsmelding = (inntektsmeldinger: Inntektsmelding[], internArbeidsforholdId?: string) => {
-  const harImMedId = inntektsmeldinger.some(i => i.internArbeidsforholdId);
-  const harImUtenId = inntektsmeldinger.some(i => !i.internArbeidsforholdId);
-  if (harImMedId && harImUtenId) {
-    throw Error('Har inntektsmelding både med og uten id');
-  }
-
-  return inntektsmeldinger.find(i => !i.internArbeidsforholdId || i.internArbeidsforholdId === internArbeidsforholdId);
-};
 
 const delOppAId = (eksternArbeidsforholdId: string): string => {
   const lengde = Math.ceil(eksternArbeidsforholdId.length / 25);
@@ -36,74 +22,64 @@ const delOppAId = (eksternArbeidsforholdId: string): string => {
 
 interface Props {
   saksnummer: string;
-  arbeidsforholdForRad: AoIArbeidsforhold[];
-  inntektsmeldingerForRad: Inntektsmelding[];
   alleKodeverk: AlleKodeverk;
   radData: ArbeidsforholdOgInntektRadData;
 }
 
-export const InntektsmeldingerPanel = ({
-  saksnummer,
-  arbeidsforholdForRad,
-  inntektsmeldingerForRad,
-  alleKodeverk,
-  radData,
-}: Props) => {
+export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Props) => {
   const intl = useIntl();
   const [visInfoOmIm, setVisInfoOmIm] = useState<Record<string, boolean>>({});
 
+  const { arbeidsforholdForRad, inntektsmeldingerForRad, arbeidsgiverIdent, erPrivatPerson } = radData;
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
-  const inntektsmeldingForArbeidsforhold = harEttArbeidsforhold
-    ? finnInntektsmelding(inntektsmeldingerForRad, arbeidsforholdForRad[0].internArbeidsforholdId)
-    : undefined;
-
+  const inntektsmeldingForArbeidsforhold = grupperArbeidsforholdMedInntektsmelding(
+    inntektsmeldingerForRad,
+    arbeidsforholdForRad,
+  );
   return (
     <VStack gap="4">
       <HStack gap="4">
         <Label size="small">
           <FormattedMessage
             id={
-              radData.erPrivatPerson
+              erPrivatPerson
                 ? 'ArbeidsforholdInformasjonPanel.Fodselsdato'
                 : 'ArbeidsforholdInformasjonPanel.Orgnr'
             }
           />
         </Label>
-        <Detail>
-          {radData.erPrivatPerson ? (
+        <BodyShort size="small">
+          {erPrivatPerson ? (
             <DateLabel dateString={radData.arbeidsgiverFødselsdato} />
-          ) : (
-            radData.arbeidsgiverIdent
-          )}
-        </Detail>
+          ) : (arbeidsgiverIdent)}
+        </BodyShort>
       </HStack>
       {!harEttArbeidsforhold && (
         <>
           <AvsnittSkiller dividerParagraf className={styles.skiller} />
-          {arbeidsforholdForRad.map(a => {
-            const inntektsmelding = inntektsmeldingerForRad.find(i => erMatch(a, i));
+          {inntektsmeldingForArbeidsforhold.map(({ arbeidsforhold: a, inntektsmelding: im }) => {
             return (
-              <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
+              <React.Fragment key={`${a?.arbeidsgiverIdent}${a?.internArbeidsforholdId}`}>
                 <VStack gap="2">
                   <HStack gap="4">
                     <Label size="small">
                       <FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" />
                     </Label>
                     <div>
-                      {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length < 50 && (
+                      {a?.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length < 50 && (
                         <div>
                           <BodyShort size="small">{a.eksternArbeidsforholdId}</BodyShort>
                         </div>
                       )}
-                      {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
+                      {a?.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
                         <Tooltip content={delOppAId(a.eksternArbeidsforholdId)}>
                           <BodyShort size="small">{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
                         </Tooltip>
                       )}
                       {!a.eksternArbeidsforholdId && <BodyShort size="small">-</BodyShort>}
                     </div>
-                    {inntektsmelding && (
+                    {im && (
                       <>
                         <Spacer />
                         <Label size="small">
@@ -111,7 +87,7 @@ export const InntektsmeldingerPanel = ({
                         </Label>
                       </>
                     )}
-                    {!inntektsmelding && (
+                    {!im && (
                       <>
                         <Spacer />
                         <div>
@@ -135,11 +111,11 @@ export const InntektsmeldingerPanel = ({
                     <BodyShort size="small">
                       <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom} />
                     </BodyShort>
-                    {inntektsmelding && (
+                    {im && (
                       <>
                         <Spacer />
                         <BodyShort size="small">
-                          <DateLabel dateString={inntektsmelding.motattDato} />
+                          <DateLabel dateString={im.motattDato} />
                         </BodyShort>
                       </>
                     )}
@@ -167,12 +143,12 @@ export const InntektsmeldingerPanel = ({
                       </BodyShort>
                     </HStack>
                   )}
-                  {inntektsmelding && (
+                  {im && (
                     <>
                       {a.internArbeidsforholdId && visInfoOmIm[a.internArbeidsforholdId] && (
                         <InntektsmeldingOpplysningerPanel
                           saksnummer={saksnummer}
-                          inntektsmelding={inntektsmelding}
+                          inntektsmelding={im}
                           skalViseArbeidsforholdId={false}
                           radData={radData}
                         />
@@ -219,17 +195,19 @@ export const InntektsmeldingerPanel = ({
           })}
         </>
       )}
-      {harEttArbeidsforhold && !!inntektsmeldingForArbeidsforhold && (
-        <InntektsmeldingOpplysningerPanel
-          saksnummer={saksnummer}
-          radData={radData}
-          arbeidsforhold={arbeidsforholdForRad[0]}
-          inntektsmelding={inntektsmeldingForArbeidsforhold}
-          skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
-          alleKodeverk={alleKodeverk}
-          ikkeVisInfo
-        />
-      )}
+      {harEttArbeidsforhold &&
+        inntektsmeldingForArbeidsforhold.length > 0 &&
+        inntektsmeldingForArbeidsforhold[0].inntektsmelding && (
+          <InntektsmeldingOpplysningerPanel
+            saksnummer={saksnummer}
+            radData={radData}
+            arbeidsforhold={arbeidsforholdForRad[0]}
+            inntektsmelding={inntektsmeldingForArbeidsforhold[0].inntektsmelding}
+            skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
+            alleKodeverk={alleKodeverk}
+            ikkeVisInfo
+          />
+        )}
       {harEttArbeidsforhold && inntektsmeldingerForRad.length === 0 && (
         <>
           <HStack gap="4">
