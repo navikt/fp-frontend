@@ -67,7 +67,11 @@ export const AppIndex = () => {
   };
 
   const addErrorMessageAndSetAsCrashed = (error: FpError) => {
-    setCrashMessage(error.type === ErrorType.GENERAL_ERROR ? error.message : 'Det oppstod en rar feilsituasjon');
+    setCrashMessage(
+      error.type === ErrorType.GENERAL_ERROR
+        ? error.message
+        : 'Det oppstod en feilsituasjon som ikke blir håndtert korrekt',
+    );
   };
 
   const errorMessages = useRestApiError() ?? EMPTY_ARRAY;
