@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -84,7 +85,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
 
-  const bTag = (...chunks: any) => <b>{chunks}</b>;
+  const bTag = (...chunks: ReactNode[]) => <b>{chunks}</b>;
 
   const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = (verdi: boolean) => {
     if (fastsattOpptjening.fastsattOpptjeningAktivitetList?.length === 0 && verdi === true) {

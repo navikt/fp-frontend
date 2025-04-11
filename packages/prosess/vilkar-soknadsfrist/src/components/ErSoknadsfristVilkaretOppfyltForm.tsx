@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { type ReactNode, useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -114,7 +114,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
   const dato = useMemo(() => findDate(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
   const textCode = useMemo(() => findTextCode(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 

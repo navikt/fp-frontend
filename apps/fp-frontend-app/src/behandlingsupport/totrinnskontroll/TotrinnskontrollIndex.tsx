@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
-import { TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
+import { type TotrinnskontrollFormValues, TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -27,8 +27,8 @@ type Values = {
 interface Props {
   fagsakData: FagsakData;
   valgtBehandlingUuid: string;
-  beslutterFormData?: any;
-  setBeslutterFormData: (data?: any) => void;
+  beslutterFormData?: TotrinnskontrollFormValues;
+  setBeslutterFormData: (data?: TotrinnskontrollFormValues) => void;
   toggleVisUtvidetBehandlingDetaljerKnapp: ReactElement;
 }
 

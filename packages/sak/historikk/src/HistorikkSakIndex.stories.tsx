@@ -229,7 +229,7 @@ const meta = {
     historikkFpSak: historikkInnslag,
     historikkFpTilbake: [],
     alleKodeverkFpSak: alleKodeverk as any,
-    alleKodeverkFpTilbake: alleKodeverkTilbakekreving as any,
+    alleKodeverkFpTilbake: alleKodeverkTilbakekreving,
     saksnummer: '2',
     getBehandlingLocation: () => locationMock,
     createLocationForSkjermlenke: () => locationMock,

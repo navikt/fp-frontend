@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { type ReactNode, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -62,7 +62,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
     [],
   );
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   const skalAvklareUforetrygd =
     omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;

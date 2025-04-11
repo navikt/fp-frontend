@@ -12,20 +12,25 @@ import {
 import type { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 import { PanelDataProvider } from '@navikt/fp-utils';
 
+import type { FaktaAksjonspunkt } from '../../types-avklar-aksjonspunkter/src/FaktaAksjonspunkt';
+import type { ProsessAksjonspunkt } from '../../types-avklar-aksjonspunkter/src/ProsessAksjonspunkt';
+
 import alleKodeverk from '../mocks/alleKodeverk.json';
+
+type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 export type PanelDataArgs = {
   fagsak?: Fagsak;
   behandling?: Behandling;
   aksjonspunkterForPanel?: Aksjonspunkt[];
   isReadOnly?: boolean;
-  submitCallback?: (data: any) => Promise<void>;
+  submitCallback?: (data: AksjonspunktType) => Promise<void>;
   alleMerknaderFraBeslutter?: { [key: string]: { notAccepted?: boolean } };
 };
 
 const promiseAction =
   () =>
-  (...args: any): Promise<any> => {
+  (...args: [AksjonspunktType]): Promise<AksjonspunktType> => {
     action('button-click')(...args);
     return Promise.resolve();
   };

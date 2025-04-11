@@ -12,7 +12,7 @@ const meta = {
   args: {
     saksbehandlerNavn: 'Saksbehandler Espen',
     saksnummer: '12343432',
-    lagreNotat: action('button-click') as (data: any) => Promise<any>,
+    lagreNotat: action('button-click'),
   },
   render: storyArgs => {
     const [args, setArgs] = useState(storyArgs);

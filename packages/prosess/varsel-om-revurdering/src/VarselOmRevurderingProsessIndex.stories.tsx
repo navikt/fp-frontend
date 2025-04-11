@@ -75,7 +75,7 @@ const meta = {
     soknad,
     soknadOriginalBehandling,
     familiehendelseOriginalBehandling,
-    previewCallback: action('button-click') as any,
+    previewCallback: action('button-click'),
   },
   render: args => <VarselOmRevurderingProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof VarselOmRevurderingProsessIndex>>;

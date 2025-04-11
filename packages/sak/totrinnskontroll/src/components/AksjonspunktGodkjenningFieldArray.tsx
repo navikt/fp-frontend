@@ -46,7 +46,9 @@ export const AksjonspunktGodkjenningFieldArray = ({
   faktaOmBeregningTilfeller,
   lagLenke,
 }: Props) => {
-  const { control, watch } = useFormContext();
+  const { control, watch } = useFormContext<{
+    aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
+  }>();
   const { fields } = useFieldArray({
     control,
     name: FIELD_ARRAY_NAME,

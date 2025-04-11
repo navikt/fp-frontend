@@ -9,6 +9,7 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
 import { RisikoklassifiseringSakIndex } from './RisikoklassifiseringSakIndex';
+import type { AvklartRisikoklassifiseringAp } from './types/AvklartRisikoklassifiseringAp';
 
 import '@navikt/ds-css';
 import '@navikt/ft-form-hooks/dist/style.css';
@@ -19,7 +20,7 @@ const meta = {
   component: RisikoklassifiseringSakIndex,
   args: {
     faresignalVurderinger: alleKodeverk[KodeverkType.FARESIGNAL_VURDERING],
-    submitAksjonspunkt: action('button-click') as () => Promise<any>,
+    submitAksjonspunkt: action('button-click') as () => Promise<AvklartRisikoklassifiseringAp>,
     toggleRiskPanel: action('button-click'),
     isPanelOpen: false,
     readOnly: false,

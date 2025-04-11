@@ -86,7 +86,7 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
             type: 'category',
             boundaryGap: false,
             axisLabel: {
-              formatter: (value: any) => {
+              formatter: value => {
                 const dato = dayjs(value);
                 const erSiste = dato.isSame(periodeSlutt);
                 const maned = erSiste ? ukjentTekst : getYearText(dato.month(), intl);

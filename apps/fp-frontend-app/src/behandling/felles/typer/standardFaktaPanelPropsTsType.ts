@@ -1,4 +1,5 @@
 import type { Aksjonspunkt, AlleKodeverk, Behandling } from '@navikt/fp-types';
+import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 export type StandardFaktaPanelProps = Readonly<{
   behandling: Behandling;
@@ -7,6 +8,6 @@ export type StandardFaktaPanelProps = Readonly<{
   submittable: boolean;
   harApneAksjonspunkter: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  submitCallback: (aksjonspunktData: any) => Promise<void>;
+  submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleKodeverk: AlleKodeverk;
 }>;

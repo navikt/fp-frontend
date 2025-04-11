@@ -28,7 +28,7 @@ import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const EMPTY_ARRAY = [] as any[];
+const EMPTY_ARRAY = new Array<FpError>();
 
 const intl = createIntl(messages);
 
@@ -66,8 +66,12 @@ export const AppIndex = () => {
     setHeaderHeight(newHeaderHeight);
   };
 
-  const addErrorMessageAndSetAsCrashed = (error: string) => {
-    setCrashMessage(error);
+  const addErrorMessageAndSetAsCrashed = (error: FpError) => {
+    setCrashMessage(
+      error.type === ErrorType.GENERAL_ERROR
+        ? error.message
+        : 'Det oppstod en feilsituasjon som ikke blir håndtert korrekt',
+    );
   };
 
   const errorMessages = useRestApiError() ?? EMPTY_ARRAY;

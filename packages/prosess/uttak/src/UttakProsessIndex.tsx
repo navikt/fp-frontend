@@ -25,7 +25,10 @@ interface Props {
   familiehendelse: FamilieHendelseSamling;
   personoversikt: Personoversikt;
   kanOverstyre: boolean;
-  oppdaterStønadskontoer: (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) => Promise<any>;
+  oppdaterStønadskontoer: (params: {
+    behandlingUuid: string;
+    perioder: PeriodeSoker[];
+  }) => Promise<UttakStonadskontoer>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 

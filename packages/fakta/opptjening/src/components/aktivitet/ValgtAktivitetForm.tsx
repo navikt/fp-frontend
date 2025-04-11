@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback } from 'react';
+import { type ReactElement, type ReactNode, useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -118,7 +118,7 @@ export const ValgtAktivitetForm = ({
     fastsattOpptjening?.opptjeningTom,
   );
 
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>

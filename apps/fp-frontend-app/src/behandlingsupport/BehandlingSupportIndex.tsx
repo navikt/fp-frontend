@@ -12,6 +12,9 @@ import {
 } from '@navikt/aksel-icons';
 import { Tabs } from '@navikt/ds-react';
 
+import type { MessagesFormValues } from '@navikt/fp-sak-meldinger';
+import type { TotrinnskontrollFormValues } from '@navikt/fp-sak-totrinnskontroll';
+
 import { getSupportPanelLocationCreator } from '../app/paths';
 import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { FagsakData } from '../fagsak/FagsakData';
@@ -55,8 +58,8 @@ export const BehandlingSupportIndex = ({
     isQueryParam: true,
   });
 
-  const [meldingFormData, setMeldingFormData] = useState();
-  const [beslutterFormData, setBeslutterFormData] = useState();
+  const [meldingFormData, setMeldingFormData] = useState<MessagesFormValues>();
+  const [beslutterFormData, setBeslutterFormData] = useState<TotrinnskontrollFormValues>();
 
   const fagsak = fagsakData.getFagsak();
   const behandling = fagsakData.getBehandling(behandlingUuid);

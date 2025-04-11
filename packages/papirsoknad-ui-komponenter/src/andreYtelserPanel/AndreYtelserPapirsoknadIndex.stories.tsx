@@ -27,7 +27,7 @@ const meta = {
     return (
       <Form
         formMethods={formMethods}
-        onSubmit={(values: any) => submitCallback(AndreYtelserPapirsoknadIndex.transformValues(values))}
+        onSubmit={values => submitCallback(AndreYtelserPapirsoknadIndex.transformValues(values))}
       >
         <VStack gap="10">
           <AndreYtelserPapirsoknadIndex {...args} />

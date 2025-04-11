@@ -97,7 +97,7 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
           innvilgelseAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
             k => k.kode === valgtPeriode.periodeResultatÅrsak,
           )?.navn,
-          b: (chunks: any) => <b>{chunks}</b>,
+          b: chunks => <b>{chunks}</b>,
         }}
       />
     );
@@ -109,7 +109,7 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
         avslagAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
           k => k.kode === valgtPeriode.periodeResultatÅrsak,
         )?.navn,
-        b: (chunks: any) => <b>{chunks}</b>,
+        b: chunks => <b>{chunks}</b>,
       }}
     />
   );

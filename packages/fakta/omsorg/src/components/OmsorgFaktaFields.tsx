@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { type ReactNode, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
@@ -20,7 +20,7 @@ interface Props {
 }
 
 export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => {
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   return (
     <FaktaGruppe

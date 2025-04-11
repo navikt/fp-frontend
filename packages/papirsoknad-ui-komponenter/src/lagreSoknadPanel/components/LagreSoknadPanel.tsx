@@ -15,7 +15,7 @@ export type LagreSoknadFormValues = {
 };
 
 interface Props {
-  onSubmitUfullstendigsoknad: () => void;
+  onSubmitUfullstendigsoknad: () => Promise<void>;
   readOnly?: boolean;
   submitting: boolean;
 }

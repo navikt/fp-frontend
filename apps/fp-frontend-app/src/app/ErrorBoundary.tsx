@@ -5,10 +5,12 @@ import { captureException, withScope } from '@sentry/browser';
 
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 
+import { ErrorType, type FpError } from '../data/error/errorType';
+
 const isDevelopment = import.meta.env.MODE === 'development';
 
 interface OwnProps {
-  errorMessageCallback: (error: any) => void;
+  errorMessageCallback: (error: FpError) => void;
   children: ReactNode;
   errorMessage?: string;
   showChild?: boolean;
@@ -56,7 +58,7 @@ export class ErrorBoundary extends Component<OwnProps, State> {
         ].join(' ')
       : error.toString();
 
-    errorMessageCallback(errorStrings);
+    errorMessageCallback({ type: ErrorType.GENERAL_ERROR, message: errorStrings });
 
     // eslint-disable-next-line no-console
     console.error(error);

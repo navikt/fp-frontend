@@ -36,6 +36,6 @@ export const Default: Story = {
   args: {
     readOnly: false,
     submitting: false,
-    onSubmitUfullstendigsoknad: action('onSubmitUfullstendigsoknad') as () => Promise<any>,
+    onSubmitUfullstendigsoknad: action('onSubmitUfullstendigsoknad') as () => Promise<void>,
   },
 };

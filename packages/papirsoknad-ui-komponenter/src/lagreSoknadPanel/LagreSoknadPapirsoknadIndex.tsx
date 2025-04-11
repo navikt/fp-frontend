@@ -10,7 +10,7 @@ const intl = createIntl(messages);
 
 interface Props {
   readOnly: boolean;
-  onSubmitUfullstendigsoknad: () => Promise<any>;
+  onSubmitUfullstendigsoknad: () => Promise<void>;
   submitting: boolean;
 }
 

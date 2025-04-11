@@ -9,7 +9,7 @@ const { ÅpentAksjonspunkt, HarIkkeAksjonspunkt, ÅpentAksjonspunktMenUtenAktivi
 
 Object.defineProperty(global.self, 'crypto', {
   value: {
-    getRandomValues: (arr: any) => crypto.randomBytes(arr.length),
+    getRandomValues: (arr: (typeof crypto)['getRandomValues']) => crypto.randomBytes(arr.length),
   },
 });
 

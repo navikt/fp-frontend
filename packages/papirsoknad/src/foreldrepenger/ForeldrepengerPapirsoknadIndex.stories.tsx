@@ -15,7 +15,7 @@ const meta = {
   args: {
     readOnly: false,
     alleKodeverk: alleKodeverk as any,
-    onSubmit: (values: any) => {
+    onSubmit: values => {
       action('onSubmit')(values);
       return Promise.resolve(values);
     },

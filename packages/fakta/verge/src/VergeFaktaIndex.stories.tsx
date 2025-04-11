@@ -3,7 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
-import { alleKodeverk, type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  alleKodeverk,
+  alleKodeverkTilbakekreving,
+  type PanelDataArgs,
+  withMellomlagretFormData,
+  withPanelData,
+} from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { VergeFaktaIndex } from './VergeFaktaIndex';
@@ -32,7 +38,7 @@ const meta = {
   args: {
     submittable: true,
     aksjonspunkterForPanel,
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: { ...alleKodeverk, ...alleKodeverkTilbakekreving },
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_VERGE]: merknaderFraBeslutter,
     },

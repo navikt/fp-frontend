@@ -31,7 +31,7 @@ interface Props {
   customVilkarOppfyltText: string | ReactElement;
   readOnly: boolean;
   skalKunneInnvilge?: boolean;
-  validatorsForRadioOptions?: ((value: boolean) => any)[];
+  validatorsForRadioOptions?: ((value: boolean) => string | null | undefined)[];
 }
 
 const sorterAvslagsArsaker = (avslagsarsakerUsortert: KodeverkMedNavn[]): KodeverkMedNavn[] =>

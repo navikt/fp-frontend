@@ -3,7 +3,7 @@ export const getValueFromLocalStorage = (key: string): string | undefined => {
   return value !== 'undefined' && value !== null ? value : undefined;
 };
 
-export const setValueInLocalStorage = (key: string, value: any): void => {
+export const setValueInLocalStorage = (key: string, value: string): void => {
   window.localStorage.setItem(key, value);
 };
 

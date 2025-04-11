@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -171,7 +172,7 @@ export const VilkarresultatMedOverstyringForm = ({
   const erOppfylt = VilkarUtfallType.OPPFYLT === status;
   const originalErVilkarOk = VilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
 
-  const bTag = (...chunks: any) => <b>{chunks}</b>;
+  const bTag = (...chunks: ReactNode[]) => <b>{chunks}</b>;
 
   return (
     <Form

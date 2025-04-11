@@ -3,26 +3,14 @@ import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { EngangsstonadForm } from './components/EngangsstonadForm';
 
+// TODO (TOR) Fjern komponent
+
 interface Props {
-  onSubmitUfullstendigsoknad: () => Promise<any>;
-  onSubmit: (values: any) => Promise<any>;
+  onSubmitUfullstendigsoknad: () => Promise<void>;
+  onSubmit: (values: any) => Promise<void>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
 }
 
-export const EngangsstonadPapirsoknadIndex = ({
-  onSubmitUfullstendigsoknad,
-  onSubmit,
-  readOnly,
-  soknadData,
-  alleKodeverk,
-}: Props) => (
-  <EngangsstonadForm
-    onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-    onSubmit={onSubmit}
-    readOnly={readOnly}
-    soknadData={soknadData}
-    alleKodeverk={alleKodeverk}
-  />
-);
+export const EngangsstonadPapirsoknadIndex = (props: Props) => <EngangsstonadForm {...props} />;

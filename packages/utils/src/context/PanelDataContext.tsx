@@ -1,8 +1,11 @@
 import { createContext, type ReactElement, useContext, useMemo } from 'react';
 
 import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
+import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-type Props<AP_TYPE> = {
+type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
+
+type Props<AP_TYPE extends AksjonspunktType> = {
   behandling: Behandling;
   fagsak: Fagsak;
   aksjonspunkterForPanel: Aksjonspunkt[];
@@ -13,12 +16,12 @@ type Props<AP_TYPE> = {
   submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
 };
 
-const PanelDataContext = createContext<Props<any> | null>(null);
+const PanelDataContext = createContext<Props<AksjonspunktType> | null>(null);
 
 export const PanelDataProvider = (
   props: {
     children: ReactElement | null;
-  } & Props<unknown>,
+  } & Props<AksjonspunktType>,
 ) => {
   const { children, ...otherProps } = props;
 
@@ -27,7 +30,7 @@ export const PanelDataProvider = (
   return <PanelDataContext value={value}>{children}</PanelDataContext>;
 };
 
-export const usePanelDataContext = <AP_TYPE,>() => {
+export const usePanelDataContext = <AP_TYPE extends AksjonspunktType>() => {
   const context = useContext<Props<AP_TYPE> | null>(PanelDataContext);
   if (!context) {
     throw new Error('PanelContext.Provider er ikke satt opp');

@@ -13,7 +13,7 @@ const classNames = classnames.bind(styles);
 
 interface PanelContainerOwnProps {
   skalSkjulePanel?: boolean;
-  children: any;
+  children: ReactElement | ReactElement[] | null;
 }
 
 const PanelContainer = ({ skalSkjulePanel = false, children }: PanelContainerOwnProps) => (
