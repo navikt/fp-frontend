@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
@@ -41,7 +40,7 @@ const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere,
         <SoknadsfristEsProsessStegInitPanel />
         <BeregningEsProsessStegInitPanel />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId} />
-        <VedtakProsessStegInitPanel fagsakYtelseType={FagsakYtelseType.ENGANGSSTONAD} erEngangsstoenad/>
+        <VedtakProsessStegInitPanel erEngangsstoenad />
       </ProsessMeny>
       <FaktaMeny
         valgtFaktaSteg={valgtFaktaSteg}
