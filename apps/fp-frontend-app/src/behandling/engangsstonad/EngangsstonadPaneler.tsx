@@ -41,7 +41,7 @@ const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere,
         <SoknadsfristEsProsessStegInitPanel />
         <BeregningEsProsessStegInitPanel />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId} />
-        <VedtakProsessStegInitPanel fagsakYtelseType={FagsakYtelseType.ENGANGSSTONAD} />
+        <VedtakProsessStegInitPanel fagsakYtelseType={FagsakYtelseType.ENGANGSSTONAD} erEngangsstoenad/>
       </ProsessMeny>
       <FaktaMeny
         valgtFaktaSteg={valgtFaktaSteg}
