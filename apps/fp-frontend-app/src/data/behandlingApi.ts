@@ -309,12 +309,12 @@ const getFeilutbetalingÅrsakOptions = (links: ApiLink[]) => (behandling: Behand
     staleTime: Infinity,
   });
 
-const getBeregningsresultatDagytelseOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getBeregningsresultatDagytelseOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE, behandling.uuid, behandling.versjon],
     queryFn: () =>
       kyExtended.get(getUrlFromRel('BEREGNINGRESULTAT_DAGYTELSE', links)).json<BeregningsresultatDagytelse>(),
-    enabled: harLenke(behandling, 'BEREGNINGRESULTAT_DAGYTELSE'),
+    enabled: harLenke(behandling, 'BEREGNINGRESULTAT_DAGYTELSE') && isEnabled,
     staleTime: Infinity,
   });
 
@@ -349,11 +349,11 @@ const getTilbakekrevingValgOptions = (links: ApiLink[]) => (behandling: Behandli
     staleTime: Infinity,
   });
 
-const getBeregningsgrunnlagOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getBeregningsgrunnlagOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGSGRUNNLAG, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('BEREGNINGSGRUNNLAG', links)).json<Beregningsgrunnlag>(),
-    enabled: harLenke(behandling, 'BEREGNINGSGRUNNLAG'),
+    enabled: harLenke(behandling, 'BEREGNINGSGRUNNLAG') && isEnabled,
     staleTime: Infinity,
   });
 
@@ -401,11 +401,11 @@ const getOpptjeningOptions = (links: ApiLink[]) => (behandling: Behandling, isEn
     staleTime: Infinity,
   });
 
-const getBeregningsresultatEngangsstønadOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+const getBeregningsresultatEngangsstønadOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.BEREGNINGRESULTAT_ENGANGSSTONAD, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('BEREGNINGRESULTAT_ENGANGSSTONAD', links)).json<BeregningsresultatEs>(),
-    enabled: harLenke(behandling, 'BEREGNINGRESULTAT_ENGANGSSTONAD'),
+    enabled: harLenke(behandling, 'BEREGNINGRESULTAT_ENGANGSSTONAD') && isEnabled,
     staleTime: Infinity,
   });
 

@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { use, useCallback, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router';
 
@@ -9,7 +9,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, OppgaveId, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, ForhåndsvisMeldingParams, OppgaveId, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -17,55 +17,61 @@ import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedta
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
+import type { StandardProsessPanelProps } from '../../felles/typer/standardProsessPanelPropsTsType.ts';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FATTER_VEDTAK,
+  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
   AksjonspunktKode.VURDERE_ANNEN_YTELSE,
   AksjonspunktKode.VURDERE_DOKUMENT,
-  AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
   AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
   AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
-  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
 ];
 
-const AKSJONSPUNKT_KODER = [...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER, AksjonspunktKode.FORESLA_VEDTAK];
+interface Props {
+  aksjonspunktKoder?: AksjonspunktKode[];
+  erEngangsstoenad?: boolean;
+}
 
-export const VedtakFpProsessStegInitPanel = () => {
+export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsstoenad = false }: Props) => {
   const intl = useIntl();
+  const navigate = useNavigate();
 
-  const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+  const [visIverksetterVedtakModal, setVisIverksetterVedtakModal] = useState(false);
+  const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
-  const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
-  const [visFatterVedtakModal, toggleFatterVedtakModal] = useState(false);
+  const AKSJONSPUNKT_KODER = [
+    ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
+    ...aksjonspunktKoder,
+    AksjonspunktKode.FORESLA_VEDTAK,
+  ];
+
+  const { setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+
   const lagringSideEffekter = getLagringSideeffekter(
-    toggleIverksetterVedtakModal,
-    toggleFatterVedtakModal,
+    setVisIverksetterVedtakModal,
+    setVisFatterVedtakModal,
     setSkalOppdatereEtterBekreftelseAvAp,
   );
 
-  const navigate = useNavigate();
-
-  const lukkIverksetterModal = () => {
-    toggleIverksetterVedtakModal(false);
-    navigate('/');
-  };
-  const lukkFatterModal = () => {
-    toggleFatterVedtakModal(false);
-    navigate('/');
-  };
-
-  const { vilkår } = behandling;
-
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
+  const { behandling } = standardPanelProps;
+
+  const statusForVedtak = finnStatusForVedtak(erEngangsstoenad, standardPanelProps);
 
   const api = useBehandlingApi(behandling);
 
   const { data: beregningsresultatDagytelse, isFetching: isBdFetching } = useQuery(
-    api.beregningsresultatDagytelseOptions(behandling),
+    api.beregningsresultatDagytelseOptions(behandling, !erEngangsstoenad),
+  );
+  const { data: beregningsresultatEngangsstoenad, isFetching: isBeFetching } = useQuery(
+    api.es.beregningsresultatEngangsstønadOptions(behandling, erEngangsstoenad),
   );
   const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
-  const { data: beregningsgrunnlag, isFetching: isBgFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
+  const { data: beregningsgrunnlag, isFetching: isBgFetching } = useQuery(
+    api.beregningsgrunnlagOptions(behandling, !erEngangsstoenad),
+  );
   const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
   const { data: beregningDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
     api.beregningDagytelseOriginalBehandlingOptions(behandling),
@@ -90,7 +96,7 @@ export const VedtakFpProsessStegInitPanel = () => {
       forhåndsvisMelding({
         ...values,
         behandlingUuid: behandling.uuid,
-        fagsakYtelseType: fagsak.fagsakYtelseType,
+        fagsakYtelseType: standardPanelProps.fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
   });
@@ -100,8 +106,24 @@ export const VedtakFpProsessStegInitPanel = () => {
     onSuccess: () => refetchOppgaver(),
   });
 
+  const lukkIverksetterModal = useCallback(() => {
+    setVisIverksetterVedtakModal(false);
+    navigate('/');
+  }, []);
+
+  const lukkFatterModal = useCallback(() => {
+    setVisFatterVedtakModal(false);
+    navigate('/');
+  }, []);
+
   const isNotFetching =
-    !isBdFetching && !isTvFetching && !isBgFetching && !isSrFetching && !isBdobFetching && !isOFetching;
+    !isBdFetching &&
+    !isBeFetching &&
+    !isTvFetching &&
+    !isBgFetching &&
+    !isSrFetching &&
+    !isBdobFetching &&
+    !isOFetching;
 
   return (
     <VedtakEditeringProvider
@@ -115,27 +137,14 @@ export const VedtakFpProsessStegInitPanel = () => {
         prosessPanelKode={ProsessStegCode.VEDTAK}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
         skalPanelVisesIMeny
-        overstyrtStatus={findStatusForVedtak(
-          vilkår ?? [],
-          behandling.aksjonspunkt ?? [],
-          standardPanelProps.aksjonspunkter,
-          standardPanelProps.behandling.behandlingsresultat,
-        )}
-        skalMarkeresSomAktiv={
-          !standardPanelProps.behandling.behandlingHenlagt &&
-          findStatusForVedtak(
-            vilkår ?? [],
-            standardPanelProps.behandling.aksjonspunkt ?? [],
-            standardPanelProps.aksjonspunkter,
-            standardPanelProps.behandling.behandlingsresultat,
-          ) !== VilkarUtfallType.IKKE_VURDERT
-        }
+        overstyrtStatus={statusForVedtak}
+        skalMarkeresSomAktiv={!behandling.behandlingHenlagt && statusForVedtak !== VilkarUtfallType.IKKE_VURDERT}
       >
         <>
           <IverksetterVedtakStatusModal
             visModal={visIverksetterVedtakModal}
             lukkModal={lukkIverksetterModal}
-            behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
+            behandlingsresultat={behandling.behandlingsresultat}
           />
           <FatterVedtakStatusModal
             visModal={visFatterVedtakModal}
@@ -144,13 +153,17 @@ export const VedtakFpProsessStegInitPanel = () => {
           />
           {isNotFetching ? (
             <VedtakProsessIndex
+              beregningsresultat={erEngangsstoenad ? beregningsresultatEngangsstoenad : beregningsresultatDagytelse}
+              originaltBeregningsresultat={
+                beregningDagytelseOriginalBehandling?.[
+                  erEngangsstoenad ? 'beregningsresultat-engangsstonad' : 'beregningsresultat-foreldrepenger'
+                ]
+              }
               tilbakekrevingvalg={tilbakekrevingValg}
-              beregningsresultatOriginalBehandling={beregningDagytelseOriginalBehandling}
               simuleringResultat={simuleringResultat}
-              beregningresultatDagytelse={beregningsresultatDagytelse}
-              beregningsgrunnlag={beregningsgrunnlag}
+              vilkar={standardPanelProps.vilkar}
               previewCallback={forhandsvis}
-              vilkar={vilkår}
+              beregningsgrunnlag={beregningsgrunnlag}
               oppgaver={oppgaver}
               ferdigstillOppgave={ferdigstillOppgave}
             />
@@ -163,57 +176,68 @@ export const VedtakFpProsessStegInitPanel = () => {
   );
 };
 
-const hasOnlyClosedAps = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean =>
-  aksjonspunkter
+const harKunLukkedeAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], vedtakAksjonspunkter: Aksjonspunkt[]): boolean => {
+  return aksjonspunkter
     .filter(ap => !vedtakAksjonspunkter.some(vap => vap.definisjon === ap.definisjon))
     .every(ap => ap.status !== AksjonspunktStatus.OPPRETTET);
+};
 
-const hasAksjonspunkt = (ap: Aksjonspunkt): boolean =>
-  ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG ||
-  ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG ||
-  ap.definisjon === AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER;
+const harRelevantAksjonspunktDefinisjon = (ap: Aksjonspunkt): boolean => {
+  return (
+    ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG ||
+    ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG ||
+    ap.definisjon === AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER
+  );
+};
 
-const isAksjonspunktOpenAndOfType = (ap: Aksjonspunkt): boolean =>
-  hasAksjonspunkt(ap) && ap.status === AksjonspunktStatus.OPPRETTET;
+const harRelevantAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => {
+  return aksjonspunkter.some(ap => harRelevantAksjonspunktDefinisjon(ap) && ap.status === AksjonspunktStatus.OPPRETTET);
+};
 
-const findStatusForVedtak = (
-  vilkar: Vilkar[],
-  aksjonspunkter: Aksjonspunkt[],
-  vedtakAksjonspunkter: Aksjonspunkt[],
-  behandlingsresultat?: Behandlingsresultat,
-): string => {
+const harVilkarMedStatus = (vilkar: Vilkar[], status: VilkarUtfallType): boolean => {
+  return vilkar.some(v => v.vilkarStatus === status);
+};
+
+const finnStatusForVedtak = (erEngangsstoenad: boolean, standardPanelProps: StandardProsessPanelProps): string => {
+  const { vilkar } = standardPanelProps;
   if (vilkar.length === 0) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
+  const aksjonspunkter = standardPanelProps.behandling.aksjonspunkt;
+  // TODO: Undersøk om det faktisk er riktig at engangsstønad ikke skal bruke samme aksjonspunkter som de andre
+  const vedtakAksjonspunkter = erEngangsstoenad
+    ? standardPanelProps.behandling.aksjonspunkt
+    : standardPanelProps.aksjonspunkter;
+
   if (
-    hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter) &&
-    vilkar.some(v => v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT)
+    harKunLukkedeAksjonspunkt(aksjonspunkter, vedtakAksjonspunkter) &&
+    harVilkarMedStatus(vilkar, VilkarUtfallType.IKKE_OPPFYLT)
   ) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  if (
-    vilkar.some(v => v.vilkarStatus === VilkarUtfallType.IKKE_VURDERT) ||
-    aksjonspunkter.some(isAksjonspunktOpenAndOfType)
-  ) {
+  if (harVilkarMedStatus(vilkar, VilkarUtfallType.IKKE_VURDERT) || harRelevantAksjonspunkt(aksjonspunkter)) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
-  if (!hasOnlyClosedAps(aksjonspunkter, vedtakAksjonspunkter)) {
+  if (!harKunLukkedeAksjonspunkt(aksjonspunkter, vedtakAksjonspunkter)) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
+
+  const behandlingsresultat = standardPanelProps.behandling.behandlingsresultat;
 
   if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
+
   return VilkarUtfallType.OPPFYLT;
 };
 
 const getLagringSideeffekter =
   (
-    toggleIverksetterVedtakModal: (visIverksetterModal: boolean) => void,
-    toggleFatterVedtakModal: (skalFatterModal: boolean) => void,
+    setVisIverksetterVedtakModal: (visIverksetterModal: boolean) => void,
+    setVisFatterVedtakModal: (skalFatterModal: boolean) => void,
     setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void,
   ) =>
   (aksjonspunkter: ProsessAksjonspunkt[]) => {
@@ -227,9 +251,9 @@ const getLagringSideeffekter =
           ('skalBrukeOverstyrendeFritekstBrev' in ap && ap.skalBrukeOverstyrendeFritekstBrev),
       );
       if (skalTilTotrinnskontroll) {
-        toggleFatterVedtakModal(true);
+        setVisFatterVedtakModal(true);
       } else {
-        toggleIverksetterVedtakModal(true);
+        setVisIverksetterVedtakModal(true);
       }
     };
   };

@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   Beregningsgrunnlag,
@@ -24,15 +24,11 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  beregningresultatDagytelse?: BeregningsresultatDagytelse;
-  beregningresultatEngangsstonad?: BeregningsresultatEs;
+  beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
+  originaltBeregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
-  beregningsresultatOriginalBehandling?: {
-    'beregningsresultat-engangsstonad'?: BeregningsresultatEs;
-    'beregningsresultat-foreldrepenger'?: BeregningsresultatDagytelse;
-  };
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
@@ -40,38 +36,25 @@ interface Props {
 }
 
 export const VedtakProsessIndex = ({
-  beregningresultatDagytelse,
-  beregningresultatEngangsstonad,
+  beregningsresultat,
+  originaltBeregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
   beregningsgrunnlag,
   vilkar,
-  beregningsresultatOriginalBehandling,
   previewCallback,
   oppgaver,
   ferdigstillOppgave,
 }: Props) => {
-  const { behandling, fagsak } = usePanelDataContext();
+  const { behandling } = usePanelDataContext();
 
   const { aksjonspunkt } = behandling;
 
   const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(aksjonspunkt, beregningsgrunnlag);
-  const beregningsresultat =
-    fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD
-      ? beregningresultatEngangsstonad
-      : beregningresultatDagytelse;
-
-  let originaltBeregningsresultat;
-  if (beregningsresultatOriginalBehandling) {
-    originaltBeregningsresultat =
-      fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD
-        ? beregningsresultatOriginalBehandling['beregningsresultat-engangsstonad']
-        : beregningsresultatOriginalBehandling['beregningsresultat-foreldrepenger'];
-  }
 
   return (
     <RawIntlProvider value={intl}>
-      {behandling.type !== BehandlingType.REVURDERING && (
+      {behandling.type !== BehandlingType.REVURDERING ? (
         <VedtakForm
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}
@@ -82,8 +65,7 @@ export const VedtakProsessIndex = ({
           oppgaver={oppgaver}
           ferdigstillOppgave={ferdigstillOppgave}
         />
-      )}
-      {behandling.type === BehandlingType.REVURDERING && (
+      ) : (
         <VedtakRevurderingForm
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}
