@@ -153,12 +153,15 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsst
           />
           {isNotFetching ? (
             <VedtakProsessIndex
-              beregningresultatDagytelse={beregningsresultatDagytelse}
-              beregningresultatEngangsstonad={beregningsresultatEngangsstoenad}
+              beregningsresultat={erEngangsstoenad ? beregningsresultatEngangsstoenad : beregningsresultatDagytelse}
+              originaltBeregningsresultat={
+                beregningDagytelseOriginalBehandling?.[
+                  erEngangsstoenad ? 'beregningsresultat-engangsstonad' : 'beregningsresultat-foreldrepenger'
+                ]
+              }
               tilbakekrevingvalg={tilbakekrevingValg}
               simuleringResultat={simuleringResultat}
               vilkar={standardPanelProps.vilkar}
-              beregningsresultatOriginalBehandling={beregningDagytelseOriginalBehandling}
               previewCallback={forhandsvis}
               beregningsgrunnlag={beregningsgrunnlag}
               oppgaver={oppgaver}
