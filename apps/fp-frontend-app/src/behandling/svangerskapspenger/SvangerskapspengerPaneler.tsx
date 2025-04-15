@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
@@ -21,10 +22,10 @@ import { FortsattMedlemskapProsessStegInitPanel } from '../fellesPaneler/prosess
 import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
 import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
 import { SoknadsfristProsessStegInitPanel } from '../fellesPaneler/prosess/SoknadsfristProsessStegInitPanel';
+import { VedtakProsessStegInitPanel } from '../fellesPaneler/prosess/VedtakProsessStegInitPanel.tsx';
 import { FodselOgTilretteleggingFaktaInitPanel } from './faktaPaneler/FodselOgTilretteleggingFaktaInitPanel';
 import { InngangsvilkarSvpProsessStegInitPanel } from './prosessPaneler/InngangsvilkarSvpProsessStegInitPanel';
 import { TilkjentYtelseProsessStegInitPanel } from './prosessPaneler/TilkjentYtelseProsessStegInitPanel';
-import { VedtakSvpProsessStegInitPanel } from './prosessPaneler/VedtakSvpProsessStegInitPanel';
 
 interface Props {
   valgtProsessSteg: string | undefined;
@@ -49,7 +50,10 @@ const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgi
           personoversikt={personoversikt}
         />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <VedtakSvpProsessStegInitPanel />
+        <VedtakProsessStegInitPanel
+          fagsakYtelseType={FagsakYtelseType.SVANGERSKAPSPENGER}
+          aksjonspunktKoder={[AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE]}
+        />
       </ProsessMeny>
       <FaktaMeny
         valgtFaktaSteg={valgtFaktaSteg}

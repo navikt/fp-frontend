@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
@@ -15,10 +16,10 @@ import { YtelserFaktaInitPanel } from '../fellesPaneler/fakta/YtelserFaktaInitPa
 import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/OpplysningspliktProsessStegInitPanel';
 import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
 import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
+import { VedtakProsessStegInitPanel } from '../fellesPaneler/prosess/VedtakProsessStegInitPanel.tsx';
 import { BeregningEsProsessStegInitPanel } from './prosessPaneler/BeregningEsProsessStegInitPanel';
 import { InngangsvilkarEsProsessStegInitPanel } from './prosessPaneler/InngangsvilkarEsProsessStegInitPanel';
 import { SoknadsfristEsProsessStegInitPanel } from './prosessPaneler/SoknadsfristEsProsessStegInitPanel';
-import { VedtakEsProsessStegInitPanel } from './prosessPaneler/VedtakEsProsessStegInitPanel';
 
 interface Props {
   valgtProsessSteg: string | undefined;
@@ -40,7 +41,7 @@ const EngangsstonadPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere,
         <SoknadsfristEsProsessStegInitPanel />
         <BeregningEsProsessStegInitPanel />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={emptyArbeidsgiverOpplysningerPerId} />
-        <VedtakEsProsessStegInitPanel />
+        <VedtakProsessStegInitPanel fagsakYtelseType={FagsakYtelseType.ENGANGSSTONAD} />
       </ProsessMeny>
       <FaktaMeny
         valgtFaktaSteg={valgtFaktaSteg}
