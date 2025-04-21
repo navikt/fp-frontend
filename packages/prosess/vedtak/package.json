@@ -59,11 +59,11 @@
     "@types/css-tree": "2.3.10",
     "@types/lodash.debounce": "4.0.9",
     "cross-env": "7.0.3",
-    "eslint": "9.24.0",
+    "eslint": "9.25.0",
     "storybook": "8.6.12",
     "stylelint": "16.18.0",
     "typescript": "5.8.3",
-    "vite": "6.2.5",
-    "vitest": "3.1.1"
+    "vite": "6.3.2",
+    "vitest": "3.1.2"
   }
 }
