@@ -27,7 +27,7 @@
     "classnames": "2.5.1",
     "dayjs": "1.11.13",
     "react": "19.1.0",
-    "react-intl": "7.1.10"
+    "react-intl": "7.1.11"
   },
   "devDependencies": {
     "@navikt/ds-css": "7.18.0",
