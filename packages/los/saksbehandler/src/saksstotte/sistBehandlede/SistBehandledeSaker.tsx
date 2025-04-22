@@ -62,7 +62,7 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
           </Table.Header>
           <Table.Body>
             {sistBehandledeSaker.map(sbs => (
-              <Table.Row key={sbs.id} onClick={() => åpneFagsak(sbs.saksnummer.toString(), sbs.behandlingId)}>
+              <Table.Row key={sbs.id} onClick={() => åpneFagsak(sbs.saksnummer, sbs.behandlingId)}>
                 <Table.DataCell scope="row">{sbs.navn}</Table.DataCell>
                 <Table.DataCell scope="row">{sbs.saksnummer}</Table.DataCell>
                 {/* <Table.DataCell scope="row">

@@ -31,11 +31,11 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
 
   const reserverOppgaveOgApne = (oppgave: Oppgave) => {
     if (oppgave.status.erReservert) {
-      åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
+      åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     } else {
       reserverOppgave(oppgave.id).then(nyOppgaveStatus => {
         if (nyOppgaveStatus?.erReservert && nyOppgaveStatus.erReservertAvInnloggetBruker) {
-          åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
+          åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
         } else if (nyOppgaveStatus?.erReservert && !nyOppgaveStatus.erReservertAvInnloggetBruker) {
           setReservertAvAnnenSaksbehandler(true);
           setReservertOppgave(oppgave);
@@ -50,7 +50,7 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
     setReservertOppgave(undefined);
     setReservertOppgaveStatus(undefined);
 
-    åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
+    åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
   };
 
   if (!isSuccess) {

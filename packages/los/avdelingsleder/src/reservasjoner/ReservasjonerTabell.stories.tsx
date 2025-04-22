@@ -51,7 +51,7 @@ export const VisTabellMedReservasjoner: Story = {
               reservertAvNavn: 'Espen Utvikler',
               reservertTilTidspunkt: '2020-01-10',
               oppgaveId: 1,
-              oppgaveSaksNr: 122234,
+              oppgaveSaksNr: '122234',
               behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
             },
             {
@@ -59,7 +59,7 @@ export const VisTabellMedReservasjoner: Story = {
               reservertAvNavn: 'Eirik Utvikler',
               reservertTilTidspunkt: '2020-01-01',
               oppgaveId: 2,
-              oppgaveSaksNr: 23454,
+              oppgaveSaksNr: '23454',
               behandlingType: BehandlingType.KLAGE,
             },
           ]),
