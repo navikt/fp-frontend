@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, alleKodeverkTilbakekreving, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 import type { Behandling, Fagsak } from '@navikt/fp-types';
 
 import { RegistrerPapirsoknadPanel } from './RegistrerPapirsoknadPanel';
@@ -14,7 +14,7 @@ const meta = {
   decorators: [withRouter, getIntlDecorator(messages)],
   args: {
     readOnly: false,
-    kodeverk: { ...alleKodeverk, ...alleKodeverkTilbakekreving },
+    kodeverk: alleKodeverk as any,
     lagreFullstendig: values => {
       action('lagreFullstendig')(values);
       return Promise.resolve(values);
