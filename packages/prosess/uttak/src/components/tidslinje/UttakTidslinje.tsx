@@ -401,6 +401,7 @@ export const UttakTidslinje = ({
                     onSelectPeriod={() => setValgtPeriodeIndex(periode.id)}
                     isActive={periode.id === valgtPeriode?.id}
                     icon={finnIkonForPeriode(periode, behandlingStatusKode)}
+                    placement={index === 0 ? 'top' : 'bottom'}
                   >
                     {finnLabelForPeriode(periode, behandlingStatusKode, intl)}
                   </Timeline.Period>
