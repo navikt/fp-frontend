@@ -48,7 +48,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     status: {
       erReservert: false,
     },
-    saksnummer: 46435,
+    saksnummer: '46435',
     personnummer: '3433434434',
     navn: 'Sara Sahara',
     system: 'SAK',
@@ -65,7 +65,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     status: {
       erReservert: false,
     },
-    saksnummer: 43546,
+    saksnummer: '43546',
     personnummer: '53343423232',
     navn: 'Petter Utvikler',
     system: 'SAK',
@@ -82,7 +82,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     status: {
       erReservert: false,
     },
-    saksnummer: 35344,
+    saksnummer: '35344',
     personnummer: '34343535423',
     navn: 'Helga Tester',
     system: 'SAK',
@@ -109,7 +109,7 @@ const RESERVERTE_OPPGAVER = [
         begrunnelse: 'Denne er flyttet',
       },
     },
-    saksnummer: 23233,
+    saksnummer: '23233',
     personnummer: '5434231232',
     navn: 'Espen Utvikler',
     system: 'SAK',
@@ -196,14 +196,14 @@ const BEHANDLEDE_OPPGAVER = [
     id: 1,
     personnummer: '343453534',
     navn: 'Gaute Johansen',
-    saksnummer: 54343,
+    saksnummer: '54343',
     behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   } as Oppgave,
   {
     id: 2,
     personnummer: '334342323',
     navn: 'Olga Mortensen',
-    saksnummer: 13232,
+    saksnummer: '13232',
     behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   } as Oppgave,
 ];
