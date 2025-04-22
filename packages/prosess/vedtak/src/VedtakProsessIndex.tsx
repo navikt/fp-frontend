@@ -2,10 +2,8 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import type {
-  Aksjonspunkt,
-  Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Oppgave,
@@ -28,7 +26,7 @@ interface Props {
   originaltBeregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
-  beregningsgrunnlag?: Beregningsgrunnlag;
+  beregningErManueltFastsatt: boolean;
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
@@ -40,17 +38,13 @@ export const VedtakProsessIndex = ({
   originaltBeregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
-  beregningsgrunnlag,
+  beregningErManueltFastsatt,
   vilkar,
   previewCallback,
   oppgaver,
   ferdigstillOppgave,
 }: Props) => {
   const { behandling } = usePanelDataContext();
-
-  const { aksjonspunkt } = behandling;
-
-  const beregningErManueltFastsatt = skalSkriveFritekstGrunnetFastsettingAvBeregning(aksjonspunkt, beregningsgrunnlag);
 
   return (
     <RawIntlProvider value={intl}>
@@ -80,29 +74,4 @@ export const VedtakProsessIndex = ({
       )}
     </RawIntlProvider>
   );
-};
-
-const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [
-  AksjonspunktKode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
-  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-];
-
-const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
-  aksjonspunkter: Aksjonspunkt[],
-  beregningsgrunnlag?: Beregningsgrunnlag,
-): boolean => {
-  if (!beregningsgrunnlag || !aksjonspunkter) {
-    return false;
-  }
-  const behandlingHarLøstBGAP = aksjonspunkter.find(
-    ap =>
-      BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) &&
-      ap.status === AksjonspunktStatus.UTFORT,
-  );
-  const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
-  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
-    andel => andel.overstyrtPrAar || andel.overstyrtPrAar === 0,
-  );
-  return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
 };

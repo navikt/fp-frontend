@@ -9,7 +9,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import type { Aksjonspunkt, ForhåndsvisMeldingParams, OppgaveId, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, Beregningsgrunnlag, ForhåndsvisMeldingParams, OppgaveId, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -27,6 +27,12 @@ const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDERE_DOKUMENT,
   AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
   AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
+];
+
+const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [
+  AksjonspunktKode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
+  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
 ];
 
 interface Props {
@@ -163,7 +169,11 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsst
               simuleringResultat={simuleringResultat}
               vilkar={standardPanelProps.vilkar}
               previewCallback={forhandsvis}
-              beregningsgrunnlag={beregningsgrunnlag}
+              beregningErManueltFastsatt={skalSkriveFritekstGrunnetFastsettingAvBeregning(
+                erEngangsstoenad,
+                behandling.aksjonspunkt,
+                beregningsgrunnlag,
+              )}
               oppgaver={oppgaver}
               ferdigstillOppgave={ferdigstillOppgave}
             />
@@ -257,3 +267,23 @@ const getLagringSideeffekter =
       }
     };
   };
+
+const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
+  erEngangsstoenad: boolean,
+  aksjonspunkter: Aksjonspunkt[],
+  beregningsgrunnlag?: Beregningsgrunnlag,
+): boolean => {
+  if (erEngangsstoenad || !beregningsgrunnlag || !aksjonspunkter) {
+    return false;
+  }
+  const behandlingHarLoestBGAP = aksjonspunkter.find(
+    ap =>
+      BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) &&
+      ap.status === AksjonspunktStatus.UTFORT,
+  );
+  const foerstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
+  const andelSomErManueltFastsatt = foerstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
+    andel => andel.overstyrtPrAar ?? andel.overstyrtPrAar === 0,
+  );
+  return !!behandlingHarLoestBGAP || !!andelSomErManueltFastsatt;
+};
