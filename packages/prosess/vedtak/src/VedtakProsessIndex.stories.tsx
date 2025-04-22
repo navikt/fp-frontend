@@ -22,7 +22,6 @@ import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter
 import type {
   Aksjonspunkt,
   Behandling,
-  Beregningsgrunnlag,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   BrevOverstyring,
@@ -128,6 +127,7 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
@@ -143,6 +143,7 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -164,6 +165,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -183,6 +185,7 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -202,6 +205,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -215,17 +219,7 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
-    beregningsgrunnlag: {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            {
-              overstyrtPrAar: 0,
-            },
-          ],
-        },
-      ],
-    } as Beregningsgrunnlag,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -245,17 +239,7 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
-    beregningsgrunnlag: {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            {
-              overstyrtPrAar: 0,
-            },
-          ],
-        },
-      ],
-    } as Beregningsgrunnlag,
+    beregningErManueltFastsatt: true,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -300,17 +284,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
-    beregningsgrunnlag: {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            {
-              overstyrtPrAar: 0,
-            },
-          ],
-        },
-      ],
-    } as Beregningsgrunnlag,
+    beregningErManueltFastsatt: true,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -442,6 +416,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -462,6 +437,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -481,6 +457,7 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -497,6 +474,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -513,17 +491,7 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
-    beregningsgrunnlag: {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            {
-              overstyrtPrAar: 0,
-            },
-          ],
-        },
-      ],
-    } as Beregningsgrunnlag,
+    beregningErManueltFastsatt: true,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -546,6 +514,7 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -562,6 +531,7 @@ export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOversty
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -589,6 +559,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -613,6 +584,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -636,6 +608,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -660,6 +633,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -682,6 +656,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -702,6 +677,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -722,6 +698,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -742,6 +719,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -762,17 +740,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
-    beregningsgrunnlag: {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            {
-              overstyrtPrAar: 0,
-            },
-          ],
-        },
-      ],
-    } as Beregningsgrunnlag,
+    beregningErManueltFastsatt: true,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -794,17 +762,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
-    beregningsgrunnlag: {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            {
-              overstyrtPrAar: 0,
-            },
-          ],
-        },
-      ],
-    } as Beregningsgrunnlag,
+    beregningErManueltFastsatt: true,
     vilkar: [
       {
         lovReferanse: '§§Dette er en lovreferanse',
@@ -833,17 +791,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
-    beregningsgrunnlag: {
-      beregningsgrunnlagPeriode: [
-        {
-          beregningsgrunnlagPrStatusOgAndel: [
-            {
-              overstyrtPrAar: 0,
-            },
-          ],
-        },
-      ],
-    } as Beregningsgrunnlag,
+    beregningErManueltFastsatt: true,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -866,6 +814,7 @@ export const LegacyOverstyring: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -888,6 +837,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
@@ -914,6 +864,7 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
         },
       ],
     } as Fagsak,
+    beregningErManueltFastsatt: false,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
