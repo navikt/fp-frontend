@@ -28,7 +28,7 @@
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-ui-komponenter": "workspace:*",
-    "@navikt/ft-hooks": "2.1.8",
+    "@navikt/ft-hooks": "2.1.9",
     "@navikt/ft-utils": "3.3.3",
     "dayjs": "1.11.13",
     "history": "5.3.0",

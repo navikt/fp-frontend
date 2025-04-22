@@ -94,10 +94,10 @@
   },
   "resolutions": {
     "@adobe/css-tools": "4.3.2",
-    "@types/react": "19.0.3",
-    "react": "19.0.0",
-    "react-dom": "19.0.0",
-    "react-test-renderer": "19.0.0"
+    "@types/react": "19.1.2",
+    "react": "19.1.0",
+    "react-dom": "19.1.0",
+    "react-test-renderer": "19.1.0"
   },
   "lint-staged": {
     "apps/**/*.{ts,tsx,js,jsx, css}": "prettier --write",
