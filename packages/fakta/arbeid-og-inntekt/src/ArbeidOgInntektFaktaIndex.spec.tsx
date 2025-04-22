@@ -4,6 +4,8 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import dayjs from 'dayjs';
 
+import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+
 import * as stories from './ArbeidOgInntektFaktaIndex.stories';
 
 const {
@@ -31,8 +33,8 @@ const frist = dayjs().add(28, 'days').format(ISO_DATE_FORMAT);
 const scrollIntoViewMock = vi.fn();
 window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
 
-describe('<ArbeidOgInntektFaktaIndex>', () => {
-  it.skip('skal avklare arbeidsforhold som mangler inntektsmelding og så sette på vent', async () => {
+describe('ArbeidOgInntektFaktaIndex', () => {
+  it('skal avklare arbeidsforhold som mangler inntektsmelding og så sette på vent', async () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
@@ -66,9 +68,10 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
       arbeidsgiverIdent: '910909088',
       begrunnelse: 'Dette er en begrunnelse',
+      behandlingVersjon: 1,
       behandlingUuid: '1223-2323-2323-22332',
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
+      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
     });
 
     await userEvent.click(await screen.findByText('Sett på vent'));
@@ -104,7 +107,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      vurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
+      vurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
     });
 
     await userEvent.click(await screen.findByText('Bekreft og fortsett'));
@@ -139,7 +142,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Vil innehente inntektsmelding fordi...')).toBeInTheDocument();
   });
 
-  it.skip('skal avklare manglende arbeidsforhold og så kontakte arbeidsgiver angående inntektsmeldingen', async () => {
+  it('skal avklare manglende arbeidsforhold og så kontakte arbeidsgiver angående inntektsmeldingen', async () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
@@ -179,7 +182,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
+      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
     });
 
     await userEvent.click(await screen.findByText('Sett på vent'));
@@ -220,7 +223,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      vurdering: 'MELDING_TIL_ARBEIDSGIVER_NAV_NO',
+      vurdering: ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO,
     });
   });
 
@@ -247,7 +250,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-      vurdering: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+      vurdering: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
     });
 
     await userEvent.click(await screen.findByText('Bekreft og fortsett'));
@@ -297,7 +300,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       fom: '2020-02-01',
       stillingsprosent: 100,
       tom: '2022-02-01',
-      vurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
+      vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
     });
 
     await userEvent.click(await screen.findByText('Bekreft og fortsett'));
@@ -420,7 +423,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       fom: '2020-02-01',
       stillingsprosent: 100,
       tom: '2022-02-01',
-      vurdering: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
+      vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
     });
 
     await userEvent.click(await screen.findByText('Bekreft og fortsett'));
@@ -489,7 +492,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       fom: '2019-12-06',
       stillingsprosent: 100,
       tom: '2022-12-31',
-      vurdering: 'FJERN_FRA_BEHANDLINGEN',
+      vurdering: ArbeidsforholdKomplettVurderingType.FJERN_FRA_BEHANDLINGEN,
     });
 
     expect(screen.getByText('Legg til arbeidsforhold')).toBeInTheDocument();
@@ -529,7 +532,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(screen.getByText('Tlf. 41925090')).toBeInTheDocument();
   });
 
-  it.skip('skal vise to arbeidsforhold fra samme virksomhet som er komplette', async () => {
+  it('skal vise to arbeidsforhold fra samme virksomhet som er komplette', async () => {
     render(<ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet />);
 
     expect(await screen.findByText('Fakta om arbeid og inntekt')).toBeInTheDocument();
@@ -569,7 +572,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     expect(await screen.getAllByText('Vis mer')).toHaveLength(2);
   });
 
-  it.skip('skal ha aksjonspunkt og vise flere arbeidsforhold i tabell', async () => {
+  it('skal ha aksjonspunkt og vise flere arbeidsforhold i tabell', async () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
@@ -595,8 +598,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverIdent: '910909090',
       begrunnelse: 'Dette er en begrunnelse',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
-      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
+      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
     });
 
     await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
@@ -610,8 +614,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverIdent: '910909092',
       begrunnelse: 'Dette er begrunnelse nr 2',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       internArbeidsforholdRef: undefined,
-      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
+      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
     });
 
     await userEvent.click(await screen.findByText('Sett på vent'));
@@ -624,7 +629,7 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
     });
   });
 
-  it.skip('skal vise to arbeidsforhold fra samme virksomhet der kun ett har fått inntektsmelding', async () => {
+  it('skal vise to arbeidsforhold fra samme virksomhet der kun ett har fått inntektsmelding', async () => {
     const settPåVent = vi.fn(() => Promise.resolve());
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
@@ -669,8 +674,9 @@ describe('<ArbeidOgInntektFaktaIndex>', () => {
       arbeidsgiverIdent: '910909088',
       begrunnelse: 'Dette er en kommentar',
       behandlingUuid: '1223-2323-2323-22332',
+      behandlingVersjon: 1,
       internArbeidsforholdRef: undefined,
-      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
+      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
     });
 
     await userEvent.click(await screen.findByText('Sett på vent'));

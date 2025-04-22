@@ -50,9 +50,10 @@ const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (
 const getOppdaterTabell =
   (formValues: FormValues) =>
   (gammelData: ArbeidsforholdOgInntektRadData[]): ArbeidsforholdOgInntektRadData[] => {
-    const rad = {
+    const rad: ArbeidsforholdOgInntektRadData = {
+      erPrivatPerson: false,
       arbeidsgiverIdent: MANUELT_ORG_NR,
-      arbeidsgiverNavn: formValues.arbeidsgiverNavn,
+      arbeidsgiverNavn: formValues.arbeidsgiverNavn!,
       avklaring: {
         fom: formValues.fom,
         tom: formValues.tom,
@@ -61,7 +62,10 @@ const getOppdaterTabell =
         begrunnelse: formValues.begrunnelse,
         saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
       },
-    } as ArbeidsforholdOgInntektRadData;
+      inntektsmeldingerForRad: [],
+      inntektsposter: [],
+      arbeidsforholdForRad: [],
+    };
 
     const gammelIndex = gammelData.findIndex(data => data.arbeidsgiverIdent === MANUELT_ORG_NR);
     if (gammelIndex === -1) {
@@ -132,15 +136,13 @@ export const ManueltLagtTilArbeidsforholdForm = ({
   };
 
   const lagreArbeidsforhold = (formValues: FormValues) => {
-    const params = {
+    const params: ManueltArbeidsforhold = lagManueltArbeidsforhold(
+      ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
       behandlingUuid,
       behandlingVersjon,
-      arbeidsgiverIdent: MANUELT_ORG_NR,
-      vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
-      ...formValues,
-    };
+      formValues,
+    );
 
-    // @ts-expect-error Fiks
     return registrerArbeidsforhold(params).then(() => {
       oppdaterTabell(getOppdaterTabell(formValues));
 
@@ -153,14 +155,13 @@ export const ManueltLagtTilArbeidsforholdForm = ({
 
   const slettArbeidsforhold = () => {
     const formValues = formMethods.getValues();
-    const params = {
+    const params = lagManueltArbeidsforhold(
+      ArbeidsforholdKomplettVurderingType.FJERN_FRA_BEHANDLINGEN,
       behandlingUuid,
       behandlingVersjon,
-      arbeidsgiverIdent: MANUELT_ORG_NR,
-      vurdering: ArbeidsforholdKomplettVurderingType.FJERN_FRA_BEHANDLINGEN,
-      ...formValues,
-    };
-    // @ts-expect-error Fiks
+      formValues,
+    );
+
     registrerArbeidsforhold(params).then(
       getOppdaterTabellOgLukkRad(oppdaterTabell, lukkArbeidsforholdRad, erNyttArbeidsforhold),
     );
@@ -268,3 +269,20 @@ export const ManueltLagtTilArbeidsforholdForm = ({
     </VStack>
   );
 };
+
+const lagManueltArbeidsforhold = (
+  vurdering: ArbeidsforholdKomplettVurderingType,
+  behandlingUuid: string,
+  behandlingVersjon: number,
+  formValues: FormValues,
+): ManueltArbeidsforhold => ({
+  vurdering,
+  behandlingUuid,
+  behandlingVersjon,
+  arbeidsgiverIdent: MANUELT_ORG_NR,
+  begrunnelse: formValues.begrunnelse!,
+  arbeidsgiverNavn: formValues.arbeidsgiverNavn!,
+  fom: formValues.fom!,
+  tom: formValues.tom,
+  stillingsprosent: formValues.stillingsprosent!,
+});

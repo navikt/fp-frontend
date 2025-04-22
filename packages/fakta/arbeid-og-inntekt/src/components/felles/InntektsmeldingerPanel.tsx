@@ -8,8 +8,8 @@ import { AvsnittSkiller, DateLabel, PeriodLabel} from '@navikt/ft-ui-komponenter
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
-import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt.ts';
-import { grupperArbeidsforholdMedInntektsmelding } from '../inntektsmeldingUtils';
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
+import { grupperArbeidsforholdMedInntektsmelding } from '../../utils/inntektsmeldingUtils';
 import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerPanel';
 
 import styles from './inntektsmeldingerPanel.module.css';

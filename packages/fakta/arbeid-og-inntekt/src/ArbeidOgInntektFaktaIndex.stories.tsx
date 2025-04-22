@@ -1188,7 +1188,8 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           motattDato: '2022-02-16',
           årsak: undefined,
           begrunnelse: 'her vil jeg mase på AG',
-          saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
+          saksbehandlersVurdering:
+            ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
         },
       ],
       arbeidsforhold: [
@@ -1200,7 +1201,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           tom: '9999-12-31',
           stillingsprosent: 50.0,
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
-          saksbehandlersVurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
+          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
           begrunnelse: 'her trenger jeg ikke IM. ja ja',
         },
         {

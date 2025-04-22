@@ -116,8 +116,7 @@ export const ManglendeInntektsmeldingForm = ({
       value: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
     },
   ];
-  // Dette valget skal ikke være tilgjengelig hvis arbeidsgiver ikke er en bedrift
-  if (radData.arbeidsgiverIdent.length === 9) {
+  if (!radData.erPrivatPerson) {
     radioOptions.splice(1, 0, {
       label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.MeldingArbeidsgiverNavNo' }),
       value: ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO,

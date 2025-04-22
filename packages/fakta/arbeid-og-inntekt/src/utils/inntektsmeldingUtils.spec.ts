@@ -1,5 +1,3 @@
-import { expect } from 'vitest';
-
 import { ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet } from '../ArbeidOgInntektFaktaIndex.stories';
 import { finnInntektsmeldingerForArbeidsgiver, grupperArbeidsforholdMedInntektsmelding } from './inntektsmeldingUtils';
 
@@ -11,6 +9,7 @@ describe('inntektsmeldingUtils', () => {
       2,
     );
   });
+
   it('skal gruppere arbeidsforhold med matchende inntektsmelding', () => {
     const { arbeidsforhold, inntektsmeldinger } =
       ArbeidsforholdErOKDerDetErToArbeidsforholdFraSammeVirksomhet.args.arbeidOgInntekt;

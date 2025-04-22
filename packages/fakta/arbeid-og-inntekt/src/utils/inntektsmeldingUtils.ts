@@ -12,12 +12,12 @@ export const grupperArbeidsforholdMedInntektsmelding = (
   arbeidsforholdHosArbeidsgiver: AoIArbeidsforhold[],
 ): { arbeidsforhold: AoIArbeidsforhold; inntektsmelding: Inntektsmelding | undefined }[] => {
   return arbeidsforholdHosArbeidsgiver.map(arbeidsforhold => {
-    const inntektsmelding = inntektsmeldingerForArbeidsgiver.find(im => erMatch(arbeidsforhold, im));
+    const inntektsmelding = inntektsmeldingerForArbeidsgiver.find(im => erMatchendeArbeidsforhold(arbeidsforhold, im));
     return { arbeidsforhold, inntektsmelding };
   });
 };
 
-export const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
+const erMatchendeArbeidsforhold = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
   inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent &&
   (!inntektsmelding.internArbeidsforholdId ||
     inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);

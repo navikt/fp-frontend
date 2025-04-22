@@ -15,7 +15,6 @@ import type {
   AoIArbeidsforhold,
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerPerId,
-  Inntektsmelding,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
@@ -24,9 +23,9 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
+import { finnInntektsmeldingerForArbeidsgiver } from '../utils/inntektsmeldingUtils';
 import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
-import { finnInntektsmeldingerForArbeidsgiver } from './inntektsmeldingUtils';
 
 import styles from './arbeidOgInntektFaktaPanel.module.css';
 
@@ -41,9 +40,6 @@ const sorterTabell = (radX: ArbeidsforholdOgInntektRadData, radY: Arbeidsforhold
   }
   return radX.arbeidsgiverNavn.localeCompare(radY.arbeidsgiverNavn);
 };
-
-const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Inntektsmelding): boolean =>
-  inntektsmelding.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent;
 
 const lagAvklaring = (arbeidsforhold: AoIArbeidsforhold, arbeidsgiverNavn: string): Avklaring => {
   const { fom, tom, saksbehandlersVurdering, stillingsprosent, begrunnelse } = arbeidsforhold;
@@ -111,19 +107,14 @@ const byggTabellStruktur = (
   );
 
   const alleInntektsmeldingerSomManglerArbeidsforhold = inntektsmeldinger
-    .filter(im => !arbeidsforhold.some(af => erMatch(af, im)))
-    .reduce<ArbeidsforholdOgInntektRadData[]>((acc, im) => {
-      const tidligereIm = acc.find(harMatchendeArbeidsgiverIdent(im));
-      if (tidligereIm) {
-        return acc;
-      }
-
+    .filter(im => !arbeidsforhold.some(af => im.arbeidsgiverIdent === af.arbeidsgiverIdent))
+    .map<ArbeidsforholdOgInntektRadData>(im => {
       const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent];
       const arbeidsgiverNavn = arbeidsgiverOpplysninger.navn;
       const inntektsposterForRad = inntekter.find(harMatchendeArbeidsgiverIdent(im))?.inntekter ?? [];
       const inntektsmeldingerForRad = inntektsmeldinger.filter(harMatchendeArbeidsgiverIdent(im));
 
-      const ne: ArbeidsforholdOgInntektRadData = {
+      return {
         arbeidsgiverIdent: im.arbeidsgiverIdent,
         arbeidsgiverNavn,
         ...(arbeidsgiverOpplysninger.erPrivatPerson
@@ -140,7 +131,6 @@ const byggTabellStruktur = (
         inntektsmeldingerForRad: inntektsmeldingerForRad,
         inntektsposter: inntektsposterForRad,
       };
-      return acc.concat(ne);
     }, []);
 
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);

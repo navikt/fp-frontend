@@ -57,7 +57,7 @@ const getOppdaterTabell =
           const opprettArbeidsforhold =
             formValues.saksbehandlersVurdering ===
             ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
-          const avklaringOpprett = opprettArbeidsforhold
+          const avklaring = opprettArbeidsforhold
             ? {
                 arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
                 fom: formValues.fom,
@@ -66,13 +66,13 @@ const getOppdaterTabell =
                 begrunnelse: formValues.begrunnelse,
                 saksbehandlersVurdering: formValues.saksbehandlersVurdering,
               }
-            : undefined;
+            : {
+                begrunnelse: formValues.begrunnelse,
+                saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+              };
           return {
             ...radData,
-            avklaring: avklaringOpprett || {
-              begrunnelse: formValues.begrunnelse,
-              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-            },
+            avklaring,
           };
         }
         return data;
