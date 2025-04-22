@@ -20,22 +20,22 @@
     "storybook": "storybook dev --quiet -p 7001"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.18.0",
-    "@navikt/ds-css": "7.18.0",
-    "@navikt/ds-react": "7.18.0",
+    "@navikt/aksel-icons": "7.20.0",
+    "@navikt/ds-css": "7.20.0",
+    "@navikt/ds-react": "7.20.0",
     "@navikt/fp-fakta-felles": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "6.2.10",
-    "@navikt/ft-form-validators": "3.1.12",
-    "@navikt/ft-ui-komponenter": "4.0.1",
-    "@navikt/ft-utils": "3.3.2",
+    "@navikt/ft-form-hooks": "6.2.11",
+    "@navikt/ft-form-validators": "3.1.13",
+    "@navikt/ft-ui-komponenter": "4.0.2",
+    "@navikt/ft-utils": "3.3.3",
     "dayjs": "1.11.13",
     "react": "19.1.0",
-    "react-hook-form": "7.55.0",
-    "react-intl": "7.1.10"
+    "react-hook-form": "7.56.0",
+    "react-intl": "7.1.11"
   },
   "devDependencies": {
     "@formatjs/cli-lib": "6.6.6",
@@ -47,12 +47,12 @@
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "cross-env": "7.0.3",
-    "eslint": "9.24.0",
+    "eslint": "9.25.1",
     "fast-glob": "^3.3.3",
     "storybook": "8.6.12",
     "stylelint": "16.18.0",
     "typescript": "5.8.3",
-    "vite": "6.2.5",
-    "vitest": "3.1.1"
+    "vite": "6.3.2",
+    "vitest": "3.1.2"
   }
 }
