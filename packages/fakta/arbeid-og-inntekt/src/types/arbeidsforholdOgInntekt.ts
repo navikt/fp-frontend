@@ -8,7 +8,8 @@ export type Avklaring = {
   tom?: string;
   stillingsprosent?: number;
 };
-type AGOpplysninger =
+
+export type AGOpplysninger =
   | {
       erPrivatPerson: true;
       arbeidsgiverIdent: string;

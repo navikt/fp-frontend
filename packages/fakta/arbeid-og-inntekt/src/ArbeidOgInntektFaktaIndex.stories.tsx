@@ -894,8 +894,8 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
           kontaktpersonNavn: 'Espen Solstråle',
           kontaktpersonNummer: '41925090',
           journalpostId: '1',
-          dokumentId: '2',
-          motattDato: '2021-12-06',
+          dokumentId: '1',
+          motattDato: '2021-12-01',
           årsak: AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
         },
         {
