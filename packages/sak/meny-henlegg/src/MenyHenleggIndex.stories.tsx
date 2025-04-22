@@ -44,12 +44,6 @@ const BEHANDLINGRESULTAT_TYPER = [
   },
 ];
 
-interface HenleggParams {
-  årsakKode: string;
-  begrunnelse: string;
-  fritekst?: string;
-}
-
 const meta = {
   title: 'sak/sak-meny-henlegg',
   component: MenyHenleggIndex,
@@ -58,7 +52,7 @@ const meta = {
     ytelseType: FagsakYtelseType.FORELDREPENGER,
     gaaTilSokeside: action('button-click'),
     henleggBehandling: () => {
-      action('button-click') as (params: HenleggParams) => Promise<any>;
+      action('button-click');
       return Promise.resolve();
     },
     lukkModal: action('button-click'),

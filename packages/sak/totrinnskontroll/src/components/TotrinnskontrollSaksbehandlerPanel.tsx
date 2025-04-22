@@ -52,7 +52,7 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
   lagLenke,
 }: Props) => {
   const intl = useIntl();
-  const bTag = useCallback((...chunks: any) => <b>{chunks}</b>, []);
+  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   return (
     <>

@@ -70,6 +70,6 @@ ProsessStegBegrunnelseTextField.buildInitialValues = (aksjonspunkter: Aksjonspun
   begrunnelse: decodeHtmlEntity(getBegrunnelse(aksjonspunkter)),
 });
 
-ProsessStegBegrunnelseTextField.transformValues = (values: FormValues): any => ({
+ProsessStegBegrunnelseTextField.transformValues = (values: FormValues): { begrunnelse: string | undefined } => ({
   begrunnelse: values.begrunnelse,
 });

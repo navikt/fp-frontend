@@ -16,8 +16,8 @@ interface Props {
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
-  meldingFormData?: any;
-  setMeldingFormData: (data?: any) => void;
+  meldingFormData?: FormValues;
+  setMeldingFormData: (data?: FormValues) => void;
   brukerManglerAdresse: boolean;
   behandling: BehandlingAppKontekst;
 }

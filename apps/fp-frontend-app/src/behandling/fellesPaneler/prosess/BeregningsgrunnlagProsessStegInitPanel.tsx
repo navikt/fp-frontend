@@ -15,6 +15,7 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
+import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -40,7 +41,7 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 };
 
 const lagModifisertCallback =
-  (submitCallback: (params: any, keepData?: boolean) => Promise<any>) =>
+  (submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>) =>
   (aksjonspunkterSomSkalLagres: BeregningAksjonspunktSubmitType[]) => {
     //TODO (TOR) Det ser ut i BeregningsgrunnlagProsessIndex som om aksjonspunkterSomSkalLagres alltid er eit array?
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
@@ -50,13 +51,13 @@ const lagModifisertCallback =
       kode: mapBGKodeTilFpsakKode(apData.kode),
       ...apData.grunnlag[0],
     }));
+    // @ts-expect-error Her er det noko rart med typinga
     return submitCallback(transformerteData);
   };
 
-const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar => {
+const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
   const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
-    // @ts-expect-error Fiks BeregningsgrunnlagProsessIndex så den kan håndtera null
     return null;
   }
   return {

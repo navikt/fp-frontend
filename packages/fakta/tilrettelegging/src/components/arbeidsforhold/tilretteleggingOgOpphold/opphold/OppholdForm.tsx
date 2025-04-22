@@ -32,8 +32,10 @@ const validerAtDatoErUnik =
       : null;
   };
 
-const validerTomEtterFom = (intl: IntlShape, index: number, getValues: UseFormGetValues<any>) => (tom?: string) =>
-  dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
+const validerTomEtterFom =
+  (intl: IntlShape, index: number, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
+    // @ts-expect-error Fiks
+    dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
 
 const validerAtPeriodeErGyldig =
   (intl: IntlShape, tilrettelegginger: ArbeidsforholdTilretteleggingDato[], termindato: string) => (dato?: string) => {
@@ -54,13 +56,15 @@ const validerAtPeriodeErGyldig =
 
 const validerAtPeriodeIkkeOverlapper =
   (
-    getValues: UseFormGetValues<any>,
+    getValues: UseFormGetValues<FormValues>,
     index: number,
     valgtOpphold: SvpAvklartOppholdPeriode,
     alleOpphold: SvpAvklartOppholdPeriode[],
   ) =>
   () => {
+    // @ts-expect-error Fiks
     const fomDato = getValues(`${index}.fom`);
+    // @ts-expect-error Fiks
     const tomDato = getValues(`${index}.tom`);
     const periodeMap = alleOpphold
       .filter(p => p.fom !== valgtOpphold.fom)

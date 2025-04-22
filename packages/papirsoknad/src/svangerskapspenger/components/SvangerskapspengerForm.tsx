@@ -51,8 +51,8 @@ interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-  onSubmit: (values: any) => Promise<any>;
-  onSubmitUfullstendigsoknad: () => Promise<any>;
+  onSubmit: (values: any) => Promise<void>;
+  onSubmitUfullstendigsoknad: () => Promise<void>;
 }
 
 /**

@@ -3,9 +3,11 @@ import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { SvangerskapspengerForm } from './components/SvangerskapspengerForm';
 
+// TODO (TOR) Fjern komponent
+
 interface Props {
-  onSubmitUfullstendigsoknad: () => Promise<any>;
-  onSubmit: (values: any) => Promise<any>;
+  onSubmitUfullstendigsoknad: () => Promise<void>;
+  onSubmit: (values: any) => Promise<void>;
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
