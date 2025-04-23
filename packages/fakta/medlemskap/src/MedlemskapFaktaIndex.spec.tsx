@@ -48,13 +48,11 @@ describe('MedlemskapFaktaIndex', () => {
     expect(utenlandsopphold.getByText('Hvor har du bodd de siste 12 månedene?')).toBeInTheDocument();
     expect(utenlandsopphold.getByText('Jeg har bodd i Norge')).toBeInTheDocument();
     expect(utenlandsopphold.getByText('Hvilke land og hvor lenge har du bodd der?')).toBeInTheDocument();
-    expect(utenlandsopphold.getByText('01.01.2010 - 01.01.2011')).toBeInTheDocument();
-    expect(utenlandsopphold.getByText('i Sverige')).toBeInTheDocument();
+    expect(utenlandsopphold.getByText('01.01.2010 - 01.01.2011 i Sverige')).toBeInTheDocument();
     expect(utenlandsopphold.getByText('Hvor skal du bo de neste 12 månedene?')).toBeInTheDocument();
     expect(utenlandsopphold.getByText('Jeg skal bo i Norge')).toBeInTheDocument();
     expect(utenlandsopphold.getByText('Hvilke land og hvor lenge skal du bo der?')).toBeInTheDocument();
-    expect(utenlandsopphold.getByText('01.01.2018 - 01.01.2019')).toBeInTheDocument();
-    expect(utenlandsopphold.getByText('i Danmark')).toBeInTheDocument();
+    expect(utenlandsopphold.getByText('01.01.2018 - 01.01.2019 i Danmark')).toBeInTheDocument();
 
     // OpplysningerOmAdresser
     const adresser = within(screen.getByLabelText('Adresser til søker(2) og annen part(2)'));
