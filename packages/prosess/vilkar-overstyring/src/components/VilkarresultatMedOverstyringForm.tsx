@@ -1,4 +1,3 @@
-import type { ReactNode } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -6,7 +5,7 @@ import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-ico
 import { BodyShort, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import {
@@ -172,8 +171,6 @@ export const VilkarresultatMedOverstyringForm = ({
   const erOppfylt = VilkarUtfallType.OPPFYLT === status;
   const originalErVilkarOk = VilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
 
-  const bTag = (...chunks: ReactNode[]) => <b>{chunks}</b>;
-
   return (
     <Form
       formMethods={formMethods}
@@ -244,7 +241,7 @@ export const VilkarresultatMedOverstyringForm = ({
                 readOnly={overrideReadOnly || !erOverstyrt}
                 customVilkarOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
                 customVilkarIkkeOppfyltText={
-                  <FormattedMessage id="VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt" values={{ b: bTag }} />
+                  <FormattedMessage id="VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt" values={{ b: BTag }} />
                 }
               />
             )}

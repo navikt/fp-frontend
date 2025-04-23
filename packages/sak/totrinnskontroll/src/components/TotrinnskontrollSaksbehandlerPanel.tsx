@@ -1,10 +1,10 @@
-import React, { type ReactNode, useCallback } from 'react';
+import React, { type ReactNode } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 import { NavLink } from 'react-router-dom';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack } from '@navikt/ds-react';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
 import type { BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
@@ -52,17 +52,11 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
   lagLenke,
 }: Props) => {
   const intl = useIntl();
-  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   return (
     <>
       <div className={styles.resultatFraGodkjenningTextContainer}>
-        <FormattedMessage
-          id="ToTrinnsForm.LøstAksjonspunkt"
-          values={{
-            b: bTag,
-          }}
-        />
+        <FormattedMessage id="ToTrinnsForm.LøstAksjonspunkt" values={{ b: BTag }} />
       </div>
       {totrinnskontrollSkjermlenkeContext.map(context => {
         const aksjonspunkter = context.totrinnskontrollAksjonspunkter;

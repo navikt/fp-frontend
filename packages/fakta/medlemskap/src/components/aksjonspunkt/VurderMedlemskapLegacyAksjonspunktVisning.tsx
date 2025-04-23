@@ -1,8 +1,8 @@
-import { type ReactNode, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller, DateLabel } from '@navikt/ft-ui-komponenter';
+import { BTag } from '@navikt/ft-utils';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, LegacyManuellMedlemskapsBehandling, LegacyMedlemPeriode } from '@navikt/fp-types';
@@ -20,7 +20,6 @@ interface VurderingVisningProps {
 
 const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }: VurderingVisningProps) => {
   const vurderingstyper = alleKodeverk[KodeverkType.MEDLEMSKAP_MANUELL_VURDERING_TYPE];
-  const bTag = useCallback((chunks: ReactNode[]) => <b>{chunks}</b>, []);
 
   return (
     <VStack gap="4">
@@ -59,7 +58,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
               {medlemsperiode.oppholdsrettVurdering ? (
                 <FormattedMessage id="StatusForBorgerFaktaPanel.HarOppholdsrett" />
               ) : (
-                <FormattedMessage id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett" values={{ b: bTag }} />
+                <FormattedMessage id="StatusForBorgerFaktaPanel.HarIkkeOppholdsrett" values={{ b: BTag }} />
               )}
             </BodyShort>
           </HStack>
@@ -74,7 +73,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
               {medlemsperiode.lovligOppholdVurdering ? (
                 <FormattedMessage id="StatusForBorgerFaktaPanel.HarLovligOpphold" />
               ) : (
-                <FormattedMessage id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold" values={{ b: bTag }} />
+                <FormattedMessage id="StatusForBorgerFaktaPanel.HarIkkeLovligOpphold" values={{ b: BTag }} />
               )}
             </BodyShort>
           </HStack>
@@ -88,7 +87,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
               {medlemsperiode.bosattVurdering ? (
                 <FormattedMessage id="MedlemskapLegacy.ErSokerBosattINorge.True" />
               ) : (
-                <FormattedMessage id="MedlemskapLegacy.ErSokerBosattINorge.False" values={{ b: bTag }} />
+                <FormattedMessage id="MedlemskapLegacy.ErSokerBosattINorge.False" />
               )}
             </BodyShort>
           </HStack>

@@ -1,4 +1,4 @@
-import { type ReactElement, type ReactNode, useCallback } from 'react';
+import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -7,7 +7,7 @@ import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-re
 import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
-import { findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
+import { BTag, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
@@ -118,8 +118,6 @@ export const ValgtAktivitetForm = ({
     fastsattOpptjening?.opptjeningTom,
   );
 
-  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
-
   return (
     <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
       <FaktaGruppe
@@ -211,7 +209,7 @@ export const ValgtAktivitetForm = ({
                   value: 'true',
                 },
                 {
-                  label: <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: bTag }} />,
+                  label: <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: BTag }} />,
                   value: 'false',
                 },
               ]}

@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { dateFormat, isObject } from '@navikt/ft-utils';
+import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
 import {
   AksjonspunktKode,
@@ -203,8 +203,6 @@ export const SokersOpplysningspliktForm = ({
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
-  const bTag = (chunks: React.ReactNode[]) => <b key="bold">{chunks}</b>;
-
   return (
     <Form
       formMethods={formMethods}
@@ -272,7 +270,7 @@ export const SokersOpplysningspliktForm = ({
                     <FormattedMessage
                       id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
                       values={{
-                        b: bTag,
+                        b: BTag,
                         br: <br key="break-line" />,
                       }}
                     />
