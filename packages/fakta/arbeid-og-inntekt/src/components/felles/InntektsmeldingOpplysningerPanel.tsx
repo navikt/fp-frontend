@@ -2,7 +2,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { dateFormat, formatCurrencyNoKr, periodFormat } from '@navikt/ft-utils';
+import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
+import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
@@ -45,7 +46,11 @@ export const InntektsmeldingOpplysningerPanel = ({
             />
           </Label>
           <BodyShort size="small">
-            {radData.erPrivatPerson ? dateFormat(radData.arbeidsgiverFødselsdato) : radData.arbeidsgiverIdent}
+            {radData.erPrivatPerson ? (
+              <DateLabel dateString={radData.arbeidsgiverFødselsdato} />
+            ) : (
+              radData.arbeidsgiverIdent
+            )}
           </BodyShort>
         </HStack>
       )}
@@ -63,9 +68,7 @@ export const InntektsmeldingOpplysningerPanel = ({
             <Label size="small">
               <FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" />
             </Label>
-            <BodyShort size="small">
-              {arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}
-            </BodyShort>
+            <BodyShort size="small">{`${arbeidsforhold.stillingsprosent}%`}</BodyShort>
           </HStack>
           {arbeidsforhold.permisjonOgMangel && (
             <HStack gap="4">
@@ -77,10 +80,10 @@ export const InntektsmeldingOpplysningerPanel = ({
                 )}
               </Label>
               <BodyShort size="small">
-                {periodFormat(
-                  arbeidsforhold.permisjonOgMangel.permisjonFom,
-                  arbeidsforhold.permisjonOgMangel.permisjonTom,
-                )}
+                <PeriodLabel
+                  dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
+                  dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
+                />
               </BodyShort>
             </HStack>
           )}
@@ -119,11 +122,9 @@ export const InntektsmeldingOpplysningerPanel = ({
         journalpostId={inntektsmelding.journalpostId}
         dokumentId={inntektsmelding.dokumentId}
       >
-        <span>
-          <BodyShort size="small" className={styles.inline}>
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-          </BodyShort>
-        </span>
+        <BodyShort size="small" className={styles.inline}>
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+        </BodyShort>
         <FileFillIcon className={styles.docIcon} />
       </DokumentLink>
     </VStack>

@@ -54,7 +54,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
           <AvsnittSkiller dividerParagraf className={styles.skiller} />
           {inntektsmeldingForArbeidsforhold.map(({ arbeidsforhold: a, inntektsmelding: im }) => {
             return (
-              <React.Fragment key={`${a?.arbeidsgiverIdent}${a?.internArbeidsforholdId}`}>
+              <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
                 <VStack gap="2">
                   <HStack gap="4">
                     <Label size="small">
