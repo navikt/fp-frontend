@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
-import { AvsnittSkiller, DateLabel, PeriodLabel} from '@navikt/ft-ui-komponenter';
+import { AvsnittSkiller, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
@@ -42,17 +42,11 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
       <HStack gap="4">
         <Label size="small">
           <FormattedMessage
-            id={
-              erPrivatPerson
-                ? 'ArbeidsforholdInformasjonPanel.Fodselsdato'
-                : 'ArbeidsforholdInformasjonPanel.Orgnr'
-            }
+            id={erPrivatPerson ? 'ArbeidsforholdInformasjonPanel.Fodselsdato' : 'ArbeidsforholdInformasjonPanel.Orgnr'}
           />
         </Label>
         <BodyShort size="small">
-          {erPrivatPerson ? (
-            <DateLabel dateString={radData.arbeidsgiverFødselsdato} />
-          ) : (arbeidsgiverIdent)}
+          {erPrivatPerson ? <DateLabel dateString={radData.arbeidsgiverFødselsdato} /> : arbeidsgiverIdent}
         </BodyShort>
       </HStack>
       {!harEttArbeidsforhold && (
