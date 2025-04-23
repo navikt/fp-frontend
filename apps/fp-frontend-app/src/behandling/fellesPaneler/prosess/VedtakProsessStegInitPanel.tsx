@@ -37,10 +37,10 @@ const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [
 
 interface Props {
   aksjonspunktKoder?: AksjonspunktKode[];
-  erEngangsstoenad?: boolean;
+  erEngangsstønad?: boolean;
 }
 
-export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsstoenad = false }: Props) => {
+export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsstønad = false }: Props) => {
   const intl = useIntl();
   const navigate = useNavigate();
 
@@ -64,19 +64,19 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsst
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
   const { behandling } = standardPanelProps;
 
-  const statusForVedtak = finnStatusForVedtak(erEngangsstoenad, standardPanelProps);
+  const statusForVedtak = finnStatusForVedtak(standardPanelProps);
 
   const api = useBehandlingApi(behandling);
 
   const { data: beregningsresultatDagytelse, isFetching: isBdFetching } = useQuery(
-    api.beregningsresultatDagytelseOptions(behandling, !erEngangsstoenad),
+    api.beregningsresultatDagytelseOptions(behandling, !erEngangsstønad),
   );
-  const { data: beregningsresultatEngangsstoenad, isFetching: isBeFetching } = useQuery(
-    api.es.beregningsresultatEngangsstønadOptions(behandling, erEngangsstoenad),
+  const { data: beregningsresultatEngangsstønad, isFetching: isBeFetching } = useQuery(
+    api.es.beregningsresultatEngangsstønadOptions(behandling, erEngangsstønad),
   );
   const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
   const { data: beregningsgrunnlag, isFetching: isBgFetching } = useQuery(
-    api.beregningsgrunnlagOptions(behandling, !erEngangsstoenad),
+    api.beregningsgrunnlagOptions(behandling, !erEngangsstønad),
   );
   const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
   const { data: beregningDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
@@ -159,10 +159,10 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsst
           />
           {isNotFetching ? (
             <VedtakProsessIndex
-              beregningsresultat={erEngangsstoenad ? beregningsresultatEngangsstoenad : beregningsresultatDagytelse}
+              beregningsresultat={erEngangsstønad ? beregningsresultatEngangsstønad : beregningsresultatDagytelse}
               originaltBeregningsresultat={
                 beregningDagytelseOriginalBehandling?.[
-                  erEngangsstoenad ? 'beregningsresultat-engangsstonad' : 'beregningsresultat-foreldrepenger'
+                  erEngangsstønad ? 'beregningsresultat-engangsstonad' : 'beregningsresultat-foreldrepenger'
                 ]
               }
               tilbakekrevingvalg={tilbakekrevingValg}
@@ -170,7 +170,7 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsst
               vilkar={standardPanelProps.vilkar}
               previewCallback={forhandsvis}
               beregningErManueltFastsatt={skalSkriveFritekstGrunnetFastsettingAvBeregning(
-                erEngangsstoenad,
+                erEngangsstønad,
                 behandling.aksjonspunkt,
                 beregningsgrunnlag,
               )}
@@ -208,17 +208,14 @@ const harVilkarMedStatus = (vilkar: Vilkar[], status: VilkarUtfallType): boolean
   return vilkar.some(v => v.vilkarStatus === status);
 };
 
-const finnStatusForVedtak = (erEngangsstoenad: boolean, standardPanelProps: StandardProsessPanelProps): string => {
+const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): string => {
   const { vilkar } = standardPanelProps;
   if (vilkar.length === 0) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
   const aksjonspunkter = standardPanelProps.behandling.aksjonspunkt;
-  // TODO: Undersøk om det faktisk er riktig at engangsstønad ikke skal bruke samme aksjonspunkter som de andre
-  const vedtakAksjonspunkter = erEngangsstoenad
-    ? standardPanelProps.behandling.aksjonspunkt
-    : standardPanelProps.aksjonspunkter;
+  const vedtakAksjonspunkter = standardPanelProps.aksjonspunkter;
 
   if (
     harKunLukkedeAksjonspunkt(aksjonspunkter, vedtakAksjonspunkter) &&
@@ -269,21 +266,21 @@ const getLagringSideeffekter =
   };
 
 const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
-  erEngangsstoenad: boolean,
+  erEngangsstønad: boolean,
   aksjonspunkter: Aksjonspunkt[],
   beregningsgrunnlag?: Beregningsgrunnlag,
 ): boolean => {
-  if (erEngangsstoenad || !beregningsgrunnlag || !aksjonspunkter) {
+  if (erEngangsstønad || !beregningsgrunnlag || !aksjonspunkter) {
     return false;
   }
-  const behandlingHarLoestBGAP = aksjonspunkter.find(
+  const behandlingHarLøstBGAP = aksjonspunkter.find(
     ap =>
       BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) &&
       ap.status === AksjonspunktStatus.UTFORT,
   );
-  const foerstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
-  const andelSomErManueltFastsatt = foerstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
+  const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
+  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
     andel => andel.overstyrtPrAar ?? andel.overstyrtPrAar === 0,
   );
-  return !!behandlingHarLoestBGAP || !!andelSomErManueltFastsatt;
+  return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
 };
