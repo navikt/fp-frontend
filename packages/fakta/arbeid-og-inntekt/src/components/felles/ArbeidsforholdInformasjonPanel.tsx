@@ -45,17 +45,17 @@ const behandleInntektsposter = (
 
 interface Props {
   saksnummer: string;
-  skjæringspunktDato: string;
+  skjæringstidspunkt: string;
   alleKodeverk: AlleKodeverk;
   radData: ArbeidsforholdOgInntektRadData;
 }
 
-export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringspunktDato, alleKodeverk, radData }: Props) => {
+export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt, alleKodeverk, radData }: Props) => {
   const [visAlleMåneder, setVisAlleMånader] = useState(false);
 
   const { inntektsposter, arbeidsforholdForRad } = radData;
   const sorterteInntektsposter = useMemo(
-    () => behandleInntektsposter(skjæringspunktDato, inntektsposter),
+    () => behandleInntektsposter(skjæringstidspunkt, inntektsposter),
     [inntektsposter],
   );
 

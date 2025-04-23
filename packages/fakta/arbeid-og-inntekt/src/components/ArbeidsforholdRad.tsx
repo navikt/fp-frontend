@@ -98,7 +98,7 @@ export const ArbeidsforholdRad = ({
   const erManueltOpprettet =
     avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
   const harArbeidsforholdOgInntektsmelding =
-    inntektsmeldingerForRad.length > 0 && arbeidsforholdForRad.length > 0 && !årsak;
+    arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length > 0 && !årsak;
   const manglerInntektsmelding = årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
   const manglerArbeidsforhold = årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD;
   const harÅpentAksjonspunkt = !!årsak && !avklaring?.saksbehandlersVurdering;
@@ -154,7 +154,7 @@ export const ArbeidsforholdRad = ({
             <>
               <ArbeidsforholdInformasjonPanel
                 saksnummer={saksnummer}
-                skjæringspunktDato={skjæringstidspunkt}
+                skjæringstidspunkt={skjæringstidspunkt}
                 alleKodeverk={alleKodeverk}
                 radData={radData}
               />
@@ -192,7 +192,7 @@ export const ArbeidsforholdRad = ({
           {harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak && (
             <ArbeidsforholdInformasjonPanel
               saksnummer={saksnummer}
-              skjæringspunktDato={skjæringstidspunkt}
+              skjæringstidspunkt={skjæringstidspunkt}
               alleKodeverk={alleKodeverk}
               radData={radData}
             />

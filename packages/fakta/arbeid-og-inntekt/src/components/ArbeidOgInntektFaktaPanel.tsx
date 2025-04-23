@@ -136,7 +136,7 @@ const byggTabellStruktur = (
         inntektsmeldingerForRad: [im],
         inntektsposter,
       };
-    }, []);
+    });
 
   return alleArbeidsforhold.concat(alleInntektsmeldingerSomManglerArbeidsforhold).sort(sorterTabell);
 };
