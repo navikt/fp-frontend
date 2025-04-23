@@ -33,7 +33,7 @@
     "@navikt/ft-utils": "3.3.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-hook-form": "7.56.0",
+    "react-hook-form": "7.56.1",
     "react-intl": "7.1.11"
   },
   "devDependencies": {
