@@ -24,7 +24,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { useIsFormDirty } from '../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData, Avklaring } from '../types/arbeidsforholdOgInntekt';
-import { harMatchendeArbeidsgiverIdent, lagArbeidsgiver } from '../utils/arbeidsgiverUtils.ts';
+import { harMatchendeArbeidsgiverIdent, lagArbeidsgiver } from '../utils/arbeidsgiverUtils';
 import { finnInntektsmeldingerForArbeidsgiver } from '../utils/inntektsmeldingUtils';
 import { ArbeidsforholdRad } from './ArbeidsforholdRad';
 import { ArbeidsOgInntektOverstyrPanel } from './ArbeidsOgInntektOverstyrPanel';
