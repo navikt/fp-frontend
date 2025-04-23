@@ -219,7 +219,7 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
-    beregningErManueltFastsatt: false,
+    beregningErManueltFastsatt: true,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
     ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
