@@ -161,7 +161,7 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoderForType = [], erEn
               }
               tilbakekrevingvalg={tilbakekrevingValg}
               simuleringResultat={simuleringResultat}
-              vilkar={standardPanelProps.vilkar}
+              vilkar={standardPanelProps.behandling.vilkår}
               previewCallback={forhandsvis}
               beregningsgrunnlag={beregningsgrunnlag}
               oppgaver={oppgaver}
@@ -194,13 +194,13 @@ const harRelevantAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => {
   return aksjonspunkter.some(ap => harRelevantAksjonspunktDefinisjon(ap) && ap.status === AksjonspunktStatus.OPPRETTET);
 };
 
-const harVilkarMedStatus = (vilkar: Vilkar[], status: VilkarUtfallType): boolean => {
-  return vilkar.some(v => v.vilkarStatus === status);
+const harVilkarMedStatus = (vilkår: Vilkar[], status: VilkarUtfallType): boolean => {
+  return vilkår.some(v => v.vilkarStatus === status);
 };
 
 const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): string => {
-  const { vilkar } = standardPanelProps;
-  if (vilkar.length === 0) {
+  const { vilkår } = standardPanelProps.behandling;
+  if (vilkår.length === 0) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
@@ -209,12 +209,12 @@ const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): str
 
   if (
     harKunLukkedeAksjonspunkt(aksjonspunkter, vedtakAksjonspunkter) &&
-    harVilkarMedStatus(vilkar, VilkarUtfallType.IKKE_OPPFYLT)
+    harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_OPPFYLT)
   ) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  if (harVilkarMedStatus(vilkar, VilkarUtfallType.IKKE_VURDERT) || harRelevantAksjonspunkt(aksjonspunkter)) {
+  if (harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_VURDERT) || harRelevantAksjonspunkt(aksjonspunkter)) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
