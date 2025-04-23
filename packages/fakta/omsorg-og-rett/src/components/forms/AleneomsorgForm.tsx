@@ -1,10 +1,11 @@
-import { type ReactNode, useCallback } from 'react';
+import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { BTag } from '@navikt/ft-utils';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
@@ -62,8 +63,6 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
     [],
   );
 
-  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
-
   const skalAvklareUforetrygd =
     omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;
 
@@ -81,7 +80,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
             label={<FormattedMessage id="AleneomsorgForm.Aleneomsorg" />}
             readOnly={isReadOnlyOrApIsNull}
             trueLabel={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />}
-            falseLabel={<FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: bTag }} />}
+            falseLabel={<FormattedMessage id="AleneomsorgForm.HarIkkeAleneomsorg" values={{ b: BTag }} />}
             falseContent={
               <HarAnnenForelderRettFelter readOnly={isReadOnlyOrApIsNull} avklareUforetrygd={skalAvklareUforetrygd} />
             }

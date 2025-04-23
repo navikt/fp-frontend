@@ -1,7 +1,8 @@
-import { type ReactNode, useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table } from '@navikt/ds-react';
+import { BTag } from '@navikt/ft-utils';
 
 import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import type {
@@ -126,8 +127,6 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
     return aktiviteterMedNavn.sort((akt1, akt2) => akt1.navn.localeCompare(akt2.navn));
   }, [valgtKontoType, stønadskontoerMedNavn]);
 
-  const bTag = useCallback((chunks: ReactNode[]) => <b>{chunks}</b>, []);
-
   return (
     <div className={styles.disponibeltUttak}>
       <HStack gap="4">
@@ -137,7 +136,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
         <BodyShort size="small">
           <FormattedMessage
             id="TimeLineInfo.Stonadinfo.Total"
-            values={{ uker: tilgjengeligeUker.uker, dager: tilgjengeligeUker.dager, b: bTag }}
+            values={{ uker: tilgjengeligeUker.uker, dager: tilgjengeligeUker.dager, b: BTag }}
           />
         </BodyShort>
       </HStack>
@@ -182,7 +181,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
                             values={{
                               ukerVerdi: ukerOgDager.uker,
                               dagerVerdi: ukerOgDager.dager,
-                              b: bTag,
+                              b: BTag,
                             }}
                           />
                         )}

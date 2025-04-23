@@ -1,7 +1,8 @@
-import { type ReactNode, useCallback, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, VStack } from '@navikt/ds-react';
+import { BTag } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 
 import { StonadskontoType } from '@navikt/fp-kodeverk';
@@ -57,8 +58,6 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
 
   const velgKonto = useCallback(() => visDagerForKonto(stønadskonto.stonadskontotype), [stønadskonto]);
 
-  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
-
   const uker = Math.floor(stønadskonto.maxDager / 5);
 
   return (
@@ -90,7 +89,7 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
                 values={{
                   ukerVerdi: fordelteDager.uker,
                   dagerVerdi: fordelteDager.dager,
-                  b: bTag,
+                  b: BTag,
                 }}
               />
             </BodyShort>

@@ -1,7 +1,7 @@
-import { type ReactNode, useCallback } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { BTag } from '@navikt/ft-utils';
 
 import { TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
@@ -20,8 +20,6 @@ interface Props {
 }
 
 export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => {
-  const bTag = useCallback((...chunks: ReactNode[]) => <b>{chunks}</b>, []);
-
   return (
     <FaktaGruppe
       withoutBorder
@@ -32,7 +30,7 @@ export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props
         label={<FormattedMessage id="OmsorgFaktaFields.OppgittOmsorg" />}
         readOnly={readOnly}
         trueLabel={<FormattedMessage id="OmsorgFaktaFields.HarOmsorg" />}
-        falseLabel={<FormattedMessage id="OmsorgFaktaFields.HarIkkeOmsorg" values={{ b: bTag }} />}
+        falseLabel={<FormattedMessage id="OmsorgFaktaFields.HarIkkeOmsorg" values={{ b: BTag }} />}
       />
     </FaktaGruppe>
   );
