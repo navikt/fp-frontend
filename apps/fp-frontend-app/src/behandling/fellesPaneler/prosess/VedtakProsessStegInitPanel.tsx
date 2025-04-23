@@ -9,7 +9,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import type { Aksjonspunkt, Beregningsgrunnlag, ForhåndsvisMeldingParams, OppgaveId, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, ForhåndsvisMeldingParams, OppgaveId, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -29,27 +29,21 @@ const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
 ];
 
-const BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT = [
-  AksjonspunktKode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE,
-  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-];
-
 interface Props {
-  aksjonspunktKoder?: AksjonspunktKode[];
+  aksjonspunktKoderForType?: AksjonspunktKode[];
   erEngangsstønad?: boolean;
 }
 
-export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsstønad = false }: Props) => {
+export const VedtakProsessStegInitPanel = ({ aksjonspunktKoderForType = [], erEngangsstønad = false }: Props) => {
   const intl = useIntl();
   const navigate = useNavigate();
 
   const [visIverksetterVedtakModal, setVisIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
-  const AKSJONSPUNKT_KODER = [
+  const aksjonspunktKoder = [
     ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
-    ...aksjonspunktKoder,
+    ...aksjonspunktKoderForType,
     AksjonspunktKode.FORESLA_VEDTAK,
   ];
 
@@ -61,7 +55,7 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsst
     setSkalOppdatereEtterBekreftelseAvAp,
   );
 
-  const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
+  const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, [], lagringSideEffekter);
   const { behandling } = standardPanelProps;
 
   const statusForVedtak = finnStatusForVedtak(standardPanelProps);
@@ -169,11 +163,7 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoder = [], erEngangsst
               simuleringResultat={simuleringResultat}
               vilkar={standardPanelProps.vilkar}
               previewCallback={forhandsvis}
-              beregningErManueltFastsatt={skalSkriveFritekstGrunnetFastsettingAvBeregning(
-                erEngangsstønad,
-                behandling.aksjonspunkt,
-                beregningsgrunnlag,
-              )}
+              beregningsgrunnlag={beregningsgrunnlag}
               oppgaver={oppgaver}
               ferdigstillOppgave={ferdigstillOppgave}
             />
@@ -264,23 +254,3 @@ const getLagringSideeffekter =
       }
     };
   };
-
-const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
-  erEngangsstønad: boolean,
-  aksjonspunkter: Aksjonspunkt[],
-  beregningsgrunnlag?: Beregningsgrunnlag,
-): boolean => {
-  if (erEngangsstønad || !beregningsgrunnlag || !aksjonspunkter) {
-    return false;
-  }
-  const behandlingHarLøstBGAP = aksjonspunkter.find(
-    ap =>
-      BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) &&
-      ap.status === AksjonspunktStatus.UTFORT,
-  );
-  const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
-  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
-    andel => andel.overstyrtPrAar ?? andel.overstyrtPrAar === 0,
-  );
-  return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
-};

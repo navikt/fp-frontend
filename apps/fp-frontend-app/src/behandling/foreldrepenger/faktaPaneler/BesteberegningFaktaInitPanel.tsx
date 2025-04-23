@@ -28,7 +28,7 @@ export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
   const { behandling } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
-  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(behandling, true));
+  const { data: beregningsgrunnlag } = useQuery(api.beregningsgrunnlagOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel

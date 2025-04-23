@@ -50,7 +50,7 @@ const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgi
           personoversikt={personoversikt}
         />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <VedtakProsessStegInitPanel aksjonspunktKoder={[AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE]} />
+        <VedtakProsessStegInitPanel aksjonspunktKoderForType={[AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE]} />
       </ProsessMeny>
       <FaktaMeny
         valgtFaktaSteg={valgtFaktaSteg}

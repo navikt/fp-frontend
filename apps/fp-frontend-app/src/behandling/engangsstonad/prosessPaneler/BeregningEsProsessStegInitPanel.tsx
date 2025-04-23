@@ -23,7 +23,7 @@ export const BeregningEsProsessStegInitPanel = () => {
   const api = useBehandlingApi(behandling);
 
   const { data: beregningsresultatEngangsstønad, isFetching } = useQuery(
-    api.es.beregningsresultatEngangsstønadOptions(behandling, true),
+    api.es.beregningsresultatEngangsstønadOptions(behandling),
   );
 
   return (

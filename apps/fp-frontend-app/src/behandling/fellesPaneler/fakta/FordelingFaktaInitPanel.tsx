@@ -36,7 +36,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
 
   const api = useBehandlingApi(behandling);
 
-  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling, true));
+  const { data: beregningsgrunnlag, isFetching } = useQuery(api.beregningsgrunnlagOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
