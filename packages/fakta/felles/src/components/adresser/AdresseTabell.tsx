@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyLong, Box, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import type { KodeverkMedNavn, Personadresse } from '@navikt/fp-types';
 
@@ -63,10 +62,7 @@ export const AdresseTabell = ({
               return (
                 <Table.Row key={adresse.adresseType + adresse.fom + adresse.tom}>
                   <Table.DataCell style={rowStyle(i)}>
-                    <PeriodLabel
-                      dateStringFom={adresse.fom}
-                      dateStringTom={adresse.tom === TIDENES_ENDE ? undefined : adresse.tom}
-                    />
+                    <PeriodLabel dateStringFom={adresse.fom} dateStringTom={adresse.tom} />
                   </Table.DataCell>
                   <Table.DataCell style={rowStyle(i)}>{formaterAdresse(adresse)}</Table.DataCell>
                   <Table.DataCell style={rowStyle(i)}>

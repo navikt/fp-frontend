@@ -3,7 +3,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { StarFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity, TIDENES_ENDE } from '@navikt/ft-utils';
+import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
@@ -69,11 +69,9 @@ export const PersonArbeidsforholdTable = ({
                 <BodyShort size="small">{decodeHtmlEntity(navn)}</BodyShort>
               </Table.DataCell>
               <Table.DataCell>
-                <PeriodLabel
-                  size="small"
-                  dateStringFom={arbeidsforhold.fom}
-                  dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined}
-                />
+                <BodyShort size="small">
+                  <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
+                </BodyShort>
               </Table.DataCell>
               <Table.DataCell>
                 <BodyShort size="small">{finnKilde(arbeidsforhold, intl)}</BodyShort>

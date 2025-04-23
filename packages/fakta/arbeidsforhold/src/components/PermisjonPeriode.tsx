@@ -19,9 +19,7 @@ export const PermisjonPeriode = ({ arbeidsforhold }: Props) => {
         <BodyShort size="small">
           <PeriodLabel
             dateStringFom={arbeidsforhold.permisjonOgMangel.permisjonFom}
-            dateStringTom={
-              arbeidsforhold.permisjonOgMangel.permisjonTom ? arbeidsforhold.permisjonOgMangel.permisjonTom : ''
-            }
+            dateStringTom={arbeidsforhold.permisjonOgMangel.permisjonTom}
           />
         </BodyShort>
       </div>
