@@ -34,13 +34,11 @@ describe('<OppgaveHandlingerMenu>', () => {
 
     await userEvent.click(screen.getByText('Legg tilbake i felles kø'));
 
-    expect(await screen.findByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).toBeInTheDocument();
+    expect(await screen.findByText('Angi begrunnelse')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Avbryt'));
 
-    await waitFor(() =>
-      expect(screen.queryByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).not.toBeInTheDocument(),
-    );
+    await waitFor(() => expect(screen.queryByText('Angi begrunnelse')).not.toBeInTheDocument());
   });
 
   it('skal åpne modal for å forlenge reservasjon', async () => {

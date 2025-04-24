@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
 import { Form, TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import type { Oppgave } from '@navikt/fp-los-felles';
@@ -16,7 +16,7 @@ const minLength3 = minLength(3);
 const maxLength500 = maxLength(500);
 
 type FormValues = {
-  begrunnelse: string;
+  begrunnelse?: string;
 };
 
 type Props = Readonly<{
@@ -34,7 +34,12 @@ export const OpphevReservasjonModal = ({ closeModal, oppgave }: Props) => {
   const queryClient = useQueryClient();
 
   const { mutate: opphevOppgavereservasjon } = useMutation({
-    mutationFn: (values: FormValues) => postOpphevReservasjon(oppgave.id, values.begrunnelse),
+    mutationFn: (values: FormValues) =>
+      postOpphevReservasjon(
+        oppgave.id,
+        values.begrunnelse ?? intl.formatMessage({ id: 'OpphevReservasjonModal.LagtTilbake' }),
+      ),
+    mutationKey: [LosUrl.RESERVERTE_OPPGAVER],
     onSuccess: () => {
       closeModal();
       queryClient.invalidateQueries({
@@ -62,7 +67,7 @@ export const OpphevReservasjonModal = ({ closeModal, oppgave }: Props) => {
           <TextAreaField
             name="begrunnelse"
             label={intl.formatMessage({ id: 'OpphevReservasjonModal.Hjelpetekst' })}
-            validate={[required, maxLength500, minLength3, hasValidText]}
+            validate={[maxLength500, minLength3, hasValidText]}
             maxLength={500}
           />
         </NavModal.Body>

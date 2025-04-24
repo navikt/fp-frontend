@@ -33,6 +33,7 @@ const meta = {
   },
   args: {
     setEnableTableEvents: action('button-click'),
+    brukernavn: 'T232332',
   },
 } satisfies Meta<typeof OppgaveHandlingerMenu>;
 export default meta;

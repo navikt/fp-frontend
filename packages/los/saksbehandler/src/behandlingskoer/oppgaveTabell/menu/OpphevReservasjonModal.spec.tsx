@@ -14,9 +14,9 @@ describe('<OpphevReservasjonModal>', () => {
     await applyRequestHandlers(Default.parameters['msw']);
     const utils = render(<Default closeModal={closeModal} />);
 
-    expect(await screen.findByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).toBeInTheDocument();
+    expect(await screen.findByText('Angi begrunnelse')).toBeInTheDocument();
 
-    const begrunnelseInput = utils.getByLabelText('Når en reservert sak frigjøres er begrunnelse obligatorisk');
+    const begrunnelseInput = utils.getByLabelText('Begrunnelse for frigjøring av reservasjon');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('OK'));

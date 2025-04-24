@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
+import type { NavAnsatt } from '@navikt/fp-types';
+
 import { BehandlingskoerIndex } from './behandlingskoer/BehandlingskoerIndex';
 import { driftsmeldingerOptions, losKodeverkOptions } from './data/fplosSaksbehandlerApi';
 import { DriftsmeldingPanel } from './driftsmelding/DriftsmeldingPanel';
@@ -13,10 +15,10 @@ import styles from './saksbehandlerDashboard.module.css';
 interface Props {
   setLosErIkkeTilgjengelig: () => void;
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
-  kanSaksbehandle: boolean;
+  navAnsatt: NavAnsatt;
 }
 
-export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, kanSaksbehandle }: Props) => {
+export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, navAnsatt }: Props) => {
   const [valgtSakslisteId, setValgtSakslisteId] = useState<number>();
 
   const alleKodeverkQuery = useQuery(losKodeverkOptions());
@@ -41,9 +43,10 @@ export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, 
             åpneFagsak={åpneFagsak}
             valgtSakslisteId={valgtSakslisteId}
             setValgtSakslisteId={setValgtSakslisteId}
+            brukernavn={navAnsatt.brukernavn}
           />
           <div className={styles.sokContainer}>
-            <FagsakSøkIndex åpneFagsak={åpneFagsak} kanSaksbehandle={kanSaksbehandle} />
+            <FagsakSøkIndex åpneFagsak={åpneFagsak} kanSaksbehandle={navAnsatt.kanSaksbehandle || false} />
           </div>
         </div>
         <div className={styles.rightColumn}>

@@ -18,9 +18,16 @@ interface Props {
   setValgtSakslisteId: (sakslisteId: number) => void;
   sakslister: Saksliste[];
   reserverOppgave: (oppgaveId: Oppgave) => void;
+  brukernavn: string;
 }
 
-export const SakslistePanel = ({ reserverOppgave, sakslister, setValgtSakslisteId, valgtSakslisteId }: Props) => {
+export const SakslistePanel = ({
+  reserverOppgave,
+  sakslister,
+  setValgtSakslisteId,
+  valgtSakslisteId,
+  brukernavn,
+}: Props) => {
   const { mutate: fetchAntallOppgaver, data: antallOppgaver } = useMutation({
     mutationFn: getBehandlingskøOppgaveAntall,
   });
@@ -40,6 +47,7 @@ export const SakslistePanel = ({ reserverOppgave, sakslister, setValgtSakslisteI
           reserverOppgave={reserverOppgave}
           antallOppgaver={antallOppgaver}
           valgtSakslisteId={valgtSakslisteId}
+          brukernavn={brukernavn}
         />
       )}
     </VStack>

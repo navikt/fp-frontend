@@ -76,9 +76,10 @@ const NotatKnapp = ({ oppgave }: { oppgave: Oppgave }) => {
 interface Props {
   oppgave: OppgaveMedReservertIndikator;
   reserverOppgave: (oppgave: Oppgave) => void;
+  brukernavn: string;
 }
 
-export const OppgaveRad = ({ oppgave, reserverOppgave }: Props) => {
+export const OppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Props) => {
   const intl = useIntl();
   const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
 
@@ -142,7 +143,11 @@ export const OppgaveRad = ({ oppgave, reserverOppgave }: Props) => {
       <Table.DataCell>
         {oppgave.underBehandling && (
           <div ref={refMeny}>
-            <OppgaveHandlingerMenu oppgave={oppgave} setEnableTableEvents={setEnableTableEvents} />
+            <OppgaveHandlingerMenu
+              oppgave={oppgave}
+              setEnableTableEvents={setEnableTableEvents}
+              brukernavn={brukernavn}
+            />
           </div>
         )}
       </Table.DataCell>

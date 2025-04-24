@@ -16,9 +16,10 @@ interface Props {
   valgtSakslisteId?: number;
   setValgtSakslisteId: (sakslisteId: number) => void;
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
+  brukernavn: string;
 }
 
-export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, åpneFagsak }: Props) => {
+export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, åpneFagsak, brukernavn }: Props) => {
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState<boolean>(false);
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
   const [reservertOppgaveStatus, setReservertOppgaveStatus] = useState<OppgaveStatus>();
@@ -64,6 +65,7 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
         setValgtSakslisteId={setValgtSakslisteId}
         reserverOppgave={reserverOppgaveOgApne}
         sakslister={sakslister}
+        brukernavn={brukernavn}
       />
       {reservertAvAnnenSaksbehandler && reservertOppgave && reservertOppgaveStatus && (
         <OppgaveErReservertAvAnnenModal

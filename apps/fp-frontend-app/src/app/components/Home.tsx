@@ -11,6 +11,7 @@ import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import type { NavAnsatt } from '@navikt/fp-types';
 import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { AktørIndex } from '../../aktoer/AktørIndex';
 import { ErrorType } from '../../data/error/errorType';
@@ -88,7 +89,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
               <SaksbehandlerIndex
                 setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig}
                 åpneFagsak={åpneFagsak}
-                kanSaksbehandle={navAnsatt?.kanSaksbehandle || false}
+                navAnsatt={notEmpty(navAnsatt)}
               />
             ) : (
               <FagsakSearchIndex />
