@@ -103,7 +103,7 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   );
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
   const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
-    andel => andel.overstyrtPrAar ?? andel.overstyrtPrAar === 0,
+    andel => andel.overstyrtPrAar || andel.overstyrtPrAar === 0,
   );
   return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;
 };
