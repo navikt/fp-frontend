@@ -161,9 +161,9 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoderForType = [], erEn
               }
               tilbakekrevingvalg={tilbakekrevingValg}
               simuleringResultat={simuleringResultat}
+              beregningsgrunnlag={beregningsgrunnlag}
               vilkar={standardPanelProps.behandling.vilkår}
               previewCallback={forhandsvis}
-              beregningsgrunnlag={beregningsgrunnlag}
               oppgaver={oppgaver}
               ferdigstillOppgave={ferdigstillOppgave}
             />
