@@ -190,7 +190,7 @@ const harRelevantAksjonspunktDefinisjon = (ap: Aksjonspunkt): boolean => {
   );
 };
 
-const harRelevantAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => {
+const harRelevantOgÅpentAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => {
   return aksjonspunkter.some(ap => harRelevantAksjonspunktDefinisjon(ap) && ap.status === AksjonspunktStatus.OPPRETTET);
 };
 
@@ -210,7 +210,7 @@ const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): str
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  if (harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_VURDERT) || harRelevantAksjonspunkt(aksjonspunkt)) {
+  if (harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_VURDERT) || harRelevantOgÅpentAksjonspunkt(aksjonspunkt)) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
