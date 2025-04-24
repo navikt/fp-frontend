@@ -199,30 +199,24 @@ const harVilkarMedStatus = (vilkår: Vilkar[], status: VilkarUtfallType): boolea
 };
 
 const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): string => {
-  const { vilkår } = standardPanelProps.behandling;
+  const { vilkår, aksjonspunkt, behandlingsresultat } = standardPanelProps.behandling;
   if (vilkår.length === 0) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
-  const aksjonspunkter = standardPanelProps.behandling.aksjonspunkt;
-  const vedtakAksjonspunkter = standardPanelProps.aksjonspunkter;
+  const kunLukkedeAksjonspunkt = harKunLukkedeAksjonspunkt(aksjonspunkt, standardPanelProps.aksjonspunkter);
 
-  if (
-    harKunLukkedeAksjonspunkt(aksjonspunkter, vedtakAksjonspunkter) &&
-    harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_OPPFYLT)
-  ) {
+  if (kunLukkedeAksjonspunkt && harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_OPPFYLT)) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  if (harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_VURDERT) || harRelevantAksjonspunkt(aksjonspunkter)) {
+  if (harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_VURDERT) || harRelevantAksjonspunkt(aksjonspunkt)) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
-  if (!harKunLukkedeAksjonspunkt(aksjonspunkter, vedtakAksjonspunkter)) {
+  if (!kunLukkedeAksjonspunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
-
-  const behandlingsresultat = standardPanelProps.behandling.behandlingsresultat;
 
   if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
     return VilkarUtfallType.IKKE_OPPFYLT;
