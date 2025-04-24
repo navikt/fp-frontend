@@ -158,7 +158,10 @@ interface Props {
   soknad: Soknad;
   personoversikt: Personoversikt;
   kanOverstyre: boolean;
-  oppdaterStønadskontoer: (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) => Promise<any>;
+  oppdaterStønadskontoer: (params: {
+    behandlingUuid: string;
+    perioder: PeriodeSoker[];
+  }) => Promise<UttakStonadskontoer>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -229,17 +232,15 @@ export const UttakProsessPanel = ({
     setPerioder(nyePerioder);
     setIsDirty(true);
 
-    oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder }).then(
-      (oppdatertStønadskonto: UttakStonadskontoer) => {
-        setStønadskonto(oppdatertStønadskonto);
-        if (oppdatertePerioder.length === 2) {
-          const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
-          setValgtPeriodeIndex(uttaksresultat.perioderAnnenpart.length + index);
-        } else {
-          visPeriode(uttaksresultat.perioderAnnenpart.concat(nyePerioder));
-        }
-      },
-    );
+    oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder }).then(oppdatertStønadskonto => {
+      setStønadskonto(oppdatertStønadskonto);
+      if (oppdatertePerioder.length === 2) {
+        const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
+        setValgtPeriodeIndex(uttaksresultat.perioderAnnenpart.length + index);
+      } else {
+        visPeriode(uttaksresultat.perioderAnnenpart.concat(nyePerioder));
+      }
+    });
   };
 
   const harÅpneAksjonspunkter = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);

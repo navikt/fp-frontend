@@ -13,6 +13,7 @@ import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@na
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
+import type { FormkravMellomlagretDataType } from './types/FormkravMellomlagretDataType';
 
 const avsluttedeBehandlinger = [
   {
@@ -27,7 +28,7 @@ const meta = {
   component: FormkravProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    lagreFormkravVurdering: action('button-click') as (data: any) => Promise<void>,
+    lagreFormkravVurdering: action('button-click') as (data: FormkravMellomlagretDataType) => Promise<void>,
     readOnlySubmitButton: false,
     avsluttedeBehandlinger,
   },

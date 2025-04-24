@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
+import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
@@ -84,8 +85,6 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
 
-  const bTag = (...chunks: any) => <b>{chunks}</b>;
-
   const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = (verdi: boolean) => {
     if (fastsattOpptjening.fastsattOpptjeningAktivitetList?.length === 0 && verdi === true) {
       return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
@@ -145,7 +144,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
                     ? 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfyltSvp'
                     : 'OpptjeningVilkarAksjonspunktPanel.ErIkkeOppfylt'
                 }
-                values={{ b: bTag }}
+                values={{ b: BTag }}
               />
             }
             validatorsForRadioOptions={[validerAtEnKunKanVelgeOppfyltNårEnHarPerioder]}

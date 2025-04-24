@@ -1,5 +1,6 @@
 import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
+  BeregnBeløpParams,
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
 } from '@navikt/ft-prosess-tilbakekreving';
@@ -88,18 +89,6 @@ export type OverstyrteAksjonspunktArgs = {
   overstyrteAksjonspunktDtoer: ({
     '@type': string;
   } & AksjonspunktType)[];
-};
-
-//TODO (Dette bør lagast og eksporterast i ft-panelet)
-type PeriodeMedBelop = {
-  belop: number;
-  fom: string;
-  tom: string;
-  begrunnelse: string;
-};
-export type BeregnBeløpParams = {
-  behandlingUuid: string;
-  perioder: PeriodeMedBelop[];
 };
 
 const kyExtended = ky.extend({
@@ -705,7 +694,7 @@ const getBeregneBeløp = (links: ApiLink[]) => (params: BeregnBeløpParams) =>
     .post(getUrlFromRel('BEREGNE_BELØP', links), {
       json: params,
     })
-    .json<void>();
+    .json<{ perioder: { belop: number }[] }>();
 
 const getOppdaterStønadskontoer =
   (links: ApiLink[]) => (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) =>
@@ -713,7 +702,7 @@ const getOppdaterStønadskontoer =
       .post(getUrlFromRel('STONADSKONTOER_GITT_UTTAKSPERIODER', links), {
         json: params,
       })
-      .json<void>();
+      .json<UttakStonadskontoer>();
 
 export const useBehandlingApi = (behandling: Behandling) => {
   const { links } = behandling;

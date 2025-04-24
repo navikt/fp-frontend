@@ -6,7 +6,6 @@ import { BodyShort, Button, Detail, HStack, Label, Popover, Tooltip, VStack } fr
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type {
@@ -104,13 +103,11 @@ export const ArbeidsforholdField = ({
                 <FormattedMessage id="ArbeidsforholdFieldArray.Periode" />
               </Label>
               <BodyShort size="small">
-                {arbeidsforhold && (
-                  <PeriodLabel
-                    dateStringFom={arbeidsforhold.fom}
-                    dateStringTom={arbeidsforhold.tom !== TIDENES_ENDE ? arbeidsforhold.tom : undefined}
-                  />
+                {arbeidsforhold ? (
+                  <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
+                ) : (
+                  '-'
                 )}
-                {!arbeidsforhold && '-'}
               </BodyShort>
             </div>
             <div>

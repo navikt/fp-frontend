@@ -52,7 +52,9 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
               <Detail>
                 <FormattedMessage id="DelOppPeriodeModalImpl.Periode" />
               </Detail>
-              <PeriodLabel size="small" dateStringFom={fomDato} dateStringTom={tomDato} />
+              <BodyShort size="small">
+                <PeriodLabel dateStringFom={fomDato} dateStringTom={tomDato} />
+              </BodyShort>
             </VStack>
             <HStack justify="space-between">
               <Datepicker

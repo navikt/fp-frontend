@@ -95,7 +95,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       oppgaveStatus &&
       (!oppgaveStatus.erReservert || (oppgaveStatus.erReservert && oppgaveStatus.erReservertAvInnloggetBruker))
     ) {
-      åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
+      åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     } else if (oppgaveStatus?.erReservert && !oppgaveStatus.erReservertAvInnloggetBruker) {
       setReservertOppgave(oppgave);
       setReservertAvAnnenSaksbehandler(true);
@@ -112,7 +112,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
           goToFagsakEllerApneModal(oppgave, status);
         });
       } else {
-        åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
+        åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
       }
     } else {
       reserverOppgave(oppgave.id).then(data => {
@@ -133,7 +133,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
   const lukkErReservertModalOgOpneOppgave = (oppgave: Oppgave) => {
     setReservertOppgave(undefined);
     setReservertAvAnnenSaksbehandler(false);
-    åpneFagsak(oppgave.saksnummer.toString(), oppgave.behandlingId);
+    åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
   };
 
   return (

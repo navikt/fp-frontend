@@ -81,8 +81,8 @@ interface Props {
   onSubmit: (data: ApData) => void;
   forhandsvisVedtaksbrev: () => void;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
-  beslutterFormData?: any;
-  setBeslutterFormData: (data?: any) => void;
+  beslutterFormData?: FormValues;
+  setBeslutterFormData: (data?: FormValues) => void;
 }
 
 export const TotrinnskontrollSakIndex = ({

@@ -37,7 +37,7 @@ const meta = {
   component: VedtakKlageProsessIndex,
   decorators: [withPanelData],
   args: {
-    previewVedtakCallback: action('button-click') as () => Promise<any>,
+    previewVedtakCallback: action('button-click'),
     behandling,
     aksjonspunkterForPanel,
   },

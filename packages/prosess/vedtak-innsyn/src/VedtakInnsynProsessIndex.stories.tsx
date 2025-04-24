@@ -33,7 +33,7 @@ const meta = {
   component: VedtakInnsynProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    previewCallback: action('button-click') as any,
+    previewCallback: action('button-click'),
     aksjonspunkterForPanel: defaultAksjonspunkter,
     alleDokumenter: [
       {

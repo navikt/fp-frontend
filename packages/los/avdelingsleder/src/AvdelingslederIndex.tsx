@@ -95,7 +95,7 @@ export const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Pro
           size="small"
           hideLabel
           label=""
-          onChange={(e: any) => {
+          onChange={e => {
             const index = e.target.value;
             setValueInLocalStorage('avdelingEnhet', index);
             setValgtAvdelingEnhet(index);

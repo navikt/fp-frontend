@@ -1,9 +1,10 @@
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
+import { BTag } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { AksjonspunktKode, KodeverkType, TilretteleggingType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -104,8 +105,6 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
-  const bTag = useCallback((chunks: any) => <b>{chunks}</b>, []);
-
   return (
     <Form
       formMethods={formMethods}
@@ -137,7 +136,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
             skalKunneInnvilge={finnesUttak}
             customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
             customVilkarIkkeOppfyltText={
-              <FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: bTag }} />
+              <FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: BTag }} />
             }
           />
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} notRequired={erVilkarOk} />

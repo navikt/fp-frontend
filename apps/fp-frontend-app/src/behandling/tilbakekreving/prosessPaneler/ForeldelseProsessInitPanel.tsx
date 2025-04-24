@@ -1,6 +1,7 @@
 import { type ComponentProps, use } from 'react';
 import { useIntl } from 'react-intl';
 
+import type { BeregnBeløpParams } from '@navikt/ft-prosess-tilbakekreving';
 import {
   ForeldelseAksjonspunktCodes,
   ForeldelseProsessIndex,
@@ -14,7 +15,7 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
-import { type BeregnBeløpParams, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';

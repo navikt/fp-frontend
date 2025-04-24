@@ -42,7 +42,7 @@ export const Default: Story = {
           begrunnelse: 'Flyttet',
         },
       },
-      saksnummer: 1234,
+      saksnummer: '1234',
       personnummer: '1212',
       navn: 'Espen Utvikler',
       system: 'SAK',

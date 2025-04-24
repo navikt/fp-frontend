@@ -135,8 +135,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
 
   const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
 
-  const onSubmit = (values: FormValues): Promise<any> =>
-    submitCallback(transformValues(values, aksjonspunkterForPanel));
+  const onSubmit = (values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel));
 
   return (
     <VStack gap="4">

@@ -116,7 +116,7 @@ export const OppgaveRad = ({ oppgave, reserverOppgave }: Props) => {
           <Tooltip content={intl.formatMessage({ id: 'OppgaverTabell.Saksnr' })}>
             <CopyButton
               activeIcon={<CheckmarkIcon className={styles.image} aria-hidden />}
-              copyText={oppgave.saksnummer.toString()}
+              copyText={oppgave.saksnummer}
               icon={<FilesIcon aria-hidden className={styles.image} />}
             />
           </Tooltip>

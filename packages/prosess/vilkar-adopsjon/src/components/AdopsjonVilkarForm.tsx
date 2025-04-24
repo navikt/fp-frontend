@@ -3,6 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
+import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
@@ -87,8 +88,6 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
-  const bTag = (...chunks: any) => <b>{chunks}</b>;
-
   return (
     <Form
       formMethods={formMethods}
@@ -114,7 +113,7 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
             avslagsarsaker={avslagsarsaker}
             readOnly={isReadOnly}
             customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
-            customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: bTag }} />}
+            customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
           />
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>

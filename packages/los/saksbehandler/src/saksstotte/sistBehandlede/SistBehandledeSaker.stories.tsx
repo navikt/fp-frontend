@@ -35,7 +35,7 @@ export const Default: Story = {
               id: 1,
               personnummer: '334342323',
               navn: 'Espen Utvikler',
-              saksnummer: 13232323,
+              saksnummer: '13232323',
               behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
             } as Oppgave,
           ]),

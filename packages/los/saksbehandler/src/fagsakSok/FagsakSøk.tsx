@@ -16,7 +16,7 @@ const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): bool
   return (
     fagsaker.length > 1 ||
     (fagsaker.length === 1 &&
-      fagsakOppgaver.filter(oppgave => oppgave.saksnummer.toString() === fagsaker[0].saksnummer).length > 1)
+      fagsakOppgaver.filter(oppgave => oppgave.saksnummer === fagsaker[0].saksnummer).length > 1)
   );
 };
 
