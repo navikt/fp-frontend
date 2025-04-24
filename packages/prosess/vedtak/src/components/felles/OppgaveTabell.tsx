@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
-import type { Oppgave, OppgaveId } from '@navikt/fp-types';
+import type { Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { Beskrivelser } from './Beskrivelser.tsx';
@@ -14,7 +14,7 @@ import styles from './oppgaveTabell.module.css';
 
 interface Props {
   oppgaver: Oppgave[];
-  ferdigstillOppgave: (oppgaveId: OppgaveId) => Promise<void>;
+  ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
 }
 
 export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave }: Props) => {
@@ -39,7 +39,7 @@ export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave }: Props) => {
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <Table.Row key={oppgave.oppgaveId.id} className={styles.row}>
+            <Table.Row key={oppgave.oppgaveId} className={styles.row}>
               <Table.DataCell>
                 <BodyShort size="small">
                   {alleKodeverk[KodeverkType.OPPGAVE_TYPE].find(o => o.kode === oppgave.oppgavetype)?.navn}

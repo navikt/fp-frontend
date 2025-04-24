@@ -1,4 +1,4 @@
-import type { FeilutbetalingÅrsak,FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
@@ -39,7 +39,6 @@ import type {
   Medlemskap,
   OmsorgOgRett,
   Oppgave,
-  OppgaveId,
   OpprettVergeParams,
   Opptjening,
   PeriodeSoker,
@@ -529,10 +528,10 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
-const getFerdigstillOppgave = (links: ApiLink[]) => (params: OppgaveId) =>
+const getFerdigstillOppgave = (links: ApiLink[]) => (oppgaveId: string) =>
   kyExtended
     .post(getUrlFromRel('FERDIGSTILL_OPPGAVE', links), {
-      json: params,
+      json: oppgaveId,
     })
     .json<void>();
 

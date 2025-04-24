@@ -9,7 +9,6 @@ import type {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Oppgave,
-  OppgaveId,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -36,7 +35,7 @@ interface Props {
   vilkar: Vilkar[];
   previewCallback: (data: ForhandsvisData) => void;
   oppgaver?: Oppgave[];
-  ferdigstillOppgave: (oppgaveId: OppgaveId) => Promise<void>;
+  ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
 }
 
 export const VedtakProsessIndex = ({

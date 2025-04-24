@@ -15,7 +15,7 @@ import {
   KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave, OppgaveId } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext.tsx';
@@ -70,7 +70,7 @@ interface Props {
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
-  ferdigstillOppgave: (oppgaveId: OppgaveId) => Promise<void>;
+  ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
   setHarValgtÅRedigereVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
   harValgtÅRedigereVedtaksbrev: boolean;
 }

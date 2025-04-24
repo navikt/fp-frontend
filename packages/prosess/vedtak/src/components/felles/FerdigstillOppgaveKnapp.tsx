@@ -3,13 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button } from '@navikt/ds-react';
 
-import type { Oppgave, OppgaveId } from '@navikt/fp-types';
+import type { Oppgave } from '@navikt/fp-types';
 
 import styles from './ferdigstillOppgaveKnapp.module.css';
 
 interface Props {
   oppgave: Oppgave;
-  ferdigstillOppgave: (oppgaveId: OppgaveId) => Promise<void>;
+  ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
 }
 
 export const FerdigstillOppgaveKnapp = ({ oppgave, ferdigstillOppgave }: Props) => {

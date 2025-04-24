@@ -9,7 +9,7 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, OppgaveId, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -96,7 +96,7 @@ export const VedtakSvpProsessStegInitPanel = () => {
   });
 
   const { mutateAsync: ferdigstillOppgave } = useMutation({
-    mutationFn: (values: OppgaveId) => api.ferdigstillOppgave(values),
+    mutationFn: (values: string) => api.ferdigstillOppgave(values),
     onSuccess: () => refetchOppgaver(),
   });
 

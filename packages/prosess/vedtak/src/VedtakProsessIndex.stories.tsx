@@ -27,7 +27,6 @@ import type {
   BeregningsresultatEs,
   BrevOverstyring,
   Fagsak,
-  OppgaveId,
   Vilkar,
 } from '@navikt/fp-types';
 
@@ -84,6 +83,7 @@ const meta = {
   args: {
     vilkar: defaultVilkar,
     previewCallback: action('button-click'),
+    ferdigstillOppgave: action('button-click') as (oppgaveId: string) => Promise<void>,
   },
   render: args => {
     const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
@@ -129,7 +129,6 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -145,7 +144,6 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -166,7 +164,6 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -185,7 +182,6 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -204,7 +200,6 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -228,7 +223,6 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
     } as Beregningsgrunnlag,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -258,7 +252,6 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
     } as Beregningsgrunnlag,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -313,7 +306,6 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
     } as Beregningsgrunnlag,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -340,7 +332,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     },
     oppgaver: [
       {
-        oppgaveId: { id: '1' },
+        oppgaveId: '1',
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
         beskrivelser: [
           {
@@ -351,7 +343,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         dokumenter: [],
       },
       {
-        oppgaveId: { id: '2' },
+        oppgaveId: '2',
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
         beskrivelser: [
           {
@@ -370,7 +362,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         dokumenter: [],
       },
       {
-        oppgaveId: { id: '3' },
+        oppgaveId: '3',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
         beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] }],
         dokumenter: [
@@ -392,7 +384,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ],
       },
       {
-        oppgaveId: { id: '4' },
+        oppgaveId: '4',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
         beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra studiested/skole'] }],
         dokumenter: [
@@ -404,7 +396,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ],
       },
       {
-        oppgaveId: { id: '5' },
+        oppgaveId: '5',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
         beskrivelser: [
           {
@@ -444,7 +436,6 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -464,7 +455,6 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -483,7 +473,6 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -499,7 +488,6 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -526,7 +514,6 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
     } as Beregningsgrunnlag,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -548,7 +535,6 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -564,7 +550,6 @@ export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOversty
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -591,7 +576,6 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -615,7 +599,6 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -638,7 +621,6 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -662,7 +644,6 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -684,7 +665,6 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -708,7 +688,6 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -732,7 +711,6 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -752,7 +730,6 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -783,7 +760,6 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
     } as Beregningsgrunnlag,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -823,7 +799,6 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
     ],
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -854,7 +829,6 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
     } as Beregningsgrunnlag,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -876,7 +850,6 @@ export const LegacyOverstyring: Story = {
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -898,7 +871,6 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
 
@@ -924,6 +896,5 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
-    ferdigstillOppgave: action('button-click') as (oppgaveId: OppgaveId) => Promise<void>,
   },
 };
