@@ -4,9 +4,8 @@ import { FileIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack } from '@navikt/ds-react';
 
 import type { OppgaveDokument } from '@navikt/fp-types';
+import { DokumentLink } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
-
-import { DokumentLink } from '../../../../../ui-komponenter';
 
 interface Props {
   dokument: OppgaveDokument;
@@ -23,7 +22,7 @@ export const DokumentVisning = ({ dokument }: Props) => {
       dokumentId={dokument.dokumentId}
       dokumentTittel={tittel}
     >
-      <HStack gap="1">
+      <HStack gap="1" wrap={false}>
         <FileIcon width="20" height="20" aria-label={intl.formatMessage({ id: 'DokumentVisning.FilIkon' })} />
         <BodyShort size="small">{tittel}</BodyShort>
       </HStack>

@@ -76,6 +76,8 @@
   "Dokumenter.VisDokumenter": "Vis dokumenter ({antall})",
   "Dokumenter.SkjulDokumenter": "Skjul dokumenter ({antall})",
 
+  "FerdigstillOppgaveKnapp.FerdigstillOppgave": "Ferdigstill oppgave i Gosys",
+
   "LegacyOverstyrtVedtaksbrev.ForhandsvisManueltVedtaksbrev": "Vis manuelt brev",
   "LegacyOverstyrtVedtaksbrev.Overskrift": "Overskrift",
   "LegacyOverstyrtVedtaksbrev.Innhold": "Innhold i brev til søker",

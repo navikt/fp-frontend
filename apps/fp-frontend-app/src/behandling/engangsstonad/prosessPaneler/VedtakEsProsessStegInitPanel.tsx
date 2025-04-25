@@ -68,7 +68,11 @@ export const VedtakEsProsessStegInitPanel = () => {
   );
   const { data: simuleringResultat, isFetching: isSrFetching } = useQuery(api.simuleringResultatOptions(behandling));
   const { data: tilbakekrevingValg, isFetching: isTvFetching } = useQuery(api.tilbakekrevingValgOptions(behandling));
-  const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
+  const {
+    data: oppgaver,
+    isFetching: isOFetching,
+    refetch: refetchOppgaver,
+  } = useQuery(api.oppgaverOptions(behandling));
 
   const { mutateAsync: hentBrevOverstyring, isPending } = useMutation({
     mutationFn: () => api.hentBrevOverstyring(),
@@ -87,6 +91,11 @@ export const VedtakEsProsessStegInitPanel = () => {
         fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
+  });
+
+  const { mutateAsync: ferdigstillOppgave } = useMutation({
+    mutationFn: (values: string) => api.ferdigstillOppgave(values),
+    onSuccess: () => refetchOppgaver(),
   });
 
   const { aksjonspunkter } = standardPanelProps;
@@ -141,6 +150,7 @@ export const VedtakEsProsessStegInitPanel = () => {
               tilbakekrevingvalg={tilbakekrevingValg}
               vilkar={vilkår}
               oppgaver={oppgaver}
+              ferdigstillOppgave={ferdigstillOppgave}
             />
           ) : (
             <LoadingPanel />

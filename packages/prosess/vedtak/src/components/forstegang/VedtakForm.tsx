@@ -177,6 +177,7 @@ interface Props {
   vilkar?: Vilkar[];
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
+  ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
 }
 
 export const VedtakForm = ({
@@ -187,6 +188,7 @@ export const VedtakForm = ({
   vilkar,
   beregningErManueltFastsatt,
   oppgaver,
+  ferdigstillOppgave,
 }: Props) => {
   const { behandling, fagsak, alleKodeverk, submitCallback, isReadOnly } =
     usePanelDataContext<VedtakAksjonspunkter[]>();
@@ -232,6 +234,7 @@ export const VedtakForm = ({
         tilbakekrevingtekst={tilbakekrevingtekst}
         erBehandlingEtterKlage={erBehandlingEtterKlage}
         oppgaver={oppgaver}
+        ferdigstillOppgave={ferdigstillOppgave}
         setHarValgtÅRedigereVedtaksbrev={setHarValgtÅRedigereVedtaksbrev}
         harValgtÅRedigereVedtaksbrev={harValgtÅRedigereVedtaksbrev}
         renderPanel={(skalBrukeOverstyrendeFritekstBrev, erInnvilget, erAvslatt) => {
