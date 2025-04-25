@@ -17,6 +17,7 @@ const {
   GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring,
   LegacyOverstyring,
   LegacyOverstyringHarSendtTilbakeFraBeslutter,
+  SkalIkkeProduseresBrev,
 } = composeStories(stories);
 
 describe('VedtakProsessIndex', () => {
@@ -421,5 +422,13 @@ describe('VedtakProsessIndex', () => {
     await userEvent.click(screen.getByText('Rediger vedtaksbrev'));
 
     expect(screen.getByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
+  });
+
+  it('skal vise en infotekst og skjul editeringslenke når brev ikke skal sendes ut', async () => {
+    render(<SkalIkkeProduseresBrev />);
+
+    expect(await screen.findByText('Vedtak')).toBeInTheDocument();
+    expect(screen.getByText('Det blir ikke sendt vedtaksbrev i denne behandlingen')).toBeInTheDocument();
+    expect(screen.queryByText('Rediger vedtaksbrev')).not.toBeInTheDocument();
   });
 });

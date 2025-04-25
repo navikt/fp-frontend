@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
 
 import {
   AksjonspunktKode,
@@ -118,6 +118,8 @@ export const VedtakFellesPanel = ({
 
   const harValgtÅRedigereMenHarIkkeRedigert = harValgtÅRedigereVedtaksbrev && !harRedigertBrev;
 
+  const skalProdusereBrev = behandlingsresultat.vedtaksbrevStatus === 'VEDTAKSBREV_PRODUSERES';
+
   return (
     <VStack gap="4">
       <HStack gap="2">
@@ -166,7 +168,7 @@ export const VedtakFellesPanel = ({
           )}
         </div>
         <div>
-          {!isReadOnly && !harValgtÅRedigereVedtaksbrev && (
+          {skalProdusereBrev && !isReadOnly && !harValgtÅRedigereVedtaksbrev && (
             <Link
               href="#"
               onClick={(e: React.MouseEvent) => {
@@ -181,7 +183,7 @@ export const VedtakFellesPanel = ({
               </span>
             </Link>
           )}
-          {(isReadOnly || harValgtÅRedigereVedtaksbrev) && (
+          {skalProdusereBrev && (isReadOnly || harValgtÅRedigereVedtaksbrev) && (
             <>
               <PencilIcon className={styles.blyantDisablet} />
               <BodyShort size="small" className={styles.disabletLink}>
@@ -191,6 +193,13 @@ export const VedtakFellesPanel = ({
           )}
         </div>
       </HStack>
+      {!skalProdusereBrev && (
+        <Alert variant="info" size="small" className={styles.alert}>
+          <BodyShort size="small">
+            <FormattedMessage id="VedtakFellesPanel.IngenVedtaksbrev" />
+          </BodyShort>
+        </Alert>
+      )}
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
       {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
       <VStack gap="8">

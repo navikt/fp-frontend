@@ -44,6 +44,7 @@
   "VedtakFellesPanel.UtkastVedtaksbrev": "Utkast vedtaksbrev",
   "VedtakFellesPanel.Forkast": "Dersom du forkaster det redigerte brevet, vil det erstattes av det automatisk genererte brevet",
   "VedtakFellesPanel.Ok": "Forkast redigert brev",
+  "VedtakFellesPanel.IngenVedtaksbrev": "Det blir ikke sendt vedtaksbrev i denne behandlingen",
 
   "VedtakHelpTextPanel.Vurder": "Vurder følgende før du sender til godkjenning:",
 
