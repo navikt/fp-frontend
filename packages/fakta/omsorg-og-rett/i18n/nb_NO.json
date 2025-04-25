@@ -1,6 +1,7 @@
 {
   "OmsorgOgRettInfoPanel.VurderOmAleneomsorg": "Vurder om søker har aleneomsorg for barnet.",
   "OmsorgOgRettInfoPanel.VurderAndreForelderRett": "Vurder om den andre forelderen har rett til foreldrepenger.",
+  "OmsorgOgRettInfoPanel.Overstyring": "Vurder overstyrt rettigshetstype.",
 
   "AleneomsorgForm.Aleneomsorg": "Søker har oppgitt å ha aleneomsorg for barnet",
   "AleneomsorgForm.HarAleneomsorg": "Søker har aleneomsorg for barnet",
@@ -35,6 +36,15 @@
   "AnnenPartsYtelser.Foreldrepenger": "Er annen part innvilget foreldrepenger?",
   "AnnenPartsYtelser.Foreldrepenger.Svar": "{foreldrepenger, select, JA {Ja} other {Nei}}",
   "AnnenPartsYtelser.Engangsstønad": "Er annen part innvilget engangsstønad?",
-  "AnnenPartsYtelser.Engangsstønad.Svar": "{engangsstønad, select, JA {Ja} other {Nei}}"
+  "AnnenPartsYtelser.Engangsstønad.Svar": "{engangsstønad, select, JA {Ja} other {Nei}}",
+
+  "Rettighetstype.Tittel": "Overstyr rettighetstype",
+  "Rettighetstype.Aleneomsorg": "Aleneomsorg",
+  "Rettighetstype.BeggeRett": "Begge rett",
+  "Rettighetstype.BeggeRettEØS": "Begge rett EØS",
+  "Rettighetstype.BareMorRett": "Bare mor rett",
+  "Rettighetstype.BareFarRett": "Bare far/medmor rett",
+  "Rettighetstype.BareFarRettMorUfør": "Bare far/medmor rett, mor er ufør",
+  "Rettighetstype.SelectLabel": "Rettighetstype"
 
 }

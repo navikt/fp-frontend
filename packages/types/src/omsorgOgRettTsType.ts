@@ -4,6 +4,7 @@ export type OmsorgOgRett = {
   søknad: Søknad;
   registerdata: RegisterData | null;
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
+  rettighetstype: Rettighetstype | null;
   relasjonsRolleType: RelasjonsRolleType;
 };
 
@@ -36,4 +37,13 @@ export enum Verdi {
   JA = 'JA',
   NEI = 'NEI',
   IKKE_RELEVANT = 'IKKE_RELEVANT',
+}
+
+export enum Rettighetstype {
+  ALENEOMSORG = 'ALENEOMSORG',
+  BEGGE_RETT = 'BEGGE_RETT',
+  BEGGE_RETT_EØS = 'BEGGE_RETT_EØS',
+  BARE_MOR_RETT = 'BARE_MOR_RETT',
+  BARE_FAR_RETT = 'BARE_FAR_RETT',
+  BARE_FAR_RETT_MOR_UFØR = 'BARE_FAR_RETT_MOR_UFØR',
 }

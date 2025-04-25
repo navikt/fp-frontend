@@ -1,5 +1,5 @@
 import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { type OmsorgOgRett, Verdi } from '@navikt/fp-types';
+import { type OmsorgOgRett, Rettighetstype, Verdi } from '@navikt/fp-types';
 
 export const omsorgOgRett: OmsorgOgRett = {
   søknad: {
@@ -7,7 +7,7 @@ export const omsorgOgRett: OmsorgOgRett = {
     annenpartIdent: null,
     annenpartBostedsland: null,
     annenpartRettighet: {
-      harRettNorge: Verdi.IKKE_RELEVANT,
+      harRettNorge: Verdi.JA,
       harOppholdEØS: Verdi.IKKE_RELEVANT,
       harRettEØS: Verdi.IKKE_RELEVANT,
       harUføretrygd: Verdi.IKKE_RELEVANT,
@@ -20,4 +20,5 @@ export const omsorgOgRett: OmsorgOgRett = {
   },
   manuellBehandlingResultat: null,
   relasjonsRolleType: RelasjonsRolleType.MOR,
+  rettighetstype: Rettighetstype.BEGGE_RETT,
 };
