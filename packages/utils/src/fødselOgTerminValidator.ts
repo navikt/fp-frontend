@@ -1,10 +1,16 @@
-import { dateBeforeOrEqual, maxValue, minValue } from '@navikt/ft-form-validators';
+import {
+  dateAfterOrEqual,
+  dateBeforeOrEqual,
+  dateBeforeOrEqualToToday,
+  maxValue,
+  minValue,
+} from '@navikt/ft-form-validators';
 import { createIntl, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import messages from '../../i18n/nb_NO.json';
+import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
@@ -32,6 +38,12 @@ export const terminBekreftelseBeforeTodayOrTermindato = (
   const grenseDato = termin?.isValid() && termin?.isBefore(today) ? termin : today;
 
   return dateBeforeOrEqual(grenseDato)(terminbekreftelseDato);
+};
+
+export const dødsdatoAfterOrEqualFødselsdato = (fødselsdato: string | undefined, dødsdato: string) => {
+  const fødsel = fødselsdato ? dayjs(fødselsdato, ISO_DATE_FORMAT) : minFodselsdato();
+
+  return dateAfterOrEqual(fødsel)(dødsdato) || dateBeforeOrEqualToToday(dødsdato);
 };
 
 export const terminErRundtFodselsdato = (fodselsdato: string | undefined, termindato: string | undefined) => {

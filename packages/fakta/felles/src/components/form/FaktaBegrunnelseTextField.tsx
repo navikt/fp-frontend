@@ -22,6 +22,7 @@ type Props = {
   hasReadOnlyLabel?: boolean;
   hasVurderingText?: boolean;
   name?: string;
+  size?: 'small' | 'medium';
 };
 
 export type FormValues = {
@@ -43,6 +44,7 @@ export const FaktaBegrunnelseTextField = ({
   hasReadOnlyLabel = false,
   hasVurderingText = false,
   name = 'begrunnelse',
+  size,
 }: Props) => {
   const code = hasVurderingText ? 'FaktaBegrunnelseTextField.Vurdering' : 'FaktaBegrunnelseTextField.BegrunnEndringene';
 
@@ -59,6 +61,7 @@ export const FaktaBegrunnelseTextField = ({
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
           readOnly={isReadOnly}
+          size={size}
         />
       )}
     </RawIntlProvider>

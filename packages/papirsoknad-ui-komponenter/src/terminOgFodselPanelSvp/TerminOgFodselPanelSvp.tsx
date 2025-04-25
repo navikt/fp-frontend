@@ -12,14 +12,15 @@ import {
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { ErBarnetFodt } from '../terminOgFodselPanel/components/ErBarnetFodt';
 import {
   maxFodselsdato,
   maxTermindato,
   minFodselsdato,
   minTermindato,
   terminErRundtFodselsdato,
-} from '../terminOgFodselPanel/validator';
+} from '@navikt/fp-utils';
+
+import { ErBarnetFodt } from '../terminOgFodselPanel/components/ErBarnetFodt';
 
 import messages from '../../i18n/nb_NO.json';
 
