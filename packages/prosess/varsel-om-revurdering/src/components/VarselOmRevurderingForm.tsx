@@ -20,7 +20,7 @@ import {
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -49,10 +49,6 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   begrunnelse: aksjonspunkter[0].begrunnelse ?? '',
   sendVarsel: undefined,
 });
-
-const nullSafe = (value: FamilieHendelse | null): FamilieHendelse => value ?? ({} as FamilieHendelse);
-
-const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 interface Props {
   familiehendelse: FamilieHendelseSamling;
@@ -114,15 +110,11 @@ export const VarselOmRevurderingForm = ({
     });
   };
 
-  const { avklartBarn } = nullSafe(familiehendelse.register);
-  const { termindato } = nullSafe(familiehendelse.gjeldende);
-  const { vedtaksDatoSomSvangerskapsuke } = nullSafe(familiehendelse.gjeldende);
-
   const erAutomatiskRevurdering = behandling.behandlingÅrsaker.reduce(
     (result, current) => result || current.erAutomatiskRevurdering,
     false,
   );
-  const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] ?? EMPTY_ARRAY;
+  const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] ?? [];
   const language = getLanguageFromSprakkode(behandling.språkkode);
 
   return (
@@ -140,12 +132,11 @@ export const VarselOmRevurderingForm = ({
               {erAutomatiskRevurdering && (
                 <FodselSammenligningIndex
                   behandlingsTypeKode={behandling.type}
-                  avklartBarn={avklartBarn}
-                  termindato={termindato}
-                  vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
                   soknad={soknad}
                   soknadOriginalBehandling={soknadOriginalBehandling}
                   familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+                  registerFamiliehendelse={familiehendelse.register ?? undefined}
+                  gjeldendeFamilieHendelse={familiehendelse.gjeldende}
                 />
               )}
               <RadioGroupPanel

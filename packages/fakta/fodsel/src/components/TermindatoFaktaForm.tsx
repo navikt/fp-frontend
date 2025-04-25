@@ -1,16 +1,17 @@
-import { useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField } from '@navikt/ft-form-hooks';
+import { Alert, HStack, VStack } from '@navikt/ds-react';
+import { Datepicker, Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './termindatoFaktaForm.module.css';
 
@@ -32,9 +33,8 @@ export type FormValues = {
 interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  readOnly: boolean;
   submittable: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+  aksjonspunkt: Aksjonspunkt;
 }
 
 /**
@@ -42,96 +42,90 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av termindato (Fødselsvilkåret).
  */
-export const TermindatoFaktaForm = ({
-  readOnly,
-  soknad,
-  gjeldendeFamiliehendelse,
-  submittable,
-  alleMerknaderFraBeslutter,
-}: Props) => {
+export const TermindatoFaktaForm = ({ soknad, gjeldendeFamiliehendelse, submittable, aksjonspunkt }: Props) => {
   const intl = useIntl();
   const editedStatus = isFieldEdited(soknad, gjeldendeFamiliehendelse);
 
-  const { watch } = useFormContext<FormValues>();
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<BekreftTerminbekreftelseAp>();
 
-  const termindato = watch('termindato');
-  const utstedtdato = watch('utstedtdato');
-  const begrunnelse = watch('begrunnelse');
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+
+  const formMethods = useForm<FormValues>({
+    defaultValues: mellomlagretFormData ?? buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkt),
+  });
+
+  const termindato = formMethods.watch('termindato');
+  const utstedtdato = formMethods.watch('utstedtdato');
+  const begrunnelse = formMethods.watch('begrunnelse');
+
   const isForTidligTerminbekreftelse = erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato);
 
-  const { avklartBarn } = gjeldendeFamiliehendelse;
-  const fodselsdatoTps = avklartBarn && avklartBarn.length > 0 ? avklartBarn[0].fodselsdato : undefined;
-  const antallBarnTps = avklartBarn ? avklartBarn.length : 0;
-  const isOverridden = gjeldendeFamiliehendelse.erOverstyrt || false;
-
   return (
-    <>
-      <FaktaGruppe
-        title={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.TERMINBEKREFTELSE]}
+    <FaktaGruppe
+      title={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.TERMINBEKREFTELSE]}
+    >
+      <Form
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values))}
+        setDataOnUnmount={setMellomlagretFormData}
       >
-        <HStack gap="4">
-          <Datepicker
-            name="utstedtdato"
-            label={intl.formatMessage({ id: 'TermindatoFaktaForm.UtstedtDato' })}
-            validate={[required, hasValidDate]}
-            isReadOnly={readOnly}
-            isEdited={editedStatus.utstedtdato}
+        <VStack gap="2">
+          <HStack gap="4">
+            <Datepicker
+              name="utstedtdato"
+              label={intl.formatMessage({ id: 'TermindatoFaktaForm.UtstedtDato' })}
+              validate={[required, hasValidDate]}
+              isReadOnly={isReadOnly}
+              isEdited={editedStatus.utstedtdato}
+            />
+            <Datepicker
+              name="termindato"
+              label={intl.formatMessage({ id: 'TermindatoFaktaForm.Termindato' })}
+              validate={[required, hasValidDate]}
+              isReadOnly={isReadOnly}
+              isEdited={editedStatus.termindato}
+            />
+            <InputField
+              name="antallBarn"
+              label={intl.formatMessage({ id: 'TermindatoFaktaForm.AntallBarn' })}
+              parse={value => {
+                const parsedValue = parseInt(value.toString(), 10);
+                return Number.isNaN(parsedValue) ? value : parsedValue;
+              }}
+              validate={[required, hasValidInteger, minValue1, maxValue9]}
+              readOnly={isReadOnly}
+              className={styles.bredde}
+              isEdited={editedStatus.antallBarn}
+            />
+          </HStack>
+
+          <FaktaBegrunnelseTextField
+            isSubmittable={submittable}
+            isReadOnly={isReadOnly}
+            hasBegrunnelse={!!begrunnelse}
           />
-          <Datepicker
-            name="termindato"
-            label={intl.formatMessage({ id: 'TermindatoFaktaForm.Termindato' })}
-            validate={[required, hasValidDate]}
-            isReadOnly={readOnly}
-            isEdited={editedStatus.termindato}
-          />
-          <InputField
-            name="antallBarn"
-            label={intl.formatMessage({ id: 'TermindatoFaktaForm.AntallBarn' })}
-            parse={value => {
-              const parsedValue = parseInt(value.toString(), 10);
-              return Number.isNaN(parsedValue) ? value : parsedValue;
-            }}
-            validate={[required, hasValidInteger, minValue1, maxValue9]}
-            readOnly={readOnly}
-            className={styles.bredde}
-            isEdited={editedStatus.antallBarn}
-          />
-        </HStack>
-      </FaktaGruppe>
-      <VStack gap="4">
-        {fodselsdatoTps && !isOverridden && (
-          <FaktaGruppe title={intl.formatMessage({ id: 'TermindatoFaktaForm.OpplysningerTPS' })}>
-            <HStack gap="10">
-              <VStack gap="2">
-                <Label size="small">
-                  <FormattedMessage id="TermindatoFaktaForm.FodselsdatoTps" />
-                </Label>
-                <BodyShort size="small">
-                  <DateLabel dateString={fodselsdatoTps} />
-                </BodyShort>
-              </VStack>
-              <VStack gap="2">
-                <Label size="small">
-                  <FormattedMessage id="TermindatoFaktaForm.AntallBarnTps" />
-                </Label>
-                <BodyShort size="small">{antallBarnTps}</BodyShort>
-              </VStack>
-            </HStack>
-          </FaktaGruppe>
-        )}
-        <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
-        {isForTidligTerminbekreftelse && (
-          <Alert variant="warning" className={styles.marginBottom}>
-            <FormattedMessage id="TermindatoFaktaForm.AdvarselForTidligUtstedtdato" />
-          </Alert>
-        )}
-      </VStack>
-    </>
+          {isForTidligTerminbekreftelse && (
+            <Alert variant="warning" className={styles.marginBottom}>
+              <FormattedMessage id="TermindatoFaktaForm.AdvarselForTidligUtstedtdato" />
+            </Alert>
+          )}
+
+          {aksjonspunkt && !isReadOnly && (
+            <FaktaSubmitButton
+              isSubmittable={submittable}
+              isReadOnly={isReadOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
+          )}
+        </VStack>
+      </Form>
+    </FaktaGruppe>
   );
 };
 
-TermindatoFaktaForm.buildInitialValues = (
+const buildInitialValues = (
   soknad: Soknad,
   familiehendelse: FamilieHendelse,
   aksjonspunkt: Aksjonspunkt,
@@ -146,7 +140,7 @@ TermindatoFaktaForm.buildInitialValues = (
   };
 };
 
-TermindatoFaktaForm.transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
+const transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
   kode: AksjonspunktKode.TERMINBEKREFTELSE,
   utstedtdato: values.utstedtdato!,
   termindato: values.termindato!,

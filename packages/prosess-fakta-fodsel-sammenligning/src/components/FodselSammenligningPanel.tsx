@@ -1,25 +1,20 @@
-import { FormattedMessage } from 'react-intl';
-
-import { BodyShort, Heading, HStack, Table, Tag } from '@navikt/ds-react';
-import { dateFormat } from '@navikt/ft-utils';
+import { HGrid, HStack, VStack } from '@navikt/ds-react';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
-import { FodselSammenligningOtherPanel } from './FodselSammenligningOtherPanel';
+import { FaktaFødselFraFReg } from './fakta/FaktaFødselFraFReg';
+import { FaktaFødselFraGjeldende } from './fakta/FaktaFødselFraGjeldende';
+import { FaktaFødselFraSøknad } from './fakta/FaktaFødselFraSøknad';
 import { FodselSammenligningRevurderingPanel } from './FodselSammenligningRevurderingPanel';
-
-import styles from './fodselSammenligningPanel.module.css';
 
 interface Props {
   behandlingsTypeKode: string;
-  avklartBarn: AvklartBarn[];
-  nrOfDodfodteBarn: number;
   soknad: Soknad;
   soknadOriginalBehandling?: Soknad;
   familiehendelseOriginalBehandling?: FamilieHendelse;
-  termindato?: string;
-  vedtaksDatoSomSvangerskapsuke?: number;
+  gjeldendeFamilieHendelse: FamilieHendelse | undefined;
+  registerFamiliehendelse: FamilieHendelse | undefined;
 }
 
 /**
@@ -29,80 +24,25 @@ interface Props {
  */
 export const FodselSammenligningPanel = ({
   behandlingsTypeKode,
-  avklartBarn,
-  nrOfDodfodteBarn,
   soknad,
-  vedtaksDatoSomSvangerskapsuke,
-  termindato,
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
+  gjeldendeFamilieHendelse,
+  registerFamiliehendelse,
 }: Props) => (
-  <HStack gap="10">
-    <div className={styles.col}>
-      {behandlingsTypeKode !== BehandlingType.REVURDERING && (
-        <FodselSammenligningOtherPanel soknad={soknad} termindato={termindato} />
-      )}
-      {behandlingsTypeKode === BehandlingType.REVURDERING && (
-        <FodselSammenligningRevurderingPanel
-          soknadOriginalBehandling={soknadOriginalBehandling}
-          familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-          vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-        />
-      )}
-    </div>
-    <div className={styles.col}>
-      <HStack gap="4">
-        <Heading size="small">
-          <FormattedMessage id="FodselsammenligningPanel.OpplysningerTPS" />
-        </Heading>
-        {nrOfDodfodteBarn > 0 && (
-          <Tag variant="info">
-            <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
-          </Tag>
-        )}
-      </HStack>
-      {avklartBarn.length > 0 && (
-        <Table>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="FodselsammenligningPanel.Dodsdato" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col" />
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {avklartBarn.map((barn: AvklartBarn) => {
-              const key = barn.fodselsdato + barn.dodsdato;
-              return (
-                <Table.Row key={key} id={key}>
-                  <Table.DataCell>
-                    <BodyShort size="small">{dateFormat(barn.fodselsdato)}</BodyShort>
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    <BodyShort size="small">{barn.dodsdato ? dateFormat(barn.dodsdato) : '-'}</BodyShort>
-                  </Table.DataCell>
-                  <Table.DataCell>
-                    {barn.dodsdato && (
-                      <Tag variant="info">
-                        <FormattedMessage id="FodselsammenligningPanel.Dod" />
-                      </Tag>
-                    )}
-                  </Table.DataCell>
-                </Table.Row>
-              );
-            })}
-          </Table.Body>
-        </Table>
-      )}
-      {avklartBarn.length === 0 && (
-        <div className={styles.noChildrenInTps}>
-          <BodyShort size="small">-</BodyShort>
-        </div>
-      )}
-    </div>
-  </HStack>
+  <VStack gap="4">
+    <HGrid columns={2} gap="4">
+      <FaktaFødselFraSøknad søknad={soknad} />
+      <FaktaFødselFraFReg registerFamiliehendelse={registerFamiliehendelse} />
+    </HGrid>
+    <FaktaFødselFraGjeldende gjeldendeFamiliehendelse={gjeldendeFamilieHendelse} />
+
+    {behandlingsTypeKode === BehandlingType.REVURDERING && (
+      <FodselSammenligningRevurderingPanel
+        soknadOriginalBehandling={soknadOriginalBehandling}
+        familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
+        vedtaksDatoSomSvangerskapsuke={gjeldendeFamilieHendelse?.vedtaksDatoSomSvangerskapsuke}
+      />
+    )}
+  </VStack>
 );
