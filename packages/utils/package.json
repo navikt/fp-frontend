@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@navikt/fp-types": "workspace:^",
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^",
     "react": "19.1.0"
   },
   "devDependencies": {
@@ -24,11 +25,11 @@
     "@storybook/react-vite": "8.6.12",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.3.0",
-    "eslint": "9.24.0",
+    "eslint": "9.25.1",
     "storybook": "8.6.12",
     "stylelint": "16.18.0",
     "typescript": "5.8.3",
-    "vite": "6.2.5",
-    "vitest": "3.1.1"
+    "vite": "6.3.2",
+    "vitest": "3.1.2"
   }
 }

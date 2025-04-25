@@ -96,8 +96,8 @@ interface Props {
   faktaOmBeregningTilfeller: KodeverkMedNavn[];
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
   onSubmit: (data: FormValues) => void;
-  beslutterFormData?: any;
-  setBeslutterFormData: (data?: any) => void;
+  beslutterFormData?: FormValues;
+  setBeslutterFormData: (data?: FormValues) => void;
 }
 
 export const TotrinnskontrollBeslutterForm = ({

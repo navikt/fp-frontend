@@ -71,7 +71,7 @@ export const SøkResultat = ({ fagsaker, fagsakOppgaver, åpneFagsak, selectOppg
           const fagsakStatusType = fagsakStatuser.find(type => type.kode === fagsak.status);
           const fagsakYtelseType = fagsakYtelseTyper.find(type => type.kode === fagsak.fagsakYtelseType);
 
-          const filtrerteOppgaver = fagsakOppgaver.filter(o => o.saksnummer.toString() === fagsak.saksnummer);
+          const filtrerteOppgaver = fagsakOppgaver.filter(o => o.saksnummer === fagsak.saksnummer);
           const oppgaver = filtrerteOppgaver.map(oppgave => (
             <Table.Row
               key={oppgave.id}

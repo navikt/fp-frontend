@@ -52,7 +52,7 @@ export const Default: Story = {
         },
         reservertTilTidspunkt: '2021-08-02T00:54:25.455',
       },
-      saksnummer: 1234,
+      saksnummer: '1234',
       personnummer: '1212',
       navn: 'Espen Utvikler',
       system: 'SAK',

@@ -3,6 +3,6 @@ export type Reservasjon = Readonly<{
   reservertAvNavn: string;
   reservertTilTidspunkt: string;
   oppgaveId: number;
-  oppgaveSaksNr: number;
+  oppgaveSaksNr: string;
   behandlingType: string;
 }>;

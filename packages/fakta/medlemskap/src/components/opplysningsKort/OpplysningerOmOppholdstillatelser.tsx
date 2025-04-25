@@ -2,7 +2,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyLong, BodyShort, Box, ReadMore, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { FaktaKilde, sorterPerioder } from '@navikt/fp-fakta-felles';
 import { KodeverkType } from '@navikt/fp-kodeverk';
@@ -67,10 +66,7 @@ export const OpplysningerOmOppholdstillatelser = ({
                 return (
                   <Table.Row key={fom + tom}>
                     <Table.DataCell>
-                      <PeriodLabel
-                        dateStringFom={fom}
-                        dateStringTom={tom === null || tom === TIDENES_ENDE ? undefined : tom}
-                      />
+                      <PeriodLabel dateStringFom={fom} dateStringTom={tom ?? undefined} />
                     </Table.DataCell>
                     <Table.DataCell>{oppholdstillatelseTypeKodeverk.find(kv => kv.kode === type)?.navn}</Table.DataCell>
                   </Table.Row>

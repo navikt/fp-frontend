@@ -15,7 +15,7 @@ export type OppgaveStatus = Readonly<{
 export type Oppgave = Readonly<{
   id: number;
   status: OppgaveStatus;
-  saksnummer: number;
+  saksnummer: string;
   personnummer: string;
   navn: string;
   system: string;

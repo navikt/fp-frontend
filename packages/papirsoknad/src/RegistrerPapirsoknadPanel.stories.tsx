@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
-import type { Fagsak } from '@navikt/fp-types';
+import type { Behandling, Fagsak } from '@navikt/fp-types';
 
 import { RegistrerPapirsoknadPanel } from './RegistrerPapirsoknadPanel';
 
@@ -15,13 +15,13 @@ const meta = {
   args: {
     readOnly: false,
     kodeverk: alleKodeverk as any,
-    lagreFullstendig: (values: any) => {
+    lagreFullstendig: values => {
       action('lagreFullstendig')(values);
       return Promise.resolve(values);
     },
     lagreUfullstendig: (...args) => {
       action('lagreUfullstendig')(args);
-      return Promise.resolve();
+      return Promise.resolve({} as Behandling);
     },
   },
 } satisfies Meta<typeof RegistrerPapirsoknadPanel>;

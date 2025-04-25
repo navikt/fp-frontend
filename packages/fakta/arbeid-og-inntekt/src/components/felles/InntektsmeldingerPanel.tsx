@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
@@ -134,7 +133,7 @@ export const InntektsmeldingerPanel = ({
                       <FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" />
                     </Label>
                     <BodyShort size="small">
-                      <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom !== TIDENES_ENDE ? a.tom : undefined} />
+                      <PeriodLabel dateStringFom={a.fom} dateStringTom={a.tom} />
                     </BodyShort>
                     {inntektsmelding && (
                       <>

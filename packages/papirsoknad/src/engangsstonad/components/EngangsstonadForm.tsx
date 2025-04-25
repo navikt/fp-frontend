@@ -28,8 +28,8 @@ interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-  onSubmitUfullstendigsoknad: () => Promise<any>;
-  onSubmit: (values: any) => Promise<any>;
+  onSubmitUfullstendigsoknad: () => Promise<void>;
+  onSubmit: (values: any) => Promise<void>;
 }
 const initialValues = () => ({
   ...MottattDatoPapirsoknadIndex.initialValues(),

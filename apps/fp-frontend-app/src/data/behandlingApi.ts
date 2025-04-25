@@ -1,5 +1,6 @@
-import type { FeilutbetalingÅrsak,FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
+import type { FeilutbetalingÅrsak, FeilutbetalingFakta } from '@navikt/ft-fakta-tilbakekreving-feilutbetaling';
 import type {
+  BeregnBeløpParams,
   DetaljerteFeilutbetalingsperioder,
   FeilutbetalingPerioderWrapper,
 } from '@navikt/ft-prosess-tilbakekreving';
@@ -39,7 +40,6 @@ import type {
   Medlemskap,
   OmsorgOgRett,
   Oppgave,
-  OppgaveId,
   OpprettVergeParams,
   Opptjening,
   PeriodeSoker,
@@ -89,18 +89,6 @@ export type OverstyrteAksjonspunktArgs = {
   overstyrteAksjonspunktDtoer: ({
     '@type': string;
   } & AksjonspunktType)[];
-};
-
-//TODO (Dette bør lagast og eksporterast i ft-panelet)
-type PeriodeMedBelop = {
-  belop: number;
-  fom: string;
-  tom: string;
-  begrunnelse: string;
-};
-export type BeregnBeløpParams = {
-  behandlingUuid: string;
-  perioder: PeriodeMedBelop[];
 };
 
 const kyExtended = ky.extend({
@@ -536,10 +524,10 @@ const getOppgaverOptions = (links: ApiLink[]) => (behandling: Behandling) =>
     staleTime: Infinity,
   });
 
-const getFerdigstillOppgave = (links: ApiLink[]) => (params: OppgaveId) =>
+const getFerdigstillOppgave = (links: ApiLink[]) => (oppgaveId: string) =>
   kyExtended
     .post(getUrlFromRel('FERDIGSTILL_OPPGAVE', links), {
-      json: params,
+      json: oppgaveId,
     })
     .json<void>();
 
@@ -713,7 +701,7 @@ const getBeregneBeløp = (links: ApiLink[]) => (params: BeregnBeløpParams) =>
     .post(getUrlFromRel('BEREGNE_BELØP', links), {
       json: params,
     })
-    .json<void>();
+    .json<{ perioder: { belop: number }[] }>();
 
 const getOppdaterStønadskontoer =
   (links: ApiLink[]) => (params: { behandlingUuid: string; perioder: PeriodeSoker[] }) =>
@@ -721,7 +709,7 @@ const getOppdaterStønadskontoer =
       .post(getUrlFromRel('STONADSKONTOER_GITT_UTTAKSPERIODER', links), {
         json: params,
       })
-      .json<void>();
+      .json<UttakStonadskontoer>();
 
 export const useBehandlingApi = (behandling: Behandling) => {
   const { links } = behandling;

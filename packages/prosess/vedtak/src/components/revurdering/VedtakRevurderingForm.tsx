@@ -23,7 +23,6 @@ import type {
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
   Oppgave,
-  OppgaveId,
   SimuleringResultat,
   TilbakekrevingValg,
   Vilkar,
@@ -228,7 +227,7 @@ interface Props {
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
-  ferdigstillOppgave: (oppgaveId: OppgaveId) => Promise<void>;
+  ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
 }
 
 export const VedtakRevurderingForm = ({

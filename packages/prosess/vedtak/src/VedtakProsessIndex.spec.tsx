@@ -312,19 +312,19 @@ describe('VedtakProsessIndex', () => {
     const ferdigstillOppgaveKnapper = await screen.getAllByText('Ferdigstill oppgave i Gosys');
     await userEvent.click(ferdigstillOppgaveKnapper[0]);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(1);
-    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(1, expect.objectContaining({ id: '1' }));
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(1, '1');
     await userEvent.click(ferdigstillOppgaveKnapper[1]);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(2);
-    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(2, expect.objectContaining({ id: '2' }));
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(2, '2');
     await userEvent.click(ferdigstillOppgaveKnapper[2]);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(3);
-    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(3, expect.objectContaining({ id: '3' }));
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(3, '3');
     await userEvent.click(ferdigstillOppgaveKnapper[3]);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(4);
-    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(4, expect.objectContaining({ id: '4' }));
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(4, '4');
     await userEvent.click(ferdigstillOppgaveKnapper[4]);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(5);
-    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(5, expect.objectContaining({ id: '5' }));
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(5, '5');
   });
 
   it('skal vise innvilget vedtaksbrev for engangsstønad og så fatte vedtak', async () => {

@@ -66,7 +66,7 @@ interface Props {
   children: ReactElement;
 }
 
-const wait = (ms: number): Promise<any> =>
+const wait = (ms: number): Promise<void> =>
   new Promise(resolve => {
     setTimeout(resolve, ms);
   });
