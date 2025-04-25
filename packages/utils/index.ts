@@ -5,3 +5,16 @@ export { notEmpty } from './src/notEmpty';
 export { assertUnreachable } from './src/switchCaseUtils';
 export { åpneDokument, åpneVindu } from './src/åpneDokument';
 export { useTrackRouteParam } from './src/hooks/useTrackRouteParam';
+export {
+  minFodselsdato,
+  maxFodselsdato,
+  minTermindato,
+  maxTermindato,
+  minTerminbekreftelseDato,
+  maxTerminbekreftelseDato,
+  terminBekreftelseBeforeTodayOrTermindato,
+  terminErRundtFodselsdato,
+  dødsdatoAfterOrEqualFødselsdato,
+  validateMinAntallBarn,
+  validateMaxAntallBarn,
+} from './src/fødselOgTerminValidator';
