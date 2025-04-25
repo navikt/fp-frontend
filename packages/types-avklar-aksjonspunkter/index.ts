@@ -13,8 +13,9 @@ export type { BekreftErMedlemVurderingAp } from './src/fakta/BekreftErMedlemVurd
 export type { BekreftOppholdsrettVurderingAp } from './src/fakta/BekreftOppholdsrettVurderingAp';
 export type { BekreftLovligOppholdVurderingAp } from './src/fakta/BekreftLovligOppholdVurderingAp';
 export type { AvklarFortsattMedlemskapAp } from './src/fakta/AvklarFortsattMedlemskapAp';
-export type { BekreftTerminbekreftelseAp } from './src/fakta/BekreftTerminbekreftelseAp';
-export type { SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
+export type { SjekkTerminbekreftelseAp } from './src/fakta/fødsel/SjekkTerminbekreftelseAp';
+export type { SjekkManglendeFodselAp } from './src/fakta/fødsel/SjekkManglendeFodselAp';
+export type { OverstyringFaktaFødselAp } from './src/fakta/fødsel/OverstyringFaktaFødselAp';
 export type { AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
 export type { BekreftUttaksperioderAp } from './src/fakta/BekreftUttaksperioderAp';
 export type { VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
