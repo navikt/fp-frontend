@@ -19,10 +19,10 @@ import {
   flyttReservasjonSaksbehandlerSøkPost,
   forlengReservasjonPost,
   LosUrl,
+  opphevReservasjon,
 } from '../../../data/fplosSaksbehandlerApi';
 import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { NotatModal } from './notat/NotatModal';
-import { OpphevReservasjonModal } from './OpphevReservasjonModal';
 
 import styles from './oppgaveHandlingerMenu.module.css';
 
@@ -36,7 +36,6 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
   const intl = useIntl();
   const queryClient = useQueryClient();
 
-  const [visOpphevReservasjonModal, setVisOpphevReservasjonModal] = useState(false);
   const [visForlengetReservasjonModal, setVisForlengetReservasjonModal] = useState(false);
   const [visReservasjonEndringDatoModal, setVisReservasjonEndringDatoModal] = useState(false);
   const [visFlyttReservasjonModal, setVisFlyttReservasjonModal] = useState(false);
@@ -75,6 +74,15 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
     },
   });
 
+  const { mutate: opphevOppgavereservasjon } = useMutation({
+    mutationFn: () => opphevReservasjon(oppgave.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
+    },
+  });
+
   const {
     mutate: hentSaksbehandler,
     data: saksbehandler,
@@ -102,7 +110,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group aria-label={intl.formatMessage({ id: 'OppgaveHandlingerMenu.Meny' })}>
-            <ActionMenu.Item onSelect={() => setVisOpphevReservasjonModal(true)} icon={<ArrowUndoIcon aria-hidden />}>
+            <ActionMenu.Item onSelect={() => opphevOppgavereservasjon()} icon={<ArrowUndoIcon aria-hidden />}>
               <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" values={{ br: <br /> }} />
             </ActionMenu.Item>
             <ActionMenu.Item onSelect={() => forlengOppgavereservasjon()} icon={<HourglassTopFilledIcon aria-hidden />}>
@@ -126,9 +134,6 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
           </ActionMenu.Group>
         </ActionMenu.Content>
       </ActionMenu>
-      {visOpphevReservasjonModal && (
-        <OpphevReservasjonModal oppgave={oppgave} closeModal={() => setVisOpphevReservasjonModal(false)} />
-      )}
       {visReservasjonEndringDatoModal && (
         <OppgaveReservasjonEndringDatoModal
           closeModal={() => setVisReservasjonEndringDatoModal(false)}

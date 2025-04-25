@@ -68,12 +68,6 @@
   "BehandlingPollingTimoutModal.TimeoutMelding": "Din økt er gått ut på tid, trykk Fortsett",
   "BehandlingPollingTimoutModal.Oppfrisk": "Fortsett",
 
-  "OpphevReservasjonModal.Begrunnelse": "Angi begrunnelse",
-  "OpphevReservasjonModal.Hjelpetekst": "Begrunnelse for frigjøring av reservasjon",
-  "OpphevReservasjonModal.Ok": "OK",
-  "OpphevReservasjonModal.Avbryt": "Avbryt",
-  "OpphevReservasjonModal.LagtTilbake": "Lagt tilbake til kø av saksbehandler",
-
   "FagsakSearch.ZeroSearchResults": "Søket ga ingen treff eller du mangler tilgang til saken",
   "FagsakSearch.FlereSakerEllerBehandlinger": "Velg sak eller behandling du ønsker å åpne/reservere. (Fagsak kan ikke reserveres.)",
 
