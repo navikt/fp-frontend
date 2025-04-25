@@ -1,17 +1,12 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { FodselSammenligningIndex } from './FodselSammenligningIndex';
 
-const avklartBarn = [
-  {
-    fodselsdato: '2019-01-10',
-    dodsdato: '2019-01-10',
-    fnr: '1213200001',
-  },
-];
+import '@navikt/ds-css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const soknad = {
   fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
@@ -20,24 +15,56 @@ const soknad = {
   antallBarn: 1,
 } as Soknad;
 
-const familiehendelse = {
-  avklartBarn: [
-    {
-      fodselsdato: '2019-01-10',
-    },
-  ],
-  termindato: '2019-01-01',
-  antallBarnTermin: 1,
-} as FamilieHendelse;
+const familiehendelseSamling = {
+  oppgitt: {
+    '@type': 'AvklartDataFodselDto',
+    soknadType: 'ST-001',
+    skjaringstidspunkt: '2025-04-22',
+    avklartBarn: [
+      {
+        fodselsdato: '2025-04-22',
+        dodsdato: null,
+      },
+    ],
+    termindato: '2025-04-22',
+    antallBarnTermin: 1,
+  },
+  gjeldende: {
+    '@type': 'AvklartDataFodselDto',
+    soknadType: 'ST-001',
+    skjaringstidspunkt: '2025-04-22',
+    avklartBarn: [
+      {
+        fodselsdato: '2025-04-22',
+        dodsdato: null,
+      },
+    ],
+    termindato: '2025-04-22',
+    antallBarnTermin: 1,
+  },
+  register: {
+    '@type': 'AvklartDataFodselDto',
+    soknadType: 'ST-001',
+    skjaringstidspunkt: '2025-04-22',
+    avklartBarn: [
+      {
+        fodselsdato: '2025-04-22',
+        dodsdato: null,
+      },
+    ],
+    termindato: '2025-04-22',
+    antallBarnTermin: 1,
+  },
+} as FamilieHendelseSamling;
 
 const meta = {
   title: 'prosessOgFakta/prosess-fakta-fodsel-sammenligning',
   component: FodselSammenligningIndex,
   args: {
-    avklartBarn,
-    termindato: '2019-01-01',
+    gjeldendeFamilieHendelse: familiehendelseSamling.gjeldende,
     soknad,
-    familiehendelseOriginalBehandling: familiehendelse,
+    registrertFamiliehendelse: familiehendelseSamling.register ?? undefined,
+    familiehendelseOriginalBehandling: undefined,
   },
 } satisfies Meta<typeof FodselSammenligningIndex>;
 export default meta;
@@ -59,7 +86,6 @@ export const PanelForNårBehandlingstypeErFørstegangssoknad: Story = {
 export const PanelForMedVisningAvSvangerskapsuke: Story = {
   args: {
     behandlingsTypeKode: BehandlingType.REVURDERING,
-    vedtaksDatoSomSvangerskapsuke: 43,
     familiehendelseOriginalBehandling: {
       avklartBarn: [] as AvklartBarn[],
       termindato: '2019-01-01',

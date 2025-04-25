@@ -2,7 +2,7 @@
   "FodselInfoPanel.KontrollerMotTerminbekreftelsen": "Kontroller terminbekreftelse",
   "FodselInfoPanel.KontrollerMotFodselsdokumentasjon": "Kontroller mot opplysningene fra fødselsdokumentasjonen",
 
-  "TermindatoFaktaForm.ApplicationInformation": "Opplysninger om termin oppgitt i søknaden",
+  "TermindatoFaktaForm.ApplicationInformation": "Kontroller opplysninger om termin oppgitt i søknaden",
   "TermindatoFaktaForm.UtstedtDato": "Utstedt dato",
   "TermindatoFaktaForm.Termindato": "Termindato",
   "TermindatoFaktaForm.AntallBarn": "Antall barn",
@@ -13,12 +13,12 @@
   "TermindatoFaktaForm.AntallBarnTps": "Antall barn",
   "TermindatoFaktaForm.AdvarselForTidligUtstedtdato": "Terminbekreftelsen utstedt før 22. svangerskapsuke. Kontakt søker for en nyere terminbekreftelse og sett saken på vent. Fortsett dersom ny bekreftelse ikke skal hentes inn. Behandlingen vil avslås på grunn av manglende dokumentasjon",
 
+  "AvklartBarnFieldArray.FyllInnDokumenterteOpplysninger": "Fyll inn dokumenterte fødselsopplysninger",
   "AvklartBarnFieldArray.Title": "Fødselsdato",
   "AvklartBarnFieldArray.Dodsdato": "Dødsdato",
   "AvklartBarnFieldArray.LeggTilBarn": "Legg til barn",
 
-  "SjekkFodselDokForm.DokumentasjonForeligger": "Dokumentasjon foreligger",
-  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Dokumentasjon foreligger ikke, bruk opplysningene i folkeregisteret",
-  "SjekkFodselDokForm.DokumentasjonAvFodsel": "Dokumentasjon av fødsel",
-  "SjekkFodselDokForm.FyllInnDokumenterteOpplysninger": "Fyll inn dokumenterte opplysninger"
+  "SjekkFodselDokForm.DokumentasjonForeligger": "Ja",
+  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Nei, bruk opplysningene i folkeregisteret",
+  "SjekkFodselDokForm.DokumentasjonAvFodsel": "Foreligger det dokumentasjon om fødsel?"
 }
