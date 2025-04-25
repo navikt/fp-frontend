@@ -6,7 +6,7 @@ import * as stories from './FodselFaktaIndex.stories';
 
 const { AksjonspunktTerminbekreftelse, AksjonspunktSjekkManglendeFødsel } = composeStories(stories);
 
-describe('<FodselFaktaIndex>', () => {
+describe('FodselFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for termin', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
