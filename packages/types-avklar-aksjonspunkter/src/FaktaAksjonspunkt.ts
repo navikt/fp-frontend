@@ -32,8 +32,9 @@ import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
 import type { OverstyringRettigheterAp } from './fakta/OverstyringRettigheterAp';
-import type { SjekkManglendeFødselAp } from './fakta/SjekkManglendeFødselAp';
-import type { SjekkTerminbekreftelseAp } from './fakta/SjekkTerminbekreftelseAp';
+import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
+import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
+import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
 import type { VurderArbeidsforholdInntektsmeldingAp } from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import type { VurderArbeidsforholdPermisjonAp } from './fakta/VurderArbeidsforholdPermisjonAp';
 import type { VurderDokumentasjonAp } from './fakta/VurderDokumentasjonAp';
@@ -55,6 +56,7 @@ export type FaktaAksjonspunkt =
   | AvklarFortsattMedlemskapAp
   | SjekkTerminbekreftelseAp
   | SjekkManglendeFødselAp
+  | OverstyringFaktaFødselAp
   | AvklarAnnenforelderHarRettAp
   | BekreftUttaksperioderAp
   | OverstyringAvklarStartdatoForPeriodenAp
