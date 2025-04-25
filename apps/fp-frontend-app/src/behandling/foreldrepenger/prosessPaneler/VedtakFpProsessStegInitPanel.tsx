@@ -70,7 +70,11 @@ export const VedtakFpProsessStegInitPanel = () => {
   const { data: beregningDagytelseOriginalBehandling, isFetching: isBdobFetching } = useQuery(
     api.beregningDagytelseOriginalBehandlingOptions(behandling),
   );
-  const { data: oppgaver, isFetching: isOFetching } = useQuery(api.oppgaverOptions(behandling));
+  const {
+    data: oppgaver,
+    isFetching: isOFetching,
+    refetch: refetchOppgaver,
+  } = useQuery(api.oppgaverOptions(behandling));
 
   const { mutateAsync: hentBrevOverstyring, isPending } = useMutation({
     mutationFn: () => api.hentBrevOverstyring(),
@@ -89,6 +93,11 @@ export const VedtakFpProsessStegInitPanel = () => {
         fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
+  });
+
+  const { mutateAsync: ferdigstillOppgave } = useMutation({
+    mutationFn: (values: string) => api.ferdigstillOppgave(values),
+    onSuccess: () => refetchOppgaver(),
   });
 
   const isNotFetching =
@@ -143,6 +152,7 @@ export const VedtakFpProsessStegInitPanel = () => {
               previewCallback={forhandsvis}
               vilkar={vilkår}
               oppgaver={oppgaver}
+              ferdigstillOppgave={ferdigstillOppgave}
             />
           ) : (
             <LoadingPanel />

@@ -1,4 +1,5 @@
 export type Oppgave = {
+  oppgaveId: string;
   oppgavetype: string;
   beskrivelser: Beskrivelse[];
   dokumenter: OppgaveDokument[];

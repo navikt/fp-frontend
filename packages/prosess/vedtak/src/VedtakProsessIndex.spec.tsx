@@ -236,8 +236,8 @@ describe('VedtakProsessIndex', () => {
   });
 
   it('skal vise oppgaver for aksjonspunkter saksbehandler må ta stilling til før godkjenning', async () => {
-    const lagre = vi.fn();
-    render(<OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil submitCallback={lagre} />);
+    const ferdigstillOppgave = vi.fn();
+    render(<OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil ferdigstillOppgave={ferdigstillOppgave} />);
 
     const visMerKnapper = await screen.getAllByText('Vis mer');
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
@@ -266,6 +266,7 @@ describe('VedtakProsessIndex', () => {
     ).toBeInTheDocument();
     expect(screen.getByText('Kan dere gi tilbakemelding på dette?')).toBeInTheDocument();
     expect(screen.getAllByText('Vis mer')).toHaveLength(2);
+    expect(screen.getAllByText('Ferdigstill oppgave i Gosys')).toHaveLength(5);
     await userEvent.click(visMerKnapper[0]);
     expect(screen.getByText('Vis mindre')).toBeInTheDocument();
     expect(screen.getByText('VL: Se sto mottatt 20.02.25')).toBeInTheDocument();
@@ -308,18 +309,22 @@ describe('VedtakProsessIndex', () => {
     const filIkoner = screen.getAllByLabelText('Åpne dokument');
     expect(filIkoner).toHaveLength(6);
 
-    await userEvent.click(screen.getByText('Til godkjenning'));
-
-    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [
-      {
-        begrunnelse: undefined,
-        fritekstBrev: undefined,
-        kode: '5015',
-        overskrift: undefined,
-        skalBrukeOverstyrendeFritekstBrev: false,
-      },
-    ]);
+    const ferdigstillOppgaveKnapper = await screen.getAllByText('Ferdigstill oppgave i Gosys');
+    await userEvent.click(ferdigstillOppgaveKnapper[0]);
+    expect(ferdigstillOppgave).toHaveBeenCalledTimes(1);
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(1, '1');
+    await userEvent.click(ferdigstillOppgaveKnapper[1]);
+    expect(ferdigstillOppgave).toHaveBeenCalledTimes(2);
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(2, '2');
+    await userEvent.click(ferdigstillOppgaveKnapper[2]);
+    expect(ferdigstillOppgave).toHaveBeenCalledTimes(3);
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(3, '3');
+    await userEvent.click(ferdigstillOppgaveKnapper[3]);
+    expect(ferdigstillOppgave).toHaveBeenCalledTimes(4);
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(4, '4');
+    await userEvent.click(ferdigstillOppgaveKnapper[4]);
+    expect(ferdigstillOppgave).toHaveBeenCalledTimes(5);
+    expect(ferdigstillOppgave).toHaveBeenNthCalledWith(5, '5');
   });
 
   it('skal vise innvilget vedtaksbrev for engangsstønad og så fatte vedtak', async () => {

@@ -83,6 +83,7 @@ const meta = {
   args: {
     vilkar: defaultVilkar,
     previewCallback: action('button-click'),
+    ferdigstillOppgave: action('button-click') as (oppgaveId: string) => Promise<void>,
   },
   render: args => {
     const [redigertHtml, setRedigertHtml] = useState<string | null>(null);
@@ -331,6 +332,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     },
     oppgaver: [
       {
+        oppgaveId: '1',
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
         beskrivelser: [
           {
@@ -341,6 +343,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         dokumenter: [],
       },
       {
+        oppgaveId: '2',
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
         beskrivelser: [
           {
@@ -359,6 +362,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         dokumenter: [],
       },
       {
+        oppgaveId: '3',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
         beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] }],
         dokumenter: [
@@ -380,6 +384,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ],
       },
       {
+        oppgaveId: '4',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
         beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra studiested/skole'] }],
         dokumenter: [
@@ -391,6 +396,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ],
       },
       {
+        oppgaveId: '5',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
         beskrivelser: [
           {

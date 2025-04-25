@@ -70,6 +70,7 @@ interface Props {
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];
+  ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
   setHarValgtÅRedigereVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
   harValgtÅRedigereVedtaksbrev: boolean;
 }
@@ -82,6 +83,7 @@ export const VedtakFellesPanel = ({
   erBehandlingEtterKlage,
   vedtakstatusTekst,
   oppgaver,
+  ferdigstillOppgave,
   setHarValgtÅRedigereVedtaksbrev,
   harValgtÅRedigereVedtaksbrev,
 }: Props) => {
@@ -192,7 +194,7 @@ export const VedtakFellesPanel = ({
         </div>
       </HStack>
       <VedtakHelpTextPanel aksjonspunkter={aksjonspunkt} isReadOnly={isReadOnly} />
-      {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} />}
+      {oppgaver && oppgaver.length > 0 && <OppgaveTabell oppgaver={oppgaver} ferdigstillOppgave={ferdigstillOppgave} />}
       <VStack gap="8">
         {renderPanel(harValgtÅRedigereVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
         {behandling.behandlingsresultat?.overskrift && (
