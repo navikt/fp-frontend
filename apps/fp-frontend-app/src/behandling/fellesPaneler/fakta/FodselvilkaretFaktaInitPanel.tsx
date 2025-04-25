@@ -16,15 +16,16 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE, AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL];
+const OVERSTYRING_KODER = [AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL];
 
 export const FodselvilkaretFaktaInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, fagsak } = use(BehandlingDataContext);
+  const { behandling, fagsak, rettigheter } = use(BehandlingDataContext);
 
   const skalPanelVisesIMeny = behandling.vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType));
 
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_KODER);
 
   const api = useBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
@@ -48,6 +49,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
           fødsel={faktafødsel}
           terminbekreftelseDokument={terminbekreftelseDokument}
           submittable={standardPanelProps.submittable}
+          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         />
       ) : (
         <LoadingPanel />

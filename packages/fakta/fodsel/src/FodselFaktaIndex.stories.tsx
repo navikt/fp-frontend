@@ -32,6 +32,7 @@ const meta = {
   args: {
     submittable: true,
     isReadOnly: false,
+    kanOverstyre: false,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
     terminbekreftelseDokument: {
@@ -83,6 +84,7 @@ const meta = {
   },
   render: args => <FodselFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselFaktaIndex>>;
+
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -329,5 +331,25 @@ export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
         ],
       },
     },
+  },
+};
+
+export const Overstyring: Story = {
+  args: {
+    kanOverstyre: true,
+  },
+};
+export const Overstyrt: Story = {
+  args: {
+    kanOverstyre: true,
+    isReadOnly: true,
+    aksjonspunkterForPanel: [
+      {
+        definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Denne saken har blitt overstyrt',
+        kanLoses: false,
+      },
+    ],
   },
 };
