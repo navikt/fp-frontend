@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Label, Table } from '@navikt/ds-react';
+import { BodyShort, Table, VStack } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -11,8 +11,6 @@ import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AoIArbeidsforhold,
-  ArbeidOgInntektsmelding,
-  Inntektsmelding,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
@@ -62,32 +60,10 @@ const finnPeriode = (
   return periode.fom ? periode : undefined;
 };
 
-const finnInntektsmelding = (
-  inntektsmeldinger: Inntektsmelding[],
-  internArbeidsforholdId?: string,
-): Inntektsmelding => {
-  const harImMedId = inntektsmeldinger.some(i => i.internArbeidsforholdId);
-  const harImUtenId = inntektsmeldinger.some(i => !i.internArbeidsforholdId);
-  if (harImMedId && harImUtenId) {
-    throw Error('Har inntektsmelding både med og uten id');
-  }
-
-  const im = inntektsmeldinger.find(
-    i => !i.internArbeidsforholdId || !internArbeidsforholdId || i.internArbeidsforholdId === internArbeidsforholdId,
-  );
-
-  if (!im) {
-    throw Error(`Finner ingen inntektsmelding for arbeidsforhold id ${internArbeidsforholdId}`);
-  }
-
-  return im;
-};
-
 interface Props {
   saksnummer: string;
   behandlingUuid: string;
   behandlingVersjon: number;
-  arbeidOgInntekt: ArbeidOgInntektsmelding;
   radData: ArbeidsforholdOgInntektRadData;
   isReadOnly: boolean;
   erOverstyrt: boolean;
@@ -97,13 +73,13 @@ interface Props {
   toggleÅpenRad: () => void;
   erRadÅpen: boolean;
   alleKodeverk: AlleKodeverk;
+  skjæringstidspunkt: string;
 }
 
 export const ArbeidsforholdRad = ({
   saksnummer,
   behandlingUuid,
   behandlingVersjon,
-  arbeidOgInntekt,
   radData,
   isReadOnly,
   erOverstyrt,
@@ -113,19 +89,11 @@ export const ArbeidsforholdRad = ({
   toggleÅpenRad,
   erRadÅpen,
   alleKodeverk,
+  skjæringstidspunkt,
 }: Props) => {
   const intl = useIntl();
 
-  const { arbeidsgiverNavn, arbeidsgiverIdent, årsak, avklaring } = radData;
-
-  const arbeidsforholdForRad = useMemo(
-    () => arbeidOgInntekt.arbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsgiverIdent),
-    [arbeidOgInntekt, arbeidsgiverIdent],
-  );
-  const inntektsmeldingerForRad = useMemo(
-    () => arbeidOgInntekt.inntektsmeldinger.filter(i => i.arbeidsgiverIdent === arbeidsgiverIdent),
-    [arbeidOgInntekt, arbeidsgiverIdent],
-  );
+  const { inntektsmeldingerForRad, arbeidsforholdForRad, arbeidsgiverNavn, avklaring, årsak } = radData;
 
   const erManueltOpprettet =
     avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
@@ -143,9 +111,6 @@ export const ArbeidsforholdRad = ({
     () => finnPeriode(arbeidsforholdForRad, avklaring),
     [erManueltOpprettet, arbeidsforholdForRad, avklaring],
   );
-  const inntektsposter = arbeidOgInntekt.inntekter.find(
-    inntekt => inntekt.arbeidsgiverIdent === arbeidsgiverIdent,
-  )?.inntekter;
 
   return (
     <Table.ExpandableRow
@@ -159,7 +124,7 @@ export const ArbeidsforholdRad = ({
         isApOpen: harÅpentAksjonspunkt,
       })}
       content={
-        <div className={harÅpentAksjonspunkt ? styles.panelOpenAp : styles.panelOpen}>
+        <VStack gap="4" className={harÅpentAksjonspunkt ? styles.panelOpenAp : styles.panelOpen}>
           {erManueltOpprettet && (
             <ManueltLagtTilArbeidsforholdForm
               behandlingUuid={behandlingUuid}
@@ -173,70 +138,66 @@ export const ArbeidsforholdRad = ({
             />
           )}
           {harArbeidsforholdOgInntektsmelding && (
-            <InntektsmeldingerPanel
-              saksnummer={saksnummer}
-              arbeidsforholdForRad={arbeidsforholdForRad}
-              inntektsmeldingerForRad={inntektsmeldingerForRad}
-              alleKodeverk={alleKodeverk}
-              radData={radData}
-            />
+            <InntektsmeldingerPanel saksnummer={saksnummer} alleKodeverk={alleKodeverk} radData={radData} />
           )}
           {harKunInntektsmeldingOgIkkeÅrsak && (
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
               arbeidsforhold={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0] : undefined}
-              inntektsmelding={finnInntektsmelding(
-                inntektsmeldingerForRad,
-                arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0]?.internArbeidsforholdId : undefined,
-              )}
+              inntektsmelding={inntektsmeldingerForRad[0]}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}
               radData={radData}
             />
           )}
           {manglerInntektsmelding && (
-            <ManglendeInntektsmeldingForm
-              saksnummer={saksnummer}
-              behandlingUuid={behandlingUuid}
-              behandlingVersjon={behandlingVersjon}
-              skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
-              inntektsposter={inntektsposter}
-              isReadOnly={isReadOnly}
-              arbeidsforholdForRad={arbeidsforholdForRad}
-              inntektsmeldingerForRad={inntektsmeldingerForRad}
-              radData={radData}
-              lagreVurdering={lagreVurdering}
-              lukkArbeidsforholdRad={toggleÅpenRad}
-              oppdaterTabell={oppdaterTabell}
-              alleKodeverk={alleKodeverk}
-            />
+            <>
+              <ArbeidsforholdInformasjonPanel
+                saksnummer={saksnummer}
+                skjæringstidspunkt={skjæringstidspunkt}
+                alleKodeverk={alleKodeverk}
+                radData={radData}
+              />
+              <ManglendeInntektsmeldingForm
+                behandlingUuid={behandlingUuid}
+                behandlingVersjon={behandlingVersjon}
+                isReadOnly={isReadOnly}
+                radData={radData}
+                lagreVurdering={lagreVurdering}
+                lukkArbeidsforholdRad={toggleÅpenRad}
+                oppdaterTabell={oppdaterTabell}
+              />
+            </>
           )}
           {manglerArbeidsforhold && (
-            <ManglendeArbeidsforholdForm
-              saksnummer={saksnummer}
-              behandlingUuid={behandlingUuid}
-              behandlingVersjon={behandlingVersjon}
-              inntektsmelding={inntektsmeldingerForRad[0]}
-              radData={radData}
-              isReadOnly={isReadOnly}
-              registrerArbeidsforhold={registrerArbeidsforhold}
-              lagreVurdering={lagreVurdering}
-              lukkArbeidsforholdRad={toggleÅpenRad}
-              oppdaterTabell={oppdaterTabell}
-              skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
-            />
+            <>
+              <InntektsmeldingOpplysningerPanel
+                saksnummer={saksnummer}
+                inntektsmelding={inntektsmeldingerForRad[0]}
+                skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
+                radData={radData}
+              />
+              <ManglendeArbeidsforholdForm
+                behandlingUuid={behandlingUuid}
+                behandlingVersjon={behandlingVersjon}
+                radData={radData}
+                isReadOnly={isReadOnly}
+                registrerArbeidsforhold={registrerArbeidsforhold}
+                lagreVurdering={lagreVurdering}
+                lukkArbeidsforholdRad={toggleÅpenRad}
+                oppdaterTabell={oppdaterTabell}
+              />
+            </>
           )}
           {harArbeidsforholdUtenInntektsmeldingMenIngenÅrsak && (
             <ArbeidsforholdInformasjonPanel
               saksnummer={saksnummer}
-              skjæringspunktDato={arbeidOgInntekt.skjæringstidspunkt}
-              inntektsposter={inntektsposter}
-              arbeidsforholdForRad={arbeidsforholdForRad}
+              skjæringstidspunkt={skjæringstidspunkt}
               alleKodeverk={alleKodeverk}
               radData={radData}
             />
           )}
-        </div>
+        </VStack>
       }
     >
       <Table.DataCell>
@@ -250,22 +211,20 @@ export const ArbeidsforholdRad = ({
           />
         )}
       </Table.DataCell>
-      <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
-        {erRadÅpen && <Label size="small">{arbeidsgiverNavn}</Label>}
-        {!erRadÅpen && <BodyShort size="small">{arbeidsgiverNavn}</BodyShort>}
+      <Table.DataCell>
+        <BodyShort>{arbeidsgiverNavn}</BodyShort>
       </Table.DataCell>
-      <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
+      <Table.DataCell>
         <BodyShort>
-          {periode?.fom && <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />}
-          {!periode && '-'}
+          {periode?.fom ? <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} /> : '-'}
         </BodyShort>
       </Table.DataCell>
-      <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
+      <Table.DataCell>
         <BodyShort>
           <FormattedMessage id={finnKildekode(erManueltOpprettet, arbeidsforholdForRad.length > 0)} />
         </BodyShort>
       </Table.DataCell>
-      <Table.DataCell className={erRadÅpen ? styles.colTopPadding : undefined}>
+      <Table.DataCell>
         <BodyShort>
           {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
             <DateLabel dateString={inntektsmeldingerForRad[0].motattDato} />
