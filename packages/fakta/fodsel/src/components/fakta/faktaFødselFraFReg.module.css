@@ -1,0 +1,17 @@
+.dødMarkering {
+  color: var(--a-icon-warning);
+  height: 24px;
+  margin-left: var(--a-spacing-2);
+  position: absolute;
+  width: 24px;
+}
+
+.grid {
+  div:first-child {
+    width: 30px;
+  }
+
+  div:not(:first-child) {
+    width: 100px;
+  }
+}
