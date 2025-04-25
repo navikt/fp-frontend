@@ -14,7 +14,7 @@ import {
 } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
-import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { SjekkTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import {
   maxTerminbekreftelseDato,
@@ -45,7 +45,7 @@ interface Props {
 export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, submittable, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<BekreftTerminbekreftelseAp>();
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkTerminbekreftelseAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -136,7 +136,7 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-const transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
+const transformValues = (values: FormValues): SjekkTerminbekreftelseAp => ({
   kode: AksjonspunktKode.TERMINBEKREFTELSE,
   utstedtdato: values.utstedtdato!,
   termindato: values.termindato!,
