@@ -175,7 +175,6 @@ export type { InfotrygdVedtak, Vedtak, VedtakArbeidsforhold, VedtakUtbetaling, S
 export type { Vilkarperiode } from './src/vilkarperiodeTsType';
 export type { ApiLink } from './src/apiLink';
 export type { Oppgave } from './src/oppgaveTsType.tsx';
-export type { OppgaveId } from './src/oppgaveIdTsType.tsx';
 export type { Beskrivelse } from './src/oppgaveTsType.tsx';
 export type { OppgaveDokument } from './src/oppgaveTsType.ts';
 export type { OneOf } from './src/oneOf';
