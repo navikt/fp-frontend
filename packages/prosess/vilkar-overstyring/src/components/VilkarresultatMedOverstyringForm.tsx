@@ -12,7 +12,7 @@ import {
   AksjonspunktKode,
   BehandlingTypeEnum,
   erAksjonspunktÅpent,
-  type OverstyringAksjonspunkter,
+  type VilkårOverstyringAksjonspunkter,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
@@ -53,7 +53,7 @@ function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
 const createInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
-  overstyringApKode: OverstyringAksjonspunkter,
+  overstyringApKode: VilkårOverstyringAksjonspunkter,
   behandlingsresultat: Behandling['behandlingsresultat'] | undefined,
   medlemskapManuellBehandlingResultat: ManuellBehandlingResultat | undefined,
 ): FormValues => {
@@ -85,13 +85,14 @@ type OverstyringVilkår =
   | OverstyringMedlemskapsvilkaretAp
   | OverstyringMedlemskapvilkaretForutgaendeAp;
 
-const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjonspunkter): OverstyringVilkår => {
+const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyringAksjonspunkter): OverstyringVilkår => {
   const { vurdering, avslagskode, begrunnelse, medlemFom, opphørFom } = values;
 
   const felles = {
     kode: overstyringApKode,
     begrunnelse: begrunnelse,
   };
+
   switch (overstyringApKode) {
     case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR:
       return {
@@ -138,7 +139,7 @@ export const VilkarresultatMedOverstyringForm = ({
   const { behandling, fagsak, submitCallback, alleMerknaderFraBeslutter } = usePanelDataContext<OverstyringVilkår>();
 
   const { erOverstyrt, toggleOverstyring, overstyringApKode, overrideReadOnly, kanOverstyreAccess } =
-    usePanelOverstyring();
+    usePanelOverstyring<VilkårOverstyringAksjonspunkter>();
 
   const initialValues = createInitialValues(
     behandling.aksjonspunkt,

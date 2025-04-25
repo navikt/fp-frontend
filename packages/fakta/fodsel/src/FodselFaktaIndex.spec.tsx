@@ -5,8 +5,13 @@ import { expect } from 'vitest';
 
 import * as stories from './FodselFaktaIndex.stories';
 
-const { Default, APTerminbekreftelse, APSjekkManglendeFødselPåEngangstønad, APSjekkManglendeFødselPåForeldrepenger } =
-  composeStories(stories);
+const {
+  Default,
+  APTerminbekreftelse,
+  APSjekkManglendeFødselPåEngangstønad,
+  APSjekkManglendeFødselPåForeldrepenger,
+  OverstyringSomOverstyrer,
+} = composeStories(stories);
 
 describe('FodselFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for termin', async () => {
@@ -131,7 +136,6 @@ describe('FodselFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5027',
-      erBarnFødt: true,
       barn: [
         {
           fødselsdato: '2025-05-04',
@@ -164,8 +168,67 @@ describe('FodselFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5027',
-      erBarnFødt: false,
+      barn: null,
       begrunnelse: 'Dette er en begrunnelse',
     });
+  });
+
+  it('skal overstyre termindato og legge til et barn', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(<OverstyringSomOverstyrer submitCallback={lagre} />);
+
+    expect(screen.getByText('Fakta om fødsel')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Overstyr'));
+
+    expect(screen.getByText('Overstyring av fødselsdetaljer')).toBeInTheDocument();
+
+    const overstyringBoks = within(screen.getByLabelText('Overstyring av fødselsdetaljer'));
+    const terminInput = overstyringBoks.getByLabelText('Termindato');
+    expect(terminInput).toHaveValue('10.06.2025');
+    await userEvent.clear(terminInput);
+    await userEvent.type(terminInput, '11.06.2025');
+
+    expect(overstyringBoks.getByText('Er barnet født?')).toBeInTheDocument();
+    expect(overstyringBoks.getByLabelText('Ja')).toBeChecked();
+
+    expect(overstyringBoks.getByLabelText('Fødselsdato')).toBeDisabled();
+
+    await userEvent.click(overstyringBoks.getByText('Legg til barn'));
+
+    await userEvent.type(overstyringBoks.getAllByLabelText('Fødselsdato')[1], '04.06.2025');
+
+    await userEvent.type(overstyringBoks.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(overstyringBoks.getByText('Bekreft'));
+
+    await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      kode: '6019',
+      termindato: '2025-06-11',
+      barn: [
+        {
+          fødselsdato: '2025-06-03',
+          dødsdato: undefined,
+        },
+        {
+          fødselsdato: '2025-06-04',
+          dødsdato: undefined,
+        },
+      ],
+      begrunnelse: 'Dette er en begrunnelse',
+    });
+  });
+
+  it('skal ikke kunne overstyre når det finnes åpent fødselaksjonspunkt', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(
+      <OverstyringSomOverstyrer
+        aksjonspunkterForPanel={APTerminbekreftelse.args.aksjonspunkterForPanel}
+        submitCallback={lagre}
+      />,
+    );
+
+    expect(screen.queryByText('Fakta om fødsel')).not.toBeInTheDocument();
+    expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
   });
 });

@@ -1,6 +1,10 @@
 {
   "FodselInfoPanel.SjekkTerminbekreftelse": "Kontroller terminbekreftelse",
   "FodselInfoPanel.SjekkManglendeFødsel": "Kontroller opplysninger om fødsel",
+  "OverstyringPanel.Tittel": "Fakta om fødsel",
+  "OverstyringForm.Tittel": "Overstyring av fødselsdetaljer",
+  "OverstyringForm.Bekreft": "Bekreft",
+  "OverstyringForm.Avbryt": "Avbryt",
   "SjekkTerminbekreftelseForm.Tittel": "Kontroller opplysninger om termin",
   "SjekkTerminbekreftelseForm.AdvarselForTidligUtstedtdato": "Terminbekreftelsen er utstedt før 22. svangerskapsuke. Kontakt bruker for en nyere terminbekreftelse og oppdater utstedt dato med ny dato når den mottas. Fortsetter du behandlingen uten ny utstedt dato blir behandlingen avslått på grunn av manglende dokumentasjon",
   "BarnFieldArray.LeggTilBarn": "Legg til barn",

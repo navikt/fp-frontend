@@ -14,6 +14,7 @@ export const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING]: 'ToTrinnsForm.Fødsel.VurderSokersRelasjon',
   [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: 'ToTrinnsForm.Fødsel.SjekkTerminbekreftelse',
   [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: 'ToTrinnsForm.Fødsel.SjekkManglendeFødsel',
+  [AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]: 'ToTrinnsForm.Fødsel.OverstyrFaktaFødsel',
   [AksjonspunktKode.OVERSTYR_FODSELSVILKAR]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
   [AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
 
