@@ -99,6 +99,7 @@ export const fagsakFullFpsak: Fagsak = {
           dato: '2025-02-12',
         },
         opphørsdato: null,
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
       behandlingÅrsaker: [
         {
