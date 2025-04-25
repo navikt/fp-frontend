@@ -15,6 +15,7 @@
   "PersonPanel.Beskrivelse.Annenpart": "Adresser for den andre forelderen registrert i folkeregisteret gyldige på skjæringstidspunktet",
   "PersonPanel.Fodt": "Født {dato}",
   "PersonPanel.Dod": "Død {dato}",
+
   "AdresseTabell.IngenAdresse": "Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.",
   "AdresseTabell.SammeAdresse": "Den andre forelderen har samme adresse som søker på skjæringstidspunktet",
   "AdresseTabell.PeriodeLabel": "Periode",
@@ -43,5 +44,7 @@
 
   "FaktaKilde.Soknad": "FRA SØKNADEN",
   "FaktaKilde.FREG": "FRA FOLKEREGISTERET",
-  "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET"
+  "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET",
+  "FaktaKilde.Ukjent": "FRA UKJENT KILDE",
+  "FaktaKilde.SBH": "FRA SAKSBEHANDLER"
 }
