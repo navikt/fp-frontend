@@ -20,6 +20,7 @@ import {
   faktaArbeidsforhold,
   familiehendelse,
   feriepengeGrunnlag,
+  fødsel,
   initFetchFpsak,
   initFetchFptilbake,
   inntektArbeidYtelse,
@@ -64,6 +65,7 @@ const ressursMap = {
   [BehandlingRel.FAKTA_ARBEIDSFORHOLD]: faktaArbeidsforhold,
   [BehandlingRel.OMSORG_OG_RETT]: omsorgOgRett,
   [BehandlingRel.FAMILIEHENDELSE]: familiehendelse,
+  [BehandlingRel.FAKTA_FØDSEL]: fødsel,
   [BehandlingRel.SAVE_AKSJONSPUNKT]: new HttpResponse(null, {
     status: 202,
     headers: { location: 'https://www.test.com/api/result' },

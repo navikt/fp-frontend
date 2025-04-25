@@ -178,6 +178,10 @@ export const behandling: Behandling = {
       rel: 'familiehendelse-v2',
     },
     {
+      href: '/fpsak/api/behandling/fodsel/fakta-fodsel?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
+      rel: 'fakta-fødsel',
+    },
+    {
       href: '/fpsak/api/behandling/person/personoversikt?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
       rel: 'behandling-personoversikt',
     },

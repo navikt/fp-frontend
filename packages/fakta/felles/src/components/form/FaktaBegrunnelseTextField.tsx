@@ -27,6 +27,7 @@ type Props<T extends FieldValues & FormValues> = {
   label?: string;
   hasReadOnlyLabel?: boolean;
   hasVurderingText?: boolean;
+  size?: 'small' | 'medium';
 };
 
 type TransformedValues = {
@@ -41,6 +42,7 @@ export const FaktaBegrunnelseTextField = <T extends FieldValues & FormValues>({
   label,
   hasReadOnlyLabel = false,
   hasVurderingText = false,
+  size,
 }: Props<T>) => {
   const code = hasVurderingText ? 'FaktaBegrunnelseTextField.Vurdering' : 'FaktaBegrunnelseTextField.BegrunnEndringene';
 
@@ -59,6 +61,7 @@ export const FaktaBegrunnelseTextField = <T extends FieldValues & FormValues>({
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
           readOnly={isReadOnly}
+          size={size}
         />
       )}
     </RawIntlProvider>

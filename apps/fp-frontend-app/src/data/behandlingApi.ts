@@ -28,6 +28,7 @@ import type {
   FamilieHendelse,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
+  Fødsel,
   FodselOgTilrettelegging,
   ForhåndsvisMeldingParams,
   Innsyn,
@@ -159,6 +160,7 @@ export const BehandlingRel = {
   FEILUTBETALING_FAKTA: 'feilutbetalingFakta',
   FEILUTBETALING_AARSAK: 'feilutbetalingAarsak',
   BEREGNINGRESULTAT_DAGYTELSE: 'beregningsresultat-dagytelse',
+  FAKTA_FØDSEL: 'fakta-fødsel',
   FAMILIEHENDELSE: 'familiehendelse-v2',
   SOKNAD: 'soknad',
   FERIEPENGEGRUNNLAG: 'feriepengegrunnlag',
@@ -307,6 +309,14 @@ const getBeregningsresultatDagytelseOptions =
       staleTime: Infinity,
     });
 
+const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) => {
+  return queryOptions({
+    queryKey: [BehandlingRel.FAKTA_FØDSEL, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('FAKTA_FØDSEL', links)).json<Fødsel>(),
+    enabled: harLenke(behandling, 'FAKTA_FØDSEL') && isEnabled,
+    staleTime: Infinity,
+  });
+};
 const getFamiliehendelseOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.FAMILIEHENDELSE, behandling.uuid, behandling.versjon],
@@ -718,6 +728,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     lagreVurderingForAOI: getLagreVurderingForAOI(links),
     åpneForNyVurderingAOI: getÅpneForNyVurderingAOI(links),
     søknadOptions: getSøknadOptions(links),
+    faktaFødselOptions: getFaktaFødselOptions(links),
     familiehendelseOptions: getFamiliehendelseOptions(links),
     beregningsresultatDagytelseOptions: getBeregningsresultatDagytelseOptions(links),
     beregningDagytelseOriginalBehandlingOptions: getBeregningDagytelseOriginalBehandlingOptions(links),

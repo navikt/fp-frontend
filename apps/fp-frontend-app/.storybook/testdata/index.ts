@@ -10,6 +10,7 @@ export { fagsakFullTilbake } from './fagsakFullTilbake';
 export { faktaArbeidsforhold } from './faktaArbeidsforhold';
 export { familiehendelse } from './familiehendelse';
 export { feriepengeGrunnlag } from './feriepengeGrunnlag';
+export { fødsel } from './fødsel';
 export { initFetchFpsak } from './initFetchFpsak';
 export { initFetchFptilbake } from './initFetchFptilbake';
 export { inntektArbeidYtelse } from './inntektArbeidYtelse';
