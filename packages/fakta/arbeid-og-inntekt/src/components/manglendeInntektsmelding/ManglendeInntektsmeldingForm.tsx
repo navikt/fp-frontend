@@ -8,17 +8,10 @@ import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import type {
-  AlleKodeverk,
-  AoIArbeidsforhold,
-  Inntektsmelding,
-  Inntektspost,
-  ManglendeInntektsmeldingVurdering,
-} from '@navikt/fp-types';
+import type { ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
-import { ArbeidsforholdInformasjonPanel } from '../felles/ArbeidsforholdInformasjonPanel';
 
 import styles from './manglendeInntektsmeldingForm.module.css';
 
@@ -54,37 +47,26 @@ const getOppdaterTabell =
   };
 
 interface Props {
-  saksnummer: string;
   behandlingUuid: string;
   behandlingVersjon: number;
-  skjæringspunktDato: string;
-  inntektsposter?: Inntektspost[];
-  isReadOnly: boolean;
-  arbeidsforholdForRad: AoIArbeidsforhold[];
-  inntektsmeldingerForRad: Inntektsmelding[];
   radData: ArbeidsforholdOgInntektRadData;
+  isReadOnly: boolean;
   lagreVurdering: (params: ManglendeInntektsmeldingVurdering) => Promise<void>;
   lukkArbeidsforholdRad: () => void;
   oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void;
-  alleKodeverk: AlleKodeverk;
 }
 
 export const ManglendeInntektsmeldingForm = ({
-  saksnummer,
   behandlingUuid,
   behandlingVersjon,
-  skjæringspunktDato,
-  inntektsposter = [],
-  arbeidsforholdForRad,
-  inntektsmeldingerForRad,
   radData,
   isReadOnly,
   lagreVurdering,
   lukkArbeidsforholdRad,
   oppdaterTabell,
-  alleKodeverk,
 }: Props) => {
   const intl = useIntl();
+  const { arbeidsforholdForRad, inntektsmeldingerForRad } = radData;
 
   const defaultValues = useMemo<FormValues>(
     () => ({
@@ -134,109 +116,95 @@ export const ManglendeInntektsmeldingForm = ({
       value: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
     },
   ];
-  // Dette valget skal ikke være tilgjengelig hvis arbeidsgiver ikke er en bedrift
-  if (radData.arbeidsgiverIdent.length === 9) {
+  if (!radData.erPrivatPerson) {
     radioOptions.splice(1, 0, {
       label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.MeldingArbeidsgiverNavNo' }),
       value: ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO,
     });
   }
   return (
-    <VStack gap="6">
-      <ArbeidsforholdInformasjonPanel
-        saksnummer={saksnummer}
-        skjæringspunktDato={skjæringspunktDato}
-        inntektsposter={inntektsposter}
-        arbeidsforholdForRad={arbeidsforholdForRad}
-        inntektsmeldingerForRad={inntektsmeldingerForRad}
-        alleKodeverk={alleKodeverk}
-        radData={radData}
-      />
-      <Form formMethods={formMethods} onSubmit={lagre}>
-        <VStack gap="4">
-          {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
-            <div className={styles.alertStripe}>
-              <Alert variant="info">
-                <FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" />
-              </Alert>
-            </div>
-          )}
-          <RadioGroupPanel
-            name="saksbehandlersVurdering"
-            label={
-              <HStack gap="2">
-                <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
-                <QuestionmarkDiamondIcon
-                  ref={svgRef}
-                  onClick={toggleHjelpetekst}
-                  className={styles.svg}
-                  title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
-                />
-                <Popover
-                  open={openState}
-                  onClose={toggleHjelpetekst}
-                  anchorEl={svgRef.current}
-                  className={styles.hjelpetekst}
-                >
-                  <Popover.Content className={styles.hjelpetekstInnhold}>
-                    <VStack gap="4">
-                      <BodyShort>
-                        <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
-                      </BodyShort>
-                      <BodyShort>
-                        <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
-                      </BodyShort>
-                      <BodyShort>
-                        <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
-                      </BodyShort>
-                    </VStack>
-                  </Popover.Content>
-                </Popover>
-              </HStack>
-            }
-            validate={[required]}
-            isReadOnly={isReadOnly}
-            radios={radioOptions}
-          />
-          <TextAreaField
-            label={
-              <FormattedMessage
-                id={
-                  erEttArbeidsforhold
-                    ? 'InntektsmeldingInnhentesForm.Begrunn'
-                    : 'InntektsmeldingInnhentesForm.Kommentar'
-                }
+    <Form formMethods={formMethods} onSubmit={lagre}>
+      <VStack gap="4">
+        {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
+          <div className={styles.alertStripe}>
+            <Alert variant="info">
+              <FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" />
+            </Alert>
+          </div>
+        )}
+        <RadioGroupPanel
+          name="saksbehandlersVurdering"
+          label={
+            <HStack gap="2">
+              <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
+              <QuestionmarkDiamondIcon
+                ref={svgRef}
+                onClick={toggleHjelpetekst}
+                className={styles.svg}
+                title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
               />
-            }
-            name="begrunnelse"
-            validate={[required, minLength3, maxLength1500, hasValidText]}
-            maxLength={1500}
-            readOnly={isReadOnly}
-          />
-          {!isReadOnly && (
-            <HStack gap="4">
-              <Button
-                size="small"
-                variant="secondary"
-                loading={formMethods.formState.isSubmitting}
-                disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+              <Popover
+                open={openState}
+                onClose={toggleHjelpetekst}
+                anchorEl={svgRef.current}
+                className={styles.hjelpetekst}
               >
-                <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
-              </Button>
-              <Button
-                size="small"
-                variant="tertiary"
-                loading={false}
-                disabled={formMethods.formState.isSubmitting}
-                onClick={avbryt}
-                type="button"
-              >
-                <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
-              </Button>
+                <Popover.Content className={styles.hjelpetekstInnhold}>
+                  <VStack gap="4">
+                    <BodyShort>
+                      <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />
+                    </BodyShort>
+                    <BodyShort>
+                      <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel2" />
+                    </BodyShort>
+                    <BodyShort>
+                      <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel3" />
+                    </BodyShort>
+                  </VStack>
+                </Popover.Content>
+              </Popover>
             </HStack>
-          )}
-        </VStack>
-      </Form>
-    </VStack>
+          }
+          validate={[required]}
+          isReadOnly={isReadOnly}
+          radios={radioOptions}
+        />
+        <TextAreaField
+          label={
+            <FormattedMessage
+              id={
+                erEttArbeidsforhold ? 'InntektsmeldingInnhentesForm.Begrunn' : 'InntektsmeldingInnhentesForm.Kommentar'
+              }
+            />
+          }
+          name="begrunnelse"
+          validate={[required, minLength3, maxLength1500, hasValidText]}
+          maxLength={1500}
+          readOnly={isReadOnly}
+        />
+        {!isReadOnly && (
+          <HStack gap="4">
+            <Button
+              size="small"
+              variant="secondary"
+              loading={formMethods.formState.isSubmitting}
+              disabled={!formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+            >
+              <FormattedMessage id="InntektsmeldingInnhentesForm.Lagre" />
+            </Button>
+            <Button
+              size="small"
+              variant="tertiary"
+              loading={false}
+              disabled={formMethods.formState.isSubmitting}
+              onClick={avbryt}
+              type="button"
+            >
+              <FormattedMessage id="InntektsmeldingInnhentesForm.Avbryt" />
+            </Button>
+          </HStack>
+        )}
+      </VStack>
+    </Form>
   );
 };

@@ -38,3 +38,7 @@
 .space {
   margin-right: 50px;
 }
+
+.alert {
+  max-width: 500px;
+}

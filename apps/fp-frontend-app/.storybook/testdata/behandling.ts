@@ -40,6 +40,7 @@ export const behandling: Behandling = {
       dato: '2025-02-12',
     },
     opphørsdato: null,
+    vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
   },
   behandlingÅrsaker: [
     {

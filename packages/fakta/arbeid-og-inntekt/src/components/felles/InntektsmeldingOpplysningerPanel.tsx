@@ -9,7 +9,7 @@ import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 import { DokumentLink } from '@navikt/fp-ui-komponenter';
 
-import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt.ts';
+import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
 
 import styles from './inntektsmeldingOpplysningerPanel.module.css';
 
@@ -34,7 +34,7 @@ export const InntektsmeldingOpplysningerPanel = ({
 }: Props) => (
   <>
     <VStack gap="4">
-      {!ikkeVisInfo && radData && (
+      {!ikkeVisInfo && (
         <HStack gap="4">
           <Label size="small">
             <FormattedMessage
@@ -45,13 +45,13 @@ export const InntektsmeldingOpplysningerPanel = ({
               }
             />
           </Label>
-          <Detail>
+          <BodyShort size="small">
             {radData.erPrivatPerson ? (
               <DateLabel dateString={radData.arbeidsgiverFødselsdato} />
             ) : (
               radData.arbeidsgiverIdent
             )}
-          </Detail>
+          </BodyShort>
         </HStack>
       )}
       {skalViseArbeidsforholdId && (
@@ -68,9 +68,7 @@ export const InntektsmeldingOpplysningerPanel = ({
             <Label size="small">
               <FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" />
             </Label>
-            <BodyShort size="small">
-              {arbeidsforhold.stillingsprosent ? `${arbeidsforhold.stillingsprosent}%` : '-'}
-            </BodyShort>
+            <BodyShort size="small">{`${arbeidsforhold.stillingsprosent}%`}</BodyShort>
           </HStack>
           {arbeidsforhold.permisjonOgMangel && (
             <HStack gap="4">
@@ -124,11 +122,9 @@ export const InntektsmeldingOpplysningerPanel = ({
         journalpostId={inntektsmelding.journalpostId}
         dokumentId={inntektsmelding.dokumentId}
       >
-        <span>
-          <BodyShort size="small" className={styles.inline}>
-            <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
-          </BodyShort>
-        </span>
+        <BodyShort size="small" className={styles.inline}>
+          <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
+        </BodyShort>
         <FileFillIcon className={styles.docIcon} />
       </DokumentLink>
     </VStack>
