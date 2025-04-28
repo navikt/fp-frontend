@@ -26,7 +26,7 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: OppgaveStatus, brukernavn: 
   }
   const datoOgTid = getDateAndTime(flyttetReservasjon.tidspunkt);
 
-  const erLagetAvInnloggetBruker = brukernavn === oppgaveStatus.reservertAvUid;
+  const erLagetAvInnloggetBruker = brukernavn === flyttetReservasjon.uid;
 
   return (
     <VStack gap="2">
