@@ -19,34 +19,42 @@ export type OppgaveMedReservertIndikator = Oppgave & {
   reservertTilTidspunkt: string | undefined;
 };
 
-const lagFlyttetReservasjonPopover = (oppgaveStatus: OppgaveStatus): ReactNode | undefined => {
+const lagFlyttetReservasjonPopover = (oppgaveStatus: OppgaveStatus, brukernavn: string): ReactNode | undefined => {
   const { flyttetReservasjon } = oppgaveStatus;
   if (!flyttetReservasjon) {
     return undefined;
   }
   const datoOgTid = getDateAndTime(flyttetReservasjon.tidspunkt);
 
+  const erLagetAvInnloggetBruker = brukernavn === oppgaveStatus.reservertAvUid;
+
   return (
     <VStack gap="2">
+      {!erLagetAvInnloggetBruker && (
+        <VStack gap="1">
+          <Label size="small">
+            <FormattedMessage id="OppgaverTabell.OverfortReservasjonHeader" />
+          </Label>
+          <BodyShort size="small">
+            <FormattedMessage
+              id="OppgaverTabell.OverfortReservasjonBody"
+              values={{
+                dato: datoOgTid?.date,
+                tid: datoOgTid?.time,
+                uid: flyttetReservasjon.uid,
+                navn: flyttetReservasjon.navn,
+              }}
+            />
+          </BodyShort>
+        </VStack>
+      )}
       <VStack gap="1">
         <Label size="small">
-          <FormattedMessage id="OppgaverTabell.OverfortReservasjonHeader" />
-        </Label>
-        <BodyShort size="small">
-          <FormattedMessage
-            id="OppgaverTabell.OverfortReservasjonBody"
-            values={{
-              dato: datoOgTid?.date,
-              tid: datoOgTid?.time,
-              uid: flyttetReservasjon.uid,
-              navn: flyttetReservasjon.navn,
-            }}
-          />
-        </BodyShort>
-      </VStack>
-      <VStack gap="1">
-        <Label size="small">
-          <FormattedMessage id="OppgaverTabell.OverfortReservasjonBegrunnelse" />
+          {erLagetAvInnloggetBruker ? (
+            <FormattedMessage id="OppgaverTabell.Notat" />
+          ) : (
+            <FormattedMessage id="OppgaverTabell.OverfortReservasjonBegrunnelse" />
+          )}
         </Label>
         <BodyShort size="small">{flyttetReservasjon.begrunnelse}</BodyShort>
       </VStack>
@@ -54,7 +62,7 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: OppgaveStatus): ReactNode |
   );
 };
 
-const NotatKnapp = ({ oppgave }: { oppgave: Oppgave }) => {
+const NotatKnapp = ({ oppgave, brukernavn }: { oppgave: Oppgave; brukernavn: string }) => {
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
   return (
@@ -67,7 +75,7 @@ const NotatKnapp = ({ oppgave }: { oppgave: Oppgave }) => {
         variant="tertiary-neutral"
       ></Button>
       <Popover open={openState} onClose={() => setOpenState(false)} anchorEl={buttonRef.current}>
-        <Popover.Content>{lagFlyttetReservasjonPopover(oppgave.status)}</Popover.Content>
+        <Popover.Content>{lagFlyttetReservasjonPopover(oppgave.status, brukernavn)}</Popover.Content>
       </Popover>
     </>
   );
@@ -136,7 +144,7 @@ export const OppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Props) => {
       <Table.DataCell>
         {oppgave.status.flyttetReservasjon && (
           <div ref={refPopover}>
-            <NotatKnapp oppgave={oppgave} />
+            <NotatKnapp oppgave={oppgave} brukernavn={brukernavn} />
           </div>
         )}
       </Table.DataCell>

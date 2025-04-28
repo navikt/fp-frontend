@@ -12,6 +12,7 @@
   "OppgaverTabell.OverfortReservasjonHeader": "Overført reservasjon",
   "OppgaverTabell.OverfortReservasjonBody": "{dato} - {tid} fra {uid} {navn}",
   "OppgaverTabell.OverfortReservasjonBegrunnelse": "Begrunnelse",
+  "OppgaverTabell.Notat": "Notat",
   "OppgaverTabell.ReservertTilTidspunkt": "Reservert til",
   "OppgaverTabell.Saksnr": "Kopier saksnummer",
 
