@@ -51,6 +51,7 @@ const defaultBehandling = {
   språkkode: 'NB',
   behandlingsresultat: {
     type: BehandlingResultatType.INNVILGET,
+    vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
   },
   behandlingPåVent: false,
   behandlingHenlagt: false,
@@ -156,6 +157,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
         vedtaksbrev: 'FRITEKST',
         type: BehandlingResultatType.INNVILGET,
         harRedigertVedtaksbrev: true,
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -174,6 +176,7 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -192,6 +195,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -233,6 +237,7 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -524,6 +529,7 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatEngangsstonad: {
@@ -568,6 +574,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
           KonsekvensForYtelsen.ENDRING_I_BEREGNING,
           KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
         ],
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -591,6 +598,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
           KonsekvensForYtelsen.ENDRING_I_BEREGNING,
           KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
         ],
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -613,6 +621,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
           KonsekvensForYtelsen.ENDRING_I_BEREGNING,
           KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
         ],
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -636,6 +645,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
           KonsekvensForYtelsen.ENDRING_I_BEREGNING,
           KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
         ],
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -657,6 +667,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
         vedtaksbrev: 'FRITEKST',
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER],
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -676,6 +687,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningsresultatOriginalBehandling: {
@@ -699,6 +711,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningsresultatOriginalBehandling: {
@@ -722,6 +735,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
         opphørsdato: '2024-11-01',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -741,6 +755,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -772,6 +787,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         type: BehandlingResultatType.AVSLATT,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
         avslagsarsak: '1007',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -810,6 +826,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
         opphørsdato: '2024-11-01',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -842,6 +859,7 @@ export const LegacyOverstyring: Story = {
         type: BehandlingResultatType.INNVILGET,
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -863,6 +881,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
         type: BehandlingResultatType.INNVILGET,
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
+        vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
     beregningresultatDagytelse: defaultberegningresultatDagytelse,
@@ -894,6 +913,25 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
         },
       ],
     } as Fagsak,
+    isReadOnly: false,
+    brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
+  },
+};
+
+export const SkalIkkeProduseresBrev: Story = {
+  args: {
+    behandling: {
+      ...defaultBehandling,
+      behandlingsresultat: {
+        type: BehandlingResultatType.INNVILGET,
+        avslagsarsakFritekst: 'Dette er ein fritekst',
+        vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+      },
+    } as Behandling,
+    beregningresultatEngangsstonad: {
+      antallBarn: 2,
+      beregnetTilkjentYtelse: 10000,
+    } as BeregningsresultatEs,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },

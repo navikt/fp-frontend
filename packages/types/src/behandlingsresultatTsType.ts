@@ -14,4 +14,12 @@ export type Behandlingsresultat = Readonly<{
     dato: string;
   };
   opphørsdato: string | null;
+  vedtaksbrevStatus:
+    | 'VEDTAKSBREV_PRODUSERES'
+    | 'INGEN_VEDTAKSBREV'
+    | 'INGEN_VEDTAKSBREV_ANKE'
+    | 'INGEN_VEDTAKSBREV_KLAGEBEHANDLING'
+    | 'INGEN_VEDTAKSBREV_BEHANDLING_ETTER_KLAGE'
+    | 'INGEN_VEDTAKSBREV_JUSTERING_AV_FERIEPENGER'
+    | 'INGEN_VEDTAKSBREV_INGEN_KONSEKVENS_FOR_YTELSE';
 }>;
