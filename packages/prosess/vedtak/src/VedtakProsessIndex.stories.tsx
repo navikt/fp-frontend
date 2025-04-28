@@ -920,7 +920,7 @@ export const SkalIkkeProduseresBrev: Story = {
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
       },
     } as Behandling,
-    beregningresultatEngangsstonad: {
+    beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
