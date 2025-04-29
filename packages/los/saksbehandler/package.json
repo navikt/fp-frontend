@@ -30,7 +30,7 @@
     "@navikt/ft-form-validators": "3.1.14",
     "@navikt/ft-ui-komponenter": "4.1.0",
     "@navikt/ft-utils": "3.3.4",
-    "@tanstack/react-query": "5.74.4",
+    "@tanstack/react-query": "5.74.9",
     "@tanstack/react-query-devtools": "^5.74.4",
     "dayjs": "1.11.13",
     "echarts": "5.6.0",
@@ -39,9 +39,9 @@
     "lodash.debounce": "4.0.8",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-hook-form": "7.56.0",
+    "react-hook-form": "7.56.1",
     "react-intl": "7.1.11",
-    "react-router-dom": "7.5.1"
+    "react-router-dom": "7.5.3"
   },
   "devDependencies": {
     "@navikt/ds-css": "7.20.0",
