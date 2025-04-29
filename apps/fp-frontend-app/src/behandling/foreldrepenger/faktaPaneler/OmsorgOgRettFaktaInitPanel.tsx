@@ -17,16 +17,19 @@ import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext'
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
   AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+  AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
 ];
+
+const OVERSTYRING_AKSJONSPUNKT_KODER = [AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG];
 
 interface Props {
   personoversikt: Personoversikt;
 }
 
 export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
-  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
+  const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER, OVERSTYRING_AKSJONSPUNKT_KODER);
 
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling, rettigheter } = use(BehandlingDataContext);
 
   const api = useBehandlingApi(behandling);
 
@@ -44,6 +47,7 @@ export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
           omsorgOgRett={omsorgOgRett}
           personoversikt={personoversikt}
           submittable={standardPanelProps.submittable}
+          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         />
       ) : (
         <LoadingPanel />

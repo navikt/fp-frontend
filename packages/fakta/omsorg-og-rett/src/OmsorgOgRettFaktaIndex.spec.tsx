@@ -3,6 +3,8 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
+import { Rettighetstype } from '@navikt/fp-types';
+
 import * as stories from './OmsorgOgRettFaktaIndex.stories';
 
 const {
@@ -11,6 +13,7 @@ const {
   HarAksjonspunktForAvklarAnnenForelderRett,
   AvklarAnnenForelderRettBareFarRett,
   RevurderingManuell,
+  KanOverstyreMor,
 } = composeStories(stories);
 
 describe('OmsorgOgRettFaktaIndex', () => {
@@ -19,6 +22,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     const utils = render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
 
+    expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
     expect(await screen.findByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
 
     expect(screen.getByText('Barnet, Tutta Utvikler')).toBeInTheDocument();
@@ -53,6 +57,8 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
     const utils = render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
+
+    expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
 
     expect(await screen.findByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
 
@@ -92,6 +98,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const utils = render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
 
     expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
+    expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
     const jaElements = screen.getAllByText('Ja');
@@ -116,6 +123,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const utils = render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
 
     expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
+    expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
     await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
@@ -143,6 +151,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   it('skal vise at bare far har rett til foreldrepenger når mor er uføretrygd', async () => {
     render(<AvklarAnnenForelderRettBareFarRett isReadOnly />);
 
+    expect(await screen.findByText('Rettighetstype')).toBeInTheDocument();
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
     expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
     expect(screen.getByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
@@ -162,6 +171,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   it('skal vise i readonly modus for historisk valgte options når revurdering åpnes', async () => {
     render(<RevurderingManuell isReadOnly={true} />);
 
+    expect(await screen.findByText('Rettighetstype')).toBeInTheDocument();
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
     expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
     expect(screen.getByText('Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?')).toBeInTheDocument();
@@ -180,6 +190,26 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(checkedJaRadioButtons).toHaveLength(1);
     checkedJaRadioButtons.forEach(radio => {
       expect(radio).toBeDisabled();
+    });
+  });
+
+  it('skal kunne ovestyre', async () => {
+    const lagreVurdering = vi.fn(() => Promise.resolve());
+
+    const utils = render(<KanOverstyreMor submitCallback={lagreVurdering} />);
+
+    await userEvent.click(screen.getByTitle('Overstyr'));
+    await userEvent.selectOptions(utils.getByLabelText('Rettighetstype'), Rettighetstype.BEGGE_RETT);
+
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
+    expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
+      kode: '6018',
+      begrunnelse: 'Dette er en begrunnelse',
+      rettighetstype: Rettighetstype.BEGGE_RETT,
     });
   });
 });

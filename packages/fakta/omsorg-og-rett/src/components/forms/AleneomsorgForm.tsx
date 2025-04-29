@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -50,18 +49,15 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
     },
   });
 
-  const transformerFeltverdier = useCallback(
-    (feltVerdier: FormValues) =>
-      submitCallback({
-        kode: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-        aleneomsorg: feltVerdier.harAleneomsorg,
-        annenforelderHarRett: feltVerdier.harAnnenForelderRett,
-        annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
-        annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
-        ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
-      }),
-    [],
-  );
+  const transformerFeltverdier = (feltVerdier: FormValues) =>
+    submitCallback({
+      kode: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      aleneomsorg: feltVerdier.harAleneomsorg,
+      annenforelderHarRett: feltVerdier.harAnnenForelderRett,
+      annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
+      annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
+      ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
+    });
 
   const skalAvklareUforetrygd =
     omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;

@@ -1,9 +1,9 @@
 import { FormattedMessage } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { Box, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { Verdi } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -13,27 +13,73 @@ import { OpplysningerFraSoknad } from '../opplysningskort/OpplysningerFraSoknad.
 import { OpplysningerOmAdresser } from '../opplysningskort/OpplysningerOmAdresser.tsx';
 import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
+import { RettighetstypeForm } from './forms/RettighetstypeForm.tsx';
 
-export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittable }: OmsorgOgRettProps) => {
+export const OmsorgOgRettInfoPanel = ({
+  personoversikt,
+  omsorgOgRett,
+  submittable,
+  kanOverstyre,
+}: OmsorgOgRettProps) => {
   const { alleKodeverk, aksjonspunkterForPanel, isReadOnly, harÅpneAksjonspunkter } = usePanelDataContext();
 
-  const harAPAleneomsorg = hasAksjonspunkt(
-    AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-    aksjonspunkterForPanel,
+  const aksjonspunkter = aksjonspunkterForPanel.filter(
+    a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
   );
-  const harAPAnnenForelderRett = hasAksjonspunkt(AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT, aksjonspunkterForPanel);
+
+  const opprettetAleneomsorgAPUtenResultat = aksjonspunkter.some(
+    a =>
+      a.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG &&
+      a.status === AksjonspunktStatus.OPPRETTET &&
+      !omsorgOgRett.manuellBehandlingResultat,
+  );
+  const opprettetRettAPUtenResultat = aksjonspunkter.some(
+    a =>
+      a.definisjon === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT &&
+      a.status === AksjonspunktStatus.OPPRETTET &&
+      !omsorgOgRett.manuellBehandlingResultat,
+  );
+  const rettAPMedResultat = aksjonspunkter.some(
+    a => a.definisjon === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT && omsorgOgRett.manuellBehandlingResultat,
+  );
+  const aleneomsorgAPMedResultat = aksjonspunkter.some(
+    a =>
+      a.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG &&
+      omsorgOgRett.manuellBehandlingResultat,
+  );
+  const harRettAp = aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT);
+  const harAleneomsorgAp = aksjonspunkter.some(
+    a => a.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+  );
+  const resultatUtenAp = omsorgOgRett.manuellBehandlingResultat && !harRettAp && !harAleneomsorgAp;
 
   const søkerHarAleneomsorgResultat =
     omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg ?? Verdi.IKKE_RELEVANT;
-  const manuellResultatUtenAksjonspunkt =
-    !harAPAleneomsorg && !harAPAnnenForelderRett && omsorgOgRett.manuellBehandlingResultat;
+
+  const overstyringAksjonspunkter = aksjonspunkterForPanel.filter(
+    a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
+  );
+  const harUløsteAksjonspunkter = opprettetRettAPUtenResultat || opprettetAleneomsorgAPUtenResultat;
   return (
-    <VStack gap="8">
+    <VStack gap="6">
       {!isReadOnly && harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
-          {harAPAleneomsorg && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
-          {harAPAnnenForelderRett && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
+          <>
+            {harAleneomsorgAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
+            {harRettAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
+            {overstyringAksjonspunkter.length > 0 && <FormattedMessage id="OmsorgOgRettInfoPanel.Overstyring" />}
+          </>
         </AksjonspunktHelpTextHTML>
+      )}
+      {!harUløsteAksjonspunkter && omsorgOgRett.rettighetstype && (
+        <Box background="surface-neutral-subtle" padding="5">
+          <RettighetstypeForm
+            omsorgOgRett={omsorgOgRett}
+            submittable={submittable}
+            aksjonspunkt={overstyringAksjonspunkter[0]}
+            kanOverstyre={kanOverstyre}
+          />
+        </Box>
       )}
 
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
@@ -42,24 +88,20 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, submittabl
       )}
       {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
 
-      {harAPAleneomsorg && (
-        <AleneomsorgForm
-          omsorgOgRett={omsorgOgRett}
-          submittable={submittable}
-          aksjonspunkt={aksjonspunkterForPanel[0]}
-        />
+      {(opprettetAleneomsorgAPUtenResultat || aleneomsorgAPMedResultat) && (
+        <AleneomsorgForm omsorgOgRett={omsorgOgRett} submittable={submittable} aksjonspunkt={aksjonspunkter[0]} />
       )}
-      {harAPAnnenForelderRett && (
+      {(opprettetRettAPUtenResultat || rettAPMedResultat) && (
         <HarAnnenForelderRettForm
           omsorgOgRett={omsorgOgRett}
           submittable={submittable}
-          aksjonspunkt={aksjonspunkterForPanel[0]}
+          aksjonspunkt={aksjonspunkter[0]}
         />
       )}
-      {manuellResultatUtenAksjonspunkt && søkerHarAleneomsorgResultat !== Verdi.IKKE_RELEVANT && (
+      {resultatUtenAp && søkerHarAleneomsorgResultat !== Verdi.IKKE_RELEVANT && (
         <AleneomsorgForm omsorgOgRett={omsorgOgRett} submittable={false} />
       )}
-      {manuellResultatUtenAksjonspunkt && søkerHarAleneomsorgResultat === Verdi.IKKE_RELEVANT && (
+      {resultatUtenAp && søkerHarAleneomsorgResultat === Verdi.IKKE_RELEVANT && (
         <HarAnnenForelderRettForm omsorgOgRett={omsorgOgRett} submittable={false} />
       )}
     </VStack>

@@ -138,6 +138,10 @@ const buildAvklarAnnenForelderText = (): ReactElement => (
   <FormattedMessage id="ToTrinnsForm.AvklarUttak.AnnenForelderHarRett" />
 );
 
+const buildOverstyrtRettOgOmsorgText = (): ReactElement => (
+  <FormattedMessage id="ToTrinnsForm.AvklarUttak.OverstyrtRettOgOmsorg" />
+);
+
 const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolean =>
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.BEHANDLE_KLAGE_NFP ||
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
@@ -182,6 +186,9 @@ export const getAksjonspunkttekst = (
   }
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD) {
     return getTextForForeldreansvarsvilkåretAndreLedd(isForeldrepenger);
+  }
+  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG) {
+    return [buildOverstyrtRettOgOmsorgText()];
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {
     return getTextForKlage(behandlingStatus, behandlingsresultat);

@@ -84,7 +84,7 @@ export type {
 export type { Vilkar } from './src/vilkarTsType';
 export type { Ytelsefordeling } from './src/ytelsefordelingTsType';
 export type { OmsorgOgRett } from './src/omsorgOgRettTsType';
-export { Verdi } from './src/omsorgOgRettTsType';
+export { Verdi, Rettighetstype } from './src/omsorgOgRettTsType';
 export type { FamilieHendelse, FamilieHendelseSamling, AvklartBarn } from './src/familieHendelseTsType';
 export type {
   Fagsak,
