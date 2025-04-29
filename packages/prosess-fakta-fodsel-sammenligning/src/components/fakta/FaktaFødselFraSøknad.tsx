@@ -1,9 +1,12 @@
-import { BodyShort, ExpansionCard, VStack } from '@navikt/ds-react';
+import { FormattedMessage } from 'react-intl';
+
+import { BodyShort, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { FaktaKilde, getLabelForFaktaKilde, ValueLabel } from '@navikt/fp-fakta-felles';
+import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { Soknad } from '@navikt/fp-types';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
   søknad: Soknad;
@@ -11,27 +14,30 @@ interface Props {
 
 export const FaktaFødselFraSøknad = ({ søknad }: Props) => {
   return (
-    <ExpansionCard size="small" aria-label="Opplysninger fra søknad" defaultOpen={true}>
-      <ExpansionCard.Header>
-        <ExpansionCard.Title>Opplysninger fra søknad</ExpansionCard.Title>
-        <ExpansionCard.Description>{getLabelForFaktaKilde(FaktaKilde.SOKNAD)}</ExpansionCard.Description>
-      </ExpansionCard.Header>
-      <ExpansionCard.Content>
-        <VStack gap="4">
-          {søknad.antallBarn && <ValueLabel label="Antall Barn">{søknad.antallBarn}</ValueLabel>}
-          {søknad.termindato && (
-            <ValueLabel label="Termindato">
-              {dateFormat(søknad.termindato) + (søknad.utstedtdato && ` (Utstedt: ${dateFormat(søknad.utstedtdato)})`)}
-            </ValueLabel>
-          )}
-          {søknad.fodselsdatoer && (
-            <ValueLabel label="Fødselsdato">
-              <Fødselsdatoer fødseldatoer={søknad.fodselsdatoer} />
-            </ValueLabel>
-          )}
-        </VStack>
-      </ExpansionCard.Content>
-    </ExpansionCard>
+    <FaktaKort label={<FormattedMessage id="FodselsammenligningPanel.OpplysningerSoknad" />}>
+      <VStack gap="4">
+        {søknad.termindato && (
+          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Termindato" />}>
+            {dateFormat(søknad.termindato)}
+          </ValueLabel>
+        )}
+        {søknad.utstedtdato && (
+          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.UstedtDato" />}>
+            {dateFormat(søknad.utstedtdato)}
+          </ValueLabel>
+        )}
+        {søknad.fodselsdatoer && (
+          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />}>
+            <Fødselsdatoer fødseldatoer={søknad.fodselsdatoer} />
+          </ValueLabel>
+        )}
+        {søknad.antallBarn && (
+          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.AntallBarn" />}>
+            {søknad.antallBarn}
+          </ValueLabel>
+        )}
+      </VStack>
+    </FaktaKort>
   );
 };
 

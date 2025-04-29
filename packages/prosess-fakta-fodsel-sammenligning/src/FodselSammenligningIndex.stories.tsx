@@ -63,7 +63,7 @@ const meta = {
   args: {
     gjeldendeFamilieHendelse: familiehendelseSamling.gjeldende,
     soknad,
-    registrertFamiliehendelse: familiehendelseSamling.register ?? undefined,
+    registerFamiliehendelse: familiehendelseSamling.register ?? undefined,
     familiehendelseOriginalBehandling: undefined,
   },
 } satisfies Meta<typeof FodselSammenligningIndex>;
@@ -77,9 +77,29 @@ export const PanelForNårBehandlingstypeErRevurdering: Story = {
   },
 };
 
-export const PanelForNårBehandlingstypeErFørstegangssoknad: Story = {
+export const PanelForFørstegangssoknad: Story = {
   args: {
     behandlingsTypeKode: BehandlingType.FORSTEGANGSSOKNAD,
+  },
+};
+export const PanelFørstegangssoknadMedDødTvilling: Story = {
+  args: {
+    behandlingsTypeKode: BehandlingType.FORSTEGANGSSOKNAD,
+    soknad: { ...soknad, antallBarn: 1, fodselsdatoer: undefined },
+    gjeldendeFamilieHendelse: familiehendelseSamling.gjeldende,
+    registerFamiliehendelse: {
+      ...familiehendelseSamling.register,
+      avklartBarn: [
+        {
+          fodselsdato: '2025-04-22',
+          dodsdato: null,
+        },
+        {
+          fodselsdato: '2025-04-22',
+          dodsdato: '2025-04-24',
+        },
+      ],
+    } as FamilieHendelse,
   },
 };
 
