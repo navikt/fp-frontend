@@ -19,25 +19,27 @@ import {
   flyttReservasjonSaksbehandlerSøkPost,
   forlengReservasjonPost,
   LosUrl,
+  opphevReservasjon,
 } from '../../../data/fplosSaksbehandlerApi';
 import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
-import { OpphevReservasjonModal } from './OpphevReservasjonModal';
+import { NotatModal } from './notat/NotatModal';
 
 import styles from './oppgaveHandlingerMenu.module.css';
 
 interface Props {
   oppgave: Oppgave;
   setEnableTableEvents: (shouldDisable: boolean) => void;
+  brukernavn: string;
 }
 
-export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents }: Props) => {
+export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernavn }: Props) => {
   const intl = useIntl();
   const queryClient = useQueryClient();
 
-  const [visOpphevReservasjonModal, setVisOpphevReservasjonModal] = useState(false);
   const [visForlengetReservasjonModal, setVisForlengetReservasjonModal] = useState(false);
   const [visReservasjonEndringDatoModal, setVisReservasjonEndringDatoModal] = useState(false);
   const [visFlyttReservasjonModal, setVisFlyttReservasjonModal] = useState(false);
+  const [visNotatModal, setVisNotatModal] = useState(false);
 
   const { mutate: endreOppgavereservasjon } = useMutation({
     mutationFn: (reserverTil: string) => endreReservasjonPost(oppgave.id, reserverTil),
@@ -72,6 +74,15 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents }: Props) 
     },
   });
 
+  const { mutate: opphevOppgavereservasjon } = useMutation({
+    mutationFn: () => opphevReservasjon(oppgave.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: [LosUrl.RESERVERTE_OPPGAVER],
+      });
+    },
+  });
+
   const {
     mutate: hentSaksbehandler,
     data: saksbehandler,
@@ -99,7 +110,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents }: Props) 
         </ActionMenu.Trigger>
         <ActionMenu.Content>
           <ActionMenu.Group aria-label={intl.formatMessage({ id: 'OppgaveHandlingerMenu.Meny' })}>
-            <ActionMenu.Item onSelect={() => setVisOpphevReservasjonModal(true)} icon={<ArrowUndoIcon aria-hidden />}>
+            <ActionMenu.Item onSelect={() => opphevOppgavereservasjon()} icon={<ArrowUndoIcon aria-hidden />}>
               <FormattedMessage id="OppgaveHandlingerMenu.LeggTilbake" values={{ br: <br /> }} />
             </ActionMenu.Item>
             <ActionMenu.Item onSelect={() => forlengOppgavereservasjon()} icon={<HourglassTopFilledIcon aria-hidden />}>
@@ -117,12 +128,12 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents }: Props) 
             >
               <FormattedMessage id="OppgaveHandlingerMenu.FlyttReservasjon" values={{ br: <br /> }} />
             </ActionMenu.Item>
+            <ActionMenu.Item onSelect={() => setVisNotatModal(true)} icon={<PersonHeadsetIcon aria-hidden />}>
+              <FormattedMessage id="OppgaveHandlingerMenu.Notat" values={{ br: <br /> }} />
+            </ActionMenu.Item>
           </ActionMenu.Group>
         </ActionMenu.Content>
       </ActionMenu>
-      {visOpphevReservasjonModal && (
-        <OpphevReservasjonModal oppgave={oppgave} closeModal={() => setVisOpphevReservasjonModal(false)} />
-      )}
       {visReservasjonEndringDatoModal && (
         <OppgaveReservasjonEndringDatoModal
           closeModal={() => setVisReservasjonEndringDatoModal(false)}
@@ -143,6 +154,14 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents }: Props) 
           hentSaksbehandlerIsSuccess={isSuccess}
           saksbehandler={saksbehandler}
           resetHentSaksbehandler={resetHentSaksbehandler}
+        />
+      )}
+      {visNotatModal && (
+        <NotatModal
+          closeModal={() => setVisNotatModal(false)}
+          flyttOppgavereservasjon={flyttOppgavereservasjon}
+          brukernavn={brukernavn}
+          notat={oppgave.status.flyttetReservasjon?.begrunnelse}
         />
       )}
     </>

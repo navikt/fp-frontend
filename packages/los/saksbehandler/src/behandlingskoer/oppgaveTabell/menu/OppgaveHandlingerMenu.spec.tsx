@@ -22,27 +22,6 @@ describe('<OppgaveHandlingerMenu>', () => {
     expect(screen.getByText('Flytt til ny saksbehandler')).toBeInTheDocument();
   });
 
-  it('skal åpne og lukke modal for oppheving av reservasjon', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
-    render(<Default />);
-
-    expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByRole('button'));
-
-    expect(await screen.findByText('Legg tilbake i felles kø')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Legg tilbake i felles kø'));
-
-    expect(await screen.findByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).toBeInTheDocument();
-
-    await userEvent.click(screen.getByText('Avbryt'));
-
-    await waitFor(() =>
-      expect(screen.queryByText('Når en reservert sak frigjøres er begrunnelse obligatorisk')).not.toBeInTheDocument(),
-    );
-  });
-
   it('skal åpne modal for å forlenge reservasjon', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

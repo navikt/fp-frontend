@@ -66,9 +66,10 @@ interface Props {
   reserverOppgave: (oppgave: Oppgave) => void;
   antallOppgaver?: number;
   valgtSakslisteId: number;
+  brukernavn: string;
 }
 
-export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSakslisteId }: Props) => {
+export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSakslisteId, brukernavn }: Props) => {
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 15;
 
@@ -158,7 +159,12 @@ export const OppgaverTabell = ({ reserverOppgave, antallOppgaver = 0, valgtSaksl
             </Table.Header>
             <Table.Body>
               {oppgaverSomSkalVisesITabell.map(oppgave => (
-                <OppgaveRad key={oppgave.id} oppgave={oppgave} reserverOppgave={reserverOppgave} />
+                <OppgaveRad
+                  key={oppgave.id}
+                  oppgave={oppgave}
+                  reserverOppgave={reserverOppgave}
+                  brukernavn={brukernavn}
+                />
               ))}
             </Table.Body>
           </Table>
