@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
 
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
@@ -50,7 +49,7 @@ const SvangerskapspengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgi
           personoversikt={personoversikt}
         />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <VedtakProsessStegInitPanel aksjonspunktKoderForType={[AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE]} />
+        <VedtakProsessStegInitPanel />
       </ProsessMeny>
       <FaktaMeny
         valgtFaktaSteg={valgtFaktaSteg}

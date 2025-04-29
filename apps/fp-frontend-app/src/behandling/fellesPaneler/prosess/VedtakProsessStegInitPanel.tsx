@@ -27,14 +27,14 @@ const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDERE_DOKUMENT,
   AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
   AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
+  AksjonspunktKode.FORESLA_VEDTAK,
 ];
 
 interface Props {
-  aksjonspunktKoderForType?: AksjonspunktKode[];
   erEngangsstønad?: boolean;
 }
 
-export const VedtakProsessStegInitPanel = ({ aksjonspunktKoderForType = [], erEngangsstønad = false }: Props) => {
+export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) => {
   const intl = useIntl();
   const navigate = useNavigate();
 
@@ -43,8 +43,7 @@ export const VedtakProsessStegInitPanel = ({ aksjonspunktKoderForType = [], erEn
 
   const aksjonspunktKoder = [
     ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
-    ...aksjonspunktKoderForType,
-    AksjonspunktKode.FORESLA_VEDTAK,
+    ...(erEngangsstønad ? [] : [AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE]),
   ];
 
   const { setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
