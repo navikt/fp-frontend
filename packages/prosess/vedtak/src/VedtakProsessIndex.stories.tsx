@@ -125,7 +125,7 @@ type Story = StoryObj<typeof meta>;
 export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
   args: {
     behandling: defaultBehandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -139,7 +139,7 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
       ...defaultBehandling,
       status: BehandlingStatus.AVSLUTTET,
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -160,7 +160,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -179,7 +179,7 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -198,7 +198,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -210,7 +210,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
 export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
   args: {
     behandling: defaultBehandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -240,7 +240,7 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -294,7 +294,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         },
       ],
     },
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -451,7 +451,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
 export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyring: Story = {
   args: {
     behandling: defaultBehandling,
-    beregningresultatEngangsstonad: {
+    beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
@@ -469,7 +469,7 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
       ...defaultBehandling,
       status: BehandlingStatus.AVSLUTTET,
     },
-    beregningresultatEngangsstonad: {
+    beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
@@ -484,7 +484,7 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
 export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring: Story = {
   args: {
     behandling: defaultBehandling,
-    beregningresultatEngangsstonad: {
+    beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
@@ -499,7 +499,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
 export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
   args: {
     behandling: defaultBehandling,
-    beregningresultatEngangsstonad: {
+    beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
@@ -532,7 +532,7 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatEngangsstonad: {
+    beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
@@ -577,7 +577,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -601,7 +601,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -624,7 +624,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -648,7 +648,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -670,7 +670,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -690,11 +690,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningsresultatOriginalBehandling: {
-      'beregningsresultat-foreldrepenger': {
-        ...defaultberegningresultatDagytelse,
-      },
-    },
+    originaltBeregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -714,11 +710,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningsresultatOriginalBehandling: {
-      'beregningsresultat-foreldrepenger': {
-        ...defaultberegningresultatDagytelse,
-      },
-    },
+    originaltBeregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -738,7 +730,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -758,7 +750,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -790,7 +782,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -829,7 +821,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -862,7 +854,7 @@ export const LegacyOverstyring: Story = {
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -884,7 +876,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     } as Fagsak,
@@ -896,7 +888,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
 export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: Story = {
   args: {
     behandling: defaultBehandling,
-    beregningresultatDagytelse: defaultberegningresultatDagytelse,
+    beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       saksnummer: '1234567',
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -928,7 +920,7 @@ export const SkalIkkeProduseresBrev: Story = {
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
       },
     } as Behandling,
-    beregningresultatEngangsstonad: {
+    beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,

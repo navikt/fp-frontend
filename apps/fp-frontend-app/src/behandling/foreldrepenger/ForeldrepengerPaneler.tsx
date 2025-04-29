@@ -25,6 +25,7 @@ import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/O
 import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
 import { SoknadsfristProsessStegInitPanel } from '../fellesPaneler/prosess/SoknadsfristProsessStegInitPanel';
 import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
+import { VedtakProsessStegInitPanel } from '../fellesPaneler/prosess/VedtakProsessStegInitPanel.tsx';
 import { BesteberegningFaktaInitPanel } from './faktaPaneler/BesteberegningFaktaInitPanel';
 import { OmsorgFaktaInitPanel } from './faktaPaneler/OmsorgFaktaInitPanel';
 import { OmsorgOgRettFaktaInitPanel } from './faktaPaneler/OmsorgOgRettFaktaInitPanel';
@@ -33,7 +34,6 @@ import { UttakFaktaInitPanel } from './faktaPaneler/UttakFaktaInitPanel';
 import { InngangsvilkarFpProsessStegInitPanel } from './prosessPaneler/InngangsvilkarFpProsessStegInitPanel';
 import { TilkjentYtelseFpProsessStegInitPanel } from './prosessPaneler/TilkjentYtelseFpProsessStegInitPanel';
 import { UttakProsessStegInitPanel } from './prosessPaneler/UttakProsessStegInitPanel';
-import { VedtakFpProsessStegInitPanel } from './prosessPaneler/VedtakFpProsessStegInitPanel';
 
 interface Props {
   valgtProsessSteg: string | undefined;
@@ -60,7 +60,7 @@ const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere
           personoversikt={personoversikt}
         />
         <SimuleringProsessStegInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
-        <VedtakFpProsessStegInitPanel />
+        <VedtakProsessStegInitPanel />
       </ProsessMeny>
       <FaktaMeny
         valgtFaktaSteg={valgtFaktaSteg}
