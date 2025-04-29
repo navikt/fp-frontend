@@ -30,7 +30,7 @@ export const FodselSammenligningPanel = ({
   gjeldendeFamilieHendelse,
   registerFamiliehendelse,
 }: Props) => (
-  <VStack gap="4">
+  <VStack gap="4" marginBlock="2">
     <HGrid columns={2} gap="4">
       <FaktaFødselFraSøknad søknad={soknad} />
       <FaktaFødselFraFReg registerFamiliehendelse={registerFamiliehendelse} />
