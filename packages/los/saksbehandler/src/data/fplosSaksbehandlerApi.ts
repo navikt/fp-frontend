@@ -118,8 +118,8 @@ export const behandlendeOppgaverOptions = () =>
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>
   kyExtended.post(LosUrl.SØK_FAGSAK, { json: { searchString, skalReservere } }).json<FagsakEnkel[]>();
 
-export const postOpphevReservasjon = (oppgaveId: number, begrunnelse: string) =>
-  kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId, begrunnelse } });
+export const opphevReservasjon = (oppgaveId: number) =>
+  kyExtended.post(LosUrl.OPPHEV_OPPGAVERESERVASJON, { json: { oppgaveId } });
 
 export const forlengReservasjonPost = (oppgaveId: number) =>
   kyExtended.post(LosUrl.FORLENG_OPPGAVERESERVASJON, { json: { oppgaveId } }).json<Oppgave[]>();

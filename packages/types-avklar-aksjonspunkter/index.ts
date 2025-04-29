@@ -20,6 +20,7 @@ export type { BekreftUttaksperioderAp } from './src/fakta/BekreftUttaksperioderA
 export type { VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
 export type { OverstyringAvklarStartdatoForPeriodenAp } from './src/fakta/OverstyringAvklarStartdatoForPeriodenAp';
 export type { OverstyringDekningsgradAp } from './src/fakta/OverstyringDekningsgradAp';
+export type { OverstyringRettigheterAp } from './src/fakta/OverstyringRettigheterAp';
 export type { AvklarDekningsgradAp } from './src/fakta/AvklarDekningsgradAp';
 export type { AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export type { AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';

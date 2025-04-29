@@ -119,6 +119,7 @@ const meta = {
   args: {
     valgtSakslisteId: 1,
     reserverOppgave: action('button-click'),
+    brukernavn: 'T232332',
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla

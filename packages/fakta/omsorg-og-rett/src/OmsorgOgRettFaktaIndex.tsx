@@ -14,6 +14,7 @@ export interface OmsorgOgRettProps {
   personoversikt: Personoversikt;
   omsorgOgRett: OmsorgOgRett;
   submittable: boolean;
+  kanOverstyre: boolean;
 }
 
 export const OmsorgOgRettFaktaIndex = (props: OmsorgOgRettProps) => (

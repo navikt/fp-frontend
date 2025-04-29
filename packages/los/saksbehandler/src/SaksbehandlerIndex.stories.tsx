@@ -8,6 +8,7 @@ import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-k
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { AndreKriterierType } from './kodeverk/andreKriterierType';
@@ -254,6 +255,9 @@ export const Default: Story = {
   args: {
     setLosErIkkeTilgjengelig: action('button-click'),
     åpneFagsak: action('button-click'),
-    kanSaksbehandle: true,
+    navAnsatt: {
+      brukernavn: 'T232332',
+      kanSaksbehandle: true,
+    } as NavAnsatt,
   },
 };

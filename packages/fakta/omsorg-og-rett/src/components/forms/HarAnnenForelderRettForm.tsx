@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { VStack } from '@navikt/ds-react';
@@ -48,17 +47,14 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
   const skalAvklareUforetrygd =
     omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;
 
-  const transformerFeltverdier = useCallback(
-    (feltVerdier: FormValues) =>
-      submitCallback({
-        kode: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
-        annenforelderHarRett: feltVerdier.harAnnenForelderRett,
-        annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
-        annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
-        ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
-      }),
-    [],
-  );
+  const transformerFeltverdier = (feltVerdier: FormValues) =>
+    submitCallback({
+      kode: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+      annenforelderHarRett: feltVerdier.harAnnenForelderRett,
+      annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
+      annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
+      ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
+    });
 
   return (
     <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>

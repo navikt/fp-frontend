@@ -16,6 +16,7 @@ import {
   KjønnkodeEnum,
   type OmsorgOgRett,
   type PersonopplysningerBasis,
+  Rettighetstype,
   Verdi,
 } from '@navikt/fp-types';
 
@@ -82,9 +83,9 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
     annenpartBostedsland: 'ABW',
     annenpartRettighet: {
       harRettNorge: Verdi.JA,
-      harOppholdEØS: Verdi.JA,
-      harRettEØS: Verdi.NEI,
-      harUføretrygd: Verdi.JA,
+      harOppholdEØS: Verdi.IKKE_RELEVANT,
+      harRettEØS: Verdi.IKKE_RELEVANT,
+      harUføretrygd: Verdi.IKKE_RELEVANT,
     },
   },
   registerdata: {
@@ -94,6 +95,7 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
   },
   manuellBehandlingResultat: null,
   relasjonsRolleType: RelasjonsRolleType.FAR,
+  rettighetstype: Rettighetstype.BEGGE_RETT,
 };
 
 const aleneOmsorgForOmsorgOgRett: OmsorgOgRett = {
@@ -106,6 +108,7 @@ const aleneOmsorgForOmsorgOgRett: OmsorgOgRett = {
   registerdata: null,
   manuellBehandlingResultat: null,
   relasjonsRolleType: RelasjonsRolleType.MOR,
+  rettighetstype: Rettighetstype.ALENEOMSORG,
 };
 
 const meta = {
@@ -136,6 +139,7 @@ export const HarAksjonspunktForAvklarAleneomsorg: Story = {
       },
     ] as Aksjonspunkt[],
     omsorgOgRett: aleneOmsorgForOmsorgOgRett,
+    kanOverstyre: false,
   },
 };
 
@@ -162,6 +166,7 @@ export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
       annenPart: defaultAnnenPart,
       bruker: defaultBruker,
     },
+    kanOverstyre: false,
   },
 };
 
@@ -193,7 +198,9 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
       },
       manuellBehandlingResultat: null,
       relasjonsRolleType: RelasjonsRolleType.FAR,
+      rettighetstype: Rettighetstype.BEGGE_RETT,
     },
+    kanOverstyre: false,
   },
 };
 
@@ -235,7 +242,9 @@ export const AvklarAnnenForelderRettBareFarRett: Story = {
         },
       },
       relasjonsRolleType: RelasjonsRolleType.FAR,
+      rettighetstype: Rettighetstype.BARE_FAR_RETT_MOR_UFØR,
     },
+    kanOverstyre: false,
   },
 };
 
@@ -269,6 +278,72 @@ export const RevurderingManuell: Story = {
         },
       },
       relasjonsRolleType: RelasjonsRolleType.MEDMOR,
+      rettighetstype: Rettighetstype.BARE_FAR_RETT_MOR_UFØR,
     },
+    kanOverstyre: false,
+  },
+};
+export const KanOverstyreMor: Story = {
+  args: {
+    aksjonspunkterForPanel: [] as Aksjonspunkt[],
+    isReadOnly: false,
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: Verdi.NEI,
+        annenpartIdent: null,
+        annenpartBostedsland: null,
+        annenpartRettighet: {
+          harRettNorge: Verdi.JA,
+          harOppholdEØS: Verdi.IKKE_RELEVANT,
+          harRettEØS: Verdi.IKKE_RELEVANT,
+          harUføretrygd: Verdi.IKKE_RELEVANT,
+        },
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: Verdi.NEI,
+        harAnnenpartForeldrepenger: Verdi.NEI,
+        harAnnenpartEngangsstønad: Verdi.NEI,
+      },
+      manuellBehandlingResultat: null,
+      relasjonsRolleType: RelasjonsRolleType.MOR,
+      rettighetstype: Rettighetstype.BEGGE_RETT,
+    },
+    kanOverstyre: true,
+  },
+};
+export const KanOverstyreFarOgAlleredeLøstAP: Story = {
+  args: {
+    aksjonspunkterForPanel: [] as Aksjonspunkt[],
+    isReadOnly: false,
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: Verdi.NEI,
+        annenpartIdent: null,
+        annenpartBostedsland: null,
+        annenpartRettighet: {
+          harRettNorge: Verdi.JA,
+          harOppholdEØS: Verdi.IKKE_RELEVANT,
+          harRettEØS: Verdi.IKKE_RELEVANT,
+          harUføretrygd: Verdi.IKKE_RELEVANT,
+        },
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: Verdi.NEI,
+        harAnnenpartForeldrepenger: Verdi.NEI,
+        harAnnenpartEngangsstønad: Verdi.NEI,
+      },
+      manuellBehandlingResultat: {
+        søkerHarAleneomsorg: Verdi.IKKE_RELEVANT,
+        annenpartRettighet: {
+          harRettNorge: Verdi.NEI,
+          harOppholdEØS: Verdi.NEI,
+          harRettEØS: Verdi.NEI,
+          harUføretrygd: Verdi.NEI,
+        },
+      },
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+      rettighetstype: Rettighetstype.BARE_FAR_RETT,
+    },
+    kanOverstyre: true,
   },
 };

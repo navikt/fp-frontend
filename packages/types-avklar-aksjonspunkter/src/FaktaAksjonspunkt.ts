@@ -32,6 +32,7 @@ import type { KontrollerBesteberegningAP } from './fakta/KontrollerBesteberegnin
 import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
+import type { OverstyringRettigheterAp } from './fakta/OverstyringRettigheterAp';
 import type { SjekkManglendeFodselAp } from './fakta/SjekkManglendeFodselAp';
 import type { VurderArbeidsforholdInntektsmeldingAp } from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import type { VurderArbeidsforholdPermisjonAp } from './fakta/VurderArbeidsforholdPermisjonAp';
@@ -70,4 +71,5 @@ export type FaktaAksjonspunkt =
   | VurderDokumentasjonAp
   | VurderArbeidsforholdPermisjonAp
   | OverstyringDekningsgradAp
+  | OverstyringRettigheterAp
   | AvklarDekningsgradAp;

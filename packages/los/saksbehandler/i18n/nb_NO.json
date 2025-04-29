@@ -12,6 +12,7 @@
   "OppgaverTabell.OverfortReservasjonHeader": "Overført reservasjon",
   "OppgaverTabell.OverfortReservasjonBody": "{dato} - {tid} fra {uid} {navn}",
   "OppgaverTabell.OverfortReservasjonBegrunnelse": "Begrunnelse",
+  "OppgaverTabell.Notat": "Notat",
   "OppgaverTabell.ReservertTilTidspunkt": "Reservert til",
   "OppgaverTabell.Saksnr": "Kopier saksnummer",
 
@@ -68,11 +69,6 @@
   "BehandlingPollingTimoutModal.TimeoutMelding": "Din økt er gått ut på tid, trykk Fortsett",
   "BehandlingPollingTimoutModal.Oppfrisk": "Fortsett",
 
-  "OpphevReservasjonModal.Begrunnelse": "Angi begrunnelse",
-  "OpphevReservasjonModal.Hjelpetekst": "Når en reservert sak frigjøres er begrunnelse obligatorisk",
-  "OpphevReservasjonModal.Ok": "OK",
-  "OpphevReservasjonModal.Avbryt": "Avbryt",
-
   "FagsakSearch.ZeroSearchResults": "Søket ga ingen treff eller du mangler tilgang til saken",
   "FagsakSearch.FlereSakerEllerBehandlinger": "Velg sak eller behandling du ønsker å åpne/reservere. (Fagsak kan ikke reserveres.)",
 
@@ -81,6 +77,7 @@
   "OppgaveHandlingerMenu.ForlengReservasjon": "Forleng reservasjon (24t)",
   "OppgaveHandlingerMenu.EndreReservasjon": "Reserver med dato",
   "OppgaveHandlingerMenu.FlyttReservasjon": "Flytt til ny saksbehandler",
+  "OppgaveHandlingerMenu.Notat": "Legg til notat",
 
   "FagsakList.Saksnummer": "Saksnummer",
   "FagsakList.Stonadstype": "Stønadstype",
@@ -125,5 +122,8 @@
 
   "SaksbehandlerNokkeltallPanel.Statistikk": "Statistikk",
   "SaksbehandlerNokkeltallPanel.ForAlle": "For alle saksbehandlere",
-  "SaksbehandlerNokkeltallPanel.ForAlleDetaljer": "Statistikk for alle som jobber med foreldrepenger, engangsstønad og svangerskapspenger"
+  "SaksbehandlerNokkeltallPanel.ForAlleDetaljer": "Statistikk for alle som jobber med foreldrepenger, engangsstønad og svangerskapspenger",
+
+  "NotatModal.SkrivNotat": "Legg til notat på reservasjon",
+  "NotatModal.Notat": "Notat"
 }
