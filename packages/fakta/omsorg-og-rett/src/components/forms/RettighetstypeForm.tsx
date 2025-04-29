@@ -11,7 +11,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett, Rettighetstype } from '@navikt/fp-types';
 import type { OverstyringRettigheterAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
 
@@ -41,10 +41,8 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
 
   const rettighetstype = omsorgOgRett.rettighetstype ?? undefined;
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
-
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? {
+    defaultValues: {
       rettighetstype: rettighetstype,
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
@@ -74,7 +72,7 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
   const [erOverstyrt, setErOverstyrt] = useState(!!aksjonspunkt?.begrunnelse);
   const readOnly = !erOverstyrt || isReadOnly || !kanOverstyre;
   return (
-    <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
+    <Form formMethods={formMethods} onSubmit={transformerFeltverdier}>
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG]}
