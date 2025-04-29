@@ -1,15 +1,16 @@
 {
+  "FodselsammenligningPanel.OpplysningerFREG": "Opplysninger fra folkeregisteret",
+  "FodselsammenligningPanel.OpplysningerSoknad": "Opplysninger oppgitt i søknaden",
+  "FodselsammenligningPanel.OpplysningerGjeldende": "Gjeldende opplysninger",
+
   "FodselsammenligningPanel.AntallBarn": "Antall barn",
   "FodselsammenligningPanel.Termindato": "Termindato",
-  "FodselsammenligningPanel.FodtISvangerskapsuke": "Født i svangerskapsuke",
-  "FodselsammenligningPanel.Svangerskapsuke": "Svangerskapsuke",
-  "FodselsammenligningPanel.OpplysningerTPS": "Opplysninger om fødsel fra folkeregisteret",
   "FodselsammenligningPanel.Fodselsdato": "Fødselsdato",
   "FodselsammenligningPanel.Dodsdato": "Dødsdato",
   "FodselsammenligningPanel.UstedtDato": "Utstedt dato",
   "FodselsammenligningPanel.Ytelsesvedtak": "Vedtak",
   "FodselsammenligningPanel.Dodfodt": "Dødfødsel",
   "FodselsammenligningPanel.Dod": "Død",
-  "FodselSammenligningOtherPanel.OpplysningerISoknad": "Opplysninger om fødsel fra søknaden",
-  "FodselSammenligningOtherPanel.TerminISoknad": "Opplysninger om termin oppgitt i søknaden"
+  "FodselsammenligningPanel.Svangerskapsuke": "Svangerskapsuke",
+  "FodselsammenligningPanel.FodtISvangerskapsuke": "Født i svangerskapsuke"
 }

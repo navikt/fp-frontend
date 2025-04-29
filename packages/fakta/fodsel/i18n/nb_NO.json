@@ -18,7 +18,7 @@
   "AvklartBarnFieldArray.Dodsdato": "Dødsdato",
   "AvklartBarnFieldArray.LeggTilBarn": "Legg til barn",
 
-  "SjekkFodselDokForm.DokumentasjonForeligger": "Ja",
-  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Nei, bruk opplysningene i folkeregisteret",
-  "SjekkFodselDokForm.DokumentasjonAvFodsel": "Foreligger det dokumentasjon om fødsel?"
+  "SjekkFodselDokForm.DokumentasjonForeligger": "Dokumentasjon foreligger",
+  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Dokumentasjon foreligger ikke, bruk opplysningene i folkeregisteret",
+  "SjekkFodselDokForm.DokumentasjonAvFodsel": "Fødselsdokumentasjon"
 }

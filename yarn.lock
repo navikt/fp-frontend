@@ -3626,7 +3626,6 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
     typescript: 5.8.3
     vite: 6.3.2
     vitest: 3.1.2

@@ -1,9 +1,10 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, ExpansionCard, HStack, Tag } from '@navikt/ds-react';
+import { BodyShort, HStack, Tag } from '@navikt/ds-react';
 
-import { FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
+import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { FamilieHendelse } from '@navikt/fp-types';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 import { AvklartBarn } from './AvklartBarn';
 
@@ -18,24 +19,29 @@ export const FaktaFødselFraFReg = ({ registerFamiliehendelse }: Props) => {
     registerFamiliehendelse.avklartBarn.filter(barn => barn.dodsdato).length > 0;
   const { avklartBarn } = registerFamiliehendelse || {};
   return (
-    <ExpansionCard size="small" aria-label="Opplysninger fra Folkeregisteret" defaultOpen={true}>
-      <ExpansionCard.Header>
-        <ExpansionCard.Title>
-          <HStack gap="4">
-            Opplysninger fra Folkeregisteret
-            {harDødFødtBarn && (
-              <Tag variant="info">
-                <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
-              </Tag>
-            )}
-          </HStack>
-        </ExpansionCard.Title>
-        <ExpansionCard.Description>{getLabelForFaktaKilde(FaktaKilde.FREG)}</ExpansionCard.Description>
-      </ExpansionCard.Header>
-      <ExpansionCard.Content>
+    <FaktaKort
+      label={
+        <HStack gap="4">
+          <FormattedMessage id="FodselsammenligningPanel.OpplysningerFREG" />
+          {harDødFødtBarn && (
+            <Tag variant="info">
+              <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
+            </Tag>
+          )}
+        </HStack>
+      }
+    >
+      <>
         {!avklartBarn && <BodyShort>Det er ikke registrert noen fødselshendelse i folkeregisteret</BodyShort>}
-        {avklartBarn && <AvklartBarn avklartBarn={avklartBarn} />}
-      </ExpansionCard.Content>
-    </ExpansionCard>
+        {avklartBarn && (
+          <>
+            <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.AntallBarn" />}>
+              {avklartBarn.length}
+            </ValueLabel>
+            <AvklartBarn avklartBarn={avklartBarn} />
+          </>
+        )}
+      </>
+    </FaktaKort>
   );
 };

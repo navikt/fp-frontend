@@ -3,11 +3,8 @@ import { render, screen } from '@testing-library/react';
 
 import * as stories from './FodselSammenligningIndex.stories';
 
-const {
-  PanelForNårBehandlingstypeErRevurdering,
-  PanelForNårBehandlingstypeErFørstegangssoknad,
-  PanelForMedVisningAvSvangerskapsuke,
-} = composeStories(stories);
+const { PanelForNårBehandlingstypeErRevurdering, PanelForFørstegangssoknad, PanelForMedVisningAvSvangerskapsuke } =
+  composeStories(stories);
 
 describe('<FodselSammenligningIndex>', () => {
   it('skal vise panel der behandling er av type revurdering', async () => {
@@ -28,7 +25,7 @@ describe('<FodselSammenligningIndex>', () => {
   });
 
   it('skal vise panel der behandling er av type førstegangsbehandling', async () => {
-    render(<PanelForNårBehandlingstypeErFørstegangssoknad />);
+    render(<PanelForFørstegangssoknad />);
 
     expect(await screen.findByText('Opplysninger om fødsel fra søknaden')).toBeInTheDocument();
     expect(screen.getByText('Utstedt dato')).toBeInTheDocument();
