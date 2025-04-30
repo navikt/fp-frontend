@@ -2399,9 +2399,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2439,9 +2439,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2474,7 +2474,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2508,9 +2508,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2539,7 +2539,7 @@ __metadata:
     react-intl: 7.1.11
     stylelint: ^16.18.0
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2574,9 +2574,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2606,9 +2606,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2644,7 +2644,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2677,9 +2677,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2717,7 +2717,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2755,7 +2755,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2790,9 +2790,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2828,9 +2828,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2865,9 +2865,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2905,9 +2905,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2943,9 +2943,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -2981,9 +2981,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3016,7 +3016,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3045,7 +3045,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3182,9 +3182,9 @@ __metadata:
     react-test-renderer: 19.1.0
     rollup-plugin-sourcemaps: 0.6.3
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3222,9 +3222,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3235,7 +3235,7 @@ __metadata:
   dependencies:
     eslint: 9.25.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
   languageName: unknown
   linkType: soft
 
@@ -3245,7 +3245,7 @@ __metadata:
   dependencies:
     eslint: 9.25.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
   languageName: unknown
   linkType: soft
 
@@ -3288,9 +3288,9 @@ __metadata:
     react-intl: 7.1.11
     react-router-dom: 7.5.1
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3325,9 +3325,9 @@ __metadata:
     react-intl: 7.1.11
     react-router-dom: 7.5.1
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3372,9 +3372,9 @@ __metadata:
     react-intl: 7.1.11
     react-router-dom: 7.5.1
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3407,7 +3407,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3443,9 +3443,9 @@ __metadata:
     react-intl: 7.1.11
     react-router-dom: 7.5.1
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3477,9 +3477,9 @@ __metadata:
     react-intl: 7.1.11
     react-router-dom: 7.5.1
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3507,9 +3507,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3537,9 +3537,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3568,9 +3568,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3595,9 +3595,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3626,9 +3626,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3655,9 +3655,9 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.56.0
     react-intl: 7.1.11
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3691,9 +3691,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3731,9 +3731,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3767,9 +3767,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3804,9 +3804,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3840,9 +3840,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3879,7 +3879,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3915,9 +3915,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3954,9 +3954,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -3991,9 +3991,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4024,7 +4024,7 @@ __metadata:
     react-intl: 7.1.11
     storybook: 8.6.12
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4072,9 +4072,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4106,9 +4106,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4140,9 +4140,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4174,9 +4174,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4208,9 +4208,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4245,9 +4245,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4281,9 +4281,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4317,9 +4317,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4353,9 +4353,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4388,9 +4388,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4417,9 +4417,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4450,9 +4450,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4481,9 +4481,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4511,9 +4511,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4538,9 +4538,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4574,9 +4574,9 @@ __metadata:
     react-intl: 7.1.11
     react-router-dom: 7.5.1
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4598,9 +4598,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4634,9 +4634,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4663,9 +4663,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4695,9 +4695,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4728,9 +4728,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4760,9 +4760,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4791,9 +4791,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4820,9 +4820,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4853,9 +4853,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4887,9 +4887,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4920,9 +4920,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4962,9 +4962,9 @@ __metadata:
     react-intl: 7.1.11
     react-router-dom: 7.5.1
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -4989,9 +4989,9 @@ __metadata:
     react-hook-form: 7.56.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -5018,9 +5018,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -5040,7 +5040,7 @@ __metadata:
     react-intl: 7.1.11
     react-router-dom: 7.5.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
   languageName: unknown
   linkType: soft
 
@@ -5054,7 +5054,7 @@ __metadata:
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 9.2.17
     "@navikt/ft-prosess-beregningsgrunnlag": 8.3.6
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
   languageName: unknown
   linkType: soft
 
@@ -5064,7 +5064,7 @@ __metadata:
   dependencies:
     "@navikt/fp-kodeverk": "workspace:*"
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
   languageName: unknown
   linkType: soft
 
@@ -5078,7 +5078,7 @@ __metadata:
     eslint: 9.25.1
     react: 19.1.0
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
   languageName: unknown
   linkType: soft
 
@@ -5103,9 +5103,9 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -5118,7 +5118,7 @@ __metadata:
     react: 19.1.0
     react-intl: 7.1.11
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
   languageName: unknown
   linkType: soft
 
@@ -5137,9 +5137,9 @@ __metadata:
     eslint: 9.25.1
     react: 19.1.0
     storybook: 8.6.12
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     typescript: 5.8.3
-    vite: 6.3.2
+    vite: 6.3.4
     vitest: 3.1.2
   languageName: unknown
   linkType: soft
@@ -6410,74 +6410,74 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli-darwin@npm:2.43.0"
+"@sentry/cli-darwin@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli-darwin@npm:2.43.1"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli-linux-arm64@npm:2.43.0"
+"@sentry/cli-linux-arm64@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli-linux-arm64@npm:2.43.1"
   conditions: (os=linux | os=freebsd) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli-linux-arm@npm:2.43.0"
+"@sentry/cli-linux-arm@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli-linux-arm@npm:2.43.1"
   conditions: (os=linux | os=freebsd) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli-linux-i686@npm:2.43.0"
+"@sentry/cli-linux-i686@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli-linux-i686@npm:2.43.1"
   conditions: (os=linux | os=freebsd) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli-linux-x64@npm:2.43.0"
+"@sentry/cli-linux-x64@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli-linux-x64@npm:2.43.1"
   conditions: (os=linux | os=freebsd) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-arm64@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli-win32-arm64@npm:2.43.0"
+"@sentry/cli-win32-arm64@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli-win32-arm64@npm:2.43.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli-win32-i686@npm:2.43.0"
+"@sentry/cli-win32-i686@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli-win32-i686@npm:2.43.1"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli-win32-x64@npm:2.43.0"
+"@sentry/cli-win32-x64@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli-win32-x64@npm:2.43.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.43.0":
-  version: 2.43.0
-  resolution: "@sentry/cli@npm:2.43.0"
+"@sentry/cli@npm:2.43.1":
+  version: 2.43.1
+  resolution: "@sentry/cli@npm:2.43.1"
   dependencies:
-    "@sentry/cli-darwin": 2.43.0
-    "@sentry/cli-linux-arm": 2.43.0
-    "@sentry/cli-linux-arm64": 2.43.0
-    "@sentry/cli-linux-i686": 2.43.0
-    "@sentry/cli-linux-x64": 2.43.0
-    "@sentry/cli-win32-arm64": 2.43.0
-    "@sentry/cli-win32-i686": 2.43.0
-    "@sentry/cli-win32-x64": 2.43.0
+    "@sentry/cli-darwin": 2.43.1
+    "@sentry/cli-linux-arm": 2.43.1
+    "@sentry/cli-linux-arm64": 2.43.1
+    "@sentry/cli-linux-i686": 2.43.1
+    "@sentry/cli-linux-x64": 2.43.1
+    "@sentry/cli-win32-arm64": 2.43.1
+    "@sentry/cli-win32-i686": 2.43.1
+    "@sentry/cli-win32-x64": 2.43.1
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
     progress: ^2.0.3
@@ -6502,7 +6502,7 @@ __metadata:
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: 59253998381ac1555e6707ed3162fcc7aa843394b51027d1ae04296616b476b29d87e2c9a8e1cb30d748cede78bdee4a5cf366eafac9724dab0dcd506ccf4ddc
+  checksum: 8386ba5de7b9d57783ac368e027b541ae55d0b5853f6ad3aeed3646a7e4337399f43a52964e456ae5dc19ca23554dacea98b951aa2aca00b4373e95736d778c8
   languageName: node
   linkType: hard
 
@@ -7407,12 +7407,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:19.1.2":
-  version: 19.1.2
-  resolution: "@types/react-dom@npm:19.1.2"
+"@types/react-dom@npm:19.1.3":
+  version: 19.1.3
+  resolution: "@types/react-dom@npm:19.1.3"
   peerDependencies:
     "@types/react": ^19.0.0
-  checksum: 62a5c398e87b5a42f34497152c67367db70d5e348a05fc4bd78c119fc8d4367c02833c022b2f5dba4df33ae65b7ff76409847722ce6b8f9ea5d31983832688da
+  checksum: 3cde94c87a053978e6d4b0ad2d13aedec236aaa3caf3477f28a5f0d0d8806ce20bd6b1825e0128be011d700de578b93049f10627f21ec61589009bf39495d808
   languageName: node
   linkType: hard
 
@@ -7499,15 +7499,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/eslint-plugin@npm:8.31.0":
-  version: 8.31.0
-  resolution: "@typescript-eslint/eslint-plugin@npm:8.31.0"
+"@typescript-eslint/eslint-plugin@npm:8.31.1":
+  version: 8.31.1
+  resolution: "@typescript-eslint/eslint-plugin@npm:8.31.1"
   dependencies:
     "@eslint-community/regexpp": ^4.10.0
-    "@typescript-eslint/scope-manager": 8.31.0
-    "@typescript-eslint/type-utils": 8.31.0
-    "@typescript-eslint/utils": 8.31.0
-    "@typescript-eslint/visitor-keys": 8.31.0
+    "@typescript-eslint/scope-manager": 8.31.1
+    "@typescript-eslint/type-utils": 8.31.1
+    "@typescript-eslint/utils": 8.31.1
+    "@typescript-eslint/visitor-keys": 8.31.1
     graphemer: ^1.4.0
     ignore: ^5.3.1
     natural-compare: ^1.4.0
@@ -7516,23 +7516,23 @@ __metadata:
     "@typescript-eslint/parser": ^8.0.0 || ^8.0.0-alpha.0
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: aaaf8664ef83621f9a9fde3efb15f0422d1645d74ff79a6814df6520cdbdb8feee051f58f024f141d7b61a58259f18dd292b6369116cf6957ddc7377bbaea2e1
+  checksum: 0f822ae63e64ad518ade8758b5defd4e0081be7851fb723a5c948138223a5a9d04da5d362e9a7232e2255a885fcca7b16c11d282a86e9477552ad7732b28afbd
   languageName: node
   linkType: hard
 
-"@typescript-eslint/parser@npm:8.31.0":
-  version: 8.31.0
-  resolution: "@typescript-eslint/parser@npm:8.31.0"
+"@typescript-eslint/parser@npm:8.31.1":
+  version: 8.31.1
+  resolution: "@typescript-eslint/parser@npm:8.31.1"
   dependencies:
-    "@typescript-eslint/scope-manager": 8.31.0
-    "@typescript-eslint/types": 8.31.0
-    "@typescript-eslint/typescript-estree": 8.31.0
-    "@typescript-eslint/visitor-keys": 8.31.0
+    "@typescript-eslint/scope-manager": 8.31.1
+    "@typescript-eslint/types": 8.31.1
+    "@typescript-eslint/typescript-estree": 8.31.1
+    "@typescript-eslint/visitor-keys": 8.31.1
     debug: ^4.3.4
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 7d35be4a51f4062b106b61591d4848feeceb6ec7c375c0f9d71780cf949d2d1a542ad5b893ca23333dcff73126ed9c05fd615fcc9652d4f78eb4d3922a47bd6b
+  checksum: b056a509806f6762ea8b0e127d5f80b586fa5a6126968f54c3b797015b7762aa83de55e4498c17524e2a3399903d4b5c4776bf414ed2f78b5877590a7958465f
   languageName: node
   linkType: hard
 
@@ -7546,28 +7546,28 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/scope-manager@npm:8.31.0":
-  version: 8.31.0
-  resolution: "@typescript-eslint/scope-manager@npm:8.31.0"
+"@typescript-eslint/scope-manager@npm:8.31.1":
+  version: 8.31.1
+  resolution: "@typescript-eslint/scope-manager@npm:8.31.1"
   dependencies:
-    "@typescript-eslint/types": 8.31.0
-    "@typescript-eslint/visitor-keys": 8.31.0
-  checksum: df114f39eacfac6f38551aed3947cb01479f13ce182b7ed503eb8ea0e0cfac15b9b5a35c01c33f83eb162009169895a551a1b63133988f809f55d212f76bd2bc
+    "@typescript-eslint/types": 8.31.1
+    "@typescript-eslint/visitor-keys": 8.31.1
+  checksum: 54831c52a87facc9c2fb47c65a7928143181e2e550843d067f8e8dd17cc59c3568a244c5e8fc50fd7b7a896fba6ea82184bdee75c1be2b624795b8e7d62fd7ba
   languageName: node
   linkType: hard
 
-"@typescript-eslint/type-utils@npm:8.31.0":
-  version: 8.31.0
-  resolution: "@typescript-eslint/type-utils@npm:8.31.0"
+"@typescript-eslint/type-utils@npm:8.31.1":
+  version: 8.31.1
+  resolution: "@typescript-eslint/type-utils@npm:8.31.1"
   dependencies:
-    "@typescript-eslint/typescript-estree": 8.31.0
-    "@typescript-eslint/utils": 8.31.0
+    "@typescript-eslint/typescript-estree": 8.31.1
+    "@typescript-eslint/utils": 8.31.1
     debug: ^4.3.4
     ts-api-utils: ^2.0.1
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 7932188fdf68e631dc0308f918950928a9cea19a9f91cb0b32b294e7ccc33ed9b265b6b353957d2bd721f79238e62135818ace8490b619e3890a1ba85bcaa3f6
+  checksum: de8b4480540236048dd9d0d3efcac88f15b4605b6a6513640375a9b0a0f49a3ef13b85e23cd2ee50451eaca57c0a6d7cf5359cfca645b73f99aa1ee6e9940bd7
   languageName: node
   linkType: hard
 
@@ -7578,10 +7578,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/types@npm:8.31.0":
-  version: 8.31.0
-  resolution: "@typescript-eslint/types@npm:8.31.0"
-  checksum: 5c0cb0f421dca169efccacd25c1eff529446eceb337ed8a439b4d0e3f4c797658a6b34a5cc6b4436262c841e3719b01ac3d26766958757487f75f97c6e6dd1e3
+"@typescript-eslint/types@npm:8.31.1":
+  version: 8.31.1
+  resolution: "@typescript-eslint/types@npm:8.31.1"
+  checksum: 25307384fee650bcb7fbbdb383185c2b82691db6d88db1a1168868fe9f554255b46dd8812d2ef10f83335d8383cf838a920ea347edef4545950c56a5e19b84de
   languageName: node
   linkType: hard
 
@@ -7604,12 +7604,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/typescript-estree@npm:8.31.0":
-  version: 8.31.0
-  resolution: "@typescript-eslint/typescript-estree@npm:8.31.0"
+"@typescript-eslint/typescript-estree@npm:8.31.1":
+  version: 8.31.1
+  resolution: "@typescript-eslint/typescript-estree@npm:8.31.1"
   dependencies:
-    "@typescript-eslint/types": 8.31.0
-    "@typescript-eslint/visitor-keys": 8.31.0
+    "@typescript-eslint/types": 8.31.1
+    "@typescript-eslint/visitor-keys": 8.31.1
     debug: ^4.3.4
     fast-glob: ^3.3.2
     is-glob: ^4.0.3
@@ -7618,22 +7618,22 @@ __metadata:
     ts-api-utils: ^2.0.1
   peerDependencies:
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 1982056fa3b9aa3488408760cd15a41fd301444c998b2063c8e323aa9a715bf1cc36388c29a58f19c529de80578a738b4074e6d9da7eb8ed9c0eb4df7293f86d
+  checksum: 93ed0853c84a0ecf8eac1716b2161821b252cc218f2084c6235672783446943e358cf4f0996d87514fb0e75d6a2eb491b18fff1e1617eabe8faada37e4810aaf
   languageName: node
   linkType: hard
 
-"@typescript-eslint/utils@npm:8.31.0":
-  version: 8.31.0
-  resolution: "@typescript-eslint/utils@npm:8.31.0"
+"@typescript-eslint/utils@npm:8.31.1":
+  version: 8.31.1
+  resolution: "@typescript-eslint/utils@npm:8.31.1"
   dependencies:
     "@eslint-community/eslint-utils": ^4.4.0
-    "@typescript-eslint/scope-manager": 8.31.0
-    "@typescript-eslint/types": 8.31.0
-    "@typescript-eslint/typescript-estree": 8.31.0
+    "@typescript-eslint/scope-manager": 8.31.1
+    "@typescript-eslint/types": 8.31.1
+    "@typescript-eslint/typescript-estree": 8.31.1
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 5569dbd4bc083bab18244e1e59119f0a55466460b1d1c659439c67bcab5fba97b84da4652798a132457a847bad7f1e76403d3c7905c49d8ebdb189f593dd1378
+  checksum: 536730f555555fcf27d16771704d0b29236d9fa4e45ead28218d04ea6e6d21fe577e50f7044fc97765b36d553a3c4240f034af065616a5363fdd0ffdad00e46f
   languageName: node
   linkType: hard
 
@@ -7661,13 +7661,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@typescript-eslint/visitor-keys@npm:8.31.0":
-  version: 8.31.0
-  resolution: "@typescript-eslint/visitor-keys@npm:8.31.0"
+"@typescript-eslint/visitor-keys@npm:8.31.1":
+  version: 8.31.1
+  resolution: "@typescript-eslint/visitor-keys@npm:8.31.1"
   dependencies:
-    "@typescript-eslint/types": 8.31.0
+    "@typescript-eslint/types": 8.31.1
     eslint-visitor-keys: ^4.2.0
-  checksum: ce88b8edb75517d4a4e9d262d7b60b5d5a1ead7cac181345a1df0dcb4c7da650785df226d2ce8abbdbd9dbf2b29040d026f792df59d3d0189236c334de56a06e
+  checksum: fe425abdf44d38afb1a94726411de4a9df540d4a05b8c7db5517b8edfcd02be8a6d7fbd532f5a0377a634956440d0757eca0abb52cecfe683cd17d5c2d02473e
   languageName: node
   linkType: hard
 
@@ -10648,7 +10648,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fdir@npm:^6.4.3, fdir@npm:^6.4.4":
+"fdir@npm:^6.4.4":
   version: 6.4.4
   resolution: "fdir@npm:6.4.4"
   peerDependencies:
@@ -10675,6 +10675,15 @@ __metadata:
   dependencies:
     flat-cache: ^6.1.7
   checksum: 0111ea743274f2527f3b943285fe88d73cd3e086b5905bb939da2d405b0733548ea17fa43d72b93e32fb88f076335ca8c36277152c1ba49cde540281f420d587
+  languageName: node
+  linkType: hard
+
+"file-entry-cache@npm:^10.0.8":
+  version: 10.0.8
+  resolution: "file-entry-cache@npm:10.0.8"
+  dependencies:
+    flat-cache: ^6.1.8
+  checksum: 832e9394c05b1484a38431a1061cbda6bef7597a0b3d9ddefd7ae9aa5f935cdb720e98066bd7e29cf2395b88d4ff42ce24860e808b74fb3a87dab07b8b98f04a
   languageName: node
   linkType: hard
 
@@ -10804,6 +10813,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"flat-cache@npm:^6.1.8":
+  version: 6.1.8
+  resolution: "flat-cache@npm:6.1.8"
+  dependencies:
+    cacheable: ^1.8.9
+    flatted: ^3.3.3
+    hookified: ^1.8.1
+  checksum: 7c26d536f21249e487eed8f21829b13eb114d4e07de239ce7300c995c80c3e704f78e4a63d7e75a63c28dc47b02c05e670c3fc745bbfd2b238d4aea0e4e4b3d2
+  languageName: node
+  linkType: hard
+
 "flat@npm:^5.0.2":
   version: 5.0.2
   resolution: "flat@npm:5.0.2"
@@ -10884,7 +10904,7 @@ __metadata:
   dependencies:
     "@eslint/js": 9.25.1
     "@navikt/aksel-stylelint": 7.20.0
-    "@sentry/cli": 2.43.0
+    "@sentry/cli": 2.43.1
     "@storybook/addon-essentials": 8.6.12
     "@storybook/addon-links": 8.6.12
     "@storybook/builder-vite": 8.6.12
@@ -10897,7 +10917,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     "@types/react": 19.1.2
     "@types/react-collapse": 5.0.4
-    "@types/react-dom": 19.1.2
+    "@types/react-dom": 19.1.3
     "@types/react-responsive": 9.0.0
     "@types/react-router-dom": 5.3.3
     "@types/react-test-renderer": 19.1.0
@@ -10921,11 +10941,11 @@ __metadata:
     prettier: ^3.5.3
     react-test-renderer: 19.1.0
     shelljs: 0.9.2
-    stylelint: 16.18.0
+    stylelint: 16.19.1
     stylelint-order: 7.0.0
     typescript: 5.8.3
-    typescript-eslint: 8.31.0
-    vite: 6.3.2
+    typescript-eslint: 8.31.1
+    vite: 6.3.4
     vite-plugin-externalize-deps: 0.9.0
     vite-plugin-html: 3.2.2
     vitest: 3.1.2
@@ -11553,6 +11573,13 @@ __metadata:
   version: 1.8.1
   resolution: "hookified@npm:1.8.1"
   checksum: 4a8c4c5ef84ce0de22f1108e86403812a82359116fa2c689720193897d74dc1657f25a1b27a6e5840e4294f0034e7e3d3bb7446a28bfb63c2b514c33ca781325
+  languageName: node
+  linkType: hard
+
+"hookified@npm:^1.8.1":
+  version: 1.8.2
+  resolution: "hookified@npm:1.8.2"
+  checksum: b7415e94f742e7bd0da5f3653a0f10f2021e1b39f92f20a03f27027ca308f6bf84a958b296abd1e15ee9e0d589d887687ec16745b7a0cdb488ba5f38e3ff524d
   languageName: node
   linkType: hard
 
@@ -12741,6 +12768,13 @@ __metadata:
   version: 0.35.0
   resolution: "known-css-properties@npm:0.35.0"
   checksum: 8ab9550a605f9113cb6dc9059e86f109c1a4a3cb12107bd2a89855bd17472001459180a710b59cb8e097d1d55f36cb08980424a26a59e2b11422934f124ba944
+  languageName: node
+  linkType: hard
+
+"known-css-properties@npm:^0.36.0":
+  version: 0.36.0
+  resolution: "known-css-properties@npm:0.36.0"
+  checksum: 2b231ae0ef90a9825f3798a585077c6948c119e091df8900ae07f52e5928122835ac1ad0b50629fe1e2357a608b17428181d5c63d02a623ffe84de5204f5f4fa
   languageName: node
   linkType: hard
 
@@ -16780,7 +16814,55 @@ __metadata:
   languageName: node
   linkType: hard
 
-"stylelint@npm:16.18.0, stylelint@npm:^16.18.0":
+"stylelint@npm:16.19.1":
+  version: 16.19.1
+  resolution: "stylelint@npm:16.19.1"
+  dependencies:
+    "@csstools/css-parser-algorithms": ^3.0.4
+    "@csstools/css-tokenizer": ^3.0.3
+    "@csstools/media-query-list-parser": ^4.0.2
+    "@csstools/selector-specificity": ^5.0.0
+    "@dual-bundle/import-meta-resolve": ^4.1.0
+    balanced-match: ^2.0.0
+    colord: ^2.9.3
+    cosmiconfig: ^9.0.0
+    css-functions-list: ^3.2.3
+    css-tree: ^3.1.0
+    debug: ^4.3.7
+    fast-glob: ^3.3.3
+    fastest-levenshtein: ^1.0.16
+    file-entry-cache: ^10.0.8
+    global-modules: ^2.0.0
+    globby: ^11.1.0
+    globjoin: ^0.1.4
+    html-tags: ^3.3.1
+    ignore: ^7.0.3
+    imurmurhash: ^0.1.4
+    is-plain-object: ^5.0.0
+    known-css-properties: ^0.36.0
+    mathml-tag-names: ^2.1.3
+    meow: ^13.2.0
+    micromatch: ^4.0.8
+    normalize-path: ^3.0.0
+    picocolors: ^1.1.1
+    postcss: ^8.5.3
+    postcss-resolve-nested-selector: ^0.1.6
+    postcss-safe-parser: ^7.0.1
+    postcss-selector-parser: ^7.1.0
+    postcss-value-parser: ^4.2.0
+    resolve-from: ^5.0.0
+    string-width: ^4.2.3
+    supports-hyperlinks: ^3.2.0
+    svg-tags: ^1.0.0
+    table: ^6.9.0
+    write-file-atomic: ^5.0.1
+  bin:
+    stylelint: bin/stylelint.mjs
+  checksum: 5bb188187053592a481c19a4420d01cb50e78a6e68edac639a0316be1cf365df28826968345e10aaf1ec1c3ed672b91c749ca10b6e71d05ff5d181db188e50c6
+  languageName: node
+  linkType: hard
+
+"stylelint@npm:^16.18.0":
   version: 16.18.0
   resolution: "stylelint@npm:16.18.0"
   dependencies:
@@ -17015,7 +17097,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tinyglobby@npm:^0.2.12, tinyglobby@npm:^0.2.13":
+"tinyglobby@npm:^0.2.13":
   version: 0.2.13
   resolution: "tinyglobby@npm:0.2.13"
   dependencies:
@@ -17347,17 +17429,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript-eslint@npm:8.31.0":
-  version: 8.31.0
-  resolution: "typescript-eslint@npm:8.31.0"
+"typescript-eslint@npm:8.31.1":
+  version: 8.31.1
+  resolution: "typescript-eslint@npm:8.31.1"
   dependencies:
-    "@typescript-eslint/eslint-plugin": 8.31.0
-    "@typescript-eslint/parser": 8.31.0
-    "@typescript-eslint/utils": 8.31.0
+    "@typescript-eslint/eslint-plugin": 8.31.1
+    "@typescript-eslint/parser": 8.31.1
+    "@typescript-eslint/utils": 8.31.1
   peerDependencies:
     eslint: ^8.57.0 || ^9.0.0
     typescript: ">=4.8.4 <5.9.0"
-  checksum: 522295d7088876c76da0bce665dfd7922b1c384cbf3947d3e9a2fceca8941b47a036263fc465a06b30862e9854f5c0cca8d08c8f09fc548aeb3d5507427241b1
+  checksum: 04f7f543f2766b66f8a4e5d67d2f4c6cbcae3577728d4f183f8075038e4594a89305101717b870be3a9204db5a3a3a40e5baea0dff0ca52ec9597068cacf4dd9
   languageName: node
   linkType: hard
 
@@ -17709,17 +17791,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:6.3.2":
-  version: 6.3.2
-  resolution: "vite@npm:6.3.2"
+"vite@npm:6.3.4":
+  version: 6.3.4
+  resolution: "vite@npm:6.3.4"
   dependencies:
     esbuild: ^0.25.0
-    fdir: ^6.4.3
+    fdir: ^6.4.4
     fsevents: ~2.3.3
     picomatch: ^4.0.2
     postcss: ^8.5.3
     rollup: ^4.34.9
-    tinyglobby: ^0.2.12
+    tinyglobby: ^0.2.13
   peerDependencies:
     "@types/node": ^18.0.0 || ^20.0.0 || >=22.0.0
     jiti: ">=1.21.0"
@@ -17760,7 +17842,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 1773809788935e4f7b3f718680f80c4e6ff0f9a39b22596bd7d405d996f0c21e67b573418aba23afbb0d54e570a315a0252b045c4a68987aa19974cf70e5d3a1
+  checksum: 6b86f267319342393d2aeea3436d64716dd6d769acd96b13f9be416f751f4f3380119594baebb2ead71f738c6bd20956017320fad4cd79ba00168f4b9a747393
   languageName: node
   linkType: hard
 

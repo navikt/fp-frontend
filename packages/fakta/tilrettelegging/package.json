@@ -52,9 +52,9 @@
     "eslint": "9.25.1",
     "fast-glob": "^3.3.3",
     "storybook": "8.6.12",
-    "stylelint": "16.18.0",
+    "stylelint": "16.19.1",
     "typescript": "5.8.3",
-    "vite": "6.3.2",
+    "vite": "6.3.4",
     "vitest": "3.1.2"
   }
 }
