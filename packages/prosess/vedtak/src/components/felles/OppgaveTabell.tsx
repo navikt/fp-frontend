@@ -15,9 +15,10 @@ import styles from './oppgaveTabell.module.css';
 interface Props {
   oppgaver: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
+  isReadOnly: boolean;
 }
 
-export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave }: Props) => {
+export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave, isReadOnly }: Props) => {
   const { alleKodeverk } = usePanelDataContext();
 
   return (
@@ -34,7 +35,7 @@ export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave }: Props) => {
             <Table.HeaderCell textSize="small">
               <FormattedMessage id="OppgaveTabell.Beskrivelse" />
             </Table.HeaderCell>
-            <Table.HeaderCell className={styles.headerButton} />
+            {!isReadOnly && <Table.HeaderCell className={styles.headerButton} />}
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -51,9 +52,11 @@ export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave }: Props) => {
                   {oppgave.dokumenter.length > 0 && <Dokumenter dokumenter={oppgave.dokumenter} />}
                 </VStack>
               </Table.DataCell>
-              <Table.DataCell align="right">
-                <FerdigstillOppgaveKnapp oppgave={oppgave} ferdigstillOppgave={ferdigstillOppgave} />
-              </Table.DataCell>
+              {!isReadOnly && (
+                <Table.DataCell align="right">
+                  <FerdigstillOppgaveKnapp oppgave={oppgave} ferdigstillOppgave={ferdigstillOppgave} />
+                </Table.DataCell>
+              )}
             </Table.Row>
           ))}
         </Table.Body>
