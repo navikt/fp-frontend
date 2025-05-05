@@ -48,13 +48,13 @@
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "cross-env": "7.0.3",
-    "eslint": "9.25.1",
-    "msw": "2.7.5",
+    "eslint": "9.26.0",
+    "msw": "2.7.6",
     "msw-storybook-addon": "^2.0.4",
     "storybook": "8.6.12",
-    "stylelint": "16.18.0",
+    "stylelint": "16.19.1",
     "typescript": "5.8.3",
-    "vite": "6.3.2",
+    "vite": "6.3.5",
     "vitest": "3.1.2"
   }
 }
