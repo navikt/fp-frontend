@@ -184,9 +184,22 @@ class CustomHeader extends Header {
   }
 }
 
+// Denne blir overstyrt for å ikkje strippa vekk a-tags ved lagring.
+class CustomParagraph extends Paragraph {
+  static override get sanitize() {
+    return {
+      a: {
+        href: true,
+      },
+      b: true,
+      br: true,
+    };
+  }
+}
+
 const getTools = (intl: IntlShape): EditorConfig['tools'] => ({
   paragraph: {
-    class: Paragraph as unknown as ToolConstructable,
+    class: CustomParagraph as unknown as ToolConstructable,
     inlineToolbar: ['bold'],
     config: {
       preservedBlank: true,
