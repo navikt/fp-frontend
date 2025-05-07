@@ -107,7 +107,7 @@ const byggTabellStruktur = (
 
       const ne: ArbeidsforholdOgInntektRadData = {
         ...arbeidsgiverOpplysninger,
-        årsak: af.årsak ?? inntektsmeldinger[0]?.årsak ?? undefined,
+        årsak: af.årsak ?? inntektsmeldingerForRad[0]?.årsak ?? undefined,
         avklaring: lagAvklaringFraArbeidsforhold(af, arbeidsgiverOpplysninger.arbeidsgiverNavn),
         arbeidsforholdForRad,
         inntektsmeldingerForRad,
