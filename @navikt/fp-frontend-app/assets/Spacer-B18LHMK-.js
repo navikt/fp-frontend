@@ -1,1 +1,0 @@
-import{R as e}from"./index-mMUbb89k.js";import{m as s}from"./withPanelData-DJnwqwDR.js";const c=()=>{const{cn:a}=s();return e.createElement("span",{className:a("navds-stack__spacer")})};export{c as S};
