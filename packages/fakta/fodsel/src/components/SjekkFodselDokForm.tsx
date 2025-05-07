@@ -4,12 +4,12 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { AvklartBarnFieldArray } from './AvklartBarnFieldArray';
@@ -54,12 +54,12 @@ export const SjekkFodselDokForm = ({
     defaultValues: mellomlagretFormData ?? buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkt),
   });
 
-  const begrunnelse = formMethods.watch('begrunnelse') || false;
+  const begrunnelse = formMethods.watch('begrunnelse');
 
   return (
-    <FaktaGruppe
-      title={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
+    <FaktaKort
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]}
+      label={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
     >
       <Form
         formMethods={formMethods}
@@ -70,20 +70,17 @@ export const SjekkFodselDokForm = ({
           <RadioGroupPanel
             name="dokumentasjonForeligger"
             isEdited={dokumentasjonForeliggerIsEdited}
-            hideLegend
+            label={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
             validate={[required]}
             isReadOnly={isReadOnly}
             isHorizontal
+            size="medium"
             isTrueOrFalseSelection
             radios={[
               {
                 label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
                 value: 'true',
-                element: (
-                  <ArrowBox marginTop={6}>
-                    <AvklartBarnFieldArray readOnly={isReadOnly} />
-                  </ArrowBox>
-                ),
+                element: <AvklartBarnFieldArray readOnly={isReadOnly} />,
               },
               {
                 label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
@@ -96,6 +93,7 @@ export const SjekkFodselDokForm = ({
             isSubmittable={submittable}
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
+            hasVurderingText
           />
 
           {aksjonspunkt && !isReadOnly && (
@@ -108,7 +106,7 @@ export const SjekkFodselDokForm = ({
           )}
         </VStack>
       </Form>
-    </FaktaGruppe>
+    </FaktaKort>
   );
 };
 

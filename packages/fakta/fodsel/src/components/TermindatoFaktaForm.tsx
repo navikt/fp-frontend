@@ -4,13 +4,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Alert, HStack, VStack } from '@navikt/ds-react';
 import { Datepicker, Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './termindatoFaktaForm.module.css';
@@ -61,8 +61,8 @@ export const TermindatoFaktaForm = ({ soknad, gjeldendeFamiliehendelse, submitta
   const isForTidligTerminbekreftelse = erTerminbekreftelseUtstedtForTidlig(utstedtdato, termindato);
 
   return (
-    <FaktaGruppe
-      title={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
+    <FaktaKort
+      label={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.TERMINBEKREFTELSE]}
     >
       <Form
@@ -104,6 +104,7 @@ export const TermindatoFaktaForm = ({ soknad, gjeldendeFamiliehendelse, submitta
             isSubmittable={submittable}
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
+            hasVurderingText
           />
           {isForTidligTerminbekreftelse && (
             <Alert variant="warning" className={styles.marginBottom}>
@@ -121,7 +122,7 @@ export const TermindatoFaktaForm = ({ soknad, gjeldendeFamiliehendelse, submitta
           )}
         </VStack>
       </Form>
-    </FaktaGruppe>
+    </FaktaKort>
   );
 };
 
