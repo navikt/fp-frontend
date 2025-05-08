@@ -66,7 +66,6 @@ const aksjonspunkterForPanel = [
 ] as Aksjonspunkt[];
 
 const meta = {
-  title: 'prosess/prosess-varsel-om-revurdering',
   component: VarselOmRevurderingProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
