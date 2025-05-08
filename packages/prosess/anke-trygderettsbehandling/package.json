@@ -22,7 +22,7 @@
     "@navikt/ds-react": "7.20.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "4.1.0",
+    "@navikt/ft-ui-komponenter": "4.1.1",
     "@navikt/ft-utils": "3.3.4",
     "classnames": "2.5.1",
     "react": "19.1.0",
