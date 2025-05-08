@@ -1,15 +1,15 @@
 import { useNavigate } from 'react-router-dom';
 
+import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import { MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
+import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { type ForhåndsvisHenleggParams, MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../data/behandlingApi';
-import { useFagsakApi } from '../../data/fagsakApi';
-import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
+import { forhåndsvisTilbakekrevingHenleggelse, useFagsakApi, useFagsakBehandlingApi } from '../../data/fagsakApi';
 import { MenyKodeverk } from '../MenyKodeverk';
 
 interface Props {
@@ -42,7 +42,7 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
   const navigate = useNavigate();
   const gåTilSokeside = () => navigate('/');
 
-  const forhåndsvisHenleggBehandling = useVisForhandsvisningAvMelding(behandlingAppKontekst);
+  const forhåndsvisHenleggBehandling = useVisForhandsvisningAvHenleggelse(behandlingAppKontekst);
 
   return (
     <MenyHenleggIndex
@@ -55,4 +55,34 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
       gaaTilSokeside={gåTilSokeside}
     />
   );
+};
+
+const useVisForhandsvisningAvHenleggelse = (behandling: BehandlingAppKontekst) => {
+  const api = useFagsakBehandlingApi(behandling);
+
+  const { mutate: forhåndsvisFpSakHenleggelse } = useMutation({
+    mutationFn: (values: ForhåndsvisHenleggParams) => api.forhåndsvisMelding(values),
+    onSuccess: response => {
+      forhandsvisDokument(response);
+    },
+  });
+
+  const { mutate: forhandsvisFpTilbakeHenleggelse } = useMutation({
+    mutationFn: (values: ForhåndsvisHenleggParams) =>
+      forhåndsvisTilbakekrevingHenleggelse(values.behandlingUuid, values.fritekst ?? ''),
+    onSuccess: response => {
+      forhandsvisDokument(response);
+    },
+  });
+
+  const erTilbakekreving =
+    BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+
+  return (data: ForhåndsvisHenleggParams): void => {
+    if (erTilbakekreving) {
+      forhandsvisFpTilbakeHenleggelse(data);
+    } else {
+      forhåndsvisFpSakHenleggelse(data);
+    }
+  };
 };
