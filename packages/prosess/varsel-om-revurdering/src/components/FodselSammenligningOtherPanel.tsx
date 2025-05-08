@@ -1,6 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import type { Soknad } from '@navikt/fp-types';
@@ -10,29 +11,6 @@ interface Props {
   termindato?: string;
 }
 
-export const getTerminEllerFodselsdato = (
-  hasSoknad: boolean,
-  fødselsdatoerSoknad: { [key: number]: string },
-  termindatoSoknad?: string,
-  termindato?: string,
-): string | null => {
-  if (hasSoknad && Object.keys(fødselsdatoerSoknad).length > 0) {
-    return dateFormat(Object.values(fødselsdatoerSoknad)[0]);
-  }
-  if (termindato) {
-    return dateFormat(termindato);
-  }
-  if (!hasSoknad) {
-    return null;
-  }
-  return termindatoSoknad ? dateFormat(termindatoSoknad) : '-';
-};
-
-/**
- * FodselSammenligningOtherPanel
- *
- * Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
- */
 export const FodselSammenligningOtherPanel = ({ soknad, termindato }: Props) => {
   const soknadFodselsdatoer = soknad.fodselsdatoer ? soknad.fodselsdatoer : {};
 
@@ -45,7 +23,7 @@ export const FodselSammenligningOtherPanel = ({ soknad, termindato }: Props) => 
       ? 'FodselSammenligningOtherPanel.OpplysningerISoknad'
       : 'FodselSammenligningOtherPanel.TerminISoknad';
 
-  const terminOrFodselDate = getTerminEllerFodselsdato(!!soknad, soknadFodselsdatoer, soknad.termindato, termindato);
+  const terminOrFødseldato = getTerminEllerFødselsdato(!!soknad, soknadFodselsdatoer, soknad.termindato, termindato);
 
   return (
     <VStack gap="4">
@@ -58,14 +36,16 @@ export const FodselSammenligningOtherPanel = ({ soknad, termindato }: Props) => 
             <Label>
               <FormattedMessage id="FodselsammenligningPanel.UstedtDato" />
             </Label>
-            <BodyShort>{dateFormat(soknad.utstedtdato)}</BodyShort>
+            <BodyShort>
+              <DateLabel dateString={soknad.utstedtdato} />
+            </BodyShort>
           </div>
         )}
         <div>
           <Label>
             <FormattedMessage id={terminOrFodselLabel} />
           </Label>
-          <BodyShort>{terminOrFodselDate}</BodyShort>
+          <BodyShort>{terminOrFødseldato}</BodyShort>
         </div>
         <div>
           <Label>
@@ -76,4 +56,22 @@ export const FodselSammenligningOtherPanel = ({ soknad, termindato }: Props) => 
       </HStack>
     </VStack>
   );
+};
+
+export const getTerminEllerFødselsdato = (
+  hasSøknad: boolean,
+  fødselsdatoerSoknad: { [key: number]: string },
+  termindatoSoknad?: string,
+  termindato?: string,
+): string | null => {
+  if (hasSøknad && Object.keys(fødselsdatoerSoknad).length > 0) {
+    return dateFormat(Object.values(fødselsdatoerSoknad)[0]);
+  }
+  if (termindato) {
+    return dateFormat(termindato);
+  }
+  if (!hasSøknad) {
+    return null;
+  }
+  return termindatoSoknad ? dateFormat(termindatoSoknad) : '-';
 };

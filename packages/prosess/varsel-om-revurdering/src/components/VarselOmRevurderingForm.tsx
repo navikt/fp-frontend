@@ -2,8 +2,8 @@ import { type MouseEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Button, Detail, Heading, Link, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { Button, Heading, Link, VStack } from '@navikt/ds-react';
+import { Form, RadioGroupPanel, ReadOnlyField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -203,12 +203,12 @@ export const VarselOmRevurderingForm = ({
             </>
           )}
           {(isReadOnly || aksjonspunkterForPanel[0].status !== AksjonspunktStatus.OPPRETTET) && (
-            <>
-              <Detail>
-                <FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />
-              </Detail>
-              <BodyShort size="small">{formVerdier.begrunnelse}</BodyShort>
-            </>
+            <ReadOnlyField
+              size="small"
+              label={<FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />}
+              value={formVerdier.begrunnelse}
+              type="textarea"
+            />
           )}
         </VStack>
       </Form>

@@ -1,13 +1,11 @@
-import { FormattedMessage } from 'react-intl';
-
-import { BodyShort, Heading, HStack, Table, Tag } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
+import { HStack } from '@navikt/ds-react';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { FodselSammenligningOtherPanel } from './FodselSammenligningOtherPanel';
 import { FodselSammenligningRevurderingPanel } from './FodselSammenligningRevurderingPanel';
+import { OpplysningerFraFReg } from './OpplysningerFraFReg';
 
 interface Props {
   behandlingsType: string;
@@ -19,11 +17,6 @@ interface Props {
   vedtaksDatoSomSvangerskapsuke: number | undefined;
 }
 
-/**
- * FodselSammenlingningPanel
- *
- * Presentasjonskomponent. Viser sammenligning av fødsel ved ytelsesvedtak/søknad og oppdatert informasjon fra TPS.
- */
 export const FodselSammenligningPanel = ({
   behandlingsType,
   avklartBarn = [],
@@ -33,7 +26,7 @@ export const FodselSammenligningPanel = ({
   soknadOriginalBehandling,
   familiehendelseOriginalBehandling,
 }: Props) => {
-  const harDødtBarn = avklartBarn.find(barn => !!barn.dodsdato);
+  const harDødtBarn = !!avklartBarn.find(barn => !!barn.dodsdato);
 
   return (
     <HStack gap="10">
@@ -49,63 +42,7 @@ export const FodselSammenligningPanel = ({
           />
         )}
       </div>
-      <div>
-        <HStack gap="4">
-          <Heading size="small">
-            <FormattedMessage id="FodselsammenligningPanel.OpplysningerTPS" />
-          </Heading>
-          {harDødtBarn && (
-            <Tag variant="info">
-              <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
-            </Tag>
-          )}
-        </HStack>
-        {avklartBarn.length > 0 && (
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell scope="col">
-                  <FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />
-                </Table.HeaderCell>
-                {harDødtBarn && (
-                  <Table.HeaderCell scope="col">
-                    <FormattedMessage id="FodselsammenligningPanel.Dodsdato" />
-                  </Table.HeaderCell>
-                )}
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {avklartBarn.map((barn: AvklartBarn, index) => {
-                const key = barn.fodselsdato + barn.dodsdato + index;
-                return (
-                  <Table.Row key={key}>
-                    <Table.DataCell>
-                      <BodyShort>
-                        <DateLabel dateString={barn.fodselsdato} />
-                      </BodyShort>
-                    </Table.DataCell>
-                    {harDødtBarn && (
-                      <Table.DataCell>
-                        {barn.dodsdato ? (
-                          <HStack gap="4" align="center">
-                            <DateLabel dateString={barn.dodsdato} />
-                            <Tag variant="info" size="small">
-                              <FormattedMessage id="FodselsammenligningPanel.Dod" />
-                            </Tag>
-                          </HStack>
-                        ) : (
-                          '-'
-                        )}
-                      </Table.DataCell>
-                    )}
-                  </Table.Row>
-                );
-              })}
-            </Table.Body>
-          </Table>
-        )}
-        {avklartBarn.length === 0 && <BodyShort>-</BodyShort>}
-      </div>
+      <OpplysningerFraFReg avklartBarn={avklartBarn} harDødtBarn={harDødtBarn} />
     </HStack>
   );
 };
