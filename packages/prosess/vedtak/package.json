@@ -22,7 +22,7 @@
   "dependencies": {
     "@editorjs/editorjs": "2.30.8",
     "@editorjs/header": "2.8.8",
-    "@editorjs/list": "2.0.6",
+    "@editorjs/list": "2.0.8",
     "@editorjs/paragraph": "2.11.7",
     "@navikt/aksel-icons": "7.20.0",
     "@navikt/ds-react": "7.20.0",
@@ -44,7 +44,7 @@
     "editorjs-undo": "2.0.28",
     "lodash.debounce": "4.0.8",
     "react": "19.1.0",
-    "react-hook-form": "7.56.0",
+    "react-hook-form": "7.56.3",
     "react-intl": "7.1.11"
   },
   "devDependencies": {
