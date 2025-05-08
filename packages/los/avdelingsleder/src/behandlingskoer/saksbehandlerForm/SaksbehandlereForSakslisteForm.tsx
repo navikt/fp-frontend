@@ -94,6 +94,7 @@ export const SaksbehandlereForSakslisteForm = ({
                           valgtAvdelingEnhet={valgtAvdelingEnhet}
                         />
                       }
+                      expandOnRowClick
                     >
                       <Table.DataCell scope="row">{sg.gruppeNavn}</Table.DataCell>
                       <Table.DataCell>{antallTilknyttetSaksliste(valgtSaksliste, sg)}</Table.DataCell>

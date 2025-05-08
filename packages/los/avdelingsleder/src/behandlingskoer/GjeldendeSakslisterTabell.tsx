@@ -164,6 +164,7 @@ export const GjeldendeSakslisterTabell = ({
                 onOpenChange={isOpen => setValgtSaksliste(isOpen, saksliste.sakslisteId)}
                 content={saksliste.sakslisteId === valgtSakslisteId ? children : undefined}
                 open={saksliste.sakslisteId === valgtSakslisteId}
+                expandOnRowClick
               >
                 <Table.DataCell>{saksliste.navn}</Table.DataCell>
                 <Table.DataCell>{formatStonadstyper(fagsakYtelseTyper, saksliste.fagsakYtelseTyper)}</Table.DataCell>

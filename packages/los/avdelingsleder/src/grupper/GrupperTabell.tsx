@@ -56,6 +56,7 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
             {grupper.saksbehandlerGrupper?.map(saksbehandlerGruppe => (
               <Table.ExpandableRow
                 key={saksbehandlerGruppe.gruppeId}
+                expandOnRowClick
                 content={
                   <GruppeSaksbehandlere
                     valgAvdeldingEnhet={valgAvdeldingEnhet}
