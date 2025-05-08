@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -14,25 +14,20 @@ import styles from './henleggBehandlingModal.module.css';
 
 const maxLength1500 = maxLength(1500);
 
-// TODO (TOR) Skal bruka navn fra kodeverk i staden for oppslag klientside for "henleggArsaker"
+export type ForhåndsvisHenleggParams = {
+  behandlingUuid: string;
+  dokumentMal: string;
+  fritekst?: string;
+};
 
-const previewHenleggBehandlingDoc =
-  (
-    previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void,
-    ytelseType: string,
-    behandlingUuid: string,
-    fritekst?: string,
-  ) =>
+const forhåndsvisHenleggBehandlingDoc =
+  (forhåndsvisHenleggingsbrev: (data: ForhåndsvisHenleggParams) => void, behandlingUuid: string, fritekst?: string) =>
   (e: React.MouseEvent | React.KeyboardEvent): void => {
-    // TODO Hardkoda verdiar. Er dette eit kodeverk?
-    const data = {
+    forhåndsvisHenleggingsbrev({
       behandlingUuid,
-      fagsakYtelseType: ytelseType,
       dokumentMal: DokumentMalType.INFO_OM_HENLEGGELSE,
       fritekst,
-      mottaker: 'Søker',
-    };
-    previewHenleggBehandling(true, data);
+    });
     e.preventDefault();
   };
 
@@ -118,7 +113,7 @@ export type FormValues = {
 interface Props {
   handleSubmit: (values: FormValues) => void;
   cancelEvent: () => void;
-  previewHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
+  forhandsvisHenleggBehandling: (data: ForhåndsvisHenleggParams) => void;
   behandlingUuid: string;
   ytelseType: string;
   behandlingResultatTyper: KodeverkMedNavn[];
@@ -134,7 +129,7 @@ interface Props {
 export const HenleggBehandlingModal = ({
   handleSubmit,
   cancelEvent,
-  previewHenleggBehandling,
+  forhandsvisHenleggBehandling,
   behandlingUuid,
   ytelseType,
   behandlingType,
@@ -150,10 +145,7 @@ export const HenleggBehandlingModal = ({
 
   const showLink = getShowLink(behandlingType, årsakKode, fritekst);
 
-  const henleggArsaker = useMemo(
-    () => getHenleggArsaker(behandlingResultatTyper, behandlingType, ytelseType),
-    [behandlingResultatTyper, behandlingType, ytelseType],
-  );
+  const henleggArsaker = getHenleggArsaker(behandlingResultatTyper, behandlingType, ytelseType);
 
   return (
     <Form formMethods={formMethods} onSubmit={handleSubmit}>
@@ -203,13 +195,8 @@ export const HenleggBehandlingModal = ({
                 <Label size="small">{intl.formatMessage({ id: 'HenleggBehandlingModal.SokerInformeres' })}</Label>
                 <Link
                   href="#"
-                  onClick={previewHenleggBehandlingDoc(previewHenleggBehandling, ytelseType, behandlingUuid, fritekst)}
-                  onKeyDown={previewHenleggBehandlingDoc(
-                    previewHenleggBehandling,
-                    ytelseType,
-                    behandlingUuid,
-                    fritekst,
-                  )}
+                  onClick={forhåndsvisHenleggBehandlingDoc(forhandsvisHenleggBehandling, behandlingUuid, fritekst)}
+                  onKeyDown={forhåndsvisHenleggBehandlingDoc(forhandsvisHenleggBehandling, behandlingUuid, fritekst)}
                 >
                   <FormattedMessage id="HenleggBehandlingModal.ForhandsvisBrev" />
                 </Link>

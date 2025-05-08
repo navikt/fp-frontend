@@ -57,7 +57,7 @@ const meta = {
       brevmaler: TEMPLATES,
       språkkode: 'NB',
     } as BehandlingAppKontekst,
-    previewCallback: action('button-click'),
+    forhåndsvisBrev: action('button-click'),
     submitCallback: action('button-click'),
     setMeldingFormData: action('button-click'),
   },

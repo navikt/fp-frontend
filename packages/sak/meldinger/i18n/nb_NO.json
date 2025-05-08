@@ -7,6 +7,7 @@
   "Messages.Preview": "Forhåndsvis",
   "Messages.PreviewText": "Forhåndsvis varselbrev",
   "Messages.Beskrivelse": "Foretrukket språk",
+  "Messages.FritekstRequired": "Feltet må fylles ut",
 
   "MessagesModal.description": "Brevet er bestilt",
   "MessagesModal.text": "Brevet er bestilt",

@@ -1,9 +1,8 @@
 export type ForhåndsvisMeldingParams = Readonly<{
-  fagsakYtelseType?: string;
-  behandlingUuid?: string;
-  automatiskVedtaksbrev?: boolean;
-  fritekst?: string;
+  behandlingUuid: string;
   dokumentMal?: string;
+  arsakskode?: string;
+  automatiskVedtaksbrev?: boolean;
   tittel?: string;
-  gjelderVedtak?: boolean;
+  fritekst?: string;
 }>;

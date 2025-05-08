@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -83,10 +83,16 @@ const transformValues = (values: FormValues) => {
   return newValues;
 };
 
+export type ForhåndsvisBrevParams = {
+  brevmalkode: string;
+  fritekst?: string;
+  arsakskode?: string;
+};
+
 interface Props {
   behandling: BehandlingAppKontekst;
   submitCallback: (values: FormValues) => void;
-  previewCallback: (brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
+  forhåndsvisBrev: (params: ForhåndsvisBrevParams) => void;
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
@@ -98,12 +104,12 @@ interface Props {
 /**
  * Messages
  *
- * Presentasjonskomponent. Gir mulighet for å forhåndsvise og sende brev. Mottaker og brevtype velges fra predefinerte lister,
+ * Gir mulighet for å forhåndsvise og sende brev. Mottaker og brevtype velges fra predefinerte lister,
  * og fritekst som skal flettes inn i brevet skrives inn i et eget felt.
  */
 export const Messages = ({
   behandling,
-  previewCallback,
+  forhåndsvisBrev,
   submitCallback,
   revurderingVarslingArsak,
   fagsakYtelseType,
@@ -113,6 +119,7 @@ export const Messages = ({
   brukerManglerAdresse,
 }: Props) => {
   const intl = useIntl();
+
   const formMethods = useForm<FormValues>({
     defaultValues: meldingFormData ?? buildInitalValues(behandling),
   });
@@ -121,9 +128,9 @@ export const Messages = ({
   const fritekst = formMethods.watch('fritekst');
   const arsakskode = formMethods.watch('arsakskode');
 
-  const filtrerteRevurderingVarslingArsaker = useMemo(
-    () => getfiltrerteRevurderingVarslingArsaker(revurderingVarslingArsak, fagsakYtelseType),
-    [],
+  const filtrerteRevurderingVarslingArsaker = getfiltrerteRevurderingVarslingArsaker(
+    revurderingVarslingArsak,
+    fagsakYtelseType,
   );
 
   if (!behandling.språkkode) {
@@ -132,9 +139,14 @@ export const Messages = ({
 
   const { formState } = formMethods;
 
-  const previewMessage = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (brevmalkode) {
-      previewCallback(brevmalkode, fritekst, arsakskode);
+  const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
+    if (brevmalkode && fritekst) {
+      forhåndsvisBrev({ brevmalkode, fritekst, arsakskode });
+    } else if (!fritekst) {
+      formMethods.setError('fritekst', {
+        type: 'manual',
+        message: intl.formatMessage({ id: 'Messages.FritekstRequired' }),
+      });
     }
     e.preventDefault();
   };
@@ -187,7 +199,7 @@ export const Messages = ({
         {brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
         <HStack justify="space-between">
           {(!erVarselOmRevurdering || (erVarselOmRevurdering && arsakskode !== undefined)) && (
-            <Link href="#" onClick={previewMessage} onKeyDown={e => (e.key === 'Enter' ? previewMessage(e) : null)}>
+            <Link href="#" onClick={forhåndsvis} onKeyDown={e => (e.key === 'Enter' ? forhåndsvis(e) : null)}>
               <FormattedMessage id="Messages.Preview" />
             </Link>
           )}

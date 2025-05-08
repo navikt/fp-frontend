@@ -6,7 +6,11 @@ import { createIntl } from '@navikt/ft-utils';
 import type { Behandling, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { HenlagtBehandlingModal } from './components/HenlagtBehandlingModal';
-import { type FormValues, HenleggBehandlingModal } from './components/HenleggBehandlingModal';
+import {
+  type ForhåndsvisHenleggParams,
+  type FormValues,
+  HenleggBehandlingModal,
+} from './components/HenleggBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -17,7 +21,7 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyHenleggI
 interface Props {
   valgtBehandling: Behandling;
   henleggBehandling: (params: { årsakKode: string; begrunnelse: string; fritekst?: string }) => Promise<void>;
-  forhandsvisHenleggBehandling: (erHenleggelse: boolean, data: any) => void;
+  forhandsvisHenleggBehandling: (data: ForhåndsvisHenleggParams) => void;
   ytelseType: string;
   behandlingResultatTyper: KodeverkMedNavn[];
   gaaTilSokeside: () => void;
@@ -52,7 +56,7 @@ export const MenyHenleggIndex = ({
         <HenleggBehandlingModal
           handleSubmit={submit}
           cancelEvent={lukkModal}
-          previewHenleggBehandling={forhandsvisHenleggBehandling}
+          forhandsvisHenleggBehandling={forhandsvisHenleggBehandling}
           ytelseType={ytelseType}
           behandlingType={valgtBehandling.type}
           behandlingUuid={valgtBehandling.uuid}
