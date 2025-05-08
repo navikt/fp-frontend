@@ -8,7 +8,7 @@ import * as stories from './VarselOmRevurderingProsessIndex.stories';
 
 const { ForFørstegangsbehandling, ForRevurdering } = composeStories(stories);
 
-describe('<VarselOmRevurderingProsessIndex>', () => {
+describe('VarselOmRevurderingProsessIndex', () => {
   it('skal for førstegangsbehandling velge å ikke sende varsel til søker og så bekrefte', async () => {
     const lagre = vi.fn();
 

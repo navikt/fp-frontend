@@ -18,11 +18,12 @@ import {
   UgunstAarsakType,
 } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
-import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+
+import { FodselSammenligningPanel } from './FodselSammenligningPanel';
 
 const minLength3 = minLength(3);
 const maxLength10000 = maxLength(10000);
@@ -124,7 +125,6 @@ export const VarselOmRevurderingForm = ({
   );
   const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] ?? EMPTY_ARRAY;
   const language = getLanguageFromSprakkode(behandling.språkkode);
-
   return (
     <>
       <Form formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
@@ -138,8 +138,8 @@ export const VarselOmRevurderingForm = ({
                 <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
               </AksjonspunktHelpTextHTML>
               {erAutomatiskRevurdering && (
-                <FodselSammenligningIndex
-                  behandlingsTypeKode={behandling.type}
+                <FodselSammenligningPanel
+                  behandlingsType={behandling.type}
                   avklartBarn={avklartBarn}
                   termindato={termindato}
                   vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
@@ -157,6 +157,25 @@ export const VarselOmRevurderingForm = ({
                   {
                     value: 'true',
                     label: intl.formatMessage({ id: 'VarselOmRevurderingForm.SendVarsel' }),
+                    element: (
+                      <ArrowBox marginTop={6}>
+                        <VStack gap="2">
+                          <TextAreaField
+                            badges={[{ type: 'info', titleText: language }]}
+                            name="fritekst"
+                            label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
+                            validate={[required, minLength3, maxLength10000, hasValidText]}
+                            maxLength={10000}
+                            parse={formaterFritekst}
+                          />
+                          <div>
+                            <Link href="#" onClick={forhåndsvisMelding}>
+                              <FormattedMessage id="VarselOmRevurderingForm.Preview" />
+                            </Link>
+                          </div>
+                        </VStack>
+                      </ArrowBox>
+                    ),
                   },
                   {
                     value: 'false',
@@ -164,25 +183,6 @@ export const VarselOmRevurderingForm = ({
                   },
                 ]}
               />
-              {formVerdier.sendVarsel && (
-                <ArrowBox>
-                  <VStack gap="2">
-                    <TextAreaField
-                      badges={[{ type: 'info', titleText: language }]}
-                      name="fritekst"
-                      label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
-                      validate={[required, minLength3, maxLength10000, hasValidText]}
-                      maxLength={10000}
-                      parse={formaterFritekst}
-                    />
-                    <div>
-                      <Link href="#" onClick={forhåndsvisMelding}>
-                        <FormattedMessage id="VarselOmRevurderingForm.Preview" />
-                      </Link>
-                    </div>
-                  </VStack>
-                </ArrowBox>
-              )}
               <TextAreaField
                 name="begrunnelse"
                 label={intl.formatMessage({ id: 'VarselOmRevurderingForm.BegrunnelseForSvar' })}
