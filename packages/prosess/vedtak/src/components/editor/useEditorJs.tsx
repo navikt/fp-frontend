@@ -19,12 +19,12 @@ import {
   erRedigertHtmlGyldig,
   konverterHtmlToEditorJsFormat,
   lagRedigerbartInnholdWrapper,
+  leggTilPTagsILiTags,
   utledDelerFraBrev,
   utledRedigerbartInnhold,
 } from './redigeringsUtils';
 
 const EDITOR_IKKE_INITIALISERT = 'Editor er ikke initialisert';
-const SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags (utanom framfor <a href)
 
 export const useEditorJs = (
   editorHolderId: string,
@@ -57,7 +57,7 @@ export const useEditorJs = (
       refMounted.current = true;
       const editor = new EditorJS({
         minHeight: 20,
-        data: konverterHtmlToEditorJsFormat(redigerbartInnhold.replace(SPACE_REGEX, '$1')),
+        data: konverterHtmlToEditorJsFormat(redigerbartInnhold),
         holder: editorHolderId,
         i18n: lagEditorJsI18n(intl),
         onReady: async () => {
@@ -99,7 +99,7 @@ export const useEditorJs = (
     const editor = notEmpty(refEditorJs.current, EDITOR_IKKE_INITIALISERT);
     await editor.blocks.clear();
     const opprinneligRedigerbartInnhold = utledRedigerbartInnhold(opprinneligHtml, harPraksisUtsettelse);
-    await editor.blocks.render(konverterHtmlToEditorJsFormat(opprinneligRedigerbartInnhold.replace(SPACE_REGEX, '$1')));
+    await editor.blocks.render(konverterHtmlToEditorJsFormat(opprinneligRedigerbartInnhold));
     await editor.isReady;
 
     const innhold = await editor.save();
@@ -138,7 +138,7 @@ export const useEditorJs = (
       automatiskVedtaksbrev: false,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
       gjelderVedtak: true,
-      fritekst: harPraksisUtsettelse ? html : lagRedigerbartInnholdWrapper(html, footer),
+      fritekst: harPraksisUtsettelse ? leggTilPTagsILiTags(html) : lagRedigerbartInnholdWrapper(html, footer),
     });
   };
 
