@@ -4,8 +4,8 @@ import { generate, parse, walk } from 'css-tree';
 import { notEmpty } from '@navikt/fp-utils';
 
 const REMOVE_SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags (utanom framfor <a href)
-const REMOVE_P_IN_LI_REGEX = /<li[^>]*>\s*(?:<p[^>]*>|<\/p>)+([\s\S]*?)<\/li>/g; // Fjern p-tags inni li-tags for å få korrekt styling
-const ADD_P_IN_LI_REGEX = /<li([^>]*)>(?!\s*<p>)([\s\S]*?)(?!<\/p>)<\/li>/g;
+const REMOVE_P_IN_LI_REGEX = /<li[^>]*>\s*(?:<p[^>]*>|<\/p>)+([\s\S]*?)<\/li>/g; // Fjern p-tags inni li-tags for å få korrekt styling i editor.js
+const ADD_P_IN_LI_REGEX = /<li([^>]*)>(?!\s*<p>)([\s\S]*?)(?!<\/p>)<\/li>/g; // Legg til p-tags inni li-tags for å få korrekt styling i pdf
 
 const fjernMellomromOgPTagsILiTags = (html: string): string =>
   html.replace(REMOVE_SPACE_REGEX, '$1').replace(REMOVE_P_IN_LI_REGEX, '<li>$1</li>');
