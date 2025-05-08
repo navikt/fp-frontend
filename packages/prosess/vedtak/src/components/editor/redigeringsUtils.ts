@@ -3,8 +3,19 @@ import { generate, parse, walk } from 'css-tree';
 
 import { notEmpty } from '@navikt/fp-utils';
 
+const REMOVE_SPACE_REGEX = /\s*(<(?!a\s+href)[^>]+>)\s*/g; // Fjerne mellomrom rundt html-tags (utanom framfor <a href)
+const REMOVE_P_IN_LI_REGEX = /<li[^>]*>\s*(?:<p[^>]*>|<\/p>)+([\s\S]*?)<\/li>/g; // Fjern p-tags inni li-tags for å få korrekt styling i editor.js
+const ADD_P_IN_LI_REGEX = /<li([^>]*)>(?!\s*<p>)([\s\S]*?)(?!<\/p>)<\/li>/g; // Legg til p-tags inni li-tags for å få korrekt styling i pdf
+
+const fjernMellomromOgPTagsILiTags = (html: string): string =>
+  html.replace(REMOVE_SPACE_REGEX, '$1').replace(REMOVE_P_IN_LI_REGEX, '<li>$1</li>');
+
+export const leggTilPTagsILiTags = (html: string): string => html.replace(ADD_P_IN_LI_REGEX, '<li$1><p>$2</p></li>');
+
 export const lagRedigerbartInnholdWrapper = (redigerbartInnhold: string, readonlyFooter: string | undefined) =>
-  `<div id="redigerbart-innhold" data-editable="data-editable">${redigerbartInnhold}</div><div id="readonly-innhold">${readonlyFooter ?? ''}</div>`;
+  `<div id="redigerbart-innhold" data-editable="data-editable">${leggTilPTagsILiTags(
+    redigerbartInnhold,
+  )}</div><div id="readonly-innhold">${readonlyFooter ?? ''}</div>`;
 
 export const utledStiler = (html: string) => {
   const heleBrevet = new DOMParser().parseFromString(html, 'text/html');
@@ -68,13 +79,13 @@ export const utledRedigerbartInnhold = (html: string, harPraksisUtsettelse: bool
   );
 
   if (harPraksisUtsettelse) {
-    return (
+    return fjernMellomromOgPTagsILiTags(
       editertbartInnhold +
-      notEmpty(heleBrevet.getElementById('readonly-innhold')?.innerHTML, 'Readonly-innhold finnes ikke i mal')
+        notEmpty(heleBrevet.getElementById('readonly-innhold')?.innerHTML, 'Readonly-innhold finnes ikke i mal'),
     );
   }
 
-  return editertbartInnhold;
+  return fjernMellomromOgPTagsILiTags(editertbartInnhold);
 };
 
 export const erRedigertHtmlGyldig = (html: string): boolean => {
