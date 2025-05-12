@@ -8,6 +8,7 @@ export enum FaktaKilde {
   SOKNAD,
   FREG,
   MEDL,
+  INGEN,
 }
 
 export const getLabelForFaktaKilde = (kilde: FaktaKilde) => {
@@ -18,6 +19,8 @@ export const getLabelForFaktaKilde = (kilde: FaktaKilde) => {
       return intl.formatMessage({ id: 'FaktaKilde.FREG' });
     case FaktaKilde.MEDL:
       return intl.formatMessage({ id: 'FaktaKilde.MEDL' });
+    case FaktaKilde.INGEN:
+      return '';
     default:
       return assertUnreachable(kilde);
   }
