@@ -19,7 +19,7 @@ const meta = {
   decorators: [withQueryClient],
   parameters: {
     msw: {
-      handlers: [http.post('http://www.test.com' + link.href, () => new HttpResponse(null, { status: 200 }))],
+      handlers: [http.post('https://www.test.com' + link.href, () => new HttpResponse(null, { status: 200 }))],
     },
   },
   args: {

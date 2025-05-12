@@ -24,7 +24,7 @@ const kyExtended = ky.extend({
 
 //MÅ være en gyldig URL for at KY skal fungere i test
 const isTest = import.meta.env.MODE === 'test';
-const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
+const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const FpFordelUrl = {
   ALLE_JOURNAL_OPPGAVER: wrapUrl('/fpfordel/api/journalfoering/oppgaver'),
