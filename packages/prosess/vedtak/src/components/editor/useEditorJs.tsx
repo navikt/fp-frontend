@@ -14,7 +14,7 @@ import { DokumentMalType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
-import type { ForhandsvisData } from '../forstegang/VedtakForm';
+import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import {
   erRedigertHtmlGyldig,
   konverterHtmlToEditorJsFormat,
@@ -30,7 +30,7 @@ export const useEditorJs = (
   editorHolderId: string,
   brevOverstyring: BrevOverstyring,
   mellomlagreOgHentPåNytt: (redigertInnhold: string | null) => Promise<void>,
-  forhåndsvisBrev: (data: ForhandsvisData) => void,
+  forhåndsvisBrev: (data: VedtakForhåndsvisData) => void,
 ) => {
   const intl = useIntl();
 
@@ -137,7 +137,6 @@ export const useEditorJs = (
     forhåndsvisBrev({
       automatiskVedtaksbrev: false,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
-      gjelderVedtak: true,
       fritekst: harPraksisUtsettelse ? leggTilPTagsILiTags(html) : lagRedigerbartInnholdWrapper(html, footer),
     });
   };

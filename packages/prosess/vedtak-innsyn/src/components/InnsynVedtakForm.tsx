@@ -20,15 +20,14 @@ import styles from './innsynVedtakForm.module.css';
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-export type ForhandsvisData = {
+export type VedtakInnsynForhandsvisData = {
   fritekst: string;
   mottaker: string;
   dokumentMal: string;
-  gjelderVedtak: boolean;
 };
 
 const getPreviewCallback =
-  (previewCallback: (data: ForhandsvisData) => void, begrunnelse?: string) =>
+  (previewCallback: (data: VedtakInnsynForhandsvisData) => void, begrunnelse?: string) =>
   (e: React.KeyboardEvent | React.MouseEvent): void => {
     e.preventDefault();
 
@@ -36,7 +35,6 @@ const getPreviewCallback =
       fritekst: begrunnelse ?? ' ',
       mottaker: '',
       dokumentMal: DokumentMalType.INNSYN_SVAR,
-      gjelderVedtak: true,
     };
     previewCallback(data);
   };
@@ -96,7 +94,7 @@ interface Props {
   innsynMottattDato: string;
   innsynResultatType: string;
   alleDokumenter: Dokument[];
-  previewCallback: (data: ForhandsvisData) => void;
+  previewCallback: (data: VedtakInnsynForhandsvisData) => void;
 }
 
 /**

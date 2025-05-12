@@ -27,7 +27,7 @@ const OMGJOER_TEKST_MAP = {
   DELVIS_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortDelvis',
 } as Record<string, string>;
 
-export type ForhandsvisData = {
+export type VedtakKlageForhandsvisData = {
   gjelderVedtak: boolean;
 };
 
@@ -85,7 +85,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
 
 interface Props {
   klageVurdering: KlageVurdering;
-  previewVedtakCallback: (data: ForhandsvisData) => void;
+  previewVedtakCallback: (data: VedtakKlageForhandsvisData) => void;
   behandlingsresultat: Behandlingsresultat;
 }
 

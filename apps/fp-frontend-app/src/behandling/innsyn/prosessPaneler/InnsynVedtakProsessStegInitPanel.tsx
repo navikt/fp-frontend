@@ -8,8 +8,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
-import type { Behandling, ForhåndsvisMeldingParams } from '@navikt/fp-types';
+import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
+import type { Behandling } from '@navikt/fp-types';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
@@ -20,7 +20,7 @@ import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext'
 export const InnsynVedtakProsessStegInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+  const { behandling, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
 
   const [visIverksetterVedtakModal, toggleIverksetterVedtakModal] = useState(false);
   const lagringSideeffekterCallback = getLagringSideeffekter(
@@ -35,11 +35,10 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   const { data: innsyn } = useQuery(api.innsyn.innsynOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
-    mutationFn: (values: ForhåndsvisMeldingParams) =>
+    mutationFn: (values: VedtakInnsynForhandsvisData) =>
       forhåndsvisMelding({
         ...values,
         behandlingUuid: behandling.uuid,
-        fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
   });

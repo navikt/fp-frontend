@@ -20,20 +20,20 @@ const getBrevKode = (klageVurdertAvKa: boolean, klageVurdering?: string): string
   }
 };
 
-export type BrevData = {
+export type KlagevurderingForhåndsvisData = {
   fritekst: string;
   dokumentMal?: string;
   erOpphevetKlage: boolean;
 };
 
-const getBrevData = (klageVurdering?: string, fritekstTilBrev?: string): BrevData => ({
+const getBrevData = (klageVurdering?: string, fritekstTilBrev?: string): KlagevurderingForhåndsvisData => ({
   fritekst: fritekstTilBrev ?? '',
   dokumentMal: getBrevKode(false, klageVurdering),
   erOpphevetKlage: klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK,
 });
 
 interface Props {
-  previewCallback: (data: BrevData) => void;
+  previewCallback: (data: KlagevurderingForhåndsvisData) => void;
   fritekstTilBrev?: string;
   klageVurdering?: string;
 }

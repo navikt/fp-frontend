@@ -8,8 +8,10 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { VarselOmRevurderingProsessIndex } from '@navikt/fp-prosess-varsel-om-revurdering';
-import type { ForhåndsvisMeldingParams } from '@navikt/fp-types';
+import {
+  type VarselOmRevurderingForhåndsvisData,
+  VarselOmRevurderingProsessIndex,
+} from '@navikt/fp-prosess-varsel-om-revurdering';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -42,7 +44,7 @@ const AKSJONSPUNKT_KODER = [
 export const VarselProsessStegInitPanel = () => {
   const intl = useIntl();
 
-  const { setSkalOppdatereEtterBekreftelseAvAp, fagsak, behandling } = use(BehandlingDataContext);
+  const { setSkalOppdatereEtterBekreftelseAvAp, behandling } = use(BehandlingDataContext);
 
   const navigate = useNavigate();
 
@@ -63,11 +65,10 @@ export const VarselProsessStegInitPanel = () => {
   const { data: søknadOriginalBehandling } = useQuery(api.søknadOriginalBehandlingOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
-    mutationFn: (values: ForhåndsvisMeldingParams) =>
+    mutationFn: (values: VarselOmRevurderingForhåndsvisData) =>
       forhåndsvisMelding({
         ...values,
         behandlingUuid: behandling.uuid,
-        fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
   });

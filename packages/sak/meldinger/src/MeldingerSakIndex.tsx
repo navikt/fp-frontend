@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
-import { type FormValues, Messages } from './components/Messages';
+import { type ForhåndsvisBrevParams, type FormValues, Messages } from './components/Messages';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   submitCallback: (values: FormValues) => void;
-  previewCallback: (brevmalkode?: string, fritekst?: string, arsakskode?: string) => void;
+  forhåndsvisBrev: (params: ForhåndsvisBrevParams) => void;
   revurderingVarslingArsak: KodeverkMedNavn[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
