@@ -6,7 +6,7 @@ import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkLosType } from '@navikt/fp-kodeverk';
 import { FlyttReservasjonModal, OppgaveReservasjonEndringDatoModal } from '@navikt/fp-los-felles';
 
 import {
@@ -30,7 +30,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
   const [showFlyttReservasjonModal, setShowFlyttReservasjonModal] = useState(false);
   const [valgtReservasjon, setValgtReservasjon] = useState<Reservasjon | undefined>(undefined);
 
-  const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
+  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
 
   const { data: reservasjoner, refetch: hentAvdelingensReservasjoner } = useQuery(
     reservasjonerForAvdelingOptions(valgtAvdelingEnhet),

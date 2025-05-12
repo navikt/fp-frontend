@@ -12,7 +12,6 @@ import dayjs from 'dayjs';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  getKodeverknavnFn,
   KodeverkType,
   SoknadType,
   VilkarType,
@@ -110,7 +109,6 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const dato = useMemo(() => findDate(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
   const textCode = useMemo(() => findTextCode(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
 
@@ -192,11 +190,9 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
         />
         {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
           <BodyShort size="small">
-            {getKodeverknavn(
-              behandling.behandlingsresultat.avslagsarsak,
-              KodeverkType.AVSLAGSARSAK,
-              VilkarType.SOKNADFRISTVILKARET,
-            )}
+            {alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SOKNADFRISTVILKARET].find(
+              type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
+            )?.navn ?? ''}
           </BodyShort>
         )}
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />

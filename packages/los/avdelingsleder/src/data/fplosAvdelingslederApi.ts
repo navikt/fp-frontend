@@ -2,7 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
 import type { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverkLos } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
 import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
@@ -109,7 +109,7 @@ export const oppgaveAntallOptions = (sakslisteId: number, avdelingEnhet: string)
 export const losKodeverkOptions = () =>
   queryOptions({
     queryKey: [LosUrl.KODEVERK_LOS],
-    queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverk>(),
+    queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverkLos>(),
     staleTime: Infinity,
   });
 

@@ -4,11 +4,12 @@ import { BodyShort } from '@navikt/ds-react';
 import { type Location } from 'history';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
 interface Props {
   skjermlenke?: string;
   behandlingLocation: Location | undefined;
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType, undertype?: string) => string;
+  alleKodeverk: AlleKodeverkTilbakekreving | AlleKodeverk;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeKode: string) => Location | undefined;
 }
 
@@ -18,12 +19,7 @@ export const scrollUp = (): void => {
   }
 };
 
-export const Skjermlenke = ({
-  skjermlenke,
-  behandlingLocation,
-  getKodeverknavn,
-  createLocationForSkjermlenke,
-}: Props) => {
+export const Skjermlenke = ({ skjermlenke, behandlingLocation, alleKodeverk, createLocationForSkjermlenke }: Props) => {
   if (!skjermlenke || !behandlingLocation) {
     return null;
   }
@@ -36,7 +32,7 @@ export const Skjermlenke = ({
   return (
     <BodyShort size="medium">
       <NavLink to={location} onClick={scrollUp}>
-        {getKodeverknavn(skjermlenke, KodeverkType.SKJERMLENKE_TYPE)}
+        {alleKodeverk[KodeverkType.SKJERMLENKE_TYPE].find(rolle => rolle.kode === skjermlenke)?.navn ?? ''}
       </NavLink>
     </BodyShort>
   );

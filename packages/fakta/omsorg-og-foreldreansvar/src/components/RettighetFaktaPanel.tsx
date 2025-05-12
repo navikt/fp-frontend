@@ -5,7 +5,7 @@ import { BodyShort, VStack } from '@navikt/ds-react';
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
-import type { RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
+import type { AlleKodeverk, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
 import styles from './rettighetFaktaPanel.module.css';
 
@@ -69,8 +69,10 @@ export const RettighetFaktaPanel = ({ alleMerknaderFraBeslutter }: Props) => {
 RettighetFaktaPanel.buildInitialValues = (
   soknad: Soknad,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
+  alleKodeverk: AlleKodeverk,
 ): FormValues => ({
   ytelser: innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-  farSokerType: soknad.farSokerType ? getKodeverknavn(soknad.farSokerType, KodeverkType.FAR_SOEKER_TYPE) : undefined,
+  farSokerType: soknad.farSokerType
+    ? (alleKodeverk[KodeverkType.FAR_SOEKER_TYPE].find(k => k.kode === soknad.farSokerType)?.navn ?? '')
+    : undefined,
 });

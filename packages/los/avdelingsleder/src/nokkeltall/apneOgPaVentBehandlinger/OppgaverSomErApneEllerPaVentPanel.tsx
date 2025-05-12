@@ -6,7 +6,7 @@ import { HStack, Label, VStack } from '@navikt/ds-react';
 import { CheckboxField, Form } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkLosType } from '@navikt/fp-kodeverk';
 
 import { oppgaverÅpneEllerPåVentOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
@@ -24,7 +24,7 @@ interface Props {
 export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
   const { data: oppgaverApneEllerPaVent } = useQuery(oppgaverÅpneEllerPåVentOptions(valgtAvdelingEnhet));
 
-  const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
+  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
 

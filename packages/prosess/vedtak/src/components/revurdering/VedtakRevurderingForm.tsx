@@ -10,7 +10,6 @@ import {
   BehandlingArsakType,
   DokumentMalType,
   FagsakYtelseType,
-  getKodeverknavnFn,
   isAvslag,
   isInnvilget,
   isOpphor,
@@ -19,6 +18,7 @@ import {
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
+  AlleKodeverk,
   Behandling,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
@@ -90,10 +90,7 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
         bt === BehandlingArsakType.KLAGE_M_INNTK,
     );
 
-const lagÅrsakString = (
-  revurderingAarsaker: string[],
-  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
-): string | undefined => {
+const lagÅrsakString = (revurderingAarsaker: string[], alleKodeverk: AlleKodeverk): string | undefined => {
   if (revurderingAarsaker === undefined || revurderingAarsaker.length < 1) {
     return undefined;
   }
@@ -103,10 +100,12 @@ const lagÅrsakString = (
   );
   const alleAndreAarsakerNavn = revurderingAarsaker
     .filter(aarsak => aarsak !== BehandlingArsakType.RE_ENDRING_FRA_BRUKER)
-    .map(aarsak => getKodeverknavn(aarsak, KodeverkType.BEHANDLING_AARSAK));
+    .map(aarsak => alleKodeverk[KodeverkType.BEHANDLING_AARSAK].find(kode => kode.kode === aarsak)?.navn ?? '');
   // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
   if (endringFraBrukerAarsak !== undefined) {
-    aarsakTekstList.push(getKodeverknavn(endringFraBrukerAarsak, KodeverkType.BEHANDLING_AARSAK));
+    aarsakTekstList.push(
+      alleKodeverk[KodeverkType.BEHANDLING_AARSAK].find(kode => kode.kode === endringFraBrukerAarsak)?.navn ?? '',
+    );
   }
   aarsakTekstList.push(...alleAndreAarsakerNavn);
   return aarsakTekstList.join(', ');
@@ -121,14 +120,13 @@ const erNyttBehandlingResult = (
   return vedtakResultOriginal !== vedtakResult;
 };
 
-export const lagKonsekvensForYtelsenTekst = (
-  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
-  konsekvenser?: string[],
-): string => {
+export const lagKonsekvensForYtelsenTekst = (alleKodeverk: AlleKodeverk, konsekvenser?: string[]): string => {
   if (!konsekvenser || konsekvenser.length < 1) {
     return '';
   }
-  return konsekvenser.map(k => getKodeverknavn(k, KodeverkType.KONSEKVENS_FOR_YTELSEN)).join(' og ');
+  return konsekvenser
+    .map(k => alleKodeverk[KodeverkType.KONSEKVENS_FOR_YTELSEN].find(kodeverk => kodeverk.kode === k)?.navn ?? '')
+    .join(' og ');
 };
 
 const erTilkjentYtelseEllerAntallBarnEndret = (
@@ -179,8 +177,8 @@ const hentResultattekst = (
 const finnInvilgetRevurderingTekst = (
   intl: IntlShape,
   ytelseTypeKode: string,
-  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
-  tilbakekrevingText: string,
+  alleKodeverk: AlleKodeverk,
+  tilbakekrevingText: string | undefined,
   konsekvenserForYtelsen?: string[],
   beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
@@ -188,8 +186,8 @@ const finnInvilgetRevurderingTekst = (
   if (ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD) {
     return intl.formatMessage({ id: hentResultattekst(true, beregningResultat, originaltBeregningResultat) });
   }
-  const konsekvens = lagKonsekvensForYtelsenTekst(getKodeverknavn, konsekvenserForYtelsen);
-  return `${konsekvens}${konsekvens !== '' ? tilbakekrevingText : '. '}`;
+  const konsekvens = lagKonsekvensForYtelsenTekst(alleKodeverk, konsekvenserForYtelsen);
+  return `${konsekvens}${konsekvens !== '' ? (tilbakekrevingText ?? '') : '. '}`;
 };
 
 const transformValues = (
@@ -265,9 +263,9 @@ export const VedtakRevurderingForm = ({
   const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandlingÅrsaker);
   const revurderingsÅrsakString = lagÅrsakString(
     behandlingÅrsaker.map(arsak => arsak.behandlingArsakType),
-    getKodeverknavnFn(alleKodeverk),
+    alleKodeverk,
   );
-  const tilbakekrevingtekst = getTilbakekrevingText(alleKodeverk, simuleringResultat, tilbakekrevingvalg);
+  const tilbakekrevingtekst = getTilbakekrevingText(simuleringResultat, tilbakekrevingvalg);
 
   let vedtakstatusTekst = '';
   if (behandlingsresultat && isInnvilget(behandlingsresultat.type)) {
@@ -275,7 +273,7 @@ export const VedtakRevurderingForm = ({
     vedtakstatusTekst = finnInvilgetRevurderingTekst(
       intl,
       fagsak.fagsakYtelseType,
-      getKodeverknavnFn(alleKodeverk),
+      alleKodeverk,
       tilbakekrevingtekst,
       konsekvenserForYtelsen,
       beregningsresultat,

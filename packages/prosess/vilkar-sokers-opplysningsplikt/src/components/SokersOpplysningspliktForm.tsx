@@ -6,14 +6,7 @@ import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  getKodeverknavnFn,
-  KodeverkType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -182,7 +175,6 @@ export const SokersOpplysningspliktForm = ({
 
   const sorterteManglendeVedlegg = getSortedManglendeVedlegg(soknad);
   const hasSoknad = harSoknad(soknad);
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
 
   const initialValues = buildInitialValues(
     sorterteManglendeVedlegg,
@@ -283,11 +275,9 @@ export const SokersOpplysningspliktForm = ({
             <div>
               {originalErVilkarOk === false && behandling.behandlingsresultat?.avslagsarsak && (
                 <BodyShort size="small">
-                  {getKodeverknavn(
-                    behandling.behandlingsresultat.avslagsarsak,
-                    KodeverkType.AVSLAGSARSAK,
-                    VilkarType.SOKERSOPPLYSNINGSPLIKT,
-                  )}
+                  {alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SOKERSOPPLYSNINGSPLIKT].find(
+                    type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
+                  )?.navn ?? ''}
                 </BodyShort>
               )}
             </div>

@@ -19,7 +19,7 @@ const meta = {
   },
   args: {
     readOnly: false,
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: alleKodeverk,
   },
   render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm({
