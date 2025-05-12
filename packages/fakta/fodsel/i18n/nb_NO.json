@@ -21,5 +21,21 @@
   "SjekkFodselDokForm.Tittel": "Kontroller opplysninger om termin oppgitt i søknaden",
   "SjekkFodselDokForm.DokumentasjonAvFodsel": "Finnes det fødselsdokumentasjon?",
   "SjekkFodselDokForm.DokumentasjonForeligger": "Dokumentasjon er tilgjengelig",
-  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Dokumentasjon mangler – bruk opplysningene fra Folkeregisteret."
+  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Dokumentasjon mangler – bruk opplysningene fra Folkeregisteret.",
+
+
+  "FodselsammenligningPanel.OpplysningerFREG": "Opplysninger fra folkeregisteret",
+  "FodselsammenligningPanel.OpplysningerSoknad": "Opplysninger oppgitt i søknaden",
+  "FodselsammenligningPanel.OpplysningerGjeldende": "Gjeldende opplysninger",
+
+  "FodselsammenligningPanel.AntallBarn": "Antall barn",
+  "FodselsammenligningPanel.Termindato": "Termindato",
+  "FodselsammenligningPanel.Fodselsdato": "Fødselsdato",
+  "FodselsammenligningPanel.Dodsdato": "Dødsdato",
+  "FodselsammenligningPanel.UstedtDato": "Utstedt dato",
+  "FodselsammenligningPanel.Ytelsesvedtak": "Vedtak",
+  "FodselsammenligningPanel.Dodfodt": "Dødfødsel",
+  "FodselsammenligningPanel.Dod": "Død",
+  "FodselsammenligningPanel.Svangerskapsuke": "Svangerskapsuke",
+  "FodselsammenligningPanel.FodtISvangerskapsuke": "Født i svangerskapsuke"
 }

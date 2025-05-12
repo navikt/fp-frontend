@@ -28,10 +28,6 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  const { data: familiehendelseOrigninalBehandling } = useQuery(
-    api.familiehendelseOrigninalBehandlingOptions(behandling),
-  );
-  const { data: søknadOriginalBehandling } = useQuery(api.søknadOriginalBehandlingOptions(behandling));
 
   return (
     <FaktaDefaultInitPanel
@@ -42,10 +38,8 @@ export const FodselvilkaretFaktaInitPanel = () => {
     >
       {familiehendelse && søknad ? (
         <FodselFaktaIndex
-          soknad={søknad}
+          søknad={søknad}
           familiehendelse={familiehendelse}
-          familiehendelseOriginalBehandling={familiehendelseOrigninalBehandling}
-          soknadOriginalBehandling={søknadOriginalBehandling}
           submittable={standardPanelProps.submittable}
         />
       ) : (

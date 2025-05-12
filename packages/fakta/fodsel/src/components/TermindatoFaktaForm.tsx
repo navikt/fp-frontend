@@ -31,7 +31,7 @@ export type FormValues = {
 };
 
 interface Props {
-  soknad: Soknad;
+  søknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   submittable: boolean;
   aksjonspunkt: Aksjonspunkt;
@@ -42,16 +42,16 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av termindato (Fødselsvilkåret).
  */
-export const TermindatoFaktaForm = ({ soknad, gjeldendeFamiliehendelse, submittable, aksjonspunkt }: Props) => {
+export const TermindatoFaktaForm = ({ søknad, gjeldendeFamiliehendelse, submittable, aksjonspunkt }: Props) => {
   const intl = useIntl();
-  const editedStatus = isFieldEdited(soknad, gjeldendeFamiliehendelse);
+  const editedStatus = isFieldEdited(søknad, gjeldendeFamiliehendelse);
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<BekreftTerminbekreftelseAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(søknad, gjeldendeFamiliehendelse, aksjonspunkt),
   });
 
   const termindato = formMethods.watch('termindato');

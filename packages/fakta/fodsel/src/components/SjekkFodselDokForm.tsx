@@ -26,7 +26,7 @@ export type FormValues = {
 interface Props {
   gjeldendeFamiliehendelse: FamilieHendelse;
   registerFamiliehendelse: FamilieHendelse | null;
-  soknad: Soknad;
+  søknad: Soknad;
   submittable: boolean;
   aksjonspunkt: Aksjonspunkt;
 }
@@ -38,7 +38,7 @@ interface Props {
  */
 export const SjekkFodselDokForm = ({
   submittable,
-  soknad,
+  søknad,
   aksjonspunkt,
   registerFamiliehendelse,
   gjeldendeFamiliehendelse,
@@ -49,9 +49,9 @@ export const SjekkFodselDokForm = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const dokumentasjonForeliggerIsEdited = isFieldEdited(soknad, gjeldendeFamiliehendelse).dokumentasjonForeligger;
+  const dokumentasjonForeliggerIsEdited = isFieldEdited(søknad, gjeldendeFamiliehendelse).dokumentasjonForeligger;
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(søknad, gjeldendeFamiliehendelse, aksjonspunkt),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
