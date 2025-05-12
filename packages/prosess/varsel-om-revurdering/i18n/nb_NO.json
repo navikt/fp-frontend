@@ -15,5 +15,17 @@
   "VarselOmRevurderingForm.OpplysningerISoknad": "Opplysninger om fødsel i søknaden",
   "VarselOmRevurderingForm.Preview": "Forhåndsvis",
 
-  "Malform.Beskrivelse": "Foretrukket språk"
+  "FodselsammenligningPanel.AntallBarn": "Antall barn",
+  "FodselsammenligningPanel.Termindato": "Termindato",
+  "FodselsammenligningPanel.FodtISvangerskapsuke": "Født i svangerskapsuke",
+  "FodselsammenligningPanel.Svangerskapsuke": "Svangerskapsuke",
+  "FodselsammenligningPanel.OpplysningerFReg": "Opplysninger om fødsel fra folkeregisteret",
+  "FodselsammenligningPanel.Fodselsdato": "Fødselsdato",
+  "FodselsammenligningPanel.Dodsdato": "Dødsdato",
+  "FodselsammenligningPanel.UstedtDato": "Utstedt dato",
+  "FodselsammenligningPanel.Ytelsesvedtak": "Vedtak",
+  "FodselsammenligningPanel.Dodfodt": "Dødfødsel",
+  "FodselsammenligningPanel.Dod": "Død",
+  "FodselSammenligningOtherPanel.OpplysningerISoknad": "Opplysninger om fødsel fra søknaden",
+  "FodselSammenligningOtherPanel.TerminISoknad": "Opplysninger om termin oppgitt i søknaden"
 }
