@@ -39,54 +39,6 @@ export type FormValues = {
   begrunnelse?: string;
 };
 
-const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) => {
-  const fom = getValues('fom');
-  if (tom && fom) {
-    return dateAfterOrEqual(fom)(tom);
-  }
-  return null;
-};
-
-const getOppdaterTabell =
-  (formValues: FormValues) =>
-  (gammelData: ArbeidsforholdOgInntektRadData[]): ArbeidsforholdOgInntektRadData[] => {
-    const rad: ArbeidsforholdOgInntektRadData = {
-      erPrivatPerson: false,
-      arbeidsgiverIdent: MANUELT_ORG_NR,
-      arbeidsgiverNavn: formValues.arbeidsgiverNavn!,
-      avklaring: {
-        fom: formValues.fom,
-        tom: formValues.tom,
-        stillingsprosent: formValues.stillingsprosent,
-        arbeidsgiverNavn: formValues.arbeidsgiverNavn,
-        begrunnelse: formValues.begrunnelse,
-        saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
-      },
-      inntektsmeldingerForRad: [],
-      inntektsposter: [],
-      arbeidsforholdForRad: [],
-    };
-
-    const gammelIndex = gammelData.findIndex(data => data.arbeidsgiverIdent === MANUELT_ORG_NR);
-    if (gammelIndex === -1) {
-      return gammelData.concat(rad);
-    }
-    return gammelData.map((data, i) => (i === gammelIndex ? rad : data));
-  };
-
-const getOppdaterTabellOgLukkRad =
-  (
-    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
-    lukkArbeidsforholdRad: () => void,
-    erNyttArbeidsforhold?: boolean,
-  ) =>
-  () => {
-    oppdaterTabell(oldData => oldData.filter(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR));
-    if (erNyttArbeidsforhold) {
-      lukkArbeidsforholdRad();
-    }
-  };
-
 interface Props {
   behandlingUuid: string;
   behandlingVersjon: number;
@@ -286,3 +238,51 @@ const lagManueltArbeidsforhold = (
   tom: formValues.tom,
   stillingsprosent: formValues.stillingsprosent!,
 });
+
+const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) => {
+  const fom = getValues('fom');
+  if (tom && fom) {
+    return dateAfterOrEqual(fom)(tom);
+  }
+  return null;
+};
+
+const getOppdaterTabell =
+  (formValues: FormValues) =>
+  (gammelData: ArbeidsforholdOgInntektRadData[]): ArbeidsforholdOgInntektRadData[] => {
+    const rad: ArbeidsforholdOgInntektRadData = {
+      erPrivatPerson: false,
+      arbeidsgiverIdent: MANUELT_ORG_NR,
+      arbeidsgiverNavn: formValues.arbeidsgiverNavn!,
+      avklaring: {
+        fom: formValues.fom,
+        tom: formValues.tom,
+        stillingsprosent: formValues.stillingsprosent,
+        arbeidsgiverNavn: formValues.arbeidsgiverNavn,
+        begrunnelse: formValues.begrunnelse,
+        saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+      },
+      inntektsmeldingerForRad: [],
+      inntektsposter: [],
+      arbeidsforholdForRad: [],
+    };
+
+    const gammelIndex = gammelData.findIndex(data => data.arbeidsgiverIdent === MANUELT_ORG_NR);
+    if (gammelIndex === -1) {
+      return gammelData.concat(rad);
+    }
+    return gammelData.map((data, i) => (i === gammelIndex ? rad : data));
+  };
+
+const getOppdaterTabellOgLukkRad =
+  (
+    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
+    lukkArbeidsforholdRad: () => void,
+    erNyttArbeidsforhold?: boolean,
+  ) =>
+  () => {
+    oppdaterTabell(oldData => oldData.filter(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR));
+    if (erNyttArbeidsforhold) {
+      lukkArbeidsforholdRad();
+    }
+  };

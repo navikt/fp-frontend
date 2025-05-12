@@ -3,7 +3,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, Link, Spacer, VStack } from '@navikt/ds-react';
-import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { BeløpLabel } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { AlleKodeverk, Inntektspost } from '@navikt/fp-types';
@@ -16,31 +17,6 @@ import styles from './arbeidsforholdInformasjonPanel.module.css';
 type ForenkletInntektspost = {
   beløp: number;
   fom: string;
-};
-
-const behandleInntektsposter = (
-  skjæringspunktDato: string,
-  inntektsposter: Inntektspost[],
-): ForenkletInntektspost[] => {
-  const skjæringstidspunkt = dayjs(skjæringspunktDato);
-  const månedenFørSkjæringspunktet = skjæringstidspunkt.subtract(1, 'month').startOf('month');
-  const tolvMånederFørSkjæringspunktet = månedenFørSkjæringspunktet.subtract(12, 'month');
-
-  const poster = [];
-  for (
-    let måned = månedenFørSkjæringspunktet;
-    måned.isAfter(tolvMånederFørSkjæringspunktet);
-    måned = måned.subtract(1, 'month')
-  ) {
-    const månedString = måned.format(ISO_DATE_FORMAT);
-    const inntekt = inntektsposter.find(inn => dayjs(inn.fom).startOf('month').format(ISO_DATE_FORMAT) === månedString);
-    poster.push({
-      beløp: inntekt?.beløp || 0,
-      fom: månedString,
-    });
-  }
-
-  return poster;
 };
 
 interface Props {
@@ -87,7 +63,9 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
                   </BodyShort>
                   <BodyShort size="small">{dayjs(inntekt.fom).year()}</BodyShort>
                   <Spacer />
-                  <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
+                  <BodyShort size="small">
+                    <BeløpLabel beløp={inntekt.beløp} />
+                  </BodyShort>
                 </HStack>
               ))}
           </VStack>
@@ -120,4 +98,29 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
       )}
     </VStack>
   );
+};
+
+const behandleInntektsposter = (
+  skjæringspunktDato: string,
+  inntektsposter: Inntektspost[],
+): ForenkletInntektspost[] => {
+  const skjæringstidspunkt = dayjs(skjæringspunktDato);
+  const månedenFørSkjæringspunktet = skjæringstidspunkt.subtract(1, 'month').startOf('month');
+  const tolvMånederFørSkjæringspunktet = månedenFørSkjæringspunktet.subtract(12, 'month');
+
+  const poster = [];
+  for (
+    let måned = månedenFørSkjæringspunktet;
+    måned.isAfter(tolvMånederFørSkjæringspunktet);
+    måned = måned.subtract(1, 'month')
+  ) {
+    const månedString = måned.format(ISO_DATE_FORMAT);
+    const inntekt = inntektsposter.find(inn => dayjs(inn.fom).startOf('month').format(ISO_DATE_FORMAT) === månedString);
+    poster.push({
+      beløp: inntekt?.beløp || 0,
+      fom: månedString,
+    });
+  }
+
+  return poster;
 };

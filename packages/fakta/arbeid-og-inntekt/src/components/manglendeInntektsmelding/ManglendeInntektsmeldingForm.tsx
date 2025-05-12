@@ -23,29 +23,6 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-const getOppdaterTabell =
-  (
-    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
-    radData: ArbeidsforholdOgInntektRadData,
-    formValues: FormValues,
-  ) =>
-  () => {
-    oppdaterTabell(oldData =>
-      oldData.map(data => {
-        if (data.arbeidsgiverIdent === radData.arbeidsgiverIdent) {
-          return {
-            ...radData,
-            avklaring: {
-              begrunnelse: formValues.begrunnelse,
-              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-            },
-          };
-        }
-        return data;
-      }),
-    );
-  };
-
 interface Props {
   behandlingUuid: string;
   behandlingVersjon: number;
@@ -208,3 +185,26 @@ export const ManglendeInntektsmeldingForm = ({
     </Form>
   );
 };
+
+const getOppdaterTabell =
+  (
+    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
+    radData: ArbeidsforholdOgInntektRadData,
+    formValues: FormValues,
+  ) =>
+  () => {
+    oppdaterTabell(oldData =>
+      oldData.map(data => {
+        if (data.arbeidsgiverIdent === radData.arbeidsgiverIdent) {
+          return {
+            ...radData,
+            avklaring: {
+              begrunnelse: formValues.begrunnelse,
+              saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+            },
+          };
+        }
+        return data;
+      }),
+    );
+  };

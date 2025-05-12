@@ -2,8 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BeløpLabel, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
@@ -91,7 +90,9 @@ export const InntektsmeldingOpplysningerPanel = ({
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
         </Label>
-        <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
+        <BodyShort size="small">
+          <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
+        </BodyShort>
       </HStack>
       <HStack gap="4">
         <Label size="small">
@@ -112,7 +113,9 @@ export const InntektsmeldingOpplysningerPanel = ({
           <Label size="small">
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
           </Label>
-          <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
+          <BodyShort size="small">
+            <BeløpLabel beløp={inntektsmelding.refusjonPrMnd} />
+          </BodyShort>
         </HStack>
       )}
       <DokumentLink
