@@ -1,13 +1,15 @@
 import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { LosUrl } from '../../../data/fplosAvdelingslederApi';
+import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { KøSortering } from '../../../kodeverk/KoSortering';
 import { SorteringVelger } from './SorteringVelger';
 
@@ -46,10 +48,14 @@ const meta = {
       },
     });
 
-    return (
+    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
+    return kodeverkLos ? (
       <Form formMethods={formMethods}>
         <SorteringVelger {...args} />
       </Form>
+    ) : (
+      <LoadingPanel />
     );
   },
 } satisfies Meta<typeof SorteringVelger>;

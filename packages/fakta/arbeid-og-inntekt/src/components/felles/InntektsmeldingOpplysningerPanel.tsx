@@ -4,7 +4,7 @@ import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { BeløpLabel, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 import { DokumentLink } from '@navikt/fp-ui-komponenter';
 
@@ -17,7 +17,7 @@ interface Props {
   arbeidsforhold?: AoIArbeidsforhold;
   inntektsmelding: Inntektsmelding;
   skalViseArbeidsforholdId: boolean;
-  alleKodeverk?: AlleKodeverk;
+  alleKodeverk: AlleKodeverk;
   radData: ArbeidsforholdOgInntektRadData;
   ikkeVisInfo?: boolean;
 }
@@ -72,11 +72,9 @@ export const InntektsmeldingOpplysningerPanel = ({
           {arbeidsforhold.permisjonOgMangel && (
             <HStack gap="4">
               <Label size="small">
-                {getKodeverknavnFraKode(
-                  alleKodeverk,
-                  KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                  arbeidsforhold.permisjonOgMangel.type,
-                )}
+                {alleKodeverk[KodeverkType.PERMISJONSBESKRIVELSE_TYPE].find(
+                  k => k.kode === arbeidsforhold.permisjonOgMangel?.type,
+                )?.navn ?? ''}
               </Label>
               <BodyShort size="small">
                 <PeriodLabel

@@ -1,12 +1,14 @@
 import { useState } from 'react';
 
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { LosUrl } from '../data/fplosAvdelingslederApi';
+import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { GjeldendeSakslisterTabell } from './GjeldendeSakslisterTabell';
 
 import messages from '../../i18n/nb_NO.json';
@@ -35,6 +37,8 @@ const meta = {
   render: storyArgs => {
     const [args, setArgs] = useState(storyArgs);
 
+    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
     const lagNySaksliste = () => {
       args.lagNySaksliste?.();
       setArgs(oldArgs => ({
@@ -49,7 +53,7 @@ const meta = {
       }));
     };
 
-    return <GjeldendeSakslisterTabell {...args} lagNySaksliste={lagNySaksliste} />;
+    return kodeverkLos ? <GjeldendeSakslisterTabell {...args} lagNySaksliste={lagNySaksliste} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof GjeldendeSakslisterTabell>;
 export default meta;

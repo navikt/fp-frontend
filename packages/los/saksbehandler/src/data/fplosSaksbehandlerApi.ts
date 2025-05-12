@@ -2,7 +2,7 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
 import type { Oppgave, OppgaveStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
+import type { AlleKodeverkLos, FagsakEnkel } from '@navikt/fp-types';
 
 import type { Driftsmelding } from '../typer/driftsmeldingTsType';
 import type { NyeOgFerdigstilteOppgaver } from '../typer/nyeOgFerdigstilteOppgaverTsType';
@@ -78,7 +78,7 @@ export const getOppgaverForFagsaker = (fagsaker: FagsakEnkel[]) =>
 export const losKodeverkOptions = () =>
   queryOptions({
     queryKey: [LosUrl.KODEVERK_LOS],
-    queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverk>(),
+    queryFn: () => kyExtended.get(LosUrl.KODEVERK_LOS).json<AlleKodeverkLos>(),
     staleTime: Infinity,
   });
 

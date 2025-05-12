@@ -23,7 +23,7 @@ const meta = {
     },
   },
   args: {
-    kodeverk: alleKodeverk as any,
+    kodeverk: alleKodeverk,
     opneSokeside: action('button-click'),
   },
 } satisfies Meta<typeof BehandlingPaVent>;

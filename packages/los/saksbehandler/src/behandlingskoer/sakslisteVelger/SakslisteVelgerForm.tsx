@@ -18,7 +18,7 @@ import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkLosType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { getSakslisteSaksbehandlere } from '../../data/fplosSaksbehandlerApi';
@@ -65,7 +65,7 @@ const getFormDefaultValues = (
 
 const AndreKriterier = ({ saksliste }: { saksliste?: Saksliste }): ReactNode => {
   const intl = useIntl();
-  const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
+  const andreKriterierTyper = useLosKodeverk(KodeverkLosType.ANDRE_KRITERIER);
 
   if (saksliste && saksliste.andreKriterier.length > 0) {
     return (
@@ -187,10 +187,9 @@ export const SakslisteVelgerForm = ({
 
   const [visAlleSaksbehandlere, setVisAlleSaksbehandlere] = useState(false);
 
-  const behandlingsTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
-  // TODO Lag ein eigen KodeverkType for LOS
-  const køSorteringTyper = useLosKodeverk('KøSortering');
+  const behandlingsTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const køSorteringTyper = useLosKodeverk(KodeverkLosType.KO_SORTERING);
 
   const sorterteSakslister = sakslister.toSorted((saksliste1, saksliste2) =>
     saksliste1.navn.localeCompare(saksliste2.navn),

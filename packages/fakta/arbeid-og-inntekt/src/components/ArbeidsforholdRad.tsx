@@ -144,6 +144,7 @@ export const ArbeidsforholdRad = ({
                 inntektsmelding={inntektsmeldingerForRad[0]}
                 skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
                 radData={radData}
+                alleKodeverk={alleKodeverk}
               />
               <ManglendeArbeidsforholdForm
                 behandlingUuid={behandlingUuid}

@@ -14,7 +14,7 @@ const meta = {
   decorators: [withRouter, getIntlDecorator(messages)],
   args: {
     readOnly: false,
-    kodeverk: alleKodeverk as any,
+    kodeverk: alleKodeverk,
     lagreFullstendig: values => {
       action('lagreFullstendig')(values);
       return Promise.resolve(values);

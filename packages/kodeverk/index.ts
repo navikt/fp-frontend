@@ -46,7 +46,8 @@ export { KanIkkeOppgiAnnenForelderArsak } from './src/kanIkkeOppgiAnnenForelderA
 export { KlageVurdering } from './src/klageVurdering';
 export { KlageVurderingOmgjoer } from './src/klageVurderingOmgjoer';
 export { KodeverkType } from './src/kodeverkTyper';
-export { getKodeverknavnFraKode, getKodeverknavnFn } from './src/kodeverkUtils';
+export { KodeverkLosType } from './src/kodeverkLosType';
+export { TilbakekrevingKodeverkType } from './src/tilbakekrevingKodeverkTyper';
 export { Kommunikasjonsretning } from './src/kommunikasjonsretning';
 export { KonsekvensForYtelsen } from './src/konsekvensForYtelsen';
 export { Landkode } from './src/landkoder';
@@ -69,7 +70,6 @@ export { SammenligningType } from './src/sammenligningType';
 export { SivilstandType } from './src/sivilstandType';
 export { SoknadType } from './src/soknadType';
 export { StonadskontoType } from './src/stonadskontoType';
-export { TilbakekrevingKodeverkType } from './src/tilbakekrevingKodeverkTyper';
 export { TilretteleggingType } from './src/tilretteleggingType';
 export { UgunstAarsakType } from './src/ugunstAarsakTyper';
 export { FagsakMarkeringKode } from './src/fagsakMarkeringKode';

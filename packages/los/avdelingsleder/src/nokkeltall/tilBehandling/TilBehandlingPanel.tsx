@@ -8,7 +8,7 @@ import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, KodeverkLosType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
@@ -42,8 +42,8 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
 
   const { data: oppgaverPerDato } = useQuery(oppgaverPerDatoOptions(valgtAvdelingEnhet));
 
-  const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
+  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
   const stringFromStorage = getValueFromLocalStorage(formName);
 
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;

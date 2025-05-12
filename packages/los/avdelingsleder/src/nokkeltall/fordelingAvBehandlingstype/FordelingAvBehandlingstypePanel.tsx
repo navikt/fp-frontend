@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, KodeverkLosType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverForAvdelingOptions } from '../../data/fplosAvdelingslederApi';
@@ -40,8 +40,8 @@ const formDefaultValues: InitialValues = { valgtYtelseType: ALLE_YTELSETYPER_VAL
 export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
   const { data: oppgaverForAvdeling } = useQuery(oppgaverForAvdelingOptions(valgtAvdelingEnhet));
 
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
-  const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
 

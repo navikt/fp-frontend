@@ -14,7 +14,7 @@ const meta = {
   component: InntektsgivendeArbeidPapirsoknadIndex,
   args: {
     readOnly: false,
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: alleKodeverk,
   },
   parameters: {
     submitCallback: action('onSubmit'),

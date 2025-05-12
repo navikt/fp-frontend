@@ -57,8 +57,9 @@ export type { Dokument } from './src/dokumentTsType';
 export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
 export type { KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
-export type { AlleKodeverk } from './src/kodeverkAlleTsType';
+export type { AlleKodeverk, KodeverkReturnType } from './src/kodeverkAlleTsType';
 export type { AlleKodeverkTilbakekreving } from './src/kodeverkAlleTilbakekrevingTsType';
+export type { AlleKodeverkLos, KodeverkLosReturnType } from './src/kodeverkAlleLosTsType';
 export type { NavAnsatt } from './src/navAnsattTsType';
 export type {
   SimuleringResultat,

@@ -49,7 +49,7 @@ const meta = {
     location: LOCATION,
     forhandsvisVedtaksbrev: action('button-click'),
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: alleKodeverk,
     createLocationForSkjermlenke: () => LOCATION,
     setBeslutterFormData: () => undefined,
   },

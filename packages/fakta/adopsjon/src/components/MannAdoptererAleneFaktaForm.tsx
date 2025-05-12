@@ -5,7 +5,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, FamilieHendelse } from '@navikt/fp-types';
 import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -47,7 +47,7 @@ export const MannAdoptererAleneFaktaForm = ({
         </Detail>
         {farSokerType && (
           <BodyShort size="small">
-            {getKodeverknavnFn(alleKodeverk)(farSokerType, KodeverkType.FAR_SOEKER_TYPE)}
+            {alleKodeverk[KodeverkType.FAR_SOEKER_TYPE].find(type => type.kode === farSokerType)?.navn}
           </BodyShort>
         )}
         <div>

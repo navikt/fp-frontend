@@ -5,7 +5,7 @@ import { HStack, Label, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, KodeverkLosType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { behandlingerFristUtløptOptions } from '../../data/fplosAvdelingslederApi';
@@ -36,7 +36,7 @@ interface Props {
 export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
   const { data: behandlingerPaVent } = useQuery(behandlingerFristUtløptOptions(valgtAvdelingEnhet));
 
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
+  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
 
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;

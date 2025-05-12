@@ -18,7 +18,7 @@ import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBeha
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../data/fagsakApi';
-import { useFpSakKodeverkMedNavn, useGetKodeverkFn } from '../data/useKodeverk';
+import { useFpSakKodeverk, useGetKodeverkFn } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
 import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
@@ -70,8 +70,12 @@ export const FagsakProfileIndex = ({
   const getKodeverkFn = useGetKodeverkFn();
 
   const fagsak = fagsakData.getFagsak();
-  const fagsakStatusMedNavn = useFpSakKodeverkMedNavn(fagsak.status, KodeverkType.FAGSAK_STATUS);
-  const fagsakYtelseTypeMedNavn = useFpSakKodeverkMedNavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE);
+  const fagsakStatusMedNavn = notEmpty(
+    useFpSakKodeverk(KodeverkType.FAGSAK_STATUS).find(k => k.kode === fagsak.status),
+  );
+  const fagsakYtelseTypeMedNavn = notEmpty(
+    useFpSakKodeverk(KodeverkType.FAGSAK_YTELSE).find(k => k.kode === fagsak.fagsakYtelseType),
+  );
 
   const initFetchQuery = useQuery(initFetchOptions());
 

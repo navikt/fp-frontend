@@ -1,7 +1,7 @@
 import { VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, getKodeverknavnFn } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 import type { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -23,8 +23,6 @@ interface Props {
  */
 export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysninger, submittable }: Props) => {
   const { alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly } = usePanelDataContext<BesteberegningAP>();
-
-  const getKodeverkNavn = getKodeverknavnFn(alleKodeverk);
 
   const { ytelsesspesifiktGrunnlag, beregningsgrunnlagPeriode } = beregningsgrunnlag;
   const besteberegninggrunnlag = ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
@@ -57,7 +55,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
         <BesteMånederVisningPanel
           besteMåneder={besteberegninggrunnlag.besteMåneder}
           arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
-          getKodeverkNavn={getKodeverkNavn}
+          alleKodeverk={alleKodeverk}
         />
       </BorderBox>
     </VStack>

@@ -4,7 +4,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkLosType } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteBehandlingstype, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
@@ -40,7 +40,7 @@ export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: 
     },
   });
 
-  const alleBehandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
+  const alleBehandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
 
   const behandlingTyper = behandlingstypeOrder.map(kode => alleBehandlingTyper.find(bt => bt.kode === kode));
 

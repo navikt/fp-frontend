@@ -6,7 +6,7 @@ import { dateTimeFormat } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
 import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
-import type { Historikkinnslag } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
@@ -16,7 +16,7 @@ import { Skjermlenke } from './Skjermlenke';
 interface Props {
   behandlingLocation?: Location;
   createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string;
+  alleKodeverk: AlleKodeverkTilbakekreving | AlleKodeverk;
   historikkInnslag: Historikkinnslag;
   saksnummer: string;
 }
@@ -32,12 +32,12 @@ const backgrounds: Record<HistorikkAktor, BoxProps['background']> = {
 export const HistorikkInnslag = ({
   behandlingLocation,
   createLocationForSkjermlenke,
-  getKodeverknavn,
+  alleKodeverk,
   historikkInnslag: { aktør, opprettetTidspunkt, tittel, linjer, dokumenter, skjermlenke },
   saksnummer,
 }: Props) => {
   const intl = useIntl();
-  const rolleNavn = getKodeverknavn(aktør.type, KodeverkType.HISTORIKK_AKTOER);
+  const rolleNavn = alleKodeverk[KodeverkType.HISTORIKK_AKTOER].find(rolle => rolle.kode === aktør.type)?.navn ?? '';
 
   const name = `${rolleNavn} ${aktør.ident ?? ''}`;
   const timestamp = dateTimeFormat(opprettetTidspunkt, { separator: 'kl', month: 'long', day: 'numeric' });
@@ -61,7 +61,7 @@ export const HistorikkInnslag = ({
             <Skjermlenke
               skjermlenke={skjermlenke}
               behandlingLocation={behandlingLocation}
-              getKodeverknavn={getKodeverknavn}
+              alleKodeverk={alleKodeverk}
               createLocationForSkjermlenke={createLocationForSkjermlenke}
             />
           )}

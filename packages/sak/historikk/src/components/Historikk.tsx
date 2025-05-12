@@ -1,10 +1,9 @@
-import { type ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
+import { type ReactElement, useEffect, useState } from 'react';
 import { useIntl } from 'react-intl';
 
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
-import { getKodeverknavnFn } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
@@ -44,27 +43,16 @@ export const Historikk = ({
 
   const [skalSortertePaValgtBehandling, setSkalSortertePaValgtBehandling] = useState(false);
 
-  const alleHistorikkInnslag = useMemo(
-    () => sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake),
-    [historikkFpSak, historikkFpTilbake],
-  );
+  const alleHistorikkInnslag = sortAndTagTilbakekreving(historikkFpSak, historikkFpTilbake);
 
-  const filtrerteInnslag = useMemo(
-    () =>
-      valgtBehandlingUuid && skalSortertePaValgtBehandling
-        ? alleHistorikkInnslag.filter(i => i.behandlingUuid === valgtBehandlingUuid)
-        : alleHistorikkInnslag,
-    [alleHistorikkInnslag, valgtBehandlingUuid, skalSortertePaValgtBehandling],
-  );
+  const filtrerteInnslag =
+    valgtBehandlingUuid && skalSortertePaValgtBehandling
+      ? alleHistorikkInnslag.filter(i => i.behandlingUuid === valgtBehandlingUuid)
+      : alleHistorikkInnslag;
 
-  const getKodeverknavnFpSak = useMemo(() => getKodeverknavnFn(alleKodeverkFpSak), [alleKodeverkFpSak]);
-  const getKodeverknavnFpTilbake = useMemo(
-    () => (alleKodeverkFpTilbake ? getKodeverknavnFn(alleKodeverkFpTilbake) : undefined),
-    [alleKodeverkFpTilbake],
-  );
   const [top, setTop] = useState<number>();
 
-  const scrollReset = useCallback(() => setTop(0), []);
+  const scrollReset = () => setTop(0);
 
   useEffect(() => {
     window.addEventListener('scroll', scrollReset);
@@ -102,9 +90,9 @@ export const Historikk = ({
       >
         <VStack gap="2" padding="4">
           {filtrerteInnslag.map(historikkinnslag => {
-            const getKodeverknavn = historikkinnslag.erTilbakekreving ? getKodeverknavnFpTilbake : getKodeverknavnFpSak;
+            const alleKodeverk = historikkinnslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 
-            if (!getKodeverknavn) {
+            if (!alleKodeverk) {
               return null;
             }
             return (
@@ -113,7 +101,7 @@ export const Historikk = ({
                 saksnummer={saksnummer}
                 historikkInnslag={historikkinnslag}
                 createLocationForSkjermlenke={createLocationForSkjermlenke}
-                getKodeverknavn={getKodeverknavn}
+                alleKodeverk={alleKodeverk}
                 behandlingLocation={
                   historikkinnslag.behandlingUuid ? getBehandlingLocation(historikkinnslag.behandlingUuid) : undefined
                 }

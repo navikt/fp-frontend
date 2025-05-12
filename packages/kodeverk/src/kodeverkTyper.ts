@@ -46,7 +46,6 @@ export enum KodeverkType {
   UTTAK_UTSETTELSE_TYPE = 'UttakUtsettelseType',
   VILKAR_TYPE = 'VilkårType',
   PERMISJONSBESKRIVELSE_TYPE = 'PermisjonsbeskrivelseType',
-  TILBAKEKR_VIDERE_BEH = 'VidereBehandling',
   VURDER_AARSAK = 'VurderÅrsak',
   ANKE_OMGJOER_AARSAK = 'AnkeOmgjørÅrsak',
   OPPHOLDSTILLATELSE_TYPE = 'OppholdstillatelseType',

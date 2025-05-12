@@ -1,10 +1,12 @@
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { LosUrl } from '../../data/fplosAvdelingslederApi';
+import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { AndreKriterierType } from '../../kodeverk/andreKriterierType';
 import { KøSortering } from '../../kodeverk/KoSortering';
 import { UtvalgskriterierForSakslisteForm } from './UtvalgskriterierForSakslisteForm';
@@ -35,6 +37,11 @@ const meta = {
   },
   args: {
     valgtAvdelingEnhet: '',
+  },
+  render: args => {
+    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
+    return kodeverkLos ? <UtvalgskriterierForSakslisteForm {...args} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof UtvalgskriterierForSakslisteForm>;
 export default meta;
