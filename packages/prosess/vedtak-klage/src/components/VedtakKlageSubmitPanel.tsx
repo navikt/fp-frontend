@@ -3,10 +3,10 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link } from '@navikt/ds-react';
 
-import { type ForhandsvisData } from './VedtakKlageForm';
+import { type VedtakKlageForhandsvisData } from './VedtakKlageForm';
 
 interface Props {
-  previewVedtakCallback: (data: ForhandsvisData) => void;
+  previewVedtakCallback: (data: VedtakKlageForhandsvisData) => void;
   behandlingPåVent: boolean;
   readOnly: boolean;
   lagreVedtak: () => void;

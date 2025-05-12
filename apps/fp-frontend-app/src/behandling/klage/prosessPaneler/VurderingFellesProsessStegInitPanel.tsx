@@ -7,8 +7,11 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, KlageVurdering as KlageVurderingKodeverk } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { type AksjonspunktVerdier, KlagevurderingProsessIndex } from '@navikt/fp-prosess-klagevurdering';
-import type { ForhåndsvisMeldingParams } from '@navikt/fp-types';
+import {
+  type AksjonspunktVerdier,
+  type KlagevurderingForhåndsvisData,
+  KlagevurderingProsessIndex,
+} from '@navikt/fp-prosess-klagevurdering';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -32,7 +35,6 @@ export const VurderingFellesProsessStegInitPanel = ({
 
   const {
     behandling,
-    fagsak,
     hentOgSettBehandling,
     setSkalOppdatereEtterBekreftelseAvAp,
     oppdaterProsessStegOgFaktaPanelIUrl,
@@ -55,11 +57,10 @@ export const VurderingFellesProsessStegInitPanel = ({
   const { data: klageVurdering } = useQuery(api.klage.klageVurderingOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
-    mutationFn: (values: ForhåndsvisMeldingParams) =>
+    mutationFn: (values: KlagevurderingForhåndsvisData) =>
       forhåndsvisMelding({
         ...values,
         behandlingUuid: behandling.uuid,
-        fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
   });

@@ -18,8 +18,8 @@ import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData.ts';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext.tsx';
-import type { ForhandsvisData } from '../forstegang/VedtakForm';
 import { LegacyOverstyrtVedtaksbrev } from './LegacyOverstyrtVedtaksbrev.tsx';
 import { OppgaveTabell } from './OppgaveTabell.tsx';
 import { OverstyringVedtaksbrev } from './OverstyringVedtaksbrev.tsx';
@@ -66,7 +66,7 @@ interface Props {
     erOpphor?: boolean,
   ) => ReactNode;
   previewAutomatiskBrev: (e: MouseEvent) => void;
-  previewCallback: (data: ForhandsvisData) => void;
+  previewCallback: (data: VedtakForhåndsvisData) => void;
   tilbakekrevingtekst?: string;
   vedtakstatusTekst?: string;
   oppgaver?: Oppgave[];

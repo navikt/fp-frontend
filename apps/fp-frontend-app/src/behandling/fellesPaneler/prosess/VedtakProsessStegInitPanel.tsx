@@ -8,8 +8,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { VedtakEditeringProvider, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import type { Aksjonspunkt, ForhåndsvisMeldingParams, Vilkar } from '@navikt/fp-types';
+import { VedtakEditeringProvider, type VedtakForhåndsvisData, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
+import type { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -91,11 +91,10 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   });
 
   const { mutate: forhandsvis } = useMutation({
-    mutationFn: (values: ForhåndsvisMeldingParams) =>
+    mutationFn: (values: VedtakForhåndsvisData) =>
       forhåndsvisMelding({
         ...values,
         behandlingUuid: behandling.uuid,
-        fagsakYtelseType: standardPanelProps.fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
   });

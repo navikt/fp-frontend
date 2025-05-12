@@ -7,12 +7,12 @@ import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
-import type { ForhandsvisData } from '../forstegang/VedtakForm';
+import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 
 // Dette panelet viser overstyrte vedtaksbrev for eldra avlutta saker (Før ein tok i bruk editor.js)
 
 interface Props {
-  forhåndsvisOverstyrtBrev: (data: ForhandsvisData) => void;
+  forhåndsvisOverstyrtBrev: (data: VedtakForhåndsvisData) => void;
   behandling: Behandling;
 }
 
@@ -28,7 +28,6 @@ export const LegacyOverstyrtVedtaksbrev = ({ forhåndsvisOverstyrtBrev, behandli
           forhåndsvisOverstyrtBrev({
             automatiskVedtaksbrev: false,
             dokumentMal: DokumentMalType.FRITEKST,
-            gjelderVedtak: true,
             tittel: overskrift ?? undefined,
             fritekst: fritekstbrev ?? undefined,
           });
