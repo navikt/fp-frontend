@@ -8,9 +8,10 @@ import { required } from '@navikt/ft-form-validators';
 import { EditedIcon, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { type FieldEditedInfo, isFieldEdited } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
+  AlleKodeverk,
   FamilieHendelse,
   InntektArbeidYtelse,
   KodeverkMedNavn,
@@ -140,15 +141,11 @@ OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (
   soknad: Soknad,
   gjeldendeFamiliehendelse: FamilieHendelse,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
-  getKodeverknavn: (kode: string, kodeverkType: KodeverkType) => string,
+  alleKodeverk: AlleKodeverk,
 ): FormValues => ({
   vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType : '',
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, gjeldendeFamiliehendelse),
-  ...RettighetFaktaPanel.buildInitialValues(
-    soknad,
-    innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-    getKodeverknavn,
-  ),
+  ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, alleKodeverk),
 });
 
 OmsorgOgForeldreansvarFaktaForm.transformValues = (

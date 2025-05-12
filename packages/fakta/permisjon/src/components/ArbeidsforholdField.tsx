@@ -7,7 +7,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { getKodeverknavnFraKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AoIArbeidsforhold,
@@ -166,11 +166,7 @@ export const ArbeidsforholdField = ({
             <HStack gap="2">
               <>
                 <Label size="small">
-                  {`${getKodeverknavnFraKode(
-                    alleKodeverk,
-                    KodeverkType.PERMISJONSBESKRIVELSE_TYPE,
-                    arbeidsforhold.permisjonOgMangel.type,
-                  )} 100%`}
+                  {`${alleKodeverk[KodeverkType.PERMISJONSBESKRIVELSE_TYPE].find(k => k.kode === arbeidsforhold.permisjonOgMangel?.type)?.navn ?? ''} 100%`}
                 </Label>
                 <BodyShort size="small">
                   <PeriodLabel

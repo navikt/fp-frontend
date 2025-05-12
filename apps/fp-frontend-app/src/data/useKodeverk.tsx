@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn } from '@navikt/fp-types';
+import { BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn, KodeverkReturnType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useFagsakApi } from './fagsakApi';
@@ -9,7 +9,7 @@ import { useFagsakApi } from './fagsakApi';
 /**
  * Hook som henter kodeverk knyttet til behandlingstype
  */
-export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodeverkTilbakekreving {
+export const useKodeverk = (behandlingType?: string): AlleKodeverk | AlleKodeverkTilbakekreving => {
   const api = useFagsakApi();
   const { data: alleKodeverkFpSak } = useQuery(api.kodeverkOptions());
   const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
@@ -17,66 +17,49 @@ export function useKodeverk(behandlingType?: string): AlleKodeverk | AlleKodever
   const erTilbakekreving =
     BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;
   return notEmpty(erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak);
-}
+};
 
 /**
- * Hook som henter et gitt FPSAK-kodeverk fra respons som allerede er hentet fra backend. For å kunne bruke denne
- * må @see useGlobalStateRestApi først brukes for å hente data fra backend
+ * Hook som henter et gitt FPSAK-kodeverk fra respons som allerede er hentet fra backend.
  */
-export function useFpSakKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
+export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): KodeverkReturnType<T> => {
   const { kodeverkOptions } = useFagsakApi();
   const { data: alleKodeverk } = useQuery(kodeverkOptions());
-  // @ts-expect-error Fiks
-  return notEmpty(alleKodeverk)[kodeverkType];
-}
 
-/**
- * Hook som henter et gitt FPTILBAKE-kodeverk fra respons som allerede er hentet fra backend. For å kunne bruke denne
- * må @see useGlobalStateRestApi først brukes for å hente data fra backend
- */
-export function useFpTilbakeKodeverk<T = KodeverkMedNavn>(kodeverkType: string): T[] {
-  const api = useFagsakApi();
-  const { data: alleKodeverk } = useQuery(api.fptilbake.kodeverkOptions());
-  // @ts-expect-error Fiks
-  return alleKodeverk ? alleKodeverk[kodeverkType] : undefined;
-}
-
-/**
- * Hook som brukes når en har behov for å slå opp navn-attributtet til et bestemt kodeverk. For å kunne bruke denne
- * må @see useGlobalStateRestApi først brukes for å hente data fra backend
- */
-export function useFpSakKodeverkMedNavn(kode: string, kodeverk: KodeverkType): KodeverkMedNavn {
-  const kodeverkForType = useFpSakKodeverk<KodeverkMedNavn>(kodeverk);
-
-  const verdi = kodeverkForType.find(k => k.kode === kode);
-
-  if (!kodeverkForType || kodeverkForType.length === 0) {
-    throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
+  if (!alleKodeverk) {
+    throw new Error('Kodeverk er ikke lastet inn');
   }
-  if (!verdi) {
-    throw Error(`Finner ingen verdi for kodeverk ${kodeverk} med kode ${kode}`);
+  if (!alleKodeverk[kodeverkType]) {
+    throw new Error(`Kodeverk ${kodeverkType} finnes ikke`);
   }
 
-  return verdi;
-}
+  return alleKodeverk[kodeverkType] as KodeverkReturnType<T>;
+};
 
+//TODO (TOR) Denne blir kun brukt kun ein plass, så like greit å få den vekk
 /**
- * Hook som brukes når en har behov for en funksjon som slår opp kodeverknavn. For å kunne bruke denne
- * må @see useGlobalStateRestApi først brukes for å hente data fra backend
+ * Hook som brukes når en har behov for en funksjon som slår opp kodeverknavn.
  */
 export function useGetKodeverkFn() {
   const api = useFagsakApi();
   const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
   const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
 
-  return (kode: string, kodeverk: KodeverkType, behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD) => {
+  return (
+    kode: string,
+    kodeverk: KodeverkType | TilbakekrevingKodeverkType,
+    behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD,
+  ) => {
     const kodeverkForType =
-      behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING
-        ? // @ts-expect-error Fiks
-          notEmpty(alleKodeverkFpTilbake)[kodeverk]
-        : notEmpty(alleFpSakKodeverk)[kodeverk];
-    if (!kodeverkForType || kodeverkForType.length === 0) {
+      kodeverk in TilbakekrevingKodeverkType &&
+      (behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING)
+        ? alleKodeverkFpTilbake?.[kodeverk as TilbakekrevingKodeverkType]
+        : alleFpSakKodeverk?.[kodeverk as KodeverkType];
+    if (!kodeverkForType) {
       throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
+    }
+    if (!Array.isArray(kodeverkForType)) {
+      throw Error(`Støtter ikke kodeverk ${kodeverk}`);
     }
     return kodeverkForType.find((k: KodeverkMedNavn) => k.kode === kode);
   };

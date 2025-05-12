@@ -70,7 +70,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       behandling={behandling ?? DEFAULT_BEHANDLING}
       aksjonspunkterForPanel={aksjonspunkter}
       harÅpneAksjonspunkter={aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET)}
-      alleKodeverk={alleKodeverk as any}
+      alleKodeverk={alleKodeverk}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter ?? {}}
       isReadOnly={isReadOnly ?? false}
       submitCallback={submitCallback ?? promiseAction()}

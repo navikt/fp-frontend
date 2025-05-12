@@ -228,7 +228,7 @@ const meta = {
     valgtBehandlingUuid: undefined,
     historikkFpSak: historikkInnslag,
     historikkFpTilbake: [],
-    alleKodeverkFpSak: alleKodeverk as any,
+    alleKodeverkFpSak: alleKodeverk,
     alleKodeverkFpTilbake: alleKodeverkTilbakekreving,
     saksnummer: '2',
     getBehandlingLocation: () => locationMock,

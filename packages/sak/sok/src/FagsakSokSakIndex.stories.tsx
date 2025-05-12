@@ -15,7 +15,7 @@ const meta = {
   args: {
     selectFagsakCallback: action('button-click'),
     searchFagsakCallback: action('button-click') as (params?: { searchString: string }) => Promise<FagsakEnkel[]>,
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: alleKodeverk,
     searchResultReceived: false,
     searchStarted: false,
   },

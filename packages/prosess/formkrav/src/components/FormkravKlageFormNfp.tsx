@@ -9,9 +9,9 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import type { KlageVurdering } from '@navikt/fp-types';
+import type { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 import type { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -33,7 +33,7 @@ export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFor
 const getKlagBareVedtak = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
   intl: IntlShape,
-  getKodeverknavn: (kode: string, kodeverk: KodeverkType) => string,
+  alleKodeverk: AlleKodeverk,
 ): ReactElement[] => {
   const klagBareVedtak = [
     <option key="formkrav" value={IKKE_PA_KLAGD_VEDTAK}>
@@ -45,7 +45,7 @@ const getKlagBareVedtak = (
       .sort((b1, b2) => dayjs(b1.avsluttet).diff(dayjs(b2.avsluttet)))
       .map(({ uuid, type, avsluttet }) => (
         <option key={uuid} value={`${uuid}`}>
-          {`${getKodeverknavn(type, KodeverkType.BEHANDLING_TYPE)} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
+          {`${alleKodeverk[KodeverkType.BEHANDLING_TYPE].find(kode => kode.kode === type)?.navn ?? ''} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
         </option>
       )),
   );
@@ -113,8 +113,7 @@ export const FormkravKlageFormNfp = ({
 
   const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<KlageFormkravAp>();
 
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
-  const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, getKodeverknavn);
+  const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, alleKodeverk);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

@@ -7,7 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, getKodeverknavnFn, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   AlleKodeverk,
@@ -56,7 +56,7 @@ const buildInitialValues = (
       soknad,
       gjeldendeFamiliehendelse,
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-      getKodeverknavnFn(alleKodeverk),
+      alleKodeverk,
     ),
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
   };

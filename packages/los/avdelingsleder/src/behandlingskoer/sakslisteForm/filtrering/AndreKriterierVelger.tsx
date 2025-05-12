@@ -6,6 +6,8 @@ import { CheckboxField, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import { KodeverkLosType } from '@navikt/fp-kodeverk';
+
 import { lagreSakslisteAndreKriterier, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
@@ -22,7 +24,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
 
   const values = watch();
 
-  const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
+  const andreKriterierTyper = useLosKodeverk(KodeverkLosType.ANDRE_KRITERIER);
 
   const { mutate: lagreAndreKriterier } = useMutation({
     mutationFn: (valuesToStore: { andreKriterierType: string; checked: boolean; inkluder: boolean }) =>

@@ -1,10 +1,12 @@
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { LosUrl } from '../data/fplosAvdelingslederApi';
+import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import { ReservasjonerTabell } from './ReservasjonerTabell';
 
 import messages from '../../i18n/nb_NO.json';
@@ -18,6 +20,10 @@ const meta = {
 
   args: {
     valgtAvdelingEnhet: '1',
+  },
+  render: args => {
+    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+    return kodeverkLos ? <ReservasjonerTabell {...args} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof ReservasjonerTabell>;
 export default meta;

@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Table } from '@navikt/ds-react';
 
-import { getKodeverknavnFn, KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
 interface Props {
@@ -17,8 +17,6 @@ interface Props {
  * Formaterer fagsak-søkeresultatet for visning i tabell. Sortering av fagsakene blir håndtert her.
  */
 export const FagsakList = ({ fagsaker, selectFagsakCallback, alleKodeverk }: Props) => {
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
-
   return (
     <Table>
       <Table.Header>
@@ -42,8 +40,12 @@ export const FagsakList = ({ fagsaker, selectFagsakCallback, alleKodeverk }: Pro
             onKeyDown={() => selectFagsakCallback(fagsak.saksnummer)}
           >
             <Table.DataCell>{fagsak.saksnummer}</Table.DataCell>
-            <Table.DataCell>{getKodeverknavn(fagsak.fagsakYtelseType, KodeverkType.FAGSAK_YTELSE)}</Table.DataCell>
-            <Table.DataCell>{getKodeverknavn(fagsak.status, KodeverkType.FAGSAK_STATUS)}</Table.DataCell>
+            <Table.DataCell>
+              {alleKodeverk[KodeverkType.FAGSAK_YTELSE].find(type => type.kode === fagsak.fagsakYtelseType)?.navn ?? ''}
+            </Table.DataCell>
+            <Table.DataCell>
+              {alleKodeverk[KodeverkType.FAGSAK_STATUS].find(type => type.kode === fagsak.status)?.navn ?? ''}
+            </Table.DataCell>
           </Table.Row>
         ))}
       </Table.Body>

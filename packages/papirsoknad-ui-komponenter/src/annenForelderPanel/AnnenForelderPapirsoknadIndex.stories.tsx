@@ -14,7 +14,7 @@ const meta = {
   component: AnnenForelderPapirsoknadIndex,
   args: {
     readOnly: false,
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: alleKodeverk,
     fagsakPersonnummer: '07078518434',
   },
   parameters: {

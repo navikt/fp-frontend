@@ -3,14 +3,14 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
 
-import { getKodeverknavnFn, KodeverkType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
 export const getAvslagArsak = (
   vilkar: Vilkar[],
-  getKodeverkNavn: (kodeverk: string, kodeverkType: KodeverkType, undertype?: string) => string,
+  alleKodeverk: AlleKodeverk,
   behandlingsresultat?: Behandlingsresultat,
 ): ReactElement | string => {
   const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT);
@@ -22,12 +22,15 @@ export const getAvslagArsak = (
     throw new Error('Behandlingsresultat eller avslagsårsak finnes ikke');
   }
 
-  const vilkarType = getKodeverkNavn(avslatteVilkar[0].vilkarType, KodeverkType.VILKAR_TYPE);
-  return `${vilkarType}: ${getKodeverkNavn(
-    behandlingsresultat.avslagsarsak,
-    KodeverkType.AVSLAGSARSAK,
-    avslatteVilkar[0].vilkarType,
-  )}`;
+  const vilkarType =
+    alleKodeverk[KodeverkType.VILKAR_TYPE].find(kode => kode.kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
+
+  const årsak =
+    alleKodeverk[KodeverkType.AVSLAGSARSAK][avslatteVilkar[0].vilkarType as VilkarType].find(
+      kode => kode.kode === behandlingsresultat.avslagsarsak,
+    )?.navn ?? '';
+
+  return `${vilkarType}: ${årsak}`;
 };
 
 interface Props {
@@ -52,14 +55,13 @@ export const VedtakAvslagPanel = ({
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => {
   const intl = useIntl();
-  const getKodeverknavn = getKodeverknavnFn(alleKodeverk);
   const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
   return (
     <>
-      {getAvslagArsak(vilkar, getKodeverknavn, behandlingsresultat) && (
+      {getAvslagArsak(vilkar, alleKodeverk, behandlingsresultat) && (
         <div>
           <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
-          <BodyShort size="small">{getAvslagArsak(vilkar, getKodeverknavn, behandlingsresultat)}</BodyShort>
+          <BodyShort size="small">{getAvslagArsak(vilkar, alleKodeverk, behandlingsresultat)}</BodyShort>
         </div>
       )}
       {!skalBrukeOverstyrendeFritekstBrev && (

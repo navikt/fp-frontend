@@ -4,11 +4,10 @@ import { FormattedMessage } from 'react-intl';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkLosType } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import type { KøSorteringType } from '../../../typer/koSorteringTsType';
 import { BelopSorteringValg } from './BelopSorteringValg';
 import { DatoSorteringValg } from './DatoSorteringValg';
 
@@ -53,7 +52,7 @@ export const SorteringVelger = ({
     },
   });
 
-  const koSorteringer = useLosKodeverk<KøSorteringType>('KøSortering');
+  const koSorteringer = useLosKodeverk(KodeverkLosType.KO_SORTERING);
 
   return (
     <RadioGroupPanel

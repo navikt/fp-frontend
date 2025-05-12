@@ -14,7 +14,7 @@ const meta = {
   decorators: [withRouter, getIntlDecorator(messages)],
   args: {
     readOnly: false,
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: alleKodeverk,
     onSubmit: values => {
       action('onSubmit')(values);
       return Promise.resolve(values);

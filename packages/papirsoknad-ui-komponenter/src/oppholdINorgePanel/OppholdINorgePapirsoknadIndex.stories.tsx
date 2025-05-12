@@ -18,7 +18,7 @@ const meta = {
   },
   args: {
     readOnly: false,
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: alleKodeverk,
     mottattDato: '2022-05-30',
   },
   render: (args, { parameters: { submitCallback } }) => {

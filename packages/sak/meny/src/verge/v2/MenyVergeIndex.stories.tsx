@@ -9,7 +9,7 @@ const meta = {
   title: 'sak-meny/verge-v2',
   component: MenyVergeIndex,
   args: {
-    alleKodeverk: alleKodeverk as any,
+    alleKodeverk: alleKodeverk,
     lukkModal: action('onLukkModal'),
     opprettVerge: action('onOpprettVerge') as () => Promise<void>,
     fjernVerge: action('onFjernVerge') as () => Promise<void>,

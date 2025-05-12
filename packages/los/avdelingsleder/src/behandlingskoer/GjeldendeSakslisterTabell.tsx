@@ -6,7 +6,7 @@ import { BodyShort, Detail, Heading, HStack, Label, Link, Table, VStack } from '
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import { KodeverkLosType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
@@ -86,8 +86,8 @@ export const GjeldendeSakslisterTabell = ({
   const [valgtSakslisteForSletting, setValgtSakslisteForSletting] = useState<SakslisteAvdeling>();
   const tabRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const behandlingTyper = useLosKodeverk(KodeverkType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkType.FAGSAK_YTELSE);
+  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
 
   const { mutate: fjernSaksliste } = useMutation({
     mutationFn: (values: { sakslisteId: number }) => slettSaksliste(values.sakslisteId, valgtAvdelingEnhet),
