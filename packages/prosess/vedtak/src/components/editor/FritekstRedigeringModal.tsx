@@ -7,14 +7,14 @@ import { Alert, Button, Heading, Modal, VStack } from '@navikt/ds-react';
 
 import type { BrevOverstyring } from '@navikt/fp-types';
 
-import type { ForhandsvisData } from '../forstegang/VedtakForm';
+import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import { BrevInnhold, EDITOR_HOLDER_ID } from './BrevInnhold';
 import { useEditorJs } from './useEditorJs';
 
 interface Props {
   brevOverstyring: BrevOverstyring;
   mellomlagreOgHentPåNytt: (redigertInnhold: string | null) => Promise<void>;
-  forhåndsvisBrev: (data: ForhandsvisData) => void;
+  forhåndsvisBrev: (data: VedtakForhåndsvisData) => void;
   setVisFritekstRedigeringModal: (visRedigering: boolean) => void;
 }
 

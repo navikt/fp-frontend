@@ -16,7 +16,7 @@ import type { KlageFormType } from '../../types/klageFormType';
 import { BekreftOgSubmitKlageModal } from './BekreftOgSubmitKlageModal';
 import { FritekstBrevTextField } from './FritekstKlageBrevTextField';
 import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
-import { type BrevData, PreviewKlageLink } from './PreviewKlageLink';
+import { type KlagevurderingForhåndsvisData, PreviewKlageLink } from './PreviewKlageLink';
 import { TempsaveKlageButton, type TransformedValues } from './TempsaveKlageButton';
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
@@ -52,7 +52,7 @@ const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): Kl
 });
 
 interface Props {
-  previewCallback: (data: BrevData) => void;
+  previewCallback: (data: KlagevurderingForhåndsvisData) => void;
   saveKlage: (data: TransformedValues) => void;
   readOnlySubmitButton?: boolean;
   klageVurdering: KlageVurdering;

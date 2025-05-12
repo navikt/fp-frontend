@@ -11,7 +11,7 @@ import {
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
-import type { BrevData } from './components/nfp/PreviewKlageLink';
+import type { KlagevurderingForhåndsvisData } from './components/nfp/PreviewKlageLink';
 import type { TransformedValues } from './components/nfp/TempsaveKlageButton';
 import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
 
@@ -21,7 +21,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     saveKlage: action('button-click') as (data: TransformedValues) => Promise<void>,
-    previewCallback: action('button-click') as (data: BrevData) => Promise<void>,
+    previewCallback: action('button-click') as (data: KlagevurderingForhåndsvisData) => Promise<void>,
     readOnlySubmitButton: false,
   },
   render: props => {

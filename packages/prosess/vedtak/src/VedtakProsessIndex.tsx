@@ -15,8 +15,9 @@ import type {
 } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { type ForhandsvisData, VedtakForm } from './components/forstegang/VedtakForm';
+import { VedtakForm } from './components/forstegang/VedtakForm';
 import { VedtakRevurderingForm } from './components/revurdering/VedtakRevurderingForm';
+import type { VedtakForhåndsvisData } from './types/VedtakForhåndsvisData';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -35,7 +36,7 @@ interface Props {
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
   vilkar: Vilkar[];
-  previewCallback: (data: ForhandsvisData) => void;
+  previewCallback: (data: VedtakForhåndsvisData) => void;
   oppgaver?: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
 }
