@@ -126,12 +126,10 @@ describe('<MenyHenleggIndex>', () => {
     await userEvent.click(screen.getByText('Forhåndsvis brev'));
 
     await waitFor(() => expect(forhandsvisHenleggBehandling).toHaveBeenCalledTimes(1));
-    expect(forhandsvisHenleggBehandling).toHaveBeenNthCalledWith(1, true, {
+    expect(forhandsvisHenleggBehandling).toHaveBeenNthCalledWith(1, {
       behandlingUuid: '23r2323',
       dokumentMal: DokumentMalType.INFO_OM_HENLEGGELSE,
       fritekst: undefined,
-      mottaker: 'Søker',
-      fagsakYtelseType: 'FP',
     });
   });
 

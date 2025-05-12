@@ -31,7 +31,6 @@ describe('<VedtakInnsynProsessIndex>', () => {
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
       dokumentMal: DokumentMalType.INNSYN_SVAR,
       fritekst: ' ',
-      gjelderVedtak: true,
       mottaker: '',
     });
 
@@ -66,7 +65,6 @@ describe('<VedtakInnsynProsessIndex>', () => {
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
       dokumentMal: DokumentMalType.INNSYN_SVAR,
       fritekst: 'Dette er en fritekst',
-      gjelderVedtak: true,
       mottaker: '',
     });
 
@@ -99,7 +97,6 @@ describe('<VedtakInnsynProsessIndex>', () => {
     expect(forhåndsvise).toHaveBeenNthCalledWith(1, {
       dokumentMal: DokumentMalType.INNSYN_SVAR,
       fritekst: 'Dette er en vurdering',
-      gjelderVedtak: true,
       mottaker: '',
     });
   });

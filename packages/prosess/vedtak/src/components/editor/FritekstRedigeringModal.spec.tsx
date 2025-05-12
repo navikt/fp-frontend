@@ -39,7 +39,6 @@ describe('FritekstRedigeringModal', () => {
     await waitFor(() => expect(forhåndsvisBrev).toHaveBeenCalledTimes(1));
     expect(forhåndsvisBrev).toHaveBeenNthCalledWith(1, {
       automatiskVedtaksbrev: false,
-      gjelderVedtak: true,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
       fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
     });
