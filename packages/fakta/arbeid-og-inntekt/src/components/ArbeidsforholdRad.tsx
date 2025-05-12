@@ -28,38 +28,6 @@ import styles from './arbeidsforholdRad.module.css';
 
 const classNames = classnames.bind(styles);
 
-const finnKildekode = (erManueltOpprettet: boolean, harArbeidsforhold: boolean): string => {
-  if (erManueltOpprettet) {
-    return 'ArbeidsforholdRad.Saksbehandler';
-  }
-  return harArbeidsforhold ? 'ArbeidsforholdRad.AaRegisteret' : 'ArbeidsforholdRad.Inntektsmelding';
-};
-
-const finnPeriode = (
-  arbeidsforhold: AoIArbeidsforhold[],
-  avklaring?: Avklaring,
-): { fom?: string; tom?: string } | undefined => {
-  if (
-    avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER ||
-    avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
-  ) {
-    return {
-      fom: avklaring?.fom,
-      tom: avklaring?.tom,
-    };
-  }
-
-  const periode = arbeidsforhold.reduce<{ fom: string | undefined; tom: string | undefined }>(
-    (res, a) => ({
-      fom: res.fom && dayjs(res.fom).isBefore(a.fom) ? res.fom : a.fom,
-      tom: res.tom && dayjs(res.tom).isAfter(a.tom) ? res.tom : a.tom,
-    }),
-    { fom: undefined, tom: undefined },
-  );
-
-  return periode.fom ? periode : undefined;
-};
-
 interface Props {
   saksnummer: string;
   behandlingUuid: string;
@@ -242,4 +210,36 @@ export const ArbeidsforholdRad = ({
       </Table.DataCell>
     </Table.ExpandableRow>
   );
+};
+
+const finnKildekode = (erManueltOpprettet: boolean, harArbeidsforhold: boolean): string => {
+  if (erManueltOpprettet) {
+    return 'ArbeidsforholdRad.Saksbehandler';
+  }
+  return harArbeidsforhold ? 'ArbeidsforholdRad.AaRegisteret' : 'ArbeidsforholdRad.Inntektsmelding';
+};
+
+const finnPeriode = (
+  arbeidsforhold: AoIArbeidsforhold[],
+  avklaring?: Avklaring,
+): { fom?: string; tom?: string } | undefined => {
+  if (
+    avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER ||
+    avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
+  ) {
+    return {
+      fom: avklaring?.fom,
+      tom: avklaring?.tom,
+    };
+  }
+
+  const periode = arbeidsforhold.reduce<{ fom: string | undefined; tom: string | undefined }>(
+    (res, a) => ({
+      fom: res.fom && dayjs(res.fom).isBefore(a.fom) ? res.fom : a.fom,
+      tom: res.tom && dayjs(res.tom).isAfter(a.tom) ? res.tom : a.tom,
+    }),
+    { fom: undefined, tom: undefined },
+  );
+
+  return periode.fom ? periode : undefined;
 };
