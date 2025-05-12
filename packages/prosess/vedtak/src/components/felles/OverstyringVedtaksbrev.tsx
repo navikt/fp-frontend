@@ -9,12 +9,12 @@ import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
 import { FritekstRedigeringModal } from '../editor/FritekstRedigeringModal';
-import type { ForhandsvisData } from '../forstegang/VedtakForm';
 
 interface Props {
-  forhåndsvisBrev: (data: ForhandsvisData) => void;
+  forhåndsvisBrev: (data: VedtakForhåndsvisData) => void;
   setHarValgtÅRedigereVedtaksbrev: (harOverstyrtVedtaksbrev: boolean) => void;
 }
 
@@ -70,7 +70,6 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
       forhåndsvisBrev({
         automatiskVedtaksbrev: false,
         dokumentMal: DokumentMalType.FRITEKST_HTML,
-        gjelderVedtak: true,
         fritekst: brevOverstyring.redigertHtml,
       });
     }

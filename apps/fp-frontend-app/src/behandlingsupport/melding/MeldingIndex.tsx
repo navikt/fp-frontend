@@ -3,16 +3,26 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
 import { Alert, VStack } from '@navikt/ds-react';
+import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingType, DokumentMalType, KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
-import { MeldingerSakIndex, type MessagesFormValues, MessagesModalSakIndex } from '@navikt/fp-sak-meldinger';
+import {
+  type ForhåndsvisBrevParams,
+  MeldingerSakIndex,
+  type MessagesFormValues,
+  MessagesModalSakIndex,
+} from '@navikt/fp-sak-meldinger';
 import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchOptions, type SubmitMessageParams, useFagsakBehandlingApi } from '../../data/fagsakApi';
+import {
+  forhåndsvisTilbakekreving,
+  initFetchOptions,
+  type SubmitMessageParams,
+  useFagsakBehandlingApi,
+} from '../../data/fagsakApi';
 import { useFpSakKodeverk } from '../../data/useKodeverk';
-import { type ForhandsvisFunksjon, useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
@@ -80,9 +90,7 @@ export const MeldingIndex = ({
     navigate('/');
   };
 
-  const fetchPreview = useVisForhandsvisningAvMelding(valgtBehandling);
-
-  const previewCallback = getPreviewCallback(fagsak.fagsakYtelseType, fetchPreview, valgtBehandling);
+  const forhåndsvisBrev = useVisForhandsvisningAvMelding(valgtBehandling);
 
   const afterSubmit = () => {
     setShowMessageModal(false);
@@ -119,7 +127,7 @@ export const MeldingIndex = ({
             <MeldingerSakIndex
               submitCallback={submitCallback}
               behandling={valgtBehandling}
-              previewCallback={previewCallback}
+              forhåndsvisBrev={forhåndsvisBrev}
               revurderingVarslingArsak={revurderingVarslingArsak}
               fagsakYtelseType={fagsak.fagsakYtelseType}
               kanVeilede={kanVeilede}
@@ -184,28 +192,6 @@ const getSubmitCallback =
     });
   };
 
-const getPreviewCallback =
-  (fagsakYtelseType: string, fetchPreview: ForhandsvisFunksjon, behandling: BehandlingAppKontekst) =>
-  (dokumentMal?: string, fritekst?: string, aarsakskode?: string) => {
-    const erTilbakekreving =
-      BehandlingType.TILBAKEKREVING === behandling.type ||
-      BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
-    const data = erTilbakekreving
-      ? {
-          behandlingUuid: behandling.uuid,
-          fritekst: fritekst || ' ',
-          brevmalkode: dokumentMal,
-        }
-      : {
-          behandlingUuid: behandling.uuid,
-          fagsakYtelseType,
-          fritekst: fritekst || ' ',
-          arsakskode: aarsakskode || null,
-          dokumentMal,
-        };
-    fetchPreview(false, data);
-  };
-
 const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMelding?: boolean) => {
   if (!behandlingKanSendeMelding) {
     return 'MeldingIndex.IkkeTilgjengeligPaVent';
@@ -214,4 +200,40 @@ const finnKanIkkeLagreMeldingTekst = (kanVeilede: boolean, behandlingKanSendeMel
     return 'MeldingIndex.IkkeTilgjengeligVeileder';
   }
   return 'MeldingIndex.IkkeTilgjengeligAvsluttet';
+};
+
+const useVisForhandsvisningAvMelding = (behandling: BehandlingAppKontekst) => {
+  const api = useFagsakBehandlingApi(behandling);
+
+  const { mutate: forhåndsvisFpSakBrev } = useMutation({
+    mutationFn: (params: ForhåndsvisBrevParams) =>
+      api.forhåndsvisMelding({
+        behandlingUuid: behandling.uuid,
+        dokumentMal: params.brevmalkode,
+        fritekst: params.fritekst || ' ',
+        arsakskode: params.arsakskode,
+      }),
+    onSuccess: response => {
+      forhandsvisDokument(response);
+    },
+  });
+
+  const { mutate: forhåndsvisFpTilbakeBrev } = useMutation({
+    mutationFn: (params: ForhåndsvisBrevParams) =>
+      forhåndsvisTilbakekreving(behandling.uuid, params.brevmalkode, params.fritekst ?? ' '),
+    onSuccess: response => {
+      forhandsvisDokument(response);
+    },
+  });
+
+  const erTilbakekreving =
+    BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+
+  return (params: ForhåndsvisBrevParams): void => {
+    if (erTilbakekreving) {
+      forhåndsvisFpTilbakeBrev(params);
+    } else {
+      forhåndsvisFpSakBrev(params);
+    }
+  };
 };

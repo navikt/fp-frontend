@@ -55,7 +55,6 @@ describe('VedtakProsessIndex', () => {
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
       dokumentMal: undefined,
       fritekst: undefined,
-      gjelderVedtak: true,
       tittel: undefined,
       automatiskVedtaksbrev: true,
     });
@@ -97,7 +96,6 @@ describe('VedtakProsessIndex', () => {
     await waitFor(() => expect(forhåndsvis).toHaveBeenCalledTimes(1));
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
       automatiskVedtaksbrev: false,
-      gjelderVedtak: true,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
       fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
     });

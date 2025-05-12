@@ -35,6 +35,7 @@ import type {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
+import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
@@ -79,16 +80,8 @@ export const finnInnvilgetResultatText = (behandlingResultatTypeKode: string, yt
   return 'VedtakForm.VilkarStatusInnvilgetForeldrepenger';
 };
 
-export type ForhandsvisData = {
-  fritekst?: string;
-  dokumentMal?: string;
-  tittel?: string;
-  gjelderVedtak: boolean;
-  automatiskVedtaksbrev?: boolean;
-};
-
 const hentForhåndsvisManueltBrevCallback =
-  (forhåndsvisCallback: (data: ForhandsvisData) => void, trigger: () => void, begrunnelse?: string) =>
+  (forhåndsvisCallback: (data: VedtakForhåndsvisData) => void, trigger: () => void, begrunnelse?: string) =>
   (e: React.MouseEvent): void => {
     e.preventDefault();
 
@@ -98,7 +91,6 @@ const hentForhåndsvisManueltBrevCallback =
       fritekst: begrunnelse,
       dokumentMal: undefined,
       tittel: undefined,
-      gjelderVedtak: true,
       automatiskVedtaksbrev: true,
     });
   };
@@ -170,7 +162,7 @@ type FormValues = {
 };
 
 interface Props {
-  previewCallback: (data: ForhandsvisData) => void;
+  previewCallback: (data: VedtakForhåndsvisData) => void;
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;

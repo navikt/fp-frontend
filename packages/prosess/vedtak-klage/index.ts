@@ -1,2 +1,2 @@
 export { VedtakKlageProsessIndex } from './src/VedtakKlageProsessIndex';
-export type { ForhandsvisData as VedtakKlageBrevData } from './src/components/VedtakKlageForm';
+export type { VedtakKlageForhandsvisData } from './src/components/VedtakKlageForm';

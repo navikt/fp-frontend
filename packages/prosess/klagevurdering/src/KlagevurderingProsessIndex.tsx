@@ -8,7 +8,7 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { BehandleKlageFormKa } from './components/ka/BehandleKlageFormKa';
 import { BehandleKlageFormNfp } from './components/nfp/BehandleKlageFormNfp';
-import { type BrevData } from './components/nfp/PreviewKlageLink';
+import { type KlagevurderingForhåndsvisData } from './components/nfp/PreviewKlageLink';
 import { type TransformedValues } from './components/nfp/TempsaveKlageButton';
 
 import messages from '../i18n/nb_NO.json';
@@ -17,7 +17,7 @@ const intl = createIntl(messages);
 
 interface Props {
   klageVurdering: KlageVurdering;
-  previewCallback: (data: BrevData) => void;
+  previewCallback: (data: KlagevurderingForhåndsvisData) => void;
   saveKlage: (data: TransformedValues) => void;
   readOnlySubmitButton: boolean;
 }

@@ -2,6 +2,7 @@ import { type ReactElement, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
@@ -12,7 +13,6 @@ import { notEmpty } from '@navikt/fp-utils';
 import { createLocationForSkjermlenke } from '../../app/paths';
 import { type BekreftedeTotrinnsaksjonspunkter, initFetchOptions, useFagsakBehandlingApi } from '../../data/fagsakApi';
 import { useKodeverk } from '../../data/useKodeverk';
-import { useVisForhandsvisningAvMelding } from '../../data/useVisForhandsvisningAvMelding';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { BeslutterModalIndex } from './BeslutterModalIndex';
@@ -65,15 +65,15 @@ export const TotrinnskontrollIndex = ({
     mutationFn: (valuesToStore: BekreftedeTotrinnsaksjonspunkter) => api.lagreTotrinnsaksjonspunkt(valuesToStore),
   });
 
-  const forhandsvisMelding = useVisForhandsvisningAvMelding(valgtBehandling);
-
-  const forhandsvisVedtaksbrev = () => {
-    forhandsvisMelding(false, {
-      behandlingUuid: valgtBehandling.uuid,
-      fagsakYtelseType: fagsak.fagsakYtelseType,
-      gjelderVedtak: true,
-    });
-  };
+  const { mutate: forhåndsvisVedtaksbrev } = useMutation({
+    mutationFn: () =>
+      api.forhåndsvisMelding({
+        behandlingUuid: valgtBehandling.uuid,
+      }),
+    onSuccess: response => {
+      forhandsvisDokument(response);
+    },
+  });
 
   if (!valgtBehandling.totrinnskontrollÅrsaker) {
     return null;
@@ -105,7 +105,7 @@ export const TotrinnskontrollIndex = ({
           location={location}
           readOnly={brukernavn === valgtBehandling.ansvarligSaksbehandler || kanVeilede}
           onSubmit={onSubmit}
-          forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
+          forhandsvisVedtaksbrev={forhåndsvisVedtaksbrev}
           fagsakYtelseType={fagsak.fagsakYtelseType}
           alleKodeverk={alleKodeverk}
           createLocationForSkjermlenke={createLocationForSkjermlenke}

@@ -8,8 +8,8 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import { VedtakKlageProsessIndex } from '@navikt/fp-prosess-vedtak-klage';
-import type { Aksjonspunkt, Behandlingsresultat, ForhåndsvisMeldingParams } from '@navikt/fp-types';
+import { type VedtakKlageForhandsvisData, VedtakKlageProsessIndex } from '@navikt/fp-prosess-vedtak-klage';
+import type { Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
@@ -26,7 +26,7 @@ const AKSJONSPUNKT_KODER = [
 export const KlageresultatProsessStegInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling, fagsak, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
+  const { behandling, setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
 
   const { aksjonspunkt: aksjonspunkter } = behandling;
 
@@ -44,11 +44,10 @@ export const KlageresultatProsessStegInitPanel = () => {
   const { data: klageVurdering } = useQuery(api.klage.klageVurderingOptions(behandling));
 
   const { mutate: forhåndsvis } = useMutation({
-    mutationFn: (values: ForhåndsvisMeldingParams) =>
+    mutationFn: (values: VedtakKlageForhandsvisData) =>
       forhåndsvisMelding({
         ...values,
         behandlingUuid: behandling.uuid,
-        fagsakYtelseType: fagsak.fagsakYtelseType,
       }),
     onSuccess: forhandsvisDokument,
   });
