@@ -5,6 +5,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { createIntl, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import messages from '../../../i18n/nb_NO.json';
 
@@ -75,4 +76,6 @@ FaktaBegrunnelseTextField.initialValues = (aksjonspunkt?: Aksjonspunkt[] | Aksjo
   begrunnelse: decodeHtmlEntity(getBegrunnelse(aksjonspunkt) ?? undefined),
 });
 
-FaktaBegrunnelseTextField.transformValues = (values: FormValues): TransformedValues => values as TransformedValues;
+FaktaBegrunnelseTextField.transformValues = (values: FormValues): TransformedValues => ({
+  begrunnelse: notEmpty(values.begrunnelse),
+});
