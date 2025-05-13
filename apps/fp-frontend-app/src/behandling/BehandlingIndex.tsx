@@ -44,6 +44,7 @@ export const BehandlingIndex = ({
 }: Props) => {
   const { selected: behandlingUuid } = useTrackRouteParam<string>({
     paramName: 'behandlingUuid',
+    parse: behandlingUuidFromUrl => behandlingUuidFromUrl,
   });
 
   useEffect(() => {
