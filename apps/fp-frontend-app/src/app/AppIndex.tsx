@@ -91,11 +91,11 @@ export const AppIndex = () => {
             setSiteHeight={setSiteHeight}
             crashMessage={crashMessage}
           />
+          {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+          {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
           <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
             {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
           </ErrorBoundary>
-          {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-          {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
         </>
       </AppConfigResolver>
     </ErrorBoundary>
