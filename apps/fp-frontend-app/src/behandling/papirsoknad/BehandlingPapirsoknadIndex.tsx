@@ -1,12 +1,15 @@
 import { use, useState } from 'react';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
+import {
+  type EngangsstønadValues,
+  type ForeldrepengerValues,
+  RegistrerPapirsoknadPanel,
+  SoknadRegistrertModal,
+  type SvangerskapsValues,
+} from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
-import type { EngangsstønadValues } from '../../../../../packages/papirsoknad/src/engangsstonad/components/EngangsstonadForm';
-import type { ForeldrepengerValues } from '../../../../../packages/papirsoknad/src/foreldrepenger/components/ForeldrepengerForm';
-import type { SvangerskapsValues } from '../../../../../packages/papirsoknad/src/svangerskapspenger/components/SvangerskapspengerForm';
 import { BehandlingDataContext } from '../felles/utils/behandlingDataContext';
 
 /**

@@ -17,7 +17,7 @@ const meta = {
     alleKodeverk: alleKodeverk,
     onSubmit: values => {
       action('onSubmit')(values);
-      return Promise.resolve(values);
+      return Promise.resolve();
     },
     onSubmitUfullstendigsoknad: () => {
       action('onSubmitUfullstendigsoknad')();
