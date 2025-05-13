@@ -64,12 +64,14 @@ const transformValues = (formValues: FormValues) => {
   };
 };
 
+export type ForeldrepengerValues = ReturnType<typeof transformValues>;
+
 interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
   fagsakPersonnummer: string;
-  onSubmit: (values: any) => Promise<void>;
+  onSubmit: (values: ForeldrepengerValues) => Promise<void>;
   onSubmitUfullstendigsoknad: () => Promise<void>;
   erEndringssøknad: boolean;
 }

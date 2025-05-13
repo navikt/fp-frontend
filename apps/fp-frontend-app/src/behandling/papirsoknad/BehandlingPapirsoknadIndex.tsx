@@ -4,6 +4,9 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { RegistrerPapirsoknadPanel, SoknadRegistrertModal } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
+import type { EngangsstønadValues } from '../../../../../packages/papirsoknad/src/engangsstonad/components/EngangsstonadForm';
+import type { ForeldrepengerValues } from '../../../../../packages/papirsoknad/src/foreldrepenger/components/ForeldrepengerForm';
+import type { SvangerskapsValues } from '../../../../../packages/papirsoknad/src/svangerskapspenger/components/SvangerskapspengerForm';
 import { BehandlingDataContext } from '../felles/utils/behandlingDataContext';
 
 /**
@@ -23,9 +26,6 @@ const BehandlingPapirsoknadIndex = () => {
 
   const lagrePapirsøknad = useLagrePapirsøknad(setErAksjonspunktLagret, setSkalOppdatereEtterBekreftelseAvAp);
 
-  const lagreUfullstendig = (fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) =>
-    lagrePapirsøknad({ ufullstendigSoeknad: true }, fagsakYtelseType, familieHendelseType, foreldreType);
-
   const erEndringssøknad = behandling.aksjonspunkt.some(
     ap => ap.definisjon === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
   );
@@ -37,8 +37,7 @@ const BehandlingPapirsoknadIndex = () => {
         fagsak={fagsak}
         kodeverk={alleKodeverk}
         readOnly={isReadOnly}
-        lagreUfullstendig={lagreUfullstendig}
-        lagreFullstendig={lagrePapirsøknad}
+        lagrePapirsøknad={lagrePapirsøknad}
         erEndringssøknad={erEndringssøknad}
       />
     </>
@@ -51,7 +50,12 @@ const useLagrePapirsøknad = (
 ) => {
   const { behandling, fagsak, lagreAksjonspunkter } = use(BehandlingDataContext);
 
-  return async (formValues: any, fagsakYtelseType: string, familieHendelseType: string, foreldreType: string) => {
+  return async (
+    fagsakYtelseType: string,
+    familieHendelseType: string,
+    foreldreType: string,
+    formValues?: EngangsstønadValues | ForeldrepengerValues | SvangerskapsValues,
+  ) => {
     const bekreftedeAksjonspunktDtoer = [
       {
         '@type': getAktivPapirsøknadApKode(behandling.aksjonspunkt),
@@ -62,7 +66,7 @@ const useLagrePapirsøknad = (
       },
     ];
 
-    if (!formValues.ufullstendigSoeknad) {
+    if (formValues) {
       setSkalOppdatereEtterBekreftelseAvAp(false);
     }
 
@@ -73,7 +77,7 @@ const useLagrePapirsøknad = (
       bekreftedeAksjonspunktDtoer,
     });
 
-    if (formValues.ufullstendigSoeknad) {
+    if (!formValues) {
       window.scrollTo(0, 0);
     } else {
       setErAksjonspunktLagret(true);

@@ -7,11 +7,10 @@ import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
 import type { Behandling } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
-import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { getAccessRights } from '../app/util/access';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
@@ -45,7 +44,6 @@ export const BehandlingIndex = ({
 }: Props) => {
   const { selected: behandlingUuid } = useTrackRouteParam<string>({
     paramName: 'behandlingUuid',
-    parse: behandlingUuidFromUrl => behandlingUuidFromUrl,
   });
 
   useEffect(() => {

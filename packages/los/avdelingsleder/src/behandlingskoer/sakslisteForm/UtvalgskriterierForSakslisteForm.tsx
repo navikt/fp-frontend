@@ -98,7 +98,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
       avdelingEnhet: valgtAvdelingEnhet,
     });
   };
-  const lagreNavn = useDebounce<string>('navn', tranformValues, formMethods.trigger);
+  const lagreNavn = useDebounce('navn', tranformValues, formMethods.trigger);
 
   return (
     <Form formMethods={formMethods}>

@@ -6,7 +6,7 @@ import { setValueInLocalStorage } from './localStorageHelper';
 
 interface Props {
   stateKey: string;
-  values: any;
+  values: unknown;
 }
 
 /**

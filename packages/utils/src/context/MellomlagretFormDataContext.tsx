@@ -7,7 +7,7 @@ export type MellomlagretFormData<T> = {
   setMellomlagretFormData: (data: T) => void;
 };
 
-const MellomlagretFormDataContext = createContext<any>(null);
+const MellomlagretFormDataContext = createContext<unknown>(null);
 
 export const MellomlagretFormDataProvider = <T,>({
   children,
@@ -36,7 +36,7 @@ export const MellomlagretFormDataProvider = <T,>({
 };
 
 export const useMellomlagretFormData = <T,>() => {
-  const context = useContext<MellomlagretFormData<T | undefined>>(MellomlagretFormDataContext);
+  const context = useContext(MellomlagretFormDataContext) as MellomlagretFormData<T | undefined> | null;
   if (!context) {
     throw new Error('MellomlagretFormDataContext er ikke satt opp');
   }

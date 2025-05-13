@@ -47,11 +47,13 @@ const transformValues = (formValues: FormValues) => ({
   ...LagreSoknadPapirsoknadIndex.transformValues(formValues),
 });
 
+export type SvangerskapsValues = ReturnType<typeof transformValues>;
+
 interface Props {
   readOnly: boolean;
   soknadData: SoknadData;
   alleKodeverk: AlleKodeverk;
-  onSubmit: (values: any) => Promise<void>;
+  onSubmit: (values: SvangerskapsValues) => Promise<void>;
   onSubmitUfullstendigsoknad: () => Promise<void>;
 }
 

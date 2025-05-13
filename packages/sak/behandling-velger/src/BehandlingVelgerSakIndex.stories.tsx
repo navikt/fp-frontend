@@ -12,7 +12,6 @@ import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const getKodeverkMedNavn = (kode: string, kodeverk: KodeverkType) => {
-  // @ts-expect-error
   const kodeverkForType = alleKodeverk[kodeverk] as KodeverkMedNavn[];
   if (!kodeverkForType || kodeverkForType.length === 0) {
     throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);

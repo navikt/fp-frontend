@@ -8,18 +8,25 @@ import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import type { TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
+import type { AksjonspunktGodkjenningData } from './AksjonspunktGodkjenningFieldArray';
+
 const minLength3 = minLength(3);
 const maxLength2000 = maxLength(2000);
 
 const FIELD_ARRAY_NAME = 'aksjonspunktGodkjenning';
 
-const harIkkeValgtMinstEnFakta = (getValues: UseFormGetValues<any>, fieldIndex: string) =>
-  !getValues(`${fieldIndex}.feilFakta`) &&
-  !getValues(`${fieldIndex}.feilLov`) &&
-  !getValues(`${fieldIndex}.feilSkjønn`) &&
-  !getValues(`${fieldIndex}.feilUtredning`) &&
-  !getValues(`${fieldIndex}.feilSaksflyt`) &&
-  !getValues(`${fieldIndex}.feilBegrunnelse`);
+const harIkkeValgtMinstEnFakta = (
+  getValues: UseFormGetValues<{
+    aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
+  }>,
+  fieldIndex: number,
+) =>
+  !getValues(`${FIELD_ARRAY_NAME}.${fieldIndex}.feilFakta`) &&
+  !getValues(`${FIELD_ARRAY_NAME}.${fieldIndex}.feilLov`) &&
+  !getValues(`${FIELD_ARRAY_NAME}.${fieldIndex}.feilSkjønn`) &&
+  !getValues(`${FIELD_ARRAY_NAME}.${fieldIndex}.feilUtredning`) &&
+  !getValues(`${FIELD_ARRAY_NAME}.${fieldIndex}.feilSaksflyt`) &&
+  !getValues(`${FIELD_ARRAY_NAME}.${fieldIndex}.feilBegrunnelse`);
 
 type Props = {
   index: number;
@@ -28,7 +35,9 @@ type Props = {
 };
 
 export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, readOnly }: Props) => {
-  const { watch, getValues } = useFormContext();
+  const { watch, getValues } = useFormContext<{
+    aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
+  }>();
 
   const aksjonspunktGodkjenning = watch('aksjonspunktGodkjenning');
 
@@ -43,7 +52,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
   const fieldIndex = `${FIELD_ARRAY_NAME}.${index}`;
 
   const feilmelding =
-    !totrinnskontrollGodkjent && harIkkeValgtMinstEnFakta(getValues, fieldIndex) ? isRequiredMessage() : undefined;
+    !totrinnskontrollGodkjent && harIkkeValgtMinstEnFakta(getValues, index) ? isRequiredMessage() : undefined;
   const errorMessage = useCustomValidation(`${fieldIndex}.faktagruppe`, feilmelding);
 
   if (!context || !totrinnskontrollAksjonspunkt) {

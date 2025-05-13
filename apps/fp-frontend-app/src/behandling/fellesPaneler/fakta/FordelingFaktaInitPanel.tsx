@@ -87,6 +87,8 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
+  //TODO (TOR) Må eksportera alle aksjonspunkt frå ft-repoet
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (aksjonspunkterSomSkalLagres: any) => {
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres

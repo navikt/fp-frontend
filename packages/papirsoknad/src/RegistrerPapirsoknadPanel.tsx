@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
@@ -9,9 +9,12 @@ import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
+import type { EngangsstønadValues } from './engangsstonad/components/EngangsstonadForm';
 import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
+import type { ForeldrepengerValues } from './foreldrepenger/components/ForeldrepengerForm';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
+import type { SvangerskapsValues } from './svangerskapspenger/components/SvangerskapspengerForm';
 import { SvangerskapspengerPapirsoknadIndex } from './svangerskapspenger/SvangerskapspengerPapirsoknadIndex';
 
 import messages from '../i18n/nb_NO.json';
@@ -22,16 +25,11 @@ interface Props {
   fagsak: Fagsak;
   kodeverk: AlleKodeverk;
   readOnly: boolean;
-  lagreUfullstendig: (
+  lagrePapirsøknad: (
     fagsakYtelseType: string,
     familieHendelseType: string,
     foreldreType: string,
-  ) => Promise<Behandling>;
-  lagreFullstendig: (
-    formValues: any,
-    fagsakYtelseType: string,
-    familieHendelseType: string,
-    foreldreType: string,
+    formValues?: EngangsstønadValues | ForeldrepengerValues | SvangerskapsValues,
   ) => Promise<Behandling>;
   erEndringssøknad: boolean;
 }
@@ -40,32 +38,29 @@ export const RegistrerPapirsoknadPanel = ({
   fagsak,
   kodeverk,
   readOnly,
-  lagreUfullstendig,
-  lagreFullstendig,
+  lagrePapirsøknad,
   erEndringssøknad,
 }: Props) => {
   const [soknadData, setSoknadData] = useState<SoknadData>();
 
-  const lagre = useCallback(
-    (formValues: any) => {
-      if (soknadData) {
-        lagreFullstendig(
-          formValues,
-          soknadData.fagsakYtelseType,
-          soknadData.familieHendelseType,
-          soknadData.foreldreType,
-        );
-      }
-      return Promise.resolve();
-    },
-    [soknadData],
-  );
-  const lagreOgAvslutt = useCallback(() => {
+  const lagreFullstendigSøknad = (formValues: EngangsstønadValues | ForeldrepengerValues | SvangerskapsValues) => {
     if (soknadData) {
-      lagreUfullstendig(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType);
+      lagrePapirsøknad(
+        soknadData.fagsakYtelseType,
+        soknadData.familieHendelseType,
+        soknadData.foreldreType,
+        formValues,
+      );
     }
     return Promise.resolve();
-  }, [soknadData]);
+  };
+
+  const lagreUfullstendigSøknadOgAvslutt = () => {
+    if (soknadData) {
+      lagrePapirsøknad(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType);
+    }
+    return Promise.resolve();
+  };
 
   return (
     <RawIntlProvider value={intl}>
@@ -85,8 +80,8 @@ export const RegistrerPapirsoknadPanel = ({
         />
         {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.ENGANGSSTONAD && (
           <EngangsstonadPapirsoknadIndex
-            onSubmitUfullstendigsoknad={lagreOgAvslutt}
-            onSubmit={lagre}
+            onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
+            onSubmit={lagreFullstendigSøknad}
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
@@ -94,8 +89,8 @@ export const RegistrerPapirsoknadPanel = ({
         )}
         {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.FORELDREPENGER && (
           <ForeldrepengerPapirsoknadIndex
-            onSubmitUfullstendigsoknad={lagreOgAvslutt}
-            onSubmit={lagre}
+            onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
+            onSubmit={lagreFullstendigSøknad}
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}
@@ -105,8 +100,8 @@ export const RegistrerPapirsoknadPanel = ({
         )}
         {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.SVANGERSKAPSPENGER && (
           <SvangerskapspengerPapirsoknadIndex
-            onSubmitUfullstendigsoknad={lagreOgAvslutt}
-            onSubmit={lagre}
+            onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
+            onSubmit={lagreFullstendigSøknad}
             readOnly={readOnly}
             soknadData={soknadData}
             alleKodeverk={kodeverk}

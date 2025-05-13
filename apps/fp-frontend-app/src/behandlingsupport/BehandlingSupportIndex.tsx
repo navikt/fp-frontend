@@ -14,9 +14,9 @@ import { Tabs } from '@navikt/ds-react';
 
 import type { MessagesFormValues } from '@navikt/fp-sak-meldinger';
 import type { TotrinnskontrollFormValues } from '@navikt/fp-sak-totrinnskontroll';
+import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { getSupportPanelLocationCreator } from '../app/paths';
-import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { FagsakData } from '../fagsak/FagsakData';
 import { DokumentIndex } from './dokument/DokumentIndex';
 import { HistorikkIndex } from './historikk/HistorikkIndex';

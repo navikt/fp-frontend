@@ -18,65 +18,79 @@ import {
 } from '../../totrinnskontrollaksjonspunktTextCodes';
 import { OpptjeningTotrinnText } from './OpptjeningTotrinnText';
 
-const buildVarigEndringBeregningText = (beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto']): ReactElement =>
+const buildVarigEndringBeregningText = (
+  beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> =>
   beregningDto?.fastsattVarigEndringNaering ? (
     <FormattedMessage id="ToTrinnsForm.Beregning.VarigEndring" />
   ) : (
     <FormattedMessage id="ToTrinnsForm.Beregning.IkkeVarigEndring" />
   );
 
-const buildUttakText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] =>
+const buildUttakText = (
+  aksjonspunkt: TotrinnskontrollAksjonspunkt,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] =>
   aksjonspunkt.uttakPerioder
-    ? aksjonspunkt.uttakPerioder.map((uttakperiode): ReactElement => {
-        const fom = dateFormat(uttakperiode.fom);
-        const tom = dateFormat(uttakperiode.tom);
-        let id;
+    ? aksjonspunkt.uttakPerioder.map(
+        (uttakperiode): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
+          const fom = dateFormat(uttakperiode.fom);
+          const tom = dateFormat(uttakperiode.tom);
+          let id;
 
-        if (uttakperiode.erSlettet) {
-          id = 'ToTrinnsForm.AvklarUttak.PeriodeSlettet';
-        } else if (uttakperiode.erLagtTil) {
-          id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
-        } else if (
-          uttakperiode.erEndret &&
-          (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
-            aksjonspunkt.aksjonspunktKode === AksjonspunktKode.TILKNYTTET_STORTINGET)
-        ) {
-          id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
-        } else if (
-          uttakperiode.erEndret &&
-          aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
-        ) {
-          id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-        } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYR_FAKTA_UTTAK) {
-          id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-        } else if (uttakperiode.erEndret) {
-          id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
-        } else {
-          id = 'ToTrinnsForm.AvklarUttak.PeriodeAvklart';
-        }
+          if (uttakperiode.erSlettet) {
+            id = 'ToTrinnsForm.AvklarUttak.PeriodeSlettet';
+          } else if (uttakperiode.erLagtTil) {
+            id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
+          } else if (
+            uttakperiode.erEndret &&
+            (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
+              aksjonspunkt.aksjonspunktKode === AksjonspunktKode.TILKNYTTET_STORTINGET)
+          ) {
+            id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
+          } else if (
+            uttakperiode.erEndret &&
+            aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
+          ) {
+            id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
+          } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYR_FAKTA_UTTAK) {
+            id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
+          } else if (uttakperiode.erEndret) {
+            id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
+          } else {
+            id = 'ToTrinnsForm.AvklarUttak.PeriodeAvklart';
+          }
 
-        return <FormattedMessage key={id} id={id} values={{ a: fom, b: tom }} />;
-      })
+          return <FormattedMessage key={id} id={id} values={{ a: fom, b: tom }} />;
+        },
+      )
     : [];
 
-const buildOpptjeningText = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] =>
+const buildOpptjeningText = (
+  aksjonspunkt: TotrinnskontrollAksjonspunkt,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] =>
   aksjonspunkt.opptjeningAktiviteter
     ? aksjonspunkt.opptjeningAktiviteter.map(aktivitet => (
         <OpptjeningTotrinnText key={aktivitet.aktivitetType} aktivitet={aktivitet} />
       ))
     : [];
 
-const getTextFromAksjonspunktkode = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] => {
+const getTextFromAksjonspunktkode = (
+  aksjonspunkt: TotrinnskontrollAksjonspunkt,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   const aksjonspunktTextId = totrinnskontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
   return aksjonspunktTextId ? [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />] : [];
 };
 
-const getTextFromTilbakekrevingAksjonspunktkode = (aksjonspunkt: TotrinnskontrollAksjonspunkt): ReactElement[] => {
+const getTextFromTilbakekrevingAksjonspunktkode = (
+  aksjonspunkt: TotrinnskontrollAksjonspunkt,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   const aksjonspunktTextId = totrinnsTilbakekrevingkontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
   return aksjonspunktTextId ? [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />] : [];
 };
 
-const getTextForForeldreansvarsvilkåretAndreLedd = (isForeldrepenger: boolean): ReactElement[] => {
+const getTextForForeldreansvarsvilkåretAndreLedd = (
+  isForeldrepenger: boolean,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   const aksjonspunktTextId = isForeldrepenger
     ? 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP'
     : 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES';
@@ -86,7 +100,7 @@ const getTextForForeldreansvarsvilkåretAndreLedd = (isForeldrepenger: boolean):
 const getFaktaOmBeregningText = (
   faktaOmBeregningTilfeller: KodeverkMedNavn[],
   beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
-): ReactElement[] => {
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (!beregningDto?.faktaOmBeregningTilfeller) {
     return [];
   }
@@ -97,7 +111,9 @@ const getFaktaOmBeregningText = (
   });
 };
 
-const getTextForKlageHelper = (behandlingsresultat?: Behandlingsresultat): ReactElement => {
+const getTextForKlageHelper = (
+  behandlingsresultat?: Behandlingsresultat,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
   let aksjonspunktTextId = '';
   switch (behandlingsresultat?.type) {
     case BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET:
@@ -127,20 +143,25 @@ const getTextForKlageHelper = (behandlingsresultat?: Behandlingsresultat): React
   return <FormattedMessage id={aksjonspunktTextId} />;
 };
 
-const getTextForKlage = (behandlingStaus: string, behandlingsresultat?: Behandlingsresultat): ReactElement[] => {
+const getTextForKlage = (
+  behandlingStaus: string,
+  behandlingsresultat?: Behandlingsresultat,
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (behandlingStaus === BehandlingStatus.FATTER_VEDTAK) {
     return [getTextForKlageHelper(behandlingsresultat)];
   }
   return [];
 };
 
-const buildAvklarAnnenForelderText = (): ReactElement => (
-  <FormattedMessage id="ToTrinnsForm.AvklarUttak.AnnenForelderHarRett" />
-);
+const buildAvklarAnnenForelderText = (): ReactElement<
+  React.ComponentProps<typeof FormattedMessage>,
+  typeof FormattedMessage
+> => <FormattedMessage id="ToTrinnsForm.AvklarUttak.AnnenForelderHarRett" />;
 
-const buildOverstyrtRettOgOmsorgText = (): ReactElement => (
-  <FormattedMessage id="ToTrinnsForm.AvklarUttak.OverstyrtRettOgOmsorg" />
-);
+const buildOverstyrtRettOgOmsorgText = (): ReactElement<
+  React.ComponentProps<typeof FormattedMessage>,
+  typeof FormattedMessage
+> => <FormattedMessage id="ToTrinnsForm.AvklarUttak.OverstyrtRettOgOmsorg" />;
 
 const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolean =>
   aksjonspunkt.aksjonspunktKode === AksjonspunktKode.BEHANDLE_KLAGE_NFP ||
@@ -153,7 +174,7 @@ export const getAksjonspunkttekst = (
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
   behandlingsresultat?: Behandlingsresultat,
-): ReactElement[] => {
+): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);
   }
