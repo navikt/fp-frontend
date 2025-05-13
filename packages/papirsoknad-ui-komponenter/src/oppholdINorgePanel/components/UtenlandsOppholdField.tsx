@@ -34,7 +34,7 @@ type Keys = 'tidligereOppholdUtenlands' | 'fremtidigeOppholdUtenlands';
 const getValue = (
   getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>,
   fieldName: string,
-  // @ts-expect-error
+  // @ts-expect-error Fiks
 ): string => getValues(fieldName);
 
 const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: FormValues[] }>, name: Keys) => () => {
