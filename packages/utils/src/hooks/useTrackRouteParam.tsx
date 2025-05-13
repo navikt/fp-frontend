@@ -1,38 +1,31 @@
-import { type Params, useLocation, useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { parseQueryString } from '@navikt/ft-utils';
 import type { Location } from 'history';
 
-const defaultConfig = {
-  paramName: '',
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  parse: (a: any) => a,
-  isQueryParam: false,
-};
+type ParamType = string | boolean | number;
 
-interface Config {
-  paramName?: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  parse?: (a: any) => any;
+type Config<T extends ParamType> = {
+  paramName: string;
+  parse?: (a: string | undefined) => T;
   isQueryParam?: boolean;
-}
-
-const mapMatchToParam = (params: Params, location: Location, trackingConfig: Config) => {
-  const newParams = trackingConfig.isQueryParam ? parseQueryString(location.search) : params;
-  return trackingConfig.paramName && trackingConfig.parse
-    ? trackingConfig.parse(newParams[trackingConfig.paramName])
-    : undefined;
 };
 
-export function useTrackRouteParam<T>(config: Config): { location: Location; selected: T } {
-  const trackingConfig = { ...defaultConfig, ...config };
+export const useTrackRouteParam = <T extends ParamType>(config: Config<T>): { location: Location; selected: T } => {
+  const trackingConfig = {
+    parse: (a: string | undefined) => a as T,
+    isQueryParam: false,
+    ...config,
+  };
 
   const location = useLocation();
   const params = useParams();
 
-  const paramFromUrl = mapMatchToParam(params, location, trackingConfig);
+  const newParams = trackingConfig.isQueryParam ? parseQueryString(location.search) : params;
+  const paramFromUrl = trackingConfig.parse(newParams[trackingConfig.paramName]);
+
   return {
     location,
     selected: paramFromUrl,
   };
-}
+};
