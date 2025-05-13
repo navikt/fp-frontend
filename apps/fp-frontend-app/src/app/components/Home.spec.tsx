@@ -19,7 +19,7 @@ describe('Home', () => {
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
   });
 
-  it.skip('skal rendre los-ikke-tilgjengelig-panel', async () => {
+  it('skal rendre los-ikke-tilgjengelig-panel', async () => {
     await applyRequestHandlers(VisLosIkkeTilgjengelig.parameters['msw']);
     render(<VisLosIkkeTilgjengelig />);
     expect(await screen.findByText('FPLOS er ikke tilgjengelig')).toBeInTheDocument();
