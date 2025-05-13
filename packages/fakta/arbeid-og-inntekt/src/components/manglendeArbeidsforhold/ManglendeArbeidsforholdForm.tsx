@@ -38,48 +38,6 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) => {
-  const fom = getValues('fom');
-  return fom && tom ? dateAfterOrEqual(fom)(tom) : null;
-};
-
-const getOppdaterTabell =
-  (
-    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
-    radData: ArbeidsforholdOgInntektRadData,
-    inntektsmelding: Inntektsmelding,
-    formValues: FormValues,
-  ) =>
-  () => {
-    oppdaterTabell(oldData =>
-      oldData.map(data => {
-        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
-          const opprettArbeidsforhold =
-            formValues.saksbehandlersVurdering ===
-            ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
-          const avklaring = opprettArbeidsforhold
-            ? {
-                arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-                fom: formValues.fom,
-                tom: formValues.tom,
-                stillingsprosent: formValues.stillingsprosent,
-                begrunnelse: formValues.begrunnelse,
-                saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-              }
-            : {
-                begrunnelse: formValues.begrunnelse,
-                saksbehandlersVurdering: formValues.saksbehandlersVurdering,
-              };
-          return {
-            ...radData,
-            avklaring,
-          };
-        }
-        return data;
-      }),
-    );
-  };
-
 interface Props {
   behandlingUuid: string;
   behandlingVersjon: number;
@@ -275,3 +233,45 @@ export const ManglendeArbeidsforholdForm = ({
     </VStack>
   );
 };
+
+const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) => {
+  const fom = getValues('fom');
+  return fom && tom ? dateAfterOrEqual(fom)(tom) : null;
+};
+
+const getOppdaterTabell =
+  (
+    oppdaterTabell: (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => void,
+    radData: ArbeidsforholdOgInntektRadData,
+    inntektsmelding: Inntektsmelding,
+    formValues: FormValues,
+  ) =>
+  () => {
+    oppdaterTabell(oldData =>
+      oldData.map(data => {
+        if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
+          const opprettArbeidsforhold =
+            formValues.saksbehandlersVurdering ===
+            ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+          const avklaring = opprettArbeidsforhold
+            ? {
+                arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
+                fom: formValues.fom,
+                tom: formValues.tom,
+                stillingsprosent: formValues.stillingsprosent,
+                begrunnelse: formValues.begrunnelse,
+                saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+              }
+            : {
+                begrunnelse: formValues.begrunnelse,
+                saksbehandlersVurdering: formValues.saksbehandlersVurdering,
+              };
+          return {
+            ...radData,
+            avklaring,
+          };
+        }
+        return data;
+      }),
+    );
+  };

@@ -15,26 +15,6 @@ import { MANUELT_ORG_NR, ManueltLagtTilArbeidsforholdForm } from './manuelt/Manu
 
 import styles from './arbeidsOgInntektOverstyrPanel.module.css';
 
-const finnAksjonspunktTekstKoder = (
-  tabellData: ArbeidsforholdOgInntektRadData[],
-  aksjonspunkt?: Aksjonspunkt,
-): string[] => {
-  const harManglendeInntektsmeldinger = tabellData.some(d => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
-  const harManglandeOpplysninger = tabellData.some(
-    d => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
-  );
-  const erApÅpent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
-
-  const koder = [];
-  if (erApÅpent && harManglendeInntektsmeldinger) {
-    koder.push('ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding');
-  }
-  if (erApÅpent && harManglandeOpplysninger) {
-    koder.push('ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger');
-  }
-  return koder;
-};
-
 interface Props {
   behandling: Behandling;
   aksjonspunkt?: Aksjonspunkt;
@@ -145,4 +125,24 @@ export const ArbeidsOgInntektOverstyrPanel = ({
       </VStack>
     </VStack>
   );
+};
+
+const finnAksjonspunktTekstKoder = (
+  tabellData: ArbeidsforholdOgInntektRadData[],
+  aksjonspunkt?: Aksjonspunkt,
+): string[] => {
+  const harManglendeInntektsmeldinger = tabellData.some(d => d.årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING);
+  const harManglandeOpplysninger = tabellData.some(
+    d => d.årsak === AksjonspunktÅrsak.INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD,
+  );
+  const erApÅpent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
+
+  const koder = [];
+  if (erApÅpent && harManglendeInntektsmeldinger) {
+    koder.push('ArbeidOgInntektFaktaPanel.InnhentManglendeInntektsmelding');
+  }
+  if (erApÅpent && harManglandeOpplysninger) {
+    koder.push('ArbeidOgInntektFaktaPanel.AvklarManglendeOpplysninger');
+  }
+  return koder;
 };

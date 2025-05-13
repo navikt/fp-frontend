@@ -14,12 +14,6 @@ import { InntektsmeldingOpplysningerPanel } from './InntektsmeldingOpplysningerP
 
 import styles from './inntektsmeldingerPanel.module.css';
 
-const delOppAId = (eksternArbeidsforholdId: string): string => {
-  const lengde = Math.ceil(eksternArbeidsforholdId.length / 25);
-  const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, i * 25 + 25));
-  return oppdeltId.join('-');
-};
-
 interface Props {
   saksnummer: string;
   alleKodeverk: AlleKodeverk;
@@ -228,4 +222,10 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
       )}
     </VStack>
   );
+};
+
+const delOppAId = (eksternArbeidsforholdId: string): string => {
+  const lengde = Math.ceil(eksternArbeidsforholdId.length / 25);
+  const oppdeltId = Array.from({ length: lengde }, (_x, i) => eksternArbeidsforholdId.slice(i * 25, i * 25 + 25));
+  return oppdeltId.join('-');
 };
