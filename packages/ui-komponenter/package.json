@@ -14,14 +14,14 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.20.0",
+    "@navikt/ds-react": "7.21.1",
     "@navikt/fp-types": "workspace:^",
     "@navikt/fp-utils": "workspace:^",
     "react": "19.1.0"
   },
   "devDependencies": {
-    "eslint": "9.25.1",
+    "eslint": "9.26.0",
     "typescript": "5.8.3",
-    "vite": "6.3.2"
+    "vite": "6.3.5"
   }
 }
