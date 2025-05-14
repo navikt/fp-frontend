@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import type { JsonBodyType, StrictResponse } from 'msw';
+import type { JsonBodyType } from 'msw';
 import { http, HttpResponse } from 'msw';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
@@ -69,10 +69,10 @@ const ressursMap = {
     headers: { location: 'http://www.test.com/api/result' },
   }),
 };
-const isStrictResponse = (response: any): response is StrictResponse<JsonBodyType> =>
+const isStrictResponse = (response: any): response is HttpResponse<JsonBodyType> =>
   response !== undefined && response.body !== undefined;
 
-const getMockResponse = (rel: string): (() => StrictResponse<JsonBodyType>) => {
+const getMockResponse = (rel: string): (() => HttpResponse<JsonBodyType>) => {
   const responseData = ressursMap[rel] ?? undefined;
   if (responseData === undefined)
     return () =>
