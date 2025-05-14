@@ -6,7 +6,7 @@ import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
@@ -27,9 +27,7 @@ import {
   OmsorgOgForeldreansvarFaktaForm,
 } from './OmsorgOgForeldreansvarFaktaForm';
 
-type FormValues = OmsorgFormValues & {
-  begrunnelse?: string;
-};
+type FormValues = OmsorgFormValues & FaktaBegrunnelseFormValues;
 
 const transformValues = (
   values: FormValues,

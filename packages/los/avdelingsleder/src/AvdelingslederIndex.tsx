@@ -10,6 +10,7 @@ import { type Location } from 'history';
 
 import type { NavAnsatt } from '@navikt/fp-types';
 
+import { useTrackRouteParam } from '../../../utils/src/hooks/useTrackRouteParam';
 import { AvdelingslederPanels } from './avdelingslederPanels';
 import { EndreSakslisterPanel } from './behandlingskoer/EndreSakslisterPanel';
 import { IkkeTilgangTilAvdelingslederPanel } from './components/IkkeTilgangTilAvdelingslederPanel';
@@ -24,7 +25,6 @@ import { NokkeltallPanel } from './nokkeltall/NokkeltallPanel';
 import { ReservasjonerTabell } from './reservasjoner/ReservasjonerTabell';
 import { SaksbehandlerePanel } from './saksbehandlere/SaksbehandlerePanel';
 import type { Avdeling } from './typer/avdelingTsType';
-import { useTrackRouteParam } from './useTrackRouteParam';
 
 import styles from './avdelingslederIndex.module.css';
 

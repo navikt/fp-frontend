@@ -8,6 +8,7 @@ import type { Location } from 'history';
 import { BehandlingType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
+import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import {
@@ -17,7 +18,6 @@ import {
   pathToAnnenPart,
   pathToMissingPage,
 } from '../app/paths';
-import { useTrackRouteParam } from '../app/useTrackRouteParam';
 import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
 import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';

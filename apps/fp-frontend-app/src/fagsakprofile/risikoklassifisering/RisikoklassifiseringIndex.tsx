@@ -6,10 +6,9 @@ import { useQuery } from '@tanstack/react-query';
 import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
 import { type AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
 import type { AksessRettigheter, Behandling, BehandlingAppKontekst, Fagsak, NavAnsatt } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
 
 import { getRiskPanelLocationCreator } from '../../app/paths';
-import { useTrackRouteParam } from '../../app/useTrackRouteParam';
 import { getAccessRights } from '../../app/util/access';
 import { initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
 import { useBehandlingPollingOperasjoner } from '../../data/polling/useBehandlingPollingOperasjoner';

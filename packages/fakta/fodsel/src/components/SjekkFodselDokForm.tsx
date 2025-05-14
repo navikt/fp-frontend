@@ -6,7 +6,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
@@ -21,9 +21,8 @@ export type FormValues = {
   dokumentasjonForeligger?: boolean;
   brukAntallBarnITps?: boolean;
   avklartBarn?: AvklartBarn[];
-  begrunnelse?: string;
   antallBarnFodt?: number;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   familiehendelse: FamilieHendelseSamling;

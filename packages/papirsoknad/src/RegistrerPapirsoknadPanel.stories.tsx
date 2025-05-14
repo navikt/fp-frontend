@@ -15,12 +15,8 @@ const meta = {
   args: {
     readOnly: false,
     kodeverk: alleKodeverk,
-    lagreFullstendig: values => {
-      action('lagreFullstendig')(values);
-      return Promise.resolve(values);
-    },
-    lagreUfullstendig: (...args) => {
-      action('lagreUfullstendig')(args);
+    lagrePapirsøknad: values => {
+      action('lagrePapirsøknad')(values);
       return Promise.resolve({} as Behandling);
     },
   },

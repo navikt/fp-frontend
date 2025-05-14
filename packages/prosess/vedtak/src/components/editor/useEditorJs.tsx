@@ -162,7 +162,7 @@ class CustomList extends EditorjsList {
       .renderSettings()
       .filter(item =>
         // https://github.com/editor-js/list/issues/119
-        // @ts-expect-error
+        // @ts-expect-error Fiks
         ['Unordered'].includes(item.label),
       )
       .map(item => ({
@@ -177,7 +177,7 @@ class CustomHeader extends Header {
   override renderSettings() {
     return super.renderSettings().map(item => ({
       ...item,
-      // @ts-expect-error
+      // @ts-expect-error Fiks
       label: item.label === 'Heading 1' ? 'Overskrift' : 'Underoverskrift',
     }));
   }

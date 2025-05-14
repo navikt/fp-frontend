@@ -69,6 +69,8 @@ const ressursMap = {
     headers: { location: 'http://www.test.com/api/result' },
   }),
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isStrictResponse = (response: any): response is HttpResponse<JsonBodyType> =>
   response !== undefined && response.body !== undefined;
 
