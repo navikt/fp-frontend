@@ -5,6 +5,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { createIntl, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import type { Aksjonspunkt } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import messages from '../../../i18n/nb_NO.json';
 
@@ -24,7 +25,7 @@ type Props = {
 };
 
 export type FormValues = {
-  [key: string]: any;
+  begrunnelse: string | undefined;
 };
 
 type TransformedValues = {
@@ -71,13 +72,10 @@ const getBegrunnelse = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): string | 
   return !!aksjonspunkt && !Array.isArray(aksjonspunkt) && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : '';
 };
 
-FaktaBegrunnelseTextField.initialValues = (
-  aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt,
-  begrunnelseFieldName = 'begrunnelse',
-): FormValues => ({
-  [begrunnelseFieldName]: decodeHtmlEntity(getBegrunnelse(aksjonspunkt) ?? undefined),
+FaktaBegrunnelseTextField.initialValues = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): FormValues => ({
+  begrunnelse: decodeHtmlEntity(getBegrunnelse(aksjonspunkt) ?? undefined),
 });
 
-FaktaBegrunnelseTextField.transformValues = (values: FormValues, name = 'begrunnelse'): TransformedValues => ({
-  begrunnelse: values[name] as string,
+FaktaBegrunnelseTextField.transformValues = (values: FormValues): TransformedValues => ({
+  begrunnelse: notEmpty(values.begrunnelse),
 });

@@ -89,7 +89,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
 
   const options = sorterteSaksbehandlereForAvdeling.map(sb => `${sb.navn} (${sb.brukerIdent})`);
 
-  const lagreNavnDebounce = useDebounce<string>(
+  const lagreNavnDebounce = useDebounce(
     'navn',
     (navn: string) => endreNavnPåGruppe({ gruppeId: saksbehandlerGruppe.gruppeId, gruppeNavn: navn }),
     formMethods.trigger,

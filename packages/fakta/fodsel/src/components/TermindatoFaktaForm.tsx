@@ -7,7 +7,7 @@ import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@na
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -26,8 +26,7 @@ export type FormValues = {
   utstedtdato?: string;
   termindato?: string;
   antallBarn?: number;
-  begrunnelse?: string;
-};
+} & FaktaBegrunnelseFormValues;
 
 interface Props {
   soknad: Soknad;

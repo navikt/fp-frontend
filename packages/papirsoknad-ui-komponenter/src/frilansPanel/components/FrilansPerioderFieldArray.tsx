@@ -11,7 +11,7 @@ import type { FrilansFormValues, FrilansSubFormValues } from '../types';
 const getValue = (
   getValues: UseFormGetValues<FrilansFormValues>,
   fieldName: string,
-  // @ts-expect-error
+  // @ts-expect-error Fiks
 ): string => getValues(fieldName);
 
 interface Props {

@@ -104,8 +104,8 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   const lagreFomDato = getLagreDatoFn(lagreSorteringTidsintervallDato, true, tomDatoVerdi);
   const lagreTomDato = getLagreDatoFn(lagreSorteringTidsintervallDato, false, fomDatoVerdi);
 
-  const lagreFomDatoDebounce = useDebounce<string>('fomDato', lagreFomDato);
-  const lagreTomDatoDebounce = useDebounce<string>('tomDato', lagreTomDato);
+  const lagreFomDatoDebounce = useDebounce('fomDato', lagreFomDato);
+  const lagreTomDatoDebounce = useDebounce('tomDato', lagreTomDato);
 
   return (
     <div className={styles.arrowBoxWidth}>

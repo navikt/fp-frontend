@@ -4,3 +4,4 @@ export { PanelOverstyringProvider, usePanelOverstyring } from './src/context/Pan
 export { notEmpty } from './src/notEmpty';
 export { assertUnreachable } from './src/switchCaseUtils';
 export { åpneDokument, åpneVindu } from './src/åpneDokument';
+export { useTrackRouteParam } from './src/hooks/useTrackRouteParam';

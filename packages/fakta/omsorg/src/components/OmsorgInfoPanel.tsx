@@ -5,12 +5,19 @@ import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton, PersonopplysningerForFamilie } from '@navikt/fp-fakta-felles';
+import {
+  type FaktaBegrunnelseFormValues,
+  FaktaBegrunnelseTextField,
+  FaktaSubmitButton,
+  PersonopplysningerForFamilie,
+} from '@navikt/fp-fakta-felles';
 import type { Aksjonspunkt, Personoversikt, Ytelsefordeling } from '@navikt/fp-types';
 import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type FormValues as OmsorgFormValues, OmsorgFaktaFields } from './OmsorgFaktaFields';
+
+type FormValues = OmsorgFormValues & FaktaBegrunnelseFormValues;
 
 const createInitialValues = (ytelsefordeling: Ytelsefordeling, aksjonspunkter: Aksjonspunkt[]): FormValues => {
   return {
@@ -23,10 +30,6 @@ const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
   ...OmsorgFaktaFields.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
-
-type FormValues = OmsorgFormValues & {
-  begrunnelse?: string;
-};
 
 interface Props {
   personoversikt: Personoversikt;

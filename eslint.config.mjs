@@ -69,6 +69,8 @@ export default [
           },
         },
       ],
+      '@typescript-eslint/no-explicit-any': ERROR,
+      '@typescript-eslint/ban-ts-comment': ERROR,
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,
@@ -79,8 +81,6 @@ export default [
       '@typescript-eslint/no-unused-vars': [ERROR],
 
       // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
-      '@typescript-eslint/no-explicit-any': OFF,
-      '@typescript-eslint/ban-ts-comment': OFF,
       'import/no-unresolved': OFF,
 
       'simple-import-sort/imports': [

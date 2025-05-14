@@ -51,8 +51,8 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
       til: nyTilVerdi,
     });
 
-  const lagreFraDebounce = useDebounce<number>('fra', lagreFra, trigger);
-  const lagreTilDebounce = useDebounce<number>('til', lagreTil, trigger);
+  const lagreFraDebounce = useDebounce('fra', lagreFra, trigger);
+  const lagreTilDebounce = useDebounce('til', lagreTil, trigger);
 
   return (
     <ArrowBox>

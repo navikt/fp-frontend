@@ -14,6 +14,7 @@ describe('FagsakIndex', () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
+    expect(await screen.findByText('Faresignaler')).toBeInTheDocument();
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
     expect(await screen.findByText('352018689 - Under behandling')).toBeInTheDocument();
 

@@ -53,7 +53,7 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
   const alleBehandlingstyperSortert = behandlingTyper.map(bt => bt.kode).sort(sorterBehandlingtyper);
   const sorterteBehandlingstyper = Object.keys(data).sort(sorterBehandlingtyper);
   const reversertSorterteBehandlingstyper = sorterteBehandlingstyper.slice().reverse();
-  // @ts-ignore Fiks
+  // @ts-expect-error Fiks
   const farger = alleBehandlingstyperSortert.map(bt => behandlingstypeFarger[bt]);
 
   return (

@@ -6,7 +6,7 @@ import { VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -14,9 +14,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from './RegistrereVergeForm';
 
-type FormValues = VergeFormValues & {
-  begrunnelse?: string;
-};
+type FormValues = VergeFormValues & FaktaBegrunnelseFormValues;
 
 const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),

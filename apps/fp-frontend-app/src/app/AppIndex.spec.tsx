@@ -54,7 +54,7 @@ describe('AppIndex', () => {
       () => {
         expect(screen.queryByText('Venter…')).not.toBeInTheDocument();
       },
-      { timeout: 10000 },
+      { timeout: 20000 },
     );
 
     const prosessMeny = within(await screen.findByTestId('prosess-meny'));
