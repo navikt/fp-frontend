@@ -1,1 +1,0 @@
-import{j as o}from"./jsx-runtime-D_zvdyIk.js";import{p as n,P as a,q as s}from"./withPanelData-BmYMFyvA.js";const m=t=>{const r=n({locale:"nb-NO",messages:t},s());return e=>o.jsx(a,{value:r,children:e()})};export{m as g};
