@@ -5,35 +5,40 @@ const { format } = winston;
 const { combine, json, timestamp } = format;
 
 const levels = {
-  ERROR: 0,
-  WARN: 1,
-  INFO: 2,
-  HTTP: 3,
-  DEBUG: 4,
+  error: 0,
+  warn: 1,
+  info: 2,
+  http: 3,
+  debug: 4,
 };
 
 const level = () => {
   const isDevelopment =
     !process.env.NODE_ENV || process.env.NODE_ENV === "development";
-  return isDevelopment ? "DEBUG" : "INFO";
+  return isDevelopment ? "debug" : "info";
 };
 
 const colors = {
-  ERROR: "red",
-  WARN: "yellow",
-  INFO: "green",
-  HTTP: "magenta",
-  DEBUG: "white",
+  error: "red",
+  warn: "yellow",
+  info: "green",
+  http: "magenta",
+  debug: "white",
 };
 
 winston.addColors(colors);
+
+const uppercaseLevel = format((info) => {
+  info.level = info.level.toUpperCase();
+  return info;
+});
 
 const stdoutLogger = winston.createLogger({
   level: level(),
   levels,
   transports: [
     new winston.transports.Console({
-      format: combine(timestamp(), json()),
+      format: combine(timestamp(), uppercaseLevel(), json()),
     }),
   ],
 });
