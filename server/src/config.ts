@@ -46,7 +46,7 @@ const azureAd = {
 };
 
 const cors = {
-  allowedHeaders: envVar('CORS_ALLOWED_HEADERS', false) ?? 'Nav-CallId',
+  allowedHeaders: envVar('CORS_ALLOWED_HEADERS', false) ?? 'callId',
   exposedHeaders: envVar('CORS_EXPOSED_HEADERS', false) ?? '',
   allowedMethods: envVar('CORS_ALLOWED_METHODS', false) ?? '',
 };

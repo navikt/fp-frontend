@@ -5,25 +5,25 @@ const { format } = winston;
 const { combine, json, timestamp } = format;
 
 const levels = {
-  error: 0,
-  warn: 1,
-  info: 2,
-  http: 3,
-  debug: 4,
+  ERROR: 0,
+  WARN: 1,
+  INFO: 2,
+  HTTP: 3,
+  DEBUG: 4,
 };
 
 const level = () => {
   const isDevelopment =
     !process.env.NODE_ENV || process.env.NODE_ENV === "development";
-  return isDevelopment ? "debug" : "info";
+  return isDevelopment ? "DEBUG" : "INFO";
 };
 
 const colors = {
-  error: "red",
-  warn: "yellow",
-  info: "green",
-  http: "magenta",
-  debug: "white",
+  ERROR: "red",
+  WARN: "yellow",
+  INFO: "green",
+  HTTP: "magenta",
+  DEBUG: "white",
 };
 
 winston.addColors(colors);
