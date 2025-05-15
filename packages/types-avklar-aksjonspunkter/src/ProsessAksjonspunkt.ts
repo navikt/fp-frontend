@@ -21,7 +21,6 @@ import type { VarselRevurderingAp } from './prosess/VarselRevurderingAp';
 import type { VurdereAnnenYtelseForVedtakAp } from './prosess/VurdereAnnenYtelseForVedtakAp';
 import type { VurdereDokumentForVedtakAp } from './prosess/VurdereDokumentForVedtakAp';
 import type { VurdereInntektsmeldingKlageForVedtakAp } from './prosess/VurdereInntektsmeldingKlageForVedtakAp';
-import type { VurdereYtelseSammeBarnAnnenForelderAp } from './prosess/VurdereYtelseSammeBarnAnnenForelderAp';
 import type { VurdereYtelseSammeBarnSokerAp } from './prosess/VurdereYtelseSammeBarnSokerAp';
 import type { VurderFeilutbetalingAp } from './prosess/VurderFeilutbetalingAp';
 import type { VurderInnsynAp } from './prosess/VurderInnsynAp';
@@ -36,7 +35,6 @@ export type ProsessAksjonspunkt =
   | AvklarOpptjeningsvilkaretAp
   | OmsorgsvilkarAp
   | VurdereYtelseSammeBarnSokerAp
-  | VurdereYtelseSammeBarnAnnenForelderAp
   | Foreldreansvarsvilkar1Ap
   | Foreldreansvarsvilkar2Ap
   | ForeslaVedtakAp

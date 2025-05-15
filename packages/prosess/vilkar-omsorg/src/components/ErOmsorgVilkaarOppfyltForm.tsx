@@ -13,11 +13,7 @@ import {
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
-import type {
-  OmsorgsvilkarAp,
-  VurdereYtelseSammeBarnAnnenForelderAp,
-  VurdereYtelseSammeBarnSokerAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { OmsorgsvilkarAp, VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
@@ -26,7 +22,7 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp>;
+type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp>;
 
 interface Props {
   status: string;
@@ -118,6 +114,5 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
       ap.definisjon,
       AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
       AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
     ),
   }));

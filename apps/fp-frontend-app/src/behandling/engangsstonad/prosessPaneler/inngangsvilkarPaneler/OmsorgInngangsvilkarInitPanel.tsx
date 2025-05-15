@@ -10,7 +10,6 @@ import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandar
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
   AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
 ];
 
 const VILKAR_KODER = [VilkarType.OMSORGSVILKARET];
@@ -37,8 +36,6 @@ export const OmsorgInngangsvilkarInitPanel = () => {
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET]: 'ErOmsorgVilkaarOppfyltForm.Paragraf',
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
-  [AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
-    'SRBVilkarForm.VurderAnnenForelderSammeBarn',
 } as Record<string, string>;
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>

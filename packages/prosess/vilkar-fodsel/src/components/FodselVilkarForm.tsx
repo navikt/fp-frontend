@@ -20,10 +20,7 @@ import {
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar } from '@navikt/fp-types';
-import type {
-  VurdereYtelseSammeBarnAnnenForelderAp,
-  VurdereYtelseSammeBarnSokerAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
@@ -57,7 +54,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     harÅpneAksjonspunkter,
     isReadOnly,
     alleMerknaderFraBeslutter,
-  } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp>();
+  } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
@@ -123,17 +120,10 @@ const buildInitialValues = (
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (
-  values: FormValues,
-  aksjonspunkter: Aksjonspunkt[],
-): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(
-    aksjonspunkter[0].definisjon,
-    AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
-  ),
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon, AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN),
 });
 
 const getFodselVilkarAvslagsarsaker = (
