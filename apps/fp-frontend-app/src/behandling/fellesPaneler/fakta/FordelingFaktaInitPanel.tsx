@@ -3,9 +3,12 @@ import { useIntl } from 'react-intl';
 
 import {
   FaktaFordelBeregningAvklaringsbehovCode,
+  type FordelBeregningsgrunnlagAP,
   FordelBeregningsgrunnlagFaktaIndex,
   type FtBeregningsgrunnlag,
   type FtVilkar,
+  type VurderNyttInntektsforholdAP,
+  type VurderRefusjonBeregningsgrunnlagAP,
 } from '@navikt/ft-fakta-fordel-beregningsgrunnlag';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
@@ -87,9 +90,12 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
-  //TODO (TOR) Må eksportera alle aksjonspunkt frå ft-repoet
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (aksjonspunkterSomSkalLagres: any) => {
+  (
+    aksjonspunkterSomSkalLagres:
+      | FordelBeregningsgrunnlagAP
+      | VurderRefusjonBeregningsgrunnlagAP
+      | VurderNyttInntektsforholdAP,
+  ) => {
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];

@@ -6,6 +6,7 @@ import {
   FaktaBeregningAvklaringsbehovCode,
   type FtBeregningsgrunnlag,
   type FtVilkar,
+  type SubmitBeregningType,
 } from '@navikt/ft-fakta-beregning';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
@@ -99,9 +100,7 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
-  //TODO (TOR) Må eksportera alle aksjonspunkt frå ft-repoet
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (aksjonspunkterSomSkalLagres: any) => {
+  (aksjonspunkterSomSkalLagres: SubmitBeregningType) => {
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
