@@ -10,7 +10,6 @@ export const totrinnskontrollaksjonspunktTextCodes = {
   [AksjonspunktKode.OMSORGSOVERTAKELSE]: 'ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger',
   [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET]:
     'ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd',
-  // 5032: 'TrinnsForm.Omsorgovertagelse.VurderTidligereUtbetaling',
 
   [AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING]: 'ToTrinnsForm.Fødsel.VurderSokersRelasjon',
   [AksjonspunktKode.TERMINBEKREFTELSE]: 'ToTrinnsForm.Fødsel.KontrollerOpplysningerTermin',
