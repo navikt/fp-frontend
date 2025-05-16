@@ -115,6 +115,9 @@ type StoryArgs = {
 const meta = {
   title: 'behandlingskoer/OppgaverTabell',
   component: OppgaverTabell,
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: [withIntl, withQueryClient],
   args: {
     valgtSakslisteId: 1,

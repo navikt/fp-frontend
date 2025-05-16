@@ -66,7 +66,7 @@ const ressursMap = {
   [BehandlingRel.FAMILIEHENDELSE]: familiehendelse,
   [BehandlingRel.SAVE_AKSJONSPUNKT]: new HttpResponse(null, {
     status: 202,
-    headers: { location: 'http://www.test.com/api/result' },
+    headers: { location: 'api/result' },
   }),
 };
 
@@ -89,15 +89,15 @@ const HANDLERS = [
   http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
   http.post(
     BehandlingUrl.BEHANDLING,
-    () => new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } }),
+    () => new HttpResponse(null, { status: 202, headers: { location: 'api/result' } }),
   ),
-  http.get('http://www.test.com/api/status', () =>
+  http.get('api/status', () =>
     HttpResponse.json({
       status: ApiPollingStatus.PENDING,
       pollIntervalMillis: 100000000,
     }),
   ),
-  http.get('http://www.test.com/api/result', () => HttpResponse.json(behandling)),
+  http.get('api/result', () => HttpResponse.json(behandling)),
   ...[
     ...initFetchFpsak.links,
     ...initFetchFpsak.sakLinks,
@@ -114,6 +114,9 @@ const HANDLERS = [
 const meta = {
   title: 'AppIndex',
   component: AppIndexWrapper,
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => {
     const fagsakId = '1';
     return (
