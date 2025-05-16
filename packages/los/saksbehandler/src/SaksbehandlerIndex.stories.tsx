@@ -214,6 +214,7 @@ const meta = {
   decorators: [withQueryClient],
   component: SaksbehandlerIndex,
   parameters: {
+    layout: 'fullscreen',
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),

@@ -32,6 +32,9 @@ const HANDLERS = [
 const meta = {
   title: 'los/avdelingsleder/AvdelingslederIndex',
   component: AvdelingslederIndexIntlWrapper,
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: [withRouter, withQueryClient],
   args: {
     setLosErIkkeTilgjengelig: action('button-click'),

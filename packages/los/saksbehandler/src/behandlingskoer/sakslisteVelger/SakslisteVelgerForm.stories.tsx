@@ -21,6 +21,7 @@ const meta = {
   component: SakslisteVelgerForm,
   decorators: [withIntl, withQueryClient],
   parameters: {
+    layout: 'fullscreen',
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),

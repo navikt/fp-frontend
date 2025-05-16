@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { alleKodeverk, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aktor, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -64,6 +64,15 @@ const NAV_ANSATT = {
   kanVeilede: true,
 };
 
+const HANDLERS = [
+  http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
+  http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+  http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+  http.get(getHref(FagsakRel.SEARCH_UTBETALINGSDATA_IS15), () => HttpResponse.json({})),
+  http.get(wrapUrl('fplos/api/saksbehandler/saksliste'), () => HttpResponse.json([])),
+  http.get(wrapUrl('fplos/api/reservasjon/tidligere-reserverte'), () => HttpResponse.json([])),
+];
+
 const meta = {
   title: 'app/Home',
   decorators: [withIntl, withQueryClient],
@@ -71,18 +80,14 @@ const meta = {
   parameters: {
     msw: {
       handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(getHref(FagsakRel.SEARCH_UTBETALINGSDATA_IS15), () => HttpResponse.json({})),
-        http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO)),
-        http.get(wrapUrl('fplos/api/kodeverk'), () => new HttpResponse(null, { status: 404 })),
-        http.get(wrapUrl('fplos/api/driftsmeldinger'), () => new HttpResponse(null, { status: 404 })),
+        ...HANDLERS,
+        http.get(wrapUrl('fplos/api/kodeverk'), () => HttpResponse.json(alleKodeverkLos)),
+        http.get(wrapUrl('fplos/api/driftsmeldinger'), () => HttpResponse.json([])),
       ],
     },
   },
   args: {
-    headerHeight: 100,
+    headerHeight: 0,
     navAnsatt: NAV_ANSATT,
   },
   render: (props, { parameters: { url } }) => {
@@ -100,6 +105,7 @@ const meta = {
     );
   },
 } satisfies Meta<typeof Home>;
+
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -113,6 +119,9 @@ export const VisLoadingFagsak: Story = {
 export const VisAktør: Story = {
   parameters: {
     url: '/aktoer/23243234234',
+    msw: {
+      handlers: [...HANDLERS, http.get(FagsakUrl.AKTOER_INFO, () => HttpResponse.json(AKTØR_INFO))],
+    },
   },
 };
 
@@ -125,6 +134,13 @@ export const VisSøk: Story = {
 export const VisLosIkkeTilgjengelig: Story = {
   parameters: {
     url: '/avdelingsleder',
+    msw: {
+      handlers: [
+        ...HANDLERS,
+        http.get(wrapUrl('fplos/api/kodeverk'), () => new HttpResponse(null, { status: 404 })),
+        http.get(wrapUrl('fplos/api/driftsmeldinger'), () => new HttpResponse(null, { status: 404 })),
+      ],
+    },
   },
 };
 
