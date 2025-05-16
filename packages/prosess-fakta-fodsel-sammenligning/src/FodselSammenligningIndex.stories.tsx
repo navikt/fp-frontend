@@ -5,9 +5,6 @@ import type { AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { FodselSammenligningIndex } from './FodselSammenligningIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const avklartBarn = [
   {
     fodselsdato: '2019-01-10',

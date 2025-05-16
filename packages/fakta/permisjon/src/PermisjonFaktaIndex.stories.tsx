@@ -8,10 +8,6 @@ import { type Aksjonspunkt, AksjonspunktÅrsak } from '@navikt/fp-types';
 
 import { PermisjonFaktaIndex } from './PermisjonFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const fellesInntektsmeldingFelter = {
   innsendingstidspunkt: '2021-12-06T00:00:00',
   kildeSystem: 'Altinn',

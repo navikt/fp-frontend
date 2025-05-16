@@ -6,10 +6,6 @@ import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const inntektsmeldingmal = {
   innsendingstidspunkt: '2024-08-08T00:00:00',
   kildeSystem: 'Altinn',

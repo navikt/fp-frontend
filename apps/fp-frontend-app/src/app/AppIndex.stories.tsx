@@ -110,6 +110,9 @@ const HANDLERS = [
 const meta = {
   title: 'AppIndex',
   component: AppIndexWrapper,
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => {
     const fagsakId = '1';
     return (

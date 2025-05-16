@@ -54,6 +54,9 @@ const meta = {
   title: 'app/AktørIndex',
   decorators: [withQueryClient],
   component: AktørIndex,
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

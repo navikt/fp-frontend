@@ -13,10 +13,6 @@ import {
 
 import { TilretteleggingFaktaIndex } from './TilretteleggingFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const TILRETTELEGGING_PERMISJON = {
   termindato: '2020-11-06',
   arbeidsforholdListe: [

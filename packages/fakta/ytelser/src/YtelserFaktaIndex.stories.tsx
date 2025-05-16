@@ -2,9 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { YtelserFaktaIndex } from './YtelserFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const defaultInntektArbeidYtelse = {
   inntektsmeldinger: [
     {
