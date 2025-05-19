@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import type { Oppgave } from '@navikt/fp-los-felles';
 
-import { doGetRequest, getOppgaverTilBehandling, reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
+import { doGetRequest, getOppgaverTilBehandling } from '../../data/fplosSaksbehandlerApi';
 
 //TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen. Alternativt gå spesifikt mot status og resultat-tjenestane
 
@@ -71,6 +71,7 @@ const hentOppgaver = async (valgtSakslisteId: number, getSakslisteId: () => numb
 
 export const useOppgavePolling = (valgtSakslisteId: number) => {
   const [oppgaverTilBehandling, setOppgaverTilBehandling] = useState<Oppgave[]>(EMPTY_ARRAY);
+  const [nyeBehandlinger, setNyeBehandlinger] = useState<Oppgave[]>(EMPTY_ARRAY);
 
   const idRef = useRef(valgtSakslisteId);
   const getSakslisteId = () => idRef.current;
@@ -85,8 +86,6 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
       hentOppgaver(valgtSakslisteId, getSakslisteId, values.oppgaveIder),
   });
 
-  const { data: reserverteOppgaver = EMPTY_ARRAY, refetch } = useQuery(reserverteOppgaverOptions());
-
   useEffect(() => {
     pollEtterOppgaver({ oppgaveIder: undefined });
   }, []);
@@ -94,8 +93,11 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
   useEffect(() => {
     if (isSuccess) {
       setOppgaverTilBehandling(tilBehandling);
+      if (oppgaverTilBehandling.length > 0) {
+        setNyeBehandlinger(tilBehandling.filter(o => !oppgaverTilBehandling.some(ob => ob.id === o.id)));
+      }
+
       pollEtterOppgaver({ oppgaveIder: tilBehandling.map(o => o.id).join(',') });
-      refetch();
     }
   }, [isSuccess]);
 
@@ -110,7 +112,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
 
   return {
     oppgaverTilBehandling,
-    reserverteOppgaver,
+    nyeBehandlinger,
     isMaxPollingAttemptsReached: tilBehandlingError?.message === MAX_POLLING_REACHED,
   };
 };

@@ -1,10 +1,8 @@
 {
   "OppgaverTabell.DineNesteSaker": "Neste i køen",
-  "OppgaverTabell.DineNesteSakerAntall": "{reservertAntall} reservert på deg, {totaltAntall} i køen totalt",
-  "OppgaverTabell.IngenOppgaver": "<i>Det er ingen behandlinger i køen</i>",
+  "OppgaverTabell.DineNesteSakerAntall": "{totaltAntall} totalt",
   "OppgaverTabell.Soker": "Søker",
   "OppgaverTabell.Sak": "Sak",
-  "OppgaverTabell.Behandlingstype": "Type",
   "OppgaverTabell.BehandlingOpprettet": "Opprettet",
   "OppgaverTabell.FristForBehandling": "Frist",
   "OppgaverTabell.OppgaveHandlinger": "Handlinger på oppgave",
@@ -15,6 +13,10 @@
   "OppgaverTabell.Notat": "Notat",
   "OppgaverTabell.ReservertTilTidspunkt": "Reservert til",
   "OppgaverTabell.Saksnr": "Kopier saksnummer",
+
+  "ReserverteOppgaverTabell.ReserverteOppgaver": "Reserverte",
+  "ReserverteOppgaverTabell.AntallOppgaver": "{reservertAntall}",
+  "ReserverteOppgaverTabell.IngenOppgaver": "<i>Det er ingen reserverte behandlinger</i>",
 
   "Person.Age": "{age} år",
   "Person.ImageText": "Personinformasjon",

@@ -11,6 +11,7 @@ import {
 } from '../data/localStorageHelper';
 import type { Saksliste } from '../typer/sakslisteTsType';
 import { OppgaverTabell } from './oppgaveTabell/OppgaverTabell';
+import { ReserverteOppgaverTabell } from './reserverteOppgaveTabell/ReserverteOppgaverTabell';
 import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
 
 interface Props {
@@ -47,9 +48,13 @@ export const SakslistePanel = ({
           reserverOppgave={reserverOppgave}
           antallOppgaver={antallOppgaver}
           valgtSakslisteId={valgtSakslisteId}
-          brukernavn={brukernavn}
         />
       )}
+      <ReserverteOppgaverTabell
+        reserverOppgave={reserverOppgave}
+        antallOppgaver={antallOppgaver}
+        brukernavn={brukernavn}
+      />
     </VStack>
   );
 };
