@@ -9,16 +9,3 @@
   margin-top: -10px;
   width: 30px;
 }
-
-.fadeIn {
-  animation: fadeInRow 1.5s ease;
-}
-
-@keyframes fadeInRow {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
