@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse } from 'msw';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -36,13 +36,15 @@ const withRequestPendingProvider: DecoratorFunction<ReactRenderer> = Story => {
 };
 
 const getHref = (rel: string) =>
-  wrapUrl(
-    notEmpty(
-      initFetchFpsak.links.find(link => link.rel === rel) ??
-        initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
-        initFetchFptilbake.links.find(link => link.rel === rel) ??
-        initFetchFptilbake.sakLinks.find(link => link.rel === rel),
-    ).href,
+  cleanUrl(
+    wrapUrl(
+      notEmpty(
+        initFetchFpsak.links.find(link => link.rel === rel) ??
+          initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
+          initFetchFptilbake.links.find(link => link.rel === rel) ??
+          initFetchFptilbake.sakLinks.find(link => link.rel === rel),
+      ).href,
+    ),
   );
 
 const BEHANDLING_TILLATTE_OPERASJONER = {
