@@ -3,14 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
 import { type ForhåndsvisHenleggParams, MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../data/behandlingApi';
 import { forhåndsvisTilbakekrevingHenleggelse, useFagsakApi, useFagsakBehandlingApi } from '../../data/fagsakApi';
-import { MenyKodeverk } from '../MenyKodeverk';
 
 interface Props {
   behandling: Behandling;
@@ -35,9 +34,10 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
       }),
   });
 
-  const menyKodeverk = new MenyKodeverk(behandling.type)
-    .medFpSakKodeverk(notEmpty(alleFpSakKodeverk))
-    .medFpTilbakeKodeverk(notEmpty(alleFpTilbakeKodeverk));
+  const behandlingresultatTyper =
+    behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
+      ? notEmpty(alleFpTilbakeKodeverk)[TilbakekrevingKodeverkType.BEHANDLING_RESULTAT_TYPE]
+      : notEmpty(alleFpSakKodeverk)[KodeverkType.BEHANDLING_RESULTAT_TYPE];
 
   const navigate = useNavigate();
   const gåTilSokeside = () => navigate('/');
@@ -50,7 +50,7 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
       forhandsvisHenleggBehandling={forhåndsvisHenleggBehandling}
       henleggBehandling={henleggBehandling}
       ytelseType={fagsakYtelseType}
-      behandlingResultatTyper={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.BEHANDLING_RESULTAT_TYPE)}
+      behandlingResultatTyper={behandlingresultatTyper}
       lukkModal={lukkModal}
       gaaTilSokeside={gåTilSokeside}
     />

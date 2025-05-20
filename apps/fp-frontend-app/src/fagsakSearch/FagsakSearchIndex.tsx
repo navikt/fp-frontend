@@ -44,9 +44,11 @@ export const FagsakSearchIndex = () => {
   });
 
   const searchResultAccessDenied =
-    fagsakError && fagsakError instanceof HTTPError && fagsakError.response.status === 403
-      ? //@ts-expect-error response.data når ein refaktorerar feilhåndteringa
-        fagsakError.response?.data
+    fagsakError &&
+    fagsakError instanceof HTTPError &&
+    fagsakError.response.status === 403 &&
+    'data' in fagsakError.response
+      ? (fagsakError.response.data as { feilmelding: string })
       : undefined;
 
   return (
