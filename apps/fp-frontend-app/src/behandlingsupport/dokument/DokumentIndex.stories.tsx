@@ -2,13 +2,13 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse } from 'msw';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak } from '../../../.storybook/testdata/initFetchFpsak';
+import { initFetchFpsak } from '../../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, wrapUrl } from '../../data/fagsakApi';
 import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
 import { DokumentIndex } from './DokumentIndex';
@@ -17,7 +17,8 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const getHref = (rel: string) => wrapUrl(notEmpty(initFetchFpsak.sakLinks.find(link => link.rel === rel)).href);
+const getHref = (rel: string) =>
+  cleanUrl(wrapUrl(notEmpty(initFetchFpsak.sakLinks.find(link => link.rel === rel)).href));
 
 const meta = {
   title: 'fagsak/DokumentIndex',
