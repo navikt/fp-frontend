@@ -12,4 +12,6 @@ export enum TilbakekrevingKodeverkType {
   VURDER_AARSAK = 'VurderÅrsak',
   VERGE_TYPE = 'VergeType',
   HISTORIKK_AKTOER = 'HistorikkAktør',
+  BEHANDLING_RESULTAT_TYPE = 'BehandlingResultatType',
+  BEHANDLING_AARSAK = 'BehandlingÅrsakType',
 }

@@ -40,9 +40,8 @@ export class ErrorBoundary extends Component<OwnProps, State> {
 
     if (!isDevelopment) {
       withScope(scope => {
-        Object.keys(info).forEach(key => {
-          // @ts-expect-error Fiks
-          scope.setExtra(key, info[key]);
+        Object.entries(info).forEach(entry => {
+          scope.setExtra(entry[0], entry[1]);
           captureException(error);
         });
       });

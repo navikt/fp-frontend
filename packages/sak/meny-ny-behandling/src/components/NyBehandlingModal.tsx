@@ -59,18 +59,18 @@ const TilbakekrevingRevurderingArsaker = [
 
 const getBehandlingAarsaker = (
   ytelseType: string,
-  alleRevurderingArsaker: KodeverkMedNavn[],
-  alleTilbakekrevingRevurderingArsaker: KodeverkMedNavn[],
   valgtBehandlingType?: string,
+  alleRevurderingArsaker?: KodeverkMedNavn[],
+  alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavn[],
 ): KodeverkMedNavn[] => {
-  if (valgtBehandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
+  if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
     return TilbakekrevingRevurderingArsaker.flatMap(ar => {
       const arsak = alleTilbakekrevingRevurderingArsaker.find(el => el.kode === ar);
       return arsak ? [arsak] : [];
     });
   }
 
-  if (valgtBehandlingType === BehandlingType.REVURDERING) {
+  if (alleRevurderingArsaker && valgtBehandlingType === BehandlingType.REVURDERING) {
     const isForeldrepenger = ytelseType === FagsakYtelseType.FORELDREPENGER;
     const isSvangerskap = ytelseType === FagsakYtelseType.SVANGERSKAPSPENGER;
     let manuelleRevurderingsArsaker = isForeldrepenger ? manuelleRevurderingsArsakerFP : manuelleRevurderingsArsakerES;
@@ -128,8 +128,8 @@ interface Props {
   ) => void;
   behandlingOppretting: BehandlingOppretting[];
   behandlingstyper: KodeverkMedNavn[];
-  tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
-  revurderingArsaker: KodeverkMedNavn[];
+  tilbakekrevingRevurderingArsaker?: KodeverkMedNavn[];
+  revurderingArsaker?: KodeverkMedNavn[];
   kanTilbakekrevingOpprettes: {
     kanBehandlingOpprettes: boolean;
     kanRevurderingOpprettes: boolean;
@@ -175,9 +175,9 @@ export const NyBehandlingModal = ({
   );
   const behandlingArsakTyper = getBehandlingAarsaker(
     ytelseType,
+    valgtBehandlingTypeKode,
     revurderingArsaker,
     tilbakekrevingRevurderingArsaker,
-    valgtBehandlingTypeKode,
   );
 
   return (
