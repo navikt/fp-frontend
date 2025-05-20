@@ -70,15 +70,11 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
     api.fptilbake.kanTilbakekrevingRevurderingOpprettesOptions(isRevurderingOpprettedAktivert, behandlingUuid),
   );
 
-  const tilbakekrevingRevurderingsårsaker =
-    behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING
-      ? notEmpty(alleFpTilbakeKodeverk)[TilbakekrevingKodeverkType.BEHANDLING_AARSAK]
-      : undefined;
+  const tilbakekrevingRevurderingsårsaker = alleFpTilbakeKodeverk
+    ? alleFpTilbakeKodeverk[TilbakekrevingKodeverkType.BEHANDLING_AARSAK]
+    : undefined;
 
-  const revurderingsårsaker =
-    behandling?.type === BehandlingType.REVURDERING
-      ? notEmpty(alleFpSakKodeverk)[KodeverkType.BEHANDLING_AARSAK]
-      : undefined;
+  const revurderingsårsaker = alleFpSakKodeverk ? alleFpSakKodeverk[KodeverkType.BEHANDLING_AARSAK] : undefined;
 
   const behandlingstyper = notEmpty(alleFpSakKodeverk)[KodeverkType.BEHANDLING_TYPE].filter(bt =>
     BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES.some(bto => bto === bt.kode),
