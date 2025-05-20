@@ -229,16 +229,16 @@ const meta = {
         http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
           const doPolling = t.request.url.includes('oppgaveIder');
           return doPolling
-            ? new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/status' } })
-            : new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } });
+            ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
+            : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
         }),
-        http.get('http://www.test.com/api/status', () =>
+        http.get('https://www.test.com/api/status', () =>
           HttpResponse.json({
             status: ApiPollingStatus.PENDING,
             pollIntervalMillis: 100000000,
           }),
         ),
-        http.get('http://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
+        http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
         http.get(LosUrl.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER, () => HttpResponse.json(NYE_OG_FERDIGSTILTE_OPPGAVER)),
