@@ -1,13 +1,12 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
 import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';
 import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../data/behandlingApi';
 import { useFagsakApi } from '../../data/fagsakApi';
-import { MenyKodeverk } from '../MenyKodeverk';
 
 interface Props {
   behandling: Behandling;
@@ -33,14 +32,15 @@ export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModa
     onSuccess: () => hentOgSettBehandling(),
   });
 
-  const menyKodeverk = new MenyKodeverk(behandling.type)
-    .medFpSakKodeverk(notEmpty(alleFpSakKodeverk))
-    .medFpTilbakeKodeverk(notEmpty(alleFpTilbakeKodeverk));
+  const venteårsaker =
+    behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
+      ? notEmpty(alleFpTilbakeKodeverk)[TilbakekrevingKodeverkType.VENT_AARSAK]
+      : notEmpty(alleFpSakKodeverk)[KodeverkType.VENT_AARSAK];
 
   return (
     <MenySettPaVentIndex
       settBehandlingPaVent={settBehandlingPåVent}
-      ventearsaker={menyKodeverk.getKodeverkForValgtBehandling(KodeverkType.VENT_AARSAK)}
+      ventearsaker={venteårsaker}
       lukkModal={lukkModal}
       erTilbakekreving={
         behandling.type === BehandlingType.TILBAKEKREVING ||

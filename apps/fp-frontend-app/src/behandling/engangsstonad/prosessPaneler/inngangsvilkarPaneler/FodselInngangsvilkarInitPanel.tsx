@@ -11,10 +11,7 @@ import {
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
-];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN];
 
 const VILKAR_KODER = [VilkarType.FODSELSVILKARET_MOR];
 
@@ -58,8 +55,6 @@ export const FodselInngangsvilkarInitPanel = () => {
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
-  [AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN]:
-    'SRBVilkarForm.VurderAnnenForelderSammeBarn',
 } as Record<string, string>;
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>

@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -19,7 +19,7 @@ import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
-const getHref = (rel: string) => wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href);
+const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const PERSON: Person = {
   navn: 'Espen Utvikler',

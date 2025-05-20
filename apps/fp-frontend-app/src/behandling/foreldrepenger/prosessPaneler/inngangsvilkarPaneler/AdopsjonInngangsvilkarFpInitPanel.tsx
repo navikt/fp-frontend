@@ -10,10 +10,7 @@ import {
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
-];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN];
 
 const VILKAR_KODER = [VilkarType.ADOPSJONSVILKARET_FORELDREPENGER];
 

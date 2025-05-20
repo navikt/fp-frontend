@@ -6,10 +6,7 @@ import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-  AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
-];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN];
 
 const VILKAR_KODER = [VilkarType.OMSORGSVILKARET];
 

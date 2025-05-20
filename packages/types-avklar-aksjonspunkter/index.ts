@@ -37,7 +37,6 @@ export type { OverstyringSokersOpplysingspliktAp } from './src/prosess/Overstyri
 export type { AvklarOpptjeningsvilkaretAp } from './src/prosess/AvklarOpptjeningsvilkaretAp';
 export type { OmsorgsvilkarAp } from './src/prosess/OmsorgsvilkarAp';
 export type { VurdereYtelseSammeBarnSokerAp } from './src/prosess/VurdereYtelseSammeBarnSokerAp';
-export type { VurdereYtelseSammeBarnAnnenForelderAp } from './src/prosess/VurdereYtelseSammeBarnAnnenForelderAp';
 export type { Foreldreansvarsvilkar1Ap } from './src/prosess/Foreldreansvarsvilkar1Ap';
 export type { Foreldreansvarsvilkar2Ap } from './src/prosess/Foreldreansvarsvilkar2Ap';
 export type { ForeslaVedtakAp } from './src/prosess/ForeslaVedtakAp';

@@ -16,7 +16,6 @@ import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 import type {
   Foreldreansvarsvilkar1Ap,
   Foreldreansvarsvilkar2Ap,
-  VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -27,12 +26,7 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-type AksjonspunktData = Array<
-  | Foreldreansvarsvilkar1Ap
-  | Foreldreansvarsvilkar2Ap
-  | VurdereYtelseSammeBarnSokerAp
-  | VurdereYtelseSammeBarnAnnenForelderAp
->;
+type AksjonspunktData = Array<Foreldreansvarsvilkar1Ap | Foreldreansvarsvilkar2Ap | VurdereYtelseSammeBarnSokerAp>;
 
 interface Props {
   isForeldreansvar2Ledd: boolean;
@@ -140,6 +134,5 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
       AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
       AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
       AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
     ),
   }));
