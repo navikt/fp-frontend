@@ -5,12 +5,12 @@ import { BodyShort, HStack, Label, Pagination, type SortState, Table, VStack } f
 import { useQuery } from '@tanstack/react-query';
 
 import { type Oppgave } from '@navikt/fp-los-felles';
+import { notEmpty } from '@navikt/fp-utils';
 
-import { notEmpty } from '../../../../../utils/src/notEmpty';
-import { reserverteOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
+import { reserverteOppgaverOptions } from '../../../data/fplosSaksbehandlerApi';
 import { ReservertOppgaveRad } from './ReservertOppgaveRad';
 
-import styles from './reserverteOppgaverTabell.module.css';
+import styles from './reservertOppgaveTabell.module.css';
 
 const EMPTY_ARRAY = new Array<Oppgave>();
 
@@ -22,7 +22,7 @@ interface Props {
   brukernavn: string;
 }
 
-export const ReserverteOppgaverTabell = ({ reserverOppgave, brukernavn }: Props) => {
+export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) => {
   const [sidetall, setSidetall] = useState(1);
   const raderPerSide = 15;
 
@@ -60,18 +60,18 @@ export const ReserverteOppgaverTabell = ({ reserverOppgave, brukernavn }: Props)
       <VStack gap="2" className={styles.headerPadding}>
         <HStack gap="2">
           <Label size="small">
-            <FormattedMessage id="ReserverteOppgaverTabell.ReserverteOppgaver" />
+            <FormattedMessage id="ReservertOppgaveTabell.ReserverteOppgaver" />
           </Label>
           <BodyShort size="small" className={styles.grayout}>
             <FormattedMessage
-              id="ReserverteOppgaverTabell.AntallOppgaver"
+              id="ReservertOppgaveTabell.AntallOppgaver"
               values={{ reservertAntall: reserverteOppgaver.length }}
             />
           </BodyShort>
         </HStack>
         {reserverteOppgaver.length === 0 && (
           <BodyShort size="small">
-            <FormattedMessage id="ReserverteOppgaverTabell.IngenOppgaver" values={{ i: chunks => <i>{chunks}</i> }} />
+            <FormattedMessage id="ReservertOppgaveTabell.IngenOppgaver" values={{ i: chunks => <i>{chunks}</i> }} />
           </BodyShort>
         )}
       </VStack>
@@ -85,20 +85,20 @@ export const ReserverteOppgaverTabell = ({ reserverOppgave, brukernavn }: Props)
             <Table.Header>
               <Table.Row>
                 <Table.ColumnHeader sortKey="navn" sortable>
-                  <FormattedMessage id="OppgaverTabell.Soker" />
+                  <FormattedMessage id="ReservertOppgaveTabell.Soker" />
                 </Table.ColumnHeader>
                 <Table.ColumnHeader sortKey="saksnummer" sortable>
-                  <FormattedMessage id="OppgaverTabell.Sak" />
+                  <FormattedMessage id="ReservertOppgaveTabell.Sak" />
                 </Table.ColumnHeader>
                 <Table.ColumnHeader />
                 <Table.ColumnHeader sortKey="opprettetTidspunkt" sortable>
-                  <FormattedMessage id="OppgaverTabell.BehandlingOpprettet" />
+                  <FormattedMessage id="ReservertOppgaveTabell.BehandlingOpprettet" />
                 </Table.ColumnHeader>
                 <Table.ColumnHeader sortKey="behandlingsfrist" sortable>
-                  <FormattedMessage id="OppgaverTabell.FristForBehandling" />
+                  <FormattedMessage id="ReservertOppgaveTabell.FristForBehandling" />
                 </Table.ColumnHeader>
                 <Table.ColumnHeader sortKey="reservertTilTidspunkt" sortable>
-                  <FormattedMessage id="OppgaverTabell.ReservertTilTidspunkt" />
+                  <FormattedMessage id="ReservertOppgaveTabell.ReservertTilTidspunkt" />
                 </Table.ColumnHeader>
                 <Table.ColumnHeader />
                 <Table.ColumnHeader />

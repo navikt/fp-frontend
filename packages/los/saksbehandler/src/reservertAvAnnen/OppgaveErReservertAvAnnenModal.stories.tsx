@@ -2,6 +2,7 @@ import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { Oppgave } from '@navikt/fp-los-felles';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveErReservertAvAnnenModal } from './OppgaveErReservertAvAnnenModal';
@@ -32,8 +33,8 @@ const oppgaveForResevertAvAnnenModal = {
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   erTilSaksbehandling: true,
   behandlingId: '1',
-  href: '',
-};
+  andreKriterier: [],
+} satisfies Oppgave;
 
 const meta = {
   title: 'OppgaveErReservertAvAnnenModal',

@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import type { Oppgave } from '@navikt/fp-los-felles';
 
-import { doGetRequest, getOppgaverTilBehandling } from '../../data/fplosSaksbehandlerApi';
+import { doGetRequest, getOppgaverTilBehandling } from '../../../data/fplosSaksbehandlerApi';
 
 //TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen. Alternativt gå spesifikt mot status og resultat-tjenestane
 

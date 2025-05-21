@@ -80,6 +80,7 @@ export const Default: Story = {
         fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
         erTilSaksbehandling: true,
         behandlingId: '12344',
+        andreKriterier: [],
       },
       {
         id: 2,
@@ -97,6 +98,7 @@ export const Default: Story = {
         fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
         erTilSaksbehandling: true,
         behandlingId: '12344',
+        andreKriterier: [],
       },
     ],
   },

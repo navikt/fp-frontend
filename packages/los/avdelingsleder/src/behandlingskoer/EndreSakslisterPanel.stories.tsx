@@ -33,7 +33,7 @@ const SAKSLISTER = [
         inkluder: true,
       },
       {
-        andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+        andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
         inkluder: false,
       },
     ],

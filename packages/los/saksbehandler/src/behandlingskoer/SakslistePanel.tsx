@@ -10,8 +10,8 @@ import {
   setValueInLocalStorage,
 } from '../data/localStorageHelper';
 import type { Saksliste } from '../typer/sakslisteTsType';
-import { OppgaverTabell } from './oppgaveTabell/OppgaverTabell';
-import { ReserverteOppgaverTabell } from './reserverteOppgaveTabell/ReserverteOppgaverTabell';
+import { LedigOppgaveTabell } from './oppgaveTabeller/ledigOppgaveTabell/LedigOppgaveTabell';
+import { ReservertOppgaveTabell } from './oppgaveTabeller/reservertOppgaveTabell/ReservertOppgaveTabell';
 import { SakslisteVelgerForm } from './sakslisteVelger/SakslisteVelgerForm';
 
 interface Props {
@@ -44,13 +44,13 @@ export const SakslistePanel = ({
         removeValueFromLocalStorage={removeValueFromLocalStorage}
       />
       {valgtSakslisteId && (
-        <OppgaverTabell
+        <LedigOppgaveTabell
           reserverOppgave={reserverOppgave}
           antallOppgaver={antallOppgaver}
           valgtSakslisteId={valgtSakslisteId}
         />
       )}
-      <ReserverteOppgaverTabell
+      <ReservertOppgaveTabell
         reserverOppgave={reserverOppgave}
         antallOppgaver={antallOppgaver}
         brukernavn={brukernavn}
