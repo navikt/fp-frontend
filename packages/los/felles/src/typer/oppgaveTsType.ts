@@ -1,3 +1,7 @@
+import type { BehandlingType } from '@navikt/fp-kodeverk';
+
+import type { AndreKriterierType } from '../andreKriterierType';
+
 export type OppgaveStatus = Readonly<{
   erReservert: boolean;
   reservertTilTidspunkt?: string;
@@ -19,11 +23,12 @@ export type Oppgave = Readonly<{
   personnummer: string;
   navn: string;
   system: string;
-  behandlingstype: string;
+  behandlingstype: BehandlingType;
   behandlingStatus: string;
   opprettetTidspunkt: string;
   behandlingsfrist: string;
   fagsakYtelseType: string;
   erTilSaksbehandling: boolean;
   behandlingId: string;
+  andreKriterier: AndreKriterierType[];
 }>;

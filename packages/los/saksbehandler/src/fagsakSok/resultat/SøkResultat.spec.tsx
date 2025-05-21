@@ -6,7 +6,7 @@ import * as stories from './SøkResultat.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<SøkResultat>', () => {
+describe('SøkResultat', () => {
   it('skal vise en tabell med en rad og tilhørende kolonnedata', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

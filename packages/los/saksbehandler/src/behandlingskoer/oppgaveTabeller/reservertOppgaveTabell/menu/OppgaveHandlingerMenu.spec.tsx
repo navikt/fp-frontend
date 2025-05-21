@@ -7,7 +7,7 @@ import * as stories from './OppgaveHandlingerMenu.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<OppgaveHandlingerMenu>', () => {
+describe('OppgaveHandlingerMenu', () => {
   it('skal vise fire meny-knapper for reserverte oppgaver', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

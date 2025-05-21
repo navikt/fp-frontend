@@ -4,10 +4,10 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
-import { AndreKriterierType } from '../../kodeverk/andreKriterierType';
 import { KøSortering } from '../../kodeverk/KoSortering';
 import { UtvalgskriterierForSakslisteForm } from './UtvalgskriterierForSakslisteForm';
 
@@ -70,7 +70,7 @@ export const MedGittNavn: Story = {
           inkluder: true,
         },
         {
-          andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+          andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
           inkluder: false,
         },
       ],
@@ -100,7 +100,7 @@ export const MedDefaultNavn: Story = {
           inkluder: true,
         },
         {
-          andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+          andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
           inkluder: false,
         },
       ],

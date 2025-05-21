@@ -5,7 +5,7 @@ import * as stories from './FagsakSøkIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<FagsakSøkIndex>', () => {
+describe('FagsakSøkIndex', () => {
   it('skal rendre komponent korrekt', async () => {
     render(<Default />);
     expect(await screen.findByText('Søk')).toBeInTheDocument();

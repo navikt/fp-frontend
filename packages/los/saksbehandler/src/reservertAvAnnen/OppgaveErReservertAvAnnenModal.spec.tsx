@@ -3,6 +3,7 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { Oppgave } from '@navikt/fp-los-felles';
 
 import * as stories from './OppgaveErReservertAvAnnenModal.stories';
 
@@ -30,10 +31,10 @@ const oppgaveForResevertAvAnnenModal = {
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   erTilSaksbehandling: true,
   behandlingId: '1',
-  href: '',
-};
+  andreKriterier: [],
+} satisfies Oppgave;
 
-describe('<OppgaveErReservertAvAnnenModal>', () => {
+describe('OppgaveErReservertAvAnnenModal', () => {
   it('skal modal og lukke den ved trykk på Ok-knappen', async () => {
     const lukkErReservertModalOgOpneOppgave = vi.fn();
     render(<Default lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave} />);

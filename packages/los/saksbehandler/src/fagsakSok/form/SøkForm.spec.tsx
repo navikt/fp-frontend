@@ -6,7 +6,7 @@ import * as stories from './SøkForm.stories';
 
 const { Søkeskjema } = composeStories(stories);
 
-describe('<SøkForm>', () => {
+describe('SøkForm', () => {
   it('skal skrive inn ugyldig fødselsnummer og vise feilmelding', async () => {
     const onSubmitMock = vi.fn();
     render(<Søkeskjema onSubmit={onSubmitMock} />);

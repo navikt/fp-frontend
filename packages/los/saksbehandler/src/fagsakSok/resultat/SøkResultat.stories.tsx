@@ -75,6 +75,7 @@ export const Default: Story = {
         fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
         erTilSaksbehandling: true,
         behandlingId: '12344',
+        andreKriterier: [],
       },
     ],
   },

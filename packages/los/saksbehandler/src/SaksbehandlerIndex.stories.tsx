@@ -6,12 +6,11 @@ import { http, HttpResponse } from 'msw';
 
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { type Oppgave } from '@navikt/fp-los-felles';
+import { AndreKriterierType, type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
-import { AndreKriterierType } from './kodeverk/andreKriterierType';
 import { KoSortering } from './kodeverk/KoSortering';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
 import type { NyeOgFerdigstilteOppgaver } from './typer/nyeOgFerdigstilteOppgaverTsType';
@@ -36,7 +35,7 @@ const SAKSLISTER = [
         inkluder: true,
       },
       {
-        andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+        andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
         inkluder: false,
       },
     ],
@@ -60,6 +59,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12',
+    andreKriterier: [],
   },
   {
     id: 4,
@@ -77,6 +77,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12',
+    andreKriterier: [],
   },
   {
     id: 3,
@@ -94,6 +95,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '34',
+    andreKriterier: [],
   },
 ] satisfies Oppgave[];
 
@@ -121,6 +123,7 @@ const RESERVERTE_OPPGAVER = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '2',
+    andreKriterier: [],
   },
 ] satisfies Oppgave[];
 

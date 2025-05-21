@@ -6,7 +6,7 @@ import * as stories from './SistBehandledeSaker.stories';
 
 const { Default, IngenBehandlinger } = composeStories(stories);
 
-describe('<SistBehandledeSaker>', () => {
+describe('SistBehandledeSaker', () => {
   it('skal vise sist behandlede saker', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

@@ -1,0 +1,82 @@
+import { type IntlShape, useIntl } from 'react-intl';
+
+import { HStack, Tag } from '@navikt/ds-react';
+
+import { BehandlingType, KodeverkLosType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, type Oppgave } from '@navikt/fp-los-felles';
+
+import { useLosKodeverk } from '../../data/useLosKodeverk';
+
+type Props = {
+  oppgave: Oppgave;
+};
+
+export const OppgaveLabels = ({ oppgave }: Props) => {
+  const intl = useIntl();
+
+  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const andreKriterier = useLosKodeverk(KodeverkLosType.ANDRE_KRITERIER);
+
+  return (
+    <HStack gap="2">
+      <Tag
+        size="small"
+        variant="success"
+        title={fagsakYtelseTyper.find(b => b.kode === oppgave.fagsakYtelseType)?.navn}
+      >
+        {oppgave.fagsakYtelseType}
+      </Tag>
+      <Tag
+        size="small"
+        variant="warning-filled"
+        title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}
+      >
+        {hentBehandlingstypeKortnavn(intl)[oppgave.behandlingstype]}
+      </Tag>
+      {oppgave.andreKriterier.filter(erRevurderingsårsak).map(kode => (
+        <Tag
+          key={kode}
+          size="small"
+          variant={MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE[kode]}
+          title={intl.formatMessage({ id: 'OppgaveLabels.BehandlingÅrsak' })}
+        >
+          {andreKriterier.find(b => b.kode === kode)?.navn}
+        </Tag>
+      ))}
+    </HStack>
+  );
+};
+
+// Dette bør ein  endra på om me bestemmer oss for å ikkje visa alle som labels
+export const MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE = {
+  [AndreKriterierType.REVURDERING_INNTEKTSMELDING]: 'alt1',
+  [AndreKriterierType.KLAGE_PÅ_TILBAKEBETALING]: 'alt1',
+  [AndreKriterierType.BERØRT_BEHANDLING]: 'alt1',
+  [AndreKriterierType.PLEIEPENGER]: 'alt1',
+  [AndreKriterierType.UTSATT_START]: 'alt1',
+  [AndreKriterierType.ENDRINGSSOKNAD]: 'alt2',
+  [AndreKriterierType.PAPIRSOKNAD]: 'alt2',
+  [AndreKriterierType.TIL_BESLUTTER]: 'alt2',
+  [AndreKriterierType.UTBETALING_TIL_BRUKER]: 'alt2',
+} satisfies Record<AndreKriterierType, React.ComponentProps<typeof Tag>['variant']>;
+
+const BEHANDLINGSÅRSAKER = [
+  AndreKriterierType.REVURDERING_INNTEKTSMELDING,
+  AndreKriterierType.KLAGE_PÅ_TILBAKEBETALING,
+  AndreKriterierType.BERØRT_BEHANDLING,
+  AndreKriterierType.PLEIEPENGER,
+  AndreKriterierType.UTSATT_START,
+];
+
+export const erRevurderingsårsak = (kode: AndreKriterierType) => BEHANDLINGSÅRSAKER.includes(kode);
+
+export const hentBehandlingstypeKortnavn = (intl: IntlShape) => ({
+  [BehandlingType.ANKE]: intl.formatMessage({ id: 'OppgaveLabels.Anke' }),
+  [BehandlingType.DOKUMENTINNSYN]: intl.formatMessage({ id: 'OppgaveLabels.Innsyn' }),
+  [BehandlingType.FORSTEGANGSSOKNAD]: intl.formatMessage({ id: 'OppgaveLabels.Forstegang' }),
+  [BehandlingType.KLAGE]: intl.formatMessage({ id: 'OppgaveLabels.Klage' }),
+  [BehandlingType.REVURDERING]: intl.formatMessage({ id: 'OppgaveLabels.Revurdering' }),
+  [BehandlingType.TILBAKEKREVING]: intl.formatMessage({ id: 'OppgaveLabels.Tilbake' }),
+  [BehandlingType.TILBAKEKREVING_REVURDERING]: intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }),
+});

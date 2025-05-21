@@ -2,14 +2,13 @@ import React, { type ReactNode, useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ChatElipsisIcon, CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tag, Tooltip, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, VStack } from '@navikt/ds-react';
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import { KodeverkLosType } from '@navikt/fp-kodeverk';
 import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
-import { useLosKodeverk } from '../../data/useLosKodeverk';
+import { OppgaveLabels } from '../OppgaveLabels';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 
 import styles from './reservertOppgaveRad.module.css';
@@ -22,8 +21,6 @@ interface Props {
 
 export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Props) => {
   const intl = useIntl();
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
 
   const [enableTableEvents, setEnableTableEvents] = useState(true);
 
@@ -56,7 +53,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
       <Table.DataCell>
         <HStack align="center" ref={refCopyButton} wrap={false}>
           <BodyShort>{oppgave.saksnummer}</BodyShort>
-          <Tooltip content={intl.formatMessage({ id: 'OppgaverTabell.Saksnr' })}>
+          <Tooltip content={intl.formatMessage({ id: 'ReservertOppgaveRad.Saksnr' })}>
             <CopyButton
               activeIcon={<CheckmarkIcon className={styles.image} aria-hidden />}
               copyText={oppgave.saksnummer}
@@ -66,22 +63,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
         </HStack>
       </Table.DataCell>
       <Table.DataCell>
-        <HStack gap="2">
-          <Tag
-            variant="success"
-            size="small"
-            title={fagsakYtelseTyper.find(b => b.kode === oppgave.fagsakYtelseType)?.navn}
-          >
-            {oppgave.fagsakYtelseType}
-          </Tag>
-          <Tag
-            variant="warning-filled"
-            size="small"
-            title={behandlingTyper.find(b => b.kode === oppgave.behandlingstype)?.navn}
-          >
-            {oppgave.behandlingstype}
-          </Tag>
-        </HStack>
+        <OppgaveLabels oppgave={oppgave} />
       </Table.DataCell>
       <Table.DataCell>
         {oppgave.opprettetTidspunkt && <DateLabel dateString={oppgave.opprettetTidspunkt} />}
@@ -126,11 +108,11 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: OppgaveStatus, brukernavn: 
       {!erLagetAvInnloggetBruker && (
         <VStack gap="1">
           <Label size="small">
-            <FormattedMessage id="OppgaverTabell.OverfortReservasjonHeader" />
+            <FormattedMessage id="ReservertOppgaveRad.OverfortReservasjonHeader" />
           </Label>
           <BodyShort size="small">
             <FormattedMessage
-              id="OppgaverTabell.OverfortReservasjonBody"
+              id="ReservertOppgaveRad.OverfortReservasjonBody"
               values={{
                 dato: datoOgTid?.date,
                 tid: datoOgTid?.time,
@@ -144,9 +126,9 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: OppgaveStatus, brukernavn: 
       <VStack gap="1">
         <Label size="small">
           {erLagetAvInnloggetBruker ? (
-            <FormattedMessage id="OppgaverTabell.Notat" />
+            <FormattedMessage id="ReservertOppgaveRad.Notat" />
           ) : (
-            <FormattedMessage id="OppgaverTabell.OverfortReservasjonBegrunnelse" />
+            <FormattedMessage id="ReservertOppgaveRad.OverfortReservasjonBegrunnelse" />
           )}
         </Label>
         <BodyShort size="small">{flyttetReservasjon.begrunnelse}</BodyShort>
