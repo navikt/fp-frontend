@@ -7,6 +7,7 @@ import { BodyShort, HStack } from '@navikt/ds-react';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
+import type { FaktaOmBeregningTilfelle, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
@@ -18,7 +19,7 @@ const VurderPåNyttPunkter = ({
   vurderArsaker,
 }: {
   vurderPaNyttArsaker: string[] | undefined;
-  vurderArsaker: KodeverkMedNavn[];
+  vurderArsaker: KodeverkMedNavn<VurderÅrsak>[];
 }) => (
   <div className={styles.approvalItem}>
     {vurderPaNyttArsaker?.map(item => (
@@ -36,8 +37,8 @@ interface Props {
   erForeldrepengerFagsak: boolean;
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn[];
-  vurderArsaker: KodeverkMedNavn[];
-  faktaOmBeregningTilfeller: KodeverkMedNavn[];
+  vurderArsaker: KodeverkMedNavn<VurderÅrsak>[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn<FaktaOmBeregningTilfelle>[];
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
 }
 

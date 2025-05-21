@@ -1,9 +1,42 @@
-import type { KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import {
+  ArbeidType,
+  Avslagsarsak,
+  FagsakMarkeringKode,
+  FagsakStatus,
+  FagsakYtelseType,
+  FaktaOmBeregningTilfelle,
+  FarSøkerType,
+  NaringsvirksomhetType,
+  OverforingArsak,
+  PeriodeResultatType,
+  RevurderingVarslingÅrsak,
+  VenteArsakType,
+  VilkarType,
+  VurderÅrsak,
+} from '@navikt/fp-kodeverk';
 
 import type { KodeverkMedNavn } from './kodeverkMedNavnTsType';
+import type { KodeverkType } from './kodeverkType';
 
-type AvslagsårsakKodeverk = Record<VilkarType, KodeverkMedNavn[]>;
-type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn & {
+//Mapping mellom KodeverkType og enums/union-types med verdier
+type KodeverkEnumMap = {
+  ArbeidType: ArbeidType;
+  Avslagsårsak: Avslagsarsak;
+  FagsakStatus: FagsakStatus;
+  FagsakYtelseType: FagsakYtelseType;
+  FagsakMarkering: FagsakMarkeringKode;
+  FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
+  FarSøkerType: FarSøkerType;
+  OverføringÅrsak: OverforingArsak;
+  RevurderingVarslingÅrsak: RevurderingVarslingÅrsak;
+  SkjermlenkeType: 'test';
+  Venteårsak: VenteArsakType;
+  VirksomhetType: NaringsvirksomhetType;
+  VurderÅrsak: VurderÅrsak;
+};
+
+type AvslagsårsakKodeverk = Record<VilkarType, KodeverkMedNavn<'Avslagsårsak'>[]>;
+type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
   lovHjemmel: string;
   sortering: string;
   utfallType: string;
@@ -13,18 +46,21 @@ type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn & {
   synligForRolle: string[];
 };
 
-type KodeverkMedSammeVerditype = Record<
-  Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak'>,
-  KodeverkMedNavn[]
->;
+type KodeverkMedSammeVerditype = {
+  [K in Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak'>]: KodeverkMedNavn<
+    K extends keyof KodeverkEnumMap ? KodeverkEnumMap[K] : unknown
+  >[];
+};
 
 export type AlleKodeverk = KodeverkMedSammeVerditype & {
   Avslagsårsak: AvslagsårsakKodeverk;
   PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
 };
 
-export type KodeverkReturnType<T extends KodeverkType> = T extends KodeverkType.AVSLAGSARSAK
+type EnumOrUnknown<T extends KodeverkType> = T extends keyof KodeverkEnumMap ? KodeverkEnumMap[T] : unknown;
+
+export type KodeverkReturnType<T extends KodeverkType> = T extends 'Avslagsårsak'
   ? AvslagsårsakKodeverk
-  : T extends KodeverkType.PERIODE_RESULTAT_AARSAK
+  : T extends 'PeriodeResultatÅrsak'
     ? PeriodeResultatÅrsakKodeverk[]
-    : KodeverkMedNavn[];
+    : KodeverkMedNavn<EnumOrUnknown<T>>[];

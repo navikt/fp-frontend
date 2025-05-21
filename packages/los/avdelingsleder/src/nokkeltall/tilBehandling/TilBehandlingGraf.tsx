@@ -21,6 +21,7 @@ const behandlingstypeFarger = {
   [BehandlingType.KLAGE]: '#826ba1',
   [BehandlingType.REVURDERING]: '#3385d1',
   [BehandlingType.FORSTEGANGSSOKNAD]: '#85d5f0',
+  [BehandlingType.ANKE]: '#85d5f0',
 };
 
 export interface OppgaveForDatoGraf {
@@ -34,9 +35,13 @@ type Koordinat = {
   y: number;
 };
 
+const keysFromObject = <T extends object>(object: T): (keyof T)[] => {
+  return Object.keys(object) as (keyof T)[];
+};
+
 interface Props {
   height: number;
-  behandlingTyper: KodeverkMedNavn[];
+  behandlingTyper: KodeverkMedNavn<BehandlingType>[];
   oppgaverPerDato: OppgaveForDatoGraf[];
   isToUkerValgt: boolean;
 }
@@ -51,9 +56,8 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
   const data = fyllInnManglendeDatoerOgSorterEtterDato(koordinater, periodeStart, periodeSlutt);
 
   const alleBehandlingstyperSortert = behandlingTyper.map(bt => bt.kode).sort(sorterBehandlingtyper);
-  const sorterteBehandlingstyper = Object.keys(data).sort(sorterBehandlingtyper);
+  const sorterteBehandlingstyper = keysFromObject(data).sort(sorterBehandlingtyper);
   const reversertSorterteBehandlingstyper = sorterteBehandlingstyper.slice().reverse();
-  // @ts-expect-error Fiks
   const farger = alleBehandlingstyperSortert.map(bt => behandlingstypeFarger[bt]);
 
   return (
@@ -120,7 +124,7 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
   );
 };
 
-const sorterBehandlingtyper = (b1: string, b2: string): number => {
+const sorterBehandlingtyper = (b1: BehandlingType, b2: BehandlingType): number => {
   const index1 = behandlingstypeOrder.findIndex(bo => bo === b1);
   const index2 = behandlingstypeOrder.findIndex(bo => bo === b2);
   if (index1 === index2) {
@@ -129,7 +133,10 @@ const sorterBehandlingtyper = (b1: string, b2: string): number => {
   return index1 > index2 ? -1 : 1;
 };
 
-const finnBehandlingTypeNavn = (behandlingTyper: KodeverkMedNavn[], behandlingTypeKode: string): string => {
+const finnBehandlingTypeNavn = (
+  behandlingTyper: KodeverkMedNavn<BehandlingType>[],
+  behandlingTypeKode: BehandlingType,
+): string => {
   const type = behandlingTyper.find(bt => bt.kode === behandlingTypeKode);
   return type ? type.navn : '';
 };
@@ -154,11 +161,11 @@ const konverterTilKoordinaterGruppertPaBehandlingstype = (
   );
 
 const fyllInnManglendeDatoerOgSorterEtterDato = (
-  data: Record<string, Koordinat[]>,
+  data: Record<BehandlingType, Koordinat[]>,
   periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
-): Record<string, Date[][]> =>
-  Object.keys(data).reduce((acc, behandlingstype) => {
+): Record<BehandlingType, Date[][]> =>
+  keysFromObject(data).reduce((acc, behandlingstype) => {
     const behandlingstypeData = data[behandlingstype];
     const koordinater = [];
 

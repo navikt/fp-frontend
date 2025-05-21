@@ -1,7 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn, KodeverkReturnType } from '@navikt/fp-types';
+import { BehandlingType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
+import type {
+  AlleKodeverk,
+  AlleKodeverkTilbakekreving,
+  KodeverkMedNavn,
+  KodeverkReturnType,
+  KodeverkType,
+} from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useFagsakApi } from './fagsakApi';
@@ -61,6 +67,6 @@ export function useGetKodeverkFn() {
     if (!Array.isArray(kodeverkForType)) {
       throw Error(`Støtter ikke kodeverk ${kodeverk}`);
     }
-    return kodeverkForType.find((k: KodeverkMedNavn) => k.kode === kode);
+    return kodeverkForType.find((k: KodeverkMedNavn<unknown>) => k.kode === kode);
   };
 }

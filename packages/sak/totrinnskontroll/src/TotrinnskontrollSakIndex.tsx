@@ -10,8 +10,8 @@ import {
   BehandlingStatus,
   BehandlingType,
   FagsakYtelseType,
-  KodeverkType,
-  VurderPaNyttArsakType,
+  FaktaOmBeregningTilfelle,
+  VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
 import type {
@@ -40,30 +40,28 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
 const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   const arsaker = [];
   if (apData.feilFakta) {
-    arsaker.push(VurderPaNyttArsakType.FEIL_FAKTA);
+    arsaker.push(VurderÅrsak.FEIL_FAKTA);
   }
   if (apData.feilLov) {
-    arsaker.push(VurderPaNyttArsakType.FEIL_LOV);
+    arsaker.push(VurderÅrsak.FEIL_LOV);
   }
   if (apData.feilSkjønn) {
-    arsaker.push(VurderPaNyttArsakType.SKJØNN);
+    arsaker.push(VurderÅrsak.SKJØNN);
   }
   if (apData.feilUtredning) {
-    arsaker.push(VurderPaNyttArsakType.UTREDNING);
+    arsaker.push(VurderÅrsak.UTREDNING);
   }
   if (apData.feilSaksflyt) {
-    arsaker.push(VurderPaNyttArsakType.SAKSFLYT);
+    arsaker.push(VurderÅrsak.SAKSFLYT);
   }
   if (apData.feilBegrunnelse) {
-    arsaker.push(VurderPaNyttArsakType.BEGRUNNELSE);
+    arsaker.push(VurderÅrsak.BEGRUNNELSE);
   }
   return arsaker;
 };
-const TOMT_KODEVERK = [] as KodeverkMedNavn[];
+const TOMT_KODEVERK = [] as KodeverkMedNavn<FaktaOmBeregningTilfelle>[];
 const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
-  KodeverkType.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
-    ? (alleKodeverk as AlleKodeverk)[KodeverkType.FAKTA_OM_BEREGNING_TILFELLE]
-    : TOMT_KODEVERK;
+  'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : TOMT_KODEVERK;
 
 export type ApData = {
   fatterVedtakAksjonspunktDto: {
@@ -144,8 +142,8 @@ export const TotrinnskontrollSakIndex = ({
     createLocationForSkjermlenke(location, skjermlenkeCode);
 
   const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;
-  const skjemalenkeTyper = alleKodeverk[KodeverkType.SKJERMLENKE_TYPE];
-  const vurderArsaker = alleKodeverk[KodeverkType.VURDER_AARSAK];
+  const skjemalenkeTyper = alleKodeverk['SkjermlenkeType'];
+  const vurderArsaker = alleKodeverk['VurderÅrsak'];
   const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);
 
   return (

@@ -3,7 +3,7 @@ import { useMediaQuery } from 'react-responsive';
 
 import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-react';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { SidePanelProfileKnapp } from './SidePanelProfileKnapp.tsx';
@@ -17,8 +17,8 @@ const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean =>
 
 interface Props {
   saksnummer: string;
-  fagsakYtelseType: KodeverkMedNavn;
-  fagsakStatus: KodeverkMedNavn;
+  fagsakYtelseType: KodeverkMedNavn<FagsakYtelseType>;
+  fagsakStatus: KodeverkMedNavn<FagsakStatus>;
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
   toggleSideMeny: () => void;

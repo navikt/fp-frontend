@@ -5,7 +5,7 @@ import { Heading, VStack } from '@navikt/ds-react';
 import { CheckboxPanel } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { ArbeidType, KodeverkType } from '@navikt/fp-kodeverk';
+import { ArbeidType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME, ANDRE_YTELSER_TYPER_NAME } from '../constants';
@@ -13,9 +13,9 @@ import type { AndreYtelserFormValue, TransformValues } from '../types';
 import { RenderAndreYtelserPerioderFieldArray } from './RenderAndreYtelserPerioderFieldArray';
 
 const removeArbeidstyper = (
-  andreYtelser: KodeverkMedNavn[],
+  andreYtelser: KodeverkMedNavn<ArbeidType>[],
   kunMiliterEllerSiviltjeneste?: boolean,
-): KodeverkMedNavn[] => {
+): KodeverkMedNavn<ArbeidType>[] => {
   if (kunMiliterEllerSiviltjeneste) {
     return andreYtelser.filter(ay => ay.kode === ArbeidType.MILITÆR_ELLER_SIVILTJENESTE);
   }
@@ -39,7 +39,7 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
 export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = false, alleKodeverk }: Props) => {
-  const andreYtelser = alleKodeverk[KodeverkType.ARBEID_TYPE];
+  const andreYtelser = alleKodeverk['ArbeidType'];
 
   const filtrerteArbeidstyper = useMemo(
     () => removeArbeidstyper(andreYtelser, kunMiliterEllerSiviltjeneste),

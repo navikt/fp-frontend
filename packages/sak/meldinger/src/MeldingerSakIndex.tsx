@@ -2,6 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
+import type { RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { type ForhåndsvisBrevParams, type FormValues, Messages } from './components/Messages';
@@ -13,7 +14,7 @@ const intl = createIntl(messages);
 interface Props {
   submitCallback: (values: FormValues) => void;
   forhåndsvisBrev: (params: ForhåndsvisBrevParams) => void;
-  revurderingVarslingArsak: KodeverkMedNavn[];
+  revurderingVarslingArsak: KodeverkMedNavn<RevurderingVarslingÅrsak>[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: FormValues;

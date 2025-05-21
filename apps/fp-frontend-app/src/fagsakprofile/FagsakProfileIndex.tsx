@@ -6,7 +6,6 @@ import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
@@ -70,11 +69,9 @@ export const FagsakProfileIndex = ({
   const getKodeverkFn = useGetKodeverkFn();
 
   const fagsak = fagsakData.getFagsak();
-  const fagsakStatusMedNavn = notEmpty(
-    useFpSakKodeverk(KodeverkType.FAGSAK_STATUS).find(k => k.kode === fagsak.status),
-  );
+  const fagsakStatusMedNavn = notEmpty(useFpSakKodeverk('FagsakStatus').find(k => k.kode === fagsak.status));
   const fagsakYtelseTypeMedNavn = notEmpty(
-    useFpSakKodeverk(KodeverkType.FAGSAK_YTELSE).find(k => k.kode === fagsak.fagsakYtelseType),
+    useFpSakKodeverk('FagsakYtelseType').find(k => k.kode === fagsak.fagsakYtelseType),
   );
 
   const initFetchQuery = useQuery(initFetchOptions());

@@ -4,6 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Button, Heading, Modal } from '@navikt/ds-react';
 import { CheckboxPanel, Form } from '@navikt/ft-form-hooks';
 
+import type { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
 import styles from './endreUtlandModal.module.css';
@@ -18,7 +19,7 @@ interface Props {
   fagsakMarkeringer?: Saksmarkering[];
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
-  fagsakMarkeringerKodeverk: KodeverkMedNavn[];
+  fagsakMarkeringerKodeverk: KodeverkMedNavn<FagsakMarkeringKode>[];
 }
 
 /**

@@ -7,7 +7,7 @@ import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
+import { DokumentMalType, FagsakYtelseType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -41,23 +41,24 @@ const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
   brevmalkode === DokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
   brevmalkode === DokumentMalType.VARSEL_OM_TILBAKEKREVING ||
   brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||
-  (brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && arsakskode === UgunstAarsakType.ANNET);
+  (brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && arsakskode === RevurderingVarslingÅrsak.ANNET);
 
 const getfiltrerteRevurderingVarslingArsaker = (
-  revurderingVarslingArsaker: KodeverkMedNavn[],
+  revurderingVarslingArsaker: KodeverkMedNavn<RevurderingVarslingÅrsak>[],
   fagsakYtelseType: string,
-): KodeverkMedNavn[] => {
+): KodeverkMedNavn<RevurderingVarslingÅrsak>[] => {
   if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
     return revurderingVarslingArsaker.filter(
       arsak =>
-        arsak.kode === UgunstAarsakType.BARN_IKKE_REGISTRERT_FOLKEREGISTER || arsak.kode === UgunstAarsakType.ANNET,
+        arsak.kode === RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER ||
+        arsak.kode === RevurderingVarslingÅrsak.ANNET,
     );
   }
   if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
     return revurderingVarslingArsaker.filter(
       arsak =>
-        arsak.kode !== UgunstAarsakType.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
-        arsak.kode !== UgunstAarsakType.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
+        arsak.kode !== RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
+        arsak.kode !== RevurderingVarslingÅrsak.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
     );
   }
   return revurderingVarslingArsaker;
@@ -77,7 +78,10 @@ const buildInitalValues = (behandling: BehandlingAppKontekst): FormValues => {
 
 const transformValues = (values: FormValues) => {
   const newValues = values;
-  if (values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && newValues.arsakskode !== UgunstAarsakType.ANNET) {
+  if (
+    values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING &&
+    newValues.arsakskode !== RevurderingVarslingÅrsak.ANNET
+  ) {
     newValues.fritekst = ' ';
   }
   return newValues;
@@ -93,7 +97,7 @@ interface Props {
   behandling: BehandlingAppKontekst;
   submitCallback: (values: FormValues) => void;
   forhåndsvisBrev: (params: ForhåndsvisBrevParams) => void;
-  revurderingVarslingArsak: KodeverkMedNavn[];
+  revurderingVarslingArsak: KodeverkMedNavn<RevurderingVarslingÅrsak>[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: FormValues;
