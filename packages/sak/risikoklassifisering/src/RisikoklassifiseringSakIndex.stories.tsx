@@ -11,10 +11,6 @@ import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
 import { RisikoklassifiseringSakIndex } from './RisikoklassifiseringSakIndex';
 import type { AvklartRisikoklassifiseringAp } from './types/AvklartRisikoklassifiseringAp';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const meta = {
   title: 'sak/sak-risikoklassifisering',
   component: RisikoklassifiseringSakIndex,

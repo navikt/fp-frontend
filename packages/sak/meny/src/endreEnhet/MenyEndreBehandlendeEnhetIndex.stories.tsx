@@ -3,8 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { MenyEndreBehandlendeEnhetIndex } from './MenyEndreBehandlendeEnhetIndex';
 
-import '@navikt/ds-css';
-
 const meta = {
   title: 'sak/sak-meny-endre-enhet',
   component: MenyEndreBehandlendeEnhetIndex,

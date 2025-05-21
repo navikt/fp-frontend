@@ -8,9 +8,6 @@ import { FodselSammenligningPanel } from './FodselSammenligningPanel';
 
 import messages from '../../i18n/nb_NO.json';
 
-import '@navikt/ds-css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const withIntl = getIntlDecorator(messages);
 
 const avklartBarn = [

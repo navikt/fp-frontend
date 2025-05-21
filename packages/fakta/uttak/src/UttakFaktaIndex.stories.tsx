@@ -10,10 +10,6 @@ import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
 import { UtsettelseÅrsak } from './kodeverk/utsettelseÅrsak';
 import { UttakFaktaIndex } from './UttakFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   910909088: {
     erPrivatPerson: false,

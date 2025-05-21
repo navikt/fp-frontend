@@ -9,10 +9,6 @@ import { KjønnkodeEnum, type PersonopplysningerBasis, type Ytelsefordeling } fr
 
 import { OmsorgFaktaIndex } from './OmsorgFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const adresse1 = {
   fom: '2023-01-01',
   tom: TIDENES_ENDE,

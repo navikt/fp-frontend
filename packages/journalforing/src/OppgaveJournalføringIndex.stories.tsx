@@ -12,10 +12,6 @@ import { OppgaveKilde } from './kodeverk/oppgaveKilde';
 import { OppgaveJournalføringIndex } from './OppgaveJournalføringIndex';
 import type { Journalpost } from './typer/journalpostTsType';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const meta = {
   title: 'journalføring/journalføring/OppgaveJournalføringIndex',
   component: OppgaveJournalføringIndex,

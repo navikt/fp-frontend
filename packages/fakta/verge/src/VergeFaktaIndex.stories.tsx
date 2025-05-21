@@ -14,10 +14,6 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { VergeFaktaIndex } from './VergeFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.AVKLAR_VERGE,

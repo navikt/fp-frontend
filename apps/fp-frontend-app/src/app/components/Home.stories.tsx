@@ -80,6 +80,7 @@ const meta = {
         http.get(wrapUrl('fplos/api/driftsmeldinger'), () => new HttpResponse(null, { status: 404 })),
       ],
     },
+    layout: 'fullscreen',
   },
   args: {
     headerHeight: 100,

@@ -9,10 +9,6 @@ import { type Medlemskap, MedlemskapAvvik, type Soknad } from '@navikt/fp-types'
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const defaultSoknad = {
   oppgittTilknytning: {
     oppholdNorgeNa: true,

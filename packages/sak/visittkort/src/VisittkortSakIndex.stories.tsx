@@ -7,9 +7,6 @@ import type { Person } from '@navikt/fp-types';
 
 import { VisittkortSakIndex } from './VisittkortSakIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-plattform-komponenter/dist/style.css';
-
 const fagsakPersonFar: Person = {
   navn: 'Espen Utvikler',
   fødselsdato: '1979-01-01',

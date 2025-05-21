@@ -11,6 +11,9 @@ const withIntl = getIntlDecorator(messages);
 const meta = {
   title: 'DriftsmeldingPanel',
   component: DriftsmeldingPanel,
+  parameters: {
+    layout: 'fullscreen',
+  },
   decorators: [withIntl],
 } satisfies Meta<typeof DriftsmeldingPanel>;
 export default meta;
