@@ -2,7 +2,7 @@
   "FodselInfoPanel.KontrollerMotTerminbekreftelsen": "Kontroller terminbekreftelse",
   "FodselInfoPanel.KontrollerMotFodselsdokumentasjon": "Kontroller mot opplysningene fra fødselsdokumentasjonen",
 
-  "TermindatoFaktaForm.ApplicationInformation": "Opplysninger om termin oppgitt i søknaden",
+  "TermindatoFaktaForm.ApplicationInformation": "Kontroller opplysninger om termin oppgitt i søknaden",
   "TermindatoFaktaForm.UtstedtDato": "Utstedt dato",
   "TermindatoFaktaForm.Termindato": "Termindato",
   "TermindatoFaktaForm.AntallBarn": "Antall barn",
@@ -13,12 +13,29 @@
   "TermindatoFaktaForm.AntallBarnTps": "Antall barn",
   "TermindatoFaktaForm.AdvarselForTidligUtstedtdato": "Terminbekreftelsen utstedt før 22. svangerskapsuke. Kontakt søker for en nyere terminbekreftelse og sett saken på vent. Fortsett dersom ny bekreftelse ikke skal hentes inn. Behandlingen vil avslås på grunn av manglende dokumentasjon",
 
+  "AvklartBarnFieldArray.FyllInnDokumenterteOpplysninger": "Fyll inn dokumenterte fødselsopplysninger",
   "AvklartBarnFieldArray.Title": "Fødselsdato",
   "AvklartBarnFieldArray.Dodsdato": "Dødsdato",
   "AvklartBarnFieldArray.LeggTilBarn": "Legg til barn",
 
-  "SjekkFodselDokForm.DokumentasjonForeligger": "Dokumentasjon foreligger",
-  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Dokumentasjon foreligger ikke, bruk opplysningene i folkeregisteret",
-  "SjekkFodselDokForm.DokumentasjonAvFodsel": "Dokumentasjon av fødsel",
-  "SjekkFodselDokForm.FyllInnDokumenterteOpplysninger": "Fyll inn dokumenterte opplysninger"
+  "SjekkFodselDokForm.Tittel": "Kontroller opplysninger om termin oppgitt i søknaden",
+  "SjekkFodselDokForm.DokumentasjonAvFodsel": "Finnes det fødselsdokumentasjon?",
+  "SjekkFodselDokForm.DokumentasjonForeligger": "Dokumentasjon er tilgjengelig",
+  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Dokumentasjon mangler – bruk opplysningene fra Folkeregisteret.",
+
+
+  "FodselsammenligningPanel.OpplysningerFREG": "Opplysninger fra folkeregisteret",
+  "FodselsammenligningPanel.OpplysningerSoknad": "Opplysninger oppgitt i søknaden",
+  "FodselsammenligningPanel.OpplysningerGjeldende": "Gjeldende opplysninger",
+
+  "FodselsammenligningPanel.AntallBarn": "Antall barn",
+  "FodselsammenligningPanel.Termindato": "Termindato",
+  "FodselsammenligningPanel.Fodselsdato": "Fødselsdato",
+  "FodselsammenligningPanel.Dodsdato": "Dødsdato",
+  "FodselsammenligningPanel.UstedtDato": "Utstedt dato",
+  "FodselsammenligningPanel.Ytelsesvedtak": "Vedtak",
+  "FodselsammenligningPanel.Dodfodt": "Dødfødsel",
+  "FodselsammenligningPanel.Dod": "Død",
+  "FodselsammenligningPanel.Svangerskapsuke": "Svangerskapsuke",
+  "FodselsammenligningPanel.FodtISvangerskapsuke": "Født i svangerskapsuke"
 }

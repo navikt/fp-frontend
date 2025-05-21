@@ -1,20 +1,18 @@
-import { useFormContext } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { VStack } from '@navikt/ds-react';
+import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { AvklartBarnFieldArray } from './AvklartBarnFieldArray';
-
-import styles from './SjekkFodselDokForm.module.css';
 
 export type FormValues = {
   fodselsdato?: string;
@@ -25,15 +23,11 @@ export type FormValues = {
 } & FaktaBegrunnelseFormValues;
 
 interface Props {
-  familiehendelse: FamilieHendelseSamling;
-  soknad: Soknad;
-  avklartBarn: AvklartBarn[];
-  readOnly: boolean;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  registerFamiliehendelse: FamilieHendelse | null;
+  søknad: Soknad;
   submittable: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  behandlingType: string;
-  soknadOriginalBehandling?: Soknad;
-  familiehendelseOriginalBehandling?: FamilieHendelse;
+  aksjonspunkt: Aksjonspunkt;
 }
 
 /**
@@ -42,53 +36,50 @@ interface Props {
  * Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
  */
 export const SjekkFodselDokForm = ({
-  readOnly,
   submittable,
-  behandlingType,
-  soknad,
-  soknadOriginalBehandling,
-  familiehendelseOriginalBehandling,
-  alleMerknaderFraBeslutter,
-  familiehendelse,
+  søknad,
+  aksjonspunkt,
+  registerFamiliehendelse,
+  gjeldendeFamiliehendelse,
 }: Props) => {
   const intl = useIntl();
-  const { watch } = useFormContext<FormValues>();
-  const { gjeldende, register } = familiehendelse;
 
-  const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;
-  const begrunnelse = watch('begrunnelse') || false;
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFodselAp>();
 
-  const dokumentasjonForeliggerIsEdited = isFieldEdited(soknad, gjeldende).dokumentasjonForeligger;
-  const { termindato, vedtaksDatoSomSvangerskapsuke } = gjeldende;
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+
+  const dokumentasjonForeliggerIsEdited = isFieldEdited(søknad, gjeldendeFamiliehendelse).dokumentasjonForeligger;
+  const formMethods = useForm<FormValues>({
+    defaultValues: mellomlagretFormData ?? buildInitialValues(søknad, gjeldendeFamiliehendelse, aksjonspunkt),
+  });
+
+  const begrunnelse = formMethods.watch('begrunnelse');
 
   return (
-    <VStack gap="4">
-      <FodselSammenligningIndex
-        behandlingsTypeKode={behandlingType}
-        avklartBarn={register?.avklartBarn}
-        termindato={termindato}
-        vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-        soknad={soknad}
-        soknadOriginalBehandling={soknadOriginalBehandling}
-        familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-      />
-      <FaktaGruppe
-        title={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]}
+    <FaktaKort
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]}
+      label={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
+    >
+      <Form
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(transformValues(values, registerFamiliehendelse?.avklartBarn))}
+        setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="2">
           <RadioGroupPanel
             name="dokumentasjonForeligger"
             isEdited={dokumentasjonForeliggerIsEdited}
-            hideLegend
+            label={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
             validate={[required]}
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnly}
             isHorizontal
+            size="medium"
             isTrueOrFalseSelection
             radios={[
               {
                 label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
                 value: 'true',
+                element: <AvklartBarnFieldArray readOnly={isReadOnly} />,
               },
               {
                 label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
@@ -96,22 +87,25 @@ export const SjekkFodselDokForm = ({
               },
             ]}
           />
-          {dokumentasjonForeligger && (
-            <div className={styles.clearfix}>
-              <ArrowBox>
-                <VStack gap="2">
-                  <Label size="small">
-                    <FormattedMessage id="SjekkFodselDokForm.FyllInnDokumenterteOpplysninger" />
-                  </Label>
-                  <AvklartBarnFieldArray readOnly={readOnly} />
-                </VStack>
-              </ArrowBox>
-            </div>
+
+          <FaktaBegrunnelseTextField
+            isSubmittable={submittable}
+            isReadOnly={isReadOnly}
+            hasBegrunnelse={!!begrunnelse}
+            hasVurderingText
+          />
+
+          {aksjonspunkt && !isReadOnly && (
+            <FaktaSubmitButton
+              isSubmittable={submittable}
+              isReadOnly={isReadOnly}
+              isSubmitting={formMethods.formState.isSubmitting}
+              isDirty={formMethods.formState.isDirty}
+            />
           )}
         </VStack>
-      </FaktaGruppe>
-      <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
-    </VStack>
+      </Form>
+    </FaktaKort>
   );
 };
 
@@ -122,8 +116,7 @@ const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
   }
   const childrenArray: AvklartBarn[] = [];
   while (antallBarn > 0) {
-    // @ts-expect-error Fiks
-    childrenArray.push({ fodselsdato: undefined, dodsdato: undefined });
+    childrenArray.push({ fodselsdato: '', dodsdato: null });
     antallBarn -= 1;
   }
   return childrenArray;
@@ -135,13 +128,15 @@ const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): SjekkManglendeFodselA
     dodsdato: ab.dodsdato === '' || ab.dodsdato === null ? undefined : ab.dodsdato,
   }));
 
-SjekkFodselDokForm.buildInitialValues = (
+const buildInitialValues = (
   soknad: Soknad,
   familiehendelse: FamilieHendelse,
   aksjonspunkt: Aksjonspunkt,
 ): FormValues => ({
   dokumentasjonForeligger:
-    familiehendelse.dokumentasjonForeligger !== null ? familiehendelse.dokumentasjonForeligger : undefined,
+    familiehendelse.dokumentasjonForeligger === null || familiehendelse.dokumentasjonForeligger === undefined
+      ? undefined
+      : familiehendelse.dokumentasjonForeligger,
   brukAntallBarnITps: familiehendelse.brukAntallBarnFraTps !== null ? familiehendelse.brukAntallBarnFraTps : undefined,
   avklartBarn:
     familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
@@ -150,7 +145,8 @@ SjekkFodselDokForm.buildInitialValues = (
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-SjekkFodselDokForm.transformValues = (values: FormValues, avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp => ({
+const transformValues = (values: FormValues, avklartBarn: AvklartBarn[] | undefined = []): SjekkManglendeFodselAp => ({
+  // TODO: sjekk at barn blir riktig pga dokumentasjonForeligger er true/false
   kode: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
   dokumentasjonForeligger: values.dokumentasjonForeligger!,
   uidentifiserteBarn: ryddOppIAvklarteBarn(values.avklartBarn!),

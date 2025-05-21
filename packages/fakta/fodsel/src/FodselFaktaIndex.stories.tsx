@@ -4,7 +4,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
@@ -37,27 +37,13 @@ const familieHendelse = {
   },
 } as FamilieHendelseSamling;
 
-const soknad = {
+const søknad = {
   fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
   termindato: '2019-01-01',
   utstedtdato: '2019-01-02',
   antallBarn: 1,
   soknadType: SoknadType.FODSEL,
 } as Soknad;
-
-const soknadOriginalBehandling = {
-  ...soknad,
-};
-
-const familiehendelseOriginalBehandling = {
-  avklartBarn: [
-    {
-      fodselsdato: '2019-01-10',
-    },
-  ],
-  termindato: '2019-01-01',
-  antallBarnTermin: 1,
-} as FamilieHendelse;
 
 const defaultAksjonspunkter: Aksjonspunkt[] = [
   {
@@ -78,10 +64,8 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     submittable: true,
-    soknad,
+    søknad,
     familiehendelse: familieHendelse,
-    soknadOriginalBehandling,
-    familiehendelseOriginalBehandling,
   },
   render: args => <FodselFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselFaktaIndex>>;
