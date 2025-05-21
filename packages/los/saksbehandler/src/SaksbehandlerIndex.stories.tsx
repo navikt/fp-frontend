@@ -64,7 +64,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12',
-    andreKriterier: [],
+    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
   },
   {
     id: 4,
@@ -128,7 +128,7 @@ const RESERVERTE_OPPGAVER = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '2',
-    andreKriterier: [],
+    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
   },
 ] satisfies Oppgave[];
 
