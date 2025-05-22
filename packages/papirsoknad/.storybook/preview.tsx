@@ -1,1 +1,1 @@
-import '../../../../.storybook/preview-storybook';
+import '../../../.storybook/preview-storybook';
