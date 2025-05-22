@@ -144,7 +144,7 @@ const getTextForKlageHelper = (
 };
 
 const getTextForKlage = (
-  behandlingStaus: string,
+  behandlingStaus: BehandlingStatus,
   behandlingsresultat?: Behandlingsresultat,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (behandlingStaus === BehandlingStatus.FATTER_VEDTAK) {
@@ -169,7 +169,7 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolea
 
 export const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
-  behandlingStatus: string,
+  behandlingStatus: BehandlingStatus,
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,

@@ -1,10 +1,11 @@
+import { BehandlingStatus, BehandlingType, VilkarType } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 export const behandling: Behandling = {
   uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
   versjon: 26,
-  type: 'BT-002',
-  status: 'UTRED',
+  type: BehandlingType.FORSTEGANGSSOKNAD,
+  status: BehandlingStatus.BEHANDLING_UTREDES,
   opprettet: '2025-03-05T16:42:58',
   avsluttet: null,
   behandlendeEnhetId: '4867',
@@ -51,42 +52,42 @@ export const behandling: Behandling = {
   ],
   vilkår: [
     {
-      vilkarType: 'FP_VK_34',
+      vilkarType: VilkarType.SOKERSOPPLYSNINGSPLIKT,
       vilkarStatus: 'OPPFYLT',
       avslagKode: null,
       lovReferanse: '§§ 21-3',
       overstyrbar: true,
     },
     {
-      vilkarType: 'FP_VK_2',
+      vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
       vilkarStatus: 'OPPFYLT',
       avslagKode: null,
       lovReferanse: '§ 14-2',
       overstyrbar: true,
     },
     {
-      vilkarType: 'FP_VK_1',
+      vilkarType: VilkarType.FODSELSVILKARET_MOR,
       vilkarStatus: 'OPPFYLT',
       avslagKode: null,
       lovReferanse: '§ 14-5, 1. ledd',
       overstyrbar: true,
     },
     {
-      vilkarType: 'FP_VK_23',
+      vilkarType: VilkarType.OPPTJENINGSVILKARET,
       vilkarStatus: 'OPPFYLT',
       avslagKode: null,
       lovReferanse: '§ 14-6',
       overstyrbar: true,
     },
     {
-      vilkarType: 'FP_VK_41',
+      vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
       vilkarStatus: 'IKKE_VURDERT',
       avslagKode: null,
       lovReferanse: '§ 14-7',
       overstyrbar: true,
     },
     {
-      vilkarType: 'FP_VK_21',
+      vilkarType: VilkarType.OPPTJENINGSPERIODE,
       vilkarStatus: 'OPPFYLT',
       avslagKode: null,
       lovReferanse: '§ 14-6 og 14-10',

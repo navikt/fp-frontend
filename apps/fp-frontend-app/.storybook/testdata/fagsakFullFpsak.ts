@@ -1,11 +1,18 @@
-import { HistorikkAktor } from '@navikt/fp-kodeverk';
+import {
+  BehandlingStatus,
+  BehandlingType,
+  FagsakStatus,
+  FagsakYtelseType,
+  HistorikkAktor,
+  RelasjonsRolleType,
+} from '@navikt/fp-kodeverk';
 import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 export const fagsakFullFpsak: Fagsak = {
   saksnummer: '1',
-  fagsakYtelseType: 'FP',
-  relasjonsRolleType: 'MORA',
-  status: 'UBEH',
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  relasjonsRolleType: RelasjonsRolleType.MOR,
+  status: FagsakStatus.OPPRETTET,
   aktørId: '9921487132273',
   sakSkalTilInfotrygd: false,
   dekningsgrad: 100,
@@ -38,23 +45,23 @@ export const fagsakFullFpsak: Fagsak = {
   fagsakMarkeringer: [],
   behandlingTypeKanOpprettes: [
     {
-      behandlingType: 'BT-002',
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: 'BT-004',
+      behandlingType: BehandlingType.REVURDERING,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: 'BT-008',
+      behandlingType: BehandlingType.ANKE,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: 'BT-003',
+      behandlingType: BehandlingType.KLAGE,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: 'BT-006',
+      behandlingType: BehandlingType.DOKUMENTINNSYN,
       kanOppretteBehandling: true,
     },
   ],
@@ -62,8 +69,8 @@ export const fagsakFullFpsak: Fagsak = {
     {
       uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       versjon: 26,
-      type: 'BT-002',
-      status: 'UTRED',
+      type: BehandlingType.FORSTEGANGSSOKNAD,
+      status: BehandlingStatus.BEHANDLING_UTREDES,
       opprettet: '2025-03-05T16:42:58',
       avsluttet: null,
       behandlendeEnhetId: '4867',

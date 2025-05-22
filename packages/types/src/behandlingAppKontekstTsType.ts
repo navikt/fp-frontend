@@ -1,3 +1,5 @@
+import type { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+
 import type { Aksjonspunkt } from './aksjonspunktTsType';
 import type { ApiLink } from './apiLink';
 import type { Behandlingsresultat } from './behandlingsresultatTsType';
@@ -7,8 +9,8 @@ import type { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunk
 export type BehandlingFellesData = Readonly<{
   versjon: number;
   uuid: string;
-  status: string;
-  type: string;
+  status: BehandlingStatus;
+  type: BehandlingType;
   fristBehandlingPåVent: string | null;
   venteÅrsakKode: string | null;
   behandlingPåVent: boolean;
