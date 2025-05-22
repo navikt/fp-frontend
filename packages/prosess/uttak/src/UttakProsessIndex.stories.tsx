@@ -9,6 +9,7 @@ import {
   AksjonspunktType,
   NavBrukerKjonn,
   UtsettelseArsakCode,
+  UttakUtsettelseType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
@@ -407,7 +408,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: '-',
-          utsettelseType: 'ARBEID',
+          utsettelseType: UttakUtsettelseType.ARBEID,
           oppholdÅrsak: '-',
           mottattDato: '2019-11-01',
           gradertAktivitet: undefined,
@@ -1001,7 +1002,7 @@ export const AksjonspunktForFar: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: '-',
-          utsettelseType: 'SYKDOM_SKADE',
+          utsettelseType: UttakUtsettelseType.SYKDOM_SKADE,
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,

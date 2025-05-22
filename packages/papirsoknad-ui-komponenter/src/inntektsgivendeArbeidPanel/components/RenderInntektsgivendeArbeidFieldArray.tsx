@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl';
 import { Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDate, maxLength } from '@navikt/ft-form-validators';
 
-import { KodeverkType, Landkode } from '@navikt/fp-kodeverk';
+import { Landkode } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
@@ -14,7 +14,7 @@ import type { InntektsgivendeArbeidFormValues } from '../types';
 
 const maxLength50 = maxLength(50);
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
+const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
     .filter(({ kode }) => kode !== Landkode.NORGE)
     .map(({ kode, navn }) => (
@@ -42,9 +42,7 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
     name: INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME,
   });
 
-  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER]
-    .slice()
-    .sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   return (
     <PeriodFieldArray

@@ -2,7 +2,13 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, TilretteleggingType, UttakArbeidType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  PermisjonsbeskrivelseType,
+  TilretteleggingType,
+  UttakArbeidType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type ArbeidOgInntektsmelding,
@@ -46,19 +52,19 @@ const TILRETTELEGGING_PERMISJON = {
           permisjonFom: '2020-02-17',
           permisjonTom: '2020-07-12',
           permisjonsprosent: 50.0,
-          type: 'VELFERDSPERMISJON',
+          type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
         {
           permisjonFom: '2019-08-06',
           permisjonTom: '2019-08-06',
           permisjonsprosent: 50.0,
-          type: 'VELFERDSPERMISJON',
+          type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
         {
           permisjonFom: '2019-10-03',
           permisjonTom: '2019-10-03',
           permisjonsprosent: 50.0,
-          type: 'VELFERDSPERMISJON',
+          type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
       ],
       avklarteOppholdPerioder: [],
@@ -95,7 +101,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
           permisjonFom: '2020-02-17',
           permisjonTom: '2020-07-12',
           permisjonsprosent: 100.0,
-          type: 'VELFERDSPERMISJON',
+          type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
       ],
       avklarteOppholdPerioder: [],

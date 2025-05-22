@@ -11,7 +11,10 @@ import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
 
-const createOptions = (bt: KodeverkMedNavn, enabledBehandlingstyper: KodeverkMedNavn[]): ReactElement => {
+const createOptions = (
+  bt: KodeverkMedNavn<'BehandlingType'>,
+  enabledBehandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
+): ReactElement => {
   const isEnabled = enabledBehandlingstyper.some(b => b.kode === bt.kode);
   return <option key={bt.kode} value={bt.kode} disabled={!isEnabled}>{` ${bt.navn} `}</option>;
 };
@@ -60,9 +63,9 @@ const TilbakekrevingRevurderingArsaker = [
 const getBehandlingAarsaker = (
   ytelseType: string,
   valgtBehandlingType?: string,
-  alleRevurderingArsaker?: KodeverkMedNavn[],
-  alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavn[],
-): KodeverkMedNavn[] => {
+  alleRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[],
+  alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[],
+): KodeverkMedNavn<'BehandlingÅrsakType'>[] => {
   if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
     return TilbakekrevingRevurderingArsaker.flatMap(ar => {
       const arsak = alleTilbakekrevingRevurderingArsaker.find(el => el.kode === ar);
@@ -85,11 +88,12 @@ const getBehandlingAarsaker = (
   return [];
 };
 
-const getBehandlingTyper = (behandlingstyper: KodeverkMedNavn[]): KodeverkMedNavn[] =>
-  [...behandlingstyper].sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn));
+const getBehandlingTyper = (
+  behandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
+): KodeverkMedNavn<'BehandlingType'>[] => [...behandlingstyper].sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn));
 
 const getEnabledBehandlingstyper = (
-  behandlingstyper: KodeverkMedNavn[],
+  behandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
   behandlingOppretting: BehandlingOppretting[],
   kanTilbakekrevingOpprettes = {
     kanBehandlingOpprettes: false,
@@ -127,9 +131,9 @@ interface Props {
     } & FormValues,
   ) => void;
   behandlingOppretting: BehandlingOppretting[];
-  behandlingstyper: KodeverkMedNavn[];
-  tilbakekrevingRevurderingArsaker?: KodeverkMedNavn[];
-  revurderingArsaker?: KodeverkMedNavn[];
+  behandlingstyper: KodeverkMedNavn<'BehandlingType'>[];
+  tilbakekrevingRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
+  revurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
   kanTilbakekrevingOpprettes: {
     kanBehandlingOpprettes: boolean;
     kanRevurderingOpprettes: boolean;

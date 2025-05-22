@@ -25,7 +25,7 @@ interface Props {
   submitCallback: (formData: FormValues) => void;
   cancelEvent: () => void;
   showModal: boolean;
-  ventearsaker: KodeverkMedNavn[];
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[];
   erTilbakekreving: boolean;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
@@ -176,7 +176,7 @@ const automatiskeVentearsakerForTilbakekreving = [
   VenteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
 ];
 
-const inkluderVentearsak = (ventearsak: KodeverkMedNavn, valgtVentearsak?: string): boolean =>
+const inkluderVentearsak = (ventearsak: KodeverkMedNavn<'Venteårsak'>, valgtVentearsak?: string): boolean =>
   automatiskeVentearsakerForTilbakekreving.some(vt => vt === ventearsak.kode)
     ? ventearsak.kode === valgtVentearsak
     : true;

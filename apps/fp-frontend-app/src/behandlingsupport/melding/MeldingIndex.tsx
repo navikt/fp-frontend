@@ -27,7 +27,7 @@ import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
-const EMPTY_ARRAY = [] as KodeverkMedNavn<VenteArsakType>[];
+const EMPTY_ARRAY = [] as KodeverkMedNavn<'Venteårsak'>[];
 
 interface Props {
   fagsakData: FagsakData;

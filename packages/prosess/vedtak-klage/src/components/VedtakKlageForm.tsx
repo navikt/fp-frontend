@@ -9,7 +9,6 @@ import {
   BehandlingResultatType,
   isKlageOmgjort,
   KlageVurdering as klageVurderingCodes,
-  KodeverkType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type { AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
@@ -47,14 +46,14 @@ const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): string[]
 const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: AlleKodeverk): string | null => {
   if (klageVurderingResultat?.klageVurderingResultatNK?.klageMedholdArsak) {
     return (
-      alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK].find(
+      alleKodeverk['KlageMedholdÅrsak'].find(
         kode => kode.kode === klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak,
       )?.navn ?? ''
     );
   }
   if (klageVurderingResultat?.klageVurderingResultatNFP?.klageMedholdArsak) {
     return (
-      alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK].find(
+      alleKodeverk['KlageMedholdÅrsak'].find(
         kode => kode.kode === klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak,
       )?.navn ?? ''
     );
@@ -134,7 +133,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
           </Label>
           {avvistArsaker.map(arsak => (
             <BodyShort size="small" key={arsak}>
-              {alleKodeverk[KodeverkType.KLAGE_AVVIST_AARSAK].find(kode => kode.kode === arsak)?.navn ?? ''}
+              {alleKodeverk['KlageAvvistÅrsak'].find(kode => kode.kode === arsak)?.navn ?? ''}
             </BodyShort>
           ))}
         </VStack>

@@ -13,6 +13,7 @@ import { BehandlingType, KonsekvensForYtelsen, VurderÅrsak } from '@navikt/fp-k
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
   TotrinnskontrollAksjonspunkt,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
@@ -91,9 +92,9 @@ interface Props {
   readOnly: boolean;
   erTilbakekreving: boolean;
   erForeldrepengerFagsak: boolean;
-  skjemalenkeTyper: KodeverkMedNavn[];
+  skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   erBehandlingEtterKlage: boolean;
-  faktaOmBeregningTilfeller: KodeverkMedNavn[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
   onSubmit: (data: FormValues) => void;
   beslutterFormData?: FormValues;

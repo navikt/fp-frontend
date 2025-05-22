@@ -9,14 +9,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  KodeverkType,
-  SoknadType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, SoknadType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -190,7 +183,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
         />
         {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
           <BodyShort size="small">
-            {alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SOKNADFRISTVILKARET].find(
+            {alleKodeverk['Avslagsårsak'][VilkarType.SOKNADFRISTVILKARET].find(
               type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
             )?.navn ?? ''}
           </BodyShort>

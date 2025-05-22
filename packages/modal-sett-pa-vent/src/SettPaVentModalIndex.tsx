@@ -14,7 +14,7 @@ interface Props {
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
   showModal: boolean;
-  ventearsaker: KodeverkMedNavn[];
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[];
   frist?: string | null;
   ventearsak?: string | null;
   visBrevErBestilt?: boolean;

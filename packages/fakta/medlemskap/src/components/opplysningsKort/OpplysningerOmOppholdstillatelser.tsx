@@ -4,7 +4,6 @@ import { BodyLong, BodyShort, Box, ReadMore, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { FaktaKilde, sorterPerioder } from '@navikt/fp-fakta-felles';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { type AlleKodeverk, MedlemskapAvvik, type OppholdstillatelsePeriode } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
@@ -25,7 +24,7 @@ export const OpplysningerOmOppholdstillatelser = ({
 }: Props) => {
   const intl = useIntl();
 
-  const oppholdstillatelseTypeKodeverk = alleKodeverk[KodeverkType.OPPHOLDSTILLATELSE_TYPE];
+  const oppholdstillatelseTypeKodeverk = alleKodeverk['OppholdstillatelseType'];
 
   return (
     <EkspansjonsKort

@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Label, Table } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FeriepengegrunnlagAndel } from '@navikt/fp-types';
 
 interface Props {
@@ -82,7 +81,7 @@ const lagVisningsnavn = (
     return agOpplysning.identifikator ? `${agOpplysning.navn} (${agOpplysning.identifikator})` : agOpplysning.navn;
   }
   return ferieAndel.aktivitetStatus
-    ? (alleKodeverk[KodeverkType.AKTIVITET_STATUS].find(kode => kode.kode === ferieAndel.aktivitetStatus)?.navn ?? '')
+    ? (alleKodeverk['AktivitetStatus'].find(kode => kode.kode === ferieAndel.aktivitetStatus)?.navn ?? '')
     : '';
 };
 

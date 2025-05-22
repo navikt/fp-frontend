@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { AksjonspunktKode, isAksjonspunktOpen, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 import { type FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 
@@ -55,7 +55,7 @@ export const BehandlingPaVent = ({
       frist={behandling.fristBehandlingPåVent}
       ventearsak={behandling.venteÅrsakKode}
       hasManualPaVent={erManueltSattPaVent}
-      ventearsaker={kodeverk[KodeverkType.VENT_AARSAK]}
+      ventearsaker={kodeverk['Venteårsak']}
       erTilbakekreving={erTilbakekreving}
       showModal={skalViseModal}
     />

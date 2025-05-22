@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX, UTSETTELSE_PERIODE_FIELD_ARRAY_NAME } from '../../constants';
@@ -23,8 +22,8 @@ interface Props {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form komponent.
  */
 export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
-  const utsettelseReasons = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE];
-  const utsettelseKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
+  const utsettelseReasons = alleKodeverk['UtsettelseÅrsak'];
+  const utsettelseKvoter = alleKodeverk['UttakPeriodeType'];
 
   const { watch } = useFormContext<PermisjonFormValues>();
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;

@@ -7,10 +7,9 @@ import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
+import { AksjonspunktKode, FaresignalVurdering } from '@navikt/fp-kodeverk';
+import { type Aksjonspunkt, type KodeverkMedNavn, type Risikoklassifisering } from '@navikt/fp-types';
 
-import { FaresignalVurdering } from '../kodeverk/faresignalVurdering';
 import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 
 const maxLength1500 = maxLength(1500);
@@ -66,7 +65,7 @@ interface Props {
   readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
   submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
-  faresignalVurderinger: KodeverkMedNavn[];
+  faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
 }
 
 /**

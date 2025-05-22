@@ -98,7 +98,7 @@ const getTextForForeldreansvarsvilkåretAndreLedd = (
 };
 
 const getFaktaOmBeregningText = (
-  faktaOmBeregningTilfeller: KodeverkMedNavn[],
+  faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (!beregningDto?.faktaOmBeregningTilfeller) {
@@ -170,7 +170,7 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolea
 export const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
   behandlingStatus: string,
-  faktaOmBeregningTilfeller: KodeverkMedNavn[],
+  faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
   behandlingsresultat?: Behandlingsresultat,

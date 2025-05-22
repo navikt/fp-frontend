@@ -7,7 +7,7 @@ import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './vilkarResultPicker.module.css';
@@ -18,7 +18,7 @@ const intl = createIntl(messages);
 
 const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode?: string) => () => erVilkarOk === false && !avslagCode;
 
-const EMPTY_ARRAY = [] as KodeverkMedNavn<Avslagsarsak>[];
+const EMPTY_ARRAY = [] as KodeverkMedNavn<'Avslagsårsak'>[];
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -26,7 +26,7 @@ type FormValues = {
 };
 
 interface Props {
-  avslagsarsaker?: KodeverkMedNavn<Avslagsarsak>[];
+  avslagsarsaker?: KodeverkMedNavn<'Avslagsårsak'>[];
   customVilkarIkkeOppfyltText: string | ReactElement;
   customVilkarOppfyltText: string | ReactElement;
   readOnly: boolean;
@@ -35,8 +35,8 @@ interface Props {
 }
 
 const sorterAvslagsArsaker = (
-  avslagsarsakerUsortert: KodeverkMedNavn<Avslagsarsak>[],
-): KodeverkMedNavn<Avslagsarsak>[] => avslagsarsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
+  avslagsarsakerUsortert: KodeverkMedNavn<'Avslagsårsak'>[],
+): KodeverkMedNavn<'Avslagsårsak'>[] => avslagsarsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
 /**
  * VilkarResultPicker

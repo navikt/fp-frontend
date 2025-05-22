@@ -2,7 +2,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { Avslagsarsak } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, Medlemskap } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringForm } from './components/VilkarresultatMedOverstyringForm';
@@ -13,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   medlemskap?: Medlemskap;
-  avslagsarsaker: KodeverkMedNavn<Avslagsarsak>[];
+  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
   panelTittelKode: string;
   lovReferanse?: string;
   status: string;

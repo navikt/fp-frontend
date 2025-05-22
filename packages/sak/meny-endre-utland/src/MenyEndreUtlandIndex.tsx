@@ -2,7 +2,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
 import { EndreUtlandModal, type FormValues } from './components/EndreUtlandModal';
@@ -18,7 +17,7 @@ interface Props {
   fagsakMarkeringer?: Saksmarkering[];
   endreFagsakMarkering: (formData: FormValues) => void;
   lukkModal: () => void;
-  fagsakMarkeringerKodeverk: KodeverkMedNavn<FagsakMarkeringKode>[];
+  fagsakMarkeringerKodeverk: KodeverkMedNavn<'FagsakMarkering'>[];
 }
 
 export const MenyEndreUtlandIndex = ({ endreFagsakMarkering, lukkModal, ...rest }: Props) => {

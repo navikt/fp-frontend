@@ -3,14 +3,13 @@ import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
 
-import type { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
 
 interface Props {
   aktorInfo: Aktor;
-  fagsakStatuser: KodeverkMedNavn<FagsakStatus>[];
-  fagsakYtelseTyper: KodeverkMedNavn<FagsakYtelseType>[];
+  fagsakStatuser: KodeverkMedNavn<'FagsakStatus'>[];
+  fagsakYtelseTyper: KodeverkMedNavn<'FagsakYtelseType'>[];
   renderSomLenke: (className: string | undefined, fagsakKomponent: ReactNode, saksnummer: string) => ReactElement;
 }
 

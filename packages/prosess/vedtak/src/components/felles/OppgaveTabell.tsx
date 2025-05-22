@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label, Table, VStack } from '@navikt/ds-react';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -43,7 +42,7 @@ export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave, isReadOnly }: Prop
             <Table.Row key={oppgave.oppgaveId} className={styles.row}>
               <Table.DataCell>
                 <BodyShort size="small">
-                  {alleKodeverk[KodeverkType.OPPGAVE_TYPE].find(o => o.kode === oppgave.oppgavetype)?.navn}
+                  {alleKodeverk['OppgaveType'].find(o => o.kode === oppgave.oppgavetype)?.navn}
                 </BodyShort>
               </Table.DataCell>
               <Table.DataCell>

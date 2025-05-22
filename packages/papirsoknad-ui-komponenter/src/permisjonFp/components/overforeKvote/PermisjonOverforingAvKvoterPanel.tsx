@@ -23,7 +23,7 @@ const getText = (intl: IntlShape, kode: string, navn: string): string => {
 };
 
 const mapArsaker = (
-  arsaker: KodeverkMedNavn<OverforingArsak>[],
+  arsaker: KodeverkMedNavn<'OverføringÅrsak'>[],
   sokerErMor: boolean,
   erEndringssøknad: boolean,
   intl: IntlShape,

@@ -23,7 +23,6 @@ const meta = {
     },
   },
   args: {
-    // @ts-expect-error alleKodeverk
     kodeverk: alleKodeverk,
     opneSokeside: action('button-click'),
   },

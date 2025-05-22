@@ -4,7 +4,6 @@ import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { Aktor, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { AktørGrid } from './AktørGrid';
@@ -16,8 +15,8 @@ const intl = createIntl(messages);
 interface Props {
   valgtAktorId: string;
   aktorInfo?: Aktor;
-  fagsakStatuser: KodeverkMedNavn<FagsakStatus>[];
-  fagsakYtelseTyper: KodeverkMedNavn<FagsakYtelseType>[];
+  fagsakStatuser: KodeverkMedNavn<'FagsakStatus'>[];
+  fagsakYtelseTyper: KodeverkMedNavn<'FagsakYtelseType'>[];
   renderSomLenke: (className: string | undefined, fagsakKomponent: ReactNode, saksnummer: string) => ReactElement;
 }
 

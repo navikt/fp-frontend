@@ -5,7 +5,6 @@ import { ChevronDownIcon, ChevronUpIcon, ExclamationmarkTriangleFillIcon } from 
 import { BodyShort, HStack, Label, Link, Spacer, Tooltip, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller, DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -117,9 +116,8 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                   {a.permisjonOgMangel && (
                     <HStack gap="4">
                       <Label size="small">
-                        {alleKodeverk[KodeverkType.PERMISJONSBESKRIVELSE_TYPE].find(
-                          k => k.kode === a.permisjonOgMangel?.type,
-                        )?.navn ?? ''}
+                        {alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === a.permisjonOgMangel?.type)
+                          ?.navn ?? ''}
                       </Label>
                       <BodyShort size="small">
                         <PeriodLabel
@@ -206,7 +204,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
           {arbeidsforholdForRad[0].permisjonOgMangel && (
             <HStack gap="4">
               <Label size="small">
-                {alleKodeverk[KodeverkType.PERMISJONSBESKRIVELSE_TYPE].find(
+                {alleKodeverk['PermisjonsbeskrivelseType'].find(
                   k => k.kode === arbeidsforholdForRad[0].permisjonOgMangel?.type,
                 )?.navn ?? ''}
               </Label>

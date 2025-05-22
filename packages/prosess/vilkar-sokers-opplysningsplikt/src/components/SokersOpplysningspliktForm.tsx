@@ -6,7 +6,7 @@ import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -275,7 +275,7 @@ export const SokersOpplysningspliktForm = ({
             <div>
               {originalErVilkarOk === false && behandling.behandlingsresultat?.avslagsarsak && (
                 <BodyShort size="small">
-                  {alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SOKERSOPPLYSNINGSPLIKT].find(
+                  {alleKodeverk['Avslagsårsak'][VilkarType.SOKERSOPPLYSNINGSPLIKT].find(
                     type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
                   )?.navn ?? ''}
                 </BodyShort>

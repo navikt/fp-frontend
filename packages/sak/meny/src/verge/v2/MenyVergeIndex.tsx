@@ -7,7 +7,6 @@ import { Form } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from '@navikt/fp-fakta-verge';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, OpprettVergeParams, Verge } from '@navikt/fp-types';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -71,7 +70,7 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
           <Modal.Body>
             <RegistrereVergeForm
               readOnly={erFjerneOperasjon}
-              vergetyper={alleKodeverk[KodeverkType.VERGE_TYPE]}
+              vergetyper={alleKodeverk['VergeType']}
               valgtVergeType={valgtVergeType}
             />
           </Modal.Body>

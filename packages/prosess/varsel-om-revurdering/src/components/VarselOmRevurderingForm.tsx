@@ -15,7 +15,6 @@ import {
   BehandlingType,
   DokumentMalType,
   RevurderingVarslingÅrsak,
-  VenteArsakType,
 } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -53,7 +52,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
 
 const nullSafe = (value: FamilieHendelse | null): FamilieHendelse => value ?? ({} as FamilieHendelse);
 
-const EMPTY_ARRAY = [] as KodeverkMedNavn<VenteArsakType>[];
+const EMPTY_ARRAY = [] as KodeverkMedNavn<'Venteårsak'>[];
 
 interface Props {
   familiehendelse: FamilieHendelseSamling;

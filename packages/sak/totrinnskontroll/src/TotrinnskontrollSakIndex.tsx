@@ -10,7 +10,6 @@ import {
   BehandlingStatus,
   BehandlingType,
   FagsakYtelseType,
-  FaktaOmBeregningTilfelle,
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
@@ -59,7 +58,7 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   }
   return arsaker;
 };
-const TOMT_KODEVERK = [] as KodeverkMedNavn<FaktaOmBeregningTilfelle>[];
+const TOMT_KODEVERK = [] as KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
   'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : TOMT_KODEVERK;
 

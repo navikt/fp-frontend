@@ -11,7 +11,6 @@ import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurdering
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  Avslagsarsak,
   BehandlingType,
   type OverstyringAksjonspunkter,
   VilkarUtfallType,
@@ -116,7 +115,7 @@ const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjo
 
 interface Props {
   medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;
-  avslagsarsaker: KodeverkMedNavn<Avslagsarsak>[];
+  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
   status: string;
   panelTittelKode: string;
   lovReferanse?: string;

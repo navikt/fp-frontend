@@ -4,7 +4,12 @@ import { NavLink } from 'react-router-dom';
 import { BodyShort, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
-import type { BehandlingAppKontekst, KodeverkMedNavn, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
+import type {
+  BehandlingAppKontekst,
+  KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
+  TotrinnskontrollSkjermlenkeContext,
+} from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
 import { GodkjenningPanel } from './GodkjenningPanel';
@@ -31,8 +36,8 @@ type Props = {
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   erTilbakekreving: boolean;
-  skjemalenkeTyper: KodeverkMedNavn[];
-  faktaOmBeregningTilfeller: KodeverkMedNavn[];
+  skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
 };
 

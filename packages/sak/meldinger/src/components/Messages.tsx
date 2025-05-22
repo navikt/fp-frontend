@@ -44,9 +44,9 @@ const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
   (brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && arsakskode === RevurderingVarslingÅrsak.ANNET);
 
 const getfiltrerteRevurderingVarslingArsaker = (
-  revurderingVarslingArsaker: KodeverkMedNavn<RevurderingVarslingÅrsak>[],
+  revurderingVarslingArsaker: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[],
   fagsakYtelseType: string,
-): KodeverkMedNavn<RevurderingVarslingÅrsak>[] => {
+): KodeverkMedNavn<'RevurderingVarslingÅrsak'>[] => {
   if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
     return revurderingVarslingArsaker.filter(
       arsak =>
@@ -97,7 +97,7 @@ interface Props {
   behandling: BehandlingAppKontekst;
   submitCallback: (values: FormValues) => void;
   forhåndsvisBrev: (params: ForhåndsvisBrevParams) => void;
-  revurderingVarslingArsak: KodeverkMedNavn<RevurderingVarslingÅrsak>[];
+  revurderingVarslingArsak: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: FormValues;

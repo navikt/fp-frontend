@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkLosType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
@@ -52,7 +52,7 @@ export const SorteringVelger = ({
     },
   });
 
-  const koSorteringer = useLosKodeverk(KodeverkLosType.KO_SORTERING);
+  const koSorteringer = useLosKodeverk('KøSortering');
 
   return (
     <RadioGroupPanel
@@ -75,7 +75,7 @@ export const SorteringVelger = ({
             koSortering.feltkategori !== 'TILBAKEKREVING' || bareTilbakekrevingValgt(valgteBehandlingtyper),
         )
         .map(koSortering => ({
-          value: koSortering.kode,
+          value: koSortering.kode as string,
           label: koSortering.navn,
           element: (
             <>

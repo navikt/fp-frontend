@@ -87,10 +87,10 @@ const henleggArsakerPerBehandlingType = {
 };
 
 export const getHenleggArsaker = (
-  behandlingResultatTyper: KodeverkMedNavn[],
+  behandlingResultatTyper: KodeverkMedNavn<'BehandlingResultatType'>[],
   behandlingType: string,
   ytelseType: string,
-): KodeverkMedNavn[] => {
+): KodeverkMedNavn<'BehandlingResultatType'>[] => {
   const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType as BehandlingType];
   return typerForBehandlingType
     .filter(
@@ -116,7 +116,7 @@ interface Props {
   forhandsvisHenleggBehandling: (data: ForhåndsvisHenleggParams) => void;
   behandlingUuid: string;
   ytelseType: string;
-  behandlingResultatTyper: KodeverkMedNavn[];
+  behandlingResultatTyper: KodeverkMedNavn<'BehandlingResultatType'>[];
   behandlingType: string;
 }
 

@@ -84,7 +84,7 @@ export const gyldigArbeidskategori = [
 
 const maxValue100 = maxValue(100);
 
-const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => gyldigeUttakperioder.some(ga => ga === kode))
     .map(({ kode, navn }) => (
@@ -93,7 +93,7 @@ const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
       </option>
     ));
 
-const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapArbeidskategori = (typer: KodeverkMedNavn<'Arbeidskategori'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => gyldigArbeidskategori.some(ga => ga === kode))
     .map(({ kode, navn }) => (
@@ -103,9 +103,9 @@ const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] =>
     ));
 
 interface Props {
-  graderingKvoter: KodeverkMedNavn[];
+  graderingKvoter: KodeverkMedNavn<'UttakPeriodeType'>[];
   readOnly: boolean;
-  arbeidskategoriTyper: KodeverkMedNavn[];
+  arbeidskategoriTyper: KodeverkMedNavn<'Arbeidskategori'>[];
 }
 
 /**

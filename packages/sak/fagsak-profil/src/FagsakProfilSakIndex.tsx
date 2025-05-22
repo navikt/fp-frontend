@@ -2,7 +2,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FagsakProfile } from './components/FagsakProfile';
@@ -13,8 +12,8 @@ const intl = createIntl(messages);
 
 interface Props {
   saksnummer: string;
-  fagsakYtelseType: KodeverkMedNavn<FagsakYtelseType>;
-  fagsakStatus: KodeverkMedNavn<FagsakStatus>;
+  fagsakYtelseType: KodeverkMedNavn<'FagsakYtelseType'>;
+  fagsakStatus: KodeverkMedNavn<'FagsakStatus'>;
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
   toggleSideMeny: () => void;

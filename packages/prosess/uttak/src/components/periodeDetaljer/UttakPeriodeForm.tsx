@@ -8,12 +8,14 @@ import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/f
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { KodeverkType, OppholdArsakType, PeriodeResultatType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
+import { OppholdArsakType, PeriodeResultatType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
 import type {
   AarsakFilter,
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
+  GraderingAvslagÅrsakKodeverk,
   KodeverkMedNavn,
+  PeriodeResultatÅrsakKodeverk,
   PeriodeSoker,
   PeriodeSokerAktivitet,
 } from '@navikt/fp-types';
@@ -27,16 +29,10 @@ import styles from './uttakPeriodeForm.module.css';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-export type ArsakKodeverk = {
-  sortering: string;
-  utfallType?: string;
-  uttakTyper?: string[];
-  valgbarForKonto?: string[];
-  gyldigForLovendringer: string[];
-  synligForRolle?: string[];
-} & KodeverkMedNavn;
-
-const erPeriodeOppfylt = (valgtPeriode: PeriodeSoker, utfallKoder: ArsakKodeverk[]): boolean | undefined => {
+const erPeriodeOppfylt = (
+  valgtPeriode: PeriodeSoker,
+  utfallKoder: PeriodeResultatÅrsakKodeverk[],
+): boolean | undefined => {
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET) {
     return true;
   }
@@ -62,7 +58,7 @@ const erPeriodeOppfylt = (valgtPeriode: PeriodeSoker, utfallKoder: ArsakKodeverk
   return false;
 };
 
-const sorterÅrsakKodeverk = (a: ArsakKodeverk, b: ArsakKodeverk): number => {
+const sorterÅrsakKodeverk = (a: PeriodeResultatÅrsakKodeverk, b: PeriodeResultatÅrsakKodeverk): number => {
   if (a.sortering < b.sortering) {
     return -1;
   }
@@ -80,7 +76,7 @@ const sorterÅrsakKodeverk = (a: ArsakKodeverk, b: ArsakKodeverk): number => {
 
 const getFiltrerPåGyldighetForLovendringer =
   (aarsakFilter: AarsakFilter, periodeFom: string) =>
-  (kodeItem: ArsakKodeverk): boolean => {
+  (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
     if (kodeItem.gyldigForLovendringer === undefined) {
       return true;
     }
@@ -94,7 +90,7 @@ const getFiltrerPåGyldighetForLovendringer =
 
 const getFiltrerPåSynlighet =
   (aarsakFilter: AarsakFilter) =>
-  (kodeItem: ArsakKodeverk): boolean => {
+  (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
     if (kodeItem.synligForRolle === undefined) {
       return true;
     }
@@ -104,7 +100,7 @@ const getFiltrerPåSynlighet =
   };
 
 const lagOptionsTilPeriodeÅrsakSelect = (
-  årsakKoder: ArsakKodeverk[],
+  årsakKoder: PeriodeResultatÅrsakKodeverk[],
   periodeFom: string,
   utfallType: string,
   aarsakFilter: AarsakFilter,
@@ -119,7 +115,7 @@ const lagOptionsTilPeriodeÅrsakSelect = (
     .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter, periodeFom))
     .filter(getFiltrerPåSynlighet(aarsakFilter));
 
-  const mapTilOption = (kodeverk: KodeverkMedNavn) => (
+  const mapTilOption = (kodeverk: KodeverkMedNavn<'PeriodeResultatÅrsak'>) => (
     <option value={kodeverk.kode} key={kodeverk.kode}>
       {kodeverk.navn}
     </option>
@@ -169,9 +165,19 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker)
   return aktivitet.trekkdagerDesimaler ? parseFloat((aktivitet.trekkdagerDesimaler % 5).toFixed(1)).toString() : '0';
 };
 
+const sorterGradering = (a: GraderingAvslagÅrsakKodeverk, b: GraderingAvslagÅrsakKodeverk): number => {
+  if (a.navn < b.navn) {
+    return -1;
+  }
+  if (a.navn > b.navn) {
+    return 1;
+  }
+  return 0;
+};
+
 const lagOptionsTilGraderingAvslagsårsakerSelect = (alleKodeverk: AlleKodeverk): ReactElement[] => {
-  const årsakKoder = alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
-  return [...årsakKoder].sort(sorterÅrsakKodeverk).map(({ kode, navn }) => (
+  const årsakKoder = alleKodeverk['GraderingAvslagÅrsak'];
+  return [...årsakKoder].sort(sorterGradering).map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
@@ -215,7 +221,7 @@ const hentSorterAktiviteterFn =
 const byggDefaultValues = (
   valgtPeriode: PeriodeSoker,
   sorterteAktiviteter: PeriodeSokerAktivitet[],
-  periodeResultatårsakKoder: ArsakKodeverk[],
+  periodeResultatårsakKoder: PeriodeResultatÅrsakKodeverk[],
 ): UttakAktivitetType => {
   const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
 
@@ -296,7 +302,7 @@ export const UttakPeriodeForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const periodeResultatårsakKoder = alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK] as ArsakKodeverk[];
+  const periodeResultatårsakKoder = alleKodeverk['PeriodeResultatÅrsak'];
 
   const sorterteAktiviteter = useMemo(() => {
     const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
@@ -371,7 +377,7 @@ export const UttakPeriodeForm = ({
         {valgtPeriode.oppholdÅrsak === OppholdArsakType.UDEFINERT && (
           <UttakAktiviteterTabell
             isReadOnly={isReadOnly}
-            periodeTyper={alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]}
+            periodeTyper={alleKodeverk['UttakPeriodeType']}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             aktiviteter={sorterteAktiviteter}
             erOppfylt={erOppfylt}

@@ -4,8 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Box, Label } from '@navikt/ds-react';
 import dayjs from 'dayjs';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingListeRad } from './BehandlingListeRad';
 
@@ -31,7 +30,8 @@ interface Props {
   behandlingUuid?: string;
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
-  getKodeverkMedNavn: (kode: string, kodeverk: KodeverkType, behandlingType?: string) => KodeverkMedNavn | undefined;
+  alleKodeverk: AlleKodeverk;
+  alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
 }
 
 /**
@@ -45,7 +45,8 @@ export const BehandlingerListe = ({
   behandlingUuid,
   skalViseAlleBehandlinger,
   toggleVisAlleBehandlinger,
-  getKodeverkMedNavn,
+  alleKodeverk,
+  alleKodeverkTilbakekreving,
 }: Props) => {
   const sorterteOgFiltrerteBehandlinger = useMemo(
     () =>
@@ -74,7 +75,8 @@ export const BehandlingerListe = ({
               erAktiv={behandling.uuid === behandlingUuid}
               skalViseAlleBehandlinger={skalViseAlleBehandlinger}
               toggleVisAlleBehandlinger={toggleVisAlleBehandlinger}
-              getKodeverkMedNavn={getKodeverkMedNavn}
+              alleKodeverk={alleKodeverk}
+              alleKodeverkTilbakekreving={alleKodeverkTilbakekreving}
             />
           </li>
         ))}

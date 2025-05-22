@@ -13,9 +13,9 @@ import type { AndreYtelserFormValue, TransformValues } from '../types';
 import { RenderAndreYtelserPerioderFieldArray } from './RenderAndreYtelserPerioderFieldArray';
 
 const removeArbeidstyper = (
-  andreYtelser: KodeverkMedNavn<ArbeidType>[],
+  andreYtelser: KodeverkMedNavn<'ArbeidType'>[],
   kunMiliterEllerSiviltjeneste?: boolean,
-): KodeverkMedNavn<ArbeidType>[] => {
+): KodeverkMedNavn<'ArbeidType'>[] => {
   if (kunMiliterEllerSiviltjeneste) {
     return andreYtelser.filter(ay => ay.kode === ArbeidType.MILITÆR_ELLER_SIVILTJENESTE);
   }

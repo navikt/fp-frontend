@@ -6,7 +6,7 @@ import { Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -38,7 +38,10 @@ const definertKodeverdiEllerUndefined = (kode: string | undefined): string | und
   return undefined;
 };
 
-const lagHjemlerMedNavn = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]): KodeverkMedNavn[] =>
+const lagHjemlerMedNavn = (
+  kodeverkNavn: KodeverkMedNavn<'KlageHjemmel'>[],
+  kodeverkVerdier: string[],
+): KodeverkMedNavn<'KlageHjemmel'>[] =>
   kodeverkNavn.filter(({ kode }) => kodeverkVerdier.includes(kode)).sort((a, b) => a.kode.localeCompare(b.kode));
 const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
@@ -73,10 +76,7 @@ export const BehandleKlageFormNfp = ({
 }: Props) => {
   const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<KlageVurderingResultatAp>();
 
-  const hjemmlerMedNavn = lagHjemlerMedNavn(
-    alleKodeverk[KodeverkType.KLAGE_HJEMMEL],
-    lagHjemmelsKoder(alleAktuelleHjemler),
-  );
+  const hjemmlerMedNavn = lagHjemlerMedNavn(alleKodeverk['KlageHjemmel'], lagHjemmelsKoder(alleAktuelleHjemler));
   const intl = useIntl();
   const [visSubmitModal, setVisSubmitModal] = useState<boolean>(false);
   const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNFP), [klageVurdering]);
@@ -112,7 +112,7 @@ export const BehandleKlageFormNfp = ({
         <KlageVurderingRadioOptionsNfp
           readOnly={isReadOnly}
           klageVurdering={formValues.klageVurdering}
-          medholdReasons={alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK]}
+          medholdReasons={alleKodeverk['KlageMedholdÅrsak']}
           alleHjemmlerMedNavn={hjemmlerMedNavn}
         />
         <ProsessStegBegrunnelseTextFieldNew

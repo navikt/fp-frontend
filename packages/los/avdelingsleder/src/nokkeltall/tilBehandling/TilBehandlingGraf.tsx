@@ -3,7 +3,7 @@ import dayjs from 'dayjs';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 const behandlingstypeOrder = [
   BehandlingType.TILBAKEKREVING_REVURDERING,
@@ -41,7 +41,7 @@ const keysFromObject = <T extends object>(object: T): (keyof T)[] => {
 
 interface Props {
   height: number;
-  behandlingTyper: KodeverkMedNavn<BehandlingType>[];
+  behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[];
   oppgaverPerDato: OppgaveForDatoGraf[];
   isToUkerValgt: boolean;
 }
@@ -134,7 +134,7 @@ const sorterBehandlingtyper = (b1: BehandlingType, b2: BehandlingType): number =
 };
 
 const finnBehandlingTypeNavn = (
-  behandlingTyper: KodeverkMedNavn<BehandlingType>[],
+  behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[],
   behandlingTypeKode: BehandlingType,
 ): string => {
   const type = behandlingTyper.find(bt => bt.kode === behandlingTypeKode);
@@ -165,6 +165,7 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
 ): Record<BehandlingType, Date[][]> =>
+  //@ts-expect-error etd
   keysFromObject(data).reduce((acc, behandlingstype) => {
     const behandlingstypeData = data[behandlingstype];
     const koordinater = [];
