@@ -165,20 +165,22 @@ const fyllInnManglendeDatoerOgSorterEtterDato = (
   periodeStart: dayjs.Dayjs,
   periodeSlutt: dayjs.Dayjs,
 ): Record<BehandlingType, Date[][]> =>
-  //@ts-expect-error etd
-  keysFromObject(data).reduce((acc, behandlingstype) => {
-    const behandlingstypeData = data[behandlingstype];
-    const koordinater = [];
+  keysFromObject(data).reduce(
+    (acc, behandlingstype) => {
+      const behandlingstypeData = data[behandlingstype];
+      const koordinater = [];
 
-    for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
-      const funnetDato = behandlingstypeData.find(d => dayjs(d.x).startOf('day').isSame(dato.startOf('day')));
-      koordinater.push(
-        funnetDato ? [dayjs(funnetDato.x).format(ISO_DATE_FORMAT), funnetDato.y] : [dato.format(ISO_DATE_FORMAT), 0],
-      );
-    }
+      for (let dato = dayjs(periodeStart); dato.isSameOrBefore(periodeSlutt); dato = dato.add(1, 'days')) {
+        const funnetDato = behandlingstypeData.find(d => dayjs(d.x).startOf('day').isSame(dato.startOf('day')));
+        koordinater.push(
+          funnetDato ? [dayjs(funnetDato.x).format(ISO_DATE_FORMAT), funnetDato.y] : [dato.format(ISO_DATE_FORMAT), 0],
+        );
+      }
 
-    return {
-      ...acc,
-      [behandlingstype]: koordinater,
-    };
-  }, {});
+      return {
+        ...acc,
+        [behandlingstype]: koordinater,
+      };
+    },
+    {} as Record<BehandlingType, Date[][]>,
+  );
