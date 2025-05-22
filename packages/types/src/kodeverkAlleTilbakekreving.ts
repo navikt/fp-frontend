@@ -23,13 +23,11 @@ type KodeverkEnumMap = {
   VergeType: VergeType;
 };
 
-type KodeverkMedSammeVerditype = {
+export type AlleKodeverkTilbakekreving = {
   [K in TilbakekrevingKodeverkType]: KodeverkMedNavnTilbakekreving<
     K extends TilbakekrevingKodeverkType ? K : unknown
   >[];
 };
-
-export type AlleKodeverkTilbakekreving = KodeverkMedSammeVerditype;
 
 type EnumOrUnknown<T extends TilbakekrevingKodeverkType> = T extends keyof KodeverkEnumMap
   ? KodeverkEnumMap[T]

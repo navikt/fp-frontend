@@ -14,7 +14,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { VenteArsakType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 export type FormValues = {
   frist?: string;
@@ -25,7 +25,7 @@ interface Props {
   submitCallback: (formData: FormValues) => void;
   cancelEvent: () => void;
   showModal: boolean;
-  ventearsaker: KodeverkMedNavn<'Venteårsak'>[];
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[] | KodeverkMedNavnTilbakekreving<'Venteårsak'>[];
   erTilbakekreving: boolean;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
