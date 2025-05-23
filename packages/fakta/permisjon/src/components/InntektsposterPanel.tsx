@@ -3,7 +3,8 @@ import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, Link, VStack } from '@navikt/ds-react';
-import { formatCurrencyNoKr, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { BeløpLabel } from '@navikt/ft-ui-komponenter';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import type { Inntektspost } from '@navikt/fp-types';
@@ -41,7 +42,9 @@ export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Pro
                     </BodyShort>
                     <BodyShort size="small">{dayjs(inntekt.fom).year()}</BodyShort>
                   </HStack>
-                  <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
+                  <BodyShort size="small">
+                    <BeløpLabel beløp={inntekt.beløp} />
+                  </BodyShort>
                 </HStack>
               ))}
           </VStack>

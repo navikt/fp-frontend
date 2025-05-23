@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { FileFillIcon, PhoneFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BeløpLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Inntektsmelding } from '@navikt/fp-types';
 
@@ -21,7 +21,9 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
       <Label size="small">
         <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
       </Label>
-      <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</BodyShort>
+      <BodyShort size="small">
+        <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
+      </BodyShort>
     </HStack>
     <HStack gap="4">
       <Label size="small">
@@ -42,7 +44,9 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
         </Label>
-        <BodyShort size="small">{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)}</BodyShort>
+        <BodyShort size="small">
+          <BeløpLabel beløp={inntektsmelding.refusjonPrMnd} />
+        </BodyShort>
       </HStack>
     )}
     <DokumentLink

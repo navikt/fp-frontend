@@ -1,7 +1,8 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { dateFormat, formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BeløpLabel, DateLabel } from '@navikt/ft-ui-komponenter';
+import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
@@ -34,13 +35,7 @@ const finnArbeidsgivertekst = (
     return '-';
   }
 
-  if (arbeidsgiverOpplysninger.erPrivatPerson) {
-    return `${arbeidsgiverOpplysninger.navn} (${dateFormat(arbeidsgiverOpplysninger.fødselsdato)})`;
-  }
-
-  return arbeidsgiverOpplysninger.identifikator
-    ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})`
-    : arbeidsgiverOpplysninger.navn;
+  return formaterArbeidsgiver(arbeidsgiverOpplysninger);
 };
 
 const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
@@ -98,7 +93,9 @@ export const ValgtAktivitetSubForm = ({
           <Label size="small">
             <FormattedMessage id="ActivityPanel.Registreringsdato" />
           </Label>
-          <BodyShort size="small">{naringRegistreringsdato ? dateFormat(naringRegistreringsdato) : '-'}</BodyShort>
+          <BodyShort size="small">
+            {naringRegistreringsdato ? <DateLabel dateString={naringRegistreringsdato} /> : '-'}
+          </BodyShort>
         </div>
         <div>
           <Label size="small">
@@ -117,7 +114,9 @@ export const ValgtAktivitetSubForm = ({
             .map(inntekt => (
               <HStack gap="5" key={inntekt.år}>
                 <BodyShort size="small">{inntekt.år}</BodyShort>
-                <BodyShort size="small">{formatCurrencyNoKr(inntekt.beløp)}</BodyShort>
+                <BodyShort size="small">
+                  <BeløpLabel beløp={inntekt.beløp} />
+                </BodyShort>
               </HStack>
             ))}
         </div>
