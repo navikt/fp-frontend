@@ -7,7 +7,7 @@ import * as stories from './FagsakSøk.stories';
 
 const { Default, IngentingBleFunnet } = composeStories(stories);
 
-describe('<FagsakSøk>', () => {
+describe('FagsakSøk', () => {
   it('skal vise tabell med saksnummer og behandlinger', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

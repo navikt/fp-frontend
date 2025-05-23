@@ -5,10 +5,10 @@ import { http, HttpResponse } from 'msw';
 import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { LosUrl } from '../../../data/fplosSaksbehandlerApi';
+import { LosUrl } from '../../../../data/fplosSaksbehandlerApi';
 import { OppgaveHandlingerMenu } from './OppgaveHandlingerMenu';
 
-import messages from '../../../../i18n/nb_NO.json';
+import messages from '../../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -64,6 +64,7 @@ export const Default: Story = {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       erTilSaksbehandling: true,
       behandlingId: '1',
+      andreKriterier: [],
     },
   },
 };

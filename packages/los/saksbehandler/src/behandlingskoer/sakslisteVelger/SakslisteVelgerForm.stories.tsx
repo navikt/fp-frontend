@@ -5,10 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
-import { AndreKriterierType } from '../../kodeverk/andreKriterierType';
 import { KoSortering } from '../../kodeverk/KoSortering';
 import { SakslisteVelgerForm } from './SakslisteVelgerForm';
 

@@ -6,7 +6,7 @@ import * as stories from './SaksbehandlerIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<SaksbehandlerIndex>', () => {
+describe('SaksbehandlerIndex', () => {
   it('skal saksbehandler-los', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     await render(<Default />);

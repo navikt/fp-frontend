@@ -6,7 +6,7 @@ import * as stories from './PersonInfo.stories';
 
 const { PersonkortMedDiskresjonskodeForMann, PersonkortForDødKvinne } = composeStories(stories);
 
-describe('<PersonInfo>', () => {
+describe('PersonInfo', () => {
   it('skal vise personkort for mann som har diskresjonskode 7', async () => {
     render(<PersonkortMedDiskresjonskodeForMann />);
 
