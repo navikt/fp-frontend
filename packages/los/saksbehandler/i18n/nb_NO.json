@@ -31,7 +31,8 @@
   "OppgaveLabels.Revurdering": "Rev",
   "OppgaveLabels.Tilbake": "Tilbake",
   "OppgaveLabels.TilbakeRev": "Tilb-Rev",
-  "OppgaveLabels.BehandlingÅrsak": "Behandlingsårsak",
+  "OppgaveLabels.RevurderingInntekstmelding": "Inntektsmelding",
+  "OppgaveLabels.BerortBehandling": "Berørt",
 
   "Person.Age": "{age} år",
   "Person.ImageText": "Personinformasjon",
