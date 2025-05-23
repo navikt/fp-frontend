@@ -8,10 +8,6 @@ import type { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { AdopsjonFaktaIndex } from './AdopsjonFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const familieHendelse = {
   gjeldende: {
     adopsjonFodelsedatoer: {

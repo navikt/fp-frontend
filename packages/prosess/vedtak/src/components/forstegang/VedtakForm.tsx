@@ -138,8 +138,8 @@ const transformValues = (
       skalBrukeOverstyrendeFritekstBrev: harOverstyrtVedtaksbrev,
     }));
 
-const finnBegrunnelse = (behandling: Behandling, beregningErManueltFastsatt: boolean): string | undefined => {
-  if (!beregningErManueltFastsatt) {
+const finnBegrunnelse = (behandling: Behandling, isReadOnly: boolean): string | undefined => {
+  if (isReadOnly) {
     return undefined;
   }
   return behandling.behandlingsresultat?.avslagsarsakFritekst

@@ -175,7 +175,6 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
       ...defaultBehandling,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
-        avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,

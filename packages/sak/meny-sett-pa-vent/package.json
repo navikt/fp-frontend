@@ -24,8 +24,8 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "4.2.1",
-    "@navikt/ft-utils": "3.4.0",
+    "@navikt/ft-ui-komponenter": "4.3.0",
+    "@navikt/ft-utils": "3.6.0",
     "dayjs": "1.11.13",
     "react": "19.1.0",
     "react-intl": "7.1.11"
