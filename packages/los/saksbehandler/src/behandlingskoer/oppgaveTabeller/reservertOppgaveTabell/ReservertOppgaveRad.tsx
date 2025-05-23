@@ -11,7 +11,7 @@ import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 import { OppgaveLabels } from '../OppgaveLabels';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
 
-import styles from './reservertOppgaveRad.module.css';
+import styles from './ReservertOppgaveRad.module.css';
 
 interface Props {
   oppgave: Oppgave;
