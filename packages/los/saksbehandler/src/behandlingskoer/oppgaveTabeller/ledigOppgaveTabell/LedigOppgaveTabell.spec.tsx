@@ -16,7 +16,7 @@ describe('OppgaverTabell', () => {
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(await screen.findByText('FP')).toBeInTheDocument();
     expect(await screen.findByText('Søknad')).toBeInTheDocument();
-    expect(await screen.findByText('Revurdering inntektsmelding')).toBeInTheDocument();
+    expect(await screen.findByText('Inntektsmelding')).toBeInTheDocument();
   });
 
   it('skal vise tom tabell når det ikke er behandlinger for køen', async () => {
