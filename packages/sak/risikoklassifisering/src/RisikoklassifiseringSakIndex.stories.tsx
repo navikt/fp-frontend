@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
@@ -15,7 +15,7 @@ const meta = {
   title: 'sak/sak-risikoklassifisering',
   component: RisikoklassifiseringSakIndex,
   args: {
-    faresignalVurderinger: alleKodeverk[KodeverkType.FARESIGNAL_VURDERING],
+    faresignalVurderinger: alleKodeverk['FaresignalVurdering'],
     submitAksjonspunkt: action('button-click') as () => Promise<AvklartRisikoklassifiseringAp>,
     toggleRiskPanel: action('button-click'),
     isPanelOpen: false,

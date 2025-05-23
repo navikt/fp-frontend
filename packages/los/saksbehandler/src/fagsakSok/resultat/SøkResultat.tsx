@@ -7,7 +7,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FagsakStatus, KodeverkLosType } from '@navikt/fp-kodeverk';
+import { FagsakStatus } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-los-felles';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
@@ -38,9 +38,9 @@ interface Props {
  * Formaterer fagsak-søkeresultatet for visning i tabell. Sortering av fagsakene blir håndtert her.
  */
 export const SøkResultat = ({ fagsaker, fagsakOppgaver, åpneFagsak, selectOppgaveCallback }: Props) => {
-  const fagsakStatuser = useLosKodeverk(KodeverkLosType.FAGSAK_STATUS);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const fagsakStatuser = useLosKodeverk('FagsakStatus');
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
+  const behandlingTyper = useLosKodeverk('BehandlingType');
 
   const sorterteFagsaker = [...fagsaker].sort(sorterFagsaker);
 

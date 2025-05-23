@@ -8,7 +8,7 @@ import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   AoIArbeidsforhold,
@@ -77,7 +77,7 @@ export const TilretteleggingFaktaForm = ({
 
   const { aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpneAksjonspunkter } =
     usePanelDataContext<BekreftSvangerskapspengerAp>();
-  const uttakArbeidTyper = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE];
+  const uttakArbeidTyper = alleKodeverk['UttakArbeidType'];
 
   const sorterteArbeidsforhold = sorterArbeidsforhold(
     svangerskapspengerTilrettelegging.arbeidsforholdListe,

@@ -9,7 +9,6 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   FagsakYtelseType,
-  KodeverkType,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -67,7 +66,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const alleAvslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR];
+  const alleAvslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.FODSELSVILKARET_MOR];
   const avslagsarsaker = getFodselVilkarAvslagsarsaker(
     ytelseTypeKode === FagsakYtelseType.FORELDREPENGER,
     alleAvslagsarsaker,
@@ -128,8 +127,8 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Vu
 
 const getFodselVilkarAvslagsarsaker = (
   isFpFagsak: boolean,
-  fodselsvilkarAvslagskoder: KodeverkMedNavn[],
-): KodeverkMedNavn[] =>
+  fodselsvilkarAvslagskoder: KodeverkMedNavn<'Avslagsårsak'>[],
+): KodeverkMedNavn<'Avslagsårsak'>[] =>
   isFpFagsak
     ? fodselsvilkarAvslagskoder.filter(arsak => !avslagsarsakerES.includes(arsak.kode))
     : fodselsvilkarAvslagskoder;

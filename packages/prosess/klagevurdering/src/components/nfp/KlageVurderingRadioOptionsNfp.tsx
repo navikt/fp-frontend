@@ -15,8 +15,8 @@ import styles from './klageVurderingRadioOptionsNfp.module.css';
 
 interface Props {
   readOnly: boolean;
-  medholdReasons: KodeverkMedNavn[];
-  alleHjemmlerMedNavn: KodeverkMedNavn[];
+  medholdReasons: KodeverkMedNavn<'KlageMedholdÅrsak'>[];
+  alleHjemmlerMedNavn: KodeverkMedNavn<'KlageHjemmel'>[];
   klageVurdering?: string;
 }
 
@@ -27,12 +27,12 @@ export const KlageVurderingRadioOptionsNfp = ({
   klageVurdering,
 }: Props) => {
   const intl = useIntl();
-  const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => (
+  const medholdOptions = medholdReasons.map(mo => (
     <option key={mo.kode} value={mo.kode}>
       {mo.navn}
     </option>
   ));
-  const hjemmelOptions = alleHjemmlerMedNavn.map((mo: KodeverkMedNavn) => (
+  const hjemmelOptions = alleHjemmlerMedNavn.map(mo => (
     <option key={mo.kode} value={mo.kode}>
       {mo.navn}
     </option>

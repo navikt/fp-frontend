@@ -6,7 +6,6 @@ import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
@@ -17,8 +16,8 @@ import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
-import { initFetchOptions } from '../data/fagsakApi';
-import { useFpSakKodeverk, useGetKodeverkFn } from '../data/useKodeverk';
+import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
+import { useFpSakKodeverk } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';
 import { EksterneRessurser } from './EksterneRessurser';
 import { RisikoklassifiseringIndex } from './risikoklassifisering/RisikoklassifiseringIndex';
@@ -67,14 +66,14 @@ export const FagsakProfileIndex = ({
   const [showAll, setShowAll] = useState(!behandlingUuid);
   const toggleShowAll = () => setShowAll(!showAll);
 
-  const getKodeverkFn = useGetKodeverkFn();
+  const api = useFagsakApi();
+  const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
+  const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
 
   const fagsak = fagsakData.getFagsak();
-  const fagsakStatusMedNavn = notEmpty(
-    useFpSakKodeverk(KodeverkType.FAGSAK_STATUS).find(k => k.kode === fagsak.status),
-  );
+  const fagsakStatusMedNavn = notEmpty(useFpSakKodeverk('FagsakStatus').find(k => k.kode === fagsak.status));
   const fagsakYtelseTypeMedNavn = notEmpty(
-    useFpSakKodeverk(KodeverkType.FAGSAK_YTELSE).find(k => k.kode === fagsak.fagsakYtelseType),
+    useFpSakKodeverk('FagsakYtelseType').find(k => k.kode === fagsak.fagsakYtelseType),
   );
 
   const initFetchQuery = useQuery(initFetchOptions());
@@ -157,7 +156,8 @@ export const FagsakProfileIndex = ({
                       {behandlingInfoKomponent}
                     </NavLink>
                   )}
-                  getKodeverkMedNavn={getKodeverkFn}
+                  alleKodeverk={notEmpty(alleFpSakKodeverk)}
+                  alleKodeverkTilbakekreving={notEmpty(alleKodeverkFpTilbake)}
                 />
               </ErrorBoundary>
             </div>

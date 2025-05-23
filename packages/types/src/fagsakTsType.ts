@@ -1,10 +1,18 @@
+import type {
+  BehandlingType,
+  FagsakMarkeringKode,
+  FagsakStatus,
+  FagsakYtelseType,
+  RelasjonsRolleType,
+} from '@navikt/fp-kodeverk';
+
 import type { BehandlingAppKontekst } from './behandlingAppKontekstTsType';
 import type { Historikkinnslag } from './historikkinnslagTsType';
 import type { Person } from './personTsType';
 import type { Risikoklassifisering } from './risikoklassifiseringTsType';
 
 export type BehandlingOppretting = Readonly<{
-  behandlingType: string;
+  behandlingType: BehandlingType;
   kanOppretteBehandling: boolean;
 }>;
 
@@ -18,7 +26,7 @@ export type FagsakHendelse = Readonly<{
 export type AnnenPartBehandling = {
   saksnummer: string;
   behandlingUuid: string;
-  relasjonsRolleType: string;
+  relasjonsRolleType: RelasjonsRolleType;
 };
 
 export type Saksnotat = {
@@ -28,15 +36,15 @@ export type Saksnotat = {
 };
 
 export type Saksmarkering = {
-  fagsakMarkering: string;
+  fagsakMarkering: FagsakMarkeringKode;
   kortNavn?: string;
 };
 
 export type Fagsak = Readonly<{
   saksnummer: string;
-  fagsakYtelseType: string;
-  relasjonsRolleType: string;
-  status: string;
+  fagsakYtelseType: FagsakYtelseType;
+  relasjonsRolleType: RelasjonsRolleType;
+  status: FagsakStatus;
   dekningsgrad: number;
   aktørId: string;
   harVergeIÅpenBehandling: boolean;

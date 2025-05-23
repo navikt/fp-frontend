@@ -1,4 +1,4 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -117,7 +117,7 @@ const GYLDIGE_UTTAK_PERIODER = [
   UttakPeriodeType.UDEFINERT,
 ];
 
-const lagPeriodeTypeOptions = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const lagPeriodeTypeOptions = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.some(p => p === kode))
     .map(({ kode, navn }) => (
@@ -153,7 +153,7 @@ const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
   };
 
 interface Props {
-  periodeTyper: KodeverkMedNavn[];
+  periodeTyper: KodeverkMedNavn<'UttakPeriodeType'>[];
   isReadOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   aktiviteter: PeriodeSokerAktivitet[];
@@ -177,7 +177,7 @@ export const UttakAktiviteterTabell = ({
     name: 'aktiviteter',
   });
 
-  const periodeTypeOptions = useMemo(() => lagPeriodeTypeOptions(periodeTyper), [periodeTyper]);
+  const periodeTypeOptions = lagPeriodeTypeOptions(periodeTyper);
 
   const { utsettelseType } = valgtPeriode;
 

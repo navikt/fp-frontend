@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, VStack } from '@navikt/ds-react';
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 
 import styles from './rettighetFaktaPanel.module.css';
@@ -73,6 +73,6 @@ RettighetFaktaPanel.buildInitialValues = (
 ): FormValues => ({
   ytelser: innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
   farSokerType: soknad.farSokerType
-    ? (alleKodeverk[KodeverkType.FAR_SOEKER_TYPE].find(k => k.kode === soknad.farSokerType)?.navn ?? '')
+    ? (alleKodeverk['FarSøkerType'].find(k => k.kode === soknad.farSokerType)?.navn ?? '')
     : undefined,
 });

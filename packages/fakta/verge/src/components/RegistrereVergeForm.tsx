@@ -27,7 +27,7 @@ export type VergeFormValues = {
 
 interface Props {
   readOnly: boolean;
-  vergetyper: KodeverkMedNavn[];
+  vergetyper: KodeverkMedNavn<'VergeType'>[];
   valgtVergeType: string | undefined;
 }
 

@@ -4,8 +4,8 @@ import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icon
 import { BodyShort, Box, HStack, Label, Spacer, Tooltip, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import { BehandlingArsakType, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
-import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import { BehandlingArsakType, BehandlingType } from '@navikt/fp-kodeverk';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import styles from './behandlingInformasjon.module.css';
 
@@ -18,7 +18,8 @@ interface Props {
   withChevronDown?: boolean;
   withChevronUp?: boolean;
   behandling: BehandlingAppKontekst;
-  getKodeverkMedNavn: (kode: string, kodeverk: KodeverkType, behandlingType?: string) => KodeverkMedNavn | undefined;
+  alleKodeverk: AlleKodeverk;
+  alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
 }
 
 /**
@@ -30,27 +31,36 @@ export const BehandlingInformasjon = ({
   withChevronDown = false,
   withChevronUp = false,
   behandling,
-  getKodeverkMedNavn,
+  alleKodeverk,
+  alleKodeverkTilbakekreving,
 }: Props) => {
   const intl = useIntl();
+
+  const erTilbakekreving =
+    behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+
+  const behandlingType = erTilbakekreving
+    ? alleKodeverkTilbakekreving['BehandlingType']
+    : alleKodeverk['BehandlingType'];
+
+  const behandlingResultatType = erTilbakekreving
+    ? alleKodeverkTilbakekreving['BehandlingResultatType']
+    : alleKodeverk['BehandlingResultatType'];
+
   return (
     <Box borderWidth="2" borderColor="border-divider" borderRadius="large" padding="3">
       <VStack gap="1">
         <HStack gap="4">
           <div className={styles.arsakPadding}>
-            <Label size="small">
-              {getKodeverkMedNavn(behandling.type, KodeverkType.BEHANDLING_TYPE, behandling.type)?.navn ?? ''}
-            </Label>
+            <Label size="small">{behandlingType.find(bt => bt.kode === behandling.type)?.navn ?? ''}</Label>
           </div>
           {(behandling.type === BehandlingType.REVURDERING || behandling.type === BehandlingType.KLAGE) &&
             behandling.førsteÅrsak?.behandlingArsakType && (
               <>
                 -
                 <BodyShort size="small">
-                  {getKodeverkMedNavn(
-                    behandling.førsteÅrsak.behandlingArsakType,
-                    KodeverkType.BEHANDLING_AARSAK,
-                    BehandlingType.REVURDERING,
+                  {alleKodeverk['BehandlingÅrsakType'].find(
+                    bt => bt.kode === behandling.førsteÅrsak?.behandlingArsakType,
                   )?.navn ?? ''}
                 </BodyShort>
               </>
@@ -96,8 +106,7 @@ export const BehandlingInformasjon = ({
             </div>
             <div>
               <BodyShort size="small">
-                {getKodeverkMedNavn(behandling.status, KodeverkType.BEHANDLING_STATUS, BehandlingType.FORSTEGANGSSOKNAD)
-                  ?.navn ?? ''}
+                {alleKodeverk['BehandlingStatus'].find(bs => bs.kode === behandling.status)?.navn ?? ''}
               </BodyShort>
             </div>
           </HStack>
@@ -110,13 +119,7 @@ export const BehandlingInformasjon = ({
               </div>
               <div>
                 <BodyShort size="small">
-                  {behandling.behandlingsresultat?.type
-                    ? getKodeverkMedNavn(
-                        behandling.behandlingsresultat.type,
-                        KodeverkType.BEHANDLING_RESULTAT_TYPE,
-                        behandling.type,
-                      )?.navn
-                    : '-'}
+                  {behandlingResultatType.find(brt => brt.kode === behandling.behandlingsresultat?.type)?.navn ?? '-'}
                 </BodyShort>
               </div>
             </HStack>

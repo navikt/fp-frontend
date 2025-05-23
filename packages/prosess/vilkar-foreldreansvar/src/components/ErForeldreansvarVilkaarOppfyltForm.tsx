@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -72,7 +72,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
   const vilkarTypeKode = isForeldreansvar2Ledd
     ? VilkarType.FORELDREANSVARSVILKARET_2_LEDD
     : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
-  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][vilkarTypeKode];
+  const avslagsarsaker = alleKodeverk['Avslagsårsak'][vilkarTypeKode];
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 

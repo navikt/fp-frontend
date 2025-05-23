@@ -15,7 +15,7 @@ import { BodyShort, Button, HStack, Timeline, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { FagsakYtelseType, KodeverkType, SoknadType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, SoknadType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -251,7 +251,7 @@ const formatPerioder = (perioder: BeregningsresultatPeriode[] = []): Periode[] =
     }));
 
 const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk): string => {
-  const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
+  const kodeverk = alleKodeverk['RelasjonsRolleType'];
   return kodeverk.find(k => k.kode === fagsak.relasjonsRolleType)?.navn ?? '';
 };
 

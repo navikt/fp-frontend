@@ -6,12 +6,7 @@ import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, dateFormat, periodFormat } from '@navikt/ft-utils';
 
-import {
-  KodeverkType,
-  OppholdArsakType,
-  PeriodeResultatType,
-  UttakArbeidType as uttakArbeidTypeKodeverk,
-} from '@navikt/fp-kodeverk';
+import { OppholdArsakType, PeriodeResultatType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker } from '@navikt/fp-types';
 
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
@@ -75,9 +70,7 @@ const typePeriode = (
       <FormattedMessage
         id="UttakActivity.Utsettelse"
         values={{
-          utsettelseType: alleKodeverk[KodeverkType.UTTAK_UTSETTELSE_TYPE].find(
-            k => k.kode === valgtPeriode.utsettelseType,
-          )?.navn,
+          utsettelseType: alleKodeverk['UttakUtsettelseType'].find(k => k.kode === valgtPeriode.utsettelseType)?.navn,
         }}
       />
     );
@@ -94,7 +87,7 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
       <FormattedMessage
         id="UttakActivity.InnvilgelseAarsak"
         values={{
-          innvilgelseAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
+          innvilgelseAarsak: alleKodeverk['PeriodeResultatÅrsak'].find(
             k => k.kode === valgtPeriode.periodeResultatÅrsak,
           )?.navn,
           b: chunks => <b>{chunks}</b>,
@@ -106,9 +99,8 @@ const isInnvilgetText = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk)
     <FormattedMessage
       id="UttakActivity.IkkeOppfyltAarsak"
       values={{
-        avslagAarsak: alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK].find(
-          k => k.kode === valgtPeriode.periodeResultatÅrsak,
-        )?.navn,
+        avslagAarsak: alleKodeverk['PeriodeResultatÅrsak'].find(k => k.kode === valgtPeriode.periodeResultatÅrsak)
+          ?.navn,
         b: chunks => <b>{chunks}</b>,
       }}
     />
@@ -119,8 +111,7 @@ const stonadskonto = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk, ko
   let returnText = '';
   if (!kontoIkkeSatt) {
     returnText =
-      alleKodeverk[KodeverkType.STOENADSKONTOTYPE].find(k => k.kode === valgtPeriode.aktiviteter[0]?.stønadskontoType)
-        ?.navn ?? '';
+      alleKodeverk['StønadskontoType'].find(k => k.kode === valgtPeriode.aktiviteter[0]?.stønadskontoType)?.navn ?? '';
   }
   return returnText;
 };
@@ -132,7 +123,7 @@ const gyldigeÅrsaker = [
   OppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
 ];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapPeriodeTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => gyldigeÅrsaker.some(årsak => årsak === kode))
     .map(({ kode }) => (
@@ -178,7 +169,7 @@ export const UttakPeriodeInfo = ({
 }: Props) => {
   const intl = useIntl();
 
-  const oppholdArsakTyper = alleKodeverk[KodeverkType.OPPHOLD_ARSAK];
+  const oppholdArsakTyper = alleKodeverk['OppholdÅrsak'];
 
   const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
 
@@ -251,10 +242,7 @@ export const UttakPeriodeInfo = ({
             <b>
               <FormattedMessage id="UttakActivity.GraderingIkkeOppfylt" />:
             </b>
-            {
-              alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK].find(k => k.kode === valgtPeriode.graderingAvslagÅrsak)
-                ?.navn
-            }
+            {alleKodeverk['GraderingAvslagÅrsak'].find(k => k.kode === valgtPeriode.graderingAvslagÅrsak)?.navn}
           </div>
         )}
       </HStack>

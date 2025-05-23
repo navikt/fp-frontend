@@ -70,7 +70,7 @@ interface Props {
   velgForrigeAktivitet: () => void;
   harAksjonspunkt: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  opptjeningAktivitetTyper: KodeverkMedNavn[];
+  opptjeningAktivitetTyper: KodeverkMedNavn<'OpptjeningAktivitetType'>[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   ferdiglignetNæring: FerdiglignetNæring[];
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];

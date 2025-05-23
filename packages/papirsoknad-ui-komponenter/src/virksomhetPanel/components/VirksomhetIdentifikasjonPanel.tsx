@@ -14,7 +14,6 @@ import {
 } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
@@ -23,7 +22,7 @@ import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../typ
 
 import styles from './virksomhetIdentifikasjonPanel.module.css';
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
+const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes.map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
@@ -44,9 +43,7 @@ interface Props {
  */
 export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }: Props) => {
   const intl = useIntl();
-  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER]
-    .slice()
-    .sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   const { getValues } = useFormContext<VirksomhetFormValues>();
 

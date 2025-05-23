@@ -6,8 +6,7 @@ import { BodyShort, Detail, Heading, HStack, Label, Link, Table, VStack } from '
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KodeverkLosType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
@@ -25,7 +24,10 @@ const headerTextCodes = [
   'GjeldendeSakslisterTabell.SistEndret',
 ];
 
-const formatStonadstyper = (fagsakYtelseTyper: KodeverkMedNavn[], valgteFagsakYtelseTyper?: string[]) => {
+const formatStonadstyper = (
+  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
+  valgteFagsakYtelseTyper?: string[],
+) => {
   if (!valgteFagsakYtelseTyper || valgteFagsakYtelseTyper.length === 0) {
     return <FormattedMessage id="GjeldendeSakslisterTabell.Alle" />;
   }
@@ -38,7 +40,10 @@ const formatStonadstyper = (fagsakYtelseTyper: KodeverkMedNavn[], valgteFagsakYt
     .join(', ');
 };
 
-const formatBehandlingstyper = (behandlingTyper: KodeverkMedNavn[], valgteBehandlingTyper?: string[]) => {
+const formatBehandlingstyper = (
+  behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[],
+  valgteBehandlingTyper?: string[],
+) => {
   if (
     !valgteBehandlingTyper ||
     valgteBehandlingTyper.length === 0 ||
@@ -86,8 +91,8 @@ export const GjeldendeSakslisterTabell = ({
   const [valgtSakslisteForSletting, setValgtSakslisteForSletting] = useState<SakslisteAvdeling>();
   const tabRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const behandlingTyper = useLosKodeverk('BehandlingType');
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
   const { mutate: fjernSaksliste } = useMutation({
     mutationFn: (values: { sakslisteId: number }) => slettSaksliste(values.sakslisteId, valgtAvdelingEnhet),

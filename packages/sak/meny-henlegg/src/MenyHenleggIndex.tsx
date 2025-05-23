@@ -23,7 +23,7 @@ interface Props {
   henleggBehandling: (params: { årsakKode: string; begrunnelse: string; fritekst?: string }) => Promise<void>;
   forhandsvisHenleggBehandling: (data: ForhåndsvisHenleggParams) => void;
   ytelseType: string;
-  behandlingResultatTyper: KodeverkMedNavn[];
+  behandlingResultatTyper: KodeverkMedNavn<'BehandlingResultatType'>[];
   gaaTilSokeside: () => void;
   lukkModal: () => void;
 }

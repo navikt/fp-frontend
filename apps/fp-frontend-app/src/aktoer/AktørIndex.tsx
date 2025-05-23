@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { AktørSakIndex } from '@navikt/fp-sak-aktor';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { useTrackRouteParam } from '@navikt/fp-utils';
@@ -19,8 +18,8 @@ export const AktørIndex = () => {
 
   const { data: aktørInfo, status } = useQuery(aktørInfoOptions(selectedAktoerId));
 
-  const fagsakStatuser = useFpSakKodeverk(KodeverkType.FAGSAK_STATUS);
-  const fagsakYtelser = useFpSakKodeverk(KodeverkType.FAGSAK_YTELSE);
+  const fagsakStatuser = useFpSakKodeverk('FagsakStatus');
+  const fagsakYtelser = useFpSakKodeverk('FagsakYtelseType');
 
   if (status === 'pending') {
     return <LoadingPanel />;

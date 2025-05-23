@@ -46,7 +46,7 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
+const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
     .filter(({ kode }) => kode !== Landkode.NORGE)
     .map(
@@ -73,7 +73,7 @@ const getValiderFørEllerEtter =
 interface Props {
   erTidligereOpphold?: boolean;
   mottattDato?: string;
-  countryCodes: KodeverkMedNavn[];
+  countryCodes: KodeverkMedNavn<'Landkoder'>[];
   readOnly: boolean;
 }
 

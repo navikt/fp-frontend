@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { dateTimeFormat } from '@navikt/ft-utils';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -30,7 +29,7 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
   if (klageFormkravResultatKA?.paKlagdBehandlingUuid) {
     const behandling = avsluttedeBehandlinger.find(b => b.uuid === klageFormkravResultatKA.paKlagdBehandlingUuid);
     if (behandling) {
-      const navn = alleKodeverk[KodeverkType.BEHANDLING_TYPE].find(k => k.kode === behandling.type)?.navn;
+      const navn = alleKodeverk['BehandlingType'].find(k => k.kode === behandling.type)?.navn;
       vedtak = `${navn} ${behandling.avsluttet ? dateTimeFormat(behandling.avsluttet) : ''}`;
     }
   }

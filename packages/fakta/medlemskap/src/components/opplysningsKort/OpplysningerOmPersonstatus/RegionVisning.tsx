@@ -5,8 +5,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, RegionPeriode } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkType, RegionPeriode } from '@navikt/fp-types';
 
 interface Props {
   regioner: RegionPeriode[];
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: Props) => {
-  const kodeverkNavn = alleKodeverk[KodeverkType.REGION];
+  const kodeverkNavn = alleKodeverk['Region'];
 
   const getRegion = (verdi: RegionPeriode): string => {
     return kodeverkNavn.find(it => it.kode === verdi.type)?.navn ?? `Ukjent region: ${verdi?.type.toLowerCase()}`;
@@ -34,7 +33,7 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
         <BodyLong textColor="subtle">
           <FormattedMessage
             id="OpplysningerOmPersonstatus.RegionIngen"
-            values={{ type: KodeverkType.REGION, erAnnenpart }}
+            values={{ type: 'Region' satisfies KodeverkType, erAnnenpart }}
           />
         </BodyLong>
       </>

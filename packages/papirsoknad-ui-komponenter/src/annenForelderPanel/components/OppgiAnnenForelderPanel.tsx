@@ -12,7 +12,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { KanIkkeOppgiAnnenForelderArsak, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
+import { KanIkkeOppgiAnnenForelderArsak, Landkode } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
@@ -20,7 +20,7 @@ import type { AnnenForelderFormValues, AnnenForelderSubFormValues } from '../typ
 
 import styles from './annenForelderPanel.module.css';
 
-const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn[]): ReactElement[] =>
+const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   landkoder
     .filter(({ kode }) => kode !== Landkode.NORGE)
     .map(({ kode, navn }) => (
@@ -47,7 +47,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
   const kanIkkeOppgiAnnenForelder = watch(`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`);
   const kanIkkeOppgiBegrunnelse = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}`);
 
-  const landkoder = alleKodeverk[KodeverkType.LANDKODER];
+  const landkoder = alleKodeverk['Landkoder'];
   const sorterteLand = useMemo(() => landkoder.slice().sort((a, b) => a.navn.localeCompare(b.navn)), [landkoder]);
 
   return (

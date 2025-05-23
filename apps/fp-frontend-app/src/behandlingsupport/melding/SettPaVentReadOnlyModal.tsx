@@ -9,7 +9,7 @@ import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 interface Props {
   lukkCallback: () => void;
-  ventearsaker: KodeverkMedNavn[];
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[];
   ventearsak?: string;
   frist: string | null;
 }

@@ -4,15 +4,19 @@ import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import {
+  AndreKriterierType,
+  BehandlingStatus,
+  BehandlingType,
+  FagsakYtelseType,
+  KøSortering,
+} from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
-import { AndreKriterierType } from './kodeverk/andreKriterierType';
-import { KoSortering } from './kodeverk/KoSortering';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
 import type { NyeOgFerdigstilteOppgaver } from './typer/nyeOgFerdigstilteOppgaverTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
@@ -23,7 +27,7 @@ const SAKSLISTER = [
     sakslisteId: 1,
     navn: 'Saksliste 1',
     sortering: {
-      sorteringType: KoSortering.BEHANDLINGSFRIST,
+      sorteringType: KøSortering.BEHANDLINGSFRIST,
       fra: 1,
       til: 4,
       erDynamiskPeriode: true,

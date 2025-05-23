@@ -85,7 +85,7 @@ const lagPerioder = (
 
 const lagRader = (
   opptjeningPeriods: OpptjeningAktivitet[],
-  opptjeningAktivitetTypes: KodeverkMedNavn[],
+  opptjeningAktivitetTypes: KodeverkMedNavn<'OpptjeningAktivitetType'>[],
   intl: IntlShape,
 ): Rad[] => {
   const duplicatesRemoved = opptjeningPeriods.reduce<OpptjeningAktivitet[]>((accPeriods, period) => {
@@ -116,7 +116,7 @@ interface Props {
   opptjeningPerioder: OpptjeningAktivitet[];
   formVerdierForAlleAktiviteter: FormValues[];
   valgtAktivitetIndex?: number;
-  opptjeningAktivitetTypes: KodeverkMedNavn[];
+  opptjeningAktivitetTypes: KodeverkMedNavn<'OpptjeningAktivitetType'>[];
   setValgtAktivitetIndex: (periodeIndex: number) => void;
   fastsattOpptjening?: Opptjening['fastsattOpptjening'];
 }

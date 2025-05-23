@@ -6,7 +6,6 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AktivNaturalYtelse, AlleKodeverk, Inntektsmelding } from '@navikt/fp-types';
 
 import { InntektsmeldingInfoBlokk } from './InntektsmeldingInfoBlokk';
@@ -89,9 +88,7 @@ export const BortfalteNaturalYtelser = ({
         <VStack gap="1">
           {Object.entries(bortfalteNaturalytelser).map(([key, value]) => (
             <div key={key}>
-              <span>
-                {alleKodeverk[KodeverkType.NATURAL_YTELSE_TYPE].find(kodeverk => kodeverk.kode === key)?.navn}
-              </span>
+              <span>{alleKodeverk['NaturalYtelseType'].find(kodeverk => kodeverk.kode === key)?.navn}</span>
               <ul>
                 {value.map(naturalytelse => (
                   <React.Fragment key={naturalytelse.indexKey}>

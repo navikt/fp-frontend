@@ -6,7 +6,7 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, DokumentMalType, KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
+import { BehandlingType, DokumentMalType, VenteArsakType } from '@navikt/fp-kodeverk';
 import {
   type ForhåndsvisBrevParams,
   MeldingerSakIndex,
@@ -27,7 +27,7 @@ import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
-const EMPTY_ARRAY = [] as KodeverkMedNavn[];
+const EMPTY_ARRAY = [] as KodeverkMedNavn<'Venteårsak'>[];
 
 interface Props {
   fagsakData: FagsakData;
@@ -70,8 +70,8 @@ export const MeldingIndex = ({
     innloggetBruker: { kanVeilede },
   } = notEmpty(initFetchQuery.data);
 
-  const ventearsaker = useFpSakKodeverk(KodeverkType.VENT_AARSAK) || EMPTY_ARRAY;
-  const revurderingVarslingArsak = useFpSakKodeverk(KodeverkType.REVURDERING_VARSLING_ÅRSAK);
+  const ventearsaker = useFpSakKodeverk('Venteårsak') || EMPTY_ARRAY;
+  const revurderingVarslingArsak = useFpSakKodeverk('RevurderingVarslingÅrsak');
 
   const { mutateAsync: sendMelding, status: meldingStatus } = useMutation({
     mutationFn: (valuesToStore: SubmitMessageParams) => api.sendMelding(valuesToStore),

@@ -7,7 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   AlleKodeverk,
@@ -132,7 +132,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
         <OmsorgOgForeldreansvarFaktaForm
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
           readOnly={isReadOnly}
-          vilkarTypes={alleKodeverk[KodeverkType.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
+          vilkarTypes={alleKodeverk['OmsorgsovertakelseVilkårType']}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
           gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}

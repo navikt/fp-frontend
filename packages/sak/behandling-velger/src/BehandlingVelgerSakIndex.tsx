@@ -3,8 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingerListe } from './components/BehandlingerListe';
 
@@ -18,7 +17,8 @@ interface Props {
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
   renderRadSomLenke: (className: string, behandlingInfoKomponent: ReactElement, uuid: string) => ReactElement;
-  getKodeverkMedNavn: (kode: string, kodeverk: KodeverkType, behandlingType?: string) => KodeverkMedNavn | undefined;
+  alleKodeverk: AlleKodeverk;
+  alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
 }
 
 export const BehandlingVelgerSakIndex = (props: Props) => (

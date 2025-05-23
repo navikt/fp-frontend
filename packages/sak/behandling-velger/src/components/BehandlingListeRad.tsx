@@ -1,7 +1,6 @@
 import { type ReactElement } from 'react';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
-import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BehandlingInformasjon } from './BehandlingInformasjon';
 
@@ -14,7 +13,8 @@ interface Props {
   skalViseAlleBehandlinger: boolean;
   toggleVisAlleBehandlinger: () => void;
   renderRadSomLenke: (className: string, behandlingInfoKomponent: ReactElement, uuid: string) => ReactElement;
-  getKodeverkMedNavn: (kode: string, kodeverk: KodeverkType, behandlingType?: string) => KodeverkMedNavn | undefined;
+  alleKodeverk: AlleKodeverk;
+  alleKodeverkTilbakekreving: AlleKodeverkTilbakekreving;
 }
 
 export const BehandlingListeRad = ({
@@ -24,7 +24,8 @@ export const BehandlingListeRad = ({
   skalViseAlleBehandlinger,
   toggleVisAlleBehandlinger,
   renderRadSomLenke,
-  getKodeverkMedNavn,
+  alleKodeverk,
+  alleKodeverkTilbakekreving,
 }: Props) => {
   if (erKunEnBehandling && erAktiv) {
     return (
@@ -32,7 +33,8 @@ export const BehandlingListeRad = ({
         behandling={behandling}
         withChevronDown={false}
         withChevronUp={false}
-        getKodeverkMedNavn={getKodeverkMedNavn}
+        alleKodeverk={alleKodeverk}
+        alleKodeverkTilbakekreving={alleKodeverkTilbakekreving}
       />
     );
   }
@@ -43,7 +45,8 @@ export const BehandlingListeRad = ({
         behandling={behandling}
         withChevronDown={false}
         withChevronUp={skalViseAlleBehandlinger && erAktiv}
-        getKodeverkMedNavn={getKodeverkMedNavn}
+        alleKodeverk={alleKodeverk}
+        alleKodeverkTilbakekreving={alleKodeverkTilbakekreving}
       />,
       behandling.uuid,
     );
@@ -55,7 +58,8 @@ export const BehandlingListeRad = ({
           behandling={behandling}
           withChevronDown={!skalViseAlleBehandlinger}
           withChevronUp={skalViseAlleBehandlinger}
-          getKodeverkMedNavn={getKodeverkMedNavn}
+          alleKodeverk={alleKodeverk}
+          alleKodeverkTilbakekreving={alleKodeverkTilbakekreving}
         />
       </button>
     );

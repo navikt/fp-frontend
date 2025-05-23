@@ -9,10 +9,11 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { BehandlingType, KonsekvensForYtelsen, VurderPaNyttArsakType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KonsekvensForYtelsen, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
   TotrinnskontrollAksjonspunkt,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
@@ -44,25 +45,25 @@ const harIkkeKonsekvenserForYtelsen = (
 
 const finnArsaker = (vurderPaNyttArsaker: string[]) =>
   vurderPaNyttArsaker.reduce((acc, arsak) => {
-    if (arsak === VurderPaNyttArsakType.FEIL_FAKTA) {
+    if (arsak === VurderÅrsak.FEIL_FAKTA) {
       return { ...acc, feilFakta: true };
     }
-    if (arsak === VurderPaNyttArsakType.FEIL_LOV) {
+    if (arsak === VurderÅrsak.FEIL_LOV) {
       return { ...acc, feilLov: true };
     }
-    if (arsak === VurderPaNyttArsakType.FEIL_REGEL) {
+    if (arsak === VurderÅrsak.FEIL_REGEL) {
       return { ...acc, feilSkjønn: true };
     }
-    if (arsak === VurderPaNyttArsakType.SKJØNN) {
+    if (arsak === VurderÅrsak.SKJØNN) {
       return { ...acc, feilSkjønn: true };
     }
-    if (arsak === VurderPaNyttArsakType.UTREDNING) {
+    if (arsak === VurderÅrsak.UTREDNING) {
       return { ...acc, feilUtredning: true };
     }
-    if (arsak === VurderPaNyttArsakType.SAKSFLYT || arsak === VurderPaNyttArsakType.ANNET) {
+    if (arsak === VurderÅrsak.SAKSFLYT || arsak === VurderÅrsak.ANNET) {
       return { ...acc, feilSaksflyt: true };
     }
-    if (arsak === VurderPaNyttArsakType.BEGRUNNELSE) {
+    if (arsak === VurderÅrsak.BEGRUNNELSE) {
       return { ...acc, feilBegrunnelse: true };
     }
     return {};
@@ -91,9 +92,9 @@ interface Props {
   readOnly: boolean;
   erTilbakekreving: boolean;
   erForeldrepengerFagsak: boolean;
-  skjemalenkeTyper: KodeverkMedNavn[];
+  skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   erBehandlingEtterKlage: boolean;
-  faktaOmBeregningTilfeller: KodeverkMedNavn[];
+  faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
   lagLenke: (skjermlenkeCode: string) => Location | undefined;
   onSubmit: (data: FormValues) => void;
   beslutterFormData?: FormValues;

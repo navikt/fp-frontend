@@ -14,8 +14,7 @@ import { PanelDataProvider } from '@navikt/fp-utils';
 
 import type { FaktaAksjonspunkt } from '../../types-avklar-aksjonspunkter/src/FaktaAksjonspunkt';
 import type { ProsessAksjonspunkt } from '../../types-avklar-aksjonspunkter/src/ProsessAksjonspunkt';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import { alleKodeverk } from '../mocks/alleKodeverk';
 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 

@@ -3,6 +3,7 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { InntektsmeldingFaktaIndex } from '@navikt/fp-fakta-inntektsmelding';
+import { NaturalYtelseType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type { ArbeidsgiverOpplysninger, Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 
@@ -109,13 +110,13 @@ export const InntektsmeldingDefault: Story = {
         aktiveNaturalytelser: [
           {
             periode: { fomDato: '2024-01-09', tomDato: '2024-10-09' },
-            type: 'ELEKTRISK_KOMMUNIKASJON',
+            type: NaturalYtelseType.ELEKTRISK_KOMMUNIKASJON,
             beloepPerMnd: { verdi: 999 },
             indexKey: '1',
           },
           {
             periode: { fomDato: '2024-01-11', tomDato: '2024-10-11' },
-            type: 'LOSJI',
+            type: NaturalYtelseType.LOSJI,
             beloepPerMnd: { verdi: 10 },
             indexKey: '2',
           },

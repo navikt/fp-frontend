@@ -42,7 +42,7 @@ const gyldigeÅrsaker = [
   OppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
 ];
 
-const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => gyldigeÅrsaker.some(ga => ga === kode))
     .map(({ kode, navn }) => (
@@ -52,7 +52,7 @@ const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
     ));
 
 interface Props {
-  oppholdsReasons: KodeverkMedNavn[];
+  oppholdsReasons: KodeverkMedNavn<'OppholdÅrsak'>[];
   readOnly: boolean;
 }
 

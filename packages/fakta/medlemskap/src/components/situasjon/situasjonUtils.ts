@@ -1,13 +1,13 @@
 import { type IntlShape } from 'react-intl';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
-import { AdresseType, KodeverkType, Landkode } from '@navikt/fp-kodeverk';
+import { AdresseType, Landkode } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Medlemskap, UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
 
 export const getSisteRegion = (medlemskap: Medlemskap, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
-  const alleRegioner = alleKodeverk[KodeverkType.REGION];
+  const alleRegioner = alleKodeverk['Region'];
   const nyesteRegion = medlemskap.regioner.sort(sorterPerioder)[0];
   return alleRegioner.find(r => r.kode === nyesteRegion.type)?.navn ?? intl.formatMessage({ id: 'Situasjon.Ukjent' });
 };
@@ -15,7 +15,7 @@ export const getSisteRegion = (medlemskap: Medlemskap, alleKodeverk: AlleKodever
 export const getSistePersonstatus = (medlemskap: Medlemskap, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
   const nyeste = medlemskap.personstatuser.sort(sorterPerioder)[0];
   if (nyeste) {
-    return alleKodeverk[KodeverkType.PERSONSTATUS_TYPE].find(type => type.kode === nyeste.type)?.navn ?? '';
+    return alleKodeverk['PersonstatusType'].find(type => type.kode === nyeste.type)?.navn ?? '';
   }
   return intl.formatMessage({ id: 'Situasjon.Ukjent' });
 };
@@ -42,7 +42,7 @@ export const formaterUtenlandsopphold = (
   const landNavn =
     utenlandsopphold.length === 1
       ? utenlandsopphold[0].landNavn
-      : (alleKodeverk[KodeverkType.LANDKODER].find(type => type.kode === Landkode.NORGE)?.navn ?? '');
+      : (alleKodeverk['Landkoder'].find(type => type.kode === Landkode.NORGE)?.navn ?? '');
 
   return intl.formatMessage({ id: 'Situasjon.ILand' }, { land: toTitleCapitalization(landNavn) });
 };

@@ -14,6 +14,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
+    "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-form-hooks": "6.3.5",
     "@tanstack/react-query": "5.76.1",

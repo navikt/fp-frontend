@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 interface Props {
   submitCallback: (values: FormValues) => void;
   forhåndsvisBrev: (params: ForhåndsvisBrevParams) => void;
-  revurderingVarslingArsak: KodeverkMedNavn[];
+  revurderingVarslingArsak: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: FormValues;

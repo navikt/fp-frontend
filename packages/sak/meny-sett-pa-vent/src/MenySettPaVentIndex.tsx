@@ -13,7 +13,7 @@ export const getMenytekst = (): string => intl.formatMessage({ id: 'MenySettPaVe
 
 interface Props {
   settBehandlingPaVent: (params: { frist: string; ventearsak: string }) => void;
-  ventearsaker: KodeverkMedNavn[];
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[];
   lukkModal: () => void;
   erTilbakekreving: boolean;
 }

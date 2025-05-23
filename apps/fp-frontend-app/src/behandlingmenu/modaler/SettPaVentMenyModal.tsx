@@ -1,6 +1,6 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';
 import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -34,8 +34,8 @@ export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModa
 
   const venteårsaker =
     behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
-      ? notEmpty(alleFpTilbakeKodeverk)[TilbakekrevingKodeverkType.VENT_AARSAK]
-      : notEmpty(alleFpSakKodeverk)[KodeverkType.VENT_AARSAK];
+      ? notEmpty(alleFpTilbakeKodeverk)['Venteårsak']
+      : notEmpty(alleFpSakKodeverk)['Venteårsak'];
 
   return (
     <MenySettPaVentIndex

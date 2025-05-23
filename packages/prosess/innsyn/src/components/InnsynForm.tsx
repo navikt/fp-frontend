@@ -12,7 +12,6 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   InnsynResultatType as innsynResultatTyperKV,
-  KodeverkType,
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
@@ -118,8 +117,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
 
   const documents = getFilteredReceivedDocuments(alleDokumenter);
 
-  const innsynResultatTyper = alleKodeverk[KodeverkType.INNSYN_RESULTAT_TYPE]
-    .filter(irt => irt.kode !== '-')
+  const innsynResultatTyper = alleKodeverk['InnsynResultatType']
     .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
     .reverse();
 
@@ -152,7 +150,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
         />
         <VedtakDocuments
           vedtaksdokumenter={innsyn?.vedtaksdokumentasjon ?? EMPTY_ARRAY}
-          behandlingTypes={alleKodeverk[KodeverkType.BEHANDLING_TYPE]}
+          behandlingTypes={alleKodeverk['BehandlingType']}
         />
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />

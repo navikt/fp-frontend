@@ -5,7 +5,6 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, PersonstatusPeriode } from '@navikt/fp-types';
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleKodeverk }: Props) => {
-  const kodeverkNavn = alleKodeverk[KodeverkType.PERSONSTATUS_TYPE];
+  const kodeverkNavn = alleKodeverk['PersonstatusType'];
 
   const getPersonstatus = (verdi: PersonstatusPeriode): string => {
     const kodeverk = kodeverkNavn.find(it => it.kode === verdi.type);

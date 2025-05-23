@@ -20,7 +20,7 @@ import messages from '../../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  avslagsarsaker: KodeverkMedNavn[];
+  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
   readOnly: boolean;
   ytelse: string;
   erForutgående: boolean;

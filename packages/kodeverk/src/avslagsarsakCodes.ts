@@ -1,3 +1,4 @@
 export enum Avslagsarsak {
   INGEN_BEREGNINGSREGLER = '1099',
+  MANN_ADOPTERER_IKKE_ALENE = '1006',
 }

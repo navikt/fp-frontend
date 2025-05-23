@@ -9,7 +9,6 @@ import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { Boks } from '@navikt/fp-fakta-felles';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
 import { type DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -136,7 +135,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                                 id="UttakDokumentasjonFaktaDetailForm.PermisjonsprosentJa"
                                 values={{
                                   prosent: ag.permisjon.prosent,
-                                  type: alleKodeverk[KodeverkType.AKTIVITETSKRAV_PERMISJON_TYPE].find(
+                                  type: alleKodeverk['AktivitetskravPermisjonType'].find(
                                     o => o.kode === ag.permisjon.type,
                                   )?.navn,
                                 }}

@@ -7,7 +7,6 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   ArbeidsforholdKomplettVurderingType,
-  KodeverkType,
   VenteArsakType,
 } from '@navikt/fp-kodeverk';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
@@ -201,7 +200,7 @@ export const ArbeidOgInntektFaktaPanel = ({
             cancelEvent={() => setVisSettPåVentModal(false)}
             defaultVenteårsak={VenteArsakType.VENT_OPDT_INNTEKTSMELDING}
             hasManualPaVent
-            ventearsaker={alleKodeverk[KodeverkType.VENT_AARSAK]}
+            ventearsaker={alleKodeverk['Venteårsak']}
             erTilbakekreving={false}
             showModal={visSettPåVentModal}
             frist={null}

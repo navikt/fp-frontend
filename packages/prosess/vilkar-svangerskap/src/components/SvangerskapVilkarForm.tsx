@@ -7,7 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, KodeverkType, TilretteleggingType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, TilretteleggingType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -101,7 +101,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     }
   }, [erVilkarOk]);
 
-  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SVANGERSKAPVILKARET];
+  const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.SVANGERSKAPVILKARET];
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 

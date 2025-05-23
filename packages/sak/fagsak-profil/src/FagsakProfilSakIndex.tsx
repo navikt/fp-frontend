@@ -12,8 +12,8 @@ const intl = createIntl(messages);
 
 interface Props {
   saksnummer: string;
-  fagsakYtelseType: KodeverkMedNavn;
-  fagsakStatus: KodeverkMedNavn;
+  fagsakYtelseType: KodeverkMedNavn<'FagsakYtelseType'>;
+  fagsakStatus: KodeverkMedNavn<'FagsakStatus'>;
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
   toggleSideMeny: () => void;

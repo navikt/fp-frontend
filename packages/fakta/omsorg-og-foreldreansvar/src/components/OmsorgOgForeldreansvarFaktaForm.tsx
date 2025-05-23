@@ -55,7 +55,7 @@ interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   readOnly: boolean;
-  vilkarTypes: KodeverkMedNavn[];
+  vilkarTypes: KodeverkMedNavn<'OmsorgsovertakelseVilkårType'>[];
   erAksjonspunktForeldreansvar: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   personoversikt: Personoversikt;

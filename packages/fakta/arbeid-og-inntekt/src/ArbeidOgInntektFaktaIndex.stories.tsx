@@ -3,7 +3,12 @@ import { type ComponentProps } from 'react';
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  ArbeidsforholdKomplettVurderingType,
+  PermisjonsbeskrivelseType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak, type ArbeidOgInntektsmelding } from '@navikt/fp-types';
 
@@ -70,7 +75,7 @@ export const InnhentInntektsmelding: Story = {
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: 'VELFERDSPERMISJON',
+            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
@@ -506,7 +511,7 @@ export const ArbeidsforholdErOK: Story = {
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: 'VELFERDSPERMISJON',
+            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
@@ -986,7 +991,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
           årsak: undefined,
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
-            type: 'PERMITTERING',
+            type: PermisjonsbeskrivelseType.PERMITTERING,
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
@@ -1003,7 +1008,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: 'VELFERDSPERMISJON',
+            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
@@ -1264,7 +1269,7 @@ export const SkalViseFødselsnummerForPrivatperson: Story = {
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: 'VELFERDSPERMISJON',
+            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,

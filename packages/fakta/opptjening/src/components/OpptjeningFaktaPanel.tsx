@@ -6,7 +6,7 @@ import { AksjonspunktHelpTextHTML, DateLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
@@ -45,7 +45,7 @@ const findSkjaringstidspunkt = (dato?: string): string => dayjs(dato).add(1, 'da
 
 const sorterEtterOpptjeningFom = (
   opptjeningPerioder: OpptjeningAktivitet[],
-  opptjeningAktivitetTypes: KodeverkMedNavn[],
+  opptjeningAktivitetTypes: KodeverkMedNavn<'OpptjeningAktivitetType'>[],
 ): OpptjeningAktivitet[] =>
   [...opptjeningPerioder].sort((o1, o2) => {
     const navn1 = opptjeningAktivitetTypes.find(oat => oat.kode === o1.aktivitetType)?.navn;
@@ -97,7 +97,7 @@ export const OpptjeningFaktaPanel = ({
 
   const harAksjonspunkt = aksjonspunkterForPanel.length > 0;
 
-  const opptjeningAktivitetTypes = alleKodeverk[KodeverkType.OPPTJENING_AKTIVITET_TYPE];
+  const opptjeningAktivitetTypes = alleKodeverk['OpptjeningAktivitetType'];
 
   const filtrerteOgSorterteOpptjeningsaktiviteter =
     !!opptjeningAktiviteter && !!fastsattOpptjening

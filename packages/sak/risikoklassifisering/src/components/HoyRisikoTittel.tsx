@@ -17,7 +17,7 @@ interface Props {
   submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
   isRiskPanelOpen: boolean;
   toggleRiskPanel: () => void;
-  faresignalVurderinger: KodeverkMedNavn[];
+  faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
 }
 
 /**

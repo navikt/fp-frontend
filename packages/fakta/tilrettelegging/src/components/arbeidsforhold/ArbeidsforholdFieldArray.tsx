@@ -56,7 +56,7 @@ interface Props {
   sorterteArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[];
   aoiArbeidsforhold: AoIArbeidsforhold[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  uttakArbeidTyper: KodeverkMedNavn[];
+  uttakArbeidTyper: KodeverkMedNavn<'UttakArbeidType'>[];
 }
 
 export const ArbeidsforholdFieldArray = ({

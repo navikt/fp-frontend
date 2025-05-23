@@ -8,8 +8,8 @@ import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { FagsakYtelseType, KodeverkLosType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
@@ -42,8 +42,8 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
 
   const { data: oppgaverPerDato } = useQuery(oppgaverPerDatoOptions(valgtAvdelingEnhet));
 
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const behandlingTyper = useLosKodeverk('BehandlingType');
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
   const stringFromStorage = getValueFromLocalStorage(formName);
 
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
@@ -134,7 +134,10 @@ const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaveForDato, ukevalg: stri
   return dayjs(oppgaveForAvdeling.opprettetDato).isSameOrAfter(toUkerSiden);
 };
 
-const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string): string => {
+const finnFagsakYtelseTypeNavn = (
+  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
+  valgtFagsakYtelseType: string,
+): string => {
   const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
   return type ? type.navn : '';
 };

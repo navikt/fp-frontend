@@ -5,7 +5,6 @@ import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
 import { dateFormat, formatCurrencyNoKr } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -28,8 +27,7 @@ const lagVisningsNavn = (
   const agOpplysning = inntekt.arbeidsgiverId ? arbeidsgiverOpplysninger[inntekt.arbeidsgiverId] : undefined;
   if (!agOpplysning) {
     return (
-      alleKodeverk[KodeverkType.OPPTJENING_AKTIVITET_TYPE].find(type => type.kode === inntekt.opptjeningAktivitetType)
-        ?.navn ?? ''
+      alleKodeverk['OpptjeningAktivitetType'].find(type => type.kode === inntekt.opptjeningAktivitetType)?.navn ?? ''
     );
   }
   if (agOpplysning.erPrivatPerson) {

@@ -2,6 +2,8 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
 const {
@@ -93,19 +95,19 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
               permisjonFom: '2020-02-17',
               permisjonTom: '2020-07-12',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
             {
               permisjonFom: '2019-08-06',
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
           ],
         },
@@ -380,19 +382,19 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
               permisjonFom: '2020-02-17',
               permisjonTom: '2020-07-12',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
             {
               permisjonFom: '2019-08-06',
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
           ],
         },

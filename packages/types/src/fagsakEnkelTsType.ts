@@ -1,8 +1,10 @@
+import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
+
 import type { Person } from './personTsType';
 
 export type FagsakEnkel = Readonly<{
   saksnummer: string;
-  fagsakYtelseType: string;
+  fagsakYtelseType: FagsakYtelseType;
   status: string;
   aktørId: string;
   barnFødt: string;

@@ -26,9 +26,9 @@ interface Props {
       behandlingUuid?: string;
     } & FormValues;
   }) => void;
-  behandlingstyper: KodeverkMedNavn[];
-  tilbakekrevingRevurderingArsaker?: KodeverkMedNavn[];
-  revurderingArsaker?: KodeverkMedNavn[];
+  behandlingstyper: KodeverkMedNavn<'BehandlingType'>[];
+  tilbakekrevingRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
+  revurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
   behandlingOppretting: BehandlingOppretting[];
   kanTilbakekrevingOpprettes: {
     kanBehandlingOpprettes: boolean;

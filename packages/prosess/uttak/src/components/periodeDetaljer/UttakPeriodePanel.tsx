@@ -7,7 +7,7 @@ import { AksjonspunktHelpTextHTML, EditedIcon } from '@navikt/ft-ui-komponenter'
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingType, KodeverkType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { BehandlingType, ManuellBehandlingÅrsak, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -42,7 +42,7 @@ const getCorrectEmptyArbeidsForhold = (
             arbeidsgiverOpplysningerPerId[item.aktivitetIdentifikator.arbeidsgiverReferanse];
           arbeidsForholdMedNullDagerIgjenArray.push(arbeidsgiverOpplysninger.navn);
         } else {
-          const navn = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(
+          const navn = alleKodeverk['UttakArbeidType'].find(
             k => k.kode === item.aktivitetIdentifikator.uttakArbeidType,
           )?.navn;
           if (navn) {
@@ -67,8 +67,7 @@ const hentApTekst = (
 ): ReactElement[] => {
   const aksjonspunktTekster = [];
 
-  // Fix - ta bort 5001 med verdi fra kodeverk
-  if (manuellBehandlingÅrsak === '5001') {
+  if (manuellBehandlingÅrsak === ManuellBehandlingÅrsak.STØNADSKONTO_TOM_FOR_STØNADSDAGER) {
     const arbeidsForhold = getCorrectEmptyArbeidsForhold(
       alleKodeverk,
       arbeidsgiverOpplysningerPerId,
@@ -95,14 +94,14 @@ const hentApTekst = (
     } else {
       aksjonspunktTekster.push(
         <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-          {alleKodeverk[KodeverkType.MANUELL_BEHANDLING_AARSAK].find(k => k.kode === manuellBehandlingÅrsak)?.navn}
+          {alleKodeverk['ManuellBehandlingÅrsak'].find(k => k.kode === manuellBehandlingÅrsak)?.navn}
         </React.Fragment>,
       );
     }
   } else {
     aksjonspunktTekster.push(
       <React.Fragment key={`kode-${manuellBehandlingÅrsak}`}>
-        {alleKodeverk[KodeverkType.MANUELL_BEHANDLING_AARSAK].find(k => k.kode === manuellBehandlingÅrsak)?.navn}
+        {alleKodeverk['ManuellBehandlingÅrsak'].find(k => k.kode === manuellBehandlingÅrsak)?.navn}
       </React.Fragment>,
     );
   }

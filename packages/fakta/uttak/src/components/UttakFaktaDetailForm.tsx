@@ -10,10 +10,9 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkType, RelasjonsRolleType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { FordelingPeriodeKilde, RelasjonsRolleType, StonadskontoType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
-import { FordelingPeriodeKilde } from '../kodeverk/fordelingPeriodeKilde';
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import {
   type FormValues as FormValuesGraderingOgSamtidigUttak,
@@ -142,21 +141,17 @@ export const UttakFaktaDetailForm = ({
     }
   };
 
-  const sorterteUttakPeriodeTyper = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].toSorted((k1, k2) =>
+  const sorterteUttakPeriodeTyper = alleKodeverk['UttakPeriodeType'].toSorted((k1, k2) =>
     k1.navn.localeCompare(k2.navn),
   );
-  const sorterteOverføringÅrsaker = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE].toSorted((k1, k2) =>
+  const sorterteOverføringÅrsaker = alleKodeverk['OverføringÅrsak'].toSorted((k1, k2) =>
     k1.navn.localeCompare(k2.navn),
   );
-  const sorterteUtsettelseÅrsaker = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE].toSorted((k1, k2) =>
+  const sorterteUtsettelseÅrsaker = alleKodeverk['UtsettelseÅrsak'].toSorted((k1, k2) =>
     k1.navn.localeCompare(k2.navn),
   );
-  const sorterteOppholdÅrsaker = alleKodeverk[KodeverkType.OPPHOLD_ARSAK].toSorted((k1, k2) =>
-    k1.navn.localeCompare(k2.navn),
-  );
-  const sorterteMorsAktiviteter = alleKodeverk[KodeverkType.MORS_AKTIVITET].toSorted((k1, k2) =>
-    k1.navn.localeCompare(k2.navn),
-  );
+  const sorterteOppholdÅrsaker = alleKodeverk['OppholdÅrsak'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
+  const sorterteMorsAktiviteter = alleKodeverk['MorsAktivitet'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   const årsakstype = formMethods.watch('arsakstype');
   const flerbarnsdager = formMethods.watch('flerbarnsdager');

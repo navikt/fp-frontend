@@ -3,7 +3,9 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { kanOverstyreAccess, writeAccess } from './access';
 
-const forEachFagsakAndBehandlingStatus = (callback: (fagsakStatus: string, behandlingStatus: string) => void) =>
+const forEachFagsakAndBehandlingStatus = (
+  callback: (fagsakStatus: FagsakStatus, behandlingStatus: BehandlingStatus) => void,
+) =>
   Object.values(FagsakStatus).forEach(fagsakStatus =>
     Object.values(BehandlingStatus).forEach(behandlingStatus => callback(fagsakStatus, behandlingStatus)),
   );
@@ -49,7 +51,7 @@ describe('access', () => {
       expect(accessForVeileder).toHaveProperty('isEnabled', false);
     });
 
-    forEachFagsakAndBehandlingStatus((fagsakStatus: string, behandlingStatus: string) => {
+    forEachFagsakAndBehandlingStatus((fagsakStatus: FagsakStatus, behandlingStatus: BehandlingStatus) => {
       const expected =
         validFagsakStatuser.some(fs => fs === fagsakStatus) &&
         validBehandlingStatuser.some(bs => bs === behandlingStatus);

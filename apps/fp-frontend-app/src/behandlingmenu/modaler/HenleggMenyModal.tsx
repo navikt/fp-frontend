@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { type ForhåndsvisHenleggParams, MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -36,8 +36,8 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
 
   const behandlingresultatTyper =
     behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
-      ? notEmpty(alleFpTilbakeKodeverk)[TilbakekrevingKodeverkType.BEHANDLING_RESULTAT_TYPE]
-      : notEmpty(alleFpSakKodeverk)[KodeverkType.BEHANDLING_RESULTAT_TYPE];
+      ? notEmpty(alleFpTilbakeKodeverk)['BehandlingResultatType']
+      : notEmpty(alleFpSakKodeverk)['BehandlingResultatType'];
 
   const navigate = useNavigate();
   const gåTilSokeside = () => navigate('/');

@@ -4,8 +4,6 @@ import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KodeverkLosType } from '@navikt/fp-kodeverk';
-
 import { lagreSakslisteFagsakYtelseType, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
@@ -33,7 +31,7 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
     },
   });
 
-  const alleFagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const alleFagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
   return (
     <VStack gap="2">
