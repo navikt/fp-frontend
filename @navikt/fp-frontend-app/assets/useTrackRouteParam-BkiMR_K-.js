@@ -1,0 +1,1 @@
+import{i as m,j as n,z as i}from"./withPanelData-CC51V6W3.js";const p=r=>{const a={parse:c=>c,isQueryParam:!1,...r},s=m(),e=n(),o=a.isQueryParam?i(s.search):e,t=a.parse(o[a.paramName]);return{location:s,selected:t}};export{p as u};
