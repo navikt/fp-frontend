@@ -12,7 +12,7 @@ export const fagsakFullFpsak: Fagsak = {
   saksnummer: '1',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   relasjonsRolleType: RelasjonsRolleType.MOR,
-  status: FagsakStatus.OPPRETTET,
+  status: FagsakStatus.UNDER_BEHANDLING,
   aktørId: '9921487132273',
   sakSkalTilInfotrygd: false,
   dekningsgrad: 100,
