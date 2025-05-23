@@ -5,8 +5,6 @@ import { IngenBehandlingValgtPanel } from './IngenBehandlingValgtPanel';
 import { NotFoundPage } from './NotFoundPage';
 import { UnauthorizedPage } from './UnauthorizedPage';
 
-import '@navikt/ds-css';
-
 const meta = {
   title: 'sak/sak-infosider',
 } satisfies Meta;

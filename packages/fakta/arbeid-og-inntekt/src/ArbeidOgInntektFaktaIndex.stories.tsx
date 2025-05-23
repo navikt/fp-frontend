@@ -9,10 +9,6 @@ import { type Aksjonspunkt, AksjonspunktÅrsak, type ArbeidOgInntektsmelding } f
 
 import { ArbeidOgInntektFaktaIndex } from './ArbeidOgInntektFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const MANUELT_ORG_NR = '342352362';
 
 const fellesInntektsmeldingFelter = {

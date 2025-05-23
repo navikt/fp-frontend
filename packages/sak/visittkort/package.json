@@ -26,8 +26,8 @@
     "@navikt/ds-react": "7.21.1",
     "@navikt/fp-kodeverk": "workspace:^",
     "@navikt/fp-types": "workspace:^",
-    "@navikt/ft-plattform-komponenter": "9.0.4",
-    "@navikt/ft-utils": "3.4.0",
+    "@navikt/ft-plattform-komponenter": "9.1.0",
+    "@navikt/ft-utils": "3.6.0",
     "dayjs": "1.11.13",
     "react": "19.1.0",
     "react-intl": "7.1.11"

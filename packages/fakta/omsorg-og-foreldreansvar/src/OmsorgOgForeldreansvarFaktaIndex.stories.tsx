@@ -16,10 +16,6 @@ import type { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Sokna
 
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const defaultFamilieHendelse = {
   gjeldende: {
     termindato: '2019-01-01',

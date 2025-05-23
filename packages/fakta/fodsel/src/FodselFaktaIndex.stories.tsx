@@ -8,10 +8,6 @@ import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad } fr
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const familieHendelse = {
   register: {
     avklartBarn: [
