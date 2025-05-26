@@ -5,7 +5,7 @@ import { CheckmarkIcon, FilesIcon } from '@navikt/aksel-icons';
 import { BodyShort, CopyButton, HStack, Table, Tooltip } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import type { Oppgave } from '@navikt/fp-los-felles';
 
 import { OppgaveLabels } from '../OppgaveLabels';
 
@@ -19,7 +19,6 @@ interface Props {
 
 export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Props) => {
   const intl = useIntl();
-  const behandlingTyper = useLosKodeverk('BehandlingType');
 
   const refCopyButton = useRef<HTMLDivElement | null>(null);
 

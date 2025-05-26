@@ -2,9 +2,9 @@ import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack, Tag } from '@navikt/ds-react';
 
-import { BehandlingType, KodeverkLosType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 import { AndreKriterierType, type Oppgave } from '@navikt/fp-los-felles';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 
@@ -15,9 +15,9 @@ type Props = {
 export const OppgaveLabels = ({ oppgave }: Props) => {
   const intl = useIntl();
 
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
-  const andreKriterier = useLosKodeverk(KodeverkLosType.ANDRE_KRITERIER);
+  const behandlingTyper = useLosKodeverk('BehandlingType');
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
+  const andreKriterier = useLosKodeverk('AndreKriterierType');
 
   return (
     <HStack gap="2">
@@ -83,7 +83,11 @@ export const hentAlleBehandlingstypeKortnavn = (intl: IntlShape) => ({
   [BehandlingType.TILBAKEKREVING_REVURDERING]: intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }),
 });
 
-export const hentBehandlingsårsakNavn = (intl: IntlShape, kode: string, andreKriterier: KodeverkMedNavn[]) => {
+export const hentBehandlingsårsakNavn = (
+  intl: IntlShape,
+  kode: string,
+  andreKriterier: LosKodeverkMedNavn<'AndreKriterierType'>[],
+) => {
   if (AndreKriterierType.REVURDERING_INNTEKTSMELDING === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.RevurderingInntekstmelding' });
   }
