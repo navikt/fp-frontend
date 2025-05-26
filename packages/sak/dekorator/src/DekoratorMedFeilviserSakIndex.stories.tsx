@@ -17,6 +17,7 @@ const meta = {
     navAnsattNavn: 'Espen Utvikler',
     setSiteHeight: action('button-click'),
     fjernFeilmeldinger: action('button-click'),
+    interneLenker: [],
     eksterneLenker: [
       {
         tekst: 'Nav',
