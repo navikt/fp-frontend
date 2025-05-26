@@ -13,7 +13,7 @@ const {
   AvslåttVilkår4Ledd,
 } = composeStories(stories);
 
-describe('<ForeldreansvarVilkarProsessIndex>', () => {
+describe('ForeldreansvarVilkarProsessIndex', () => {
   it('skal bestemme at 2-ledd er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 

@@ -5,7 +5,7 @@ import * as stories from './YtelserFaktaIndex.stories';
 
 const { YtelserForHovedsøker, YtelserForHovedsøkerOgAnnenPart, UtenTilgrensedeYtelser } = composeStories(stories);
 
-describe('<YtelserFaktaIndex>', () => {
+describe('YtelserFaktaIndex', () => {
   it('skal vise ytelser for hovedsøker', async () => {
     render(<YtelserForHovedsøker />);
 

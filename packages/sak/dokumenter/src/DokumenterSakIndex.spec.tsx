@@ -5,7 +5,7 @@ import * as stories from './DokumenterSakIndex.stories';
 
 const { Default, IngenDokumenter } = composeStories(stories);
 
-describe('<DokumenterSakIndex>', () => {
+describe('DokumenterSakIndex', () => {
   it('skal vise tre dokumenter i listen', async () => {
     render(<Default />);
     expect(await screen.findByText('Inn/ut')).toBeInTheDocument();

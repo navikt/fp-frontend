@@ -7,7 +7,7 @@ import * as stories from './UtvalgskriterierForSakslisteForm.stories';
 
 const { MedGittNavn, MedDefaultNavn } = composeStories(stories);
 
-describe('<UtvalgskriterierForSakslisteForm>', () => {
+describe('UtvalgskriterierForSakslisteForm', () => {
   it('skal vise sakslistenavn som saksbehandler har skrive inn', async () => {
     await applyRequestHandlers(MedGittNavn.parameters['msw']);
     render(<MedGittNavn />);

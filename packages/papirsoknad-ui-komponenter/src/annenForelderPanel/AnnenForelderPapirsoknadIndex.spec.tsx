@@ -6,7 +6,7 @@ import * as stories from './AnnenForelderPapirsoknadIndex.stories';
 
 const { SokerErMor } = composeStories(stories);
 
-describe('<AnnenForelderPapirsoknadIndex>', () => {
+describe('AnnenForelderPapirsoknadIndex', () => {
   it('skal validere fødselsnummer', async () => {
     const lagre = vi.fn();
 

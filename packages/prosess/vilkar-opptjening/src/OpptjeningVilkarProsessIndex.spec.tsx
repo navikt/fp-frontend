@@ -13,7 +13,7 @@ Object.defineProperty(global.self, 'crypto', {
   },
 });
 
-describe('<OpptjeningVilkarProsessIndex>', () => {
+describe('OpptjeningVilkarProsessIndex', () => {
   it('skal løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 

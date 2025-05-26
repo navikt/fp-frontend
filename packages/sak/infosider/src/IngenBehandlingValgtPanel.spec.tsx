@@ -5,7 +5,7 @@ import * as stories from './InfosiderSakIndex.stories';
 
 const { BehandlingErIkkeValgt, BehandlingerFinnesIkke } = composeStories(stories);
 
-describe('<IngenBehandlingValgtPanel>', () => {
+describe('IngenBehandlingValgtPanel', () => {
   it('skal vise tekst når ingen behandlinger er valgt', async () => {
     render(<BehandlingErIkkeValgt />);
     expect(await screen.findByText('Velg behandling')).toBeInTheDocument();

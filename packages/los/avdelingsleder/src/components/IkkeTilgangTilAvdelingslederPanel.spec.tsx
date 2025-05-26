@@ -5,7 +5,7 @@ import * as stories from './IkkeTilgangTilAvdelingslederPanel.stories';
 
 const { IkkeTilgangTilAvdelingsleder } = composeStories(stories);
 
-describe('<IkkeTilgangTilAvdelingslederPanel>', () => {
+describe('IkkeTilgangTilAvdelingslederPanel', () => {
   it('skal vise side for ikke tilgang til avdelingsleder', async () => {
     render(<IkkeTilgangTilAvdelingsleder />);
     expect(await screen.findByText('Du har ikke tilgang til å bruke dette programmet')).toBeInTheDocument();

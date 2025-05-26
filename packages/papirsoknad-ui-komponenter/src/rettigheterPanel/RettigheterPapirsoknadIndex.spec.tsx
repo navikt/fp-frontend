@@ -6,7 +6,7 @@ import * as stories from './RettigheterPapirsoknadIndex.stories';
 
 const { MorFødsel, FarAdopterer } = composeStories(stories);
 
-describe('<RettigheterPapirsoknadIndex>', () => {
+describe('RettigheterPapirsoknadIndex', () => {
   it('skal velge at andre forelderen er død', async () => {
     const lagre = vi.fn();
 

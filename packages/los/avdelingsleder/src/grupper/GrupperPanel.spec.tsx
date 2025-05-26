@@ -6,7 +6,7 @@ import * as stories from './GrupperPanel.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<GrupperPanel>', () => {
+describe('GrupperPanel', () => {
   it('skal vise gruppe i tabell', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

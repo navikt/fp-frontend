@@ -5,7 +5,7 @@ import * as stories from './InfosiderSakIndex.stories';
 
 const { IkkeInnloggetBruker } = composeStories(stories);
 
-describe('<UnauthorizedPage>', () => {
+describe('UnauthorizedPage', () => {
   it('skal rendre UnauthorizedPage korrekt', async () => {
     render(<IkkeInnloggetBruker />);
     expect(await screen.findByText('Du må logge inn for å få tilgang til systemet')).toBeInTheDocument();

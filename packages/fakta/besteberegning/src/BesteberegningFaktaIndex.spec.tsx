@@ -6,7 +6,7 @@ import * as stories from './BesteberegningFaktaIndex.stories';
 
 const { BesteberegningMedDagpengerOgArbeid, BesteberegningMedAvvik } = composeStories(stories);
 
-describe('<BesteberegningFaktaIndex>', () => {
+describe('BesteberegningFaktaIndex', () => {
   it('skal se at tabell renderes med korrekt antall måneder og at passende navn vises for aktivitetene', async () => {
     render(<BesteberegningMedDagpengerOgArbeid />);
     expect(await screen.findByText('Beregning etter §14-7, 1. ledd gir beste beregning.')).toBeInTheDocument();

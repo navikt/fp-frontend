@@ -11,7 +11,7 @@ const {
   IkkeVisBarnetsAnkomstDatoForEngangsstønad,
 } = composeStories(stories);
 
-describe('<AdopsjonFaktaIndex>', () => {
+describe('AdopsjonFaktaIndex', () => {
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og så bekrefte', async () => {
     const lagre = vi.fn();
 

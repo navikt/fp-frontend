@@ -18,7 +18,7 @@ const lagNyDato = (nyDato: string) => {
   return backspace + nyDato;
 };
 
-describe('<FodselOgTilretteleggingFaktaIndex>', () => {
+describe('FodselOgTilretteleggingFaktaIndex', () => {
   it('skal vurdere velferdspermisjon og så bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 

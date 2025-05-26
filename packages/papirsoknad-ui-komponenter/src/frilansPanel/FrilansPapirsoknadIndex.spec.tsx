@@ -6,7 +6,7 @@ import * as stories from './FrilansPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<FrilansPapirsoknadIndex>', () => {
+describe('FrilansPapirsoknadIndex', () => {
   it('skal velge at søker ikke har periode med frilansvirksomhet', async () => {
     const lagre = vi.fn();
 

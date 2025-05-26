@@ -9,7 +9,7 @@ import * as stories from './MottattDatoPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MottattDatoPapirsoknadIndex>', () => {
+describe('MottattDatoPapirsoknadIndex', () => {
   it('skal velge gyldig mottatt dato', async () => {
     const lagre = vi.fn();
 

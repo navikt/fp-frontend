@@ -13,7 +13,7 @@ const {
   StadfestResultat,
 } = composeStories(stories);
 
-describe('<AnkeProsessIndex>', () => {
+describe('AnkeProsessIndex', () => {
   it('skal vise historisk anke som er omgjort i fpsak', async () => {
     render(<OmjørResultatTilUgunst />);
 

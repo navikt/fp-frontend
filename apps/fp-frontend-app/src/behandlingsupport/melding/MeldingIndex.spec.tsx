@@ -9,7 +9,7 @@ import * as stories from './MeldingIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MeldingIndex>', () => {
+describe('MeldingIndex', () => {
   it('skal vise meldinger når mottakere og brevmaler har blitt hentet fra server', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

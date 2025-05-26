@@ -6,7 +6,7 @@ import * as stories from './InntektsgivendeArbeidPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<InntektsgivendeArbeidPapirsoknadIndex>', () => {
+describe('InntektsgivendeArbeidPapirsoknadIndex', () => {
   it('skal fylle ut inntektsgivende arbeid i utland', async () => {
     const lagre = vi.fn();
 

@@ -6,7 +6,7 @@ import * as stories from './UtbetalingsdataIs15Index.stories';
 
 const { Default, IngenData } = composeStories(stories);
 
-describe('<UtbetalingsdataIs15Index>', () => {
+describe('UtbetalingsdataIs15Index', () => {
   it('skal få feilmelding når en søker på ugyldig fødselsnummer', async () => {
     render(<Default />);
 

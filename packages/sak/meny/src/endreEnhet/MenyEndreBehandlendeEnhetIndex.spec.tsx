@@ -6,7 +6,7 @@ import * as stories from './MenyEndreBehandlendeEnhetIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MenyEndreBehandlendeEnhetIndex>', () => {
+describe('MenyEndreBehandlendeEnhetIndex', () => {
   it('skal velge og lagre ny enhet', async () => {
     const lagreNyBehandlendeEnhet = vi.fn();
     const lukkModal = vi.fn();

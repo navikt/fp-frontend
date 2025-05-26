@@ -5,7 +5,7 @@ import * as stories from './OppgaveReservasjonForlengetModal.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<OppgaveReservasjonForlengetModal>', () => {
+describe('OppgaveReservasjonForlengetModal', () => {
   it('skal rendre modal for å gi tilbakemelding om at reservasjon er forlenget', async () => {
     render(<Default />);
     expect(await screen.findAllByText('Behandlingen er reservert på deg')).toHaveLength(2);
