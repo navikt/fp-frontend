@@ -22,11 +22,11 @@ export const getAvslagArsak = (
     throw new Error('Behandlingsresultat eller avslagsårsak finnes ikke');
   }
 
-  const vilkarType = alleKodeverk['VilkårType'].find(kode => kode.kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
+  const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
 
   const årsak =
     alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType as VilkarType].find(
-      kode => kode.kode === behandlingsresultat.avslagsarsak,
+      ({ kode }) => kode === behandlingsresultat.avslagsarsak,
     )?.navn ?? '';
 
   return `${vilkarType}: ${årsak}`;

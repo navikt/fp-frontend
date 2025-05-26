@@ -148,7 +148,7 @@ const ResultatOmgjores = ({
           <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" />
         </Detail>
         <Detail>
-          {alleKodeverk['AnkeOmgjørÅrsak'].find(kode => kode.kode === ankeVurderingResultat.ankeOmgjoerArsak)?.navn ??
+          {alleKodeverk['AnkeOmgjørÅrsak'].find(({ kode }) => kode === ankeVurderingResultat.ankeOmgjoerArsak)?.navn ??
             ''}
         </Detail>
       </>

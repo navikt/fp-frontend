@@ -81,7 +81,7 @@ const lagVisningsnavn = (
     return agOpplysning.identifikator ? `${agOpplysning.navn} (${agOpplysning.identifikator})` : agOpplysning.navn;
   }
   return ferieAndel.aktivitetStatus
-    ? (alleKodeverk['AktivitetStatus'].find(kode => kode.kode === ferieAndel.aktivitetStatus)?.navn ?? '')
+    ? (alleKodeverk['AktivitetStatus'].find(({ kode }) => kode === ferieAndel.aktivitetStatus)?.navn ?? '')
     : '';
 };
 

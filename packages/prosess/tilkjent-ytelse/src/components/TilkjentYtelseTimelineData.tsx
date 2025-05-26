@@ -194,7 +194,7 @@ const createVisningNavnForUttakArbeidstaker = (
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
   if (!arbeidsgiverOpplysninger?.navn) {
     const opptjeningAktiviteter = alleKodeverk['OpptjeningAktivitetType'];
-    return opptjeningAktiviteter.find(kode => kode.kode === andel.arbeidsforholdType)?.navn ?? '';
+    return opptjeningAktiviteter.find(({ kode }) => kode === andel.arbeidsforholdType)?.navn ?? '';
   }
   return formaterArbeidsgiver(arbeidsgiverOpplysninger, andel.eksternArbeidsforholdId);
 };

@@ -91,11 +91,11 @@ const lagÅrsakString = (revurderingAarsaker: string[], alleKodeverk: AlleKodeve
   );
   const alleAndreAarsakerNavn = revurderingAarsaker
     .filter(aarsak => aarsak !== BehandlingArsakType.RE_ENDRING_FRA_BRUKER)
-    .map(aarsak => alleKodeverk['BehandlingÅrsakType'].find(kode => kode.kode === aarsak)?.navn ?? '');
+    .map(aarsak => alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === aarsak)?.navn ?? '');
   // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
   if (endringFraBrukerAarsak !== undefined) {
     aarsakTekstList.push(
-      alleKodeverk['BehandlingÅrsakType'].find(kode => kode.kode === endringFraBrukerAarsak)?.navn ?? '',
+      alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === endringFraBrukerAarsak)?.navn ?? '',
     );
   }
   aarsakTekstList.push(...alleAndreAarsakerNavn);

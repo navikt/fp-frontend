@@ -45,7 +45,7 @@ const getKlagBareVedtak = (
       .sort((b1, b2) => dayjs(b1.avsluttet).diff(dayjs(b2.avsluttet)))
       .map(({ uuid, type, avsluttet }) => (
         <option key={uuid} value={`${uuid}`}>
-          {`${alleKodeverk['BehandlingType'].find(kode => kode.kode === type)?.navn ?? ''} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
+          {`${alleKodeverk['BehandlingType'].find(({ kode }) => kode === type)?.navn ?? ''} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
         </option>
       )),
   );
