@@ -145,7 +145,7 @@ export const SimuleringTable = ({
       const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periode.fom, mottaker);
       const nesteMåned = mottaker.nesteUtbPeriode.tom;
       const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
-      const array = [] as ReactElement[];
+      const array = new Array<ReactElement>();
 
       return (
         <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>

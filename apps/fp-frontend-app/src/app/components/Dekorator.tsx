@@ -6,7 +6,7 @@ import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
 import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
-import { DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
+import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { ErrorType, type FpError } from '../../data/error/errorType';
@@ -18,8 +18,6 @@ type QueryStrings = {
   errorcode?: string;
   errormessage?: string;
 };
-
-const EMPTY_ARRAY = [] as Feilmelding[];
 
 interface Props {
   queryStrings: QueryStrings;
@@ -64,7 +62,7 @@ export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideError
 
   const { kanOppgavestyre, kanSaksbehandle } = navAnsatt;
 
-  const interneLenker = [];
+  const interneLenker = new Array<DekoratorLenke>();
   if (kanOppgavestyre) {
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
@@ -98,9 +96,7 @@ export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideError
       tittel={intl.formatMessage({ id: 'Dekorator.Foreldrepenger' })}
       tittelCallback={visLos}
       navAnsattNavn={navAnsatt.navn}
-      feilmeldinger={
-        hideErrorMessages ? EMPTY_ARRAY : formaterFeilmeldinger(intl, errorMessages, queryStrings, crashMessage)
-      }
+      feilmeldinger={hideErrorMessages ? [] : formaterFeilmeldinger(intl, errorMessages, queryStrings, crashMessage)}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
       interneLenker={interneLenker}

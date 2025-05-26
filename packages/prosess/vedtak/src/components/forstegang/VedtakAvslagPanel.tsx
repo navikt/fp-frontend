@@ -42,10 +42,8 @@ interface Props {
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
-const EMPTY_ARRAY = [] as Vilkar[];
-
 export const VedtakAvslagPanel = ({
-  vilkar = EMPTY_ARRAY,
+  vilkar = [],
   behandlingsresultat,
   språkkode,
   isReadOnly,

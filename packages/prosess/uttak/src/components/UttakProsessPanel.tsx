@@ -80,7 +80,7 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
 };
 
 const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadskontoer, intl: IntlShape) => {
-  const feil = [] as string[];
+  const feil = new Array<string>();
 
   perioder.forEach(p => {
     const ikkeGyldigeAktiviteter = p.aktiviteter.filter(

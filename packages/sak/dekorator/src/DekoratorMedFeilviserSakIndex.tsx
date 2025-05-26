@@ -23,11 +23,9 @@ interface Props {
   feilmeldinger: Feilmelding[];
   fjernFeilmeldinger: () => void;
   setSiteHeight: (height: number) => void;
-  interneLenker?: DekoratorLenke[];
+  interneLenker: DekoratorLenke[];
   eksterneLenker: DekoratorLenke[];
 }
-
-const EMPTY_ARRAY = [] as DekoratorLenke[];
 
 /**
  * DekoratorMedFeilviserSakIndex
@@ -44,7 +42,7 @@ export const DekoratorMedFeilviserSakIndex = ({
   feilmeldinger,
   fjernFeilmeldinger,
   setSiteHeight,
-  interneLenker = EMPTY_ARRAY,
+  interneLenker,
   eksterneLenker,
 }: Props) => {
   const fixedHeaderRef = useRef<HTMLDivElement>(null);

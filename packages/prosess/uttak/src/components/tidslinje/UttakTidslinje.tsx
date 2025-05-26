@@ -182,7 +182,7 @@ const slåSammenPinDataOmLikDato = (pinData: PinData[]): PinData[] =>
   }, []);
 
 const lagPinData = (tidslinjeTider: TidslinjeTimes, fomDato: dayjs.Dayjs): PinData[] => {
-  const pinData = [] as PinData[];
+  const pinData = new Array<PinData>();
 
   if (tidslinjeTider.dodSoker) {
     pinData.push({

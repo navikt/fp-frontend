@@ -108,7 +108,7 @@ const lagAndelerPrIdMap = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   alleKodeverk: AlleKodeverk,
 ): AndelerPrId[] => {
-  const listeMedAndelerPrId = [] as AndelerPrId[];
+  const listeMedAndelerPrId = new Array<AndelerPrId>();
   andeler.forEach(ferieAndel => {
     const andelTilSøker = ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
     const andelTilRefusjon = !ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;

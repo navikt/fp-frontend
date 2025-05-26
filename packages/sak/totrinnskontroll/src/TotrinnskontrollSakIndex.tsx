@@ -13,12 +13,7 @@ import {
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
-import type {
-  AlleKodeverk,
-  AlleKodeverkTilbakekreving,
-  BehandlingAppKontekst,
-  KodeverkMedNavn,
-} from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { type AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
@@ -58,9 +53,8 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   }
   return arsaker;
 };
-const TOMT_KODEVERK = [] as KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
-  'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : TOMT_KODEVERK;
+  'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : [];
 
 export type ApData = {
   fatterVedtakAksjonspunktDto: {

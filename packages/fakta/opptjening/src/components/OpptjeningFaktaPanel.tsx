@@ -23,7 +23,7 @@ import { OpptjeningTidslinje } from './tidslinje/OpptjeningTidslinje';
 import styles from './opptjeningFaktaPanel.module.css';
 
 const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]): ReactElement[] => {
-  const texts = [] as ReactElement[];
+  const texts = new Array<ReactElement>();
   if (opptjeningAktiviteter.some(a => a.stillingsandel === 0)) {
     texts.push(
       <FormattedMessage id="OpptjeningFaktaForm.AktivitetenErTimeAvslonnet" key="AktivitetenErTimeAvslonnet" />,

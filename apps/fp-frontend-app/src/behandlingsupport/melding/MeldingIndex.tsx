@@ -13,7 +13,7 @@ import {
   type MessagesFormValues,
   MessagesModalSakIndex,
 } from '@navikt/fp-sak-meldinger';
-import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
@@ -26,8 +26,6 @@ import { useFpSakKodeverk } from '../../data/useKodeverk';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
-
-const EMPTY_ARRAY = [] as KodeverkMedNavn<'Venteårsak'>[];
 
 interface Props {
   fagsakData: FagsakData;
@@ -70,7 +68,7 @@ export const MeldingIndex = ({
     innloggetBruker: { kanVeilede },
   } = notEmpty(initFetchQuery.data);
 
-  const ventearsaker = useFpSakKodeverk('Venteårsak') || EMPTY_ARRAY;
+  const ventearsaker = useFpSakKodeverk('Venteårsak') || [];
   const revurderingVarslingArsak = useFpSakKodeverk('RevurderingVarslingÅrsak');
 
   const { mutateAsync: sendMelding, status: meldingStatus } = useMutation({
