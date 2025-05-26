@@ -94,5 +94,8 @@ export const hentBehandlingsårsakNavn = (
   if (AndreKriterierType.BERØRT_BEHANDLING === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.BerortBehandling' });
   }
+  if (AndreKriterierType.KLAGE_PÅ_TILBAKEBETALING === kode) {
+    return intl.formatMessage({ id: 'OppgaveLabels.KlageTilbakebetaling' });
+  }
   return andreKriterier.find(b => b.kode === kode)?.navn;
 };

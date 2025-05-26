@@ -68,7 +68,6 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
       <Table.DataCell>
         {oppgave.opprettetTidspunkt && <DateLabel dateString={oppgave.opprettetTidspunkt} />}
       </Table.DataCell>
-      <Table.DataCell>{oppgave.behandlingsfrist && <DateLabel dateString={oppgave.behandlingsfrist} />}</Table.DataCell>
       <Table.DataCell>
         {oppgave.status.reservertTilTidspunkt && (
           <DateTimeLabel dateTimeString={oppgave.status.reservertTilTidspunkt} separator="kl" />

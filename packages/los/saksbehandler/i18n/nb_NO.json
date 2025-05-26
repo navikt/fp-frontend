@@ -4,7 +4,6 @@
   "LedigOppgaveTabell.Soker": "Søker",
   "LedigOppgaveTabell.Sak": "Sak",
   "LedigOppgaveTabell.BehandlingOpprettet": "Opprettet",
-  "LedigOppgaveTabell.FristForBehandling": "Frist",
   "LedigOppgaveTabell.IngenOppgaver": "<i>Det er ingen behandlinger i køen</i>",
 
   "LedigOppgaveRad.Saksnr": "Kopier saksnummer",
@@ -12,7 +11,6 @@
   "ReservertOppgaveTabell.Soker": "Søker",
   "ReservertOppgaveTabell.Sak": "Sak",
   "ReservertOppgaveTabell.ReservertTilTidspunkt": "Reservert til",
-  "ReservertOppgaveTabell.FristForBehandling": "Frist",
   "ReservertOppgaveTabell.BehandlingOpprettet": "Opprettet",
   "ReservertOppgaveTabell.ReserverteOppgaver": "Reserverte",
   "ReservertOppgaveTabell.AntallOppgaver": "{reservertAntall}",
@@ -33,6 +31,7 @@
   "OppgaveLabels.TilbakeRev": "Tilb-Rev",
   "OppgaveLabels.RevurderingInntekstmelding": "Inntektsmelding",
   "OppgaveLabels.BerortBehandling": "Berørt",
+  "OppgaveLabels.KlageTilbakebetaling": "Klage TB",
 
   "Person.Age": "{age} år",
   "Person.ImageText": "Personinformasjon",

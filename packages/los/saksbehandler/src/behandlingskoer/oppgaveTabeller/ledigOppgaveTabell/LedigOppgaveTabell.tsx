@@ -52,9 +52,6 @@ export const LedigOppgaveTabell = ({ reserverOppgave, antallOppgaver = 0, valgtS
                 <Table.ColumnHeader>
                   <FormattedMessage id="LedigOppgaveTabell.BehandlingOpprettet" />
                 </Table.ColumnHeader>
-                <Table.ColumnHeader>
-                  <FormattedMessage id="LedigOppgaveTabell.FristForBehandling" />
-                </Table.ColumnHeader>
               </Table.Row>
             </Table.Header>
             <Table.Body>

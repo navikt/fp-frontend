@@ -60,7 +60,6 @@ export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Pr
       <Table.DataCell>
         {oppgave.opprettetTidspunkt && <DateLabel dateString={oppgave.opprettetTidspunkt} />}
       </Table.DataCell>
-      <Table.DataCell>{oppgave.behandlingsfrist && <DateLabel dateString={oppgave.behandlingsfrist} />}</Table.DataCell>
     </Table.Row>
   );
 };

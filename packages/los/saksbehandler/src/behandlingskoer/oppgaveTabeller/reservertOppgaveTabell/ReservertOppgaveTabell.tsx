@@ -14,7 +14,7 @@ import styles from './reservertOppgaveTabell.module.css';
 
 const EMPTY_ARRAY = new Array<Oppgave>();
 
-type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspunkt' | 'behandlingsfrist' | 'status';
+type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspunkt' | 'status';
 
 interface Props {
   reserverOppgave: (oppgave: Oppgave) => void;
@@ -93,9 +93,6 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
                 <Table.ColumnHeader />
                 <Table.ColumnHeader sortKey="opprettetTidspunkt" sortable>
                   <FormattedMessage id="ReservertOppgaveTabell.BehandlingOpprettet" />
-                </Table.ColumnHeader>
-                <Table.ColumnHeader sortKey="behandlingsfrist" sortable>
-                  <FormattedMessage id="ReservertOppgaveTabell.FristForBehandling" />
                 </Table.ColumnHeader>
                 <Table.ColumnHeader sortKey="reservertTilTidspunkt" sortable>
                   <FormattedMessage id="ReservertOppgaveTabell.ReservertTilTidspunkt" />
