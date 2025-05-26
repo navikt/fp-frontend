@@ -5,7 +5,7 @@ import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack
 import { dateTimeFormat } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { HistorikkAktor, KodeverkType } from '@navikt/fp-kodeverk';
+import { HistorikkAktor } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
@@ -37,7 +37,7 @@ export const HistorikkInnslag = ({
   saksnummer,
 }: Props) => {
   const intl = useIntl();
-  const rolleNavn = alleKodeverk[KodeverkType.HISTORIKK_AKTOER].find(rolle => rolle.kode === aktør.type)?.navn ?? '';
+  const rolleNavn = alleKodeverk['HistorikkAktør'].find(rolle => rolle.kode === aktør.type)?.navn ?? '';
 
   const name = `${rolleNavn} ${aktør.ident ?? ''}`;
   const timestamp = dateTimeFormat(opprettetTidspunkt, { separator: 'kl', month: 'long', day: 'numeric' });

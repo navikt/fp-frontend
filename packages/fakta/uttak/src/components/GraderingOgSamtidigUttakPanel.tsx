@@ -7,7 +7,7 @@ import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { dateFormat, guid } from '@navikt/ft-utils';
 
-import { KodeverkType, UttakArbeidType } from '@navikt/fp-kodeverk';
+import { UttakArbeidType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysninger,
@@ -56,7 +56,7 @@ const mapArbeidsforhold = (
 
     let periodeArbeidsforhold = '';
     if (arbeidType && arbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
-      periodeArbeidsforhold = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(k => k.kode === arbeidType)?.navn ?? '';
+      periodeArbeidsforhold = alleKodeverk['UttakArbeidType'].find(k => k.kode === arbeidType)?.navn ?? '';
     } else if (arbeidsgiverOpplysninger) {
       periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
     }

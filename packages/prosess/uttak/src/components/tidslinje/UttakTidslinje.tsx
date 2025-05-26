@@ -23,7 +23,6 @@ import dayjs from 'dayjs';
 
 import {
   BehandlingStatus,
-  KodeverkType,
   OppholdArsakType,
   PeriodeResultatType,
   RelasjonsRolleType,
@@ -277,7 +276,7 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
 };
 
 const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
-  const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
+  const kodeverk = alleKodeverk['RelasjonsRolleType'];
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
   return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
 };

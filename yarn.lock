@@ -5049,6 +5049,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-storybook-utils@workspace:packages/storybook-utils"
   dependencies:
+    "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.3.5
     "@storybook/types": 8.6.12

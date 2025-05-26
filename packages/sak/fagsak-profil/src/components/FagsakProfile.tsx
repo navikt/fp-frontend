@@ -17,8 +17,8 @@ const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean =>
 
 interface Props {
   saksnummer: string;
-  fagsakYtelseType: KodeverkMedNavn;
-  fagsakStatus: KodeverkMedNavn;
+  fagsakYtelseType: KodeverkMedNavn<'FagsakYtelseType'>;
+  fagsakStatus: KodeverkMedNavn<'FagsakStatus'>;
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
   toggleSideMeny: () => void;

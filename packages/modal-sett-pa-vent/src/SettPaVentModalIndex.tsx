@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import { type FormValues, SettPaVentModal } from './components/SettPaVentModal';
 
@@ -14,7 +14,7 @@ interface Props {
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
   showModal: boolean;
-  ventearsaker: KodeverkMedNavn[];
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[] | KodeverkMedNavnTilbakekreving<'Venteårsak'>[];
   frist?: string | null;
   ventearsak?: string | null;
   visBrevErBestilt?: boolean;

@@ -12,7 +12,7 @@ interface AdresseTabellProps {
   adresser: Personadresse[];
   erAnnenpart?: boolean;
   harSammeAdresser?: boolean;
-  adresseKodeverk: KodeverkMedNavn[];
+  adresseKodeverk: KodeverkMedNavn<'AdresseType'>[];
 }
 
 export const AdresseTabell = ({

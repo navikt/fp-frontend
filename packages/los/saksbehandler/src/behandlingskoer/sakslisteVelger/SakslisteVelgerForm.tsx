@@ -18,9 +18,7 @@ import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import { KodeverkLosType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
-
+import type { LosKodeverkMedNavn } from '../../../../../types/src/kodeverkAlleLos';
 import { getSakslisteSaksbehandlere } from '../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import type { Saksliste } from '../../typer/sakslisteTsType';
@@ -65,7 +63,7 @@ const getFormDefaultValues = (
 
 const AndreKriterier = ({ saksliste }: { saksliste?: Saksliste }): ReactNode => {
   const intl = useIntl();
-  const andreKriterierTyper = useLosKodeverk(KodeverkLosType.ANDRE_KRITERIER);
+  const andreKriterierTyper = useLosKodeverk('AndreKriterierType');
 
   if (saksliste && saksliste.andreKriterier.length > 0) {
     return (
@@ -111,7 +109,7 @@ const getNavn = (values: TextValues, intl: IntlShape) => {
 
 const getSorteringsnavnForPeriode = (
   intl: IntlShape,
-  køSorteringTyper: KodeverkMedNavn[],
+  køSorteringTyper: LosKodeverkMedNavn<'KøSortering'>[],
   sorteringType: string,
   fomDato?: string,
   tomDato?: string,
@@ -131,7 +129,7 @@ const getSorteringsnavnForPeriode = (
 
 const getSorteringsnavnForDynamiskPeriode = (
   intl: IntlShape,
-  køSorteringTyper: KodeverkMedNavn[],
+  køSorteringTyper: LosKodeverkMedNavn<'KøSortering'>[],
   sorteringType: string,
   fra?: number,
   til?: number,
@@ -148,7 +146,11 @@ const getSorteringsnavnForDynamiskPeriode = (
   return getNavn(values, intl);
 };
 
-const getSorteringsnavn = (intl: IntlShape, køSorteringTyper: KodeverkMedNavn[], saksliste?: Saksliste) => {
+const getSorteringsnavn = (
+  intl: IntlShape,
+  køSorteringTyper: LosKodeverkMedNavn<'KøSortering'>[],
+  saksliste?: Saksliste,
+) => {
   if (!saksliste?.sortering) {
     return '';
   }
@@ -187,9 +189,9 @@ export const SakslisteVelgerForm = ({
 
   const [visAlleSaksbehandlere, setVisAlleSaksbehandlere] = useState(false);
 
-  const behandlingsTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
-  const køSorteringTyper = useLosKodeverk(KodeverkLosType.KO_SORTERING);
+  const behandlingsTyper = useLosKodeverk('BehandlingType');
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
+  const køSorteringTyper = useLosKodeverk('KøSortering');
 
   const sorterteSakslister = sakslister.toSorted((saksliste1, saksliste2) =>
     saksliste1.navn.localeCompare(saksliste2.navn),

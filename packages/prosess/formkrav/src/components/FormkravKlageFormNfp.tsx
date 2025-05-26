@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 import type { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -45,7 +45,7 @@ const getKlagBareVedtak = (
       .sort((b1, b2) => dayjs(b1.avsluttet).diff(dayjs(b2.avsluttet)))
       .map(({ uuid, type, avsluttet }) => (
         <option key={uuid} value={`${uuid}`}>
-          {`${alleKodeverk[KodeverkType.BEHANDLING_TYPE].find(kode => kode.kode === type)?.navn ?? ''} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
+          {`${alleKodeverk['BehandlingType'].find(kode => kode.kode === type)?.navn ?? ''} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
         </option>
       )),
   );

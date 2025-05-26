@@ -5,15 +5,18 @@ import { HStack, Label, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { FagsakYtelseType, KodeverkLosType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { behandlingerFristUtløptOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { VentefristUtløperGraf } from './VentefristUtløperGraf';
 
-const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string): string => {
+const finnFagsakYtelseTypeNavn = (
+  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
+  valgtFagsakYtelseType: string,
+): string => {
   const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
   return type ? type.navn : '';
 };
@@ -36,7 +39,7 @@ interface Props {
 export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
   const { data: behandlingerPaVent } = useQuery(behandlingerFristUtløptOptions(valgtAvdelingEnhet));
 
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;

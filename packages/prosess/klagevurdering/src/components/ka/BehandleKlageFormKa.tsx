@@ -5,7 +5,6 @@ import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import {
   KlageVurdering as klageVurderingType,
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
-  KodeverkType,
 } from '@navikt/fp-kodeverk';
 import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -32,7 +31,7 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
     klageVurderingOmgjoer,
   } = klageVurdering.klageVurderingResultatNK ?? {};
 
-  const medholdReasons = alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK];
+  const medholdReasons = alleKodeverk['KlageMedholdÅrsak'];
 
   return (
     <VStack gap="4">

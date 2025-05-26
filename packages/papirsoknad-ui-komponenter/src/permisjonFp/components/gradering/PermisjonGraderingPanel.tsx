@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 
-import { Arbeidskategori, KodeverkType } from '@navikt/fp-kodeverk';
+import { Arbeidskategori } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -23,8 +23,8 @@ interface Props {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent
  */
 export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
-  const graderingKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
-  const arbeidskategoriTyper = alleKodeverk[KodeverkType.ARBEIDSKATEGORI];
+  const graderingKvoter = alleKodeverk['UttakPeriodeType'];
+  const arbeidskategoriTyper = alleKodeverk['Arbeidskategori'];
 
   const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesGradering }>();
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;

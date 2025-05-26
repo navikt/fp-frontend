@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { type FormValues as EndreUtlandFormValues, MenyEndreUtlandIndex } from '@navikt/fp-sak-meny-endre-utland';
 import type { Saksmarkering } from '@navikt/fp-types';
 
@@ -22,7 +21,7 @@ export const EndreFagsakMarkeringMenyModal = ({
 }: Props) => {
   const queryClient = useQueryClient();
   const api = useFagsakApi();
-  const fagsakMarkeringerKodeverk = useFpSakKodeverk(KodeverkType.FAGSAK_MARKERING).toSorted((a, b) =>
+  const fagsakMarkeringerKodeverk = useFpSakKodeverk('FagsakMarkering').toSorted((a, b) =>
     a.navn.localeCompare(b.navn),
   );
 

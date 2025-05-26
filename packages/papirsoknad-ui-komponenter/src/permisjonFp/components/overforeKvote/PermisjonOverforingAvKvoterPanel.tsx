@@ -5,7 +5,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { CheckboxField } from '@navikt/ft-form-hooks';
 
-import { ForeldreType, KodeverkType, OverforingArsak } from '@navikt/fp-kodeverk';
+import { ForeldreType, OverforingArsak } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -23,7 +23,7 @@ const getText = (intl: IntlShape, kode: string, navn: string): string => {
 };
 
 const mapArsaker = (
-  arsaker: KodeverkMedNavn[],
+  arsaker: KodeverkMedNavn<'OverføringÅrsak'>[],
   sokerErMor: boolean,
   erEndringssøknad: boolean,
   intl: IntlShape,
@@ -61,7 +61,7 @@ interface Props {
 export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, readOnly, erEndringssøknad }: Props) => {
   const intl = useIntl();
 
-  const overtaKvoteReasons = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE];
+  const overtaKvoteReasons = alleKodeverk['OverføringÅrsak'];
   const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, erEndringssøknad, intl);
 
   const { watch } = useFormContext<PermisjonFormValues>();

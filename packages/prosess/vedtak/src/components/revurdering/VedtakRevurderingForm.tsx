@@ -13,7 +13,6 @@ import {
   isAvslag,
   isInnvilget,
   isOpphor,
-  KodeverkType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
@@ -92,11 +91,11 @@ const lagÅrsakString = (revurderingAarsaker: string[], alleKodeverk: AlleKodeve
   );
   const alleAndreAarsakerNavn = revurderingAarsaker
     .filter(aarsak => aarsak !== BehandlingArsakType.RE_ENDRING_FRA_BRUKER)
-    .map(aarsak => alleKodeverk[KodeverkType.BEHANDLING_AARSAK].find(kode => kode.kode === aarsak)?.navn ?? '');
+    .map(aarsak => alleKodeverk['BehandlingÅrsakType'].find(kode => kode.kode === aarsak)?.navn ?? '');
   // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
   if (endringFraBrukerAarsak !== undefined) {
     aarsakTekstList.push(
-      alleKodeverk[KodeverkType.BEHANDLING_AARSAK].find(kode => kode.kode === endringFraBrukerAarsak)?.navn ?? '',
+      alleKodeverk['BehandlingÅrsakType'].find(kode => kode.kode === endringFraBrukerAarsak)?.navn ?? '',
     );
   }
   aarsakTekstList.push(...alleAndreAarsakerNavn);
@@ -117,7 +116,7 @@ export const lagKonsekvensForYtelsenTekst = (alleKodeverk: AlleKodeverk, konsekv
     return '';
   }
   return konsekvenser
-    .map(k => alleKodeverk[KodeverkType.KONSEKVENS_FOR_YTELSEN].find(kodeverk => kodeverk.kode === k)?.navn ?? '')
+    .map(k => alleKodeverk['KonsekvensForYtelsen'].find(kodeverk => kodeverk.kode === k)?.navn ?? '')
     .join(' og ');
 };
 

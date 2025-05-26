@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
-import { AnkeVurdering as ankeVurderingType, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
+import { AnkeVurdering as ankeVurderingType, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import type { AnkeVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -18,7 +18,7 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
 
   const { alleKodeverk } = usePanelDataContext();
 
-  const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
+  const ankeOmgorArsaker = alleKodeverk['AnkeOmgjørÅrsak'];
 
   return (
     <VStack gap="4">

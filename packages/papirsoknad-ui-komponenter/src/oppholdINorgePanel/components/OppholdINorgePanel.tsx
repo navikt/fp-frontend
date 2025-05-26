@@ -1,11 +1,9 @@
-import { useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
@@ -43,10 +41,7 @@ interface Props {
  */
 export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato, erAdopsjon }: Props) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = useMemo(
-    () => alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn)),
-    [alleKodeverk],
-  );
+  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   const { watch } = useFormContext<OppholdINorgeFormValues>();
   const skalViseTidligereOppholdInput = !watch('oppholdSisteTolvINorge', true);

@@ -115,7 +115,7 @@ const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjo
 
 interface Props {
   medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;
-  avslagsarsaker: KodeverkMedNavn[];
+  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
   status: string;
   panelTittelKode: string;
   lovReferanse?: string;

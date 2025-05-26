@@ -6,7 +6,7 @@ import { Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { FagsakYtelseType, FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
@@ -46,9 +46,9 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
     [setSoknadData],
   );
 
-  const fagsakYtelseTyper = alleKodeverk[KodeverkType.FAGSAK_YTELSE];
-  const familieHendelseTyper = alleKodeverk[KodeverkType.FAMILIE_HENDELSE_TYPE];
-  const foreldreTyper = alleKodeverk[KodeverkType.FORELDRE_TYPE];
+  const fagsakYtelseTyper = alleKodeverk['FagsakYtelseType'];
+  const familieHendelseTyper = alleKodeverk['FamilieHendelseType'];
+  const foreldreTyper = alleKodeverk['ForeldreType'];
 
   return (
     <Form formMethods={formMethods} onSubmit={onSubmit}>

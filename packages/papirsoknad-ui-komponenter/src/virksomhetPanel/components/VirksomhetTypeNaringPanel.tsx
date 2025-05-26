@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { CheckboxPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { KodeverkType, NaringsvirksomhetType } from '@navikt/fp-kodeverk';
+import { NaringsvirksomhetType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
@@ -24,7 +24,7 @@ const compare = (arg1: number, arg2: number): number => {
 };
 
 const naringvirksomhetTyper = (alleKodeverk: AlleKodeverk) =>
-  alleKodeverk[KodeverkType.VIRKSOMHET_TYPE]
+  alleKodeverk['VirksomhetType']
     .filter(t => t.kode !== NaringsvirksomhetType.FRILANSER)
     .sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]))
     .map(t => ({ value: t.kode, label: t.navn }));

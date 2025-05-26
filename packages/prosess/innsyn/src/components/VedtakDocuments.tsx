@@ -9,7 +9,7 @@ import { hentVedtakDokumentLenke } from '@navikt/fp-konstanter';
 import type { InnsynVedtaksdokument, KodeverkMedNavn } from '@navikt/fp-types';
 
 interface Props {
-  behandlingTypes: KodeverkMedNavn[];
+  behandlingTypes: KodeverkMedNavn<'BehandlingType'>[];
   vedtaksdokumenter: InnsynVedtaksdokument[];
 }
 

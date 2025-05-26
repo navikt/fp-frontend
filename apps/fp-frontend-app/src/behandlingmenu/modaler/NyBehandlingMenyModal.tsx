@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingStatus, BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -71,12 +71,12 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   );
 
   const tilbakekrevingRevurderingsårsaker = alleFpTilbakeKodeverk
-    ? alleFpTilbakeKodeverk[TilbakekrevingKodeverkType.BEHANDLING_AARSAK]
+    ? alleFpTilbakeKodeverk['BehandlingÅrsakType']
     : undefined;
 
-  const revurderingsårsaker = alleFpSakKodeverk ? alleFpSakKodeverk[KodeverkType.BEHANDLING_AARSAK] : undefined;
+  const revurderingsårsaker = alleFpSakKodeverk ? alleFpSakKodeverk['BehandlingÅrsakType'] : undefined;
 
-  const behandlingstyper = notEmpty(alleFpSakKodeverk)[KodeverkType.BEHANDLING_TYPE].filter(bt =>
+  const behandlingstyper = notEmpty(alleFpSakKodeverk)['BehandlingType'].filter(bt =>
     BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES.some(bto => bto === bt.kode),
   );
 

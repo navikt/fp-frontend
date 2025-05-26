@@ -6,7 +6,6 @@ import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, 
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import { KodeverkLosType } from '@navikt/fp-kodeverk';
 import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
@@ -89,7 +88,7 @@ interface Props {
 
 export const OppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Props) => {
   const intl = useIntl();
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const behandlingTyper = useLosKodeverk('BehandlingType');
 
   const [enableTableEvents, setEnableTableEvents] = useState(true);
 

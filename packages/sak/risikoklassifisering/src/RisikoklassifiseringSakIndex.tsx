@@ -28,7 +28,7 @@ interface Props {
   readOnly: boolean;
   submitAksjonspunkt?: (data: AvklartRisikoklassifiseringAp) => void;
   toggleRiskPanel: () => void;
-  faresignalVurderinger: KodeverkMedNavn[];
+  faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
 }
 
 /**

@@ -7,7 +7,6 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
@@ -24,17 +23,17 @@ const getTypeTekst = (
 ): string | undefined => {
   const årsaktype = utledÅrsakstype(periode);
   if (årsaktype === Årsakstype.UTTAK || årsaktype === Årsakstype.OVERFØRING) {
-    const tekst = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find(k => k.kode === periode.uttakPeriodeType)?.navn;
+    const tekst = alleKodeverk['UttakPeriodeType'].find(k => k.kode === periode.uttakPeriodeType)?.navn;
     return periode.arbeidstidsprosent && periode.arbeidstidsprosent > 0
       ? `${tekst} - Gradert ${periode.arbeidstidsprosent}%`
       : tekst;
   }
   if (årsaktype === Årsakstype.OPPHOLD) {
-    const navn = alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find(k => k.kode === periode.oppholdÅrsak)?.navn;
+    const navn = alleKodeverk['OppholdÅrsak'].find(k => k.kode === periode.oppholdÅrsak)?.navn;
     return intl.formatMessage({ id: 'UttakFaktaTabel.Opphold' }, { arsak: navn?.replace('har uttak av', '') });
   }
   if (årsaktype === Årsakstype.UTSETTELSE) {
-    const navn = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
+    const navn = alleKodeverk['UtsettelseÅrsak'].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
     return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
   }
   return '';
@@ -172,7 +171,7 @@ export const UttakFaktaTable = ({
                 <Table.DataCell>{numberOfDaysAndWeeks.formattedString}</Table.DataCell>
                 <Table.DataCell>{getTypeTekst(alleKodeverk, periode, intl)}</Table.DataCell>
                 <Table.DataCell>
-                  {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find(k => k.kode === periode.periodeKilde)?.navn}
+                  {alleKodeverk['FordelingPeriodeKilde'].find(k => k.kode === periode.periodeKilde)?.navn}
                 </Table.DataCell>
               </Table.ExpandableRow>
             );

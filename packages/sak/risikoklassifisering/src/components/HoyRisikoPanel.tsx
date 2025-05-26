@@ -15,7 +15,7 @@ interface Props {
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
   submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
-  faresignalVurderinger: KodeverkMedNavn[];
+  faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
 }
 
 /**

@@ -1,0 +1,17 @@
+export type TilbakekrevingKodeverkType =
+  | 'Aktsomhet'
+  | 'SærligGrunn'
+  | 'VilkårResultat'
+  | 'ForeldelseVurderingType'
+  | 'HendelseType'
+  | 'HendelseUnderType'
+  | 'VidereBehandling'
+  | 'Venteårsak'
+  | 'SkjermlenkeType'
+  | 'VedtakResultatType'
+  | 'VurderÅrsak'
+  | 'VergeType'
+  | 'HistorikkAktør'
+  | 'BehandlingResultatType'
+  | 'BehandlingÅrsakType'
+  | 'BehandlingType';

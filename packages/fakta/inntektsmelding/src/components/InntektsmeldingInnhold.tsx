@@ -4,7 +4,6 @@ import { Heading, HGrid, HStack, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { formatCurrencyNoKr } from '@navikt/ft-utils';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { Inntektsmelding } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -65,7 +64,7 @@ export const InntektsmeldingInnhold = ({
         <KontaktPerson inntektsmelding={inntektsmelding} />
 
         <Startdato
-          ytelse={alleKodeverk[KodeverkType.FAGSAK_YTELSE].find(k => k.kode === fagsak.fagsakYtelseType)?.navn ?? ''}
+          ytelse={alleKodeverk['FagsakYtelseType'].find(k => k.kode === fagsak.fagsakYtelseType)?.navn ?? ''}
           startDatoPermisjon={inntektsmelding.startDatoPermisjon}
         />
 

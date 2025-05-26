@@ -18,7 +18,7 @@ interface Props {
   fagsakMarkeringer?: Saksmarkering[];
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
-  fagsakMarkeringerKodeverk: KodeverkMedNavn[];
+  fagsakMarkeringerKodeverk: KodeverkMedNavn<'FagsakMarkering'>[];
 }
 
 /**

@@ -46,14 +46,14 @@ const getValiderFomTomRekkefølge =
     return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
   };
 
-const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapTyper = (typer: KodeverkMedNavn<'UtsettelseÅrsak'>[]): ReactElement[] =>
   typer.map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
   ));
 
-const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => gyldigeUttakperioder.some(gup => gup === kode))
     .map(({ kode, navn }) => (
@@ -63,8 +63,8 @@ const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
     ));
 
 interface Props {
-  utsettelseReasons: KodeverkMedNavn[];
-  utsettelseKvoter: KodeverkMedNavn[];
+  utsettelseReasons: KodeverkMedNavn<'UtsettelseÅrsak'>[];
+  utsettelseKvoter: KodeverkMedNavn<'UttakPeriodeType'>[];
   readOnly: boolean;
 }
 

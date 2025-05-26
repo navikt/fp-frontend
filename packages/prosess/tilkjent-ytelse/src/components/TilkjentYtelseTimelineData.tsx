@@ -5,7 +5,7 @@ import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, HStack, Label, Table, VStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 
-import { AktivitetStatus, KodeverkType } from '@navikt/fp-kodeverk';
+import { AktivitetStatus } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -196,8 +196,7 @@ const createVisningNavnForUttakArbeidstaker = (
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
   if (!arbeidsgiverOpplysninger?.navn) {
     return andel.arbeidsforholdType
-      ? (alleKodeverk[KodeverkType.OPPTJENING_AKTIVITET_TYPE].find(kode => kode.kode === andel.arbeidsforholdType)
-          ?.navn ?? '')
+      ? (alleKodeverk['OpptjeningAktivitetType'].find(kode => kode.kode === andel.arbeidsforholdType)?.navn ?? '')
       : '';
   }
   return arbeidsgiverOpplysninger.erPrivatPerson

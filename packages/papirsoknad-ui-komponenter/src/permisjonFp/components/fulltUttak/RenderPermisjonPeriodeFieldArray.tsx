@@ -16,7 +16,7 @@ import {
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
@@ -36,7 +36,7 @@ export const gyldigeUttakperioder = [
   UttakPeriodeType.MODREKVOTE,
 ];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapPeriodeTyper = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => gyldigeUttakperioder.some(gu => gu === kode))
     .map(({ kode, navn }) => (
@@ -45,7 +45,7 @@ const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
       </option>
     ));
 
-const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]): ReactElement[] =>
+const mapAktiviteter = (aktiviteter: KodeverkMedNavn<'MorsAktivitet'>[]): ReactElement[] =>
   aktiviteter.map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
@@ -96,10 +96,12 @@ interface Props {
 export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKodeverk }: Props) => {
   const intl = useIntl();
 
-  const periodeTyper = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
-  const morsAktivitetTyper = alleKodeverk[KodeverkType.MORS_AKTIVITET];
+  const periodeTyper = alleKodeverk['UttakPeriodeType'];
+  const morsAktivitetTyper = alleKodeverk['MorsAktivitet'];
 
+  //@ts-expect-error Dette bør fjernast. '-' er gammalt rask
   if (morsAktivitetTyper.filter(({ kode }) => kode === '-').length === 0) {
+    //@ts-expect-error Dette bør fjernast. '-' er gammalt rask
     morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' });
   }
 

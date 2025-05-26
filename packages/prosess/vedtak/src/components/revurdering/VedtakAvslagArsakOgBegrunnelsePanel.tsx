@@ -7,7 +7,7 @@ import { TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
 import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
@@ -29,11 +29,10 @@ const getAvslagArsak = (
     throw new Error('Ingen behandlingsresultat eller avslagsårsak finnes');
   }
 
-  const vilkarType =
-    alleKodeverk[KodeverkType.VILKAR_TYPE].find(kode => kode.kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
+  const vilkarType = alleKodeverk['VilkårType'].find(kode => kode.kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
 
   const årsak =
-    alleKodeverk[KodeverkType.AVSLAGSARSAK][avslatteVilkar[0].vilkarType as VilkarType].find(
+    alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType as VilkarType].find(
       kode => kode.kode === behandlingsresultat.avslagsarsak,
     )?.navn ?? '';
 

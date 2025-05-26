@@ -7,6 +7,7 @@ import {
   AdresseType,
   AksjonspunktKode,
   AksjonspunktStatus,
+  FarSøkerType,
   NavBrukerKjonn,
   SivilstandType,
   SoknadType,
@@ -30,7 +31,7 @@ const soknad = {
   utstedtdato: '2019-01-02',
   antallBarn: 2,
   soknadType: SoknadType.ADOPSJON,
-  farSokerType: 'ADOPTERER_ALENE',
+  farSokerType: FarSøkerType.ADOPTERER_ALENE,
 } as Soknad;
 
 const personoversikt: Personoversikt = {

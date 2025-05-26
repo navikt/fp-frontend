@@ -18,7 +18,7 @@ const intl = createIntl(messages);
 
 const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode?: string) => () => erVilkarOk === false && !avslagCode;
 
-const EMPTY_ARRAY = [] as KodeverkMedNavn[];
+const EMPTY_ARRAY = [] as KodeverkMedNavn<'Avslagsårsak'>[];
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -26,7 +26,7 @@ type FormValues = {
 };
 
 interface Props {
-  avslagsarsaker?: KodeverkMedNavn[];
+  avslagsarsaker?: KodeverkMedNavn<'Avslagsårsak'>[];
   customVilkarIkkeOppfyltText: string | ReactElement;
   customVilkarOppfyltText: string | ReactElement;
   readOnly: boolean;
@@ -34,8 +34,9 @@ interface Props {
   validatorsForRadioOptions?: ((value: boolean) => string | null | undefined)[];
 }
 
-const sorterAvslagsArsaker = (avslagsarsakerUsortert: KodeverkMedNavn[]): KodeverkMedNavn[] =>
-  avslagsarsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
+const sorterAvslagsArsaker = (
+  avslagsarsakerUsortert: KodeverkMedNavn<'Avslagsårsak'>[],
+): KodeverkMedNavn<'Avslagsårsak'>[] => avslagsarsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
 /**
  * VilkarResultPicker

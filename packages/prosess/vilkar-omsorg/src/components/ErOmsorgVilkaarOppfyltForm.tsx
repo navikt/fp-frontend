@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -58,7 +58,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.OMSORGSVILKARET];
+  const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.OMSORGSVILKARET];
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 

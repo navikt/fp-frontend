@@ -4,7 +4,6 @@ import { BodyLong, BodyShort, Box, Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { FaktaKilde, sorterPerioder } from '@navikt/fp-fakta-felles';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { type AlleKodeverk, MedlemskapAvvik, type MedlemskapPeriode } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
@@ -25,8 +24,8 @@ export const OpplysningerFraMedlemskapsregister = ({
 }: Props) => {
   const intl = useIntl();
 
-  const medlemskapTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_TYPE];
-  const dekningTypeKodeverk = alleKodeverk[KodeverkType.MEDLEMSKAP_DEKNING];
+  const medlemskapTypeKodeverk = alleKodeverk['MedlemskapType'];
+  const dekningTypeKodeverk = alleKodeverk['MedlemskapDekningType'];
 
   const skalViseStudieland = medlemskapsperioder.find(mp => !!mp.studieland);
   const skalViseLovvalgtland = medlemskapsperioder.find(mp => !!mp.lovvalgsland);

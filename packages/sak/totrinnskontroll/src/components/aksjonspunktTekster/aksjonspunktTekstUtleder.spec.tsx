@@ -13,7 +13,7 @@ const behandlingStatusFVED = BehandlingStatus.FATTER_VEDTAK;
 const erTilbakekreving = false;
 
 const behandlingStatus = BehandlingStatus.OPPRETTET;
-const faktaOmBeregningTilfeller = {} as KodeverkMedNavn[];
+const faktaOmBeregningTilfeller = {} as KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 
 describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5004', () => {
