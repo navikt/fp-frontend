@@ -1,5 +1,0 @@
-import"./withPanelData-BmAMIdfq.js";import{g as a}from"./withIntl-Ba9cvir8.js";import"./index-nufLo1NJ.js";import{Å as m}from"./ÅpenRevurderingModal-BSTlTHYN.js";import{m as i}from"./nb_NO-D39UuuyA.js";import"./index-mMUbb89k.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./v4-CtRu48qb.js";import"./entry-preview-D8ayIdO9.js";import"./iframe-DyEDOKdv.js";import"./chunk-XP5HYGXS-BpfKkqn7.js";import"./entry-preview-docs-DtNjo1hO.js";import"./index-CXQShRbs.js";import"./dayjs.min-Cke173X9.js";import"./index-0CCRSEf1.js";import"./ExclamationmarkTriangleFill-ku4D5C8d.js";const p=a(i),I={title:"behandling/tilbakekreving/ÅpenRevurderingModal",component:m,decorators:[p]},r={args:{harÅpenRevurdering:!0}};var e,t,o;r.parameters={...r.parameters,docs:{...(e=r.parameters)==null?void 0:e.docs,source:{originalSource:`{
-  args: {
-    harÅpenRevurdering: true
-  }
-}`,...(o=(t=r.parameters)==null?void 0:t.docs)==null?void 0:o.source}}};const M=["Default"];export{r as Default,M as __namedExportsOrder,I as default};

@@ -1,1 +1,0 @@
-import{j as o}from"./index-nufLo1NJ.js";import{n,o as a,p as s}from"./withPanelData-BmAMIdfq.js";const m=t=>{const r=n({locale:"nb-NO",messages:t},s());return e=>o.jsx(a,{value:r,children:e()})};export{m as g};
