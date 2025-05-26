@@ -5,7 +5,7 @@ import * as stories from './InfosiderSakIndex.stories';
 
 const { HarIkkeTilgang } = composeStories(stories);
 
-describe('<ForbiddenPage>', () => {
+describe('ForbiddenPage', () => {
   it('skal rendre ForbiddenPage korrekt', async () => {
     render(<HarIkkeTilgang />);
     expect(await screen.findByText('Du har ikke tilgang til å slå opp denne personen')).toBeInTheDocument();

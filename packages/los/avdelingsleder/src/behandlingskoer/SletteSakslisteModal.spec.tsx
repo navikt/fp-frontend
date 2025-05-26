@@ -6,7 +6,7 @@ import * as stories from './SletteSakslisteModal.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<SletteSakslisteModal>', () => {
+describe('SletteSakslisteModal', () => {
   it('skal vise modal for sletting av saksliste og så svare ja', async () => {
     const submit = vi.fn();
     render(<Default submit={submit} />);

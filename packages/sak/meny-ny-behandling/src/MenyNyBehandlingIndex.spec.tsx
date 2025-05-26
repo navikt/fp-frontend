@@ -6,7 +6,7 @@ import * as stories from './MenyNyBehandlingIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MenyNyBehandlingIndex>', () => {
+describe('MenyNyBehandlingIndex', () => {
   it('skal opprette ny klagebehandling', async () => {
     const lagNyBehandling = vi.fn();
     const lukkModal = vi.fn();

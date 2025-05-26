@@ -9,7 +9,7 @@ import * as stories from './MenyHenleggIndex.stories';
 const { ForFørstegangssøknad, ForKlage, ForInnsyn, ForTilbakekreving, ForTilbakekrevingRevurdering, ForRevurdering } =
   composeStories(stories);
 
-describe('<MenyHenleggIndex>', () => {
+describe('MenyHenleggIndex', () => {
   it('skal velge henlegge behandling og så vise modal som viser at behandling er henlagt', async () => {
     const henleggBehandling = vi.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);

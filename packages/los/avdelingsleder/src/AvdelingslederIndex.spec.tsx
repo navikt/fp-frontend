@@ -7,7 +7,7 @@ import * as stories from './AvdelingslederIndex.stories';
 const { Default, HarIkkeTilgang, LasteIkonFørValgtAvdelingErSatt, SkalFiltrereBortAvdelingerSomKreverKode6 } =
   composeStories(stories);
 
-describe('<AvdelingslederIndex>', () => {
+describe('AvdelingslederIndex', () => {
   it.skip('skal vise lasteikon før valgt avdeling er satt', async () => {
     await applyRequestHandlers(LasteIkonFørValgtAvdelingErSatt.parameters['msw']);
     render(<LasteIkonFørValgtAvdelingErSatt />);

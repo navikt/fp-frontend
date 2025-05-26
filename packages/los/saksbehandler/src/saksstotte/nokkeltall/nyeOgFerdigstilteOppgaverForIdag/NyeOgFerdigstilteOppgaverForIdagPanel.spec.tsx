@@ -6,7 +6,7 @@ import * as stories from './NyeOgFerdigstilteOppgaverForIdagPanel.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<NyeOgFerdigstilteOppgaverForIdagPanel>', () => {
+describe('NyeOgFerdigstilteOppgaverForIdagPanel', () => {
   it('skal rendre graf', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

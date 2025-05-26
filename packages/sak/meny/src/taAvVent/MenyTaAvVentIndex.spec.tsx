@@ -6,7 +6,7 @@ import * as stories from './MenyTaAvVentIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MenyTaAvVentIndex>', () => {
+describe('MenyTaAvVentIndex', () => {
   it('skal vise modal og velge å åpne ta behandling av vent', async () => {
     const taBehandlingAvVent = vi.fn();
     const lukkModal = vi.fn();

@@ -27,7 +27,7 @@ const TestErrorMessage = ({ skalFjerne = false }) => {
   );
 };
 
-describe('<RestApiErrorContext>', () => {
+describe('RestApiErrorContext', () => {
   it('skal legge til feilmelding og så hente alle i kontekst', async () => {
     render(
       <RestApiErrorProvider>

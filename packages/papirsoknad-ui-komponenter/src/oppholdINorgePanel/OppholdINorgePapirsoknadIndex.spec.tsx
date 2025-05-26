@@ -8,7 +8,7 @@ import * as stories from './OppholdINorgePapirsoknadIndex.stories';
 
 const { ForFodsel, ForAdopsjon } = composeStories(stories);
 
-describe('<OppholdINorgePapirsoknadIndex>', () => {
+describe('OppholdINorgePapirsoknadIndex', () => {
   it('skal svare ja på alle spørsmåla for fødsel', async () => {
     const lagre = vi.fn();
 

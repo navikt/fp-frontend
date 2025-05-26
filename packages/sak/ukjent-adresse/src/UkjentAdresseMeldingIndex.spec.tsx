@@ -5,7 +5,7 @@ import * as stories from './UkjentAdresseMeldingIndex.stories';
 
 const { IngenAdresse } = composeStories(stories);
 
-describe('<IngenAdresse>', () => {
+describe('IngenAdresse', () => {
   it('skal vise panelet om brukeren mangler adresse', async () => {
     render(<IngenAdresse />);
     expect(

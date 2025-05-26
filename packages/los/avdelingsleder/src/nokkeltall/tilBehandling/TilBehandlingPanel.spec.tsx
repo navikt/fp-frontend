@@ -6,7 +6,7 @@ import * as stories from './TilBehandlingPanel.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<TilBehandlingPanel>', () => {
+describe('TilBehandlingPanel', () => {
   // TODO echarts-testing
   it.skip('skal vise graffilter', async () => {
     await applyRequestHandlers(Default.parameters['msw']);

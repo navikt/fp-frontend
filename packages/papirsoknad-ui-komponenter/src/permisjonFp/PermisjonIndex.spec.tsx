@@ -6,7 +6,7 @@ import * as stories from './PermisjonIndex.stories';
 
 const { SokerErMor } = composeStories(stories);
 
-describe('<PermisjonIndex>', () => {
+describe('PermisjonIndex', () => {
   it('skal velge fullt uttak', async () => {
     const lagre = vi.fn();
 

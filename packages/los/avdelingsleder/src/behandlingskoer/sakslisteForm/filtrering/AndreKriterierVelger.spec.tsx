@@ -7,7 +7,7 @@ import * as stories from './AndreKriterierVelger.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<AndreKriterierVelger>', () => {
+describe('AndreKriterierVelger', () => {
   it('skal vise checkboxer for andre kriterier der Til beslutter er valgt fra før', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);

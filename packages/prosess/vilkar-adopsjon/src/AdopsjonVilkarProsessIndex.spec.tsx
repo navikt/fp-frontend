@@ -6,7 +6,7 @@ import * as stories from './AdopsjonVilkarProsessIndex.stories';
 
 const { ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår } = composeStories(stories);
 
-describe('<AdopsjonVilkarProsessIndex>', () => {
+describe('AdopsjonVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 

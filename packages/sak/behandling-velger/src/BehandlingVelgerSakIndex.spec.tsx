@@ -6,7 +6,7 @@ import * as stories from './BehandlingVelgerSakIndex.stories';
 
 const { Default, IngenBehandlinger } = composeStories(stories);
 
-describe('<BehandlingVelgerSakIndex>', () => {
+describe('BehandlingVelgerSakIndex', () => {
   it('skal vise kun en behandling når behandlingslisten ikke er ekspandert', async () => {
     render(<Default />);
     expect(await screen.findByText('Førstegangsbehandling')).toBeInTheDocument();

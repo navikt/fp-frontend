@@ -6,7 +6,7 @@ import * as stories from './OmsorgVilkarProsessIndex.stories';
 
 const { ÅpentAksjonspunkt, OppfyltVilkår, AvslåttVilkår } = composeStories(stories);
 
-describe('<OmsorgVilkarProsessIndex>', () => {
+describe('OmsorgVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 

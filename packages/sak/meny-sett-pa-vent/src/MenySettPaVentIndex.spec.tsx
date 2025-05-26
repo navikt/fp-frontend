@@ -14,7 +14,7 @@ const initFrist = (): string => {
   return dayjs(date).format(ISO_DATE_FORMAT);
 };
 
-describe('<MenySettPaVentIndex>', () => {
+describe('MenySettPaVentIndex', () => {
   it('skal velge årsak for sett på vent og så fortsette', async () => {
     const settBehandlingPaVent = vi.fn();
     const lukkModal = vi.fn();

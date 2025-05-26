@@ -6,7 +6,7 @@ import * as stories from './FlyttReservasjonModal.stories';
 
 const { Default, MedTreffPåSøk } = composeStories(stories);
 
-describe('<FlyttReservasjonModal>', () => {
+describe('FlyttReservasjonModal', () => {
   it('skal vise søkeknapp som disablet når en ikke har skrevet inn noen tegn i brukerident-feltet', async () => {
     render(<Default />);
 
