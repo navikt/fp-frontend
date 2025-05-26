@@ -13,12 +13,7 @@ import {
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
-import type {
-  AlleKodeverk,
-  AlleKodeverkTilbakekreving,
-  BehandlingAppKontekst,
-  KodeverkMedNavn,
-} from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { type AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
