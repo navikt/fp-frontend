@@ -13,6 +13,7 @@ import {
   notDash,
   required,
 } from '@navikt/ft-form-validators';
+import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type {
@@ -22,7 +23,6 @@ import type {
   PeriodeSokerAktivitet,
 } from '@navikt/fp-types';
 
-import { lagVisningsNavn } from '../../utils/lagVisningsNavn.ts';
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 import type { UttakAktivitetType } from './UttakAktivitetType';
 
@@ -47,7 +47,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
     arbeidsforhold = arbeidsgiverOpplysninger
-      ? lagVisningsNavn(arbeidsgiverOpplysninger, eksternArbeidsforholdId)
+      ? formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternArbeidsforholdId)
       : arbeidsgiverReferanse;
   }
   return {
