@@ -5,7 +5,7 @@ import * as stories from './VentefristUtløperPanel.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<VentefristUtløperPanel>', () => {
+describe('VentefristUtløperPanel', () => {
   // TODO echarts-testing
   it.skip('skal vise graffilter', async () => {
     const { getByLabelText } = render(<Default />);

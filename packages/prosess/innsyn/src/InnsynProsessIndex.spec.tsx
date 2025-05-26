@@ -8,7 +8,7 @@ import * as stories from './InnsynProsessIndex.stories';
 
 const { PanelForVurderingAvInnsyn } = composeStories(stories);
 
-describe('<InnsynProsessIndex>', () => {
+describe('InnsynProsessIndex', () => {
   it('skal fylle ut og så bekrefte avslått innsyn', async () => {
     const lagre = vi.fn();
 

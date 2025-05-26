@@ -7,7 +7,7 @@ import * as stories from './SvangerskapVilkarProsessIndex.stories';
 const { ÅpentAksjonspunktSkalKunneInnvilge, ÅpentAksjonspunktSkalIkkeKunneInnvilge, OppfyltVilkår, AvslåttVilkår } =
   composeStories(stories);
 
-describe('<SvangerskapVilkarProsessIndex>', () => {
+describe('SvangerskapVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret ikke er oppfylt fordi en ikke har perioder som kan innvilges', async () => {
     const lagre = vi.fn();
 

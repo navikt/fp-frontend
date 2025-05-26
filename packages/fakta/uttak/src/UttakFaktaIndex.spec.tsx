@@ -14,7 +14,7 @@ const {
   VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet,
 } = composeStories(stories);
 
-describe('<UttakFaktaIndex>', () => {
+describe('UttakFaktaIndex', () => {
   it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
     render(<VisUttaksperiodeUtenAksjonspunkt />);
 

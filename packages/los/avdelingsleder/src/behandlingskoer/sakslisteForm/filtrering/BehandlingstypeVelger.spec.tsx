@@ -7,7 +7,7 @@ import * as stories from './BehandlingstypeVelger.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<BehandlingstypeVelger>', () => {
+describe('BehandlingstypeVelger', () => {
   it('skal vise checkboxer for behandlingstyper', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);

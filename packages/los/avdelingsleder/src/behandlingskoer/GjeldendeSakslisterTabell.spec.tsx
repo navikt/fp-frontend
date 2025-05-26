@@ -7,7 +7,7 @@ import * as stories from './GjeldendeSakslisterTabell.stories';
 
 const { TabellNårDetIkkeFinnesBehandlingskøer, TabellNårDetFinnesEnBehandlingskø } = composeStories(stories);
 
-describe('<GjeldendeSakslisterTabell>', () => {
+describe('GjeldendeSakslisterTabell', () => {
   it('skal vise at ingen behandlingskøer er laget og så legge til en ny kø', async () => {
     await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
     render(<TabellNårDetIkkeFinnesBehandlingskøer />);

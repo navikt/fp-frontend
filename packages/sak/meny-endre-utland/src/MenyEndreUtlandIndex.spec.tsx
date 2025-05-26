@@ -8,7 +8,7 @@ import * as stories from './MenyEndreUtlandIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MenyEndreUtlandIndex>', () => {
+describe('MenyEndreUtlandIndex', () => {
   it('skal endre fra ingenting til eøs', async () => {
     const endreFagsakMarkering = vi.fn();
     const lukkModal = vi.fn();

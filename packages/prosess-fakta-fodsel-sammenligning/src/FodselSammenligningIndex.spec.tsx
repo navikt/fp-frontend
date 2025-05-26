@@ -9,7 +9,7 @@ const {
   PanelForMedVisningAvSvangerskapsuke,
 } = composeStories(stories);
 
-describe('<FodselSammenligningIndex>', () => {
+describe('FodselSammenligningIndex', () => {
   it('skal vise panel der behandling er av type revurdering', async () => {
     render(<PanelForNårBehandlingstypeErRevurdering />);
 

@@ -6,7 +6,7 @@ import * as stories from './NotatSakIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<NotatSakIndex>', () => {
+describe('NotatSakIndex', () => {
   it('skal legge til notat', async () => {
     const lagre = vi.fn();
 

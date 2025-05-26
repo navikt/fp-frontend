@@ -6,7 +6,7 @@ import * as stories from './FatterVedtakApprovalModalSakIndex.stories';
 const { EtterGodkjenning, EtterGodkjenningAvKlage, EtterTilbakesendingTilSaksbehandler, EtterFatterVedtakOgGodkjent } =
   composeStories(stories);
 
-describe('<FatterVedtakApprovalModalSakIndex>', () => {
+describe('FatterVedtakApprovalModalSakIndex', () => {
   it('skal vise modal etter godkjenning', async () => {
     render(<EtterGodkjenning />);
 

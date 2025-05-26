@@ -33,7 +33,7 @@ const oppgaveForResevertAvAnnenModal = {
   href: '',
 };
 
-describe('<OppgaveErReservertAvAnnenModal>', () => {
+describe('OppgaveErReservertAvAnnenModal', () => {
   it('skal modal og lukke den ved trykk på Ok-knappen', async () => {
     const lukkErReservertModalOgOpneOppgave = vi.fn();
     render(<Default lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave} />);

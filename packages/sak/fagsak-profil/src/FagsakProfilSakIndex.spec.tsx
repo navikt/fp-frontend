@@ -5,7 +5,7 @@ import * as stories from './FagsakProfilSakIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<FagsakProfile>', () => {
+describe('FagsakProfile', () => {
   it('skal vise fagsak-profil', async () => {
     render(<Default />);
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();

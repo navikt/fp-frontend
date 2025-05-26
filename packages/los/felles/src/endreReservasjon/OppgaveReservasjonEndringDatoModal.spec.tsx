@@ -8,7 +8,7 @@ import * as stories from './OppgaveReservasjonEndringDatoModal.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<OppgaveReservasjonEndringDatoModal>', () => {
+describe('OppgaveReservasjonEndringDatoModal', () => {
   it('skal vise modal for oppheving av reservasjon og velge dato', async () => {
     const endreOppgavereservasjon = vi.fn();
 

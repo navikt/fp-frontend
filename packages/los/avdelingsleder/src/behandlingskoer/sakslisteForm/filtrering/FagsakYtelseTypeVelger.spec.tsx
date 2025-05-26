@@ -7,7 +7,7 @@ import * as stories from './FagsakYtelseTypeVelger.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<FagsakYtelseTypeVelger>', () => {
+describe('FagsakYtelseTypeVelger', () => {
   it('skal vise checkboxer for stønadstyper og så velge engangsstønad', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);

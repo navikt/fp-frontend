@@ -8,7 +8,7 @@ import * as stories from './TerminOgFodselPanel.stories';
 
 const { ForeldrepengeSak, ErIkkeForeldrepengeSak } = composeStories(stories);
 
-describe('<TerminOgFodselPanel>', () => {
+describe('TerminOgFodselPanel', () => {
   it('skal velge at barnet er født for foreldrepengersak', async () => {
     const lagre = vi.fn();
 

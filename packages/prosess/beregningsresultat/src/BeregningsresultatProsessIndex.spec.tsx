@@ -5,7 +5,7 @@ import * as stories from './BeregningsresultatProsessIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<BeregningsresultatProsessIndex>', () => {
+describe('BeregningsresultatProsessIndex', () => {
   it('skal vise panel med beregningsinformasjon', async () => {
     render(<Default />);
 

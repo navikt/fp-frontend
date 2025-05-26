@@ -6,7 +6,7 @@ import * as stories from './OpptjeningFaktaIndex.stories';
 
 const { MedAksjonspunkt, UtenAksjonspunkt } = composeStories(stories);
 
-describe('<OpptjeningFaktaIndex>', () => {
+describe('OpptjeningFaktaIndex', () => {
   it('skal åpne aktivitet automatisk når det har åpent aksjonspunkt og så godkjenne det', async () => {
     const lagre = vi.fn(() => Promise.resolve());
     const utils = render(<MedAksjonspunkt submitCallback={lagre} />);

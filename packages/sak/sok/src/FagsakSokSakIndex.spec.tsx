@@ -6,7 +6,7 @@ import * as stories from './FagsakSokSakIndex.stories';
 
 const { Default, IkkeAdgang, IngenTreff } = composeStories(stories);
 
-describe('<FagsakSokSakIndex>', () => {
+describe('FagsakSokSakIndex', () => {
   it('skal skrive inn ikke gyldig saksnummer og få feilmelding', async () => {
     const utils = render(<Default />);
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();

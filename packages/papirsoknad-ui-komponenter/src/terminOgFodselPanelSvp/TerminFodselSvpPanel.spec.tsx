@@ -9,7 +9,7 @@ import * as stories from './TerminFodselSvpPanel.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<TerminOgFodselPanelSvp>', () => {
+describe('TerminOgFodselPanelSvp', () => {
   it('skal velge termindato og fødselsdato', async () => {
     const lagre = vi.fn();
     const foedselsDato = dayjs().subtract(1, 'day');

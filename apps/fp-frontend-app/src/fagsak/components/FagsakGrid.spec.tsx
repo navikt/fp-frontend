@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 
 import { FagsakGrid } from './FagsakGrid';
 
-describe('<FagsakGrid>', () => {
+describe('<FagsakGrid', () => {
   it('skal vise fagsakgrid med underkomponenter', async () => {
     render(
       <FagsakGrid

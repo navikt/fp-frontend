@@ -6,7 +6,7 @@ import * as stories from './SletteSaksbehandlerModal.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<SletteSaksbehandlerModal>', () => {
+describe('SletteSaksbehandlerModal', () => {
   it('skal vise modal og slette ved å trykk ja', async () => {
     const fjernSaksbehandler = vi.fn();
     render(<Default fjernSaksbehandler={fjernSaksbehandler} />);

@@ -6,7 +6,7 @@ import * as stories from './RisikoklassifiseringSakIndex.stories';
 
 const { IngenRisikoklassifisering, LavRisikoklassifisering, HøyRisikoklassifisering } = composeStories(stories);
 
-describe('<RisikoklassifiseringSakIndex>', () => {
+describe('RisikoklassifiseringSakIndex', () => {
   it('skal mangle klassifisering', async () => {
     render(<IngenRisikoklassifisering />);
     expect(await screen.findByText('Venter på mulige faresignaler')).toBeInTheDocument();
