@@ -27,9 +27,7 @@ describe('skalViseProsessPanel', () => {
         vilkarType: VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE,
       } as Vilkar,
     ];
-    const aksjonspunkter = [] as Aksjonspunkt[];
-
-    const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
+    const skalVise = skalViseProsessPanel([], [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
 
     expect(skalVise).toBe(true);
   });
@@ -57,9 +55,8 @@ describe('skalViseProsessPanel', () => {
         definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
       },
     ] as Aksjonspunkt[];
-    const vilkar = [] as Vilkar[];
 
-    const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], vilkar);
+    const skalVise = skalViseProsessPanel(aksjonspunkter, [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE], []);
 
     expect(skalVise).toBe(false);
   });

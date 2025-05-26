@@ -18,8 +18,6 @@ const intl = createIntl(messages);
 
 const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode?: string) => () => erVilkarOk === false && !avslagCode;
 
-const EMPTY_ARRAY = [] as KodeverkMedNavn<'Avslagsårsak'>[];
-
 type FormValues = {
   erVilkarOk?: boolean;
   avslagskode?: string;
@@ -94,7 +92,7 @@ export const VilkarResultPicker = ({
         <SelectField
           name="avslagskode"
           label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-          selectValues={sorterAvslagsArsaker(avslagsarsaker || EMPTY_ARRAY).map(aa => (
+          selectValues={sorterAvslagsArsaker(avslagsarsaker || []).map(aa => (
             <option key={aa.kode} value={aa.kode}>
               {aa.navn}
             </option>

@@ -58,9 +58,8 @@ const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   }
   return arsaker;
 };
-const TOMT_KODEVERK = [] as KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
-  'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : TOMT_KODEVERK;
+  'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : [];
 
 export type ApData = {
   fatterVedtakAksjonspunktDto: {

@@ -28,8 +28,6 @@ interface Props {
   toggleVisUtvidetBehandlingDetaljerKnapp: React.ReactElement;
 }
 
-const EMPTY_ARRAY = [] as Dokument[];
-
 /**
  * DokumentIndex
  *
@@ -44,7 +42,7 @@ export const DokumentIndex = ({
   const api = useFagsakApi();
   const intl = useIntl();
 
-  const { data: alleDokumenter = EMPTY_ARRAY, status } = useQuery(
+  const { data: alleDokumenter = [], status } = useQuery(
     api.hentDokumenter(saksnummer, behandlingUuid, behandlingVersjon),
   );
 

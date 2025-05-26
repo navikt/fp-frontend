@@ -70,8 +70,6 @@ const transformValues = (
   return aksjonspunkterSomSkalBekreftes;
 };
 
-const EMPTY_ARRAY = [] as AvklartBarn[];
-
 interface Props {
   familiehendelse: FamilieHendelseSamling;
   submittable: boolean;
@@ -101,7 +99,7 @@ export const FodselInfoPanel = ({
     isReadOnly,
   } = usePanelDataContext<AksjonspunktData>();
 
-  const avklartBarn = familiehendelse?.register?.avklartBarn ?? EMPTY_ARRAY;
+  const avklartBarn = familiehendelse?.register?.avklartBarn ?? [];
   const termindato = familiehendelse?.gjeldende?.termindato ?? undefined;
   const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke ?? undefined;
 

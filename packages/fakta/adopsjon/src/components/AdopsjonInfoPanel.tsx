@@ -74,8 +74,8 @@ const buildInitialValues = (
   };
 };
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => {
-  const aksjonspunkterArray = [] as AksjonspunktData;
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData[] => {
+  const aksjonspunkterArray = new Array<AksjonspunktData>();
   aksjonspunkterArray.push(DokumentasjonFaktaForm.transformValues(values));
 
   if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && values.ektefellesBarn !== undefined) {
@@ -99,9 +99,10 @@ const getEditedStatus = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendel
 
 type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
 
-type AksjonspunktData = Array<
-  BekreftEktefelleAksjonspunktAp | BekreftDokumentertDatoAksjonspunktAp | BekreftMannAdoptererAksjonspunktAp
->;
+type AksjonspunktData =
+  | BekreftEktefelleAksjonspunktAp
+  | BekreftDokumentertDatoAksjonspunktAp
+  | BekreftMannAdoptererAksjonspunktAp;
 
 interface Props {
   submittable: boolean;
@@ -123,7 +124,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
     harÅpneAksjonspunkter,
     alleMerknaderFraBeslutter,
     isReadOnly,
-  } = usePanelDataContext<AksjonspunktData>();
+  } = usePanelDataContext<AksjonspunktData[]>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

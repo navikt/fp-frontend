@@ -18,7 +18,7 @@ import {
 } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -51,8 +51,6 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
 });
 
 const nullSafe = (value: FamilieHendelse | null): FamilieHendelse => value ?? ({} as FamilieHendelse);
-
-const EMPTY_ARRAY = [] as KodeverkMedNavn<'Venteårsak'>[];
 
 interface Props {
   familiehendelse: FamilieHendelseSamling;
@@ -122,7 +120,7 @@ export const VarselOmRevurderingForm = ({
     (result, current) => result || current.erAutomatiskRevurdering,
     false,
   );
-  const ventearsaker = alleKodeverk['Venteårsak'] ?? EMPTY_ARRAY;
+  const ventearsaker = alleKodeverk['Venteårsak'] ?? [];
   const language = getLanguageFromSprakkode(behandling.språkkode);
   return (
     <>

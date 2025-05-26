@@ -15,14 +15,12 @@ import {
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument, InnsynVedtaksdokument } from '@navikt/fp-types';
+import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListInnsyn } from './DocumentListInnsyn';
 import { VedtakDocuments } from './VedtakDocuments';
-
-const EMPTY_ARRAY = [] as InnsynVedtaksdokument[];
 
 type FormValues = {
   mottattDato?: string;
@@ -149,7 +147,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
           validate={[required, hasValidDate]}
         />
         <VedtakDocuments
-          vedtaksdokumenter={innsyn?.vedtaksdokumentasjon ?? EMPTY_ARRAY}
+          vedtaksdokumenter={innsyn?.vedtaksdokumentasjon ?? []}
           behandlingTypes={alleKodeverk['BehandlingType']}
         />
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />

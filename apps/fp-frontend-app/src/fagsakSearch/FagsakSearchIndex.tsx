@@ -4,13 +4,10 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
 import { FagsakSokSakIndex } from '@navikt/fp-sak-sok';
-import type { FagsakEnkel } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { pathToFagsak } from '../app/paths';
 import { useFagsakApi } from '../data/fagsakApi';
-
-const EMPTY_ARRAY = [] as FagsakEnkel[];
 
 /**
  * FagsakSearchIndex
@@ -31,7 +28,7 @@ export const FagsakSearchIndex = () => {
 
   const {
     mutate: searchFagsaker,
-    data: fagsaker = EMPTY_ARRAY,
+    data: fagsaker = [],
     status: søkeStatus,
     error: fagsakError,
   } = useMutation({

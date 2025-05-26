@@ -55,13 +55,11 @@ const DEFAULT_FAGSAK = {
   },
 } as Fagsak;
 
-const DEFAULT_AKSJONSPUNKTER = [] as Aksjonspunkt[];
-
 export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) => {
   const { fagsak, behandling, aksjonspunkterForPanel, isReadOnly, submitCallback, alleMerknaderFraBeslutter } =
     context.args as PanelDataArgs;
 
-  const aksjonspunkter = aksjonspunkterForPanel ?? DEFAULT_AKSJONSPUNKTER;
+  const aksjonspunkter = aksjonspunkterForPanel ?? [];
 
   return (
     <PanelDataProvider
