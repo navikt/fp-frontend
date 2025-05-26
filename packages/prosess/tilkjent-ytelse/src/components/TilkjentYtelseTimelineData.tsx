@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, HStack, Label, Table, VStack } from '@navikt/ds-react';
-import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, dateFormat, formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { AktivitetStatus } from '@navikt/fp-kodeverk';
 import type {
@@ -186,8 +186,6 @@ export const TilkjentYtelseTimelineData = ({
   );
 };
 
-const getEndCharFromId = (id: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
 const createVisningNavnForUttakArbeidstaker = (
   andel: BeregningsresultatPeriodeAndel,
   alleKodeverk: AlleKodeverk,
@@ -195,15 +193,10 @@ const createVisningNavnForUttakArbeidstaker = (
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
   if (!arbeidsgiverOpplysninger?.navn) {
-    return andel.arbeidsforholdType
-      ? (alleKodeverk['OpptjeningAktivitetType'].find(kode => kode.kode === andel.arbeidsforholdType)?.navn ?? '')
-      : '';
+    const opptjeningAktiviteter = alleKodeverk['OpptjeningAktivitetType'];
+    return opptjeningAktiviteter.find(({ kode }) => kode === andel.arbeidsforholdType)?.navn ?? '';
   }
-  return arbeidsgiverOpplysninger.erPrivatPerson
-    ? `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.fødselsdato})`
-    : `${arbeidsgiverOpplysninger.navn} (${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(
-        andel.eksternArbeidsforholdId,
-      )}`;
+  return formaterArbeidsgiver(arbeidsgiverOpplysninger, andel.eksternArbeidsforholdId);
 };
 
 const findAndelsnavn = (

@@ -5,41 +5,19 @@ import { FormattedMessage } from 'react-intl';
 import { Alert, HStack } from '@navikt/ds-react';
 import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { dateFormat, guid } from '@navikt/ft-utils';
+import { formaterArbeidsgiver, guid } from '@navikt/ft-utils';
 
 import { UttakArbeidType } from '@navikt/fp-kodeverk';
-import type {
-  AlleKodeverk,
-  ArbeidsgiverOpplysninger,
-  ArbeidsgiverOpplysningerPerId,
-  FaktaArbeidsforhold,
-} from '@navikt/fp-types';
+import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './graderingOgSamtidigUttakPanel.module.css';
 
-export enum Årsakstype {
-  UTTAK = 'UTTAK',
-  OVERFØRING = 'OVERFØRING',
-  UTSETTELSE = 'UTSETTELSE',
-  OPPHOLD = 'OPPHOLD',
-}
-
 export type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
   arbeidsgiverId?: string;
   harGradering?: boolean;
   harSamtidigUttaksprosent?: boolean;
-};
-
-// Todo: gjør dette til delt kode delt kode
-const getEndCharFromId = (id: string | undefined) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-const lagVisningsNavn = (ago: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: string): string => {
-  if (ago.erPrivatPerson) {
-    return `${ago.navn.substring(0, 5)}...(${dateFormat(ago.fødselsdato)})`;
-  } else {
-    return `${ago.navn} (${ago.identifikator})${getEndCharFromId(eksternArbeidsforholdId)}`;
-  }
 };
 
 const mapArbeidsforhold = (
@@ -58,7 +36,7 @@ const mapArbeidsforhold = (
     if (arbeidType && arbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
       periodeArbeidsforhold = alleKodeverk['UttakArbeidType'].find(k => k.kode === arbeidType)?.navn ?? '';
     } else if (arbeidsgiverOpplysninger) {
-      periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
+      periodeArbeidsforhold = formaterArbeidsgiver(arbeidsgiverOpplysninger);
     }
 
     return (

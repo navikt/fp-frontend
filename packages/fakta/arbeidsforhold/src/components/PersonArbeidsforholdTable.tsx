@@ -1,9 +1,9 @@
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { StarFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Table } from '@navikt/ds-react';
+import { Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
-import { decodeHtmlEntity } from '@navikt/ft-utils';
+import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
@@ -22,7 +22,6 @@ export const PersonArbeidsforholdTable = ({
   inntektsmeldinger,
 }: Props) => {
   const intl = useIntl();
-
   return (
     <Table>
       <Table.Header>
@@ -52,7 +51,6 @@ export const PersonArbeidsforholdTable = ({
             arbeidsforhold.stillingsprosent !== undefined && arbeidsforhold.stillingsprosent !== null
               ? `${arbeidsforhold.stillingsprosent.toFixed(2)} %`
               : '';
-          const navn = utledNavn(arbeidsforhold, alleArbeidsforhold, arbeidsgiverOpplysningerPerId);
           const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.motattDato;
           return (
             <Table.ExpandableRow
@@ -65,28 +63,16 @@ export const PersonArbeidsforholdTable = ({
               expandOnRowClick
               expansionDisabled={!arbeidsforhold.saksbehandlersVurdering}
             >
-              <Table.DataCell>
-                <BodyShort size="small">{decodeHtmlEntity(navn)}</BodyShort>
+              <Table.DataCell textSize="small">
+                {utledNavn(arbeidsforhold, alleArbeidsforhold, arbeidsgiverOpplysningerPerId)}
               </Table.DataCell>
-              <Table.DataCell>
-                <BodyShort size="small">
-                  <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
-                </BodyShort>
+              <Table.DataCell textSize="small">
+                <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
               </Table.DataCell>
-              <Table.DataCell>
-                <BodyShort size="small">{finnKilde(arbeidsforhold, intl)}</BodyShort>
-              </Table.DataCell>
-              <Table.DataCell>
-                <BodyShort size="small">{stillingsprosent}</BodyShort>
-              </Table.DataCell>
-              <Table.DataCell>
-                {mottattDato && (
-                  <BodyShort size="small">
-                    <DateLabel dateString={mottattDato} />
-                  </BodyShort>
-                )}
-              </Table.DataCell>
-              <Table.DataCell>
+              <Table.DataCell textSize="small">{finnKilde(arbeidsforhold, intl)}</Table.DataCell>
+              <Table.DataCell textSize="small">{stillingsprosent}</Table.DataCell>
+              <Table.DataCell textSize="small">{mottattDato && <DateLabel dateString={mottattDato} />}</Table.DataCell>
+              <Table.DataCell textSize="small">
                 {(arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK ||
                   arbeidsforhold.saksbehandlersVurdering ===
                     ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
@@ -123,27 +109,22 @@ export const erMatch = (arbeidsforhold: AoIArbeidsforhold, inntektsmelding: Innt
   (!inntektsmelding.internArbeidsforholdId ||
     inntektsmelding.internArbeidsforholdId === arbeidsforhold.internArbeidsforholdId);
 
-const getEndCharFromId = (id?: string): string => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-
 const utledNavn = (
-  arbeidsforhold: AoIArbeidsforhold,
+  { saksbehandlersVurdering, eksternArbeidsforholdId, arbeidsgiverIdent }: AoIArbeidsforhold,
   alleArbeidsforhold: AoIArbeidsforhold[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): string => {
-  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
-  const navn = arbeidsgiverOpplysninger?.navn;
-  if (
-    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER
-  ) {
-    return navn;
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverIdent];
+  if (saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
+    return arbeidsgiverOpplysninger?.navn;
   }
 
-  const skalViseEksternId =
-    alleArbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
+  const eksternId =
+    alleArbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsgiverIdent).length > 1
+      ? eksternArbeidsforholdId
+      : undefined;
 
-  return skalViseEksternId
-    ? `${navn}(${arbeidsgiverOpplysninger.identifikator})${getEndCharFromId(arbeidsforhold.eksternArbeidsforholdId)}`
-    : `${navn}(${arbeidsgiverOpplysninger.identifikator})`;
+  return formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternId);
 };
 
 const utledNøkkel = (

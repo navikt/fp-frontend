@@ -1,7 +1,8 @@
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { formatCurrencyNoKr, periodFormat } from '@navikt/ft-utils';
+import { BeløpLabel } from '@navikt/ft-ui-komponenter';
+import { periodFormat } from '@navikt/ft-utils';
 
 import styles from './simuleringSummary.module.css';
 
@@ -42,26 +43,28 @@ export const SimuleringSummary = ({
             <BodyShort size="small">
               <FormattedMessage id="Simulering.etterbetaling" />:
             </BodyShort>
-            <BodyShort size="small">{formatCurrencyNoKr(etterbetaling)}</BodyShort>
+            <BodyShort size="small">
+              <BeløpLabel beløp={etterbetaling} />
+            </BodyShort>
           </HStack>
           <HStack gap="4">
             <BodyShort size="small">
               <FormattedMessage id="Simulering.tilbakekreving" />:
             </BodyShort>
-            <BodyShort size="small">
-              <span className={feilutbetaling ? styles.redNumber : styles.positivNumber}>
-                {formatCurrencyNoKr(feilutbetaling)}
-              </span>
+            <BodyShort weight="semibold" size="small" className={styles.number}>
+              <BeløpLabel beløp={feilutbetaling} rød={feilutbetaling < 0} />
             </BodyShort>
-            {inntrekk !== null && (
+          </HStack>
+          {inntrekk != undefined && (
+            <HStack gap="4">
               <BodyShort size="small">
                 <FormattedMessage id="Simulering.inntrekk" />:
-                <span className={inntrekk ? styles.redNumber : styles.positivNumber}>
-                  {formatCurrencyNoKr(inntrekk)}
-                </span>
               </BodyShort>
-            )}
-          </HStack>
+              <BodyShort weight="semibold" size="small" className={styles.number}>
+                <BeløpLabel beløp={inntrekk} rød={inntrekk < 0} />
+              </BodyShort>
+            </HStack>
+          )}
         </VStack>
       )}
     </div>

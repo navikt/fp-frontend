@@ -47,14 +47,14 @@ const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: 
   if (klageVurderingResultat?.klageVurderingResultatNK?.klageMedholdArsak) {
     return (
       alleKodeverk['KlageMedholdÅrsak'].find(
-        kode => kode.kode === klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak,
+        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak,
       )?.navn ?? ''
     );
   }
   if (klageVurderingResultat?.klageVurderingResultatNFP?.klageMedholdArsak) {
     return (
       alleKodeverk['KlageMedholdÅrsak'].find(
-        kode => kode.kode === klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak,
+        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak,
       )?.navn ?? ''
     );
   }
@@ -133,7 +133,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
           </Label>
           {avvistArsaker.map(arsak => (
             <BodyShort size="small" key={arsak}>
-              {alleKodeverk['KlageAvvistÅrsak'].find(kode => kode.kode === arsak)?.navn ?? ''}
+              {alleKodeverk['KlageAvvistÅrsak'].find(({ kode }) => kode === arsak)?.navn ?? ''}
             </BodyShort>
           ))}
         </VStack>

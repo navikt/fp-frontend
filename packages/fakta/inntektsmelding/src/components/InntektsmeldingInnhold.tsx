@@ -1,8 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HGrid, HStack, VStack } from '@navikt/ds-react';
-import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BeløpLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Inntektsmelding } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -50,7 +49,7 @@ export const InntektsmeldingInnhold = ({
         <InntektsmeldingInfoBlokk
           tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.månedsinntekt.heading' })}
         >
-          <span>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</span>
+          <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
           {/*TODO: Få inn endringsgrunn når dette er med i data-modellen*/}
         </InntektsmeldingInfoBlokk>
 

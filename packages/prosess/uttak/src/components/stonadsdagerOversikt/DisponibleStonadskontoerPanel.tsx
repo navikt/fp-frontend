@@ -2,7 +2,7 @@ import { useCallback, useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table } from '@navikt/ds-react';
-import { BTag } from '@navikt/ft-utils';
+import { BTag, formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import type {
@@ -12,7 +12,6 @@ import type {
   Stonadskonto,
 } from '@navikt/fp-types';
 
-import { lagVisningsNavn } from '../../utils/lagVisningsNavn.ts';
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 import { finnAntallUkerOgDager, StonadsdagerTab } from './StonadsdagerTab';
 
@@ -87,7 +86,7 @@ const utledNavn = (
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-    return arbeidsgiverOpplysninger ? lagVisningsNavn(arbeidsgiverOpplysninger) : arbeidsgiverReferanse;
+    return arbeidsgiverOpplysninger ? formaterArbeidsgiver(arbeidsgiverOpplysninger) : arbeidsgiverReferanse;
   }
 
   return intl.formatMessage({ id: 'RenderUttakTable.ArbeidType.ANNET' });
@@ -170,22 +169,18 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
                 const ukerOgDager = finnAntallUkerOgDager(arbforhold.saldo);
                 return (
                   <Table.Row key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>
-                    <Table.DataCell>
-                      <BodyShort size="small">{arbforhold.navn}</BodyShort>
-                    </Table.DataCell>
-                    <Table.DataCell>
-                      <BodyShort size="small">
-                        {arbforhold.saldo && (
-                          <FormattedMessage
-                            id="TimeLineInfo.Stonadinfo.UkerDager"
-                            values={{
-                              ukerVerdi: ukerOgDager.uker,
-                              dagerVerdi: ukerOgDager.dager,
-                              b: BTag,
-                            }}
-                          />
-                        )}
-                      </BodyShort>
+                    <Table.DataCell textSize="small">{arbforhold.navn}</Table.DataCell>
+                    <Table.DataCell textSize="small">
+                      {arbforhold.saldo && (
+                        <FormattedMessage
+                          id="TimeLineInfo.Stonadinfo.UkerDager"
+                          values={{
+                            ukerVerdi: ukerOgDager.uker,
+                            dagerVerdi: ukerOgDager.dager,
+                            b: BTag,
+                          }}
+                        />
+                      )}
                     </Table.DataCell>
                   </Table.Row>
                 );

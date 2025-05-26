@@ -2,8 +2,8 @@ import React from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { addDaysToDate, formatCurrencyNoKr, TIDENES_ENDE } from '@navikt/ft-utils';
+import { BeløpLabel, DateLabel } from '@navikt/ft-ui-komponenter';
+import { addDaysToDate, TIDENES_ENDE } from '@navikt/ft-utils';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import type { AktivNaturalYtelse, AlleKodeverk, Inntektsmelding } from '@navikt/fp-types';
@@ -104,7 +104,7 @@ export const BortfalteNaturalYtelser = ({
                     )}
                     <li>
                       <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.verdi" />:{' '}
-                      {formatCurrencyNoKr(naturalytelse.beloepPerMnd.verdi)}
+                      <BeløpLabel beløp={naturalytelse.beloepPerMnd.verdi} />
                     </li>
                   </React.Fragment>
                 ))}
