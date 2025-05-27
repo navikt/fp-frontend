@@ -5,7 +5,7 @@ import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { NotatModal } from './NotatModal';
 
-import messages from '../../../../../i18n/nb_NO.json';
+import messages from '../../../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 

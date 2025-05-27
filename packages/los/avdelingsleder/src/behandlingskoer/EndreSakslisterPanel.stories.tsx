@@ -1,10 +1,12 @@
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
 import { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { LosUrl } from '../data/fplosAvdelingslederApi';
+import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { EndreSakslisterPanel } from './EndreSakslisterPanel';
 
@@ -33,7 +35,7 @@ const SAKSLISTER = [
         inkluder: true,
       },
       {
-        andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+        andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
         inkluder: false,
       },
     ],
@@ -59,6 +61,11 @@ const meta = {
         http.post(LosUrl.LAGRE_SAKSLISTE_ANDRE_KRITERIER, () => new HttpResponse(null, { status: 200 })),
       ],
     },
+  },
+  render: args => {
+    const { data: kodeverkLos } = useQuery(losKodeverkOptions());
+
+    return kodeverkLos ? <EndreSakslisterPanel {...args} /> : <LoadingPanel />;
   },
 } satisfies Meta<typeof EndreSakslisterPanel>;
 export default meta;

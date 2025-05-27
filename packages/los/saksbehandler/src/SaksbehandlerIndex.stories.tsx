@@ -40,7 +40,7 @@ const SAKSLISTER = [
         inkluder: true,
       },
       {
-        andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+        andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
         inkluder: false,
       },
     ],
@@ -64,6 +64,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12',
+    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
   },
   {
     id: 4,
@@ -81,6 +82,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12',
+    andreKriterier: [],
   },
   {
     id: 3,
@@ -98,6 +100,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '34',
+    andreKriterier: [],
   },
 ] satisfies Oppgave[];
 
@@ -125,6 +128,7 @@ const RESERVERTE_OPPGAVER = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '2',
+    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
   },
 ] satisfies Oppgave[];
 

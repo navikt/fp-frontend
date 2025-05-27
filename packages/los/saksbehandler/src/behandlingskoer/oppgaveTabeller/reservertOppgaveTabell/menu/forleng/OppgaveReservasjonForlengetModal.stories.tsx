@@ -6,7 +6,7 @@ import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveReservasjonForlengetModal } from './OppgaveReservasjonForlengetModal';
 
-import messages from '../../../../../i18n/nb_NO.json';
+import messages from '../../../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -44,6 +44,7 @@ export const Default: Story = {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
       erTilSaksbehandling: true,
       behandlingId: '1',
+      andreKriterier: [],
     },
     closeModal: action('button-click'),
   },

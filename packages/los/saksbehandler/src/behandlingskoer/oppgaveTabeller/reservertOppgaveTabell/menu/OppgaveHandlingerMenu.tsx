@@ -20,7 +20,7 @@ import {
   forlengReservasjonPost,
   LosUrl,
   opphevReservasjon,
-} from '../../../data/fplosSaksbehandlerApi';
+} from '../../../../data/fplosSaksbehandlerApi';
 import { OppgaveReservasjonForlengetModal } from './forleng/OppgaveReservasjonForlengetModal';
 import { NotatModal } from './notat/NotatModal';
 
@@ -102,7 +102,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
             icon={
               <MenuElipsisVerticalCircleIcon
                 className={styles.image}
-                title={intl.formatMessage({ id: 'OppgaverTabell.OppgaveHandlinger' })}
+                title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.OppgaveHandlinger' })}
               />
             }
             size="small"

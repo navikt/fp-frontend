@@ -68,7 +68,7 @@ export const MedGittNavn: Story = {
           inkluder: true,
         },
         {
-          andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+          andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
           inkluder: false,
         },
       ],
@@ -98,7 +98,7 @@ export const MedDefaultNavn: Story = {
           inkluder: true,
         },
         {
-          andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+          andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
           inkluder: false,
         },
       ],

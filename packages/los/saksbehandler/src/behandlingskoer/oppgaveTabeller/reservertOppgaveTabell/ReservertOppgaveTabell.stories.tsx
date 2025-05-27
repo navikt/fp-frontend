@@ -6,43 +6,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import { ApiPollingStatus } from '@navikt/fp-konstanter';
+import { AndreKriterierType, BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
-import { OppgaverTabell } from './OppgaverTabell';
+import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
+import { ReservertOppgaveTabell } from './ReservertOppgaveTabell';
 
-import messages from '../../../i18n/nb_NO.json';
+import messages from '../../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
-
-const OPPGAVER_TIL_BEHANDLING = [
-  {
-    id: 1,
-    status: {
-      erReservert: false,
-      flyttetReservasjon: {
-        tidspunkt: '2019-02-02',
-        uid: '23423',
-        navn: 'Espen Utvikler',
-        begrunnelse: 'Flyttet fordi...',
-      },
-    },
-    saksnummer: '345325',
-    personnummer: '1212',
-    navn: 'Espen Utvikler',
-    system: 'SAK',
-    behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
-    opprettetTidspunkt: '2019-01-01',
-    behandlingsfrist: '2019-01-01',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    erTilSaksbehandling: true,
-    behandlingId: '1',
-  },
-] satisfies Oppgave[];
 
 const RESERVERTE_OPPGAVER = [
   {
@@ -68,6 +41,7 @@ const RESERVERTE_OPPGAVER = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '2',
+    andreKriterier: [],
   },
   {
     id: 3,
@@ -86,6 +60,7 @@ const RESERVERTE_OPPGAVER = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '2',
+    andreKriterier: [],
   },
   {
     id: 4,
@@ -104,29 +79,24 @@ const RESERVERTE_OPPGAVER = [
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '2',
+    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
   },
 ] satisfies Oppgave[];
 
-type StoryArgs = {
-  reserverteOppgaver?: Oppgave[];
-  oppgaverTilBehandling?: Oppgave[];
-} & ComponentProps<typeof OppgaverTabell>;
-
 const meta = {
-  title: 'behandlingskoer/OppgaverTabell',
-  component: OppgaverTabell,
+  title: 'behandlingskoer/ReservertOppgaveTabell',
+  component: ReservertOppgaveTabell,
   decorators: [withIntl, withQueryClient],
   args: {
-    valgtSakslisteId: 1,
     reserverOppgave: action('button-click'),
     brukernavn: 'T232332',
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
     const alleKodeverk = useQuery(losKodeverkOptions()).data;
-    return alleKodeverk ? <OppgaverTabell {...props} /> : <LoadingPanel />;
+    return alleKodeverk ? <ReservertOppgaveTabell {...props} /> : <LoadingPanel />;
   },
-} satisfies Meta<StoryArgs>;
+} satisfies Meta<ComponentProps<typeof ReservertOppgaveTabell>>;
 export default meta;
 
 type Story = StoryObj<typeof meta>;
@@ -138,19 +108,6 @@ export const Default: Story = {
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER)),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
-          const doPolling = t.request.url.includes('oppgaveIder');
-          return doPolling
-            ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
-            : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
-        }),
-        http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json({
-            status: ApiPollingStatus.PENDING,
-            pollIntervalMillis: 100000000,
-          }),
-        ),
-        http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
       ],
     },
   },
@@ -166,19 +123,6 @@ export const TomOppgaveTabell: Story = {
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([])),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
-          const doPolling = t.request.url.includes('oppgaveIder');
-          return doPolling
-            ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
-            : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
-        }),
-        http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json({
-            status: ApiPollingStatus.PENDING,
-            pollIntervalMillis: 100000000,
-          }),
-        ),
-        http.get('https://www.test.com/api/result', () => HttpResponse.json([])),
       ],
     },
   },
@@ -209,19 +153,6 @@ export const VisPagineringNårMerEnn15Oppgaver: Story = {
             ...oppdatertId(RESERVERTE_OPPGAVER, 70),
           ]),
         ),
-        http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
-          const doPolling = t.request.url.includes('oppgaveIder');
-          return doPolling
-            ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
-            : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
-        }),
-        http.get('https://www.test.com/api/status', () =>
-          HttpResponse.json({
-            status: ApiPollingStatus.PENDING,
-            pollIntervalMillis: 100000000,
-          }),
-        ),
-        http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
       ],
     },
   },
