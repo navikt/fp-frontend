@@ -8,6 +8,7 @@ import {
   AktivitetStatus,
   ArbeidsforholdHandlingType,
   NavBrukerKjonn,
+  OpptjeningAktivitetType,
   SoknadType,
   StonadskontoType,
 } from '@navikt/fp-kodeverk';
@@ -51,7 +52,7 @@ const beregningresultat = {
             stonadskontoType: StonadskontoType.FELLESPERIODE,
           },
           aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
-          arbeidsforholdType: ArbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
+          arbeidsforholdType: OpptjeningAktivitetType.ARBEID,
         },
       ],
       fom: '2018-01-01',
