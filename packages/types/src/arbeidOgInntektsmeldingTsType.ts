@@ -1,3 +1,5 @@
+import type { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+
 export enum AksjonspunktÅrsak {
   MANGLENDE_INNTEKTSMELDING = 'MANGLENDE_INNTEKTSMELDING',
   INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD = 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
@@ -7,7 +9,7 @@ export enum AksjonspunktÅrsak {
 type PermisjonOgMangel = Readonly<{
   permisjonFom: string;
   permisjonTom?: string;
-  type: string;
+  type: PermisjonsbeskrivelseType;
   årsak?: AksjonspunktÅrsak;
   permisjonStatus?: string;
 }>;

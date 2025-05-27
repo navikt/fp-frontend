@@ -3,13 +3,17 @@ import { NavLink } from 'react-router-dom';
 import { BodyShort } from '@navikt/ds-react';
 import { type Location } from 'history';
 
+import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 
 interface Props {
-  skjermlenke?: string;
+  skjermlenke?: SkjermlenkeType;
   behandlingLocation: Location | undefined;
   alleKodeverk: AlleKodeverkTilbakekreving | AlleKodeverk;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeKode: string) => Location | undefined;
+  createLocationForSkjermlenke: (
+    behandlingLocation: Location,
+    skjermlenkeKode: SkjermlenkeType,
+  ) => Location | undefined;
 }
 
 export const scrollUp = (): void => {

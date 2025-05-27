@@ -1,3 +1,5 @@
+import type { AktivitetskravPermisjonType } from '@navikt/fp-kodeverk';
+
 export enum UttakType {
   UTSETTELSE = 'UTSETTELSE',
   OVERFØRING = 'OVERFØRING',
@@ -50,5 +52,5 @@ export type AktivitetskravGrunnlagArbeid = Readonly<{
 
 export type Permisjon = Readonly<{
   prosent: number;
-  type: string;
+  type: AktivitetskravPermisjonType;
 }>;

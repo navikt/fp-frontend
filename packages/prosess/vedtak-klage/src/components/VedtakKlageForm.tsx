@@ -8,6 +8,7 @@ import {
   AksjonspunktStatus,
   BehandlingResultatType,
   isKlageOmgjort,
+  KlageAvvistÅrsak,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -31,7 +32,7 @@ export type VedtakKlageForhandsvisData = {
 
 type AksjonspunktData = Array<ForeslaVedtakAp | ForeslaVedtakManueltAp>;
 
-const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): string[] => {
+const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): KlageAvvistÅrsak[] => {
   if (klageVurderingResultat) {
     if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
       return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;

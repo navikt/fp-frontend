@@ -1,21 +1,30 @@
+import type {
+  MedlemskapDekningType,
+  MedlemskapManuellVurderingType,
+  MedlemskapType,
+  OppholdstillatelseType,
+  PersonstatusType,
+  Region,
+} from '@navikt/fp-kodeverk';
+
 import type { Personadresse } from './personadresseTsType';
 
 export type RegionPeriode = Readonly<{
   fom: string;
   tom: string | null;
-  type: string;
+  type: Region;
 }>;
 
 export type PersonstatusPeriode = Readonly<{
   fom: string;
   tom: string | null;
-  type: string;
+  type: PersonstatusType;
 }>;
 
 export type OppholdstillatelsePeriode = Readonly<{
   fom: string;
   tom: string | null;
-  type: string;
+  type: OppholdstillatelseType;
 }>;
 
 type UtenlandsoppholdPeriode = Readonly<{
@@ -30,8 +39,8 @@ export type MedlemskapPeriode = Readonly<{
   erMedlem: boolean;
   lovvalgsland: string | null;
   studieland: string | null;
-  medlemskapType: string;
-  dekningType: string;
+  medlemskapType: MedlemskapType;
+  dekningType: MedlemskapDekningType;
   beslutningsdato: string;
 }>;
 
@@ -51,7 +60,7 @@ export type LegacyMedlemPeriode = Readonly<{
   erEosBorger?: boolean;
   lovligOppholdVurdering?: boolean;
   bosattVurdering?: boolean;
-  medlemskapManuellVurderingType?: string;
+  medlemskapManuellVurderingType?: MedlemskapManuellVurderingType;
   begrunnelse?: string;
 }>;
 

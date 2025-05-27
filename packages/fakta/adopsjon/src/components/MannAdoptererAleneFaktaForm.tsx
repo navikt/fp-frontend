@@ -5,7 +5,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, FarSøkerType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, FamilieHendelse } from '@navikt/fp-types';
 import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -13,7 +13,7 @@ import styles from './mannAdoptererAleneFaktaForm.module.css';
 
 interface Props {
   readOnly: boolean;
-  farSokerType: string | undefined;
+  farSokerType: FarSøkerType | undefined;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   mannAdoptererAlene?: boolean;

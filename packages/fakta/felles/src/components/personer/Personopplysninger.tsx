@@ -4,6 +4,7 @@ import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react'
 import { Gender, GenderIcon } from '@navikt/ft-plattform-komponenter';
 import { createIntl, dateFormat } from '@navikt/ft-utils';
 
+import type { SivilstandType } from '@navikt/fp-kodeverk';
 import { type AlleKodeverk, KjønnkodeEnum, type Personadresse } from '@navikt/fp-types';
 
 import { AdresseTabell } from '../adresser/AdresseTabell';
@@ -17,7 +18,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   harSammeAdresser?: boolean;
   navn?: string;
-  sivilstand?: string;
+  sivilstand?: SivilstandType;
   dødsdato?: string | null;
   fødselsdato?: string;
   adresser: Personadresse[];

@@ -7,6 +7,7 @@ import { BodyShort, HStack } from '@navikt/ds-react';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
+import type { SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
@@ -22,8 +23,8 @@ const VurderPåNyttPunkter = ({
   vurderPaNyttArsaker,
   vurderArsaker,
 }: {
-  vurderPaNyttArsaker: string[] | undefined;
-  vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[];
+  vurderPaNyttArsaker: VurderÅrsak[] | undefined;
+  vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[] | KodeverkMedNavnTilbakekreving<'VurderÅrsak'>[];
 }) => (
   <div className={styles.approvalItem}>
     {vurderPaNyttArsaker?.map(item => (
@@ -43,7 +44,7 @@ interface Props {
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[] | KodeverkMedNavnTilbakekreving<'VurderÅrsak'>[];
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
-  lagLenke: (skjermlenkeCode: string) => Location | undefined;
+  lagLenke: (skjermlenkeCode: SkjermlenkeType) => Location | undefined;
 }
 
 export const TotrinnskontrollSaksbehandlerPanel = ({

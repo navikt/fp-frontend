@@ -151,14 +151,6 @@ export type AlleKodeverk = KodeverkMedSammeVerditype & {
 
 type EnumOrUnknown<T extends KodeverkType> = T extends keyof KodeverkEnumMap ? KodeverkEnumMap[T] : unknown;
 
-export type KodeverkReturnType<T extends KodeverkType> = T extends 'Avslagsårsak'
-  ? AvslagsårsakKodeverk
-  : T extends 'PeriodeResultatÅrsak'
-    ? PeriodeResultatÅrsakKodeverk[]
-    : T extends 'GraderingAvslagÅrsak'
-      ? GraderingAvslagÅrsakKodeverk[]
-      : KodeverkMedNavn<T>[];
-
 export type KodeverkMedNavn<T extends KodeverkType> = Readonly<{
   kode: EnumOrUnknown<T>;
   navn: string;

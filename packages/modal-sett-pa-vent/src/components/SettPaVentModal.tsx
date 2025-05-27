@@ -176,7 +176,10 @@ const automatiskeVentearsakerForTilbakekreving = [
   VenteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
 ];
 
-const inkluderVentearsak = (ventearsak: KodeverkMedNavn<'Venteårsak'>, valgtVentearsak?: string): boolean =>
+const inkluderVentearsak = (
+  ventearsak: KodeverkMedNavn<'Venteårsak'> | KodeverkMedNavnTilbakekreving<'Venteårsak'>,
+  valgtVentearsak?: string,
+): boolean =>
   automatiskeVentearsakerForTilbakekreving.some(vt => vt === ventearsak.kode)
     ? ventearsak.kode === valgtVentearsak
     : true;

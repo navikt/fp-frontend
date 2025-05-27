@@ -1,3 +1,5 @@
+import type { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+
 export type BeregningsresultatPeriodeAndel = Readonly<{
   arbeidsgiverReferanse: string;
   refusjon: number;
@@ -10,7 +12,7 @@ export type BeregningsresultatPeriodeAndel = Readonly<{
   sisteUtbetalingsdato: string;
   aktivitetStatus: string;
   eksternArbeidsforholdId: string;
-  arbeidsforholdType: string;
+  arbeidsforholdType: OpptjeningAktivitetType;
 }>;
 
 export type BeregningsresultatPeriode = Readonly<{

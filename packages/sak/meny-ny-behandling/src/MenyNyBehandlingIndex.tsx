@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import { type BehandlingOppretting, type FormValues, NyBehandlingModal } from './components/NyBehandlingModal';
 
@@ -27,7 +27,7 @@ interface Props {
     } & FormValues;
   }) => void;
   behandlingstyper: KodeverkMedNavn<'BehandlingType'>[];
-  tilbakekrevingRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
+  tilbakekrevingRevurderingArsaker?: KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[];
   revurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
   behandlingOppretting: BehandlingOppretting[];
   kanTilbakekrevingOpprettes: {

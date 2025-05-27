@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { BodyShort, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
+import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
@@ -38,7 +39,7 @@ type Props = {
   erTilbakekreving: boolean;
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
-  lagLenke: (skjermlenkeCode: string) => Location | undefined;
+  lagLenke: (skjermlenkeCode: SkjermlenkeType) => Location | undefined;
 };
 
 export const AksjonspunktGodkjenningFieldArray = ({
