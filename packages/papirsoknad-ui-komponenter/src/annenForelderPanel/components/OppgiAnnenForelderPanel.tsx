@@ -1,4 +1,4 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -48,7 +48,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
   const kanIkkeOppgiBegrunnelse = watch(`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}`);
 
   const landkoder = alleKodeverk['Landkoder'];
-  const sorterteLand = useMemo(() => landkoder.slice().sort((a, b) => a.navn.localeCompare(b.navn)), [landkoder]);
+  const sorterteLand = landkoder.slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   return (
     <>

@@ -1,4 +1,4 @@
-import React, { type ReactElement, useCallback, useState } from 'react';
+import React, { type ReactElement, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, ScissorsIcon, XMarkIcon } from '@navikt/aksel-icons';
@@ -177,7 +177,7 @@ export const UttakPeriodePanel = ({
   const intl = useIntl();
 
   const [visModal, setVisModal] = useState(false);
-  const toggleVisningAvModal = useCallback(() => setVisModal(verdi => !verdi), []);
+  const toggleVisningAvModal = () => setVisModal(verdi => !verdi);
 
   const { perioderAnnenpart } = uttaksresultat;
 
@@ -186,17 +186,14 @@ export const UttakPeriodePanel = ({
 
   const erHovedsøkersPeriode = valgtPeriodeIndex + 1 > perioderAnnenpart.length;
 
-  const splittPeriode = useCallback(
-    (dato: string) => {
-      const periode1 = lagPeriode(valgtPeriode, valgtPeriode.fom, dato);
-      const periode2 = lagPeriode(valgtPeriode, dayjs(dato).add(1, 'days').format('YYYY-MM-DD'), valgtPeriode.tom);
-      oppdaterPeriode([periode1, periode2]);
-      toggleVisningAvModal();
-    },
-    [valgtPeriodeIndex],
-  );
+  const splittPeriode = (dato: string) => {
+    const periode1 = lagPeriode(valgtPeriode, valgtPeriode.fom, dato);
+    const periode2 = lagPeriode(valgtPeriode, dayjs(dato).add(1, 'days').format('YYYY-MM-DD'), valgtPeriode.tom);
+    oppdaterPeriode([periode1, periode2]);
+    toggleVisningAvModal();
+  };
 
-  const lukkPeriode = useCallback(() => setValgtPeriodeIndex(undefined), []);
+  const lukkPeriode = () => setValgtPeriodeIndex(undefined);
 
   const harSoktOmFlerbarnsdager = erHovedsøkersPeriode
     ? perioderSøker.some(p => p.flerbarnsdager)
@@ -205,12 +202,12 @@ export const UttakPeriodePanel = ({
   const erRevurderingFørEndringsdato =
     behandling.type === BehandlingType.REVURDERING && valgtPeriode.tom < endringsdato;
 
-  const visForrigePeriode = useCallback(() => {
+  const visForrigePeriode = () => {
     setValgtPeriodeIndex(index => (index === 0 || index === undefined ? index : index - 1));
-  }, []);
-  const visNestePeriode = useCallback(() => {
+  };
+  const visNestePeriode = () => {
     setValgtPeriodeIndex(index => (index === allePerioder.length - 1 || index === undefined ? index : index + 1));
-  }, [allePerioder.length]);
+  };
 
   return (
     <Box borderWidth="1" padding="4">

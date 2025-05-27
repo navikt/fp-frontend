@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback, useEffect, useMemo } from 'react';
+import { type ReactElement, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -304,15 +304,10 @@ export const UttakPeriodeForm = ({
 
   const periodeResultatårsakKoder = alleKodeverk['PeriodeResultatÅrsak'];
 
-  const sorterteAktiviteter = useMemo(() => {
-    const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
-    return [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
-  }, [valgtPeriode.aktiviteter]);
+  const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
+  const sorterteAktiviteter = [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
 
-  const defaultValues = useMemo(
-    () => byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder),
-    [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId],
-  );
+  const defaultValues = byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder);
 
   const formMethods = useForm<UttakAktivitetType>({
     defaultValues,
@@ -329,26 +324,17 @@ export const UttakPeriodeForm = ({
   const aktiviteter = formMethods.watch('aktiviteter');
   const førsteValgteStønadskonto = aktiviteter.length > 0 ? aktiviteter[0].stønadskontoType : undefined;
 
-  const periodeÅrsakOptions = useMemo(
-    () =>
-      lagOptionsTilPeriodeÅrsakSelect(
-        periodeResultatårsakKoder,
-        valgtPeriode.fom,
-        erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
-        årsakFilter,
-        valgtPeriode.utsettelseType,
-        førsteValgteStønadskonto ?? valgtPeriode.periodeType,
-        valgtPeriode.aktiviteter.length === 1,
-      ),
-    [erOppfylt, årsakFilter, valgtPeriode, førsteValgteStønadskonto],
+  const periodeÅrsakOptions = lagOptionsTilPeriodeÅrsakSelect(
+    periodeResultatårsakKoder,
+    valgtPeriode.fom,
+    erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
+    årsakFilter,
+    valgtPeriode.utsettelseType,
+    førsteValgteStønadskonto ?? valgtPeriode.periodeType,
+    valgtPeriode.aktiviteter.length === 1,
   );
 
-  const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
-
-  const submit = useCallback(
-    (values: UttakAktivitetType) => oppdaterPeriode([transformValues(values, valgtPeriode, sorterteAktiviteter)]),
-    [valgtPeriode],
-  );
+  const graderingAvslagsårsakOptions = lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk);
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(
     valgtPeriode.utsettelseType,
@@ -360,7 +346,12 @@ export const UttakPeriodeForm = ({
   const warning = warning1 ?? warning2;
 
   return (
-    <Form formMethods={formMethods} onSubmit={submit}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: UttakAktivitetType) =>
+        oppdaterPeriode([transformValues(values, valgtPeriode, sorterteAktiviteter)])
+      }
+    >
       <VStack gap="4">
         <UttakPeriodeInfo
           valgtPeriode={valgtPeriode}

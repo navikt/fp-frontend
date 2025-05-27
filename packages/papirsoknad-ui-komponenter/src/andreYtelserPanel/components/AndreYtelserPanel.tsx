@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
@@ -41,10 +40,7 @@ interface Props {
 export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = false, alleKodeverk }: Props) => {
   const andreYtelser = alleKodeverk['ArbeidType'];
 
-  const filtrerteArbeidstyper = useMemo(
-    () => removeArbeidstyper(andreYtelser, kunMiliterEllerSiviltjeneste),
-    [kunMiliterEllerSiviltjeneste],
-  );
+  const filtrerteArbeidstyper = removeArbeidstyper(andreYtelser, kunMiliterEllerSiviltjeneste);
 
   return (
     <BorderBox>

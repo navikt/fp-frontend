@@ -1,4 +1,4 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -41,32 +41,23 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
   const { aksjonspunkterForPanel, fagsak, submitCallback, isReadOnly, alleKodeverk } =
     usePanelDataContext<VurderArbeidsforholdPermisjonAp>();
 
-  const arbeidOgInntektMedPermisjon = useMemo(
-    () => ({
-      inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
-      arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter(a => a.permisjonOgMangel?.årsak),
-      inntekter: arbeidOgInntekt.inntekter,
-      skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
-    }),
-    [arbeidOgInntekt],
-  );
+  const arbeidOgInntektMedPermisjon = {
+    inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
+    arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter(a => a.permisjonOgMangel?.årsak),
+    inntekter: arbeidOgInntekt.inntekter,
+    skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
+  };
 
   const { arbeidsforhold } = arbeidOgInntektMedPermisjon;
 
-  const sorterteArbeidsforhold = useMemo(
-    () => [...arbeidsforhold].sort(getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId)),
-    [arbeidsforhold, arbeidsgiverOpplysningerPerId],
-  );
+  const sorterteArbeidsforhold = [...arbeidsforhold].sort(getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId));
 
-  const defaultValues = useMemo(
-    () => ({
-      arbeidsforhold: sorterteArbeidsforhold.map(a => ({
-        permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
-      })),
-      begrunnelse: aksjonspunkterForPanel[0].begrunnelse ?? '',
-    }),
-    [sorterteArbeidsforhold],
-  );
+  const defaultValues = {
+    arbeidsforhold: sorterteArbeidsforhold.map(a => ({
+      permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
+    })),
+    begrunnelse: aksjonspunkterForPanel[0].begrunnelse ?? '',
+  };
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 

@@ -1,4 +1,4 @@
-import { type KeyboardEvent, type MouseEvent, useCallback } from 'react';
+import { type KeyboardEvent, type MouseEvent } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link } from '@navikt/ds-react';
@@ -20,12 +20,12 @@ export const VedtakKlageSubmitPanel = ({
   lagreVedtak,
   isSubmitting,
 }: Props) => {
-  const forhåndsvis = useCallback((e: KeyboardEvent | MouseEvent) => {
+  const forhåndsvis = (e: KeyboardEvent | MouseEvent) => {
     e.preventDefault();
     previewVedtakCallback({
       gjelderVedtak: true,
     });
-  }, []);
+  };
 
   return (
     <HStack gap="2" align="center">

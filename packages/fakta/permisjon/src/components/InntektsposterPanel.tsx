@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
@@ -19,10 +19,7 @@ interface Props {
 export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Props) => {
   const [visAlleMåneder, setVisAlleMåneder] = useState(false);
 
-  const sorterteInntektsposter = useMemo(
-    () => behandleInntektsposter(skjæringstidspunkt, inntektsposter),
-    [inntektsposter],
-  );
+  const sorterteInntektsposter = behandleInntektsposter(skjæringstidspunkt, inntektsposter);
 
   return (
     <>

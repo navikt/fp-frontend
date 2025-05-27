@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Table } from '@navikt/ds-react';
@@ -46,42 +46,34 @@ export const UttakDokumentasjonFaktaTable = ({
 }: Props) => {
   const [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer] = useState<string[]>([]);
 
-  const velgDokBehovFomDato = useCallback(
-    (fom?: string) => {
-      if (fom) {
-        if (valgtDokBehovFomDatoer.includes(fom)) {
-          setValgtDokBehovFomDatoer(foms => foms.filter(f => f !== fom));
-        } else {
-          setValgtDokBehovFomDatoer(foms => foms.concat(fom));
-        }
+  const velgDokBehovFomDato = (fom?: string) => {
+    if (fom) {
+      if (valgtDokBehovFomDatoer.includes(fom)) {
+        setValgtDokBehovFomDatoer(foms => foms.filter(f => f !== fom));
+      } else {
+        setValgtDokBehovFomDatoer(foms => foms.concat(fom));
       }
-    },
-    [valgtDokBehovFomDatoer, setValgtDokBehovFomDatoer],
-  );
+    }
+  };
 
   useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov?.find(oa => !oa.vurdering)?.fom), []);
 
-  const oppdaterPeriode = useCallback(
-    (oppdatertKrav: { perioder: DokumentasjonVurderingBehov[] }) => {
-      const { perioder } = oppdatertKrav;
-      const oppdaterteDokBehov = dokumentasjonVurderingBehov
-        .filter(aKrav => aKrav.fom !== perioder[0].fom)
-        .concat(perioder)
-        .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
+  const oppdaterPeriode = (oppdatertKrav: { perioder: DokumentasjonVurderingBehov[] }) => {
+    const { perioder } = oppdatertKrav;
+    const oppdaterteDokBehov = dokumentasjonVurderingBehov
+      .filter(aKrav => aKrav.fom !== perioder[0].fom)
+      .concat(perioder)
+      .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
-      oppdaterDokBehov(oppdaterteDokBehov);
+    oppdaterDokBehov(oppdaterteDokBehov);
 
-      setValgtDokBehovFomDatoer(fomDatoer => {
-        const åpneRaderMinusDenSomErOppdatert = fomDatoer.filter(fom => fom !== perioder[0].fom);
-        const nySomSkalÅpnes = oppdaterteDokBehov.find(oa => !oa.vurdering)?.fom;
-        return nySomSkalÅpnes
-          ? åpneRaderMinusDenSomErOppdatert.concat(nySomSkalÅpnes)
-          : åpneRaderMinusDenSomErOppdatert;
-      });
-      setDirty(true);
-    },
-    [dokumentasjonVurderingBehov],
-  );
+    setValgtDokBehovFomDatoer(fomDatoer => {
+      const åpneRaderMinusDenSomErOppdatert = fomDatoer.filter(fom => fom !== perioder[0].fom);
+      const nySomSkalÅpnes = oppdaterteDokBehov.find(oa => !oa.vurdering)?.fom;
+      return nySomSkalÅpnes ? åpneRaderMinusDenSomErOppdatert.concat(nySomSkalÅpnes) : åpneRaderMinusDenSomErOppdatert;
+    });
+    setDirty(true);
+  };
 
   return (
     <Table>

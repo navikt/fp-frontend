@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -40,18 +39,17 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
 
   const selectedFagsakYtelseType = formMethods.watch('fagsakYtelseType');
 
-  const onSubmit = useCallback(
-    (values: FormValues) =>
-      setSoknadData(new SoknadData(values.fagsakYtelseType!, values.familieHendelseType!, values.foreldreType!)),
-    [setSoknadData],
-  );
-
   const fagsakYtelseTyper = alleKodeverk['FagsakYtelseType'];
   const familieHendelseTyper = alleKodeverk['FamilieHendelseType'];
   const foreldreTyper = alleKodeverk['ForeldreType'];
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit}>
+    <Form
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) =>
+        setSoknadData(new SoknadData(values.fagsakYtelseType!, values.familieHendelseType!, values.foreldreType!))
+      }
+    >
       <Box background="bg-subtle" borderColor="border-default" borderWidth="1">
         <VStack gap="4" padding="5">
           <Heading size="small">

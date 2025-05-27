@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table } from '@navikt/ds-react';
@@ -101,16 +101,13 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
   const intl = useIntl();
   const [valgtKontoType, setValgtKontoType] = useState<string>();
 
-  const visDagerForKonto = useCallback((stonadskontotype: string): void => {
+  const visDagerForKonto = (stonadskontotype: string): void => {
     setValgtKontoType(forrigeKontoType => (forrigeKontoType === stonadskontotype ? undefined : stonadskontotype));
-  }, []);
+  };
 
-  const stønadskontoerMedNavn = useMemo(
-    () => (stønadskontoer ? Object.values(stønadskontoer).sort(sorterKontoer) : []),
-    [stønadskontoer],
-  );
+  const stønadskontoerMedNavn = stønadskontoer ? Object.values(stønadskontoer).sort(sorterKontoer) : [];
 
-  const tilgjengeligeUker = useMemo(() => finnTilgjengeligeUker(stønadskontoer), [stønadskontoer]);
+  const tilgjengeligeUker = finnTilgjengeligeUker(stønadskontoer);
 
   const sorterteAktiviteter = useMemo(() => {
     if (!valgtKontoType) {

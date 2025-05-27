@@ -11,11 +11,5 @@ interface Props {
 
 export const TaAvVentMenyModal = ({ behandling, setBehandling, lukkModal }: Props) => {
   const api = useBehandlingPollingOperasjoner(behandling, setBehandling);
-  return (
-    <MenyTaAvVentIndex
-      behandlingVersjon={behandling.versjon}
-      taBehandlingAvVent={api.gjenopptaBehandling}
-      lukkModal={lukkModal}
-    />
-  );
+  return <MenyTaAvVentIndex taBehandlingAvVent={api.gjenopptaBehandling} lukkModal={lukkModal} />;
 };

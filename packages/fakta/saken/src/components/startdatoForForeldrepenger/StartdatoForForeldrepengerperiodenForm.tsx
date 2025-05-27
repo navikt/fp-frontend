@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -77,11 +77,11 @@ export const StartdatoForForeldrepengerperiodenForm = ({
   });
 
   const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
-  const slåPåEditering = useCallback(() => setVisEditeringsmodus(true), []);
-  const slaAvEditeringAvStartdato = useCallback(() => {
+  const slåPåEditering = () => setVisEditeringsmodus(true);
+  const slaAvEditeringAvStartdato = () => {
     formMethods.reset();
     setVisEditeringsmodus(false);
-  }, []);
+  };
 
   return (
     <Form

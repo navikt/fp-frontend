@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
@@ -32,23 +32,19 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
     },
   });
 
-  const sorterteSaksbehandlere = useMemo(
-    () =>
-      saksbehandlere.toSorted((saksbehandler1, saksbehandler2) => {
-        const compareWithNullsLast = (a: string | null, b: string | null) => {
-          if (a != null && b != null) return a.localeCompare(b);
-          if (a == null && b == null) return 0;
-          return a == null ? 1 : -1;
-        };
+  const sorterteSaksbehandlere = saksbehandlere.toSorted((saksbehandler1, saksbehandler2) => {
+    const compareWithNullsLast = (a: string | null, b: string | null) => {
+      if (a != null && b != null) return a.localeCompare(b);
+      if (a == null && b == null) return 0;
+      return a == null ? 1 : -1;
+    };
 
-        const enhetComparison = compareWithNullsLast(saksbehandler1.ansattAvdeling, saksbehandler2.ansattAvdeling);
-        if (enhetComparison !== 0) {
-          return enhetComparison;
-        }
-        return compareWithNullsLast(saksbehandler1.navn, saksbehandler2.navn);
-      }),
-    [saksbehandlere],
-  );
+    const enhetComparison = compareWithNullsLast(saksbehandler1.ansattAvdeling, saksbehandler2.ansattAvdeling);
+    if (enhetComparison !== 0) {
+      return enhetComparison;
+    }
+    return compareWithNullsLast(saksbehandler1.navn, saksbehandler2.navn);
+  });
 
   return (
     <VStack gap="2">

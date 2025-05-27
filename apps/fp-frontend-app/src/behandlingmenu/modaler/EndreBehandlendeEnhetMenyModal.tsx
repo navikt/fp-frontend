@@ -29,7 +29,6 @@ export const EndreBehandlendeEnhetMenyModal = ({ behandling, hentOgSettBehandlin
 
   return (
     <MenyEndreBehandlendeEnhetIndex
-      behandlingVersjon={behandling.versjon}
       behandlendeEnhetId={behandling.behandlendeEnhetId}
       behandlendeEnhetNavn={behandling.behandlendeEnhetNavn}
       nyBehandlendeEnhet={endreBehandlendeEnhet}

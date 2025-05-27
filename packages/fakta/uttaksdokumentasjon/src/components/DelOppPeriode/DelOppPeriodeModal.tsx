@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -34,7 +33,7 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
   const formMethods = useForm<{ dato: string }>();
 
   const splittDato = formMethods.watch('dato');
-  const perioder = useMemo(() => (splittDato ? splitPeriodePåDato(periode, splittDato) : null), [splittDato]);
+  const perioder = splittDato ? splitPeriodePåDato(periode, splittDato) : null;
 
   return (
     <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>

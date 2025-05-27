@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
@@ -72,42 +72,33 @@ export const UttakFaktaTable = ({
 }: Props) => {
   const intl = useIntl();
 
-  const velgPeriodeFomDato = useCallback(
-    (fom?: string, lukkAlleAndre = false) => {
-      if (fom && valgteFomDatoer.includes(fom)) {
-        setValgteFomDatoer(foms => foms.filter(f => f !== fom));
-      } else if (lukkAlleAndre) {
-        const nye = fom ? [fom] : [];
-        setValgteFomDatoer(() => nye);
-      } else if (fom) {
-        setValgteFomDatoer(foms => foms.concat(fom));
-      }
-    },
-    [valgteFomDatoer, setValgteFomDatoer],
-  );
+  const velgPeriodeFomDato = (fom?: string, lukkAlleAndre = false) => {
+    if (fom && valgteFomDatoer.includes(fom)) {
+      setValgteFomDatoer(foms => foms.filter(f => f !== fom));
+    } else if (lukkAlleAndre) {
+      const nye = fom ? [fom] : [];
+      setValgteFomDatoer(() => nye);
+    } else if (fom) {
+      setValgteFomDatoer(foms => foms.concat(fom));
+    }
+  };
 
-  const oppdaterPeriode = useCallback(
-    (uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
-      const oppdatertePerioder = uttakKontrollerFaktaPerioder
-        .filter(p => p.originalFom !== uPeriode.originalFom)
-        .concat(uPeriode)
-        .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
+  const oppdaterPeriode = (uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
+    const oppdatertePerioder = uttakKontrollerFaktaPerioder
+      .filter(p => p.originalFom !== uPeriode.originalFom)
+      .concat(uPeriode)
+      .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
 
-      setDirty(true);
-      oppdaterUttakPerioder(oppdatertePerioder);
-      velgPeriodeFomDato(undefined, true);
-    },
-    [uttakKontrollerFaktaPerioder],
-  );
+    setDirty(true);
+    oppdaterUttakPerioder(oppdatertePerioder);
+    velgPeriodeFomDato(undefined, true);
+  };
 
-  const slettPeriode = useCallback(
-    (fom: string) => {
-      const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter(p => p.originalFom !== fom);
-      oppdaterUttakPerioder(oppdatertePerioder);
-      setDirty(true);
-    },
-    [uttakKontrollerFaktaPerioder],
-  );
+  const slettPeriode = (fom: string) => {
+    const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter(p => p.originalFom !== fom);
+    oppdaterUttakPerioder(oppdatertePerioder);
+    setDirty(true);
+  };
 
   const sisteMåned =
     uttakKontrollerFaktaPerioder.length > 0

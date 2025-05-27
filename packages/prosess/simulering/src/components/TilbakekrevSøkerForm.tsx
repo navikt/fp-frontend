@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -77,13 +77,10 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
 
   const isForeldrepenger = fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER;
 
-  const previewMessage = useCallback(
-    (e: React.MouseEvent): void => {
-      previewCallback({ mottaker: '', fritekst: varseltekst ?? ' ' });
-      e.preventDefault();
-    },
-    [varseltekst],
-  );
+  const previewMessage = (e: React.MouseEvent): void => {
+    previewCallback({ mottaker: '', fritekst: varseltekst ?? ' ' });
+    e.preventDefault();
+  };
 
   if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.VURDER_FEILUTBETALING) {
     return null;

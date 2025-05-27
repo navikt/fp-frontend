@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -92,18 +91,15 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
   const { aksjonspunkterForPanel, behandling, isReadOnly, submitCallback, alleKodeverk } =
     usePanelDataContext<SoknadsfristAp>();
 
-  const initialValues = useMemo(
-    () => buildInitialValues(aksjonspunkterForPanel, status),
-    [aksjonspunkterForPanel, status],
-  );
+  const initialValues = buildInitialValues(aksjonspunkterForPanel, status);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const dato = useMemo(() => findDate(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
-  const textCode = useMemo(() => findTextCode(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
+  const dato = findDate(soknad, gjeldendeFamiliehendelse);
+  const textCode = findTextCode(soknad, gjeldendeFamiliehendelse);
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 

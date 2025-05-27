@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
@@ -46,7 +46,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   const [erLokaltOverstyrt, setErLokaltOverstyrt] = useState(false);
   const [skalToggleVisningAvLeggTilArbeidsforhold, toggleVisningAvLeggTilArbeidsforhold] = useState(false);
 
-  const toggleOverstyring = useCallback(() => {
+  const toggleOverstyring = () => {
     setErOverstyrt(true);
     setErLokaltOverstyrt(true);
 
@@ -57,12 +57,9 @@ export const ArbeidsOgInntektOverstyrPanel = ({
     if (indexForManueltLagtTil !== -1) {
       settÅpneRadIndexer([indexForManueltLagtTil]);
     }
-  }, [tabellData, settÅpneRadIndexer]);
+  };
 
-  const aksjonspunktTekstKoder = useMemo(
-    () => finnAksjonspunktTekstKoder(tabellData, aksjonspunkt),
-    [behandling.versjon],
-  );
+  const aksjonspunktTekstKoder = finnAksjonspunktTekstKoder(tabellData, aksjonspunkt);
 
   const harIngenArbeidsforholdSomErManueltLagtTil = tabellData.every(data => data.arbeidsgiverIdent !== MANUELT_ORG_NR);
 
