@@ -1,10 +1,17 @@
+import type {
+  Avslagsarsak,
+  BehandlingResultatType,
+  BehandlingResultatTypeTilbakekreving,
+  KonsekvensForYtelsen,
+} from '@navikt/fp-kodeverk';
+
 export type Behandlingsresultat = Readonly<{
   id: number;
-  type: string;
-  avslagsarsak: string | null;
+  type: BehandlingResultatType | BehandlingResultatTypeTilbakekreving;
+  avslagsarsak: Avslagsarsak | null;
   avslagsarsakFritekst?: string | null;
   rettenTil?: string;
-  konsekvenserForYtelsen?: string[];
+  konsekvenserForYtelsen?: KonsekvensForYtelsen[];
   vedtaksbrev?: string;
   overskrift: string | null;
   fritekstbrev: string | null;

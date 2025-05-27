@@ -7,7 +7,7 @@ import { CheckboxField, Form, SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
 
@@ -64,8 +64,8 @@ const getBehandlingAarsaker = (
   ytelseType: string,
   valgtBehandlingType?: string,
   alleRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[],
-  alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[],
-): KodeverkMedNavn<'BehandlingÅrsakType'>[] => {
+  alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[],
+): KodeverkMedNavn<'BehandlingÅrsakType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[] => {
   if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
     return TilbakekrevingRevurderingArsaker.flatMap(ar => {
       const arsak = alleTilbakekrevingRevurderingArsaker.find(el => el.kode === ar);
@@ -132,7 +132,7 @@ interface Props {
   ) => void;
   behandlingOppretting: BehandlingOppretting[];
   behandlingstyper: KodeverkMedNavn<'BehandlingType'>[];
-  tilbakekrevingRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
+  tilbakekrevingRevurderingArsaker?: KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[];
   revurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
   kanTilbakekrevingOpprettes: {
     kanBehandlingOpprettes: boolean;

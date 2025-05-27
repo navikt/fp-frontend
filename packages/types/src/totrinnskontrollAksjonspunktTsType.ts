@@ -1,3 +1,5 @@
+import type { VurderÅrsak } from '@navikt/fp-kodeverk';
+
 enum TypeEndring {
   AVKLART = 'AVKLART',
   ENDRET = 'ENDRET',
@@ -23,7 +25,7 @@ export type TotrinnskontrollAksjonspunkt = Readonly<{
   };
   besluttersBegrunnelse?: string;
   totrinnskontrollGodkjent?: boolean;
-  vurderPaNyttArsaker?: string[];
+  vurderPaNyttArsaker?: VurderÅrsak[];
   uttakPerioder?: {
     fom: string;
     tom: string;

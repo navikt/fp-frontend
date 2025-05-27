@@ -1,4 +1,6 @@
 import {
+  BehandlingArsakType,
+  BehandlingResultatType,
   BehandlingStatus,
   BehandlingType,
   FagsakStatus,
@@ -78,7 +80,7 @@ export const fagsakFullFpsak: Fagsak = {
       erAktivPapirsoknad: false,
       førsteÅrsak: {
         erAutomatiskRevurdering: false,
-        behandlingArsakType: 'RE-END-INNTEKTSMELD',
+        behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
         manueltOpprettet: false,
       },
       gjeldendeVedtak: false,
@@ -92,7 +94,7 @@ export const fagsakFullFpsak: Fagsak = {
       toTrinnsBehandling: false,
       behandlingsresultat: {
         id: 999951,
-        type: 'IKKE_FASTSATT',
+        type: BehandlingResultatType.IKKE_FASTSATT,
         avslagsarsak: null,
         avslagsarsakFritekst: null,
         rettenTil: '-',
@@ -111,7 +113,7 @@ export const fagsakFullFpsak: Fagsak = {
       behandlingÅrsaker: [
         {
           erAutomatiskRevurdering: false,
-          behandlingArsakType: 'RE-END-INNTEKTSMELD',
+          behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
           manueltOpprettet: false,
         },
       ],

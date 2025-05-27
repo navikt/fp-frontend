@@ -59,7 +59,7 @@ const getCorrectEmptyArbeidsForhold = (
 };
 
 const hentApTekst = (
-  manuellBehandlingÅrsak: string,
+  manuellBehandlingÅrsak: ManuellBehandlingÅrsak,
   alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto: UttakStonadskontoer,

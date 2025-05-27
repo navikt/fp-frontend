@@ -4,7 +4,7 @@ import type { Aksess, AksessRettigheter, NavAnsatt } from '@navikt/fp-types';
 const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanVeilede;
 const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanSaksbehandle;
 const kanOverstyre = (navAnsatt: NavAnsatt): boolean => kanSaksbehandle(navAnsatt) && navAnsatt.kanOverstyre;
-const isBehandlingAvTilbakekreving = (type?: string): boolean =>
+const isBehandlingAvTilbakekreving = (type?: BehandlingType): boolean =>
   type ? type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING : false;
 
 const accessibleFor =

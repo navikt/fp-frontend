@@ -25,7 +25,7 @@ const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
   },
 };
 
-const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string): Aksjonspunkt => ({
+const lagAksjonspunkt = (apKode: AksjonspunktKode, status: AksjonspunktStatus, begrunnelse?: string): Aksjonspunkt => ({
   definisjon: apKode,
   status,
   kanLoses: true,

@@ -1,4 +1,14 @@
-import { BehandlingStatus, BehandlingType, VilkarType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  BehandlingArsakType,
+  BehandlingResultatType,
+  BehandlingStatus,
+  BehandlingType,
+  VilkarType,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 export const behandling: Behandling = {
@@ -13,7 +23,7 @@ export const behandling: Behandling = {
   erAktivPapirsoknad: false,
   førsteÅrsak: {
     erAutomatiskRevurdering: false,
-    behandlingArsakType: 'RE-END-INNTEKTSMELD',
+    behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
     manueltOpprettet: false,
   },
   gjeldendeVedtak: false,
@@ -27,7 +37,7 @@ export const behandling: Behandling = {
   toTrinnsBehandling: false,
   behandlingsresultat: {
     id: 999951,
-    type: 'IKKE_FASTSATT',
+    type: BehandlingResultatType.IKKE_FASTSATT,
     avslagsarsak: null,
     avslagsarsakFritekst: null,
     rettenTil: '-',
@@ -46,49 +56,49 @@ export const behandling: Behandling = {
   behandlingÅrsaker: [
     {
       erAutomatiskRevurdering: false,
-      behandlingArsakType: 'RE-END-INNTEKTSMELD',
+      behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
       manueltOpprettet: false,
     },
   ],
   vilkår: [
     {
       vilkarType: VilkarType.SOKERSOPPLYSNINGSPLIKT,
-      vilkarStatus: 'OPPFYLT',
+      vilkarStatus: VilkarUtfallType.OPPFYLT,
       avslagKode: null,
       lovReferanse: '§§ 21-3',
       overstyrbar: true,
     },
     {
       vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
-      vilkarStatus: 'OPPFYLT',
+      vilkarStatus: VilkarUtfallType.OPPFYLT,
       avslagKode: null,
       lovReferanse: '§ 14-2',
       overstyrbar: true,
     },
     {
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
-      vilkarStatus: 'OPPFYLT',
+      vilkarStatus: VilkarUtfallType.OPPFYLT,
       avslagKode: null,
       lovReferanse: '§ 14-5, 1. ledd',
       overstyrbar: true,
     },
     {
       vilkarType: VilkarType.OPPTJENINGSVILKARET,
-      vilkarStatus: 'OPPFYLT',
+      vilkarStatus: VilkarUtfallType.OPPFYLT,
       avslagKode: null,
       lovReferanse: '§ 14-6',
       overstyrbar: true,
     },
     {
       vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
-      vilkarStatus: 'IKKE_VURDERT',
+      vilkarStatus: VilkarUtfallType.IKKE_VURDERT,
       avslagKode: null,
       lovReferanse: '§ 14-7',
       overstyrbar: true,
     },
     {
       vilkarType: VilkarType.OPPTJENINGSPERIODE,
-      vilkarStatus: 'OPPFYLT',
+      vilkarStatus: VilkarUtfallType.OPPFYLT,
       avslagKode: null,
       lovReferanse: '§ 14-6 og 14-10',
       overstyrbar: true,
@@ -234,15 +244,15 @@ export const behandling: Behandling = {
   ],
   aksjonspunkt: [
     {
-      definisjon: '5038',
-      status: 'OPPR',
+      definisjon: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+      status: AksjonspunktStatus.OPPRETTET,
       begrunnelse: null,
-      vilkarType: 'FP_VK_41',
+      vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: null,
       vurderPaNyttArsaker: null,
       besluttersBegrunnelse: null,
-      aksjonspunktType: 'MANU',
+      aksjonspunktType: AksjonspunktType.MANUELL,
       kanLoses: true,
       endretTidspunkt: null,
       endretAv: null,

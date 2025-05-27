@@ -32,10 +32,6 @@ export type AlleKodeverkLos = KodeverkMedSammeVerditype & {
 
 type EnumOrUnknown<T extends LosKodeverkType> = T extends keyof KodeverkEnumMap ? KodeverkEnumMap[T] : unknown;
 
-export type KodeverkLosReturnType<T extends LosKodeverkType> = T extends 'KøSortering'
-  ? KøSorteringKodeverk[]
-  : LosKodeverkMedNavn<T>[];
-
 export type LosKodeverkMedNavn<T extends LosKodeverkType> = Readonly<{
   kode: EnumOrUnknown<T>;
   navn: string;

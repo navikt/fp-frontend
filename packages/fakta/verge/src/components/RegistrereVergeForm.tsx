@@ -10,7 +10,7 @@ import {
 import { createIntl } from '@navikt/ft-utils';
 
 import { VergeType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn, OpprettVergeParams, Verge } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving, OpprettVergeParams, Verge } from '@navikt/fp-types';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -22,12 +22,12 @@ export type VergeFormValues = {
   gyldigTom?: string;
   fnr?: string;
   organisasjonsnummer?: string;
-  vergeType?: string;
+  vergeType?: VergeType;
 };
 
 interface Props {
   readOnly: boolean;
-  vergetyper: KodeverkMedNavn<'VergeType'>[];
+  vergetyper: KodeverkMedNavn<'VergeType'>[] | KodeverkMedNavnTilbakekreving<'VergeType'>[];
   valgtVergeType: string | undefined;
 }
 

@@ -30,7 +30,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     ventearsaker: VENTEARSAKER,
-    ventearsak: 'test',
+    ventearsak: VenteArsakType.ENDRE_TILKJENT_YTELSE,
     lukkCallback: action('button-click'),
     frist: null,
   },

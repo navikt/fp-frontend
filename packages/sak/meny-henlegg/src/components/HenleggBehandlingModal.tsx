@@ -7,8 +7,14 @@ import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
-import { BehandlingResultatType, BehandlingType, DokumentMalType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import {
+  BehandlingResultatType,
+  BehandlingResultatTypeTilbakekreving,
+  BehandlingType,
+  DokumentMalType,
+  FagsakYtelseType,
+} from '@navikt/fp-kodeverk';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import styles from './henleggBehandlingModal.module.css';
 
@@ -36,7 +42,7 @@ const showHenleggelseFritekst = (behandlingTypeKode: string, årsakKode?: string
   BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === årsakKode;
 
 const disableHovedKnapp = (
-  behandlingTypeKode: string,
+  behandlingTypeKode: BehandlingType,
   årsakKode?: string,
   begrunnelse?: string,
   fritekst?: string,
@@ -47,7 +53,7 @@ const disableHovedKnapp = (
   return !(årsakKode && begrunnelse);
 };
 
-const getShowLink = (behandlingType: string, arsakKode?: string, fritekst?: string): boolean => {
+const getShowLink = (behandlingType: BehandlingType, arsakKode?: string, fritekst?: string): boolean => {
   if (behandlingType === BehandlingType.TILBAKEKREVING) {
     return BehandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
   }
@@ -69,10 +75,10 @@ const henleggArsakerPerBehandlingType = {
     BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
     BehandlingResultatType.HENLAGT_FEILOPPRETTET,
   ],
-  [BehandlingType.TILBAKEKREVING]: [BehandlingResultatType.HENLAGT_FEILOPPRETTET],
+  [BehandlingType.TILBAKEKREVING]: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
   [BehandlingType.TILBAKEKREVING_REVURDERING]: [
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV,
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV,
+    BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_MED_BREV,
+    BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_UTEN_BREV,
   ],
   [BehandlingType.REVURDERING]: [
     BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
@@ -87,11 +93,13 @@ const henleggArsakerPerBehandlingType = {
 };
 
 export const getHenleggArsaker = (
-  behandlingResultatTyper: KodeverkMedNavn<'BehandlingResultatType'>[],
-  behandlingType: string,
-  ytelseType: string,
-): KodeverkMedNavn<'BehandlingResultatType'>[] => {
-  const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType as BehandlingType];
+  behandlingResultatTyper:
+    | KodeverkMedNavn<'BehandlingResultatType'>[]
+    | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[],
+  behandlingType: BehandlingType,
+  ytelseType: FagsakYtelseType,
+): (KodeverkMedNavn<'BehandlingResultatType'> | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>)[] => {
+  const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
   return typerForBehandlingType
     .filter(
       type =>
@@ -115,9 +123,11 @@ interface Props {
   cancelEvent: () => void;
   forhandsvisHenleggBehandling: (data: ForhåndsvisHenleggParams) => void;
   behandlingUuid: string;
-  ytelseType: string;
-  behandlingResultatTyper: KodeverkMedNavn<'BehandlingResultatType'>[];
-  behandlingType: string;
+  ytelseType: FagsakYtelseType;
+  behandlingResultatTyper:
+    | KodeverkMedNavn<'BehandlingResultatType'>[]
+    | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[];
+  behandlingType: BehandlingType;
 }
 
 /**

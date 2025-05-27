@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkReturnType, KodeverkType } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useFagsakApi } from './fagsakApi';
@@ -22,7 +22,7 @@ export const useKodeverk = (behandlingType?: string): AlleKodeverk | AlleKodever
 /**
  * Hook som henter et gitt FPSAK-kodeverk fra respons som allerede er hentet fra backend.
  */
-export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): KodeverkReturnType<T> => {
+export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): AlleKodeverk[T] => {
   const { kodeverkOptions } = useFagsakApi();
   const { data: alleKodeverk } = useQuery(kodeverkOptions());
 
@@ -33,5 +33,5 @@ export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): Kodev
     throw new Error(`Kodeverk ${kodeverkType} finnes ikke`);
   }
 
-  return alleKodeverk[kodeverkType] as KodeverkReturnType<T>;
+  return alleKodeverk[kodeverkType];
 };

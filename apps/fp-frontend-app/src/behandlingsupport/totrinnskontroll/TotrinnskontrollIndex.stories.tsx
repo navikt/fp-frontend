@@ -6,6 +6,7 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 
 import {
   AksjonspunktKode,
+  BehandlingArsakType,
   BehandlingStatus,
   BehandlingType,
   FagsakStatus,
@@ -108,7 +109,7 @@ const BEHANDLING = {
   totrinnskontrollÅrsaker: TOTRINNSKONTROLL_AKSJONSPUNKTER,
   behandlingÅrsaker: [
     {
-      behandlingArsakType: '',
+      behandlingArsakType: BehandlingArsakType.ANNET,
     },
   ],
 } as BehandlingAppKontekst;

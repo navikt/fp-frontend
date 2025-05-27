@@ -1,3 +1,5 @@
+import type { FarSøkerType } from '@navikt/fp-kodeverk';
+
 export type ManglendeVedleggSoknad = Readonly<{
   dokumentType: string; // Brukes kun som sorteringsnøkkel, ikke kodeverk
   dokumentTittel: string;
@@ -53,5 +55,5 @@ export type Soknad = Readonly<{
   omsorgsovertakelseDato?: string;
   barnetsAnkomstTilNorgeDato?: string;
   adopsjonFodelsedatoer?: Record<number, string>;
-  farSokerType?: string | null;
+  farSokerType?: FarSøkerType | null;
 }>;

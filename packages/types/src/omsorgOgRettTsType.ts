@@ -1,4 +1,4 @@
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { Landkode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 
 export type OmsorgOgRett = {
   søknad: Søknad;
@@ -11,7 +11,7 @@ export type OmsorgOgRett = {
 export type Søknad = {
   søkerHarAleneomsorg: Verdi;
   annenpartIdent: string | null;
-  annenpartBostedsland: string | null;
+  annenpartBostedsland: Landkode | null;
   annenpartRettighet: Rettighet | null;
 };
 

@@ -13,6 +13,7 @@ import {
   isAvslag,
   isInnvilget,
   isOpphor,
+  KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
@@ -81,7 +82,7 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
         bt === BehandlingArsakType.KLAGE_M_INNTK,
     );
 
-const lagÅrsakString = (revurderingAarsaker: string[], alleKodeverk: AlleKodeverk): string | undefined => {
+const lagÅrsakString = (revurderingAarsaker: BehandlingArsakType[], alleKodeverk: AlleKodeverk): string | undefined => {
   if (revurderingAarsaker === undefined || revurderingAarsaker.length < 1) {
     return undefined;
   }
@@ -111,7 +112,10 @@ const erNyttBehandlingResult = (
   return vedtakResultOriginal !== vedtakResult;
 };
 
-export const lagKonsekvensForYtelsenTekst = (alleKodeverk: AlleKodeverk, konsekvenser?: string[]): string => {
+export const lagKonsekvensForYtelsenTekst = (
+  alleKodeverk: AlleKodeverk,
+  konsekvenser?: KonsekvensForYtelsen[],
+): string => {
   if (!konsekvenser || konsekvenser.length < 1) {
     return '';
   }
@@ -170,7 +174,7 @@ const finnInvilgetRevurderingTekst = (
   ytelseTypeKode: string,
   alleKodeverk: AlleKodeverk,
   tilbakekrevingText: string | undefined,
-  konsekvenserForYtelsen?: string[],
+  konsekvenserForYtelsen?: KonsekvensForYtelsen[],
   beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): string => {

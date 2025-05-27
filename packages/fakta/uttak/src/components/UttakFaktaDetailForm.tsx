@@ -10,7 +10,7 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FordelingPeriodeKilde, RelasjonsRolleType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { FordelingPeriodeKilde, RelasjonsRolleType, UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
@@ -85,7 +85,7 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
     ? {
         arbeidsgiverReferanse:
           values.arbeidsgiverId.split('-')[0] === 'null' ? undefined : values.arbeidsgiverId.split('-')[0],
-        arbeidType: values.arbeidsgiverId.split('-')[1],
+        arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
       }
     : undefined,
   periodeKilde: FordelingPeriodeKilde.SAKSBEHANDLER,
@@ -177,7 +177,7 @@ export const UttakFaktaDetailForm = ({
 
   const erUttakOgFellesperiodeEllerForeldrepenger =
     årsakstype === Årsakstype.UTTAK &&
-    (stønadskonto === StonadskontoType.FELLESPERIODE || stønadskonto === StonadskontoType.FORELDREPENGER);
+    (stønadskonto === UttakPeriodeType.FELLESPERIODE || stønadskonto === UttakPeriodeType.FORELDREPENGER);
   const visMorsAktivitet =
     fagsak.relasjonsRolleType !== RelasjonsRolleType.MOR &&
     (erUttakOgFellesperiodeEllerForeldrepenger || årsakstype === Årsakstype.UTSETTELSE);

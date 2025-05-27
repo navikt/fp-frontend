@@ -1,3 +1,4 @@
+import { PersonstatusType, Region } from '@navikt/fp-kodeverk';
 import type { Medlemskap } from '@navikt/fp-types';
 
 export const medlemskap: Medlemskap = {
@@ -7,14 +8,14 @@ export const medlemskap: Medlemskap = {
     {
       fom: '1993-03-05',
       tom: '9999-12-31',
-      type: 'NORDEN',
+      type: Region.NORDEN,
     },
   ],
   personstatuser: [
     {
       fom: '1993-03-05',
       tom: '9999-12-31',
-      type: 'BOSA',
+      type: PersonstatusType.BOSATT,
     },
   ],
   utenlandsopphold: [],
@@ -52,14 +53,14 @@ export const medlemskap: Medlemskap = {
       {
         fom: '1991-03-05',
         tom: '9999-12-31',
-        type: 'NORDEN',
+        type: Region.NORDEN,
       },
     ],
     personstatuser: [
       {
         fom: '1991-03-05',
         tom: '9999-12-31',
-        type: 'BOSA',
+        type: PersonstatusType.BOSATT,
       },
     ],
   },
