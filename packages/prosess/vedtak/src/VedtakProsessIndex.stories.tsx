@@ -6,6 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
+  Avslagsarsak,
   BehandlingArsakType,
   BehandlingResultatType,
   BehandlingStatus,
@@ -777,7 +778,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
-        avslagsarsak: '1007',
+        avslagsarsak: Avslagsarsak.MANN_ADOPTERER_IKKE_ALENE,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
