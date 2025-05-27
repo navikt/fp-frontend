@@ -66,8 +66,6 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
           avklarteOppholdPerioder: [],
           eksternArbeidsforholdReferanse: '23422323',
           kanTilrettelegges: true,
-          kopiertFraTidligereBehandling: true,
-          mottattTidspunkt: '2020-03-11T16:21:48.532298',
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
           stillingsprosentStartTilrettelegging: 100,
@@ -354,8 +352,6 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
           stillingsprosentStartTilrettelegging: 100,
           eksternArbeidsforholdReferanse: '23422323',
           kanTilrettelegges: true,
-          kopiertFraTidligereBehandling: true,
-          mottattTidspunkt: '2020-03-11T16:21:48.532298',
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
           tilretteleggingDatoer: [
