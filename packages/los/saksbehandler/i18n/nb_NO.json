@@ -4,7 +4,7 @@
   "LedigOppgaveTabell.Soker": "Søker",
   "LedigOppgaveTabell.Sak": "Sak",
   "LedigOppgaveTabell.BehandlingOpprettet": "Opprettet",
-  "LedigOppgaveTabell.IngenOppgaver": "<i>Det er ingen behandlinger i køen</i>",
+  "LedigOppgaveTabell.IngenOppgaver": "Det er ingen behandlinger i køen",
 
   "LedigOppgaveRad.Saksnr": "Kopier saksnummer",
 
@@ -14,7 +14,7 @@
   "ReservertOppgaveTabell.BehandlingOpprettet": "Opprettet",
   "ReservertOppgaveTabell.ReserverteOppgaver": "Reserverte",
   "ReservertOppgaveTabell.AntallOppgaver": "{reservertAntall}",
-  "ReservertOppgaveTabell.IngenOppgaver": "<i>Det er ingen reserverte behandlinger</i>",
+  "ReservertOppgaveTabell.IngenOppgaver": "Det er ingen reserverte behandlinger",
 
   "ReservertOppgaveRad.OverfortReservasjonBegrunnelse": "Begrunnelse",
   "ReservertOppgaveRad.Notat": "Notat",
@@ -47,7 +47,7 @@
   "Search.ReserverBehandling": "Reserver behandlingen ved søk",
 
   "SistBehandledeSaker.SistBehandledeSaker": "Dine siste reserverte behandlinger",
-  "SistBehandledeSaker.IngenBehandlinger": "<i>Ingen behandlinger</i>",
+  "SistBehandledeSaker.IngenBehandlinger": "Ingen behandlinger",
   "SistBehandledeSaker.Behandling": "Behandling {index}",
   "SistBehandledeSaker.Soker": "Søker",
   "SistBehandledeSaker.Saksnr": "Saksnr",
@@ -122,7 +122,7 @@
   "NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling": "Førstegangsbeh.",
 
   "SakslisteVelgerForm.Saksliste": "Behandlingskø",
-  "SakslisteVelgerForm.IkkeOppfort": "<i>Du er ikke lagt til i noen behandlingskøer</i>",
+  "SakslisteVelgerForm.IkkeOppfort": "Du er ikke lagt til i noen behandlingskøer",
   "SakslisteVelgerForm.Stonadstype": "Stønad",
   "SakslisteVelgerForm.Behandlingstype": "Behandling",
   "SakslisteVelgerForm.Sortering": "Sortering",

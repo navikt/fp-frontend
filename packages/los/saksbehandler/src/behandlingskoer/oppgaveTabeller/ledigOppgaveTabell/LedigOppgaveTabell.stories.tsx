@@ -6,9 +6,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import { AndreKriterierType, type Oppgave } from '@navikt/fp-los-felles';
+import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';

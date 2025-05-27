@@ -2,8 +2,8 @@ import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack, Tag } from '@navikt/ds-react';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
-import { AndreKriterierType, type Oppgave } from '@navikt/fp-los-felles';
+import { AndreKriterierType, BehandlingType } from '@navikt/fp-kodeverk';
+import { type Oppgave } from '@navikt/fp-los-felles';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';

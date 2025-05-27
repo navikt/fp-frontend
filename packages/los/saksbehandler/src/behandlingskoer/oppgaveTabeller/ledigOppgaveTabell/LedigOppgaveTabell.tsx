@@ -34,7 +34,7 @@ export const LedigOppgaveTabell = ({ reserverOppgave, antallOppgaver = 0, valgtS
       </VStack>
       {oppgaverTilBehandling.length === 0 && (
         <BodyShort size="small" className={styles.padding}>
-          <FormattedMessage id="LedigOppgaveTabell.IngenOppgaver" values={{ i: chunks => <i>{chunks}</i> }} />
+          <FormattedMessage id="LedigOppgaveTabell.IngenOppgaver" tagName="i" />
         </BodyShort>
       )}
       {oppgaverTilBehandling.length > 0 && (
