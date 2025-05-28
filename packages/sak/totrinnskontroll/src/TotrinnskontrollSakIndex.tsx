@@ -10,6 +10,7 @@ import {
   BehandlingStatus,
   BehandlingType,
   FagsakYtelseType,
+  SkjermlenkeType,
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
@@ -66,12 +67,15 @@ export type ApData = {
 interface Props {
   behandling: BehandlingAppKontekst;
   location: Location;
-  fagsakYtelseType: string;
+  fagsakYtelseType: FagsakYtelseType;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
   onSubmit: (data: ApData) => void;
   forhandsvisVedtaksbrev: () => void;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
+  createLocationForSkjermlenke: (
+    behandlingLocation: Location,
+    skjermlenkeCode: SkjermlenkeType,
+  ) => Location | undefined;
   beslutterFormData?: FormValues;
   setBeslutterFormData: (data?: FormValues) => void;
 }
@@ -131,7 +135,7 @@ export const TotrinnskontrollSakIndex = ({
       })
     : behandling.totrinnskontrollÅrsaker;
 
-  const lagLenke = (skjermlenkeCode: string): Location | undefined =>
+  const lagLenke = (skjermlenkeCode: SkjermlenkeType): Location | undefined =>
     createLocationForSkjermlenke(location, skjermlenkeCode);
 
   const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;

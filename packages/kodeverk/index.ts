@@ -26,6 +26,7 @@ export {
   isKlageOmgjort,
   isKlageAvvist,
 } from './src/behandlingResultatType';
+export { BehandlingResultatTypeTilbakekreving } from './src/behandlingResultatTypeTilbakekreving';
 export { BehandlingStatus } from './src/behandlingStatus';
 export { BehandlingType } from './src/behandlingType';
 export { BeregningsgrunnlagAndeltype } from './src/beregningsgrunnlagAndeltyper';

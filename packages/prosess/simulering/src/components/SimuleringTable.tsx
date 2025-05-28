@@ -145,7 +145,12 @@ export const SimuleringTable = ({
       const rangeOfMonths = getPeriod(ingenPerioderMedAvvik, simuleringResultat.periode.fom, mottaker);
       const nesteMåned = mottaker.nesteUtbPeriode.tom;
       const visDetaljer = showDetails.find(d => d.id === mottakerIndex);
-      const array = new Array<ReactElement>();
+
+      const resultatRader = getResultatRadene(
+        ingenPerioderMedAvvik,
+        mottaker.resultatPerFagområde,
+        mottaker.resultatOgMotregningRader,
+      );
 
       return (
         <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
@@ -180,54 +185,43 @@ export const SimuleringTable = ({
               </Table.Row>
             </Table.Header>
             <Table.Body>
-              {array
-                .concat(
-                  ...mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) =>
-                    fagOmråde.rader
-                      .filter(rad => {
-                        const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
-                        const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
-                        return !rowIsHidden(isRowToggable, visDetaljer ? visDetaljer.show : false);
-                      })
-                      .map((rad, rowIndex) => {
-                        const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
-                        const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
-                        const borderBottom = isRowToggable
-                          ? 'dashed 1px var(--a-gray-200)'
-                          : 'solid 1px var(--a-gray-200)';
-                        return (
-                          <Table.Row key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}>
-                            <Table.DataCell
-                              style={
-                                isFeilUtbetalt || ingenPerioderMedAvvik
-                                  ? { fontWeight: 'bold', borderBottom }
-                                  : { borderBottom }
-                              }
-                            >
-                              <FormattedMessage id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
-                            </Table.DataCell>
-                            {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned, borderBottom)}
-                          </Table.Row>
-                        );
-                      }),
-                  ),
-                )
-                .concat(
-                  getResultatRadene(
-                    ingenPerioderMedAvvik,
-                    mottaker.resultatPerFagområde,
-                    mottaker.resultatOgMotregningRader,
-                  ).map((resultat, resultatIndex) => (
-                    <Table.Row key={`rowIndex${resultatIndex + 1}`}>
-                      <Table.DataCell
-                        style={resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED ? { fontWeight: 'bold' } : {}}
-                      >
-                        <FormattedMessage id={`Simulering.${resultat.feltnavn}`} />
-                      </Table.DataCell>
-                      {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
-                    </Table.Row>
-                  )),
-                )}
+              {mottaker.resultatPerFagområde.map((fagOmråde, fagIndex) =>
+                fagOmråde.rader
+                  .filter(rad => {
+                    const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
+                    const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
+                    return !rowIsHidden(isRowToggable, visDetaljer ? visDetaljer.show : false);
+                  })
+                  .map((rad, rowIndex) => {
+                    const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
+                    const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
+                    const borderBottom = isRowToggable ? 'dashed 1px var(--a-gray-200)' : 'solid 1px var(--a-gray-200)';
+                    return (
+                      <Table.Row key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}>
+                        <Table.DataCell
+                          style={
+                            isFeilUtbetalt || ingenPerioderMedAvvik
+                              ? { fontWeight: 'bold', borderBottom }
+                              : { borderBottom }
+                          }
+                        >
+                          <FormattedMessage id={`Simulering.${fagOmråde.fagOmrådeKode}.${rad.feltnavn}`} />
+                        </Table.DataCell>
+                        {createColumns(rad.resultaterPerMåned, rangeOfMonths, nesteMåned, borderBottom)}
+                      </Table.Row>
+                    );
+                  }),
+              )}
+              {resultatRader.map((resultat, resultatIndex) => (
+                <Table.Row key={`rowIndex${resultatIndex + 1}`}>
+                  <Table.DataCell
+                    style={resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED ? { fontWeight: 'bold' } : {}}
+                  >
+                    <FormattedMessage id={`Simulering.${resultat.feltnavn}`} />
+                  </Table.DataCell>
+                  {createColumns(resultat.resultaterPerMåned, rangeOfMonths, nesteMåned)}
+                </Table.Row>
+              ))}
             </Table.Body>
           </Table>
         </div>

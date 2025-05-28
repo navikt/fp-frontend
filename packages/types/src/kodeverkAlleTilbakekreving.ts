@@ -1,6 +1,6 @@
 import type {
   BehandlingArsakType,
-  BehandlingResultatType,
+  BehandlingResultatTypeTilbakekreving,
   BehandlingType,
   SkjermlenkeTypeTilbakekreving,
   VenteArsakType,
@@ -16,7 +16,7 @@ import type { TilbakekrevingKodeverkType } from './kodeverkTypeTilbakekreving';
 type KodeverkEnumMap = {
   BehandlingType: BehandlingType;
   BehandlingÅrsakType: BehandlingArsakType;
-  BehandlingResultatType: BehandlingResultatType;
+  BehandlingResultatType: BehandlingResultatTypeTilbakekreving;
   SkjermlenkeType: SkjermlenkeTypeTilbakekreving;
   Venteårsak: VenteArsakType;
   VurderÅrsak: VurderÅrsak;

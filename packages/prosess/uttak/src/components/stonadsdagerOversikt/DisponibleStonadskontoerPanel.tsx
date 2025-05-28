@@ -41,7 +41,7 @@ const lagTabellRadKey = (
     ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]
     : undefined;
 
-  let arbKey = uttakArbeidType;
+  let arbKey = uttakArbeidType as string;
   arbKey = arbeidsgiverOpplysninger ? `${arbKey} ${arbeidsgiverOpplysninger.navn}` : arbKey;
   arbKey = arbeidsforholdId ? `${arbKey} ${arbeidsforholdId}` : arbKey;
   arbKey = arbeidsgiverOpplysninger ? `${arbKey} ${arbeidsgiverOpplysninger.identifikator}` : arbKey;

@@ -58,13 +58,12 @@ export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
 export type {
   AlleKodeverk,
-  KodeverkReturnType,
   KodeverkMedNavn,
   PeriodeResultatÅrsakKodeverk,
   GraderingAvslagÅrsakKodeverk,
 } from './src/kodeverkAlle';
 export type { AlleKodeverkTilbakekreving, KodeverkMedNavnTilbakekreving } from './src/kodeverkAlleTilbakekreving';
-export type { AlleKodeverkLos, KodeverkLosReturnType, LosKodeverkMedNavn } from './src/kodeverkAlleLos';
+export type { AlleKodeverkLos, LosKodeverkMedNavn } from './src/kodeverkAlleLos';
 export type { NavAnsatt } from './src/navAnsattTsType';
 export type {
   SimuleringResultat,

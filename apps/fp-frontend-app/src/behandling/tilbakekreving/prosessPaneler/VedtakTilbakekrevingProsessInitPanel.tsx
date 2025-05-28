@@ -13,9 +13,9 @@ import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
   BehandlingArsakType,
+  BehandlingResultatTypeTilbakekreving,
   BehandlingStatus,
   BehandlingType,
-  VedtakResultatType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -122,7 +122,7 @@ const Wrapper = (props: ComponentProps<typeof VedtakTilbakekrevingProsessIndex>)
   );
 };
 
-const erTilbakekrevingÅrsakKlage = (årsak: string): boolean =>
+const erTilbakekrevingÅrsakKlage = (årsak: BehandlingArsakType): boolean =>
   !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
 
 const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
@@ -131,11 +131,12 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   }
   const { type } = beregningsresultat;
 
-  if (type === VedtakResultatType.INGEN_TILBAKEBETALING) {
+  if (type === BehandlingResultatTypeTilbakekreving.INGEN_TILBAKEBETALING) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  return type === VedtakResultatType.DELVIS_TILBAKEBETALING || type === VedtakResultatType.FULL_TILBAKEBETALING
+  return type === BehandlingResultatTypeTilbakekreving.DELVIS_TILBAKEBETALING ||
+    type === BehandlingResultatTypeTilbakekreving.FULL_TILBAKEBETALING
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;
 };

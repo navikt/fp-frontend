@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
 
-import { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
@@ -25,7 +25,7 @@ export const getAvslagArsak = (
   const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
 
   const årsak =
-    alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType as VilkarType].find(
+    alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType].find(
       ({ kode }) => kode === behandlingsresultat.avslagsarsak,
     )?.navn ?? '';
 

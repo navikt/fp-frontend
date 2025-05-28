@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { BehandlingType, KonsekvensForYtelsen, VurderÅrsak } from '@navikt/fp-kodeverk';
+import { BehandlingType, KonsekvensForYtelsen, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
@@ -95,7 +95,7 @@ interface Props {
   skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   erBehandlingEtterKlage: boolean;
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
-  lagLenke: (skjermlenkeCode: string) => Location | undefined;
+  lagLenke: (skjermlenkeCode: SkjermlenkeType) => Location | undefined;
   onSubmit: (data: FormValues) => void;
   beslutterFormData?: FormValues;
   setBeslutterFormData: (data?: FormValues) => void;
@@ -118,13 +118,9 @@ export const TotrinnskontrollBeslutterForm = ({
 }: Props) => {
   const erKlage = behandling && behandling.type === BehandlingType.KLAGE;
   const erAnke = behandling && behandling.type === BehandlingType.ANKE;
-  const harIkkeKonsekvensForYtelse = useMemo(
-    () =>
-      harIkkeKonsekvenserForYtelsen(
-        [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
-        behandling.behandlingsresultat,
-      ),
-    [behandling.behandlingsresultat],
+  const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
+    [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
+    behandling.behandlingsresultat,
   );
 
   const defaultValues = useMemo(

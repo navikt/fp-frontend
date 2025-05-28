@@ -1,5 +1,7 @@
+import type { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+
 export type OpptjeningAktivitet = {
-  aktivitetType: string;
+  aktivitetType: OpptjeningAktivitetType;
   opptjeningFom: string;
   opptjeningTom: string;
   arbeidsgiverReferanse: string | null;

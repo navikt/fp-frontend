@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 
-import type { KodeverkLosReturnType, LosKodeverkType } from '@navikt/fp-types';
+import type { AlleKodeverkLos, LosKodeverkType } from '@navikt/fp-types';
 
 import { losKodeverkOptions } from './fplosAvdelingslederApi';
 
 /**
  * Hook som henter et gitt kodeverk fra respons som allerede er hentet fra backend.
  */
-export const useLosKodeverk = <T extends LosKodeverkType>(kodeverkType: T): KodeverkLosReturnType<T> => {
+export const useLosKodeverk = <T extends LosKodeverkType>(kodeverkType: T): AlleKodeverkLos[T] => {
   const alleKodeverk = useQuery(losKodeverkOptions()).data;
 
   if (!alleKodeverk) {
@@ -17,5 +17,5 @@ export const useLosKodeverk = <T extends LosKodeverkType>(kodeverkType: T): Kode
     throw new Error(`Kodeverk ${kodeverkType} for LOS finnes ikke`);
   }
 
-  return alleKodeverk[kodeverkType] as KodeverkLosReturnType<T>;
+  return alleKodeverk[kodeverkType];
 };

@@ -5,7 +5,7 @@ import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack
 import { dateTimeFormat } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { HistorikkAktor } from '@navikt/fp-kodeverk';
+import { HistorikkAktor, SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
@@ -15,7 +15,10 @@ import { Skjermlenke } from './Skjermlenke';
 
 interface Props {
   behandlingLocation?: Location;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
+  createLocationForSkjermlenke: (
+    behandlingLocation: Location,
+    skjermlenkeCode: SkjermlenkeType,
+  ) => Location | undefined;
   alleKodeverk: AlleKodeverkTilbakekreving | AlleKodeverk;
   historikkInnslag: Historikkinnslag;
   saksnummer: string;

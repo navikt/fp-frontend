@@ -1,3 +1,4 @@
+import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import type { Opptjening } from '@navikt/fp-types';
 
 export const opptjening: Opptjening = {
@@ -18,7 +19,7 @@ export const opptjening: Opptjening = {
   },
   opptjeningAktivitetList: [
     {
-      aktivitetType: 'FRILANS',
+      aktivitetType: OpptjeningAktivitetType.FRILANS,
       opptjeningFom: '2023-03-05',
       opptjeningTom: '9999-12-31',
       arbeidsgiverReferanse: null,
@@ -30,7 +31,7 @@ export const opptjening: Opptjening = {
       begrunnelse: null,
     },
     {
-      aktivitetType: 'ARBEID',
+      aktivitetType: OpptjeningAktivitetType.ARBEID,
       opptjeningFom: '2024-03-05',
       opptjeningTom: '9999-12-31',
       arbeidsgiverReferanse: '992257822',

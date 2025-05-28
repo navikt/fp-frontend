@@ -2,8 +2,7 @@ import { ExpandVerticalIcon } from '@navikt/aksel-icons';
 import { Button, Tooltip } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { HistorikkAktor } from '@navikt/fp-kodeverk';
-import { skjermlenkeCodes } from '@navikt/fp-konstanter';
+import { HistorikkAktor, SkjermlenkeType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
 import type { Historikkinnslag } from '@navikt/fp-types';
 
@@ -29,7 +28,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: HistorikkAktor.SAKSBEHANDLER,
       ident: 'Z994283',
     },
-    skjermlenke: skjermlenkeCodes['FAKTA_UTTAK'].kode,
+    skjermlenke: SkjermlenkeType.FAKTA_UTTAK,
     opprettetTidspunkt: '2024-12-06T11:59:56.891',
     dokumenter: [],
     tittel: null,
@@ -91,7 +90,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: HistorikkAktor.SAKSBEHANDLER,
       ident: 'Z991198',
     },
-    skjermlenke: 'PUNKT_FOR_MEDLEMSKAP_LØPENDE',
+    skjermlenke: SkjermlenkeType.PUNKT_FOR_MEDLEMSKAP_LØPENDE,
     opprettetTidspunkt: '2024-08-04T20:07:08.962',
     dokumenter: null,
     tittel: null,
@@ -112,7 +111,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: HistorikkAktor.BESLUTTER,
       ident: 'Z993179',
     },
-    skjermlenke: skjermlenkeCodes['VEDTAK'].kode,
+    skjermlenke: SkjermlenkeType.VEDTAK,
     opprettetTidspunkt: '2024-09-27T16:02:59.251',
     dokumenter: null,
     tittel: null,
@@ -151,7 +150,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: HistorikkAktor.SAKSBEHANDLER,
       ident: 'Z991753',
     },
-    skjermlenke: skjermlenkeCodes['FAKTA_OM_MEDLEMSKAP'].kode,
+    skjermlenke: SkjermlenkeType.FAKTA_OM_MEDLEMSKAP,
     opprettetTidspunkt: '2024-09-19T16:33:54.789',
     dokumenter: [],
     tittel: null,

@@ -1,5 +1,7 @@
+import type { AktivitetStatus } from '@navikt/fp-kodeverk';
+
 export type FeriepengegrunnlagAndel = Readonly<{
-  aktivitetStatus: string;
+  aktivitetStatus: AktivitetStatus;
   opptjeningsår: number;
   årsbeløp: number;
   erBrukerMottaker: boolean;

@@ -4,6 +4,7 @@ import { useIntl } from 'react-intl';
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
+import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
@@ -19,7 +20,10 @@ interface Props {
   alleKodeverkFpSak: AlleKodeverk;
   saksnummer: string;
   getBehandlingLocation: (behandlingUuid: string) => Location;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
+  createLocationForSkjermlenke: (
+    behandlingLocation: Location,
+    skjermlenkeCode: SkjermlenkeType,
+  ) => Location | undefined;
   utvidEllerMinskBehandlingDetaljerKnapp: ReactElement;
 }
 

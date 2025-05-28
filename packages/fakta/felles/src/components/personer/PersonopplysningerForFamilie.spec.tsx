@@ -4,7 +4,7 @@ import { expect } from 'vitest';
 
 import { AdresseType, SivilstandType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { type AlleKodeverk, KjønnkodeEnum, type Personoversikt } from '@navikt/fp-types';
+import { KjønnkodeEnum, type Personoversikt } from '@navikt/fp-types';
 
 import { PersonopplysningerForFamilie } from './PersonopplysningerForFamilie';
 
@@ -71,12 +71,7 @@ const personoversikt: Personoversikt = {
 
 describe('PersonopplysningerForFamilie', () => {
   it('skal vise personoplysninger for familie', () => {
-    render(
-      <PersonopplysningerForFamilie
-        personoversikt={personoversikt}
-        alleKodeverk={alleKodeverk as unknown as AlleKodeverk}
-      />,
-    );
+    render(<PersonopplysningerForFamilie personoversikt={personoversikt} alleKodeverk={alleKodeverk} />);
 
     const barn1 = within(screen.getByLabelText('Tutta Utvikler'));
     expect(barn1.getByText('Barnet, Tutta Utvikler')).toBeInTheDocument();
