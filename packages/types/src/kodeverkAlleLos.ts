@@ -6,16 +6,16 @@ import type {
   KøSortering,
 } from '@navikt/fp-kodeverk';
 
-import type { LosKodeverkType } from './kodeverkTypeLos';
-
 //Mapping mellom LosKodeverkType og enums/union-types med verdier
 type KodeverkEnumMap = {
   BehandlingType: BehandlingType;
   AndreKriterierType: AndreKriterierType;
   FagsakYtelseType: FagsakYtelseType;
-  KøSorteringing: KøSortering;
+  KøSortering: KøSortering;
   FagsakStatus: FagsakStatus;
 };
+
+export type LosKodeverkType = keyof KodeverkEnumMap;
 
 type KøSorteringKodeverk = LosKodeverkMedNavn<'KøSortering'> & {
   felttype: string;
