@@ -17,7 +17,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    behandlingVersjon: 2,
     behandlendeEnhetId: '4292',
     behandlendeEnhetNavn: 'Nav klageinstans Midt-Norge',
     behandlendeEnheter: [
