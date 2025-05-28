@@ -28,7 +28,7 @@
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-konstanter": "3.1.4",
     "@navikt/ft-plattform-komponenter": "9.1.0",
-    "@navikt/ft-ui-komponenter": "4.3.0",
+    "@navikt/ft-ui-komponenter": "4.4.0",
     "@navikt/ft-utils": "3.6.0",
     "classnames": "2.5.1",
     "react": "19.1.0",

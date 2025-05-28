@@ -23,10 +23,10 @@
   "dependencies": {
     "@navikt/ds-css": "7.21.1",
     "@navikt/ds-react": "7.21.1",
-    "@navikt/ft-form-hooks": "6.3.5",
+    "@navikt/ft-form-hooks": "6.3.8",
     "@navikt/ft-form-validators": "3.2.2",
     "@navikt/ft-plattform-komponenter": "9.1.0",
-    "@navikt/ft-ui-komponenter": "4.3.0",
+    "@navikt/ft-ui-komponenter": "4.4.0",
     "@navikt/ft-utils": "3.6.0",
     "react": "19.1.0",
     "react-hook-form": "7.56.3",
