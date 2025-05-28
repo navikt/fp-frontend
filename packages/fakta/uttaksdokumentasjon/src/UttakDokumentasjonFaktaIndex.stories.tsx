@@ -20,7 +20,7 @@ const aktivitetskravGrunnlagListe = [
     stillingsprosent: 60,
     permisjon: {
       prosent: 40,
-      type: 'UTDANNING',
+      type: AktivitetskravPermisjonType.UTDANNING,
     },
   },
   {
