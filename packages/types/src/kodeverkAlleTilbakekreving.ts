@@ -2,13 +2,12 @@ import type {
   BehandlingArsakType,
   BehandlingResultatTypeTilbakekreving,
   BehandlingType,
+  HistorikkAktor,
   SkjermlenkeTypeTilbakekreving,
   VenteArsakType,
   VergeType,
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
-
-import type { TilbakekrevingKodeverkType } from './kodeverkTypeTilbakekreving';
 
 //TODO Ein del av desse kodeverk-filene er delt mellom fpsak og tilbake. Mange av dei har ulike verdiar og bør delast opp i fleire filer
 
@@ -17,11 +16,14 @@ type KodeverkEnumMap = {
   BehandlingType: BehandlingType;
   BehandlingÅrsakType: BehandlingArsakType;
   BehandlingResultatType: BehandlingResultatTypeTilbakekreving;
+  HistorikkAktør: HistorikkAktor;
   SkjermlenkeType: SkjermlenkeTypeTilbakekreving;
   Venteårsak: VenteArsakType;
   VurderÅrsak: VurderÅrsak;
   VergeType: VergeType;
 };
+
+export type TilbakekrevingKodeverkType = keyof KodeverkEnumMap;
 
 export type AlleKodeverkTilbakekreving = {
   [K in TilbakekrevingKodeverkType]: KodeverkMedNavnTilbakekreving<

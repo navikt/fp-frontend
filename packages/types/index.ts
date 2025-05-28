@@ -58,12 +58,17 @@ export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
 export type {
   AlleKodeverk,
+  KodeverkType,
   KodeverkMedNavn,
   PeriodeResultatÅrsakKodeverk,
   GraderingAvslagÅrsakKodeverk,
 } from './src/kodeverkAlle';
-export type { AlleKodeverkTilbakekreving, KodeverkMedNavnTilbakekreving } from './src/kodeverkAlleTilbakekreving';
-export type { AlleKodeverkLos, LosKodeverkMedNavn } from './src/kodeverkAlleLos';
+export type {
+  AlleKodeverkTilbakekreving,
+  TilbakekrevingKodeverkType,
+  KodeverkMedNavnTilbakekreving,
+} from './src/kodeverkAlleTilbakekreving';
+export type { AlleKodeverkLos, LosKodeverkType, LosKodeverkMedNavn } from './src/kodeverkAlleLos';
 export type { NavAnsatt } from './src/navAnsattTsType';
 export type {
   SimuleringResultat,
@@ -184,6 +189,3 @@ export type { Beskrivelse } from './src/oppgaveTsType.tsx';
 export type { OppgaveDokument } from './src/oppgaveTsType.ts';
 export type { OneOf } from './src/oneOf';
 export type { BrevOverstyring } from './src/brevOverstyring';
-export type { KodeverkType } from './src/kodeverkType';
-export type { TilbakekrevingKodeverkType } from './src/kodeverkTypeTilbakekreving';
-export type { LosKodeverkType } from './src/kodeverkTypeLos';
