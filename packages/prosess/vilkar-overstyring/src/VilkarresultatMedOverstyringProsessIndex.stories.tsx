@@ -6,6 +6,7 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   Avslagsarsak,
+  BehandlingResultatType,
   BehandlingType,
   FagsakYtelseType,
   VilkarType,
@@ -184,8 +185,8 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        avslagsarsak: '1020',
-        type: 'OPPHØR',
+        avslagsarsak: Avslagsarsak.ÅRSAK_1020,
+        type: BehandlingResultatType.OPPHOR,
       },
     } as Behandling,
     status: VilkarUtfallType.IKKE_VURDERT,

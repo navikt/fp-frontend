@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback, useEffect, useMemo, useState } from 'react';
+import { type ReactElement, useEffect, useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
@@ -193,9 +193,9 @@ export const UttakProsessPanel = ({
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [isDirty, setIsDirty] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const toggleOverstyring = useCallback(() => {
+  const toggleOverstyring = () => {
     setErOverstyrt(forrigeVerdi => !forrigeVerdi);
-  }, []);
+  };
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<PeriodeSoker[]>();
 
@@ -261,12 +261,8 @@ export const UttakProsessPanel = ({
     return valgtPeriodeIndex !== undefined || !isDirty;
   }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
 
-  const feilmeldinger = useMemo(() => {
-    if (!isDirty || valgtPeriodeIndex !== undefined) {
-      return [];
-    }
-    return validerPerioder(perioder, stønadskonto, intl);
-  }, [perioder, stønadskonto, valgtPeriodeIndex, isDirty]);
+  const feilmeldinger =
+    !isDirty || valgtPeriodeIndex !== undefined ? [] : validerPerioder(perioder, stønadskonto, intl);
 
   const harIngenEllerLukkedeAksjonspunkt =
     aksjonspunkterForPanel.filter(ap => ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER).length === 0 ||

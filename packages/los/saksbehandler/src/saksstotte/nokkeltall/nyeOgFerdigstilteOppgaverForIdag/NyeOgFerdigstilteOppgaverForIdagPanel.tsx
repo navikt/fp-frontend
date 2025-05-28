@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
@@ -24,10 +23,7 @@ interface Props {
 export const NyeOgFerdigstilteOppgaverForIdagPanel = ({ height, nyeOgFerdigstilteOppgaver }: Props) => {
   const behandlingTyper = useLosKodeverk('BehandlingType');
 
-  const filtrerteNyeOgFerdigstilteOppgaver = useMemo(
-    () => getNyeOgFerdigstilteForIDag(nyeOgFerdigstilteOppgaver),
-    [nyeOgFerdigstilteOppgaver],
-  );
+  const filtrerteNyeOgFerdigstilteOppgaver = getNyeOgFerdigstilteForIDag(nyeOgFerdigstilteOppgaver);
 
   return (
     <VStack gap="1">

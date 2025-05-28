@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -35,17 +35,14 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
     mellomlagretFormData?.dokBehov ?? dokumentasjonVurderingBehov,
   );
 
-  const bekreft = useCallback(
-    (begrunnelse: string) => {
-      setErBekreftKnappTrykket(true);
-      submitCallback({
-        kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        vurderingBehov: dokBehov,
-        begrunnelse,
-      });
-    },
-    [dokBehov],
-  );
+  const bekreft = (begrunnelse: string) => {
+    setErBekreftKnappTrykket(true);
+    submitCallback({
+      kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+      vurderingBehov: dokBehov,
+      begrunnelse,
+    });
+  };
 
   const lagretBegrunnelse = aksjonspunkterForPanel[0]?.begrunnelse ?? '';
   const formMethods = useForm<{ begrunnelse: string }>({
@@ -63,10 +60,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const isSubmittable = useMemo(
-    () => submittable && dokBehov?.every(a => a.vurdering) && !!begrunnelse,
-    [dokBehov, begrunnelse],
-  );
+  const isSubmittable = submittable && dokBehov?.every(a => a.vurdering) && !!begrunnelse;
 
   const [isDirty, setIsDirty] = useState<boolean>(false);
 

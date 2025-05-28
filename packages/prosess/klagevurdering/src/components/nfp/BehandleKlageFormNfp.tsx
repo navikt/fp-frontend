@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -79,22 +79,23 @@ export const BehandleKlageFormNfp = ({
   const hjemmlerMedNavn = lagHjemlerMedNavn(alleKodeverk['KlageHjemmel'], lagHjemmelsKoder(alleAktuelleHjemler));
   const intl = useIntl();
   const [visSubmitModal, setVisSubmitModal] = useState<boolean>(false);
-  const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNFP), [klageVurdering]);
+
+  const defaultValues = buildInitialValues(klageVurdering.klageVurderingResultatNFP);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<KlageFormType>();
 
   const formMethods = useForm<KlageFormType>({
-    defaultValues: mellomlagretFormData ?? initialValues,
+    defaultValues: mellomlagretFormData ?? defaultValues,
   });
   const formValues = formMethods.watch();
 
-  const lukkModal = useCallback(() => {
+  const lukkModal = () => {
     setVisSubmitModal(false);
-  }, []);
+  };
 
-  const åpneModal = useCallback(() => {
+  const åpneModal = () => {
     setVisSubmitModal(true);
-  }, []);
+  };
 
   return (
     <Form

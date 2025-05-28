@@ -1,4 +1,4 @@
-import React, { type ReactElement, useMemo } from 'react';
+import React, { type ReactElement } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -101,7 +101,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
     name,
   });
 
-  const land = useMemo(() => countrySelectValues(countryCodes), [countryCodes]);
+  const land = countrySelectValues(countryCodes);
 
   return (
     <PeriodFieldArray<FormValues>

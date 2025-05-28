@@ -1,4 +1,4 @@
-import React, { type ReactElement, type ReactNode, useMemo, useState } from 'react';
+import React, { type ReactElement, type ReactNode, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import {
@@ -309,25 +309,18 @@ export const UttakTidslinje = ({
 }: TidslinjeProps) => {
   const intl = useIntl();
 
-  const radIder = useMemo(() => lagGruppeIder(uttakPerioder), [uttakPerioder]);
-  const perioder = useMemo(
-    () => formatPaneler(tilknyttetStortinget, uttakPerioder),
-    [tilknyttetStortinget, uttakPerioder],
-  );
+  const radIder = lagGruppeIder(uttakPerioder);
+  const perioder = formatPaneler(tilknyttetStortinget, uttakPerioder);
 
   const sorterteUttaksperioder = [...uttakPerioder].sort(sortByDate);
 
-  const valgtPeriode = useMemo(
-    () =>
-      selectedPeriod
-        ? {
-            fom: selectedPeriod.periode.fom,
-            tom: selectedPeriod.periode.tom,
-            id: selectedPeriod.id,
-          }
-        : undefined,
-    [selectedPeriod],
-  );
+  const valgtPeriode = selectedPeriod
+    ? {
+        fom: selectedPeriod.periode.fom,
+        tom: selectedPeriod.periode.tom,
+        id: selectedPeriod.id,
+      }
+    : undefined;
 
   const originalFomDato = dayjs(sorterteUttaksperioder[0].periode.fom);
   const originalTomDato = dayjs(sorterteUttaksperioder[sorterteUttaksperioder.length - 1].periode.tom);

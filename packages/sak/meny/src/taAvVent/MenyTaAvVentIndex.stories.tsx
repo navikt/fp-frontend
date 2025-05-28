@@ -7,7 +7,6 @@ const meta = {
   title: 'sak/sak-meny-ta-av-vent',
   component: MenyTaAvVentIndex,
   args: {
-    behandlingVersjon: 2,
     taBehandlingAvVent: action('button-click'),
     lukkModal: action('button-click'),
   },

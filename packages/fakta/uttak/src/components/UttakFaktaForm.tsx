@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -174,12 +174,14 @@ export const UttakFaktaForm = ({
   const { alleKodeverk, submitCallback, fagsak, aksjonspunkterForPanel, isReadOnly } =
     usePanelDataContext<BekreftUttaksperioderAp[]>();
 
-  const sortertePerioder = useMemo(() => {
-    const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>
-      dayjs(krav1.fom).diff(dayjs(krav2.fom)),
-    );
-    return leggTilAksjonspunktMarkering(sortertListe, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId);
-  }, [uttakKontrollerFaktaPerioder, aksjonspunkterForPanel, arbeidsgiverOpplysningerPerId]);
+  const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>
+    dayjs(krav1.fom).diff(dayjs(krav2.fom)),
+  );
+  const sortertePerioder = leggTilAksjonspunktMarkering(
+    sortertListe,
+    aksjonspunkterForPanel,
+    arbeidsgiverOpplysningerPerId,
+  );
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
     uttakPerioder: KontrollerFaktaPeriodeMedApMarkering[];
@@ -208,52 +210,47 @@ export const UttakFaktaForm = ({
   const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
     a => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK,
   );
-  const bekreft = useCallback(
-    (begrunnelse: string) => {
-      const overstyrAp = [
-        {
-          // TODO Fiks hack
-          kode: validerApKodeOgHentApEnum(AksjonspunktKode.OVERSTYR_FAKTA_UTTAK, AksjonspunktKode.OVERSTYR_FAKTA_UTTAK),
-          perioder: uttakPerioder,
-          begrunnelse,
-        },
-      ];
-
-      const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
-        kode: validerApKodeOgHentApEnum(
-          ap.definisjon,
-          AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-          AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-          AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-          AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-        ),
+  const bekreft = (begrunnelse: string) => {
+    const overstyrAp = [
+      {
+        // TODO Fiks hack
+        kode: validerApKodeOgHentApEnum(AksjonspunktKode.OVERSTYR_FAKTA_UTTAK, AksjonspunktKode.OVERSTYR_FAKTA_UTTAK),
         perioder: uttakPerioder,
         begrunnelse,
-      }));
+      },
+    ];
 
-      return submitCallback(aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp);
-    },
-    [uttakPerioder],
-  );
+    const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
+      kode: validerApKodeOgHentApEnum(
+        ap.definisjon,
+        AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+        AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+        AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+        AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+      ),
+      perioder: uttakPerioder,
+      begrunnelse,
+    }));
+
+    return submitCallback(aksjonspunkterSomSkalBekreftes.length > 0 ? aksjonspunkterSomSkalBekreftes : overstyrAp);
+  };
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
   const [isDirty, setIsDirty] = useState(false);
 
-  const feilmelding = useMemo(() => {
-    if (isDirty || formMethods.formState.isDirty) {
-      const erMor = fagsak.relasjonsRolleType === RelasjonsRolleType.MOR;
-      return validerPerioder(
-        fagsak,
-        uttakPerioder,
-        erMor,
-        aksjonspunkterForPanel,
-        ytelsefordeling.førsteUttaksdato,
-        intl,
-      );
-    }
-    return null;
-  }, [uttakPerioder, isDirty, formMethods.formState.isDirty]);
+  let feilmelding = null;
+  if (isDirty || formMethods.formState.isDirty) {
+    const erMor = fagsak.relasjonsRolleType === RelasjonsRolleType.MOR;
+    feilmelding = validerPerioder(
+      fagsak,
+      uttakPerioder,
+      erMor,
+      aksjonspunkterForPanel,
+      ytelsefordeling.førsteUttaksdato,
+      intl,
+    );
+  }
 
   const [visNyPeriode, setVisNyPeriode] = useState(false);
 
@@ -263,10 +260,7 @@ export const UttakFaktaForm = ({
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
   const harApneAksjonspunkter = aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status));
-  const aksjonspunktTekster = useMemo(
-    () => finnAksjonspunktTekster(aksjonspunkterForPanel, ytelsefordeling),
-    [aksjonspunkterForPanel, ytelsefordeling],
-  );
+  const aksjonspunktTekster = finnAksjonspunktTekster(aksjonspunkterForPanel, ytelsefordeling);
 
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 

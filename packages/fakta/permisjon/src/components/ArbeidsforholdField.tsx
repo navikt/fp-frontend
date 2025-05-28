@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
@@ -64,7 +64,7 @@ export const ArbeidsforholdField = ({
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
+  const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
 
   return (
     <ArbeidsforholdBoks key={fieldId} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>

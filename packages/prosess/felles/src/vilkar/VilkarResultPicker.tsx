@@ -1,4 +1,4 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
@@ -52,10 +52,7 @@ export const VilkarResultPicker = ({
   const { getValues, watch } = useFormContext();
   const erVilkarOk = watch('erVilkarOk');
 
-  const radioValidators = useMemo(
-    () => (validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required]),
-    [validatorsForRadioOptions],
-  );
+  const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
 
   return (
     <VStack gap="4" paddingInline="4">

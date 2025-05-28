@@ -1,4 +1,3 @@
-import { useCallback, useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, VStack } from '@navikt/ds-react';
@@ -53,10 +52,10 @@ interface Props {
 }
 
 export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false }: Props) => {
-  const fordelteDager = useMemo(() => finnAntallUkerOgDager(stønadskonto.saldo), [stønadskonto]);
-  const kontonavnTekst = useMemo(() => finnKorrektLabelForKvote(stønadskonto.stonadskontotype), [stønadskonto]);
+  const fordelteDager = finnAntallUkerOgDager(stønadskonto.saldo);
+  const kontonavnTekst = finnKorrektLabelForKvote(stønadskonto.stonadskontotype);
 
-  const velgKonto = useCallback(() => visDagerForKonto(stønadskonto.stonadskontotype), [stønadskonto]);
+  const velgKonto = () => visDagerForKonto(stønadskonto.stonadskontotype);
 
   const uker = Math.floor(stønadskonto.maxDager / 5);
 

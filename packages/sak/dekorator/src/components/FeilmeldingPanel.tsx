@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
@@ -28,27 +28,21 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
   const [erModalÅpen, setErModalÅpen] = useState(false);
   const [valgtFeilmeldingIndex, setValgtFeilmeldingIndex] = useState<number | undefined>(undefined);
 
-  const toggleModalOnClick = useCallback(
-    (event: React.MouseEvent | React.KeyboardEvent, index: number): void => {
-      setErModalÅpen(!erModalÅpen);
-      setValgtFeilmeldingIndex(index);
-      if (event) {
-        event.preventDefault();
-      }
-    },
-    [erModalÅpen],
-  );
+  const toggleModalOnClick = (event: React.MouseEvent | React.KeyboardEvent, index: number): void => {
+    setErModalÅpen(!erModalÅpen);
+    setValgtFeilmeldingIndex(index);
+    if (event) {
+      event.preventDefault();
+    }
+  };
 
-  const toggleModalOnKeyDown = useCallback(
-    (event: React.KeyboardEvent, index: number): void => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        toggleModalOnClick(event, index);
-      } else {
-        event.preventDefault();
-      }
-    },
-    [toggleModalOnClick],
-  );
+  const toggleModalOnKeyDown = (event: React.KeyboardEvent, index: number): void => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      toggleModalOnClick(event, index);
+    } else {
+      event.preventDefault();
+    }
+  };
 
   if (feilmeldinger.length === 0) {
     return null;

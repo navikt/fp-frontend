@@ -3,6 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
+import { VergeType } from '../../../../../kodeverk/src/vergeType';
 import { MenyVergeIndex } from './MenyVergeIndex';
 
 const meta = {
@@ -30,7 +31,7 @@ export const FjerneVerge: Story = {
   args: {
     type: 'FJERN',
     verge: {
-      vergeType: 'ADVOKAT',
+      vergeType: VergeType.ADVOKAT,
       navn: 'Ola Nordmann',
       organisasjonsnummer: '123456789',
       gyldigFom: '2025-01-01',

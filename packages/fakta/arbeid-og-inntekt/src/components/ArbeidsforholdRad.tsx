@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
@@ -75,10 +74,7 @@ export const ArbeidsforholdRad = ({
   const harKunInntektsmeldingOgIkkeÅrsak =
     arbeidsforholdForRad.length === 0 && inntektsmeldingerForRad.length > 0 && !årsak;
 
-  const periode = useMemo(
-    () => finnPeriode(arbeidsforholdForRad, avklaring),
-    [erManueltOpprettet, arbeidsforholdForRad, avklaring],
-  );
+  const periode = finnPeriode(arbeidsforholdForRad, avklaring);
 
   return (
     <Table.ExpandableRow

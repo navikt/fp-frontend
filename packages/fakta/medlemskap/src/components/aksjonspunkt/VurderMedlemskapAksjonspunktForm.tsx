@@ -1,4 +1,4 @@
-import { type PropsWithChildren, useCallback, useState } from 'react';
+import { type PropsWithChildren, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -67,21 +67,18 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
   const erForutgåendeAksjonspunkt = aksjonspunkt.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR;
 
-  const bekreft = useCallback(
-    ({ vurdering, avslagskode, medlemFom, opphørFom, begrunnelse }: VurderMedlemskapFormValues) => {
-      setSubmitting(true);
-      return submitCallback({
-        kode: erForutgåendeAksjonspunkt
-          ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
-          : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-        begrunnelse,
-        avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
-        opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
-        medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
-      });
-    },
-    [],
-  );
+  const bekreft = ({ vurdering, avslagskode, medlemFom, opphørFom, begrunnelse }: VurderMedlemskapFormValues) => {
+    setSubmitting(true);
+    return submitCallback({
+      kode: erForutgåendeAksjonspunkt
+        ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+        : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+      begrunnelse,
+      avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
+      opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
+      medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
+    });
+  };
   const avslagsarsaker = alleKodeverk['Avslagsårsak'][
     erForutgåendeAksjonspunkt ? VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE : VilkarType.MEDLEMSKAPSVILKARET
   ].sort((k1, k2) => k1.navn.localeCompare(k2.navn));

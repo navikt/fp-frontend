@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -124,10 +124,7 @@ export const UttakFaktaDetailForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const defaultValues = useMemo(
-    () => (valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined),
-    [valgtPeriode, arbeidsgiverOpplysningerPerId],
-  );
+  const defaultValues = valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues,

@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
@@ -11,23 +10,20 @@ const intl = createIntl(messages);
 export const getMenytekst = (): string => intl.formatMessage({ id: 'MenyTaAvVentIndex.ResumeBehandling' });
 
 interface Props {
-  behandlingVersjon: number;
   taBehandlingAvVent: () => void;
   lukkModal: () => void;
 }
 
-export const MenyTaAvVentIndex = ({ behandlingVersjon, taBehandlingAvVent, lukkModal }: Props) => {
-  const submit = useCallback(() => {
-    taBehandlingAvVent();
-    lukkModal();
-  }, [behandlingVersjon]);
-
+export const MenyTaAvVentIndex = ({ taBehandlingAvVent, lukkModal }: Props) => {
   return (
     <RawIntlProvider value={intl}>
       <OkAvbrytModal
         text={intl.formatMessage({ id: 'MenyTaAvVentIndex.TaAvVent' })}
         showModal
-        submit={submit}
+        submit={() => {
+          taBehandlingAvVent();
+          lukkModal();
+        }}
         cancel={lukkModal}
       />
     </RawIntlProvider>

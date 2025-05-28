@@ -1,4 +1,4 @@
-import { type ReactNode, useCallback, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -60,25 +60,22 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
 
   const { alleKodeverk } = usePanelDataContext();
 
-  const lagNyPeriode = useCallback(
-    (currentIndex: number, dato: string) => {
-      const currentPeriode = fields[currentIndex];
+  const lagNyPeriode = (currentIndex: number, dato: string) => {
+    const currentPeriode = fields[currentIndex];
 
-      update(currentIndex, {
-        ...currentPeriode,
-        tom: dato,
-        vurdering: undefined,
-      });
-      insert(currentIndex + 1, {
-        ...currentPeriode,
-        fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
-        tom: currentPeriode.tom,
-        vurdering: undefined,
-      });
-      setValgtPeriodeIndex(undefined);
-    },
-    [fields],
-  );
+    update(currentIndex, {
+      ...currentPeriode,
+      tom: dato,
+      vurdering: undefined,
+    });
+    insert(currentIndex + 1, {
+      ...currentPeriode,
+      fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
+      tom: currentPeriode.tom,
+      vurdering: undefined,
+    });
+    setValgtPeriodeIndex(undefined);
+  };
 
   const slåSammenMedPeriodeOver = (currentIndex: number) => {
     const previousIndex = currentIndex - 1;

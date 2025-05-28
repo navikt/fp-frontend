@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
@@ -30,10 +30,7 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
   const [visAlleMåneder, setVisAlleMånader] = useState(false);
 
   const { inntektsposter, arbeidsforholdForRad } = radData;
-  const sorterteInntektsposter = useMemo(
-    () => behandleInntektsposter(skjæringstidspunkt, inntektsposter),
-    [inntektsposter],
-  );
+  const sorterteInntektsposter = behandleInntektsposter(skjæringstidspunkt, inntektsposter);
 
   const harEttArbeidsforhold = arbeidsforholdForRad.length === 1;
 
