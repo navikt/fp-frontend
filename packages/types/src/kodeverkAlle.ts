@@ -59,8 +59,6 @@ import {
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
-import type { KodeverkType } from './kodeverkType';
-
 //Mapping mellom KodeverkType og enums/union-types med verdier
 type KodeverkEnumMap = {
   AdresseType: AdresseType;
@@ -122,6 +120,8 @@ type KodeverkEnumMap = {
   VirksomhetType: NaringsvirksomhetType;
   VurderÅrsak: VurderÅrsak;
 };
+
+export type KodeverkType = keyof KodeverkEnumMap;
 
 type AvslagsårsakKodeverk = Record<VilkarType, KodeverkMedNavn<'Avslagsårsak'>[]>;
 export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {

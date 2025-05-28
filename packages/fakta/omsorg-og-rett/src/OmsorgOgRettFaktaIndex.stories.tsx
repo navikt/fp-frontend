@@ -7,6 +7,7 @@ import {
   AdresseType,
   AksjonspunktKode,
   AksjonspunktStatus,
+  Landkode,
   RelasjonsRolleType,
   SivilstandType,
 } from '@navikt/fp-kodeverk';
@@ -76,7 +77,7 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
   søknad: {
     søkerHarAleneomsorg: Verdi.NEI,
     annenpartIdent: 'ArubaFnr123',
-    annenpartBostedsland: 'ABW',
+    annenpartBostedsland: Landkode.ARUBA,
     annenpartRettighet: {
       harRettNorge: Verdi.JA,
       harOppholdEØS: Verdi.IKKE_RELEVANT,
