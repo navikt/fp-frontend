@@ -6,7 +6,6 @@ import { http, HttpResponse } from 'msw';
 
 import {
   AndreKriterierType,
-  BehandlingStatus,
   BehandlingType,
   FagsakYtelseType,
   KøSortering,
@@ -58,7 +57,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Sara Sahara',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2024-11-01',
     behandlingsfrist: '2024-11-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -76,7 +74,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Petter Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2024-01-01',
     behandlingsfrist: '2024-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -94,7 +91,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Helga Tester',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2023-04-01',
     behandlingsfrist: '2023-04-05',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -122,7 +118,6 @@ const RESERVERTE_OPPGAVER = [
     navn: 'Espen Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -206,14 +201,12 @@ const BEHANDLEDE_OPPGAVER = [
     personnummer: '343453534',
     navn: 'Gaute Johansen',
     saksnummer: '54343',
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   } as Oppgave,
   {
     id: 2,
     personnummer: '334342323',
     navn: 'Olga Mortensen',
     saksnummer: '13232',
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   } as Oppgave,
 ];
 

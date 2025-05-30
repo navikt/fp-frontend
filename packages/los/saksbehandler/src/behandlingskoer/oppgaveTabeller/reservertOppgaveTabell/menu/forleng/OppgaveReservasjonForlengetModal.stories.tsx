@@ -1,7 +1,7 @@
 import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveReservasjonForlengetModal } from './OppgaveReservasjonForlengetModal';
@@ -38,7 +38,6 @@ export const Default: Story = {
       navn: 'Espen Utvikler',
       system: 'SAK',
       behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-      behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
       opprettetTidspunkt: '2019-01-01',
       behandlingsfrist: '2019-01-01',
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,

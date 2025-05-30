@@ -6,7 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { AndreKriterierType, BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
@@ -35,7 +35,6 @@ const RESERVERTE_OPPGAVER = [
     navn: 'Helge Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.KLAGE,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -54,7 +53,6 @@ const RESERVERTE_OPPGAVER = [
     navn: 'Bjarne Bjærke',
     system: 'SAK',
     behandlingstype: BehandlingType.KLAGE,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2023-01-01',
     behandlingsfrist: '2023-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -73,7 +71,6 @@ const RESERVERTE_OPPGAVER = [
     navn: 'Borgil Bø',
     system: 'SAK',
     behandlingstype: BehandlingType.REVURDERING,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2024-01-01',
     behandlingsfrist: '2024-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
