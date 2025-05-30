@@ -9,12 +9,7 @@ import {
   ArbeidsforholdKomplettVurderingType,
   PermisjonsbeskrivelseType,
 } from '@navikt/fp-kodeverk';
-import {
-  type PanelDataArgs,
-  withMellomlagretFormData,
-  withPanelData,
-  withThemeDecorator,
-} from '@navikt/fp-storybook-utils';
+import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak, type ArbeidOgInntektsmelding } from '@navikt/fp-types';
 
 import { ArbeidOgInntektFaktaIndex } from './ArbeidOgInntektFaktaIndex';
@@ -35,7 +30,7 @@ const fellesInntektsmeldingFelter = {
 const meta = {
   title: 'fakta/fakta-arbeid-og-inntekter',
   component: ArbeidOgInntektFaktaIndex,
-  decorators: [withMellomlagretFormData, withPanelData, withThemeDecorator],
+  decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId: {},
     lagreVurdering: action('onLagreVurdering') as () => Promise<void>,
