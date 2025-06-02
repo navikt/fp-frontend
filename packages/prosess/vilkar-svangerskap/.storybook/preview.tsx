@@ -1,1 +1,1 @@
-import '../../../../.storybook/preview-storybook';
+export { decorators, globalTypes } from '../../../../.storybook/preview-storybook';
