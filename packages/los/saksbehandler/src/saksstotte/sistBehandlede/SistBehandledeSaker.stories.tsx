@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';

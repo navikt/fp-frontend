@@ -1,5 +1,5 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-los-felles';

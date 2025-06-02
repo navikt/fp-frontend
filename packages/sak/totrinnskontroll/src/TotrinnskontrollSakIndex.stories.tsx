@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import type { DecoratorFunction } from '@storybook/types';
+import { action } from 'storybook/actions';
 
 import {
   BehandlingResultatType,
