@@ -3,6 +3,7 @@ export { getIntlDecorator } from './decorators/withIntl';
 export { withQueryClient } from './decorators/withQueryClient';
 export { withMellomlagretFormData } from './decorators/withMellomlagretFormData';
 export { withPanelData } from './decorators/withPanelData';
+export { withThemeDecorator } from './decorators/withThemeDecorator';
 export type { PanelDataArgs } from './decorators/withPanelData';
 export { withPanelOverstyring } from './decorators/withPanelOverstyring';
 export type { PanelOverstyringContextArgs } from './decorators/withPanelOverstyring';
