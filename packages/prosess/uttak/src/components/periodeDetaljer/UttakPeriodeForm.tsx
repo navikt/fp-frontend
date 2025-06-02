@@ -1,4 +1,4 @@
-import { type ReactElement, useEffect } from 'react';
+import { type ReactElement, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -304,10 +304,17 @@ export const UttakPeriodeForm = ({
 
   const periodeResultatårsakKoder = alleKodeverk['PeriodeResultatÅrsak'];
 
-  const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
-  const sorterteAktiviteter = [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
+  // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
+  const sorterteAktiviteter = useMemo(() => {
+    const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
+    return [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
+  }, [valgtPeriode.aktiviteter]);
 
-  const defaultValues = byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder);
+  // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
+  const defaultValues = useMemo(
+    () => byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder),
+    [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId],
+  );
 
   const formMethods = useForm<UttakAktivitetType>({
     defaultValues,
