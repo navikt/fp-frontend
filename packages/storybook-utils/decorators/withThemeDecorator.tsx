@@ -9,9 +9,13 @@ export const withThemeDecorator: DecoratorFunction<ReactRenderer> = (Story, cont
 
   useEffect(() => {
     // Dette kan sikkert gjerast på ein bedre måte
-    document
-      .getElementsByClassName('sb-show-main')[0]
-      .setAttribute('style', theme === 'dark' ? 'background: #0e151f !important' : 'background: #fff !important');
+    const elements = document.getElementsByClassName('sb-show-main');
+    if (elements.length > 0) {
+      elements[0].setAttribute(
+        'style',
+        theme === 'dark' ? 'background: #0e151f !important' : 'background: #fff !important',
+      );
+    }
   }, [theme]);
 
   return (
