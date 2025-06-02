@@ -1,0 +1,1 @@
+import{j as o}from"./jsx-runtime-D_zvdyIk.js";import{j as n,k as a,l}from"./withThemeDecorator-zwF_VyQA.js";const m=t=>{const r=n({locale:"nb-NO",messages:t},l());return e=>o.jsx(a,{value:r,children:e()})};export{m as g};
