@@ -22,7 +22,6 @@ export type Oppgave = Readonly<{
   navn: string;
   system: string;
   behandlingstype: BehandlingType;
-  behandlingStatus: string;
   opprettetTidspunkt: string;
   behandlingsfrist: string;
   fagsakYtelseType: string;

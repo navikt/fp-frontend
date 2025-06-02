@@ -2,7 +2,7 @@ import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../../../data/fplosSaksbehandlerApi';
@@ -58,7 +58,6 @@ export const Default: Story = {
       navn: 'Espen Utvikler',
       system: 'SAK',
       behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-      behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
       opprettetTidspunkt: '2019-01-01',
       behandlingsfrist: '2019-01-01',
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
