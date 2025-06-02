@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
 import { alleKodeverkLos, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';

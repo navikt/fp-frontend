@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 
 import { Form } from '@navikt/ft-form-hooks';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { withRouter } from '@navikt/fp-storybook-utils';
 

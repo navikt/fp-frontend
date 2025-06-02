@@ -1,5 +1,5 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';

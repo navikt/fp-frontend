@@ -1,10 +1,10 @@
 import { type ComponentProps } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
 import { AndreKriterierType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
