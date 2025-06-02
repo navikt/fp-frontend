@@ -1,0 +1,6 @@
+import"./withThemeDecorator-BZQjU9lx.js";import{g as s}from"./withIntl-tQ0xi-BU.js";import"./jsx-runtime-D_zvdyIk.js";import{B as a}from"./BehandlingHenlagtPanel-BtbhztXv.js";import{m}from"./nb_NO-D39UuuyA.js";import"./index-mMUbb89k.js";import"./_commonjsHelpers-Cpj98o6Y.js";import"./v4-CtRu48qb.js";import"./entry-preview-Cn7A1Fvq.js";import"./iframe-DqcOPUTh.js";import"./chunk-XP5HYGXS-BpfKkqn7.js";import"./entry-preview-docs-DtNjo1hO.js";import"./index-CXQShRbs.js";import"./vilkarUtfallType-vN0hVpa7.js";import"./index.es-C4Lecm0y.js";import"./VStack-B03ELhmT.js";import"./index-D4MMZV7Z.js";import"./index-0CCRSEf1.js";import"./CheckmarkCircleFill-eGxMWVD6.js";import"./ExclamationmarkTriangleFill-D5UgUWWL.js";import"./bind-oYjWB_aQ.js";import"./message-B4U_BNQ1.js";const n=s(m),E={title:"behandling/prosess/BehandlingHenlagtPanel",component:a,decorators:[n]},t={args:{valgtProsessSteg:"henlagt",settProsessPanelMenyData:()=>{}}};var r,o,e;t.parameters={...t.parameters,docs:{...(r=t.parameters)==null?void 0:r.docs,source:{originalSource:`{
+  args: {
+    valgtProsessSteg: 'henlagt',
+    settProsessPanelMenyData: () => undefined
+  }
+}`,...(e=(o=t.parameters)==null?void 0:o.docs)==null?void 0:e.source}}};const O=["Default"];export{t as Default,O as __namedExportsOrder,E as default};
