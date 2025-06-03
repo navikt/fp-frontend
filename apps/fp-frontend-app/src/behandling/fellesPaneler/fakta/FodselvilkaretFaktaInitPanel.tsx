@@ -1,4 +1,4 @@
-import { use } from 'react';
+import { use, useEffect } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -27,8 +27,12 @@ export const FodselvilkaretFaktaInitPanel = () => {
   const api = useBehandlingApi(behandling);
 
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
-  const { data: søknad } = useQuery(api.søknadOptions(behandling));
-
+  const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling, skalPanelVisesIMeny));
+  // const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  useEffect(() => {
+    console.log('faktaFødsel: ', faktafødsel);
+    console.log('familiehendelse: ', familiehendelse);
+  }, [faktafødsel]);
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
@@ -36,12 +40,8 @@ export const FodselvilkaretFaktaInitPanel = () => {
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {familiehendelse && søknad ? (
-        <FodselFaktaIndex
-          søknad={søknad}
-          familiehendelse={familiehendelse}
-          submittable={standardPanelProps.submittable}
-        />
+      {faktafødsel ? (
+        <FodselFaktaIndex fødsel={faktafødsel} submittable={standardPanelProps.submittable} />
       ) : (
         <LoadingPanel />
       )}

@@ -1,34 +1,35 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, VStack } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { dateFormat } from '@navikt/ft-utils';
+import { BodyShort, Tag, VStack } from '@navikt/ds-react';
+import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { ValueLabel } from '@navikt/fp-fakta-felles';
-import type { Soknad } from '@navikt/fp-types';
+import type { AvklartBarn, FødselSøknad } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
-  søknad: Soknad;
+  søknad: FødselSøknad;
 }
 
 export const FaktaFødselFraSøknad = ({ søknad }: Props) => {
+  const intl = useIntl();
+  const tittel = intl.formatMessage({ id: 'FodselsammenligningPanel.OpplysningerSoknad' });
   return (
-    <FaktaKort label={<FormattedMessage id="FodselsammenligningPanel.OpplysningerSoknad" />}>
+    <FaktaKort label={tittel}>
       <VStack gap="4">
         {søknad.termindato && (
           <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Termindato" />}>
-            {dateFormat(søknad.termindato)}
+            <DateLabel dateString={søknad.termindato} />
           </ValueLabel>
         )}
         {søknad.utstedtdato && (
           <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.UstedtDato" />}>
-            {dateFormat(søknad.utstedtdato)}
+            <DateLabel dateString={søknad.utstedtdato} />
           </ValueLabel>
         )}
-        {søknad.fodselsdatoer && (
+        {søknad.barn.length > 0 && (
           <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />}>
-            <Fødselsdatoer fødseldatoer={søknad.fodselsdatoer} />
+            <Fødselsdatoer barn={søknad.barn} />
           </ValueLabel>
         )}
         {søknad.antallBarn && (
@@ -41,18 +42,22 @@ export const FaktaFødselFraSøknad = ({ søknad }: Props) => {
   );
 };
 
-const Fødselsdatoer = ({ fødseldatoer }: { fødseldatoer: Record<number, string> }) => {
-  const datoer = Object.values(fødseldatoer);
+const Fødselsdatoer = ({ barn }: { barn: AvklartBarn[] }) => {
+  const filtrertBarn = barn.reduce<AvklartBarn[]>((acc, curr) => {
+    return acc.some(e => e.fodselsdato == curr.fodselsdato && e.dodsdato == curr.dodsdato) ? acc : acc.concat(curr);
+  }, []);
 
-  return datoer.length === 1 ? (
-    <BodyShort>
-      <DateLabel dateString={datoer[0]} />
+  return filtrertBarn.map(({ fodselsdato, dodsdato }) => (
+    <BodyShort key={fodselsdato}>
+      {dodsdato ? (
+        <>
+          <PeriodLabel dateStringFom={fodselsdato} dateStringTom={dodsdato} />
+          <Tag variant="info">Død</Tag>
+        </>
+      ) : (
+        <DateLabel dateString={fodselsdato} />
+      )}
+      {}
     </BodyShort>
-  ) : (
-    datoer.map(([key, fd]) => (
-      <BodyShort key={key}>
-        <DateLabel dateString={fd} />
-      </BodyShort>
-    ))
-  );
+  ));
 };

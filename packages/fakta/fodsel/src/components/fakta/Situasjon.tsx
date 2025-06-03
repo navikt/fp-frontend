@@ -3,39 +3,60 @@ import { FormattedMessage } from 'react-intl';
 import { HStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { FaktaBox, FaktaKilde } from '@navikt/fp-fakta-felles';
-import type { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import { FaktaBox } from '@navikt/fp-fakta-felles';
+import type { FødselGjeldende } from '@navikt/fp-types';
 
 interface Props {
-  familiehendelse: FamilieHendelseSamling;
-  søknad: Soknad;
+  gjeldende: FødselGjeldende;
 }
 
-// TODO(siri): legg inn kilde når den kommer fra backend
-export const Situasjon = ({ familiehendelse }: Props) => {
-  const { avklartBarn, termindato } = familiehendelse.gjeldende || {};
+export const Situasjon = ({ gjeldende }: Props) => {
+  console.log('Situasjon', gjeldende);
+  const { barn, termindato, utstedtdato } = gjeldende;
 
+  const erLikeBarn =
+    barn.length === 0 ||
+    barn.every(
+      b =>
+        b.kilde === barn[0].kilde &&
+        b.barn.fodselsdato === barn[0].barn.fodselsdato &&
+        b.barn.dodsdato === barn[0].barn.dodsdato,
+    );
   return (
     <HStack gap="4">
-      {termindato && (
+      {termindato.termindato && (
         <FaktaBox
-          kilde={FaktaKilde.INGEN}
+          kilde={termindato.kilde}
           label={<FormattedMessage id="FodselsammenligningPanel.Termindato" />}
-          value={dateFormat(termindato)}
+          value={dateFormat(termindato.termindato)}
         />
       )}
-      {avklartBarn && (
+      {utstedtdato.utstedtdato && (
         <FaktaBox
-          kilde={FaktaKilde.INGEN}
-          value={avklartBarn.map(barn => dateFormat(barn.fodselsdato)).join(', ')}
-          label={<FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />}
+          kilde={utstedtdato.kilde}
+          label={<FormattedMessage id="FodselsammenligningPanel.Utstedtdato" />}
+          value={dateFormat(utstedtdato.utstedtdato)}
         />
       )}
-      {avklartBarn && (
+      {barn.map((b, index) => (
         <FaktaBox
-          kilde={FaktaKilde.INGEN}
+          key={b.barn.fodselsdato}
+          kilde={b.kilde}
+          value={dateFormat(b.barn.fodselsdato)}
+          label={
+            erLikeBarn ? (
+              <FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />
+            ) : (
+              <FormattedMessage id="FodselsammenligningPanel.FodselsdatoMedNr" values={{ nummer: index + 1 }} />
+            )
+          }
+        />
+      ))}
+      {erLikeBarn && barn.length > 0 && (
+        <FaktaBox
+          kilde={barn[0].kilde}
           label={<FormattedMessage id="FodselsammenligningPanel.AntallBarn" />}
-          value={avklartBarn.length.toString()}
+          value={barn.length.toString()}
         />
       )}
     </HStack>

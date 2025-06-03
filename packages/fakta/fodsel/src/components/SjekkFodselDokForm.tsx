@@ -5,9 +5,9 @@ import { VStack } from '@navikt/ds-react';
 import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, AvklartBarn, Fødsel } from '@navikt/fp-types';
 import type { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -15,17 +15,13 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 import { AvklartBarnFieldArray } from './AvklartBarnFieldArray';
 
 export type FormValues = {
-  fodselsdato?: string;
   dokumentasjonForeligger?: boolean;
   brukAntallBarnITps?: boolean;
   avklartBarn?: AvklartBarn[];
-  antallBarnFodt?: number;
 } & FaktaBegrunnelseFormValues;
 
 interface Props {
-  gjeldendeFamiliehendelse: FamilieHendelse;
-  registerFamiliehendelse: FamilieHendelse | null;
-  søknad: Soknad;
+  fødsel: Fødsel;
   submittable: boolean;
   aksjonspunkt: Aksjonspunkt;
 }
@@ -35,22 +31,16 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
  */
-export const SjekkFodselDokForm = ({
-  submittable,
-  søknad,
-  aksjonspunkt,
-  registerFamiliehendelse,
-  gjeldendeFamiliehendelse,
-}: Props) => {
+export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFodselAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const dokumentasjonForeliggerIsEdited = isFieldEdited(søknad, gjeldendeFamiliehendelse).dokumentasjonForeligger;
+  const dokumentasjonForeliggerIsEdited = fødsel.gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER');
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(søknad, gjeldendeFamiliehendelse, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(fødsel, aksjonspunkt),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -58,18 +48,18 @@ export const SjekkFodselDokForm = ({
   return (
     <FaktaKort
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]}
-      label={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
+      label={intl.formatMessage({ id: 'SjekkFodselDokForm.Tittel' })}
     >
       <Form
         formMethods={formMethods}
-        onSubmit={values => submitCallback(transformValues(values, registerFamiliehendelse?.avklartBarn))}
+        onSubmit={values => submitCallback(transformValues(values, fødsel.register.barn))}
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="2">
           <RadioGroupPanel
             name="dokumentasjonForeligger"
             isEdited={dokumentasjonForeliggerIsEdited}
-            label={intl.formatMessage({ id: 'SjekkFodselDokForm.DokumentasjonAvFodsel' })}
+            label={intl.formatMessage({ id: 'SjekkFodselDokForm.FyllInnDokumenterteOpplysninger' })}
             validate={[required]}
             isReadOnly={isReadOnly}
             isHorizontal
@@ -92,7 +82,7 @@ export const SjekkFodselDokForm = ({
             isSubmittable={submittable}
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
-            hasVurderingText
+            size="medium"
           />
 
           {aksjonspunkt && !isReadOnly && (
@@ -128,20 +118,13 @@ const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): SjekkManglendeFodselA
     dodsdato: ab.dodsdato === '' || ab.dodsdato === null ? undefined : ab.dodsdato,
   }));
 
-const buildInitialValues = (
-  soknad: Soknad,
-  familiehendelse: FamilieHendelse,
-  aksjonspunkt: Aksjonspunkt,
-): FormValues => ({
-  dokumentasjonForeligger:
-    familiehendelse.dokumentasjonForeligger === null || familiehendelse.dokumentasjonForeligger === undefined
-      ? undefined
-      : familiehendelse.dokumentasjonForeligger,
-  brukAntallBarnITps: familiehendelse.brukAntallBarnFraTps !== null ? familiehendelse.brukAntallBarnFraTps : undefined,
+const buildInitialValues = (fødsel: Fødsel, aksjonspunkt: Aksjonspunkt): FormValues => ({
+  dokumentasjonForeligger: fødsel.gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER') ?? undefined,
+  brukAntallBarnITps: !fødsel.gjeldende.barn.some(b => b.kilde !== 'FOLKEREGISTER'),
   avklartBarn:
-    familiehendelse.avklartBarn && familiehendelse.avklartBarn.length > 0
-      ? familiehendelse.avklartBarn
-      : lagBarn(soknad.antallBarn || 0),
+    fødsel.gjeldende.barn.length > 0
+      ? fødsel.gjeldende.barn.map(({ barn }) => barn)
+      : lagBarn(fødsel.gjeldende.antallBarn || 0),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 

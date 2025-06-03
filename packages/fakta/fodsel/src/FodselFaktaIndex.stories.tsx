@@ -2,13 +2,13 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Fødsel } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
-const familieHendelse = {
+/* const familieHendelse = {
   register: {
     avklartBarn: [
       {
@@ -40,7 +40,7 @@ const søknad = {
   antallBarn: 1,
   soknadType: SoknadType.FODSEL,
 } as Soknad;
-
+*/
 const defaultAksjonspunkter: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.TERMINBEKREFTELSE,
@@ -54,14 +54,82 @@ const merknaderFraBeslutter = {
   notAccepted: false,
 };
 
+const testFødsel: Fødsel = {
+  søknad: {
+    barn: [
+      { fodselsdato: '2023-10-01', dodsdato: null },
+      { fodselsdato: '2023-10-02', dodsdato: null },
+    ],
+    termindato: '2023-10-15',
+    utstedtdato: '2023-10-10',
+    antallBarn: 2,
+  },
+  register: {
+    barn: [{ fodselsdato: '2023-10-01', dodsdato: null }],
+  },
+  gjeldende: {
+    termindato: {
+      kilde: 'SØKNAD',
+      termindato: '2023-10-15',
+      kanOverstyres: true,
+    },
+    utstedtdato: {
+      kilde: 'FOLKEREGISTER',
+      utstedtdato: '2023-10-10',
+    },
+    antallBarn: 2,
+    barn: [
+      {
+        kilde: 'SAKSBEHANDLER',
+        barn: { fodselsdato: '2023-10-01', dodsdato: null },
+        kanOverstyres: false,
+      },
+    ],
+  },
+};
+
+const testFødsel2: Fødsel = {
+  søknad: {
+    barn: [{ fodselsdato: '2019-01-10', dodsdato: null }],
+    termindato: '2019-01-01',
+    utstedtdato: '2019-01-02',
+    antallBarn: 1,
+  },
+  register: {
+    barn: [{ fodselsdato: '2019-01-10', dodsdato: null }],
+  },
+  gjeldende: {
+    barn: [
+      {
+        kilde: 'FOLKEREGISTER',
+        barn: {
+          fodselsdato: '2019-01-01',
+          dodsdato: null,
+        },
+        kanOverstyres: false,
+      },
+    ],
+    termindato: {
+      kilde: 'SØKNAD',
+      termindato: '2019-01-01',
+      kanOverstyres: true,
+    },
+    utstedtdato: { kilde: 'SAKSBEHANDLER', utstedtdato: '2019-01-01' },
+    antallBarn: 1,
+  },
+};
+/* vedtaksDatoSomSvangerskapsuke: 43,
+    erOverstyrt: false,
+    morForSykVedFodsel: true,
+    dokumentasjonForeligger: true,
+    brukAntallBarnFraTps: true,*/
 const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     submittable: true,
-    søknad,
-    familiehendelse: familieHendelse,
+    fødsel: testFødsel,
   },
   render: args => <FodselFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselFaktaIndex>>;
@@ -80,6 +148,7 @@ export const AksjonspunktTerminbekreftelse: Story = {
 
 export const AksjonspunktSjekkManglendeFødsel: Story = {
   args: {
+    fødsel: testFødsel2,
     aksjonspunkterForPanel: defaultAksjonspunkter.map(a => ({
       ...a,
       definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,

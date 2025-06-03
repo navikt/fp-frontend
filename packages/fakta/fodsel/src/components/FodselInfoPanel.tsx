@@ -4,7 +4,7 @@ import { HGrid, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Fødsel } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { FaktaFødselFraFReg } from './fakta/FaktaFødselFraFReg';
@@ -16,9 +16,8 @@ import { TermindatoFaktaForm } from './TermindatoFaktaForm';
 const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktKode;
 
 interface Props {
-  familiehendelse: FamilieHendelseSamling;
+  fødsel: Fødsel;
   submittable: boolean;
-  søknad: Soknad;
 }
 
 /**
@@ -26,7 +25,7 @@ interface Props {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
-export const FodselInfoPanel = ({ submittable, søknad, familiehendelse }: Props) => {
+export const FodselInfoPanel = ({ submittable, fødsel }: Props) => {
   const { aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === TERMINBEKREFTELSE);
@@ -43,29 +42,18 @@ export const FodselInfoPanel = ({ submittable, søknad, familiehendelse }: Props
         </AksjonspunktHelpTextHTML>
       )}
 
-      <Situasjon familiehendelse={familiehendelse} søknad={søknad} />
+      <Situasjon gjeldende={fødsel.gjeldende} />
       <HGrid columns={2} gap="4">
-        <FaktaFødselFraSøknad søknad={søknad} />
-        <FaktaFødselFraFReg registerFamiliehendelse={familiehendelse.register ?? undefined} />
+        <FaktaFødselFraSøknad søknad={fødsel.søknad} />
+        <FaktaFødselFraFReg register={fødsel.register} />
       </HGrid>
 
       {terminbekreftelseAp && (
-        <TermindatoFaktaForm
-          submittable={submittable}
-          søknad={søknad}
-          gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-          aksjonspunkt={terminbekreftelseAp}
-        />
+        <TermindatoFaktaForm submittable={submittable} fødsel={fødsel} aksjonspunkt={terminbekreftelseAp} />
       )}
 
       {manglendeFødselAp && (
-        <SjekkFodselDokForm
-          submittable={submittable}
-          søknad={søknad}
-          gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-          registerFamiliehendelse={familiehendelse.register}
-          aksjonspunkt={manglendeFødselAp}
-        />
+        <SjekkFodselDokForm submittable={submittable} fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />
       )}
     </VStack>
   );

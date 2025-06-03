@@ -6,9 +6,9 @@ import { Datepicker, Form, InputField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Fødsel, FødselGjeldende, FødselSøknad } from '@navikt/fp-types';
 import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -30,10 +30,9 @@ export type FormValues = {
 } & FaktaBegrunnelseFormValues;
 
 interface Props {
-  søknad: Soknad;
-  gjeldendeFamiliehendelse: FamilieHendelse;
   submittable: boolean;
   aksjonspunkt: Aksjonspunkt;
+  fødsel: Fødsel;
 }
 
 /**
@@ -41,16 +40,16 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av termindato (Fødselsvilkåret).
  */
-export const TermindatoFaktaForm = ({ søknad, gjeldendeFamiliehendelse, submittable, aksjonspunkt }: Props) => {
+export const TermindatoFaktaForm = ({ fødsel: { gjeldende, søknad }, submittable, aksjonspunkt }: Props) => {
   const intl = useIntl();
-  const editedStatus = isFieldEdited(søknad, gjeldendeFamiliehendelse);
+  const editedStatus = isFieldEdited(søknad, gjeldende);
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<BekreftTerminbekreftelseAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(søknad, gjeldendeFamiliehendelse, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(søknad, gjeldende, aksjonspunkt),
   });
 
   const termindato = formMethods.watch('termindato');
@@ -61,7 +60,7 @@ export const TermindatoFaktaForm = ({ søknad, gjeldendeFamiliehendelse, submitt
 
   return (
     <FaktaKort
-      label={intl.formatMessage({ id: 'TermindatoFaktaForm.ApplicationInformation' })}
+      label={intl.formatMessage({ id: 'TermindatoFaktaForm.Tittel' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.TERMINBEKREFTELSE]}
     >
       <Form
@@ -103,7 +102,6 @@ export const TermindatoFaktaForm = ({ søknad, gjeldendeFamiliehendelse, submitt
             isSubmittable={submittable}
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
-            hasVurderingText
           />
           {isForTidligTerminbekreftelse && (
             <Alert variant="warning" className={styles.marginBottom}>
@@ -126,19 +124,15 @@ export const TermindatoFaktaForm = ({ søknad, gjeldendeFamiliehendelse, submitt
 };
 
 const buildInitialValues = (
-  soknad: Soknad,
-  familiehendelse: FamilieHendelse,
+  søknad: FødselSøknad,
+  gjeldende: FødselGjeldende,
   aksjonspunkt: Aksjonspunkt,
-): FormValues => {
-  const antallBarn = soknad.antallBarn ? soknad.antallBarn : NaN;
-  const soknadUtstedtdato = soknad.utstedtdato ?? undefined;
-  return {
-    utstedtdato: familiehendelse.utstedtdato ?? soknadUtstedtdato,
-    termindato: familiehendelse.termindato ?? soknad.termindato,
-    antallBarn: familiehendelse.antallBarnTermin ?? antallBarn,
-    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-  };
-};
+): FormValues => ({
+  utstedtdato: gjeldende.utstedtdato.utstedtdato ?? søknad.utstedtdato,
+  termindato: gjeldende.termindato.termindato ?? søknad.termindato,
+  antallBarn: gjeldende.antallBarn ?? søknad.antallBarn,
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
+});
 
 const transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
   kode: AksjonspunktKode.TERMINBEKREFTELSE,
@@ -146,4 +140,20 @@ const transformValues = (values: FormValues): BekreftTerminbekreftelseAp => ({
   termindato: values.termindato!,
   antallBarn: values.antallBarn!,
   ...FaktaBegrunnelseTextField.transformValues(values),
+});
+
+const isNotEqual = (value1: number | string | undefined | null, value2: number | string | undefined | null): boolean =>
+  value2 !== null && value2 !== undefined && value1 !== value2;
+
+const isFieldEdited = (
+  søknad: FødselSøknad,
+  gjeldende: FødselGjeldende,
+): {
+  termindato: boolean;
+  antallBarn: boolean;
+  utstedtdato: boolean;
+} => ({
+  termindato: isNotEqual(søknad.termindato, gjeldende.termindato.termindato),
+  antallBarn: isNotEqual(søknad.antallBarn, gjeldende.antallBarn),
+  utstedtdato: isNotEqual(søknad.utstedtdato, gjeldende.utstedtdato.utstedtdato),
 });

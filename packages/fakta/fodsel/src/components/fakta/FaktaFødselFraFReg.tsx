@@ -1,45 +1,44 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, HStack, Tag } from '@navikt/ds-react';
+import { BodyShort, Tag } from '@navikt/ds-react';
 
 import { ValueLabel } from '@navikt/fp-fakta-felles';
-import type { FamilieHendelse } from '@navikt/fp-types';
+import type { FødselRegister } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 import { AvklartBarn } from './AvklartBarn';
 
 interface Props {
-  registerFamiliehendelse: FamilieHendelse | undefined;
+  register: FødselRegister;
 }
 
-export const FaktaFødselFraFReg = ({ registerFamiliehendelse }: Props) => {
-  const harDødFødtBarn =
-    registerFamiliehendelse &&
-    registerFamiliehendelse.avklartBarn &&
-    registerFamiliehendelse.avklartBarn.filter(barn => barn.dodsdato).length > 0;
-  const { avklartBarn } = registerFamiliehendelse || {};
+export const FaktaFødselFraFReg = ({ register }: Props) => {
+  const intl = useIntl();
+  const { barn } = register || {};
+
+  const harDødFødtBarn = barn.filter(b => b.dodsdato).length > 0;
+
   return (
     <FaktaKort
-      label={
-        <HStack gap="4">
-          <FormattedMessage id="FodselsammenligningPanel.OpplysningerFREG" />
-          {harDødFødtBarn && (
-            <Tag variant="info">
-              <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
-            </Tag>
-          )}
-        </HStack>
+      label={intl.formatMessage({ id: 'FodselsammenligningPanel.OpplysningerFREG' })}
+      tags={
+        harDødFødtBarn ? (
+          <Tag variant="info">
+            <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
+          </Tag>
+        ) : undefined
       }
     >
       <>
-        {!avklartBarn && <BodyShort>Det er ikke registrert noen fødselshendelse i folkeregisteret</BodyShort>}
-        {avklartBarn && (
+        {barn.length > 0 ? (
           <>
-            <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.AntallBarn" />}>
-              {avklartBarn.length}
-            </ValueLabel>
-            <AvklartBarn avklartBarn={avklartBarn} />
+            <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.AntallBarn" />}>{barn.length}</ValueLabel>
+            <AvklartBarn avklartBarn={barn} />
           </>
+        ) : (
+          <BodyShort>
+            <FormattedMessage id="FaktaFødselFraFReg.IngenBarn" />
+          </BodyShort>
         )}
       </>
     </FaktaKort>

@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import * as stories from './FodselFaktaIndex.stories';
@@ -13,14 +13,31 @@ describe('FodselFaktaIndex', () => {
     const utils = render(<AksjonspunktTerminbekreftelse submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller terminbekreftelse')).toBeInTheDocument();
-    expect(screen.getByText('Opplysninger om termin oppgitt i søknaden')).toBeInTheDocument();
-    expect(screen.getByText('Utstedt dato')).toBeInTheDocument();
-    expect(screen.getByText('Termindato')).toBeInTheDocument();
-    expect(screen.getAllByText('Antall barn')).toHaveLength(2);
 
-    expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
-    expect(screen.getByText('Fødselsdato')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2019')).toBeInTheDocument();
+    const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));
+    expect(søknadsBoks.getByText('Termindato')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('01.01.2019')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('Utstedt dato')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('02.01.2019')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('Fødselsdato')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('03.01.2019')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('Antall barn')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('1')).toBeInTheDocument();
+
+    const fregBoks = within(screen.getByLabelText('Opplysninger fra folkeregisteret'));
+    expect(fregBoks.getByText('Antall barn')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('1')).toBeInTheDocument();
+    expect(fregBoks.getByText('Fødselsdato')).toBeInTheDocument();
+    expect(fregBoks.getByText('03.01.2019')).toBeInTheDocument();
+
+    const apBoks = within(screen.getByLabelText('Kontroller opplysninger om termin oppgitt i søknaden'));
+
+    expect(apBoks.getByText('Utstedt dato')).toBeInTheDocument();
+    expect(apBoks.getByText('02.01.2019')).toBeInTheDocument();
+    expect(apBoks.getByText('Termindato')).toBeInTheDocument();
+    expect(apBoks.getByText('01.01.2019')).toBeInTheDocument();
+    expect(apBoks.getByText('Antall barn')).toBeInTheDocument();
+    expect(apBoks.getByText('1')).toBeInTheDocument();
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
