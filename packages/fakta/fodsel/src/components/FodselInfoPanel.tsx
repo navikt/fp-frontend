@@ -7,11 +7,11 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Fødsel } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import { SjekkFodselDokForm } from './aksjonspunkt/SjekkFodselDokForm';
+import { TermindatoFaktaForm } from './aksjonspunkt/TermindatoFaktaForm';
 import { FaktaFødselFraFReg } from './fakta/FaktaFødselFraFReg';
 import { FaktaFødselFraSøknad } from './fakta/FaktaFødselFraSøknad';
-import { Situasjon } from './fakta/Situasjon.tsx';
-import { SjekkFodselDokForm } from './SjekkFodselDokForm';
-import { TermindatoFaktaForm } from './TermindatoFaktaForm';
+import { Situasjon } from './fakta/Situasjon';
 
 const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktKode;
 

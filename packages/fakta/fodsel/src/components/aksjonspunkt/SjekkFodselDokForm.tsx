@@ -12,13 +12,13 @@ import type { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunk
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { AvklartBarnFieldArray } from './AvklartBarnFieldArray';
+import { type AvklarBarnFormValues, AvklartBarnFieldArray } from './AvklartBarnFieldArray';
 
 export type FormValues = {
   dokumentasjonForeligger?: boolean;
   brukAntallBarnITps?: boolean;
-  avklartBarn?: AvklartBarn[];
-} & FaktaBegrunnelseFormValues;
+} & AvklarBarnFormValues &
+  FaktaBegrunnelseFormValues;
 
 interface Props {
   fødsel: Fødsel;
@@ -99,40 +99,17 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel }: Props
   );
 };
 
-const lagBarn = (antallBarnFraSoknad: number): AvklartBarn[] => {
-  let antallBarn = antallBarnFraSoknad;
-  if (antallBarn === 0 || !antallBarn) {
-    antallBarn = 1;
-  }
-  const childrenArray: AvklartBarn[] = [];
-  while (antallBarn > 0) {
-    childrenArray.push({ fodselsdato: '', dodsdato: null });
-    antallBarn -= 1;
-  }
-  return childrenArray;
-};
-
-const ryddOppIAvklarteBarn = (avklartBarn: AvklartBarn[]): SjekkManglendeFodselAp['uidentifiserteBarn'] =>
-  avklartBarn.map(ab => ({
-    fodselsdato: ab.fodselsdato,
-    dodsdato: ab.dodsdato === '' || ab.dodsdato === null ? undefined : ab.dodsdato,
-  }));
-
 const buildInitialValues = (fødsel: Fødsel, aksjonspunkt: Aksjonspunkt): FormValues => ({
   dokumentasjonForeligger: fødsel.gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER') ?? undefined,
   brukAntallBarnITps: !fødsel.gjeldende.barn.some(b => b.kilde !== 'FOLKEREGISTER'),
-  avklartBarn:
-    fødsel.gjeldende.barn.length > 0
-      ? fødsel.gjeldende.barn.map(({ barn }) => barn)
-      : lagBarn(fødsel.gjeldende.antallBarn || 0),
+  ...AvklartBarnFieldArray.initialValues(fødsel.gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
 const transformValues = (values: FormValues, avklartBarn: AvklartBarn[] | undefined = []): SjekkManglendeFodselAp => ({
-  // TODO: sjekk at barn blir riktig pga dokumentasjonForeligger er true/false
   kode: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
   dokumentasjonForeligger: values.dokumentasjonForeligger!,
-  uidentifiserteBarn: ryddOppIAvklarteBarn(values.avklartBarn!),
   brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps! : false,
+  ...AvklartBarnFieldArray.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

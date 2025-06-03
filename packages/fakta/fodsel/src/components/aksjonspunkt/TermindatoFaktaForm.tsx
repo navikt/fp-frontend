@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, InputField } from '@navikt/ft-form-hooks';
+import { Datepicker, Form, NumberField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -14,14 +14,6 @@ import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './termindatoFaktaForm.module.css';
-
-const minValue1 = minValue(1);
-const maxValue9 = maxValue(9);
-
-const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: string): boolean =>
-  !!utstedtdato &&
-  !!termindato &&
-  !dayjs(utstedtdato).isAfter(dayjs(termindato).subtract(18, 'weeks').subtract(4, 'days'));
 
 export type FormValues = {
   utstedtdato?: string;
@@ -84,14 +76,10 @@ export const TermindatoFaktaForm = ({ fødsel: { gjeldende, søknad }, submittab
               isReadOnly={isReadOnly}
               isEdited={editedStatus.termindato}
             />
-            <InputField
+            <NumberField
               name="antallBarn"
               label={intl.formatMessage({ id: 'TermindatoFaktaForm.AntallBarn' })}
-              parse={value => {
-                const parsedValue = parseInt(value.toString(), 10);
-                return Number.isNaN(parsedValue) ? value : parsedValue;
-              }}
-              validate={[required, hasValidInteger, minValue1, maxValue9]}
+              validate={[required, hasValidInteger, minValue(1), maxValue(5)]}
               readOnly={isReadOnly}
               className={styles.bredde}
               isEdited={editedStatus.antallBarn}
@@ -128,8 +116,8 @@ const buildInitialValues = (
   gjeldende: FødselGjeldende,
   aksjonspunkt: Aksjonspunkt,
 ): FormValues => ({
-  utstedtdato: gjeldende.utstedtdato.utstedtdato ?? søknad.utstedtdato,
-  termindato: gjeldende.termindato.termindato ?? søknad.termindato,
+  utstedtdato: gjeldende.utstedtdato?.utstedtdato ?? søknad.utstedtdato ?? undefined,
+  termindato: gjeldende.termindato?.termindato ?? søknad.termindato ?? undefined,
   antallBarn: gjeldende.antallBarn ?? søknad.antallBarn,
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
@@ -153,7 +141,12 @@ const isFieldEdited = (
   antallBarn: boolean;
   utstedtdato: boolean;
 } => ({
-  termindato: isNotEqual(søknad.termindato, gjeldende.termindato.termindato),
+  termindato: isNotEqual(søknad.termindato, gjeldende.termindato?.termindato),
   antallBarn: isNotEqual(søknad.antallBarn, gjeldende.antallBarn),
-  utstedtdato: isNotEqual(søknad.utstedtdato, gjeldende.utstedtdato.utstedtdato),
+  utstedtdato: isNotEqual(søknad.utstedtdato, gjeldende.utstedtdato?.utstedtdato),
 });
+
+const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: string): boolean =>
+  !!utstedtdato &&
+  !!termindato &&
+  !dayjs(utstedtdato).isAfter(dayjs(termindato).subtract(18, 'weeks').subtract(4, 'days'));

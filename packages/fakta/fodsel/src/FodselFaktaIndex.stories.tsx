@@ -8,39 +8,6 @@ import type { Aksjonspunkt, Fødsel } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
-/* const familieHendelse = {
-  register: {
-    avklartBarn: [
-      {
-        fodselsdato: '2019-01-10',
-      },
-    ],
-  },
-  gjeldende: {
-    avklartBarn: [
-      {
-        fodselsdato: '2019-01-01',
-      },
-    ],
-    termindato: '2019-01-01',
-    utstedtdato: '2019-01-01',
-    antallBarnTermin: 1,
-    vedtaksDatoSomSvangerskapsuke: 43,
-    erOverstyrt: false,
-    morForSykVedFodsel: true,
-    dokumentasjonForeligger: true,
-    brukAntallBarnFraTps: true,
-  },
-} as FamilieHendelseSamling;
-
-const søknad = {
-  fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
-  termindato: '2019-01-01',
-  utstedtdato: '2019-01-02',
-  antallBarn: 1,
-  soknadType: SoknadType.FODSEL,
-} as Soknad;
-*/
 const defaultAksjonspunkter: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.TERMINBEKREFTELSE,
@@ -88,37 +55,6 @@ const testFødsel: Fødsel = {
   },
 };
 
-const testFødsel2: Fødsel = {
-  søknad: {
-    barn: [{ fodselsdato: '2019-01-10', dodsdato: null }],
-    termindato: '2019-01-01',
-    utstedtdato: '2019-01-02',
-    antallBarn: 1,
-  },
-  register: {
-    barn: [{ fodselsdato: '2019-01-10', dodsdato: null }],
-  },
-  gjeldende: {
-    barn: [
-      {
-        kilde: 'FOLKEREGISTER',
-        barn: {
-          fodselsdato: '2019-01-01',
-          dodsdato: null,
-        },
-        kanOverstyres: false,
-      },
-    ],
-    termindato: {
-      kilde: 'SØKNAD',
-      termindato: '2019-01-01',
-      kanOverstyres: true,
-    },
-    utstedtdato: { kilde: 'SAKSBEHANDLER', utstedtdato: '2019-01-01' },
-    antallBarn: 1,
-  },
-};
-
 const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
@@ -139,16 +75,42 @@ export const AksjonspunktTerminbekreftelse: Story = {
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.TERMINBEKREFTELSE]: merknaderFraBeslutter,
     },
+    // fra sak m. f.nr. 20437533041
+    fødsel: {
+      søknad: {
+        barn: [],
+        termindato: '2025-06-24',
+        utstedtdato: '2025-05-20',
+        antallBarn: 1,
+      },
+      register: {
+        barn: [],
+      },
+      gjeldende: {
+        termindato: {
+          kilde: 'SØKNAD',
+          termindato: '2025-06-24',
+          kanOverstyres: true,
+        },
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-05-20',
+        },
+        barn: [],
+        antallBarn: 1,
+      },
+    },
   },
 };
 
 export const AksjonspunktSjekkManglendeFødselPåEngangstønad: Story = {
   args: {
+    // fra sak m. f.nr. 11499122286
     fødsel: {
       søknad: {
         barn: [
           {
-            fodselsdato: '2025-05-03',
+            fodselsdato: '2025-05-04',
             dodsdato: null,
           },
         ],
@@ -166,7 +128,7 @@ export const AksjonspunktSjekkManglendeFødselPåEngangstønad: Story = {
           {
             kilde: 'SØKNAD',
             barn: {
-              fodselsdato: '2025-05-03',
+              fodselsdato: '2025-05-04',
               dodsdato: null,
             },
             kanOverstyres: true,

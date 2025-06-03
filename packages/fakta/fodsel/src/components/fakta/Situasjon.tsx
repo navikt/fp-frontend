@@ -10,10 +10,7 @@ interface Props {
   gjeldende: FødselGjeldende;
 }
 
-export const Situasjon = ({ gjeldende }: Props) => {
-  console.log('Situasjon', gjeldende);
-  const { barn, termindato, utstedtdato } = gjeldende;
-
+export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Props) => {
   const erLikeBarn =
     barn.length === 0 ||
     barn.every(
@@ -24,14 +21,14 @@ export const Situasjon = ({ gjeldende }: Props) => {
     );
   return (
     <HStack gap="4">
-      {termindato.termindato && (
+      {termindato && (
         <FaktaBox
           kilde={termindato.kilde}
           label={<FormattedMessage id="FodselsammenligningPanel.Termindato" />}
           value={dateFormat(termindato.termindato)}
         />
       )}
-      {utstedtdato.utstedtdato && (
+      {utstedtdato && (
         <FaktaBox
           kilde={utstedtdato.kilde}
           label={<FormattedMessage id="FodselsammenligningPanel.Utstedtdato" />}
