@@ -1,4 +1,4 @@
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
@@ -19,19 +19,20 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
         b.barn.fodselsdato === barn[0].barn.fodselsdato &&
         b.barn.dodsdato === barn[0].barn.dodsdato,
     );
+  const intl = useIntl();
   return (
-    <HStack gap="4">
+    <HStack gap="4" aria-label={intl.formatMessage({ id: 'Situasjon.OpplysningerGjeldende' })}>
       {termindato && (
         <FaktaBox
           kilde={termindato.kilde}
-          label={<FormattedMessage id="FodselsammenligningPanel.Termindato" />}
+          label={<FormattedMessage id="Label.Termindato" />}
           value={dateFormat(termindato.termindato)}
         />
       )}
       {utstedtdato && (
         <FaktaBox
           kilde={utstedtdato.kilde}
-          label={<FormattedMessage id="FodselsammenligningPanel.Utstedtdato" />}
+          label={<FormattedMessage id="Label.Utstedtdato" />}
           value={dateFormat(utstedtdato.utstedtdato)}
         />
       )}
@@ -42,7 +43,7 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
           value={dateFormat(b.barn.fodselsdato)}
           label={
             erLikeBarn ? (
-              <FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />
+              <FormattedMessage id="Label.Fodselsdato" />
             ) : (
               <FormattedMessage id="FodselsammenligningPanel.FodselsdatoMedNr" values={{ nummer: index + 1 }} />
             )
@@ -52,7 +53,7 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
       {erLikeBarn && barn.length > 0 && (
         <FaktaBox
           kilde={barn[0].kilde}
-          label={<FormattedMessage id="FodselsammenligningPanel.AntallBarn" />}
+          label={<FormattedMessage id="Label.AntallBarn" />}
           value={barn.length.toString()}
         />
       )}

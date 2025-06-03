@@ -27,17 +27,17 @@ export const AvklartBarn = ({ avklartBarn }: Props) => {
       {avklartBarn &&
         (alleBarnHarSammeFodselsdatoOgStatus(avklartBarn) ? (
           <>
-            <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />}>
+            <ValueLabel label={<FormattedMessage id="Label.Fodselsdato" />}>
               <DateLabel dateString={avklartBarn[0].fodselsdato} />
             </ValueLabel>
             {avklartBarn[0].dodsdato && (
-              <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Dodsdato" />}>
+              <ValueLabel label={<FormattedMessage id="Label.Dodsdato" />}>
                 <DateLabel dateString={avklartBarn[0].dodsdato} />
               </ValueLabel>
             )}
           </>
         ) : (
-          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />}>
+          <ValueLabel label={<FormattedMessage id="Label.Fodselsdato" />}>
             {avklartBarn.map((barn, index) => (
               <BodyShort key={barn.fodselsdato + barn.dodsdato}>
                 {index + 1}
@@ -45,7 +45,7 @@ export const AvklartBarn = ({ avklartBarn }: Props) => {
                 {dateFormat(barn.fodselsdato)} (
                 {barn.dodsdato && (
                   <>
-                    <FormattedMessage id="FodselsammenligningPanel.Dod" /> <DateLabel dateString={barn.dodsdato} />
+                    <FormattedMessage id="FaktaFødselFraFReg.Dod" /> <DateLabel dateString={barn.dodsdato} />
                   </>
                 )}
                 )

@@ -146,6 +146,53 @@ export const AksjonspunktSjekkManglendeFødselPåEngangstønad: Story = {
     },
   },
 };
+export const AksjonspunktSjekkManglendeFødselPåForeldrepenger: Story = {
+  args: {
+    // fra sak m. f.nr. 15489629477
+    fødsel: {
+      søknad: {
+        barn: [
+          {
+            fodselsdato: '2025-05-04',
+            dodsdato: null,
+          },
+        ],
+        termindato: '2025-04-14',
+        utstedtdato: null,
+        antallBarn: 1,
+      },
+      register: {
+        barn: [],
+      },
+      gjeldende: {
+        termindato: {
+          kilde: 'SØKNAD',
+          termindato: '2025-04-14',
+          kanOverstyres: true,
+        },
+        utstedtdato: null,
+        barn: [
+          {
+            kilde: 'SØKNAD',
+            barn: {
+              fodselsdato: '2025-05-04',
+              dodsdato: null,
+            },
+            kanOverstyres: true,
+          },
+        ],
+        antallBarn: 1,
+      },
+    },
+    aksjonspunkterForPanel: defaultAksjonspunkter.map(a => ({
+      ...a,
+      definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
+    })),
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+    },
+  },
+};
 
 export const ReadonlyPanel: Story = {
   args: {
@@ -162,9 +209,47 @@ export const ReadonlyPanel: Story = {
   },
 };
 
-export const PanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter: Story = {
+export const Default: Story = {
   args: {
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
+    fødsel: {
+      søknad: {
+        barn: [],
+        termindato: '2025-06-10',
+        utstedtdato: '2025-05-10',
+        antallBarn: 1,
+      },
+      register: {
+        barn: [
+          {
+            fodselsdato: '2025-06-03',
+            dodsdato: null,
+          },
+        ],
+      },
+      gjeldende: {
+        termindato: {
+          kilde: 'SØKNAD',
+          termindato: '2025-06-10',
+          kanOverstyres: true,
+        },
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-05-10',
+        },
+        barn: [
+          {
+            kilde: 'FOLKEREGISTER',
+            barn: {
+              fodselsdato: '2025-06-03',
+              dodsdato: null,
+            },
+            kanOverstyres: false,
+          },
+        ],
+        antallBarn: 1,
+      },
+    },
   },
 };

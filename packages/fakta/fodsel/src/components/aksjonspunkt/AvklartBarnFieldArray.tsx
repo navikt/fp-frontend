@@ -1,5 +1,5 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, HStack } from '@navikt/ds-react';
@@ -52,13 +52,15 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
           <HStack gap="4" align="end" key={field.id} paddingBlock="2 0">
             {fields.length > 1 && (
               <Box paddingBlock="3">
-                <BodyShort size="medium">Barn {index + 1}:</BodyShort>
+                <BodyShort size="medium">
+                  <FormattedMessage id="AvklartBarnFieldArray.NummerertRad" values={{ nummer: index + 1 }} />
+                </BodyShort>
               </Box>
             )}
             <Datepicker
               size="medium"
               name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
-              label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Title' })}
+              label={intl.formatMessage({ id: 'Label.Fodselsdato' })}
               hideLabel={index > 0}
               validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
               isReadOnly={readOnly}
@@ -67,7 +69,7 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
             <Datepicker
               size="medium"
               name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
-              label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}
+              label={intl.formatMessage({ id: 'Label.Dodsdato' })}
               hideLabel={index > 0}
               validate={[hasValidDate, dateBeforeOrEqualToToday]}
               isReadOnly={readOnly}

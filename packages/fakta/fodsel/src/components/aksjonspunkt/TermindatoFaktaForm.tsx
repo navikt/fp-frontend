@@ -64,21 +64,21 @@ export const TermindatoFaktaForm = ({ fødsel: { gjeldende, søknad }, submittab
           <HStack gap="4">
             <Datepicker
               name="utstedtdato"
-              label={intl.formatMessage({ id: 'TermindatoFaktaForm.UtstedtDato' })}
+              label={intl.formatMessage({ id: 'Label.Utstedtdato' })}
               validate={[required, hasValidDate]}
               isReadOnly={isReadOnly}
               isEdited={editedStatus.utstedtdato}
             />
             <Datepicker
               name="termindato"
-              label={intl.formatMessage({ id: 'TermindatoFaktaForm.Termindato' })}
+              label={intl.formatMessage({ id: 'Label.Termindato' })}
               validate={[required, hasValidDate]}
               isReadOnly={isReadOnly}
               isEdited={editedStatus.termindato}
             />
             <NumberField
               name="antallBarn"
-              label={intl.formatMessage({ id: 'TermindatoFaktaForm.AntallBarn' })}
+              label={intl.formatMessage({ id: 'Label.AntallBarn' })}
               validate={[required, hasValidInteger, minValue(1), maxValue(5)]}
               readOnly={isReadOnly}
               className={styles.bredde}
@@ -90,6 +90,7 @@ export const TermindatoFaktaForm = ({ fødsel: { gjeldende, søknad }, submittab
             isSubmittable={submittable}
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
+            hasVurderingText
           />
           {isForTidligTerminbekreftelse && (
             <Alert variant="warning" className={styles.marginBottom}>

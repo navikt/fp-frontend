@@ -20,11 +20,11 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
 
   return (
     <FaktaKort
-      label={intl.formatMessage({ id: 'FodselsammenligningPanel.OpplysningerFREG' })}
+      label={intl.formatMessage({ id: 'FaktaFødselFraFReg.Tittel' })}
       tags={
         harDødFødtBarn ? (
           <Tag variant="info">
-            <FormattedMessage id="FodselsammenligningPanel.Dodfodt" />
+            <FormattedMessage id="FaktaFødselFraFReg.Dodfodt" />
           </Tag>
         ) : undefined
       }
@@ -32,7 +32,7 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
       <>
         {barn.length > 0 ? (
           <>
-            <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.AntallBarn" />}>{barn.length}</ValueLabel>
+            <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{barn.length}</ValueLabel>
             <AvklartBarn avklartBarn={barn} />
           </>
         ) : (

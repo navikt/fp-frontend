@@ -5,7 +5,12 @@ import { expect } from 'vitest';
 
 import * as stories from './FodselFaktaIndex.stories';
 
-const { AksjonspunktTerminbekreftelse, AksjonspunktSjekkManglendeFødselPåEngangstønad } = composeStories(stories);
+const {
+  Default,
+  AksjonspunktTerminbekreftelse,
+  AksjonspunktSjekkManglendeFødselPåEngangstønad,
+  AksjonspunktSjekkManglendeFødselPåForeldrepenger,
+} = composeStories(stories);
 
 describe('FodselFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for termin', async () => {
@@ -18,7 +23,7 @@ describe('FodselFaktaIndex', () => {
     const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));
     expect(søknadsBoks.getByText('Termindato')).toBeInTheDocument();
     expect(søknadsBoks.getByText('24.06.2025')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('Utstedt dato')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('Utstedtdato')).toBeInTheDocument();
     expect(søknadsBoks.getByText('20.05.2025')).toBeInTheDocument();
     expect(søknadsBoks.getByText('Antall barn')).toBeInTheDocument();
     expect(søknadsBoks.getByText('1')).toBeInTheDocument();
@@ -28,13 +33,13 @@ describe('FodselFaktaIndex', () => {
 
     const apBoks = within(screen.getByLabelText('Kontroller opplysninger om termin oppgitt i søknaden'));
 
-    expect(apBoks.getByLabelText('Utstedt dato')).toHaveValue('20.05.2025');
+    expect(apBoks.getByLabelText('Utstedtdato')).toHaveValue('20.05.2025');
     expect(apBoks.getByLabelText('Termindato')).toHaveValue('24.06.2025');
     expect(apBoks.getByLabelText('Antall barn')).toHaveValue('1');
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
@@ -50,21 +55,46 @@ describe('FodselFaktaIndex', () => {
     });
   });
 
-  it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon foreligger', async () => {
+  it('skal vise fakta i revurdering  ved fødselshendlese', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<AksjonspunktSjekkManglendeFødselPåEngangstønad submitCallback={lagre} />);
+    render(<Default submitCallback={lagre} />);
+
+    const situasjon = within(screen.getByLabelText('Gjeldende opplysninger'));
+
+    expect(situasjon.getAllByText('FRA SØKNADEN')).toHaveLength(2);
+    expect(situasjon.getByText('Termindato')).toBeInTheDocument();
+    expect(situasjon.getByText('10.06.2025')).toBeInTheDocument();
+    expect(situasjon.getByText('Utstedtdato')).toBeInTheDocument();
+    expect(situasjon.getByText('10.05.2025')).toBeInTheDocument();
+
+    expect(situasjon.getAllByText('FRA FOLKEREGISTERET')).toHaveLength(2);
+    expect(situasjon.getByText('Fødselsdato')).toBeInTheDocument();
+    expect(situasjon.getByText('03.06.2025')).toBeInTheDocument();
+    expect(situasjon.getByText('Antall barn')).toBeInTheDocument();
+    expect(situasjon.getByText('1')).toBeInTheDocument();
+
     const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));
-    expect(søknadsBoks.getByText('Fødselsdato')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('04.05.2025')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('Termindato')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('10.06.2025')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('Utstedtdato')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('10.05.2025')).toBeInTheDocument();
     expect(søknadsBoks.getByText('Antall barn')).toBeInTheDocument();
     expect(søknadsBoks.getByText('1')).toBeInTheDocument();
 
     const fregBoks = within(screen.getByLabelText('Opplysninger fra folkeregisteret'));
-    expect(fregBoks.getByText('Det er ikke registrert noen fødselshendelse i folkeregisteret')).toBeInTheDocument();
+    expect(fregBoks.getByText('Antall barn')).toBeInTheDocument();
+    expect(fregBoks.getByText('1')).toBeInTheDocument();
+    expect(fregBoks.getByText('Fødselsdato')).toBeInTheDocument();
+    expect(fregBoks.getByText('03.06.2025')).toBeInTheDocument();
+  });
+
+  it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon foreligger', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+
+    const utils = render(<AksjonspunktSjekkManglendeFødselPåForeldrepenger submitCallback={lagre} />);
 
     const apBoks = within(screen.getByLabelText('Kontroller dokumentasjon av fødsel'));
-
     expect(apBoks.getByText('Fyll inn dokumenterte fødselsopplysninger')).toBeInTheDocument();
     expect(apBoks.getByLabelText('Ingen opplysninger om barn (avslag)')).toBeChecked();
 
@@ -84,7 +114,7 @@ describe('FodselFaktaIndex', () => {
     await userEvent.type(dødsdatoFelt, '05.05.2025');
     fireEvent.blur(dødsdatoFelt);
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
@@ -118,7 +148,7 @@ describe('FodselFaktaIndex', () => {
 
     expect(apBoks.getByText('Fyll inn dokumenterte fødselsopplysninger')).toBeInTheDocument();
     expect(apBoks.getByLabelText('Ingen opplysninger om barn (avslag)')).toBeChecked();
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 

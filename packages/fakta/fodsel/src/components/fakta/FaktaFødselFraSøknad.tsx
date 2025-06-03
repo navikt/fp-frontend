@@ -13,29 +13,27 @@ interface Props {
 
 export const FaktaFødselFraSøknad = ({ søknad }: Props) => {
   const intl = useIntl();
-  const tittel = intl.formatMessage({ id: 'FodselsammenligningPanel.OpplysningerSoknad' });
+  const tittel = intl.formatMessage({ id: 'FaktaFødselFraSøknad.Tittel' });
   return (
     <FaktaKort label={tittel}>
       <VStack gap="4">
         {søknad.termindato && (
-          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Termindato" />}>
+          <ValueLabel label={<FormattedMessage id="Label.Termindato" />}>
             <DateLabel dateString={søknad.termindato} />
           </ValueLabel>
         )}
         {søknad.utstedtdato && (
-          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.UstedtDato" />}>
+          <ValueLabel label={<FormattedMessage id="Label.Utstedtdato" />}>
             <DateLabel dateString={søknad.utstedtdato} />
           </ValueLabel>
         )}
         {søknad.barn.length > 0 && (
-          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.Fodselsdato" />}>
+          <ValueLabel label={<FormattedMessage id="Label.Fodselsdato" />}>
             <Fødselsdatoer barn={søknad.barn} />
           </ValueLabel>
         )}
         {søknad.antallBarn && (
-          <ValueLabel label={<FormattedMessage id="FodselsammenligningPanel.AntallBarn" />}>
-            {søknad.antallBarn}
-          </ValueLabel>
+          <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{søknad.antallBarn}</ValueLabel>
         )}
       </VStack>
     </FaktaKort>

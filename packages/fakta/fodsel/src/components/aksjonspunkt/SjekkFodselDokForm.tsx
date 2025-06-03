@@ -7,7 +7,7 @@ import { required } from '@navikt/ft-form-validators';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, AvklartBarn, Fødsel } from '@navikt/fp-types';
+import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
 import type { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -31,16 +31,16 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
  */
-export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel }: Props) => {
+export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel: { gjeldende } }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFodselAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const dokumentasjonForeliggerIsEdited = fødsel.gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER');
+  const dokumentasjonForeliggerIsEdited = gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER');
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(fødsel, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(gjeldende, aksjonspunkt),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -52,7 +52,7 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel }: Props
     >
       <Form
         formMethods={formMethods}
-        onSubmit={values => submitCallback(transformValues(values, fødsel.register.barn))}
+        onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="2">
@@ -83,6 +83,7 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel }: Props
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
             size="medium"
+            hasVurderingText
           />
 
           {aksjonspunkt && !isReadOnly && (
@@ -99,17 +100,17 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel }: Props
   );
 };
 
-const buildInitialValues = (fødsel: Fødsel, aksjonspunkt: Aksjonspunkt): FormValues => ({
-  dokumentasjonForeligger: fødsel.gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER') ?? undefined,
-  brukAntallBarnITps: !fødsel.gjeldende.barn.some(b => b.kilde !== 'FOLKEREGISTER'),
-  ...AvklartBarnFieldArray.initialValues(fødsel.gjeldende),
+const buildInitialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
+  dokumentasjonForeligger: gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER') ?? undefined,
+  brukAntallBarnITps: !gjeldende.barn.some(b => b.kilde !== 'FOLKEREGISTER'),
+  ...AvklartBarnFieldArray.initialValues(gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-const transformValues = (values: FormValues, avklartBarn: AvklartBarn[] | undefined = []): SjekkManglendeFodselAp => ({
+const transformValues = (values: FormValues): SjekkManglendeFodselAp => ({
   kode: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
   dokumentasjonForeligger: values.dokumentasjonForeligger!,
-  brukAntallBarnITps: avklartBarn && !!avklartBarn.length ? values.brukAntallBarnITps! : false,
+  brukAntallBarnITps: false,
   ...AvklartBarnFieldArray.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
