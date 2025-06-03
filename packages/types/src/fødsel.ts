@@ -8,8 +8,8 @@ export type Fødsel = {
 
 export type FødselSøknad = {
   barn: AvklartBarn[];
-  termindato: string;
-  utstedtdato: string;
+  termindato: string | null;
+  utstedtdato: string | null;
   antallBarn: number;
 };
 
@@ -23,8 +23,8 @@ type FødselDtoGjeldendeUtstedtdato = {
 };
 
 export type FødselGjeldende = {
-  termindato: FødselDtoGjeldendeTermindato;
-  utstedtdato: FødselDtoGjeldendeUtstedtdato;
+  termindato: FødselDtoGjeldendeTermindato | null;
+  utstedtdato: FødselDtoGjeldendeUtstedtdato | null;
   barn: FødselDtoGjeldendeBarn[];
   antallBarn: number;
 };

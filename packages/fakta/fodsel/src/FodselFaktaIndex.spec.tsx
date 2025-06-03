@@ -16,28 +16,26 @@ describe('FodselFaktaIndex', () => {
 
     const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));
     expect(søknadsBoks.getByText('Termindato')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('01.01.2019')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('15.10.2023')).toBeInTheDocument();
     expect(søknadsBoks.getByText('Utstedt dato')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('02.01.2019')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('10.10.2023')).toBeInTheDocument();
     expect(søknadsBoks.getByText('Fødselsdato')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('03.01.2019')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('01.10.2023')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('02.10.2023')).toBeInTheDocument();
     expect(søknadsBoks.getByText('Antall barn')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('1')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('2')).toBeInTheDocument();
 
     const fregBoks = within(screen.getByLabelText('Opplysninger fra folkeregisteret'));
     expect(fregBoks.getByText('Antall barn')).toBeInTheDocument();
-    expect(søknadsBoks.getByText('1')).toBeInTheDocument();
+    expect(fregBoks.getByText('1')).toBeInTheDocument();
     expect(fregBoks.getByText('Fødselsdato')).toBeInTheDocument();
-    expect(fregBoks.getByText('03.01.2019')).toBeInTheDocument();
+    expect(fregBoks.getByText('01.10.2023')).toBeInTheDocument();
 
     const apBoks = within(screen.getByLabelText('Kontroller opplysninger om termin oppgitt i søknaden'));
 
-    expect(apBoks.getByText('Utstedt dato')).toBeInTheDocument();
-    expect(apBoks.getByText('02.01.2019')).toBeInTheDocument();
-    expect(apBoks.getByText('Termindato')).toBeInTheDocument();
-    expect(apBoks.getByText('01.01.2019')).toBeInTheDocument();
-    expect(apBoks.getByText('Antall barn')).toBeInTheDocument();
-    expect(apBoks.getByText('1')).toBeInTheDocument();
+    expect(apBoks.getByLabelText('Utstedt dato')).toHaveValue('10.10.2023');
+    expect(apBoks.getByLabelText('Termindato')).toHaveValue('15.10.2023');
+    expect(apBoks.getByLabelText('Antall barn')).toHaveValue('2');
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
@@ -48,15 +46,13 @@ describe('FodselFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [
-      {
-        antallBarn: 1,
-        begrunnelse: 'Dette er en begrunnelse',
-        kode: '5001',
-        termindato: '2019-01-01',
-        utstedtdato: '2019-01-01',
-      },
-    ]);
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      antallBarn: 2,
+      begrunnelse: 'Dette er en begrunnelse',
+      kode: '5001',
+      termindato: '2023-10-15',
+      utstedtdato: '2023-10-10',
+    });
   });
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon foreligger', async () => {
@@ -103,24 +99,22 @@ describe('FodselFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
-    expect(lagre).toHaveBeenNthCalledWith(1, [
-      {
-        brukAntallBarnITps: true,
-        dokumentasjonForeligger: true,
-        kode: '5027',
-        uidentifiserteBarn: [
-          {
-            dodsdato: undefined,
-            fodselsdato: '2010-01-01',
-          },
-          {
-            dodsdato: '2021-09-23',
-            fodselsdato: '2021-09-23',
-          },
-        ],
-        begrunnelse: 'Dette er en begrunnelse',
-      },
-    ]);
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      brukAntallBarnITps: true,
+      dokumentasjonForeligger: true,
+      kode: '5027',
+      uidentifiserteBarn: [
+        {
+          dodsdato: undefined,
+          fodselsdato: '2010-01-01',
+        },
+        {
+          dodsdato: '2021-09-23',
+          fodselsdato: '2021-09-23',
+        },
+      ],
+      begrunnelse: 'Dette er en begrunnelse',
+    });
   });
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon ikke foreligger', async () => {

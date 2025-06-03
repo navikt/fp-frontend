@@ -82,7 +82,7 @@ const testFødsel: Fødsel = {
       {
         kilde: 'SAKSBEHANDLER',
         barn: { fodselsdato: '2023-10-01', dodsdato: null },
-        kanOverstyres: false,
+        kanOverstyres: true,
       },
     ],
   },
@@ -118,11 +118,7 @@ const testFødsel2: Fødsel = {
     antallBarn: 1,
   },
 };
-/* vedtaksDatoSomSvangerskapsuke: 43,
-    erOverstyrt: false,
-    morForSykVedFodsel: true,
-    dokumentasjonForeligger: true,
-    brukAntallBarnFraTps: true,*/
+
 const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
@@ -146,9 +142,39 @@ export const AksjonspunktTerminbekreftelse: Story = {
   },
 };
 
-export const AksjonspunktSjekkManglendeFødsel: Story = {
+export const AksjonspunktSjekkManglendeFødselPåEngangstønad: Story = {
   args: {
-    fødsel: testFødsel2,
+    fødsel: {
+      søknad: {
+        barn: [
+          {
+            fodselsdato: '2025-05-03',
+            dodsdato: null,
+          },
+        ],
+        termindato: null,
+        utstedtdato: null,
+        antallBarn: 1,
+      },
+      register: {
+        barn: [],
+      },
+      gjeldende: {
+        termindato: null,
+        utstedtdato: null,
+        barn: [
+          {
+            kilde: 'SØKNAD',
+            barn: {
+              fodselsdato: '2025-05-03',
+              dodsdato: null,
+            },
+            kanOverstyres: true,
+          },
+        ],
+        antallBarn: 1,
+      },
+    },
     aksjonspunkterForPanel: defaultAksjonspunkter.map(a => ({
       ...a,
       definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
