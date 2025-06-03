@@ -2,7 +2,7 @@ import { type PropsWithChildren } from 'react';
 
 import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 
-import { FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
+import { type FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 
 interface Props {
   kilde: FaktaKilde;

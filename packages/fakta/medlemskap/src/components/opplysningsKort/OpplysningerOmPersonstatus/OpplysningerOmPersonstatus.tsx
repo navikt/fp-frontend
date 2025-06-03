@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Detail, Label, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
-import { FaktaKilde } from '@navikt/fp-fakta-felles';
 import { type AlleKodeverk, type Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../../ekspansjonsKort/EkspansjonsKort';
@@ -34,7 +33,7 @@ export const OpplysningerOmPersonstatus = ({
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
       tittel={intl.formatMessage({ id: 'OpplysningsKort.PersonstatusTittel' }, { harAnnenpart: !!annenpart })}
-      kilde={FaktaKilde.FREG}
+      kilde="FOLKEREGISTER"
       relevanteAvvik={avvik.filter(a => relevantForPersonstatus.includes(a))}
     >
       <VStack gap="4" aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}>

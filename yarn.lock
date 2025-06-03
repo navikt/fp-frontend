@@ -3066,7 +3066,6 @@ __metadata:
     "@navikt/fp-prosess-anke-resultat": "workspace:*"
     "@navikt/fp-prosess-anke-trygderettsbehandling": "workspace:*"
     "@navikt/fp-prosess-beregningsresultat": "workspace:*"
-    "@navikt/fp-prosess-fakta-fodsel-sammenligning": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-prosess-formkrav": "workspace:*"
     "@navikt/fp-prosess-innsyn": "workspace:*"
@@ -3811,7 +3810,6 @@ __metadata:
     "@navikt/ds-css": 7.22.0
     "@navikt/ds-react": 7.22.0
     "@navikt/fp-kodeverk": "workspace:*"
-    "@navikt/fp-prosess-fakta-fodsel-sammenligning": "workspace:*"
     "@navikt/fp-prosess-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
