@@ -123,7 +123,7 @@
     "@navikt/ft-utils": "3.6.1",
     "@popperjs/core": "2.11.8",
     "@sentry/browser": "9.24.0",
-    "@tanstack/react-query": "5.79.0",
+    "@tanstack/react-query": "5.79.2",
     "@tanstack/react-query-devtools": "^5.79.0",
     "classnames": "2.5.1",
     "core-js": "3.42.0",
