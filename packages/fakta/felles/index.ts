@@ -10,7 +10,7 @@ export { formaterAdresse, getNyesteAdresse, erPersonAdresserLike } from './src/u
 export { validerApKodeOgHentApEnum } from './src/utils/validerApKodeOgHentApEnum';
 
 export { FaktaGruppe, FaktaBox } from './src/components/FaktaBox';
-export { FaktaKilde, getLabelForFaktaKilde } from './src/components/FaktaKilde';
+export { type FaktaKilde, getLabelForFaktaKilde } from './src/components/FaktaKilde';
 export { Boks } from './src/components/Boks';
 
 export { Personopplysninger } from './src/components/personer/Personopplysninger';

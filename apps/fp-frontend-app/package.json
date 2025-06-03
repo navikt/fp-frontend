@@ -63,7 +63,6 @@
     "@navikt/fp-prosess-anke-resultat": "workspace:*",
     "@navikt/fp-prosess-anke-trygderettsbehandling": "workspace:*",
     "@navikt/fp-prosess-beregningsresultat": "workspace:*",
-    "@navikt/fp-prosess-fakta-fodsel-sammenligning": "workspace:*",
     "@navikt/fp-prosess-felles": "workspace:*",
     "@navikt/fp-prosess-formkrav": "workspace:*",
     "@navikt/fp-prosess-innsyn": "workspace:*",

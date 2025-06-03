@@ -2,7 +2,7 @@ import React, { forwardRef, type ForwardRefExoticComponent, type PropsWithChildr
 
 import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 
-import { FaktaKilde, getLabelForFaktaKilde } from './FaktaKilde';
+import { type FaktaKilde, getLabelForFaktaKilde } from './FaktaKilde';
 
 export const FaktaGruppe = forwardRef((props, ref) => (
   <HStack gap="2" style={{ display: 'flex' }} {...props} ref={ref} />

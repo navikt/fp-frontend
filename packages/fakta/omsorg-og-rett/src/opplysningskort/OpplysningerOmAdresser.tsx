@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
-import { FaktaKilde, Personopplysninger } from '@navikt/fp-fakta-felles';
+import { Personopplysninger } from '@navikt/fp-fakta-felles';
 import { type AlleKodeverk, type Personoversikt } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
@@ -27,7 +27,7 @@ export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, ba
           adresseCountBarn: barnAdresser.length > 0 ? barnAdresser.length : 'none',
         },
       )}
-      kilde={FaktaKilde.FREG}
+      kilde="FOLKEREGISTER"
     >
       <Personopplysninger
         showIcon={false}

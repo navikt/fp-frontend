@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { FaktaKilde } from '@navikt/fp-fakta-felles';
 import { MedlemskapAvvik, type Soknad, type UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
@@ -57,7 +56,7 @@ export const OpplysningerOmUtenlandsopphold = ({
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
       tittel={intl.formatMessage({ id: 'OpplysningsKort.UtenlandsoppholdTittel' })}
-      kilde={FaktaKilde.SOKNAD}
+      kilde="SØKNAD"
       relevanteAvvik={avvik.filter(a => relevantForUtenlandsopphold.includes(a))}
     >
       <div>

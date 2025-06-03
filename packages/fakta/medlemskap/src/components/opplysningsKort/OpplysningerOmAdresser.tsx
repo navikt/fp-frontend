@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
-import { erPersonAdresserLike, FaktaKilde, Personopplysninger } from '@navikt/fp-fakta-felles';
+import { erPersonAdresserLike, Personopplysninger } from '@navikt/fp-fakta-felles';
 import { type AlleKodeverk, type Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
@@ -37,7 +37,7 @@ export const OpplysningerOmAdresser = ({
           adresseCountAnnenpart: annenpart?.adresser.length ?? 'none',
         },
       )}
-      kilde={FaktaKilde.FREG}
+      kilde="FOLKEREGISTER"
       relevanteAvvik={avvik.filter(a => relevantForAdresser.includes(a))}
     >
       <Personopplysninger

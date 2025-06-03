@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyLong, BodyShort, Box, Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { FaktaKilde, sorterPerioder } from '@navikt/fp-fakta-felles';
+import { sorterPerioder } from '@navikt/fp-fakta-felles';
 import { type AlleKodeverk, MedlemskapAvvik, type MedlemskapPeriode } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
@@ -33,7 +33,7 @@ export const OpplysningerFraMedlemskapsregister = ({
   return (
     <EkspansjonsKort
       skalViseAvvik={skalViseAvvik}
-      kilde={FaktaKilde.MEDL}
+      kilde="MEDL"
       tittel={intl.formatMessage(
         { id: 'OpplysningsKort.MedlemskapsperiodeTittel' },
         { count: medlemskapsperioder.length },
