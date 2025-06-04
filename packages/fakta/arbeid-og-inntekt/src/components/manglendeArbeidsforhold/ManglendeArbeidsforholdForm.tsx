@@ -61,14 +61,16 @@ export const ManglendeArbeidsforholdForm = ({
 }: Props) => {
   const intl = useIntl();
 
+  const defaultValues = {
+    saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
+    begrunnelse: radData.avklaring?.begrunnelse,
+    fom: radData.avklaring?.fom,
+    tom: radData.avklaring?.tom,
+    stillingsprosent: radData.avklaring?.stillingsprosent,
+  };
+
   const formMethods = useForm<FormValues>({
-    defaultValues: {
-      saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
-      begrunnelse: radData.avklaring?.begrunnelse,
-      fom: radData.avklaring?.fom,
-      tom: radData.avklaring?.tom,
-      stillingsprosent: radData.avklaring?.stillingsprosent,
-    },
+    defaultValues,
   });
 
   useSetDirtyForm(formMethods.formState.isDirty);
@@ -77,13 +79,7 @@ export const ManglendeArbeidsforholdForm = ({
 
   const avbryt = () => {
     lukkArbeidsforholdRad();
-    formMethods.reset({
-      saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
-      begrunnelse: radData.avklaring?.begrunnelse,
-      fom: radData.avklaring?.fom,
-      tom: radData.avklaring?.tom,
-      stillingsprosent: radData.avklaring?.stillingsprosent,
-    });
+    formMethods.reset(defaultValues);
   };
 
   const inntektsmelding = radData.inntektsmeldingerForRad[0];

@@ -45,11 +45,12 @@ export const ManglendeInntektsmeldingForm = ({
   const intl = useIntl();
   const { arbeidsforholdForRad, inntektsmeldingerForRad } = radData;
 
+  const defaultValues = {
+    saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
+    begrunnelse: radData.avklaring?.begrunnelse,
+  };
   const formMethods = useForm<FormValues>({
-    defaultValues: {
-      saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
-      begrunnelse: radData.avklaring?.begrunnelse,
-    },
+    defaultValues,
   });
 
   useSetDirtyForm(formMethods.formState.isDirty);
@@ -58,10 +59,7 @@ export const ManglendeInntektsmeldingForm = ({
 
   const avbryt = () => {
     lukkArbeidsforholdRad();
-    formMethods.reset({
-      saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
-      begrunnelse: radData.avklaring?.begrunnelse,
-    });
+    formMethods.reset(defaultValues);
   };
 
   const lagre = (formValues: FormValues) => {
