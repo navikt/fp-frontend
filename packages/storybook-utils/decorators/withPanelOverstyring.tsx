@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions';
 import { type ReactRenderer } from '@storybook/react';
 import type { DecoratorFunction } from '@storybook/types';
+import { action } from 'storybook/actions';
 
 import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';

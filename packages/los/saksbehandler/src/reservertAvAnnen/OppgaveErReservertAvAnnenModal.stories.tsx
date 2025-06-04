@@ -1,7 +1,7 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-los-felles';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
@@ -27,7 +27,6 @@ const oppgaveForResevertAvAnnenModal = {
   navn: 'Espen Utvikler',
   system: 'SAK',
   behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-  behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   opprettetTidspunkt: '2019-01-01',
   behandlingsfrist: '2019-01-01',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,

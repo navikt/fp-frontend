@@ -62,11 +62,6 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
               <Table.Row key={sbs.id} onClick={() => åpneFagsak(sbs.saksnummer, sbs.behandlingId)}>
                 <Table.DataCell scope="row">{sbs.navn}</Table.DataCell>
                 <Table.DataCell scope="row">{sbs.saksnummer}</Table.DataCell>
-                {/* <Table.DataCell scope="row">
-                  {sbs.behandlingStatus
-                    ? getKodeverknavnFraKode(alleKodeverk, KodeverkType.BEHANDLING_STATUS, sbs.behandlingStatus)
-                    : ''}
-                </Table.DataCell> */}
                 <Table.DataCell scope="row">
                   <ChevronRightCircleFillIcon aria-hidden className={styles.pointerIcon} />
                 </Table.DataCell>

@@ -2,7 +2,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label, Table } from '@navikt/ds-react';
 
-import { FaktaKilde } from '@navikt/fp-fakta-felles';
 import { type AlleKodeverk, type OmsorgOgRett, Verdi } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../components/ekspansjonsKort/EkspansjonsKort.tsx';
@@ -30,7 +29,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett, alleKodeverk }: Props) => 
   return (
     <EkspansjonsKort
       tittel={intl.formatMessage({ id: 'OpplysningsKort.OpplysningerFraSøknadTittel' })}
-      kilde={FaktaKilde.SOKNAD}
+      kilde="SØKNAD"
       defaultOpen
     >
       <Table>

@@ -1,8 +1,8 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
 import { BehandlingStatus, BehandlingType, DokumentMalType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import {

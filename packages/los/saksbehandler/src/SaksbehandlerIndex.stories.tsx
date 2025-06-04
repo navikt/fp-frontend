@@ -1,16 +1,10 @@
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
-import {
-  AndreKriterierType,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakYtelseType,
-  KøSortering,
-} from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -58,7 +52,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Sara Sahara',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2024-11-01',
     behandlingsfrist: '2024-11-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -76,7 +69,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Petter Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2024-01-01',
     behandlingsfrist: '2024-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -94,7 +86,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Helga Tester',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2023-04-01',
     behandlingsfrist: '2023-04-05',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -122,7 +113,6 @@ const RESERVERTE_OPPGAVER = [
     navn: 'Espen Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -206,14 +196,12 @@ const BEHANDLEDE_OPPGAVER = [
     personnummer: '343453534',
     navn: 'Gaute Johansen',
     saksnummer: '54343',
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   } as Oppgave,
   {
     id: 2,
     personnummer: '334342323',
     navn: 'Olga Mortensen',
     saksnummer: '13232',
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   } as Oppgave,
 ];
 

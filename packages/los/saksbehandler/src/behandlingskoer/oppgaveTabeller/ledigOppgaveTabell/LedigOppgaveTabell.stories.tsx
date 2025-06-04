@@ -1,12 +1,12 @@
 import { type ComponentProps } from 'react';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -35,7 +35,6 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Espen Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,

@@ -2,7 +2,7 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-los-felles';
 
 import * as stories from './OppgaveErReservertAvAnnenModal.stories';
@@ -25,7 +25,6 @@ const oppgaveForResevertAvAnnenModal = {
   navn: 'Espen Utvikler',
   system: 'SAK',
   behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-  behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   opprettetTidspunkt: '2019-01-01',
   behandlingsfrist: '2019-01-01',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
