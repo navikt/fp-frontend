@@ -1,4 +1,4 @@
-import { use, useEffect } from 'react';
+import { use } from 'react';
 import { useIntl } from 'react-intl';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -26,13 +26,12 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const api = useBehandlingApi(behandling);
 
+  // TODO: slett når vi er ferdig, den er fin til å følge med på forskjeller mellom kallene
+  // @ts-expect-error fjernes når fakta-fødsel er ferdig
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling, skalPanelVisesIMeny));
-  // const { data: søknad } = useQuery(api.søknadOptions(behandling));
-  useEffect(() => {
-    console.log('faktaFødsel: ', faktafødsel);
-    console.log('familiehendelse: ', familiehendelse);
-  }, [faktafødsel]);
+
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}

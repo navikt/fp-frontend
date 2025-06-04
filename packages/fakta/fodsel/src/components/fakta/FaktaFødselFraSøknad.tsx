@@ -7,32 +7,32 @@ import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { FødselSøknad } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
-import { AvklartBarn } from './AvklartBarn';
-
 interface Props {
   søknad: FødselSøknad;
 }
 
-export const FaktaFødselFraSøknad = ({ søknad }: Props) => {
+export const FaktaFødselFraSøknad = ({ søknad: { termindato, utstedtdato, antallBarn, barn } }: Props) => {
   const intl = useIntl();
   const tittel = intl.formatMessage({ id: 'FaktaFødselFraSøknad.Tittel' });
   return (
     <FaktaKort label={tittel}>
       <VStack gap="4">
-        {søknad.barn.length > 0 && <AvklartBarn avklartBarn={søknad.barn} />}
-        {søknad.termindato && (
+        {barn.length > 0 && (
+          <ValueLabel label={<FormattedMessage id="Label.Fodselsdato" />}>
+            <DateLabel dateString={barn[0].fødselsdato} />
+          </ValueLabel>
+        )}
+        {termindato && (
           <ValueLabel label={<FormattedMessage id="Label.Termindato" />}>
-            <DateLabel dateString={søknad.termindato} />
+            <DateLabel dateString={termindato} />
           </ValueLabel>
         )}
-        {søknad.utstedtdato && (
+        {utstedtdato && (
           <ValueLabel label={<FormattedMessage id="Label.Utstedtdato" />}>
-            <DateLabel dateString={søknad.utstedtdato} />
+            <DateLabel dateString={utstedtdato} />
           </ValueLabel>
         )}
-        {søknad.antallBarn && (
-          <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{søknad.antallBarn}</ValueLabel>
-        )}
+        {antallBarn && <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{antallBarn}</ValueLabel>}
       </VStack>
     </FaktaKort>
   );

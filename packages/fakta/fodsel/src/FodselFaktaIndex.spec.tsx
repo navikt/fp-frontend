@@ -67,7 +67,7 @@ describe('FodselFaktaIndex', () => {
     expect(situasjonUtstedtdato.getByText('FRA SØKNADEN')).toBeInTheDocument();
 
     const situasjonFødselsdato = within(situasjon.getByLabelText('Fødselsdato'));
-    expect(situasjonFødselsdato.getByText('f. 03.06.2025')).toBeInTheDocument();
+    expect(situasjonFødselsdato.getByText('03.06.2025')).toBeInTheDocument();
     expect(situasjonFødselsdato.getByText('FRA FOLKEREGISTERET')).toBeInTheDocument();
 
     const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));

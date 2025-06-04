@@ -84,7 +84,6 @@ export const APTerminbekreftelse: Story = {
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.TERMINBEKREFTELSE]: merknaderFraBeslutter,
     },
-    // fra sak m. f.nr. 20437533041
     fødsel: {
       søknad: {
         barn: [],
@@ -114,7 +113,6 @@ export const APTerminbekreftelse: Story = {
 
 export const APSjekkManglendeFødselPåEngangstønad: Story = {
   args: {
-    // fra sak m. f.nr. 11499122286
     fødsel: {
       søknad: {
         barn: [
@@ -154,7 +152,6 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
 };
 export const APSjekkManglendeFødselPåForeldrepenger: Story = {
   args: {
-    // fra sak m. f.nr. 15489629477
     fødsel: {
       søknad: {
         barn: [
