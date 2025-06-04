@@ -4,19 +4,16 @@ import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
 import * as stories from './FodselFaktaIndex.stories';
+import { APSjekkManglendeFødselPåEngangstønad, APTerminbekreftelse } from './FodselFaktaIndex.stories';
 
-const {
-  Default,
-  AksjonspunktTerminbekreftelse,
-  AksjonspunktSjekkManglendeFødselPåEngangstønad,
-  AksjonspunktSjekkManglendeFødselPåForeldrepenger,
-} = composeStories(stories);
+const { Default, APTerminbekreftelse, APSjekkManglendeFødselPåEngangstønad, APSjekkManglendeFødselPåForeldrepenger } =
+  composeStories(stories);
 
 describe('FodselFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for termin', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<AksjonspunktTerminbekreftelse submitCallback={lagre} />);
+    const utils = render(<APTerminbekreftelse submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller terminbekreftelse')).toBeInTheDocument();
 
@@ -92,7 +89,7 @@ describe('FodselFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon foreligger', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<AksjonspunktSjekkManglendeFødselPåForeldrepenger submitCallback={lagre} />);
+    const utils = render(<APSjekkManglendeFødselPåForeldrepenger submitCallback={lagre} />);
 
     const apBoks = within(screen.getByLabelText('Kontroller dokumentasjon av fødsel'));
     expect(apBoks.getByText('Fyll inn dokumenterte fødselsopplysninger')).toBeInTheDocument();
@@ -141,7 +138,7 @@ describe('FodselFaktaIndex', () => {
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon ikke foreligger', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<AksjonspunktSjekkManglendeFødselPåEngangstønad submitCallback={lagre} />);
+    const utils = render(<APSjekkManglendeFødselPåEngangstønad submitCallback={lagre} />);
 
     const apBoks = within(screen.getByLabelText('Kontroller dokumentasjon av fødsel'));
     expect(apBoks.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();

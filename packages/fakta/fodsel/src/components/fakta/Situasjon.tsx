@@ -37,15 +37,14 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
         />
       )}
 
-      {barn.length === 1 ||
-        (erLikeBarn && (
-          <FaktaBox
-            key={barn[0].barn.fødselsdato}
-            kilde={barn[0].kilde}
-            value={formaterLiv(barn[0].barn)}
-            label={<FormattedMessage id="Label.Fodselsdato" />}
-          />
-        ))}
+      {(barn.length === 1 || erLikeBarn) && (
+        <FaktaBox
+          key={barn[0].barn.fødselsdato}
+          kilde={barn[0].kilde}
+          value={formaterLiv(barn[0].barn)}
+          label={<FormattedMessage id="Label.Fodselsdato" />}
+        />
+      )}
       {!erLikeBarn &&
         barn.map((b, index) => (
           <FaktaBox
