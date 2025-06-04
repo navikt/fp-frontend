@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -65,16 +65,13 @@ export const ManueltLagtTilArbeidsforholdForm = ({
   const intl = useIntl();
   const [visSletteDialog, setVisSletteDialog] = useState(false);
 
-  const defaultValues = useMemo<FormValues>(
-    () => ({
-      fom: radData?.avklaring?.fom,
-      tom: radData?.avklaring?.tom,
-      stillingsprosent: radData?.avklaring?.stillingsprosent,
-      begrunnelse: radData?.avklaring?.begrunnelse,
-      arbeidsgiverNavn: radData?.avklaring?.arbeidsgiverNavn,
-    }),
-    [radData],
-  );
+  const defaultValues = {
+    fom: radData?.avklaring?.fom,
+    tom: radData?.avklaring?.tom,
+    stillingsprosent: radData?.avklaring?.stillingsprosent,
+    begrunnelse: radData?.avklaring?.begrunnelse,
+    arbeidsgiverNavn: radData?.avklaring?.arbeidsgiverNavn,
+  };
 
   const formMethods = useForm<FormValues>({
     defaultValues,

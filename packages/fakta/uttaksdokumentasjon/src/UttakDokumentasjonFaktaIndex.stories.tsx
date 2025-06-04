@@ -28,7 +28,7 @@ const aktivitetskravGrunnlagListe = [
     stillingsprosent: 50,
     permisjon: {
       prosent: 0,
-      type: '-',
+      type: AktivitetskravPermisjonType.UDEFINERT,
     },
   },
 ] as AktivitetskravGrunnlagArbeid[];

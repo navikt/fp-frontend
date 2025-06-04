@@ -1,4 +1,4 @@
-import { use, useCallback, useState } from 'react';
+import { use, useState } from 'react';
 import { useIntl } from 'react-intl';
 import { useNavigate } from 'react-router';
 
@@ -104,15 +104,15 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
     onSuccess: () => refetchOppgaver(),
   });
 
-  const lukkIverksetterModal = useCallback(() => {
+  const lukkIverksetterModal = () => {
     setVisIverksetterVedtakModal(false);
     navigate('/');
-  }, []);
+  };
 
-  const lukkFatterModal = useCallback(() => {
+  const lukkFatterModal = () => {
     setVisFatterVedtakModal(false);
     navigate('/');
-  }, []);
+  };
 
   const isNotFetching =
     !isBdFetching &&

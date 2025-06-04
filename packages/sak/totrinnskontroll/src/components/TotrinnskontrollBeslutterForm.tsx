@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -123,10 +122,7 @@ export const TotrinnskontrollBeslutterForm = ({
     behandling.behandlingsresultat,
   );
 
-  const defaultValues = useMemo(
-    () => buildInitialValues(totrinnskontrollSkjermlenkeContext),
-    [totrinnskontrollSkjermlenkeContext],
-  );
+  const defaultValues = buildInitialValues(totrinnskontrollSkjermlenkeContext);
   const formMethods = useForm({
     defaultValues: beslutterFormData || defaultValues,
   });

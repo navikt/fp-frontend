@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -122,10 +122,7 @@ export const InnsynVedtakForm = ({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const documents = useMemo(
-    () => getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter),
-    [alleDokumenter, innsynDokumenter],
-  );
+  const documents = getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter);
 
   const apVurderInnsynBegrunnelse =
     aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;

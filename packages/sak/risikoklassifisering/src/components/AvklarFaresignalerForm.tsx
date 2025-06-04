@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -80,23 +79,13 @@ export const AvklarFaresignalerForm = ({
   risikoklassifisering,
   submitCallback,
 }: Props) => {
-  const underkategoriFaresignalVurderinger = useMemo(
-    () =>
-      faresignalVurderinger.filter(
-        vurdering =>
-          vurdering.kode !== FaresignalVurdering.INNVIRKNING &&
-          vurdering.kode !== FaresignalVurdering.INGEN_INNVIRKNING,
-      ),
-    [],
-  );
-
-  const defaultValues = useMemo(
-    () => buildInitialValues(aksjonspunkt, risikoklassifisering),
-    [aksjonspunkt, risikoklassifisering],
+  const underkategoriFaresignalVurderinger = faresignalVurderinger.filter(
+    vurdering =>
+      vurdering.kode !== FaresignalVurdering.INNVIRKNING && vurdering.kode !== FaresignalVurdering.INGEN_INNVIRKNING,
   );
 
   const formMethods = useForm<Values>({
-    defaultValues,
+    defaultValues: buildInitialValues(aksjonspunkt, risikoklassifisering),
   });
 
   const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === FaresignalVurdering.INNVIRKNING;

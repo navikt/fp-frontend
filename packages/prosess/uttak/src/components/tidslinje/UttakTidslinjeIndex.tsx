@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { calcDays, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -161,21 +161,14 @@ export const UttakTidslinjeIndex = ({
   const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, perioderAnnenpart);
   const annenForelderPerioder = leggTidslinjedataTilPeriode(false, uttakMedOpphold, perioderAnnenpart);
 
-  const alleUttaksperioderMedId = useMemo(
-    () =>
-      annenForelderPerioder.concat(
-        hovedsøkerPerioder.map(p => ({
-          ...p,
-          id: p.id + annenForelderPerioder.length,
-        })),
-      ),
-    [hovedsøkerPerioder, annenForelderPerioder],
+  const alleUttaksperioderMedId = annenForelderPerioder.concat(
+    hovedsøkerPerioder.map(p => ({
+      ...p,
+      id: p.id + annenForelderPerioder.length,
+    })),
   );
 
-  const tidslinjeTider = useMemo(
-    () => finnTidslinjeTider(behandling, søknad, familiehendelse, personoversikt, endringsdato),
-    [behandling, søknad, familiehendelse, personoversikt, endringsdato],
-  );
+  const tidslinjeTider = finnTidslinjeTider(behandling, søknad, familiehendelse, personoversikt, endringsdato);
 
   return (
     <UttakTidslinje

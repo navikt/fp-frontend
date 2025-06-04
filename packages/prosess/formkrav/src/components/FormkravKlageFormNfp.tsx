@@ -1,4 +1,4 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
@@ -117,7 +117,7 @@ export const FormkravKlageFormNfp = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const initialValues = useMemo(() => buildInitialValues(klageVurdering), [klageVurdering]);
+  const initialValues = buildInitialValues(klageVurdering);
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });

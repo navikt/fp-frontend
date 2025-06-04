@@ -1,4 +1,4 @@
-import { type ReactElement, useCallback, useEffect } from 'react';
+import { type ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -94,7 +94,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
     }
   }, []);
 
-  const triggerValidationOnChange = useCallback(() => (isSubmitted ? trigger() : undefined), [isSubmitted, trigger]);
+  const triggerValidationOnChange = () => (isSubmitted ? trigger() : undefined);
 
   return (
     <PeriodFieldArray

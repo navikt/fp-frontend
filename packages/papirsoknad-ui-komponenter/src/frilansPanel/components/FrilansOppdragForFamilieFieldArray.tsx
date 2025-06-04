@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
@@ -68,7 +67,7 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
   });
 
   const perioder = watch(`${FRILANS_NAME_PREFIX}.perioder`);
-  const sorterteFomDatoer = useMemo(() => sortFomDates(perioder), [perioder]);
+  const sorterteFomDatoer = sortFomDates(perioder);
 
   return (
     <PeriodFieldArray

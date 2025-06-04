@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon } from '@navikt/aksel-icons';
@@ -15,13 +15,10 @@ interface Props {
 
 export const VedtakDocuments = ({ vedtaksdokumenter, behandlingTypes }: Props) => {
   const [showDocuments, setShowDocuments] = useState(false);
-  const toggleDocuments = useCallback(
-    (evt: React.MouseEvent) => {
-      setShowDocuments(!showDocuments);
-      evt.preventDefault();
-    },
-    [showDocuments],
-  );
+  const toggleDocuments = (evt: React.MouseEvent) => {
+    setShowDocuments(!showDocuments);
+    evt.preventDefault();
+  };
 
   if (vedtaksdokumenter.length === 0) {
     return <FormattedMessage id="DocumentListInnsyn.Vedtaksdokumentasjon" values={{ numberOfDocuments: 0 }} />;

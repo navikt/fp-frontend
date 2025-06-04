@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -45,14 +45,10 @@ export const ManglendeInntektsmeldingForm = ({
   const intl = useIntl();
   const { arbeidsforholdForRad, inntektsmeldingerForRad } = radData;
 
-  const defaultValues = useMemo<FormValues>(
-    () => ({
-      saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
-      begrunnelse: radData.avklaring?.begrunnelse,
-    }),
-    [radData],
-  );
-
+  const defaultValues = {
+    saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
+    begrunnelse: radData.avklaring?.begrunnelse,
+  };
   const formMethods = useForm<FormValues>({
     defaultValues,
   });
@@ -82,7 +78,7 @@ export const ManglendeInntektsmeldingForm = ({
 
   const svgRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
+  const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
   const radioOptions = [
     {
       label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' }),

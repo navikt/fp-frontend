@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -61,16 +61,13 @@ export const ManglendeArbeidsforholdForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const defaultValues = useMemo<FormValues>(
-    () => ({
-      saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
-      begrunnelse: radData.avklaring?.begrunnelse,
-      fom: radData.avklaring?.fom,
-      tom: radData.avklaring?.tom,
-      stillingsprosent: radData.avklaring?.stillingsprosent,
-    }),
-    [radData],
-  );
+  const defaultValues = {
+    saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
+    begrunnelse: radData.avklaring?.begrunnelse,
+    fom: radData.avklaring?.fom,
+    tom: radData.avklaring?.tom,
+    stillingsprosent: radData.avklaring?.stillingsprosent,
+  };
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -119,7 +116,7 @@ export const ManglendeArbeidsforholdForm = ({
 
   const buttonRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
+  const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
 
   return (
     <VStack gap="8">

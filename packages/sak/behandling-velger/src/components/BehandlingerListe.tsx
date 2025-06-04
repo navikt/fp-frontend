@@ -1,4 +1,4 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Label } from '@navikt/ds-react';
@@ -48,12 +48,8 @@ export const BehandlingerListe = ({
   alleKodeverk,
   alleKodeverkTilbakekreving,
 }: Props) => {
-  const sorterteOgFiltrerteBehandlinger = useMemo(
-    () =>
-      sorterBehandlinger(behandlinger).filter(
-        behandling => skalViseAlleBehandlinger || behandling.uuid === behandlingUuid,
-      ),
-    [skalViseAlleBehandlinger, behandlingUuid, behandlinger],
+  const sorterteOgFiltrerteBehandlinger = sorterBehandlinger(behandlinger).filter(
+    behandling => skalViseAlleBehandlinger || behandling.uuid === behandlingUuid,
   );
 
   return (

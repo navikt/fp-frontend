@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -28,24 +27,16 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
 
-  const filtrerteBehandlingstyper = useMemo(
-    () =>
-      behandlingTyper.filter(
-        type => type.kode !== BehandlingType.TILBAKEKREVING && type.kode !== BehandlingType.TILBAKEKREVING_REVURDERING,
-      ),
-    [],
+  const filtrerteBehandlingstyper = behandlingTyper.filter(
+    type => type.kode !== BehandlingType.TILBAKEKREVING && type.kode !== BehandlingType.TILBAKEKREVING_REVURDERING,
   );
 
-  const formDefaultValues = useMemo(
-    () =>
-      Object.values(filtrerteBehandlingstyper).reduce(
-        (app, type) => ({
-          ...app,
-          [type.kode]: true,
-        }),
-        {},
-      ),
-    [],
+  const formDefaultValues = Object.values(filtrerteBehandlingstyper).reduce(
+    (app, type) => ({
+      ...app,
+      [type.kode]: true,
+    }),
+    {},
   );
 
   const formMethods = useForm({

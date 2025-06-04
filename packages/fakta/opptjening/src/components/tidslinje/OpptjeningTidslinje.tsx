@@ -1,4 +1,4 @@
-import { type ReactNode, useCallback, useMemo } from 'react';
+import { type ReactNode } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import {
@@ -134,21 +134,21 @@ export const OpptjeningTidslinje = ({
   const opptjeningFomDato = fastsattOpptjening?.opptjeningFom;
   const opptjeningTomDato = fastsattOpptjening?.opptjeningTom;
 
-  const rader = useMemo(() => lagRader(opptjeningPerioder, opptjeningAktivitetTypes, intl), [opptjeningPerioder]);
-  const perioder = useMemo(
-    () => lagPerioder(opptjeningPerioder, formVerdierForAlleAktiviteter, rader, opptjeningFomDato, opptjeningTomDato),
-    [formVerdierForAlleAktiviteter],
+  const rader = lagRader(opptjeningPerioder, opptjeningAktivitetTypes, intl);
+  const perioder = lagPerioder(
+    opptjeningPerioder,
+    formVerdierForAlleAktiviteter,
+    rader,
+    opptjeningFomDato,
+    opptjeningTomDato,
   );
 
-  const velgPeriode = useCallback(
-    (periodeId: number): void => {
-      const valgtPeriode = perioder.find(item => item.id === periodeId);
-      if (valgtPeriode) {
-        setValgtAktivitetIndex(valgtPeriode.id);
-      }
-    },
-    [perioder, setValgtAktivitetIndex],
-  );
+  const velgPeriode = (periodeId: number): void => {
+    const valgtPeriode = perioder.find(item => item.id === periodeId);
+    if (valgtPeriode) {
+      setValgtAktivitetIndex(valgtPeriode.id);
+    }
+  };
 
   if (!opptjeningFomDato || !opptjeningTomDato) {
     return null;
