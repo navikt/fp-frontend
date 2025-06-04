@@ -1,17 +1,16 @@
 import { type ReactNode } from 'react';
 
-import { Box, Heading, HStack } from '@navikt/ds-react';
+import { Box, Heading } from '@navikt/ds-react';
 
 interface Props {
   children: ReactNode;
   label: string;
-  tags?: ReactNode;
   merknaderFraBeslutter?: {
     notAccepted?: boolean;
   };
 }
 
-export const FaktaKort = ({ label, tags, children, merknaderFraBeslutter }: Props) => {
+export const FaktaKort = ({ label, children, merknaderFraBeslutter }: Props) => {
   const error = !!(merknaderFraBeslutter && merknaderFraBeslutter.notAccepted);
   return (
     <Box
@@ -22,10 +21,7 @@ export const FaktaKort = ({ label, tags, children, merknaderFraBeslutter }: Prop
       aria-label={label}
     >
       <Box padding="4" borderRadius="medium medium 0 0" background="surface-neutral-moderate">
-        <HStack gap="4">
-          <Heading size="small">{label}</Heading>
-          {tags}
-        </HStack>
+        <Heading size="small">{label}</Heading>
       </Box>
       <Box padding="4">{children}</Box>
     </Box>

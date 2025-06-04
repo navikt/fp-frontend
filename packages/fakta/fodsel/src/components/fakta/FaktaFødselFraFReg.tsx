@@ -1,6 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Tag } from '@navikt/ds-react';
+import { BodyShort, VStack } from '@navikt/ds-react';
 
 import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { FødselRegister } from '@navikt/fp-types';
@@ -16,31 +16,20 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
   const intl = useIntl();
   const { barn } = register || {};
 
-  const harDødFødtBarn = barn.filter(b => b.dødsdato).length > 0;
-
   return (
-    <FaktaKort
-      label={intl.formatMessage({ id: 'FaktaFødselFraFReg.Tittel' })}
-      tags={
-        harDødFødtBarn ? (
-          <Tag variant="info">
-            <FormattedMessage id="FaktaFødselFraFReg.Dodfodt" />
-          </Tag>
-        ) : undefined
-      }
-    >
-      <>
+    <FaktaKort label={intl.formatMessage({ id: 'FaktaFødselFraFReg.Tittel' })}>
+      <VStack gap="4">
         {barn.length > 0 ? (
           <>
-            <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{barn.length}</ValueLabel>
             <AvklartBarn avklartBarn={barn} />
+            <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{barn.length}</ValueLabel>
           </>
         ) : (
           <BodyShort>
             <FormattedMessage id="FaktaFødselFraFReg.IngenBarn" />
           </BodyShort>
         )}
-      </>
+      </VStack>
     </FaktaKort>
   );
 };

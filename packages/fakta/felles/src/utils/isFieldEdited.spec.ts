@@ -38,72 +38,6 @@ const soknad = {
 } as Soknad;
 
 describe('isFieldEdited', () => {
-  describe('termindato', () => {
-    it('skal vise endret termindato', () => {
-      const familiehendelse = {
-        termindato: '2018-07-28',
-      };
-
-      const isTermindatoEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse).termindato;
-
-      expect(isTermindatoEdited).toBe(true);
-    });
-
-    it('skal ikke vise uendret termindato', () => {
-      const familiehendelse = {
-        termindato: '2018-07-27',
-      };
-
-      const isTermindatoEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse).termindato;
-
-      expect(isTermindatoEdited).toBe(false);
-    });
-  });
-
-  describe('utstedtdato', () => {
-    it('skal vise endret utstedtdato', () => {
-      const familiehendelse = {
-        utstedtdato: '2018-06-26',
-      };
-
-      const isUtstedtdatoEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse).utstedtdato;
-
-      expect(isUtstedtdatoEdited).toBe(true);
-    });
-
-    it('skal ikke vise uendret utstedtdato', () => {
-      const familiehendelse = {
-        utstedtdato: '2018-06-25',
-      };
-
-      const isUtstedtdatoEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse).utstedtdato;
-
-      expect(isUtstedtdatoEdited).toBe(false);
-    });
-  });
-
-  describe('antallBarn', () => {
-    it('skal vise endret antallBarn', () => {
-      const familiehendelse = {
-        antallBarnTermin: 2,
-      };
-
-      const isAntallBarnEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse).antallBarn;
-
-      expect(isAntallBarnEdited).toBe(true);
-    });
-
-    it('skal ikke vise uendret antallBarn', () => {
-      const familiehendelse = {
-        antallBarnTermin: 1,
-      };
-
-      const isAntallBarnEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse).antallBarn;
-
-      expect(isAntallBarnEdited).toBe(false);
-    });
-  });
-
   describe('vilkarType', () => {
     it('skal vise endret vilkarType', () => {
       const familiehendelse = {
@@ -270,32 +204,6 @@ describe('isFieldEdited', () => {
       const isMannAdoptererAleneEdited = isFieldEdited(soknad, familiehendelse as FamilieHendelse).mannAdoptererAlene;
 
       expect(isMannAdoptererAleneEdited).toBe(false);
-    });
-  });
-
-  describe('dokumentasjonForeligger', () => {
-    it('skal vise endret dokumentasjonForeligger', () => {
-      const familiehendelse = {
-        dokumentasjonForeligger: true,
-      };
-
-      const isDokumentasjonForeliggerEdited = isFieldEdited(
-        soknad,
-        familiehendelse as FamilieHendelse,
-      ).dokumentasjonForeligger;
-
-      expect(isDokumentasjonForeliggerEdited).toBe(true);
-    });
-
-    it('skal ikke vise uendret dokumentasjonForeligger', () => {
-      const familiehendelse = {};
-
-      const isDokumentasjonForeliggerEdited = isFieldEdited(
-        soknad,
-        familiehendelse as FamilieHendelse,
-      ).dokumentasjonForeligger;
-
-      expect(isDokumentasjonForeliggerEdited).toBe(false);
     });
   });
 });

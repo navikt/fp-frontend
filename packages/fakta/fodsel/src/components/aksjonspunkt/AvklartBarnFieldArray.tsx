@@ -2,7 +2,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
-import { BodyShort, Box, Button, HStack } from '@navikt/ds-react';
+import { Box, Button, HStack, Label } from '@navikt/ds-react';
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 
@@ -52,9 +52,9 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
           <HStack gap="4" align="end" key={field.id} paddingBlock="2 0">
             {fields.length > 1 && (
               <Box paddingBlock="3">
-                <BodyShort size="medium">
-                  <FormattedMessage id="Label.NummerertRad" values={{ nummer: index + 1 }} />
-                </BodyShort>
+                <Label size="medium">
+                  <FormattedMessage id="Label.NummerertBarn" values={{ nummer: index + 1 }} />
+                </Label>
               </Box>
             )}
             <Datepicker

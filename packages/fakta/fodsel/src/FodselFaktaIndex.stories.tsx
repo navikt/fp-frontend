@@ -197,7 +197,7 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
   },
 };
 
-export const ReadonlyPanelMedUtførtSjekkMAnglendeFødselAP: Story = {
+export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
   args: {
     isReadOnly: true,
     aksjonspunkterForPanel: [

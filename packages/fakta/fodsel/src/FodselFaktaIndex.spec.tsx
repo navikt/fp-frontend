@@ -58,15 +58,17 @@ describe('FodselFaktaIndex', () => {
 
     const situasjon = within(screen.getByLabelText('Gjeldende opplysninger'));
 
-    expect(situasjon.getAllByText('FRA SØKNADEN')).toHaveLength(2);
-    expect(situasjon.getByText('Termindato')).toBeInTheDocument();
-    expect(situasjon.getByText('10.06.2025')).toBeInTheDocument();
-    expect(situasjon.getByText('Utstedtdato')).toBeInTheDocument();
-    expect(situasjon.getByText('10.05.2025')).toBeInTheDocument();
+    const situasjonTermindato = within(situasjon.getByLabelText('Termindato'));
+    expect(situasjonTermindato.getByText('10.06.2025')).toBeInTheDocument();
+    expect(situasjonTermindato.getByText('FRA SØKNADEN')).toBeInTheDocument();
 
-    expect(situasjon.getByText('Fødselsdato')).toBeInTheDocument();
-    expect(situasjon.getByText('03.06.2025')).toBeInTheDocument();
-    expect(situasjon.getByText('FRA FOLKEREGISTERET')).toBeInTheDocument();
+    const situasjonUtstedtdato = within(situasjon.getByLabelText('Utstedtdato'));
+    expect(situasjonUtstedtdato.getByText('10.05.2025')).toBeInTheDocument();
+    expect(situasjonUtstedtdato.getByText('FRA SØKNADEN')).toBeInTheDocument();
+
+    const situasjonFødselsdato = within(situasjon.getByLabelText('Fødselsdato'));
+    expect(situasjonFødselsdato.getByText('f. 03.06.2025')).toBeInTheDocument();
+    expect(situasjonFødselsdato.getByText('FRA FOLKEREGISTERET')).toBeInTheDocument();
 
     const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));
     expect(søknadsBoks.getByText('Termindato')).toBeInTheDocument();
