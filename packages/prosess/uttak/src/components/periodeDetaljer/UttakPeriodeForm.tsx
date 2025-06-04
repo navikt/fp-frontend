@@ -8,7 +8,7 @@ import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/f
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { OppholdArsakType, PeriodeResultatType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
+import { OppholdArsakType, PeriodeResultatType, StonadskontoType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
 import type {
   AarsakFilter,
   AlleKodeverk,
@@ -74,6 +74,36 @@ const sorterÅrsakKodeverk = (a: PeriodeResultatÅrsakKodeverk, b: PeriodeResult
   return 0;
 };
 
+const lagOptionsTilPeriodeÅrsakSelect = (
+  årsakKoder: PeriodeResultatÅrsakKodeverk[],
+  periodeFom: string,
+  utfallType: string,
+  aarsakFilter: AarsakFilter,
+  periodeType: string,
+  utsettelseType?: string,
+): ReactElement[] => {
+  årsakKoder.sort(sorterÅrsakKodeverk);
+
+  const filteredNyKodeArray = årsakKoder
+    .filter(kodeItem => !utfallType || kodeItem.utfallType === utfallType)
+    .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter, periodeFom))
+    .filter(getFiltrerPåSynlighet(aarsakFilter));
+
+  const mapTilOption = (kodeverk: KodeverkMedNavn<'PeriodeResultatÅrsak'>) => (
+    <option value={kodeverk.kode} key={kodeverk.kode}>
+      {kodeverk.navn}
+    </option>
+  );
+
+  if (utsettelseType && utsettelseType !== '-') {
+    return filteredNyKodeArray.filter(kv => kv.uttakTyper?.includes('UTSETTELSE')).map(mapTilOption);
+  }
+  return filteredNyKodeArray
+    .filter(kv => kv.uttakTyper?.includes('UTTAK'))
+    .filter(kv => periodeType === '-' || kv.valgbarForKonto?.includes(periodeType))
+    .map(mapTilOption);
+};
+
 const getFiltrerPåGyldighetForLovendringer =
   (aarsakFilter: AarsakFilter, periodeFom: string) =>
   (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
@@ -98,43 +128,6 @@ const getFiltrerPåSynlighet =
       ? kodeItem.synligForRolle.includes('MOR')
       : kodeItem.synligForRolle.includes('IKKE_MOR');
   };
-
-const lagOptionsTilPeriodeÅrsakSelect = (
-  årsakKoder: PeriodeResultatÅrsakKodeverk[],
-  periodeFom: string,
-  utfallType: string,
-  aarsakFilter: AarsakFilter,
-  utsettelseType?: string,
-  periodeType?: string,
-  skalFiltrere?: boolean,
-): ReactElement[] => {
-  årsakKoder.sort(sorterÅrsakKodeverk);
-
-  const filteredNyKodeArray = årsakKoder
-    .filter(kodeItem => !utfallType || kodeItem.utfallType === utfallType)
-    .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter, periodeFom))
-    .filter(getFiltrerPåSynlighet(aarsakFilter));
-
-  const mapTilOption = (kodeverk: KodeverkMedNavn<'PeriodeResultatÅrsak'>) => (
-    <option value={kodeverk.kode} key={kodeverk.kode}>
-      {kodeverk.navn}
-    </option>
-  );
-
-  if (skalFiltrere && utsettelseType) {
-    if (utsettelseType !== UtsettelseArsakCode.UDEFINERT) {
-      return filteredNyKodeArray.filter(kv => kv.uttakTyper?.includes('UTSETTELSE')).map(mapTilOption);
-    }
-    if (periodeType && utsettelseType === UtsettelseArsakCode.UDEFINERT) {
-      return filteredNyKodeArray
-        .filter(kv => kv.uttakTyper?.includes('UTTAK'))
-        .filter(kv => kv.valgbarForKonto?.includes(periodeType))
-        .map(mapTilOption);
-    }
-  }
-
-  return filteredNyKodeArray.map(mapTilOption);
-};
 
 // https://jira.adeo.no/browse/PFP-7937
 const finnUker = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker): string => {
@@ -329,16 +322,16 @@ export const UttakPeriodeForm = ({
   const samtidigUttak = formMethods.watch('samtidigUttak');
   const valgtInnvilgelsesÅrsak = formMethods.watch('periodeAarsak');
   const aktiviteter = formMethods.watch('aktiviteter');
-  const førsteValgteStønadskonto = aktiviteter.length > 0 ? aktiviteter[0].stønadskontoType : undefined;
+
+  const stønadskontoType = aktiviteter.length === 1 ? aktiviteter[0].stønadskontoType : StonadskontoType.UDEFINERT;
 
   const periodeÅrsakOptions = lagOptionsTilPeriodeÅrsakSelect(
     periodeResultatårsakKoder,
     valgtPeriode.fom,
     erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
     årsakFilter,
+    stønadskontoType,
     valgtPeriode.utsettelseType,
-    førsteValgteStønadskonto ?? valgtPeriode.periodeType,
-    valgtPeriode.aktiviteter.length === 1,
   );
 
   const graderingAvslagsårsakOptions = lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk);
