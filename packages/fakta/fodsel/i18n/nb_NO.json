@@ -11,7 +11,7 @@
   "TermindatoFaktaForm.FodselsdatoTps": "Fødselsdato",
   "TermindatoFaktaForm.AntallBarnTps": "Antall barn",
   "TermindatoFaktaForm.AdvarselForTidligUtstedtdato": "Terminbekreftelsen utstedt før 22. svangerskapsuke. Kontakt søker for en nyere terminbekreftelse og sett saken på vent. Fortsett dersom ny bekreftelse ikke skal hentes inn. Behandlingen vil avslås på grunn av manglende dokumentasjon",
-  "AvklartBarnFieldArray.NummerertRad": "Barn {nummer}:",
+  "Label.NummerertRad": "Barn {nummer}:",
   "AvklartBarnFieldArray.LeggTilBarn": "Legg til barn",
   "SjekkFodselDokForm.Tittel": "Kontroller dokumentasjon av fødsel",
   "SjekkFodselDokForm.FyllInnDokumenterteOpplysninger": "Fyll inn dokumenterte fødselsopplysninger",
@@ -30,5 +30,5 @@
   "Label.AntallBarn": "Antall barn",
   "Label.Termindato": "Termindato",
   "Label.Utstedtdato": "Utstedtdato",
-  "FodselsammenligningPanel.FodselsdatoMedNr": "Barn {nummer} fødselsdato"
+  "FodselsammenligningPanel.FodselsdatoMedNr": "Barn {nummer}"
 }

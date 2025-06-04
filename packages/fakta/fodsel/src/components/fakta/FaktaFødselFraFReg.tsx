@@ -16,7 +16,7 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
   const intl = useIntl();
   const { barn } = register || {};
 
-  const harDødFødtBarn = barn.filter(b => b.dodsdato).length > 0;
+  const harDødFødtBarn = barn.filter(b => b.dødsdato).length > 0;
 
   return (
     <FaktaKort

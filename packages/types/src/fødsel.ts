@@ -1,4 +1,4 @@
-import type { AvklartBarn } from './familieHendelseTsType';
+export type BarnHendelseData = { fødselsdato: string; dødsdato: string | null };
 
 export type Fødsel = {
   søknad: FødselSøknad;
@@ -7,14 +7,14 @@ export type Fødsel = {
 };
 
 export type FødselSøknad = {
-  barn: AvklartBarn[];
+  barn: BarnHendelseData[];
   termindato: string | null;
   utstedtdato: string | null;
   antallBarn: number;
 };
 
 export type FødselRegister = {
-  barn: AvklartBarn[];
+  barn: BarnHendelseData[];
 };
 
 type FødselDtoGjeldendeUtstedtdato = {
@@ -37,7 +37,7 @@ export type FødselDtoGjeldendeTermindato = {
 
 export type FødselDtoGjeldendeBarn = {
   kilde: Kilde;
-  barn: AvklartBarn;
+  barn: BarnHendelseData;
   kanOverstyres: boolean;
 };
 

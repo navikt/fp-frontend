@@ -4,7 +4,7 @@ import { HStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { FaktaBox } from '@navikt/fp-fakta-felles';
-import type { FødselGjeldende } from '@navikt/fp-types';
+import type { BarnHendelseData, FødselGjeldende } from '@navikt/fp-types';
 
 interface Props {
   gjeldende: FødselGjeldende;
@@ -12,12 +12,12 @@ interface Props {
 
 export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Props) => {
   const erLikeBarn =
-    barn.length === 0 ||
+    barn.length > 0 &&
     barn.every(
       b =>
         b.kilde === barn[0].kilde &&
-        b.barn.fodselsdato === barn[0].barn.fodselsdato &&
-        b.barn.dodsdato === barn[0].barn.dodsdato,
+        b.barn.fødselsdato === barn[0].barn.fødselsdato &&
+        b.barn.dødsdato === barn[0].barn.dødsdato,
     );
   const intl = useIntl();
   return (
@@ -36,27 +36,31 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
           value={dateFormat(utstedtdato.utstedtdato)}
         />
       )}
-      {barn.map((b, index) => (
-        <FaktaBox
-          key={b.barn.fodselsdato}
-          kilde={b.kilde}
-          value={dateFormat(b.barn.fodselsdato)}
-          label={
-            erLikeBarn ? (
-              <FormattedMessage id="Label.Fodselsdato" />
-            ) : (
-              <FormattedMessage id="FodselsammenligningPanel.FodselsdatoMedNr" values={{ nummer: index + 1 }} />
-            )
-          }
-        />
-      ))}
-      {erLikeBarn && barn.length > 0 && (
-        <FaktaBox
-          kilde={barn[0].kilde}
-          label={<FormattedMessage id="Label.AntallBarn" />}
-          value={barn.length.toString()}
-        />
-      )}
+
+      {barn.length === 1 ||
+        (erLikeBarn && (
+          <FaktaBox
+            key={barn[0].barn.fødselsdato}
+            kilde={barn[0].kilde}
+            value={formaterLiv(barn[0].barn)}
+            label={<FormattedMessage id="Label.Fodselsdato" />}
+          />
+        ))}
+      {!erLikeBarn &&
+        barn.map((b, index) => (
+          <FaktaBox
+            key={b.barn.fødselsdato}
+            kilde={b.kilde}
+            value={formaterLiv(b.barn)}
+            label={<FormattedMessage id="FodselsammenligningPanel.FodselsdatoMedNr" values={{ nummer: index + 1 }} />}
+          />
+        ))}
     </HStack>
   );
+};
+
+const formaterLiv = ({ fødselsdato, dødsdato }: BarnHendelseData): string => {
+  const født = dateFormat(fødselsdato);
+  const død = dødsdato ? dateFormat(dødsdato) : null;
+  return dødsdato ? `f. ${født} - d. ${død}` : `f. ${født}`;
 };

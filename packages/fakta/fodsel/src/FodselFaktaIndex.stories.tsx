@@ -24,15 +24,15 @@ const merknaderFraBeslutter = {
 const testFødsel: Fødsel = {
   søknad: {
     barn: [
-      { fodselsdato: '2023-10-01', dodsdato: null },
-      { fodselsdato: '2023-10-02', dodsdato: null },
+      { fødselsdato: '2023-10-01', dødsdato: null },
+      { fødselsdato: '2023-10-02', dødsdato: null },
     ],
     termindato: '2023-10-15',
     utstedtdato: '2023-10-10',
     antallBarn: 2,
   },
   register: {
-    barn: [{ fodselsdato: '2023-10-01', dodsdato: null }],
+    barn: [{ fødselsdato: '2023-10-01', dødsdato: null }],
   },
   gjeldende: {
     termindato: {
@@ -48,7 +48,7 @@ const testFødsel: Fødsel = {
     barn: [
       {
         kilde: 'SAKSBEHANDLER',
-        barn: { fodselsdato: '2023-10-01', dodsdato: null },
+        barn: { fødselsdato: '2023-10-01', dødsdato: null },
         kanOverstyres: true,
       },
     ],
@@ -110,8 +110,8 @@ export const AksjonspunktSjekkManglendeFødselPåEngangstønad: Story = {
       søknad: {
         barn: [
           {
-            fodselsdato: '2025-05-04',
-            dodsdato: null,
+            fødselsdato: '2025-05-04',
+            dødsdato: null,
           },
         ],
         termindato: null,
@@ -128,8 +128,8 @@ export const AksjonspunktSjekkManglendeFødselPåEngangstønad: Story = {
           {
             kilde: 'SØKNAD',
             barn: {
-              fodselsdato: '2025-05-04',
-              dodsdato: null,
+              fødselsdato: '2025-05-04',
+              dødsdato: null,
             },
             kanOverstyres: true,
           },
@@ -153,8 +153,8 @@ export const AksjonspunktSjekkManglendeFødselPåForeldrepenger: Story = {
       søknad: {
         barn: [
           {
-            fodselsdato: '2025-05-04',
-            dodsdato: null,
+            fødselsdato: '2025-05-04',
+            dødsdato: null,
           },
         ],
         termindato: '2025-04-14',
@@ -175,8 +175,8 @@ export const AksjonspunktSjekkManglendeFødselPåForeldrepenger: Story = {
           {
             kilde: 'SØKNAD',
             barn: {
-              fodselsdato: '2025-05-04',
-              dodsdato: null,
+              fødselsdato: '2025-05-04',
+              dødsdato: null,
             },
             kanOverstyres: true,
           },
@@ -223,8 +223,8 @@ export const Default: Story = {
       register: {
         barn: [
           {
-            fodselsdato: '2025-06-03',
-            dodsdato: null,
+            fødselsdato: '2025-06-03',
+            dødsdato: null,
           },
         ],
       },
@@ -242,13 +242,68 @@ export const Default: Story = {
           {
             kilde: 'FOLKEREGISTER',
             barn: {
-              fodselsdato: '2025-06-03',
-              dodsdato: null,
+              fødselsdato: '2025-06-03',
+              dødsdato: null,
             },
             kanOverstyres: false,
           },
         ],
         antallBarn: 1,
+      },
+    },
+  },
+};
+
+export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
+  args: {
+    fødsel: {
+      søknad: {
+        barn: [],
+        termindato: '2025-05-21',
+        utstedtdato: '2025-04-21',
+        antallBarn: 1,
+      },
+      register: {
+        barn: [
+          {
+            fødselsdato: '2025-05-28',
+            dødsdato: '2025-05-28',
+          },
+          {
+            fødselsdato: '2025-05-28',
+            dødsdato: null,
+          },
+        ],
+      },
+      gjeldende: {
+        termindato: {
+          kilde: 'SØKNAD',
+          termindato: '2025-05-21',
+          kanOverstyres: true,
+        },
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-04-21',
+        },
+        barn: [
+          {
+            kilde: 'FOLKEREGISTER',
+            barn: {
+              fødselsdato: '2025-05-28',
+              dødsdato: '2025-05-28',
+            },
+            kanOverstyres: false,
+          },
+          {
+            kilde: 'FOLKEREGISTER',
+            barn: {
+              fødselsdato: '2025-05-28',
+              dødsdato: null,
+            },
+            kanOverstyres: false,
+          },
+        ],
+        antallBarn: 2,
       },
     },
   },

@@ -5,20 +5,20 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { ValueLabel } from '@navikt/fp-fakta-felles';
-import type { AvklartBarn as AvklartBarnType } from '@navikt/fp-types';
+import type { BarnHendelseData } from '@navikt/fp-types';
 
 interface Props {
-  avklartBarn: AvklartBarnType[];
+  avklartBarn: BarnHendelseData[];
 }
 
-const alleBarnHarSammeFodselsdatoOgStatus = (avklartBarn: AvklartBarnType[]) => {
+const alleBarnHarSammeFodselsdatoOgStatus = (avklartBarn: BarnHendelseData[]) => {
   if (avklartBarn.length === 0) {
     return false;
   }
-  const fodselsdato = avklartBarn[0].fodselsdato;
-  const dodsdato = avklartBarn[0].dodsdato;
+  const fødselsdato = avklartBarn[0].fødselsdato;
+  const dodsdato = avklartBarn[0].dødsdato;
 
-  return avklartBarn.every(barn => barn.fodselsdato === fodselsdato && barn.dodsdato === dodsdato);
+  return avklartBarn.every(barn => barn.fødselsdato === fødselsdato && barn.dødsdato === dodsdato);
 };
 
 export const AvklartBarn = ({ avklartBarn }: Props) => {
@@ -28,27 +28,27 @@ export const AvklartBarn = ({ avklartBarn }: Props) => {
         (alleBarnHarSammeFodselsdatoOgStatus(avklartBarn) ? (
           <>
             <ValueLabel label={<FormattedMessage id="Label.Fodselsdato" />}>
-              <DateLabel dateString={avklartBarn[0].fodselsdato} />
+              <DateLabel dateString={avklartBarn[0].fødselsdato} />
             </ValueLabel>
-            {avklartBarn[0].dodsdato && (
+            {avklartBarn[0].dødsdato && (
               <ValueLabel label={<FormattedMessage id="Label.Dodsdato" />}>
-                <DateLabel dateString={avklartBarn[0].dodsdato} />
+                <DateLabel dateString={avklartBarn[0].dødsdato} />
               </ValueLabel>
             )}
           </>
         ) : (
           <ValueLabel label={<FormattedMessage id="Label.Fodselsdato" />}>
             {avklartBarn.map((barn, index) => (
-              <BodyShort key={barn.fodselsdato + barn.dodsdato}>
-                {index + 1}
-                {': '}
-                {dateFormat(barn.fodselsdato)} (
-                {barn.dodsdato && (
+              <BodyShort key={barn.fødselsdato + barn.dødsdato}>
+                <FormattedMessage id="Label.NummerertRad" values={{ nummer: index + 1 }} />{' '}
+                {dateFormat(barn.fødselsdato)}
+                {barn.dødsdato && (
                   <>
-                    <FormattedMessage id="FaktaFødselFraFReg.Dod" /> <DateLabel dateString={barn.dodsdato} />
+                    {' '}
+                    (
+                    <FormattedMessage id="FaktaFødselFraFReg.Dod" /> <DateLabel dateString={barn.dødsdato} />)
                   </>
                 )}
-                )
               </BodyShort>
             ))}
           </ValueLabel>

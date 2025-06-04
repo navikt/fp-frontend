@@ -53,7 +53,7 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
             {fields.length > 1 && (
               <Box paddingBlock="3">
                 <BodyShort size="medium">
-                  <FormattedMessage id="AvklartBarnFieldArray.NummerertRad" values={{ nummer: index + 1 }} />
+                  <FormattedMessage id="Label.NummerertRad" values={{ nummer: index + 1 }} />
                 </BodyShort>
               </Box>
             )}
@@ -96,9 +96,9 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
 AvklartBarnFieldArray.initialValues = (gjeldende: FødselGjeldende): AvklarBarnFormValues => ({
   avklartBarn:
     gjeldende.barn.length > 0
-      ? gjeldende.barn.map(({ barn: { fodselsdato, dodsdato }, kanOverstyres }) => ({
-          fodselsdato,
-          dodsdato: dodsdato ?? null,
+      ? gjeldende.barn.map(({ barn: { fødselsdato, dødsdato }, kanOverstyres }) => ({
+          fodselsdato: fødselsdato,
+          dodsdato: dødsdato ?? null,
           erRedigerbar: kanOverstyres,
         }))
       : lagBarn(gjeldende.antallBarn || 0),

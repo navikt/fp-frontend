@@ -4,7 +4,7 @@ import { BodyShort, Tag, VStack } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { ValueLabel } from '@navikt/fp-fakta-felles';
-import type { AvklartBarn, FødselSøknad } from '@navikt/fp-types';
+import type { BarnHendelseData, FødselSøknad } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
@@ -40,20 +40,20 @@ export const FaktaFødselFraSøknad = ({ søknad }: Props) => {
   );
 };
 
-const Fødselsdatoer = ({ barn }: { barn: AvklartBarn[] }) => {
-  const filtrertBarn = barn.reduce<AvklartBarn[]>((acc, curr) => {
-    return acc.some(e => e.fodselsdato == curr.fodselsdato && e.dodsdato == curr.dodsdato) ? acc : acc.concat(curr);
+const Fødselsdatoer = ({ barn }: { barn: BarnHendelseData[] }) => {
+  const filtrertBarn = barn.reduce<BarnHendelseData[]>((acc, curr) => {
+    return acc.some(e => e.fødselsdato == curr.fødselsdato && e.dødsdato == curr.dødsdato) ? acc : acc.concat(curr);
   }, []);
 
-  return filtrertBarn.map(({ fodselsdato, dodsdato }) => (
-    <BodyShort key={fodselsdato}>
-      {dodsdato ? (
+  return filtrertBarn.map(({ fødselsdato, dødsdato }) => (
+    <BodyShort key={fødselsdato}>
+      {dødsdato ? (
         <>
-          <PeriodLabel dateStringFom={fodselsdato} dateStringTom={dodsdato} />
+          <PeriodLabel dateStringFom={fødselsdato} dateStringTom={dødsdato} />
           <Tag variant="info">Død</Tag>
         </>
       ) : (
-        <DateLabel dateString={fodselsdato} />
+        <DateLabel dateString={fødselsdato} />
       )}
       {}
     </BodyShort>
