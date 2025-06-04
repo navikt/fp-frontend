@@ -4,7 +4,6 @@ import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
 import * as stories from './FodselFaktaIndex.stories';
-import { APSjekkManglendeFødselPåEngangstønad, APTerminbekreftelse } from './FodselFaktaIndex.stories';
 
 const { Default, APTerminbekreftelse, APSjekkManglendeFødselPåEngangstønad, APSjekkManglendeFødselPåForeldrepenger } =
   composeStories(stories);
@@ -52,7 +51,7 @@ describe('FodselFaktaIndex', () => {
     });
   });
 
-  it('skal vise fakta i revurdering  ved fødselshendlese', async () => {
+  it('skal vise fakta i revurdering ved fødselshendlese', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<Default submitCallback={lagre} />);
@@ -65,11 +64,9 @@ describe('FodselFaktaIndex', () => {
     expect(situasjon.getByText('Utstedtdato')).toBeInTheDocument();
     expect(situasjon.getByText('10.05.2025')).toBeInTheDocument();
 
-    expect(situasjon.getAllByText('FRA FOLKEREGISTERET')).toHaveLength(2);
     expect(situasjon.getByText('Fødselsdato')).toBeInTheDocument();
     expect(situasjon.getByText('03.06.2025')).toBeInTheDocument();
-    expect(situasjon.getByText('Antall barn')).toBeInTheDocument();
-    expect(situasjon.getByText('1')).toBeInTheDocument();
+    expect(situasjon.getByText('FRA FOLKEREGISTERET')).toBeInTheDocument();
 
     const søknadsBoks = within(screen.getByLabelText('Opplysninger oppgitt i søknaden'));
     expect(søknadsBoks.getByText('Termindato')).toBeInTheDocument();
