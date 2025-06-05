@@ -7,7 +7,7 @@ import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@na
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -49,7 +49,6 @@ export const TermindatoFaktaForm = ({
   alleMerknaderFraBeslutter,
 }: Props) => {
   const intl = useIntl();
-  const editedStatus = isFieldEdited(soknad, gjeldendeFamiliehendelse);
 
   const { watch } = useFormContext<FormValues>();
 
@@ -75,14 +74,14 @@ export const TermindatoFaktaForm = ({
             label={intl.formatMessage({ id: 'TermindatoFaktaForm.UtstedtDato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}
-            isEdited={editedStatus.utstedtdato}
+            isEdited={isNotEqual(soknad.utstedtdato, gjeldendeFamiliehendelse.utstedtdato)}
           />
           <Datepicker
             name="termindato"
             label={intl.formatMessage({ id: 'TermindatoFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}
-            isEdited={editedStatus.termindato}
+            isEdited={isNotEqual(soknad.termindato, gjeldendeFamiliehendelse.termindato)}
           />
           <InputField
             name="antallBarn"
@@ -94,7 +93,7 @@ export const TermindatoFaktaForm = ({
             validate={[required, hasValidInteger, minValue1, maxValue9]}
             readOnly={readOnly}
             className={styles.bredde}
-            isEdited={editedStatus.antallBarn}
+            isEdited={isNotEqual(soknad.antallBarn, gjeldendeFamiliehendelse.antallBarnTermin)}
           />
         </HStack>
       </FaktaGruppe>

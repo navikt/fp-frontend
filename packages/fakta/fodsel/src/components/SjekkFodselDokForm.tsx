@@ -6,7 +6,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
 import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
@@ -58,7 +58,6 @@ export const SjekkFodselDokForm = ({
   const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;
   const begrunnelse = watch('begrunnelse') || false;
 
-  const dokumentasjonForeliggerIsEdited = isFieldEdited(soknad, gjeldende).dokumentasjonForeligger;
   const { termindato, vedtaksDatoSomSvangerskapsuke } = gjeldende;
 
   return (
@@ -79,7 +78,7 @@ export const SjekkFodselDokForm = ({
         <VStack gap="2">
           <RadioGroupPanel
             name="dokumentasjonForeligger"
-            isEdited={dokumentasjonForeliggerIsEdited}
+            isEdited={hasValue(gjeldende.dokumentasjonForeligger)}
             hideLegend
             validate={[required]}
             isReadOnly={readOnly}
