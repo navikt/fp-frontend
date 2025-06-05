@@ -5,7 +5,7 @@ import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import type { FieldEditedInfo } from '@navikt/fp-fakta-felles';
+import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
@@ -22,7 +22,6 @@ export type FormValues = {
 interface Props {
   readOnly: boolean;
   erAksjonspunktForeldreansvar: boolean;
-  editedStatus: FieldEditedInfo;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   soknad: Soknad;
   familiehendelse: FamilieHendelse;
@@ -34,7 +33,6 @@ interface Props {
 export const OmsorgsovertakelseFaktaPanel = ({
   readOnly,
   erAksjonspunktForeldreansvar,
-  editedStatus,
   alleMerknaderFraBeslutter,
   soknad,
   familiehendelse,
@@ -57,7 +55,7 @@ export const OmsorgsovertakelseFaktaPanel = ({
           label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
-          isEdited={editedStatus.omsorgsovertakelseDato}
+          isEdited={isNotEqual(soknad.omsorgsovertakelseDato, familiehendelse.omsorgsovertakelseDato)}
         />
         {erAksjonspunktForeldreansvar && (
           <Datepicker

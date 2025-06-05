@@ -3,8 +3,7 @@ export { FaktaSubmitButton } from './src/components/form/FaktaSubmitButton';
 export { TrueFalseInput } from './src/components/form/TrueFalseInput';
 export type { FormValues as FaktaBegrunnelseFormValues } from './src/components/form/FaktaBegrunnelseTextField';
 
-export { isFieldEdited } from './src/utils/isFieldEdited';
-export type { FieldEditedInfo } from './src/utils/isFieldEdited';
+export { hasValue, isNotEqual } from './src/utils/validering';
 export { sorterPerioder } from './src/utils/periodeUtils';
 export { formaterAdresse, getNyesteAdresse, erPersonAdresserLike } from './src/utils/adresseUtils';
 export { validerApKodeOgHentApEnum } from './src/utils/validerApKodeOgHentApEnum';

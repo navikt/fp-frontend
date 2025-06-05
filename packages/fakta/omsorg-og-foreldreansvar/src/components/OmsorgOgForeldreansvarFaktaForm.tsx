@@ -7,7 +7,7 @@ import { SelectField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { EditedIcon, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { type FieldEditedInfo, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
@@ -43,9 +43,6 @@ const getDescriptionText = (vilkarCode?: string): ReactElement => {
   return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkarToSeeDescription" />;
 };
 
-const getEditedStatus = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): FieldEditedInfo =>
-  isFieldEdited(soknad, gjeldendeFamiliehendelse);
-
 export type FormValues = OmsorgFormValues &
   RettighetFormValues & {
     vilkarType?: string;
@@ -79,7 +76,6 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
 
   const { watch } = useFormContext<FormValues>();
 
-  const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
   const vilkarType = watch('vilkarType');
 
   return (
@@ -88,7 +84,6 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
         <OmsorgsovertakelseFaktaPanel
           readOnly={readOnly}
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
-          editedStatus={editedStatus}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
           familiehendelse={gjeldendeFamiliehendelse}
@@ -126,7 +121,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
                 <Label size="small" as="span">
                   {vilkarTypes.find(d => d.kode === vilkarType)?.navn}
                 </Label>
-                {editedStatus.vilkarType && <EditedIcon />}
+                {hasValue(gjeldendeFamiliehendelse.vilkarType) && <EditedIcon />}
               </div>
             )}
             <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
