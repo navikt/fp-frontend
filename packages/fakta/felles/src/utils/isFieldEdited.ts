@@ -8,15 +8,6 @@ const hasValue = (value: string | number | boolean | undefined | null): boolean 
 const isNotEqual = (value1: number | string | undefined | null, value2: number | string | undefined | null): boolean =>
   hasValue(value2) && value1 !== value2;
 
-const getIsUtstedtDatoEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean =>
-  isNotEqual(soknad.utstedtdato, familiehendelse.utstedtdato);
-
-const getIsTerminDatoEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean =>
-  isNotEqual(soknad.termindato, familiehendelse.termindato);
-
-const getIsAntallBarnEdited = (soknad: Soknad, familiehendelse: FamilieHendelse): boolean =>
-  isNotEqual(soknad.antallBarn, familiehendelse.antallBarnTermin);
-
 const getIsVilkarTypeEdited = (familiehendelse: FamilieHendelse): boolean => hasValue(familiehendelse.vilkarType);
 
 const getIsAdopsjonFodelsedatoerEdited = (
@@ -40,13 +31,7 @@ const getIsEktefellesBarnEdited = (familiehendelse: FamilieHendelse): boolean =>
 const getIsMannAdoptererAleneEdited = (familiehendelse: FamilieHendelse): boolean =>
   hasValue(familiehendelse.mannAdoptererAlene);
 
-const getIsDokumentasjonForeliggerEdited = (familiehendelse: FamilieHendelse): boolean =>
-  hasValue(familiehendelse.dokumentasjonForeligger);
-
 export type FieldEditedInfo = {
-  termindato?: boolean;
-  antallBarn?: boolean;
-  utstedtdato?: boolean;
   adopsjonFodelsedatoer?: Record<string, boolean>;
   omsorgsovertakelseDato?: boolean;
   barnetsAnkomstTilNorgeDato?: boolean;
@@ -54,16 +39,12 @@ export type FieldEditedInfo = {
   vilkarType?: boolean;
   ektefellesBarn?: boolean;
   mannAdoptererAlene?: boolean;
-  dokumentasjonForeligger?: boolean;
 };
 
 export const isFieldEdited = (
   soknad: Soknad = {} as Soknad,
   gjeldendeFamiliehendelse: FamilieHendelse = {} as FamilieHendelse,
 ): FieldEditedInfo => ({
-  termindato: getIsTerminDatoEdited(soknad, gjeldendeFamiliehendelse),
-  antallBarn: getIsAntallBarnEdited(soknad, gjeldendeFamiliehendelse),
-  utstedtdato: getIsUtstedtDatoEdited(soknad, gjeldendeFamiliehendelse),
   adopsjonFodelsedatoer: getIsAdopsjonFodelsedatoerEdited(soknad, gjeldendeFamiliehendelse),
   omsorgsovertakelseDato: getIsOmsorgsovertakelseDatoEdited(soknad, gjeldendeFamiliehendelse),
   barnetsAnkomstTilNorgeDato: getIsBarnetsAnkomstTilNorgeDatoEdited(soknad, gjeldendeFamiliehendelse),
@@ -71,5 +52,4 @@ export const isFieldEdited = (
   vilkarType: getIsVilkarTypeEdited(gjeldendeFamiliehendelse),
   ektefellesBarn: getIsEktefellesBarnEdited(gjeldendeFamiliehendelse),
   mannAdoptererAlene: getIsMannAdoptererAleneEdited(gjeldendeFamiliehendelse),
-  dokumentasjonForeligger: getIsDokumentasjonForeliggerEdited(gjeldendeFamiliehendelse),
 });

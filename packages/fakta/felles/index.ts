@@ -17,3 +17,5 @@ export { Personopplysninger } from './src/components/personer/Personopplysninger
 export { PersonopplysningerForFamilie } from './src/components/personer/PersonopplysningerForFamilie';
 
 export { AdresseTabell } from './src/components/adresser/AdresseTabell';
+
+export { ValueLabel } from './src/components/ValueLabel';
