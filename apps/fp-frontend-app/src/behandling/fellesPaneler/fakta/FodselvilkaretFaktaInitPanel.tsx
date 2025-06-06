@@ -9,6 +9,7 @@ import { AksjonspunktKode, fodselsvilkarene } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
+import { useFagsakApi } from '../../../data/fagsakApi';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
@@ -18,20 +19,29 @@ const AKSJONSPUNKT_KODER = [AksjonspunktKode.TERMINBEKREFTELSE, AksjonspunktKode
 export const FodselvilkaretFaktaInitPanel = () => {
   const intl = useIntl();
 
-  const { behandling } = use(BehandlingDataContext);
+  const { behandling, fagsak } = use(BehandlingDataContext);
 
   const skalPanelVisesIMeny = behandling.vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType));
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const api = useBehandlingApi(behandling);
+  const fagsakApi = useFagsakApi();
 
-  // TODO: slett når vi er ferdig, den er fin til å følge med på forskjeller mellom kallene
-  // @ts-expect-error fjernes når fakta-fødsel er ferdig
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling, skalPanelVisesIMeny));
+  const { data: alleDokumenter = [] } = useQuery(
+    fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon),
+  );
 
+  const terminbekreftelseDokument = alleDokumenter.find(dok => dok.tittel === 'Terminbekreftelse');
+  const terminbekreftelseDokumentReferanse = terminbekreftelseDokument
+    ? {
+        saksnummer: fagsak.saksnummer,
+        journalpostId: terminbekreftelseDokument.journalpostId,
+        dokumentId: terminbekreftelseDokument.dokumentId,
+        dokumentTittel: terminbekreftelseDokument.tittel,
+      }
+    : undefined;
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
@@ -40,7 +50,11 @@ export const FodselvilkaretFaktaInitPanel = () => {
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {faktafødsel ? (
-        <FodselFaktaIndex fødsel={faktafødsel} submittable={standardPanelProps.submittable} />
+        <FodselFaktaIndex
+          fødsel={faktafødsel}
+          terminbekreftelseDokumentReferanse={terminbekreftelseDokumentReferanse}
+          submittable={standardPanelProps.submittable}
+        />
       ) : (
         <LoadingPanel />
       )}

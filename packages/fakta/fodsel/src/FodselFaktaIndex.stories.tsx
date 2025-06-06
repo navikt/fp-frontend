@@ -33,6 +33,11 @@ const meta = {
     submittable: true,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
+    terminbekreftelseDokumentReferanse: {
+      journalpostId: '1',
+      dokumentId: '2',
+      saksnummer: '3',
+    },
     fødsel: {
       søknad: {
         barn: [],
@@ -113,6 +118,7 @@ export const APTerminbekreftelse: Story = {
 
 export const APSjekkManglendeFødselPåEngangstønad: Story = {
   args: {
+    terminbekreftelseDokumentReferanse: undefined,
     fødsel: {
       søknad: {
         barn: [
@@ -121,7 +127,7 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
             dødsdato: null,
           },
         ],
-        termindato: null,
+        termindato: '2025-05-06',
         utstedtdato: null,
         antallBarn: 1,
       },
@@ -129,7 +135,11 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
         barn: [],
       },
       gjeldende: {
-        termindato: null,
+        termindato: {
+          kilde: 'SØKNAD',
+          termindato: '2025-05-06',
+          kanOverstyres: true,
+        },
         utstedtdato: null,
         barn: [
           {

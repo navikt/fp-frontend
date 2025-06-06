@@ -66,6 +66,7 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
     </HStack>
   );
 };
+
 const formaterLiv = ({ fødselsdato, dødsdato }: BarnHendelseData): string => {
   const født = dateFormat(fødselsdato);
   const død = dødsdato ? dateFormat(dødsdato) : null;

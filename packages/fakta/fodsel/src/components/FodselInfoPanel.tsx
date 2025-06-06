@@ -5,6 +5,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Fødsel } from '@navikt/fp-types';
+import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { SjekkFodselDokForm } from './aksjonspunkt/SjekkFodselDokForm';
@@ -18,6 +19,7 @@ const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktKode;
 interface Props {
   fødsel: Fødsel;
   submittable: boolean;
+  terminbekreftelseDokumentReferanse: DokumentLinkReferanse | undefined;
 }
 
 /**
@@ -25,7 +27,7 @@ interface Props {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
-export const FodselInfoPanel = ({ submittable, fødsel }: Props) => {
+export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumentReferanse }: Props) => {
   const { aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === TERMINBEKREFTELSE);
@@ -43,8 +45,12 @@ export const FodselInfoPanel = ({ submittable, fødsel }: Props) => {
       )}
 
       <Situasjon gjeldende={fødsel.gjeldende} />
+
       <HGrid columns={2} gap="4">
-        <FaktaFødselFraSøknad søknad={fødsel.søknad} />
+        <FaktaFødselFraSøknad
+          søknad={fødsel.søknad}
+          terminbekreftelseDokumentReferanse={terminbekreftelseDokumentReferanse}
+        />
         <FaktaFødselFraFReg register={fødsel.register} />
       </HGrid>
 

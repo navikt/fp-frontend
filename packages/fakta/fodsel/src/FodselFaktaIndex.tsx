@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { Fødsel } from '@navikt/fp-types';
+import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 
 import { FodselInfoPanel } from './components/FodselInfoPanel';
 
@@ -12,6 +13,7 @@ const intl = createIntl(messages);
 
 interface Props {
   fødsel: Fødsel;
+  terminbekreftelseDokumentReferanse: DokumentLinkReferanse | undefined;
   submittable: boolean;
 }
 

@@ -23,9 +23,10 @@ describe('FodselFaktaIndex', () => {
     expect(søknadsBoks.getByText('20.05.2025')).toBeInTheDocument();
     expect(søknadsBoks.getByText('Antall barn')).toBeInTheDocument();
     expect(søknadsBoks.getByText('1')).toBeInTheDocument();
+    expect(søknadsBoks.getByText('Vis terminbekreftelse')).toBeInTheDocument();
 
-    const fregBoks = within(screen.getByLabelText('Opplysninger fra folkeregisteret'));
-    expect(fregBoks.getByText('Det er ikke registrert noen fødselshendelse i folkeregisteret')).toBeInTheDocument();
+    const fregBoks = within(screen.getByLabelText('Opplysninger fra Folkeregisteret'));
+    expect(fregBoks.getByText('Det er ikke registrert noen fødselshendelse i Folkeregisteret')).toBeInTheDocument();
 
     const apBoks = within(screen.getByLabelText('Kontroller opplysninger om termin oppgitt i søknaden'));
 
@@ -78,7 +79,7 @@ describe('FodselFaktaIndex', () => {
     expect(søknadsBoks.getByText('Antall barn')).toBeInTheDocument();
     expect(søknadsBoks.getByText('1')).toBeInTheDocument();
 
-    const fregBoks = within(screen.getByLabelText('Opplysninger fra folkeregisteret'));
+    const fregBoks = within(screen.getByLabelText('Opplysninger fra Folkeregisteret'));
     expect(fregBoks.getByText('Antall barn')).toBeInTheDocument();
     expect(fregBoks.getByText('1')).toBeInTheDocument();
     expect(fregBoks.getByText('Fødselsdato')).toBeInTheDocument();

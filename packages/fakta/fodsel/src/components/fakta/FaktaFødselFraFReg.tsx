@@ -1,6 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Box, HStack, VStack } from '@navikt/ds-react';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { BodyShort, Box, HStack, Tooltip, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
@@ -33,7 +34,9 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
           </ValueLabel>
           {barn[0].dødsdato && (
             <ValueLabel label={<FormattedMessage id="Label.Dodsdato" />}>
-              <DateLabel dateString={barn[0].dødsdato} />
+              <HStack align="center" gap="2">
+                <DateLabel dateString={barn[0].dødsdato} /> <MarkeringDød />
+              </HStack>
             </ValueLabel>
           )}
           <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{barn.length}</ValueLabel>
@@ -60,10 +63,19 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
                 />
               </Box>
               {harDødtBarn && (
-                <Box width="100px">
+                <Box>
                   <ReadOnlyField
                     size="medium"
-                    value={dødsdato ? <DateLabel dateString={dødsdato} /> : '-'}
+                    value={
+                      dødsdato ? (
+                        <HStack gap="2">
+                          <DateLabel dateString={dødsdato} />
+                          <MarkeringDød />
+                        </HStack>
+                      ) : (
+                        '-'
+                      )
+                    }
                     label={<FormattedMessage id="Label.Dodsdato" />}
                     hideLabel={index > 0}
                   />
@@ -76,3 +88,9 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
     </FaktaKort>
   );
 };
+
+const MarkeringDød = () => (
+  <Tooltip content="Død">
+    <ExclamationmarkTriangleFillIcon width={24} height={24} color="var(--a-icon-warning)" />
+  </Tooltip>
+);

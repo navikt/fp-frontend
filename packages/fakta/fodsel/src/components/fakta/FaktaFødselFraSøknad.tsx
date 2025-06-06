@@ -1,17 +1,21 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { HStack, Label, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { FødselSøknad } from '@navikt/fp-types';
-import { FaktaKort } from '@navikt/fp-ui-komponenter';
+import { DokumentLink, type DokumentLinkReferanse, FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
   søknad: FødselSøknad;
+  terminbekreftelseDokumentReferanse: DokumentLinkReferanse | undefined;
 }
 
-export const FaktaFødselFraSøknad = ({ søknad: { termindato, utstedtdato, antallBarn, barn } }: Props) => {
+export const FaktaFødselFraSøknad = ({
+  søknad: { termindato, utstedtdato, antallBarn, barn },
+  terminbekreftelseDokumentReferanse,
+}: Props) => {
   const intl = useIntl();
   const tittel = intl.formatMessage({ id: 'FaktaFødselFraSøknad.Tittel' });
   return (
@@ -33,6 +37,20 @@ export const FaktaFødselFraSøknad = ({ søknad: { termindato, utstedtdato, ant
           </ValueLabel>
         )}
         {antallBarn && <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{antallBarn}</ValueLabel>}
+
+        {terminbekreftelseDokumentReferanse && (
+          <HStack gap="2">
+            <Label>
+              <FormattedMessage id="FaktaFødselFraSøknad.Terminbekreftelse" />:
+            </Label>
+            <DokumentLink
+              {...terminbekreftelseDokumentReferanse}
+              dokumentTittel={intl.formatMessage({ id: 'FaktaFødselFraSøknad.VisTerminbekreftelse' })}
+            >
+              {intl.formatMessage({ id: 'FaktaFødselFraSøknad.VisTerminbekreftelse' })}
+            </DokumentLink>
+          </HStack>
+        )}
       </VStack>
     </FaktaKort>
   );
