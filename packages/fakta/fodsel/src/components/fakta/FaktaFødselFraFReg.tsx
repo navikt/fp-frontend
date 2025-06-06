@@ -10,6 +10,7 @@ import type { FødselRegister } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 import styles from './faktaFødselFraFReg.module.css';
+
 interface Props {
   register: FødselRegister;
 }
@@ -88,11 +89,4 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
   );
 };
 
-const MarkeringDød = () => (
-  <ExclamationmarkTriangleFillIcon
-    className={styles.dødMarkering}
-    width={24}
-    height={24}
-    color="var(--a-icon-warning)"
-  />
-);
+const MarkeringDød = () => <ExclamationmarkTriangleFillIcon className={styles.dødMarkering} />;

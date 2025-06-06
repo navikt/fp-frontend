@@ -1,6 +1,7 @@
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { FaktaBox } from '@navikt/fp-fakta-felles';
@@ -11,6 +12,7 @@ interface Props {
 }
 
 export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Props) => {
+  const intl = useIntl();
   const erLikeBarn =
     barn.length > 0 &&
     barn.every(
@@ -19,7 +21,7 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
         b.barn.fødselsdato === barn[0].barn.fødselsdato &&
         b.barn.dødsdato === barn[0].barn.dødsdato,
     );
-  const intl = useIntl();
+
   return (
     <HStack gap="4" aria-label={intl.formatMessage({ id: 'Situasjon.OpplysningerGjeldende' })}>
       {(barn.length === 1 || erLikeBarn) && (
@@ -27,15 +29,15 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
           <FaktaBox
             key={barn[0].barn.fødselsdato}
             kilde={barn[0].kilde}
-            value={dateFormat(barn[0].barn.fødselsdato)}
-            label={intl.formatMessage({ id: 'Label.Fodselsdato' })}
+            value={<DateLabel dateString={barn[0].barn.fødselsdato} />}
+            label={<FormattedMessage id="Label.Fodselsdato" />}
           />
           {barn[0].barn.dødsdato && (
             <FaktaBox
               key={barn[0].barn.fødselsdato}
               kilde={barn[0].kilde}
-              value={dateFormat(barn[0].barn.dødsdato)}
-              label={intl.formatMessage({ id: 'Label.Dodsdato' })}
+              value={<DateLabel dateString={barn[0].barn.dødsdato} />}
+              label={<FormattedMessage id="Label.Dodsdato" />}
             />
           )}
         </>
@@ -43,24 +45,24 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
       {!erLikeBarn &&
         barn.map((b, index) => (
           <FaktaBox
-            key={b.barn.fødselsdato}
+            key={`${b.barn.fødselsdato}-${b.barn.dødsdato}-${b.kilde}`}
             kilde={b.kilde}
             value={formaterLiv(b.barn)}
-            label={intl.formatMessage({ id: 'Label.NummerertBarn' }, { nummer: index + 1 })}
+            label={<FormattedMessage id="Label.NummerertBarn" values={{ nummer: index + 1 }} />}
           />
         ))}
       {termindato && (
         <FaktaBox
           kilde={termindato.kilde}
-          label={intl.formatMessage({ id: 'Label.Termindato' })}
-          value={dateFormat(termindato.termindato)}
+          label={<FormattedMessage id="Label.Termindato" />}
+          value={<DateLabel dateString={termindato.termindato} />}
         />
       )}
       {utstedtdato && (
         <FaktaBox
           kilde={utstedtdato.kilde}
-          label={intl.formatMessage({ id: 'Label.Utstedtdato' })}
-          value={dateFormat(utstedtdato.utstedtdato)}
+          label={<FormattedMessage id="Label.Utstedtdato" />}
+          value={<DateLabel dateString={utstedtdato.utstedtdato} />}
         />
       )}
     </HStack>
