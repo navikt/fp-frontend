@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Box, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
@@ -47,41 +47,35 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
       {barn.length > 0 && !erAlleBarnLike && (
         <div>
           {barn.map(({ fødselsdato, dødsdato }, index) => (
-            <HStack key={fødselsdato + dødsdato} gap="6" align="end" paddingBlock="2 0" wrap={false}>
-              <Box width="30px">
-                <ReadOnlyField
-                  size="medium"
-                  label={<FormattedMessage id="Label.Barn" />}
-                  value={index + 1}
-                  hideLabel={index > 0}
-                />
-              </Box>
-              <Box width="100px">
-                <ReadOnlyField
-                  size="medium"
-                  label={<FormattedMessage id="Label.Fodselsdato" />}
-                  value={<DateLabel dateString={fødselsdato} />}
-                  hideLabel={index > 0}
-                />
-              </Box>
+            <HStack key={fødselsdato + dødsdato} gap="6" wrap={false} className={styles.grid}>
+              <ReadOnlyField
+                size="medium"
+                label={<FormattedMessage id="Label.Barn" />}
+                value={index + 1}
+                hideLabel={index > 0}
+              />
+              <ReadOnlyField
+                size="medium"
+                label={<FormattedMessage id="Label.Fodselsdato" />}
+                value={<DateLabel dateString={fødselsdato} />}
+                hideLabel={index > 0}
+              />
               {harDødtBarn && (
-                <Box>
-                  <ReadOnlyField
-                    size="medium"
-                    value={
-                      dødsdato ? (
-                        <>
-                          <DateLabel dateString={dødsdato} />
-                          <MarkeringDød />
-                        </>
-                      ) : (
-                        '-'
-                      )
-                    }
-                    label={<FormattedMessage id="Label.Dodsdato" />}
-                    hideLabel={index > 0}
-                  />
-                </Box>
+                <ReadOnlyField
+                  size="medium"
+                  value={
+                    dødsdato ? (
+                      <>
+                        <DateLabel dateString={dødsdato} />
+                        <MarkeringDød />
+                      </>
+                    ) : (
+                      '-'
+                    )
+                  }
+                  label={<FormattedMessage id="Label.Dodsdato" />}
+                  hideLabel={index > 0}
+                />
               )}
             </HStack>
           ))}
