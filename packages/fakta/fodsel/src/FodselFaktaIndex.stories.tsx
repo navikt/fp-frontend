@@ -33,7 +33,7 @@ const meta = {
     submittable: true,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
-    terminbekreftelseDokumentReferanse: {
+    terminbekreftelseDokument: {
       journalpostId: '1',
       dokumentId: '2',
       saksnummer: '3',
@@ -118,7 +118,7 @@ export const APTerminbekreftelse: Story = {
 
 export const APSjekkManglendeFødselPåEngangstønad: Story = {
   args: {
-    terminbekreftelseDokumentReferanse: undefined,
+    terminbekreftelseDokument: undefined,
     fødsel: {
       søknad: {
         barn: [
@@ -162,6 +162,7 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
 };
 export const APSjekkManglendeFødselPåForeldrepenger: Story = {
   args: {
+    terminbekreftelseDokument: undefined,
     fødsel: {
       søknad: {
         barn: [
@@ -213,6 +214,7 @@ export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
     },
+    terminbekreftelseDokument: undefined,
   },
 };
 
@@ -220,6 +222,7 @@ export const Default: Story = {};
 
 export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
   args: {
+    terminbekreftelseDokument: undefined,
     fødsel: {
       søknad: {
         barn: [],

@@ -9,12 +9,12 @@ import { DokumentLink, type DokumentLinkReferanse, FaktaKort } from '@navikt/fp-
 
 interface Props {
   søknad: FødselSøknad;
-  terminbekreftelseDokumentReferanse: DokumentLinkReferanse | undefined;
+  terminbekreftelseDokument: DokumentLinkReferanse | undefined;
 }
 
 export const FaktaFødselFraSøknad = ({
   søknad: { termindato, utstedtdato, antallBarn, barn },
-  terminbekreftelseDokumentReferanse,
+  terminbekreftelseDokument,
 }: Props) => {
   const intl = useIntl();
   const tittel = intl.formatMessage({ id: 'FaktaFødselFraSøknad.Tittel' });
@@ -38,13 +38,13 @@ export const FaktaFødselFraSøknad = ({
         )}
         {antallBarn && <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{antallBarn}</ValueLabel>}
 
-        {terminbekreftelseDokumentReferanse && (
+        {terminbekreftelseDokument && (
           <HStack gap="2">
             <Label>
               <FormattedMessage id="FaktaFødselFraSøknad.Terminbekreftelse" />:
             </Label>
             <DokumentLink
-              {...terminbekreftelseDokumentReferanse}
+              {...terminbekreftelseDokument}
               dokumentTittel={intl.formatMessage({ id: 'FaktaFødselFraSøknad.VisTerminbekreftelse' })}
             >
               {intl.formatMessage({ id: 'FaktaFødselFraSøknad.VisTerminbekreftelse' })}

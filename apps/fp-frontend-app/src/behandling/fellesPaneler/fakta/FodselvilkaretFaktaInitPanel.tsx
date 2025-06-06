@@ -7,6 +7,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FodselFaktaIndex } from '@navikt/fp-fakta-fodsel';
 import { AksjonspunktKode, fodselsvilkarene } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import type { Dokument } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { useFagsakApi } from '../../../data/fagsakApi';
@@ -33,15 +34,8 @@ export const FodselvilkaretFaktaInitPanel = () => {
     fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon),
   );
 
-  const terminbekreftelseDokument = alleDokumenter.find(dok => dok.tittel === 'Terminbekreftelse');
-  const terminbekreftelseDokumentReferanse = terminbekreftelseDokument
-    ? {
-        saksnummer: fagsak.saksnummer,
-        journalpostId: terminbekreftelseDokument.journalpostId,
-        dokumentId: terminbekreftelseDokument.dokumentId,
-        dokumentTittel: terminbekreftelseDokument.tittel,
-      }
-    : undefined;
+  const terminbekreftelseDokument = finnTerminBekreftelse(alleDokumenter, fagsak.saksnummer);
+
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
@@ -52,7 +46,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
       {faktafødsel ? (
         <FodselFaktaIndex
           fødsel={faktafødsel}
-          terminbekreftelseDokumentReferanse={terminbekreftelseDokumentReferanse}
+          terminbekreftelseDokument={terminbekreftelseDokument}
           submittable={standardPanelProps.submittable}
         />
       ) : (
@@ -60,4 +54,16 @@ export const FodselvilkaretFaktaInitPanel = () => {
       )}
     </FaktaDefaultInitPanel>
   );
+};
+
+const finnTerminBekreftelse = (dokumentliste: Dokument[], saksnummer: string) => {
+  const terminbekreftelseDokument = dokumentliste.find(dok => dok.tittel === 'Terminbekreftelse');
+  return terminbekreftelseDokument
+    ? {
+        saksnummer,
+        journalpostId: terminbekreftelseDokument.journalpostId,
+        dokumentId: terminbekreftelseDokument.dokumentId,
+        dokumentTittel: terminbekreftelseDokument.tittel,
+      }
+    : undefined;
 };

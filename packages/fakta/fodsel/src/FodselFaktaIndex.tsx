@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 
 interface Props {
   fødsel: Fødsel;
-  terminbekreftelseDokumentReferanse: DokumentLinkReferanse | undefined;
+  terminbekreftelseDokument: DokumentLinkReferanse | undefined;
   submittable: boolean;
 }
 
