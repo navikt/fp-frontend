@@ -9,7 +9,7 @@ import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { FødselRegister } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
-import styles from 'faktaFødselFraFReg.module.css';
+import styles from './faktaFødselFraFReg.module.css';
 interface Props {
   register: FødselRegister;
 }
