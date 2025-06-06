@@ -36,7 +36,9 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
           </ValueLabel>
           {barn[0].dødsdato && (
             <ValueLabel label={<FormattedMessage id="Label.Dodsdato" />}>
-              <DateLabel dateString={barn[0].dødsdato} /> <MarkeringDød />
+              <BodyShort>
+                <DateLabel dateString={barn[0].dødsdato} /> <MarkeringDød />
+              </BodyShort>
             </ValueLabel>
           )}
           <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{barn.length}</ValueLabel>
