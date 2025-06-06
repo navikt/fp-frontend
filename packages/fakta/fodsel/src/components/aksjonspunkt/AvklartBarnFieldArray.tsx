@@ -1,12 +1,14 @@
-import { useFieldArray, useFormContext } from 'react-hook-form';
+import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { Box, Button, HStack, Label } from '@navikt/ds-react';
 import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
-import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
+import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
+import dayjs from 'dayjs';
 
 import type { AvklartBarn, FødselGjeldende } from '@navikt/fp-types';
+import { dødsdatoAfterOrEqualFødselsdato, maxFodselsdato, minFodselsdato } from '@navikt/fp-utils';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
@@ -31,11 +33,11 @@ interface Props {
 export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
   const intl = useIntl();
 
-  const { control, watch } = useFormContext<AvklarBarnFormValues>();
+  const { control, watch, getValues } = useFormContext<AvklarBarnFormValues>();
   const { fields, remove, append } = useFieldArray({ control, name: FIELD_ARRAY_NAME });
 
   const avklartBarn = watch(FIELD_ARRAY_NAME);
-
+  const today = dayjs().toDate();
   return (
     <PeriodFieldArray
       fields={fields}
@@ -62,7 +64,9 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
               name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
               label={intl.formatMessage({ id: 'Label.Fodselsdato' })}
               hideLabel={index > 0}
-              validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
+              validate={[required, hasValidDate, dateAfterOrEqual(minFodselsdato()), dateBeforeOrEqualToToday]}
+              fromDate={minFodselsdato().toDate()}
+              toDate={maxFodselsdato().toDate()}
               isReadOnly={readOnly}
               disabled={disabled}
             />
@@ -71,7 +75,8 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
               name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
               label={intl.formatMessage({ id: 'Label.Dodsdato' })}
               hideLabel={index > 0}
-              validate={[hasValidDate, dateBeforeOrEqualToToday]}
+              validate={[hasValidDate, dateBeforeOrEqualToToday, validerDødsdato(getValues, index)]}
+              toDate={today}
               isReadOnly={readOnly}
               disabled={disabled}
             />
@@ -112,14 +117,15 @@ AvklartBarnFieldArray.transformValues = (values: AvklarBarnFormValues) => ({
 });
 
 const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
-  let antallBarn = antallBarnFraSoknad;
-  if (antallBarn === 0 || !antallBarn) {
-    antallBarn = 1;
-  }
-  const childrenArray: FieldArrayRow[] = [];
-  while (antallBarn > 0) {
-    childrenArray.push({ fodselsdato: '', dodsdato: null, erRedigerbar: true });
-    antallBarn -= 1;
-  }
-  return childrenArray;
+  const antallBarn = antallBarnFraSoknad > 0 ? antallBarnFraSoknad : 1;
+  return Array(antallBarn).fill({
+    fodselsdato: '',
+    dodsdato: null,
+    erRedigerbar: true,
+  });
+};
+
+const validerDødsdato = (getValues: UseFormGetValues<AvklarBarnFormValues>, index: number) => (dødsdato: string) => {
+  const fødselsdato = getValues(`${FIELD_ARRAY_NAME}.${index}.fodselsdato`);
+  return dødsdatoAfterOrEqualFødselsdato(fødselsdato, dødsdato);
 };

@@ -1,9 +1,15 @@
-import { useForm } from 'react-hook-form';
+import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
 import { Datepicker, Form, NumberField } from '@navikt/ft-form-hooks';
-import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
+import {
+  dateAfterOrEqual,
+  dateBeforeOrEqual,
+  hasValidDate,
+  hasValidInteger,
+  required,
+} from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -11,7 +17,17 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende, FødselSøknad } from '@navikt/fp-types';
 import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import {
+  maxTerminbekreftelseDato,
+  maxTermindato,
+  minTerminbekreftelseDato,
+  minTermindato,
+  terminBekreftelseBeforeTodayOrTermindato,
+  useMellomlagretFormData,
+  usePanelDataContext,
+  validateMaxAntallBarn,
+  validateMinAntallBarn,
+} from '@navikt/fp-utils';
 
 import styles from './termindatoFaktaForm.module.css';
 
@@ -63,23 +79,27 @@ export const TermindatoFaktaForm = ({ fødsel: { gjeldende, søknad }, submittab
         <VStack gap="2">
           <HStack gap="4">
             <Datepicker
-              name="utstedtdato"
-              label={intl.formatMessage({ id: 'Label.Utstedtdato' })}
-              validate={[required, hasValidDate]}
-              isReadOnly={isReadOnly}
-              isEdited={editedStatus.utstedtdato}
-            />
-            <Datepicker
               name="termindato"
               label={intl.formatMessage({ id: 'Label.Termindato' })}
-              validate={[required, hasValidDate]}
+              validate={[required, hasValidDate, dateAfterOrEqual(minTermindato()), dateBeforeOrEqual(maxTermindato())]}
+              fromDate={minTermindato().toDate()}
+              toDate={maxTermindato().toDate()}
               isReadOnly={isReadOnly}
               isEdited={editedStatus.termindato}
+            />
+            <Datepicker
+              name="utstedtdato"
+              label={intl.formatMessage({ id: 'Label.Utstedtdato' })}
+              validate={[required, hasValidDate, validerTerminBekreftelse(formMethods.getValues)]}
+              isReadOnly={isReadOnly}
+              fromDate={minTerminbekreftelseDato().toDate()}
+              toDate={maxTerminbekreftelseDato().toDate()}
+              isEdited={editedStatus.utstedtdato}
             />
             <NumberField
               name="antallBarn"
               label={intl.formatMessage({ id: 'Label.AntallBarn' })}
-              validate={[required, hasValidInteger, minValue(1), maxValue(5)]}
+              validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
               readOnly={isReadOnly}
               className={styles.bredde}
               isEdited={editedStatus.antallBarn}
@@ -151,3 +171,8 @@ const erTerminbekreftelseUtstedtForTidlig = (utstedtdato?: string, termindato?: 
   !!utstedtdato &&
   !!termindato &&
   !dayjs(utstedtdato).isAfter(dayjs(termindato).subtract(18, 'weeks').subtract(4, 'days'));
+
+const validerTerminBekreftelse = (getValues: UseFormGetValues<FormValues>) => (terminbekreftelseDato: string) => {
+  const termindato = getValues('termindato');
+  return terminBekreftelseBeforeTodayOrTermindato(termindato, terminbekreftelseDato);
+};

@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, Box, HStack, Tooltip, VStack } from '@navikt/ds-react';
+import { BodyShort, Box, HStack, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
@@ -9,6 +9,7 @@ import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { FødselRegister } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
+import styles from 'faktaFødselFraFReg.module.css';
 interface Props {
   register: FødselRegister;
 }
@@ -34,9 +35,7 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
           </ValueLabel>
           {barn[0].dødsdato && (
             <ValueLabel label={<FormattedMessage id="Label.Dodsdato" />}>
-              <HStack align="center" gap="2">
-                <DateLabel dateString={barn[0].dødsdato} /> <MarkeringDød />
-              </HStack>
+              <DateLabel dateString={barn[0].dødsdato} /> <MarkeringDød />
             </ValueLabel>
           )}
           <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{barn.length}</ValueLabel>
@@ -68,10 +67,10 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
                     size="medium"
                     value={
                       dødsdato ? (
-                        <HStack gap="2">
+                        <>
                           <DateLabel dateString={dødsdato} />
                           <MarkeringDød />
-                        </HStack>
+                        </>
                       ) : (
                         '-'
                       )
@@ -90,7 +89,10 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
 };
 
 const MarkeringDød = () => (
-  <Tooltip content="Død">
-    <ExclamationmarkTriangleFillIcon width={24} height={24} color="var(--a-icon-warning)" />
-  </Tooltip>
+  <ExclamationmarkTriangleFillIcon
+    className={styles.dødMarkering}
+    width={24}
+    height={24}
+    color="var(--a-icon-warning)"
+  />
 );

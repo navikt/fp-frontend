@@ -1,0 +1,7 @@
+
+.dødMarkering {
+  color: var(--a-icon-warning);
+  height: 24px;
+  padding-left: var(--a-spacing-2);
+  width: 24px;
+}
