@@ -43,11 +43,8 @@ export const FaktaFødselFraSøknad = ({
             <Label>
               <FormattedMessage id="FaktaFødselFraSøknad.Terminbekreftelse" />:
             </Label>
-            <DokumentLink
-              {...terminbekreftelseDokument}
-              dokumentTittel={intl.formatMessage({ id: 'FaktaFødselFraSøknad.VisTerminbekreftelse' })}
-            >
-              {intl.formatMessage({ id: 'FaktaFødselFraSøknad.VisTerminbekreftelse' })}
+            <DokumentLink {...terminbekreftelseDokument}>
+              <FormattedMessage id="FaktaFødselFraSøknad.VisTerminbekreftelse" />
             </DokumentLink>
           </HStack>
         )}
