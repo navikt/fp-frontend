@@ -6,13 +6,7 @@ import { HStack, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import {
-  type FaktaBegrunnelseFormValues,
-  FaktaBegrunnelseTextField,
-  FaktaSubmitButton,
-  type FieldEditedInfo,
-  isFieldEdited,
-} from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type {
@@ -94,9 +88,6 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
   }));
 };
 
-const getEditedStatus = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): FieldEditedInfo =>
-  isFieldEdited(soknad, gjeldendeFamiliehendelse);
-
 type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
 
 type AksjonspunktData =
@@ -134,8 +125,6 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
-
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel));
 
   return (
@@ -149,7 +138,8 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
             <div className={styles.leftCol}>
               <DokumentasjonFaktaForm
                 readOnly={isReadOnly}
-                editedStatus={editedStatus}
+                soknad={soknad}
+                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
                 erForeldrepengerFagsak={isForeldrepengerFagsak}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
@@ -162,14 +152,14 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
               <EktefelleFaktaForm
                 readOnly={isReadOnly}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-                ektefellesBarnIsEdited={editedStatus.ektefellesBarn}
+                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
               />
             )}
             {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel) && (
               <MannAdoptererAleneFaktaForm
                 farSokerType={soknad.farSokerType ?? undefined}
                 readOnly={isReadOnly}
-                mannAdoptererAlene={editedStatus.mannAdoptererAlene}
+                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 alleKodeverk={alleKodeverk}
               />

@@ -5,6 +5,7 @@ import { RadioGroupPanel } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
+import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, FarSøkerType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, FamilieHendelse } from '@navikt/fp-types';
 import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -16,7 +17,7 @@ interface Props {
   farSokerType: FarSøkerType | undefined;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  mannAdoptererAlene?: boolean;
+  gjeldendeFamiliehendelse: FamilieHendelse;
 }
 
 export type FormValues = {
@@ -33,7 +34,7 @@ export const MannAdoptererAleneFaktaForm = ({
   readOnly,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-  mannAdoptererAlene,
+  gjeldendeFamiliehendelse,
 }: Props) => {
   const intl = useIntl();
   return (
@@ -56,7 +57,7 @@ export const MannAdoptererAleneFaktaForm = ({
         <RadioGroupPanel
           name="mannAdoptererAlene"
           hideLegend
-          isEdited={mannAdoptererAlene}
+          isEdited={hasValue(gjeldendeFamiliehendelse.mannAdoptererAlene)}
           validate={[required]}
           isReadOnly={readOnly}
           isHorizontal

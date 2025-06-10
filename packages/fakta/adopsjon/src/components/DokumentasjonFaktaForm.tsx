@@ -6,10 +6,11 @@ import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { Datepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { diff } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { type FieldEditedInfo } from '@navikt/fp-fakta-felles';
+import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -28,7 +29,8 @@ interface Props {
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
-  editedStatus: FieldEditedInfo;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  soknad: Soknad;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -39,7 +41,8 @@ interface Props {
  */
 export const DokumentasjonFaktaForm = ({
   readOnly,
-  editedStatus,
+  soknad,
+  gjeldendeFamiliehendelse,
   erForeldrepengerFagsak,
   hasEktefellesBarnAksjonspunkt,
   alleMerknaderFraBeslutter,
@@ -50,6 +53,8 @@ export const DokumentasjonFaktaForm = ({
   const fodselsdatoer = watch('fodselsdatoer') ?? {};
   const omsorgsovertakelseDato = watch('omsorgsovertakelseDato');
   const barnetsAnkomstTilNorgeDato = watch('barnetsAnkomstTilNorgeDato');
+
+  const getAdopsjonsdatoEditedStatusForId = isAdopsjonFodelsedatoerEdited(soknad, gjeldendeFamiliehendelse);
 
   return (
     <FaktaGruppe
@@ -66,7 +71,7 @@ export const DokumentasjonFaktaForm = ({
           }
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
-          isEdited={editedStatus.omsorgsovertakelseDato}
+          isEdited={isNotEqual(soknad.omsorgsovertakelseDato, gjeldendeFamiliehendelse.omsorgsovertakelseDato)}
         />
         {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
           <Datepicker
@@ -74,7 +79,7 @@ export const DokumentasjonFaktaForm = ({
             label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
             validate={[hasValidDate]}
             isReadOnly={readOnly}
-            isEdited={editedStatus.barnetsAnkomstTilNorgeDato}
+            isEdited={isNotEqual(soknad.barnetsAnkomstTilNorgeDato, gjeldendeFamiliehendelse.ankomstNorge)}
           />
         )}
         {Object.keys(fodselsdatoer).map((id, i) => (
@@ -89,7 +94,7 @@ export const DokumentasjonFaktaForm = ({
               )}
               validate={[required, hasValidDate]}
               isReadOnly={readOnly}
-              isEdited={editedStatus.adopsjonFodelsedatoer ? editedStatus.adopsjonFodelsedatoer[id] : false}
+              isEdited={getAdopsjonsdatoEditedStatusForId(id)}
             />
             {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
               <ExclamationmarkTriangleFillIcon
@@ -139,3 +144,11 @@ DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumenter
   omsorgsovertakelseDato: values.omsorgsovertakelseDato ?? '',
   fodselsdatoer: values.fodselsdatoer ?? '',
 });
+
+export const isAdopsjonFodelsedatoerEdited =
+  (soknad: Soknad, familiehendelse: FamilieHendelse) =>
+  (id: string): boolean => {
+    const editedStatus = diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
+    // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output
+    return editedStatus ? editedStatus[id] : false;
+  };
