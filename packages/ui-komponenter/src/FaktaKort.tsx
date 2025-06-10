@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const FaktaKort = ({ label, children, merknaderFraBeslutter }: Props) => {
-  const error = !!(merknaderFraBeslutter && merknaderFraBeslutter.notAccepted);
+  const error = merknaderFraBeslutter?.notAccepted ?? false;
   return (
     <Box
       borderWidth={error ? '1' : undefined}
