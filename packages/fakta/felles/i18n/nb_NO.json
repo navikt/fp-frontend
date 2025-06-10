@@ -1,11 +1,14 @@
 {
   "AdresseVisning.Adresse": "Adresse",
+
   "ForelderPanel.Soker": "Søker",
   "ForelderPanel.AnnenForelder": "Annen forelder",
+
   "AlleBarnPanel.Barn": "Barn",
   "AlleBarnPanel.BarnNr": "Barn {nummer}",
   "AlleBarnPanel.Fodt": "Født",
   "AlleBarnPanel.Dod": "Død",
+
   "PersonPanel.RolleOgNavn": "{rolle, select, BRUKER {Søker, } ANNEN_PART {Den andre forelderen, } BARN {Barnet, } other {} }{navn}",
   "PersonPanel.Beskrivelse.Bruker": "Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene",
   "PersonPanel.Beskrivelse.Barn": "Adresser for barnet registrert i folkeregisteret gyldige på skjæringstidspunktet",
@@ -18,6 +21,7 @@
   "AdresseTabell.PeriodeLabel": "Periode",
   "AdresseTabell.AdresseLabel": "Adresse",
   "AdresseTabell.TypeLabel": "Type",
+
   "MerkePanel.Dod": "DØD",
   "MerkePanel.DodTittel": "Personen er død",
   "MerkePanel.DodFodt": "DØDFØDT",
@@ -29,12 +33,15 @@
   "MerkePanel.Diskresjon7Tittel": "Personen har diskresjonsmerking kode 7",
   "MerkePanel.EgenAnsattTittel": "Personen er ansatt i Nav",
   "MerkePanel.VergeTittel": "Personen har verge",
+
   "SubmitButton.ConfirmInformation": "Bekreft og fortsett",
   "FaktaBegrunnelseTextField.BegrunnEndringene": "Begrunn endringene",
   "FaktaBegrunnelseTextField.Vurdering": "Vurdering",
   "FaktaBegrunnelseTextField.Begrunnelse": "Begrunnelse",
+
   "TrueFalseInput.True": "Ja",
   "TrueFalseInput.False": "Nei",
+
   "FaktaKilde.Soknad": "FRA SØKNADEN",
   "FaktaKilde.FREG": "FRA FOLKEREGISTERET",
   "FaktaKilde.MEDL": "FRA MEDLEMSKAPSREGISTERET",

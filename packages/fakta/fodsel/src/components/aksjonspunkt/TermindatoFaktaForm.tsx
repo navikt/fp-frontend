@@ -36,7 +36,7 @@ import {
 
 import styles from './termindatoFaktaForm.module.css';
 
-export type FormValues = {
+type FormValues = {
   utstedtdato?: string;
   termindato?: string;
   antallBarn?: number;
@@ -48,11 +48,6 @@ interface Props {
   fødsel: Fødsel;
 }
 
-/**
- * TermindatoFaktaForm
- *
- * Setter opp aksjonspunktet for avklaring av termindato (Fødselsvilkåret).
- */
 export const TermindatoFaktaForm = ({ fødsel: { gjeldende, søknad }, submittable, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
