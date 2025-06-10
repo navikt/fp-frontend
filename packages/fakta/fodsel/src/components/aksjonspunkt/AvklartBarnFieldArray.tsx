@@ -51,9 +51,9 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
       {(field, index) => {
         const disabled = watch(`${FIELD_ARRAY_NAME}.${index}.erRedigerbar`) !== true;
         return (
-          <HStack gap="4" align="end" key={field.id} paddingBlock="2 0">
+          <HStack gap="4" align="end" key={field.id}>
             {fields.length > 1 && (
-              <Box paddingBlock="3">
+              <Box>
                 <Label size="medium">
                   <FormattedMessage id="Label.NummerertBarn" values={{ nummer: index + 1 }} />
                 </Label>
