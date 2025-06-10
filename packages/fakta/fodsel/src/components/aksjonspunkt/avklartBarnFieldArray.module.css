@@ -1,7 +1,8 @@
 .tableNoBorder {
   width: fit-content;
 
-  & td, th {
+  & td,
+  th {
     align-content: start;
     border: none;
   }
