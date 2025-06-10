@@ -3126,17 +3126,17 @@ __metadata:
     "@navikt/ft-ui-komponenter": 4.4.1
     "@navikt/ft-utils": 3.6.1
     "@popperjs/core": 2.11.8
-    "@sentry/browser": 9.24.0
+    "@sentry/browser": 9.27.0
     "@storybook/addon-a11y": 9.0.4
     "@storybook/react": 9.0.4
     "@storybook/react-vite": 9.0.4
-    "@tanstack/react-query": 5.79.0
+    "@tanstack/react-query": 5.80.6
     "@tanstack/react-query-devtools": ^5.79.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
-    core-js: 3.42.0
+    core-js: 3.43.0
     dayjs: 1.11.13
     eslint: 9.28.0
     history: 5.3.0
@@ -3149,8 +3149,8 @@ __metadata:
     react-modal: 3.16.3
     react-popper: 2.3.0
     react-responsive: 10.0.1
-    react-router: 7.6.1
-    react-router-dom: 7.6.1
+    react-router: 7.6.2
+    react-router-dom: 7.6.2
     react-test-renderer: 19.1.0
     rollup-plugin-sourcemaps: 0.6.3
     storybook: 9.0.4
@@ -3178,7 +3178,7 @@ __metadata:
     "@navikt/ft-utils": 3.6.1
     "@storybook/react": 9.0.4
     "@storybook/react-vite": 9.0.4
-    "@tanstack/react-query": 5.79.0
+    "@tanstack/react-query": 5.80.6
     "@tanstack/react-query-devtools": ^5.79.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
@@ -3238,7 +3238,7 @@ __metadata:
     "@navikt/ft-utils": 3.6.1
     "@storybook/react": 9.0.4
     "@storybook/react-vite": 9.0.4
-    "@tanstack/react-query": 5.79.0
+    "@tanstack/react-query": 5.80.6
     "@tanstack/react-query-devtools": ^5.79.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
@@ -3256,7 +3256,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.57.0
     react-intl: 7.1.11
-    react-router-dom: 7.6.1
+    react-router-dom: 7.6.2
     storybook: 9.0.4
     stylelint: 16.20.0
     typescript: 5.8.3
@@ -3292,7 +3292,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.57.0
     react-intl: 7.1.11
-    react-router-dom: 7.6.1
+    react-router-dom: 7.6.2
     storybook: 9.0.4
     stylelint: 16.20.0
     typescript: 5.8.3
@@ -3320,7 +3320,7 @@ __metadata:
     "@navikt/ft-utils": 3.6.1
     "@storybook/react": 9.0.4
     "@storybook/react-vite": 9.0.4
-    "@tanstack/react-query": 5.79.0
+    "@tanstack/react-query": 5.80.6
     "@tanstack/react-query-devtools": ^5.79.0
     "@testing-library/dom": 10.4.0
     "@testing-library/react": 16.3.0
@@ -3338,7 +3338,7 @@ __metadata:
     react-dom: 19.1.0
     react-hook-form: 7.57.0
     react-intl: 7.1.11
-    react-router-dom: 7.6.1
+    react-router-dom: 7.6.2
     storybook: 9.0.4
     stylelint: 16.20.0
     typescript: 5.8.3
@@ -3407,7 +3407,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.57.0
     react-intl: 7.1.11
-    react-router-dom: 7.6.1
+    react-router-dom: 7.6.2
     storybook: 9.0.4
     stylelint: 16.20.0
     typescript: 5.8.3
@@ -3440,7 +3440,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.57.0
     react-intl: 7.1.11
-    react-router-dom: 7.6.1
+    react-router-dom: 7.6.2
     storybook: 9.0.4
     stylelint: 16.20.0
     typescript: 5.8.3
@@ -4503,7 +4503,7 @@ __metadata:
     history: 5.3.0
     react: 19.1.0
     react-intl: 7.1.11
-    react-router-dom: 7.6.1
+    react-router-dom: 7.6.2
     storybook: 9.0.4
     stylelint: 16.20.0
     typescript: 5.8.3
@@ -4879,7 +4879,7 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.57.0
     react-intl: 7.1.11
-    react-router-dom: 7.6.1
+    react-router-dom: 7.6.2
     storybook: 9.0.4
     stylelint: 16.20.0
     typescript: 5.8.3
@@ -4950,13 +4950,13 @@ __metadata:
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 6.3.9
     "@storybook/types": 8.6.14
-    "@tanstack/react-query": 5.79.0
+    "@tanstack/react-query": 5.80.6
     eslint: 9.28.0
     history: 5.3.0
     react: 19.1.0
     react-hook-form: 7.57.0
     react-intl: 7.1.11
-    react-router-dom: 7.6.1
+    react-router-dom: 7.6.2
     typescript: 5.8.3
     vite: 6.3.5
   languageName: unknown
@@ -6288,54 +6288,54 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry-internal/browser-utils@npm:9.24.0":
-  version: 9.24.0
-  resolution: "@sentry-internal/browser-utils@npm:9.24.0"
+"@sentry-internal/browser-utils@npm:9.27.0":
+  version: 9.27.0
+  resolution: "@sentry-internal/browser-utils@npm:9.27.0"
   dependencies:
-    "@sentry/core": 9.24.0
-  checksum: ca2b19d14f14e5af7a685fe1a736af58425daebe4d66d0b9ac6f0b6b270c535a926434cc96fc96259f0411c6d98ebdac4796d3bff5c4f193faaa7193f202dacb
+    "@sentry/core": 9.27.0
+  checksum: 07e96d358924977c76a67908787c8b1d08251794655b286551fea48e683efb256dec21d9fee562533e5266a7da8d572c5f4863bceb54231dbed4d61a5a197d40
   languageName: node
   linkType: hard
 
-"@sentry-internal/feedback@npm:9.24.0":
-  version: 9.24.0
-  resolution: "@sentry-internal/feedback@npm:9.24.0"
+"@sentry-internal/feedback@npm:9.27.0":
+  version: 9.27.0
+  resolution: "@sentry-internal/feedback@npm:9.27.0"
   dependencies:
-    "@sentry/core": 9.24.0
-  checksum: 457cc8b71d04840a88c158a18d849f01f886d36d12d9862c55a018123bbe3abae5c60d84e4cd6628f1b45356c56f05020476f10be3e793d89e06c91b74110e09
+    "@sentry/core": 9.27.0
+  checksum: 56495222eb3f3875a3edc5e2d71204e9062f679d905029e8a8ebc6db9d13de650e909dfa7616f5b78faa597942f6e157f104d582f61bdc4eb17b177f06334d8d
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay-canvas@npm:9.24.0":
-  version: 9.24.0
-  resolution: "@sentry-internal/replay-canvas@npm:9.24.0"
+"@sentry-internal/replay-canvas@npm:9.27.0":
+  version: 9.27.0
+  resolution: "@sentry-internal/replay-canvas@npm:9.27.0"
   dependencies:
-    "@sentry-internal/replay": 9.24.0
-    "@sentry/core": 9.24.0
-  checksum: a4f861f38273a00ea64a36c36ded43fdf8c7dd529f12447d4f47c8334888fdf747d53579bcedd78fdbd869162dfa68a075a4c1e7382e912a55d00c9f2aa9bd94
+    "@sentry-internal/replay": 9.27.0
+    "@sentry/core": 9.27.0
+  checksum: 55f77a0ddc18e42f052f235c0aca25c22a4c9e67dc2ccfefe0f3a02f56a2d71e5e05bde44721a11e2478650b9bccc280d73edf1978dc3e1fe160de4a7e2cc94c
   languageName: node
   linkType: hard
 
-"@sentry-internal/replay@npm:9.24.0":
-  version: 9.24.0
-  resolution: "@sentry-internal/replay@npm:9.24.0"
+"@sentry-internal/replay@npm:9.27.0":
+  version: 9.27.0
+  resolution: "@sentry-internal/replay@npm:9.27.0"
   dependencies:
-    "@sentry-internal/browser-utils": 9.24.0
-    "@sentry/core": 9.24.0
-  checksum: e41f5f169142e504a8b5868eea02539da3f8dbea714fdf3cc22c4112adf38f574fd8b27389fac10c958a483d1156dddfd7cb60a09d5c3d191aac9df9677f973f
+    "@sentry-internal/browser-utils": 9.27.0
+    "@sentry/core": 9.27.0
+  checksum: 998477a8d9b1910b3b149f149baab83a38cc47c57eb2dbedd7ebc63d44e75a3477f116e36090d12cb11276b66d11bd8506df2095fc6b29cca4abf107dedb2306
   languageName: node
   linkType: hard
 
-"@sentry/browser@npm:9.24.0":
-  version: 9.24.0
-  resolution: "@sentry/browser@npm:9.24.0"
+"@sentry/browser@npm:9.27.0":
+  version: 9.27.0
+  resolution: "@sentry/browser@npm:9.27.0"
   dependencies:
-    "@sentry-internal/browser-utils": 9.24.0
-    "@sentry-internal/feedback": 9.24.0
-    "@sentry-internal/replay": 9.24.0
-    "@sentry-internal/replay-canvas": 9.24.0
-    "@sentry/core": 9.24.0
-  checksum: 67df3e8bca5d680aceb32a92149160e836b812f5d10cf0fbee769b01f45125679f6ca12b81f6e3187aa1439edf74699583d2e91a27ff713faf1186056e2384d5
+    "@sentry-internal/browser-utils": 9.27.0
+    "@sentry-internal/feedback": 9.27.0
+    "@sentry-internal/replay": 9.27.0
+    "@sentry-internal/replay-canvas": 9.27.0
+    "@sentry/core": 9.27.0
+  checksum: 166b7e8d6377596ee3df107bf653102bd130b595bf6d2d402bb7b2d8326004980e318a21a20d93714a2e8c1396a6f0a16bbe7fc2805c772ac4eeb2ce9eeead31
   languageName: node
   linkType: hard
 
@@ -6435,10 +6435,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/core@npm:9.24.0":
-  version: 9.24.0
-  resolution: "@sentry/core@npm:9.24.0"
-  checksum: 585541b965a01526a310027792cbb7d3a0700045ae4db1db755d155203542487f0dd6778dedbeaf2ad66c665bd809772ebc3b853bd783ee4fb0dc62da54f0274
+"@sentry/core@npm:9.27.0":
+  version: 9.27.0
+  resolution: "@sentry/core@npm:9.27.0"
+  checksum: bb8f301dfa9779530f287de7be1f4cf196f449a182896f575cf5697a10866b17e532fc2daf91e55e223aa1ffcb63b4830e61f522f8d7d548b513632ef6607278
   languageName: node
   linkType: hard
 
@@ -6686,10 +6686,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.79.0":
-  version: 5.79.0
-  resolution: "@tanstack/query-core@npm:5.79.0"
-  checksum: b365daced0a1144f6bbb9f075d526cb0059bf4e85f6103ad2e127cc30e11e0bd39c2ce223b2bf5bc2f7a46750cb662459b227cec67d8fca3266579c3d0bffcf0
+"@tanstack/query-core@npm:5.80.6":
+  version: 5.80.6
+  resolution: "@tanstack/query-core@npm:5.80.6"
+  checksum: 928a3300d8d6233c4435ba80a8386b7bb9e4e56a0b5803dd1cb4adae00cb04b59d1716162e6715ed6660d2a42ded40c5aac7d920227f46dffb6d1c398df44106
   languageName: node
   linkType: hard
 
@@ -6712,14 +6712,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.79.0":
-  version: 5.79.0
-  resolution: "@tanstack/react-query@npm:5.79.0"
+"@tanstack/react-query@npm:5.80.6":
+  version: 5.80.6
+  resolution: "@tanstack/react-query@npm:5.80.6"
   dependencies:
-    "@tanstack/query-core": 5.79.0
+    "@tanstack/query-core": 5.80.6
   peerDependencies:
     react: ^18 || ^19
-  checksum: 357946b7d72e7fc0ba0d8d9c991439c5e8c6e0c2d70c241718d5feabb8b10afc56d6ce69a490688d029fbf7b34d8342516acbc97a8dafd85f58c121d96b628b1
+  checksum: 5dc02b7bb9c37e67908c19efa1ce75e6afc9adc2bc51ce4ca903e4bd61186836a8362c5dcd6afffe9694d902043e2857b11a88a767cd45e448dd781c5e5891ac
   languageName: node
   linkType: hard
 
@@ -8828,6 +8828,13 @@ __metadata:
   version: 3.42.0
   resolution: "core-js@npm:3.42.0"
   checksum: 270b5532511e2e6cc8e6b10c1434306208dca377aba3850875941316ce605b008ddbdeca0b6dd6eb2a4b188899dab259c0aecd7dc265bc5e7df19563e4e284b7
+  languageName: node
+  linkType: hard
+
+"core-js@npm:3.43.0":
+  version: 3.43.0
+  resolution: "core-js@npm:3.43.0"
+  checksum: b6da4099d9556ce23f8ada331c8cdc4a6803089a4de837126d52058ec05b74be1c6019e00ff2cf17635989d16562ddddf13cc6fa189d254914b4a42eb4960322
   languageName: node
   linkType: hard
 
@@ -14947,21 +14954,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-router-dom@npm:7.6.1":
-  version: 7.6.1
-  resolution: "react-router-dom@npm:7.6.1"
+"react-router-dom@npm:7.6.2":
+  version: 7.6.2
+  resolution: "react-router-dom@npm:7.6.2"
   dependencies:
-    react-router: 7.6.1
+    react-router: 7.6.2
   peerDependencies:
     react: ">=18"
     react-dom: ">=18"
-  checksum: 9b6690c530ff366339cb4b2f75870618aa0ab99ee85b8f912054bd63b406ece0b0c237e3b33c28df985b2227d8009bcf5d53b8242b92edb5829a0e1a4af8dad4
+  checksum: 944f87d4d62eddbd517b9cbd39c9282200b172b31309cdb0eca3803f768c2b29466d852db7ce4a997ae1818d8103a1d1322e7fca4d6d4d846757b0e00b931c90
   languageName: node
   linkType: hard
 
-"react-router@npm:7.6.1":
-  version: 7.6.1
-  resolution: "react-router@npm:7.6.1"
+"react-router@npm:7.6.2":
+  version: 7.6.2
+  resolution: "react-router@npm:7.6.2"
   dependencies:
     cookie: ^1.0.1
     set-cookie-parser: ^2.6.0
@@ -14971,7 +14978,7 @@ __metadata:
   peerDependenciesMeta:
     react-dom:
       optional: true
-  checksum: 661d40601d600eb0d577aa1c7710ab0357a95b3f9f9626daf7996db32bf58b95a8a831704f7b92be98b7005a6c61f06d555e81e779f837f0a69642be4353fcb6
+  checksum: 6d3c931043dcbc3dd16dc431e3a7701403c2a786068968154374d1bbcb7476b8ae7ae9279ed81cc9c36ce537b8d7355c13d126045cd52c98decc3bd1194cc4f9
   languageName: node
   linkType: hard
 
