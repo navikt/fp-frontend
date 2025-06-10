@@ -132,10 +132,10 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
 AvklartBarnFieldArray.initialValues = (gjeldende: FødselGjeldende): AvklarBarnFormValues => ({
   avklartBarn:
     gjeldende.barn.length > 0
-      ? gjeldende.barn.map(({ barn: { fødselsdato, dødsdato }, kanOverstyres }) => ({
+      ? gjeldende.barn.map(({ barn: { fødselsdato, dødsdato }, kilde }) => ({
           fodselsdato: fødselsdato,
           dodsdato: dødsdato ?? null,
-          erRedigerbar: kanOverstyres,
+          erRedigerbar: kilde !== 'FOLKEREGISTER',
         }))
       : lagBarn(gjeldende.antallBarn || 0),
 });
