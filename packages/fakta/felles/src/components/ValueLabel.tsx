@@ -4,7 +4,7 @@ import { BodyShort, Label, VStack } from '@navikt/ds-react';
 
 interface Props {
   label: ReactElement | string;
-  children: ReactNode | ReactElement | string | number | (ReactNode | string | ReactElement | null | '')[];
+  children: ReactNode | ReactElement | string | number | (ReactNode | string | ReactElement | null)[];
 }
 
 export const ValueLabel = ({ label, children }: Props) => {
