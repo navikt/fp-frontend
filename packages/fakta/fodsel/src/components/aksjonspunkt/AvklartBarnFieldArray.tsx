@@ -1,14 +1,16 @@
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { TrashIcon } from '@navikt/aksel-icons';
-import { Box, Button, HStack, Label } from '@navikt/ds-react';
-import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { PlusCircleIcon, TrashIcon } from '@navikt/aksel-icons';
+import { Button, Table } from '@navikt/ds-react';
+import { Datepicker, ReadOnlyField } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
 import type { AvklartBarn, FødselGjeldende } from '@navikt/fp-types';
 import { dødsdatoAfterOrEqualFødselsdato, maxFodselsdato, minFodselsdato } from '@navikt/fp-utils';
+
+import styles from './avklartBarnFieldArray.module.css';
 
 const FIELD_ARRAY_NAME = 'avklartBarn';
 
@@ -39,62 +41,91 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
   const avklartBarn = watch(FIELD_ARRAY_NAME);
   const today = dayjs().toDate();
   return (
-    <PeriodFieldArray
-      fields={fields}
-      emptyPeriodTemplate={defaultAntallBarn}
-      readOnly={readOnly}
-      bodyText={intl.formatMessage({ id: 'AvklartBarnFieldArray.LeggTilBarn' })}
-      shouldShowAddButton={avklartBarn.length < 5}
-      remove={remove}
-      append={append}
-    >
-      {(field, index) => {
-        const disabled = watch(`${FIELD_ARRAY_NAME}.${index}.erRedigerbar`) !== true;
-        return (
-          <HStack gap="4" align="end" key={field.id}>
+    <div>
+      <Table className={styles.tableNoBorder} size="small">
+        <Table.Header>
+          <Table.Row>
             {fields.length > 1 && (
-              <Box>
-                <Label size="medium">
-                  <FormattedMessage id="Label.NummerertBarn" values={{ nummer: index + 1 }} />
-                </Label>
-              </Box>
+              <Table.HeaderCell>
+                <FormattedMessage id="Label.Barn" />
+              </Table.HeaderCell>
             )}
-            <Datepicker
-              size="medium"
-              name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
-              label={intl.formatMessage({ id: 'Label.Fodselsdato' })}
-              hideLabel={index > 0}
-              validate={[required, hasValidDate, dateAfterOrEqual(minFodselsdato()), dateBeforeOrEqualToToday]}
-              fromDate={minFodselsdato().toDate()}
-              toDate={maxFodselsdato().toDate()}
-              isReadOnly={readOnly}
-              disabled={disabled}
-            />
-            <Datepicker
-              size="medium"
-              name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
-              label={intl.formatMessage({ id: 'Label.Dodsdato' })}
-              hideLabel={index > 0}
-              validate={[hasValidDate, dateBeforeOrEqualToToday, validerDødsdato(getValues, index)]}
-              toDate={today}
-              isReadOnly={readOnly}
-              disabled={disabled}
-            />
-            {avklartBarn.length > 1 && !(readOnly || disabled) && (
-              <div>
-                <Button
-                  size="medium"
-                  type="button"
-                  variant="tertiary-neutral"
-                  icon={<TrashIcon />}
-                  onClick={() => remove(index)}
-                />
-              </div>
-            )}
-          </HStack>
-        );
-      }}
-    </PeriodFieldArray>
+            <Table.HeaderCell>
+              <FormattedMessage id="Label.Fodselsdato" />
+            </Table.HeaderCell>
+            <Table.HeaderCell>
+              <FormattedMessage id="Label.Dodsdato" />
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {fields.map((field, index) => {
+            const disabled = watch(`${FIELD_ARRAY_NAME}.${index}.erRedigerbar`) !== true;
+            return (
+              <Table.Row shadeOnHover={false} key={field.id}>
+                {fields.length > 1 && (
+                  <Table.DataCell>
+                    <ReadOnlyField
+                      size="medium"
+                      label={<FormattedMessage id="Label.Barn" />}
+                      value={index + 1}
+                      hideLabel
+                    />
+                  </Table.DataCell>
+                )}
+                <Table.DataCell>
+                  <Datepicker
+                    size="medium"
+                    name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
+                    label={intl.formatMessage({ id: 'Label.Fodselsdato' })}
+                    hideLabel
+                    validate={[required, hasValidDate, dateAfterOrEqual(minFodselsdato()), dateBeforeOrEqualToToday]}
+                    fromDate={minFodselsdato().toDate()}
+                    toDate={maxFodselsdato().toDate()}
+                    isReadOnly={readOnly}
+                    disabled={disabled}
+                  />
+                </Table.DataCell>
+                <Table.DataCell>
+                  <Datepicker
+                    size="medium"
+                    name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
+                    label={intl.formatMessage({ id: 'Label.Dodsdato' })}
+                    hideLabel
+                    validate={[hasValidDate, dateBeforeOrEqualToToday, validerDødsdato(getValues, index)]}
+                    toDate={today}
+                    isReadOnly={readOnly}
+                    disabled={disabled}
+                  />
+                </Table.DataCell>
+                {avklartBarn.length > 1 && !(readOnly || disabled) && (
+                  <Table.DataCell>
+                    <Button
+                      size="medium"
+                      type="button"
+                      variant="tertiary-neutral"
+                      icon={<TrashIcon />}
+                      onClick={() => remove(index)}
+                    />
+                  </Table.DataCell>
+                )}
+              </Table.Row>
+            );
+          })}
+        </Table.Body>
+      </Table>
+      {!readOnly && (
+        <Button
+          onClick={() => append(defaultAntallBarn)}
+          type="button"
+          variant="tertiary-neutral"
+          icon={<PlusCircleIcon aria-hidden />}
+          size="small"
+        >
+          {intl.formatMessage({ id: 'AvklartBarnFieldArray.LeggTilBarn' })}
+        </Button>
+      )}
+    </div>
   );
 };
 
