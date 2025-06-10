@@ -14,7 +14,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type AvklarBarnFormValues, AvklartBarnFieldArray } from './AvklartBarnFieldArray';
 
-export type FormValues = {
+type FormValues = {
   dokumentasjonForeligger?: boolean;
 } & AvklarBarnFormValues &
   FaktaBegrunnelseFormValues;
@@ -25,11 +25,6 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
 }
 
-/**
- * FodselInfoPanel
- *
- * Setter opp aksjonspunktet for avklaring av manglende fødsel (Fødselsvilkåret).
- */
 export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel: { gjeldende } }: Props) => {
   const intl = useIntl();
 
