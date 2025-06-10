@@ -2337,20 +2337,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mswjs/interceptors@npm:^0.38.7":
-  version: 0.38.7
-  resolution: "@mswjs/interceptors@npm:0.38.7"
-  dependencies:
-    "@open-draft/deferred-promise": ^2.2.0
-    "@open-draft/logger": ^0.3.0
-    "@open-draft/until": ^2.0.0
-    is-node-process: ^1.2.0
-    outvariant: ^1.4.3
-    strict-event-emitter: ^0.5.1
-  checksum: 96debc7595b02d45366e1d2a77b84e4b28f9db24796e058f7645f344fa0d20c477d3a11bcec25c1c3f147f22a3d3df9ba2d9d878f07635d77f2c69b3f2c6244d
-  languageName: node
-  linkType: hard
-
 "@mswjs/interceptors@npm:^0.39.1":
   version: 0.39.2
   resolution: "@mswjs/interceptors@npm:0.39.2"
@@ -5096,8 +5082,8 @@ __metadata:
   resolution: "@navikt/fp-utils-test@workspace:packages/utils-test"
   dependencies:
     eslint: 9.28.0
-    msw: 2.8.7
-    msw-storybook-addon: ^2.0.4
+    msw: 2.10.2
+    msw-storybook-addon: 2.0.5
     react: 19.1.0
     react-intl: 7.1.11
     typescript: 5.8.3
@@ -7401,21 +7387,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/browser@npm:3.2.1":
-  version: 3.2.1
-  resolution: "@vitest/browser@npm:3.2.1"
+"@vitest/browser@npm:3.2.3":
+  version: 3.2.3
+  resolution: "@vitest/browser@npm:3.2.3"
   dependencies:
     "@testing-library/dom": ^10.4.0
     "@testing-library/user-event": ^14.6.1
-    "@vitest/mocker": 3.2.1
-    "@vitest/utils": 3.2.1
+    "@vitest/mocker": 3.2.3
+    "@vitest/utils": 3.2.3
     magic-string: ^0.30.17
     sirv: ^3.0.1
     tinyrainbow: ^2.0.0
     ws: ^8.18.2
   peerDependencies:
     playwright: "*"
-    vitest: 3.2.1
+    vitest: 3.2.3
     webdriverio: ^7.0.0 || ^8.0.0 || ^9.0.0
   peerDependenciesMeta:
     playwright:
@@ -7424,7 +7410,7 @@ __metadata:
       optional: true
     webdriverio:
       optional: true
-  checksum: 9050ad96bcdab3580464432d04a92ff8c962360e29fb3b5f9f8114f043f2585686c394f7d61941524df1acd47bdde4426c24805a2cea1e1f4491c62b2984e109
+  checksum: 3c6d5f1294722cb7f262250f1b70fe8408c2eefc4d58e605c61a6eebd66816da8d87a9f7fdf4fdd9f84e79db5a46d0ce24576a63b06cea13d743ea63fcec73a8
   languageName: node
   linkType: hard
 
@@ -7468,25 +7454,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/mocker@npm:3.2.1":
-  version: 3.2.1
-  resolution: "@vitest/mocker@npm:3.2.1"
-  dependencies:
-    "@vitest/spy": 3.2.1
-    estree-walker: ^3.0.3
-    magic-string: ^0.30.17
-  peerDependencies:
-    msw: ^2.4.9
-    vite: ^5.0.0 || ^6.0.0 || ^7.0.0-0
-  peerDependenciesMeta:
-    msw:
-      optional: true
-    vite:
-      optional: true
-  checksum: 12a91ab97adc43bbe7d4fd3ff7208e1cfbbe4387f47912dbe822470d993f3d98065b6239480c7ae21861e0454a8d83f1b726b4f8b3314b0affa30c99d6dc643f
-  languageName: node
-  linkType: hard
-
 "@vitest/mocker@npm:3.2.3":
   version: 3.2.3
   resolution: "@vitest/mocker@npm:3.2.3"
@@ -7512,15 +7479,6 @@ __metadata:
   dependencies:
     tinyrainbow: ^2.0.0
   checksum: 447b53bd962bc5978cf3e8c67f0600e38470ea63ab6ae24fb048dca79305828f37d9d854a7db1abc97ebde66a65187f87a99ca7969e43c750998c944e3ec48c6
-  languageName: node
-  linkType: hard
-
-"@vitest/pretty-format@npm:3.2.1":
-  version: 3.2.1
-  resolution: "@vitest/pretty-format@npm:3.2.1"
-  dependencies:
-    tinyrainbow: ^2.0.0
-  checksum: b745e84431a77cc7865044dca86b10f9e4b4151032d782025f3c086e704f597d25d03c3db744f709d93483c5a86be29a56ab6284127a0a3d496427ce75a1497f
   languageName: node
   linkType: hard
 
@@ -7564,15 +7522,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@vitest/spy@npm:3.2.1":
-  version: 3.2.1
-  resolution: "@vitest/spy@npm:3.2.1"
-  dependencies:
-    tinyspy: ^4.0.3
-  checksum: 87c6aba0165aaf58717aabce85089746052a5c308e248bbd5a81cf9b853fb1c59cb413c38723790fe3b77b05d1c1fec9c3c8dafe6fd9f095d3fba7592f6a6328
-  languageName: node
-  linkType: hard
-
 "@vitest/spy@npm:3.2.3":
   version: 3.2.3
   resolution: "@vitest/spy@npm:3.2.3"
@@ -7590,17 +7539,6 @@ __metadata:
     loupe: ^3.1.3
     tinyrainbow: ^2.0.0
   checksum: d31797594598817670cc49dfcd4ded2953d707c62e5dc7807737e8108073e97499cf7ef2eb3295f1fb52446a8a85ba50aacef21126689251092bc8566bff4bb6
-  languageName: node
-  linkType: hard
-
-"@vitest/utils@npm:3.2.1":
-  version: 3.2.1
-  resolution: "@vitest/utils@npm:3.2.1"
-  dependencies:
-    "@vitest/pretty-format": 3.2.1
-    loupe: ^3.1.3
-    tinyrainbow: ^2.0.0
-  checksum: 4d43150c81b7ffa6ffadbff7cf7d4328487c12d30dcb3e505c36d2e347978e2d5977aa9cf52a56b2a5f0e6f18b23307e78e7c3c7b1db4c62446b65f227ab61de
   languageName: node
   linkType: hard
 
@@ -10669,7 +10607,7 @@ __metadata:
     "@types/react-router-dom": 5.3.3
     "@types/react-test-renderer": 19.1.0
     "@vitejs/plugin-react": 4.5.2
-    "@vitest/browser": 3.2.1
+    "@vitest/browser": 3.2.3
     "@vitest/coverage-c8": 0.33.0
     cross-env: 7.0.3
     dotenv: 16.5.0
@@ -13398,7 +13336,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw-storybook-addon@npm:^2.0.4":
+"msw-storybook-addon@npm:2.0.5":
   version: 2.0.5
   resolution: "msw-storybook-addon@npm:2.0.5"
   dependencies:
@@ -13439,39 +13377,6 @@ __metadata:
   bin:
     msw: cli/index.js
   checksum: ca79300c3af2821e9ab7ab426657caaafd791c777139d54c3ad1752a592c4e249dd267b9da97328964f269850b54b1c6b538fa0b27f2f5881430db454ecd9b35
-  languageName: node
-  linkType: hard
-
-"msw@npm:2.8.7":
-  version: 2.8.7
-  resolution: "msw@npm:2.8.7"
-  dependencies:
-    "@bundled-es-modules/cookie": ^2.0.1
-    "@bundled-es-modules/statuses": ^1.0.1
-    "@bundled-es-modules/tough-cookie": ^0.1.6
-    "@inquirer/confirm": ^5.0.0
-    "@mswjs/interceptors": ^0.38.7
-    "@open-draft/deferred-promise": ^2.2.0
-    "@open-draft/until": ^2.1.0
-    "@types/cookie": ^0.6.0
-    "@types/statuses": ^2.0.4
-    graphql: ^16.8.1
-    headers-polyfill: ^4.0.2
-    is-node-process: ^1.2.0
-    outvariant: ^1.4.3
-    path-to-regexp: ^6.3.0
-    picocolors: ^1.1.1
-    strict-event-emitter: ^0.5.1
-    type-fest: ^4.26.1
-    yargs: ^17.7.2
-  peerDependencies:
-    typescript: ">= 4.8.x"
-  peerDependenciesMeta:
-    typescript:
-      optional: true
-  bin:
-    msw: cli/index.js
-  checksum: 9814e9306364d9cc17be7d9683d7000e3ea3c41b6325b473e192f26cc953c4a2e7f2160b01785880c883ebc2af560fc117aea6dda5cf22503979c0f5a4ec986b
   languageName: node
   linkType: hard
 

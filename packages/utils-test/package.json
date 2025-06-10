@@ -14,8 +14,8 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "msw": "2.8.7",
-    "msw-storybook-addon": "^2.0.4",
+    "msw": "2.10.2",
+    "msw-storybook-addon": "2.0.5",
     "react": "19.1.0",
     "react-intl": "7.1.11"
   },
