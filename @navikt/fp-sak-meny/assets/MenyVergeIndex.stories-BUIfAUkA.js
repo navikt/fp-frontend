@@ -1,9 +1,0 @@
-import{j as a,P as j,a as v}from"./iframe-CEd9u-4o.js";import{e as y,m as x}from"./nb_NO-CcHUbcoZ.js";import"./index-BnKv0Sxk.js";const i=v(x),l=({fjernVerge:V,opprettVerge:n,lukkModal:s})=>{const f=()=>{s();const o=n||V;if(!o)throw Error("Skal alltid ha enten opprettVerge eller fjernVerge");o()};return a.jsx(j,{value:i,children:a.jsx(y,{text:i.formatMessage({id:n?"MenyVergeIndex.OpprettVergeSporsmal":"MenyVergeIndex.FjernVergeSporsmal"}),showModal:!0,submit:f,cancel:s})})};l.__docgenInfo={description:"",methods:[],displayName:"MenyVergeIndex",props:{fjernVerge:{required:!1,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},opprettVerge:{required:!1,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""},lukkModal:{required:!0,tsType:{name:"signature",type:"function",raw:"() => void",signature:{arguments:[],return:{name:"void"}}},description:""}}};const{action:t}=__STORYBOOK_MODULE_ACTIONS__,O={title:"sak-meny/verge-v1",component:l,args:{lukkModal:t("button-click")}},e={args:{opprettVerge:t("button-click")}},r={args:{fjernVerge:t("button-click")}};var c,g,p;e.parameters={...e.parameters,docs:{...(c=e.parameters)==null?void 0:c.docs,source:{originalSource:`{
-  args: {
-    opprettVerge: action('button-click') as () => Promise<void>
-  }
-}`,...(p=(g=e.parameters)==null?void 0:g.docs)==null?void 0:p.source}}};var d,m,u;r.parameters={...r.parameters,docs:{...(d=r.parameters)==null?void 0:d.docs,source:{originalSource:`{
-  args: {
-    fjernVerge: action('button-click') as () => Promise<void>
-  }
-}`,...(u=(m=r.parameters)==null?void 0:m.docs)==null?void 0:u.source}}};const S=["LeggeTilVerge","FjerneVerge"];export{r as FjerneVerge,e as LeggeTilVerge,S as __namedExportsOrder,O as default};
