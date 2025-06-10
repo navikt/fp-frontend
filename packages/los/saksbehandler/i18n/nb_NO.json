@@ -32,6 +32,12 @@
   "OppgaveLabels.RevurderingInntekstmelding": "Inntektsmelding",
   "OppgaveLabels.BerortBehandling": "Berørt",
   "OppgaveLabels.KlageTilbakebetaling": "Klage TB",
+  "OppgaveLabels.Dod": "Død",
+  "OppgaveLabels.Papirsoknad": "Papirsøknad",
+  "OppgaveLabels.FraBeslutter": "Fra beslutter",
+  "OppgaveLabels.Naring": "Selvstendig næring",
+  "OppgaveLabels.Utbetaling": "Utbetaling",
+  "OppgaveLabels.VurderSed": "Vurder SED",
 
   "Person.Age": "{age} år",
   "Person.ImageText": "Personinformasjon",
