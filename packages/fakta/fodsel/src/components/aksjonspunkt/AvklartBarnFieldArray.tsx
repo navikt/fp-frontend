@@ -122,7 +122,7 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
           icon={<PlusCircleIcon aria-hidden />}
           size="small"
         >
-          {intl.formatMessage({ id: 'AvklartBarnFieldArray.LeggTilBarn' })}
+          <FormattedMessage id="AvklartBarnFieldArray.LeggTilBarn" />
         </Button>
       )}
     </div>
