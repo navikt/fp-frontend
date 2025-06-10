@@ -14,9 +14,9 @@ export const FaktaKort = ({ label, children, merknaderFraBeslutter }: Props) => 
   const error = merknaderFraBeslutter?.notAccepted ?? false;
   return (
     <Box
-      borderWidth={error ? '1' : undefined}
+      borderWidth={error ? '2' : undefined}
       borderColor={error ? 'border-danger' : undefined}
-      borderRadius="0 0 medium medium"
+      borderRadius="medium"
       background="surface-subtle"
       aria-label={label}
     >
