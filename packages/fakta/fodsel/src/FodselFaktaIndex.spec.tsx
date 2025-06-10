@@ -99,7 +99,7 @@ describe('FodselFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Registrer opplysninger om barn'));
 
-    await userEvent.click(screen.getByTitle('Legg til barn'));
+    await userEvent.click(screen.getByText('Legg til barn'));
 
     const alleDatofelt = utils.getAllByRole('textbox', { hidden: true });
 
