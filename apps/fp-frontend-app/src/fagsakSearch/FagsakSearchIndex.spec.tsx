@@ -1,15 +1,16 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './FagsakSearchIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('FagsakSearchIndex', () => {
-  it('skal søke med saksnummer og få opp treff i liste', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal søke med saksnummer og få opp treff i liste', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     const utils = render(<Default />);
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();

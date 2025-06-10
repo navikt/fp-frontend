@@ -14,6 +14,7 @@
     "test": "lerna run test --stream",
     "test:changed": "lerna run test --stream --since origin/master",
     "test:coverage": "lerna run test:coverage --stream",
+    "test:browser": "vitest --project=browser",
     "tsc": "lerna run tsc --stream",
     "tsc:changed": "lerna run tsc --stream --since origin/master",
     "eslint": "lerna run eslint --stream",
@@ -63,6 +64,7 @@
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "19.1.0",
     "@vitejs/plugin-react": "4.5.2",
+    "@vitest/browser": "3.2.1",
     "@vitest/coverage-c8": "0.33.0",
     "cross-env": "7.0.3",
     "eslint": "9.28.0",
@@ -78,6 +80,7 @@
     "jsdom": "26.1.0",
     "lerna": "8.2.2",
     "lint-staged": "15.5.2",
+    "playwright": "1.52.0",
     "prettier": "^3.5.3",
     "react-test-renderer": "19.1.0",
     "shelljs": "0.10.0",
@@ -88,7 +91,11 @@
     "vite": "6.3.5",
     "vite-plugin-externalize-deps": "0.9.0",
     "vite-plugin-html": "3.2.2",
+<<<<<<< HEAD
     "vitest": "3.2.3",
+=======
+    "vitest": "3.2.1",
+>>>>>>> a725409855 (Legg til vitest browser mode)
     "vitest-canvas-mock": "0.3.3"
   },
   "resolutions": {
@@ -106,7 +113,8 @@
   "packageManager": "yarn@3.4.1",
   "msw": {
     "workerDirectory": [
-      "./.storybook/mock"
+      "./.storybook/mock",
+      "public"
     ]
   }
 }

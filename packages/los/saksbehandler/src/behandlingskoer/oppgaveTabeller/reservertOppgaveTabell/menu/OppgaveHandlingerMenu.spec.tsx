@@ -1,15 +1,16 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './OppgaveHandlingerMenu.stories';
 
 const { Default } = composeStories(stories);
 
 describe('OppgaveHandlingerMenu', () => {
-  it('skal vise fire meny-knapper for reserverte oppgaver', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal vise fire meny-knapper for reserverte oppgaver', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -22,8 +23,8 @@ describe('OppgaveHandlingerMenu', () => {
     expect(screen.getByText('Flytt til ny saksbehandler')).toBeInTheDocument();
   });
 
-  it('skal åpne modal for å forlenge reservasjon', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal åpne modal for å forlenge reservasjon', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -37,8 +38,8 @@ describe('OppgaveHandlingerMenu', () => {
     expect(await screen.findAllByText('Behandlingen er reservert på deg')).toHaveLength(2);
   });
 
-  it('skal åpne modal for å reservere med dato', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal åpne modal for å reservere med dato', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -52,8 +53,8 @@ describe('OppgaveHandlingerMenu', () => {
     expect(await screen.findByText('Velg dato som reservasjonen avsluttes')).toBeInTheDocument();
   });
 
-  it('skal åpne og lukke modal for å flytte reservasjon', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal åpne og lukke modal for å flytte reservasjon', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();

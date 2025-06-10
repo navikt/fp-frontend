@@ -1,15 +1,17 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './BehandlingPaVent.stories';
 
 const { BehandlingSattPåVent, BehandlingSattManueltPåVent } = composeStories(stories);
 
 describe('BehandlingPaVent', () => {
-  it('skal vise at behandling er satt på vent', async () => {
-    await applyRequestHandlers(BehandlingSattPåVent.parameters['msw']);
+  mswTest('skal vise at behandling er satt på vent', async ({ setHandlers }) => {
+    setHandlers(BehandlingSattPåVent.parameters['msw']);
+
     render(<BehandlingSattPåVent />);
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
@@ -18,10 +20,10 @@ describe('BehandlingPaVent', () => {
     expect(screen.queryByRole('Select')).not.toBeInTheDocument();
   });
 
-  it('skal vise at behandling er satt på vent manuelt og så endre årsak og lagre', async () => {
-    const åpneSøkeside = vi.fn();
+  mswTest('skal vise at behandling er satt på vent manuelt og så endre årsak og lagre', async ({ setHandlers }) => {
+    setHandlers(BehandlingSattManueltPåVent.parameters['msw']);
 
-    await applyRequestHandlers(BehandlingSattManueltPåVent.parameters['msw']);
+    const åpneSøkeside = vi.fn();
     render(<BehandlingSattManueltPåVent opneSokeside={åpneSøkeside} />);
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();

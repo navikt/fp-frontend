@@ -1,15 +1,16 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './FagsakYtelseTypeVelger.stories';
 
 const { Default } = composeStories(stories);
 
 describe('FagsakYtelseTypeVelger', () => {
-  it('skal vise checkboxer for stønadstyper og så velge engangsstønad', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal vise checkboxer for stønadstyper og så velge engangsstønad', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Stønadstype')).toBeInTheDocument();
     expect(getByLabelText('Foreldrepenger')).toBeChecked();

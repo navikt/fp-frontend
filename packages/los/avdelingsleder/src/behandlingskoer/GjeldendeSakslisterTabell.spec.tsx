@@ -1,15 +1,16 @@
 import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './GjeldendeSakslisterTabell.stories';
 
 const { TabellNårDetIkkeFinnesBehandlingskøer, TabellNårDetFinnesEnBehandlingskø } = composeStories(stories);
 
 describe('GjeldendeSakslisterTabell', () => {
-  it('skal vise at ingen behandlingskøer er laget og så legge til en ny kø', async () => {
-    await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
+  mswTest('skal vise at ingen behandlingskøer er laget og så legge til en ny kø', async ({ setHandlers }) => {
+    setHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
     render(<TabellNårDetIkkeFinnesBehandlingskøer />);
     expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
     expect(screen.queryByText('Navn')).not.toBeInTheDocument();
@@ -20,8 +21,8 @@ describe('GjeldendeSakslisterTabell', () => {
     expect(await screen.findByText('Ny liste')).toBeInTheDocument();
   });
 
-  it('skal vise slette kø ved å trykke på ikon for sletting', async () => {
-    await applyRequestHandlers(TabellNårDetFinnesEnBehandlingskø.parameters['msw']);
+  mswTest('skal vise slette kø ved å trykke på ikon for sletting', async ({ setHandlers }) => {
+    setHandlers(TabellNårDetFinnesEnBehandlingskø.parameters['msw']);
     render(<TabellNårDetFinnesEnBehandlingskø />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
@@ -34,8 +35,8 @@ describe('GjeldendeSakslisterTabell', () => {
     expect(screen.queryByText('Ønsker du å slette Saksliste 1?')).not.toBeInTheDocument();
   });
 
-  it('skal legge til en ny kø ved bruk av tastaturet (enter)', async () => {
-    await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
+  mswTest('skal legge til en ny kø ved bruk av tastaturet (enter)', async ({ setHandlers }) => {
+    setHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
     render(<TabellNårDetIkkeFinnesBehandlingskøer />);
     expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
     expect(screen.queryByText('Navn')).not.toBeInTheDocument();

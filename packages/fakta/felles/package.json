@@ -7,9 +7,11 @@
     ".": "./index.ts"
   },
   "scripts": {
-    "test": "vitest",
-    "test:watch": "vitest --watch=true",
-    "test:coverage": "vitest --coverage",
+    "test": "vitest --project=jsdom",
+    "test:watch": "vitest --project=jsdom --watch=true",
+    "test:coverage": "vitest --project=jsdom --coverage",
+    "test:browser": "vitest --project=browser",
+    "test:browser:watch": "vitest --project=browser --watch=true",
     "tsc": "tsc --pretty",
     "stylelint": "stylelint \"src/**/*.module.css\"",
     "eslint": "eslint \"src/**/*.ts*\" --color",

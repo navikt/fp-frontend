@@ -1,15 +1,16 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './SakslisteVelgerForm.stories';
 
 const { Default, MedToSakslister, MedFlereEnnTreSaksbehandlere } = composeStories(stories);
 
 describe('SakslisteVelgerForm', () => {
-  it('skal vise dropdown med en saksliste', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal vise dropdown med en saksliste', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     const { getByText } = render(<Default />);
 
     expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
@@ -34,8 +35,8 @@ describe('SakslisteVelgerForm', () => {
     expect(screen.getByText(/Gjeldende intervall:/i)).toBeInTheDocument();
   });
 
-  it('skal vise dropdown med to saksliste og så bytte valgt liste', async () => {
-    await applyRequestHandlers(MedToSakslister.parameters['msw']);
+  mswTest('skal vise dropdown med to saksliste og så bytte valgt liste', async ({ setHandlers }) => {
+    setHandlers(MedToSakslister.parameters['msw']);
     const { getByLabelText, getByText } = render(<MedToSakslister />);
 
     expect(await screen.findByText('Saksliste 1')).toBeInTheDocument();
@@ -66,8 +67,8 @@ describe('SakslisteVelgerForm', () => {
     expect(screen.getByText('Utbetaling til bruker')).toBeInTheDocument();
   });
 
-  it('skal i utgangspunktet kun vise tre saksbehandlere og så klikke for å vise alle', async () => {
-    await applyRequestHandlers(MedFlereEnnTreSaksbehandlere.parameters['msw']);
+  mswTest('skal i utgangspunktet kun vise tre saksbehandlere og så klikke for å vise alle', async ({ setHandlers }) => {
+    setHandlers(MedFlereEnnTreSaksbehandlere.parameters['msw']);
     render(<MedFlereEnnTreSaksbehandlere />);
 
     expect(await screen.findByText('Behandlingskø')).toBeInTheDocument();
