@@ -41,7 +41,6 @@ const emptyQueryString = (queryString: string): boolean => queryString === '?' |
 
 const updateQueryParams = (queryString: string, nextParams: QueryParams): Search => {
   const prevParams = emptyQueryString(queryString) ? {} : parseQueryString(queryString);
-  // @ts-expect-error Fiks type i ft-repoet
   return formatQueryString({
     ...prevParams,
     ...nextParams,
