@@ -16,7 +16,6 @@ import { type AvklarBarnFormValues, AvklartBarnFieldArray } from './AvklartBarnF
 
 export type FormValues = {
   dokumentasjonForeligger?: boolean;
-  brukAntallBarnITps?: boolean;
 } & AvklarBarnFormValues &
   FaktaBegrunnelseFormValues;
 
@@ -74,6 +73,7 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel: { gjeld
               {
                 label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
                 value: 'false',
+                disabled: gjeldende.barn.some(b => b.kilde === 'FOLKEREGISTER'),
               },
             ]}
           />
@@ -101,8 +101,7 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel: { gjeld
 };
 
 const buildInitialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
-  dokumentasjonForeligger: gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER') ?? undefined,
-  brukAntallBarnITps: !gjeldende.barn.some(b => b.kilde !== 'FOLKEREGISTER'),
+  dokumentasjonForeligger: gjeldende.barn.some(b => b.kilde !== 'SØKNAD'),
   ...AvklartBarnFieldArray.initialValues(gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
