@@ -31,6 +31,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     submittable: true,
+    isReadOnly: false,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
     terminbekreftelseDokument: {

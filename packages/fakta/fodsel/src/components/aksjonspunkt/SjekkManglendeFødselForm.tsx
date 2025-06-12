@@ -12,11 +12,11 @@ import type { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunk
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { type AvklarBarnFormValues, AvklartBarnFieldArray } from './AvklartBarnFieldArray';
+import { BarnFieldArray, type BarnFormValues } from '../form/BarnFieldArray';
 
 type FormValues = {
   dokumentasjonForeligger?: boolean;
-} & AvklarBarnFormValues &
+} & BarnFormValues &
   FaktaBegrunnelseFormValues;
 
 interface Props {
@@ -25,7 +25,7 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
 }
 
-export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel: { gjeldende } }: Props) => {
+export const SjekkManglendeFDselForm = ({ submittable, aksjonspunkt, fødsel: { gjeldende } }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFodselAp>();
@@ -49,7 +49,7 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel: { gjeld
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="2">
+        <VStack gap="6">
           <RadioGroupPanel
             name="dokumentasjonForeligger"
             isEdited={dokumentasjonForeliggerIsEdited}
@@ -63,7 +63,7 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel: { gjeld
               {
                 label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
                 value: 'true',
-                element: <AvklartBarnFieldArray readOnly={isReadOnly} />,
+                element: <BarnFieldArray isReadOnly={isReadOnly} />,
               },
               {
                 label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
@@ -97,7 +97,7 @@ export const SjekkFodselDokForm = ({ submittable, aksjonspunkt, fødsel: { gjeld
 
 const buildInitialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
   dokumentasjonForeligger: gjeldende.barn.some(b => b.kilde !== 'SØKNAD'),
-  ...AvklartBarnFieldArray.initialValues(gjeldende),
+  ...BarnFieldArray.initialValues(gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
@@ -105,6 +105,6 @@ const transformValues = (values: FormValues): SjekkManglendeFodselAp => ({
   kode: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
   dokumentasjonForeligger: values.dokumentasjonForeligger!,
   brukAntallBarnITps: false,
-  ...AvklartBarnFieldArray.transformValues(values),
+  ...BarnFieldArray.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

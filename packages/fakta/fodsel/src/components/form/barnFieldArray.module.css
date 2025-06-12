@@ -6,4 +6,9 @@
     align-content: start;
     border: none;
   }
+
+  & tr th:first-child,
+  tr td:first-child {
+    padding-left: 0;
+  }
 }

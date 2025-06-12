@@ -13,18 +13,11 @@ interface Props {
 
 export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Props) => {
   const intl = useIntl();
-  const erLikeBarn =
-    barn.length > 0 &&
-    barn.every(
-      b =>
-        b.kilde === barn[0].kilde &&
-        b.barn.fødselsdato === barn[0].barn.fødselsdato &&
-        b.barn.dødsdato === barn[0].barn.dødsdato,
-    );
+  const barnErLike = erBarnLike(barn);
 
   return (
     <HStack gap="4" aria-label={intl.formatMessage({ id: 'Situasjon.OpplysningerGjeldende' })}>
-      {(barn.length === 1 || erLikeBarn) && (
+      {(barn.length === 1 || barnErLike) && (
         <>
           <FaktaBox
             key={barn[0].barn.fødselsdato}
@@ -42,7 +35,7 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
           )}
         </>
       )}
-      {!erLikeBarn &&
+      {!barnErLike &&
         barn.map((b, index) => (
           <FaktaBox
             key={`${b.barn.fødselsdato}-${b.barn.dødsdato}-${b.kilde}`}
@@ -74,3 +67,11 @@ const formaterLiv = ({ fødselsdato, dødsdato }: BarnHendelseData): string => {
   const død = dødsdato ? dateFormat(dødsdato) : null;
   return dødsdato ? `f. ${født} - d. ${død}` : `f. ${født}`;
 };
+const erBarnLike = (barn: FødselGjeldende['barn']) =>
+  barn.length > 0 &&
+  barn.every(
+    b =>
+      b.kilde === barn[0].kilde &&
+      b.barn.fødselsdato === barn[0].barn.fødselsdato &&
+      b.barn.dødsdato === barn[0].barn.dødsdato,
+  );
