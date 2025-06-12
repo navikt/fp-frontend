@@ -1,9 +1,9 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { FødselSøknad } from '@navikt/fp-types';
 import { DokumentLink, type DokumentLinkReferanse, FaktaKort } from '@navikt/fp-ui-komponenter';
 
@@ -22,21 +22,24 @@ export const FaktaFødselFraSøknad = ({
     <FaktaKort label={tittel}>
       <VStack gap="4">
         {termindato && (
-          <ValueLabel label={<FormattedMessage id="Label.Termindato" />}>
-            <DateLabel dateString={termindato} />
-          </ValueLabel>
+          <ReadOnlyField
+            label={<FormattedMessage id="Label.Termindato" />}
+            value={<DateLabel dateString={termindato} />}
+          />
         )}
         {utstedtdato && (
-          <ValueLabel label={<FormattedMessage id="Label.Utstedtdato" />}>
-            <DateLabel dateString={utstedtdato} />
-          </ValueLabel>
+          <ReadOnlyField
+            label={<FormattedMessage id="Label.Utstedtdato" />}
+            value={<DateLabel dateString={utstedtdato} />}
+          />
         )}
-        {antallBarn && <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{antallBarn}</ValueLabel>}
+        {antallBarn && <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={antallBarn} />}
 
         {barn.length > 0 && (
-          <ValueLabel label={<FormattedMessage id="Label.Fodselsdato" />}>
-            <DateLabel dateString={barn[0].fødselsdato} />
-          </ValueLabel>
+          <ReadOnlyField
+            label={<FormattedMessage id="Label.Fodselsdato" />}
+            value={<DateLabel dateString={barn[0].fødselsdato} />}
+          />
         )}
 
         {terminbekreftelseDokument && (
