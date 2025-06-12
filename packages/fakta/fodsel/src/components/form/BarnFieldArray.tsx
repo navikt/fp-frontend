@@ -122,15 +122,17 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
         </Table.Body>
       </Table>
       {!isReadOnly && (
-        <Button
-          onClick={() => append(defaultAntallBarn)}
-          type="button"
-          variant="tertiary-neutral"
-          icon={<PlusCircleIcon aria-hidden />}
-          size="small"
-        >
-          <FormattedMessage id="AvklartBarnFieldArray.LeggTilBarn" />
-        </Button>
+        <div>
+          <Button
+            onClick={() => append(defaultAntallBarn)}
+            type="button"
+            variant="tertiary-neutral"
+            icon={<PlusCircleIcon aria-hidden />}
+            size="small"
+          >
+            <FormattedMessage id="AvklartBarnFieldArray.LeggTilBarn" />
+          </Button>
+        </div>
       )}
     </>
   );

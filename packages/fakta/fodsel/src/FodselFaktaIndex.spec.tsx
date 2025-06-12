@@ -12,7 +12,7 @@ describe('FodselFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for termin', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<APTerminbekreftelse submitCallback={lagre} />);
+    render(<APTerminbekreftelse submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller terminbekreftelse')).toBeInTheDocument();
 
@@ -30,13 +30,25 @@ describe('FodselFaktaIndex', () => {
 
     const apBoks = within(screen.getByLabelText('Kontroller opplysninger om termin oppgitt i søknaden'));
 
-    expect(apBoks.getByLabelText('Utstedtdato')).toHaveValue('20.05.2025');
-    expect(apBoks.getByLabelText('Termindato')).toHaveValue('24.06.2025');
-    expect(apBoks.getByLabelText('Antall barn')).toHaveValue('1');
+    const apBoksTermindato = apBoks.getByLabelText('Termindato');
+    const apBoksUtstedtdato = apBoks.getByLabelText('Utstedtdato');
+    const apBoksAntallBarn = apBoks.getByLabelText('Antall barn');
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    expect(apBoksTermindato).toHaveValue('24.06.2025');
+    await userEvent.clear(apBoksTermindato);
+    await userEvent.type(apBoksTermindato, '25.06.2025');
+
+    expect(apBoksUtstedtdato).toHaveValue('20.05.2025');
+    await userEvent.clear(apBoksUtstedtdato);
+    await userEvent.type(apBoksUtstedtdato, '21.05.2025');
+
+    expect(apBoksAntallBarn).toHaveValue('1');
+    await userEvent.clear(apBoksAntallBarn);
+    await userEvent.type(apBoksAntallBarn, '2');
+
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
@@ -44,11 +56,11 @@ describe('FodselFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      antallBarn: 1,
       begrunnelse: 'Dette er en begrunnelse',
       kode: '5001',
-      termindato: '2025-06-24',
-      utstedtdato: '2025-05-20',
+      termindato: '2025-06-25',
+      utstedtdato: '2025-05-21',
+      antallBarn: 2,
     });
   });
 
@@ -89,7 +101,7 @@ describe('FodselFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon foreligger', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<APSjekkManglendeFødselPåForeldrepenger submitCallback={lagre} />);
+    render(<APSjekkManglendeFødselPåForeldrepenger submitCallback={lagre} />);
 
     const apBoks = within(screen.getByLabelText('Kontroller dokumentasjon av fødsel'));
     expect(apBoks.getByText('Fyll inn dokumenterte fødselsopplysninger')).toBeInTheDocument();
@@ -101,7 +113,7 @@ describe('FodselFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Legg til barn'));
 
-    const alleDatofelt = utils.getAllByRole('textbox', { hidden: true });
+    const alleDatofelt = screen.getAllByRole('textbox', { hidden: true });
 
     const fødselsdatoFelt2 = alleDatofelt[2];
     await userEvent.type(fødselsdatoFelt2, '05.05.2025');
@@ -111,7 +123,7 @@ describe('FodselFaktaIndex', () => {
     await userEvent.type(dødsdatoFelt, '05.05.2025');
     fireEvent.blur(dødsdatoFelt);
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 
@@ -138,14 +150,14 @@ describe('FodselFaktaIndex', () => {
 
   it('skal bekrefte aksjonspunkt for manglende fødsel ved å velge at dokumentasjon ikke foreligger', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<APSjekkManglendeFødselPåEngangstønad submitCallback={lagre} />);
+    render(<APSjekkManglendeFødselPåEngangstønad submitCallback={lagre} />);
 
     const apBoks = within(screen.getByLabelText('Kontroller dokumentasjon av fødsel'));
     expect(apBoks.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(apBoks.getByText('Fyll inn dokumenterte fødselsopplysninger')).toBeInTheDocument();
     expect(apBoks.getByLabelText('Ingen opplysninger om barn (avslag)')).toBeChecked();
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     expect(await screen.findByText('Bekreft og fortsett')).toBeEnabled();
 

@@ -2,7 +2,7 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, NumberField } from '@navikt/ft-form-hooks';
+import { Datepicker, Form, InputField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -75,10 +75,11 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="2">
+        <VStack gap="4">
           <HStack gap="4">
             <Datepicker
               name="termindato"
+              size="medium"
               label={intl.formatMessage({ id: 'Label.Termindato' })}
               validate={[required, hasValidDate, dateAfterOrEqual(minTermindato()), dateBeforeOrEqual(maxTermindato())]}
               fromDate={minTermindato().toDate()}
@@ -88,6 +89,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
             />
             <Datepicker
               name="utstedtdato"
+              size="medium"
               label={intl.formatMessage({ id: 'Label.Utstedtdato' })}
               validate={[required, hasValidDate, validerTerminBekreftelse(formMethods.getValues)]}
               isReadOnly={isReadOnly}
@@ -95,9 +97,14 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
               toDate={maxTerminbekreftelseDato().toDate()}
               isEdited={isNotEqual(søknad.utstedtdato, gjeldende.utstedtdato?.utstedtdato)}
             />
-            <NumberField
+            <InputField
               name="antallBarn"
+              size="medium"
               label={intl.formatMessage({ id: 'Label.AntallBarn' })}
+              parse={value => {
+                const parsedValue = parseInt(value.toString(), 10);
+                return Number.isNaN(parsedValue) ? value : parsedValue;
+              }}
               validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
               readOnly={isReadOnly}
               className={styles.bredde}
@@ -109,10 +116,12 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
             isSubmittable={submittable}
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
+            size="medium"
             hasVurderingText
           />
+
           {isForTidligTerminbekreftelse && (
-            <Alert variant="warning" className={styles.marginBottom}>
+            <Alert variant="warning">
               <FormattedMessage id="TermindatoFaktaForm.AdvarselForTidligUtstedtdato" />
             </Alert>
           )}
