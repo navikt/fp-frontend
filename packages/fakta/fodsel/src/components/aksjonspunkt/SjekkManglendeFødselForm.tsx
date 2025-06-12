@@ -49,7 +49,7 @@ export const SjekkManglendeFDselForm = ({ submittable, aksjonspunkt, fødsel: { 
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="6">
+        <VStack gap="4">
           <RadioGroupPanel
             name="dokumentasjonForeligger"
             isEdited={dokumentasjonForeliggerIsEdited}
