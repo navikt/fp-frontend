@@ -56,7 +56,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(søknad, gjeldende, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? initialValues(søknad, gjeldende, aksjonspunkt),
   });
 
   const termindato = formMethods.watch('termindato');
@@ -140,11 +140,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
   );
 };
 
-const buildInitialValues = (
-  søknad: FødselSøknad,
-  gjeldende: FødselGjeldende,
-  aksjonspunkt: Aksjonspunkt,
-): FormValues => ({
+const initialValues = (søknad: FødselSøknad, gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
   utstedtdato: gjeldende.utstedtdato?.utstedtdato ?? søknad.utstedtdato ?? undefined,
   termindato: gjeldende.termindato?.termindato ?? søknad.termindato ?? undefined,
   antallBarn: gjeldende.antallBarn ?? søknad.antallBarn,

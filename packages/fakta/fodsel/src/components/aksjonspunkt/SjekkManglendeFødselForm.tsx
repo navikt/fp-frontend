@@ -34,7 +34,7 @@ export const SjekkManglendeFDselForm = ({ submittable, aksjonspunkt, fødsel: { 
 
   const dokumentasjonForeliggerIsEdited = gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER');
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(gjeldende, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? initialValues(gjeldende, aksjonspunkt),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -95,7 +95,7 @@ export const SjekkManglendeFDselForm = ({ submittable, aksjonspunkt, fødsel: { 
   );
 };
 
-const buildInitialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
+const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
   dokumentasjonForeligger: gjeldende.barn.some(b => b.kilde !== 'SØKNAD'),
   ...BarnFieldArray.initialValues(gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
