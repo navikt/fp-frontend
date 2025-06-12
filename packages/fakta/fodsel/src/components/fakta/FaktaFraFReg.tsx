@@ -7,13 +7,13 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import type { FødselRegister } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
-import styles from './faktaFødselFraFReg.module.css';
+import styles from './faktaFraFReg.module.css';
 
 interface Props {
   register: FødselRegister;
 }
 
-export const FaktaFødselFraFReg = ({ register }: Props) => {
+export const FaktaFraFReg = ({ register }: Props) => {
   const intl = useIntl();
   const { barn } = register || {};
 

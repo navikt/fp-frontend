@@ -25,7 +25,7 @@ interface Props {
   aksjonspunkt: Aksjonspunkt;
 }
 
-export const SjekkManglendeFDselForm = ({ submittable, aksjonspunkt, fødsel: { gjeldende } }: Props) => {
+export const SjekkManglendeFødselForm = ({ submittable, aksjonspunkt, fødsel: { gjeldende } }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFodselAp>();

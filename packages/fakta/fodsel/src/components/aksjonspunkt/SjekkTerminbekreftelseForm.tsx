@@ -3,13 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
 import { Datepicker, Form, InputField } from '@navikt/ft-form-hooks';
-import {
-  dateAfterOrEqual,
-  dateBeforeOrEqual,
-  hasValidDate,
-  hasValidInteger,
-  required,
-} from '@navikt/ft-form-validators';
+import { hasValidDate, hasValidInteger, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
 import {
@@ -19,14 +13,12 @@ import {
   isNotEqual,
 } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Fødsel, FødselGjeldende, FødselSøknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
 import type { BekreftTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import {
   maxTerminbekreftelseDato,
-  maxTermindato,
   minTerminbekreftelseDato,
-  minTermindato,
   terminBekreftelseBeforeTodayOrTermindato,
   useMellomlagretFormData,
   usePanelDataContext,
@@ -34,13 +26,15 @@ import {
   validateMinAntallBarn,
 } from '@navikt/fp-utils';
 
+import { Termindato, type TermindatoFormValues } from '../form/Termindato';
+
 import styles from './sjekkTerminbekreftelseForm.module.css';
 
 type FormValues = {
   utstedtdato?: string;
-  termindato?: string;
   antallBarn?: number;
-} & FaktaBegrunnelseFormValues;
+} & TermindatoFormValues &
+  FaktaBegrunnelseFormValues;
 
 interface Props {
   submittable: boolean;
@@ -56,7 +50,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? initialValues(søknad, gjeldende, aksjonspunkt),
+    defaultValues: mellomlagretFormData ?? initialValues(gjeldende, aksjonspunkt),
   });
 
   const termindato = formMethods.watch('termindato');
@@ -77,16 +71,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
       >
         <VStack gap="4">
           <HStack gap="4">
-            <Datepicker
-              name="termindato"
-              size="medium"
-              label={intl.formatMessage({ id: 'Label.Termindato' })}
-              validate={[required, hasValidDate, dateAfterOrEqual(minTermindato()), dateBeforeOrEqual(maxTermindato())]}
-              fromDate={minTermindato().toDate()}
-              toDate={maxTermindato().toDate()}
-              isReadOnly={isReadOnly}
-              isEdited={isNotEqual(søknad.termindato, gjeldende.termindato?.termindato)}
-            />
+            <Termindato isReadOnly={isReadOnly} isEdited={gjeldende.termindato?.kilde !== 'SØKNAD'} />
             <Datepicker
               name="utstedtdato"
               size="medium"
@@ -95,7 +80,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
               isReadOnly={isReadOnly}
               fromDate={minTerminbekreftelseDato().toDate()}
               toDate={maxTerminbekreftelseDato().toDate()}
-              isEdited={isNotEqual(søknad.utstedtdato, gjeldende.utstedtdato?.utstedtdato)}
+              isEdited={gjeldende.utstedtdato?.kilde !== 'SØKNAD'}
             />
             <InputField
               name="antallBarn"
@@ -140,10 +125,10 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
   );
 };
 
-const initialValues = (søknad: FødselSøknad, gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
-  utstedtdato: gjeldende.utstedtdato?.utstedtdato ?? søknad.utstedtdato ?? undefined,
-  termindato: gjeldende.termindato?.termindato ?? søknad.termindato ?? undefined,
-  antallBarn: gjeldende.antallBarn ?? søknad.antallBarn,
+const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
+  utstedtdato: gjeldende.utstedtdato?.utstedtdato ?? undefined,
+  termindato: gjeldende.termindato?.termindato ?? undefined,
+  antallBarn: gjeldende.antallBarn,
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 

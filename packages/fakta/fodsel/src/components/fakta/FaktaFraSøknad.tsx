@@ -12,7 +12,7 @@ interface Props {
   terminbekreftelseDokument: DokumentLinkReferanse | undefined;
 }
 
-export const FaktaFødselFraSøknad = ({
+export const FaktaFraSøknad = ({
   søknad: { termindato, utstedtdato, antallBarn, barn },
   terminbekreftelseDokument,
 }: Props) => {
