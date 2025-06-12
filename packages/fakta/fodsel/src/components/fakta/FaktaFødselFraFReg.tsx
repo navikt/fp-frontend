@@ -4,7 +4,6 @@ import { BodyShort, HStack, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import { ValueLabel } from '@navikt/fp-fakta-felles';
 import type { FødselRegister } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
@@ -30,15 +29,17 @@ export const FaktaFødselFraFReg = ({ register }: Props) => {
       )}
       {barn.length > 0 && erAlleBarnLike && (
         <VStack gap="4">
-          <ValueLabel label={<FormattedMessage id="Label.Fodselsdato" />}>
-            <DateLabel dateString={barn[0].fødselsdato} />
-          </ValueLabel>
+          <ReadOnlyField
+            label={<FormattedMessage id="Label.Fodselsdato" />}
+            value={<DateLabel dateString={barn[0].fødselsdato} />}
+          />
           {barn[0].dødsdato && (
-            <ValueLabel label={<FormattedMessage id="Label.Dodsdato" />}>
-              <DateLabel dateString={barn[0].dødsdato} />
-            </ValueLabel>
+            <ReadOnlyField
+              label={<FormattedMessage id="Label.Dodsdato" />}
+              value={<DateLabel dateString={barn[0].dødsdato} />}
+            />
           )}
-          <ValueLabel label={<FormattedMessage id="Label.AntallBarn" />}>{barn.length}</ValueLabel>
+          <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={barn.length} />
         </VStack>
       )}
       {barn.length > 0 && !erAlleBarnLike && (

@@ -8,8 +8,8 @@ import type { Fødsel } from '@navikt/fp-types';
 import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { SjekkFodselDokForm } from './aksjonspunkt/SjekkFodselDokForm';
-import { TermindatoFaktaForm } from './aksjonspunkt/TermindatoFaktaForm';
+import { SjekkManglendeFDselForm } from './aksjonspunkt/SjekkManglendeFødselForm';
+import { SjekkTerminbekreftelseForm } from './aksjonspunkt/SjekkTerminbekreftelseForm';
 import { FaktaFødselFraFReg } from './fakta/FaktaFødselFraFReg';
 import { FaktaFødselFraSøknad } from './fakta/FaktaFødselFraSøknad';
 import { Situasjon } from './fakta/Situasjon';
@@ -52,11 +52,11 @@ export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumen
       </HGrid>
 
       {terminbekreftelseAp && (
-        <TermindatoFaktaForm submittable={submittable} fødsel={fødsel} aksjonspunkt={terminbekreftelseAp} />
+        <SjekkTerminbekreftelseForm submittable={submittable} fødsel={fødsel} aksjonspunkt={terminbekreftelseAp} />
       )}
 
       {manglendeFødselAp && (
-        <SjekkFodselDokForm submittable={submittable} fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />
+        <SjekkManglendeFDselForm submittable={submittable} fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />
       )}
     </VStack>
   );

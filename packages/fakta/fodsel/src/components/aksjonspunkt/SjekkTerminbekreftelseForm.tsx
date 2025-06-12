@@ -34,7 +34,7 @@ import {
   validateMinAntallBarn,
 } from '@navikt/fp-utils';
 
-import styles from './termindatoFaktaForm.module.css';
+import styles from './sjekkTerminbekreftelseForm.module.css';
 
 type FormValues = {
   utstedtdato?: string;
@@ -48,7 +48,7 @@ interface Props {
   fødsel: Fødsel;
 }
 
-export const TermindatoFaktaForm = ({ fødsel: { gjeldende, søknad }, submittable, aksjonspunkt }: Props) => {
+export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, submittable, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<BekreftTerminbekreftelseAp>();

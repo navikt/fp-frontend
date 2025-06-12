@@ -10,9 +10,9 @@ import dayjs from 'dayjs';
 import type { AvklartBarn, FødselGjeldende } from '@navikt/fp-types';
 import { dødsdatoAfterOrEqualFødselsdato, maxFodselsdato, minFodselsdato } from '@navikt/fp-utils';
 
-import styles from './avklartBarnFieldArray.module.css';
+import styles from './barnFieldArray.module.css';
 
-const FIELD_ARRAY_NAME = 'avklartBarn';
+const FIELD_ARRAY_NAME = 'barn';
 
 export const defaultAntallBarn: FieldArrayRow = {
   fodselsdato: '',
@@ -24,24 +24,27 @@ type FieldArrayRow = AvklartBarn & {
   erRedigerbar?: boolean;
 };
 
-export type AvklarBarnFormValues = {
+export type BarnFormValues = {
   [FIELD_ARRAY_NAME]: FieldArrayRow[];
 };
 
 interface Props {
-  readOnly: boolean;
+  isReadOnly: boolean;
 }
 
-export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
+export const BarnFieldArray = ({ isReadOnly }: Props) => {
   const intl = useIntl();
 
-  const { control, watch, getValues } = useFormContext<AvklarBarnFormValues>();
+  const { control, watch, getValues } = useFormContext<BarnFormValues>();
   const { fields, remove, append } = useFieldArray({ control, name: FIELD_ARRAY_NAME });
 
-  const avklartBarn = watch(FIELD_ARRAY_NAME);
+  const barn = watch(FIELD_ARRAY_NAME);
   const today = dayjs().toDate();
+
+  const skalViseDødsdato = !isReadOnly || barn.some(b => b.dodsdato !== null);
+
   return (
-    <div>
+    <>
       <Table className={styles.tableNoBorder} size="small">
         <Table.Header>
           <Table.Row>
@@ -53,14 +56,16 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
             <Table.HeaderCell>
               <FormattedMessage id="Label.Fodselsdato" />
             </Table.HeaderCell>
-            <Table.HeaderCell>
-              <FormattedMessage id="Label.Dodsdato" />
-            </Table.HeaderCell>
+            {skalViseDødsdato && (
+              <Table.HeaderCell>
+                <FormattedMessage id="Label.Dodsdato" />
+              </Table.HeaderCell>
+            )}
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {fields.map((field, index) => {
-            const disabled = watch(`${FIELD_ARRAY_NAME}.${index}.erRedigerbar`) !== true;
+            const disabled = field.erRedigerbar !== true;
             return (
               <Table.Row shadeOnHover={false} key={field.id}>
                 {fields.length > 1 && (
@@ -82,23 +87,25 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
                     validate={[required, hasValidDate, dateAfterOrEqual(minFodselsdato()), dateBeforeOrEqualToToday]}
                     fromDate={minFodselsdato().toDate()}
                     toDate={maxFodselsdato().toDate()}
-                    isReadOnly={readOnly}
+                    isReadOnly={isReadOnly}
                     disabled={disabled}
                   />
                 </Table.DataCell>
-                <Table.DataCell>
-                  <Datepicker
-                    size="medium"
-                    name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
-                    label={intl.formatMessage({ id: 'Label.Dodsdato' })}
-                    hideLabel
-                    validate={[hasValidDate, dateBeforeOrEqualToToday, validerDødsdato(getValues, index)]}
-                    toDate={today}
-                    isReadOnly={readOnly}
-                    disabled={disabled}
-                  />
-                </Table.DataCell>
-                {avklartBarn.length > 1 && !(readOnly || disabled) && (
+                {skalViseDødsdato && (
+                  <Table.DataCell>
+                    <Datepicker
+                      size="medium"
+                      name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
+                      label={intl.formatMessage({ id: 'Label.Dodsdato' })}
+                      hideLabel
+                      validate={[hasValidDate, dateBeforeOrEqualToToday, validerDødsdato(getValues, index)]}
+                      toDate={today}
+                      isReadOnly={isReadOnly}
+                      disabled={disabled}
+                    />
+                  </Table.DataCell>
+                )}
+                {barn.length > 1 && !(isReadOnly || disabled) && (
                   <Table.DataCell>
                     <Button
                       size="medium"
@@ -114,7 +121,7 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
           })}
         </Table.Body>
       </Table>
-      {!readOnly && (
+      {!isReadOnly && (
         <Button
           onClick={() => append(defaultAntallBarn)}
           type="button"
@@ -125,23 +132,23 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
           <FormattedMessage id="AvklartBarnFieldArray.LeggTilBarn" />
         </Button>
       )}
-    </div>
+    </>
   );
 };
 
-AvklartBarnFieldArray.initialValues = (gjeldende: FødselGjeldende): AvklarBarnFormValues => ({
-  avklartBarn:
+BarnFieldArray.initialValues = (gjeldende: FødselGjeldende): BarnFormValues => ({
+  barn:
     gjeldende.barn.length > 0
-      ? gjeldende.barn.map(({ barn: { fødselsdato, dødsdato }, kilde }) => ({
+      ? gjeldende.barn.map(({ barn: { fødselsdato, dødsdato }, kanOverstyres }) => ({
           fodselsdato: fødselsdato,
           dodsdato: dødsdato ?? null,
-          erRedigerbar: kilde !== 'FOLKEREGISTER',
+          erRedigerbar: kanOverstyres,
         }))
       : lagBarn(gjeldende.antallBarn || 0),
 });
 
-AvklartBarnFieldArray.transformValues = (values: AvklarBarnFormValues) => ({
-  uidentifiserteBarn: values.avklartBarn.map(ab => ({
+BarnFieldArray.transformValues = (values: BarnFormValues) => ({
+  uidentifiserteBarn: values.barn.map(ab => ({
     fodselsdato: ab.fodselsdato,
     dodsdato: ab.dodsdato === '' || ab.dodsdato === null ? undefined : ab.dodsdato,
   })),
@@ -156,7 +163,7 @@ const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
   });
 };
 
-const validerDødsdato = (getValues: UseFormGetValues<AvklarBarnFormValues>, index: number) => (dødsdato: string) => {
+const validerDødsdato = (getValues: UseFormGetValues<BarnFormValues>, index: number) => (dødsdato: string) => {
   const fødselsdato = getValues(`${FIELD_ARRAY_NAME}.${index}.fodselsdato`);
   return dødsdatoAfterOrEqualFødselsdato(fødselsdato, dødsdato);
 };
