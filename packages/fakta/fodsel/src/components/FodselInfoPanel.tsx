@@ -8,10 +8,10 @@ import type { Fødsel } from '@navikt/fp-types';
 import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { SjekkManglendeFDselForm } from './aksjonspunkt/SjekkManglendeFødselForm';
+import { SjekkManglendeFødselForm } from './aksjonspunkt/SjekkManglendeFødselForm';
 import { SjekkTerminbekreftelseForm } from './aksjonspunkt/SjekkTerminbekreftelseForm';
-import { FaktaFødselFraFReg } from './fakta/FaktaFødselFraFReg';
-import { FaktaFødselFraSøknad } from './fakta/FaktaFødselFraSøknad';
+import { FaktaFraFReg } from './fakta/FaktaFraFReg';
+import { FaktaFraSøknad } from './fakta/FaktaFraSøknad';
 import { Situasjon } from './fakta/Situasjon';
 
 const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktKode;
@@ -47,8 +47,8 @@ export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumen
       <Situasjon gjeldende={fødsel.gjeldende} />
 
       <HGrid columns={2} gap="4">
-        <FaktaFødselFraSøknad søknad={fødsel.søknad} terminbekreftelseDokument={terminbekreftelseDokument} />
-        <FaktaFødselFraFReg register={fødsel.register} />
+        <FaktaFraSøknad søknad={fødsel.søknad} terminbekreftelseDokument={terminbekreftelseDokument} />
+        <FaktaFraFReg register={fødsel.register} />
       </HGrid>
 
       {terminbekreftelseAp && (
@@ -56,7 +56,7 @@ export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumen
       )}
 
       {manglendeFødselAp && (
-        <SjekkManglendeFDselForm submittable={submittable} fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />
+        <SjekkManglendeFødselForm submittable={submittable} fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />
       )}
     </VStack>
   );
