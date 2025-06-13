@@ -81,6 +81,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
               fromDate={minTerminbekreftelseDato().toDate()}
               toDate={maxTerminbekreftelseDato().toDate()}
               isEdited={gjeldende.utstedtdato?.kilde !== 'SØKNAD'}
+              defaultMonth={new Date()}
             />
             <InputField
               name="antallBarn"

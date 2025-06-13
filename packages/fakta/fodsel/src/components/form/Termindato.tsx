@@ -24,6 +24,7 @@ export const Termindato = ({ isReadOnly, isEdited }: Props) => {
       validate={[required, hasValidDate, dateAfterOrEqual(minTermindato()), dateBeforeOrEqual(maxTermindato())]}
       fromDate={minTermindato().toDate()}
       toDate={maxTermindato().toDate()}
+      defaultMonth={new Date()}
       isReadOnly={isReadOnly}
       isEdited={isEdited}
     />

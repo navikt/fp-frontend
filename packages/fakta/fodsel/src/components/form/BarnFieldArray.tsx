@@ -105,7 +105,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                     />
                   </Table.DataCell>
                 )}
-                {barn.length > 1 && !(isReadOnly || disabled) && (
+                {index !== 0 && !(isReadOnly || disabled) && (
                   <Table.DataCell>
                     <Button
                       size="medium"
