@@ -150,12 +150,12 @@ BarnFieldArray.initialValues = (gjeldende: FødselGjeldende): BarnFormValues => 
 });
 
 BarnFieldArray.transformValues = (
-  values: BarnFormValues,
+  { barn }: BarnFormValues,
   skalListeBrukes: boolean,
-): { uidentifiserteBarn: { fodselsdato: string; dodsdato: string | undefined }[] } => ({
+): { barn: { fodselsdato: string; dodsdato: string | undefined }[] } => ({
   // @ts-expect-error skal være en tom liste eller null men backend må fikses
-  uidentifiserteBarn: skalListeBrukes
-    ? values.barn.map(ab => ({
+  barn: skalListeBrukes
+    ? barn.map(ab => ({
         fodselsdato: ab.fodselsdato,
         dodsdato: ab.dodsdato === '' || ab.dodsdato === null ? undefined : ab.dodsdato,
       }))
