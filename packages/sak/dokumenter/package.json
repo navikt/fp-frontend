@@ -29,7 +29,7 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-ui-komponenter": "workspace:*",
-    "@navikt/ft-ui-komponenter": "4.4.3",
+    "@navikt/ft-ui-komponenter": "4.5.0",
     "@navikt/ft-utils": "3.6.2",
     "react": "19.1.0",
     "react-intl": "7.1.11"
