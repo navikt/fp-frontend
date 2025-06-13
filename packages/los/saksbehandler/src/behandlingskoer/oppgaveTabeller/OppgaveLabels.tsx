@@ -65,6 +65,8 @@ const MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE_SORTERT = {
   [AndreKriterierType.VURDER_FORMKRAV]: 'alt3',
   [AndreKriterierType.VURDER_FARESIGNALER]: 'alt3',
   [AndreKriterierType.VURDER_SYKDOM]: 'alt3',
+  [AndreKriterierType.IKKE_VARSLET]: 'alt3',
+  [AndreKriterierType.OVER_FIRE_RETTSGEBYR]: 'alt3',
   [AndreKriterierType.BARE_FAR_RETT]: 'alt2',
   [AndreKriterierType.UTLANDSSAK]: 'alt2',
   [AndreKriterierType.DØD]: 'alt2',

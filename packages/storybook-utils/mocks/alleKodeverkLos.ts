@@ -156,6 +156,16 @@ export const alleKodeverkLos: AlleKodeverkLos = {
       kodeverk: 'ANDRE_KRITERIER',
       navn: 'Vurder sykdom',
     },
+    {
+      kode: 'IKKE_VARSLET',
+      kodeverk: 'ANDRE_KRITERIER',
+      navn: 'Ikke varslet',
+    },
+    {
+      kode: 'OVER_FIRE_RETTSGEBYR',
+      kodeverk: 'ANDRE_KRITERIER',
+      navn: 'Over 4 rettsgebyr',
+    },
   ],
   FagsakYtelseType: [
     {
