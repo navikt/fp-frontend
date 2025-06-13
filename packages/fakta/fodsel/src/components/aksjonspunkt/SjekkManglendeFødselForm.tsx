@@ -104,7 +104,6 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
 const transformValues = (values: FormValues): SjekkManglendeFodselAp => ({
   kode: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
   dokumentasjonForeligger: values.dokumentasjonForeligger!,
-  brukAntallBarnITps: false,
-  ...BarnFieldArray.transformValues(values),
+  ...BarnFieldArray.transformValues(values, !!values.dokumentasjonForeligger),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

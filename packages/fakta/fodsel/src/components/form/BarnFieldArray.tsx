@@ -149,11 +149,13 @@ BarnFieldArray.initialValues = (gjeldende: FødselGjeldende): BarnFormValues => 
       : lagBarn(gjeldende.antallBarn || 0),
 });
 
-BarnFieldArray.transformValues = (values: BarnFormValues) => ({
-  uidentifiserteBarn: values.barn.map(ab => ({
-    fodselsdato: ab.fodselsdato,
-    dodsdato: ab.dodsdato === '' || ab.dodsdato === null ? undefined : ab.dodsdato,
-  })),
+BarnFieldArray.transformValues = (values: BarnFormValues, skalListeBrukes: boolean) => ({
+  uidentifiserteBarn: skalListeBrukes
+    ? values.barn.map(ab => ({
+        fodselsdato: ab.fodselsdato,
+        dodsdato: ab.dodsdato === '' || ab.dodsdato === null ? undefined : ab.dodsdato,
+      }))
+    : [{}], // TODO fiks uidentifiserteBarn i backend
 });
 
 const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
