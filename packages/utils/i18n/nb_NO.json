@@ -1,0 +1,4 @@
+{
+  "ValidationMessage.ForTidligTermin": "Termin kan ikke være mer enn 3 uker før fødsel",
+  "ValidationMessage.ForSenTermin": "Termin kan ikke være mer enn 5 måneder etter fødsel"
+}
