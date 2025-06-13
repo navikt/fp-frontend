@@ -1,14 +1,15 @@
 import { composeStories } from '@storybook/react';
 import { screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './LedigOppgaveTabell.stories';
 
 const { Default, TomOppgaveTabell } = composeStories(stories);
 
 describe('OppgaverTabell', () => {
-  it('skal vise tabell med behandlinger', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal vise tabell med behandlinger', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     await Default.run();
 
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();
@@ -19,8 +20,8 @@ describe('OppgaverTabell', () => {
     expect(await screen.findByText('Inntektsmelding')).toBeInTheDocument();
   });
 
-  it('skal vise tom tabell når det ikke er behandlinger for køen', async () => {
-    await applyRequestHandlers(TomOppgaveTabell.parameters['msw']);
+  mswTest('skal vise tom tabell når det ikke er behandlinger for køen', async ({ setHandlers }) => {
+    setHandlers(TomOppgaveTabell.parameters['msw']);
     await TomOppgaveTabell.run();
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();
     expect(await screen.findByText('0 totalt')).toBeInTheDocument();

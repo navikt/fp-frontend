@@ -1,6 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './FordelingAvBehandlingstypePanel.stories';
 
@@ -8,8 +9,8 @@ const { Default } = composeStories(stories);
 
 describe('FordelingAvBehandlingstypePanel', () => {
   // TODO echarts-testing
-  it.skip('skal vise graffilter', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest.skip('skal vise graffilter', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Antall åpne oppgaver nå')).toBeInTheDocument();
 

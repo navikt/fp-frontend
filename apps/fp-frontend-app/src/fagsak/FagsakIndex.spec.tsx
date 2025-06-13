@@ -3,15 +3,16 @@ import { Context as ResponsiveContext } from 'react-responsive';
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './FagsakIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('FagsakIndex', () => {
-  it('skal vise fagsak-delen av app og vente på at behandling skal vises', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal vise fagsak-delen av app og vente på at behandling skal vises', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Faresignaler')).toBeInTheDocument();
@@ -32,8 +33,8 @@ describe('FagsakIndex', () => {
     expect(screen.getByText('Venter…')).toBeInTheDocument();
   });
 
-  it('skal vise åpning og lukking av sidepanel ved storskjerm', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal vise åpning og lukking av sidepanel ved storskjerm', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1702 }}>
         <Default />
@@ -48,8 +49,8 @@ describe('FagsakIndex', () => {
     expect(screen.queryByLabelText('Vis sidepanel')).toBeInTheDocument();
   });
 
-  it('skal skjule knapp for åpning eller lukking av sidepanel ved småskjerm', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal skjule knapp for åpning eller lukking av sidepanel ved småskjerm', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1408 }}>
         <Default />
