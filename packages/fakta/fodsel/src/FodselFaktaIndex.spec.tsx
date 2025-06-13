@@ -131,9 +131,8 @@ describe('FodselFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      brukAntallBarnITps: false,
-      dokumentasjonForeligger: true,
       kode: '5027',
+      dokumentasjonForeligger: true,
       uidentifiserteBarn: [
         {
           fodselsdato: '2025-05-04',
@@ -165,15 +164,9 @@ describe('FodselFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      brukAntallBarnITps: false,
-      dokumentasjonForeligger: false,
       kode: '5027',
-      uidentifiserteBarn: [
-        {
-          dodsdato: undefined,
-          fodselsdato: '2025-05-04',
-        },
-      ],
+      dokumentasjonForeligger: false,
+      uidentifiserteBarn: [{}],
       begrunnelse: 'Dette er en begrunnelse',
     });
   });
