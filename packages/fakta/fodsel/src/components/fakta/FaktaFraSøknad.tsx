@@ -33,7 +33,6 @@ export const FaktaFraSøknad = ({
             value={<DateLabel dateString={utstedtdato} />}
           />
         )}
-        {antallBarn && <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={antallBarn} />}
 
         {barn.length > 0 && (
           <ReadOnlyField
@@ -41,6 +40,7 @@ export const FaktaFraSøknad = ({
             value={<DateLabel dateString={barn[0].fødselsdato} />}
           />
         )}
+        {antallBarn && <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={antallBarn} />}
 
         {terminbekreftelseDokument && (
           <HStack gap="2">
