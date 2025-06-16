@@ -5,8 +5,13 @@ import { expect } from 'vitest';
 
 import * as stories from './FodselFaktaIndex.stories';
 
-const { Default, APTerminbekreftelse, APSjekkManglendeFødselPåEngangstønad, APSjekkManglendeFødselPåForeldrepenger } =
-  composeStories(stories);
+const {
+  Default,
+  APTerminbekreftelse,
+  APSjekkManglendeFødselPåEngangstønad,
+  APSjekkManglendeFødselPåForeldrepenger,
+  Overstyring,
+} = composeStories(stories);
 
 describe('FodselFaktaIndex', () => {
   it('skal bekrefte aksjonspunkt for termin', async () => {
@@ -169,5 +174,14 @@ describe('FodselFaktaIndex', () => {
       uidentifiserteBarn: [{}],
       begrunnelse: 'Dette er en begrunnelse',
     });
+  });
+
+  it('skal overstyre termindato og legge til et barn', async () => {
+    render(<Overstyring />);
+
+    expect(screen.getByText('Fakta om fødsel')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Overstyr'));
+
+    expect(screen.getByText('Overstyring av fødselsdetaljer')).toBeInTheDocument();
   });
 });
