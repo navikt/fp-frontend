@@ -138,17 +138,14 @@ const transformValues = (
       skalBrukeOverstyrendeFritekstBrev: harOverstyrtVedtaksbrev,
     }));
 
-const finnBegrunnelse = (behandling: Behandling, isReadOnly: boolean): string | undefined => {
-  if (isReadOnly) {
-    return undefined;
-  }
+const finnBegrunnelse = (behandling: Behandling): string | undefined => {
   return behandling.behandlingsresultat?.avslagsarsakFritekst
     ? decodeHtmlEntity(behandling.behandlingsresultat.avslagsarsakFritekst)
     : undefined;
 };
 
-export const buildInitialValues = (behandling: Behandling, beregningErManueltFastsatt: boolean): FormValues => ({
-  begrunnelse: finnBegrunnelse(behandling, beregningErManueltFastsatt),
+export const buildInitialValues = (behandling: Behandling): FormValues => ({
+  begrunnelse: finnBegrunnelse(behandling),
 });
 
 type VedtakAksjonspunkter =
@@ -192,7 +189,7 @@ export const VedtakForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling, beregningErManueltFastsatt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');

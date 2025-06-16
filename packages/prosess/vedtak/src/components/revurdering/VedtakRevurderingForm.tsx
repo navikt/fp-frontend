@@ -250,7 +250,7 @@ export const VedtakRevurderingForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling, isReadOnly),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
