@@ -1,14 +1,15 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './OppgaveJournalføringIndex.stories';
 
 const { ViseOppgaverIListe, IngenOppgaver } = composeStories(stories);
 
 describe('JournalforingIndex', () => {
-  it('skal vise en liste med oppgaver', async () => {
-    await applyRequestHandlers(ViseOppgaverIListe.parameters['msw']);
+  mswTest('skal vise en liste med oppgaver', async ({ setHandlers }) => {
+    setHandlers(ViseOppgaverIListe.parameters['msw']);
     render(<ViseOppgaverIListe />);
     expect(await screen.findByText('Journalføring')).toBeInTheDocument();
 
@@ -29,8 +30,8 @@ describe('JournalforingIndex', () => {
     expect(screen.getByText('4016')).toBeInTheDocument();
   });
 
-  it('skal vise ingen oppgaver', async () => {
-    await applyRequestHandlers(IngenOppgaver.parameters['msw']);
+  mswTest('skal vise ingen oppgaver', async ({ setHandlers }) => {
+    setHandlers(IngenOppgaver.parameters['msw']);
     render(<IngenOppgaver />);
     expect(await screen.findByText('Fant ingen journalføringsoppgaver')).toBeInTheDocument();
   });

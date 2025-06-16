@@ -2,16 +2,18 @@ import { Context as ResponsiveContext } from 'react-responsive';
 
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor, within } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
 import { expect } from 'vitest';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './AppIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('AppIndex', () => {
-  it('skal rendre app med korrekt informasjon', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal rendre app med korrekt informasjon', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
+
     render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <Default />

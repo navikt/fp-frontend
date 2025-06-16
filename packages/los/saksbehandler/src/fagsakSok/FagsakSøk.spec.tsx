@@ -1,15 +1,16 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import dayjs from 'dayjs';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './FagsakSøk.stories';
 
 const { Default, IngentingBleFunnet } = composeStories(stories);
 
 describe('FagsakSøk', () => {
-  it('skal vise tabell med saksnummer og behandlinger', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal vise tabell med saksnummer og behandlinger', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     render(<Default />);
 
     const alder = dayjs().diff('1980-10-10', 'years');
@@ -20,8 +21,8 @@ describe('FagsakSøk', () => {
     expect(screen.getByText('12213234')).toBeInTheDocument();
   });
 
-  it('skal ikke finne noe på bruker', async () => {
-    await applyRequestHandlers(IngentingBleFunnet.parameters['msw']);
+  mswTest('skal ikke finne noe på bruker', async ({ setHandlers }) => {
+    setHandlers(IngentingBleFunnet.parameters['msw']);
     render(<IngentingBleFunnet />);
     expect(await screen.findByText('Søket ga ingen treff eller du mangler tilgang til saken')).toBeInTheDocument();
   });

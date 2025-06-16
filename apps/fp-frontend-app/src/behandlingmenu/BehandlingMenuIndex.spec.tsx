@@ -1,14 +1,16 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './BehandlingMenuIndex.stories';
 
 const { ValgNårBehandlingErValgt, ValgNårBehandlingIkkeErValgt } = composeStories(stories);
 
 describe('BehandlingMenuIndex', () => {
-  it('skal vise alle menyhandlinger når behandling er valgt', async () => {
-    await applyRequestHandlers(ValgNårBehandlingErValgt.parameters['msw']);
+  mswTest('skal vise alle menyhandlinger når behandling er valgt', async ({ setHandlers }) => {
+    setHandlers(ValgNårBehandlingErValgt.parameters['msw']);
+
     render(<ValgNårBehandlingErValgt />);
 
     expect(await screen.findByText('Sett behandlingen på vent')).toBeInTheDocument();
@@ -20,8 +22,9 @@ describe('BehandlingMenuIndex', () => {
     expect(screen.getByText('Opprett verge/fullmektig')).toBeInTheDocument();
   });
 
-  it('skal vise kun to valg når behandling ikke er valgt', async () => {
-    await applyRequestHandlers(ValgNårBehandlingIkkeErValgt.parameters['msw']);
+  mswTest('skal vise kun to valg når behandling ikke er valgt', async ({ setHandlers }) => {
+    setHandlers(ValgNårBehandlingIkkeErValgt.parameters['msw']);
+
     render(<ValgNårBehandlingIkkeErValgt />);
 
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();
