@@ -2,7 +2,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon, TrashIcon } from '@navikt/aksel-icons';
-import { Button, Table } from '@navikt/ds-react';
+import { Button, Detail, Table } from '@navikt/ds-react';
 import { Datepicker, ReadOnlyField } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
@@ -61,6 +61,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                 <FormattedMessage id="Label.Dodsdato" />
               </Table.HeaderCell>
             )}
+            <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
         <Table.Body>
@@ -105,7 +106,8 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                     />
                   </Table.DataCell>
                 )}
-                {index !== 0 && !(isReadOnly || disabled) && (
+
+                {index !== 0 && !isReadOnly && !disabled && (
                   <Table.DataCell>
                     <Button
                       size="medium"
@@ -114,6 +116,11 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                       icon={<TrashIcon />}
                       onClick={() => remove(index)}
                     />
+                  </Table.DataCell>
+                )}
+                {!isReadOnly && disabled && (
+                  <Table.DataCell className={styles.rowDescription}>
+                    <Detail as="span">Hentet fra folkeregisteret – kan ikke endres</Detail>
                   </Table.DataCell>
                 )}
               </Table.Row>

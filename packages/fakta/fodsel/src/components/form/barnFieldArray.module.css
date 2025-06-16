@@ -11,4 +11,8 @@
   tr td:first-child {
     padding-left: 0;
   }
+
+  .rowDescription {
+    align-content: center;
+  }
 }
