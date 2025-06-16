@@ -12,7 +12,7 @@ FaktaGruppe.displayName = 'FaktaGruppe';
 
 interface FaktaBoxProps {
   label: string | ReactNode;
-  value: string;
+  value: string | ReactNode;
   kilde: FaktaKilde;
 }
 

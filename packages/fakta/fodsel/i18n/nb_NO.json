@@ -1,24 +1,24 @@
 {
   "FodselInfoPanel.KontrollerMotTerminbekreftelsen": "Kontroller terminbekreftelse",
   "FodselInfoPanel.KontrollerMotFodselsdokumentasjon": "Kontroller mot opplysningene fra fødselsdokumentasjonen",
-
-  "TermindatoFaktaForm.ApplicationInformation": "Opplysninger om termin oppgitt i søknaden",
-  "TermindatoFaktaForm.UtstedtDato": "Utstedt dato",
-  "TermindatoFaktaForm.Termindato": "Termindato",
-  "TermindatoFaktaForm.AntallBarn": "Antall barn",
-  "TermindatoFaktaForm.CheckInformation": "Kontroller og godkjenn opplysningene i terminbekreftelsen",
-  "TermindatoFaktaForm.14WeeksAndThreeDays": "Utstedtdato kan ikke være før 26. svangerskapsuke",
-  "TermindatoFaktaForm.OpplysningerTPS": "Opplysninger om fødsel fra folkeregisteret",
-  "TermindatoFaktaForm.FodselsdatoTps": "Fødselsdato",
-  "TermindatoFaktaForm.AntallBarnTps": "Antall barn",
+  "TermindatoFaktaForm.Tittel": "Kontroller opplysninger om termin oppgitt i søknaden",
   "TermindatoFaktaForm.AdvarselForTidligUtstedtdato": "Terminbekreftelsen utstedt før 22. svangerskapsuke. Kontakt søker for en nyere terminbekreftelse og sett saken på vent. Fortsett dersom ny bekreftelse ikke skal hentes inn. Behandlingen vil avslås på grunn av manglende dokumentasjon",
-
-  "AvklartBarnFieldArray.Title": "Fødselsdato",
-  "AvklartBarnFieldArray.Dodsdato": "Dødsdato",
   "AvklartBarnFieldArray.LeggTilBarn": "Legg til barn",
-
-  "SjekkFodselDokForm.DokumentasjonForeligger": "Dokumentasjon foreligger",
-  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Dokumentasjon foreligger ikke, bruk opplysningene i folkeregisteret",
-  "SjekkFodselDokForm.DokumentasjonAvFodsel": "Dokumentasjon av fødsel",
-  "SjekkFodselDokForm.FyllInnDokumenterteOpplysninger": "Fyll inn dokumenterte opplysninger"
+  "SjekkFodselDokForm.Tittel": "Kontroller dokumentasjon av fødsel",
+  "SjekkFodselDokForm.FyllInnDokumenterteOpplysninger": "Fyll inn dokumenterte fødselsopplysninger",
+  "SjekkFodselDokForm.DokumentasjonForeligger": "Registrer opplysninger om barn",
+  "SjekkFodselDokForm.DokumentasjonForeliggerIkke": "Ingen opplysninger om barn (avslag)",
+  "FaktaFødselFraFReg.Tittel": "Opplysninger fra Folkeregisteret",
+  "FaktaFødselFraFReg.IngenBarn": "Det er ikke registrert noen fødselshendelse i Folkeregisteret",
+  "FaktaFødselFraSøknad.Tittel": "Opplysninger oppgitt i søknaden",
+  "FaktaFødselFraSøknad.Terminbekreftelse" : "Terminbekreftelse",
+  "FaktaFødselFraSøknad.VisTerminbekreftelse": "Vis terminbekreftelse",
+  "Situasjon.OpplysningerGjeldende": "Gjeldende opplysninger",
+  "Label.NummerertBarn": "Barn {nummer}",
+  "Label.Barn": "Barn",
+  "Label.Fodselsdato": "Fødselsdato",
+  "Label.Dodsdato": "Dødsdato",
+  "Label.AntallBarn": "Antall barn",
+  "Label.Termindato": "Termindato",
+  "Label.Utstedtdato": "Utstedtdato"
 }

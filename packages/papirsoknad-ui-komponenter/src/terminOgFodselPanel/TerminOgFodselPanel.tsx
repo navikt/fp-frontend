@@ -14,7 +14,6 @@ import {
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { ErBarnetFodt } from './components/ErBarnetFodt';
 import {
   maxFodselsdato,
   maxTerminbekreftelseDato,
@@ -26,7 +25,9 @@ import {
   terminErRundtFodselsdato,
   validateMaxAntallBarn,
   validateMinAntallBarn,
-} from './validator';
+} from '@navikt/fp-utils';
+
+import { ErBarnetFodt } from './components/ErBarnetFodt';
 
 import messages from '../../i18n/nb_NO.json';
 

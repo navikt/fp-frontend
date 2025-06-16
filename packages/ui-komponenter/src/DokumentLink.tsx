@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { type PropsWithChildren } from 'react';
 
 import { Link } from '@navikt/ds-react';
 
 import { hentDokumentLenke } from '@navikt/fp-konstanter';
 import { åpneVindu } from '@navikt/fp-utils';
+
+export type DokumentLinkReferanse = {
+  saksnummer: string;
+  journalpostId: string;
+  dokumentId: string;
+  dokumentTittel?: string;
+};
 
 export const DokumentLink = ({
   saksnummer,
@@ -11,13 +18,7 @@ export const DokumentLink = ({
   dokumentId,
   dokumentTittel,
   children,
-}: {
-  saksnummer: string;
-  journalpostId: string;
-  dokumentId: string;
-  dokumentTittel?: string;
-  children?: React.ReactNode;
-}) => {
+}: PropsWithChildren<DokumentLinkReferanse>) => {
   const target = `${journalpostId}-${dokumentId}`;
   const url = hentDokumentLenke(saksnummer, journalpostId, dokumentId);
 
