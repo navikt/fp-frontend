@@ -23,16 +23,15 @@ type FødselDtoGjeldendeUtstedtdato = {
 };
 
 export type FødselGjeldende = {
-  termindato: FødselDtoGjeldendeTermindato | null;
+  termin: FødselDtoGjeldendeTermindato | null;
   utstedtdato: FødselDtoGjeldendeUtstedtdato | null;
   barn: FødselDtoGjeldendeBarn[];
-  antallBarn: number;
 };
 
 export type FødselDtoGjeldendeTermindato = {
   kilde: Kilde;
   termindato: string;
-  kanOverstyres: boolean;
+  antallBarn: number;
 };
 
 export type FødselDtoGjeldendeBarn = {

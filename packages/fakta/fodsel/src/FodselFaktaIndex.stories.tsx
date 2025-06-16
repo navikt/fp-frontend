@@ -55,10 +55,10 @@ const meta = {
         ],
       },
       gjeldende: {
-        termindato: {
+        termin: {
           kilde: 'SØKNAD',
           termindato: '2025-06-10',
-          kanOverstyres: true,
+          antallBarn: 1,
         },
         utstedtdato: {
           kilde: 'SØKNAD',
@@ -74,7 +74,6 @@ const meta = {
             kanOverstyres: false,
           },
         ],
-        antallBarn: 1,
       },
     },
   },
@@ -101,17 +100,16 @@ export const APTerminbekreftelse: Story = {
         barn: [],
       },
       gjeldende: {
-        termindato: {
+        termin: {
           kilde: 'SØKNAD',
           termindato: '2025-06-24',
-          kanOverstyres: true,
+          antallBarn: 1,
         },
         utstedtdato: {
           kilde: 'SØKNAD',
           utstedtdato: '2025-05-20',
         },
         barn: [],
-        antallBarn: 1,
       },
     },
   },
@@ -136,10 +134,10 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
         barn: [],
       },
       gjeldende: {
-        termindato: {
+        termin: {
           kilde: 'SØKNAD',
           termindato: '2025-05-06',
-          kanOverstyres: true,
+          antallBarn: 1,
         },
         utstedtdato: null,
         barn: [
@@ -152,7 +150,6 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
             kanOverstyres: true,
           },
         ],
-        antallBarn: 1,
       },
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
@@ -180,10 +177,10 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
         barn: [],
       },
       gjeldende: {
-        termindato: {
+        termin: {
           kilde: 'SØKNAD',
           termindato: '2025-04-14',
-          kanOverstyres: true,
+          antallBarn: 1,
         },
         utstedtdato: null,
         barn: [
@@ -196,7 +193,6 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
             kanOverstyres: true,
           },
         ],
-        antallBarn: 1,
       },
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
@@ -244,10 +240,10 @@ export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
         ],
       },
       gjeldende: {
-        termindato: {
+        termin: {
           kilde: 'SØKNAD',
           termindato: '2025-05-21',
-          kanOverstyres: true,
+          antallBarn: 2,
         },
         utstedtdato: {
           kilde: 'SØKNAD',
@@ -271,7 +267,6 @@ export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
             kanOverstyres: false,
           },
         ],
-        antallBarn: 2,
       },
     },
   },

@@ -71,7 +71,10 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
       >
         <VStack gap="4">
           <HStack gap="4">
-            <Termindato isReadOnly={isReadOnly} isEdited={gjeldende.termindato?.kilde !== 'SØKNAD'} />
+            <Termindato
+              isReadOnly={isReadOnly}
+              isEdited={isNotEqual(søknad.termindato, gjeldende.termin?.termindato)}
+            />
             <Datepicker
               name="utstedtdato"
               size="medium"
@@ -80,7 +83,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
               isReadOnly={isReadOnly}
               fromDate={minTerminbekreftelseDato().toDate()}
               toDate={maxTerminbekreftelseDato().toDate()}
-              isEdited={gjeldende.utstedtdato?.kilde !== 'SØKNAD'}
+              isEdited={isNotEqual(søknad.utstedtdato, gjeldende.utstedtdato?.utstedtdato)}
               defaultMonth={new Date()}
             />
             <InputField
@@ -94,7 +97,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
               validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
               readOnly={isReadOnly}
               className={styles.bredde}
-              isEdited={isNotEqual(søknad.antallBarn, gjeldende.antallBarn)}
+              isEdited={isNotEqual(søknad.antallBarn, gjeldende.termin?.antallBarn)}
             />
           </HStack>
 
@@ -127,9 +130,9 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
 };
 
 const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
-  utstedtdato: gjeldende.utstedtdato?.utstedtdato ?? undefined,
-  termindato: gjeldende.termindato?.termindato ?? undefined,
-  antallBarn: gjeldende.antallBarn,
+  utstedtdato: gjeldende.utstedtdato?.utstedtdato,
+  termindato: gjeldende.termin?.termindato,
+  antallBarn: gjeldende.termin?.antallBarn,
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 

@@ -153,7 +153,7 @@ BarnFieldArray.initialValues = (gjeldende: FødselGjeldende): BarnFormValues => 
           dodsdato: dødsdato ?? null,
           erRedigerbar: kanOverstyres,
         }))
-      : lagBarn(gjeldende.antallBarn || 0),
+      : lagBarn(gjeldende.termin?.antallBarn ?? 0),
 });
 
 BarnFieldArray.transformValues = (

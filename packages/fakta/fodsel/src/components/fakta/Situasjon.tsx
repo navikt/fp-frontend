@@ -11,7 +11,7 @@ interface Props {
   gjeldende: FødselGjeldende;
 }
 
-export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Props) => {
+export const Situasjon = ({ gjeldende: { barn, termin, utstedtdato } }: Props) => {
   const intl = useIntl();
   const barnErLike = erBarnLike(barn);
 
@@ -44,11 +44,11 @@ export const Situasjon = ({ gjeldende: { barn, termindato, utstedtdato } }: Prop
             label={intl.formatMessage({ id: 'Label.NummerertBarn' }, { nummer: index + 1 })}
           />
         ))}
-      {termindato && (
+      {termin && (
         <FaktaBox
-          kilde={termindato.kilde}
+          kilde={termin.kilde}
           label={intl.formatMessage({ id: 'Label.Termindato' })}
-          value={<DateLabel dateString={termindato.termindato} />}
+          value={<DateLabel dateString={termin.termindato} />}
         />
       )}
       {utstedtdato && (
