@@ -61,12 +61,12 @@ export const SjekkManglendeFødselForm = ({ submittable, aksjonspunkt, fødsel: 
             isTrueOrFalseSelection
             radios={[
               {
-                label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeligger" />,
+                label: <FormattedMessage id="SjekkFodselDokForm.Ja" />,
                 value: 'true',
                 element: <BarnFieldArray isReadOnly={isReadOnly} />,
               },
               {
-                label: <FormattedMessage id="SjekkFodselDokForm.DokumentasjonForeliggerIkke" />,
+                label: <FormattedMessage id="SjekkFodselDokForm.Nei" />,
                 value: 'false',
                 disabled: gjeldende.barn.some(b => b.kilde === 'FOLKEREGISTER'),
               },

@@ -5,7 +5,7 @@ import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 export type SjekkManglendeFodselAp = {
   dokumentasjonForeligger: boolean;
   uidentifiserteBarn: {
-    fodselsdato: string;
-    dodsdato?: string;
+    fødselsdato: string;
+    dødsdato?: string;
   }[];
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_MANGLENDE_FODSEL>;
