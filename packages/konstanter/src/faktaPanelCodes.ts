@@ -19,6 +19,7 @@ export enum FaktaPanelCode {
   PERMISJON = 'permisjon',
   SAKEN = 'saken',
   UTTAK = 'uttak',
+  UTTAK_EØS = 'uttak-eoes',
   VERGE = 'verge',
   YTELSER = 'ytelser',
   UTTAK_DOKUMENTASJON = 'uttakdokumentasjon',
