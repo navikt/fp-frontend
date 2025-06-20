@@ -197,3 +197,4 @@ export type {
   FødselDtoGjeldendeBarn,
   BarnHendelseData,
 } from './src/fødsel';
+export type { AnnenforelderUttakEøsPeriode } from './src/faktaUttakEøsPeriode';
