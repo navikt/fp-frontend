@@ -179,15 +179,16 @@ BarnFieldArray.initialValues = (gjeldende: FødselGjeldende): BarnFormValues => 
 
 BarnFieldArray.transformValues = (
   values: BarnFormValues,
-  skalListeBrukes: boolean,
-): { uidentifiserteBarn: { fodselsdato: string; dodsdato: string | undefined }[] } => ({
-  uidentifiserteBarn: skalListeBrukes
-    ? values.barn.map(ab => ({
-        fodselsdato: ab.fødselsdato,
-        dodsdato: ab.dødsdato === '' || ab.dødsdato === null ? undefined : ab.dødsdato,
-      }))
-    : [],
-});
+  erBarnFødt: boolean,
+): { barn?: { fødselsdato: string; dødsdato: string | undefined }[] } =>
+  erBarnFødt
+    ? {
+        barn: values.barn.map(ab => ({
+          fødselsdato: ab.fødselsdato,
+          dødsdato: ab.dødsdato === '' || ab.dødsdato === null ? undefined : ab.dødsdato,
+        })),
+      }
+    : {};
 
 const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
   const antallBarn = antallBarnFraSoknad > 0 ? antallBarnFraSoknad : 1;

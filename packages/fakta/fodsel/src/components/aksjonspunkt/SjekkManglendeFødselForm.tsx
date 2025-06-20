@@ -15,7 +15,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 import { BarnFieldArray, type BarnFormValues } from '../form/BarnFieldArray';
 
 type FormValues = {
-  dokumentasjonForeligger?: boolean;
+  erBarnFødt?: boolean;
 } & BarnFormValues &
   FaktaBegrunnelseFormValues;
 
@@ -70,7 +70,7 @@ export const SjekkManglendeFødselForm = ({
             </Alert>
           )}
           <RadioGroupPanel
-            name="dokumentasjonForeligger"
+            name="erBarnFødt"
             isEdited={dokumentasjonForeliggerIsEdited}
             label={intl.formatMessage({ id: 'SjekkManglendeFødselForm.Label' })}
             validate={[required]}
@@ -115,15 +115,15 @@ export const SjekkManglendeFødselForm = ({
 };
 
 const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
-  dokumentasjonForeligger: mapDokumentasjonForligger(gjeldende),
+  erBarnFødt: mapDokumentasjonForligger(gjeldende),
   ...BarnFieldArray.initialValues(gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
 const transformValues = (values: FormValues): SjekkManglendeFodselAp => ({
   kode: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
-  dokumentasjonForeligger: values.dokumentasjonForeligger!,
-  ...BarnFieldArray.transformValues(values, !!values.dokumentasjonForeligger),
+  erBarnFødt: values.erBarnFødt!,
+  ...BarnFieldArray.transformValues(values, !!values.erBarnFødt),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 
