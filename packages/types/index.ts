@@ -189,3 +189,4 @@ export type { Beskrivelse } from './src/oppgaveTsType.tsx';
 export type { OppgaveDokument } from './src/oppgaveTsType.ts';
 export type { OneOf } from './src/oneOf';
 export type { BrevOverstyring } from './src/brevOverstyring';
+export type { AnnenforelderUttakEøsPeriode } from './src/faktaUttakEøsPeriode';
