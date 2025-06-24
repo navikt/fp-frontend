@@ -1,6 +1,6 @@
 import type { AndreKriterierType, BehandlingType } from '@navikt/fp-kodeverk';
 
-export type OppgaveStatus = Readonly<{
+export type ReservasjonStatus = Readonly<{
   erReservert: boolean;
   reservertTilTidspunkt?: string;
   erReservertAvInnloggetBruker?: boolean;
@@ -16,7 +16,7 @@ export type OppgaveStatus = Readonly<{
 
 export type Oppgave = Readonly<{
   id: number;
-  status: OppgaveStatus;
+  reservasjonStatus: ReservasjonStatus;
   saksnummer: string;
   personnummer: string;
   navn: string;

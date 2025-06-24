@@ -43,7 +43,7 @@ export const Default: Story = {
   args: {
     oppgave: {
       id: 1,
-      status: {
+      reservasjonStatus: {
         erReservert: false,
         flyttetReservasjon: {
           tidspunkt: '2019-02-02',

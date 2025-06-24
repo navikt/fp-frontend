@@ -6,7 +6,7 @@ import { BodyShort, Button, CopyButton, HStack, Label, Popover, Table, Tooltip, 
 import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import type { Oppgave, ReservasjonStatus } from '@navikt/fp-los-felles';
 
 import { OppgaveLabels } from '../OppgaveLabels';
 import { OppgaveHandlingerMenu } from './menu/OppgaveHandlingerMenu';
@@ -69,12 +69,12 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
         {oppgave.opprettetTidspunkt && <DateLabel dateString={oppgave.opprettetTidspunkt} />}
       </Table.DataCell>
       <Table.DataCell>
-        {oppgave.status.reservertTilTidspunkt && (
-          <DateTimeLabel dateTimeString={oppgave.status.reservertTilTidspunkt} separator="kl" />
+        {oppgave.reservasjonStatus.reservertTilTidspunkt && (
+          <DateTimeLabel dateTimeString={oppgave.reservasjonStatus.reservertTilTidspunkt} separator="kl" />
         )}
       </Table.DataCell>
       <Table.DataCell>
-        {oppgave.status.flyttetReservasjon && (
+        {oppgave.reservasjonStatus.flyttetReservasjon && (
           <div ref={refPopover}>
             <NotatKnapp oppgave={oppgave} brukernavn={brukernavn} />
           </div>
@@ -93,7 +93,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
   );
 };
 
-const lagFlyttetReservasjonPopover = (oppgaveStatus: OppgaveStatus, brukernavn: string): ReactNode | undefined => {
+const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukernavn: string): ReactNode | undefined => {
   const { flyttetReservasjon } = oppgaveStatus;
   if (!flyttetReservasjon) {
     return undefined;
@@ -149,7 +149,7 @@ const NotatKnapp = ({ oppgave, brukernavn }: { oppgave: Oppgave; brukernavn: str
         variant="tertiary-neutral"
       ></Button>
       <Popover open={openState} onClose={() => setOpenState(false)} anchorEl={buttonRef.current}>
-        <Popover.Content>{lagFlyttetReservasjonPopover(oppgave.status, brukernavn)}</Popover.Content>
+        <Popover.Content>{lagFlyttetReservasjonPopover(oppgave.reservasjonStatus, brukernavn)}</Popover.Content>
       </Popover>
     </>
   );

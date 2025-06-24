@@ -66,7 +66,7 @@ export const Default: Story = {
     fagsakOppgaver: [
       {
         id: 1,
-        status: {
+        reservasjonStatus: {
           erReservert: false,
         },
         saksnummer: '12213234',
@@ -83,7 +83,7 @@ export const Default: Story = {
       },
       {
         id: 2,
-        status: {
+        reservasjonStatus: {
           erReservert: false,
         },
         saksnummer: '12213234',

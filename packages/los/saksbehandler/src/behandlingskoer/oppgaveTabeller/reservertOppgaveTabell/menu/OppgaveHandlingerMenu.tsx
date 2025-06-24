@@ -137,7 +137,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
       {visReservasjonEndringDatoModal && (
         <OppgaveReservasjonEndringDatoModal
           closeModal={() => setVisReservasjonEndringDatoModal(false)}
-          reserverTilDefault={oppgave.status.reservertTilTidspunkt}
+          reserverTilDefault={oppgave.reservasjonStatus.reservertTilTidspunkt}
           endreOppgavereservasjon={endreOppgavereservasjon}
         />
       )}
@@ -146,7 +146,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
       )}
       {visFlyttReservasjonModal && (
         <FlyttReservasjonModal
-          flyttetBegrunnelse={oppgave.status.flyttetReservasjon?.begrunnelse}
+          flyttetBegrunnelse={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
           closeModal={() => setVisFlyttReservasjonModal(false)}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
           hentSaksbehandler={hentSaksbehandler}
@@ -161,7 +161,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
           closeModal={() => setVisNotatModal(false)}
           flyttOppgavereservasjon={flyttOppgavereservasjon}
           brukernavn={brukernavn}
-          notat={oppgave.status.flyttetReservasjon?.begrunnelse}
+          notat={oppgave.reservasjonStatus.flyttetReservasjon?.begrunnelse}
         />
       )}
     </>

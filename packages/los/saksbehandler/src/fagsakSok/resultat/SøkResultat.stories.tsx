@@ -61,7 +61,7 @@ export const Default: Story = {
     fagsakOppgaver: [
       {
         id: 1,
-        status: {
+        reservasjonStatus: {
           erReservert: false,
         },
         saksnummer: '12213234',

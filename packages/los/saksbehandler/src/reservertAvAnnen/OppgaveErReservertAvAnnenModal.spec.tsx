@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 const oppgaveForResevertAvAnnenModal = {
   id: 1,
-  status: {
+  reservasjonStatus: {
     erReservert: false,
     flyttetReservasjon: {
       tidspunkt: '2019-02-02',
