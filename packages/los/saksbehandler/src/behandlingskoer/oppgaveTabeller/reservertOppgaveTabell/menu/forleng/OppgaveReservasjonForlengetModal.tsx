@@ -37,7 +37,7 @@ export const OppgaveReservasjonForlengetModal = ({ oppgave, closeModal }: Props)
             <BodyShort>
               <FormattedMessage
                 id="OppgaveReservasjonForlengetModal.Til"
-                values={getDateAndTime(oppgave.status.reservertTilTidspunkt)}
+                values={getDateAndTime(oppgave.reservasjonStatus.reservertTilTidspunkt)}
               />
             </BodyShort>
           </VStack>
