@@ -60,6 +60,14 @@ export const useBehandlingPollingOperasjoner = (
     onSuccess: onBehandlingSuccess,
   });
 
+  const { mutate: merkSomHaster } = useMutation({
+    mutationFn: async () => {
+      const response = await pollingApi.merkSomHaster(behandling.uuid, behandling.versjon);
+      return doPolling(response, setIsRequestPending);
+    },
+    onSuccess: onBehandlingSuccess,
+  });
+
   const { mutate: gjenopptaBehandling } = useMutation({
     mutationFn: async () => {
       const response = await pollingApi.gjenopptaBehandling({
@@ -77,6 +85,7 @@ export const useBehandlingPollingOperasjoner = (
     opprettVergeV1,
     fjernVergeV1,
     åpneForEndringer,
+    merkSomHaster,
     gjenopptaBehandling,
   };
 };
