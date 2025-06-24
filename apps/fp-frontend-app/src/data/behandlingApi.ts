@@ -756,6 +756,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     vergeOptions: getVergeOptions(links),
     hentBrevOverstyring: getHentBrevOverstyring(links),
     mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
+    merkSomHaster: getMerkSomHaster(links),
     verge: {
       hent: getVerge(links),
       opprettVergeV2: getOpprettVergeV2(links),
@@ -798,7 +799,6 @@ export const useBehandlingApi = (behandling: Behandling) => {
       lagreOverstyrtAksjonspunkt: getLagreOverstyrtAksjonspunkt(links),
       opprettVergeV1: getOpprettVergeV1(links),
       fjernVergeV1: getFjernVergeV1(links),
-      merkSomHaster: getMerkSomHaster(links),
     },
   };
 };
