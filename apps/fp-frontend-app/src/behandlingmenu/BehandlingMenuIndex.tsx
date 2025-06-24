@@ -149,11 +149,7 @@ export const BehandlingMenuIndex = ({
         <TaAvVentMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
       )}
       {valgtModal === ModalType.MERK_SOM_HASTER && behandling && (
-        <MerkSomHasterMenyModal
-          behandling={behandling}
-          hentOgSettBehandling={hentOgSettBehandling}
-          lukkModal={lukkModal}
-        />
+        <MerkSomHasterMenyModal behandling={behandling} lukkModal={lukkModal} />
       )}
     </>
   );
