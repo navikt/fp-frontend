@@ -8,16 +8,19 @@ import { FagsakRel } from '../../data/fagsakApi';
 
 interface Props {
   behandling: Behandling;
+  hentOgSettBehandling: () => void;
   lukkModal: () => void;
 }
 
-export const MerkSomHasterMenyModal = ({ behandling, lukkModal }: Props) => {
+export const MerkSomHasterMenyModal = ({ behandling, hentOgSettBehandling, lukkModal }: Props) => {
   const api = useBehandlingApi(behandling);
   const queryClient = useQueryClient();
 
   const { mutate: merkSomHaster } = useMutation({
     mutationFn: () => api.merkSomHaster(behandling.uuid, behandling.versjon),
     onSuccess: () => {
+      hentOgSettBehandling();
+
       queryClient.invalidateQueries({
         queryKey: [FagsakRel.FETCH_FAGSAK],
       });
