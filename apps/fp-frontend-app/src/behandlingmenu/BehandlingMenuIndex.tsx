@@ -9,6 +9,7 @@ import { getEndreEnhetMenytekst, getTaAvVentMenytekst, getVergeMenytekst } from 
 import { getMenytekst as getApneForEndringerMenytekst } from '@navikt/fp-sak-meny-apne-for-endringer';
 import { getMenytekst as getEndreUtlandMenytekst } from '@navikt/fp-sak-meny-endre-utland';
 import { getMenytekst as getHenleggMenytekst } from '@navikt/fp-sak-meny-henlegg';
+import { getMenytekst as getMerkSomHasterMenytekst } from '@navikt/fp-sak-meny-merk-som-haster';
 import { getMenytekst as getNyBehandlingMenytekst } from '@navikt/fp-sak-meny-ny-behandling';
 import { getMenytekst as getSettPaVentMenytekst } from '@navikt/fp-sak-meny-sett-pa-vent';
 import type { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
@@ -21,6 +22,7 @@ import { ApneForEndringerMenyModal } from './modaler/ApneForEndringerMenyModal';
 import { EndreBehandlendeEnhetMenyModal } from './modaler/EndreBehandlendeEnhetMenyModal';
 import { EndreFagsakMarkeringMenyModal } from './modaler/EndreFagsakMarkeringMenyModal';
 import { HenleggMenyModal } from './modaler/HenleggMenyModal';
+import { MerkSomHasterMenyModal } from './modaler/MerkSomHasterMenyModal';
 import { NyBehandlingMenyModal } from './modaler/NyBehandlingMenyModal';
 import { SettPaVentMenyModal } from './modaler/SettPaVentMenyModal';
 import { TaAvVentMenyModal } from './modaler/TaAvVentMenyModal';
@@ -35,6 +37,7 @@ enum ModalType {
   HENLEGG = 'HENLEGG',
   SETT_PÅ_VENT = 'SETT_PÅ_VENT',
   TA_AV_VENT = 'TA_AV_VENT',
+  MERK_SOM_HASTER = 'MERK_SOM_HASTER',
 }
 
 interface Props {
@@ -145,6 +148,9 @@ export const BehandlingMenuIndex = ({
       {valgtModal === ModalType.TA_AV_VENT && behandling && (
         <TaAvVentMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
       )}
+      {valgtModal === ModalType.MERK_SOM_HASTER && behandling && (
+        <MerkSomHasterMenyModal behandling={behandling} setBehandling={setBehandling} lukkModal={lukkModal} />
+      )}
     </>
   );
 };
@@ -191,6 +197,10 @@ const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fag
     [ModalType.VERGE]: {
       disabled: !(!erPaVent && (skalViseOpprettVerge || skalViseFjernVerge)),
       text: getVergeMenytekst(skalViseOpprettVerge),
+    },
+    [ModalType.MERK_SOM_HASTER]: {
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanMerkesHaster,
+      text: getMerkSomHasterMenytekst(),
     },
   } as Record<string, { disabled: boolean; text: string }>;
 };

@@ -96,6 +96,7 @@
     "@navikt/fp-sak-meny-apne-for-endringer": "workspace:*",
     "@navikt/fp-sak-meny-endre-utland": "workspace:*",
     "@navikt/fp-sak-meny-henlegg": "workspace:*",
+    "@navikt/fp-sak-meny-merk-som-haster": "workspace:*",
     "@navikt/fp-sak-meny-ny-behandling": "workspace:*",
     "@navikt/fp-sak-meny-sett-pa-vent": "workspace:*",
     "@navikt/fp-sak-notat": "workspace:*",

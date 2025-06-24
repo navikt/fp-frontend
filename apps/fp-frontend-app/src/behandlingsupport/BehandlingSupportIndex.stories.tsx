@@ -46,6 +46,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanGjenopptas: false,
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
+  behandlingKanMerkesHaster: false,
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
 };
 
