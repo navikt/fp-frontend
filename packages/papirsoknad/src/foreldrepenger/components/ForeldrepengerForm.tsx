@@ -73,7 +73,6 @@ interface Props {
   fagsakPersonnummer: string;
   onSubmit: (values: ForeldrepengerValues) => Promise<void>;
   onSubmitUfullstendigsoknad: () => Promise<void>;
-  erEndringssøknad: boolean;
 }
 
 /**
@@ -88,7 +87,6 @@ export const ForeldrepengerForm = ({
   onSubmit,
   onSubmitUfullstendigsoknad,
   fagsakPersonnummer,
-  erEndringssøknad,
 }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: buildInitialValues(),
@@ -138,7 +136,7 @@ export const ForeldrepengerForm = ({
           foreldreType={soknadData.getForeldreType()}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
-          erEndringssøknad={erEndringssøknad}
+          erEndringssøknad={false}
         />
         <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />
         <SprakPapirsoknadIndex readOnly={readOnly} />
@@ -147,6 +145,7 @@ export const ForeldrepengerForm = ({
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         submitting={formMethods.formState.isSubmitting}
+        erEndringssøknad={false}
       />
     </Form>
   );

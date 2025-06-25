@@ -3,6 +3,7 @@ import { use, useState } from 'react';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   type EngangsstønadValues,
+  type ForeldrepengerEndringssøknadValues,
   type ForeldrepengerValues,
   RegistrerPapirsoknadPanel,
   SoknadRegistrertModal,
@@ -57,7 +58,7 @@ const useLagrePapirsøknad = (
     fagsakYtelseType: string,
     familieHendelseType: string,
     foreldreType: string,
-    formValues?: EngangsstønadValues | ForeldrepengerValues | SvangerskapsValues,
+    formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => {
     const bekreftedeAksjonspunktDtoer = [
       {

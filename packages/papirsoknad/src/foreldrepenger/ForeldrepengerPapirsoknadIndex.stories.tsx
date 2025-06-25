@@ -55,3 +55,10 @@ export const ForFarVedFødsel: Story = {
     soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, FamilieHendelseType.FODSEL, ForeldreType.FAR),
   },
 };
+
+export const Endringssøknad: Story = {
+  args: {
+    soknadData: new SoknadData(FagsakYtelseType.FORELDREPENGER, FamilieHendelseType.FODSEL, ForeldreType.FAR),
+    erEndringssøknad: true,
+  },
+};
