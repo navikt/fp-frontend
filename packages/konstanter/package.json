@@ -14,6 +14,8 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "devDependencies": {
+    "@navikt/fp-config-eslint": "workspace:*",
+    "@navikt/fp-config-typescript": "workspace:*",
     "eslint": "9.28.0",
     "typescript": "5.8.3",
     "vite": "6.3.5"

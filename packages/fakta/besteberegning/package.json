@@ -37,6 +37,8 @@
   },
   "devDependencies": {
     "@navikt/ds-css": "7.23.2",
+    "@navikt/fp-config-eslint": "workspace:*",
+    "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/react": "9.0.12",
     "@storybook/react-vite": "9.0.12",

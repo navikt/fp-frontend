@@ -1,8 +1,4 @@
 {
-  "include": ["./", "../../@types/externals.d.ts"],
-  "exclude": ["node_modules", "**.spec.ts", "vite.config.js", "dist"],
-  "extends": "../../tsconfig.json",
-  "compilerOptions": {
-    "strict": true
-  }
+  "extends": "@navikt/fp-config-typescript/tsconfig.json",
+  "include": ["./src/", "../../@types/externals.d.ts"]
 }

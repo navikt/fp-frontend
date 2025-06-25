@@ -12,6 +12,8 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
+    "@navikt/fp-config-eslint": "workspace:*",
+    "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-fakta-beregning": "9.1.0",
