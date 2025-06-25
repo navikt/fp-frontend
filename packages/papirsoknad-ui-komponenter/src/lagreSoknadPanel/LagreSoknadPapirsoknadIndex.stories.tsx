@@ -37,5 +37,15 @@ export const Default: Story = {
     readOnly: false,
     submitting: false,
     onSubmitUfullstendigsoknad: action('onSubmitUfullstendigsoknad') as () => Promise<void>,
+    erEndringssøknad: false,
+  },
+};
+
+export const ErEndringssøknad: Story = {
+  args: {
+    readOnly: false,
+    submitting: false,
+    onSubmitUfullstendigsoknad: action('onSubmitUfullstendigsoknad') as () => Promise<void>,
+    erEndringssøknad: true,
   },
 };

@@ -69,7 +69,11 @@ export const RegistrerPapirsoknadPanel = ({
     <RawIntlProvider value={intl}>
       <VStack gap="4" padding="4">
         <Heading size="small">
-          <FormattedMessage id="Registrering.RegistrereSoknad" />
+          {erEndringssøknad ? (
+            <FormattedMessage id="Registrering.RegistrereEndringssoknad" />
+          ) : (
+            <FormattedMessage id="Registrering.RegistrereSoknad" />
+          )}
         </Heading>
         {!readOnly && (
           <AksjonspunktHelpTextHTML>

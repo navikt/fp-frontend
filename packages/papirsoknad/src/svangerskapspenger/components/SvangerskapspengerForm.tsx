@@ -97,6 +97,7 @@ export const SvangerskapspengerForm = ({
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         submitting={formMethods.formState.isSubmitting}
+        erEndringssøknad={false}
       />
     </Form>
   );
