@@ -1,4 +1,4 @@
 {
-  "extends": "@navikt/fp-config-typescript/tsconfig.json",
+  "extends": "@navikt/fp-config-typescript",
   "include": ["./", "../../@types/externals.d.ts"]
 }
