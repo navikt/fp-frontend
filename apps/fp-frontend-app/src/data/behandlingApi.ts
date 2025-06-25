@@ -129,6 +129,7 @@ export const BehandlingUrl = {
 
 export const BehandlingRel = {
   OPEN_BEHANDLING_FOR_CHANGES: 'opne-for-endringer',
+  MERK_HASTER: 'merk-haster',
   BEHANDLING_NY_BEHANDLENDE_ENHET: 'bytt-behandlende-enhet',
   HENLEGG_BEHANDLING: 'henlegg-behandling',
   BEHANDLING_ON_HOLD: 'sett-behandling-pa-vent',
@@ -571,6 +572,11 @@ const getÅpneBehandlingForEndring = (links: ApiLink[]) => (behandlingUuid: stri
     json: { behandlingUuid, behandlingVersjon },
   });
 
+const getMerkSomHaster = (links: ApiLink[]) => (behandlingUuid: string, behandlingVersjon: number) =>
+  kyExtended.post(getUrlFromRel('MERK_HASTER', links), {
+    json: { behandlingUuid, behandlingVersjon },
+  });
+
 const getNyBehandlendeEnhet = (links: ApiLink[]) => (params: NyBehandlendeEnhet) =>
   kyExtended
     .post(getUrlFromRel('BEHANDLING_NY_BEHANDLENDE_ENHET', links), {
@@ -750,6 +756,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     vergeOptions: getVergeOptions(links),
     hentBrevOverstyring: getHentBrevOverstyring(links),
     mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
+    merkSomHaster: getMerkSomHaster(links),
     verge: {
       hent: getVerge(links),
       opprettVergeV2: getOpprettVergeV2(links),

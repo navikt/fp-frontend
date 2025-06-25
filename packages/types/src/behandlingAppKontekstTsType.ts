@@ -64,6 +64,7 @@ export type BehandlingTillatteOperasjoner = Readonly<{
   behandlingKanGjenopptas: boolean;
   behandlingKanOpnesForEndringer: boolean;
   behandlingKanSettesPaVent: boolean;
+  behandlingKanMerkesHaster: boolean;
   vergeBehandlingsmeny: VergeBehandlingmenyValg;
 }>;
 

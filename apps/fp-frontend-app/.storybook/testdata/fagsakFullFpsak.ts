@@ -144,6 +144,7 @@ export const fagsakFullFpsak: Fagsak = {
         behandlingKanSendeMelding: true,
         behandlingFraBeslutter: false,
         behandlingTilGodkjenning: false,
+        behandlingKanMerkesHaster: false,
         vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
       },
       brevmaler: [

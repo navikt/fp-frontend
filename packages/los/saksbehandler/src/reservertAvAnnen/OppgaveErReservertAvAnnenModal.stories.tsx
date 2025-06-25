@@ -13,7 +13,7 @@ const withIntl = getIntlDecorator(messages);
 
 const oppgaveForResevertAvAnnenModal = {
   id: 1,
-  status: {
+  reservasjonStatus: {
     erReservert: false,
     flyttetReservasjon: {
       tidspunkt: '2019-02-02',
@@ -48,7 +48,7 @@ export const Default: Story = {
   args: {
     lukkErReservertModalOgOpneOppgave: action('button-click'),
     oppgave: oppgaveForResevertAvAnnenModal,
-    oppgaveStatus: {
+    reservasjonStatus: {
       erReservert: false,
       reservertAvNavn: 'Espen Utvikler',
       reservertAvUid: 'E232323',

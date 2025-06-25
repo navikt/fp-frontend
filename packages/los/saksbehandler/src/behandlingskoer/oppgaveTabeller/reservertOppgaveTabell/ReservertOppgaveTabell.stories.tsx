@@ -20,7 +20,7 @@ const withIntl = getIntlDecorator(messages);
 const RESERVERTE_OPPGAVER = [
   {
     id: 2,
-    status: {
+    reservasjonStatus: {
       erReservert: true,
       reservertTilTidspunkt: '2019-01-01T00:54:25.455',
       flyttetReservasjon: {
@@ -44,7 +44,7 @@ const RESERVERTE_OPPGAVER = [
   },
   {
     id: 3,
-    status: {
+    reservasjonStatus: {
       erReservert: true,
       reservertTilTidspunkt: '2023-01-01T00:54:25.455',
     },
@@ -62,7 +62,7 @@ const RESERVERTE_OPPGAVER = [
   },
   {
     id: 4,
-    status: {
+    reservasjonStatus: {
       erReservert: true,
       reservertTilTidspunkt: '2024-01-01T00:54:25.455',
     },

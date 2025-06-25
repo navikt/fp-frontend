@@ -44,7 +44,7 @@ const SAKSLISTER = [
 const OPPGAVER_TIL_BEHANDLING = [
   {
     id: 1,
-    status: {
+    reservasjonStatus: {
       erReservert: false,
     },
     saksnummer: '46435',
@@ -61,7 +61,7 @@ const OPPGAVER_TIL_BEHANDLING = [
   },
   {
     id: 4,
-    status: {
+    reservasjonStatus: {
       erReservert: false,
     },
     saksnummer: '43546',
@@ -78,7 +78,7 @@ const OPPGAVER_TIL_BEHANDLING = [
   },
   {
     id: 3,
-    status: {
+    reservasjonStatus: {
       erReservert: false,
     },
     saksnummer: '35344',
@@ -98,7 +98,7 @@ const OPPGAVER_TIL_BEHANDLING = [
 const RESERVERTE_OPPGAVER = [
   {
     id: 2,
-    status: {
+    reservasjonStatus: {
       erReservert: true,
       reservertTilTidspunkt: '2019-08-02T00:54:25.455',
       flyttetReservasjon: {

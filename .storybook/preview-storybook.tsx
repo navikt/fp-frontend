@@ -7,6 +7,9 @@ import { withThemeDecorator } from '@navikt/fp-storybook-utils';
 import 'dayjs/locale/nb.js';
 import '@navikt/ds-css';
 import '@navikt/ds-css/darkside';
+import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-plattform-komponenter/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 dayjs.locale('nb');
 

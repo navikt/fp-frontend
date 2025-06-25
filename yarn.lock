@@ -3306,6 +3306,7 @@ __metadata:
     "@navikt/fp-sak-meny-apne-for-endringer": "workspace:*"
     "@navikt/fp-sak-meny-endre-utland": "workspace:*"
     "@navikt/fp-sak-meny-henlegg": "workspace:*"
+    "@navikt/fp-sak-meny-merk-som-haster": "workspace:*"
     "@navikt/fp-sak-meny-ny-behandling": "workspace:*"
     "@navikt/fp-sak-meny-sett-pa-vent": "workspace:*"
     "@navikt/fp-sak-notat": "workspace:*"
@@ -4862,6 +4863,30 @@ __metadata:
     react-intl: 7.1.11
     storybook: 9.0.6
     stylelint: 16.20.0
+    typescript: 5.8.3
+    vite: 6.3.5
+    vitest: 3.2.3
+  languageName: unknown
+  linkType: soft
+
+"@navikt/fp-sak-meny-merk-som-haster@workspace:*, @navikt/fp-sak-meny-merk-som-haster@workspace:packages/sak/meny-merk-som-haster":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-sak-meny-merk-som-haster@workspace:packages/sak/meny-merk-som-haster"
+  dependencies:
+    "@navikt/ds-css": 7.22.0
+    "@navikt/ds-react": 7.22.0
+    "@navikt/ft-ui-komponenter": 4.5.0
+    "@navikt/ft-utils": 3.6.2
+    "@storybook/react": 9.0.6
+    "@storybook/react-vite": 9.0.6
+    "@testing-library/dom": 10.4.0
+    "@testing-library/react": 16.3.0
+    "@testing-library/user-event": 14.6.1
+    cross-env: 7.0.3
+    eslint: 9.28.0
+    react: 19.1.0
+    react-intl: 7.1.11
+    storybook: 9.0.6
     typescript: 5.8.3
     vite: 6.3.5
     vitest: 3.2.3

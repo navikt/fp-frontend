@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
 import { HTTPError } from 'ky';
 
-import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import type { Oppgave, ReservasjonStatus } from '@navikt/fp-los-felles';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
 import {
@@ -90,30 +90,30 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
 
   const erSøkFerdig = isSøkFagsakSuccess && !isHentOppgaverPending;
 
-  const goToFagsakEllerApneModal = (oppgave: Oppgave, oppgaveStatus?: OppgaveStatus) => {
+  const goToFagsakEllerApneModal = (oppgave: Oppgave, reservasjonStatus?: ReservasjonStatus) => {
     if (
-      oppgaveStatus &&
-      (!oppgaveStatus.erReservert || (oppgaveStatus.erReservert && oppgaveStatus.erReservertAvInnloggetBruker))
+      reservasjonStatus &&
+      (!reservasjonStatus.erReservert || (reservasjonStatus.erReservert && reservasjonStatus.erReservertAvInnloggetBruker))
     ) {
       åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
-    } else if (oppgaveStatus?.erReservert && !oppgaveStatus.erReservertAvInnloggetBruker) {
+    } else if (reservasjonStatus?.erReservert && !reservasjonStatus.erReservertAvInnloggetBruker) {
       setReservertOppgave(oppgave);
       setReservertAvAnnenSaksbehandler(true);
     }
   };
 
   const velgFagsakOperasjoner = (oppgave: Oppgave, skalSjekkeOmReservert: boolean) => {
-    if (oppgave.status.erReservert && !oppgave.status.erReservertAvInnloggetBruker) {
+    if (oppgave.reservasjonStatus.erReservert && !oppgave.reservasjonStatus.erReservertAvInnloggetBruker) {
       setReservertOppgave(oppgave);
       setReservertAvAnnenSaksbehandler(true);
     } else if (!skalReservere) {
-      if (skalSjekkeOmReservert) {
-        hentReservasjonsstatus(oppgave.id).then(status => {
-          goToFagsakEllerApneModal(oppgave, status);
-        });
-      } else {
-        åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
-      }
+        if (skalSjekkeOmReservert) {
+          hentReservasjonsstatus(oppgave.id).then(status => {
+            goToFagsakEllerApneModal(oppgave, status);
+          });
+        } else {
+          åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
+        }
     } else {
       reserverOppgave(oppgave.id).then(data => {
         goToFagsakEllerApneModal(oppgave, data);
@@ -154,7 +154,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
         <OppgaveErReservertAvAnnenModal
           lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave}
           oppgave={reservertOppgave}
-          oppgaveStatus={reservertOppgave.status}
+          reservasjonStatus={reservertOppgave.reservasjonStatus}
         />
       )}
     </>
