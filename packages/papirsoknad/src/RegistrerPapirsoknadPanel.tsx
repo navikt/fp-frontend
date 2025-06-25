@@ -11,6 +11,7 @@ import type { AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
 import type { EngangsstønadValues } from './engangsstonad/components/EngangsstonadForm';
 import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
+import type { ForeldrepengerEndringssøknadValues } from './foreldrepenger/components/ForeldrepengerEndringssøknadForm';
 import type { ForeldrepengerValues } from './foreldrepenger/components/ForeldrepengerForm';
 import { ForeldrepengerPapirsoknadIndex } from './foreldrepenger/ForeldrepengerPapirsoknadIndex';
 import { SoknadTypePickerForm } from './SoknadTypePickerForm';
@@ -29,7 +30,7 @@ interface Props {
     fagsakYtelseType: string,
     familieHendelseType: string,
     foreldreType: string,
-    formValues?: EngangsstønadValues | ForeldrepengerValues | SvangerskapsValues,
+    formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => Promise<Behandling>;
   erEndringssøknad: boolean;
 }
@@ -43,7 +44,9 @@ export const RegistrerPapirsoknadPanel = ({
 }: Props) => {
   const [soknadData, setSoknadData] = useState<SoknadData>();
 
-  const lagreFullstendigSøknad = (formValues: EngangsstønadValues | ForeldrepengerValues | SvangerskapsValues) => {
+  const lagreFullstendigSøknad = (
+    formValues: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
+  ) => {
     if (soknadData) {
       lagrePapirsøknad(
         soknadData.fagsakYtelseType,
