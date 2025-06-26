@@ -54,11 +54,38 @@ export default defineConfig({
     },
   },
   test: {
-    environment: 'jsdom',
-    css: false,
-    globals: true,
-    setupFiles: 'vitest-setup.ts',
     watch: false,
-    testTimeout: 25000,
+    globals: true,
+    testTimeout: 20000,
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: 'jsdom',
+          deps: { interopDefault: true },
+          environment: 'jsdom',
+          css: false,
+          setupFiles: 'vitest-setup.ts',
+          env: {
+            TEST_MODE: 'jsdom-mode',
+          },
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: 'browser',
+          setupFiles: 'vitest-setup-browser.ts',
+          browser: {
+            enabled: true,
+            provider: 'playwright',
+            instances: [{ browser: 'chromium' }],
+          },
+          env: {
+            TEST_MODE: 'browser-mode',
+          },
+        },
+      },
+    ],
   },
 });

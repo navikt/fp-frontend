@@ -1,23 +1,24 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswTest } from '@navikt/fp-utils-test';
 
 import * as stories from './BehandlingstypeVelger.stories';
 
 const { Default } = composeStories(stories);
 
 describe('BehandlingstypeVelger', () => {
-  it('skal vise checkboxer for behandlingstyper', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal vise checkboxer for behandlingstyper', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Førstegangsbehandling')).toBeChecked();
     expect(getByLabelText('Klage')).not.toBeChecked();
   });
 
-  it('skal velge klage', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+  mswTest('skal velge klage', async ({ setHandlers }) => {
+    setHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Klage')).not.toBeChecked();
