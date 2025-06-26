@@ -39,7 +39,7 @@
     "react-intl": "7.1.11"
   },
   "devDependencies": {
-    "@formatjs/cli-lib": "6.6.6",
+    "@formatjs/cli-lib": "7.4.2",
     "@navikt/ds-css": "7.22.0",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@storybook/react": "9.0.6",
