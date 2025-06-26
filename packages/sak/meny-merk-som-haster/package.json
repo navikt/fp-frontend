@@ -30,6 +30,7 @@
     "@navikt/ds-css": "7.22.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
+    "@navikt/fp-config-vite": "workspace:*",
     "@storybook/react": "9.0.6",
     "@storybook/react-vite": "9.0.6",
     "@testing-library/dom": "10.4.0",

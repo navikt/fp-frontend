@@ -29,8 +29,6 @@
     "eslint": "9.28.0",
     "storybook": "9.0.6",
     "stylelint": "16.20.0",
-    "typescript": "5.8.3",
-    "vite": "6.3.5",
-    "vitest": "3.2.3"
+    "typescript": "5.8.3"
   }
 }
