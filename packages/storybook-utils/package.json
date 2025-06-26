@@ -25,6 +25,8 @@
     "react-router-dom": "7.6.2"
   },
   "devDependencies": {
+    "@navikt/fp-config-eslint": "workspace:*",
+    "@navikt/fp-config-typescript": "workspace:*",
     "@storybook/types": "8.6.14",
     "eslint": "9.28.0",
     "typescript": "5.8.3",

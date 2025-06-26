@@ -26,8 +26,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "jsx": "react-jsx",
-    "typeRoots": ["./node_modules/@types", "./@types", "./node_modules"],
     "skipLibCheck": true
   },
-  "include": ["packages/**/*", "apps/**/*", "@types"]
+  "exclude": ["node_modules", "**.spec.ts", "vite.config.js", "dist"]
 }

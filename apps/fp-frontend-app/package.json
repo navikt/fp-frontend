@@ -141,6 +141,8 @@
     "rollup-plugin-sourcemaps": "0.6.3"
   },
   "devDependencies": {
+    "@navikt/fp-config-eslint": "workspace:*",
+    "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-utils-test": "workspace:*",
     "@storybook/addon-a11y": "9.0.12",
