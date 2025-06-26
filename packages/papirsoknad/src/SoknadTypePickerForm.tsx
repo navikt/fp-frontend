@@ -11,11 +11,11 @@ import type { AlleKodeverk } from '@navikt/fp-types';
 
 export const SØKNAD_TYPER = [FamilieHendelseType.ADOPSJON, FamilieHendelseType.FODSEL];
 
-interface FormValues {
-  fagsakYtelseType?: string;
-  familieHendelseType?: string;
-  foreldreType?: string;
-}
+type FormValues = {
+  fagsakYtelseType: string;
+  familieHendelseType: string;
+  foreldreType: string;
+};
 
 interface Props {
   setSoknadData: (soknadData: SoknadData) => void;
@@ -46,9 +46,10 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) =>
-        setSoknadData(new SoknadData(values.fagsakYtelseType!, values.familieHendelseType!, values.foreldreType!))
-      }
+      onSubmit={(values: FormValues) => {
+        setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType));
+        formMethods.reset(values);
+      }}
     >
       <Box background="bg-subtle" borderColor="border-default" borderWidth="1">
         <VStack gap="4" padding="5">
@@ -94,7 +95,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
           </HStack>
 
           <Box style={{ textAlign: 'end' }}>
-            <Button type="submit" disabled={formMethods.formState.isSubmitting || formMethods.formState.isSubmitted}>
+            <Button type="submit" disabled={!formMethods.formState.isDirty}>
               <FormattedMessage id="Registrering.Omsoknaden.VisSkjema" />
             </Button>
           </Box>

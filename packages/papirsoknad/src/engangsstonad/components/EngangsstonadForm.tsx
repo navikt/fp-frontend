@@ -56,6 +56,7 @@ export const EngangsstonadForm = ({
         readOnly={readOnly}
         submitting={formMethods.formState.isSubmitting}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
+        erEndringssøknad={false}
       />
     </Form>
   );

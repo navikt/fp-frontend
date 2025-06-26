@@ -18,9 +18,15 @@ interface Props {
   onSubmitUfullstendigsoknad: () => Promise<void>;
   readOnly?: boolean;
   submitting: boolean;
+  erEndringssøknad: boolean;
 }
 
-export const LagreSoknadPanel = ({ submitting, onSubmitUfullstendigsoknad, readOnly = true }: Props) => {
+export const LagreSoknadPanel = ({
+  submitting,
+  onSubmitUfullstendigsoknad,
+  readOnly = true,
+  erEndringssøknad,
+}: Props) => {
   const intl = useIntl();
 
   const { watch } = useFormContext<LagreSoknadFormValues>();
@@ -38,18 +44,20 @@ export const LagreSoknadPanel = ({ submitting, onSubmitUfullstendigsoknad, readO
           validate={[maxLength1500, hasValidText]}
           readOnly={readOnly}
         />
-        <div>
-          <CheckboxField
-            name="registrerVerge"
-            label={intl.formatMessage({ id: 'Registrering.Verge' })}
-            readOnly={readOnly}
-          />
-          <CheckboxField
-            name="ufullstendigSoeknad"
-            label={intl.formatMessage({ id: 'Registrering.SaveApplication.OpplysningspliktErIkkeOverholdt' })}
-            readOnly={readOnly}
-          />
-        </div>
+        {!erEndringssøknad && (
+          <div>
+            <CheckboxField
+              name="registrerVerge"
+              label={intl.formatMessage({ id: 'Registrering.Verge' })}
+              readOnly={readOnly}
+            />
+            <CheckboxField
+              name="ufullstendigSoeknad"
+              label={intl.formatMessage({ id: 'Registrering.SaveApplication.OpplysningspliktErIkkeOverholdt' })}
+              readOnly={readOnly}
+            />
+          </div>
+        )}
         <div>
           {!ufullstendigSoeknad && (
             <Button
