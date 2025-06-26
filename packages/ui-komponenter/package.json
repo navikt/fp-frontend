@@ -14,7 +14,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.22.0",
+    "@navikt/ds-react": "7.23.2",
     "@navikt/fp-types": "workspace:^",
     "@navikt/fp-utils": "workspace:^",
     "react": "19.1.0"
