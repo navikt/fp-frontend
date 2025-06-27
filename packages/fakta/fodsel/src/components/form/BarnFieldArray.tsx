@@ -78,7 +78,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
         </Table.Header>
         <Table.Body>
           {fields.map((field, index) => {
-            const isDirty = dirtyFields.barn?.[index].fødselsdato || dirtyFields.barn?.[index].dødsdato;
+            const isDirty = dirtyFields.barn?.[index]?.fødselsdato ?? dirtyFields.barn?.[index]?.dødsdato;
             const fieldArrayRow = `${FIELD_ARRAY_NAME}.${index}` as const;
 
             return (
