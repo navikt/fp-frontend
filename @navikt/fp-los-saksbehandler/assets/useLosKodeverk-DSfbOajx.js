@@ -1,0 +1,1 @@
+import{u as e}from"./useQuery-CCzjY9t4.js";import{l as s}from"./fplosSaksbehandlerApi-D2WcQp54.js";const i=r=>{const o=e(s()).data;if(!o)throw new Error("Kodeverk for LOS er ikke lastet inn");if(!o[r])throw new Error(`Kodeverk ${r} for LOS finnes ikke`);return o[r]};export{i as u};
