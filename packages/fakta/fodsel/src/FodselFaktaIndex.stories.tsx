@@ -122,14 +122,9 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
     terminbekreftelseDokument: undefined,
     fødsel: {
       søknad: {
-        barn: [
-          {
-            fødselsdato: '2025-05-04',
-            dødsdato: null,
-          },
-        ],
+        barn: [],
         termindato: '2025-05-06',
-        utstedtdato: null,
+        utstedtdato: '2025-04-16',
         antallBarn: 1,
       },
       register: {
@@ -142,17 +137,11 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
           termindato: '2025-05-06',
           antallBarn: 1,
         },
-        utstedtdato: null,
-        barn: [
-          {
-            kilde: 'SØKNAD',
-            barn: {
-              fødselsdato: '2025-05-04',
-              dødsdato: null,
-            },
-            kanOverstyres: true,
-          },
-        ],
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-04-16',
+        },
+        barn: [],
       },
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
