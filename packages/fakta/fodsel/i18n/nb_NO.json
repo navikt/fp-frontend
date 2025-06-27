@@ -8,7 +8,7 @@
   "SjekkManglendeFødselForm.Tittel": "Kontroller opplysninger om fødsel",
   "SjekkManglendeFødselForm.DiffIFreg": "Det er forskjell i antall barn i Folkeregisteret({antallIFreg}) og i søknaden({antallISøknad}). Kontroller hvilke opplysninger som er korrekte.",
   "SjekkManglendeFødselForm.IngenBarnRegistrertIFreg": "Det er ikke registrert noen fødsel i Folkeregisteret. Innhent dokumentasjon på fødsel fra bruker og registrer fødsel manuelt.",
-  "SjekkManglendeFødselForm.Label": "Er barnet født?",
+  "SjekkManglendeFødselForm.Label": "Er {antallBarn, plural, one {barnet} other {barna}} født?",
   "SjekkManglendeFødselForm.Ja": "Ja",
   "SjekkManglendeFødselForm.Nei": "Nei",
   "FaktaFraFReg.Tittel": "Opplysninger fra Folkeregisteret",

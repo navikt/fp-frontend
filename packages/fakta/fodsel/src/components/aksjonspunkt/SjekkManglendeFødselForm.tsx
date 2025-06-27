@@ -72,7 +72,7 @@ export const SjekkManglendeFødselForm = ({
           <RadioGroupPanel
             name="erBarnFødt"
             isEdited={dokumentasjonForeliggerIsEdited}
-            label={intl.formatMessage({ id: 'SjekkManglendeFødselForm.Label' })}
+            label={intl.formatMessage({ id: 'SjekkManglendeFødselForm.Label' }, { antallBarn: søknad.antallBarn })}
             validate={[required]}
             isReadOnly={isReadOnly}
             isHorizontal
