@@ -195,7 +195,7 @@ const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
   return Array(antallBarn).fill({
     fødselsdato: '',
     dødsdato: null,
-    erRedigerbar: true,
+    kanOverstyres: true,
     kilde: 'SAKSBEHANDLER',
   });
 };
