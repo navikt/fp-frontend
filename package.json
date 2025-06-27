@@ -41,16 +41,16 @@
     "packages/**/*"
   ],
   "dependencies": {
-    "dotenv": "16.5.0"
+    "dotenv": "16.6.0"
   },
   "devDependencies": {
-    "@eslint/js": "9.28.0",
+    "@eslint/js": "9.29.0",
     "@navikt/aksel-stylelint": "7.23.2",
     "@sentry/cli": "2.46.0",
     "@storybook/addon-links": "9.0.12",
     "@storybook/builder-vite": "9.0.12",
     "@storybook/cli": "9.0.12",
-    "@storybook/react": "9.0.12",
+    "@storybook/react": "9.0.13",
     "@testing-library/dom": "10.4.0",
     "@testing-library/jest-dom": "6.6.3",
     "@testing-library/react": "16.3.0",
@@ -62,12 +62,12 @@
     "@types/react-responsive": "9.0.0",
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "19.1.0",
-    "@vitejs/plugin-react": "4.5.2",
+    "@vitejs/plugin-react": "4.6.0",
     "@vitest/coverage-c8": "0.33.0",
     "cross-env": "7.0.3",
-    "eslint": "9.28.0",
+    "eslint": "9.29.0",
     "eslint-config-prettier": "10.1.5",
-    "eslint-plugin-import": "2.31.0",
+    "eslint-plugin-import": "2.32.0",
     "eslint-plugin-jsx-a11y": "6.10.2",
     "eslint-plugin-react": "7.37.5",
     "eslint-plugin-simple-import-sort": "12.1.1",
@@ -84,11 +84,11 @@
     "stylelint": "16.20.0",
     "stylelint-order": "7.0.0",
     "typescript": "5.8.3",
-    "typescript-eslint": "8.34.0",
+    "typescript-eslint": "8.35.0",
     "vite": "6.3.5",
     "vite-plugin-externalize-deps": "0.9.0",
     "vite-plugin-html": "3.2.2",
-    "vitest": "3.2.3",
+    "vitest": "3.2.4",
     "vitest-canvas-mock": "0.3.3"
   },
   "resolutions": {
