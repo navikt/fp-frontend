@@ -1,7 +1,7 @@
 import { useIntl } from 'react-intl';
 
 import { Detail, VStack } from '@navikt/ds-react';
-import { TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
@@ -25,7 +25,7 @@ export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnl
   return (
     <>
       {!isReadOnly && (
-        <TextAreaField
+        <RhfTextarea
           name="begrunnelse"
           label={intl.formatMessage({ id: labelTextCode })}
           validate={[minLength3, maxLength1500, hasValidText]}

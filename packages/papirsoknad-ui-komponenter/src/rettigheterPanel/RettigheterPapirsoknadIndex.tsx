@@ -1,5 +1,5 @@
 import { Heading, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -59,7 +59,7 @@ export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => 
     <BorderBox>
       <VStack gap="4">
         <Heading size="small">{intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}</Heading>
-        <RadioGroupPanel name="rettigheter" isReadOnly={readOnly} radios={options} />
+        <RhfRadioGroup name="rettigheter" isReadOnly={readOnly} radios={options} />
       </VStack>
     </BorderBox>
   );

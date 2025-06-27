@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, HStack, Popover, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
@@ -105,8 +105,9 @@ export const ManglendeInntektsmeldingForm = ({
             </Alert>
           </div>
         )}
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="saksbehandlersVurdering"
+          control={formMethods.control}
           label={
             <HStack gap="2">
               <FormattedMessage id="InntektsmeldingInnhentesForm.MåInnhentes" />
@@ -142,7 +143,9 @@ export const ManglendeInntektsmeldingForm = ({
           isReadOnly={isReadOnly}
           radios={radioOptions}
         />
-        <TextAreaField
+        <RhfTextarea
+          name="begrunnelse"
+          control={formMethods.control}
           label={
             <FormattedMessage
               id={
@@ -150,7 +153,6 @@ export const ManglendeInntektsmeldingForm = ({
               }
             />
           }
-          name="begrunnelse"
           validate={[required, minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
           readOnly={isReadOnly}

@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
-import { Form, InputField } from '@navikt/ft-form-hooks';
+import { Form, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 
 import styles from './searchForm.module.css';
@@ -41,8 +41,9 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
           <FormattedMessage id="Search.SearchFagsakOrPerson" />
         </BodyShort>
         <HStack gap="2" align="end">
-          <InputField
+          <RhfTextField
             name="searchString"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'Search.SaksnummerOrPersonId' })}
             validate={[hasValidSaksnummerOrFodselsnummerFormat]}
           />

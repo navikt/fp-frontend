@@ -13,7 +13,7 @@ import {
   SackKronerIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, SelectField } from '@navikt/ft-form-hooks';
+import { Form, RhfSelect } from '@navikt/ft-form-hooks';
 import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -239,8 +239,9 @@ export const SakslisteVelgerForm = ({
     <Form formMethods={formMethods} className={styles.container}>
       <VStack gap="6">
         <HStack justify="space-between" align="end">
-          <SelectField
+          <RhfSelect
             name="sakslisteId"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'SakslisteVelgerForm.Saksliste' })}
             selectValues={sorterteSakslister.map(saksliste => (
               <option key={saksliste.sakslisteId} value={`${saksliste.sakslisteId}`}>

@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
@@ -27,7 +27,7 @@ interface Props {
 export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<VirksomhetFormValues>();
+  const { watch, control } = useFormContext<VirksomhetFormValues>();
   const harArbeidetIEgenVirksomhet = watch(`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`) || null;
 
   return (
@@ -37,8 +37,9 @@ export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) =>
           <FormattedMessage id="Registrering.EgenVirksomhet.Title" />
         </Heading>
 
-        <RadioGroupPanel
+        <RhfRadioGroup
           name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
+          control={control}
           validate={[required]}
           isReadOnly={readOnly}
           hideLegend

@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
-import { CheckboxField, Form, InputField } from '@navikt/ft-form-hooks';
+import { Form, RhfCheckbox, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 
 import styles from './SøkForm.module.css';
@@ -39,8 +39,9 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
       <VStack gap="2">
         <HStack gap="8">
           <HStack gap="0">
-            <InputField
+            <RhfTextField
               name="searchString"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'Search.SearchHeader' })}
               description={intl.formatMessage({ id: 'Search.SaksnummerOrPersonId' })}
               validate={[hasValidSaksnummerOrFodselsnummerFormat]}
@@ -60,8 +61,9 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
             </div>
           </HStack>
           {kanSaksbehandle && (
-            <CheckboxField
+            <RhfCheckbox
               name="skalReservere"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'Search.ReserverBehandling' })}
               onClick={resetSearch}
               className={styles.checkbox}

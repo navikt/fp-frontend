@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, HStack, Popover, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker, RhfRadioGroup, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -127,8 +127,9 @@ export const ManglendeArbeidsforholdForm = ({
       </div>
       <Form formMethods={formMethods} onSubmit={lagre}>
         <VStack gap="4">
-          <RadioGroupPanel
+          <RhfRadioGroup
             name="saksbehandlersVurdering"
+            control={formMethods.control}
             label={
               <HStack gap="2">
                 <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
@@ -171,20 +172,23 @@ export const ManglendeArbeidsforholdForm = ({
           />
           {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
             <HStack gap="4">
-              <Datepicker
+              <RhfDatepicker
                 name="fom"
+                control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
                 validate={[required, hasValidDate]}
                 isReadOnly={isReadOnly}
               />
-              <Datepicker
+              <RhfDatepicker
                 name="tom"
+                control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
                 validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                 isReadOnly={isReadOnly}
               />
-              <InputField
+              <RhfTextField
                 name="stillingsprosent"
+                control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
                 parse={value => {
                   const parsedValue = parseInt(value.toString(), 10);
@@ -196,9 +200,10 @@ export const ManglendeArbeidsforholdForm = ({
               />
             </HStack>
           )}
-          <TextAreaField
-            label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
+            label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}

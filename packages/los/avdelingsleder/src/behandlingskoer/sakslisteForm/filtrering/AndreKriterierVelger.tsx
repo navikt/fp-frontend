@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -18,7 +18,7 @@ interface Props {
 
 export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
-  const { setValue, watch } = useFormContext();
+  const { setValue, watch, control } = useFormContext();
 
   const values = watch();
 
@@ -53,9 +53,10 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
       </Label>
       {andreKriterierTyper.map(akt => (
         <div key={akt.kode}>
-          <CheckboxField
+          <RhfCheckbox
             key={akt.kode}
             name={akt.kode}
+            control={control}
             label={akt.navn}
             onChange={isChecked => {
               setValue(`${akt.kode}_inkluder`, true);
@@ -69,8 +70,9 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
           {values[akt.kode] && (
             <div className={styles.arrowbox}>
               <ArrowBox alignOffset={30}>
-                <RadioGroupPanel
+                <RhfRadioGroup
                   name={`${akt.kode}_inkluder`}
+                  control={control}
                   isHorizontal
                   isTrueOrFalseSelection
                   onChange={skalInkludere =>

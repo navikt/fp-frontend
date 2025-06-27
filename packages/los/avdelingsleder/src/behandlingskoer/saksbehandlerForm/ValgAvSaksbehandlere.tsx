@@ -1,5 +1,5 @@
 import { HStack, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
@@ -35,7 +35,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
     <HStack gap="1">
       <VStack gap="2" width="50%">
         {avdelingensSaksbehandlereVenstreListe.map(s => (
-          <CheckboxField
+          <RhfCheckbox
             key={s.brukerIdent}
             name={s.brukerIdent}
             label={s.navn}
@@ -50,7 +50,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
       </VStack>
       <VStack gap="2">
         {avdelingensSaksbehandlereHoyreListe.map(s => (
-          <CheckboxField
+          <RhfCheckbox
             key={s.brukerIdent}
             name={s.brukerIdent}
             label={s.navn}

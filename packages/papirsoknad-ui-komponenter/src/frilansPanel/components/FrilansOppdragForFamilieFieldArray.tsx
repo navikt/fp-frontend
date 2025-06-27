@@ -2,7 +2,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { Datepicker, InputField, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, maxLength } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -81,8 +81,9 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}`;
         return (
           <HStack key={field.id} gap="4" paddingBlock="2" align="end">
-            <Datepicker
-              name={`${namePart1}.fomDato`}
+            <RhfDatepicker
+              name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.fomDato`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeFom' })}
               validate={[
                 hasValidDate,
@@ -95,8 +96,9 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            <Datepicker
-              name={`${namePart1}.tomDato`}
+            <RhfDatepicker
+              name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.tomDato`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeTom' })}
               validate={[
                 hasValidDate,
@@ -108,8 +110,9 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            <InputField
-              name={`${namePart1}.oppdragsgiver`}
+            <RhfTextField
+              name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.oppdragsgiver`}
+              control={control}
               validate={[maxLength50]}
               label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver' })}
             />

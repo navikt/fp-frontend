@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
@@ -52,7 +52,7 @@ export const SjekkFodselDokForm = ({
   familiehendelse,
 }: Props) => {
   const intl = useIntl();
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FormValues>();
   const { gjeldende, register } = familiehendelse;
 
   const dokumentasjonForeligger = watch('dokumentasjonForeligger') || false;
@@ -76,8 +76,9 @@ export const SjekkFodselDokForm = ({
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]}
       >
         <VStack gap="2">
-          <RadioGroupPanel
+          <RhfRadioGroup
             name="dokumentasjonForeligger"
+            control={control}
             isEdited={hasValue(gjeldende.dokumentasjonForeligger)}
             hideLegend
             validate={[required]}

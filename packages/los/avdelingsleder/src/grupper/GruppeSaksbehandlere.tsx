@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
-import { Form, InputField } from '@navikt/ft-form-hooks';
+import { Form, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -123,10 +123,12 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
   return (
     <Form formMethods={formMethods}>
       <VStack gap="5">
-        <InputField
+        <RhfTextField
           name="navn"
+          control={formMethods.control}
           label={intl.formatMessage({ id: 'GruppeSaksbehandlere.Navn' })}
           validate={[required, minLength3, maxLength100, hasValidName]}
+          //@ts-expect-error fiks
           onBlur={lagreNavnDebounce}
           className={styles.navn}
         />

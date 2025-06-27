@@ -1,5 +1,5 @@
 import { HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   hasValidDate,
   hasValidFodselsnummer,
@@ -38,7 +38,7 @@ interface Props {
  */
 export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType }: Props) => (
   <VStack gap="4">
-    <SelectField
+    <RhfSelect
       name="vergeType"
       label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
       validate={[required]}
@@ -52,21 +52,21 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
     {valgtVergeType && (
       <>
         <HStack gap="4">
-          <InputField
+          <RhfTextField
             name="navn"
             label={intl.formatMessage({ id: 'Verge.Navn' })}
             validate={[required, hasValidName]}
             readOnly={readOnly}
           />
           {valgtVergeType === VergeType.ADVOKAT ? (
-            <InputField
+            <RhfTextField
               name="organisasjonsnummer"
               label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
               validate={[required, hasValidOrgNumber]}
               readOnly={readOnly}
             />
           ) : (
-            <InputField
+            <RhfTextField
               name="fnr"
               label={intl.formatMessage({ id: 'Verge.FodselsNummer' })}
               validate={[required, hasValidFodselsnummer]}
@@ -75,13 +75,13 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
           )}
         </HStack>
         <HStack gap="4">
-          <Datepicker
+          <RhfDatepicker
             name="gyldigFom"
             label={intl.formatMessage({ id: 'Verge.PeriodeFOM' })}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}
           />
-          <Datepicker
+          <RhfDatepicker
             name="gyldigTom"
             label={intl.formatMessage({ id: 'Verge.PeriodeTOM' })}
             validate={[hasValidDate]}

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, Chat, HStack, VStack } from '@navikt/ds-react';
-import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -121,8 +121,9 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
         <div className={styles.form}>
           <Form formMethods={formMethods} onSubmit={lagre}>
             <VStack gap="4">
-              <TextAreaField
+              <RhfTextarea
                 name="beskrivelse"
+                control={formMethods.control}
                 label=""
                 maxLength={1000}
                 validate={[required, maxLength1000, hasValidText]}

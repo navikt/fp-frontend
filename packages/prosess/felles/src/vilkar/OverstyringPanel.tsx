@@ -3,8 +3,8 @@ import { useFormContext } from 'react-hook-form';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { TextAreaField } from '@navikt/ft-form-hooks';
-import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
+import { RhfTextarea } from '@navikt/ft-form-hooks';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox, EditedIcon } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -17,7 +17,8 @@ const intl = createIntl(messages);
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
+const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) =>
+  value !== undefined || isDirty ? required(value) : undefined;
 
 interface Props {
   erOverstyrt: boolean;
@@ -44,8 +45,10 @@ export const OverstyringPanel = ({
   erIkkeGodkjentAvBeslutter,
   children,
 }: Props) => {
+  // TODO (TOR) Manglar type
   const {
     formState: { isDirty },
+    control,
   } = useFormContext();
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
   return (
@@ -58,8 +61,9 @@ export const OverstyringPanel = ({
         <Label size="medium">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
         <div>{children}</div>
         {(erOverstyrt || hasAksjonspunkt) && (
-          <TextAreaField
+          <RhfTextarea
             name="begrunnelse"
+            control={control}
             label={intl.formatMessage({ id: 'OverstyringPanel.Vilkar' })}
             validate={[isRequiredFn, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}

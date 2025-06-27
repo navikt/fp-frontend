@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { Datepicker, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -207,7 +207,7 @@ export const TilretteleggingForm = ({
               tomDato={tomDatoForTilrettelegging}
             />
           )}
-          <Datepicker
+          <RhfDatepicker
             name={`${index}.fom`}
             label={intl.formatMessage({
               id: 'TilretteleggingForm.FraOgMed',
@@ -225,7 +225,7 @@ export const TilretteleggingForm = ({
             ]}
             isReadOnly={readOnly}
           />
-          <RadioGroupPanel
+          <RhfRadioGroup
             name={`${index}.type`}
             label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
             validate={[required]}
@@ -251,7 +251,7 @@ export const TilretteleggingForm = ({
                 tilrettelegging.type !== TilretteleggingType.DELVIS_TILRETTELEGGING ||
                 erNyPeriode ||
                 formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
-                <NumberField
+                <RhfNumericField
                   name={`${index}.stillingsprosent`}
                   className={styles.arbeidsprosent}
                   readOnly={readOnly}
@@ -270,7 +270,7 @@ export const TilretteleggingForm = ({
                   }}
                 />
               )}
-              <NumberField
+              <RhfNumericField
                 name={`${index}.overstyrtUtbetalingsgrad`}
                 className={styles.utbetalingsgrad}
                 readOnly={readOnly}

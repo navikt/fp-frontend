@@ -2,7 +2,7 @@ import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, Button, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { Permisjon } from '@navikt/fp-types';
@@ -86,7 +86,7 @@ export const VelferdspermisjonForm = ({
         }}
       >
         <VStack gap="5">
-          <RadioGroupPanel
+          <RhfRadioGroup
             name={`${permisjonIndex}.erGyldig`}
             label={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
             description={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldigDetaljer' })}

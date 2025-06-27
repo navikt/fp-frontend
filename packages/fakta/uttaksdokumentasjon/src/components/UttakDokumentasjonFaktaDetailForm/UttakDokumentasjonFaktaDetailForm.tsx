@@ -3,7 +3,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Link, ReadMore, Table, VStack } from '@navikt/ds-react';
-import { Form, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -147,17 +147,19 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </Table.Body>
                 </Table>
               )}
-              <RadioGroupPanel
+              <RhfRadioGroup
                 name={`perioder.${0}.vurdering`}
+                control={formMethods.control}
                 label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                 validate={[required]}
                 isReadOnly={readOnly}
                 radios={vurderingsalternativ}
               />
               {formMethods.watch(`perioder.0.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
-                <NumberField
-                  label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
+                <RhfNumericField
                   name="perioder.0.morsStillingsprosent"
+                  control={formMethods.control}
+                  label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
                   validate={[required, minValue(0.01), maxValue(74.99)]}
                   readOnly={readOnly}
                 />
@@ -194,16 +196,18 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                     <BodyShort weight="semibold">{getFormatertPeriode(periode)}</BodyShort>
                     <BodyShort>{calcDaysAndWeeks(periode.fom, periode.tom).formattedString}</BodyShort>
                   </HStack>
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name={`perioder.${index}.vurdering`}
+                    control={formMethods.control}
                     label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                     validate={[required]}
                     isReadOnly={readOnly}
                     radios={vurderingsalternativ}
                   />
                   {formMethods.watch(`perioder.${index}.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
-                    <NumberField
+                    <RhfNumericField
                       label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
+                      control={formMethods.control}
                       name={`perioder.${index}.morsStillingsprosent`}
                       validate={[required, minValue(0.01), maxValue(74.99)]}
                       readOnly={readOnly}

@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
@@ -55,7 +55,7 @@ export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: 
             return null;
           }
           return (
-            <CheckboxField
+            <RhfCheckbox
               key={bt.kode}
               name={bt.kode}
               label={bt.navn}

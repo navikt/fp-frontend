@@ -1,7 +1,7 @@
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -39,7 +39,7 @@ export const KlageVurderingRadioOptionsNfp = ({
   ));
   return (
     <VStack gap="4">
-      <RadioGroupPanel
+      <RhfRadioGroup
         name="klageVurdering"
         validate={[required]}
         isReadOnly={readOnly}
@@ -58,7 +58,7 @@ export const KlageVurderingRadioOptionsNfp = ({
       {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
         <ArrowBox>
           <VStack gap="4">
-            <SelectField
+            <RhfSelect
               readOnly={readOnly}
               name="klageMedholdArsak"
               selectValues={medholdOptions}
@@ -66,7 +66,7 @@ export const KlageVurderingRadioOptionsNfp = ({
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
             />
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="klageVurderingOmgjoer"
               validate={[required]}
               isReadOnly={readOnly}
@@ -88,7 +88,7 @@ export const KlageVurderingRadioOptionsNfp = ({
           </VStack>
         </ArrowBox>
       )}
-      <SelectField
+      <RhfSelect
         readOnly={readOnly}
         name="klageHjemmel"
         selectValues={hjemmelOptions}

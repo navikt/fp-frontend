@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -58,8 +58,9 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
           <FormattedMessage id="VentefristUtløperPanel.SattPaVent" />
         </Label>
         <HStack gap="4">
-          <RadioGroupPanel
+          <RhfRadioGroup
             name="valgtYtelsetype"
+            control={formMethods.control}
             isHorizontal
             radios={[
               {

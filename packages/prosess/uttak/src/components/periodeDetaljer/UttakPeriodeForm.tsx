@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -376,8 +376,9 @@ export const UttakPeriodeForm = ({
           />
         )}
         {erHovedsøkersPeriode && (
-          <TextAreaField
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
@@ -386,8 +387,9 @@ export const UttakPeriodeForm = ({
         )}
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="erOppfylt"
+              control={formMethods.control}
               hideLegend
               validate={[required]}
               isHorizontal
@@ -400,8 +402,9 @@ export const UttakPeriodeForm = ({
             {erOppfylt !== undefined && (
               <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
                 <VStack gap="4">
-                  <SelectField
+                  <RhfSelect
                     name="periodeAarsak"
+                    control={formMethods.control}
                     label={intl.formatMessage({
                       id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
                     })}
@@ -410,8 +413,9 @@ export const UttakPeriodeForm = ({
                   />
                   {valgtPeriode.gradertAktivitet && erOppfylt && (
                     <>
-                      <RadioGroupPanel
+                      <RhfRadioGroup
                         name="graderingInnvilget"
+                        control={formMethods.control}
                         label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
                         validate={[required]}
                         isHorizontal
@@ -422,8 +426,9 @@ export const UttakPeriodeForm = ({
                         ]}
                       />
                       {graderingInnvilget === false && (
-                        <SelectField
+                        <RhfSelect
                           name="graderingAvslagAarsak"
+                          control={formMethods.control}
                           label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
                           validate={[required, notDash]}
                           selectValues={graderingAvslagsårsakOptions}

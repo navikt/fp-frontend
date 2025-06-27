@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { Form, SelectField } from '@navikt/ft-form-hooks';
+import { Form, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
@@ -79,8 +79,9 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
       >
         <VStack gap="6">
           <HStack gap="2" align="start">
-            <SelectField
+            <RhfSelect
               name="rettighetstype"
+              control={formMethods.control}
               label={<FormattedMessage id="Rettighetstype.SelectLabel" />}
               validate={[required]}
               className={styles.selectType}

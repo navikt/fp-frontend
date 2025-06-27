@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
-import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfCheckbox, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -147,16 +147,18 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
         return (
           <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
             <div>
-              <SelectField
-                readOnly={readOnly}
+              <RhfSelect
                 name={`${getPrefix(index)}.periodeType`}
+                control={control}
+                readOnly={readOnly}
                 label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
                 selectValues={mapPeriodeTyper(periodeTyper)}
                 validate={[required]}
               />
             </div>
-            <Datepicker
+            <RhfDatepicker
               isReadOnly={readOnly}
+              control={control}
               name={`${getPrefix(index)}.periodeFom`}
               label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
               validate={[
@@ -167,8 +169,9 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            <Datepicker
+            <RhfDatepicker
               isReadOnly={readOnly}
+              control={control}
               name={`${getPrefix(index)}.periodeTom`}
               label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
               validate={[
@@ -180,10 +183,11 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
             {!sokerErMor && (
-              <SelectField
+              <RhfSelect
+                name={`${getPrefix(index)}.morsAktivitet`}
+                control={control}
                 readOnly={readOnly}
                 disabled={skalDisableMorsAktivitet}
-                name={`${getPrefix(index)}.morsAktivitet`}
                 label={getLabel(
                   erForsteRad,
                   intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }),
@@ -193,20 +197,23 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               />
             )}
 
-            <CheckboxField
-              readOnly={readOnly}
+            <RhfCheckbox
               name={`${getPrefix(index)}.flerbarnsdager`}
+              control={control}
+              readOnly={readOnly}
               label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
             />
-            <CheckboxField
-              readOnly={readOnly}
+            <RhfCheckbox
               name={`${getPrefix(index)}.harSamtidigUttak`}
+              control={control}
+              readOnly={readOnly}
               label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
             />
 
             {periode.harSamtidigUttak && (
-              <InputField
+              <RhfTextField
                 name={`${getPrefix(index)}.samtidigUttaksprosent`}
+                control={control}
                 validate={[hasValidDecimal, maxValue100]}
                 label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
                 normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}

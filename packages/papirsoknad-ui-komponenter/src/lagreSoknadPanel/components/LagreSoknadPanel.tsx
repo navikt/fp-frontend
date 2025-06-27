@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, VStack } from '@navikt/ds-react';
-import { CheckboxField, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
@@ -29,15 +29,16 @@ export const LagreSoknadPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<LagreSoknadFormValues>();
+  const { watch, control } = useFormContext<LagreSoknadFormValues>();
   const ufullstendigSoeknad = watch('ufullstendigSoeknad') || false;
 
   return (
     <BorderBox>
       <VStack gap="4">
         <Heading size="small">{intl.formatMessage({ id: 'Registrering.SaveApplication.Title' })}</Heading>
-        <TextAreaField
+        <RhfTextarea
           name="kommentarEndring"
+          control={control}
           label={intl.formatMessage({ id: 'Registrering.SaveApplication.Label' })}
           description={intl.formatMessage({ id: 'Registrering.SaveApplication.Description' })}
           maxLength={1500}
@@ -46,13 +47,15 @@ export const LagreSoknadPanel = ({
         />
         {!erEndringssøknad && (
           <div>
-            <CheckboxField
+            <RhfCheckbox
               name="registrerVerge"
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.Verge' })}
               readOnly={readOnly}
             />
-            <CheckboxField
+            <RhfCheckbox
               name="ufullstendigSoeknad"
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.SaveApplication.OpplysningspliktErIkkeOverholdt' })}
               readOnly={readOnly}
             />

@@ -2,7 +2,7 @@ import { type ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -93,8 +93,9 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
     >
       {(field, index) => (
         <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
-          <Datepicker
+          <RhfDatepicker
             name={`${getPrefix(index)}.periodeFom`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
             validate={[
               required,
@@ -109,8 +110,9 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
             onChange={() => (isSubmitted ? trigger() : undefined)}
           />
 
-          <Datepicker
+          <RhfDatepicker
             name={`${getPrefix(index)}.periodeTom`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
             validate={[
               required,
@@ -126,8 +128,9 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
           />
 
           <div>
-            <SelectField
+            <RhfSelect
               name={`${getPrefix(index)}.årsak`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.Permisjon.Opphold.Arsak' })}
               selectValues={mapTyper(oppholdsReasons)}
               validate={[required]}

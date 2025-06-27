@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import { ForeldreType, OverforingArsak } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
@@ -64,7 +64,7 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
   const overtaKvoteReasons = alleKodeverk['OverføringÅrsak'];
   const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, erEndringssøknad, intl);
 
-  const { watch } = useFormContext<PermisjonFormValues>();
+  const { watch, control } = useFormContext<PermisjonFormValues>();
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
 
   return (
@@ -72,9 +72,10 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
       <Label>
         <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" />
       </Label>
-      <CheckboxField
-        readOnly={readOnly}
+      <RhfCheckbox
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`}
+        control={control}
+        readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvote" />}
       />
       {skalOvertaKvote && <RenderOverforingAvKvoterFieldArray selectValues={selectValues} readOnly={readOnly} />}

@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { CheckboxPanel } from '@navikt/ft-form-hooks';
+import { RhfCheckboxGroup } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
 import { ArbeidType } from '@navikt/fp-kodeverk';
@@ -48,7 +48,7 @@ export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = fal
         <Heading size="small">
           <FormattedMessage id="Registrering.AndreYtelser.Title" />
         </Heading>
-        <CheckboxPanel
+        <RhfCheckboxGroup
           isReadOnly={readOnly}
           name={`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`}
           checkboxes={filtrerteArbeidstyper.map(ay => ({

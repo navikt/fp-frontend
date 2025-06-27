@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxPanel, Datepicker, InputField, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfCheckboxGroup, RhfDatepicker, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, hasValidText, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -22,7 +22,7 @@ const aarsaker = ({ readOnly, index }: Props) => [
     label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />,
     element: (
       <ArrowBox marginTop={8}>
-        <Datepicker
+        <RhfDatepicker
           name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndringGjeldendeFom`}
           isReadOnly={readOnly}
           validate={[hasValidDate, required]}
@@ -37,7 +37,7 @@ const aarsaker = ({ readOnly, index }: Props) => [
     label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.NyIArbeidslivet" />,
     element: (
       <ArrowBox marginTop={8}>
-        <Datepicker
+        <RhfDatepicker
           name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.nyIArbeidslivetFom`}
           isReadOnly={readOnly}
           validate={[hasValidDate, required]}
@@ -66,18 +66,18 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
             <Label size="small">
               <FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" />
             </Label>
-            <CheckboxPanel
+            <RhfCheckboxGroup
               validate={[required]}
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`}
               checkboxes={aarsaker({ readOnly, index })}
             />
 
-            <TextAreaField
+            <RhfTextarea
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.beskrivelseAvEndring`}
               label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
               validate={[hasValidText]}
             />
-            <InputField
+            <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.inntekt`}
               label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Inntekt" />}
               readOnly={readOnly}

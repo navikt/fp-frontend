@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Box, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -160,8 +160,9 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
             <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
           </VStack>
         </HStack>
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="erVilkarOk"
+          control={formMethods.control}
           validate={[required]}
           isReadOnly={isReadOnly}
           isHorizontal

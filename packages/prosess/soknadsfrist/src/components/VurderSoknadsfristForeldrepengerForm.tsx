@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat, periodFormat } from '@navikt/ft-utils';
@@ -130,8 +130,9 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
         <div className={styles.marginTop}>
           <VStack gap="4">
             <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="gyldigSenFremsetting"
+              control={formMethods.control}
               validate={[required]}
               isReadOnly={isReadOnly}
               isHorizontal
@@ -150,8 +151,9 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
             />
             {gyldigSenFremsetting && (
               <ArrowBox>
-                <Datepicker
+                <RhfDatepicker
                   name="ansesMottatt"
+                  control={formMethods.control}
                   isReadOnly={isReadOnly}
                   label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.NyMottattDato" />}
                   validate={[required, hasValidDate, dateBeforeOrEqualToToday]}

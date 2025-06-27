@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, Label, VStack } from '@navikt/ds-react';
-import { TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
@@ -56,8 +56,10 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => {
+  // TODO (TOR) Manglar typing
   const {
     formState: { isDirty },
+    control,
   } = useFormContext();
 
   const isRequiredFn = (value?: string | number | boolean) => value !== undefined || isDirty;
@@ -74,8 +76,9 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
         </VStack>
       )}
       {!skalBrukeOverstyrendeFritekstBrev && (
-        <TextAreaField
+        <RhfTextarea
           name="begrunnelse"
+          control={control}
           label={<FormattedMessage id="VedtakForm.Fritekst" />}
           validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
           maxLength={1500}

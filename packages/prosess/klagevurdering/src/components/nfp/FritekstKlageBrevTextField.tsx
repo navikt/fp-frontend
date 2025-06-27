@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import { TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
@@ -13,7 +13,7 @@ interface Props {
 
 export const FritekstBrevTextField = ({ språkkode, readOnly = true }: Props) => (
   <div className={styles.fritekstTilBrevTextArea}>
-    <TextAreaField
+    <RhfTextarea
       name="fritekstTilBrev"
       label={useIntl().formatMessage({ id: 'FritekstKlageBrevTextField.Fritekst' })}
       validate={[required, hasValidText]}

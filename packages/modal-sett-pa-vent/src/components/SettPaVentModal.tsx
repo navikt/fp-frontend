@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Modal, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, SelectField } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   ariaCheck,
   dateAfterOrEqualToToday,
@@ -76,14 +76,16 @@ export const SettPaVentModal = ({
         <Modal.Body>
           <VStack gap="4">
             {(hasManualPaVent || fristFraFelt) && (
-              <Datepicker
-                label={<FormattedMessage id="SettPaVentModal.Frist" />}
+              <RhfDatepicker
                 name="frist"
+                control={formMethods.control}
+                label={<FormattedMessage id="SettPaVentModal.Frist" />}
                 validate={[required, hasValidDate, dateAfterOrEqualToToday]}
               />
             )}
-            <SelectField
+            <RhfSelect
               name="ventearsak"
+              control={formMethods.control}
               label={<FormattedMessage id="SettPaVentModal.Arsak" />}
               validate={[required]}
               selectValues={ventearsaker

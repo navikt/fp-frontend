@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { PencilIcon, TabsAddIcon } from '@navikt/aksel-icons';
 import { Button, Checkbox, CheckboxGroup, HStack, Label, Spacer } from '@navikt/ds-react';
-import { InputField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
@@ -51,7 +51,7 @@ export const DokumentDetaljer = ({
     return (
       <div className={styles.dokContainer}>
         <div className={styles.dokumentTittel}>
-          <InputField
+          <RhfTextField
             name={inputFieldName}
             validate={[required, hasValidText]}
             readOnly={dokumentTittelStyresAvJournalpostTittel}
@@ -69,7 +69,7 @@ export const DokumentDetaljer = ({
         <>
           <HStack className={styles.dokumentTittel} gap="1">
             {harToggletFritekst && (
-              <InputField
+              <RhfTextField
                 name={`journalpostDokumenter.${docFieldIndex}.tittel`}
                 validate={[required, hasValidText]}
                 readOnly={false}
@@ -78,7 +78,7 @@ export const DokumentDetaljer = ({
               />
             )}
             {!harToggletFritekst && (
-              <SelectField
+              <RhfSelect
                 readOnly={false}
                 name={`journalpostDokumenter.${docFieldIndex}.tittel`}
                 label={undefined}

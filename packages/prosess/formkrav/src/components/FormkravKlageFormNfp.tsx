@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
@@ -146,10 +146,11 @@ export const FormkravKlageFormNfp = ({
           <VStack gap="6">
             <HStack gap="10">
               <div>
-                <SelectField
+                <RhfSelect
+                  name="vedtak"
+                  control={formMethods.control}
                   readOnly={isReadOnly}
                   validate={[required]}
-                  name="vedtak"
                   label={intl.formatMessage({ id: 'Klage.Formkrav.VelgVedtak' })}
                   selectValues={klageBareVedtakOptions}
                   className={styles.selectBredde}
@@ -157,8 +158,9 @@ export const FormkravKlageFormNfp = ({
               </div>
               <VStack gap="5">
                 <HStack gap="4">
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name="erKlagerPart"
+                    control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
@@ -175,8 +177,9 @@ export const FormkravKlageFormNfp = ({
                       },
                     ]}
                   />
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name="erKonkret"
+                    control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
@@ -195,8 +198,9 @@ export const FormkravKlageFormNfp = ({
                   />
                 </HStack>
                 <HStack gap="4">
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name="erFristOverholdt"
+                    control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
@@ -213,8 +217,9 @@ export const FormkravKlageFormNfp = ({
                       },
                     ]}
                   />
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name="erSignert"
+                    control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
@@ -237,8 +242,9 @@ export const FormkravKlageFormNfp = ({
           </VStack>
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
           {skalLagreFritekstfelt(formVerdier) && (
-            <TextAreaField
+            <RhfTextarea
               name="fritekstTilBrev"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'FormkravKlageFormNfp.Fritekst' })}
               maxLength={100000}
               validate={[required, hasValidText]}

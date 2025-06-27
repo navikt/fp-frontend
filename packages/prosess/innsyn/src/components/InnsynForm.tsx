@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -139,8 +139,9 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
             <FormattedMessage id="InnsynForm.VurderKravetOmInnsyn" />
           </AksjonspunktHelpTextHTML>
         )}
-        <Datepicker
+        <RhfDatepicker
           name="mottattDato"
+          control={formMethods.control}
           label={intl.formatMessage({ id: 'InnsynForm.DatoMottattKrav' })}
           isReadOnly={isReadOnly}
           isEdited={!isApOpen}
@@ -152,8 +153,9 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
         />
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="innsynResultatType"
+          control={formMethods.control}
           label={<FormattedMessage id="InnsynForm.Resultat" />}
           validate={[required]}
           isReadOnly={isReadOnly}
@@ -168,8 +170,9 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
           innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
           <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
             <VStack gap="4">
-              <RadioGroupPanel
+              <RhfRadioGroup
                 name="sattPaVent"
+                control={formMethods.control}
                 label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
                 validate={[required]}
                 isReadOnly={isReadOnly}
@@ -188,8 +191,9 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
                 ]}
               />
               {sattPaVent && (
-                <Datepicker
+                <RhfDatepicker
                   name="fristDato"
+                  control={formMethods.control}
                   label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
                   isReadOnly={isReadOnly}
                   isEdited={!isApOpen}

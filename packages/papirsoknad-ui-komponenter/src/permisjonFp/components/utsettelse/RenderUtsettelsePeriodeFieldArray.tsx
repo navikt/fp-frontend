@@ -2,7 +2,7 @@ import { type ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -107,15 +107,17 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
     >
       {(field, index) => (
         <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
-          <SelectField
+          <RhfSelect
             name={`${getPrefix(index)}.periodeForUtsettelse`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' })}
             selectValues={mapKvoter(utsettelseKvoter)}
             validate={[required]}
           />
 
-          <Datepicker
+          <RhfDatepicker
             name={`${getPrefix(index)}.periodeFom`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
             validate={[
               required,
@@ -126,8 +128,9 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
             onChange={triggerValidationOnChange}
           />
 
-          <Datepicker
+          <RhfDatepicker
             name={`${getPrefix(index)}.periodeTom`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
             validate={[
               required,
@@ -138,17 +141,19 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
             onChange={triggerValidationOnChange}
           />
 
-          <SelectField
+          <RhfSelect
             name={`${getPrefix(index)}.arsakForUtsettelse`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' })}
             selectValues={mapTyper(utsettelseReasons)}
             validate={[required]}
             onChange={triggerValidationOnChange}
           />
 
-          <SelectField
-            label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
+          <RhfSelect
             name={`${getPrefix(index)}.erArbeidstaker`}
+            control={control}
+            label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
             selectValues={[
               <option value="true" key="true">
                 {intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}

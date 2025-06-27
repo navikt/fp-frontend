@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { CheckboxPanel } from '@navikt/ft-form-hooks';
+import { RhfCheckboxGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { NaringsvirksomhetType } from '@navikt/fp-kodeverk';
@@ -43,7 +43,7 @@ interface Props {
  */
 export const VirksomhetTypeNaringPanel = ({ readOnly, alleKodeverk, index }: Props) => {
   return (
-    <CheckboxPanel
+    <RhfCheckboxGroup
       label={<FormattedMessage id="Registrering.VirksomhetNaeringTypePanel.Title" />}
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.typeVirksomhet`}
       validate={[required]}

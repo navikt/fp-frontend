@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, Label, Link, Modal, VStack } from '@navikt/ds-react';
-import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
@@ -172,8 +172,9 @@ export const HenleggBehandlingModal = ({
         </Modal.Header>
         <Modal.Body>
           <VStack gap="4">
-            <SelectField
+            <RhfSelect
               name="årsakKode"
+              control={formMethods.control}
               className={styles.selectWidth}
               label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
               validate={[required]}
@@ -183,16 +184,18 @@ export const HenleggBehandlingModal = ({
                 </option>
               ))}
             />
-            <TextAreaField
+            <RhfTextarea
               name="begrunnelse"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'HenleggBehandlingModal.BegrunnelseField' })}
               validate={[required, maxLength1500, hasValidText]}
               maxLength={1500}
             />
             {showHenleggelseFritekst(behandlingType, årsakKode) && (
               <div className={styles.fritekstTilBrevTextArea}>
-                <TextAreaField
+                <RhfTextarea
                   name="fritekst"
+                  control={formMethods.control}
                   label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
                   validate={[required, hasValidText]}
                   maxLength={2000}

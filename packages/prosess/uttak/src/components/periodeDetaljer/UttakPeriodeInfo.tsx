@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
-import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, dateFormat, periodFormat } from '@navikt/ft-utils';
 
@@ -184,19 +184,19 @@ export const UttakPeriodeInfo = ({
           <div>{isReadOnly && isInnvilgetText(valgtPeriode, alleKodeverk)}</div>
           <div>
             {harSoktOmFlerbarnsdager && (
-              <CheckboxField
+              <RhfCheckbox
                 name="flerbarnsdager"
                 label={intl.formatMessage({ id: 'UttakActivity.Flerbarnsdager' })}
                 readOnly={isReadOnly}
               />
             )}
-            <CheckboxField
+            <RhfCheckbox
               key="samtidigUttak"
               name="samtidigUttak"
               label={intl.formatMessage({ id: 'UttakActivity.SamtidigUttak' })}
               readOnly={isReadOnly}
               validate={[
-                // @ts-expect-error FIX type i CheckboxField
+                // @ts-expect-error FIX type i RhfCheckbox
                 (samtidigUttak: boolean) =>
                   erOppfylt && samtidigUttak !== true && valgtInnvilgelsesÅrsak === '2038'
                     ? intl.formatMessage({ id: 'ValidationMessage.SamtidigUttakErObligatorisk' })
@@ -205,7 +205,7 @@ export const UttakPeriodeInfo = ({
             />
             {erSamtidigUttak && (
               <HStack gap="2">
-                <NumberField
+                <RhfNumericField
                   name="samtidigUttaksprosent"
                   className={styles.numberFieldLength}
                   readOnly={isReadOnly}
@@ -251,7 +251,7 @@ export const UttakPeriodeInfo = ({
           <Detail>
             <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
           </Detail>
-          <SelectField
+          <RhfSelect
             name="oppholdArsak"
             selectValues={mapPeriodeTyper(oppholdArsakTyper)}
             label=""

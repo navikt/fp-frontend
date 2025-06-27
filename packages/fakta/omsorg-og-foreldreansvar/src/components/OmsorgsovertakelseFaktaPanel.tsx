@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label } from '@navikt/ds-react';
-import { Datepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
@@ -50,7 +50,7 @@ export const OmsorgsovertakelseFaktaPanel = ({
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
       <HStack gap="10">
-        <Datepicker
+        <RhfDatepicker
           name="omsorgsovertakelseDato"
           label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
           validate={[required, hasValidDate]}
@@ -58,7 +58,7 @@ export const OmsorgsovertakelseFaktaPanel = ({
           isEdited={isNotEqual(soknad.omsorgsovertakelseDato, familiehendelse.omsorgsovertakelseDato)}
         />
         {erAksjonspunktForeldreansvar && (
-          <Datepicker
+          <RhfDatepicker
             name="foreldreansvarDato"
             label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' })}
             validate={[required, hasValidDate]}

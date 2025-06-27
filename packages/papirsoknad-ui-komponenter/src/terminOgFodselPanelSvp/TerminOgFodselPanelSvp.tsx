@@ -1,7 +1,7 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { Datepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -47,7 +47,7 @@ const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato:
  * Form som brukes for registrere termin og fødsel i papirsøknad.
  */
 export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
-  const { getValues, watch } = useFormContext<FormValues>();
+  const { getValues, watch, control } = useFormContext<FormValues>();
 
   const erBarnetFodt = watch('erBarnetFodt');
 
@@ -57,8 +57,9 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
         <Heading size="small">{intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}</Heading>
         <ErBarnetFodt readOnly={readOnly} />
         {erBarnetFodt && (
-          <Datepicker
+          <RhfDatepicker
             name="foedselsDato"
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Fodselsdato' })}
             isReadOnly={readOnly}
             fromDate={minFodselsdato().toDate()}
@@ -66,8 +67,9 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
             validate={[required, hasValidDate, dateBeforeOrEqualToToday, dateAfterOrEqual(minFodselsdato())]}
           />
         )}
-        <Datepicker
+        <RhfDatepicker
           name="termindato"
+          control={control}
           label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Termindato' })}
           isReadOnly={readOnly}
           fromDate={minTermindato().toDate()}

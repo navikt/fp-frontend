@@ -1,6 +1,6 @@
 import { useFormContext } from 'react-hook-form';
 
-import { TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl, decodeHtmlEntity, formaterFritekst } from '@navikt/ft-utils';
 
@@ -45,14 +45,18 @@ export const ProsessStegBegrunnelseTextField = ({
   useAllWidth = false,
   notRequired = false,
 }: Props) => {
+  // TODO (TOR) Manglar type
   const {
     formState: { isDirty },
+    control,
   } = useFormContext();
+
   const isRequiredFn = notRequired ? () => false : getIsBegrunnelseRequired(isDirty);
   return (
     <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>
-      <TextAreaField
+      <RhfTextarea
         name="begrunnelse"
+        control={control}
         label={text ?? intl.formatMessage({ id: getBegrunnelseTextCode(readOnly) })}
         validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
         maxLength={2000}

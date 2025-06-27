@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
-import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
@@ -141,7 +141,7 @@ export const Messages = ({
     return null;
   }
 
-  const { formState } = formMethods;
+  const { formState, control } = formMethods;
 
   const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
     if (brevmalkode && fritekst) {
@@ -166,8 +166,9 @@ export const Messages = ({
       setDataOnUnmount={setMeldingFormData}
     >
       <VStack gap="4">
-        <SelectField
+        <RhfSelect
           name="brevmalkode"
+          control={control}
           label={intl.formatMessage({ id: 'Messages.Template' })}
           validate={[required]}
           selectValues={behandling.brevmaler.map(mal => (
@@ -178,8 +179,9 @@ export const Messages = ({
           className={styles.bredde}
         />
         {erVarselOmRevurdering && (
-          <SelectField
+          <RhfSelect
             name="arsakskode"
+            control={control}
             label={intl.formatMessage({ id: 'Messages.Årsak' })}
             validate={[required]}
             selectValues={filtrerteRevurderingVarslingArsaker.map(cause => (
@@ -191,8 +193,9 @@ export const Messages = ({
           />
         )}
         {showFritekst(brevmalkode, arsakskode) && (
-          <TextAreaField
+          <RhfTextarea
             name="fritekst"
+            control={control}
             label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
             validate={[required, erVarselOmRevurdering ? maxLength10000 : maxLength4000, minLength3, hasValidText]}
             maxLength={erVarselOmRevurdering ? 10000 : 4000}

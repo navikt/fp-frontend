@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Modal as NavModal, VStack } from '@navikt/ds-react';
-import { Form, InputField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import type { SaksbehandlerProfil } from '../typer/saksbehandlerProfilTsType';
@@ -92,8 +92,9 @@ export const FlyttReservasjonModal = ({
             onSubmit={(formValues: SøkFormValues) => hentSaksbehandler(formValues.brukerIdent)}
           >
             <HStack gap="4" align="end">
-              <InputField
+              <RhfTextField
                 name="brukerIdent"
+                control={søkFormMethods.control}
                 label={intl.formatMessage({ id: 'FlyttReservasjonModal.Brukerident' })}
                 validate={[required, minLength7, maxLength7]}
                 autoFocus
@@ -120,8 +121,9 @@ export const FlyttReservasjonModal = ({
               });
             }}
           >
-            <TextAreaField
+            <RhfTextarea
               name="begrunnelse"
+              control={lagreFormMethods.control}
               label={intl.formatMessage({ id: 'FlyttReservasjonModal.Begrunn' })}
               validate={[required, maxLength500, minLength3, hasValidText]}
               maxLength={500}

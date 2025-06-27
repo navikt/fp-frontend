@@ -1,5 +1,5 @@
 import { Heading, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
@@ -23,7 +23,7 @@ export const DekningsgradIndex = ({ readOnly }: Props) => (
   <BorderBox>
     <VStack gap="4">
       <Heading size="small">{intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}</Heading>
-      <RadioGroupPanel
+      <RhfRadioGroup
         name="dekningsgrad"
         validate={[required]}
         isReadOnly={readOnly}

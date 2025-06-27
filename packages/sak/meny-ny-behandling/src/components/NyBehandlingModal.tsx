@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
-import { CheckboxField, Form, SelectField } from '@navikt/ft-form-hooks';
+import { Form, RhfCheckbox, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -199,22 +199,25 @@ export const NyBehandlingModal = ({
         </Modal.Header>
         <Modal.Body>
           <VStack gap="4">
-            <SelectField
+            <RhfSelect
               name="behandlingType"
+              control={formMethods.control}
               label=""
               validate={[required]}
               selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
               className={styles.typeBredde}
             />
             {valgtBehandlingTypeKode === BehandlingType.FORSTEGANGSSOKNAD && (
-              <CheckboxField
+              <RhfCheckbox
                 name="nyBehandlingEtterKlage"
+                control={formMethods.control}
                 label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
               />
             )}
             {behandlingArsakTyper.length > 0 && (
-              <SelectField
+              <RhfSelect
                 name="behandlingArsakType"
+                control={formMethods.control}
                 label=""
                 hideLabel
                 validate={[required]}

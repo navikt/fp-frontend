@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
@@ -195,8 +195,9 @@ export const ValgtAktivitetForm = ({
             ferdiglignetNæring={ferdiglignetNæring}
           />
           {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="erGodkjent"
+              control={formMethods.control}
               hideLegend
               validate={[required]}
               isReadOnly={readOnly}
@@ -215,8 +216,9 @@ export const ValgtAktivitetForm = ({
               ]}
             />
           )}
-          <TextAreaField
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
             label={<FormattedMessage id={finnBegrunnelseLabel(erGodkjent, erEndret, readOnly, harAksjonspunkt)} />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}

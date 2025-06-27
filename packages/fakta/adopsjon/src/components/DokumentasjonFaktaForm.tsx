@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { Datepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { diff } from '@navikt/ft-utils';
@@ -49,7 +49,7 @@ export const DokumentasjonFaktaForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FormValues>();
   const fodselsdatoer = watch('fodselsdatoer') ?? {};
   const omsorgsovertakelseDato = watch('omsorgsovertakelseDato');
   const barnetsAnkomstTilNorgeDato = watch('barnetsAnkomstTilNorgeDato');
@@ -62,8 +62,9 @@ export const DokumentasjonFaktaForm = ({
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
     >
       <VStack gap="4" className={styles.container}>
-        <Datepicker
+        <RhfDatepicker
           name="omsorgsovertakelseDato"
+          control={control}
           label={
             erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
               ? intl.formatMessage({ id: 'DokumentasjonFaktaForm.Stebarnsadopsjon' })
@@ -74,8 +75,9 @@ export const DokumentasjonFaktaForm = ({
           isEdited={isNotEqual(soknad.omsorgsovertakelseDato, gjeldendeFamiliehendelse.omsorgsovertakelseDato)}
         />
         {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
-          <Datepicker
+          <RhfDatepicker
             name="barnetsAnkomstTilNorgeDato"
+            control={control}
             label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
             validate={[hasValidDate]}
             isReadOnly={readOnly}
@@ -84,7 +86,7 @@ export const DokumentasjonFaktaForm = ({
         )}
         {Object.keys(fodselsdatoer).map((id, i) => (
           <HStack gap="4" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
-            <Datepicker
+            <RhfDatepicker
               name={`fodselsdatoer.${id}`}
               label={intl.formatMessage(
                 {

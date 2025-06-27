@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -88,7 +88,7 @@ export const OmsorgOgAdopsjonPanel = ({
           />
         </Heading>
         {isForeldrepengerFagsak && familieHendelseType === FamilieHendelseType.ADOPSJON && (
-          <RadioGroupPanel
+          <RhfRadioGroup
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
             label={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
             validate={[required]}
@@ -107,8 +107,9 @@ export const OmsorgOgAdopsjonPanel = ({
             ]}
           />
         )}
-        <Datepicker
+        <RhfDatepicker
           name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}
+          control={control}
           label={formatMessage({
             id:
               familieHendelseType === FamilieHendelseType.ADOPSJON
@@ -120,15 +121,16 @@ export const OmsorgOgAdopsjonPanel = ({
         />
         <HStack gap="4">
           {familieHendelseType === FamilieHendelseType.ADOPSJON && (
-            <Datepicker
+            <RhfDatepicker
               name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
               label={formatMessage({ id: 'Registrering.Adopsjon.Ankomstdato' })}
               isReadOnly={readOnly}
               validate={[hasValidDate]}
             />
           )}
-          <InputField
+          <RhfTextField
             name={`${OMSORG_NAME_PREFIX}.antallBarn`}
+            control={control}
             label={formatMessage({ id: 'Registrering.Adopsjon.AntallBarn' })}
             readOnly={readOnly}
             className={styles.barnInput}
@@ -146,8 +148,9 @@ export const OmsorgOgAdopsjonPanel = ({
         </HStack>
         {fields.map((field, index) => (
           <React.Fragment key={field.id}>
-            <Datepicker
+            <RhfDatepicker
               name={`${OMSORG_NAME_PREFIX}.foedselsDato.${index}.dato`}
+              control={control}
               isReadOnly={readOnly}
               validate={
                 familieHendelseType === FamilieHendelseType.ADOPSJON

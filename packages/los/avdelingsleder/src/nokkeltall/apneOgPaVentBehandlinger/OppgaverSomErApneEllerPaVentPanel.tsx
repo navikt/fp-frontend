@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { CheckboxField, Form } from '@navikt/ft-form-hooks';
+import { Form, RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
@@ -39,6 +39,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
     {},
   );
 
+  // TODO (TOR) Mangler typing for useForm
   const formMethods = useForm({
     defaultValues: lagredeVerdier ?? formDefaultValues,
   });
@@ -54,7 +55,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
         </Label>
         <HStack gap="4">
           {filtrerteBehandlingstyper.map(type => (
-            <CheckboxField key={type.kode} name={type.kode} label={type.navn} />
+            <RhfCheckbox key={type.kode} name={type.kode} control={formMethods.control} label={type.navn} />
           ))}
         </HStack>
         <OppgaverSomErApneEllerPaVentGraf
