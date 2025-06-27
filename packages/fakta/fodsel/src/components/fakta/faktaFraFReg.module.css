@@ -1,0 +1,9 @@
+.grid {
+  div:first-child {
+    width: 30px;
+  }
+
+  div:not(:first-child) {
+    width: 100px;
+  }
+}

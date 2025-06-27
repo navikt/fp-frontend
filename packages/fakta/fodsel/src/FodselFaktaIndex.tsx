@@ -2,7 +2,8 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Fødsel } from '@navikt/fp-types';
+import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 
 import { FodselInfoPanel } from './components/FodselInfoPanel';
 
@@ -11,10 +12,8 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  soknad: Soknad;
-  familiehendelse: FamilieHendelseSamling;
-  soknadOriginalBehandling?: Soknad;
-  familiehendelseOriginalBehandling?: FamilieHendelse;
+  fødsel: Fødsel;
+  terminbekreftelseDokument: DokumentLinkReferanse | undefined;
   submittable: boolean;
 }
 

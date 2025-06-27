@@ -1,0 +1,18 @@
+.tableNoBorder {
+  width: fit-content;
+
+  & td,
+  th {
+    align-content: start;
+    border: none;
+  }
+
+  & tr th:first-child,
+  tr td:first-child {
+    padding-left: 0;
+  }
+
+  .rowDescription {
+    align-content: center;
+  }
+}

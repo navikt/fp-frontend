@@ -1,81 +1,25 @@
-import { type ReactElement } from 'react';
-import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { HGrid, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
-import { FodselSammenligningIndex } from '@navikt/fp-prosess-fakta-fodsel-sammenligning';
-import type { Aksjonspunkt, AvklartBarn, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
-import type { BekreftTerminbekreftelseAp, SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { Fødsel } from '@navikt/fp-types';
+import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
-import { type FormValues as SjekkFodselDokFormValues, SjekkFodselDokForm } from './SjekkFodselDokForm';
-import { type FormValues as TermindatoFormValues, TermindatoFaktaForm } from './TermindatoFaktaForm';
+import { SjekkManglendeFødselForm } from './aksjonspunkt/SjekkManglendeFødselForm';
+import { SjekkTerminbekreftelseForm } from './aksjonspunkt/SjekkTerminbekreftelseForm';
+import { FaktaFraFReg } from './fakta/FaktaFraFReg';
+import { FaktaFraSøknad } from './fakta/FaktaFraSøknad';
+import { Situasjon } from './fakta/Situasjon';
 
 const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktKode;
 
-const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
-  const helpTexts: ReactElement[] = [];
-  if (hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkter)) {
-    helpTexts.push(
-      <FormattedMessage key="KontrollerMotTerminbekreftelsen" id="FodselInfoPanel.KontrollerMotTerminbekreftelsen" />,
-    );
-  }
-  if (hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkter)) {
-    helpTexts.push(
-      <FormattedMessage
-        key="KontrollerMotFodselsdokumentasjon"
-        id="FodselInfoPanel.KontrollerMotFodselsdokumentasjon"
-      />,
-    );
-  }
-  return helpTexts;
-};
-
-type FormValues = TermindatoFormValues & SjekkFodselDokFormValues;
-
-const buildInitialValues = (
-  soknad: Soknad,
-  familieHendelse: FamilieHendelseSamling,
-  terminbekreftelseAp?: Aksjonspunkt,
-  manglendeFødselAp?: Aksjonspunkt,
-) => ({
-  ...(terminbekreftelseAp
-    ? TermindatoFaktaForm.buildInitialValues(soknad, familieHendelse.gjeldende, terminbekreftelseAp)
-    : {}),
-  ...(manglendeFødselAp
-    ? SjekkFodselDokForm.buildInitialValues(soknad, familieHendelse.gjeldende, manglendeFødselAp)
-    : {}),
-});
-
-type AksjonspunktData = Array<BekreftTerminbekreftelseAp | SjekkManglendeFodselAp>;
-
-const transformValues = (
-  values: FormValues,
-  avklartBarn: AvklartBarn[],
-  terminbekreftelseAp?: Aksjonspunkt,
-  manglendeFødselAp?: Aksjonspunkt,
-): AksjonspunktData => {
-  const aksjonspunkterSomSkalBekreftes = [];
-  if (terminbekreftelseAp) {
-    aksjonspunkterSomSkalBekreftes.push(TermindatoFaktaForm.transformValues(values));
-  }
-  if (manglendeFødselAp) {
-    aksjonspunkterSomSkalBekreftes.push(SjekkFodselDokForm.transformValues(values, avklartBarn));
-  }
-  return aksjonspunkterSomSkalBekreftes;
-};
-
 interface Props {
-  familiehendelse: FamilieHendelseSamling;
+  fødsel: Fødsel;
   submittable: boolean;
-  soknad: Soknad;
-  soknadOriginalBehandling?: Soknad;
-  familiehendelseOriginalBehandling?: FamilieHendelse;
+  terminbekreftelseDokument: DokumentLinkReferanse | undefined;
 }
 
 /**
@@ -83,92 +27,37 @@ interface Props {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
-export const FodselInfoPanel = ({
-  submittable,
-  soknad,
-  soknadOriginalBehandling,
-  familiehendelseOriginalBehandling,
-  familiehendelse,
-}: Props) => {
-  const {
-    submitCallback,
-    behandling,
-    aksjonspunkterForPanel,
-    harÅpneAksjonspunkter,
-    alleMerknaderFraBeslutter,
-    isReadOnly,
-  } = usePanelDataContext<AksjonspunktData>();
-
-  const avklartBarn = familiehendelse?.register?.avklartBarn ?? [];
-  const termindato = familiehendelse?.gjeldende?.termindato ?? undefined;
-  const vedtaksDatoSomSvangerskapsuke = familiehendelse?.gjeldende?.vedtaksDatoSomSvangerskapsuke ?? undefined;
+export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokument }: Props) => {
+  const { aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === TERMINBEKREFTELSE);
   const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
-
-  const formMethods = useForm<FormValues>({
-    defaultValues:
-      mellomlagretFormData ?? buildInitialValues(soknad, familiehendelse, terminbekreftelseAp, manglendeFødselAp),
-  });
-
   return (
-    <VStack gap="2">
+    <VStack gap="4">
       {harÅpneAksjonspunkter && (
-        <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
+        <AksjonspunktHelpTextHTML>
+          <>
+            {terminbekreftelseAp && <FormattedMessage id="FodselInfoPanel.KontrollerTerminbekreftelsen" />}
+            {manglendeFødselAp && <FormattedMessage id="FodselInfoPanel.KontrollerFodsel" />}
+          </>
+        </AksjonspunktHelpTextHTML>
       )}
-      <Form
-        formMethods={formMethods}
-        onSubmit={values =>
-          submitCallback(transformValues(values, avklartBarn, terminbekreftelseAp, manglendeFødselAp))
-        }
-        setDataOnUnmount={setMellomlagretFormData}
-      >
-        <VStack gap="2">
-          {hasAksjonspunkt(TERMINBEKREFTELSE, aksjonspunkterForPanel) && (
-            <TermindatoFaktaForm
-              readOnly={isReadOnly}
-              submittable={submittable}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              soknad={soknad}
-              gjeldendeFamiliehendelse={familiehendelse.gjeldende}
-            />
-          )}
-          {hasAksjonspunkt(SJEKK_MANGLENDE_FODSEL, aksjonspunkterForPanel) && (
-            <SjekkFodselDokForm
-              behandlingType={behandling.type}
-              readOnly={isReadOnly}
-              submittable={submittable}
-              soknadOriginalBehandling={soknadOriginalBehandling}
-              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-              soknad={soknad}
-              avklartBarn={avklartBarn}
-              familiehendelse={familiehendelse}
-            />
-          )}
-          {aksjonspunkterForPanel.length !== 0 && !isReadOnly && (
-            <FaktaSubmitButton
-              isSubmittable={submittable}
-              isReadOnly={isReadOnly}
-              isSubmitting={formMethods.formState.isSubmitting}
-              isDirty={formMethods.formState.isDirty}
-            />
-          )}
-          {aksjonspunkterForPanel.length === 0 && (
-            <FodselSammenligningIndex
-              behandlingsTypeKode={behandling.type}
-              avklartBarn={avklartBarn}
-              termindato={termindato}
-              vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-              soknad={soknad}
-              soknadOriginalBehandling={soknadOriginalBehandling}
-              familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-            />
-          )}
-        </VStack>
-      </Form>
+
+      <Situasjon gjeldende={fødsel.gjeldende} />
+
+      <HGrid columns={2} gap="4">
+        <FaktaFraSøknad søknad={fødsel.søknad} terminbekreftelseDokument={terminbekreftelseDokument} />
+        <FaktaFraFReg register={fødsel.register} />
+      </HGrid>
+
+      {terminbekreftelseAp && (
+        <SjekkTerminbekreftelseForm submittable={submittable} fødsel={fødsel} aksjonspunkt={terminbekreftelseAp} />
+      )}
+
+      {manglendeFødselAp && (
+        <SjekkManglendeFødselForm submittable={submittable} fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />
+      )}
     </VStack>
   );
 };
