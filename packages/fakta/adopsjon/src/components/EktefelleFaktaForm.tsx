@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
@@ -41,7 +41,7 @@ export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMer
         <div>
           <hr className={styles.hr} />
         </div>
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="ektefellesBarn"
           hideLegend
           validate={[required]}

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -96,15 +96,17 @@ export const AvklarFaresignalerForm = ({
       onSubmit={(values: Values) => submitCallback && submitCallback(transformValues(values))}
     >
       <VStack gap="4">
-        <TextAreaField
+        <RhfTextarea
           name={begrunnelseFieldName}
+          control={formMethods.control}
           label={<FormattedMessage id="Risikopanel.Forms.Vurdering" />}
           validate={[required, maxLength1500, minLength3, hasValidText]}
           maxLength={1500}
           readOnly={readOnly}
         />
-        <RadioGroupPanel
+        <RhfRadioGroup
           name={VURDERING_HOVEDKATEGORI}
+          control={formMethods.control}
           label={<FormattedMessage id="Risikopanel.Form.Resultat" />}
           validate={[required]}
           isReadOnly={readOnly}
@@ -117,8 +119,9 @@ export const AvklarFaresignalerForm = ({
                 <div style={{ paddingTop: '15px' }}>
                   {harValgtReelle && (
                     <ArrowBox alignOffset={20}>
-                      <RadioGroupPanel
+                      <RhfRadioGroup
                         name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
+                        control={formMethods.control}
                         validate={[required]}
                         isReadOnly={readOnly}
                         radios={underkategoriFaresignalVurderinger.map(vurdering => ({

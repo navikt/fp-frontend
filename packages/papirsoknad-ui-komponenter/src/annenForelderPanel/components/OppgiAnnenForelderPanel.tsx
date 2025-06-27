@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { CheckboxField, InputField, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfRadioGroup, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   harSammeFodselsnummerSomSoker,
   hasValidFodselsnummer,
@@ -40,6 +40,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
 
   const {
     watch,
+    control,
     trigger,
     formState: { isSubmitted },
   } = useFormContext<AnnenForelderFormValues>();
@@ -52,8 +53,9 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
 
   return (
     <>
-      <InputField
+      <RhfTextField
         name={`${ANNEN_FORELDER_NAME_PREFIX}.foedselsnummer`}
+        control={control}
         label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
         parse={value => (value ? value.toString().replace(/\s/g, '') : value)}
         readOnly={readOnly}
@@ -70,8 +72,9 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
         }
         disabled={kanIkkeOppgiAnnenForelder}
       />
-      <CheckboxField
+      <RhfCheckbox
         name={`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`}
+        control={control}
         label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent' })}
         readOnly={readOnly}
         onChange={() => (isSubmitted ? trigger() : undefined)}
@@ -82,8 +85,9 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
             <Heading size="small">
               {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
             </Heading>
-            <RadioGroupPanel
+            <RhfRadioGroup
               name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
+              control={control}
               hideLegend
               validate={[required]}
               isReadOnly={readOnly}
@@ -100,8 +104,9 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
             />
             {kanIkkeOppgiBegrunnelse?.arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
               <>
-                <SelectField
+                <RhfSelect
                   name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
+                  control={control}
                   label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
                   selectValues={filtrerLandOgLagOptions(sorterteLand)}
                   validate={[required]}
@@ -109,8 +114,9 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                   readOnly={readOnly}
                 />
 
-                <InputField
+                <RhfTextField
                   name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
+                  control={control}
                   label={formatMessage({
                     id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer',
                   })}

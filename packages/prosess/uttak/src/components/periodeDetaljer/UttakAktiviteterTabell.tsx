@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Table } from '@navikt/ds-react';
-import { NumberField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal,
   hasValidInteger,
@@ -228,8 +228,9 @@ export const UttakAktiviteterTabell = ({
                   </Table.DataCell>
                   <Table.DataCell>
                     <div className={styles.selectStonad}>
-                      <SelectField
+                      <RhfSelect
                         name={`aktiviteter.${index}.stønadskontoType`}
+                        control={control}
                         selectValues={periodeTypeOptions}
                         hideLabel
                         label=""
@@ -241,8 +242,9 @@ export const UttakAktiviteterTabell = ({
                   <Table.DataCell>
                     <HStack gap="2" align="center">
                       <span className={styles.weekPosition}>
-                        <NumberField
+                        <RhfNumericField
                           name={`aktiviteter.${index}.weeks`}
+                          control={control}
                           className={styles.numberWidth}
                           readOnly={isReadOnly}
                           validate={[
@@ -254,8 +256,9 @@ export const UttakAktiviteterTabell = ({
                         />
                       </span>
                       {isReadOnly ? <div>/</div> : <div className={styles.verticalCharPlacementInTable}>/</div>}
-                      <NumberField
+                      <RhfNumericField
                         name={`aktiviteter.${index}.days`}
+                        control={control}
                         className={styles.numberWidth}
                         readOnly={isReadOnly}
                         validate={[
@@ -272,8 +275,9 @@ export const UttakAktiviteterTabell = ({
                   </Table.DataCell>
                   <Table.DataCell>
                     <div className={styles.utbetalingsgrad}>
-                      <NumberField
+                      <RhfNumericField
                         name={`aktiviteter.${index}.utbetalingsgrad`}
+                        control={control}
                         validate={[
                           required,
                           minValue0,

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal } from '@navikt/ds-react';
-import { CheckboxPanel, Form } from '@navikt/ft-form-hooks';
+import { Form, RhfCheckboxGroup } from '@navikt/ft-form-hooks';
 
 import type { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
@@ -57,7 +57,7 @@ export const EndreUtlandModal = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <CheckboxPanel
+          <RhfCheckboxGroup
             name="fagsakMarkeringer"
             hideLegend
             checkboxes={fagsakMarkeringerKodeverk.map(markering => ({

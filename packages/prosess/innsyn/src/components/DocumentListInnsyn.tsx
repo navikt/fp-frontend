@@ -3,7 +3,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from '@navikt/aksel-icons';
 import { BodyShort, Heading, Table } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
@@ -99,7 +99,7 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
             return (
               <Table.Row key={dokId}>
                 <Table.DataCell className={styles.checkboxCol}>
-                  <CheckboxField label={noLabelHack()} name={`dokument_${dokId}`} disabled={readOnly} />
+                  <RhfCheckbox label={noLabelHack()} name={`dokument_${dokId}`} disabled={readOnly} />
                 </Table.DataCell>
                 <Table.DataCell hidden={readOnly}>{img}</Table.DataCell>
                 <Table.DataCell className={styles.linkCol}>

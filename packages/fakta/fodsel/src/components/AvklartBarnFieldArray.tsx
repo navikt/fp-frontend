@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import type { AvklartBarn } from '@navikt/fp-types';
@@ -43,14 +43,16 @@ export const AvklartBarnFieldArray = ({ readOnly }: Props) => {
       {(field, index, getRemoveButton = () => '-') => (
         <React.Fragment key={field.id}>
           <HStack gap="4" align="end">
-            <Datepicker
+            <RhfDatepicker
               name={`${FIELD_ARRAY_NAME}.${index}.fodselsdato`}
+              control={control}
               label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Title' })}
               validate={[hasValidDate, required, dateBeforeOrEqualToToday]}
               isReadOnly={readOnly}
             />
-            <Datepicker
+            <RhfDatepicker
               name={`${FIELD_ARRAY_NAME}.${index}.dodsdato`}
+              control={control}
               label={intl.formatMessage({ id: 'AvklartBarnFieldArray.Dodsdato' })}
               validate={[hasValidDate, dateBeforeOrEqualToToday]}
               isReadOnly={readOnly}

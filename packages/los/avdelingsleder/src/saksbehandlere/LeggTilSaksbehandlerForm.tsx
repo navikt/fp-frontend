@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, InputField } from '@navikt/ft-form-hooks';
+import { Form, RhfTextField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -82,8 +82,9 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
           <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTil" />
         </Label>
         <HStack gap="4">
-          <InputField
+          <RhfTextField
             name="brukerIdent"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.Brukerident' })}
             validate={[required]}
           />

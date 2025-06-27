@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -116,16 +116,18 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
       {(field, index, getRemoveButton) => (
         <React.Fragment key={field.id}>
           <HStack key={field.id} gap="4" paddingBlock="2">
-            <SelectField
+            <RhfSelect
               name={`${name}.${index}.land`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Country' })}
               selectValues={land}
               readOnly={readOnly}
               validate={[required]}
             />
 
-            <Datepicker
+            <RhfDatepicker
               name={`${name}.${index}.periodeFom`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
               isReadOnly={readOnly}
               validate={[
@@ -144,8 +146,9 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
-            <Datepicker
+            <RhfDatepicker
               name={`${name}.${index}.periodeTom`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
               isReadOnly={readOnly}
               validate={[

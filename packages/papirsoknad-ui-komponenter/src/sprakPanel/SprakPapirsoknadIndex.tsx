@@ -1,5 +1,5 @@
 import { Heading, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
@@ -26,7 +26,7 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => (
   <BorderBox>
     <VStack gap="4">
       <Heading size="small">{intl.formatMessage({ id: 'Registrering.Sprak' })}</Heading>
-      <RadioGroupPanel
+      <RhfRadioGroup
         name="språkkode"
         validate={[required]}
         isReadOnly={readOnly}

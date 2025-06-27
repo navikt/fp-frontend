@@ -2,7 +2,7 @@ import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, ErrorMessage, HStack, Label, VStack } from '@navikt/ds-react';
-import { CheckboxField, RadioGroupPanel, TextAreaField, useCustomValidation } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfRadioGroup, RhfTextarea, useCustomValidation } from '@navikt/ft-form-hooks';
 import { hasValidText, isRequiredMessage, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -35,7 +35,7 @@ type Props = {
 };
 
 export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, readOnly }: Props) => {
-  const { watch, getValues } = useFormContext<{
+  const { watch, getValues, control } = useFormContext<{
     aksjonspunktGodkjenning: AksjonspunktGodkjenningData[];
   }>();
 
@@ -49,11 +49,9 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
     c => c.aksjonspunktKode === aksjonspunktKode,
   );
 
-  const fieldIndex = `${FIELD_ARRAY_NAME}.${index}`;
-
   const feilmelding =
     !totrinnskontrollGodkjent && harIkkeValgtMinstEnFakta(getValues, index) ? isRequiredMessage() : undefined;
-  const errorMessage = useCustomValidation(`${fieldIndex}.faktagruppe`, feilmelding);
+  const errorMessage = useCustomValidation(`${FIELD_ARRAY_NAME}.${index}.faktagruppe`, feilmelding);
 
   if (!context || !totrinnskontrollAksjonspunkt) {
     return null;
@@ -61,8 +59,9 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
 
   return (
     <VStack gap="3">
-      <RadioGroupPanel
-        name={`${fieldIndex}.totrinnskontrollGodkjent`}
+      <RhfRadioGroup
+        name={`${FIELD_ARRAY_NAME}.${index}.totrinnskontrollGodkjent`}
+        control={control}
         isReadOnly={readOnly}
         isHorizontal
         isTrueOrFalseSelection
@@ -91,35 +90,41 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
               <VStack gap="1">
                 <HStack justify="space-between" style={{ width: '300px' }}>
                   <VStack gap="1">
-                    <CheckboxField
-                      name={`${fieldIndex}.feilFakta`}
+                    <RhfCheckbox
+                      name={`${FIELD_ARRAY_NAME}.${index}.feilFakta`}
+                      control={control}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Fakta" />}
                       readOnly={readOnly}
                     />
-                    <CheckboxField
-                      name={`${fieldIndex}.feilSkjønn`}
+                    <RhfCheckbox
+                      name={`${FIELD_ARRAY_NAME}.${index}.feilSkjønn`}
+                      control={control}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Skjønn" />}
                       readOnly={readOnly}
                     />
-                    <CheckboxField
-                      name={`${fieldIndex}.feilLov`}
+                    <RhfCheckbox
+                      name={`${FIELD_ARRAY_NAME}.${index}.feilLov`}
+                      control={control}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Lovanvendelse" />}
                       readOnly={readOnly}
                     />
                   </VStack>
                   <VStack gap="1">
-                    <CheckboxField
-                      name={`${fieldIndex}.feilUtredning`}
+                    <RhfCheckbox
+                      name={`${FIELD_ARRAY_NAME}.${index}.feilUtredning`}
+                      control={control}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Utredning" />}
                       readOnly={readOnly}
                     />
-                    <CheckboxField
-                      name={`${fieldIndex}.feilSaksflyt`}
+                    <RhfCheckbox
+                      name={`${FIELD_ARRAY_NAME}.${index}.feilSaksflyt`}
+                      control={control}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Saksflyt" />}
                       readOnly={readOnly}
                     />
-                    <CheckboxField
-                      name={`${fieldIndex}.feilBegrunnelse`}
+                    <RhfCheckbox
+                      name={`${FIELD_ARRAY_NAME}.${index}.feilBegrunnelse`}
+                      control={control}
                       label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
                       readOnly={readOnly}
                     />
@@ -127,8 +132,9 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
                 </HStack>
               </VStack>
               {errorMessage && <ErrorMessage size="small">{errorMessage}</ErrorMessage>}
-              <TextAreaField
-                name={`${fieldIndex}.besluttersBegrunnelse`}
+              <RhfTextarea
+                name={`${FIELD_ARRAY_NAME}.${index}.besluttersBegrunnelse`}
+                control={control}
                 label={<FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Begrunnelse" />}
                 validate={[required, minLength3, maxLength2000, hasValidText]}
                 readOnly={readOnly}

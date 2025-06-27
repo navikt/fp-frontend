@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
 
@@ -25,7 +25,7 @@ export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
   const utsettelseReasons = alleKodeverk['UtsettelseÅrsak'];
   const utsettelseKvoter = alleKodeverk['UttakPeriodeType'];
 
-  const { watch } = useFormContext<PermisjonFormValues>();
+  const { watch, control } = useFormContext<PermisjonFormValues>();
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
 
   return (
@@ -33,9 +33,10 @@ export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
       <Label>
         <FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" />
       </Label>
-      <CheckboxField
-        readOnly={readOnly}
+      <RhfCheckbox
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`}
+        control={control}
+        readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.Utsettelse.UtsettUttaket" />}
       />
       {skalUtsette && (

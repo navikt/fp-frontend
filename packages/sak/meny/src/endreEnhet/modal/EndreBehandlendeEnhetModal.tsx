@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
-import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 
 import styles from './endreBehandlendeEnhetModal.module.css';
@@ -72,15 +72,17 @@ export const EndreBehandlendeEnhetModal = ({
         </Modal.Header>
         <Modal.Body>
           <VStack gap="4">
-            <SelectField
+            <RhfSelect
               name="nyEnhet"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.NyEnhetField' })}
               validate={[required]}
               selectValues={selectOptions}
               className={styles.selectWidth}
             />
-            <TextAreaField
+            <RhfTextarea
               name="begrunnelse"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.BegrunnelseField' })}
               validate={[required, maxLength400, hasValidText]}
               maxLength={400}

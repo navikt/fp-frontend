@@ -1,7 +1,7 @@
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { Datepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
@@ -29,7 +29,7 @@ export const MottattDatoPapirsoknadIndex = ({ readOnly }: Props) => (
         <Heading size="small">
           <FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" />
         </Heading>
-        <Datepicker
+        <RhfDatepicker
           name="mottattDato"
           label={<FormattedMessage key="regDatoUnder" id="Registrering.Omsoknaden.MottattDato" />}
           fromDate={minMottattdato().toDate()}

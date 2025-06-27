@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -61,8 +61,9 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
         <Label size="small">
           <FormattedMessage id="FordelingAvBehandlingstypePanel.Fordeling" />
         </Label>
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="valgtYtelseType"
+          control={formMethods.control}
           isHorizontal
           radios={[
             {

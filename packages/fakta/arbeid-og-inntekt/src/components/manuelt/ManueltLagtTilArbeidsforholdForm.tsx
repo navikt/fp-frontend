@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashFillIcon } from '@navikt/aksel-icons';
 import { Button, Heading, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, InputField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -128,28 +128,32 @@ export const ManueltLagtTilArbeidsforholdForm = ({
           <HStack gap="4">
             {erOverstyrt && (
               <>
-                <InputField
+                <RhfTextField
                   name="arbeidsgiverNavn"
+                  control={formMethods.control}
                   label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
                   validate={[required]}
                   readOnly={isReadOnly || !erOverstyrt}
                 />
-                <Datepicker
+                <RhfDatepicker
                   name="fom"
+                  control={formMethods.control}
                   label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
                   validate={[required, hasValidDate]}
                   isReadOnly={isReadOnly || !erOverstyrt}
                 />
-                <Datepicker
+                <RhfDatepicker
                   name="tom"
+                  control={formMethods.control}
                   label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
                   validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                   isReadOnly={isReadOnly || !erOverstyrt}
                 />
               </>
             )}
-            <InputField
+            <RhfTextField
               name="stillingsprosent"
+              control={formMethods.control}
               label={<FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" />}
               parse={value => {
                 const parsedValue = parseInt(value.toString(), 10);
@@ -160,9 +164,10 @@ export const ManueltLagtTilArbeidsforholdForm = ({
               maxLength={3}
             />
           </HStack>
-          <TextAreaField
-            label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
+            label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly || !erOverstyrt}

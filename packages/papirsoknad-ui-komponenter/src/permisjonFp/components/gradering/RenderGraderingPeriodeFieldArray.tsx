@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
-import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfCheckbox, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -152,16 +152,18 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
 
         return (
           <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
-            <SelectField
+            <RhfSelect
               name={`${getPrefix(index)}.periodeForGradering`}
+              control={control}
               selectValues={mapKvoter(graderingKvoter)}
               label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
               validate={[required]}
             />
 
-            <Datepicker
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
+            <RhfDatepicker
               name={`${getPrefix(index)}.periodeFom`}
+              control={control}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
               validate={[
                 required,
                 hasValidDate,
@@ -171,9 +173,10 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
-            <Datepicker
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
+            <RhfDatepicker
               name={`${getPrefix(index)}.periodeTom`}
+              control={control}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
               validate={[
                 required,
                 hasValidDate,
@@ -182,48 +185,55 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            <InputField
-              label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
+            <RhfTextField
               name={`${getPrefix(index)}.prosentandelArbeid`}
+              control={control}
+              label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
               validate={[required, hasValidDecimal, maxValue100]}
               normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
             />
 
-            <InputField
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
+            <RhfTextField
               name={`${getPrefix(index)}.arbeidsgiverIdentifikator`}
+              control={control}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
               validate={[
                 getValiderArbeidsgiverIdNårRequired(getValues, index),
                 hasValidInteger,
                 validerAtArbeidsgiverIdErGyldig,
               ]}
             />
-            <SelectField
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
+            <RhfSelect
               name={`${getPrefix(index)}.arbeidskategoriType`}
+              control={control}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
               selectValues={mapArbeidskategori(arbeidskategoriTyper)}
               validate={[required]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
-            <CheckboxField
+            <RhfCheckbox
               name={`${getPrefix(index)}.skalGraderes`}
+              control={control}
               label={<FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />}
             />
 
-            <CheckboxField
-              readOnly={readOnly}
+            <RhfCheckbox
               name={`${getPrefix(index)}.flerbarnsdager`}
+              control={control}
+              readOnly={readOnly}
               label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
             />
 
-            <CheckboxField
+            <RhfCheckbox
               name={`${getPrefix(index)}.harSamtidigUttak`}
+              control={control}
               label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
             />
             {harSamtidigUttak && (
-              <InputField
+              <RhfTextField
                 name={`${getPrefix(index)}.samtidigUttaksprosent`}
+                control={control}
                 validate={[required, hasValidDecimal, maxValue100]}
                 label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
               />

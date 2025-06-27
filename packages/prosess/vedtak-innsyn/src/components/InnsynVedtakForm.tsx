@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
-import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
@@ -158,8 +158,9 @@ export const InnsynVedtakForm = ({
           </BodyShort>
         </VStack>
         {innsynResultatType !== InnsynResultatType.INNVILGET && (
-          <TextAreaField
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'InnsynVedtakForm.Fritekst' })}
             validate={[minLength3, maxLength1500, hasValidText]}
             maxLength={1500}

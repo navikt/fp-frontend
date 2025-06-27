@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, maxLength } from '@navikt/ft-form-validators';
 
 import { Landkode } from '@navikt/fp-kodeverk';
@@ -55,29 +55,33 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
     >
       {(field, index) => (
         <FieldArrayRow key={field.id} remove={remove} index={index} readOnly={readOnly}>
-          <InputField
+          <RhfTextField
             readOnly={readOnly}
+            control={control}
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.arbeidsgiver`}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Arbeidsgiver' })}
             validate={[maxLength50]}
             maxLength={99}
           />
 
-          <Datepicker
-            isReadOnly={readOnly}
+          <RhfDatepicker
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeFom`}
+            control={control}
+            isReadOnly={readOnly}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeFom' })}
             validate={[hasValidDate]}
           />
-          <Datepicker
-            isReadOnly={readOnly}
+          <RhfDatepicker
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.periodeTom`}
+            control={control}
+            isReadOnly={readOnly}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.periodeTom' })}
             validate={[hasValidDate]}
           />
-          <SelectField
-            readOnly={readOnly}
+          <RhfSelect
             name={`${INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME}.${index}.land`}
+            control={control}
+            readOnly={readOnly}
             label={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.Land' })}
             selectValues={countrySelectValues(sortedCountriesByName)}
             size="small"

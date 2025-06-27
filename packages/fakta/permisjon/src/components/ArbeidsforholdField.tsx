@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, HStack, Label, Popover, Tooltip, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
@@ -182,7 +182,7 @@ export const ArbeidsforholdField = ({
           {!inntektsmelding && inntektsposter && (
             <InntektsposterPanel inntektsposter={inntektsposter} skjæringstidspunkt={skjæringstidspunkt} />
           )}
-          <RadioGroupPanel
+          <RhfRadioGroup
             name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
             label={
               <HStack gap="2">

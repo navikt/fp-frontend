@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
@@ -78,8 +78,9 @@ export const InnhentDokOpptjeningUtlandPanel = ({
           erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
         >
           <VStack gap="4">
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="dokStatus"
+              control={formMethods.control}
               label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
               validate={[required]}
               isReadOnly={readOnly}

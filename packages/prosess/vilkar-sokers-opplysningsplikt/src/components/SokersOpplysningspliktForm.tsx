@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
@@ -245,8 +245,9 @@ export const SokersOpplysningspliktForm = ({
           )}
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
           {!isReadOnly && (
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="erVilkarOk"
+              control={formMethods.control}
               validate={[required]}
               isHorizontal
               isTrueOrFalseSelection

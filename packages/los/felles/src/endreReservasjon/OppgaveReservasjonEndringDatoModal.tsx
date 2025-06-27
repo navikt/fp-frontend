@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
-import { Datepicker, Form } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqualToToday, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -48,9 +48,10 @@ export const OppgaveReservasjonEndringDatoModal = ({
           </Heading>
         </NavModal.Header>
         <NavModal.Body>
-          <Datepicker
-            label=""
+          <RhfDatepicker
             name="reserverTil"
+            control={søkFormMethods.control}
+            label=""
             validate={[hasValidDate, dateAfterOrEqualToToday, dateBeforeOrEqual(thirtyDaysFromNow())]}
             fromDate={new Date()}
             toDate={thirtyDaysFromNow().toDate()}

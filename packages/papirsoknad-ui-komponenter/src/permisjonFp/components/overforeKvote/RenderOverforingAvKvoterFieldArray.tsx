@@ -2,7 +2,7 @@ import { type ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -75,8 +75,9 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
       {(field, index) => (
         <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
           <div>
-            <SelectField
+            <RhfSelect
               name={`${getPrefix(index)}.overforingArsak`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.AngiArsak' })}
               selectValues={selectValues}
               validate={[required]}
@@ -84,9 +85,10 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
             />
           </div>
 
-          <Datepicker
-            isReadOnly={readOnly}
+          <RhfDatepicker
             name={`${getPrefix(index)}.periodeFom`}
+            control={control}
+            isReadOnly={readOnly}
             validate={[
               required,
               hasValidDate,
@@ -101,9 +103,10 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
             onChange={() => (isSubmitted ? trigger() : undefined)}
           />
 
-          <Datepicker
-            isReadOnly={readOnly}
+          <RhfDatepicker
             name={`${getPrefix(index)}.periodeTom`}
+            control={control}
+            isReadOnly={readOnly}
             validate={[
               required,
               hasValidDate,

@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, HGrid, Label, VStack } from '@navikt/ds-react';
-import { SelectField } from '@navikt/ft-form-hooks';
+import { RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { EditedIcon, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
@@ -74,7 +74,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FormValues>();
 
   const vilkarType = watch('vilkarType');
 
@@ -101,8 +101,9 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
         >
           <VStack gap="4">
             {!readOnly && (
-              <SelectField
+              <RhfSelect
                 name="vilkarType"
+                control={control}
                 validate={[required]}
                 hideLabel
                 label=""

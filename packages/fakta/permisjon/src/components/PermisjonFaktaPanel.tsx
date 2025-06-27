@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
@@ -117,13 +117,14 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
             skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
             alleKodeverk={alleKodeverk}
           />
-          <TextAreaField
+          <RhfTextarea
+            name="begrunnelse"
+            control={formMethods.control}
             label={
               <Label size="small">
                 <FormattedMessage id="PermisjonFaktaPanel.Begrunn" />
               </Label>
             }
-            name="begrunnelse"
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}

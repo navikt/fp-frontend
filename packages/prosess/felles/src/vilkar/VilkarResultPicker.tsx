@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -49,7 +49,8 @@ export const VilkarResultPicker = ({
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
 }: Props) => {
-  const { getValues, watch } = useFormContext();
+  // TODO (TOR) useFormContext manglar typing
+  const { getValues, watch, control } = useFormContext();
   const erVilkarOk = watch('erVilkarOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
@@ -66,8 +67,9 @@ export const VilkarResultPicker = ({
       )}
 
       {(!readOnly || erVilkarOk === undefined) && (
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="erVilkarOk"
+          control={control}
           // @ts-expect-error Fiks denne!
           validate={radioValidators}
           isReadOnly={readOnly}
@@ -86,8 +88,9 @@ export const VilkarResultPicker = ({
         />
       )}
       {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
-        <SelectField
+        <RhfSelect
           name="avslagskode"
+          control={control}
           label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
           selectValues={sorterAvslagsArsaker(avslagsarsaker || []).map(aa => (
             <option key={aa.kode} value={aa.kode}>

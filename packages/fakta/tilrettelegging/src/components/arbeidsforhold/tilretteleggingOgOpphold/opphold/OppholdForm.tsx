@@ -2,7 +2,7 @@ import { FormProvider, useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -140,8 +140,9 @@ export const OppholdForm = ({
       >
         <VStack gap="10">
           <HStack gap="4">
-            <Datepicker
+            <RhfDatepicker
               name={`${index}.fom`}
+              control={formMethods.control}
               label={intl.formatMessage({
                 id: 'OppholdForm.FraOgMed',
               })}
@@ -153,8 +154,9 @@ export const OppholdForm = ({
               ]}
               isReadOnly={forVisning}
             />
-            <Datepicker
+            <RhfDatepicker
               name={`${index}.tom`}
+              control={formMethods.control}
               label={intl.formatMessage({
                 id: 'OppholdForm.TilOgMed',
               })}
@@ -168,8 +170,9 @@ export const OppholdForm = ({
               isReadOnly={forVisning}
             />
           </HStack>
-          <RadioGroupPanel
+          <RhfRadioGroup
             name={`${index}.oppholdÅrsak`}
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
             validate={[required]}
             isReadOnly={forVisning}

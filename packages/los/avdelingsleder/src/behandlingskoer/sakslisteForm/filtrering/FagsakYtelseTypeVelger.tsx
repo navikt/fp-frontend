@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { lagreSakslisteFagsakYtelseType, LosUrl } from '../../../data/fplosAvdelingslederApi';
@@ -39,7 +39,7 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
         <FormattedMessage id="FagsakYtelseTypeVelger.Stonadstype" />
       </Label>
       {alleFagsakYtelseTyper.map(fyt => (
-        <CheckboxField
+        <RhfCheckbox
           key={fyt.kode}
           name={fyt.kode}
           label={alleFagsakYtelseTyper.find(type => type.kode === fyt.kode)?.navn ?? ''}

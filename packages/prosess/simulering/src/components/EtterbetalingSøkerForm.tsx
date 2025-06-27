@@ -1,7 +1,7 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ReadMore, VStack } from '@navikt/ds-react';
-import { TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -46,7 +46,7 @@ export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
       <ReadMore header={<FormattedMessage id="Simulering.Etterbetaling.ReadMoreTittel" />} className={styles.readMore}>
         <FormattedMessage id="Simulering.Etterbetaling.ReadMoreInnhold" />
       </ReadMore>
-      <TextAreaField
+      <RhfTextarea
         name="begrunnelseEtterbetaling"
         label={intl.formatMessage({ id: 'Simulering.Etterbetaling.Vurdering' })}
         validate={[required, minLength3, maxLength1500, hasValidText]}

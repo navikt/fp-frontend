@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { Box } from '@navikt/ds-react';
-import { Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { maxValue, required } from '@navikt/ft-form-validators';
 
 import { TilretteleggingType } from '@navikt/fp-kodeverk';
@@ -27,7 +27,9 @@ interface Props {
 export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => {
   const intl = useIntl();
 
+  // TODO (TOR) Manglar type
   const { control } = useFormContext();
+
   const { fields, remove, append } = useFieldArray({
     control,
     name,
@@ -51,9 +53,10 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
       >
         {(field, index) => (
           <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
-            <SelectField
-              readOnly={readOnly}
+            <RhfSelect
               name={`${name}.${index}.tilretteleggingType`}
+              control={control}
+              readOnly={readOnly}
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' })}
               validate={[required]}
               selectValues={[
@@ -75,15 +78,17 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
               ]}
             />
 
-            <Datepicker
-              isReadOnly={readOnly}
+            <RhfDatepicker
               name={`${name}.${index}.dato`}
+              control={control}
+              isReadOnly={readOnly}
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.FraDato' })}
               validate={[required]}
             />
 
-            <InputField
+            <RhfTextField
               readOnly={readOnly}
+              control={control}
               name={`${name}.${index}.stillingsprosent`}
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.Stillingsprosent' })}
               validate={[required, maxValue3]}

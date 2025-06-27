@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Link, Tooltip, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -71,7 +71,7 @@ interface Props {
 export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, aksjonspunkt, fagsak }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FormValues>();
 
   const varseltekst = watch('varseltekst');
 
@@ -88,15 +88,17 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
 
   return (
     <VStack gap="10" align="start">
-      <TextAreaField
+      <RhfTextarea
         name="begrunnelse"
+        control={control}
         label={intl.formatMessage({ id: 'Simulering.vurdering' })}
         validate={[required, minLength3, maxLength1500, hasValidText]}
         maxLength={1500}
         readOnly={readOnly}
       />
-      <RadioGroupPanel
+      <RhfRadioGroup
         name="videreBehandling"
+        control={control}
         label={<FormattedMessage id="Simulering.videreBehandling" />}
         validate={[required]}
         isReadOnly={readOnly}
@@ -122,8 +124,9 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
                         <QuestionmarkDiamondIcon className={styles.helpTextImage} />
                       </Tooltip>
                     </HStack>
-                    <TextAreaField
+                    <RhfTextarea
                       name="varseltekst"
+                      control={control}
                       label={intl.formatMessage({ id: 'Simulering.fritekst' })}
                       validate={[required, minLength3, maxLength1500, hasValidText]}
                       maxLength={1500}

@@ -4,7 +4,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PencilFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -116,14 +116,16 @@ export const StartdatoForForeldrepengerperiodenForm = ({
             }
           >
             <VStack gap="4">
-              <Datepicker
+              <RhfDatepicker
                 name="startdatoFraSoknad"
+                control={formMethods.control}
                 label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
                 validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
                 isReadOnly={readOnly}
               />
-              <TextAreaField
+              <RhfTextarea
                 name="begrunnelse"
+                control={formMethods.control}
                 label={<FormattedMessage id="StartdatoForForeldrepengerperiodenForm.Vurdering" />}
                 validate={[required, minLength3, maxLength1500, hasValidText]}
                 maxLength={1500}

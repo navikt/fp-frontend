@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
@@ -34,7 +34,9 @@ export const SorteringVelger = ({
   erDynamiskPeriode,
 }: Props) => {
   const queryClient = useQueryClient();
-  const { resetField } = useFormContext();
+
+  // TODO (TOR) typing på useFormContext
+  const { resetField, control } = useFormContext();
 
   const { mutate: lagreSortering } = useMutation({
     mutationFn: (valuesToStore: { sorteringType: string }) =>
@@ -55,8 +57,9 @@ export const SorteringVelger = ({
   const koSorteringer = useLosKodeverk('KøSortering');
 
   return (
-    <RadioGroupPanel
+    <RhfRadioGroup
       name="sortering"
+      control={control}
       label={<FormattedMessage id="SorteringVelger.Sortering" />}
       onChange={sorteringType => {
         resetField('fra', { defaultValue: '' });

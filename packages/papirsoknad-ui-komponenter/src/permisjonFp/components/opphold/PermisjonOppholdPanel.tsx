@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
 
@@ -24,7 +24,7 @@ interface Props {
 export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
   const oppholdsReasons = alleKodeverk['OppholdÅrsak'];
 
-  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesOpphold }>();
+  const { watch, control } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesOpphold }>();
   const skalHaOpphold = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`) || false;
 
   return (
@@ -32,9 +32,10 @@ export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
       <Label>
         <FormattedMessage id="Registrering.Permisjon.Opphold.Title" />
       </Label>
-      <CheckboxField
-        readOnly={readOnly}
+      <RhfCheckbox
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`}
+        control={control}
+        readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.Opphold.OppholdUttaket" />}
       />
       {skalHaOpphold && <RenderOppholdPeriodeFieldArray oppholdsReasons={oppholdsReasons} readOnly={readOnly} />}

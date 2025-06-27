@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
-import { Form, InputField } from '@navikt/ft-form-hooks';
+import { Form, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
 
 const MIN_LENGTH_9 = minLength(9);
@@ -56,8 +56,9 @@ export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harS
               </BodyShort>
             </VStack>
             <HStack gap="2">
-              <InputField
+              <RhfTextField
                 name="journalpostId"
+                control={formMethods.control}
                 validate={[required, hasValidInteger, MIN_LENGTH_9]}
                 size="medium"
                 hideLabel

@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Detail, HStack, VStack } from '@navikt/ds-react';
-import { CheckboxField, Datepicker, InputField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { ArrowBox, DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -84,7 +84,8 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
     },
   });
 
-  const { watch } = useFormContext();
+  // TODO (TOR) Manglar typing for useFormContext
+  const { watch, control } = useFormContext();
   const fraVerdi = watch('fra');
   const tilVerdi = watch('til');
   const fomDatoVerdi = watch('fomDato');
@@ -117,8 +118,9 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
           {erDynamiskPeriode && (
             <HStack gap="4">
               <div>
-                <InputField
+                <RhfTextField
                   name="fra"
+                  control={control}
                   className={styles.dato}
                   label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
                   validate={[hasValidPosOrNegInteger]}
@@ -134,8 +136,9 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                 <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
               </Detail>
               <div>
-                <InputField
+                <RhfTextField
                   name="til"
+                  control={control}
                   className={styles.dato}
                   label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
                   validate={[hasValidPosOrNegInteger]}
@@ -154,8 +157,9 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
           )}
           {!erDynamiskPeriode && (
             <VStack gap="4">
-              <Datepicker
+              <RhfDatepicker
                 name="fomDato"
+                control={control}
                 label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
                 validate={[hasValidDate]}
                 onChange={lagreFomDatoDebounce}
@@ -163,16 +167,18 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
               <Detail>
                 <FormattedMessage id="SorteringVelger.Bindestrek" />
               </Detail>
-              <Datepicker
+              <RhfDatepicker
                 name="tomDato"
+                control={control}
                 label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
                 validate={[hasValidDate]}
                 onChange={lagreTomDatoDebounce}
               />
             </VStack>
           )}
-          <CheckboxField
+          <RhfCheckbox
             name="erDynamiskPeriode"
+            control={control}
             label={intl.formatMessage({ id: 'SorteringVelger.DynamiskPeriode' })}
             onChange={() => lagreSakslisteSorteringErDynamiskPeriode()}
           />

@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -50,7 +50,7 @@ export const TermindatoFaktaForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FormValues>();
 
   const termindato = watch('termindato');
   const utstedtdato = watch('utstedtdato');
@@ -69,22 +69,25 @@ export const TermindatoFaktaForm = ({
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.TERMINBEKREFTELSE]}
       >
         <HStack gap="4">
-          <Datepicker
+          <RhfDatepicker
             name="utstedtdato"
+            control={control}
             label={intl.formatMessage({ id: 'TermindatoFaktaForm.UtstedtDato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}
             isEdited={isNotEqual(soknad.utstedtdato, gjeldendeFamiliehendelse.utstedtdato)}
           />
-          <Datepicker
+          <RhfDatepicker
             name="termindato"
+            control={control}
             label={intl.formatMessage({ id: 'TermindatoFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}
             isEdited={isNotEqual(soknad.termindato, gjeldendeFamiliehendelse.termindato)}
           />
-          <InputField
+          <RhfTextField
             name="antallBarn"
+            control={control}
             label={intl.formatMessage({ id: 'TermindatoFaktaForm.AntallBarn' })}
             parse={value => {
               const parsedValue = parseInt(value.toString(), 10);

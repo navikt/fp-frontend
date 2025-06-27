@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { PencilIcon } from '@navikt/aksel-icons';
 import { Button, Checkbox, CheckboxGroup, Heading, HStack } from '@navikt/ds-react';
-import { InputField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
@@ -30,7 +30,7 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
         <>
           <HStack className={styles.inputBoks}>
             {harToggletFritekst && (
-              <InputField
+              <RhfTextField
                 name="journalpostTittel"
                 validate={[required, hasValidText]}
                 readOnly={readOnly}
@@ -39,7 +39,7 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
               />
             )}
             {!harToggletFritekst && (
-              <SelectField
+              <RhfSelect
                 readOnly={readOnly}
                 name="journalpostTittel"
                 label={undefined}

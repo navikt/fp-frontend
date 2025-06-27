@@ -1,6 +1,6 @@
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -14,7 +14,7 @@ interface Props {
 
 export const ErBarnetFodt = ({ readOnly }: Props) => (
   <RawIntlProvider value={intl}>
-    <RadioGroupPanel
+    <RhfRadioGroup
       name="erBarnetFodt"
       label={<FormattedMessage id="Registrering.TerminOgFodsel.ErBarnetFodt" />}
       validate={[required]}

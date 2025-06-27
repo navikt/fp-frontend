@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Table, VStack } from '@navikt/ds-react';
-import { InputField } from '@navikt/ft-form-hooks';
+import { RhfTextField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
@@ -26,7 +26,7 @@ interface Props {
 }
 
 export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, remove }: Props) => {
-  const { getFieldState, watch } = useFormContext<VirksomhetFormValues>();
+  const { getFieldState, watch, control } = useFormContext<VirksomhetFormValues>();
   const { error } = getFieldState(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}`);
   const virksomhetNavn = watch(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navn`);
   const [isOpen, setIsOpen] = useState(open);
@@ -46,8 +46,9 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
           <BodyShort weight="semibold">{virksomhetNavn}</BodyShort>
         </Box>
         <VStack gap="4" hidden={!isOpen}>
-          <InputField
+          <RhfTextField
             name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navn`}
+            control={control}
             validate={[required]}
             label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.Name" />}
             readOnly={readOnly}

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { Form, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
@@ -62,8 +62,9 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
           <FormattedMessage id="TilBehandlingPanel.TilBehandling" />
         </Label>
         <HStack gap="4">
-          <SelectField
+          <RhfSelect
             name="ukevalg"
+            control={formMethods.control}
             label=""
             selectValues={uker.map(u => (
               <option key={u.kode} value={u.kode}>
@@ -71,8 +72,9 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
               </option>
             ))}
           />
-          <RadioGroupPanel
+          <RhfRadioGroup
             name="ytelseType"
+            control={formMethods.control}
             isHorizontal
             radios={[
               {

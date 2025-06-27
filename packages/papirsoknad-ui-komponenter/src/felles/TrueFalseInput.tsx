@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -32,7 +32,7 @@ export const TrueFalseInput = ({
   isRequired = true,
 }: Props) => {
   return (
-    <RadioGroupPanel
+    <RhfRadioGroup
       name={name}
       label={label}
       validate={isRequired ? [required] : []}

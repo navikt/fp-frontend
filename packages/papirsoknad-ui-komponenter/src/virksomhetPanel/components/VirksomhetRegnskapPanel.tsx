@@ -1,7 +1,7 @@
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { InputField } from '@navikt/ft-form-hooks';
+import { RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, hasValidText, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -29,13 +29,13 @@ export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
       trueContent={
         <ArrowBox marginTop={8}>
           <VStack gap="4">
-            <InputField
+            <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navnRegnskapsforer`}
               readOnly={readOnly}
               validate={[required, hasValidText]}
               label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantName" />}
             />
-            <InputField
+            <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.tlfRegnskapsforer`}
               readOnly={readOnly}
               validate={[required, hasValidInteger]}

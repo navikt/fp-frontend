@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
@@ -154,15 +154,17 @@ export const TilretteleggingFaktaForm = ({
           </AksjonspunktHelpTextHTML>
         )}
         <HStack gap="4" wrap>
-          <Datepicker
+          <RhfDatepicker
             name="termindato"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readonly}
           />
           {fødselsdato && (
-            <Datepicker
+            <RhfDatepicker
               name="fødselsdato"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
               validate={[required, hasValidDate]}
               isReadOnly={readonly}
@@ -201,8 +203,9 @@ export const TilretteleggingFaktaForm = ({
             <FormattedMessage id="TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon" />
           </FeilmeldingAlert>
         )}
-        <TextAreaField
+        <RhfTextarea
           name="begrunnelse"
+          control={formMethods.control}
           label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnEndringene' })}
           validate={[isRequiredFn, maxLength1500, hasValidText]}
           maxLength={1500}

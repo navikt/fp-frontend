@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { CheckboxField, Form } from '@navikt/ft-form-hooks';
+import { Form, RhfCheckbox } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -70,8 +70,9 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="4">
-          <CheckboxField
+          <RhfCheckbox
             name="besteberegningErKorrektValg"
+            control={formMethods.control}
             label={<FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.Radiotekst" />}
             readOnly={readOnly}
             onChange={() => setErKnappEnabled(!erKnappEnabled)}
