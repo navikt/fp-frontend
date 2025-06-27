@@ -209,7 +209,6 @@ export const TilretteleggingForm = ({
           )}
           <RhfDatepicker
             name={`${index}.fom`}
-            control={formMethods.control}
             label={intl.formatMessage({
               id: 'TilretteleggingForm.FraOgMed',
             })}
@@ -228,7 +227,6 @@ export const TilretteleggingForm = ({
           />
           <RhfRadioGroup
             name={`${index}.type`}
-            control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
             validate={[required]}
             isReadOnly={readOnly}
@@ -255,7 +253,6 @@ export const TilretteleggingForm = ({
                 formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
                 <RhfNumericField
                   name={`${index}.stillingsprosent`}
-                  control={formMethods.control}
                   className={styles.arbeidsprosent}
                   readOnly={readOnly}
                   label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
@@ -275,7 +272,6 @@ export const TilretteleggingForm = ({
               )}
               <RhfNumericField
                 name={`${index}.overstyrtUtbetalingsgrad`}
-                control={formMethods.control}
                 className={styles.utbetalingsgrad}
                 readOnly={readOnly}
                 label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}

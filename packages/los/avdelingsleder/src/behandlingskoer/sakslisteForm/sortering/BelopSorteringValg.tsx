@@ -66,6 +66,7 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
           control={control}
           className={styles.dato}
           validate={[hasValidPosOrNegInteger]}
+          // @ts-expect-error fiks
           onChange={lagreFraDebounce}
         />
         <Detail className={styles.beløp}>
@@ -76,6 +77,7 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
           control={control}
           className={styles.dato}
           validate={[hasValidPosOrNegInteger]}
+          // @ts-expect-error fiks
           onChange={lagreTilDebounce}
         />
         <Detail className={styles.beløp}>

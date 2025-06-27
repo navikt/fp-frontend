@@ -88,7 +88,6 @@ export const DokumentasjonFaktaForm = ({
           <HStack gap="4" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
             <RhfDatepicker
               name={`fodselsdatoer.${id}`}
-              control={control}
               label={intl.formatMessage(
                 {
                   id: 'DokumentasjonFaktaForm.Fodselsdato',

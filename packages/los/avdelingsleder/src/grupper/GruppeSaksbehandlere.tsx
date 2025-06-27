@@ -128,6 +128,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
           control={formMethods.control}
           label={intl.formatMessage({ id: 'GruppeSaksbehandlere.Navn' })}
           validate={[required, minLength3, maxLength100, hasValidName]}
+          //@ts-expect-error fiks
           onBlur={lagreNavnDebounce}
           className={styles.navn}
         />

@@ -142,7 +142,6 @@ export const OppholdForm = ({
           <HStack gap="4">
             <RhfDatepicker
               name={`${index}.fom`}
-              control={formMethods.control}
               label={intl.formatMessage({
                 id: 'OppholdForm.FraOgMed',
               })}
@@ -156,7 +155,6 @@ export const OppholdForm = ({
             />
             <RhfDatepicker
               name={`${index}.tom`}
-              control={formMethods.control}
               label={intl.formatMessage({
                 id: 'OppholdForm.TilOgMed',
               })}
@@ -172,7 +170,6 @@ export const OppholdForm = ({
           </HStack>
           <RhfRadioGroup
             name={`${index}.oppholdÅrsak`}
-            control={formMethods.control}
             label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
             validate={[required]}
             isReadOnly={forVisning}

@@ -114,6 +114,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
                 control={formMethods.control}
                 label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
                 validate={[required, minLength3, maxLength100, hasValidName]}
+                // @ts-expect-error fiks
                 onChange={lagreNavn}
                 className={styles.bredde}
               />

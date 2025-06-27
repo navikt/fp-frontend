@@ -283,7 +283,6 @@ export const UttakAktiviteterTabell = ({
                           minValue0,
                           maxProsentValue100,
                           hasValidDecimal,
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
                             intl,
                             valgtPeriode,
@@ -292,11 +291,8 @@ export const UttakAktiviteterTabell = ({
                           ),
                           // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           (utbetalingsgrad: string) => {
                             const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
                             return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0

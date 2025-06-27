@@ -88,7 +88,6 @@ export const VelferdspermisjonForm = ({
         <VStack gap="5">
           <RhfRadioGroup
             name={`${permisjonIndex}.erGyldig`}
-            control={formMethods.control}
             label={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
             description={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldigDetaljer' })}
             validate={[required]}

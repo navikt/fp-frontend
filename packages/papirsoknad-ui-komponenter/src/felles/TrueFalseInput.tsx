@@ -14,9 +14,9 @@ type Props = {
   readOnly: boolean;
   isHorizontal?: boolean;
   isRequired?: boolean;
-  trueLabel?: React.ReactNode;
+  trueLabel?: React.ReactElement;
   trueContent?: React.ReactElement;
-  falseLabel?: React.ReactNode;
+  falseLabel?: React.ReactElement;
   falseContent?: React.ReactElement;
 };
 

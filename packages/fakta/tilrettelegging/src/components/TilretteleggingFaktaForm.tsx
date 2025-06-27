@@ -42,7 +42,8 @@ const getAksjonspunktBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string | un
   return aksjonpunkt?.begrunnelse ?? undefined;
 };
 
-const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
+const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) =>
+  value !== undefined || isDirty ? required(value) : undefined;
 
 const utledOmEnSkalVurdereVelferdspermisjoner = (alleArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[]) =>
   alleArbeidsforhold.some(arbeidsforhold =>

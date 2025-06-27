@@ -90,7 +90,6 @@ export const OmsorgOgAdopsjonPanel = ({
         {isForeldrepengerFagsak && familieHendelseType === FamilieHendelseType.ADOPSJON && (
           <RhfRadioGroup
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
-            control={control}
             label={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
             validate={[required]}
             isReadOnly={readOnly}
@@ -124,7 +123,6 @@ export const OmsorgOgAdopsjonPanel = ({
           {familieHendelseType === FamilieHendelseType.ADOPSJON && (
             <RhfDatepicker
               name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
-              control={control}
               label={formatMessage({ id: 'Registrering.Adopsjon.Ankomstdato' })}
               isReadOnly={readOnly}
               validate={[hasValidDate]}

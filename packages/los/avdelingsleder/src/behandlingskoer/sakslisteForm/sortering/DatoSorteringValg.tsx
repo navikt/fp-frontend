@@ -124,6 +124,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                   className={styles.dato}
                   label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
                   validate={[hasValidPosOrNegInteger]}
+                  // @ts-expect-error fiks
                   onBlur={lagreFra}
                 />
                 {(fraVerdi || fraVerdi === 0) && (
@@ -142,6 +143,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                   className={styles.dato}
                   label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
                   validate={[hasValidPosOrNegInteger]}
+                  // @ts-expect-error fiks
                   onBlur={lagreTil}
                 />
                 {(tilVerdi || tilVerdi === 0) && (
