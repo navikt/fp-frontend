@@ -1,19 +1,10 @@
-import react from '@vitejs/plugin-react';
-import sourcemaps from 'rollup-plugin-sourcemaps';
-import { defineConfig } from 'vitest/config';
+/// <reference types="vitest" />
+import { mergeConfig } from 'vite';
 
-export default defineConfig({
-  plugins: [
-    react({
-      // Use React plugin in all *.jsx and *.tsx files
-      include: '**/*.{ts,tsx}',
-    }),
-  ],
-  css: {
-    modules: {
-      localsConvention: 'camelCase',
-    },
-  },
+import { createSharedAppConfig } from '@navikt/fp-config-vite';
+
+// eslint-disable-next-line import/no-default-export
+export default mergeConfig(createSharedAppConfig(), {
   server: {
     port: 9010,
     cors: {
@@ -46,19 +37,5 @@ export default defineConfig({
         secure: false,
       },
     },
-  },
-  build: {
-    sourcemap: true,
-    rollupOptions: {
-      plugins: [sourcemaps({ exclude: /@sentry/ })],
-    },
-  },
-  test: {
-    environment: 'jsdom',
-    css: false,
-    globals: true,
-    setupFiles: 'vitest-setup.ts',
-    watch: false,
-    testTimeout: 25000,
   },
 });
