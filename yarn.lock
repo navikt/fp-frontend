@@ -5243,14 +5243,9 @@ __metadata:
     "@navikt/ds-react": 7.23.2
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-<<<<<<< HEAD
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-form-hooks": 6.3.13
-    "@navikt/ft-form-validators": 3.2.5
-=======
     "@navikt/ft-form-hooks": 7.0.0
     "@navikt/ft-form-validators": 4.0.0
->>>>>>> e378281ac8 (Oppdart ft-pakker og navn på wrappers. Sender inn control der det er lett tilgjengeleg)
     "@navikt/ft-plattform-komponenter": 9.1.4
     "@navikt/ft-ui-komponenter": 4.5.1
     "@navikt/ft-utils": 3.6.3
