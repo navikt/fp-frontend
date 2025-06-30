@@ -41,7 +41,7 @@ export const FagsakProfile = ({
 }: Props) => {
   const intl = useIntl();
   const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
-  const sorterteFagsakMarkeringer = fagsakMarkeringTekster?.sort() ?? [];
+  const sorterteFagsakMarkeringer = fagsakMarkeringTekster?.toSorted() ?? [];
   return (
     <VStack gap="4">
       <HStack gap="4">

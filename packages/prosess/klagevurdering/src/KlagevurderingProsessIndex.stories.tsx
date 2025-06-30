@@ -11,8 +11,8 @@ import {
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
+import { type TransformedValues } from './components/nfp/BehandleKlageFormNfp';
 import type { KlagevurderingForhåndsvisData } from './components/nfp/PreviewKlageLink';
-import type { TransformedValues } from './components/nfp/TempsaveKlageButton';
 import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
 
 const meta = {

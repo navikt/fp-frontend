@@ -19,6 +19,7 @@ import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 import {
   erTilbakekreving,
+  type FormValues,
   IKKE_PA_KLAGD_VEDTAK,
   påklagdTilbakekrevingInfo,
   skalLagreFritekstfelt,
@@ -54,40 +55,35 @@ const getKlagBareVedtak = (
 const getLovHjemmeler = (aksjonspunktCode: string): string =>
   aksjonspunktCode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA';
 
-type FormValues = {
-  erKlagerPart?: boolean;
-  erFristOverholdt?: boolean;
-  erKonkret?: boolean;
-  erSignert?: boolean;
-  begrunnelse?: string;
-  vedtak?: string;
-  fritekstTilBrev?: string;
-};
-
-const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
+const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefined => {
   const klageFormkavResultatNfp = klageVurdering ? klageVurdering.klageFormkravResultatNFP : null;
   const klageVurderingResultatNFP = klageVurdering ? klageVurdering.klageVurderingResultatNFP : null;
+
+  if (!klageFormkavResultatNfp) {
+    return undefined;
+  }
+
   return {
-    vedtak: klageFormkavResultatNfp ? getPaKlagdVedtak(klageFormkavResultatNfp) : '',
-    begrunnelse: klageFormkavResultatNfp ? klageFormkavResultatNfp.begrunnelse : undefined,
-    erKlagerPart: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagerPart : undefined,
-    erKonkret: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlageKonkret : undefined,
-    erFristOverholdt: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagefirstOverholdt : undefined,
-    erSignert: klageFormkavResultatNfp ? klageFormkavResultatNfp.erSignert : undefined,
+    vedtak: getPaKlagdVedtak(klageFormkavResultatNfp),
+    begrunnelse: klageFormkavResultatNfp.begrunnelse,
+    erKlagerPart: klageFormkavResultatNfp.erKlagerPart,
+    erKonkret: klageFormkavResultatNfp.erKlageKonkret,
+    erFristOverholdt: klageFormkavResultatNfp.erKlagefirstOverholdt,
+    erSignert: klageFormkavResultatNfp.erSignert,
     fritekstTilBrev: klageVurderingResultatNFP ? klageVurderingResultatNFP.fritekstTilBrev : undefined,
   };
 };
 
 const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): KlageFormkravAp => ({
-  erKlagerPart: values.erKlagerPart!,
-  erFristOverholdt: values.erFristOverholdt!,
-  erKonkret: values.erKonkret!,
-  erSignert: values.erSignert!,
+  erKlagerPart: values.erKlagerPart,
+  erFristOverholdt: values.erFristOverholdt,
+  erKonkret: values.erKonkret,
+  erSignert: values.erSignert,
   begrunnelse: values.begrunnelse,
   kode: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
-  erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak!),
-  tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak!),
+  erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
+  tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
   fritekstTilBrev: skalLagreFritekstfelt(values) ? values.fritekstTilBrev : undefined,
 });
 

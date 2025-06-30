@@ -13,7 +13,7 @@ import { AksjonspunktKode, FagsakYtelseType, TilbakekrevingVidereBehandling } fr
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { FeilutbetalingFormValues, FormValues } from '../types/FormValues';
+import type { FeilutbetalingFormValues } from '../types/FormValues';
 
 import styles from './tilbakekrevSøkerForm.module.css';
 
@@ -21,7 +21,7 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const IKKE_SEND = 'IKKE_SEND';
 
-export const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
+export const transformValues = (values: FeilutbetalingFormValues): VurderFeilutbetalingAp => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
   if (videreBehandling?.endsWith(IKKE_SEND)) {
     return {
@@ -34,7 +34,7 @@ export const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
   return {
     kode: AksjonspunktKode.VURDER_FEILUTBETALING,
     begrunnelse,
-    videreBehandling: videreBehandling!,
+    videreBehandling,
     varseltekst,
   };
 };
@@ -71,7 +71,7 @@ interface Props {
 export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, aksjonspunkt, fagsak }: Props) => {
   const intl = useIntl();
 
-  const { watch, control } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FeilutbetalingFormValues>();
 
   const varseltekst = watch('varseltekst');
 

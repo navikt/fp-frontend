@@ -112,10 +112,8 @@ export const BehandlingMenuIndex = ({
       )}
       {valgtModal === ModalType.VERGE && behandlingAppContext && behandling && (
         <VergeMenyModal
-          fagsak={fagsak}
           behandlingAppKontekst={behandlingAppContext}
           behandling={behandling}
-          setBehandling={setBehandling}
           lukkModal={lukkModal}
           hentOgSettBehandling={hentOgSettBehandling}
         />

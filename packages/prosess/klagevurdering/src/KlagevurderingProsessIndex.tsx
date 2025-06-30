@@ -7,9 +7,8 @@ import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { BehandleKlageFormKa } from './components/ka/BehandleKlageFormKa';
-import { BehandleKlageFormNfp } from './components/nfp/BehandleKlageFormNfp';
+import { BehandleKlageFormNfp, type TransformedValues } from './components/nfp/BehandleKlageFormNfp';
 import { type KlagevurderingForhåndsvisData } from './components/nfp/PreviewKlageLink';
-import { type TransformedValues } from './components/nfp/TempsaveKlageButton';
 
 import messages from '../i18n/nb_NO.json';
 

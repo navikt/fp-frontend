@@ -16,6 +16,7 @@ import type {
 import type { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
+import type { EtterbetalingSøkerFormValues, FeilutbetalingFormValues } from '../types/FormValues';
 import {
   buildInitialValues as buildInitialValuesEtterbetaling,
   EtterbetalingSøkerForm,
@@ -34,11 +35,7 @@ type Details = {
   show: boolean;
 };
 
-type FormValues = {
-  videreBehandling?: string;
-  varseltekst?: string;
-  begrunnelse?: string;
-};
+type FormValues = FeilutbetalingFormValues | EtterbetalingSøkerFormValues;
 
 type SimuleringAksjonspunkt = VurderFeilutbetalingAp | KontrollerEtterbetalingTilSøkerAP;
 
@@ -73,10 +70,13 @@ const hentToggleDetaljer =
 
 const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): SimuleringAksjonspunkt[] => {
   const aksjonspunkterTilSubmit: SimuleringAksjonspunkt[] = [];
-  if (hasAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkter)) {
+  if (hasAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkter) && 'videreBehandling' in values) {
     aksjonspunkterTilSubmit.push(transformValuesTilbakekrev(values));
   }
-  if (hasAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkter)) {
+  if (
+    hasAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkter) &&
+    'begrunnelseEtterbetaling' in values
+  ) {
     aksjonspunkterTilSubmit.push(transformValuesEtterbetaling(values));
   }
   return aksjonspunkterTilSubmit;

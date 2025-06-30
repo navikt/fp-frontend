@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import styles from './startdatoForForeldrepengerperiodenForm.module.css';
 
@@ -37,7 +37,7 @@ const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormVa
 const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
   opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon,
-  startdatoFraSoknad: values.startdatoFraSoknad!,
+  startdatoFraSoknad: notEmpty(values.startdatoFraSoknad),
   begrunnelse: values.begrunnelse,
 });
 
