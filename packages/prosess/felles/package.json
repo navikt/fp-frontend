@@ -24,7 +24,7 @@
     "@navikt/ft-ui-komponenter": "4.5.1",
     "@navikt/ft-utils": "3.6.3",
     "react": "19.1.0",
-    "react-hook-form": "7.58.1",
+    "react-hook-form": "7.59.0",
     "react-intl": "7.1.11"
   },
   "devDependencies": {
@@ -37,10 +37,10 @@
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "cross-env": "7.0.3",
-    "eslint": "9.28.0",
+    "eslint": "9.30.0",
     "stylelint": "16.20.0",
     "typescript": "5.8.3",
     "vite": "6.3.5",
-    "vitest": "3.2.3"
+    "vitest": "3.2.4"
   }
 }
