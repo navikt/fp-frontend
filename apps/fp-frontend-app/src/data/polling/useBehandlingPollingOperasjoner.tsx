@@ -52,8 +52,6 @@ export const useBehandlingPollingOperasjoner = (
   return {
     lagreAksjonspunkter,
     lagreOverstyrteAksjonspunkter,
-    opprettVergeV1,
-    fjernVergeV1,
     åpneForEndringer,
     gjenopptaBehandling,
   };
