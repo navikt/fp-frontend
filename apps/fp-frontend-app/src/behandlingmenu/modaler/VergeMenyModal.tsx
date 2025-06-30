@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-import { MenyVergeIndexV2 } from '@navikt/fp-sak-meny';
+import { MenyVergeIndex } from '@navikt/fp-sak-meny';
 import { type Behandling, type BehandlingAppKontekst, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../data/behandlingApi';
@@ -47,7 +47,7 @@ export const VergeMenyModal = ({ behandlingAppKontekst, behandling, hentOgSettBe
 
   const { data: verge } = useQuery(behandlingApi.verge.hent(behandling));
   return (
-    <MenyVergeIndexV2
+    <MenyVergeIndex
       type={VergeBehandlingmenyValg.OPPRETT === vergeMenyvalg ? 'OPPRETT' : 'FJERN'}
       verge={verge}
       opprettVerge={opprettVergeV2}
