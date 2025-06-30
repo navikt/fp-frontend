@@ -16,9 +16,9 @@
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-fakta-beregning": "10.0.0",
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "10.0.0",
-    "@navikt/ft-prosess-beregningsgrunnlag": "9.0.0"
+    "@navikt/ft-fakta-beregning": "10.0.2",
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": "10.0.2",
+    "@navikt/ft-prosess-beregningsgrunnlag": "9.0.2"
   },
   "devDependencies": {
     "typescript": "5.8.3"

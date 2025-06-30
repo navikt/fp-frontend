@@ -9,7 +9,7 @@ import { createIntl } from '@navikt/ft-utils';
 import { RegistrereVergeForm, type VergeFormValues } from '@navikt/fp-fakta-verge';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, OpprettVergeParams, Verge } from '@navikt/fp-types';
 
-import messages from '../../../i18n/nb_NO.json';
+import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
@@ -31,7 +31,7 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
   const erFjerneOperasjon = type === 'FJERN';
 
   const formMethods = useForm<VergeFormValues>({
-    defaultValues: RegistrereVergeForm.buildInitialValues(verge),
+    defaultValues: verge ? RegistrereVergeForm.buildInitialValues(verge) : undefined,
   });
 
   const handleSubmit = (values: VergeFormValues) => {
