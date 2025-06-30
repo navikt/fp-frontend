@@ -8,14 +8,14 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { EtterbetalingSøkerFormValues, FormValues } from '../types/FormValues';
+import type { EtterbetalingSøkerFormValues } from '../types/FormValues';
 
 import styles from './etterbetalingSøkerForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-export const transformValues = (values: FormValues): KontrollerEtterbetalingTilSøkerAP => ({
+export const transformValues = (values: EtterbetalingSøkerFormValues): KontrollerEtterbetalingTilSøkerAP => ({
   kode: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
   begrunnelse: values.begrunnelseEtterbetaling,
 });

@@ -108,9 +108,6 @@ export const Default: Story = {
       ],
     },
   },
-  args: {
-    antallOppgaver: 4,
-  },
 };
 
 export const TomOppgaveTabell: Story = {
@@ -152,8 +149,5 @@ export const VisPagineringNårMerEnn15Oppgaver: Story = {
         ),
       ],
     },
-  },
-  args: {
-    antallOppgaver: 4,
   },
 };

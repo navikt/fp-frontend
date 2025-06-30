@@ -18,7 +18,6 @@ type TableHeaders = 'navn' | 'saksnummer' | 'behandlingstype' | 'opprettetTidspu
 
 interface Props {
   reserverOppgave: (oppgave: Oppgave) => void;
-  antallOppgaver?: number;
   brukernavn: string;
 }
 
@@ -129,7 +128,9 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
 
 const comparator = (a: Oppgave, b: Oppgave, orderBy: TableHeaders) => {
   if (orderBy === 'status') {
-    return notEmpty(a.reservasjonStatus.reservertTilTidspunkt) < notEmpty(b.reservasjonStatus.reservertTilTidspunkt) ? -1 : 1;
+    return notEmpty(a.reservasjonStatus.reservertTilTidspunkt) < notEmpty(b.reservasjonStatus.reservertTilTidspunkt)
+      ? -1
+      : 1;
   }
 
   if (b[orderBy] === undefined || a[orderBy] === undefined || b[orderBy] < a[orderBy]) {

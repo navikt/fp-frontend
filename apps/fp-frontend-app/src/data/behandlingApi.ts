@@ -134,8 +134,6 @@ export const BehandlingRel = {
   HENLEGG_BEHANDLING: 'henlegg-behandling',
   BEHANDLING_ON_HOLD: 'sett-behandling-pa-vent',
   RESUME_BEHANDLING: 'gjenoppta-behandling',
-  VERGE_OPPRETT_V1: 'opprett-verge',
-  VERGE_FJERN_V1: 'fjern-verge',
   VERGE_OPPRETT_V2: 'verge-opprett',
   VERGE_FJERN_V2: 'verge-fjern',
   VERGE_HENT: 'verge-hent',
@@ -614,18 +612,8 @@ const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: s
     json: params,
   });
 
-const getOpprettVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT_V1', links), {
-    json: params,
-  });
-
 const getOpprettVergeV2 = (links: ApiLink[]) => (params: OpprettVergeParams) =>
   kyExtended.post(getUrlFromRel('VERGE_OPPRETT_V2', links), {
-    json: params,
-  });
-
-const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V1', links), {
     json: params,
   });
 
@@ -797,8 +785,6 @@ export const useBehandlingApi = (behandling: Behandling) => {
       åpneBehandlingForEndring: getÅpneBehandlingForEndring(links),
       lagreAksjonspunkt: getLagreAksjonspunkt(links),
       lagreOverstyrtAksjonspunkt: getLagreOverstyrtAksjonspunkt(links),
-      opprettVergeV1: getOpprettVergeV1(links),
-      fjernVergeV1: getFjernVergeV1(links),
     },
   };
 };

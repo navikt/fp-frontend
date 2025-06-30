@@ -43,18 +43,14 @@ export const SakslistePanel = ({
         setValueInLocalStorage={setValueInLocalStorage}
         removeValueFromLocalStorage={removeValueFromLocalStorage}
       />
-      {valgtSakslisteId && (
+      {!!valgtSakslisteId && (
         <LedigOppgaveTabell
           reserverOppgave={reserverOppgave}
           antallOppgaver={antallOppgaver}
           valgtSakslisteId={valgtSakslisteId}
         />
       )}
-      <ReservertOppgaveTabell
-        reserverOppgave={reserverOppgave}
-        antallOppgaver={antallOppgaver}
-        brukernavn={brukernavn}
-      />
+      <ReservertOppgaveTabell reserverOppgave={reserverOppgave} brukernavn={brukernavn} />
     </VStack>
   );
 };

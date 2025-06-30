@@ -1,5 +1,5 @@
 export type FeilutbetalingFormValues = {
-  videreBehandling?: string;
+  videreBehandling: string;
   varseltekst?: string;
   begrunnelse?: string;
 };

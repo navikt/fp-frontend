@@ -11,6 +11,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import { VergeType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving, OpprettVergeParams, Verge } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -99,11 +100,11 @@ RegistrereVergeForm.buildInitialValues = (verge: Verge | undefined): VergeFormVa
 });
 
 RegistrereVergeForm.transformValues = (values: VergeFormValues): OpprettVergeParams => ({
-  vergeType: values.vergeType!,
-  navn: values.navn!,
+  vergeType: notEmpty(values.vergeType),
+  navn: notEmpty(values.navn),
   gyldigFom: values.gyldigFom!,
   gyldigTom: values.gyldigTom,
   ...(values.vergeType === VergeType.ADVOKAT
-    ? { organisasjonsnummer: values.organisasjonsnummer! }
+    ? { organisasjonsnummer: notEmpty(values.organisasjonsnummer) }
     : { fnr: values.fnr! }),
 });

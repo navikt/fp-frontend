@@ -10,14 +10,23 @@ import { AksjonspunktKode, KlageVurdering as klageVurderingType } from '@navikt/
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { KlageFormType } from '../../types/klageFormType';
 import { BekreftOgSubmitKlageModal } from './BekreftOgSubmitKlageModal';
 import { FritekstBrevTextField } from './FritekstKlageBrevTextField';
 import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
 import { type KlagevurderingForhåndsvisData, PreviewKlageLink } from './PreviewKlageLink';
-import { TempsaveKlageButton, type TransformedValues } from './TempsaveKlageButton';
+
+export type TransformedValues = {
+  kode: string;
+  klageMedholdArsak?: string;
+  klageVurderingOmgjoer?: string;
+  klageHjemmel?: string;
+  fritekstTilBrev: string;
+  begrunnelse: string;
+  klageVurdering: string;
+};
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak:
@@ -25,7 +34,7 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageVurderingOmgjoer:
     values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : undefined,
   klageHjemmel: values.klageHjemmel,
-  klageVurdering: values.klageVurdering!,
+  klageVurdering: notEmpty(values.klageVurdering),
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
   kode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
@@ -158,14 +167,35 @@ export const BehandleKlageFormNfp = ({
                 />
               )}
           </HStack>
-          <TempsaveKlageButton
-            saveKlage={saveKlage}
-            handleSubmit={formMethods.handleSubmit}
-            readOnly={isReadOnly}
-            aksjonspunktCode={AksjonspunktKode.BEHANDLE_KLAGE_NFP}
-          />
+          {!isReadOnly && (
+            <Button
+              size="small"
+              variant="primary"
+              onClick={formMethods.handleSubmit((values: KlageFormType) =>
+                saveKlage(transformValuesTempSave(values, AksjonspunktKode.BEHANDLE_KLAGE_NFP)),
+              )}
+              type="button"
+            >
+              <FormattedMessage id="Klage.ResolveKlage.TempSaveButton" />
+            </Button>
+          )}
         </HStack>
       </VStack>
     </Form>
   );
 };
+
+const transformValuesTempSave = (values: KlageFormType, aksjonspunktCode: string): TransformedValues => ({
+  kode: aksjonspunktCode,
+  klageMedholdArsak:
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ||
+    values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK
+      ? values.klageMedholdArsak
+      : undefined,
+  klageVurderingOmgjoer:
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : undefined,
+  klageHjemmel: values.klageHjemmel,
+  fritekstTilBrev: notEmpty(values.fritekstTilBrev),
+  begrunnelse: notEmpty(values.begrunnelse),
+  klageVurdering: notEmpty(values.klageVurdering),
+});
