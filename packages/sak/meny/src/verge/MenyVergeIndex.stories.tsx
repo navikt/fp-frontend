@@ -3,7 +3,7 @@ import { action } from 'storybook/actions';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import { VergeType } from '../../../../../kodeverk/src/vergeType';
+import { VergeType } from '../../../../kodeverk/src/vergeType';
 import { MenyVergeIndex } from './MenyVergeIndex';
 
 const meta = {
