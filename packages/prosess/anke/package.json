@@ -19,33 +19,33 @@
     "storybook": "storybook dev --quiet -p 7030"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.23.2",
+    "@navikt/ds-react": "7.24.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "4.5.1",
-    "@navikt/ft-utils": "3.6.3",
+    "@navikt/ft-ui-komponenter": "4.5.2",
+    "@navikt/ft-utils": "3.6.4",
     "classnames": "2.5.1",
     "dayjs": "1.11.13",
     "react": "19.1.0",
     "react-intl": "7.1.11"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.23.2",
+    "@navikt/ds-css": "7.24.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
-    "@storybook/react": "9.0.12",
-    "@storybook/react-vite": "9.0.12",
+    "@storybook/react": "9.0.14",
+    "@storybook/react-vite": "9.0.14",
     "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.3.0",
     "@testing-library/user-event": "14.6.1",
     "cross-env": "7.0.3",
-    "eslint": "9.28.0",
-    "storybook": "9.0.6",
-    "stylelint": "16.20.0",
+    "eslint": "9.30.0",
+    "storybook": "9.0.14",
+    "stylelint": "16.21.0",
     "typescript": "5.8.3",
     "vite": "6.3.5",
-    "vitest": "3.2.3"
+    "vitest": "3.2.4"
   }
 }
