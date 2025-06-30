@@ -7,6 +7,5 @@ export type SaksbehandlerGruppe = Readonly<{
 }>;
 
 export type SaksbehandlereOgSaksbehandlerGrupper = Readonly<{
-  // saksbehandlere: GruppeSaksbehandler[]; // FIXME Kva treng ein denne til?
   saksbehandlerGrupper: SaksbehandlerGruppe[];
 }>;

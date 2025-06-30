@@ -15,10 +15,13 @@ import { RegistrereVergeForm, type VergeFormValues } from './RegistrereVergeForm
 
 type FormValues = VergeFormValues & FaktaBegrunnelseFormValues;
 
-const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
-  ...RegistrereVergeForm.buildInitialValues(verge),
-});
+const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspunkt[]): FormValues | undefined =>
+  verge
+    ? {
+        ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
+        ...RegistrereVergeForm.buildInitialValues(verge),
+      }
+    : undefined;
 
 const transformValues = (values: FormValues): AvklarVergeAp => ({
   kode: AksjonspunktKode.AVKLAR_VERGE,

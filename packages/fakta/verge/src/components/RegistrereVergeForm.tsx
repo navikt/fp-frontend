@@ -18,12 +18,12 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 export type VergeFormValues = {
-  navn?: string;
-  gyldigFom?: string;
+  navn: string;
+  gyldigFom: string;
   gyldigTom?: string;
   fnr?: string;
   organisasjonsnummer?: string;
-  vergeType?: VergeType;
+  vergeType: VergeType;
 };
 
 interface Props {
@@ -94,17 +94,17 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
   </VStack>
 );
 
-RegistrereVergeForm.buildInitialValues = (verge: Verge | undefined): VergeFormValues => ({
+RegistrereVergeForm.buildInitialValues = (verge: Verge): VergeFormValues => ({
   ...verge,
   gyldigTom: verge?.gyldigTom ?? undefined,
 });
 
 RegistrereVergeForm.transformValues = (values: VergeFormValues): OpprettVergeParams => ({
-  vergeType: notEmpty(values.vergeType),
-  navn: notEmpty(values.navn),
-  gyldigFom: values.gyldigFom!,
+  vergeType: values.vergeType,
+  navn: values.navn,
+  gyldigFom: values.gyldigFom,
   gyldigTom: values.gyldigTom,
   ...(values.vergeType === VergeType.ADVOKAT
     ? { organisasjonsnummer: notEmpty(values.organisasjonsnummer) }
-    : { fnr: values.fnr! }),
+    : { fnr: notEmpty(values.fnr) }),
 });
