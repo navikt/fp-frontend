@@ -33,8 +33,20 @@ export const Default: Story = {
   args: {
     annenForelderUttakEøs: [
       {
+        fom: '2023-02-01',
+        tom: '2023-02-15',
+        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkdager: 10,
+      },
+      {
         fom: '2023-01-01',
         tom: '2023-01-31',
+        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkdager: 10,
+      },
+      {
+        fom: '2021-01-01',
+        tom: '2021-01-31',
         trekkonto: UttakPeriodeType.MODREKVOTE,
         trekkdager: 10,
       },

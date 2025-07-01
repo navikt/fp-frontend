@@ -7,6 +7,7 @@ import { Button, ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react'
 import { Form } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, isAksjonspunktOpen } from '@navikt/fp-kodeverk';
@@ -29,7 +30,10 @@ export const UttakEøsFaktaInfoPanel = ({ annenForelderUttakEøs, submittable }:
   const { aksjonspunkterForPanel, isReadOnly, submitCallback } = usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
   const harApneAksjonspunkter = aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status));
 
-  const [perioder, setPerioder] = useState<AnnenforelderUttakEøsPeriode[]>(annenForelderUttakEøs || []);
+  const [perioder, setPerioder] = useState<AnnenforelderUttakEøsPeriode[]>(
+    annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))) || [],
+  );
+
   const [visForm, setVisForm] = useState(false);
   const [feilmelding, setFeilmelding] = useState<string | undefined>();
 
@@ -76,8 +80,8 @@ export const UttakEøsFaktaInfoPanel = ({ annenForelderUttakEøs, submittable }:
         <UttakEøsFaktaTable annenForelderUttakEøsPerioder={perioder} setPerioder={setPerioder} />
         {visForm && (
           <UttakEøsFaktaForm
-            oppdater={(data: FormValues) => {
-              setPerioder(prevPerioder => [...prevPerioder, data]);
+            oppdater={(nyPeriode: FormValues) => {
+              setPerioder(prevPerioder => [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))));
               setVisForm(false);
             }}
             avbryt={() => setVisForm(false)}
