@@ -1,6 +1,8 @@
+import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
+import { Checkbox, Heading, VStack } from '@navikt/ds-react';
 import { RhfCheckboxGroup } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
@@ -10,21 +12,6 @@ import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME, ANDRE_YTELSER_TYPER_NAME } from '../constants';
 import type { AndreYtelserFormValue, TransformValues } from '../types';
 import { RenderAndreYtelserPerioderFieldArray } from './RenderAndreYtelserPerioderFieldArray';
-
-const removeArbeidstyper = (
-  andreYtelser: KodeverkMedNavn<'ArbeidType'>[],
-  kunMiliterEllerSiviltjeneste?: boolean,
-): KodeverkMedNavn<'ArbeidType'>[] => {
-  if (kunMiliterEllerSiviltjeneste) {
-    return andreYtelser.filter(ay => ay.kode === ArbeidType.MILITÆR_ELLER_SIVILTJENESTE);
-  }
-  return andreYtelser.filter(
-    ay =>
-      ay.kode !== ArbeidType.UTENLANDSK_ARBEIDSFORHOLD &&
-      ay.kode !== ArbeidType.FRILANSER &&
-      ay.kode !== ArbeidType.LONN_UNDER_UTDANNING,
-  );
-};
 
 interface Props {
   readOnly: boolean;
@@ -38,9 +25,9 @@ interface Props {
  * Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
  */
 export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = false, alleKodeverk }: Props) => {
-  const andreYtelser = alleKodeverk['ArbeidType'];
+  const { control } = useFormContext<AndreYtelserFormValue>();
 
-  const filtrerteArbeidstyper = removeArbeidstyper(andreYtelser, kunMiliterEllerSiviltjeneste);
+  const filtrerteArbeidstyper = filtrerArbeidstyper(alleKodeverk['ArbeidType'], kunMiliterEllerSiviltjeneste);
 
   return (
     <BorderBox>
@@ -49,21 +36,14 @@ export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = fal
           <FormattedMessage id="Registrering.AndreYtelser.Title" />
         </Heading>
         <RhfCheckboxGroup
-          isReadOnly={readOnly}
           name={`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`}
-          checkboxes={filtrerteArbeidstyper.map(ay => ({
-            label: ay.navn,
-            value: ay.kode,
-            element: (
-              <ArrowBox>
-                <RenderAndreYtelserPerioderFieldArray
-                  name={`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_PERIODER_NAME}.${ay.kode}`}
-                  readOnly={readOnly}
-                />
-              </ArrowBox>
-            ),
-          }))}
-        />
+          control={control}
+          isReadOnly={readOnly}
+        >
+          {filtrerteArbeidstyper.map(at => (
+            <CheckboxWithInfo key={at.kode} arbeidstype={at} readOnly={readOnly} />
+          ))}
+        </RhfCheckboxGroup>
       </VStack>
     </BorderBox>
   );
@@ -88,3 +68,47 @@ AndreYtelserPanel.transformValues = ({
     })),
   ),
 });
+
+const CheckboxWithInfo = ({
+  arbeidstype,
+  readOnly,
+}: {
+  arbeidstype: KodeverkMedNavn<'ArbeidType'>;
+  readOnly: boolean;
+}) => {
+  const { watch } = useFormContext<AndreYtelserFormValue>();
+  const valgteArbeidstyper = watch(`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`);
+
+  const [visPerioder, setVisPeriode] = useState(valgteArbeidstyper.includes(arbeidstype.kode));
+
+  return (
+    <VStack gap="2">
+      <Checkbox value={arbeidstype.kode} onClick={() => setVisPeriode(!visPerioder)} disabled={readOnly}>
+        {arbeidstype.navn}
+      </Checkbox>
+      {visPerioder && (
+        <ArrowBox>
+          <RenderAndreYtelserPerioderFieldArray
+            name={`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_PERIODER_NAME}.${arbeidstype.kode}`}
+            readOnly={readOnly}
+          />
+        </ArrowBox>
+      )}
+    </VStack>
+  );
+};
+
+const filtrerArbeidstyper = (
+  andreYtelser: KodeverkMedNavn<'ArbeidType'>[],
+  kunMiliterEllerSiviltjeneste?: boolean,
+): KodeverkMedNavn<'ArbeidType'>[] => {
+  if (kunMiliterEllerSiviltjeneste) {
+    return andreYtelser.filter(ay => ay.kode === ArbeidType.MILITÆR_ELLER_SIVILTJENESTE);
+  }
+  return andreYtelser.filter(
+    ay =>
+      ay.kode !== ArbeidType.UTENLANDSK_ARBEIDSFORHOLD &&
+      ay.kode !== ArbeidType.FRILANSER &&
+      ay.kode !== ArbeidType.LONN_UNDER_UTDANNING,
+  );
+};

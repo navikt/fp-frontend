@@ -50,6 +50,7 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
   return (
     <TrueFalseInput
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.virksomhetRegistrertINorge`}
+      control={control}
       label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.RegisteredInNorway" />}
       readOnly={readOnly}
       trueContent={

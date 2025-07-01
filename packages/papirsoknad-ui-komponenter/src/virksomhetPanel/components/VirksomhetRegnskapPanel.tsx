@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
@@ -7,7 +8,7 @@ import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
-import type { RegistrerVirksomhetFormValues } from '../types';
+import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
 
 interface Props {
   readOnly: boolean;
@@ -21,9 +22,11 @@ interface Props {
  * søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
 export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
+  const { control } = useFormContext<VirksomhetFormValues>();
   return (
     <TrueFalseInput
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.harRegnskapsforer`}
+      control={control}
       label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Accountant" />}
       readOnly={readOnly}
       trueContent={

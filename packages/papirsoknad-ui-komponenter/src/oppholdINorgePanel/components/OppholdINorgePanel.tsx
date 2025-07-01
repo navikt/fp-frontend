@@ -43,7 +43,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
   const { formatMessage } = useIntl();
   const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
-  const { watch } = useFormContext<OppholdINorgeFormValues>();
+  const { watch, control } = useFormContext<OppholdINorgeFormValues>();
   const skalViseTidligereOppholdInput = !watch('oppholdSisteTolvINorge', true);
   const skalViseFremtidigeOppholdInput = !watch('oppholdNesteTolvINorge', true);
 
@@ -56,6 +56,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
 
         <TrueFalseInput
           name="oppholdINorge"
+          control={control}
           label={formatMessage({
             id: erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel',
           })}
@@ -65,6 +66,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
         <VStack gap="2">
           <TrueFalseInput
             name="oppholdSisteTolvINorge"
+            control={control}
             label={<FormattedMessage id="Registrering.OppholdSisteTolv" />}
             readOnly={readOnly}
           />
@@ -83,6 +85,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
         <VStack gap="2">
           <TrueFalseInput
             name="oppholdNesteTolvINorge"
+            control={control}
             label={<FormattedMessage id="Registrering.OppholdNesteTolv" />}
             readOnly={readOnly}
           />
