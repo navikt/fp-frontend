@@ -1,3 +1,17 @@
 {
-  "UttakFaktaForm.FaktaUttakEos": "Fakta om uttak til annen forelder i EØS"
+  "UttakEøsFaktaInfoPanel.Aksjonspunkt": "Avklar uttak i EØS for annen forelder",
+  "UttakEøsFaktaInfoPanel.OverlappendePerioder": "Det finnes overlappende perioder",
+
+  "UttakFaktaForm.FaktaUttakEos": "Fakta om uttak til annen forelder i EØS",
+  "UttakFaktaForm.LeggTilPeriode": "Legg til periode",
+
+  "UttakEøsFaktaForm.Fom": "Fra og med",
+  "UttakEøsFaktaForm.Tom": "Til og med",
+  "UttakFaktaForm.Stønadskonto": "Stønadskonto",
+  "UttakEøsFaktaForm.Trekkdager": "Trekkdager",
+  "UttakEøsFaktaForm.Oppdater": "Oppdater",
+  "UttakEøsFaktaForm.LeggTil": "Legg til",
+  "UttakEøsFaktaForm.Avslutt": "Avbryt",
+  "UttakFaktaForm.Slett": "Slett periode",
+  "UttakEøsFaktaForm.VilDuSlette": "Vil du slette denne perioden?"
 }
