@@ -62,6 +62,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
 
           <TrueFalseInput
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}
+            control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
             readOnly={readOnly}
             trueContent={
@@ -88,6 +89,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
 
           <TrueFalseInput
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`}
+            control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
             readOnly={readOnly}
             trueContent={
@@ -113,6 +115,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
           />
           <TrueFalseInput
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`}
+            control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
             readOnly={readOnly}
             trueContent={
