@@ -95,6 +95,8 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
             ytelse={fagsak.fagsakYtelseType}
           />
           <FaktaBegrunnelseTextField
+            name="begrunnelse"
+            control={formMethods.control}
             hasReadOnlyLabel
             isReadOnly={isReadOnly}
             isSubmittable={submittable}

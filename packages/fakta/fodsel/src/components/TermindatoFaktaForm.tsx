@@ -121,7 +121,13 @@ export const TermindatoFaktaForm = ({
             </HStack>
           </FaktaGruppe>
         )}
-        <FaktaBegrunnelseTextField isSubmittable={submittable} isReadOnly={readOnly} hasBegrunnelse={!!begrunnelse} />
+        <FaktaBegrunnelseTextField
+          name="begrunnelse"
+          control={control}
+          isSubmittable={submittable}
+          isReadOnly={readOnly}
+          hasBegrunnelse={!!begrunnelse}
+        />
         {isForTidligTerminbekreftelse && (
           <Alert variant="warning" className={styles.marginBottom}>
             <FormattedMessage id="TermindatoFaktaForm.AdvarselForTidligUtstedtdato" />

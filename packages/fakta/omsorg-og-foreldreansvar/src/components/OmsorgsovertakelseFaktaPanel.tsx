@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label } from '@navikt/ds-react';
@@ -8,6 +9,8 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
+
+import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
 
 const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
   const antallBarn = soknad.antallBarn ?? NaN;
@@ -40,6 +43,8 @@ export const OmsorgsovertakelseFaktaPanel = ({
   const intl = useIntl();
   const antallBarn = getAntallBarn(soknad, familiehendelse);
 
+  const { control } = useFormContext<OmsorgOgForeldreansvarFormValues>();
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({
@@ -52,6 +57,7 @@ export const OmsorgsovertakelseFaktaPanel = ({
       <HStack gap="10">
         <RhfDatepicker
           name="omsorgsovertakelseDato"
+          control={control}
           label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
@@ -60,6 +66,7 @@ export const OmsorgsovertakelseFaktaPanel = ({
         {erAksjonspunktForeldreansvar && (
           <RhfDatepicker
             name="foreldreansvarDato"
+            control={control}
             label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}

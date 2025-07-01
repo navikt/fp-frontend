@@ -96,6 +96,8 @@ export const InnhentDokOpptjeningUtlandPanel = ({
               ]}
             />
             <FaktaBegrunnelseTextField
+              name="begrunnelse"
+              control={formMethods.control}
               isSubmittable={submittable}
               isReadOnly={readOnly}
               hasBegrunnelse={!!begrunnelse}

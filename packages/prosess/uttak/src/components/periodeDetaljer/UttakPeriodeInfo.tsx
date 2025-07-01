@@ -1,4 +1,5 @@
 import { type ReactElement } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
@@ -10,6 +11,7 @@ import { OppholdArsakType, PeriodeResultatType, UttakArbeidType as uttakArbeidTy
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker } from '@navikt/fp-types';
 
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
+import type { UttakAktivitetType } from './UttakAktivitetType';
 
 import styles from './uttakPeriodeInfo.module.css';
 
@@ -169,6 +171,8 @@ export const UttakPeriodeInfo = ({
 }: Props) => {
   const intl = useIntl();
 
+  const { control } = useFormContext<UttakAktivitetType>();
+
   const oppholdArsakTyper = alleKodeverk['OppholdÅrsak'];
 
   const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
@@ -186,6 +190,7 @@ export const UttakPeriodeInfo = ({
             {harSoktOmFlerbarnsdager && (
               <RhfCheckbox
                 name="flerbarnsdager"
+                control={control}
                 label={intl.formatMessage({ id: 'UttakActivity.Flerbarnsdager' })}
                 readOnly={isReadOnly}
               />
@@ -193,6 +198,7 @@ export const UttakPeriodeInfo = ({
             <RhfCheckbox
               key="samtidigUttak"
               name="samtidigUttak"
+              control={control}
               label={intl.formatMessage({ id: 'UttakActivity.SamtidigUttak' })}
               readOnly={isReadOnly}
               validate={[
@@ -207,6 +213,7 @@ export const UttakPeriodeInfo = ({
               <HStack gap="2">
                 <RhfNumericField
                   name="samtidigUttaksprosent"
+                  control={control}
                   className={styles.numberFieldLength}
                   readOnly={isReadOnly}
                   label={intl.formatMessage({ id: 'UttakInfo.SamtidigUttaksprosent' })}
@@ -253,6 +260,7 @@ export const UttakPeriodeInfo = ({
           </Detail>
           <RhfSelect
             name="oppholdArsak"
+            control={control}
             selectValues={mapPeriodeTyper(oppholdArsakTyper)}
             label=""
             hideLabel

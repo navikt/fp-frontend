@@ -34,12 +34,14 @@ export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
           <VStack gap="4">
             <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navnRegnskapsforer`}
+              control={control}
               readOnly={readOnly}
               validate={[required, hasValidText]}
               label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantName" />}
             />
             <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.tlfRegnskapsforer`}
+              control={control}
               readOnly={readOnly}
               validate={[required, hasValidInteger]}
               label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.AccountantPhone" />}

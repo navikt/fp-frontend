@@ -78,6 +78,8 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
             onChange={() => setErKnappEnabled(!erKnappEnabled)}
           />
           <FaktaBegrunnelseTextField
+            name="begrunnelse"
+            control={formMethods.control}
             isSubmittable={submittable}
             isReadOnly={readOnly}
             hasBegrunnelse={!!begrunnelse}

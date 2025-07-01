@@ -36,6 +36,7 @@ import type {
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
+import type { VedtakFormValues } from '../../types/VedtakFormValues';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
@@ -120,7 +121,7 @@ const finnVedtakstatusTekst = (
 };
 
 const transformValues = (
-  values: FormValues,
+  values: VedtakFormValues,
   aksjonspunkter: Aksjonspunkt[],
   harOverstyrtVedtaksbrev: boolean,
 ): VedtakAksjonspunkter[] =>
@@ -144,7 +145,7 @@ const finnBegrunnelse = (behandling: Behandling): string | undefined => {
     : undefined;
 };
 
-export const buildInitialValues = (behandling: Behandling): FormValues => ({
+export const buildInitialValues = (behandling: Behandling): VedtakFormValues => ({
   begrunnelse: finnBegrunnelse(behandling),
 });
 
@@ -153,10 +154,6 @@ type VedtakAksjonspunkter =
   | ForeslaVedtakManueltAp
   | VurdereAnnenYtelseForVedtakAp
   | VurdereDokumentForVedtakAp;
-
-type FormValues = {
-  begrunnelse?: string;
-};
 
 interface Props {
   previewCallback: (data: VedtakForhåndsvisData) => void;
@@ -186,9 +183,9 @@ export const VedtakForm = ({
 
   const intl = useIntl();
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<VedtakFormValues>();
 
-  const formMethods = useForm<FormValues>({
+  const formMethods = useForm<VedtakFormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(behandling),
   });
 
@@ -211,7 +208,7 @@ export const VedtakForm = ({
   return (
     <Form
       formMethods={formMethods}
-      onSubmit={(values: FormValues) =>
+      onSubmit={(values: VedtakFormValues) =>
         submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
       }
       setDataOnUnmount={setMellomlagretFormData}

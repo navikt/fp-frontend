@@ -139,6 +139,8 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           personoversikt={personoversikt}
         />
         <FaktaBegrunnelseTextField
+          name="begrunnelse"
+          control={formMethods.control}
           isSubmittable={submittable}
           isReadOnly={isReadOnly}
           hasBegrunnelse={!!begrunnelse}

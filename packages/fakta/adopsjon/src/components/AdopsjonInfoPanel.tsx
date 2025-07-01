@@ -168,6 +168,8 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
           {aksjonspunkterForPanel && aksjonspunkterForPanel.length > 0 && (
             <>
               <FaktaBegrunnelseTextField
+                name="begrunnelse"
+                control={formMethods.control}
                 isSubmittable={submittable}
                 isReadOnly={isReadOnly}
                 hasBegrunnelse={!!begrunnelse}

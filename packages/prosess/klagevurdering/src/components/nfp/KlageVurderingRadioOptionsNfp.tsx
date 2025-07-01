@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
@@ -10,6 +11,8 @@ import {
   KlageVurderingOmgjoer as klageVurderingOmgjoerType,
 } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
+
+import type { KlageFormType } from '../../types/klageFormType';
 
 import styles from './klageVurderingRadioOptionsNfp.module.css';
 
@@ -27,6 +30,9 @@ export const KlageVurderingRadioOptionsNfp = ({
   klageVurdering,
 }: Props) => {
   const intl = useIntl();
+
+  const { control } = useFormContext<KlageFormType>();
+
   const medholdOptions = medholdReasons.map(mo => (
     <option key={mo.kode} value={mo.kode}>
       {mo.navn}
@@ -41,6 +47,7 @@ export const KlageVurderingRadioOptionsNfp = ({
     <VStack gap="4">
       <RhfRadioGroup
         name="klageVurdering"
+        control={control}
         validate={[required]}
         isReadOnly={readOnly}
         isHorizontal
@@ -60,6 +67,7 @@ export const KlageVurderingRadioOptionsNfp = ({
           <VStack gap="4">
             <RhfSelect
               readOnly={readOnly}
+              control={control}
               name="klageMedholdArsak"
               selectValues={medholdOptions}
               className={readOnly ? styles.selectReadOnly : styles.select}
@@ -68,6 +76,7 @@ export const KlageVurderingRadioOptionsNfp = ({
             />
             <RhfRadioGroup
               name="klageVurderingOmgjoer"
+              control={control}
               validate={[required]}
               isReadOnly={readOnly}
               radios={[
@@ -90,6 +99,7 @@ export const KlageVurderingRadioOptionsNfp = ({
       )}
       <RhfSelect
         readOnly={readOnly}
+        control={control}
         name="klageHjemmel"
         selectValues={hjemmelOptions}
         className={readOnly ? styles.selectReadOnly : styles.select}
