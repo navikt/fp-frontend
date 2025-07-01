@@ -1,7 +1,7 @@
 export { FaktaBegrunnelseTextField } from './src/components/form/FaktaBegrunnelseTextField';
 export { FaktaSubmitButton } from './src/components/form/FaktaSubmitButton';
 export { TrueFalseInput } from './src/components/form/TrueFalseInput';
-export type { FormValues as FaktaBegrunnelseFormValues } from './src/components/form/FaktaBegrunnelseTextField';
+export type { FaktaBegrunnelseFormValues } from './src/components/form/FaktaBegrunnelseTextField';
 
 export { hasValue, isNotEqual } from './src/utils/validering';
 export { sorterPerioder } from './src/utils/periodeUtils';
