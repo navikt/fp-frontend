@@ -1,15 +1,18 @@
+import { useState } from 'react';
+
 import { Table, VStack } from '@navikt/ds-react';
-import { dateFormat } from '@navikt/ft-utils';
+import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 
+import { UttakEøsFaktaForm } from './UttakEøsFaktaForm';
+
 interface Props {
-  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
+  annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
+  setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
 }
 
-export const UttakEøsFaktaTable = ({ annenForelderUttakEøs }: Props) => {
-  //const intl = useIntl(); // TODO: legg inn språk
-
+export const UttakEøsFaktaTable = ({ annenForelderUttakEøsPerioder, setPerioder }: Props) => {
   return (
     <VStack gap="6">
       <Table>
@@ -18,20 +21,87 @@ export const UttakEøsFaktaTable = ({ annenForelderUttakEøs }: Props) => {
             <Table.HeaderCell scope="col">Periode</Table.HeaderCell>
             <Table.HeaderCell scope="col">Kontotype</Table.HeaderCell>
             <Table.HeaderCell scope="col">Trekkdager</Table.HeaderCell>
+            <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {annenForelderUttakEøs.map(({ fom, tom, trekkonto, trekkdager }, i) => {
+          {annenForelderUttakEøsPerioder.map(annenForelderUttakEøsPeriode => {
             return (
-              <Table.Row key={i + dateFormat(fom)}>
-                <Table.DataCell>{`${dateFormat(fom)} - ${dateFormat(tom)}`}</Table.DataCell>
-                <Table.DataCell>{trekkonto}</Table.DataCell>
-                <Table.DataCell>{trekkdager}</Table.DataCell>
-              </Table.Row>
+              <Rad
+                key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
+                annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
+                setPerioder={setPerioder}
+              />
             );
           })}
         </Table.Body>
       </Table>
     </VStack>
+  );
+};
+
+interface RadProps {
+  annenForelderUttakEøsPeriode: AnnenforelderUttakEøsPeriode;
+  setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
+}
+
+const Rad = ({ annenForelderUttakEøsPeriode, setPerioder }: RadProps) => {
+  const [erÅpen, setErÅpen] = useState(false);
+
+  const oppdaterPeriode = (oppdatertPeriode: AnnenforelderUttakEøsPeriode) => {
+    setErÅpen(false);
+    setPerioder(prevPerioder => {
+      const index = prevPerioder.findIndex(
+        periode => periode.fom === annenForelderUttakEøsPeriode.fom && periode.tom === annenForelderUttakEøsPeriode.tom,
+      );
+      if (index !== -1) {
+        const updatedPerioder = [...prevPerioder];
+        updatedPerioder[index] = oppdatertPeriode;
+        return updatedPerioder;
+      }
+      return [...prevPerioder, oppdatertPeriode];
+    });
+  };
+
+  const slettPeriode = () => {
+    setErÅpen(false);
+    setPerioder(prevPerioder => {
+      return prevPerioder.filter(
+        periode => periode.fom !== annenForelderUttakEøsPeriode.fom && periode.tom !== annenForelderUttakEøsPeriode.tom,
+      );
+    });
+  };
+
+  const avbryt = () => {
+    setErÅpen(false);
+  };
+
+  return (
+    <Table.ExpandableRow
+      key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
+      content={
+        erÅpen && (
+          <UttakEøsFaktaForm
+            annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
+            oppdater={oppdaterPeriode}
+            slettPeriode={slettPeriode}
+            avbryt={avbryt}
+          />
+        )
+      }
+      expandOnRowClick
+      onOpenChange={() => setErÅpen(!erÅpen)}
+      open={erÅpen}
+      togglePlacement="right"
+    >
+      <Table.DataCell>
+        <PeriodLabel
+          dateStringFom={annenForelderUttakEøsPeriode.fom}
+          dateStringTom={annenForelderUttakEøsPeriode.tom}
+        />
+      </Table.DataCell>
+      <Table.DataCell>{annenForelderUttakEøsPeriode.trekkonto}</Table.DataCell>
+      <Table.DataCell>{annenForelderUttakEøsPeriode.trekkdager}</Table.DataCell>
+    </Table.ExpandableRow>
   );
 };

@@ -4,7 +4,7 @@ import { createIntl } from '@navikt/ft-utils';
 
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 
-import { UttakESFaktaForm } from './components/UttakEøsFaktaForm.tsx';
+import { UttakEøsFaktaInfoPanel } from './components/UttakEøsFaktaInfoPanel.tsx';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -18,6 +18,6 @@ interface Props {
 
 export const UttakFaktaEøsIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <UttakESFaktaForm {...props} />
+    <UttakEøsFaktaInfoPanel {...props} />
   </RawIntlProvider>
 );
