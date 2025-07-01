@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { Table, VStack } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import dayjs from 'dayjs';
 
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 
@@ -51,15 +52,10 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder }: RadProps) => {
   const oppdaterPeriode = (oppdatertPeriode: AnnenforelderUttakEøsPeriode) => {
     setErÅpen(false);
     setPerioder(prevPerioder => {
-      const index = prevPerioder.findIndex(
-        periode => periode.fom === annenForelderUttakEøsPeriode.fom && periode.tom === annenForelderUttakEøsPeriode.tom,
+      const perioderSomIkkeErOppdatert = prevPerioder.filter(
+        periode => periode.fom !== annenForelderUttakEøsPeriode.fom && periode.tom !== annenForelderUttakEøsPeriode.tom,
       );
-      if (index !== -1) {
-        const updatedPerioder = [...prevPerioder];
-        updatedPerioder[index] = oppdatertPeriode;
-        return updatedPerioder;
-      }
-      return [...prevPerioder, oppdatertPeriode];
+      return [...perioderSomIkkeErOppdatert, oppdatertPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
     });
   };
 
