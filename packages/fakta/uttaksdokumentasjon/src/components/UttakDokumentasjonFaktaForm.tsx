@@ -80,7 +80,6 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
         <VStack gap="4">
           <FaktaBegrunnelseTextField
-            name="begrunnelse"
             control={formMethods.control}
             label={intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.Begrunnelse' })}
             isSubmittable

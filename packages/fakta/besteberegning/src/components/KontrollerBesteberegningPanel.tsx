@@ -27,7 +27,7 @@ export const transformValues = (values: FormValues): ManuellKontrollBesteberegni
 });
 
 export type FormValues = {
-  begrunnelse?: string;
+  begrunnelse: string | undefined;
   besteberegningErKorrektValg?: boolean;
 };
 
@@ -78,7 +78,6 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
             onChange={() => setErKnappEnabled(!erKnappEnabled)}
           />
           <FaktaBegrunnelseTextField
-            name="begrunnelse"
             control={formMethods.control}
             isSubmittable={submittable}
             isReadOnly={readOnly}

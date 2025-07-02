@@ -1,4 +1,4 @@
-import type { FieldValues, UseControllerProps } from 'react-hook-form';
+import type { FieldValues, Path, UseControllerProps } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
 import { RhfTextarea } from '@navikt/ft-form-hooks';
@@ -15,8 +15,11 @@ const intl = createIntl(messages);
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-type Props<T extends FieldValues> = {
-  name: UseControllerProps<T>['name'];
+export type FormValues = {
+  begrunnelse: string | undefined;
+};
+
+type Props<T extends FieldValues & FormValues> = {
   control: UseControllerProps<T>['control'];
   isReadOnly: boolean;
   isSubmittable: boolean;
@@ -26,16 +29,11 @@ type Props<T extends FieldValues> = {
   hasVurderingText?: boolean;
 };
 
-export type FormValues = {
-  begrunnelse: string | undefined;
-};
-
 type TransformedValues = {
   begrunnelse: string;
 };
 
-export const FaktaBegrunnelseTextField = <T extends FieldValues>({
-  name,
+export const FaktaBegrunnelseTextField = <T extends FieldValues & FormValues>({
   control,
   isReadOnly,
   isSubmittable,
@@ -50,11 +48,12 @@ export const FaktaBegrunnelseTextField = <T extends FieldValues>({
     if (isReadOnly) return hasReadOnlyLabel ? intl.formatMessage({ id: 'FaktaBegrunnelseTextField.Begrunnelse' }) : '';
     return label ?? intl.formatMessage({ id: code });
   };
+
   return (
     <RawIntlProvider value={intl}>
       {(isSubmittable || hasBegrunnelse) && (
         <RhfTextarea
-          name={name}
+          name={'begrunnelse' as Path<T>}
           control={control}
           label={getLabel()}
           validate={[required, minLength3, maxLength1500, hasValidText]}

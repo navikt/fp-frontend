@@ -83,7 +83,6 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
           />
 
           <FaktaBegrunnelseTextField
-            name="begrunnelse"
             control={formMethods.control}
             isSubmittable={submittable}
             isReadOnly={isReadOnlyOrApIsNull}

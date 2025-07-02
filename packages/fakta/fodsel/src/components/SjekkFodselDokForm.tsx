@@ -111,7 +111,6 @@ export const SjekkFodselDokForm = ({
         </VStack>
       </FaktaGruppe>
       <FaktaBegrunnelseTextField
-        name="begrunnelse"
         control={control}
         isSubmittable={submittable}
         isReadOnly={readOnly}

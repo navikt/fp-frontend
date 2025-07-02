@@ -98,7 +98,6 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
           </HStack>
 
           <FaktaBegrunnelseTextField
-            name="begrunnelse"
             control={formMethods.control}
             isSubmittable={submittable}
             isReadOnly={readOnly}

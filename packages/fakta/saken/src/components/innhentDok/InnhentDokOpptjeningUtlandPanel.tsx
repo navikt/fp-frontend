@@ -26,7 +26,7 @@ const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
 });
 
 export type FormValues = {
-  begrunnelse?: string;
+  begrunnelse: string | undefined;
   dokStatus?: string;
 };
 
@@ -96,7 +96,6 @@ export const InnhentDokOpptjeningUtlandPanel = ({
               ]}
             />
             <FaktaBegrunnelseTextField
-              name="begrunnelse"
               control={formMethods.control}
               isSubmittable={submittable}
               isReadOnly={readOnly}
