@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ReactElement, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -8,7 +8,7 @@ import { Datepicker, Form, NumberField, SelectField } from '@navikt/ft-form-hook
 import { hasValidDate, hasValidInteger, minValue, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
-import { UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -30,7 +30,29 @@ interface Props {
 export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, slettPeriode, avbryt }: Props) => {
   const intl = useIntl();
 
-  const { isReadOnly } = usePanelDataContext<BekreftUttaksperioderAp[]>();
+  const { isReadOnly, fagsak } = usePanelDataContext<BekreftUttaksperioderAp[]>();
+
+  const gyldigeKontotyperOption = (): ReactElement[] => {
+    if (fagsak.relasjonsRolleType === RelasjonsRolleType.MOR) {
+      return [
+        <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
+          {UttakPeriodeType.FELLESPERIODE}
+        </option>,
+        <option key={1} value={UttakPeriodeType.MODREKVOTE}>
+          {UttakPeriodeType.MODREKVOTE}
+        </option>,
+      ];
+    } else {
+      return [
+        <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
+          {UttakPeriodeType.FELLESPERIODE}
+        </option>,
+        <option key={1} value={UttakPeriodeType.FEDREKVOTE}>
+          {UttakPeriodeType.FEDREKVOTE}
+        </option>,
+      ];
+    }
+  };
 
   const formMethods = useForm<FormValues>({ defaultValues: annenForelderUttakEøsPeriode });
 
@@ -77,14 +99,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
               label={intl.formatMessage({
                 id: 'UttakFaktaForm.Stønadskonto',
               })}
-              selectValues={[
-                <option key={1} value={UttakPeriodeType.MODREKVOTE}>
-                  mødrekvote
-                </option>,
-                <option key={2} value={UttakPeriodeType.FELLESPERIODE}>
-                  fellesperiode
-                </option>,
-              ]}
+              selectValues={gyldigeKontotyperOption()}
               readOnly={isReadOnly}
               validate={[required]}
             />

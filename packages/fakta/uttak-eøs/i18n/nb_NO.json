@@ -1,6 +1,10 @@
 {
   "UttakEøsFaktaInfoPanel.Aksjonspunkt": "Avklar uttak i EØS for annen forelder",
   "UttakEøsFaktaInfoPanel.OverlappendePerioder": "Det finnes overlappende perioder",
+  "UttakEøsFaktaInfoPanel.FeilmeldingIngenPerioder": "Det er svart JA på at annen forelder har uttak i EØS, men det er ikke registrert noen perioder.",
+  "UttakEøsFaktaInfoPanel.harPeriodeIEøs": "Har annen forelder uttak i EØS?",
+  "UttakEøsFaktaInfoPanel.Ja": "Ja",
+  "UttakEøsFaktaInfoPanel.Nei": "Nei",
 
   "UttakFaktaForm.FaktaUttakEos": "Fakta om uttak til annen forelder i EØS",
   "UttakFaktaForm.LeggTilPeriode": "Legg til periode",
