@@ -1,5 +1,0 @@
-import"./iframe-BJhriNd1.js";import{g as a}from"./withIntl-BZ20F7Er.js";import{Å as n}from"./ÅpenRevurderingModal-D10hsT1W.js";import{m as s}from"./nb_NO-D39UuuyA.js";import"./VStack-DjKL2eQm.js";import"./index-DQECdfAs.js";import"./ExclamationmarkTriangleFill-ClE3XlZm.js";const m=a(s),f={title:"behandling/tilbakekreving/ÅpenRevurderingModal",component:n,decorators:[m]},r={args:{harÅpenRevurdering:!0}};var e,t,o;r.parameters={...r.parameters,docs:{...(e=r.parameters)==null?void 0:e.docs,source:{originalSource:`{
-  args: {
-    harÅpenRevurdering: true
-  }
-}`,...(o=(t=r.parameters)==null?void 0:t.docs)==null?void 0:o.source}}};const v=["Default"];export{r as Default,v as __namedExportsOrder,f as default};
