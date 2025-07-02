@@ -10,6 +10,16 @@ const __dirname = path.dirname(__filename);
 export const createSharedAppConfig = setupFileDirName =>
   mergeConfig(createConfig(setupFileDirName), {
     build: {
+      plugins: [
+        react({
+          include: '**/*.{ts,tsx}',
+        }),
+      ],
+      css: {
+        modules: {
+          localsConvention: 'camelCase',
+        },
+      },
       sourcemap: true,
       rollupOptions: {
         plugins: [sourcemaps({ exclude: /@sentry/ })],
@@ -21,16 +31,6 @@ export const createSharedPackagesConfig = setupFileDirName => createConfig(setup
 
 export const createConfig = setupFileDirName =>
   defineConfig({
-    plugins: [
-      react({
-        include: '**/*.{ts,tsx}',
-      }),
-    ],
-    css: {
-      modules: {
-        localsConvention: 'camelCase',
-      },
-    },
     test: {
       deps: { interopDefault: true },
       environment: 'jsdom',
