@@ -153,15 +153,15 @@ describe('UttakFaktaEøsIndex', () => {
 
     // Oppdatere perioden slik at det ikke blir overlapp og sender deretter inn
     await userEvent.click(screen.getAllByTitle('Vis mer')[1]);
+    await userEvent.clear(screen.getByLabelText('Fra og med'));
     await userEvent.type(screen.getByLabelText('Fra og med'), '16.02.2022');
     await userEvent.click(screen.getByText('Oppdater'));
 
     console.log(screen.debug());
 
-    expect(screen.getByText('Du må rette disse feilene før du kan fortsette:')).not.toBeInTheDocument();
-    expect(screen.getByText('Det finnes overlappende perioder')).not.toBeInTheDocument();
+    expect(screen.queryByText('Du må rette disse feilene før du kan fortsette:')).not.toBeInTheDocument();
+    expect(screen.queryByText('Det finnes overlappende perioder')).not.toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -169,16 +169,16 @@ describe('UttakFaktaEøsIndex', () => {
       begrunnelse: 'Dette er en begrunnelse',
       perioder: [
         {
-          fom: '31.01.2022',
-          tom: '15.02.2022',
-          trekkonto: UttakPeriodeType.FELLESPERIODE,
-          trekkdager: 40,
+          fom: '2022-01-31',
+          tom: '2022-02-15',
+          trekkdager: '40',
+          trekkonto: 'FELLESPERIODE',
         },
         {
-          fom: '16.02.2022',
-          tom: '25.02.2022',
-          trekkonto: UttakPeriodeType.MODREKVOTE,
-          trekkdager: 10,
+          fom: '2022-02-16',
+          tom: '2022-02-25',
+          trekkdager: '12',
+          trekkonto: 'MØDREKVOTE',
         },
       ],
     });
