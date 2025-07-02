@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Button, ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
+import { Button, ErrorSummary, Heading, HStack, Radio, RadioGroup, VStack } from '@navikt/ds-react';
 import { Form } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
@@ -34,7 +34,8 @@ export const UttakEøsFaktaInfoPanel = ({ annenForelderUttakEøs, submittable }:
     annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))) || [],
   );
 
-  const [visForm, setVisForm] = useState(false);
+  const [visTabell, setVisTabell] = useState(perioder.length > 0);
+  const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);
   const [feilmelding, setFeilmelding] = useState<string | undefined>();
 
   const formMethods = useForm<{ begrunnelse: string | null }>({
@@ -42,12 +43,24 @@ export const UttakEøsFaktaInfoPanel = ({ annenForelderUttakEøs, submittable }:
   });
 
   const bekreft = (begrunnelse: string) => {
+    if (visTabell && perioder.length === 0) {
+      setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaInfoPanel.FeilmeldingIngenPerioder' }));
+    } else {
+      setFeilmelding(undefined);
+    }
+
     submitCallback({
       kode: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       begrunnelse,
-      perioder,
+      perioder: visTabell ? perioder : [],
     });
   };
+
+  useEffect(() => {
+    if (!visTabell) {
+      setFeilmelding(undefined);
+    }
+  }, [visTabell]);
 
   useEffect(() => {
     const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
@@ -77,29 +90,47 @@ export const UttakEøsFaktaInfoPanel = ({ annenForelderUttakEøs, submittable }:
         </ErrorSummary>
       )}
       <VStack gap="10">
-        <UttakEøsFaktaTable annenForelderUttakEøsPerioder={perioder} setPerioder={setPerioder} />
-        {visForm && (
-          <UttakEøsFaktaForm
-            oppdater={(nyPeriode: FormValues) => {
-              setPerioder(prevPerioder => [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))));
-              setVisForm(false);
-            }}
-            avbryt={() => setVisForm(false)}
-          />
-        )}
-        {!visForm && (
-          <div>
-            <Button
-              size="small"
-              variant="tertiary"
-              type="button"
-              icon={<PlusCircleIcon />}
-              onClick={() => setVisForm(true)}
-              disabled={isReadOnly}
-            >
-              <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
-            </Button>
-          </div>
+        <RadioGroup
+          legend={<FormattedMessage id="UttakEøsFaktaInfoPanel.harPeriodeIEøs" />}
+          onChange={setVisTabell}
+          defaultValue={perioder.length > 0}
+        >
+          <Radio value={true}>
+            <FormattedMessage id="UttakEøsFaktaInfoPanel.Ja" />
+          </Radio>
+          <Radio value={false}>
+            <FormattedMessage id="UttakEøsFaktaInfoPanel.Nei" />
+          </Radio>
+        </RadioGroup>
+        {visTabell && (
+          <>
+            <UttakEøsFaktaTable annenForelderUttakEøsPerioder={perioder} setPerioder={setPerioder} />
+            {visLeggTilPeriodeForm && (
+              <UttakEøsFaktaForm
+                oppdater={(nyPeriode: FormValues) => {
+                  setPerioder(prevPerioder =>
+                    [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
+                  );
+                  setVisLeggTilPeriodeForm(false);
+                }}
+                avbryt={() => setVisLeggTilPeriodeForm(false)}
+              />
+            )}
+            {!visLeggTilPeriodeForm && (
+              <div>
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  type="button"
+                  icon={<PlusCircleIcon />}
+                  onClick={() => setVisLeggTilPeriodeForm(true)}
+                  disabled={isReadOnly}
+                >
+                  <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
+                </Button>
+              </div>
+            )}
+          </>
         )}
         <Form formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
           <VStack gap="4">
