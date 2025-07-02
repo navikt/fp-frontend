@@ -297,7 +297,12 @@ export const UttakFaktaForm = ({
       />
       <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
         <VStack gap="4">
-          <FaktaBegrunnelseTextField isSubmittable isReadOnly={!erRedigerbart} hasBegrunnelse />
+          <FaktaBegrunnelseTextField
+            control={formMethods.control}
+            isSubmittable
+            isReadOnly={!erRedigerbart}
+            hasBegrunnelse
+          />
           {erRedigerbart && (
             <FaktaSubmitButton
               isSubmittable={isSubmittable}

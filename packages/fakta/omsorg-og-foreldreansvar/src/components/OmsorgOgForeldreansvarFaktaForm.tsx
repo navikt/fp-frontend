@@ -23,10 +23,11 @@ import type {
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
 import { BarnPanel } from './BarnPanel';
 import { ForeldrePanel } from './ForeldrePanel';
-import { type FormValues as OmsorgFormValues, OmsorgsovertakelseFaktaPanel } from './OmsorgsovertakelseFaktaPanel';
-import { type FormValues as RettighetFormValues, RettighetFaktaPanel } from './RettighetFaktaPanel';
+import { OmsorgsovertakelseFaktaPanel } from './OmsorgsovertakelseFaktaPanel';
+import { RettighetFaktaPanel } from './RettighetFaktaPanel';
 
 import styles from './omsorgOgForeldreansvarFaktaForm.module.css';
 
@@ -42,11 +43,6 @@ const getDescriptionText = (vilkarCode?: string): ReactElement => {
   }
   return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkarToSeeDescription" />;
 };
-
-export type FormValues = OmsorgFormValues &
-  RettighetFormValues & {
-    vilkarType?: string;
-  };
 
 interface Props {
   soknad: Soknad;
@@ -74,7 +70,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { watch, control } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<OmsorgOgForeldreansvarFormValues>();
 
   const vilkarType = watch('vilkarType');
 
@@ -138,14 +134,14 @@ OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (
   gjeldendeFamiliehendelse: FamilieHendelse,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
   alleKodeverk: AlleKodeverk,
-): FormValues => ({
+): OmsorgOgForeldreansvarFormValues => ({
   vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType : '',
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, gjeldendeFamiliehendelse),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, alleKodeverk),
 });
 
 OmsorgOgForeldreansvarFaktaForm.transformValues = (
-  values: FormValues,
+  values: OmsorgOgForeldreansvarFormValues,
   aksjonspunkt: Aksjonspunkt,
 ): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp =>
   aksjonspunkt.definisjon === AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR

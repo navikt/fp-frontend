@@ -22,12 +22,10 @@ import type {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import {
-  type FormValues as OmsorgFormValues,
-  OmsorgOgForeldreansvarFaktaForm,
-} from './OmsorgOgForeldreansvarFaktaForm';
+import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
+import { OmsorgOgForeldreansvarFaktaForm } from './OmsorgOgForeldreansvarFaktaForm';
 
-type FormValues = OmsorgFormValues & FaktaBegrunnelseFormValues;
+type FormValues = OmsorgOgForeldreansvarFormValues & FaktaBegrunnelseFormValues;
 
 const transformValues = (
   values: FormValues,
@@ -139,6 +137,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           personoversikt={personoversikt}
         />
         <FaktaBegrunnelseTextField
+          control={formMethods.control}
           isSubmittable={submittable}
           isReadOnly={isReadOnly}
           hasBegrunnelse={!!begrunnelse}

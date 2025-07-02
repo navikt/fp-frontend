@@ -81,6 +81,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
           {aksjonspunkterForPanel.length !== 0 && (
             <>
               <FaktaBegrunnelseTextField
+                control={formMethods.control}
                 isSubmittable={submittable}
                 isReadOnly={isReadOnly}
                 hasBegrunnelse={!!begrunnelse}

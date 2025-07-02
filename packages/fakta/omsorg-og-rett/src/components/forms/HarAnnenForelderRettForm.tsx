@@ -66,6 +66,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
           <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
 
           <FaktaBegrunnelseTextField
+            control={formMethods.control}
             isSubmittable={submittable}
             isReadOnly={readOnly}
             hasBegrunnelse={true}

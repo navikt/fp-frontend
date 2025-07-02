@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ReadMore, VStack } from '@navikt/ds-react';
@@ -37,6 +38,8 @@ interface Props {
 export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
+  const { control } = useFormContext<EtterbetalingSøkerFormValues>();
+
   if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
     return null;
   }
@@ -48,6 +51,7 @@ export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
       </ReadMore>
       <RhfTextarea
         name="begrunnelseEtterbetaling"
+        control={control}
         label={intl.formatMessage({ id: 'Simulering.Etterbetaling.Vurdering' })}
         validate={[required, minLength3, maxLength1500, hasValidText]}
         maxLength={1500}

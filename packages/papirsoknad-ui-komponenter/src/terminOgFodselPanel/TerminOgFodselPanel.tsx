@@ -118,6 +118,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                   </HStack>
                   <RhfDatepicker
                     name="terminbekreftelseDato"
+                    control={control}
                     label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.UtstedtDato' })}
                     isReadOnly={readOnly}
                     fromDate={minTerminbekreftelseDato().toDate()}

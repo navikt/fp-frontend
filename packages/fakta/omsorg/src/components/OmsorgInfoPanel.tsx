@@ -75,6 +75,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
             )}
 
             <FaktaBegrunnelseTextField
+              control={formMethods.control}
               isSubmittable={submittable}
               isReadOnly={isReadOnly}
               hasBegrunnelse={true}

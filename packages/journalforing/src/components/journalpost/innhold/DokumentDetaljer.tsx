@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { PencilIcon, TabsAddIcon } from '@navikt/aksel-icons';
@@ -9,6 +10,7 @@ import { hasValidText, required } from '@navikt/ft-form-validators';
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
 import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
 import type { JournalDokument } from '../../../typer/journalDokumentTsType';
+import type { JournalføringFormValues } from '../../../typer/journalføringFormValues';
 import type { Journalpost } from '../../../typer/journalpostTsType';
 
 import styles from './dokumentDetaljer.module.css';
@@ -29,12 +31,11 @@ export const DokumentDetaljer = ({
   journalpost,
   dokumentTittelStyresAvJournalpostTittel,
 }: Props) => {
+  const { control } = useFormContext<JournalføringFormValues>();
+
   const [kanRedigeres, setKanRedigeres] = useState<boolean>(!dokument.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
 
-  const inputFieldName = dokumentTittelStyresAvJournalpostTittel
-    ? 'journalpostTittel'
-    : `journalpostDokumenter.${docFieldIndex}.tittel`;
   const nyFaneKnapp = (
     <div className={styles.knappKol}>
       <Button
@@ -52,7 +53,12 @@ export const DokumentDetaljer = ({
       <div className={styles.dokContainer}>
         <div className={styles.dokumentTittel}>
           <RhfTextField
-            name={inputFieldName}
+            name={
+              dokumentTittelStyresAvJournalpostTittel
+                ? 'journalpostTittel'
+                : `journalpostDokumenter.${docFieldIndex}.tittel`
+            }
+            control={control}
             validate={[required, hasValidText]}
             readOnly={dokumentTittelStyresAvJournalpostTittel}
             maxLength={200}
@@ -71,6 +77,7 @@ export const DokumentDetaljer = ({
             {harToggletFritekst && (
               <RhfTextField
                 name={`journalpostDokumenter.${docFieldIndex}.tittel`}
+                control={control}
                 validate={[required, hasValidText]}
                 readOnly={false}
                 className={styles.input}
@@ -79,8 +86,9 @@ export const DokumentDetaljer = ({
             )}
             {!harToggletFritekst && (
               <RhfSelect
-                readOnly={false}
                 name={`journalpostDokumenter.${docFieldIndex}.tittel`}
+                control={control}
+                readOnly={false}
                 label={undefined}
                 validate={[required]}
                 className={styles.input}
