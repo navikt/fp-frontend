@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, NumberField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, Form, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, minValue, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
@@ -69,13 +69,13 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
       <Form formMethods={formMethods} onSubmit={oppdater}>
         <VStack gap="8">
           <HStack gap="4" align="end">
-            <Datepicker
+            <RhfDatepicker
               name="fom"
               label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Fom' })}
               validate={[required, hasValidDate]}
               isReadOnly={isReadOnly}
             />
-            <Datepicker
+            <RhfDatepicker
               name="tom"
               label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Tom' })}
               validate={[required, hasValidDate]}
@@ -94,7 +94,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
             )}
           </HStack>
           <HStack gap="4">
-            <SelectField
+            <RhfSelect
               name="trekkonto"
               label={intl.formatMessage({
                 id: 'UttakFaktaForm.Stønadskonto',
@@ -103,7 +103,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
               readOnly={isReadOnly}
               validate={[required]}
             />
-            <NumberField
+            <RhfNumericField
               name="trekkdager"
               label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Trekkdager' })}
               validate={[required, hasValidInteger, minValue(0)]}
