@@ -29,7 +29,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {
+export const ÅpentAksjonspunktMedPerioder: Story = {
   args: {
     annenForelderUttakEøs: [
       {
@@ -54,7 +54,7 @@ export const Default: Story = {
   },
 };
 
-export const TomTabell: Story = {
+export const ÅpentAksjonspunktUtenPerioder: Story = {
   args: {
     annenForelderUttakEøs: undefined,
   },
