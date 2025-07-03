@@ -6,11 +6,13 @@
   "UttakEøsFaktaInfoPanel.Ja": "Ja",
   "UttakEøsFaktaInfoPanel.Nei": "Nei",
 
+
   "UttakFaktaForm.FaktaUttakEos": "Fakta om uttak til annen forelder i EØS",
   "UttakFaktaForm.LeggTilPeriode": "Legg til periode",
 
   "UttakEøsFaktaForm.Fom": "Fra og med",
   "UttakEøsFaktaForm.Tom": "Til og med",
+  "UttakEøsFaktaForm.TomForFom": "Dato kan ikke være før fra",
   "UttakFaktaForm.Stønadskonto": "Stønadskonto",
   "UttakEøsFaktaForm.Trekkdager": "Trekkdager",
   "UttakEøsFaktaForm.Oppdater": "Oppdater",

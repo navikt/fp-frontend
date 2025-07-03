@@ -1,17 +1,19 @@
 import { type ReactElement, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useForm, type UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
 import { Form, RhfDatepicker, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
-import { hasValidDate, hasValidInteger, minValue, required } from '@navikt/ft-form-validators';
+import { hasValidDate, hasValidDecimal, minValue, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import { RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
+import dayjs from 'dayjs';
+import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 
 export type FormValues = {
   fom: string;
@@ -38,8 +40,8 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
         <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
           {UttakPeriodeType.FELLESPERIODE}
         </option>,
-        <option key={1} value={UttakPeriodeType.MODREKVOTE}>
-          {UttakPeriodeType.MODREKVOTE}
+        <option key={1} value={UttakPeriodeType.FEDREKVOTE}>
+          {UttakPeriodeType.FEDREKVOTE}
         </option>,
       ];
     } else {
@@ -47,15 +49,15 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
         <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
           {UttakPeriodeType.FELLESPERIODE}
         </option>,
-        <option key={1} value={UttakPeriodeType.FEDREKVOTE}>
-          {UttakPeriodeType.FEDREKVOTE}
+        <option key={1} value={UttakPeriodeType.MODREKVOTE}>
+          {UttakPeriodeType.MODREKVOTE}
         </option>,
       ];
     }
   };
 
   const formMethods = useForm<FormValues>({ defaultValues: annenForelderUttakEøsPeriode });
-
+  const fom = formMethods.watch('fom');
   const [visSletteDialog, setVisSletteDialog] = useState(false);
   const slettUttaksperiode = () => {
     setVisSletteDialog(false);
@@ -78,8 +80,9 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
             <RhfDatepicker
               name="tom"
               label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Tom' })}
-              validate={[required, hasValidDate]}
+              validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
               isReadOnly={isReadOnly}
+              fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
             />
             {slettPeriode && (
               <Button
@@ -106,9 +109,9 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
             <RhfNumericField
               name="trekkdager"
               label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Trekkdager' })}
-              validate={[required, hasValidInteger, minValue(0)]}
+              validate={[required, minValue(0), hasValidDecimal]}
               readOnly={isReadOnly}
-              returnAsNumber
+              forceTwoDecimalDigits
             />
           </HStack>
           <HStack gap="4">
@@ -136,3 +139,6 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
     </>
   );
 };
+
+const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
+  dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakEøsFaktaForm.TomForFom' }) : null;
