@@ -57,6 +57,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
   const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(behandling));
+  const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));
 
   const { mutateAsync: oppdaterStønadskontoer } = useMutation({
     mutationFn: api.oppdaterStønadskontoer,
@@ -80,6 +81,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
           familiehendelse={familiehendelse}
           soknad={søknad}
           uttakStonadskontoer={uttakStønadskontoer}
+          annenForelderUttakEøs={annenForelderUttakEøs || []}
         />
       ) : (
         <LoadingPanel />
