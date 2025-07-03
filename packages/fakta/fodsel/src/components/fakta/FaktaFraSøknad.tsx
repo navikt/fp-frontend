@@ -17,9 +17,8 @@ export const FaktaFraSøknad = ({
   terminbekreftelseDokument,
 }: Props) => {
   const intl = useIntl();
-  const tittel = intl.formatMessage({ id: 'FaktaFraSøknad.Tittel' });
   return (
-    <FaktaKort label={tittel}>
+    <FaktaKort label={intl.formatMessage({ id: 'FaktaFraSøknad.Tittel' })}>
       <VStack gap="4">
         {termindato && (
           <ReadOnlyField

@@ -6,7 +6,7 @@
   "BarnFieldArray.LeggTilBarn": "Legg til barn",
   "BarnFieldArray.HelpText": "Hvis opplysningene er feil må dette rettes opp i Folkeregisteret",
   "SjekkManglendeFødselForm.Tittel": "Kontroller opplysninger om fødsel",
-  "SjekkManglendeFødselForm.Info.ForskjelligAntallBarn": "Det er forskjell i antall barn i Folkeregisteret({antallIFreg}) og i søknaden({antallISøknad}). Kontroller hvilke opplysninger som er korrekte.",
+  "SjekkManglendeFødselForm.Info.ForskjelligAntallBarn": "Det er forskjell i antall barn i Folkeregisteret({antallIFreg}) og i søknaden({antallISøknad}).",
   "SjekkManglendeFødselForm.Info.IngenBarnRegistrert": "Det er ikke registrert noen fødsel i Folkeregisteret. Innhent dokumentasjon på fødsel fra bruker og registrer fødsel manuelt.",
   "ErBarnFødt.Label": "Er {antallBarn, plural, one {barnet} other {barna}} født?",
   "ErBarnFødt.Ja": "Ja",

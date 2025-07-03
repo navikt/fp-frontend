@@ -189,4 +189,11 @@ export type { Beskrivelse } from './src/oppgaveTsType.tsx';
 export type { OppgaveDokument } from './src/oppgaveTsType.ts';
 export type { OneOf } from './src/oneOf';
 export type { BrevOverstyring } from './src/brevOverstyring';
-export type { Fødsel, FødselSøknad, FødselRegister, FødselGjeldende, BarnHendelseData } from './src/fødsel';
+export type {
+  Fødsel,
+  FødselSøknad,
+  FødselRegister,
+  FødselGjeldende,
+  FødselDtoGjeldendeBarn,
+  BarnHendelseData,
+} from './src/fødsel';
