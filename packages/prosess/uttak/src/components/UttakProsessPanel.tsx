@@ -8,6 +8,7 @@ import { AksjonspunktKode, AksjonspunktStatus, PeriodeResultatType, Stonadskonto
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
+  AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   FamilieHendelseSamling,
   PeriodeSoker,
@@ -163,6 +164,7 @@ interface Props {
     perioder: PeriodeSoker[];
   }) => Promise<UttakStonadskontoer>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
 }
 
 const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
@@ -184,6 +186,7 @@ export const UttakProsessPanel = ({
   kanOverstyre,
   oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
+  annenForelderUttakEøs,
 }: Props) => {
   const intl = useIntl();
 
@@ -304,6 +307,7 @@ export const UttakProsessPanel = ({
         tilknyttetStortinget={erTilknyttetStortinget}
         fagsak={fagsak}
         alleKodeverk={alleKodeverk}
+        annenForelderUttakEøs={annenForelderUttakEøs}
       />
       {valgtPeriodeIndex !== undefined && (
         <UttakPeriodePanel
