@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, Form, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
+import { Form, RhfDatepicker, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, minValue, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
@@ -108,6 +108,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøsPeriode, oppdater, sl
               label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Trekkdager' })}
               validate={[required, hasValidInteger, minValue(0)]}
               readOnly={isReadOnly}
+              returnAsNumber
             />
           </HStack>
           <HStack gap="4">

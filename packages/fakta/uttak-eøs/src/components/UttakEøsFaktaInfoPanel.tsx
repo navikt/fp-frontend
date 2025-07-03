@@ -9,13 +9,13 @@ import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
-import { type FormValues, UttakEøsFaktaForm } from './UttakEøsFaktaForm';
+import { type FormValues as UttakEøsFaktaFormValues, UttakEøsFaktaForm } from './UttakEøsFaktaForm';
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
 interface Props {
@@ -38,8 +38,8 @@ export const UttakEøsFaktaInfoPanel = ({ annenForelderUttakEøs, submittable }:
   const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);
   const [feilmelding, setFeilmelding] = useState<string | undefined>();
 
-  const formMethods = useForm<{ begrunnelse: string | null }>({
-    defaultValues: { begrunnelse: aksjonspunkterForPanel[0].begrunnelse },
+  const formMethods = useForm<FaktaBegrunnelseFormValues>({
+    defaultValues: FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel[0]),
   });
 
   const bekreft = (begrunnelse: string) => {
@@ -107,7 +107,7 @@ export const UttakEøsFaktaInfoPanel = ({ annenForelderUttakEøs, submittable }:
             <UttakEøsFaktaTable annenForelderUttakEøsPerioder={perioder} setPerioder={setPerioder} />
             {visLeggTilPeriodeForm && (
               <UttakEøsFaktaForm
-                oppdater={(nyPeriode: FormValues) => {
+                oppdater={(nyPeriode: UttakEøsFaktaFormValues) => {
                   setPerioder(prevPerioder =>
                     [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
                   );
@@ -134,7 +134,12 @@ export const UttakEøsFaktaInfoPanel = ({ annenForelderUttakEøs, submittable }:
         )}
         <Form formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
           <VStack gap="4">
-            <FaktaBegrunnelseTextField isSubmittable isReadOnly={isReadOnly} hasBegrunnelse />
+            <FaktaBegrunnelseTextField
+              control={formMethods.control}
+              isSubmittable
+              isReadOnly={isReadOnly}
+              hasBegrunnelse
+            />
             <FaktaSubmitButton
               isSubmittable={submittable && !feilmelding}
               isReadOnly={isReadOnly}
