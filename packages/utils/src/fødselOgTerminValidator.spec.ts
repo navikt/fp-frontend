@@ -1,8 +1,12 @@
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import { expect } from 'vitest';
 
-import { terminBekreftelseBeforeTodayOrTermindato, terminErRundtFodselsdato } from './validator';
+import {
+  dødsdatoAfterOrEqualFødselsdato,
+  terminBekreftelseBeforeTodayOrTermindato,
+  terminErRundtFodselsdato,
+} from './fødselOgTerminValidator';
 
 const terminFremtidig = dayjs().add(5, 'weeks').format(ISO_DATE_FORMAT);
 const terminPassert = dayjs().subtract(5, 'weeks').format(ISO_DATE_FORMAT);
@@ -86,6 +90,32 @@ describe('validator', () => {
     it('skal feile for termin der fødsel er mer enn 5 måneder før termin', () => {
       const result = terminErRundtFodselsdato(fodselsdato.format(ISO_DATE_FORMAT), ulovligTerminFremtidig);
       expect(result).toEqual('Termin kan ikke være mer enn 5 måneder etter fødsel');
+    });
+  });
+
+  describe('dødsdatoAfterOrEqualFødselsdato', () => {
+    const fodselsdato = dayjs().subtract(1, 'month').format(ISO_DATE_FORMAT);
+    it('skal godta dødsdato samme dag som fødselsdato', () => {
+      const result = dødsdatoAfterOrEqualFødselsdato(fodselsdato, fodselsdato);
+      expect(result).toBeNull();
+    });
+
+    it('skal godta dødsdato mellom fødselsdato og i dag', () => {
+      const result = dødsdatoAfterOrEqualFødselsdato(fodselsdato, dayjs().subtract(1, 'week').format(ISO_DATE_FORMAT));
+      expect(result).toBeNull();
+    });
+
+    it('skal feile for dødsdato før fødselsdato', () => {
+      const result = dødsdatoAfterOrEqualFødselsdato(
+        fodselsdato,
+        dayjs(fodselsdato).subtract(1, 'week').format(ISO_DATE_FORMAT),
+      );
+      expect(result).toEqual(`Dato må være etter eller lik ${dayjs(fodselsdato).format(DDMMYYYY_DATE_FORMAT)}`);
+    });
+
+    it('skal feile for dødsdato etter i dag', () => {
+      const result = dødsdatoAfterOrEqualFødselsdato(undefined, dayjs().add(1, 'week').format(ISO_DATE_FORMAT));
+      expect(result).toEqual(`Dato må være før eller lik ${dayjs().format(DDMMYYYY_DATE_FORMAT)}`);
     });
   });
 });
