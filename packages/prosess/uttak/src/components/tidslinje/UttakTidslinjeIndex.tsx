@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { BehandlingType, OppholdArsakType, SoknadType, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
+  AnnenforelderUttakEøsPeriode,
   Behandling,
   Fagsak,
   FamilieHendelse,
@@ -140,6 +141,7 @@ interface Props {
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
 }
 
 export const UttakTidslinjeIndex = ({
@@ -155,6 +157,7 @@ export const UttakTidslinjeIndex = ({
   setValgtPeriodeIndex,
   fagsak,
   alleKodeverk,
+  annenForelderUttakEøs,
 }: Props) => {
   const uttakMedOpphold = lagUttakMedOpphold(perioderSøker);
 

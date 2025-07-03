@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, Heading, HStack, Label, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
 import { BTag, formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';

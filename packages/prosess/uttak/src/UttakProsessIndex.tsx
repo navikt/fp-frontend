@@ -3,6 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 
 import type {
+  AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   FamilieHendelseSamling,
   PeriodeSoker,
@@ -30,6 +31,7 @@ interface Props {
     perioder: PeriodeSoker[];
   }) => Promise<UttakStonadskontoer>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
 }
 
 export const UttakProsessIndex = ({
@@ -41,6 +43,7 @@ export const UttakProsessIndex = ({
   kanOverstyre,
   oppdaterStønadskontoer,
   arbeidsgiverOpplysningerPerId,
+  annenForelderUttakEøs,
 }: Props) => (
   <RawIntlProvider value={intl}>
     <UttakProsessPanel
@@ -52,6 +55,7 @@ export const UttakProsessIndex = ({
       kanOverstyre={kanOverstyre}
       oppdaterStønadskontoer={oppdaterStønadskontoer}
       arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+      annenForelderUttakEøs={annenForelderUttakEøs}
     />
   </RawIntlProvider>
 );
