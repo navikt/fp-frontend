@@ -41,6 +41,7 @@
   "UttakTimeLineData.PeriodeData.Detaljer": "Detaljer for valgt periode",
   "UttakTimeLineData.PeriodeData.DelOppPerioden": "Del opp perioden",
   "TimeLineInfo.Aktivitet": "Aktivitet",
+  "TimeLineInfo.KontoReduksjonerEøs": "Redusert med {dager} dager pga. annen forelder uttak i EØS",
   "TimeLineInfo.Disponibelt": "Disponibelt",
   "TimeLineInfo.Stonadinfo.DisponibleStonadsdager": "Disponible stønadsdager (u/d)",
   "TimeLineInfo.Stonadinfo.Total": "Sum permisjon: <b>{uker} </b> uker {dager, select, 0 {} other {og <b>{dager}</b> dager}}",
