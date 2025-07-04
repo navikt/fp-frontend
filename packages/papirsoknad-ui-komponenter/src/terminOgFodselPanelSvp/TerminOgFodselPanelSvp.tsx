@@ -1,5 +1,4 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
@@ -58,17 +57,17 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
         <RhfRadioGroup
           name="erBarnetFodt"
           control={control}
-          label={<FormattedMessage id="Registrering.TerminOgFodsel.ErBarnetFodt" />}
+          label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
           validate={[required]}
           isReadOnly={readOnly}
           isTrueOrFalseSelection
           radios={[
             {
-              label: <FormattedMessage id="Registrering.TerminOgFodsel.ErFodt" />,
+              label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErFodt' }),
               value: 'true',
             },
             {
-              label: <FormattedMessage id="Registrering.TerminOgFodsel.ErIkkeFodt" />,
+              label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErIkkeFodt' }),
               value: 'false',
             },
           ]}
