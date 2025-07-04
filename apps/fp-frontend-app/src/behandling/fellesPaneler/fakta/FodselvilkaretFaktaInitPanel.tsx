@@ -15,7 +15,7 @@ import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel'
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.TERMINBEKREFTELSE, AksjonspunktKode.SJEKK_MANGLENDE_FODSEL];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE, AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL];
 
 export const FodselvilkaretFaktaInitPanel = () => {
   const intl = useIntl();

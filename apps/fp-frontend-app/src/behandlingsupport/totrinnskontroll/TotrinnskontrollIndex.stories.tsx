@@ -60,8 +60,8 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
   {
     skjermlenkeType: 'FAKTA_OM_FOEDSEL',
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FODSEL),
-      createAksjonspunkt(AksjonspunktKode.TERMINBEKREFTELSE),
+      createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL),
+      createAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE),
       createAksjonspunkt(AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING),
     ],
   },

@@ -7,7 +7,7 @@ import { Form } from '@navikt/ft-form-hooks';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
-import type { SjekkManglendeFodselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { SjekkManglendeFødselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -28,7 +28,7 @@ export const SjekkManglendeFødselForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFodselAp>();
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFødselAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const dokumentasjonForeliggerIsEdited = gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER');
@@ -43,7 +43,7 @@ export const SjekkManglendeFødselForm = ({
 
   return (
     <FaktaKort
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]}
       label={intl.formatMessage({ id: 'SjekkManglendeFødselForm.Tittel' })}
     >
       <Form
@@ -99,8 +99,8 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
-const transformValues = (values: FormValues): SjekkManglendeFodselAp => ({
-  kode: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
+const transformValues = (values: FormValues): SjekkManglendeFødselAp => ({
+  kode: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

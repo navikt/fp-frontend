@@ -1,5 +1,5 @@
 {
-  "FodselInfoPanel.SjekkTerminbekreftelsen": "Kontroller terminbekreftelse",
+  "FodselInfoPanel.SjekkTerminbekreftelse": "Kontroller terminbekreftelse",
   "FodselInfoPanel.SjekkManglendeFødsel": "Kontroller opplysninger om fødsel",
   "SjekkTerminbekreftelseForm.Tittel": "Kontroller opplysninger om termin",
   "SjekkTerminbekreftelseForm.AdvarselForTidligUtstedtdato": "Terminbekreftelsen er utstedt før 22. svangerskapsuke. Kontakt bruker for en nyere terminbekreftelse og oppdater utstedt dato med ny dato når den mottas. Fortsetter du behandlingen uten ny utstedt dato blir behandlingen avslått på grunn av manglende dokumentasjon",

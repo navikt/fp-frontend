@@ -126,7 +126,7 @@ describe('aksjonspunktTekstUtleder', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5001', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktKode.TERMINBEKREFTELSE,
+      aksjonspunktKode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
@@ -137,11 +137,11 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.KontrollerOpplysningerTermin');
+    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.SjekkTerminbekreftelse');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5027', () => {
     const aksjonspunkt = {
-      aksjonspunktKode: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
+      aksjonspunktKode: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
       besluttersBegrunnelse: 'begrunnelse',
       totrinnskontrollGodkjent: false,
     } as TotrinnskontrollAksjonspunkt;
