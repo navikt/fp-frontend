@@ -5,7 +5,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   DoorOpenIcon,
-  FigureCombinationIcon,
+  EarthIcon,
   FigureOutwardFillIcon,
   MinusIcon,
   PauseIcon,
@@ -158,18 +158,23 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
     .map(activity => activity.group);
 };
 
-const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean, annenpartEøs: boolean) => {
-  if (!erHovedsøker && annenpartEøs) {
-    return <FigureCombinationIcon width={20} height={20} />;
+const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
+  function ikonForRolleType(relasjonsRolleType: RelasjonsRolleType) {
+    return relasjonsRolleType === RelasjonsRolleType.FAR ? (
+      <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />
+    ) : (
+      <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />
+    );
   }
-  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
-  if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
-    return <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />;
+  if (erHovedsøker) {
+    return ikonForRolleType(fagsak.relasjonsRolleType);
   }
-  if (rrType === RelasjonsRolleType.FAR) {
-    return <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />;
+  if (!fagsak.annenpartBehandling?.relasjonsRolleType) {
+    return fagsak.relasjonsRolleType === RelasjonsRolleType.FAR
+      ? ikonForRolleType(RelasjonsRolleType.MOR)
+      : ikonForRolleType(RelasjonsRolleType.FAR);
   }
-  return <FigureCombinationIcon width={20} height={20} />;
+  return ikonForRolleType(fagsak.annenpartBehandling!.relasjonsRolleType);
 };
 
 type PinData = {
@@ -282,6 +287,9 @@ const finnLabelForPeriode = (
 };
 
 const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKode: string) => {
+  if (erEøsPeriode(periode.periode)) {
+    return <EarthIcon />;
+  }
   if (periode.erGradert) {
     return <PercentIcon />;
   }
@@ -294,16 +302,13 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
   return periode.erOpphold ? <DoorOpenIcon /> : PERIODE_TYPE_IKON_MAP[periode.periodeType];
 };
 
-const finnRolle = (
-  fagsak: Fagsak,
-  alleKodeverk: AlleKodeverk,
-  erHovedsøker: boolean,
-  annenpartEøs: boolean,
-): string => {
-  if (!erHovedsøker && annenpartEøs) {
-    return 'EØS';
-  }
+const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
   const kodeverk = alleKodeverk['RelasjonsRolleType'];
+  if (!erHovedsøker && !fagsak.annenpartBehandling?.relasjonsRolleType) {
+    const rrType =
+      fagsak.relasjonsRolleType === RelasjonsRolleType.FAR ? RelasjonsRolleType.MOR : RelasjonsRolleType.FAR;
+    return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
+  }
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
   return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
 };
@@ -338,7 +343,6 @@ export const UttakTidslinje = ({
 
   const radIder = lagGruppeIder(uttakPerioder);
   const perioder = formatPaneler(tilknyttetStortinget, uttakPerioder);
-  const annenpartEøs = uttakPerioder.some(p => erEøsPeriode(p.periode));
 
   const sorterteUttaksperioder = [...uttakPerioder].sort(sortByDate);
 
@@ -407,8 +411,8 @@ export const UttakTidslinje = ({
           return (
             <Timeline.Row
               key={radId}
-              label={finnRolle(fagsak, alleKodeverk, erHovedsøker, annenpartEøs)}
-              icon={finnIkon(fagsak, erHovedsøker, annenpartEøs)}
+              label={finnRolle(fagsak, alleKodeverk, erHovedsøker)}
+              icon={finnIkon(fagsak, erHovedsøker)}
             >
               {perioder
                 .filter(periode => periode.group === radId)
