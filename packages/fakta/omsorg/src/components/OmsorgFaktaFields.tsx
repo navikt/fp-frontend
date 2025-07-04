@@ -1,4 +1,4 @@
-import { useForm } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => {
-  const { control } = useForm<FormValues>();
+  const { control } = useFormContext<FormValues>();
   return (
     <FaktaGruppe
       withoutBorder
