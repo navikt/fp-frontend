@@ -4,8 +4,8 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  DoorOpenIcon,
-  EarthIcon,
+  DoorOpenIcon, EarthIcon,
+  FigureCombinationIcon,
   FigureOutwardFillIcon,
   MinusIcon,
   PauseIcon,
@@ -28,7 +28,13 @@ import {
   RelasjonsRolleType,
   UttakPeriodeType,
 } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AnnenforelderUttakEøsPeriode, Fagsak, PeriodeSoker } from '@navikt/fp-types';
+import {
+  type AlleKodeverk,
+  type AnnenforelderUttakEøsPeriode,
+  type Fagsak,
+  KjønnkodeEnum,
+  type PeriodeSoker
+} from '@navikt/fp-types';
 
 export type PeriodeSøkerMedTidslinjedata = {
   id: number;
