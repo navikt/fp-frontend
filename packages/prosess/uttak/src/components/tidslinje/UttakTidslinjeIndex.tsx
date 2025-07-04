@@ -100,7 +100,7 @@ const finnTidslinjeTider = (
 const leggTidslinjedataTilPeriode = (
   erHovedsøker: boolean,
   hovedsøkerPerioder: PeriodeSoker[],
-  annenpartPerioder: PeriodeSoker[],
+  annenpartPerioder: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[],
 ): PeriodeSøkerMedTidslinjedata[] => {
   const perioder = erHovedsøker ? hovedsøkerPerioder : annenpartPerioder;
 
@@ -159,10 +159,12 @@ export const UttakTidslinjeIndex = ({
   alleKodeverk,
   annenForelderUttakEøs,
 }: Props) => {
+  const annenForelder = annenForelderUttakEøs ?? perioderAnnenpart;
+
   const uttakMedOpphold = lagUttakMedOpphold(perioderSøker);
 
-  const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, perioderAnnenpart);
-  const annenForelderPerioder = leggTidslinjedataTilPeriode(false, uttakMedOpphold, perioderAnnenpart);
+  const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, annenForelder);
+  const annenForelderPerioder = leggTidslinjedataTilPeriode(false, uttakMedOpphold, annenForelder);
 
   const alleUttaksperioderMedId = annenForelderPerioder.concat(
     hovedsøkerPerioder.map(p => ({
