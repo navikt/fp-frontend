@@ -116,7 +116,7 @@ const getStatus = (
 
 const finnPeriodeType = (valgtPeriode: PeriodeSoker | AnnenforelderUttakEøsPeriode): string => {
   if (erEøsPeriode(valgtPeriode)) {
-    return '';
+    return valgtPeriode.trekkonto;
   }
   const kontoIkkeSatt =
     valgtPeriode.aktiviteter.length === 0 ||
@@ -158,7 +158,10 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
     .map(activity => activity.group);
 };
 
-const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
+const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean, annenpartEøs: boolean) => {
+  if (!erHovedsøker && annenpartEøs) {
+    return <FigureCombinationIcon width={20} height={20} />;
+  }
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
   if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
     return <FigureOutwardFillIcon width={20} height={20} color="var(--ax-danger-300)" />;
@@ -291,7 +294,15 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
   return periode.erOpphold ? <DoorOpenIcon /> : PERIODE_TYPE_IKON_MAP[periode.periodeType];
 };
 
-const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
+const finnRolle = (
+  fagsak: Fagsak,
+  alleKodeverk: AlleKodeverk,
+  erHovedsøker: boolean,
+  annenpartEøs: boolean,
+): string => {
+  if (!erHovedsøker && annenpartEøs) {
+    return 'EØS';
+  }
   const kodeverk = alleKodeverk['RelasjonsRolleType'];
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
   return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
@@ -327,6 +338,7 @@ export const UttakTidslinje = ({
 
   const radIder = lagGruppeIder(uttakPerioder);
   const perioder = formatPaneler(tilknyttetStortinget, uttakPerioder);
+  const annenpartEøs = uttakPerioder.some(p => erEøsPeriode(p.periode));
 
   const sorterteUttaksperioder = [...uttakPerioder].sort(sortByDate);
 
@@ -395,8 +407,8 @@ export const UttakTidslinje = ({
           return (
             <Timeline.Row
               key={radId}
-              label={finnRolle(fagsak, alleKodeverk, erHovedsøker)}
-              icon={finnIkon(fagsak, erHovedsøker)}
+              label={finnRolle(fagsak, alleKodeverk, erHovedsøker, annenpartEøs)}
+              icon={finnIkon(fagsak, erHovedsøker, annenpartEøs)}
             >
               {perioder
                 .filter(periode => periode.group === radId)
