@@ -28,11 +28,11 @@ import {
   RelasjonsRolleType,
   UttakPeriodeType,
 } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
+import type { AlleKodeverk, AnnenforelderUttakEøsPeriode, Fagsak, PeriodeSoker } from '@navikt/fp-types';
 
 export type PeriodeSøkerMedTidslinjedata = {
   id: number;
-  periode: PeriodeSoker;
+  periode: PeriodeSoker | AnnenforelderUttakEøsPeriode;
   hovedsoker: boolean;
   group: number;
 };
@@ -73,7 +73,7 @@ const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslin
 type PeriodeMedStartOgSlutt = {
   start: string;
   end: string;
-  status: 'success' | 'warning' | 'danger';
+  status: 'success' | 'warning' | 'danger' | 'info';
   periodeType: string;
   erGradert: boolean;
   erOpphold: boolean;
@@ -81,7 +81,16 @@ type PeriodeMedStartOgSlutt = {
   begrunnelse?: string;
 } & PeriodeSøkerMedTidslinjedata;
 
-const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'success' | 'warning' | 'danger' => {
+const erEøsPeriode = (periode: PeriodeSoker | AnnenforelderUttakEøsPeriode) => 'trekkdager' in periode;
+
+const getStatus = (
+  periode: PeriodeSoker | AnnenforelderUttakEøsPeriode,
+  tilknyttetStortinget: boolean,
+): 'success' | 'warning' | 'danger' | 'info' => {
+  if (erEøsPeriode(periode)) {
+    return 'info';
+  }
+
   if (periode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
     return 'warning';
   }
@@ -105,7 +114,10 @@ const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'succe
   return 'danger';
 };
 
-const finnPeriodeType = (valgtPeriode: PeriodeSoker): string => {
+const finnPeriodeType = (valgtPeriode: PeriodeSoker | AnnenforelderUttakEøsPeriode): string => {
+  if (erEøsPeriode(valgtPeriode)) {
+    return '';
+  }
   const kontoIkkeSatt =
     valgtPeriode.aktiviteter.length === 0 ||
     (!valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-');
@@ -124,10 +136,12 @@ const formatPaneler = (
     end: periode.periode.tom,
     status: getStatus(periode.periode, tilknyttetStortinget),
     periodeType: finnPeriodeType(periode.periode),
-    erGradert: !!periode.periode.gradertAktivitet && !!periode.periode.graderingInnvilget,
-    erOpphold: periode.periode.oppholdÅrsak !== OppholdArsakType.UDEFINERT,
-    harUtsettelse: periode.periode.utsettelseType !== '-',
-    begrunnelse: periode.periode.begrunnelse,
+    erGradert: erEøsPeriode(periode.periode)
+      ? false
+      : !!periode.periode.gradertAktivitet && !!periode.periode.graderingInnvilget,
+    erOpphold: erEøsPeriode(periode.periode) ? false : periode.periode.oppholdÅrsak !== OppholdArsakType.UDEFINERT,
+    harUtsettelse: erEøsPeriode(periode.periode) ? false : periode.periode.utsettelseType !== '-',
+    begrunnelse: erEøsPeriode(periode.periode) ? '' : periode.periode.begrunnelse,
   }));
 
 const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
@@ -228,6 +242,8 @@ const finnLabelForPeriode = (
   if (periode.periodeType !== '-' && periode.periodeType !== '') {
     periodeType = intl.formatMessage({ id: PERIODE_TYPE_LABEL_MAP[periode.periodeType] });
   }
+
+  //TODO HEr må ein da inn få vist data for EØS periodane
 
   let type = '';
   if (periode.erGradert) {
