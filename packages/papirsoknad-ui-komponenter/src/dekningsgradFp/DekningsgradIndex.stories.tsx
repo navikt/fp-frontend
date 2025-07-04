@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
@@ -22,14 +22,14 @@ const meta = {
     });
 
     return (
-      <Form formMethods={formMethods} onSubmit={val => submitCallback(DekningsgradIndex.transformValues(val))}>
+      <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(DekningsgradIndex.transformValues(val))}>
         <VStack gap="10">
           <DekningsgradIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
         </VStack>
-      </Form>
+      </RhfForm>
     );
   },
 } satisfies Meta<typeof DekningsgradIndex>;

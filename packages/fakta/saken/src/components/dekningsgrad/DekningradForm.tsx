@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PencilFillIcon, PencilIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -105,7 +105,7 @@ export const DekningradForm = ({
   }
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback({
@@ -187,6 +187,6 @@ export const DekningradForm = ({
           </div>
         </VStack>
       </Box>
-    </Form>
+    </RhfForm>
   );
 };

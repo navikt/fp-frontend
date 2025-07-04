@@ -3,7 +3,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Link, ReadMore, Table, VStack } from '@navikt/ds-react';
-import { Form, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -92,7 +92,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
   const morsArbeid = aktivitetskravGrunnlagArbeids.toSorted((a, b) => a.orgNummer.localeCompare(b.orgNummer));
   return (
     <Boks harBorderLeft={!behov.vurdering && fields.length === 1}>
-      <Form formMethods={formMethods} onSubmit={handleSubmit}>
+      <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
         <VStack gap="6">
           {fields.length === 1 && (
             <VStack gap="6">
@@ -246,7 +246,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
             </HStack>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
       {valgtPeriodeIndex !== undefined && (
         <DelOppPeriodeModal
           periode={fields[valgtPeriodeIndex]}

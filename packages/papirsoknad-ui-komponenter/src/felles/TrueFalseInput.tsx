@@ -11,7 +11,7 @@ const intl = createIntl(messages);
 
 type Props<T extends FieldValues> = {
   name: UseControllerProps<T>['name'];
-  control?: UseControllerProps<T>['control'];
+  control: UseControllerProps<T>['control'];
   label: React.ReactNode;
   readOnly: boolean;
   isHorizontal?: boolean;

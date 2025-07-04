@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, UNSAFE_Combobox, VStack } from '@navikt/ds-react';
-import { Form, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -121,7 +121,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
   useEffect(() => filterOptions(filterValue), [saksbehandlerGruppe, filterValue]);
 
   return (
-    <Form formMethods={formMethods}>
+    <RhfForm formMethods={formMethods}>
       <VStack gap="5">
         <RhfTextField
           name="navn"
@@ -178,6 +178,6 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
           </VStack>
         </VStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

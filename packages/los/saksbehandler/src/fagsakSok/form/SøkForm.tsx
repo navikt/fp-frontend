@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfCheckbox, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfCheckbox, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 
 import styles from './SøkForm.module.css';
@@ -35,7 +35,7 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
   const searchStringValue = formMethods.watch('searchString');
 
   return (
-    <Form<SøkFormValues> onSubmit={onSubmit} formMethods={formMethods}>
+    <RhfForm<SøkFormValues> onSubmit={onSubmit} formMethods={formMethods}>
       <VStack gap="2">
         <HStack gap="8">
           <HStack gap="0">
@@ -77,6 +77,6 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
           </HStack>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

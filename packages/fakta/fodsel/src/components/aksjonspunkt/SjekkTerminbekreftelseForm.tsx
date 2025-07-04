@@ -2,7 +2,7 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -64,7 +64,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
       label={intl.formatMessage({ id: 'SjekkTerminbekreftelseForm.Tittel' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.TERMINBEKREFTELSE]}
     >
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
@@ -127,7 +127,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
             />
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </FaktaKort>
   );
 };

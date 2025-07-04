@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert, BodyLong, Heading, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -153,7 +153,7 @@ export const JournalpostDetaljer = ({
   const isSubmittable = formMethods.formState.isDirty;
 
   return (
-    <Form<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
+    <RhfForm<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
       <VStack gap="5">
         <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
         {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
@@ -221,6 +221,6 @@ export const JournalpostDetaljer = ({
           />
         </div>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

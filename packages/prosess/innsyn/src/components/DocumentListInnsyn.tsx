@@ -1,4 +1,5 @@
 import { type ReactElement } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ChevronDownDoubleIcon, ChevronLeftDoubleIcon, ChevronRightDoubleIcon } from '@navikt/aksel-icons';
@@ -55,6 +56,10 @@ interface Props {
  */
 export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Props) => {
   const intl = useIntl();
+
+  // TODO (TOR) Manglar type
+  const { control } = useFormContext();
+
   if (documents.length === 0) {
     return (
       <BodyShort size="small" className={styles.noDocuments}>
@@ -99,7 +104,7 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
             return (
               <Table.Row key={dokId}>
                 <Table.DataCell className={styles.checkboxCol}>
-                  <RhfCheckbox label={noLabelHack()} name={`dokument_${dokId}`} disabled={readOnly} />
+                  <RhfCheckbox label={noLabelHack()} name={`dokument_${dokId}`} control={control} disabled={readOnly} />
                 </Table.DataCell>
                 <Table.DataCell hidden={readOnly}>{img}</Table.DataCell>
                 <Table.DataCell className={styles.linkCol}>

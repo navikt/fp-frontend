@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -46,7 +46,7 @@ export const SjekkManglendeFødselForm = ({
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]}
       label={intl.formatMessage({ id: 'SjekkManglendeFødselForm.Tittel' })}
     >
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
@@ -89,7 +89,7 @@ export const SjekkManglendeFødselForm = ({
             />
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </FaktaKort>
   );
 };

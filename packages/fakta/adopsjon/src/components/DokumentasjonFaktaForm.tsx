@@ -22,7 +22,7 @@ dayjs.extend(isSameOrBefore);
 export type FormValues = {
   omsorgsovertakelseDato?: string;
   barnetsAnkomstTilNorgeDato?: string;
-  fodselsdatoer?: Record<number, string>;
+  fodselsdatoer?: Record<string, string>;
 };
 
 interface Props {
@@ -88,6 +88,7 @@ export const DokumentasjonFaktaForm = ({
           <HStack gap="4" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
             <RhfDatepicker
               name={`fodselsdatoer.${id}`}
+              control={control}
               label={intl.formatMessage(
                 {
                   id: 'DokumentasjonFaktaForm.Fodselsdato',

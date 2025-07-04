@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -79,7 +79,7 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
   const { lovReferanse } = vilkar[0];
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -108,6 +108,6 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };

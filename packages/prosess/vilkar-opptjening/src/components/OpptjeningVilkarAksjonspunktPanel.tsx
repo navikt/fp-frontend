@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -103,7 +103,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
   );
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
+    <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
         isAksjonspunktOpen={harÅpneAksjonspunkter}
@@ -152,6 +152,6 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };

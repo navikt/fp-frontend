@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
-import { Form, RhfCheckbox, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfCheckbox, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -185,7 +185,7 @@ export const NyBehandlingModal = ({
   );
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit}>
+    <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
       <Modal
         className={styles.modal}
         open
@@ -240,6 +240,6 @@ export const NyBehandlingModal = ({
           </Button>
         </Modal.Footer>
       </Modal>
-    </Form>
+    </RhfForm>
   );
 };

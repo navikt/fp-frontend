@@ -1,4 +1,5 @@
 import React from 'react';
+import type { FieldValues, UseControllerProps } from 'react-hook-form';
 
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
@@ -8,8 +9,9 @@ import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-type Props = {
-  name: string;
+type Props<T extends FieldValues> = {
+  name: UseControllerProps<T>['name'];
+  control: UseControllerProps<T>['control'];
   label: React.ReactNode;
   readOnly: boolean;
   trueLabel?: React.ReactElement;
@@ -18,10 +20,20 @@ type Props = {
   falseContent?: React.ReactElement;
 };
 
-export const TrueFalseInput = ({ name, label, readOnly, trueLabel, trueContent, falseLabel, falseContent }: Props) => {
+export const TrueFalseInput = <T extends FieldValues>({
+  name,
+  control,
+  label,
+  readOnly,
+  trueLabel,
+  trueContent,
+  falseLabel,
+  falseContent,
+}: Props<T>) => {
   return (
     <RhfRadioGroup
       name={name}
+      control={control}
       label={label}
       validate={[required]}
       isReadOnly={readOnly}

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, Heading, Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, hasAksjonspunkt, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
@@ -185,7 +185,7 @@ export const SimuleringPanel = ({
       )}
       {!simuleringResultat && <FormattedMessage id="Simulering.ingenData" />}
       {skalHaForm && (
-        <Form
+        <RhfForm
           formMethods={formMethods}
           onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
           setDataOnUnmount={setMellomlagretFormData}
@@ -216,7 +216,7 @@ export const SimuleringPanel = ({
               </Button>
             </div>
           </VStack>
-        </Form>
+        </RhfForm>
       )}
     </VStack>
   );

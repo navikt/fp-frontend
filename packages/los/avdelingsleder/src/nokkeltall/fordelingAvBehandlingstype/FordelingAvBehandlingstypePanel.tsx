@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -55,7 +55,7 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
   const values = formMethods.watch();
 
   return (
-    <Form formMethods={formMethods}>
+    <RhfForm formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="2">
         <Label size="small">
@@ -98,6 +98,6 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
           }
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
@@ -22,25 +23,29 @@ interface Props {
   readOnly: boolean;
 }
 
-export const MottattDatoPapirsoknadIndex = ({ readOnly }: Props) => (
-  <RawIntlProvider value={intl}>
-    <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
-          <FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" />
-        </Heading>
-        <RhfDatepicker
-          name="mottattDato"
-          label={<FormattedMessage key="regDatoUnder" id="Registrering.Omsoknaden.MottattDato" />}
-          fromDate={minMottattdato().toDate()}
-          toDate={maxMottattdato().toDate()}
-          validate={[required, hasValidDate, dateBeforeOrEqualToToday, dateAfterOrEqual(minMottattdato())]}
-          isReadOnly={readOnly}
-        />
-      </VStack>
-    </BorderBox>
-  </RawIntlProvider>
-);
+export const MottattDatoPapirsoknadIndex = ({ readOnly }: Props) => {
+  const { control } = useFormContext<MottattDatoFormValues>();
+  return (
+    <RawIntlProvider value={intl}>
+      <BorderBox>
+        <VStack gap="4">
+          <Heading size="small">
+            <FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" />
+          </Heading>
+          <RhfDatepicker
+            name="mottattDato"
+            control={control}
+            label={<FormattedMessage key="regDatoUnder" id="Registrering.Omsoknaden.MottattDato" />}
+            fromDate={minMottattdato().toDate()}
+            toDate={maxMottattdato().toDate()}
+            validate={[required, hasValidDate, dateBeforeOrEqualToToday, dateAfterOrEqual(minMottattdato())]}
+            isReadOnly={readOnly}
+          />
+        </VStack>
+      </BorderBox>
+    </RawIntlProvider>
+  );
+};
 
 MottattDatoPapirsoknadIndex.initialValues = (): MottattDatoFormValues => ({
   mottattDato: undefined,

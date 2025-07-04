@@ -1,7 +1,8 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
+import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { RhfDatepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -19,8 +20,6 @@ import {
   minTermindato,
   terminErRundtFodselsdato,
 } from '@navikt/fp-utils';
-
-import { ErBarnetFodt } from '../terminOgFodselPanel/components/ErBarnetFodt';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -45,7 +44,7 @@ const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato:
 /*
  * TerminOgFodselPanelSvp
  *
- * Form som brukes for registrere termin og fødsel i papirsøknad.
+ * RhfForm som brukes for registrere termin og fødsel i papirsøknad.
  */
 export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
   const { getValues, watch, control } = useFormContext<FormValues>();
@@ -56,7 +55,24 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
     <BorderBox>
       <VStack gap="4">
         <Heading size="small">{intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}</Heading>
-        <ErBarnetFodt readOnly={readOnly} />
+        <RhfRadioGroup
+          name="erBarnetFodt"
+          control={control}
+          label={<FormattedMessage id="Registrering.TerminOgFodsel.ErBarnetFodt" />}
+          validate={[required]}
+          isReadOnly={readOnly}
+          isTrueOrFalseSelection
+          radios={[
+            {
+              label: <FormattedMessage id="Registrering.TerminOgFodsel.ErFodt" />,
+              value: 'true',
+            },
+            {
+              label: <FormattedMessage id="Registrering.TerminOgFodsel.ErIkkeFodt" />,
+              value: 'false',
+            },
+          ]}
+        />
         {erBarnetFodt && (
           <RhfDatepicker
             name="foedselsDato"

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
@@ -107,7 +107,7 @@ export const BehandleKlageFormNfp = ({
   };
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -181,7 +181,7 @@ export const BehandleKlageFormNfp = ({
           )}
         </HStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
 

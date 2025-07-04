@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
-import { Form, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
 
 const MIN_LENGTH_9 = minLength(9);
@@ -39,7 +39,7 @@ export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harS
       </Modal.Header>
       <Modal.Body>
         <VStack gap="2">
-          <Form<Formvalues>
+          <RhfForm<Formvalues>
             formMethods={formMethods}
             onSubmit={(data: Formvalues) => {
               setLasterJournalpost(true);
@@ -68,7 +68,7 @@ export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harS
                 <FormattedMessage id="Journalpost.Søk.Finn" />
               </Button>
             </HStack>
-          </Form>
+          </RhfForm>
           {harSøktOgFunnetIngenMatch && (
             <BodyShort>
               <FormattedMessage id="Journalpost.Søk.IngenTreffEllerManglerTilgang" />

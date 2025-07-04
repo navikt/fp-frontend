@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RhfCheckbox } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
@@ -47,7 +47,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
   const values = formMethods.watch();
 
   return (
-    <Form formMethods={formMethods}>
+    <RhfForm formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="4">
         <Label size="small">
@@ -63,6 +63,6 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
           oppgaverApneEllerPaVent={oppgaverApneEllerPaVent.filter(oav => values[oav.behandlingType])}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

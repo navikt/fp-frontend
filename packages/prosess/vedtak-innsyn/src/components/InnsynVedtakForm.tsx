@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
-import { Form, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
@@ -132,7 +132,7 @@ export const InnsynVedtakForm = ({
   const previewBrev = getPreviewCallback(previewCallback, begrunnelse);
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -204,6 +204,6 @@ export const InnsynVedtakForm = ({
           </Link>
         </HStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Link, VStack } from '@navikt/ds-react';
-import { Form, ReadOnlyField, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, ReadOnlyField, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -124,7 +124,7 @@ export const VarselOmRevurderingForm = ({
   const language = getLanguageFromSprakkode(behandling.språkkode);
   return (
     <>
-      <Form formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap="4">
           <Heading size="small">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
@@ -211,7 +211,7 @@ export const VarselOmRevurderingForm = ({
             />
           )}
         </VStack>
-      </Form>
+      </RhfForm>
       <SettPaVentModalIndex
         showModal={skalVisePåVentModal}
         frist={dayjs().add(28, 'days').format(ISO_DATE_FORMAT)}

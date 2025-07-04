@@ -4,7 +4,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PencilFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfDatepicker, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfDatepicker, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -84,7 +84,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
   };
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(soknad, values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -148,6 +148,6 @@ export const StartdatoForForeldrepengerperiodenForm = ({
           </AksjonspunktBox>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -65,7 +65,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
           {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.CheckInformation' })}
         </AksjonspunktHelpTextHTML>
       )}
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
@@ -95,7 +95,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
             </>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </>
   );
 };

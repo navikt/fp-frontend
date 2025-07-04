@@ -1,3 +1,4 @@
+import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
@@ -20,6 +21,7 @@ interface Props {
 }
 
 export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props) => {
+  const { control } = useForm<FormValues>();
   return (
     <FaktaGruppe
       withoutBorder
@@ -27,6 +29,7 @@ export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props
     >
       <TrueFalseInput
         name="omsorg"
+        control={control}
         label={<FormattedMessage id="OmsorgFaktaFields.OppgittOmsorg" />}
         readOnly={readOnly}
         trueLabel={<FormattedMessage id="OmsorgFaktaFields.HarOmsorg" />}

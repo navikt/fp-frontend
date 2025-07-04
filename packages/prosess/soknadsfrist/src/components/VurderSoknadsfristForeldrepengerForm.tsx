@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat, periodFormat } from '@navikt/ft-utils';
@@ -75,7 +75,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
   const soknadsfristdato = søknadsfrist?.utledetSøknadsfrist;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(formValues: FormValues) => submitCallback(transformValues(formValues))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -169,6 +169,6 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
           </VStack>
         </div>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

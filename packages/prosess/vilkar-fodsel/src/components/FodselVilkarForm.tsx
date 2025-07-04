@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
 import {
@@ -77,7 +77,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
   const { lovReferanse } = vilkar[0];
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -106,7 +106,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
           <ProsessStegBegrunnelseTextFieldNew useAllWidth readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };
 

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
@@ -44,7 +44,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
   const foreldreTyper = alleKodeverk['ForeldreType'];
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => {
         setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType));
@@ -104,6 +104,6 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
           </Box>
         </VStack>
       </Box>
-    </Form>
+    </RhfForm>
   );
 };

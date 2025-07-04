@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
 import { Button, Heading, Modal } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from '@navikt/fp-fakta-verge';
@@ -51,7 +51,7 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
 
   return (
     <RawIntlProvider value={intl}>
-      <Form formMethods={formMethods} onSubmit={handleSubmit}>
+      <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
         <Modal
           open
           width="small"
@@ -83,7 +83,7 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
             </Button>
           </Modal.Footer>
         </Modal>
-      </Form>
+      </RhfForm>
     </RawIntlProvider>
   );
 };

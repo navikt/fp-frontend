@@ -7,15 +7,9 @@ import type {
   ArbeidsgiverOpplysningerPerId,
 } from '@navikt/fp-types';
 
-import { ArbeidsforholdField } from './ArbeidsforholdField';
+import { ArbeidsforholdField, type FormValues } from './ArbeidsforholdField';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';
-
-type FormValues = {
-  arbeidsforhold: {
-    permisjonStatus: string;
-  }[];
-};
 
 interface Props {
   saksnummer: string;

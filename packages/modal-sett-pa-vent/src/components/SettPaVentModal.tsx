@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Modal, VStack } from '@navikt/ds-react';
-import { Form, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   ariaCheck,
   dateAfterOrEqualToToday,
@@ -62,7 +62,7 @@ export const SettPaVentModal = ({
   const showFristenTekst = skalViseFristenTekst(erTilbakekreving, frist, fristFraFelt, ventearsakFraFelt);
 
   return (
-    <Form formMethods={formMethods} onSubmit={submitCallback}>
+    <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
       <Modal
         width="small"
         open={showModal}
@@ -145,7 +145,7 @@ export const SettPaVentModal = ({
           )}
         </Modal.Footer>
       </Modal>
-    </Form>
+    </RhfForm>
   );
 };
 

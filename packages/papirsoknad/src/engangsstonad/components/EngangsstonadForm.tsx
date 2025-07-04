@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { HGrid } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
@@ -41,7 +41,7 @@ export const EngangsstonadForm = ({
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
-    <Form formMethods={formMethods} onSubmit={values => onSubmit(transformValues(soknadData, values))}>
+    <RhfForm formMethods={formMethods} onSubmit={values => onSubmit(transformValues(soknadData, values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="4">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <ComponentForFamilieHendelse
@@ -58,7 +58,7 @@ export const EngangsstonadForm = ({
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         erEndringssøknad={false}
       />
-    </Form>
+    </RhfForm>
   );
 };
 

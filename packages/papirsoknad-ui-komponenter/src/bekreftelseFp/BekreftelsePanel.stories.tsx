@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
@@ -20,14 +20,14 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <Form formMethods={formMethods} onSubmit={val => submitCallback(BekreftelsePanel.tranformValues(val))}>
+      <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(BekreftelsePanel.tranformValues(val))}>
         <VStack gap="10">
           <BekreftelsePanel {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
         </VStack>
-      </Form>
+      </RhfForm>
     );
   },
 } satisfies Meta<typeof BekreftelsePanel>;
