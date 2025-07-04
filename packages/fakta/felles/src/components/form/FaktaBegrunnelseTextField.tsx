@@ -15,11 +15,11 @@ const intl = createIntl(messages);
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-export type FormValues = {
+export type FaktaBegrunnelseFormValues = {
   begrunnelse: string | undefined;
 };
 
-type Props<T extends FieldValues & FormValues> = {
+type Props<T extends FieldValues & FaktaBegrunnelseFormValues> = {
   control: UseControllerProps<T>['control'];
   isReadOnly: boolean;
   isSubmittable: boolean;
@@ -34,7 +34,7 @@ type TransformedValues = {
   begrunnelse: string;
 };
 
-export const FaktaBegrunnelseTextField = <T extends FieldValues & FormValues>({
+export const FaktaBegrunnelseTextField = <T extends FieldValues & FaktaBegrunnelseFormValues>({
   control,
   isReadOnly,
   isSubmittable,
@@ -75,10 +75,12 @@ const getBegrunnelse = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): string | 
   return !!aksjonspunkt && !Array.isArray(aksjonspunkt) && aksjonspunkt.begrunnelse ? aksjonspunkt.begrunnelse : '';
 };
 
-FaktaBegrunnelseTextField.initialValues = (aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt): FormValues => ({
+FaktaBegrunnelseTextField.initialValues = (
+  aksjonspunkt?: Aksjonspunkt[] | Aksjonspunkt,
+): FaktaBegrunnelseFormValues => ({
   begrunnelse: decodeHtmlEntity(getBegrunnelse(aksjonspunkt) ?? undefined),
 });
 
-FaktaBegrunnelseTextField.transformValues = (values: FormValues): TransformedValues => ({
+FaktaBegrunnelseTextField.transformValues = (values: FaktaBegrunnelseFormValues): TransformedValues => ({
   begrunnelse: notEmpty(values.begrunnelse),
 });
