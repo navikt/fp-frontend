@@ -9,13 +9,13 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
 const apTerminbekreftelse: Aksjonspunkt = {
-  definisjon: AksjonspunktKode.TERMINBEKREFTELSE,
+  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   status: AksjonspunktStatus.OPPRETTET,
   begrunnelse: null,
   kanLoses: true,
 };
 const apSjekkManglendeFødsel: Aksjonspunkt = {
-  definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
+  definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
   status: AksjonspunktStatus.OPPRETTET,
   begrunnelse: null,
   kanLoses: true,
@@ -91,7 +91,7 @@ export const APTerminbekreftelse: Story = {
   args: {
     aksjonspunkterForPanel: [apTerminbekreftelse],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.TERMINBEKREFTELSE]: merknaderFraBeslutter,
+      [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: merknaderFraBeslutter,
     },
     fødsel: {
       søknad: {
@@ -155,7 +155,7 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
   },
 };
@@ -202,7 +202,7 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
   },
 };
@@ -253,7 +253,7 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
   },
 };
@@ -265,7 +265,7 @@ export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
       { ...apSjekkManglendeFødsel, status: AksjonspunktStatus.UTFORT, begrunnelse: 'Dette er en begrunnelse' },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
     terminbekreftelseDokument: undefined,
   },

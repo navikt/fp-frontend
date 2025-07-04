@@ -14,7 +14,7 @@ import { FaktaFraFReg } from './fakta/FaktaFraFReg';
 import { FaktaFraSøknad } from './fakta/FaktaFraSøknad';
 import { Situasjon } from './fakta/Situasjon';
 
-const { TERMINBEKREFTELSE, SJEKK_MANGLENDE_FODSEL } = AksjonspunktKode;
+const { SJEKK_TERMINBEKREFTELSE, SJEKK_MANGLENDE_FØDSEL } = AksjonspunktKode;
 
 interface Props {
   fødsel: Fødsel;
@@ -30,15 +30,15 @@ interface Props {
 export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokument }: Props) => {
   const { aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
 
-  const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === TERMINBEKREFTELSE);
-  const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FODSEL);
+  const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_TERMINBEKREFTELSE);
+  const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FØDSEL);
 
   return (
     <VStack gap="4">
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           <>
-            {terminbekreftelseAp && <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelsen" />}
+            {terminbekreftelseAp && <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />}
             {manglendeFødselAp && <FormattedMessage id="FodselInfoPanel.SjekkManglendeFødsel" />}
           </>
         </AksjonspunktHelpTextHTML>

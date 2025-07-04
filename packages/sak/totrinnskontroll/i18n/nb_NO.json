@@ -51,7 +51,7 @@
   "ToTrinnsForm.Fødsel.VurderSokersRelasjon": "Søkers relasjon til barnet er vurdert.",
   "ToTrinnsForm.Fødsel.VurderVilkarSykdom": "Vilkår for sykdom er vurdert.",
   "ToTrinnsForm.Fødsel.VurderTidligereUtbetaling": "Det er vurdert om tidligere utbetalt ytelse gjelder for samme barn.",
-  "ToTrinnsForm.Fødsel.KontrollerOpplysningerTermin": "Opplysninger om termin fra søknad er endret.",
+  "ToTrinnsForm.Fødsel.SjekkTerminbekreftelse": "Opplysninger om termin fra søknad er endret.",
   "ToTrinnsForm.Fødsel.KontrollerOpplysningerFodselsdokumentasjonen": "Opplysninger om fødsel fra dokumentasjon er endret.",
   "ToTrinnsForm.Fødsel.SjekkManglendeFødsel": "Manglende opplysninger om dokumentasjon er endret.",
   "ToTrinnsForm.Fødsel.VilkarOverstyrt": "Fødselsvilkåret er overstyrt.",

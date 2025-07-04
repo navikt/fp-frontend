@@ -26,14 +26,14 @@ import type { BekreftMannAdoptererAksjonspunktAp } from './fakta/BekreftMannAdop
 import type { BekreftOmsorgVurderingAp } from './fakta/BekreftOmsorgVurderingAp';
 import type { BekreftOppholdsrettVurderingAp } from './fakta/BekreftOppholdsrettVurderingAp';
 import type { BekreftSvangerskapspengerAp } from './fakta/BekreftSvangerskapspengerAp';
-import type { BekreftTerminbekreftelseAp } from './fakta/BekreftTerminbekreftelseAp';
 import type { BekreftUttaksperioderAp } from './fakta/BekreftUttaksperioderAp';
 import type { KontrollerBesteberegningAP } from './fakta/KontrollerBesteberegningAP';
 import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
 import type { OverstyringRettigheterAp } from './fakta/OverstyringRettigheterAp';
-import type { SjekkManglendeFodselAp } from './fakta/SjekkManglendeFodselAp';
+import type { SjekkManglendeFødselAp } from './fakta/SjekkManglendeFødselAp';
+import type { SjekkTerminbekreftelseAp } from './fakta/SjekkTerminbekreftelseAp';
 import type { VurderArbeidsforholdInntektsmeldingAp } from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import type { VurderArbeidsforholdPermisjonAp } from './fakta/VurderArbeidsforholdPermisjonAp';
 import type { VurderDokumentasjonAp } from './fakta/VurderDokumentasjonAp';
@@ -53,8 +53,8 @@ export type FaktaAksjonspunkt =
   | BekreftOppholdsrettVurderingAp
   | BekreftLovligOppholdVurderingAp
   | AvklarFortsattMedlemskapAp
-  | BekreftTerminbekreftelseAp
-  | SjekkManglendeFodselAp
+  | SjekkTerminbekreftelseAp
+  | SjekkManglendeFødselAp
   | AvklarAnnenforelderHarRettAp
   | BekreftUttaksperioderAp
   | OverstyringAvklarStartdatoForPeriodenAp
