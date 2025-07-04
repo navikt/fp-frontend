@@ -13,7 +13,10 @@ import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel'
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART];
+const AKSJONSPUNKT_KODER = [
+  AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+  AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS,
+];
 
 export const UttakEøsFaktaInitPanel = () => {
   const intl = useIntl();

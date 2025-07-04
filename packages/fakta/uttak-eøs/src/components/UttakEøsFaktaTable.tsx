@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Table, VStack } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
@@ -6,14 +6,15 @@ import dayjs from 'dayjs';
 
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 
-import { UttakEøsFaktaForm } from './UttakEøsFaktaForm';
+import { UttakESFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
 
 interface Props {
   annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
   setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
+  isReadOnly: boolean;
 }
 
-export const UttakEøsFaktaTable = ({ annenForelderUttakEøsPerioder, setPerioder }: Props) => {
+export const UttakEøsFaktaTable = ({ annenForelderUttakEøsPerioder, setPerioder, isReadOnly }: Props) => {
   return (
     <VStack gap="6">
       <Table>
@@ -32,6 +33,7 @@ export const UttakEøsFaktaTable = ({ annenForelderUttakEøsPerioder, setPeriode
                 key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
                 annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
                 setPerioder={setPerioder}
+                isReadOnly={isReadOnly}
               />
             );
           })}
@@ -44,9 +46,10 @@ export const UttakEøsFaktaTable = ({ annenForelderUttakEøsPerioder, setPeriode
 interface RadProps {
   annenForelderUttakEøsPeriode: AnnenforelderUttakEøsPeriode;
   setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
+  isReadOnly: boolean;
 }
 
-const Rad = ({ annenForelderUttakEøsPeriode, setPerioder }: RadProps) => {
+const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly }: RadProps) => {
   const [erÅpen, setErÅpen] = useState(false);
 
   const oppdaterPeriode = (oppdatertPeriode: AnnenforelderUttakEøsPeriode) => {
@@ -77,15 +80,17 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder }: RadProps) => {
       key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
       content={
         erÅpen && (
-          <UttakEøsFaktaForm
+          <UttakESFaktaDetailForm
             annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
             oppdater={oppdaterPeriode}
             slettPeriode={slettPeriode}
             avbryt={avbryt}
+            isReadOnly={isReadOnly}
           />
         )
       }
       expandOnRowClick
+      expansionDisabled={isReadOnly}
       onOpenChange={() => setErÅpen(!erÅpen)}
       open={erÅpen}
       togglePlacement="right"
