@@ -1,0 +1,36 @@
+import{j as a,w as F}from"./iframe-Dmh-bYKZ.js";import{X as N}from"./index.es-B7wmsOeO.js";import{u as D,F as j,i as m,w as U,n as f,c as I,d as _}from"./fagsakApi-Cjl1n1hz.js";import{h as e,H as s,c as T}from"./index-CO4_nb9H.js";import{D as p,K as i}from"./DokumentIndex-7IhnFAQ-.js";import{g as E}from"./withIntl-BNABvdwF.js";import{U as H}from"./UtvidEllerMinskKnapp-S0NVXlip.js";import{m as S}from"./nb_NO-D39UuuyA.js";import"./VStack-C2OPlWDP.js";import"./index-8mrfWrGx.js";import"./CheckmarkCircleFill-BlRhkVdT.js";import"./ExclamationmarkTriangleFill-DSgz1pFk.js";import"./behandlingResultatType-CVAxOrek.js";import"./vilkarUtfallType-vN0hVpa7.js";import"./FaktaKort-DKKS6ZHV.js";import"./eksterneLenker-DcE6CUbm.js";import"./Link-DspvGFRV.js";import"./message-DaLj-6KA.js";import"./Table-DBvzuhRQ.js";import"./ChevronDown-B0J18etT.js";import"./Checkbox-DOOBzdRl.js";import"./StarFill-rPLXg6Es.js";import"./SupportHeader-DO-iu2x8.js";import"./ErrorBoundary-Ci-8rWhv.js";import"./IngenBehandlingValgtPanel-BlIfQflB.js";import"./errorType-dJv3uKLz.js";const{action:O}=__STORYBOOK_MODULE_ACTIONS__,C=E(S),h=o=>T(U(f(m.sakLinks.find(r=>r.rel===o)).href)),st={title:"fagsak/DokumentIndex",decorators:[C,F],component:p,args:{saksnummer:"1",toggleVisUtvidetBehandlingDetaljerKnapp:a.jsx(H,{toggleVisUtvidetBehandlingDetaljer:O("button-click"),visUtvidetBehandlingDetaljer:!1})},render:o=>{const{status:r}=D(_());return r==="success"?a.jsx(p,{...o}):a.jsx(N,{})}},t={parameters:{msw:{handlers:[e.get(j.INIT_FETCH,()=>s.json(m)),e.get(h(I.ALL_DOCUMENTS),()=>s.json([{journalpostId:"1",dokumentId:"1",tittel:"dok",tidspunkt:"10.10.2017 10:23",kommunikasjonsretning:i.INN},{journalpostId:"2",dokumentId:"2",tittel:"dok1",tidspunkt:"10.10.2019 10:23",kommunikasjonsretning:i.INN},{journalpostId:"3",dokumentId:"3",tittel:"dok2",tidspunkt:"10.10.2018 10:23",kommunikasjonsretning:i.INN}]))]}},args:{behandlingUuid:"11212",behandlingVersjon:1}},n={parameters:{msw:{handlers:[e.get(j.INIT_FETCH,()=>s.json(m)),e.get(h(I.ALL_DOCUMENTS),()=>s.json([]))]}},args:{}};var d,k,u;t.parameters={...t.parameters,docs:{...(d=t.parameters)==null?void 0:d.docs,source:{originalSource:`{
+  parameters: {
+    msw: {
+      handlers: [http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)), http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json([{
+        journalpostId: '1',
+        dokumentId: '1',
+        tittel: 'dok',
+        tidspunkt: '10.10.2017 10:23',
+        kommunikasjonsretning: Kommunikasjonsretning.INN
+      }, {
+        journalpostId: '2',
+        dokumentId: '2',
+        tittel: 'dok1',
+        tidspunkt: '10.10.2019 10:23',
+        kommunikasjonsretning: Kommunikasjonsretning.INN
+      }, {
+        journalpostId: '3',
+        dokumentId: '3',
+        tittel: 'dok2',
+        tidspunkt: '10.10.2018 10:23',
+        kommunikasjonsretning: Kommunikasjonsretning.INN
+      }]))]
+    }
+  },
+  args: {
+    behandlingUuid: '11212',
+    behandlingVersjon: 1
+  }
+}`,...(u=(k=t.parameters)==null?void 0:k.docs)==null?void 0:u.source}}};var g,l,c;n.parameters={...n.parameters,docs:{...(g=n.parameters)==null?void 0:g.docs,source:{originalSource:`{
+  parameters: {
+    msw: {
+      handlers: [http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)), http.get(getHref(FagsakRel.ALL_DOCUMENTS), () => HttpResponse.json([]))]
+    }
+  },
+  args: {}
+}`,...(c=(l=n.parameters)==null?void 0:l.docs)==null?void 0:c.source}}};const ot=["DetFinnesDokumenterPåSak","DetFinnesIngenDokumenterPåSak"];export{t as DetFinnesDokumenterPåSak,n as DetFinnesIngenDokumenterPåSak,ot as __namedExportsOrder,st as default};
