@@ -2,9 +2,9 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt } from '@navikt/fp-types';
+import type { Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 
 import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
 
@@ -13,6 +13,9 @@ const meta = {
   component: UttakFaktaEøsIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
+    fagsak: {
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+    } as Fagsak,
     kanOverstyre: false,
     submittable: true,
     aksjonspunkterForPanel: [
@@ -57,5 +60,20 @@ export const ÅpentAksjonspunktMedPerioder: Story = {
 export const ÅpentAksjonspunktUtenPerioder: Story = {
   args: {
     annenForelderUttakEøs: undefined,
+  },
+};
+
+export const IkkeÅpentAksjonspunktMenForeliggerPerioderFraTidligereBehandling: Story = {
+  args: {
+    kanOverstyre: true,
+    aksjonspunkterForPanel: [],
+    annenForelderUttakEøs: [
+      {
+        fom: '2023-02-01',
+        tom: '2023-02-15',
+        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkdager: 10,
+      },
+    ],
   },
 };
