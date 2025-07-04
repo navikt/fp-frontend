@@ -63,7 +63,7 @@ export const ÅpentAksjonspunktUtenPerioder: Story = {
   },
 };
 
-export const IkkeÅpentAksjonspunktMenForeliggerPerioderFraTidligereBehandling: Story = {
+export const MuligAAOverstyreHvisDetForeliggerTidligereLagtInnPerioder: Story = {
   args: {
     kanOverstyre: true,
     aksjonspunkterForPanel: [],
