@@ -85,7 +85,6 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly }: RadProp
             oppdater={oppdaterPeriode}
             slettPeriode={slettPeriode}
             avbryt={avbryt}
-            isReadOnly={isReadOnly}
           />
         )
       }
