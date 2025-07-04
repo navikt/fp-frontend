@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -32,7 +32,7 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, submittable, avbrytOver
   const finnesBarnIFReg = gjeldende.barn.some(b => b.kilde === 'FOLKEREGISTER');
 
   return (
-    <Form formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values))}>
+    <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values))}>
       <VStack gap="6">
         <Termindato isReadOnly={isReadOnly} />
 
@@ -64,7 +64,7 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, submittable, avbrytOver
           </HStack>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
 
