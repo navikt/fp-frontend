@@ -4,8 +4,8 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  DoorOpenIcon,
-  EarthIcon,
+  DoorOpenIcon, EarthIcon,
+  FigureCombinationIcon,
   FigureOutwardFillIcon,
   MinusIcon,
   PauseIcon,
@@ -28,7 +28,13 @@ import {
   RelasjonsRolleType,
   UttakPeriodeType,
 } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AnnenforelderUttakEøsPeriode, Fagsak, PeriodeSoker } from '@navikt/fp-types';
+import {
+  type AlleKodeverk,
+  type AnnenforelderUttakEøsPeriode,
+  type Fagsak,
+  KjønnkodeEnum,
+  type PeriodeSoker
+} from '@navikt/fp-types';
 
 export type PeriodeSøkerMedTidslinjedata = {
   id: number;
@@ -159,22 +165,14 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
 };
 
 const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
-  function ikonForRolleType(relasjonsRolleType: RelasjonsRolleType) {
-    return relasjonsRolleType === RelasjonsRolleType.FAR ? (
-      <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />
-    ) : (
-      <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />
-    );
+  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : rolleAnnenpart(fagsak);
+  if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
+    return <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />;
   }
-  if (erHovedsøker) {
-    return ikonForRolleType(fagsak.relasjonsRolleType);
+  if (rrType === RelasjonsRolleType.FAR) {
+    return <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />;
   }
-  if (!fagsak.annenpartBehandling?.relasjonsRolleType) {
-    return fagsak.relasjonsRolleType === RelasjonsRolleType.FAR
-      ? ikonForRolleType(RelasjonsRolleType.MOR)
-      : ikonForRolleType(RelasjonsRolleType.FAR);
-  }
-  return ikonForRolleType(fagsak.annenpartBehandling!.relasjonsRolleType);
+  return <FigureCombinationIcon width={20} height={20} />;
 };
 
 type PinData = {
@@ -304,13 +302,16 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
 
 const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
   const kodeverk = alleKodeverk['RelasjonsRolleType'];
-  if (!erHovedsøker && !fagsak.annenpartBehandling?.relasjonsRolleType) {
-    const rrType =
-      fagsak.relasjonsRolleType === RelasjonsRolleType.FAR ? RelasjonsRolleType.MOR : RelasjonsRolleType.FAR;
-    return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
-  }
-  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
+  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : rolleAnnenpart(fagsak);
   return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
+};
+
+const rolleAnnenpart = (fagsak: Fagsak) => {
+  if (fagsak.relasjonsRolleType === RelasjonsRolleType.MOR) {
+    const kjønnAnnenpart = fagsak.annenPart!.kjønn;
+    return kjønnAnnenpart === KjønnkodeEnum.KVINNE ? RelasjonsRolleType.MEDMOR : RelasjonsRolleType.FAR;
+  }
+  return RelasjonsRolleType.MOR;
 };
 
 interface TidslinjeProps {
