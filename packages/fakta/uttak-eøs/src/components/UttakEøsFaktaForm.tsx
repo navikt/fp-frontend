@@ -87,9 +87,8 @@ export const UttakESFaktaForm = ({ annenForelderUttakEøs, submittable, kanOvers
     }
   }, [perioder]);
 
-  const begrunnelse = formMethods.watch('begrunnelse');
+  const begrunnelse = formMethods.watch('begrunnelse'); // TODO: Greit å gjøre dette eller litt overkill?
   useEffect(() => {
-    console.log('effekt brukt!');
     setMellomlagretFormData({
       visTabell: visTabell,
       annenForelderUttakEøsPerioder: perioder,
