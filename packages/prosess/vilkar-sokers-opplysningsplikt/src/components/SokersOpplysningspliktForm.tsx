@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
@@ -196,7 +196,7 @@ export const SokersOpplysningspliktForm = ({
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback(
@@ -285,6 +285,6 @@ export const SokersOpplysningspliktForm = ({
           )}
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };

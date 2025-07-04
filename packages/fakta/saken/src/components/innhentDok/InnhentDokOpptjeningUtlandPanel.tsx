@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
@@ -63,7 +63,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
   const begrunnelse = formMethods.watch('begrunnelse');
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -111,6 +111,6 @@ export const InnhentDokOpptjeningUtlandPanel = ({
           </VStack>
         </AksjonspunktBox>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

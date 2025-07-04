@@ -9,7 +9,7 @@ import dayjs from 'dayjs';
 import type { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
 type FormValues = Record<
-  number,
+  string,
   {
     skalVelgeDato: boolean;
   } & SvpAvklartOppholdPeriode
@@ -34,7 +34,6 @@ const validerAtDatoErUnik =
 
 const validerTomEtterFom =
   (intl: IntlShape, index: number, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
-    // @ts-expect-error Fiks
     dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
 
 const validerAtPeriodeErGyldig =
@@ -62,9 +61,7 @@ const validerAtPeriodeIkkeOverlapper =
     alleOpphold: SvpAvklartOppholdPeriode[],
   ) =>
   () => {
-    // @ts-expect-error Fiks
     const fomDato = getValues(`${index}.fom`);
-    // @ts-expect-error Fiks
     const tomDato = getValues(`${index}.tom`);
     const periodeMap = alleOpphold
       .filter(p => p.fom !== valgtOpphold.fom)
@@ -142,6 +139,7 @@ export const OppholdForm = ({
           <HStack gap="4">
             <RhfDatepicker
               name={`${index}.fom`}
+              control={formMethods.control}
               label={intl.formatMessage({
                 id: 'OppholdForm.FraOgMed',
               })}
@@ -155,6 +153,7 @@ export const OppholdForm = ({
             />
             <RhfDatepicker
               name={`${index}.tom`}
+              control={formMethods.control}
               label={intl.formatMessage({
                 id: 'OppholdForm.TilOgMed',
               })}
@@ -170,6 +169,7 @@ export const OppholdForm = ({
           </HStack>
           <RhfRadioGroup
             name={`${index}.oppholdÅrsak`}
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
             validate={[required]}
             isReadOnly={forVisning}

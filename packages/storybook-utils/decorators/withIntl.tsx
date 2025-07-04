@@ -1,7 +1,7 @@
 import { createIntl, createIntlCache, RawIntlProvider } from 'react-intl';
 
 import type { ReactRenderer } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
 export const getIntlDecorator = (messages: Record<string, string>) => {
   const intl = createIntl(

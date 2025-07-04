@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
@@ -72,7 +72,7 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
   const [erOverstyrt, setErOverstyrt] = useState(!!aksjonspunkt?.begrunnelse);
   const readOnly = !erOverstyrt || isReadOnly || !kanOverstyre;
   return (
-    <Form formMethods={formMethods} onSubmit={transformerFeltverdier}>
+    <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier}>
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG]}
@@ -112,6 +112,6 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
           />
         </VStack>
       </FaktaGruppe>
-    </Form>
+    </RhfForm>
   );
 };

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import {
@@ -64,7 +64,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
       )}
       <PersonopplysningerForFamilie alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
       {harAksjonspunkt && (
-        <Form
+        <RhfForm
           formMethods={formMethods}
           onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
           setDataOnUnmount={setMellomlagretFormData}
@@ -88,7 +88,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
               isDirty={formMethods.formState.isDirty}
             />
           </VStack>
-        </Form>
+        </RhfForm>
       )}
     </VStack>
   );

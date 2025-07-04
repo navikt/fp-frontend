@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
@@ -64,7 +64,7 @@ export const DekningradApForm = ({
   return (
     <VStack gap="4">
       <AksjonspunktBox erAksjonspunktApent={erAksjonspunktApent} erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}>
-        <Form
+        <RhfForm
           formMethods={formMethods}
           onSubmit={(values: FormValues) =>
             submitCallback({
@@ -167,7 +167,7 @@ export const DekningradApForm = ({
               </Button>
             </div>
           </VStack>
-        </Form>
+        </RhfForm>
       </AksjonspunktBox>
       {!erIkkeGodkjentAvBeslutter && !erAksjonspunktApent && <hr className={styles.hr} />}
     </VStack>

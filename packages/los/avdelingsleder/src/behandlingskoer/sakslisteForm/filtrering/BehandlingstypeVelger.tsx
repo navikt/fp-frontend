@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
@@ -18,6 +19,9 @@ interface Props {
 
 export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
+
+  // TODO (TOR) Manglar type
+  const { control } = useFormContext();
 
   const { mutate: lagreBehandlingstype } = useMutation({
     mutationFn: (valuesToStore: { behandlingType: string; checked: boolean }) =>
@@ -58,6 +62,7 @@ export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: 
             <RhfCheckbox
               key={bt.kode}
               name={bt.kode}
+              control={control}
               label={bt.navn}
               onChange={isChecked =>
                 lagreBehandlingstype({

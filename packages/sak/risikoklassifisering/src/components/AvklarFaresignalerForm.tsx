@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -91,7 +91,7 @@ export const AvklarFaresignalerForm = ({
   const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === FaresignalVurdering.INNVIRKNING;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: Values) => submitCallback && submitCallback(transformValues(values))}
     >
@@ -107,7 +107,7 @@ export const AvklarFaresignalerForm = ({
         <RhfRadioGroup
           name={VURDERING_HOVEDKATEGORI}
           control={formMethods.control}
-          label={<FormattedMessage id="Risikopanel.Form.Resultat" />}
+          label={<FormattedMessage id="Risikopanel.RhfForm.Resultat" />}
           validate={[required]}
           isReadOnly={readOnly}
           radios={[
@@ -150,10 +150,10 @@ export const AvklarFaresignalerForm = ({
             disabled={!formMethods.formState.isDirty || readOnly || formMethods.formState.isSubmitting}
             onClick={ariaCheck}
           >
-            <FormattedMessage id="Risikopanel.Form.Bekreft" />
+            <FormattedMessage id="Risikopanel.RhfForm.Bekreft" />
           </Button>
         </div>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

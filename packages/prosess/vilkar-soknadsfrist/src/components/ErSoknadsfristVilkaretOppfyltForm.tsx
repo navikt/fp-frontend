@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Box, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -106,7 +106,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
   const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -193,6 +193,6 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
           isDirty={formMethods.formState.isDirty}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

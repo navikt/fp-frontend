@@ -1,3 +1,5 @@
+import { useFormContext } from 'react-hook-form';
+
 import { HStack, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -16,6 +18,9 @@ interface Props {
 
 export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksbehandlere }: Props) => {
   const queryClient = useQueryClient();
+
+  // TODO (TOR) Manglar type
+  const { control } = useFormContext();
 
   const { mutate: knyttSaksbehandlerTilSaksliste } = useMutation({
     mutationFn: (values: { brukerIdent: string; checked: boolean }) =>
@@ -38,6 +43,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
           <RhfCheckbox
             key={s.brukerIdent}
             name={s.brukerIdent}
+            control={control}
             label={s.navn}
             onChange={isChecked =>
               knyttSaksbehandlerTilSaksliste({
@@ -53,6 +59,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
           <RhfCheckbox
             key={s.brukerIdent}
             name={s.brukerIdent}
+            control={control}
             label={s.navn}
             onChange={isChecked =>
               knyttSaksbehandlerTilSaksliste({

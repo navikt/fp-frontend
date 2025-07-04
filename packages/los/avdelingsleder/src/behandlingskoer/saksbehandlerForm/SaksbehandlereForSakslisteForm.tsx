@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Box, ExpansionCard, Label, Table, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { type SaksbehandlerProfil } from '@navikt/fp-los-felles';
@@ -55,7 +55,7 @@ export const SaksbehandlereForSakslisteForm = ({
     !grupper.saksbehandlerGrupper.every(sg => sg.saksbehandlere.length === 0);
 
   return (
-    <Form<FormValues> formMethods={formMethods}>
+    <RhfForm<FormValues> formMethods={formMethods}>
       <Box padding="5" borderColor="border-divider" borderRadius="0" borderWidth="1">
         <VStack gap="2">
           <Label size="small">
@@ -132,7 +132,7 @@ export const SaksbehandlereForSakslisteForm = ({
           )}
         </VStack>
       </Box>
-    </Form>
+    </RhfForm>
   );
 };
 

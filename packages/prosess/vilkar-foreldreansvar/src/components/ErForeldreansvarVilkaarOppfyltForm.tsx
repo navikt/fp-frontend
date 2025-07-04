@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -77,7 +77,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -112,7 +112,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };
 

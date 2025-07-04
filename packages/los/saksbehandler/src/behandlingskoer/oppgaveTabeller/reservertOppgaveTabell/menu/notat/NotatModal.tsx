@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
-import { Form, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import styles from './notatModal.module.css';
@@ -46,7 +46,7 @@ export const NotatModal = ({ notat, closeModal, flyttOppgavereservasjon, brukern
         </Label>
       </NavModal.Header>
       <NavModal.Body>
-        <Form
+        <RhfForm
           formMethods={lagreFormMethods}
           onSubmit={values => {
             closeModal();
@@ -71,7 +71,7 @@ export const NotatModal = ({ notat, closeModal, flyttOppgavereservasjon, brukern
               <FormattedMessage id="FlyttReservasjonModal.Ok" />
             </Button>
           </HStack>
-        </Form>
+        </RhfForm>
       </NavModal.Body>
     </NavModal>
   );

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
@@ -55,7 +55,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
   const values = formMethods.watch();
 
   return (
-    <Form<FormValues> formMethods={formMethods}>
+    <RhfForm<FormValues> formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="4">
         <Label size="small">
@@ -113,7 +113,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
           }
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
 

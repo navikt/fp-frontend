@@ -9,7 +9,7 @@ import type { Permisjon } from '@navikt/fp-types';
 
 import type { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 
-type FormValues = Record<number, Permisjon>;
+type FormValues = Record<string, Permisjon>;
 
 interface Props {
   velferdspermisjon: Permisjon;
@@ -70,7 +70,6 @@ export const VelferdspermisjonForm = ({
     return Promise.resolve();
   };
 
-  // @ts-expect-error Fiks denne
   const erGyldig = formMethods.watch(`${permisjonIndex}.erGyldig`);
 
   return (
@@ -88,6 +87,7 @@ export const VelferdspermisjonForm = ({
         <VStack gap="5">
           <RhfRadioGroup
             name={`${permisjonIndex}.erGyldig`}
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
             description={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldigDetaljer' })}
             validate={[required]}

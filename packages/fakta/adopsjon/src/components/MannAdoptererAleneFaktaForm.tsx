@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Detail, VStack } from '@navikt/ds-react';
@@ -37,6 +38,7 @@ export const MannAdoptererAleneFaktaForm = ({
   gjeldendeFamiliehendelse,
 }: Props) => {
   const intl = useIntl();
+  const { control } = useFormContext<FormValues>();
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
@@ -56,6 +58,7 @@ export const MannAdoptererAleneFaktaForm = ({
         </div>
         <RhfRadioGroup
           name="mannAdoptererAlene"
+          control={control}
           hideLegend
           isEdited={hasValue(gjeldendeFamiliehendelse.mannAdoptererAlene)}
           validate={[required]}

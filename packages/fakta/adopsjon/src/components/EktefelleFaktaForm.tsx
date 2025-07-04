@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, VStack } from '@navikt/ds-react';
@@ -29,6 +30,8 @@ export type FormValues = {
  */
 export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMerknaderFraBeslutter }: Props) => {
   const intl = useIntl();
+  const { control } = useFormContext<FormValues>();
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
@@ -43,6 +46,7 @@ export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMer
         </div>
         <RhfRadioGroup
           name="ektefellesBarn"
+          control={control}
           hideLegend
           validate={[required]}
           isReadOnly={readOnly}

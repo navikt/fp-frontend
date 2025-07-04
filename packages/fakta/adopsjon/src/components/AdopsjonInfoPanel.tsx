@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -132,7 +132,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
-      <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap="6">
           <HStack gap="4" wrap>
             <div className={styles.leftCol}>
@@ -182,7 +182,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
             </>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </VStack>
   );
 };

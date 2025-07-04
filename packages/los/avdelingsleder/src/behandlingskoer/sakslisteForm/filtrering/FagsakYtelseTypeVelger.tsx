@@ -1,3 +1,4 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
@@ -14,6 +15,9 @@ interface Props {
 
 export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
+
+  // TODO (TOR) Manglar type
+  const { control } = useFormContext();
 
   const { mutate: lagreFagsakYtelseType } = useMutation({
     mutationFn: (values: { sakslisteId: number; avdelingEnhet: string; fagsakYtelseType: string; checked: boolean }) =>
@@ -42,6 +46,7 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
         <RhfCheckbox
           key={fyt.kode}
           name={fyt.kode}
+          control={control}
           label={alleFagsakYtelseTyper.find(type => type.kode === fyt.kode)?.navn ?? ''}
           onChange={isChecked =>
             lagreFagsakYtelseType({

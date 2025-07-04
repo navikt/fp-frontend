@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
@@ -23,6 +24,12 @@ import { InntektsposterPanel } from './InntektsposterPanel';
 import styles from './arbeidsforholdField.module.css';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';
+
+export type FormValues = {
+  arbeidsforhold: {
+    permisjonStatus: string;
+  }[];
+};
 
 interface Props {
   index: number;
@@ -50,6 +57,8 @@ export const ArbeidsforholdField = ({
   alleKodeverk,
 }: Props) => {
   const intl = useIntl();
+
+  const { control } = useFormContext<FormValues>();
 
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
@@ -184,6 +193,7 @@ export const ArbeidsforholdField = ({
           )}
           <RhfRadioGroup
             name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
+            control={control}
             label={
               <HStack gap="2">
                 <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />

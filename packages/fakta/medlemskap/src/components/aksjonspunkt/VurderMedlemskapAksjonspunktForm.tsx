@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, BehandlingType, VilkarType } from '@navikt/fp-kodeverk';
@@ -85,7 +85,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
 
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>
-      <Form formMethods={formMethods} onSubmit={bekreft} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm formMethods={formMethods} onSubmit={bekreft} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap={isReadOnly ? '2' : '6'}>
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
@@ -115,7 +115,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
             </div>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </ConditionalWrapper>
   );
 };

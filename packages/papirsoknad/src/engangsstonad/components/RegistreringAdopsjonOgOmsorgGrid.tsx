@@ -19,7 +19,7 @@ interface Props {
 /*
  * RegistreringAdopsjonOgOmsorgGrid
  *
- * Form som brukes ved adopsjon for tilleggsopplysninger.
+ * RhfForm som brukes ved adopsjon for tilleggsopplysninger.
  */
 export const RegistreringAdopsjonOgOmsorgGrid = ({
   readOnly,

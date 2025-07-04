@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { Form, RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -125,7 +125,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
   const sattPaVent = formMethods.watch('sattPaVent');
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, alleDokumenter))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -211,6 +211,6 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
           text={sattPaVent ? intl.formatMessage({ id: 'SubmitButton.SettPåVent' }) : undefined}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -119,7 +119,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
   );
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]))}
     >
@@ -154,6 +154,6 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           isReadOnly={isReadOnly}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

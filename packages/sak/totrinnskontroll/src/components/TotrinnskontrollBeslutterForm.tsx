@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { ariaCheck } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
@@ -134,7 +134,7 @@ export const TotrinnskontrollBeslutterForm = ({
   }
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setBeslutterFormData}>
+    <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setBeslutterFormData}>
       <VStack gap="6">
         {!readOnly && (
           <AksjonspunktHelpTextHTML>
@@ -184,6 +184,6 @@ export const TotrinnskontrollBeslutterForm = ({
           )}
         </HStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

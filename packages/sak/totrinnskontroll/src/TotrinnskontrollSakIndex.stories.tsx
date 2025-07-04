@@ -1,6 +1,6 @@
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
 import { action } from 'storybook/actions';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
 import {
   BehandlingResultatType,

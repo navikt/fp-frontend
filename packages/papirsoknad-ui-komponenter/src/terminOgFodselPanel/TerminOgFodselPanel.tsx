@@ -2,7 +2,7 @@ import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
 import { Alert, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -26,8 +26,6 @@ import {
   validateMaxAntallBarn,
   validateMinAntallBarn,
 } from '@navikt/fp-utils';
-
-import { ErBarnetFodt } from './components/ErBarnetFodt';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -83,8 +81,24 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
       <BorderBox>
         <VStack gap="4">
           <Heading size="small">{intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}</Heading>
-
-          <ErBarnetFodt readOnly={readOnly} />
+          <RhfRadioGroup
+            name="erBarnetFodt"
+            control={control}
+            label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
+            validate={[required]}
+            isReadOnly={readOnly}
+            isTrueOrFalseSelection
+            radios={[
+              {
+                label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErFodt' }),
+                value: 'true',
+              },
+              {
+                label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErIkkeFodt' }),
+                value: 'false',
+              },
+            ]}
+          />
           {erBarnetFodt !== undefined && (
             <VStack gap="4">
               {erBarnetFodt === false && (

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, Box, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -101,7 +101,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   const lagreNavn = useDebounce('navn', tranformValues, formMethods.trigger);
 
   return (
-    <Form formMethods={formMethods}>
+    <RhfForm formMethods={formMethods}>
       <Box padding="5" borderColor="border-divider" borderRadius="0" borderWidth="1">
         <VStack gap="2">
           <Heading size="small">
@@ -114,8 +114,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
                 control={formMethods.control}
                 label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
                 validate={[required, minLength3, maxLength100, hasValidName]}
-                // @ts-expect-error fiks
-                onChange={lagreNavn}
+                onChange={value => lagreNavn(value)}
                 className={styles.bredde}
               />
               <Box padding="2" background="bg-subtle">
@@ -154,6 +153,6 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
           </VStack>
         </VStack>
       </Box>
-    </Form>
+    </RhfForm>
   );
 };

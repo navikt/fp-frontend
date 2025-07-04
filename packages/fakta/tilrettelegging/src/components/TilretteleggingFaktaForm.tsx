@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfDatepicker, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
@@ -140,7 +140,7 @@ export const TilretteleggingFaktaForm = ({
   };
 
   return (
-    <Form formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
+    <RhfForm formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
       <VStack gap="8">
         {harÅpneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>
@@ -219,6 +219,6 @@ export const TilretteleggingFaktaForm = ({
           isDirty={formMethods.formState.isDirty}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
