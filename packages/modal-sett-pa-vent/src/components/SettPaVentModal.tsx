@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Modal, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   ariaCheck,
   dateAfterOrEqualToToday,

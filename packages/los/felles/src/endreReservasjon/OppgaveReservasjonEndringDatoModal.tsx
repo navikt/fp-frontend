@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal as NavModal } from '@navikt/ds-react';
-import { RhfForm, RhfDatepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker,RhfForm } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqualToToday, dateBeforeOrEqual, hasValidDate } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';

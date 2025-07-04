@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Detail, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfDatepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker,RhfForm } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks } from '@navikt/ft-utils';

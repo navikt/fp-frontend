@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashFillIcon } from '@navikt/aksel-icons';
 import { Button, Heading, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfDatepicker, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,

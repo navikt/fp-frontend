@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
 import { Button, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfCheckbox, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 
 import styles from './SøkForm.module.css';

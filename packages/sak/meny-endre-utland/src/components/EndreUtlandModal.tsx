@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Checkbox, Heading, Modal } from '@navikt/ds-react';
-import { RhfForm, RhfCheckboxGroup } from '@navikt/ft-form-hooks';
+import { RhfCheckboxGroup,RhfForm } from '@navikt/ft-form-hooks';
 
 import type { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 

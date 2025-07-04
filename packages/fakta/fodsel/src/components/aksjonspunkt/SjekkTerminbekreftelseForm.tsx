@@ -2,7 +2,7 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
