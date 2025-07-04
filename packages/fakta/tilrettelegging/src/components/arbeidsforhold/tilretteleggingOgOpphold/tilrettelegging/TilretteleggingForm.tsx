@@ -22,7 +22,7 @@ import styles from './tilretteleggingForm.module.css';
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
 
-type FormValues = Record<number, ArbeidsforholdTilretteleggingDato>;
+type FormValues = Record<string, ArbeidsforholdTilretteleggingDato>;
 
 const validerAtDatoErUnik =
   (
@@ -209,6 +209,7 @@ export const TilretteleggingForm = ({
           )}
           <RhfDatepicker
             name={`${index}.fom`}
+            control={formMethods.control}
             label={intl.formatMessage({
               id: 'TilretteleggingForm.FraOgMed',
             })}
@@ -227,6 +228,7 @@ export const TilretteleggingForm = ({
           />
           <RhfRadioGroup
             name={`${index}.type`}
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
             validate={[required]}
             isReadOnly={readOnly}
@@ -253,6 +255,7 @@ export const TilretteleggingForm = ({
                 formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
                 <RhfNumericField
                   name={`${index}.stillingsprosent`}
+                  control={formMethods.control}
                   className={styles.arbeidsprosent}
                   readOnly={readOnly}
                   label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
@@ -265,13 +268,13 @@ export const TilretteleggingForm = ({
                       velferdspermisjonprosent,
                       value,
                     );
-                    // @ts-expect-error Fiks
                     formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
                   }}
                 />
               )}
               <RhfNumericField
                 name={`${index}.overstyrtUtbetalingsgrad`}
+                control={formMethods.control}
                 className={styles.utbetalingsgrad}
                 readOnly={readOnly}
                 label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}

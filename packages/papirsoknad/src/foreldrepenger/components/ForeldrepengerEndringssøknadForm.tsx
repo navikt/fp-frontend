@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { HGrid } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import {
   BekreftelsePanel,
@@ -43,7 +43,7 @@ interface Props {
 /**
  * ForeldrepengerEndringssøknadForm
  *
- * Form-komponent for registrering av papir-endringssøknad for foreldrepenger.
+ * RhfForm-komponent for registrering av papir-endringssøknad for foreldrepenger.
  */
 export const ForeldrepengerEndringssøknadForm = ({
   readOnly,
@@ -57,7 +57,7 @@ export const ForeldrepengerEndringssøknadForm = ({
   });
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
+    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="4">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <BekreftelsePanel annenForelderInformertRequired readOnly={readOnly} />
@@ -74,6 +74,6 @@ export const ForeldrepengerEndringssøknadForm = ({
         submitting={formMethods.formState.isSubmitting}
         erEndringssøknad
       />
-    </Form>
+    </RhfForm>
   );
 };

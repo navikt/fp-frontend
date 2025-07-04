@@ -125,8 +125,9 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                 {skalViseDødsdato && (
                   <Table.DataCell>
                     <RhfDatepicker
-                      size="medium"
                       name={`${fieldArrayRow}.dødsdato`}
+                      control={control}
+                      size="medium"
                       label={intl.formatMessage({ id: 'Label.Dødsdato' })}
                       hideLabel
                       validate={[hasValidDate, dateBeforeOrEqualToToday, validerDødsdato(getValues, index)]}

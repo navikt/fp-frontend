@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, Label, Link, Modal, VStack } from '@navikt/ds-react';
-import { Form, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
@@ -158,7 +158,7 @@ export const HenleggBehandlingModal = ({
   const henleggArsaker = getHenleggArsaker(behandlingResultatTyper, behandlingType, ytelseType);
 
   return (
-    <Form formMethods={formMethods} onSubmit={handleSubmit}>
+    <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
       <Modal
         className={styles.modal}
         open
@@ -231,6 +231,6 @@ export const HenleggBehandlingModal = ({
           </Button>
         </Modal.Footer>
       </Modal>
-    </Form>
+    </RhfForm>
   );
 };

@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
@@ -119,7 +119,7 @@ export const ValgtAktivitetForm = ({
   );
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
+    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
       <FaktaGruppe
         className={styles.panel}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}
@@ -236,6 +236,6 @@ export const ValgtAktivitetForm = ({
           )}
         </VStack>
       </FaktaGruppe>
-    </Form>
+    </RhfForm>
   );
 };

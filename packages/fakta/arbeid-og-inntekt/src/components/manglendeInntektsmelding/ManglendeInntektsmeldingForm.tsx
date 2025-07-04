@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, HStack, Popover, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
@@ -96,7 +96,7 @@ export const ManglendeInntektsmeldingForm = ({
     });
   }
   return (
-    <Form formMethods={formMethods} onSubmit={lagre}>
+    <RhfForm formMethods={formMethods} onSubmit={lagre}>
       <VStack gap="4">
         {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
           <div className={styles.alertStripe}>
@@ -180,7 +180,7 @@ export const ManglendeInntektsmeldingForm = ({
           </HStack>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
 

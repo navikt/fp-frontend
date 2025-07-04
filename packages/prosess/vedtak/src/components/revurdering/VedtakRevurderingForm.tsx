@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateFormat } from '@navikt/ft-utils';
 
 import {
@@ -294,7 +294,7 @@ export const VedtakRevurderingForm = ({
   const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(previewCallback, begrunnelse);
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
@@ -352,6 +352,6 @@ export const VedtakRevurderingForm = ({
           ) : null;
         }}
       />
-    </Form>
+    </RhfForm>
   );
 };

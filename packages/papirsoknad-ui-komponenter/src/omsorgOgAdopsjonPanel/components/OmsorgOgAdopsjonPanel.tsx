@@ -89,7 +89,9 @@ export const OmsorgOgAdopsjonPanel = ({
         </Heading>
         {isForeldrepengerFagsak && familieHendelseType === FamilieHendelseType.ADOPSJON && (
           <RhfRadioGroup
+            //@ts-expect-error Her er det noko rart med typane
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
+            control={control}
             label={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
             validate={[required]}
             isReadOnly={readOnly}
@@ -122,7 +124,9 @@ export const OmsorgOgAdopsjonPanel = ({
         <HStack gap="4">
           {familieHendelseType === FamilieHendelseType.ADOPSJON && (
             <RhfDatepicker
+              //@ts-expect-error Her er det noko rart med typane
               name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
+              control={control}
               label={formatMessage({ id: 'Registrering.Adopsjon.Ankomstdato' })}
               isReadOnly={readOnly}
               validate={[hasValidDate]}

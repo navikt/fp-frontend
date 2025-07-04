@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 
 import styles from './searchForm.module.css';
@@ -35,7 +35,7 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
   const searchString = formMethods.watch('searchString');
 
   return (
-    <Form formMethods={formMethods} onSubmit={searchFagsakCallback} className={styles.container}>
+    <RhfForm formMethods={formMethods} onSubmit={searchFagsakCallback} className={styles.container}>
       <VStack gap="2">
         <BodyShort size="small">
           <FormattedMessage id="Search.SearchFagsakOrPerson" />
@@ -65,6 +65,6 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
           </HStack>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

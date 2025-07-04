@@ -15,18 +15,20 @@ interface Props {
 }
 
 export const HarAnnenForelderRettFelter = ({ readOnly, avklareUforetrygd }: Props) => {
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FormValues>();
   const harAnnenForelderRettEØS = watch('harAnnenForelderRettEØS');
 
   return (
     <TrueFalseInput
       name="harAnnenForelderRett"
+      control={control}
       label={<FormattedMessage id="HarAnnenForelderRettFelter.HarAnnenForelderRett" />}
       readOnly={readOnly}
       falseContent={
         <>
           <TrueFalseInput
             name="harAnnenForelderRettEØS"
+            control={control}
             label={<FormattedMessage id="HarAnnenForelderRettFelter.AnnenForelderRettEØS" />}
             readOnly={readOnly}
           />
@@ -34,6 +36,7 @@ export const HarAnnenForelderRettFelter = ({ readOnly, avklareUforetrygd }: Prop
           {harAnnenForelderRettEØS === false && avklareUforetrygd && (
             <TrueFalseInput
               name="mottarAnnenForelderUforetrygd"
+              control={control}
               label={<FormattedMessage id="HarAnnenForelderRettFelter.MottarUforetrygd" />}
               readOnly={readOnly}
             />

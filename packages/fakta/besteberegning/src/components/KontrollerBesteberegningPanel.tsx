@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { Form, RhfCheckbox } from '@navikt/ft-form-hooks';
+import { RhfCheckbox,RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -64,7 +64,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
           ]}
         </AksjonspunktHelpTextHTML>
       )}
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
@@ -91,7 +91,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
             isReadOnly={readOnly}
           />
         </VStack>
-      </Form>
+      </RhfForm>
     </VStack>
   );
 };

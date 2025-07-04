@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
@@ -295,7 +295,7 @@ export const UttakFaktaForm = ({
         visNyPeriode={visNyPeriode}
         settVisNyPeriode={setVisNyPeriode}
       />
-      <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+      <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
         <VStack gap="4">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
@@ -312,7 +312,7 @@ export const UttakFaktaForm = ({
             />
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </VStack>
   );
 };

@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Modal as NavModal, VStack } from '@navikt/ds-react';
-import { Form, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import type { SaksbehandlerProfil } from '../typer/saksbehandlerProfilTsType';
@@ -87,7 +87,7 @@ export const FlyttReservasjonModal = ({
       </NavModal.Header>
       <NavModal.Body>
         <VStack gap="4">
-          <Form
+          <RhfForm
             formMethods={søkFormMethods}
             onSubmit={(formValues: SøkFormValues) => hentSaksbehandler(formValues.brukerIdent)}
           >
@@ -110,8 +110,8 @@ export const FlyttReservasjonModal = ({
               </Button>
             </HStack>
             {hentSaksbehandlerIsSuccess && <BodyShort size="small">{formatText(intl, saksbehandler)}</BodyShort>}
-          </Form>
-          <Form
+          </RhfForm>
+          <RhfForm
             formMethods={lagreFormMethods}
             onSubmit={values => {
               closeModal();
@@ -147,7 +147,7 @@ export const FlyttReservasjonModal = ({
                 <FormattedMessage id="FlyttReservasjonModal.Ok" />
               </Button>
             </HStack>
-          </Form>
+          </RhfForm>
         </VStack>
       </NavModal.Body>
     </NavModal>

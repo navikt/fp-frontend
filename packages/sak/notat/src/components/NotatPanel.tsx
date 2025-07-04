@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, Chat, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -119,7 +119,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
       )}
       {kanSaksbehandle && (
         <div className={styles.form}>
-          <Form formMethods={formMethods} onSubmit={lagre}>
+          <RhfForm formMethods={formMethods} onSubmit={lagre}>
             <VStack gap="4">
               <RhfTextarea
                 name="beskrivelse"
@@ -137,7 +137,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
                 </Button>
               </HStack>
             </VStack>
-          </Form>
+          </RhfForm>
         </div>
       )}
       {!kanSaksbehandle && (

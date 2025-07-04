@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
-import { Form, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
@@ -160,7 +160,7 @@ export const Messages = ({
   const erVarselOmRevurdering = brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMeldingFormData}
@@ -221,6 +221,6 @@ export const Messages = ({
           </Button>
         </HStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

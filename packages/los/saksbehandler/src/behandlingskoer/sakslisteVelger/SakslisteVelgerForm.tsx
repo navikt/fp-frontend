@@ -13,7 +13,7 @@ import {
   SackKronerIcon,
 } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
@@ -236,7 +236,7 @@ export const SakslisteVelgerForm = ({
   const sorterteSaksbehandlere = saksbehandlere?.toSorted((s1, s2) => s1.navn.localeCompare(s2.navn));
 
   return (
-    <Form formMethods={formMethods} className={styles.container}>
+    <RhfForm formMethods={formMethods} className={styles.container}>
       <VStack gap="6">
         <HStack justify="space-between" align="end">
           <RhfSelect
@@ -387,6 +387,6 @@ export const SakslisteVelgerForm = ({
           )}
         </div>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

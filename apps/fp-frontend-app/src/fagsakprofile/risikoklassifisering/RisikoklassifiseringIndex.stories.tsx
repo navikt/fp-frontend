@@ -1,9 +1,9 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
 import {
   AksjonspunktKode,

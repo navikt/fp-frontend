@@ -1,6 +1,6 @@
 import { useForm } from 'react-hook-form';
 
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
@@ -50,9 +50,9 @@ const meta = {
     const { data: kodeverkLos } = useQuery(losKodeverkOptions());
 
     return kodeverkLos ? (
-      <Form formMethods={formMethods}>
+      <RhfForm formMethods={formMethods}>
         <SorteringVelger {...args} />
-      </Form>
+      </RhfForm>
     ) : (
       <LoadingPanel />
     );

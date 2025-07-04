@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
@@ -121,7 +121,7 @@ export const FormkravKlageFormNfp = ({
   const formVerdier = formMethods.watch();
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -266,6 +266,6 @@ export const FormkravKlageFormNfp = ({
           </HStack>
         </VStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

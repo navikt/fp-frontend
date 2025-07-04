@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -51,7 +51,7 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
   const values = formMethods.watch();
 
   return (
-    <Form<FormValues> formMethods={formMethods}>
+    <RhfForm<FormValues> formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="4">
         <Label size="small">
@@ -89,6 +89,6 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
           )}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

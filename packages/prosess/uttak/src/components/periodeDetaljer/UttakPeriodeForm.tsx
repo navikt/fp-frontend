@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
-import { Form, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -346,7 +346,7 @@ export const UttakPeriodeForm = ({
   const warning = warning1 ?? warning2;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: UttakAktivitetType) =>
         oppdaterPeriode([transformValues(values, valgtPeriode, sorterteAktiviteter)])
@@ -455,6 +455,6 @@ export const UttakPeriodeForm = ({
           </>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
