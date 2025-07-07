@@ -14,11 +14,12 @@ import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspun
 import { usePanelDataContext } from '@navikt/fp-utils';
 import dayjs from 'dayjs';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import styles from './uttakEøsFaktaDetailForm.module.css';
 
 export type FormValues = {
   fom: string;
   tom: string;
-  trekkonto: UttakPeriodeType;
+  trekkonto: 'FELLESPERIODE' | 'MØDREKVOTE' | 'FEDREKVOTE';
   trekkdager: number;
 };
 
@@ -29,7 +30,7 @@ interface Props {
   avbryt: () => void;
 }
 
-export const UttakESFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater, slettPeriode, avbryt }: Props) => {
+export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater, slettPeriode, avbryt }: Props) => {
   const intl = useIntl();
 
   const { isReadOnly, fagsak } = usePanelDataContext<BekreftUttaksperioderAp[]>();
@@ -38,19 +39,19 @@ export const UttakESFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater
     if (fagsak.relasjonsRolleType === RelasjonsRolleType.MOR) {
       return [
         <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
-          {UttakPeriodeType.FELLESPERIODE}
+          {toTitleCapitalization(UttakPeriodeType.FELLESPERIODE)}
         </option>,
         <option key={1} value={UttakPeriodeType.FEDREKVOTE}>
-          {UttakPeriodeType.FEDREKVOTE}
+          {toTitleCapitalization(UttakPeriodeType.FEDREKVOTE)}
         </option>,
       ];
     } else {
       return [
         <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
-          {UttakPeriodeType.FELLESPERIODE}
+          {toTitleCapitalization(UttakPeriodeType.FELLESPERIODE)}
         </option>,
         <option key={1} value={UttakPeriodeType.MODREKVOTE}>
-          {UttakPeriodeType.MODREKVOTE}
+          {toTitleCapitalization(UttakPeriodeType.MODREKVOTE)}
         </option>,
       ];
     }
@@ -102,6 +103,7 @@ export const UttakESFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater
               label={intl.formatMessage({
                 id: 'UttakFaktaForm.Stønadskonto',
               })}
+              className={styles.select}
               selectValues={gyldigeKontotyperOption()}
               readOnly={isReadOnly}
               validate={[required]}
@@ -114,7 +116,7 @@ export const UttakESFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater
               forceTwoDecimalDigits
             />
           </HStack>
-          <HStack gap="4">
+          <HStack gap="4" className={styles.marginBtn}>
             <Button
               size="small"
               variant="primary"
@@ -147,3 +149,11 @@ export const UttakESFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdater
 
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
   dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakEøsFaktaForm.TomForFom' }) : null;
+
+export const toTitleCapitalization = (sentence: string): string => {
+  return sentence
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize the first letter of each word
+    .join(' ');
+};
