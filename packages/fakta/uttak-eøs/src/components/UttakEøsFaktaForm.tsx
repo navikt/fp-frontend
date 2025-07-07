@@ -15,8 +15,10 @@ import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { type FormValues as UttakEøsFaktaFormValues, UttakESFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
+import { type FormValues as UttakEøsFaktaFormValues, UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
+
+import styles from './uttakEøsFaktaTable.module.css';
 
 interface Props {
   annenForelderUttakEøs?: AnnenforelderUttakEøsPeriode[];
@@ -24,7 +26,7 @@ interface Props {
   kanOverstyre: boolean;
 }
 
-export const UttakESFaktaForm = ({ annenForelderUttakEøs, submittable, kanOverstyre }: Props) => {
+export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOverstyre }: Props) => {
   const intl = useIntl();
 
   const { aksjonspunkterForPanel, isReadOnly, submitCallback } = usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
@@ -64,7 +66,7 @@ export const UttakESFaktaForm = ({ annenForelderUttakEøs, submittable, kanOvers
       setFeilmelding(undefined);
     }
 
-    submitCallback({
+    return submitCallback({
       kode: erOverstyrt ? AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       begrunnelse,
       perioder: visTabell ? perioder : [],
@@ -122,13 +124,16 @@ export const UttakESFaktaForm = ({ annenForelderUttakEøs, submittable, kanOvers
           onChange={setVisTabell}
           defaultValue={mellomlagretFormData?.visTabell ?? visTabell}
           readOnly={!erRedigerbart}
+          size="small"
         >
-          <Radio value={true}>
-            <FormattedMessage id="UttakEøsFaktaInfoPanel.Ja" />
-          </Radio>
-          <Radio value={false}>
-            <FormattedMessage id="UttakEøsFaktaInfoPanel.Nei" />
-          </Radio>
+          <HStack gap="4">
+            <Radio value={true}>
+              <FormattedMessage id="UttakEøsFaktaInfoPanel.Ja" />
+            </Radio>
+            <Radio value={false}>
+              <FormattedMessage id="UttakEøsFaktaInfoPanel.Nei" />
+            </Radio>
+          </HStack>
         </RadioGroup>
         {visTabell && (
           <>
@@ -140,15 +145,20 @@ export const UttakESFaktaForm = ({ annenForelderUttakEøs, submittable, kanOvers
             {erRedigerbart && (
               <>
                 {visLeggTilPeriodeForm && (
-                  <UttakESFaktaDetailForm
-                    oppdater={(nyPeriode: UttakEøsFaktaFormValues) => {
-                      setPerioder(prevPerioder =>
-                        [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
-                      );
-                      setVisLeggTilPeriodeForm(false);
-                    }}
-                    avbryt={() => setVisLeggTilPeriodeForm(false)}
-                  />
+                  <VStack gap="4" className={styles.panel}>
+                    <Heading size="small">
+                      <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
+                    </Heading>
+                    <UttakEøsFaktaDetailForm
+                      oppdater={(nyPeriode: UttakEøsFaktaFormValues) => {
+                        setPerioder(prevPerioder =>
+                          [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
+                        );
+                        setVisLeggTilPeriodeForm(false);
+                      }}
+                      avbryt={() => setVisLeggTilPeriodeForm(false)}
+                    />
+                  </VStack>
                 )}
                 {!visLeggTilPeriodeForm && (
                   <div>
