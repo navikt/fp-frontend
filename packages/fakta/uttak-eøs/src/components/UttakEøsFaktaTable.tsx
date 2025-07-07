@@ -6,7 +6,12 @@ import dayjs from 'dayjs';
 
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 
-import { UttakESFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
+import { toTitleCapitalization, UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
+
+import styles from './UttakEøsFaktaTable.module.css';
+import classnames from 'classnames/bind';
+
+const classNames = classnames.bind(styles);
 
 interface Props {
   annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
@@ -19,7 +24,7 @@ export const UttakEøsFaktaTable = ({ annenForelderUttakEøsPerioder, setPeriode
     <VStack gap="6">
       <Table>
         <Table.Header>
-          <Table.Row>
+          <Table.Row className={styles.headerRow}>
             <Table.HeaderCell scope="col">Periode</Table.HeaderCell>
             <Table.HeaderCell scope="col">Kontotype</Table.HeaderCell>
             <Table.HeaderCell scope="col">Trekkdager</Table.HeaderCell>
@@ -78,21 +83,27 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly }: RadProp
   return (
     <Table.ExpandableRow
       key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
-      content={
-        erÅpen && (
-          <UttakESFaktaDetailForm
-            annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
-            oppdater={oppdaterPeriode}
-            slettPeriode={slettPeriode}
-            avbryt={avbryt}
-          />
-        )
-      }
       expandOnRowClick
       expansionDisabled={isReadOnly}
-      onOpenChange={() => setErÅpen(!erÅpen)}
-      open={erÅpen}
       togglePlacement="right"
+      open={erÅpen}
+      onOpenChange={() => setErÅpen(!erÅpen)}
+      className={classNames('row', {
+        isOpen: erÅpen,
+      })}
+      contentGutter="none"
+      content={
+        erÅpen && (
+          <div className={styles.panelOpen}>
+            <UttakEøsFaktaDetailForm
+              annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
+              oppdater={oppdaterPeriode}
+              slettPeriode={slettPeriode}
+              avbryt={avbryt}
+            />
+          </div>
+        )
+      }
     >
       <Table.DataCell>
         <PeriodLabel
@@ -100,7 +111,7 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly }: RadProp
           dateStringTom={annenForelderUttakEøsPeriode.tom}
         />
       </Table.DataCell>
-      <Table.DataCell>{annenForelderUttakEøsPeriode.trekkonto}</Table.DataCell>
+      <Table.DataCell>{toTitleCapitalization(annenForelderUttakEøsPeriode.trekkonto)}</Table.DataCell>
       <Table.DataCell>{annenForelderUttakEøsPeriode.trekkdager}</Table.DataCell>
     </Table.ExpandableRow>
   );
