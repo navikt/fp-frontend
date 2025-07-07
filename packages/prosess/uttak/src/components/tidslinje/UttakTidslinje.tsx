@@ -4,7 +4,8 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
-  DoorOpenIcon, EarthIcon,
+  DoorOpenIcon,
+  EarthIcon,
   FigureCombinationIcon,
   FigureOutwardFillIcon,
   MinusIcon,
@@ -33,7 +34,7 @@ import {
   type AnnenforelderUttakEøsPeriode,
   type Fagsak,
   KjønnkodeEnum,
-  type PeriodeSoker
+  type PeriodeSoker,
 } from '@navikt/fp-types';
 
 export type PeriodeSøkerMedTidslinjedata = {
@@ -245,14 +246,29 @@ const finnLabelForPeriode = (
   intl: IntlShape,
 ): ReactElement => {
   const periodeString = periodFormat(periode.start, periode.end);
-  const dager = calcDaysAndWeeks(periode.start, periode.end).formattedString;
 
   let periodeType = '';
   if (periode.periodeType !== '-' && periode.periodeType !== '') {
     periodeType = intl.formatMessage({ id: PERIODE_TYPE_LABEL_MAP[periode.periodeType] });
   }
-
-  //TODO HEr må ein da inn få vist data for EØS periodane
+  if (erEøsPeriode(periode.periode)) {
+    const trekkdager = periode.periode.trekkdager;
+    return (
+      <>
+        <BodyShort>
+          <FormattedMessage id="UttakTidslinje.Stonadskonto" values={{ periodeType: periodeType || '-' }} />
+        </BodyShort>
+        <BodyShort>
+          <FormattedMessage id="UttakTidslinje.Periode" values={{ periodeString }} />
+        </BodyShort>
+        <VStack gap="2">
+          <BodyShort>
+            <FormattedMessage id="UttakTidslinje.Trekkdager" values={{ trekkdager }} />
+          </BodyShort>
+        </VStack>
+      </>
+    );
+  }
 
   let type = '';
   if (periode.erGradert) {
@@ -263,6 +279,7 @@ const finnLabelForPeriode = (
     type = intl.formatMessage({ id: 'UttakTidslinje.OppholdPeriode' });
   }
 
+  const dager = calcDaysAndWeeks(periode.start, periode.end).formattedString;
   const manueltEndret =
     periode.begrunnelse && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK
       ? intl.formatMessage({ id: 'UttakTidslinje.ManueltEditert' })

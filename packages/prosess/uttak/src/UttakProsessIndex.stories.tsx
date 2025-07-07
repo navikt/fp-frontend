@@ -11,6 +11,7 @@ import {
   ManuellBehandlingÅrsak,
   NavBrukerKjonn,
   PeriodeResultatÅrsak,
+  RelasjonsRolleType,
   StonadskontoType,
   UttakUtsettelseType,
 } from '@navikt/fp-kodeverk';
@@ -19,6 +20,7 @@ import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
+  Fagsak,
   FamilieHendelseSamling,
   Personoversikt,
   Soknad,
@@ -184,6 +186,7 @@ const meta = {
       return Promise.resolve(uttakStonadskontoer);
     },
     arbeidsgiverOpplysningerPerId,
+    annenForelderUttakEøs: [],
   },
   render: args => <UttakProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof UttakProsessIndex>>;
@@ -1301,5 +1304,101 @@ export const VisOppholdsperiode: Story = {
       årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: true, søkerErMor: true },
       endringsdato: '2023-02-03',
     },
+  },
+};
+
+export const MorPerioderI_EØSFarSamtidigUttak: Story = {
+  args: {
+    personoversikt: {
+      bruker: {
+        kjønn: NavBrukerKjonn.MANN,
+      },
+    } as Personoversikt,
+    fagsak: {
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+    } as Fagsak,
+    uttaksresultat: {
+      perioderSøker: [
+        {
+          fom: '2025-01-15',
+          tom: '2025-02-04',
+          aktiviteter: [
+            {
+              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              prosentArbeid: 0,
+              arbeidsforholdId: '7272d1a7-8dbb-4953-bb39-e0742635b2a5',
+              eksternArbeidsforholdId: 'ARB001-002',
+              arbeidsgiverReferanse: '994884174',
+              utbetalingsgrad: 100,
+              uttakArbeidType: 'ORDINÆRT_ARBEID',
+              gradering: false,
+              trekkdagerDesimaler: 5.0,
+            },
+          ],
+          periodeResultatType: 'MANUELL_BEHANDLING',
+          begrunnelse: undefined,
+          periodeResultatÅrsak: PeriodeResultatÅrsak.ÅRSAK_4002,
+          manuellBehandlingÅrsak: ManuellBehandlingÅrsak.ÅRSAK_5014,
+          graderingAvslagÅrsak: GraderingAvslagÅrsak.UDEFINERT,
+          flerbarnsdager: false,
+          samtidigUttak: false,
+          samtidigUttaksprosent: undefined,
+          graderingInnvilget: false,
+          periodeType: 'FELLESPERIODE',
+          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          oppholdÅrsak: '-',
+          mottattDato: '2022-12-01',
+          gradertAktivitet: undefined,
+        },
+        {
+          fom: '2025-03-25',
+          tom: '2025-06-25',
+          aktiviteter: [
+            {
+              stønadskontoType: StonadskontoType.FELLESPERIODE,
+              prosentArbeid: 0,
+              arbeidsforholdId: '7272d1a7-8dbb-4953-bb39-e0742635b2a5',
+              eksternArbeidsforholdId: 'ARB001-002',
+              arbeidsgiverReferanse: '994884174',
+              utbetalingsgrad: 100,
+              uttakArbeidType: 'ORDINÆRT_ARBEID',
+              gradering: false,
+              trekkdagerDesimaler: 5.0,
+            },
+          ],
+          periodeResultatType: 'INNVILGET',
+          begrunnelse: undefined,
+          periodeResultatÅrsak: PeriodeResultatÅrsak.ÅRSAK_4002,
+          manuellBehandlingÅrsak: ManuellBehandlingÅrsak.UDEFINERT,
+          graderingAvslagÅrsak: GraderingAvslagÅrsak.UDEFINERT,
+          flerbarnsdager: false,
+          samtidigUttak: false,
+          samtidigUttaksprosent: undefined,
+          graderingInnvilget: false,
+          periodeType: 'FELLESPERIODE',
+          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          oppholdÅrsak: '-',
+          mottattDato: '2022-12-01',
+          gradertAktivitet: undefined,
+        },
+      ],
+      perioderAnnenpart: [],
+      årsakFilter: { kreverSammenhengendeUttakTom: '2021-09-30', utenMinsterett: false, søkerErMor: true },
+      endringsdato: '2022-10-20',
+    },
+    annenForelderUttakEøs: [
+      {
+        fom: '2024-05-01',
+        tom: '2024-12-12',
+        trekkonto: StonadskontoType.MØDREKVOTE,
+        trekkdager: 90,
+      },
+      {
+        fom: '2025-01-15',
+        tom: '2025-02-04',
+        trekkonto: StonadskontoType.FELLESPERIODE,
+        trekkdager: 20,
+      },
+    ],
   },
 };

@@ -325,6 +325,7 @@ export const UttakProsessPanel = ({
           erTilknyttetStortinget={erTilknyttetStortinget}
           harÅpneAksjonspunkter={harÅpneAksjonspunkter}
           endringsdato={uttaksresultat.endringsdato}
+          perioderAnnenpartEøs={annenForelderUttakEøs}
         />
       )}
       {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (

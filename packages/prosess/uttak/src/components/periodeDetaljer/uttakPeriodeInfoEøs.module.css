@@ -1,0 +1,8 @@
+.greenDetailsPeriod {
+  background-color: var(--a-surface-info-subtle);
+  padding: 12px;
+}
+
+.eosIcon {
+  font-size: 3rem;
+}
