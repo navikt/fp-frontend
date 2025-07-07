@@ -29,7 +29,7 @@
     "@navikt/ft-ui-komponenter": "4.5.3",
     "@navikt/ft-utils": "3.6.5",
     "react": "19.1.0",
-    "react-hook-form": "7.59.0",
+    "react-hook-form": "7.60.0",
     "react-intl": "7.1.11"
   },
   "devDependencies": {

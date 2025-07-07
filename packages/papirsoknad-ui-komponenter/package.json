@@ -35,7 +35,7 @@
     "classnames": "2.5.1",
     "dayjs": "1.11.13",
     "react": "19.1.0",
-    "react-hook-form": "7.59.0",
+    "react-hook-form": "7.60.0",
     "react-intl": "7.1.11",
     "react-router-dom": "7.6.3"
   },

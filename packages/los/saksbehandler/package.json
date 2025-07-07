@@ -39,7 +39,7 @@
     "lodash.debounce": "4.0.8",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-hook-form": "7.59.0",
+    "react-hook-form": "7.60.0",
     "react-intl": "7.1.11",
     "react-router-dom": "7.6.3"
   },
