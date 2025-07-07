@@ -79,6 +79,7 @@
   "UttakTidslinje.Stonadskonto": "Stønadskonto: {periodeType}",
   "UttakTidslinje.Periode": "Periode: {periodeString}",
   "UttakTidslinje.Dager": "Dager: {dager}",
+  "UttakTidslinje.Trekkdager": "Trekkdager: {trekkdager}",
   "UttakActivity.Vurdering": "Vurdering: ",
   "UttakActivity.Oppfylt": "Oppfylt",
   "UttakActivity.IkkeOppfylt": "Ikke oppfylt",
@@ -238,5 +239,9 @@
   "UttakPanel.InvalidTrekkDagerFlerbarnsdager": "Antall dager med flerbarnsdager kan ikke være høyere enn {maxDays}",
   "UttakPanel.InvalidStonadskonto": "Stønadskonto {konto} er ikke tilgjengelig",
   "UttakActivity.MerEn100Prosent": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.",
-  "UttakActivity.MerEn100ProsentOgOgyldigUtsettlse": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%. Søker har ikke 100% stilling, vurder om perioden kan utsettes."
+  "UttakActivity.MerEn100ProsentOgOgyldigUtsettlse": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%. Søker har ikke 100% stilling, vurder om perioden kan utsettes.",
+
+  "UttakPeriodeInfoEØS.Uttak": "Uttak",
+  "UttakPeriodeInfoEØS.Trekkdager": "Trekkdager:  {trekkdager}"
+
 }
