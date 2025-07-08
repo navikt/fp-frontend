@@ -4,5 +4,18 @@
 }
 
 .select {
-  width: 130px;
+  width: 300px;
+}
+
+.weekPosition {
+  float: right;
+}
+
+.numberWidth {
+  width: 100px;
+}
+
+.trekkdagerUker {
+  fontWeight: 'bold';
+  textAlign: 'center';
 }

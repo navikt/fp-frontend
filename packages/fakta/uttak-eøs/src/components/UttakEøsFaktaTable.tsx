@@ -10,6 +10,8 @@ import { toTitleCapitalization, UttakEøsFaktaDetailForm } from './UttakEøsFakt
 
 import styles from './UttakEøsFaktaTable.module.css';
 import classnames from 'classnames/bind';
+import { FormattedMessage } from 'react-intl';
+import { finnDager, finnUker } from '@navikt/fp-utils';
 
 const classNames = classnames.bind(styles);
 
@@ -25,9 +27,15 @@ export const UttakEøsFaktaTable = ({ annenForelderUttakEøsPerioder, setPeriode
       <Table>
         <Table.Header>
           <Table.Row className={styles.headerRow}>
-            <Table.HeaderCell scope="col">Periode</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Kontotype</Table.HeaderCell>
-            <Table.HeaderCell scope="col">Trekkdager</Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="UttakEøsFaktaTable.Periode" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="UttakEøsFaktaTable.Kontotype" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col" align="center">
+              <FormattedMessage id="UttakEøsFaktaTable.Trekkdager" />
+            </Table.HeaderCell>
             <Table.HeaderCell />
           </Table.Row>
         </Table.Header>
@@ -112,7 +120,9 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly }: RadProp
         />
       </Table.DataCell>
       <Table.DataCell>{toTitleCapitalization(annenForelderUttakEøsPeriode.trekkonto)}</Table.DataCell>
-      <Table.DataCell>{annenForelderUttakEøsPeriode.trekkdager}</Table.DataCell>
+      <Table.DataCell align="center">
+        {finnUker(annenForelderUttakEøsPeriode.trekkdager)} / {finnDager(annenForelderUttakEøsPeriode.trekkdager)}
+      </Table.DataCell>
     </Table.ExpandableRow>
   );
 };

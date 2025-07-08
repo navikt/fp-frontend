@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
-import { BTag, formaterArbeidsgiver } from '@navikt/ft-utils';
+import { BTag, createWeekAndDay, formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import type {
@@ -154,7 +154,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
             {valgtKonto.kontoReduksjoner?.annenForelderEøsUttak && (
               <FormattedMessage
                 id="TimeLineInfo.KontoReduksjonerEøs"
-                values={{ dager: valgtKonto.kontoReduksjoner.annenForelderEøsUttak }}
+                values={{ dager: createWeekAndDay(valgtKonto.kontoReduksjoner.annenForelderEøsUttak).formattedString }}
               />
             )}
             <Table>
