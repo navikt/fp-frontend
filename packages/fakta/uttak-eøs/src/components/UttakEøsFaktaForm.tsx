@@ -15,7 +15,7 @@ import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import { type FormValues as UttakEøsFaktaFormValues, UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
+import { UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
 import styles from './uttakEøsFaktaTable.module.css';
@@ -150,7 +150,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
                       <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
                     </Heading>
                     <UttakEøsFaktaDetailForm
-                      oppdater={(nyPeriode: UttakEøsFaktaFormValues) => {
+                      oppdater={(nyPeriode: AnnenforelderUttakEøsPeriode) => {
                         setPerioder(prevPerioder =>
                           [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
                         );
