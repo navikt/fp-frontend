@@ -9,16 +9,21 @@
 
   "UttakFaktaForm.FaktaUttakEos": "Fakta om uttak til annen forelder i EØS",
   "UttakFaktaForm.LeggTilPeriode": "Legg til periode",
-
-  "UttakEøsFaktaForm.Fom": "Fra og med",
-  "UttakEøsFaktaForm.Tom": "Til og med",
-  "UttakEøsFaktaForm.TomForFom": "Dato kan ikke være før fra",
-  "UttakFaktaForm.Stønadskonto": "Stønadskonto",
-  "UttakEøsFaktaForm.Trekkdager": "Trekkdager",
-  "UttakEøsFaktaForm.Oppdater": "Oppdater",
-  "UttakEøsFaktaForm.LeggTil": "Legg til",
-  "UttakEøsFaktaForm.Avslutt": "Avbryt",
-  "UttakFaktaForm.Slett": "Slett periode",
   "UttakEøsFaktaForm.NyPeriode": "Ny periode",
-  "UttakEøsFaktaForm.VilDuSlette": "Vil du slette denne perioden?"
+  "UttakEøsFaktaForm.VilDuSlette": "Vil du slette denne perioden?",
+
+  "UttakEøsFaktaDetailForm.Fom": "Fra og med",
+  "UttakEøsFaktaDetailForm.Tom": "Til og med",
+  "UttakEøsFaktaDetailForm.TomForFom": "Dato kan ikke være før fra",
+  "UttakEøsFaktaDetailForm.Stønadskonto": "Stønadskonto",
+  "UttakEøsFaktaDetailForm.TrekkUkerDager": "Trekk uker / dager",
+  "UttakEøsFaktaDetailForm.Virkedager": "Antall virkedager: {virkedager}",
+  "UttakEøsFaktaDetailForm.Oppdater": "Oppdater",
+  "UttakEøsFaktaDetailForm.LeggTil": "Legg til",
+  "UttakEøsFaktaDetailForm.Avslutt": "Avbryt",
+  "UttakEøsFaktaDetailForm.Slett": "Slett periode",
+
+  "UttakEøsFaktaTable.Periode": "Periode",
+  "UttakEøsFaktaTable.Kontotype": "Stønadskonto",
+  "UttakEøsFaktaTable.Trekkdager": "Trekk antall uker/dager"
 }

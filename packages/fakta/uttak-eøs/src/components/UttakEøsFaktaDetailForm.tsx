@@ -3,29 +3,30 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
-import { Button, HStack, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { Form, RhfDatepicker, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
-import { hasValidDate, hasValidDecimal, minValue, required } from '@navikt/ft-form-validators';
+import { hasValidDate, hasValidDecimal, hasValidInteger, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
 import { RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
-import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
+import { type AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { finnDager, finnUker, usePanelDataContext } from '@navikt/fp-utils';
 import dayjs from 'dayjs';
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import styles from './uttakEøsFaktaDetailForm.module.css';
 
 export type FormValues = {
   fom: string;
   tom: string;
   trekkonto: 'FELLESPERIODE' | 'MØDREKVOTE' | 'FEDREKVOTE';
-  trekkdager: number;
+  trekkdager: string;
+  trekkuker: string;
 };
 
 interface Props {
   annenForelderUttakEøsPeriode?: AnnenforelderUttakEøsPeriode;
-  oppdater: (data: FormValues) => void;
+  oppdater: (data: AnnenforelderUttakEøsPeriode) => void;
   slettPeriode?: () => void;
   avbryt: () => void;
 }
@@ -57,8 +58,12 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
     }
   };
 
-  const formMethods = useForm<FormValues>({ defaultValues: annenForelderUttakEøsPeriode });
+  const formMethods = useForm<FormValues>({
+    defaultValues: annenForelderUttakEøsPeriode ? defaultVerdier(annenForelderUttakEøsPeriode) : {},
+  });
+
   const fom = formMethods.watch('fom');
+  const tom = formMethods.watch('tom');
   const [visSletteDialog, setVisSletteDialog] = useState(false);
   const slettUttaksperiode = () => {
     setVisSletteDialog(false);
@@ -69,52 +74,80 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
 
   return (
     <>
-      <Form formMethods={formMethods} onSubmit={oppdater}>
+      <Form formMethods={formMethods} onSubmit={values => oppdater(transformValues(values))}>
         <VStack gap="8">
-          <HStack gap="4" align="end">
-            <RhfDatepicker
-              name="fom"
-              label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Fom' })}
-              validate={[required, hasValidDate]}
-              isReadOnly={isReadOnly}
-            />
-            <RhfDatepicker
-              name="tom"
-              label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Tom' })}
-              validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
-              isReadOnly={isReadOnly}
-              fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
-            />
-            {slettPeriode && !isReadOnly && (
-              <Button
-                size="small"
-                variant="tertiary"
-                type="button"
-                icon={<TrashIcon />}
-                onClick={() => setVisSletteDialog(true)}
-              >
-                <FormattedMessage id="UttakFaktaForm.Slett" />
-              </Button>
+          <VStack gap="4">
+            <HStack gap="4" align="end">
+              <RhfDatepicker
+                name="fom"
+                label={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.Fom' })}
+                validate={[required, hasValidDate]}
+                isReadOnly={isReadOnly}
+              />
+              <RhfDatepicker
+                name="tom"
+                label={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.Tom' })}
+                validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
+                isReadOnly={isReadOnly}
+                fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
+              />
+              {slettPeriode && !isReadOnly && (
+                <Button
+                  size="small"
+                  variant="tertiary"
+                  type="button"
+                  icon={<TrashIcon />}
+                  onClick={() => setVisSletteDialog(true)}
+                >
+                  <FormattedMessage id="UttakEøsFaktaDetailForm.Slett" />
+                </Button>
+              )}
+            </HStack>
+            {fom && tom && (
+              <BodyShort>
+                {intl.formatMessage(
+                  { id: 'UttakEøsFaktaDetailForm.Virkedager' },
+                  { virkedager: calcDaysAndWeeks(fom, tom).formattedString },
+                )}
+              </BodyShort>
             )}
-          </HStack>
+          </VStack>
           <HStack gap="4">
             <RhfSelect
               name="trekkonto"
               label={intl.formatMessage({
-                id: 'UttakFaktaForm.Stønadskonto',
+                id: 'UttakEøsFaktaDetailForm.Stønadskonto',
               })}
               className={styles.select}
               selectValues={gyldigeKontotyperOption()}
               readOnly={isReadOnly}
               validate={[required]}
             />
-            <RhfNumericField
-              name="trekkdager"
-              label={intl.formatMessage({ id: 'UttakEøsFaktaForm.Trekkdager' })}
-              validate={[required, minValue(0), hasValidDecimal]}
-              readOnly={isReadOnly}
-              forceTwoDecimalDigits
-            />
+          </HStack>
+          <HStack gap="4" align="end">
+            <VStack align="start">
+              <Label size="small" className={styles.trekkdagerUker}>
+                {intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TrekkUkerDager' })}{' '}
+                {/* Example: "Trekk uker/dager" */}
+              </Label>
+              <HStack gap="2" align="center">
+                <RhfNumericField
+                  name="trekkuker"
+                  control={formMethods.control}
+                  className={styles.numberWidth}
+                  readOnly={isReadOnly}
+                  validate={[required, hasValidInteger]}
+                />
+                <div>/</div>
+                <RhfNumericField
+                  name="trekkdager"
+                  control={formMethods.control}
+                  className={styles.numberWidth}
+                  readOnly={isReadOnly}
+                  validate={[required, hasValidDecimal]}
+                />
+              </HStack>
+            </VStack>
           </HStack>
           <HStack gap="4" className={styles.marginBtn}>
             <Button
@@ -124,20 +157,20 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               disabled={!formMethods.formState.isDirty || isReadOnly}
             >
               {slettPeriode ? (
-                <FormattedMessage id="UttakEøsFaktaForm.Oppdater" />
+                <FormattedMessage id="UttakEøsFaktaDetailForm.Oppdater" />
               ) : (
-                <FormattedMessage id="UttakEøsFaktaForm.LeggTil" />
+                <FormattedMessage id="UttakEøsFaktaDetailForm.LeggTil" />
               )}
             </Button>
             <Button size="small" variant="secondary" onClick={avbryt} type="button" disabled={isReadOnly}>
-              <FormattedMessage id="UttakEøsFaktaForm.Avslutt" />
+              <FormattedMessage id="UttakEøsFaktaDetailForm.Avslutt" />
             </Button>
           </HStack>
         </VStack>
       </Form>
       {visSletteDialog && (
         <OkAvbrytModal
-          text={intl.formatMessage({ id: 'UttakEøsFaktaForm.VilDuSlette' })}
+          text={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.VilDuSlette' })}
           submit={slettUttaksperiode}
           cancel={() => setVisSletteDialog(false)}
           showModal
@@ -148,7 +181,22 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
 };
 
 const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
-  dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakEøsFaktaForm.TomForFom' }) : null;
+  dayjs(tom).isBefore(getValues('fom')) ? intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TomForFom' }) : null;
+
+const defaultVerdier = ({ trekkdager, ...rest }: AnnenforelderUttakEøsPeriode): FormValues => {
+  return {
+    ...rest,
+    trekkdager: finnDager(trekkdager),
+    trekkuker: finnUker(trekkdager),
+  };
+};
+
+const transformValues = ({ trekkdager, trekkuker, ...rest }: FormValues): AnnenforelderUttakEøsPeriode => {
+  return {
+    ...rest,
+    trekkdager: parseFloat(trekkuker) * 5 + parseFloat(trekkdager),
+  };
+};
 
 export const toTitleCapitalization = (sentence: string): string => {
   return sentence
