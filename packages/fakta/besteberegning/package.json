@@ -32,7 +32,7 @@
     "@navikt/ft-utils": "3.6.5",
     "dayjs": "1.11.13",
     "react": "19.1.0",
-    "react-hook-form": "7.59.0",
+    "react-hook-form": "7.60.0",
     "react-intl": "7.1.11"
   },
   "devDependencies": {
@@ -51,7 +51,7 @@
     "storybook": "9.0.15",
     "stylelint": "16.21.1",
     "typescript": "5.8.3",
-    "vite": "7.0.2",
+    "vite": "7.0.3",
     "vitest": "3.2.4"
   }
 }
