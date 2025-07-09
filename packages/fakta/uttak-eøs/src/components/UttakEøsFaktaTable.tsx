@@ -93,7 +93,7 @@ export const UttakEøsFaktaTable = ({
                 onClick={() => setVisLeggTilPeriodeForm(true)}
                 disabled={isReadOnly}
               >
-                <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
+                <FormattedMessage id="UttakEøsFaktaForm.LeggTilPeriode" />
               </Button>
             </div>
           )}

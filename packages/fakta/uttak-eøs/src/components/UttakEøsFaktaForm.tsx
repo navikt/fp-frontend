@@ -55,7 +55,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
 
   const bekreft = (begrunnelse: string) => {
     if (visTabell && perioder.length === 0) {
-      setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaInfoPanel.FeilmeldingIngenPerioder' }));
+      setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaForm.FeilmeldingIngenPerioder' }));
       return;
     } else {
       setFeilmelding(undefined);
@@ -71,18 +71,17 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
   useEffect(() => {
     if (!visTabell) {
       setFeilmelding(undefined);
+      return;
     }
-  }, [visTabell]);
 
-  useEffect(() => {
     const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
     const erOverlappendePerioder = periodeMap.length > 0 ? !!dateRangesNotOverlapping(periodeMap) : undefined;
     if (erOverlappendePerioder) {
-      setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaInfoPanel.OverlappendePerioder' }));
+      setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaForm.OverlappendePerioder' }));
     } else {
       setFeilmelding(undefined);
     }
-  }, [perioder]);
+  }, [perioder, visTabell]);
 
   const begrunnelse = formMethods.watch('begrunnelse');
   useEffect(() => {
@@ -97,7 +96,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
     <VStack gap="8">
       <HStack gap="4">
         <Heading size="small">
-          <FormattedMessage id="UttakFaktaForm.FaktaUttakEos" />
+          <FormattedMessage id="UttakEøsFaktaForm.FaktaUttakEos" />
         </Heading>
         {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
           <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
@@ -105,7 +104,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
       </HStack>
       {harApneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
-          <FormattedMessage id="UttakEøsFaktaInfoPanel.Aksjonspunkt" />
+          <FormattedMessage id="UttakEøsFaktaForm.Aksjonspunkt" />
         </AksjonspunktHelpTextHTML>
       )}
       {feilmelding && (
@@ -115,7 +114,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
       )}
       <VStack gap="10">
         <RadioGroup
-          legend={<FormattedMessage id="UttakEøsFaktaInfoPanel.harPeriodeIEøs" />}
+          legend={<FormattedMessage id="UttakEøsFaktaForm.tsx.harPeriodeIEøs" />}
           onChange={setVisTabell}
           defaultValue={mellomlagretFormData?.visTabell ?? visTabell}
           readOnly={!erRedigerbart}
@@ -123,10 +122,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
         >
           <HStack gap="4">
             <Radio value={true}>
-              <FormattedMessage id="UttakEøsFaktaInfoPanel.Ja" />
+              <FormattedMessage id="UttakEøsFaktaForm.Ja" />
             </Radio>
             <Radio value={false}>
-              <FormattedMessage id="UttakEøsFaktaInfoPanel.Nei" />
+              <FormattedMessage id="UttakEøsFaktaForm.Nei" />
             </Radio>
           </HStack>
         </RadioGroup>

@@ -157,8 +157,6 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '16.02.2022');
     await userEvent.click(screen.getByText('Oppdater'));
 
-    console.log(screen.debug());
-
     expect(screen.queryByText('Du må rette disse feilene før du kan fortsette:')).not.toBeInTheDocument();
     expect(screen.queryByText('Det finnes overlappende perioder')).not.toBeInTheDocument();
 
