@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
+
 import { ErrorSummary, Heading, HStack, Radio, RadioGroup, VStack } from '@navikt/ds-react';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -11,8 +13,8 @@ import { AksjonspunktKode, isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
-import { RhfForm } from '@navikt/ft-form-hooks';
 
 interface Props {
   annenForelderUttakEøs?: AnnenforelderUttakEøsPeriode[];
@@ -114,7 +116,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
       )}
       <VStack gap="10">
         <RadioGroup
-          legend={<FormattedMessage id="UttakEøsFaktaForm.tsx.harPeriodeIEøs" />}
+          legend={<FormattedMessage id="UttakEøsFaktaForm.harPeriodeIEøs" />}
           onChange={setVisTabell}
           defaultValue={mellomlagretFormData?.visTabell ?? visTabell}
           readOnly={!erRedigerbart}

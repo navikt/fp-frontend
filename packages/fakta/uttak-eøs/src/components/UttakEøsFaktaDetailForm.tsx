@@ -7,13 +7,14 @@ import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, hasValidInteger, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
+import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import dayjs from 'dayjs';
 
 import { RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import { type AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { finnDager, finnUker, usePanelDataContext } from '@navikt/fp-utils';
-import dayjs from 'dayjs';
-import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+
 import styles from './uttakEøsFaktaDetailForm.module.css';
 
 export type FormValues = {

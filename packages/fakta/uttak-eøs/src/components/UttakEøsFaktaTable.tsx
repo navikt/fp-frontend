@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
+import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Button, Heading, Table, VStack } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
+import { finnDager, finnUker } from '@navikt/fp-utils';
 
 import { toTitleCapitalization, UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
 
-import styles from './UttakEøsFaktaTable.module.css';
-import classnames from 'classnames/bind';
-import { FormattedMessage } from 'react-intl';
-import { finnDager, finnUker } from '@navikt/fp-utils';
-import { PlusCircleIcon } from '@navikt/aksel-icons';
+import styles from './uttakEøsFaktaTable.module.css';
 
 const classNames = classnames.bind(styles);
 
