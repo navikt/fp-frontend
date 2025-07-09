@@ -7,10 +7,8 @@
   "UttakEøsFaktaForm.Ja": "Ja",
   "UttakEøsFaktaForm.Nei": "Nei",
   "UttakEøsFaktaForm.LeggTilPeriode": "Legg til periode",
-  
-  "UttakEøsFaktaForm.NyPeriode": "Ny periode",
-  "UttakEøsFaktaForm.VilDuSlette": "Vil du slette denne perioden?",
 
+  "UttakEøsFaktaForm.NyPeriode": "Ny periode",
   "UttakEøsFaktaDetailForm.Fom": "Fra og med",
   "UttakEøsFaktaDetailForm.Tom": "Til og med",
   "UttakEøsFaktaDetailForm.TomForFom": "Dato kan ikke være før fra",
@@ -21,6 +19,7 @@
   "UttakEøsFaktaDetailForm.LeggTil": "Legg til",
   "UttakEøsFaktaDetailForm.Avslutt": "Avbryt",
   "UttakEøsFaktaDetailForm.Slett": "Slett periode",
+  "UttakEøsFaktaDetailForm.VilDuSlette": "Vil du slette denne perioden?",
 
   "UttakEøsFaktaTable.Periode": "Periode",
   "UttakEøsFaktaTable.Kontotype": "Stønadskonto",
