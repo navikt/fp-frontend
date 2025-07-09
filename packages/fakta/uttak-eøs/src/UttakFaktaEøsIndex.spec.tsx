@@ -6,7 +6,11 @@ import { UttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import * as stories from './UttakFaktaEøsIndex.stories';
 
-const { ÅpentAksjonspunktMedPerioder, ÅpentAksjonspunktUtenPerioder } = composeStories(stories);
+const {
+  ÅpentAksjonspunktMedPerioder,
+  ÅpentAksjonspunktUtenPerioder,
+  OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør,
+} = composeStories(stories);
 
 describe('UttakFaktaEøsIndex', () => {
   it('skal få aksjonspunkt uten eksisterende perioder og kan bekrefte AP uten å legge til noen peridoer', async () => {
@@ -52,7 +56,9 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
-    await userEvent.type(screen.getByLabelText('Trekkdager'), '40');
+
+    await userEvent.type(utils.container.querySelector('input[name="trekkuker"]')!, '8');
+    await userEvent.type(utils.container.querySelector('input[name="trekkdager"]')!, '0');
     await userEvent.click(screen.getByText('Legg til'));
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
@@ -66,7 +72,7 @@ describe('UttakFaktaEøsIndex', () => {
           fom: '2022-01-31',
           tom: '2022-02-15',
           trekkonto: 'FELLESPERIODE',
-          trekkdager: '40',
+          trekkdager: 40,
         },
       ],
     });
@@ -132,7 +138,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
-    await userEvent.type(screen.getByLabelText('Trekkdager'), '40');
+    await userEvent.type(utils.container.querySelector('input[name="trekkuker"]')!, '8');
+    await userEvent.type(utils.container.querySelector('input[name="trekkdager"]')!, '3');
     await userEvent.click(screen.getByText('Legg til'));
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
@@ -140,7 +147,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '12.02.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '25.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.MODREKVOTE);
-    await userEvent.type(screen.getByLabelText('Trekkdager'), '12');
+    await userEvent.type(utils.container.querySelector('input[name="trekkuker"]')!, '1');
+    await userEvent.type(utils.container.querySelector('input[name="trekkdager"]')!, '2.4');
     await userEvent.click(screen.getByText('Legg til'));
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
@@ -157,8 +165,6 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '16.02.2022');
     await userEvent.click(screen.getByText('Oppdater'));
 
-    console.log(screen.debug());
-
     expect(screen.queryByText('Du må rette disse feilene før du kan fortsette:')).not.toBeInTheDocument();
     expect(screen.queryByText('Det finnes overlappende perioder')).not.toBeInTheDocument();
 
@@ -171,13 +177,41 @@ describe('UttakFaktaEøsIndex', () => {
         {
           fom: '2022-01-31',
           tom: '2022-02-15',
-          trekkdager: '40',
+          trekkdager: 43,
           trekkonto: 'FELLESPERIODE',
         },
         {
           fom: '2022-02-16',
           tom: '2022-02-25',
-          trekkdager: '12',
+          trekkdager: 7.4,
+          trekkonto: 'MØDREKVOTE',
+        },
+      ],
+    });
+  });
+
+  it('skal kunne overstyre og vil da sende inn med annen aksjonspunktkode enn ordinært aksjonspunkt', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    const utils = render(<OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør submitCallback={lagre} />);
+
+    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(screen.queryByTitle('Overstyr')).toBeInTheDocument();
+    expect(screen.queryByTitle('Bekreft og fortsett')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByTitle('Overstyr'));
+
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      kode: '6103',
+      begrunnelse: 'Dette er en begrunnelse',
+      perioder: [
+        {
+          fom: '2023-02-01',
+          tom: '2023-02-15',
+          trekkdager: 10,
           trekkonto: 'MØDREKVOTE',
         },
       ],
