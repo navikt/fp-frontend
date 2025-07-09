@@ -4,7 +4,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RhfDatepicker, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, hasValidInteger, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
@@ -74,19 +74,21 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
 
   return (
     <>
-      <Form formMethods={formMethods} onSubmit={values => oppdater(transformValues(values))}>
+      <RhfForm formMethods={formMethods} onSubmit={values => oppdater(transformValues(values))}>
         <VStack gap="8">
           <VStack gap="4">
             <HStack gap="4" align="end">
               <RhfDatepicker
                 name="fom"
                 label={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.Fom' })}
+                control={formMethods.control}
                 validate={[required, hasValidDate]}
                 isReadOnly={isReadOnly}
               />
               <RhfDatepicker
                 name="tom"
                 label={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.Tom' })}
+                control={formMethods.control}
                 validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
                 isReadOnly={isReadOnly}
                 fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
@@ -118,6 +120,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               label={intl.formatMessage({
                 id: 'UttakEøsFaktaDetailForm.Stønadskonto',
               })}
+              control={formMethods.control}
               className={styles.select}
               selectValues={gyldigeKontotyperOption()}
               readOnly={isReadOnly}
@@ -167,7 +170,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
             </Button>
           </HStack>
         </VStack>
-      </Form>
+      </RhfForm>
       {visSletteDialog && (
         <OkAvbrytModal
           text={intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.VilDuSlette' })}

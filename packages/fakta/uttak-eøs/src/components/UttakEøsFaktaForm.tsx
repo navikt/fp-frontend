@@ -4,7 +4,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
 import { Button, ErrorSummary, Heading, HStack, Radio, RadioGroup, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -19,6 +18,7 @@ import { UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
 import styles from './uttakEøsFaktaTable.module.css';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 interface Props {
   annenForelderUttakEøs?: AnnenforelderUttakEøsPeriode[];
@@ -62,6 +62,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
   const bekreft = (begrunnelse: string) => {
     if (visTabell && perioder.length === 0) {
       setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaInfoPanel.FeilmeldingIngenPerioder' }));
+      return;
     } else {
       setFeilmelding(undefined);
     }
@@ -178,7 +179,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
             )}
           </>
         )}
-        <Form formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
+        <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
           <VStack gap="4">
             <FaktaBegrunnelseTextField
               control={formMethods.control}
@@ -195,7 +196,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
               />
             )}
           </VStack>
-        </Form>
+        </RhfForm>
       </VStack>
     </VStack>
   );
