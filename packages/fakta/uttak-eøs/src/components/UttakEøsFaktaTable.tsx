@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { FormattedMessage } from 'react-intl';
 
-import { Table, VStack } from '@navikt/ds-react';
+import { PlusCircleIcon } from '@navikt/aksel-icons';
+import { Button, Heading, Table, VStack } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
+import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
+import { finnDager, finnUker } from '@navikt/fp-utils';
 
 import { toTitleCapitalization, UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
 
-import styles from './UttakEøsFaktaTable.module.css';
-import classnames from 'classnames/bind';
-import { FormattedMessage } from 'react-intl';
-import { finnDager, finnUker } from '@navikt/fp-utils';
+import styles from './uttakEøsFaktaTable.module.css';
 
 const classNames = classnames.bind(styles);
 
@@ -19,40 +20,86 @@ interface Props {
   annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
   setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
   isReadOnly: boolean;
+  erRedigerbart?: boolean;
+  visLeggTilPeriodeForm?: boolean;
+  setVisLeggTilPeriodeForm: (vis: boolean) => void;
 }
 
-export const UttakEøsFaktaTable = ({ annenForelderUttakEøsPerioder, setPerioder, isReadOnly }: Props) => {
+export const UttakEøsFaktaTable = ({
+  annenForelderUttakEøsPerioder,
+  setPerioder,
+  isReadOnly,
+  erRedigerbart,
+  visLeggTilPeriodeForm,
+  setVisLeggTilPeriodeForm,
+}: Props) => {
   return (
-    <VStack gap="6">
-      <Table>
-        <Table.Header>
-          <Table.Row className={styles.headerRow}>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="UttakEøsFaktaTable.Periode" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col">
-              <FormattedMessage id="UttakEøsFaktaTable.Kontotype" />
-            </Table.HeaderCell>
-            <Table.HeaderCell scope="col" align="center">
-              <FormattedMessage id="UttakEøsFaktaTable.Trekkdager" />
-            </Table.HeaderCell>
-            <Table.HeaderCell />
-          </Table.Row>
-        </Table.Header>
-        <Table.Body>
-          {annenForelderUttakEøsPerioder.map(annenForelderUttakEøsPeriode => {
-            return (
-              <Rad
-                key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
-                annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
-                setPerioder={setPerioder}
-                isReadOnly={isReadOnly}
+    <>
+      <VStack gap="6">
+        <Table>
+          <Table.Header>
+            <Table.Row className={styles.headerRow}>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="UttakEøsFaktaTable.Periode" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col">
+                <FormattedMessage id="UttakEøsFaktaTable.Kontotype" />
+              </Table.HeaderCell>
+              <Table.HeaderCell scope="col" align="center">
+                <FormattedMessage id="UttakEøsFaktaTable.Trekkdager" />
+              </Table.HeaderCell>
+              <Table.HeaderCell />
+            </Table.Row>
+          </Table.Header>
+          <Table.Body>
+            {annenForelderUttakEøsPerioder.map(annenForelderUttakEøsPeriode => {
+              return (
+                <Rad
+                  key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
+                  annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
+                  setPerioder={setPerioder}
+                  isReadOnly={isReadOnly}
+                />
+              );
+            })}
+          </Table.Body>
+        </Table>
+      </VStack>
+      {erRedigerbart && (
+        <>
+          {visLeggTilPeriodeForm && (
+            <VStack gap="4" className={styles.panel}>
+              <Heading size="small">
+                <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
+              </Heading>
+              <UttakEøsFaktaDetailForm
+                oppdater={(nyPeriode: AnnenforelderUttakEøsPeriode) => {
+                  setPerioder(prevPerioder =>
+                    [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
+                  );
+                  setVisLeggTilPeriodeForm(false);
+                }}
+                avbryt={() => setVisLeggTilPeriodeForm(false)}
               />
-            );
-          })}
-        </Table.Body>
-      </Table>
-    </VStack>
+            </VStack>
+          )}
+          {!visLeggTilPeriodeForm && (
+            <div>
+              <Button
+                size="small"
+                variant="tertiary"
+                type="button"
+                icon={<PlusCircleIcon />}
+                onClick={() => setVisLeggTilPeriodeForm(true)}
+                disabled={isReadOnly}
+              >
+                <FormattedMessage id="UttakEøsFaktaForm.LeggTilPeriode" />
+              </Button>
+            </div>
+          )}
+        </>
+      )}
+    </>
   );
 };
 

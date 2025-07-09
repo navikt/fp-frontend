@@ -1,17 +1,14 @@
 {
-  "UttakEøsFaktaInfoPanel.Aksjonspunkt": "Avklar uttak i EØS for annen forelder",
-  "UttakEøsFaktaInfoPanel.OverlappendePerioder": "Det finnes overlappende perioder",
-  "UttakEøsFaktaInfoPanel.FeilmeldingIngenPerioder": "Det er svart JA på at annen forelder har uttak i EØS, men det er ikke registrert noen perioder.",
-  "UttakEøsFaktaInfoPanel.harPeriodeIEøs": "Har annen forelder uttak i EØS?",
-  "UttakEøsFaktaInfoPanel.Ja": "Ja",
-  "UttakEøsFaktaInfoPanel.Nei": "Nei",
+  "UttakEøsFaktaForm.FaktaUttakEos": "Fakta om uttak til annen forelder i EØS",
+  "UttakEøsFaktaForm.Aksjonspunkt": "Avklar uttak i EØS for annen forelder",
+  "UttakEøsFaktaForm.OverlappendePerioder": "Det finnes overlappende perioder",
+  "UttakEøsFaktaForm.FeilmeldingIngenPerioder": "Det er svart JA på at annen forelder har uttak i EØS, men det er ikke registrert noen perioder.",
+  "UttakEøsFaktaForm.harPeriodeIEøs": "Har annen forelder uttak i EØS?",
+  "UttakEøsFaktaForm.Ja": "Ja",
+  "UttakEøsFaktaForm.Nei": "Nei",
+  "UttakEøsFaktaForm.LeggTilPeriode": "Legg til periode",
 
-
-  "UttakFaktaForm.FaktaUttakEos": "Fakta om uttak til annen forelder i EØS",
-  "UttakFaktaForm.LeggTilPeriode": "Legg til periode",
   "UttakEøsFaktaForm.NyPeriode": "Ny periode",
-  "UttakEøsFaktaForm.VilDuSlette": "Vil du slette denne perioden?",
-
   "UttakEøsFaktaDetailForm.Fom": "Fra og med",
   "UttakEøsFaktaDetailForm.Tom": "Til og med",
   "UttakEøsFaktaDetailForm.TomForFom": "Dato kan ikke være før fra",
@@ -22,6 +19,7 @@
   "UttakEøsFaktaDetailForm.LeggTil": "Legg til",
   "UttakEøsFaktaDetailForm.Avslutt": "Avbryt",
   "UttakEøsFaktaDetailForm.Slett": "Slett periode",
+  "UttakEøsFaktaDetailForm.VilDuSlette": "Vil du slette denne perioden?",
 
   "UttakEøsFaktaTable.Periode": "Periode",
   "UttakEøsFaktaTable.Kontotype": "Stønadskonto",

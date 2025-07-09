@@ -63,7 +63,28 @@ export const ÅpentAksjonspunktUtenPerioder: Story = {
   },
 };
 
-export const MuligAAOverstyreHvisDetForeliggerTidligereLagtInnPerioder: Story = {
+export const OverstyringOpprettetAksjonspunkt: Story = {
+  args: {
+    kanOverstyre: true,
+    aksjonspunkterForPanel: [
+      {
+        begrunnelse: null,
+        status: AksjonspunktStatus.OPPRETTET,
+        definisjon: AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS,
+      } as Aksjonspunkt,
+    ],
+    annenForelderUttakEøs: [
+      {
+        fom: '2023-02-01',
+        tom: '2023-02-15',
+        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkdager: 10,
+      },
+    ],
+  },
+};
+
+export const OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør: Story = {
   args: {
     kanOverstyre: true,
     aksjonspunkterForPanel: [],
