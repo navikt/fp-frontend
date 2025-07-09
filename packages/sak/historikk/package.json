@@ -29,7 +29,7 @@
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-ui-komponenter": "workspace:*",
     "@navikt/ft-hooks": "2.1.15",
-    "@navikt/ft-utils": "3.6.5",
+    "@navikt/ft-utils": "3.6.8",
     "dayjs": "1.11.13",
     "history": "5.3.0",
     "react": "19.1.0",

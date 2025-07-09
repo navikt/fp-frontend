@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { BehandlingType, OppholdArsakType, SoknadType, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
+  AnnenforelderUttakEøsPeriode,
   Behandling,
   Fagsak,
   FamilieHendelse,
@@ -99,7 +100,7 @@ const finnTidslinjeTider = (
 const leggTidslinjedataTilPeriode = (
   erHovedsøker: boolean,
   hovedsøkerPerioder: PeriodeSoker[],
-  annenpartPerioder: PeriodeSoker[],
+  annenpartPerioder: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[],
 ): PeriodeSøkerMedTidslinjedata[] => {
   const perioder = erHovedsøker ? hovedsøkerPerioder : annenpartPerioder;
 
@@ -140,6 +141,7 @@ interface Props {
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
 }
 
 export const UttakTidslinjeIndex = ({
@@ -155,11 +157,14 @@ export const UttakTidslinjeIndex = ({
   setValgtPeriodeIndex,
   fagsak,
   alleKodeverk,
+  annenForelderUttakEøs,
 }: Props) => {
+  const annenForelder = annenForelderUttakEøs ?? perioderAnnenpart;
+
   const uttakMedOpphold = lagUttakMedOpphold(perioderSøker);
 
-  const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, perioderAnnenpart);
-  const annenForelderPerioder = leggTidslinjedataTilPeriode(false, uttakMedOpphold, perioderAnnenpart);
+  const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, annenForelder);
+  const annenForelderPerioder = leggTidslinjedataTilPeriode(false, uttakMedOpphold, annenForelder);
 
   const alleUttaksperioderMedId = annenForelderPerioder.concat(
     hovedsøkerPerioder.map(p => ({

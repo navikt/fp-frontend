@@ -21,6 +21,9 @@ export type Stonadskonto = Readonly<{
     prematurdager: number;
     flerbarnsdager: number;
   };
+  kontoReduksjoner?: {
+    annenForelderEøsUttak: number;
+  };
 }>;
 
 export type UttakStonadskontoer = Readonly<{

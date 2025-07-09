@@ -30,6 +30,7 @@ import { BesteberegningFaktaInitPanel } from './faktaPaneler/BesteberegningFakta
 import { OmsorgFaktaInitPanel } from './faktaPaneler/OmsorgFaktaInitPanel';
 import { OmsorgOgRettFaktaInitPanel } from './faktaPaneler/OmsorgOgRettFaktaInitPanel';
 import { UttakDokumentasjonFaktaInitPanel } from './faktaPaneler/UttakDokumentasjonFaktaInitPanel';
+import { UttakEøsFaktaInitPanel } from './faktaPaneler/UttakEøsFaktaInitPanel.tsx';
 import { UttakFaktaInitPanel } from './faktaPaneler/UttakFaktaInitPanel';
 import { InngangsvilkarFpProsessStegInitPanel } from './prosessPaneler/InngangsvilkarFpProsessStegInitPanel';
 import { TilkjentYtelseFpProsessStegInitPanel } from './prosessPaneler/TilkjentYtelseFpProsessStegInitPanel';
@@ -85,6 +86,7 @@ const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere
         <OmsorgOgRettFaktaInitPanel personoversikt={personoversikt} />
         <OmsorgFaktaInitPanel personoversikt={personoversikt} />
         <UttakFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
+        <UttakEøsFaktaInitPanel />
         <UttakDokumentasjonFaktaInitPanel />
       </FaktaMeny>
     </>
