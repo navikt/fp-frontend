@@ -31,7 +31,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
 
   const { aksjonspunkterForPanel, isReadOnly, submitCallback } = usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
   const harApneAksjonspunkter = aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status));
-  const sortertePerioder = annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))) || [];
+  annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
     visTabell: boolean; // Ikke en del av form. Bedre måte å gjøre dette på?
@@ -40,10 +40,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
   }>();
 
   const [perioder, setPerioder] = useState<AnnenforelderUttakEøsPeriode[]>(
-    mellomlagretFormData?.annenForelderUttakEøsPerioder ?? sortertePerioder,
+    mellomlagretFormData?.annenForelderUttakEøsPerioder ?? annenForelderUttakEøs ?? [],
   );
   const [erOverstyrt, setErOverstyrt] = useState(false);
-  const [visTabell, setVisTabell] = useState(mellomlagretFormData?.visTabell ?? sortertePerioder.length > 0);
+  const [visTabell, setVisTabell] = useState(mellomlagretFormData?.visTabell ?? perioder.length > 0);
   const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);
   const [feilmelding, setFeilmelding] = useState<string | undefined>();
 
@@ -90,12 +90,12 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
     }
   }, [perioder]);
 
-  const begrunnelse = formMethods.watch('begrunnelse'); // TODO: Greit å gjøre dette eller litt overkill?
+  const begrunnelse = formMethods.watch('begrunnelse');
   useEffect(() => {
     setMellomlagretFormData({
       visTabell: visTabell,
       annenForelderUttakEøsPerioder: perioder,
-      begrunnelse: formMethods.getValues('begrunnelse'),
+      begrunnelse: begrunnelse,
     });
   }, [visTabell, perioder, begrunnelse]);
 

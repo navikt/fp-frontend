@@ -129,10 +129,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
           </HStack>
           <HStack gap="4" align="end">
             <VStack align="start">
-              <Label size="small" className={styles.trekkdagerUker}>
-                {intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TrekkUkerDager' })}{' '}
-                {/* Example: "Trekk uker/dager" */}
-              </Label>
+              <Label size="small">{intl.formatMessage({ id: 'UttakEøsFaktaDetailForm.TrekkUkerDager' })}</Label>
               <HStack gap="2" align="center">
                 <RhfNumericField
                   name="trekkuker"
