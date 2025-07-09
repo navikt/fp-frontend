@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
-
-import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Button, ErrorSummary, Heading, HStack, Radio, RadioGroup, VStack } from '@navikt/ds-react';
+import { ErrorSummary, Heading, HStack, Radio, RadioGroup, VStack } from '@navikt/ds-react';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -13,11 +11,7 @@ import { AksjonspunktKode, isAksjonspunktOpen } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
-
-import { UttakEøsFaktaDetailForm } from './UttakEøsFaktaDetailForm.tsx';
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
-
-import styles from './uttakEøsFaktaTable.module.css';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
 interface Props {
@@ -137,47 +131,14 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
           </HStack>
         </RadioGroup>
         {visTabell && (
-          <>
-            <UttakEøsFaktaTable
-              annenForelderUttakEøsPerioder={perioder}
-              setPerioder={setPerioder}
-              isReadOnly={!erRedigerbart}
-            />
-            {erRedigerbart && (
-              <>
-                {visLeggTilPeriodeForm && (
-                  <VStack gap="4" className={styles.panel}>
-                    <Heading size="small">
-                      <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
-                    </Heading>
-                    <UttakEøsFaktaDetailForm
-                      oppdater={(nyPeriode: AnnenforelderUttakEøsPeriode) => {
-                        setPerioder(prevPerioder =>
-                          [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
-                        );
-                        setVisLeggTilPeriodeForm(false);
-                      }}
-                      avbryt={() => setVisLeggTilPeriodeForm(false)}
-                    />
-                  </VStack>
-                )}
-                {!visLeggTilPeriodeForm && (
-                  <div>
-                    <Button
-                      size="small"
-                      variant="tertiary"
-                      type="button"
-                      icon={<PlusCircleIcon />}
-                      onClick={() => setVisLeggTilPeriodeForm(true)}
-                      disabled={isReadOnly}
-                    >
-                      <FormattedMessage id="UttakFaktaForm.LeggTilPeriode" />
-                    </Button>
-                  </div>
-                )}
-              </>
-            )}
-          </>
+          <UttakEøsFaktaTable
+            annenForelderUttakEøsPerioder={perioder}
+            setPerioder={setPerioder}
+            isReadOnly={!erRedigerbart}
+            erRedigerbart={erRedigerbart}
+            visLeggTilPeriodeForm={visLeggTilPeriodeForm}
+            setVisLeggTilPeriodeForm={setVisLeggTilPeriodeForm}
+          />
         )}
         <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
           <VStack gap="4">
