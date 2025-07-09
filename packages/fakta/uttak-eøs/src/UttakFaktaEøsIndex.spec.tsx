@@ -6,7 +6,11 @@ import { UttakPeriodeType } from '@navikt/fp-kodeverk';
 
 import * as stories from './UttakFaktaEøsIndex.stories';
 
-const { ÅpentAksjonspunktMedPerioder, ÅpentAksjonspunktUtenPerioder } = composeStories(stories);
+const {
+  ÅpentAksjonspunktMedPerioder,
+  ÅpentAksjonspunktUtenPerioder,
+  OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør,
+} = composeStories(stories);
 
 describe('UttakFaktaEøsIndex', () => {
   it('skal få aksjonspunkt uten eksisterende perioder og kan bekrefte AP uten å legge til noen peridoer', async () => {
@@ -180,6 +184,34 @@ describe('UttakFaktaEøsIndex', () => {
           fom: '2022-02-16',
           tom: '2022-02-25',
           trekkdager: 7.4,
+          trekkonto: 'MØDREKVOTE',
+        },
+      ],
+    });
+  });
+
+  it('skal kunne overstyre og vil da sende inn med annen aksjonspunktkode enn ordinært aksjonspunkt', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    const utils = render(<OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør submitCallback={lagre} />);
+
+    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(screen.queryByTitle('Overstyr')).toBeInTheDocument();
+    expect(screen.queryByTitle('Bekreft og fortsett')).not.toBeInTheDocument();
+
+    await userEvent.click(screen.getByTitle('Overstyr'));
+
+    expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
+    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+
+    expect(lagre).toHaveBeenNthCalledWith(1, {
+      kode: '6103',
+      begrunnelse: 'Dette er en begrunnelse',
+      perioder: [
+        {
+          fom: '2023-02-01',
+          tom: '2023-02-15',
+          trekkdager: 10,
           trekkonto: 'MØDREKVOTE',
         },
       ],
