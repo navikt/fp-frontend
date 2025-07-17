@@ -4,10 +4,10 @@
   "type": "module",
   "version": "1.0.0",
   "dependencies": {
-    "@storybook/react": "9.0.15",
+    "@storybook/react": "9.0.17",
     "@vitejs/plugin-react": "4.6.0",
     "rollup-plugin-sourcemaps": "0.6.3",
-    "vite": "7.0.2",
+    "vite": "7.0.5",
     "vitest": "3.2.4"
   }
 }
