@@ -9,7 +9,7 @@ export type AktsomhetInfo = {
   sarligGrunnerBegrunnelse: string;
 };
 
-export type VilkarResultatInfo = {
+type VilkarResultatInfo = {
   begrunnelse: string;
   aktsomhet?: string;
   aktsomhetInfo?: AktsomhetInfo;

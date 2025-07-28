@@ -20,8 +20,8 @@ import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf'
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-export const ALLE_YTELSETYPER_VALGT = 'ALLE';
-export const UKE_2 = '2';
+const ALLE_YTELSETYPER_VALGT = 'ALLE';
+const UKE_2 = '2';
 
 type FormValues = {
   ukevalg: string;

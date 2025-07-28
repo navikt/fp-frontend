@@ -8,30 +8,6 @@ import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
-export const getAvslagArsak = (
-  vilkar: Vilkar[],
-  alleKodeverk: AlleKodeverk,
-  behandlingsresultat?: Behandlingsresultat,
-): ReactElement | string => {
-  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT);
-  if (avslatteVilkar.length === 0) {
-    return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
-  }
-
-  if (!behandlingsresultat?.avslagsarsak) {
-    throw new Error('Behandlingsresultat eller avslagsårsak finnes ikke');
-  }
-
-  const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
-
-  const årsak =
-    alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType].find(
-      ({ kode }) => kode === behandlingsresultat.avslagsarsak,
-    )?.navn ?? '';
-
-  return `${vilkarType}: ${årsak}`;
-};
-
 interface Props {
   vilkar?: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
@@ -55,10 +31,10 @@ export const VedtakAvslagPanel = ({
   const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
   return (
     <>
-      {getAvslagArsak(vilkar, alleKodeverk, behandlingsresultat) && (
+      {getAvslagÅrsak(vilkar, alleKodeverk, behandlingsresultat) && (
         <div>
           <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
-          <BodyShort size="small">{getAvslagArsak(vilkar, alleKodeverk, behandlingsresultat)}</BodyShort>
+          <BodyShort size="small">{getAvslagÅrsak(vilkar, alleKodeverk, behandlingsresultat)}</BodyShort>
         </div>
       )}
       {!skalBrukeOverstyrendeFritekstBrev && (
@@ -71,4 +47,28 @@ export const VedtakAvslagPanel = ({
       )}
     </>
   );
+};
+
+const getAvslagÅrsak = (
+  vilkar: Vilkar[],
+  alleKodeverk: AlleKodeverk,
+  behandlingsresultat?: Behandlingsresultat,
+): ReactElement | string => {
+  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT);
+  if (avslatteVilkar.length === 0) {
+    return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
+  }
+
+  if (!behandlingsresultat?.avslagsarsak) {
+    throw new Error('Behandlingsresultat eller avslagsårsak finnes ikke');
+  }
+
+  const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
+
+  const årsak =
+    alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType].find(
+      ({ kode }) => kode === behandlingsresultat.avslagsarsak,
+    )?.navn ?? '';
+
+  return `${vilkarType}: ${årsak}`;
 };

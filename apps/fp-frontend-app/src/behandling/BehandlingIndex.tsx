@@ -71,7 +71,7 @@ interface BehandlingIndexWrapperProps {
   fagsakData: FagsakData;
 }
 
-export const BehandlingIndexWrapper = ({
+const BehandlingIndexWrapper = ({
   behandling,
   setBehandling,
   hentOgSettBehandling,

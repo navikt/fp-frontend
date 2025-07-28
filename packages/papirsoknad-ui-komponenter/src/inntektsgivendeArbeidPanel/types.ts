@@ -1,6 +1,6 @@
 import { INNTEKTSGIVENDE_ARBEID_FIELD_ARRAY_NAME } from './constants';
 
-export type InnerFormValue = {
+type InnerFormValue = {
   arbeidsgiver?: string;
   periodeFom?: string;
   periodeTom?: string;

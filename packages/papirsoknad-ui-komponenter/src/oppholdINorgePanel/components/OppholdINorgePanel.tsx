@@ -17,7 +17,7 @@ export type OppholdINorgeFormValues = {
   fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
 };
 
-export type TranformFormValues = {
+type TranformFormValues = {
   oppholdINorge?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   harFremtidigeOppholdUtenlands?: boolean;

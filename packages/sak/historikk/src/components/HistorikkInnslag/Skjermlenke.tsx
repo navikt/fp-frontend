@@ -16,7 +16,7 @@ interface Props {
   ) => Location | undefined;
 }
 
-export const scrollUp = (): void => {
+const scrollUp = (): void => {
   if (window.innerWidth < 1305) {
     window.scroll(0, 0);
   }

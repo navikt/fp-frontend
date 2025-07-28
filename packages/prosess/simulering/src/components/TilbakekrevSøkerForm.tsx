@@ -21,45 +21,6 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const IKKE_SEND = 'IKKE_SEND';
 
-export const transformValues = (values: FeilutbetalingFormValues): VurderFeilutbetalingAp => {
-  const { videreBehandling, varseltekst, begrunnelse } = values;
-  if (videreBehandling?.endsWith(IKKE_SEND)) {
-    return {
-      kode: AksjonspunktKode.VURDER_FEILUTBETALING,
-      begrunnelse,
-      videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
-    };
-  }
-
-  return {
-    kode: AksjonspunktKode.VURDER_FEILUTBETALING,
-    begrunnelse,
-    videreBehandling,
-    varseltekst,
-  };
-};
-
-export const buildInitialValues = (
-  aksjonspunkt?: Aksjonspunkt,
-  tilbakekrevingvalg?: TilbakekrevingValg,
-): FeilutbetalingFormValues | undefined => {
-  if (!aksjonspunkt || !tilbakekrevingvalg) {
-    return undefined;
-  }
-
-  const harTypeIkkeSendt =
-    !tilbakekrevingvalg.varseltekst &&
-    tilbakekrevingvalg.videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
-
-  return {
-    videreBehandling: harTypeIkkeSendt
-      ? tilbakekrevingvalg.videreBehandling + IKKE_SEND
-      : tilbakekrevingvalg.videreBehandling,
-    varseltekst: tilbakekrevingvalg.varseltekst,
-    begrunnelse: aksjonspunkt.begrunnelse ?? '',
-  };
-};
-
 interface Props {
   fagsak: Fagsak;
   språkkode: string;
@@ -161,4 +122,43 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
       />
     </VStack>
   );
+};
+
+TilbakekrevSøkerForm.initialValues = (
+  aksjonspunkt?: Aksjonspunkt,
+  tilbakekrevingvalg?: TilbakekrevingValg,
+): FeilutbetalingFormValues | undefined => {
+  if (!aksjonspunkt || !tilbakekrevingvalg) {
+    return undefined;
+  }
+
+  const harTypeIkkeSendt =
+    !tilbakekrevingvalg.varseltekst &&
+    tilbakekrevingvalg.videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
+
+  return {
+    videreBehandling: harTypeIkkeSendt
+      ? tilbakekrevingvalg.videreBehandling + IKKE_SEND
+      : tilbakekrevingvalg.videreBehandling,
+    varseltekst: tilbakekrevingvalg.varseltekst,
+    begrunnelse: aksjonspunkt.begrunnelse ?? '',
+  };
+};
+
+TilbakekrevSøkerForm.transformValues = (values: FeilutbetalingFormValues): VurderFeilutbetalingAp => {
+  const { videreBehandling, varseltekst, begrunnelse } = values;
+  if (videreBehandling?.endsWith(IKKE_SEND)) {
+    return {
+      kode: AksjonspunktKode.VURDER_FEILUTBETALING,
+      begrunnelse,
+      videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
+    };
+  }
+
+  return {
+    kode: AksjonspunktKode.VURDER_FEILUTBETALING,
+    begrunnelse,
+    videreBehandling,
+    varseltekst,
+  };
 };

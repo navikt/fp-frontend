@@ -14,50 +14,15 @@ import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassi
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-export const begrunnelseFieldName = 'begrunnelse';
-export const VURDERING_HOVEDKATEGORI = 'vurderingerHovedkategori';
-export const IKKE_REELLE_VURDERINGER_UNDERKATEGORI = 'ikkeReelleVurderingerUnderkategori';
+const begrunnelseFieldName = 'begrunnelse';
+const VURDERING_HOVEDKATEGORI = 'vurderingerHovedkategori';
+const IKKE_REELLE_VURDERINGER_UNDERKATEGORI = 'ikkeReelleVurderingerUnderkategori';
 
 type Values = {
   [begrunnelseFieldName]?: string;
   [VURDERING_HOVEDKATEGORI]: string;
   [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]?: string;
 };
-
-export const buildInitialValues = (
-  aksjonspunkt: Aksjonspunkt,
-  risikoklassifisering?: Risikoklassifisering,
-): Values | undefined => {
-  if (aksjonspunkt?.begrunnelse && risikoklassifisering?.faresignalVurdering) {
-    const kode = risikoklassifisering.faresignalVurdering;
-    return {
-      [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
-      [VURDERING_HOVEDKATEGORI]:
-        kode === FaresignalVurdering.INGEN_INNVIRKNING
-          ? FaresignalVurdering.INGEN_INNVIRKNING
-          : FaresignalVurdering.INNVIRKNING,
-      [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]: kode === FaresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
-    };
-  }
-  return undefined;
-};
-
-const utledFaresignalVurderingVerdi = (
-  vurderingHovedkategori: string,
-  vurderingUnderkategori?: string,
-): string | undefined =>
-  vurderingHovedkategori === FaresignalVurdering.INGEN_INNVIRKNING
-    ? FaresignalVurdering.INGEN_INNVIRKNING
-    : vurderingUnderkategori;
-
-const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
-  kode: AksjonspunktKode.VURDER_FARESIGNALER,
-  faresignalVurdering: utledFaresignalVurderingVerdi(
-    values[VURDERING_HOVEDKATEGORI],
-    values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI],
-  ),
-  begrunnelse: values[begrunnelseFieldName],
-});
 
 interface Props {
   aksjonspunkt: Aksjonspunkt;
@@ -157,3 +122,38 @@ export const AvklarFaresignalerForm = ({
     </RhfForm>
   );
 };
+
+const buildInitialValues = (
+  aksjonspunkt: Aksjonspunkt,
+  risikoklassifisering?: Risikoklassifisering,
+): Values | undefined => {
+  if (aksjonspunkt?.begrunnelse && risikoklassifisering?.faresignalVurdering) {
+    const kode = risikoklassifisering.faresignalVurdering;
+    return {
+      [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
+      [VURDERING_HOVEDKATEGORI]:
+        kode === FaresignalVurdering.INGEN_INNVIRKNING
+          ? FaresignalVurdering.INGEN_INNVIRKNING
+          : FaresignalVurdering.INNVIRKNING,
+      [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]: kode === FaresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
+    };
+  }
+  return undefined;
+};
+
+const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
+  kode: AksjonspunktKode.VURDER_FARESIGNALER,
+  faresignalVurdering: utledFaresignalVurderingVerdi(
+    values[VURDERING_HOVEDKATEGORI],
+    values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI],
+  ),
+  begrunnelse: values[begrunnelseFieldName],
+});
+
+const utledFaresignalVurderingVerdi = (
+  vurderingHovedkategori: string,
+  vurderingUnderkategori?: string,
+): string | undefined =>
+  vurderingHovedkategori === FaresignalVurdering.INGEN_INNVIRKNING
+    ? FaresignalVurdering.INGEN_INNVIRKNING
+    : vurderingUnderkategori;

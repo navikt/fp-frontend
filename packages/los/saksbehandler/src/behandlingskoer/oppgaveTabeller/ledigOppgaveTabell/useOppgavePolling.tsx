@@ -28,7 +28,7 @@ const wait = (ms: number) =>
     setTimeout(resolve, ms);
   });
 
-export const isPollingResponse = (response: PollingResponse | Oppgave[]): response is PollingResponse => {
+const isPollingResponse = (response: PollingResponse | Oppgave[]): response is PollingResponse => {
   return (response as PollingResponse).status !== undefined;
 };
 

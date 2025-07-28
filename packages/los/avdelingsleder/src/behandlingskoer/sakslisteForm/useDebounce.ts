@@ -3,7 +3,7 @@ import { type FieldValues, type Path, useFormContext, type UseFormTrigger } from
 
 import debounce from 'lodash.debounce';
 
-export const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 1000);
+const getTimeoutValue = () => (import.meta.env.MODE === 'test' ? 0 : 1000);
 
 export const useDebounce = <VALUE, FORM_VALUES extends FieldValues>(
   feltNavn: Path<FORM_VALUES>,

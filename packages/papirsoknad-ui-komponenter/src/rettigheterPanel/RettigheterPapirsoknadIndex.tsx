@@ -18,14 +18,14 @@ interface Props {
   soknadData: SoknadData;
 }
 
-export const rettighet = {
+const rettighet = {
   ANNEN_FORELDER_DOED: 'ANNEN_FORELDER_DOED',
   OVERTA_FORELDREANSVARET_ALENE: 'OVERTA_FORELDREANSVARET_ALENE',
   MANN_ADOPTERER_ALENE: 'MANN_ADOPTERER_ALENE',
   IKKE_RELEVANT: 'IKKE_RELEVANT',
 };
 
-export type RettigheterFormValues = {
+type RettigheterFormValues = {
   rettigheter?: string;
 };
 

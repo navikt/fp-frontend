@@ -30,7 +30,7 @@ export type FødselGjeldende = {
   fødselDokumetasjonStatus: 'DOKUMENTERT' | 'IKKE_DOKUMENTERT' | 'IKKE_VURDERT';
 };
 
-export type FødselDtoGjeldendeTermindato = {
+type FødselDtoGjeldendeTermindato = {
   kilde: Kilde;
   termindato: string;
 };

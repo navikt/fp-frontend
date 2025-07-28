@@ -50,7 +50,7 @@ export type AktivitetskravGrunnlagArbeid = Readonly<{
   permisjon: Permisjon;
 }>;
 
-export type Permisjon = Readonly<{
+type Permisjon = Readonly<{
   prosent: number;
   type: AktivitetskravPermisjonType;
 }>;

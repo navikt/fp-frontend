@@ -2,8 +2,8 @@ import { useIntl } from 'react-intl';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
-import type { LosKodeverkMedNavn } from '../../../../../../types/src/kodeverkAlleLos';
 import type { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 
 const behandlingstypeOrder = [

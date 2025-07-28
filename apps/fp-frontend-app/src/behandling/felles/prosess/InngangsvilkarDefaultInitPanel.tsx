@@ -9,13 +9,13 @@ import { InngangsvilkårPanelDataContext } from './InngangsvilkarDefaultInitWrap
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
 
-export type Props = {
+interface Props {
   standardPanelProps: StandardProsessPanelProps;
   vilkarKoder?: VilkarType[];
   inngangsvilkarPanelKode: string;
   hentInngangsvilkarPanelTekst: string;
   children: ReactElement;
-};
+}
 
 export const InngangsvilkarOverstyringDefaultInitPanel = (
   props: Props & {

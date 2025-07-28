@@ -6,7 +6,7 @@ import * as stories from './OppgaveJournalføringIndex.stories';
 
 const { ViseOppgaverIListe, IngenOppgaver } = composeStories(stories);
 
-describe('JournalforingIndex', () => {
+describe('OppgaveJournalføringIndex', () => {
   it('skal vise en liste med oppgaver', async () => {
     await applyRequestHandlers(ViseOppgaverIListe.parameters['msw']);
     render(<ViseOppgaverIListe />);

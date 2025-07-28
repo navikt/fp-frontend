@@ -15,13 +15,10 @@ interface Props {
   annenForelderInformertRequired?: boolean;
 }
 
-export type BekreftelseFormValues = {
+type BekreftelseFormValues = {
   annenForelderInformert?: boolean;
 };
 
-/**
- * Presentasjonskomponent. Komponenten vises som del av skjermbildet for registrering av papirsøknad dersom søknad gjelder foreldrepenger.
- */
 export const BekreftelsePanel = ({ readOnly, annenForelderInformertRequired = false }: Props) => {
   const { control } = useFormContext<BekreftelseFormValues>();
   return (

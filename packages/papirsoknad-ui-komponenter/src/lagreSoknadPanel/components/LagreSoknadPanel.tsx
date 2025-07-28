@@ -8,7 +8,7 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 const maxLength1500 = maxLength(1500);
 
-export type LagreSoknadFormValues = {
+type LagreSoknadFormValues = {
   kommentarEndring?: string;
   registrerVerge?: boolean;
   ufullstendigSoeknad?: boolean;

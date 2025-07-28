@@ -21,7 +21,7 @@ const finnFagsakYtelseTypeNavn = (
   return type ? type.navn : '';
 };
 
-export const ALLE_YTELSETYPER_VALGT = 'ALLE';
+const ALLE_YTELSETYPER_VALGT = 'ALLE';
 
 interface InitialValues {
   valgtYtelseType: string;

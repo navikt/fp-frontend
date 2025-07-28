@@ -1,7 +1,7 @@
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import type { Beregningsgrunnlag, BeregningsgrunnlagAndel, Besteberegninggrunnlag } from '@navikt/fp-types';
 
-export const besteberegninggrunnlag: Besteberegninggrunnlag = {
+const besteberegninggrunnlag: Besteberegninggrunnlag = {
   besteMåneder: [
     {
       fom: '2020-01-01',

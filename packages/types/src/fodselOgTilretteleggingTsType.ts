@@ -24,7 +24,7 @@ export type ArbeidsforholdTilretteleggingDato = Readonly<{
   mottattDato?: string;
 }>;
 
-export type OppholdKilde = 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER';
+type OppholdKilde = 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER';
 
 export type SvpAvklartOppholdPeriode = Readonly<{
   fom: string;

@@ -15,7 +15,7 @@ const intl = createIntl(messages);
 export const minMottattdato = () => dayjs().subtract(1, 'year').subtract(1, 'day');
 export const maxMottattdato = () => dayjs();
 
-export type MottattDatoFormValues = {
+type MottattDatoFormValues = {
   mottattDato?: string;
 };
 

@@ -21,7 +21,7 @@ const finnFagsakYtelseTypeNavn = (
   return type ? type.navn : '';
 };
 
-export const ALLE_YTELSETYPER_VALGT = 'ALLE';
+const ALLE_YTELSETYPER_VALGT = 'ALLE';
 
 const formName = 'ventefristUtløperForm';
 const formDefaultValues = { valgtYtelsetype: ALLE_YTELSETYPER_VALGT };

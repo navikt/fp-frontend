@@ -31,7 +31,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-export type FormValues = {
+type FormValues = {
   termindato?: string;
   terminbekreftelseDato?: string;
   antallBarnFraTerminbekreftelse?: number;
@@ -40,7 +40,7 @@ export type FormValues = {
   erBarnetFodt?: boolean;
 };
 
-export type TransformFormValues =
+type TransformFormValues =
   | {
       erBarnetFodt: false;
       termindato?: string;
@@ -202,6 +202,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
 TerminOgFodselPanel.initialValues = (): FormValues => ({
   erBarnetFodt: undefined,
 });
+
 TerminOgFodselPanel.transformValues = ({
   antallBarn,
   erBarnetFodt,

@@ -9,7 +9,7 @@ import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 
-export type Props = {
+interface Props {
   skalPanelVisesIMeny: boolean;
   overstyrtStatus?: string;
   prosessPanelKode: ProsessStegCode;
@@ -17,7 +17,7 @@ export type Props = {
   skalMarkeresSomAktiv?: boolean;
   standardPanelProps: StandardProsessPanelProps;
   children: ReactElement;
-};
+}
 
 export const ProsessDefaultInitPanel = (props: Props) => {
   const { standardPanelProps } = props;
@@ -35,9 +35,9 @@ export const ProsessDefaultInitOverstyringPanel = (props: Props) => {
   return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
 };
 
-export type ProsessPanel = {
+interface ProsessPanel {
   harApentAksjonspunkt: boolean;
-};
+}
 
 const ProsessPanel = ({
   overstyrtStatus,

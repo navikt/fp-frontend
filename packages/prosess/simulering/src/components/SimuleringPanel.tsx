@@ -17,18 +17,10 @@ import type { KontrollerEtterbetalingTilSøkerAP, VurderFeilutbetalingAp } from 
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { EtterbetalingSøkerFormValues, FeilutbetalingFormValues } from '../types/FormValues';
-import {
-  buildInitialValues as buildInitialValuesEtterbetaling,
-  EtterbetalingSøkerForm,
-  transformValues as transformValuesEtterbetaling,
-} from './EtterbetalingSøkerForm';
+import { EtterbetalingSøkerForm } from './EtterbetalingSøkerForm';
 import { SimuleringSummary } from './SimuleringSummary';
 import { SimuleringTable } from './SimuleringTable';
-import {
-  buildInitialValues as buildInitialValuesTilbakekrev,
-  TilbakekrevSøkerForm,
-  transformValues as transformValuesTilbakekrev,
-} from './TilbakekrevSøkerForm';
+import { TilbakekrevSøkerForm } from './TilbakekrevSøkerForm';
 
 type Details = {
   id: number;
@@ -38,78 +30,6 @@ type Details = {
 type FormValues = FeilutbetalingFormValues | EtterbetalingSøkerFormValues;
 
 type SimuleringAksjonspunkt = VurderFeilutbetalingAp | KontrollerEtterbetalingTilSøkerAP;
-
-const finnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], kode: string) =>
-  aksjonspunkter.find(ap => ap.definisjon === kode);
-
-const hentToggleDetaljer =
-  (showDetails: Details[], setShowDetails: (details: Details[]) => void) =>
-  (id: number): void => {
-    const tableIndex = showDetails.findIndex((table: Details) => table.id === id);
-    let newShowDetailsArray = [];
-
-    if (tableIndex !== -1) {
-      const updatedTable = {
-        id,
-        show: !showDetails[tableIndex].show,
-      };
-
-      newShowDetailsArray = [
-        ...showDetails.slice(0, tableIndex),
-        updatedTable,
-        ...showDetails.slice(tableIndex + 1, showDetails.length - 1),
-      ];
-    } else {
-      newShowDetailsArray = showDetails.concat({
-        id,
-        show: true,
-      });
-    }
-    setShowDetails(newShowDetailsArray);
-  };
-
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): SimuleringAksjonspunkt[] => {
-  const aksjonspunkterTilSubmit: SimuleringAksjonspunkt[] = [];
-  if (hasAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkter) && 'videreBehandling' in values) {
-    aksjonspunkterTilSubmit.push(transformValuesTilbakekrev(values));
-  }
-  if (
-    hasAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkter) &&
-    'begrunnelseEtterbetaling' in values
-  ) {
-    aksjonspunkterTilSubmit.push(transformValuesEtterbetaling(values));
-  }
-  return aksjonspunkterTilSubmit;
-};
-
-const buildInitialValues = (
-  aksjonspunkter: Aksjonspunkt[],
-  tilbakekrevingvalg?: TilbakekrevingValg,
-): FormValues | undefined => {
-  if (aksjonspunkter.length === 0) {
-    return undefined;
-  }
-  return {
-    ...buildInitialValuesTilbakekrev(
-      finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING),
-      tilbakekrevingvalg,
-    ),
-    ...buildInitialValuesEtterbetaling(
-      finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER),
-    ),
-  };
-};
-
-const lagAksjonspunktTitler = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
-  const elementer: ReactElement[] = [];
-  if (hasAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkter)) {
-    elementer.push(<FormattedMessage id="Simulering.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />);
-  }
-  if (hasAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkter)) {
-    elementer.push(<FormattedMessage id="Simulering.Etterbetaling.Tittel" key="kontrollerFeilutbetaling" />);
-  }
-  return elementer;
-};
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -220,4 +140,76 @@ export const SimuleringPanel = ({
       )}
     </VStack>
   );
+};
+
+const finnAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], kode: string) =>
+  aksjonspunkter.find(ap => ap.definisjon === kode);
+
+const hentToggleDetaljer =
+  (showDetails: Details[], setShowDetails: (details: Details[]) => void) =>
+  (id: number): void => {
+    const tableIndex = showDetails.findIndex((table: Details) => table.id === id);
+    let newShowDetailsArray = [];
+
+    if (tableIndex !== -1) {
+      const updatedTable = {
+        id,
+        show: !showDetails[tableIndex].show,
+      };
+
+      newShowDetailsArray = [
+        ...showDetails.slice(0, tableIndex),
+        updatedTable,
+        ...showDetails.slice(tableIndex + 1, showDetails.length - 1),
+      ];
+    } else {
+      newShowDetailsArray = showDetails.concat({
+        id,
+        show: true,
+      });
+    }
+    setShowDetails(newShowDetailsArray);
+  };
+
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): SimuleringAksjonspunkt[] => {
+  const aksjonspunkterTilSubmit: SimuleringAksjonspunkt[] = [];
+  if (hasAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkter) && 'videreBehandling' in values) {
+    aksjonspunkterTilSubmit.push(TilbakekrevSøkerForm.transformValues(values));
+  }
+  if (
+    hasAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkter) &&
+    'begrunnelseEtterbetaling' in values
+  ) {
+    aksjonspunkterTilSubmit.push(EtterbetalingSøkerForm.transformValues(values));
+  }
+  return aksjonspunkterTilSubmit;
+};
+
+const buildInitialValues = (
+  aksjonspunkter: Aksjonspunkt[],
+  tilbakekrevingvalg?: TilbakekrevingValg,
+): FormValues | undefined => {
+  if (aksjonspunkter.length === 0) {
+    return undefined;
+  }
+  return {
+    ...TilbakekrevSøkerForm.initialValues(
+      finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING),
+      tilbakekrevingvalg,
+    ),
+    ...EtterbetalingSøkerForm.initialValues(
+      finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER),
+    ),
+  };
+};
+
+const lagAksjonspunktTitler = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
+  const elementer: ReactElement[] = [];
+  if (hasAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkter)) {
+    elementer.push(<FormattedMessage id="Simulering.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />);
+  }
+  if (hasAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkter)) {
+    elementer.push(<FormattedMessage id="Simulering.Etterbetaling.Tittel" key="kontrollerFeilutbetaling" />);
+  }
+  return elementer;
 };

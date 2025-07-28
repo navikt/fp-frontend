@@ -1,5 +1,6 @@
 import { EGEN_VIRKSOMHET_NAME_PREFIX } from './constants';
-export type IdFormValues = {
+
+type IdFormValues = {
   fom?: string;
   tom?: string;
   navn?: string;
@@ -7,13 +8,14 @@ export type IdFormValues = {
   organisasjonsnummer?: string;
   landJobberFra?: string;
 };
-export type RegnskapFormValues = {
+
+type RegnskapFormValues = {
   harRegnskapsforer?: boolean;
   navnRegnskapsforer?: string;
   tlfRegnskapsforer?: string;
 };
 
-export type RelasjonFormValues = {
+type RelasjonFormValues = {
   familieEllerVennerTilknyttetNaringen?: boolean;
 };
 
@@ -27,7 +29,7 @@ export type StartedEndretFormValues = {
   inntekt?: number;
 };
 
-export type TypeNaringFormValues = {
+type TypeNaringFormValues = {
   typeVirksomhet: string[];
 };
 
@@ -36,7 +38,8 @@ export type RegistrerVirksomhetFormValues = IdFormValues &
   RegnskapFormValues &
   StartedEndretFormValues &
   TypeNaringFormValues;
-export type VirksomhetSubFormValues = {
+
+type VirksomhetSubFormValues = {
   harArbeidetIEgenVirksomhet?: boolean;
   virksomheter: RegistrerVirksomhetFormValues[];
 };

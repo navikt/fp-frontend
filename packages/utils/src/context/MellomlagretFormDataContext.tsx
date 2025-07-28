@@ -2,7 +2,7 @@ import { createContext, type ReactElement, useContext, useEffect, useMemo, useSt
 
 import type { Behandling } from '@navikt/fp-types';
 
-export type MellomlagretFormData<T> = {
+type MellomlagretFormData<T> = {
   mellomlagretFormData: T;
   setMellomlagretFormData: (data: T) => void;
 };

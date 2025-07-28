@@ -135,7 +135,7 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgs
   !!omsorgsovertakelseDato &&
   dayjs(fodselsdatoer[id]).isSameOrBefore(dayjs(omsorgsovertakelseDato).subtract(15, 'years'));
 
-DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
+DokumentasjonFaktaForm.initialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
   omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato,
   barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge ?? soknad.barnetsAnkomstTilNorgeDato,
   fodselsdatoer: familiehendelse?.adopsjonFodelsedatoer ?? soknad.adopsjonFodelsedatoer,
@@ -148,7 +148,7 @@ DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumenter
   fodselsdatoer: values.fodselsdatoer ?? '',
 });
 
-export const isAdopsjonFodelsedatoerEdited =
+const isAdopsjonFodelsedatoerEdited =
   (soknad: Soknad, familiehendelse: FamilieHendelse) =>
   (id: string): boolean => {
     const editedStatus = diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);

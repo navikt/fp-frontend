@@ -18,7 +18,8 @@ import { dateFormat, DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 
-import type { LosKodeverkMedNavn } from '../../../../../types/src/kodeverkAlleLos';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
+
 import { getSakslisteSaksbehandlere } from '../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import type { Saksliste } from '../../typer/sakslisteTsType';

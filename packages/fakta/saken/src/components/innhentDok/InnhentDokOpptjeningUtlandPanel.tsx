@@ -20,12 +20,7 @@ const OpptjeningIUtlandDokStatus = {
   DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET: 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET',
 };
 
-const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
-  kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  ...values,
-});
-
-export type FormValues = {
+type FormValues = {
   begrunnelse: string | undefined;
   dokStatus?: string;
 };
@@ -114,3 +109,8 @@ export const InnhentDokOpptjeningUtlandPanel = ({
     </RhfForm>
   );
 };
+
+const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
+  kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+  ...values,
+});

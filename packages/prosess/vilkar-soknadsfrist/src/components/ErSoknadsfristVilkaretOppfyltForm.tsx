@@ -56,7 +56,7 @@ const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | un
   return familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato;
 };
 
-export const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
   erVilkarOk:
     aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : VilkarUtfallType.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),

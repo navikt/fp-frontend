@@ -5,7 +5,7 @@ export type DokumentTittelSubmitValue = Readonly<{
   tittel: string;
 }>;
 
-export type OpprettSakSubmitValue = Readonly<{
+type OpprettSakSubmitValue = Readonly<{
   ytelseType?: string;
   aktørId: string;
   sakstype: Sakstype;

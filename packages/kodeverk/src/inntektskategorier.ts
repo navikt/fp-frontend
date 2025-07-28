@@ -11,13 +11,3 @@ export enum Inntektskategori {
   ARBEIDSTAKER_UTEN_FERIEPENGER = 'ARBEIDSTAKER_UTEN_FERIEPENGER',
   UDEFINERT = '-',
 }
-
-const SELVSTENDIG_NÆRINGSDRIVENDE_INNTEKTSKATEGORIER = [
-  Inntektskategori.SELVSTENDIG_NÆRINGSDRIVENDE,
-  Inntektskategori.JORDBRUKER,
-  Inntektskategori.DAGMAMMA,
-  Inntektskategori.FISKER,
-];
-
-export const isSelvstendigNæringsdrivende = (inntektskategori: string): boolean =>
-  SELVSTENDIG_NÆRINGSDRIVENDE_INNTEKTSKATEGORIER.some(i => i === inntektskategori);
