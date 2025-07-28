@@ -14,7 +14,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
-export type FormValues = {
+type FormValues = {
   harAleneomsorg: boolean;
   harAnnenForelderRett?: boolean;
   mottarAnnenForelderUforetrygd?: boolean;

@@ -7,5 +7,3 @@ export type FeilutbetalingFormValues = {
 export type EtterbetalingSøkerFormValues = {
   begrunnelseEtterbetaling?: string;
 };
-
-export type FormValues = FeilutbetalingFormValues & EtterbetalingSøkerFormValues;

@@ -15,7 +15,7 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
 
-export type FormValues = {
+type FormValues = {
   rettighetstype: Rettighetstype;
   begrunnelse: string;
 };

@@ -52,7 +52,7 @@ export const AppIndexWrapper = () => {
  * Dette er toppkomponenten i applikasjonen. Denne vil rendre header
  * og home-komponentene. Home-komponenten vil rendre barn-komponenter via ruter.
  */
-export const AppIndex = () => {
+const AppIndex = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 

@@ -7,13 +7,13 @@ import type { StandardFaktaPanelProps } from '../typer/standardFaktaPanelPropsTs
 import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
 
-export type Props = {
+interface Props {
   standardPanelProps: StandardFaktaPanelProps;
   skalPanelVisesIMeny: boolean;
   faktaPanelKode: FaktaPanelCode;
   faktaPanelMenyTekst: string;
   children: ReactElement;
-};
+}
 
 export const FaktaDefaultInitPanel = ({
   standardPanelProps,

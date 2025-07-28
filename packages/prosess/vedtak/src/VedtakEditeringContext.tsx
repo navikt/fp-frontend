@@ -2,7 +2,7 @@ import { createContext, type ReactElement, useContext, useEffect, useMemo, useSt
 
 import type { Behandling, BrevOverstyring } from '@navikt/fp-types';
 
-export type VedtakEditeringData = {
+type VedtakEditeringData = {
   hentBrevOverstyring: () => Promise<BrevOverstyring>;
   hentBrevOverstyringIsPending: boolean;
   mellomlagreBrevOverstyring: (redigertInnhold: string | null) => Promise<void>;

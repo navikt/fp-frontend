@@ -16,20 +16,6 @@ import styles from './etterbetalingSøkerForm.module.css';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-export const transformValues = (values: EtterbetalingSøkerFormValues): KontrollerEtterbetalingTilSøkerAP => ({
-  kode: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-  begrunnelse: values.begrunnelseEtterbetaling,
-});
-
-export const buildInitialValues = (aksjonspunkt?: Aksjonspunkt): EtterbetalingSøkerFormValues | undefined => {
-  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
-    return undefined;
-  }
-  return {
-    begrunnelseEtterbetaling: aksjonspunkt.begrunnelse ?? '',
-  };
-};
-
 interface Props {
   aksjonspunkt?: Aksjonspunkt;
   readOnly: boolean;
@@ -61,3 +47,17 @@ export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
     </VStack>
   );
 };
+
+EtterbetalingSøkerForm.initialValues = (aksjonspunkt?: Aksjonspunkt): EtterbetalingSøkerFormValues | undefined => {
+  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
+    return undefined;
+  }
+  return {
+    begrunnelseEtterbetaling: aksjonspunkt.begrunnelse ?? '',
+  };
+};
+
+EtterbetalingSøkerForm.transformValues = (values: EtterbetalingSøkerFormValues): KontrollerEtterbetalingTilSøkerAP => ({
+  kode: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+  begrunnelse: values.begrunnelseEtterbetaling,
+});

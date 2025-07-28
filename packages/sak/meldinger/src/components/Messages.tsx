@@ -23,70 +23,6 @@ export type FormValues = {
   arsakskode?: string;
 };
 
-export type Template = {
-  kode: string;
-  navn: string;
-  tilgjengelig: boolean;
-};
-
-const getFritekstMessage = (brevmalkode?: string): string =>
-  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER || brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER
-    ? 'Messages.DocumentList'
-    : 'Messages.Fritekst';
-
-// TODO (TOR) Bør erstattast av ein markør fra backend
-const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
-  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
-  brevmalkode === DokumentMalType.FRITEKST ||
-  brevmalkode === DokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
-  brevmalkode === DokumentMalType.VARSEL_OM_TILBAKEKREVING ||
-  brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||
-  (brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && arsakskode === RevurderingVarslingÅrsak.ANNET);
-
-const getfiltrerteRevurderingVarslingArsaker = (
-  revurderingVarslingArsaker: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[],
-  fagsakYtelseType: string,
-): KodeverkMedNavn<'RevurderingVarslingÅrsak'>[] => {
-  if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
-    return revurderingVarslingArsaker.filter(
-      arsak =>
-        arsak.kode === RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER ||
-        arsak.kode === RevurderingVarslingÅrsak.ANNET,
-    );
-  }
-  if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
-    return revurderingVarslingArsaker.filter(
-      arsak =>
-        arsak.kode !== RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
-        arsak.kode !== RevurderingVarslingÅrsak.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
-    );
-  }
-  return revurderingVarslingArsaker;
-};
-
-const buildInitalValues = (behandling: BehandlingAppKontekst): FormValues => {
-  const initialValues = {
-    brevmalkode: behandling.brevmaler[0]?.kode ?? undefined,
-    fritekst: '',
-  };
-
-  if (behandling.ugunstAksjonspunkt) {
-    return { ...initialValues, brevmalkode: DokumentMalType.VARSEL_OM_REVURDERING };
-  }
-  return { ...initialValues };
-};
-
-const transformValues = (values: FormValues) => {
-  const newValues = values;
-  if (
-    values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING &&
-    newValues.arsakskode !== RevurderingVarslingÅrsak.ANNET
-  ) {
-    newValues.fritekst = ' ';
-  }
-  return newValues;
-};
-
 export type ForhåndsvisBrevParams = {
   brevmalkode: string;
   fritekst?: string;
@@ -125,7 +61,7 @@ export const Messages = ({
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: meldingFormData ?? buildInitalValues(behandling),
+    defaultValues: meldingFormData ?? buildInitialValues(behandling),
   });
 
   const brevmalkode = formMethods.watch('brevmalkode');
@@ -223,4 +159,62 @@ export const Messages = ({
       </VStack>
     </RhfForm>
   );
+};
+
+const getFritekstMessage = (brevmalkode?: string): string =>
+  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER || brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER
+    ? 'Messages.DocumentList'
+    : 'Messages.Fritekst';
+
+// TODO (TOR) Bør erstattast av ein markør fra backend
+const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
+  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
+  brevmalkode === DokumentMalType.FRITEKST ||
+  brevmalkode === DokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
+  brevmalkode === DokumentMalType.VARSEL_OM_TILBAKEKREVING ||
+  brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||
+  (brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && arsakskode === RevurderingVarslingÅrsak.ANNET);
+
+const getfiltrerteRevurderingVarslingArsaker = (
+  revurderingVarslingArsaker: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[],
+  fagsakYtelseType: string,
+): KodeverkMedNavn<'RevurderingVarslingÅrsak'>[] => {
+  if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
+    return revurderingVarslingArsaker.filter(
+      arsak =>
+        arsak.kode === RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER ||
+        arsak.kode === RevurderingVarslingÅrsak.ANNET,
+    );
+  }
+  if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
+    return revurderingVarslingArsaker.filter(
+      arsak =>
+        arsak.kode !== RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
+        arsak.kode !== RevurderingVarslingÅrsak.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
+    );
+  }
+  return revurderingVarslingArsaker;
+};
+
+const buildInitialValues = (behandling: BehandlingAppKontekst): FormValues => {
+  const initialValues = {
+    brevmalkode: behandling.brevmaler[0]?.kode ?? undefined,
+    fritekst: '',
+  };
+
+  if (behandling.ugunstAksjonspunkt) {
+    return { ...initialValues, brevmalkode: DokumentMalType.VARSEL_OM_REVURDERING };
+  }
+  return { ...initialValues };
+};
+
+const transformValues = (values: FormValues) => {
+  const newValues = values;
+  if (
+    values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING &&
+    newValues.arsakskode !== RevurderingVarslingÅrsak.ANNET
+  ) {
+    newValues.fritekst = ' ';
+  }
+  return newValues;
 };

@@ -61,7 +61,7 @@ const buildInitialValues = (
   }
 
   return {
-    ...DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse),
+    ...DokumentasjonFaktaForm.initialValues(soknad, familiehendelse),
     ...omAdopsjonGjelderEktefellesBarn,
     ...mannAdoptererAleneValues,
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter[0]),

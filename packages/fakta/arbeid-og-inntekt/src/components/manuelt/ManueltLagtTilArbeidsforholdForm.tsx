@@ -31,7 +31,7 @@ const maxLength1500 = maxLength(1500);
 const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
-export type FormValues = {
+type FormValues = {
   arbeidsgiverNavn?: string;
   fom?: string;
   tom?: string;

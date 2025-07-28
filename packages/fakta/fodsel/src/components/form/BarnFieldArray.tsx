@@ -23,7 +23,7 @@ import styles from './barnFieldArray.module.css';
 
 const FIELD_ARRAY_NAME = 'barn';
 
-export const defaultAntallBarn: FieldArrayRow = {
+const defaultAntallBarn: FieldArrayRow = {
   fødselsdato: '',
   dødsdato: '',
   kanOverstyres: true,
