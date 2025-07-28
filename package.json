@@ -94,6 +94,7 @@
   "resolutions": {
     "@adobe/css-tools": "4.3.2",
     "@types/react": "19.1.2",
+    "axios": "1.11.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-test-renderer": "19.1.0"
