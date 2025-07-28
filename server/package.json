@@ -13,7 +13,6 @@
   "dependencies": {
     "@navikt/oasis": "^3.8.0",
     "@navikt/vite-mode": "0.13.6",
-    "axios": "^1.11.0",
     "connect-timeout": "^1.9.1",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
