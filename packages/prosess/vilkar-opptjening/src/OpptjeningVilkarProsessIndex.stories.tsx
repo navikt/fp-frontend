@@ -55,9 +55,8 @@ export const ÅpentAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
-    ] as Aksjonspunkt[],
+    ] satisfies Aksjonspunkt[],
   },
 };
 
