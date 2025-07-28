@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const folder = path.dirname(__filename);
 
 export const createSharedAppConfig = setupFileDirName =>
   mergeConfig(createConfig(setupFileDirName), {
@@ -36,7 +36,7 @@ export const createConfig = setupFileDirName =>
       environment: 'jsdom',
       css: false,
       globals: true,
-      setupFiles: setupFileDirName || path.resolve(__dirname, './vitest-setup'),
+      setupFiles: setupFileDirName || path.resolve(folder, './vitest-setup'),
       watch: false,
       testTimeout: 20000,
     },
