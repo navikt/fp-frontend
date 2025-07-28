@@ -20,7 +20,7 @@ const sprakvalg = {
   ENGELSK: 'EN',
 };
 
-export type SprakFormValues = {
+type SprakFormValues = {
   språkkode?: string;
 };
 

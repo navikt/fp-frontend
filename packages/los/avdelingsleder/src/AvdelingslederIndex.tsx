@@ -9,8 +9,8 @@ import { useQuery } from '@tanstack/react-query';
 import { type Location } from 'history';
 
 import type { NavAnsatt } from '@navikt/fp-types';
+import { useTrackRouteParam } from '@navikt/fp-utils';
 
-import { useTrackRouteParam } from '../../../utils/src/hooks/useTrackRouteParam';
 import { AvdelingslederPanels } from './avdelingslederPanels';
 import { EndreSakslisterPanel } from './behandlingskoer/EndreSakslisterPanel';
 import { IkkeTilgangTilAvdelingslederPanel } from './components/IkkeTilgangTilAvdelingslederPanel';
@@ -45,7 +45,7 @@ export const AvdelingslederIndexIntlWrapper = (props: Props) => {
   );
 };
 
-export const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => {
+const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => {
   const navigate = useNavigate();
   const [valgtAvdelingEnhet, setValgtAvdelingEnhet] = useState<string>();
 

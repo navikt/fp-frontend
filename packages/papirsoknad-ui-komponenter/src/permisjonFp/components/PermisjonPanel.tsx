@@ -6,8 +6,8 @@ import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
-import { notEmpty } from '../../../../utils/src/notEmpty';
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
   OPPHOLD_PERIODE_FIELD_ARRAY_NAME,

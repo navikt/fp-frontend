@@ -107,7 +107,7 @@ const kyExtended = ky.extend({
 
 //MÅ være en gyldig URL for at KY skal fungere i test
 const isTest = import.meta.env.MODE === 'test';
-export const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
+const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 const getUrlFromRel = (rel: keyof typeof BehandlingRel, links: ApiLink[]): string => {
   const link = links.find(l => l.rel === BehandlingRel[rel]);

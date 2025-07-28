@@ -7,13 +7,6 @@ import dayjs from 'dayjs';
 import type { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 import { NyeOgFerdigstilteOppgaverForSisteSyvGraf } from './NyeOgFerdigstilteOppgaverForSisteSyvGraf';
 
-export const getNyeOgFerdigstilteForSisteSyvDager = (
-  nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = [],
-): NyeOgFerdigstilteOppgaver[] => {
-  const iDag = dayjs().startOf('day');
-  return nyeOgFerdigstilte.filter(oppgave => iDag.isAfter(dayjs(oppgave.dato, ISO_DATE_FORMAT)));
-};
-
 interface Props {
   height: number;
   nyeOgFerdigstilteOppgaver?: NyeOgFerdigstilteOppgaver[];
@@ -31,4 +24,11 @@ export const NyeOgFerdigstilteOppgaverForSisteSyvPanel = ({ height, nyeOgFerdigs
       />
     </VStack>
   );
+};
+
+const getNyeOgFerdigstilteForSisteSyvDager = (
+  nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = [],
+): NyeOgFerdigstilteOppgaver[] => {
+  const iDag = dayjs().startOf('day');
+  return nyeOgFerdigstilte.filter(oppgave => iDag.isAfter(dayjs(oppgave.dato, ISO_DATE_FORMAT)));
 };

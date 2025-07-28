@@ -18,8 +18,6 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';
 
-export const VEDTAK_KLAGE_FORM_NAME = 'VEDTAK_KLAGE_FORM';
-
 const OMGJOER_TEKST_MAP = {
   GUNST_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortGunst',
   UGUNST_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortUgunst',
@@ -31,55 +29,6 @@ export type VedtakKlageForhandsvisData = {
 };
 
 type AksjonspunktData = Array<ForeslaVedtakAp | ForeslaVedtakManueltAp>;
-
-const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): KlageAvvistÅrsak[] => {
-  if (klageVurderingResultat) {
-    if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
-      return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;
-    }
-    if (klageVurderingResultat.klageFormkravResultatNFP) {
-      return klageVurderingResultat.klageFormkravResultatNFP.avvistArsaker;
-    }
-  }
-  return [];
-};
-
-const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: AlleKodeverk): string | null => {
-  if (klageVurderingResultat?.klageVurderingResultatNK?.klageMedholdArsak) {
-    return (
-      alleKodeverk['KlageMedholdÅrsak'].find(
-        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak,
-      )?.navn ?? ''
-    );
-  }
-  if (klageVurderingResultat?.klageVurderingResultatNFP?.klageMedholdArsak) {
-    return (
-      alleKodeverk['KlageMedholdÅrsak'].find(
-        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak,
-      )?.navn ?? ''
-    );
-  }
-  return null;
-};
-
-const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | null => {
-  const klageResultat =
-    behandlingKlageVurdering.klageVurderingResultatNK ?? behandlingKlageVurdering.klageVurderingResultatNFP;
-  switch (klageResultat?.klageVurdering) {
-    case klageVurderingCodes.AVVIS_KLAGE:
-      return 'VedtakKlageForm.KlageAvvist';
-    case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
-      return 'VedtakKlageForm.KlageStadfestet';
-    case klageVurderingCodes.OPPHEVE_YTELSESVEDTAK:
-      return 'VedtakKlageForm.YtelsesvedtakOpphevet';
-    case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
-      return 'VedtakKlageForm.HjemmsendUtenOpphev';
-    case klageVurderingCodes.MEDHOLD_I_KLAGE:
-      return OMGJOER_TEKST_MAP[klageResultat?.klageVurderingOmgjoer ?? ''];
-    default:
-      return 'VedtakKlageForm.IkkeFastsatt';
-  }
-};
 
 interface Props {
   klageVurdering: KlageVurdering;
@@ -166,4 +115,52 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
       )}
     </VStack>
   );
+};
+const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): KlageAvvistÅrsak[] => {
+  if (klageVurderingResultat) {
+    if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
+      return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;
+    }
+    if (klageVurderingResultat.klageFormkravResultatNFP) {
+      return klageVurderingResultat.klageFormkravResultatNFP.avvistArsaker;
+    }
+  }
+  return [];
+};
+
+const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: AlleKodeverk): string | null => {
+  if (klageVurderingResultat?.klageVurderingResultatNK?.klageMedholdArsak) {
+    return (
+      alleKodeverk['KlageMedholdÅrsak'].find(
+        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak,
+      )?.navn ?? ''
+    );
+  }
+  if (klageVurderingResultat?.klageVurderingResultatNFP?.klageMedholdArsak) {
+    return (
+      alleKodeverk['KlageMedholdÅrsak'].find(
+        ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak,
+      )?.navn ?? ''
+    );
+  }
+  return null;
+};
+
+const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | null => {
+  const klageResultat =
+    behandlingKlageVurdering.klageVurderingResultatNK ?? behandlingKlageVurdering.klageVurderingResultatNFP;
+  switch (klageResultat?.klageVurdering) {
+    case klageVurderingCodes.AVVIS_KLAGE:
+      return 'VedtakKlageForm.KlageAvvist';
+    case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
+      return 'VedtakKlageForm.KlageStadfestet';
+    case klageVurderingCodes.OPPHEVE_YTELSESVEDTAK:
+      return 'VedtakKlageForm.YtelsesvedtakOpphevet';
+    case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
+      return 'VedtakKlageForm.HjemmsendUtenOpphev';
+    case klageVurderingCodes.MEDHOLD_I_KLAGE:
+      return OMGJOER_TEKST_MAP[klageResultat?.klageVurderingOmgjoer ?? ''];
+    default:
+      return 'VedtakKlageForm.IkkeFastsatt';
+  }
 };

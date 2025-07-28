@@ -58,7 +58,7 @@ export const FodselSammenligningOtherPanel = ({ soknad, termindato }: Props) => 
   );
 };
 
-export const getTerminEllerFødselsdato = (
+const getTerminEllerFødselsdato = (
   hasSøknad: boolean,
   fødselsdatoerSoknad: { [key: number]: string },
   termindatoSoknad?: string,

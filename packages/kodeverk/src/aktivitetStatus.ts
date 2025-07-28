@@ -1,5 +1,3 @@
-import { BeregningsgrunnlagAndeltype } from './beregningsgrunnlagAndeltyper';
-
 export enum AktivitetStatus {
   MIDLERTIDIG_INAKTIV = 'MIDL_INAKTIV',
   KUN_YTELSE = 'KUN_YTELSE',
@@ -18,8 +16,3 @@ export enum AktivitetStatus {
   BRUKERS_ANDEL = 'BA',
   UDEFINERT = '-',
 }
-
-export const aktivitetstatusTilAndeltypeMap = {} as Record<string, string>;
-aktivitetstatusTilAndeltypeMap[AktivitetStatus.BRUKERS_ANDEL] = BeregningsgrunnlagAndeltype.BRUKERS_ANDEL;
-aktivitetstatusTilAndeltypeMap[AktivitetStatus.FRILANSER] = BeregningsgrunnlagAndeltype.FRILANS;
-aktivitetstatusTilAndeltypeMap[AktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE] = BeregningsgrunnlagAndeltype.EGEN_NÆRING;

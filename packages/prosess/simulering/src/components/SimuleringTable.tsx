@@ -21,103 +21,13 @@ import styles from './simuleringTable.module.css';
 
 const classNames = classnames.bind(styles);
 
-export const simuleringCodes = {
+const simuleringCodes = {
   DIFFERANSE: 'differanse',
   INNTREKK: 'inntrekk',
   FEILUTBETALING: 'feilutbetaling',
   INNTREKKNESTEMÅNED: 'inntrekkNesteMåned',
   OPPFYLT: 'oppfylt',
   REDUKSJON: 'reduksjon',
-};
-
-const isNextPeriod = (monthAndYear: { month: string; year: string }, nextPeriod: string): boolean =>
-  `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod ? dayjs(nextPeriod).format('MMMMYY') : false);
-
-const skalViseCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFagområde[]): boolean =>
-  mottakerResultatPerFag.some(fag => fag.rader.length > 1);
-
-const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
-  const fagFeilUtbetalt = fagOmråde.rader.find(rad => rad.feltnavn === simuleringCodes.DIFFERANSE);
-  return !!fagFeilUtbetalt && !rowIsFeilUtbetalt;
-};
-
-const rowIsHidden = (isRowToggable: boolean, showDetails: boolean): boolean => isRowToggable && !showDetails;
-
-const createColumns = (
-  perioder: SimuleringResultatRad['resultaterPerMåned'],
-  rangeOfMonths: { month: string; year: string }[],
-  nextPeriod: string,
-  borderBottom?: string,
-): ReactElement[] => {
-  const nextPeriodFormatted = `${dayjs(nextPeriod).format('MMMMYY')}`;
-
-  const perioderData = rangeOfMonths.map(monthAndYear => {
-    const periodeExists = perioder.find(
-      periode =>
-        dayjs(periode.periode.tom).format('MMMMYY').toLowerCase() === `${monthAndYear.month}${monthAndYear.year}`,
-    );
-    return periodeExists || { måned: `${monthAndYear.month}${monthAndYear.year}`, beløp: null };
-  });
-
-  return perioderData.map((måned, månedIndex) => (
-    <Table.DataCell
-      key={`columnIndex${månedIndex + 1}`}
-      style={{ borderBottom }}
-      className={classNames({
-        rodTekst: !måned.beløp || måned.beløp < 0,
-        lastColumn:
-          'måned' in måned
-            ? måned.måned === nextPeriodFormatted
-            : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
-      })}
-    >
-      {måned.beløp ? formatCurrencyNoKr(måned.beløp) : '-'}
-    </Table.DataCell>
-  ));
-};
-
-const lagVisningsNavn = (mottaker: Mottaker, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId): string => {
-  const agOpplysning = mottaker.mottakerIdentifikator
-    ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator]
-    : undefined;
-  return agOpplysning ? `${agOpplysning.navn} (${mottaker.mottakerNummer})` : `${mottaker.mottakerNummer}`;
-};
-
-const tableTitle = (
-  mottaker: Mottaker,
-  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-): ReactElement | null =>
-  mottaker.mottakerType === MottakerType.ARBG || mottaker.mottakerType === MottakerType.ARBGP ? (
-    <Heading size="xsmall">{lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}</Heading>
-  ) : null;
-
-const getResultatRadene = (
-  ingenPerioderMedAvvik: boolean,
-  resultatPerFagområde: SimuleringResultatPerFagområde[],
-  resultatOgMotregningRader: Mottaker['resultatOgMotregningRader'],
-): Mottaker['resultatOgMotregningRader'] => {
-  if (!ingenPerioderMedAvvik) {
-    return resultatOgMotregningRader;
-  }
-  return resultatPerFagområde.length > 1
-    ? resultatOgMotregningRader.filter(resultat => resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED)
-    : [];
-};
-
-const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string): boolean =>
-  !!(ingenPerioderMedAvvik && mottakerTypeKode === MottakerType.BRUKER);
-
-const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => periodeFom || nesteUtbPeriodeFom;
-
-const getPeriod = (
-  ingenPerioderMedAvvik: boolean,
-  periodeFom: string,
-  mottaker: Mottaker,
-): { month: string; year: string }[] => {
-  const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
-    ? dayjs(mottaker.nesteUtbPeriode.tom).subtract(1, 'months').format()
-    : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriode.fom);
-  return getRangeOfMonths(fomDato, mottaker.nesteUtbPeriode.tom);
 };
 
 type Details = {
@@ -229,3 +139,93 @@ export const SimuleringTable = ({
     })}
   </>
 );
+
+const isNextPeriod = (monthAndYear: { month: string; year: string }, nextPeriod: string): boolean =>
+  `${monthAndYear.month}${monthAndYear.year}` === (nextPeriod ? dayjs(nextPeriod).format('MMMMYY') : false);
+
+const skalViseCollapseButton = (mottakerResultatPerFag: SimuleringResultatPerFagområde[]): boolean =>
+  mottakerResultatPerFag.some(fag => fag.rader.length > 1);
+
+const rowToggable = (fagOmråde: SimuleringResultatPerFagområde, rowIsFeilUtbetalt: boolean): boolean => {
+  const fagFeilUtbetalt = fagOmråde.rader.find(rad => rad.feltnavn === simuleringCodes.DIFFERANSE);
+  return !!fagFeilUtbetalt && !rowIsFeilUtbetalt;
+};
+
+const rowIsHidden = (isRowToggable: boolean, showDetails: boolean): boolean => isRowToggable && !showDetails;
+
+const createColumns = (
+  perioder: SimuleringResultatRad['resultaterPerMåned'],
+  rangeOfMonths: { month: string; year: string }[],
+  nextPeriod: string,
+  borderBottom?: string,
+): ReactElement[] => {
+  const nextPeriodFormatted = `${dayjs(nextPeriod).format('MMMMYY')}`;
+
+  const perioderData = rangeOfMonths.map(monthAndYear => {
+    const periodeExists = perioder.find(
+      periode =>
+        dayjs(periode.periode.tom).format('MMMMYY').toLowerCase() === `${monthAndYear.month}${monthAndYear.year}`,
+    );
+    return periodeExists || { måned: `${monthAndYear.month}${monthAndYear.year}`, beløp: null };
+  });
+
+  return perioderData.map((måned, månedIndex) => (
+    <Table.DataCell
+      key={`columnIndex${månedIndex + 1}`}
+      style={{ borderBottom }}
+      className={classNames({
+        rodTekst: !måned.beløp || måned.beløp < 0,
+        lastColumn:
+          'måned' in måned
+            ? måned.måned === nextPeriodFormatted
+            : dayjs(måned.periode.tom).format('MMMMYY') === nextPeriodFormatted,
+      })}
+    >
+      {måned.beløp ? formatCurrencyNoKr(måned.beløp) : '-'}
+    </Table.DataCell>
+  ));
+};
+
+const lagVisningsNavn = (mottaker: Mottaker, arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId): string => {
+  const agOpplysning = mottaker.mottakerIdentifikator
+    ? arbeidsgiverOpplysninger[mottaker.mottakerIdentifikator]
+    : undefined;
+  return agOpplysning ? `${agOpplysning.navn} (${mottaker.mottakerNummer})` : `${mottaker.mottakerNummer}`;
+};
+
+const tableTitle = (
+  mottaker: Mottaker,
+  arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+): ReactElement | null =>
+  mottaker.mottakerType === MottakerType.ARBG || mottaker.mottakerType === MottakerType.ARBGP ? (
+    <Heading size="xsmall">{lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}</Heading>
+  ) : null;
+
+const getResultatRadene = (
+  ingenPerioderMedAvvik: boolean,
+  resultatPerFagområde: SimuleringResultatPerFagområde[],
+  resultatOgMotregningRader: Mottaker['resultatOgMotregningRader'],
+): Mottaker['resultatOgMotregningRader'] => {
+  if (!ingenPerioderMedAvvik) {
+    return resultatOgMotregningRader;
+  }
+  return resultatPerFagområde.length > 1
+    ? resultatOgMotregningRader.filter(resultat => resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED)
+    : [];
+};
+
+const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string): boolean =>
+  !!(ingenPerioderMedAvvik && mottakerTypeKode === MottakerType.BRUKER);
+
+const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => periodeFom || nesteUtbPeriodeFom;
+
+const getPeriod = (
+  ingenPerioderMedAvvik: boolean,
+  periodeFom: string,
+  mottaker: Mottaker,
+): { month: string; year: string }[] => {
+  const fomDato = avvikBruker(ingenPerioderMedAvvik, mottaker.mottakerType)
+    ? dayjs(mottaker.nesteUtbPeriode.tom).subtract(1, 'months').format()
+    : getPeriodeFom(periodeFom, mottaker.nesteUtbPeriode.fom);
+  return getRangeOfMonths(fomDato, mottaker.nesteUtbPeriode.tom);
+};

@@ -30,43 +30,6 @@ import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldA
 const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`;
-const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
-
-const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
-  const perioder = getValues(`${FA_PREFIX}`) ?? [];
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-};
-
-const getValiderFørEllerEtter =
-  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, sjekkFør: boolean) => () => {
-    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-
-    if (!tomVerdi || !fomVerdi) {
-      return null;
-    }
-
-    return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-  };
-
-const getValiderArbeidsgiverIdNårRequired =
-  (getValues: UseFormGetValues<PermisjonFormValues>, index: number) => (arbeidsgiverIdentifikator: string) => {
-    const arbeidsgiverIdentifikatorRequired =
-      getValues(`${getPrefix(index)}.arbeidskategoriType`) === Arbeidskategori.ARBEIDSTAKER;
-    return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
-  };
-
-const validerAtArbeidsgiverIdErGyldig = (arbeidsgiverIdentifikator: string) => {
-  if (!arbeidsgiverIdentifikator) {
-    return undefined;
-  }
-  return arbeidsgiverIdentifikator.length === 11
-    ? hasValidFodselsnummer(arbeidsgiverIdentifikator)
-    : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
-};
 
 const defaultGraderingPeriode: GraderingPeriode = {
   periodeFom: '',
@@ -76,32 +39,13 @@ const defaultGraderingPeriode: GraderingPeriode = {
   skalGraderes: false,
 };
 
-export const gyldigArbeidskategori = [
+const gyldigArbeidskategori = [
   Arbeidskategori.ARBEIDSTAKER,
   Arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE,
   Arbeidskategori.FRILANSER,
 ];
 
 const maxValue100 = maxValue(100);
-
-const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
-  typer
-    .filter(({ kode }) => gyldigeUttakperioder.some(ga => ga === kode))
-    .map(({ kode, navn }) => (
-      <option value={kode} key={kode}>
-        {navn}
-      </option>
-    ));
-
-const mapArbeidskategori = (typer: KodeverkMedNavn<'Arbeidskategori'>[]): ReactElement[] =>
-  typer
-    .filter(({ kode }) => gyldigArbeidskategori.some(ga => ga === kode))
-    .map(({ kode, navn }) => (
-      <option value={kode} key={kode}>
-        {navn}
-      </option>
-    ));
-
 interface Props {
   graderingKvoter: KodeverkMedNavn<'UttakPeriodeType'>[];
   readOnly: boolean;
@@ -250,3 +194,58 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
     </PeriodFieldArray>
   );
 };
+const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
+
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(`${FA_PREFIX}`) ?? [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
+};
+
+const getValiderFørEllerEtter =
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, sjekkFør: boolean) => () => {
+    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
+
+    if (!tomVerdi || !fomVerdi) {
+      return null;
+    }
+
+    return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+  };
+
+const getValiderArbeidsgiverIdNårRequired =
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number) => (arbeidsgiverIdentifikator: string) => {
+    const arbeidsgiverIdentifikatorRequired =
+      getValues(`${getPrefix(index)}.arbeidskategoriType`) === Arbeidskategori.ARBEIDSTAKER;
+    return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
+  };
+
+const validerAtArbeidsgiverIdErGyldig = (arbeidsgiverIdentifikator: string) => {
+  if (!arbeidsgiverIdentifikator) {
+    return undefined;
+  }
+  return arbeidsgiverIdentifikator.length === 11
+    ? hasValidFodselsnummer(arbeidsgiverIdentifikator)
+    : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
+};
+
+const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeUttakperioder.some(ga => ga === kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
+
+const mapArbeidskategori = (typer: KodeverkMedNavn<'Arbeidskategori'>[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigArbeidskategori.some(ga => ga === kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));

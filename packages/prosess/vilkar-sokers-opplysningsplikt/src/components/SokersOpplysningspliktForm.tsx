@@ -54,7 +54,7 @@ const formatArbeidsgiver = (
   return lagArbeidsgiverNavnOgOrgnrTekst(arbeidsgiverOpplysninger.navn, arbeidsgiverOpplysninger.identifikator);
 };
 
-export const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] =>
+const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] =>
   soknad?.manglendeVedlegg
     ? soknad.manglendeVedlegg.slice().sort((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel))
     : [];

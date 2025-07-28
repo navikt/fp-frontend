@@ -8,13 +8,6 @@ import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import type { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 import { NyeOgFerdigstilteOppgaverForIdagGraf } from './NyeOgFerdigstilteOppgaverForIdagGraf';
 
-export const getNyeOgFerdigstilteForIDag = (
-  nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = [],
-): NyeOgFerdigstilteOppgaver[] => {
-  const iDag = dayjs();
-  return nyeOgFerdigstilte.filter(oppgave => iDag.isSame(dayjs(oppgave.dato, ISO_DATE_FORMAT), 'day'));
-};
-
 interface Props {
   height: number;
   nyeOgFerdigstilteOppgaver?: NyeOgFerdigstilteOppgaver[];
@@ -37,4 +30,11 @@ export const NyeOgFerdigstilteOppgaverForIdagPanel = ({ height, nyeOgFerdigstilt
       />
     </VStack>
   );
+};
+
+const getNyeOgFerdigstilteForIDag = (
+  nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = [],
+): NyeOgFerdigstilteOppgaver[] => {
+  const iDag = dayjs();
+  return nyeOgFerdigstilte.filter(oppgave => iDag.isSame(dayjs(oppgave.dato, ISO_DATE_FORMAT), 'day'));
 };

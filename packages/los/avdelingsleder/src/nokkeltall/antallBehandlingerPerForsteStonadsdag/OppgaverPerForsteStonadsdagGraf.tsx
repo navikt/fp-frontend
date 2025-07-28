@@ -66,13 +66,13 @@ export const OppgaverPerForsteStonadsdagGraf = ({ height, oppgaverPerForsteStona
   );
 };
 
-export const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag[]): Koordinat[] =>
+const lagKoordinater = (oppgaverPerForsteStonadsdag: OppgaverForForsteStonadsdag[]): Koordinat[] =>
   oppgaverPerForsteStonadsdag.map(o => ({
     x: dayjs(o.forsteStonadsdag).startOf('day').toDate().getTime(),
     y: o.antall,
   }));
 
-export const lagDatastruktur = (koordinater: Koordinat[]): number[][] => {
+const lagDatastruktur = (koordinater: Koordinat[]): number[][] => {
   const nyeKoordinater = [];
   const periodeStart = koordinater
     .map(koordinat => dayjs(koordinat.x))

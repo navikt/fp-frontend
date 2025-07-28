@@ -36,51 +36,11 @@ export const gyldigeUttakperioder = [
   UttakPeriodeType.MODREKVOTE,
 ];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
-  typer
-    .filter(({ kode }) => gyldigeUttakperioder.some(gu => gu === kode))
-    .map(({ kode, navn }) => (
-      <option value={kode} key={kode}>
-        {navn}
-      </option>
-    ));
-
-const mapAktiviteter = (aktiviteter: KodeverkMedNavn<'MorsAktivitet'>[]): ReactElement[] =>
-  aktiviteter.map(({ kode, navn }) => (
-    <option value={kode} key={kode}>
-      {navn}
-    </option>
-  ));
-
-export const PERIODS_WITH_NO_MORS_AKTIVITET = [
+const PERIODS_WITH_NO_MORS_AKTIVITET = [
   UttakPeriodeType.FEDREKVOTE,
   UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
   UttakPeriodeType.MODREKVOTE,
 ];
-
-const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
-
-const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
-  !!periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
-
-const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
-  const perioder = getValues(FA_PREFIX) ?? [];
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return dateRangesNotOverlapping(periodeMap);
-};
-
-const getValiderFomOgTomVerdi =
-  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, erFør: boolean) => () => {
-    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-    if (!tomVerdi || !fomVerdi) {
-      return null;
-    }
-
-    return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-  };
 
 interface Props {
   readOnly: boolean;
@@ -254,3 +214,43 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) 
       samtidigUttaksprosent: value.samtidigUttaksprosent,
     };
   });
+
+const mapPeriodeTyper = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeUttakperioder.some(gu => gu === kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
+
+const mapAktiviteter = (aktiviteter: KodeverkMedNavn<'MorsAktivitet'>[]): ReactElement[] =>
+  aktiviteter.map(({ kode, navn }) => (
+    <option value={kode} key={kode}>
+      {navn}
+    </option>
+  ));
+
+const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
+
+const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
+  !!periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
+
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(FA_PREFIX) ?? [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return dateRangesNotOverlapping(periodeMap);
+};
+
+const getValiderFomOgTomVerdi =
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, erFør: boolean) => () => {
+    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
+    if (!tomVerdi || !fomVerdi) {
+      return null;
+    }
+
+    return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+  };

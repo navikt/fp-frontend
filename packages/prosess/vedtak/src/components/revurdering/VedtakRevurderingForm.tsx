@@ -112,10 +112,7 @@ const erNyttBehandlingResult = (
   return vedtakResultOriginal !== vedtakResult;
 };
 
-export const lagKonsekvensForYtelsenTekst = (
-  alleKodeverk: AlleKodeverk,
-  konsekvenser?: KonsekvensForYtelsen[],
-): string => {
+const lagKonsekvensForYtelsenTekst = (alleKodeverk: AlleKodeverk, konsekvenser?: KonsekvensForYtelsen[]): string => {
   if (!konsekvenser || konsekvenser.length < 1) {
     return '';
   }

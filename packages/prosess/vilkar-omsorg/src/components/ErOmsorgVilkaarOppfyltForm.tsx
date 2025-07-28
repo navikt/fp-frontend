@@ -97,7 +97,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
   );
 };
 
-export const buildInitialValues = (
+const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],

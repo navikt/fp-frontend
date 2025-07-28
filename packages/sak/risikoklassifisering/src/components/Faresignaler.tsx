@@ -5,7 +5,7 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import type { Risikoklassifisering } from '@navikt/fp-types';
 
-export const FarePanel = ({
+const FarePanel = ({
   risikoFaresignaler,
   labelId,
 }: {
