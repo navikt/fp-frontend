@@ -1,4 +1,10 @@
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatus } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  BehandlingStatus,
+  VilkarType,
+} from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
@@ -12,6 +18,14 @@ describe('getAlleMerknaderFraBeslutter', () => {
       kanLoses: true,
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
+      vilkarType: VilkarType.FODSELSVILKARET_MOR,
+      vurderPaNyttArsaker: null,
+      besluttersBegrunnelse: null,
+      aksjonspunktType: AksjonspunktType.MANUELL,
+      erAktivt: true,
+      fristTid: null,
+      endretTidspunkt: null,
+      endretAv: null,
     },
   ];
 
