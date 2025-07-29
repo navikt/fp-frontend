@@ -1,53 +1,63 @@
 import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+
+import { mswWrapper } from '@navikt/fp-utils-test';
 
 import * as stories from './GjeldendeSakslisterTabell.stories';
 
 const { TabellNårDetIkkeFinnesBehandlingskøer, TabellNårDetFinnesEnBehandlingskø } = composeStories(stories);
 
 describe('GjeldendeSakslisterTabell', () => {
-  it('skal vise at ingen behandlingskøer er laget og så legge til en ny kø', async () => {
-    await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
-    render(<TabellNårDetIkkeFinnesBehandlingskøer />);
-    expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
-    expect(screen.queryByText('Navn')).not.toBeInTheDocument();
+  it(
+    'skal vise at ingen behandlingskøer er laget og så legge til en ny kø',
+    mswWrapper(async ({ setHandlers }) => {
+      setHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
+      render(<TabellNårDetIkkeFinnesBehandlingskøer />);
+      expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
+      expect(screen.queryByText('Navn')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Legg til behandlingskø'));
+      await userEvent.click(screen.getByText('Legg til behandlingskø'));
 
-    expect(await screen.findByText('Navn')).toBeInTheDocument();
-    expect(await screen.findByText('Ny liste')).toBeInTheDocument();
-  });
+      expect(await screen.findByText('Navn')).toBeInTheDocument();
+      expect(await screen.findByText('Ny liste')).toBeInTheDocument();
+    }),
+  );
 
-  it('skal vise slette kø ved å trykke på ikon for sletting', async () => {
-    await applyRequestHandlers(TabellNårDetFinnesEnBehandlingskø.parameters['msw']);
-    render(<TabellNårDetFinnesEnBehandlingskø />);
-    expect(await screen.findByText('Navn')).toBeInTheDocument();
+  it(
+    'skal vise slette kø ved å trykke på ikon for sletting',
+    mswWrapper(async ({ setHandlers }) => {
+      setHandlers(TabellNårDetFinnesEnBehandlingskø.parameters['msw']);
+      render(<TabellNårDetFinnesEnBehandlingskø />);
+      expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[1]);
+      await userEvent.click(screen.getAllByRole('img')[1]);
 
-    expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
+      expect(await screen.findByText('Ønsker du å slette Saksliste 1?')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Ja'));
+      await userEvent.click(screen.getByText('Ja'));
 
-    expect(screen.queryByText('Ønsker du å slette Saksliste 1?')).not.toBeInTheDocument();
-  });
+      expect(screen.queryByText('Ønsker du å slette Saksliste 1?')).not.toBeInTheDocument();
+    }),
+  );
 
-  it('skal legge til en ny kø ved bruk av tastaturet (enter)', async () => {
-    await applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
-    render(<TabellNårDetIkkeFinnesBehandlingskøer />);
-    expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
-    expect(screen.queryByText('Navn')).not.toBeInTheDocument();
+  it(
+    'skal legge til en ny kø ved bruk av tastaturet (enter)',
+    mswWrapper(async ({ setHandlers }) => {
+      setHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
+      render(<TabellNårDetIkkeFinnesBehandlingskøer />);
+      expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
+      expect(screen.queryByText('Navn')).not.toBeInTheDocument();
 
-    await fireEvent.keyDown(screen.getByText('Legg til behandlingskø'), {
-      key: 'Enter',
-      code: 'Enter',
-      keyCode: 13,
-      charCode: 13,
-    });
+      await fireEvent.keyDown(screen.getByText('Legg til behandlingskø'), {
+        key: 'Enter',
+        code: 'Enter',
+        keyCode: 13,
+        charCode: 13,
+      });
 
-    expect(screen.getByText('Navn')).toBeInTheDocument();
-    expect(screen.getByText('Ny liste')).toBeInTheDocument();
-  });
+      expect(screen.getByText('Navn')).toBeInTheDocument();
+      expect(screen.getByText('Ny liste')).toBeInTheDocument();
+    }),
+  );
 });

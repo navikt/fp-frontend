@@ -32,12 +32,40 @@ export const createSharedPackagesConfig = setupFileDirName => createConfig(setup
 export const createConfig = setupFileDirName =>
   defineConfig({
     test: {
-      deps: { interopDefault: true },
-      environment: 'jsdom',
-      css: false,
       globals: true,
-      setupFiles: setupFileDirName || path.resolve(folder, './vitest-setup'),
-      watch: false,
+      coverage: {
+        include: ['src/**/*'],
+        exclude: [],
+      },
       testTimeout: 20000,
+      projects: [
+        {
+          extends: true,
+          test: {
+            name: 'jsdom',
+            environment: 'jsdom',
+            css: false,
+            setupFiles: setupFileDirName || path.resolve(folder, './vitest-setup.ts'),
+            env: {
+              TEST_MODE: 'jsdom-mode',
+            },
+          },
+        },
+        {
+          extends: true,
+          test: {
+            name: 'browser',
+            setupFiles: setupFileDirName || path.resolve(folder, './vitest-browser-mode-setup.ts'),
+            browser: {
+              enabled: true,
+              provider: 'playwright',
+              instances: [{ browser: 'chromium' }],
+            },
+            env: {
+              TEST_MODE: 'browser-mode',
+            },
+          },
+        },
+      ],
     },
   });

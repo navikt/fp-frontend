@@ -2740,8 +2740,6 @@ __metadata:
     eslint: 9.32.0
     history: 5.3.0
     ky: 1.8.2
-    msw: 2.10.4
-    msw-storybook-addon: 2.0.5
     react: 19.1.0
     react-dom: 19.1.0
     react-intl: 7.1.11
@@ -2788,8 +2786,6 @@ __metadata:
     dayjs: 1.11.13
     eslint: 9.32.0
     ky: 1.8.2
-    msw: 2.10.4
-    msw-storybook-addon: 2.0.5
     react: 19.1.0
     react-hook-form: 7.61.1
     react-intl: 7.1.11
@@ -2857,8 +2853,6 @@ __metadata:
     history: 5.3.0
     ky: 1.8.2
     lodash.debounce: 4.0.8
-    msw: 2.10.4
-    msw-storybook-addon: 2.0.5
     react: 19.1.0
     react-hook-form: 7.61.1
     react-intl: 7.1.11
@@ -2944,8 +2938,6 @@ __metadata:
     history: 5.3.0
     ky: 1.8.2
     lodash.debounce: 4.0.8
-    msw: 2.10.4
-    msw-storybook-addon: 2.0.5
     react: 19.1.0
     react-dom: 19.1.0
     react-hook-form: 7.61.1
@@ -5701,6 +5693,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@polka/url@npm:^1.0.0-next.24":
+  version: 1.0.0-next.29
+  resolution: "@polka/url@npm:1.0.0-next.29"
+  checksum: 69ca11ab15a4ffec7f0b07fcc4e1f01489b3d9683a7e1867758818386575c60c213401259ba3705b8a812228d17e2bfd18e6f021194d943fff4bca389c9d4f28
+  languageName: node
+  linkType: hard
+
 "@popperjs/core@npm:2.11.8":
   version: 2.11.8
   resolution: "@popperjs/core@npm:2.11.8"
@@ -6307,7 +6306,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:10.4.1":
+"@testing-library/dom@npm:10.4.1, @testing-library/dom@npm:^10.4.0":
   version: 10.4.1
   resolution: "@testing-library/dom@npm:10.4.1"
   dependencies:
@@ -7036,6 +7035,33 @@ __metadata:
   peerDependencies:
     vite: ^4.2.0 || ^5.0.0 || ^6.0.0 || ^7.0.0
   checksum: 3e3c4c58f65e8041c4891736613732d572f232bc6b039e74ea00554b94b8010ac246e2f6e099e8b6c474d9c1741e2b166b48fa47fe0093312beefa99a1b13d00
+  languageName: node
+  linkType: hard
+
+"@vitest/browser@npm:3.2.4":
+  version: 3.2.4
+  resolution: "@vitest/browser@npm:3.2.4"
+  dependencies:
+    "@testing-library/dom": ^10.4.0
+    "@testing-library/user-event": ^14.6.1
+    "@vitest/mocker": 3.2.4
+    "@vitest/utils": 3.2.4
+    magic-string: ^0.30.17
+    sirv: ^3.0.1
+    tinyrainbow: ^2.0.0
+    ws: ^8.18.2
+  peerDependencies:
+    playwright: "*"
+    vitest: 3.2.4
+    webdriverio: ^7.0.0 || ^8.0.0 || ^9.0.0
+  peerDependenciesMeta:
+    playwright:
+      optional: true
+    safaridriver:
+      optional: true
+    webdriverio:
+      optional: true
+  checksum: e81e0e04482ce0a91a6ac3a419ba70d36870dffc9ef6983038941b437ad4bb06cf7917ae913f77da20438456a401a95283ca9db2fe44e222d04a531a8a8afa8d
   languageName: node
   linkType: hard
 
@@ -10249,6 +10275,7 @@ __metadata:
     "@types/react-router-dom": 5.3.3
     "@types/react-test-renderer": 19.1.0
     "@vitejs/plugin-react": 4.7.0
+    "@vitest/browser": 3.2.4
     "@vitest/coverage-c8": 0.33.0
     cross-env: 10.0.0
     dotenv: 17.2.1
@@ -10265,6 +10292,9 @@ __metadata:
     jsdom: 26.1.0
     lerna: 8.2.4
     lint-staged: 16.1.2
+    msw: 2.10.4
+    msw-storybook-addon: 2.0.5
+    playwright: 1.54.1
     prettier: 3.6.2
     react-test-renderer: 19.1.0
     shelljs: 0.10.0
@@ -10343,12 +10373,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fsevents@npm:2.3.2":
+  version: 2.3.2
+  resolution: "fsevents@npm:2.3.2"
+  dependencies:
+    node-gyp: latest
+  checksum: 97ade64e75091afee5265e6956cb72ba34db7819b4c3e94c431d4be2b19b8bb7a2d4116da417950c3425f17c8fe693d25e20212cac583ac1521ad066b77ae31f
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
 "fsevents@npm:~2.3.2, fsevents@npm:~2.3.3":
   version: 2.3.3
   resolution: "fsevents@npm:2.3.3"
   dependencies:
     node-gyp: latest
   checksum: 11e6ea6fea15e42461fc55b4b0e4a0a3c654faa567f1877dbd353f39156f69def97a69936d1746619d656c4b93de2238bf731f6085a03a50cabf287c9d024317
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"fsevents@patch:fsevents@2.3.2#~builtin<compat/fsevents>":
+  version: 2.3.2
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
+  dependencies:
+    node-gyp: latest
   conditions: os=darwin
   languageName: node
   linkType: hard
@@ -12913,6 +12962,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"mrmime@npm:^2.0.0":
+  version: 2.0.1
+  resolution: "mrmime@npm:2.0.1"
+  checksum: 455a555009edb2ed6e587e0fcb5e41fcbf8f1dcca28242a57d054f02204ab198bed93ba9de75db06bd3447e8603bc74e10a22440ba99431fc4a751435fba35bf
+  languageName: node
+  linkType: hard
+
 "ms@npm:^2.1.1, ms@npm:^2.1.3":
   version: 2.1.3
   resolution: "ms@npm:2.1.3"
@@ -14118,6 +14174,30 @@ __metadata:
     mlly: ^1.7.4
     pathe: ^2.0.1
   checksum: 4fa4edb2bb845646cdbd04c5c6bc43cdbc8f02ed4d1c28bfcafb6e65928aece789bcf1335e4cac5f65dfdc376e4bd7435bd509a35e9ec73ef2c076a1b88e289c
+  languageName: node
+  linkType: hard
+
+"playwright-core@npm:1.54.1":
+  version: 1.54.1
+  resolution: "playwright-core@npm:1.54.1"
+  bin:
+    playwright-core: cli.js
+  checksum: e51dc8fd490e9fe3148fb5af72fcfdfcd5220416ac3ba8e95a7aadb5b1c58cb444aa714dabbb5f2730fa730843855c2ef97553ca6948eb3f54d8ad73bf917149
+  languageName: node
+  linkType: hard
+
+"playwright@npm:1.54.1":
+  version: 1.54.1
+  resolution: "playwright@npm:1.54.1"
+  dependencies:
+    fsevents: 2.3.2
+    playwright-core: 1.54.1
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    playwright: cli.js
+  checksum: 8d8d8d53119f86e850b03a592f766fe78a6f5eaa65a854ae65c8bfaf5e5fc11a35ed2e5d50c849a15c519626f9276fb42a8813e03ccf1d1f24b95e0e55cb5eca
   languageName: node
   linkType: hard
 
@@ -15355,6 +15435,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sirv@npm:^3.0.1":
+  version: 3.0.1
+  resolution: "sirv@npm:3.0.1"
+  dependencies:
+    "@polka/url": ^1.0.0-next.24
+    mrmime: ^2.0.0
+    totalist: ^3.0.0
+  checksum: 4139140b452aec0caf6f630f37e4ff403420adcba81d9242fbe78fc34836f5c408aa4b9c6430139f8d2f6b9f26f0e6e61b8b17cac9eed1d24fd6412cfcb0ed7d
+  languageName: node
+  linkType: hard
+
 "slash@npm:3.0.0, slash@npm:^3.0.0":
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
@@ -16174,6 +16265,13 @@ __metadata:
   dependencies:
     is-number: ^7.0.0
   checksum: f76fa01b3d5be85db6a2a143e24df9f60dd047d151062d0ba3df62953f2f697b16fe5dad9b0ac6191c7efc7b1d9dcaa4b768174b7b29da89d4428e64bc0a20ed
+  languageName: node
+  linkType: hard
+
+"totalist@npm:^3.0.0":
+  version: 3.0.1
+  resolution: "totalist@npm:3.0.1"
+  checksum: 5132d562cf88ff93fd710770a92f31dbe67cc19b5c6ccae2efc0da327f0954d211bbfd9456389655d726c624f284b4a23112f56d1da931ca7cfabbe1f45e778a
   languageName: node
   linkType: hard
 
@@ -17255,6 +17353,21 @@ __metadata:
     utf-8-validate:
       optional: true
   checksum: 4658357185d891bc45cc2d42a84f9e192d047e8476fb5cba25b604f7d75ca87ca0dd54cd0b2cc49aeee57c79045a741cb7d0b14501953ac60c790cd105c42f23
+  languageName: node
+  linkType: hard
+
+"ws@npm:^8.18.2":
+  version: 8.18.3
+  resolution: "ws@npm:8.18.3"
+  peerDependencies:
+    bufferutil: ^4.0.1
+    utf-8-validate: ">=5.0.2"
+  peerDependenciesMeta:
+    bufferutil:
+      optional: true
+    utf-8-validate:
+      optional: true
+  checksum: d64ef1631227bd0c5fe21b3eb3646c9c91229402fb963d12d87b49af0a1ef757277083af23a5f85742bae1e520feddfb434cb882ea59249b15673c16dc3f36e0
   languageName: node
   linkType: hard
 
