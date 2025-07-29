@@ -1,56 +1,65 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
+import { mswWrapper } from '@navikt/fp-utils-test';
 
 import * as stories from './MeldingIndex.stories';
 
 const { Default } = composeStories(stories);
 
 describe('MeldingIndex', () => {
-  it('skal vise meldinger når mottakere og brevmaler har blitt hentet fra server', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
-    render(<Default />);
-    expect(await screen.findByText('Mal 1')).toBeInTheDocument();
-    expect(screen.getByText('Mal 2')).toBeInTheDocument();
-    expect(screen.getByText('Mal 3')).toBeInTheDocument();
-    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
-  });
+  it(
+    'skal vise meldinger når mottakere og brevmaler har blitt hentet fra server',
+    mswWrapper(async ({ setHandlers }) => {
+      setHandlers(Default.parameters['msw']);
+      render(<Default />);
+      expect(await screen.findByText('Mal 1')).toBeInTheDocument();
+      expect(screen.getByText('Mal 2')).toBeInTheDocument();
+      expect(screen.getByText('Mal 3')).toBeInTheDocument();
+      expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
+    }),
+  );
 
-  it('skal sende melding og så lukke modal', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
-    render(<Default />);
+  it(
+    'skal sende melding og så lukke modal',
+    mswWrapper(async ({ setHandlers }) => {
+      setHandlers(Default.parameters['msw']);
+      render(<Default />);
 
-    expect(await screen.findByText('Meldinger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
+      expect(await screen.findByText('Meldinger')).toBeInTheDocument();
+      expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByLabelText('Mal'), 'Mal1');
+      await userEvent.selectOptions(screen.getByLabelText('Mal'), 'Mal1');
 
-    await userEvent.click(screen.getByText('Send brev'));
+      await userEvent.click(screen.getByText('Send brev'));
 
-    expect(await screen.findAllByText('Brevet er bestilt')).toHaveLength(2);
+      expect(await screen.findAllByText('Brevet er bestilt')).toHaveLength(2);
 
-    await userEvent.click(screen.getByText('OK'));
-  });
+      await userEvent.click(screen.getByText('OK'));
+    }),
+  );
 
-  it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
-    render(<Default />);
+  it(
+    'skal sende melding og sette saken på vent hvis INNHENT_DOK',
+    mswWrapper(async ({ setHandlers }) => {
+      setHandlers(Default.parameters['msw']);
+      render(<Default />);
 
-    expect(await screen.findByText('Meldinger')).toBeInTheDocument();
-    expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
+      expect(await screen.findByText('Meldinger')).toBeInTheDocument();
+      expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByLabelText('Mal'), DokumentMalType.INNHENTE_OPPLYSNINGER);
+      await userEvent.selectOptions(screen.getByLabelText('Mal'), DokumentMalType.INNHENTE_OPPLYSNINGER);
 
-    const begrunnelseInput = screen.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
-    await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
+      const begrunnelseInput = screen.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
+      await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    await userEvent.click(screen.getByText('Send brev'));
+      await userEvent.click(screen.getByText('Send brev'));
 
-    expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
+      expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
 
-    await userEvent.click(screen.getByText('Gå til forsiden'));
-  });
+      await userEvent.click(screen.getByText('Gå til forsiden'));
+    }),
+  );
 });
