@@ -2,9 +2,9 @@ import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 
 import styles from './dokumentIndex.module.css';
 
-type Props = Readonly<{
+interface Props {
   dokument: JournalDokument;
-}>;
+}
 
 /**
  * PDFVisning - Panel for å vise valgt dokument

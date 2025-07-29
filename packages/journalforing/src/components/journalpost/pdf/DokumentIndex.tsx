@@ -9,9 +9,9 @@ import { PDFVisning } from './PDFVisning';
 
 import styles from './dokumentIndex.module.css';
 
-type Props = {
-  dokumenter?: JournalDokument[];
-};
+interface Props {
+  dokumenter: JournalDokument[] | undefined;
+}
 
 export const DokumentIndex = ({ dokumenter }: Props) => {
   const initieltDokumnet = dokumenter && dokumenter.length > 0 ? dokumenter[0] : undefined;

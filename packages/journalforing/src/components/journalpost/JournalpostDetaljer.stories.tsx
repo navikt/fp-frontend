@@ -5,10 +5,9 @@ import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
-import { DokumentTittel } from '../../kodeverk/dokumentTittel';
-import { JournalKanal } from '../../kodeverk/journalKanal';
-import { OppgaveKilde } from '../../kodeverk/oppgaveKilde';
 import type { Journalpost } from '../../typer/journalpostTsType';
+import type { Oppgave } from '../../typer/oppgaveTsType';
+import { DokumentTittel } from '../../utils/dokumentTittel';
 import { JournalpostDetaljer } from './JournalpostDetaljer';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -22,7 +21,7 @@ const navAnsattDefault = {
   brukernavn: saksbehandler,
 } as NavAnsatt;
 
-const defaultOppgave = {
+const defaultOppgave: Oppgave = {
   journalpostId: journalpost.toString(),
   aktørId: '9996923456799',
   fødselsnummer: '12048714373',
@@ -31,13 +30,13 @@ const defaultOppgave = {
   ytelseType: 'FP',
   enhetId: '4108',
   beskrivelse: 'Inntektsmelding',
-  kilde: OppgaveKilde.GOSYS,
+  kilde: 'GOSYS',
 };
 
 const detaljertJournalpostMal = {
   journalpostId: journalpost.toString(),
   tittel: DokumentTittel.BEKREFTELSE_ARBEIDSGIVER,
-  kanal: JournalKanal.EESSI,
+  kanal: 'EESSI',
   kanOppretteSak: true,
   bruker: {
     navn: 'Søker Søkersen',
@@ -94,7 +93,7 @@ const detaljertJournalpostMal = {
 const journalpostKlage = {
   journalpostId: journalpost.toString(),
   tittel: DokumentTittel.KLAGE,
-  kanal: JournalKanal.SKAN_NETS,
+  kanal: 'SKAN_NETS',
   kanOppretteSak: false,
   bruker: {
     navn: 'Søker Søkersen',
@@ -177,6 +176,6 @@ export const VisOppgaveIkkeReservert: Story = {
 export const VisFlyttTilGosysOmKildeGosys: Story = {
   args: {
     ...VisOppgaveReservertAvAndre.args,
-    oppgave: { ...defaultOppgave, kilde: OppgaveKilde.LOKAL },
+    oppgave: { ...defaultOppgave, kilde: 'LOKAL' },
   },
 };

@@ -2,7 +2,6 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Sakstype } from '../../kodeverk/sakstype';
 import * as stories from './JournalpostDetaljer.stories';
 
 const { VisOppgaveForSubmitReservertAvMeg, VisFlyttTilGosysOmKildeGosys, VisJournalpostKlage } =
@@ -131,7 +130,7 @@ describe('JournalpostDetaljer', () => {
         opprettSak: {
           aktørId: '98594685464858',
           ytelseType: 'FP',
-          sakstype: Sakstype.FAGSAK,
+          sakstype: 'FAGSAK',
         },
       },
       false,
@@ -174,7 +173,7 @@ describe('JournalpostDetaljer', () => {
         journalpostId: '986547336994',
         opprettSak: {
           aktørId: '98594685464858',
-          sakstype: Sakstype.GENERELL,
+          sakstype: 'GENERELL',
         },
       },
       false,
