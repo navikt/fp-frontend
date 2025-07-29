@@ -19,5 +19,4 @@ export type SakslisteAvdeling = Readonly<{
   };
   andreKriterier?: AnnetKriterie[];
   saksbehandlerIdenter: string[];
-  antallBehandlinger: number;
 }>;

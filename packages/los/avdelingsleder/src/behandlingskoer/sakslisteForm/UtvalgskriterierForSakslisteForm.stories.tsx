@@ -53,7 +53,6 @@ export const MedGittNavn: Story = {
       navn: 'liste',
       sistEndret: '2020-10-10',
       saksbehandlerIdenter: [],
-      antallBehandlinger: 1,
       sortering: {
         sorteringType: KøSortering.BEHANDLINGSFRIST,
         fra: 1,
@@ -83,7 +82,6 @@ export const MedDefaultNavn: Story = {
       navn: undefined,
       sistEndret: '2020-10-10',
       saksbehandlerIdenter: [],
-      antallBehandlinger: 1,
       sortering: {
         sorteringType: KøSortering.BEHANDLINGSFRIST,
         fra: 1,

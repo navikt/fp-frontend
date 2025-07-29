@@ -37,7 +37,6 @@ export const IngenSaksbehandlere: Story = {
       navn: 'Saksliste 1',
       sistEndret: '2020-01-01',
       saksbehandlerIdenter: ['S34354'],
-      antallBehandlinger: 1,
     },
     avdelingensSaksbehandlere: [],
   },
@@ -58,7 +57,6 @@ export const ToSaksbehandlere: Story = {
       navn: 'Saksliste 1',
       sistEndret: '2020-01-01',
       saksbehandlerIdenter: ['S34354'],
-      antallBehandlinger: 1,
     },
     avdelingensSaksbehandlere: [
       {
@@ -90,7 +88,6 @@ export const TreSaksbehandlere: Story = {
       navn: 'Saksliste 1',
       sistEndret: '2020-01-01',
       saksbehandlerIdenter: ['S34354'],
-      antallBehandlinger: 1,
     },
     avdelingensSaksbehandlere: [
       {
@@ -148,7 +145,6 @@ export const SaksbehandlereSomErGruppert: Story = {
       navn: 'Saksliste 1',
       sistEndret: '2020-01-01',
       saksbehandlerIdenter: ['S34354'],
-      antallBehandlinger: 1,
     },
     avdelingensSaksbehandlere: [
       {

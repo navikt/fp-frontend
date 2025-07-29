@@ -29,7 +29,6 @@ export const Default: Story = {
       navn: 'Saksliste 1',
       sistEndret: '2020-01-01',
       saksbehandlerIdenter: [],
-      antallBehandlinger: 2,
     },
   },
 };

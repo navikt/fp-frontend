@@ -66,7 +66,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
             <HStack gap="4" justify="center">
               <ArrowDownIcon
                 className={styles.arrow}
-                title={intl.formatMessage({ id: 'EndreSakslisterPanel.Saksbehandlere' })}
+                title={intl.formatMessage({ id: 'EndreSakslisterPanel.KnyttetMotSaksbehandlere' })}
               />
               <FormattedMessage id="EndreSakslisterPanel.KnyttetMotSaksbehandlere" />
             </HStack>
