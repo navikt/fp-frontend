@@ -3,7 +3,9 @@
 # Step 1: Run the command
 if ! yarn run openapi-ts; then
   echo "❌ Typegenerering feilet. Sjekk error filen som ble generert."
-  echo "👉 Husk at du må ha autotest kjørende. Dobbeltsjekk at foreldrepengesoknad-api kjører på samme port som gitt i openapi-ts.config.ts"
+  echo "👉 Husk at du må ha en swagger.json lokalt."
+  echo "1. Kjør opp autotest. Gå til Swagger lokalt på localhost:9200"
+  echo "2. Åpne network og kopier openapi.json for relevant tjeneste"
   exit 1
 fi
 
