@@ -43,6 +43,7 @@ export const createConfig = setupFileDirName =>
           extends: true,
           test: {
             name: 'jsdom',
+            deps: { interopDefault: true },
             environment: 'jsdom',
             css: false,
             setupFiles: setupFileDirName || path.resolve(folder, './vitest-setup.ts'),
