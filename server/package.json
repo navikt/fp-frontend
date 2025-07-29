@@ -11,9 +11,9 @@
     "prettier": "prettier --write src"
   },
   "dependencies": {
-    "@navikt/oasis": "^3.8.0",
-    "@navikt/vite-mode": "0.13.6",
-    "connect-timeout": "^1.9.1",
+    "@navikt/oasis": "^3.4.0",
+    "@navikt/vite-mode": "0.13.3",
+    "connect-timeout": "^1.9.0",
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^5.1.0",
