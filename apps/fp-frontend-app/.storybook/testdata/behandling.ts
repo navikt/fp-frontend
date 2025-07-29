@@ -258,6 +258,8 @@ export const behandling: Behandling = {
       besluttersBegrunnelse: null,
       aksjonspunktType: AksjonspunktType.MANUELL,
       kanLoses: true,
+      erAktivt: true,
+      fristTid: null,
       endretTidspunkt: null,
       endretAv: null,
     },

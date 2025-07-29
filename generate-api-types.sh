@@ -16,4 +16,3 @@ rm -rf temp-types
 # Step 4: Format types
 cd packages/types
 yarn run prettier
-yarn run eslint:fix
