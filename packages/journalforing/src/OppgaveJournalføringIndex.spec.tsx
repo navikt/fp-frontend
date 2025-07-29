@@ -7,21 +7,13 @@ import * as stories from './OppgaveJournalføringIndex.stories';
 
 const { ViseOppgaverIListe, IngenOppgaver } = composeStories(stories);
 
-<<<<<<< Updated upstream
 describe('OppgaveJournalføringIndex', () => {
-  it('skal vise en liste med oppgaver', async () => {
-    await applyRequestHandlers(ViseOppgaverIListe.parameters['msw']);
-    render(<ViseOppgaverIListe />);
-    expect(await screen.findByText('Journalføring')).toBeInTheDocument();
-=======
-describe('JournalforingIndex', () => {
   it(
     'skal vise en liste med oppgaver',
     mswWrapper(async ({ setHandlers }) => {
       setHandlers(ViseOppgaverIListe.parameters['msw']);
       render(<ViseOppgaverIListe />);
       expect(await screen.findByText('Journalføring')).toBeInTheDocument();
->>>>>>> Stashed changes
 
       // Tabell overskrift
       expect(await screen.findByText('Opprettet')).toBeInTheDocument();
