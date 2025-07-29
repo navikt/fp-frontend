@@ -1,4 +1,4 @@
-import React, { type ReactElement, type ReactNode, useMemo, useState } from 'react';
+import React, { type ReactElement, type ReactNode, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import {
@@ -23,7 +23,6 @@ import dayjs from 'dayjs';
 
 import {
   BehandlingStatus,
-  KodeverkType,
   OppholdArsakType,
   PeriodeResultatType,
   RelasjonsRolleType,
@@ -183,7 +182,7 @@ const slåSammenPinDataOmLikDato = (pinData: PinData[]): PinData[] =>
   }, []);
 
 const lagPinData = (tidslinjeTider: TidslinjeTimes, fomDato: dayjs.Dayjs): PinData[] => {
-  const pinData = [] as PinData[];
+  const pinData = new Array<PinData>();
 
   if (tidslinjeTider.dodSoker) {
     pinData.push({
@@ -277,7 +276,7 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
 };
 
 const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
-  const kodeverk = alleKodeverk[KodeverkType.RELASJONSROLLE_TYPE];
+  const kodeverk = alleKodeverk['RelasjonsRolleType'];
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
   return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
 };
@@ -310,25 +309,18 @@ export const UttakTidslinje = ({
 }: TidslinjeProps) => {
   const intl = useIntl();
 
-  const radIder = useMemo(() => lagGruppeIder(uttakPerioder), [uttakPerioder]);
-  const perioder = useMemo(
-    () => formatPaneler(tilknyttetStortinget, uttakPerioder),
-    [tilknyttetStortinget, uttakPerioder],
-  );
+  const radIder = lagGruppeIder(uttakPerioder);
+  const perioder = formatPaneler(tilknyttetStortinget, uttakPerioder);
 
   const sorterteUttaksperioder = [...uttakPerioder].sort(sortByDate);
 
-  const valgtPeriode = useMemo(
-    () =>
-      selectedPeriod
-        ? {
-            fom: selectedPeriod.periode.fom,
-            tom: selectedPeriod.periode.tom,
-            id: selectedPeriod.id,
-          }
-        : undefined,
-    [selectedPeriod],
-  );
+  const valgtPeriode = selectedPeriod
+    ? {
+        fom: selectedPeriod.periode.fom,
+        tom: selectedPeriod.periode.tom,
+        id: selectedPeriod.id,
+      }
+    : undefined;
 
   const originalFomDato = dayjs(sorterteUttaksperioder[0].periode.fom);
   const originalTomDato = dayjs(sorterteUttaksperioder[sorterteUttaksperioder.length - 1].periode.tom);

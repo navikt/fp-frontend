@@ -1,6 +1,6 @@
 import React, { createContext, type PropsWithChildren, useContext, useEffect, useMemo, useState } from 'react';
 
-export const DirtyFormContext = createContext<{
+const DirtyFormContext = createContext<{
   isDirty: boolean;
   setDirty: React.Dispatch<React.SetStateAction<boolean>>;
 }>({ isDirty: false, setDirty: () => undefined });

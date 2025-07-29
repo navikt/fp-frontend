@@ -12,15 +12,12 @@ interface Props {
   readOnly: boolean;
   onSubmitUfullstendigsoknad: () => Promise<void>;
   submitting: boolean;
+  erEndringssøknad: boolean;
 }
 
-export const LagreSoknadPapirsoknadIndex = ({ readOnly, onSubmitUfullstendigsoknad, submitting }: Props) => (
+export const LagreSoknadPapirsoknadIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <LagreSoknadPanel
-      readOnly={readOnly}
-      onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
-      submitting={submitting}
-    />
+    <LagreSoknadPanel {...props} />
   </RawIntlProvider>
 );
 

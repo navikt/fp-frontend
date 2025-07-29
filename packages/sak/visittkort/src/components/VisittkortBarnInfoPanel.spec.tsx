@@ -23,7 +23,7 @@ const Component = ({
   </RawIntlProvider>
 );
 
-describe('<VisittkortBarnInfoPanel>', () => {
+describe('VisittkortBarnInfoPanel', () => {
   it('skal vise panel for fødsel av ett barn', async () => {
     render(<Component antallBarn={1} />);
     expect(await screen.findByText(/Født 01.01.2024 \([^)]+\)/)).toBeInTheDocument();

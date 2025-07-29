@@ -7,6 +7,7 @@ import {
   AdresseType,
   AksjonspunktKode,
   AksjonspunktStatus,
+  Landkode,
   RelasjonsRolleType,
   SivilstandType,
 } from '@navikt/fp-kodeverk';
@@ -21,10 +22,6 @@ import {
 } from '@navikt/fp-types';
 
 import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
-
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const adresse1 = {
   fom: '2023-01-01',
@@ -80,7 +77,7 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
   søknad: {
     søkerHarAleneomsorg: Verdi.NEI,
     annenpartIdent: 'ArubaFnr123',
-    annenpartBostedsland: 'ABW',
+    annenpartBostedsland: Landkode.ARUBA,
     annenpartRettighet: {
       harRettNorge: Verdi.JA,
       harOppholdEØS: Verdi.IKKE_RELEVANT,

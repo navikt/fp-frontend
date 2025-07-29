@@ -1,23 +1,24 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse } from 'msw';
 
+import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
+import { initFetchFpsak } from '../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
 
-const getHref = (rel: string) => wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href);
+const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const FAGSAK_1 = {
   saksnummer: '12345',
-  fagsakYtelseType: 'ES',
-  status: 'OPPR',
+  fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+  status: FagsakStatus.OPPRETTET,
   aktørId: '1',
   barnFødt: '2019-10-10',
   opprettet: '',

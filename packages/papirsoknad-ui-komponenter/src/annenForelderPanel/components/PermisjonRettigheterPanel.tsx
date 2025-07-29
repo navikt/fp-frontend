@@ -15,7 +15,7 @@ interface Props {
 export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<AnnenForelderFormValues>();
+  const { watch, control } = useFormContext<AnnenForelderFormValues>();
   const sokerHarAleneomsorg = watch(`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`);
   const annenForelderHarRett = watch(`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`);
   const annenForelderRettEØS = watch(`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`);
@@ -24,12 +24,14 @@ export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
     <VStack gap="4">
       <TrueFalseInput
         name={`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`}
+        control={control}
         label={intl.formatMessage({ id: 'Registrering.Permisjon.SøkerHarAleneomsorg' })}
         readOnly={readOnly}
       />
       {sokerHarAleneomsorg === false && (
         <TrueFalseInput
           name={`${ANNEN_FORELDER_NAME_PREFIX}.denAndreForelderenHarRettPaForeldrepenger`}
+          control={control}
           label={intl.formatMessage({ id: 'Registrering.Permisjon.HarRettPaForeldrepenger' })}
           readOnly={readOnly}
         />
@@ -37,6 +39,7 @@ export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
       {sokerHarAleneomsorg === false && annenForelderHarRett === false && (
         <TrueFalseInput
           name={`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`}
+          control={control}
           label={intl.formatMessage({ id: 'Registrering.Permisjon.AnnenForelderRettEØS' })}
           readOnly={readOnly}
         />
@@ -47,6 +50,7 @@ export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
         annenForelderRettEØS === false && (
           <TrueFalseInput
             name={`${ANNEN_FORELDER_NAME_PREFIX}.morMottarUføretrygd`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.MorUføretrygd' })}
             readOnly={readOnly}
           />

@@ -6,6 +6,7 @@ import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import type { AlleKodeverk } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
@@ -85,7 +86,7 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
 };
 
 PermisjonPanel.transformValues = (values: PermisjonFormValues) => {
-  const permisjonValues = values[TIDSROM_PERMISJON_FORM_NAME_PREFIX]!;
+  const permisjonValues = notEmpty(values[TIDSROM_PERMISJON_FORM_NAME_PREFIX]);
   const newValues = permisjonValues;
   const permisjonsdata = permisjonValues[PERMISJON_PERIODE_FIELD_ARRAY_NAME];
   if (values.tidsromPermisjon?.fulltUttak && permisjonsdata) {

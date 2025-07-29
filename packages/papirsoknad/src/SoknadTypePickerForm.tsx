@@ -1,22 +1,21 @@
-import { useCallback } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { FagsakYtelseType, FamilieHendelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
-export const SØKNAD_TYPER = [FamilieHendelseType.ADOPSJON, FamilieHendelseType.FODSEL];
+const SØKNAD_TYPER = [FamilieHendelseType.ADOPSJON, FamilieHendelseType.FODSEL];
 
-interface FormValues {
-  fagsakYtelseType?: string;
-  familieHendelseType?: string;
-  foreldreType?: string;
-}
+type FormValues = {
+  fagsakYtelseType: string;
+  familieHendelseType: string;
+  foreldreType: string;
+};
 
 interface Props {
   setSoknadData: (soknadData: SoknadData) => void;
@@ -40,18 +39,18 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
 
   const selectedFagsakYtelseType = formMethods.watch('fagsakYtelseType');
 
-  const onSubmit = useCallback(
-    (values: FormValues) =>
-      setSoknadData(new SoknadData(values.fagsakYtelseType!, values.familieHendelseType!, values.foreldreType!)),
-    [setSoknadData],
-  );
-
-  const fagsakYtelseTyper = alleKodeverk[KodeverkType.FAGSAK_YTELSE];
-  const familieHendelseTyper = alleKodeverk[KodeverkType.FAMILIE_HENDELSE_TYPE];
-  const foreldreTyper = alleKodeverk[KodeverkType.FORELDRE_TYPE];
+  const fagsakYtelseTyper = alleKodeverk['FagsakYtelseType'];
+  const familieHendelseTyper = alleKodeverk['FamilieHendelseType'];
+  const foreldreTyper = alleKodeverk['ForeldreType'];
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit}>
+    <RhfForm
+      formMethods={formMethods}
+      onSubmit={(values: FormValues) => {
+        setSoknadData(new SoknadData(values.fagsakYtelseType, values.familieHendelseType, values.foreldreType));
+        formMethods.reset(values);
+      }}
+    >
       <Box background="bg-subtle" borderColor="border-default" borderWidth="1">
         <VStack gap="4" padding="5">
           <Heading size="small">
@@ -59,9 +58,10 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
           </Heading>
 
           <HStack gap="20">
-            <RadioGroupPanel
-              label={<FormattedMessage id="Registrering.Omsoknaden.soknadstype" />}
+            <RhfRadioGroup
               name="fagsakYtelseType"
+              control={formMethods.control}
+              label={<FormattedMessage id="Registrering.Omsoknaden.soknadstype" />}
               validate={[required]}
               radios={fagsakYtelseTyper.map(fyt => ({
                 label: fyt.navn,
@@ -71,8 +71,9 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
             />
 
             {selectedFagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && (
-              <RadioGroupPanel
+              <RhfRadioGroup
                 name="familieHendelseType"
+                control={formMethods.control}
                 label={<FormattedMessage id="Registrering.Omsoknaden.Tema" />}
                 validate={[required]}
                 radios={familieHendelseTyper
@@ -84,8 +85,9 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
               />
             )}
 
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="foreldreType"
+              control={formMethods.control}
               label={<FormattedMessage id="Registrering.Omsoknaden.Soker" />}
               validate={[required]}
               radios={foreldreTyper.map(ft => ({
@@ -96,12 +98,12 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
           </HStack>
 
           <Box style={{ textAlign: 'end' }}>
-            <Button type="submit" disabled={formMethods.formState.isSubmitting || formMethods.formState.isSubmitted}>
+            <Button type="submit" disabled={!formMethods.formState.isDirty}>
               <FormattedMessage id="Registrering.Omsoknaden.VisSkjema" />
             </Button>
           </Box>
         </VStack>
       </Box>
-    </Form>
+    </RhfForm>
   );
 };

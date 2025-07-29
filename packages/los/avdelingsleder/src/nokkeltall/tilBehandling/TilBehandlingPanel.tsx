@@ -2,14 +2,14 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { FagsakYtelseType, KodeverkLosType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverPerDatoOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
@@ -20,8 +20,8 @@ import { type OppgaveForDatoGraf, TilBehandlingGraf } from './TilBehandlingGraf'
 dayjs.extend(isSameOrAfter);
 dayjs.extend(isSameOrBefore);
 
-export const ALLE_YTELSETYPER_VALGT = 'ALLE';
-export const UKE_2 = '2';
+const ALLE_YTELSETYPER_VALGT = 'ALLE';
+const UKE_2 = '2';
 
 type FormValues = {
   ukevalg: string;
@@ -42,8 +42,8 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
 
   const { data: oppgaverPerDato } = useQuery(oppgaverPerDatoOptions(valgtAvdelingEnhet));
 
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const behandlingTyper = useLosKodeverk('BehandlingType');
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
   const stringFromStorage = getValueFromLocalStorage(formName);
 
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
@@ -55,15 +55,16 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
   const values = formMethods.watch();
 
   return (
-    <Form<FormValues> formMethods={formMethods}>
+    <RhfForm<FormValues> formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="4">
         <Label size="small">
           <FormattedMessage id="TilBehandlingPanel.TilBehandling" />
         </Label>
         <HStack gap="4">
-          <SelectField
+          <RhfSelect
             name="ukevalg"
+            control={formMethods.control}
             label=""
             selectValues={uker.map(u => (
               <option key={u.kode} value={u.kode}>
@@ -71,8 +72,9 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
               </option>
             ))}
           />
-          <RadioGroupPanel
+          <RhfRadioGroup
             name="ytelseType"
+            control={formMethods.control}
             isHorizontal
             radios={[
               {
@@ -111,7 +113,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
           }
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
 
@@ -134,7 +136,10 @@ const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaveForDato, ukevalg: stri
   return dayjs(oppgaveForAvdeling.opprettetDato).isSameOrAfter(toUkerSiden);
 };
 
-const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string): string => {
+const finnFagsakYtelseTypeNavn = (
+  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
+  valgtFagsakYtelseType: string,
+): string => {
   const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
   return type ? type.navn : '';
 };

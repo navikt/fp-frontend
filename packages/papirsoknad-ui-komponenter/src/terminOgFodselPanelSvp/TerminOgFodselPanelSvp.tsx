@@ -1,7 +1,7 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { Datepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -12,20 +12,19 @@ import {
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { ErBarnetFodt } from '../terminOgFodselPanel/components/ErBarnetFodt';
 import {
   maxFodselsdato,
   maxTermindato,
   minFodselsdato,
   minTermindato,
   terminErRundtFodselsdato,
-} from '../terminOgFodselPanel/validator';
+} from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-export type FormValues = {
+type FormValues = {
   termindato?: string;
   foedselsDato?: string;
   erBarnetFodt?: boolean;
@@ -44,10 +43,10 @@ const validateTermin = (getValues: UseFormGetValues<FormValues>) => (termindato:
 /*
  * TerminOgFodselPanelSvp
  *
- * Form som brukes for registrere termin og fødsel i papirsøknad.
+ * RhfForm som brukes for registrere termin og fødsel i papirsøknad.
  */
 export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
-  const { getValues, watch } = useFormContext<FormValues>();
+  const { getValues, watch, control } = useFormContext<FormValues>();
 
   const erBarnetFodt = watch('erBarnetFodt');
 
@@ -55,10 +54,28 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
     <BorderBox>
       <VStack gap="4">
         <Heading size="small">{intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}</Heading>
-        <ErBarnetFodt readOnly={readOnly} />
+        <RhfRadioGroup
+          name="erBarnetFodt"
+          control={control}
+          label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
+          validate={[required]}
+          isReadOnly={readOnly}
+          isTrueOrFalseSelection
+          radios={[
+            {
+              label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErFodt' }),
+              value: 'true',
+            },
+            {
+              label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErIkkeFodt' }),
+              value: 'false',
+            },
+          ]}
+        />
         {erBarnetFodt && (
-          <Datepicker
+          <RhfDatepicker
             name="foedselsDato"
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Fodselsdato' })}
             isReadOnly={readOnly}
             fromDate={minFodselsdato().toDate()}
@@ -66,8 +83,9 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
             validate={[required, hasValidDate, dateBeforeOrEqualToToday, dateAfterOrEqual(minFodselsdato())]}
           />
         )}
-        <Datepicker
+        <RhfDatepicker
           name="termindato"
+          control={control}
           label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Termindato' })}
           isReadOnly={readOnly}
           fromDate={minTermindato().toDate()}

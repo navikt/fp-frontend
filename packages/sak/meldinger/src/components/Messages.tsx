@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
-import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
+import { DokumentMalType, FagsakYtelseType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
 
@@ -23,66 +23,6 @@ export type FormValues = {
   arsakskode?: string;
 };
 
-export type Template = {
-  kode: string;
-  navn: string;
-  tilgjengelig: boolean;
-};
-
-const getFritekstMessage = (brevmalkode?: string): string =>
-  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER || brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER
-    ? 'Messages.DocumentList'
-    : 'Messages.Fritekst';
-
-// TODO (TOR) Bør erstattast av ein markør fra backend
-const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
-  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
-  brevmalkode === DokumentMalType.FRITEKST ||
-  brevmalkode === DokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
-  brevmalkode === DokumentMalType.VARSEL_OM_TILBAKEKREVING ||
-  brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||
-  (brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && arsakskode === UgunstAarsakType.ANNET);
-
-const getfiltrerteRevurderingVarslingArsaker = (
-  revurderingVarslingArsaker: KodeverkMedNavn[],
-  fagsakYtelseType: string,
-): KodeverkMedNavn[] => {
-  if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
-    return revurderingVarslingArsaker.filter(
-      arsak =>
-        arsak.kode === UgunstAarsakType.BARN_IKKE_REGISTRERT_FOLKEREGISTER || arsak.kode === UgunstAarsakType.ANNET,
-    );
-  }
-  if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
-    return revurderingVarslingArsaker.filter(
-      arsak =>
-        arsak.kode !== UgunstAarsakType.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
-        arsak.kode !== UgunstAarsakType.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
-    );
-  }
-  return revurderingVarslingArsaker;
-};
-
-const buildInitalValues = (behandling: BehandlingAppKontekst): FormValues => {
-  const initialValues = {
-    brevmalkode: behandling.brevmaler[0]?.kode ?? undefined,
-    fritekst: '',
-  };
-
-  if (behandling.ugunstAksjonspunkt) {
-    return { ...initialValues, brevmalkode: DokumentMalType.VARSEL_OM_REVURDERING };
-  }
-  return { ...initialValues };
-};
-
-const transformValues = (values: FormValues) => {
-  const newValues = values;
-  if (values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && newValues.arsakskode !== UgunstAarsakType.ANNET) {
-    newValues.fritekst = ' ';
-  }
-  return newValues;
-};
-
 export type ForhåndsvisBrevParams = {
   brevmalkode: string;
   fritekst?: string;
@@ -93,7 +33,7 @@ interface Props {
   behandling: BehandlingAppKontekst;
   submitCallback: (values: FormValues) => void;
   forhåndsvisBrev: (params: ForhåndsvisBrevParams) => void;
-  revurderingVarslingArsak: KodeverkMedNavn[];
+  revurderingVarslingArsak: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[];
   fagsakYtelseType: string;
   kanVeilede: boolean;
   meldingFormData?: FormValues;
@@ -121,7 +61,7 @@ export const Messages = ({
   const intl = useIntl();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: meldingFormData ?? buildInitalValues(behandling),
+    defaultValues: meldingFormData ?? buildInitialValues(behandling),
   });
 
   const brevmalkode = formMethods.watch('brevmalkode');
@@ -137,7 +77,7 @@ export const Messages = ({
     return null;
   }
 
-  const { formState } = formMethods;
+  const { formState, control } = formMethods;
 
   const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
     if (brevmalkode && fritekst) {
@@ -156,14 +96,15 @@ export const Messages = ({
   const erVarselOmRevurdering = brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMeldingFormData}
     >
       <VStack gap="4">
-        <SelectField
+        <RhfSelect
           name="brevmalkode"
+          control={control}
           label={intl.formatMessage({ id: 'Messages.Template' })}
           validate={[required]}
           selectValues={behandling.brevmaler.map(mal => (
@@ -174,8 +115,9 @@ export const Messages = ({
           className={styles.bredde}
         />
         {erVarselOmRevurdering && (
-          <SelectField
+          <RhfSelect
             name="arsakskode"
+            control={control}
             label={intl.formatMessage({ id: 'Messages.Årsak' })}
             validate={[required]}
             selectValues={filtrerteRevurderingVarslingArsaker.map(cause => (
@@ -187,8 +129,9 @@ export const Messages = ({
           />
         )}
         {showFritekst(brevmalkode, arsakskode) && (
-          <TextAreaField
+          <RhfTextarea
             name="fritekst"
+            control={control}
             label={intl.formatMessage({ id: getFritekstMessage(brevmalkode) })}
             validate={[required, erVarselOmRevurdering ? maxLength10000 : maxLength4000, minLength3, hasValidText]}
             maxLength={erVarselOmRevurdering ? 10000 : 4000}
@@ -214,6 +157,64 @@ export const Messages = ({
           </Button>
         </HStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
+};
+
+const getFritekstMessage = (brevmalkode?: string): string =>
+  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER || brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER
+    ? 'Messages.DocumentList'
+    : 'Messages.Fritekst';
+
+// TODO (TOR) Bør erstattast av ein markør fra backend
+const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
+  brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
+  brevmalkode === DokumentMalType.FRITEKST ||
+  brevmalkode === DokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
+  brevmalkode === DokumentMalType.VARSEL_OM_TILBAKEKREVING ||
+  brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||
+  (brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING && arsakskode === RevurderingVarslingÅrsak.ANNET);
+
+const getfiltrerteRevurderingVarslingArsaker = (
+  revurderingVarslingArsaker: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[],
+  fagsakYtelseType: string,
+): KodeverkMedNavn<'RevurderingVarslingÅrsak'>[] => {
+  if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
+    return revurderingVarslingArsaker.filter(
+      arsak =>
+        arsak.kode === RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER ||
+        arsak.kode === RevurderingVarslingÅrsak.ANNET,
+    );
+  }
+  if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
+    return revurderingVarslingArsaker.filter(
+      arsak =>
+        arsak.kode !== RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
+        arsak.kode !== RevurderingVarslingÅrsak.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
+    );
+  }
+  return revurderingVarslingArsaker;
+};
+
+const buildInitialValues = (behandling: BehandlingAppKontekst): FormValues => {
+  const initialValues = {
+    brevmalkode: behandling.brevmaler[0]?.kode ?? undefined,
+    fritekst: '',
+  };
+
+  if (behandling.ugunstAksjonspunkt) {
+    return { ...initialValues, brevmalkode: DokumentMalType.VARSEL_OM_REVURDERING };
+  }
+  return { ...initialValues };
+};
+
+const transformValues = (values: FormValues) => {
+  const newValues = values;
+  if (
+    values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING &&
+    newValues.arsakskode !== RevurderingVarslingÅrsak.ANNET
+  ) {
+    newValues.fritekst = ' ';
+  }
+  return newValues;
 };

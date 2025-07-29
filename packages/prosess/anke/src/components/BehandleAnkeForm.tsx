@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
+import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -22,8 +22,8 @@ const formatBehandlingId = (
   vedtak?: string,
 ): string => {
   const info = behandlinger.find(b => b.uuid === vedtak);
-  const behandlingTyper = alleKodeverk[KodeverkType.BEHANDLING_TYPE];
-  const behandlingStatuser = alleKodeverk[KodeverkType.BEHANDLING_STATUS];
+  const behandlingTyper = alleKodeverk['BehandlingType'];
+  const behandlingStatuser = alleKodeverk['BehandlingStatus'];
 
   return info
     ? `${dateFormat(info.opprettet)} - ${behandlingTyper.find(bt => bt.kode === info.type)?.navn} ` +
@@ -45,7 +45,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
 
   const { alleKodeverk } = usePanelDataContext();
 
-  const ankeOmgorArsaker = alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK];
+  const ankeOmgorArsaker = alleKodeverk['AnkeOmgjørÅrsak'];
 
   const behandlesKabal = ankeVurdering?.underBehandlingKabal || false;
   const behandletKabal = ankeVurdering?.behandletAvKabal || false;

@@ -10,13 +10,13 @@ import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagret
 
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
-type FormValues = {
-  erKlagerPart?: boolean;
-  erFristOverholdt?: boolean;
-  erKonkret?: boolean;
-  erSignert?: boolean;
-  begrunnelse?: string;
-  vedtak?: string;
+export type FormValues = {
+  erKlagerPart: boolean;
+  erFristOverholdt: boolean;
+  erKonkret: boolean;
+  erSignert: boolean;
+  begrunnelse: string;
+  vedtak: string;
   fritekstTilBrev?: string;
 };
 
@@ -68,14 +68,14 @@ const transformValues = (
   aksjonspunktCode: string,
 ): FormkravMellomlagretDataType => ({
   kode: aksjonspunktCode,
-  begrunnelse: values.begrunnelse!,
+  begrunnelse: values.begrunnelse,
   behandlingUuid,
-  erKlagerPart: values.erKlagerPart!,
-  erFristOverholdt: values.erFristOverholdt!,
-  erKonkret: values.erKonkret!,
-  erSignert: values.erSignert!,
-  erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak!),
-  klageTilbakekreving: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak!),
+  erKlagerPart: values.erKlagerPart,
+  erFristOverholdt: values.erFristOverholdt,
+  erKonkret: values.erKonkret,
+  erSignert: values.erSignert,
+  erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
+  klageTilbakekreving: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
   paKlagdBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
   fritekstTilBrev: skalLagreFritekstfelt(values) ? values.fritekstTilBrev : undefined,
 });

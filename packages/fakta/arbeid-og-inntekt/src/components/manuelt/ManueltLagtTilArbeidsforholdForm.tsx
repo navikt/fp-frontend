@@ -1,10 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { TrashFillIcon } from '@navikt/aksel-icons';
 import { Button, Heading, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, InputField, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -31,7 +31,7 @@ const maxLength1500 = maxLength(1500);
 const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
-export type FormValues = {
+type FormValues = {
   arbeidsgiverNavn?: string;
   fom?: string;
   tom?: string;
@@ -65,16 +65,13 @@ export const ManueltLagtTilArbeidsforholdForm = ({
   const intl = useIntl();
   const [visSletteDialog, setVisSletteDialog] = useState(false);
 
-  const defaultValues = useMemo<FormValues>(
-    () => ({
-      fom: radData?.avklaring?.fom,
-      tom: radData?.avklaring?.tom,
-      stillingsprosent: radData?.avklaring?.stillingsprosent,
-      begrunnelse: radData?.avklaring?.begrunnelse,
-      arbeidsgiverNavn: radData?.avklaring?.arbeidsgiverNavn,
-    }),
-    [radData],
-  );
+  const defaultValues = {
+    fom: radData?.avklaring?.fom,
+    tom: radData?.avklaring?.tom,
+    stillingsprosent: radData?.avklaring?.stillingsprosent,
+    begrunnelse: radData?.avklaring?.begrunnelse,
+    arbeidsgiverNavn: radData?.avklaring?.arbeidsgiverNavn,
+  };
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -126,33 +123,37 @@ export const ManueltLagtTilArbeidsforholdForm = ({
           <FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" />
         </Heading>
       )}
-      <Form formMethods={formMethods} onSubmit={lagreArbeidsforhold}>
+      <RhfForm formMethods={formMethods} onSubmit={lagreArbeidsforhold}>
         <VStack gap="6">
           <HStack gap="4">
             {erOverstyrt && (
               <>
-                <InputField
+                <RhfTextField
                   name="arbeidsgiverNavn"
+                  control={formMethods.control}
                   label={<FormattedMessage id="LeggTilArbeidsforholdForm.Arbeidsgiver" />}
                   validate={[required]}
                   readOnly={isReadOnly || !erOverstyrt}
                 />
-                <Datepicker
+                <RhfDatepicker
                   name="fom"
+                  control={formMethods.control}
                   label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeFra" />}
                   validate={[required, hasValidDate]}
                   isReadOnly={isReadOnly || !erOverstyrt}
                 />
-                <Datepicker
+                <RhfDatepicker
                   name="tom"
+                  control={formMethods.control}
                   label={<FormattedMessage id="LeggTilArbeidsforholdForm.PeriodeTil" />}
                   validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                   isReadOnly={isReadOnly || !erOverstyrt}
                 />
               </>
             )}
-            <InputField
+            <RhfTextField
               name="stillingsprosent"
+              control={formMethods.control}
               label={<FormattedMessage id="LeggTilArbeidsforholdForm.Stillingsprosent" />}
               parse={value => {
                 const parsedValue = parseInt(value.toString(), 10);
@@ -163,9 +164,10 @@ export const ManueltLagtTilArbeidsforholdForm = ({
               maxLength={3}
             />
           </HStack>
-          <TextAreaField
-            label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
+            label={<FormattedMessage id="LeggTilArbeidsforholdForm.Begrunn" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly || !erOverstyrt}
@@ -209,7 +211,7 @@ export const ManueltLagtTilArbeidsforholdForm = ({
             </HStack>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
       {visSletteDialog && (
         <OkAvbrytModal
           text={intl.formatMessage({ id: 'NyttArbeidsforholdForm.VilDuSlette' })}

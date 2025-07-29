@@ -1,8 +1,8 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
+import { action } from 'storybook/actions';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { DokumentMalType, FagsakYtelseType, UgunstAarsakType } from '@navikt/fp-kodeverk';
+import { DokumentMalType, FagsakYtelseType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
@@ -35,12 +35,12 @@ const TEMPLATES = [
 
 const REVURDERING_VARSLING_ARSAK = [
   {
-    kode: UgunstAarsakType.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
+    kode: RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
     navn: 'Barn ikke registrert i folkeregisteret',
     kodeverk: 'UGUNST',
   },
   {
-    kode: UgunstAarsakType.ANNET,
+    kode: RevurderingVarslingÅrsak.ANNET,
     navn: 'Annet',
     kodeverk: 'UGUNST',
   },

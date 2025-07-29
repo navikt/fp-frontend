@@ -7,7 +7,7 @@ import * as stories from './KlagevurderingProsessIndex.stories';
 const { KlagevurderingMedAksjonspunktNfp, MedholdIKlageNk, StadfestKlageNk, HjemsendtIKlageNk, OpphevIKlageNk } =
   composeStories(stories);
 
-describe('<KlagevurderingProsessIndex>', () => {
+describe('KlagevurderingProsessIndex', () => {
   it('skal fylle ut, mellomlagre, forhåndsvise og så bekrefte aksjonspunkt for NFP', async () => {
     const lagre = vi.fn();
     const mellomlagre = vi.fn();

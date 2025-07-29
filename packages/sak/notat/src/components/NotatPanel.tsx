@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, Chat, HStack, VStack } from '@navikt/ds-react';
-import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -35,19 +35,13 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
   const intl = useIntl();
   const formMethods = useForm<FormValues>();
 
-  const sorterteNotater = useMemo(
-    () => [...notater].sort((a, b) => dayjs(a.opprettetTidspunkt).diff(dayjs(b.opprettetTidspunkt))),
-    [notater],
-  );
+  const sorterteNotater = [...notater].sort((a, b) => dayjs(a.opprettetTidspunkt).diff(dayjs(b.opprettetTidspunkt)));
 
-  const lagre = useCallback(
-    (values: FormValues) => {
-      lagreNotat({ saksnummer, notat: values.beskrivelse });
+  const lagre = (values: FormValues) => {
+    lagreNotat({ saksnummer, notat: values.beskrivelse });
 
-      formMethods.reset();
-    },
-    [notater],
-  );
+    formMethods.reset();
+  };
 
   const bottomEl = useRef<HTMLDivElement | null>(null);
   const [top, setTop] = useState<number>();
@@ -74,7 +68,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
   }, [sorterteNotater]);
 
   // Denne er kun her for å få komponent-repaint ved scrolling
-  const scrollReset = useCallback(() => setTop(0), []);
+  const scrollReset = () => setTop(0);
   useEffect(() => {
     window.addEventListener('scroll', scrollReset);
     return () => {
@@ -125,10 +119,11 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
       )}
       {kanSaksbehandle && (
         <div className={styles.form}>
-          <Form formMethods={formMethods} onSubmit={lagre}>
+          <RhfForm formMethods={formMethods} onSubmit={lagre}>
             <VStack gap="4">
-              <TextAreaField
+              <RhfTextarea
                 name="beskrivelse"
+                control={formMethods.control}
                 label=""
                 maxLength={1000}
                 validate={[required, maxLength1000, hasValidText]}
@@ -142,7 +137,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
                 </Button>
               </HStack>
             </VStack>
-          </Form>
+          </RhfForm>
         </div>
       )}
       {!kanSaksbehandle && (

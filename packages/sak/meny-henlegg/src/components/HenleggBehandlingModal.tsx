@@ -3,12 +3,18 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, Label, Link, Modal, VStack } from '@navikt/ds-react';
-import { Form, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
-import { BehandlingResultatType, BehandlingType, DokumentMalType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import {
+  BehandlingResultatType,
+  BehandlingResultatTypeTilbakekreving,
+  BehandlingType,
+  DokumentMalType,
+  FagsakYtelseType,
+} from '@navikt/fp-kodeverk';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import styles from './henleggBehandlingModal.module.css';
 
@@ -20,48 +26,6 @@ export type ForhåndsvisHenleggParams = {
   fritekst?: string;
 };
 
-const forhåndsvisHenleggBehandlingDoc =
-  (forhåndsvisHenleggingsbrev: (data: ForhåndsvisHenleggParams) => void, behandlingUuid: string, fritekst?: string) =>
-  (e: React.MouseEvent | React.KeyboardEvent): void => {
-    forhåndsvisHenleggingsbrev({
-      behandlingUuid,
-      dokumentMal: DokumentMalType.INFO_OM_HENLEGGELSE,
-      fritekst,
-    });
-    e.preventDefault();
-  };
-
-const showHenleggelseFritekst = (behandlingTypeKode: string, årsakKode?: string): boolean =>
-  BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode &&
-  BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === årsakKode;
-
-const disableHovedKnapp = (
-  behandlingTypeKode: string,
-  årsakKode?: string,
-  begrunnelse?: string,
-  fritekst?: string,
-): boolean => {
-  if (showHenleggelseFritekst(behandlingTypeKode, årsakKode)) {
-    return !(årsakKode && begrunnelse && fritekst);
-  }
-  return !(årsakKode && begrunnelse);
-};
-
-const getShowLink = (behandlingType: string, arsakKode?: string, fritekst?: string): boolean => {
-  if (behandlingType === BehandlingType.TILBAKEKREVING) {
-    return BehandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
-  }
-  if (behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
-    return BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
-  }
-
-  return [
-    BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
-    BehandlingResultatType.HENLAGT_KLAGE_TRUKKET,
-    BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-  ].some(brt => brt === arsakKode);
-};
-
 const henleggArsakerPerBehandlingType = {
   [BehandlingType.KLAGE]: [BehandlingResultatType.HENLAGT_KLAGE_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
   [BehandlingType.ANKE]: [BehandlingResultatType.HENLAGT_ANKE_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
@@ -69,10 +33,10 @@ const henleggArsakerPerBehandlingType = {
     BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
     BehandlingResultatType.HENLAGT_FEILOPPRETTET,
   ],
-  [BehandlingType.TILBAKEKREVING]: [BehandlingResultatType.HENLAGT_FEILOPPRETTET],
+  [BehandlingType.TILBAKEKREVING]: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
   [BehandlingType.TILBAKEKREVING_REVURDERING]: [
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV,
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV,
+    BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_MED_BREV,
+    BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_UTEN_BREV,
   ],
   [BehandlingType.REVURDERING]: [
     BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
@@ -86,24 +50,6 @@ const henleggArsakerPerBehandlingType = {
   ],
 };
 
-export const getHenleggArsaker = (
-  behandlingResultatTyper: KodeverkMedNavn[],
-  behandlingType: string,
-  ytelseType: string,
-): KodeverkMedNavn[] => {
-  const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType as BehandlingType];
-  return typerForBehandlingType
-    .filter(
-      type =>
-        ytelseType !== FagsakYtelseType.ENGANGSSTONAD ||
-        (ytelseType === FagsakYtelseType.ENGANGSSTONAD && type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER),
-    )
-    .flatMap(type => {
-      const typer = behandlingResultatTyper.find(brt => brt.kode === type);
-      return typer ? [typer] : [];
-    });
-};
-
 export type FormValues = {
   årsakKode?: string;
   begrunnelse?: string;
@@ -115,9 +61,11 @@ interface Props {
   cancelEvent: () => void;
   forhandsvisHenleggBehandling: (data: ForhåndsvisHenleggParams) => void;
   behandlingUuid: string;
-  ytelseType: string;
-  behandlingResultatTyper: KodeverkMedNavn[];
-  behandlingType: string;
+  ytelseType: FagsakYtelseType;
+  behandlingResultatTyper:
+    | KodeverkMedNavn<'BehandlingResultatType'>[]
+    | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[];
+  behandlingType: BehandlingType;
 }
 
 /**
@@ -145,10 +93,10 @@ export const HenleggBehandlingModal = ({
 
   const showLink = getShowLink(behandlingType, årsakKode, fritekst);
 
-  const henleggArsaker = getHenleggArsaker(behandlingResultatTyper, behandlingType, ytelseType);
+  const henleggArsaker = getHenleggÅrsaker(behandlingResultatTyper, behandlingType, ytelseType);
 
   return (
-    <Form formMethods={formMethods} onSubmit={handleSubmit}>
+    <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
       <Modal
         className={styles.modal}
         open
@@ -162,8 +110,9 @@ export const HenleggBehandlingModal = ({
         </Modal.Header>
         <Modal.Body>
           <VStack gap="4">
-            <SelectField
+            <RhfSelect
               name="årsakKode"
+              control={formMethods.control}
               className={styles.selectWidth}
               label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
               validate={[required]}
@@ -173,16 +122,18 @@ export const HenleggBehandlingModal = ({
                 </option>
               ))}
             />
-            <TextAreaField
+            <RhfTextarea
               name="begrunnelse"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'HenleggBehandlingModal.BegrunnelseField' })}
               validate={[required, maxLength1500, hasValidText]}
               maxLength={1500}
             />
             {showHenleggelseFritekst(behandlingType, årsakKode) && (
               <div className={styles.fritekstTilBrevTextArea}>
-                <TextAreaField
+                <RhfTextarea
                   name="fritekst"
+                  control={formMethods.control}
                   label={intl.formatMessage({ id: 'HenleggBehandlingModal.Fritekst' })}
                   validate={[required, hasValidText]}
                   maxLength={2000}
@@ -218,6 +169,68 @@ export const HenleggBehandlingModal = ({
           </Button>
         </Modal.Footer>
       </Modal>
-    </Form>
+    </RhfForm>
   );
+};
+
+const forhåndsvisHenleggBehandlingDoc =
+  (forhåndsvisHenleggingsbrev: (data: ForhåndsvisHenleggParams) => void, behandlingUuid: string, fritekst?: string) =>
+  (e: React.MouseEvent | React.KeyboardEvent): void => {
+    forhåndsvisHenleggingsbrev({
+      behandlingUuid,
+      dokumentMal: DokumentMalType.INFO_OM_HENLEGGELSE,
+      fritekst,
+    });
+    e.preventDefault();
+  };
+
+const showHenleggelseFritekst = (behandlingTypeKode: string, årsakKode?: string): boolean =>
+  BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode &&
+  BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === årsakKode;
+
+const disableHovedKnapp = (
+  behandlingTypeKode: BehandlingType,
+  årsakKode?: string,
+  begrunnelse?: string,
+  fritekst?: string,
+): boolean => {
+  if (showHenleggelseFritekst(behandlingTypeKode, årsakKode)) {
+    return !(årsakKode && begrunnelse && fritekst);
+  }
+  return !(årsakKode && begrunnelse);
+};
+
+const getShowLink = (behandlingType: BehandlingType, arsakKode?: string, fritekst?: string): boolean => {
+  if (behandlingType === BehandlingType.TILBAKEKREVING) {
+    return BehandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
+  }
+  if (behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
+    return BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
+  }
+
+  return [
+    BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
+    BehandlingResultatType.HENLAGT_KLAGE_TRUKKET,
+    BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
+  ].some(brt => brt === arsakKode);
+};
+
+const getHenleggÅrsaker = (
+  behandlingResultatTyper:
+    | KodeverkMedNavn<'BehandlingResultatType'>[]
+    | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[],
+  behandlingType: BehandlingType,
+  ytelseType: FagsakYtelseType,
+): (KodeverkMedNavn<'BehandlingResultatType'> | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>)[] => {
+  const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
+  return typerForBehandlingType
+    .filter(
+      type =>
+        ytelseType !== FagsakYtelseType.ENGANGSSTONAD ||
+        (ytelseType === FagsakYtelseType.ENGANGSSTONAD && type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER),
+    )
+    .flatMap(type => {
+      const typer = behandlingResultatTyper.find(brt => brt.kode === type);
+      return typer ? [typer] : [];
+    });
 };

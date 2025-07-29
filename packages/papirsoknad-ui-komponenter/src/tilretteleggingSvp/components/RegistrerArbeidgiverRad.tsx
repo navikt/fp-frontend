@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { ChevronDownIcon, ChevronUpIcon, TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, HStack, Table, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasNoWhiteSpace, hasValidOrgNumberOrFodselsnr, required } from '@navikt/ft-form-validators';
 
 import {
@@ -26,7 +26,7 @@ interface Props {
 }
 
 export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove }: Props) => {
-  const { getFieldState, watch } = useFormContext<FormValues>();
+  const { getFieldState, watch, control } = useFormContext<FormValues>();
   const { error } = getFieldState(`${FA_PREFIX}.${index}`);
   const organisasjonsnummer = watch(`${FA_PREFIX}.${index}.organisasjonsnummer`);
   const [isOpen, setIsOpen] = useState(open);
@@ -48,9 +48,10 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
         </Box>
         <VStack gap="4" hidden={!isOpen}>
           <HStack gap="4">
-            <InputField
+            <RhfTextField
+              name={`${FA_PREFIX}.${index}.organisasjonsnummer`}
+              control={control}
               readOnly={readOnly}
-              name={`${getPrefix(index)}.organisasjonsnummer`}
               label={intl.formatMessage({ id: 'RegistrerArbeidsgiverRad.OrgNr' })}
               validate={[
                 required,
@@ -59,8 +60,9 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
               ]}
               maxLength={99}
             />
-            <Datepicker
-              name={`${getPrefix(index)}.behovsdato`}
+            <RhfDatepicker
+              name={`${FA_PREFIX}.${index}.behovsdato`}
+              control={control}
               label={intl.formatMessage({ id: 'RegistrerArbeidsgiverRad.TilretteleggingFra' })}
               validate={[required]}
               isReadOnly={readOnly}

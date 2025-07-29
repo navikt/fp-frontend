@@ -5,12 +5,13 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
+import type { VenteArsakType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 interface Props {
   lukkCallback: () => void;
-  ventearsaker: KodeverkMedNavn[];
-  ventearsak?: string;
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[];
+  ventearsak?: VenteArsakType;
   frist: string | null;
 }
 

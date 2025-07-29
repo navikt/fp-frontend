@@ -1,19 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { CheckboxField, Datepicker, Form, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkType, RelasjonsRolleType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { FordelingPeriodeKilde, RelasjonsRolleType, UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
-import { FordelingPeriodeKilde } from '../kodeverk/fordelingPeriodeKilde';
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import {
   type FormValues as FormValuesGraderingOgSamtidigUttak,
@@ -86,7 +85,7 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
     ? {
         arbeidsgiverReferanse:
           values.arbeidsgiverId.split('-')[0] === 'null' ? undefined : values.arbeidsgiverId.split('-')[0],
-        arbeidType: values.arbeidsgiverId.split('-')[1],
+        arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
       }
     : undefined,
   periodeKilde: FordelingPeriodeKilde.SAKSBEHANDLER,
@@ -125,10 +124,7 @@ export const UttakFaktaDetailForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const defaultValues = useMemo(
-    () => (valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined),
-    [valgtPeriode, arbeidsgiverOpplysningerPerId],
-  );
+  const defaultValues = valgtPeriode ? lagDefaultVerdier(valgtPeriode, arbeidsgiverOpplysningerPerId) : undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -142,21 +138,17 @@ export const UttakFaktaDetailForm = ({
     }
   };
 
-  const sorterteUttakPeriodeTyper = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].toSorted((k1, k2) =>
+  const sorterteUttakPeriodeTyper = alleKodeverk['UttakPeriodeType'].toSorted((k1, k2) =>
     k1.navn.localeCompare(k2.navn),
   );
-  const sorterteOverføringÅrsaker = alleKodeverk[KodeverkType.OVERFOERING_AARSAK_TYPE].toSorted((k1, k2) =>
+  const sorterteOverføringÅrsaker = alleKodeverk['OverføringÅrsak'].toSorted((k1, k2) =>
     k1.navn.localeCompare(k2.navn),
   );
-  const sorterteUtsettelseÅrsaker = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE].toSorted((k1, k2) =>
+  const sorterteUtsettelseÅrsaker = alleKodeverk['UtsettelseÅrsak'].toSorted((k1, k2) =>
     k1.navn.localeCompare(k2.navn),
   );
-  const sorterteOppholdÅrsaker = alleKodeverk[KodeverkType.OPPHOLD_ARSAK].toSorted((k1, k2) =>
-    k1.navn.localeCompare(k2.navn),
-  );
-  const sorterteMorsAktiviteter = alleKodeverk[KodeverkType.MORS_AKTIVITET].toSorted((k1, k2) =>
-    k1.navn.localeCompare(k2.navn),
-  );
+  const sorterteOppholdÅrsaker = alleKodeverk['OppholdÅrsak'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
+  const sorterteMorsAktiviteter = alleKodeverk['MorsAktivitet'].toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   const årsakstype = formMethods.watch('arsakstype');
   const flerbarnsdager = formMethods.watch('flerbarnsdager');
@@ -182,7 +174,7 @@ export const UttakFaktaDetailForm = ({
 
   const erUttakOgFellesperiodeEllerForeldrepenger =
     årsakstype === Årsakstype.UTTAK &&
-    (stønadskonto === StonadskontoType.FELLESPERIODE || stønadskonto === StonadskontoType.FORELDREPENGER);
+    (stønadskonto === UttakPeriodeType.FELLESPERIODE || stønadskonto === UttakPeriodeType.FORELDREPENGER);
   const visMorsAktivitet =
     fagsak.relasjonsRolleType !== RelasjonsRolleType.MOR &&
     (erUttakOgFellesperiodeEllerForeldrepenger || årsakstype === Årsakstype.UTSETTELSE);
@@ -197,18 +189,20 @@ export const UttakFaktaDetailForm = ({
           showModal
         />
       )}
-      <Form formMethods={formMethods} onSubmit={onSubmit}>
+      <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
         <VStack gap="4">
           <HStack gap="2" align="end">
-            <Datepicker
+            <RhfDatepicker
               name="fom"
+              control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.Fom" />}
               validate={[required, hasValidDate]}
               isReadOnly={readOnly}
               defaultMonth={defaultMonth}
             />
-            <Datepicker
+            <RhfDatepicker
               name="tom"
+              control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.Tom" />}
               validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
               isReadOnly={readOnly}
@@ -238,8 +232,9 @@ export const UttakFaktaDetailForm = ({
               </div>
             )}
             {!readOnly && (
-              <RadioGroupPanel
+              <RhfRadioGroup
                 name="arsakstype"
+                control={formMethods.control}
                 label={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
                 validate={[required]}
                 isReadOnly={readOnly}
@@ -252,8 +247,9 @@ export const UttakFaktaDetailForm = ({
             )}
           </HStack>
           {(årsakstype === Årsakstype.UTTAK || årsakstype === Årsakstype.OVERFØRING) && (
-            <SelectField
+            <RhfSelect
               name="uttakPeriodeType"
+              control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
               validate={[required]}
               className={styles.select}
@@ -268,8 +264,9 @@ export const UttakFaktaDetailForm = ({
           {årsakstype !== Årsakstype.UTTAK && (
             <HStack gap="4">
               {årsakstype === Årsakstype.UTSETTELSE && (
-                <SelectField
+                <RhfSelect
                   name="utsettelseÅrsak"
+                  control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
                   className={styles.selectArsak}
@@ -282,8 +279,9 @@ export const UttakFaktaDetailForm = ({
                 />
               )}
               {årsakstype === Årsakstype.OVERFØRING && (
-                <SelectField
+                <RhfSelect
                   name="overføringÅrsak"
+                  control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
                   className={styles.selectArsak}
@@ -296,8 +294,9 @@ export const UttakFaktaDetailForm = ({
                 />
               )}
               {årsakstype === Årsakstype.OPPHOLD && (
-                <SelectField
+                <RhfSelect
                   name="oppholdÅrsak"
+                  control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
                   className={styles.selectArsak}
@@ -321,8 +320,9 @@ export const UttakFaktaDetailForm = ({
             />
           )}
           {visMorsAktivitet && (
-            <SelectField
+            <RhfSelect
               name="morsAktivitet"
+              control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.MorsAktivitet" />}
               className={styles.select}
               selectValues={sorterteMorsAktiviteter.map(vt => (
@@ -348,8 +348,9 @@ export const UttakFaktaDetailForm = ({
                 </div>
               )}
               {!readOnly && (
-                <CheckboxField
+                <RhfCheckbox
                   name="flerbarnsdager"
+                  control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Flerbarnsdager" />}
                 />
               )}
@@ -379,7 +380,7 @@ export const UttakFaktaDetailForm = ({
             </HStack>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </>
   );
 };

@@ -6,7 +6,7 @@ import * as stories from './BekreftelsePanel.stories';
 
 const { Default, MedObligatoriskFeltFordiAnnenForelderErInformert } = composeStories(stories);
 
-describe('<BekreftelsePanel>', () => {
+describe('BekreftelsePanel', () => {
   it('skal ikke ha behov for å velge når annen forelder ikke er informert', async () => {
     const lagre = vi.fn();
     await Default.run({

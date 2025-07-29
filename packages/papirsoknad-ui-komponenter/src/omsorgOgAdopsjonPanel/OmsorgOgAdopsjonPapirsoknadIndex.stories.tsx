@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
-import { action } from '@storybook/addon-actions';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 
@@ -24,7 +24,7 @@ const meta = {
     const formMethods = useForm({ defaultValues: OmsorgOgAdopsjonPapirsoknadIndex.initialValues() });
 
     return (
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values))}
       >
@@ -34,7 +34,7 @@ const meta = {
             Lagreknapp (Kun for test)
           </Button>
         </VStack>
-      </Form>
+      </RhfForm>
     );
   },
 } satisfies Meta<typeof OmsorgOgAdopsjonPapirsoknadIndex>;

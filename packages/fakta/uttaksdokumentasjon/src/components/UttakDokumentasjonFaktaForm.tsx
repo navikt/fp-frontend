@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
@@ -35,17 +35,14 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
     mellomlagretFormData?.dokBehov ?? dokumentasjonVurderingBehov,
   );
 
-  const bekreft = useCallback(
-    (begrunnelse: string) => {
-      setErBekreftKnappTrykket(true);
-      submitCallback({
-        kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        vurderingBehov: dokBehov,
-        begrunnelse,
-      });
-    },
-    [dokBehov],
-  );
+  const bekreft = (begrunnelse: string) => {
+    setErBekreftKnappTrykket(true);
+    submitCallback({
+      kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+      vurderingBehov: dokBehov,
+      begrunnelse,
+    });
+  };
 
   const lagretBegrunnelse = aksjonspunkterForPanel[0]?.begrunnelse ?? '';
   const formMethods = useForm<{ begrunnelse: string }>({
@@ -63,10 +60,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const isSubmittable = useMemo(
-    () => submittable && dokBehov?.every(a => a.vurdering) && !!begrunnelse,
-    [dokBehov, begrunnelse],
-  );
+  const isSubmittable = submittable && dokBehov?.every(a => a.vurdering) && !!begrunnelse;
 
   const [isDirty, setIsDirty] = useState<boolean>(false);
 
@@ -83,9 +77,10 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
         setDirty={setIsDirty}
         readOnly={readOnly}
       />
-      <Form formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
+      <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
         <VStack gap="4">
           <FaktaBegrunnelseTextField
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.Begrunnelse' })}
             isSubmittable
             isReadOnly={readOnly}
@@ -104,7 +99,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
             </div>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </VStack>
   );
 };

@@ -1,5 +1,5 @@
 import { type ReactRenderer } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
 import type { Behandling } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider } from '@navikt/fp-utils';

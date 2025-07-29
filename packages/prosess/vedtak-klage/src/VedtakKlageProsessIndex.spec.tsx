@@ -6,7 +6,7 @@ import * as stories from './VedtakKlageProsessIndex.stories';
 
 const { VedtakspanelDerKlageErVurdertAvNfp, VedtakspanelDerKlageErVurdertAvNk } = composeStories(stories);
 
-describe('<VedtakKlageProsessIndex>', () => {
+describe('VedtakKlageProsessIndex', () => {
   it('skal fylle ut, forhåndsvise og så bekrefte vedtak for NFP', async () => {
     const lagre = vi.fn(() => Promise.resolve());
     const forhåndsvis = vi.fn();

@@ -1,15 +1,15 @@
 import { useForm } from 'react-hook-form';
 
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
+import { AndreKriterierType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
-import { AndreKriterierType } from '../../../kodeverk/andreKriterierType';
 import { AndreKriterierVelger } from './AndreKriterierVelger';
 
 import messages from '../../../../i18n/nb_NO.json';
@@ -44,9 +44,9 @@ const meta = {
     const alleKodeverk = useQuery(losKodeverkOptions()).data;
 
     return alleKodeverk ? (
-      <Form formMethods={formMethods}>
+      <RhfForm formMethods={formMethods}>
         <AndreKriterierVelger {...args} />
-      </Form>
+      </RhfForm>
     ) : (
       <LoadingPanel />
     );

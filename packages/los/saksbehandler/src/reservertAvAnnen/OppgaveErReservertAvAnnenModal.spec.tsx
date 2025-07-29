@@ -2,7 +2,8 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { Oppgave } from '@navikt/fp-los-felles';
 
 import * as stories from './OppgaveErReservertAvAnnenModal.stories';
 
@@ -10,7 +11,7 @@ const { Default } = composeStories(stories);
 
 const oppgaveForResevertAvAnnenModal = {
   id: 1,
-  status: {
+  reservasjonStatus: {
     erReservert: false,
     flyttetReservasjon: {
       tidspunkt: '2019-02-02',
@@ -24,16 +25,15 @@ const oppgaveForResevertAvAnnenModal = {
   navn: 'Espen Utvikler',
   system: 'SAK',
   behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-  behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   opprettetTidspunkt: '2019-01-01',
   behandlingsfrist: '2019-01-01',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   erTilSaksbehandling: true,
   behandlingId: '1',
-  href: '',
-};
+  andreKriterier: [],
+} satisfies Oppgave;
 
-describe('<OppgaveErReservertAvAnnenModal>', () => {
+describe('OppgaveErReservertAvAnnenModal', () => {
   it('skal modal og lukke den ved trykk på Ok-knappen', async () => {
     const lukkErReservertModalOgOpneOppgave = vi.fn();
     render(<Default lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave} />);

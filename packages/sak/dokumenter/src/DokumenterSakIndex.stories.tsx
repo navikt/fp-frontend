@@ -1,5 +1,5 @@
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import type { Dokument } from '@navikt/fp-types';

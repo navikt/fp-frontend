@@ -6,7 +6,7 @@ import * as stories from './OmsorgOgAdopsjonPapirsoknadIndex.stories';
 
 const { ForFodsel, ForAdopsjon } = composeStories(stories);
 
-describe('<OmsorgOgAdopsjonPapirsoknadIndex>', () => {
+describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
   it('skal velge ett barn for fødsel', async () => {
     const lagre = vi.fn();
 

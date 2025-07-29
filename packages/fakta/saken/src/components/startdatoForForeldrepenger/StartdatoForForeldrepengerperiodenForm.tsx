@@ -1,10 +1,10 @@
-import { useCallback, useState } from 'react';
+import { useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PencilFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import styles from './startdatoForForeldrepengerperiodenForm.module.css';
 
@@ -37,7 +37,7 @@ const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormVa
 const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
   opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon,
-  startdatoFraSoknad: values.startdatoFraSoknad!,
+  startdatoFraSoknad: notEmpty(values.startdatoFraSoknad),
   begrunnelse: values.begrunnelse,
 });
 
@@ -77,14 +77,14 @@ export const StartdatoForForeldrepengerperiodenForm = ({
   });
 
   const [visEditeringsmodus, setVisEditeringsmodus] = useState(false);
-  const slåPåEditering = useCallback(() => setVisEditeringsmodus(true), []);
-  const slaAvEditeringAvStartdato = useCallback(() => {
+  const slåPåEditering = () => setVisEditeringsmodus(true);
+  const slaAvEditeringAvStartdato = () => {
     formMethods.reset();
     setVisEditeringsmodus(false);
-  }, []);
+  };
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(soknad, values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -116,14 +116,16 @@ export const StartdatoForForeldrepengerperiodenForm = ({
             }
           >
             <VStack gap="4">
-              <Datepicker
+              <RhfDatepicker
                 name="startdatoFraSoknad"
+                control={formMethods.control}
                 label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
                 validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
                 isReadOnly={readOnly}
               />
-              <TextAreaField
+              <RhfTextarea
                 name="begrunnelse"
+                control={formMethods.control}
                 label={<FormattedMessage id="StartdatoForForeldrepengerperiodenForm.Vurdering" />}
                 validate={[required, minLength3, maxLength1500, hasValidText]}
                 maxLength={1500}
@@ -146,6 +148,6 @@ export const StartdatoForForeldrepengerperiodenForm = ({
           </AksjonspunktBox>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

@@ -2,71 +2,24 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const familieHendelse = {
-  register: {
-    avklartBarn: [
-      {
-        fodselsdato: '2019-01-10',
-      },
-    ],
-  },
-  gjeldende: {
-    avklartBarn: [
-      {
-        fodselsdato: '2019-01-01',
-      },
-    ],
-    termindato: '2019-01-01',
-    utstedtdato: '2019-01-01',
-    antallBarnTermin: 1,
-    vedtaksDatoSomSvangerskapsuke: 43,
-    erOverstyrt: false,
-    morForSykVedFodsel: true,
-    dokumentasjonForeligger: true,
-    brukAntallBarnFraTps: true,
-  },
-} as FamilieHendelseSamling;
-
-const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' } as { [key: number]: string },
-  termindato: '2019-01-01',
-  utstedtdato: '2019-01-02',
-  antallBarn: 1,
-  soknadType: SoknadType.FODSEL,
-} as Soknad;
-
-const soknadOriginalBehandling = {
-  ...soknad,
+const apTerminbekreftelse: Aksjonspunkt = {
+  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
 };
-
-const familiehendelseOriginalBehandling = {
-  avklartBarn: [
-    {
-      fodselsdato: '2019-01-10',
-    },
-  ],
-  termindato: '2019-01-01',
-  antallBarnTermin: 1,
-} as FamilieHendelse;
-
-const defaultAksjonspunkter: Aksjonspunkt[] = [
-  {
-    definisjon: AksjonspunktKode.TERMINBEKREFTELSE,
-    status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: null,
-    kanLoses: true,
-  },
-];
+const apSjekkManglendeFødsel: Aksjonspunkt = {
+  definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+};
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -78,10 +31,55 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     submittable: true,
-    soknad,
-    familiehendelse: familieHendelse,
-    soknadOriginalBehandling,
-    familiehendelseOriginalBehandling,
+    isReadOnly: false,
+    aksjonspunkterForPanel: [],
+    alleMerknaderFraBeslutter: {},
+    terminbekreftelseDokument: {
+      journalpostId: '1',
+      dokumentId: '2',
+      saksnummer: '3',
+    },
+    fødsel: {
+      søknad: {
+        barn: [],
+        termindato: '2025-06-10',
+        utstedtdato: '2025-05-10',
+        antallBarn: 1,
+      },
+      register: {
+        barn: [
+          {
+            fødselsdato: '2025-06-03',
+            dødsdato: null,
+          },
+        ],
+      },
+      gjeldende: {
+        fødselDokumetasjonStatus: 'DOKUMENTERT',
+        termin: {
+          kilde: 'SØKNAD',
+          termindato: '2025-06-10',
+        },
+        antallBarn: {
+          kilde: 'SØKNAD',
+          antall: 1,
+        },
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-05-10',
+        },
+        barn: [
+          {
+            kilde: 'FOLKEREGISTER',
+            barn: {
+              fødselsdato: '2025-06-03',
+              dødsdato: null,
+            },
+            kanOverstyres: false,
+          },
+        ],
+      },
+    },
   },
   render: args => <FodselFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselFaktaIndex>>;
@@ -89,45 +87,247 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const AksjonspunktTerminbekreftelse: Story = {
+export const APTerminbekreftelse: Story = {
   args: {
-    aksjonspunkterForPanel: defaultAksjonspunkter,
+    aksjonspunkterForPanel: [apTerminbekreftelse],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.TERMINBEKREFTELSE]: merknaderFraBeslutter,
+      [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: merknaderFraBeslutter,
+    },
+    fødsel: {
+      søknad: {
+        barn: [],
+        termindato: '2025-06-24',
+        utstedtdato: '2025-05-20',
+        antallBarn: 1,
+      },
+      register: {
+        barn: [],
+      },
+      gjeldende: {
+        fødselDokumetasjonStatus: 'IKKE_VURDERT',
+        termin: {
+          kilde: 'SØKNAD',
+          termindato: '2025-06-24',
+        },
+        antallBarn: {
+          kilde: 'SØKNAD',
+          antall: 1,
+        },
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-05-20',
+        },
+        barn: [],
+      },
     },
   },
 };
 
-export const AksjonspunktSjekkManglendeFødsel: Story = {
+export const APSjekkManglendeFødselPåEngangstønad: Story = {
   args: {
-    aksjonspunkterForPanel: defaultAksjonspunkter.map(a => ({
-      ...a,
-      definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
-    })),
+    terminbekreftelseDokument: undefined,
+    fødsel: {
+      søknad: {
+        barn: [],
+        termindato: '2025-05-06',
+        utstedtdato: '2025-04-16',
+        antallBarn: 1,
+      },
+      register: {
+        barn: [],
+      },
+      gjeldende: {
+        fødselDokumetasjonStatus: 'IKKE_VURDERT',
+        termin: {
+          kilde: 'SØKNAD',
+          termindato: '2025-05-06',
+        },
+        antallBarn: {
+          kilde: 'SØKNAD',
+          antall: 1,
+        },
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-04-16',
+        },
+        barn: [],
+      },
+    },
+    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
+    },
+  },
+};
+export const APSjekkManglendeFødselPåForeldrepenger: Story = {
+  args: {
+    terminbekreftelseDokument: undefined,
+    fødsel: {
+      søknad: {
+        barn: [
+          {
+            fødselsdato: '2025-05-04',
+            dødsdato: null,
+          },
+        ],
+        termindato: '2025-04-14',
+        utstedtdato: null,
+        antallBarn: 1,
+      },
+      register: {
+        barn: [],
+      },
+      gjeldende: {
+        fødselDokumetasjonStatus: 'IKKE_VURDERT',
+        termin: {
+          kilde: 'SØKNAD',
+          termindato: '2025-04-14',
+        },
+        antallBarn: {
+          kilde: 'SØKNAD',
+          antall: 1,
+        },
+        utstedtdato: null,
+        barn: [
+          {
+            kilde: 'SØKNAD',
+            barn: {
+              fødselsdato: '2025-05-04',
+              dødsdato: null,
+            },
+            kanOverstyres: true,
+          },
+        ],
+      },
+    },
+    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
   },
 };
 
-export const ReadonlyPanel: Story = {
+export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
+  args: {
+    terminbekreftelseDokument: undefined,
+    fødsel: {
+      søknad: {
+        barn: [],
+        termindato: '2025-06-24',
+        utstedtdato: '2025-05-20',
+        antallBarn: 2,
+      },
+      register: {
+        barn: [
+          {
+            fødselsdato: '2025-06-25',
+            dødsdato: null,
+          },
+        ],
+      },
+      gjeldende: {
+        fødselDokumetasjonStatus: 'IKKE_VURDERT',
+        termin: {
+          kilde: 'SØKNAD',
+          termindato: '2025-06-24',
+        },
+        antallBarn: {
+          kilde: 'SØKNAD',
+          antall: 2,
+        },
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-05-20',
+        },
+        barn: [
+          {
+            kilde: 'FOLKEREGISTER',
+            barn: {
+              fødselsdato: '2025-06-25',
+              dødsdato: null,
+            },
+            kanOverstyres: false,
+          },
+        ],
+      },
+    },
+    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
+    alleMerknaderFraBeslutter: {
+      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
+    },
+  },
+};
+
+export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
   args: {
     isReadOnly: true,
-    aksjonspunkterForPanel: defaultAksjonspunkter.map(a => ({
-      ...a,
-      status: AksjonspunktStatus.UTFORT,
-      definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FODSEL,
-      begrunnelse: 'Dette er en begrunnelse',
-    })),
+    aksjonspunkterForPanel: [
+      { ...apSjekkManglendeFødsel, status: AksjonspunktStatus.UTFORT, begrunnelse: 'Dette er en begrunnelse' },
+    ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FODSEL]: merknaderFraBeslutter,
+      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
+    terminbekreftelseDokument: undefined,
   },
 };
 
-export const PanelForFødselssammenligningNårDetIkkeFinnesAksjonspunkter: Story = {
+export const Default: Story = {};
+
+export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
   args: {
-    aksjonspunkterForPanel: [],
-    alleMerknaderFraBeslutter: {},
+    terminbekreftelseDokument: undefined,
+    fødsel: {
+      søknad: {
+        barn: [],
+        termindato: '2025-05-21',
+        utstedtdato: '2025-04-21',
+        antallBarn: 1,
+      },
+      register: {
+        barn: [
+          {
+            fødselsdato: '2025-05-28',
+            dødsdato: '2025-05-28',
+          },
+          {
+            fødselsdato: '2025-05-28',
+            dødsdato: null,
+          },
+        ],
+      },
+      gjeldende: {
+        fødselDokumetasjonStatus: 'IKKE_VURDERT',
+        termin: {
+          kilde: 'SØKNAD',
+          termindato: '2025-05-21',
+        },
+        antallBarn: {
+          kilde: 'SØKNAD',
+          antall: 2,
+        },
+        utstedtdato: {
+          kilde: 'SØKNAD',
+          utstedtdato: '2025-04-21',
+        },
+        barn: [
+          {
+            kilde: 'FOLKEREGISTER',
+            barn: {
+              fødselsdato: '2025-05-28',
+              dødsdato: '2025-05-28',
+            },
+            kanOverstyres: false,
+          },
+          {
+            kilde: 'FOLKEREGISTER',
+            barn: {
+              fødselsdato: '2025-05-28',
+              dødsdato: null,
+            },
+            kanOverstyres: false,
+          },
+        ],
+      },
+    },
   },
 };

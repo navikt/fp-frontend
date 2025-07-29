@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
@@ -20,13 +20,8 @@ const OpptjeningIUtlandDokStatus = {
   DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET: 'DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET',
 };
 
-const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
-  kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  ...values,
-});
-
-export type FormValues = {
-  begrunnelse?: string;
+type FormValues = {
+  begrunnelse: string | undefined;
   dokStatus?: string;
 };
 
@@ -63,7 +58,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
   const begrunnelse = formMethods.watch('begrunnelse');
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -78,8 +73,9 @@ export const InnhentDokOpptjeningUtlandPanel = ({
           erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
         >
           <VStack gap="4">
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="dokStatus"
+              control={formMethods.control}
               label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
               validate={[required]}
               isReadOnly={readOnly}
@@ -95,6 +91,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
               ]}
             />
             <FaktaBegrunnelseTextField
+              control={formMethods.control}
               isSubmittable={submittable}
               isReadOnly={readOnly}
               hasBegrunnelse={!!begrunnelse}
@@ -109,6 +106,11 @@ export const InnhentDokOpptjeningUtlandPanel = ({
           </VStack>
         </AksjonspunktBox>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
+
+const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
+  kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+  ...values,
+});

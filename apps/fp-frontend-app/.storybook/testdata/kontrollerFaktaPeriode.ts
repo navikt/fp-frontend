@@ -1,10 +1,11 @@
+import { FordelingPeriodeKilde, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { KontrollerFaktaPeriode } from '@navikt/fp-types';
 
 export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
   {
     fom: '2025-02-12',
     tom: '2025-03-04',
-    uttakPeriodeType: 'FORELDREPENGER_FØR_FØDSEL',
+    uttakPeriodeType: UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
     utsettelseÅrsak: null,
     overføringÅrsak: null,
     oppholdÅrsak: null,
@@ -13,13 +14,13 @@ export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
     samtidigUttaksprosent: null,
     flerbarnsdager: false,
     morsAktivitet: null,
-    periodeKilde: 'SØKNAD',
+    periodeKilde: FordelingPeriodeKilde.SØKNAD,
     begrunnelse: null,
   },
   {
     fom: '2025-03-05',
     tom: '2025-06-17',
-    uttakPeriodeType: 'MØDREKVOTE',
+    uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
     utsettelseÅrsak: null,
     overføringÅrsak: null,
     oppholdÅrsak: null,
@@ -28,13 +29,13 @@ export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
     samtidigUttaksprosent: null,
     flerbarnsdager: false,
     morsAktivitet: null,
-    periodeKilde: 'SØKNAD',
+    periodeKilde: FordelingPeriodeKilde.SØKNAD,
     begrunnelse: null,
   },
   {
     fom: '2025-06-18',
     tom: '2025-10-07',
-    uttakPeriodeType: 'FELLESPERIODE',
+    uttakPeriodeType: UttakPeriodeType.FELLESPERIODE,
     utsettelseÅrsak: null,
     overføringÅrsak: null,
     oppholdÅrsak: null,
@@ -43,7 +44,7 @@ export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
     samtidigUttaksprosent: null,
     flerbarnsdager: false,
     morsAktivitet: null,
-    periodeKilde: 'SØKNAD',
+    periodeKilde: FordelingPeriodeKilde.SØKNAD,
     begrunnelse: null,
   },
 ];

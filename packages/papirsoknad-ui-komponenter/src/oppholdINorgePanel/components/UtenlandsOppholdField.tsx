@@ -1,9 +1,9 @@
-import React, { type ReactElement, useMemo } from 'react';
+import React, { type ReactElement } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -46,7 +46,7 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
   return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
 };
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
+const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
     .filter(({ kode }) => kode !== Landkode.NORGE)
     .map(
@@ -73,7 +73,7 @@ const getValiderFørEllerEtter =
 interface Props {
   erTidligereOpphold?: boolean;
   mottattDato?: string;
-  countryCodes: KodeverkMedNavn[];
+  countryCodes: KodeverkMedNavn<'Landkoder'>[];
   readOnly: boolean;
 }
 
@@ -101,7 +101,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
     name,
   });
 
-  const land = useMemo(() => countrySelectValues(countryCodes), [countryCodes]);
+  const land = countrySelectValues(countryCodes);
 
   return (
     <PeriodFieldArray<FormValues>
@@ -116,16 +116,18 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
       {(field, index, getRemoveButton) => (
         <React.Fragment key={field.id}>
           <HStack key={field.id} gap="4" paddingBlock="2">
-            <SelectField
+            <RhfSelect
               name={`${name}.${index}.land`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Country' })}
               selectValues={land}
               readOnly={readOnly}
               validate={[required]}
             />
 
-            <Datepicker
+            <RhfDatepicker
               name={`${name}.${index}.periodeFom`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
               isReadOnly={readOnly}
               validate={[
@@ -144,8 +146,9 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
-            <Datepicker
+            <RhfDatepicker
               name={`${name}.${index}.periodeTom`}
+              control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
               isReadOnly={readOnly}
               validate={[

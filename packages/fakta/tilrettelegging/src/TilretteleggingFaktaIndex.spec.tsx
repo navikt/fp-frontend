@@ -2,6 +2,8 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
 const {
@@ -16,7 +18,7 @@ const lagNyDato = (nyDato: string) => {
   return backspace + nyDato;
 };
 
-describe('<FodselOgTilretteleggingFaktaIndex>', () => {
+describe('FodselOgTilretteleggingFaktaIndex', () => {
   it('skal vurdere velferdspermisjon og så bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
@@ -64,8 +66,6 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           avklarteOppholdPerioder: [],
           eksternArbeidsforholdReferanse: '23422323',
           kanTilrettelegges: true,
-          kopiertFraTidligereBehandling: true,
-          mottattTidspunkt: '2020-03-11T16:21:48.532298',
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
           stillingsprosentStartTilrettelegging: 100,
@@ -93,19 +93,19 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
               permisjonFom: '2020-02-17',
               permisjonTom: '2020-07-12',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
             {
               permisjonFom: '2019-08-06',
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
           ],
         },
@@ -352,8 +352,6 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
           stillingsprosentStartTilrettelegging: 100,
           eksternArbeidsforholdReferanse: '23422323',
           kanTilrettelegges: true,
-          kopiertFraTidligereBehandling: true,
-          mottattTidspunkt: '2020-03-11T16:21:48.532298',
           skalBrukes: true,
           tilretteleggingBehovFom: '2020-03-17',
           tilretteleggingDatoer: [
@@ -380,19 +378,19 @@ describe('<FodselOgTilretteleggingFaktaIndex>', () => {
               permisjonFom: '2020-02-17',
               permisjonTom: '2020-07-12',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
             {
               permisjonFom: '2019-08-06',
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
-              type: 'VELFERDSPERMISJON',
+              type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             },
           ],
         },

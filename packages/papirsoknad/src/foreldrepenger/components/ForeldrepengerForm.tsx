@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 
 import { HGrid } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import {
@@ -73,13 +73,12 @@ interface Props {
   fagsakPersonnummer: string;
   onSubmit: (values: ForeldrepengerValues) => Promise<void>;
   onSubmitUfullstendigsoknad: () => Promise<void>;
-  erEndringssøknad: boolean;
 }
 
 /**
  * ForeldrepengerForm
  *
- * Form-komponent for registrering av papirsøknad for foreldrepenger.
+ * RhfForm-komponent for registrering av papirsøknad for foreldrepenger.
  */
 export const ForeldrepengerForm = ({
   readOnly,
@@ -88,7 +87,6 @@ export const ForeldrepengerForm = ({
   onSubmit,
   onSubmitUfullstendigsoknad,
   fagsakPersonnummer,
-  erEndringssøknad,
 }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: buildInitialValues(),
@@ -104,7 +102,7 @@ export const ForeldrepengerForm = ({
   const mottattDato = formMethods.watch('mottattDato');
 
   return (
-    <Form formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
+    <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
       <HGrid columns={{ sm: 1, md: 2 }} gap="4">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <OppholdINorgePapirsoknadIndex
@@ -138,7 +136,7 @@ export const ForeldrepengerForm = ({
           foreldreType={soknadData.getForeldreType()}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
-          erEndringssøknad={erEndringssøknad}
+          erEndringssøknad={false}
         />
         <BekreftelsePanel annenForelderInformertRequired={annenForelderInformertRequired} readOnly={readOnly} />
         <SprakPapirsoknadIndex readOnly={readOnly} />
@@ -147,7 +145,8 @@ export const ForeldrepengerForm = ({
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
         submitting={formMethods.formState.isSubmitting}
+        erEndringssøknad={false}
       />
-    </Form>
+    </RhfForm>
   );
 };

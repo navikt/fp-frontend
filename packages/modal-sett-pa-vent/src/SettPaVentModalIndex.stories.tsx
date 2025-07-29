@@ -1,8 +1,7 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { SettPaVentModalIndex } from './SettPaVentModalIndex';
 
@@ -10,7 +9,7 @@ const meta = {
   title: 'modal-sett-pa-vent/SettPaVentModal',
   component: SettPaVentModalIndex,
   args: {
-    ventearsaker: alleKodeverk['Venteårsak'] as KodeverkMedNavn[],
+    ventearsaker: alleKodeverk['Venteårsak'],
     showModal: true,
     submitCallback: action('button-click'),
     cancelEvent: action('button-click'),
@@ -41,6 +40,6 @@ export const VenterPåTilbakekrevinggrunnlagMedUtløptFrist: Story = {
     ventearsak: 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
     hasManualPaVent: false,
     erTilbakekreving: true,
-    ventearsaker: alleKodeverkTilbakekreving['Venteårsak'] as KodeverkMedNavn[],
+    ventearsaker: alleKodeverkTilbakekreving['Venteårsak'],
   },
 };

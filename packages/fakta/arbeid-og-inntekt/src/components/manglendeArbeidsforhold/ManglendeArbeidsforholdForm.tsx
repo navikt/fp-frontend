@@ -1,10 +1,10 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, HStack, Popover, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, InputField, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfRadioGroup, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -61,16 +61,13 @@ export const ManglendeArbeidsforholdForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const defaultValues = useMemo<FormValues>(
-    () => ({
-      saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
-      begrunnelse: radData.avklaring?.begrunnelse,
-      fom: radData.avklaring?.fom,
-      tom: radData.avklaring?.tom,
-      stillingsprosent: radData.avklaring?.stillingsprosent,
-    }),
-    [radData],
-  );
+  const defaultValues = {
+    saksbehandlersVurdering: radData.avklaring?.saksbehandlersVurdering,
+    begrunnelse: radData.avklaring?.begrunnelse,
+    fom: radData.avklaring?.fom,
+    tom: radData.avklaring?.tom,
+    stillingsprosent: radData.avklaring?.stillingsprosent,
+  };
 
   const formMethods = useForm<FormValues>({
     defaultValues,
@@ -119,7 +116,7 @@ export const ManglendeArbeidsforholdForm = ({
 
   const buttonRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
+  const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
 
   return (
     <VStack gap="8">
@@ -128,10 +125,11 @@ export const ManglendeArbeidsforholdForm = ({
           <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
         </Alert>
       </div>
-      <Form formMethods={formMethods} onSubmit={lagre}>
+      <RhfForm formMethods={formMethods} onSubmit={lagre}>
         <VStack gap="4">
-          <RadioGroupPanel
+          <RhfRadioGroup
             name="saksbehandlersVurdering"
+            control={formMethods.control}
             label={
               <HStack gap="2">
                 <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
@@ -174,20 +172,23 @@ export const ManglendeArbeidsforholdForm = ({
           />
           {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
             <HStack gap="4">
-              <Datepicker
+              <RhfDatepicker
                 name="fom"
+                control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeFra" />}
                 validate={[required, hasValidDate]}
                 isReadOnly={isReadOnly}
               />
-              <Datepicker
+              <RhfDatepicker
                 name="tom"
+                control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.PeriodeTil" />}
                 validate={[hasValidDate, validerPeriodeRekkefølge(formMethods.getValues)]}
                 isReadOnly={isReadOnly}
               />
-              <InputField
+              <RhfTextField
                 name="stillingsprosent"
+                control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
                 parse={value => {
                   const parsedValue = parseInt(value.toString(), 10);
@@ -199,9 +200,10 @@ export const ManglendeArbeidsforholdForm = ({
               />
             </HStack>
           )}
-          <TextAreaField
-            label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
+            label={<FormattedMessage id="ManglendeOpplysningerForm.Begrunn" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}
@@ -229,7 +231,7 @@ export const ManglendeArbeidsforholdForm = ({
             </HStack>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </VStack>
   );
 };

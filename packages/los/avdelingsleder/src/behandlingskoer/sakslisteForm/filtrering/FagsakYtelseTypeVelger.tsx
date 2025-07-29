@@ -1,10 +1,9 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-import { KodeverkLosType } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteFagsakYtelseType, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
@@ -16,6 +15,9 @@ interface Props {
 
 export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
+
+  // TODO (TOR) Manglar type
+  const { control } = useFormContext();
 
   const { mutate: lagreFagsakYtelseType } = useMutation({
     mutationFn: (values: { sakslisteId: number; avdelingEnhet: string; fagsakYtelseType: string; checked: boolean }) =>
@@ -33,7 +35,7 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
     },
   });
 
-  const alleFagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const alleFagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
   return (
     <VStack gap="2">
@@ -41,9 +43,10 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
         <FormattedMessage id="FagsakYtelseTypeVelger.Stonadstype" />
       </Label>
       {alleFagsakYtelseTyper.map(fyt => (
-        <CheckboxField
+        <RhfCheckbox
           key={fyt.kode}
           name={fyt.kode}
+          control={control}
           label={alleFagsakYtelseTyper.find(type => type.kode === fyt.kode)?.navn ?? ''}
           onChange={isChecked =>
             lagreFagsakYtelseType({

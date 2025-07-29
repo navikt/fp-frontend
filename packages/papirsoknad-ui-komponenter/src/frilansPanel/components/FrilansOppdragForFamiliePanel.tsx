@@ -14,13 +14,14 @@ interface Props {
 }
 
 export const FrilansOppdragForFamiliePanel = ({ readOnly }: Props) => {
-  const { watch } = useFormContext<FrilansFormValues>();
+  const { watch, control } = useFormContext<FrilansFormValues>();
   const harHattOppdragForFamilie = watch(`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`);
 
   return (
     <>
       <TrueFalseInput
         name={`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`}
+        control={control}
         label={<FormattedMessage id="Registrering.FrilansOppdrag.HarHattOppdragForFamilie" />}
         readOnly={readOnly}
       />

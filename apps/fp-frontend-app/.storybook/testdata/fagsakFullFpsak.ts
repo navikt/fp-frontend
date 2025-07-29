@@ -1,11 +1,20 @@
-import { HistorikkAktor } from '@navikt/fp-kodeverk';
+import {
+  BehandlingArsakType,
+  BehandlingResultatType,
+  BehandlingStatus,
+  BehandlingType,
+  FagsakStatus,
+  FagsakYtelseType,
+  HistorikkAktor,
+  RelasjonsRolleType,
+} from '@navikt/fp-kodeverk';
 import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 export const fagsakFullFpsak: Fagsak = {
   saksnummer: '1',
-  fagsakYtelseType: 'FP',
-  relasjonsRolleType: 'MORA',
-  status: 'UBEH',
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  relasjonsRolleType: RelasjonsRolleType.MOR,
+  status: FagsakStatus.UNDER_BEHANDLING,
   aktørId: '9921487132273',
   sakSkalTilInfotrygd: false,
   dekningsgrad: 100,
@@ -38,23 +47,23 @@ export const fagsakFullFpsak: Fagsak = {
   fagsakMarkeringer: [],
   behandlingTypeKanOpprettes: [
     {
-      behandlingType: 'BT-002',
+      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: 'BT-004',
+      behandlingType: BehandlingType.REVURDERING,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: 'BT-008',
+      behandlingType: BehandlingType.ANKE,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: 'BT-003',
+      behandlingType: BehandlingType.KLAGE,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: 'BT-006',
+      behandlingType: BehandlingType.DOKUMENTINNSYN,
       kanOppretteBehandling: true,
     },
   ],
@@ -62,8 +71,8 @@ export const fagsakFullFpsak: Fagsak = {
     {
       uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       versjon: 26,
-      type: 'BT-002',
-      status: 'UTRED',
+      type: BehandlingType.FORSTEGANGSSOKNAD,
+      status: BehandlingStatus.BEHANDLING_UTREDES,
       opprettet: '2025-03-05T16:42:58',
       avsluttet: null,
       behandlendeEnhetId: '4867',
@@ -71,7 +80,7 @@ export const fagsakFullFpsak: Fagsak = {
       erAktivPapirsoknad: false,
       førsteÅrsak: {
         erAutomatiskRevurdering: false,
-        behandlingArsakType: 'RE-END-INNTEKTSMELD',
+        behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
         manueltOpprettet: false,
       },
       gjeldendeVedtak: false,
@@ -85,7 +94,7 @@ export const fagsakFullFpsak: Fagsak = {
       toTrinnsBehandling: false,
       behandlingsresultat: {
         id: 999951,
-        type: 'IKKE_FASTSATT',
+        type: BehandlingResultatType.IKKE_FASTSATT,
         avslagsarsak: null,
         avslagsarsakFritekst: null,
         rettenTil: '-',
@@ -104,7 +113,7 @@ export const fagsakFullFpsak: Fagsak = {
       behandlingÅrsaker: [
         {
           erAutomatiskRevurdering: false,
-          behandlingArsakType: 'RE-END-INNTEKTSMELD',
+          behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
           manueltOpprettet: false,
         },
       ],
@@ -112,22 +121,18 @@ export const fagsakFullFpsak: Fagsak = {
         {
           href: '/fpsak/api/behandling/person/personoversikt?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
           rel: 'behandling-personoversikt',
-          type: 'GET',
         },
         {
           href: '/fpsak/api/behandling/familiehendelse/v2?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
           rel: 'familiehendelse-v2',
-          type: 'GET',
         },
         {
           href: '/fpsak/api/brev/bestill',
           rel: 'brev-bestill',
-          type: 'POST',
         },
         {
           href: '/fpsak/api/brev/forhandsvis',
           rel: 'brev-vis',
-          type: 'POST',
         },
       ],
       behandlingTillatteOperasjoner: {
@@ -139,6 +144,7 @@ export const fagsakFullFpsak: Fagsak = {
         behandlingKanSendeMelding: true,
         behandlingFraBeslutter: false,
         behandlingTilGodkjenning: false,
+        behandlingKanMerkesHaster: false,
         vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
       },
       brevmaler: [

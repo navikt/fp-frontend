@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
@@ -17,26 +17,11 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { OpptjeningVilkarView } from './OpptjeningVilkarView';
 
-export type FormValues = {
+type FormValues = {
   erVilkarOk?: boolean;
   avslagCode?: string;
   begrunnelse?: string;
 };
-
-export const buildInitialValues = (
-  aksjonspunkter: Aksjonspunkt[],
-  status: string,
-  behandlingsresultat?: Behandlingsresultat,
-): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
-});
-
-const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
-  ...VilkarResultPicker.transformValues(values),
-  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKARET,
-});
 
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
@@ -73,11 +58,10 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
 
-  const initialValues = buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat);
-
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? initialValues,
+    defaultValues:
+      mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat),
   });
 
   const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
@@ -103,7 +87,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
   );
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
+    <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
         isAksjonspunktOpen={harÅpneAksjonspunkter}
@@ -152,6 +136,21 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };
+
+const buildInitialValues = (
+  aksjonspunkter: Aksjonspunkt[],
+  status: string,
+  behandlingsresultat?: Behandlingsresultat,
+): FormValues => ({
+  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+});
+
+const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
+  ...VilkarResultPicker.transformValues(values),
+  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+  kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKARET,
+});

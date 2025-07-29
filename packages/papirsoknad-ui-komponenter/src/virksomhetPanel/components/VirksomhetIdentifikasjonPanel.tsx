@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -14,7 +14,6 @@ import {
 } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
@@ -23,7 +22,7 @@ import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../typ
 
 import styles from './virksomhetIdentifikasjonPanel.module.css';
 
-const countrySelectValues = (countryCodes: KodeverkMedNavn[]): ReactElement[] =>
+const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes.map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
@@ -44,21 +43,21 @@ interface Props {
  */
 export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }: Props) => {
   const intl = useIntl();
-  const sortedCountriesByName = alleKodeverk[KodeverkType.LANDKODER]
-    .slice()
-    .sort((a, b) => a.navn.localeCompare(b.navn));
+  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
-  const { getValues } = useFormContext<VirksomhetFormValues>();
+  const { getValues, control } = useFormContext<VirksomhetFormValues>();
 
   return (
     <TrueFalseInput
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.virksomhetRegistrertINorge`}
+      control={control}
       label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.RegisteredInNorway" />}
       readOnly={readOnly}
       trueContent={
         <ArrowBox marginTop={8}>
-          <InputField
+          <RhfTextField
             name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.organisasjonsnummer`}
+            control={control}
             readOnly={readOnly}
             validate={[required, hasValidInteger, hasValidOrgNumber]}
             label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.OrganizationNumber" />}
@@ -68,8 +67,9 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
       falseContent={
         <ArrowBox alignOffset={58} marginTop={8}>
           <VStack gap="4">
-            <SelectField
+            <RhfSelect
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.landJobberFra`}
+              control={control}
               className={styles.landBredde}
               selectValues={countrySelectValues(sortedCountriesByName)}
               validate={[required]}
@@ -77,13 +77,16 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
             />
 
             <HStack gap="4">
-              <Datepicker
+              <RhfDatepicker
+                name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.fom`}
+                control={control}
                 isReadOnly={readOnly}
                 validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-                name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.fom`}
                 label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeFom' })}
               />
-              <Datepicker
+              <RhfDatepicker
+                name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.tom`}
+                control={control}
                 isReadOnly={readOnly}
                 validate={[
                   hasValidDate,
@@ -92,7 +95,6 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
                     return fom ? validPeriodeFomTom(fom, tomDato) : null;
                   },
                 ]}
-                name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.tom`}
                 label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.periodeTom' })}
               />
             </HStack>

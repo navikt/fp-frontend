@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -13,11 +13,7 @@ import {
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
-import type {
-  OmsorgsvilkarAp,
-  VurdereYtelseSammeBarnAnnenForelderAp,
-  VurdereYtelseSammeBarnSokerAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { OmsorgsvilkarAp, VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
@@ -26,7 +22,7 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp>;
+type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp>;
 
 interface Props {
   status: string;
@@ -62,12 +58,12 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.OMSORGSVILKARET];
+  const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.OMSORGSVILKARET];
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -97,11 +93,11 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };
 
-export const buildInitialValues = (
+const buildInitialValues = (
   aksjonspunkter: Aksjonspunkt[],
   status: string,
   behandlingsresultat?: Behandling['behandlingsresultat'],
@@ -118,6 +114,5 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
       ap.definisjon,
       AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
       AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
     ),
   }));

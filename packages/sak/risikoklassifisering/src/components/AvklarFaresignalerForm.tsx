@@ -1,24 +1,22 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
+import { AksjonspunktKode, FaresignalVurdering } from '@navikt/fp-kodeverk';
+import { type Aksjonspunkt, type KodeverkMedNavn, type Risikoklassifisering } from '@navikt/fp-types';
 
-import { FaresignalVurdering } from '../kodeverk/faresignalVurdering';
 import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 
 const maxLength1500 = maxLength(1500);
 const minLength3 = minLength(3);
 
-export const begrunnelseFieldName = 'begrunnelse';
-export const VURDERING_HOVEDKATEGORI = 'vurderingerHovedkategori';
-export const IKKE_REELLE_VURDERINGER_UNDERKATEGORI = 'ikkeReelleVurderingerUnderkategori';
+const begrunnelseFieldName = 'begrunnelse';
+const VURDERING_HOVEDKATEGORI = 'vurderingerHovedkategori';
+const IKKE_REELLE_VURDERINGER_UNDERKATEGORI = 'ikkeReelleVurderingerUnderkategori';
 
 type Values = {
   [begrunnelseFieldName]?: string;
@@ -26,47 +24,12 @@ type Values = {
   [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]?: string;
 };
 
-export const buildInitialValues = (
-  aksjonspunkt: Aksjonspunkt,
-  risikoklassifisering?: Risikoklassifisering,
-): Values | undefined => {
-  if (aksjonspunkt?.begrunnelse && risikoklassifisering?.faresignalVurdering) {
-    const kode = risikoklassifisering.faresignalVurdering;
-    return {
-      [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
-      [VURDERING_HOVEDKATEGORI]:
-        kode === FaresignalVurdering.INGEN_INNVIRKNING
-          ? FaresignalVurdering.INGEN_INNVIRKNING
-          : FaresignalVurdering.INNVIRKNING,
-      [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]: kode === FaresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
-    };
-  }
-  return undefined;
-};
-
-const utledFaresignalVurderingVerdi = (
-  vurderingHovedkategori: string,
-  vurderingUnderkategori?: string,
-): string | undefined =>
-  vurderingHovedkategori === FaresignalVurdering.INGEN_INNVIRKNING
-    ? FaresignalVurdering.INGEN_INNVIRKNING
-    : vurderingUnderkategori;
-
-const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
-  kode: AksjonspunktKode.VURDER_FARESIGNALER,
-  faresignalVurdering: utledFaresignalVurderingVerdi(
-    values[VURDERING_HOVEDKATEGORI],
-    values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI],
-  ),
-  begrunnelse: values[begrunnelseFieldName],
-});
-
 interface Props {
   aksjonspunkt: Aksjonspunkt;
   readOnly: boolean;
   risikoklassifisering?: Risikoklassifisering;
   submitCallback?: (data: AvklartRisikoklassifiseringAp) => void;
-  faresignalVurderinger: KodeverkMedNavn[];
+  faresignalVurderinger: KodeverkMedNavn<'FaresignalVurdering'>[];
 }
 
 /**
@@ -81,43 +44,35 @@ export const AvklarFaresignalerForm = ({
   risikoklassifisering,
   submitCallback,
 }: Props) => {
-  const underkategoriFaresignalVurderinger = useMemo(
-    () =>
-      faresignalVurderinger.filter(
-        vurdering =>
-          vurdering.kode !== FaresignalVurdering.INNVIRKNING &&
-          vurdering.kode !== FaresignalVurdering.INGEN_INNVIRKNING,
-      ),
-    [],
-  );
-
-  const defaultValues = useMemo(
-    () => buildInitialValues(aksjonspunkt, risikoklassifisering),
-    [aksjonspunkt, risikoklassifisering],
+  const underkategoriFaresignalVurderinger = faresignalVurderinger.filter(
+    vurdering =>
+      vurdering.kode !== FaresignalVurdering.INNVIRKNING && vurdering.kode !== FaresignalVurdering.INGEN_INNVIRKNING,
   );
 
   const formMethods = useForm<Values>({
-    defaultValues,
+    defaultValues: buildInitialValues(aksjonspunkt, risikoklassifisering),
   });
 
   const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === FaresignalVurdering.INNVIRKNING;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: Values) => submitCallback && submitCallback(transformValues(values))}
     >
       <VStack gap="4">
-        <TextAreaField
+        <RhfTextarea
           name={begrunnelseFieldName}
+          control={formMethods.control}
           label={<FormattedMessage id="Risikopanel.Forms.Vurdering" />}
           validate={[required, maxLength1500, minLength3, hasValidText]}
           maxLength={1500}
           readOnly={readOnly}
         />
-        <RadioGroupPanel
+        <RhfRadioGroup
           name={VURDERING_HOVEDKATEGORI}
-          label={<FormattedMessage id="Risikopanel.Form.Resultat" />}
+          control={formMethods.control}
+          label={<FormattedMessage id="Risikopanel.RhfForm.Resultat" />}
           validate={[required]}
           isReadOnly={readOnly}
           radios={[
@@ -129,8 +84,9 @@ export const AvklarFaresignalerForm = ({
                 <div style={{ paddingTop: '15px' }}>
                   {harValgtReelle && (
                     <ArrowBox alignOffset={20}>
-                      <RadioGroupPanel
+                      <RhfRadioGroup
                         name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
+                        control={formMethods.control}
                         validate={[required]}
                         isReadOnly={readOnly}
                         radios={underkategoriFaresignalVurderinger.map(vurdering => ({
@@ -159,10 +115,45 @@ export const AvklarFaresignalerForm = ({
             disabled={!formMethods.formState.isDirty || readOnly || formMethods.formState.isSubmitting}
             onClick={ariaCheck}
           >
-            <FormattedMessage id="Risikopanel.Form.Bekreft" />
+            <FormattedMessage id="Risikopanel.RhfForm.Bekreft" />
           </Button>
         </div>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
+
+const buildInitialValues = (
+  aksjonspunkt: Aksjonspunkt,
+  risikoklassifisering?: Risikoklassifisering,
+): Values | undefined => {
+  if (aksjonspunkt?.begrunnelse && risikoklassifisering?.faresignalVurdering) {
+    const kode = risikoklassifisering.faresignalVurdering;
+    return {
+      [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
+      [VURDERING_HOVEDKATEGORI]:
+        kode === FaresignalVurdering.INGEN_INNVIRKNING
+          ? FaresignalVurdering.INGEN_INNVIRKNING
+          : FaresignalVurdering.INNVIRKNING,
+      [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]: kode === FaresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
+    };
+  }
+  return undefined;
+};
+
+const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
+  kode: AksjonspunktKode.VURDER_FARESIGNALER,
+  faresignalVurdering: utledFaresignalVurderingVerdi(
+    values[VURDERING_HOVEDKATEGORI],
+    values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI],
+  ),
+  begrunnelse: values[begrunnelseFieldName],
+});
+
+const utledFaresignalVurderingVerdi = (
+  vurderingHovedkategori: string,
+  vurderingUnderkategori?: string,
+): string | undefined =>
+  vurderingHovedkategori === FaresignalVurdering.INGEN_INNVIRKNING
+    ? FaresignalVurdering.INGEN_INNVIRKNING
+    : vurderingUnderkategori;

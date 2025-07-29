@@ -1,25 +1,38 @@
-import type { Preview, ReactRenderer } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
+import type { Preview } from '@storybook/react';
 import dayjs from 'dayjs';
 import { initialize, mswLoader } from 'msw-storybook-addon';
 
-import './globalStylesStorybook.module.css';
+import { withThemeDecorator } from '@navikt/fp-storybook-utils';
 
 import 'dayjs/locale/nb.js';
+import '@navikt/ds-css';
+import '@navikt/ds-css/darkside';
+import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-plattform-komponenter/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 dayjs.locale('nb');
 
-const withMarginDecorator: DecoratorFunction<ReactRenderer> = Story => (
-  <div style={{ margin: '40px' }}>
-    <Story />
-  </div>
-);
+export const decorators = [withThemeDecorator];
 
-export const decorators = [withMarginDecorator];
+export const globalTypes = {
+  theme: {
+    name: 'Tema',
+    description: 'Aksel tema',
+    defaultValue: 'none',
+    toolbar: {
+      icon: 'circlehollow',
+      items: [
+        { value: 'none', icon: 'close', title: 'Gammel' },
+        { value: 'light', icon: 'circlehollow', title: 'Lys' },
+        { value: 'dark', icon: 'circle', title: 'Mørk' },
+      ],
+      showName: true,
+    },
+  },
+};
 
 const preview: Preview = {
-  decorators,
-  // beforeAll is available in Storybook 8.2. Else the call would happen outside of the preview object
   beforeAll: async () => {
     initialize({
       onUnhandledRequest: 'bypass',
@@ -29,6 +42,8 @@ const preview: Preview = {
     });
   },
   loaders: [mswLoader],
+  decorators,
+  globalTypes,
 };
 
 export default preview;

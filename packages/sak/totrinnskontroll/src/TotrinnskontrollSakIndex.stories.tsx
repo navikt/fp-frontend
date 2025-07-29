@@ -1,8 +1,14 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
+import { action } from 'storybook/actions';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { BehandlingResultatType, BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import {
+  BehandlingResultatType,
+  BehandlingStatus,
+  BehandlingType,
+  FagsakYtelseType,
+  SkjermlenkeType,
+} from '@navikt/fp-kodeverk';
 import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 import type { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
@@ -65,7 +71,7 @@ export const ForBeslutter: Story = {
       ...DEFAULT_BEHANDLING,
       totrinnskontrollÅrsaker: [
         {
-          skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
+          skjermlenkeType: SkjermlenkeType.FORMKRAV_KLAGE_NFP,
           totrinnskontrollAksjonspunkter: [
             {
               aksjonspunktKode: '5082',
@@ -80,7 +86,7 @@ export const ForBeslutter: Story = {
           ],
         },
         {
-          skjermlenkeType: 'KLAGE_BEH_NFP',
+          skjermlenkeType: SkjermlenkeType.KLAGE_BEH_NFP,
           totrinnskontrollAksjonspunkter: [
             {
               aksjonspunktKode: '5035',
@@ -108,7 +114,7 @@ export const ForSaksbehandler: Story = {
       status: BehandlingStatus.BEHANDLING_UTREDES,
       totrinnskontrollÅrsaker: [
         {
-          skjermlenkeType: 'FORMKRAV_KLAGE_NFP',
+          skjermlenkeType: SkjermlenkeType.FORMKRAV_KLAGE_NFP,
           totrinnskontrollAksjonspunkter: [
             {
               aksjonspunktKode: '5082',
@@ -126,7 +132,7 @@ export const ForSaksbehandler: Story = {
           ],
         },
         {
-          skjermlenkeType: 'KLAGE_BEH_NFP',
+          skjermlenkeType: SkjermlenkeType.KLAGE_BEH_NFP,
           totrinnskontrollAksjonspunkter: [
             {
               aksjonspunktKode: '5035',

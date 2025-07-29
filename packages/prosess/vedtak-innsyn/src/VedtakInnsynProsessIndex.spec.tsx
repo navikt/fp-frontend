@@ -8,7 +8,7 @@ import * as stories from './VedtakInnsynProsessIndex.stories';
 
 const { PanelForInnvilgetVedtak, PanelForAvvistVedtak, PanelForAvvistVedtakReadonly } = composeStories(stories);
 
-describe('<VedtakInnsynProsessIndex>', () => {
+describe('VedtakInnsynProsessIndex', () => {
   it('skal forhåndsvise og så bekrefte innvilget vedtak', async () => {
     const lagre = vi.fn();
     const forhåndsvise = vi.fn();

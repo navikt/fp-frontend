@@ -15,8 +15,8 @@ const intl = createIntl(messages);
 interface Props {
   valgtAktorId: string;
   aktorInfo?: Aktor;
-  fagsakStatuser: KodeverkMedNavn[];
-  fagsakYtelseTyper: KodeverkMedNavn[];
+  fagsakStatuser: KodeverkMedNavn<'FagsakStatus'>[];
+  fagsakYtelseTyper: KodeverkMedNavn<'FagsakYtelseType'>[];
   renderSomLenke: (className: string | undefined, fagsakKomponent: ReactNode, saksnummer: string) => ReactElement;
 }
 

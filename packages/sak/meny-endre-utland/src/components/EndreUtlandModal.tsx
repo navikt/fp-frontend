@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, Modal } from '@navikt/ds-react';
-import { CheckboxPanel, Form } from '@navikt/ft-form-hooks';
+import { Button, Checkbox, Heading, Modal } from '@navikt/ds-react';
+import { RhfCheckboxGroup,RhfForm } from '@navikt/ft-form-hooks';
 
 import type { KodeverkMedNavn, Saksmarkering } from '@navikt/fp-types';
 
@@ -18,7 +18,7 @@ interface Props {
   fagsakMarkeringer?: Saksmarkering[];
   cancelEvent: () => void;
   submitCallback: (formData: FormValues) => void;
-  fagsakMarkeringerKodeverk: KodeverkMedNavn[];
+  fagsakMarkeringerKodeverk: KodeverkMedNavn<'FagsakMarkering'>[];
 }
 
 /**
@@ -44,7 +44,7 @@ export const EndreUtlandModal = ({
   });
 
   return (
-    <Form formMethods={formMethods} onSubmit={submitCallback}>
+    <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
       <Modal
         className={styles.modal}
         open
@@ -57,14 +57,13 @@ export const EndreUtlandModal = ({
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <CheckboxPanel
-            name="fagsakMarkeringer"
-            hideLegend
-            checkboxes={fagsakMarkeringerKodeverk.map(markering => ({
-              label: markering.navn,
-              value: markering.kode,
-            }))}
-          />
+          <RhfCheckboxGroup name="fagsakMarkeringer" control={formMethods.control} hideLegend>
+            {fagsakMarkeringerKodeverk.map(markering => (
+              <Checkbox key={markering.kode} value={markering.kode}>
+                {markering.navn}
+              </Checkbox>
+            ))}
+          </RhfCheckboxGroup>
         </Modal.Body>
         <Modal.Footer>
           <Button size="small" variant="primary">
@@ -75,6 +74,6 @@ export const EndreUtlandModal = ({
           </Button>
         </Modal.Footer>
       </Modal>
-    </Form>
+    </RhfForm>
   );
 };

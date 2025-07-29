@@ -17,7 +17,7 @@ interface Props {
   fagsakMarkeringer?: Saksmarkering[];
   endreFagsakMarkering: (formData: FormValues) => void;
   lukkModal: () => void;
-  fagsakMarkeringerKodeverk: KodeverkMedNavn[];
+  fagsakMarkeringerKodeverk: KodeverkMedNavn<'FagsakMarkering'>[];
 }
 
 export const MenyEndreUtlandIndex = ({ endreFagsakMarkering, lukkModal, ...rest }: Props) => {

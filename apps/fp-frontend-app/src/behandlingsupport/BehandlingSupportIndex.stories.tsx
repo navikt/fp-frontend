@@ -1,8 +1,8 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
@@ -26,13 +26,15 @@ import messages from '../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const getHref = (rel: string) =>
-  wrapUrl(
-    notEmpty(
-      initFetchFpsak.links.find(link => link.rel === rel) ??
-        initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
-        initFetchFptilbake.links.find(link => link.rel === rel) ??
-        initFetchFptilbake.sakLinks.find(link => link.rel === rel),
-    ).href,
+  cleanUrl(
+    wrapUrl(
+      notEmpty(
+        initFetchFpsak.links.find(link => link.rel === rel) ??
+          initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
+          initFetchFptilbake.links.find(link => link.rel === rel) ??
+          initFetchFptilbake.sakLinks.find(link => link.rel === rel),
+      ).href,
+    ),
   );
 
 const BEHANDLING_TILLATTE_OPERASJONER = {
@@ -44,6 +46,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanGjenopptas: false,
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
+  behandlingKanMerkesHaster: false,
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
 };
 

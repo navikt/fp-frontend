@@ -6,7 +6,7 @@ import * as stories from './DekningsgradIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<BekreftelsePanel>', () => {
+describe('BekreftelsePanel', () => {
   it('skal måtte velge dekningsgrad', async () => {
     const lagre = vi.fn();
 

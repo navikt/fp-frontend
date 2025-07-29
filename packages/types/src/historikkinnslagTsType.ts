@@ -1,10 +1,10 @@
-import { HistorikkAktor } from '@navikt/fp-kodeverk';
+import { HistorikkAktor, SkjermlenkeType } from '@navikt/fp-kodeverk';
 
 export type Historikkinnslag = Readonly<{
   aktør: HistorikkUtfører;
   opprettetTidspunkt: string;
   behandlingUuid: string | null;
-  skjermlenke: string | null;
+  skjermlenke: SkjermlenkeType | null;
   dokumenter: HistorikkInnslagDokumentLink[] | null;
   tittel: string | null;
   linjer: Linje[];

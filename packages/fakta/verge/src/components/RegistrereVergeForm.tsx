@@ -1,5 +1,7 @@
+import { useFormContext } from 'react-hook-form';
+
 import { HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   hasValidDate,
   hasValidFodselsnummer,
@@ -9,25 +11,27 @@ import {
 } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
+import type { FaktaBegrunnelseFormValues } from '@navikt/fp-fakta-felles';
 import { VergeType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn, OpprettVergeParams, Verge } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving, OpprettVergeParams, Verge } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
 export type VergeFormValues = {
-  navn?: string;
-  gyldigFom?: string;
+  navn: string;
+  gyldigFom: string;
   gyldigTom?: string;
   fnr?: string;
   organisasjonsnummer?: string;
-  vergeType?: string;
+  vergeType: VergeType;
 };
 
 interface Props {
   readOnly: boolean;
-  vergetyper: KodeverkMedNavn[];
+  vergetyper: KodeverkMedNavn<'VergeType'>[] | KodeverkMedNavnTilbakekreving<'VergeType'>[];
   valgtVergeType: string | undefined;
 }
 
@@ -36,74 +40,83 @@ interface Props {
  *
  * Formkomponent. Registrering og oppdatering av verge.
  */
-export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType }: Props) => (
-  <VStack gap="4">
-    <SelectField
-      name="vergeType"
-      label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
-      validate={[required]}
-      selectValues={vergetyper.map(vt => (
-        <option key={vt.kode} value={vt.kode}>
-          {vt.navn}
-        </option>
-      ))}
-      readOnly={readOnly}
-    />
-    {valgtVergeType && (
-      <>
-        <HStack gap="4">
-          <InputField
-            name="navn"
-            label={intl.formatMessage({ id: 'Verge.Navn' })}
-            validate={[required, hasValidName]}
-            readOnly={readOnly}
-          />
-          {valgtVergeType === VergeType.ADVOKAT ? (
-            <InputField
-              name="organisasjonsnummer"
-              label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
-              validate={[required, hasValidOrgNumber]}
+export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType }: Props) => {
+  const { control } = useFormContext<VergeFormValues & FaktaBegrunnelseFormValues>();
+  return (
+    <VStack gap="4">
+      <RhfSelect
+        name="vergeType"
+        control={control}
+        label={intl.formatMessage({ id: 'Verge.TypeVerge' })}
+        validate={[required]}
+        selectValues={vergetyper.map(vt => (
+          <option key={vt.kode} value={vt.kode}>
+            {vt.navn}
+          </option>
+        ))}
+        readOnly={readOnly}
+      />
+      {valgtVergeType && (
+        <>
+          <HStack gap="4">
+            <RhfTextField
+              name="navn"
+              control={control}
+              label={intl.formatMessage({ id: 'Verge.Navn' })}
+              validate={[required, hasValidName]}
               readOnly={readOnly}
             />
-          ) : (
-            <InputField
-              name="fnr"
-              label={intl.formatMessage({ id: 'Verge.FodselsNummer' })}
-              validate={[required, hasValidFodselsnummer]}
-              readOnly={readOnly}
+            {valgtVergeType === VergeType.ADVOKAT ? (
+              <RhfTextField
+                name="organisasjonsnummer"
+                control={control}
+                label={intl.formatMessage({ id: 'Verge.Organisasjonsnummer' })}
+                validate={[required, hasValidOrgNumber]}
+                readOnly={readOnly}
+              />
+            ) : (
+              <RhfTextField
+                name="fnr"
+                control={control}
+                label={intl.formatMessage({ id: 'Verge.FodselsNummer' })}
+                validate={[required, hasValidFodselsnummer]}
+                readOnly={readOnly}
+              />
+            )}
+          </HStack>
+          <HStack gap="4">
+            <RhfDatepicker
+              name="gyldigFom"
+              control={control}
+              label={intl.formatMessage({ id: 'Verge.PeriodeFOM' })}
+              validate={[required, hasValidDate]}
+              isReadOnly={readOnly}
             />
-          )}
-        </HStack>
-        <HStack gap="4">
-          <Datepicker
-            name="gyldigFom"
-            label={intl.formatMessage({ id: 'Verge.PeriodeFOM' })}
-            validate={[required, hasValidDate]}
-            isReadOnly={readOnly}
-          />
-          <Datepicker
-            name="gyldigTom"
-            label={intl.formatMessage({ id: 'Verge.PeriodeTOM' })}
-            validate={[hasValidDate]}
-            isReadOnly={readOnly}
-          />
-        </HStack>
-      </>
-    )}
-  </VStack>
-);
+            <RhfDatepicker
+              name="gyldigTom"
+              control={control}
+              label={intl.formatMessage({ id: 'Verge.PeriodeTOM' })}
+              validate={[hasValidDate]}
+              isReadOnly={readOnly}
+            />
+          </HStack>
+        </>
+      )}
+    </VStack>
+  );
+};
 
-RegistrereVergeForm.buildInitialValues = (verge: Verge | undefined): VergeFormValues => ({
+RegistrereVergeForm.buildInitialValues = (verge: Verge): VergeFormValues => ({
   ...verge,
   gyldigTom: verge?.gyldigTom ?? undefined,
 });
 
 RegistrereVergeForm.transformValues = (values: VergeFormValues): OpprettVergeParams => ({
-  vergeType: values.vergeType!,
-  navn: values.navn!,
-  gyldigFom: values.gyldigFom!,
+  vergeType: values.vergeType,
+  navn: values.navn,
+  gyldigFom: values.gyldigFom,
   gyldigTom: values.gyldigTom,
   ...(values.vergeType === VergeType.ADVOKAT
-    ? { organisasjonsnummer: values.organisasjonsnummer! }
-    : { fnr: values.fnr! }),
+    ? { organisasjonsnummer: notEmpty(values.organisasjonsnummer) }
+    : { fnr: notEmpty(values.fnr) }),
 });

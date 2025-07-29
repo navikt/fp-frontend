@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
-import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfCheckbox, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -16,7 +16,7 @@ import {
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
@@ -36,51 +36,11 @@ export const gyldigeUttakperioder = [
   UttakPeriodeType.MODREKVOTE,
 ];
 
-const mapPeriodeTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
-  typer
-    .filter(({ kode }) => gyldigeUttakperioder.some(gu => gu === kode))
-    .map(({ kode, navn }) => (
-      <option value={kode} key={kode}>
-        {navn}
-      </option>
-    ));
-
-const mapAktiviteter = (aktiviteter: KodeverkMedNavn[]): ReactElement[] =>
-  aktiviteter.map(({ kode, navn }) => (
-    <option value={kode} key={kode}>
-      {navn}
-    </option>
-  ));
-
-export const PERIODS_WITH_NO_MORS_AKTIVITET = [
+const PERIODS_WITH_NO_MORS_AKTIVITET = [
   UttakPeriodeType.FEDREKVOTE,
   UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
   UttakPeriodeType.MODREKVOTE,
 ];
-
-const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
-
-const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
-  !!periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
-
-const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
-  const perioder = getValues(FA_PREFIX) ?? [];
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return dateRangesNotOverlapping(periodeMap);
-};
-
-const getValiderFomOgTomVerdi =
-  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, erFør: boolean) => () => {
-    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-    if (!tomVerdi || !fomVerdi) {
-      return null;
-    }
-
-    return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-  };
 
 interface Props {
   readOnly: boolean;
@@ -96,10 +56,12 @@ interface Props {
 export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKodeverk }: Props) => {
   const intl = useIntl();
 
-  const periodeTyper = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
-  const morsAktivitetTyper = alleKodeverk[KodeverkType.MORS_AKTIVITET];
+  const periodeTyper = alleKodeverk['UttakPeriodeType'];
+  const morsAktivitetTyper = alleKodeverk['MorsAktivitet'];
 
+  //@ts-expect-error Dette bør fjernast. '-' er gammalt rask
   if (morsAktivitetTyper.filter(({ kode }) => kode === '-').length === 0) {
+    //@ts-expect-error Dette bør fjernast. '-' er gammalt rask
     morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' });
   }
 
@@ -145,16 +107,18 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
         return (
           <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
             <div>
-              <SelectField
-                readOnly={readOnly}
+              <RhfSelect
                 name={`${getPrefix(index)}.periodeType`}
+                control={control}
+                readOnly={readOnly}
                 label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeType' }))}
                 selectValues={mapPeriodeTyper(periodeTyper)}
                 validate={[required]}
               />
             </div>
-            <Datepicker
+            <RhfDatepicker
               isReadOnly={readOnly}
+              control={control}
               name={`${getPrefix(index)}.periodeFom`}
               label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' }))}
               validate={[
@@ -165,8 +129,9 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            <Datepicker
+            <RhfDatepicker
               isReadOnly={readOnly}
+              control={control}
               name={`${getPrefix(index)}.periodeTom`}
               label={getLabel(erForsteRad, intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' }))}
               validate={[
@@ -178,10 +143,11 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
             {!sokerErMor && (
-              <SelectField
+              <RhfSelect
+                name={`${getPrefix(index)}.morsAktivitet`}
+                control={control}
                 readOnly={readOnly}
                 disabled={skalDisableMorsAktivitet}
-                name={`${getPrefix(index)}.morsAktivitet`}
                 label={getLabel(
                   erForsteRad,
                   intl.formatMessage({ id: 'Registrering.Permisjon.Fellesperiode.morsAktivitet' }),
@@ -191,20 +157,23 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               />
             )}
 
-            <CheckboxField
-              readOnly={readOnly}
+            <RhfCheckbox
               name={`${getPrefix(index)}.flerbarnsdager`}
+              control={control}
+              readOnly={readOnly}
               label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
             />
-            <CheckboxField
-              readOnly={readOnly}
+            <RhfCheckbox
               name={`${getPrefix(index)}.harSamtidigUttak`}
+              control={control}
+              readOnly={readOnly}
               label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
             />
 
             {periode.harSamtidigUttak && (
-              <InputField
+              <RhfTextField
                 name={`${getPrefix(index)}.samtidigUttaksprosent`}
+                control={control}
                 validate={[hasValidDecimal, maxValue100]}
                 label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
                 normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
@@ -245,3 +214,43 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) 
       samtidigUttaksprosent: value.samtidigUttaksprosent,
     };
   });
+
+const mapPeriodeTyper = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeUttakperioder.some(gu => gu === kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
+
+const mapAktiviteter = (aktiviteter: KodeverkMedNavn<'MorsAktivitet'>[]): ReactElement[] =>
+  aktiviteter.map(({ kode, navn }) => (
+    <option value={kode} key={kode}>
+      {navn}
+    </option>
+  ));
+
+const getLabel = (erForsteRad: boolean, text: string): string => (erForsteRad ? text : '');
+
+const erPeriodeFormFør01012019 = (periodeFom: string | undefined): boolean =>
+  !!periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
+
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(FA_PREFIX) ?? [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return dateRangesNotOverlapping(periodeMap);
+};
+
+const getValiderFomOgTomVerdi =
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, erFør: boolean) => () => {
+    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
+    if (!tomVerdi || !fomVerdi) {
+      return null;
+    }
+
+    return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+  };

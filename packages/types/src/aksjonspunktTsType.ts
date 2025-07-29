@@ -1,13 +1,21 @@
+import type {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  VilkarType,
+  VurderÅrsak,
+} from '@navikt/fp-kodeverk';
+
 export type Aksjonspunkt = Readonly<{
-  definisjon: string;
-  status: string;
+  definisjon: AksjonspunktKode;
+  status: AksjonspunktStatus;
   begrunnelse: string | null;
-  vilkarType?: string;
+  vilkarType?: VilkarType;
   toTrinnsBehandling?: boolean;
   toTrinnsBehandlingGodkjent?: boolean | null;
-  vurderPaNyttArsaker?: string[] | null;
+  vurderPaNyttArsaker?: VurderÅrsak[] | null;
   besluttersBegrunnelse?: string | null;
-  aksjonspunktType?: string;
+  aksjonspunktType?: AksjonspunktType;
   kanLoses: boolean;
   endretAv?: string | null;
   endretTidspunkt?: string | null;

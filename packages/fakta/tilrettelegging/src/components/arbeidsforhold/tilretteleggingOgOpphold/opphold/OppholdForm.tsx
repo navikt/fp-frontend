@@ -2,14 +2,14 @@ import { FormProvider, useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { Datepicker, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
 import type { ArbeidsforholdTilretteleggingDato, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
 type FormValues = Record<
-  number,
+  string,
   {
     skalVelgeDato: boolean;
   } & SvpAvklartOppholdPeriode
@@ -34,7 +34,6 @@ const validerAtDatoErUnik =
 
 const validerTomEtterFom =
   (intl: IntlShape, index: number, getValues: UseFormGetValues<FormValues>) => (tom?: string) =>
-    // @ts-expect-error Fiks
     dayjs(tom).isBefore(getValues(`${index}.fom`)) ? intl.formatMessage({ id: 'OppholdForm.TomForFom' }) : null;
 
 const validerAtPeriodeErGyldig =
@@ -62,9 +61,7 @@ const validerAtPeriodeIkkeOverlapper =
     alleOpphold: SvpAvklartOppholdPeriode[],
   ) =>
   () => {
-    // @ts-expect-error Fiks
     const fomDato = getValues(`${index}.fom`);
-    // @ts-expect-error Fiks
     const tomDato = getValues(`${index}.tom`);
     const periodeMap = alleOpphold
       .filter(p => p.fom !== valgtOpphold.fom)
@@ -140,8 +137,9 @@ export const OppholdForm = ({
       >
         <VStack gap="10">
           <HStack gap="4">
-            <Datepicker
+            <RhfDatepicker
               name={`${index}.fom`}
+              control={formMethods.control}
               label={intl.formatMessage({
                 id: 'OppholdForm.FraOgMed',
               })}
@@ -153,8 +151,9 @@ export const OppholdForm = ({
               ]}
               isReadOnly={forVisning}
             />
-            <Datepicker
+            <RhfDatepicker
               name={`${index}.tom`}
+              control={formMethods.control}
               label={intl.formatMessage({
                 id: 'OppholdForm.TilOgMed',
               })}
@@ -168,8 +167,9 @@ export const OppholdForm = ({
               isReadOnly={forVisning}
             />
           </HStack>
-          <RadioGroupPanel
+          <RhfRadioGroup
             name={`${index}.oppholdÅrsak`}
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
             validate={[required]}
             isReadOnly={forVisning}

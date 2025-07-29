@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
 import { ForeldreType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const PermisjonFulltUttak = ({ foreldreType, readOnly, alleKodeverk }: Props) => {
-  const { watch } = useFormContext<PermisjonFormValues>();
+  const { watch, control } = useFormContext<PermisjonFormValues>();
   const fulltUttak = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`) ?? false;
 
   return (
@@ -26,9 +26,10 @@ export const PermisjonFulltUttak = ({ foreldreType, readOnly, alleKodeverk }: Pr
       <Label>
         <FormattedMessage id="Registrering.Permisjon.FulltUttak" />
       </Label>
-      <CheckboxField
-        readOnly={readOnly}
+      <RhfCheckbox
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.fulltUttak`}
+        control={control}
+        readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.FulltUttak" />}
       />
       {fulltUttak && (

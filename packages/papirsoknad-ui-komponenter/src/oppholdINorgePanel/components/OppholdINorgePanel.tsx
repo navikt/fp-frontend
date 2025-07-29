@@ -1,11 +1,9 @@
-import { useMemo } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
@@ -19,7 +17,7 @@ export type OppholdINorgeFormValues = {
   fremtidigeOppholdUtenlands?: FormValuesFieldArray[];
 };
 
-export type TranformFormValues = {
+type TranformFormValues = {
   oppholdINorge?: boolean;
   harTidligereOppholdUtenlands?: boolean;
   harFremtidigeOppholdUtenlands?: boolean;
@@ -43,12 +41,9 @@ interface Props {
  */
 export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato, erAdopsjon }: Props) => {
   const { formatMessage } = useIntl();
-  const sortedCountriesByName = useMemo(
-    () => alleKodeverk[KodeverkType.LANDKODER].slice().sort((a, b) => a.navn.localeCompare(b.navn)),
-    [alleKodeverk],
-  );
+  const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
-  const { watch } = useFormContext<OppholdINorgeFormValues>();
+  const { watch, control } = useFormContext<OppholdINorgeFormValues>();
   const skalViseTidligereOppholdInput = !watch('oppholdSisteTolvINorge', true);
   const skalViseFremtidigeOppholdInput = !watch('oppholdNesteTolvINorge', true);
 
@@ -61,6 +56,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
 
         <TrueFalseInput
           name="oppholdINorge"
+          control={control}
           label={formatMessage({
             id: erAdopsjon ? 'Registrering.OppholdVedAdopsjon' : 'Registrering.OppholdVedFodsel',
           })}
@@ -70,6 +66,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
         <VStack gap="2">
           <TrueFalseInput
             name="oppholdSisteTolvINorge"
+            control={control}
             label={<FormattedMessage id="Registrering.OppholdSisteTolv" />}
             readOnly={readOnly}
           />
@@ -88,6 +85,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
         <VStack gap="2">
           <TrueFalseInput
             name="oppholdNesteTolvINorge"
+            control={control}
             label={<FormattedMessage id="Registrering.OppholdNesteTolv" />}
             readOnly={readOnly}
           />

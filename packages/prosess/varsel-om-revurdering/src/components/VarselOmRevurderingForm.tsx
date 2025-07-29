@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Link, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, ReadOnlyField, TextAreaField } from '@navikt/ft-form-hooks';
+import { ReadOnlyField, RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -14,12 +14,11 @@ import {
   AksjonspunktStatus,
   BehandlingType,
   DokumentMalType,
-  KodeverkType,
-  UgunstAarsakType,
+  RevurderingVarslingÅrsak,
 } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, KodeverkMedNavn, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -52,8 +51,6 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
 });
 
 const nullSafe = (value: FamilieHendelse | null): FamilieHendelse => value ?? ({} as FamilieHendelse);
-
-const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 interface Props {
   familiehendelse: FamilieHendelseSamling;
@@ -110,7 +107,7 @@ export const VarselOmRevurderingForm = ({
     e.preventDefault();
     previewCallback({
       dokumentMal: DokumentMalType.VARSEL_OM_REVURDERING,
-      arsakskode: UgunstAarsakType.ANNET,
+      arsakskode: RevurderingVarslingÅrsak.ANNET,
       fritekst: formVerdier.fritekst ?? ' ',
     });
   };
@@ -123,11 +120,11 @@ export const VarselOmRevurderingForm = ({
     (result, current) => result || current.erAutomatiskRevurdering,
     false,
   );
-  const ventearsaker = alleKodeverk[KodeverkType.VENT_AARSAK] ?? EMPTY_ARRAY;
+  const ventearsaker = alleKodeverk['Venteårsak'] ?? [];
   const language = getLanguageFromSprakkode(behandling.språkkode);
   return (
     <>
-      <Form formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap="4">
           <Heading size="small">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
@@ -148,8 +145,9 @@ export const VarselOmRevurderingForm = ({
                   familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
                 />
               )}
-              <RadioGroupPanel
+              <RhfRadioGroup
                 name="sendVarsel"
+                control={formMethods.control}
                 validate={[required]}
                 isHorizontal
                 isTrueOrFalseSelection
@@ -160,9 +158,10 @@ export const VarselOmRevurderingForm = ({
                     element: (
                       <ArrowBox marginTop={6}>
                         <VStack gap="2">
-                          <TextAreaField
-                            badges={[{ type: 'info', titleText: language }]}
+                          <RhfTextarea
                             name="fritekst"
+                            control={formMethods.control}
+                            badges={[{ type: 'info', titleText: language }]}
                             label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
                             validate={[required, minLength3, maxLength10000, hasValidText]}
                             maxLength={10000}
@@ -183,8 +182,9 @@ export const VarselOmRevurderingForm = ({
                   },
                 ]}
               />
-              <TextAreaField
+              <RhfTextarea
                 name="begrunnelse"
+                control={formMethods.control}
                 label={intl.formatMessage({ id: 'VarselOmRevurderingForm.BegrunnelseForSvar' })}
                 validate={[required, minLength3, hasValidText]}
               />
@@ -211,7 +211,7 @@ export const VarselOmRevurderingForm = ({
             />
           )}
         </VStack>
-      </Form>
+      </RhfForm>
       <SettPaVentModalIndex
         showModal={skalVisePåVentModal}
         frist={dayjs().add(28, 'days').format(ISO_DATE_FORMAT)}

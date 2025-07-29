@@ -1,9 +1,9 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -18,15 +18,13 @@ const intl = createIntl(messages);
 
 const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode?: string) => () => erVilkarOk === false && !avslagCode;
 
-const EMPTY_ARRAY = [] as KodeverkMedNavn[];
-
 type FormValues = {
   erVilkarOk?: boolean;
   avslagskode?: string;
 };
 
 interface Props {
-  avslagsarsaker?: KodeverkMedNavn[];
+  avslagsarsaker?: KodeverkMedNavn<'Avslagsårsak'>[];
   customVilkarIkkeOppfyltText: string | ReactElement;
   customVilkarOppfyltText: string | ReactElement;
   readOnly: boolean;
@@ -34,8 +32,9 @@ interface Props {
   validatorsForRadioOptions?: ((value: boolean) => string | null | undefined)[];
 }
 
-const sorterAvslagsArsaker = (avslagsarsakerUsortert: KodeverkMedNavn[]): KodeverkMedNavn[] =>
-  avslagsarsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
+const sorterAvslagsArsaker = (
+  avslagsarsakerUsortert: KodeverkMedNavn<'Avslagsårsak'>[],
+): KodeverkMedNavn<'Avslagsårsak'>[] => avslagsarsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
 /**
  * VilkarResultPicker
@@ -50,13 +49,11 @@ export const VilkarResultPicker = ({
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
 }: Props) => {
-  const { getValues, watch } = useFormContext();
+  // TODO (TOR) useFormContext manglar typing
+  const { getValues, watch, control } = useFormContext();
   const erVilkarOk = watch('erVilkarOk');
 
-  const radioValidators = useMemo(
-    () => (validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required]),
-    [validatorsForRadioOptions],
-  );
+  const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
 
   return (
     <VStack gap="4" paddingInline="4">
@@ -70,8 +67,9 @@ export const VilkarResultPicker = ({
       )}
 
       {(!readOnly || erVilkarOk === undefined) && (
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="erVilkarOk"
+          control={control}
           // @ts-expect-error Fiks denne!
           validate={radioValidators}
           isReadOnly={readOnly}
@@ -90,10 +88,11 @@ export const VilkarResultPicker = ({
         />
       )}
       {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
-        <SelectField
+        <RhfSelect
           name="avslagskode"
+          control={control}
           label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-          selectValues={sorterAvslagsArsaker(avslagsarsaker || EMPTY_ARRAY).map(aa => (
+          selectValues={sorterAvslagsArsaker(avslagsarsaker || []).map(aa => (
             <option key={aa.kode} value={aa.kode}>
               {aa.navn}
             </option>

@@ -1,18 +1,18 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { ariaCheck } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { BehandlingType, KonsekvensForYtelsen, VurderPaNyttArsakType } from '@navikt/fp-kodeverk';
+import { BehandlingType, KonsekvensForYtelsen, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
   TotrinnskontrollAksjonspunkt,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
@@ -44,25 +44,25 @@ const harIkkeKonsekvenserForYtelsen = (
 
 const finnArsaker = (vurderPaNyttArsaker: string[]) =>
   vurderPaNyttArsaker.reduce((acc, arsak) => {
-    if (arsak === VurderPaNyttArsakType.FEIL_FAKTA) {
+    if (arsak === VurderÅrsak.FEIL_FAKTA) {
       return { ...acc, feilFakta: true };
     }
-    if (arsak === VurderPaNyttArsakType.FEIL_LOV) {
+    if (arsak === VurderÅrsak.FEIL_LOV) {
       return { ...acc, feilLov: true };
     }
-    if (arsak === VurderPaNyttArsakType.FEIL_REGEL) {
+    if (arsak === VurderÅrsak.FEIL_REGEL) {
       return { ...acc, feilSkjønn: true };
     }
-    if (arsak === VurderPaNyttArsakType.SKJØNN) {
+    if (arsak === VurderÅrsak.SKJØNN) {
       return { ...acc, feilSkjønn: true };
     }
-    if (arsak === VurderPaNyttArsakType.UTREDNING) {
+    if (arsak === VurderÅrsak.UTREDNING) {
       return { ...acc, feilUtredning: true };
     }
-    if (arsak === VurderPaNyttArsakType.SAKSFLYT || arsak === VurderPaNyttArsakType.ANNET) {
+    if (arsak === VurderÅrsak.SAKSFLYT || arsak === VurderÅrsak.ANNET) {
       return { ...acc, feilSaksflyt: true };
     }
-    if (arsak === VurderPaNyttArsakType.BEGRUNNELSE) {
+    if (arsak === VurderÅrsak.BEGRUNNELSE) {
       return { ...acc, feilBegrunnelse: true };
     }
     return {};
@@ -91,10 +91,10 @@ interface Props {
   readOnly: boolean;
   erTilbakekreving: boolean;
   erForeldrepengerFagsak: boolean;
-  skjemalenkeTyper: KodeverkMedNavn[];
+  skjemalenkeTyper: KodeverkMedNavn<'SkjermlenkeType'>[] | KodeverkMedNavnTilbakekreving<'SkjermlenkeType'>[];
   erBehandlingEtterKlage: boolean;
-  faktaOmBeregningTilfeller: KodeverkMedNavn[];
-  lagLenke: (skjermlenkeCode: string) => Location | undefined;
+  faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
+  lagLenke: (skjermlenkeCode: SkjermlenkeType) => Location | undefined;
   onSubmit: (data: FormValues) => void;
   beslutterFormData?: FormValues;
   setBeslutterFormData: (data?: FormValues) => void;
@@ -117,19 +117,12 @@ export const TotrinnskontrollBeslutterForm = ({
 }: Props) => {
   const erKlage = behandling && behandling.type === BehandlingType.KLAGE;
   const erAnke = behandling && behandling.type === BehandlingType.ANKE;
-  const harIkkeKonsekvensForYtelse = useMemo(
-    () =>
-      harIkkeKonsekvenserForYtelsen(
-        [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
-        behandling.behandlingsresultat,
-      ),
-    [behandling.behandlingsresultat],
+  const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
+    [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
+    behandling.behandlingsresultat,
   );
 
-  const defaultValues = useMemo(
-    () => buildInitialValues(totrinnskontrollSkjermlenkeContext),
-    [totrinnskontrollSkjermlenkeContext],
-  );
+  const defaultValues = buildInitialValues(totrinnskontrollSkjermlenkeContext);
   const formMethods = useForm({
     defaultValues: beslutterFormData || defaultValues,
   });
@@ -141,7 +134,7 @@ export const TotrinnskontrollBeslutterForm = ({
   }
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setBeslutterFormData}>
+    <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setBeslutterFormData}>
       <VStack gap="6">
         {!readOnly && (
           <AksjonspunktHelpTextHTML>
@@ -191,6 +184,6 @@ export const TotrinnskontrollBeslutterForm = ({
           )}
         </HStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

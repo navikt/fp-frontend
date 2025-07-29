@@ -1,10 +1,10 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Link, Tooltip, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -13,52 +13,13 @@ import { AksjonspunktKode, FagsakYtelseType, TilbakekrevingVidereBehandling } fr
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-import type { FeilutbetalingFormValues, FormValues } from '../types/FormValues';
+import type { FeilutbetalingFormValues } from '../types/FormValues';
 
 import styles from './tilbakekrevSøkerForm.module.css';
 
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 const IKKE_SEND = 'IKKE_SEND';
-
-export const transformValues = (values: FormValues): VurderFeilutbetalingAp => {
-  const { videreBehandling, varseltekst, begrunnelse } = values;
-  if (videreBehandling?.endsWith(IKKE_SEND)) {
-    return {
-      kode: AksjonspunktKode.VURDER_FEILUTBETALING,
-      begrunnelse,
-      videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
-    };
-  }
-
-  return {
-    kode: AksjonspunktKode.VURDER_FEILUTBETALING,
-    begrunnelse,
-    videreBehandling: videreBehandling!,
-    varseltekst,
-  };
-};
-
-export const buildInitialValues = (
-  aksjonspunkt?: Aksjonspunkt,
-  tilbakekrevingvalg?: TilbakekrevingValg,
-): FeilutbetalingFormValues | undefined => {
-  if (!aksjonspunkt || !tilbakekrevingvalg) {
-    return undefined;
-  }
-
-  const harTypeIkkeSendt =
-    !tilbakekrevingvalg.varseltekst &&
-    tilbakekrevingvalg.videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
-
-  return {
-    videreBehandling: harTypeIkkeSendt
-      ? tilbakekrevingvalg.videreBehandling + IKKE_SEND
-      : tilbakekrevingvalg.videreBehandling,
-    varseltekst: tilbakekrevingvalg.varseltekst,
-    begrunnelse: aksjonspunkt.begrunnelse ?? '',
-  };
-};
 
 interface Props {
   fagsak: Fagsak;
@@ -71,19 +32,16 @@ interface Props {
 export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, aksjonspunkt, fagsak }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FeilutbetalingFormValues>();
 
   const varseltekst = watch('varseltekst');
 
   const isForeldrepenger = fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER;
 
-  const previewMessage = useCallback(
-    (e: React.MouseEvent): void => {
-      previewCallback({ mottaker: '', fritekst: varseltekst ?? ' ' });
-      e.preventDefault();
-    },
-    [varseltekst],
-  );
+  const previewMessage = (e: React.MouseEvent): void => {
+    previewCallback({ mottaker: '', fritekst: varseltekst ?? ' ' });
+    e.preventDefault();
+  };
 
   if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.VURDER_FEILUTBETALING) {
     return null;
@@ -91,15 +49,17 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
 
   return (
     <VStack gap="10" align="start">
-      <TextAreaField
+      <RhfTextarea
         name="begrunnelse"
+        control={control}
         label={intl.formatMessage({ id: 'Simulering.vurdering' })}
         validate={[required, minLength3, maxLength1500, hasValidText]}
         maxLength={1500}
         readOnly={readOnly}
       />
-      <RadioGroupPanel
+      <RhfRadioGroup
         name="videreBehandling"
+        control={control}
         label={<FormattedMessage id="Simulering.videreBehandling" />}
         validate={[required]}
         isReadOnly={readOnly}
@@ -125,8 +85,9 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
                         <QuestionmarkDiamondIcon className={styles.helpTextImage} />
                       </Tooltip>
                     </HStack>
-                    <TextAreaField
+                    <RhfTextarea
                       name="varseltekst"
+                      control={control}
                       label={intl.formatMessage({ id: 'Simulering.fritekst' })}
                       validate={[required, minLength3, maxLength1500, hasValidText]}
                       maxLength={1500}
@@ -161,4 +122,43 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
       />
     </VStack>
   );
+};
+
+TilbakekrevSøkerForm.initialValues = (
+  aksjonspunkt?: Aksjonspunkt,
+  tilbakekrevingvalg?: TilbakekrevingValg,
+): FeilutbetalingFormValues | undefined => {
+  if (!aksjonspunkt || !tilbakekrevingvalg) {
+    return undefined;
+  }
+
+  const harTypeIkkeSendt =
+    !tilbakekrevingvalg.varseltekst &&
+    tilbakekrevingvalg.videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
+
+  return {
+    videreBehandling: harTypeIkkeSendt
+      ? tilbakekrevingvalg.videreBehandling + IKKE_SEND
+      : tilbakekrevingvalg.videreBehandling,
+    varseltekst: tilbakekrevingvalg.varseltekst,
+    begrunnelse: aksjonspunkt.begrunnelse ?? '',
+  };
+};
+
+TilbakekrevSøkerForm.transformValues = (values: FeilutbetalingFormValues): VurderFeilutbetalingAp => {
+  const { videreBehandling, varseltekst, begrunnelse } = values;
+  if (videreBehandling?.endsWith(IKKE_SEND)) {
+    return {
+      kode: AksjonspunktKode.VURDER_FEILUTBETALING,
+      begrunnelse,
+      videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
+    };
+  }
+
+  return {
+    kode: AksjonspunktKode.VURDER_FEILUTBETALING,
+    begrunnelse,
+    videreBehandling,
+    varseltekst,
+  };
 };

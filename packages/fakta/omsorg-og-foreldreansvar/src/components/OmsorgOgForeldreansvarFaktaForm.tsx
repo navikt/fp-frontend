@@ -3,11 +3,11 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, HGrid, Label, VStack } from '@navikt/ds-react';
-import { SelectField } from '@navikt/ft-form-hooks';
+import { RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { EditedIcon, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { type FieldEditedInfo, isFieldEdited } from '@navikt/fp-fakta-felles';
+import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
@@ -23,10 +23,11 @@ import type {
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
 import { BarnPanel } from './BarnPanel';
 import { ForeldrePanel } from './ForeldrePanel';
-import { type FormValues as OmsorgFormValues, OmsorgsovertakelseFaktaPanel } from './OmsorgsovertakelseFaktaPanel';
-import { type FormValues as RettighetFormValues, RettighetFaktaPanel } from './RettighetFaktaPanel';
+import { OmsorgsovertakelseFaktaPanel } from './OmsorgsovertakelseFaktaPanel';
+import { RettighetFaktaPanel } from './RettighetFaktaPanel';
 
 import styles from './omsorgOgForeldreansvarFaktaForm.module.css';
 
@@ -43,19 +44,11 @@ const getDescriptionText = (vilkarCode?: string): ReactElement => {
   return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkarToSeeDescription" />;
 };
 
-const getEditedStatus = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): FieldEditedInfo =>
-  isFieldEdited(soknad, gjeldendeFamiliehendelse);
-
-export type FormValues = OmsorgFormValues &
-  RettighetFormValues & {
-    vilkarType?: string;
-  };
-
 interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   readOnly: boolean;
-  vilkarTypes: KodeverkMedNavn[];
+  vilkarTypes: KodeverkMedNavn<'OmsorgsovertakelseVilkårType'>[];
   erAksjonspunktForeldreansvar: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   personoversikt: Personoversikt;
@@ -77,9 +70,8 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<OmsorgOgForeldreansvarFormValues>();
 
-  const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
   const vilkarType = watch('vilkarType');
 
   return (
@@ -88,7 +80,6 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
         <OmsorgsovertakelseFaktaPanel
           readOnly={readOnly}
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
-          editedStatus={editedStatus}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
           familiehendelse={gjeldendeFamiliehendelse}
@@ -106,8 +97,9 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
         >
           <VStack gap="4">
             {!readOnly && (
-              <SelectField
+              <RhfSelect
                 name="vilkarType"
+                control={control}
                 validate={[required]}
                 hideLabel
                 label=""
@@ -126,7 +118,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
                 <Label size="small" as="span">
                   {vilkarTypes.find(d => d.kode === vilkarType)?.navn}
                 </Label>
-                {editedStatus.vilkarType && <EditedIcon />}
+                {hasValue(gjeldendeFamiliehendelse.vilkarType) && <EditedIcon />}
               </div>
             )}
             <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
@@ -142,14 +134,14 @@ OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (
   gjeldendeFamiliehendelse: FamilieHendelse,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
   alleKodeverk: AlleKodeverk,
-): FormValues => ({
+): OmsorgOgForeldreansvarFormValues => ({
   vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType : '',
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, gjeldendeFamiliehendelse),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, alleKodeverk),
 });
 
 OmsorgOgForeldreansvarFaktaForm.transformValues = (
-  values: FormValues,
+  values: OmsorgOgForeldreansvarFormValues,
   aksjonspunkt: Aksjonspunkt,
 ): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp =>
   aksjonspunkt.definisjon === AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR

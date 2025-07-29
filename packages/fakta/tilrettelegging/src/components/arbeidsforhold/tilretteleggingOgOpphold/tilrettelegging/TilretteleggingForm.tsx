@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { Datepicker, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -22,7 +22,7 @@ import styles from './tilretteleggingForm.module.css';
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
 
-type FormValues = Record<number, ArbeidsforholdTilretteleggingDato>;
+type FormValues = Record<string, ArbeidsforholdTilretteleggingDato>;
 
 const validerAtDatoErUnik =
   (
@@ -207,8 +207,9 @@ export const TilretteleggingForm = ({
               tomDato={tomDatoForTilrettelegging}
             />
           )}
-          <Datepicker
+          <RhfDatepicker
             name={`${index}.fom`}
+            control={formMethods.control}
             label={intl.formatMessage({
               id: 'TilretteleggingForm.FraOgMed',
             })}
@@ -225,8 +226,9 @@ export const TilretteleggingForm = ({
             ]}
             isReadOnly={readOnly}
           />
-          <RadioGroupPanel
+          <RhfRadioGroup
             name={`${index}.type`}
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
             validate={[required]}
             isReadOnly={readOnly}
@@ -251,8 +253,9 @@ export const TilretteleggingForm = ({
                 tilrettelegging.type !== TilretteleggingType.DELVIS_TILRETTELEGGING ||
                 erNyPeriode ||
                 formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
-                <NumberField
+                <RhfNumericField
                   name={`${index}.stillingsprosent`}
+                  control={formMethods.control}
                   className={styles.arbeidsprosent}
                   readOnly={readOnly}
                   label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
@@ -265,13 +268,13 @@ export const TilretteleggingForm = ({
                       velferdspermisjonprosent,
                       value,
                     );
-                    // @ts-expect-error Fiks
                     formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
                   }}
                 />
               )}
-              <NumberField
+              <RhfNumericField
                 name={`${index}.overstyrtUtbetalingsgrad`}
+                control={formMethods.control}
                 className={styles.utbetalingsgrad}
                 readOnly={readOnly}
                 label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}

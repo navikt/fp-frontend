@@ -6,7 +6,7 @@
   "Risikopanel.Panel.Tittel": "Vurder faresignalene",
   "Risikopanel.Panel.Medlemskap": "Medlemskap",
   "Risikopanel.Panel.ArbeidsforholdInntekt": "Arbeidsforhold og inntekt",
-  "Risikopanel.Form.Resultat": "Resultat av vurderingen",
-  "Risikopanel.Form.Bekreft": "Bekreft og fortsett",
+  "Risikopanel.RhfForm.Resultat": "Resultat av vurderingen",
+  "Risikopanel.RhfForm.Bekreft": "Bekreft og fortsett",
   "Risikopanel.Forms.Vurdering": "Vurdering"
 }

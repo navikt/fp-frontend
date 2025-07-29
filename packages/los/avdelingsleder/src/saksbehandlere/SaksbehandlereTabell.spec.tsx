@@ -7,7 +7,7 @@ import * as stories from './SaksbehandlereTabell.stories';
 
 const { Default, TomTabell, MedSaksbehandlerUtenAnsattAvdeling } = composeStories(stories);
 
-describe('<SaksbehandlereTabell>', () => {
+describe('SaksbehandlereTabell', () => {
   it('skal vise to saksbehandlere i tabell', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);

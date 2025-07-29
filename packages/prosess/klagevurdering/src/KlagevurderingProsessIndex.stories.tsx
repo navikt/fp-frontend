@@ -1,7 +1,7 @@
 import { type ComponentProps } from 'react';
 
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
@@ -11,8 +11,8 @@ import {
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
+import { type TransformedValues } from './components/nfp/BehandleKlageFormNfp';
 import type { KlagevurderingForhåndsvisData } from './components/nfp/PreviewKlageLink';
-import type { TransformedValues } from './components/nfp/TempsaveKlageButton';
 import { KlagevurderingProsessIndex } from './KlagevurderingProsessIndex';
 
 const meta = {

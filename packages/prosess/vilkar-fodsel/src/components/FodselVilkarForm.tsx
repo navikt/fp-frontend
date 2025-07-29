@@ -2,14 +2,13 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
   FagsakYtelseType,
-  KodeverkType,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -20,10 +19,7 @@ import {
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar } from '@navikt/fp-types';
-import type {
-  VurdereYtelseSammeBarnAnnenForelderAp,
-  VurdereYtelseSammeBarnSokerAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const avslagsarsakerES = ['1002', '1003', '1032'];
@@ -57,7 +53,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     harÅpneAksjonspunkter,
     isReadOnly,
     alleMerknaderFraBeslutter,
-  } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp>();
+  } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
@@ -70,7 +66,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const alleAvslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.FODSELSVILKARET_MOR];
+  const alleAvslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.FODSELSVILKARET_MOR];
   const avslagsarsaker = getFodselVilkarAvslagsarsaker(
     ytelseTypeKode === FagsakYtelseType.FORELDREPENGER,
     alleAvslagsarsaker,
@@ -81,7 +77,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
   const { lovReferanse } = vilkar[0];
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -110,7 +106,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
           <ProsessStegBegrunnelseTextFieldNew useAllWidth readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };
 
@@ -123,23 +119,16 @@ const buildInitialValues = (
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (
-  values: FormValues,
-  aksjonspunkter: Aksjonspunkt[],
-): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(
-    aksjonspunkter[0].definisjon,
-    AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
-  ),
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon, AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN),
 });
 
 const getFodselVilkarAvslagsarsaker = (
   isFpFagsak: boolean,
-  fodselsvilkarAvslagskoder: KodeverkMedNavn[],
-): KodeverkMedNavn[] =>
+  fodselsvilkarAvslagskoder: KodeverkMedNavn<'Avslagsårsak'>[],
+): KodeverkMedNavn<'Avslagsårsak'>[] =>
   isFpFagsak
     ? fodselsvilkarAvslagskoder.filter(arsak => !avslagsarsakerES.includes(arsak.kode))
     : fodselsvilkarAvslagskoder;

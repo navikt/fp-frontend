@@ -7,7 +7,7 @@ import * as stories from './LeggTilSaksbehandlerForm.stories';
 
 const { Default, SaksbehandlerFinnesIkke } = composeStories(stories);
 
-describe('<LeggTilSaksbehandlerForm>', () => {
+describe('LeggTilSaksbehandlerForm', () => {
   it('skal vise at oppgitt brukerident ikke finnes', async () => {
     await applyRequestHandlers(SaksbehandlerFinnesIkke.parameters['msw']);
     const utils = render(<SaksbehandlerFinnesIkke />);

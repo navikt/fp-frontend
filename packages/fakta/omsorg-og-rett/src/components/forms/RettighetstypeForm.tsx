@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { Form, SelectField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
@@ -15,7 +15,7 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
 
-export type FormValues = {
+type FormValues = {
   rettighetstype: Rettighetstype;
   begrunnelse: string;
 };
@@ -72,15 +72,16 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
   const [erOverstyrt, setErOverstyrt] = useState(!!aksjonspunkt?.begrunnelse);
   const readOnly = !erOverstyrt || isReadOnly || !kanOverstyre;
   return (
-    <Form formMethods={formMethods} onSubmit={transformerFeltverdier}>
+    <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier}>
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG]}
       >
         <VStack gap="6">
           <HStack gap="2" align="start">
-            <SelectField
+            <RhfSelect
               name="rettighetstype"
+              control={formMethods.control}
               label={<FormattedMessage id="Rettighetstype.SelectLabel" />}
               validate={[required]}
               className={styles.selectType}
@@ -97,6 +98,7 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
           </HStack>
 
           <FaktaBegrunnelseTextField
+            control={formMethods.control}
             isSubmittable={submittable}
             isReadOnly={readOnly}
             hasBegrunnelse={true}
@@ -110,6 +112,6 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
           />
         </VStack>
       </FaktaGruppe>
-    </Form>
+    </RhfForm>
   );
 };

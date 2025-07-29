@@ -7,7 +7,7 @@ import * as stories from './AndreYtelserPapirsoknadIndex.stories';
 
 const { Default, KunMiliterEllerSiviltjeneste } = composeStories(stories);
 
-describe('<AndreYtelserPapirsoknadIndex>', () => {
+describe('AndreYtelserPapirsoknadIndex', () => {
   it('skal validere at fom-dato er før tom-dato', async () => {
     const lagre = vi.fn();
 

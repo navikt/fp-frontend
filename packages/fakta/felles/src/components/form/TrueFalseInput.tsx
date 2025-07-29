@@ -1,6 +1,7 @@
 import React from 'react';
+import type { FieldValues, UseControllerProps } from 'react-hook-form';
 
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -8,20 +9,31 @@ import messages from '../../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-type Props = {
-  name: string;
+type Props<T extends FieldValues> = {
+  name: UseControllerProps<T>['name'];
+  control: UseControllerProps<T>['control'];
   label: React.ReactNode;
   readOnly: boolean;
-  trueLabel?: React.ReactNode;
+  trueLabel?: React.ReactElement;
   trueContent?: React.ReactElement;
-  falseLabel?: React.ReactNode;
+  falseLabel?: React.ReactElement;
   falseContent?: React.ReactElement;
 };
 
-export const TrueFalseInput = ({ name, label, readOnly, trueLabel, trueContent, falseLabel, falseContent }: Props) => {
+export const TrueFalseInput = <T extends FieldValues>({
+  name,
+  control,
+  label,
+  readOnly,
+  trueLabel,
+  trueContent,
+  falseLabel,
+  falseContent,
+}: Props<T>) => {
   return (
-    <RadioGroupPanel
+    <RhfRadioGroup
       name={name}
+      control={control}
       label={label}
       validate={[required]}
       isReadOnly={readOnly}

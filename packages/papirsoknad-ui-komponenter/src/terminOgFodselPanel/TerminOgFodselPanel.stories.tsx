@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
-import { action } from '@storybook/addon-actions';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { TerminOgFodselPanel } from './TerminOgFodselPanel';
 
@@ -20,14 +20,17 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <Form formMethods={formMethods} onSubmit={values => submitCallback(TerminOgFodselPanel.transformValues(values))}>
+      <RhfForm
+        formMethods={formMethods}
+        onSubmit={values => submitCallback(TerminOgFodselPanel.transformValues(values))}
+      >
         <VStack gap="10">
           <TerminOgFodselPanel {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
         </VStack>
-      </Form>
+      </RhfForm>
     );
   },
 } satisfies Meta<typeof TerminOgFodselPanel>;

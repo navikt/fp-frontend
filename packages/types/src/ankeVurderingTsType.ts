@@ -1,8 +1,10 @@
+import type { AnkeOmgjorArsak } from '@navikt/fp-kodeverk';
+
 export type AnkeVurdering = Readonly<{
   ankeVurderingResultat?: {
     ankeVurdering?: string;
     ankeVurderingOmgjoer?: string;
-    ankeOmgjoerArsak?: string;
+    ankeOmgjoerArsak?: AnkeOmgjorArsak;
     trygderettVurdering?: string;
     trygderettVurderingOmgjoer?: string;
     trygderettOmgjoerArsak?: string;

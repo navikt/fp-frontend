@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
-import { CheckboxField, Datepicker, InputField, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfCheckbox, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -30,43 +30,6 @@ import { gyldigeUttakperioder } from '../fulltUttak/RenderPermisjonPeriodeFieldA
 const maxLength9OrFodselsnr = maxLengthOrFodselsnr(9);
 
 const FA_PREFIX = `${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.${GRADERING_PERIODE_FIELD_ARRAY_NAME}`;
-const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
-
-const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
-  const perioder = getValues(`${FA_PREFIX}`) ?? [];
-  const periodeMap = perioder
-    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
-    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
-  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
-};
-
-const getValiderFørEllerEtter =
-  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, sjekkFør: boolean) => () => {
-    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
-    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
-
-    if (!tomVerdi || !fomVerdi) {
-      return null;
-    }
-
-    return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
-  };
-
-const getValiderArbeidsgiverIdNårRequired =
-  (getValues: UseFormGetValues<PermisjonFormValues>, index: number) => (arbeidsgiverIdentifikator: string) => {
-    const arbeidsgiverIdentifikatorRequired =
-      getValues(`${getPrefix(index)}.arbeidskategoriType`) === Arbeidskategori.ARBEIDSTAKER;
-    return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
-  };
-
-const validerAtArbeidsgiverIdErGyldig = (arbeidsgiverIdentifikator: string) => {
-  if (!arbeidsgiverIdentifikator) {
-    return undefined;
-  }
-  return arbeidsgiverIdentifikator.length === 11
-    ? hasValidFodselsnummer(arbeidsgiverIdentifikator)
-    : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
-};
 
 const defaultGraderingPeriode: GraderingPeriode = {
   periodeFom: '',
@@ -76,36 +39,17 @@ const defaultGraderingPeriode: GraderingPeriode = {
   skalGraderes: false,
 };
 
-export const gyldigArbeidskategori = [
+const gyldigArbeidskategori = [
   Arbeidskategori.ARBEIDSTAKER,
   Arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE,
   Arbeidskategori.FRILANSER,
 ];
 
 const maxValue100 = maxValue(100);
-
-const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
-  typer
-    .filter(({ kode }) => gyldigeUttakperioder.some(ga => ga === kode))
-    .map(({ kode, navn }) => (
-      <option value={kode} key={kode}>
-        {navn}
-      </option>
-    ));
-
-const mapArbeidskategori = (typer: KodeverkMedNavn[]): ReactElement[] =>
-  typer
-    .filter(({ kode }) => gyldigArbeidskategori.some(ga => ga === kode))
-    .map(({ kode, navn }) => (
-      <option value={kode} key={kode}>
-        {navn}
-      </option>
-    ));
-
 interface Props {
-  graderingKvoter: KodeverkMedNavn[];
+  graderingKvoter: KodeverkMedNavn<'UttakPeriodeType'>[];
   readOnly: boolean;
-  arbeidskategoriTyper: KodeverkMedNavn[];
+  arbeidskategoriTyper: KodeverkMedNavn<'Arbeidskategori'>[];
 }
 
 /**
@@ -152,16 +96,18 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
 
         return (
           <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
-            <SelectField
+            <RhfSelect
               name={`${getPrefix(index)}.periodeForGradering`}
+              control={control}
               selectValues={mapKvoter(graderingKvoter)}
               label={intl.formatMessage({ id: 'Registrering.Permisjon.Gradering.Periode' })}
               validate={[required]}
             />
 
-            <Datepicker
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
+            <RhfDatepicker
               name={`${getPrefix(index)}.periodeFom`}
+              control={control}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
               validate={[
                 required,
                 hasValidDate,
@@ -171,9 +117,10 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
-            <Datepicker
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
+            <RhfDatepicker
               name={`${getPrefix(index)}.periodeTom`}
+              control={control}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
               validate={[
                 required,
                 hasValidDate,
@@ -182,48 +129,55 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            <InputField
-              label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
+            <RhfTextField
               name={`${getPrefix(index)}.prosentandelArbeid`}
+              control={control}
+              label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
               validate={[required, hasValidDecimal, maxValue100]}
               normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
             />
 
-            <InputField
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
+            <RhfTextField
               name={`${getPrefix(index)}.arbeidsgiverIdentifikator`}
+              control={control}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.Orgnr' })}
               validate={[
                 getValiderArbeidsgiverIdNårRequired(getValues, index),
                 hasValidInteger,
                 validerAtArbeidsgiverIdErGyldig,
               ]}
             />
-            <SelectField
-              label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
+            <RhfSelect
               name={`${getPrefix(index)}.arbeidskategoriType`}
+              control={control}
+              label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
               selectValues={mapArbeidskategori(arbeidskategoriTyper)}
               validate={[required]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
-            <CheckboxField
+            <RhfCheckbox
               name={`${getPrefix(index)}.skalGraderes`}
+              control={control}
               label={<FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />}
             />
 
-            <CheckboxField
-              readOnly={readOnly}
+            <RhfCheckbox
               name={`${getPrefix(index)}.flerbarnsdager`}
+              control={control}
+              readOnly={readOnly}
               label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
             />
 
-            <CheckboxField
+            <RhfCheckbox
               name={`${getPrefix(index)}.harSamtidigUttak`}
+              control={control}
               label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
             />
             {harSamtidigUttak && (
-              <InputField
+              <RhfTextField
                 name={`${getPrefix(index)}.samtidigUttaksprosent`}
+                control={control}
                 validate={[required, hasValidDecimal, maxValue100]}
                 label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
               />
@@ -240,3 +194,58 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
     </PeriodFieldArray>
   );
 };
+const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
+
+const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues>) => () => {
+  const perioder = getValues(`${FA_PREFIX}`) ?? [];
+  const periodeMap = perioder
+    .filter(({ periodeFom, periodeTom }) => periodeFom !== '' && periodeTom !== '')
+    .map(({ periodeFom, periodeTom }) => [periodeFom, periodeTom]);
+  return periodeMap.length > 0 ? dateRangesNotOverlapping(periodeMap) : undefined;
+};
+
+const getValiderFørEllerEtter =
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number, sjekkFør: boolean) => () => {
+    const fomVerdi = getValues(`${getPrefix(index)}.periodeFom`);
+    const tomVerdi = getValues(`${getPrefix(index)}.periodeTom`);
+
+    if (!tomVerdi || !fomVerdi) {
+      return null;
+    }
+
+    return sjekkFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
+  };
+
+const getValiderArbeidsgiverIdNårRequired =
+  (getValues: UseFormGetValues<PermisjonFormValues>, index: number) => (arbeidsgiverIdentifikator: string) => {
+    const arbeidsgiverIdentifikatorRequired =
+      getValues(`${getPrefix(index)}.arbeidskategoriType`) === Arbeidskategori.ARBEIDSTAKER;
+    return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
+  };
+
+const validerAtArbeidsgiverIdErGyldig = (arbeidsgiverIdentifikator: string) => {
+  if (!arbeidsgiverIdentifikator) {
+    return undefined;
+  }
+  return arbeidsgiverIdentifikator.length === 11
+    ? hasValidFodselsnummer(arbeidsgiverIdentifikator)
+    : maxLength9OrFodselsnr(arbeidsgiverIdentifikator);
+};
+
+const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigeUttakperioder.some(ga => ga === kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));
+
+const mapArbeidskategori = (typer: KodeverkMedNavn<'Arbeidskategori'>[]): ReactElement[] =>
+  typer
+    .filter(({ kode }) => gyldigArbeidskategori.some(ga => ga === kode))
+    .map(({ kode, navn }) => (
+      <option value={kode} key={kode}>
+        {navn}
+      </option>
+    ));

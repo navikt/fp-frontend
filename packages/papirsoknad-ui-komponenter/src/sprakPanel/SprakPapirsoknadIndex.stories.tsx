@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
-import { action } from '@storybook/addon-actions';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { SprakPapirsoknadIndex } from './SprakPapirsoknadIndex';
 
@@ -20,14 +20,14 @@ const meta = {
     const formMethods = useForm();
 
     return (
-      <Form formMethods={formMethods} onSubmit={val => submitCallback(SprakPapirsoknadIndex.transformValues(val))}>
+      <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(SprakPapirsoknadIndex.transformValues(val))}>
         <VStack gap="10">
           <SprakPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)
           </Button>
         </VStack>
-      </Form>
+      </RhfForm>
     );
   },
 } satisfies Meta<typeof SprakPapirsoknadIndex>;

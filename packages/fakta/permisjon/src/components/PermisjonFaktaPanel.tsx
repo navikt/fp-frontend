@@ -1,9 +1,9 @@
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
@@ -41,32 +41,23 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
   const { aksjonspunkterForPanel, fagsak, submitCallback, isReadOnly, alleKodeverk } =
     usePanelDataContext<VurderArbeidsforholdPermisjonAp>();
 
-  const arbeidOgInntektMedPermisjon = useMemo(
-    () => ({
-      inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
-      arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter(a => a.permisjonOgMangel?.årsak),
-      inntekter: arbeidOgInntekt.inntekter,
-      skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
-    }),
-    [arbeidOgInntekt],
-  );
+  const arbeidOgInntektMedPermisjon = {
+    inntektsmeldinger: arbeidOgInntekt.inntektsmeldinger,
+    arbeidsforhold: arbeidOgInntekt.arbeidsforhold.filter(a => a.permisjonOgMangel?.årsak),
+    inntekter: arbeidOgInntekt.inntekter,
+    skjæringstidspunkt: arbeidOgInntekt.skjæringstidspunkt,
+  };
 
   const { arbeidsforhold } = arbeidOgInntektMedPermisjon;
 
-  const sorterteArbeidsforhold = useMemo(
-    () => [...arbeidsforhold].sort(getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId)),
-    [arbeidsforhold, arbeidsgiverOpplysningerPerId],
-  );
+  const sorterteArbeidsforhold = [...arbeidsforhold].sort(getSorterArbeidsforhold(arbeidsgiverOpplysningerPerId));
 
-  const defaultValues = useMemo(
-    () => ({
-      arbeidsforhold: sorterteArbeidsforhold.map(a => ({
-        permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
-      })),
-      begrunnelse: aksjonspunkterForPanel[0].begrunnelse ?? '',
-    }),
-    [sorterteArbeidsforhold],
-  );
+  const defaultValues = {
+    arbeidsforhold: sorterteArbeidsforhold.map(a => ({
+      permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
+    })),
+    begrunnelse: aksjonspunkterForPanel[0].begrunnelse ?? '',
+  };
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -101,7 +92,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
           <FormattedMessage id="PermisjonFaktaPanel.PermisjonUtenSluttdato" />
         </AksjonspunktHelpTextHTML>
       )}
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={values =>
           submitCallback({
@@ -126,13 +117,14 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
             skjæringstidspunkt={arbeidOgInntektMedPermisjon.skjæringstidspunkt}
             alleKodeverk={alleKodeverk}
           />
-          <TextAreaField
+          <RhfTextarea
+            name="begrunnelse"
+            control={formMethods.control}
             label={
               <Label size="small">
                 <FormattedMessage id="PermisjonFaktaPanel.Begrunn" />
               </Label>
             }
-            name="begrunnelse"
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
             readOnly={isReadOnly}
@@ -150,7 +142,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
             </div>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </VStack>
   );
 };

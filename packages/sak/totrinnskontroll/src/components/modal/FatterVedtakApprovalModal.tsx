@@ -9,7 +9,7 @@ import type { Behandling } from '@navikt/fp-types';
 import styles from './fatterVedtakApprovalModal.module.css';
 
 const getInfoTextCode = (
-  behandlingtypeKode: string,
+  behandlingtypeKode: BehandlingType,
   behandlingsresultat: Behandling['behandlingsresultat'],
   isOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
@@ -38,7 +38,7 @@ const getInfoTextCode = (
   return 'FatterVedtakApprovalModal.InnvilgetVedtak';
 };
 
-const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: string) => {
+const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: BehandlingType) => {
   if (behandlingTypeKode === BehandlingType.KLAGE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
@@ -51,12 +51,13 @@ const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: stri
   return 'FatterVedtakApprovalModal.ModalDescriptionApproval';
 };
 
-const isStatusFatterVedtak = (behandlingStatusKode: string) => behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK;
+const isStatusFatterVedtak = (behandlingStatusKode: BehandlingStatus) =>
+  behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK;
 
 const utledInfoTextCode = (
   allAksjonspunktApproved: boolean,
-  behandlingStatusKode: string,
-  behandlingTypeKode: string,
+  behandlingStatusKode: BehandlingStatus,
+  behandlingTypeKode: BehandlingType,
   behandlingsresultat: Behandling['behandlingsresultat'],
   isBehandlingsresultatOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
@@ -74,12 +75,12 @@ const utledInfoTextCode = (
   return 'FatterVedtakApprovalModal.VedtakReturneresTilSaksbehandler';
 };
 
-const utledAltImgTextCode = (behandlingStatusKode: string) =>
+const utledAltImgTextCode = (behandlingStatusKode: BehandlingStatus) =>
   isStatusFatterVedtak(behandlingStatusKode) ? 'FatterVedtakApprovalModal.Innvilget' : '';
 
 const utledModalDescriptionTextCode = (
-  behandlingStatusKode: string,
-  behandlingTypeKode: string,
+  behandlingStatusKode: BehandlingStatus,
+  behandlingTypeKode: BehandlingType,
   isBehandlingsresultatOpphor: boolean,
 ) =>
   isStatusFatterVedtak(behandlingStatusKode)
@@ -90,8 +91,8 @@ interface Props {
   closeEvent: () => void;
   allAksjonspunktApproved: boolean;
   behandlingsresultat?: Behandling['behandlingsresultat'];
-  behandlingStatusKode: string;
-  behandlingTypeKode: string;
+  behandlingStatusKode: BehandlingStatus;
+  behandlingTypeKode: BehandlingType;
   harSammeResultatSomOriginalBehandling?: boolean;
 }
 

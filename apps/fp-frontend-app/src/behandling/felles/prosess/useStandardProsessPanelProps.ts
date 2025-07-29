@@ -16,8 +16,8 @@ import { BehandlingDataContext } from '../utils/behandlingDataContext';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
-export const DEFAULT_FAKTA_KODE = 'default';
-export const DEFAULT_PROSESS_STEG_KODE = 'default';
+const DEFAULT_FAKTA_KODE = 'default';
+const DEFAULT_PROSESS_STEG_KODE = 'default';
 
 const getBekreftAksjonspunktProsessCallback =
   (

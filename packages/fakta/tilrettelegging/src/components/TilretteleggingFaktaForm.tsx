@@ -3,12 +3,12 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, HStack, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   AoIArbeidsforhold,
@@ -42,7 +42,8 @@ const getAksjonspunktBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string | un
   return aksjonpunkt?.begrunnelse ?? undefined;
 };
 
-const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) => value !== undefined || isDirty;
+const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) =>
+  value !== undefined || isDirty ? required(value) : undefined;
 
 const utledOmEnSkalVurdereVelferdspermisjoner = (alleArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[]) =>
   alleArbeidsforhold.some(arbeidsforhold =>
@@ -77,7 +78,7 @@ export const TilretteleggingFaktaForm = ({
 
   const { aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpneAksjonspunkter } =
     usePanelDataContext<BekreftSvangerskapspengerAp>();
-  const uttakArbeidTyper = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE];
+  const uttakArbeidTyper = alleKodeverk['UttakArbeidType'];
 
   const sorterteArbeidsforhold = sorterArbeidsforhold(
     svangerskapspengerTilrettelegging.arbeidsforholdListe,
@@ -139,7 +140,7 @@ export const TilretteleggingFaktaForm = ({
   };
 
   return (
-    <Form formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
+    <RhfForm formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
       <VStack gap="8">
         {harÅpneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>
@@ -154,15 +155,17 @@ export const TilretteleggingFaktaForm = ({
           </AksjonspunktHelpTextHTML>
         )}
         <HStack gap="4" wrap>
-          <Datepicker
+          <RhfDatepicker
             name="termindato"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Termindato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readonly}
           />
           {fødselsdato && (
-            <Datepicker
+            <RhfDatepicker
               name="fødselsdato"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.Fodselsdato' })}
               validate={[required, hasValidDate]}
               isReadOnly={readonly}
@@ -201,8 +204,9 @@ export const TilretteleggingFaktaForm = ({
             <FormattedMessage id="TilretteleggingFaktaForm.ValgtSvpVedGyldig100Permisjon" />
           </FeilmeldingAlert>
         )}
-        <TextAreaField
+        <RhfTextarea
           name="begrunnelse"
+          control={formMethods.control}
           label={intl.formatMessage({ id: 'TilretteleggingFaktaForm.BegrunnEndringene' })}
           validate={[isRequiredFn, maxLength1500, hasValidText]}
           maxLength={1500}
@@ -215,6 +219,6 @@ export const TilretteleggingFaktaForm = ({
           isDirty={formMethods.formState.isDirty}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

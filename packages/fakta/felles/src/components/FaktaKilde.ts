@@ -4,20 +4,18 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-export enum FaktaKilde {
-  SOKNAD,
-  FREG,
-  MEDL,
-}
+export type FaktaKilde = 'SØKNAD' | 'FOLKEREGISTER' | 'MEDL' | 'SAKSBEHANDLER';
 
 export const getLabelForFaktaKilde = (kilde: FaktaKilde) => {
   switch (kilde) {
-    case FaktaKilde.SOKNAD:
+    case 'SØKNAD':
       return intl.formatMessage({ id: 'FaktaKilde.Soknad' });
-    case FaktaKilde.FREG:
+    case 'FOLKEREGISTER':
       return intl.formatMessage({ id: 'FaktaKilde.FREG' });
-    case FaktaKilde.MEDL:
+    case 'MEDL':
       return intl.formatMessage({ id: 'FaktaKilde.MEDL' });
+    case 'SAKSBEHANDLER':
+      return intl.formatMessage({ id: 'FaktaKilde.SBH' });
     default:
       return assertUnreachable(kilde);
   }

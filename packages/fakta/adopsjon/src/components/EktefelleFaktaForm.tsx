@@ -1,10 +1,12 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
+import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse } from '@navikt/fp-types';
 import type { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -13,7 +15,7 @@ import styles from './ektefelleFaktaForm.module.css';
 
 interface Props {
   readOnly: boolean;
-  ektefellesBarnIsEdited?: boolean;
+  gjeldendeFamiliehendelse: FamilieHendelse;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -26,8 +28,10 @@ export type FormValues = {
  *
  * Setter opp aksjonspunktet for vurdering av om det er ektefelles barn som adopteres.
  */
-export const EktefelleFaktaForm = ({ readOnly, ektefellesBarnIsEdited = false, alleMerknaderFraBeslutter }: Props) => {
+export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMerknaderFraBeslutter }: Props) => {
   const intl = useIntl();
+  const { control } = useFormContext<FormValues>();
+
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
@@ -40,12 +44,13 @@ export const EktefelleFaktaForm = ({ readOnly, ektefellesBarnIsEdited = false, a
         <div>
           <hr className={styles.hr} />
         </div>
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="ektefellesBarn"
+          control={control}
           hideLegend
           validate={[required]}
           isReadOnly={readOnly}
-          isEdited={ektefellesBarnIsEdited}
+          isEdited={hasValue(gjeldendeFamiliehendelse.ektefellesBarn)}
           isHorizontal
           isTrueOrFalseSelection
           radios={[

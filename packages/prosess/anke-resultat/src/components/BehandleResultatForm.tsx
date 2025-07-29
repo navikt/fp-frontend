@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Detail, Heading, Label, VStack } from '@navikt/ds-react';
 
-import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer, KodeverkType } from '@navikt/fp-kodeverk';
+import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -148,9 +148,8 @@ const ResultatOmgjores = ({
           <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" />
         </Detail>
         <Detail>
-          {alleKodeverk[KodeverkType.ANKE_OMGJOER_AARSAK].find(
-            kode => kode.kode === ankeVurderingResultat.ankeOmgjoerArsak,
-          )?.navn ?? ''}
+          {alleKodeverk['AnkeOmgjørÅrsak'].find(({ kode }) => kode === ankeVurderingResultat.ankeOmgjoerArsak)?.navn ??
+            ''}
         </Detail>
       </>
     )}

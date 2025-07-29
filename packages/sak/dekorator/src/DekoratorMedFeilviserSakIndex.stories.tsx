@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { DekoratorMedFeilviserSakIndex } from './DekoratorMedFeilviserSakIndex';
 
@@ -17,6 +17,7 @@ const meta = {
     navAnsattNavn: 'Espen Utvikler',
     setSiteHeight: action('button-click'),
     fjernFeilmeldinger: action('button-click'),
+    interneLenker: [],
     eksterneLenker: [
       {
         tekst: 'Nav',

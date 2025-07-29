@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { type NavigateFunction, useLocation, useNavigate } from 'react-router';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
@@ -71,7 +71,7 @@ interface BehandlingIndexWrapperProps {
   fagsakData: FagsakData;
 }
 
-export const BehandlingIndexWrapper = ({
+const BehandlingIndexWrapper = ({
   behandling,
   setBehandling,
   hentOgSettBehandling,
@@ -105,10 +105,7 @@ export const BehandlingIndexWrapper = ({
 
   const navigate = useNavigate();
   const location = useLocation();
-  const oppdaterProsessStegOgFaktaPanelIUrl = useCallback(getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate), [
-    location,
-    navigate,
-  ]);
+  const oppdaterProsessStegOgFaktaPanelIUrl = getOppdaterProsessStegOgFaktaPanelIUrl(location, navigate);
 
   if (kodeverk === undefined) {
     return <LoadingPanel />;

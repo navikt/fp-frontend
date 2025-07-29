@@ -28,6 +28,7 @@ import type {
   FamilieHendelse,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
+  Fødsel,
   FodselOgTilrettelegging,
   ForhåndsvisMeldingParams,
   Innsyn,
@@ -106,7 +107,7 @@ const kyExtended = ky.extend({
 
 //MÅ være en gyldig URL for at KY skal fungere i test
 const isTest = import.meta.env.MODE === 'test';
-export const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
+const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 const getUrlFromRel = (rel: keyof typeof BehandlingRel, links: ApiLink[]): string => {
   const link = links.find(l => l.rel === BehandlingRel[rel]);
@@ -129,12 +130,11 @@ export const BehandlingUrl = {
 
 export const BehandlingRel = {
   OPEN_BEHANDLING_FOR_CHANGES: 'opne-for-endringer',
+  MERK_HASTER: 'merk-haster',
   BEHANDLING_NY_BEHANDLENDE_ENHET: 'bytt-behandlende-enhet',
   HENLEGG_BEHANDLING: 'henlegg-behandling',
   BEHANDLING_ON_HOLD: 'sett-behandling-pa-vent',
   RESUME_BEHANDLING: 'gjenoppta-behandling',
-  VERGE_OPPRETT_V1: 'opprett-verge',
-  VERGE_FJERN_V1: 'fjern-verge',
   VERGE_OPPRETT_V2: 'verge-opprett',
   VERGE_FJERN_V2: 'verge-fjern',
   VERGE_HENT: 'verge-hent',
@@ -160,6 +160,7 @@ export const BehandlingRel = {
   FEILUTBETALING_FAKTA: 'feilutbetalingFakta',
   FEILUTBETALING_AARSAK: 'feilutbetalingAarsak',
   BEREGNINGRESULTAT_DAGYTELSE: 'beregningsresultat-dagytelse',
+  FAKTA_FØDSEL: 'fakta-fødsel',
   FAMILIEHENDELSE: 'familiehendelse-v2',
   SOKNAD: 'soknad',
   FERIEPENGEGRUNNLAG: 'feriepengegrunnlag',
@@ -308,6 +309,14 @@ const getBeregningsresultatDagytelseOptions =
       staleTime: Infinity,
     });
 
+const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) => {
+  return queryOptions({
+    queryKey: [BehandlingRel.FAKTA_FØDSEL, behandling.uuid, behandling.versjon],
+    queryFn: () => kyExtended.get(getUrlFromRel('FAKTA_FØDSEL', links)).json<Fødsel>(),
+    enabled: harLenke(behandling, 'FAKTA_FØDSEL') && isEnabled,
+    staleTime: Infinity,
+  });
+};
 const getFamiliehendelseOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.FAMILIEHENDELSE, behandling.uuid, behandling.versjon],
@@ -571,6 +580,11 @@ const getÅpneBehandlingForEndring = (links: ApiLink[]) => (behandlingUuid: stri
     json: { behandlingUuid, behandlingVersjon },
   });
 
+const getMerkSomHaster = (links: ApiLink[]) => (behandlingUuid: string, behandlingVersjon: number) =>
+  kyExtended.post(getUrlFromRel('MERK_HASTER', links), {
+    json: { behandlingUuid, behandlingVersjon },
+  });
+
 const getNyBehandlendeEnhet = (links: ApiLink[]) => (params: NyBehandlendeEnhet) =>
   kyExtended
     .post(getUrlFromRel('BEHANDLING_NY_BEHANDLENDE_ENHET', links), {
@@ -608,18 +622,8 @@ const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: s
     json: params,
   });
 
-const getOpprettVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_OPPRETT_V1', links), {
-    json: params,
-  });
-
 const getOpprettVergeV2 = (links: ApiLink[]) => (params: OpprettVergeParams) =>
   kyExtended.post(getUrlFromRel('VERGE_OPPRETT_V2', links), {
-    json: params,
-  });
-
-const getFjernVergeV1 = (links: ApiLink[]) => (params: { behandlingUuid: string; behandlingVersjon: number }) =>
-  kyExtended.post<Behandling>(getUrlFromRel('VERGE_FJERN_V1', links), {
     json: params,
   });
 
@@ -724,6 +728,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     lagreVurderingForAOI: getLagreVurderingForAOI(links),
     åpneForNyVurderingAOI: getÅpneForNyVurderingAOI(links),
     søknadOptions: getSøknadOptions(links),
+    faktaFødselOptions: getFaktaFødselOptions(links),
     familiehendelseOptions: getFamiliehendelseOptions(links),
     beregningsresultatDagytelseOptions: getBeregningsresultatDagytelseOptions(links),
     beregningDagytelseOriginalBehandlingOptions: getBeregningDagytelseOriginalBehandlingOptions(links),
@@ -750,6 +755,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     vergeOptions: getVergeOptions(links),
     hentBrevOverstyring: getHentBrevOverstyring(links),
     mellomlagreBrevOverstyring: getMellomlagreBrevOverstyring(links),
+    merkSomHaster: getMerkSomHaster(links),
     verge: {
       hent: getVerge(links),
       opprettVergeV2: getOpprettVergeV2(links),
@@ -790,8 +796,6 @@ export const useBehandlingApi = (behandling: Behandling) => {
       åpneBehandlingForEndring: getÅpneBehandlingForEndring(links),
       lagreAksjonspunkt: getLagreAksjonspunkt(links),
       lagreOverstyrtAksjonspunkt: getLagreOverstyrtAksjonspunkt(links),
-      opprettVergeV1: getOpprettVergeV1(links),
-      fjernVergeV1: getFjernVergeV1(links),
     },
   };
 };

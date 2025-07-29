@@ -3,43 +3,21 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Alert, HStack } from '@navikt/ds-react';
-import { CheckboxField, NumberField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { dateFormat, guid } from '@navikt/ft-utils';
+import { formaterArbeidsgiver, guid } from '@navikt/ft-utils';
 
-import { KodeverkType, UttakArbeidType } from '@navikt/fp-kodeverk';
-import type {
-  AlleKodeverk,
-  ArbeidsgiverOpplysninger,
-  ArbeidsgiverOpplysningerPerId,
-  FaktaArbeidsforhold,
-} from '@navikt/fp-types';
+import { UttakArbeidType } from '@navikt/fp-kodeverk';
+import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 
 import styles from './graderingOgSamtidigUttakPanel.module.css';
 
-export enum Årsakstype {
-  UTTAK = 'UTTAK',
-  OVERFØRING = 'OVERFØRING',
-  UTSETTELSE = 'UTSETTELSE',
-  OPPHOLD = 'OPPHOLD',
-}
-
 export type FormValues = KontrollerFaktaPeriodeMedApMarkering & {
   arbeidsgiverId?: string;
   harGradering?: boolean;
   harSamtidigUttaksprosent?: boolean;
-};
-
-// Todo: gjør dette til delt kode delt kode
-const getEndCharFromId = (id: string | undefined) => (id ? `...${id.substring(id.length - 4, id.length)}` : '');
-const lagVisningsNavn = (ago: ArbeidsgiverOpplysninger, eksternArbeidsforholdId?: string): string => {
-  if (ago.erPrivatPerson) {
-    return `${ago.navn.substring(0, 5)}...(${dateFormat(ago.fødselsdato)})`;
-  } else {
-    return `${ago.navn} (${ago.identifikator})${getEndCharFromId(eksternArbeidsforholdId)}`;
-  }
 };
 
 const mapArbeidsforhold = (
@@ -56,9 +34,9 @@ const mapArbeidsforhold = (
 
     let periodeArbeidsforhold = '';
     if (arbeidType && arbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
-      periodeArbeidsforhold = alleKodeverk[KodeverkType.UTTAK_ARBEID_TYPE].find(k => k.kode === arbeidType)?.navn ?? '';
+      periodeArbeidsforhold = alleKodeverk['UttakArbeidType'].find(k => k.kode === arbeidType)?.navn ?? '';
     } else if (arbeidsgiverOpplysninger) {
-      periodeArbeidsforhold = lagVisningsNavn(arbeidsgiverOpplysninger);
+      periodeArbeidsforhold = formaterArbeidsgiver(arbeidsgiverOpplysninger);
     }
 
     return (
@@ -91,7 +69,7 @@ export const GraderingOgSamtidigUttakPanel = ({
   const toggleGradering = () => setVisGradering(old => !old);
   const toggleSamtidigUttaksprosent = () => setVisSamtidigUttaksgradering(old => !old);
 
-  const { unregister } = useFormContext<FormValues>();
+  const { unregister, control } = useFormContext<FormValues>();
 
   useEffect(() => {
     if (!visGradering) {
@@ -108,14 +86,16 @@ export const GraderingOgSamtidigUttakPanel = ({
   return (
     <>
       <HStack gap="2">
-        <CheckboxField
+        <RhfCheckbox
           name="harGradering"
+          control={control}
           label={<FormattedMessage id="UttakFaktaDetailForm.HarGradering" />}
           readOnly={readOnly}
           onChange={toggleGradering}
         />
-        <CheckboxField
+        <RhfCheckbox
           name="harSamtidigUttaksprosent"
+          control={control}
           label={<FormattedMessage id="UttakFaktaDetailForm.HarSamtidigUttaksprosent" />}
           readOnly={readOnly}
           onChange={toggleSamtidigUttaksprosent}
@@ -132,16 +112,18 @@ export const GraderingOgSamtidigUttakPanel = ({
         <HStack gap="6">
           {visGradering && faktaArbeidsforhold && (
             <>
-              <NumberField
+              <RhfNumericField
                 name="arbeidstidsprosent"
+                control={control}
                 label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
                 forceTwoDecimalDigits
                 validate={[required]}
                 className={styles.gradering}
                 readOnly={readOnly}
               />
-              <SelectField
+              <RhfSelect
                 name="arbeidsgiverId"
+                control={control}
                 label={<FormattedMessage id="UttakFaktaDetailForm.Arbeidsgiver" />}
                 validate={[required]}
                 selectValues={mapArbeidsforhold(faktaArbeidsforhold, alleKodeverk, arbeidsgiverOpplysningerPerId)}
@@ -150,8 +132,9 @@ export const GraderingOgSamtidigUttakPanel = ({
             </>
           )}
           {visSamtidigUttaksgradering && (
-            <NumberField
+            <RhfNumericField
               name="samtidigUttaksprosent"
+              control={control}
               label={<FormattedMessage id="UttakFaktaDetailForm.SamtidigUttaksprosent" />}
               validate={[required]}
               forceTwoDecimalDigits

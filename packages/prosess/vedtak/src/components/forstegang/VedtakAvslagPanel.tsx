@@ -3,12 +3,53 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Label } from '@navikt/ds-react';
 
-import { KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
-export const getAvslagArsak = (
+interface Props {
+  vilkar?: Vilkar[];
+  behandlingsresultat?: Behandlingsresultat;
+  språkkode: string;
+  isReadOnly: boolean;
+  alleKodeverk: AlleKodeverk;
+  beregningErManueltFastsatt: boolean;
+  skalBrukeOverstyrendeFritekstBrev: boolean;
+}
+
+export const VedtakAvslagPanel = ({
+  vilkar = [],
+  behandlingsresultat,
+  språkkode,
+  isReadOnly,
+  alleKodeverk,
+  beregningErManueltFastsatt,
+  skalBrukeOverstyrendeFritekstBrev,
+}: Props) => {
+  const intl = useIntl();
+  const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
+  return (
+    <>
+      {getAvslagÅrsak(vilkar, alleKodeverk, behandlingsresultat) && (
+        <div>
+          <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
+          <BodyShort size="small">{getAvslagÅrsak(vilkar, alleKodeverk, behandlingsresultat)}</BodyShort>
+        </div>
+      )}
+      {!skalBrukeOverstyrendeFritekstBrev && (
+        <VedtakFritekstPanel
+          isReadOnly={isReadOnly}
+          språkkode={språkkode}
+          behandlingsresultat={behandlingsresultat}
+          labelTextCode={textCode}
+        />
+      )}
+    </>
+  );
+};
+
+const getAvslagÅrsak = (
   vilkar: Vilkar[],
   alleKodeverk: AlleKodeverk,
   behandlingsresultat?: Behandlingsresultat,
@@ -22,56 +63,12 @@ export const getAvslagArsak = (
     throw new Error('Behandlingsresultat eller avslagsårsak finnes ikke');
   }
 
-  const vilkarType =
-    alleKodeverk[KodeverkType.VILKAR_TYPE].find(kode => kode.kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
+  const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
 
   const årsak =
-    alleKodeverk[KodeverkType.AVSLAGSARSAK][avslatteVilkar[0].vilkarType as VilkarType].find(
-      kode => kode.kode === behandlingsresultat.avslagsarsak,
+    alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType].find(
+      ({ kode }) => kode === behandlingsresultat.avslagsarsak,
     )?.navn ?? '';
 
   return `${vilkarType}: ${årsak}`;
-};
-
-interface Props {
-  vilkar?: Vilkar[];
-  behandlingsresultat?: Behandlingsresultat;
-  språkkode: string;
-  isReadOnly: boolean;
-  alleKodeverk: AlleKodeverk;
-  beregningErManueltFastsatt: boolean;
-  skalBrukeOverstyrendeFritekstBrev: boolean;
-}
-
-const EMPTY_ARRAY = [] as Vilkar[];
-
-export const VedtakAvslagPanel = ({
-  vilkar = EMPTY_ARRAY,
-  behandlingsresultat,
-  språkkode,
-  isReadOnly,
-  alleKodeverk,
-  beregningErManueltFastsatt,
-  skalBrukeOverstyrendeFritekstBrev,
-}: Props) => {
-  const intl = useIntl();
-  const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
-  return (
-    <>
-      {getAvslagArsak(vilkar, alleKodeverk, behandlingsresultat) && (
-        <div>
-          <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
-          <BodyShort size="small">{getAvslagArsak(vilkar, alleKodeverk, behandlingsresultat)}</BodyShort>
-        </div>
-      )}
-      {!skalBrukeOverstyrendeFritekstBrev && (
-        <VedtakFritekstPanel
-          isReadOnly={isReadOnly}
-          språkkode={språkkode}
-          behandlingsresultat={behandlingsresultat}
-          labelTextCode={textCode}
-        />
-      )}
-    </>
-  );
 };

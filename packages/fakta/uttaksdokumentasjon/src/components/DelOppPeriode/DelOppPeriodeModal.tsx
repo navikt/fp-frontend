@@ -1,10 +1,9 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ScissorsIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
-import { Datepicker, Form } from '@navikt/ft-form-hooks';
+import { RhfDatepicker,RhfForm } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -34,10 +33,10 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
   const formMethods = useForm<{ dato: string }>();
 
   const splittDato = formMethods.watch('dato');
-  const perioder = useMemo(() => (splittDato ? splitPeriodePåDato(periode, splittDato) : null), [splittDato]);
+  const perioder = splittDato ? splitPeriodePåDato(periode, splittDato) : null;
 
   return (
-    <Form formMethods={formMethods} onSubmit={values => submit(values.dato)}>
+    <RhfForm formMethods={formMethods} onSubmit={values => submit(values.dato)}>
       <Modal
         open
         aria-label={intl.formatMessage({ id: 'DelOppPeriodeModal.Periode' })}
@@ -63,8 +62,9 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
               </Label>
               <PeriodLabel dateStringFom={periode.fom} dateStringTom={periode.tom} />
             </VStack>
-            <Datepicker
+            <RhfDatepicker
               name="dato"
+              control={formMethods.control}
               size="medium"
               description={intl.formatMessage({ id: 'DelOppPeriodeModal.DatePickerBeskrivelse' })}
               label={<FormattedMessage id="DelOppPeriodeModal.DatePickerTittel" />}
@@ -100,6 +100,6 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
           </Button>
         </Modal.Footer>
       </Modal>
-    </Form>
+    </RhfForm>
   );
 };

@@ -1,13 +1,13 @@
-import { useCallback, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, HStack, Label, Popover, Tooltip, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AoIArbeidsforhold,
@@ -24,6 +24,12 @@ import { InntektsposterPanel } from './InntektsposterPanel';
 import styles from './arbeidsforholdField.module.css';
 
 const FIELD_ARRAY_NAME = 'arbeidsforhold';
+
+export type FormValues = {
+  arbeidsforhold: {
+    permisjonStatus: string;
+  }[];
+};
 
 interface Props {
   index: number;
@@ -52,6 +58,8 @@ export const ArbeidsforholdField = ({
 }: Props) => {
   const intl = useIntl();
 
+  const { control } = useFormContext<FormValues>();
+
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
   const arbeidsforhold = sorterteArbeidsforhold[index];
@@ -65,7 +73,7 @@ export const ArbeidsforholdField = ({
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
-  const toggleHjelpetekst = useCallback(() => setOpenState(gammelVerdi => !gammelVerdi), []);
+  const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
 
   return (
     <ArbeidsforholdBoks key={fieldId} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
@@ -166,7 +174,7 @@ export const ArbeidsforholdField = ({
             <HStack gap="2">
               <>
                 <Label size="small">
-                  {`${alleKodeverk[KodeverkType.PERMISJONSBESKRIVELSE_TYPE].find(k => k.kode === arbeidsforhold.permisjonOgMangel?.type)?.navn ?? ''} 100%`}
+                  {`${alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === arbeidsforhold.permisjonOgMangel?.type)?.navn ?? ''} 100%`}
                 </Label>
                 <BodyShort size="small">
                   <PeriodLabel
@@ -183,8 +191,9 @@ export const ArbeidsforholdField = ({
           {!inntektsmelding && inntektsposter && (
             <InntektsposterPanel inntektsposter={inntektsposter} skjæringstidspunkt={skjæringstidspunkt} />
           )}
-          <RadioGroupPanel
+          <RhfRadioGroup
             name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
+            control={control}
             label={
               <HStack gap="2">
                 <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />

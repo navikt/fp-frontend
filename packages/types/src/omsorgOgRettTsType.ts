@@ -1,4 +1,4 @@
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { Landkode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 
 export type OmsorgOgRett = {
   søknad: Søknad;
@@ -8,27 +8,26 @@ export type OmsorgOgRett = {
   relasjonsRolleType: RelasjonsRolleType;
 };
 
-export type Søknad = {
+type Søknad = {
   søkerHarAleneomsorg: Verdi;
   annenpartIdent: string | null;
-  annenpartBostedsland: string | null;
+  annenpartBostedsland: Landkode | null;
   annenpartRettighet: Rettighet | null;
 };
 
-export type Rettighet = {
+type Rettighet = {
   harRettNorge: Verdi;
   harOppholdEØS: Verdi;
   harRettEØS: Verdi;
   harUføretrygd: Verdi;
 };
 
-export type RegisterData = {
+type RegisterData = {
   harAnnenpartUføretrygd: Verdi;
   harAnnenpartForeldrepenger: Verdi;
   harAnnenpartEngangsstønad: Verdi;
 };
-
-export type ManuellBehandlingResultat = {
+type ManuellBehandlingResultat = {
   søkerHarAleneomsorg: Verdi;
   annenpartRettighet: Rettighet | null;
 };

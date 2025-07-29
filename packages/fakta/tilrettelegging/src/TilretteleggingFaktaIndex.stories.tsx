@@ -2,20 +2,23 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, TilretteleggingType, UttakArbeidType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  PermisjonsbeskrivelseType,
+  TilretteleggingType,
+  UttakArbeidType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type ArbeidOgInntektsmelding,
   type ArbeidsforholdFodselOgTilrettelegging,
   type ArbeidsgiverOpplysningerPerId,
+  type FodselOgTilrettelegging,
   SvpTilretteleggingFomKilde,
 } from '@navikt/fp-types';
 
 import { TilretteleggingFaktaIndex } from './TilretteleggingFaktaIndex';
-
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const TILRETTELEGGING_PERMISJON = {
   termindato: '2020-11-06',
@@ -40,9 +43,7 @@ const TILRETTELEGGING_PERMISJON = {
       ],
       eksternArbeidsforholdReferanse: '23422323',
       arbeidsgiverReferanse: '999999999',
-      uttakArbeidType: 'FRILANS',
-      kopiertFraTidligereBehandling: true,
-      mottattTidspunkt: '2020-03-11T16:21:48.532298',
+      uttakArbeidType: UttakArbeidType.FRILANS,
       skalBrukes: true,
       kanTilrettelegges: true,
       velferdspermisjoner: [
@@ -50,19 +51,19 @@ const TILRETTELEGGING_PERMISJON = {
           permisjonFom: '2020-02-17',
           permisjonTom: '2020-07-12',
           permisjonsprosent: 50.0,
-          type: 'VELFERDSPERMISJON',
+          type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
         {
           permisjonFom: '2019-08-06',
           permisjonTom: '2019-08-06',
           permisjonsprosent: 50.0,
-          type: 'VELFERDSPERMISJON',
+          type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
         {
           permisjonFom: '2019-10-03',
           permisjonTom: '2019-10-03',
           permisjonsprosent: 50.0,
-          type: 'VELFERDSPERMISJON',
+          type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
       ],
       avklarteOppholdPerioder: [],
@@ -70,7 +71,7 @@ const TILRETTELEGGING_PERMISJON = {
     },
   ],
   saksbehandlet: true,
-};
+} satisfies FodselOgTilrettelegging;
 
 const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
   termindato: '2020-11-06',
@@ -89,9 +90,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
       ],
       eksternArbeidsforholdReferanse: '23422323',
       arbeidsgiverReferanse: '999999999',
-      uttakArbeidType: 'FRILANS',
-      kopiertFraTidligereBehandling: true,
-      mottattTidspunkt: '2020-03-11T16:21:48.532298',
+      uttakArbeidType: UttakArbeidType.FRILANS,
       skalBrukes: true,
       kanTilrettelegges: true,
       velferdspermisjoner: [
@@ -99,7 +98,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
           permisjonFom: '2020-02-17',
           permisjonTom: '2020-07-12',
           permisjonsprosent: 100.0,
-          type: 'VELFERDSPERMISJON',
+          type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
       ],
       avklarteOppholdPerioder: [],
@@ -118,7 +117,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
         },
       ],
       arbeidsgiverReferanse: '2',
-      uttakArbeidType: 'ORDINÆRT_ARBEID',
+      uttakArbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
@@ -127,7 +126,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
     },
   ],
   saksbehandlet: true,
-};
+} satisfies FodselOgTilrettelegging;
 
 const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
   termindato: '2020-02-27',
@@ -166,7 +165,7 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
         },
       ],
       arbeidsgiverReferanse: '2',
-      uttakArbeidType: 'ORDINÆRT_ARBEID',
+      uttakArbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
@@ -340,7 +339,7 @@ export const HarOpphold: Story = {
             },
           ],
           arbeidsgiverReferanse: '999999999',
-          uttakArbeidType: 'FRILANS',
+          uttakArbeidType: UttakArbeidType.FRILANS,
           skalBrukes: true,
           kanTilrettelegges: true,
           velferdspermisjoner: [],
@@ -397,7 +396,7 @@ export const ErReadonly: Story = {
             },
           ],
           arbeidsgiverReferanse: '999999999',
-          uttakArbeidType: 'FRILANS',
+          uttakArbeidType: UttakArbeidType.FRILANS,
           skalBrukes: true,
           kanTilrettelegges: true,
           velferdspermisjoner: [],
@@ -455,7 +454,7 @@ export const ErRevurdering: Story = {
             },
           ],
           arbeidsgiverReferanse: '999999999',
-          uttakArbeidType: 'FRILANS',
+          uttakArbeidType: UttakArbeidType.FRILANS,
           skalBrukes: true,
           kanTilrettelegges: true,
           velferdspermisjoner: [],

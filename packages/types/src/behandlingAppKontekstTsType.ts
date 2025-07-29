@@ -1,3 +1,5 @@
+import type { BehandlingArsakType, BehandlingStatus, BehandlingType, SkjermlenkeType } from '@navikt/fp-kodeverk';
+
 import type { Aksjonspunkt } from './aksjonspunktTsType';
 import type { ApiLink } from './apiLink';
 import type { Behandlingsresultat } from './behandlingsresultatTsType';
@@ -7,8 +9,8 @@ import type { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunk
 export type BehandlingFellesData = Readonly<{
   versjon: number;
   uuid: string;
-  status: string;
-  type: string;
+  status: BehandlingStatus;
+  type: BehandlingType;
   fristBehandlingPåVent: string | null;
   venteÅrsakKode: string | null;
   behandlingPåVent: boolean;
@@ -31,7 +33,7 @@ export type BehandlingFellesData = Readonly<{
 }>;
 
 export type BehandlingÅrsak = {
-  behandlingArsakType: string;
+  behandlingArsakType: BehandlingArsakType;
   manueltOpprettet: boolean;
   erAutomatiskRevurdering: boolean;
 };
@@ -43,7 +45,7 @@ type Brevmal = {
 };
 
 export type TotrinnskontrollSkjermlenkeContext = Readonly<{
-  skjermlenkeType: string;
+  skjermlenkeType: SkjermlenkeType;
   totrinnskontrollAksjonspunkter: TotrinnskontrollAksjonspunkt[];
 }>;
 
@@ -62,6 +64,7 @@ export type BehandlingTillatteOperasjoner = Readonly<{
   behandlingKanGjenopptas: boolean;
   behandlingKanOpnesForEndringer: boolean;
   behandlingKanSettesPaVent: boolean;
+  behandlingKanMerkesHaster: boolean;
   vergeBehandlingsmeny: VergeBehandlingmenyValg;
 }>;
 

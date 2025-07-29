@@ -9,10 +9,6 @@ import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-typ
 import { BesteberegningFaktaIndex } from './BesteberegningFaktaIndex';
 import { beregningsgrunnlag as scenarioBG } from './scenario/BesteberegningScenario';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
   974652269: {
     erPrivatPerson: false,
@@ -29,7 +25,7 @@ const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
   },
 };
 
-const lagAksjonspunkt = (apKode: string, status: string, begrunnelse?: string): Aksjonspunkt => ({
+const lagAksjonspunkt = (apKode: AksjonspunktKode, status: AksjonspunktStatus, begrunnelse?: string): Aksjonspunkt => ({
   definisjon: apKode,
   status,
   kanLoses: true,

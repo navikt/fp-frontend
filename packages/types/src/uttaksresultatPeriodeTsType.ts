@@ -1,5 +1,13 @@
+import type {
+  GraderingAvslagÅrsak,
+  ManuellBehandlingÅrsak,
+  PeriodeResultatÅrsak,
+  StonadskontoType,
+  UttakUtsettelseType,
+} from '@navikt/fp-kodeverk';
+
 export type PeriodeSokerAktivitet = Readonly<{
-  stønadskontoType?: string;
+  stønadskontoType?: StonadskontoType;
   prosentArbeid?: number;
   arbeidsforholdId?: string;
   eksternArbeidsforholdId?: string;
@@ -16,17 +24,17 @@ export type PeriodeSoker = Readonly<{
   aktiviteter: PeriodeSokerAktivitet[];
   periodeResultatType: string;
   begrunnelse?: string;
-  periodeResultatÅrsak: string;
+  periodeResultatÅrsak: PeriodeResultatÅrsak;
   mottattDato?: string;
-  manuellBehandlingÅrsak: string;
-  graderingAvslagÅrsak: string;
+  manuellBehandlingÅrsak: ManuellBehandlingÅrsak;
+  graderingAvslagÅrsak: GraderingAvslagÅrsak;
   flerbarnsdager: boolean;
   samtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
   graderingInnvilget: boolean;
   gradertAktivitet?: PeriodeSokerAktivitet;
   periodeType: string;
-  utsettelseType: string;
+  utsettelseType: UttakUtsettelseType;
   oppholdÅrsak: string;
 }>;
 

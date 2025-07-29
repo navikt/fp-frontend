@@ -6,7 +6,7 @@ import * as stories from './SaksbehandlereForSakslisteForm.stories';
 
 const { IngenSaksbehandlere, ToSaksbehandlere, SaksbehandlereSomErGruppert } = composeStories(stories);
 
-describe('<SaksbehandlereForSakslisteForm>', () => {
+describe('SaksbehandlereForSakslisteForm', () => {
   it('skal vise tekst som viser at ingen saksbehandlere er tilknyttet', async () => {
     await applyRequestHandlers(IngenSaksbehandlere.parameters['msw']);
     render(<IngenSaksbehandlere />);

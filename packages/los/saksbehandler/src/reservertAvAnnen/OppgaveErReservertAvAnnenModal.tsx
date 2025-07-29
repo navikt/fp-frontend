@@ -4,14 +4,14 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Label, Modal as NavModal } from '@navikt/ds-react';
 import { getDateAndTime } from '@navikt/ft-utils';
 
-import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import type { Oppgave, ReservasjonStatus } from '@navikt/fp-los-felles';
 
 import styles from './oppgaveErReservertAvAnnenModal.module.css';
 
 type Props = Readonly<{
   lukkErReservertModalOgOpneOppgave: (oppgave: Oppgave) => void;
   oppgave: Oppgave;
-  oppgaveStatus: OppgaveStatus;
+  reservasjonStatus: ReservasjonStatus;
 }>;
 
 /**
@@ -22,7 +22,7 @@ type Props = Readonly<{
 export const OppgaveErReservertAvAnnenModal = ({
   lukkErReservertModalOgOpneOppgave,
   oppgave,
-  oppgaveStatus,
+  reservasjonStatus,
 }: Props) => {
   const intl = useIntl();
   const lukk = () => lukkErReservertModalOgOpneOppgave(oppgave);
@@ -44,9 +44,9 @@ export const OppgaveErReservertAvAnnenModal = ({
             <FormattedMessage
               id="OppgaveErReservertAvAnnenModal.ReservertAv"
               values={{
-                saksbehandlernavn: oppgaveStatus.reservertAvNavn,
-                saksbehandlerid: oppgaveStatus.reservertAvUid,
-                ...getDateAndTime(oppgaveStatus.reservertTilTidspunkt),
+                saksbehandlernavn: reservasjonStatus.reservertAvNavn,
+                saksbehandlerid: reservasjonStatus.reservertAvUid,
+                ...getDateAndTime(reservasjonStatus.reservertTilTidspunkt),
               }}
             />
           </Label>

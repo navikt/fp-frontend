@@ -1,11 +1,13 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Detail, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { hasValue } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode, FarSøkerType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, FamilieHendelse } from '@navikt/fp-types';
 import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -13,10 +15,10 @@ import styles from './mannAdoptererAleneFaktaForm.module.css';
 
 interface Props {
   readOnly: boolean;
-  farSokerType: string | undefined;
+  farSokerType: FarSøkerType | undefined;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  mannAdoptererAlene?: boolean;
+  gjeldendeFamiliehendelse: FamilieHendelse;
 }
 
 export type FormValues = {
@@ -33,9 +35,10 @@ export const MannAdoptererAleneFaktaForm = ({
   readOnly,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-  mannAdoptererAlene,
+  gjeldendeFamiliehendelse,
 }: Props) => {
   const intl = useIntl();
+  const { control } = useFormContext<FormValues>();
   return (
     <FaktaGruppe
       title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
@@ -47,16 +50,17 @@ export const MannAdoptererAleneFaktaForm = ({
         </Detail>
         {farSokerType && (
           <BodyShort size="small">
-            {alleKodeverk[KodeverkType.FAR_SOEKER_TYPE].find(type => type.kode === farSokerType)?.navn}
+            {alleKodeverk['FarSøkerType'].find(type => type.kode === farSokerType)?.navn}
           </BodyShort>
         )}
         <div>
           <hr className={styles.hr} />
         </div>
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="mannAdoptererAlene"
+          control={control}
           hideLegend
-          isEdited={mannAdoptererAlene}
+          isEdited={hasValue(gjeldendeFamiliehendelse.mannAdoptererAlene)}
           validate={[required]}
           isReadOnly={readOnly}
           isHorizontal

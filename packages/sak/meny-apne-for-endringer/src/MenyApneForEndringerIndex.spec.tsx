@@ -6,7 +6,7 @@ import * as stories from './MenyApneForEndringerIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MenyApneForEndringerIndex>', () => {
+describe('MenyApneForEndringerIndex', () => {
   it('skal vise modal og velge å åpne behandling for endringer', async () => {
     const apneBehandlingForEndringer = vi.fn();
     const lukkModal = vi.fn();

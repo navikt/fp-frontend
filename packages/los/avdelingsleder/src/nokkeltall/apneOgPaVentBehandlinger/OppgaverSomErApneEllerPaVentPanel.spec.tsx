@@ -6,7 +6,7 @@ import * as stories from './OppgaverSomErApneEllerPaVentPanel.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<OppgaverSomErApneEllerPaVentPanel>', () => {
+describe('OppgaverSomErApneEllerPaVentPanel', () => {
   // TODO echarts-testing
   it.skip('skal vise graffilter', async () => {
     await applyRequestHandlers(Default.parameters['msw']);

@@ -3,16 +3,10 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import {
-  type FaktaBegrunnelseFormValues,
-  FaktaBegrunnelseTextField,
-  FaktaSubmitButton,
-  type FieldEditedInfo,
-  isFieldEdited,
-} from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type {
@@ -67,15 +61,15 @@ const buildInitialValues = (
   }
 
   return {
-    ...DokumentasjonFaktaForm.buildInitialValues(soknad, familiehendelse),
+    ...DokumentasjonFaktaForm.initialValues(soknad, familiehendelse),
     ...omAdopsjonGjelderEktefellesBarn,
     ...mannAdoptererAleneValues,
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter[0]),
   };
 };
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData => {
-  const aksjonspunkterArray = [] as AksjonspunktData;
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData[] => {
+  const aksjonspunkterArray = new Array<AksjonspunktData>();
   aksjonspunkterArray.push(DokumentasjonFaktaForm.transformValues(values));
 
   if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && values.ektefellesBarn !== undefined) {
@@ -94,14 +88,12 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
   }));
 };
 
-const getEditedStatus = (soknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): FieldEditedInfo =>
-  isFieldEdited(soknad, gjeldendeFamiliehendelse);
-
 type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
 
-type AksjonspunktData = Array<
-  BekreftEktefelleAksjonspunktAp | BekreftDokumentertDatoAksjonspunktAp | BekreftMannAdoptererAksjonspunktAp
->;
+type AksjonspunktData =
+  | BekreftEktefelleAksjonspunktAp
+  | BekreftDokumentertDatoAksjonspunktAp
+  | BekreftMannAdoptererAksjonspunktAp;
 
 interface Props {
   submittable: boolean;
@@ -123,7 +115,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
     harÅpneAksjonspunkter,
     alleMerknaderFraBeslutter,
     isReadOnly,
-  } = usePanelDataContext<AksjonspunktData>();
+  } = usePanelDataContext<AksjonspunktData[]>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -133,8 +125,6 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const editedStatus = getEditedStatus(soknad, gjeldendeFamiliehendelse);
-
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel));
 
   return (
@@ -142,13 +132,14 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
-      <Form formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap="6">
           <HStack gap="4" wrap>
             <div className={styles.leftCol}>
               <DokumentasjonFaktaForm
                 readOnly={isReadOnly}
-                editedStatus={editedStatus}
+                soknad={soknad}
+                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
                 erForeldrepengerFagsak={isForeldrepengerFagsak}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
@@ -161,14 +152,14 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
               <EktefelleFaktaForm
                 readOnly={isReadOnly}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-                ektefellesBarnIsEdited={editedStatus.ektefellesBarn}
+                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
               />
             )}
             {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel) && (
               <MannAdoptererAleneFaktaForm
                 farSokerType={soknad.farSokerType ?? undefined}
                 readOnly={isReadOnly}
-                mannAdoptererAlene={editedStatus.mannAdoptererAlene}
+                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 alleKodeverk={alleKodeverk}
               />
@@ -177,6 +168,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
           {aksjonspunkterForPanel && aksjonspunkterForPanel.length > 0 && (
             <>
               <FaktaBegrunnelseTextField
+                control={formMethods.control}
                 isSubmittable={submittable}
                 isReadOnly={isReadOnly}
                 hasBegrunnelse={!!begrunnelse}
@@ -190,7 +182,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
             </>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </VStack>
   );
 };

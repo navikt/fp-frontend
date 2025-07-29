@@ -56,10 +56,19 @@ export type {
 export type { Dokument } from './src/dokumentTsType';
 export type { FaktaArbeidsforhold } from './src/faktaArbeidsforholdTsType';
 export type { InntektArbeidYtelse, RelatertTilgrensedYtelse } from './src/inntektArbeidYtelseTsType';
-export type { KodeverkMedNavn } from './src/kodeverkMedNavnTsType';
-export type { AlleKodeverk, KodeverkReturnType } from './src/kodeverkAlleTsType';
-export type { AlleKodeverkTilbakekreving } from './src/kodeverkAlleTilbakekrevingTsType';
-export type { AlleKodeverkLos, KodeverkLosReturnType } from './src/kodeverkAlleLosTsType';
+export type {
+  AlleKodeverk,
+  KodeverkType,
+  KodeverkMedNavn,
+  PeriodeResultatÅrsakKodeverk,
+  GraderingAvslagÅrsakKodeverk,
+} from './src/kodeverkAlle';
+export type {
+  AlleKodeverkTilbakekreving,
+  TilbakekrevingKodeverkType,
+  KodeverkMedNavnTilbakekreving,
+} from './src/kodeverkAlleTilbakekreving';
+export type { AlleKodeverkLos, LosKodeverkType, LosKodeverkMedNavn } from './src/kodeverkAlleLos';
 export type { NavAnsatt } from './src/navAnsattTsType';
 export type {
   SimuleringResultat,
@@ -180,3 +189,11 @@ export type { Beskrivelse } from './src/oppgaveTsType.tsx';
 export type { OppgaveDokument } from './src/oppgaveTsType.ts';
 export type { OneOf } from './src/oneOf';
 export type { BrevOverstyring } from './src/brevOverstyring';
+export type {
+  Fødsel,
+  FødselSøknad,
+  FødselRegister,
+  FødselGjeldende,
+  FødselDtoGjeldendeBarn,
+  BarnHendelseData,
+} from './src/fødsel';

@@ -1,13 +1,12 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -16,10 +15,13 @@ import { RegistrereVergeForm, type VergeFormValues } from './RegistrereVergeForm
 
 type FormValues = VergeFormValues & FaktaBegrunnelseFormValues;
 
-const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
-  ...RegistrereVergeForm.buildInitialValues(verge),
-});
+const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspunkt[]): FormValues | undefined =>
+  verge
+    ? {
+        ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter),
+        ...RegistrereVergeForm.buildInitialValues(verge),
+      }
+    : undefined;
 
 const transformValues = (values: FormValues): AvklarVergeAp => ({
   kode: AksjonspunktKode.AVKLAR_VERGE,
@@ -54,10 +56,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
   const valgtVergeType = formMethods.watch('vergeType');
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const vergetyper = useMemo(
-    () => alleKodeverk[KodeverkType.VERGE_TYPE].sort((k1, k2) => k1.navn.localeCompare(k2.navn)),
-    [alleKodeverk[KodeverkType.VERGE_TYPE]],
-  );
+  const vergetyper = alleKodeverk['VergeType'].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   return (
     <>
@@ -66,7 +65,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
           {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.CheckInformation' })}
         </AksjonspunktHelpTextHTML>
       )}
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
@@ -82,6 +81,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
           {aksjonspunkterForPanel.length !== 0 && (
             <>
               <FaktaBegrunnelseTextField
+                control={formMethods.control}
                 isSubmittable={submittable}
                 isReadOnly={isReadOnly}
                 hasBegrunnelse={!!begrunnelse}
@@ -95,7 +95,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
             </>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { BehandlingStatus } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
-export const getAlleMerknaderFraBeslutter = (behandlingStatus: string, aksjonspunkter: Aksjonspunkt[]) => {
+export const getAlleMerknaderFraBeslutter = (behandlingStatus: BehandlingStatus, aksjonspunkter: Aksjonspunkt[]) => {
   if (behandlingStatus !== BehandlingStatus.BEHANDLING_UTREDES) {
     return {};
   }

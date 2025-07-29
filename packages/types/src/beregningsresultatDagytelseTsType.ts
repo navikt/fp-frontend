@@ -1,16 +1,18 @@
+import type { AktivitetStatus, OpptjeningAktivitetType, StonadskontoType } from '@navikt/fp-kodeverk';
+
 export type BeregningsresultatPeriodeAndel = Readonly<{
   arbeidsgiverReferanse: string;
   refusjon: number;
   tilSoker: number;
   uttak: {
-    stonadskontoType: string;
+    stonadskontoType: StonadskontoType;
     gradering: boolean;
   };
   utbetalingsgrad: number;
   sisteUtbetalingsdato: string;
-  aktivitetStatus: string;
+  aktivitetStatus: AktivitetStatus;
   eksternArbeidsforholdId: string;
-  arbeidsforholdType: string;
+  arbeidsforholdType: OpptjeningAktivitetType;
 }>;
 
 export type BeregningsresultatPeriode = Readonly<{

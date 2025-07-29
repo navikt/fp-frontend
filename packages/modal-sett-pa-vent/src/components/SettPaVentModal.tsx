@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Modal, VStack } from '@navikt/ds-react';
-import { Datepicker, Form, SelectField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   ariaCheck,
   dateAfterOrEqualToToday,
@@ -14,7 +14,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { VenteArsakType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 export type FormValues = {
   frist?: string;
@@ -25,7 +25,7 @@ interface Props {
   submitCallback: (formData: FormValues) => void;
   cancelEvent: () => void;
   showModal: boolean;
-  ventearsaker: KodeverkMedNavn[];
+  ventearsaker: KodeverkMedNavn<'Venteårsak'>[] | KodeverkMedNavnTilbakekreving<'Venteårsak'>[];
   erTilbakekreving: boolean;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
@@ -62,7 +62,7 @@ export const SettPaVentModal = ({
   const showFristenTekst = skalViseFristenTekst(erTilbakekreving, frist, fristFraFelt, ventearsakFraFelt);
 
   return (
-    <Form formMethods={formMethods} onSubmit={submitCallback}>
+    <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
       <Modal
         width="small"
         open={showModal}
@@ -76,14 +76,16 @@ export const SettPaVentModal = ({
         <Modal.Body>
           <VStack gap="4">
             {(hasManualPaVent || fristFraFelt) && (
-              <Datepicker
-                label={<FormattedMessage id="SettPaVentModal.Frist" />}
+              <RhfDatepicker
                 name="frist"
+                control={formMethods.control}
+                label={<FormattedMessage id="SettPaVentModal.Frist" />}
                 validate={[required, hasValidDate, dateAfterOrEqualToToday]}
               />
             )}
-            <SelectField
+            <RhfSelect
               name="ventearsak"
+              control={formMethods.control}
               label={<FormattedMessage id="SettPaVentModal.Arsak" />}
               validate={[required]}
               selectValues={ventearsaker
@@ -143,7 +145,7 @@ export const SettPaVentModal = ({
           )}
         </Modal.Footer>
       </Modal>
-    </Form>
+    </RhfForm>
   );
 };
 
@@ -176,7 +178,10 @@ const automatiskeVentearsakerForTilbakekreving = [
   VenteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
 ];
 
-const inkluderVentearsak = (ventearsak: KodeverkMedNavn, valgtVentearsak?: string): boolean =>
+const inkluderVentearsak = (
+  ventearsak: KodeverkMedNavn<'Venteårsak'> | KodeverkMedNavnTilbakekreving<'Venteårsak'>,
+  valgtVentearsak?: string,
+): boolean =>
   automatiskeVentearsakerForTilbakekreving.some(vt => vt === ventearsak.kode)
     ? ventearsak.kode === valgtVentearsak
     : true;

@@ -2,23 +2,26 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { FagsakYtelseType, KodeverkLosType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { behandlingerFristUtløptOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { VentefristUtløperGraf } from './VentefristUtløperGraf';
 
-const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string): string => {
+const finnFagsakYtelseTypeNavn = (
+  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
+  valgtFagsakYtelseType: string,
+): string => {
   const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
   return type ? type.navn : '';
 };
 
-export const ALLE_YTELSETYPER_VALGT = 'ALLE';
+const ALLE_YTELSETYPER_VALGT = 'ALLE';
 
 const formName = 'ventefristUtløperForm';
 const formDefaultValues = { valgtYtelsetype: ALLE_YTELSETYPER_VALGT };
@@ -36,7 +39,7 @@ interface Props {
 export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
   const { data: behandlingerPaVent } = useQuery(behandlingerFristUtløptOptions(valgtAvdelingEnhet));
 
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
@@ -48,15 +51,16 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
   const values = formMethods.watch();
 
   return (
-    <Form<FormValues> formMethods={formMethods}>
+    <RhfForm<FormValues> formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="4">
         <Label size="small">
           <FormattedMessage id="VentefristUtløperPanel.SattPaVent" />
         </Label>
         <HStack gap="4">
-          <RadioGroupPanel
+          <RhfRadioGroup
             name="valgtYtelsetype"
+            control={formMethods.control}
             isHorizontal
             radios={[
               {
@@ -85,6 +89,6 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
           )}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

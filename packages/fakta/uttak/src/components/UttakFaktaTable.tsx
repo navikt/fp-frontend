@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
@@ -7,7 +7,6 @@ import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
@@ -24,17 +23,17 @@ const getTypeTekst = (
 ): string | undefined => {
   const årsaktype = utledÅrsakstype(periode);
   if (årsaktype === Årsakstype.UTTAK || årsaktype === Årsakstype.OVERFØRING) {
-    const tekst = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE].find(k => k.kode === periode.uttakPeriodeType)?.navn;
+    const tekst = alleKodeverk['UttakPeriodeType'].find(k => k.kode === periode.uttakPeriodeType)?.navn;
     return periode.arbeidstidsprosent && periode.arbeidstidsprosent > 0
       ? `${tekst} - Gradert ${periode.arbeidstidsprosent}%`
       : tekst;
   }
   if (årsaktype === Årsakstype.OPPHOLD) {
-    const navn = alleKodeverk[KodeverkType.OPPHOLD_ARSAK].find(k => k.kode === periode.oppholdÅrsak)?.navn;
+    const navn = alleKodeverk['OppholdÅrsak'].find(k => k.kode === periode.oppholdÅrsak)?.navn;
     return intl.formatMessage({ id: 'UttakFaktaTabel.Opphold' }, { arsak: navn?.replace('har uttak av', '') });
   }
   if (årsaktype === Årsakstype.UTSETTELSE) {
-    const navn = alleKodeverk[KodeverkType.UTSETTELSE_AARSAK_TYPE].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
+    const navn = alleKodeverk['UtsettelseÅrsak'].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
     return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
   }
   return '';
@@ -73,42 +72,33 @@ export const UttakFaktaTable = ({
 }: Props) => {
   const intl = useIntl();
 
-  const velgPeriodeFomDato = useCallback(
-    (fom?: string, lukkAlleAndre = false) => {
-      if (fom && valgteFomDatoer.includes(fom)) {
-        setValgteFomDatoer(foms => foms.filter(f => f !== fom));
-      } else if (lukkAlleAndre) {
-        const nye = fom ? [fom] : [];
-        setValgteFomDatoer(() => nye);
-      } else if (fom) {
-        setValgteFomDatoer(foms => foms.concat(fom));
-      }
-    },
-    [valgteFomDatoer, setValgteFomDatoer],
-  );
+  const velgPeriodeFomDato = (fom?: string, lukkAlleAndre = false) => {
+    if (fom && valgteFomDatoer.includes(fom)) {
+      setValgteFomDatoer(foms => foms.filter(f => f !== fom));
+    } else if (lukkAlleAndre) {
+      const nye = fom ? [fom] : [];
+      setValgteFomDatoer(() => nye);
+    } else if (fom) {
+      setValgteFomDatoer(foms => foms.concat(fom));
+    }
+  };
 
-  const oppdaterPeriode = useCallback(
-    (uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
-      const oppdatertePerioder = uttakKontrollerFaktaPerioder
-        .filter(p => p.originalFom !== uPeriode.originalFom)
-        .concat(uPeriode)
-        .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
+  const oppdaterPeriode = (uPeriode: KontrollerFaktaPeriodeMedApMarkering) => {
+    const oppdatertePerioder = uttakKontrollerFaktaPerioder
+      .filter(p => p.originalFom !== uPeriode.originalFom)
+      .concat(uPeriode)
+      .sort((a1, a2) => dayjs(a1.fom).diff(dayjs(a2.fom)));
 
-      setDirty(true);
-      oppdaterUttakPerioder(oppdatertePerioder);
-      velgPeriodeFomDato(undefined, true);
-    },
-    [uttakKontrollerFaktaPerioder],
-  );
+    setDirty(true);
+    oppdaterUttakPerioder(oppdatertePerioder);
+    velgPeriodeFomDato(undefined, true);
+  };
 
-  const slettPeriode = useCallback(
-    (fom: string) => {
-      const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter(p => p.originalFom !== fom);
-      oppdaterUttakPerioder(oppdatertePerioder);
-      setDirty(true);
-    },
-    [uttakKontrollerFaktaPerioder],
-  );
+  const slettPeriode = (fom: string) => {
+    const oppdatertePerioder = uttakKontrollerFaktaPerioder.filter(p => p.originalFom !== fom);
+    oppdaterUttakPerioder(oppdatertePerioder);
+    setDirty(true);
+  };
 
   const sisteMåned =
     uttakKontrollerFaktaPerioder.length > 0
@@ -172,7 +162,7 @@ export const UttakFaktaTable = ({
                 <Table.DataCell>{numberOfDaysAndWeeks.formattedString}</Table.DataCell>
                 <Table.DataCell>{getTypeTekst(alleKodeverk, periode, intl)}</Table.DataCell>
                 <Table.DataCell>
-                  {alleKodeverk[KodeverkType.FORDELING_PERIODE_KILDE].find(k => k.kode === periode.periodeKilde)?.navn}
+                  {alleKodeverk['FordelingPeriodeKilde'].find(k => k.kode === periode.periodeKilde)?.navn}
                 </Table.DataCell>
               </Table.ExpandableRow>
             );

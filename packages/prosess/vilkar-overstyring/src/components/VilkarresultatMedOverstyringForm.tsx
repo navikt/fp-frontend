@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { CheckmarkCircleFillIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 
@@ -115,7 +115,7 @@ const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjo
 
 interface Props {
   medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;
-  avslagsarsaker: KodeverkMedNavn[];
+  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
   status: string;
   panelTittelKode: string;
   lovReferanse?: string;
@@ -172,7 +172,7 @@ export const VilkarresultatMedOverstyringForm = ({
   const originalErVilkarOk = VilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, overstyringApKode))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -248,6 +248,6 @@ export const VilkarresultatMedOverstyringForm = ({
           </OverstyringPanel>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

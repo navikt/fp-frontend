@@ -2,16 +2,12 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
+import { ArbeidsforholdKomplettVurderingType, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { AksjonspunktÅrsak, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { ArbeidsforholdFaktaIndex } from './ArbeidsforholdFaktaIndex';
 import { BekreftetPermisjonStatus } from './kodeverk/bekreftetPermisjonStatus';
-
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const fellesInntektsmeldingFelter = {
   innsendingstidspunkt: '2021-12-06T00:00:00',
@@ -148,7 +144,7 @@ export const SokerErIPermisjon: Story = {
           begrunnelse: 'Dette er en begrunnelse 6',
           permisjonOgMangel: {
             permisjonFom: '2020-01-01',
-            type: 'PERMISJON',
+            type: PermisjonsbeskrivelseType.PERMISJON,
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
             permisjonStatus: BekreftetPermisjonStatus.BRUK_PERMISJON,
           },
@@ -177,7 +173,7 @@ export const SokerErIkkeIPermisjon: Story = {
           permisjonOgMangel: {
             permisjonFom: '2020-01-01',
             permisjonTom: '2021-01-01',
-            type: 'PERMISJON',
+            type: PermisjonsbeskrivelseType.PERMISJON,
             permisjonStatus: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
           },
         },

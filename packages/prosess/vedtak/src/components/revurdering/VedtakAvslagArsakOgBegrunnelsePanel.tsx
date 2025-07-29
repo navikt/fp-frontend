@@ -3,11 +3,11 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Detail, Label, VStack } from '@navikt/ds-react';
-import { TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
 import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
@@ -29,12 +29,11 @@ const getAvslagArsak = (
     throw new Error('Ingen behandlingsresultat eller avslagsårsak finnes');
   }
 
-  const vilkarType =
-    alleKodeverk[KodeverkType.VILKAR_TYPE].find(kode => kode.kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
+  const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
 
   const årsak =
-    alleKodeverk[KodeverkType.AVSLAGSARSAK][avslatteVilkar[0].vilkarType as VilkarType].find(
-      kode => kode.kode === behandlingsresultat.avslagsarsak,
+    alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType as VilkarType].find(
+      ({ kode }) => kode === behandlingsresultat.avslagsarsak,
     )?.navn ?? '';
 
   return `${vilkarType}: ${årsak}`;
@@ -57,8 +56,10 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => {
+  // TODO (TOR) Manglar typing
   const {
     formState: { isDirty },
+    control,
   } = useFormContext();
 
   const isRequiredFn = (value?: string | number | boolean) => value !== undefined || isDirty;
@@ -75,8 +76,9 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
         </VStack>
       )}
       {!skalBrukeOverstyrendeFritekstBrev && (
-        <TextAreaField
+        <RhfTextarea
           name="begrunnelse"
+          control={control}
           label={<FormattedMessage id="VedtakForm.Fritekst" />}
           validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
           maxLength={1500}

@@ -21,6 +21,7 @@ const meta = {
     msw: {
       handlers: [http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak))],
     },
+    layout: 'fullscreen',
   },
   args: {
     queryStrings: {

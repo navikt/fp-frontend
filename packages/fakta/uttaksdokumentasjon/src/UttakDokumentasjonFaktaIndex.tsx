@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
@@ -18,10 +17,10 @@ interface Props {
 }
 
 export const UttakDokumentasjonFaktaIndex = ({ dokumentasjonVurderingBehov, submittable }: Props) => {
-  const sorterteBehov = useMemo(
-    () => [...dokumentasjonVurderingBehov].sort((krav1, krav2) => dayjs(krav1.fom).diff(dayjs(krav2.fom))),
-    [dokumentasjonVurderingBehov],
+  const sorterteBehov = [...dokumentasjonVurderingBehov].sort((krav1, krav2) =>
+    dayjs(krav1.fom).diff(dayjs(krav2.fom)),
   );
+
   return (
     <RawIntlProvider value={intl}>
       <UttakDokumentasjonFaktaForm dokumentasjonVurderingBehov={sorterteBehov} submittable={submittable} />

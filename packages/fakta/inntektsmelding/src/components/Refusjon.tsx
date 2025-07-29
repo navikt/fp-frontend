@@ -1,7 +1,6 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BeløpLabel, DateLabel } from '@navikt/ft-ui-komponenter';
 
 import type { Inntektsmelding } from '@navikt/fp-types';
 
@@ -12,13 +11,11 @@ export const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding
   if (inntektsmelding.refusjonsperioder.length === 0) {
     return (
       <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}>
-        <span>
-          {inntektsmelding.refusjonPrMnd ? (
-            formatCurrencyNoKr(inntektsmelding.refusjonPrMnd)
-          ) : (
-            <FormattedMessage id="InntektsmeldingFaktaPanel.refusjon.ingen" />
-          )}
-        </span>
+        {inntektsmelding.refusjonPrMnd ? (
+          <BeløpLabel beløp={inntektsmelding.refusjonPrMnd} />
+        ) : (
+          <FormattedMessage tagName="span" id="InntektsmeldingFaktaPanel.refusjon.ingen" />
+        )}
       </InntektsmeldingInfoBlokk>
     );
   }
@@ -29,7 +26,7 @@ export const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding
   return (
     <InntektsmeldingInfoBlokk tittel={intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.refusjon.heading' })}>
       <span>Krever refusjon</span>
-      <span>{formatCurrencyNoKr(inntektsmelding.refusjonPrMnd ?? 0)}</span>
+      <BeløpLabel beløp={inntektsmelding.refusjonPrMnd ?? 0} />
       <span>Endringer i perioden:</span>
       <ul>
         {perioderStigende.map(refusjon => {
@@ -38,7 +35,7 @@ export const Refusjon = ({ inntektsmelding }: { inntektsmelding: Inntektsmelding
               <FormattedMessage
                 id="InntektsmeldingFaktaPanel.refusjon.endring.periode"
                 values={{
-                  kroner: formatCurrencyNoKr(refusjon.refusjonsbeløp.verdi),
+                  kroner: <BeløpLabel beløp={refusjon.refusjonsbeløp.verdi} />,
                   fom: <DateLabel dateString={refusjon.fom} />,
                 }}
               />

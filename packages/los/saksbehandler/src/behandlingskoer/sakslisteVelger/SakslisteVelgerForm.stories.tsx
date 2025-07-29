@@ -1,15 +1,13 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
-import { AndreKriterierType } from '../../kodeverk/andreKriterierType';
-import { KoSortering } from '../../kodeverk/KoSortering';
 import { SakslisteVelgerForm } from './SakslisteVelgerForm';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -21,6 +19,7 @@ const meta = {
   component: SakslisteVelgerForm,
   decorators: [withIntl, withQueryClient],
   parameters: {
+    layout: 'fullscreen',
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
@@ -77,7 +76,7 @@ export const Default: Story = {
           },
         ],
         sortering: {
-          sorteringType: KoSortering.BEHANDLINGSFRIST,
+          sorteringType: KøSortering.BEHANDLINGSFRIST,
           fra: 2,
           til: 4,
           erDynamiskPeriode: true,
@@ -102,7 +101,7 @@ export const MedToSakslister: Story = {
           },
         ],
         sortering: {
-          sorteringType: KoSortering.BEHANDLINGSFRIST,
+          sorteringType: KøSortering.BEHANDLINGSFRIST,
           fra: 2,
           til: 4,
           erDynamiskPeriode: true,
@@ -120,7 +119,7 @@ export const MedToSakslister: Story = {
           },
         ],
         sortering: {
-          sorteringType: KoSortering.BEHANDLINGSFRIST,
+          sorteringType: KøSortering.BEHANDLINGSFRIST,
           fra: 2,
           til: 4,
           erDynamiskPeriode: true,
@@ -197,7 +196,7 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
           },
         ],
         sortering: {
-          sorteringType: KoSortering.BEHANDLINGSFRIST,
+          sorteringType: KøSortering.BEHANDLINGSFRIST,
           fra: 2,
           til: 4,
           erDynamiskPeriode: true,

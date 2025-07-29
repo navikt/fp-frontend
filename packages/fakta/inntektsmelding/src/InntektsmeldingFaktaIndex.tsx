@@ -3,8 +3,8 @@ import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { CircleFillIcon, CoffeeIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, type SortState, Table } from '@navikt/ds-react';
-import { DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
-import { createIntl, formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BeløpLabel, DateLabel, DateTimeLabel } from '@navikt/ft-ui-komponenter';
+import { createIntl } from '@navikt/ft-utils';
 
 import type {
   ArbeidsgiverOpplysningerPerId,
@@ -127,7 +127,9 @@ export const InntektsmeldingFaktaIndex = ({
                     '-'
                   )}
                 </Table.DataCell>
-                <Table.DataCell>{formatCurrencyNoKr(inntektsmelding.inntektPrMnd)}</Table.DataCell>
+                <Table.DataCell>
+                  <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
+                </Table.DataCell>
                 <Table.DataCell>
                   <InntektsmeldingStatus behandling={behandling} inntektsmelding={inntektsmelding} />
                 </Table.DataCell>

@@ -1,3 +1,5 @@
+import type { UttakArbeidType } from '@navikt/fp-kodeverk';
+
 export enum SvpTilretteleggingFomKilde {
   ENDRET_AV_SAKSBEHANDLER = 'ENDRET_AV_SAKSBEHANDLER',
   REGISTRERT_AV_SAKSBEHANDLER = 'REGISTRERT_AV_SAKSBEHANDLER',
@@ -22,7 +24,7 @@ export type ArbeidsforholdTilretteleggingDato = Readonly<{
   mottattDato?: string;
 }>;
 
-export type OppholdKilde = 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER';
+type OppholdKilde = 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER';
 
 export type SvpAvklartOppholdPeriode = Readonly<{
   fom: string;
@@ -36,7 +38,7 @@ export type ArbeidsforholdFodselOgTilrettelegging = Readonly<{
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: ArbeidsforholdTilretteleggingDato[];
   arbeidsgiverReferanse: string;
-  uttakArbeidType: string;
+  uttakArbeidType: UttakArbeidType;
   opplysningerOmRisiko?: string;
   opplysningerOmTilrettelegging?: string;
   internArbeidsforholdReferanse?: string;

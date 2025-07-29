@@ -6,7 +6,7 @@ import * as stories from './PermisjonFaktaIndex.stories';
 
 const { EttArbeidsforholdUtenSluttdatoForPermisjon, FlereArbeidsforhold } = composeStories(stories);
 
-describe('<PermisjonFaktaIndex>', () => {
+describe('PermisjonFaktaIndex', () => {
   it('skal velge å ta med arbeidsforholdet og så bekrefte', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 

@@ -1,7 +1,7 @@
 import { MemoryRouter } from 'react-router-dom';
 
 import type { Meta, StoryObj } from '@storybook/react';
-import type { JsonBodyType } from 'msw';
+import { cleanUrl, type JsonBodyType } from 'msw';
 import { http, HttpResponse } from 'msw';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
@@ -20,6 +20,7 @@ import {
   faktaArbeidsforhold,
   familiehendelse,
   feriepengeGrunnlag,
+  fødsel,
   initFetchFpsak,
   initFetchFptilbake,
   inntektArbeidYtelse,
@@ -64,9 +65,10 @@ const ressursMap = {
   [BehandlingRel.FAKTA_ARBEIDSFORHOLD]: faktaArbeidsforhold,
   [BehandlingRel.OMSORG_OG_RETT]: omsorgOgRett,
   [BehandlingRel.FAMILIEHENDELSE]: familiehendelse,
+  [BehandlingRel.FAKTA_FØDSEL]: fødsel,
   [BehandlingRel.SAVE_AKSJONSPUNKT]: new HttpResponse(null, {
     status: 202,
-    headers: { location: 'http://www.test.com/api/result' },
+    headers: { location: 'https://www.test.com/api/result' },
   }),
 };
 
@@ -89,31 +91,30 @@ const HANDLERS = [
   http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
   http.post(
     BehandlingUrl.BEHANDLING,
-    () => new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } }),
+    () => new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } }),
   ),
-  http.get('http://www.test.com/api/status', () =>
+  http.get('https://www.test.com/api/status', () =>
     HttpResponse.json({
       status: ApiPollingStatus.PENDING,
       pollIntervalMillis: 100000000,
     }),
   ),
-  http.get('http://www.test.com/api/result', () => HttpResponse.json(behandling)),
+  http.get('https://www.test.com/api/result', () => HttpResponse.json(behandling)),
   ...[
     ...initFetchFpsak.links,
     ...initFetchFpsak.sakLinks,
     ...initFetchFptilbake.links,
     ...initFetchFptilbake.sakLinks,
     ...behandling.links,
-  ].map(link => {
-    if (link.type === 'GET') {
-      return http.get(wrapUrl(link.href), getMockResponse(link.rel));
-    } else return http.post(wrapUrl(link.href), getMockResponse(link.rel));
-  }),
+  ].map(link => http.all(cleanUrl(wrapUrl(link.href)), getMockResponse(link.rel))),
 ];
 
 const meta = {
   title: 'AppIndex',
   component: AppIndexWrapper,
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => {
     const fagsakId = '1';
     return (

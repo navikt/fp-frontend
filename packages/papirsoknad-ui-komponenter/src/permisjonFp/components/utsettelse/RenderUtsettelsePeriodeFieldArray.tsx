@@ -1,8 +1,8 @@
-import { type ReactElement, useCallback, useEffect } from 'react';
+import { type ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { Datepicker, PeriodFieldArray, SelectField } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -46,14 +46,14 @@ const getValiderFomTomRekkefølge =
     return erFør ? dateBeforeOrEqual(tomVerdi)(fomVerdi) : dateAfterOrEqual(fomVerdi)(tomVerdi);
   };
 
-const mapTyper = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapTyper = (typer: KodeverkMedNavn<'UtsettelseÅrsak'>[]): ReactElement[] =>
   typer.map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
   ));
 
-const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => gyldigeUttakperioder.some(gup => gup === kode))
     .map(({ kode, navn }) => (
@@ -63,8 +63,8 @@ const mapKvoter = (typer: KodeverkMedNavn[]): ReactElement[] =>
     ));
 
 interface Props {
-  utsettelseReasons: KodeverkMedNavn[];
-  utsettelseKvoter: KodeverkMedNavn[];
+  utsettelseReasons: KodeverkMedNavn<'UtsettelseÅrsak'>[];
+  utsettelseKvoter: KodeverkMedNavn<'UttakPeriodeType'>[];
   readOnly: boolean;
 }
 
@@ -94,7 +94,7 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
     }
   }, []);
 
-  const triggerValidationOnChange = useCallback(() => (isSubmitted ? trigger() : undefined), [isSubmitted, trigger]);
+  const triggerValidationOnChange = () => (isSubmitted ? trigger() : undefined);
 
   return (
     <PeriodFieldArray
@@ -107,15 +107,17 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
     >
       {(field, index) => (
         <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
-          <SelectField
+          <RhfSelect
             name={`${getPrefix(index)}.periodeForUtsettelse`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Periode' })}
             selectValues={mapKvoter(utsettelseKvoter)}
             validate={[required]}
           />
 
-          <Datepicker
+          <RhfDatepicker
             name={`${getPrefix(index)}.periodeFom`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeFom' })}
             validate={[
               required,
@@ -126,8 +128,9 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
             onChange={triggerValidationOnChange}
           />
 
-          <Datepicker
+          <RhfDatepicker
             name={`${getPrefix(index)}.periodeTom`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.periodeTom' })}
             validate={[
               required,
@@ -138,17 +141,19 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
             onChange={triggerValidationOnChange}
           />
 
-          <SelectField
+          <RhfSelect
             name={`${getPrefix(index)}.arsakForUtsettelse`}
+            control={control}
             label={intl.formatMessage({ id: 'Registrering.Permisjon.Utsettelse.Arsak' })}
             selectValues={mapTyper(utsettelseReasons)}
             validate={[required]}
             onChange={triggerValidationOnChange}
           />
 
-          <SelectField
-            label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
+          <RhfSelect
             name={`${getPrefix(index)}.erArbeidstaker`}
+            control={control}
+            label={intl.formatMessage({ id: 'Registrering.Permisjon.ArbeidskategoriLabel' })}
             selectValues={[
               <option value="true" key="true">
                 {intl.formatMessage({ id: 'Registrering.Permisjon.ErArbeidstaker' })}

@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingStatus, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -13,7 +13,6 @@ import { useGetEnabledApplikasjonContext } from '../../app/useGetEnabledApplikas
 import { initFetchOptions, useFagsakApi } from '../../data/fagsakApi';
 import { useLagNyBehandling } from '../../data/polling/useLagNyBehandling';
 import { FagsakData } from '../../fagsak/FagsakData';
-import { MenyKodeverk } from '../MenyKodeverk';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
   BehandlingType.FORSTEGANGSSOKNAD,
@@ -71,9 +70,15 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
     api.fptilbake.kanTilbakekrevingRevurderingOpprettesOptions(isRevurderingOpprettedAktivert, behandlingUuid),
   );
 
-  const menyKodeverk = new MenyKodeverk(behandling?.type)
-    .medFpSakKodeverk(notEmpty(alleFpSakKodeverk))
-    .medFpTilbakeKodeverk(notEmpty(alleFpTilbakeKodeverk));
+  const tilbakekrevingRevurderingsårsaker = alleFpTilbakeKodeverk
+    ? alleFpTilbakeKodeverk['BehandlingÅrsakType']
+    : undefined;
+
+  const revurderingsårsaker = alleFpSakKodeverk ? alleFpSakKodeverk['BehandlingÅrsakType'] : undefined;
+
+  const behandlingstyper = notEmpty(alleFpSakKodeverk)['BehandlingType'].filter(bt =>
+    BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES.some(bto => bto === bt.kode),
+  );
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -95,18 +100,9 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
         kanBehandlingOpprettes,
         kanRevurderingOpprettes,
       }}
-      behandlingstyper={menyKodeverk.getKodeverkForBehandlingstyper(
-        BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES,
-        KodeverkType.BEHANDLING_TYPE,
-      )}
-      tilbakekrevingRevurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(
-        KodeverkType.BEHANDLING_AARSAK,
-        BehandlingType.TILBAKEKREVING_REVURDERING,
-      )}
-      revurderingArsaker={menyKodeverk.getKodeverkForBehandlingstype(
-        KodeverkType.BEHANDLING_AARSAK,
-        BehandlingType.REVURDERING,
-      )}
+      behandlingstyper={behandlingstyper}
+      tilbakekrevingRevurderingArsaker={tilbakekrevingRevurderingsårsaker}
+      revurderingArsaker={revurderingsårsaker}
       ytelseType={fagsak.fagsakYtelseType}
       lagNyBehandling={lagNyBehandling}
       lukkModal={lukkModal}

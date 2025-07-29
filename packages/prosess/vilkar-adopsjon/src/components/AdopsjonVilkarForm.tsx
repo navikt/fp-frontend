@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -13,10 +13,7 @@ import {
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
-import type {
-  VurdereYtelseSammeBarnAnnenForelderAp,
-  VurdereYtelseSammeBarnSokerAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
+import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
@@ -40,17 +37,10 @@ const buildInitialValues = (
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
-const transformValues = (
-  values: FormValues,
-  aksjonspunkter: Aksjonspunkt[],
-): VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp => ({
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(
-    aksjonspunkter[0].definisjon,
-    AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
-  ),
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon, AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN),
 });
 
 /**
@@ -69,7 +59,7 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
     harÅpneAksjonspunkter,
     isReadOnly,
     alleMerknaderFraBeslutter,
-  } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp | VurdereYtelseSammeBarnAnnenForelderAp>();
+  } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
@@ -82,14 +72,14 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.ADOPSJONSVILKARET];
+  const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.ADOPSJONSVILKARET];
 
   const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -118,6 +108,6 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };

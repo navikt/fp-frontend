@@ -3,7 +3,8 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { Behandling, KodeverkMedNavn } from '@navikt/fp-types';
+import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { Behandling, KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import { HenlagtBehandlingModal } from './components/HenlagtBehandlingModal';
 import {
@@ -22,8 +23,10 @@ interface Props {
   valgtBehandling: Behandling;
   henleggBehandling: (params: { årsakKode: string; begrunnelse: string; fritekst?: string }) => Promise<void>;
   forhandsvisHenleggBehandling: (data: ForhåndsvisHenleggParams) => void;
-  ytelseType: string;
-  behandlingResultatTyper: KodeverkMedNavn[];
+  ytelseType: FagsakYtelseType;
+  behandlingResultatTyper:
+    | KodeverkMedNavn<'BehandlingResultatType'>[]
+    | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>[];
   gaaTilSokeside: () => void;
   lukkModal: () => void;
 }

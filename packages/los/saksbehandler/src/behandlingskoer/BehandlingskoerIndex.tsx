@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import type { Oppgave, OppgaveStatus } from '@navikt/fp-los-felles';
+import type { Oppgave, ReservasjonStatus } from '@navikt/fp-los-felles';
 
 import { reserverOppgavePost, sakslisteOptions } from '../data/fplosSaksbehandlerApi';
 import { OppgaveErReservertAvAnnenModal } from '../reservertAvAnnen/OppgaveErReservertAvAnnenModal';
@@ -22,7 +22,7 @@ interface Props {
 export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, åpneFagsak, brukernavn }: Props) => {
   const [reservertAvAnnenSaksbehandler, setReservertAvAnnenSaksbehandler] = useState<boolean>(false);
   const [reservertOppgave, setReservertOppgave] = useState<Oppgave>();
-  const [reservertOppgaveStatus, setReservertOppgaveStatus] = useState<OppgaveStatus>();
+  const [reservertOppgaveStatus, setReservertOppgaveStatus] = useState<ReservasjonStatus>();
 
   const { data: sakslister = EMPTY_ARRAY, isSuccess } = useQuery(sakslisteOptions());
 
@@ -31,7 +31,7 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
   });
 
   const reserverOppgaveOgApne = (oppgave: Oppgave) => {
-    if (oppgave.status.erReservert) {
+    if (oppgave.reservasjonStatus.erReservert) {
       åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     } else {
       reserverOppgave(oppgave.id).then(nyOppgaveStatus => {
@@ -71,7 +71,7 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
         <OppgaveErReservertAvAnnenModal
           lukkErReservertModalOgOpneOppgave={lukkErReservertModalOgOpneOppgave}
           oppgave={reservertOppgave}
-          oppgaveStatus={reservertOppgaveStatus}
+          reservasjonStatus={reservertOppgaveStatus}
         />
       )}
     </>

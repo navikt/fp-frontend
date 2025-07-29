@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateFormat } from '@navikt/ft-utils';
 
 import {
@@ -13,7 +13,7 @@ import {
   isAvslag,
   isInnvilget,
   isOpphor,
-  KodeverkType,
+  KonsekvensForYtelsen,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
@@ -82,7 +82,7 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
         bt === BehandlingArsakType.KLAGE_M_INNTK,
     );
 
-const lagÅrsakString = (revurderingAarsaker: string[], alleKodeverk: AlleKodeverk): string | undefined => {
+const lagÅrsakString = (revurderingAarsaker: BehandlingArsakType[], alleKodeverk: AlleKodeverk): string | undefined => {
   if (revurderingAarsaker === undefined || revurderingAarsaker.length < 1) {
     return undefined;
   }
@@ -92,11 +92,11 @@ const lagÅrsakString = (revurderingAarsaker: string[], alleKodeverk: AlleKodeve
   );
   const alleAndreAarsakerNavn = revurderingAarsaker
     .filter(aarsak => aarsak !== BehandlingArsakType.RE_ENDRING_FRA_BRUKER)
-    .map(aarsak => alleKodeverk[KodeverkType.BEHANDLING_AARSAK].find(kode => kode.kode === aarsak)?.navn ?? '');
+    .map(aarsak => alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === aarsak)?.navn ?? '');
   // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
   if (endringFraBrukerAarsak !== undefined) {
     aarsakTekstList.push(
-      alleKodeverk[KodeverkType.BEHANDLING_AARSAK].find(kode => kode.kode === endringFraBrukerAarsak)?.navn ?? '',
+      alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === endringFraBrukerAarsak)?.navn ?? '',
     );
   }
   aarsakTekstList.push(...alleAndreAarsakerNavn);
@@ -112,12 +112,12 @@ const erNyttBehandlingResult = (
   return vedtakResultOriginal !== vedtakResult;
 };
 
-export const lagKonsekvensForYtelsenTekst = (alleKodeverk: AlleKodeverk, konsekvenser?: string[]): string => {
+const lagKonsekvensForYtelsenTekst = (alleKodeverk: AlleKodeverk, konsekvenser?: KonsekvensForYtelsen[]): string => {
   if (!konsekvenser || konsekvenser.length < 1) {
     return '';
   }
   return konsekvenser
-    .map(k => alleKodeverk[KodeverkType.KONSEKVENS_FOR_YTELSEN].find(kodeverk => kodeverk.kode === k)?.navn ?? '')
+    .map(k => alleKodeverk['KonsekvensForYtelsen'].find(kodeverk => kodeverk.kode === k)?.navn ?? '')
     .join(' og ');
 };
 
@@ -171,7 +171,7 @@ const finnInvilgetRevurderingTekst = (
   ytelseTypeKode: string,
   alleKodeverk: AlleKodeverk,
   tilbakekrevingText: string | undefined,
-  konsekvenserForYtelsen?: string[],
+  konsekvenserForYtelsen?: KonsekvensForYtelsen[],
   beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): string => {
@@ -247,7 +247,7 @@ export const VedtakRevurderingForm = ({
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling, beregningErManueltFastsatt),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -291,7 +291,7 @@ export const VedtakRevurderingForm = ({
   const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(previewCallback, begrunnelse);
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
@@ -349,6 +349,6 @@ export const VedtakRevurderingForm = ({
           ) : null;
         }}
       />
-    </Form>
+    </RhfForm>
   );
 };

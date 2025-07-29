@@ -7,7 +7,7 @@ import * as stories from './SimuleringProsessIndex.stories';
 const { AksjonspunktVurderFeilutbetaling, SimuleringspanelUtenAksjonspunkt, AksjonspunktKontrollerEtterbetaling } =
   composeStories(stories);
 
-describe('<SimuleringProsessIndex>', () => {
+describe('SimuleringProsessIndex', () => {
   it('skal velge ingen tilbakebetaling og så bekrefte', async () => {
     const lagre = vi.fn();
 

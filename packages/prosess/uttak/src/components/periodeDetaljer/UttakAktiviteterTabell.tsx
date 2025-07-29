@@ -1,9 +1,9 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Table } from '@navikt/ds-react';
-import { NumberField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   hasValidDecimal,
   hasValidInteger,
@@ -13,6 +13,7 @@ import {
   notDash,
   required,
 } from '@navikt/ft-form-validators';
+import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type {
@@ -22,7 +23,6 @@ import type {
   PeriodeSokerAktivitet,
 } from '@navikt/fp-types';
 
-import { lagVisningsNavn } from '../../utils/lagVisningsNavn.ts';
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 import type { UttakAktivitetType } from './UttakAktivitetType';
 
@@ -47,7 +47,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
     arbeidsforhold = arbeidsgiverOpplysninger
-      ? lagVisningsNavn(arbeidsgiverOpplysninger, eksternArbeidsforholdId)
+      ? formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternArbeidsforholdId)
       : arbeidsgiverReferanse;
   }
   return {
@@ -117,7 +117,7 @@ const GYLDIGE_UTTAK_PERIODER = [
   UttakPeriodeType.UDEFINERT,
 ];
 
-const lagPeriodeTypeOptions = (typer: KodeverkMedNavn[]): ReactElement[] =>
+const lagPeriodeTypeOptions = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
     .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.some(p => p === kode))
     .map(({ kode, navn }) => (
@@ -153,7 +153,7 @@ const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
   };
 
 interface Props {
-  periodeTyper: KodeverkMedNavn[];
+  periodeTyper: KodeverkMedNavn<'UttakPeriodeType'>[];
   isReadOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   aktiviteter: PeriodeSokerAktivitet[];
@@ -177,7 +177,7 @@ export const UttakAktiviteterTabell = ({
     name: 'aktiviteter',
   });
 
-  const periodeTypeOptions = useMemo(() => lagPeriodeTypeOptions(periodeTyper), [periodeTyper]);
+  const periodeTypeOptions = lagPeriodeTypeOptions(periodeTyper);
 
   const { utsettelseType } = valgtPeriode;
 
@@ -228,8 +228,9 @@ export const UttakAktiviteterTabell = ({
                   </Table.DataCell>
                   <Table.DataCell>
                     <div className={styles.selectStonad}>
-                      <SelectField
+                      <RhfSelect
                         name={`aktiviteter.${index}.stønadskontoType`}
+                        control={control}
                         selectValues={periodeTypeOptions}
                         hideLabel
                         label=""
@@ -241,8 +242,9 @@ export const UttakAktiviteterTabell = ({
                   <Table.DataCell>
                     <HStack gap="2" align="center">
                       <span className={styles.weekPosition}>
-                        <NumberField
+                        <RhfNumericField
                           name={`aktiviteter.${index}.weeks`}
+                          control={control}
                           className={styles.numberWidth}
                           readOnly={isReadOnly}
                           validate={[
@@ -254,8 +256,9 @@ export const UttakAktiviteterTabell = ({
                         />
                       </span>
                       {isReadOnly ? <div>/</div> : <div className={styles.verticalCharPlacementInTable}>/</div>}
-                      <NumberField
+                      <RhfNumericField
                         name={`aktiviteter.${index}.days`}
+                        control={control}
                         className={styles.numberWidth}
                         readOnly={isReadOnly}
                         validate={[
@@ -272,14 +275,14 @@ export const UttakAktiviteterTabell = ({
                   </Table.DataCell>
                   <Table.DataCell>
                     <div className={styles.utbetalingsgrad}>
-                      <NumberField
+                      <RhfNumericField
                         name={`aktiviteter.${index}.utbetalingsgrad`}
+                        control={control}
                         validate={[
                           required,
                           minValue0,
                           maxProsentValue100,
                           hasValidDecimal,
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmUtbetalingsgradMårVæreHøyereEnn0(
                             intl,
                             valgtPeriode,
@@ -288,11 +291,8 @@ export const UttakAktiviteterTabell = ({
                           ),
                           // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           (utbetalingsgrad: string) => {
                             const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
                             return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0

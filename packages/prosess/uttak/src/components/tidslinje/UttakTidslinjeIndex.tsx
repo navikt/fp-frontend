@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { calcDays, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingType, OppholdArsakType, SoknadType } from '@navikt/fp-kodeverk';
+import { BehandlingType, OppholdArsakType, SoknadType, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   Behandling,
@@ -19,12 +19,12 @@ import { type PeriodeSøkerMedTidslinjedata, type TidslinjeTimes, UttakTidslinje
 
 //TODO (TOR) Dette er vel mapping mellom kodeverk? Bør i sofall bruka kodeverk-enums
 const OppholdArsakMapper = {
-  INGEN: 'UDEFINERT',
-  UTTAK_MØDREKVOTE_ANNEN_FORELDER: 'MØDREKVOTE',
-  UTTAK_FEDREKVOTE_ANNEN_FORELDER: 'FEDREKVOTE',
-  UTTAK_FELLESP_ANNEN_FORELDER: 'FELLESPERIODE',
-  UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'FORELDREPENGER',
-} as Record<string, string>;
+  INGEN: StonadskontoType.UDEFINERT,
+  UTTAK_MØDREKVOTE_ANNEN_FORELDER: StonadskontoType.MØDREKVOTE,
+  UTTAK_FEDREKVOTE_ANNEN_FORELDER: StonadskontoType.FEDREKVOTE,
+  UTTAK_FELLESP_ANNEN_FORELDER: StonadskontoType.FELLESPERIODE,
+  UTTAK_FORELDREPENGER_ANNEN_FORELDER: StonadskontoType.FORELDREPENGER,
+} as Record<string, StonadskontoType>;
 
 const finnSøknadsdato = (søknad: Soknad): string => {
   const { mottattDato } = søknad;
@@ -161,21 +161,14 @@ export const UttakTidslinjeIndex = ({
   const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, perioderAnnenpart);
   const annenForelderPerioder = leggTidslinjedataTilPeriode(false, uttakMedOpphold, perioderAnnenpart);
 
-  const alleUttaksperioderMedId = useMemo(
-    () =>
-      annenForelderPerioder.concat(
-        hovedsøkerPerioder.map(p => ({
-          ...p,
-          id: p.id + annenForelderPerioder.length,
-        })),
-      ),
-    [hovedsøkerPerioder, annenForelderPerioder],
+  const alleUttaksperioderMedId = annenForelderPerioder.concat(
+    hovedsøkerPerioder.map(p => ({
+      ...p,
+      id: p.id + annenForelderPerioder.length,
+    })),
   );
 
-  const tidslinjeTider = useMemo(
-    () => finnTidslinjeTider(behandling, søknad, familiehendelse, personoversikt, endringsdato),
-    [behandling, søknad, familiehendelse, personoversikt, endringsdato],
-  );
+  const tidslinjeTider = finnTidslinjeTider(behandling, søknad, familiehendelse, personoversikt, endringsdato);
 
   return (
     <UttakTidslinje

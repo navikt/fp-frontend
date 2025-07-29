@@ -2,23 +2,26 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { FagsakYtelseType, KodeverkLosType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverForAvdelingOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { FordelingAvBehandlingstypeGraf } from './FordelingAvBehandlingstypeGraf';
 
-const finnFagsakYtelseTypeNavn = (fagsakYtelseTyper: KodeverkMedNavn[], valgtFagsakYtelseType: string) => {
+const finnFagsakYtelseTypeNavn = (
+  fagsakYtelseTyper: LosKodeverkMedNavn<'FagsakYtelseType'>[],
+  valgtFagsakYtelseType: string,
+) => {
   const type = fagsakYtelseTyper.find(fyt => fyt.kode === valgtFagsakYtelseType);
   return type ? type.navn : '';
 };
 
-export const ALLE_YTELSETYPER_VALGT = 'ALLE';
+const ALLE_YTELSETYPER_VALGT = 'ALLE';
 
 interface InitialValues {
   valgtYtelseType: string;
@@ -40,8 +43,8 @@ const formDefaultValues: InitialValues = { valgtYtelseType: ALLE_YTELSETYPER_VAL
 export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
   const { data: oppgaverForAvdeling } = useQuery(oppgaverForAvdelingOptions(valgtAvdelingEnhet));
 
-  const fagsakYtelseTyper = useLosKodeverk(KodeverkLosType.FAGSAK_YTELSE_TYPE);
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
+  const behandlingTyper = useLosKodeverk('BehandlingType');
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
 
@@ -52,14 +55,15 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
   const values = formMethods.watch();
 
   return (
-    <Form formMethods={formMethods}>
+    <RhfForm formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="2">
         <Label size="small">
           <FormattedMessage id="FordelingAvBehandlingstypePanel.Fordeling" />
         </Label>
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="valgtYtelseType"
+          control={formMethods.control}
           isHorizontal
           radios={[
             {
@@ -94,6 +98,6 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
           }
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

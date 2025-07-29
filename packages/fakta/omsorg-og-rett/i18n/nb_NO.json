@@ -8,7 +8,7 @@
   "AleneomsorgForm.HarIkkeAleneomsorg": "Søker har <b>ikke</b> aleneomsorg for barnet",
 
   "HarAnnenForelderRettFelter.HarAnnenForelderRett": "Har annen forelder rett til foreldrepenger i Norge?",
-  "HarAnnenForelderRettFelter.MottarUforetrygd": "Mottar annen forelder uføretrygd, jfr 14-14 tredje ledd?",
+  "HarAnnenForelderRettFelter.MottarUforetrygd": "Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?",
   "HarAnnenForelderRettFelter.AnnenForelderRettEØS": "Har annen forelder tilstrekkelig opptjening fra land i EØS?",
 
   "OpplysningsKort.OpplysningerFraSøknadTittel": "Opplysninger fra søknad",
@@ -26,7 +26,7 @@
   "OpplysningerFraSøknad.HarAnnenForelderRett.Svar": "{iNorge, select, JA {Ja} other {Nei}}",
   "OpplysningerFraSøknad.HarOppholdIEØS": "Har den andre forelderen oppholdt seg fast i et annet EØS-land enn Norge ett år før barnet ble født?",
   "OpplysningerFraSøknad.HarOppholdIEØS.Svar": "{oppholdEØS, select, JA {Ja} other {Nei}}",
-  "OpplysningerFraSøknad.HarRettEØS": "Har den andre forelderen arbeidet eller mottatt pengestøtte i et EØS-land i 6 eller mer måneder før barnet blir født?",
+  "OpplysningerFraSøknad.HarRettEØS": "Har den andre forelderen rett til pengestøtte i et annet EØS-land som tilsvarer foreldrepenger i Norge?",
   "OpplysningerFraSøknad.HarRettEØS.Svar": "{rettEØS, select, JA {Ja} other {Nei}}",
   "OpplysningerFraSøknad.HarUføretrygd": "Har den andre forelderen uføretrygd?",
   "OpplysningerFraSøknad.HarUføretrygd.Svar": "{uføretrygd, select, JA {Ja} other {Nei}}",

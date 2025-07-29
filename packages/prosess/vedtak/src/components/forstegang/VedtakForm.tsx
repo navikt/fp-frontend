@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { type IntlShape, useIntl } from 'react-intl';
 
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import {
@@ -36,13 +36,14 @@ import type {
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
+import type { VedtakFormValues } from '../../types/VedtakFormValues';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import { VedtakAvslagPanel } from './VedtakAvslagPanel';
 import { VedtakInnvilgetPanel } from './VedtakInnvilgetPanel';
 
-export const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
+const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
   if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
     return 'VedtakForm.ResultatKlageYtelsesvedtakOpphevet';
   }
@@ -61,7 +62,7 @@ export const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytels
   return 'VedtakForm.ForeldrepengerIkkeInnvilget';
 };
 
-export const finnInnvilgetResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
+const finnInnvilgetResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
   if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET) {
     return 'VedtakForm.ResultatOpprettholdVedtak';
   }
@@ -120,7 +121,7 @@ const finnVedtakstatusTekst = (
 };
 
 const transformValues = (
-  values: FormValues,
+  values: VedtakFormValues,
   aksjonspunkter: Aksjonspunkt[],
   harOverstyrtVedtaksbrev: boolean,
 ): VedtakAksjonspunkter[] =>
@@ -138,17 +139,14 @@ const transformValues = (
       skalBrukeOverstyrendeFritekstBrev: harOverstyrtVedtaksbrev,
     }));
 
-const finnBegrunnelse = (behandling: Behandling, beregningErManueltFastsatt: boolean): string | undefined => {
-  if (!beregningErManueltFastsatt) {
-    return undefined;
-  }
+const finnBegrunnelse = (behandling: Behandling): string | undefined => {
   return behandling.behandlingsresultat?.avslagsarsakFritekst
     ? decodeHtmlEntity(behandling.behandlingsresultat.avslagsarsakFritekst)
     : undefined;
 };
 
-export const buildInitialValues = (behandling: Behandling, beregningErManueltFastsatt: boolean): FormValues => ({
-  begrunnelse: finnBegrunnelse(behandling, beregningErManueltFastsatt),
+export const buildInitialValues = (behandling: Behandling): VedtakFormValues => ({
+  begrunnelse: finnBegrunnelse(behandling),
 });
 
 type VedtakAksjonspunkter =
@@ -156,10 +154,6 @@ type VedtakAksjonspunkter =
   | ForeslaVedtakManueltAp
   | VurdereAnnenYtelseForVedtakAp
   | VurdereDokumentForVedtakAp;
-
-type FormValues = {
-  begrunnelse?: string;
-};
 
 interface Props {
   previewCallback: (data: VedtakForhåndsvisData) => void;
@@ -189,10 +183,10 @@ export const VedtakForm = ({
 
   const intl = useIntl();
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<VedtakFormValues>();
 
-  const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling, beregningErManueltFastsatt),
+  const formMethods = useForm<VedtakFormValues>({
+    defaultValues: mellomlagretFormData ?? buildInitialValues(behandling),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -212,9 +206,9 @@ export const VedtakForm = ({
   const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(previewCallback, trigger, begrunnelse);
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) =>
+      onSubmit={(values: VedtakFormValues) =>
         submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
       }
       setDataOnUnmount={setMellomlagretFormData}
@@ -257,6 +251,6 @@ export const VedtakForm = ({
           ) : null;
         }}
       />
-    </Form>
+    </RhfForm>
   );
 };

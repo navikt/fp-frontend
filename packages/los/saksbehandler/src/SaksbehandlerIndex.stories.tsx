@@ -1,18 +1,16 @@
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
-import { AndreKriterierType } from './kodeverk/andreKriterierType';
-import { KoSortering } from './kodeverk/KoSortering';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
 import type { NyeOgFerdigstilteOppgaver } from './typer/nyeOgFerdigstilteOppgaverTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
@@ -23,7 +21,7 @@ const SAKSLISTER = [
     sakslisteId: 1,
     navn: 'Saksliste 1',
     sortering: {
-      sorteringType: KoSortering.BEHANDLINGSFRIST,
+      sorteringType: KøSortering.BEHANDLINGSFRIST,
       fra: 1,
       til: 4,
       erDynamiskPeriode: true,
@@ -36,7 +34,7 @@ const SAKSLISTER = [
         inkluder: true,
       },
       {
-        andreKriterierType: AndreKriterierType.REGISTRER_PAPIRSOKNAD,
+        andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
         inkluder: false,
       },
     ],
@@ -46,7 +44,7 @@ const SAKSLISTER = [
 const OPPGAVER_TIL_BEHANDLING = [
   {
     id: 1,
-    status: {
+    reservasjonStatus: {
       erReservert: false,
     },
     saksnummer: '46435',
@@ -54,16 +52,16 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Sara Sahara',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2024-11-01',
     behandlingsfrist: '2024-11-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12',
+    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
   },
   {
     id: 4,
-    status: {
+    reservasjonStatus: {
       erReservert: false,
     },
     saksnummer: '43546',
@@ -71,16 +69,16 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Petter Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2024-01-01',
     behandlingsfrist: '2024-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '12',
+    andreKriterier: [],
   },
   {
     id: 3,
-    status: {
+    reservasjonStatus: {
       erReservert: false,
     },
     saksnummer: '35344',
@@ -88,19 +86,19 @@ const OPPGAVER_TIL_BEHANDLING = [
     navn: 'Helga Tester',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2023-04-01',
     behandlingsfrist: '2023-04-05',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '34',
+    andreKriterier: [],
   },
 ] satisfies Oppgave[];
 
 const RESERVERTE_OPPGAVER = [
   {
     id: 2,
-    status: {
+    reservasjonStatus: {
       erReservert: true,
       reservertTilTidspunkt: '2019-08-02T00:54:25.455',
       flyttetReservasjon: {
@@ -115,12 +113,12 @@ const RESERVERTE_OPPGAVER = [
     navn: 'Espen Utvikler',
     system: 'SAK',
     behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
     fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
     erTilSaksbehandling: true,
     behandlingId: '2',
+    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
   },
 ] satisfies Oppgave[];
 
@@ -198,14 +196,12 @@ const BEHANDLEDE_OPPGAVER = [
     personnummer: '343453534',
     navn: 'Gaute Johansen',
     saksnummer: '54343',
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   } as Oppgave,
   {
     id: 2,
     personnummer: '334342323',
     navn: 'Olga Mortensen',
     saksnummer: '13232',
-    behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   } as Oppgave,
 ];
 
@@ -214,6 +210,7 @@ const meta = {
   decorators: [withQueryClient],
   component: SaksbehandlerIndex,
   parameters: {
+    layout: 'fullscreen',
     msw: {
       handlers: [
         http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
@@ -229,16 +226,16 @@ const meta = {
         http.get(LosUrl.OPPGAVER_TIL_BEHANDLING, t => {
           const doPolling = t.request.url.includes('oppgaveIder');
           return doPolling
-            ? new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/status' } })
-            : new HttpResponse(null, { status: 202, headers: { location: 'http://www.test.com/api/result' } });
+            ? new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/status' } })
+            : new HttpResponse(null, { status: 202, headers: { location: 'https://www.test.com/api/result' } });
         }),
-        http.get('http://www.test.com/api/status', () =>
+        http.get('https://www.test.com/api/status', () =>
           HttpResponse.json({
             status: ApiPollingStatus.PENDING,
             pollIntervalMillis: 100000000,
           }),
         ),
-        http.get('http://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
+        http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
         http.get(LosUrl.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER, () => HttpResponse.json(NYE_OG_FERDIGSTILTE_OPPGAVER)),

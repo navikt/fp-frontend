@@ -1,15 +1,15 @@
-import { type ReactElement, useMemo } from 'react';
+import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 import type { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -19,6 +19,7 @@ import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 import {
   erTilbakekreving,
+  type FormValues,
   IKKE_PA_KLAGD_VEDTAK,
   påklagdTilbakekrevingInfo,
   skalLagreFritekstfelt,
@@ -27,7 +28,7 @@ import {
 
 import styles from './formkravKlageFormNfp.module.css';
 
-export const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string =>
+const getPaKlagdVedtak = (klageFormkavResultat?: KlageVurdering['klageFormkravResultatKA']): string =>
   klageFormkavResultat?.paKlagdBehandlingUuid ? `${klageFormkavResultat.paKlagdBehandlingUuid}` : IKKE_PA_KLAGD_VEDTAK;
 
 const getKlagBareVedtak = (
@@ -45,7 +46,7 @@ const getKlagBareVedtak = (
       .sort((b1, b2) => dayjs(b1.avsluttet).diff(dayjs(b2.avsluttet)))
       .map(({ uuid, type, avsluttet }) => (
         <option key={uuid} value={`${uuid}`}>
-          {`${alleKodeverk[KodeverkType.BEHANDLING_TYPE].find(kode => kode.kode === type)?.navn ?? ''} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
+          {`${alleKodeverk['BehandlingType'].find(({ kode }) => kode === type)?.navn ?? ''} ${avsluttet ? dateTimeFormat(avsluttet) : ''}`}
         </option>
       )),
   );
@@ -54,40 +55,35 @@ const getKlagBareVedtak = (
 const getLovHjemmeler = (aksjonspunktCode: string): string =>
   aksjonspunktCode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA';
 
-type FormValues = {
-  erKlagerPart?: boolean;
-  erFristOverholdt?: boolean;
-  erKonkret?: boolean;
-  erSignert?: boolean;
-  begrunnelse?: string;
-  vedtak?: string;
-  fritekstTilBrev?: string;
-};
-
-const buildInitialValues = (klageVurdering: KlageVurdering): FormValues => {
+const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefined => {
   const klageFormkavResultatNfp = klageVurdering ? klageVurdering.klageFormkravResultatNFP : null;
   const klageVurderingResultatNFP = klageVurdering ? klageVurdering.klageVurderingResultatNFP : null;
+
+  if (!klageFormkavResultatNfp) {
+    return undefined;
+  }
+
   return {
-    vedtak: klageFormkavResultatNfp ? getPaKlagdVedtak(klageFormkavResultatNfp) : '',
-    begrunnelse: klageFormkavResultatNfp ? klageFormkavResultatNfp.begrunnelse : undefined,
-    erKlagerPart: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagerPart : undefined,
-    erKonkret: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlageKonkret : undefined,
-    erFristOverholdt: klageFormkavResultatNfp ? klageFormkavResultatNfp.erKlagefirstOverholdt : undefined,
-    erSignert: klageFormkavResultatNfp ? klageFormkavResultatNfp.erSignert : undefined,
+    vedtak: getPaKlagdVedtak(klageFormkavResultatNfp),
+    begrunnelse: klageFormkavResultatNfp.begrunnelse,
+    erKlagerPart: klageFormkavResultatNfp.erKlagerPart,
+    erKonkret: klageFormkavResultatNfp.erKlageKonkret,
+    erFristOverholdt: klageFormkavResultatNfp.erKlagefirstOverholdt,
+    erSignert: klageFormkavResultatNfp.erSignert,
     fritekstTilBrev: klageVurderingResultatNFP ? klageVurderingResultatNFP.fritekstTilBrev : undefined,
   };
 };
 
 const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): KlageFormkravAp => ({
-  erKlagerPart: values.erKlagerPart!,
-  erFristOverholdt: values.erFristOverholdt!,
-  erKonkret: values.erKonkret!,
-  erSignert: values.erSignert!,
+  erKlagerPart: values.erKlagerPart,
+  erFristOverholdt: values.erFristOverholdt,
+  erKonkret: values.erKonkret,
+  erSignert: values.erSignert,
   begrunnelse: values.begrunnelse,
   kode: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
-  erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak!),
-  tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak!),
+  erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
+  tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
   fritekstTilBrev: skalLagreFritekstfelt(values) ? values.fritekstTilBrev : undefined,
 });
 
@@ -117,7 +113,7 @@ export const FormkravKlageFormNfp = ({
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
-  const initialValues = useMemo(() => buildInitialValues(klageVurdering), [klageVurdering]);
+  const initialValues = buildInitialValues(klageVurdering);
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
@@ -125,7 +121,7 @@ export const FormkravKlageFormNfp = ({
   const formVerdier = formMethods.watch();
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -146,10 +142,11 @@ export const FormkravKlageFormNfp = ({
           <VStack gap="6">
             <HStack gap="10">
               <div>
-                <SelectField
+                <RhfSelect
+                  name="vedtak"
+                  control={formMethods.control}
                   readOnly={isReadOnly}
                   validate={[required]}
-                  name="vedtak"
                   label={intl.formatMessage({ id: 'Klage.Formkrav.VelgVedtak' })}
                   selectValues={klageBareVedtakOptions}
                   className={styles.selectBredde}
@@ -157,8 +154,9 @@ export const FormkravKlageFormNfp = ({
               </div>
               <VStack gap="5">
                 <HStack gap="4">
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name="erKlagerPart"
+                    control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
@@ -175,8 +173,9 @@ export const FormkravKlageFormNfp = ({
                       },
                     ]}
                   />
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name="erKonkret"
+                    control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
@@ -195,8 +194,9 @@ export const FormkravKlageFormNfp = ({
                   />
                 </HStack>
                 <HStack gap="4">
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name="erFristOverholdt"
+                    control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
@@ -213,8 +213,9 @@ export const FormkravKlageFormNfp = ({
                       },
                     ]}
                   />
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name="erSignert"
+                    control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
@@ -237,8 +238,9 @@ export const FormkravKlageFormNfp = ({
           </VStack>
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
           {skalLagreFritekstfelt(formVerdier) && (
-            <TextAreaField
+            <RhfTextarea
               name="fritekstTilBrev"
+              control={formMethods.control}
               label={intl.formatMessage({ id: 'FormkravKlageFormNfp.Fritekst' })}
               maxLength={100000}
               validate={[required, hasValidText]}
@@ -264,6 +266,6 @@ export const FormkravKlageFormNfp = ({
           </HStack>
         </VStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

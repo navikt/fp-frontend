@@ -1,23 +1,15 @@
 import { useState } from 'react';
 
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
-import { BehandlingStatus, BehandlingType, KodeverkType } from '@navikt/fp-kodeverk';
-import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import type { BehandlingAppKontekst, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
+import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
+import type { BehandlingAppKontekst, Behandlingsresultat } from '@navikt/fp-types';
 
 import { BehandlingVelgerSakIndex } from './BehandlingVelgerSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
-
-const getKodeverkMedNavn = (kode: string, kodeverk: KodeverkType) => {
-  const kodeverkForType = alleKodeverk[kodeverk] as KodeverkMedNavn[];
-  if (!kodeverkForType || kodeverkForType.length === 0) {
-    throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
-  }
-  return kodeverkForType.find(k => k.kode === kode);
-};
 
 const meta = {
   title: 'sak/sak-behandling-velger',
@@ -27,7 +19,8 @@ const meta = {
     skalViseAlleBehandlinger: false,
     toggleVisAlleBehandlinger: action('button-click'),
     renderRadSomLenke: () => <div>dummy</div>,
-    getKodeverkMedNavn,
+    alleKodeverk: alleKodeverk,
+    alleKodeverkTilbakekreving: alleKodeverkTilbakekreving,
   },
   render: storyArgs => {
     const [args, setArgs] = useState(storyArgs);

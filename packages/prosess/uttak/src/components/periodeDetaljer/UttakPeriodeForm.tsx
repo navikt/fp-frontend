@@ -1,19 +1,21 @@
-import { type ReactElement, useCallback, useEffect, useMemo } from 'react';
+import { type ReactElement, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, SelectField, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { KodeverkType, OppholdArsakType, PeriodeResultatType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
+import { OppholdArsakType, PeriodeResultatType, StonadskontoType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
 import type {
   AarsakFilter,
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
+  GraderingAvslagÅrsakKodeverk,
   KodeverkMedNavn,
+  PeriodeResultatÅrsakKodeverk,
   PeriodeSoker,
   PeriodeSokerAktivitet,
 } from '@navikt/fp-types';
@@ -27,16 +29,10 @@ import styles from './uttakPeriodeForm.module.css';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-export type ArsakKodeverk = {
-  sortering: string;
-  utfallType?: string;
-  uttakTyper?: string[];
-  valgbarForKonto?: string[];
-  gyldigForLovendringer: string[];
-  synligForRolle?: string[];
-} & KodeverkMedNavn;
-
-const erPeriodeOppfylt = (valgtPeriode: PeriodeSoker, utfallKoder: ArsakKodeverk[]): boolean | undefined => {
+const erPeriodeOppfylt = (
+  valgtPeriode: PeriodeSoker,
+  utfallKoder: PeriodeResultatÅrsakKodeverk[],
+): boolean | undefined => {
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET) {
     return true;
   }
@@ -62,7 +58,7 @@ const erPeriodeOppfylt = (valgtPeriode: PeriodeSoker, utfallKoder: ArsakKodeverk
   return false;
 };
 
-const sorterÅrsakKodeverk = (a: ArsakKodeverk, b: ArsakKodeverk): number => {
+const sorterÅrsakKodeverk = (a: PeriodeResultatÅrsakKodeverk, b: PeriodeResultatÅrsakKodeverk): number => {
   if (a.sortering < b.sortering) {
     return -1;
   }
@@ -78,9 +74,39 @@ const sorterÅrsakKodeverk = (a: ArsakKodeverk, b: ArsakKodeverk): number => {
   return 0;
 };
 
+const lagOptionsTilPeriodeÅrsakSelect = (
+  årsakKoder: PeriodeResultatÅrsakKodeverk[],
+  periodeFom: string,
+  utfallType: string,
+  aarsakFilter: AarsakFilter,
+  periodeType: string,
+  utsettelseType?: string,
+): ReactElement[] => {
+  årsakKoder.sort(sorterÅrsakKodeverk);
+
+  const filteredNyKodeArray = årsakKoder
+    .filter(kodeItem => !utfallType || kodeItem.utfallType === utfallType)
+    .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter, periodeFom))
+    .filter(getFiltrerPåSynlighet(aarsakFilter));
+
+  const mapTilOption = (kodeverk: KodeverkMedNavn<'PeriodeResultatÅrsak'>) => (
+    <option value={kodeverk.kode} key={kodeverk.kode}>
+      {kodeverk.navn}
+    </option>
+  );
+
+  if (utsettelseType && utsettelseType !== '-') {
+    return filteredNyKodeArray.filter(kv => kv.uttakTyper?.includes('UTSETTELSE')).map(mapTilOption);
+  }
+  return filteredNyKodeArray
+    .filter(kv => kv.uttakTyper?.includes('UTTAK'))
+    .filter(kv => periodeType === '-' || kv.valgbarForKonto?.includes(periodeType))
+    .map(mapTilOption);
+};
+
 const getFiltrerPåGyldighetForLovendringer =
   (aarsakFilter: AarsakFilter, periodeFom: string) =>
-  (kodeItem: ArsakKodeverk): boolean => {
+  (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
     if (kodeItem.gyldigForLovendringer === undefined) {
       return true;
     }
@@ -94,7 +120,7 @@ const getFiltrerPåGyldighetForLovendringer =
 
 const getFiltrerPåSynlighet =
   (aarsakFilter: AarsakFilter) =>
-  (kodeItem: ArsakKodeverk): boolean => {
+  (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
     if (kodeItem.synligForRolle === undefined) {
       return true;
     }
@@ -102,43 +128,6 @@ const getFiltrerPåSynlighet =
       ? kodeItem.synligForRolle.includes('MOR')
       : kodeItem.synligForRolle.includes('IKKE_MOR');
   };
-
-const lagOptionsTilPeriodeÅrsakSelect = (
-  årsakKoder: ArsakKodeverk[],
-  periodeFom: string,
-  utfallType: string,
-  aarsakFilter: AarsakFilter,
-  utsettelseType?: string,
-  periodeType?: string,
-  skalFiltrere?: boolean,
-): ReactElement[] => {
-  årsakKoder.sort(sorterÅrsakKodeverk);
-
-  const filteredNyKodeArray = årsakKoder
-    .filter(kodeItem => !utfallType || kodeItem.utfallType === utfallType)
-    .filter(getFiltrerPåGyldighetForLovendringer(aarsakFilter, periodeFom))
-    .filter(getFiltrerPåSynlighet(aarsakFilter));
-
-  const mapTilOption = (kodeverk: KodeverkMedNavn) => (
-    <option value={kodeverk.kode} key={kodeverk.kode}>
-      {kodeverk.navn}
-    </option>
-  );
-
-  if (skalFiltrere && utsettelseType) {
-    if (utsettelseType !== UtsettelseArsakCode.UDEFINERT) {
-      return filteredNyKodeArray.filter(kv => kv.uttakTyper?.includes('UTSETTELSE')).map(mapTilOption);
-    }
-    if (periodeType && utsettelseType === UtsettelseArsakCode.UDEFINERT) {
-      return filteredNyKodeArray
-        .filter(kv => kv.uttakTyper?.includes('UTTAK'))
-        .filter(kv => kv.valgbarForKonto?.includes(periodeType))
-        .map(mapTilOption);
-    }
-  }
-
-  return filteredNyKodeArray.map(mapTilOption);
-};
 
 // https://jira.adeo.no/browse/PFP-7937
 const finnUker = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker): string => {
@@ -169,9 +158,19 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker)
   return aktivitet.trekkdagerDesimaler ? parseFloat((aktivitet.trekkdagerDesimaler % 5).toFixed(1)).toString() : '0';
 };
 
+const sorterGradering = (a: GraderingAvslagÅrsakKodeverk, b: GraderingAvslagÅrsakKodeverk): number => {
+  if (a.navn < b.navn) {
+    return -1;
+  }
+  if (a.navn > b.navn) {
+    return 1;
+  }
+  return 0;
+};
+
 const lagOptionsTilGraderingAvslagsårsakerSelect = (alleKodeverk: AlleKodeverk): ReactElement[] => {
-  const årsakKoder = alleKodeverk[KodeverkType.GRADERING_AVSLAG_AARSAK] as ArsakKodeverk[];
-  return [...årsakKoder].sort(sorterÅrsakKodeverk).map(({ kode, navn }) => (
+  const årsakKoder = alleKodeverk['GraderingAvslagÅrsak'];
+  return [...årsakKoder].sort(sorterGradering).map(({ kode, navn }) => (
     <option value={kode} key={kode}>
       {navn}
     </option>
@@ -215,7 +214,7 @@ const hentSorterAktiviteterFn =
 const byggDefaultValues = (
   valgtPeriode: PeriodeSoker,
   sorterteAktiviteter: PeriodeSokerAktivitet[],
-  periodeResultatårsakKoder: ArsakKodeverk[],
+  periodeResultatårsakKoder: PeriodeResultatÅrsakKodeverk[],
 ): UttakAktivitetType => {
   const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
 
@@ -296,13 +295,15 @@ export const UttakPeriodeForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const periodeResultatårsakKoder = alleKodeverk[KodeverkType.PERIODE_RESULTAT_AARSAK] as ArsakKodeverk[];
+  const periodeResultatårsakKoder = alleKodeverk['PeriodeResultatÅrsak'];
 
+  // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
   const sorterteAktiviteter = useMemo(() => {
     const sorterAktiviteter = hentSorterAktiviteterFn(arbeidsgiverOpplysningerPerId, intl);
     return [...valgtPeriode.aktiviteter].sort(sorterAktiviteter);
   }, [valgtPeriode.aktiviteter]);
 
+  // Her er det noko rart. Denne må ha useMemo, ellers blir testen aldri ferdig
   const defaultValues = useMemo(
     () => byggDefaultValues(valgtPeriode, sorterteAktiviteter, periodeResultatårsakKoder),
     [valgtPeriode, sorterteAktiviteter, arbeidsgiverOpplysningerPerId],
@@ -321,28 +322,19 @@ export const UttakPeriodeForm = ({
   const samtidigUttak = formMethods.watch('samtidigUttak');
   const valgtInnvilgelsesÅrsak = formMethods.watch('periodeAarsak');
   const aktiviteter = formMethods.watch('aktiviteter');
-  const førsteValgteStønadskonto = aktiviteter.length > 0 ? aktiviteter[0].stønadskontoType : undefined;
 
-  const periodeÅrsakOptions = useMemo(
-    () =>
-      lagOptionsTilPeriodeÅrsakSelect(
-        periodeResultatårsakKoder,
-        valgtPeriode.fom,
-        erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
-        årsakFilter,
-        valgtPeriode.utsettelseType,
-        førsteValgteStønadskonto ?? valgtPeriode.periodeType,
-        valgtPeriode.aktiviteter.length === 1,
-      ),
-    [erOppfylt, årsakFilter, valgtPeriode, førsteValgteStønadskonto],
+  const stønadskontoType = aktiviteter.length === 1 ? aktiviteter[0].stønadskontoType : StonadskontoType.UDEFINERT;
+
+  const periodeÅrsakOptions = lagOptionsTilPeriodeÅrsakSelect(
+    periodeResultatårsakKoder,
+    valgtPeriode.fom,
+    erOppfylt ? 'INNVILGET' : 'AVSLÅTT',
+    årsakFilter,
+    stønadskontoType,
+    valgtPeriode.utsettelseType,
   );
 
-  const graderingAvslagsårsakOptions = useMemo(() => lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk), []);
-
-  const submit = useCallback(
-    (values: UttakAktivitetType) => oppdaterPeriode([transformValues(values, valgtPeriode, sorterteAktiviteter)]),
-    [valgtPeriode],
-  );
+  const graderingAvslagsårsakOptions = lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk);
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(
     valgtPeriode.utsettelseType,
@@ -354,7 +346,12 @@ export const UttakPeriodeForm = ({
   const warning = warning1 ?? warning2;
 
   return (
-    <Form formMethods={formMethods} onSubmit={submit}>
+    <RhfForm
+      formMethods={formMethods}
+      onSubmit={(values: UttakAktivitetType) =>
+        oppdaterPeriode([transformValues(values, valgtPeriode, sorterteAktiviteter)])
+      }
+    >
       <VStack gap="4">
         <UttakPeriodeInfo
           valgtPeriode={valgtPeriode}
@@ -371,7 +368,7 @@ export const UttakPeriodeForm = ({
         {valgtPeriode.oppholdÅrsak === OppholdArsakType.UDEFINERT && (
           <UttakAktiviteterTabell
             isReadOnly={isReadOnly}
-            periodeTyper={alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE]}
+            periodeTyper={alleKodeverk['UttakPeriodeType']}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             aktiviteter={sorterteAktiviteter}
             erOppfylt={erOppfylt}
@@ -379,8 +376,9 @@ export const UttakPeriodeForm = ({
           />
         )}
         {erHovedsøkersPeriode && (
-          <TextAreaField
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'UttakActivity.Vurdering' })}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
@@ -389,8 +387,9 @@ export const UttakPeriodeForm = ({
         )}
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="erOppfylt"
+              control={formMethods.control}
               hideLegend
               validate={[required]}
               isHorizontal
@@ -403,8 +402,9 @@ export const UttakPeriodeForm = ({
             {erOppfylt !== undefined && (
               <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
                 <VStack gap="4">
-                  <SelectField
+                  <RhfSelect
                     name="periodeAarsak"
+                    control={formMethods.control}
                     label={intl.formatMessage({
                       id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
                     })}
@@ -413,8 +413,9 @@ export const UttakPeriodeForm = ({
                   />
                   {valgtPeriode.gradertAktivitet && erOppfylt && (
                     <>
-                      <RadioGroupPanel
+                      <RhfRadioGroup
                         name="graderingInnvilget"
+                        control={formMethods.control}
                         label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
                         validate={[required]}
                         isHorizontal
@@ -425,8 +426,9 @@ export const UttakPeriodeForm = ({
                         ]}
                       />
                       {graderingInnvilget === false && (
-                        <SelectField
+                        <RhfSelect
                           name="graderingAvslagAarsak"
+                          control={formMethods.control}
                           label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
                           validate={[required, notDash]}
                           selectValues={graderingAvslagsårsakOptions}
@@ -453,6 +455,6 @@ export const UttakPeriodeForm = ({
           </>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

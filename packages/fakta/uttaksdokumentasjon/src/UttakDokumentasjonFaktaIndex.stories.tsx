@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, AktivitetskravPermisjonType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type AktivitetskravGrunnlagArbeid,
@@ -14,17 +14,13 @@ import {
 
 import { UttakDokumentasjonFaktaIndex } from './UttakDokumentasjonFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const aktivitetskravGrunnlagListe = [
   {
     orgNummer: '123456789',
     stillingsprosent: 60,
     permisjon: {
       prosent: 40,
-      type: 'UTDANNING',
+      type: AktivitetskravPermisjonType.UTDANNING,
     },
   },
   {
@@ -32,7 +28,7 @@ const aktivitetskravGrunnlagListe = [
     stillingsprosent: 50,
     permisjon: {
       prosent: 0,
-      type: '-',
+      type: AktivitetskravPermisjonType.UDEFINERT,
     },
   },
 ] as AktivitetskravGrunnlagArbeid[];
@@ -81,7 +77,7 @@ const automatiskAvklartBehovListe = [
         stillingsprosent: 100,
         permisjon: {
           prosent: 0,
-          type: '-',
+          type: AktivitetskravPermisjonType.UDEFINERT,
         },
       },
     ],

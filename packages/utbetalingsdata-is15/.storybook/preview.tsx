@@ -1,2 +1,1 @@
-import '@navikt/ds-css';
-export { decorators } from '../../../.storybook/preview-storybook';
+export { decorators, globalTypes } from '../../../.storybook/preview-storybook';

@@ -6,7 +6,7 @@ import * as stories from './VurderSoknadsfristForeldrepengerIndex.stories';
 
 const { PanelForSoknadsfrist } = composeStories(stories);
 
-describe('<VurderSoknadsfristForeldrepengerIndex>', () => {
+describe('VurderSoknadsfristForeldrepengerIndex', () => {
   it('skal velge ingen grunn og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 

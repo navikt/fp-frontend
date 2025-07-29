@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { Table } from '@navikt/ds-react';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, FagsakEnkel } from '@navikt/fp-types';
 
 interface Props {
@@ -41,10 +40,10 @@ export const FagsakList = ({ fagsaker, selectFagsakCallback, alleKodeverk }: Pro
           >
             <Table.DataCell>{fagsak.saksnummer}</Table.DataCell>
             <Table.DataCell>
-              {alleKodeverk[KodeverkType.FAGSAK_YTELSE].find(type => type.kode === fagsak.fagsakYtelseType)?.navn ?? ''}
+              {alleKodeverk['FagsakYtelseType'].find(type => type.kode === fagsak.fagsakYtelseType)?.navn ?? ''}
             </Table.DataCell>
             <Table.DataCell>
-              {alleKodeverk[KodeverkType.FAGSAK_STATUS].find(type => type.kode === fagsak.status)?.navn ?? ''}
+              {alleKodeverk['FagsakStatus'].find(type => type.kode === fagsak.status)?.navn ?? ''}
             </Table.DataCell>
           </Table.Row>
         ))}

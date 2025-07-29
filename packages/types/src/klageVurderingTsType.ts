@@ -1,10 +1,12 @@
+import type { KlageAvvistÅrsak, KlageHjemmel, KlageMedholdÅrsak } from '@navikt/fp-kodeverk';
+
 export type KlageVurderingResultat = Readonly<{
   klageVurdertAv: string;
   klageVurdering?: string;
   fritekstTilBrev?: string;
-  klageMedholdArsak?: string;
+  klageMedholdArsak?: KlageMedholdÅrsak;
   klageVurderingOmgjoer?: string;
-  klageHjemmel?: string;
+  klageHjemmel?: KlageHjemmel;
   begrunnelse?: string;
 }>;
 
@@ -12,7 +14,7 @@ export type KlageVurdering = Readonly<{
   klageVurderingResultatNK?: KlageVurderingResultat;
   klageVurderingResultatNFP?: KlageVurderingResultat;
   klageFormkravResultatKA?: {
-    avvistArsaker: string[];
+    avvistArsaker: KlageAvvistÅrsak[];
     paKlagdBehandlingUuid: string;
     paklagdBehandlingType: string;
     begrunnelse: string;
@@ -22,7 +24,7 @@ export type KlageVurdering = Readonly<{
     erSignert: boolean;
   };
   klageFormkravResultatNFP?: {
-    avvistArsaker: string[];
+    avvistArsaker: KlageAvvistÅrsak[];
     paKlagdBehandlingUuid: string;
     paklagdBehandlingType: string;
     begrunnelse: string;

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
@@ -14,7 +14,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { HarAnnenForelderRettFelter } from './HarAnnenForelderRettFelter';
 
-export type FormValues = {
+type FormValues = {
   harAleneomsorg: boolean;
   harAnnenForelderRett?: boolean;
   mottarAnnenForelderUforetrygd?: boolean;
@@ -63,7 +63,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
     omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;
 
   return (
-    <Form formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
+    <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
       <FaktaGruppe
         withoutBorder
         merknaderFraBeslutter={
@@ -73,6 +73,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
         <VStack gap="6">
           <TrueFalseInput
             name="harAleneomsorg"
+            control={formMethods.control}
             label={<FormattedMessage id="AleneomsorgForm.Aleneomsorg" />}
             readOnly={isReadOnlyOrApIsNull}
             trueLabel={<FormattedMessage id="AleneomsorgForm.HarAleneomsorg" />}
@@ -83,6 +84,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
           />
 
           <FaktaBegrunnelseTextField
+            control={formMethods.control}
             isSubmittable={submittable}
             isReadOnly={isReadOnlyOrApIsNull}
             hasBegrunnelse={true}
@@ -96,6 +98,6 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
           />
         </VStack>
       </FaktaGruppe>
-    </Form>
+    </RhfForm>
   );
 };

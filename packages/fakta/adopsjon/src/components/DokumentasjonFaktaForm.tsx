@@ -3,13 +3,14 @@ import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { Datepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { diff } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
-import { type FieldEditedInfo } from '@navikt/fp-fakta-felles';
+import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -21,14 +22,15 @@ dayjs.extend(isSameOrBefore);
 export type FormValues = {
   omsorgsovertakelseDato?: string;
   barnetsAnkomstTilNorgeDato?: string;
-  fodselsdatoer?: Record<number, string>;
+  fodselsdatoer?: Record<string, string>;
 };
 
 interface Props {
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
-  editedStatus: FieldEditedInfo;
+  gjeldendeFamiliehendelse: FamilieHendelse;
+  soknad: Soknad;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -39,17 +41,20 @@ interface Props {
  */
 export const DokumentasjonFaktaForm = ({
   readOnly,
-  editedStatus,
+  soknad,
+  gjeldendeFamiliehendelse,
   erForeldrepengerFagsak,
   hasEktefellesBarnAksjonspunkt,
   alleMerknaderFraBeslutter,
 }: Props) => {
   const intl = useIntl();
 
-  const { watch } = useFormContext<FormValues>();
+  const { watch, control } = useFormContext<FormValues>();
   const fodselsdatoer = watch('fodselsdatoer') ?? {};
   const omsorgsovertakelseDato = watch('omsorgsovertakelseDato');
   const barnetsAnkomstTilNorgeDato = watch('barnetsAnkomstTilNorgeDato');
+
+  const getAdopsjonsdatoEditedStatusForId = isAdopsjonFodelsedatoerEdited(soknad, gjeldendeFamiliehendelse);
 
   return (
     <FaktaGruppe
@@ -57,8 +62,9 @@ export const DokumentasjonFaktaForm = ({
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
     >
       <VStack gap="4" className={styles.container}>
-        <Datepicker
+        <RhfDatepicker
           name="omsorgsovertakelseDato"
+          control={control}
           label={
             erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
               ? intl.formatMessage({ id: 'DokumentasjonFaktaForm.Stebarnsadopsjon' })
@@ -66,21 +72,23 @@ export const DokumentasjonFaktaForm = ({
           }
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
-          isEdited={editedStatus.omsorgsovertakelseDato}
+          isEdited={isNotEqual(soknad.omsorgsovertakelseDato, gjeldendeFamiliehendelse.omsorgsovertakelseDato)}
         />
         {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
-          <Datepicker
+          <RhfDatepicker
             name="barnetsAnkomstTilNorgeDato"
+            control={control}
             label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
             validate={[hasValidDate]}
             isReadOnly={readOnly}
-            isEdited={editedStatus.barnetsAnkomstTilNorgeDato}
+            isEdited={isNotEqual(soknad.barnetsAnkomstTilNorgeDato, gjeldendeFamiliehendelse.ankomstNorge)}
           />
         )}
         {Object.keys(fodselsdatoer).map((id, i) => (
           <HStack gap="4" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
-            <Datepicker
+            <RhfDatepicker
               name={`fodselsdatoer.${id}`}
+              control={control}
               label={intl.formatMessage(
                 {
                   id: 'DokumentasjonFaktaForm.Fodselsdato',
@@ -89,7 +97,7 @@ export const DokumentasjonFaktaForm = ({
               )}
               validate={[required, hasValidDate]}
               isReadOnly={readOnly}
-              isEdited={editedStatus.adopsjonFodelsedatoer ? editedStatus.adopsjonFodelsedatoer[id] : false}
+              isEdited={getAdopsjonsdatoEditedStatusForId(id)}
             />
             {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
               <ExclamationmarkTriangleFillIcon
@@ -127,7 +135,7 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgs
   !!omsorgsovertakelseDato &&
   dayjs(fodselsdatoer[id]).isSameOrBefore(dayjs(omsorgsovertakelseDato).subtract(15, 'years'));
 
-DokumentasjonFaktaForm.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
+DokumentasjonFaktaForm.initialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
   omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato,
   barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge ?? soknad.barnetsAnkomstTilNorgeDato,
   fodselsdatoer: familiehendelse?.adopsjonFodelsedatoer ?? soknad.adopsjonFodelsedatoer,
@@ -139,3 +147,11 @@ DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumenter
   omsorgsovertakelseDato: values.omsorgsovertakelseDato ?? '',
   fodselsdatoer: values.fodselsdatoer ?? '',
 });
+
+const isAdopsjonFodelsedatoerEdited =
+  (soknad: Soknad, familiehendelse: FamilieHendelse) =>
+  (id: string): boolean => {
+    const editedStatus = diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
+    // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output
+    return editedStatus ? editedStatus[id] : false;
+  };

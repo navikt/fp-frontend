@@ -41,7 +41,6 @@ const emptyQueryString = (queryString: string): boolean => queryString === '?' |
 
 const updateQueryParams = (queryString: string, nextParams: QueryParams): Search => {
   const prevParams = emptyQueryString(queryString) ? {} : parseQueryString(queryString);
-  // @ts-expect-error Fiks type i ft-repoet
   return formatQueryString({
     ...prevParams,
     ...nextParams,
@@ -53,7 +52,7 @@ export const getFagsakHref = (saksnummer: string, behandlingUuid?: string) =>
     ? `/fagsak/${saksnummer}/behandling/${behandlingUuid}/?punkt=default&fakta=default`
     : `/fagsak/${saksnummer}/`;
 
-export const getLocationWithQueryParams = (location: Location, queryParams: QueryParams): Location => ({
+const getLocationWithQueryParams = (location: Location, queryParams: QueryParams): Location => ({
   ...location,
   search: updateQueryParams(location.search, queryParams),
 });

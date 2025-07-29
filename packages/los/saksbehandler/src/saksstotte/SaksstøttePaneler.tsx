@@ -11,6 +11,6 @@ interface Props {
 export const SaksstøttePaneler = ({ valgtSakslisteId, åpneFagsak }: Props) => (
   <VStack gap="6">
     <SistBehandledeSaker åpneFagsak={åpneFagsak} />
-    {valgtSakslisteId && <SaksbehandlerNokkeltallPanel valgtSakslisteId={valgtSakslisteId} />}
+    {!!valgtSakslisteId && <SaksbehandlerNokkeltallPanel valgtSakslisteId={valgtSakslisteId} />}
   </VStack>
 );

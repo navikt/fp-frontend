@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, InputField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -76,14 +76,15 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
   }, [saksbehandlerStatus, saksbehandler, erLagtTilAllerede]);
 
   return (
-    <Form formMethods={formMethods} onSubmit={values => finnSaksbehandler({ brukerIdent: values.brukerIdent })}>
+    <RhfForm formMethods={formMethods} onSubmit={values => finnSaksbehandler({ brukerIdent: values.brukerIdent })}>
       <VStack gap="4">
         <Label size="small">
           <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTil" />
         </Label>
         <HStack gap="4">
-          <InputField
+          <RhfTextField
             name="brukerIdent"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.Brukerident' })}
             validate={[required]}
           />
@@ -131,6 +132,6 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
           </VStack>
         )}
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

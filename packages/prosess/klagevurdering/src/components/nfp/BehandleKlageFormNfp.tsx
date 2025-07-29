@@ -1,23 +1,32 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, KlageVurdering as klageVurderingType, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
 import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import type { KlageFormType } from '../../types/klageFormType';
 import { BekreftOgSubmitKlageModal } from './BekreftOgSubmitKlageModal';
 import { FritekstBrevTextField } from './FritekstKlageBrevTextField';
 import { KlageVurderingRadioOptionsNfp } from './KlageVurderingRadioOptionsNfp';
 import { type KlagevurderingForhåndsvisData, PreviewKlageLink } from './PreviewKlageLink';
-import { TempsaveKlageButton, type TransformedValues } from './TempsaveKlageButton';
+
+export type TransformedValues = {
+  kode: string;
+  klageMedholdArsak?: string;
+  klageVurderingOmgjoer?: string;
+  klageHjemmel?: string;
+  fritekstTilBrev: string;
+  begrunnelse: string;
+  klageVurdering: string;
+};
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageMedholdArsak:
@@ -25,7 +34,7 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageVurderingOmgjoer:
     values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : undefined,
   klageHjemmel: values.klageHjemmel,
-  klageVurdering: values.klageVurdering!,
+  klageVurdering: notEmpty(values.klageVurdering),
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
   kode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
@@ -38,7 +47,10 @@ const definertKodeverdiEllerUndefined = (kode: string | undefined): string | und
   return undefined;
 };
 
-const lagHjemlerMedNavn = (kodeverkNavn: KodeverkMedNavn[], kodeverkVerdier: string[]): KodeverkMedNavn[] =>
+const lagHjemlerMedNavn = (
+  kodeverkNavn: KodeverkMedNavn<'KlageHjemmel'>[],
+  kodeverkVerdier: string[],
+): KodeverkMedNavn<'KlageHjemmel'>[] =>
   kodeverkNavn.filter(({ kode }) => kodeverkVerdier.includes(kode)).sort((a, b) => a.kode.localeCompare(b.kode));
 const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
@@ -73,31 +85,29 @@ export const BehandleKlageFormNfp = ({
 }: Props) => {
   const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<KlageVurderingResultatAp>();
 
-  const hjemmlerMedNavn = lagHjemlerMedNavn(
-    alleKodeverk[KodeverkType.KLAGE_HJEMMEL],
-    lagHjemmelsKoder(alleAktuelleHjemler),
-  );
+  const hjemmlerMedNavn = lagHjemlerMedNavn(alleKodeverk['KlageHjemmel'], lagHjemmelsKoder(alleAktuelleHjemler));
   const intl = useIntl();
   const [visSubmitModal, setVisSubmitModal] = useState<boolean>(false);
-  const initialValues = useMemo(() => buildInitialValues(klageVurdering.klageVurderingResultatNFP), [klageVurdering]);
+
+  const defaultValues = buildInitialValues(klageVurdering.klageVurderingResultatNFP);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<KlageFormType>();
 
   const formMethods = useForm<KlageFormType>({
-    defaultValues: mellomlagretFormData ?? initialValues,
+    defaultValues: mellomlagretFormData ?? defaultValues,
   });
   const formValues = formMethods.watch();
 
-  const lukkModal = useCallback(() => {
+  const lukkModal = () => {
     setVisSubmitModal(false);
-  }, []);
+  };
 
-  const åpneModal = useCallback(() => {
+  const åpneModal = () => {
     setVisSubmitModal(true);
-  }, []);
+  };
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -112,7 +122,7 @@ export const BehandleKlageFormNfp = ({
         <KlageVurderingRadioOptionsNfp
           readOnly={isReadOnly}
           klageVurdering={formValues.klageVurdering}
-          medholdReasons={alleKodeverk[KodeverkType.KLAGE_MEDHOLD_ARSAK]}
+          medholdReasons={alleKodeverk['KlageMedholdÅrsak']}
           alleHjemmlerMedNavn={hjemmlerMedNavn}
         />
         <ProsessStegBegrunnelseTextFieldNew
@@ -157,14 +167,35 @@ export const BehandleKlageFormNfp = ({
                 />
               )}
           </HStack>
-          <TempsaveKlageButton
-            saveKlage={saveKlage}
-            handleSubmit={formMethods.handleSubmit}
-            readOnly={isReadOnly}
-            aksjonspunktCode={AksjonspunktKode.BEHANDLE_KLAGE_NFP}
-          />
+          {!isReadOnly && (
+            <Button
+              size="small"
+              variant="primary"
+              onClick={formMethods.handleSubmit((values: KlageFormType) =>
+                saveKlage(transformValuesTempSave(values, AksjonspunktKode.BEHANDLE_KLAGE_NFP)),
+              )}
+              type="button"
+            >
+              <FormattedMessage id="Klage.ResolveKlage.TempSaveButton" />
+            </Button>
+          )}
         </HStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };
+
+const transformValuesTempSave = (values: KlageFormType, aksjonspunktCode: string): TransformedValues => ({
+  kode: aksjonspunktCode,
+  klageMedholdArsak:
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ||
+    values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK
+      ? values.klageMedholdArsak
+      : undefined,
+  klageVurderingOmgjoer:
+    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : undefined,
+  klageHjemmel: values.klageHjemmel,
+  fritekstTilBrev: notEmpty(values.fritekstTilBrev),
+  begrunnelse: notEmpty(values.begrunnelse),
+  klageVurdering: notEmpty(values.klageVurdering),
+});

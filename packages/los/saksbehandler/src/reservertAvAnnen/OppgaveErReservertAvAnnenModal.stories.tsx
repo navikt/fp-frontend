@@ -1,7 +1,8 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
-import { BehandlingStatus, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { Oppgave } from '@navikt/fp-los-felles';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveErReservertAvAnnenModal } from './OppgaveErReservertAvAnnenModal';
@@ -12,7 +13,7 @@ const withIntl = getIntlDecorator(messages);
 
 const oppgaveForResevertAvAnnenModal = {
   id: 1,
-  status: {
+  reservasjonStatus: {
     erReservert: false,
     flyttetReservasjon: {
       tidspunkt: '2019-02-02',
@@ -26,14 +27,13 @@ const oppgaveForResevertAvAnnenModal = {
   navn: 'Espen Utvikler',
   system: 'SAK',
   behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-  behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
   opprettetTidspunkt: '2019-01-01',
   behandlingsfrist: '2019-01-01',
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   erTilSaksbehandling: true,
   behandlingId: '1',
-  href: '',
-};
+  andreKriterier: [],
+} satisfies Oppgave;
 
 const meta = {
   title: 'OppgaveErReservertAvAnnenModal',
@@ -48,7 +48,7 @@ export const Default: Story = {
   args: {
     lukkErReservertModalOgOpneOppgave: action('button-click'),
     oppgave: oppgaveForResevertAvAnnenModal,
-    oppgaveStatus: {
+    reservasjonStatus: {
       erReservert: false,
       reservertAvNavn: 'Espen Utvikler',
       reservertAvUid: 'E232323',

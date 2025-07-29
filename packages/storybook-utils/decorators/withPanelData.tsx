@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions';
 import { type ReactRenderer } from '@storybook/react';
-import type { DecoratorFunction } from '@storybook/types';
+import { action } from 'storybook/actions';
+import type { DecoratorFunction } from 'storybook/internal/types';
 
 import {
   AksjonspunktStatus,
@@ -14,8 +14,7 @@ import { PanelDataProvider } from '@navikt/fp-utils';
 
 import type { FaktaAksjonspunkt } from '../../types-avklar-aksjonspunkter/src/FaktaAksjonspunkt';
 import type { ProsessAksjonspunkt } from '../../types-avklar-aksjonspunkter/src/ProsessAksjonspunkt';
-
-import alleKodeverk from '../mocks/alleKodeverk.json';
+import { alleKodeverk } from '../mocks/alleKodeverk';
 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
@@ -56,13 +55,11 @@ const DEFAULT_FAGSAK = {
   },
 } as Fagsak;
 
-const DEFAULT_AKSJONSPUNKTER = [] as Aksjonspunkt[];
-
 export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) => {
   const { fagsak, behandling, aksjonspunkterForPanel, isReadOnly, submitCallback, alleMerknaderFraBeslutter } =
     context.args as PanelDataArgs;
 
-  const aksjonspunkter = aksjonspunkterForPanel ?? DEFAULT_AKSJONSPUNKTER;
+  const aksjonspunkter = aksjonspunkterForPanel ?? [];
 
   return (
     <PanelDataProvider

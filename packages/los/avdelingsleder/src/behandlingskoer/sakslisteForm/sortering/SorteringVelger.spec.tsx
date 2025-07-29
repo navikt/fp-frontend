@@ -11,7 +11,7 @@ const {
   SorteringsvelgerNårDynamiskPeriodeErValgt,
 } = composeStories(stories);
 
-describe('<SorteringVelger>', () => {
+describe('SorteringVelger', () => {
   it('skal vise tre sorteringsvalg når mange behandlingstyper er valgt', async () => {
     await applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw']);
     render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);

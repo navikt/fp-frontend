@@ -1,6 +1,6 @@
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME, ANDRE_YTELSER_TYPER_NAME } from './constants';
 
-export type Periode = {
+type Periode = {
   periodeFom: string;
   periodeTom: string;
 };

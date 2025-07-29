@@ -1,10 +1,11 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkLosType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteBehandlingstype, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
@@ -18,6 +19,9 @@ interface Props {
 
 export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
+
+  // TODO (TOR) Manglar type
+  const { control } = useFormContext();
 
   const { mutate: lagreBehandlingstype } = useMutation({
     mutationFn: (valuesToStore: { behandlingType: string; checked: boolean }) =>
@@ -40,7 +44,7 @@ export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: 
     },
   });
 
-  const alleBehandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const alleBehandlingTyper = useLosKodeverk('BehandlingType');
 
   const behandlingTyper = behandlingstypeOrder.map(kode => alleBehandlingTyper.find(bt => bt.kode === kode));
 
@@ -55,9 +59,10 @@ export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: 
             return null;
           }
           return (
-            <CheckboxField
+            <RhfCheckbox
               key={bt.kode}
               name={bt.kode}
+              control={control}
               label={bt.navn}
               onChange={isChecked =>
                 lagreBehandlingstype({

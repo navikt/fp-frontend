@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
 import { Button, HStack } from '@navikt/ds-react';
-import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME } from '../constants';
@@ -45,8 +45,9 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
         const fieldNamePrefix = `${name}.${index}` as const;
         return (
           <HStack key={field.id} gap="2">
-            <Datepicker
+            <RhfDatepicker
               name={`${fieldNamePrefix}.periodeFom`}
+              control={control}
               label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
               validate={[
                 required,
@@ -59,8 +60,9 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
 
-            <Datepicker
+            <RhfDatepicker
               name={`${name}.${index}.periodeTom`}
+              control={control}
               label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
               validate={[
                 required,

@@ -2,15 +2,11 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, SoknadType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, FarSøkerType, SoknadType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { AdopsjonFaktaIndex } from './AdopsjonFaktaIndex';
-
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const familieHendelse = {
   gjeldende: {
@@ -27,7 +23,7 @@ const soknad = {
   utstedtdato: '2019-01-02',
   antallBarn: 1,
   soknadType: SoknadType.FODSEL,
-  farSokerType: 'ADOPTERER_ALENE',
+  farSokerType: FarSøkerType.ADOPTERER_ALENE,
   omsorgsovertakelseDato: '2022-09-14',
   barnetsAnkomstTilNorgeDato: '2022-09-13',
 } as Soknad;

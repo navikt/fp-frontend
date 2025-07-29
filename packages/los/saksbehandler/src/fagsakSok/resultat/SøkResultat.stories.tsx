@@ -1,10 +1,10 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
-import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
@@ -61,7 +61,7 @@ export const Default: Story = {
     fagsakOppgaver: [
       {
         id: 1,
-        status: {
+        reservasjonStatus: {
           erReservert: false,
         },
         saksnummer: '12213234',
@@ -69,12 +69,12 @@ export const Default: Story = {
         navn: 'Espen Utvikler',
         system: 'SAK',
         behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
-        behandlingStatus: BehandlingStatus.BEHANDLING_UTREDES,
         opprettetTidspunkt: '2020-01-01',
         behandlingsfrist: '2020-01-01',
         fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
         erTilSaksbehandling: true,
         behandlingId: '12344',
+        andreKriterier: [],
       },
     ],
   },

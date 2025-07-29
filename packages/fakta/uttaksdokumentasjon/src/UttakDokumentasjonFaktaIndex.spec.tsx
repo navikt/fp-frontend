@@ -14,7 +14,7 @@ const {
   UavklartePerioderMenIkkeAksjonspunktEnnå,
 } = composeStories(stories);
 
-describe('<UttakDokumentasjonFaktaIndex>', () => {
+describe('UttakDokumentasjonFaktaIndex', () => {
   it('skal avklare perioder og så bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 

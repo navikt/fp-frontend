@@ -1,15 +1,14 @@
-import { type ReactNode, useCallback, useState } from 'react';
+import { type ReactNode, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Link, ReadMore, Table, VStack } from '@navikt/ds-react';
-import { Form, NumberField, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { Boks } from '@navikt/fp-fakta-felles';
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import { FOLKETRYGDLOVEN_KAP14_13_URL } from '@navikt/fp-konstanter';
 import { type DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -61,25 +60,22 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
 
   const { alleKodeverk } = usePanelDataContext();
 
-  const lagNyPeriode = useCallback(
-    (currentIndex: number, dato: string) => {
-      const currentPeriode = fields[currentIndex];
+  const lagNyPeriode = (currentIndex: number, dato: string) => {
+    const currentPeriode = fields[currentIndex];
 
-      update(currentIndex, {
-        ...currentPeriode,
-        tom: dato,
-        vurdering: undefined,
-      });
-      insert(currentIndex + 1, {
-        ...currentPeriode,
-        fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
-        tom: currentPeriode.tom,
-        vurdering: undefined,
-      });
-      setValgtPeriodeIndex(undefined);
-    },
-    [fields],
-  );
+    update(currentIndex, {
+      ...currentPeriode,
+      tom: dato,
+      vurdering: undefined,
+    });
+    insert(currentIndex + 1, {
+      ...currentPeriode,
+      fom: dayjs(dato).add(1, 'day').format(ISO_DATE_FORMAT),
+      tom: currentPeriode.tom,
+      vurdering: undefined,
+    });
+    setValgtPeriodeIndex(undefined);
+  };
 
   const slåSammenMedPeriodeOver = (currentIndex: number) => {
     const previousIndex = currentIndex - 1;
@@ -96,7 +92,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
   const morsArbeid = aktivitetskravGrunnlagArbeids.toSorted((a, b) => a.orgNummer.localeCompare(b.orgNummer));
   return (
     <Boks harBorderLeft={!behov.vurdering && fields.length === 1}>
-      <Form formMethods={formMethods} onSubmit={handleSubmit}>
+      <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
         <VStack gap="6">
           {fields.length === 1 && (
             <VStack gap="6">
@@ -136,7 +132,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                                 id="UttakDokumentasjonFaktaDetailForm.PermisjonsprosentJa"
                                 values={{
                                   prosent: ag.permisjon.prosent,
-                                  type: alleKodeverk[KodeverkType.AKTIVITETSKRAV_PERMISJON_TYPE].find(
+                                  type: alleKodeverk['AktivitetskravPermisjonType'].find(
                                     o => o.kode === ag.permisjon.type,
                                   )?.navn,
                                 }}
@@ -151,17 +147,19 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </Table.Body>
                 </Table>
               )}
-              <RadioGroupPanel
+              <RhfRadioGroup
                 name={`perioder.${0}.vurdering`}
+                control={formMethods.control}
                 label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                 validate={[required]}
                 isReadOnly={readOnly}
                 radios={vurderingsalternativ}
               />
               {formMethods.watch(`perioder.0.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
-                <NumberField
-                  label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
+                <RhfNumericField
                   name="perioder.0.morsStillingsprosent"
+                  control={formMethods.control}
+                  label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
                   validate={[required, minValue(0.01), maxValue(74.99)]}
                   readOnly={readOnly}
                 />
@@ -198,16 +196,18 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                     <BodyShort weight="semibold">{getFormatertPeriode(periode)}</BodyShort>
                     <BodyShort>{calcDaysAndWeeks(periode.fom, periode.tom).formattedString}</BodyShort>
                   </HStack>
-                  <RadioGroupPanel
+                  <RhfRadioGroup
                     name={`perioder.${index}.vurdering`}
+                    control={formMethods.control}
                     label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                     validate={[required]}
                     isReadOnly={readOnly}
                     radios={vurderingsalternativ}
                   />
                   {formMethods.watch(`perioder.${index}.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
-                    <NumberField
+                    <RhfNumericField
                       label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
+                      control={formMethods.control}
                       name={`perioder.${index}.morsStillingsprosent`}
                       validate={[required, minValue(0.01), maxValue(74.99)]}
                       readOnly={readOnly}
@@ -246,7 +246,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
             </HStack>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
       {valgtPeriodeIndex !== undefined && (
         <DelOppPeriodeModal
           periode={fields[valgtPeriodeIndex]}

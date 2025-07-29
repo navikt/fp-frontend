@@ -1,11 +1,12 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
+  BehandlingArsakType,
   BehandlingStatus,
   BehandlingType,
   FagsakStatus,
@@ -38,12 +39,14 @@ import messages from '../../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const getHref = (rel: string) =>
-  wrapUrl(
-    notEmpty(
-      initFetchFpsak.links.find(link => link.rel === rel) ??
-        initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
-        initFetchFptilbake.links.find(link => link.rel === rel),
-    ).href,
+  cleanUrl(
+    wrapUrl(
+      notEmpty(
+        initFetchFpsak.links.find(link => link.rel === rel) ??
+          initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
+          initFetchFptilbake.links.find(link => link.rel === rel),
+      ).href,
+    ),
   );
 
 const createAksjonspunkt = (aksjonspunktKode: string) =>
@@ -57,8 +60,8 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
   {
     skjermlenkeType: 'FAKTA_OM_FOEDSEL',
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FODSEL),
-      createAksjonspunkt(AksjonspunktKode.TERMINBEKREFTELSE),
+      createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL),
+      createAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE),
       createAksjonspunkt(AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING),
     ],
   },
@@ -106,7 +109,7 @@ const BEHANDLING = {
   totrinnskontrollÅrsaker: TOTRINNSKONTROLL_AKSJONSPUNKTER,
   behandlingÅrsaker: [
     {
-      behandlingArsakType: '',
+      behandlingArsakType: BehandlingArsakType.ANNET,
     },
   ],
 } as BehandlingAppKontekst;

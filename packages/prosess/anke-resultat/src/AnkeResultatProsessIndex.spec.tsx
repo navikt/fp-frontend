@@ -6,7 +6,7 @@ import * as stories from './AnkeResultatProsessIndex.stories';
 const { ResultatVedStadfestYtelsesvedtak, ResultatVedOppheveOgHjemsende, ResultatVedOmgjør, ResultatVedAvvis } =
   composeStories(stories);
 
-describe('<AnkeResultatProsessIndex>', () => {
+describe('AnkeResultatProsessIndex', () => {
   it('skal vise resultat ved stadfestet vedtak', async () => {
     render(<ResultatVedStadfestYtelsesvedtak />);
 

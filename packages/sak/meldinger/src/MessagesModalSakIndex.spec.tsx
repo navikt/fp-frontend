@@ -6,7 +6,7 @@ import * as stories from './MessagesModalSakIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<MessagesModalSakIndex>', () => {
+describe('MessagesModalSakIndex', () => {
   it('skal vise modal når brevet er bestilt og lukke ved trykk på OK-knapp', async () => {
     const lukk = vi.fn();
 

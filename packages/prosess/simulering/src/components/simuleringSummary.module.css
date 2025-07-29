@@ -14,14 +14,7 @@
   font-weight: bold;
 }
 
-.redNumber {
-  color: var(--a-nav-red);
-  font-weight: bold;
-  padding-left: 15px;
-}
-
-.positivNumber {
-  font-weight: bold;
+.number {
   padding-left: 15px;
 }
 

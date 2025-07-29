@@ -2,7 +2,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { Datepicker, PeriodFieldArray } from '@navikt/ft-form-hooks';
+import { PeriodFieldArray, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import { FRILANS_NAME_PREFIX } from '../constants';
@@ -49,8 +49,9 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.perioder.${index}`;
         return (
           <HStack key={field.id} gap="4" paddingBlock="2">
-            <Datepicker
-              name={`${namePart1}.periodeFom`}
+            <RhfDatepicker
+              name={`${FRILANS_NAME_PREFIX}.perioder.${index}.periodeFom`}
+              control={control}
               label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' }) : ''}
               validate={[
                 required,
@@ -63,8 +64,9 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            <Datepicker
-              name={`${namePart1}.periodeTom`}
+            <RhfDatepicker
+              name={`${FRILANS_NAME_PREFIX}.perioder.${index}.periodeTom`}
+              control={control}
               label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' }) : ''}
               validate={[
                 required,

@@ -1,9 +1,9 @@
 import { useForm } from 'react-hook-form';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
-import { action } from '@storybook/addon-actions';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { FrilansPapirsoknadIndex } from './FrilansPapirsoknadIndex';
 
@@ -22,7 +22,7 @@ const meta = {
     });
 
     return (
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(FrilansPapirsoknadIndex.transformValues(values))}
       >
@@ -32,7 +32,7 @@ const meta = {
             Lagreknapp (Kun for test)
           </Button>
         </VStack>
-      </Form>
+      </RhfForm>
     );
   },
 } satisfies Meta<typeof FrilansPapirsoknadIndex>;

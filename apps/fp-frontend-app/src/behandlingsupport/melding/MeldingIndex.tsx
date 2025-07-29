@@ -6,14 +6,14 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, DokumentMalType, KodeverkType, VenteArsakType } from '@navikt/fp-kodeverk';
+import { BehandlingType, DokumentMalType, VenteArsakType } from '@navikt/fp-kodeverk';
 import {
   type ForhåndsvisBrevParams,
   MeldingerSakIndex,
   type MessagesFormValues,
   MessagesModalSakIndex,
 } from '@navikt/fp-sak-meldinger';
-import type { BehandlingAppKontekst, KodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
@@ -26,8 +26,6 @@ import { useFpSakKodeverk } from '../../data/useKodeverk';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
-
-const EMPTY_ARRAY = [] as KodeverkMedNavn[];
 
 interface Props {
   fagsakData: FagsakData;
@@ -70,8 +68,8 @@ export const MeldingIndex = ({
     innloggetBruker: { kanVeilede },
   } = notEmpty(initFetchQuery.data);
 
-  const ventearsaker = useFpSakKodeverk(KodeverkType.VENT_AARSAK) || EMPTY_ARRAY;
-  const revurderingVarslingArsak = useFpSakKodeverk(KodeverkType.REVURDERING_VARSLING_ÅRSAK);
+  const ventearsaker = useFpSakKodeverk('Venteårsak') || [];
+  const revurderingVarslingArsak = useFpSakKodeverk('RevurderingVarslingÅrsak');
 
   const { mutateAsync: sendMelding, status: meldingStatus } = useMutation({
     mutationFn: (valuesToStore: SubmitMessageParams) => api.sendMelding(valuesToStore),

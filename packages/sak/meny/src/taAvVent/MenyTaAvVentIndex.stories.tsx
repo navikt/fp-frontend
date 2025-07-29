@@ -1,5 +1,5 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { MenyTaAvVentIndex } from './MenyTaAvVentIndex';
 
@@ -7,7 +7,6 @@ const meta = {
   title: 'sak/sak-meny-ta-av-vent',
   component: MenyTaAvVentIndex,
   args: {
-    behandlingVersjon: 2,
     taBehandlingAvVent: action('button-click'),
     lukkModal: action('button-click'),
   },

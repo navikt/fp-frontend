@@ -1,5 +1,7 @@
+import { useFormContext } from 'react-hook-form';
+
 import { Heading, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -16,14 +18,14 @@ interface Props {
   soknadData: SoknadData;
 }
 
-export const rettighet = {
+const rettighet = {
   ANNEN_FORELDER_DOED: 'ANNEN_FORELDER_DOED',
   OVERTA_FORELDREANSVARET_ALENE: 'OVERTA_FORELDREANSVARET_ALENE',
   MANN_ADOPTERER_ALENE: 'MANN_ADOPTERER_ALENE',
   IKKE_RELEVANT: 'IKKE_RELEVANT',
 };
 
-export type RettigheterFormValues = {
+type RettigheterFormValues = {
   rettigheter?: string;
 };
 
@@ -55,11 +57,13 @@ export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => 
     ? baseOptions
     : baseOptions.filter(option => option.value !== rettighet.MANN_ADOPTERER_ALENE);
 
+  const { control } = useFormContext<RettigheterFormValues>();
+
   return (
     <BorderBox>
       <VStack gap="4">
         <Heading size="small">{intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}</Heading>
-        <RadioGroupPanel name="rettigheter" isReadOnly={readOnly} radios={options} />
+        <RhfRadioGroup name="rettigheter" control={control} isReadOnly={readOnly} radios={options} />
       </VStack>
     </BorderBox>
   );

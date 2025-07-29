@@ -1,7 +1,8 @@
+import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -11,12 +12,14 @@ import {
 } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
+import type { KlageFormType } from '../../types/klageFormType';
+
 import styles from './klageVurderingRadioOptionsNfp.module.css';
 
 interface Props {
   readOnly: boolean;
-  medholdReasons: KodeverkMedNavn[];
-  alleHjemmlerMedNavn: KodeverkMedNavn[];
+  medholdReasons: KodeverkMedNavn<'KlageMedholdÅrsak'>[];
+  alleHjemmlerMedNavn: KodeverkMedNavn<'KlageHjemmel'>[];
   klageVurdering?: string;
 }
 
@@ -27,20 +30,24 @@ export const KlageVurderingRadioOptionsNfp = ({
   klageVurdering,
 }: Props) => {
   const intl = useIntl();
-  const medholdOptions = medholdReasons.map((mo: KodeverkMedNavn) => (
+
+  const { control } = useFormContext<KlageFormType>();
+
+  const medholdOptions = medholdReasons.map(mo => (
     <option key={mo.kode} value={mo.kode}>
       {mo.navn}
     </option>
   ));
-  const hjemmelOptions = alleHjemmlerMedNavn.map((mo: KodeverkMedNavn) => (
+  const hjemmelOptions = alleHjemmlerMedNavn.map(mo => (
     <option key={mo.kode} value={mo.kode}>
       {mo.navn}
     </option>
   ));
   return (
     <VStack gap="4">
-      <RadioGroupPanel
+      <RhfRadioGroup
         name="klageVurdering"
+        control={control}
         validate={[required]}
         isReadOnly={readOnly}
         isHorizontal
@@ -58,16 +65,18 @@ export const KlageVurderingRadioOptionsNfp = ({
       {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
         <ArrowBox>
           <VStack gap="4">
-            <SelectField
+            <RhfSelect
               readOnly={readOnly}
+              control={control}
               name="klageMedholdArsak"
               selectValues={medholdOptions}
               className={readOnly ? styles.selectReadOnly : styles.select}
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
             />
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="klageVurderingOmgjoer"
+              control={control}
               validate={[required]}
               isReadOnly={readOnly}
               radios={[
@@ -88,8 +97,9 @@ export const KlageVurderingRadioOptionsNfp = ({
           </VStack>
         </ArrowBox>
       )}
-      <SelectField
+      <RhfSelect
         readOnly={readOnly}
+        control={control}
         name="klageHjemmel"
         selectValues={hjemmelOptions}
         className={readOnly ? styles.selectReadOnly : styles.select}

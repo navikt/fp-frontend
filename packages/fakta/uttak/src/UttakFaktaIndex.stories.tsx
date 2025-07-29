@@ -2,17 +2,20 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  FordelingPeriodeKilde,
+  RelasjonsRolleType,
+  UtsettelseÅrsak,
+  UttakArbeidType,
+  UttakPeriodeType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
 import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
-import { UtsettelseÅrsak } from './kodeverk/utsettelseÅrsak';
 import { UttakFaktaIndex } from './UttakFaktaIndex';
-
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   910909088: {
@@ -34,10 +37,10 @@ const meta = {
     faktaArbeidsforhold: [
       {
         arbeidsgiverReferanse: '910909088',
-        arbeidType: 'ORDINÆRT_ARBEID',
+        arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
       },
       {
-        arbeidType: 'SELVSTENDIG_NÆRINGSDRIVENDE',
+        arbeidType: UttakArbeidType.SELVSTENDIG_NÆRINGSDRIVENDE,
         arbeidsgiverReferanse: 'null',
       },
     ],
@@ -62,7 +65,7 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
         uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
         arbeidsforhold: undefined,
         flerbarnsdager: false,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: false,
@@ -83,7 +86,7 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
         uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
         arbeidsforhold: undefined,
         flerbarnsdager: false,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: true,
@@ -112,11 +115,11 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
         arbeidstidsprosent: 10,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         samtidigUttaksprosent: 80,
         flerbarnsdager: true,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
       {
         fom: '2022-12-02',
@@ -125,10 +128,10 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         flerbarnsdager: false,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
       {
         fom: '2022-12-11',
@@ -137,10 +140,10 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         flerbarnsdager: false,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: false,
@@ -166,7 +169,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
         fom: '2022-11-12',
         tom: '2022-12-01',
         utsettelseÅrsak: UtsettelseÅrsak.ARBEID,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: false,
@@ -193,7 +196,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
         tom: '2022-12-01',
         overføringÅrsak: OverføringÅrsak.IKKE_RETT_ANNEN_FORELDER,
         uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: false,
@@ -241,10 +244,10 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '91090823',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         flerbarnsdager: false,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: false,
@@ -273,10 +276,10 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910923',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         flerbarnsdager: false,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: false,
@@ -305,12 +308,12 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         samtidigUttaksprosent: 50,
         morsAktivitet: 'ARBEID',
         flerbarnsdager: true,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: false,
@@ -340,12 +343,12 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         samtidigUttaksprosent: 50,
         morsAktivitet: 'ARBEID',
         flerbarnsdager: true,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
         begrunnelse: 'Dette er en gammel begrunnelse',
       },
     ],
@@ -376,11 +379,11 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
         arbeidstidsprosent: 10,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         samtidigUttaksprosent: 80,
         flerbarnsdager: true,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
       {
         fom: '2022-12-02',
@@ -389,10 +392,10 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         flerbarnsdager: false,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
       {
         fom: '2022-12-11',
@@ -401,13 +404,13 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: 'ORDINÆRT_ARBEID',
+          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
         },
         flerbarnsdager: false,
-        periodeKilde: 'SØKNAD',
+        periodeKilde: FordelingPeriodeKilde.SØKNAD,
       },
     ],
     kanOverstyre: false,
-    fagsak: { relasjonsRolleType: 'FAR' } as Fagsak,
+    fagsak: { relasjonsRolleType: RelasjonsRolleType.FAR } as Fagsak,
   },
 };

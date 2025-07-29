@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
-import { RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -134,16 +134,18 @@ export const VelgSakForm = ({
       )}
       <VStack gap="8">
         <VStack gap="4">
-          <RadioGroupPanel
-            disabled={!erKlarForJournalføring}
+          <RhfRadioGroup
             name={radioFieldName}
+            control={formMethods.control}
+            disabled={!erKlarForJournalføring}
             validate={[required]}
             radios={lagRadioOptions(journalpost)}
           />
           {sakValg === LAG_NY_SAK && (
-            <SelectField
-              className={styles.ytelseSelect}
+            <RhfSelect
               name={selectFieldName}
+              control={formMethods.control}
+              className={styles.ytelseSelect}
               validate={[required]}
               label={intl.formatMessage({ id: 'Journal.Sak.VelgYtelse' })}
               selectValues={ytelseSelectValg.map(ytelseType => (

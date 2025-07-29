@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkType, TilbakekrevingKodeverkType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkMedNavn, KodeverkReturnType } from '@navikt/fp-types';
+import { BehandlingType } from '@navikt/fp-kodeverk';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useFagsakApi } from './fagsakApi';
@@ -22,7 +22,7 @@ export const useKodeverk = (behandlingType?: string): AlleKodeverk | AlleKodever
 /**
  * Hook som henter et gitt FPSAK-kodeverk fra respons som allerede er hentet fra backend.
  */
-export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): KodeverkReturnType<T> => {
+export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): AlleKodeverk[T] => {
   const { kodeverkOptions } = useFagsakApi();
   const { data: alleKodeverk } = useQuery(kodeverkOptions());
 
@@ -33,34 +33,5 @@ export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): Kodev
     throw new Error(`Kodeverk ${kodeverkType} finnes ikke`);
   }
 
-  return alleKodeverk[kodeverkType] as KodeverkReturnType<T>;
+  return alleKodeverk[kodeverkType];
 };
-
-//TODO (TOR) Denne blir kun brukt kun ein plass, så like greit å få den vekk
-/**
- * Hook som brukes når en har behov for en funksjon som slår opp kodeverknavn.
- */
-export function useGetKodeverkFn() {
-  const api = useFagsakApi();
-  const { data: alleFpSakKodeverk } = useQuery(api.kodeverkOptions());
-  const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
-
-  return (
-    kode: string,
-    kodeverk: KodeverkType | TilbakekrevingKodeverkType,
-    behandlingType: string = BehandlingType.FORSTEGANGSSOKNAD,
-  ) => {
-    const kodeverkForType =
-      kodeverk in TilbakekrevingKodeverkType &&
-      (behandlingType === BehandlingType.TILBAKEKREVING || behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING)
-        ? alleKodeverkFpTilbake?.[kodeverk as TilbakekrevingKodeverkType]
-        : alleFpSakKodeverk?.[kodeverk as KodeverkType];
-    if (!kodeverkForType) {
-      throw Error(`Det finnes ingen kodeverk for type ${kodeverk} med kode ${kode}`);
-    }
-    if (!Array.isArray(kodeverkForType)) {
-      throw Error(`Støtter ikke kodeverk ${kodeverk}`);
-    }
-    return kodeverkForType.find((k: KodeverkMedNavn) => k.kode === kode);
-  };
-}

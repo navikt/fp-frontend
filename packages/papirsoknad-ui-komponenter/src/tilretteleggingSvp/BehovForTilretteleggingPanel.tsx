@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
-import { Datepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
@@ -28,7 +28,7 @@ interface Props {
 }
 
 export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
-  const { watch, setError, clearErrors, formState } = useFormContext<FormValues>();
+  const { watch, setError, clearErrors, formState, control } = useFormContext<FormValues>();
 
   const [sokSN, sokFrilans, sokArbeid] = watch([
     `${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`,
@@ -62,6 +62,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
 
           <TrueFalseInput
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForSelvstendigNaringsdrivende`}
+            control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
             readOnly={readOnly}
             trueContent={
@@ -70,8 +71,9 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
                   <Heading size="small">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelSN" />
                   </Heading>
-                  <Datepicker
+                  <RhfDatepicker
                     name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoSN`}
+                    control={control}
                     label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
                     validate={[required]}
                     isReadOnly={readOnly}
@@ -87,6 +89,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
 
           <TrueFalseInput
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForFrilans`}
+            control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
             readOnly={readOnly}
             trueContent={
@@ -95,8 +98,9 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
                   <Heading size="small">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelFrilans" />
                   </Heading>
-                  <Datepicker
+                  <RhfDatepicker
                     name={`${TILRETTELEGGING_NAME_PREFIX}.behovsdatoFrilans`}
+                    control={control}
                     label={intl.formatMessage({ id: 'BehovForTilretteleggingPanel.TilretteleggingFra' })}
                     validate={[required]}
                     isReadOnly={readOnly}
@@ -111,6 +115,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
           />
           <TrueFalseInput
             name={`${TILRETTELEGGING_NAME_PREFIX}.sokForArbeidsgiver`}
+            control={control}
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
             readOnly={readOnly}
             trueContent={

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakStatus, FagsakYtelseType, KodeverkType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FagsakYtelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
@@ -22,8 +22,8 @@ const meta = {
   component: AktørSakIndex,
   args: {
     valgtAktorId: '123',
-    fagsakStatuser: alleKodeverk[KodeverkType.FAGSAK_STATUS],
-    fagsakYtelseTyper: alleKodeverk[KodeverkType.FAGSAK_YTELSE],
+    fagsakStatuser: alleKodeverk['FagsakStatus'],
+    fagsakYtelseTyper: alleKodeverk['FagsakYtelseType'],
     renderSomLenke: (className, fagsakKomponent) => (
       <button type="button" className={className}>
         {fagsakKomponent}

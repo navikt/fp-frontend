@@ -1,12 +1,11 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { CheckboxField, Form } from '@navikt/ft-form-hooks';
+import { RhfCheckbox,RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, KodeverkLosType } from '@navikt/fp-kodeverk';
+import { BehandlingType } from '@navikt/fp-kodeverk';
 
 import { oppgaverÅpneEllerPåVentOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
@@ -24,30 +23,23 @@ interface Props {
 export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, getValueFromLocalStorage }: Props) => {
   const { data: oppgaverApneEllerPaVent } = useQuery(oppgaverÅpneEllerPåVentOptions(valgtAvdelingEnhet));
 
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const behandlingTyper = useLosKodeverk('BehandlingType');
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
 
-  const filtrerteBehandlingstyper = useMemo(
-    () =>
-      behandlingTyper.filter(
-        type => type.kode !== BehandlingType.TILBAKEKREVING && type.kode !== BehandlingType.TILBAKEKREVING_REVURDERING,
-      ),
-    [],
+  const filtrerteBehandlingstyper = behandlingTyper.filter(
+    type => type.kode !== BehandlingType.TILBAKEKREVING && type.kode !== BehandlingType.TILBAKEKREVING_REVURDERING,
   );
 
-  const formDefaultValues = useMemo(
-    () =>
-      Object.values(filtrerteBehandlingstyper).reduce(
-        (app, type) => ({
-          ...app,
-          [type.kode]: true,
-        }),
-        {},
-      ),
-    [],
+  const formDefaultValues = Object.values(filtrerteBehandlingstyper).reduce(
+    (app, type) => ({
+      ...app,
+      [type.kode]: true,
+    }),
+    {},
   );
 
+  // TODO (TOR) Mangler typing for useForm
   const formMethods = useForm({
     defaultValues: lagredeVerdier ?? formDefaultValues,
   });
@@ -55,7 +47,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
   const values = formMethods.watch();
 
   return (
-    <Form formMethods={formMethods}>
+    <RhfForm formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
       <VStack gap="4">
         <Label size="small">
@@ -63,7 +55,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
         </Label>
         <HStack gap="4">
           {filtrerteBehandlingstyper.map(type => (
-            <CheckboxField key={type.kode} name={type.kode} label={type.navn} />
+            <RhfCheckbox key={type.kode} name={type.kode} control={formMethods.control} label={type.navn} />
           ))}
         </HStack>
         <OppgaverSomErApneEllerPaVentGraf
@@ -71,6 +63,6 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
           oppgaverApneEllerPaVent={oppgaverApneEllerPaVent.filter(oav => values[oav.behandlingType])}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

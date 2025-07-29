@@ -5,7 +5,7 @@ import * as stories from './OppgaverPerForsteStonadsdagPanel.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<OppgaverPerForsteStonadsdagPanel>', () => {
+describe('OppgaverPerForsteStonadsdagPanel', () => {
   // TODO echarts-testing
   it.skip('skal rendre graf', async () => {
     render(<Default />);

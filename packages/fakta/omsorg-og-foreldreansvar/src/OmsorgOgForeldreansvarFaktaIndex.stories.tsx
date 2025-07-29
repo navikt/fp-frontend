@@ -7,6 +7,7 @@ import {
   AdresseType,
   AksjonspunktKode,
   AksjonspunktStatus,
+  FarSøkerType,
   NavBrukerKjonn,
   SivilstandType,
   SoknadType,
@@ -15,10 +16,6 @@ import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
-
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const defaultFamilieHendelse = {
   gjeldende: {
@@ -34,7 +31,7 @@ const soknad = {
   utstedtdato: '2019-01-02',
   antallBarn: 2,
   soknadType: SoknadType.ADOPSJON,
-  farSokerType: 'ADOPTERER_ALENE',
+  farSokerType: FarSøkerType.ADOPTERER_ALENE,
 } as Soknad;
 
 const personoversikt: Personoversikt = {

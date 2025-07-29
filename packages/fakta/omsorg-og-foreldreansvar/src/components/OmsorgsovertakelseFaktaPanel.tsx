@@ -1,13 +1,16 @@
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Label } from '@navikt/ds-react';
-import { Datepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import type { FieldEditedInfo } from '@navikt/fp-fakta-felles';
+import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
+
+import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
 
 const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
   const antallBarn = soknad.antallBarn ?? NaN;
@@ -22,7 +25,6 @@ export type FormValues = {
 interface Props {
   readOnly: boolean;
   erAksjonspunktForeldreansvar: boolean;
-  editedStatus: FieldEditedInfo;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   soknad: Soknad;
   familiehendelse: FamilieHendelse;
@@ -34,13 +36,14 @@ interface Props {
 export const OmsorgsovertakelseFaktaPanel = ({
   readOnly,
   erAksjonspunktForeldreansvar,
-  editedStatus,
   alleMerknaderFraBeslutter,
   soknad,
   familiehendelse,
 }: Props) => {
   const intl = useIntl();
   const antallBarn = getAntallBarn(soknad, familiehendelse);
+
+  const { control } = useFormContext<OmsorgOgForeldreansvarFormValues>();
 
   return (
     <FaktaGruppe
@@ -52,16 +55,18 @@ export const OmsorgsovertakelseFaktaPanel = ({
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
       <HStack gap="10">
-        <Datepicker
+        <RhfDatepicker
           name="omsorgsovertakelseDato"
+          control={control}
           label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
-          isEdited={editedStatus.omsorgsovertakelseDato}
+          isEdited={isNotEqual(soknad.omsorgsovertakelseDato, familiehendelse.omsorgsovertakelseDato)}
         />
         {erAksjonspunktForeldreansvar && (
-          <Datepicker
+          <RhfDatepicker
             name="foreldreansvarDato"
+            control={control}
             label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' })}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}

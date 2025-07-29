@@ -1,6 +1,8 @@
+import type { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+
 export type Vilkar = Readonly<{
-  vilkarType: string;
-  vilkarStatus: string;
+  vilkarType: VilkarType;
+  vilkarStatus: VilkarUtfallType;
   avslagKode?: string | null;
   lovReferanse?: string;
   overstyrbar: boolean;

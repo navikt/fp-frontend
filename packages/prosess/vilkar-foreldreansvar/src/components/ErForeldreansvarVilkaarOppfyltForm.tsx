@@ -2,10 +2,10 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -16,7 +16,6 @@ import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 import type {
   Foreldreansvarsvilkar1Ap,
   Foreldreansvarsvilkar2Ap,
-  VurdereYtelseSammeBarnAnnenForelderAp,
   VurdereYtelseSammeBarnSokerAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -27,12 +26,7 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-type AksjonspunktData = Array<
-  | Foreldreansvarsvilkar1Ap
-  | Foreldreansvarsvilkar2Ap
-  | VurdereYtelseSammeBarnSokerAp
-  | VurdereYtelseSammeBarnAnnenForelderAp
->;
+type AksjonspunktData = Array<Foreldreansvarsvilkar1Ap | Foreldreansvarsvilkar2Ap | VurdereYtelseSammeBarnSokerAp>;
 
 interface Props {
   isForeldreansvar2Ledd: boolean;
@@ -78,12 +72,12 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
   const vilkarTypeKode = isForeldreansvar2Ledd
     ? VilkarType.FORELDREANSVARSVILKARET_2_LEDD
     : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
-  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][vilkarTypeKode];
+  const avslagsarsaker = alleKodeverk['Avslagsårsak'][vilkarTypeKode];
 
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -118,7 +112,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };
 
@@ -140,6 +134,5 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
       AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
       AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
       AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      AksjonspunktKode.AVKLAR_OM_STONAD_TIL_ANNEN_FORELDER_GJELDER_SAMME_BARN,
     ),
   }));

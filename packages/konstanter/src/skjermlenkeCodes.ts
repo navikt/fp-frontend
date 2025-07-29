@@ -3,7 +3,7 @@ import { ProsessStegCode } from './prosessStegCodes';
 
 type SkjermlenkeData = Record<string, { kode: string; faktaNavn: string; punktNavn: string }>;
 
-export const skjermlenkeCodesFpsak: SkjermlenkeData = {
+const skjermlenkeCodesFpsak: SkjermlenkeData = {
   BEREGNING_ENGANGSSTOENAD: {
     kode: 'BEREGNING_ENGANGSSTOENAD',
     faktaNavn: FaktaPanelCode.DEFAULT,

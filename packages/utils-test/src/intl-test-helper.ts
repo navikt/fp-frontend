@@ -3,7 +3,7 @@ import { createIntl, createIntlCache } from 'react-intl';
 // Create the IntlProvider to retrieve context for wrapping around.
 const cache = createIntlCache();
 
-export const getIntlObject = (moduleMessages: Record<string, string>) => {
+const getIntlObject = (moduleMessages: Record<string, string>) => {
   const selectedMessages = moduleMessages;
 
   return createIntl(

@@ -4,7 +4,7 @@ import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react'
 import { Gender, GenderIcon } from '@navikt/ft-plattform-komponenter';
 import { createIntl, dateFormat } from '@navikt/ft-utils';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
+import type { SivilstandType } from '@navikt/fp-kodeverk';
 import { type AlleKodeverk, KjønnkodeEnum, type Personadresse } from '@navikt/fp-types';
 
 import { AdresseTabell } from '../adresser/AdresseTabell';
@@ -18,7 +18,7 @@ interface Props {
   alleKodeverk: AlleKodeverk;
   harSammeAdresser?: boolean;
   navn?: string;
-  sivilstand?: string;
+  sivilstand?: SivilstandType;
   dødsdato?: string | null;
   fødselsdato?: string;
   adresser: Personadresse[];
@@ -78,7 +78,7 @@ export const Personopplysninger = ({
               </HStack>
               {!isChild && sivilstand && (
                 <Detail aria-label="Sivilstand">
-                  {alleKodeverk[KodeverkType.SIVILSTAND_TYPE].find(s => s.kode === sivilstand)?.navn}
+                  {alleKodeverk['SivilstandType'].find(s => s.kode === sivilstand)?.navn}
                 </Detail>
               )}
             </div>
@@ -91,7 +91,7 @@ export const Personopplysninger = ({
           <AdresseTabell
             harSammeAdresser={harSammeAdresser}
             adresser={adresser}
-            adresseKodeverk={alleKodeverk[KodeverkType.ADRESSE_TYPE]}
+            adresseKodeverk={alleKodeverk['AdresseType']}
             erAnnenpart={rolle === 'ANNEN_PART'}
           />
         </VStack>

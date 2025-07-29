@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Detail, HStack } from '@navikt/ds-react';
-import { InputField } from '@navikt/ft-form-hooks';
+import { RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidPosOrNegInteger } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -20,7 +20,8 @@ interface Props {
 export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
 
-  const { watch, trigger } = useFormContext();
+  // TODO (TOR) Manglar type
+  const { watch, trigger, control } = useFormContext();
   const fraVerdi = watch('fra');
   const tilVerdi = watch('til');
 
@@ -60,20 +61,22 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
         <FormattedMessage id="SorteringVelger.FiltrerPaHeltall" />
       </Detail>
       <HStack gap="4">
-        <InputField
+        <RhfTextField
           name="fra"
+          control={control}
           className={styles.dato}
           validate={[hasValidPosOrNegInteger]}
-          onChange={lagreFraDebounce}
+          onChange={value => lagreFraDebounce(value)}
         />
         <Detail className={styles.beløp}>
           <FormattedMessage id="SorteringVelger.Valuta" />
         </Detail>
-        <InputField
+        <RhfTextField
           name="til"
+          control={control}
           className={styles.dato}
           validate={[hasValidPosOrNegInteger]}
-          onChange={lagreTilDebounce}
+          onChange={value => lagreTilDebounce(value)}
         />
         <Detail className={styles.beløp}>
           <FormattedMessage id="SorteringVelger.Valuta" />

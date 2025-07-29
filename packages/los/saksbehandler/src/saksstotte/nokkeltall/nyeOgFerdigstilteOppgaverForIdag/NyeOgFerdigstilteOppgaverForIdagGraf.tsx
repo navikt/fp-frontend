@@ -2,7 +2,7 @@ import { useIntl } from 'react-intl';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import type { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 
@@ -17,7 +17,7 @@ const behandlingstypeOrder = [
 
 interface Props {
   height: number;
-  behandlingTyper: KodeverkMedNavn[];
+  behandlingTyper: LosKodeverkMedNavn<'BehandlingType'>[];
   nyeOgFerdigstilteOppgaver: NyeOgFerdigstilteOppgaver[];
 }
 

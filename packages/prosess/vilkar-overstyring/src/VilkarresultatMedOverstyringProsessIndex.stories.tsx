@@ -5,9 +5,10 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
+  Avslagsarsak,
+  BehandlingResultatType,
   BehandlingType,
   FagsakYtelseType,
-  KodeverkType,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -19,7 +20,7 @@ import {
   withPanelData,
   withPanelOverstyring,
 } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, Fagsak, Medlemskap } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Fagsak, KodeverkMedNavn, Medlemskap } from '@navikt/fp-types';
 
 import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOverstyringProsessIndex';
 
@@ -32,16 +33,16 @@ const defaultBehandling = {
 
 const defaultAvslagsarsaker = [
   {
-    kode: 'AVSLAG_TEST_1',
+    kode: Avslagsarsak.INGEN_BEREGNINGSREGLER,
     navn: 'Dette er en avslagsårsak',
     kodeverk: '',
   },
   {
-    kode: 'AVSLAG_TEST_2',
+    kode: Avslagsarsak.MANN_ADOPTERER_IKKE_ALENE,
     navn: 'Dette er en annen avslagsårsak',
     kodeverk: '',
   },
-];
+] satisfies KodeverkMedNavn<'Avslagsårsak'>[];
 
 const meta = {
   title: 'prosess/prosess-vilkar-overstyring',
@@ -75,7 +76,7 @@ export const OverstyringspanelForMedlemskap: Story = {
   args: {
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
-    avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET],
+    avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET],
     behandling: {
       ...defaultBehandling,
       type: BehandlingType.REVURDERING,
@@ -87,7 +88,7 @@ export const OverstyringErUtførtForMedlemskap: Story = {
   args: {
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
-    avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET],
+    avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -115,7 +116,7 @@ export const OverstyringForForutgåendeMedlemskap: Story = {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
     } as Fagsak,
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
+    avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
   },
 };
@@ -127,7 +128,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
     } as Fagsak,
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
-    avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
+    avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -153,7 +154,7 @@ export const OverstyringspanelForOpptjening: Story = {
   args: {
     panelTittelKode: 'Inngangsvilkar.Opptjeningsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET,
-    avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.OPPTJENINGSVILKARET],
+    avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.OPPTJENINGSVILKARET],
   },
 };
 
@@ -162,7 +163,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        avslagsarsak: 'AVSLAG_TEST_1',
+        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
       },
       aksjonspunkt: [
         {
@@ -184,8 +185,8 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        avslagsarsak: '1020',
-        type: 'OPPHØR',
+        avslagsarsak: Avslagsarsak.ÅRSAK_1020,
+        type: BehandlingResultatType.OPPHOR,
       },
     } as Behandling,
     status: VilkarUtfallType.IKKE_VURDERT,
@@ -198,7 +199,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
   args: {
     panelTittelKode: 'Behandlingspunkt.FortsattMedlemskap',
     overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-    avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
+    avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -220,7 +221,7 @@ export const LøpendeMedlemskapVisningSomIkkeErOverstyrt: Story = {
   args: {
     panelTittelKode: 'Behandlingspunkt.FortsattMedlemskap',
     overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-    avslagsarsaker: alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
+    avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
     status: VilkarUtfallType.IKKE_OPPFYLT,
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     isReadOnly: true,

@@ -2,11 +2,11 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Table, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, KodeverkType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -54,7 +54,7 @@ const formatArbeidsgiver = (
   return lagArbeidsgiverNavnOgOrgnrTekst(arbeidsgiverOpplysninger.navn, arbeidsgiverOpplysninger.identifikator);
 };
 
-export const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] =>
+const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] =>
   soknad?.manglendeVedlegg
     ? soknad.manglendeVedlegg.slice().sort((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel))
     : [];
@@ -196,7 +196,7 @@ export const SokersOpplysningspliktForm = ({
   const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback(
@@ -245,8 +245,9 @@ export const SokersOpplysningspliktForm = ({
           )}
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
           {!isReadOnly && (
-            <RadioGroupPanel
+            <RhfRadioGroup
               name="erVilkarOk"
+              control={formMethods.control}
               validate={[required]}
               isHorizontal
               isTrueOrFalseSelection
@@ -275,7 +276,7 @@ export const SokersOpplysningspliktForm = ({
             <div>
               {originalErVilkarOk === false && behandling.behandlingsresultat?.avslagsarsak && (
                 <BodyShort size="small">
-                  {alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SOKERSOPPLYSNINGSPLIKT].find(
+                  {alleKodeverk['Avslagsårsak'][VilkarType.SOKERSOPPLYSNINGSPLIKT].find(
                     type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
                   )?.navn ?? ''}
                 </BodyShort>
@@ -284,6 +285,6 @@ export const SokersOpplysningspliktForm = ({
           )}
         </VStack>
       </ProsessPanelTemplate>
-    </Form>
+    </RhfForm>
   );
 };

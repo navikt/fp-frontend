@@ -1,6 +1,6 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
 import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -19,7 +19,7 @@ const meta = {
   decorators: [withQueryClient],
   parameters: {
     msw: {
-      handlers: [http.post('http://www.test.com' + link.href, () => new HttpResponse(null, { status: 200 }))],
+      handlers: [http.post('https://www.test.com' + link.href, () => new HttpResponse(null, { status: 200 }))],
     },
   },
   args: {

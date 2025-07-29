@@ -1,13 +1,15 @@
 import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { PencilIcon } from '@navikt/aksel-icons';
 import { Button, Checkbox, CheckboxGroup, Heading, HStack } from '@navikt/ds-react';
-import { InputField, SelectField } from '@navikt/ft-form-hooks';
+import { RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 
 import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
 import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
+import type { JournalføringFormValues } from '../../../typer/journalføringFormValues';
 import type { Journalpost } from '../../../typer/journalpostTsType';
 
 import styles from './journalpostTittelForm.module.css';
@@ -24,14 +26,17 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
   const [kanRedigereTittel, setKanRedigereTittel] = useState(!journalpost.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
 
+  const { control } = useFormContext<JournalføringFormValues>();
+
   return (
     <div className={styles.container}>
       {kanRedigereTittel && (
         <>
           <HStack className={styles.inputBoks}>
             {harToggletFritekst && (
-              <InputField
+              <RhfTextField
                 name="journalpostTittel"
+                control={control}
                 validate={[required, hasValidText]}
                 readOnly={readOnly}
                 maxLength={200}
@@ -39,9 +44,10 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
               />
             )}
             {!harToggletFritekst && (
-              <SelectField
-                readOnly={readOnly}
+              <RhfSelect
                 name="journalpostTittel"
+                control={control}
+                readOnly={readOnly}
                 label={undefined}
                 className={styles.selectField}
                 validate={[required]}

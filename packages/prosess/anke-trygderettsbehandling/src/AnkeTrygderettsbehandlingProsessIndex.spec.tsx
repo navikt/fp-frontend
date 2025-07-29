@@ -13,7 +13,7 @@ const {
   ErUnderBehandlingIKabel,
 } = composeStories(stories);
 
-describe('<AnkeTrygderettsbehandlingProsessIndex>', () => {
+describe('AnkeTrygderettsbehandlingProsessIndex', () => {
   it('skal vise historisk anke som er omgjort i fpsak', async () => {
     render(<ResultatVedOmgjortResultat />);
 

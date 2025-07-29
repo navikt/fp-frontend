@@ -6,7 +6,7 @@ import * as stories from './SprakPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<SprakPapirsoknadIndex>', () => {
+describe('SprakPapirsoknadIndex', () => {
   it('skal velge korrekt språk', async () => {
     const lagre = vi.fn();
 

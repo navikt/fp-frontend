@@ -1,5 +1,7 @@
+import type { GraderingAvslagÅrsak, PeriodeResultatÅrsak, StonadskontoType } from '@navikt/fp-kodeverk';
+
 export type UttakAktivitet = {
-  stønadskontoType: string;
+  stønadskontoType: StonadskontoType;
   weeks: string;
   days: string;
   utbetalingsgrad: string;
@@ -8,9 +10,9 @@ export type UttakAktivitet = {
 export type UttakAktivitetType = {
   begrunnelse?: string;
   erOppfylt?: boolean;
-  periodeAarsak: string;
+  periodeAarsak: PeriodeResultatÅrsak;
   graderingInnvilget: boolean;
-  graderingAvslagAarsak: string;
+  graderingAvslagAarsak: GraderingAvslagÅrsak;
   samtidigUttaksprosent?: string;
   flerbarnsdager: boolean;
   samtidigUttak?: boolean;

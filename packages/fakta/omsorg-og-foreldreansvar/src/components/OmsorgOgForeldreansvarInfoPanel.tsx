@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, hasAksjonspunkt, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   AlleKodeverk,
@@ -22,12 +22,10 @@ import type {
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
-import {
-  type FormValues as OmsorgFormValues,
-  OmsorgOgForeldreansvarFaktaForm,
-} from './OmsorgOgForeldreansvarFaktaForm';
+import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
+import { OmsorgOgForeldreansvarFaktaForm } from './OmsorgOgForeldreansvarFaktaForm';
 
-type FormValues = OmsorgFormValues & FaktaBegrunnelseFormValues;
+type FormValues = OmsorgOgForeldreansvarFormValues & FaktaBegrunnelseFormValues;
 
 const transformValues = (
   values: FormValues,
@@ -121,7 +119,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
   );
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]))}
     >
@@ -132,13 +130,14 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
         <OmsorgOgForeldreansvarFaktaForm
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
           readOnly={isReadOnly}
-          vilkarTypes={alleKodeverk[KodeverkType.OMSORGSOVERTAKELSE_VILKAR_TYPE]}
+          vilkarTypes={alleKodeverk['OmsorgsovertakelseVilkårType']}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
           gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
           personoversikt={personoversikt}
         />
         <FaktaBegrunnelseTextField
+          control={formMethods.control}
           isSubmittable={submittable}
           isReadOnly={isReadOnly}
           hasBegrunnelse={!!begrunnelse}
@@ -155,6 +154,6 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           isReadOnly={isReadOnly}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

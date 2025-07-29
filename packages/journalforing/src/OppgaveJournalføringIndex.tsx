@@ -43,7 +43,7 @@ export const OppgaveJournalføringIndex = (props: Props) => {
 /**
  * Toppkomponent, orkestrerer restkall for journalføring
  */
-export const JournalforingIndex = ({ navAnsatt }: Props) => {
+const JournalforingIndex = ({ navAnsatt }: Props) => {
   const [valgtOppgave, setValgtOppgave] = useState<Oppgave | undefined>(undefined);
   const [visModal, setVisModal] = useState(false);
 

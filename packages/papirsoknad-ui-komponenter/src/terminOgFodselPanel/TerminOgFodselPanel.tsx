@@ -2,7 +2,7 @@ import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
 import { Alert, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Datepicker, InputField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -14,7 +14,6 @@ import {
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { ErBarnetFodt } from './components/ErBarnetFodt';
 import {
   maxFodselsdato,
   maxTerminbekreftelseDato,
@@ -26,13 +25,13 @@ import {
   terminErRundtFodselsdato,
   validateMaxAntallBarn,
   validateMinAntallBarn,
-} from './validator';
+} from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-export type FormValues = {
+type FormValues = {
   termindato?: string;
   terminbekreftelseDato?: string;
   antallBarnFraTerminbekreftelse?: number;
@@ -41,7 +40,7 @@ export type FormValues = {
   erBarnetFodt?: boolean;
 };
 
-export type TransformFormValues =
+type TransformFormValues =
   | {
       erBarnetFodt: false;
       termindato?: string;
@@ -73,7 +72,7 @@ const validerTerminBekreftelse =
   };
 
 export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Props) => {
-  const { watch, getValues } = useFormContext<FormValues>();
+  const { watch, getValues, control } = useFormContext<FormValues>();
 
   const erBarnetFodt = watch('erBarnetFodt');
 
@@ -82,15 +81,32 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
       <BorderBox>
         <VStack gap="4">
           <Heading size="small">{intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}</Heading>
-
-          <ErBarnetFodt readOnly={readOnly} />
+          <RhfRadioGroup
+            name="erBarnetFodt"
+            control={control}
+            label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
+            validate={[required]}
+            isReadOnly={readOnly}
+            isTrueOrFalseSelection
+            radios={[
+              {
+                label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErFodt' }),
+                value: 'true',
+              },
+              {
+                label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErIkkeFodt' }),
+                value: 'false',
+              },
+            ]}
+          />
           {erBarnetFodt !== undefined && (
             <VStack gap="4">
               {erBarnetFodt === false && (
                 <>
                   <HStack gap="4">
-                    <Datepicker
+                    <RhfDatepicker
                       name="termindato"
+                      control={control}
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Termindato' })}
                       isReadOnly={readOnly}
                       fromDate={minTermindato().toDate()}
@@ -103,8 +119,9 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                         dateBeforeOrEqual(maxTermindato()),
                       ]}
                     />
-                    <InputField
+                    <RhfTextField
                       name="antallBarn"
+                      control={control}
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.AntallBarn' })}
                       readOnly={readOnly}
                       parse={value => {
@@ -114,8 +131,9 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                       validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
                     />
                   </HStack>
-                  <Datepicker
+                  <RhfDatepicker
                     name="terminbekreftelseDato"
+                    control={control}
                     label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.UtstedtDato' })}
                     isReadOnly={readOnly}
                     fromDate={minTerminbekreftelseDato().toDate()}
@@ -128,16 +146,18 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
               {erBarnetFodt === true && (
                 <>
                   <HStack gap="4">
-                    <Datepicker
+                    <RhfDatepicker
                       name="foedselsDato"
+                      control={control}
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Fodselsdato' })}
                       isReadOnly={readOnly}
                       validate={[required, hasValidDate, dateAfterOrEqual(minFodselsdato()), dateBeforeOrEqualToToday]}
                       fromDate={minFodselsdato().toDate()}
                       toDate={maxFodselsdato().toDate()}
                     />
-                    <InputField
+                    <RhfTextField
                       name="antallBarn"
+                      control={control}
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.AntallBarn' })}
                       readOnly={readOnly}
                       parse={value => {
@@ -154,8 +174,9 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                       </Label>
                     </Alert>
                   )}
-                  <Datepicker
+                  <RhfDatepicker
                     name="termindato"
+                    control={control}
                     label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Termindato' })}
                     isReadOnly={readOnly}
                     validate={[
@@ -181,6 +202,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
 TerminOgFodselPanel.initialValues = (): FormValues => ({
   erBarnetFodt: undefined,
 });
+
 TerminOgFodselPanel.transformValues = ({
   antallBarn,
   erBarnetFodt,

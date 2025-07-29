@@ -1,5 +1,5 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
@@ -26,7 +26,7 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
-export const ForeldrepengerFørstegang: Story = {
+export const ForeldrepengerFørstegangssøknad: Story = {
   args: {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -36,7 +36,7 @@ export const ForeldrepengerFørstegang: Story = {
   },
 };
 
-export const ForeldrepengerEndring: Story = {
+export const ForeldrepengerEndringssøknad: Story = {
   args: {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
@@ -46,7 +46,7 @@ export const ForeldrepengerEndring: Story = {
   },
 };
 
-export const SvangerskapspengerFørstegang: Story = {
+export const SvangerskapspengerFørstegangssøknad: Story = {
   args: {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
@@ -56,31 +56,12 @@ export const SvangerskapspengerFørstegang: Story = {
   },
 };
 
-export const SvangerskapspengerEndring: Story = {
-  args: {
-    fagsak: {
-      fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
-      bruker: { fødselsnummer: '00000000000' },
-    } as Fagsak,
-    erEndringssøknad: true,
-  },
-};
-export const EngangsstonadFørstegang: Story = {
+export const EngangsstonadFørstegangssøknad: Story = {
   args: {
     fagsak: {
       fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
       bruker: { fødselsnummer: '00000000000' },
     } as Fagsak,
     erEndringssøknad: false,
-  },
-};
-
-export const EngangsstonadEndring: Story = {
-  args: {
-    fagsak: {
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-      bruker: { fødselsnummer: '00000000000' },
-    } as Fagsak,
-    erEndringssøknad: true,
   },
 };

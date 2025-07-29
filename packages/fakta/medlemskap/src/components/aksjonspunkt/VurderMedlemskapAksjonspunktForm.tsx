@@ -1,12 +1,12 @@
-import { type PropsWithChildren, useCallback, useState } from 'react';
+import { type PropsWithChildren, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, VStack } from '@navikt/ds-react';
-import { Form } from '@navikt/ft-form-hooks';
+import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, BehandlingType, KodeverkType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingType, VilkarType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -67,28 +67,25 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
   const erForutgåendeAksjonspunkt = aksjonspunkt.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR;
 
-  const bekreft = useCallback(
-    ({ vurdering, avslagskode, medlemFom, opphørFom, begrunnelse }: VurderMedlemskapFormValues) => {
-      setSubmitting(true);
-      return submitCallback({
-        kode: erForutgåendeAksjonspunkt
-          ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
-          : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-        begrunnelse,
-        avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
-        opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
-        medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
-      });
-    },
-    [],
-  );
-  const avslagsarsaker = alleKodeverk[KodeverkType.AVSLAGSARSAK][
+  const bekreft = ({ vurdering, avslagskode, medlemFom, opphørFom, begrunnelse }: VurderMedlemskapFormValues) => {
+    setSubmitting(true);
+    return submitCallback({
+      kode: erForutgåendeAksjonspunkt
+        ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
+        : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+      begrunnelse,
+      avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
+      opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
+      medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
+    });
+  };
+  const avslagsarsaker = alleKodeverk['Avslagsårsak'][
     erForutgåendeAksjonspunkt ? VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE : VilkarType.MEDLEMSKAPSVILKARET
   ].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>
-      <Form formMethods={formMethods} onSubmit={bekreft} setDataOnUnmount={setMellomlagretFormData}>
+      <RhfForm formMethods={formMethods} onSubmit={bekreft} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap={isReadOnly ? '2' : '6'}>
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
@@ -98,6 +95,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
             ytelse={fagsak.fagsakYtelseType}
           />
           <FaktaBegrunnelseTextField
+            control={formMethods.control}
             hasReadOnlyLabel
             isReadOnly={isReadOnly}
             isSubmittable={submittable}
@@ -117,7 +115,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
             </div>
           )}
         </VStack>
-      </Form>
+      </RhfForm>
     </ConditionalWrapper>
   );
 };

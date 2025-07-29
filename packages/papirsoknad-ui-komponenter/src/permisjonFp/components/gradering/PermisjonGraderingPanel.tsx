@@ -2,9 +2,9 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import { Arbeidskategori, KodeverkType } from '@navikt/fp-kodeverk';
+import { Arbeidskategori } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -23,10 +23,10 @@ interface Props {
  * Komponenten har inputfelter og må derfor rendres som etterkommer av form-komponent
  */
 export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
-  const graderingKvoter = alleKodeverk[KodeverkType.UTTAK_PERIODE_TYPE];
-  const arbeidskategoriTyper = alleKodeverk[KodeverkType.ARBEIDSKATEGORI];
+  const graderingKvoter = alleKodeverk['UttakPeriodeType'];
+  const arbeidskategoriTyper = alleKodeverk['Arbeidskategori'];
 
-  const { watch } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesGradering }>();
+  const { watch, control } = useFormContext<{ [TIDSROM_PERMISJON_FORM_NAME_PREFIX]: FormValuesGradering }>();
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
 
   return (
@@ -34,9 +34,10 @@ export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
       <Label>
         <FormattedMessage id="Registrering.Permisjon.Gradering.Title" />
       </Label>
-      <CheckboxField
-        readOnly={readOnly}
+      <RhfCheckbox
         name={`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`}
+        control={control}
+        readOnly={readOnly}
         label={<FormattedMessage id="Registrering.Permisjon.Gradering.GraderUttaket" />}
       />
       {skalGradere && (

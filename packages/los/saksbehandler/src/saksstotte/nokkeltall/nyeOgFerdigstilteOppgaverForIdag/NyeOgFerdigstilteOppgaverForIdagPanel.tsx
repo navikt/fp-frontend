@@ -1,22 +1,12 @@
-import { useMemo } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, VStack } from '@navikt/ds-react';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkLosType } from '@navikt/fp-kodeverk';
-
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import type { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 import { NyeOgFerdigstilteOppgaverForIdagGraf } from './NyeOgFerdigstilteOppgaverForIdagGraf';
-
-export const getNyeOgFerdigstilteForIDag = (
-  nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = [],
-): NyeOgFerdigstilteOppgaver[] => {
-  const iDag = dayjs();
-  return nyeOgFerdigstilte.filter(oppgave => iDag.isSame(dayjs(oppgave.dato, ISO_DATE_FORMAT), 'day'));
-};
 
 interface Props {
   height: number;
@@ -24,12 +14,9 @@ interface Props {
 }
 
 export const NyeOgFerdigstilteOppgaverForIdagPanel = ({ height, nyeOgFerdigstilteOppgaver }: Props) => {
-  const behandlingTyper = useLosKodeverk(KodeverkLosType.BEHANDLING_TYPE);
+  const behandlingTyper = useLosKodeverk('BehandlingType');
 
-  const filtrerteNyeOgFerdigstilteOppgaver = useMemo(
-    () => getNyeOgFerdigstilteForIDag(nyeOgFerdigstilteOppgaver),
-    [nyeOgFerdigstilteOppgaver],
-  );
+  const filtrerteNyeOgFerdigstilteOppgaver = getNyeOgFerdigstilteForIDag(nyeOgFerdigstilteOppgaver);
 
   return (
     <VStack gap="1">
@@ -43,4 +30,11 @@ export const NyeOgFerdigstilteOppgaverForIdagPanel = ({ height, nyeOgFerdigstilt
       />
     </VStack>
   );
+};
+
+const getNyeOgFerdigstilteForIDag = (
+  nyeOgFerdigstilte: NyeOgFerdigstilteOppgaver[] = [],
+): NyeOgFerdigstilteOppgaver[] => {
+  const iDag = dayjs();
+  return nyeOgFerdigstilte.filter(oppgave => iDag.isSame(dayjs(oppgave.dato, ISO_DATE_FORMAT), 'day'));
 };

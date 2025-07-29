@@ -1,13 +1,15 @@
+import { useState } from 'react';
+import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxPanel, Datepicker, InputField, TextAreaField } from '@navikt/ft-form-hooks';
+import { Checkbox, Label, VStack } from '@navikt/ds-react';
+import { RhfCheckboxGroup, RhfDatepicker, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, hasValidText, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
-import type { StartedEndretFormValues } from '../types';
+import type { StartedEndretFormValues, VirksomhetFormValues } from '../types';
 
 import styles from './virksomhetStartetEndretPanel.module.css';
 
@@ -16,38 +18,6 @@ interface Props {
   index: number;
 }
 
-const aarsaker = ({ readOnly, index }: Props) => [
-  {
-    value: 'harVarigEndring',
-    label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />,
-    element: (
-      <ArrowBox marginTop={8}>
-        <Datepicker
-          name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndringGjeldendeFom`}
-          isReadOnly={readOnly}
-          validate={[hasValidDate, required]}
-          label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-        />
-      </ArrowBox>
-    ),
-  },
-  { value: 'erNyoppstartet', label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" /> },
-  {
-    value: 'erNyIArbeidslivet',
-    label: <FormattedMessage id="Registrering.VirksomhetStartetPanel.NyIArbeidslivet" />,
-    element: (
-      <ArrowBox marginTop={8}>
-        <Datepicker
-          name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.nyIArbeidslivetFom`}
-          isReadOnly={readOnly}
-          validate={[hasValidDate, required]}
-          label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
-        />
-      </ArrowBox>
-    ),
-  },
-];
-
 /**
  * VirksomhetStartetEndretPanel
  *
@@ -55,9 +25,11 @@ const aarsaker = ({ readOnly, index }: Props) => [
  * papirsøknad dersom søknad gjelder foreldrepenger og saksbehandler skal legge til ny virksomhet for søker.
  */
 export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
+  const { control } = useFormContext<VirksomhetFormValues>();
   return (
     <TrueFalseInput
       name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireAr`}
+      control={control}
       label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.NewlyStartedOrChanged" />}
       readOnly={readOnly}
       trueContent={
@@ -66,19 +38,37 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
             <Label size="small">
               <FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" />
             </Label>
-            <CheckboxPanel
-              validate={[required]}
+            <RhfCheckboxGroup
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`}
-              checkboxes={aarsaker({ readOnly, index })}
-            />
+              control={control}
+              validate={[required]}
+            >
+              <CheckboxWithInfo
+                value="harVarigEndring"
+                label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.HarVarigEndring" />}
+                readOnly={readOnly}
+                index={index}
+              />
+              <Checkbox value="erNyoppstartet" readOnly={readOnly}>
+                <FormattedMessage id="Registrering.VirksomhetStartetPanel.ErNyoppstartet" />
+              </Checkbox>
+              <CheckboxWithInfo
+                value="erNyIArbeidslivet"
+                label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.NyIArbeidslivet" />}
+                readOnly={readOnly}
+                index={index}
+              />
+            </RhfCheckboxGroup>
 
-            <TextAreaField
+            <RhfTextarea
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.beskrivelseAvEndring`}
+              control={control}
               label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.VirksomhetEndretBeskrivelse" />}
               validate={[hasValidText]}
             />
-            <InputField
+            <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.inntekt`}
+              control={control}
               label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Inntekt" />}
               readOnly={readOnly}
               validate={[hasValidInteger, required]}
@@ -121,4 +111,44 @@ VirksomhetStartetEndretPanel.transformValues = ({
         }
       : {}),
   };
+};
+
+const CheckboxWithInfo = ({
+  value,
+  label,
+  readOnly,
+  index,
+}: {
+  value: 'harVarigEndring' | 'erNyIArbeidslivet';
+  label: React.ReactNode;
+  readOnly: boolean;
+  index: number;
+}) => {
+  const { watch, control } = useFormContext<VirksomhetFormValues>();
+  const valgteÅrsaker = watch(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`);
+
+  const [visPerioder, setVisPeriode] = useState(valgteÅrsaker.includes(value));
+
+  return (
+    <VStack gap="2">
+      <Checkbox value={value} onClick={() => setVisPeriode(!visPerioder)} disabled={readOnly}>
+        {label}
+      </Checkbox>
+      {visPerioder && (
+        <ArrowBox marginTop={8}>
+          <RhfDatepicker
+            name={
+              value === 'harVarigEndring'
+                ? `${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndringGjeldendeFom`
+                : `${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.nyIArbeidslivetFom`
+            }
+            control={control}
+            isReadOnly={readOnly}
+            validate={[hasValidDate, required]}
+            label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.GjeldendeFom" />}
+          />
+        </ArrowBox>
+      )}
+    </VStack>
+  );
 };

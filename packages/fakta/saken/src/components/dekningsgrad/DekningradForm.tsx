@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PencilFillIcon, PencilIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -105,7 +105,7 @@ export const DekningradForm = ({
   }
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback({
@@ -125,8 +125,9 @@ export const DekningradForm = ({
       </div>
       <Box background="surface-neutral-subtle" padding="5">
         <VStack gap="6">
-          <RadioGroupPanel
+          <RhfRadioGroup
             name="dekningsgrad"
+            control={formMethods.control}
             label={<FormattedMessage id="DekningsgradForm.Dekningsgrad" />}
             description={
               fagsak.annenPart
@@ -166,8 +167,9 @@ export const DekningradForm = ({
               },
             ]}
           />
-          <TextAreaField
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
             label={<FormattedMessage id="DekningsgradForm.Begrunnelse" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
@@ -185,6 +187,6 @@ export const DekningradForm = ({
           </div>
         </VStack>
       </Box>
-    </Form>
+    </RhfForm>
   );
 };

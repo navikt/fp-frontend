@@ -8,10 +8,6 @@ import type { Fagsak, Soknad } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
 
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
-
 const defaultSøknad = {
   oppgittFordeling: {
     startDatoForPermisjon: '2019-01-01',

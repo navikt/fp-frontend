@@ -2,10 +2,10 @@ import { type ReactElement } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
-import { dateFormat, formatCurrencyNoKr } from '@navikt/ft-utils';
+import { BeløpLabel } from '@navikt/ft-ui-komponenter';
+import { formaterArbeidsgiver } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { KodeverkType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -28,16 +28,10 @@ const lagVisningsNavn = (
   const agOpplysning = inntekt.arbeidsgiverId ? arbeidsgiverOpplysninger[inntekt.arbeidsgiverId] : undefined;
   if (!agOpplysning) {
     return (
-      alleKodeverk[KodeverkType.OPPTJENING_AKTIVITET_TYPE].find(type => type.kode === inntekt.opptjeningAktivitetType)
-        ?.navn ?? ''
+      alleKodeverk['OpptjeningAktivitetType'].find(type => type.kode === inntekt.opptjeningAktivitetType)?.navn ?? ''
     );
   }
-  if (agOpplysning.erPrivatPerson) {
-    return agOpplysning.fødselsdato
-      ? `${agOpplysning.navn} (${dateFormat(agOpplysning.fødselsdato)})`
-      : agOpplysning.navn;
-  }
-  return `${agOpplysning.navn} (${agOpplysning.identifikator})`;
+  return formaterArbeidsgiver(agOpplysning);
 };
 
 const InntektRad = ({
@@ -50,26 +44,22 @@ const InntektRad = ({
   alleKodeverk: AlleKodeverk;
 }): ReactElement => (
   <Table.Row className={styles.månedRad}>
-    <Table.DataCell className={styles.månedAktivitet}>
-      <BodyShort size="small">{lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, alleKodeverk)}</BodyShort>
+    <Table.DataCell textSize="small" className={styles.månedAktivitet}>
+      {lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, alleKodeverk)}
     </Table.DataCell>
-    <Table.DataCell className={styles.månedInntekt}>
-      <BodyShort size="small">{formatCurrencyNoKr(inntekt.inntekt)}</BodyShort>
+    <Table.DataCell textSize="small" className={styles.månedInntekt}>
+      <BeløpLabel beløp={inntekt.inntekt} />
     </Table.DataCell>
   </Table.Row>
 );
 const SummeringsRad = ({ inntekter }: { inntekter: BesteberegningInntekt[] }): ReactElement => (
   <Table.Row key="sum">
-    <Table.DataCell>
-      <Label size="small">
-        <FormattedMessage id="Inntekttabell.Sum" />
-      </Label>
-    </Table.DataCell>
-    <Table.DataCell>
-      <Label size="small">
-        {formatCurrencyNoKr(inntekter.map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0))}
-      </Label>
-    </Table.DataCell>
+    <Table.HeaderCell textSize="small">
+      <FormattedMessage id="Inntekttabell.Sum" />
+    </Table.HeaderCell>
+    <Table.HeaderCell textSize="small">
+      <BeløpLabel beløp={inntekter.map(({ inntekt }) => inntekt).reduce((i1, i2) => i1 + i2, 0)} />
+    </Table.HeaderCell>
   </Table.Row>
 );
 
@@ -178,7 +168,7 @@ export const BesteMånederVisningPanel = ({ besteMåneder, arbeidsgiverOpplysnin
       <Label size="small">
         <FormattedMessage
           id="Inntekttabell.BeregnetÅrsinntekt"
-          values={{ inntekt: formatCurrencyNoKr(finnÅrsinntekt(besteMåneder)) }}
+          values={{ inntekt: <BeløpLabel beløp={finnÅrsinntekt(besteMåneder)} /> }}
         />
       </Label>
     </VStack>

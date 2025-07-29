@@ -6,7 +6,7 @@ import * as stories from './ReservasjonerTabell.stories';
 
 const { ViseAtIngenReservasjonerBleFunnet, VisTabellMedReservasjoner } = composeStories(stories);
 
-describe('<ReservasjonerTabell>', () => {
+describe('ReservasjonerTabell', () => {
   it('skal vise tekst som viser at ingen reservasjoner er lagt til', async () => {
     await applyRequestHandlers(ViseAtIngenReservasjonerBleFunnet.parameters['msw']);
     render(<ViseAtIngenReservasjonerBleFunnet />);

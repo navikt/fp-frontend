@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
-import { Form, TextAreaField } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
@@ -122,10 +122,7 @@ export const InnsynVedtakForm = ({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const documents = useMemo(
-    () => getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter),
-    [alleDokumenter, innsynDokumenter],
-  );
+  const documents = getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter);
 
   const apVurderInnsynBegrunnelse =
     aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
@@ -135,7 +132,7 @@ export const InnsynVedtakForm = ({
   const previewBrev = getPreviewCallback(previewCallback, begrunnelse);
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -161,8 +158,9 @@ export const InnsynVedtakForm = ({
           </BodyShort>
         </VStack>
         {innsynResultatType !== InnsynResultatType.INNVILGET && (
-          <TextAreaField
+          <RhfTextarea
             name="begrunnelse"
+            control={formMethods.control}
             label={intl.formatMessage({ id: 'InnsynVedtakForm.Fritekst' })}
             validate={[minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
@@ -206,6 +204,6 @@ export const InnsynVedtakForm = ({
           </Link>
         </HStack>
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

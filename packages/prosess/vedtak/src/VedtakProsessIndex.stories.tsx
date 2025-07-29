@@ -1,11 +1,12 @@
 import { type ComponentProps, useState } from 'react';
 
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
+  Avslagsarsak,
   BehandlingArsakType,
   BehandlingResultatType,
   BehandlingStatus,
@@ -175,7 +176,6 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
       ...defaultBehandling,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
-        avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
@@ -778,7 +778,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
-        avslagsarsak: '1007',
+        avslagsarsak: Avslagsarsak.MANN_ADOPTERER_IKKE_ALENE,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,

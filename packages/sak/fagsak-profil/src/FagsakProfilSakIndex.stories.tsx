@@ -1,8 +1,8 @@
-import { action } from '@storybook/addon-actions';
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { FagsakStatus, FagsakYtelseType, KodeverkType } from '@navikt/fp-kodeverk';
+import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import { FagsakProfilSakIndex } from './FagsakProfilSakIndex';
 
@@ -28,11 +28,11 @@ export const Default: Story = {
     saksnummer: '232341251',
     fagsakYtelseType: {
       kode: FagsakYtelseType.FORELDREPENGER,
-      kodeverk: KodeverkType.FAGSAK_YTELSE,
+      kodeverk: 'FAGSAK_YTELSE_TYPE',
       navn: 'Foreldrepenger',
     },
     fagsakMarkeringTekster: ['Næring', 'Utland'],
-    fagsakStatus: { kode: FagsakStatus.OPPRETTET, kodeverk: KodeverkType.FAGSAK_STATUS, navn: 'Opprettet' },
+    fagsakStatus: { kode: FagsakStatus.OPPRETTET, kodeverk: 'FAGSAK_STATUS', navn: 'Opprettet' },
     dekningsgrad: 100,
     toggleSideMeny: action('button-click'),
     visSideMeny: true,

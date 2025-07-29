@@ -3,15 +3,18 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
-import { CheckboxField, Form, SelectField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
 
-const createOptions = (bt: KodeverkMedNavn, enabledBehandlingstyper: KodeverkMedNavn[]): ReactElement => {
+const createOptions = (
+  bt: KodeverkMedNavn<'BehandlingType'>,
+  enabledBehandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
+): ReactElement => {
   const isEnabled = enabledBehandlingstyper.some(b => b.kode === bt.kode);
   return <option key={bt.kode} value={bt.kode} disabled={!isEnabled}>{` ${bt.navn} `}</option>;
 };
@@ -59,18 +62,18 @@ const TilbakekrevingRevurderingArsaker = [
 
 const getBehandlingAarsaker = (
   ytelseType: string,
-  alleRevurderingArsaker: KodeverkMedNavn[],
-  alleTilbakekrevingRevurderingArsaker: KodeverkMedNavn[],
   valgtBehandlingType?: string,
-): KodeverkMedNavn[] => {
-  if (valgtBehandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
+  alleRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[],
+  alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[],
+): KodeverkMedNavn<'BehandlingÅrsakType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[] => {
+  if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
     return TilbakekrevingRevurderingArsaker.flatMap(ar => {
       const arsak = alleTilbakekrevingRevurderingArsaker.find(el => el.kode === ar);
       return arsak ? [arsak] : [];
     });
   }
 
-  if (valgtBehandlingType === BehandlingType.REVURDERING) {
+  if (alleRevurderingArsaker && valgtBehandlingType === BehandlingType.REVURDERING) {
     const isForeldrepenger = ytelseType === FagsakYtelseType.FORELDREPENGER;
     const isSvangerskap = ytelseType === FagsakYtelseType.SVANGERSKAPSPENGER;
     let manuelleRevurderingsArsaker = isForeldrepenger ? manuelleRevurderingsArsakerFP : manuelleRevurderingsArsakerES;
@@ -85,11 +88,12 @@ const getBehandlingAarsaker = (
   return [];
 };
 
-const getBehandlingTyper = (behandlingstyper: KodeverkMedNavn[]): KodeverkMedNavn[] =>
-  [...behandlingstyper].sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn));
+const getBehandlingTyper = (
+  behandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
+): KodeverkMedNavn<'BehandlingType'>[] => [...behandlingstyper].sort((bt1, bt2) => bt1.navn.localeCompare(bt2.navn));
 
 const getEnabledBehandlingstyper = (
-  behandlingstyper: KodeverkMedNavn[],
+  behandlingstyper: KodeverkMedNavn<'BehandlingType'>[],
   behandlingOppretting: BehandlingOppretting[],
   kanTilbakekrevingOpprettes = {
     kanBehandlingOpprettes: false,
@@ -127,9 +131,9 @@ interface Props {
     } & FormValues,
   ) => void;
   behandlingOppretting: BehandlingOppretting[];
-  behandlingstyper: KodeverkMedNavn[];
-  tilbakekrevingRevurderingArsaker: KodeverkMedNavn[];
-  revurderingArsaker: KodeverkMedNavn[];
+  behandlingstyper: KodeverkMedNavn<'BehandlingType'>[];
+  tilbakekrevingRevurderingArsaker?: KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[];
+  revurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[];
   kanTilbakekrevingOpprettes: {
     kanBehandlingOpprettes: boolean;
     kanRevurderingOpprettes: boolean;
@@ -175,13 +179,13 @@ export const NyBehandlingModal = ({
   );
   const behandlingArsakTyper = getBehandlingAarsaker(
     ytelseType,
+    valgtBehandlingTypeKode,
     revurderingArsaker,
     tilbakekrevingRevurderingArsaker,
-    valgtBehandlingTypeKode,
   );
 
   return (
-    <Form formMethods={formMethods} onSubmit={onSubmit}>
+    <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
       <Modal
         className={styles.modal}
         open
@@ -195,22 +199,25 @@ export const NyBehandlingModal = ({
         </Modal.Header>
         <Modal.Body>
           <VStack gap="4">
-            <SelectField
+            <RhfSelect
               name="behandlingType"
+              control={formMethods.control}
               label=""
               validate={[required]}
               selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
               className={styles.typeBredde}
             />
             {valgtBehandlingTypeKode === BehandlingType.FORSTEGANGSSOKNAD && (
-              <CheckboxField
+              <RhfCheckbox
                 name="nyBehandlingEtterKlage"
+                control={formMethods.control}
                 label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.NyBehandlingEtterKlage' })}
               />
             )}
             {behandlingArsakTyper.length > 0 && (
-              <SelectField
+              <RhfSelect
                 name="behandlingArsakType"
+                control={formMethods.control}
                 label=""
                 hideLabel
                 validate={[required]}
@@ -233,6 +240,6 @@ export const NyBehandlingModal = ({
           </Button>
         </Modal.Footer>
       </Modal>
-    </Form>
+    </RhfForm>
   );
 };

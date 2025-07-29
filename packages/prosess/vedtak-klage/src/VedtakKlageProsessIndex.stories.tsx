@@ -1,12 +1,14 @@
 import { type ComponentProps } from 'react';
 
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
+import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
   BehandlingResultatType,
+  KlageAvvistÅrsak,
+  KlageMedholdÅrsak,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
@@ -53,13 +55,13 @@ export const VedtakspanelDerKlageErVurdertAvNk: Story = {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
         klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
-        klageMedholdArsak: 'PROSESSUELL_FEIL',
+        klageMedholdArsak: KlageMedholdÅrsak.PROSESSUELL_FEIL,
         fritekstTilBrev: 'test',
       },
       klageFormkravResultatKA: {
-        avvistArsaker: ['IKKE_KONKRET'],
-      } as KlageVurdering['klageFormkravResultatKA'],
-    },
+        avvistArsaker: [KlageAvvistÅrsak.IKKE_KONKRET],
+      },
+    } as KlageVurdering,
   },
 };
 
@@ -69,12 +71,12 @@ export const VedtakspanelDerKlageErVurdertAvNfp: Story = {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NFP',
         klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
-        klageMedholdArsak: 'PROSESSUELL_FEIL',
+        klageMedholdArsak: KlageMedholdÅrsak.PROSESSUELL_FEIL,
         fritekstTilBrev: 'test',
       },
       klageFormkravResultatKA: {
-        avvistArsaker: ['IKKE_KONKRET'],
-      } as KlageVurdering['klageFormkravResultatKA'],
-    },
+        avvistArsaker: [KlageAvvistÅrsak.IKKE_KONKRET],
+      },
+    } as KlageVurdering,
   },
 };

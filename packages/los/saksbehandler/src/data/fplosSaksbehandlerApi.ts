@@ -1,7 +1,7 @@
 import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
-import type { Oppgave, OppgaveStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
+import type { Oppgave, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import type { AlleKodeverkLos, FagsakEnkel } from '@navikt/fp-types';
 
 import type { Driftsmelding } from '../typer/driftsmeldingTsType';
@@ -24,7 +24,7 @@ const kyExtended = ky.extend({
 
 //MÅ være en gyldig URL for at KY skal fungere i test
 const isTest = import.meta.env.MODE === 'test';
-const wrapUrl = (url: string) => (isTest ? `http://www.test.com${url}` : url);
+const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrl = {
   KODEVERK_LOS: wrapUrl('fplos/api/kodeverk'),
@@ -54,7 +54,7 @@ export const getBehandlingskøOppgaveAntall = (sakslisteId: number) =>
   kyExtended.get(LosUrl.BEHANDLINGSKO_OPPGAVE_ANTALL, { searchParams: { sakslisteId } }).json<number>();
 
 export const getReservasjonsstatus = (oppgaveId: number) =>
-  kyExtended.get(LosUrl.HENT_RESERVASJONSSTATUS, { searchParams: { oppgaveId } }).json<OppgaveStatus>();
+  kyExtended.get(LosUrl.HENT_RESERVASJONSSTATUS, { searchParams: { oppgaveId } }).json<ReservasjonStatus>();
 
 export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: string) =>
   kyExtended.get<Oppgave[]>(LosUrl.OPPGAVER_TIL_BEHANDLING, {
@@ -131,7 +131,7 @@ export const flyttReservasjonPost = (oppgaveId: number, brukerIdent: string, beg
   kyExtended.post(LosUrl.FLYTT_RESERVASJON, { json: { oppgaveId, brukerIdent, begrunnelse } }).json<Oppgave[]>();
 
 export const reserverOppgavePost = (oppgaveId: number) =>
-  kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<OppgaveStatus>();
+  kyExtended.post(LosUrl.RESERVER_OPPGAVE, { json: { oppgaveId } }).json<ReservasjonStatus>();
 
 export const flyttReservasjonSaksbehandlerSøkPost = (brukerIdent: string) =>
   kyExtended.post(LosUrl.FLYTT_RESERVASJON_SAKSBEHANDLER_SOK, { json: { brukerIdent } }).json<SaksbehandlerProfil>();

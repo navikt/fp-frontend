@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { CheckboxField, Form } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
@@ -12,22 +12,8 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
-export const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
-  const apErLøst = aksjonspunkt.status === AksjonspunktStatus.UTFORT;
-  return {
-    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-    besteberegningErKorrektValg: apErLøst ? true : undefined,
-  };
-};
-
-export const transformValues = (values: FormValues): ManuellKontrollBesteberegningAP => ({
-  kode: AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
-  begrunnelse: values.begrunnelse,
-  besteberegningErKorrekt: !!values.besteberegningErKorrektValg,
-});
-
-export type FormValues = {
-  begrunnelse?: string;
+type FormValues = {
+  begrunnelse: string | undefined;
   besteberegningErKorrektValg?: boolean;
 };
 
@@ -64,19 +50,21 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
           ]}
         </AksjonspunktHelpTextHTML>
       )}
-      <Form
+      <RhfForm
         formMethods={formMethods}
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="4">
-          <CheckboxField
+          <RhfCheckbox
             name="besteberegningErKorrektValg"
+            control={formMethods.control}
             label={<FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.Radiotekst" />}
             readOnly={readOnly}
             onChange={() => setErKnappEnabled(!erKnappEnabled)}
           />
           <FaktaBegrunnelseTextField
+            control={formMethods.control}
             isSubmittable={submittable}
             isReadOnly={readOnly}
             hasBegrunnelse={!!begrunnelse}
@@ -89,7 +77,21 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
             isReadOnly={readOnly}
           />
         </VStack>
-      </Form>
+      </RhfForm>
     </VStack>
   );
 };
+
+const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
+  const apErLøst = aksjonspunkt.status === AksjonspunktStatus.UTFORT;
+  return {
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
+    besteberegningErKorrektValg: apErLøst ? true : undefined,
+  };
+};
+
+const transformValues = (values: FormValues): ManuellKontrollBesteberegningAP => ({
+  kode: AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+  begrunnelse: values.begrunnelse,
+  besteberegningErKorrekt: !!values.besteberegningErKorrektValg,
+});

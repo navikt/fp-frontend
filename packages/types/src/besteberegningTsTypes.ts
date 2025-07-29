@@ -1,3 +1,5 @@
+import type { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+
 export type Månedsgrunnlag = Readonly<{
   fom: string;
   tom: string;
@@ -7,7 +9,7 @@ export type Månedsgrunnlag = Readonly<{
 export type BesteberegningInntekt = Readonly<{
   arbeidsgiverId?: string;
   arbeidsforholdId?: string;
-  opptjeningAktivitetType: string;
+  opptjeningAktivitetType: OpptjeningAktivitetType;
   inntekt: number;
 }>;
 

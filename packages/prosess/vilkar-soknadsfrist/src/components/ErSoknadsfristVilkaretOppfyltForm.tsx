@@ -1,22 +1,14 @@
-import { useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Box, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { Form, RadioGroupPanel } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  KodeverkType,
-  SoknadType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, SoknadType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -64,7 +56,7 @@ const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | un
   return familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato;
 };
 
-export const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
   erVilkarOk:
     aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : VilkarUtfallType.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
@@ -99,25 +91,22 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
   const { aksjonspunkterForPanel, behandling, isReadOnly, submitCallback, alleKodeverk } =
     usePanelDataContext<SoknadsfristAp>();
 
-  const initialValues = useMemo(
-    () => buildInitialValues(aksjonspunkterForPanel, status),
-    [aksjonspunkterForPanel, status],
-  );
+  const initialValues = buildInitialValues(aksjonspunkterForPanel, status);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const dato = useMemo(() => findDate(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
-  const textCode = useMemo(() => findTextCode(soknad, gjeldendeFamiliehendelse), [soknad, gjeldendeFamiliehendelse]);
+  const dato = findDate(soknad, gjeldendeFamiliehendelse);
+  const textCode = findTextCode(soknad, gjeldendeFamiliehendelse);
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
 
   return (
-    <Form
+    <RhfForm
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
@@ -171,8 +160,9 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
             <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
           </VStack>
         </HStack>
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="erVilkarOk"
+          control={formMethods.control}
           validate={[required]}
           isReadOnly={isReadOnly}
           isHorizontal
@@ -190,7 +180,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
         />
         {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
           <BodyShort size="small">
-            {alleKodeverk[KodeverkType.AVSLAGSARSAK][VilkarType.SOKNADFRISTVILKARET].find(
+            {alleKodeverk['Avslagsårsak'][VilkarType.SOKNADFRISTVILKARET].find(
               type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
             )?.navn ?? ''}
           </BodyShort>
@@ -203,6 +193,6 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
           isDirty={formMethods.formState.isDirty}
         />
       </VStack>
-    </Form>
+    </RhfForm>
   );
 };

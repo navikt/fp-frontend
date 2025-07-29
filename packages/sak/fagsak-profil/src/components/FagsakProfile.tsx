@@ -17,8 +17,8 @@ const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean =>
 
 interface Props {
   saksnummer: string;
-  fagsakYtelseType: KodeverkMedNavn;
-  fagsakStatus: KodeverkMedNavn;
+  fagsakYtelseType: KodeverkMedNavn<'FagsakYtelseType'>;
+  fagsakStatus: KodeverkMedNavn<'FagsakStatus'>;
   dekningsgrad?: number;
   fagsakMarkeringTekster?: string[];
   toggleSideMeny: () => void;
@@ -41,7 +41,8 @@ export const FagsakProfile = ({
 }: Props) => {
   const intl = useIntl();
   const isWrappedUnder = useMediaQuery({ maxWidth: 1408 });
-  const sorterteFagsakMarkeringer = fagsakMarkeringTekster?.sort() ?? [];
+  const sorterteFagsakMarkeringer =
+    fagsakMarkeringTekster?.toSorted((markering1, markering2) => markering1.localeCompare(markering2)) ?? [];
   return (
     <VStack gap="4">
       <HStack gap="4">

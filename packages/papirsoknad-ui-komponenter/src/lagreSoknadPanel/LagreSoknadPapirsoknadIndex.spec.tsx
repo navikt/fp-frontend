@@ -7,7 +7,7 @@ import * as stories from './LagreSoknadPapirsoknadIndex.stories';
 
 const { Default } = composeStories(stories);
 
-describe('<LagreSoknadPapirsoknadIndex>', () => {
+describe('LagreSoknadPapirsoknadIndex', () => {
   it('skal bekrefte opplysninger', async () => {
     const lagre = vi.fn();
 

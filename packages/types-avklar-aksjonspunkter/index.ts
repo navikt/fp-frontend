@@ -13,8 +13,8 @@ export type { BekreftErMedlemVurderingAp } from './src/fakta/BekreftErMedlemVurd
 export type { BekreftOppholdsrettVurderingAp } from './src/fakta/BekreftOppholdsrettVurderingAp';
 export type { BekreftLovligOppholdVurderingAp } from './src/fakta/BekreftLovligOppholdVurderingAp';
 export type { AvklarFortsattMedlemskapAp } from './src/fakta/AvklarFortsattMedlemskapAp';
-export type { BekreftTerminbekreftelseAp } from './src/fakta/BekreftTerminbekreftelseAp';
-export type { SjekkManglendeFodselAp } from './src/fakta/SjekkManglendeFodselAp';
+export type { SjekkTerminbekreftelseAp } from './src/fakta/SjekkTerminbekreftelseAp';
+export type { SjekkManglendeFødselAp } from './src/fakta/SjekkManglendeFødselAp';
 export type { AvklarAnnenforelderHarRettAp } from './src/fakta/AvklarAnnenforelderHarRettAp';
 export type { BekreftUttaksperioderAp } from './src/fakta/BekreftUttaksperioderAp';
 export type { VurderArbeidsforholdPermisjonAp } from './src/fakta/VurderArbeidsforholdPermisjonAp';
@@ -37,7 +37,6 @@ export type { OverstyringSokersOpplysingspliktAp } from './src/prosess/Overstyri
 export type { AvklarOpptjeningsvilkaretAp } from './src/prosess/AvklarOpptjeningsvilkaretAp';
 export type { OmsorgsvilkarAp } from './src/prosess/OmsorgsvilkarAp';
 export type { VurdereYtelseSammeBarnSokerAp } from './src/prosess/VurdereYtelseSammeBarnSokerAp';
-export type { VurdereYtelseSammeBarnAnnenForelderAp } from './src/prosess/VurdereYtelseSammeBarnAnnenForelderAp';
 export type { Foreldreansvarsvilkar1Ap } from './src/prosess/Foreldreansvarsvilkar1Ap';
 export type { Foreldreansvarsvilkar2Ap } from './src/prosess/Foreldreansvarsvilkar2Ap';
 export type { ForeslaVedtakAp } from './src/prosess/ForeslaVedtakAp';

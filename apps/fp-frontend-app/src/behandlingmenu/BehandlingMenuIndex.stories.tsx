@@ -1,8 +1,8 @@
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
-import { action } from '@storybook/addon-actions';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse } from 'msw';
+import { action } from 'storybook/actions';
 
 import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
@@ -16,8 +16,7 @@ import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navik
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
-import { initFetchFptilbake } from '../../.storybook/testdata/initFetchFptilbake';
+import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingMenuIndex } from './BehandlingMenuIndex';
@@ -27,13 +26,15 @@ import messages from '../../i18n/nb_NO.json';
 const withIntl = getIntlDecorator(messages);
 
 const getHref = (rel: string) =>
-  wrapUrl(
-    notEmpty(
-      initFetchFpsak.links.find(link => link.rel === rel) ??
-        initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
-        initFetchFptilbake.links.find(link => link.rel === rel) ??
-        initFetchFptilbake.sakLinks.find(link => link.rel === rel),
-    ).href,
+  cleanUrl(
+    wrapUrl(
+      notEmpty(
+        initFetchFpsak.links.find(link => link.rel === rel) ??
+          initFetchFpsak.sakLinks.find(link => link.rel === rel) ??
+          initFetchFptilbake.links.find(link => link.rel === rel) ??
+          initFetchFptilbake.sakLinks.find(link => link.rel === rel),
+      ).href,
+    ),
   );
 
 const BEHANDLING_TILLATTE_OPERASJONER = {

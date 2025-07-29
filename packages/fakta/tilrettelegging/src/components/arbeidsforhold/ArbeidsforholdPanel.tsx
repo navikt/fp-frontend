@@ -2,7 +2,7 @@ import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Label, VStack } from '@navikt/ds-react';
-import { CheckboxField, Datepicker } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { DDMMYYYY_DATE_FORMAT } from '@navikt/ft-utils';
@@ -72,7 +72,7 @@ export const ArbeidsforholdPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { getValues, watch, setValue } = useFormContext<TilretteleggingFormValues>();
+  const { getValues, watch, setValue, control } = useFormContext<TilretteleggingFormValues>();
 
   const tilretteleggingBehovFom = watch(`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`);
 
@@ -111,14 +111,16 @@ export const ArbeidsforholdPanel = ({
           {[<FormattedMessage id="TilretteleggingFaktaForm.UndersokNarmere" key="svangerskapspengerAp" />]}
         </AksjonspunktHelpTextHTML>
       )}
-      <CheckboxField
-        readOnly={readOnly}
+      <RhfCheckbox
         name={`arbeidsforhold.${arbeidsforholdIndex}.skalBrukes`}
+        control={control}
+        readOnly={readOnly}
         label={<FormattedMessage id="TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold" />}
       />
       <VStack gap="8">
-        <Datepicker
+        <RhfDatepicker
           name={`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`}
+          control={control}
           label={intl.formatMessage({
             id: 'TilretteleggingForArbeidsgiverPanel.DatoForTilrettelegging',
           })}

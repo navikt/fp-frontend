@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
-import { http, HttpResponse } from 'msw';
+import { cleanUrl, http, HttpResponse } from 'msw';
 
 import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -11,12 +11,11 @@ import type { Aktor, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak } from '../../.storybook/testdata/initFetchFpsak';
-import { initFetchFptilbake } from '../../.storybook/testdata/initFetchFptilbake';
+import { initFetchFpsak, initFetchFptilbake } from '../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { AktørIndex } from './AktørIndex';
 
-const getHref = (rel: string) => wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href);
+const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
 const PERSON: Person = {
   navn: 'Espen Utvikler',
@@ -55,6 +54,9 @@ const meta = {
   title: 'app/AktørIndex',
   decorators: [withQueryClient],
   component: AktørIndex,
+  parameters: {
+    layout: 'fullscreen',
+  },
   render: () => {
     //Må hente data til cache før testa komponent blir kalla
     const { status } = useQuery(initFetchOptions());

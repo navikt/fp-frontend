@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { RawIntlProvider } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
-import { Datepicker, RadioGroupPanel, SelectField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -20,7 +20,7 @@ import messages from '../../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  avslagsarsaker: KodeverkMedNavn[];
+  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
   readOnly: boolean;
   ytelse: string;
   erForutgående: boolean;
@@ -28,7 +28,7 @@ interface Props {
 }
 
 export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForutgående, erRevurdering }: Props) => {
-  const { watch } = useFormContext<VurderMedlemskapFormValues>();
+  const { watch, control } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');
 
@@ -39,8 +39,9 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
   return (
     <RawIntlProvider value={intl}>
       <VStack gap={readOnly ? '2' : '6'}>
-        <RadioGroupPanel
+        <RhfRadioGroup
           name="vurdering"
+          control={control}
           label={
             readOnly ? intl.formatMessage({ id: 'VurderMedlemsskapAksjonspunktForm.VurderingLabel.ReadOnly' }) : label
           }
@@ -49,8 +50,9 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
           radios={lagVurderingsAlternativer(ytelse, erForutgående, erRevurdering)}
         />
         {vurdering && [MedlemskapVurdering.DELVIS_OPPFYLT, MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) && (
-          <SelectField
+          <RhfSelect
             name="avslagskode"
+            control={control}
             label={intl.formatMessage({
               id: readOnly
                 ? 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly'
@@ -66,8 +68,9 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
           />
         )}
         {!erForutgående && vurdering === MedlemskapVurdering.DELVIS_OPPFYLT && (
-          <Datepicker
+          <RhfDatepicker
             name="opphørFom"
+            control={control}
             label={intl.formatMessage({
               id: readOnly
                 ? 'VurderMedlemsskapAksjonspunktForm.OpphorFomLabel.ReadOnly'
@@ -81,8 +84,9 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
           vurdering &&
           [MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) &&
           avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE && (
-            <Datepicker
+            <RhfDatepicker
               name="medlemFom"
+              control={control}
               label={intl.formatMessage({
                 id: readOnly
                   ? 'VurderMedlemsskapAksjonspunktForm.MedlemFomLabel.ReadOnly'

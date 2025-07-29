@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktStatus, KodeverkType } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { type AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
 import type { AksessRettigheter, Behandling, BehandlingAppKontekst, Fagsak, NavAnsatt } from '@navikt/fp-types';
 import { notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
@@ -65,7 +65,7 @@ export const RisikoklassifiseringIndex = ({ fagsakData, behandling, setBehandlin
       isPanelOpen={isRiskPanelOpen}
       readOnly
       toggleRiskPanel={toggleRiskPanel}
-      faresignalVurderinger={notEmpty(alleKodeverk)[KodeverkType.FARESIGNAL_VURDERING]}
+      faresignalVurderinger={notEmpty(alleKodeverk)['FaresignalVurdering']}
     />
   );
 };
@@ -133,7 +133,7 @@ const RisikoklassifiseringBehandling = ({
       readOnly={readOnly}
       submitAksjonspunkt={lagreRisikoklassifiseringAksjonspunkt}
       toggleRiskPanel={toggleRiskPanel}
-      faresignalVurderinger={notEmpty(alleKodeverk)[KodeverkType.FARESIGNAL_VURDERING]}
+      faresignalVurderinger={notEmpty(alleKodeverk)['FaresignalVurdering']}
     />
   );
 };

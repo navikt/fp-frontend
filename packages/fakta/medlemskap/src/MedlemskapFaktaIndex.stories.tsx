@@ -3,15 +3,21 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AdresseType, AksjonspunktKode, AksjonspunktStatus, PersonstatusType, Region } from '@navikt/fp-kodeverk';
+import {
+  AdresseType,
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  MedlemskapDekningType,
+  MedlemskapManuellVurderingType,
+  MedlemskapType,
+  OppholdstillatelseType,
+  PersonstatusType,
+  Region,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Medlemskap, MedlemskapAvvik, type Soknad } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
-
-import '@navikt/ds-css';
-import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const defaultSoknad = {
   oppgittTilknytning: {
@@ -64,7 +70,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
     {
       fom: '2021-10-13',
       tom: '2024-01-13',
-      type: 'PERMANENT',
+      type: OppholdstillatelseType.PERMANENT,
     },
   ],
   medlemskapsperioder: [
@@ -74,8 +80,8 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       erMedlem: false,
       lovvalgsland: 'Finland',
       studieland: null,
-      medlemskapType: 'AVKLARES',
-      dekningType: 'OPPHOR',
+      medlemskapType: MedlemskapType.AVKLARES,
+      dekningType: MedlemskapDekningType.OPPHOR,
       beslutningsdato: '2020-02-01',
     },
 
@@ -85,8 +91,8 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       erMedlem: true,
       lovvalgsland: 'Norge',
       studieland: 'Sverige',
-      medlemskapType: 'ENDELIG',
-      dekningType: 'FULL',
+      medlemskapType: MedlemskapType.ENDELIG,
+      dekningType: MedlemskapDekningType.FULL,
       beslutningsdato: '2024-09-24',
     },
   ],
@@ -249,8 +255,8 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
       medlemskapsperioder: [],
       oppholdstillatelser: [],
       utenlandsopphold: [],
-      personstatuser: [{ fom: '2022-09-01', tom: TIDENES_ENDE, type: 'BOSA' }],
-      regioner: [{ fom: '1971-09-17', tom: TIDENES_ENDE, type: 'NORDEN' }],
+      personstatuser: [{ fom: '2022-09-01', tom: TIDENES_ENDE, type: PersonstatusType.BOSATT }],
+      regioner: [{ fom: '1971-09-17', tom: TIDENES_ENDE, type: Region.NORDEN }],
     }),
     soknad: {
       oppgittTilknytning: {
@@ -328,7 +334,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
           },
           {
             vurderingsdato: '2019-05-23',
-            medlemskapManuellVurderingType: 'MEDLEM',
+            medlemskapManuellVurderingType: MedlemskapManuellVurderingType.MEDLEM,
             begrunnelse: 'Søker er medlem jaja',
           },
         ],

@@ -10,16 +10,11 @@ import {
   BehandlingStatus,
   BehandlingType,
   FagsakYtelseType,
-  KodeverkType,
-  VurderPaNyttArsakType,
+  SkjermlenkeType,
+  VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
-import type {
-  AlleKodeverk,
-  AlleKodeverkTilbakekreving,
-  BehandlingAppKontekst,
-  KodeverkMedNavn,
-} from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { type AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';
@@ -40,30 +35,27 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
 const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
   const arsaker = [];
   if (apData.feilFakta) {
-    arsaker.push(VurderPaNyttArsakType.FEIL_FAKTA);
+    arsaker.push(VurderÅrsak.FEIL_FAKTA);
   }
   if (apData.feilLov) {
-    arsaker.push(VurderPaNyttArsakType.FEIL_LOV);
+    arsaker.push(VurderÅrsak.FEIL_LOV);
   }
   if (apData.feilSkjønn) {
-    arsaker.push(VurderPaNyttArsakType.SKJØNN);
+    arsaker.push(VurderÅrsak.SKJØNN);
   }
   if (apData.feilUtredning) {
-    arsaker.push(VurderPaNyttArsakType.UTREDNING);
+    arsaker.push(VurderÅrsak.UTREDNING);
   }
   if (apData.feilSaksflyt) {
-    arsaker.push(VurderPaNyttArsakType.SAKSFLYT);
+    arsaker.push(VurderÅrsak.SAKSFLYT);
   }
   if (apData.feilBegrunnelse) {
-    arsaker.push(VurderPaNyttArsakType.BEGRUNNELSE);
+    arsaker.push(VurderÅrsak.BEGRUNNELSE);
   }
   return arsaker;
 };
-const TOMT_KODEVERK = [] as KodeverkMedNavn[];
 const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving) =>
-  KodeverkType.FAKTA_OM_BEREGNING_TILFELLE in alleKodeverk
-    ? (alleKodeverk as AlleKodeverk)[KodeverkType.FAKTA_OM_BEREGNING_TILFELLE]
-    : TOMT_KODEVERK;
+  'FaktaOmBeregningTilfelle' in alleKodeverk ? alleKodeverk['FaktaOmBeregningTilfelle'] : [];
 
 export type ApData = {
   fatterVedtakAksjonspunktDto: {
@@ -75,12 +67,15 @@ export type ApData = {
 interface Props {
   behandling: BehandlingAppKontekst;
   location: Location;
-  fagsakYtelseType: string;
+  fagsakYtelseType: FagsakYtelseType;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   readOnly: boolean;
   onSubmit: (data: ApData) => void;
   forhandsvisVedtaksbrev: () => void;
-  createLocationForSkjermlenke: (behandlingLocation: Location, skjermlenkeCode: string) => Location | undefined;
+  createLocationForSkjermlenke: (
+    behandlingLocation: Location,
+    skjermlenkeCode: SkjermlenkeType,
+  ) => Location | undefined;
   beslutterFormData?: FormValues;
   setBeslutterFormData: (data?: FormValues) => void;
 }
@@ -140,12 +135,12 @@ export const TotrinnskontrollSakIndex = ({
       })
     : behandling.totrinnskontrollÅrsaker;
 
-  const lagLenke = (skjermlenkeCode: string): Location | undefined =>
+  const lagLenke = (skjermlenkeCode: SkjermlenkeType): Location | undefined =>
     createLocationForSkjermlenke(location, skjermlenkeCode);
 
   const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;
-  const skjemalenkeTyper = alleKodeverk[KodeverkType.SKJERMLENKE_TYPE];
-  const vurderArsaker = alleKodeverk[KodeverkType.VURDER_AARSAK];
+  const skjemalenkeTyper = alleKodeverk['SkjermlenkeType'];
+  const vurderArsaker = alleKodeverk['VurderÅrsak'];
   const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);
 
   return (
