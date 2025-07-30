@@ -28,10 +28,7 @@ import type {
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import {
-  type KontrollerFaktaPeriodeMedApMarkering,
-  PeriodeApType,
-} from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { UttakFaktaTable } from './UttakFaktaTable';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
