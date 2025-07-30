@@ -1,8 +1,8 @@
 import { type ReactElement } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { TabsAddIcon } from '@navikt/aksel-icons';
-import { Button, CopyButton, Detail, HStack, Label, Tag, type TagProps, VStack } from '@navikt/ds-react';
+import { ExternalLinkIcon } from '@navikt/aksel-icons';
+import { Button, CopyButton, Detail, HStack, Label, Spacer, Tag, type TagProps, VStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
@@ -10,6 +10,69 @@ import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
 
 import styles from './sakDetaljer.module.css';
+
+type Props = Readonly<{
+  sak: JournalFagsak;
+}>;
+
+/**
+ * SakDetaljer - Inneholder detaljer om en sak som kan knyttes til journalposten
+ */
+export const SakDetaljer = ({ sak }: Props) => {
+  const famTekst = utledFamileihendelsetekst(sak.familieHendelseJf);
+  const intl = useIntl();
+  return (
+    <HStack className={styles.sakContainer} gap="0 4" align="center" wrap={false}>
+      <div>
+        <VStack gap="1">
+          <HStack gap="0 2" align="center">
+            <Label>
+              <FormattedMessage id="Journal.Sak.Ytelse" values={{ ytelseType: sak.ytelseType }} />
+            </Label>
+            <HStack align="center">
+              <Label>{sak.saksnummer}</Label>
+              <CopyButton copyText={sak.saksnummer} variant="action" size="small" />
+            </HStack>
+          </HStack>
+          <VStack gap="2">
+            <HStack gap="2">
+              <Detail>
+                <FormattedMessage
+                  id="Journal.Sak.OpprettetDato"
+                  values={{ br: <br />, opprettetDato: dateFormat(sak.opprettetDato) }}
+                />
+              </Detail>
+              {sak.førsteUttaksdato && (
+                <Detail>
+                  <FormattedMessage
+                    id="Journal.Sak.FørsteUttak"
+                    values={{
+                      br: <br />,
+                      førsteUttak: dateFormat(sak.førsteUttaksdato),
+                    }}
+                  />
+                </Detail>
+              )}
+              {famTekst && <Detail>{famTekst}</Detail>}
+            </HStack>
+            <div>{lagEtikett(sak.status)}</div>
+          </VStack>
+        </VStack>
+      </div>
+
+      <Spacer />
+      <Button
+        as="a"
+        href={velgSakLenke(sak.saksnummer)}
+        target="_blank"
+        rel="noreferrer"
+        variant="tertiary"
+        title={intl.formatMessage({ id: 'DokumentDetaljer.ExternalLink' })}
+        icon={<ExternalLinkIcon className={styles.externalLinkIcon} />}
+      />
+    </HStack>
+  );
+};
 
 const velgSakLenke = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
 
@@ -48,79 +111,15 @@ const utledFamileihendelsetekst = (familieHendelseJf?: FamilieHendelse): ReactEl
     return null;
   }
   const tekstKode = finnFamilieHendelseTekstKode(familieHendelseJf.familihendelseType);
-  return <FormattedMessage id={tekstKode} values={{ famDato: dateFormat(familieHendelseJf.familiehHendelseDato) }} />;
+  return (
+    <FormattedMessage
+      id={tekstKode}
+      values={{ br: <br />, famDato: dateFormat(familieHendelseJf.familiehHendelseDato) }}
+    />
+  );
 };
 
 const lagEtikett = (fagsakStatus: string): ReactElement | null => {
   const props = finnTagProps(fagsakStatus);
   return props ? <Tag {...props} /> : null;
-};
-
-type Props = Readonly<{
-  sak: JournalFagsak;
-}>;
-
-/**
- * SakDetaljer - Inneholder detaljer om en sak som kan knyttes til journalposten
- */
-export const SakDetaljer = ({ sak }: Props) => {
-  const famTekst = utledFamileihendelsetekst(sak.familieHendelseJf);
-
-  return (
-    <div className={styles.sakContainer}>
-      <div className={styles.sakDataFelt}>
-        <VStack gap="1">
-          <HStack gap="3" className={styles.sakRad}>
-            <Label>
-              <FormattedMessage id="Journal.Sak.Ytelse" values={{ ytelseType: sak.ytelseType }} />
-            </Label>
-            <Label>{sak.saksnummer}</Label>
-            <div className={styles.clipBoard}>
-              <CopyButton copyText={sak.saksnummer} variant="action" />
-            </div>
-          </HStack>
-          <VStack gap="2">
-            <HStack gap="2">
-              <div className={styles.datoFelt}>
-                <Detail>
-                  <FormattedMessage
-                    id="Journal.Sak.OpprettetDato"
-                    values={{ opprettetDato: dateFormat(sak.opprettetDato) }}
-                  />
-                </Detail>
-              </div>
-              {sak.førsteUttaksdato && (
-                <div className={styles.datoFelt}>
-                  <Detail>
-                    <FormattedMessage
-                      id="Journal.Sak.FørsteUttak"
-                      values={{ førsteUttak: dateFormat(sak.førsteUttaksdato) }}
-                    />
-                  </Detail>
-                </div>
-              )}
-              {famTekst && (
-                <div className={styles.datoFelt}>
-                  <Detail>{famTekst}</Detail>
-                </div>
-              )}
-            </HStack>
-            <div>{lagEtikett(sak.status)}</div>
-          </VStack>
-        </VStack>
-      </div>
-      <div className={styles.faneFelt}>
-        <div>
-          <Button
-            as="a"
-            href={velgSakLenke(sak.saksnummer)}
-            target="_blank"
-            rel="noreferrer"
-            variant="tertiary"
-            icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
-          />
-        </div>
-      </div>
-    </div>
-  );
 };

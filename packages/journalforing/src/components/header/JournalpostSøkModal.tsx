@@ -1,33 +1,31 @@
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
+import { MagnifyingGlassIcon } from '@navikt/aksel-icons';
+import { BodyShort, Button, Heading, HStack, Modal, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidInteger, minLength, required } from '@navikt/ft-form-validators';
 
-const MIN_LENGTH_9 = minLength(9);
-
-type Formvalues = {
+type FormValues = {
   journalpostId: string;
 };
 
-type Props = Readonly<{
+interface Props {
   hentJournalpost: (journalpostId: string) => void;
   lukkModal: () => void;
   erÅpen: boolean;
   harSøktOgFunnetIngenMatch: boolean;
-}>;
+}
 
 /**
  * JournalpostSøkModal - Modal for å søke etter en journalpost ved ID
  */
 export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harSøktOgFunnetIngenMatch }: Props) => {
-  const intl = useIntl();
   const [lasterJournalpost, setLasterJournalpost] = useState(false);
 
   const formMethods = useForm({
-    defaultValues: {} as Formvalues,
+    defaultValues: {} as FormValues,
   });
 
   return (
@@ -39,32 +37,24 @@ export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harS
       </Modal.Header>
       <Modal.Body>
         <VStack gap="2">
-          <RhfForm<Formvalues>
+          <RhfForm<FormValues>
             formMethods={formMethods}
-            onSubmit={(data: Formvalues) => {
+            onSubmit={(data: FormValues) => {
               setLasterJournalpost(true);
               hentJournalpost(data.journalpostId);
               setLasterJournalpost(false);
             }}
           >
-            <VStack gap="1" justify="start">
-              <Label>
-                <FormattedMessage id="Journalpost.Søk.JournalpostID" />
-              </Label>
-              <BodyShort>
-                <FormattedMessage id="Journalpost.Søk.KunTall" />
-              </BodyShort>
-            </VStack>
-            <HStack gap="2">
+            <HStack gap="2" align="end">
               <RhfTextField
+                description={<FormattedMessage id="Journalpost.Søk.KunTall" />}
+                label={<FormattedMessage id="Journalpost.Søk.JournalpostID" />}
                 name="journalpostId"
                 control={formMethods.control}
-                validate={[required, hasValidInteger, MIN_LENGTH_9]}
+                validate={[required, hasValidInteger, minLength(9)]}
                 size="medium"
-                hideLabel
-                label={intl.formatMessage({ id: 'Journalpost.Søk.JournalpostID' })}
               />
-              <Button size="xsmall" loading={lasterJournalpost}>
+              <Button loading={lasterJournalpost} icon={<MagnifyingGlassIcon aria-hidden />}>
                 <FormattedMessage id="Journalpost.Søk.Finn" />
               </Button>
             </HStack>

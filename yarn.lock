@@ -1915,10 +1915,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -1957,10 +1957,10 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -1995,10 +1995,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2031,10 +2031,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2067,11 +2067,11 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-plattform-komponenter": 9.1.10
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-plattform-komponenter": 9.2.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2101,10 +2101,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2138,8 +2138,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2173,10 +2173,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2210,10 +2210,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2250,10 +2250,10 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2290,10 +2290,10 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2328,10 +2328,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2368,10 +2368,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2408,10 +2408,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2448,10 +2448,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2489,10 +2489,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2530,10 +2530,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2567,10 +2567,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2600,8 +2600,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2712,18 +2712,18 @@ __metadata:
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 11.0.5
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 12.0.5
-    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 5.0.5
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-plattform-komponenter": 9.1.10
-    "@navikt/ft-prosess-beregningsgrunnlag": 10.0.5
-    "@navikt/ft-prosess-tilbakekreving": 6.0.5
-    "@navikt/ft-prosess-tilbakekreving-foreldelse": 6.0.5
-    "@navikt/ft-prosess-tilbakekreving-vedtak": 5.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-fakta-beregning": 11.1.1
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 12.1.1
+    "@navikt/ft-fakta-tilbakekreving-feilutbetaling": 5.1.1
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-plattform-komponenter": 9.2.0
+    "@navikt/ft-prosess-beregningsgrunnlag": 10.1.1
+    "@navikt/ft-prosess-tilbakekreving": 6.1.1
+    "@navikt/ft-prosess-tilbakekreving-foreldelse": 6.1.1
+    "@navikt/ft-prosess-tilbakekreving-vedtak": 5.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@popperjs/core": 2.11.8
     "@sentry/browser": 9.42.0
     "@storybook/addon-a11y": 9.0.18
@@ -2773,10 +2773,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@tanstack/react-query": 5.83.0
@@ -2838,10 +2838,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@tanstack/react-query": 5.83.0
@@ -2883,10 +2883,10 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -2926,10 +2926,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@tanstack/react-query": 5.83.0
@@ -2972,10 +2972,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3010,10 +3010,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:^"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3048,10 +3048,10 @@ __metadata:
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3083,8 +3083,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3115,8 +3115,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3147,8 +3147,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3178,8 +3178,8 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3210,10 +3210,10 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -3244,10 +3244,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3285,10 +3285,10 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3324,10 +3324,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3362,10 +3362,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3401,10 +3401,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3439,10 +3439,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3478,10 +3478,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3518,10 +3518,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3558,10 +3558,10 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3594,8 +3594,8 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3635,11 +3635,11 @@ __metadata:
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-prosess-beregningsgrunnlag": 10.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-prosess-beregningsgrunnlag": 10.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3680,9 +3680,9 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3716,9 +3716,9 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3752,9 +3752,9 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3788,9 +3788,9 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3825,9 +3825,9 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3864,9 +3864,9 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3901,10 +3901,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3939,10 +3939,10 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -3977,9 +3977,9 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4012,9 +4012,9 @@ __metadata:
     "@navikt/fp-sak-visittkort": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-plattform-komponenter": 9.1.10
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-plattform-komponenter": 9.2.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4043,9 +4043,9 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-plattform-komponenter": 9.1.10
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-plattform-komponenter": 9.2.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4078,9 +4078,9 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-konstanter": 3.1.4
-    "@navikt/ft-plattform-komponenter": 9.1.10
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-plattform-komponenter": 9.2.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4111,8 +4111,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4140,8 +4140,8 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4174,8 +4174,8 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-hooks": 2.1.16
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-hooks": 2.2.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4205,7 +4205,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4236,10 +4236,10 @@ __metadata:
     "@navikt/fp-sak-ukjent-adresse": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4271,8 +4271,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4302,10 +4302,10 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4337,10 +4337,10 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4368,8 +4368,8 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4398,10 +4398,10 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4433,8 +4433,8 @@ __metadata:
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4462,11 +4462,11 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-plattform-komponenter": 9.1.10
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-plattform-komponenter": 9.2.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4496,10 +4496,10 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4533,10 +4533,10 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:^"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:^"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4568,10 +4568,10 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4606,13 +4606,13 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils-test": "workspace:*"
-    "@navikt/ft-fakta-beregning": 11.0.5
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 12.0.5
-    "@navikt/ft-form-hooks": 8.0.5
-    "@navikt/ft-form-validators": 4.0.7
-    "@navikt/ft-prosess-beregningsgrunnlag": 10.0.5
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-fakta-beregning": 11.1.1
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 12.1.1
+    "@navikt/ft-form-hooks": 8.1.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-prosess-beregningsgrunnlag": 10.1.1
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4643,8 +4643,8 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4676,8 +4676,8 @@ __metadata:
     "@navikt/fp-kodeverk": "workspace:^"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:^"
-    "@navikt/ft-plattform-komponenter": 9.1.10
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-plattform-komponenter": 9.2.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4702,7 +4702,7 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 8.0.5
+    "@navikt/ft-form-hooks": 8.1.1
     "@tanstack/react-query": 5.83.0
     eslint: 9.32.0
     history: 5.3.0
@@ -4722,9 +4722,9 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-fakta-beregning": 11.0.5
-    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 12.0.5
-    "@navikt/ft-prosess-beregningsgrunnlag": 10.0.5
+    "@navikt/ft-fakta-beregning": 11.1.1
+    "@navikt/ft-fakta-fordel-beregningsgrunnlag": 12.1.1
+    "@navikt/ft-prosess-beregningsgrunnlag": 10.1.1
     typescript: 5.8.3
   languageName: unknown
   linkType: soft
@@ -4767,8 +4767,8 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-types": "workspace:*"
-    "@navikt/ft-ui-komponenter": 4.5.7
-    "@navikt/ft-utils": 3.6.9
+    "@navikt/ft-ui-komponenter": 4.6.0
+    "@navikt/ft-utils": 3.7.0
     "@storybook/react": 9.0.18
     "@storybook/react-vite": 9.0.18
     "@testing-library/dom": 10.4.1
@@ -4821,20 +4821,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/ft-fakta-beregning@npm:11.0.5":
-  version: 11.0.5
-  resolution: "@navikt/ft-fakta-beregning@npm:11.0.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F11.0.5%2Ff5723ab254bdc7ba9a9f1186f67574e39889ac22"
+"@navikt/ft-fakta-beregning@npm:11.1.1":
+  version: 11.1.1
+  resolution: "@navikt/ft-fakta-beregning@npm:11.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-beregning%2F11.1.1%2F8be762c3d1252dcf60cfaa8fd8c06090ac8c89cf"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
     "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-form-hooks": ^8.0.5
-    "@navikt/ft-form-validators": ^4.0.7
-    "@navikt/ft-ui-komponenter": ^4.5.7
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-form-hooks": ^8.1.1
+    "@navikt/ft-form-validators": ^4.1.0
+    "@navikt/ft-ui-komponenter": ^4.6.0
+    "@navikt/ft-utils": ^3.7.0
     core-js: 3.44.0
     dayjs: 1.11.13
-    dayjs-plugin-utc: 0.1.2
     react: 19.1.0
     react-dom: 19.1.0
     react-hook-form: 7.61.1
@@ -4857,28 +4856,26 @@ __metadata:
     react-dom: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 20910da5bd9f1116564d7bdfb502357d77ee84699dc3a5fd22a2ea7ec612233707954f25925581b8ce867ba9488ca1e002867cb7cb99c8ba9c6ed4a8133c852e
+  checksum: 2d6aeadae86165fec9e83ddf6d58c467344229eb0ca03e24eb55b0f67c89f5e495b030f61879bf61749addce1dec7767b8159a8af710ee54d2f9b215a6f1e0bf
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:12.0.5":
-  version: 12.0.5
-  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:12.0.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F12.0.5%2F928fb09fb5c62551b37ca0be0a5fa815b618b7b2"
+"@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:12.1.1":
+  version: 12.1.1
+  resolution: "@navikt/ft-fakta-fordel-beregningsgrunnlag@npm:12.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-fordel-beregningsgrunnlag%2F12.1.1%2F47f0b19d72740fc6e5f83e19b7370733c8f2b2eb"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
     "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-form-hooks": ^8.0.5
-    "@navikt/ft-form-validators": ^4.0.7
-    "@navikt/ft-ui-komponenter": ^4.5.7
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-form-hooks": ^8.1.1
+    "@navikt/ft-form-validators": ^4.1.0
+    "@navikt/ft-ui-komponenter": ^4.6.0
+    "@navikt/ft-utils": ^3.7.0
     classnames: 2.5.1
-    core-js: 3.44.0
     dayjs: 1.11.13
     react: 19.1.0
     react-hook-form: 7.61.1
     react-intl: 7.1.11
-    uuid: 11.1.0
   peerDependencies:
     "@navikt/aksel-icons": 7.x
     "@navikt/ds-css": 7.x
@@ -4897,20 +4894,20 @@ __metadata:
     react-hook-form: 7.x
     react-intl: 6.x
     uuid: 9.0.1
-  checksum: 4bf9cca5b514d5ae79f963915bb43ccf2456f694f9cb4fdfdec574ac3f062f402d6c86105bc122d200668b428886a5a064bae6d20662f5d7a0c5d2dfd8e674f0
+  checksum: 01964c5db8c35afe20b6d9fc20d26dde443a5de9653239c2fa595dfcd912a08e71b4d7780b092305135c5b2f6a8d01ae5e42d5bc2b20f5af2400844090418df0
   languageName: node
   linkType: hard
 
-"@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:5.0.5":
-  version: 5.0.5
-  resolution: "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:5.0.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-tilbakekreving-feilutbetaling%2F5.0.5%2F209c0a68c7625d03d4890c9a15c696ebd043ef2d"
+"@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:5.1.1":
+  version: 5.1.1
+  resolution: "@navikt/ft-fakta-tilbakekreving-feilutbetaling@npm:5.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-fakta-tilbakekreving-feilutbetaling%2F5.1.1%2Fab2f4b268f5030d41f51a6e9b66887e3179c5fc7"
   dependencies:
     "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-form-hooks": ^8.0.5
-    "@navikt/ft-form-validators": ^4.0.7
-    "@navikt/ft-ui-komponenter": ^4.5.7
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-form-hooks": ^8.1.1
+    "@navikt/ft-form-validators": ^4.1.0
+    "@navikt/ft-ui-komponenter": ^4.6.0
+    "@navikt/ft-utils": ^3.7.0
     react: 19.1.0
     react-hook-form: 7.61.1
     react-intl: 7.1.11
@@ -4926,23 +4923,21 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 9f1047886ead839f1738b1672d0e6b919bc93d79b13cc3c2bd9fd4dca35d77af7b419c568032af39d67e5cb3dbaf193bf67a7218732a2277d534d5cf8fb36f05
+  checksum: c632d540584c0243e17c41175b5cd75b240d23edf08be33a9aaebb2945a682b34c36aeb7fc21562c9b165f46629f176771b3d2e64d4de76450d6188e118ad581
   languageName: node
   linkType: hard
 
-"@navikt/ft-form-hooks@npm:8.0.5, @navikt/ft-form-hooks@npm:^8.0.5":
-  version: 8.0.5
-  resolution: "@navikt/ft-form-hooks@npm:8.0.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-hooks%2F8.0.5%2F32ccec240649ba3d3c5eea68a953eb13bfa430e6"
+"@navikt/ft-form-hooks@npm:8.1.1, @navikt/ft-form-hooks@npm:^8.1.1":
+  version: 8.1.1
+  resolution: "@navikt/ft-form-hooks@npm:8.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-hooks%2F8.1.1%2Feb02bfc2e2b98f09e53b82f95a2d23ac04bbd21c"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
     "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-form-validators": ^4.0.7
-    "@navikt/ft-ui-komponenter": ^4.5.7
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-ui-komponenter": ^4.6.0
+    "@navikt/ft-utils": ^3.7.0
     classnames: 2.5.1
     dayjs: 1.11.13
-    lodash.throttle: 4.1.1
     react: 19.1.0
     react-dom: 19.1.0
     react-hook-form: 7.61.1
@@ -4960,29 +4955,29 @@ __metadata:
     react: 19.1.0
     react-dom: 19.1.0
     react-hook-form: 7.x
-  checksum: 2023a68365f4b3577353a8d2c80f5bbf0739181e3d2baa4071fb31c9e6e117e00937cf1ce97bb5a9f17c973a15523c8c0a03bac01edf9abeb49eae0366078aac
+  checksum: abd46fdf066b6de2ac962b491fd64cf2db27e729bfafdc89d2598d13187adea78ff0dd9a98dc81a72fe2b1d4d740d0b26f3a417315f18bd99b1d0bb9bbbbaf8f
   languageName: node
   linkType: hard
 
-"@navikt/ft-form-validators@npm:4.0.7, @navikt/ft-form-validators@npm:^4.0.7":
-  version: 4.0.7
-  resolution: "@navikt/ft-form-validators@npm:4.0.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-validators%2F4.0.7%2F8360434801d26ec3242c73a9ee37e6388c5f3589"
+"@navikt/ft-form-validators@npm:4.1.0, @navikt/ft-form-validators@npm:^4.1.0":
+  version: 4.1.0
+  resolution: "@navikt/ft-form-validators@npm:4.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-validators%2F4.1.0%2Ffa67d8c6d9ec9326517dca02f0b519613c7da474"
   dependencies:
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-utils": ^3.7.0
     dayjs: 1.11.13
   peerDependencies:
     "@navikt/ft-utils": 2.x
     dayjs: 1.11.x
-  checksum: 33471d24e4b4d13f6763c78e22da38400652c6f156332c4436b801e4bf7f1721408f892c346797d6c8a50ad7a98e87621154eef0d23ed3b2d09454a9cd8f5bee
+  checksum: cd1bcc1c50773595a09d59da329a8d62c21b3ee655fc8af5e844a8b8c8f80eefc03576029e0348a7f4f0d29981a209f8f72c53e5bf88d8f70582d883ca175d70
   languageName: node
   linkType: hard
 
-"@navikt/ft-hooks@npm:2.1.16":
-  version: 2.1.16
-  resolution: "@navikt/ft-hooks@npm:2.1.16::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-hooks%2F2.1.16%2Fc50a0cfbc518a6d4bf4c0e76ab9c890181b004bb"
+"@navikt/ft-hooks@npm:2.2.0":
+  version: 2.2.0
+  resolution: "@navikt/ft-hooks@npm:2.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-hooks%2F2.2.0%2Fd1698cfa44c270c6823bea39b75c767f06d51603"
   peerDependencies:
     react: 19.1.0
-  checksum: 0d2337247ee073e28043696f6a4bf2a06581d1709b14ccc68735794fe7a5a12f59e63a1c32b1972857cd19d66c02dd19a61de7577ad5a7d08ee7654a2ea25ce8
+  checksum: e2b7ffbc8ba50461dccf8a1a0b3227be84244ee9fdcb6ccf15ddd551153432759e7f52d7ba2e4c2a06f6f0196a9c84a8f835ec6d486398748c994cac9bec384c
   languageName: node
   linkType: hard
 
@@ -4993,40 +4988,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-plattform-komponenter@npm:9.1.10":
-  version: 9.1.10
-  resolution: "@navikt/ft-plattform-komponenter@npm:9.1.10::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-plattform-komponenter%2F9.1.10%2F3582b571f21d7053ad9160ab1bfc5196fbcd96b2"
+"@navikt/ft-plattform-komponenter@npm:9.2.0":
+  version: 9.2.0
+  resolution: "@navikt/ft-plattform-komponenter@npm:9.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-plattform-komponenter%2F9.2.0%2Fb7209c45c9acf150303555d255f6e0f8fae84120"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
-    "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-utils": ^3.7.0
     classnames: 2.5.1
+    dayjs: 1.11.13
   peerDependencies:
     "@navikt/aksel-icons": 7.x
     "@navikt/ds-css": 7.x
     "@navikt/ds-react": 7.x
     "@popperjs/core": 2.11.8
     classnames: 2.5.1
+    dayjs: 1.11.x
     lodash.throttle: 4.1.1
     prop-types: 15.8.1
     react: 19.1.0
     react-dom: 19.1.0
-  checksum: b9539a083981e1fb19cf968497e10d055e1e16c1243f9b8c17cd5c01c7da0a04066d4f00980ec15738d14b9e36f144c281347049edc452fd0f83824ea112a21a
+  checksum: f0d7ccfdb3b1bdab3f4c1fc4eeeea99077752af64e4f2bbba0a5503dbfda857a07d8e7226421c76a8c4342536ea4b5debffd4d2678980faae303ef089b6e5d2f
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-beregningsgrunnlag@npm:10.0.5":
-  version: 10.0.5
-  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:10.0.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F10.0.5%2F0a947b79bbf8a218e7642ea4b12f7b29ff06fd56"
+"@navikt/ft-prosess-beregningsgrunnlag@npm:10.1.1":
+  version: 10.1.1
+  resolution: "@navikt/ft-prosess-beregningsgrunnlag@npm:10.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-beregningsgrunnlag%2F10.1.1%2Ff18960534cde4515b1d71dc82a3d9c02222ba12c"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
     "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-form-hooks": ^8.0.5
-    "@navikt/ft-form-validators": ^4.0.7
-    "@navikt/ft-ui-komponenter": ^4.5.7
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-form-hooks": ^8.1.1
+    "@navikt/ft-form-validators": ^4.1.0
+    "@navikt/ft-ui-komponenter": ^4.6.0
+    "@navikt/ft-utils": ^3.7.0
     classnames: 2.5.1
     dayjs: 1.11.13
     echarts: 5.6.0
@@ -5050,23 +5046,22 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 72b1e7c51add7816d962518a7c319739e2890246e16de543f3742cef8b844563ff36760466055f4b0d0b4028253c518b04cb1a7b8735d1c811475d67ee5e13cd
+  checksum: ac7c1b50608a69a332ec3609648ea7200c029132625079682e4b0afbddb9291652b40dcd45806c2e976be6f16de41345ae71fe0f22ecc6f167c8cabf4ced7fd3
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-tilbakekreving-foreldelse@npm:6.0.5":
-  version: 6.0.5
-  resolution: "@navikt/ft-prosess-tilbakekreving-foreldelse@npm:6.0.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-foreldelse%2F6.0.5%2F53fe95e690794c221056f0f735c985a8c489c138"
+"@navikt/ft-prosess-tilbakekreving-foreldelse@npm:6.1.1":
+  version: 6.1.1
+  resolution: "@navikt/ft-prosess-tilbakekreving-foreldelse@npm:6.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-foreldelse%2F6.1.1%2Fce692dbdf758a7ccef30da187ca60e77c1fc2711"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
     "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-form-hooks": ^8.0.5
-    "@navikt/ft-form-validators": ^4.0.7
-    "@navikt/ft-ui-komponenter": ^4.5.7
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-form-hooks": ^8.1.1
+    "@navikt/ft-form-validators": ^4.1.0
+    "@navikt/ft-ui-komponenter": ^4.6.0
+    "@navikt/ft-utils": ^3.7.0
     dayjs: 1.11.13
-    moment: 2.30.1
     react: 19.1.0
     react-hook-form: 7.61.1
     react-intl: 7.1.11
@@ -5084,21 +5079,21 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: 9be9ab2725026f916b5d7cd740821b571704a0155013a87d331361cf35dc6c25eb03f6fba0caa89b0ac698529b9bfc368768e44193dfcdc695ae5de6d392ab01
+  checksum: b28fac41a2e32e78b2bd301938f302ae85252773d33a533d2e14b061ce55e6a44800861e6054f2273a309829c65c064b6fb53664f0dabb0fa93af2b8e98559e8
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-tilbakekreving-vedtak@npm:5.0.5":
-  version: 5.0.5
-  resolution: "@navikt/ft-prosess-tilbakekreving-vedtak@npm:5.0.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-vedtak%2F5.0.5%2F3fa2577b50f241b3540361ff5f7e7eef637ac55e"
+"@navikt/ft-prosess-tilbakekreving-vedtak@npm:5.1.1":
+  version: 5.1.1
+  resolution: "@navikt/ft-prosess-tilbakekreving-vedtak@npm:5.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving-vedtak%2F5.1.1%2F777367dbf6a59fa7f2cce1abdf1b7758ea8a45c8"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
     "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-form-hooks": ^8.0.5
-    "@navikt/ft-form-validators": ^4.0.7
-    "@navikt/ft-ui-komponenter": ^4.5.7
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-form-hooks": ^8.1.1
+    "@navikt/ft-form-validators": ^4.1.0
+    "@navikt/ft-ui-komponenter": ^4.6.0
+    "@navikt/ft-utils": ^3.7.0
     classnames: 2.5.1
     react: 19.1.0
     react-hook-form: 7.61.1
@@ -5117,21 +5112,21 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.x
     react-intl: 6.x
-  checksum: bc04f6b294f26f1c0e90ed6de95d6499d5304013223d88effe68f5f66281fe359d54d5e57c620f9adcd1443e37c5f15ce24c4c7dc8b5c1ebebcafc4656cf395c
+  checksum: 6229784745b4e1bc285b61cf819efdc08f4eff2b948e7ccaa05acc81c9323cf7605f5af3004a7313855acb8e8ae62817b65c95db2247951267f4e0e518c45263
   languageName: node
   linkType: hard
 
-"@navikt/ft-prosess-tilbakekreving@npm:6.0.5":
-  version: 6.0.5
-  resolution: "@navikt/ft-prosess-tilbakekreving@npm:6.0.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving%2F6.0.5%2Fe525662e5c35b2f345da60d76884e85756899b68"
+"@navikt/ft-prosess-tilbakekreving@npm:6.1.1":
+  version: 6.1.1
+  resolution: "@navikt/ft-prosess-tilbakekreving@npm:6.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-prosess-tilbakekreving%2F6.1.1%2Fb3227ec2fa86749d70c6c937e74b2daed443e51e"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
     "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-form-hooks": ^8.0.5
-    "@navikt/ft-form-validators": ^4.0.7
-    "@navikt/ft-ui-komponenter": ^4.5.7
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-form-hooks": ^8.1.1
+    "@navikt/ft-form-validators": ^4.1.0
+    "@navikt/ft-ui-komponenter": ^4.6.0
+    "@navikt/ft-utils": ^3.7.0
     dayjs: 1.11.13
     moment: 2.30.1
     react: 19.1.0
@@ -5152,23 +5147,21 @@ __metadata:
     react: 19.1.0
     react-hook-form: 7.53.0
     react-intl: 6.x
-  checksum: 0a8387f36c1d991b76cb78f8e06decb6b11e4cf87e5d3c10a761f42fcbc6f115a8d88eb87d5d43b5cfa24978b9b851eb70ecbcbb9cf8eb774c494c21985d13f5
+  checksum: ab1d931bef666355339ced3db759724574c462221bbc67a56866b492f542f170c8bdb843a4c13d4d324e2b974ba398486638d3b93e774a8f17c8476676a6d503
   languageName: node
   linkType: hard
 
-"@navikt/ft-ui-komponenter@npm:4.5.7, @navikt/ft-ui-komponenter@npm:^4.5.7":
-  version: 4.5.7
-  resolution: "@navikt/ft-ui-komponenter@npm:4.5.7::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-ui-komponenter%2F4.5.7%2F56509745fcc5d3fb9750b1a58d63b36d98ff654a"
+"@navikt/ft-ui-komponenter@npm:4.6.0, @navikt/ft-ui-komponenter@npm:^4.6.0":
+  version: 4.6.0
+  resolution: "@navikt/ft-ui-komponenter@npm:4.6.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-ui-komponenter%2F4.6.0%2F691bda2a9a99a05c3850ea06608aa10e29eb08cd"
   dependencies:
     "@navikt/aksel-icons": 7.25.1
-    "@navikt/ds-css": 7.25.1
     "@navikt/ds-react": 7.25.1
-    "@navikt/ft-utils": ^3.6.9
+    "@navikt/ft-utils": ^3.7.0
     classnames: 2.5.1
     react: 19.1.0
     react-dom: 19.1.0
     react-intl: 7.1.11
-    react-modal: 3.16.3
   peerDependencies:
     "@navikt/aksel-icons": 7.x
     "@navikt/ds-css": 7.x
@@ -5179,13 +5172,13 @@ __metadata:
     react-dom: 19.1.0
     react-intl: 6.x
     react-modal: 3.16.1
-  checksum: 235607f3913653522a39edb465662e60a48d85a6e083d5df46144c2165d4e1f942e9a004fc2ef784e440bd00b8bbc1a89cfbcc29c659f7b3e2d4cd34d07d1877
+  checksum: 52759099015ea4f79850fd69055782d0267c996bdb57619e4848a624f2cc0b902ca057dd122753c3c04b1008805f3cdf43f1eae3282b2075c3d9aaf077296b26
   languageName: node
   linkType: hard
 
-"@navikt/ft-utils@npm:3.6.9, @navikt/ft-utils@npm:^3.6.9":
-  version: 3.6.9
-  resolution: "@navikt/ft-utils@npm:3.6.9::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-utils%2F3.6.9%2Fba58db47df4fe4fa589532d603d09a79d32994e5"
+"@navikt/ft-utils@npm:3.7.0, @navikt/ft-utils@npm:^3.7.0":
+  version: 3.7.0
+  resolution: "@navikt/ft-utils@npm:3.7.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-utils%2F3.7.0%2F05cadab0b890fcfbc2d91c8e74d70cfd5797178e"
   dependencies:
     dayjs: 1.11.13
     react-intl: 7.1.11
@@ -5193,7 +5186,7 @@ __metadata:
     dayjs: 1.11.x
     react: "*"
     react-intl: 6.x
-  checksum: ab71d21a3c923eaf9c02c7645d859e7150960f58c096e8fa174521bf04551fbfb6bdb52857928dffd66ecac769971bd9c15b4b31e1321201aa5b20c990e6490e
+  checksum: cd17be1cdd3ef0a3db188bc1c6004534d7405ac4714015f596d59e4bc6311e7bdef62eb60c28558856726af79a04b9cb56b17f74792c8666617566a4bff88a30
   languageName: node
   linkType: hard
 
@@ -8691,13 +8684,6 @@ __metadata:
   version: 3.0.3
   resolution: "dateformat@npm:3.0.3"
   checksum: ca4911148abb09887bd9bdcd632c399b06f3ecad709a18eb594d289a1031982f441e08e281db77ffebcb2cbcbfa1ac578a7cbfbf8743f41009aa5adc1846ed34
-  languageName: node
-  linkType: hard
-
-"dayjs-plugin-utc@npm:0.1.2":
-  version: 0.1.2
-  resolution: "dayjs-plugin-utc@npm:0.1.2"
-  checksum: 80a3732407d7bcb0e2ca34a2964852a60c88540144ecca3fb0f4db03c1611f8198fea49fd8373972af7f8427789e591f42e32d0a5fa54d0f413c1b0921685dec
   languageName: node
   linkType: hard
 
@@ -12341,13 +12327,6 @@ __metadata:
   version: 4.6.2
   resolution: "lodash.merge@npm:4.6.2"
   checksum: ad580b4bdbb7ca1f7abf7e1bce63a9a0b98e370cf40194b03380a46b4ed799c9573029599caebc1b14e3f24b111aef72b96674a56cfa105e0f5ac70546cdc005
-  languageName: node
-  linkType: hard
-
-"lodash.throttle@npm:4.1.1":
-  version: 4.1.1
-  resolution: "lodash.throttle@npm:4.1.1"
-  checksum: 129c0a28cee48b348aef146f638ef8a8b197944d4e9ec26c1890c19d9bf5a5690fe11b655c77a4551268819b32d27f4206343e30c78961f60b561b8608c8c805
   languageName: node
   linkType: hard
 
@@ -16636,15 +16615,6 @@ __metadata:
   version: 1.0.2
   resolution: "util-deprecate@npm:1.0.2"
   checksum: 474acf1146cb2701fe3b074892217553dfcf9a031280919ba1b8d651a068c9b15d863b7303cb15bd00a862b498e6cf4ad7b4a08fb134edd5a6f7641681cb54a2
-  languageName: node
-  linkType: hard
-
-"uuid@npm:11.1.0":
-  version: 11.1.0
-  resolution: "uuid@npm:11.1.0"
-  bin:
-    uuid: dist/esm/bin/uuid
-  checksum: 840f19758543c4631e58a29439e51b5b669d5f34b4dd2700b6a1d15c5708c7a6e0c3e2c8c4a2eae761a3a7caa7e9884d00c86c02622ba91137bd3deade6b4b4a
   languageName: node
   linkType: hard
 

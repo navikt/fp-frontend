@@ -2,18 +2,18 @@ import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, HStack, Spacer, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { notEmpty } from '@navikt/fp-utils';
 
-import { erEndeligJournalført } from '../../../kodeverk/journalpostTilstand';
-import { Sakstype } from '../../../kodeverk/sakstype';
 import type { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 import type { JournalFagsak } from '../../../typer/journalFagsakTsType';
 import type { JournalføringFormValues } from '../../../typer/journalføringFormValues';
 import type { Journalpost } from '../../../typer/journalpostTsType';
+import { erEndeligJournalført } from '../../../utils/journalpostTilstandUtils';
 
 import styles from './velgSakForm.module.css';
 
@@ -43,8 +43,8 @@ export const transformValues = (
   if (saksnummerValg === LAG_GENERELL_SAK) {
     return {
       opprettSak: {
-        aktørId: journalpost.bruker.aktørId,
-        sakstype: Sakstype.GENERELL,
+        aktørId: notEmpty(journalpost.bruker?.aktørId),
+        sakstype: 'GENERELL',
       },
     };
   }
@@ -56,8 +56,8 @@ export const transformValues = (
     return {
       opprettSak: {
         ytelseType: valgtYtelse,
-        aktørId: journalpost.bruker.aktørId,
-        sakstype: Sakstype.FAGSAK,
+        aktørId: notEmpty(journalpost.bruker?.aktørId),
+        sakstype: 'FAGSAK',
       },
     };
   }
@@ -161,7 +161,7 @@ export const VelgSakForm = ({
             </Alert>
           )}
         </VStack>
-        <HStack className={styles.knappRad} gap="4">
+        <HStack gap="4">
           <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
             <FormattedMessage
               id={erEndeligJournalført(journalpost.tilstand) ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.Journalfør'}
@@ -171,7 +171,8 @@ export const VelgSakForm = ({
             <FormattedMessage id="ValgtOppgave.Avbryt" />
           </Button>
           {erLokalOppgave && (
-            <div className={styles.colMargin}>
+            <>
+              <Spacer />
               <Button
                 size="small"
                 variant="primary"
@@ -182,7 +183,7 @@ export const VelgSakForm = ({
               >
                 <FormattedMessage id="ValgtOppgave.Flytt.Til.Gosys" />
               </Button>
-            </div>
+            </>
           )}
         </HStack>
       </VStack>

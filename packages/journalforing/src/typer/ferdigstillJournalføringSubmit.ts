@@ -1,9 +1,9 @@
-import { Sakstype } from '../kodeverk/sakstype';
-
 export type DokumentTittelSubmitValue = Readonly<{
   dokumentId: string;
   tittel: string;
 }>;
+
+type Sakstype = 'FAGSAK' | 'GENERELL';
 
 type OpprettSakSubmitValue = Readonly<{
   ytelseType?: string;

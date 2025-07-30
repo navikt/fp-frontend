@@ -1,4 +1,4 @@
-import { JournalVariant } from '../kodeverk/journalVariant';
+type JournalVariant = 'ARKIV' | 'ORIGINAL';
 
 export type JournalDokument = Readonly<{
   dokumentId: string;
