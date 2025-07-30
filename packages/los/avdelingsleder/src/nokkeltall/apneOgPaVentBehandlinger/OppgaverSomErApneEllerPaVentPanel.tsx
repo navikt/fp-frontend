@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfCheckbox,RhfForm } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingType } from '@navikt/fp-kodeverk';

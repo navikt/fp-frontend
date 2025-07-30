@@ -3,11 +3,10 @@ import { action } from 'storybook/actions';
 
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
-import { VergeType } from '../../../../kodeverk/src/vergeType';
 import { MenyVergeIndex } from './MenyVergeIndex';
 
 const meta = {
-  title: 'sak-meny/verge-v2',
+  title: 'sak-meny/verge',
   component: MenyVergeIndex,
   args: {
     alleKodeverk: alleKodeverk,
@@ -31,7 +30,7 @@ export const FjerneVerge: Story = {
   args: {
     type: 'FJERN',
     verge: {
-      vergeType: VergeType.ADVOKAT,
+      vergeType: 'ADVOKAT',
       navn: 'Ola Nordmann',
       organisasjonsnummer: '123456789',
       gyldigFom: '2025-01-01',

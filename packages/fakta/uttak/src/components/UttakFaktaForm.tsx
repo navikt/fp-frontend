@@ -71,7 +71,7 @@ const leggTilAksjonspunktMarkering = (
       return {
         ...periode,
         originalFom: periode.fom,
-        aksjonspunktType: PeriodeApType.MANGLENDE_ARBEIDSFORHOLD,
+        aksjonspunktType: 'MANGLENDE_ARBEIDSFORHOLD',
       };
     }
 

@@ -10,7 +10,6 @@
   "scripts": {
     "test": "vitest",
     "test:watch": "vitest --watch=true",
-    "test:coverage": "vitest --coverage",
     "tsc": "tsc --pretty",
     "eslint": "eslint \"src/**/*.ts*\" --color",
     "eslint:fix": "eslint --fix \"src/**/*.ts*\" --color",
@@ -24,9 +23,6 @@
     "@navikt/aksel-icons": "7.25.1",
     "@navikt/ds-css": "7.25.1",
     "@navikt/ds-react": "7.25.1",
-    "@navikt/fp-kodeverk": "workspace:*",
-    "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-konstanter": "3.1.4",
     "@navikt/ft-plattform-komponenter": "9.2.0",
     "@navikt/ft-ui-komponenter": "4.6.0",
     "@navikt/ft-utils": "3.7.0",

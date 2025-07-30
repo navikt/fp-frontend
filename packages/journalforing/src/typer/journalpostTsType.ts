@@ -12,7 +12,7 @@ export type JournalpostTilstand =
   | 'FERDIGSTILT'
   | 'UTGAAR';
 
-export type JournalBruker = Readonly<{
+type JournalBruker = Readonly<{
   navn: string;
   fnr: string;
   aktørId: string;
