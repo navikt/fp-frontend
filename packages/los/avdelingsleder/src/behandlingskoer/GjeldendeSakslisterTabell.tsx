@@ -37,6 +37,7 @@ const formatStonadstyper = (
       const type = fagsakYtelseTyper.find(def => def.kode === fyt);
       return type ? type.navn : '';
     })
+    .sort((a, b) => a.localeCompare(b))
     .join(', ');
 };
 
@@ -57,6 +58,7 @@ const formatBehandlingstyper = (
       const type = behandlingTyper.find(def => def.kode === bt);
       return type ? type.navn : '';
     })
+    .sort((a, b) => a.localeCompare(b))
     .join(', ');
 };
 
