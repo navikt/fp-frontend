@@ -22,8 +22,8 @@
     "@navikt/ds-react": "7.25.1",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "4.5.7",
-    "@navikt/ft-utils": "3.6.9",
+    "@navikt/ft-ui-komponenter": "4.6.0",
+    "@navikt/ft-utils": "3.7.0",
     "classnames": "2.5.1",
     "react": "19.1.0",
     "react-intl": "7.1.11"
