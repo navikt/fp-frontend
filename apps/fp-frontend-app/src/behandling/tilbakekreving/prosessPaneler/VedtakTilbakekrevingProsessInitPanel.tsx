@@ -1,6 +1,6 @@
 import { type ComponentProps, use, useState } from 'react';
 import { useIntl } from 'react-intl';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import {
   type ForhandsvisData,

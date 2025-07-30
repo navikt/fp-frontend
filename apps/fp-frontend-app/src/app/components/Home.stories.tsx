@@ -1,4 +1,4 @@
-import { MemoryRouter } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';

@@ -1,5 +1,5 @@
 import { use } from 'react';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';

@@ -2423,7 +2423,6 @@ __metadata:
     react-intl: 7.1.11
     react-modal: 3.16.3
     react-responsive: 10.0.1
-    react-router: 7.7.1
     react-router-dom: 7.7.1
     storybook: 9.0.18
     stylelint: 16.22.0
