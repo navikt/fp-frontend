@@ -20,6 +20,7 @@ jobs:
       node-version: '22.17.1'
       push-image: true
       branch: ${{ inputs.branch }}
+      run-knip: true
     secrets: inherit
 
   deploy-dev:
