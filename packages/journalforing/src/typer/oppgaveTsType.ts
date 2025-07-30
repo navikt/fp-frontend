@@ -1,4 +1,4 @@
-export type OppgaveKilde = 'LOKAL' | 'GOSYS';
+type OppgaveKilde = 'LOKAL' | 'GOSYS';
 
 export type Oppgave = Readonly<{
   journalpostId: string;

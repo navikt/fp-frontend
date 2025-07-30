@@ -78,7 +78,6 @@ export { VenteArsakType } from './src/venteArsakType';
 export { VilkarType, adopsjonsvilkarene, fodselsvilkarene } from './src/vilkarType';
 export { VilkarUtfallType } from './src/vilkarUtfallType';
 export { VurderÅrsak } from './src/vurderÅrsak';
-export { VergeType } from './src/vergeType';
 export { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';
 export { RevurderingVarslingÅrsak } from './src/RevurderingVarslingÅrsak';
 export { KøSortering } from './src/køSortering';

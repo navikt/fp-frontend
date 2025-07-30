@@ -37,7 +37,9 @@ export const Dokumenter = ({ dokumenter }: Props) => {
       </Button>
       {!erDokumenterSkjult && (
         <VStack gap="1" className={styles.andreDokumenter}>
-          {dokumenter?.map(dokument => <DokumentVisning key={dokument.dokumentId} dokument={dokument} />)}
+          {dokumenter?.map(dokument => (
+            <DokumentVisning key={dokument.dokumentId} dokument={dokument} />
+          ))}
         </VStack>
       )}
     </VStack>

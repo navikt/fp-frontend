@@ -12,8 +12,13 @@ import {
 import { createIntl } from '@navikt/ft-utils';
 
 import type { FaktaBegrunnelseFormValues } from '@navikt/fp-fakta-felles';
-import { VergeType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving, OpprettVergeParams, Verge } from '@navikt/fp-types';
+import type {
+  KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
+  OpprettVergeParams,
+  Verge,
+  VergeType,
+} from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
@@ -32,7 +37,7 @@ export type VergeFormValues = {
 interface Props {
   readOnly: boolean;
   vergetyper: KodeverkMedNavn<'VergeType'>[] | KodeverkMedNavnTilbakekreving<'VergeType'>[];
-  valgtVergeType: string | undefined;
+  valgtVergeType: VergeType | undefined;
 }
 
 /**
@@ -66,7 +71,7 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
               validate={[required, hasValidName]}
               readOnly={readOnly}
             />
-            {valgtVergeType === VergeType.ADVOKAT ? (
+            {valgtVergeType === 'ADVOKAT' ? (
               <RhfTextField
                 name="organisasjonsnummer"
                 control={control}
@@ -116,7 +121,7 @@ RegistrereVergeForm.transformValues = (values: VergeFormValues): OpprettVergePar
   navn: values.navn,
   gyldigFom: values.gyldigFom,
   gyldigTom: values.gyldigTom,
-  ...(values.vergeType === VergeType.ADVOKAT
+  ...(values.vergeType === 'ADVOKAT'
     ? { organisasjonsnummer: notEmpty(values.organisasjonsnummer) }
     : { fnr: notEmpty(values.fnr) }),
 });

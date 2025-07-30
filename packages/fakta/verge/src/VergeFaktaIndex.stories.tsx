@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, VergeType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -55,7 +55,7 @@ export const Default: Story = {
 export const ReadOnly: Story = {
   args: {
     verge: {
-      vergeType: VergeType.ADVOKAT,
+      vergeType: 'ADVOKAT',
       navn: 'Ola Nordmann',
       organisasjonsnummer: '123456789',
       gyldigFom: '2025-01-01',

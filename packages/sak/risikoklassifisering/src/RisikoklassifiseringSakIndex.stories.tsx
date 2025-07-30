@@ -7,7 +7,6 @@ import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
-import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
 import { RisikoklassifiseringSakIndex } from './RisikoklassifiseringSakIndex';
 import type { AvklartRisikoklassifiseringAp } from './types/AvklartRisikoklassifiseringAp';
 
@@ -45,7 +44,7 @@ export const IngenRisikoklassifisering: Story = {};
 export const LavRisikoklassifisering: Story = {
   args: {
     risikoklassifisering: {
-      kontrollresultat: KontrollresultatKode.IKKE_HOY,
+      kontrollresultat: 'IKKE_HOY',
     },
   },
 };
@@ -58,7 +57,7 @@ export const HøyRisikoklassifisering: Story = {
       begrunnelse: null,
     } as Aksjonspunkt,
     risikoklassifisering: {
-      kontrollresultat: KontrollresultatKode.HOY,
+      kontrollresultat: 'HOY',
       medlFaresignaler: {
         faresignaler: ['Faresignal 1'],
       },

@@ -3,7 +3,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { ScissorsIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, Modal, VStack } from '@navikt/ds-react';
-import { RhfDatepicker,RhfForm } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';

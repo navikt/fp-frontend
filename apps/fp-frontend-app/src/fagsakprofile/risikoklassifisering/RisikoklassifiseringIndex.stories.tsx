@@ -13,7 +13,6 @@ import {
   FagsakStatus,
   FagsakYtelseType,
 } from '@navikt/fp-kodeverk';
-import { KontrollresultatKode } from '@navikt/fp-sak-risikoklassifisering';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -81,7 +80,7 @@ const ALLE_BEHANDLINGER = [
     erAktivPapirsoknad: false,
     behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
     kontrollResultat: {
-      kontrollresultat: KontrollresultatKode.HOY,
+      kontrollresultat: 'HOY',
       medlFaresignaler: undefined,
       iayFaresignaler: undefined,
     },
