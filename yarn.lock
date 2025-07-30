@@ -1578,7 +1578,6 @@ __metadata:
   resolution: "@navikt/fp-config-eslint@workspace:packages/config/eslint"
   dependencies:
     "@eslint/js": 9.32.0
-    eslint: 9.32.0
     eslint-config-prettier: 10.1.8
     eslint-plugin-import: 2.32.0
     eslint-plugin-jsx-a11y: 6.10.2
@@ -1587,6 +1586,8 @@ __metadata:
     eslint-plugin-vitest: 0.5.4
     globals: 16.3.0
     typescript-eslint: 8.38.0
+  peerDependencies:
+    eslint: 9.32.0
   languageName: unknown
   linkType: soft
 
@@ -4327,6 +4328,7 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 8.1.1
+    "@storybook/react": 9.0.18
     "@tanstack/react-query": 5.83.0
     eslint: 9.32.0
     react: 19.1.0
