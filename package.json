@@ -23,7 +23,6 @@
     "clean": "lerna run clean --stream",
     "dev": "yarn lerna run dev --scope=@navikt/fp-frontend-app",
     "build": "lerna run build --stream",
-    "doc": "react-asciidoc-generator ./packages/ -o ../../docs/generated/react.adoc --handlebar-template src/docs/asciidoc-template.handlebars",
     "up": "docker-compose up -d --remove-orphans --build",
     "down": "docker-compose down",
     "remove-node-modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",
