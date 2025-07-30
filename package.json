@@ -79,9 +79,9 @@
     "lerna": "8.2.4",
     "lint-staged": "16.1.2",
     "prettier": "3.6.2",
-    "react-test-renderer": "19.1.0",
+    "react-test-renderer": "19.1.1",
     "shelljs": "0.10.0",
-    "stylelint": "16.22.0",
+    "stylelint": "16.23.0",
     "stylelint-order": "7.0.0",
     "typescript": "5.8.3",
     "typescript-eslint": "8.38.0",
@@ -97,7 +97,7 @@
     "axios": "1.11.0",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "react-test-renderer": "19.1.0"
+    "react-test-renderer": "19.1.1"
   },
   "lint-staged": {
     "apps/**/*.{ts,tsx,js,jsx, css}": "prettier --write",
