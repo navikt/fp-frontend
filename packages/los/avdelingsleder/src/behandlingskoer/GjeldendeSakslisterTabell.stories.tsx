@@ -48,7 +48,6 @@ const meta = {
           navn: 'Ny liste',
           sistEndret: '2020-01-01',
           saksbehandlerIdenter: [],
-          antallBehandlinger: 1,
         }),
       }));
     };
@@ -74,7 +73,6 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
         navn: 'Saksliste 1',
         sistEndret: '2020-01-01',
         saksbehandlerIdenter: ['R23233'],
-        antallBehandlinger: 1,
       },
     ],
     oppgaverForAvdelingAntall: 1,

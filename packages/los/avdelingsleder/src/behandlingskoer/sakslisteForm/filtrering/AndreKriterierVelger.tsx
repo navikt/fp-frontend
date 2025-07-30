@@ -35,7 +35,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL],
+        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
       queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],

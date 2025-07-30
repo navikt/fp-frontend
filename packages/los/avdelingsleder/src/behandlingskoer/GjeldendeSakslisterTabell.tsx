@@ -1,14 +1,14 @@
 import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, Heading, HStack, Label, Link, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Detail, Heading, HStack, Label, Link, Loader, Table, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
-import { LosUrl, slettSaksliste } from '../data/fplosAvdelingslederApi';
+import { LosUrl, oppgaveAntallOptions, slettSaksliste } from '../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../data/useLosKodeverk';
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
 import { SletteSakslisteModal } from './SletteSakslisteModal';
@@ -37,6 +37,7 @@ const formatStonadstyper = (
       const type = fagsakYtelseTyper.find(def => def.kode === fyt);
       return type ? type.navn : '';
     })
+    .sort((a, b) => a.localeCompare(b))
     .join(', ');
 };
 
@@ -57,6 +58,7 @@ const formatBehandlingstyper = (
       const type = behandlingTyper.find(def => def.kode === bt);
       return type ? type.navn : '';
     })
+    .sort((a, b) => a.localeCompare(b))
     .join(', ');
 };
 
@@ -177,7 +179,12 @@ export const GjeldendeSakslisterTabell = ({
                 <Table.DataCell>
                   {saksliste.saksbehandlerIdenter.length > 0 ? saksliste.saksbehandlerIdenter.length : ''}
                 </Table.DataCell>
-                <Table.DataCell>{saksliste.antallBehandlinger}</Table.DataCell>
+                <Table.DataCell>
+                  <AntallOppaverForSaksliste
+                    valgtAvdelingEnhet={valgtAvdelingEnhet}
+                    sakslisteId={saksliste.sakslisteId}
+                  />
+                </Table.DataCell>
                 <Table.DataCell>
                   <DateLabel dateString={saksliste.sistEndret} />
                 </Table.DataCell>
@@ -213,5 +220,29 @@ export const GjeldendeSakslisterTabell = ({
         />
       )}
     </VStack>
+  );
+};
+
+export const AntallOppaverForSaksliste = ({
+  valgtAvdelingEnhet,
+  sakslisteId,
+}: {
+  valgtAvdelingEnhet: string;
+  sakslisteId: number;
+}) => {
+  const intl = useIntl();
+  const { data: antallOppgaver, isFetching, isError } = useQuery(oppgaveAntallOptions(sakslisteId, valgtAvdelingEnhet));
+
+  if (isError) {
+    return <FormattedMessage id="AntallOppaverForSaksliste.HentingAvAntallOppgaverFeilet" />;
+  }
+
+  return isFetching ? (
+    <Loader
+      size="small"
+      title={intl.formatMessage({ id: 'AntallOppaverForSaksliste.HentingAvAntallOppgaverHentes' })}
+    />
+  ) : (
+    antallOppgaver
   );
 };
