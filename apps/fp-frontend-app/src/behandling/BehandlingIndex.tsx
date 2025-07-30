@@ -1,5 +1,5 @@
 import { Suspense, useEffect, useState } from 'react';
-import { type NavigateFunction, useLocation, useNavigate } from 'react-router';
+import { type NavigateFunction, useLocation, useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { replaceNorwegianCharacters } from '@navikt/ft-utils';

@@ -1,5 +1,5 @@
 import { Suspense, use } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { parseQueryString } from '@navikt/ft-utils';
