@@ -1,7 +1,7 @@
 import type { KnipConfig } from 'knip';
 
 const config: KnipConfig = {
-  ignore: ['.storybook'],
+  ignore: ['.storybook/**', 'server/**'],
   ignoreDependencies: [],
 };
 
