@@ -1,5 +1,7 @@
 import { useFieldArray, useFormContext } from 'react-hook-form';
 
+import { VStack } from '@navikt/ds-react';
+
 import type { DokumentTittelSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 import type { DokumentTittelFormValues, JournalføringFormValues } from '../../../typer/journalføringFormValues';
@@ -61,7 +63,7 @@ export const DokumentForm = ({ journalpost, dokumentTittelStyresAvJournalpostTit
     name: 'journalpostDokumenter',
   });
   return (
-    <>
+    <VStack gap="2">
       {fields.map((field, index) => (
         <DokumentDetaljer
           dokument={finnMatchendeDokumentForId(field.dokumentId, journalpost.dokumenter || TOM_DOK_LISTE)}
@@ -71,6 +73,6 @@ export const DokumentForm = ({ journalpost, dokumentTittelStyresAvJournalpostTit
           dokumentTittelStyresAvJournalpostTittel={dokumentTittelStyresAvJournalpostTittel}
         />
       ))}
-    </>
+    </VStack>
   );
 };

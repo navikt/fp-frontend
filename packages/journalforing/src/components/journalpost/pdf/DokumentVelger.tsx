@@ -1,27 +1,12 @@
-import { ToggleGroup } from '@navikt/ds-react';
+import { HStack, ToggleGroup, Tooltip } from '@navikt/ds-react';
 
 import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 
-import styles from './dokumentVelger.module.css';
-
-const FORKORTET = '...';
-
-const lagForkortetNavn = (dok: JournalDokument): string => {
-  if (!dok.tittel) {
-    return 'Ukjent tittel';
-  }
-  if (dok.tittel.length > 10) {
-    const kortNavn = dok.tittel.substring(0, 9);
-    return kortNavn.concat(FORKORTET);
-  }
-  return dok.tittel;
-};
-
-type Props = {
+interface Props {
   setValgtDokument: (dok: JournalDokument) => void;
   valgtDokument: JournalDokument;
   dokumenter: JournalDokument[];
-};
+}
 
 export const DokumentVelger = ({ setValgtDokument, valgtDokument, dokumenter }: Props) => {
   if (dokumenter.length < 2) {
@@ -34,16 +19,25 @@ export const DokumentVelger = ({ setValgtDokument, valgtDokument, dokumenter }: 
     }
   };
   return (
-    <div className={styles.panel}>
-      <div className={styles.toggleGroup}>
-        <ToggleGroup defaultValue={valgtDokument.dokumentId} onChange={endreValg}>
-          {dokumenter.map(dok => (
-            <ToggleGroup.Item value={dok.dokumentId} key={dok.dokumentId}>
-              {lagForkortetNavn(dok)}
-            </ToggleGroup.Item>
-          ))}
-        </ToggleGroup>
-      </div>
-    </div>
+    <HStack justify="center">
+      <ToggleGroup defaultValue={valgtDokument.dokumentId} onChange={endreValg}>
+        {dokumenter.map(({ dokumentId, tittel }) => (
+          <Tooltip key={dokumentId} content={tittel}>
+            <ToggleGroup.Item value={dokumentId}>{lagForkortetNavn(tittel)}</ToggleGroup.Item>
+          </Tooltip>
+        ))}
+      </ToggleGroup>
+    </HStack>
   );
+};
+
+const lagForkortetNavn = (tittel: string): string => {
+  if (!tittel) {
+    return 'Ukjent tittel';
+  }
+  if (tittel.length > 15) {
+    const kortNavn = tittel.substring(0, 14);
+    return kortNavn.concat('...');
+  }
+  return tittel;
 };

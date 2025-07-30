@@ -1,40 +1,8 @@
 .sakContainer {
   background-color: var(--a-blue-50);
-  display: flex;
-  margin-bottom: 8px;
   padding: 16px;
-  width: 100%;
 }
-
-.sakDataFelt {
-  width: 90%;
-}
-
-.faneFelt {
-  margin-bottom: auto;
-  margin-top: auto;
-  width: 10%;
-}
-
-.clipBoard > button {
-  padding: 0;
-}
-
-.newTabIcon {
+.externalLinkIcon {
   height: 32px;
   width: 32px;
-}
-
-.sakRad {
-  margin-bottom: 8px;
-}
-
-.datoFelt {
-  width: 30%;
-}
-
-@media all and (max-width: 1500px) {
-  .datoFelt {
-    margin-top: 16px;
-  }
 }

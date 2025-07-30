@@ -1,17 +1,33 @@
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 
-import { JournalKanal } from '../kodeverk/journalKanal';
-import { JournalpostTilstand } from '../kodeverk/journalpostTilstand';
-import type { JournalAvsender } from './journalAvsenderTsType';
-import type { JournalBruker } from './journalBrukerTsType';
 import type { JournalDokument } from './journalDokumentTsType';
 import type { JournalFagsak } from './journalFagsakTsType';
+
+export type JournalKanal = 'NAV_NO' | 'ALTINN' | 'EESSI' | 'EIA' | 'HELSENETTET' | 'SKAN_NETS';
+export type JournalpostTilstand =
+  | 'MOTTATT'
+  | 'JOURNALFOERT'
+  | 'FEILREGISTRERT'
+  | 'EKSPEDERT'
+  | 'FERDIGSTILT'
+  | 'UTGAAR';
+
+export type JournalBruker = Readonly<{
+  navn: string;
+  fnr: string;
+  aktørId: string;
+}>;
+
+type JournalAvsender = Readonly<{
+  navn: string;
+  id: string;
+}>;
 
 export type Journalpost = Readonly<{
   journalpostId: string;
   tittel?: string;
   kanal?: JournalKanal;
-  bruker: JournalBruker;
+  bruker: JournalBruker | null;
   tilstand?: JournalpostTilstand;
   eksisterendeSaksnummer?: string;
   journalførendeEnhet?: string;

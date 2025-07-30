@@ -1,4 +1,4 @@
-import { OppgaveKilde } from '../kodeverk/oppgaveKilde';
+export type OppgaveKilde = 'LOKAL' | 'GOSYS';
 
 export type Oppgave = Readonly<{
   journalpostId: string;

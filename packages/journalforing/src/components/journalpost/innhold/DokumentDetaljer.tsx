@@ -1,17 +1,17 @@
 import { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { PencilIcon, TabsAddIcon } from '@navikt/aksel-icons';
+import { ExternalLinkIcon, PencilIcon } from '@navikt/aksel-icons';
 import { Button, Checkbox, CheckboxGroup, HStack, Label, Spacer } from '@navikt/ds-react';
 import { RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 
-import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
-import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
 import type { JournalDokument } from '../../../typer/journalDokumentTsType';
 import type { JournalføringFormValues } from '../../../typer/journalføringFormValues';
 import type { Journalpost } from '../../../typer/journalpostTsType';
+import { dokumentTitler } from '../../../utils/dokumentTittel';
+import { erKanalSomErÅpenForEndring } from '../../../utils/journalKanalUtils';
 
 import styles from './dokumentDetaljer.module.css';
 
@@ -32,92 +32,87 @@ export const DokumentDetaljer = ({
   dokumentTittelStyresAvJournalpostTittel,
 }: Props) => {
   const { control } = useFormContext<JournalføringFormValues>();
-
+  const intl = useIntl();
   const [kanRedigeres, setKanRedigeres] = useState<boolean>(!dokument.tittel);
   const [harToggletFritekst, setHarToggletFritekst] = useState(false);
 
   const nyFaneKnapp = (
-    <div className={styles.knappKol}>
-      <Button
-        as="a"
-        href={dokument.lenke}
-        target="_blank"
-        rel="noreferrer"
-        variant="tertiary"
-        icon={<TabsAddIcon aria-hidden className={styles.newTabIcon} />}
-      />
-    </div>
+    <Button
+      as="a"
+      href={dokument.lenke}
+      target="_blank"
+      rel="noreferrer"
+      variant="tertiary"
+      title={intl.formatMessage({ id: 'DokumentDetaljer.ExternalLink' })}
+      icon={<ExternalLinkIcon aria-hidden className={styles.externalLinkIcon} />}
+    />
   );
   if (dokumentTittelStyresAvJournalpostTittel) {
     return (
-      <div className={styles.dokContainer}>
-        <div className={styles.dokumentTittel}>
-          <RhfTextField
-            name={
-              dokumentTittelStyresAvJournalpostTittel
-                ? 'journalpostTittel'
-                : `journalpostDokumenter.${docFieldIndex}.tittel`
-            }
-            control={control}
-            validate={[required, hasValidText]}
-            readOnly={dokumentTittelStyresAvJournalpostTittel}
-            maxLength={200}
-          />
-        </div>
+      <HStack className={styles.dokContainer} gap="0 4" align="center" wrap={false}>
+        <RhfTextField
+          name={
+            dokumentTittelStyresAvJournalpostTittel
+              ? 'journalpostTittel'
+              : `journalpostDokumenter.${docFieldIndex}.tittel`
+          }
+          control={control}
+          validate={[required, hasValidText]}
+          readOnly={dokumentTittelStyresAvJournalpostTittel}
+          maxLength={200}
+        />
         <Spacer />
         {nyFaneKnapp}
-      </div>
+      </HStack>
     );
   }
   return (
-    <div className={styles.dokContainer}>
+    <HStack className={styles.dokContainer} gap="0 4" align="center" wrap={false}>
       {kanRedigeres && (
         <>
-          <HStack className={styles.dokumentTittel} gap="1">
-            {harToggletFritekst && (
-              <RhfTextField
-                name={`journalpostDokumenter.${docFieldIndex}.tittel`}
-                control={control}
-                validate={[required, hasValidText]}
-                readOnly={false}
-                className={styles.input}
-                maxLength={100}
-              />
-            )}
-            {!harToggletFritekst && (
-              <RhfSelect
-                name={`journalpostDokumenter.${docFieldIndex}.tittel`}
-                control={control}
-                readOnly={false}
-                label={undefined}
-                validate={[required]}
-                className={styles.input}
-                selectValues={listeMedTittler.map(tittel => (
-                  <option value={tittel} key={tittel}>
-                    {tittel}
-                  </option>
-                ))}
-              />
-            )}
-          </HStack>
-          <HStack className={styles.checkbox}>
-            <CheckboxGroup
-              legend="Brukt fritekst"
-              hideLegend
-              onChange={() => {
-                setHarToggletFritekst(!harToggletFritekst);
-              }}
-              value={[harToggletFritekst]}
-            >
-              <Checkbox value>
-                <FormattedMessage id="Journal.Tittel.Fritekst" />
-              </Checkbox>
-            </CheckboxGroup>
-          </HStack>
+          {harToggletFritekst && (
+            <RhfTextField
+              name={`journalpostDokumenter.${docFieldIndex}.tittel`}
+              control={control}
+              hideLabel
+              validate={[required, hasValidText]}
+              readOnly={false}
+              className={styles.input}
+              maxLength={100}
+            />
+          )}
+          {!harToggletFritekst && (
+            <RhfSelect
+              name={`journalpostDokumenter.${docFieldIndex}.tittel`}
+              control={control}
+              hideLabel
+              readOnly={false}
+              label={undefined}
+              validate={[required]}
+              className={styles.input}
+              selectValues={dokumentTitler.map(tittel => (
+                <option value={tittel} key={tittel}>
+                  {tittel}
+                </option>
+              ))}
+            />
+          )}
+          <CheckboxGroup
+            legend="Brukt fritekst"
+            hideLegend
+            onChange={() => {
+              setHarToggletFritekst(!harToggletFritekst);
+            }}
+            value={[harToggletFritekst]}
+          >
+            <Checkbox value size="small">
+              <FormattedMessage id="Journal.Tittel.Fritekst" />
+            </Checkbox>
+          </CheckboxGroup>
         </>
       )}
       {!kanRedigeres && (
-        <HStack className={styles.dokumentTittel}>
+        <>
           <Label>{dokument.tittel}</Label>
           {erKanalSomErÅpenForEndring(journalpost.kanal) && (
             <Button
@@ -130,10 +125,10 @@ export const DokumentDetaljer = ({
               variant="tertiary"
             />
           )}
-        </HStack>
+        </>
       )}
       <Spacer />
       {nyFaneKnapp}
-    </div>
+    </HStack>
   );
 };
