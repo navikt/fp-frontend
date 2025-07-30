@@ -2,9 +2,15 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  OpptjeningAktivitetType,
+  VilkarType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
+import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
 import { OpptjeningFaktaIndex } from './OpptjeningFaktaIndex';
 
@@ -37,10 +43,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
+
 export const MedAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -182,6 +206,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -243,6 +268,8 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
+
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,

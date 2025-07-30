@@ -2,9 +2,16 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, AktivitetskravPermisjonType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  AktivitetskravPermisjonType,
+  VilkarType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
+  type Aksjonspunkt,
   type AktivitetskravGrunnlagArbeid,
   type DokumentasjonVurderingBehov,
   UttakÅrsak,
@@ -32,6 +39,23 @@ const aktivitetskravGrunnlagListe = [
     },
   },
 ] as AktivitetskravGrunnlagArbeid[];
+
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
 
 const opprettetDokumentasjonVurderingBehovListe = [
   {
@@ -98,6 +122,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -157,6 +182,7 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette er en begrunnelse',
@@ -173,6 +199,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: null,

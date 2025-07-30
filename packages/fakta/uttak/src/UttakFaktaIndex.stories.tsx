@@ -5,14 +5,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
+  AksjonspunktType,
   FordelingPeriodeKilde,
   RelasjonsRolleType,
   UtsettelseÅrsak,
   UttakArbeidType,
   UttakPeriodeType,
+  VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
+import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
 import { OverføringÅrsak } from './kodeverk/overføringÅrsak';
 import { UttakFaktaIndex } from './UttakFaktaIndex';
@@ -25,6 +27,23 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
     navn: 'BEDRIFT AS',
   },
 };
+
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-uttak',
@@ -97,6 +116,7 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -154,6 +174,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -180,6 +201,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -207,6 +229,7 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -226,6 +249,7 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -258,6 +282,7 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -290,6 +315,7 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette er en begrunnelse',
@@ -325,6 +351,7 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette er en begrunnelse',
@@ -361,6 +388,7 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,

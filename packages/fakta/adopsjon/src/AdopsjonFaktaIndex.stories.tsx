@@ -2,9 +2,16 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, FarSøkerType, SoknadType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  FarSøkerType,
+  SoknadType,
+  VilkarType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
 
 import { AdopsjonFaktaIndex } from './AdopsjonFaktaIndex';
 
@@ -48,10 +55,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
+
 export const AksjonspunktForAdopsjonsvilkåret: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -68,6 +93,7 @@ export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -84,6 +110,7 @@ export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -100,6 +127,7 @@ export const IkkeVisBarnetsAnkomstDatoForEngangsstønad: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
