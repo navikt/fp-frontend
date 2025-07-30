@@ -1,0 +1,13 @@
+import{j as e}from"./iframe-BKAlD7kq.js";import{u as d,l as u,V as i,b as f,r as p,m as c,d as g,N as F,B as b}from"./nb_NO-BBa2qQ2A.js";import{T as I}from"./TrueFalseInput-Dl_7nYBb.js";import"./index-ChRUIYyj.js";import"./index.es-BwStEKym.js";const l=p(c),r=({readOnly:n,annenForelderInformertRequired:o=!1})=>{const{control:t}=d();return e.jsx(u,{children:e.jsxs(i,{gap:"4",children:[e.jsx(f,{size:"small",children:l.formatMessage({id:"Registrering.TheOtherParent.Confirmation"})}),e.jsx(I,{name:"annenForelderInformert",control:t,label:l.formatMessage({id:"Registrering.TheOtherParent.OtherParentKnowPeriods"}),isRequired:o,readOnly:n})]})})};r.initialValues=()=>({annenForelderInformert:void 0});r.tranformValues=({annenForelderInformert:n})=>({annenForelderInformert:n});r.__docgenInfo={description:"",methods:[{name:"initialValues",docblock:null,modifiers:["static"],params:[],returns:{type:{name:"signature",type:"object",raw:`{
+  annenForelderInformert?: boolean;
+}`,signature:{properties:[{key:"annenForelderInformert",value:{name:"boolean",required:!1}}]}}}},{name:"tranformValues",docblock:null,modifiers:["static"],params:[{name:"{ annenForelderInformert }: BekreftelseFormValues",optional:!1,type:{name:"signature",type:"object",raw:`{
+  annenForelderInformert?: boolean;
+}`,signature:{properties:[{key:"annenForelderInformert",value:{name:"boolean",required:!1}}]},alias:"BekreftelseFormValues"}}],returns:null}],displayName:"BekreftelsePanel",props:{readOnly:{required:!0,tsType:{name:"boolean"},description:""},annenForelderInformertRequired:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}}}};const{action:k}=__STORYBOOK_MODULE_ACTIONS__,q={title:"ui-komponenter/bekreftelse",component:r,parameters:{submitCallback:k("onSubmit")},args:{readOnly:!1},render:(n,{parameters:{submitCallback:o}})=>{const t=g();return e.jsx(F,{formMethods:t,onSubmit:m=>o(r.tranformValues(m)),children:e.jsxs(i,{gap:"10",children:[e.jsx(r,{...n}),e.jsx(b,{size:"small",variant:"primary",children:"Lagreknapp (Kun for test)"})]})})}},a={args:{annenForelderInformertRequired:!1}},s={args:{annenForelderInformertRequired:!0}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+  args: {
+    annenForelderInformertRequired: false
+  }
+}`,...a.parameters?.docs?.source}}};s.parameters={...s.parameters,docs:{...s.parameters?.docs,source:{originalSource:`{
+  args: {
+    annenForelderInformertRequired: true
+  }
+}`,...s.parameters?.docs?.source}}};const R=["Default","MedObligatoriskFeltFordiAnnenForelderErInformert"];export{a as Default,s as MedObligatoriskFeltFordiAnnenForelderErInformert,R as __namedExportsOrder,q as default};

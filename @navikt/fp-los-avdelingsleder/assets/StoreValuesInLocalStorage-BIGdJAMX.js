@@ -1,0 +1,1 @@
+import{r as t}from"./iframe-gYF99bpJ.js";const l=e=>{const o=window.localStorage.getItem(e);return o!=="undefined"&&o!==null?o:void 0},a=(e,o)=>{window.localStorage.setItem(e,o)},n=e=>{window.localStorage.removeItem(e)},s=({stateKey:e,values:o})=>(t.useEffect(()=>{a(e,JSON.stringify(o))},[o]),null);export{s as S,l as g,n as r,a as s};
