@@ -8,7 +8,6 @@ export type SakslisteAvdeling = Readonly<{
   navn?: string;
   behandlingTyper?: string[];
   fagsakYtelseTyper?: string[];
-  sistEndret: string;
   sortering?: {
     sorteringType: string;
     fra?: number;
