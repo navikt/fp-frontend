@@ -180,7 +180,7 @@ export const GjeldendeSakslisterTabell = ({
                   {saksliste.saksbehandlerIdenter.length > 0 ? saksliste.saksbehandlerIdenter.length : ''}
                 </Table.DataCell>
                 <Table.DataCell>
-                  <AntallOppaverForSaksliste
+                  <AntallOppgaverForSaksliste
                     valgtAvdelingEnhet={valgtAvdelingEnhet}
                     sakslisteId={saksliste.sakslisteId}
                   />
@@ -223,7 +223,7 @@ export const GjeldendeSakslisterTabell = ({
   );
 };
 
-export const AntallOppaverForSaksliste = ({
+const AntallOppgaverForSaksliste = ({
   valgtAvdelingEnhet,
   sakslisteId,
 }: {
@@ -234,13 +234,13 @@ export const AntallOppaverForSaksliste = ({
   const { data: antallOppgaver, isFetching, isError } = useQuery(oppgaveAntallOptions(sakslisteId, valgtAvdelingEnhet));
 
   if (isError) {
-    return <FormattedMessage id="AntallOppaverForSaksliste.HentingAvAntallOppgaverFeilet" />;
+    return <FormattedMessage id="AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet" />;
   }
 
   return isFetching ? (
     <Loader
       size="small"
-      title={intl.formatMessage({ id: 'AntallOppaverForSaksliste.HentingAvAntallOppgaverHentes' })}
+      title={intl.formatMessage({ id: 'AntallOppgaverForSaksliste.HentingAvAntallOppgaverHentes' })}
     />
   ) : (
     antallOppgaver
