@@ -125,7 +125,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/eslintrc@npm:3.3.1, @eslint/eslintrc@npm:^3.3.1":
+"@eslint/eslintrc@npm:^3.3.1":
   version: 3.3.1
   resolution: "@eslint/eslintrc@npm:3.3.1"
   dependencies:
@@ -170,7 +170,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@fp-frontend/server@workspace:."
   dependencies:
-    "@eslint/eslintrc": 3.3.1
     "@eslint/js": 9.32.0
     "@navikt/oasis": ^3.4.0
     "@navikt/vite-mode": 0.13.3
@@ -179,7 +178,6 @@ __metadata:
     "@types/express": 5.0.3
     "@types/express-http-proxy": ^1.6.6
     "@types/morgan": 1.9.10
-    "@typescript-eslint/eslint-plugin": 8.38.0
     connect-timeout: ^1.9.0
     cors: ^2.8.5
     dotenv: ^16.6.1
