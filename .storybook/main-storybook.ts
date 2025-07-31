@@ -1,5 +1,4 @@
 import type { StorybookConfig } from '@storybook/react-vite';
-import react from '@vitejs/plugin-react';
 
 //TODO (TOR) Litt hacky løysing med forskjellige relative paths for staticDirs her
 
@@ -16,10 +15,4 @@ export const config: StorybookConfig = {
 export const configWithDifferentStaticDirs: StorybookConfig = {
   ...config,
   staticDirs: ['../../../../.storybook/mock'],
-  async viteFinal(mainConfig) {
-    return {
-      ...mainConfig,
-      plugins: mainConfig.plugins?.concat(react()) ?? [react()],
-    };
-  },
 };
