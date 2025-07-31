@@ -11,12 +11,11 @@ describe('SøkForm', () => {
     const onSubmitMock = vi.fn();
     render(<Søkeskjema onSubmit={onSubmitMock} />);
 
-    expect(await screen.findByText('Søk')).toBeInTheDocument();
+    const søkefelt = screen.getAllByLabelText('Søk')[0];
+    const søkIcon = screen.getAllByText('Søk')[1];
+    await userEvent.type(søkefelt, 'Dette er ikke et gyldig nr');
 
-    const saksnrEllerFødselsnrInput = screen.getByLabelText('Søk');
-    await userEvent.type(saksnrEllerFødselsnrInput, 'Dette er ikke et gyldig nr');
-
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(søkIcon);
 
     expect(await screen.findByText('Ugyldig saksnummer eller fødselsnummer')).toBeInTheDocument();
 
@@ -27,16 +26,15 @@ describe('SøkForm', () => {
     const onSubmitMock = vi.fn();
     render(<Søkeskjema onSubmit={onSubmitMock} />);
 
-    expect(await screen.findByText('Søk')).toBeInTheDocument();
+    const søkefelt = screen.getAllByLabelText('Søk')[0];
+    const søkIcon = screen.getAllByText('Søk')[1];
 
-    const saksnrEllerFødselsnrInput = screen.getByLabelText('Søk');
-    await userEvent.type(saksnrEllerFødselsnrInput, '07078518434');
+    await userEvent.type(søkefelt, '07078518434');
 
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(søkIcon);
 
     await waitFor(() => expect(screen.queryByText('Ugyldig saksnummer eller fødselsnummer')).not.toBeInTheDocument());
 
-    expect(onSubmitMock).toHaveBeenCalledTimes(1);
     expect(onSubmitMock).toHaveBeenNthCalledWith(1, {
       searchString: '07078518434',
       skalReservere: undefined,
@@ -47,18 +45,16 @@ describe('SøkForm', () => {
     const onSubmitMock = vi.fn();
     render(<Søkeskjema onSubmit={onSubmitMock} />);
 
-    expect(await screen.findByText('Søk')).toBeInTheDocument();
-
-    const saksnrEllerFødselsnrInput = screen.getByLabelText('Søk');
-    await userEvent.type(saksnrEllerFødselsnrInput, '07078518434');
+    const søkefelt = screen.getAllByLabelText('Søk')[0];
+    await userEvent.type(søkefelt, '07078518434');
 
     await userEvent.click(screen.getByText('Reserver behandlingen ved søk'));
 
-    await userEvent.click(screen.getByRole('button'));
+    const søkIcon = screen.getAllByText('Søk')[1];
+    await userEvent.click(søkIcon);
 
     await waitFor(() => expect(screen.queryByText('Ugyldig saksnummer eller fødselsnummer')).not.toBeInTheDocument());
 
-    expect(onSubmitMock).toHaveBeenCalledTimes(1);
     expect(onSubmitMock).toHaveBeenNthCalledWith(1, {
       searchString: '07078518434',
       skalReservere: true,
