@@ -19,7 +19,6 @@ describe('SletteSakslisteModal', () => {
       navn: 'Saksliste 1',
       saksbehandlerIdenter: [],
       sakslisteId: 1,
-      sistEndret: '2020-01-01',
     });
   });
 

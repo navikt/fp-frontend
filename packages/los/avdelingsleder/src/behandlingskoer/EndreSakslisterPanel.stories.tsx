@@ -18,7 +18,6 @@ const SAKSLISTER = [
   {
     sakslisteId: 1,
     navn: 'test',
-    sistEndret: '2020-10-10',
     saksbehandlerIdenter: [],
     sortering: {
       sorteringType: KøSortering.BEHANDLINGSFRIST,
