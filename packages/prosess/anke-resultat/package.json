@@ -23,7 +23,7 @@
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-utils": "3.7.0",
-    "react": "19.1.0",
+    "react": "19.1.1",
     "react-intl": "7.1.11"
   },
   "devDependencies": {

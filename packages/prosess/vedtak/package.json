@@ -41,7 +41,7 @@
     "editorjs-html": "4.0.5",
     "editorjs-undo": "2.0.28",
     "lodash.debounce": "4.0.8",
-    "react": "19.1.0",
+    "react": "19.1.1",
     "react-hook-form": "7.61.1",
     "react-intl": "7.1.11"
   },
