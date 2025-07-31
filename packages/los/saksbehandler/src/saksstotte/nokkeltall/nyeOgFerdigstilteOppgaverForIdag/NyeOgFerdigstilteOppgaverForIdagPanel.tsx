@@ -19,8 +19,8 @@ export const NyeOgFerdigstilteOppgaverForIdagPanel = ({ height, nyeOgFerdigstilt
   const filtrerteNyeOgFerdigstilteOppgaver = getNyeOgFerdigstilteForIDag(nyeOgFerdigstilteOppgaver);
 
   return (
-    <VStack gap="1">
-      <Heading size="xsmall">
+    <VStack gap="space-4">
+      <Heading size="xsmall" level="2">
         <FormattedMessage id="NyeOgFerdigstilteOppgaverForIdagPanel.IDag" />
       </Heading>
       <NyeOgFerdigstilteOppgaverForIdagGraf

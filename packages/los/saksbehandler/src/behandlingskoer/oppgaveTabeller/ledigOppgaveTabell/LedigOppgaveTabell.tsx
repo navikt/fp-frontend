@@ -20,10 +20,10 @@ export const LedigOppgaveTabell = ({ reserverOppgave, antallOppgaver = 0, valgtS
   const { oppgaverTilBehandling, nyeBehandlinger, isMaxPollingAttemptsReached } = useOppgavePolling(valgtSakslisteId);
 
   return (
-    <VStack gap="4" className={styles.tabell}>
+    <VStack gap="space-16" className={styles.tabell}>
       {isMaxPollingAttemptsReached && <BehandlingPollingTimoutModal />}
-      <VStack gap="2" className={styles.padding}>
-        <HStack gap="2">
+      <VStack gap="space-8" className={styles.padding}>
+        <HStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="LedigOppgaveTabell.DineNesteSaker" />
           </Label>
@@ -38,7 +38,7 @@ export const LedigOppgaveTabell = ({ reserverOppgave, antallOppgaver = 0, valgtS
         </BodyShort>
       )}
       {oppgaverTilBehandling.length > 0 && (
-        <VStack gap="4">
+        <VStack gap="space-16">
           <Table size="small">
             <Table.Header>
               <Table.Row>

@@ -63,7 +63,7 @@ export const DokumentForm = ({ journalpost, dokumentTittelStyresAvJournalpostTit
     name: 'journalpostDokumenter',
   });
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       {fields.map((field, index) => (
         <DokumentDetaljer
           dokument={finnMatchendeDokumentForId(field.dokumentId, journalpost.dokumenter || TOM_DOK_LISTE)}

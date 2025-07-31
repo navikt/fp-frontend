@@ -131,7 +131,7 @@ export const GjeldendeSakslisterTabell = ({
   };
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <HStack justify="space-between">
         <Label size="small">
           <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
@@ -140,7 +140,9 @@ export const GjeldendeSakslisterTabell = ({
           <BodyShort size="small">
             <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
           </BodyShort>
-          <Heading size="small">{oppgaverForAvdelingAntall ?? '0'}</Heading>
+          <Heading size="small" level="2">
+            {oppgaverForAvdelingAntall ?? '0'}
+          </Heading>
         </div>
       </HStack>
       {sakslister.length === 0 && (

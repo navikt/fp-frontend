@@ -20,7 +20,7 @@ export const OppgaveLabels = ({ oppgave }: Props) => {
   const andreKriterier = useLosKodeverk('AndreKriterierType');
 
   return (
-    <HStack gap="2">
+    <HStack gap="space-8">
       <Tag
         size="small"
         variant="success"

@@ -47,7 +47,7 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
   });
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       {sorterteSaksbehandlere.length === 0 && (
         <BodyShort size="small">
           <FormattedMessage id="SaksbehandlereTabell.IngenSaksbehandlere" />

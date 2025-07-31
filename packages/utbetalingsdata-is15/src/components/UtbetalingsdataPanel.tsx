@@ -36,8 +36,8 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
   };
 
   return (
-    <VStack gap="5" className={styles.container}>
-      <Heading size="large">
+    <VStack gap="space-20" className={styles.container}>
+      <Heading size="large" level="2">
         <FormattedMessage id="UtbetalingsdataPanel.Heading" />
       </Heading>
       <div>
@@ -56,7 +56,7 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
       </div>
       {isSuccess && infotrygdVedtak && !error && (
         <>
-          <Heading size="small">
+          <Heading size="small" level="3">
             {infotrygdVedtak.saker.length > 0 || infotrygdVedtak.vedtakKjeder.length > 0 ? (
               <FormattedMessage id="UtbetalingsdataPanel.Resultat" />
             ) : (
@@ -65,27 +65,22 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
           </Heading>
           {infotrygdVedtak.saker.length > 0 && (
             <>
-              <Heading size="xsmall">
+              <Heading size="xsmall" level="3">
                 <FormattedMessage id="UtbetalingsdataPanel.Saker" />
               </Heading>
               <SakerPanel saker={infotrygdVedtak.saker} />
             </>
           )}
           {infotrygdVedtak.vedtakKjeder.length > 0 && (
-            <Heading size="xsmall">
+            <Heading size="xsmall" level="3">
               <FormattedMessage id="UtbetalingsdataPanel.Utbetalinger" />
             </Heading>
           )}
           {infotrygdVedtak.vedtakKjeder.map(vedtakKjede => (
-            <ExpansionCard
-              size="small"
-              aria-label="default-demo"
-              key={vedtakKjede.opprinneligIdentdato}
-              className={styles.card}
-            >
+            <ExpansionCard size="small" aria-label="default-demo" key={vedtakKjede.opprinneligIdentdato}>
               <ExpansionCard.Header>
                 <ExpansionCard.Title size="small">
-                  <HStack gap="5">
+                  <HStack gap="space-20">
                     <DateLabel dateString={vedtakKjede.opprinneligIdentdato} />
                     <div>{vedtakKjede.behandlingstema.termnavn}</div>
                   </HStack>

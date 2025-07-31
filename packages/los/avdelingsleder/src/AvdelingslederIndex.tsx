@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
-import { Box, Heading, HStack, Select, Tabs } from '@navikt/ds-react';
+import { Box, Heading, HStack, Select, Tabs, Theme } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
@@ -39,9 +39,11 @@ interface Props {
 
 export const AvdelingslederIndexIntlWrapper = (props: Props) => {
   return (
-    <RawIntlProvider value={intl}>
-      <AvdelingslederIndex {...props} />
-    </RawIntlProvider>
+    <Theme theme="light">
+      <RawIntlProvider value={intl}>
+        <AvdelingslederIndex {...props} />
+      </RawIntlProvider>
+    </Theme>
   );
 };
 
@@ -122,7 +124,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.BEHANDLINGSKOER}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Behandlingskoer" />
               </Heading>
             }
@@ -130,7 +132,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.NOKKELTALL}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Nokkeltall" />
               </Heading>
             }
@@ -138,7 +140,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.SAKSBEHANDLERE}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Saksbehandlere" />
               </Heading>
             }
@@ -146,7 +148,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.GRUPPER}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Grupper" />
               </Heading>
             }
@@ -154,14 +156,14 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.RESERVASJONER}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Reservasjoner" />
               </Heading>
             }
           />
         </Tabs.List>
       </Tabs>
-      <Box background="bg-default" padding="5">
+      <Box.New background="default" padding="5">
         {activeAvdelingslederPanel === AvdelingslederPanels.BEHANDLINGSKOER && (
           <EndreSakslisterPanel
             valgtAvdelingEnhet={valgtAvdelingEnhet}
@@ -183,7 +185,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
         {activeAvdelingslederPanel === AvdelingslederPanels.RESERVASJONER && (
           <ReservasjonerTabell valgtAvdelingEnhet={valgtAvdelingEnhet} />
         )}
-      </Box>
+      </Box.New>
     </div>
   );
 };

@@ -24,7 +24,7 @@ export const SakDetaljer = ({ sak }: Props) => {
   return (
     <HStack className={styles.sakContainer} gap="0 4" align="center" wrap={false}>
       <div>
-        <VStack gap="1">
+        <VStack gap="space-4">
           <HStack gap="0 2" align="center">
             <Label>
               <FormattedMessage id="Journal.Sak.Ytelse" values={{ ytelseType: sak.ytelseType }} />
@@ -34,8 +34,8 @@ export const SakDetaljer = ({ sak }: Props) => {
               <CopyButton copyText={sak.saksnummer} variant="action" size="small" />
             </HStack>
           </HStack>
-          <VStack gap="2">
-            <HStack gap="2">
+          <VStack gap="space-8">
+            <HStack gap="space-8">
               <Detail>
                 <FormattedMessage
                   id="Journal.Sak.OpprettetDato"

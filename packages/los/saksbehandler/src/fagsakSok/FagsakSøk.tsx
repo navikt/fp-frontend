@@ -53,7 +53,7 @@ export const FagsakSøk = ({
   resetSearch,
   kanSaksbehandle,
 }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <SøkForm
       onSubmit={searchFagsakCallback}
       searchStarted={searchStarted}

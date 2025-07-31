@@ -153,7 +153,7 @@ export const JournalpostDetaljer = ({
 
   return (
     <RhfForm<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
-      <VStack gap="5">
+      <VStack gap="space-20">
         <div>
           <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
           {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
@@ -167,15 +167,15 @@ export const JournalpostDetaljer = ({
           knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
         />
         {oppgave?.beskrivelse && (
-          <VStack gap="0">
-            <Heading size="small">
+          <VStack gap="space-0">
+            <Heading size="small" level="2">
               <FormattedMessage id="ValgtOppgave.Beskrivelse" />
             </Heading>
             <BodyLong>{oppgave.beskrivelse}</BodyLong>
           </VStack>
         )}
-        <VStack gap="2">
-          <Heading size="small">
+        <VStack gap="space-8">
+          <Heading size="small" level="2">
             <FormattedMessage id="ValgtOppgave.Dokumenter" />
           </Heading>
           {journalpost.dokumenter && (
@@ -186,15 +186,15 @@ export const JournalpostDetaljer = ({
           )}
         </VStack>
         {journalpost.eksisterendeSaksnummer && (
-          <VStack gap="2">
-            <Heading size="small">
+          <VStack gap="space-8">
+            <Heading size="small" level="2">
               <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
             </Heading>
             <SakDetaljer sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)} />
           </VStack>
         )}
-        <VStack gap="2">
-          <Heading size="small">
+        <VStack gap="space-8">
+          <Heading size="small" level="2">
             <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
           </Heading>
           {skalKunneEndreSøker && (
@@ -202,7 +202,7 @@ export const JournalpostDetaljer = ({
               <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
             </Alert>
           )}
-          <VStack gap="2">
+          <VStack gap="space-8">
             {saker
               .filter(sak => sak.saksnummer !== journalpost.eksisterendeSaksnummer)
               .map(sak => (
@@ -211,7 +211,7 @@ export const JournalpostDetaljer = ({
           </VStack>
         </VStack>
         <div>
-          <Heading size="small">
+          <Heading size="small" level="2">
             <FormattedMessage id={skalBareKunneEndreSak ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.KnyttTilSak'} />
           </Heading>
           <VelgSakForm
