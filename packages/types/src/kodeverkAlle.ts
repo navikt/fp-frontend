@@ -57,6 +57,7 @@ import {
   VilkarType,
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
+
 import type { VergeType } from './vergeTsType';
 
 //Mapping mellom KodeverkType og enums/union-types med verdier

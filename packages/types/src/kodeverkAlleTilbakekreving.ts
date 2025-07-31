@@ -7,6 +7,7 @@ import type {
   VenteArsakType,
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
+
 import type { VergeType } from './vergeTsType';
 
 //TODO Ein del av desse kodeverk-filene er delt mellom fpsak og tilbake. Mange av dei har ulike verdiar og bør delast opp i fleire filer
