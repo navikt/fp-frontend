@@ -9479,7 +9479,6 @@ __metadata:
     "@types/react-dom": 19.1.6
     "@types/react-responsive": 9.0.0
     "@types/react-router-dom": 5.3.3
-    "@vitejs/plugin-react": 4.7.0
     gh-pages: 6.3.0
     husky: 9.1.7
     jsdom: 26.1.0
@@ -9491,7 +9490,6 @@ __metadata:
     stylelint: 16.22.0
     stylelint-order: 7.0.0
     typescript: 5.8.3
-    vite: 7.0.6
     vitest: 3.2.4
     vitest-canvas-mock: 0.3.3
   languageName: unknown
