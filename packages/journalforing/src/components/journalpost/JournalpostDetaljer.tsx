@@ -168,14 +168,14 @@ export const JournalpostDetaljer = ({
         />
         {oppgave?.beskrivelse && (
           <VStack gap="space-0">
-            <Heading size="small" level="2">
+            <Heading size="small" level="4">
               <FormattedMessage id="ValgtOppgave.Beskrivelse" />
             </Heading>
             <BodyLong>{oppgave.beskrivelse}</BodyLong>
           </VStack>
         )}
         <VStack gap="space-8">
-          <Heading size="small" level="2">
+          <Heading size="small" level="4">
             <FormattedMessage id="ValgtOppgave.Dokumenter" />
           </Heading>
           {journalpost.dokumenter && (
@@ -187,14 +187,14 @@ export const JournalpostDetaljer = ({
         </VStack>
         {journalpost.eksisterendeSaksnummer && (
           <VStack gap="space-8">
-            <Heading size="small" level="2">
+            <Heading size="small" level="4">
               <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
             </Heading>
             <SakDetaljer sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)} />
           </VStack>
         )}
         <VStack gap="space-8">
-          <Heading size="small" level="2">
+          <Heading size="small" level="4">
             <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
           </Heading>
           {skalKunneEndreSøker && (
@@ -211,7 +211,7 @@ export const JournalpostDetaljer = ({
           </VStack>
         </VStack>
         <div>
-          <Heading size="small" level="2">
+          <Heading size="small" level="4">
             <FormattedMessage id={skalBareKunneEndreSak ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.KnyttTilSak'} />
           </Heading>
           <VelgSakForm

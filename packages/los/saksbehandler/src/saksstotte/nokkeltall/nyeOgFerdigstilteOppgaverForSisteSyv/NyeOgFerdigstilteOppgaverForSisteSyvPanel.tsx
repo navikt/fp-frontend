@@ -15,7 +15,7 @@ interface Props {
 export const NyeOgFerdigstilteOppgaverForSisteSyvPanel = ({ height, nyeOgFerdigstilteOppgaver }: Props) => {
   return (
     <VStack gap="space-4">
-      <Heading size="xsmall" level="2">
+      <Heading size="xsmall" level="4">
         <FormattedMessage id="NyeOgFerdigstilteOppgaverForSisteSyvPanel.SisteSyv" />
       </Heading>
       <NyeOgFerdigstilteOppgaverForSisteSyvGraf

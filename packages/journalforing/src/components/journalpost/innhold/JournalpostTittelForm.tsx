@@ -75,7 +75,7 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
       )}
       {!kanRedigereTittel && (
         <>
-          <Heading size="large" level="2">
+          <Heading size="large" level="3">
             {journalpost.tittel}
           </Heading>
           {!readOnly && erKanalSomErÅpenForEndring(journalpost.kanal) && (

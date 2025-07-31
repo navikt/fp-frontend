@@ -29,7 +29,7 @@ interface BrukerAvsenderRadProps {
 const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): ReactElement => (
   <VStack gap="space-8">
     {title && (
-      <Heading size="small" level="2">
+      <Heading size="small" level="4">
         {title}
       </Heading>
     )}
@@ -103,7 +103,7 @@ export const BrukerAvsenderPanel = ({
     <VStack gap="space-16">
       {skalKunneEndreSøker && (
         <VStack gap="space-8">
-          <Heading size="small" level="2">
+          <Heading size="small" level="4">
             <FormattedMessage id="ValgtOppgave.Søker" />
           </Heading>
           <Alert variant="warning" size="small">
