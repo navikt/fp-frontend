@@ -5483,6 +5483,102 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@sentry/cli-darwin@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli-darwin@npm:2.50.2"
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"@sentry/cli-linux-arm64@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli-linux-arm64@npm:2.50.2"
+  conditions: (os=linux | os=freebsd | os=android) & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@sentry/cli-linux-arm@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli-linux-arm@npm:2.50.2"
+  conditions: (os=linux | os=freebsd | os=android) & cpu=arm
+  languageName: node
+  linkType: hard
+
+"@sentry/cli-linux-i686@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli-linux-i686@npm:2.50.2"
+  conditions: (os=linux | os=freebsd | os=android) & (cpu=x86 | cpu=ia32)
+  languageName: node
+  linkType: hard
+
+"@sentry/cli-linux-x64@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli-linux-x64@npm:2.50.2"
+  conditions: (os=linux | os=freebsd | os=android) & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@sentry/cli-win32-arm64@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli-win32-arm64@npm:2.50.2"
+  conditions: os=win32 & cpu=arm64
+  languageName: node
+  linkType: hard
+
+"@sentry/cli-win32-i686@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli-win32-i686@npm:2.50.2"
+  conditions: os=win32 & (cpu=x86 | cpu=ia32)
+  languageName: node
+  linkType: hard
+
+"@sentry/cli-win32-x64@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli-win32-x64@npm:2.50.2"
+  conditions: os=win32 & cpu=x64
+  languageName: node
+  linkType: hard
+
+"@sentry/cli@npm:2.50.2":
+  version: 2.50.2
+  resolution: "@sentry/cli@npm:2.50.2"
+  dependencies:
+    "@sentry/cli-darwin": 2.50.2
+    "@sentry/cli-linux-arm": 2.50.2
+    "@sentry/cli-linux-arm64": 2.50.2
+    "@sentry/cli-linux-i686": 2.50.2
+    "@sentry/cli-linux-x64": 2.50.2
+    "@sentry/cli-win32-arm64": 2.50.2
+    "@sentry/cli-win32-i686": 2.50.2
+    "@sentry/cli-win32-x64": 2.50.2
+    https-proxy-agent: ^5.0.0
+    node-fetch: ^2.6.7
+    progress: ^2.0.3
+    proxy-from-env: ^1.1.0
+    which: ^2.0.2
+  dependenciesMeta:
+    "@sentry/cli-darwin":
+      optional: true
+    "@sentry/cli-linux-arm":
+      optional: true
+    "@sentry/cli-linux-arm64":
+      optional: true
+    "@sentry/cli-linux-i686":
+      optional: true
+    "@sentry/cli-linux-x64":
+      optional: true
+    "@sentry/cli-win32-arm64":
+      optional: true
+    "@sentry/cli-win32-i686":
+      optional: true
+    "@sentry/cli-win32-x64":
+      optional: true
+  bin:
+    sentry-cli: bin/sentry-cli
+  checksum: 16241b45f2521cae60ae819db4b8e7f9dd394f3dfbdafa19ca91a5508712adc8e7ce334e8eecfd8517cd42f4c69b08e7a3f84a5cfd1ebc92f20c2e3506104899
+  languageName: node
+  linkType: hard
+
 "@sentry/core@npm:9.42.0":
   version: 9.42.0
   resolution: "@sentry/core@npm:9.42.0"
@@ -6454,6 +6550,15 @@ __metadata:
   version: 1.0.0
   resolution: "add-stream@npm:1.0.0"
   checksum: 3e9e8b0b8f0170406d7c3a9a39bfbdf419ccccb0fd2a396338c0fda0a339af73bf738ad414fc520741de74517acf0dd92b4a36fd3298a47fd5371eee8f2c5a06
+  languageName: node
+  linkType: hard
+
+"agent-base@npm:6":
+  version: 6.0.2
+  resolution: "agent-base@npm:6.0.2"
+  dependencies:
+    debug: 4
+  checksum: f52b6872cc96fd5f622071b71ef200e01c7c4c454ee68bc9accca90c98cfb39f2810e3e9aa330435835eedc8c23f4f8a15267f67c6e245d2b33757575bdac49d
   languageName: node
   linkType: hard
 
@@ -9158,6 +9263,7 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@navikt/aksel-stylelint": 7.25.1
+    "@sentry/cli": 2.50.2
     "@storybook/addon-a11y": 9.0.18
     "@storybook/addon-links": 9.0.18
     "@storybook/react": 9.0.18
@@ -9787,6 +9893,16 @@ __metadata:
     agent-base: ^7.1.0
     debug: ^4.3.4
   checksum: 670858c8f8f3146db5889e1fa117630910101db601fff7d5a8aa637da0abedf68c899f03d3451cac2f83bcc4c3d2dabf339b3aa00ff8080571cceb02c3ce02f3
+  languageName: node
+  linkType: hard
+
+"https-proxy-agent@npm:^5.0.0":
+  version: 5.0.1
+  resolution: "https-proxy-agent@npm:5.0.1"
+  dependencies:
+    agent-base: 6
+    debug: 4
+  checksum: 571fccdf38184f05943e12d37d6ce38197becdd69e58d03f43637f7fa1269cf303a7d228aa27e5b27bbd3af8f09fd938e1c91dcfefff2df7ba77c20ed8dfc765
   languageName: node
   linkType: hard
 
@@ -11742,6 +11858,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-fetch@npm:^2.6.7":
+  version: 2.7.0
+  resolution: "node-fetch@npm:2.7.0"
+  dependencies:
+    whatwg-url: ^5.0.0
+  peerDependencies:
+    encoding: ^0.1.0
+  peerDependenciesMeta:
+    encoding:
+      optional: true
+  checksum: d76d2f5edb451a3f05b15115ec89fc6be39de37c6089f1b6368df03b91e1633fd379a7e01b7ab05089a25034b2023d959b47e59759cb38d88341b2459e89d6e5
+  languageName: node
+  linkType: hard
+
 "node-gyp@npm:^10.0.0":
   version: 10.3.1
   resolution: "node-gyp@npm:10.3.1"
@@ -12799,6 +12929,13 @@ __metadata:
   version: 2.0.0
   resolution: "proggy@npm:2.0.0"
   checksum: 398f38c5e53d8f3dd8e1f67140dd1044dfde0a8e43edb2df55f7f38b958912841c78a970e61f2ee7222be4f3f1ee0da134e21d0eb537805cb1b10516555c7ac1
+  languageName: node
+  linkType: hard
+
+"progress@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "progress@npm:2.0.3"
+  checksum: f67403fe7b34912148d9252cb7481266a354bd99ce82c835f79070643bb3c6583d10dbcfda4d41e04bbc1d8437e9af0fb1e1f2135727878f5308682a579429b7
   languageName: node
   linkType: hard
 
@@ -15393,7 +15530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"which@npm:^2.0.1":
+"which@npm:^2.0.1, which@npm:^2.0.2":
   version: 2.0.2
   resolution: "which@npm:2.0.2"
   dependencies:

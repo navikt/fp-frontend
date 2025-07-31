@@ -41,6 +41,7 @@
   ],
   "devDependencies": {
     "@navikt/aksel-stylelint": "7.25.1",
+    "@sentry/cli": "2.50.2",
     "@storybook/addon-a11y": "9.0.18",
     "@storybook/addon-links": "9.0.18",
     "@storybook/react": "9.0.18",
