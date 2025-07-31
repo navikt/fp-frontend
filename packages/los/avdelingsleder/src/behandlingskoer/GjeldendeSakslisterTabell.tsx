@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Detail, Heading, HStack, Label, Link, Loader, Table, VStack } from '@navikt/ds-react';
-import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
@@ -21,7 +20,6 @@ const headerTextCodes = [
   'GjeldendeSakslisterTabell.Behandlingtype',
   'GjeldendeSakslisterTabell.AntallSaksbehandlere',
   'GjeldendeSakslisterTabell.AntallBehandlinger',
-  'GjeldendeSakslisterTabell.SistEndret',
 ];
 
 const formatStonadstyper = (
@@ -184,9 +182,6 @@ export const GjeldendeSakslisterTabell = ({
                     valgtAvdelingEnhet={valgtAvdelingEnhet}
                     sakslisteId={saksliste.sakslisteId}
                   />
-                </Table.DataCell>
-                <Table.DataCell>
-                  <DateLabel dateString={saksliste.sistEndret} />
                 </Table.DataCell>
                 <Table.DataCell>
                   <div

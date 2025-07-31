@@ -27,7 +27,6 @@ export const Default: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'Saksliste 1',
-      sistEndret: '2020-01-01',
       saksbehandlerIdenter: [],
     },
   },
