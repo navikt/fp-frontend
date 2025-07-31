@@ -55,8 +55,8 @@
   "GjeldendeSakslisterTabell.AntallBehandlinger": "Antall behandlinger",
   "GjeldendeSakslisterTabell.OppgaverForAvdeling": "Antall åpne behandlinger totalt",
 
-  "AntallOppaverForSaksliste.HentingAvAntallOppgaverFeilet": "Henting av antall feilet",
-  "AntallOppaverForSaksliste.HentingAvAntallOppgaverHentes": "Henter antall oppgaver for behandlingskøen",
+  "AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet": "Henting av antall feilet",
+  "AntallOppgaverForSaksliste.HentingAvAntallOppgaverHentes": "Henter antall oppgaver for behandlingskøen",
 
   "FagsakYtelseTypeVelger.Stonadstype": "Stønadstype",
 
