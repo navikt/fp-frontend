@@ -1,21 +1,3 @@
-.searchInput {
-  width: 300px;
-}
-
-.searchButtonDiv {
-  margin-top: 82px;
-}
-
-.searchButton {
-  height: 48px;
-  width: 48px;
-}
-
-.checkbox {
-  margin-top: 88px;
-  padding-bottom: 7px;
-}
-
 .advarselIcon {
   color: var(--a-orange-500);
   height: 25px;
