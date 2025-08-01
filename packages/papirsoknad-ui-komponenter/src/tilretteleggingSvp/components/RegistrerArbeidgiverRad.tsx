@@ -43,11 +43,11 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
         />
       </Table.DataCell>
       <Table.DataCell valign="top">
-        <Box hidden={isOpen} paddingBlock="3">
+        <Box.New hidden={isOpen} paddingBlock="3">
           <BodyShort weight="semibold">{organisasjonsnummer}</BodyShort>
-        </Box>
-        <VStack gap="4" hidden={!isOpen}>
-          <HStack gap="4">
+        </Box.New>
+        <VStack gap="space-16" hidden={!isOpen}>
+          <HStack gap="space-16">
             <RhfTextField
               name={`${FA_PREFIX}.${index}.organisasjonsnummer`}
               control={control}

@@ -24,7 +24,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={values => submitCallback(TerminOgFodselPanel.transformValues(values))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <TerminOgFodselPanel {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

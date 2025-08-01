@@ -31,8 +31,8 @@ export const AndreYtelserPanel = ({ readOnly, kunMiliterEllerSiviltjeneste = fal
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="Registrering.AndreYtelser.Title" />
         </Heading>
         <RhfCheckboxGroup
@@ -82,7 +82,7 @@ const CheckboxWithInfo = ({
   const [visPerioder, setVisPeriode] = useState(valgteArbeidstyper.includes(arbeidstype.kode));
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Checkbox value={arbeidstype.kode} onClick={() => setVisPeriode(!visPerioder)} disabled={readOnly}>
         {arbeidstype.navn}
       </Checkbox>

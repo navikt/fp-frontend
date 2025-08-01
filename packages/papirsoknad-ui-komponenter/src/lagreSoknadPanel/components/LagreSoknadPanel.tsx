@@ -34,8 +34,10 @@ export const LagreSoknadPanel = ({
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">{intl.formatMessage({ id: 'Registrering.SaveApplication.Title' })}</Heading>
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
+          {intl.formatMessage({ id: 'Registrering.SaveApplication.Title' })}
+        </Heading>
         <RhfTextarea
           name="kommentarEndring"
           control={control}

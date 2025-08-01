@@ -18,8 +18,8 @@ export const FrilansPanel = ({ readOnly }: Props) => {
   const { control } = useFormContext<FrilansFormValues>();
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="Registrering.Frilans.Title" />
         </Heading>
 
@@ -30,7 +30,7 @@ export const FrilansPanel = ({ readOnly }: Props) => {
           readOnly={readOnly}
           trueContent={
             <ArrowBox marginTop={8}>
-              <VStack gap="4">
+              <VStack gap="space-16">
                 <Detail>
                   <FormattedMessage id="Registrering.Frilans.OppgiPeriode" />
                 </Detail>

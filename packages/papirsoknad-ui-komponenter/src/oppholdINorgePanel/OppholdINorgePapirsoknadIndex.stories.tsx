@@ -33,7 +33,7 @@ const meta = {
           submitCallback(OppholdINorgePapirsoknadIndex.transformValues(values))
         }
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <OppholdINorgePapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

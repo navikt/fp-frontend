@@ -42,7 +42,7 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
   }, []);
 
   return (
-    <Box background="surface-action-subtle" padding="3" style={{ borderLeft: '4px solid var(--a-lightblue-700)' }}>
+    <Box.New background="brand-blue-moderateA" padding="3" style={{ borderLeft: '4px solid var(--a-lightblue-700)' }}>
       <PeriodFieldArray
         fields={fields}
         emptyPeriodTemplate={defaultTilrettelegging}
@@ -97,6 +97,6 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
           </FieldArrayRow>
         )}
       </PeriodFieldArray>
-    </Box>
+    </Box.New>
   );
 };

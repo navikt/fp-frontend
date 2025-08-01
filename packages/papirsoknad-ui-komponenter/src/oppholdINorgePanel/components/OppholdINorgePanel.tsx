@@ -49,8 +49,8 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="Registrering.Opphold" />
         </Heading>
 
@@ -63,7 +63,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
           readOnly={readOnly}
         />
 
-        <VStack gap="2">
+        <VStack gap="space-8">
           <TrueFalseInput
             name="oppholdSisteTolvINorge"
             control={control}
@@ -82,7 +82,7 @@ export const OppholdINorgePanel = ({ readOnly = true, alleKodeverk, mottattDato,
           )}
         </VStack>
 
-        <VStack gap="2">
+        <VStack gap="space-8">
           <TrueFalseInput
             name="oppholdNesteTolvINorge"
             control={control}

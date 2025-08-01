@@ -42,10 +42,10 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
         />
       </Table.DataCell>
       <Table.DataCell valign="top">
-        <Box hidden={isOpen} paddingBlock="3">
+        <Box.New hidden={isOpen} paddingBlock="3">
           <BodyShort weight="semibold">{virksomhetNavn}</BodyShort>
-        </Box>
-        <VStack gap="4" hidden={!isOpen}>
+        </Box.New>
+        <VStack gap="space-16" hidden={!isOpen}>
           <RhfTextField
             name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navn`}
             control={control}

@@ -29,7 +29,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={values => submitCallback(AndreYtelserPapirsoknadIndex.transformValues(values))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <AndreYtelserPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

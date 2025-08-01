@@ -21,7 +21,7 @@ const meta = {
 
     return (
       <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(SprakPapirsoknadIndex.transformValues(val))}>
-        <VStack gap="10">
+        <VStack gap="space-40">
           <SprakPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

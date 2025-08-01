@@ -51,9 +51,9 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
         formMethods.reset(values);
       }}
     >
-      <Box background="bg-subtle" borderColor="border-default" borderWidth="1">
-        <VStack gap="4" padding="5">
-          <Heading size="small">
+      <Box.New background="neutral-moderate" borderWidth="1">
+        <VStack gap="space-16" padding="5">
+          <Heading size="small" level="3">
             <FormattedMessage id="Registrering.Omsoknaden.Title" />
           </Heading>
 
@@ -103,7 +103,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
             </Button>
           </Box>
         </VStack>
-      </Box>
+      </Box.New>
     </RhfForm>
   );
 };

@@ -25,8 +25,10 @@ export const DekningsgradIndex = ({ readOnly }: Props) => {
   const { control } = useFormContext<FormValues>();
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">{intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}</Heading>
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
+          {intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}
+        </Heading>
         <RhfRadioGroup
           name="dekningsgrad"
           control={control}

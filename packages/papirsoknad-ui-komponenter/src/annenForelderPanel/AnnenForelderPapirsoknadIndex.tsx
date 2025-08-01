@@ -25,8 +25,8 @@ interface Props {
 export const AnnenForelderPapirsoknadIndex = ({ readOnly, alleKodeverk, fagsakPersonnummer, sokerErMor }: Props) => (
   <RawIntlProvider value={intl}>
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="Registrering.TheOtherParent.Title" />
         </Heading>
         <OppgiAnnenForelderPanel

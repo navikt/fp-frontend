@@ -23,7 +23,7 @@ const meta = {
 
     return (
       <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(DekningsgradIndex.transformValues(val))}>
-        <VStack gap="10">
+        <VStack gap="space-40">
           <DekningsgradIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

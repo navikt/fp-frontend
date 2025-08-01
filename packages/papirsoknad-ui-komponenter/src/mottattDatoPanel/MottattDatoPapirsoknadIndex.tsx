@@ -28,8 +28,8 @@ export const MottattDatoPapirsoknadIndex = ({ readOnly }: Props) => {
   return (
     <RawIntlProvider value={intl}>
       <BorderBox>
-        <VStack gap="4">
-          <Heading size="small">
+        <VStack gap="space-16">
+          <Heading size="small" level="3">
             <FormattedMessage key="regDatoTittel" id="Registrering.Omsoknaden.MottattDato" />
           </Heading>
           <RhfDatepicker

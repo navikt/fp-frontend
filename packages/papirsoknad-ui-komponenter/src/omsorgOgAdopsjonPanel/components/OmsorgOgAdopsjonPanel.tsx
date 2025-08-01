@@ -77,8 +77,8 @@ export const OmsorgOgAdopsjonPanel = ({
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage
             id={
               familieHendelseType === FamilieHendelseType.ADOPSJON
@@ -121,7 +121,7 @@ export const OmsorgOgAdopsjonPanel = ({
           isReadOnly={readOnly}
           validate={familieHendelseType === FamilieHendelseType.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
         />
-        <HStack gap="4">
+        <HStack gap="space-16">
           {familieHendelseType === FamilieHendelseType.ADOPSJON && (
             <RhfDatepicker
               //@ts-expect-error Her er det noko rart med typane

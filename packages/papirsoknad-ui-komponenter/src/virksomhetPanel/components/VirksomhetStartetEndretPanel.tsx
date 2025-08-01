@@ -34,7 +34,7 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
       readOnly={readOnly}
       trueContent={
         <ArrowBox marginTop={8}>
-          <VStack gap="4">
+          <VStack gap="space-16">
             <Label size="small">
               <FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" />
             </Label>
@@ -130,7 +130,7 @@ const CheckboxWithInfo = ({
   const [visPerioder, setVisPeriode] = useState(valgteÅrsaker.includes(value));
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Checkbox value={value} onClick={() => setVisPeriode(!visPerioder)} disabled={readOnly}>
         {label}
       </Checkbox>

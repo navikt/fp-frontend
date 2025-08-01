@@ -26,7 +26,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={val => submitCallback(BehovForTilretteleggingPanel.transformValues(val))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <BehovForTilretteleggingPanel {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

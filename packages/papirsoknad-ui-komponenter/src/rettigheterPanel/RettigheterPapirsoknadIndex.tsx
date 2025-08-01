@@ -61,8 +61,10 @@ export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => 
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">{intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}</Heading>
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
+          {intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}
+        </Heading>
         <RhfRadioGroup name="rettigheter" control={control} isReadOnly={readOnly} radios={options} />
       </VStack>
     </BorderBox>

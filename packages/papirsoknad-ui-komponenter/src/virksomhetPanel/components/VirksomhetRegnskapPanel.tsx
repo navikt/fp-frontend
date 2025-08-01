@@ -31,7 +31,7 @@ export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
       readOnly={readOnly}
       trueContent={
         <ArrowBox marginTop={8}>
-          <VStack gap="4">
+          <VStack gap="space-16">
             <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navnRegnskapsforer`}
               control={control}

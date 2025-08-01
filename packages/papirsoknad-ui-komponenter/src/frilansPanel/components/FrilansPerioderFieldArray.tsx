@@ -48,7 +48,7 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
       {(field, index, getRemoveButton) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.perioder.${index}`;
         return (
-          <HStack key={field.id} gap="4" paddingBlock="2">
+          <HStack key={field.id} gap="space-16" paddingBlock="2">
             <RhfDatepicker
               name={`${FRILANS_NAME_PREFIX}.perioder.${index}.periodeFom`}
               control={control}
