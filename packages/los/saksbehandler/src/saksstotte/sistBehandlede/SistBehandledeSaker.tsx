@@ -25,12 +25,12 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
   const { data: sistBehandledeSaker = EMPTY_ARRAY } = useQuery(behandlendeOppgaverOptions());
 
   return (
-    <VStack gap="2">
-      <HStack gap="2" align="center">
+    <VStack gap="space-8">
+      <HStack gap="space-8" align="center">
         <div className={styles.iconBackground}>
           <ClockDashedIcon aria-hidden className={styles.clockIcon} />
         </div>
-        <Heading size="xsmall">
+        <Heading size="xsmall" level="2">
           <FormattedMessage id="SistBehandledeSaker.SistBehandledeSaker" />
         </Heading>
       </HStack>

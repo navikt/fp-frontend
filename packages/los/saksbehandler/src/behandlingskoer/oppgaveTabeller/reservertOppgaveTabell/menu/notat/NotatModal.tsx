@@ -63,7 +63,7 @@ export const NotatModal = ({ notat, closeModal, flyttOppgavereservasjon, brukern
             validate={[required, maxLength500, minLength3, hasValidText]}
             maxLength={500}
           />
-          <HStack gap="2" justify="end">
+          <HStack gap="space-8" justify="end">
             <Button className={styles.cancelButton} size="small" variant="secondary" onClick={closeModal} type="button">
               <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
             </Button>

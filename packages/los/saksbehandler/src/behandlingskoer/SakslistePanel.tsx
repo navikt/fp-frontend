@@ -34,7 +34,7 @@ export const SakslistePanel = ({
   });
 
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <SakslisteVelgerForm
         sakslister={sakslister}
         setValgtSakslisteId={setValgtSakslisteId}

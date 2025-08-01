@@ -100,12 +100,12 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
   return (
     <RhfForm formMethods={formMethods}>
-      <Box padding="5" borderColor="border-divider" borderRadius="0" borderWidth="1">
-        <VStack gap="2">
-          <Heading size="small">
+      <Box.New padding="5" borderColor="neutral-subtle" borderRadius="0" borderWidth="1">
+        <VStack gap="space-8">
+          <Heading size="small" level="2">
             <FormattedMessage id="UtvalgskriterierForSakslisteForm.Utvalgskriterier" />
           </Heading>
-          <VStack gap="4">
+          <VStack gap="space-16">
             <RhfTextField
               name="navn"
               control={formMethods.control}
@@ -142,7 +142,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
             </HStack>
           </VStack>
         </VStack>
-      </Box>
+      </Box.New>
     </RhfForm>
   );
 };

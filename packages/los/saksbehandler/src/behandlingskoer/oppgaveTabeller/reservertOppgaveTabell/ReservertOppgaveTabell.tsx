@@ -56,8 +56,8 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
 
   return (
     <div className={styles.tabell}>
-      <VStack gap="2" className={styles.headerPadding}>
-        <HStack gap="2">
+      <VStack gap="space-8" className={styles.headerPadding}>
+        <HStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="ReservertOppgaveTabell.ReserverteOppgaver" />
           </Label>
@@ -75,7 +75,7 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
         )}
       </VStack>
       {reserverteOppgaver.length > 0 && (
-        <VStack gap="4">
+        <VStack gap="space-16">
           <Table
             size="small"
             sort={tabellSortering}

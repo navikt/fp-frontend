@@ -57,7 +57,7 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
   return (
     <RhfForm formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
-      <VStack gap="2">
+      <VStack gap="space-8">
         <Label size="small">
           <FormattedMessage id="FordelingAvBehandlingstypePanel.Fordeling" />
         </Label>

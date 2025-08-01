@@ -15,7 +15,7 @@ export const OppgaverPerForsteStonadsdagPanel = ({ height, valgtAvdelingEnhet }:
   const { data: oppgaverPerForsteStonadsdag } = useQuery(oppgaverPerFørsteStønadsdagOptions(valgtAvdelingEnhet));
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Label size="small">
         <FormattedMessage id="OppgaverPerForsteStonadsdagPanel.FordeltPaForsteStonadsdag" />
       </Label>

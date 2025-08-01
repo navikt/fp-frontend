@@ -57,11 +57,11 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
-      <VStack gap="4">
+      <VStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="TilBehandlingPanel.TilBehandling" />
         </Label>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <RhfSelect
             name="ukevalg"
             control={formMethods.control}

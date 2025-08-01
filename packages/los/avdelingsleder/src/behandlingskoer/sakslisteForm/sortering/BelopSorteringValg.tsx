@@ -60,7 +60,7 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
       <Detail>
         <FormattedMessage id="SorteringVelger.FiltrerPaHeltall" />
       </Detail>
-      <HStack gap="4">
+      <HStack gap="space-16">
         <RhfTextField
           name="fra"
           control={control}

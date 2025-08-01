@@ -77,11 +77,11 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => finnSaksbehandler({ brukerIdent: values.brukerIdent })}>
-      <VStack gap="4">
+      <VStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="LeggTilSaksbehandlerForm.LeggTil" />
         </Label>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <RhfTextField
             name="brukerIdent"
             control={formMethods.control}
@@ -101,9 +101,9 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
           </div>
         </HStack>
         {saksbehandlerStatus === 'success' && (
-          <VStack gap="2">
+          <VStack gap="space-8">
             <BodyShort size="small">{formattedText}</BodyShort>
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Button
                 size="small"
                 variant="primary"

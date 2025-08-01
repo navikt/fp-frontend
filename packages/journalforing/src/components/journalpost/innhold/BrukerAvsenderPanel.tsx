@@ -27,13 +27,17 @@ interface BrukerAvsenderRadProps {
 }
 
 const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): ReactElement => (
-  <VStack gap="2">
-    {title && <Heading size="small">{title}</Heading>}
-    <HStack gap="4">
+  <VStack gap="space-8">
+    {title && (
+      <Heading size="small" level="4">
+        {title}
+      </Heading>
+    )}
+    <HStack gap="space-16">
       <div className={styles.ikonKol}>{ikon}</div>
       <div>
         <BodyShort>{navn}</BodyShort>
-        <HStack gap="1" align="center">
+        <HStack gap="space-4" align="center">
           <BodyShort>{id}</BodyShort>
           <CopyButton copyText={id} variant="action" size="small" />
         </HStack>
@@ -96,10 +100,10 @@ export const BrukerAvsenderPanel = ({
   };
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {skalKunneEndreSøker && (
-        <VStack gap="2">
-          <Heading size="small">
+        <VStack gap="space-8">
+          <Heading size="small" level="4">
             <FormattedMessage id="ValgtOppgave.Søker" />
           </Heading>
           <Alert variant="warning" size="small">
@@ -115,7 +119,7 @@ export const BrukerAvsenderPanel = ({
           </Search>
           {søkerFeilmelding && <ErrorMessage>{søkerFeilmelding}</ErrorMessage>}
           {brukerTilForhåndsvisning && (
-            <VStack gap="4">
+            <VStack gap="space-16">
               <BrukerAvsenderRad
                 navn={brukerTilForhåndsvisning.navn}
                 id={brukerTilForhåndsvisning.fødselsnummer}

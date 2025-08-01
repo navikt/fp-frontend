@@ -35,7 +35,7 @@ export const OppgaveErReservertAvAnnenModal = ({
       onClose={lukk}
     >
       <NavModal.Body>
-        <HStack gap="4" wrap={false} align="center">
+        <HStack gap="space-16" wrap={false} align="center">
           <ExclamationmarkTriangleFillIcon
             className={styles.image}
             title={intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.ReservertAvEnkel' })}

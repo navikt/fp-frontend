@@ -37,7 +37,7 @@ export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAns
       <Table.DataCell>{oppgave.beskrivelse}</Table.DataCell>
       <Table.DataCell>
         {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
-          <Tag size="small" variant="info-moderate">
+          <Tag size="small" variant="alt3">
             <FormattedMessage id="Oppgavetabell.Meg" />
           </Tag>
         )}

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { Heading } from '@navikt/ds-react';
+import { Heading, Theme } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -34,9 +34,11 @@ interface Props {
 
 export const OppgaveJournalføringIndex = (props: Props) => {
   return (
-    <RawIntlProvider value={intl}>
-      <JournalforingIndex {...props} />
-    </RawIntlProvider>
+    <Theme theme="light">
+      <RawIntlProvider value={intl}>
+        <JournalforingIndex {...props} />
+      </RawIntlProvider>
+    </Theme>
   );
 };
 
@@ -128,7 +130,7 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
 
   if (!navAnsatt) {
     return (
-      <Heading size="medium">
+      <Heading size="medium" level="2">
         <FormattedMessage id="Journalforing.Tilgang" />
       </Heading>
     );

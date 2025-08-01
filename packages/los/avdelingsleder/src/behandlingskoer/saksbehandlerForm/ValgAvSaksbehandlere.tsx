@@ -37,8 +37,8 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
   const avdelingensSaksbehandlereHoyreListe = saksbehandlere.slice(pos);
 
   return (
-    <HStack gap="1">
-      <VStack gap="2" width="50%">
+    <HStack gap="space-4">
+      <VStack gap="space-8" width="50%">
         {avdelingensSaksbehandlereVenstreListe.map(s => (
           <RhfCheckbox
             key={s.brukerIdent}
@@ -54,7 +54,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
           />
         ))}
       </VStack>
-      <VStack gap="2">
+      <VStack gap="space-8">
         {avdelingensSaksbehandlereHoyreListe.map(s => (
           <RhfCheckbox
             key={s.brukerIdent}

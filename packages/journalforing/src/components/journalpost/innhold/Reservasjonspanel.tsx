@@ -33,7 +33,7 @@ export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props
       {oppgave.reservertAv && navAnsatt.brukernavn === oppgave?.reservertAv && (
         <BodyShort>
           <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-          <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
+          <Tag size="small" variant="alt3" style={{ marginLeft: '0.5rem' }}>
             <FormattedMessage id="Oppgavetabell.Meg" />
           </Tag>
           <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
@@ -44,7 +44,7 @@ export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props
       {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
         <BodyShort>
           <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-          <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
+          <Tag size="small" variant="alt3" style={{ marginLeft: '0.5rem' }}>
             {oppgave.reservertAv}
           </Tag>
         </BodyShort>

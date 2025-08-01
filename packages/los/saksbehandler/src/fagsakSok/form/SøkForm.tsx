@@ -1,9 +1,9 @@
-import { useForm } from 'react-hook-form';
-import { useIntl } from 'react-intl';
+import { useController, useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ExclamationmarkTriangleFillIcon, MagnifyingGlassIcon } from '@navikt/aksel-icons';
-import { Button, HStack, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
+import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
+import { HStack, Search, VStack } from '@navikt/ds-react';
+import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { hasValidSaksnummerOrFodselsnummerFormat } from '@navikt/ft-form-validators';
 
 import styles from './SøkForm.module.css';
@@ -32,46 +32,48 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
   const intl = useIntl();
   const formMethods = useForm<SøkFormValues>();
 
-  const searchStringValue = formMethods.watch('searchString');
+  const { field } = useController({
+    name: 'searchString',
+    control: formMethods.control,
+    rules: {
+      validate: val => hasValidSaksnummerOrFodselsnummerFormat(val) || true,
+    },
+  });
 
   return (
     <RhfForm<SøkFormValues> onSubmit={onSubmit} formMethods={formMethods}>
-      <VStack gap="2">
-        <HStack gap="8">
-          <HStack gap="0">
-            <RhfTextField
-              name="searchString"
-              control={formMethods.control}
-              label={intl.formatMessage({ id: 'Search.SearchHeader' })}
-              description={intl.formatMessage({ id: 'Search.SaksnummerOrPersonId' })}
-              validate={[hasValidSaksnummerOrFodselsnummerFormat]}
-              parse={(s = '') => s.toString().trim()}
-              className={styles.searchInput}
-              size="medium"
-            />
-            <div className={styles.searchButtonDiv}>
-              <Button
-                size="small"
-                variant="primary"
-                icon={<MagnifyingGlassIcon aria-hidden />}
-                loading={!searchResultAccessDenied?.feilmelding && searchStarted}
-                disabled={(!searchResultAccessDenied?.feilmelding && searchStarted) || !searchStringValue}
-                className={styles.searchButton}
-              />
-            </div>
-          </HStack>
-          {kanSaksbehandle && (
-            <RhfCheckbox
-              name="skalReservere"
-              control={formMethods.control}
-              label={intl.formatMessage({ id: 'Search.ReserverBehandling' })}
-              onClick={resetSearch}
-              className={styles.checkbox}
-            />
-          )}
-        </HStack>
+      <VStack gap="space-8">
+        <Search
+          label={<FormattedMessage id="Search.SearchHeader" />}
+          description={<FormattedMessage id="Search.SaksnummerOrPersonId" />}
+          variant="primary"
+          value={field.value}
+          error={formMethods.formState.errors['searchString']?.message}
+          onChange={field.onChange}
+          hideLabel={false}
+          htmlSize="30"
+          clearButton
+          onClear={() => {
+            field.onChange('');
+            resetSearch();
+          }}
+        >
+          <Search.Button
+            type="submit"
+            loading={!searchResultAccessDenied?.feilmelding && searchStarted}
+            disabled={(!searchResultAccessDenied?.feilmelding && searchStarted) || !field.value || field.value === ''}
+          />
+        </Search>
+        {kanSaksbehandle && (
+          <RhfCheckbox
+            name="skalReservere"
+            control={formMethods.control}
+            label={intl.formatMessage({ id: 'Search.ReserverBehandling' })}
+            onClick={resetSearch}
+          />
+        )}
         {searchResultAccessDenied?.feilmelding && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
             {searchResultAccessDenied.feilmelding}
           </HStack>

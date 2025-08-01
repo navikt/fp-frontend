@@ -31,12 +31,12 @@ export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harS
   return (
     <Modal open={erÅpen} onClose={lukkModal} aria-label="journalpost-modal">
       <Modal.Header>
-        <Heading size="medium">
+        <Heading size="medium" level="2">
           <FormattedMessage id="Journalpost.Søk.Tittel" />
         </Heading>
       </Modal.Header>
       <Modal.Body>
-        <VStack gap="2">
+        <VStack gap="space-8">
           <RhfForm<FormValues>
             formMethods={formMethods}
             onSubmit={(data: FormValues) => {
@@ -45,7 +45,7 @@ export const JournalpostSøkModal = ({ hentJournalpost, lukkModal, erÅpen, harS
               setLasterJournalpost(false);
             }}
           >
-            <HStack gap="2" align="end">
+            <HStack gap="space-8" align="end">
               <RhfTextField
                 description={<FormattedMessage id="Journalpost.Søk.KunTall" />}
                 label={<FormattedMessage id="Journalpost.Søk.JournalpostID" />}
