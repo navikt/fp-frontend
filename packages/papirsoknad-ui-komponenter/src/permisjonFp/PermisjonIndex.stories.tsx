@@ -31,7 +31,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={(values: PermisjonFormValues) => submitCallback(PermisjonIndex.transformValues(values))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <PermisjonIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

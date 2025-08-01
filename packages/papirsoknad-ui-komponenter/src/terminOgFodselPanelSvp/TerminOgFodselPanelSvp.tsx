@@ -52,8 +52,10 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">{intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}</Heading>
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
+          {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}
+        </Heading>
         <RhfRadioGroup
           name="erBarnetFodt"
           control={control}

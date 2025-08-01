@@ -30,7 +30,7 @@ export const PermisjonGraderingPanel = ({ readOnly, alleKodeverk }: Props) => {
   const skalGradere = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalGradere`) || false;
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label>
         <FormattedMessage id="Registrering.Permisjon.Gradering.Title" />
       </Label>

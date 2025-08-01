@@ -30,7 +30,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={values => submitCallback(AnnenForelderPapirsoknadIndex.transformValues(values))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <AnnenForelderPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

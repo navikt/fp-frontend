@@ -44,7 +44,7 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
       {(field, index) => {
         const fieldNamePrefix = `${name}.${index}` as const;
         return (
-          <HStack key={field.id} gap="2">
+          <HStack key={field.id} gap="space-8">
             <RhfDatepicker
               name={`${fieldNamePrefix}.periodeFom`}
               control={control}

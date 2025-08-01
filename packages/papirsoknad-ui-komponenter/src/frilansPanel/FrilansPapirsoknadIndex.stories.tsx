@@ -26,7 +26,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={values => submitCallback(FrilansPapirsoknadIndex.transformValues(values))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <FrilansPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

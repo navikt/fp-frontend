@@ -81,8 +81,8 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
       />
       {kanIkkeOppgiAnnenForelder === true && (
         <ArrowBox>
-          <VStack gap="4">
-            <Heading size="small">
+          <VStack gap="space-16">
+            <Heading size="small" level="4">
               {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
             </Heading>
             <RhfRadioGroup

@@ -16,7 +16,7 @@ export const FieldArrayRow = ({ children, remove, readOnly, index }: Props) => {
     <>
       {index > 0 && <AvsnittSkiller spaceUnder spaceAbove />}
       <HStack wrap={false} justify="space-between">
-        <HStack wrap gap="4">
+        <HStack wrap gap="space-16">
           {children}
         </HStack>
         {!readOnly && index > 0 && (

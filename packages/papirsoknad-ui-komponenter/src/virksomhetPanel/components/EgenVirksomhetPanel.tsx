@@ -32,8 +32,8 @@ export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) =>
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="Registrering.EgenVirksomhet.Title" />
         </Heading>
 
