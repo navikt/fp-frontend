@@ -41,8 +41,8 @@
   "devDependencies": {
     "@navikt/aksel-stylelint": "7.25.1",
     "@sentry/cli": "2.50.2",
-    "@storybook/addon-a11y": "9.0.18",
-    "@storybook/addon-links": "9.0.18",
+    "@storybook/addon-a11y": "9.1.0",
+    "@storybook/addon-links": "9.1.0",
     "@storybook/react": "9.0.18",
     "@testing-library/jest-dom": "6.6.4",
     "@types/react": "19.1.8",
@@ -57,9 +57,9 @@
     "lint-staged": "16.1.2",
     "prettier": "3.6.2",
     "shelljs": "0.10.0",
-    "stylelint": "16.22.0",
+    "stylelint": "16.23.0",
     "stylelint-order": "7.0.0",
-    "typescript": "5.8.3",
+    "typescript": "5.9.2",
     "vitest": "3.2.4",
     "vitest-canvas-mock": "0.3.3"
   },
