@@ -103,9 +103,9 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukerna
   const erLagetAvInnloggetBruker = brukernavn === flyttetReservasjon.uid;
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       {!erLagetAvInnloggetBruker && (
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="ReservertOppgaveRad.OverfortReservasjonHeader" />
           </Label>
@@ -122,7 +122,7 @@ const lagFlyttetReservasjonPopover = (oppgaveStatus: ReservasjonStatus, brukerna
           </BodyShort>
         </VStack>
       )}
-      <VStack gap="1">
+      <VStack gap="space-4">
         <Label size="small">
           {erLagetAvInnloggetBruker ? (
             <FormattedMessage id="ReservertOppgaveRad.Notat" />

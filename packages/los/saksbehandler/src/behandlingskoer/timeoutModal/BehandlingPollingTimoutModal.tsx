@@ -19,7 +19,7 @@ export const BehandlingPollingTimoutModal = () => {
       onClose={() => window.location.reload()}
     >
       <NavModal.Body>
-        <HStack gap="4" align="center">
+        <HStack gap="space-16" align="center">
           <ExclamationmarkTriangleFillIcon
             className={styles.image}
             title={intl.formatMessage({ id: 'BehandlingPollingTimoutModal.TimeoutMelding' })}

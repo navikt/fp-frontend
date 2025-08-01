@@ -22,15 +22,15 @@ export const PersonInfo = ({ person }: Props) => {
   const alder = dayjs().diff(fødselsdato, 'years');
 
   return (
-    <HStack gap="4">
+    <HStack gap="space-16">
       {kjønn === KjønnkodeEnum.KVINNE && (
         <FigureOutwardFillIcon className={styles.kvinneIcon} title={intl.formatMessage({ id: 'Person.ImageText' })} />
       )}
       {kjønn === KjønnkodeEnum.MANN && (
         <FigureInwardFillIcon className={styles.MannIcon} title={intl.formatMessage({ id: 'Person.ImageText' })} />
       )}
-      <VStack gap="1">
-        <Heading size="small">
+      <VStack gap="space-4">
+        <Heading size="small" level="2">
           {navn} <Aldersvisning erDød={!!dødsdato} alder={alder} dødsdato={dødsdato} />
         </Heading>
         <Detail>{fødselsnummer}</Detail>

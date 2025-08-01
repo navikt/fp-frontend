@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const SaksbehandlerePanel = ({ avdelingensSaksbehandlere, valgtAvdelingEnhet }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <SaksbehandlereTabell saksbehandlere={avdelingensSaksbehandlere} valgtAvdelingEnhet={valgtAvdelingEnhet} />
     <LeggTilSaksbehandlerForm
       valgtAvdelingEnhet={valgtAvdelingEnhet}

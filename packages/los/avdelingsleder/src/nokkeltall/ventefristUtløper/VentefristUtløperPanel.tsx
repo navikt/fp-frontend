@@ -53,11 +53,11 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
-      <VStack gap="4">
+      <VStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="VentefristUtløperPanel.SattPaVent" />
         </Label>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <RhfRadioGroup
             name="valgtYtelsetype"
             control={formMethods.control}

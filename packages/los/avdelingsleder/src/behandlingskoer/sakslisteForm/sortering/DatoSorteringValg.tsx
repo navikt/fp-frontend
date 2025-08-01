@@ -111,12 +111,12 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   return (
     <div className={styles.arrowBoxWidth}>
       <ArrowBox>
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Detail>
             <FormattedMessage id="SorteringVelger.FiltrerPaTidsintervall" />
           </Detail>
           {erDynamiskPeriode && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <div>
                 <RhfTextField
                   name="fra"
@@ -156,7 +156,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
             </HStack>
           )}
           {!erDynamiskPeriode && (
-            <VStack gap="4">
+            <VStack gap="space-16">
               <RhfDatepicker
                 name="fomDato"
                 control={control}

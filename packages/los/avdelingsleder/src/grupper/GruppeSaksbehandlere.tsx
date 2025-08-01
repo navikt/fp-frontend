@@ -122,7 +122,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
 
   return (
     <RhfForm formMethods={formMethods}>
-      <VStack gap="5">
+      <VStack gap="space-20">
         <RhfTextField
           name="navn"
           control={formMethods.control}
@@ -131,7 +131,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
           onBlur={value => lagreNavnDebounce(value)}
           className={styles.navn}
         />
-        <VStack gap="4">
+        <VStack gap="space-16">
           <UNSAFE_Combobox
             label={intl.formatMessage({ id: 'GruppeSaksbehandlere.VelgSaksbehandlere' })}
             size="small"
@@ -143,7 +143,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
             className={styles.saksbehandlerCombo}
           />
 
-          <VStack gap="2">
+          <VStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="GruppeSaksbehandlere.ValgteSaksbehandlere" />
             </Label>
@@ -153,7 +153,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
               </BodyShort>
             )}
             {sorterteGrupperteSaksbehandlere.map(saksbehandler => (
-              <HStack gap="2" align="center" key={saksbehandler.brukerIdent}>
+              <HStack gap="space-8" align="center" key={saksbehandler.brukerIdent}>
                 <div>{`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}</div>
                 <div>
                   <XMarkIcon

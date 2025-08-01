@@ -2,7 +2,7 @@ import { type KeyboardEvent, type ReactElement, useEffect, useRef, useState } fr
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PlusCircleIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Detail, Heading, HStack, Label, Link, Loader, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Detail, HStack, Label, Link, Loader, Table, VStack } from '@navikt/ds-react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
@@ -131,7 +131,7 @@ export const GjeldendeSakslisterTabell = ({
   };
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <HStack justify="space-between">
         <Label size="small">
           <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
@@ -140,7 +140,7 @@ export const GjeldendeSakslisterTabell = ({
           <BodyShort size="small">
             <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
           </BodyShort>
-          <Heading size="small">{oppgaverForAvdelingAntall ?? '0'}</Heading>
+          <BodyShort size="large">{oppgaverForAvdelingAntall ?? '0'}</BodyShort>
         </div>
       </HStack>
       {sakslister.length === 0 && (

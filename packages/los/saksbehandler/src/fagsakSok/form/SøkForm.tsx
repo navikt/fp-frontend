@@ -36,9 +36,9 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
 
   return (
     <RhfForm<SøkFormValues> onSubmit={onSubmit} formMethods={formMethods}>
-      <VStack gap="2">
-        <HStack gap="8">
-          <HStack gap="0">
+      <VStack gap="space-8">
+        <HStack gap="space-32">
+          <HStack gap="space-0">
             <RhfTextField
               name="searchString"
               control={formMethods.control}
@@ -71,7 +71,7 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
           )}
         </HStack>
         {searchResultAccessDenied?.feilmelding && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
             {searchResultAccessDenied.feilmelding}
           </HStack>

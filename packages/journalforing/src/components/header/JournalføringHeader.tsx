@@ -38,14 +38,14 @@ export const JournalføringHeader = ({
   return (
     <HStack className={styles.header}>
       <div>
-        <HStack gap="8" align="center">
+        <HStack gap="space-32" align="center">
           {valgtJournalpost && (
             <BodyShort as={Link} size="large" onClick={avbrytVisningAvJournalpost}>
               <ChevronLeftIcon height="28px" width="28px" />
               <FormattedMessage id="Journalforing.Oversikt" />
             </BodyShort>
           )}
-          <Heading size="medium">
+          <Heading size="medium" level="2">
             <FormattedMessage id="Journalforing.Tittel" />
           </Heading>
         </HStack>

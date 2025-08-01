@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const ArbeidsforholdPanel = ({ alleArbeidsforhold }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <div />
     {!alleArbeidsforhold && (
       <BodyShort size="small">

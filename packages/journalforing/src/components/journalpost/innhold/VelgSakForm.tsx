@@ -121,7 +121,7 @@ export const VelgSakForm = ({
   const sakValg = formMethods.watch(radioFieldName);
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {!finnesSaker && erKlarForJournalføring && (
         <BodyShort>
           <FormattedMessage id="Journal.Sak.Ingen" />
@@ -132,8 +132,8 @@ export const VelgSakForm = ({
           <FormattedMessage id="Journalpost.Søk.Forklaring" />
         </Alert>
       )}
-      <VStack gap="8">
-        <VStack gap="4">
+      <VStack gap="space-32">
+        <VStack gap="space-16">
           <RhfRadioGroup
             name={radioFieldName}
             control={formMethods.control}
@@ -161,7 +161,7 @@ export const VelgSakForm = ({
             </Alert>
           )}
         </VStack>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
             <FormattedMessage
               id={erEndeligJournalført(journalpost.tilstand) ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.Journalfør'}

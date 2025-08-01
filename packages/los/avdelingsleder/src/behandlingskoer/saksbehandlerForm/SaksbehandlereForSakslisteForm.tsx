@@ -56,8 +56,8 @@ export const SaksbehandlereForSakslisteForm = ({
 
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
-      <Box padding="5" borderColor="border-divider" borderRadius="0" borderWidth="1">
-        <VStack gap="2">
+      <Box.New padding="5" borderColor="neutral-subtle" borderRadius="0" borderWidth="1">
+        <VStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="SaksbehandlereForSakslisteForm.Saksbehandlere" />
           </Label>
@@ -66,7 +66,7 @@ export const SaksbehandlereForSakslisteForm = ({
               <FormattedMessage id="SaksbehandlereForSakslisteForm.IngenSaksbehandlere" />
             </BodyShort>
           )}
-          <VStack gap="10">
+          <VStack gap="space-40">
             {harGrupper && (
               <Table>
                 <Table.Header>
@@ -131,7 +131,7 @@ export const SaksbehandlereForSakslisteForm = ({
             </ExpansionCard>
           )}
         </VStack>
-      </Box>
+      </Box.New>
     </RhfForm>
   );
 };
