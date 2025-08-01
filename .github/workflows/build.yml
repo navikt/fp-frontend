@@ -24,6 +24,7 @@ jobs:
       node-version: '22.17.1'
       build-image: ${{ github.ref_name == 'master' }} # default: true
       push-image: ${{ github.ref_name == 'master' }} # default: false
+      run-knip: true
     secrets: inherit
 
   deploy-dev:
