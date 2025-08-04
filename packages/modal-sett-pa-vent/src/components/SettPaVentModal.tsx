@@ -1,7 +1,7 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Button, Modal, VStack } from '@navikt/ds-react';
+import { BodyShort, Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   ariaCheck,
@@ -67,12 +67,15 @@ export const SettPaVentModal = ({
         width="small"
         open={showModal}
         onClose={cancelEvent}
-        header={{
-          heading: intl.formatMessage({
-            id: ventearsak ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.SettesPaVent',
-          }),
-        }}
+        aria-label={intl.formatMessage({
+          id: ventearsak ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.SettesPaVent',
+        })}
       >
+        <Modal.Header>
+          <Heading size="small" level="2">
+            <FormattedMessage id={ventearsak ? 'SettPaVentModal.ErSettPaVent' : 'SettPaVentModal.SettesPaVent'} />
+          </Heading>
+        </Modal.Header>
         <Modal.Body>
           <VStack gap="space-16">
             {(hasManualPaVent || fristFraFelt) && (
