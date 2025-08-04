@@ -1,7 +1,7 @@
 .card {
   background-color: var(--a-grayalpha-100);
-  border-radius: 0;
   border-collapse: var(--a-grayalpha-200);
+  border-radius: 0;
 }
 .cardHeader {
   background-color: var(--a-gray-200);
