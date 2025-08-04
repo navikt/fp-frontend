@@ -78,7 +78,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <VStack gap="4">
+        <VStack gap="space-16">
           <Label size="small">
             <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.VilkaretOppfylt" />
           </Label>

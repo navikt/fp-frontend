@@ -22,7 +22,7 @@ export const Dokumenter = ({ dokumenter }: Props) => {
   return dokumenter.length == 1 ? (
     <DokumentVisning dokument={dokumenter[0]} />
   ) : (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Button
         className={styles.button}
         variant="tertiary"
@@ -36,7 +36,7 @@ export const Dokumenter = ({ dokumenter }: Props) => {
           : intl.formatMessage({ id: 'Dokumenter.SkjulDokumenter' }, { antall: dokumenter.length })}
       </Button>
       {!erDokumenterSkjult && (
-        <VStack gap="1" className={styles.andreDokumenter}>
+        <VStack gap="space-4" className={styles.andreDokumenter}>
           {dokumenter?.map(dokument => (
             <DokumentVisning key={dokument.dokumentId} dokument={dokument} />
           ))}

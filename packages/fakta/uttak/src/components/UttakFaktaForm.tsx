@@ -262,9 +262,9 @@ export const UttakFaktaForm = ({
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
   return (
-    <VStack gap="8">
-      <HStack gap="4">
-        <Heading size="small">
+    <VStack gap="space-32">
+      <HStack gap="space-16">
+        <Heading size="small" level="2">
           <FormattedMessage id="UttakFaktaForm.FaktaUttak" />
         </Heading>
         {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
@@ -293,7 +293,7 @@ export const UttakFaktaForm = ({
         settVisNyPeriode={setVisNyPeriode}
       />
       <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
             isSubmittable

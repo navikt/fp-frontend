@@ -101,7 +101,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
   });
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <Table size="small">
         <Table.Body>
           {alleRaderSortert.map((rad, index) => {
@@ -155,7 +155,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
         </Table.Body>
       </Table>
       {!readOnly && (
-        <HStack gap="4">
+        <HStack gap="space-16">
           <Button
             size="small"
             variant="secondary"

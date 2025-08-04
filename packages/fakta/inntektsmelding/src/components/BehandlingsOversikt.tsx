@@ -49,7 +49,7 @@ export const BehandlingsOversikt = ({
       <List>
         {sorterteBehandlinger.map(b => (
           <List.Item key={b.uuid}>
-            <VStack gap="1">
+            <VStack gap="space-4">
               <span>{alleKodeverk.BehandlingType.find(({ kode }) => kode === b.type)?.navn}</span>
               <span>
                 <FormattedMessage id="InntektsmeldingFaktaPanel.behandling.opprettet" />{' '}

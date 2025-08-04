@@ -27,8 +27,6 @@
 }
 
 .row {
-  --ac-table-row-hover: var(--a-gray-200);
-
   cursor: pointer;
 }
 

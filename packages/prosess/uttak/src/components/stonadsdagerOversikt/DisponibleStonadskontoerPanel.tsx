@@ -125,7 +125,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
 
   return (
     <div className={styles.disponibeltUttak}>
-      <HStack gap="4">
+      <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
         </Label>

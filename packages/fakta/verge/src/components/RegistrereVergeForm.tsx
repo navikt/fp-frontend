@@ -48,7 +48,7 @@ interface Props {
 export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType }: Props) => {
   const { control } = useFormContext<VergeFormValues & FaktaBegrunnelseFormValues>();
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <RhfSelect
         name="vergeType"
         control={control}
@@ -63,7 +63,7 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
       />
       {valgtVergeType && (
         <>
-          <HStack gap="4">
+          <HStack gap="space-16">
             <RhfTextField
               name="navn"
               control={control}
@@ -89,7 +89,7 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
               />
             )}
           </HStack>
-          <HStack gap="4">
+          <HStack gap="space-16">
             <RhfDatepicker
               name="gyldigFom"
               control={control}

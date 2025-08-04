@@ -65,7 +65,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
   const [isDirty, setIsDirty] = useState<boolean>(false);
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       {aksjonspunkterForPanel.some(a => a.status === AksjonspunktStatus.OPPRETTET) && (
         <Alert variant="warning">
           <FormattedMessage id="UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst" />
@@ -78,7 +78,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submi
         readOnly={readOnly}
       />
       <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
             label={intl.formatMessage({ id: 'UttakDokumentasjonFaktaForm.Begrunnelse' })}

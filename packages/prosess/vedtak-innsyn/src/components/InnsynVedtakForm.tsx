@@ -137,11 +137,11 @@ export const InnsynVedtakForm = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="2">
           <FormattedMessage id={isReadOnly ? 'InnsynVedtakForm.Vedtak' : 'InnsynVedtakForm.ForslagVedtak'} />
         </Heading>
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="InnsynVedtakForm.Resultat" />
           </Label>
@@ -149,7 +149,7 @@ export const InnsynVedtakForm = ({
             <FormattedMessage id={findResultTypeMessage(innsynResultatType)} />
           </BodyShort>
         </VStack>
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="InnsynVedtakForm.Vurdering" />
           </Label>
@@ -180,7 +180,7 @@ export const InnsynVedtakForm = ({
             documents={documents.filter(document => document.fikkInnsyn === true)}
           />
         )}
-        <HStack gap="4">
+        <HStack gap="space-16">
           {!isReadOnly && (
             <ProsessStegSubmitButtonNew
               isReadOnly={isReadOnly}

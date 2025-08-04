@@ -31,8 +31,8 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
     arbeidsforholdForRad,
   );
   return (
-    <VStack gap="4">
-      <HStack gap="4">
+    <VStack gap="space-16">
+      <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage
             id={erPrivatPerson ? 'ArbeidsforholdInformasjonPanel.Fodselsdato' : 'ArbeidsforholdInformasjonPanel.Orgnr'}
@@ -48,8 +48,8 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
           {inntektsmeldingForArbeidsforhold.map(({ arbeidsforhold: a, inntektsmelding: im }) => {
             return (
               <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
-                <VStack gap="2">
-                  <HStack gap="4">
+                <VStack gap="space-8">
+                  <HStack gap="space-16">
                     <Label size="small">
                       <FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" />
                     </Label>
@@ -91,7 +91,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                       </>
                     )}
                   </HStack>
-                  <HStack gap="4">
+                  <HStack gap="space-16">
                     <Label size="small">
                       <FormattedMessage id="ArbeidsforholdInformasjonPanel.Periode" />
                     </Label>
@@ -107,14 +107,14 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                       </>
                     )}
                   </HStack>
-                  <HStack gap="4">
+                  <HStack gap="space-16">
                     <Label size="small">
                       <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
                     </Label>
                     <BodyShort size="small">{`${a.stillingsprosent}%`}</BodyShort>
                   </HStack>
                   {a.permisjonOgMangel && (
-                    <HStack gap="4">
+                    <HStack gap="space-16">
                       <Label size="small">
                         {alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === a.permisjonOgMangel?.type)
                           ?.navn ?? ''}
@@ -195,14 +195,14 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
         )}
       {harEttArbeidsforhold && inntektsmeldingerForRad.length === 0 && (
         <>
-          <HStack gap="4">
+          <HStack gap="space-16">
             <Label size="small">
               <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
             </Label>
             <BodyShort size="small">{`${arbeidsforholdForRad[0].stillingsprosent}%`}</BodyShort>
           </HStack>
           {arbeidsforholdForRad[0].permisjonOgMangel && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Label size="small">
                 {alleKodeverk['PermisjonsbeskrivelseType'].find(
                   k => k.kode === arbeidsforholdForRad[0].permisjonOgMangel?.type,

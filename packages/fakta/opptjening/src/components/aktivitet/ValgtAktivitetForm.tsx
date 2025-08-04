@@ -124,13 +124,13 @@ export const ValgtAktivitetForm = ({
         className={styles.panel}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}
       >
-        <VStack gap="6">
-          <VStack gap="2">
+        <VStack gap="space-24">
+          <VStack gap="space-8">
             <HStack justify="space-between">
-              <Heading size="small">
+              <Heading size="small" level="3">
                 <FormattedMessage id="ActivityPanel.Details" />
               </Heading>
-              <HStack gap="2">
+              <HStack gap="space-8">
                 <Button
                   className={styles.margin}
                   size="xsmall"
@@ -164,13 +164,13 @@ export const ValgtAktivitetForm = ({
                 />
               </HStack>
             </HStack>
-            <HStack gap="1">
+            <HStack gap="space-4">
               <div className={styles.colMargin}>
                 <Label size="small">
                   <FormattedMessage id="ActivityPanel.Period" />
                 </Label>
                 {opptjeningFom && opptjeningTom && (
-                  <HStack gap="2">
+                  <HStack gap="space-8">
                     <BodyShort size="small">{periodFormat(opptjeningFom, opptjeningTom)}</BodyShort>
                     <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
                   </HStack>
@@ -225,7 +225,7 @@ export const ValgtAktivitetForm = ({
             readOnly={readOnly || skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret)}
           />
           {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
                 <FormattedMessage id="ActivityPanel.Oppdater" />
               </Button>

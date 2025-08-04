@@ -57,7 +57,7 @@ export const OverstyringPanel = ({
       erAksjonspunktApent={erOverstyrt}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <Label size="medium">{intl.formatMessage({ id: 'OverstyringPanel.AutomatiskVurdering' })}</Label>
         <div>{children}</div>
         {(erOverstyrt || hasAksjonspunkt) && (
@@ -71,18 +71,18 @@ export const OverstyringPanel = ({
           />
         )}
         {!erOverstyrt && erVilkarOk !== undefined && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <EditedIcon />
             <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Endret' })}</BodyShort>
           </HStack>
         )}
         {erOverstyrt && (
           <>
-            <HStack gap="2">
+            <HStack gap="space-8">
               <ExclamationmarkTriangleFillIcon className={styles.exclamationmarkIcon} />
               <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Unntakstilfeller' })}</BodyShort>
             </HStack>
-            <HStack gap="2">
+            <HStack gap="space-8">
               {!overrideReadOnly && (
                 <Button
                   size="small"

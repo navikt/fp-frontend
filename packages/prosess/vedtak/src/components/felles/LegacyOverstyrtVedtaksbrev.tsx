@@ -37,13 +37,13 @@ export const LegacyOverstyrtVedtaksbrev = ({ forhåndsvisOverstyrtBrev, behandli
         <ArrowForwardIcon />
       </Link>
       <AvsnittSkiller />
-      <VStack gap="1">
+      <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="LegacyOverstyrtVedtaksbrev.Overskrift" />
         </Label>
         <BodyShort>{overskrift}</BodyShort>
       </VStack>
-      <VStack gap="1">
+      <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="LegacyOverstyrtVedtaksbrev.Innhold" />
         </Label>

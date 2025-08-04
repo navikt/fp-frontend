@@ -71,7 +71,7 @@ export const TilretteleggingInfoPanel = ({
       }}
     >
       <HStack justify="space-between">
-        <HStack gap="4">
+        <HStack gap="space-16">
           <PersonPregnantIcon title="a11y-title" fontSize="1.5rem" />
           <div>
             <BodyShort size="small">
@@ -95,7 +95,7 @@ export const TilretteleggingInfoPanel = ({
             )}
           </div>
         </HStack>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <CalendarIcon title="a11y-title" fontSize="1.5rem" />
           <div>
             <BodyShort size="small">
@@ -110,7 +110,7 @@ export const TilretteleggingInfoPanel = ({
           </div>
         </HStack>
         {!registrertAvSaksbehandler && (
-          <HStack gap="4">
+          <HStack gap="space-16">
             <BranchingIcon title="a11y-title" fontSize="1.5rem" />
             <div>
               <BodyShort size="small">
@@ -130,7 +130,7 @@ export const TilretteleggingInfoPanel = ({
           </HStack>
         )}
         {registrertAvSaksbehandler && (
-          <HStack gap="4">
+          <HStack gap="space-16">
             <BranchingIcon title="a11y-title" fontSize="1.5rem" />
             <BodyShort size="small">
               <FormattedMessage id="TilretteleggingInfoPanel.Saksbehandler" />

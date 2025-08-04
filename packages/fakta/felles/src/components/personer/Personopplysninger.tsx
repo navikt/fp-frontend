@@ -52,16 +52,16 @@ export const Personopplysninger = ({
   const isChild = rolle === 'BARN';
   return (
     <RawIntlProvider value={intl}>
-      <Box background="bg-subtle" padding="4" borderRadius="large" aria-label={navn}>
-        <VStack gap="1">
-          <HStack gap="5">
+      <Box.New background="neutral-moderate" padding="4" borderRadius="large" aria-label={navn}>
+        <VStack gap="space-4">
+          <HStack gap="space-20">
             {showIcon && (
               <div>
                 <GenderIcon gender={hentKjønn(kjønn)} isChild={isChild} />
               </div>
             )}
             <div>
-              <HStack gap="4">
+              <HStack gap="space-16">
                 <Label>
                   <FormattedMessage id="PersonPanel.RolleOgNavn" values={{ rolle, navn }} />
                 </Label>
@@ -95,7 +95,7 @@ export const Personopplysninger = ({
             erAnnenpart={rolle === 'ANNEN_PART'}
           />
         </VStack>
-      </Box>
+      </Box.New>
     </RawIntlProvider>
   );
 };

@@ -61,7 +61,7 @@ export const OmsorgOgRettInfoPanel = ({
   );
   const harUløsteAksjonspunkter = opprettetRettAPUtenResultat || opprettetAleneomsorgAPUtenResultat;
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       {!isReadOnly && harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           <>
@@ -72,14 +72,14 @@ export const OmsorgOgRettInfoPanel = ({
         </AksjonspunktHelpTextHTML>
       )}
       {!harUløsteAksjonspunkter && omsorgOgRett.rettighetstype && (
-        <Box background="surface-neutral-subtle" padding="5">
+        <Box.New background="neutral-moderate" padding="5">
           <RettighetstypeForm
             omsorgOgRett={omsorgOgRett}
             submittable={submittable}
             aksjonspunkt={overstyringAksjonspunkter[0]}
             kanOverstyre={kanOverstyre}
           />
-        </Box>
+        </Box.New>
       )}
 
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />

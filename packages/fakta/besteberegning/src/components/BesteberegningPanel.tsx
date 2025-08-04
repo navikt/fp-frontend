@@ -36,7 +36,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
       ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
   );
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {!!besteberegningAP && (
         <KontrollerBesteberegningPanel
           aksjonspunkt={besteberegningAP}

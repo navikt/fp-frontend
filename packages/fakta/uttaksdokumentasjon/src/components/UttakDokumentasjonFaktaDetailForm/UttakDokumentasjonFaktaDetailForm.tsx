@@ -93,9 +93,9 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
   return (
     <Boks harBorderLeft={!behov.vurdering && fields.length === 1}>
       <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
-        <VStack gap="6">
+        <VStack gap="space-24">
           {fields.length === 1 && (
-            <VStack gap="6">
+            <VStack gap="space-24">
               <div>
                 <DelOppPeriodeButton
                   display={!readOnly && periodeErMerEnnEnDag(fields[0])}
@@ -171,14 +171,14 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
             fields.map((periode, index) => (
               <Card key={periode.fom}>
                 <Card.Header>
-                  <HStack gap="4">
+                  <HStack gap="space-16">
                     <Label>
                       <FormattedMessage
                         id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex"
                         values={{ index: index + 1 }}
                       />
                     </Label>
-                    <HStack gap="2">
+                    <HStack gap="space-8">
                       <DelOppPeriodeButton
                         display={!readOnly && periodeErMerEnnEnDag(periode)}
                         onClick={() => setValgtPeriodeIndex(index)}
@@ -192,7 +192,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </HStack>
                 </Card.Header>
                 <Card.Content>
-                  <HStack gap="6">
+                  <HStack gap="space-24">
                     <BodyShort weight="semibold">{getFormatertPeriode(periode)}</BodyShort>
                     <BodyShort>{calcDaysAndWeeks(periode.fom, periode.tom).formattedString}</BodyShort>
                   </HStack>
@@ -230,7 +230,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
             </ReadMore>
           )}
           {!readOnly && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Button
                 size="small"
                 type="submit"

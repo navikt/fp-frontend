@@ -44,7 +44,7 @@ export const MannAdoptererAleneFaktaForm = ({
       title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
-      <VStack gap="2" width="100%">
+      <VStack gap="space-8" width="100%">
         <Detail>
           <FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" />
         </Detail>

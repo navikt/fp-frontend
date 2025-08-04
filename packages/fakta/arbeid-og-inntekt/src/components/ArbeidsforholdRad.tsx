@@ -88,7 +88,7 @@ export const ArbeidsforholdRad = ({
         isApOpen: harÅpentAksjonspunkt,
       })}
       content={
-        <VStack gap="4" className={harÅpentAksjonspunkt ? styles.panelOpenAp : styles.panelOpen}>
+        <VStack gap="space-16" className={harÅpentAksjonspunkt ? styles.panelOpenAp : styles.panelOpen}>
           {erManueltOpprettet && (
             <ManueltLagtTilArbeidsforholdForm
               behandlingUuid={behandlingUuid}

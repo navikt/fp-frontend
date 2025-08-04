@@ -72,7 +72,7 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
           onClick={velgKonto}
           aria-selected={aktiv}
         >
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Detail>
               <FormattedMessage
                 id={kontonavnTekst}

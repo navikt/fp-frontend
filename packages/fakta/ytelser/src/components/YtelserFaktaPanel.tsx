@@ -11,17 +11,17 @@ interface Props {
 }
 
 export const YtelserFaktaPanel = ({ inntektArbeidYtelse }: Props) => (
-  <VStack gap="8">
-    <VStack gap="4">
-      <Heading size="small">
+  <VStack gap="space-32">
+    <VStack gap="space-16">
+      <Heading size="small" level="2">
         <FormattedMessage id="YtelserFaktaPanel.SokersYtelser" />
       </Heading>
       <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker} />
     </VStack>
     {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder &&
       inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
-        <VStack gap="4">
-          <Heading size="small">
+        <VStack gap="space-16">
+          <Heading size="small" level="3">
             <FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" />
           </Heading>
           <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder} />

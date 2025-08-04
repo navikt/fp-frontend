@@ -42,13 +42,13 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
         className={styles.modal}
       >
         <Modal.Header>
-          <Heading size="small">
+          <Heading size="small" level="1">
             <FormattedMessage id="DelOppPeriodeModalImpl.DelOppPerioden" />
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <VStack gap="4">
-            <VStack gap="1">
+          <VStack gap="space-16">
+            <VStack gap="space-4">
               <Detail>
                 <FormattedMessage id="DelOppPeriodeModalImpl.Periode" />
               </Detail>

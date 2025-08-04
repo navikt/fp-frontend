@@ -123,7 +123,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
       formMethods={formMethods}
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]))}
     >
-      <VStack gap="5">
+      <VStack gap="space-20">
         {!isReadOnly && harÅpneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>{findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}</AksjonspunktHelpTextHTML>
         )}

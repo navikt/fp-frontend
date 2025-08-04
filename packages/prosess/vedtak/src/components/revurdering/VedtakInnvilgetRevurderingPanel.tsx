@@ -29,10 +29,10 @@ export const VedtakInnvilgetRevurderingPanel = ({
   beregningErManueltFastsatt,
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD && beregningsresultat && 'antallBarn' in beregningsresultat && (
-      <HStack gap="2">
-        <VStack gap="1">
+      <HStack gap="space-8">
+        <VStack gap="space-4">
           <Detail>
             <FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" />
           </Detail>
@@ -40,7 +40,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
             {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
           </Label>
         </VStack>
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Detail>
             <FormattedMessage id="VedtakForm.AntallBarn" />
           </Detail>
@@ -51,7 +51,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
     {(ytelseTypeKode === FagsakYtelseType.FORELDREPENGER || ytelseTypeKode === FagsakYtelseType.SVANGERSKAPSPENGER) && (
       <>
         {revurderingsÅrsakString && (
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="VedtakForm.Revurdering.Aarsak" />
             </Label>

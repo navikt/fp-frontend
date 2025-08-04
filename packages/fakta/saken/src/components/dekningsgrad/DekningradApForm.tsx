@@ -62,7 +62,7 @@ export const DekningradApForm = ({
   const erIkkeGodkjentAvBeslutter = !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted;
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <AksjonspunktBox erAksjonspunktApent={erAksjonspunktApent} erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}>
         <RhfForm
           formMethods={formMethods}
@@ -74,11 +74,11 @@ export const DekningradApForm = ({
             })
           }
         >
-          <VStack gap="10">
-            <HStack gap="4">
-              <Box background="surface-selected" padding="5" borderColor="border-default" borderRadius="medium">
-                <VStack gap="2">
-                  <HStack gap="4" align="center">
+          <VStack gap="space-40">
+            <HStack gap="space-16">
+              <Box.New background="brand-blue-moderate" padding="5" borderColor="neutral" borderRadius="medium">
+                <VStack gap="space-8">
+                  <HStack gap="space-16" align="center">
                     {finnIkonForKjønn(fagsak.bruker.kjønn)}
                     <VStack gap="0">
                       <BodyShort size="medium">{fagsak.bruker.navn}</BodyShort>
@@ -94,15 +94,15 @@ export const DekningradApForm = ({
                       </BodyShort>
                     </VStack>
                   </HStack>
-                  <Heading size="xsmall">
+                  <Heading size="xsmall" level="3">
                     <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad: dgSøker.dekningsgrad }} />
                   </Heading>
                 </VStack>
-              </Box>
+              </Box.New>
               {fagsak.annenPart && (
-                <Box background="surface-selected" padding="5" borderColor="border-default" borderRadius="medium">
-                  <VStack gap="2">
-                    <HStack gap="4" align="center">
+                <Box.New background="brand-blue-moderate" padding="5" borderColor="neutral" borderRadius="medium">
+                  <VStack gap="space-8">
+                    <HStack gap="space-16" align="center">
                       {finnIkonForKjønn(fagsak.annenPart.kjønn)}
                       <VStack gap="0">
                         <BodyShort size="medium">{fagsak.annenPart.navn} </BodyShort>
@@ -120,14 +120,14 @@ export const DekningradApForm = ({
                         </BodyShort>
                       </VStack>
                     </HStack>
-                    <Heading size="xsmall">
+                    <Heading size="xsmall" level="3">
                       <FormattedMessage
                         id="DekningradApForm.HarValgt"
                         values={{ dekningsgrad: dgAnnenpart?.dekningsgrad }}
                       />
                     </Heading>
                   </VStack>
-                </Box>
+                </Box.New>
               )}
             </HStack>
             <RhfRadioGroup

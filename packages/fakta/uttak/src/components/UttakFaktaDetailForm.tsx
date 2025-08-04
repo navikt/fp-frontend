@@ -190,8 +190,8 @@ export const UttakFaktaDetailForm = ({
         />
       )}
       <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
-        <VStack gap="4">
-          <HStack gap="2" align="end">
+        <VStack gap="space-16">
+          <HStack gap="space-8" align="end">
             <RhfDatepicker
               name="fom"
               control={formMethods.control}
@@ -220,7 +220,7 @@ export const UttakFaktaDetailForm = ({
               </Button>
             )}
           </HStack>
-          <HStack gap="2">
+          <HStack gap="space-8">
             {readOnly && (
               <div>
                 <Label size="small">
@@ -262,7 +262,7 @@ export const UttakFaktaDetailForm = ({
             />
           )}
           {årsakstype !== Årsakstype.UTTAK && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               {årsakstype === Årsakstype.UTSETTELSE && (
                 <RhfSelect
                   name="utsettelseÅrsak"
@@ -365,7 +365,7 @@ export const UttakFaktaDetailForm = ({
             </div>
           )}
           {!readOnly && (
-            <HStack gap="2" className={styles.marginBtn}>
+            <HStack gap="space-8" className={styles.marginBtn}>
               <Button
                 size="small"
                 variant="secondary"

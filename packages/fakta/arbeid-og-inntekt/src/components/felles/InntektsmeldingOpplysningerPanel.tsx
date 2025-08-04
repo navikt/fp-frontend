@@ -31,9 +31,9 @@ export const InntektsmeldingOpplysningerPanel = ({
   radData,
 }: Props) => (
   <>
-    <VStack gap="4">
+    <VStack gap="space-16">
       {!ikkeVisInfo && (
-        <HStack gap="4">
+        <HStack gap="space-16">
           <Label size="small">
             <FormattedMessage
               id={
@@ -53,7 +53,7 @@ export const InntektsmeldingOpplysningerPanel = ({
         </HStack>
       )}
       {skalViseArbeidsforholdId && (
-        <HStack gap="4">
+        <HStack gap="space-16">
           <Label size="small">
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.ArbeidsforholdId" />
           </Label>
@@ -62,14 +62,14 @@ export const InntektsmeldingOpplysningerPanel = ({
       )}
       {arbeidsforhold && (
         <>
-          <HStack gap="4">
+          <HStack gap="space-16">
             <Label size="small">
               <FormattedMessage id="InntektsmeldingOpplysningerPanel.Stillingsprosent" />
             </Label>
             <BodyShort size="small">{`${arbeidsforhold.stillingsprosent}%`}</BodyShort>
           </HStack>
           {arbeidsforhold.permisjonOgMangel && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Label size="small">
                 {alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === arbeidsforhold.permisjonOgMangel?.type)
                   ?.navn ?? ''}
@@ -84,7 +84,7 @@ export const InntektsmeldingOpplysningerPanel = ({
           )}
         </>
       )}
-      <HStack gap="4">
+      <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
         </Label>
@@ -92,7 +92,7 @@ export const InntektsmeldingOpplysningerPanel = ({
           <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
         </BodyShort>
       </HStack>
-      <HStack gap="4">
+      <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
         </Label>
@@ -107,7 +107,7 @@ export const InntektsmeldingOpplysningerPanel = ({
         </BodyShort>
       </HStack>
       {inntektsmelding.refusjonPrMnd !== undefined && inntektsmelding.refusjonPrMnd !== null && (
-        <HStack gap="4">
+        <HStack gap="space-16">
           <Label size="small">
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
           </Label>
@@ -127,9 +127,9 @@ export const InntektsmeldingOpplysningerPanel = ({
         <FileFillIcon className={styles.docIcon} />
       </DokumentLink>
     </VStack>
-    <HStack gap="4">
+    <HStack gap="space-16">
       <PhoneFillIcon className={styles.phoneIcon} />
-      <VStack gap="1">
+      <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
         </Label>

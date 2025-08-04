@@ -54,7 +54,7 @@ export const OmsorgsovertakelseFaktaPanel = ({
       })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
-      <HStack gap="10">
+      <HStack gap="space-40">
         <RhfDatepicker
           name="omsorgsovertakelseDato"
           control={control}

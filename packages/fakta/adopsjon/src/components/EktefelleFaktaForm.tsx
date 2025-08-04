@@ -37,7 +37,7 @@ export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMer
       title={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
-      <VStack gap="2" width="100%">
+      <VStack gap="space-8" width="100%">
         <BodyShort size="small">
           <FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />
         </BodyShort>

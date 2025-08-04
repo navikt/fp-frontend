@@ -21,7 +21,7 @@ export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave, isReadOnly }: Prop
   const { alleKodeverk } = usePanelDataContext();
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label size="small">
         <FormattedMessage id="OppgaveTabell.Header" />
       </Label>
@@ -46,7 +46,7 @@ export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave, isReadOnly }: Prop
                 </BodyShort>
               </Table.DataCell>
               <Table.DataCell>
-                <VStack gap="2">
+                <VStack gap="space-8">
                   {oppgave.beskrivelser.length > 0 && <Beskrivelser beskrivelser={oppgave.beskrivelser} />}
                   {oppgave.dokumenter.length > 0 && <Dokumenter dokumenter={oppgave.dokumenter} />}
                 </VStack>

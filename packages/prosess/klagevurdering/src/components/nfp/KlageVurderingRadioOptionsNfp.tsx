@@ -44,7 +44,7 @@ export const KlageVurderingRadioOptionsNfp = ({
     </option>
   ));
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <RhfRadioGroup
         name="klageVurdering"
         control={control}
@@ -64,7 +64,7 @@ export const KlageVurderingRadioOptionsNfp = ({
       />
       {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
         <ArrowBox>
-          <VStack gap="4">
+          <VStack gap="space-16">
             <RhfSelect
               readOnly={readOnly}
               control={control}

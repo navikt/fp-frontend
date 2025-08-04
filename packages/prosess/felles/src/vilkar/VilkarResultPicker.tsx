@@ -56,9 +56,9 @@ export const VilkarResultPicker = ({
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
 
   return (
-    <VStack gap="4" paddingInline="4">
+    <VStack gap="space-16" paddingInline="4">
       {readOnly && erVilkarOk !== undefined && (
-        <HStack gap="2">
+        <HStack gap="space-8">
           {erVilkarOk && <CheckmarkIcon className={styles.godkjentImage} />}
           {!erVilkarOk && <XMarkOctagonIcon className={styles.avslattImage} />}
           {erVilkarOk && <BodyShort size="small">{customVilkarOppfyltText}</BodyShort>}

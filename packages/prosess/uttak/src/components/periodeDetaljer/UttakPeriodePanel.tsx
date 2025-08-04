@@ -210,8 +210,8 @@ export const UttakPeriodePanel = ({
   };
 
   return (
-    <Box borderWidth="1" padding="4">
-      <VStack gap="4">
+    <Box.New borderWidth="1" padding="4">
+      <VStack gap="space-16">
         <HStack align="center" justify="space-between">
           <Label size="small">
             <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
@@ -240,7 +240,7 @@ export const UttakPeriodePanel = ({
             </>
           )}
 
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Button
               size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
@@ -296,6 +296,6 @@ export const UttakPeriodePanel = ({
           erTilknyttetStortinget={erTilknyttetStortinget}
         />
       </VStack>
-    </Box>
+    </Box.New>
   );
 };

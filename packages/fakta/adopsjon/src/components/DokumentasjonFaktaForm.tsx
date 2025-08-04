@@ -61,7 +61,7 @@ export const DokumentasjonFaktaForm = ({
       title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
     >
-      <VStack gap="4" className={styles.container}>
+      <VStack gap="space-16" className={styles.container}>
         <RhfDatepicker
           name="omsorgsovertakelseDato"
           control={control}
@@ -85,7 +85,7 @@ export const DokumentasjonFaktaForm = ({
           />
         )}
         {Object.keys(fodselsdatoer).map((id, i) => (
-          <HStack gap="4" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
+          <HStack gap="space-16" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
             <RhfDatepicker
               name={`fodselsdatoer.${id}`}
               control={control}

@@ -125,8 +125,8 @@ export const VarselOmRevurderingForm = ({
   return (
     <>
       <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
-        <VStack gap="4">
-          <Heading size="small">
+        <VStack gap="space-16">
+          <Heading size="small" level="2">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
           </Heading>
           {!isReadOnly && aksjonspunkterForPanel[0].status === AksjonspunktStatus.OPPRETTET && (
@@ -157,7 +157,7 @@ export const VarselOmRevurderingForm = ({
                     label: intl.formatMessage({ id: 'VarselOmRevurderingForm.SendVarsel' }),
                     element: (
                       <ArrowBox marginTop={6}>
-                        <VStack gap="2">
+                        <VStack gap="space-8">
                           <RhfTextarea
                             name="fritekst"
                             control={formMethods.control}

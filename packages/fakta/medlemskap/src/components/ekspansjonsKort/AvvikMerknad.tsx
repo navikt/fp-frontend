@@ -34,13 +34,13 @@ interface Props {
 
 export const AvvikMerknad = ({ avvik }: Props) => {
   return (
-    <Box borderRadius="full" paddingInline="2" paddingBlock="1" background="surface-neutral-subtle">
-      <HStack gap="2">
+    <Box.New borderRadius="full" paddingInline="2" paddingBlock="1" background="neutral-moderateA">
+      <HStack gap="space-8">
         <AvvikStatus harAvvik={true} />
         <BodyLong size="small">
           <FormattedMessage id={getFormateringsIdForAvvik(avvik)} />
         </BodyLong>
       </HStack>
-    </Box>
+    </Box.New>
   );
 };

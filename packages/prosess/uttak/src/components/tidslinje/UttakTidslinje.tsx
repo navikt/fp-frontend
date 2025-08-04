@@ -251,7 +251,7 @@ const finnLabelForPeriode = (
       <BodyShort>
         <FormattedMessage id="UttakTidslinje.Periode" values={{ periodeString }} />
       </BodyShort>
-      <VStack gap="2">
+      <VStack gap="space-8">
         <BodyShort>
           <FormattedMessage id="UttakTidslinje.Dager" values={{ dager }} />
         </BodyShort>
@@ -358,11 +358,11 @@ export const UttakTidslinje = ({
   };
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <Timeline startDate={dayjs(fomDato).toDate()} endDate={dayjs(tomDato).add(1, 'days').toDate()}>
         {pinData.map(data => (
           <Timeline.Pin key={data.dato} date={dayjs(data.datoITidslinjen).toDate()}>
-            <VStack gap="1">
+            <VStack gap="space-4">
               {data.tekstIder.map(id => (
                 <Label size="small" key={id}>
                   <FormattedMessage id={id} />
@@ -402,7 +402,7 @@ export const UttakTidslinje = ({
           );
         })}
       </Timeline>
-      <HStack gap="2" justify="end">
+      <HStack gap="space-8" justify="end">
         <Button
           size="small"
           icon={<PlusIcon aria-hidden />}

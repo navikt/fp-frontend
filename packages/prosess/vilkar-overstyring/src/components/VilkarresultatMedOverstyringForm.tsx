@@ -177,21 +177,21 @@ export const VilkarresultatMedOverstyringForm = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, overstyringApKode))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="2">
-        <VStack gap="4">
-          <HStack gap="2">
+      <VStack gap="space-8">
+        <VStack gap="space-16">
+          <HStack gap="space-8">
             {!erOverstyrt && originalErVilkarOk !== undefined && (
               <>
                 {originalErVilkarOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
                 {!originalErVilkarOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
               </>
             )}
-            <Heading size="small">
+            <Heading size="small" level="3">
               <FormattedMessage id={panelTittelKode} />
             </Heading>
             {lovReferanse && <Detail className={styles.vilkar}>{lovReferanse}</Detail>}
           </HStack>
-          <HStack gap="2">
+          <HStack gap="space-8">
             {originalErVilkarOk && (
               <Label size="small">
                 <FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />

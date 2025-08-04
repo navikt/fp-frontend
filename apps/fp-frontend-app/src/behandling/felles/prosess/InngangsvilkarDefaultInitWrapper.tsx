@@ -53,11 +53,11 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
       status={status}
       skalSkjulePanel={!erPanelValgt}
     >
-      <VStack gap="8">
+      <VStack gap="space-32">
         {erPanelValgt && (harFaktaApOgIkkeFerdigBehandlet || aksjonspunktTekster.length > 0) && (
           <AksjonspunktHelpTextHTML>
             {harFaktaApOgIkkeFerdigBehandlet ? (
-              <HStack gap="1">
+              <HStack gap="space-4">
                 <FormattedMessage id="InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv" />
                 <Link
                   onClick={(evt: MouseEvent) => {

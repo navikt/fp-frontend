@@ -74,7 +74,7 @@ export const SettPaVentModal = ({
         }}
       >
         <Modal.Body>
-          <VStack gap="4">
+          <VStack gap="space-16">
             {(hasManualPaVent || fristFraFelt) && (
               <RhfDatepicker
                 name="frist"

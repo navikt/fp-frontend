@@ -117,15 +117,15 @@ export const ManueltLagtTilArbeidsforholdForm = ({
   };
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {!radData && (
-        <Heading size="small">
+        <Heading size="small" level="3">
           <FormattedMessage id="LeggTilArbeidsforholdForm.LeggTilArbeidsforhold" />
         </Heading>
       )}
       <RhfForm formMethods={formMethods} onSubmit={lagreArbeidsforhold}>
-        <VStack gap="6">
-          <HStack gap="4">
+        <VStack gap="space-24">
+          <HStack gap="space-16">
             {erOverstyrt && (
               <>
                 <RhfTextField
@@ -173,7 +173,7 @@ export const ManueltLagtTilArbeidsforholdForm = ({
             readOnly={isReadOnly || !erOverstyrt}
           />
           {erOverstyrt && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Button
                 size="small"
                 variant="secondary"

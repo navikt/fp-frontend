@@ -66,12 +66,12 @@ export const EndreBehandlendeEnhetModal = ({
         onClose={lukkModal}
       >
         <Modal.Header>
-          <Heading size="small">
+          <Heading size="small" level="1">
             <FormattedMessage id="EndreBehandlendeEnhetModal.EndreEnhet" />
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <VStack gap="4">
+          <VStack gap="space-16">
             <RhfSelect
               name="nyEnhet"
               control={formMethods.control}

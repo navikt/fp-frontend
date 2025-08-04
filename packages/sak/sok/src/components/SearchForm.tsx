@@ -36,11 +36,11 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={searchFagsakCallback} className={styles.container}>
-      <VStack gap="2">
+      <VStack gap="space-8">
         <BodyShort size="small">
           <FormattedMessage id="Search.SearchFagsakOrPerson" />
         </BodyShort>
-        <HStack gap="2" align="end">
+        <HStack gap="space-8" align="end">
           <RhfTextField
             name="searchString"
             control={formMethods.control}
@@ -57,7 +57,7 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
           </Button>
         </HStack>
         {searchResultAccessDenied && (
-          <HStack gap="2" align="end">
+          <HStack gap="space-8" align="end">
             <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
             <BodyShort size="small">
               <FormattedMessage id={searchResultAccessDenied.feilmelding} />

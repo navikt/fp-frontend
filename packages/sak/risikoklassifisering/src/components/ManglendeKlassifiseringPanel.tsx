@@ -9,8 +9,8 @@ import { Box, HStack, Label } from '@navikt/ds-react';
  * Statisk visning av panel som tilsier ingen risikoklassifisering er utført for valgt behandling, eller at ingen behandling er valgt.
  */
 export const ManglendeKlassifiseringPanel = () => (
-  <Box borderWidth="2" borderColor="border-divider" borderRadius="large" padding="3">
-    <HStack gap="4" align="center">
+  <Box.New borderWidth="2" borderColor="neutral-subtle" borderRadius="large" padding="3">
+    <HStack gap="space-16" align="center">
       <HourglassTopFilledIcon
         title={useIntl().formatMessage({ id: 'Risikopanel.Tittel' })}
         color="var(--a-gray-600)"
@@ -21,5 +21,5 @@ export const ManglendeKlassifiseringPanel = () => (
         <FormattedMessage id="Risikopanel.Tittel.ManglerKlassifisering" />
       </Label>
     </HStack>
-  </Box>
+  </Box.New>
 );

@@ -77,7 +77,7 @@ export const ArbeidsforholdField = ({
 
   return (
     <ArbeidsforholdBoks key={fieldId} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
-      <HStack gap="6">
+      <HStack gap="space-24">
         {!harÅpentAksjonspunkt && (
           <CheckmarkIcon
             title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.Ok' })}
@@ -90,7 +90,7 @@ export const ArbeidsforholdField = ({
             className={styles.exclamationmarkIcon}
           />
         )}
-        <VStack gap="4" width="90%">
+        <VStack gap="space-16" width="90%">
           <HStack justify="space-between">
             <div>
               <Label size="small">{arbeidsgiverOpplysinger.navn}</Label>
@@ -143,7 +143,7 @@ export const ArbeidsforholdField = ({
             </div>
           </HStack>
           {visArbeidsforholdId && arbeidsforhold.eksternArbeidsforholdId && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Label size="small">
                 <FormattedMessage id="ArbeidsforholdFieldArray.Id" />
               </Label>
@@ -163,7 +163,7 @@ export const ArbeidsforholdField = ({
             </HStack>
           )}
           {arbeidsforhold.stillingsprosent && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Label size="small">
                 <FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" />
               </Label>
@@ -171,7 +171,7 @@ export const ArbeidsforholdField = ({
             </HStack>
           )}
           {arbeidsforhold.permisjonOgMangel && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <>
                 <Label size="small">
                   {`${alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === arbeidsforhold.permisjonOgMangel?.type)?.navn ?? ''} 100%`}
@@ -195,7 +195,7 @@ export const ArbeidsforholdField = ({
             name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
             control={control}
             label={
-              <HStack gap="2">
+              <HStack gap="space-8">
                 <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />
                 <div className={styles.image}>
                   <Button
@@ -216,7 +216,7 @@ export const ArbeidsforholdField = ({
                     className={styles.hjelpetekst}
                   >
                     <Popover.Content className={styles.hjelpetekstInnhold}>
-                      <VStack gap="2">
+                      <VStack gap="space-8">
                         <BodyShort>
                           <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />
                         </BodyShort>

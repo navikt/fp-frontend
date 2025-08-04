@@ -36,7 +36,7 @@ export const OpplysningerOmPersonstatus = ({
       kilde="FOLKEREGISTER"
       relevanteAvvik={avvik.filter(a => relevantForPersonstatus.includes(a))}
     >
-      <VStack gap="4" aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}>
+      <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${brukerNavn}`}>
         <Label>
           <FormattedMessage id="OpplysningerOmPersonstatus.Soker" values={{ navn: brukerNavn }} />
         </Label>
@@ -50,7 +50,7 @@ export const OpplysningerOmPersonstatus = ({
       {annenpart && (
         <>
           <AvsnittSkiller dividerParagraf />
-          <VStack gap="4" aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}>
+          <VStack gap="space-16" aria-label={`Personstatus og statsborgerskap for ${annenpartNavn}`}>
             <Label>
               <FormattedMessage id="OpplysningerOmPersonstatus.Annenpart" values={{ navn: annenpartNavn ?? 'none' }} />
             </Label>

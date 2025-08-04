@@ -197,7 +197,7 @@ export const TilretteleggingForm = ({
           marginRight: '-8px',
         }}
       >
-        <VStack gap="8">
+        <VStack gap="space-32">
           {!erNyPeriode && (
             <TilretteleggingInfoPanel
               tilrettelegging={formValues}
@@ -295,7 +295,7 @@ export const TilretteleggingForm = ({
             </>
           )}
           {!readOnly && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Button
                 size="small"
                 variant="primary"

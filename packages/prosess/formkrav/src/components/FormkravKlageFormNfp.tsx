@@ -126,21 +126,23 @@ export const FormkravKlageFormNfp = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="4">
-        <VStack gap="1">
-          <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.Title' })}</Heading>
+      <VStack gap="space-16">
+        <VStack gap="space-4">
+          <Heading size="small" level="3">
+            {intl.formatMessage({ id: 'Klage.Formkrav.Title' })}
+          </Heading>
           <Detail>
             {intl.formatMessage({ id: getLovHjemmeler(AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) })}
           </Detail>
         </VStack>
-        <VStack gap="6">
+        <VStack gap="space-24">
           {!readOnlySubmitButton && (
             <AksjonspunktHelpTextHTML>
               <FormattedMessage id="Klage.Formkrav.HelpText" />
             </AksjonspunktHelpTextHTML>
           )}
-          <VStack gap="6">
-            <HStack gap="10">
+          <VStack gap="space-24">
+            <HStack gap="space-40">
               <div>
                 <RhfSelect
                   name="vedtak"
@@ -152,8 +154,8 @@ export const FormkravKlageFormNfp = ({
                   className={styles.selectBredde}
                 />
               </div>
-              <VStack gap="5">
-                <HStack gap="4">
+              <VStack gap="space-20">
+                <HStack gap="space-16">
                   <RhfRadioGroup
                     name="erKlagerPart"
                     control={formMethods.control}
@@ -193,7 +195,7 @@ export const FormkravKlageFormNfp = ({
                     ]}
                   />
                 </HStack>
-                <HStack gap="4">
+                <HStack gap="space-16">
                   <RhfRadioGroup
                     name="erFristOverholdt"
                     control={formMethods.control}

@@ -34,9 +34,11 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
   const medholdReasons = alleKodeverk['KlageMedholdÅrsak'];
 
   return (
-    <VStack gap="4">
-      <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
-      <VStack gap="1">
+    <VStack gap="space-16">
+      <Heading size="small" level="2">
+        {intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}
+      </Heading>
+      <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="KlageVurderingRadioOptionsKa.VurderingForKlage" />
         </Label>
@@ -56,7 +58,7 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
         </BodyShort>
       </VStack>
       {vurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="Klage.ResolveKlage.Cause" />
           </Label>
@@ -76,20 +78,20 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
       )}
       {(vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK ||
         vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE) && (
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="Klage.ResolveKlage.Cause" />
           </Label>
           <BodyShort size="small">{medholdReasons.find(mo => mo.kode === klageMedholdArsak)?.navn}</BodyShort>
         </VStack>
       )}
-      <VStack gap="1">
+      <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="FritekstKlageBrevTextField.Fritekst" />
         </Label>
         <BodyShort size="small">{fritekstTilBrev}</BodyShort>
       </VStack>
-      <VStack gap="1">
+      <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="KlageVurderingRadioOptionsKa.Begrunnelse" />
         </Label>

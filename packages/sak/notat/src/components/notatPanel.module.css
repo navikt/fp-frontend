@@ -20,13 +20,13 @@
 }
 
 .bubble {
-  --ac-chat-bubble-bg: var(--a-gray-50);
+  background-color: var(--a-gray-50);
 
   width: 600px;
 }
 
 .bubbleSelf {
-  --ac-chat-bubble-bg: var(--a-blue-50);
+  background-color: var(--a-blue-50);
 
   width: 600px;
 }
@@ -51,9 +51,6 @@
 }
 
 .alert {
-  --ac-alert-info-border: var(--a-surface-info-subtle);
-
-  background-color: var(--a-surface-info-subtle);
   margin-top: auto;
   padding-bottom: 16px;
 }

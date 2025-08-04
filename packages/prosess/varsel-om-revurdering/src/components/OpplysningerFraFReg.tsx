@@ -12,9 +12,9 @@ interface Props {
 
 export const OpplysningerFraFReg = ({ avklartBarn, harDødtBarn }: Props) => {
   return (
-    <VStack gap="4">
-      <HStack gap="4">
-        <Heading size="small">
+    <VStack gap="space-16">
+      <HStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="FodselsammenligningPanel.OpplysningerFReg" />
         </Heading>
         {harDødtBarn && (
@@ -50,7 +50,7 @@ export const OpplysningerFraFReg = ({ avklartBarn, harDødtBarn }: Props) => {
                   {harDødtBarn && (
                     <Table.DataCell>
                       {barn.dodsdato ? (
-                        <HStack gap="4" align="center">
+                        <HStack gap="space-16" align="center">
                           <DateLabel dateString={barn.dodsdato} />
                           <Tag variant="info" size="small">
                             <FormattedMessage id="FodselsammenligningPanel.Dod" />

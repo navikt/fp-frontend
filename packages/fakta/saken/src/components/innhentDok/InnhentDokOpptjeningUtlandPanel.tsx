@@ -63,8 +63,8 @@ export const InnhentDokOpptjeningUtlandPanel = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="6">
-        <Heading size="small">
+      <VStack gap="space-24">
+        <Heading size="small" level="3">
           <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
         </Heading>
         <AksjonspunktBox
@@ -72,7 +72,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
           erAksjonspunktApent={harApneAksjonspunkter}
           erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
         >
-          <VStack gap="4">
+          <VStack gap="space-16">
             <RhfRadioGroup
               name="dokStatus"
               control={formMethods.control}

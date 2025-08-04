@@ -119,19 +119,19 @@ export const ManglendeArbeidsforholdForm = ({
   const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
 
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <div className={styles.alertStripe}>
         <Alert variant="info">
           <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
         </Alert>
       </div>
       <RhfForm formMethods={formMethods} onSubmit={lagre}>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <RhfRadioGroup
             name="saksbehandlersVurdering"
             control={formMethods.control}
             label={
-              <HStack gap="2">
+              <HStack gap="space-8">
                 <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
                 <QuestionmarkDiamondIcon
                   className={styles.svg}
@@ -171,7 +171,7 @@ export const ManglendeArbeidsforholdForm = ({
             ]}
           />
           {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <RhfDatepicker
                 name="fom"
                 control={formMethods.control}
@@ -209,7 +209,7 @@ export const ManglendeArbeidsforholdForm = ({
             readOnly={isReadOnly}
           />
           {!isReadOnly && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Button
                 size="small"
                 variant="secondary"

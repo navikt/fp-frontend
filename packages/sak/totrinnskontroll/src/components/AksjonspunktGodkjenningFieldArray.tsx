@@ -63,7 +63,7 @@ export const AksjonspunktGodkjenningFieldArray = ({
   const aksjonspunktGodkjenning = watch('aksjonspunktGodkjenning');
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       {fields.map((field, index) => {
         const { aksjonspunktKode } = aksjonspunktGodkjenning[index];
         const context = totrinnskontrollSkjermlenkeContext.find(c =>

@@ -58,7 +58,7 @@ export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
 
     if (opprettetAp.length > 0) {
       return (
-        <VStack gap="2">
+        <VStack gap="space-8">
           {[...new Set(avvik.map(getFormateringsIdForAvvik))].map(a => (
             <AksjonspunktHelpTextHTML key={a}>
               {intl.formatMessage({ id: a }) + intl.formatMessage({ id: 'AksjonspunktHelpText.Postfix' })}

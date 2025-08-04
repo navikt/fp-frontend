@@ -71,7 +71,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
   const skalViseDødsdato = !isReadOnly || barn.some(b => b.dødsdato !== null);
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Table className={styles.tableNoBorder} size="small">
         <Table.Header>
           <Table.Row>
@@ -138,7 +138,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                   </Table.DataCell>
                 )}
                 <Table.DataCell className={styles.rowDescription}>
-                  <HStack gap="2" align="center">
+                  <HStack gap="space-8" align="center">
                     <Detail>{getLabelForFaktaKilde(isDirty ? 'SAKSBEHANDLER' : field.kilde)}</Detail>
                     {!isReadOnly && (
                       <>

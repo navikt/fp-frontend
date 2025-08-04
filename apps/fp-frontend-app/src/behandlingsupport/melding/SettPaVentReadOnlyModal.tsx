@@ -28,19 +28,19 @@ export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak
       onClose={lukkCallback}
     >
       <Modal.Header>
-        <Heading size="small">
+        <Heading size="small" level="1">
           <FormattedMessage id="SettPaVentReadOnlyModal.ModalDescriptionErPaVent" />
         </Heading>
       </Modal.Header>
       <Modal.Body>
-        <HStack gap="6">
-          <VStack gap="1">
+        <HStack gap="space-24">
+          <VStack gap="space-4">
             <Label>
               <FormattedMessage id="SettPaVentReadOnlyModal.Arsak" />
             </Label>
             <BodyShort>{ventearsaker.find(v => v.kode === ventearsak)?.navn}</BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label>
               <FormattedMessage id="SettPaVentReadOnlyModal.Frist" />
             </Label>

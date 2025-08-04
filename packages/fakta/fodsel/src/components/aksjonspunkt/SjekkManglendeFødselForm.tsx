@@ -51,7 +51,7 @@ export const SjekkManglendeFødselForm = ({
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="4">
+        <VStack gap="space-16">
           {!isReadOnly && !finnesBarnIFReg && (
             <Alert variant="info">
               <FormattedMessage id="SjekkManglendeFødselForm.Info.IngenBarnRegistrert" />

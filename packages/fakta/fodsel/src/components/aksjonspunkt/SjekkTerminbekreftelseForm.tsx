@@ -69,8 +69,8 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="4">
-          <HStack gap="4">
+        <VStack gap="space-16">
+          <HStack gap="space-16">
             <Termindato
               isReadOnly={isReadOnly}
               isEdited={isNotEqual(søknad.termindato, gjeldende.termin?.termindato)}

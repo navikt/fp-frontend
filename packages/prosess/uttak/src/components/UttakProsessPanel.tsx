@@ -275,9 +275,9 @@ export const UttakProsessPanel = ({
   );
 
   return (
-    <VStack gap="6">
-      <HStack gap="4">
-        <Heading size="small">
+    <VStack gap="space-24">
+      <HStack gap="space-16">
+        <Heading size="small" level="2">
           <FormattedMessage id="UttakPanel.Title" />
         </Heading>
         {!isReadOnly && kanOverstyre && (!harÅpneAksjonspunkter || harOverstyrAp) && (

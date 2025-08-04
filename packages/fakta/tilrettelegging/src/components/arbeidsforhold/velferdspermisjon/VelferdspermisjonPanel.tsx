@@ -24,8 +24,8 @@ export const VelferdspermisjonPanel = ({
 }: Props) => {
   const intl = useIntl();
   return (
-    <VStack gap="2">
-      <HStack gap="4" align="center">
+    <VStack gap="space-8">
+      <HStack gap="space-16" align="center">
         <Label size="small">
           <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
         </Label>

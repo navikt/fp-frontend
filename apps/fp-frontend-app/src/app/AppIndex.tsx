@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 
+import { Theme } from '@navikt/ds-react';
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -41,7 +42,9 @@ export const AppIndexWrapper = () => {
     <RawIntlProvider value={intl}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
-        <AppIndex />
+        <Theme theme="light">
+          <AppIndex />
+        </Theme>
       </QueryClientProvider>
     </RawIntlProvider>
   );

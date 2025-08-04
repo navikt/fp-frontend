@@ -1,6 +1,5 @@
 import { RawIntlProvider } from 'react-intl';
 
-import { Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { NavAnsatt } from '@navikt/fp-types';
@@ -19,10 +18,8 @@ interface Props {
 
 export const SaksbehandlerIndex = (props: Props) => {
   return (
-    <Theme theme="light">
-      <RawIntlProvider value={intl}>
-        <SaksbehandlerDashboard {...props} />
-      </RawIntlProvider>
-    </Theme>
+    <RawIntlProvider value={intl}>
+      <SaksbehandlerDashboard {...props} />
+    </RawIntlProvider>
   );
 };

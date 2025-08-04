@@ -35,24 +35,24 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
   }
 
   return (
-    <VStack gap="4">
-      <Heading size="small">
+    <VStack gap="space-16">
+      <Heading size="small" level="2">
         <FormattedMessage id="Klage.Formkrav.Title" />
       </Heading>
       {underBehandlingKabal && (
-        <Heading size="small">
+        <Heading size="small" level="3">
           <FormattedMessage id="Klage.Formkrav.SeKabalText" />
         </Heading>
       )}
       {!underBehandlingKabal && !behandletAvKabal && (
         <>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Klage.Formkrav.VelgVedtak" />
             </Label>
             <BodyShort size="small">{vedtak}</BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Klage.Formkrav.ErKlagerPart" />
             </Label>
@@ -64,7 +64,7 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
               )}
             </BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Klage.Formkrav.ErKonkret" />
             </Label>
@@ -76,7 +76,7 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
               )}
             </BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Klage.Formkrav.ErFristOverholdt" />
             </Label>
@@ -88,7 +88,7 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
               )}
             </BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Klage.Formkrav.ErSignert" />
             </Label>
@@ -100,7 +100,7 @@ export const FormkravKlageKa = ({ klageVurdering, avsluttedeBehandlinger }: Prop
               )}
             </BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Klage.Formkrav.Vurdering" />
             </Label>

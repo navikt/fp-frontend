@@ -84,7 +84,7 @@ export const VelferdspermisjonForm = ({
           marginRight: '-8px',
         }}
       >
-        <VStack gap="5">
+        <VStack gap="space-20">
           <RhfRadioGroup
             name={`${permisjonIndex}.erGyldig`}
             control={formMethods.control}

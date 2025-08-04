@@ -101,7 +101,7 @@ export const Messages = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMeldingFormData}
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <RhfSelect
           name="brevmalkode"
           control={control}
