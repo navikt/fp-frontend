@@ -21,13 +21,11 @@
 
 .bubble {
   background-color: var(--a-gray-50);
-
   width: 600px;
 }
 
 .bubbleSelf {
   background-color: var(--a-blue-50);
-
   width: 600px;
 }
 
