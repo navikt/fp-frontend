@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { ExternalLinkIcon, MenuGridIcon } from '@navikt/aksel-icons';
-import { Dropdown, InternalHeader, Link, Spacer } from '@navikt/ds-react';
+import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
@@ -67,31 +67,33 @@ export const DekoratorMedFeilviserSakIndex = ({
                 title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk' })}
               />
             </InternalHeader.Button>
-            <Dropdown.Menu>
-              <Dropdown.Menu.GroupedList>
-                {interneLenker.length > 0 && (
+            <Theme theme="light">
+              <Dropdown.Menu>
+                <Dropdown.Menu.GroupedList>
+                  {interneLenker.length > 0 && (
+                    <Dropdown.Menu.GroupedList.Heading>
+                      <FormattedMessage id="DekoratorMedFeilviserSakIndex.Vedtakslosningen" />
+                    </Dropdown.Menu.GroupedList.Heading>
+                  )}
+                  {interneLenker.map(lenke => (
+                    <Dropdown.Menu.GroupedList.Item as={Link} key={lenke.tekst} onClick={lenke.callback}>
+                      {lenke.tekst}
+                    </Dropdown.Menu.GroupedList.Item>
+                  ))}
                   <Dropdown.Menu.GroupedList.Heading>
-                    <FormattedMessage id="DekoratorMedFeilviserSakIndex.Vedtakslosningen" />
+                    <FormattedMessage id="DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk" />
                   </Dropdown.Menu.GroupedList.Heading>
-                )}
-                {interneLenker.map(lenke => (
-                  <Dropdown.Menu.GroupedList.Item as={Link} key={lenke.tekst} onClick={lenke.callback}>
-                    {lenke.tekst}
-                  </Dropdown.Menu.GroupedList.Item>
-                ))}
-                <Dropdown.Menu.GroupedList.Heading>
-                  <FormattedMessage id="DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk" />
-                </Dropdown.Menu.GroupedList.Heading>
-                {eksterneLenker.map(lenke => (
-                  <Dropdown.Menu.GroupedList.Item as={Link} key={lenke.tekst} href={lenke.href} target="_blank">
-                    {lenke.tekst}
-                    <ExternalLinkIcon
-                      title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EksternLenke' })}
-                    />
-                  </Dropdown.Menu.GroupedList.Item>
-                ))}
-              </Dropdown.Menu.GroupedList>
-            </Dropdown.Menu>
+                  {eksterneLenker.map(lenke => (
+                    <Dropdown.Menu.GroupedList.Item as={Link} key={lenke.tekst} href={lenke.href} target="_blank">
+                      {lenke.tekst}
+                      <ExternalLinkIcon
+                        title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EksternLenke' })}
+                      />
+                    </Dropdown.Menu.GroupedList.Item>
+                  ))}
+                </Dropdown.Menu.GroupedList>
+              </Dropdown.Menu>
+            </Theme>
           </Dropdown>
           <InternalHeader.User name={navAnsattNavn} />
         </InternalHeader>
