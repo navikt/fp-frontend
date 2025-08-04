@@ -28,7 +28,7 @@ export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak
       onClose={lukkCallback}
     >
       <Modal.Header>
-        <Heading size="small" level="1">
+        <Heading size="small" level="2">
           <FormattedMessage id="SettPaVentReadOnlyModal.ModalDescriptionErPaVent" />
         </Heading>
       </Modal.Header>

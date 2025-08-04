@@ -66,7 +66,7 @@ export const EndreBehandlendeEnhetModal = ({
         onClose={lukkModal}
       >
         <Modal.Header>
-          <Heading size="small" level="1">
+          <Heading size="small" level="2">
             <FormattedMessage id="EndreBehandlendeEnhetModal.EndreEnhet" />
           </Heading>
         </Modal.Header>

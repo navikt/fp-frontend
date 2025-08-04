@@ -104,7 +104,7 @@ export const HenleggBehandlingModal = ({
         onClose={cancelEvent}
       >
         <Modal.Header>
-          <Heading size="small" level="1">
+          <Heading size="small" level="2">
             <FormattedMessage id="HenleggBehandlingModal.HenleggBehandling" />
           </Heading>
         </Modal.Header>

@@ -32,7 +32,7 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
       <Modal.Header>
         <HStack gap="space-16">
           <ExclamationmarkTriangleFillIcon className={styles.image} />
-          <Heading size="small" level="1">
+          <Heading size="small" level="2">
             <FormattedMessage id="FeilmeldingsdetaljerModal.ErrorDetails" />
           </Heading>
         </HStack>
