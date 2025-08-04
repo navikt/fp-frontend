@@ -80,7 +80,7 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
       {(field, index, getRemoveButton) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}`;
         return (
-          <HStack key={field.id} gap="4" paddingBlock="2" align="end">
+          <HStack key={field.id} gap="space-16" paddingBlock="2" align="end">
             <RhfDatepicker
               name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.fomDato`}
               control={control}

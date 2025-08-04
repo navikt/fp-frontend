@@ -58,7 +58,7 @@ export const ForeldrepengerEndringssøknadForm = ({
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => onSubmit(transformValues(values))}>
-      <HGrid columns={{ sm: 1, md: 2 }} gap="4">
+      <HGrid columns={{ sm: 1, md: 2 }} gap="space-16">
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <BekreftelsePanel annenForelderInformertRequired readOnly={readOnly} />
       </HGrid>

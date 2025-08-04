@@ -21,7 +21,7 @@ const meta = {
 
     return (
       <RhfForm formMethods={formMethods} onSubmit={val => submitCallback(BekreftelsePanel.tranformValues(val))}>
-        <VStack gap="10">
+        <VStack gap="space-40">
           <BekreftelsePanel {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

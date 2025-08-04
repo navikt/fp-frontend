@@ -28,7 +28,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={values => submitCallback(OmsorgOgAdopsjonPapirsoknadIndex.transformValues(values))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <OmsorgOgAdopsjonPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

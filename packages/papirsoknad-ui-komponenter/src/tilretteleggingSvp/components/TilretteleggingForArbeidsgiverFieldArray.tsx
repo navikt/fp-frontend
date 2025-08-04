@@ -46,7 +46,7 @@ export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) =>
   }, []);
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Table>
         <Table.Header>
           <Table.Row>

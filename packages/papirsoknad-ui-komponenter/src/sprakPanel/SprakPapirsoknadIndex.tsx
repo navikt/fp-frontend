@@ -28,8 +28,10 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
   const { control } = useFormContext<SprakFormValues>();
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">{intl.formatMessage({ id: 'Registrering.Sprak' })}</Heading>
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
+          {intl.formatMessage({ id: 'Registrering.Sprak' })}
+        </Heading>
         <RhfRadioGroup
           name="språkkode"
           control={control}
