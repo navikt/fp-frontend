@@ -57,8 +57,9 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
 
-    await userEvent.type(utils.container.querySelector('input[name="trekkuker"]')!, '8');
-    await userEvent.type(utils.container.querySelector('input[name="trekkdager"]')!, '0');
+    console.log(screen.getAllByRole('textbox'));
+    await userEvent.type(screen.getAllByRole('textbox')[2], '8');
+    await userEvent.type(screen.getAllByRole('textbox')[3], '0');
     await userEvent.click(screen.getByText('Legg til'));
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
@@ -138,8 +139,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
-    await userEvent.type(utils.container.querySelector('input[name="trekkuker"]')!, '8');
-    await userEvent.type(utils.container.querySelector('input[name="trekkdager"]')!, '3');
+    await userEvent.type(screen.getAllByRole('textbox')[2], '8');
+    await userEvent.type(screen.getAllByRole('textbox')[3], '3');
     await userEvent.click(screen.getByText('Legg til'));
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
@@ -147,8 +148,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '12.02.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '25.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.MODREKVOTE);
-    await userEvent.type(utils.container.querySelector('input[name="trekkuker"]')!, '1');
-    await userEvent.type(utils.container.querySelector('input[name="trekkdager"]')!, '2.4');
+    await userEvent.type(screen.getAllByRole('textbox')[2], '1');
+    await userEvent.type(screen.getAllByRole('textbox')[3], '2.4');
     await userEvent.click(screen.getByText('Legg til'));
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');

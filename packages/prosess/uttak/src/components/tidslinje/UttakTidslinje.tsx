@@ -19,7 +19,7 @@ import {
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Timeline, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { calcDaysAndWeeks, ISO_DATE_FORMAT, periodFormat } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, createWeekAndDay, ISO_DATE_FORMAT, periodFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
@@ -165,10 +165,7 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
     .map(activity => activity.group);
 };
 
-const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean, annenpartEøs: boolean) => {
-  if (!erHovedsøker && annenpartEøs) {
-    return <FigureCombinationIcon width={20} height={20} />;
-  }
+const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : rolleAnnenpart(fagsak);
   if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
     return <FigureOutwardFillIcon width={20} height={20} color="var(--ax-danger-300)" />;
@@ -263,7 +260,12 @@ const finnLabelForPeriode = (
         </BodyShort>
         <VStack gap="2">
           <BodyShort>
-            <FormattedMessage id="UttakTidslinje.Trekkdager" values={{ trekkdager }} />
+            <FormattedMessage
+              id="UttakTidslinje.Trekkdager"
+              values={{
+                trekkdager: createWeekAndDay(Math.floor(trekkdager / 5), trekkdager % 5).formattedString,
+              }}
+            />
           </BodyShort>
         </VStack>
       </>

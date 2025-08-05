@@ -2205,9 +2205,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak-eos@workspace:packages/fakta/uttak-eøs"
   dependencies:
-    "@navikt/aksel-icons": 7.24.0
-    "@navikt/ds-css": 7.24.0
-    "@navikt/ds-react": 7.24.0
+    "@navikt/aksel-icons": 7.25.2
+    "@navikt/ds-css": 7.25.2
+    "@navikt/ds-react": 7.25.2
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2217,26 +2217,26 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 7.1.1
-    "@navikt/ft-form-validators": 4.0.1
-    "@navikt/ft-ui-komponenter": 4.5.2
-    "@navikt/ft-utils": 3.6.4
-    "@storybook/react": 9.0.14
-    "@storybook/react-vite": 9.0.14
-    "@testing-library/dom": 10.4.0
+    "@navikt/ft-form-hooks": 9.0.0
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 6.0.0
+    "@navikt/ft-utils": 3.7.0
+    "@storybook/react": 9.0.18
+    "@storybook/react-vite": 9.0.18
+    "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     cross-env: 7.0.3
     dayjs: 1.11.13
-    eslint: 9.30.0
+    eslint: 9.32.0
     react: 19.1.0
-    react-hook-form: 7.59.0
+    react-hook-form: 7.61.1
     react-intl: 7.1.11
-    storybook: 9.0.14
-    stylelint: 16.21.0
+    storybook: 9.0.18
+    stylelint: 16.22.0
     typescript: 5.8.3
-    vite: 6.3.5
+    vite: 7.0.6
     vitest: 3.2.4
   languageName: unknown
   linkType: soft
@@ -8043,7 +8043,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
+"cross-env@npm:7.0.3":
+  version: 7.0.3
+  resolution: "cross-env@npm:7.0.3"
+  dependencies:
+    cross-spawn: ^7.0.1
+  bin:
+    cross-env: src/bin/cross-env.js
+    cross-env-shell: src/bin/cross-env-shell.js
+  checksum: 26f2f3ea2ab32617f57effb70d329c2070d2f5630adc800985d8b30b56e8bf7f5f439dd3a0358b79cee6f930afc23cf8e23515f17ccfb30092c6b62c6b630a79
+  languageName: node
+  linkType: hard
+
+"cross-spawn@npm:^7.0.1, cross-spawn@npm:^7.0.3, cross-spawn@npm:^7.0.6":
   version: 7.0.6
   resolution: "cross-spawn@npm:7.0.6"
   dependencies:
