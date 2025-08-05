@@ -1,7 +1,0 @@
-import{j as e,T as i,L as d,w as l}from"./iframe-CKZvDsWp.js";import{M as t,r as c,A as m,a as p,b as r,B as g,m as u}from"./nb_NO-CaRP0_Pe.js";import"./index-B7XwvW9I.js";const s=c(u),o=({isOpen:n=!1})=>e.jsx(i,{theme:"light",children:e.jsx(t,{open:n,"aria-label":s.formatMessage({id:"SoknadRegistrertModal.ContentLabel"}),onClose:()=>{},children:e.jsx(t.Body,{style:{padding:4},children:e.jsx(m,{variant:"success",children:e.jsxs(p,{justify:"space-between",gap:"space-16",align:"center",children:[e.jsxs("div",{children:[e.jsx(r,{size:"small",children:s.formatMessage({id:"SoknadRegistrertModal.InfoTextOne"})}),e.jsx(r,{size:"small",children:s.formatMessage({id:"SoknadRegistrertModal.InfoTextTwo"})})]}),e.jsx(d,{to:"/",children:e.jsx(g,{size:"small",variant:"primary",type:"button",children:s.formatMessage({id:"SoknadRegistrertModal.OkButtonText"})})})]})})})})});o.__docgenInfo={description:`SoknadRegistrertModal
-
-Informasjonsmodal som vises til saksbehandler når en papirsøknad har blitt registrert.`,methods:[],displayName:"SoknadRegistrertModal",props:{isOpen:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}}}};const j={component:o,decorators:[l]},a={args:{isOpen:!0}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
-  args: {
-    isOpen: true
-  }
-}`,...a.parameters?.docs?.source}}};const M=["Default"];export{a as Default,M as __namedExportsOrder,j as default};
