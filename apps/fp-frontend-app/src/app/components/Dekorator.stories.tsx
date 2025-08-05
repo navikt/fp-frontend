@@ -2,6 +2,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
+import { action } from 'storybook/internal/actions';
 
 import { getIntlDecorator, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 
@@ -31,6 +32,8 @@ const meta = {
     setSiteHeight: () => undefined,
     crashMessage: undefined,
     hideErrorMessages: false,
+    theme: 'light',
+    setTheme: action('setTheme'),
   },
   render: props => {
     //Må hente data til cache før testa komponent blir kalla
