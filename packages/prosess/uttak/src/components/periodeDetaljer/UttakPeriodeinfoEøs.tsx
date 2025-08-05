@@ -27,7 +27,11 @@ export const UttakPeriodeInfoEØS = ({ valgtPeriode, alleKodeverk }: Props) => {
         <BodyShort>
           <FormattedMessage
             id="UttakPeriodeInfoEØS.Trekkdager"
-            values={{ trekkdager: createWeekAndDay(valgtPeriode.trekkdager).formattedString, b: BTag }}
+            values={{
+              trekkdager: createWeekAndDay(Math.floor(valgtPeriode.trekkdager / 5), valgtPeriode.trekkdager % 5)
+                .formattedString,
+              b: BTag,
+            }}
           />
         </BodyShort>
       </div>

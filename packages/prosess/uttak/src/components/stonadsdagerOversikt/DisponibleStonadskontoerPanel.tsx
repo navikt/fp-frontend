@@ -154,7 +154,12 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
             {valgtKonto.kontoReduksjoner?.annenForelderEøsUttak && (
               <FormattedMessage
                 id="TimeLineInfo.KontoReduksjonerEøs"
-                values={{ dager: createWeekAndDay(valgtKonto.kontoReduksjoner.annenForelderEøsUttak).formattedString }}
+                values={{
+                  dager: createWeekAndDay(
+                    Math.floor(valgtKonto.kontoReduksjoner.annenForelderEøsUttak / 5),
+                    valgtKonto.kontoReduksjoner.annenForelderEøsUttak % 5,
+                  ).formattedString,
+                }}
               />
             )}
             <Table>
@@ -175,7 +180,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
                     <Table.Row key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>
                       <Table.DataCell textSize="small">{arbforhold.navn}</Table.DataCell>
                       <Table.DataCell textSize="small">
-                        {arbforhold.saldo && (
+                        {arbforhold.saldo > 0 && (
                           <FormattedMessage
                             id="TimeLineInfo.Stonadinfo.UkerDager"
                             values={{
