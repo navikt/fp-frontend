@@ -27,7 +27,7 @@
 }
 
 .noDocuments {
-  background-color: white;
+  background-color: var(--ax-bg-default);
   margin-top: -15px;
   padding: 12px;
 }

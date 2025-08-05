@@ -6,7 +6,7 @@
   top: 0;
 }
 .tabs .tab.aktiv {
-  background-color: #fff;
+  background-color: var(--ax-bg-default);
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   border-color: transparent;
@@ -29,7 +29,7 @@
   width: 110px;
 }
 .tabs .tab .tabInner.error {
-  background-color: #f3cccc;
-  border-color: #c30000;
+  background-color: var(--ax-border-brand-magenta-strong);
+  border-color: var(--ax-bg-danger-soft);
   border-radius: 4px;
 }

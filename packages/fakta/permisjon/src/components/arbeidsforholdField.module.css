@@ -7,8 +7,8 @@
 }
 
 .hjelpetekstInnhold {
-  background-color: #d8f9ff;
-  border: 1px solid #66cbec;
+  background-color: var(--ax-bg-accent-moderate);
+  border: 1px solid var(--ax-bg-accent-strong);
 }
 
 .exclamationmarkIcon {

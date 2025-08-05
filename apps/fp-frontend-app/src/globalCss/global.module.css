@@ -3,8 +3,8 @@ html {
 }
 
 body {
-  background-color: #fff;
-  color: #262626;
+  background-color: var(--ax-bg-default);
+  color: var(--ax-text-neutral);
   height: 100%;
   line-height: 1.42857143;
   margin: 0;

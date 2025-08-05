@@ -5,9 +5,9 @@
 }
 
 .circle {
-  background: var(--ax-neutral-300);
+  background: var(--ax-neutral-400);
   border-radius: 50%;
-  color: #000;
+  color: var(--ax-text-accent-contrast);
   height: 25px;
   line-height: 25px;
   text-align: center;

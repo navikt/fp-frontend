@@ -13,7 +13,7 @@ const withStyleProvider: DecoratorFunction<ReactRenderer> = Story => (
       width: '600px',
       margin: '50px',
       padding: '20px',
-      backgroundColor: 'white',
+      backgroundColor: 'var(--ax-bg-default)',
     }}
   >
     <Story />

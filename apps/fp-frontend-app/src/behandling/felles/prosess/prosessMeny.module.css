@@ -19,7 +19,7 @@
 .stepArrowContainer:after {
   border: solid transparent;
   border-color: rgba(255, 255, 255, 0);
-  border-bottom-color: #fff;
+  border-bottom-color: var(--ax-bg-default);
   border-width: 12px;
   bottom: 100%;
   content: ' ';

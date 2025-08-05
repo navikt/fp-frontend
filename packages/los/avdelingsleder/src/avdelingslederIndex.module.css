@@ -1,5 +1,5 @@
 .container {
-  background-color: #efefef;
+  background-color: var(--ax-bg-default);
   padding-top: 15px;
 }
 

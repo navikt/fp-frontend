@@ -18,7 +18,7 @@
 }
 
 .lenke {
-  color: #0067c5;
+  color: var(--ax-accent-800);
 }
 
 .checkmarkIcon {
