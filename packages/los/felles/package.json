@@ -19,7 +19,7 @@
     "storybook": "storybook dev --quiet -p 7021"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.25.1",
+    "@navikt/ds-react": "7.25.2",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/ft-form-hooks": "8.1.2",
     "@navikt/ft-form-validators": "4.1.0",
@@ -32,7 +32,7 @@
     "react-intl": "7.1.11"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.25.1",
+    "@navikt/ds-css": "7.25.2",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",

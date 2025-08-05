@@ -39,7 +39,7 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@navikt/aksel-stylelint": "7.25.1",
+    "@navikt/aksel-stylelint": "7.25.2",
     "@sentry/cli": "2.50.2",
     "@storybook/addon-a11y": "9.0.18",
     "@storybook/addon-links": "9.0.18",
