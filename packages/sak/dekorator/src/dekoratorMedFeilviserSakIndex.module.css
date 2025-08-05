@@ -4,7 +4,7 @@
 
 .container {
   background-color: var(--ax-neutral-1000);
-  color: var(--a-white);
+  color: var(--ax-bg-default);
   font-size: 20px;
   position: fixed;
   top: 0;
