@@ -20,7 +20,7 @@ export const VisittkortBarnInfoPanel = ({ familiehendelse }: Props) => {
       height={24}
       width={24}
       color="white"
-      style={{ backgroundColor: 'var(--a-gray-400)', borderRadius: '50%', padding: '2px' }}
+      style={{ backgroundColor: 'var(--ax-neutral-500)', borderRadius: '50%', padding: '2px' }}
     />
   );
 

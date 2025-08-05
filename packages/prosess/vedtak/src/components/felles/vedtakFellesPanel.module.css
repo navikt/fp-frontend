@@ -7,7 +7,7 @@
 }
 
 .blyantDisablet {
-  color: var(--a-gray-100);
+  color: var(--ax-neutral-200);
   height: 20px;
   margin-right: 5px;
   width: 20px;
@@ -19,19 +19,19 @@
 }
 
 .innvilgetImage {
-  color: var(--a-surface-success);
+  color: var(--ax-bg-success-strong);
   height: 25px;
   width: 25px;
 }
 
 .avslattImage {
-  color: var(--a-red-500);
+  color: var(--ax-danger-600);
   height: 25px;
   width: 25px;
 }
 
 .disabletLink {
-  color: var(--a-gray-100);
+  color: var(--ax-neutral-200);
   display: inline;
 }
 

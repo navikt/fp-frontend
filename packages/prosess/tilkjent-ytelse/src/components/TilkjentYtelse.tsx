@@ -147,9 +147,9 @@ export const TilkjentYtelse = ({
           label={finnRolle(fagsak, alleKodeverk)}
           icon={
             hovedsøkerKjønnKode === KjønnkodeEnum.KVINNE ? (
-              <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />
+              <FigureOutwardFillIcon width={20} height={20} color="var(--ax-danger-300)" />
             ) : (
-              <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />
+              <SilhouetteFillIcon width={20} height={20} color="var(--ax-accent-700)" />
             )
           }
         >

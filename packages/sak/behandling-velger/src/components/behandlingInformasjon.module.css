@@ -1,10 +1,10 @@
 .starImage {
-  color: var(--a-orange-500);
+  color: var(--ax-warning-600);
   height: 20px;
   width: 20px;
 }
 .chevronImage {
-  color: var(--a-blue-500);
+  color: var(--ax-accent-600);
   height: 30px;
   margin-top: -4px;
   width: 30px;
@@ -18,7 +18,7 @@
 }
 .line {
   border: 0;
-  border-top: 1px solid var(--a-gray-100);
+  border-top: 1px solid var(--ax-neutral-200);
   height: 1px;
 }
 .arsakPadding {

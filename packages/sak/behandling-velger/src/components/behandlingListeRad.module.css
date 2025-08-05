@@ -16,7 +16,7 @@
 }
 .linkToBehandling:hover > :first-child,
 .toggleShowAllButton:hover > :first-child {
-  background: var(--a-gray-100);
+  background: var(--ax-neutral-200);
 }
 .linkToBehandling:visited {
   color: inherit;

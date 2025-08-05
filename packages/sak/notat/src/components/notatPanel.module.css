@@ -1,5 +1,5 @@
 .circle {
-  background: var(--a-gray-300);
+  background: var(--ax-neutral-400);
   border-radius: 50%;
   color: #000;
   height: 25px;
@@ -20,12 +20,12 @@
 }
 
 .bubble {
-  background-color: var(--a-gray-50);
+  background-color: var(--ax-neutral-100);
   width: 600px;
 }
 
 .bubbleSelf {
-  background-color: var(--a-blue-50);
+  background-color: var(--ax-accent-100);
   width: 600px;
 }
 
@@ -42,8 +42,8 @@
 }
 
 .form {
-  background-color: var(--a-gray-50);
-  border-top: 2px solid var(--a-grayalpha-300);
+  background-color: var(--ax-neutral-100);
+  border-top: 2px solid var(--ax-neutral-400A);
   margin-top: auto;
   padding: 16px;
 }
@@ -62,7 +62,7 @@
 }
 
 .ingen {
-  color: var(--a-gray-600);
+  color: var(--ax-neutral-700);
 }
 
 .textAlign {

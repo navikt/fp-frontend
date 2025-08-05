@@ -1,5 +1,5 @@
 .days {
-  color: var(--a-red-600);
+  color: var(--ax-danger-700);
 }
 
 .hyphen {
@@ -13,7 +13,7 @@
 }
 
 .panel {
-  border: 1px solid var(--a-gray-100);
+  border: 1px solid var(--ax-neutral-200);
   border-radius: 4px;
   padding: 16px;
 }

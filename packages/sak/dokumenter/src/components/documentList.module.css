@@ -1,5 +1,5 @@
 .image {
-  color: var(--a-orange-400);
+  color: var(--ax-warning-500);
   height: 20px;
   width: 25px;
 }
@@ -9,12 +9,12 @@
 .kommunikasjonsretning {
   align-items: center;
   display: flex;
-  gap: var(--a-spacing-2);
+  gap: var(--ax-space-8);
 }
 .dokumentlenke {
   cursor: pointer;
   display: inline;
 }
 .openDocumentButton {
-  margin-top: var(--a-spacing-2);
+  margin-top: var(--ax-space-8);
 }

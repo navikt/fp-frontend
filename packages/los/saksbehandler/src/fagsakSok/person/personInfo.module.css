@@ -1,11 +1,11 @@
 .kvinneIcon {
-  color: var(--a-red-300);
+  color: var(--ax-danger-400);
   height: 30px;
   margin-top: 7px;
   width: 30px;
 }
 .MannIcon {
-  color: var(--a-blue-400);
+  color: var(--ax-accent-500);
   height: 30px;
   margin-top: 7px;
   width: 30px;

@@ -6,7 +6,7 @@
 }
 
 .dokumentRad {
-  background-color: var(--a-blue-50);
+  background-color: var(--ax-accent-100);
   padding: 16px;
   width: 100%;
 }
@@ -17,7 +17,7 @@
 }
 
 .newTabIcon {
-  color: var(--a-blue-600);
+  color: var(--ax-accent-700);
   height: 32px;
   width: 32px;
 }

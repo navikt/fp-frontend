@@ -46,7 +46,7 @@ export const HoyRisikoTittel = ({
           <HStack gap="space-16" align="center">
             <XMarkOctagonFillIcon
               title={intl.formatMessage({ id: 'Risikopanel.Tittel' })}
-              color="var(--a-red-500)"
+              color="var(--ax-danger-600)"
               height={24}
               width={24}
             />

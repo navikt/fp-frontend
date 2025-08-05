@@ -7,20 +7,20 @@
 }
 
 .imageInn {
-  color: var(--a-surface-success);
+  color: var(--ax-bg-success-strong);
   height: 30px;
   margin-left: 10px;
   width: 30px;
 }
 
 .imageSend {
-  color: var(--a-orange-500);
+  color: var(--ax-warning-600);
   height: 30px;
   margin-left: 10px;
   width: 30px;
 }
 .imageIntern {
-  color: var(--a-blue-400);
+  color: var(--ax-accent-500);
   height: 30px;
   margin-left: 10px;
   width: 30px;

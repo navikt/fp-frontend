@@ -13,7 +13,7 @@ export const ManglendeKlassifiseringPanel = () => (
     <HStack gap="space-16" align="center">
       <HourglassTopFilledIcon
         title={useIntl().formatMessage({ id: 'Risikopanel.Tittel' })}
-        color="var(--a-gray-600)"
+        color="var(--ax-neutral-700)"
         height={24}
         width={24}
       />

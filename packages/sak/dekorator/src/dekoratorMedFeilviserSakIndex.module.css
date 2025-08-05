@@ -3,7 +3,7 @@
 }
 
 .container {
-  background-color: var(--a-gray-900);
+  background-color: var(--ax-neutral-1000);
   color: var(--a-white);
   font-size: 20px;
   position: fixed;

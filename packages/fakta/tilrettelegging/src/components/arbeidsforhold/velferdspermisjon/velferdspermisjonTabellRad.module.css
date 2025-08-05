@@ -3,11 +3,11 @@
 }
 
 .openRow {
-  background-color: var(--a-surface-neutral-moderate);
+  background-color: var(--ax-bg-neutral-moderate);
   cursor: pointer;
 }
 
 .apRow {
-  background-color: var(--a-orange-100);
+  background-color: var(--ax-warning-200);
   cursor: pointer;
 }

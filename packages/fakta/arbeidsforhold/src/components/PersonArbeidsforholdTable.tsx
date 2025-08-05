@@ -77,7 +77,7 @@ export const PersonArbeidsforholdTable = ({
                   arbeidsforhold.saksbehandlersVurdering ===
                     ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
                   <StarFillIcon
-                    color="var(--a-orange-600)"
+                    color="var(--ax-warning-700)"
                     height="20px"
                     width="25px"
                     title={intl.formatMessage({ id: 'PersonArbeidsforholdTable.ErIBruk' })}
