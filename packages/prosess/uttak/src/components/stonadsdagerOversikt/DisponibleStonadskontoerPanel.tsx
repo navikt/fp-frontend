@@ -180,7 +180,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
                     <Table.Row key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>
                       <Table.DataCell textSize="small">{arbforhold.navn}</Table.DataCell>
                       <Table.DataCell textSize="small">
-                        {arbforhold.saldo > 0 && (
+                        {arbforhold.saldo && (
                           <FormattedMessage
                             id="TimeLineInfo.Stonadinfo.UkerDager"
                             values={{
