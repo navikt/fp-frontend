@@ -38,7 +38,7 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setFaktaPanelMedÅ
               label: data.tekst,
               active: data.erAktiv,
               icon: data.harApneAksjonspunkter ? (
-                <ExclamationmarkTriangleFillIcon color="var(--a-orange-600)" />
+                <ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" />
               ) : undefined,
             }))}
             onClick={(index: number) => {
