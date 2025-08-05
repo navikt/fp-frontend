@@ -24,7 +24,7 @@ export const VedtakOpphorRevurderingPanel = ({
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => (
   <>
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="VedtakForm.Revurdering.Aarsak" />
       </Label>

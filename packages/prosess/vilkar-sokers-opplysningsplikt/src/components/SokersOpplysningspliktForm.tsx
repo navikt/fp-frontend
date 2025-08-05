@@ -215,9 +215,9 @@ export const SokersOpplysningspliktForm = ({
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <VStack gap="4">
+        <VStack gap="space-16">
           {sorterteManglendeVedlegg.length > 0 && (
-            <VStack gap="4">
+            <VStack gap="space-16">
               <BodyShort size="small">
                 <FormattedMessage id="SokersOpplysningspliktForm.ManglendeDokumentasjon" />
               </BodyShort>

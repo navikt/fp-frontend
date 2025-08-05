@@ -85,7 +85,7 @@ export const BortfalteNaturalYtelser = ({
           <FormattedMessage id="InntektsmeldingFaktaPanel.bortfalteNaturalytelser.ingen" />
         </span>
       ) : (
-        <VStack gap="1">
+        <VStack gap="space-4">
           {Object.entries(bortfalteNaturalytelser).map(([key, value]) => (
             <div key={key}>
               <span>{alleKodeverk['NaturalYtelseType'].find(kodeverk => kodeverk.kode === key)?.navn}</span>

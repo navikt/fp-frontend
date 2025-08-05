@@ -128,13 +128,13 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel));
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
       <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
-        <VStack gap="6">
-          <HStack gap="4" wrap>
+        <VStack gap="space-24">
+          <HStack gap="space-16" wrap>
             <div className={styles.leftCol}>
               <DokumentasjonFaktaForm
                 readOnly={isReadOnly}

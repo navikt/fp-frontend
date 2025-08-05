@@ -86,12 +86,12 @@ export const FlyttReservasjonModal = ({
         </Label>
       </NavModal.Header>
       <NavModal.Body>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <RhfForm
             formMethods={søkFormMethods}
             onSubmit={(formValues: SøkFormValues) => hentSaksbehandler(formValues.brukerIdent)}
           >
-            <HStack gap="4" align="end">
+            <HStack gap="space-16" align="end">
               <RhfTextField
                 name="brukerIdent"
                 control={søkFormMethods.control}
@@ -128,7 +128,7 @@ export const FlyttReservasjonModal = ({
               validate={[required, maxLength500, minLength3, hasValidText]}
               maxLength={500}
             />
-            <HStack gap="2" justify="end">
+            <HStack gap="space-8" justify="end">
               <Button
                 className={styles.cancelButton}
                 size="small"

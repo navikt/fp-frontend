@@ -75,9 +75,9 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(a => a.status === AksjonspunktStatus.OPPRETTET);
 
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <HStack justify="space-between">
-        <Heading size="small">
+        <Heading size="small" level="2">
           <FormattedMessage id="PermisjonFaktaPanel.Overskrift" />
         </Heading>
         <BodyShort size="small">
@@ -106,7 +106,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
           })
         }
       >
-        <VStack gap="6">
+        <VStack gap="space-24">
           <ArbeidsforholdFieldArray
             saksnummer={fagsak.saksnummer}
             sorterteArbeidsforhold={sorterteArbeidsforhold}

@@ -123,19 +123,19 @@ export const VedtakFellesPanel = ({
   const skalProdusereBrev = behandlingsresultat.vedtaksbrevStatus === 'VEDTAKSBREV_PRODUSERES';
 
   return (
-    <VStack gap="4">
-      <HStack gap="2">
+    <VStack gap="space-16">
+      <HStack gap="space-8">
         {status === behandlingStatusCode.AVSLUTTET && (
           <>
             {erInnvilget && <CheckmarkCircleFillIcon className={styles.innvilgetImage} />}
             {!erInnvilget && <XMarkOctagonFillIcon className={styles.avslattImage} />}
           </>
         )}
-        <Heading size="small">
+        <Heading size="small" level="2">
           <FormattedMessage id={finnTekstkodeFraBehandlingstatus(status)} />
         </Heading>
       </HStack>
-      <HStack gap="2">
+      <HStack gap="space-8">
         <div className={styles.space}>
           <Label size="small">
             {vedtakstatusTekst}
@@ -206,7 +206,7 @@ export const VedtakFellesPanel = ({
       {oppgaver && oppgaver.length > 0 && (
         <OppgaveTabell oppgaver={oppgaver} ferdigstillOppgave={ferdigstillOppgave} isReadOnly={isReadOnly} />
       )}
-      <VStack gap="8">
+      <VStack gap="space-32">
         {renderPanel(harValgtÅRedigereVedtaksbrev, erInnvilget, erAvslatt, erOpphor)}
         {behandling.behandlingsresultat?.overskrift && (
           <LegacyOverstyrtVedtaksbrev forhåndsvisOverstyrtBrev={previewCallback} behandling={behandling} />

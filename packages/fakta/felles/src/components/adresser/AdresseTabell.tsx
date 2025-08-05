@@ -23,11 +23,11 @@ export const AdresseTabell = ({
 }: AdresseTabellProps) => {
   if (harSammeAdresser) {
     return (
-      <Box padding="4">
+      <Box.New padding="4">
         <BodyLong textColor="subtle">
           <FormattedMessage id="AdresseTabell.SammeAdresse" />
         </BodyLong>
-      </Box>
+      </Box.New>
     );
   }
 
@@ -36,11 +36,11 @@ export const AdresseTabell = ({
   return (
     <>
       {adresser.length === 0 && (
-        <Box padding="4">
+        <Box.New padding="4">
           <BodyLong textColor="subtle">
             <FormattedMessage id="AdresseTabell.IngenAdresse" values={{ erAnnenpart }} />
           </BodyLong>
-        </Box>
+        </Box.New>
       )}
       {adresser.length > 0 && (
         <Table style={{ tableLayout: 'fixed' }}>

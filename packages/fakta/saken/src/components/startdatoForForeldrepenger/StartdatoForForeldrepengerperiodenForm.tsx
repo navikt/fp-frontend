@@ -89,12 +89,12 @@ export const StartdatoForForeldrepengerperiodenForm = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(soknad, values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="StartdatoForForeldrepengerperiodenForm.StartdatoForPerioden" />
         </Heading>
         {!visEditeringsmodus && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <BodyShort size="small">
               {soknad.oppgittFordeling
                 ? capitalizeFirstLetter(dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))
@@ -115,7 +115,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
               !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
             }
           >
-            <VStack gap="4">
+            <VStack gap="space-16">
               <RhfDatepicker
                 name="startdatoFraSoknad"
                 control={formMethods.control}
@@ -131,7 +131,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
                 maxLength={1500}
                 readOnly={readOnly}
               />
-              <HStack gap="2">
+              <HStack gap="space-8">
                 <Button
                   size="small"
                   variant="primary"

@@ -48,7 +48,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
   }
 
   return (
-    <VStack gap="10" align="start">
+    <VStack gap="space-40" align="start">
       <RhfTextarea
         name="begrunnelse"
         control={control}
@@ -70,8 +70,8 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
             element: (
               <div className={styles.varsel}>
                 <ArrowBox alignOffset={20}>
-                  <VStack gap="4">
-                    <HStack gap="2">
+                  <VStack gap="space-16">
+                    <HStack gap="space-8">
                       <BodyShort size="small" className={styles.bold}>
                         <FormattedMessage id="Simulering.varseltekst" />
                       </BodyShort>

@@ -25,7 +25,7 @@ export const BarnPanel = ({ alleMerknaderFraBeslutter, soknad }: Props) => {
       title={intl.formatMessage({ id: 'BarnPanel.BarnDetSøkesOm' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
-      <VStack gap="2">
+      <VStack gap="space-8">
         {adopsjonFodelsedatoer &&
           Object.keys(adopsjonFodelsedatoer).map(key => (
             <div key={`${key}`}>

@@ -52,7 +52,7 @@ export const EndreUtlandModal = ({
         onClose={cancelEvent}
       >
         <Modal.Header>
-          <Heading size="small">
+          <Heading size="small" level="2">
             <FormattedMessage id="MenyEndreUtlandIndex.UtlandTittel" />
           </Heading>
         </Modal.Header>

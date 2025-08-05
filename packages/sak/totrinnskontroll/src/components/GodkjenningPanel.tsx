@@ -58,7 +58,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
   }
 
   return (
-    <VStack gap="3">
+    <VStack gap="space-12">
       <RhfRadioGroup
         name={`${FIELD_ARRAY_NAME}.${index}.totrinnskontrollGodkjent`}
         control={control}
@@ -79,17 +79,17 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
       />
       {totrinnskontrollGodkjent === false && (
         <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
-          <VStack gap="2">
+          <VStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" />
             </Label>
             <BodyShort size="small">
               <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Forklaring" />
             </BodyShort>
-            <VStack gap="4">
-              <VStack gap="1">
+            <VStack gap="space-16">
+              <VStack gap="space-4">
                 <HStack justify="space-between" style={{ width: '300px' }}>
-                  <VStack gap="1">
+                  <VStack gap="space-4">
                     <RhfCheckbox
                       name={`${FIELD_ARRAY_NAME}.${index}.feilFakta`}
                       control={control}
@@ -109,7 +109,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
                       readOnly={readOnly}
                     />
                   </VStack>
-                  <VStack gap="1">
+                  <VStack gap="space-4">
                     <RhfCheckbox
                       name={`${FIELD_ARRAY_NAME}.${index}.feilUtredning`}
                       control={control}

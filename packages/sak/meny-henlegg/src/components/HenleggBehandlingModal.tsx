@@ -104,12 +104,12 @@ export const HenleggBehandlingModal = ({
         onClose={cancelEvent}
       >
         <Modal.Header>
-          <Heading size="small">
+          <Heading size="small" level="2">
             <FormattedMessage id="HenleggBehandlingModal.HenleggBehandling" />
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <VStack gap="4">
+          <VStack gap="space-16">
             <RhfSelect
               name="årsakKode"
               control={formMethods.control}

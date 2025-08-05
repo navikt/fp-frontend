@@ -27,7 +27,7 @@ export const OpptjeningVilkarView = ({
   opptjeningFomDate,
   opptjeningTomDate,
 }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <BodyShort size="small">
       <FormattedMessage id="OpptjeningVilkarView.MonthsAndDays" values={{ months, days }} />
     </BodyShort>

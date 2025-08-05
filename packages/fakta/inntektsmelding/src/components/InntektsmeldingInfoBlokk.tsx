@@ -4,7 +4,7 @@ import { Label, VStack } from '@navikt/ds-react';
 
 export const InntektsmeldingInfoBlokk = ({ tittel, children }: { tittel: string; children: React.ReactNode }) => {
   return (
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="medium">{tittel}</Label>
       {children}
     </VStack>

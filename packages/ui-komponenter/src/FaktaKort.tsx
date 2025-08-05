@@ -13,17 +13,19 @@ interface Props {
 export const FaktaKort = ({ label, children, merknaderFraBeslutter }: Props) => {
   const error = merknaderFraBeslutter?.notAccepted ?? false;
   return (
-    <Box
+    <Box.New
       borderWidth={error ? '2' : undefined}
-      borderColor={error ? 'border-danger' : undefined}
+      borderColor={error ? 'neutral' : undefined}
       borderRadius="medium"
-      background="surface-subtle"
+      background="neutral-soft"
       aria-label={label}
     >
-      <Box padding="4" borderRadius="medium medium 0 0" background="surface-neutral-moderate">
-        <Heading size="small">{label}</Heading>
-      </Box>
-      <Box padding="4">{children}</Box>
-    </Box>
+      <Box.New padding="4" borderRadius="medium medium 0 0" background="neutral-moderateA">
+        <Heading size="small" level="3">
+          {label}
+        </Heading>
+      </Box.New>
+      <Box.New padding="4">{children}</Box.New>
+    </Box.New>
   );
 };

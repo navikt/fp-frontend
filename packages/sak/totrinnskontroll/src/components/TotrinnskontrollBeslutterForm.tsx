@@ -135,7 +135,7 @@ export const TotrinnskontrollBeslutterForm = ({
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setBeslutterFormData}>
-      <VStack gap="6">
+      <VStack gap="space-24">
         {!readOnly && (
           <AksjonspunktHelpTextHTML>
             {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
@@ -151,7 +151,7 @@ export const TotrinnskontrollBeslutterForm = ({
           faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
           lagLenke={lagLenke}
         />
-        <HStack gap="4">
+        <HStack gap="space-16">
           <Button
             variant="primary"
             size="small"

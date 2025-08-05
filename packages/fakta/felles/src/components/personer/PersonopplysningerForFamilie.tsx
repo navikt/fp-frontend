@@ -11,7 +11,7 @@ interface Props {
 
 export const PersonopplysningerForFamilie = ({ personoversikt: { barn, bruker, annenPart }, alleKodeverk }: Props) => {
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       {barn.map(b => (
         <Personopplysninger key={b.aktoerId} {...b} alleKodeverk={alleKodeverk} rolle="BARN" />
       ))}

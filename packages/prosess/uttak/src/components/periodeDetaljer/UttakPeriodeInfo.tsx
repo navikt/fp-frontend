@@ -178,7 +178,7 @@ export const UttakPeriodeInfo = ({
   const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
 
   return (
-    <VStack gap="4" className={periodeStatusClassName(valgtPeriode, erTilknyttetStortinget)}>
+    <VStack gap="space-16" className={periodeStatusClassName(valgtPeriode, erTilknyttetStortinget)}>
       {valgtPeriode.oppholdÅrsak === '-' && (
         <HStack justify="space-between">
           <div>
@@ -210,7 +210,7 @@ export const UttakPeriodeInfo = ({
               ]}
             />
             {erSamtidigUttak && (
-              <HStack gap="2">
+              <HStack gap="space-8">
                 <RhfNumericField
                   name="samtidigUttaksprosent"
                   control={control}
@@ -226,7 +226,7 @@ export const UttakPeriodeInfo = ({
           </div>
         </HStack>
       )}
-      <HStack gap="10">
+      <HStack gap="space-40">
         <div>
           <Label size="small">{periodFormat(valgtPeriode.fom, valgtPeriode.tom)}</Label>
           {valgtPeriode.oppholdÅrsak === '-' && (

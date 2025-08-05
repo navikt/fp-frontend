@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
-import { Box, Heading, HStack, Select, Tabs, Theme } from '@navikt/ds-react';
+import { Box, Heading, HStack, Select, Tabs } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl, formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
@@ -39,11 +39,9 @@ interface Props {
 
 export const AvdelingslederIndexIntlWrapper = (props: Props) => {
   return (
-    <Theme theme="light">
-      <RawIntlProvider value={intl}>
-        <AvdelingslederIndex {...props} />
-      </RawIntlProvider>
-    </Theme>
+    <RawIntlProvider value={intl}>
+      <AvdelingslederIndex {...props} />
+    </RawIntlProvider>
   );
 };
 

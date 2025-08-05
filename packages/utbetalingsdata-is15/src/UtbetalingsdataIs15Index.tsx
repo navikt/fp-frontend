@@ -1,6 +1,5 @@
 import { RawIntlProvider } from 'react-intl';
 
-import { Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import type { InfotrygdVedtak } from '@navikt/fp-types';
@@ -20,8 +19,6 @@ interface Props {
 
 export const UtbetalingsdataIs15Index = (args: Props) => (
   <RawIntlProvider value={intl}>
-    <Theme theme="light">
-      <UtbetalingsdataPanel {...args} />
-    </Theme>
+    <UtbetalingsdataPanel {...args} />
   </RawIntlProvider>
 );

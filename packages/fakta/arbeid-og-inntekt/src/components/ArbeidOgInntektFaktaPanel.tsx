@@ -131,7 +131,7 @@ export const ArbeidOgInntektFaktaPanel = ({
     !isReadOnly && erAksjonspunktApent && harBehandletAllePerioder && !isDirty && !kanSettePåVent;
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <ArbeidsOgInntektOverstyrPanel
         behandling={behandling}
         aksjonspunkt={aksjonspunkt}
@@ -222,7 +222,7 @@ export const ArbeidOgInntektFaktaPanel = ({
         </div>
       )}
       {skalViseÅpneForNyVurderingKnapp && (
-        <VStack gap="4">
+        <VStack gap="space-16">
           <div className={styles.alertStripe}>
             <Alert variant="info">
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />

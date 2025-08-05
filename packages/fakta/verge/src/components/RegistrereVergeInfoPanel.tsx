@@ -70,7 +70,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
         onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="6">
+        <VStack gap="space-24">
           <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
             <RegistrereVergeForm
               readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}

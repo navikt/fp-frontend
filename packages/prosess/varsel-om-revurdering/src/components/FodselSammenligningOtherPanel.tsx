@@ -26,11 +26,11 @@ export const FodselSammenligningOtherPanel = ({ soknad, termindato }: Props) => 
   const terminOrFødseldato = getTerminEllerFødselsdato(!!soknad, soknadFodselsdatoer, soknad.termindato, termindato);
 
   return (
-    <VStack gap="4">
-      <Heading size="small">
+    <VStack gap="space-16">
+      <Heading size="small" level="3">
         <FormattedMessage id={terminFodselHeader} />
       </Heading>
-      <HStack gap="4">
+      <HStack gap="space-16">
         {soknad.utstedtdato && (
           <div>
             <Label>

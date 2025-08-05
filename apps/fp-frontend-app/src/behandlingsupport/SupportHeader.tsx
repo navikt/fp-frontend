@@ -27,11 +27,13 @@ export const SupportHeaderAndContent = ({
   const { addErrorMessage } = useRestApiErrorDispatcher();
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <div className={styles.header}>
         <HStack justify="space-between">
-          <HStack gap="1" align="center">
-            <Heading size="small">{tekst}</Heading>
+          <HStack gap="space-4" align="center">
+            <Heading size="small" level="2">
+              {tekst}
+            </Heading>
             {toggleVisUtvidetBehandlingDetaljerKnapp}
           </HStack>
           {!!antall && antall > 0 && <div className={styles.circle}>{antall}</div>}

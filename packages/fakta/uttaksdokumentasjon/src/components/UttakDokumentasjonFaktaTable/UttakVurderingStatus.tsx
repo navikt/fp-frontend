@@ -25,7 +25,7 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
   switch (vurdering) {
     case UttakVurdering.GODKJENT:
       return (
-        <HStack gap="1">
+        <HStack gap="space-4">
           <CheckmarkCircleFillIcon color="var(--a-icon-success)" />
           {morsStillingsprosent ? (
             <FormattedMessage id="UttakDokumentasjonFaktaTable.GodkjentMedProsent" values={{ morsStillingsprosent }} />

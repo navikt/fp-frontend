@@ -139,9 +139,9 @@ export const FatterVedtakApprovalModal = ({
     >
       <Modal.Body>
         <HStack justify="space-between" align="center" wrap={false}>
-          <HStack gap="2">
+          <HStack gap="space-8">
             <CheckmarkCircleFillIcon className={styles.image} title={intl.formatMessage({ id: altImgTextCode })} />
-            <VStack gap="1">
+            <VStack gap="space-4">
               <Label size="small">
                 <FormattedMessage id={infoTextCode} />
               </Label>

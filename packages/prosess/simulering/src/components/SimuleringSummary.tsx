@@ -26,7 +26,7 @@ export const SimuleringSummary = ({
   inntrekk,
   ingenPerioderMedAvvik,
 }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <BodyShort size="small" className={styles.summaryTitle}>
       <FormattedMessage id="Simulering.bruker" />
     </BodyShort>
@@ -37,9 +37,9 @@ export const SimuleringSummary = ({
         </div>
       )}
       {!ingenPerioderMedAvvik && (
-        <VStack gap="4">
+        <VStack gap="space-16">
           <Label size="small">{periodFormat(fom, tom)}</Label>
-          <HStack gap="4">
+          <HStack gap="space-16">
             <BodyShort size="small">
               <FormattedMessage id="Simulering.etterbetaling" />:
             </BodyShort>
@@ -47,7 +47,7 @@ export const SimuleringSummary = ({
               <BeløpLabel beløp={etterbetaling} />
             </BodyShort>
           </HStack>
-          <HStack gap="4">
+          <HStack gap="space-16">
             <BodyShort size="small">
               <FormattedMessage id="Simulering.tilbakekreving" />:
             </BodyShort>
@@ -56,7 +56,7 @@ export const SimuleringSummary = ({
             </BodyShort>
           </HStack>
           {inntrekk != undefined && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <BodyShort size="small">
                 <FormattedMessage id="Simulering.inntrekk" />:
               </BodyShort>

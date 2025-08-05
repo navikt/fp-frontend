@@ -85,7 +85,7 @@ export const GraderingOgSamtidigUttakPanel = ({
 
   return (
     <>
-      <HStack gap="2">
+      <HStack gap="space-8">
         <RhfCheckbox
           name="harGradering"
           control={control}
@@ -109,7 +109,7 @@ export const GraderingOgSamtidigUttakPanel = ({
         </div>
       )}
       {(visGradering || visSamtidigUttaksgradering) && (
-        <HStack gap="6">
+        <HStack gap="space-24">
           {visGradering && faktaArbeidsforhold && (
             <>
               <RhfNumericField

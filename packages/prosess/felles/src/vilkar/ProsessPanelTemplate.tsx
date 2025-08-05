@@ -40,18 +40,20 @@ export const ProsessPanelTemplate = ({
   isSubmitting,
   children,
 }: Props) => (
-  <VStack gap="4">
-    <HStack gap="2">
+  <VStack gap="space-16">
+    <HStack gap="space-8">
       {originalErVilkarOk !== undefined && (
         <>
           {originalErVilkarOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
           {!originalErVilkarOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
         </>
       )}
-      <Heading size="small">{title}</Heading>
+      <Heading size="small" level="3">
+        {title}
+      </Heading>
       {lovReferanse && <Detail className={styles.vilkar}>{lovReferanse}</Detail>}
     </HStack>
-    <HStack gap="2">
+    <HStack gap="space-8">
       {originalErVilkarOk && <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Label>}
       {originalErVilkarOk === false && (
         <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}</Label>
@@ -65,7 +67,7 @@ export const ProsessPanelTemplate = ({
       erAksjonspunktApent={isAksjonspunktOpen}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <div>{children}</div>
         <ProsessStegSubmitButton
           isReadOnly={readOnly}

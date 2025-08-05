@@ -93,7 +93,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <VStack gap="4">
+        <VStack gap="space-16">
           <Label size="small">
             <FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />
           </Label>

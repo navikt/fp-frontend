@@ -48,9 +48,9 @@ export const BehandlingInformasjon = ({
     : alleKodeverk['BehandlingResultatType'];
 
   return (
-    <Box borderWidth="2" borderColor="border-divider" borderRadius="large" padding="3">
-      <VStack gap="1">
-        <HStack gap="4">
+    <Box.New borderWidth="2" borderColor="neutral-subtle" borderRadius="large" padding="3">
+      <VStack gap="space-4">
+        <HStack gap="space-16">
           <div className={styles.arsakPadding}>
             <Label size="small">{behandlingType.find(bt => bt.kode === behandling.type)?.navn ?? ''}</Label>
           </div>
@@ -97,8 +97,8 @@ export const BehandlingInformasjon = ({
         <div>
           <hr className={styles.line} />
         </div>
-        <VStack gap="1">
-          <HStack gap="1">
+        <VStack gap="space-4">
+          <HStack gap="space-4">
             <div className={styles.firstColumnWidth}>
               <BodyShort size="small">
                 <FormattedMessage id="BehandlingPickerItemContent.Behandlingstatus" />
@@ -110,8 +110,8 @@ export const BehandlingInformasjon = ({
               </BodyShort>
             </div>
           </HStack>
-          <VStack gap="4">
-            <HStack gap="1">
+          <VStack gap="space-16">
+            <HStack gap="space-4">
               <div className={styles.firstColumnWidth}>
                 <BodyShort size="small">
                   <FormattedMessage id="BehandlingPickerItemContent.Resultat" />
@@ -123,7 +123,7 @@ export const BehandlingInformasjon = ({
                 </BodyShort>
               </div>
             </HStack>
-            <HStack gap="1">
+            <HStack gap="space-4">
               <div className={styles.firstColumnWidth}>
                 <BodyShort size="small">
                   <FormattedMessage id="BehandlingPickerItemContent.Opprettet" />
@@ -136,7 +136,7 @@ export const BehandlingInformasjon = ({
               </div>
             </HStack>
           </VStack>
-          <HStack gap="1">
+          <HStack gap="space-4">
             <div className={styles.firstColumnWidth}>
               <BodyShort size="small">
                 <FormattedMessage id="BehandlingPickerItemContent.Avsluttet" />
@@ -162,6 +162,6 @@ export const BehandlingInformasjon = ({
           </HStack>
         </VStack>
       </VStack>
-    </Box>
+    </Box.New>
   );
 };

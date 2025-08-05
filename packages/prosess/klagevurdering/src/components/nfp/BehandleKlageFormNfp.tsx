@@ -112,8 +112,10 @@ export const BehandleKlageFormNfp = ({
       onSubmit={(values: KlageFormType) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="4">
-        <Heading size="small">{intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}</Heading>
+      <VStack gap="space-16">
+        <Heading size="small" level="2">
+          {intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}
+        </Heading>
         {!readOnlySubmitButton && (
           <AksjonspunktHelpTextHTML>
             {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktKode.BEHANDLE_KLAGE_NFP} />]}
@@ -131,7 +133,7 @@ export const BehandleKlageFormNfp = ({
         />
         <FritekstBrevTextField språkkode={behandling.språkkode} readOnly={isReadOnly} />
         <HStack justify="space-between">
-          <HStack gap="4">
+          <HStack gap="space-16">
             {formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
               <>
                 <Button variant="primary" type="button" size="small" onClick={() => åpneModal()} disabled={isReadOnly}>

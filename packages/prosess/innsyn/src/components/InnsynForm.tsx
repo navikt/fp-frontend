@@ -130,8 +130,8 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, alleDokumenter))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="2">
           <FormattedMessage id="InnsynForm.Innsynsbehandling" />
         </Heading>
         {isApOpen && (
@@ -169,7 +169,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
         {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
           innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
           <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
-            <VStack gap="4">
+            <VStack gap="space-16">
               <RhfRadioGroup
                 name="sattPaVent"
                 control={formMethods.control}

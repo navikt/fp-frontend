@@ -77,8 +77,8 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
         withoutBorder
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG]}
       >
-        <VStack gap="6">
-          <HStack gap="2" align="start">
+        <VStack gap="space-24">
+          <HStack gap="space-8" align="start">
             <RhfSelect
               name="rettighetstype"
               control={formMethods.control}

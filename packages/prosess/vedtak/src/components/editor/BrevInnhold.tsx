@@ -51,7 +51,7 @@ export const BrevInnhold = ({
         </div>
       </div>
       <footer>
-        <VStack gap="4">
+        <VStack gap="space-16">
           {visForhåndsvisValideringsFeil && (
             <Alert variant="error">
               <FormattedMessage id="BrevInnhold.InnholdMangler" />

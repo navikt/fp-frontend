@@ -28,7 +28,7 @@ const VurderPåNyttPunkter = ({
 }) => (
   <div className={styles.approvalItem}>
     {vurderPaNyttArsaker?.map(item => (
-      <HStack gap="2" key={item}>
+      <HStack gap="space-8" key={item}>
         <XMarkOctagonIcon className={styles.xmark} />
         <div>{vurderArsaker.find(arsak => item === arsak.kode)?.navn}</div>
       </HStack>
@@ -101,7 +101,7 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
                     ))}
                     <div className={styles.approvalItem}>
                       {aksjonspunkt.totrinnskontrollGodkjent ? (
-                        <HStack gap="2">
+                        <HStack gap="space-8">
                           <CheckmarkIcon
                             title={intl.formatMessage({ id: 'ToTrinnsForm.Godkjent' })}
                             className={styles.checkmarkIcon}

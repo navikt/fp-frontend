@@ -62,9 +62,9 @@ export const DekningradForm = ({
 
   if (!visEditeringsmodus) {
     return (
-      <VStack gap="2">
-        <HStack gap="2" align="center">
-          <Heading size="small">
+      <VStack gap="space-8">
+        <HStack gap="space-8" align="center">
+          <Heading size="small" level="3">
             <FormattedMessage id="DekningsgradForm.Dekningsgrad" />
           </Heading>
           {aksjonspunkt?.begrunnelse && (
@@ -73,7 +73,7 @@ export const DekningradForm = ({
             </BodyShort>
           )}
         </HStack>
-        <HStack gap="2">
+        <HStack gap="space-8">
           <FormattedMessage
             id="DekningsgradForm.DekningsgradForeldrepenger"
             values={{
@@ -91,14 +91,14 @@ export const DekningradForm = ({
           )}
         </HStack>
         {aksjonspunkt?.begrunnelse && (
-          <Box background="bg-subtle" padding="5" borderColor="border-default" borderRadius="medium">
-            <VStack gap="2">
+          <Box.New background="neutral-moderate" padding="5" borderRadius="medium">
+            <VStack gap="space-8">
               <Label size="small">
                 <FormattedMessage id="DekningsgradForm.BeskrivelseAvEndring" />
               </Label>
               <BodyShort size="small">{aksjonspunkt.begrunnelse}</BodyShort>
             </VStack>
-          </Box>
+          </Box.New>
         )}
       </VStack>
     );
@@ -116,15 +116,15 @@ export const DekningradForm = ({
       }
     >
       <div className={styles.header}>
-        <HStack gap="2" align="center">
+        <HStack gap="space-8" align="center">
           <PencilIcon aria-hidden height={24} width={24} />
-          <Heading size="small">
+          <Heading size="small" level="3">
             <FormattedMessage id="DekningsgradForm.EndreDekningsgrad" />
           </Heading>
         </HStack>
       </div>
-      <Box background="surface-neutral-subtle" padding="5">
-        <VStack gap="6">
+      <Box.New background="neutral-moderate" padding="5">
+        <VStack gap="space-24">
           <RhfRadioGroup
             name="dekningsgrad"
             control={formMethods.control}
@@ -186,7 +186,7 @@ export const DekningradForm = ({
             </Button>
           </div>
         </VStack>
-      </Box>
+      </Box.New>
     </RhfForm>
   );
 };

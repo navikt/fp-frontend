@@ -8,7 +8,7 @@ interface Props {
 
 export const BeskrivelseVisning = ({ beskrivelse }: Props) => {
   return (
-    <VStack gap="1">
+    <VStack gap="space-4">
       {beskrivelse.header && <BodyShort size="small">{beskrivelse.header}</BodyShort>}
       {beskrivelse.kommentarer.map(kommentar => (
         <BodyShort key={kommentar} size="small">

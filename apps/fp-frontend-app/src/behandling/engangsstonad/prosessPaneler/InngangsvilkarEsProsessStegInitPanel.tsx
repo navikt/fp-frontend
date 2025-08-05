@@ -14,7 +14,7 @@ interface Props {
 
 export const InngangsvilkarEsProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo }: Props) => (
   <InngangsvilkarDefaultInitWrapper faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo}>
-    <VStack gap="8">
+    <VStack gap="space-32">
       <FodselInngangsvilkarInitPanel />
       <AdopsjonInngangsvilkarInitPanel />
       <OmsorgInngangsvilkarInitPanel />

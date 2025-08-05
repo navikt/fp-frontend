@@ -21,9 +21,11 @@ export const ÅpenRevurderingModal = ({ harÅpenRevurdering }: { harÅpenRevurde
       aria-label={intl.formatMessage({ id: 'ÅpenRevurderingModal.ApenRevurderingHeader' })}
     >
       <Modal.Header closeButton={false}>
-        <HStack gap="4" align="center">
+        <HStack gap="space-16" align="center">
           <ExclamationmarkTriangleFillIcon width={35} height={35} color="var(--a-orange-600)" />
-          <Heading size="small">{intl.formatMessage({ id: 'ÅpenRevurderingModal.ApenRevurderingHeader' })}</Heading>
+          <Heading size="small" level="2">
+            {intl.formatMessage({ id: 'ÅpenRevurderingModal.ApenRevurderingHeader' })}
+          </Heading>
         </HStack>
       </Modal.Header>
       <Modal.Body>

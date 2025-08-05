@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { Heading, Theme } from '@navikt/ds-react';
+import { Heading } from '@navikt/ds-react';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -34,11 +34,9 @@ interface Props {
 
 export const OppgaveJournalføringIndex = (props: Props) => {
   return (
-    <Theme theme="light">
-      <RawIntlProvider value={intl}>
-        <JournalforingIndex {...props} />
-      </RawIntlProvider>
-    </Theme>
+    <RawIntlProvider value={intl}>
+      <JournalforingIndex {...props} />
+    </RawIntlProvider>
   );
 };
 

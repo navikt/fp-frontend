@@ -70,7 +70,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
           alleMerknaderFraBeslutter[AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]
         }
       >
-        <VStack gap="6">
+        <VStack gap="space-24">
           <TrueFalseInput
             name="harAleneomsorg"
             control={formMethods.control}

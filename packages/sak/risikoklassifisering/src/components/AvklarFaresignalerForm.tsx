@@ -60,7 +60,7 @@ export const AvklarFaresignalerForm = ({
       formMethods={formMethods}
       onSubmit={(values: Values) => submitCallback && submitCallback(transformValues(values))}
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <RhfTextarea
           name={begrunnelseFieldName}
           control={formMethods.control}

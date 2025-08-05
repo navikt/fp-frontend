@@ -98,12 +98,14 @@ export const ArbeidsforholdFieldArray = ({
         return (
           <React.Fragment key={field.id}>
             <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles.card}>
-              <ExpansionCard.Header>
+              <ExpansionCard.Header className={styles.cardHeader}>
                 <div className={styles.padding}>
-                  <HStack gap="14" align="center">
-                    <HStack gap="4" align="center">
+                  <HStack gap="space-56" align="center">
+                    <HStack gap="space-16" align="center">
                       <Buildings3Icon color="var(--a-blue-600)" className={styles.image} />
-                      <Heading size="small">{arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}</Heading>
+                      <Heading size="small" level="3">
+                        {arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}
+                      </Heading>
                       {arbeidsgiverOpplysning?.identifikator && (
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       )}
@@ -113,7 +115,7 @@ export const ArbeidsforholdFieldArray = ({
                         </BodyShort>
                       )}
                     </HStack>
-                    <HStack gap="4" align="center">
+                    <HStack gap="space-16" align="center">
                       <Tag size="small" variant="neutral-moderate">
                         <FormattedMessage
                           id="ArbeidsforholdFieldArray.Stillingsprosent"

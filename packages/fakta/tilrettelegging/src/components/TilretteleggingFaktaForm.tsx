@@ -141,7 +141,7 @@ export const TilretteleggingFaktaForm = ({
 
   return (
     <RhfForm formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
-      <VStack gap="8">
+      <VStack gap="space-32">
         {harÅpneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>
             {skalVurdereVelferdspermisjoner
@@ -154,7 +154,7 @@ export const TilretteleggingFaktaForm = ({
               : [<FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" key="svangerskapspengerAp" />]}
           </AksjonspunktHelpTextHTML>
         )}
-        <HStack gap="4" wrap>
+        <HStack gap="space-16" wrap>
           <RhfDatepicker
             name="termindato"
             control={formMethods.control}

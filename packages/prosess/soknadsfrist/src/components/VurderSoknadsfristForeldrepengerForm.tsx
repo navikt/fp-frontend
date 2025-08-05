@@ -80,8 +80,8 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
       onSubmit={(formValues: FormValues) => submitCallback(transformValues(formValues))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="6">
-        <Heading size="small">
+      <VStack gap="space-24">
+        <Heading size="small" level="2">
           <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Soknadsfrist" />
         </Heading>
         {harÅpneAksjonspunkter && (
@@ -96,7 +96,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
           </AksjonspunktHelpTextHTML>
         )}
         <HStack justify="space-between">
-          <Box className={styles.panel}>
+          <Box.New className={styles.panel}>
             <Label size="small">
               <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Vurder" />
             </Label>
@@ -111,7 +111,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
                 <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Punkt3" />
               </li>
             </ul>
-          </Box>
+          </Box.New>
           <div>
             <Detail>
               <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.SoknadMottatt" />
@@ -128,7 +128,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
           )}
         </HStack>
         <div className={styles.marginTop}>
-          <VStack gap="4">
+          <VStack gap="space-16">
             <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
             <RhfRadioGroup
               name="gyldigSenFremsetting"

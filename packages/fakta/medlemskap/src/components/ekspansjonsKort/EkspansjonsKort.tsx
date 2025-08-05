@@ -25,7 +25,7 @@ export const EkspansjonsKort = ({
   return (
     <ExpansionCard aria-label={tittel} size="small">
       <ExpansionCard.Header>
-        <HStack gap="4" wrap={false}>
+        <HStack gap="space-16" wrap={false}>
           {skalViseAvvik && (
             <div style={{ marginTop: 4 }}>
               <AvvikStatus harAvvik={relevanteAvvik.length > 0} />
@@ -38,12 +38,12 @@ export const EkspansjonsKort = ({
         </HStack>
       </ExpansionCard.Header>
       <ExpansionCard.Content>
-        <Box padding="4" background="surface-subtle" borderRadius="medium">
-          <VStack gap="4">
+        <Box.New padding="4" background="neutral-softA" borderRadius="medium">
+          <VStack gap="space-16">
             {skalViseAvvik && relevanteAvvik.map(a => <AvvikMerknad key={a} avvik={a} />)}
             {children}
           </VStack>
-        </Box>
+        </Box.New>
       </ExpansionCard.Content>
     </ExpansionCard>
   );

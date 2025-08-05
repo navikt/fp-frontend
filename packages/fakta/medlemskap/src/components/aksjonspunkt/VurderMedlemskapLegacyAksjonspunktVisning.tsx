@@ -21,7 +21,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
   const vurderingstyper = alleKodeverk['MedlemskapManuellVurderingType'];
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {skalViseDato && (
         <Label>
           <FormattedMessage id="MedlemskapLegacy.Vurderingsdato.Label" />
@@ -29,9 +29,9 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
         </Label>
       )}
 
-      <VStack gap="2">
+      <VStack gap="space-8">
         {medlemsperiode.erEosBorger !== undefined && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="MedlemskapLegacy.ErSokerEOS.Label" />
             </Label>
@@ -48,7 +48,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
         )}
 
         {medlemsperiode.oppholdsrettVurdering !== undefined && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="StatusForBorgerFaktaPanel.Oppholdsrett" />
               {': '}
@@ -63,7 +63,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
           </HStack>
         )}
         {medlemsperiode.lovligOppholdVurdering !== undefined && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="StatusForBorgerFaktaPanel.LovligOpphold" />
               {': '}
@@ -78,7 +78,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
           </HStack>
         )}
         {medlemsperiode.bosattVurdering !== undefined && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="MedlemskapLegacy.ErSokerBosattINorge.Label" />
             </Label>
@@ -93,7 +93,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
         )}
 
         {medlemsperiode.medlemskapManuellVurderingType && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="MedlemskapLegacy.MedlemskapManuell.Label" />
             </Label>
@@ -103,7 +103,7 @@ const MedlemskapPeriodeVisning = ({ medlemsperiode, alleKodeverk, skalViseDato }
           </HStack>
         )}
         {medlemsperiode.begrunnelse && (
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="MedlemskapLegacy.Begrunnelse.Label" />
             </Label>
@@ -119,9 +119,9 @@ export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehand
   const skalViseDato = legacyManuellBehandling.perioder.length !== 1;
 
   return (
-    <Box background="surface-subtle" borderWidth="2" borderRadius="large" borderColor="border-divider" padding="4">
-      <VStack gap="4">
-        <Heading size="small">
+    <Box.New background="neutral-soft" borderWidth="2" borderRadius="large" borderColor="neutral-subtle" padding="4">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="MedlemskapLegacy.TidligereVurdering" />
         </Heading>
         {legacyManuellBehandling.perioder.map((p, index) => (
@@ -136,6 +136,6 @@ export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehand
           </>
         ))}
       </VStack>
-    </Box>
+    </Box.New>
   );
 };

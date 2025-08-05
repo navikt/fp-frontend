@@ -240,7 +240,7 @@ export const UttakAktiviteterTabell = ({
                     </div>
                   </Table.DataCell>
                   <Table.DataCell>
-                    <HStack gap="2" align="center">
+                    <HStack gap="space-8" align="center">
                       <span className={styles.weekPosition}>
                         <RhfNumericField
                           name={`aktiviteter.${index}.weeks`}

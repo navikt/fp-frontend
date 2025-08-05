@@ -22,7 +22,7 @@ export const DokumentVisning = ({ dokument }: Props) => {
       dokumentId={dokument.dokumentId}
       dokumentTittel={tittel}
     >
-      <HStack gap="1" wrap={false}>
+      <HStack gap="space-4" wrap={false}>
         <FileIcon width="20" height="20" aria-label={intl.formatMessage({ id: 'DokumentVisning.FilIkon' })} />
         <BodyShort size="small">{tittel}</BodyShort>
       </HStack>

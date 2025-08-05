@@ -33,14 +33,14 @@ export const VedtakInnvilgetPanel = ({
       {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD &&
         beregningsresultat &&
         'antallBarn' in beregningsresultat && (
-          <HStack gap="2">
-            <VStack gap="1">
+          <HStack gap="space-8">
+            <VStack gap="space-4">
               <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
               <Label size="small">
                 {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
               </Label>
             </VStack>
-            <VStack gap="1">
+            <VStack gap="space-4">
               <Detail>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
               <Label size="small">{beregningsresultat.antallBarn}</Label>
             </VStack>

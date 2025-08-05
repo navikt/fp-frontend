@@ -135,8 +135,8 @@ export const OppholdForm = ({
           marginRight: '-8px',
         }}
       >
-        <VStack gap="10">
-          <HStack gap="4">
+        <VStack gap="space-40">
+          <HStack gap="space-16">
             <RhfDatepicker
               name={`${index}.fom`}
               control={formMethods.control}
@@ -185,7 +185,7 @@ export const OppholdForm = ({
             ]}
           />
           {!forVisning && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Button
                 size="small"
                 variant="primary"

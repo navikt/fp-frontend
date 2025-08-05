@@ -111,9 +111,11 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="4">
-        <VStack gap="1">
-          <Heading size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}</Heading>
+      <VStack gap="space-16">
+        <VStack gap="space-4">
+          <Heading size="small" level="2">
+            {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Soknadsfrist' })}
+          </Heading>
           <span className="typo-normal">
             <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1" />
             <span className={styles.days}>
@@ -129,8 +131,10 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
           </span>
         </VStack>
         <HStack justify="space-between">
-          <Box className={styles.panel}>
-            <Heading size="small">{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}</Heading>
+          <Box.New className={styles.panel}>
+            <Heading size="small" level="3">
+              {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}
+            </Heading>
             <ul className={styles.hyphen}>
               <li>
                 <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" />
@@ -142,20 +146,20 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
                 <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question3" />
               </li>
             </ul>
-          </Box>
-          <VStack gap="6">
-            <VStack gap="1">
+          </Box.New>
+          <VStack gap="space-24">
+            <VStack gap="space-4">
               <Detail>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
               <span className="typo-normal">{soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}</span>
             </VStack>
-            <VStack gap="1">
+            <VStack gap="space-4">
               <Detail>
                 {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
               </Detail>
               <span className="typo-normal">{soknad.begrunnelseForSenInnsending ?? '-'}</span>
             </VStack>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             {textCode && <Detail>{intl.formatMessage({ id: textCode })}</Detail>}
             <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
           </VStack>

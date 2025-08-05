@@ -37,7 +37,7 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
 
   if (barnErLike) {
     return (
-      <VStack gap="4">
+      <VStack gap="space-16">
         <ReadOnlyField
           label={<FormattedMessage id="Label.Fødselsdato" />}
           value={<DateLabel dateString={barn[0].fødselsdato} />}
@@ -56,7 +56,7 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
   return (
     <div>
       {barn.map(({ fødselsdato, dødsdato }, index) => (
-        <HStack key={fødselsdato + dødsdato} gap="6" wrap={false} className={styles.grid}>
+        <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles.grid}>
           <ReadOnlyField
             size="medium"
             label={<FormattedMessage id="Label.Barn" />}

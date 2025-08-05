@@ -14,7 +14,7 @@ export const EkspansjonsKort = ({ tittel, kilde, defaultOpen, children }: PropsW
   return (
     <ExpansionCard aria-label={tittel} size="small" defaultOpen={defaultOpen}>
       <ExpansionCard.Header>
-        <HStack gap="4" wrap={false}>
+        <HStack gap="space-16" wrap={false}>
           <div>
             <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
             {kilde !== null && <ExpansionCard.Description>{getLabelForFaktaKilde(kilde)}</ExpansionCard.Description>}
@@ -22,9 +22,9 @@ export const EkspansjonsKort = ({ tittel, kilde, defaultOpen, children }: PropsW
         </HStack>
       </ExpansionCard.Header>
       <ExpansionCard.Content>
-        <Box padding="4" background="surface-subtle" borderRadius="medium">
-          <VStack gap="4">{children}</VStack>
-        </Box>
+        <Box.New padding="4" background="neutral-soft" borderRadius="medium">
+          <VStack gap="space-16">{children}</VStack>
+        </Box.New>
       </ExpansionCard.Content>
     </ExpansionCard>
   );

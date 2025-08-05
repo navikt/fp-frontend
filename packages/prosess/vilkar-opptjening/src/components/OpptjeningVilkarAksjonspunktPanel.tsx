@@ -109,7 +109,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
             }
           />
         </Label>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <VilkarResultPicker
             readOnly={isReadOnly}
             customVilkarOppfyltText={

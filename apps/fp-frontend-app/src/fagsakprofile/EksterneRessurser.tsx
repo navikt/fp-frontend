@@ -15,12 +15,12 @@ export const EksterneRessurser = ({
   arbeidstakerHref: string | undefined;
 }) => {
   return (
-    <Box paddingInline="4" paddingBlock="2" background="bg-subtle" borderRadius="large">
+    <Box.New paddingInline="4" paddingBlock="2" background="neutral-moderate" borderRadius="large">
       <HStack justify="space-between" align="center" wrap={false}>
         <Detail weight="semibold">
           <FormattedMessage id="EksterneRessurser.Lenke" />
         </Detail>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <a href={getModiaUrl(fagsak.bruker.fødselsnummer)} target="_blank" rel="noreferrer">
             <Button as="span" size="xsmall" variant="primary-neutral">
               <FormattedMessage id="EksterneRessurser.Modia" />
@@ -51,6 +51,6 @@ export const EksterneRessurser = ({
           </a>
         </HStack>
       </HStack>
-    </Box>
+    </Box.New>
   );
 };

@@ -352,7 +352,7 @@ export const UttakPeriodeForm = ({
         oppdaterPeriode([transformValues(values, valgtPeriode, sorterteAktiviteter)])
       }
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <UttakPeriodeInfo
           valgtPeriode={valgtPeriode}
           alleKodeverk={alleKodeverk}
@@ -401,7 +401,7 @@ export const UttakPeriodeForm = ({
             />
             {erOppfylt !== undefined && (
               <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
-                <VStack gap="4">
+                <VStack gap="space-16">
                   <RhfSelect
                     name="periodeAarsak"
                     control={formMethods.control}
@@ -444,7 +444,7 @@ export const UttakPeriodeForm = ({
                 {warning}
               </Alert>
             )}
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
                 <FormattedMessage id="UttakActivity.Oppdater" />
               </Button>

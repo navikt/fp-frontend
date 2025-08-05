@@ -9,7 +9,7 @@ interface IconLabelProps {
 }
 
 export const IconLabel = ({ icon, formattedMessageId }: IconLabelProps) => (
-  <HStack gap="1">
+  <HStack gap="space-4">
     <div style={{ marginTop: 2 }}>{icon}</div>
     <BodyShort
       style={{

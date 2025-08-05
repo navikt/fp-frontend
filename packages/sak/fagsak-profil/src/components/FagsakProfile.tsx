@@ -44,10 +44,12 @@ export const FagsakProfile = ({
   const sorterteFagsakMarkeringer =
     fagsakMarkeringTekster?.toSorted((markering1, markering2) => markering1.localeCompare(markering2)) ?? [];
   return (
-    <VStack gap="4">
-      <HStack gap="4">
+    <VStack gap="space-16">
+      <HStack gap="space-16">
         {!isWrappedUnder && <SidePanelProfileKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />}
-        <Heading size="medium">{fagsakYtelseType.navn}</Heading>
+        <Heading size="medium" level="3">
+          {fagsakYtelseType.navn}
+        </Heading>
         {visSakDekningsgrad(fagsakYtelseType.kode, dekningsgrad) && (
           <Tooltip
             content={intl.formatMessage({ id: 'FagsakProfile.Dekningsgrad' }, { dekningsgrad })}
@@ -59,7 +61,7 @@ export const FagsakProfile = ({
       </HStack>
       <BodyShort size="small">{`${saksnummer} - ${fagsakStatus.navn}`}</BodyShort>
       {sorterteFagsakMarkeringer.length > 0 && (
-        <HStack gap="4">
+        <HStack gap="space-16">
           {sorterteFagsakMarkeringer.map(tekst => (
             <Tooltip
               key={tekst}

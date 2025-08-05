@@ -17,7 +17,7 @@ export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, rende
   return (
     <>
       <VisittkortSakIndex bruker={aktorInfo.person} />
-      <VStack gap="4" align="center" margin="5">
+      <VStack gap="space-16" align="center" margin="5">
         {aktorInfo.fagsaker.length ? (
           aktorInfo.fagsaker.map(fagsak => {
             const fagsakYtelseNavn = fagsakYtelseTyper.find(s => s.kode === fagsak.fagsakYtelseType)?.navn;
@@ -33,7 +33,7 @@ export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, rende
             );
           })
         ) : (
-          <Heading size="small">
+          <Heading size="small" level="2">
             <FormattedMessage id="AktoerGrid.IngenFagsaker" />
           </Heading>
         )}

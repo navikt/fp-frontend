@@ -17,7 +17,7 @@ export const Situasjon = ({ gjeldende: { barn, termin, utstedtdato, antallBarn }
   const barnErLike = erGjeldendeBarnLike(barn);
 
   return (
-    <HStack gap="4" aria-label={intl.formatMessage({ id: 'Situasjon.OpplysningerGjeldende' })}>
+    <HStack gap="space-16" aria-label={intl.formatMessage({ id: 'Situasjon.OpplysningerGjeldende' })}>
       {barnErLike && (
         <>
           <FaktaBox

@@ -88,7 +88,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
     >
       {sorterteNotater.length > 0 && (
         <div className={styles.thechats} ref={bottomEl}>
-          <VStack gap="2">
+          <VStack gap="space-8">
             {sorterteNotater.map((notat, index) => (
               <div key={notat.opprettetTidspunkt} className={index === 0 ? styles.marginTop : undefined}>
                 <Chat
@@ -120,7 +120,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
       {kanSaksbehandle && (
         <div className={styles.form}>
           <RhfForm formMethods={formMethods} onSubmit={lagre}>
-            <VStack gap="4">
+            <VStack gap="space-16">
               <RhfTextarea
                 name="beskrivelse"
                 control={formMethods.control}

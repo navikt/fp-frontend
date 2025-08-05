@@ -102,7 +102,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
             erLosTilgjengelig ? (
               <AvdelingslederIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} navAnsatt={navAnsatt} />
             ) : (
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="Los.IkkeTilgjengelig" />
               </Heading>
             )

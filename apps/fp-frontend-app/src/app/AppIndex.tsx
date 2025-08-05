@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 
+import { Theme } from '@navikt/ds-react';
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -22,8 +23,7 @@ import '../globalCss/global.module.css';
 
 import messages from '../../i18n/nb_NO.json';
 
-import '@navikt/ds-css';
-import '@navikt/ds-css/darkside';
+import '../globalCss/global.css';
 import '@navikt/ds-css-internal';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
@@ -41,7 +41,9 @@ export const AppIndexWrapper = () => {
     <RawIntlProvider value={intl}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
-        <AppIndex />
+        <Theme theme="light">
+          <AppIndex />
+        </Theme>
       </QueryClientProvider>
     </RawIntlProvider>
   );

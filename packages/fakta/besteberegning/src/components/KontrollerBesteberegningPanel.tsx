@@ -39,7 +39,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
   });
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
         <AksjonspunktHelpTextHTML>
           {[
@@ -55,7 +55,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
         onSubmit={values => submitCallback(transformValues(values))}
         setDataOnUnmount={setMellomlagretFormData}
       >
-        <VStack gap="4">
+        <VStack gap="space-16">
           <RhfCheckbox
             name="besteberegningErKorrektValg"
             control={formMethods.control}

@@ -13,18 +13,18 @@ export const InfoBox = ({
   Icon?: ComponentType<SVGProps<SVGSVGElement>>;
 }>) => {
   return (
-    <Box
-      background="surface-subtle"
+    <Box.New
+      background="neutral-soft"
       borderWidth="2"
       borderRadius="large"
-      borderColor="border-divider"
+      borderColor="neutral"
       paddingInline="4"
       paddingBlock={size === 'small' ? '2' : '4'}
     >
-      <HStack gap="2">
+      <HStack gap="space-8">
         {Icon && <Icon style={{ height: '25px', width: '25px' }} />}
         {children}
       </HStack>
-    </Box>
+    </Box.New>
   );
 };

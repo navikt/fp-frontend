@@ -29,7 +29,7 @@ export const FodselSammenligningPanel = ({
   const harDødtBarn = !!avklartBarn.find(barn => !!barn.dodsdato);
 
   return (
-    <HStack gap="10">
+    <HStack gap="space-40">
       <div>
         {behandlingsType !== BehandlingType.REVURDERING && (
           <FodselSammenligningOtherPanel soknad={soknad} termindato={termindato} />

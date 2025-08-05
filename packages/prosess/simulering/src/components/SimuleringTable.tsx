@@ -198,7 +198,9 @@ const tableTitle = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | null =>
   mottaker.mottakerType === MottakerType.ARBG || mottaker.mottakerType === MottakerType.ARBGP ? (
-    <Heading size="xsmall">{lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}</Heading>
+    <Heading size="xsmall" level="3">
+      {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
+    </Heading>
   ) : null;
 
 const getResultatRadene = (

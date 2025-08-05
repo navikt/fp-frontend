@@ -105,7 +105,7 @@ export const ArbeidsforholdPanel = ({
   };
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {visInfoAlert && (
         <AksjonspunktHelpTextHTML>
           {[<FormattedMessage id="TilretteleggingFaktaForm.UndersokNarmere" key="svangerskapspengerAp" />]}
@@ -117,7 +117,7 @@ export const ArbeidsforholdPanel = ({
         readOnly={readOnly}
         label={<FormattedMessage id="TilretteleggingForArbeidsgiverPanel.SkalHaSvpForArbeidsforhold" />}
       />
-      <VStack gap="8">
+      <VStack gap="space-32">
         <RhfDatepicker
           name={`arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingBehovFom`}
           control={control}
@@ -135,7 +135,7 @@ export const ArbeidsforholdPanel = ({
             oppdaterOverstyrtUtbetalingsgrad={oppdaterOverstyrtUtbetalingsgrad}
           />
         )}
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Perioder" />
           </Label>

@@ -27,7 +27,7 @@ export const MessagesModal = ({ showModal, closeEvent }: Props) => {
     >
       <Modal.Body>
         <HStack justify="space-between" align="center">
-          <HStack gap="2" align="center">
+          <HStack gap="space-8" align="center">
             <CheckmarkCircleFillIcon
               className={styles.image}
               title={intl.formatMessage({ id: 'MessagesModal.description' })}

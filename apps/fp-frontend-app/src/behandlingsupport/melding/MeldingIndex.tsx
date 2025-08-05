@@ -113,7 +113,7 @@ export const MeldingIndex = ({
         tekst={intl.formatMessage({ id: 'MeldingIndex.Meldinger' })}
         toggleVisUtvidetBehandlingDetaljerKnapp={toggleVisUtvidetBehandlingDetaljerKnapp}
       >
-        <VStack gap="4">
+        <VStack gap="space-16">
           {!kanSendeMelding && (
             <Alert variant="info">
               <FormattedMessage

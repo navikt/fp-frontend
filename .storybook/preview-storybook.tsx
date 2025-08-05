@@ -19,11 +19,10 @@ export const globalTypes = {
   theme: {
     name: 'Tema',
     description: 'Aksel tema',
-    defaultValue: 'none',
+    defaultValue: 'light',
     toolbar: {
       icon: 'circlehollow',
       items: [
-        { value: 'none', icon: 'close', title: 'Gammel' },
         { value: 'light', icon: 'circlehollow', title: 'Lys' },
         { value: 'dark', icon: 'circle', title: 'Mørk' },
       ],
