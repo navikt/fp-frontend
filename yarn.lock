@@ -2600,7 +2600,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    echarts: 5.6.0
+    echarts: 6.0.0
     eslint: 9.32.0
     react: 19.1.0
     react-hook-form: 7.61.1
@@ -8291,6 +8291,16 @@ __metadata:
     tslib: 2.3.0
     zrender: 5.6.1
   checksum: 4b545444155f9457daa89a4ea45f9e08177a9a59d9df7e5ea5206f66e290964fb0a1a273b0dfdeb24a4aa264f6afc925918aa2b76190917abf390bef092ba95c
+  languageName: node
+  linkType: hard
+
+"echarts@npm:6.0.0":
+  version: 6.0.0
+  resolution: "echarts@npm:6.0.0"
+  dependencies:
+    tslib: 2.3.0
+    zrender: 6.0.0
+  checksum: 43834984bcefb82f9683586e29a8948324995c5bae61727f94ab56b19c982da089830f9bf060a6f20408d10ffb790b4856113d12ecff6f992624dd11f8eafd36
   languageName: node
   linkType: hard
 
@@ -16176,5 +16186,14 @@ __metadata:
   dependencies:
     tslib: 2.3.0
   checksum: 01caeac2d30f0083009aafa531ccb7fe991b6ac0ddd8134dc7b0015f794ed7e3d4fbfe5d32f61cb591014245eca15aeebcfc962cdebfe3829598f0c94ba3dc29
+  languageName: node
+  linkType: hard
+
+"zrender@npm:6.0.0":
+  version: 6.0.0
+  resolution: "zrender@npm:6.0.0"
+  dependencies:
+    tslib: 2.3.0
+  checksum: 69a843ad690e90ca14c713c22b6608415b7dcb56c516ce9b74894bd35b18089aaa590f71dae583520bc65c818ec70c2f0a3e7cfb8a1918f93edee51a03988f83
   languageName: node
   linkType: hard
