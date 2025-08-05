@@ -61,7 +61,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     isSuccess: isSøkFagsakSuccess,
   } = useMutation({
     mutationFn: async (values: SøkFormValues) => {
-      const fagsakerResultat = await søkFagsakPost(values.searchString, values.skalReservere);
+      const fagsakerResultat = await søkFagsakPost(values.searchString.trim(), values.skalReservere);
       if (fagsakerResultat.length === 0) {
         return [];
       }

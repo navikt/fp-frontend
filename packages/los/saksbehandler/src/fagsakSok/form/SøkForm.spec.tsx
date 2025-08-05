@@ -45,6 +45,22 @@ describe('SøkForm', () => {
     });
   });
 
+  it('skal skrive inn gyldig fødselsnummer med space foran og bak og så kunne sende inn resultat', async () => {
+    const onSubmitMock = vi.fn();
+    render(<Søkeskjema onSubmit={onSubmitMock} />);
+
+    await userEvent.type(screen.getByRole('searchbox', { name: 'Søk' }), ' 07078518434 ');
+
+    await userEvent.click(screen.getByRole('button', { name: 'Søk' }));
+
+    await waitFor(() => expect(screen.queryByText('Ugyldig saksnummer eller fødselsnummer')).not.toBeInTheDocument());
+
+    expect(onSubmitMock).toHaveBeenNthCalledWith(1, {
+      searchString: ' 07078518434 ',
+      skalReservere: undefined,
+    });
+  });
+
   it('skal reservere behandling ved søk', async () => {
     const onSubmitMock = vi.fn();
     render(<Søkeskjema onSubmit={onSubmitMock} />);

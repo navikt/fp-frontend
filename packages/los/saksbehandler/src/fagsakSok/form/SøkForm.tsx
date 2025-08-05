@@ -36,7 +36,7 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
     name: 'searchString',
     control: formMethods.control,
     rules: {
-      validate: val => hasValidSaksnummerOrFodselsnummerFormat(val) || true,
+      validate: val => hasValidSaksnummerOrFodselsnummerFormat(val?.trim()) || true,
     },
   });
 
