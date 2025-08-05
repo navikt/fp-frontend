@@ -1,5 +1,5 @@
 .steg {
-  background-color: var(--a-white);
+  background-color: var(--ax-bg-default);
   border-top: 1px solid var(--ax-neutral-400);
   box-shadow: -4px 1px 6px 1px rgba(0, 0, 0, 0.23);
   position: relative;

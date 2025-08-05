@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { type ComponentProps, useMemo, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 
@@ -41,9 +41,7 @@ export const AppIndexWrapper = () => {
     <RawIntlProvider value={intl}>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools />
-        <Theme theme="light">
-          <AppIndex />
-        </Theme>
+        <AppIndex />
       </QueryClientProvider>
     </RawIntlProvider>
   );
@@ -58,6 +56,7 @@ export const AppIndexWrapper = () => {
 const AppIndex = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
+  const [theme, setTheme] = useState<ComponentProps<typeof Theme>['theme']>('light');
 
   const initFetchQuery = useQuery(initFetchOptions());
   const navAnsatt = initFetchQuery.data?.innloggetBruker;
@@ -85,23 +84,27 @@ const AppIndex = () => {
   const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
 
   return (
-    <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
-      <AppConfigResolver>
-        <>
-          <Dekorator
-            hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
-            queryStrings={queryStrings}
-            setSiteHeight={setSiteHeight}
-            crashMessage={crashMessage}
-          />
-          <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
-            {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
-          </ErrorBoundary>
-          {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-          {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-        </>
-      </AppConfigResolver>
-    </ErrorBoundary>
+    <Theme theme={theme}>
+      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
+        <AppConfigResolver>
+          <>
+            <Dekorator
+              hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
+              queryStrings={queryStrings}
+              setSiteHeight={setSiteHeight}
+              crashMessage={crashMessage}
+              theme={theme}
+              setTheme={setTheme}
+            />
+            <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
+              {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+            </ErrorBoundary>
+            {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+            {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+          </>
+        </AppConfigResolver>
+      </ErrorBoundary>
+    </Theme>
   );
 };
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useRef } from 'react';
+import React, { type ComponentProps, useEffect, useRef } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { ExternalLinkIcon, MenuGridIcon } from '@navikt/aksel-icons';
+import { ExternalLinkIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
 import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -25,6 +25,8 @@ interface Props {
   setSiteHeight: (height: number) => void;
   interneLenker: DekoratorLenke[];
   eksterneLenker: DekoratorLenke[];
+  theme: ComponentProps<typeof Theme>['theme'];
+  setTheme: (theme: ComponentProps<typeof Theme>['theme']) => void;
 }
 
 /**
@@ -44,6 +46,8 @@ export const DekoratorMedFeilviserSakIndex = ({
   setSiteHeight,
   interneLenker,
   eksterneLenker,
+  theme,
+  setTheme,
 }: Props) => {
   const fixedHeaderRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -67,7 +71,7 @@ export const DekoratorMedFeilviserSakIndex = ({
                 title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk' })}
               />
             </InternalHeader.Button>
-            <Theme theme="light">
+            <Theme theme={theme}>
               <Dropdown.Menu>
                 <Dropdown.Menu.GroupedList>
                   {interneLenker.length > 0 && (
@@ -96,6 +100,19 @@ export const DekoratorMedFeilviserSakIndex = ({
             </Theme>
           </Dropdown>
           <InternalHeader.User name={navAnsattNavn} />
+          <InternalHeader.Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+            {theme === 'dark' ? (
+              <SunIcon
+                style={{ fontSize: '1.5rem' }}
+                title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilLysTema' })}
+              />
+            ) : (
+              <MoonIcon
+                style={{ fontSize: '1.5rem' }}
+                title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilMorkTema' })}
+              />
+            )}
+          </InternalHeader.Button>
         </InternalHeader>
         <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
       </RawIntlProvider>
