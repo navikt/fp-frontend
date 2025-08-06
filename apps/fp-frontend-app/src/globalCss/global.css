@@ -1,4 +1,0 @@
-@layer dsComponentsLegacy, dsComponents;
-
-@import '@navikt/ds-css' layer(dsComponentsLegacy);
-@import '@navikt/ds-css/darkside' layer(dsComponents);
