@@ -1,0 +1,25 @@
+import{w as u,j as O,F as R,B as i}from"./iframe-rUdowgs-.js";import{X as V}from"./index.es-GATJa6fU.js";import{u as P}from"./useQuery-C1p9khC2.js";import{a as t,L as r,H as s,l as S}from"./fplosSaksbehandlerApi-CmHpqlwU.js";import{A as T}from"./andreKriterierType-Cg0VWsVP.js";import"./FlyttReservasjonModal-9yiYRMJe.js";import{g as _}from"./withIntl-DU4l9fHm.js";import{a as l}from"./alleKodeverkLos-DeeW-5p1.js";import{R as g}from"./ReservertOppgaveTabell-DOYg7PAF.js";import{m as A}from"./nb_NO-DUD8ZAg7.js";import"./Loader-DN9l1kEc.js";import"./index.es-Bk-da9xx.js";import"./Modal-D9cD-R9g.js";import"./index-C7-4nLYl.js";import"./composeEventHandlers-krbYd5LM.js";import"./ChevronDown-BOhz-Zxb.js";import"./Tag-DriZpGYG.js";import"./VStack-CLJMsM8A.js";import"./OppgaveLabels-BXIqhKQD.js";import"./Portal-Dli3OHeF.js";import"./useLosKodeverk-BiJVmCW7.js";import"./OppgaveHandlingerMenu-hQ36qLJN.js";import"./useMutation-CUzE8bYY.js";import"./OppgaveReservasjonForlengetModal-Da8ocfF8.js";import"./NotatModal-VMf7cZsm.js";import"./ChevronRight-D-GnPNxc.js";import"./PersonHeadset-BZzxkyI0.js";import"./Table-GgJF7uGJ.js";import"./ArrowsUpDown-CdzRmDAy.js";const{action:G}=__STORYBOOK_MODULE_ACTIONS__,c=_(A),e=[{id:2,reservasjonStatus:{erReservert:!0,reservertTilTidspunkt:"2019-01-01T00:54:25.455",flyttetReservasjon:{tidspunkt:"2019-02-02",uid:"23423",navn:"Espen Utvikler",begrunnelse:"Dette er en begrunnelse"}},saksnummer:"1234",personnummer:"233",navn:"Helge Utvikler",system:"SAK",behandlingstype:i.KLAGE,opprettetTidspunkt:"2019-01-01",behandlingsfrist:"2019-01-01",fagsakYtelseType:R.FORELDREPENGER,erTilSaksbehandling:!0,behandlingId:"2",andreKriterier:[]},{id:3,reservasjonStatus:{erReservert:!0,reservertTilTidspunkt:"2023-01-01T00:54:25.455"},saksnummer:"964545",personnummer:"233",navn:"Bjarne Bjærke",system:"SAK",behandlingstype:i.KLAGE,opprettetTidspunkt:"2023-01-01",behandlingsfrist:"2023-01-01",fagsakYtelseType:R.FORELDREPENGER,erTilSaksbehandling:!0,behandlingId:"2",andreKriterier:[]},{id:4,reservasjonStatus:{erReservert:!0,reservertTilTidspunkt:"2024-01-01T00:54:25.455"},saksnummer:"3454626",personnummer:"233",navn:"Borgil Bø",system:"SAK",behandlingstype:i.REVURDERING,opprettetTidspunkt:"2024-01-01",behandlingsfrist:"2024-01-01",fagsakYtelseType:R.FORELDREPENGER,erTilSaksbehandling:!0,behandlingId:"2",andreKriterier:[T.REVURDERING_INNTEKTSMELDING]}],ee={title:"behandlingskoer/ReservertOppgaveTabell",component:g,decorators:[c,u],args:{reserverOppgave:G("button-click"),brukernavn:"T232332"},render:p=>P(S()).data?O.jsx(g,{...p}):O.jsx(V,{})},a={parameters:{msw:{handlers:[t.get(r.KODEVERK_LOS,()=>s.json(l)),t.get(r.FORLENG_OPPGAVERESERVASJON,()=>new s(null,{status:200})),t.get(r.RESERVERTE_OPPGAVER,()=>s.json(e))]}}},o={parameters:{msw:{handlers:[t.get(r.KODEVERK_LOS,()=>s.json(l)),t.get(r.FORLENG_OPPGAVERESERVASJON,()=>new s(null,{status:200})),t.get(r.RESERVERTE_OPPGAVER,()=>s.json([]))]}}},n=(p,m)=>p.map(d=>({...d,id:d.id+m})),E={parameters:{msw:{handlers:[t.get(r.KODEVERK_LOS,()=>s.json(l)),t.get(r.FORLENG_OPPGAVERESERVASJON,()=>new s(null,{status:200})),t.get(r.RESERVERTE_OPPGAVER,()=>s.json([...e,...n(e,10),...n(e,20),...n(e,30),...n(e,40),...n(e,50),...n(e,60),...n(e,70)]))]}}};a.parameters={...a.parameters,docs:{...a.parameters?.docs,source:{originalSource:`{
+  parameters: {
+    msw: {
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)), http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, {
+        status: 200
+      })), http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json(RESERVERTE_OPPGAVER))]
+    }
+  }
+}`,...a.parameters?.docs?.source}}};o.parameters={...o.parameters,docs:{...o.parameters?.docs,source:{originalSource:`{
+  parameters: {
+    msw: {
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)), http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, {
+        status: 200
+      })), http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([]))]
+    }
+  }
+}`,...o.parameters?.docs?.source}}};E.parameters={...E.parameters,docs:{...E.parameters?.docs,source:{originalSource:`{
+  parameters: {
+    msw: {
+      handlers: [http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)), http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, {
+        status: 200
+      })), http.get(LosUrl.RESERVERTE_OPPGAVER, () => HttpResponse.json([...RESERVERTE_OPPGAVER, ...oppdatertId(RESERVERTE_OPPGAVER, 10), ...oppdatertId(RESERVERTE_OPPGAVER, 20), ...oppdatertId(RESERVERTE_OPPGAVER, 30), ...oppdatertId(RESERVERTE_OPPGAVER, 40), ...oppdatertId(RESERVERTE_OPPGAVER, 50), ...oppdatertId(RESERVERTE_OPPGAVER, 60), ...oppdatertId(RESERVERTE_OPPGAVER, 70)]))]
+    }
+  }
+}`,...E.parameters?.docs?.source}}};const te=["Default","TomOppgaveTabell","VisPagineringNårMerEnn15Oppgaver"];export{a as Default,o as TomOppgaveTabell,E as VisPagineringNårMerEnn15Oppgaver,te as __namedExportsOrder,ee as default};
