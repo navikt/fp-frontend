@@ -1,10 +1,10 @@
 .card {
-  background-color: var(--a-grayalpha-100);
-  border-collapse: var(--a-grayalpha-200);
+  background-color: var(--ax-neutral-200A);
+  border-collapse: var(--ax-neutral-300A);
   border-radius: 0;
 }
 .cardHeader {
-  background-color: var(--a-gray-200);
+  background-color: var(--ax-neutral-300);
 }
 
 .padding {

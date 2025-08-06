@@ -127,7 +127,7 @@ export const OppholdForm = ({
     <FormProvider {...formMethods}>
       <div
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--ax-bg-default)',
           padding: '24px',
           marginTop: '-8px',
           marginBottom: '-8px',

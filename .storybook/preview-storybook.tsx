@@ -5,7 +5,6 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { withThemeDecorator } from '@navikt/fp-storybook-utils';
 
 import 'dayjs/locale/nb.js';
-import '@navikt/ds-css';
 import '@navikt/ds-css/darkside';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';

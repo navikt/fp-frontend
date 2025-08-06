@@ -7,19 +7,19 @@
 }
 
 .hjelpetekstInnhold {
-  background-color: #d8f9ff;
-  border: 1px solid #66cbec;
+  background-color: var(--ax-bg-accent-moderate);
+  border: 1px solid var(--ax-bg-accent-strong);
 }
 
 .exclamationmarkIcon {
-  color: var(--a-orange-600);
+  color: var(--ax-warning-700);
   height: 30px;
   margin-top: 5px;
   width: 30px;
 }
 
 .checkmarkIcon {
-  color: var(--a-green-500);
+  color: var(--ax-success-600);
   height: 30px;
   margin-top: 5px;
   width: 30px;

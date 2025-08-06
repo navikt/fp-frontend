@@ -1,5 +1,5 @@
 .isSelected {
-  background-color: var(--a-gray-100);
+  background-color: var(--ax-neutral-200);
 }
 
 .addCircleIcon,
@@ -10,7 +10,7 @@
 }
 
 .grayBox {
-  background-color: var(--a-gray-100);
+  background-color: var(--ax-neutral-200);
   padding: 5px 15px 5px 15px;
 }
 
@@ -24,6 +24,6 @@
 }
 
 .removeImage {
-  color: var(--a-red-400);
+  color: var(--ax-danger-500);
   margin-top: 5px;
 }

@@ -13,7 +13,7 @@
 }
 
 .rightColumn {
-  background-color: var(--a-surface-subtle);
+  background-color: var(--ax-bg-neutral-soft);
   float: right;
   padding-left: 20px;
   padding-right: 20px;
@@ -42,7 +42,7 @@
 
 @media all and (min-width: 1350px) {
   .rightColumn {
-    border-left-color: var(--a-gray-300);
+    border-left-color: var(--ax-neutral-400);
     border-left-style: solid;
     border-left-width: 1px;
   }
@@ -50,7 +50,7 @@
 
 @media all and (max-width: 1350px) {
   .rightColumn {
-    border-top-color: var(--a-gray-300);
+    border-top-color: var(--ax-neutral-400);
     border-top-style: solid;
     border-top-width: 1px;
     margin-top: 40px;

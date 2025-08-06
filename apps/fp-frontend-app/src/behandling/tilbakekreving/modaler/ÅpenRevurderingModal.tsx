@@ -22,7 +22,7 @@ export const ÅpenRevurderingModal = ({ harÅpenRevurdering }: { harÅpenRevurde
     >
       <Modal.Header closeButton={false}>
         <HStack gap="space-16" align="center">
-          <ExclamationmarkTriangleFillIcon width={35} height={35} color="var(--a-orange-600)" />
+          <ExclamationmarkTriangleFillIcon width={35} height={35} color="var(--ax-warning-700)" />
           <Heading size="small" level="2">
             {intl.formatMessage({ id: 'ÅpenRevurderingModal.ApenRevurderingHeader' })}
           </Heading>

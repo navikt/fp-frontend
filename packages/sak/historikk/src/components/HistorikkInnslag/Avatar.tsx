@@ -24,7 +24,7 @@ export const Avatar = ({ aktørType }: Props) => {
       return (
         <PersonFillIcon
           fontSize={24}
-          color="var(--a-red-300)"
+          color="var(--ax-danger-400)"
           title={intl.formatMessage({ id: 'Historikkinnslag.Soker' })}
         />
       );

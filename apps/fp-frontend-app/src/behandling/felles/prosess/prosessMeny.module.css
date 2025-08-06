@@ -1,5 +1,5 @@
 .container {
-  border-bottom: 1px solid var(--a-gray-300);
+  border-bottom: 1px solid var(--ax-neutral-400);
 }
 
 .meny {
@@ -19,7 +19,7 @@
 .stepArrowContainer:after {
   border: solid transparent;
   border-color: rgba(255, 255, 255, 0);
-  border-bottom-color: #fff;
+  border-bottom-color: var(--ax-bg-default);
   border-width: 12px;
   bottom: 100%;
   content: ' ';
@@ -34,7 +34,7 @@
 .stepArrowContainer:before {
   border: solid transparent;
   border-color: rgba(0, 0, 0, 0);
-  border-bottom-color: var(--a-gray-300);
+  border-bottom-color: var(--ax-neutral-400);
   border-width: 13px;
   bottom: 100%;
   content: ' ';

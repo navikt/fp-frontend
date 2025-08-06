@@ -15,7 +15,7 @@ export const IngenRisikoPanel = () => (
         title={useIntl().formatMessage({ id: 'Risikopanel.Tittel' })}
         height={24}
         width={24}
-        color="var(--a-surface-success)"
+        color="var(--ax-bg-success-strong)"
       />
       <Label size="small">
         <FormattedMessage id="Risikopanel.Tittel.IngenFaresignaler" />

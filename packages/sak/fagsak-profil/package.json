@@ -19,12 +19,12 @@
     "storybook": "storybook dev --quiet -p 7018"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.25.1",
-    "@navikt/ds-css": "7.25.1",
-    "@navikt/ds-react": "7.25.1",
+    "@navikt/aksel-icons": "7.25.2",
+    "@navikt/ds-css": "7.25.2",
+    "@navikt/ds-react": "7.25.2",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-ui-komponenter": "5.0.0",
+    "@navikt/ft-ui-komponenter": "6.0.0",
     "@navikt/ft-utils": "3.7.0",
     "react": "19.1.0",
     "react-intl": "7.1.11"

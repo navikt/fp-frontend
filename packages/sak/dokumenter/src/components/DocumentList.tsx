@@ -32,7 +32,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
     return (
       <span className={styles.kommunikasjonsretning}>
         <ChevronRightCircleFillIcon
-          color="var(--a-purple-500)"
+          color="var(--ax-meta-purple-600)"
           width={25}
           height={25}
           title={intl.formatMessage({ id: 'DocumentList.Motta' })}
@@ -45,7 +45,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
     return (
       <span className={styles.kommunikasjonsretning}>
         <ChevronLeftCircleFillIcon
-          color="var(--a-purple-200)"
+          color="var(--ax-meta-purple-300)"
           width={25}
           height={25}
           title={intl.formatMessage({ id: 'DocumentList.Send' })}
@@ -57,7 +57,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
   return (
     <span className={styles.kommunikasjonsretning}>
       <NotePencilFillIcon
-        color="var(--a-gray-700)"
+        color="var(--ax-neutral-800)"
         width={25}
         height={25}
         title={intl.formatMessage({ id: 'DocumentList.Intern' })}

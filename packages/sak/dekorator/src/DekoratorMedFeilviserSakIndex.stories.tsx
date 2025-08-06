@@ -23,6 +23,8 @@ const meta = {
         tekst: 'Nav',
       },
     ],
+    theme: 'light',
+    setTheme: action('setTheme'),
   },
   render: storyArgs => {
     const [args, setArgs] = useState(storyArgs);

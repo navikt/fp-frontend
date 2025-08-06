@@ -3,15 +3,15 @@
 }
 
 .container {
-  background-color: var(--a-surface-subtle);
-  border-bottom-color: var(--a-gray-300);
+  background-color: var(--ax-bg-neutral-soft);
+  border-bottom-color: var(--ax-neutral-400);
   border-bottom-style: solid;
   border-bottom-width: 1px;
   padding: 16px;
 }
 
 .grayout {
-  color: var(--a-gray-500);
+  color: var(--ax-neutral-600);
   height: 24px;
   width: 24px;
 }

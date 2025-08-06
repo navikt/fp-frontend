@@ -1,10 +1,10 @@
 .panel {
-  background-color: var(--a-gray-100);
+  background-color: var(--ax-neutral-200);
   padding: 10px;
 }
 
 .panelOpen {
-  background-color: var(--a-gray-50);
+  background-color: var(--ax-neutral-100);
   margin-bottom: -16px;
   margin-left: -7px;
   margin-right: -7px;
@@ -13,8 +13,8 @@
 }
 
 .panelOpenAp {
-  background-color: var(--a-gray-50);
-  border-left: 4px solid var(--a-orange-400);
+  background-color: var(--ax-neutral-100);
+  border-left: 4px solid var(--ax-warning-500);
   margin-bottom: -16px;
   margin-left: -10px;
   margin-right: -7px;
@@ -23,7 +23,7 @@
 }
 
 .headerRow {
-  background-color: var(--a-gray-100);
+  background-color: var(--ax-neutral-200);
 }
 
 .row {
@@ -31,9 +31,9 @@
 }
 
 .isOpen {
-  background-color: var(--a-gray-50);
+  background-color: var(--ax-neutral-100);
 }
 
 .isApOpen {
-  border-left: 4px solid var(--a-orange-400);
+  border-left: 4px solid var(--ax-warning-500);
 }

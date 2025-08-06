@@ -1,5 +1,5 @@
 .helpTextImage {
-  color: var(--a-blue-500);
+  color: var(--ax-accent-600);
   cursor: pointer;
   height: 25px;
   margin-top: -3px;
@@ -25,7 +25,7 @@
 }
 
 .previewLink {
-  color: var(--a-blue-500);
+  color: var(--ax-accent-600);
   font-weight: bold;
 }
 

@@ -33,7 +33,7 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
   const intl = useIntl();
 
   return (
-    <Table.Row shadeOnHover={false} style={{ backgroundColor: error && !isOpen ? 'var(--a-red-50)' : 'none' }}>
+    <Table.Row shadeOnHover={false} style={{ backgroundColor: error && !isOpen ? 'var(--ax-danger-100)' : 'none' }}>
       <Table.DataCell valign="top">
         <Button
           type="button"

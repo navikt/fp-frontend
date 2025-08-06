@@ -27,7 +27,7 @@ const meta = {
 
     return (
       <VStack gap="space-20">
-        <div style={{ color: 'red' }}>Gyldig fødselsnummer for testing: 07078518434</div>
+        <div style={{ color: 'var(--ax-bg-danger-soft)' }}>Gyldig fødselsnummer for testing: 07078518434</div>
         <UtbetalingsdataIs15Index {...args} søkInfotrygdVedtak={søkInfotrygdVedtak} />
       </VStack>
     );

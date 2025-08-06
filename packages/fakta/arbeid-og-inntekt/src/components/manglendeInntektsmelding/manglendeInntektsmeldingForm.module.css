@@ -7,12 +7,12 @@
 }
 
 .hjelpetekstInnhold {
-  background-color: #d8f9ff;
-  border: 1px solid #66cbec;
+  background-color: var(--ax-bg-accent-moderate);
+  border: 1px solid var(--ax-bg-accent-strong);
 }
 
 .svg {
-  color: var(--a-blue-400);
+  color: var(--ax-accent-500);
   height: 25px;
   margin-top: -5px;
   width: 25px;

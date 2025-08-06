@@ -1,18 +1,18 @@
 .removeIcon {
-  color: var(--a-red-400);
+  color: var(--ax-danger-500);
   cursor: pointer;
   height: 25px;
   width: 25px;
 }
 .calendarIcon {
-  color: var(--a-blue-600);
+  color: var(--ax-accent-700);
   cursor: pointer;
   height: 25px;
   width: 25px;
 }
 
 .flyttIcon {
-  color: var(--a-blue-600);
+  color: var(--ax-accent-700);
   cursor: pointer;
   height: 25px;
   width: 25px;

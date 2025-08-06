@@ -1,5 +1,5 @@
 .grayout {
-  color: var(--a-gray-500);
+  color: var(--ax-neutral-600);
 }
 
 .headerPadding {
@@ -7,7 +7,7 @@
 }
 
 .tabell {
-  border-bottom-color: var(--a-gray-300);
+  border-bottom-color: var(--ax-neutral-400);
   border-bottom-style: solid;
   border-bottom-width: 1px;
   padding-bottom: 50px;

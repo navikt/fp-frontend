@@ -3,11 +3,11 @@
 }
 
 .simuleringTable .rodTekst {
-  color: var(--a-nav-red);
+  color: var(--ax-text-logo);
 }
 
 .simuleringTable .lastColumn {
-  border-left: dashed 1px var(--a-gray-200);
+  border-left: dashed 1px var(--ax-neutral-300);
 }
 
 .simuleringTable tr td:first-child {
@@ -15,7 +15,7 @@
 }
 
 .simuleringTable thead td .nextPeriod {
-  border-left: dashed 1px var(--a-gray-200);
+  border-left: dashed 1px var(--ax-neutral-300);
   margin-right: -20px;
   padding: 8px;
 }

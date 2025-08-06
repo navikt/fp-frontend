@@ -1,9 +1,9 @@
 .isUnderBehandling {
-  background-color: var(--a-orange-100);
+  background-color: var(--ax-warning-200);
 }
 
 .image {
-  color: var(--a-blue-600);
+  color: var(--ax-accent-700);
   height: 30px;
   margin-bottom: -10px;
   margin-top: -10px;
