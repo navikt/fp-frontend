@@ -17,7 +17,7 @@
     "@navikt/ds-react": "7.25.2",
     "@navikt/fp-konstanter": "workspace:^",
     "@navikt/fp-utils": "workspace:^",
-    "react": "19.1.0"
+    "react": "19.1.1"
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
