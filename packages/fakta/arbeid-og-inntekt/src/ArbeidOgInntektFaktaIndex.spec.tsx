@@ -569,7 +569,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await userEvent.click(screen.getAllByText('Vis mindre')[0]);
 
-    expect(await screen.getAllByText('Vis mer')).toHaveLength(2);
+    expect(await screen.findAllByText('Vis mer')).toHaveLength(2);
   });
 
   it('skal ha aksjonspunkt og vise flere arbeidsforhold i tabell', async () => {
