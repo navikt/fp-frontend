@@ -18,3 +18,4 @@ export {
   validateMinAntallBarn,
   validateMaxAntallBarn,
 } from './src/fødselOgTerminValidator';
+export { finnDager, finnUker } from './src/virkedagerUtil';

@@ -41,6 +41,7 @@
   "UttakTimeLineData.PeriodeData.Detaljer": "Detaljer for valgt periode",
   "UttakTimeLineData.PeriodeData.DelOppPerioden": "Del opp perioden",
   "TimeLineInfo.Aktivitet": "Aktivitet",
+  "TimeLineInfo.KontoReduksjonerEøs": "Redusert med {dager} pga. annen forelders uttak i EØS",
   "TimeLineInfo.Disponibelt": "Disponibelt",
   "TimeLineInfo.Stonadinfo.DisponibleStonadsdager": "Disponible stønadsdager (u/d)",
   "TimeLineInfo.Stonadinfo.Total": "Sum permisjon: <b>{uker} </b> uker {dager, select, 0 {} other {og <b>{dager}</b> dager}}",
@@ -78,6 +79,7 @@
   "UttakTidslinje.Stonadskonto": "Stønadskonto: {periodeType}",
   "UttakTidslinje.Periode": "Periode: {periodeString}",
   "UttakTidslinje.Dager": "Dager: {dager}",
+  "UttakTidslinje.Trekkdager": "Trekkdager: {trekkdager}",
   "UttakActivity.Vurdering": "Vurdering: ",
   "UttakActivity.Oppfylt": "Oppfylt",
   "UttakActivity.IkkeOppfylt": "Ikke oppfylt",
@@ -237,5 +239,10 @@
   "UttakPanel.InvalidTrekkDagerFlerbarnsdager": "Antall dager med flerbarnsdager kan ikke være høyere enn {maxDays}",
   "UttakPanel.InvalidStonadskonto": "Stønadskonto {konto} er ikke tilgjengelig",
   "UttakActivity.MerEn100Prosent": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.",
-  "UttakActivity.MerEn100ProsentOgOgyldigUtsettlse": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%. Søker har ikke 100% stilling, vurder om perioden kan utsettes."
+  "UttakActivity.MerEn100ProsentOgOgyldigUtsettlse": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%. Søker har ikke 100% stilling, vurder om perioden kan utsettes.",
+
+  "UttakPeriodeInfoEØS.Uttak": "Uttak",
+  "UttakPeriodeInfoEØS.UttakBeskrivelse": "<b>Uttak</b>: Periode hvor annen forelder har uttak av foreldrepenger i et EØS-land.",
+  "UttakPeriodeInfoEØS.Trekkdager": "Trekkdager:  {trekkdager}",
+  "UttakPeriodeInfoEØS.RegistrertAvSaksbehandler": "Registrert i Fakta om uttak (EØS)"
 }
