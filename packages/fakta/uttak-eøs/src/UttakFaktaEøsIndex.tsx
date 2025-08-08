@@ -11,7 +11,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  annenForelderUttakEøs?: AnnenforelderUttakEøsPeriode[];
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
   kanOverstyre: boolean;
   submittable: boolean;
 }

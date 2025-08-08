@@ -57,20 +57,33 @@ export const ÅpentAksjonspunktMedPerioder: Story = {
   },
 };
 
-export const ÅpentAksjonspunktUtenPerioder: Story = {
+export const AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg: Story = {
   args: {
-    annenForelderUttakEøs: undefined,
+    annenForelderUttakEøs: [],
   },
 };
 
-export const OverstyringOpprettetAksjonspunkt: Story = {
+export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
+  args: {
+    aksjonspunkterForPanel: [
+      {
+        begrunnelse: 'Dette er en begrunnelse',
+        status: AksjonspunktStatus.UTFORT,
+        definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+      } as Aksjonspunkt,
+    ],
+    annenForelderUttakEøs: [],
+  },
+};
+
+export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSomKanLøsesEllerEndres: Story = {
   args: {
     kanOverstyre: true,
     aksjonspunkterForPanel: [
       {
         begrunnelse: null,
-        status: AksjonspunktStatus.OPPRETTET,
-        definisjon: AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS,
+        status: AksjonspunktStatus.UTFORT,
+        definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       } as Aksjonspunkt,
     ],
     annenForelderUttakEøs: [
@@ -84,7 +97,7 @@ export const OverstyringOpprettetAksjonspunkt: Story = {
   },
 };
 
-export const OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør: Story = {
+export const OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRegistrertePerioder: Story = {
   args: {
     kanOverstyre: true,
     aksjonspunkterForPanel: [],
@@ -96,5 +109,13 @@ export const OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør: Story = 
         trekkdager: 10,
       },
     ],
+  },
+};
+
+export const OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedIngenPerioder: Story = {
+  args: {
+    kanOverstyre: true,
+    aksjonspunkterForPanel: [],
+    annenForelderUttakEøs: [],
   },
 };

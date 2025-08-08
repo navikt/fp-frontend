@@ -35,36 +35,34 @@ export const UttakEøsFaktaTable = ({
 }: Props) => {
   return (
     <>
-      <VStack gap="6">
-        <Table>
-          <Table.Header>
-            <Table.Row className={styles.headerRow}>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="UttakEøsFaktaTable.Periode" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col">
-                <FormattedMessage id="UttakEøsFaktaTable.Kontotype" />
-              </Table.HeaderCell>
-              <Table.HeaderCell scope="col" align="center">
-                <FormattedMessage id="UttakEøsFaktaTable.Trekkdager" />
-              </Table.HeaderCell>
-              <Table.HeaderCell />
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>
-            {annenForelderUttakEøsPerioder.map(annenForelderUttakEøsPeriode => {
-              return (
-                <Rad
-                  key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
-                  annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
-                  setPerioder={setPerioder}
-                  isReadOnly={isReadOnly}
-                />
-              );
-            })}
-          </Table.Body>
-        </Table>
-      </VStack>
+      <Table>
+        <Table.Header>
+          <Table.Row className={styles.headerRow}>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="UttakEøsFaktaTable.Periode" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col">
+              <FormattedMessage id="UttakEøsFaktaTable.Kontotype" />
+            </Table.HeaderCell>
+            <Table.HeaderCell scope="col" align="center">
+              <FormattedMessage id="UttakEøsFaktaTable.Trekkdager" />
+            </Table.HeaderCell>
+            <Table.HeaderCell />
+          </Table.Row>
+        </Table.Header>
+        <Table.Body>
+          {annenForelderUttakEøsPerioder.map(annenForelderUttakEøsPeriode => {
+            return (
+              <Rad
+                key={annenForelderUttakEøsPeriode.fom + annenForelderUttakEøsPeriode.tom}
+                annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
+                setPerioder={setPerioder}
+                isReadOnly={isReadOnly}
+              />
+            );
+          })}
+        </Table.Body>
+      </Table>
       {erRedigerbart && (
         <>
           {visLeggTilPeriodeForm && (

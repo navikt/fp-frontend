@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-kompon
 import dayjs from 'dayjs';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, isAksjonspunktOpen } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -17,7 +17,7 @@ import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/
 import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
 interface Props {
-  annenForelderUttakEøs?: AnnenforelderUttakEøsPeriode[];
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
   submittable: boolean;
   kanOverstyre: boolean;
 }
@@ -25,21 +25,24 @@ interface Props {
 export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOverstyre }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, isReadOnly, submitCallback } = usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
-  const harApneAksjonspunkter = aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status));
+  const { aksjonspunkterForPanel, harÅpneAksjonspunkter, isReadOnly, submitCallback } =
+    usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
   annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
-    visTabell: boolean; // Ikke en del av form. Bedre måte å gjøre dette på?
+    harPeriodeIEøs: boolean | undefined;
     annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
     begrunnelse: string | undefined;
   }>();
 
   const [perioder, setPerioder] = useState<AnnenforelderUttakEøsPeriode[]>(
-    mellomlagretFormData?.annenForelderUttakEøsPerioder ?? annenForelderUttakEøs ?? [],
+    mellomlagretFormData?.annenForelderUttakEøsPerioder ?? annenForelderUttakEøs,
   );
   const [erOverstyrt, setErOverstyrt] = useState(false);
-  const [visTabell, setVisTabell] = useState(mellomlagretFormData?.visTabell ?? perioder.length > 0);
+  const [harPeriodeIEøs, setHarPeriodeIEøs] = useState(
+    mellomlagretFormData?.harPeriodeIEøs ??
+      (harÅpneAksjonspunkter && perioder.length === 0 ? undefined : perioder.length > 0),
+  );
   const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);
   const [feilmelding, setFeilmelding] = useState<string | undefined>();
 
@@ -56,7 +59,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
   const bekreft = (begrunnelse: string) => {
-    if (visTabell && perioder.length === 0) {
+    if (harPeriodeIEøs && perioder.length === 0) {
       setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaForm.FeilmeldingIngenPerioder' }));
       return;
     } else {
@@ -66,12 +69,12 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
     return submitCallback({
       kode: erOverstyrt ? AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       begrunnelse,
-      perioder: visTabell ? perioder : [],
+      perioder: harPeriodeIEøs ? perioder : [],
     });
   };
 
   useEffect(() => {
-    if (!visTabell) {
+    if (!harPeriodeIEøs) {
       setFeilmelding(undefined);
       return;
     }
@@ -83,16 +86,16 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
     } else {
       setFeilmelding(undefined);
     }
-  }, [perioder, visTabell]);
+  }, [perioder, harPeriodeIEøs]);
 
   const begrunnelse = formMethods.watch('begrunnelse');
   useEffect(() => {
     setMellomlagretFormData({
-      visTabell: visTabell,
+      harPeriodeIEøs: harPeriodeIEøs,
       annenForelderUttakEøsPerioder: perioder,
       begrunnelse: begrunnelse,
     });
-  }, [visTabell, perioder, begrunnelse]);
+  }, [harPeriodeIEøs, perioder, begrunnelse]);
 
   return (
     <VStack gap="8">
@@ -104,7 +107,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
           <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
         )}
       </HStack>
-      {harApneAksjonspunkter && (
+      {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="UttakEøsFaktaForm.Aksjonspunkt" />
         </AksjonspunktHelpTextHTML>
@@ -117,8 +120,8 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
       <VStack gap="10">
         <RadioGroup
           legend={<FormattedMessage id="UttakEøsFaktaForm.harPeriodeIEøs" />}
-          onChange={setVisTabell}
-          defaultValue={mellomlagretFormData?.visTabell ?? visTabell}
+          onChange={setHarPeriodeIEøs}
+          defaultValue={harPeriodeIEøs}
           readOnly={!erRedigerbart}
           size="small"
         >
@@ -131,7 +134,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
             </Radio>
           </HStack>
         </RadioGroup>
-        {visTabell && (
+        {harPeriodeIEøs && (
           <UttakEøsFaktaTable
             annenForelderUttakEøsPerioder={perioder}
             setPerioder={setPerioder}
@@ -151,7 +154,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
             />
             {erRedigerbart && (
               <FaktaSubmitButton
-                isSubmittable={submittable && !feilmelding}
+                isSubmittable={submittable && !feilmelding && harPeriodeIEøs !== undefined}
                 isReadOnly={isReadOnly}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}
