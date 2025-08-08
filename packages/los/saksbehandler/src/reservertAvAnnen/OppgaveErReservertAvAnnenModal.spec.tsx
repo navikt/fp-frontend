@@ -2,7 +2,7 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-los-felles';
 
 import * as stories from './OppgaveErReservertAvAnnenModal.stories';
@@ -31,6 +31,7 @@ const oppgaveForResevertAvAnnenModal = {
   erTilSaksbehandling: true,
   behandlingId: '1',
   andreKriterier: [],
+  oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
 } satisfies Oppgave;
 
 describe('OppgaveErReservertAvAnnenModal', () => {
