@@ -4,7 +4,13 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-kodeverk';
+import {
+  AndreKriterierType,
+  BehandlingType,
+  FagsakYtelseType,
+  KøSortering,
+  OppgaveBehandlingStatus,
+} from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -58,6 +64,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '12',
     andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
+    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
   },
   {
     id: 4,
@@ -75,6 +82,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '12',
     andreKriterier: [],
+    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
   },
   {
     id: 3,
@@ -92,6 +100,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '34',
     andreKriterier: [],
+    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
   },
 ] satisfies Oppgave[];
 
@@ -119,6 +128,7 @@ const RESERVERTE_OPPGAVER = [
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
+    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
   },
 ] satisfies Oppgave[];
 
@@ -188,7 +198,7 @@ const NYE_OG_FERDIGSTILTE_OPPGAVER = [
     antallFerdigstilte: 2,
     dato: dayjs().subtract(5, 'd').format(ISO_DATE_FORMAT),
   },
-] satisfies NyeOgFerdigstilteOppgaver[];
+] as NyeOgFerdigstilteOppgaver[];
 
 const BEHANDLEDE_OPPGAVER = [
   {
@@ -196,12 +206,20 @@ const BEHANDLEDE_OPPGAVER = [
     personnummer: '343453534',
     navn: 'Gaute Johansen',
     saksnummer: '54343',
+    reservasjonStatus: {
+      erReservert: false,
+    },
+    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
   } as Oppgave,
   {
     id: 2,
     personnummer: '334342323',
     navn: 'Olga Mortensen',
     saksnummer: '13232',
+    reservasjonStatus: {
+      erReservert: false,
+    },
+    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
   } as Oppgave,
 ];
 

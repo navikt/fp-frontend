@@ -255,4 +255,31 @@ export const alleKodeverkLos: AlleKodeverkLos = {
       feltkategori: 'TILBAKEKREVING',
     },
   ],
+  OppgaveBehandlingStatus: [
+    {
+      kode: 'PÅ_VENT',
+      kodeverk: 'OPPGAVE_BEHANDLING_STATUS',
+      navn: 'På vent',
+    },
+    {
+      kode: 'FERDIG',
+      kodeverk: 'OPPGAVE_BEHANDLING_STATUS',
+      navn: 'Ferdig',
+    },
+    {
+      kode: 'TIL_BESLUTTER',
+      kodeverk: 'OPPGAVE_BEHANDLING_STATUS',
+      navn: 'Til beslutter',
+    },
+    {
+      kode: 'RETURNERT_FRA_BESLUTTER',
+      kodeverk: 'OPPGAVE_BEHANDLING_STATUS',
+      navn: 'Returnert fra beslutter',
+    },
+    {
+      kode: 'UNDER_ARBEID',
+      kodeverk: 'OPPGAVE_BEHANDLING_STATUS',
+      navn: 'Under arbeid',
+    },
+  ],
 };
