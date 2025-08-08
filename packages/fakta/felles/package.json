@@ -17,23 +17,23 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.25.2",
+    "@navikt/ds-react": "7.26.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-form-hooks": "9.0.0",
-    "@navikt/ft-form-validators": "4.1.0",
-    "@navikt/ft-plattform-komponenter": "10.0.0",
-    "@navikt/ft-ui-komponenter": "6.0.0",
-    "@navikt/ft-utils": "3.7.0",
+    "@navikt/ft-form-hooks": "9.0.1",
+    "@navikt/ft-form-validators": "4.1.1",
+    "@navikt/ft-plattform-komponenter": "10.0.1",
+    "@navikt/ft-ui-komponenter": "6.0.1",
+    "@navikt/ft-utils": "3.7.1",
     "classnames": "2.5.1",
     "lodash": "^4.17.21",
-    "react": "19.1.0",
-    "react-hook-form": "7.61.1",
+    "react": "19.1.1",
+    "react-hook-form": "7.62.0",
     "react-intl": "7.1.11"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.25.2",
+    "@navikt/ds-css": "7.26.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
@@ -41,8 +41,8 @@
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.0",
     "eslint": "9.32.0",
-    "stylelint": "16.22.0",
-    "typescript": "5.8.3",
+    "stylelint": "16.23.1",
+    "typescript": "5.9.2",
     "vitest": "3.2.4"
   }
 }

@@ -74,6 +74,7 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
         },
         legend: {
           data: [paVentTekst, ikkePaVentTekst],
+          top: 'top',
         },
         grid: {
           left: '3%',
