@@ -8,22 +8,26 @@ import * as stories from './UttakFaktaEøsIndex.stories';
 
 const {
   ÅpentAksjonspunktMedPerioder,
-  ÅpentAksjonspunktUtenPerioder,
-  OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør,
+  AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg,
+  OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRegistrertePerioder,
+  OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSomKanLøsesEllerEndres,
 } = composeStories(stories);
 
 describe('UttakFaktaEøsIndex', () => {
-  it('skal få aksjonspunkt uten eksisterende perioder og kan bekrefte AP uten å legge til noen peridoer', async () => {
+  it('skal få aksjonspunkt uten eksisterende perioder og kan bekrefte AP uten å legge til noen perioder', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<ÅpentAksjonspunktUtenPerioder submitCallback={lagre} />);
+    const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
 
     expect(screen.queryByText('Periode')).not.toBeInTheDocument();
 
     expect(screen.getByText('Har annen forelder uttak i EØS?')).toBeInTheDocument();
-    expect(screen.getByLabelText('Nei')).toHaveProperty('checked', true);
+    expect(screen.getByLabelText('Ja')).not.toBeChecked();
+    expect(screen.getByLabelText('Nei')).not.toBeChecked();
+    expect(screen.queryByText('Periode')).not.toBeInTheDocument();
 
+    await screen.getByLabelText('Nei').click();
     expect(screen.queryByText('Periode')).not.toBeInTheDocument();
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
@@ -36,20 +40,18 @@ describe('UttakFaktaEøsIndex', () => {
     });
   });
 
-  it('skal få aksjonspunkt uten eksisterende perioder og kan bekrefte AP uten å legge til peridoer', async () => {
+  it('aksjonspunkt skal initielt ikke ha perioder registrert og saksbehandler kan bekrefte AP uten å legge til noen perioder', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<ÅpentAksjonspunktUtenPerioder submitCallback={lagre} />);
+    const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
 
     expect(screen.queryByText('Periode')).not.toBeInTheDocument();
 
     expect(screen.getByText('Har annen forelder uttak i EØS?')).toBeInTheDocument();
-    const JaKnapp = screen.getByLabelText('Ja');
-    JaKnapp.click();
-    expect(JaKnapp).toHaveProperty('checked', true);
+    await screen.getByLabelText('Ja').click();
 
-    expect(screen.queryByText('Periode')).toBeInTheDocument();
+    expect(screen.getByText('Periode')).toBeInTheDocument();
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Legg til periode'));
@@ -57,7 +59,6 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
 
-    console.log(screen.getAllByRole('textbox'));
     await userEvent.type(screen.getAllByRole('textbox')[2], '8');
     await userEvent.type(screen.getAllByRole('textbox')[3], '0');
     await userEvent.click(screen.getByText('Legg til'));
@@ -86,10 +87,8 @@ describe('UttakFaktaEøsIndex', () => {
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
 
     expect(screen.getByText('Har annen forelder uttak i EØS?')).toBeInTheDocument();
-    const JaKnapp = screen.getByLabelText('Ja');
-    expect(JaKnapp).toHaveProperty('checked', true);
-
-    expect(screen.queryByText('Periode')).toBeInTheDocument();
+    expect(screen.getByLabelText('Ja')).toHaveProperty('checked', true);
+    expect(screen.getByText('Periode')).toBeInTheDocument();
 
     await userEvent.click(screen.getAllByTitle('Vis mer')[0]);
     await userEvent.click(screen.getByText('Slett periode'));
@@ -121,7 +120,7 @@ describe('UttakFaktaEøsIndex', () => {
 
   it('skal få feilmelding hvis en legger til overlappende perioder, rydder opp i overlapper og sender inn', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<ÅpentAksjonspunktUtenPerioder submitCallback={lagre} />);
+    const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
 
@@ -132,7 +131,7 @@ describe('UttakFaktaEøsIndex', () => {
     JaKnapp.click();
     expect(JaKnapp).toHaveProperty('checked', true);
 
-    expect(screen.queryByText('Periode')).toBeInTheDocument();
+    expect(screen.getByText('Periode')).toBeInTheDocument();
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Legg til periode'));
@@ -193,10 +192,12 @@ describe('UttakFaktaEøsIndex', () => {
 
   it('skal kunne overstyre og vil da sende inn med annen aksjonspunktkode enn ordinært aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<OverstyringSkalVæreMuligHvisDetForeliggerPerioderFraFør submitCallback={lagre} />);
+    const utils = render(
+      <OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRegistrertePerioder submitCallback={lagre} />,
+    );
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-    expect(screen.queryByTitle('Overstyr')).toBeInTheDocument();
+    expect(screen.getByText('Overstyr')).toBeInTheDocument();
     expect(screen.queryByTitle('Bekreft og fortsett')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Overstyr'));
@@ -217,5 +218,15 @@ describe('UttakFaktaEøsIndex', () => {
         },
       ],
     });
+  });
+
+  it('overstyring knapp skal ikke være tilgjenglig hvis det foreligger et aktivt aksjonspunkt', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(
+      <OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSomKanLøsesEllerEndres submitCallback={lagre} />,
+    );
+
+    expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
+    expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
   });
 });

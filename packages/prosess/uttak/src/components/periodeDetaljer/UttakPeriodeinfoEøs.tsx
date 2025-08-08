@@ -14,15 +14,15 @@ interface Props {
 
 export const UttakPeriodeInfoEØS = ({ valgtPeriode, alleKodeverk }: Props) => {
   return (
-    <VStack gap="4" className={styles.greenDetailsPeriod}>
-      <div>
+    <VStack gap="space-16" className={styles.greenDetailsPeriod}>
+      <VStack>
         <Label size="small">
           <FormattedMessage id="UttakPeriodeInfoEØS.Uttak" />
         </Label>
         <BodyShort>{stonadskonto(valgtPeriode, alleKodeverk)}</BodyShort>
-      </div>
+      </VStack>
 
-      <div>
+      <VStack>
         <Label size="small">{periodFormat(valgtPeriode.fom, valgtPeriode.tom)}</Label>
         <BodyShort>
           <FormattedMessage
@@ -34,7 +34,11 @@ export const UttakPeriodeInfoEØS = ({ valgtPeriode, alleKodeverk }: Props) => {
             }}
           />
         </BodyShort>
-      </div>
+      </VStack>
+
+      <BodyShort>
+        <FormattedMessage id="UttakPeriodeInfoEØS.RegistrertAvSaksbehandler" />
+      </BodyShort>
     </VStack>
   );
 };

@@ -251,7 +251,7 @@ const finnLabelForPeriode = (
   if (erEøsPeriode(periode.periode)) {
     const trekkdager = periode.periode.trekkdager;
     return (
-      <>
+      <VStack>
         <BodyShort>
           <FormattedMessage id="UttakTidslinje.Stonadskonto" values={{ periodeType: periodeType || '-' }} />
         </BodyShort>
@@ -268,7 +268,7 @@ const finnLabelForPeriode = (
             />
           </BodyShort>
         </VStack>
-      </>
+      </VStack>
     );
   }
 

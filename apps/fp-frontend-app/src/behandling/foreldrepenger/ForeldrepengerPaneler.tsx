@@ -25,12 +25,12 @@ import { OpplysningspliktProsessStegInitPanel } from '../fellesPaneler/prosess/O
 import { SimuleringProsessStegInitPanel } from '../fellesPaneler/prosess/SimuleringProsessStegInitPanel';
 import { SoknadsfristProsessStegInitPanel } from '../fellesPaneler/prosess/SoknadsfristProsessStegInitPanel';
 import { VarselProsessStegInitPanel } from '../fellesPaneler/prosess/VarselProsessStegInitPanel';
-import { VedtakProsessStegInitPanel } from '../fellesPaneler/prosess/VedtakProsessStegInitPanel.tsx';
+import { VedtakProsessStegInitPanel } from '../fellesPaneler/prosess/VedtakProsessStegInitPanel';
 import { BesteberegningFaktaInitPanel } from './faktaPaneler/BesteberegningFaktaInitPanel';
 import { OmsorgFaktaInitPanel } from './faktaPaneler/OmsorgFaktaInitPanel';
 import { OmsorgOgRettFaktaInitPanel } from './faktaPaneler/OmsorgOgRettFaktaInitPanel';
 import { UttakDokumentasjonFaktaInitPanel } from './faktaPaneler/UttakDokumentasjonFaktaInitPanel';
-import { UttakEøsFaktaInitPanel } from './faktaPaneler/UttakEøsFaktaInitPanel.tsx';
+import { UttakEøsFaktaInitPanel } from './faktaPaneler/UttakEøsFaktaInitPanel';
 import { UttakFaktaInitPanel } from './faktaPaneler/UttakFaktaInitPanel';
 import { InngangsvilkarFpProsessStegInitPanel } from './prosessPaneler/InngangsvilkarFpProsessStegInitPanel';
 import { TilkjentYtelseFpProsessStegInitPanel } from './prosessPaneler/TilkjentYtelseFpProsessStegInitPanel';
