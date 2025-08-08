@@ -1,0 +1,172 @@
+import{r as g,c as U,e as B,s as m,f as Y,u as D,j as t,S as $}from"./iframe-B3LllOyS.js";import{u as L}from"./useQuery-Dd00kS4c.js";import"./FlyttReservasjonModal-7oYJA89T.js";import{e as F}from"./fplosSaksbehandlerApi-Dsddu5UX.js";import{H as V,J}from"./index.es-B_bcqdk4.js";import{T as Q,C as G,S as W,a as X,O as Z}from"./OppgaveLabels-CWKDwVBw.js";import{O as ee}from"./OppgaveHandlingerMenu-B9uh6c6l.js";import{T as d}from"./Table-bB41s0gD.js";import{H as C,V as x}from"./VStack-oiDHnFzs.js";import{u as E,a as re,H as ne,B as f,L as w}from"./nb_NO-iOLOzDYk.js";import{B as P}from"./Modal-D2EJqP0l.js";import{P as _}from"./index.es-BZ8HOhoj.js";import{u as te,M as y}from"./Loader-BniX8TTA.js";import{S as se}from"./ChevronRight-D5RUNovN.js";const I=(e,a)=>{if(e==null)throw Error("Data er ikke oppgitt");return e};var ae=function(e,a){var n={};for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&a.indexOf(r)<0&&(n[r]=e[r]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,r=Object.getOwnPropertySymbols(e);s<r.length;s++)a.indexOf(r[s])<0&&Object.prototype.propertyIsEnumerable.call(e,r[s])&&(n[r[s]]=e[r[s]]);return n};const ie=g.forwardRef((e,a)=>{var{title:n,titleId:r}=e,s=ae(e,["title","titleId"]);let i=E();return i=n?r||"title-"+i:void 0,g.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:a,"aria-labelledby":i},s),n?g.createElement("title",{id:i},n):null,g.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M4.75 6c0-.69.56-1.25 1.25-1.25h12c.69 0 1.25.56 1.25 1.25v9c0 .69-.56 1.25-1.25 1.25H9a.75.75 0 0 0-.386.107L4.75 18.675zM6 3.25A2.75 2.75 0 0 0 3.25 6v14a.75.75 0 0 0 1.136.643l4.822-2.893H18A2.75 2.75 0 0 0 20.75 15V6A2.75 2.75 0 0 0 18 3.25zm3 6.5a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5zm2.25.75a.75.75 0 0 1 .75-.75h.01a.75.75 0 0 1 0 1.5H12a.75.75 0 0 1-.75-.75M15 9.75a.75.75 0 0 0 0 1.5h.01a.75.75 0 0 0 0-1.5z",clipRule:"evenodd"}))});var le=function(e,a){var n={};for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&a.indexOf(r)<0&&(n[r]=e[r]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,r=Object.getOwnPropertySymbols(e);s<r.length;s++)a.indexOf(r[s])<0&&Object.prototype.propertyIsEnumerable.call(e,r[s])&&(n[r[s]]=e[r[s]]);return n};const oe=g.forwardRef((e,a)=>{var{title:n,titleId:r}=e,s=le(e,["title","titleId"]);let i=E();return i=n?r||"title-"+i:void 0,g.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:a,"aria-labelledby":i},s),n?g.createElement("title",{id:i},n):null,g.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M14.53 5.97a.75.75 0 0 1 0 1.06L9.56 12l4.97 4.97a.75.75 0 1 1-1.06 1.06l-5.5-5.5a.75.75 0 0 1 0-1.06l5.5-5.5a.75.75 0 0 1 1.06 0",clipRule:"evenodd"}))});var ue=function(e,a){var n={};for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&a.indexOf(r)<0&&(n[r]=e[r]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,r=Object.getOwnPropertySymbols(e);s<r.length;s++)a.indexOf(r[s])<0&&Object.prototype.propertyIsEnumerable.call(e,r[s])&&(n[r[s]]=e[r[s]]);return n};const K=g.forwardRef((e,a)=>{var{children:n,as:r="button",selected:s=!1,className:i,page:l,"data-color":c}=e,p=ue(e,["children","as","selected","className","page","data-color"]);const o=U(!1),{cn:u}=B();return m.createElement(P,Object.assign({as:r,variant:o?"tertiary-neutral":"tertiary","data-color":c,"aria-current":s,"data-pressed":s,ref:a,className:u("navds-pagination__item",i,{"navds-pagination__item--selected":s}),"data-page":l,page:l},r==="button"&&{type:"button"},p),n)});var de=function(e,a){var n={};for(var r in e)Object.prototype.hasOwnProperty.call(e,r)&&a.indexOf(r)<0&&(n[r]=e[r]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var s=0,r=Object.getOwnPropertySymbols(e);s<r.length;s++)a.indexOf(r[s])<0&&Object.prototype.propertyIsEnumerable.call(e,r[s])&&(n[r[s]]=e[r[s]]);return n};const ge=({page:e,count:a,boundaryCount:n=1,siblingCount:r=1})=>{var s,i;const l=(v,b)=>Array.from({length:b-v+1},(k,h)=>v+h);if(a<=(n+r)*2+3)return l(1,a);const c=l(1,n),p=l(a-n+1,a),o=Math.max(Math.min(e-r,a-n-r*2-1),n+2),u=o+r*2;return[...c,o-((s=c[c.length-1])!==null&&s!==void 0?s:0)===2?o-1:"ellipsis",...l(o,u),((i=p[0])!==null&&i!==void 0?i:a+1)-u===2?u+1:"ellipsis",...p]},H=g.forwardRef((e,a)=>{var{page:n,onPageChange:r,count:s,boundaryCount:i=1,siblingCount:l=1,className:c,size:p="medium",prevNextTexts:o=!1,srHeading:u,"aria-labelledby":v,renderItem:b=K,"data-color":k}=e,h=de(e,["page","onPageChange","count","boundaryCount","siblingCount","className","size","prevNextTexts","srHeading","aria-labelledby","renderItem","data-color"]);const{cn:j}=B(),A=re(),R=te("Pagination");return n<1?(console.error("page cannot be less than 1"),null):s<1?(console.error("count cannot be less than 1"),null):i<0?(console.error("boundaryCount cannot be less than 0"),null):l<0?(console.error("siblingCount cannot be less than 0"),null):m.createElement("nav",Object.assign({ref:a},h,{"data-color":k,"aria-labelledby":u?Y(A,v):v,className:j("navds-pagination",`navds-pagination--${p}`,c)}),u&&m.createElement(ne,{size:"xsmall",visuallyHidden:!0,as:u.tag,id:A},u.text),m.createElement("ul",{className:j("navds-pagination__list")},m.createElement("li",null,m.createElement(b,{"data-color":k,className:j("navds-pagination__prev-next",{"navds-pagination--invisible":n===1,"navds-pagination--prev-next--with-text":o}),disabled:n===1,onClick:()=>r?.(n-1),page:n-1,size:p,icon:m.createElement(oe,Object.assign({},o?{"aria-hidden":!0}:{title:R("previous")}))},o&&R("previous"))),ge({page:n,count:s,siblingCount:l,boundaryCount:i}).map((q,M)=>{const T=Number(q);return Number.isNaN(T)?m.createElement("li",{className:j("navds-pagination__ellipsis"),key:`${q}${M}`},m.createElement(f,{size:p==="xsmall"?"small":p,as:"span"},"...")):m.createElement("li",{key:q},m.createElement(b,{"data-color":k,onClick:()=>r?.(T),selected:n===T,page:T,size:p},T))}),m.createElement("li",null,m.createElement(b,{"data-color":k,className:j("navds-pagination__prev-next",{"navds-pagination--invisible":n===s,"navds-pagination--prev-next--with-text":o}),disabled:n===s,onClick:()=>r?.(n+1),page:n+1,size:p,icon:m.createElement(se,Object.assign({},o?{"aria-hidden":!0}:{title:R("next")})),iconPosition:"right"},o&&R("next")))))});H.Item=K;const ve="_isUnderBehandling_7ijt7_1",pe="_image_7ijt7_5",O={isUnderBehandling:ve,image:pe},z=({oppgave:e,reserverOppgave:a,brukernavn:n})=>{const r=D(),[s,i]=g.useState(!0),l=g.useRef(null),c=g.useRef(null),p=g.useRef(null),o=(u,v)=>{const b=l.current?.contains(u.target),k=c.current?.contains(u.target),h=p.current?.contains(u.target);b||k||h||v&&a(v)};return t.jsxs(d.Row,{onMouseDown:s?u=>o(u,e):void 0,onKeyDown:s?u=>o(u,e):void 0,className:O.isUnderBehandling,children:[t.jsx(d.DataCell,{children:e.navn??"<navn>"}),t.jsx(d.DataCell,{children:t.jsxs(C,{align:"center",ref:p,wrap:!1,children:[t.jsx(f,{children:e.saksnummer}),t.jsx(Q,{content:r.formatMessage({id:"ReservertOppgaveRad.Saksnr"}),children:t.jsx(G,{activeIcon:t.jsx(X,{className:O.image,"aria-hidden":!0}),copyText:e.saksnummer,icon:t.jsx(W,{"aria-hidden":!0,className:O.image})})})]})}),t.jsx(d.DataCell,{children:t.jsx(Z,{oppgave:e})}),t.jsx(d.DataCell,{children:e.opprettetTidspunkt&&t.jsx(V,{dateString:e.opprettetTidspunkt})}),t.jsx(d.DataCell,{children:e.reservasjonStatus.reservertTilTidspunkt&&t.jsx(J,{dateTimeString:e.reservasjonStatus.reservertTilTidspunkt,separator:"kl"})}),t.jsx(d.DataCell,{children:e.reservasjonStatus.flyttetReservasjon&&t.jsx("div",{ref:c,children:t.jsx(ce,{oppgave:e,brukernavn:n})})}),t.jsx(d.DataCell,{children:t.jsx("div",{ref:l,children:t.jsx(ee,{oppgave:e,setEnableTableEvents:i,brukernavn:n})})})]},e.id)},me=(e,a)=>{const{flyttetReservasjon:n}=e;if(!n)return;const r=$(n.tidspunkt),s=a===n.uid;return t.jsxs(x,{gap:"space-8",children:[!s&&t.jsxs(x,{gap:"space-4",children:[t.jsx(w,{size:"small",children:t.jsx(y,{id:"ReservertOppgaveRad.OverfortReservasjonHeader"})}),t.jsx(f,{size:"small",children:t.jsx(y,{id:"ReservertOppgaveRad.OverfortReservasjonBody",values:{dato:r?.date,tid:r?.time,uid:n.uid,navn:n.navn}})})]}),t.jsxs(x,{gap:"space-4",children:[t.jsx(w,{size:"small",children:s?t.jsx(y,{id:"ReservertOppgaveRad.Notat"}):t.jsx(y,{id:"ReservertOppgaveRad.OverfortReservasjonBegrunnelse"})}),t.jsx(f,{size:"small",children:n.begrunnelse})]})]})},ce=({oppgave:e,brukernavn:a})=>{const n=g.useRef(null),[r,s]=g.useState(!1);return t.jsxs(t.Fragment,{children:[t.jsx(P,{ref:n,onClick:()=>s(!r),"aria-expanded":r,icon:t.jsx(ie,{className:O.image,"aria-hidden":!0}),variant:"tertiary-neutral"}),t.jsx(_,{open:r,onClose:()=>s(!1),anchorEl:n.current,children:t.jsx(_.Content,{children:me(e.reservasjonStatus,a)})})]})};z.__docgenInfo={description:"",methods:[],displayName:"ReservertOppgaveRad",props:{oppgave:{required:!0,tsType:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  id: number;
+  reservasjonStatus: ReservasjonStatus;
+  saksnummer: string;
+  personnummer: string;
+  navn: string;
+  system: string;
+  behandlingstype: BehandlingType;
+  opprettetTidspunkt: string;
+  behandlingsfrist: string;
+  fagsakYtelseType: string;
+  erTilSaksbehandling: boolean;
+  behandlingId: string;
+  andreKriterier: AndreKriterierType[];
+}`,signature:{properties:[{key:"id",value:{name:"number",required:!0}},{key:"reservasjonStatus",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  erReservert: boolean;
+  reservertTilTidspunkt?: string;
+  erReservertAvInnloggetBruker?: boolean;
+  reservertAvUid?: string;
+  reservertAvNavn?: string;
+  flyttetReservasjon?: {
+    tidspunkt: string;
+    uid: string;
+    navn: string;
+    begrunnelse: string;
+  };
+}`,signature:{properties:[{key:"erReservert",value:{name:"boolean",required:!0}},{key:"reservertTilTidspunkt",value:{name:"string",required:!1}},{key:"erReservertAvInnloggetBruker",value:{name:"boolean",required:!1}},{key:"reservertAvUid",value:{name:"string",required:!1}},{key:"reservertAvNavn",value:{name:"string",required:!1}},{key:"flyttetReservasjon",value:{name:"signature",type:"object",raw:`{
+  tidspunkt: string;
+  uid: string;
+  navn: string;
+  begrunnelse: string;
+}`,signature:{properties:[{key:"tidspunkt",value:{name:"string",required:!0}},{key:"uid",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}}]},required:!1}}]}}],raw:`Readonly<{
+  erReservert: boolean;
+  reservertTilTidspunkt?: string;
+  erReservertAvInnloggetBruker?: boolean;
+  reservertAvUid?: string;
+  reservertAvNavn?: string;
+  flyttetReservasjon?: {
+    tidspunkt: string;
+    uid: string;
+    navn: string;
+    begrunnelse: string;
+  };
+}>`,required:!0}},{key:"saksnummer",value:{name:"string",required:!0}},{key:"personnummer",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"system",value:{name:"string",required:!0}},{key:"behandlingstype",value:{name:"BehandlingType",required:!0}},{key:"opprettetTidspunkt",value:{name:"string",required:!0}},{key:"behandlingsfrist",value:{name:"string",required:!0}},{key:"fagsakYtelseType",value:{name:"string",required:!0}},{key:"erTilSaksbehandling",value:{name:"boolean",required:!0}},{key:"behandlingId",value:{name:"string",required:!0}},{key:"andreKriterier",value:{name:"Array",elements:[{name:"AndreKriterierType"}],raw:"AndreKriterierType[]",required:!0}}]}}],raw:`Readonly<{
+  id: number;
+  reservasjonStatus: ReservasjonStatus;
+  saksnummer: string;
+  personnummer: string;
+  navn: string;
+  system: string;
+  behandlingstype: BehandlingType;
+  opprettetTidspunkt: string;
+  behandlingsfrist: string;
+  fagsakYtelseType: string;
+  erTilSaksbehandling: boolean;
+  behandlingId: string;
+  andreKriterier: AndreKriterierType[];
+}>`},description:""},reserverOppgave:{required:!0,tsType:{name:"signature",type:"function",raw:"(oppgave: Oppgave) => void",signature:{arguments:[{type:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  id: number;
+  reservasjonStatus: ReservasjonStatus;
+  saksnummer: string;
+  personnummer: string;
+  navn: string;
+  system: string;
+  behandlingstype: BehandlingType;
+  opprettetTidspunkt: string;
+  behandlingsfrist: string;
+  fagsakYtelseType: string;
+  erTilSaksbehandling: boolean;
+  behandlingId: string;
+  andreKriterier: AndreKriterierType[];
+}`,signature:{properties:[{key:"id",value:{name:"number",required:!0}},{key:"reservasjonStatus",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  erReservert: boolean;
+  reservertTilTidspunkt?: string;
+  erReservertAvInnloggetBruker?: boolean;
+  reservertAvUid?: string;
+  reservertAvNavn?: string;
+  flyttetReservasjon?: {
+    tidspunkt: string;
+    uid: string;
+    navn: string;
+    begrunnelse: string;
+  };
+}`,signature:{properties:[{key:"erReservert",value:{name:"boolean",required:!0}},{key:"reservertTilTidspunkt",value:{name:"string",required:!1}},{key:"erReservertAvInnloggetBruker",value:{name:"boolean",required:!1}},{key:"reservertAvUid",value:{name:"string",required:!1}},{key:"reservertAvNavn",value:{name:"string",required:!1}},{key:"flyttetReservasjon",value:{name:"signature",type:"object",raw:`{
+  tidspunkt: string;
+  uid: string;
+  navn: string;
+  begrunnelse: string;
+}`,signature:{properties:[{key:"tidspunkt",value:{name:"string",required:!0}},{key:"uid",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}}]},required:!1}}]}}],raw:`Readonly<{
+  erReservert: boolean;
+  reservertTilTidspunkt?: string;
+  erReservertAvInnloggetBruker?: boolean;
+  reservertAvUid?: string;
+  reservertAvNavn?: string;
+  flyttetReservasjon?: {
+    tidspunkt: string;
+    uid: string;
+    navn: string;
+    begrunnelse: string;
+  };
+}>`,required:!0}},{key:"saksnummer",value:{name:"string",required:!0}},{key:"personnummer",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"system",value:{name:"string",required:!0}},{key:"behandlingstype",value:{name:"BehandlingType",required:!0}},{key:"opprettetTidspunkt",value:{name:"string",required:!0}},{key:"behandlingsfrist",value:{name:"string",required:!0}},{key:"fagsakYtelseType",value:{name:"string",required:!0}},{key:"erTilSaksbehandling",value:{name:"boolean",required:!0}},{key:"behandlingId",value:{name:"string",required:!0}},{key:"andreKriterier",value:{name:"Array",elements:[{name:"AndreKriterierType"}],raw:"AndreKriterierType[]",required:!0}}]}}],raw:`Readonly<{
+  id: number;
+  reservasjonStatus: ReservasjonStatus;
+  saksnummer: string;
+  personnummer: string;
+  navn: string;
+  system: string;
+  behandlingstype: BehandlingType;
+  opprettetTidspunkt: string;
+  behandlingsfrist: string;
+  fagsakYtelseType: string;
+  erTilSaksbehandling: boolean;
+  behandlingId: string;
+  andreKriterier: AndreKriterierType[];
+}>`},name:"oppgave"}],return:{name:"void"}}},description:""},brukernavn:{required:!0,tsType:{name:"string"},description:""}}};const ye="_grayout_1s8eq_1",be="_headerPadding_1s8eq_5",ke="_tabell_1s8eq_9",S={grayout:ye,headerPadding:be,tabell:ke},fe=new Array,he=({reserverOppgave:e,brukernavn:a})=>{const[n,r]=g.useState(1),s=15,{data:i=fe}=L(F()),[l,c]=g.useState({orderBy:"reservertTilTidspunkt",direction:"ascending"}),p=v=>{c(l&&v===l.orderBy&&l.direction==="descending"?void 0:{orderBy:v,direction:l&&v===l.orderBy&&l.direction==="ascending"?"descending":"ascending"})},o=i.slice().sort(je(l)),u=o.length>s?o.slice((n-1)*s,n*s):o;return t.jsxs("div",{className:S.tabell,children:[t.jsxs(x,{gap:"space-8",className:S.headerPadding,children:[t.jsxs(C,{gap:"space-8",children:[t.jsx(w,{size:"small",children:t.jsx(y,{id:"ReservertOppgaveTabell.ReserverteOppgaver"})}),t.jsx(f,{size:"small",className:S.grayout,children:t.jsx(y,{id:"ReservertOppgaveTabell.AntallOppgaver",values:{reservertAntall:i.length}})})]}),i.length===0&&t.jsx(f,{size:"small",children:t.jsx(y,{id:"ReservertOppgaveTabell.IngenOppgaver",tagName:"i"})})]}),i.length>0&&t.jsxs(x,{gap:"space-16",children:[t.jsxs(d,{size:"small",sort:l,onSortChange:v=>p(v),children:[t.jsx(d.Header,{children:t.jsxs(d.Row,{children:[t.jsx(d.ColumnHeader,{sortKey:"navn",sortable:!0,children:t.jsx(y,{id:"ReservertOppgaveTabell.Soker"})}),t.jsx(d.ColumnHeader,{sortKey:"saksnummer",sortable:!0,children:t.jsx(y,{id:"ReservertOppgaveTabell.Sak"})}),t.jsx(d.ColumnHeader,{}),t.jsx(d.ColumnHeader,{sortKey:"opprettetTidspunkt",sortable:!0,children:t.jsx(y,{id:"ReservertOppgaveTabell.BehandlingOpprettet"})}),t.jsx(d.ColumnHeader,{sortKey:"reservertTilTidspunkt",sortable:!0,children:t.jsx(y,{id:"ReservertOppgaveTabell.ReservertTilTidspunkt"})}),t.jsx(d.ColumnHeader,{}),t.jsx(d.ColumnHeader,{})]})}),t.jsx(d.Body,{children:u.map(v=>t.jsx(z,{oppgave:v,reserverOppgave:e,brukernavn:a},v.id))})]}),o.length>s&&t.jsx(H,{page:n,onPageChange:r,count:Math.ceil(o.length/s),size:"small",prevNextTexts:!0})]})]})},N=(e,a,n)=>n==="status"?I(e.reservasjonStatus.reservertTilTidspunkt)<I(a.reservasjonStatus.reservertTilTidspunkt)?-1:1:a[n]===void 0||e[n]===void 0||a[n]<e[n]?-1:a[n]>e[n]?1:0,je=e=>(a,n)=>e?e.direction==="ascending"?N(n,a,e.orderBy):N(a,n,e.orderBy):1;he.__docgenInfo={description:"",methods:[],displayName:"ReservertOppgaveTabell",props:{reserverOppgave:{required:!0,tsType:{name:"signature",type:"function",raw:"(oppgave: Oppgave) => void",signature:{arguments:[{type:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  id: number;
+  reservasjonStatus: ReservasjonStatus;
+  saksnummer: string;
+  personnummer: string;
+  navn: string;
+  system: string;
+  behandlingstype: BehandlingType;
+  opprettetTidspunkt: string;
+  behandlingsfrist: string;
+  fagsakYtelseType: string;
+  erTilSaksbehandling: boolean;
+  behandlingId: string;
+  andreKriterier: AndreKriterierType[];
+}`,signature:{properties:[{key:"id",value:{name:"number",required:!0}},{key:"reservasjonStatus",value:{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  erReservert: boolean;
+  reservertTilTidspunkt?: string;
+  erReservertAvInnloggetBruker?: boolean;
+  reservertAvUid?: string;
+  reservertAvNavn?: string;
+  flyttetReservasjon?: {
+    tidspunkt: string;
+    uid: string;
+    navn: string;
+    begrunnelse: string;
+  };
+}`,signature:{properties:[{key:"erReservert",value:{name:"boolean",required:!0}},{key:"reservertTilTidspunkt",value:{name:"string",required:!1}},{key:"erReservertAvInnloggetBruker",value:{name:"boolean",required:!1}},{key:"reservertAvUid",value:{name:"string",required:!1}},{key:"reservertAvNavn",value:{name:"string",required:!1}},{key:"flyttetReservasjon",value:{name:"signature",type:"object",raw:`{
+  tidspunkt: string;
+  uid: string;
+  navn: string;
+  begrunnelse: string;
+}`,signature:{properties:[{key:"tidspunkt",value:{name:"string",required:!0}},{key:"uid",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"begrunnelse",value:{name:"string",required:!0}}]},required:!1}}]}}],raw:`Readonly<{
+  erReservert: boolean;
+  reservertTilTidspunkt?: string;
+  erReservertAvInnloggetBruker?: boolean;
+  reservertAvUid?: string;
+  reservertAvNavn?: string;
+  flyttetReservasjon?: {
+    tidspunkt: string;
+    uid: string;
+    navn: string;
+    begrunnelse: string;
+  };
+}>`,required:!0}},{key:"saksnummer",value:{name:"string",required:!0}},{key:"personnummer",value:{name:"string",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"system",value:{name:"string",required:!0}},{key:"behandlingstype",value:{name:"BehandlingType",required:!0}},{key:"opprettetTidspunkt",value:{name:"string",required:!0}},{key:"behandlingsfrist",value:{name:"string",required:!0}},{key:"fagsakYtelseType",value:{name:"string",required:!0}},{key:"erTilSaksbehandling",value:{name:"boolean",required:!0}},{key:"behandlingId",value:{name:"string",required:!0}},{key:"andreKriterier",value:{name:"Array",elements:[{name:"AndreKriterierType"}],raw:"AndreKriterierType[]",required:!0}}]}}],raw:`Readonly<{
+  id: number;
+  reservasjonStatus: ReservasjonStatus;
+  saksnummer: string;
+  personnummer: string;
+  navn: string;
+  system: string;
+  behandlingstype: BehandlingType;
+  opprettetTidspunkt: string;
+  behandlingsfrist: string;
+  fagsakYtelseType: string;
+  erTilSaksbehandling: boolean;
+  behandlingId: string;
+  andreKriterier: AndreKriterierType[];
+}>`},name:"oppgave"}],return:{name:"void"}}},description:""},brukernavn:{required:!0,tsType:{name:"string"},description:""}}};export{he as R};
