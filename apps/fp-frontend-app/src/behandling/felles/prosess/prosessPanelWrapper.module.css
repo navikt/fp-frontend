@@ -1,9 +1,13 @@
 .steg {
-  background-color: var(--ax-bg-default);
+  background-color: var(--ax-bg-raised);
   border-top: 1px solid var(--ax-neutral-400);
   box-shadow: -4px 1px 6px 1px rgba(0, 0, 0, 0.23);
   position: relative;
   width: 100%;
+}
+
+:global(.dark) .steg {
+  border-top: 1px solid var(--ax-neutral-700);
 }
 
 .steg.skalSkjulePanel {

@@ -2,6 +2,10 @@
   border-bottom: 1px solid var(--ax-neutral-400);
 }
 
+:global(.dark) .container {
+  border-bottom: 1px solid var(--ax-neutral-700);
+}
+
 .meny {
   margin-bottom: 23px;
   margin-left: 25px;
@@ -19,7 +23,7 @@
 .stepArrowContainer:after {
   border: solid transparent;
   border-color: rgba(255, 255, 255, 0);
-  border-bottom-color: var(--ax-bg-default);
+  border-bottom-color: var(--ax-bg-raised);
   border-width: 12px;
   bottom: 100%;
   content: ' ';
@@ -35,13 +39,17 @@
   border: solid transparent;
   border-color: rgba(0, 0, 0, 0);
   border-bottom-color: var(--ax-neutral-400);
-  border-width: 13px;
+  border-width: 14px;
   bottom: 100%;
   content: ' ';
   height: 0;
   left: 50%;
-  margin-left: -13px;
+  margin-left: -14px;
   pointer-events: none;
   position: absolute;
   width: 0;
+}
+
+:global(.dark) .stepArrowContainer:before {
+  border-bottom-color: var(--ax-neutral-700);
 }
