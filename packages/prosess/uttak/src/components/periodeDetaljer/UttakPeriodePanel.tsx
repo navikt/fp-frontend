@@ -154,6 +154,7 @@ const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): Perio
 
 interface Props {
   perioderSøker: PeriodeSoker[];
+  perioderAnnenpart: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[];
   behandling: Behandling;
   uttaksresultat: Uttaksresultat;
   valgtPeriodeIndex: number;
@@ -166,11 +167,11 @@ interface Props {
   erTilknyttetStortinget: boolean;
   harÅpneAksjonspunkter: boolean;
   endringsdato: string;
-  perioderAnnenpartEøs?: AnnenforelderUttakEøsPeriode[];
 }
 
 export const UttakPeriodePanel = ({
   perioderSøker,
+  perioderAnnenpart,
   behandling,
   uttaksresultat,
   valgtPeriodeIndex,
@@ -183,18 +184,16 @@ export const UttakPeriodePanel = ({
   erTilknyttetStortinget,
   harÅpneAksjonspunkter,
   endringsdato,
-  perioderAnnenpartEøs,
 }: Props) => {
   const intl = useIntl();
 
   const [visModal, setVisModal] = useState(false);
   const toggleVisningAvModal = () => setVisModal(verdi => !verdi);
 
-  const annenpartPerioder = perioderAnnenpartEøs ?? uttaksresultat.perioderAnnenpart;
-  const allePerioder = annenpartPerioder.concat(perioderSøker);
+  const allePerioder = perioderAnnenpart.concat(perioderSøker);
   const valgtPeriode = allePerioder[valgtPeriodeIndex];
 
-  const erHovedsøkersPeriode = valgtPeriodeIndex + 1 > annenpartPerioder.length;
+  const erHovedsøkersPeriode = valgtPeriodeIndex + 1 > perioderAnnenpart.length;
   const erValgtPeriodeEøsPeriode = erEøsPeriode(valgtPeriode);
 
   const splittPeriode = (dato: string) => {
@@ -211,7 +210,7 @@ export const UttakPeriodePanel = ({
 
   const harSoktOmFlerbarnsdager = erHovedsøkersPeriode
     ? perioderSøker.some(p => p.flerbarnsdager)
-    : annenpartPerioder.some(p => !erEøsPeriode(p) && p.flerbarnsdager);
+    : perioderAnnenpart.some(p => !erEøsPeriode(p) && p.flerbarnsdager);
 
   const erRevurderingFørEndringsdato =
     behandling.type === BehandlingType.REVURDERING && valgtPeriode.tom < endringsdato;

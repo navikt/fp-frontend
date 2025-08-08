@@ -186,7 +186,7 @@ const meta = {
       return Promise.resolve(uttakStonadskontoer);
     },
     arbeidsgiverOpplysningerPerId,
-    annenForelderUttakEøs: [],
+    annenForelderUttakEøs: undefined,
   },
   render: args => <UttakProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof UttakProsessIndex>>;

@@ -31,7 +31,7 @@ interface Props {
     perioder: PeriodeSoker[];
   }) => Promise<UttakStonadskontoer>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined;
 }
 
 export const UttakProsessIndex = ({

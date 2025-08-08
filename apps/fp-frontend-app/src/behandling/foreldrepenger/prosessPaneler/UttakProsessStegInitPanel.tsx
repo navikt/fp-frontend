@@ -81,7 +81,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
           familiehendelse={familiehendelse}
           soknad={søknad}
           uttakStonadskontoer={uttakStønadskontoer}
-          annenForelderUttakEøs={annenForelderUttakEøs || []}
+          annenForelderUttakEøs={annenForelderUttakEøs}
         />
       ) : (
         <LoadingPanel />
