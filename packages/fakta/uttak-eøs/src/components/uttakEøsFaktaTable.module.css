@@ -13,12 +13,7 @@
 }
 
 .headerRow {
-  background-color: var(--ax-neutral-200);
-}
-
-.row {
-  --ac-table-row-hover: var(--ax-neutral-300);
-  cursor: pointer;
+  background-color: var(--ax-neutral-100);
 }
 
 .isOpen {
