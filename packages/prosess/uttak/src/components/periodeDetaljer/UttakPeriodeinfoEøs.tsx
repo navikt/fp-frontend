@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { BTag, createWeekAndDay, periodFormat } from '@navikt/ft-utils';
 
 import type { AlleKodeverk, AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
@@ -16,9 +16,15 @@ export const UttakPeriodeInfoEØS = ({ valgtPeriode, alleKodeverk }: Props) => {
   return (
     <VStack gap="space-16" className={styles.greenDetailsPeriod}>
       <VStack>
-        <Label size="small">
-          <FormattedMessage id="UttakPeriodeInfoEØS.Uttak" />
-        </Label>
+        <HStack justify="space-between">
+          <Label size="small">
+            <FormattedMessage id="UttakPeriodeInfoEØS.Uttak" />
+          </Label>
+          <BodyShort>
+            <FormattedMessage id="UttakPeriodeInfoEØS.UttakBeskrivelse" values={{ b: BTag }} />
+          </BodyShort>
+          <div />
+        </HStack>
         <BodyShort>{stonadskonto(valgtPeriode, alleKodeverk)}</BodyShort>
       </VStack>
 

@@ -13,6 +13,7 @@ import {
   PeriodeResultatÅrsak,
   RelasjonsRolleType,
   StonadskontoType,
+  UttakArbeidType,
   UttakUtsettelseType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
@@ -1317,6 +1318,30 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
     fagsak: {
       relasjonsRolleType: RelasjonsRolleType.FAR,
     } as Fagsak,
+    uttakStonadskontoer: {
+      ...uttakStonadskontoer,
+      stonadskontoer: {
+        ...uttakStonadskontoer.stonadskontoer,
+        FELLESPERIODE: {
+          stonadskontotype: 'FELLESPERIODE',
+          maxDager: 80,
+          saldo: 80,
+          kontoReduksjoner: {
+            annenForelderEøsUttak: 20,
+          },
+          aktivitetSaldoDtoList: [
+            {
+              aktivitetIdentifikator: {
+                uttakArbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+                arbeidsgiverReferanse: '910909088',
+              },
+              saldo: 80,
+            },
+          ],
+          gyldigForbruk: true,
+        },
+      },
+    },
     uttaksresultat: {
       perioderSøker: [
         {

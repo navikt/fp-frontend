@@ -242,6 +242,7 @@
   "UttakActivity.MerEn100ProsentOgOgyldigUtsettlse": "Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%. Søker har ikke 100% stilling, vurder om perioden kan utsettes.",
 
   "UttakPeriodeInfoEØS.Uttak": "Uttak",
+  "UttakPeriodeInfoEØS.UttakBeskrivelse": "<b>Uttak</b>: Periode hvor annen forelder har uttak av foreldrepenger i et EØS-land.",
   "UttakPeriodeInfoEØS.Trekkdager": "Trekkdager:  {trekkdager}",
   "UttakPeriodeInfoEØS.RegistrertAvSaksbehandler": "Registrert i Fakta om uttak (EØS)"
 }
