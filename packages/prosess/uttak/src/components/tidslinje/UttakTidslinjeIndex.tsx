@@ -133,7 +133,7 @@ interface Props {
   søknad: Soknad;
   personoversikt: Personoversikt;
   perioderSøker: PeriodeSoker[];
-  perioderAnnenpart: PeriodeSoker[];
+  perioderAnnenpart: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[];
   valgtPeriodeIndex: number | undefined;
   familiehendelse: FamilieHendelseSamling;
   endringsdato: string;
@@ -141,7 +141,6 @@ interface Props {
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
-  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
 }
 
 export const UttakTidslinjeIndex = ({
@@ -157,14 +156,11 @@ export const UttakTidslinjeIndex = ({
   setValgtPeriodeIndex,
   fagsak,
   alleKodeverk,
-  annenForelderUttakEøs,
 }: Props) => {
-  const annenForelder = annenForelderUttakEøs ?? perioderAnnenpart;
-
   const uttakMedOpphold = lagUttakMedOpphold(perioderSøker);
 
-  const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, annenForelder);
-  const annenForelderPerioder = leggTidslinjedataTilPeriode(false, uttakMedOpphold, annenForelder);
+  const hovedsøkerPerioder = leggTidslinjedataTilPeriode(true, uttakMedOpphold, perioderAnnenpart);
+  const annenForelderPerioder = leggTidslinjedataTilPeriode(false, uttakMedOpphold, perioderAnnenpart);
 
   const alleUttaksperioderMedId = annenForelderPerioder.concat(
     hovedsøkerPerioder.map(p => ({

@@ -164,7 +164,7 @@ interface Props {
     perioder: PeriodeSoker[];
   }) => Promise<UttakStonadskontoer>;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined;
 }
 
 const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
@@ -175,6 +175,23 @@ const sortByDate = (a: PeriodeSoker, b: PeriodeSoker): number => {
     return 1;
   }
   return 0;
+};
+
+const erOrdinærPeriode = (periode: PeriodeSoker | AnnenforelderUttakEøsPeriode): periode is PeriodeSoker => {
+  return 'periodeResultatType' in periode;
+};
+
+const getPerioderAnnenpart = (
+  uttaksresultat: Uttaksresultat,
+  annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined,
+) => {
+  if (uttaksresultat.perioderAnnenpart && uttaksresultat.perioderAnnenpart.length > 0) {
+    return uttaksresultat.perioderAnnenpart;
+  }
+  if (annenForelderUttakEøs) {
+    return annenForelderUttakEøs;
+  }
+  return [];
 };
 
 export const UttakProsessPanel = ({
@@ -204,15 +221,17 @@ export const UttakProsessPanel = ({
 
   const [perioder, setPerioder] = useState<PeriodeSoker[]>(mellomlagretFormData ?? uttaksresultat.perioderSøker);
   const [valgtPeriodeIndex, setValgtPeriodeIndex] = useState<number | undefined>();
-
   const [stønadskonto, setStønadskonto] = useState(uttakStonadskontoer);
 
   useEffect(() => () => setMellomlagretFormData(perioder), [perioder]);
 
-  const allePerioder = uttaksresultat.perioderAnnenpart.concat(perioder);
+  const perioderAnnenpart = getPerioderAnnenpart(uttaksresultat, annenForelderUttakEøs);
+  const allePerioder = perioderAnnenpart.concat(perioder);
 
-  const visPeriode = (per: PeriodeSoker[]) => {
-    const index = per.findIndex(period => period.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING);
+  const visPeriode = (per: (PeriodeSoker | AnnenforelderUttakEøsPeriode)[]) => {
+    const index = per.findIndex(
+      period => erOrdinærPeriode(period) && period.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING,
+    );
     if (index !== -1) {
       setValgtPeriodeIndex(index);
     } else if (valgtPeriodeIndex !== undefined) {
@@ -239,9 +258,9 @@ export const UttakProsessPanel = ({
       setStønadskonto(oppdatertStønadskonto);
       if (oppdatertePerioder.length === 2) {
         const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
-        setValgtPeriodeIndex(uttaksresultat.perioderAnnenpart.length + index);
+        setValgtPeriodeIndex(perioderAnnenpart.length + index);
       } else {
-        visPeriode(uttaksresultat.perioderAnnenpart.concat(nyePerioder));
+        visPeriode(perioderAnnenpart.concat(nyePerioder));
       }
     });
   };
@@ -296,7 +315,7 @@ export const UttakProsessPanel = ({
       />
       <UttakTidslinjeIndex
         perioderSøker={perioder}
-        perioderAnnenpart={uttaksresultat.perioderAnnenpart}
+        perioderAnnenpart={perioderAnnenpart}
         valgtPeriodeIndex={valgtPeriodeIndex}
         setValgtPeriodeIndex={setValgtPeriodeIndex}
         behandling={behandling}
@@ -307,12 +326,12 @@ export const UttakProsessPanel = ({
         tilknyttetStortinget={erTilknyttetStortinget}
         fagsak={fagsak}
         alleKodeverk={alleKodeverk}
-        annenForelderUttakEøs={annenForelderUttakEøs}
       />
       {valgtPeriodeIndex !== undefined && (
         <UttakPeriodePanel
           key={valgtPeriodeIndex}
           perioderSøker={perioder}
+          perioderAnnenpart={perioderAnnenpart}
           behandling={behandling}
           uttaksresultat={uttaksresultat}
           valgtPeriodeIndex={valgtPeriodeIndex}
@@ -325,7 +344,6 @@ export const UttakProsessPanel = ({
           erTilknyttetStortinget={erTilknyttetStortinget}
           harÅpneAksjonspunkter={harÅpneAksjonspunkter}
           endringsdato={uttaksresultat.endringsdato}
-          perioderAnnenpartEøs={annenForelderUttakEøs}
         />
       )}
       {((!harIngenEllerLukkedeAksjonspunkt && !isReadOnly) || erOverstyrt) && (
