@@ -7,8 +7,10 @@
 }
 
 .tabell {
-  border-bottom-color: var(--ax-neutral-400);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom: 1px solid var(--ax-neutral-400);
   padding-bottom: 50px;
+}
+
+:global(.dark) .tabell {
+  border-bottom: 1px solid var(--ax-neutral-700);
 }
