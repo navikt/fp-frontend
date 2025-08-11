@@ -46,7 +46,7 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
                 <div key={edKey}>
                   <Detail>{`${capitalizeFirstLetters(edKey)}:`}</Detail>
                   <div>
-                    {/* @ts-expect-error Fiks */}
+                    {/* @ts-expect-error Fiks. Dette vil kreve at vi lager en rekursiv rendering av objectet */}
                     <BodyShort size="small">{feilmeldingsdetaljer[edKey]}</BodyShort>
                   </div>
                 </div>
