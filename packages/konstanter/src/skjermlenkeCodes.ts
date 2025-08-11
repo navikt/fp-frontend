@@ -164,6 +164,11 @@ const skjermlenkeCodesFpsak: SkjermlenkeData = {
     faktaNavn: FaktaPanelCode.UTTAK,
     punktNavn: '',
   },
+  FAKTA_UTTAK_EØS: {
+    kode: 'FAKTA_UTTAK_EØS',
+    faktaNavn: FaktaPanelCode.UTTAK_EØS,
+    punktNavn: '',
+  },
   FAKTA_OM_UTTAK_DOKUMENTASJON: {
     kode: 'FAKTA_OM_UTTAK_DOKUMENTASJON',
     faktaNavn: FaktaPanelCode.UTTAK_DOKUMENTASJON,

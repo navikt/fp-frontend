@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import { BehandlingType, ManuellBehandlingÅrsak, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
+  AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
   PeriodeSoker,
@@ -20,6 +21,7 @@ import type {
 
 import { SplittPeriodeModal } from './splitt/SplittPeriodeModal';
 import { UttakPeriodeForm } from './UttakPeriodeForm';
+import { UttakPeriodeInfoEØS } from './UttakPeriodeinfoEøs.tsx';
 
 const getCorrectEmptyArbeidsForhold = (
   alleKodeverk: AlleKodeverk,
@@ -56,6 +58,13 @@ const getCorrectEmptyArbeidsForhold = (
   }
 
   return arbeidsforholdMedPositivSaldoFinnes ? arbeidsForholdMedNullDagerIgjenArray : [];
+};
+
+const erEøsPeriode = (
+  periode: PeriodeSoker | AnnenforelderUttakEøsPeriode,
+): periode is AnnenforelderUttakEøsPeriode => {
+  // Adjust this based on a property unique to AnnenforelderUttakEøsPeriode
+  return 'trekkdager' in periode;
 };
 
 const hentApTekst = (
@@ -145,6 +154,7 @@ const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): Perio
 
 interface Props {
   perioderSøker: PeriodeSoker[];
+  perioderAnnenpart: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[];
   behandling: Behandling;
   uttaksresultat: Uttaksresultat;
   valgtPeriodeIndex: number;
@@ -161,6 +171,7 @@ interface Props {
 
 export const UttakPeriodePanel = ({
   perioderSøker,
+  perioderAnnenpart,
   behandling,
   uttaksresultat,
   valgtPeriodeIndex,
@@ -179,14 +190,16 @@ export const UttakPeriodePanel = ({
   const [visModal, setVisModal] = useState(false);
   const toggleVisningAvModal = () => setVisModal(verdi => !verdi);
 
-  const { perioderAnnenpart } = uttaksresultat;
-
   const allePerioder = perioderAnnenpart.concat(perioderSøker);
   const valgtPeriode = allePerioder[valgtPeriodeIndex];
 
   const erHovedsøkersPeriode = valgtPeriodeIndex + 1 > perioderAnnenpart.length;
+  const erValgtPeriodeEøsPeriode = erEøsPeriode(valgtPeriode);
 
   const splittPeriode = (dato: string) => {
+    if (erEøsPeriode(valgtPeriode)) {
+      return;
+    }
     const periode1 = lagPeriode(valgtPeriode, valgtPeriode.fom, dato);
     const periode2 = lagPeriode(valgtPeriode, dayjs(dato).add(1, 'days').format('YYYY-MM-DD'), valgtPeriode.tom);
     oppdaterPeriode([periode1, periode2]);
@@ -197,7 +210,7 @@ export const UttakPeriodePanel = ({
 
   const harSoktOmFlerbarnsdager = erHovedsøkersPeriode
     ? perioderSøker.some(p => p.flerbarnsdager)
-    : perioderAnnenpart.some(p => p.flerbarnsdager);
+    : perioderAnnenpart.some(p => !erEøsPeriode(p) && p.flerbarnsdager);
 
   const erRevurderingFørEndringsdato =
     behandling.type === BehandlingType.REVURDERING && valgtPeriode.tom < endringsdato;
@@ -215,9 +228,9 @@ export const UttakPeriodePanel = ({
         <HStack align="center" justify="space-between">
           <Label size="small">
             <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-            {!!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
+            {!erValgtPeriodeEøsPeriode && !!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
           </Label>
-          {!isReadOnly && erHovedsøkersPeriode && !erRevurderingFørEndringsdato && (
+          {!isReadOnly && erHovedsøkersPeriode && !erValgtPeriodeEøsPeriode && !erRevurderingFørEndringsdato && (
             <>
               <Button
                 size="xsmall"
@@ -272,29 +285,34 @@ export const UttakPeriodePanel = ({
             />
           </HStack>
         </HStack>
-        {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
-          <AksjonspunktHelpTextHTML>
-            {hentApTekst(
-              valgtPeriode.manuellBehandlingÅrsak,
-              alleKodeverk,
-              arbeidsgiverOpplysningerPerId,
-              uttakStonadskontoer,
-              valgtPeriode.periodeType,
+        {erValgtPeriodeEøsPeriode && <UttakPeriodeInfoEØS valgtPeriode={valgtPeriode} alleKodeverk={alleKodeverk} />}
+        {!erValgtPeriodeEøsPeriode && (
+          <>
+            {valgtPeriode.manuellBehandlingÅrsak && valgtPeriode.manuellBehandlingÅrsak !== '-' && (
+              <AksjonspunktHelpTextHTML>
+                {hentApTekst(
+                  valgtPeriode.manuellBehandlingÅrsak,
+                  alleKodeverk,
+                  arbeidsgiverOpplysningerPerId,
+                  uttakStonadskontoer,
+                  valgtPeriode.periodeType,
+                )}
+              </AksjonspunktHelpTextHTML>
             )}
-          </AksjonspunktHelpTextHTML>
+            <UttakPeriodeForm
+              valgtPeriode={valgtPeriode}
+              oppdaterPeriode={oppdaterPeriode}
+              isReadOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}
+              erHovedsøkersPeriode={erHovedsøkersPeriode}
+              lukkPeriodeVisning={lukkPeriode}
+              alleKodeverk={alleKodeverk}
+              årsakFilter={uttaksresultat.årsakFilter}
+              arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+              harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
+              erTilknyttetStortinget={erTilknyttetStortinget}
+            />
+          </>
         )}
-        <UttakPeriodeForm
-          valgtPeriode={valgtPeriode}
-          oppdaterPeriode={oppdaterPeriode}
-          isReadOnly={isReadOnly || !erHovedsøkersPeriode || erRevurderingFørEndringsdato}
-          erHovedsøkersPeriode={erHovedsøkersPeriode}
-          lukkPeriodeVisning={lukkPeriode}
-          alleKodeverk={alleKodeverk}
-          årsakFilter={uttaksresultat.årsakFilter}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          harSoktOmFlerbarnsdager={harSoktOmFlerbarnsdager}
-          erTilknyttetStortinget={erTilknyttetStortinget}
-        />
       </VStack>
     </Box.New>
   );

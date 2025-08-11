@@ -47,7 +47,7 @@ export const finnAntallUkerOgDager = (saldo: number): { uker: number; dager: num
 
 interface Props {
   stønadskonto: Stonadskonto;
-  visDagerForKonto: (stønadskontotype: string) => void;
+  visDagerForKonto: (stønadskonto: Stonadskonto) => void;
   aktiv?: boolean;
 }
 
@@ -55,7 +55,7 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
   const fordelteDager = finnAntallUkerOgDager(stønadskonto.saldo);
   const kontonavnTekst = finnKorrektLabelForKvote(stønadskonto.stonadskontotype);
 
-  const velgKonto = () => visDagerForKonto(stønadskonto.stonadskontotype);
+  const velgKonto = () => visDagerForKonto(stønadskonto);
 
   const uker = Math.floor(stønadskonto.maxDager / 5);
 
