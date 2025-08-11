@@ -915,19 +915,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/config-helpers@npm:^0.3.0":
-  version: 0.3.0
-  resolution: "@eslint/config-helpers@npm:0.3.0"
-  checksum: d4fe8242ef580806ddaa88309f4bb2d3e6be5524cc6d6197675106c6d048f766a3f9cdc2e8e33bbc97a123065792cac8314fc85ac2b3cf72610e8df59301d63a
+"@eslint/config-helpers@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@eslint/config-helpers@npm:0.3.1"
+  checksum: b95c239264078a430761afb344402d517134289a7d8b69a6ff1378ebe5eec9da6ad22b5e6d193b9e02899aeda30817ac47178d5927247092cc6d73a52f8d07c9
   languageName: node
   linkType: hard
 
-"@eslint/core@npm:^0.15.0, @eslint/core@npm:^0.15.1":
-  version: 0.15.1
-  resolution: "@eslint/core@npm:0.15.1"
+"@eslint/core@npm:^0.15.2":
+  version: 0.15.2
+  resolution: "@eslint/core@npm:0.15.2"
   dependencies:
     "@types/json-schema": ^7.0.15
-  checksum: 9215f00466d60764453466604443a491b0ea8263c148836fef723354d6ef1d550991e931d3df2780c99cee2cab14c4f41f97d5341ab12a8443236c961bb6f664
+  checksum: 535fc4e657760851826ceae325a72dde664b99189bd975715de3526db655c66d7a35b72dbb1c7641ab9201ed4e2130f79c5be51f96c820b5407c3766dcf94f23
   languageName: node
   linkType: hard
 
@@ -955,6 +955,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@eslint/js@npm:9.33.0":
+  version: 9.33.0
+  resolution: "@eslint/js@npm:9.33.0"
+  checksum: b3cd3cd42884059850d73caadf5c28cd3256bd80cf7d85b91b12ba3a7e7711593f3b6594dbd6a9b6212b8d5da6e89dd6c18e1720c15e4468def5e1a9e36cb4fa
+  languageName: node
+  linkType: hard
+
 "@eslint/object-schema@npm:^2.1.6":
   version: 2.1.6
   resolution: "@eslint/object-schema@npm:2.1.6"
@@ -962,13 +969,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/plugin-kit@npm:^0.3.4":
-  version: 0.3.4
-  resolution: "@eslint/plugin-kit@npm:0.3.4"
+"@eslint/plugin-kit@npm:^0.3.5":
+  version: 0.3.5
+  resolution: "@eslint/plugin-kit@npm:0.3.5"
   dependencies:
-    "@eslint/core": ^0.15.1
+    "@eslint/core": ^0.15.2
     levn: ^0.4.1
-  checksum: 9dd448926e90c9ae0eb4332c5a2e1b80733ceeecb4d487bb131ca26404ad5af706b262e3c76a5b81f7980c0dfc975c5b9e4ef715676e0e4c48e66f0d7bac83b2
+  checksum: 1808d7e2538335b8e4536ef372840e93468ecc6f4a5bf72ad665795290b6a8a72f51ef4ffd8bcfc601b133a5d5f67b59ab256d945f8c825c5c307aad29efaf86
   languageName: node
   linkType: hard
 
@@ -1671,7 +1678,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     fast-glob: 3.3.3
     react: 19.1.1
     react-hook-form: 7.62.0
@@ -1712,7 +1719,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -1745,7 +1752,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -1780,7 +1787,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -1813,7 +1820,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     classnames: 2.5.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     lodash: ^4.17.21
     react: 19.1.1
     react-hook-form: 7.62.0
@@ -1851,7 +1858,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -1885,7 +1892,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -1922,7 +1929,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -1958,7 +1965,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -1997,7 +2004,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2035,7 +2042,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2071,7 +2078,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-dom: 19.1.1
     react-hook-form: 7.62.0
@@ -2110,7 +2117,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2148,7 +2155,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2187,7 +2194,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     fast-glob: 3.3.3
     react: 19.1.1
     react-dom: 19.1.1
@@ -2228,7 +2235,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2267,7 +2274,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2304,7 +2311,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2330,7 +2337,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -2451,7 +2458,7 @@ __metadata:
     classnames: 2.5.1
     core-js: 3.45.0
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     history: 5.3.0
     ky: 1.8.2
     msw: 2.10.4
@@ -2496,7 +2503,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     ky: 1.8.2
     msw: 2.10.4
     msw-storybook-addon: 2.0.5
@@ -2517,7 +2524,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    eslint: 9.32.0
+    eslint: 9.33.0
     typescript: 5.9.2
   languageName: unknown
   linkType: soft
@@ -2528,7 +2535,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    eslint: 9.32.0
+    eslint: 9.33.0
     typescript: 5.9.2
   languageName: unknown
   linkType: soft
@@ -2560,7 +2567,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     "@types/lodash.debounce": 4.0.9
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     history: 5.3.0
     ky: 1.8.2
     lodash.debounce: 4.0.8
@@ -2600,7 +2607,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
     echarts: 6.0.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2639,7 +2646,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     ky: 1.8.2
     msw: 2.10.4
     msw-storybook-addon: 2.0.5
@@ -2677,7 +2684,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2713,7 +2720,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2744,7 +2751,7 @@ __metadata:
     "@navikt/ft-utils": 3.7.1
     "@storybook/react": 9.1.1
     "@storybook/react-vite": 9.1.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2772,7 +2779,7 @@ __metadata:
     "@storybook/react-vite": 9.1.1
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -2799,7 +2806,7 @@ __metadata:
     "@storybook/react-vite": 9.1.1
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -2827,7 +2834,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -2853,7 +2860,7 @@ __metadata:
     "@storybook/react-vite": 9.1.1
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -2880,7 +2887,7 @@ __metadata:
     "@navikt/ft-form-validators": 4.1.1
     "@navikt/ft-ui-komponenter": 6.0.1
     "@navikt/ft-utils": 3.7.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2914,7 +2921,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2954,7 +2961,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -2991,7 +2998,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3029,7 +3036,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3066,7 +3073,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3100,7 +3107,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-dom: 19.1.1
     react-intl: 7.1.11
@@ -3138,7 +3145,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3176,7 +3183,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3211,7 +3218,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3243,7 +3250,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -3290,7 +3297,7 @@ __metadata:
     dayjs: 1.11.13
     editorjs-html: 4.0.5
     editorjs-undo: 2.0.28
-    eslint: 9.32.0
+    eslint: 9.33.0
     lodash.debounce: 4.0.8
     react: 19.1.1
     react-hook-form: 7.62.0
@@ -3326,7 +3333,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3360,7 +3367,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3394,7 +3401,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3428,7 +3435,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3464,7 +3471,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-dom: 19.1.1
     react-hook-form: 7.62.0
@@ -3503,7 +3510,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3540,7 +3547,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3576,7 +3583,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3612,7 +3619,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3643,7 +3650,7 @@ __metadata:
     "@storybook/react-vite": 9.1.1
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -3675,7 +3682,7 @@ __metadata:
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -3705,7 +3712,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -3735,7 +3742,7 @@ __metadata:
     "@storybook/react-vite": 9.1.1
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -3764,7 +3771,7 @@ __metadata:
     "@storybook/react-vite": 9.1.1
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -3793,7 +3800,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     history: 5.3.0
     react: 19.1.1
     react-intl: 7.1.11
@@ -3819,7 +3826,7 @@ __metadata:
     "@storybook/react-vite": 9.1.1
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -3853,7 +3860,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     classnames: 2.5.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3881,7 +3888,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -3911,7 +3918,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3944,7 +3951,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -3972,7 +3979,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -4002,7 +4009,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -4031,7 +4038,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -4062,7 +4069,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -4094,7 +4101,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -4129,7 +4136,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-dom: 19.1.1
     react-hook-form: 7.62.0
@@ -4164,7 +4171,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
@@ -4202,7 +4209,7 @@ __metadata:
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     history: 5.3.0
     react: 19.1.1
     react-hook-form: 7.62.0
@@ -4230,7 +4237,7 @@ __metadata:
     "@storybook/react-vite": 9.1.1
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -4260,7 +4267,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     storybook: 9.1.1
@@ -4284,7 +4291,7 @@ __metadata:
     "@storybook/react": 9.1.1
     "@tanstack/react-query": 5.84.1
     "@tanstack/react-query-devtools": 5.84.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     react-router-dom: 7.8.0
@@ -4304,7 +4311,7 @@ __metadata:
     "@navikt/ft-fakta-beregning": 12.0.1
     "@navikt/ft-fakta-fordel-beregningsgrunnlag": 13.0.1
     "@navikt/ft-prosess-beregningsgrunnlag": 11.0.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     typescript: 5.9.2
   languageName: unknown
   linkType: soft
@@ -4316,7 +4323,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
-    eslint: 9.32.0
+    eslint: 9.33.0
     typescript: 5.9.2
   languageName: unknown
   linkType: soft
@@ -4331,7 +4338,7 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-konstanter": "workspace:^"
     "@navikt/fp-utils": "workspace:^"
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     typescript: 5.9.2
   languageName: unknown
@@ -4355,7 +4362,7 @@ __metadata:
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
-    eslint: 9.32.0
+    eslint: 9.33.0
     fast-glob: 3.3.3
     react: 19.1.1
     react-intl: 7.1.11
@@ -4372,7 +4379,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    eslint: 9.32.0
+    eslint: 9.33.0
     react: 19.1.1
     react-intl: 7.1.11
     typescript: 5.9.2
@@ -4392,7 +4399,7 @@ __metadata:
     "@navikt/ft-form-validators": 4.1.1
     "@navikt/ft-utils": 3.7.1
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     history: 5.3.0
     react: 19.1.1
     typescript: 5.9.2
@@ -5772,74 +5779,74 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli-darwin@npm:2.51.0"
+"@sentry/cli-darwin@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli-darwin@npm:2.51.1"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli-linux-arm64@npm:2.51.0"
+"@sentry/cli-linux-arm64@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli-linux-arm64@npm:2.51.1"
   conditions: (os=linux | os=freebsd | os=android) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli-linux-arm@npm:2.51.0"
+"@sentry/cli-linux-arm@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli-linux-arm@npm:2.51.1"
   conditions: (os=linux | os=freebsd | os=android) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli-linux-i686@npm:2.51.0"
+"@sentry/cli-linux-i686@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli-linux-i686@npm:2.51.1"
   conditions: (os=linux | os=freebsd | os=android) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli-linux-x64@npm:2.51.0"
+"@sentry/cli-linux-x64@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli-linux-x64@npm:2.51.1"
   conditions: (os=linux | os=freebsd | os=android) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-arm64@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli-win32-arm64@npm:2.51.0"
+"@sentry/cli-win32-arm64@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli-win32-arm64@npm:2.51.1"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli-win32-i686@npm:2.51.0"
+"@sentry/cli-win32-i686@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli-win32-i686@npm:2.51.1"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli-win32-x64@npm:2.51.0"
+"@sentry/cli-win32-x64@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli-win32-x64@npm:2.51.1"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.51.0":
-  version: 2.51.0
-  resolution: "@sentry/cli@npm:2.51.0"
+"@sentry/cli@npm:2.51.1":
+  version: 2.51.1
+  resolution: "@sentry/cli@npm:2.51.1"
   dependencies:
-    "@sentry/cli-darwin": 2.51.0
-    "@sentry/cli-linux-arm": 2.51.0
-    "@sentry/cli-linux-arm64": 2.51.0
-    "@sentry/cli-linux-i686": 2.51.0
-    "@sentry/cli-linux-x64": 2.51.0
-    "@sentry/cli-win32-arm64": 2.51.0
-    "@sentry/cli-win32-i686": 2.51.0
-    "@sentry/cli-win32-x64": 2.51.0
+    "@sentry/cli-darwin": 2.51.1
+    "@sentry/cli-linux-arm": 2.51.1
+    "@sentry/cli-linux-arm64": 2.51.1
+    "@sentry/cli-linux-i686": 2.51.1
+    "@sentry/cli-linux-x64": 2.51.1
+    "@sentry/cli-win32-arm64": 2.51.1
+    "@sentry/cli-win32-i686": 2.51.1
+    "@sentry/cli-win32-x64": 2.51.1
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
     progress: ^2.0.3
@@ -5864,7 +5871,7 @@ __metadata:
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: bd2a4a79d47804ca30e1923c8c17c32bc9246d22970cbf224686e7a637b98d2f37ea0b33cc4771d3e2f47b2778d5d75d8fb77b304c6d4cca5c9b8ac69ed7eb0e
+  checksum: 836475b5877b15653db223c5463431893a23634c8e83aab346f0b899e026a315c54f6c2e020159716b27172b8c1589eb5fa2732fa2eaa37c8a248da3de69124b
   languageName: node
   linkType: hard
 
@@ -7556,10 +7563,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^5.4.1":
-  version: 5.4.1
-  resolution: "chalk@npm:5.4.1"
-  checksum: 0c656f30b782fed4d99198825c0860158901f449a6b12b818b0aabad27ec970389e7e8767d0e00762175b23620c812e70c4fd92c0210e55fc2d993638b74e86e
+"chalk@npm:^5.5.0":
+  version: 5.5.0
+  resolution: "chalk@npm:5.5.0"
+  checksum: 00788e9f072477be4fbefa13c46ab0a078be4bdf598b807cc62ea89f7850902b020bbcafabd7855e3d8ef0ff409ec761e5094c93404cca7fb63c372525d2b4a4
   languageName: node
   linkType: hard
 
@@ -9062,18 +9069,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:9.32.0":
-  version: 9.32.0
-  resolution: "eslint@npm:9.32.0"
+"eslint@npm:9.33.0":
+  version: 9.33.0
+  resolution: "eslint@npm:9.33.0"
   dependencies:
     "@eslint-community/eslint-utils": ^4.2.0
     "@eslint-community/regexpp": ^4.12.1
     "@eslint/config-array": ^0.21.0
-    "@eslint/config-helpers": ^0.3.0
-    "@eslint/core": ^0.15.0
+    "@eslint/config-helpers": ^0.3.1
+    "@eslint/core": ^0.15.2
     "@eslint/eslintrc": ^3.3.1
-    "@eslint/js": 9.32.0
-    "@eslint/plugin-kit": ^0.3.4
+    "@eslint/js": 9.33.0
+    "@eslint/plugin-kit": ^0.3.5
     "@humanfs/node": ^0.16.6
     "@humanwhocodes/module-importer": ^1.0.1
     "@humanwhocodes/retry": ^0.4.2
@@ -9108,7 +9115,7 @@ __metadata:
       optional: true
   bin:
     eslint: bin/eslint.js
-  checksum: 66b7d6cb1dec65e343b7a79238615fd446f5eed250f96b5896737dcdf3675f86a9529ddabe183d9c330ee8f70a04cbd3dde5dc57aac6e2530f18dff8b770c7ee
+  checksum: 1d383c3f294b8f0cedb20d06139b26fb22b80365f093f9ee8d24bc7e4377f6d9ad52478917e9d583f2cccf16cca85eee1624a9dcc7d3bdc0a5fa2b62c044882b
   languageName: node
   linkType: hard
 
@@ -9578,7 +9585,7 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@navikt/aksel-stylelint": 7.26.0
-    "@sentry/cli": 2.51.0
+    "@sentry/cli": 2.51.1
     "@storybook/addon-a11y": 9.1.1
     "@storybook/addon-links": 9.1.1
     "@storybook/react": 9.1.1
@@ -9592,7 +9599,7 @@ __metadata:
     jsdom: 26.1.0
     knip: ^5.62.0
     lerna: 8.2.3
-    lint-staged: 16.1.4
+    lint-staged: 16.1.5
     prettier: 3.6.2
     shelljs: 0.10.0
     stylelint: 16.23.1
@@ -11402,11 +11409,11 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lint-staged@npm:16.1.4":
-  version: 16.1.4
-  resolution: "lint-staged@npm:16.1.4"
+"lint-staged@npm:16.1.5":
+  version: 16.1.5
+  resolution: "lint-staged@npm:16.1.5"
   dependencies:
-    chalk: ^5.4.1
+    chalk: ^5.5.0
     commander: ^14.0.0
     debug: ^4.4.1
     lilconfig: ^3.1.3
@@ -11415,10 +11422,10 @@ __metadata:
     nano-spawn: ^1.0.2
     pidtree: ^0.6.0
     string-argv: ^0.3.2
-    yaml: ^2.8.0
+    yaml: ^2.8.1
   bin:
     lint-staged: bin/lint-staged.js
-  checksum: f6b63bfec697cc06ea4e0cc3aad4519f15935b7064633ef3f46b8efc7271526bd3bc9bc9f008cc38f1dd4976f2f90a6697fefc401e5bce3ded7a32b8aea2761c
+  checksum: 992d13bc29491227b4bdb7a1b28edbb5367f6dcec54258a28460662531bf19a701e386b56325c4c7f6f0809a4d1fd81f5a61d34df05a4caad6f5f41dce56456c
   languageName: node
   linkType: hard
 
@@ -16285,12 +16292,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"yaml@npm:^2.8.0":
-  version: 2.8.0
-  resolution: "yaml@npm:2.8.0"
+"yaml@npm:^2.8.1":
+  version: 2.8.1
+  resolution: "yaml@npm:2.8.1"
   bin:
     yaml: bin.mjs
-  checksum: 66f103ca5a2f02dac0526895cc7ae7626d91aa8c43aad6fdcff15edf68b1199be4012140b390063877913441aaa5288fdf57eca30e06268a8282dd741525e626
+  checksum: 35b46150d48bc1da2fd5b1521a48a4fa36d68deaabe496f3c3fa9646d5796b6b974f3930a02c4b5aee6c85c860d7d7f79009416724465e835f40b87898c36de4
   languageName: node
   linkType: hard
 
