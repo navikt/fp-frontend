@@ -4,10 +4,12 @@
 
 .container {
   background-color: var(--ax-bg-neutral-soft);
-  border-bottom-color: var(--ax-neutral-400);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  border-bottom: 1px solid var(--ax-neutral-400);
   padding: 16px;
+}
+
+:global(.dark) .container {
+  border-bottom: 1px solid var(--ax-neutral-700);
 }
 
 .grayout {
