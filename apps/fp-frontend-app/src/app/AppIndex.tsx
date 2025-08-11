@@ -160,8 +160,7 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
     } else if (error.response.status === 504 || error.response.status === 404) {
       addErrorMessage({
         type: ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
-        //@ts-expect-error Fiks
-        location: error.response?.config?.url,
+        location: error.response.url,
       });
     } else {
       try {
