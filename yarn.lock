@@ -955,6 +955,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@eslint/js@npm:9.33.0":
+  version: 9.33.0
+  resolution: "@eslint/js@npm:9.33.0"
+  checksum: b3cd3cd42884059850d73caadf5c28cd3256bd80cf7d85b91b12ba3a7e7711593f3b6594dbd6a9b6212b8d5da6e89dd6c18e1720c15e4468def5e1a9e36cb4fa
+  languageName: node
+  linkType: hard
+
 "@eslint/object-schema@npm:^2.1.6":
   version: 2.1.6
   resolution: "@eslint/object-schema@npm:2.1.6"
@@ -1608,7 +1615,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-config-eslint@workspace:packages/config/eslint"
   dependencies:
-    "@eslint/js": 9.32.0
+    "@eslint/js": 9.33.0
     eslint-config-prettier: 10.1.8
     eslint-plugin-import: 2.32.0
     eslint-plugin-jsx-a11y: 6.10.2
@@ -2443,8 +2450,8 @@ __metadata:
     "@storybook/addon-a11y": 9.1.1
     "@storybook/react": 9.1.1
     "@storybook/react-vite": 9.1.1
-    "@tanstack/react-query": 5.84.1
-    "@tanstack/react-query-devtools": 5.84.1
+    "@tanstack/react-query": 5.84.2
+    "@tanstack/react-query-devtools": 5.84.2
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2491,7 +2498,7 @@ __metadata:
     "@navikt/ft-utils": 3.7.1
     "@storybook/react": 9.1.1
     "@storybook/react-vite": 9.1.1
-    "@tanstack/react-query": 5.84.1
+    "@tanstack/react-query": 5.84.2
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2554,7 +2561,7 @@ __metadata:
     "@navikt/ft-utils": 3.7.1
     "@storybook/react": 9.1.1
     "@storybook/react-vite": 9.1.1
-    "@tanstack/react-query": 5.84.1
+    "@tanstack/react-query": 5.84.2
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -2634,7 +2641,7 @@ __metadata:
     "@navikt/ft-utils": 3.7.1
     "@storybook/react": 9.1.1
     "@storybook/react-vite": 9.1.1
-    "@tanstack/react-query": 5.84.1
+    "@tanstack/react-query": 5.84.2
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -4282,8 +4289,8 @@ __metadata:
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@storybook/react": 9.1.1
-    "@tanstack/react-query": 5.84.1
-    "@tanstack/react-query-devtools": 5.84.1
+    "@tanstack/react-query": 5.84.2
+    "@tanstack/react-query-devtools": 5.84.2
     eslint: 9.32.0
     react: 19.1.1
     react-intl: 7.1.11
@@ -6063,26 +6070,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:5.84.1":
-  version: 5.84.1
-  resolution: "@tanstack/react-query-devtools@npm:5.84.1"
+"@tanstack/react-query-devtools@npm:5.84.2":
+  version: 5.84.2
+  resolution: "@tanstack/react-query-devtools@npm:5.84.2"
   dependencies:
     "@tanstack/query-devtools": 5.84.0
   peerDependencies:
-    "@tanstack/react-query": ^5.84.1
+    "@tanstack/react-query": ^5.84.2
     react: ^18 || ^19
-  checksum: 82f8e8ffbf92eb96c13d019ea9e04fa946dcb9154e62215925c23e2865ab04c43e1b717470445bf846418138be837dcc164ebef9b43571ef4d0e4cb694e77332
+  checksum: 0f45418f3d6179e23c889b5a9abeba4877bced00fbda842682101e1e6cc06be47a30095149d7c8f882ef1d47d92c889373016749681208a2c94c5522324075d9
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:5.84.1":
-  version: 5.84.1
-  resolution: "@tanstack/react-query@npm:5.84.1"
+"@tanstack/react-query@npm:5.84.2":
+  version: 5.84.2
+  resolution: "@tanstack/react-query@npm:5.84.2"
   dependencies:
     "@tanstack/query-core": 5.83.1
   peerDependencies:
     react: ^18 || ^19
-  checksum: 5bd03ab95f97243f00a831e50f5f0675f47d0b293de6583bbd9396907c7eeb1af0f8a4cbaf09b88a0d7f52af8ca5d9af3db0221cc5b6ece61fc2932cc1646403
+  checksum: 1284bced0c7acf74a443b359f94cb4700a2ec32dbd2a2a6f9e877eefe0b40e0c76d1cb5bfa2fe04aadac1ba7eae156e4f58b9c6ab70151f6c08492f4c32d4329
   languageName: node
   linkType: hard
 
