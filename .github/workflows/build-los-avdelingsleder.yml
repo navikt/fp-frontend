@@ -1,0 +1,54 @@
+name: Bygg og deploy los-avdelingsleder
+on:
+  push:
+    branches:
+      - '**'
+    paths-ignore:
+      - '**.md'
+      - '**.MD'
+      - '.gitignore'
+      - '.editorconfig'
+      - 'LICENCE'
+      - 'CODEOWNERS'
+
+jobs:
+  build-app:
+    name: Build
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    uses: navikt/fp-gha-workflows/.github/workflows/build-app-frontend-yarn.yml@main
+    with:
+      runs-on: 'ubuntu-latest-8-cores'
+      node-version: '22.17.1'
+      build-image: ${{ github.ref_name == 'master' }} # default: true
+      push-image: ${{ github.ref_name == 'master' }} # default: false
+      run-knip: true
+    secrets: inherit
+
+  deploy-dev:
+    name: Deploy dev
+    permissions:
+      id-token: write
+    if: github.ref_name == 'master'
+    needs: build-app
+    uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@main
+    with:
+      gar: true
+      image: ${{ needs.build-app.outputs.build-version }}
+      cluster: dev-gcp
+    secrets: inherit
+
+  deploy-prod:
+    name: Deploy prod
+    permissions:
+      id-token: write
+    if: github.ref_name == 'master'
+    needs: [build-app, deploy-dev]
+    uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@main
+    with:
+      gar: true
+      image: ${{ needs.build-app.outputs.build-version }}
+      cluster: prod-gcp
+    secrets: inherit
