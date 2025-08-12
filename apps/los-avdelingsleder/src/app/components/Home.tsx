@@ -21,7 +21,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
   return (
     <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
       <Routes>
-        <Route path="/avdelingsleder" element={<AvdelingslederIndex navAnsatt={navAnsatt} />} />
+        <Route path="/" element={<AvdelingslederIndex navAnsatt={navAnsatt} />} />
         <Route path="*" element={<NotFoundPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />} />
       </Routes>
     </div>
