@@ -6,7 +6,7 @@ import { Heading } from '@navikt/ds-react';
 import { useMutation } from '@tanstack/react-query';
 
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
-import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder';
+import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder-old';
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import type { NavAnsatt } from '@navikt/fp-types';

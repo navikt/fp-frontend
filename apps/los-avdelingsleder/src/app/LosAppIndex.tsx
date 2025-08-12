@@ -17,9 +17,16 @@ import { initFetchOptions } from '../data/fplosAvdelingslederApi';
 import { Dekorator } from './components/Dekorator';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { Home } from './components/Home';
-import { PollingTimeoutError } from './components/pollingUtils';
+
+import '../globalCss/global.module.css';
 
 import messages from '../../i18n/nb_NO.json';
+
+import '@navikt/ds-css/darkside';
+import '@navikt/ds-css-internal';
+import '@navikt/ft-form-hooks/dist/style.css';
+import '@navikt/ft-plattform-komponenter/dist/style.css';
+import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const EMPTY_ARRAY = new Array<FpError>();
 
@@ -45,7 +52,6 @@ const LosAppIndex = () => {
   const [theme, setTheme] = useState<ComponentProps<typeof Theme>['theme']>('light');
 
   const initFetchQuery = useQuery(initFetchOptions());
-  const navAnsatt = initFetchQuery.data?.innloggetBruker;
 
   const location = useLocation();
 
@@ -69,9 +75,11 @@ const LosAppIndex = () => {
   const hasForbiddenOrUnauthorizedErrors = hasForbiddenErrors || hasUnauthorizedErrors;
   const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
 
-  if (initFetchQuery.isPending) {
+  if (initFetchQuery.isPending || !initFetchQuery.data) {
     return <LoadingPanel />;
   }
+
+  const navAnsatt = initFetchQuery.data.innloggetBruker;
 
   return (
     <Theme theme={theme}>
@@ -83,6 +91,7 @@ const LosAppIndex = () => {
           crashMessage={crashMessage}
           theme={theme}
           setTheme={setTheme}
+          navAnsatt={navAnsatt}
         />
         <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
           {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
@@ -136,9 +145,7 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
   // eslint-disable-next-line no-console
   console.log(error);
 
-  if (error instanceof PollingTimeoutError) {
-    addErrorMessage({ type: ErrorType.POLLING_TIMEOUT, message: error.message, location: error.location });
-  } else if (error instanceof HTTPError) {
+  if (error instanceof HTTPError) {
     if (error.response.status === 403) {
       addErrorMessage({ type: ErrorType.REQUEST_FORBIDDEN, message: error.message });
     } else if (error.response.status === 401) {

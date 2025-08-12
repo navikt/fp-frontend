@@ -4,16 +4,13 @@ import { useNavigate } from 'react-router-dom';
 
 import type { Theme } from '@navikt/ds-react';
 import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
-import { useQuery } from '@tanstack/react-query';
 
 import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
-import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
-import { notEmpty } from '@navikt/fp-utils';
+import { DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
+import type { NavAnsatt } from '@navikt/fp-types';
 
 import { ErrorType, type FpError } from '../../data/error/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../../data/error/RestApiErrorContext';
-import { initFetchOptions } from '../../data/fagsakApi';
-import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
 
 type QueryStrings = {
   errorcode?: string;
@@ -27,6 +24,7 @@ interface Props {
   hideErrorMessages?: boolean;
   theme: ComponentProps<typeof Theme>['theme'];
   setTheme: (theme: ComponentProps<typeof Theme>['theme']) => void;
+  navAnsatt: NavAnsatt;
 }
 
 export const Dekorator = ({
@@ -36,14 +34,12 @@ export const Dekorator = ({
   hideErrorMessages = false,
   theme,
   setTheme,
+  navAnsatt,
 }: Props) => {
   const intl = useIntl();
 
   const errorMessages = useRestApiError();
   const { removeErrorMessages } = useRestApiErrorDispatcher();
-
-  const initFetchQuery = useQuery(initFetchOptions());
-  const { innloggetBruker: navAnsatt } = notEmpty(initFetchQuery.data);
 
   const navigate = useNavigate();
   const visLos = (e: React.SyntheticEvent) => {
@@ -55,40 +51,6 @@ export const Dekorator = ({
     }
     e.preventDefault();
   };
-  const visAvdelingslederside = (e: React.SyntheticEvent) => {
-    navigate(AVDELINGSLEDER_PATH);
-    e.preventDefault();
-  };
-
-  const visJournalføringside = (e: React.SyntheticEvent) => {
-    navigate(JOURNALFØRING_PATH);
-    e.preventDefault();
-  };
-
-  const visUtbetalingsdataSide = (e: React.SyntheticEvent) => {
-    navigate(UTBETALINGSDATA_PATH);
-    e.preventDefault();
-  };
-
-  const { kanOppgavestyre, kanSaksbehandle } = navAnsatt;
-
-  const interneLenker = new Array<DekoratorLenke>();
-  if (kanOppgavestyre) {
-    interneLenker.push({
-      tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
-      callback: (e: React.SyntheticEvent) => visAvdelingslederside(e),
-    });
-  }
-  if (kanSaksbehandle) {
-    interneLenker.push({
-      tekst: intl.formatMessage({ id: 'Dekorator.Journalforing' }),
-      callback: (e: React.SyntheticEvent) => visJournalføringside(e),
-    });
-  }
-  interneLenker.push({
-    tekst: intl.formatMessage({ id: 'Dekorator.Utbetalingsdata' }),
-    callback: (e: React.SyntheticEvent) => visUtbetalingsdataSide(e),
-  });
 
   const eksterneLenker = [
     {
@@ -109,7 +71,7 @@ export const Dekorator = ({
       feilmeldinger={hideErrorMessages ? [] : formaterFeilmeldinger(intl, errorMessages, queryStrings, crashMessage)}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
-      interneLenker={interneLenker}
+      interneLenker={[]}
       eksterneLenker={eksterneLenker}
       theme={theme}
       setTheme={setTheme}
