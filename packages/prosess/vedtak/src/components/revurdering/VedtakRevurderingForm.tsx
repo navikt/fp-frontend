@@ -8,12 +8,12 @@ import { dateFormat } from '@navikt/ft-utils';
 import {
   AksjonspunktKode,
   BehandlingArsakType,
-  DokumentMalType,
   FagsakYtelseType,
   isAvslag,
   isInnvilget,
   isOpphor,
   KonsekvensForYtelsen,
+  VedtakbrevType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
@@ -239,7 +239,7 @@ export const VedtakRevurderingForm = ({
   const { harRedigertBrev } = useVedtakEditeringContext();
 
   const [harValgtÅRedigereVedtaksbrev, setHarValgtÅRedigereVedtaksbrev] = useState(
-    harRedigertBrev || behandling.behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
+    harRedigertBrev || behandling.behandlingsresultat?.vedtaksbrev === VedtakbrevType.FRITEKST,
   );
 
   const { behandlingsresultat, språkkode, aksjonspunkt, behandlingÅrsaker } = behandling;
