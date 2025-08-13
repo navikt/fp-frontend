@@ -29,7 +29,7 @@ interface Props {
   customVilkarOppfyltText: string | ReactElement;
   readOnly: boolean;
   skalKunneInnvilge?: boolean;
-  validatorsForRadioOptions?: ((value: string | number) => string | undefined | null)[];
+  validatorsForRadioOptions?: ((value: boolean) => string | null | undefined)[];
 }
 
 const sorterAvslagsArsaker = (
@@ -70,6 +70,7 @@ export const VilkarResultPicker = ({
         <RhfRadioGroup
           name="erVilkarOk"
           control={control}
+          // @ts-expect-error Fiks denne!
           validate={radioValidators}
           isReadOnly={readOnly}
           isTrueOrFalseSelection
