@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -41,6 +41,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '1',
     andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
+    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
   },
 ] satisfies Oppgave[];
 
