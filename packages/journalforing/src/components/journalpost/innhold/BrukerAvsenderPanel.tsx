@@ -93,8 +93,7 @@ export const BrukerAvsenderPanel = ({
 
   const oppdaterMedBrukerKlikk = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      // @ts-expect-error Fiks!
-      const fnr = e.target?.value;
+      const fnr = e.currentTarget.value;
       forhåndsvisSøker(fnr);
     }
   };

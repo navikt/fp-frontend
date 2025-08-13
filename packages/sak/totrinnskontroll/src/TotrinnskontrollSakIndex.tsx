@@ -98,20 +98,22 @@ export const TotrinnskontrollSakIndex = ({
   const submitHandler = (values: FormValues) => {
     const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning.map(apData => ({
       aksjonspunktKode: apData.aksjonspunktKode,
-      godkjent: apData.totrinnskontrollGodkjent,
+      godkjent: !!apData.totrinnskontrollGodkjent,
       begrunnelse: apData.besluttersBegrunnelse,
       arsaker: getArsaker(apData),
     }));
 
-    const kode = erTilbakekreving ? AksjonspunktKodeTilbakekreving.FATTER_VEDTAK : AksjonspunktKode.FATTER_VEDTAK;
+    const kode = erTilbakekreving
+      ? (AksjonspunktKodeTilbakekreving.FATTER_VEDTAK as const)
+      : (AksjonspunktKode.FATTER_VEDTAK as const);
     const fatterVedtakAksjonspunktDto = {
       '@type': kode,
-      begrunnelse: null,
+      kode,
+      begrunnelse: undefined,
       aksjonspunktGodkjenningDtos,
     };
 
     return onSubmit({
-      // @ts-expect-error Fiks denne!
       fatterVedtakAksjonspunktDto,
       erAlleAksjonspunktGodkjent: values.aksjonspunktGodkjenning.every(ap => ap.totrinnskontrollGodkjent),
     });

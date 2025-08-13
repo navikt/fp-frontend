@@ -371,7 +371,7 @@ export const UttakPeriodeForm = ({
             periodeTyper={alleKodeverk['UttakPeriodeType']}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             aktiviteter={sorterteAktiviteter}
-            erOppfylt={erOppfylt}
+            erOppfylt={!!erOppfylt}
             valgtPeriode={valgtPeriode}
           />
         )}

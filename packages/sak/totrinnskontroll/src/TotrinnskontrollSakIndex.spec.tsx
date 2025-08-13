@@ -47,7 +47,8 @@ describe('TotrinnskontrollSakIndex', () => {
             godkjent: true,
           },
         ],
-        begrunnelse: null,
+        begrunnelse: undefined,
+        kode: '5016',
       },
     });
   });
@@ -93,7 +94,8 @@ describe('TotrinnskontrollSakIndex', () => {
             godkjent: false,
           },
         ],
-        begrunnelse: null,
+        begrunnelse: undefined,
+        kode: '5016',
       },
     });
   });
