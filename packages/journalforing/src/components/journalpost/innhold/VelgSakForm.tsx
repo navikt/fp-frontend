@@ -27,6 +27,7 @@ const selectFieldName = 'ytelsetypeValg';
 type RadioOption = {
   label: ReactElement;
   value: string;
+  disabled: boolean;
 };
 
 const ytelseSelectValg: FagsakYtelseType[] = [
@@ -134,14 +135,14 @@ export const VelgSakForm = ({
       )}
       <VStack gap="space-32">
         <VStack gap="space-16">
-          <RhfRadioGroupNew
-            name={radioFieldName}
-            control={formMethods.control}
-            disabled={!erKlarForJournalføring}
-            validate={[required]}
-          >
+          <RhfRadioGroupNew name={radioFieldName} control={formMethods.control} validate={[required]}>
             {lagRadioOptions(journalpost).map(option => (
-              <Radio key={option.value} value={option.value} size="small">
+              <Radio
+                key={option.value}
+                value={option.value}
+                size="small"
+                disabled={!erKlarForJournalføring || option.disabled}
+              >
                 {option.label}
               </Radio>
             ))}

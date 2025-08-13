@@ -49,17 +49,19 @@ export const TrueFalseInput = <T extends FieldValues>({
           validate={isRequired ? [required] : []}
           isReadOnly={readOnly}
         >
-          <HStack gap="space-16">
-            <Radio value={true} size="small">
-              {trueLabel ?? intl.formatMessage({ id: 'Registrering.Yes' })}
-            </Radio>
-            <Radio value={false} size="small">
-              {falseLabel ?? intl.formatMessage({ id: 'Registrering.No' })}
-            </Radio>
-          </HStack>
+          <>
+            <HStack gap="space-16">
+              <Radio value={true} size="small">
+                {trueLabel ?? intl.formatMessage({ id: 'Registrering.Yes' })}
+              </Radio>
+              <Radio value={false} size="small">
+                {falseLabel ?? intl.formatMessage({ id: 'Registrering.No' })}
+              </Radio>
+            </HStack>
+            {value === true && trueContent}
+            {value === false && falseContent}
+          </>
         </RhfRadioGroupNew>
-        {value === true && trueContent}
-        {value === false && falseContent}
       </VStack>
     );
   }
