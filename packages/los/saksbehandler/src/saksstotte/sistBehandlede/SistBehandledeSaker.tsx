@@ -108,7 +108,7 @@ const StatusIcon = ({ oppgave }: { oppgave: Oppgave }) => {
     return <CheckmarkCircleIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-success-500)" />;
   }
   if (oppgave.oppgaveBehandlingStatus === OppgaveBehandlingStatus.PÅ_VENT) {
-    return <HourglassTopFilledIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-neutral-500)" />;
+    return <HourglassTopFilledIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-success-500)" />;
   }
   if (oppgave.oppgaveBehandlingStatus === OppgaveBehandlingStatus.RETURNERT_FRA_BESLUTTER) {
     return <ArrowCirclepathIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-warning-500)" />;
