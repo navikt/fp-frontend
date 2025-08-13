@@ -169,7 +169,6 @@ const getFritekstMessage = (brevmalkode?: string): string =>
 // TODO (TOR) Bør erstattast av ein markør fra backend
 const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
   brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
-  brevmalkode === DokumentMalType.FRITEKST ||
   brevmalkode === DokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
   brevmalkode === DokumentMalType.VARSEL_OM_TILBAKEKREVING ||
   brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||

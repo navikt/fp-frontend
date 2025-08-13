@@ -58,6 +58,7 @@
   "SistBehandledeSaker.Soker": "Søker",
   "SistBehandledeSaker.Saksnr": "Saksnr",
   "SistBehandledeSaker.Status": "Status",
+  "SistBehandledeSaker.ErReservert": "Reservert",
 
   "NyeOgFerdigstilteOppgaverForIdagPanel.NyeOgFerdigstilte": "Nye og ferdigstilte behandlinger",
   "NyeOgFerdigstilteOppgaverForIdagPanel.IDag": "For i dag",
