@@ -2201,6 +2201,45 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@navikt/fp-fakta-uttak-eos@workspace:packages/fakta/uttak-eøs":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-fakta-uttak-eos@workspace:packages/fakta/uttak-eøs"
+  dependencies:
+    "@navikt/aksel-icons": 7.26.0
+    "@navikt/ds-css": 7.26.0
+    "@navikt/ds-react": 7.26.0
+    "@navikt/fp-config-eslint": "workspace:*"
+    "@navikt/fp-config-typescript": "workspace:*"
+    "@navikt/fp-config-vite": "workspace:*"
+    "@navikt/fp-fakta-felles": "workspace:*"
+    "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
+    "@navikt/fp-types": "workspace:*"
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-utils": "workspace:*"
+    "@navikt/ft-form-hooks": 9.0.1
+    "@navikt/ft-form-validators": 4.1.0
+    "@navikt/ft-ui-komponenter": 6.0.1
+    "@navikt/ft-utils": 3.7.1
+    "@storybook/react": 9.1.1
+    "@storybook/react-vite": 9.1.1
+    "@testing-library/dom": 10.4.1
+    "@testing-library/react": 16.3.0
+    "@testing-library/user-event": 14.6.1
+    classnames: 2.5.1
+    dayjs: 1.11.13
+    eslint: 9.32.0
+    react: 19.1.1
+    react-hook-form: 7.62.0
+    react-intl: 7.1.11
+    storybook: 9.1.1
+    stylelint: 16.23.1
+    typescript: 5.9.2
+    vite: 7.1.1
+    vitest: 3.2.4
+  languageName: unknown
+  linkType: soft
+
 "@navikt/fp-fakta-uttak@workspace:*, @navikt/fp-fakta-uttak@workspace:packages/fakta/uttak":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak@workspace:packages/fakta/uttak"
@@ -4537,6 +4576,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/ft-form-validators@npm:4.1.0":
+  version: 4.1.0
+  resolution: "@navikt/ft-form-validators@npm:4.1.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-validators%2F4.1.0%2Ffa67d8c6d9ec9326517dca02f0b519613c7da474"
+  dependencies:
+    "@navikt/ft-utils": ^3.7.0
+    dayjs: 1.11.13
+  peerDependencies:
+    "@navikt/ft-utils": 2.x
+    dayjs: 1.11.x
+  checksum: cd1bcc1c50773595a09d59da329a8d62c21b3ee655fc8af5e844a8b8c8f80eefc03576029e0348a7f4f0d29981a209f8f72c53e5bf88d8f70582d883ca175d70
+  languageName: node
+  linkType: hard
+
 "@navikt/ft-form-validators@npm:4.1.1, @navikt/ft-form-validators@npm:^4.1.1":
   version: 4.1.1
   resolution: "@navikt/ft-form-validators@npm:4.1.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-validators%2F4.1.1%2Fc42fb946c2fd3271dbe51fc6d7fc4ffdd296902a"
@@ -4738,7 +4790,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/ft-utils@npm:3.7.1, @navikt/ft-utils@npm:^3.7.1":
+"@navikt/ft-utils@npm:3.7.1, @navikt/ft-utils@npm:^3.7.0, @navikt/ft-utils@npm:^3.7.1":
   version: 3.7.1
   resolution: "@navikt/ft-utils@npm:3.7.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-utils%2F3.7.1%2F26ca105dbba38b44b58ac916d931664a5df628bc"
   dependencies:

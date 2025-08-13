@@ -5,6 +5,7 @@ import {
   ArrowLeftIcon,
   ArrowRightIcon,
   DoorOpenIcon,
+  EarthIcon,
   FigureCombinationIcon,
   FigureOutwardFillIcon,
   MinusIcon,
@@ -18,7 +19,7 @@ import {
 } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Timeline, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
-import { calcDaysAndWeeks, ISO_DATE_FORMAT, periodFormat } from '@navikt/ft-utils';
+import { calcDaysAndWeeks, createWeekAndDay, ISO_DATE_FORMAT, periodFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import {
@@ -28,11 +29,17 @@ import {
   RelasjonsRolleType,
   UttakPeriodeType,
 } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, Fagsak, PeriodeSoker } from '@navikt/fp-types';
+import {
+  type AlleKodeverk,
+  type AnnenforelderUttakEøsPeriode,
+  type Fagsak,
+  KjønnkodeEnum,
+  type PeriodeSoker,
+} from '@navikt/fp-types';
 
 export type PeriodeSøkerMedTidslinjedata = {
   id: number;
-  periode: PeriodeSoker;
+  periode: PeriodeSoker | AnnenforelderUttakEøsPeriode;
   hovedsoker: boolean;
   group: number;
 };
@@ -73,7 +80,7 @@ const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslin
 type PeriodeMedStartOgSlutt = {
   start: string;
   end: string;
-  status: 'success' | 'warning' | 'danger';
+  status: 'success' | 'warning' | 'danger' | 'info';
   periodeType: string;
   erGradert: boolean;
   erOpphold: boolean;
@@ -81,7 +88,16 @@ type PeriodeMedStartOgSlutt = {
   begrunnelse?: string;
 } & PeriodeSøkerMedTidslinjedata;
 
-const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'success' | 'warning' | 'danger' => {
+const erEøsPeriode = (periode: PeriodeSoker | AnnenforelderUttakEøsPeriode) => 'trekkdager' in periode;
+
+const getStatus = (
+  periode: PeriodeSoker | AnnenforelderUttakEøsPeriode,
+  tilknyttetStortinget: boolean,
+): 'success' | 'warning' | 'danger' | 'info' => {
+  if (erEøsPeriode(periode)) {
+    return 'info';
+  }
+
   if (periode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
     return 'warning';
   }
@@ -105,7 +121,10 @@ const getStatus = (periode: PeriodeSoker, tilknyttetStortinget: boolean): 'succe
   return 'danger';
 };
 
-const finnPeriodeType = (valgtPeriode: PeriodeSoker): string => {
+const finnPeriodeType = (valgtPeriode: PeriodeSoker | AnnenforelderUttakEøsPeriode): string => {
+  if (erEøsPeriode(valgtPeriode)) {
+    return valgtPeriode.trekkonto;
+  }
   const kontoIkkeSatt =
     valgtPeriode.aktiviteter.length === 0 ||
     (!valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-');
@@ -124,10 +143,12 @@ const formatPaneler = (
     end: periode.periode.tom,
     status: getStatus(periode.periode, tilknyttetStortinget),
     periodeType: finnPeriodeType(periode.periode),
-    erGradert: !!periode.periode.gradertAktivitet && !!periode.periode.graderingInnvilget,
-    erOpphold: periode.periode.oppholdÅrsak !== OppholdArsakType.UDEFINERT,
-    harUtsettelse: periode.periode.utsettelseType !== '-',
-    begrunnelse: periode.periode.begrunnelse,
+    erGradert: erEøsPeriode(periode.periode)
+      ? false
+      : !!periode.periode.gradertAktivitet && !!periode.periode.graderingInnvilget,
+    erOpphold: erEøsPeriode(periode.periode) ? false : periode.periode.oppholdÅrsak !== OppholdArsakType.UDEFINERT,
+    harUtsettelse: erEøsPeriode(periode.periode) ? false : periode.periode.utsettelseType !== '-',
+    begrunnelse: erEøsPeriode(periode.periode) ? '' : periode.periode.begrunnelse,
   }));
 
 const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
@@ -145,7 +166,7 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
 };
 
 const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
-  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
+  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : rolleAnnenpart(fagsak);
   if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
     return <FigureOutwardFillIcon width={20} height={20} color="var(--ax-danger-300)" />;
   }
@@ -222,11 +243,33 @@ const finnLabelForPeriode = (
   intl: IntlShape,
 ): ReactElement => {
   const periodeString = periodFormat(periode.start, periode.end);
-  const dager = calcDaysAndWeeks(periode.start, periode.end).formattedString;
 
   let periodeType = '';
   if (periode.periodeType !== '-' && periode.periodeType !== '') {
     periodeType = intl.formatMessage({ id: PERIODE_TYPE_LABEL_MAP[periode.periodeType] });
+  }
+  if (erEøsPeriode(periode.periode)) {
+    const trekkdager = periode.periode.trekkdager;
+    return (
+      <VStack>
+        <BodyShort>
+          <FormattedMessage id="UttakTidslinje.Stonadskonto" values={{ periodeType: periodeType || '-' }} />
+        </BodyShort>
+        <BodyShort>
+          <FormattedMessage id="UttakTidslinje.Periode" values={{ periodeString }} />
+        </BodyShort>
+        <VStack gap="2">
+          <BodyShort>
+            <FormattedMessage
+              id="UttakTidslinje.Trekkdager"
+              values={{
+                trekkdager: createWeekAndDay(Math.floor(trekkdager / 5), trekkdager % 5).formattedString,
+              }}
+            />
+          </BodyShort>
+        </VStack>
+      </VStack>
+    );
   }
 
   let type = '';
@@ -238,6 +281,7 @@ const finnLabelForPeriode = (
     type = intl.formatMessage({ id: 'UttakTidslinje.OppholdPeriode' });
   }
 
+  const dager = calcDaysAndWeeks(periode.start, periode.end).formattedString;
   const manueltEndret =
     periode.begrunnelse && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK
       ? intl.formatMessage({ id: 'UttakTidslinje.ManueltEditert' })
@@ -263,6 +307,9 @@ const finnLabelForPeriode = (
 };
 
 const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKode: string) => {
+  if (erEøsPeriode(periode.periode)) {
+    return <EarthIcon />;
+  }
   if (periode.erGradert) {
     return <PercentIcon />;
   }
@@ -277,8 +324,21 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
 
 const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
   const kodeverk = alleKodeverk['RelasjonsRolleType'];
-  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : fagsak.annenpartBehandling!.relasjonsRolleType;
+  if (!erHovedsøker && !fagsak.annenpartBehandling?.relasjonsRolleType) {
+    const rrType =
+      fagsak.relasjonsRolleType === RelasjonsRolleType.FAR ? RelasjonsRolleType.MOR : RelasjonsRolleType.FAR;
+    return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
+  }
+  const rrType = erHovedsøker ? fagsak.relasjonsRolleType : rolleAnnenpart(fagsak);
   return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
+};
+
+const rolleAnnenpart = (fagsak: Fagsak) => {
+  if (fagsak.relasjonsRolleType === RelasjonsRolleType.MOR) {
+    const kjønnAnnenpart = fagsak.annenPart!.kjønn;
+    return kjønnAnnenpart === KjønnkodeEnum.KVINNE ? RelasjonsRolleType.MEDMOR : RelasjonsRolleType.FAR;
+  }
+  return RelasjonsRolleType.MOR;
 };
 
 interface TidslinjeProps {

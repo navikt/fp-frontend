@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 import { BehandlingType, OppholdArsakType, SoknadType, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
+  AnnenforelderUttakEøsPeriode,
   Behandling,
   Fagsak,
   FamilieHendelse,
@@ -99,7 +100,7 @@ const finnTidslinjeTider = (
 const leggTidslinjedataTilPeriode = (
   erHovedsøker: boolean,
   hovedsøkerPerioder: PeriodeSoker[],
-  annenpartPerioder: PeriodeSoker[],
+  annenpartPerioder: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[],
 ): PeriodeSøkerMedTidslinjedata[] => {
   const perioder = erHovedsøker ? hovedsøkerPerioder : annenpartPerioder;
 
@@ -132,7 +133,7 @@ interface Props {
   søknad: Soknad;
   personoversikt: Personoversikt;
   perioderSøker: PeriodeSoker[];
-  perioderAnnenpart: PeriodeSoker[];
+  perioderAnnenpart: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[];
   valgtPeriodeIndex: number | undefined;
   familiehendelse: FamilieHendelseSamling;
   endringsdato: string;

@@ -13,6 +13,7 @@ import type { AksjonspunktVerdier } from '@navikt/fp-prosess-klagevurdering';
 import type { AvklartRisikoklassifiseringAp } from '@navikt/fp-sak-risikoklassifisering';
 import type {
   AnkeVurdering,
+  AnnenforelderUttakEøsPeriode,
   ApiLink,
   ArbeidOgInntektsmelding,
   ArbeidsgiverOpplysningerWrapper,
@@ -180,6 +181,7 @@ export const BehandlingRel = {
   STONADSKONTOER_GITT_UTTAKSPERIODER: 'lagre-stonadskontoer-gitt-uttaksperioder',
   DOKUMENTASJON_VURDERING_BEHOV: 'uttak-vurder-dokumentasjon',
   UTTAK_KONTROLLER_FAKTA_PERIODER_V2: 'uttak-kontroller-fakta-perioder-v2',
+  UTTAK_ANNEN_FORELDER_EOS: 'uttak-annen-forelder-eos',
   FAKTA_ARBEIDSFORHOLD: 'fakta-arbeidsforhold',
   FAMILIEHENDELSE_ORIGINAL_BEHANDLING: 'familiehendelse-original-behandling',
   SOKNAD_ORIGINAL_BEHANDLING: 'soknad-original-behandling',
@@ -468,6 +470,15 @@ const getUttakKontrollerFaktaPerioderOptions = (links: ApiLink[]) => (behandling
     staleTime: Infinity,
   });
 
+const getUttakAnnenpartEøsOptions = (links: ApiLink[]) => (behandling: Behandling) =>
+  queryOptions({
+    queryKey: [BehandlingRel.UTTAK_ANNEN_FORELDER_EOS, behandling.uuid, behandling.versjon],
+    queryFn: () =>
+      kyExtended.get(getUrlFromRel('UTTAK_ANNEN_FORELDER_EOS', links)).json<AnnenforelderUttakEøsPeriode[]>(),
+    enabled: harLenke(behandling, 'UTTAK_ANNEN_FORELDER_EOS'),
+    staleTime: Infinity,
+  });
+
 const getFaktaArbeidsforholdOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.FAKTA_ARBEIDSFORHOLD, behandling.uuid, behandling.versjon],
@@ -745,6 +756,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     opptjeningOptions: getOpptjeningOptions(links),
     dokumentasjonVurderingBehovOptions: getDokumentasjonVurderingBehovOptions(links),
     uttakKontrollerFaktaPerioderOptions: getUttakKontrollerFaktaPerioderOptions(links),
+    uttakAnnenpartEøsOptions: getUttakAnnenpartEøsOptions(links),
     faktaArbeidsforholdOptions: getFaktaArbeidsforholdOptions(links),
     familiehendelseOrigninalBehandlingOptions: getFamiliehendelseOrigninalBehandlingOptions(links),
     søknadOriginalBehandlingOptions: getSøknadOriginalBehandlingOptions(links),
