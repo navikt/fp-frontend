@@ -2,8 +2,8 @@ import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { BodyShort, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -29,7 +29,7 @@ interface Props {
   customVilkarOppfyltText: string | ReactElement;
   readOnly: boolean;
   skalKunneInnvilge?: boolean;
-  validatorsForRadioOptions?: ((value: boolean) => string | null | undefined)[];
+  validatorsForRadioOptions?: ((value: string | number | boolean) => string | null | undefined)[];
 }
 
 const sorterAvslagsArsaker = (
@@ -67,25 +67,14 @@ export const VilkarResultPicker = ({
       )}
 
       {(!readOnly || erVilkarOk === undefined) && (
-        <RhfRadioGroup
-          name="erVilkarOk"
-          control={control}
-          // @ts-expect-error Fiks denne!
-          validate={radioValidators}
-          isReadOnly={readOnly}
-          isTrueOrFalseSelection
-          radios={[
-            {
-              value: 'true',
-              label: customVilkarOppfyltText,
-              disabled: !skalKunneInnvilge,
-            },
-            {
-              value: 'false',
-              label: customVilkarIkkeOppfyltText,
-            },
-          ]}
-        />
+        <RhfRadioGroupNew name="erVilkarOk" control={control} validate={radioValidators} isReadOnly={readOnly}>
+          <Radio value={true} size="small" disabled={!skalKunneInnvilge}>
+            {customVilkarOppfyltText}
+          </Radio>
+          <Radio value={false} size="small">
+            {customVilkarIkkeOppfyltText}
+          </Radio>
+        </RhfRadioGroupNew>
       )}
       {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
         <RhfSelect

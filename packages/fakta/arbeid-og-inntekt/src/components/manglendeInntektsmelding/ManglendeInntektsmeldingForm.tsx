@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
@@ -79,22 +79,7 @@ export const ManglendeInntektsmeldingForm = ({
   const svgRef = useRef<SVGSVGElement>(null);
   const [openState, setOpenState] = useState(false);
   const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
-  const radioOptions = [
-    {
-      label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.TarKontakt' }),
-      value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
-    },
-    {
-      label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.GåVidere' }),
-      value: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
-    },
-  ];
-  if (!radData.erPrivatPerson) {
-    radioOptions.splice(1, 0, {
-      label: intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.MeldingArbeidsgiverNavNo' }),
-      value: ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO,
-    });
-  }
+
   return (
     <RhfForm formMethods={formMethods} onSubmit={lagre}>
       <VStack gap="space-16">
@@ -105,7 +90,7 @@ export const ManglendeInntektsmeldingForm = ({
             </Alert>
           </div>
         )}
-        <RhfRadioGroup
+        <RhfRadioGroupNew
           name="saksbehandlersVurdering"
           control={formMethods.control}
           label={
@@ -141,8 +126,24 @@ export const ManglendeInntektsmeldingForm = ({
           }
           validate={[required]}
           isReadOnly={isReadOnly}
-          radios={radioOptions}
-        />
+        >
+          <VStack gap="space-2">
+            <Radio
+              value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
+              size="small"
+            >
+              <FormattedMessage id="InntektsmeldingInnhentesForm.TarKontakt" />
+            </Radio>
+            {!radData.erPrivatPerson && (
+              <Radio value={ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO} size="small">
+                <FormattedMessage id="InntektsmeldingInnhentesForm.MeldingArbeidsgiverNavNo" />
+              </Radio>
+            )}
+            <Radio value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING} size="small">
+              <FormattedMessage id="InntektsmeldingInnhentesForm.GåVidere" />
+            </Radio>
+          </VStack>
+        </RhfRadioGroupNew>
         <RhfTextarea
           name="begrunnelse"
           control={formMethods.control}

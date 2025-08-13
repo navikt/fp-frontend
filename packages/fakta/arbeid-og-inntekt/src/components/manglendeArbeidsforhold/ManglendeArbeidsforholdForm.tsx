@@ -3,8 +3,8 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm, RhfRadioGroup, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
+import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfForm, RhfRadioGroupNew, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -127,7 +127,7 @@ export const ManglendeArbeidsforholdForm = ({
       </div>
       <RhfForm formMethods={formMethods} onSubmit={lagre}>
         <VStack gap="space-16">
-          <RhfRadioGroup
+          <RhfRadioGroupNew
             name="saksbehandlersVurdering"
             control={formMethods.control}
             label={
@@ -155,21 +155,20 @@ export const ManglendeArbeidsforholdForm = ({
             }
             validate={[required]}
             isReadOnly={isReadOnly}
-            radios={[
-              {
-                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' }),
-                value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
-              },
-              {
-                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' }),
-                value: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-              },
-              {
-                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' }),
-                value: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-              },
-            ]}
-          />
+          >
+            <Radio
+              value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD}
+              size="small"
+            >
+              <FormattedMessage id="ManglendeOpplysningerForm.TarKontakt" />
+            </Radio>
+            <Radio value={ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING} size="small">
+              <FormattedMessage id="ManglendeOpplysningerForm.GåVidere" />
+            </Radio>
+            <Radio value={ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING} size="small">
+              <FormattedMessage id="ManglendeOpplysningerForm.OpprettArbeidsforhold" />
+            </Radio>
+          </RhfRadioGroupNew>
           {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
             <HStack gap="space-16">
               <RhfDatepicker

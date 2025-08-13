@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Box, Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { BodyShort, Box, Detail, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -164,24 +164,16 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
             <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
           </VStack>
         </HStack>
-        <RhfRadioGroup
-          name="erVilkarOk"
-          control={formMethods.control}
-          validate={[required]}
-          isReadOnly={isReadOnly}
-          isHorizontal
-          isTrueOrFalseSelection
-          radios={[
-            {
-              value: 'true',
-              label: <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: BTag }} />,
-            },
-            {
-              value: 'false',
-              label: <FormattedMessage id={findRadioButtonTextCode(false)} values={{ b: BTag }} />,
-            },
-          ]}
-        />
+        <RhfRadioGroupNew name="erVilkarOk" control={formMethods.control} validate={[required]} isReadOnly={isReadOnly}>
+          <HStack gap="space-16">
+            <Radio value={true} size="small">
+              <FormattedMessage id={findRadioButtonTextCode(true)} values={{ b: BTag }} />
+            </Radio>
+            <Radio value={false} size="small">
+              <FormattedMessage id={findRadioButtonTextCode(false)} values={{ b: BTag }} />
+            </Radio>
+          </HStack>
+        </RhfRadioGroupNew>
         {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
           <BodyShort size="small">
             {alleKodeverk['Avslagsårsak'][VilkarType.SOKNADFRISTVILKARET].find(

@@ -3,8 +3,8 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Link, Tooltip, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { BodyShort, HStack, Link, Radio, Tooltip, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -35,6 +35,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
   const { watch, control } = useFormContext<FeilutbetalingFormValues>();
 
   const varseltekst = watch('varseltekst');
+  const videreBehandling = watch('videreBehandling');
 
   const isForeldrepenger = fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER;
 
@@ -57,69 +58,67 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
         maxLength={1500}
         readOnly={readOnly}
       />
-      <RhfRadioGroup
+      <RhfRadioGroupNew
         name="videreBehandling"
         control={control}
         label={<FormattedMessage id="Simulering.videreBehandling" />}
         validate={[required]}
         isReadOnly={readOnly}
-        radios={[
-          {
-            value: TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
-            label: <FormattedMessage id="Simulering.gjennomfør" />,
-            element: (
-              <div className={styles.varsel}>
-                <ArrowBox alignOffset={20}>
-                  <VStack gap="space-16">
-                    <HStack gap="space-8">
-                      <BodyShort size="small" className={styles.bold}>
-                        <FormattedMessage id="Simulering.varseltekst" />
-                      </BodyShort>
-                      <Tooltip
-                        content={
-                          isForeldrepenger
-                            ? intl.formatMessage({ id: 'Simulering.HjelpetekstForeldrepenger' })
-                            : intl.formatMessage({ id: 'Simulering.HjelpetekstEngangsstonad' })
-                        }
-                      >
-                        <QuestionmarkDiamondIcon className={styles.helpTextImage} />
-                      </Tooltip>
-                    </HStack>
-                    <RhfTextarea
-                      name="varseltekst"
-                      control={control}
-                      label={intl.formatMessage({ id: 'Simulering.fritekst' })}
-                      validate={[required, minLength3, maxLength1500, hasValidText]}
-                      maxLength={1500}
-                      readOnly={readOnly}
-                      parse={formaterFritekst}
-                      badges={[
-                        {
-                          type: 'info',
-                          titleText: getLanguageFromSprakkode(språkkode),
-                        },
-                      ]}
-                    />
-                    {!readOnly && (
-                      <Link href="#" onClick={previewMessage}>
-                        <FormattedMessage id="Messages.PreviewText" />
-                      </Link>
-                    )}
-                  </VStack>
-                </ArrowBox>
-              </div>
-            ),
-          },
-          {
-            value: `${TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT}${IKKE_SEND}`,
-            label: <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />,
-          },
-          {
-            value: TilbakekrevingVidereBehandling.TILBAKEKR_IGNORER,
-            label: <FormattedMessage id="Simulering.avvent" />,
-          },
-        ]}
-      />
+      >
+        <VStack gap="space-2">
+          <Radio value={TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT} size="small">
+            <FormattedMessage id="Simulering.gjennomfør" />
+          </Radio>
+          {videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT && (
+            <div className={styles.varsel}>
+              <ArrowBox alignOffset={20}>
+                <VStack gap="space-16">
+                  <HStack gap="space-8">
+                    <BodyShort size="small" className={styles.bold}>
+                      <FormattedMessage id="Simulering.varseltekst" />
+                    </BodyShort>
+                    <Tooltip
+                      content={
+                        isForeldrepenger
+                          ? intl.formatMessage({ id: 'Simulering.HjelpetekstForeldrepenger' })
+                          : intl.formatMessage({ id: 'Simulering.HjelpetekstEngangsstonad' })
+                      }
+                    >
+                      <QuestionmarkDiamondIcon className={styles.helpTextImage} />
+                    </Tooltip>
+                  </HStack>
+                  <RhfTextarea
+                    name="varseltekst"
+                    control={control}
+                    label={intl.formatMessage({ id: 'Simulering.fritekst' })}
+                    validate={[required, minLength3, maxLength1500, hasValidText]}
+                    maxLength={1500}
+                    readOnly={readOnly}
+                    parse={formaterFritekst}
+                    badges={[
+                      {
+                        type: 'info',
+                        titleText: getLanguageFromSprakkode(språkkode),
+                      },
+                    ]}
+                  />
+                  {!readOnly && (
+                    <Link href="#" onClick={previewMessage}>
+                      <FormattedMessage id="Messages.PreviewText" />
+                    </Link>
+                  )}
+                </VStack>
+              </ArrowBox>
+            </div>
+          )}
+          <Radio value={`${TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT}${IKKE_SEND}`} size="small">
+            <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />
+          </Radio>
+          <Radio value={TilbakekrevingVidereBehandling.TILBAKEKR_IGNORER} size="small">
+            <FormattedMessage id="Simulering.avvent" />
+          </Radio>
+        </VStack>
+      </RhfRadioGroupNew>
     </VStack>
   );
 };

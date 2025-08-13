@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
-import { Heading, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Heading, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
@@ -32,26 +32,17 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.Sprak' })}
         </Heading>
-        <RhfRadioGroup
-          name="språkkode"
-          control={control}
-          validate={[required]}
-          isReadOnly={readOnly}
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' }),
-              value: sprakvalg.BOKMAL,
-            },
-            {
-              label: intl.formatMessage({ id: 'Registrering.Sprak.Nynorsk' }),
-              value: sprakvalg.NYNORSK,
-            },
-            {
-              label: intl.formatMessage({ id: 'Registrering.Sprak.Engelsk' }),
-              value: sprakvalg.ENGELSK,
-            },
-          ]}
-        />
+        <RhfRadioGroupNew name="språkkode" control={control} validate={[required]} isReadOnly={readOnly}>
+          <Radio value={sprakvalg.BOKMAL} size="small">
+            {intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' })}
+          </Radio>
+          <Radio value={sprakvalg.NYNORSK} size="small">
+            {intl.formatMessage({ id: 'Registrering.Sprak.Nynorsk' })}
+          </Radio>
+          <Radio value={sprakvalg.ENGELSK} size="small">
+            {intl.formatMessage({ id: 'Registrering.Sprak.Engelsk' })}
+          </Radio>
+        </RhfRadioGroupNew>
       </VStack>
     </BorderBox>
   );

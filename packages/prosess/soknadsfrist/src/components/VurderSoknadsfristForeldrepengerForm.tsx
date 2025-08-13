@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Box, Detail, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { BodyShort, Box, Detail, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat, periodFormat } from '@navikt/ft-utils';
@@ -130,25 +130,22 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
         <div className={styles.marginTop}>
           <VStack gap="space-16">
             <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-            <RhfRadioGroup
+            <RhfRadioGroupNew
               name="gyldigSenFremsetting"
               control={formMethods.control}
               validate={[required]}
               isReadOnly={isReadOnly}
-              isHorizontal
               isEdited={isEdited(aksjonspunkterForPanel.length > 0, gyldigSenFremsetting)}
-              isTrueOrFalseSelection
-              radios={[
-                {
-                  value: 'true',
-                  label: <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigGrunn" />,
-                },
-                {
-                  value: 'false',
-                  label: <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />,
-                },
-              ]}
-            />
+            >
+              <HStack gap="space-16">
+                <Radio value={true} size="small">
+                  <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigGrunn" />
+                </Radio>
+                <Radio value={false} size="small">
+                  <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />
+                </Radio>
+              </HStack>
+            </RhfRadioGroupNew>
             {gyldigSenFremsetting && (
               <ArrowBox>
                 <RhfDatepicker

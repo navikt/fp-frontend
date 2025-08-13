@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
-import { RawIntlProvider } from 'react-intl';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -39,7 +39,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
   return (
     <RawIntlProvider value={intl}>
       <VStack gap={readOnly ? '2' : '6'}>
-        <RhfRadioGroup
+        <RhfRadioGroupNew
           name="vurdering"
           control={control}
           label={
@@ -47,8 +47,13 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
           }
           validate={[required]}
           isReadOnly={readOnly}
-          radios={lagVurderingsAlternativer(ytelse, erForutgående, erRevurdering)}
-        />
+        >
+          {lagVurderingsAlternativer(ytelse, erForutgående, erRevurdering).map(option => (
+            <Radio key={option.value} value={option.value} size="small">
+              <FormattedMessage id={option.label} />
+            </Radio>
+          ))}
+        </RhfRadioGroupNew>
         {vurdering && [MedlemskapVurdering.DELVIS_OPPFYLT, MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) && (
           <RhfSelect
             name="avslagskode"

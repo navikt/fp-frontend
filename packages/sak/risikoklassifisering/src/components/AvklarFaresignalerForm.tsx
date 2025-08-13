@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Button, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { Button, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -69,44 +69,41 @@ export const AvklarFaresignalerForm = ({
           maxLength={1500}
           readOnly={readOnly}
         />
-        <RhfRadioGroup
+        <RhfRadioGroupNew
           name={VURDERING_HOVEDKATEGORI}
           control={formMethods.control}
           label={<FormattedMessage id="Risikopanel.RhfForm.Resultat" />}
           validate={[required]}
           isReadOnly={readOnly}
-          radios={[
-            {
-              value: FaresignalVurdering.INNVIRKNING,
-              label:
-                faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INNVIRKNING)?.navn ?? '',
-              element: (
-                <div style={{ paddingTop: '15px' }}>
-                  {harValgtReelle && (
-                    <ArrowBox alignOffset={20}>
-                      <RhfRadioGroup
-                        name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
-                        control={formMethods.control}
-                        validate={[required]}
-                        isReadOnly={readOnly}
-                        radios={underkategoriFaresignalVurderinger.map(vurdering => ({
-                          value: vurdering.kode,
-                          label: vurdering.navn,
-                        }))}
-                      />
-                    </ArrowBox>
-                  )}
-                </div>
-              ),
-            },
-            {
-              value: FaresignalVurdering.INGEN_INNVIRKNING,
-              label:
-                faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INGEN_INNVIRKNING)
-                  ?.navn ?? '',
-            },
-          ]}
-        />
+        >
+          <VStack gap="space-2">
+            <Radio value={FaresignalVurdering.INNVIRKNING} size="small">
+              {faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INNVIRKNING)?.navn ?? ''}
+            </Radio>
+            {harValgtReelle && (
+              <div style={{ paddingTop: '15px' }}>
+                <ArrowBox alignOffset={20}>
+                  <RhfRadioGroupNew
+                    name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
+                    control={formMethods.control}
+                    validate={[required]}
+                    isReadOnly={readOnly}
+                  >
+                    {underkategoriFaresignalVurderinger.map(vurdering => (
+                      <Radio key={vurdering.kode} value={vurdering.kode} size="small">
+                        {vurdering.navn}
+                      </Radio>
+                    ))}
+                  </RhfRadioGroupNew>
+                </ArrowBox>
+              </div>
+            )}
+          </VStack>
+          <Radio value={FaresignalVurdering.INGEN_INNVIRKNING} size="small">
+            {faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INGEN_INNVIRKNING)?.navn ??
+              ''}
+          </Radio>
+        </RhfRadioGroupNew>
         <div>
           <Button
             size="small"

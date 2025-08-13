@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
@@ -195,26 +195,23 @@ export const ValgtAktivitetForm = ({
             ferdiglignetNæring={ferdiglignetNæring}
           />
           {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
-            <RhfRadioGroup
+            <RhfRadioGroupNew
               name="erGodkjent"
               control={formMethods.control}
               hideLegend
               validate={[required]}
               isReadOnly={readOnly}
               isEdited={erEndret}
-              isHorizontal
-              isTrueOrFalseSelection
-              radios={[
-                {
-                  label: intl.formatMessage({ id: 'ActivityPanel.Godkjent' }),
-                  value: 'true',
-                },
-                {
-                  label: <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: BTag }} />,
-                  value: 'false',
-                },
-              ]}
-            />
+            >
+              <HStack gap="space-16">
+                <Radio value={true} size="small">
+                  <FormattedMessage id="ActivityPanel.Godkjent" />
+                </Radio>
+                <Radio value={false} size="small">
+                  <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: BTag }} />
+                </Radio>
+              </HStack>
+            </RhfRadioGroupNew>
           )}
           <RhfTextarea
             name="begrunnelse"
