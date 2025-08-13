@@ -13,10 +13,17 @@ on:
         options:
           - dev
           - prod
+      app:
+        required: true
+        type: choice
+        description: 'Application to deploy ()'
+        options:
+          - fp-frontend
+          - los-avdelingsleder
 
 jobs:
   deploy:
-    name: Deploy dev
+    name: Deploy
     permissions:
       id-token: write
     uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@main
@@ -24,4 +31,6 @@ jobs:
       gar: true
       image: ${{ inputs.image }}
       cluster: ${{ inputs.environment }}-gcp
+      image_suffix: '/${{ inputs.app }}'
+      deploy_context: '/${{ inputs.app }}'
     secrets: inherit
