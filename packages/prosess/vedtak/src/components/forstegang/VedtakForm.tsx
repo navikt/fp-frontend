@@ -9,11 +9,11 @@ import {
   AksjonspunktKode,
   BehandlingArsakType as klageBehandlingArsakType,
   BehandlingResultatType,
-  DokumentMalType,
   FagsakYtelseType,
   isAvslag,
   isInnvilget,
   isKlageOmgjort,
+  VedtakbrevType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
@@ -196,7 +196,7 @@ export const VedtakForm = ({
   const { harRedigertBrev } = useVedtakEditeringContext();
 
   const [harValgtÅRedigereVedtaksbrev, setHarValgtÅRedigereVedtaksbrev] = useState(
-    harRedigertBrev || behandlingsresultat?.vedtaksbrev === DokumentMalType.FRITEKST,
+    harRedigertBrev || behandlingsresultat?.vedtaksbrev === VedtakbrevType.FRITEKST,
   );
 
   const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker);

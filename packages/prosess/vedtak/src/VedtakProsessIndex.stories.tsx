@@ -16,6 +16,7 @@ import {
   KonsekvensForYtelsen,
   OppgaveType,
   RelasjonsRolleType,
+  VedtakbrevType,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -155,7 +156,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       ...defaultBehandling,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
-        vedtaksbrev: 'FRITEKST',
+        vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
         harRedigertVedtaksbrev: true,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -664,7 +665,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       type: BehandlingType.REVURDERING,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
-        vedtaksbrev: 'FRITEKST',
+        vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -847,7 +848,7 @@ export const LegacyOverstyring: Story = {
       ...defaultBehandling,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
-        vedtaksbrev: 'FRITEKST',
+        vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
@@ -869,7 +870,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
       ...defaultBehandling,
       status: BehandlingStatus.OPPRETTET,
       behandlingsresultat: {
-        vedtaksbrev: 'FRITEKST',
+        vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
