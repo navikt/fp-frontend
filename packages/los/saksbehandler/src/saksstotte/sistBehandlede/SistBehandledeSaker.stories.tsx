@@ -1,11 +1,14 @@
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
+import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
+import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
-import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
-import { LosUrl } from '../../data/fplosSaksbehandlerApi';
+import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
 import { SistBehandledeSaker } from './SistBehandledeSaker';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -19,6 +22,11 @@ const meta = {
   args: {
     åpneFagsak: action('button-click'),
   },
+  render: props => {
+    //Må hente data til cache før testa komponent blir kalla
+    const alleKodeverk = useQuery(losKodeverkOptions()).data;
+    return alleKodeverk ? <SistBehandledeSaker {...props} /> : <LoadingPanel />;
+  },
 } satisfies Meta<typeof SistBehandledeSaker>;
 export default meta;
 
@@ -28,6 +36,7 @@ export const Default: Story = {
   parameters: {
     msw: {
       handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
         http.get(LosUrl.BEHANDLEDE_OPPGAVER, () =>
           HttpResponse.json([
             {
@@ -35,6 +44,11 @@ export const Default: Story = {
               personnummer: '334342323',
               navn: 'Espen Utvikler',
               saksnummer: '13232323',
+              oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+              reservasjonStatus: {
+                erReservert: true,
+                reservertAvNavn: 'Ola Nordmann',
+              },
             } as Oppgave,
           ]),
         ),
@@ -46,7 +60,10 @@ export const Default: Story = {
 export const IngenBehandlinger: Story = {
   parameters: {
     msw: {
-      handlers: [http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json([]))],
+      handlers: [
+        http.get(LosUrl.KODEVERK_LOS, () => HttpResponse.json(alleKodeverkLos)),
+        http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json([])),
+      ],
     },
   },
 };

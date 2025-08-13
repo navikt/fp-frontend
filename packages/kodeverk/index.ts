@@ -104,3 +104,4 @@ export { PeriodeResultatÅrsak } from './src/periodeResultatÅrsak';
 export { GraderingAvslagÅrsak } from './src/graderingAvslagÅrsak';
 export { MedlemskapDekningType } from './src/medlemskapDekningType';
 export { MedlemskapType } from './src/medlemskapType';
+export { OppgaveBehandlingStatus } from './src/oppgaveBehandlingStatus';

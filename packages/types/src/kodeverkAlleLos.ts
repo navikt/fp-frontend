@@ -4,6 +4,7 @@ import type {
   FagsakStatus,
   FagsakYtelseType,
   KøSortering,
+  OppgaveBehandlingStatus,
 } from '@navikt/fp-kodeverk';
 
 //Mapping mellom LosKodeverkType og enums/union-types med verdier
@@ -13,6 +14,7 @@ type KodeverkEnumMap = {
   FagsakYtelseType: FagsakYtelseType;
   KøSortering: KøSortering;
   FagsakStatus: FagsakStatus;
+  OppgaveBehandlingStatus: OppgaveBehandlingStatus;
 };
 
 export type LosKodeverkType = keyof KodeverkEnumMap;
