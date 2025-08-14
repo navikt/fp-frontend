@@ -23,11 +23,13 @@ import '../globalCss/global.module.css';
 
 import messages from '../../i18n/nb_NO.json';
 
-import '@navikt/ds-css/darkside';
 import '@navikt/ds-css-internal';
+import '@navikt/ds-css/darkside';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
+
+const THEME_LOCALE_STORAGE_KEY = 'fp-frontend-theme';
 
 const EMPTY_ARRAY = new Array<FpError>();
 
@@ -56,7 +58,8 @@ export const AppIndexWrapper = () => {
 const AppIndex = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
-  const [theme, setTheme] = useState<ComponentProps<typeof Theme>['theme']>('light');
+
+  const { theme, setTheme } = useThemeFromLocalStorage();
 
   const initFetchQuery = useQuery(initFetchOptions());
   const navAnsatt = initFetchQuery.data?.innloggetBruker;
@@ -173,4 +176,24 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
   } else {
     addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
   }
+};
+
+type Theme = NonNullable<ComponentProps<typeof Theme>['theme']>;
+
+const useThemeFromLocalStorage = () => {
+  const body = document.body;
+
+  const [theme, setTheme] = useState<Theme>(() => {
+    const currentTheme = (localStorage.getItem(THEME_LOCALE_STORAGE_KEY) as Theme) ?? 'light';
+    body.classList.add(currentTheme);
+    return currentTheme;
+  });
+
+  const updateTheme = (newTheme: Theme) => {
+    setTheme(newTheme);
+    body.classList.replace(newTheme === 'dark' ? 'light' : 'dark', newTheme);
+    localStorage.setItem(THEME_LOCALE_STORAGE_KEY, newTheme);
+  };
+
+  return { theme, setTheme: updateTheme };
 };
