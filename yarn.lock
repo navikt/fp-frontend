@@ -1024,31 +1024,34 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/cli-lib@npm:7.4.2":
-  version: 7.4.2
-  resolution: "@formatjs/cli-lib@npm:7.4.2"
+"@formatjs/cli-lib@npm:6.6.6":
+  version: 6.6.6
+  resolution: "@formatjs/cli-lib@npm:6.6.6"
   dependencies:
-    "@formatjs/icu-messageformat-parser": 2.11.2
-    "@formatjs/icu-skeleton-parser": 1.8.14
-    "@formatjs/ts-transformer": 3.14.0
-    "@types/estree": ^1.0.6
-    "@types/fs-extra": ^11.0.4
-    "@types/json-stable-stringify": ^1.1.0
-    "@types/node": ^22.0.0
-    chalk: ^4.1.2
-    commander: ^13
-    fast-glob: ^3.3.2
-    fs-extra: ^11.2.0
-    json-stable-stringify: ^1.1.1
-    loud-rejection: ^2
-    tslib: ^2.8.0
-    typescript: ^5.6.0
+    "@formatjs/icu-messageformat-parser": 2.9.4
+    "@formatjs/icu-skeleton-parser": 1.8.8
+    "@formatjs/ts-transformer": 3.13.23
+    "@types/estree": ^1.0.0
+    "@types/fs-extra": 9 || 10 || 11
+    "@types/json-stable-stringify": 1
+    "@types/node": 14 || 16 || 17 || 18 || 20 || 22
+    chalk: 4
+    commander: 12
+    fast-glob: 3
+    fs-extra: 9 || 10 || 11
+    json-stable-stringify: 1
+    loud-rejection: 2
+    tslib: 2
+    typescript: 5
   peerDependencies:
-    "@glimmer/syntax": ^0.94.9
-    "@vue/compiler-core": ^3.5.12
-    content-tag: ^3.0.0
-    ember-template-recast: ^6.1.5
-    vue: ^3.5.12
+    "@glimmer/env": ^0.1.7
+    "@glimmer/reference": ^0.91.1 || ^0.92.0
+    "@glimmer/syntax": ^0.92.0
+    "@glimmer/validator": ^0.92.0
+    "@vue/compiler-core": ^3.4.0
+    content-tag: ^2.0.1
+    ember-template-recast: ^6.1.4
+    vue: ^3.4.0
   peerDependenciesMeta:
     "@glimmer/env":
       optional: true
@@ -1066,7 +1069,18 @@ __metadata:
       optional: true
     vue:
       optional: true
-  checksum: 3c2c9da5cf665a193c5de30da030cf97938830ce08cf2f3d2aab2ad6609eee37a33c4107843b4673dffcd5013e16c6c08b8af07650b33034dc29dfd7f61fa85d
+  checksum: 792ebc7b74eab8d9245fec86aa1a4321b112d9dacaf41700d6a95618bf61724f6380e6aff1292bb5db57ff325937603a3412b8667d709c38a5901502dad2540c
+  languageName: node
+  linkType: hard
+
+"@formatjs/ecma402-abstract@npm:2.2.4":
+  version: 2.2.4
+  resolution: "@formatjs/ecma402-abstract@npm:2.2.4"
+  dependencies:
+    "@formatjs/fast-memoize": 2.2.3
+    "@formatjs/intl-localematcher": 0.5.8
+    tslib: 2
+  checksum: 48e9ea01b0e1bdf9af9ccd68019b7026bc5e1c43f2cebfad2011504f8de533545bf862c42272f6fbcede13731d78a9cb98aec546fd9bdc52877e9cff5d7ff34d
   languageName: node
   linkType: hard
 
@@ -1079,6 +1093,15 @@ __metadata:
     decimal.js: ^10.4.3
     tslib: ^2.8.0
   checksum: ee41278ab4d587e0c9e82d8ed9d46440297a547fac10eb4bee922c65c99a1cf00db154da02d7c80682bb010222e6fbe5a1cad72d64a94052544e76c9119a7513
+  languageName: node
+  linkType: hard
+
+"@formatjs/fast-memoize@npm:2.2.3":
+  version: 2.2.3
+  resolution: "@formatjs/fast-memoize@npm:2.2.3"
+  dependencies:
+    tslib: 2
+  checksum: a9634acb5e03d051e09881eea5484ab02271f7d6b5f96ae9485674ab3c359aa881bc45fc07a1181ae4b2d6e288dadc169f578d142d698913ebbefa373014cac2
   languageName: node
   linkType: hard
 
@@ -1102,6 +1125,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@formatjs/icu-messageformat-parser@npm:2.9.4":
+  version: 2.9.4
+  resolution: "@formatjs/icu-messageformat-parser@npm:2.9.4"
+  dependencies:
+    "@formatjs/ecma402-abstract": 2.2.4
+    "@formatjs/icu-skeleton-parser": 1.8.8
+    tslib: 2
+  checksum: 8bce7bf5153dd701f6f8159f9ba02bda9a5da9bf1751065dd5a12b03b65f13ea85fdde980bcd89148bfc1b63d5a74bf3eeac98d03af85b5a6911509a8c69702e
+  languageName: node
+  linkType: hard
+
 "@formatjs/icu-skeleton-parser@npm:1.8.14":
   version: 1.8.14
   resolution: "@formatjs/icu-skeleton-parser@npm:1.8.14"
@@ -1109,6 +1143,25 @@ __metadata:
     "@formatjs/ecma402-abstract": 2.3.4
     tslib: ^2.8.0
   checksum: dcce6bdb7952201804bae17270d6a99a6baa780c4657d4bb02d15de08d1c3fd8c904e13bb1ef6ccd6fde68d5a56f22a7ba99be4e92903d4fe050f61bebaa0e8e
+  languageName: node
+  linkType: hard
+
+"@formatjs/icu-skeleton-parser@npm:1.8.8":
+  version: 1.8.8
+  resolution: "@formatjs/icu-skeleton-parser@npm:1.8.8"
+  dependencies:
+    "@formatjs/ecma402-abstract": 2.2.4
+    tslib: 2
+  checksum: 3f966274995fe5f38eca082e08f21373213e68adb9df33d8537ec9c81d1e5893693c17fc3b2a285e038f09e3401b8991fc13d142029bf61eb546e6c6f3b14b43
+  languageName: node
+  linkType: hard
+
+"@formatjs/intl-localematcher@npm:0.5.8":
+  version: 0.5.8
+  resolution: "@formatjs/intl-localematcher@npm:0.5.8"
+  dependencies:
+    tslib: 2
+  checksum: db1a06d6ee929497e73536f9f53e4a8698e0a648fad2fbeec1a32b8786c78627ad996b6da6b8fecb2686bbc6011e09c2a5206742a22f42ef4c5c67b190de760a
   languageName: node
   linkType: hard
 
@@ -1139,23 +1192,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@formatjs/ts-transformer@npm:3.14.0":
-  version: 3.14.0
-  resolution: "@formatjs/ts-transformer@npm:3.14.0"
+"@formatjs/ts-transformer@npm:3.13.23":
+  version: 3.13.23
+  resolution: "@formatjs/ts-transformer@npm:3.13.23"
   dependencies:
-    "@formatjs/icu-messageformat-parser": 2.11.2
-    "@types/json-stable-stringify": ^1.1.0
-    "@types/node": ^22.0.0
-    chalk: ^4.1.2
-    json-stable-stringify: ^1.1.1
-    tslib: ^2.8.0
-    typescript: ^5.6.0
+    "@formatjs/icu-messageformat-parser": 2.9.4
+    "@types/json-stable-stringify": 1
+    "@types/node": 14 || 16 || 17 || 18 || 20 || 22
+    chalk: 4
+    json-stable-stringify: 1
+    tslib: 2
+    typescript: 5
   peerDependencies:
-    ts-jest: ^29
+    ts-jest: ">=27"
   peerDependenciesMeta:
     ts-jest:
       optional: true
-  checksum: d12315bf9da12517cfa4de88fa331d011844c7d205edf070da00fdc55d42cafcb052fd30658f3b13944e1a6e50cf0e809c37fb77a4506291694ac8bb96d779b7
+  checksum: 5d788e1e78cea12c8aa6021c17b4e60628f584d72413bdaf25cf89fd7dc6a51279b2c2edd4cb39cd4741d7bd439fb1f7469a06fdc01baea1ec482f768ff5d74c
   languageName: node
   linkType: hard
 
@@ -1594,7 +1647,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon"
   dependencies:
-    "@formatjs/cli-lib": 7.4.2
+    "@formatjs/cli-lib": 6.6.6
     "@navikt/aksel-icons": 7.28.0
     "@navikt/ds-css": 7.28.0
     "@navikt/ds-react": 7.28.0
@@ -2110,7 +2163,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-tilrettelegging@workspace:packages/fakta/tilrettelegging"
   dependencies:
-    "@formatjs/cli-lib": 7.4.2
+    "@formatjs/cli-lib": 6.6.6
     "@navikt/aksel-icons": 7.28.0
     "@navikt/ds-css": 7.28.0
     "@navikt/ds-react": 7.28.0
@@ -4326,7 +4379,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-utbetalingsdata-is15@workspace:packages/utbetalingsdata-is15"
   dependencies:
-    "@formatjs/cli-lib": 7.4.2
+    "@formatjs/cli-lib": 6.6.6
     "@navikt/ds-css": 7.28.0
     "@navikt/ds-react": 7.28.0
     "@navikt/fp-config-eslint": "workspace:*"
@@ -6284,7 +6337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/fs-extra@npm:^11.0.4":
+"@types/fs-extra@npm:9 || 10 || 11":
   version: 11.0.4
   resolution: "@types/fs-extra@npm:11.0.4"
   dependencies:
@@ -6318,7 +6371,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/json-stable-stringify@npm:^1.1.0":
+"@types/json-stable-stringify@npm:1":
   version: 1.1.0
   resolution: "@types/json-stable-stringify@npm:1.1.0"
   checksum: 7fdf2463b2d3ed1ffa08466842f3864b934c16061c68c5aa0aa4bc541879edaeb59ad874ffbd8b4e6714628c88ccb3b4e85dbce40badb16d104aa329212c15ba
@@ -6380,7 +6433,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^22.0.0":
+"@types/node@npm:14 || 16 || 17 || 18 || 20 || 22":
   version: 22.17.1
   resolution: "@types/node@npm:22.17.1"
   dependencies:
@@ -7517,6 +7570,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"chalk@npm:4, chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
+  version: 4.1.2
+  resolution: "chalk@npm:4.1.2"
+  dependencies:
+    ansi-styles: ^4.1.0
+    supports-color: ^7.1.0
+  checksum: fe75c9d5c76a7a98d45495b91b2172fa3b7a09e0cc9370e5c8feb1c567b85c4288e2b3fded7cfdd7359ac28d6b3844feb8b82b8686842e93d23c827c417e83fc
+  languageName: node
+  linkType: hard
+
 "chalk@npm:4.1.0":
   version: 4.1.0
   resolution: "chalk@npm:4.1.0"
@@ -7534,16 +7597,6 @@ __metadata:
     ansi-styles: ^4.1.0
     supports-color: ^7.1.0
   checksum: 8e3ddf3981c4da405ddbd7d9c8d91944ddf6e33d6837756979f7840a29272a69a5189ecae0ff84006750d6d1e92368d413335eab4db5476db6e6703a1d1e0505
-  languageName: node
-  linkType: hard
-
-"chalk@npm:^4.0.0, chalk@npm:^4.0.2, chalk@npm:^4.1.0, chalk@npm:^4.1.1, chalk@npm:^4.1.2":
-  version: 4.1.2
-  resolution: "chalk@npm:4.1.2"
-  dependencies:
-    ansi-styles: ^4.1.0
-    supports-color: ^7.1.0
-  checksum: fe75c9d5c76a7a98d45495b91b2172fa3b7a09e0cc9370e5c8feb1c567b85c4288e2b3fded7cfdd7359ac28d6b3844feb8b82b8686842e93d23c827c417e83fc
   languageName: node
   linkType: hard
 
@@ -7778,7 +7831,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"commander@npm:^13, commander@npm:^13.0.0":
+"commander@npm:12":
+  version: 12.1.0
+  resolution: "commander@npm:12.1.0"
+  checksum: 68e9818b00fc1ed9cdab9eb16905551c2b768a317ae69a5e3c43924c2b20ac9bb65b27e1cab36aeda7b6496376d4da908996ba2c0b5d79463e0fb1e77935d514
+  languageName: node
+  linkType: hard
+
+"commander@npm:^13.0.0":
   version: 13.1.0
   resolution: "commander@npm:13.1.0"
   checksum: 8ca2fcb33caf2aa06fba3722d7a9440921331d54019dabf906f3603313e7bf334b009b862257b44083ff65d5a3ab19e83ad73af282bd5319f01dc228bdf87ef0
@@ -9270,7 +9330,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fast-glob@npm:3.3.3, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
+"fast-glob@npm:3, fast-glob@npm:3.3.3, fast-glob@npm:^3.2.9, fast-glob@npm:^3.3.2, fast-glob@npm:^3.3.3":
   version: 3.3.3
   resolution: "fast-glob@npm:3.3.3"
   dependencies:
@@ -9600,6 +9660,17 @@ __metadata:
   version: 1.0.0
   resolution: "fs-constants@npm:1.0.0"
   checksum: 18f5b718371816155849475ac36c7d0b24d39a11d91348cfcb308b4494824413e03572c403c86d3a260e049465518c4f0d5bd00f0371cdfcad6d4f30a85b350d
+  languageName: node
+  linkType: hard
+
+"fs-extra@npm:9 || 10 || 11":
+  version: 11.3.1
+  resolution: "fs-extra@npm:11.3.1"
+  dependencies:
+    graceful-fs: ^4.2.0
+    jsonfile: ^6.0.1
+    universalify: ^2.0.0
+  checksum: 12968b8b426f298c9ddfa9c2163e828a3bdf295b222895073faaec9798286102d771f54374498b934520cab6ef900ee3d643ea53b98a82703d5c546e16975538
   languageName: node
   linkType: hard
 
@@ -11050,7 +11121,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json-stable-stringify@npm:^1.1.1":
+"json-stable-stringify@npm:1":
   version: 1.3.0
   resolution: "json-stable-stringify@npm:1.3.0"
   dependencies:
@@ -11549,7 +11620,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loud-rejection@npm:^2":
+"loud-rejection@npm:2":
   version: 2.2.0
   resolution: "loud-rejection@npm:2.2.0"
   dependencies:
@@ -15288,17 +15359,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2, tslib@npm:^2.0.1, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.4.0, tslib@npm:^2.8.0":
+  version: 2.8.1
+  resolution: "tslib@npm:2.8.1"
+  checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a
+  languageName: node
+  linkType: hard
+
 "tslib@npm:2.3.0":
   version: 2.3.0
   resolution: "tslib@npm:2.3.0"
   checksum: 8869694c26e4a7b56d449662fd54a4f9ba872c889d991202c74462bd99f10e61d5bd63199566c4284c0f742277736292a969642cc7b590f98727a7cae9529122
-  languageName: node
-  linkType: hard
-
-"tslib@npm:^2.0.1, tslib@npm:^2.1.0, tslib@npm:^2.3.0, tslib@npm:^2.4.0, tslib@npm:^2.8.0":
-  version: 2.8.1
-  resolution: "tslib@npm:2.8.1"
-  checksum: e4aba30e632b8c8902b47587fd13345e2827fa639e7c3121074d5ee0880723282411a8838f830b55100cbe4517672f84a2472667d355b81e8af165a55dc6203a
   languageName: node
   linkType: hard
 
@@ -15439,7 +15510,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:5.9.2, typescript@npm:^5.6.0":
+"typescript@npm:5, typescript@npm:5.9.2":
   version: 5.9.2
   resolution: "typescript@npm:5.9.2"
   bin:
@@ -15459,7 +15530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@5.9.2#~builtin<compat/typescript>, typescript@patch:typescript@^5.6.0#~builtin<compat/typescript>":
+"typescript@patch:typescript@5#~builtin<compat/typescript>, typescript@patch:typescript@5.9.2#~builtin<compat/typescript>":
   version: 5.9.2
   resolution: "typescript@patch:typescript@npm%3A5.9.2#~builtin<compat/typescript>::version=5.9.2&hash=1f5320"
   bin:
