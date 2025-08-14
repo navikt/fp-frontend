@@ -19,10 +19,9 @@ import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
 import { ErrorBoundary } from './ErrorBoundary';
 
-import '../globalCss/global.module.css';
-
 import messages from '../../i18n/nb_NO.json';
 
+import '../globalCss/global.css';
 import '@navikt/ds-css-internal';
 import '@navikt/ds-css/darkside';
 import '@navikt/ft-form-hooks/dist/style.css';
