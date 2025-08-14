@@ -14,7 +14,7 @@
     "clean": "rm -rf ./dist ./node_modules"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.26.0",
+    "@navikt/ds-react": "7.28.0",
     "@navikt/fp-konstanter": "workspace:^",
     "@navikt/fp-utils": "workspace:^",
     "react": "19.1.1"
@@ -23,7 +23,7 @@
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
-    "eslint": "9.32.0",
+    "eslint": "9.33.0",
     "typescript": "5.9.2"
   }
 }
