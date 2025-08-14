@@ -26,7 +26,7 @@ interface Props {
   interneLenker: DekoratorLenke[];
   eksterneLenker: DekoratorLenke[];
   theme: ComponentProps<typeof Theme>['theme'];
-  setTheme: (theme: ComponentProps<typeof Theme>['theme']) => void;
+  setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
 }
 
 /**
