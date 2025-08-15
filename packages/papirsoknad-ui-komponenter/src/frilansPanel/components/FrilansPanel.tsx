@@ -29,7 +29,7 @@ export const FrilansPanel = ({ readOnly }: Props) => {
           label={<FormattedMessage id="Registrering.Frilans.HarFrilansvirksomhet" />}
           readOnly={readOnly}
           trueContent={
-            <ArrowBox marginTop={8}>
+            <ArrowBox>
               <VStack gap="space-16">
                 <Detail>
                   <FormattedMessage id="Registrering.Frilans.OppgiPeriode" />

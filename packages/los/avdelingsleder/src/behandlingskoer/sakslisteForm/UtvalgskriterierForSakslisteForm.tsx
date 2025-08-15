@@ -115,7 +115,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
               className={styles.bredde}
             />
             <HStack justify="space-between">
-              <div>
+              <VStack gap="space-16">
                 <FagsakYtelseTypeVelger
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
@@ -124,7 +124,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
                 />
-              </div>
+              </VStack>
               <div>
                 <AndreKriterierVelger
                   valgtSakslisteId={valgtSaksliste.sakslisteId}

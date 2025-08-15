@@ -44,7 +44,7 @@ export const KlageVurderingRadioOptionsNfp = ({
     </option>
   ));
   return (
-    <VStack gap="space-16">
+    <VStack gap="space-12">
       <RhfRadioGroupNew name="klageVurdering" control={control} validate={[required]} isReadOnly={readOnly}>
         <HStack gap="space-16">
           <Radio value={klageVurderingType.MEDHOLD_I_KLAGE} size="small">

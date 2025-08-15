@@ -145,36 +145,38 @@ export const VarselOmRevurderingForm = ({
                   familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
                 />
               )}
-              <RhfRadioGroupNew name="sendVarsel" control={formMethods.control} validate={[required]}>
-                <HStack gap="space-16">
-                  <Radio value={true} size="small">
-                    <FormattedMessage id="VarselOmRevurderingForm.SendVarsel" />
-                  </Radio>
-                  <Radio value={false} size="small">
-                    <FormattedMessage id="VarselOmRevurderingForm.IkkeSendVarsel" />
-                  </Radio>
-                </HStack>
-              </RhfRadioGroupNew>
-              {formVerdier.sendVarsel && (
-                <ArrowBox marginTop={6}>
-                  <VStack gap="space-8">
-                    <RhfTextarea
-                      name="fritekst"
-                      control={formMethods.control}
-                      badges={[{ type: 'info', titleText: language }]}
-                      label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
-                      validate={[required, minLength3, maxLength10000, hasValidText]}
-                      maxLength={10000}
-                      parse={formaterFritekst}
-                    />
-                    <div>
-                      <Link href="#" onClick={forhåndsvisMelding}>
-                        <FormattedMessage id="VarselOmRevurderingForm.Preview" />
-                      </Link>
-                    </div>
-                  </VStack>
-                </ArrowBox>
-              )}
+              <VStack gap="space-12">
+                <RhfRadioGroupNew name="sendVarsel" control={formMethods.control} validate={[required]}>
+                  <HStack gap="space-16">
+                    <Radio value={true} size="small">
+                      <FormattedMessage id="VarselOmRevurderingForm.SendVarsel" />
+                    </Radio>
+                    <Radio value={false} size="small">
+                      <FormattedMessage id="VarselOmRevurderingForm.IkkeSendVarsel" />
+                    </Radio>
+                  </HStack>
+                </RhfRadioGroupNew>
+                {formVerdier.sendVarsel && (
+                  <ArrowBox>
+                    <VStack gap="space-8">
+                      <RhfTextarea
+                        name="fritekst"
+                        control={formMethods.control}
+                        badges={[{ type: 'info', titleText: language }]}
+                        label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
+                        validate={[required, minLength3, maxLength10000, hasValidText]}
+                        maxLength={10000}
+                        parse={formaterFritekst}
+                      />
+                      <div>
+                        <Link href="#" onClick={forhåndsvisMelding}>
+                          <FormattedMessage id="VarselOmRevurderingForm.Preview" />
+                        </Link>
+                      </div>
+                    </VStack>
+                  </ArrowBox>
+                )}
+              </VStack>
               <RhfTextarea
                 name="begrunnelse"
                 control={formMethods.control}

@@ -82,7 +82,7 @@ const CheckboxWithInfo = ({
   const [visPerioder, setVisPeriode] = useState(valgteArbeidstyper.includes(arbeidstype.kode));
 
   return (
-    <VStack gap="space-8">
+    <VStack gap="space-12">
       <Checkbox value={arbeidstype.kode} onClick={() => setVisPeriode(!visPerioder)} disabled={readOnly}>
         {arbeidstype.navn}
       </Checkbox>

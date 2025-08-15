@@ -66,7 +66,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
             readOnly={readOnly}
             trueContent={
-              <ArrowBox marginTop={4}>
+              <ArrowBox>
                 <VStack gap="space-16">
                   <Heading size="small" level="4">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelSN" />
@@ -93,7 +93,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
             readOnly={readOnly}
             trueContent={
-              <ArrowBox marginTop={4}>
+              <ArrowBox>
                 <VStack gap="space-16">
                   <Heading size="small" level="4">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelFrilans" />
@@ -119,7 +119,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
             readOnly={readOnly}
             trueContent={
-              <ArrowBox marginTop={4}>
+              <ArrowBox>
                 <VStack gap="space-16">
                   <Heading size="small" level="4">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelArbeidstaker" />

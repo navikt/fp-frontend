@@ -130,33 +130,35 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
         <div className={styles.marginTop}>
           <VStack gap="space-16">
             <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-            <RhfRadioGroupNew
-              name="gyldigSenFremsetting"
-              control={formMethods.control}
-              validate={[required]}
-              isReadOnly={isReadOnly}
-              isEdited={isEdited(aksjonspunkterForPanel.length > 0, gyldigSenFremsetting)}
-            >
-              <HStack gap="space-16">
-                <Radio value={true} size="small">
-                  <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigGrunn" />
-                </Radio>
-                <Radio value={false} size="small">
-                  <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />
-                </Radio>
-              </HStack>
-            </RhfRadioGroupNew>
-            {gyldigSenFremsetting && (
-              <ArrowBox>
-                <RhfDatepicker
-                  name="ansesMottatt"
-                  control={formMethods.control}
-                  isReadOnly={isReadOnly}
-                  label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.NyMottattDato" />}
-                  validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
-                />
-              </ArrowBox>
-            )}
+            <VStack gap="space-12">
+              <RhfRadioGroupNew
+                name="gyldigSenFremsetting"
+                control={formMethods.control}
+                validate={[required]}
+                isReadOnly={isReadOnly}
+                isEdited={isEdited(aksjonspunkterForPanel.length > 0, gyldigSenFremsetting)}
+              >
+                <HStack gap="space-16">
+                  <Radio value={true} size="small">
+                    <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.GyldigGrunn" />
+                  </Radio>
+                  <Radio value={false} size="small">
+                    <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />
+                  </Radio>
+                </HStack>
+              </RhfRadioGroupNew>
+              {gyldigSenFremsetting && (
+                <ArrowBox>
+                  <RhfDatepicker
+                    name="ansesMottatt"
+                    control={formMethods.control}
+                    isReadOnly={isReadOnly}
+                    label={<FormattedMessage id="VurderSoknadsfristForeldrepengerForm.NyMottattDato" />}
+                    validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+                  />
+                </ArrowBox>
+              )}
+            </VStack>
             <ProsessStegSubmitButtonNew
               isReadOnly={isReadOnly}
               isSubmittable={!readOnlySubmitButton}

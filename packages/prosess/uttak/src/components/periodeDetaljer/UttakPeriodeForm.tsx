@@ -387,59 +387,61 @@ export const UttakPeriodeForm = ({
         )}
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
-            <RhfRadioGroupNew name="erOppfylt" control={formMethods.control} hideLegend validate={[required]}>
-              <HStack gap="space-16">
-                <Radio value={true} size="small">
-                  <FormattedMessage id="UttakActivity.Oppfylt" />
-                </Radio>
-                <Radio value={false} size="small">
-                  <FormattedMessage id="UttakActivity.IkkeOppfylt" />
-                </Radio>
-              </HStack>
-            </RhfRadioGroupNew>
-            {erOppfylt !== undefined && (
-              <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
-                <VStack gap="space-16">
-                  <RhfSelect
-                    name="periodeAarsak"
-                    control={formMethods.control}
-                    label={intl.formatMessage({
-                      id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
-                    })}
-                    selectValues={periodeÅrsakOptions}
-                    validate={[required, notDash]}
-                  />
-                  {valgtPeriode.gradertAktivitet && erOppfylt && (
-                    <>
-                      <RhfRadioGroupNew
-                        name="graderingInnvilget"
-                        control={formMethods.control}
-                        label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
-                        validate={[required]}
-                      >
-                        <HStack gap="space-16">
-                          <Radio value={true} size="small">
-                            <FormattedMessage id="UttakActivity.Oppfylt" />
-                          </Radio>
-                          <Radio value={false} size="small">
-                            <FormattedMessage id="UttakActivity.IkkeOppfylt" />
-                          </Radio>
-                        </HStack>
-                      </RhfRadioGroupNew>
-                      {graderingInnvilget === false && (
-                        <RhfSelect
-                          name="graderingAvslagAarsak"
+            <VStack gap="space-12">
+              <RhfRadioGroupNew name="erOppfylt" control={formMethods.control} hideLegend validate={[required]}>
+                <HStack gap="space-16">
+                  <Radio value={true} size="small">
+                    <FormattedMessage id="UttakActivity.Oppfylt" />
+                  </Radio>
+                  <Radio value={false} size="small">
+                    <FormattedMessage id="UttakActivity.IkkeOppfylt" />
+                  </Radio>
+                </HStack>
+              </RhfRadioGroupNew>
+              {erOppfylt !== undefined && (
+                <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
+                  <VStack gap="space-16">
+                    <RhfSelect
+                      name="periodeAarsak"
+                      control={formMethods.control}
+                      label={intl.formatMessage({
+                        id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
+                      })}
+                      selectValues={periodeÅrsakOptions}
+                      validate={[required, notDash]}
+                    />
+                    {valgtPeriode.gradertAktivitet && erOppfylt && (
+                      <>
+                        <RhfRadioGroupNew
+                          name="graderingInnvilget"
                           control={formMethods.control}
-                          label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
-                          validate={[required, notDash]}
-                          selectValues={graderingAvslagsårsakOptions}
-                        />
-                      )}
-                    </>
-                  )}
-                </VStack>
-              </ArrowBox>
-            )}
+                          label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
+                          validate={[required]}
+                        >
+                          <HStack gap="space-16">
+                            <Radio value={true} size="small">
+                              <FormattedMessage id="UttakActivity.Oppfylt" />
+                            </Radio>
+                            <Radio value={false} size="small">
+                              <FormattedMessage id="UttakActivity.IkkeOppfylt" />
+                            </Radio>
+                          </HStack>
+                        </RhfRadioGroupNew>
+                        {graderingInnvilget === false && (
+                          <RhfSelect
+                            name="graderingAvslagAarsak"
+                            control={formMethods.control}
+                            label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
+                            validate={[required, notDash]}
+                            selectValues={graderingAvslagsårsakOptions}
+                          />
+                        )}
+                      </>
+                    )}
+                  </VStack>
+                </ArrowBox>
+              )}
+            </VStack>
             {warning && (
               <Alert size="small" variant="info" className={styles.alert}>
                 {warning}

@@ -30,7 +30,7 @@ export const VirksomhetRegnskapPanel = ({ index, readOnly }: Props) => {
       label={<FormattedMessage id="Registrering.VirksomhetRegnskapPanel.Accountant" />}
       readOnly={readOnly}
       trueContent={
-        <ArrowBox marginTop={8}>
+        <ArrowBox>
           <VStack gap="space-16">
             <RhfTextField
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navnRegnskapsforer`}

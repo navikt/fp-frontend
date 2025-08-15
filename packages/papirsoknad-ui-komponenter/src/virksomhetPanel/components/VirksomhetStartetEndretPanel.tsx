@@ -33,7 +33,7 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
       label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.NewlyStartedOrChanged" />}
       readOnly={readOnly}
       trueContent={
-        <ArrowBox marginTop={8}>
+        <ArrowBox>
           <VStack gap="space-16">
             <Label size="small">
               <FormattedMessage id="Registrering.VirksomhetStartetPanel.Reason" />
@@ -130,12 +130,12 @@ const CheckboxWithInfo = ({
   const [visPerioder, setVisPeriode] = useState(valgteÅrsaker.includes(value));
 
   return (
-    <VStack gap="space-8">
+    <VStack gap="space-12">
       <Checkbox value={value} onClick={() => setVisPeriode(!visPerioder)} disabled={readOnly}>
         {label}
       </Checkbox>
       {visPerioder && (
-        <ArrowBox marginTop={8}>
+        <ArrowBox>
           <RhfDatepicker
             name={
               value === 'harVarigEndring'
