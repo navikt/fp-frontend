@@ -1,8 +1,8 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, ErrorMessage, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfRadioGroup, RhfTextarea, useCustomValidation } from '@navikt/ft-form-hooks';
+import { BodyShort, ErrorMessage, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfCheckbox, RhfRadioGroupNew, RhfTextarea, useCustomValidation } from '@navikt/ft-form-hooks';
 import { hasValidText, isRequiredMessage, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -59,24 +59,21 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
 
   return (
     <VStack gap="space-12">
-      <RhfRadioGroup
+      <RhfRadioGroupNew
         name={`${FIELD_ARRAY_NAME}.${index}.totrinnskontrollGodkjent`}
         control={control}
         isReadOnly={readOnly}
-        isHorizontal
-        isTrueOrFalseSelection
         hideLegend
-        radios={[
-          {
-            value: 'true',
-            label: <FormattedMessage id="ApprovalField.Godkjent" />,
-          },
-          {
-            value: 'false',
-            label: <FormattedMessage id="ApprovalField.Vurder" />,
-          },
-        ]}
-      />
+      >
+        <HStack gap="space-16">
+          <Radio value={true} size="small">
+            <FormattedMessage id="ApprovalField.Godkjent" />
+          </Radio>
+          <Radio value={false} size="small">
+            <FormattedMessage id="ApprovalField.Vurder" />
+          </Radio>
+        </HStack>
+      </RhfRadioGroupNew>
       {totrinnskontrollGodkjent === false && (
         <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
           <VStack gap="space-8">

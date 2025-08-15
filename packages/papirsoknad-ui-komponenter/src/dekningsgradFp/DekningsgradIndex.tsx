@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
-import { Heading, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
@@ -29,23 +29,16 @@ export const DekningsgradIndex = ({ readOnly }: Props) => {
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.Dekningsgrad.Title' })}
         </Heading>
-        <RhfRadioGroup
-          name="dekningsgrad"
-          control={control}
-          validate={[required]}
-          isReadOnly={readOnly}
-          isHorizontal
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.80' }),
-              value: '80_PROSENT',
-            },
-            {
-              label: intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.100' }),
-              value: '100_PROSENT',
-            },
-          ]}
-        />
+        <RhfRadioGroupNew name="dekningsgrad" control={control} validate={[required]} isReadOnly={readOnly}>
+          <HStack gap="space-16">
+            <Radio value="80_PROSENT" size="small">
+              {intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.80' })}
+            </Radio>
+            <Radio value="100_PROSENT" size="small">
+              {intl.formatMessage({ id: 'Registrering.Dekningsgrad.prosent.100' })}
+            </Radio>
+          </HStack>
+        </RhfRadioGroupNew>
       </VStack>
     </BorderBox>
   );

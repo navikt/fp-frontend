@@ -2,8 +2,8 @@ import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, Button, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { Alert, BodyShort, Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -27,6 +27,7 @@ const selectFieldName = 'ytelsetypeValg';
 type RadioOption = {
   label: ReactElement;
   value: string;
+  disabled: boolean;
 };
 
 const ytelseSelectValg: FagsakYtelseType[] = [
@@ -134,13 +135,18 @@ export const VelgSakForm = ({
       )}
       <VStack gap="space-32">
         <VStack gap="space-16">
-          <RhfRadioGroup
-            name={radioFieldName}
-            control={formMethods.control}
-            disabled={!erKlarForJournalføring}
-            validate={[required]}
-            radios={lagRadioOptions(journalpost)}
-          />
+          <RhfRadioGroupNew name={radioFieldName} control={formMethods.control} validate={[required]}>
+            {lagRadioOptions(journalpost).map(option => (
+              <Radio
+                key={option.value}
+                value={option.value}
+                size="small"
+                disabled={!erKlarForJournalføring || option.disabled}
+              >
+                {option.label}
+              </Radio>
+            ))}
+          </RhfRadioGroupNew>
           {sakValg === LAG_NY_SAK && (
             <RhfSelect
               name={selectFieldName}

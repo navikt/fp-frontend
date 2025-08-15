@@ -1,7 +1,7 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 
-import { Heading, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Heading, Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -56,24 +56,20 @@ export const TerminOgFodselPanelSvp = ({ readOnly }: Props) => {
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}
         </Heading>
-        <RhfRadioGroup
+        <RhfRadioGroupNew
           name="erBarnetFodt"
           control={control}
           label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
           validate={[required]}
           isReadOnly={readOnly}
-          isTrueOrFalseSelection
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErFodt' }),
-              value: 'true',
-            },
-            {
-              label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErIkkeFodt' }),
-              value: 'false',
-            },
-          ]}
-        />
+        >
+          <Radio value={true} size="small">
+            {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErFodt' })}
+          </Radio>
+          <Radio value={false} size="small">
+            {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErIkkeFodt' })}
+          </Radio>
+        </RhfRadioGroupNew>
         {erBarnetFodt && (
           <RhfDatepicker
             name="foedselsDato"

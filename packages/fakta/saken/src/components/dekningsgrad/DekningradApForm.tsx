@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { BodyShort, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { BodyShort, Box, Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
@@ -49,7 +49,6 @@ export const DekningradApForm = ({
   readOnly,
   alleMerknaderFraBeslutter,
 }: Props) => {
-  const intl = useIntl();
   const formMethods = useForm<FormValues>({
     defaultValues: {
       dekningsgrad: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad,
@@ -130,24 +129,20 @@ export const DekningradApForm = ({
                 </Box.New>
               )}
             </HStack>
-            <RhfRadioGroup
+            <RhfRadioGroupNew
               name="dekningsgrad"
               control={formMethods.control}
               label={<FormattedMessage id="DekningradApForm.HvilkenDekningsgrad" />}
               validate={[required]}
               isReadOnly={readOnly}
-              parse={value => parseInt(value, 10)}
-              radios={[
-                {
-                  label: intl.formatMessage({ id: 'DekningradApForm.80' }),
-                  value: '80',
-                },
-                {
-                  label: intl.formatMessage({ id: 'DekningradApForm.100' }),
-                  value: '100',
-                },
-              ]}
-            />
+            >
+              <Radio value={80} size="small">
+                <FormattedMessage id="DekningradApForm.80" />
+              </Radio>
+              <Radio value={100} size="small">
+                <FormattedMessage id="DekningradApForm.100" />
+              </Radio>
+            </RhfRadioGroupNew>
             <RhfTextarea
               name="begrunnelse"
               control={formMethods.control}

@@ -2,8 +2,8 @@ import { type ReactElement, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -387,18 +387,16 @@ export const UttakPeriodeForm = ({
         )}
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
-            <RhfRadioGroup
-              name="erOppfylt"
-              control={formMethods.control}
-              hideLegend
-              validate={[required]}
-              isHorizontal
-              isTrueOrFalseSelection
-              radios={[
-                { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
-                { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
-              ]}
-            />
+            <RhfRadioGroupNew name="erOppfylt" control={formMethods.control} hideLegend validate={[required]}>
+              <HStack gap="space-16">
+                <Radio value={true} size="small">
+                  <FormattedMessage id="UttakActivity.Oppfylt" />
+                </Radio>
+                <Radio value={false} size="small">
+                  <FormattedMessage id="UttakActivity.IkkeOppfylt" />
+                </Radio>
+              </HStack>
+            </RhfRadioGroupNew>
             {erOppfylt !== undefined && (
               <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
                 <VStack gap="space-16">
@@ -413,18 +411,21 @@ export const UttakPeriodeForm = ({
                   />
                   {valgtPeriode.gradertAktivitet && erOppfylt && (
                     <>
-                      <RhfRadioGroup
+                      <RhfRadioGroupNew
                         name="graderingInnvilget"
                         control={formMethods.control}
                         label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
                         validate={[required]}
-                        isHorizontal
-                        isTrueOrFalseSelection
-                        radios={[
-                          { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
-                          { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
-                        ]}
-                      />
+                      >
+                        <HStack gap="space-16">
+                          <Radio value={true} size="small">
+                            <FormattedMessage id="UttakActivity.Oppfylt" />
+                          </Radio>
+                          <Radio value={false} size="small">
+                            <FormattedMessage id="UttakActivity.IkkeOppfylt" />
+                          </Radio>
+                        </HStack>
+                      </RhfRadioGroupNew>
                       {graderingInnvilget === false && (
                         <RhfSelect
                           name="graderingAvslagAarsak"

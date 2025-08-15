@@ -2,8 +2,8 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { Detail, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
@@ -156,84 +156,72 @@ export const FormkravKlageFormNfp = ({
               </div>
               <VStack gap="space-20">
                 <HStack gap="space-16">
-                  <RhfRadioGroup
+                  <RhfRadioGroupNew
                     name="erKlagerPart"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
-                    isHorizontal
-                    isTrueOrFalseSelection
-                    radios={[
-                      {
-                        value: 'true',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                      },
-                      {
-                        value: 'false',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                      },
-                    ]}
-                  />
-                  <RhfRadioGroup
+                  >
+                    <HStack gap="space-16">
+                      <Radio value={true} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Ja" />
+                      </Radio>
+                      <Radio value={false} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Nei" />
+                      </Radio>
+                    </HStack>
+                  </RhfRadioGroupNew>
+                  <RhfRadioGroupNew
                     name="erKonkret"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
-                    isHorizontal
-                    isTrueOrFalseSelection
-                    radios={[
-                      {
-                        value: 'true',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                      },
-                      {
-                        value: 'false',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                      },
-                    ]}
-                  />
+                  >
+                    <HStack gap="space-16">
+                      <Radio value={true} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Ja" />
+                      </Radio>
+                      <Radio value={false} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Nei" />
+                      </Radio>
+                    </HStack>
+                  </RhfRadioGroupNew>
                 </HStack>
                 <HStack gap="space-16">
-                  <RhfRadioGroup
+                  <RhfRadioGroupNew
                     name="erFristOverholdt"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
-                    isHorizontal
-                    isTrueOrFalseSelection
-                    radios={[
-                      {
-                        value: 'true',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                      },
-                      {
-                        value: 'false',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                      },
-                    ]}
-                  />
-                  <RhfRadioGroup
+                  >
+                    <HStack gap="space-16">
+                      <Radio value={true} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Ja" />
+                      </Radio>
+                      <Radio value={false} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Nei" />
+                      </Radio>
+                    </HStack>
+                  </RhfRadioGroupNew>
+                  <RhfRadioGroupNew
                     name="erSignert"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
-                    isHorizontal
-                    isTrueOrFalseSelection
-                    radios={[
-                      {
-                        value: 'true',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                      },
-                      {
-                        value: 'false',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                      },
-                    ]}
-                  />
+                  >
+                    <HStack gap="space-16">
+                      <Radio value={true} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Ja" />
+                      </Radio>
+                      <Radio value={false} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Nei" />
+                      </Radio>
+                    </HStack>
+                  </RhfRadioGroupNew>
                 </HStack>
               </VStack>
             </HStack>

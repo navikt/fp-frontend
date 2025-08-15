@@ -69,7 +69,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
 
-  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = (verdi: boolean) => {
+  const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = (verdi: string | number | boolean) => {
     if (fastsattOpptjening.fastsattOpptjeningAktivitetList?.length === 0 && verdi === true) {
       return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
     }

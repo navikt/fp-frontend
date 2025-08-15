@@ -3,8 +3,8 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
@@ -232,18 +232,21 @@ export const UttakFaktaDetailForm = ({
               </div>
             )}
             {!readOnly && (
-              <RhfRadioGroup
+              <RhfRadioGroupNew
                 name="arsakstype"
                 control={formMethods.control}
                 label={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
                 validate={[required]}
                 isReadOnly={readOnly}
-                isHorizontal
-                radios={Object.keys(Årsakstype).map(type => ({
-                  value: type,
-                  label: intl.formatMessage({ id: ÅRSAKSTYPE_TEKST_KODER[type] }),
-                }))}
-              />
+              >
+                <HStack gap="space-16">
+                  {Object.keys(Årsakstype).map(type => (
+                    <Radio key={type} value={type} size="small">
+                      <FormattedMessage id={ÅRSAKSTYPE_TEKST_KODER[type]} />
+                    </Radio>
+                  ))}
+                </HStack>
+              </RhfRadioGroupNew>
             )}
           </HStack>
           {(årsakstype === Årsakstype.UTTAK || årsakstype === Årsakstype.OVERFØRING) && (

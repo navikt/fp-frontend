@@ -3,8 +3,8 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Detail, HStack, Label, Popover, Tooltip, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, Detail, HStack, Label, Popover, Radio, Tooltip, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
@@ -191,7 +191,7 @@ export const ArbeidsforholdField = ({
           {!inntektsmelding && inntektsposter && (
             <InntektsposterPanel inntektsposter={inntektsposter} skjæringstidspunkt={skjæringstidspunkt} />
           )}
-          <RhfRadioGroup
+          <RhfRadioGroupNew
             name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
             control={control}
             label={
@@ -237,21 +237,20 @@ export const ArbeidsforholdField = ({
             }
             validate={[required]}
             isReadOnly={isReadOnly}
-            radios={[
-              {
-                label: intl.formatMessage({
-                  id: inntektsmelding
+          >
+            <Radio value={BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON} size="small">
+              <FormattedMessage
+                id={
+                  inntektsmelding
                     ? 'ArbeidsforholdFieldArray.TaMedArbeidsforhold'
-                    : 'ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding',
-                }),
-                value: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
-              },
-              {
-                label: intl.formatMessage({ id: 'ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold' }),
-                value: BekreftetPermisjonStatus.BRUK_PERMISJON,
-              },
-            ]}
-          />
+                    : 'ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding'
+                }
+              />
+            </Radio>
+            <Radio value={BekreftetPermisjonStatus.BRUK_PERMISJON} size="small">
+              <FormattedMessage id="ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold" />
+            </Radio>
+          </RhfRadioGroupNew>
         </VStack>
       </HStack>
     </ArbeidsforholdBoks>
