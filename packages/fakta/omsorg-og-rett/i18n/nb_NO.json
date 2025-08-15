@@ -9,7 +9,7 @@
 
   "HarAnnenForelderRettFelter.HarAnnenForelderRett": "Har annen forelder rett til foreldrepenger i Norge?",
   "HarAnnenForelderRettFelter.MottarUforetrygd": "Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?",
-  "HarAnnenForelderRettFelter.AnnenForelderRettEØS": "Har annen forelder tilstrekkelig opptjening fra land i EØS?",
+  "HarAnnenForelderRettFelter.AnnenForelderRettEØS": "Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?",
 
   "OpplysningsKort.OpplysningerFraSøknadTittel": "Opplysninger fra søknad",
   "OpplysningsKort.AdresseTittel": "Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other {, annen part({adresseCountAnnenpart})}}{adresseCountBarn, select, none {} other {, barn({adresseCountBarn})}}",
