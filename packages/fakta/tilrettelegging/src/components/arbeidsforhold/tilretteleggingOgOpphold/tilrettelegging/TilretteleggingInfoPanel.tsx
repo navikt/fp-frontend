@@ -60,7 +60,7 @@ export const TilretteleggingInfoPanel = ({
   return (
     <div
       style={{
-        background: '#E5E5E5',
+        background: 'var(--ax-bg-neutral-soft)',
         marginLeft: '-24px',
         marginTop: '-24px',
         marginRight: '-24px',

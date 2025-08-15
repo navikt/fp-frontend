@@ -1,5 +1,5 @@
 .container {
-  background-color: var(--ax-neutral-400);
+  background-color: var(--ax-neutral-200);
   border-bottom: 1px solid var(--ax-border-neutral-subtle);
   padding-right: 8px;
 }
