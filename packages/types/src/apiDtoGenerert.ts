@@ -649,18 +649,1326 @@ export type ProsessTaskGruppeIdDto = {
   gruppe?: string;
 };
 
+export type AksjonspunktGodkjenningDto = {
+  godkjent?: boolean;
+  begrunnelse?: string;
+  aksjonspunktKode?: string;
+  arsaker: Array<
+    'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+  >;
+};
+
+export type AktivitetskravGrunnlagArbeid = {
+  orgNummer?: string;
+  stillingsprosent?: number;
+  permisjon?: Permisjon;
+};
+
+export type AndreYtelserDto = {
+  ytelseType?:
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'FORENKLET_OPPGJØRSORDNING'
+    | 'FRILANSER'
+    | 'FRILANSER_OPPDRAGSTAKER'
+    | 'LØNN_UNDER_UTDANNING'
+    | 'MARITIMT_ARBEIDSFORHOLD'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'ORDINÆRT_ARBEIDSFORHOLD'
+    | 'PENSJON_OG_ANDRE_TYPER_YTELSER_UTEN_ANSETTELSESFORHOLD'
+    | 'NÆRING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VANLIG'
+    | '-';
+  periodeFom?: string;
+  periodeTom?: string;
+};
+
+export type AnnenForelderDto = {
+  foedselsnummer?: string;
+  kanIkkeOppgiAnnenForelder?: boolean;
+  kanIkkeOppgiBegrunnelse?: KanIkkeOppgiBegrunnelse;
+  sokerHarAleneomsorg?: boolean;
+  denAndreForelderenHarRettPaForeldrepenger?: boolean;
+  morMottarUføretrygd?: boolean;
+  annenForelderRettEØS?: boolean;
+};
+
+export type ArbeidsforholdDto = {
+  arbeidsgiverReferanse?: string;
+  arbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+};
+
+export type Arbeidsgiver = {
+  identifikator?: string;
+  erVirksomhet?: boolean;
+  aktørId?: string;
+  orgnr?: string;
+  indexKey?: string;
+};
+
+export type AvklarAleneomsorgVurderingDto = {
+  aleneomsorg: boolean;
+  annenforelderHarRett?: boolean;
+  annenForelderHarRettEØS?: boolean;
+  annenforelderMottarUføretrygd?: boolean;
+  begrunnelse?: string;
+};
+
+export type AvklarAnnenforelderHarRettDto = {
+  annenforelderHarRett: boolean;
+  annenForelderHarRettEØS?: boolean;
+  annenforelderMottarUføretrygd?: boolean;
+  begrunnelse?: string;
+};
+
+export type AvklarDekningsgradDto = {
+  dekningsgrad?: number;
+  begrunnelse?: string;
+};
+
+export type BekreftSokersOpplysningspliktManuDto = {
+  begrunnelse?: string;
+  erVilkarOk?: boolean;
+  inntektsmeldingerSomIkkeKommer?: Array<InntektsmeldingSomIkkeKommerDto>;
+};
+
+export type BekreftSvangerskapspengerDto = {
+  termindato?: string;
+  fødselsdato?: string;
+  bekreftetSvpArbeidsforholdList?: Array<SvpArbeidsforholdDto>;
+  begrunnelse?: string;
+};
+
+export type BekreftSvangerskapspengervilkårDto = {
+  begrunnelse?: string;
+  avslagskode?: string;
+};
+
 export type BekreftedeAksjonspunkterDto = {
   behandlingUuid: string;
   behandlingVersjon: number;
   bekreftedeAksjonspunktDtoer?: Array<BekreftetAksjonspunktDto>;
 };
 
-export type BekreftetAksjonspunktDto = {
+export type BekreftetAksjonspunktDto = (
+  | ({
+      '@type': 'FatterVedtakAksjonspunktDto';
+    } & FatterVedtakAksjonspunktDto)
+  | ({
+      '@type': 'AvklarDekningsgradDto';
+    } & AvklarDekningsgradDto)
+  | ({
+      '@type': 'VurderInnsynDto';
+    } & VurderInnsynDto)
+  | ({
+      '@type': 'KlageFormkravAksjonspunktDto';
+    } & KlageFormkravAksjonspunktDto)
+  | ({
+      '@type': 'KlageVurderingResultatAksjonspunktDto';
+    } & KlageVurderingResultatAksjonspunktDto)
+  | ({
+      '@type': 'VurderForutgåendeMedlemskapDto';
+    } & VurderForutgåendeMedlemskapDto)
+  | ({
+      '@type': 'VurderMedlemskapDto';
+    } & VurderMedlemskapDto)
+  | ({
+      '@type': 'KontrollerRevurderingsBehandlingDto';
+    } & KontrollerRevurderingsBehandlingDto)
+  | ({
+      '@type': 'VarselRevurderingManuellDto';
+    } & VarselRevurderingManuellDto)
+  | ({
+      '@type': 'VurderFaresignalerDto';
+    } & VurderFaresignalerDto)
+  | ({
+      '@type': 'BekreftSvangerskapspengerDto';
+    } & BekreftSvangerskapspengerDto)
+  | ({
+      '@type': 'BekreftSvangerskapspengervilkårDto';
+    } & BekreftSvangerskapspengervilkårDto)
+  | ({
+      '@type': 'BekreftSokersOpplysningspliktManuDto';
+    } & BekreftSokersOpplysningspliktManuDto)
+  | ({
+      '@type': 'SoknadsfristAksjonspunktDto';
+    } & SoknadsfristAksjonspunktDto)
+  | ({
+      '@type': 'VurderSøknadsfristDto';
+    } & VurderSøknadsfristDto)
+  | ({
+      '@type': 'KontrollerStorEtterbetalingSøkerDto';
+    } & KontrollerStorEtterbetalingSøkerDto)
+  | ({
+      '@type': 'VurderFeilutbetalingDto';
+    } & VurderFeilutbetalingDto)
+  | ({
+      '@type': 'VurderUttakDokumentasjonDto';
+    } & VurderUttakDokumentasjonDto)
+  | ({
+      '@type': 'AvklarAleneomsorgVurderingDto';
+    } & AvklarAleneomsorgVurderingDto)
+  | ({
+      '@type': 'AvklarAnnenforelderHarRettDto';
+    } & AvklarAnnenforelderHarRettDto)
+  | ({
+      '@type': 'FastsetteUttakKontrollerAnnenpartEØSDto';
+    } & FastsetteUttakKontrollerAnnenpartEøsDto)
+  | ({
+      '@type': 'FastsetteUttakKontrollerOpplysningerOmDødDto';
+    } & FastsetteUttakKontrollerOpplysningerOmDødDto)
+  | ({
+      '@type': 'FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto';
+    } & FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto)
+  | ({
+      '@type': 'FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto';
+    } & FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto)
+  | ({
+      '@type': 'FastsetteUttakPerioderDto';
+    } & FastsetteUttakPerioderDto)
+  | ({
+      '@type': 'FastsetteUttakStortingsrepresentantDto';
+    } & FastsetteUttakStortingsrepresentantDto)
+  | ({
+      '@type': 'GraderingAktivitetUtenBGDto';
+    } & GraderingAktivitetUtenBgDto)
+  | ({
+      '@type': 'GraderingUkjentAktivitetDto';
+    } & GraderingUkjentAktivitetDto)
+  | ({
+      '@type': 'IngenPerioderDto';
+    } & IngenPerioderDto)
+  | ({
+      '@type': 'ManueltSattStartdatoDto';
+    } & ManueltSattStartdatoDto)
+  | ({
+      '@type': 'ForeslaVedtakManueltAksjonspuntDto';
+    } & ForeslaVedtakManueltAksjonspuntDto)
+  | ({
+      '@type': 'ForeslåVedtakAksjonspunktDto';
+    } & ForeslåVedtakAksjonspunktDto)
+  | ({
+      '@type': 'VurdereAnnenYteleseFørVedtakDto';
+    } & VurdereAnnenYteleseFørVedtakDto)
+  | ({
+      '@type': 'VurdereDokumentFørVedtakDto';
+    } & VurdereDokumentFørVedtakDto)
+  | ({
+      '@type': 'VurdereInntektsmeldingFørVedtakDto';
+    } & VurdereInntektsmeldingFørVedtakDto)
+  | ({
+      '@type': 'ManuellRegistreringEngangsstonadDto';
+    } & ManuellRegistreringEngangsstonadDto)
+  | ({
+      '@type': 'ManuellRegistreringEndringsøknadDto';
+    } & ManuellRegistreringEndringsøknadDto)
+  | ({
+      '@type': 'ManuellRegistreringForeldrepengerDto';
+    } & ManuellRegistreringForeldrepengerDto)
+  | ({
+      '@type': 'ManuellRegistreringSvangerskapspengerDto';
+    } & ManuellRegistreringSvangerskapspengerDto)
+) & {
+  begrunnelse?: string;
+  '@type': string;
+};
+
+export type DokumentasjonVurderingBehovDto = {
+  fom: string;
+  tom: string;
+  type: 'UTSETTELSE' | 'OVERFØRING' | 'UTTAK';
+  årsak:
+    | 'INNLEGGELSE_SØKER'
+    | 'INNLEGGELSE_BARN'
+    | 'HV_ØVELSE'
+    | 'NAV_TILTAK'
+    | 'SYKDOM_SØKER'
+    | 'INNLEGGELSE_ANNEN_FORELDER'
+    | 'SYKDOM_ANNEN_FORELDER'
+    | 'BARE_SØKER_RETT'
+    | 'ALENEOMSORG'
+    | 'AKTIVITETSKRAV_ARBEID'
+    | 'AKTIVITETSKRAV_UTDANNING'
+    | 'AKTIVITETSKRAV_KVALPROG'
+    | 'AKTIVITETSKRAV_INTROPROG'
+    | 'AKTIVITETSKRAV_TRENGER_HJELP'
+    | 'AKTIVITETSKRAV_INNLAGT'
+    | 'AKTIVITETSKRAV_ARBEID_OG_UTDANNING'
+    | 'AKTIVITETSKRAV_IKKE_OPPGITT'
+    | 'TIDLIG_OPPSTART_FAR';
+  vurdering?: 'GODKJENT' | 'GODKJENT_AUTOMATISK' | 'IKKE_GODKJENT' | 'IKKE_DOKUMENTERT';
+  morsStillingsprosent?: number;
+  aktivitetskravGrunnlag?: Array<AktivitetskravGrunnlagArbeid>;
+};
+
+export type EgenVirksomhetDto = {
+  harArbeidetIEgenVirksomhet?: boolean;
+  virksomheter?: Array<VirksomhetDto>;
+};
+
+export type FaktaUttakPeriodeDto = {
+  fom: string;
+  tom: string;
+  uttakPeriodeType?:
+    | 'FELLESPERIODE'
+    | 'MØDREKVOTE'
+    | 'FEDREKVOTE'
+    | 'FORELDREPENGER'
+    | 'FORELDREPENGER_FØR_FØDSEL'
+    | '-';
+  utsettelseÅrsak?:
+    | 'ARBEID'
+    | 'LOVBESTEMT_FERIE'
+    | 'SYKDOM'
+    | 'INSTITUSJONSOPPHOLD_SØKER'
+    | 'INSTITUSJONSOPPHOLD_BARNET'
+    | 'HV_OVELSE'
+    | 'NAV_TILTAK'
+    | 'FRI'
+    | '-';
+  overføringÅrsak?:
+    | 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER'
+    | 'SYKDOM_ANNEN_FORELDER'
+    | 'IKKE_RETT_ANNEN_FORELDER'
+    | 'ALENEOMSORG'
+    | '-';
+  oppholdÅrsak?:
+    | '-'
+    | 'UTTAK_MØDREKVOTE_ANNEN_FORELDER'
+    | 'UTTAK_FEDREKVOTE_ANNEN_FORELDER'
+    | 'UTTAK_FELLESP_ANNEN_FORELDER'
+    | 'UTTAK_FORELDREPENGER_ANNEN_FORELDER';
+  arbeidstidsprosent?: number;
+  arbeidsforhold?: ArbeidsforholdDto;
+  samtidigUttaksprosent?: number;
+  flerbarnsdager?: boolean;
+  morsAktivitet?:
+    | '-'
+    | 'ARBEID'
+    | 'UTDANNING'
+    | 'KVALPROG'
+    | 'INTROPROG'
+    | 'TRENGER_HJELP'
+    | 'INNLAGT'
+    | 'ARBEID_OG_UTDANNING'
+    | 'UFØRE'
+    | 'IKKE_OPPGITT';
+  periodeKilde?: 'SØKNAD' | 'TIDLIGERE_VEDTAK' | 'ANDRE_NAV_VEDTAK' | 'SAKSBEHANDLER';
   begrunnelse?: string;
 };
 
-export type OverstyringAksjonspunktDto = {
+export type FastsetteUttakKontrollerAnnenpartEøsDto = {
+  perioder: Array<UttakResultatPeriodeLagreDto>;
   begrunnelse?: string;
+};
+
+export type FastsetteUttakKontrollerOpplysningerOmDødDto = {
+  perioder: Array<UttakResultatPeriodeLagreDto>;
+  begrunnelse?: string;
+};
+
+export type FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto = {
+  perioder: Array<UttakResultatPeriodeLagreDto>;
+  begrunnelse?: string;
+};
+
+export type FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto = {
+  perioder: Array<UttakResultatPeriodeLagreDto>;
+  begrunnelse?: string;
+};
+
+export type FastsetteUttakPerioderDto = {
+  perioder: Array<UttakResultatPeriodeLagreDto>;
+  begrunnelse?: string;
+};
+
+export type FastsetteUttakStortingsrepresentantDto = {
+  perioder: Array<UttakResultatPeriodeLagreDto>;
+  begrunnelse?: string;
+};
+
+export type FatterVedtakAksjonspunktDto = {
+  aksjonspunktGodkjenningDtos?: Array<AksjonspunktGodkjenningDto>;
+  begrunnelse?: string;
+};
+
+export type ForeslaVedtakManueltAksjonspuntDto = {
+  skalBrukeOverstyrendeFritekstBrev?: boolean;
+  begrunnelse?: string;
+};
+
+export type ForeslåVedtakAksjonspunktDto = {
+  skalBrukeOverstyrendeFritekstBrev?: boolean;
+  begrunnelse?: string;
+};
+
+export type FrilansDto = {
+  harSokerPeriodeMedFrilans?: boolean;
+  perioder?: Array<Frilansperiode>;
+  erNyoppstartetFrilanser?: boolean;
+  harInntektFraFosterhjem?: boolean;
+  harHattOppdragForFamilie?: boolean;
+  oppdragPerioder?: Array<Oppdragperiode>;
+};
+
+export type Frilansperiode = {
+  periodeFom: string;
+  periodeTom: string;
+};
+
+export type GraderingAktivitetUtenBgDto = {
+  perioder: Array<FaktaUttakPeriodeDto>;
+  begrunnelse?: string;
+};
+
+export type GraderingDto = {
+  periodeFom: string;
+  periodeTom: string;
+  arbeidsgiverIdentifikator?: string;
+  periodeForGradering:
+    | 'FELLESPERIODE'
+    | 'MØDREKVOTE'
+    | 'FEDREKVOTE'
+    | 'FORELDREPENGER'
+    | 'FORELDREPENGER_FØR_FØDSEL'
+    | '-';
+  prosentandelArbeid?: number;
+  skalGraderes?: boolean;
+  erArbeidstaker?: boolean;
+  erFrilanser?: boolean;
+  erSelvstNæringsdrivende?: boolean;
+  harSamtidigUttak?: boolean;
+  samtidigUttaksprosent?: number;
+  flerbarnsdager?: boolean;
+};
+
+export type GraderingUkjentAktivitetDto = {
+  perioder: Array<FaktaUttakPeriodeDto>;
+  begrunnelse?: string;
+};
+
+export type IngenPerioderDto = {
+  perioder: Array<FaktaUttakPeriodeDto>;
+  begrunnelse?: string;
+};
+
+export type InntektsmeldingSomIkkeKommerDto = {
+  organisasjonsnummer?: string;
+  aktørId?: string;
+  brukerHarSagtAtIkkeKommer?: boolean;
+};
+
+export type InternArbeidsforholdRef = {
+  referanse?: string;
+  uuidreferanse?: string;
+  indexKey?: string;
+};
+
+export type KanIkkeOppgiBegrunnelse = {
+  arsak: string;
+  begrunnelse?: string;
+  utenlandskFoedselsnummer?: string;
+  land?: string;
+};
+
+export type KlageFormkravAksjonspunktDto = {
+  erKlagerPart?: boolean;
+  erFristOverholdt?: boolean;
+  erKonkret?: boolean;
+  erSignert?: boolean;
+  erTilbakekreving?: boolean;
+  fritekstTilBrev?: string;
+  begrunnelse?: string;
+  tilbakekrevingInfo?: KlageTilbakekrevingDto;
+  vedtakBehandlingUuid?: string;
+};
+
+export type KlageTilbakekrevingDto = {
+  tilbakekrevingUuid: string;
+  tilbakekrevingVedtakDato?: string;
+  tilbakekrevingBehandlingType?: string;
+};
+
+export type KlageVurderingResultatAksjonspunktDto = {
+  klageVurdering:
+    | 'OPPHEVE_YTELSESVEDTAK'
+    | 'STADFESTE_YTELSESVEDTAK'
+    | 'MEDHOLD_I_KLAGE'
+    | 'AVVIS_KLAGE'
+    | 'HJEMSENDE_UTEN_Å_OPPHEVE'
+    | '-';
+  fritekstTilBrev?: string;
+  klageMedholdArsak?: 'NYE_OPPLYSNINGER' | 'ULIK_REGELVERKSTOLKNING' | 'ULIK_VURDERING' | 'PROSESSUELL_FEIL' | '-';
+  klageVurderingOmgjoer?: 'GUNST_MEDHOLD_I_KLAGE' | 'DELVIS_MEDHOLD_I_KLAGE' | 'UGUNST_MEDHOLD_I_KLAGE' | '-';
+  klageHjemmel?:
+    | '14-02'
+    | '14-04'
+    | '14-05'
+    | '14-06'
+    | '14-07'
+    | '14-09'
+    | '14-10'
+    | '14-11'
+    | '14-12'
+    | '14-13'
+    | '14-14'
+    | '14-15'
+    | '14-16'
+    | '14-17'
+    | '8-2'
+    | '21-3'
+    | '22-13'
+    | '22-15'
+    | '883-5'
+    | '883-6'
+    | '-';
+  begrunnelse?: string;
+};
+
+export type KontrollerRevurderingsBehandlingDto = {
+  begrunnelse?: string;
+};
+
+export type KontrollerStorEtterbetalingSøkerDto = {
+  begrunnelse?: string;
+};
+
+export type ManuellRegistreringEndringsøknadDto = {
+  tema: 'ADPSJN' | 'OMSRGO' | 'FODSL' | 'TERM' | '-';
+  soknadstype: 'ES' | 'FP' | 'SVP' | '-';
+  soker: 'MOR' | 'FAR' | 'MEDMOR' | 'ANDRE' | '-';
+  rettigheter?: 'ANNEN_FORELDER_DOED' | 'OVERTA_FORELDREANSVARET_ALENE' | 'MANN_ADOPTERER_ALENE';
+  oppholdINorge?: boolean;
+  harTidligereOppholdUtenlands?: boolean;
+  harFremtidigeOppholdUtenlands?: boolean;
+  tidligereOppholdUtenlands?: Array<UtenlandsoppholdDto>;
+  fremtidigeOppholdUtenlands?: Array<UtenlandsoppholdDto>;
+  erBarnetFodt?: boolean;
+  termindato?: string;
+  terminbekreftelseDato?: string;
+  antallBarnFraTerminbekreftelse?: number;
+  antallBarn?: number;
+  foedselsDato?: string;
+  annenForelder?: AnnenForelderDto;
+  tilleggsopplysninger?: string;
+  språkkode?: 'NB' | 'NN' | 'EN' | '-';
+  kommentarEndring?: string;
+  registrerVerge?: boolean;
+  mottattDato?: string;
+  ufullstendigSoeknad?: boolean;
+  omsorg?: OmsorgDto;
+  tidsromPermisjon?: TidsromPermisjonDto;
+  annenForelderInformert?: boolean;
+  begrunnelse?: string;
+};
+
+export type ManuellRegistreringEngangsstonadDto = {
+  tema: 'ADPSJN' | 'OMSRGO' | 'FODSL' | 'TERM' | '-';
+  soknadstype: 'ES' | 'FP' | 'SVP' | '-';
+  soker: 'MOR' | 'FAR' | 'MEDMOR' | 'ANDRE' | '-';
+  rettigheter?: 'ANNEN_FORELDER_DOED' | 'OVERTA_FORELDREANSVARET_ALENE' | 'MANN_ADOPTERER_ALENE';
+  oppholdINorge?: boolean;
+  harTidligereOppholdUtenlands?: boolean;
+  harFremtidigeOppholdUtenlands?: boolean;
+  tidligereOppholdUtenlands?: Array<UtenlandsoppholdDto>;
+  fremtidigeOppholdUtenlands?: Array<UtenlandsoppholdDto>;
+  erBarnetFodt?: boolean;
+  termindato?: string;
+  terminbekreftelseDato?: string;
+  antallBarnFraTerminbekreftelse?: number;
+  antallBarn?: number;
+  foedselsDato?: string;
+  annenForelder?: AnnenForelderDto;
+  tilleggsopplysninger?: string;
+  språkkode?: 'NB' | 'NN' | 'EN' | '-';
+  kommentarEndring?: string;
+  registrerVerge?: boolean;
+  mottattDato?: string;
+  ufullstendigSoeknad?: boolean;
+  omsorg?: OmsorgDto;
+  begrunnelse?: string;
+};
+
+export type ManuellRegistreringForeldrepengerDto = {
+  tema: 'ADPSJN' | 'OMSRGO' | 'FODSL' | 'TERM' | '-';
+  soknadstype: 'ES' | 'FP' | 'SVP' | '-';
+  soker: 'MOR' | 'FAR' | 'MEDMOR' | 'ANDRE' | '-';
+  rettigheter?: 'ANNEN_FORELDER_DOED' | 'OVERTA_FORELDREANSVARET_ALENE' | 'MANN_ADOPTERER_ALENE';
+  oppholdINorge?: boolean;
+  harTidligereOppholdUtenlands?: boolean;
+  harFremtidigeOppholdUtenlands?: boolean;
+  tidligereOppholdUtenlands?: Array<UtenlandsoppholdDto>;
+  fremtidigeOppholdUtenlands?: Array<UtenlandsoppholdDto>;
+  erBarnetFodt?: boolean;
+  termindato?: string;
+  terminbekreftelseDato?: string;
+  antallBarnFraTerminbekreftelse?: number;
+  antallBarn?: number;
+  foedselsDato?: string;
+  annenForelder?: AnnenForelderDto;
+  tilleggsopplysninger?: string;
+  språkkode?: 'NB' | 'NN' | 'EN' | '-';
+  kommentarEndring?: string;
+  registrerVerge?: boolean;
+  mottattDato?: string;
+  ufullstendigSoeknad?: boolean;
+  omsorg?: OmsorgDto;
+  arbeidsforhold?: Array<ArbeidsforholdDto>;
+  andreYtelser?: Array<AndreYtelserDto>;
+  egenVirksomhet?: EgenVirksomhetDto;
+  frilans?: FrilansDto;
+  dekningsgrad?: '100_PROSENT' | '80_PROSENT';
+  tidsromPermisjon?: TidsromPermisjonDto;
+  annenForelderInformert?: boolean;
+  begrunnelse?: string;
+};
+
+export type ManuellRegistreringSvangerskapspengerDto = {
+  tema: 'ADPSJN' | 'OMSRGO' | 'FODSL' | 'TERM' | '-';
+  soknadstype: 'ES' | 'FP' | 'SVP' | '-';
+  soker: 'MOR' | 'FAR' | 'MEDMOR' | 'ANDRE' | '-';
+  rettigheter?: 'ANNEN_FORELDER_DOED' | 'OVERTA_FORELDREANSVARET_ALENE' | 'MANN_ADOPTERER_ALENE';
+  oppholdINorge?: boolean;
+  harTidligereOppholdUtenlands?: boolean;
+  harFremtidigeOppholdUtenlands?: boolean;
+  tidligereOppholdUtenlands?: Array<UtenlandsoppholdDto>;
+  fremtidigeOppholdUtenlands?: Array<UtenlandsoppholdDto>;
+  erBarnetFodt?: boolean;
+  termindato?: string;
+  terminbekreftelseDato?: string;
+  antallBarnFraTerminbekreftelse?: number;
+  antallBarn?: number;
+  foedselsDato?: string;
+  annenForelder?: AnnenForelderDto;
+  tilleggsopplysninger?: string;
+  språkkode?: 'NB' | 'NN' | 'EN' | '-';
+  kommentarEndring?: string;
+  registrerVerge?: boolean;
+  mottattDato?: string;
+  ufullstendigSoeknad?: boolean;
+  omsorg?: OmsorgDto;
+  arbeidsforhold?: Array<ArbeidsforholdDto>;
+  andreYtelser?: Array<AndreYtelserDto>;
+  egenVirksomhet?: EgenVirksomhetDto;
+  frilans?: FrilansDto;
+  tilretteleggingArbeidsforhold?: Array<SvpTilretteleggingArbeidsforholdDto>;
+  begrunnelse?: string;
+};
+
+export type ManueltSattStartdatoDto = {
+  perioder: Array<FaktaUttakPeriodeDto>;
+  begrunnelse?: string;
+};
+
+export type NaringsvirksomhetTypeDto = {
+  ANNEN?: boolean;
+  FISKE?: boolean;
+  DAGMAMMA?: boolean;
+  JORDBRUK_SKOGBRUK?: boolean;
+  typeFiske?: string;
+};
+
+export type OmsorgDto = {
+  antallBarn?: number;
+  foedselsDato?: Array<string>;
+  omsorgsovertakelsesdato?: string;
+  ankomstdato?: string;
+  erEktefellesBarn?: boolean;
+};
+
+export type Oppdragperiode = {
+  oppdragsgiver?: string;
+  fomDato?: string;
+  tomDato?: string;
+};
+
+export type OppholdDto = {
+  årsak:
+    | '-'
+    | 'UTTAK_MØDREKVOTE_ANNEN_FORELDER'
+    | 'UTTAK_FEDREKVOTE_ANNEN_FORELDER'
+    | 'UTTAK_FELLESP_ANNEN_FORELDER'
+    | 'UTTAK_FORELDREPENGER_ANNEN_FORELDER';
+  periodeFom: string;
+  periodeTom: string;
+};
+
+export type OverføringsperiodeDto = {
+  periodeFom: string;
+  periodeTom: string;
+  overforingArsak:
+    | 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER'
+    | 'SYKDOM_ANNEN_FORELDER'
+    | 'IKKE_RETT_ANNEN_FORELDER'
+    | 'ALENEOMSORG'
+    | '-';
+};
+
+export type Permisjon = {
+  prosent?: number;
+  type?: '-' | 'UTDANNING' | 'FORELDREPENGER' | 'PERMITTERING' | 'ANNEN_PERMISJON';
+};
+
+export type PermisjonPeriodeDto = {
+  periodeFom: string;
+  periodeTom: string;
+  periodeType?: 'FELLESPERIODE' | 'MØDREKVOTE' | 'FEDREKVOTE' | 'FORELDREPENGER' | 'FORELDREPENGER_FØR_FØDSEL' | '-';
+  morsAktivitet?:
+    | '-'
+    | 'ARBEID'
+    | 'UTDANNING'
+    | 'KVALPROG'
+    | 'INTROPROG'
+    | 'TRENGER_HJELP'
+    | 'INNLAGT'
+    | 'ARBEID_OG_UTDANNING'
+    | 'UFØRE'
+    | 'IKKE_OPPGITT';
+  harSamtidigUttak?: boolean;
+  samtidigUttaksprosent?: number;
+  flerbarnsdager?: boolean;
+};
+
+export type SoknadsfristAksjonspunktDto = {
+  begrunnelse?: string;
+  erVilkarOk: boolean;
+};
+
+export type SvpArbeidsforholdDto = {
+  tilretteleggingId?: number;
+  tilretteleggingBehovFom?: string;
+  tilretteleggingDatoer?: Array<SvpTilretteleggingDatoDto>;
+  uttakArbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+  arbeidsgiverReferanse?: string;
+  opplysningerOmRisiko?: string;
+  opplysningerOmTilrettelegging?: string;
+  kopiertFraTidligereBehandling?: boolean;
+  mottattTidspunkt?: string;
+  internArbeidsforholdReferanse?: string;
+  eksternArbeidsforholdReferanse?: string;
+  skalBrukes?: boolean;
+  kanTilrettelegges?: boolean;
+  stillingsprosentStartTilrettelegging?: number;
+  velferdspermisjoner?: Array<VelferdspermisjonDto>;
+  avklarteOppholdPerioder?: Array<SvpAvklartOppholdPeriodeDto>;
+  begrunnelse?: string;
+};
+
+export type SvpAvklartOppholdPeriodeDto = {
+  fom: string;
+  tom: string;
+  oppholdÅrsak: 'SYKEPENGER' | 'FERIE';
+  oppholdKilde?: 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER';
+  forVisning?: boolean;
+};
+
+export type SvpTilretteleggingArbeidsforholdDto = (
+  | SvpTilretteleggingFrilanserDto
+  | SvpTilretteleggingPrivatArbeidsgiverDto
+  | SvpTilretteleggingSelvstendigNæringsdrivendeDto
+  | SvpTilretteleggingVirksomhetDto
+) & {
+  behovsdato?: string;
+  tilrettelegginger?: Array<SvpTilretteleggingDto>;
+};
+
+export type SvpTilretteleggingDatoDto = {
+  fom?: string;
+  type?: 'HEL_TILRETTELEGGING' | 'DELVIS_TILRETTELEGGING' | 'INGEN_TILRETTELEGGING';
+  stillingsprosent?: number;
+  overstyrtUtbetalingsgrad?: number;
+  kilde?: 'ENDRET_AV_SAKSBEHANDLER' | 'REGISTRERT_AV_SAKSBEHANDLER' | 'TIDLIGERE_VEDTAK' | 'SØKNAD';
+  mottattDato?: string;
+};
+
+export type SvpTilretteleggingDto = {
+  termindato?: string;
+  fødselsdato?: string;
+  arbeidsforholdListe?: Array<SvpArbeidsforholdDto>;
+  saksbehandlet?: boolean;
+};
+
+export type SvpTilretteleggingFrilanserDto = {
+  behovsdato?: string;
+  tilrettelegginger?: Array<SvpTilretteleggingDto>;
+};
+
+export type SvpTilretteleggingPrivatArbeidsgiverDto = {
+  behovsdato?: string;
+  tilrettelegginger?: Array<SvpTilretteleggingDto>;
+  arbeidsgiverIdentifikator?: string;
+};
+
+export type SvpTilretteleggingSelvstendigNæringsdrivendeDto = {
+  behovsdato?: string;
+  tilrettelegginger?: Array<SvpTilretteleggingDto>;
+};
+
+export type SvpTilretteleggingVirksomhetDto = {
+  behovsdato?: string;
+  tilrettelegginger?: Array<SvpTilretteleggingDto>;
+  organisasjonsnummer?: string;
+};
+
+export type TidsromPermisjonDto = {
+  overforingsperioder?: Array<OverføringsperiodeDto>;
+  permisjonsPerioder?: Array<PermisjonPeriodeDto>;
+  graderingPeriode?: Array<GraderingDto>;
+  utsettelsePeriode?: Array<UtsettelseDto>;
+  oppholdPerioder?: Array<OppholdDto>;
+};
+
+export type Trekkdager = {
+  [key: string]: unknown;
+};
+
+export type UtenlandsoppholdDto = {
+  land: string;
+  periodeFom: string;
+  periodeTom: string;
+};
+
+export type UtsettelseDto = {
+  periodeFom: string;
+  periodeTom: string;
+  periodeForUtsettelse?:
+    | 'FELLESPERIODE'
+    | 'MØDREKVOTE'
+    | 'FEDREKVOTE'
+    | 'FORELDREPENGER'
+    | 'FORELDREPENGER_FØR_FØDSEL'
+    | '-';
+  arsakForUtsettelse?:
+    | 'ARBEID'
+    | 'LOVBESTEMT_FERIE'
+    | 'SYKDOM'
+    | 'INSTITUSJONSOPPHOLD_SØKER'
+    | 'INSTITUSJONSOPPHOLD_BARNET'
+    | 'HV_OVELSE'
+    | 'NAV_TILTAK'
+    | 'FRI'
+    | '-';
+  morsAktivitet?:
+    | '-'
+    | 'ARBEID'
+    | 'UTDANNING'
+    | 'KVALPROG'
+    | 'INTROPROG'
+    | 'TRENGER_HJELP'
+    | 'INNLAGT'
+    | 'ARBEID_OG_UTDANNING'
+    | 'UFØRE'
+    | 'IKKE_OPPGITT';
+};
+
+export type UttakResultatPeriodeAktivitetLagreDto = {
+  stønadskontoType?:
+    | 'FELLESPERIODE'
+    | 'MØDREKVOTE'
+    | 'FEDREKVOTE'
+    | 'FORELDREPENGER'
+    | 'FORELDREPENGER_FØR_FØDSEL'
+    | '-';
+  trekkdagerDesimaler: Trekkdager;
+  arbeidsgiver?: Arbeidsgiver;
+  arbeidsgiverReferanse?: string;
+  arbeidsforholdId?: InternArbeidsforholdRef;
+  utbetalingsgrad?: number;
+  uttakArbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+};
+
+export type UttakResultatPeriodeLagreDto = {
+  fom: string;
+  tom: string;
+  aktiviteter: Array<UttakResultatPeriodeAktivitetLagreDto>;
+  begrunnelse?: string;
+  periodeResultatType: 'INNVILGET' | 'AVSLÅTT' | 'MANUELL_BEHANDLING';
+  periodeResultatÅrsak:
+    | '-'
+    | '2002'
+    | '2003'
+    | '2004'
+    | '2005'
+    | '2006'
+    | '2007'
+    | '2010'
+    | '2011'
+    | '2012'
+    | '2013'
+    | '2014'
+    | '2015'
+    | '2016'
+    | '2017'
+    | '2018'
+    | '2019'
+    | '2020'
+    | '2021'
+    | '2022'
+    | '2023'
+    | '2024'
+    | '2025'
+    | '2026'
+    | '2027'
+    | '2028'
+    | '2030'
+    | '2031'
+    | '2032'
+    | '2033'
+    | '2034'
+    | '2035'
+    | '2036'
+    | '2037'
+    | '2038'
+    | '2039'
+    | '4002'
+    | '4003'
+    | '4005'
+    | '4007'
+    | '4008'
+    | '4012'
+    | '4013'
+    | '4020'
+    | '4022'
+    | '4023'
+    | '4025'
+    | '4030'
+    | '4031'
+    | '4032'
+    | '4033'
+    | '4034'
+    | '4035'
+    | '4037'
+    | '4038'
+    | '4039'
+    | '4040'
+    | '4041'
+    | '4050'
+    | '4051'
+    | '4052'
+    | '4053'
+    | '4054'
+    | '4055'
+    | '4056'
+    | '4057'
+    | '4058'
+    | '4059'
+    | '4060'
+    | '4061'
+    | '4062'
+    | '4063'
+    | '4064'
+    | '4065'
+    | '4066'
+    | '4067'
+    | '4068'
+    | '4069'
+    | '4070'
+    | '4071'
+    | '4072'
+    | '4073'
+    | '4074'
+    | '4075'
+    | '4076'
+    | '4077'
+    | '4081'
+    | '4082'
+    | '4084'
+    | '4085'
+    | '4086'
+    | '4087'
+    | '4088'
+    | '4089'
+    | '4092'
+    | '4093'
+    | '4095'
+    | '4096'
+    | '4097'
+    | '4098'
+    | '4099'
+    | '4100'
+    | '4102'
+    | '4103'
+    | '4104'
+    | '4105'
+    | '4106'
+    | '4107'
+    | '4110'
+    | '4111'
+    | '4112'
+    | '4115'
+    | '4116'
+    | '4117';
+  utsettelseType:
+    | 'ARBEID'
+    | 'FERIE'
+    | 'SYKDOM_SKADE'
+    | 'SØKER_INNLAGT'
+    | 'BARN_INNLAGT'
+    | 'HV_OVELSE'
+    | 'NAV_TILTAK'
+    | 'FRI'
+    | '-';
+  oppholdÅrsak:
+    | '-'
+    | 'UTTAK_MØDREKVOTE_ANNEN_FORELDER'
+    | 'UTTAK_FEDREKVOTE_ANNEN_FORELDER'
+    | 'UTTAK_FELLESP_ANNEN_FORELDER'
+    | 'UTTAK_FORELDREPENGER_ANNEN_FORELDER';
+  flerbarnsdager?: boolean;
+  samtidigUttak?: boolean;
+  samtidigUttaksprosent?: number;
+  graderingInnvilget?: boolean;
+  graderingAvslagÅrsak: '-' | '4504' | '4501' | '4502' | '4503' | '4523';
+  mottattDato?: string;
+};
+
+export type VarselRevurderingManuellDto = {
+  sendVarsel?: boolean;
+  fritekst?: string;
+  frist?: string;
+  ventearsak?:
+    | '-'
+    | 'AVV_DOK'
+    | 'AVV_FODSEL'
+    | 'FOR_TIDLIG_SOKNAD'
+    | 'SCANN'
+    | 'UTV_FRIST'
+    | 'VENT_PÅ_BRUKERTILBAKEMELDING'
+    | 'VENT_UTLAND_TRYGD'
+    | 'VENT_INNTEKT_RAPPORTERINGSFRIST'
+    | 'VENT_MANGLENDE_SYKEMELDING'
+    | 'VENT_OPDT_INNTEKTSMELDING'
+    | 'VENT_OPPTJENING_OPPLYSNINGER'
+    | 'VENT_PÅ_SISTE_AAP_MELDEKORT'
+    | 'VENT_SØKNAD_SENDT_INFORMASJONSBREV'
+    | 'VENT_ÅPEN_BEHANDLING'
+    | 'VENT_KABAL'
+    | 'ANKE_OVERSENDT_TIL_TRYGDERETTEN'
+    | 'ANKE_VENTER_PAA_MERKNADER_FRA_BRUKER'
+    | 'AVV_RESPONS_REVURDERING'
+    | 'VENT_TIDLIGERE_BEHANDLING'
+    | 'AAP_DP_SISTE_10_MND_SVP'
+    | 'AAP_DP_ENESTE_AKTIVITET_SVP'
+    | 'DELVIS_TILRETTELEGGING_OG_REFUSJON_SVP'
+    | 'FLERE_ARBEIDSFORHOLD_SAMME_ORG_SVP'
+    | 'FL_SN_IKKE_STOTTET_FOR_SVP'
+    | 'GRADERING_FLERE_ARBEIDSFORHOLD'
+    | 'OPPD_ÅPEN_BEH'
+    | 'REFUSJON_3_MÅNEDER'
+    | 'VENTELØNN_ELLER_MILITÆR_MED_FLERE_AKTIVITETER'
+    | 'VENT_BEREGNING_TILBAKE_I_TID'
+    | 'VENT_DEKGRAD_REGEL'
+    | 'VENT_DØDFØDSEL_80P_DEKNINGSGRAD'
+    | 'VENT_FEIL_ENDRINGSSØKNAD'
+    | 'VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG'
+    | 'VENT_INFOTRYGD'
+    | 'VENT_MANGLENDE_ARBEIDSFORHOLD'
+    | 'VENT_MILITÆR_OG_BG_UNDER_3G'
+    | 'ULIKE_STARTDATOER_SVP'
+    | 'VENT_LOVENDRING_8_41'
+    | 'VENT_PÅ_KORRIGERT_BESTEBEREGNING'
+    | 'VENT_PÅ_NY_INNTEKTSMELDING_MED_GYLDIG_ARB_ID'
+    | 'VENT_REGISTERINNHENTING'
+    | 'VENT_ØKONOMI';
+  begrunnelse?: string;
+};
+
+export type VelferdspermisjonDto = {
+  permisjonFom?: string;
+  permisjonTom?: string;
+  permisjonsprosent?: number;
+  type?:
+    | '-'
+    | 'PERMISJON'
+    | 'UTDANNINGSPERMISJON'
+    | 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
+    | 'UTDANNINGSPERMISJON_LOVFESTET'
+    | 'VELFERDSPERMISJON'
+    | 'ANNEN_PERMISJON_IKKE_LOVFESTET'
+    | 'ANNEN_PERMISJON_LOVFESTET'
+    | 'PERMISJON_MED_FORELDREPENGER'
+    | 'PERMITTERING'
+    | 'PERMISJON_VED_MILITÆRTJENESTE';
+  erGyldig?: boolean;
+};
+
+export type VirksomhetDto = {
+  navn: string;
+  virksomhetRegistrertINorge?: boolean;
+  organisasjonsnummer?: string;
+  landJobberFra?: string;
+  typeVirksomhet: NaringsvirksomhetTypeDto;
+  varigEndretEllerStartetSisteFireAr?: boolean;
+  harVarigEndring?: boolean;
+  erNyoppstartet?: boolean;
+  varigEndringGjeldendeFom?: string;
+  inntekt?: number;
+  beskrivelseAvEndring?: string;
+  harRegnskapsforer?: boolean;
+  navnRegnskapsforer?: string;
+  tlfRegnskapsforer?: string;
+  familieEllerVennerTilknyttetNaringen?: boolean;
+  erNyIArbeidslivet?: boolean;
+  oppstartsdato?: string;
+  fom?: string;
+  tom?: string;
+};
+
+export type VurderFaresignalerDto = {
+  faresignalVurdering:
+    | 'INNVIRKNING'
+    | 'INNVILGET_REDUSERT'
+    | 'INNVILGET_UENDRET'
+    | 'AVSLAG_FARESIGNAL'
+    | 'AVSLAG_ANNET'
+    | 'INGEN_INNVIRKNING'
+    | '-';
+  begrunnelse?: string;
+};
+
+export type VurderFeilutbetalingDto = {
+  videreBehandling: '-' | 'TILBAKEKR_OPPRETT' | 'TILBAKEKR_IGNORER' | 'TILBAKEKR_INNTREKK' | 'TILBAKEKR_OPPDATER';
+  varseltekst?: string;
+  begrunnelse?: string;
+};
+
+export type VurderForutgåendeMedlemskapDto = {
+  avslagskode?:
+    | '1001'
+    | '1002'
+    | '1003'
+    | '1004'
+    | '1005'
+    | '1006'
+    | '1007'
+    | '1008'
+    | '1009'
+    | '1010'
+    | '1011'
+    | '1012'
+    | '1013'
+    | '1014'
+    | '1015'
+    | '1016'
+    | '1017'
+    | '1018'
+    | '1019'
+    | '1020'
+    | '1021'
+    | '1023'
+    | '1024'
+    | '1025'
+    | '1026'
+    | '1027'
+    | '1028'
+    | '1029'
+    | '1031'
+    | '1032'
+    | '1033'
+    | '1034'
+    | '1035'
+    | '1041'
+    | '1051'
+    | '1052'
+    | '1060'
+    | '1061'
+    | '1062'
+    | '1063'
+    | '1064'
+    | '1065'
+    | '1066'
+    | '1099'
+    | '-';
+  medlemFom?: string;
+  begrunnelse?: string;
+};
+
+export type VurderInnsynDokumentDto = {
+  fikkInnsyn?: boolean;
+  journalpostId?: string;
+  dokumentId?: string;
+};
+
+export type VurderInnsynDto = {
+  begrunnelse?: string;
+  innsynResultatType: 'INNV' | 'DELV' | 'AVVIST' | '-';
+  mottattDato: string;
+  innsynDokumenter: Array<VurderInnsynDokumentDto>;
+  sattPaVent?: boolean;
+  fristDato?: string;
+};
+
+export type VurderMedlemskapDto = {
+  avslagskode?:
+    | '1001'
+    | '1002'
+    | '1003'
+    | '1004'
+    | '1005'
+    | '1006'
+    | '1007'
+    | '1008'
+    | '1009'
+    | '1010'
+    | '1011'
+    | '1012'
+    | '1013'
+    | '1014'
+    | '1015'
+    | '1016'
+    | '1017'
+    | '1018'
+    | '1019'
+    | '1020'
+    | '1021'
+    | '1023'
+    | '1024'
+    | '1025'
+    | '1026'
+    | '1027'
+    | '1028'
+    | '1029'
+    | '1031'
+    | '1032'
+    | '1033'
+    | '1034'
+    | '1035'
+    | '1041'
+    | '1051'
+    | '1052'
+    | '1060'
+    | '1061'
+    | '1062'
+    | '1063'
+    | '1064'
+    | '1065'
+    | '1066'
+    | '1099'
+    | '-';
+  opphørFom?: string;
+  begrunnelse?: string;
+};
+
+export type VurderSøknadsfristDto = {
+  ansesMottattDato?: string;
+  harGyldigGrunn?: boolean;
+  begrunnelse?: string;
+};
+
+export type VurderUttakDokumentasjonDto = {
+  vurderingBehov?: Array<DokumentasjonVurderingBehovDto>;
+  begrunnelse?: string;
+};
+
+export type VurdereAnnenYteleseFørVedtakDto = {
+  begrunnelse?: string;
+};
+
+export type VurdereDokumentFørVedtakDto = {
+  begrunnelse?: string;
+};
+
+export type VurdereInntektsmeldingFørVedtakDto = {
+  begrunnelse?: string;
+};
+
+export type AvklarDekningsgradOverstyringDto = {
+  dekningsgrad?: number;
+  begrunnelse?: string;
+};
+
+export type OverstyrOmsorgOgRettDto = {
+  rettighetstype:
+    | 'ALENEOMSORG'
+    | 'BEGGE_RETT'
+    | 'BEGGE_RETT_EØS'
+    | 'BARE_MOR_RETT'
+    | 'BARE_FAR_RETT'
+    | 'BARE_FAR_RETT_MOR_UFØR';
+  begrunnelse?: string;
+};
+
+export type OverstyringAdopsjonsvilkåretDto = {
+  begrunnelse?: string;
+  avslagskode?: string;
+  erVilkarOk?: boolean;
+};
+
+export type OverstyringAksjonspunktDto = (
+  | AvklarDekningsgradOverstyringDto
+  | OverstyrOmsorgOgRettDto
+  | OverstyringUttakDto
+  | OverstyringFaktaUttakDto
+  | OverstyringForutgåendeMedlemskapsvilkårDto
+  | OverstyringFødselsvilkåretDto
+  | OverstyringFødselvilkåretFarMedmorDto
+  | OverstyringMedlemskapsvilkåretDto
+  | OverstyringOpptjeningsvilkåretDto
+  | OverstyringSokersOpplysingspliktDto
+  | OverstyringSøknadsfristvilkåretDto
+  | OverstyringAdopsjonsvilkåretDto
+  | OverstyringAvklarStartdatoForPeriodenDto
+) & {
+  begrunnelse?: string;
+};
+
+export type OverstyringAvklarStartdatoForPeriodenDto = {
+  begrunnelse?: string;
+  startdatoFraSoknad?: string;
+  opprinneligDato?: string;
+};
+
+export type OverstyringFaktaUttakDto = {
+  perioder: Array<FaktaUttakPeriodeDto>;
+  begrunnelse?: string;
+};
+
+export type OverstyringForutgåendeMedlemskapsvilkårDto = {
+  begrunnelse?: string;
+  avslagskode?: string;
+  erVilkarOk?: boolean;
+  medlemFom?: string;
+};
+
+export type OverstyringFødselsvilkåretDto = {
+  begrunnelse?: string;
+  avslagskode?: string;
+  erVilkarOk?: boolean;
+};
+
+export type OverstyringFødselvilkåretFarMedmorDto = {
+  begrunnelse?: string;
+  avslagskode?: string;
+  erVilkarOk?: boolean;
+};
+
+export type OverstyringMedlemskapsvilkåretDto = {
+  begrunnelse?: string;
+  avslagskode?: string;
+  erVilkarOk?: boolean;
+  opphørFom?: string;
+};
+
+export type OverstyringOpptjeningsvilkåretDto = {
+  begrunnelse?: string;
+  avslagskode?: string;
+  erVilkarOk?: boolean;
+};
+
+export type OverstyringSokersOpplysingspliktDto = {
+  begrunnelse?: string;
+  erVilkarOk?: boolean;
+};
+
+export type OverstyringSøknadsfristvilkåretDto = {
+  begrunnelse?: string;
+  erVilkarOk?: boolean;
+};
+
+export type OverstyringUttakDto = {
+  begrunnelse?: string;
+  perioder: Array<UttakResultatPeriodeLagreDto>;
 };
 
 export type OverstyrteAksjonspunkterDto = {
@@ -766,11 +2074,6 @@ export type ArbeidOgInntektsmeldingDto = {
   arbeidsforhold?: Array<ArbeidsforholdDto>;
   inntekter?: Array<InntektDto>;
   skjæringstidspunkt?: string;
-};
-
-export type ArbeidsforholdDto = {
-  arbeidsgiverReferanse?: string;
-  arbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
 };
 
 export type InntektDto = {
@@ -1063,14 +2366,6 @@ export type AndelMedBeløpDto = {
   fastsattBelopPrMnd?: number;
 };
 
-export type Arbeidsgiver = {
-  identifikator?: string;
-  aktørId?: string;
-  orgnr?: string;
-  indexKey?: string;
-  erVirksomhet?: boolean;
-};
-
 export type ArbeidstakerUtenInntektsmeldingAndelDto = {
   andelsnr: number;
   arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
@@ -1325,13 +2620,80 @@ export type BeregningsgrunnlagPeriodeDto = {
   beregningsgrunnlagPrStatusOgAndel?: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
 };
 
-export type BeregningsgrunnlagPrStatusOgAndelAtDto = BeregningsgrunnlagPrStatusOgAndelDto & {
-  dtoType: 'BeregningsgrunnlagPrStatusOgAndelATDto';
-} & {
+export type BeregningsgrunnlagPrStatusOgAndelAtDto = {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
   bortfaltNaturalytelse?: number;
 };
 
-export type BeregningsgrunnlagPrStatusOgAndelDto = {
+export type BeregningsgrunnlagPrStatusOgAndelDto = (
+  | ({
+      dtoType: 'BeregningsgrunnlagPrStatusOgAndelATDto';
+    } & BeregningsgrunnlagPrStatusOgAndelAtDto)
+  | ({
+      dtoType: 'BeregningsgrunnlagPrStatusOgAndelDtoFelles';
+    } & BeregningsgrunnlagPrStatusOgAndelDtoFelles)
+  | ({
+      dtoType: 'BeregningsgrunnlagPrStatusOgAndelFLDto';
+    } & BeregningsgrunnlagPrStatusOgAndelFlDto)
+  | ({
+      dtoType: 'BeregningsgrunnlagPrStatusOgAndelSNDto';
+    } & BeregningsgrunnlagPrStatusOgAndelSnDto)
+  | ({
+      dtoType: 'BeregningsgrunnlagPrStatusOgAndelYtelseDto';
+    } & BeregningsgrunnlagPrStatusOgAndelYtelseDto)
+) & {
   aktivitetStatus?:
     | 'MIDL_INAKTIV'
     | 'AAP'
@@ -1388,27 +2750,232 @@ export type BeregningsgrunnlagPrStatusOgAndelDto = {
   dtoType: string;
 };
 
-export type BeregningsgrunnlagPrStatusOgAndelDtoFelles = BeregningsgrunnlagPrStatusOgAndelDto & {
-  dtoType: 'BeregningsgrunnlagPrStatusOgAndelDtoFelles';
+export type BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
 };
 
-export type BeregningsgrunnlagPrStatusOgAndelFlDto = BeregningsgrunnlagPrStatusOgAndelDto & {
-  dtoType: 'BeregningsgrunnlagPrStatusOgAndelFLDto';
-} & {
+export type BeregningsgrunnlagPrStatusOgAndelFlDto = {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
   erNyoppstartet?: boolean;
 };
 
-export type BeregningsgrunnlagPrStatusOgAndelSnDto = BeregningsgrunnlagPrStatusOgAndelDto & {
-  dtoType: 'BeregningsgrunnlagPrStatusOgAndelSNDto';
-} & {
+export type BeregningsgrunnlagPrStatusOgAndelSnDto = {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
   pgiSnitt?: number;
   pgiVerdier?: Array<PgiDto>;
   næringer?: Array<EgenNæringDto>;
 };
 
-export type BeregningsgrunnlagPrStatusOgAndelYtelseDto = BeregningsgrunnlagPrStatusOgAndelDto & {
-  dtoType: 'BeregningsgrunnlagPrStatusOgAndelYtelseDto';
-} & {
+export type BeregningsgrunnlagPrStatusOgAndelYtelseDto = {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
   belopFraMeldekortPrMnd?: number;
   belopFraMeldekortPrAar?: number;
   oppjustertGrunnlag?: number;
@@ -1694,9 +3261,7 @@ export type FordelingDto = {
   fordelBeregningsgrunnlag?: FordelBeregningsgrunnlagDto;
 };
 
-export type ForeldrepengerGrunnlagDto = YtelsespesifiktGrunnlagDto & {
-  ytelsetype: 'ForeldrepengerGrunnlagDto';
-} & {
+export type ForeldrepengerGrunnlagDto = {
   besteberegninggrunnlag?: BesteberegninggrunnlagDto;
 };
 
@@ -1723,9 +3288,7 @@ export type FrisinnAndelDto = {
     | '-';
 };
 
-export type FrisinnGrunnlagDto = YtelsespesifiktGrunnlagDto & {
-  ytelsetype: 'FrisinnGrunnlagDto';
-} & {
+export type FrisinnGrunnlagDto = {
   opplysningerFL?: SøknadsopplysningerDto;
   opplysningerSN?: SøknadsopplysningerDto;
   perioderSøktFor: Array<OpplystPeriodeDto>;
@@ -1860,9 +3423,7 @@ export type NyPeriodeDto = {
   tom?: string;
 };
 
-export type OmsorgspengeGrunnlagDto = YtelsespesifiktGrunnlagDto & {
-  ytelsetype: 'OmsorgspengeGrunnlagDto';
-} & {
+export type OmsorgspengeGrunnlagDto = {
   skalAvviksvurdere?: boolean;
 };
 
@@ -1978,8 +3539,8 @@ export type SammenligningsgrunnlagDto = {
   differanseBeregnet?: number;
 };
 
-export type SvangerskapspengerGrunnlagDto = YtelsespesifiktGrunnlagDto & {
-  ytelsetype: 'SvangerskapspengerGrunnlagDto';
+export type SvangerskapspengerGrunnlagDto = {
+  [key: string]: unknown;
 };
 
 export type SøknadsopplysningerDto = {
@@ -2026,7 +3587,20 @@ export type VurderRepresentererStortingetDto = {
   representererStortinget?: boolean;
 };
 
-export type YtelsespesifiktGrunnlagDto = {
+export type YtelsespesifiktGrunnlagDto = (
+  | ({
+      ytelsetype: 'OmsorgspengeGrunnlagDto';
+    } & OmsorgspengeGrunnlagDto)
+  | ({
+      ytelsetype: 'SvangerskapspengerGrunnlagDto';
+    } & SvangerskapspengerGrunnlagDto)
+  | ({
+      ytelsetype: 'ForeldrepengerGrunnlagDto';
+    } & ForeldrepengerGrunnlagDto)
+  | ({
+      ytelsetype: 'FrisinnGrunnlagDto';
+    } & FrisinnGrunnlagDto)
+) & {
   ytelsetype: string;
 };
 
@@ -2168,6 +3742,7 @@ export type Register = {
 export type Søknad = {
   status?: 'MOTTATT' | 'BEHANDLET';
   mottattTidspunkt?: string;
+  tilrettelegginger?: Array<Tilrettelegging>;
 };
 
 export type Termin = {
@@ -2305,12 +3880,6 @@ export type KlageFormKravAksjonspunktMellomlagringDto = {
   begrunnelse?: string;
   fritekstTilBrev?: string;
   paKlagdBehandlingUuid?: string;
-};
-
-export type KlageTilbakekrevingDto = {
-  tilbakekrevingUuid: string;
-  tilbakekrevingVedtakDato?: string;
-  tilbakekrevingBehandlingType?: string;
 };
 
 export type KlageVurderingResultatAksjonspunktMellomlagringDto = {
@@ -2831,69 +4400,6 @@ export type Utenlandsopphold = {
     | '-';
 };
 
-export type SvpArbeidsforholdDto = {
-  tilretteleggingId?: number;
-  tilretteleggingBehovFom?: string;
-  tilretteleggingDatoer?: Array<SvpTilretteleggingDatoDto>;
-  uttakArbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
-  arbeidsgiverReferanse?: string;
-  opplysningerOmRisiko?: string;
-  opplysningerOmTilrettelegging?: string;
-  kopiertFraTidligereBehandling?: boolean;
-  mottattTidspunkt?: string;
-  internArbeidsforholdReferanse?: string;
-  eksternArbeidsforholdReferanse?: string;
-  skalBrukes?: boolean;
-  kanTilrettelegges?: boolean;
-  stillingsprosentStartTilrettelegging?: number;
-  velferdspermisjoner?: Array<VelferdspermisjonDto>;
-  avklarteOppholdPerioder?: Array<SvpAvklartOppholdPeriodeDto>;
-  begrunnelse?: string;
-};
-
-export type SvpAvklartOppholdPeriodeDto = {
-  fom: string;
-  tom: string;
-  oppholdÅrsak: 'SYKEPENGER' | 'FERIE';
-  oppholdKilde?: 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER';
-  forVisning?: boolean;
-};
-
-export type SvpTilretteleggingDatoDto = {
-  fom?: string;
-  type?: 'HEL_TILRETTELEGGING' | 'DELVIS_TILRETTELEGGING' | 'INGEN_TILRETTELEGGING';
-  stillingsprosent?: number;
-  overstyrtUtbetalingsgrad?: number;
-  kilde?: 'ENDRET_AV_SAKSBEHANDLER' | 'REGISTRERT_AV_SAKSBEHANDLER' | 'TIDLIGERE_VEDTAK' | 'SØKNAD';
-  mottattDato?: string;
-};
-
-export type SvpTilretteleggingDto = {
-  termindato?: string;
-  fødselsdato?: string;
-  arbeidsforholdListe?: Array<SvpArbeidsforholdDto>;
-  saksbehandlet?: boolean;
-};
-
-export type VelferdspermisjonDto = {
-  permisjonFom?: string;
-  permisjonTom?: string;
-  permisjonsprosent?: number;
-  type?:
-    | '-'
-    | 'PERMISJON'
-    | 'UTDANNINGSPERMISJON'
-    | 'UTDANNINGSPERMISJON_IKKE_LOVFESTET'
-    | 'UTDANNINGSPERMISJON_LOVFESTET'
-    | 'VELFERDSPERMISJON'
-    | 'ANNEN_PERMISJON_IKKE_LOVFESTET'
-    | 'ANNEN_PERMISJON_LOVFESTET'
-    | 'PERMISJON_MED_FORELDREPENGER'
-    | 'PERMITTERING'
-    | 'PERMISJON_VED_MILITÆRTJENESTE';
-  erGyldig?: boolean;
-};
-
 export type DekningsgradInfoDto = {
   avklartDekningsgrad?: number;
   søker?: OppgittDekningsgradDto;
@@ -2996,21 +4502,6 @@ export type OppgittTilknytningDto = {
   utlandsoppholdEtter?: Array<UtlandsoppholdDto>;
 };
 
-export type SoknadAdopsjonDto = SoknadDto & {
-  omsorgsovertakelseDato?: string;
-  barnetsAnkomstTilNorgeDato?: string;
-  adopsjonFodelsedatoer?: {
-    [key: string]: string;
-  };
-  farSokerType?:
-    | 'ADOPTERER_ALENE'
-    | 'ANDRE_FORELDER_DØD'
-    | 'OVERTATT_OMSORG'
-    | 'OVERTATT_OMSORG_F'
-    | 'ANDRE_FORELD_DØD_F'
-    | '-';
-};
-
 export type SoknadDto = {
   soknadType?: 'ST-001' | 'ST-002';
   mottattDato?: string;
@@ -3020,21 +4511,6 @@ export type SoknadDto = {
   manglendeVedlegg?: Array<ManglendeVedleggDto>;
   oppgittFordeling?: OppgittFordelingDto;
   søknadsfrist?: SøknadsfristDto;
-};
-
-export type SoknadFodselDto = SoknadDto & {
-  utstedtdato?: string;
-  termindato?: string;
-  farSokerType?:
-    | 'ADOPTERER_ALENE'
-    | 'ANDRE_FORELDER_DØD'
-    | 'OVERTATT_OMSORG'
-    | 'OVERTATT_OMSORG_F'
-    | 'ANDRE_FORELD_DØD_F'
-    | '-';
-  fodselsdatoer?: {
-    [key: string]: string;
-  };
 };
 
 export type SøknadsfristDto = {
@@ -3049,6 +4525,52 @@ export type UtlandsoppholdDto = {
   landNavn?: string;
   fom?: string;
   tom?: string;
+};
+
+export type SoknadAdopsjonDto = {
+  soknadType?: 'ST-001' | 'ST-002';
+  mottattDato?: string;
+  begrunnelseForSenInnsending?: string;
+  antallBarn?: number;
+  oppgittTilknytning?: OppgittTilknytningDto;
+  manglendeVedlegg?: Array<ManglendeVedleggDto>;
+  oppgittFordeling?: OppgittFordelingDto;
+  søknadsfrist?: SøknadsfristDto;
+  omsorgsovertakelseDato?: string;
+  barnetsAnkomstTilNorgeDato?: string;
+  adopsjonFodelsedatoer?: {
+    [key: string]: string;
+  };
+  farSokerType?:
+    | 'ADOPTERER_ALENE'
+    | 'ANDRE_FORELDER_DØD'
+    | 'OVERTATT_OMSORG'
+    | 'OVERTATT_OMSORG_F'
+    | 'ANDRE_FORELD_DØD_F'
+    | '-';
+};
+
+export type SoknadFodselDto = {
+  soknadType?: 'ST-001' | 'ST-002';
+  mottattDato?: string;
+  begrunnelseForSenInnsending?: string;
+  antallBarn?: number;
+  oppgittTilknytning?: OppgittTilknytningDto;
+  manglendeVedlegg?: Array<ManglendeVedleggDto>;
+  oppgittFordeling?: OppgittFordelingDto;
+  søknadsfrist?: SøknadsfristDto;
+  utstedtdato?: string;
+  termindato?: string;
+  farSokerType?:
+    | 'ADOPTERER_ALENE'
+    | 'ANDRE_FORELDER_DØD'
+    | 'OVERTATT_OMSORG'
+    | 'OVERTATT_OMSORG_F'
+    | 'ANDRE_FORELD_DØD_F'
+    | '-';
+  fodselsdatoer?: {
+    [key: string]: string;
+  };
 };
 
 export type SoknadBackendDto = {
@@ -3179,267 +4701,6 @@ export type StønadskontoDto = {
 export type BehandlingMedUttaksperioderDto = {
   behandlingUuid: string;
   perioder: Array<UttakResultatPeriodeLagreDto>;
-};
-
-export type InternArbeidsforholdRef = {
-  referanse?: string;
-  indexKey?: string;
-  uuidreferanse?: string;
-};
-
-export type Trekkdager = {
-  [key: string]: unknown;
-};
-
-export type UttakResultatPeriodeAktivitetLagreDto = {
-  stønadskontoType?:
-    | 'FELLESPERIODE'
-    | 'MØDREKVOTE'
-    | 'FEDREKVOTE'
-    | 'FORELDREPENGER'
-    | 'FORELDREPENGER_FØR_FØDSEL'
-    | '-';
-  trekkdagerDesimaler: Trekkdager;
-  arbeidsgiver?: Arbeidsgiver;
-  arbeidsgiverReferanse?: string;
-  arbeidsforholdId?: InternArbeidsforholdRef;
-  utbetalingsgrad?: number;
-  uttakArbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
-};
-
-export type UttakResultatPeriodeLagreDto = {
-  fom: string;
-  tom: string;
-  aktiviteter: Array<UttakResultatPeriodeAktivitetLagreDto>;
-  begrunnelse?: string;
-  periodeResultatType: 'INNVILGET' | 'AVSLÅTT' | 'MANUELL_BEHANDLING';
-  periodeResultatÅrsak:
-    | '-'
-    | '2002'
-    | '2003'
-    | '2004'
-    | '2005'
-    | '2006'
-    | '2007'
-    | '2010'
-    | '2011'
-    | '2012'
-    | '2013'
-    | '2014'
-    | '2015'
-    | '2016'
-    | '2017'
-    | '2018'
-    | '2019'
-    | '2020'
-    | '2021'
-    | '2022'
-    | '2023'
-    | '2024'
-    | '2025'
-    | '2026'
-    | '2027'
-    | '2028'
-    | '2030'
-    | '2031'
-    | '2032'
-    | '2033'
-    | '2034'
-    | '2035'
-    | '2036'
-    | '2037'
-    | '2038'
-    | '2039'
-    | '4002'
-    | '4003'
-    | '4005'
-    | '4007'
-    | '4008'
-    | '4012'
-    | '4013'
-    | '4020'
-    | '4022'
-    | '4023'
-    | '4025'
-    | '4030'
-    | '4031'
-    | '4032'
-    | '4033'
-    | '4034'
-    | '4035'
-    | '4037'
-    | '4038'
-    | '4039'
-    | '4040'
-    | '4041'
-    | '4050'
-    | '4051'
-    | '4052'
-    | '4053'
-    | '4054'
-    | '4055'
-    | '4056'
-    | '4057'
-    | '4058'
-    | '4059'
-    | '4060'
-    | '4061'
-    | '4062'
-    | '4063'
-    | '4064'
-    | '4065'
-    | '4066'
-    | '4067'
-    | '4068'
-    | '4069'
-    | '4070'
-    | '4071'
-    | '4072'
-    | '4073'
-    | '4074'
-    | '4075'
-    | '4076'
-    | '4077'
-    | '4081'
-    | '4082'
-    | '4084'
-    | '4085'
-    | '4086'
-    | '4087'
-    | '4088'
-    | '4089'
-    | '4092'
-    | '4093'
-    | '4095'
-    | '4096'
-    | '4097'
-    | '4098'
-    | '4099'
-    | '4100'
-    | '4102'
-    | '4103'
-    | '4104'
-    | '4105'
-    | '4106'
-    | '4107'
-    | '4110'
-    | '4111'
-    | '4112'
-    | '4115'
-    | '4116'
-    | '4117';
-  utsettelseType:
-    | 'ARBEID'
-    | 'FERIE'
-    | 'SYKDOM_SKADE'
-    | 'SØKER_INNLAGT'
-    | 'BARN_INNLAGT'
-    | 'HV_OVELSE'
-    | 'NAV_TILTAK'
-    | 'FRI'
-    | '-';
-  oppholdÅrsak:
-    | '-'
-    | 'UTTAK_MØDREKVOTE_ANNEN_FORELDER'
-    | 'UTTAK_FEDREKVOTE_ANNEN_FORELDER'
-    | 'UTTAK_FELLESP_ANNEN_FORELDER'
-    | 'UTTAK_FORELDREPENGER_ANNEN_FORELDER';
-  flerbarnsdager?: boolean;
-  samtidigUttak?: boolean;
-  samtidigUttaksprosent?: number;
-  graderingInnvilget?: boolean;
-  graderingAvslagÅrsak: '-' | '4504' | '4501' | '4502' | '4503' | '4523';
-  mottattDato?: string;
-};
-
-export type AktivitetskravGrunnlagArbeid = {
-  orgNummer?: string;
-  stillingsprosent?: number;
-  permisjon?: Permisjon;
-};
-
-export type DokumentasjonVurderingBehovDto = {
-  fom: string;
-  tom: string;
-  type: 'UTSETTELSE' | 'OVERFØRING' | 'UTTAK';
-  årsak:
-    | 'INNLEGGELSE_SØKER'
-    | 'INNLEGGELSE_BARN'
-    | 'HV_ØVELSE'
-    | 'NAV_TILTAK'
-    | 'SYKDOM_SØKER'
-    | 'INNLEGGELSE_ANNEN_FORELDER'
-    | 'SYKDOM_ANNEN_FORELDER'
-    | 'BARE_SØKER_RETT'
-    | 'ALENEOMSORG'
-    | 'AKTIVITETSKRAV_ARBEID'
-    | 'AKTIVITETSKRAV_UTDANNING'
-    | 'AKTIVITETSKRAV_KVALPROG'
-    | 'AKTIVITETSKRAV_INTROPROG'
-    | 'AKTIVITETSKRAV_TRENGER_HJELP'
-    | 'AKTIVITETSKRAV_INNLAGT'
-    | 'AKTIVITETSKRAV_ARBEID_OG_UTDANNING'
-    | 'AKTIVITETSKRAV_IKKE_OPPGITT'
-    | 'TIDLIG_OPPSTART_FAR';
-  vurdering?: 'GODKJENT' | 'GODKJENT_AUTOMATISK' | 'IKKE_GODKJENT' | 'IKKE_DOKUMENTERT';
-  morsStillingsprosent?: number;
-  aktivitetskravGrunnlag?: Array<AktivitetskravGrunnlagArbeid>;
-};
-
-export type Permisjon = {
-  prosent?: number;
-  type?: '-' | 'UTDANNING' | 'FORELDREPENGER' | 'PERMITTERING' | 'ANNEN_PERMISJON';
-};
-
-export type FaktaUttakPeriodeDto = {
-  fom: string;
-  tom: string;
-  uttakPeriodeType?:
-    | 'FELLESPERIODE'
-    | 'MØDREKVOTE'
-    | 'FEDREKVOTE'
-    | 'FORELDREPENGER'
-    | 'FORELDREPENGER_FØR_FØDSEL'
-    | '-';
-  utsettelseÅrsak?:
-    | 'ARBEID'
-    | 'LOVBESTEMT_FERIE'
-    | 'SYKDOM'
-    | 'INSTITUSJONSOPPHOLD_SØKER'
-    | 'INSTITUSJONSOPPHOLD_BARNET'
-    | 'HV_OVELSE'
-    | 'NAV_TILTAK'
-    | 'FRI'
-    | '-';
-  overføringÅrsak?:
-    | 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER'
-    | 'SYKDOM_ANNEN_FORELDER'
-    | 'IKKE_RETT_ANNEN_FORELDER'
-    | 'ALENEOMSORG'
-    | '-';
-  oppholdÅrsak?:
-    | '-'
-    | 'UTTAK_MØDREKVOTE_ANNEN_FORELDER'
-    | 'UTTAK_FEDREKVOTE_ANNEN_FORELDER'
-    | 'UTTAK_FELLESP_ANNEN_FORELDER'
-    | 'UTTAK_FORELDREPENGER_ANNEN_FORELDER';
-  arbeidstidsprosent?: number;
-  arbeidsforhold?: ArbeidsforholdDto;
-  samtidigUttaksprosent?: number;
-  flerbarnsdager?: boolean;
-  morsAktivitet?:
-    | '-'
-    | 'ARBEID'
-    | 'UTDANNING'
-    | 'KVALPROG'
-    | 'INTROPROG'
-    | 'TRENGER_HJELP'
-    | 'INNLAGT'
-    | 'ARBEID_OG_UTDANNING'
-    | 'UFØRE'
-    | 'IKKE_OPPGITT';
-  periodeKilde?: 'SØKNAD' | 'TIDLIGERE_VEDTAK' | 'ANDRE_NAV_VEDTAK' | 'SAKSBEHANDLER';
-  begrunnelse?: string;
 };
 
 export type SvangerskapspengerUttakResultatArbeidsforholdDto = {
@@ -3670,9 +4931,9 @@ export type UttakResultatPeriodeDto = {
   mottattDato?: string;
   tidligstMottattDato?: string;
   erUtbetalingRedusertTilMorsStillingsprosent?: boolean;
-  gradertAktivitet?: UttakResultatPeriodeAktivitetDto;
   periodeResultatÅrsakLovhjemmel?: string;
   graderingsAvslagÅrsakLovhjemmel?: string;
+  gradertAktivitet?: UttakResultatPeriodeAktivitetDto;
 };
 
 export type UttakResultatPerioderDto = {
@@ -4335,9 +5596,9 @@ export type TotrinnskontrollSkjermlenkeContextDto = {
 export type UttakPeriodeEndringDto = {
   fom?: string;
   tom?: string;
-  erSlettet?: boolean;
   erEndret?: boolean;
   erLagtTil?: boolean;
+  erSlettet?: boolean;
 };
 
 export type LagreFagsakNotatDto = {
@@ -4349,12 +5610,17 @@ export type SokefeltDto = {
   searchString: string;
 };
 
+export type FamiliehendelseDto = (AvklartDataAdopsjonDto | AvklartDataFodselDto | AvklartDataOmsorgDto) & {
+  soknadType?: 'ST-001' | 'ST-002';
+  skjaringstidspunkt?: string;
+};
+
 export type AvklartBarnDto = {
   fodselsdato?: string;
   dodsdato?: string;
 };
 
-export type AvklartDataAdopsjonDto = FamiliehendelseDto & {
+export type AvklartDataAdopsjonDto = {
   mannAdoptererAlene?: boolean;
   ektefellesBarn?: boolean;
   omsorgsovertakelseDato?: string;
@@ -4365,11 +5631,15 @@ export type AvklartDataAdopsjonDto = FamiliehendelseDto & {
   fødselsdatoer?: {
     [key: string]: string;
   };
+  soknadType?: 'ST-001' | 'ST-002';
+  skjaringstidspunkt?: string;
 };
 
-export type AvklartDataFodselDto = FamiliehendelseDto & {
+export type AvklartDataFodselDto = {
   dokumentasjonForligger?: boolean;
   dokumentasjonForeligger?: boolean;
+  soknadType?: 'ST-001' | 'ST-002';
+  skjaringstidspunkt?: string;
   avklartBarn?: Array<AvklartBarnDto>;
   brukAntallBarnFraTps?: boolean;
   termindato?: string;
@@ -4379,7 +5649,7 @@ export type AvklartDataFodselDto = FamiliehendelseDto & {
   vedtaksDatoSomSvangerskapsuke?: number;
 };
 
-export type AvklartDataOmsorgDto = FamiliehendelseDto & {
+export type AvklartDataOmsorgDto = {
   omsorgsovertakelseDato?: string;
   vilkarType?: 'FP_VK_5' | 'FP_VK_8' | 'FP_VK_33' | '-';
   antallBarnTilBeregning?: number;
@@ -4387,9 +5657,6 @@ export type AvklartDataOmsorgDto = FamiliehendelseDto & {
   fødselsdatoer?: {
     [key: string]: string;
   };
-};
-
-export type FamiliehendelseDto = {
   soknadType?: 'ST-001' | 'ST-002';
   skjaringstidspunkt?: string;
 };
@@ -4967,9 +6234,7 @@ export type ArbeidsforholdUttak = {
     | 'ANNET';
 };
 
-export type EsSak = Sak & {
-  type: 'EsSak';
-} & {
+export type EsSak = {
   saksnummer?: string;
   aktørId?: string;
   familieHendelse?: FamilieHendelse;
@@ -4979,9 +6244,7 @@ export type EsSak = Sak & {
   vedtak?: Array<Vedtak>;
 };
 
-export type FpSak = Sak & {
-  type: 'FpSak';
-} & {
+export type FpSak = {
   saksnummer?: string;
   aktørId?: string;
   familieHendelse?: FamilieHendelse;
@@ -5021,7 +6284,17 @@ export type Rettigheter = {
   annenForelderTilsvarendeRettEØS?: boolean;
 };
 
-export type Sak = {
+export type Sak = (
+  | ({
+      type: 'EsSak';
+    } & EsSak)
+  | ({
+      type: 'FpSak';
+    } & FpSak)
+  | ({
+      type: 'SvpSak';
+    } & SvpSak)
+) & {
   type: string;
 };
 
@@ -5043,9 +6316,7 @@ export type SvpPeriode = {
     | 'OPPHØR_ANNET';
 };
 
-export type SvpSak = Sak & {
-  type: 'SvpSak';
-} & {
+export type SvpSak = {
   saksnummer?: string;
   aktørId?: string;
   familieHendelse?: FamilieHendelse;
@@ -5134,26 +6405,52 @@ export type EnkelRespons = {
   status?: string;
 };
 
-export type AdressebeskyttelseHendelseDto = HendelseDto & {
+export type AdressebeskyttelseHendelseDto = {
+  id: string;
+  endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
+  avsenderSystem?: string;
+  hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
-export type DødHendelseDto = HendelseDto & {
+export type DødHendelseDto = {
+  id: string;
+  endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   dødsdato?: string;
+  avsenderSystem?: string;
+  hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
-export type DødfødselHendelseDto = HendelseDto & {
+export type DødfødselHendelseDto = {
+  id: string;
+  endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   dødfødselsdato?: string;
+  avsenderSystem?: string;
+  hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
-export type FødselHendelseDto = HendelseDto & {
+export type FødselHendelseDto = {
+  id: string;
+  endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørIdForeldre: Array<AktørIdDto>;
   fødselsdato?: string;
+  avsenderSystem?: string;
+  hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
-export type HendelseDto = {
+export type HendelseDto = (
+  | AdressebeskyttelseHendelseDto
+  | DødHendelseDto
+  | DødfødselHendelseDto
+  | FødselHendelseDto
+  | UtflyttingHendelseDto
+) & {
   id: string;
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   avsenderSystem?: string;
@@ -5166,9 +6463,14 @@ export type HendelseWrapperDto = {
   alleAktørId?: Array<string>;
 };
 
-export type UtflyttingHendelseDto = HendelseDto & {
+export type UtflyttingHendelseDto = {
+  id: string;
+  endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   utflyttingsdato?: string;
+  avsenderSystem?: string;
+  hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type Arbeidsforhold = {
