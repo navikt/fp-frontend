@@ -29,7 +29,7 @@
   width: 110px;
 }
 .tabs .tab .tabInner.error {
-  background-color: var(--ax-border-brand-magenta-strong);
-  border-color: var(--ax-bg-danger-soft);
+  background-color: var(--ax-bg-danger-moderate);
+  border-color: var(--ax-bg-danger-strong);
   border-radius: 4px;
 }

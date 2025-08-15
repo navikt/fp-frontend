@@ -52,7 +52,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
         <FormattedMessage id="AndreKriterierVelger.AndreKriterier" />
       </Label>
       {andreKriterierTyper.map(akt => (
-        <div key={akt.kode}>
+        <VStack gap="space-8" key={akt.kode}>
           <RhfCheckbox
             key={akt.kode}
             name={akt.kode}
@@ -91,7 +91,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
               </ArrowBox>
             </div>
           )}
-        </div>
+        </VStack>
       ))}
     </VStack>
   );

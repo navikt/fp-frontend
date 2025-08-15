@@ -76,27 +76,25 @@ export const AvklarFaresignalerForm = ({
           validate={[required]}
           isReadOnly={readOnly}
         >
-          <VStack gap="space-2">
+          <VStack gap="space-12">
             <Radio value={FaresignalVurdering.INNVIRKNING} size="small">
               {faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INNVIRKNING)?.navn ?? ''}
             </Radio>
             {harValgtReelle && (
-              <div style={{ paddingTop: '15px' }}>
-                <ArrowBox alignOffset={20}>
-                  <RhfRadioGroupNew
-                    name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
-                    control={formMethods.control}
-                    validate={[required]}
-                    isReadOnly={readOnly}
-                  >
-                    {underkategoriFaresignalVurderinger.map(vurdering => (
-                      <Radio key={vurdering.kode} value={vurdering.kode} size="small">
-                        {vurdering.navn}
-                      </Radio>
-                    ))}
-                  </RhfRadioGroupNew>
-                </ArrowBox>
-              </div>
+              <ArrowBox alignOffset={20}>
+                <RhfRadioGroupNew
+                  name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
+                  control={formMethods.control}
+                  validate={[required]}
+                  isReadOnly={readOnly}
+                >
+                  {underkategoriFaresignalVurderinger.map(vurdering => (
+                    <Radio key={vurdering.kode} value={vurdering.kode} size="small">
+                      {vurdering.navn}
+                    </Radio>
+                  ))}
+                </RhfRadioGroupNew>
+              </ArrowBox>
             )}
           </VStack>
           <Radio value={FaresignalVurdering.INGEN_INNVIRKNING} size="small">

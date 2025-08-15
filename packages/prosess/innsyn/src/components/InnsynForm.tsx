@@ -153,56 +153,58 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
         />
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-        <RhfRadioGroupNew
-          name="innsynResultatType"
-          control={formMethods.control}
-          label={<FormattedMessage id="InnsynForm.Resultat" />}
-          validate={[required]}
-          isReadOnly={isReadOnly}
-          isEdited={!isApOpen}
-        >
-          <HStack gap="space-16">
-            {innsynResultatTyper.map(irt => (
-              <Radio key={irt.kode} value={irt.kode} size="small">
-                {irt.navn}
-              </Radio>
-            ))}
-          </HStack>
-        </RhfRadioGroupNew>
-        {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
-          innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
-          <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
-            <VStack gap="space-16">
-              <RhfRadioGroupNew
-                name="sattPaVent"
-                control={formMethods.control}
-                label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
-                validate={[required]}
-                isReadOnly={isReadOnly}
-                isEdited={!isApOpen}
-              >
-                <HStack gap="space-16">
-                  <Radio value={true} size="small">
-                    <FormattedMessage id="InnsynForm.SettBehandlingPåVent" />
-                  </Radio>
-                  <Radio value={false} size="small">
-                    <FormattedMessage id="InnsynForm.ForeslåOgFatteVedtak" />
-                  </Radio>
-                </HStack>
-              </RhfRadioGroupNew>
-              {sattPaVent && (
-                <RhfDatepicker
-                  name="fristDato"
+        <VStack gap="space-12">
+          <RhfRadioGroupNew
+            name="innsynResultatType"
+            control={formMethods.control}
+            label={<FormattedMessage id="InnsynForm.Resultat" />}
+            validate={[required]}
+            isReadOnly={isReadOnly}
+            isEdited={!isApOpen}
+          >
+            <HStack gap="space-16">
+              {innsynResultatTyper.map(irt => (
+                <Radio key={irt.kode} value={irt.kode} size="small">
+                  {irt.navn}
+                </Radio>
+              ))}
+            </HStack>
+          </RhfRadioGroupNew>
+          {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
+            innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
+            <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
+              <VStack gap="space-16">
+                <RhfRadioGroupNew
+                  name="sattPaVent"
                   control={formMethods.control}
-                  label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+                  label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
+                  validate={[required]}
                   isReadOnly={isReadOnly}
                   isEdited={!isApOpen}
-                  validate={[required, hasValidDate]}
-                />
-              )}
-            </VStack>
-          </ArrowBox>
-        )}
+                >
+                  <HStack gap="space-16">
+                    <Radio value={true} size="small">
+                      <FormattedMessage id="InnsynForm.SettBehandlingPåVent" />
+                    </Radio>
+                    <Radio value={false} size="small">
+                      <FormattedMessage id="InnsynForm.ForeslåOgFatteVedtak" />
+                    </Radio>
+                  </HStack>
+                </RhfRadioGroupNew>
+                {sattPaVent && (
+                  <RhfDatepicker
+                    name="fristDato"
+                    control={formMethods.control}
+                    label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+                    isReadOnly={isReadOnly}
+                    isEdited={!isApOpen}
+                    validate={[required, hasValidDate]}
+                  />
+                )}
+              </VStack>
+            </ArrowBox>
+          )}
+        </VStack>
         <ProsessStegSubmitButtonNew
           isReadOnly={isReadOnly}
           isSubmittable={!readOnlySubmitButton}
