@@ -168,7 +168,7 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
 const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : rolleAnnenpart(fagsak);
   if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
-    return <FigureOutwardFillIcon width={20} height={20} color="var(--ax-danger-300)" />;
+    return <FigureOutwardFillIcon width={20} height={20} color="var(--ax-bg-danger-strong)" />;
   }
   if (rrType === RelasjonsRolleType.FAR) {
     return <SilhouetteFillIcon width={20} height={20} color="var(--ax-accent-700)" />;

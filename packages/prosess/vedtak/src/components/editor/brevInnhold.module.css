@@ -24,8 +24,8 @@
 }
 
 .redigerbartInnhold {
-  border-left: 15px solid var(--ax-warning-400);
-  border-right: 15px solid var(--ax-warning-400);
+  border-left: 15px solid var(--ax-warning-500);
+  border-right: 15px solid var(--ax-warning-500);
   box-sizing: content-box;
   margin-bottom: 40px;
   margin-top: 40px;
