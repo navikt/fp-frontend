@@ -700,11 +700,11 @@ export type ArbeidsforholdDto = {
 };
 
 export type Arbeidsgiver = {
-  identifikator?: string;
   erVirksomhet?: boolean;
+  identifikator?: string;
   aktørId?: string;
-  orgnr?: string;
   indexKey?: string;
+  orgnr?: string;
 };
 
 export type AvklarAleneomsorgVurderingDto = {
@@ -753,46 +753,46 @@ export type BekreftedeAksjonspunkterDto = {
 
 export type BekreftetAksjonspunktDto = (
   | ({
-      '@type': 'FatterVedtakAksjonspunktDto';
+      '@type': '5016';
     } & FatterVedtakAksjonspunktDto)
   | ({
-      '@type': 'AvklarDekningsgradDto';
+      '@type': '5002';
     } & AvklarDekningsgradDto)
   | ({
-      '@type': 'VurderInnsynDto';
+      '@type': '5037';
     } & VurderInnsynDto)
   | ({
-      '@type': 'KlageFormkravAksjonspunktDto';
+      '@type': '5082';
     } & KlageFormkravAksjonspunktDto)
   | ({
-      '@type': 'KlageVurderingResultatAksjonspunktDto';
+      '@type': '5035';
     } & KlageVurderingResultatAksjonspunktDto)
   | ({
       '@type': 'VurderForutgåendeMedlemskapDto';
     } & VurderForutgåendeMedlemskapDto)
   | ({
-      '@type': 'VurderMedlemskapDto';
+      '@type': '5101';
     } & VurderMedlemskapDto)
   | ({
-      '@type': 'KontrollerRevurderingsBehandlingDto';
+      '@type': '5055';
     } & KontrollerRevurderingsBehandlingDto)
   | ({
-      '@type': 'VarselRevurderingManuellDto';
+      '@type': '5026';
     } & VarselRevurderingManuellDto)
   | ({
-      '@type': 'VurderFaresignalerDto';
+      '@type': '5095';
     } & VurderFaresignalerDto)
   | ({
-      '@type': 'BekreftSvangerskapspengerDto';
+      '@type': '5091';
     } & BekreftSvangerskapspengerDto)
   | ({
       '@type': 'BekreftSvangerskapspengervilkårDto';
     } & BekreftSvangerskapspengervilkårDto)
   | ({
-      '@type': 'BekreftSokersOpplysningspliktManuDto';
+      '@type': '5017';
     } & BekreftSokersOpplysningspliktManuDto)
   | ({
-      '@type': 'SoknadsfristAksjonspunktDto';
+      '@type': '5007';
     } & SoknadsfristAksjonspunktDto)
   | ({
       '@type': 'VurderSøknadsfristDto';
@@ -801,16 +801,16 @@ export type BekreftetAksjonspunktDto = (
       '@type': 'KontrollerStorEtterbetalingSøkerDto';
     } & KontrollerStorEtterbetalingSøkerDto)
   | ({
-      '@type': 'VurderFeilutbetalingDto';
+      '@type': '5084';
     } & VurderFeilutbetalingDto)
   | ({
-      '@type': 'VurderUttakDokumentasjonDto';
+      '@type': '5074';
     } & VurderUttakDokumentasjonDto)
   | ({
-      '@type': 'AvklarAleneomsorgVurderingDto';
+      '@type': '5060';
     } & AvklarAleneomsorgVurderingDto)
   | ({
-      '@type': 'AvklarAnnenforelderHarRettDto';
+      '@type': '5086';
     } & AvklarAnnenforelderHarRettDto)
   | ({
       '@type': 'FastsetteUttakKontrollerAnnenpartEØSDto';
@@ -822,28 +822,28 @@ export type BekreftetAksjonspunktDto = (
       '@type': 'FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto';
     } & FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto)
   | ({
-      '@type': 'FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto';
+      '@type': '5073';
     } & FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto)
   | ({
-      '@type': 'FastsetteUttakPerioderDto';
+      '@type': '5071';
     } & FastsetteUttakPerioderDto)
   | ({
-      '@type': 'FastsetteUttakStortingsrepresentantDto';
+      '@type': '5072';
     } & FastsetteUttakStortingsrepresentantDto)
   | ({
-      '@type': 'GraderingAktivitetUtenBGDto';
+      '@type': '5066';
     } & GraderingAktivitetUtenBgDto)
   | ({
-      '@type': 'GraderingUkjentAktivitetDto';
+      '@type': '5063';
     } & GraderingUkjentAktivitetDto)
   | ({
-      '@type': 'IngenPerioderDto';
+      '@type': '5064';
     } & IngenPerioderDto)
   | ({
-      '@type': 'ManueltSattStartdatoDto';
+      '@type': '5065';
     } & ManueltSattStartdatoDto)
   | ({
-      '@type': 'ForeslaVedtakManueltAksjonspuntDto';
+      '@type': '5028';
     } & ForeslaVedtakManueltAksjonspuntDto)
   | ({
       '@type': 'ForeslåVedtakAksjonspunktDto';
@@ -858,16 +858,16 @@ export type BekreftetAksjonspunktDto = (
       '@type': 'VurdereInntektsmeldingFørVedtakDto';
     } & VurdereInntektsmeldingFørVedtakDto)
   | ({
-      '@type': 'ManuellRegistreringEngangsstonadDto';
+      '@type': '5012';
     } & ManuellRegistreringEngangsstonadDto)
   | ({
       '@type': 'ManuellRegistreringEndringsøknadDto';
     } & ManuellRegistreringEndringsøknadDto)
   | ({
-      '@type': 'ManuellRegistreringForeldrepengerDto';
+      '@type': '5040';
     } & ManuellRegistreringForeldrepengerDto)
   | ({
-      '@type': 'ManuellRegistreringSvangerskapspengerDto';
+      '@type': '5096';
     } & ManuellRegistreringSvangerskapspengerDto)
 ) & {
   begrunnelse?: string;
@@ -1364,10 +1364,18 @@ export type SvpAvklartOppholdPeriodeDto = {
 };
 
 export type SvpTilretteleggingArbeidsforholdDto = (
-  | SvpTilretteleggingFrilanserDto
-  | SvpTilretteleggingPrivatArbeidsgiverDto
-  | SvpTilretteleggingSelvstendigNæringsdrivendeDto
-  | SvpTilretteleggingVirksomhetDto
+  | ({
+      '@type': 'FR';
+    } & SvpTilretteleggingFrilanserDto)
+  | ({
+      '@type': 'PA';
+    } & SvpTilretteleggingPrivatArbeidsgiverDto)
+  | ({
+      '@type': 'SvpTilretteleggingSelvstendigNæringsdrivendeDto';
+    } & SvpTilretteleggingSelvstendigNæringsdrivendeDto)
+  | ({
+      '@type': 'VI';
+    } & SvpTilretteleggingVirksomhetDto)
 ) & {
   behovsdato?: string;
   tilrettelegginger?: Array<SvpTilretteleggingDto>;
@@ -1896,19 +1904,48 @@ export type OverstyringAdopsjonsvilkåretDto = {
 };
 
 export type OverstyringAksjonspunktDto = (
-  | AvklarDekningsgradOverstyringDto
-  | OverstyrOmsorgOgRettDto
-  | OverstyringUttakDto
-  | OverstyringFaktaUttakDto
-  | OverstyringForutgåendeMedlemskapsvilkårDto
-  | OverstyringFødselsvilkåretDto
-  | OverstyringFødselvilkåretFarMedmorDto
-  | OverstyringMedlemskapsvilkåretDto
-  | OverstyringOpptjeningsvilkåretDto
-  | OverstyringSokersOpplysingspliktDto
-  | OverstyringSøknadsfristvilkåretDto
-  | OverstyringAdopsjonsvilkåretDto
-  | OverstyringAvklarStartdatoForPeriodenDto
+  | ({
+      '@type': '6016';
+    } & AvklarDekningsgradOverstyringDto)
+  | ({
+      '@type': '6018';
+    } & OverstyrOmsorgOgRettDto)
+  | ({
+      '@type': '6008';
+    } & OverstyringUttakDto)
+  | ({
+      '@type': '6065';
+    } & OverstyringFaktaUttakDto)
+  | ({
+      '@type': 'OverstyringForutgåendeMedlemskapsvilkårDto';
+    } & OverstyringForutgåendeMedlemskapsvilkårDto)
+  | ({
+      '@type': 'OverstyringFødselsvilkåretDto';
+    } & OverstyringFødselsvilkåretDto)
+  | ({
+      '@type': 'OverstyringFødselvilkåretFarMedmorDto';
+    } & OverstyringFødselvilkåretFarMedmorDto)
+  | ({
+      '@type': 'OverstyringMedlemskapsvilkåretDto';
+    } & OverstyringMedlemskapsvilkåretDto)
+  | ({
+      '@type': 'OverstyringOpptjeningsvilkåretDto';
+    } & OverstyringOpptjeningsvilkåretDto)
+  | ({
+      '@type': '6002';
+    } & OverstyringSokersOpplysingspliktDto)
+  | ({
+      '@type': 'OverstyringSøknadsfristvilkåretDto';
+    } & OverstyringSøknadsfristvilkåretDto)
+  | ({
+      '@type': 'OverstyringAdopsjonsvilkåretDto';
+    } & OverstyringAdopsjonsvilkåretDto)
+  | ({
+      '@type': 'OverstyringAdopsjonsvilkåretDto';
+    } & OverstyringAdopsjonsvilkåretDto)
+  | ({
+      '@type': '6045';
+    } & OverstyringAvklarStartdatoForPeriodenDto)
 ) & {
   begrunnelse?: string;
 };
@@ -2679,19 +2716,19 @@ export type BeregningsgrunnlagPrStatusOgAndelAtDto = {
 
 export type BeregningsgrunnlagPrStatusOgAndelDto = (
   | ({
-      dtoType: 'BeregningsgrunnlagPrStatusOgAndelATDto';
+      dtoType: 'AT';
     } & BeregningsgrunnlagPrStatusOgAndelAtDto)
   | ({
-      dtoType: 'BeregningsgrunnlagPrStatusOgAndelDtoFelles';
+      dtoType: 'GENERELL';
     } & BeregningsgrunnlagPrStatusOgAndelDtoFelles)
   | ({
-      dtoType: 'BeregningsgrunnlagPrStatusOgAndelFLDto';
+      dtoType: 'FL';
     } & BeregningsgrunnlagPrStatusOgAndelFlDto)
   | ({
-      dtoType: 'BeregningsgrunnlagPrStatusOgAndelSNDto';
+      dtoType: 'SN';
     } & BeregningsgrunnlagPrStatusOgAndelSnDto)
   | ({
-      dtoType: 'BeregningsgrunnlagPrStatusOgAndelYtelseDto';
+      dtoType: 'KUN_YTELSE';
     } & BeregningsgrunnlagPrStatusOgAndelYtelseDto)
 ) & {
   aktivitetStatus?:
@@ -3589,16 +3626,16 @@ export type VurderRepresentererStortingetDto = {
 
 export type YtelsespesifiktGrunnlagDto = (
   | ({
-      ytelsetype: 'OmsorgspengeGrunnlagDto';
+      ytelsetype: 'OMP';
     } & OmsorgspengeGrunnlagDto)
   | ({
-      ytelsetype: 'SvangerskapspengerGrunnlagDto';
+      ytelsetype: 'SVP';
     } & SvangerskapspengerGrunnlagDto)
   | ({
-      ytelsetype: 'ForeldrepengerGrunnlagDto';
+      ytelsetype: 'FP';
     } & ForeldrepengerGrunnlagDto)
   | ({
-      ytelsetype: 'FrisinnGrunnlagDto';
+      ytelsetype: 'FRISINN';
     } & FrisinnGrunnlagDto)
 ) & {
   ytelsetype: string;
@@ -5610,7 +5647,17 @@ export type SokefeltDto = {
   searchString: string;
 };
 
-export type FamiliehendelseDto = (AvklartDataAdopsjonDto | AvklartDataFodselDto | AvklartDataOmsorgDto) & {
+export type FamiliehendelseDto = (
+  | ({
+      '@type': 'AvklartDataAdopsjonDto';
+    } & AvklartDataAdopsjonDto)
+  | ({
+      '@type': 'AvklartDataFodselDto';
+    } & AvklartDataFodselDto)
+  | ({
+      '@type': 'AvklartDataOmsorgDto';
+    } & AvklartDataOmsorgDto)
+) & {
   soknadType?: 'ST-001' | 'ST-002';
   skjaringstidspunkt?: string;
 };
@@ -6286,13 +6333,13 @@ export type Rettigheter = {
 
 export type Sak = (
   | ({
-      type: 'EsSak';
+      type: 'engangsstønad';
     } & EsSak)
   | ({
-      type: 'FpSak';
+      type: 'foreldrepenger';
     } & FpSak)
   | ({
-      type: 'SvpSak';
+      type: 'svangerskapspenger';
     } & SvpSak)
 ) & {
   type: string;
@@ -6445,11 +6492,21 @@ export type FødselHendelseDto = {
 };
 
 export type HendelseDto = (
-  | AdressebeskyttelseHendelseDto
-  | DødHendelseDto
-  | DødfødselHendelseDto
-  | FødselHendelseDto
-  | UtflyttingHendelseDto
+  | ({
+      '@type': 'ADRESSEBESKYTTELSE';
+    } & AdressebeskyttelseHendelseDto)
+  | ({
+      '@type': 'DødHendelseDto';
+    } & DødHendelseDto)
+  | ({
+      '@type': 'DødfødselHendelseDto';
+    } & DødfødselHendelseDto)
+  | ({
+      '@type': 'FødselHendelseDto';
+    } & FødselHendelseDto)
+  | ({
+      '@type': 'UTFLYTTING';
+    } & UtflyttingHendelseDto)
 ) & {
   id: string;
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
