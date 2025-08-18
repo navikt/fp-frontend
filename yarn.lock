@@ -2200,7 +2200,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-uttak-eos@workspace:packages/fakta/uttak-eøs":
+"@navikt/fp-fakta-uttak-eos@workspace:*, @navikt/fp-fakta-uttak-eos@workspace:packages/fakta/uttak-eøs":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-uttak-eos@workspace:packages/fakta/uttak-eøs"
   dependencies:
@@ -2404,6 +2404,7 @@ __metadata:
     "@navikt/fp-fakta-saken": "workspace:*"
     "@navikt/fp-fakta-tilrettelegging": "workspace:*"
     "@navikt/fp-fakta-uttak": "workspace:*"
+    "@navikt/fp-fakta-uttak-eos": "workspace:*"
     "@navikt/fp-fakta-uttaksdokumentasjon": "workspace:*"
     "@navikt/fp-fakta-verge": "workspace:*"
     "@navikt/fp-fakta-ytelser": "workspace:*"

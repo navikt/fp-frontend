@@ -43,6 +43,7 @@
     "@navikt/fp-fakta-saken": "workspace:*",
     "@navikt/fp-fakta-tilrettelegging": "workspace:*",
     "@navikt/fp-fakta-uttak": "workspace:*",
+    "@navikt/fp-fakta-uttak-eos": "workspace:*",
     "@navikt/fp-fakta-uttaksdokumentasjon": "workspace:*",
     "@navikt/fp-fakta-verge": "workspace:*",
     "@navikt/fp-fakta-ytelser": "workspace:*",
