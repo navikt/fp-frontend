@@ -18,9 +18,9 @@
     "storybook": "storybook dev --quiet -p 7018"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.28.0",
+    "@navikt/ds-react": "7.28.1",
     "@navikt/fp-types": "workspace:*",
-    "@navikt/ft-utils": "3.8.1",
+    "@navikt/ft-utils": "3.8.2",
     "dayjs": "1.11.13",
     "react": "19.1.1",
     "react-intl": "7.1.11"
