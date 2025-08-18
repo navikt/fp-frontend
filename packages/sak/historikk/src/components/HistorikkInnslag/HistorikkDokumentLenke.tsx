@@ -15,7 +15,7 @@ export const HistorikkDokumentLenke = ({
   saksnummer,
 }: Props) => {
   const dokument = (
-    <HStack align="center" gap="1">
+    <HStack align="center" gap="space-4">
       <FileIcon title={tag} width={24} height={24} />
       <BodyShort>{tag}</BodyShort>
     </HStack>

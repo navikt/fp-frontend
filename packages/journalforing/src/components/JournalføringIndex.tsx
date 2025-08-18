@@ -33,7 +33,7 @@ export const JournalføringIndex = ({
   reserverOppgave,
   flyttTilGosys,
 }: Props) => (
-  <div className={styles.container}>
+  <div>
     {!valgtJournalpost && (
       <div className={styles.sentrertInnhold}>
         <OppgaveTabell

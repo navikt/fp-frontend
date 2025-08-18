@@ -101,7 +101,7 @@ export const Messages = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMeldingFormData}
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <RhfSelect
           name="brevmalkode"
           control={control}
@@ -169,7 +169,6 @@ const getFritekstMessage = (brevmalkode?: string): string =>
 // TODO (TOR) Bør erstattast av ein markør fra backend
 const showFritekst = (brevmalkode?: string, arsakskode?: string): boolean =>
   brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
-  brevmalkode === DokumentMalType.FRITEKST ||
   brevmalkode === DokumentMalType.KORRIGERT_VARSEL_OM_TILBAKEKREVING ||
   brevmalkode === DokumentMalType.VARSEL_OM_TILBAKEKREVING ||
   brevmalkode === DokumentMalType.TBK_INNHENTE_OPPLYSNINGER ||

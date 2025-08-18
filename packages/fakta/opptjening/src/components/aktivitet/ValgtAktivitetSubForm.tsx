@@ -63,12 +63,12 @@ export const ValgtAktivitetSubForm = ({
   naringRegistreringsdato,
   ferdiglignetNæring,
 }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     {erAvType(
       valgtAktivitetstype,
       ...[OpptjeningAktivitetType.ARBEID, OpptjeningAktivitetType.NARING, ...YTELSE_TYPER],
     ) && (
-      <HStack gap="4">
+      <HStack gap="space-16">
         <div>
           <Label size="small">
             <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
@@ -112,7 +112,7 @@ export const ValgtAktivitetSubForm = ({
               return 0;
             })
             .map(inntekt => (
-              <HStack gap="5" key={inntekt.år}>
+              <HStack gap="space-20" key={inntekt.år}>
                 <BodyShort size="small">{inntekt.år}</BodyShort>
                 <BodyShort size="small">
                   <BeløpLabel beløp={inntekt.beløp} />

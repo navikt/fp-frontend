@@ -1,12 +1,12 @@
 .container {
-  background-color: var(--a-white);
+  background-color: var(--ax-bg-default);
   padding-left: 40px;
   padding-right: 40px;
   padding-top: 15px;
 }
 
 .dokumentRad {
-  background-color: var(--a-blue-50);
+  background-color: var(--ax-accent-100);
   padding: 16px;
   width: 100%;
 }
@@ -17,7 +17,7 @@
 }
 
 .newTabIcon {
-  color: var(--a-blue-600);
+  color: var(--ax-accent-700);
   height: 32px;
   width: 32px;
 }

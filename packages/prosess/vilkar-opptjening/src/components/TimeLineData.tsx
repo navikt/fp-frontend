@@ -40,13 +40,13 @@ export const TimeLineData = ({
 }: Props) => {
   const intl = useIntl();
   return (
-    <Box borderWidth="1" padding="4">
-      <VStack gap="4">
+    <Box.New borderWidth="1" padding="4">
+      <VStack gap="space-16">
         <HStack justify="space-between">
           <Label size="small">
             <FormattedMessage id="OpptjeningVilkarView.DetailsForSelectedPeriod" />
           </Label>
-          <HStack gap="2">
+          <HStack gap="space-8">
             <Button
               size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
@@ -84,7 +84,7 @@ export const TimeLineData = ({
             dateStringTom={fastsattOpptjeningAktivitet.tom}
           />
         </BodyShort>
-        <HStack gap="1">
+        <HStack gap="space-4">
           {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <CheckmarkIcon className={styles.godkjentImage} />}
           {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <XMarkIcon className={styles.avslattImage} />}
           <BodyShort size="small">
@@ -92,6 +92,6 @@ export const TimeLineData = ({
           </BodyShort>
         </HStack>
       </VStack>
-    </Box>
+    </Box.New>
   );
 };

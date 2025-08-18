@@ -105,7 +105,7 @@ export const SimuleringTable = ({
                   .map((rad, rowIndex) => {
                     const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
                     const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
-                    const borderBottom = isRowToggable ? 'dashed 1px var(--a-gray-200)' : 'solid 1px var(--a-gray-200)';
+                    const borderBottom = isRowToggable ? 'dashed 1px var(--ax-neutral-300)' : 'solid 1px var(--ax-neutral-300)';
                     return (
                       <Table.Row key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}>
                         <Table.DataCell
@@ -198,7 +198,9 @@ const tableTitle = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | null =>
   mottaker.mottakerType === MottakerType.ARBG || mottaker.mottakerType === MottakerType.ARBGP ? (
-    <Heading size="xsmall">{lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}</Heading>
+    <Heading size="xsmall" level="3">
+      {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
+    </Heading>
   ) : null;
 
 const getResultatRadene = (

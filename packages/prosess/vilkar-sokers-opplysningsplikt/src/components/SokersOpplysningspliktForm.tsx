@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Table, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { BodyShort, HStack, Radio, Table, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
@@ -215,9 +215,9 @@ export const SokersOpplysningspliktForm = ({
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <VStack gap="4">
+        <VStack gap="space-16">
           {sorterteManglendeVedlegg.length > 0 && (
-            <VStack gap="4">
+            <VStack gap="space-16">
               <BodyShort size="small">
                 <FormattedMessage id="SokersOpplysningspliktForm.ManglendeDokumentasjon" />
               </BodyShort>
@@ -245,32 +245,22 @@ export const SokersOpplysningspliktForm = ({
           )}
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
           {!isReadOnly && (
-            <RhfRadioGroup
-              name="erVilkarOk"
-              control={formMethods.control}
-              validate={[required]}
-              isHorizontal
-              isTrueOrFalseSelection
-              radios={[
-                {
-                  value: 'true',
-                  label: <FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />,
-                  disabled: !hasSoknad,
-                },
-                {
-                  value: 'false',
-                  label: (
-                    <FormattedMessage
-                      id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
-                      values={{
-                        b: BTag,
-                        br: <br key="break-line" />,
-                      }}
-                    />
-                  ),
-                },
-              ]}
-            />
+            <RhfRadioGroupNew name="erVilkarOk" control={formMethods.control} validate={[required]}>
+              <HStack gap="space-16">
+                <Radio value={true} size="small" disabled={!hasSoknad}>
+                  <FormattedMessage id="SokersOpplysningspliktForm.VilkarOppfylt" />
+                </Radio>
+                <Radio value={false} size="small">
+                  <FormattedMessage
+                    id="SokersOpplysningspliktForm.VilkarIkkeOppfylt"
+                    values={{
+                      b: BTag,
+                      br: <br key="break-line" />,
+                    }}
+                  />
+                </Radio>
+              </HStack>
+            </RhfRadioGroupNew>
           )}
           {isReadOnly && (
             <div>

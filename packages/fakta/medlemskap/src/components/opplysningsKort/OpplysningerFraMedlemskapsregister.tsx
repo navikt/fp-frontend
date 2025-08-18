@@ -46,11 +46,11 @@ export const OpplysningerFraMedlemskapsregister = ({
         </BodyShort>
 
         {medlemskapsperioder.length === 0 && (
-          <Box padding="4">
+          <Box.New padding="4">
             <BodyLong textColor="subtle">
               <FormattedMessage id="OpplysningerFraMedlemskapsregister.Tabell.Ingen" />
             </BodyLong>
-          </Box>
+          </Box.New>
         )}
         {medlemskapsperioder.length > 0 && (
           <Table>

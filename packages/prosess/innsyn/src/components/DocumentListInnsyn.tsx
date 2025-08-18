@@ -70,7 +70,7 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
 
   return (
     <div>
-      <Heading size="small" className={styles.noDocuments}>
+      <Heading size="small" level="2" className={styles.noDocuments}>
         <FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" />
       </Heading>
       <Table>

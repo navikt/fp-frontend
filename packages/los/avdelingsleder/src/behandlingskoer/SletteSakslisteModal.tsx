@@ -27,7 +27,7 @@ export const SletteSakslisteModal = ({ valgtSaksliste, cancel, submit }: Props) 
       onClose={cancel}
     >
       <Modal.Header>
-        <Heading size="small">
+        <Heading size="small" level="2">
           <FormattedMessage id="SletteSakslisteModal.SletteSaksliste" values={{ sakslisteNavn: valgtSaksliste.navn }} />
         </Heading>
       </Modal.Header>

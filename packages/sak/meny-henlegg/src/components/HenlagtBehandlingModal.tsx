@@ -28,12 +28,12 @@ export const HenlagtBehandlingModal = ({ showModal, closeEvent }: Props) => {
     >
       <Modal.Body>
         <HStack justify="space-between">
-          <HStack gap="3">
+          <HStack gap="space-12">
             <CheckmarkCircleFillIcon
               className={styles.image}
               title={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
             />
-            <VStack gap="1">
+            <VStack gap="space-4">
               <Label size="small">
                 <FormattedMessage id="HenlagtBehandlingModal.BehandlingenErHenlagt" />
               </Label>

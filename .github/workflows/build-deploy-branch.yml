@@ -17,9 +17,10 @@ jobs:
     uses: navikt/fp-gha-workflows/.github/workflows/build-app-frontend-yarn.yml@main
     with:
       runs-on: 'ubuntu-latest-8-cores'
-      node-version: '22.6.0'
+      node-version: '22.17.1'
       push-image: true
       branch: ${{ inputs.branch }}
+      run-knip: true
     secrets: inherit
 
   deploy-dev:

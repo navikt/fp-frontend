@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useIntl } from 'react-intl';
 
-import { BodyLong, BodyShort, Box, type BoxProps, Button, Detail, HStack, VStack } from '@navikt/ds-react';
+import { BodyLong, BodyShort, Box, type BoxNewProps, Button, Detail, HStack, VStack } from '@navikt/ds-react';
 import { dateTimeFormat } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
@@ -24,12 +24,12 @@ interface Props {
   saksnummer: string;
 }
 
-const backgrounds: Record<HistorikkAktor, BoxProps['background']> = {
-  [HistorikkAktor.ARBEIDSGIVER]: 'surface-info-subtle',
-  [HistorikkAktor.BESLUTTER]: 'surface-success-subtle',
-  [HistorikkAktor.VEDTAKSLOSNINGEN]: 'bg-subtle',
-  [HistorikkAktor.SAKSBEHANDLER]: 'surface-alt-1-subtle',
-  [HistorikkAktor.SOKER]: 'surface-warning-subtle',
+const backgrounds: Record<HistorikkAktor, BoxNewProps['background']> = {
+  [HistorikkAktor.ARBEIDSGIVER]: 'info-moderate',
+  [HistorikkAktor.BESLUTTER]: 'success-moderate',
+  [HistorikkAktor.VEDTAKSLOSNINGEN]: 'neutral-moderate',
+  [HistorikkAktor.SAKSBEHANDLER]: 'meta-purple-moderate',
+  [HistorikkAktor.SOKER]: 'warning-moderate',
 };
 
 export const HistorikkInnslag = ({
@@ -50,10 +50,10 @@ export const HistorikkInnslag = ({
   const linjerSomSkalVises = linjer.slice(0, erLinjerSkjult ? 3 : linjer.length);
 
   return (
-    <HStack data-testid="historikkinnslag" wrap={false} gap="5" justify="end" align="center">
-      <Box padding="4" background={backgrounds[aktør.type]}>
-        <VStack gap="2">
-          <HStack gap="2">
+    <HStack data-testid="historikkinnslag" wrap={false} gap="space-20" justify="end" align="center">
+      <Box.New padding="4" background={backgrounds[aktør.type]}>
+        <VStack gap="space-8">
+          <HStack gap="space-8">
             <Detail weight="semibold">{name}</Detail>
             <Detail>{timestamp}</Detail>
           </HStack>
@@ -102,10 +102,10 @@ export const HistorikkInnslag = ({
             </div>
           )}
         </VStack>
-      </Box>
-      <Box>
+      </Box.New>
+      <Box.New>
         <Avatar aktørType={aktør.type} />
-      </Box>
+      </Box.New>
     </HStack>
   );
 };

@@ -3,8 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, expect } from 'vitest';
 
-import { VergeType } from '@navikt/fp-kodeverk';
-
 import * as stories from './MenyVergeIndex.stories';
 
 const { LeggeTilVerge, FjerneVerge } = composeStories(stories);
@@ -23,7 +21,7 @@ describe('MenyVergeIndex', () => {
 
     expect(await screen.findByText('Opprett verge/fullmektig?')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByLabelText('Type verge'), VergeType.FBARN);
+    await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'FBARN');
     await userEvent.type(screen.getByLabelText('Navn'), 'Ola Nordmann');
     await userEvent.type(screen.getByLabelText('Fødselsnummer'), '11427635718');
     await userEvent.type(screen.getByLabelText('Periode f.o.m.'), '01.01.2025');
@@ -35,7 +33,7 @@ describe('MenyVergeIndex', () => {
       fnr: '11427635718',
       gyldigFom: '2025-01-01',
       gyldigTom: '2025-12-31',
-      vergeType: VergeType.FBARN,
+      vergeType: 'FBARN',
     });
     expect(lukkModal).toHaveBeenCalledOnce();
     expect(fjernVerge).not.toHaveBeenCalled();
@@ -46,7 +44,7 @@ describe('MenyVergeIndex', () => {
 
     expect(await screen.findByText('Opprett verge/fullmektig?')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByLabelText('Type verge'), VergeType.ADVOKAT);
+    await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'ADVOKAT');
     await userEvent.type(screen.getByLabelText('Navn'), 'Advokatfirma AS');
     await userEvent.type(screen.getByLabelText('Organisasjonsnummer'), '123456789');
     await userEvent.type(screen.getByLabelText('Periode f.o.m.'), '01.01.2025');
@@ -58,7 +56,7 @@ describe('MenyVergeIndex', () => {
       organisasjonsnummer: '123456789',
       gyldigFom: '2025-01-01',
       gyldigTom: '2025-12-31',
-      vergeType: VergeType.ADVOKAT,
+      vergeType: 'ADVOKAT',
     });
     expect(lukkModal).toHaveBeenCalledOnce();
     expect(fjernVerge).not.toHaveBeenCalled();

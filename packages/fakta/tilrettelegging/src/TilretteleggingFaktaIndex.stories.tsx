@@ -375,6 +375,12 @@ export const HarOpphold: Story = {
               oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
             },
             {
+              fom: '2020-09-21',
+              tom: '2020-09-24',
+              oppholdÅrsak: 'FERIE',
+              oppholdKilde: 'TIDLIGERE_VEDTAK',
+            },
+            {
               fom: '2020-09-25',
               tom: '2020-09-30',
               oppholdÅrsak: 'FERIE',

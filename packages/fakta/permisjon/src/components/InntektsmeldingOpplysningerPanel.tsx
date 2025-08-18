@@ -16,8 +16,8 @@ interface Props {
 }
 
 export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }: Props) => (
-  <VStack gap="4">
-    <HStack gap="4">
+  <VStack gap="space-16">
+    <HStack gap="space-16">
       <Label size="small">
         <FormattedMessage id="InntektsmeldingOpplysningerPanel.Inntektsmelding" />
       </Label>
@@ -25,7 +25,7 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
         <BeløpLabel beløp={inntektsmelding.inntektPrMnd} />
       </BodyShort>
     </HStack>
-    <HStack gap="4">
+    <HStack gap="space-16">
       <Label size="small">
         <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjon" />
       </Label>
@@ -40,7 +40,7 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
       </BodyShort>
     </HStack>
     {inntektsmelding.refusjonPrMnd && (
-      <HStack gap="4">
+      <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
         </Label>
@@ -54,16 +54,16 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
       journalpostId={inntektsmelding.journalpostId}
       dokumentId={inntektsmelding.dokumentId}
     >
-      <HStack gap="1">
+      <HStack gap="space-4">
         <BodyShort size="small" className={styles.inline}>
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
         </BodyShort>
         <FileFillIcon className={styles.docIcon} />
       </HStack>
     </DokumentLink>
-    <HStack gap="4" align="center">
+    <HStack gap="space-16" align="center">
       <PhoneFillIcon className={styles.phoneIcon} />
-      <VStack gap="1">
+      <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />
         </Label>

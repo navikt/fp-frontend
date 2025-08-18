@@ -1,5 +1,5 @@
 .disponibeltUttak {
-  background-color: #f1f1f1;
+  background-color: var(--ax-bg-neutral-moderate);
   height: auto;
   max-width: 700px;
   min-width: 500px;
@@ -14,10 +14,10 @@
   padding: 0;
 }
 .tabs ul li:hover {
-  background-color: #fff;
+  background-color: var(--ax-bg-default);
 }
 .visKonto {
-  background: #fff;
+  background: var(--ax-bg-default);
   border-radius: 4px;
   margin-top: -5px;
   padding: 10px;

@@ -54,6 +54,7 @@ export const FordelingAvBehandlingstypeGraf = ({ height, oppgaverForAvdeling, be
         },
         legend: {
           data: [tilBehandlingTekst, tilBeslutterTekst],
+          top: 'top',
         },
         grid: {
           left: '3%',

@@ -9,9 +9,9 @@ import { PDFVisning } from './PDFVisning';
 
 import styles from './dokumentIndex.module.css';
 
-type Props = {
-  dokumenter?: JournalDokument[];
-};
+interface Props {
+  dokumenter: JournalDokument[] | undefined;
+}
 
 export const DokumentIndex = ({ dokumenter }: Props) => {
   const initieltDokumnet = dokumenter && dokumenter.length > 0 ? dokumenter[0] : undefined;
@@ -19,14 +19,14 @@ export const DokumentIndex = ({ dokumenter }: Props) => {
 
   if (!valgtDokument || !dokumenter) {
     return (
-      <Heading size="small">
+      <Heading size="small" level="2">
         <FormattedMessage id="ValgtOppgave.Dokumenter.Tom" />
       </Heading>
     );
   }
 
   return (
-    <VStack gap="4" className={styles.pdfContainer}>
+    <VStack gap="space-16" className={styles.pdfContainer}>
       <DokumentVelger setValgtDokument={setValgtDokument} valgtDokument={valgtDokument} dokumenter={dokumenter} />
       <PDFVisning dokument={valgtDokument} />
     </VStack>

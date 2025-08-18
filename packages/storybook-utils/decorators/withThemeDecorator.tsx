@@ -20,12 +20,9 @@ export const withThemeDecorator: DecoratorFunction<ReactRenderer> = (Story, cont
 
   return (
     <>
-      {theme !== 'none' && (
-        <Theme theme={theme === 'dark' ? 'dark' : 'light'}>
-          <Story />
-        </Theme>
-      )}
-      {theme === 'none' && <Story />}
+      <Theme theme={theme === 'dark' ? 'dark' : 'light'}>
+        <Story />
+      </Theme>
     </>
   );
 };

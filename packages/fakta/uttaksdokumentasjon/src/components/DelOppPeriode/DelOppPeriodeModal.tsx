@@ -44,19 +44,19 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
         className={styles.modal}
       >
         <Modal.Header>
-          <Heading size="medium">
-            <HStack gap="1" align="center">
+          <Heading size="small" level="2">
+            <HStack gap="space-4" align="center">
               <ScissorsIcon />
               <FormattedMessage id="DelOppPeriodeModal.Tittel" />
             </HStack>
           </Heading>
         </Modal.Header>
         <Modal.Body>
-          <VStack gap="6">
+          <VStack gap="space-24">
             <BodyShort>
               <FormattedMessage id="DelOppPeriodeModal.Beskrivelse" />
             </BodyShort>
-            <VStack gap="1">
+            <VStack gap="space-4">
               <Label>
                 <FormattedMessage id="DelOppPeriodeModal.PeriodeLabel" />
               </Label>
@@ -73,8 +73,8 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
               toDate={dayjs(periode.tom, ISO_DATE_FORMAT).subtract(1, 'day').toDate()}
             />
             {perioder && (
-              <Box background="bg-subtle" padding="2" borderRadius="large" style={{ width: 'max-content' }}>
-                <VStack gap="1">
+              <Box.New background="neutral-moderate" padding="2" borderRadius="large" style={{ width: 'max-content' }}>
+                <VStack gap="space-4">
                   <Label>
                     <FormattedMessage id="DelOppPeriodeModal.NyePeriodeLabel" />
                   </Label>
@@ -87,7 +87,7 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
                     </BodyShort>
                   ))}
                 </VStack>
-              </Box>
+              </Box.New>
             )}
           </VStack>
         </Modal.Body>

@@ -2,8 +2,8 @@ import { type ReactElement, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -352,7 +352,7 @@ export const UttakPeriodeForm = ({
         oppdaterPeriode([transformValues(values, valgtPeriode, sorterteAktiviteter)])
       }
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <UttakPeriodeInfo
           valgtPeriode={valgtPeriode}
           alleKodeverk={alleKodeverk}
@@ -371,7 +371,7 @@ export const UttakPeriodeForm = ({
             periodeTyper={alleKodeverk['UttakPeriodeType']}
             arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
             aktiviteter={sorterteAktiviteter}
-            erOppfylt={erOppfylt}
+            erOppfylt={!!erOppfylt}
             valgtPeriode={valgtPeriode}
           />
         )}
@@ -387,64 +387,67 @@ export const UttakPeriodeForm = ({
         )}
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
-            <RhfRadioGroup
-              name="erOppfylt"
-              control={formMethods.control}
-              hideLegend
-              validate={[required]}
-              isHorizontal
-              isTrueOrFalseSelection
-              radios={[
-                { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
-                { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
-              ]}
-            />
-            {erOppfylt !== undefined && (
-              <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
-                <VStack gap="4">
-                  <RhfSelect
-                    name="periodeAarsak"
-                    control={formMethods.control}
-                    label={intl.formatMessage({
-                      id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
-                    })}
-                    selectValues={periodeÅrsakOptions}
-                    validate={[required, notDash]}
-                  />
-                  {valgtPeriode.gradertAktivitet && erOppfylt && (
-                    <>
-                      <RhfRadioGroup
-                        name="graderingInnvilget"
-                        control={formMethods.control}
-                        label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
-                        validate={[required]}
-                        isHorizontal
-                        isTrueOrFalseSelection
-                        radios={[
-                          { label: intl.formatMessage({ id: 'UttakActivity.Oppfylt' }), value: 'true' },
-                          { label: intl.formatMessage({ id: 'UttakActivity.IkkeOppfylt' }), value: 'false' },
-                        ]}
-                      />
-                      {graderingInnvilget === false && (
-                        <RhfSelect
-                          name="graderingAvslagAarsak"
+            <VStack gap="space-12">
+              <RhfRadioGroupNew name="erOppfylt" control={formMethods.control} hideLegend validate={[required]}>
+                <HStack gap="space-16">
+                  <Radio value={true} size="small">
+                    <FormattedMessage id="UttakActivity.Oppfylt" />
+                  </Radio>
+                  <Radio value={false} size="small">
+                    <FormattedMessage id="UttakActivity.IkkeOppfylt" />
+                  </Radio>
+                </HStack>
+              </RhfRadioGroupNew>
+              {erOppfylt !== undefined && (
+                <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
+                  <VStack gap="space-16">
+                    <RhfSelect
+                      name="periodeAarsak"
+                      control={formMethods.control}
+                      label={intl.formatMessage({
+                        id: erOppfylt ? 'UttakActivity.InnvilgelseAarsaker' : 'UttakActivity.AvslagAarsak',
+                      })}
+                      selectValues={periodeÅrsakOptions}
+                      validate={[required, notDash]}
+                    />
+                    {valgtPeriode.gradertAktivitet && erOppfylt && (
+                      <>
+                        <RhfRadioGroupNew
+                          name="graderingInnvilget"
                           control={formMethods.control}
-                          label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
-                          validate={[required, notDash]}
-                          selectValues={graderingAvslagsårsakOptions}
-                        />
-                      )}
-                    </>
-                  )}
-                </VStack>
-              </ArrowBox>
-            )}
+                          label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
+                          validate={[required]}
+                        >
+                          <HStack gap="space-16">
+                            <Radio value={true} size="small">
+                              <FormattedMessage id="UttakActivity.Oppfylt" />
+                            </Radio>
+                            <Radio value={false} size="small">
+                              <FormattedMessage id="UttakActivity.IkkeOppfylt" />
+                            </Radio>
+                          </HStack>
+                        </RhfRadioGroupNew>
+                        {graderingInnvilget === false && (
+                          <RhfSelect
+                            name="graderingAvslagAarsak"
+                            control={formMethods.control}
+                            label={intl.formatMessage({ id: 'UttakActivity.GraderingAvslagAarsaker' })}
+                            validate={[required, notDash]}
+                            selectValues={graderingAvslagsårsakOptions}
+                          />
+                        )}
+                      </>
+                    )}
+                  </VStack>
+                </ArrowBox>
+              )}
+            </VStack>
             {warning && (
               <Alert size="small" variant="info" className={styles.alert}>
                 {warning}
               </Alert>
             )}
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
                 <FormattedMessage id="UttakActivity.Oppdater" />
               </Button>

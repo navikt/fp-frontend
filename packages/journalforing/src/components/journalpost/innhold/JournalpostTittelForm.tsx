@@ -7,10 +7,10 @@ import { Button, Checkbox, CheckboxGroup, Heading, HStack } from '@navikt/ds-rea
 import { RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 
-import { listeMedTittler } from '../../../kodeverk/dokumentTittel';
-import { erKanalSomErÅpenForEndring } from '../../../kodeverk/journalKanal';
 import type { JournalføringFormValues } from '../../../typer/journalføringFormValues';
 import type { Journalpost } from '../../../typer/journalpostTsType';
+import { dokumentTitler } from '../../../utils/dokumentTittel';
+import { erKanalSomErÅpenForEndring } from '../../../utils/journalKanalUtils';
 
 import styles from './journalpostTittelForm.module.css';
 
@@ -29,36 +29,36 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
   const { control } = useFormContext<JournalføringFormValues>();
 
   return (
-    <div className={styles.container}>
+    <HStack gap="0 4" align="center">
       {kanRedigereTittel && (
         <>
-          <HStack className={styles.inputBoks}>
-            {harToggletFritekst && (
-              <RhfTextField
-                name="journalpostTittel"
-                control={control}
-                validate={[required, hasValidText]}
-                readOnly={readOnly}
-                maxLength={200}
-                className={styles.inputField}
-              />
-            )}
-            {!harToggletFritekst && (
-              <RhfSelect
-                name="journalpostTittel"
-                control={control}
-                readOnly={readOnly}
-                label={undefined}
-                className={styles.selectField}
-                validate={[required]}
-                selectValues={listeMedTittler.map(tittel => (
-                  <option value={tittel} key={tittel}>
-                    {tittel}
-                  </option>
-                ))}
-              />
-            )}
-          </HStack>
+          {harToggletFritekst && (
+            <RhfTextField
+              name="journalpostTittel"
+              control={control}
+              validate={[required, hasValidText]}
+              readOnly={readOnly}
+              maxLength={200}
+              hideLabel
+              className={styles.inputField}
+            />
+          )}
+          {!harToggletFritekst && (
+            <RhfSelect
+              name="journalpostTittel"
+              control={control}
+              readOnly={readOnly}
+              label={undefined}
+              hideLabel
+              className={styles.inputField}
+              validate={[required]}
+              selectValues={dokumentTitler.map(tittel => (
+                <option value={tittel} key={tittel}>
+                  {tittel}
+                </option>
+              ))}
+            />
+          )}
           <CheckboxGroup
             legend="Brukt fritekst"
             hideLegend
@@ -74,8 +74,10 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
         </>
       )}
       {!kanRedigereTittel && (
-        <HStack className={styles.inputBoks}>
-          <Heading size="large">{journalpost.tittel}</Heading>
+        <>
+          <Heading size="large" level="3">
+            {journalpost.tittel}
+          </Heading>
           {!readOnly && erKanalSomErÅpenForEndring(journalpost.kanal) && (
             <Button
               icon={<PencilIcon aria-hidden />}
@@ -86,8 +88,8 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
               variant="tertiary"
             />
           )}
-        </HStack>
+        </>
       )}
-    </div>
+    </HStack>
   );
 };

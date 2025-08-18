@@ -68,7 +68,7 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label>
         <FormattedMessage id="Registrering.Permisjon.OverforingAvKvote.OvertaKvoten" />
       </Label>

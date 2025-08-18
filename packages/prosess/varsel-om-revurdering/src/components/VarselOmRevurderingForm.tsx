@@ -2,8 +2,8 @@ import { type MouseEvent, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Button, Heading, Link, VStack } from '@navikt/ds-react';
-import { ReadOnlyField, RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { Button, Heading, HStack, Link, Radio, VStack } from '@navikt/ds-react';
+import { ReadOnlyField, RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -125,8 +125,8 @@ export const VarselOmRevurderingForm = ({
   return (
     <>
       <RhfForm formMethods={formMethods} onSubmit={submitCallback} setDataOnUnmount={setMellomlagretFormData}>
-        <VStack gap="4">
-          <Heading size="small">
+        <VStack gap="space-16">
+          <Heading size="small" level="2">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
           </Heading>
           {!isReadOnly && aksjonspunkterForPanel[0].status === AksjonspunktStatus.OPPRETTET && (
@@ -145,43 +145,38 @@ export const VarselOmRevurderingForm = ({
                   familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
                 />
               )}
-              <RhfRadioGroup
-                name="sendVarsel"
-                control={formMethods.control}
-                validate={[required]}
-                isHorizontal
-                isTrueOrFalseSelection
-                radios={[
-                  {
-                    value: 'true',
-                    label: intl.formatMessage({ id: 'VarselOmRevurderingForm.SendVarsel' }),
-                    element: (
-                      <ArrowBox marginTop={6}>
-                        <VStack gap="2">
-                          <RhfTextarea
-                            name="fritekst"
-                            control={formMethods.control}
-                            badges={[{ type: 'info', titleText: language }]}
-                            label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
-                            validate={[required, minLength3, maxLength10000, hasValidText]}
-                            maxLength={10000}
-                            parse={formaterFritekst}
-                          />
-                          <div>
-                            <Link href="#" onClick={forhåndsvisMelding}>
-                              <FormattedMessage id="VarselOmRevurderingForm.Preview" />
-                            </Link>
-                          </div>
-                        </VStack>
-                      </ArrowBox>
-                    ),
-                  },
-                  {
-                    value: 'false',
-                    label: intl.formatMessage({ id: 'VarselOmRevurderingForm.IkkeSendVarsel' }),
-                  },
-                ]}
-              />
+              <VStack gap="space-12">
+                <RhfRadioGroupNew name="sendVarsel" control={formMethods.control} validate={[required]}>
+                  <HStack gap="space-16">
+                    <Radio value={true} size="small">
+                      <FormattedMessage id="VarselOmRevurderingForm.SendVarsel" />
+                    </Radio>
+                    <Radio value={false} size="small">
+                      <FormattedMessage id="VarselOmRevurderingForm.IkkeSendVarsel" />
+                    </Radio>
+                  </HStack>
+                </RhfRadioGroupNew>
+                {formVerdier.sendVarsel && (
+                  <ArrowBox>
+                    <VStack gap="space-8">
+                      <RhfTextarea
+                        name="fritekst"
+                        control={formMethods.control}
+                        badges={[{ type: 'info', titleText: language }]}
+                        label={intl.formatMessage({ id: 'VarselOmRevurderingForm.FritekstIBrev' })}
+                        validate={[required, minLength3, maxLength10000, hasValidText]}
+                        maxLength={10000}
+                        parse={formaterFritekst}
+                      />
+                      <div>
+                        <Link href="#" onClick={forhåndsvisMelding}>
+                          <FormattedMessage id="VarselOmRevurderingForm.Preview" />
+                        </Link>
+                      </div>
+                    </VStack>
+                  </ArrowBox>
+                )}
+              </VStack>
               <RhfTextarea
                 name="begrunnelse"
                 control={formMethods.control}

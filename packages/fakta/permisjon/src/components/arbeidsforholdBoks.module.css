@@ -1,15 +1,15 @@
 .boks {
-  border-bottom: solid 1px var(--a-gray-200);
-  border-left: solid 5px var(--a-gray-200);
+  border-bottom: solid 1px var(--ax-neutral-300);
+  border-left: solid 5px var(--ax-neutral-300);
   padding-bottom: 40px;
   padding-left: 10px;
   padding-top: 20px;
 }
 
 .aksjonspunkt {
-  border-left: solid 5px var(--a-orange-400);
+  border-left: solid 5px var(--ax-warning-500);
 }
 
 .harBorderTop {
-  border-top: solid 1px var(--a-gray-200);
+  border-top: solid 1px var(--ax-neutral-300);
 }

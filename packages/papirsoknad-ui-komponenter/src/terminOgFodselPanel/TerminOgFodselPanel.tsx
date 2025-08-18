@@ -1,8 +1,8 @@
 import { useFormContext, type UseFormGetValues } from 'react-hook-form';
-import { RawIntlProvider } from 'react-intl';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { Alert, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
+import { Alert, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfRadioGroupNew, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -79,31 +79,29 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
   return (
     <RawIntlProvider value={intl}>
       <BorderBox>
-        <VStack gap="4">
-          <Heading size="small">{intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}</Heading>
-          <RhfRadioGroup
+        <VStack gap="space-16">
+          <Heading size="small" level="3">
+            {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}
+          </Heading>
+          <RhfRadioGroupNew
             name="erBarnetFodt"
             control={control}
             label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
             validate={[required]}
             isReadOnly={readOnly}
-            isTrueOrFalseSelection
-            radios={[
-              {
-                label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErFodt' }),
-                value: 'true',
-              },
-              {
-                label: intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErIkkeFodt' }),
-                value: 'false',
-              },
-            ]}
-          />
+          >
+            <Radio value={true} size="small">
+              <FormattedMessage id="Registrering.TerminOgFodsel.ErFodt" />
+            </Radio>
+            <Radio value={false} size="small">
+              <FormattedMessage id="Registrering.TerminOgFodsel.ErIkkeFodt" />
+            </Radio>
+          </RhfRadioGroupNew>
           {erBarnetFodt !== undefined && (
-            <VStack gap="4">
+            <VStack gap="space-16">
               {erBarnetFodt === false && (
                 <>
-                  <HStack gap="4">
+                  <HStack gap="space-16">
                     <RhfDatepicker
                       name="termindato"
                       control={control}
@@ -145,7 +143,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
               )}
               {erBarnetFodt === true && (
                 <>
-                  <HStack gap="4">
+                  <HStack gap="space-16">
                     <RhfDatepicker
                       name="foedselsDato"
                       control={control}

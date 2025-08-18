@@ -49,7 +49,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
   const overstyringsAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_DEKNINGSGRAD);
 
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       {harÅpneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkterForPanel) && (
         <AksjonspunktHelpTextHTML>
           {[<FormattedMessage key="OpptjeningUtland" id="SakenFaktaPanel.OpptjeningUtland" />]}
@@ -61,7 +61,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
             {[<FormattedMessage key="AvklarDekningsgrad" id="SakenFaktaPanel.AvklarDekningsgrad" />]}
           </AksjonspunktHelpTextHTML>
         )}
-      <VStack gap="10">
+      <VStack gap="space-40">
         {soknad && automatiskAp && (
           <DekningradApForm
             søknad={soknad}
@@ -72,7 +72,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           />
         )}
-        <HStack gap="10">
+        <HStack gap="space-40">
           {automatiskMarkeringAvUtenlandssakAp && (
             <InnhentDokOpptjeningUtlandPanel
               dokStatus={utlandDokStatus?.dokStatus}

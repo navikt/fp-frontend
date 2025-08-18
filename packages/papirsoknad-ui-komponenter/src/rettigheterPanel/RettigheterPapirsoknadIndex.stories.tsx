@@ -23,7 +23,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={val => submitCallback(RettigheterPapirsoknadIndex.transformValues(val))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <RettigheterPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

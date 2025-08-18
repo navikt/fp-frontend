@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Heading, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
@@ -25,36 +25,29 @@ interface Props {
  * Søker må oppgi om hen har arbdeidet i egen virksomhet.
  */
 export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) => {
-  const intl = useIntl();
-
   const { watch, control } = useFormContext<VirksomhetFormValues>();
   const harArbeidetIEgenVirksomhet = watch(`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`) || null;
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="Registrering.EgenVirksomhet.Title" />
         </Heading>
-
-        <RhfRadioGroup
+        <RhfRadioGroupNew
           name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
           control={control}
           validate={[required]}
           isReadOnly={readOnly}
           hideLegend
-          isTrueOrFalseSelection
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.No' }),
-              value: 'false',
-            },
-            {
-              label: intl.formatMessage({ id: 'Registrering.EgenVirksomhet.Yes' }),
-              value: 'true',
-            },
-          ]}
-        />
+        >
+          <Radio value={false} size="small">
+            <FormattedMessage id="Registrering.EgenVirksomhet.No" />
+          </Radio>
+          <Radio value={true} size="small">
+            <FormattedMessage id="Registrering.EgenVirksomhet.Yes" />
+          </Radio>
+        </RhfRadioGroupNew>
         {harArbeidetIEgenVirksomhet && <RegistrerVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />}
       </VStack>
     </BorderBox>

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveReservasjonForlengetModal } from './OppgaveReservasjonForlengetModal';
@@ -44,6 +44,7 @@ export const Default: Story = {
       erTilSaksbehandling: true,
       behandlingId: '1',
       andreKriterier: [],
+      oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
     },
     closeModal: action('button-click'),
   },

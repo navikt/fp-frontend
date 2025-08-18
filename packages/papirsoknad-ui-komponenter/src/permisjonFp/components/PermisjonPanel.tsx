@@ -61,8 +61,8 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="Registrering.Permisjon.Title" />
         </Heading>
         <PermisjonFulltUttak foreldreType={foreldreType} readOnly={readOnly} alleKodeverk={alleKodeverk} />

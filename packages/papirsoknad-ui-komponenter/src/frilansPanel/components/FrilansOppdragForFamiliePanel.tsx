@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Label } from '@navikt/ds-react';
+import { Label, VStack } from '@navikt/ds-react';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { TrueFalseInput } from '../../felles/TrueFalseInput';
@@ -18,7 +18,7 @@ export const FrilansOppdragForFamiliePanel = ({ readOnly }: Props) => {
   const harHattOppdragForFamilie = watch(`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`);
 
   return (
-    <>
+    <VStack gap="space-12">
       <TrueFalseInput
         name={`${FRILANS_NAME_PREFIX}.harHattOppdragForFamilie`}
         control={control}
@@ -33,7 +33,7 @@ export const FrilansOppdragForFamiliePanel = ({ readOnly }: Props) => {
           <FrilansOppdragForFamilieFieldArray readOnly={readOnly} />
         </ArrowBox>
       )}
-    </>
+    </VStack>
   );
 };
 

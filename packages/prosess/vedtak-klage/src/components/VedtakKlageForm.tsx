@@ -62,11 +62,11 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
   };
 
   return (
-    <VStack gap="4">
-      <Heading size="small">
+    <VStack gap="space-16">
+      <Heading size="small" level="2">
         <FormattedMessage id="VedtakKlageForm.Header" />
       </Heading>
-      <VStack gap="1">
+      <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="VedtakKlageForm.Resultat" />
         </Label>
@@ -77,7 +77,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
         )}
       </VStack>
       {behandlingsresultat.type === BehandlingResultatType.KLAGE_AVVIST && (
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" />
           </Label>
@@ -89,7 +89,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
         </VStack>
       )}
       {erOmgjort && (
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilOmgjoring" />
           </Label>
@@ -97,7 +97,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
         </VStack>
       )}
       {behandlingsresultat.type === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET && (
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" />
           </Label>

@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Heading, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
@@ -63,8 +63,8 @@ export const InnhentDokOpptjeningUtlandPanel = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="6">
-        <Heading size="small">
+      <VStack gap="space-24">
+        <Heading size="small" level="3">
           <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
         </Heading>
         <AksjonspunktBox
@@ -72,24 +72,21 @@ export const InnhentDokOpptjeningUtlandPanel = ({
           erAksjonspunktApent={harApneAksjonspunkter}
           erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
         >
-          <VStack gap="4">
-            <RhfRadioGroup
+          <VStack gap="space-16">
+            <RhfRadioGroupNew
               name="dokStatus"
               control={formMethods.control}
               label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
               validate={[required]}
               isReadOnly={readOnly}
-              radios={[
-                {
-                  label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />,
-                  value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET,
-                },
-                {
-                  label: <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: BTag }} />,
-                  value: OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET,
-                },
-              ]}
-            />
+            >
+              <Radio value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET} size="small">
+                <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />
+              </Radio>
+              <Radio value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET} size="small">
+                <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: BTag }} />
+              </Radio>
+            </RhfRadioGroupNew>
             <FaktaBegrunnelseTextField
               control={formMethods.control}
               isSubmittable={submittable}

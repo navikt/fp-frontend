@@ -30,23 +30,23 @@ export const FeilmeldingsdetaljerModal = ({ skalViseModal, lukkModal, feilmeldin
       onClose={lukkModal}
     >
       <Modal.Header>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <ExclamationmarkTriangleFillIcon className={styles.image} />
-          <Heading size="small">
+          <Heading size="small" level="2">
             <FormattedMessage id="FeilmeldingsdetaljerModal.ErrorDetails" />
           </Heading>
         </HStack>
       </Modal.Header>
       <Modal.Body>
-        <HStack gap="10">
+        <HStack gap="space-40">
           <div />
-          <VStack gap="4">
+          <VStack gap="space-16">
             {feilmeldingsdetaljer &&
               Object.keys(feilmeldingsdetaljer).map(edKey => (
                 <div key={edKey}>
                   <Detail>{`${capitalizeFirstLetters(edKey)}:`}</Detail>
                   <div>
-                    {/* @ts-expect-error Fiks */}
+                    {/* @ts-expect-error Fiks. Dette vil kreve at vi lager en rekursiv rendering av objectet */}
                     <BodyShort size="small">{feilmeldingsdetaljer[edKey]}</BodyShort>
                   </div>
                 </div>

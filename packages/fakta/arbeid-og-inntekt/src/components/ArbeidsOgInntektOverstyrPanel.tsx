@@ -66,9 +66,9 @@ export const ArbeidsOgInntektOverstyrPanel = ({
   const erAksjonspunktÅpent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
 
   return (
-    <VStack gap="8">
-      <HStack gap="4">
-        <Heading size="small">
+    <VStack gap="space-32">
+      <HStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage id="ArbeidOgInntektFaktaPanel.Overskrift" />
         </Heading>
         {erOverstyrer && erAksjonspunktÅpent && !readOnly && <OverstyringKnapp onClick={toggleOverstyring} />}
@@ -80,7 +80,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
           />
         </BodyShort>
       </HStack>
-      <VStack gap="4">
+      <VStack gap="space-16">
         {aksjonspunktTekstKoder.length > 0 && (
           <AksjonspunktHelpTextHTML>
             {aksjonspunktTekstKoder.map(kode => intl.formatMessage({ id: kode })).join(' ')}

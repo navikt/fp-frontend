@@ -28,7 +28,7 @@ export const SletteSaksbehandlerModal = ({ valgtSaksbehandler, closeSletteModal,
       onClose={closeSletteModal}
     >
       <NavModal.Header>
-        <Heading size="small">
+        <Heading size="small" level="2">
           <FormattedMessage
             id="SletteSaksbehandlerModal.SletteSaksbehandler"
             values={{ saksbehandlerNavn: valgtSaksbehandler.navn }}

@@ -2,8 +2,8 @@ import { type ReactNode, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Button, HStack, Label, Link, ReadMore, Table, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, HStack, Label, Link, Radio, ReadMore, Table, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfNumericField, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -93,9 +93,9 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
   return (
     <Boks harBorderLeft={!behov.vurdering && fields.length === 1}>
       <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
-        <VStack gap="6">
+        <VStack gap="space-24">
           {fields.length === 1 && (
-            <VStack gap="6">
+            <VStack gap="space-24">
               <div>
                 <DelOppPeriodeButton
                   display={!readOnly && periodeErMerEnnEnDag(fields[0])}
@@ -147,14 +147,19 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </Table.Body>
                 </Table>
               )}
-              <RhfRadioGroup
+              <RhfRadioGroupNew
                 name={`perioder.${0}.vurdering`}
                 control={formMethods.control}
                 label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                 validate={[required]}
                 isReadOnly={readOnly}
-                radios={vurderingsalternativ}
-              />
+              >
+                {vurderingsalternativ.map(alt => (
+                  <Radio key={alt.value} value={alt.value} size="small">
+                    <FormattedMessage id={alt.label} />
+                  </Radio>
+                ))}
+              </RhfRadioGroupNew>
               {formMethods.watch(`perioder.0.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
                 <RhfNumericField
                   name="perioder.0.morsStillingsprosent"
@@ -171,14 +176,14 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
             fields.map((periode, index) => (
               <Card key={periode.fom}>
                 <Card.Header>
-                  <HStack gap="4">
+                  <HStack gap="space-16">
                     <Label>
                       <FormattedMessage
                         id="UttakDokumentasjonFaktaDetailForm.PeriodeMedIndex"
                         values={{ index: index + 1 }}
                       />
                     </Label>
-                    <HStack gap="2">
+                    <HStack gap="space-8">
                       <DelOppPeriodeButton
                         display={!readOnly && periodeErMerEnnEnDag(periode)}
                         onClick={() => setValgtPeriodeIndex(index)}
@@ -192,18 +197,23 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </HStack>
                 </Card.Header>
                 <Card.Content>
-                  <HStack gap="6">
+                  <HStack gap="space-24">
                     <BodyShort weight="semibold">{getFormatertPeriode(periode)}</BodyShort>
                     <BodyShort>{calcDaysAndWeeks(periode.fom, periode.tom).formattedString}</BodyShort>
                   </HStack>
-                  <RhfRadioGroup
+                  <RhfRadioGroupNew
                     name={`perioder.${index}.vurdering`}
                     control={formMethods.control}
                     label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
                     validate={[required]}
                     isReadOnly={readOnly}
-                    radios={vurderingsalternativ}
-                  />
+                  >
+                    {vurderingsalternativ.map(alt => (
+                      <Radio key={alt.value} value={alt.value} size="small">
+                        <FormattedMessage id={alt.label} />
+                      </Radio>
+                    ))}
+                  </RhfRadioGroupNew>
                   {formMethods.watch(`perioder.${index}.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
                     <RhfNumericField
                       label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
@@ -230,7 +240,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
             </ReadMore>
           )}
           {!readOnly && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Button
                 size="small"
                 type="submit"

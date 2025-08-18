@@ -27,7 +27,7 @@ export const KlageBehandlingModal = ({ visModal = false, lukkModal }: Props) => 
       onClose={lukkModal}
     >
       <Modal.Body>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <CheckmarkCircleFillIcon className={styles.image} />
           <div>
             <BodyShort size="small">{intl.formatMessage({ id: 'KlageVurderingModal.VedtakOversendt' })}</BodyShort>

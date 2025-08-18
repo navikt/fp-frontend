@@ -44,8 +44,8 @@ export const TilkjentYtelsePanel = ({
   const søknadMottattDato = søknad.søknadsfrist?.mottattDato ?? søknad.mottattDato;
 
   return (
-    <VStack gap="4">
-      <Heading size="small">
+    <VStack gap="space-16">
+      <Heading size="small" level="2">
         <FormattedMessage id="TilkjentYtelse.Title" />
       </Heading>
       {beregningresultat && (
@@ -67,11 +67,11 @@ export const TilkjentYtelsePanel = ({
         />
       )}
       {vurderTilbaketrekkAPBegrunnelse && (
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Label>
             <FormattedMessage id="TilkjentYtelse.VurderTilbaketrekk.Beskrivelse" />
           </Label>
-          <HStack gap="2">
+          <HStack gap="space-8">
             <BodyShort>{vurderTilbaketrekkAPBegrunnelse}</BodyShort>
             <EditedIcon />
           </HStack>

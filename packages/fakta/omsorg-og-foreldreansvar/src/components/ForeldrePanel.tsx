@@ -43,11 +43,13 @@ export const ForeldrePanel = ({ personoversikt, alleMerknaderFraBeslutter }: Pro
       title={intl.formatMessage({ id: 'ForeldrePanel.Foreldre' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
-      <VStack gap="8">
+      <VStack gap="space-32">
         {beggeForeldre.map(foreldre => {
           return (
-            <VStack gap="2" key={`${foreldre.aktoerId}`}>
-              <Heading size="small">{foreldre.navn}</Heading>
+            <VStack gap="space-8" key={`${foreldre.aktoerId}`}>
+              <Heading size="small" level="3">
+                {foreldre.navn}
+              </Heading>
               <Label size="small">
                 <FormattedMessage id="ForeldrePanel.Address" />
               </Label>

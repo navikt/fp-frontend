@@ -34,11 +34,11 @@ export const FodselSammenligningRevurderingPanel = ({
       !!vedtaksDatoSomSvangerskapsuke;
 
   return (
-    <VStack gap="4">
-      <Heading size="small">
+    <VStack gap="space-16">
+      <Heading size="small" level="3">
         <FormattedMessage id="FodselsammenligningPanel.Ytelsesvedtak" />
       </Heading>
-      <HStack gap="4">
+      <HStack gap="space-16">
         {shouldShowVedtaksdatoAsSvangerskapsuke && (
           <div>
             <Label>

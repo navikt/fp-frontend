@@ -6,8 +6,6 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 
 import type { NavAnsatt } from '@navikt/fp-types';
 
-import { erEndeligJournalført } from '../../kodeverk/journalpostTilstand';
-import { OppgaveKilde } from '../../kodeverk/oppgaveKilde';
 import type {
   DokumentTittelSubmitValue,
   JournalførSubmitValue,
@@ -20,6 +18,7 @@ import type { Journalpost } from '../../typer/journalpostTsType';
 import type { OppdaterMedBruker } from '../../typer/oppdaterBrukerTsType';
 import type { Oppgave } from '../../typer/oppgaveTsType';
 import type { ReserverOppgaveType } from '../../typer/reserverOppgaveType';
+import { erEndeligJournalført } from '../../utils/journalpostTilstandUtils';
 import { BrukerAvsenderPanel } from './innhold/BrukerAvsenderPanel';
 import {
   buildInitialValues as buildInitialValuesFlereDokumenter,
@@ -154,9 +153,11 @@ export const JournalpostDetaljer = ({
 
   return (
     <RhfForm<JournalføringFormValues> formMethods={formMethods} onSubmit={submitJournal}>
-      <VStack gap="5">
-        <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
-        {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
+      <VStack gap="space-20">
+        <div>
+          <JournalpostTittelForm journalpost={journalpost} readOnly={skalBareKunneEndreSak} />
+          {oppgave && <Reservasjonspanel oppgave={oppgave} reserverOppgave={reserverOppgave} navAnsatt={navAnsatt} />}
+        </div>
         <BrukerAvsenderPanel
           journalpost={journalpost}
           hentForhåndsvisningAvSøker={forhåndsvisBruker}
@@ -166,15 +167,15 @@ export const JournalpostDetaljer = ({
           knyttSøkerTilJournalpost={knyttJournalpostTilBruker}
         />
         {oppgave?.beskrivelse && (
-          <>
-            <Heading size="small">
-              <FormattedMessage id="ValgtOppgave.Notat" />
+          <VStack gap="space-0">
+            <Heading size="small" level="4">
+              <FormattedMessage id="ValgtOppgave.Beskrivelse" />
             </Heading>
             <BodyLong>{oppgave.beskrivelse}</BodyLong>
-          </>
+          </VStack>
         )}
-        <div>
-          <Heading size="small">
+        <VStack gap="space-8">
+          <Heading size="small" level="4">
             <FormattedMessage id="ValgtOppgave.Dokumenter" />
           </Heading>
           {journalpost.dokumenter && (
@@ -183,32 +184,34 @@ export const JournalpostDetaljer = ({
               dokumentTittelStyresAvJournalpostTittel={dokumentTittelSkalStyresAvJournalpost(journalpost)}
             />
           )}
-        </div>
+        </VStack>
         {journalpost.eksisterendeSaksnummer && (
-          <div>
-            <Heading size="small">
+          <VStack gap="space-8">
+            <Heading size="small" level="4">
               <FormattedMessage id="ValgtOppgave.TilknyttetSak" />
             </Heading>
             <SakDetaljer sak={finnSakMedSaksnummer(journalpost.eksisterendeSaksnummer, saker)} />
-          </div>
+          </VStack>
         )}
-        <div>
-          <Heading size="small">
+        <VStack gap="space-8">
+          <Heading size="small" level="4">
             <FormattedMessage id="ValgtOppgave.RelaterteSaker" />
           </Heading>
           {skalKunneEndreSøker && (
-            <Alert variant="info">
+            <Alert variant="info" size="small">
               <FormattedMessage id="ValgtOppgave.RelaterteSaker.ManglerSøker" />
             </Alert>
           )}
-          {saker
-            .filter(sak => sak.saksnummer !== journalpost.eksisterendeSaksnummer)
-            .map(sak => (
-              <SakDetaljer sak={sak} key={sak.saksnummer} />
-            ))}
-        </div>
+          <VStack gap="space-8">
+            {saker
+              .filter(sak => sak.saksnummer !== journalpost.eksisterendeSaksnummer)
+              .map(sak => (
+                <SakDetaljer sak={sak} key={sak.saksnummer} />
+              ))}
+          </VStack>
+        </VStack>
         <div>
-          <Heading size="small">
+          <Heading size="small" level="4">
             <FormattedMessage id={skalBareKunneEndreSak ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.KnyttTilSak'} />
           </Heading>
           <VelgSakForm
@@ -216,7 +219,7 @@ export const JournalpostDetaljer = ({
             journalpost={journalpost}
             avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
             erKlarForJournalføring={!skalKunneEndreSøker}
-            erLokalOppgave={oppgave?.kilde === OppgaveKilde.LOKAL}
+            erLokalOppgave={oppgave?.kilde === 'LOKAL'}
             flyttTilGosys={flyttTilGosys}
           />
         </div>

@@ -21,9 +21,9 @@ export const FatterVedtakStatusModal = ({ visModal = false, lukkModal, tekst }: 
   return (
     <Modal width="small" open={visModal} aria-label={tekst} onClose={lukkModal}>
       <Modal.Body>
-        <HStack gap="6">
+        <HStack gap="space-24">
           <CheckmarkCircleFillIcon className={styles.image} />
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">{tekst}</Label>
             <BodyShort size="small">
               <FormattedMessage id="FatterVedtakStatusModal.GoToSearchPage" />

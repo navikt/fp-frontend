@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfCheckbox, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -35,7 +35,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL],
+        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
       queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
@@ -47,12 +47,12 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
   });
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label size="small">
         <FormattedMessage id="AndreKriterierVelger.AndreKriterier" />
       </Label>
       {andreKriterierTyper.map(akt => (
-        <div key={akt.kode}>
+        <VStack gap="space-8" key={akt.kode}>
           <RhfCheckbox
             key={akt.kode}
             name={akt.kode}
@@ -70,33 +70,28 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
           {values[akt.kode] && (
             <div className={styles.arrowbox}>
               <ArrowBox alignOffset={30}>
-                <RhfRadioGroup
+                <RhfRadioGroupNew
                   name={`${akt.kode}_inkluder`}
                   control={control}
-                  isHorizontal
-                  isTrueOrFalseSelection
                   onChange={skalInkludere =>
                     lagreAndreKriterier({
                       andreKriterierType: akt.kode,
                       checked: true,
-                      inkluder: skalInkludere,
+                      inkluder: skalInkludere === true,
                     })
                   }
-                  radios={[
-                    {
-                      value: 'true',
-                      label: <FormattedMessage id="AndreKriterierVelger.TaMed" />,
-                    },
-                    {
-                      value: 'false',
-                      label: <FormattedMessage id="AndreKriterierVelger.Fjern" />,
-                    },
-                  ]}
-                />
+                >
+                  <Radio value={true} size="small">
+                    <FormattedMessage id="AndreKriterierVelger.TaMed" />
+                  </Radio>
+                  <Radio value={false} size="small">
+                    <FormattedMessage id="AndreKriterierVelger.Fjern" />
+                  </Radio>
+                </RhfRadioGroupNew>
               </ArrowBox>
             </div>
           )}
-        </div>
+        </VStack>
       ))}
     </VStack>
   );

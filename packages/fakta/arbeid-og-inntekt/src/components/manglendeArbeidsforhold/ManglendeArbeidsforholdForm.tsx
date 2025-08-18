@@ -3,8 +3,8 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, HStack, Popover, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm, RhfRadioGroup, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
+import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfForm, RhfRadioGroupNew, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -119,19 +119,19 @@ export const ManglendeArbeidsforholdForm = ({
   const toggleHjelpetekst = () => setOpenState(gammelVerdi => !gammelVerdi);
 
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <div className={styles.alertStripe}>
         <Alert variant="info">
           <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
         </Alert>
       </div>
       <RhfForm formMethods={formMethods} onSubmit={lagre}>
-        <VStack gap="4">
-          <RhfRadioGroup
+        <VStack gap="space-16">
+          <RhfRadioGroupNew
             name="saksbehandlersVurdering"
             control={formMethods.control}
             label={
-              <HStack gap="2">
+              <HStack gap="space-8">
                 <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
                 <QuestionmarkDiamondIcon
                   className={styles.svg}
@@ -155,23 +155,22 @@ export const ManglendeArbeidsforholdForm = ({
             }
             validate={[required]}
             isReadOnly={isReadOnly}
-            radios={[
-              {
-                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.TarKontakt' }),
-                value: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
-              },
-              {
-                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.GåVidere' }),
-                value: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-              },
-              {
-                label: intl.formatMessage({ id: 'ManglendeOpplysningerForm.OpprettArbeidsforhold' }),
-                value: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-              },
-            ]}
-          />
+          >
+            <Radio
+              value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD}
+              size="small"
+            >
+              <FormattedMessage id="ManglendeOpplysningerForm.TarKontakt" />
+            </Radio>
+            <Radio value={ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING} size="small">
+              <FormattedMessage id="ManglendeOpplysningerForm.GåVidere" />
+            </Radio>
+            <Radio value={ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING} size="small">
+              <FormattedMessage id="ManglendeOpplysningerForm.OpprettArbeidsforhold" />
+            </Radio>
+          </RhfRadioGroupNew>
           {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <RhfDatepicker
                 name="fom"
                 control={formMethods.control}
@@ -209,7 +208,7 @@ export const ManglendeArbeidsforholdForm = ({
             readOnly={isReadOnly}
           />
           {!isReadOnly && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Button
                 size="small"
                 variant="secondary"

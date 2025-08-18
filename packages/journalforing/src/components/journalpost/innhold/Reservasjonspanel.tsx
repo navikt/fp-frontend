@@ -1,6 +1,6 @@
 import { FormattedMessage } from 'react-intl';
 
-import { BodyLong, Button, Tag } from '@navikt/ds-react';
+import { BodyShort, Button, Tag } from '@navikt/ds-react';
 
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -29,33 +29,33 @@ export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props
   };
 
   return (
-    <div>
+    <>
       {oppgave.reservertAv && navAnsatt.brukernavn === oppgave?.reservertAv && (
-        <BodyLong>
+        <BodyShort>
           <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-          <Tag size="small" variant="info-moderate" style={{ marginLeft: '0.5rem' }}>
+          <Tag size="small" variant="alt3" style={{ marginLeft: '0.5rem' }}>
             <FormattedMessage id="Oppgavetabell.Meg" />
           </Tag>
           <Button variant="tertiary" size="small" onClick={reserverOppgaveAction} style={{ marginLeft: '0.5rem' }}>
             <FormattedMessage id="Oppgavetabell.FjernMeg" />
           </Button>
-        </BodyLong>
+        </BodyShort>
       )}
       {oppgave.reservertAv && navAnsatt.brukernavn !== oppgave.reservertAv && (
-        <BodyLong>
+        <BodyShort>
           <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
-          <Tag size="small" variant="neutral-moderate" style={{ marginLeft: '0.5rem' }}>
+          <Tag size="small" variant="alt3" style={{ marginLeft: '0.5rem' }}>
             {oppgave.reservertAv}
           </Tag>
-        </BodyLong>
+        </BodyShort>
       )}
       {!oppgave.reservertAv && (
-        <BodyLong>
+        <div>
           <Button variant="tertiary" size="small" onClick={reserverOppgaveAction}>
             <FormattedMessage id="Oppgavetabell.SettPåMeg" />
           </Button>
-        </BodyLong>
+        </div>
       )}
-    </div>
+    </>
   );
 };

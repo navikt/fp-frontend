@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, HStack, Label, Table } from '@navikt/ds-react';
-import { BTag, formaterArbeidsgiver } from '@navikt/ft-utils';
+import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
+import { BTag, createWeekAndDay, formaterArbeidsgiver } from '@navikt/ft-utils';
 
 import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import type {
@@ -99,10 +99,12 @@ interface Props {
 
 export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
-  const [valgtKontoType, setValgtKontoType] = useState<string>();
+  const [valgtKonto, setValgtKonto] = useState<Stonadskonto>();
 
-  const visDagerForKonto = (stonadskontotype: string): void => {
-    setValgtKontoType(forrigeKontoType => (forrigeKontoType === stonadskontotype ? undefined : stonadskontotype));
+  const visDagerForKonto = (stonadskonto: Stonadskonto): void => {
+    setValgtKonto(forrigeKontoType =>
+      forrigeKontoType?.stonadskontotype === stonadskonto.stonadskontotype ? undefined : stonadskonto,
+    );
   };
 
   const stønadskontoerMedNavn = stønadskontoer ? Object.values(stønadskontoer).sort(sorterKontoer) : [];
@@ -110,22 +112,20 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
   const tilgjengeligeUker = finnTilgjengeligeUker(stønadskontoer);
 
   const sorterteAktiviteter = useMemo(() => {
-    if (!valgtKontoType) {
+    if (!valgtKonto) {
       return undefined;
     }
 
-    const konto = stønadskontoerMedNavn.find(s => s.stonadskontotype === valgtKontoType);
-
-    const aktiviteterMedNavn = (konto?.aktivitetSaldoDtoList ?? []).map(aktivitet => ({
+    const aktiviteterMedNavn = (valgtKonto?.aktivitetSaldoDtoList ?? []).map(aktivitet => ({
       ...aktivitet,
       navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
     }));
     return aktiviteterMedNavn.sort((akt1, akt2) => akt1.navn.localeCompare(akt2.navn));
-  }, [valgtKontoType, stønadskontoerMedNavn]);
+  }, [valgtKonto, stønadskontoerMedNavn]);
 
   return (
     <div className={styles.disponibeltUttak}>
-      <HStack gap="4">
+      <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
         </Label>
@@ -138,52 +138,65 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
       </HStack>
       <div className={styles.tabs}>
         <ul>
-          {stønadskontoerMedNavn.map(konto => (
+          {stønadskontoerMedNavn.map(k => (
             <StonadsdagerTab
-              key={konto.stonadskontotype}
-              aktiv={konto.stonadskontotype === valgtKontoType}
-              stønadskonto={konto}
+              key={k.stonadskontotype}
+              aktiv={k.stonadskontotype === valgtKonto?.stonadskontotype}
+              stønadskonto={k}
               visDagerForKonto={visDagerForKonto}
             />
           ))}
         </ul>
       </div>
-      {valgtKontoType && sorterteAktiviteter && sorterteAktiviteter.length > 0 && (
+      {valgtKonto && sorterteAktiviteter && sorterteAktiviteter.length > 0 && (
         <div className={styles.visKonto}>
-          <Table>
-            <Table.Header>
-              <Table.Row>
-                <Table.HeaderCell scope="col">
-                  <FormattedMessage id="TimeLineInfo.Aktivitet" />
-                </Table.HeaderCell>
-                <Table.HeaderCell scope="col">
-                  <FormattedMessage id="TimeLineInfo.Disponibelt" />
-                </Table.HeaderCell>
-              </Table.Row>
-            </Table.Header>
-            <Table.Body>
-              {sorterteAktiviteter.map(arbforhold => {
-                const ukerOgDager = finnAntallUkerOgDager(arbforhold.saldo);
-                return (
-                  <Table.Row key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>
-                    <Table.DataCell textSize="small">{arbforhold.navn}</Table.DataCell>
-                    <Table.DataCell textSize="small">
-                      {arbforhold.saldo && (
-                        <FormattedMessage
-                          id="TimeLineInfo.Stonadinfo.UkerDager"
-                          values={{
-                            ukerVerdi: ukerOgDager.uker,
-                            dagerVerdi: ukerOgDager.dager,
-                            b: BTag,
-                          }}
-                        />
-                      )}
-                    </Table.DataCell>
-                  </Table.Row>
-                );
-              })}
-            </Table.Body>
-          </Table>
+          <VStack gap="4">
+            {valgtKonto.kontoReduksjoner?.annenForelderEøsUttak && (
+              <FormattedMessage
+                id="TimeLineInfo.KontoReduksjonerEøs"
+                values={{
+                  dager: createWeekAndDay(
+                    Math.floor(valgtKonto.kontoReduksjoner.annenForelderEøsUttak / 5),
+                    valgtKonto.kontoReduksjoner.annenForelderEøsUttak % 5,
+                  ).formattedString,
+                }}
+              />
+            )}
+            <Table>
+              <Table.Header>
+                <Table.Row>
+                  <Table.HeaderCell scope="col">
+                    <FormattedMessage id="TimeLineInfo.Aktivitet" />
+                  </Table.HeaderCell>
+                  <Table.HeaderCell scope="col">
+                    <FormattedMessage id="TimeLineInfo.Disponibelt" />
+                  </Table.HeaderCell>
+                </Table.Row>
+              </Table.Header>
+              <Table.Body>
+                {sorterteAktiviteter.map(arbforhold => {
+                  const ukerOgDager = finnAntallUkerOgDager(arbforhold.saldo);
+                  return (
+                    <Table.Row key={lagTabellRadKey(arbforhold, arbeidsgiverOpplysningerPerId)}>
+                      <Table.DataCell textSize="small">{arbforhold.navn}</Table.DataCell>
+                      <Table.DataCell textSize="small">
+                        {arbforhold.saldo && (
+                          <FormattedMessage
+                            id="TimeLineInfo.Stonadinfo.UkerDager"
+                            values={{
+                              ukerVerdi: ukerOgDager.uker,
+                              dagerVerdi: ukerOgDager.dager,
+                              b: BTag,
+                            }}
+                          />
+                        )}
+                      </Table.DataCell>
+                    </Table.Row>
+                  );
+                })}
+              </Table.Body>
+            </Table>
+          </VStack>
         </div>
       )}
     </div>

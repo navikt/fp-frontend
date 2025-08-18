@@ -122,7 +122,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.BEHANDLINGSKOER}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Behandlingskoer" />
               </Heading>
             }
@@ -130,7 +130,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.NOKKELTALL}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Nokkeltall" />
               </Heading>
             }
@@ -138,7 +138,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.SAKSBEHANDLERE}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Saksbehandlere" />
               </Heading>
             }
@@ -146,7 +146,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.GRUPPER}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Grupper" />
               </Heading>
             }
@@ -154,14 +154,14 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
           <Tabs.Tab
             value={AvdelingslederPanels.RESERVASJONER}
             label={
-              <Heading size="small">
+              <Heading size="small" level="2">
                 <FormattedMessage id="AvdelingslederIndex.Reservasjoner" />
               </Heading>
             }
           />
         </Tabs.List>
       </Tabs>
-      <Box background="bg-default" padding="5">
+      <Box.New background="default" padding="5">
         {activeAvdelingslederPanel === AvdelingslederPanels.BEHANDLINGSKOER && (
           <EndreSakslisterPanel
             valgtAvdelingEnhet={valgtAvdelingEnhet}
@@ -183,7 +183,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
         {activeAvdelingslederPanel === AvdelingslederPanels.RESERVASJONER && (
           <ReservasjonerTabell valgtAvdelingEnhet={valgtAvdelingEnhet} />
         )}
-      </Box>
+      </Box.New>
     </div>
   );
 };

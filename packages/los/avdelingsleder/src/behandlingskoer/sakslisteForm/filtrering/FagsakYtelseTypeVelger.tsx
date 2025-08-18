@@ -24,7 +24,7 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
       lagreSakslisteFagsakYtelseType(values.sakslisteId, values.avdelingEnhet, values.fagsakYtelseType, values.checked),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL],
+        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
       queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
@@ -38,7 +38,7 @@ export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }:
   const alleFagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label size="small">
         <FormattedMessage id="FagsakYtelseTypeVelger.Stonadstype" />
       </Label>

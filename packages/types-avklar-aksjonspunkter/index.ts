@@ -28,6 +28,7 @@ export type { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fa
 export type { VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';
 export type { VurderMedlemskapAp } from './src/fakta/VurderMedlemskapAp';
 export type { VurderForutgaendeMedlemskapAp } from './src/fakta/VurderForutgaendeMedlemskapAp';
+export type { BekreftAnnenpartsUttakEøsAp } from './src/fakta/BekreftAnnenpartsUttakEøsAp';
 export type { BesteberegningAP, ManuellKontrollBesteberegningAP } from './src/fakta/KontrollerBesteberegningAP';
 
 export type { ProsessAksjonspunkt } from './src/ProsessAksjonspunkt';

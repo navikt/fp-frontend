@@ -9,7 +9,7 @@ import { FagsakProfilSakIndex } from './FagsakProfilSakIndex';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const withStylerovider: DecoratorFunction<ReactRenderer> = Story => (
-  <div style={{ width: '600px', backgroundColor: 'white', padding: '30px' }}>
+  <div style={{ width: '600px', backgroundColor: 'var(--ax-bg-default)', padding: '30px' }}>
     <Story />
   </div>
 );

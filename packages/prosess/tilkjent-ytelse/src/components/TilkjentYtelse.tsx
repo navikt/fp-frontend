@@ -123,7 +123,7 @@ export const TilkjentYtelse = ({
   const familiehendelseData = getFamiliehendelseData(familiehendelseSamling);
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Timeline startDate={startDato.toDate()} endDate={endDato.add(1, 'days').toDate()}>
         <Timeline.Pin date={finnSøknadsdatoPinDato(søknadsdato, startDato).toDate()}>
           <BodyShort>
@@ -147,9 +147,9 @@ export const TilkjentYtelse = ({
           label={finnRolle(fagsak, alleKodeverk)}
           icon={
             hovedsøkerKjønnKode === KjønnkodeEnum.KVINNE ? (
-              <FigureOutwardFillIcon width={20} height={20} color="var(--a-red-200)" />
+              <FigureOutwardFillIcon width={20} height={20} color="var(--ax-danger-300)" />
             ) : (
-              <SilhouetteFillIcon width={20} height={20} color="var(--a-blue-600)" />
+              <SilhouetteFillIcon width={20} height={20} color="var(--ax-accent-700)" />
             )
           }
         >
@@ -167,7 +167,7 @@ export const TilkjentYtelse = ({
           ))}
         </Timeline.Row>
       </Timeline>
-      <HStack gap="2" justify="end">
+      <HStack gap="space-8" justify="end">
         <Button
           size="small"
           icon={<PlusIcon aria-hidden />}

@@ -13,7 +13,7 @@
 }
 
 .rightColumn {
-  background-color: var(--a-surface-subtle);
+  background-color: var(--ax-bg-neutral-soft);
   float: right;
   padding-left: 20px;
   padding-right: 20px;
@@ -42,17 +42,21 @@
 
 @media all and (min-width: 1350px) {
   .rightColumn {
-    border-left-color: var(--a-gray-300);
-    border-left-style: solid;
-    border-left-width: 1px;
+    border-left: 1px solid var(--ax-neutral-400);
+  }
+
+  :global(.dark) .rightColumn {
+    border-left: 1px solid var(--ax-neutral-700);
   }
 }
 
 @media all and (max-width: 1350px) {
   .rightColumn {
-    border-top-color: var(--a-gray-300);
-    border-top-style: solid;
-    border-top-width: 1px;
+    border-top: 1px solid var(--ax-neutral-400);
     margin-top: 40px;
+  }
+
+  :global(.dark) .rightColumn {
+    border-top-color: 1px solid var(--ax-neutral-700);
   }
 }

@@ -1,6 +1,5 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import dayjs from 'dayjs';
 import { applyRequestHandlers } from 'msw-storybook-addon';
 
 import * as stories from './FagsakSøk.stories';
@@ -11,12 +10,7 @@ describe('FagsakSøk', () => {
   it('skal vise tabell med saksnummer og behandlinger', async () => {
     await applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
-
-    const alder = dayjs().diff('1980-10-10', 'years');
-
-    expect(await screen.findByText('Søk')).toBeInTheDocument();
-    expect(screen.getByText('Espen Utvikler')).toBeInTheDocument();
-    expect(screen.getByText(`${alder} år`)).toBeInTheDocument();
+    expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('12213234')).toBeInTheDocument();
   });
 

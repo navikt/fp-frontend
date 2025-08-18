@@ -2,7 +2,7 @@ import { type ReactElement, useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Buildings3Icon, SilhouetteIcon } from '@navikt/aksel-icons';
-import { Alert, BodyShort, Button, CopyButton, Heading, HStack, Search, VStack } from '@navikt/ds-react';
+import { Alert, BodyShort, Button, CopyButton, ErrorMessage, Heading, HStack, Search, VStack } from '@navikt/ds-react';
 import { isValidFodselsnummer } from '@navikt/ft-utils';
 
 import type { ForhåndsvisBrukerRespons } from '../../../typer/forhåndsvisBrukerResponsTsType';
@@ -23,41 +23,37 @@ interface BrukerAvsenderRadProps {
   navn: string;
   id: string;
   ikon: ReactElement;
-  title?: string;
+  title?: ReactElement;
 }
 
 const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): ReactElement => (
-  <VStack gap="2" className={styles.kolBredde}>
+  <VStack gap="space-8">
     {title && (
-      <Heading size="small">
-        <FormattedMessage id={title} />
+      <Heading size="small" level="4">
+        {title}
       </Heading>
     )}
-    <HStack gap="2">
+    <HStack gap="space-16">
       <div className={styles.ikonKol}>{ikon}</div>
-      <VStack gap="1">
+      <div>
         <BodyShort>{navn}</BodyShort>
-        <HStack gap="1">
-          <div className={styles.kopiTekst}>
-            <BodyShort>{id}</BodyShort>
-          </div>
-          <div className={styles.clipBoard}>
-            <CopyButton copyText={id} variant="action" />
-          </div>
+        <HStack gap="space-4" align="center">
+          <BodyShort>{id}</BodyShort>
+          <CopyButton copyText={id} variant="action" size="small" />
         </HStack>
-      </VStack>
+      </div>
     </HStack>
   </VStack>
 );
 
-type Props = Readonly<{
+interface Props {
   journalpost: Journalpost;
   hentForhåndsvisningAvSøker: (fnr: string) => void;
   skalKunneEndreSøker: boolean;
   brukerTilForhåndsvisning?: ForhåndsvisBrukerRespons;
   knyttSøkerTilJournalpost: (params: OppdaterMedBruker) => void;
   lasterBruker: boolean;
-}>;
+}
 
 /**
  * BrukerAvsenderPanel - Inneholder detaljer om bruker og avsender
@@ -97,57 +93,51 @@ export const BrukerAvsenderPanel = ({
 
   const oppdaterMedBrukerKlikk = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      // @ts-expect-error Fiks!
-      const fnr = e.target?.value;
+      const fnr = e.currentTarget.value;
       forhåndsvisSøker(fnr);
     }
   };
 
   return (
-    <div className={styles.brukerAvsenderRad}>
-      <div>
-        {skalKunneEndreSøker && (
-          <VStack gap="4">
-            <Heading size="small">
-              <FormattedMessage id="ValgtOppgave.Bruker" />
-            </Heading>
-            <Alert variant="warning">
-              <BodyShort>
-                <FormattedMessage id="ValgtOppgave.Søk.Bruker" />
-              </BodyShort>
-            </Alert>
-            <VStack gap="2">
-              <Search
-                label={intl.formatMessage({ id: 'ValgtOppgave.Søk.FinnBruker' })}
-                onKeyDown={oppdaterMedBrukerKlikk}
-                onSearchClick={forhåndsvisSøker}
-                hideLabel={false}
-              >
-                <Search.Button type="button" loading={lasterBruker} />
-              </Search>
-              {søkerFeilmelding && <BodyShort className={styles.error}>{søkerFeilmelding}</BodyShort>}
-              {brukerTilForhåndsvisning && (
-                <VStack gap="4">
-                  <BrukerAvsenderRad
-                    navn={brukerTilForhåndsvisning.navn}
-                    id={brukerTilForhåndsvisning.fødselsnummer}
-                    ikon={<SilhouetteIcon className={styles.ikon} />}
-                  />
-                  <Button type="button" onClick={knyttSøkerTilJP}>
-                    <FormattedMessage id="ValgtOppgave.Søk.KnyttTil" />
-                  </Button>
-                </VStack>
-              )}
+    <VStack gap="space-16">
+      {skalKunneEndreSøker && (
+        <VStack gap="space-8">
+          <Heading size="small" level="4">
+            <FormattedMessage id="ValgtOppgave.Søker" />
+          </Heading>
+          <Alert variant="warning" size="small">
+            <FormattedMessage id="ValgtOppgave.Søk.Bruker" />
+          </Alert>
+          <Search
+            label={intl.formatMessage({ id: 'ValgtOppgave.Søk.FinnBruker' })}
+            onKeyDown={oppdaterMedBrukerKlikk}
+            onSearchClick={forhåndsvisSøker}
+            hideLabel={false}
+          >
+            <Search.Button type="button" loading={lasterBruker} />
+          </Search>
+          {søkerFeilmelding && <ErrorMessage>{søkerFeilmelding}</ErrorMessage>}
+          {brukerTilForhåndsvisning && (
+            <VStack gap="space-16">
+              <BrukerAvsenderRad
+                navn={brukerTilForhåndsvisning.navn}
+                id={brukerTilForhåndsvisning.fødselsnummer}
+                ikon={<SilhouetteIcon className={styles.ikon} />}
+              />
+              <Button type="button" onClick={knyttSøkerTilJP}>
+                <FormattedMessage id="ValgtOppgave.Søk.KnyttTil" />
+              </Button>
             </VStack>
-          </VStack>
-        )}
-      </div>
+          )}
+        </VStack>
+      )}
+
       {journalpost.bruker?.navn && (
         <BrukerAvsenderRad
           navn={journalpost.bruker.navn}
           id={journalpost.bruker.fnr}
           ikon={<SilhouetteIcon className={styles.ikon} />}
-          title="ValgtOppgave.Bruker"
+          title={<FormattedMessage id="ValgtOppgave.Søker" />}
         />
       )}
       {journalpost.avsender?.navn && (
@@ -155,9 +145,9 @@ export const BrukerAvsenderPanel = ({
           navn={journalpost.avsender.navn}
           id={journalpost.avsender.id}
           ikon={finnAvsenderBilde(journalpost)}
-          title="ValgtOppgave.Avsender"
+          title={<FormattedMessage id="ValgtOppgave.Avsender" />}
         />
       )}
-    </div>
+    </VStack>
   );
 };

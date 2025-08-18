@@ -37,10 +37,10 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
   const visInntektsposter = inntektsposter.length > 0 && inntektsposter.some(i => i.beløp > 0);
 
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       <InntektsmeldingerPanel saksnummer={saksnummer} alleKodeverk={alleKodeverk} radData={radData} />
       {visInntektsposter && (
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Label size="small">
             <FormattedMessage
               id={
@@ -50,11 +50,11 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
               }
             />
           </Label>
-          <VStack gap="1">
+          <VStack gap="space-4">
             {sorterteInntektsposter
               .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
               .map(inntekt => (
-                <HStack gap="2" className={styles.bredde} key={inntekt.fom}>
+                <HStack gap="space-8" className={styles.bredde} key={inntekt.fom}>
                   <BodyShort size="small">
                     <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
                   </BodyShort>

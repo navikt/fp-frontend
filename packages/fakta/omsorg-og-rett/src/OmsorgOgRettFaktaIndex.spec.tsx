@@ -128,7 +128,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
     await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
 
-    expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
+    expect(
+      screen.getByText('Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?'),
+    ).toBeInTheDocument();
     await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
 
     expect(await screen.findByText('Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?')).toBeInTheDocument();
@@ -153,7 +155,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(await screen.findByText('Rettighetstype')).toBeInTheDocument();
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
-    expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
+    expect(
+      screen.getByText('Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?'),
+    ).toBeInTheDocument();
     expect(screen.getByText('Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?')).toBeInTheDocument();
     expect(await screen.findByText('Mor har ikke rett og er uføretrygded i pesys.')).toBeInTheDocument();
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
@@ -173,7 +177,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(await screen.findByText('Rettighetstype')).toBeInTheDocument();
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
-    expect(screen.getByText('Har annen forelder tilstrekkelig opptjening fra land i EØS?')).toBeInTheDocument();
+    expect(
+      screen.getByText('Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?'),
+    ).toBeInTheDocument();
     expect(screen.getByText('Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?')).toBeInTheDocument();
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();

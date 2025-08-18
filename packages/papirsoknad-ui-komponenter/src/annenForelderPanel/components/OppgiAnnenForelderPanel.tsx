@@ -1,9 +1,9 @@
 import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfRadioGroup, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
+import { Heading, Radio, VStack } from '@navikt/ds-react';
+import { RhfCheckbox, RhfRadioGroupNew, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   harSammeFodselsnummerSomSoker,
   hasValidFodselsnummer,
@@ -72,63 +72,62 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
         }
         disabled={kanIkkeOppgiAnnenForelder}
       />
-      <RhfCheckbox
-        name={`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`}
-        control={control}
-        label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent' })}
-        readOnly={readOnly}
-        onChange={() => (isSubmitted ? trigger() : undefined)}
-      />
-      {kanIkkeOppgiAnnenForelder === true && (
-        <ArrowBox>
-          <VStack gap="4">
-            <Heading size="small">
-              {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
-            </Heading>
-            <RhfRadioGroup
-              name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
-              control={control}
-              hideLegend
-              validate={[required]}
-              isReadOnly={readOnly}
-              radios={[
-                {
-                  label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1' }),
-                  value: KanIkkeOppgiAnnenForelderArsak.UKJENT_FORELDER,
-                },
-                {
-                  label: formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2' }),
-                  value: KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR,
-                },
-              ]}
-            />
-            {kanIkkeOppgiBegrunnelse?.arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
-              <>
-                <RhfSelect
-                  name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
-                  control={control}
-                  label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
-                  selectValues={filtrerLandOgLagOptions(sorterteLand)}
-                  validate={[required]}
-                  className={styles.inputBredde}
-                  readOnly={readOnly}
-                />
+      <VStack gap="space-12">
+        <RhfCheckbox
+          name={`${ANNEN_FORELDER_NAME_PREFIX}.kanIkkeOppgiAnnenForelder`}
+          control={control}
+          label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent' })}
+          readOnly={readOnly}
+          onChange={() => (isSubmitted ? trigger() : undefined)}
+        />
+        {kanIkkeOppgiAnnenForelder === true && (
+          <ArrowBox>
+            <VStack gap="space-16">
+              <Heading size="small" level="4">
+                {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
+              </Heading>
+              <RhfRadioGroupNew
+                name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
+                control={control}
+                hideLegend
+                validate={[required]}
+                isReadOnly={readOnly}
+              >
+                <Radio value={KanIkkeOppgiAnnenForelderArsak.UKJENT_FORELDER} size="small">
+                  <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1" />
+                </Radio>
+                <Radio value={KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR} size="small">
+                  <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2" />
+                </Radio>
+              </RhfRadioGroupNew>
+              {kanIkkeOppgiBegrunnelse?.arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
+                <>
+                  <RhfSelect
+                    name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
+                    control={control}
+                    label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
+                    selectValues={filtrerLandOgLagOptions(sorterteLand)}
+                    validate={[required]}
+                    className={styles.inputBredde}
+                    readOnly={readOnly}
+                  />
 
-                <RhfTextField
-                  name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
-                  control={control}
-                  label={formatMessage({
-                    id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer',
-                  })}
-                  validate={[required]}
-                  className={styles.inputBredde}
-                  readOnly={readOnly}
-                />
-              </>
-            )}
-          </VStack>
-        </ArrowBox>
-      )}
+                  <RhfTextField
+                    name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.utenlandskFoedselsnummer`}
+                    control={control}
+                    label={formatMessage({
+                      id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer',
+                    })}
+                    validate={[required]}
+                    className={styles.inputBredde}
+                    readOnly={readOnly}
+                  />
+                </>
+              )}
+            </VStack>
+          </ArrowBox>
+        )}
+      </VStack>
     </>
   );
 };

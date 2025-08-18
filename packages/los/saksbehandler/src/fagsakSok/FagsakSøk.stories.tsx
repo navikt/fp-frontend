@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingType, FagsakStatus, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
@@ -80,6 +80,7 @@ export const Default: Story = {
         erTilSaksbehandling: true,
         behandlingId: '12344',
         andreKriterier: [],
+        oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
       },
       {
         id: 2,
@@ -97,6 +98,7 @@ export const Default: Story = {
         erTilSaksbehandling: true,
         behandlingId: '12344',
         andreKriterier: [],
+        oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
       },
     ],
   },

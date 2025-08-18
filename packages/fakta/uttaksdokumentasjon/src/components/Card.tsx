@@ -5,15 +5,15 @@ import { Box, HStack, VStack } from '@navikt/ds-react';
 const CardWrapper = ({ children }: PropsWithChildren) => <div>{children}</div>;
 
 const CardHeader = ({ children }: PropsWithChildren) => (
-  <Box background="surface-neutral-moderate" paddingInline="4" paddingBlock="2">
-    <HStack gap="6">{children}</HStack>
-  </Box>
+  <Box.New background="neutral-moderate" paddingInline="4" paddingBlock="2">
+    <HStack gap="space-24">{children}</HStack>
+  </Box.New>
 );
 
 const CardContent = ({ children }: PropsWithChildren) => (
-  <Box background="surface-neutral-subtle" paddingInline="4" paddingBlock="2">
-    <VStack gap="6">{children}</VStack>
-  </Box>
+  <Box.New background="neutral-soft" paddingInline="4" paddingBlock="2">
+    <VStack gap="space-24">{children}</VStack>
+  </Box.New>
 );
 
 type CardProps = typeof CardWrapper & {

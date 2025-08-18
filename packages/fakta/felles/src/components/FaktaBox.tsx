@@ -5,7 +5,7 @@ import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react'
 import { type FaktaKilde, getLabelForFaktaKilde } from './FaktaKilde';
 
 export const FaktaGruppe = forwardRef((props, ref) => (
-  <HStack gap="2" style={{ display: 'flex' }} {...props} ref={ref} />
+  <HStack gap="space-8" style={{ display: 'flex' }} {...props} ref={ref} />
 )) as ForwardRefExoticComponent<PropsWithChildren & React.RefAttributes<HTMLDivElement>>;
 
 FaktaGruppe.displayName = 'FaktaGruppe';
@@ -18,8 +18,8 @@ interface FaktaBoxProps {
 
 export const FaktaBox = ({ label, value, kilde }: FaktaBoxProps) => {
   return (
-    <Box
-      background="bg-subtle"
+    <Box.New
+      background="neutral-soft"
       flexBasis="0%"
       flexGrow="1"
       borderRadius="medium"
@@ -27,13 +27,13 @@ export const FaktaBox = ({ label, value, kilde }: FaktaBoxProps) => {
       paddingInline="4"
       aria-label={typeof label === 'string' ? label : undefined}
     >
-      <VStack gap="6" flexGrow="1" height="100%" justify="space-between">
+      <VStack gap="space-24" flexGrow="1" height="100%" justify="space-between">
         <div>
           <Label size="small">{label}</Label>
           <BodyShort size="large">{value}</BodyShort>
         </div>
         <Detail uppercase>{getLabelForFaktaKilde(kilde)}</Detail>
       </VStack>
-    </Box>
+    </Box.New>
   );
 };

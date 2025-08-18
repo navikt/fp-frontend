@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const UtbetalingerPanel = ({ utbetalinger }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <div />
     {!utbetalinger && (
       <BodyShort size="small">

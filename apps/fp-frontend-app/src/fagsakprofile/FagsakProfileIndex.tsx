@@ -105,7 +105,7 @@ export const FagsakProfileIndex = ({
       {shouldRedirectToBehandlinger && (
         <Navigate to={findPathToBehandling(fagsak.saksnummer, location, fagsakData.getAlleBehandlinger())} />
       )}
-      <VStack gap="5">
+      <VStack gap="space-20">
         {!shouldRedirectToBehandlinger && (
           <HStack justify="space-between" align="start">
             <div>
@@ -135,7 +135,7 @@ export const FagsakProfileIndex = ({
         )}
 
         <VStack
-          gap="6"
+          gap="space-24"
           className={
             visUtvidetBehandlingDetaljer ? styles.skjulUtvidetBehandlingDetaljer : styles.visUtvidetBehandlingDetaljer
           }

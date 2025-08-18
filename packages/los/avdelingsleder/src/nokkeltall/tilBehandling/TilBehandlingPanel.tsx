@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
@@ -57,11 +57,11 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
   return (
     <RhfForm<FormValues> formMethods={formMethods}>
       <StoreValuesInLocalStorage stateKey={formName} values={values} />
-      <VStack gap="4">
+      <VStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="TilBehandlingPanel.TilBehandling" />
         </Label>
-        <HStack gap="4">
+        <HStack gap="space-16">
           <RhfSelect
             name="ukevalg"
             control={formMethods.control}
@@ -72,29 +72,22 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
               </option>
             ))}
           />
-          <RhfRadioGroup
-            name="ytelseType"
-            control={formMethods.control}
-            isHorizontal
-            radios={[
-              {
-                value: FagsakYtelseType.FORELDREPENGER,
-                label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER),
-              },
-              {
-                value: FagsakYtelseType.ENGANGSSTONAD,
-                label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD),
-              },
-              {
-                value: FagsakYtelseType.SVANGERSKAPSPENGER,
-                label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
-              },
-              {
-                value: ALLE_YTELSETYPER_VALGT,
-                label: <FormattedMessage id="TilBehandlingPanel.Alle" />,
-              },
-            ]}
-          />
+          <RhfRadioGroupNew name="ytelseType" control={formMethods.control}>
+            <HStack gap="space-16">
+              <Radio value={FagsakYtelseType.FORELDREPENGER} size="small">
+                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER)}
+              </Radio>
+              <Radio value={FagsakYtelseType.ENGANGSSTONAD} size="small">
+                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD)}
+              </Radio>
+              <Radio value={FagsakYtelseType.SVANGERSKAPSPENGER} size="small">
+                {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER)}
+              </Radio>
+              <Radio value={ALLE_YTELSETYPER_VALGT} size="small">
+                <FormattedMessage id="TilBehandlingPanel.Alle" />
+              </Radio>
+            </HStack>
+          </RhfRadioGroupNew>
         </HStack>
         <TilBehandlingGraf
           height={height}

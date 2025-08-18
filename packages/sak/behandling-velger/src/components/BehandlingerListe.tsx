@@ -55,11 +55,11 @@ export const BehandlingerListe = ({
   return (
     <ul className={styles.behandlingList}>
       {behandlinger.length === 0 && (
-        <Box borderWidth="2" borderColor="border-divider" borderRadius="large" padding="3">
+        <Box.New borderWidth="2" borderColor="neutral-subtle" borderRadius="large" padding="3">
           <Label size="small">
             <FormattedMessage id="BehandlingList.ZeroBehandlinger" />
           </Label>
-        </Box>
+        </Box.New>
       )}
       {behandlinger.length > 0 &&
         sorterteOgFiltrerteBehandlinger.map(behandling => (

@@ -54,7 +54,7 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
       label={<FormattedMessage id="Registrering.VirksomhetIdentifikasjonPanel.RegisteredInNorway" />}
       readOnly={readOnly}
       trueContent={
-        <ArrowBox marginTop={8}>
+        <ArrowBox>
           <RhfTextField
             name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.organisasjonsnummer`}
             control={control}
@@ -65,8 +65,8 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
         </ArrowBox>
       }
       falseContent={
-        <ArrowBox alignOffset={58} marginTop={8}>
-          <VStack gap="4">
+        <ArrowBox alignOffset={58}>
+          <VStack gap="space-16">
             <RhfSelect
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.landJobberFra`}
               control={control}
@@ -76,7 +76,7 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
               label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Country' })}
             />
 
-            <HStack gap="4">
+            <HStack gap="space-16">
               <RhfDatepicker
                 name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.fom`}
                 control={control}

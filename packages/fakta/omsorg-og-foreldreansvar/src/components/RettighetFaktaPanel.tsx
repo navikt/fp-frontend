@@ -38,7 +38,7 @@ export const RettighetFaktaPanel = ({ alleMerknaderFraBeslutter }: Props) => {
       title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.Rettighet' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
-      <VStack gap="4">
+      <VStack gap="space-16">
         <BodyShort size="small">{farSokerType || '-'}</BodyShort>
         <div>
           <FaktaGruppe

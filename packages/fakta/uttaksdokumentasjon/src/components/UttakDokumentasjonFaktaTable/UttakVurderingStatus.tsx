@@ -17,7 +17,7 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
   if (!vurdering) {
     return (
       <IconLabel
-        icon={<CircleFillIcon color="var(--a-orange-400)" />}
+        icon={<CircleFillIcon color="var(--ax-warning-500)" />}
         formattedMessageId="UttakDokumentasjonFaktaTable.TilVurdering"
       />
     );
@@ -25,8 +25,8 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
   switch (vurdering) {
     case UttakVurdering.GODKJENT:
       return (
-        <HStack gap="1">
-          <CheckmarkCircleFillIcon color="var(--a-icon-success)" />
+        <HStack gap="space-4">
+          <CheckmarkCircleFillIcon color="var(--ax-text-success-decoration)" />
           {morsStillingsprosent ? (
             <FormattedMessage id="UttakDokumentasjonFaktaTable.GodkjentMedProsent" values={{ morsStillingsprosent }} />
           ) : (
@@ -37,21 +37,21 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
     case UttakVurdering.IKKE_GODKJENT:
       return (
         <IconLabel
-          icon={<XMarkOctagonFillIcon color="var(--a-icon-danger)" />}
+          icon={<XMarkOctagonFillIcon color="var(--ax-text-danger-decoration)" />}
           formattedMessageId="UttakDokumentasjonFaktaTable.IkkeGodkjent"
         />
       );
     case UttakVurdering.IKKE_DOKUMENTERT:
       return (
         <IconLabel
-          icon={<FileXMarkFillIcon color="var(--a-icon-subtle)" />}
+          icon={<FileXMarkFillIcon color="var(--ax-text-neutral-subtle)" />}
           formattedMessageId="UttakDokumentasjonFaktaTable.ManglerDok"
         />
       );
     case UttakVurdering.GODKJENT_AUTOMATISK:
       return (
         <IconLabel
-          icon={<CheckmarkCircleFillIcon color="var(--a-icon-success)" />}
+          icon={<CheckmarkCircleFillIcon color="var(--ax-text-success-decoration)" />}
           formattedMessageId="UttakDokumentasjonFaktaTable.GodkjentAutomatisk"
         />
       );

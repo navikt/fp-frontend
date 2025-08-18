@@ -188,7 +188,7 @@ export const OpptjeningFaktaPanel = ({
   );
 
   return (
-    <VStack gap="6" className={styles.container}>
+    <VStack gap="space-24" className={styles.container}>
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}

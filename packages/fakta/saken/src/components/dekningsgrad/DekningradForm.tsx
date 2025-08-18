@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PencilFillIcon, PencilIcon } from '@navikt/aksel-icons';
-import { BodyShort, Box, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { BodyShort, Box, Button, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -62,9 +62,9 @@ export const DekningradForm = ({
 
   if (!visEditeringsmodus) {
     return (
-      <VStack gap="2">
-        <HStack gap="2" align="center">
-          <Heading size="small">
+      <VStack gap="space-8">
+        <HStack gap="space-8" align="center">
+          <Heading size="small" level="3">
             <FormattedMessage id="DekningsgradForm.Dekningsgrad" />
           </Heading>
           {aksjonspunkt?.begrunnelse && (
@@ -73,7 +73,7 @@ export const DekningradForm = ({
             </BodyShort>
           )}
         </HStack>
-        <HStack gap="2">
+        <HStack gap="space-8">
           <FormattedMessage
             id="DekningsgradForm.DekningsgradForeldrepenger"
             values={{
@@ -91,14 +91,14 @@ export const DekningradForm = ({
           )}
         </HStack>
         {aksjonspunkt?.begrunnelse && (
-          <Box background="bg-subtle" padding="5" borderColor="border-default" borderRadius="medium">
-            <VStack gap="2">
+          <Box.New background="neutral-moderate" padding="5" borderRadius="medium">
+            <VStack gap="space-8">
               <Label size="small">
                 <FormattedMessage id="DekningsgradForm.BeskrivelseAvEndring" />
               </Label>
               <BodyShort size="small">{aksjonspunkt.begrunnelse}</BodyShort>
             </VStack>
-          </Box>
+          </Box.New>
         )}
       </VStack>
     );
@@ -116,16 +116,16 @@ export const DekningradForm = ({
       }
     >
       <div className={styles.header}>
-        <HStack gap="2" align="center">
+        <HStack gap="space-8" align="center">
           <PencilIcon aria-hidden height={24} width={24} />
-          <Heading size="small">
+          <Heading size="small" level="3">
             <FormattedMessage id="DekningsgradForm.EndreDekningsgrad" />
           </Heading>
         </HStack>
       </div>
-      <Box background="surface-neutral-subtle" padding="5">
-        <VStack gap="6">
-          <RhfRadioGroup
+      <Box.New background="neutral-moderate" padding="5">
+        <VStack gap="space-24">
+          <RhfRadioGroupNew
             name="dekningsgrad"
             control={formMethods.control}
             label={<FormattedMessage id="DekningsgradForm.Dekningsgrad" />}
@@ -149,24 +149,22 @@ export const DekningradForm = ({
               },
             ]}
             isReadOnly={readOnly}
-            parse={value => parseInt(value, 10)}
-            radios={[
-              {
-                label: intl.formatMessage(
+          >
+            <HStack gap="space-16">
+              <Radio value={80} size="small">
+                {intl.formatMessage(
                   { id: 'DekningsgradForm.80' },
                   { erSatt: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad === 80 },
-                ),
-                value: '80',
-              },
-              {
-                label: intl.formatMessage(
+                )}
+              </Radio>
+              <Radio value={100} size="small">
+                {intl.formatMessage(
                   { id: 'DekningsgradForm.100' },
                   { erSatt: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad === 100 },
-                ),
-                value: '100',
-              },
-            ]}
-          />
+                )}
+              </Radio>
+            </HStack>
+          </RhfRadioGroupNew>
           <RhfTextarea
             name="begrunnelse"
             control={formMethods.control}
@@ -186,7 +184,7 @@ export const DekningradForm = ({
             </Button>
           </div>
         </VStack>
-      </Box>
+      </Box.New>
     </RhfForm>
   );
 };

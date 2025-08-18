@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Heading, HStack, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
+import { Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfRadioGroupNew, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -77,8 +77,8 @@ export const OmsorgOgAdopsjonPanel = ({
 
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
           <FormattedMessage
             id={
               familieHendelseType === FamilieHendelseType.ADOPSJON
@@ -88,26 +88,23 @@ export const OmsorgOgAdopsjonPanel = ({
           />
         </Heading>
         {isForeldrepengerFagsak && familieHendelseType === FamilieHendelseType.ADOPSJON && (
-          <RhfRadioGroup
+          <RhfRadioGroupNew
             //@ts-expect-error Her er det noko rart med typane
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
             control={control}
             label={<FormattedMessage id="Registrering.Adopsjon.GjelderEktefellesBarn" />}
             validate={[required]}
             isReadOnly={readOnly}
-            isTrueOrFalseSelection
-            isHorizontal
-            radios={[
-              {
-                label: formatMessage({ id: 'Registrering.Adopsjon.Ja' }),
-                value: 'true',
-              },
-              {
-                label: formatMessage({ id: 'Registrering.Adopsjon.Nei' }),
-                value: 'false',
-              },
-            ]}
-          />
+          >
+            <HStack gap="space-16">
+              <Radio value={true} size="small">
+                <FormattedMessage id="Registrering.Adopsjon.Ja" />
+              </Radio>
+              <Radio value={false} size="small">
+                <FormattedMessage id="Registrering.Adopsjon.Nei" />
+              </Radio>
+            </HStack>
+          </RhfRadioGroupNew>
         )}
         <RhfDatepicker
           name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}
@@ -121,7 +118,7 @@ export const OmsorgOgAdopsjonPanel = ({
           isReadOnly={readOnly}
           validate={familieHendelseType === FamilieHendelseType.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
         />
-        <HStack gap="4">
+        <HStack gap="space-16">
           {familieHendelseType === FamilieHendelseType.ADOPSJON && (
             <RhfDatepicker
               //@ts-expect-error Her er det noko rart med typane

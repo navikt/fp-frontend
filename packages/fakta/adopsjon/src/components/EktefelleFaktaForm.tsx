@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { BodyShort, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
@@ -37,33 +37,30 @@ export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMer
       title={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
-      <VStack gap="2" width="100%">
+      <VStack gap="space-8" width="100%">
         <BodyShort size="small">
           <FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />
         </BodyShort>
         <div>
           <hr className={styles.hr} />
         </div>
-        <RhfRadioGroup
+        <RhfRadioGroupNew
           name="ektefellesBarn"
           control={control}
           hideLegend
           validate={[required]}
           isReadOnly={readOnly}
           isEdited={hasValue(gjeldendeFamiliehendelse.ektefellesBarn)}
-          isHorizontal
-          isTrueOrFalseSelection
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'EktefelleFaktaForm.ErIkkeValg' }),
-              value: 'false',
-            },
-            {
-              label: intl.formatMessage({ id: 'EktefelleFaktaForm.ErValg' }),
-              value: 'true',
-            },
-          ]}
-        />
+        >
+          <HStack gap="space-16">
+            <Radio value={false} size="small">
+              <FormattedMessage id="EktefelleFaktaForm.ErIkkeValg" />
+            </Radio>
+            <Radio value={true} size="small">
+              <FormattedMessage id="EktefelleFaktaForm.ErValg" />
+            </Radio>
+          </HStack>
+        </RhfRadioGroupNew>
       </VStack>
     </FaktaGruppe>
   );

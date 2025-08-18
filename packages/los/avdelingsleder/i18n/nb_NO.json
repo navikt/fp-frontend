@@ -35,7 +35,6 @@
 
   "UtvalgskriterierForSakslisteForm.Utvalgskriterier": "Utvalgskriterier",
   "UtvalgskriterierForSakslisteForm.Navn": "Navn",
-  "UtvalgskriterierForSakslisteForm.AntallSaker": "Antall behandlinger",
   "UtvalgskriterierForSakslisteForm.NyListe": "Ny behandlingskø",
 
   "AndreKriterierVelger.TilBeslutter": "Til beslutter",
@@ -47,7 +46,6 @@
   "GjeldendeSakslisterTabell.GjeldendeLister": "Gjeldende behandlingskøer",
   "GjeldendeSakslisterTabell.IngenLister": "Ingen behandlingskøer er laget",
   "GjeldendeSakslisterTabell.Listenavn": "Navn",
-  "GjeldendeSakslisterTabell.SistEndret": "Sist endret",
   "GjeldendeSakslisterTabell.LeggTilListe": "Legg til behandlingskø",
   "GjeldendeSakslisterTabell.Behandlingtype": "Behandlingstype",
   "GjeldendeSakslisterTabell.Stonadstype": "Stønadstype",
@@ -55,6 +53,9 @@
   "GjeldendeSakslisterTabell.AntallSaksbehandlere": "Antall saksbehandlere",
   "GjeldendeSakslisterTabell.AntallBehandlinger": "Antall behandlinger",
   "GjeldendeSakslisterTabell.OppgaverForAvdeling": "Antall åpne behandlinger totalt",
+
+  "AntallOppgaverForSaksliste.HentingAvAntallOppgaverFeilet": "Henting av antall feilet",
+  "AntallOppgaverForSaksliste.HentingAvAntallOppgaverHentes": "Henter antall oppgaver for behandlingskøen",
 
   "FagsakYtelseTypeVelger.Stonadstype": "Stønadstype",
 

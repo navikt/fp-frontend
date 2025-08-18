@@ -55,13 +55,13 @@ export const TilkjentYtelseTimelineData = ({
   const bold = (...chunks: [parts: React.ReactNode[]]) => <b>{chunks}</b>;
 
   return (
-    <Box borderWidth="1" padding="4">
-      <VStack gap="4">
+    <Box.New borderWidth="1" padding="4">
+      <VStack gap="space-16">
         <HStack justify="space-between">
           <Label size="small">
             <FormattedMessage id="TilkjentYtelse.PeriodeData.Detaljer" />
           </Label>
-          <HStack gap="2" align="center">
+          <HStack gap="space-8" align="center">
             <Button
               size="xsmall"
               icon={<ArrowLeftIcon aria-hidden />}
@@ -93,8 +93,8 @@ export const TilkjentYtelseTimelineData = ({
             />
           </HStack>
         </HStack>
-        <Box background="surface-success-subtle" padding="4" width="370px">
-          <VStack gap="2">
+        <Box.New background="success-moderate" padding="4" width="370px">
+          <VStack gap="space-8">
             <HStack justify="space-between">
               <Label size="small">
                 <FormattedMessage
@@ -107,14 +107,14 @@ export const TilkjentYtelseTimelineData = ({
               </Label>
               <BodyShort size="small">{numberOfDaysAndWeeks.formattedString}</BodyShort>
             </HStack>
-            <HStack gap="2">
+            <HStack gap="space-8">
               <FormattedMessage
                 id="TilkjentYtelse.PeriodeData.Dagsats"
                 values={{ dagsatsVerdi: valgtBeregningsresultatPeriode.dagsats, b: bold }}
               />
             </HStack>
           </VStack>
-        </Box>
+        </Box.New>
         {valgtBeregningsresultatPeriode.andeler && valgtBeregningsresultatPeriode.andeler.length !== 0 && (
           <Table>
             <Table.Header>
@@ -182,7 +182,7 @@ export const TilkjentYtelseTimelineData = ({
           </Table>
         )}
       </VStack>
-    </Box>
+    </Box.New>
   );
 };
 

@@ -61,7 +61,7 @@ export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModa
           })}
         >
           <Modal.Header closeButton>
-            <Heading size="medium">
+            <Heading size="small" level="2">
               {intl.formatMessage({
                 id: erFjerneOperasjon ? 'MenyVergeIndex.FjernVergeSporsmal' : 'MenyVergeIndex.OpprettVergeSporsmal',
               })}

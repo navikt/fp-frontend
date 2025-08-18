@@ -1,6 +1,6 @@
 .container {
-  background-color: var(--a-gray-300);
-  color: white;
+  background-color: var(--ax-neutral-400);
+  color: var(--ax-bg-default);
   display: block;
   max-height: 120px;
   min-height: 50px;
@@ -17,7 +17,7 @@
 }
 
 .driftsInfo {
-  color: var(--a-orange-600);
+  color: var(--ax-warning-700);
   height: 20px;
   margin-right: 10px;
   width: 20px;

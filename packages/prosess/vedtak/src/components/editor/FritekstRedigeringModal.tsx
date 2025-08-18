@@ -76,7 +76,7 @@ export const FritekstRedigeringModal = ({
         aria-label="Rediger brev"
       >
         <Modal.Header>
-          <VStack gap="4">
+          <VStack gap="space-16">
             <Heading level="3" size="small">
               <FormattedMessage id="FritekstRedigeringModal.Rediger" />
             </Heading>
@@ -113,7 +113,7 @@ export const FritekstRedigeringModal = ({
         aria-label={intl.formatMessage({ id: 'FritekstRedigeringModal.TilbakestillLabel' })}
       >
         <Modal.Header>
-          <Heading as="h3" size="medium">
+          <Heading as="h3" size="medium" level="3">
             <FormattedMessage id="FritekstRedigeringModal.BekreftTilbakestillTittel" />
           </Heading>
         </Modal.Header>

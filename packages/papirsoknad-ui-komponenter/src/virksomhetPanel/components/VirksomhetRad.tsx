@@ -32,7 +32,7 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
   const [isOpen, setIsOpen] = useState(open);
 
   return (
-    <Table.Row shadeOnHover={false} style={{ backgroundColor: error && !isOpen ? 'var(--a-red-50)' : 'none' }}>
+    <Table.Row shadeOnHover={false} style={{ backgroundColor: error && !isOpen ? 'var(--ax-danger-100)' : 'none' }}>
       <Table.DataCell valign="top">
         <Button
           type="button"
@@ -42,10 +42,10 @@ export const VirksomhetRad = ({ open, readOnly = false, alleKodeverk, index, rem
         />
       </Table.DataCell>
       <Table.DataCell valign="top">
-        <Box hidden={isOpen} paddingBlock="3">
+        <Box.New hidden={isOpen} paddingBlock="3">
           <BodyShort weight="semibold">{virksomhetNavn}</BodyShort>
-        </Box>
-        <VStack gap="4" hidden={!isOpen}>
+        </Box.New>
+        <VStack gap="space-16" hidden={!isOpen}>
           <RhfTextField
             name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.navn`}
             control={control}

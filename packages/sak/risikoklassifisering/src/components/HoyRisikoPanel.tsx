@@ -30,7 +30,7 @@ export const HoyRisikoPanel = ({
   submitCallback,
   faresignalVurderinger,
 }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     {aksjonspunkt && aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
       <AksjonspunktHelpTextHTML>
         <FormattedMessage id="Risikopanel.Panel.Tittel" />

@@ -7,14 +7,14 @@ import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navik
 import { HoyRisikoTittel } from './components/HoyRisikoTittel';
 import { IngenRisikoPanel } from './components/IngenRisikoPanel';
 import { ManglendeKlassifiseringPanel } from './components/ManglendeKlassifiseringPanel';
-import { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
+import type { KontrollresultatKode } from './kodeverk/kontrollresultatKode';
 import type { AvklartRisikoklassifiseringAp } from './types/AvklartRisikoklassifiseringAp';
 
 import messages from '../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const harResultatkode = (resultatkode: string, risikoklassifisering?: Risikoklassifisering): boolean => {
+const harResultatkode = (resultatkode: KontrollresultatKode, risikoklassifisering?: Risikoklassifisering): boolean => {
   if (!risikoklassifisering?.kontrollresultat) {
     return false;
   }
@@ -47,8 +47,8 @@ export const RisikoklassifiseringSakIndex = ({
   toggleRiskPanel,
   faresignalVurderinger,
 }: Props) => {
-  const harIkkeHoyRisikoklassifisering = harResultatkode(KontrollresultatKode.IKKE_HOY, risikoklassifisering);
-  const harHoyRisikoklassifisering = harResultatkode(KontrollresultatKode.HOY, risikoklassifisering);
+  const harIkkeHoyRisikoklassifisering = harResultatkode('IKKE_HOY', risikoklassifisering);
+  const harHoyRisikoklassifisering = harResultatkode('HOY', risikoklassifisering);
 
   return (
     <RawIntlProvider value={intl}>

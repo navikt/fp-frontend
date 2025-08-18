@@ -23,8 +23,10 @@ export const BekreftelsePanel = ({ readOnly, annenForelderInformertRequired = fa
   const { control } = useFormContext<BekreftelseFormValues>();
   return (
     <BorderBox>
-      <VStack gap="4">
-        <Heading size="small">{intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}</Heading>
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
+          {intl.formatMessage({ id: 'Registrering.TheOtherParent.Confirmation' })}
+        </Heading>
         <TrueFalseInput
           name="annenForelderInformert"
           control={control}

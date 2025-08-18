@@ -33,12 +33,12 @@ export const FeriepengerPanel = ({ feriepengegrunnlag, alleKodeverk, arbeidsgive
     <Accordion>
       <Accordion.Item open={erPanelÅpent}>
         <Accordion.Header onClick={() => setErPanelÅpent(!erPanelÅpent)}>
-          <Heading size="small">
+          <Heading size="small" level="2">
             <FormattedMessage id="TilkjentYtelse.Feriepenger.Tittel" />
           </Heading>
         </Accordion.Header>
         <Accordion.Content>
-          <VStack gap="4">
+          <VStack gap="space-16">
             {opptjeningsår.map(år => (
               <FeriepengerPrÅr
                 key={`tabell_${år}`}

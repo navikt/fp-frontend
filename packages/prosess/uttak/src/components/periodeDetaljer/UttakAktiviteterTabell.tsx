@@ -67,12 +67,7 @@ const sjekkOmUtbetalingsgradEr0OmAvslått =
   };
 
 const sjekkOmUtbetalingsgradMårVæreHøyereEnn0 =
-  (
-    intl: IntlShape,
-    valgtPeriode: PeriodeSoker,
-    samletUtbetalingsgradForAndreAktiviteter: number,
-    erOppfylt?: boolean,
-  ) =>
+  (intl: IntlShape, valgtPeriode: PeriodeSoker, samletUtbetalingsgradForAndreAktiviteter: number, erOppfylt: boolean) =>
   (utbetalingsgrad: string): string | null => {
     const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
     const erUttak = valgtPeriode.utsettelseType === '-' && !kontoIkkeSatt;
@@ -157,7 +152,7 @@ interface Props {
   isReadOnly: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   aktiviteter: PeriodeSokerAktivitet[];
-  erOppfylt?: boolean;
+  erOppfylt: boolean;
   valgtPeriode: PeriodeSoker;
 }
 
@@ -240,7 +235,7 @@ export const UttakAktiviteterTabell = ({
                     </div>
                   </Table.DataCell>
                   <Table.DataCell>
-                    <HStack gap="2" align="center">
+                    <HStack gap="space-8" align="center">
                       <span className={styles.weekPosition}>
                         <RhfNumericField
                           name={`aktiviteter.${index}.weeks`}
@@ -289,7 +284,6 @@ export const UttakAktiviteterTabell = ({
                             samletUtbetalingsgradForAndreAktiviteter,
                             erOppfylt,
                           ),
-                          // @ts-expect-error Fiks typen til utbetalingsgrad. Bør vera number
                           sjekkOmUtbetalingsgradEr0OmAvslått(intl, erOppfylt, utsettelseType),
                           sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0(intl, getValues, index),
                           sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),

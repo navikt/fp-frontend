@@ -46,9 +46,7 @@ const meta = {
         sakslister: oldArgs.sakslister.concat({
           sakslisteId: oldArgs.sakslister.length === 1 ? 1 : 2,
           navn: 'Ny liste',
-          sistEndret: '2020-01-01',
           saksbehandlerIdenter: [],
-          antallBehandlinger: 1,
         }),
       }));
     };
@@ -72,9 +70,7 @@ export const TabellNårDetFinnesEnBehandlingskø: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        sistEndret: '2020-01-01',
         saksbehandlerIdenter: ['R23233'],
-        antallBehandlinger: 1,
       },
     ],
     oppgaverForAvdelingAntall: 1,

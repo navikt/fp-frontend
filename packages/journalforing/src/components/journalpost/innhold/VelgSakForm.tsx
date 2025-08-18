@@ -2,18 +2,18 @@ import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, BodyShort, Button, HStack, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { Alert, BodyShort, Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { notEmpty } from '@navikt/fp-utils';
 
-import { erEndeligJournalført } from '../../../kodeverk/journalpostTilstand';
-import { Sakstype } from '../../../kodeverk/sakstype';
 import type { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
 import type { JournalFagsak } from '../../../typer/journalFagsakTsType';
 import type { JournalføringFormValues } from '../../../typer/journalføringFormValues';
 import type { Journalpost } from '../../../typer/journalpostTsType';
+import { erEndeligJournalført } from '../../../utils/journalpostTilstandUtils';
 
 import styles from './velgSakForm.module.css';
 
@@ -27,6 +27,7 @@ const selectFieldName = 'ytelsetypeValg';
 type RadioOption = {
   label: ReactElement;
   value: string;
+  disabled: boolean;
 };
 
 const ytelseSelectValg: FagsakYtelseType[] = [
@@ -43,8 +44,8 @@ export const transformValues = (
   if (saksnummerValg === LAG_GENERELL_SAK) {
     return {
       opprettSak: {
-        aktørId: journalpost.bruker.aktørId,
-        sakstype: Sakstype.GENERELL,
+        aktørId: notEmpty(journalpost.bruker?.aktørId),
+        sakstype: 'GENERELL',
       },
     };
   }
@@ -56,8 +57,8 @@ export const transformValues = (
     return {
       opprettSak: {
         ytelseType: valgtYtelse,
-        aktørId: journalpost.bruker.aktørId,
-        sakstype: Sakstype.FAGSAK,
+        aktørId: notEmpty(journalpost.bruker?.aktørId),
+        sakstype: 'FAGSAK',
       },
     };
   }
@@ -121,7 +122,7 @@ export const VelgSakForm = ({
   const sakValg = formMethods.watch(radioFieldName);
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {!finnesSaker && erKlarForJournalføring && (
         <BodyShort>
           <FormattedMessage id="Journal.Sak.Ingen" />
@@ -132,15 +133,20 @@ export const VelgSakForm = ({
           <FormattedMessage id="Journalpost.Søk.Forklaring" />
         </Alert>
       )}
-      <VStack gap="8">
-        <VStack gap="4">
-          <RhfRadioGroup
-            name={radioFieldName}
-            control={formMethods.control}
-            disabled={!erKlarForJournalføring}
-            validate={[required]}
-            radios={lagRadioOptions(journalpost)}
-          />
+      <VStack gap="space-32">
+        <VStack gap="space-16">
+          <RhfRadioGroupNew name={radioFieldName} control={formMethods.control} validate={[required]}>
+            {lagRadioOptions(journalpost).map(option => (
+              <Radio
+                key={option.value}
+                value={option.value}
+                size="small"
+                disabled={!erKlarForJournalføring || option.disabled}
+              >
+                {option.label}
+              </Radio>
+            ))}
+          </RhfRadioGroupNew>
           {sakValg === LAG_NY_SAK && (
             <RhfSelect
               name={selectFieldName}
@@ -161,7 +167,7 @@ export const VelgSakForm = ({
             </Alert>
           )}
         </VStack>
-        <HStack className={styles.knappRad} gap="4">
+        <HStack gap="space-16">
           <Button size="small" variant="primary" disabled={!isSubmittable} type="submit">
             <FormattedMessage
               id={erEndeligJournalført(journalpost.tilstand) ? 'Journal.Sak.AnnenSak' : 'ValgtOppgave.Journalfør'}
@@ -171,7 +177,8 @@ export const VelgSakForm = ({
             <FormattedMessage id="ValgtOppgave.Avbryt" />
           </Button>
           {erLokalOppgave && (
-            <div className={styles.colMargin}>
+            <>
+              <Spacer />
               <Button
                 size="small"
                 variant="primary"
@@ -182,7 +189,7 @@ export const VelgSakForm = ({
               >
                 <FormattedMessage id="ValgtOppgave.Flytt.Til.Gosys" />
               </Button>
-            </div>
+            </>
           )}
         </HStack>
       </VStack>

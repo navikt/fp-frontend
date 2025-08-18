@@ -3,8 +3,8 @@ import { useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { TrashIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfCheckbox, RhfDatepicker, RhfForm, RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
@@ -190,8 +190,8 @@ export const UttakFaktaDetailForm = ({
         />
       )}
       <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
-        <VStack gap="4">
-          <HStack gap="2" align="end">
+        <VStack gap="space-16">
+          <HStack gap="space-8" align="end">
             <RhfDatepicker
               name="fom"
               control={formMethods.control}
@@ -220,7 +220,7 @@ export const UttakFaktaDetailForm = ({
               </Button>
             )}
           </HStack>
-          <HStack gap="2">
+          <HStack gap="space-8">
             {readOnly && (
               <div>
                 <Label size="small">
@@ -232,18 +232,21 @@ export const UttakFaktaDetailForm = ({
               </div>
             )}
             {!readOnly && (
-              <RhfRadioGroup
+              <RhfRadioGroupNew
                 name="arsakstype"
                 control={formMethods.control}
                 label={<FormattedMessage id="UttakFaktaDetailForm.Periodetype" />}
                 validate={[required]}
                 isReadOnly={readOnly}
-                isHorizontal
-                radios={Object.keys(Årsakstype).map(type => ({
-                  value: type,
-                  label: intl.formatMessage({ id: ÅRSAKSTYPE_TEKST_KODER[type] }),
-                }))}
-              />
+              >
+                <HStack gap="space-16">
+                  {Object.keys(Årsakstype).map(type => (
+                    <Radio key={type} value={type} size="small">
+                      <FormattedMessage id={ÅRSAKSTYPE_TEKST_KODER[type]} />
+                    </Radio>
+                  ))}
+                </HStack>
+              </RhfRadioGroupNew>
             )}
           </HStack>
           {(årsakstype === Årsakstype.UTTAK || årsakstype === Årsakstype.OVERFØRING) && (
@@ -262,7 +265,7 @@ export const UttakFaktaDetailForm = ({
             />
           )}
           {årsakstype !== Årsakstype.UTTAK && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               {årsakstype === Årsakstype.UTSETTELSE && (
                 <RhfSelect
                   name="utsettelseÅrsak"
@@ -365,7 +368,7 @@ export const UttakFaktaDetailForm = ({
             </div>
           )}
           {!readOnly && (
-            <HStack gap="2" className={styles.marginBtn}>
+            <HStack gap="space-8" className={styles.marginBtn}>
               <Button
                 size="small"
                 variant="secondary"

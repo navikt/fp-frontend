@@ -67,13 +67,15 @@ export const Historikk = ({
 
   return (
     <>
-      <Box background="bg-subtle" borderColor="border-divider" borderWidth="0 0 2 0" padding="5">
+      <Box.New background="neutral-moderate" borderColor="neutral-subtleA" borderWidth="0 0 2 0" padding="5">
         <HStack justify="space-between">
-          <HStack gap="1" align="center">
-            <Heading size="small">{intl.formatMessage({ id: 'History.Historikk' })}</Heading>
+          <HStack gap="space-4" align="center">
+            <Heading size="small" level="3">
+              {intl.formatMessage({ id: 'History.Historikk' })}
+            </Heading>
             {utvidEllerMinskBehandlingDetaljerKnapp}
           </HStack>
-          <HStack gap="8">
+          <HStack gap="space-32">
             {valgtBehandlingUuid && (
               <Checkbox size="small" onChange={() => setSkalSortertePaValgtBehandling(!skalSortertePaValgtBehandling)}>
                 {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
@@ -82,7 +84,7 @@ export const Historikk = ({
             <div className={styles.circle}>{filtrerteInnslag.length}</div>
           </HStack>
         </HStack>
-      </Box>
+      </Box.New>
       <div
         style={{ height: `calc(100vh - ${top}px)` }}
         className={styles.overflow}
@@ -92,7 +94,7 @@ export const Historikk = ({
           }
         }}
       >
-        <VStack gap="2" padding="4">
+        <VStack gap="space-8" padding="4">
           {filtrerteInnslag.map(historikkinnslag => {
             const alleKodeverk = historikkinnslag.erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak;
 

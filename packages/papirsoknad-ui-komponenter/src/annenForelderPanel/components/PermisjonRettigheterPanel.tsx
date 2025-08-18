@@ -21,7 +21,7 @@ export const PermisjonRettigheterPanel = ({ readOnly, sokerErMor }: Props) => {
   const annenForelderRettEØS = watch(`${ANNEN_FORELDER_NAME_PREFIX}.annenForelderRettEØS`);
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <TrueFalseInput
         name={`${ANNEN_FORELDER_NAME_PREFIX}.sokerHarAleneomsorg`}
         control={control}

@@ -88,6 +88,7 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
         },
         legend: {
           data: reversertSorterteBehandlingstyper.map(type => finnBehandlingTypeNavn(behandlingTyper, type)),
+          top: 'top',
         },
         grid: {
           left: '3%',

@@ -24,7 +24,7 @@ export const SoknadRegistrertModal = ({ isOpen = false }: Props) => (
   >
     <Modal.Body style={{ padding: 4 }}>
       <Alert variant="success">
-        <HStack justify="space-between" gap="4" align="center">
+        <HStack justify="space-between" gap="space-16" align="center">
           <div>
             <BodyShort size="small">{intl.formatMessage({ id: 'SoknadRegistrertModal.InfoTextOne' })}</BodyShort>
             <BodyShort size="small">{intl.formatMessage({ id: 'SoknadRegistrertModal.InfoTextTwo' })}</BodyShort>

@@ -38,8 +38,8 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
   const overstyrtTom = finnOverstyrtTom(valgtArbeidsforhold);
 
   return (
-    <VStack gap="4">
-      <Heading size="small">
+    <VStack gap="space-16">
+      <Heading size="small" level="3">
         <FormattedMessage id="ArbeidsforholdDetail.Header" />
       </Heading>
       <PermisjonPeriode arbeidsforhold={valgtArbeidsforhold} />

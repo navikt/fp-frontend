@@ -1,5 +1,3 @@
-import type { VergeType } from '@navikt/fp-kodeverk';
-
 import type { OneOf } from './oneOf';
 
 export type Verge = {
@@ -15,3 +13,5 @@ export type OpprettVergeParams = {
   gyldigTom?: string;
   vergeType: VergeType;
 } & OneOf<{ fnr: string }, { organisasjonsnummer: string }>;
+
+export type VergeType = 'BARN' | 'FBARN' | 'VOKSEN' | 'ADVOKAT' | 'ANNEN_F';

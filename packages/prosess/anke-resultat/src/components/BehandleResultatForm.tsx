@@ -12,11 +12,11 @@ interface Props {
 }
 
 const ResultatEnkel = ({ ankeVurderingResultat }: Props): ReactElement => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Stadfest" />
     </Detail>
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
       </Label>
@@ -26,11 +26,11 @@ const ResultatEnkel = ({ ankeVurderingResultat }: Props): ReactElement => (
 );
 
 const ResultatOpphev = ({ ankeVurderingResultat }: Props): ReactElement => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Oppheves" />
     </Detail>
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
       </Label>
@@ -40,11 +40,11 @@ const ResultatOpphev = ({ ankeVurderingResultat }: Props): ReactElement => (
 );
 
 const ResultatHjemsend = ({ ankeVurderingResultat }: Props): ReactElement => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Detail>
       <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Hjemsendes" />
     </Detail>
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
       </Label>
@@ -54,7 +54,7 @@ const ResultatHjemsend = ({ ankeVurderingResultat }: Props): ReactElement => (
 );
 
 const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Detail>
       {ankeVurderingResultat?.påAnketKlageBehandlingUuid && (
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Avvises" />
@@ -63,7 +63,7 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.AvvisesUten" />
       )}
     </Detail>
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Arsak" />
       </Label>
@@ -98,7 +98,7 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
         )}
       </ul>
     </VStack>
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
       </Label>
@@ -112,7 +112,7 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
         />
       </Detail>
     </VStack>
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
       </Label>
@@ -138,7 +138,7 @@ const ResultatOmgjores = ({
   ankeVurderingResultat,
   alleKodeverk,
 }: Props & { alleKodeverk: AlleKodeverk }): ReactElement => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Detail>
       <FormattedMessage id={hentSpråkkode(ankeVurderingResultat?.ankeVurderingOmgjoer)} />
     </Detail>
@@ -153,7 +153,7 @@ const ResultatOmgjores = ({
         </Detail>
       </>
     )}
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling.Begrunnelse" />
       </Label>
@@ -190,11 +190,11 @@ interface Props {
 }
 
 export const BehandleResultatForm = ({ ankeVurderingResultat }: Props) => (
-  <VStack gap="4">
-    <Heading size="small">
+  <VStack gap="space-16">
+    <Heading size="small" level="2">
       <FormattedMessage id="Ankebehandling.Resultat.Title" />
     </Heading>
-    <VStack gap="1">
+    <VStack gap="space-4">
       <Label size="small">
         <FormattedMessage id="Ankebehandling.Resultat.Innstilling" />
       </Label>

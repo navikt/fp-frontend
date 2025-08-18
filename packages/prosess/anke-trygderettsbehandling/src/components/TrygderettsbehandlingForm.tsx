@@ -21,23 +21,23 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
   const ankeOmgorArsaker = alleKodeverk['AnkeOmgjørÅrsak'];
 
   return (
-    <VStack gap="4">
-      <Heading size="small">
+    <VStack gap="space-16">
+      <Heading size="small" level="2">
         <FormattedMessage id="Ankebehandling.Merknad.Title" />
       </Heading>
       {behandlesKabal && (
-        <Heading size="small">
+        <Heading size="small" level="3">
           <FormattedMessage id="Ankebehandling.Merknad.SeKabalText" />
         </Heading>
       )}
       {behandletKabal && (
-        <Heading size="small">
+        <Heading size="small" level="3">
           <FormattedMessage id="Ankebehandling.Merknad.BehandletKabal" />
         </Heading>
       )}
       {!behandlesKabal && !behandlesKabalTrygderett && (
         <>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.Merknad.Merknader" />
             </Label>
@@ -49,13 +49,13 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
               )}
             </BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.Fritekst" />
             </Label>
             <BodyShort size="small">{avr?.merknadKommentar}</BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.Resultat" />
             </Label>
@@ -81,7 +81,7 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
       )}
       {ankeVurderingType.ANKE_OMGJOER === avr?.trygderettVurdering && (
         <>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
             </Label>
@@ -89,7 +89,7 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
               {ankeOmgorArsaker.find(aoa => aoa.kode === avr?.trygderettOmgjoerArsak)?.navn}
             </BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <BodyShort size="small">
               {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
                 <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
@@ -107,7 +107,7 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
       {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.trygderettVurdering ||
         ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.trygderettVurdering) &&
         !behandletKabal && (
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
             </Label>

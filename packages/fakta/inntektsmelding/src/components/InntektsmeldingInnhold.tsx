@@ -28,8 +28,8 @@ export const InntektsmeldingInnhold = ({
   const intl = useIntl();
 
   return (
-    <VStack gap="4" className={styles.container}>
-      <HStack gap="4" justify="space-between" align="start">
+    <VStack gap="space-16" className={styles.container}>
+      <HStack gap="space-16" justify="space-between" align="start">
         <Heading level="3" size="small">
           <FormattedMessage id="InntektsmeldingFaktaPanel.innsendingstidspunkt" />{' '}
           <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
@@ -40,7 +40,7 @@ export const InntektsmeldingInnhold = ({
           arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]}
         />
       </HStack>
-      <HGrid columns={3} gap="8">
+      <HGrid columns={3} gap="space-32">
         <Arbeidsgiver
           arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]}
           arbeidsgiverIdent={inntektsmelding.arbeidsgiverIdent}

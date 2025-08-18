@@ -75,8 +75,8 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
   const vilkarType = watch('vilkarType');
 
   return (
-    <VStack gap="2">
-      <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
+    <VStack gap="space-8">
+      <HGrid gap="space-20" columns="repeat(auto-fit, minmax(16rem, 1fr))">
         <OmsorgsovertakelseFaktaPanel
           readOnly={readOnly}
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
@@ -86,7 +86,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
         />
         {!erAksjonspunktForeldreansvar && <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />}
       </HGrid>
-      <HGrid gap="5" columns="repeat(auto-fit, minmax(16rem, 1fr))">
+      <HGrid gap="space-20" columns="repeat(auto-fit, minmax(16rem, 1fr))">
         <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
         <ForeldrePanel personoversikt={personoversikt} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
       </HGrid>
@@ -95,7 +95,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
           title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
           merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
         >
-          <VStack gap="4">
+          <VStack gap="space-16">
             {!readOnly && (
               <RhfSelect
                 name="vilkarType"

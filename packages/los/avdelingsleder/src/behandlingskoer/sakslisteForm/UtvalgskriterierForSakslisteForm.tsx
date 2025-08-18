@@ -1,12 +1,12 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, Box, Heading, HStack, VStack } from '@navikt/ds-react';
+import { Box, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidName, maxLength, minLength, required } from '@navikt/ft-form-validators';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { lagreSakslisteNavn, LosUrl, oppgaveAntallOptions } from '../../data/fplosAvdelingslederApi';
+import { lagreSakslisteNavn, LosUrl } from '../../data/fplosAvdelingslederApi';
 import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 import { AndreKriterierVelger } from './filtrering/AndreKriterierVelger';
 import { BehandlingstypeVelger } from './filtrering/BehandlingstypeVelger';
@@ -73,8 +73,6 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
   const queryClient = useQueryClient();
   const intl = useIntl();
 
-  const { data: antallOppgaver } = useQuery(oppgaveAntallOptions(valgtSaksliste.sakslisteId, valgtAvdelingEnhet));
-
   const { mutate: lagreSakslistensNavn } = useMutation({
     mutationFn: (values: { sakslisteId: number; navn: string; avdelingEnhet: string }) =>
       lagreSakslisteNavn(values.sakslisteId, values.navn, values.avdelingEnhet),
@@ -102,30 +100,22 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
 
   return (
     <RhfForm formMethods={formMethods}>
-      <Box padding="5" borderColor="border-divider" borderRadius="0" borderWidth="1">
-        <VStack gap="2">
-          <Heading size="small">
+      <Box.New padding="5" borderColor="neutral-subtle" borderRadius="0" borderWidth="1">
+        <VStack gap="space-8">
+          <Heading size="small" level="2">
             <FormattedMessage id="UtvalgskriterierForSakslisteForm.Utvalgskriterier" />
           </Heading>
-          <VStack gap="4">
+          <VStack gap="space-16">
+            <RhfTextField
+              name="navn"
+              control={formMethods.control}
+              label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
+              validate={[required, minLength3, maxLength100, hasValidName]}
+              onChange={value => lagreNavn(value)}
+              className={styles.bredde}
+            />
             <HStack justify="space-between">
-              <RhfTextField
-                name="navn"
-                control={formMethods.control}
-                label={intl.formatMessage({ id: 'UtvalgskriterierForSakslisteForm.Navn' })}
-                validate={[required, minLength3, maxLength100, hasValidName]}
-                onChange={value => lagreNavn(value)}
-                className={styles.bredde}
-              />
-              <Box padding="2" background="bg-subtle">
-                <BodyShort size="small">
-                  <FormattedMessage id="UtvalgskriterierForSakslisteForm.AntallSaker" />
-                </BodyShort>
-                <Heading size="small">{antallOppgaver ? `${antallOppgaver}` : '0'}</Heading>
-              </Box>
-            </HStack>
-            <HStack justify="space-between">
-              <div>
+              <VStack gap="space-16">
                 <FagsakYtelseTypeVelger
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
@@ -134,7 +124,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
                   valgtAvdelingEnhet={valgtAvdelingEnhet}
                 />
-              </div>
+              </VStack>
               <div>
                 <AndreKriterierVelger
                   valgtSakslisteId={valgtSaksliste.sakslisteId}
@@ -152,7 +142,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
             </HStack>
           </VStack>
         </VStack>
-      </Box>
+      </Box.New>
     </RhfForm>
   );
 };

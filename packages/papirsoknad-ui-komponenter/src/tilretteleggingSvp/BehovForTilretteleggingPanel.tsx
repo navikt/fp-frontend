@@ -51,8 +51,8 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
   return (
     <RawIntlProvider value={intl}>
       <BorderBox>
-        <VStack gap="4">
-          <Heading size="small">
+        <VStack gap="space-16">
+          <Heading size="small" level="3">
             <FormattedMessage id="BehovForTilretteleggingPanel.BehovForTilrettelegging" />
           </Heading>
 
@@ -66,9 +66,9 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForSelvstendigNaringsdrivende" />}
             readOnly={readOnly}
             trueContent={
-              <ArrowBox marginTop={4}>
-                <VStack gap="4">
-                  <Heading size="small">
+              <ArrowBox>
+                <VStack gap="space-16">
+                  <Heading size="small" level="4">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelSN" />
                   </Heading>
                   <RhfDatepicker
@@ -93,9 +93,9 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForFrilans" />}
             readOnly={readOnly}
             trueContent={
-              <ArrowBox marginTop={4}>
-                <VStack gap="4">
-                  <Heading size="small">
+              <ArrowBox>
+                <VStack gap="space-16">
+                  <Heading size="small" level="4">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelFrilans" />
                   </Heading>
                   <RhfDatepicker
@@ -119,9 +119,9 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
             label={<FormattedMessage id="BehovForTilretteleggingPanel.SokForArbeidsgiver" />}
             readOnly={readOnly}
             trueContent={
-              <ArrowBox marginTop={4}>
-                <VStack gap="4">
-                  <Heading size="small">
+              <ArrowBox>
+                <VStack gap="space-16">
+                  <Heading size="small" level="4">
                     <FormattedMessage id="BehovForTilretteleggingPanel.TittelArbeidstaker" />
                   </Heading>
                   <TilretteleggingForArbeidsgiverFieldArray readOnly={readOnly} />

@@ -17,7 +17,7 @@ export const VedtakPanel = ({ alleVedtak, erForeldrepenger }: Props) => {
   const [valgtVedtak, setValgtVedtak] = useState<Vedtak>();
 
   return (
-    <VStack gap="10">
+    <VStack gap="space-40">
       <Table size="small">
         <Table.Header>
           <Table.Row>

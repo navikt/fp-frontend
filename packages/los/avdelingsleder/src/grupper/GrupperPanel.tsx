@@ -29,7 +29,7 @@ export const GrupperPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehandlere }: 
   }
 
   return (
-    <VStack gap="5" align="start">
+    <VStack gap="space-20" align="start">
       <GrupperTabell
         valgAvdeldingEnhet={valgtAvdelingEnhet}
         grupper={grupper}

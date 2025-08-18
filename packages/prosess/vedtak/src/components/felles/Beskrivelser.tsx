@@ -26,7 +26,7 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
   const beskrivelserSomSkjules = beskrivelser.slice(1);
 
   return (
-    <VStack gap="1">
+    <VStack gap="space-4">
       {beskrivelseForVisning && <BeskrivelseVisning beskrivelse={beskrivelseForVisning} />}
       {skalSkjuleResterendeBeskrivelser && (
         <Button
@@ -44,7 +44,7 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
         </Button>
       )}
       {!erResterendeBeskrivelserSkjult && (
-        <VStack gap="3" className={styles.eldreBeskrivelser}>
+        <VStack gap="space-12" className={styles.eldreBeskrivelser}>
           {beskrivelserSomSkjules.map(beskrivelse => (
             <BeskrivelseVisning key={beskrivelse.header + beskrivelse.kommentarer[0]} beskrivelse={beskrivelse} />
           ))}

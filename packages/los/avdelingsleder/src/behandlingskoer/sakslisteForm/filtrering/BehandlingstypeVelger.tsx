@@ -33,7 +33,7 @@ export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: 
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL],
+        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
       queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
@@ -49,7 +49,7 @@ export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: 
   const behandlingTyper = behandlingstypeOrder.map(kode => alleBehandlingTyper.find(bt => bt.kode === kode));
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label size="small">
         <FormattedMessage id="BehandlingstypeVelger.Behandlingstype" />
       </Label>

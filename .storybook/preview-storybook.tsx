@@ -5,7 +5,6 @@ import { initialize, mswLoader } from 'msw-storybook-addon';
 import { withThemeDecorator } from '@navikt/fp-storybook-utils';
 
 import 'dayjs/locale/nb.js';
-import '@navikt/ds-css';
 import '@navikt/ds-css/darkside';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
@@ -19,11 +18,10 @@ export const globalTypes = {
   theme: {
     name: 'Tema',
     description: 'Aksel tema',
-    defaultValue: 'none',
+    defaultValue: 'light',
     toolbar: {
       icon: 'circlehollow',
       items: [
-        { value: 'none', icon: 'close', title: 'Gammel' },
         { value: 'light', icon: 'circlehollow', title: 'Lys' },
         { value: 'dark', icon: 'circle', title: 'Mørk' },
       ],

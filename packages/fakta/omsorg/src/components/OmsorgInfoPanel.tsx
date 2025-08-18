@@ -56,7 +56,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
   const harAksjonspunkt = aksjonspunkterForPanel.length > 0;
 
   return (
-    <VStack gap="8">
+    <VStack gap="space-32">
       {!isReadOnly && harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="OmsorgInfoPanel.VurderOmsorg" />
@@ -69,7 +69,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
           onSubmit={(values: FormValues) => submitCallback(transformValues(values))}
           setDataOnUnmount={setMellomlagretFormData}
         >
-          <VStack gap="6">
+          <VStack gap="space-24">
             {harAksjonspunkt && (
               <OmsorgFaktaFields readOnly={isReadOnly} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
             )}

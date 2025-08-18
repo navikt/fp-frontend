@@ -69,8 +69,8 @@ export const SimuleringPanel = ({
     hasAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkterForPanel);
   const aksjonspunktTittler = harÅpneAksjonspunkter ? lagAksjonspunktTitler(aksjonspunkterForPanel) : [];
   return (
-    <VStack gap="8">
-      <Heading size="small">
+    <VStack gap="space-32">
+      <Heading size="small" level="2">
         <FormattedMessage id="Simulering.Title" />
       </Heading>
       {simuleringResultatOption && (
@@ -110,7 +110,7 @@ export const SimuleringPanel = ({
           onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel))}
           setDataOnUnmount={setMellomlagretFormData}
         >
-          <VStack gap="4">
+          <VStack gap="space-16">
             <TilbakekrevSøkerForm
               aksjonspunkt={finnAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.VURDER_FEILUTBETALING)}
               fagsak={fagsak}

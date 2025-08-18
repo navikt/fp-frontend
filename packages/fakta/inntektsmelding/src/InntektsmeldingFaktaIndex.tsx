@@ -65,7 +65,7 @@ export const InntektsmeldingFaktaIndex = ({
   if (ims.length === 0) {
     return (
       <RawIntlProvider value={intl}>
-        <HStack gap="2" justify="center" align="center" className={styles.ingenInntektsmeldinger}>
+        <HStack gap="space-8" justify="center" align="center" className={styles.ingenInntektsmeldinger}>
           <BodyShort>
             <FormattedMessage id="InntektsmeldingFaktaPanel.ingen" />
           </BodyShort>
@@ -205,7 +205,7 @@ const InntektsmeldingStatus = ({
   const behandlingIMStatus = hentBehandlingIMStatus({ behandling, inntektsmelding });
   if (behandlingIMStatus === 'DENNE') {
     return (
-      <HStack gap="1" align="center">
+      <HStack gap="space-4" align="center">
         <CircleFillIcon className={styles.behandlingCircleDenne} />
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.denne" />
       </HStack>
@@ -213,7 +213,7 @@ const InntektsmeldingStatus = ({
   }
   if (behandlingIMStatus === 'ANDRE') {
     return (
-      <HStack gap="1" align="center">
+      <HStack gap="space-4" align="center">
         <CircleFillIcon className={styles.behandlingCircleAndre} />
         <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.andre" />
       </HStack>
@@ -221,7 +221,7 @@ const InntektsmeldingStatus = ({
   }
 
   return (
-    <HStack gap="1" align="center">
+    <HStack gap="space-4" align="center">
       <CircleFillIcon className={styles.behandlingCircleIngen} />
       <FormattedMessage id="InntektsmeldingFaktaPanel.tabell.cell.behandling.ingen" />
     </HStack>

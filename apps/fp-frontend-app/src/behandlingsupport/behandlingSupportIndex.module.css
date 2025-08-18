@@ -9,9 +9,9 @@
 }
 
 .ulesteNotater {
-  background-color: #c30000;
+  background-color: var(--ax-bg-danger-moderateA);
   border-radius: 9999px;
-  color: white;
+  color: var(--ax-text-neutral);
   font-size: 0.875rem;
   font-weight: 600;
   height: 1.25rem;

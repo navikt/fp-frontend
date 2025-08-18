@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Heading, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
@@ -124,13 +124,13 @@ export const ValgtAktivitetForm = ({
         className={styles.panel}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}
       >
-        <VStack gap="6">
-          <VStack gap="2">
+        <VStack gap="space-24">
+          <VStack gap="space-8">
             <HStack justify="space-between">
-              <Heading size="small">
+              <Heading size="small" level="3">
                 <FormattedMessage id="ActivityPanel.Details" />
               </Heading>
-              <HStack gap="2">
+              <HStack gap="space-8">
                 <Button
                   className={styles.margin}
                   size="xsmall"
@@ -164,13 +164,13 @@ export const ValgtAktivitetForm = ({
                 />
               </HStack>
             </HStack>
-            <HStack gap="1">
+            <HStack gap="space-4">
               <div className={styles.colMargin}>
                 <Label size="small">
                   <FormattedMessage id="ActivityPanel.Period" />
                 </Label>
                 {opptjeningFom && opptjeningTom && (
-                  <HStack gap="2">
+                  <HStack gap="space-8">
                     <BodyShort size="small">{periodFormat(opptjeningFom, opptjeningTom)}</BodyShort>
                     <BodyShort size="small">{finnMånederOgDager(opptjeningFom, opptjeningTom)}</BodyShort>
                   </HStack>
@@ -195,26 +195,23 @@ export const ValgtAktivitetForm = ({
             ferdiglignetNæring={ferdiglignetNæring}
           />
           {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
-            <RhfRadioGroup
+            <RhfRadioGroupNew
               name="erGodkjent"
               control={formMethods.control}
               hideLegend
               validate={[required]}
               isReadOnly={readOnly}
               isEdited={erEndret}
-              isHorizontal
-              isTrueOrFalseSelection
-              radios={[
-                {
-                  label: intl.formatMessage({ id: 'ActivityPanel.Godkjent' }),
-                  value: 'true',
-                },
-                {
-                  label: <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: BTag }} />,
-                  value: 'false',
-                },
-              ]}
-            />
+            >
+              <HStack gap="space-16">
+                <Radio value={true} size="small">
+                  <FormattedMessage id="ActivityPanel.Godkjent" />
+                </Radio>
+                <Radio value={false} size="small">
+                  <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: BTag }} />
+                </Radio>
+              </HStack>
+            </RhfRadioGroupNew>
           )}
           <RhfTextarea
             name="begrunnelse"
@@ -225,7 +222,7 @@ export const ValgtAktivitetForm = ({
             readOnly={readOnly || skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret)}
           />
           {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <Button size="small" variant="primary" disabled={!formMethods.formState.isDirty}>
                 <FormattedMessage id="ActivityPanel.Oppdater" />
               </Button>

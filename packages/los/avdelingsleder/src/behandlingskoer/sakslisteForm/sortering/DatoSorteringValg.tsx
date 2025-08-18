@@ -37,7 +37,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
       lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL],
+        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
       queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
@@ -52,7 +52,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
     mutationFn: () => lagreSakslisteSorteringDynamiskPeriode(valgtSakslisteId, valgtAvdelingEnhet),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL],
+        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
       queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
@@ -73,7 +73,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVE_ANTALL],
+        queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
       queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
@@ -111,12 +111,12 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   return (
     <div className={styles.arrowBoxWidth}>
       <ArrowBox>
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Detail>
             <FormattedMessage id="SorteringVelger.FiltrerPaTidsintervall" />
           </Detail>
           {erDynamiskPeriode && (
-            <HStack gap="4">
+            <HStack gap="space-16">
               <div>
                 <RhfTextField
                   name="fra"
@@ -156,7 +156,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
             </HStack>
           )}
           {!erDynamiskPeriode && (
-            <VStack gap="4">
+            <VStack gap="space-16">
               <RhfDatepicker
                 name="fomDato"
                 control={control}

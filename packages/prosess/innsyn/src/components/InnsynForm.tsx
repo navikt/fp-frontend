@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Heading, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -130,8 +130,8 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, alleDokumenter))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="4">
-        <Heading size="small">
+      <VStack gap="space-16">
+        <Heading size="small" level="2">
           <FormattedMessage id="InnsynForm.Innsynsbehandling" />
         </Heading>
         {isApOpen && (
@@ -153,56 +153,58 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
         />
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
-        <RhfRadioGroup
-          name="innsynResultatType"
-          control={formMethods.control}
-          label={<FormattedMessage id="InnsynForm.Resultat" />}
-          validate={[required]}
-          isReadOnly={isReadOnly}
-          isHorizontal
-          isEdited={!isApOpen}
-          radios={innsynResultatTyper.map(irt => ({
-            value: irt.kode,
-            label: irt.navn,
-          }))}
-        />
-        {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
-          innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
-          <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
-            <VStack gap="4">
-              <RhfRadioGroup
-                name="sattPaVent"
-                control={formMethods.control}
-                label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
-                validate={[required]}
-                isReadOnly={isReadOnly}
-                isEdited={!isApOpen}
-                isHorizontal
-                isTrueOrFalseSelection
-                radios={[
-                  {
-                    value: 'true',
-                    label: intl.formatMessage({ id: 'InnsynForm.SettBehandlingPåVent' }),
-                  },
-                  {
-                    value: 'false',
-                    label: intl.formatMessage({ id: 'InnsynForm.ForeslåOgFatteVedtak' }),
-                  },
-                ]}
-              />
-              {sattPaVent && (
-                <RhfDatepicker
-                  name="fristDato"
+        <VStack gap="space-12">
+          <RhfRadioGroupNew
+            name="innsynResultatType"
+            control={formMethods.control}
+            label={<FormattedMessage id="InnsynForm.Resultat" />}
+            validate={[required]}
+            isReadOnly={isReadOnly}
+            isEdited={!isApOpen}
+          >
+            <HStack gap="space-16">
+              {innsynResultatTyper.map(irt => (
+                <Radio key={irt.kode} value={irt.kode} size="small">
+                  {irt.navn}
+                </Radio>
+              ))}
+            </HStack>
+          </RhfRadioGroupNew>
+          {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
+            innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
+            <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
+              <VStack gap="space-16">
+                <RhfRadioGroupNew
+                  name="sattPaVent"
                   control={formMethods.control}
-                  label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+                  label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
+                  validate={[required]}
                   isReadOnly={isReadOnly}
                   isEdited={!isApOpen}
-                  validate={[required, hasValidDate]}
-                />
-              )}
-            </VStack>
-          </ArrowBox>
-        )}
+                >
+                  <HStack gap="space-16">
+                    <Radio value={true} size="small">
+                      <FormattedMessage id="InnsynForm.SettBehandlingPåVent" />
+                    </Radio>
+                    <Radio value={false} size="small">
+                      <FormattedMessage id="InnsynForm.ForeslåOgFatteVedtak" />
+                    </Radio>
+                  </HStack>
+                </RhfRadioGroupNew>
+                {sattPaVent && (
+                  <RhfDatepicker
+                    name="fristDato"
+                    control={formMethods.control}
+                    label={intl.formatMessage({ id: 'InnsynForm.FristDato' })}
+                    isReadOnly={isReadOnly}
+                    isEdited={!isApOpen}
+                    validate={[required, hasValidDate]}
+                  />
+                )}
+              </VStack>
+            </ArrowBox>
+          )}
+        </VStack>
         <ProsessStegSubmitButtonNew
           isReadOnly={isReadOnly}
           isSubmittable={!readOnlySubmitButton}

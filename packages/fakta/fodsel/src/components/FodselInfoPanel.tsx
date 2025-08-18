@@ -34,7 +34,7 @@ export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumen
   const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FØDSEL);
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           <>
@@ -46,7 +46,7 @@ export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumen
 
       <Situasjon gjeldende={fødsel.gjeldende} />
 
-      <HGrid columns={2} gap="4">
+      <HGrid columns={2} gap="space-16">
         <FaktaFraSøknad søknad={fødsel.søknad} terminbekreftelseDokument={terminbekreftelseDokument} />
         <FaktaFraFReg register={fødsel.register} />
       </HGrid>

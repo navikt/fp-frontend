@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Box, Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
@@ -51,50 +51,55 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
         formMethods.reset(values);
       }}
     >
-      <Box background="bg-subtle" borderColor="border-default" borderWidth="1">
-        <VStack gap="4" padding="5">
-          <Heading size="small">
+      <Box.New background="neutral-moderate" borderWidth="1">
+        <VStack gap="space-16" padding="5">
+          <Heading size="small" level="3">
             <FormattedMessage id="Registrering.Omsoknaden.Title" />
           </Heading>
 
           <HStack gap="20">
-            <RhfRadioGroup
+            <RhfRadioGroupNew
               name="fagsakYtelseType"
               control={formMethods.control}
               label={<FormattedMessage id="Registrering.Omsoknaden.soknadstype" />}
               validate={[required]}
-              radios={fagsakYtelseTyper.map(fyt => ({
-                label: fyt.navn,
-                value: fyt.kode,
-              }))}
-              disabled={true}
-            />
+            >
+              {fagsakYtelseTyper.map(fyt => (
+                <Radio key={fyt.kode} value={fyt.kode} size="small" disabled={true}>
+                  {fyt.navn}
+                </Radio>
+              ))}
+            </RhfRadioGroupNew>
 
             {selectedFagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && (
-              <RhfRadioGroup
+              <RhfRadioGroupNew
                 name="familieHendelseType"
                 control={formMethods.control}
                 label={<FormattedMessage id="Registrering.Omsoknaden.Tema" />}
                 validate={[required]}
-                radios={familieHendelseTyper
+              >
+                {familieHendelseTyper
                   .filter(({ kode }) => SØKNAD_TYPER.some(st => st === kode))
-                  .map(bmt => ({
-                    label: bmt.navn,
-                    value: bmt.kode,
-                  }))}
-              />
+                  .map(bmt => (
+                    <Radio key={bmt.kode} value={bmt.kode} size="small">
+                      {bmt.navn}
+                    </Radio>
+                  ))}
+              </RhfRadioGroupNew>
             )}
 
-            <RhfRadioGroup
+            <RhfRadioGroupNew
               name="foreldreType"
               control={formMethods.control}
               label={<FormattedMessage id="Registrering.Omsoknaden.Soker" />}
               validate={[required]}
-              radios={foreldreTyper.map(ft => ({
-                label: ft.navn,
-                value: ft.kode,
-              }))}
-            />
+            >
+              {foreldreTyper.map(ft => (
+                <Radio key={ft.kode} value={ft.kode} size="small">
+                  {ft.navn}
+                </Radio>
+              ))}
+            </RhfRadioGroupNew>
           </HStack>
 
           <Box style={{ textAlign: 'end' }}>
@@ -103,7 +108,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
             </Button>
           </Box>
         </VStack>
-      </Box>
+      </Box.New>
     </RhfForm>
   );
 };

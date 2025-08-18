@@ -104,7 +104,7 @@ interface RadMedMånederProps {
 }
 
 const RadMedMåneder = ({ måneder, arbeidsgiverOpplysninger, alleKodeverk }: RadMedMånederProps): ReactElement => (
-  <HStack gap="2">
+  <HStack gap="space-8">
     {måneder.map(månedsgrunnlag => {
       return (
         <div className={styles.colWidth} key={månedsgrunnlag.fom}>
@@ -146,7 +146,7 @@ interface Props {
 export const BesteMånederVisningPanel = ({ besteMåneder, arbeidsgiverOpplysninger, alleKodeverk }: Props) => {
   const sorterteMåneder = sorterEtterMåned(besteMåneder);
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       <Label size="small">
         <FormattedMessage id="Inntekttabell.Tittel" />{' '}
       </Label>

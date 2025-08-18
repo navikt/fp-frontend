@@ -98,7 +98,7 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
         <Label size="small">
           <FormattedMessage id="AdopsjonVilkarForm.TidligereUtbetaltStonad" />
         </Label>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <VilkarResultPicker
             avslagsarsaker={avslagsarsaker}
             readOnly={isReadOnly}

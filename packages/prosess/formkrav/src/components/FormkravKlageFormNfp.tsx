@@ -2,8 +2,8 @@ import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Detail, Heading, HStack, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { Detail, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
@@ -126,21 +126,23 @@ export const FormkravKlageFormNfp = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, avsluttedeBehandlinger))}
       setDataOnUnmount={setMellomlagretFormData}
     >
-      <VStack gap="4">
-        <VStack gap="1">
-          <Heading size="small">{intl.formatMessage({ id: 'Klage.Formkrav.Title' })}</Heading>
+      <VStack gap="space-16">
+        <VStack gap="space-4">
+          <Heading size="small" level="3">
+            {intl.formatMessage({ id: 'Klage.Formkrav.Title' })}
+          </Heading>
           <Detail>
             {intl.formatMessage({ id: getLovHjemmeler(AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) })}
           </Detail>
         </VStack>
-        <VStack gap="6">
+        <VStack gap="space-24">
           {!readOnlySubmitButton && (
             <AksjonspunktHelpTextHTML>
               <FormattedMessage id="Klage.Formkrav.HelpText" />
             </AksjonspunktHelpTextHTML>
           )}
-          <VStack gap="6">
-            <HStack gap="10">
+          <VStack gap="space-24">
+            <HStack gap="space-40">
               <div>
                 <RhfSelect
                   name="vedtak"
@@ -152,86 +154,74 @@ export const FormkravKlageFormNfp = ({
                   className={styles.selectBredde}
                 />
               </div>
-              <VStack gap="5">
-                <HStack gap="4">
-                  <RhfRadioGroup
+              <VStack gap="space-20">
+                <HStack gap="space-16">
+                  <RhfRadioGroupNew
                     name="erKlagerPart"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
-                    isHorizontal
-                    isTrueOrFalseSelection
-                    radios={[
-                      {
-                        value: 'true',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                      },
-                      {
-                        value: 'false',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                      },
-                    ]}
-                  />
-                  <RhfRadioGroup
+                  >
+                    <HStack gap="space-16">
+                      <Radio value={true} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Ja" />
+                      </Radio>
+                      <Radio value={false} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Nei" />
+                      </Radio>
+                    </HStack>
+                  </RhfRadioGroupNew>
+                  <RhfRadioGroupNew
                     name="erKonkret"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
-                    isHorizontal
-                    isTrueOrFalseSelection
-                    radios={[
-                      {
-                        value: 'true',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                      },
-                      {
-                        value: 'false',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                      },
-                    ]}
-                  />
+                  >
+                    <HStack gap="space-16">
+                      <Radio value={true} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Ja" />
+                      </Radio>
+                      <Radio value={false} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Nei" />
+                      </Radio>
+                    </HStack>
+                  </RhfRadioGroupNew>
                 </HStack>
-                <HStack gap="4">
-                  <RhfRadioGroup
+                <HStack gap="space-16">
+                  <RhfRadioGroupNew
                     name="erFristOverholdt"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
-                    isHorizontal
-                    isTrueOrFalseSelection
-                    radios={[
-                      {
-                        value: 'true',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                      },
-                      {
-                        value: 'false',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                      },
-                    ]}
-                  />
-                  <RhfRadioGroup
+                  >
+                    <HStack gap="space-16">
+                      <Radio value={true} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Ja" />
+                      </Radio>
+                      <Radio value={false} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Nei" />
+                      </Radio>
+                    </HStack>
+                  </RhfRadioGroupNew>
+                  <RhfRadioGroupNew
                     name="erSignert"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
                     validate={[required]}
                     isReadOnly={isReadOnly}
-                    isHorizontal
-                    isTrueOrFalseSelection
-                    radios={[
-                      {
-                        value: 'true',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Ja' }),
-                      },
-                      {
-                        value: 'false',
-                        label: intl.formatMessage({ id: 'Klage.Formkrav.Nei' }),
-                      },
-                    ]}
-                  />
+                  >
+                    <HStack gap="space-16">
+                      <Radio value={true} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Ja" />
+                      </Radio>
+                      <Radio value={false} size="small">
+                        <FormattedMessage id="Klage.Formkrav.Nei" />
+                      </Radio>
+                    </HStack>
+                  </RhfRadioGroupNew>
                 </HStack>
               </VStack>
             </HStack>

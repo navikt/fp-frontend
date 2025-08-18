@@ -1,8 +1,8 @@
 import { FormProvider, useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -127,7 +127,7 @@ export const OppholdForm = ({
     <FormProvider {...formMethods}>
       <div
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--ax-bg-default)',
           padding: '24px',
           marginTop: '-8px',
           marginBottom: '-8px',
@@ -135,8 +135,8 @@ export const OppholdForm = ({
           marginRight: '-8px',
         }}
       >
-        <VStack gap="10">
-          <HStack gap="4">
+        <VStack gap="space-40">
+          <HStack gap="space-16">
             <RhfDatepicker
               name={`${index}.fom`}
               control={formMethods.control}
@@ -167,25 +167,22 @@ export const OppholdForm = ({
               isReadOnly={forVisning}
             />
           </HStack>
-          <RhfRadioGroup
+          <RhfRadioGroupNew
             name={`${index}.oppholdÅrsak`}
             control={formMethods.control}
             label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
             validate={[required]}
             isReadOnly={forVisning}
-            radios={[
-              {
-                label: intl.formatMessage({ id: 'OppholdForm.Sykepenger' }),
-                value: 'SYKEPENGER',
-              },
-              {
-                label: intl.formatMessage({ id: 'OppholdForm.Ferie' }),
-                value: 'FERIE',
-              },
-            ]}
-          />
+          >
+            <Radio value="SYKEPENGER" size="small">
+              <FormattedMessage id="OppholdForm.Sykepenger" />
+            </Radio>
+            <Radio value="FERIE" size="small">
+              <FormattedMessage id="OppholdForm.Ferie" />
+            </Radio>
+          </RhfRadioGroupNew>
           {!forVisning && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Button
                 size="small"
                 variant="primary"

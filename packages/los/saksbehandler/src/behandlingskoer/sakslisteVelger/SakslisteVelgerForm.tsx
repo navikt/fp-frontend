@@ -68,7 +68,7 @@ const AndreKriterier = ({ saksliste }: { saksliste?: Saksliste }): ReactNode => 
 
   if (saksliste && saksliste.andreKriterier.length > 0) {
     return (
-      <VStack gap="1">
+      <VStack gap="space-4">
         {saksliste.andreKriterier.map(ak => (
           <BodyShort key={ak.andreKriterierType}>
             {ak.inkluder
@@ -223,8 +223,8 @@ export const SakslisteVelgerForm = ({
 
   if (sakslister.length === 0) {
     return (
-      <VStack gap="2" className={styles.container}>
-        <Heading size="xsmall">
+      <VStack gap="space-8" className={styles.container}>
+        <Heading size="xsmall" level="2">
           <FormattedMessage id="SakslisteVelgerForm.Saksliste" />
         </Heading>
         <BodyShort>
@@ -238,7 +238,7 @@ export const SakslisteVelgerForm = ({
 
   return (
     <RhfForm formMethods={formMethods} className={styles.container}>
-      <VStack gap="6">
+      <VStack gap="space-24">
         <HStack justify="space-between" align="end">
           <RhfSelect
             name="sakslisteId"
@@ -263,11 +263,11 @@ export const SakslisteVelgerForm = ({
         </HStack>
         <div className={visKøFiltere ? styles.active : styles.hidden}>
           {visKøFiltere && (
-            <VStack gap="6">
+            <VStack gap="space-24">
               {valgtSaksliste && (
-                <HStack gap="5" align="stretch">
-                  <Box background="surface-neutral-subtle" padding="4" borderRadius="xlarge" width="200px">
-                    <VStack gap="4">
+                <HStack gap="space-20" align="stretch">
+                  <Box.New background="neutral-moderateA" padding="4" borderRadius="xlarge" width="200px">
+                    <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
                           <FormattedMessage id="SakslisteVelgerForm.Stonadstype" />
@@ -275,7 +275,7 @@ export const SakslisteVelgerForm = ({
                         <SackKronerIcon aria-hidden className={styles.grayout} />
                       </HStack>
                       {valgtSaksliste.fagsakYtelseTyper.length > 0 ? (
-                        <VStack gap="1">
+                        <VStack gap="space-4">
                           {valgtSaksliste.fagsakYtelseTyper.map(type => (
                             <BodyShort key={type}>{fagsakYtelseTyper.find(fyt => fyt.kode === type)?.navn}</BodyShort>
                           ))}
@@ -286,9 +286,9 @@ export const SakslisteVelgerForm = ({
                         </BodyShort>
                       )}
                     </VStack>
-                  </Box>
-                  <Box background="surface-neutral-subtle" padding="4" borderRadius="xlarge" width="200px">
-                    <VStack gap="4">
+                  </Box.New>
+                  <Box.New background="neutral-moderateA" padding="4" borderRadius="xlarge" width="200px">
+                    <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
                           <FormattedMessage id="SakslisteVelgerForm.Behandlingstype" />
@@ -296,7 +296,7 @@ export const SakslisteVelgerForm = ({
                         <DocPencilIcon aria-hidden className={styles.grayout} />
                       </HStack>
                       {valgtSaksliste.behandlingTyper.length > 0 ? (
-                        <VStack gap="1">
+                        <VStack gap="space-4">
                           {valgtSaksliste.behandlingTyper.map(type => (
                             <BodyShort key={type}>{behandlingsTyper.find(bt => bt.kode === type)?.navn}</BodyShort>
                           ))}
@@ -305,9 +305,9 @@ export const SakslisteVelgerForm = ({
                         <FormattedMessage id="SakslisteVelgerForm.Alle" />
                       )}
                     </VStack>
-                  </Box>
-                  <Box background="surface-neutral-subtle" padding="4" borderRadius="xlarge" width="200px">
-                    <VStack gap="4">
+                  </Box.New>
+                  <Box.New background="neutral-moderateA" padding="4" borderRadius="xlarge" width="200px">
+                    <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
                           <FormattedMessage id="SakslisteVelgerForm.AndreKriterier" />
@@ -316,9 +316,9 @@ export const SakslisteVelgerForm = ({
                       </HStack>
                       <AndreKriterier saksliste={valgtSaksliste} />
                     </VStack>
-                  </Box>
-                  <Box background="surface-neutral-subtle" padding="4" borderRadius="xlarge" width="200px">
-                    <VStack gap="4">
+                  </Box.New>
+                  <Box.New background="neutral-moderateA" padding="4" borderRadius="xlarge" width="200px">
+                    <VStack gap="space-16">
                       <HStack justify="space-between">
                         <Label size="small">
                           <FormattedMessage id="SakslisteVelgerForm.Sortering" />
@@ -327,37 +327,37 @@ export const SakslisteVelgerForm = ({
                       </HStack>
                       <BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>
                     </VStack>
-                  </Box>
+                  </Box.New>
                 </HStack>
               )}
-              <VStack gap="2">
+              <VStack gap="space-8">
                 <Label size="small">
                   <FormattedMessage id="SakslisteVelgerForm.AndreSomJobber" />
                 </Label>
-                <HStack gap="2" className={styles.paddingBottom}>
+                <HStack gap="space-8" className={styles.paddingBottom}>
                   {sorterteSaksbehandlere
                     ?.slice(
                       0,
                       sorterteSaksbehandlere.length > 3 && !visAlleSaksbehandlere ? 3 : sorterteSaksbehandlere.length,
                     )
                     .map(s => (
-                      <Box
-                        background="surface-neutral-subtle"
+                      <Box.New
+                        background="neutral-moderateA"
                         padding="2"
                         borderRadius="full"
                         key={s.brukerIdent.brukerIdent}
                       >
-                        <HStack gap="2" align="center">
+                        <HStack gap="space-8" align="center">
                           <PersonHeadsetIcon aria-hidden className={styles.grayout} />
                           <BodyShort>{s.navn}</BodyShort>
                         </HStack>
-                      </Box>
+                      </Box.New>
                     ))}
                   {sorterteSaksbehandlere && sorterteSaksbehandlere.length > 3 && (
-                    <HStack gap="2">
+                    <HStack gap="space-8">
                       {!visAlleSaksbehandlere && (
-                        <Box background="surface-neutral-subtle" padding="2" borderRadius="full">
-                          <HStack gap="2" align="center">
+                        <Box.New background="neutral-moderateA" padding="2" borderRadius="full">
+                          <HStack gap="space-8" align="center">
                             <PlusIcon aria-hidden className={styles.grayout} />
                             <BodyShort>
                               <FormattedMessage
@@ -366,7 +366,7 @@ export const SakslisteVelgerForm = ({
                               />
                             </BodyShort>
                           </HStack>
-                        </Box>
+                        </Box.New>
                       )}
                       <Button
                         variant="tertiary"

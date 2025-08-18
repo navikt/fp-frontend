@@ -121,7 +121,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
       >
-        <VStack gap="4">
+        <VStack gap="space-16">
           <Label size="small">
             <FormattedMessage id="SvangerskapVilkarForm.RettTilSvp" />
           </Label>

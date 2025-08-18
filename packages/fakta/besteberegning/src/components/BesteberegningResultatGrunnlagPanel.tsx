@@ -36,7 +36,7 @@ const girKap8Besteberegning = (kap8Beregning: number, kap1473Beregning: number):
  * Presentasjonskomponent. Viser sammenligning av kap 8 beregning og §14-7, ledd 3 beregning.
  */
 export const BesteberegningResultatGrunnlagPanel = ({ periode, besteMåneder }: Props) => (
-  <VStack gap="4">
+  <VStack gap="space-16">
     <Table>
       <Table.Header>
         <Table.Row>

@@ -28,7 +28,7 @@ export const PermisjonOppholdPanel = ({ readOnly, alleKodeverk }: Props) => {
   const skalHaOpphold = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalHaOpphold`) || false;
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label>
         <FormattedMessage id="Registrering.Permisjon.Opphold.Title" />
       </Label>

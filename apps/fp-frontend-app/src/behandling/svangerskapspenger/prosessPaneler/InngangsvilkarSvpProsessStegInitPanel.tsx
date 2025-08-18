@@ -11,8 +11,8 @@ interface Props {
 
 export const InngangsvilkarSvpProsessStegInitPanel = ({ faktaPanelMedÅpentApInfo }: Props) => (
   <InngangsvilkarDefaultInitWrapper faktaPanelMedÅpentApInfo={faktaPanelMedÅpentApInfo}>
-    <HGrid columns={2} gap="8">
-      <VStack gap="8">
+    <HGrid columns={2} gap="space-32">
+      <VStack gap="space-32">
         <SvangerskapInngangsvilkarInitPanel />
         <MedlemskapInngangsvilkarInitPanel />
       </VStack>

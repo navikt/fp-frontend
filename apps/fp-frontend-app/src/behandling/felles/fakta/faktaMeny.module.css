@@ -1,14 +1,19 @@
 .container {
-  background-color: var(--a-white);
+  background-color: var(--ax-bg-default);
   height: 100%;
 }
 
 .content {
+  border-left: 1px solid var(--ax-neutral-400);
   flex: 1 1 auto;
   padding-bottom: 40px;
   padding-left: 24px;
   padding-right: 40px;
   padding-top: 40px;
+}
+
+:global(.dark) .content {
+  border-left: 1px solid var(--ax-neutral-700);
 }
 
 .sideMenu {

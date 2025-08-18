@@ -84,9 +84,9 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
         cancel={() => setVisForkastOverstyringModal(false)}
         submit={forkastOverstyrtBrev}
       />
-      <VStack gap="4">
-        <Box padding="4" borderRadius="medium" background="surface-subtle">
-          <VStack gap="4">
+      <VStack gap="space-16">
+        <Box.New padding="4" borderRadius="medium" background="neutral-soft">
+          <VStack gap="space-16">
             {!isReadOnly && !brevOverstyring?.redigertHtml && !hentBrevOverstyringIsPending && (
               <Alert variant="info" size="small">
                 <FormattedMessage id="OverstyringVedtaksbrev.KanRedigeres" />
@@ -99,10 +99,10 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
             )}
             {!isReadOnly && (
               <>
-                <Heading size="small">
+                <Heading size="small" level="2">
                   <FormattedMessage id="OverstyringVedtaksbrev.RedigerBrevOverskrift" />
                 </Heading>
-                <HStack gap="4">
+                <HStack gap="space-16">
                   <Button
                     variant="secondary"
                     type="button"
@@ -147,7 +147,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
               </Alert>
             )}
           </VStack>
-        </Box>
+        </Box.New>
       </VStack>
       {brevOverstyring && visFritekstRedigeringModal && (
         <FritekstRedigeringModal

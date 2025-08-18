@@ -1,8 +1,8 @@
 import { FormProvider, useForm, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { Alert, Button, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Alert, Button, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { Permisjon } from '@navikt/fp-types';
@@ -76,7 +76,7 @@ export const VelferdspermisjonForm = ({
     <FormProvider {...formMethods}>
       <div
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--ax-bg-default)',
           padding: '24px',
           marginTop: '-8px',
           marginBottom: '-8px',
@@ -84,26 +84,22 @@ export const VelferdspermisjonForm = ({
           marginRight: '-8px',
         }}
       >
-        <VStack gap="5">
-          <RhfRadioGroup
+        <VStack gap="space-20">
+          <RhfRadioGroupNew
             name={`${permisjonIndex}.erGyldig`}
             control={formMethods.control}
             label={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldig' })}
             description={intl.formatMessage({ id: 'VelferdspermisjonPanel.PermisjonGyldigDetaljer' })}
             validate={[required]}
             isReadOnly={readOnly}
-            isTrueOrFalseSelection
-            radios={[
-              {
-                label: intl.formatMessage({ id: 'VelferdspermisjonPanel.Ja' }),
-                value: 'true',
-              },
-              {
-                label: intl.formatMessage({ id: 'VelferdspermisjonPanel.Nei' }),
-                value: 'false',
-              },
-            ]}
-          />
+          >
+            <Radio value={true} size="small">
+              <FormattedMessage id="VelferdspermisjonPanel.Ja" />
+            </Radio>
+            <Radio value={false} size="small">
+              <FormattedMessage id="VelferdspermisjonPanel.Nei" />
+            </Radio>
+          </RhfRadioGroupNew>
           {erGyldig && velferdspermisjon.permisjonsprosent === 100 && (
             <Alert variant="info" size="small">
               <FormattedMessage id="VelferdspermisjonPanel.Permisjon100ProsentOgGyldig" />

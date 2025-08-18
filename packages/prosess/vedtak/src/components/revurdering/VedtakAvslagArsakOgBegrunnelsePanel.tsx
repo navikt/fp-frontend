@@ -66,9 +66,9 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   const avslagsårsak = getAvslagArsak(alleKodeverk, vilkar, behandlingsresultat);
 
   return (
-    <VStack gap="4">
+    <VStack gap="space-16">
       {avslagsårsak && (
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="VedtakForm.ArsakTilAvslag" />
           </Label>
@@ -93,7 +93,7 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
         />
       )}
       {erReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
-        <VStack gap="1">
+        <VStack gap="space-4">
           <Detail>
             <FormattedMessage id="VedtakForm.Fritekst" />
           </Detail>

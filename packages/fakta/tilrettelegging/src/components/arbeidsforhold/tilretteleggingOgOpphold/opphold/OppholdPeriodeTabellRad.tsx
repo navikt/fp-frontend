@@ -31,6 +31,8 @@ const utledKilde = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
       return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Soknad' });
     case 'INNTEKTSMELDING':
       return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Inntektsmelding' });
+    case 'TIDLIGERE_VEDTAK':
+      return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.TidligereVedtak' });
     default:
       return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
   }

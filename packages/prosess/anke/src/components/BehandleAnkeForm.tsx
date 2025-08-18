@@ -51,23 +51,23 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
   const behandletKabal = ankeVurdering?.behandletAvKabal || false;
 
   return (
-    <VStack gap="4">
-      <Heading size="small">
+    <VStack gap="space-16">
+      <Heading size="small" level="2">
         <FormattedMessage id="Ankebehandling.Title" />
       </Heading>
       {behandlesKabal && (
-        <Heading size="small">
+        <Heading size="small" level="3">
           <FormattedMessage id="Ankebehandling.SeKabalText" />
         </Heading>
       )}
       {behandletKabal && (
-        <Heading size="small">
+        <Heading size="small" level="3">
           <FormattedMessage id="Ankebehandling.BehandletKabal" />
         </Heading>
       )}
       {!behandlesKabal && (
         <>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.Resultat.Vedtak" />
             </Label>
@@ -78,7 +78,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
               {vedtak !== IKKE_PAA_ANKET_BEHANDLING_ID && formatBehandlingId(behandlinger, alleKodeverk, vedtak)}
             </BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.Resultat" />
             </Label>
@@ -102,7 +102,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
           </VStack>
           {AnkeVurderingKodeverk.ANKE_AVVIS === avr?.ankeVurdering && !behandletKabal && (
             <>
-              <VStack gap="1">
+              <VStack gap="space-4">
                 <Label size="small">
                   <FormattedMessage id="Ankebehandling.Avvisning" />
                 </Label>
@@ -127,7 +127,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
                   </BodyShort>
                 )}
               </VStack>
-              <VStack gap="1">
+              <VStack gap="space-4">
                 <Label size="small">
                   <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
                 </Label>
@@ -143,7 +143,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
           )}
           {AnkeVurderingKodeverk.ANKE_OMGJOER === avr?.ankeVurdering && (
             <>
-              <VStack gap="1">
+              <VStack gap="space-4">
                 <Label size="small">
                   <FormattedMessage id="Ankebehandling.Avvisning" />
                 </Label>
@@ -151,7 +151,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
                   {ankeOmgorArsaker.find(aoa => aoa.kode === avr?.ankeOmgjoerArsak)?.navn}
                 </BodyShort>
               </VStack>
-              <VStack gap="1">
+              <VStack gap="space-4">
                 <BodyShort size="small">
                   {avr?.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
@@ -169,7 +169,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
           {(AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.ankeVurdering ||
             AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.ankeVurdering) &&
             !behandletKabal && (
-              <VStack gap="1">
+              <VStack gap="space-4">
                 <Label size="small">
                   <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
                 </Label>
@@ -178,13 +178,13 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
                 </BodyShort>
               </VStack>
             )}
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="Ankebehandling.Begrunnelse" />
             </Label>
             <BodyShort size="small">{avr?.begrunnelse}</BodyShort>
           </VStack>
-          <VStack gap="1">
+          <VStack gap="space-4">
             <Label size="small">
               <FormattedMessage id="FritekstAnkeBrevTextField.Fritekst" />
             </Label>

@@ -37,7 +37,7 @@ export const MedlemskapInfoPanel = ({ medlemskap, soknad, submittable }: Props) 
 
   if (medlemskap) {
     return (
-      <VStack gap="6">
+      <VStack gap="space-24">
         <AksjonspunktHelpText aksjonspunkter={aksjonspunkterForPanel} medlemskap={medlemskap} />
         {medlemskap.manuellBehandlingResultat && isReadOnly && aksjonspunkt && (
           <VurderMedlemskapAksjonspunktForm
@@ -55,7 +55,7 @@ export const MedlemskapInfoPanel = ({ medlemskap, soknad, submittable }: Props) 
         )}
         <SituasjonOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
 
-        <VStack gap="2">
+        <VStack gap="space-8">
           <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.avvik} skalViseAvvik={harAksjonspunkt} />
           <OpplysningerOmAdresser
             medlemskap={medlemskap}

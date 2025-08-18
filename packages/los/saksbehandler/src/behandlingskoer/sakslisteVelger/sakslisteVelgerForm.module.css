@@ -3,15 +3,17 @@
 }
 
 .container {
-  background-color: var(--a-surface-subtle);
-  border-bottom-color: var(--a-gray-300);
-  border-bottom-style: solid;
-  border-bottom-width: 1px;
+  background-color: var(--ax-bg-neutral-soft);
+  border-bottom: 1px solid var(--ax-neutral-400);
   padding: 16px;
 }
 
+:global(.dark) .container {
+  border-bottom: 1px solid var(--ax-neutral-700);
+}
+
 .grayout {
-  color: var(--a-gray-500);
+  color: var(--ax-neutral-600);
   height: 24px;
   width: 24px;
 }

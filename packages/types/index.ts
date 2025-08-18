@@ -150,7 +150,7 @@ export type { Personoversikt, PersonopplysningerBasis } from './src/personoversi
 export type { Personadresse } from './src/personadresseTsType';
 export type { KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
 export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
-export type { Verge, OpprettVergeParams } from './src/vergeTsType';
+export type { Verge, OpprettVergeParams, VergeType } from './src/vergeTsType';
 export type { ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';
 export type { ManglendeInntektsmeldingVurdering } from './src/manglendeInntektsmeldingVurderingTsType';
@@ -197,3 +197,4 @@ export type {
   FødselDtoGjeldendeBarn,
   BarnHendelseData,
 } from './src/fødsel';
+export type { AnnenforelderUttakEøsPeriode } from './src/faktaUttakEøsPeriode';

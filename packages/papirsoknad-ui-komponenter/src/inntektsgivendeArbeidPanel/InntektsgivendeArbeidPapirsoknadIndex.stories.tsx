@@ -29,7 +29,7 @@ const meta = {
         formMethods={formMethods}
         onSubmit={val => submitCallback(InntektsgivendeArbeidPapirsoknadIndex.transformValues(val))}
       >
-        <VStack gap="10">
+        <VStack gap="space-40">
           <InntektsgivendeArbeidPapirsoknadIndex {...args} />
           <Button size="small" variant="primary">
             Lagreknapp (Kun for test)

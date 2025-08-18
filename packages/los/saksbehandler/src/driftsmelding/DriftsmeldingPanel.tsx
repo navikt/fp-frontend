@@ -21,9 +21,9 @@ export const DriftsmeldingPanel = ({ driftsmeldinger }: Props) => {
 
   return (
     <div className={styles.container}>
-      <VStack gap="2">
+      <VStack gap="space-8">
         {driftsmeldinger.map(message => (
-          <HStack gap="2" key={message.id}>
+          <HStack gap="space-8" key={message.id}>
             <ExclamationmarkTriangleFillIcon className={styles.driftsInfo} />
             <Detail className={styles.wordWrap}>{message.melding}</Detail>
           </HStack>

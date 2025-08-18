@@ -1,7 +1,8 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { FødselGjeldende } from '@navikt/fp-types';
@@ -23,32 +24,32 @@ export type ErBarnFødtFormValues = {
 export const ErBarnFødt = ({ isReadOnly, isEdited, finnesBarnIFReg, antallBarnISøknad }: Props) => {
   const intl = useIntl();
 
-  const { control } = useFormContext<ErBarnFødtFormValues>();
+  const { control, watch } = useFormContext<ErBarnFødtFormValues>();
+
+  const erBarnFødt = watch('erBarnFødt');
 
   return (
-    <RhfRadioGroup
-      control={control}
-      name="erBarnFødt"
-      isEdited={isEdited}
-      label={intl.formatMessage({ id: 'ErBarnFødt.Label' }, { antallBarn: antallBarnISøknad })}
-      validate={[required]}
-      isReadOnly={isReadOnly}
-      isHorizontal
-      size="medium"
-      isTrueOrFalseSelection
-      radios={[
-        {
-          label: <FormattedMessage id="ErBarnFødt.Ja" />,
-          value: 'true',
-          element: <BarnFieldArray isReadOnly={isReadOnly} />,
-        },
-        {
-          label: <FormattedMessage id="ErBarnFødt.Nei" />,
-          value: 'false',
-          disabled: finnesBarnIFReg,
-        },
-      ]}
-    />
+    <VStack gap="space-16">
+      <RhfRadioGroupNew
+        control={control}
+        name="erBarnFødt"
+        isEdited={isEdited}
+        label={intl.formatMessage({ id: 'ErBarnFødt.Label' }, { antallBarn: antallBarnISøknad })}
+        validate={[required]}
+        isReadOnly={isReadOnly}
+        size="medium"
+      >
+        <HStack gap="space-16">
+          <Radio value={true} size="small">
+            <FormattedMessage id="ErBarnFødt.Ja" />
+          </Radio>
+          <Radio value={false} size="small" disabled={finnesBarnIFReg}>
+            <FormattedMessage id="ErBarnFødt.Nei" />
+          </Radio>
+        </HStack>
+      </RhfRadioGroupNew>
+      {erBarnFødt && <BarnFieldArray isReadOnly={isReadOnly} />}
+    </VStack>
   );
 };
 

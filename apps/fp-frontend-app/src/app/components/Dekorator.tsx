@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { type ComponentProps } from 'react';
 import { type IntlShape, useIntl } from 'react-intl';
 import { useNavigate } from 'react-router-dom';
 
+import type { Theme } from '@navikt/ds-react';
 import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
@@ -24,9 +25,18 @@ interface Props {
   setSiteHeight: (headerHeight: number) => void;
   crashMessage?: string;
   hideErrorMessages?: boolean;
+  theme: ComponentProps<typeof Theme>['theme'];
+  setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
 }
 
-export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideErrorMessages = false }: Props) => {
+export const Dekorator = ({
+  queryStrings,
+  setSiteHeight,
+  crashMessage,
+  hideErrorMessages = false,
+  theme,
+  setTheme,
+}: Props) => {
   const intl = useIntl();
 
   const errorMessages = useRestApiError();
@@ -101,6 +111,8 @@ export const Dekorator = ({ queryStrings, setSiteHeight, crashMessage, hideError
       setSiteHeight={setSiteHeight}
       interneLenker={interneLenker}
       eksterneLenker={eksterneLenker}
+      theme={theme}
+      setTheme={setTheme}
     />
   );
 };

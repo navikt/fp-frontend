@@ -32,8 +32,8 @@ export const BekreftOgSubmitKlageModal = ({
       onClose={lukkModal}
     >
       <Modal.Body>
-        <VStack gap="3">
-          <VStack gap="4">
+        <VStack gap="space-12">
+          <VStack gap="space-16">
             <Label size="medium">
               <FormattedMessage id="Klage.Modal.Overskrift" />
             </Label>
@@ -53,7 +53,7 @@ export const BekreftOgSubmitKlageModal = ({
             )}
           </VStack>
           <div>
-            <HStack gap="2">
+            <HStack gap="space-8">
               <ProsessStegSubmitButtonNew
                 isReadOnly={readOnly}
                 isSubmittable={isSubmittable}

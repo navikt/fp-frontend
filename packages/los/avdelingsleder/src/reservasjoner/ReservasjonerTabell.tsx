@@ -91,7 +91,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
   };
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label size="small">
         <FormattedMessage id="ReservasjonerTabell.Reservasjoner" />
       </Label>

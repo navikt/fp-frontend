@@ -3,8 +3,8 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
-import { BodyShort, Button, Detail, HStack, Label, Popover, Tooltip, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { BodyShort, Button, Detail, HStack, Label, Popover, Radio, Tooltip, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
@@ -77,7 +77,7 @@ export const ArbeidsforholdField = ({
 
   return (
     <ArbeidsforholdBoks key={fieldId} harÅpentAksjonspunkt={harÅpentAksjonspunkt} harBorderTop={index === 0}>
-      <HStack gap="6">
+      <HStack gap="space-24">
         {!harÅpentAksjonspunkt && (
           <CheckmarkIcon
             title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.Ok' })}
@@ -90,7 +90,7 @@ export const ArbeidsforholdField = ({
             className={styles.exclamationmarkIcon}
           />
         )}
-        <VStack gap="4" width="90%">
+        <VStack gap="space-16" width="90%">
           <HStack justify="space-between">
             <div>
               <Label size="small">{arbeidsgiverOpplysinger.navn}</Label>
@@ -143,7 +143,7 @@ export const ArbeidsforholdField = ({
             </div>
           </HStack>
           {visArbeidsforholdId && arbeidsforhold.eksternArbeidsforholdId && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Label size="small">
                 <FormattedMessage id="ArbeidsforholdFieldArray.Id" />
               </Label>
@@ -163,7 +163,7 @@ export const ArbeidsforholdField = ({
             </HStack>
           )}
           {arbeidsforhold.stillingsprosent && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Label size="small">
                 <FormattedMessage id="ArbeidsforholdFieldArray.Stillingsprosent" />
               </Label>
@@ -171,7 +171,7 @@ export const ArbeidsforholdField = ({
             </HStack>
           )}
           {arbeidsforhold.permisjonOgMangel && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <>
                 <Label size="small">
                   {`${alleKodeverk['PermisjonsbeskrivelseType'].find(k => k.kode === arbeidsforhold.permisjonOgMangel?.type)?.navn ?? ''} 100%`}
@@ -191,11 +191,11 @@ export const ArbeidsforholdField = ({
           {!inntektsmelding && inntektsposter && (
             <InntektsposterPanel inntektsposter={inntektsposter} skjæringstidspunkt={skjæringstidspunkt} />
           )}
-          <RhfRadioGroup
+          <RhfRadioGroupNew
             name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
             control={control}
             label={
-              <HStack gap="2">
+              <HStack gap="space-8">
                 <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />
                 <div className={styles.image}>
                   <Button
@@ -216,7 +216,7 @@ export const ArbeidsforholdField = ({
                     className={styles.hjelpetekst}
                   >
                     <Popover.Content className={styles.hjelpetekstInnhold}>
-                      <VStack gap="2">
+                      <VStack gap="space-8">
                         <BodyShort>
                           <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />
                         </BodyShort>
@@ -237,21 +237,20 @@ export const ArbeidsforholdField = ({
             }
             validate={[required]}
             isReadOnly={isReadOnly}
-            radios={[
-              {
-                label: intl.formatMessage({
-                  id: inntektsmelding
+          >
+            <Radio value={BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON} size="small">
+              <FormattedMessage
+                id={
+                  inntektsmelding
                     ? 'ArbeidsforholdFieldArray.TaMedArbeidsforhold'
-                    : 'ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding',
-                }),
-                value: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
-              },
-              {
-                label: intl.formatMessage({ id: 'ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold' }),
-                value: BekreftetPermisjonStatus.BRUK_PERMISJON,
-              },
-            ]}
-          />
+                    : 'ArbeidsforholdFieldArray.TaMedArbeidsforholdIkkeInntektsmelding'
+                }
+              />
+            </Radio>
+            <Radio value={BekreftetPermisjonStatus.BRUK_PERMISJON} size="small">
+              <FormattedMessage id="ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold" />
+            </Radio>
+          </RhfRadioGroupNew>
         </VStack>
       </HStack>
     </ArbeidsforholdBoks>

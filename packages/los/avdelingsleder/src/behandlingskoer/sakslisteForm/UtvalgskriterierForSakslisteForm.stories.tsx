@@ -51,9 +51,7 @@ export const MedGittNavn: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: 'liste',
-      sistEndret: '2020-10-10',
       saksbehandlerIdenter: [],
-      antallBehandlinger: 1,
       sortering: {
         sorteringType: KøSortering.BEHANDLINGSFRIST,
         fra: 1,
@@ -81,9 +79,7 @@ export const MedDefaultNavn: Story = {
     valgtSaksliste: {
       sakslisteId: 1,
       navn: undefined,
-      sistEndret: '2020-10-10',
       saksbehandlerIdenter: [],
-      antallBehandlinger: 1,
       sortering: {
         sorteringType: KøSortering.BEHANDLINGSFRIST,
         fra: 1,

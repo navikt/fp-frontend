@@ -29,7 +29,7 @@ export const PermisjonUtsettelsePanel = ({ readOnly, alleKodeverk }: Props) => {
   const skalUtsette = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalUtsette`) || false;
 
   return (
-    <VStack gap="2">
+    <VStack gap="space-8">
       <Label>
         <FormattedMessage id="Registrering.Permisjon.Utsettelse.Title" />
       </Label>

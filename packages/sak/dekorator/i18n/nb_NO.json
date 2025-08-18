@@ -5,5 +5,7 @@
   "FeilmeldingsdetaljerModal.Close": "Lukk",
   "DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk": "Systemer og oppslagsverk",
   "DekoratorMedFeilviserSakIndex.Vedtakslosningen": "Vedtaksløsningen",
-  "DekoratorMedFeilviserSakIndex.EksternLenke": "Ekstern lenke"
+  "DekoratorMedFeilviserSakIndex.EksternLenke": "Ekstern lenke",
+  "DekoratorMedFeilviserSakIndex.EndreTilLysTema": "Endre til lyst tema",
+  "DekoratorMedFeilviserSakIndex.EndreTilMorkTema": "Endre til mørkt tema"
 }

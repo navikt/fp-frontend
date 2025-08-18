@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
-import { Button, HStack, Spacer, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfNumericField, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -189,7 +189,7 @@ export const TilretteleggingForm = ({
     <FormProvider {...formMethods}>
       <div
         style={{
-          backgroundColor: 'white',
+          backgroundColor: 'var(--ax-bg-default)',
           padding: '24px',
           marginTop: '-8px',
           marginBottom: '-8px',
@@ -197,7 +197,7 @@ export const TilretteleggingForm = ({
           marginRight: '-8px',
         }}
       >
-        <VStack gap="8">
+        <VStack gap="space-32">
           {!erNyPeriode && (
             <TilretteleggingInfoPanel
               tilrettelegging={formValues}
@@ -226,27 +226,23 @@ export const TilretteleggingForm = ({
             ]}
             isReadOnly={readOnly}
           />
-          <RhfRadioGroup
+          <RhfRadioGroupNew
             name={`${index}.type`}
             control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
             validate={[required]}
             isReadOnly={readOnly}
-            radios={[
-              {
-                label: intl.formatMessage({ id: 'TilretteleggingForm.KanGjennomfores' }),
-                value: TilretteleggingType.HEL_TILRETTELEGGING,
-              },
-              {
-                label: intl.formatMessage({ id: 'TilretteleggingForm.RedusertArbeid' }),
-                value: TilretteleggingType.DELVIS_TILRETTELEGGING,
-              },
-              {
-                label: intl.formatMessage({ id: 'TilretteleggingForm.KanIkkeGjennomfores' }),
-                value: TilretteleggingType.INGEN_TILRETTELEGGING,
-              },
-            ]}
-          />
+          >
+            <Radio value={TilretteleggingType.HEL_TILRETTELEGGING} size="small">
+              <FormattedMessage id="TilretteleggingForm.KanGjennomfores" />
+            </Radio>
+            <Radio value={TilretteleggingType.DELVIS_TILRETTELEGGING} size="small">
+              <FormattedMessage id="TilretteleggingForm.RedusertArbeid" />
+            </Radio>
+            <Radio value={TilretteleggingType.INGEN_TILRETTELEGGING} size="small">
+              <FormattedMessage id="TilretteleggingForm.KanIkkeGjennomfores" />
+            </Radio>
+          </RhfRadioGroupNew>
           {formValues.type === TilretteleggingType.DELVIS_TILRETTELEGGING && (
             <>
               {(tilrettelegging.stillingsprosent === undefined ||
@@ -295,7 +291,7 @@ export const TilretteleggingForm = ({
             </>
           )}
           {!readOnly && (
-            <HStack gap="2">
+            <HStack gap="space-8">
               <Button
                 size="small"
                 variant="primary"

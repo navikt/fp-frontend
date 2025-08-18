@@ -1,8 +1,8 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Detail, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { BodyShort, Detail, HStack, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
@@ -44,7 +44,7 @@ export const MannAdoptererAleneFaktaForm = ({
       title={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
-      <VStack gap="2" width="100%">
+      <VStack gap="space-8" width="100%">
         <Detail>
           <FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" />
         </Detail>
@@ -56,26 +56,23 @@ export const MannAdoptererAleneFaktaForm = ({
         <div>
           <hr className={styles.hr} />
         </div>
-        <RhfRadioGroup
+        <RhfRadioGroupNew
           name="mannAdoptererAlene"
           control={control}
           hideLegend
           isEdited={hasValue(gjeldendeFamiliehendelse.mannAdoptererAlene)}
           validate={[required]}
           isReadOnly={readOnly}
-          isHorizontal
-          isTrueOrFalseSelection
-          radios={[
-            {
-              label: intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererAlene' }),
-              value: 'true',
-            },
-            {
-              label: intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.AdoptererIkkeAlene' }),
-              value: 'false',
-            },
-          ]}
-        />
+        >
+          <HStack gap="space-16">
+            <Radio value={true} size="small">
+              <FormattedMessage id="MannAdoptererAleneFaktaForm.AdoptererAlene" />
+            </Radio>
+            <Radio value={false} size="small">
+              <FormattedMessage id="MannAdoptererAleneFaktaForm.AdoptererIkkeAlene" />
+            </Radio>
+          </HStack>
+        </RhfRadioGroupNew>
       </VStack>
     </FaktaGruppe>
   );

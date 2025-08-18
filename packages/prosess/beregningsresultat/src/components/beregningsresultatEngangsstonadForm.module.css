@@ -4,6 +4,6 @@
 
 .divider {
   border-bottom: 0;
-  border-top: px solid var(--a-gray-900);
+  border-top: px solid var(--ax-neutral-1000);
   width: 300px;
 }

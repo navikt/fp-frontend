@@ -1,0 +1,27 @@
+{
+  "UttakEøsFaktaForm.FaktaUttakEos": "Fakta om uttak til annen forelder i EØS",
+  "UttakEøsFaktaForm.Aksjonspunkt": "Avklar uttak i EØS for annen forelder",
+  "UttakEøsFaktaForm.OverlappendePerioder": "Det finnes overlappende perioder",
+  "UttakEøsFaktaForm.FeilmeldingIngenPerioder": "Det er svart JA på at annen forelder har uttak i EØS, men det er ikke registrert noen perioder.",
+  "UttakEøsFaktaForm.harPeriodeIEøs": "Har annen forelder uttak i EØS?",
+  "UttakEøsFaktaForm.Ja": "Ja",
+  "UttakEøsFaktaForm.Nei": "Nei",
+  "UttakEøsFaktaForm.LeggTilPeriode": "Legg til periode",
+
+  "UttakEøsFaktaForm.NyPeriode": "Ny periode",
+  "UttakEøsFaktaDetailForm.Fom": "Fra og med",
+  "UttakEøsFaktaDetailForm.Tom": "Til og med",
+  "UttakEøsFaktaDetailForm.TomForFom": "Dato kan ikke være før fra",
+  "UttakEøsFaktaDetailForm.Stønadskonto": "Stønadskonto",
+  "UttakEøsFaktaDetailForm.TrekkUkerDager": "Trekk uker / dager",
+  "UttakEøsFaktaDetailForm.Virkedager": "Antall virkedager: {virkedager}",
+  "UttakEøsFaktaDetailForm.Oppdater": "Oppdater",
+  "UttakEøsFaktaDetailForm.LeggTil": "Legg til",
+  "UttakEøsFaktaDetailForm.Avslutt": "Avbryt",
+  "UttakEøsFaktaDetailForm.Slett": "Slett periode",
+  "UttakEøsFaktaDetailForm.VilDuSlette": "Vil du slette denne perioden?",
+
+  "UttakEøsFaktaTable.Periode": "Periode",
+  "UttakEøsFaktaTable.Kontotype": "Stønadskonto",
+  "UttakEøsFaktaTable.Trekkdager": "Trekk antall uker/dager"
+}

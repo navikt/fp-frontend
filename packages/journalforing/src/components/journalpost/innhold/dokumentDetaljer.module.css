@@ -1,45 +1,18 @@
 .dokContainer {
-  background-color: var(--a-blue-50);
-  display: flex;
-  margin-bottom: 8px;
+  background-color: var(--ax-accent-100);
   padding: 16px;
-  width: 100%;
 }
 
-.dokumentTittel {
-  margin-bottom: auto;
-  margin-right: 16px;
-  margin-top: auto;
-  width: 90%;
-}
-
-.knappKol {
-  width: 10%;
-}
-
-.newTabIcon {
-  color: var(--a-blue-600);
+.externalLinkIcon {
   height: 32px;
   width: 32px;
 }
 
 .editButton {
-  color: var(--a-blue-600);
   height: 20px;
   width: 20px;
 }
 
-.editButton:last-child {
-  margin-left: 16px;
-}
-
-.checkbox {
-  display: flex;
-  margin-bottom: auto;
-  margin-top: auto;
-}
-
 .input {
-  display: flex;
   width: 600px;
 }

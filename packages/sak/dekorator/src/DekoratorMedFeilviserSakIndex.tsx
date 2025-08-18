@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { type ComponentProps, useEffect, useRef } from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { ExternalLinkIcon, MenuGridIcon } from '@navikt/aksel-icons';
-import { Dropdown, InternalHeader, Link, Spacer } from '@navikt/ds-react';
+import { ExternalLinkIcon, MenuGridIcon, MoonIcon, SunIcon } from '@navikt/aksel-icons';
+import { Dropdown, InternalHeader, Link, Spacer, Theme } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 
 import { FeilmeldingPanel } from './components/FeilmeldingPanel';
@@ -25,6 +25,8 @@ interface Props {
   setSiteHeight: (height: number) => void;
   interneLenker: DekoratorLenke[];
   eksterneLenker: DekoratorLenke[];
+  theme: ComponentProps<typeof Theme>['theme'];
+  setTheme: (theme: NonNullable<ComponentProps<typeof Theme>['theme']>) => void;
 }
 
 /**
@@ -44,6 +46,8 @@ export const DekoratorMedFeilviserSakIndex = ({
   setSiteHeight,
   interneLenker,
   eksterneLenker,
+  theme,
+  setTheme,
 }: Props) => {
   const fixedHeaderRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -67,36 +71,59 @@ export const DekoratorMedFeilviserSakIndex = ({
                 title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk' })}
               />
             </InternalHeader.Button>
-            <Dropdown.Menu>
-              <Dropdown.Menu.GroupedList>
-                {interneLenker.length > 0 && (
+            <Theme theme={theme}>
+              <Dropdown.Menu>
+                <Dropdown.Menu.GroupedList>
+                  {interneLenker.length > 0 && (
+                    <Dropdown.Menu.GroupedList.Heading>
+                      <FormattedMessage id="DekoratorMedFeilviserSakIndex.Vedtakslosningen" />
+                    </Dropdown.Menu.GroupedList.Heading>
+                  )}
+                  {interneLenker.map(lenke => (
+                    <Dropdown.Menu.GroupedList.Item as={Link} key={lenke.tekst} onClick={lenke.callback}>
+                      {lenke.tekst}
+                    </Dropdown.Menu.GroupedList.Item>
+                  ))}
                   <Dropdown.Menu.GroupedList.Heading>
-                    <FormattedMessage id="DekoratorMedFeilviserSakIndex.Vedtakslosningen" />
+                    <FormattedMessage id="DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk" />
                   </Dropdown.Menu.GroupedList.Heading>
-                )}
-                {interneLenker.map(lenke => (
-                  <Dropdown.Menu.GroupedList.Item as={Link} key={lenke.tekst} onClick={lenke.callback}>
-                    {lenke.tekst}
-                  </Dropdown.Menu.GroupedList.Item>
-                ))}
-                <Dropdown.Menu.GroupedList.Heading>
-                  <FormattedMessage id="DekoratorMedFeilviserSakIndex.SystemerOgOppslagsverk" />
-                </Dropdown.Menu.GroupedList.Heading>
-                {eksterneLenker.map(lenke => (
-                  <Dropdown.Menu.GroupedList.Item as={Link} key={lenke.tekst} href={lenke.href} target="_blank">
-                    {lenke.tekst}
-                    <ExternalLinkIcon
-                      title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EksternLenke' })}
-                    />
-                  </Dropdown.Menu.GroupedList.Item>
-                ))}
-              </Dropdown.Menu.GroupedList>
-            </Dropdown.Menu>
+                  {eksterneLenker.map(lenke => (
+                    <Dropdown.Menu.GroupedList.Item as={Link} key={lenke.tekst} href={lenke.href} target="_blank">
+                      {lenke.tekst}
+                      <ExternalLinkIcon
+                        title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EksternLenke' })}
+                      />
+                    </Dropdown.Menu.GroupedList.Item>
+                  ))}
+                </Dropdown.Menu.GroupedList>
+              </Dropdown.Menu>
+            </Theme>
           </Dropdown>
           <InternalHeader.User name={navAnsattNavn} />
+          {skalViseTemaKnapp() && (
+            <InternalHeader.Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+              {theme === 'dark' ? (
+                <SunIcon
+                  style={{ fontSize: '1.5rem' }}
+                  title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilLysTema' })}
+                />
+              ) : (
+                <MoonIcon
+                  style={{ fontSize: '1.5rem' }}
+                  title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilMorkTema' })}
+                />
+              )}
+            </InternalHeader.Button>
+          )}
         </InternalHeader>
         <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
       </RawIntlProvider>
     </div>
   );
+};
+
+const skalViseTemaKnapp = () => {
+  const erDev = window.location.href.includes('fpsak.intern.dev.nav.no');
+  const erLokalt = window.location.href.includes('localhost');
+  return erDev || erLokalt;
 };

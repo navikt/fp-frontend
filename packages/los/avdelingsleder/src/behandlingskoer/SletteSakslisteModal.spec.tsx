@@ -16,11 +16,9 @@ describe('SletteSakslisteModal', () => {
 
     await waitFor(() => expect(submit).toHaveBeenCalledTimes(1));
     expect(submit).toHaveBeenNthCalledWith(1, {
-      antallBehandlinger: 2,
       navn: 'Saksliste 1',
       saksbehandlerIdenter: [],
       sakslisteId: 1,
-      sistEndret: '2020-01-01',
     });
   });
 

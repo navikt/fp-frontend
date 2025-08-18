@@ -1,7 +1,8 @@
-import { useMemo, useState } from 'react';
+import { type ComponentProps, useMemo, useState } from 'react';
 import { RawIntlProvider } from 'react-intl';
 import { Link, useLocation } from 'react-router-dom';
 
+import { Theme } from '@navikt/ds-react';
 import { createIntl, parseQueryString } from '@navikt/ft-utils';
 import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
@@ -18,15 +19,16 @@ import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
 import { ErrorBoundary } from './ErrorBoundary';
 
-import '../globalCss/global.module.css';
-
 import messages from '../../i18n/nb_NO.json';
 
-import '@navikt/ds-css';
+import '../globalCss/global.css';
 import '@navikt/ds-css-internal';
+import '@navikt/ds-css/darkside';
 import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
+
+const THEME_LOCALE_STORAGE_KEY = 'fp-frontend-theme';
 
 const EMPTY_ARRAY = new Array<FpError>();
 
@@ -56,6 +58,8 @@ const AppIndex = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
 
+  const { theme, setTheme } = useThemeFromLocalStorage();
+
   const initFetchQuery = useQuery(initFetchOptions());
   const navAnsatt = initFetchQuery.data?.innloggetBruker;
 
@@ -82,23 +86,27 @@ const AppIndex = () => {
   const shouldRenderHome = !crashMessage && !hasForbiddenOrUnauthorizedErrors;
 
   return (
-    <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
-      <AppConfigResolver>
-        <>
-          <Dekorator
-            hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
-            queryStrings={queryStrings}
-            setSiteHeight={setSiteHeight}
-            crashMessage={crashMessage}
-          />
-          <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
-            {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
-          </ErrorBoundary>
-          {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-          {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
-        </>
-      </AppConfigResolver>
-    </ErrorBoundary>
+    <Theme theme={theme}>
+      <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed}>
+        <AppConfigResolver>
+          <>
+            <Dekorator
+              hideErrorMessages={hasForbiddenOrUnauthorizedErrors}
+              queryStrings={queryStrings}
+              setSiteHeight={setSiteHeight}
+              crashMessage={crashMessage}
+              theme={theme}
+              setTheme={setTheme}
+            />
+            <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
+              {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+            </ErrorBoundary>
+            {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+            {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
+          </>
+        </AppConfigResolver>
+      </ErrorBoundary>
+    </Theme>
   );
 };
 
@@ -154,8 +162,7 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
     } else if (error.response.status === 504 || error.response.status === 404) {
       addErrorMessage({
         type: ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
-        //@ts-expect-error Fiks
-        location: error.response?.config?.url,
+        location: error.response.url,
       });
     } else {
       try {
@@ -168,4 +175,24 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
   } else {
     addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
   }
+};
+
+type Theme = NonNullable<ComponentProps<typeof Theme>['theme']>;
+
+const useThemeFromLocalStorage = () => {
+  const body = document.body;
+
+  const [theme, setTheme] = useState<Theme>(() => {
+    const currentTheme = (localStorage.getItem(THEME_LOCALE_STORAGE_KEY) as Theme) ?? 'light';
+    body.classList.add(currentTheme);
+    return currentTheme;
+  });
+
+  const updateTheme = (newTheme: Theme) => {
+    setTheme(newTheme);
+    body.classList.replace(newTheme === 'dark' ? 'light' : 'dark', newTheme);
+    localStorage.setItem(THEME_LOCALE_STORAGE_KEY, newTheme);
+  };
+
+  return { theme, setTheme: updateTheme };
 };

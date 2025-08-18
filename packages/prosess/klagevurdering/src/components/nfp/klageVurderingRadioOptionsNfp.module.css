@@ -8,7 +8,7 @@
   width: 300px;
 }
 .selectReadOnly {
-  color: #f00;
+  color: var(--ax-bg-warning-soft);
   width: 300px;
 }
 .confirmVilkarForm textarea {

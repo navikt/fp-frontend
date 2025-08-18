@@ -1,5 +1,9 @@
 .container {
-  background-color: var(--a-gray-50);
-  border-bottom: 1px solid var(--a-border-divider);
+  background-color: var(--ax-neutral-200);
+  border-bottom: 1px solid var(--ax-border-neutral-subtle);
   padding-right: 8px;
+}
+
+:global(.dark) .container {
+  border-bottom: 1px solid var(--ax-neutral-700);
 }

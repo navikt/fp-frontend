@@ -20,19 +20,19 @@ export const SaksbehandlerNokkeltallPanel = ({ valgtSakslisteId }: Props) => {
   const nyeOgFerdigstilteOppgaver = useQuery(hentNyeOgFerdigstilteOppgaverOptions(valgtSakslisteId)).data;
 
   return (
-    <VStack gap="4">
-      <HStack gap="2" align="center">
+    <VStack gap="space-16">
+      <HStack gap="space-8" align="center">
         <div className={styles.iconBackground}>
           <SectorChartIcon aria-hidden className={styles.sectorChatIcon} />
         </div>
-        <Heading size="xsmall">
+        <Heading size="xsmall" level="2">
           <FormattedMessage id="SaksbehandlerNokkeltallPanel.Statistikk" />
         </Heading>
       </HStack>
-      <Box background="surface-neutral-subtle" padding="4" borderRadius="large">
-        <VStack gap="4">
-          <VStack gap="1">
-            <Heading size="small">
+      <Box.New padding="4" borderRadius="large">
+        <VStack gap="space-16">
+          <VStack gap="space-4">
+            <Heading size="small" level="3">
               <FormattedMessage id="SaksbehandlerNokkeltallPanel.ForAlle" />
             </Heading>
             <Detail>
@@ -48,7 +48,7 @@ export const SaksbehandlerNokkeltallPanel = ({ valgtSakslisteId }: Props) => {
             nyeOgFerdigstilteOppgaver={nyeOgFerdigstilteOppgaver}
           />
         </VStack>
-      </Box>
+      </Box.New>
     </VStack>
   );
 };

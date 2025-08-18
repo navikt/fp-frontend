@@ -106,7 +106,7 @@ export const UttakFaktaTable = ({
       : undefined;
 
   return (
-    <VStack gap="6">
+    <VStack gap="space-24">
       <Table>
         <Table.Header>
           <Table.Row className={styles.headerRow}>
@@ -188,8 +188,8 @@ export const UttakFaktaTable = ({
             </div>
           )}
           {visNyPeriode && (
-            <VStack gap="4" className={styles.panel}>
-              <Heading size="small">
+            <VStack gap="space-16" className={styles.panel}>
+              <Heading size="small" level="3">
                 <FormattedMessage id="UttakFaktaForm.NyPeriode" />
               </Heading>
               <UttakFaktaDetailForm

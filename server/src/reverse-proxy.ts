@@ -82,9 +82,9 @@ const proxyOptions = (api: ProxyConfig["apis"][0]) =>
       const melding = `${statusCode} ${proxyRes.statusMessage}: ${userReq.method} - ${userReq.originalUrl} (${requestTime}ms)`;
       const callIdValue = proxyReq.getHeader("Nav-Callid");
       if (Number(statusCode) >= 500) {
-        logger.logger.warn(melding, { "callId": callIdValue });
+        logger.logger.warn(melding, { callId: callIdValue });
       } else {
-        logger.logger.info(melding, { "callId": callIdValue });
+        logger.logger.info(melding, { callId: callIdValue });
       }
       return headers;
     },

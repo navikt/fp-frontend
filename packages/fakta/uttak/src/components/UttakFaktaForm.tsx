@@ -28,10 +28,7 @@ import type {
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import {
-  type KontrollerFaktaPeriodeMedApMarkering,
-  PeriodeApType,
-} from '../typer/kontrollerFaktaPeriodeMedApMarkering';
+import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { UttakFaktaTable } from './UttakFaktaTable';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
@@ -71,7 +68,7 @@ const leggTilAksjonspunktMarkering = (
       return {
         ...periode,
         originalFom: periode.fom,
-        aksjonspunktType: PeriodeApType.MANGLENDE_ARBEIDSFORHOLD,
+        aksjonspunktType: 'MANGLENDE_ARBEIDSFORHOLD',
       };
     }
 
@@ -265,9 +262,9 @@ export const UttakFaktaForm = ({
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
   return (
-    <VStack gap="8">
-      <HStack gap="4">
-        <Heading size="small">
+    <VStack gap="space-32">
+      <HStack gap="space-16">
+        <Heading size="small" level="2">
           <FormattedMessage id="UttakFaktaForm.FaktaUttak" />
         </Heading>
         {kanOverstyre && !isReadOnly && automatiskeAksjonspunkter.length === 0 && (
@@ -296,7 +293,7 @@ export const UttakFaktaForm = ({
         settVisNyPeriode={setVisNyPeriode}
       />
       <RhfForm formMethods={formMethods} onSubmit={(values: { begrunnelse: string }) => bekreft(values.begrunnelse)}>
-        <VStack gap="4">
+        <VStack gap="space-16">
           <FaktaBegrunnelseTextField
             control={formMethods.control}
             isSubmittable

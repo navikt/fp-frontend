@@ -24,16 +24,16 @@ export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Pro
   return (
     <>
       {inntektsposter.length > 0 && (
-        <VStack gap="2">
+        <VStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="InntektsposterPanel.Inntekter" />
           </Label>
-          <VStack gap="1" width="150px">
+          <VStack gap="space-4" width="150px">
             {sorterteInntektsposter
               .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
               .map(inntekt => (
                 <HStack justify="space-between" key={inntekt.fom}>
-                  <HStack gap="1" key={inntekt.fom}>
+                  <HStack gap="space-4" key={inntekt.fom}>
                     <BodyShort size="small">
                       <FormattedMessage id={`InntektsposterPanel.${dayjs(inntekt.fom).month() + 1}`} />
                     </BodyShort>

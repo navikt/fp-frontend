@@ -1,25 +1,5 @@
-.searchInput {
-  width: 300px;
-}
-
-.searchButtonDiv {
-  margin-top: 82px;
-}
-
-.searchButton {
-  --ac-button-border-radius: 0 5px 5px 0;
-
-  height: 48px;
-  width: 48px;
-}
-
-.checkbox {
-  margin-top: 88px;
-  padding-bottom: 7px;
-}
-
 .advarselIcon {
-  color: var(--a-orange-500);
+  color: var(--ax-warning-600);
   height: 25px;
   width: 25px;
 }
