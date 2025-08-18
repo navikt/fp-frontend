@@ -27,14 +27,14 @@ import type { BekreftOmsorgVurderingAp } from './fakta/BekreftOmsorgVurderingAp'
 import type { BekreftOppholdsrettVurderingAp } from './fakta/BekreftOppholdsrettVurderingAp';
 import type { BekreftSvangerskapspengerAp } from './fakta/BekreftSvangerskapspengerAp';
 import type { BekreftUttaksperioderAp } from './fakta/BekreftUttaksperioderAp';
+import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
+import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
+import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
 import type { KontrollerBesteberegningAP } from './fakta/KontrollerBesteberegningAP';
 import type { MerkOpptjeningUtlandAp } from './fakta/MerkOpptjeningUtlandAp';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from './fakta/OverstyringAvklarStartdatoForPeriodenAp';
 import type { OverstyringDekningsgradAp } from './fakta/OverstyringDekningsgradAp';
 import type { OverstyringRettigheterAp } from './fakta/OverstyringRettigheterAp';
-import type { SjekkManglendeFødselAp } from './fakta/fødsel/SjekkManglendeFødselAp';
-import type { SjekkTerminbekreftelseAp } from './fakta/fødsel/SjekkTerminbekreftelseAp';
-import type { OverstyringFaktaFødselAp } from './fakta/fødsel/OverstyringFaktaFødselAp';
 import type { VurderArbeidsforholdInntektsmeldingAp } from './fakta/VurderArbeidsforholdInntektsmeldingAp';
 import type { VurderArbeidsforholdPermisjonAp } from './fakta/VurderArbeidsforholdPermisjonAp';
 import type { VurderDokumentasjonAp } from './fakta/VurderDokumentasjonAp';
