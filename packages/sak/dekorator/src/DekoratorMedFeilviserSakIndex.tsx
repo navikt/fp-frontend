@@ -100,30 +100,22 @@ export const DekoratorMedFeilviserSakIndex = ({
             </Theme>
           </Dropdown>
           <InternalHeader.User name={navAnsattNavn} />
-          {skalViseTemaKnapp() && (
-            <InternalHeader.Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-              {theme === 'dark' ? (
-                <SunIcon
-                  style={{ fontSize: '1.5rem' }}
-                  title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilLysTema' })}
-                />
-              ) : (
-                <MoonIcon
-                  style={{ fontSize: '1.5rem' }}
-                  title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilMorkTema' })}
-                />
-              )}
-            </InternalHeader.Button>
-          )}
+          <InternalHeader.Button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+            {theme === 'dark' ? (
+              <SunIcon
+                style={{ fontSize: '1.5rem' }}
+                title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilLysTema' })}
+              />
+            ) : (
+              <MoonIcon
+                style={{ fontSize: '1.5rem' }}
+                title={intl.formatMessage({ id: 'DekoratorMedFeilviserSakIndex.EndreTilMorkTema' })}
+              />
+            )}
+          </InternalHeader.Button>
         </InternalHeader>
         <FeilmeldingPanel fjernFeilmeldinger={fjernFeilmeldinger} feilmeldinger={feilmeldinger} />
       </RawIntlProvider>
     </div>
   );
-};
-
-const skalViseTemaKnapp = () => {
-  const erDev = window.location.href.includes('fpsak.intern.dev.nav.no');
-  const erLokalt = window.location.href.includes('localhost');
-  return erDev || erLokalt;
 };
