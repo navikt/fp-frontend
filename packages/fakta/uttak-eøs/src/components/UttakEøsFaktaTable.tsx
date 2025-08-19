@@ -34,7 +34,7 @@ export const UttakEøsFaktaTable = ({
   setVisLeggTilPeriodeForm,
 }: Props) => {
   return (
-    <>
+    <VStack gap="space-16">
       <Table>
         <Table.Header>
           <Table.Row className={styles.headerRow}>
@@ -64,7 +64,7 @@ export const UttakEøsFaktaTable = ({
         </Table.Body>
       </Table>
       {annenForelderUttakEøsPerioder.length === 0 && (
-        <Alert variant="info" size="small" className={styles.ingenPerioderInfo}>
+        <Alert variant="info" size="small">
           <FormattedMessage id="UttakEøsFaktaForm.IngenPerioderRegistrert" />
         </Alert>
       )}
@@ -102,7 +102,7 @@ export const UttakEøsFaktaTable = ({
           )}
         </>
       )}
-    </>
+    </VStack>
   );
 };
 

@@ -99,7 +99,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
           <ErrorSummary.Item>{feilmelding}</ErrorSummary.Item>
         </ErrorSummary>
       )}
-      <VStack gap="10">
+      <VStack gap="space-32">
         <UttakEøsFaktaTable
           annenForelderUttakEøsPerioder={perioder}
           setPerioder={setPerioder}

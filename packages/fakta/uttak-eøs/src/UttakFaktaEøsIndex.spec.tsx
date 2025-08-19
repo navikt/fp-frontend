@@ -49,7 +49,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getAllByRole('textbox')[3], '0');
     await userEvent.click(screen.getByText('Legg til'));
 
-    expect(await screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -73,7 +73,7 @@ describe('UttakFaktaEøsIndex', () => {
     const utils = render(<ÅpentAksjonspunktMedPerioder submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-    expect(await screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getAllByTitle('Vis mer')[0]);
     await userEvent.click(screen.getByText('Slett periode'));
@@ -130,7 +130,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getAllByRole('textbox')[3], '2.4');
     await userEvent.click(screen.getByText('Legg til'));
 
-    expect(await screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
+    expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
