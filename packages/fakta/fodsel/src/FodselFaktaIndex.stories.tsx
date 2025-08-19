@@ -2,23 +2,36 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
-const apTerminbekreftelse: Aksjonspunkt = {
-  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.VURDER_INNSYN,
   status: AksjonspunktStatus.OPPRETTET,
   begrunnelse: null,
   kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
+
+const apTerminbekreftelse: Aksjonspunkt = {
+  ...aksjonspunktDefault,
+  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
 };
 const apSjekkManglendeFødsel: Aksjonspunkt = {
+  ...aksjonspunktDefault,
   definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
-  status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
-  kanLoses: true,
 };
 
 const merknaderFraBeslutter = {

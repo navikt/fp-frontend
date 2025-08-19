@@ -15,6 +15,7 @@ import {
   StonadskontoType,
   UttakArbeidType,
   UttakUtsettelseType,
+  VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
@@ -35,9 +36,17 @@ const åpentAksjonspunkt: Aksjonspunkt[] = [
     definisjon: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
     status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: null,
-    toTrinnsBehandling: true,
-    aksjonspunktType: AksjonspunktType.MANUELL,
     kanLoses: true,
+    toTrinnsBehandling: true,
+    toTrinnsBehandlingGodkjent: null,
+    vurderPaNyttArsaker: null,
+    besluttersBegrunnelse: null,
+    aksjonspunktType: AksjonspunktType.MANUELL,
+    vilkarType: VilkarType.OMSORGSVILKARET,
+    erAktivt: true,
+    fristTid: null,
+    endretTidspunkt: null,
+    endretAv: null,
   },
 ];
 
