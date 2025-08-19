@@ -40,7 +40,7 @@
   ],
   "devDependencies": {
     "@hey-api/openapi-ts": "0.80.13",
-    "@navikt/aksel-stylelint": "7.28.0",
+    "@navikt/aksel-stylelint": "7.28.1",
     "@sentry/cli": "2.52.0",
     "@storybook/addon-a11y": "9.1.2",
     "@storybook/addon-links": "9.1.2",
@@ -54,7 +54,7 @@
     "husky": "9.1.7",
     "jsdom": "26.1.0",
     "knip": "^5.62.0",
-    "lerna": "8.2.4",
+    "lerna": "8.2.3",
     "lint-staged": "16.1.5",
     "prettier": "3.6.2",
     "shelljs": "0.10.0",
