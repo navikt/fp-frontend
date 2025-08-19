@@ -72,6 +72,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
   }, [perioder]);
 
   const begrunnelse = formMethods.watch('begrunnelse');
+
   useEffect(() => {
     setMellomlagretFormData({
       annenForelderUttakEøsPerioder: perioder,
