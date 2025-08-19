@@ -1,15 +1,12 @@
 {
-  "RegistrereVergeInfoPanel.CheckInformation": "Fyll ut og kontroller vergeopplysninger",
+  "RegistrereVergeInfoPanel.AksjonspunktTekst": "Fyll ut og kontroller vergeopplysninger",
 
-  "Verge.KontaktPerson": "Kontaktperson",
   "Verge.Navn": "Navn",
-  "Verge.Mandat": "Mandat",
   "Verge.FodselsNummer": "Fødselsnummer",
-  "Verge.PeriodeFOM": "Periode f.o.m.",
-  "Verge.PeriodeTOM": "Periode t.o.m.",
+  "Verge.PeriodeFOM": "Fra og med",
+  "Verge.PeriodeTOM": "Til og med",
   "Verge.TypeVerge": "Type verge",
   "Verge.VergeFullmektig": "Verge/fullmektig",
   "Verge.Soker": "Søker",
-  "Verge.BrukerErUnderTvungenForvaltning": "Søker er under tvungen forvaltning",
   "Verge.Organisasjonsnummer": "Organisasjonsnummer"
 }

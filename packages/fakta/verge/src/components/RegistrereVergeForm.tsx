@@ -9,7 +9,7 @@ import {
   hasValidOrgNumber,
   required,
 } from '@navikt/ft-form-validators';
-import { createIntl } from '@navikt/ft-utils';
+import { createIntl, TIDENES_ENDE } from '@navikt/ft-utils';
 
 import type { FaktaBegrunnelseFormValues } from '@navikt/fp-fakta-felles';
 import type {
@@ -63,7 +63,7 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
       />
       {valgtVergeType && (
         <>
-          <HStack gap="space-16">
+          <HStack gap="space-20">
             <RhfTextField
               name="navn"
               control={control}
@@ -89,9 +89,10 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
               />
             )}
           </HStack>
-          <HStack gap="space-16">
+          <HStack gap="space-20">
             <RhfDatepicker
               name="gyldigFom"
+              size="medium"
               control={control}
               label={intl.formatMessage({ id: 'Verge.PeriodeFOM' })}
               validate={[required, hasValidDate]}
@@ -99,6 +100,7 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
             />
             <RhfDatepicker
               name="gyldigTom"
+              size="medium"
               control={control}
               label={intl.formatMessage({ id: 'Verge.PeriodeTOM' })}
               validate={[hasValidDate]}
@@ -113,15 +115,21 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
 
 RegistrereVergeForm.buildInitialValues = (verge: Verge): VergeFormValues => ({
   ...verge,
-  gyldigTom: verge?.gyldigTom ?? undefined,
+  gyldigTom: !!verge.gyldigTom && verge.gyldigTom !== TIDENES_ENDE ? verge.gyldigTom : '',
 });
 
-RegistrereVergeForm.transformValues = (values: VergeFormValues): OpprettVergeParams => ({
-  vergeType: values.vergeType,
-  navn: values.navn,
-  gyldigFom: values.gyldigFom,
-  gyldigTom: values.gyldigTom,
-  ...(values.vergeType === 'ADVOKAT'
+RegistrereVergeForm.transformValues = ({
+  vergeType,
+  navn,
+  gyldigFom,
+  gyldigTom,
+  ...values
+}: VergeFormValues): OpprettVergeParams => ({
+  vergeType,
+  navn,
+  gyldigFom,
+  gyldigTom: gyldigTom != null && gyldigTom !== '' ? gyldigTom : undefined,
+  ...(vergeType === 'ADVOKAT'
     ? { organisasjonsnummer: notEmpty(values.organisasjonsnummer) }
     : { fnr: notEmpty(values.fnr) }),
 });
