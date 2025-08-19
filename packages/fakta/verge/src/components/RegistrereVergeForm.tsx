@@ -92,7 +92,6 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
           <HStack gap="space-20">
             <RhfDatepicker
               name="gyldigFom"
-              size="medium"
               control={control}
               label={intl.formatMessage({ id: 'Verge.PeriodeFOM' })}
               validate={[required, hasValidDate]}
@@ -100,7 +99,6 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
             />
             <RhfDatepicker
               name="gyldigTom"
-              size="medium"
               control={control}
               label={intl.formatMessage({ id: 'Verge.PeriodeTOM' })}
               validate={[hasValidDate]}
