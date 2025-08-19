@@ -1,20 +1,20 @@
-import {useEffect, useState} from 'react';
-import {useForm} from 'react-hook-form';
-import {FormattedMessage, useIntl} from 'react-intl';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { FormattedMessage, useIntl } from 'react-intl';
 
-import {ErrorSummary, Heading, HStack, VStack} from '@navikt/ds-react';
-import {RhfForm} from '@navikt/ft-form-hooks';
-import {dateRangesNotOverlapping} from '@navikt/ft-form-validators';
-import {AksjonspunktHelpTextHTML, OverstyringKnapp} from '@navikt/ft-ui-komponenter';
+import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
+import { RhfForm } from '@navikt/ft-form-hooks';
+import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
+import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import {type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton} from '@navikt/fp-fakta-felles';
-import {AksjonspunktKode} from '@navikt/fp-kodeverk';
-import type {AnnenforelderUttakEøsPeriode} from '@navikt/fp-types';
-import type {BekreftAnnenpartsUttakEøsAp} from '@navikt/fp-types-avklar-aksjonspunkter';
-import {notEmpty, useMellomlagretFormData, usePanelDataContext} from '@navikt/fp-utils';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
+import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-import {UttakEøsFaktaTable} from './UttakEøsFaktaTable';
+import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
 interface Props {
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
