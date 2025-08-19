@@ -15,7 +15,7 @@ export const FaktaKort = ({ label, children, merknaderFraBeslutter }: Props) => 
   return (
     <Box.New
       borderWidth={error ? '2' : undefined}
-      borderColor={error ? 'neutral' : undefined}
+      borderColor={error ? 'danger-strong' : undefined}
       borderRadius="medium"
       background="neutral-soft"
       aria-label={label}
