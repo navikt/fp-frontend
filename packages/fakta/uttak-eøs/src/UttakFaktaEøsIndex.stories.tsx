@@ -2,11 +2,35 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  RelasjonsRolleType,
+  UttakPeriodeType,
+  VilkarType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 
 import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
+
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-uttak-eøs',
@@ -20,10 +44,9 @@ const meta = {
     submittable: true,
     aksjonspunkterForPanel: [
       {
-        begrunnelse: null,
-        status: AksjonspunktStatus.OPPRETTET,
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-      } as Aksjonspunkt,
+      },
     ],
   },
   render: args => <UttakFaktaEøsIndex {...args} />,
@@ -67,10 +90,11 @@ export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         begrunnelse: 'Dette er en begrunnelse',
         status: AksjonspunktStatus.UTFORT,
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-      } as Aksjonspunkt,
+      },
     ],
     annenForelderUttakEøs: [],
   },
@@ -81,10 +105,11 @@ export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSom
     kanOverstyre: true,
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         begrunnelse: null,
         status: AksjonspunktStatus.UTFORT,
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-      } as Aksjonspunkt,
+      },
     ],
     annenForelderUttakEøs: [
       {

@@ -408,6 +408,7 @@ export type AksjonspunktDto = {
     | '5074'
     | '5101'
     | '5102'
+    | '5103'
     | '6002'
     | '6003'
     | '6004'
@@ -424,6 +425,7 @@ export type AksjonspunktDto = {
     | '6016'
     | '6018'
     | '6017'
+    | '6103'
     | '7001'
     | '7002'
     | '7003'
@@ -702,9 +704,9 @@ export type ArbeidsforholdDto = {
 export type Arbeidsgiver = {
   erVirksomhet?: boolean;
   identifikator?: string;
-  aktørId?: string;
   indexKey?: string;
   orgnr?: string;
+  aktørId?: string;
 };
 
 export type AvklarAleneomsorgVurderingDto = {
@@ -768,7 +770,7 @@ export type BekreftetAksjonspunktDto = (
       '@type': '5035';
     } & KlageVurderingResultatAksjonspunktDto)
   | ({
-      '@type': 'VurderForutgåendeMedlemskapDto';
+      '@type': '5102';
     } & VurderForutgåendeMedlemskapDto)
   | ({
       '@type': '5101';
@@ -786,7 +788,7 @@ export type BekreftetAksjonspunktDto = (
       '@type': '5091';
     } & BekreftSvangerskapspengerDto)
   | ({
-      '@type': 'BekreftSvangerskapspengervilkårDto';
+      '@type': '5092';
     } & BekreftSvangerskapspengervilkårDto)
   | ({
       '@type': '5017';
@@ -795,10 +797,10 @@ export type BekreftetAksjonspunktDto = (
       '@type': '5007';
     } & SoknadsfristAksjonspunktDto)
   | ({
-      '@type': 'VurderSøknadsfristDto';
+      '@type': '5043';
     } & VurderSøknadsfristDto)
   | ({
-      '@type': 'KontrollerStorEtterbetalingSøkerDto';
+      '@type': '5029';
     } & KontrollerStorEtterbetalingSøkerDto)
   | ({
       '@type': '5084';
@@ -813,13 +815,13 @@ export type BekreftetAksjonspunktDto = (
       '@type': '5086';
     } & AvklarAnnenforelderHarRettDto)
   | ({
-      '@type': 'FastsetteUttakKontrollerAnnenpartEØSDto';
+      '@type': '5069';
     } & FastsetteUttakKontrollerAnnenpartEøsDto)
   | ({
-      '@type': 'FastsetteUttakKontrollerOpplysningerOmDødDto';
+      '@type': '5076';
     } & FastsetteUttakKontrollerOpplysningerOmDødDto)
   | ({
-      '@type': 'FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto';
+      '@type': '5077';
     } & FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto)
   | ({
       '@type': '5073';
@@ -830,6 +832,9 @@ export type BekreftetAksjonspunktDto = (
   | ({
       '@type': '5072';
     } & FastsetteUttakStortingsrepresentantDto)
+  | ({
+      '@type': '5103';
+    } & EøsUttakDto)
   | ({
       '@type': '5066';
     } & GraderingAktivitetUtenBgDto)
@@ -846,22 +851,22 @@ export type BekreftetAksjonspunktDto = (
       '@type': '5028';
     } & ForeslaVedtakManueltAksjonspuntDto)
   | ({
-      '@type': 'ForeslåVedtakAksjonspunktDto';
+      '@type': '5015';
     } & ForeslåVedtakAksjonspunktDto)
   | ({
-      '@type': 'VurdereAnnenYteleseFørVedtakDto';
+      '@type': '5033';
     } & VurdereAnnenYteleseFørVedtakDto)
   | ({
-      '@type': 'VurdereDokumentFørVedtakDto';
+      '@type': '5034';
     } & VurdereDokumentFørVedtakDto)
   | ({
-      '@type': 'VurdereInntektsmeldingFørVedtakDto';
+      '@type': '5003';
     } & VurdereInntektsmeldingFørVedtakDto)
   | ({
       '@type': '5012';
     } & ManuellRegistreringEngangsstonadDto)
   | ({
-      '@type': 'ManuellRegistreringEndringsøknadDto';
+      '@type': '5057';
     } & ManuellRegistreringEndringsøknadDto)
   | ({
       '@type': '5040';
@@ -905,6 +910,18 @@ export type DokumentasjonVurderingBehovDto = {
 export type EgenVirksomhetDto = {
   harArbeidetIEgenVirksomhet?: boolean;
   virksomheter?: Array<VirksomhetDto>;
+};
+
+export type EøsUttakDto = {
+  perioder: Array<EøsUttakPeriodeDto>;
+  begrunnelse?: string;
+};
+
+export type EøsUttakPeriodeDto = {
+  fom: string;
+  tom: string;
+  trekkdager: number;
+  trekkonto: 'FELLESPERIODE' | 'MØDREKVOTE' | 'FEDREKVOTE' | 'FORELDREPENGER' | 'FORELDREPENGER_FØR_FØDSEL' | '-';
 };
 
 export type FaktaUttakPeriodeDto = {
@@ -1359,7 +1376,7 @@ export type SvpAvklartOppholdPeriodeDto = {
   fom: string;
   tom: string;
   oppholdÅrsak: 'SYKEPENGER' | 'FERIE';
-  oppholdKilde?: 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER';
+  oppholdKilde?: 'SØKNAD' | 'INNTEKTSMELDING' | 'REGISTRERT_AV_SAKSBEHANDLER' | 'TIDLIGERE_VEDTAK';
   forVisning?: boolean;
 };
 
@@ -1371,7 +1388,7 @@ export type SvpTilretteleggingArbeidsforholdDto = (
       '@type': 'PA';
     } & SvpTilretteleggingPrivatArbeidsgiverDto)
   | ({
-      '@type': 'SvpTilretteleggingSelvstendigNæringsdrivendeDto';
+      '@type': 'SN';
     } & SvpTilretteleggingSelvstendigNæringsdrivendeDto)
   | ({
       '@type': 'VI';
@@ -1601,6 +1618,7 @@ export type UttakResultatPeriodeLagreDto = {
     | '4105'
     | '4106'
     | '4107'
+    | '4108'
     | '4110'
     | '4111'
     | '4112'
@@ -1914,34 +1932,37 @@ export type OverstyringAksjonspunktDto = (
       '@type': '6008';
     } & OverstyringUttakDto)
   | ({
+      '@type': '6103';
+    } & OverstyringEøsUttakDto)
+  | ({
       '@type': '6065';
     } & OverstyringFaktaUttakDto)
   | ({
-      '@type': 'OverstyringForutgåendeMedlemskapsvilkårDto';
+      '@type': '6017';
     } & OverstyringForutgåendeMedlemskapsvilkårDto)
   | ({
-      '@type': 'OverstyringFødselsvilkåretDto';
+      '@type': '6003';
     } & OverstyringFødselsvilkåretDto)
   | ({
-      '@type': 'OverstyringFødselvilkåretFarMedmorDto';
+      '@type': '6009';
     } & OverstyringFødselvilkåretFarMedmorDto)
   | ({
-      '@type': 'OverstyringMedlemskapsvilkåretDto';
+      '@type': '6005';
     } & OverstyringMedlemskapsvilkåretDto)
   | ({
-      '@type': 'OverstyringOpptjeningsvilkåretDto';
+      '@type': '6011';
     } & OverstyringOpptjeningsvilkåretDto)
   | ({
       '@type': '6002';
     } & OverstyringSokersOpplysingspliktDto)
   | ({
-      '@type': 'OverstyringSøknadsfristvilkåretDto';
+      '@type': '6006';
     } & OverstyringSøknadsfristvilkåretDto)
   | ({
-      '@type': 'OverstyringAdopsjonsvilkåretDto';
+      '@type': '6010';
     } & OverstyringAdopsjonsvilkåretDto)
   | ({
-      '@type': 'OverstyringAdopsjonsvilkåretDto';
+      '@type': '6010';
     } & OverstyringAdopsjonsvilkåretDto)
   | ({
       '@type': '6045';
@@ -1954,6 +1975,11 @@ export type OverstyringAvklarStartdatoForPeriodenDto = {
   begrunnelse?: string;
   startdatoFraSoknad?: string;
   opprinneligDato?: string;
+};
+
+export type OverstyringEøsUttakDto = {
+  perioder: Array<EøsUttakPeriodeDto>;
+  begrunnelse?: string;
 };
 
 export type OverstyringFaktaUttakDto = {
@@ -4705,6 +4731,10 @@ export type AktivitetSaldoDto = {
   saldo?: number;
 };
 
+export type KontoReduksjoner = {
+  annenForelderEøsUttak?: number;
+};
+
 export type KontoUtvidelser = {
   prematurdager?: number;
   flerbarnsdager?: number;
@@ -4733,6 +4763,7 @@ export type StønadskontoDto = {
   aktivitetSaldoDtoList?: Array<AktivitetSaldoDto>;
   gyldigForbruk?: boolean;
   kontoUtvidelser?: KontoUtvidelser;
+  kontoReduksjoner?: KontoReduksjoner;
 };
 
 export type BehandlingMedUttaksperioderDto = {
@@ -4911,6 +4942,7 @@ export type UttakResultatPeriodeDto = {
     | '4105'
     | '4106'
     | '4107'
+    | '4108'
     | '4110'
     | '4111'
     | '4112'
@@ -5545,7 +5577,8 @@ export type HistorikkinnslagDto = {
     | 'VEDTAK'
     | 'VURDER_FARESIGNALER'
     | 'FAKTA_OM_UTTAK_DOKUMENTASJON'
-    | 'FAKTA_UTTAK';
+    | 'FAKTA_UTTAK'
+    | 'FAKTA_UTTAK_EØS';
   opprettetTidspunkt?: string;
   dokumenter?: Array<HistorikkInnslagDokumentLinkDto>;
   tittel?: string;
@@ -6291,6 +6324,13 @@ export type EsSak = {
   vedtak?: Array<Vedtak>;
 };
 
+export type EøsUttaksperiode = {
+  fom?: string;
+  tom?: string;
+  trekkdager?: number;
+  konto?: 'FORELDREPENGER' | 'MØDREKVOTE' | 'FEDREKVOTE' | 'FELLESPERIODE' | 'FORELDREPENGER_FØR_FØDSEL';
+};
+
 export type FpSak = {
   saksnummer?: string;
   aktørId?: string;
@@ -6496,13 +6536,13 @@ export type HendelseDto = (
       '@type': 'ADRESSEBESKYTTELSE';
     } & AdressebeskyttelseHendelseDto)
   | ({
-      '@type': 'DødHendelseDto';
+      '@type': 'DØD';
     } & DødHendelseDto)
   | ({
-      '@type': 'DødfødselHendelseDto';
+      '@type': 'DØDFØDSEL';
     } & DødfødselHendelseDto)
   | ({
-      '@type': 'FødselHendelseDto';
+      '@type': 'FØDSEL';
     } & FødselHendelseDto)
   | ({
       '@type': 'UTFLYTTING';
@@ -7878,6 +7918,28 @@ export type GetStonadskontoerGittUttaksperioderResponses = {
 export type GetStonadskontoerGittUttaksperioderResponse =
   GetStonadskontoerGittUttaksperioderResponses[keyof GetStonadskontoerGittUttaksperioderResponses];
 
+export type HentAnnenpartPerioderIEøsData = {
+  body?: never;
+  path?: never;
+  query: {
+    /**
+     * behandlingUUID
+     */
+    uuid: UuidDto;
+  };
+  url: '/api/behandling/uttak/uttak-eos-annenpart';
+};
+
+export type HentAnnenpartPerioderIEøsResponses = {
+  /**
+   * default response
+   */
+  default: Array<EøsUttakPeriodeDto>;
+};
+
+export type HentAnnenpartPerioderIEøsResponse =
+  HentAnnenpartPerioderIEøsResponses[keyof HentAnnenpartPerioderIEøsResponses];
+
 export type HentArbeidsforholdData = {
   body?: never;
   path?: never;
@@ -9142,22 +9204,6 @@ export type HentInfOmBehandlingerMedDiffResponses = {
   default: unknown;
 };
 
-export type HentMigreringInputData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningBeregning/hentMigreringInput';
-};
-
-export type HentMigreringInputResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
 export type HentRefusjonskravperioderInputData = {
   body?: never;
   path?: never;
@@ -9203,22 +9249,6 @@ export type LagreNySatsResponses = {
 };
 
 export type LagreNySatsResponse = LagreNySatsResponses[keyof LagreNySatsResponses];
-
-export type MigrerSakData = {
-  body?: never;
-  path?: never;
-  query: {
-    saksnummer: SaksnummerDto;
-  };
-  url: '/api/forvaltningBeregning/migrerSak';
-};
-
-export type MigrerSakResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
 
 export type OpphørRefusjonInntektsmeldingData = {
   body: EndreInntektsmeldingDto;
@@ -10160,6 +10190,33 @@ export type SetAksjonspunktAvbruttErrors = {
 };
 
 export type SetAksjonspunktAvbruttResponses = {
+  /**
+   * Aksjonspunkt avbrutt.
+   */
+  200: unknown;
+};
+
+export type SetBehandlingKøetData = {
+  body?: never;
+  path?: never;
+  query: {
+    behandlingUuid: BehandlingIdDto;
+  };
+  url: '/api/forvaltningTeknisk/sett-behandling-koet';
+};
+
+export type SetBehandlingKøetErrors = {
+  /**
+   * Fant ikke aktuelt aksjonspunkt.
+   */
+  400: unknown;
+  /**
+   * Feilet pga ukjent feil.
+   */
+  500: unknown;
+};
+
+export type SetBehandlingKøetResponses = {
   /**
    * Aksjonspunkt avbrutt.
    */
