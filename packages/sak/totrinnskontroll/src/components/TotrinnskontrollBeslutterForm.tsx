@@ -151,7 +151,7 @@ export const TotrinnskontrollBeslutterForm = ({
           faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
           lagLenke={lagLenke}
         />
-        <HStack gap="space-16">
+        <HStack gap="space-16" style={{ marginBottom: '50px' }}>
           <Button
             variant="primary"
             size="small"
