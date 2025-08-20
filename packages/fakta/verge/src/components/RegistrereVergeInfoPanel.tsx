@@ -58,7 +58,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
   const vergetyper = alleKodeverk['VergeType'].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   return (
-    <>
+    <VStack gap="space-20">
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.AksjonspunktTekst' })}
@@ -98,6 +98,6 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
           )}
         </VStack>
       </RhfForm>
-    </>
+    </VStack>
   );
 };
