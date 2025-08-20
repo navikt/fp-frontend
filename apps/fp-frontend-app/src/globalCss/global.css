@@ -15,5 +15,5 @@ body {
 }
 
 :root {
-  --header-height: 80px; /* Set dynamically with JS if it changes */
+  --header-height: 80px; /* Set dynamically with JS when it changes */
 }
