@@ -19,17 +19,7 @@ describe('UttakFaktaEøsIndex', () => {
     const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-
-    expect(screen.queryByText('Periode')).not.toBeInTheDocument();
-
-    expect(screen.getByText('Har annen forelder uttak i EØS?')).toBeInTheDocument();
-    expect(screen.getByLabelText('Ja')).not.toBeChecked();
-    expect(screen.getByLabelText('Nei')).not.toBeChecked();
-    expect(screen.queryByText('Periode')).not.toBeInTheDocument();
-
-    await screen.getByLabelText('Nei').click();
-    expect(screen.queryByText('Periode')).not.toBeInTheDocument();
-
+    expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -45,11 +35,7 @@ describe('UttakFaktaEøsIndex', () => {
     const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-
-    expect(screen.queryByText('Periode')).not.toBeInTheDocument();
-
-    expect(screen.getByText('Har annen forelder uttak i EØS?')).toBeInTheDocument();
-    await screen.getByLabelText('Ja').click();
+    expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
 
     expect(screen.getByText('Periode')).toBeInTheDocument();
 
@@ -62,6 +48,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getAllByRole('textbox')[2], '8');
     await userEvent.type(screen.getAllByRole('textbox')[3], '0');
     await userEvent.click(screen.getByText('Legg til'));
+
+    expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -85,10 +73,7 @@ describe('UttakFaktaEøsIndex', () => {
     const utils = render(<ÅpentAksjonspunktMedPerioder submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-
-    expect(screen.getByText('Har annen forelder uttak i EØS?')).toBeInTheDocument();
-    expect(screen.getByLabelText('Ja')).toHaveProperty('checked', true);
-    expect(screen.getByText('Periode')).toBeInTheDocument();
+    expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
     await userEvent.click(screen.getAllByTitle('Vis mer')[0]);
     await userEvent.click(screen.getByText('Slett periode'));
@@ -123,13 +108,7 @@ describe('UttakFaktaEøsIndex', () => {
     const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
-
-    expect(screen.queryByText('Periode')).not.toBeInTheDocument();
-
-    expect(screen.getByText('Har annen forelder uttak i EØS?')).toBeInTheDocument();
-    const JaKnapp = screen.getByLabelText('Ja');
-    JaKnapp.click();
-    expect(JaKnapp).toHaveProperty('checked', true);
+    expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
 
     expect(screen.getByText('Periode')).toBeInTheDocument();
 
@@ -150,6 +129,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getAllByRole('textbox')[2], '1');
     await userEvent.type(screen.getAllByRole('textbox')[3], '2.4');
     await userEvent.click(screen.getByText('Legg til'));
+
+    expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();

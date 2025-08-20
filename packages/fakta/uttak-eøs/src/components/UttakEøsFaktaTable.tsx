@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
-import { Button, Heading, Table, VStack } from '@navikt/ds-react';
+import { Alert, Button, Heading, Table, VStack } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
@@ -34,7 +34,7 @@ export const UttakEøsFaktaTable = ({
   setVisLeggTilPeriodeForm,
 }: Props) => {
   return (
-    <>
+    <VStack gap="space-16">
       <Table>
         <Table.Header>
           <Table.Row className={styles.headerRow}>
@@ -63,6 +63,11 @@ export const UttakEøsFaktaTable = ({
           })}
         </Table.Body>
       </Table>
+      {annenForelderUttakEøsPerioder.length === 0 && (
+        <Alert variant="info" size="small">
+          <FormattedMessage id="UttakEøsFaktaForm.IngenPerioderRegistrert" />
+        </Alert>
+      )}
       {erRedigerbart && (
         <>
           {visLeggTilPeriodeForm && (
@@ -97,7 +102,7 @@ export const UttakEøsFaktaTable = ({
           )}
         </>
       )}
-    </>
+    </VStack>
   );
 };
 

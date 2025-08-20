@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { ErrorSummary, Heading, HStack, Radio, RadioGroup, VStack } from '@navikt/ds-react';
+import { ErrorSummary, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
@@ -30,7 +30,6 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
   annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
-    harPeriodeIEøs: boolean | undefined;
     annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];
     begrunnelse: string | undefined;
   }>();
@@ -39,10 +38,6 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
     mellomlagretFormData?.annenForelderUttakEøsPerioder ?? annenForelderUttakEøs,
   );
   const [erOverstyrt, setErOverstyrt] = useState(false);
-  const [harPeriodeIEøs, setHarPeriodeIEøs] = useState(
-    mellomlagretFormData?.harPeriodeIEøs ??
-      (harÅpneAksjonspunkter && perioder.length === 0 ? undefined : perioder.length > 0),
-  );
   const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);
   const [feilmelding, setFeilmelding] = useState<string | undefined>();
 
@@ -59,26 +54,14 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
   const bekreft = (begrunnelse: string) => {
-    if (harPeriodeIEøs && perioder.length === 0) {
-      setFeilmelding(intl.formatMessage({ id: 'UttakEøsFaktaForm.FeilmeldingIngenPerioder' }));
-      return;
-    } else {
-      setFeilmelding(undefined);
-    }
-
     return submitCallback({
       kode: erOverstyrt ? AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       begrunnelse,
-      perioder: harPeriodeIEøs ? perioder : [],
+      perioder: perioder,
     });
   };
 
   useEffect(() => {
-    if (!harPeriodeIEøs) {
-      setFeilmelding(undefined);
-      return;
-    }
-
     const periodeMap = perioder.map(({ fom, tom }) => [fom, tom]);
     const erOverlappendePerioder = periodeMap.length > 0 ? !!dateRangesNotOverlapping(periodeMap) : undefined;
     if (erOverlappendePerioder) {
@@ -86,16 +69,16 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
     } else {
       setFeilmelding(undefined);
     }
-  }, [perioder, harPeriodeIEøs]);
+  }, [perioder]);
 
   const begrunnelse = formMethods.watch('begrunnelse');
+
   useEffect(() => {
     setMellomlagretFormData({
-      harPeriodeIEøs: harPeriodeIEøs,
       annenForelderUttakEøsPerioder: perioder,
       begrunnelse: begrunnelse,
     });
-  }, [harPeriodeIEøs, perioder, begrunnelse]);
+  }, [perioder, begrunnelse]);
 
   return (
     <VStack gap="8">
@@ -117,33 +100,15 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
           <ErrorSummary.Item>{feilmelding}</ErrorSummary.Item>
         </ErrorSummary>
       )}
-      <VStack gap="10">
-        <RadioGroup
-          legend={<FormattedMessage id="UttakEøsFaktaForm.harPeriodeIEøs" />}
-          onChange={setHarPeriodeIEøs}
-          defaultValue={harPeriodeIEøs}
-          readOnly={!erRedigerbart}
-          size="small"
-        >
-          <HStack gap="4">
-            <Radio value={true}>
-              <FormattedMessage id="UttakEøsFaktaForm.Ja" />
-            </Radio>
-            <Radio value={false}>
-              <FormattedMessage id="UttakEøsFaktaForm.Nei" />
-            </Radio>
-          </HStack>
-        </RadioGroup>
-        {harPeriodeIEøs && (
-          <UttakEøsFaktaTable
-            annenForelderUttakEøsPerioder={perioder}
-            setPerioder={setPerioder}
-            isReadOnly={!erRedigerbart}
-            erRedigerbart={erRedigerbart}
-            visLeggTilPeriodeForm={visLeggTilPeriodeForm}
-            setVisLeggTilPeriodeForm={setVisLeggTilPeriodeForm}
-          />
-        )}
+      <VStack gap="space-32">
+        <UttakEøsFaktaTable
+          annenForelderUttakEøsPerioder={perioder}
+          setPerioder={setPerioder}
+          isReadOnly={!erRedigerbart}
+          erRedigerbart={erRedigerbart}
+          visLeggTilPeriodeForm={visLeggTilPeriodeForm}
+          setVisLeggTilPeriodeForm={setVisLeggTilPeriodeForm}
+        />
         <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
           <VStack gap="4">
             <FaktaBegrunnelseTextField
@@ -154,7 +119,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
             />
             {erRedigerbart && (
               <FaktaSubmitButton
-                isSubmittable={submittable && !feilmelding && harPeriodeIEøs !== undefined}
+                isSubmittable={submittable && !feilmelding}
                 isReadOnly={isReadOnly}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}

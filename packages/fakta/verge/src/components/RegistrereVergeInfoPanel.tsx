@@ -3,12 +3,13 @@ import { useIntl } from 'react-intl';
 
 import { VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
-import { AksjonspunktHelpTextHTML, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from './RegistrereVergeForm';
@@ -36,9 +37,7 @@ interface Props {
 }
 
 /**
- * RegistrereVergeInfoPanel
- *
- * Presentasjonskomponent. Har ansvar for å sette opp formen for att registrere verge.
+ * TODO: fjern aksjonspunktet AVKLAR_VERGE når det ikke lenger er i bruk
  */
 export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: Props) => {
   const intl = useIntl();
@@ -59,10 +58,10 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
   const vergetyper = alleKodeverk['VergeType'].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 
   return (
-    <>
+    <VStack gap="space-20">
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
-          {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.CheckInformation' })}
+          {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.AksjonspunktTekst' })}
         </AksjonspunktHelpTextHTML>
       )}
       <RhfForm
@@ -71,13 +70,16 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
         setDataOnUnmount={setMellomlagretFormData}
       >
         <VStack gap="space-24">
-          <FaktaGruppe merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}>
+          <FaktaKort
+            label={intl.formatMessage({ id: 'Verge.VergeFullmektig' })}
+            merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}
+          >
             <RegistrereVergeForm
               readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}
               vergetyper={vergetyper}
               valgtVergeType={valgtVergeType}
             />
-          </FaktaGruppe>
+          </FaktaKort>
           {aksjonspunkterForPanel.length !== 0 && (
             <>
               <FaktaBegrunnelseTextField
@@ -96,6 +98,6 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
           )}
         </VStack>
       </RhfForm>
-    </>
+    </VStack>
   );
 };
