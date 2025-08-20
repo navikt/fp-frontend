@@ -25,11 +25,11 @@ describe('VergeFaktaIndex', () => {
     const organisasjonsnummerInput = utils.getByLabelText('Organisasjonsnummer');
     await userEvent.type(organisasjonsnummerInput, '232232323');
 
-    const fomInput = utils.getByLabelText('Periode f.o.m.');
+    const fomInput = utils.getByLabelText('Fra og med');
     await userEvent.type(fomInput, '14.09.2022');
     fireEvent.blur(fomInput);
 
-    const tomInput = utils.getByLabelText('Periode t.o.m.');
+    const tomInput = utils.getByLabelText('Til og med');
     await userEvent.type(tomInput, '24.09.2022');
     fireEvent.blur(tomInput);
 
