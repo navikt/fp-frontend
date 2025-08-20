@@ -113,7 +113,7 @@ export const RegistrereVergeForm = ({ readOnly, vergetyper = [], valgtVergeType 
 
 RegistrereVergeForm.buildInitialValues = (verge: Verge): VergeFormValues => ({
   ...verge,
-  gyldigTom: !!verge.gyldigTom && verge.gyldigTom !== TIDENES_ENDE ? verge.gyldigTom : '',
+  gyldigTom: !!verge.gyldigTom && verge.gyldigTom !== TIDENES_ENDE ? verge.gyldigTom : undefined,
 });
 
 RegistrereVergeForm.transformValues = ({
