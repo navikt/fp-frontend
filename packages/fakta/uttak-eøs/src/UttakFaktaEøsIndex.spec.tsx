@@ -20,7 +20,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
     expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -51,7 +51,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -80,7 +80,7 @@ describe('UttakFaktaEøsIndex', () => {
     expect(screen.getByText('Vil du slette denne perioden?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('OK'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -132,7 +132,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('Du må rette disse feilene før du kan fortsette:')).toBeInTheDocument();
@@ -184,7 +184,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByTitle('Overstyr'));
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {

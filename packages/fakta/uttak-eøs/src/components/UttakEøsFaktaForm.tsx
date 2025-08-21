@@ -115,6 +115,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
               control={formMethods.control}
               isSubmittable
               isReadOnly={!erRedigerbart}
+              hasVurderingText={true}
               hasBegrunnelse
             />
             {erRedigerbart && (
