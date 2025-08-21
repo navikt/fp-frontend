@@ -23,6 +23,7 @@
     "clean": "lerna run clean --stream",
     "dev": "yarn lerna run dev --scope=@navikt/fp-frontend-app",
     "build": "lerna run build --stream",
+    "build-fp-avdelingsleder": "lerna run build --stream --scope=@navikt/fp-avdelingsleder",
     "up": "docker-compose up -d --remove-orphans --build",
     "down": "docker-compose down",
     "remove-node-modules": "find . -name \"node_modules\" -exec rm -rf '{}' +",

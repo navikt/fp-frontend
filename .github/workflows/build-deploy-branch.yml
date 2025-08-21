@@ -12,7 +12,7 @@ on:
         description: 'Applikasjon som skal deployes fra branch'
         options:
           - fp-frontend
-          - los-avdelingsleder
+          - fp-avdelingsleder
 
 jobs:
   build-app:

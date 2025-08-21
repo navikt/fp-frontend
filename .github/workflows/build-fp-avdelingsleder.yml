@@ -1,15 +1,16 @@
-name: Bygg og deploy los-avdelingsleder
+name: Bygg og deploy fp-avdelingsleder
 on:
+  workflow_dispatch:
   push:
-    branches:
-      - '**'
-    paths-ignore:
-      - '**.md'
-      - '**.MD'
-      - '.gitignore'
-      - '.editorconfig'
-      - 'LICENCE'
-      - 'CODEOWNERS'
+    paths:
+      - 'apps/fp-avdelingsleder/**'
+      - 'packages/**'
+      - 'server/**'
+      - '.deploy/fp-avdelingsleder/**'
+      - '.deploy/naiserator.yaml'
+      - '.github/workflows/build-fp-avdelingsleder.yml'
+      - 'Dockerfile'
+      - 'yarn.lock'
 
 jobs:
   build-app:
@@ -18,13 +19,14 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    uses: navikt/fp-gha-workflows/.github/workflows/build-app-frontend-yarn.yml@main
+    uses: navikt/fp-frontend/.github/workflows/build.yml@master
     with:
       runs-on: 'ubuntu-latest-8-cores'
       node-version: '22.17.1'
       build-image: ${{ github.ref_name == 'master' }} # default: true
       push-image: ${{ github.ref_name == 'master' }} # default: false
       run-knip: true
+      app: fp-avdelingsleder
     secrets: inherit
 
   deploy-dev:

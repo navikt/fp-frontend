@@ -1,6 +1,6 @@
 {
-  "app": "los-avdelingsleder",
-  "ingresses": ["https://fpsak.intern.nav.no"],
+  "app": "fp-avdelingsleder",
+  "ingresses": ["https://fp-avdelingsleder.intern.nav.no"],
   "minReplicas": "2",
   "maxReplicas": "4",
   "env": "production",

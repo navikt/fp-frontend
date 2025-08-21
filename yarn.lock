@@ -2711,9 +2711,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-los-avdelingsleder@workspace:apps/los-avdelingsleder":
+"@navikt/fp-los-avdelingsleder@workspace:apps/fp-los-avdelingsleder":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-los-avdelingsleder@workspace:apps/los-avdelingsleder"
+  resolution: "@navikt/fp-los-avdelingsleder@workspace:apps/fp-los-avdelingsleder"
   dependencies:
     "@navikt/aksel-icons": 7.30.1
     "@navikt/ds-css": 7.30.1
