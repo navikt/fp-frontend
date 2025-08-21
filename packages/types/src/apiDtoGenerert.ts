@@ -702,11 +702,11 @@ export type ArbeidsforholdDto = {
 };
 
 export type Arbeidsgiver = {
-  identifikator?: string;
-  indexKey?: string;
-  orgnr?: string;
-  aktørId?: string;
   erVirksomhet?: boolean;
+  orgnr?: string;
+  indexKey?: string;
+  aktørId?: string;
+  identifikator?: string;
 };
 
 export type AvklarAleneomsorgVurderingDto = {
@@ -1078,8 +1078,8 @@ export type InntektsmeldingSomIkkeKommerDto = {
 
 export type InternArbeidsforholdRef = {
   referanse?: string;
-  indexKey?: string;
   uuidreferanse?: string;
+  indexKey?: string;
 };
 
 export type KanIkkeOppgiBegrunnelse = {
@@ -5343,7 +5343,7 @@ export type DokumentIdDto = {
 export type AktoerInfoDto = {
   aktørId: string | null;
   person: PersonDto;
-  fagsaker: Array<FagsakSøkDto> | null;
+  fagsaker: Array<FagsakSøkDto>;
 };
 
 export type FagsakSøkDto = {
@@ -5352,20 +5352,20 @@ export type FagsakSøkDto = {
   status: 'OPPR' | 'UBEH' | 'LOP' | 'AVSLU';
   relasjonsRolleType: 'EKTE' | 'BARN' | 'FARA' | 'MORA' | 'REPA' | 'MMOR' | 'ANPA' | '-';
   aktørId: string;
-  person?: PersonDto;
-  barnFødt?: string;
-  opprettet?: string;
+  person: PersonDto;
+  barnFødt: string;
+  opprettet: string;
   endret?: string;
 };
 
 export type PersonDto = {
-  aktørId: string;
+  aktørId: string | null;
   navn: string;
   fødselsnummer: string;
   kjønn: 'K' | 'M' | '-';
-  diskresjonskode?: string;
+  diskresjonskode: string | null;
   fødselsdato: string;
-  dødsdato?: string;
+  dødsdato: string | null;
   dodsdato?: string;
   språkkode: 'NB' | 'NN' | 'EN' | '-';
 };
@@ -5423,8 +5423,8 @@ export type BehandlingOpprettingDto = {
 };
 
 export type BrevmalDto = {
-  kode: string | null;
-  navn: string | null;
+  kode: string;
+  navn: string;
   tilgjengelig: boolean | null;
 };
 
@@ -5474,7 +5474,7 @@ export type FagsakBehandlingDto = {
 };
 
 export type FagsakFullDto = {
-  saksnummer: string | null;
+  saksnummer: string;
   fagsakYtelseType: 'ES' | 'FP' | 'SVP' | '-';
   relasjonsRolleType: 'EKTE' | 'BARN' | 'FARA' | 'MORA' | 'REPA' | 'MMOR' | 'ANPA' | '-';
   status: 'OPPR' | 'UBEH' | 'LOP' | 'AVSLU';
@@ -5668,9 +5668,9 @@ export type TotrinnskontrollSkjermlenkeContextDto = {
 export type UttakPeriodeEndringDto = {
   fom: string | null;
   tom: string | null;
+  erSlettet: boolean | null;
   erEndret: boolean | null;
   erLagtTil: boolean | null;
-  erSlettet: boolean | null;
 };
 
 export type LagreFagsakNotatDto = {
@@ -6498,9 +6498,9 @@ export type AdressebeskyttelseHendelseDto = {
   id: string | null;
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
+  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
-  alleAktørId: Array<string> | null;
 };
 
 export type DødHendelseDto = {
@@ -6508,9 +6508,9 @@ export type DødHendelseDto = {
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   dødsdato: string | null;
+  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
-  alleAktørId: Array<string> | null;
 };
 
 export type DødfødselHendelseDto = {
@@ -6518,9 +6518,9 @@ export type DødfødselHendelseDto = {
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   dødfødselsdato: string | null;
+  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
-  alleAktørId: Array<string> | null;
 };
 
 export type FødselHendelseDto = {
@@ -6528,9 +6528,9 @@ export type FødselHendelseDto = {
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørIdForeldre: Array<AktørIdDto>;
   fødselsdato: string | null;
+  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
-  alleAktørId: Array<string> | null;
 };
 
 export type HendelseDto = (
@@ -6552,9 +6552,9 @@ export type HendelseDto = (
 ) & {
   id: string;
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
+  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
-  alleAktørId?: Array<string>;
 };
 
 export type HendelseWrapperDto = {
@@ -6567,9 +6567,9 @@ export type UtflyttingHendelseDto = {
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   utflyttingsdato: string | null;
+  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
-  alleAktørId: Array<string> | null;
 };
 
 export type Arbeidsforhold = {
@@ -6626,11 +6626,11 @@ export type LosAksjonspunktDto = {
 };
 
 export type LosBehandlingDto = {
-  behandlingUuid: string | null;
+  behandlingUuid: string;
   kildesystem: 'FPSAK' | 'FPTILBAKE';
-  saksnummer: string | null;
+  saksnummer: string;
   ytelse: 'ENGANGSTØNAD' | 'FORELDREPENGER' | 'SVANGERSKAPSPENGER';
-  aktørId: string | null;
+  aktørId: string;
   behandlingstype:
     | 'FØRSTEGANGS'
     | 'REVURDERING'
@@ -6640,7 +6640,7 @@ export type LosBehandlingDto = {
     | 'ANKE'
     | 'INNSYN';
   behandlingsstatus: 'OPPRETTET' | 'UTREDES' | 'FATTER_VEDTAK' | 'IVERKSETTER_VEDTAK' | 'AVSLUTTET';
-  opprettetTidspunkt: string | null;
+  opprettetTidspunkt: string;
   behandlendeEnhetId: string | null;
   behandlingsfrist: string | null;
   ansvarligSaksbehandlerIdent: string | null;
@@ -6679,7 +6679,7 @@ export type LosTilbakeDto = {
 
 export type LosFagsakEgenskaperDto = {
   saksegenskaper: Array<string> | null;
-  fagsakMarkering: string | null;
+  fagsakMarkering?: string;
 };
 
 export type NøkkeltallBehandlingVentefristUtløper = {

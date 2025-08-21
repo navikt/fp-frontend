@@ -1,7 +1,8 @@
-import type { FagsakEnkel } from './fagsakEnkelTsType';
-import type { Person } from './personTsType';
+import type { AktoerInfoDto } from './apiDtoGenerert.ts';
 
-export type Aktor = Readonly<{
-  fagsaker: FagsakEnkel[];
-  person: Person;
-}>;
+// export type Aktor = Readonly<{
+//   fagsaker: FagsakEnkel[];
+//   person: Person;
+// }>;
+
+export type Aktor = AktoerInfoDto;
