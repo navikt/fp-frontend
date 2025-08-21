@@ -2520,11 +2520,12 @@ export type AvslagsårsakPrPeriodeDto = {
     | 'AVKORTET_GRUNNET_ANNEN_INNTEKT';
 };
 
+//TODO: kalkulus
 export type BeregningAktivitetDto = {
   arbeidsgiverIdent?: string;
   eksternArbeidsforholdId?: string;
   fom: string;
-  tom: string;
+  tom?: string;
   arbeidsforholdId?: string;
   arbeidsforholdType:
     | 'AAP'
@@ -2551,13 +2552,14 @@ export type BeregningAktivitetDto = {
   skalBrukes?: boolean;
 };
 
+// TODO: fra ft-beregning
 export type BeregningsgrunnlagArbeidsforholdDto = {
   arbeidsgiverIdent?: string;
   startdato?: string;
   opphoersdato?: string;
   arbeidsforholdId?: string;
   eksternArbeidsforholdId?: string;
-  arbeidsforholdType?:
+  arbeidsforholdType:
     | 'AAP'
     | 'ARBEID'
     | 'DAGPENGER'
@@ -3188,7 +3190,7 @@ export type FaktaOmBeregningDto = {
   vurderMottarYtelse?: VurderMottarYtelseDto;
   avklarAktiviteter?: AvklarAktiviteterDto;
   vurderBesteberegning?: VurderBesteberegningDto;
-  andelerForFaktaOmBeregning?: Array<AndelForFaktaOmBeregningDto>;
+  andelerForFaktaOmBeregning: Array<AndelForFaktaOmBeregningDto>;
   vurderMilitaer?: VurderMilitærDto;
   refusjonskravSomKommerForSentListe?: Array<RefusjonskravSomKommerForSentDto>;
 };
@@ -3466,7 +3468,7 @@ export type KortvarigeArbeidsforholdDto = {
 
 export type KunYtelseDto = {
   andeler?: Array<AndelMedBeløpDto>;
-  fodendeKvinneMedDP?: boolean;
+  fodendeKvinneMedDP: boolean;
   erBesteberegning?: boolean;
 };
 

@@ -1,102 +1,41 @@
-import type { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
+import type {
+  AktivitetTomDatoMappingDto,
+  AndelForFaktaOmBeregningDto,
+  ArbeidstakerUtenInntektsmeldingAndelDto,
+  ATogFliSammeOrganisasjonDto,
+  AvklarAktiviteterDto,
+  BeregningAktivitetDto,
+  FaktaOmBeregningAndelDto,
+  FaktaOmBeregningDto,
+  KortvarigeArbeidsforholdDto,
+  KunYtelseDto,
+  RefusjonskravSomKommerForSentDto,
+  VurderBesteberegningDto,
+  VurderMottarYtelseDto,
+} from './apiDtoGenerert.ts';
 
-export type FaktaOmBeregningAndel = Readonly<{
-  arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
-  andelsnr?: number;
-  inntektskategori?: string;
-  aktivitetStatus?: string;
-}>;
+export type FaktaOmBeregningAndel = FaktaOmBeregningAndelDto;
 
-export type AndelForFaktaOmBeregning = Readonly<{
-  arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
-  andelsnr?: number;
-  refusjonskrav?: number;
-  inntektskategori?: string;
-  aktivitetStatus?: string;
-  belopReadOnly?: number;
-  fastsattBelop?: number;
-  visningsnavn?: string;
-  skalKunneEndreAktivitet?: boolean;
-  lagtTilAvSaksbehandler: boolean;
-}>;
+export type AndelForFaktaOmBeregning = AndelForFaktaOmBeregningDto;
 
-export type RefusjonskravSomKommerForSentListe = Readonly<{
-  arbeidsgiverIdent: string;
-  erRefusjonskravGyldig?: boolean;
-}>;
+export type RefusjonskravSomKommerForSentListe = RefusjonskravSomKommerForSentDto;
 
-type VurderMilitaer = Readonly<{
-  harMilitaer?: boolean;
-}>;
+export type VurderBesteberegning = VurderBesteberegningDto;
 
-export type VurderBesteberegning = Readonly<{
-  skalHaBesteberegning?: boolean;
-}>;
+export type BeregningAktivitet = BeregningAktivitetDto;
 
-export type BeregningAktivitet = Readonly<{
-  arbeidsgiverIdent?: string;
-  eksternArbeidsforholdId?: string;
-  fom: string;
-  tom?: string;
-  arbeidsforholdId?: string;
-  arbeidsforholdType: string;
-  aktørIdString?: string;
-  skalBrukes?: boolean;
-}>;
+export type AvklarBeregningAktiviteter = AktivitetTomDatoMappingDto;
 
-export type AvklarBeregningAktiviteter = Readonly<{
-  tom: string;
-  aktiviteter?: BeregningAktivitet[];
-}>;
+export type AvklarBeregningAktiviteterMap = AvklarAktiviteterDto;
 
-export type AvklarBeregningAktiviteterMap = Readonly<{
-  aktiviteterTomDatoMapping?: AvklarBeregningAktiviteter[];
-}>;
+export type KortvarigAndel = KortvarigeArbeidsforholdDto;
 
-interface KunYtelseAndel extends FaktaOmBeregningAndel {
-  fastsattBelopPrMnd: number;
-}
+export type ArbeidstakerUtenIMAndel = ArbeidstakerUtenInntektsmeldingAndelDto;
 
-export interface KortvarigAndel extends AndelForFaktaOmBeregning {
-  erTidsbegrensetArbeidsforhold?: boolean;
-}
+export type KunYtelse = KunYtelseDto;
 
-export interface ArbeidstakerUtenIMAndel extends AndelForFaktaOmBeregning {
-  mottarYtelse?: boolean;
-  inntektPrMnd?: number;
-}
+export type VurderMottarYtelse = VurderMottarYtelseDto;
 
-export type KunYtelse = Readonly<{
-  andeler?: KunYtelseAndel[];
-  fodendeKvinneMedDP: boolean;
-  erBesteberegning?: boolean;
-}>;
+export type ATFLSammeOrgAndel = ATogFliSammeOrganisasjonDto;
 
-export type VurderMottarYtelse = Readonly<{
-  erFrilans?: boolean;
-  frilansMottarYtelse?: boolean;
-  frilansInntektPrMnd?: number;
-  arbeidstakerAndelerUtenIM?: ArbeidstakerUtenIMAndel[];
-}>;
-
-export interface ATFLSammeOrgAndel extends FaktaOmBeregningAndel {
-  inntektPrMnd?: number;
-}
-
-export type FaktaOmBeregning = Readonly<{
-  beregningsgrunnlagArbeidsforhold?: (BeregningsgrunnlagArbeidsforhold & {
-    erTidsbegrensetArbeidsforhold?: boolean;
-  })[];
-  avklarAktiviteter?: AvklarBeregningAktiviteterMap;
-  frilansAndel?: FaktaOmBeregningAndel;
-  vurderMilitaer?: VurderMilitaer;
-  vurderBesteberegning?: VurderBesteberegning;
-  refusjonskravSomKommerForSentListe?: RefusjonskravSomKommerForSentListe[];
-  arbeidsforholdMedLønnsendringUtenIM?: FaktaOmBeregningAndel[];
-  andelerForFaktaOmBeregning: AndelForFaktaOmBeregning[];
-  kortvarigeArbeidsforhold?: KortvarigAndel[];
-  kunYtelse?: KunYtelse;
-  faktaOmBeregningTilfeller?: string[];
-  vurderMottarYtelse?: VurderMottarYtelse;
-  arbeidstakerOgFrilanserISammeOrganisasjonListe?: ATFLSammeOrgAndel[];
-}>;
+export type FaktaOmBeregning = FaktaOmBeregningDto;

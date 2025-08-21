@@ -93,6 +93,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           ],
         },
       ],
+      skjæringstidspunkt: '',
     },
     andelerForFaktaOmBeregning: [
       {

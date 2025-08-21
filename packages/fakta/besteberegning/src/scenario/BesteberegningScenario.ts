@@ -121,8 +121,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           besteberegningPrAar: 400000.0,
           inntektskategori: 'ARBEIDSTAKER',
           arbeidsforhold: {
-            arbeidsgiverNavn: 'BEDRIFT AS',
-            arbeidsgiverId: '974652269',
+            arbeidsgiverIdent: '974652269',
             startdato: '2019-02-03',
             opphoersdato: '2020-02-03',
             arbeidsforholdType: 'ARBEID',
