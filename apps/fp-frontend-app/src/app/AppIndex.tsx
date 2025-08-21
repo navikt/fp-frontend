@@ -66,7 +66,7 @@ const AppIndex = () => {
   const location = useLocation();
 
   const setSiteHeight = (newHeaderHeight: number): void => {
-    document.documentElement.setAttribute('style', `height: calc(100% - ${newHeaderHeight}px)`);
+    document.documentElement.style.setProperty('--header-height', `${newHeaderHeight}px`);
     setHeaderHeight(newHeaderHeight);
   };
 
