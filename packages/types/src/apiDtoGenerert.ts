@@ -13,39 +13,39 @@ export type ReferanseDto = {
 
 export type BehandlingDto = {
   id?: number;
-  uuid?: string;
-  versjon?: number;
-  type?: 'BT-002' | 'BT-003' | 'BT-004' | 'BT-008' | 'BT-006' | 'BT-007' | 'BT-009' | '-';
-  status?: 'AVSLU' | 'FVED' | 'IVED' | 'OPPRE' | 'UTRED';
+  uuid: string;
+  versjon: number;
+  type: 'BT-002' | 'BT-003' | 'BT-004' | 'BT-008' | 'BT-006' | 'BT-007' | 'BT-009' | '-';
+  status: 'AVSLU' | 'FVED' | 'IVED' | 'OPPRE' | 'UTRED';
   fagsakId?: number;
-  opprettet?: string;
+  opprettet: string;
   avsluttet?: string;
   endret?: string;
   endretAvBrukernavn?: string;
-  behandlendeEnhetId?: string;
-  behandlendeEnhetNavn?: string;
-  erAktivPapirsoknad?: boolean;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
+  erAktivPapirsoknad: boolean;
   førsteÅrsak?: BehandlingÅrsakDto;
   behandlingsfristTid?: string;
-  gjeldendeVedtak?: boolean;
+  gjeldendeVedtak: boolean;
   erPaaVent?: boolean;
   originalVedtaksDato?: string;
-  behandlingHenlagt?: boolean;
+  behandlingHenlagt: boolean;
   behandlingPaaVent?: boolean;
-  behandlingPåVent?: boolean;
+  behandlingPåVent: boolean;
   fristBehandlingPåVent?: string;
   fristBehandlingPaaVent?: string;
   venteArsakKode?: string;
   venteÅrsakKode?: string;
   sprakkode?: 'NB' | 'NN' | 'EN' | '-';
-  språkkode?: 'NB' | 'NN' | 'EN' | '-';
-  behandlingKøet?: boolean;
+  språkkode: 'NB' | 'NN' | 'EN' | '-';
+  behandlingKøet: boolean;
   ansvarligSaksbehandler?: string;
-  toTrinnsBehandling?: boolean;
+  toTrinnsBehandling: boolean;
   behandlingsresultat?: BehandlingsresultatDto;
-  behandlingÅrsaker?: Array<BehandlingÅrsakDto>;
+  behandlingÅrsaker: Array<BehandlingÅrsakDto>;
   vilkår?: Array<VilkårDto>;
-  links?: Array<ResourceLink>;
+  links: Array<ResourceLink>;
   behandlingKoet?: boolean;
 };
 
@@ -703,10 +703,10 @@ export type ArbeidsforholdDto = {
 
 export type Arbeidsgiver = {
   identifikator?: string;
-  erVirksomhet?: boolean;
   indexKey?: string;
   orgnr?: string;
   aktørId?: string;
+  erVirksomhet?: boolean;
 };
 
 export type AvklarAleneomsorgVurderingDto = {
@@ -1078,8 +1078,8 @@ export type InntektsmeldingSomIkkeKommerDto = {
 
 export type InternArbeidsforholdRef = {
   referanse?: string;
-  uuidreferanse?: string;
   indexKey?: string;
+  uuidreferanse?: string;
 };
 
 export type KanIkkeOppgiBegrunnelse = {
@@ -2048,15 +2048,15 @@ export type AnkeVurderingResultatDto = {
     | 'ANKE_OMGJOER'
     | 'ANKE_AVVIS'
     | '-';
-  begrunnelse: string | null;
+  begrunnelse: string;
   fritekstTilBrev: string | null;
   ankeOmgjoerArsak: 'NYE_OPPLYSNINGER' | 'ULIK_REGELVERKSTOLKNING' | 'ULIK_VURDERING' | 'PROSESSUELL_FEIL' | '-';
   ankeVurderingOmgjoer: 'ANKE_TIL_GUNST' | 'ANKE_DELVIS_OMGJOERING_TIL_GUNST' | 'ANKE_TIL_UGUNST' | '-';
-  erAnkerIkkePart: boolean | null;
-  erFristIkkeOverholdt: boolean | null;
-  erIkkeKonkret: boolean | null;
-  erIkkeSignert: boolean | null;
-  erSubsidiartRealitetsbehandles: boolean | null;
+  erAnkerIkkePart: boolean;
+  erFristIkkeOverholdt: boolean;
+  erIkkeKonkret: boolean;
+  erIkkeSignert: boolean;
+  erSubsidiartRealitetsbehandles: boolean;
   erMerknaderMottatt: boolean | null;
   merknadKommentar: string | null;
   påAnketKlageBehandlingUuid: string | null;
