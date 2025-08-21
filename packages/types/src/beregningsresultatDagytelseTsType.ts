@@ -1,27 +1,26 @@
-import type { AktivitetStatus, OpptjeningAktivitetType, StonadskontoType } from '@navikt/fp-kodeverk';
+import type {
+  BeregningsresultatMedUttaksplanDto,
+  BeregningsresultatPeriodeAndelDto,
+  BeregningsresultatPeriodeDto,
+} from './apiDtoGenerert.ts';
+//
+// export type BeregningsresultatPeriodeAndel = Readonly<{
+//   arbeidsgiverReferanse: string;
+//   refusjon: number;
+//   tilSoker: number;
+//   uttak: {
+//     stonadskontoType: StonadskontoType;
+//     gradering: boolean;
+//   };
+//   utbetalingsgrad: number;
+//   sisteUtbetalingsdato: string;
+//   aktivitetStatus: AktivitetStatus;
+//   eksternArbeidsforholdId: string;
+//   arbeidsforholdType: OpptjeningAktivitetType;
+// }>;
 
-export type BeregningsresultatPeriodeAndel = Readonly<{
-  arbeidsgiverReferanse: string;
-  refusjon: number;
-  tilSoker: number;
-  uttak: {
-    stonadskontoType: StonadskontoType;
-    gradering: boolean;
-  };
-  utbetalingsgrad: number;
-  sisteUtbetalingsdato: string;
-  aktivitetStatus: AktivitetStatus;
-  eksternArbeidsforholdId: string;
-  arbeidsforholdType: OpptjeningAktivitetType;
-}>;
+export type BeregningsresultatPeriodeAndel = BeregningsresultatPeriodeAndelDto;
 
-export type BeregningsresultatPeriode = Readonly<{
-  fom: string;
-  tom: string;
-  dagsats: number;
-  andeler?: BeregningsresultatPeriodeAndel[];
-}>;
+export type BeregningsresultatPeriode = BeregningsresultatPeriodeDto;
 
-export type BeregningsresultatDagytelse = Readonly<{
-  perioder?: BeregningsresultatPeriode[];
-}>;
+export type BeregningsresultatDagytelse = BeregningsresultatMedUttaksplanDto;

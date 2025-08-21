@@ -36,9 +36,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
           <Detail>
             <FormattedMessage id="VedtakForm.beregnetTilkjentYtelse" />
           </Detail>
-          <Label size="small">
-            {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
-          </Label>
+          <Label size="small">{formatCurrencyWithKr(beregningsresultat.beregnetTilkjentYtelse)}</Label>
         </VStack>
         <VStack gap="space-4">
           <Detail>

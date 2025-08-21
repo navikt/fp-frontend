@@ -3676,30 +3676,16 @@ export type BeregningsresultatMedUttaksplanDto = {
 };
 
 export type BeregningsresultatPeriodeAndelDto = {
-  arbeidsgiverReferanse?: string;
-  refusjon?: number;
-  tilSoker?: number;
-  uttak?: UttakDto;
-  utbetalingsgrad?: number;
-  sisteUtbetalingsdato?: string;
-  aktivitetStatus?:
-    | 'ARBEIDSAVKLARINGSPENGER'
-    | 'ARBEIDSTAKER'
-    | 'DAGPENGER'
-    | 'FRILANSER'
-    | 'MILITÆR_ELLER_SIVIL'
-    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
-    | 'KOMBINERT_AT_FL'
-    | 'KOMBINERT_AT_SN'
-    | 'KOMBINERT_FL_SN'
-    | 'KOMBINERT_AT_FL_SN'
-    | 'BRUKERS_ANDEL'
-    | 'KUN_YTELSE'
-    | 'TTLSTØTENDE_YTELSE'
-    | 'VENTELØNN_VARTPENGER'
-    | 'UDEFINERT';
+  arbeidsgiverReferanse: string;
+  refusjon: number;
+  tilSoker: number;
+  uttak: UttakDto;
+  utbetalingsgrad: number;
+  sisteUtbetalingsdato: string;
+  // TODO: denne har gammel enum object greie. Temp fiks for å slippe feil
+  aktivitetStatus: ATogFliSammeOrganisasjonDto['aktivitetStatus'];
   arbeidsforholdId?: string;
-  eksternArbeidsforholdId?: string;
+  eksternArbeidsforholdId: string;
   aktørId?: string;
   arbeidsforholdType?:
     | 'AAP'
@@ -3726,22 +3712,22 @@ export type BeregningsresultatPeriodeAndelDto = {
 };
 
 export type BeregningsresultatPeriodeDto = {
-  fom?: string;
-  tom?: string;
-  dagsats?: number;
+  fom: string;
+  tom: string;
+  dagsats: number;
   andeler?: Array<BeregningsresultatPeriodeAndelDto>;
 };
 
 export type UttakDto = {
-  stonadskontoType?: string;
+  stonadskontoType: string;
   periodeResultatType?: string;
-  gradering?: boolean;
+  gradering: boolean;
 };
 
 export type BeregningsresultatEngangsstønadDto = {
-  beregnetTilkjentYtelse?: number;
-  satsVerdi?: number;
-  antallBarn?: number;
+  beregnetTilkjentYtelse: number;
+  satsVerdi: number;
+  antallBarn: number;
 };
 
 export type FeriepengegrunnlagAndelDto = {

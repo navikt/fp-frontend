@@ -1,5 +1,3 @@
-export type BeregningsresultatEs = Readonly<{
-  beregnetTilkjentYtelse: number;
-  satsVerdi: number;
-  antallBarn: number;
-}>;
+import type { BeregningsresultatEngangsstønadDto } from './apiDtoGenerert.ts';
+
+export type BeregningsresultatEs = BeregningsresultatEngangsstønadDto;
