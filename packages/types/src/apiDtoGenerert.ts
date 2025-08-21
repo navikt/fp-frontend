@@ -155,7 +155,7 @@ export type BehandlingsresultatDto = {
   fritekstbrev: string | null;
   harRedigertVedtaksbrev: boolean | null;
   erRevurderingMedUendretUtfall: boolean | null;
-  skjæringstidspunkt: SkjæringstidspunktDto;
+  skjæringstidspunkt: SkjæringstidspunktDto | null;
   endretDekningsgrad: boolean | null;
   opphørsdato: string | null;
 };
@@ -562,7 +562,7 @@ export type UtvidetBehandlingDto = {
   behandlendeEnhetId: string | null;
   behandlendeEnhetNavn: string | null;
   erAktivPapirsoknad: boolean | null;
-  førsteÅrsak: BehandlingÅrsakDto;
+  førsteÅrsak: BehandlingÅrsakDto | null;
   behandlingsfristTid: string | null;
   gjeldendeVedtak: boolean | null;
   erPaaVent: boolean | null;
@@ -579,7 +579,7 @@ export type UtvidetBehandlingDto = {
   behandlingKøet: boolean | null;
   ansvarligSaksbehandler: string | null;
   toTrinnsBehandling: boolean | null;
-  behandlingsresultat: BehandlingsresultatDto;
+  behandlingsresultat: BehandlingsresultatDto | null;
   behandlingÅrsaker: Array<BehandlingÅrsakDto> | null;
   vilkår: Array<VilkårDto> | null;
   links: Array<ResourceLink> | null;
@@ -590,7 +590,7 @@ export type UtvidetBehandlingDto = {
   harSattEndringsdato: boolean | null;
   alleUttaksperioderAvslått: boolean | null;
   sjekkSimuleringResultat?: boolean;
-  taskStatus: AsyncPollingStatus;
+  taskStatus: AsyncPollingStatus | null;
   behandlingKoet: boolean | null;
 };
 
@@ -689,7 +689,7 @@ export type AndreYtelserDto = {
 export type AnnenForelderDto = {
   foedselsnummer: string | null;
   kanIkkeOppgiAnnenForelder: boolean | null;
-  kanIkkeOppgiBegrunnelse: KanIkkeOppgiBegrunnelse;
+  kanIkkeOppgiBegrunnelse: KanIkkeOppgiBegrunnelse | null;
   sokerHarAleneomsorg: boolean | null;
   denAndreForelderenHarRettPaForeldrepenger: boolean | null;
   morMottarUføretrygd: boolean | null;
@@ -702,11 +702,11 @@ export type ArbeidsforholdDto = {
 };
 
 export type Arbeidsgiver = {
-  erVirksomhet?: boolean;
-  orgnr?: string;
-  indexKey?: string;
-  aktørId?: string;
   identifikator?: string;
+  erVirksomhet?: boolean;
+  indexKey?: string;
+  orgnr?: string;
+  aktørId?: string;
 };
 
 export type AvklarAleneomsorgVurderingDto = {
@@ -1097,7 +1097,7 @@ export type KlageFormkravAksjonspunktDto = {
   erTilbakekreving: boolean | null;
   fritekstTilBrev: string | null;
   begrunnelse: string | null;
-  tilbakekrevingInfo: KlageTilbakekrevingDto;
+  tilbakekrevingInfo: KlageTilbakekrevingDto | null;
   vedtakBehandlingUuid: string | null;
 };
 
@@ -1167,15 +1167,15 @@ export type ManuellRegistreringEndringsøknadDto = {
   antallBarnFraTerminbekreftelse: number | null;
   antallBarn: number | null;
   foedselsDato: string | null;
-  annenForelder: AnnenForelderDto;
+  annenForelder: AnnenForelderDto | null;
   tilleggsopplysninger: string | null;
   språkkode: 'NB' | 'NN' | 'EN' | '-';
   kommentarEndring: string | null;
   registrerVerge: boolean | null;
   mottattDato: string | null;
   ufullstendigSoeknad: boolean | null;
-  omsorg: OmsorgDto;
-  tidsromPermisjon: TidsromPermisjonDto;
+  omsorg: OmsorgDto | null;
+  tidsromPermisjon: TidsromPermisjonDto | null;
   annenForelderInformert: boolean | null;
   begrunnelse: string | null;
 };
@@ -1196,14 +1196,14 @@ export type ManuellRegistreringEngangsstonadDto = {
   antallBarnFraTerminbekreftelse: number | null;
   antallBarn: number | null;
   foedselsDato: string | null;
-  annenForelder: AnnenForelderDto;
+  annenForelder: AnnenForelderDto | null;
   tilleggsopplysninger: string | null;
   språkkode: 'NB' | 'NN' | 'EN' | '-';
   kommentarEndring: string | null;
   registrerVerge: boolean | null;
   mottattDato: string | null;
   ufullstendigSoeknad: boolean | null;
-  omsorg: OmsorgDto;
+  omsorg: OmsorgDto | null;
   begrunnelse: string | null;
 };
 
@@ -1223,20 +1223,20 @@ export type ManuellRegistreringForeldrepengerDto = {
   antallBarnFraTerminbekreftelse: number | null;
   antallBarn: number | null;
   foedselsDato: string | null;
-  annenForelder: AnnenForelderDto;
+  annenForelder: AnnenForelderDto | null;
   tilleggsopplysninger: string | null;
   språkkode: 'NB' | 'NN' | 'EN' | '-';
   kommentarEndring: string | null;
   registrerVerge: boolean | null;
   mottattDato: string | null;
   ufullstendigSoeknad: boolean | null;
-  omsorg: OmsorgDto;
+  omsorg: OmsorgDto | null;
   arbeidsforhold: Array<ArbeidsforholdDto> | null;
   andreYtelser: Array<AndreYtelserDto> | null;
-  egenVirksomhet: EgenVirksomhetDto;
-  frilans: FrilansDto;
+  egenVirksomhet: EgenVirksomhetDto | null;
+  frilans: FrilansDto | null;
   dekningsgrad: '100_PROSENT' | '80_PROSENT';
-  tidsromPermisjon: TidsromPermisjonDto;
+  tidsromPermisjon: TidsromPermisjonDto | null;
   annenForelderInformert: boolean | null;
   begrunnelse: string | null;
 };
@@ -1257,18 +1257,18 @@ export type ManuellRegistreringSvangerskapspengerDto = {
   antallBarnFraTerminbekreftelse: number | null;
   antallBarn: number | null;
   foedselsDato: string | null;
-  annenForelder: AnnenForelderDto;
+  annenForelder: AnnenForelderDto | null;
   tilleggsopplysninger: string | null;
   språkkode: 'NB' | 'NN' | 'EN' | '-';
   kommentarEndring: string | null;
   registrerVerge: boolean | null;
   mottattDato: string | null;
   ufullstendigSoeknad: boolean | null;
-  omsorg: OmsorgDto;
+  omsorg: OmsorgDto | null;
   arbeidsforhold: Array<ArbeidsforholdDto> | null;
   andreYtelser: Array<AndreYtelserDto> | null;
-  egenVirksomhet: EgenVirksomhetDto;
-  frilans: FrilansDto;
+  egenVirksomhet: EgenVirksomhetDto | null;
+  frilans: FrilansDto | null;
   tilretteleggingArbeidsforhold: Array<SvpTilretteleggingArbeidsforholdDto> | null;
   begrunnelse: string | null;
 };
@@ -2073,7 +2073,7 @@ export type AnkeVurderingResultatDto = {
 };
 
 export type AnkebehandlingDto = {
-  ankeVurderingResultat: AnkeVurderingResultatDto;
+  ankeVurderingResultat: AnkeVurderingResultatDto | null;
   underBehandlingKabal: boolean | null;
   underBehandlingKabalTrygderett: boolean | null;
   behandletAvKabal: boolean | null;
@@ -2727,7 +2727,7 @@ export type BeregningsgrunnlagPrStatusOgAndelAtDto = {
     | 'FISKER'
     | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
     | '-';
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
   fastsattAvSaksbehandler: boolean | null;
   lagtTilAvSaksbehandler: boolean | null;
   belopPrMndEtterAOrdningen: number | null;
@@ -2857,7 +2857,7 @@ export type BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
     | 'FISKER'
     | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
     | '-';
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
   fastsattAvSaksbehandler: boolean | null;
   lagtTilAvSaksbehandler: boolean | null;
   belopPrMndEtterAOrdningen: number | null;
@@ -2913,7 +2913,7 @@ export type BeregningsgrunnlagPrStatusOgAndelFlDto = {
     | 'FISKER'
     | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
     | '-';
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
   fastsattAvSaksbehandler: boolean | null;
   lagtTilAvSaksbehandler: boolean | null;
   belopPrMndEtterAOrdningen: number | null;
@@ -2970,7 +2970,7 @@ export type BeregningsgrunnlagPrStatusOgAndelSnDto = {
     | 'FISKER'
     | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
     | '-';
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
   fastsattAvSaksbehandler: boolean | null;
   lagtTilAvSaksbehandler: boolean | null;
   belopPrMndEtterAOrdningen: number | null;
@@ -3029,7 +3029,7 @@ export type BeregningsgrunnlagPrStatusOgAndelYtelseDto = {
     | 'FISKER'
     | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
     | '-';
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto;
+  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
   fastsattAvSaksbehandler: boolean | null;
   lagtTilAvSaksbehandler: boolean | null;
   belopPrMndEtterAOrdningen: number | null;
@@ -3327,7 +3327,7 @@ export type FordelingDto = {
 };
 
 export type ForeldrepengerGrunnlagDto = {
-  besteberegninggrunnlag: BesteberegninggrunnlagDto;
+  besteberegninggrunnlag: BesteberegninggrunnlagDto | null;
 };
 
 export type FrisinnAndelDto = {
@@ -3354,8 +3354,8 @@ export type FrisinnAndelDto = {
 };
 
 export type FrisinnGrunnlagDto = {
-  opplysningerFL: SøknadsopplysningerDto;
-  opplysningerSN: SøknadsopplysningerDto;
+  opplysningerFL: SøknadsopplysningerDto | null;
+  opplysningerSN: SøknadsopplysningerDto | null;
   perioderSøktFor: Array<OpplystPeriodeDto>;
   frisinnPerioder: Array<FrisinnPeriodeDto>;
   avslagsårsakPrPeriode: Array<AvslagsårsakPrPeriodeDto>;
@@ -3898,10 +3898,10 @@ export type KlageVurderingResultatDto = {
 };
 
 export type KlagebehandlingDto = {
-  klageFormkravResultatNFP: KlageFormkravResultatDto;
-  klageVurderingResultatNFP: KlageVurderingResultatDto;
-  klageFormkravResultatKA: KlageFormkravResultatDto;
-  klageVurderingResultatNK: KlageVurderingResultatDto;
+  klageFormkravResultatNFP: KlageFormkravResultatDto | null;
+  klageVurderingResultatNFP: KlageVurderingResultatDto | null;
+  klageFormkravResultatKA: KlageFormkravResultatDto | null;
+  klageVurderingResultatNK: KlageVurderingResultatDto | null;
   aktuelleHjemler: Array<
     | '14-02'
     | '14-04'
@@ -4467,8 +4467,8 @@ export type Utenlandsopphold = {
 
 export type DekningsgradInfoDto = {
   avklartDekningsgrad: number | null;
-  søker: OppgittDekningsgradDto;
-  annenPart: OppgittDekningsgradDto;
+  søker: OppgittDekningsgradDto | null;
+  annenPart: OppgittDekningsgradDto | null;
 };
 
 export type ManglendeVedleggDto = {
@@ -4556,7 +4556,7 @@ export type OppgittDekningsgradDto = {
 
 export type OppgittFordelingDto = {
   startDatoForPermisjon: string | null;
-  dekningsgrader: DekningsgradInfoDto;
+  dekningsgrader: DekningsgradInfoDto | null;
 };
 
 export type OppgittTilknytningDto = {
@@ -4572,10 +4572,10 @@ export type SoknadDto = {
   mottattDato: string | null;
   begrunnelseForSenInnsending: string | null;
   antallBarn: number | null;
-  oppgittTilknytning: OppgittTilknytningDto;
+  oppgittTilknytning: OppgittTilknytningDto | null;
   manglendeVedlegg: Array<ManglendeVedleggDto> | null;
-  oppgittFordeling: OppgittFordelingDto;
-  søknadsfrist: SøknadsfristDto;
+  oppgittFordeling: OppgittFordelingDto | null;
+  søknadsfrist: SøknadsfristDto | null;
 };
 
 export type SøknadsfristDto = {
@@ -4597,10 +4597,10 @@ export type SoknadAdopsjonDto = {
   mottattDato: string | null;
   begrunnelseForSenInnsending: string | null;
   antallBarn: number | null;
-  oppgittTilknytning: OppgittTilknytningDto;
+  oppgittTilknytning: OppgittTilknytningDto | null;
   manglendeVedlegg: Array<ManglendeVedleggDto> | null;
-  oppgittFordeling: OppgittFordelingDto;
-  søknadsfrist: SøknadsfristDto;
+  oppgittFordeling: OppgittFordelingDto | null;
+  søknadsfrist: SøknadsfristDto | null;
   omsorgsovertakelseDato: string | null;
   barnetsAnkomstTilNorgeDato: string | null;
   adopsjonFodelsedatoer: {
@@ -4620,10 +4620,10 @@ export type SoknadFodselDto = {
   mottattDato: string | null;
   begrunnelseForSenInnsending: string | null;
   antallBarn: number | null;
-  oppgittTilknytning: OppgittTilknytningDto;
+  oppgittTilknytning: OppgittTilknytningDto | null;
   manglendeVedlegg: Array<ManglendeVedleggDto> | null;
-  oppgittFordeling: OppgittFordelingDto;
-  søknadsfrist: SøknadsfristDto;
+  oppgittFordeling: OppgittFordelingDto | null;
+  søknadsfrist: SøknadsfristDto | null;
   utstedtdato: string | null;
   termindato: string | null;
   farSokerType:
@@ -5442,7 +5442,7 @@ export type FagsakBehandlingDto = {
   behandlendeEnhetId: string | null;
   behandlendeEnhetNavn: string | null;
   erAktivPapirsoknad: boolean | null;
-  førsteÅrsak: BehandlingÅrsakDto;
+  førsteÅrsak: BehandlingÅrsakDto | null;
   behandlingsfristTid: string | null;
   gjeldendeVedtak: boolean | null;
   erPaaVent: boolean | null;
@@ -5459,16 +5459,16 @@ export type FagsakBehandlingDto = {
   behandlingKøet: boolean | null;
   ansvarligSaksbehandler: string | null;
   toTrinnsBehandling: boolean | null;
-  behandlingsresultat: BehandlingsresultatDto;
+  behandlingsresultat: BehandlingsresultatDto | null;
   behandlingÅrsaker: Array<BehandlingÅrsakDto> | null;
   vilkår: Array<VilkårDto> | null;
   links: Array<ResourceLink> | null;
-  behandlingTillatteOperasjoner: BehandlingOperasjonerDto;
+  behandlingTillatteOperasjoner: BehandlingOperasjonerDto | null;
   brevmaler: Array<BrevmalDto> | null;
   totrinnskontrollÅrsaker: Array<TotrinnskontrollSkjermlenkeContextDto> | null;
   totrinnskontrollReadonly: boolean | null;
-  risikoAksjonspunkt: AksjonspunktDto;
-  kontrollResultat: KontrollresultatDto;
+  risikoAksjonspunkt: AksjonspunktDto | null;
+  kontrollResultat: KontrollresultatDto | null;
   ugunstAksjonspunkt: boolean | null;
   behandlingKoet: boolean | null;
 };
@@ -5481,17 +5481,17 @@ export type FagsakFullDto = {
   aktørId: string | null;
   sakSkalTilInfotrygd: boolean | null;
   dekningsgrad: number | null;
-  bruker: PersonDto;
+  bruker: PersonDto | null;
   brukerManglerAdresse: boolean | null;
-  annenPart: PersonDto;
-  annenpartBehandling: AnnenPartBehandlingDto;
-  familiehendelse: SakHendelseDto;
+  annenPart: PersonDto | null;
+  annenpartBehandling: AnnenPartBehandlingDto | null;
+  familiehendelse: SakHendelseDto | null;
   fagsakMarkeringer: Array<FagsakMarkeringDto> | null;
   behandlingTypeKanOpprettes: Array<BehandlingOpprettingDto> | null;
   behandlinger: Array<FagsakBehandlingDto> | null;
   historikkinnslag: Array<HistorikkinnslagDto> | null;
   notater: Array<FagsakNotatDto> | null;
-  kontrollResultat: KontrollresultatDto;
+  kontrollResultat: KontrollresultatDto | null;
   harVergeIÅpenBehandling: boolean | null;
 };
 
@@ -5532,7 +5532,7 @@ export type HistorikkInnslagDokumentLinkDto = {
 
 export type HistorikkinnslagDto = {
   behandlingUuid: string | null;
-  aktør: HistorikkAktørDto;
+  aktør: HistorikkAktørDto | null;
   skjermlenke:
     | 'ANKE_MERKNADER'
     | 'ANKE_VURDERING'
@@ -5589,8 +5589,8 @@ export type HistorikkinnslagDto = {
 
 export type KontrollresultatDto = {
   kontrollresultat: 'HOY' | 'IKKE_HOY' | 'IKKE_KLASSIFISERT' | '-';
-  iayFaresignaler: FaresignalgruppeDto;
-  medlFaresignaler: FaresignalgruppeDto;
+  iayFaresignaler: FaresignalgruppeDto | null;
+  medlFaresignaler: FaresignalgruppeDto | null;
   faresignalVurdering:
     | 'INNVIRKNING'
     | 'INNVILGET_REDUSERT'
@@ -5641,7 +5641,7 @@ export type TotrinnsBeregningDto = {
 export type TotrinnskontrollAksjonspunkterDto = {
   aksjonspunktKode: string | null;
   opptjeningAktiviteter: Array<TotrinnskontrollAktivitetDto> | null;
-  beregningDto: TotrinnsBeregningDto;
+  beregningDto: TotrinnsBeregningDto | null;
   besluttersBegrunnelse: string | null;
   totrinnskontrollGodkjent: boolean | null;
   vurderPaNyttArsaker: Array<
@@ -5668,9 +5668,9 @@ export type TotrinnskontrollSkjermlenkeContextDto = {
 export type UttakPeriodeEndringDto = {
   fom: string | null;
   tom: string | null;
-  erSlettet: boolean | null;
   erEndret: boolean | null;
   erLagtTil: boolean | null;
+  erSlettet: boolean | null;
 };
 
 export type LagreFagsakNotatDto = {
@@ -6081,7 +6081,7 @@ export type ForeldrepengerRettigheter = {
 
 export type Gradering = {
   prosent: number | null;
-  uttakAktivitet: UttakAktivitet;
+  uttakAktivitet: UttakAktivitet | null;
 };
 
 export type Stønadskonto = {
@@ -6304,7 +6304,7 @@ export type Aktivitet = {
 };
 
 export type ArbeidsforholdUttak = {
-  aktivitet: Aktivitet;
+  aktivitet: Aktivitet | null;
   behovFom: string | null;
   risikoFaktorer: string | null;
   tiltak: string | null;
@@ -6319,7 +6319,7 @@ export type ArbeidsforholdUttak = {
 export type EsSak = {
   saksnummer: string | null;
   aktørId: string | null;
-  familieHendelse: FamilieHendelse;
+  familieHendelse: FamilieHendelse | null;
   avsluttet: boolean | null;
   aksjonspunkt: Array<Aksjonspunkt> | null;
   søknader: Array<Søknad> | null;
@@ -6336,7 +6336,7 @@ export type EøsUttaksperiode = {
 export type FpSak = {
   saksnummer: string | null;
   aktørId: string | null;
-  familieHendelse: FamilieHendelse;
+  familieHendelse: FamilieHendelse | null;
   avsluttet: boolean | null;
   vedtak: Array<Vedtak> | null;
   oppgittAnnenPart: string | null;
@@ -6344,7 +6344,7 @@ export type FpSak = {
   søknader: Array<Søknad> | null;
   brukerRolle: 'MOR' | 'FAR' | 'MEDMOR' | 'UKJENT';
   fødteBarn: Array<string> | null;
-  rettigheter: Rettigheter;
+  rettigheter: Rettigheter | null;
   ønskerJustertUttakVedFødsel: boolean | null;
 };
 
@@ -6408,7 +6408,7 @@ export type SvpPeriode = {
 export type SvpSak = {
   saksnummer: string | null;
   aktørId: string | null;
-  familieHendelse: FamilieHendelse;
+  familieHendelse: FamilieHendelse | null;
   avsluttet: boolean | null;
   aksjonspunkt: Array<Aksjonspunkt> | null;
   søknader: Array<Søknad> | null;
@@ -6416,7 +6416,7 @@ export type SvpSak = {
 };
 
 export type Tilrettelegging = {
-  aktivitet: Aktivitet;
+  aktivitet: Aktivitet | null;
   behovFom: string | null;
   risikoFaktorer: string | null;
   tiltak: string | null;
@@ -6464,25 +6464,25 @@ export type Uttaksperiode = {
     | 'ARBEID_OG_UTDANNING'
     | 'UFØRE'
     | 'IKKE_OPPGITT';
-  resultat: Resultat;
+  resultat: Resultat | null;
 };
 
 export type UttaksperiodeAktivitet = {
-  aktivitet: UttakAktivitet;
+  aktivitet: UttakAktivitet | null;
   konto: 'FORELDREPENGER' | 'MØDREKVOTE' | 'FEDREKVOTE' | 'FELLESPERIODE' | 'FORELDREPENGER_FØR_FØDSEL';
   trekkdager: number | null;
   arbeidstidsprosent: number | null;
 };
 
 export type Vedtak = {
-  behandlingstema: InfotrygdKode;
+  behandlingstema: InfotrygdKode | null;
   identdato: string | null;
   opphørFom: string | null;
   opprinneligIdentdato: string | null;
-  periode: Periode;
+  periode: Periode | null;
   registrert: string | null;
   saksbehandlerId: string | null;
-  arbeidskategori: InfotrygdKode;
+  arbeidskategori: InfotrygdKode | null;
   arbeidsforhold: Array<Arbeidsforhold> | null;
   dekningsgrad: number | null;
   fødselsdatoBarn: string | null;
@@ -6498,9 +6498,9 @@ export type AdressebeskyttelseHendelseDto = {
   id: string | null;
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type DødHendelseDto = {
@@ -6508,9 +6508,9 @@ export type DødHendelseDto = {
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   dødsdato: string | null;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type DødfødselHendelseDto = {
@@ -6518,9 +6518,9 @@ export type DødfødselHendelseDto = {
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   dødfødselsdato: string | null;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type FødselHendelseDto = {
@@ -6528,9 +6528,9 @@ export type FødselHendelseDto = {
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørIdForeldre: Array<AktørIdDto>;
   fødselsdato: string | null;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type HendelseDto = (
@@ -6552,9 +6552,9 @@ export type HendelseDto = (
 ) & {
   id: string;
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type HendelseWrapperDto = {
@@ -6567,15 +6567,15 @@ export type UtflyttingHendelseDto = {
   endringstype: 'OPPRETTET' | 'KORRIGERT' | 'ANNULLERT' | 'OPPHOERT';
   aktørId: Array<AktørIdDto>;
   utflyttingsdato: string | null;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type Arbeidsforhold = {
   arbeidsgiverOrgnr: string | null;
   inntekt: number | null;
-  inntektsperiode: InfotrygdKode;
+  inntektsperiode: InfotrygdKode | null;
   refusjon: boolean | null;
   refusjonTom: string | null;
   identdato: string | null;
@@ -6604,7 +6604,7 @@ export type SakDto = {
 };
 
 export type Utbetaling = {
-  periode: Periode;
+  periode: Periode | null;
   utbetalingsgrad: number | null;
   arbeidsgiverOrgnr: string | null;
   erRefusjon: boolean | null;
@@ -6615,7 +6615,7 @@ export type Utbetaling = {
 
 export type VedtakKjede = {
   opprinneligIdentdato: string | null;
-  behandlingstema: InfotrygdKode;
+  behandlingstema: InfotrygdKode | null;
   vedtak: Array<Vedtak> | null;
 };
 
@@ -6663,9 +6663,9 @@ export type LosBehandlingDto = {
   faresignaler: boolean | null;
   refusjonskrav: boolean | null;
   saksegenskaper: Array<string> | null;
-  foreldrepengerDto: LosForeldrepengerDto;
+  foreldrepengerDto: LosForeldrepengerDto | null;
   behandlingsegenskaper: Array<string> | null;
-  tilbakeDto: LosTilbakeDto;
+  tilbakeDto: LosTilbakeDto | null;
 };
 
 export type LosForeldrepengerDto = {
