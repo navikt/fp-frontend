@@ -29,10 +29,13 @@ const FAGSAK_1 = {
     dødsdato: null,
     aktørId: '111111',
     kjønn: KjønnkodeEnum.KVINNE,
+    diskresjonskode: null,
+    språkkode: '-',
   },
+  relasjonsRolleType: '-',
 } satisfies FagsakEnkel;
 
-const FAGSAK_2: Partial<FagsakEnkel> = {
+const FAGSAK_2 = {
   ...FAGSAK_1,
   saksnummer: '23456',
 } satisfies FagsakEnkel;

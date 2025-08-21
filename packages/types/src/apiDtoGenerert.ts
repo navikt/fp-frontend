@@ -2256,11 +2256,11 @@ export type UtsettelsePeriodeDto = {
 };
 
 export type ArbeidsgiverOpplysningerDto = {
-  referanse?: string;
-  identifikator?: string;
-  navn?: string;
+  referanse: string;
+  identifikator: string;
+  navn: string;
   fødselsdato?: string;
-  erPrivatPerson?: boolean;
+  erPrivatPerson: boolean;
 };
 
 export type ArbeidsgiverOversiktDto = {

@@ -6,7 +6,7 @@ import { DiskresjonskodeType } from '../../kodeverk/diskresjonskodeType';
 
 interface Props {
   erDød?: boolean;
-  diskresjonskode?: string;
+  diskresjonskode: string | null;
 }
 
 /**

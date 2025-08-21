@@ -28,40 +28,49 @@ export const initFetchFpsak: InitDataFpSak = {
     {
       href: '/fpsak/api/kodeverk',
       rel: 'kodeverk',
+      type: 'GET',
     },
     {
       href: '/fpsak/api/fagsak/sok',
       rel: 'søk-fagsak',
+      type: 'GET',
     },
     {
       href: '/fpsak/api/infotrygd/sok',
       rel: 'infotrygd-søk',
+      type: 'GET',
     },
   ],
   sakLinks: [
     {
       href: '/fpsak/api/fagsak/full',
       rel: 'fagsak-full',
+      type: 'GET',
     },
     {
       href: '/fpsak/api/dokument/hent-dokumentliste',
       rel: 'sak-dokumentliste',
+      type: 'GET',
     },
     {
       href: '/fpsak/api/fagsak/endre-utland',
       rel: 'endre-utland-markering',
+      type: 'GET',
     },
     {
       href: '/fpsak/api/fagsak/notat',
       rel: 'lagre-notat',
+      type: 'GET',
     },
     {
       href: '/fpsak/api/register/redirect-to/aa-reg',
       rel: 'arbeidstaker-redirect',
+      type: 'GET',
     },
     {
       href: '/fpsak/api/register/redirect-to/a-inntekt',
       rel: 'ainntekt-redirect',
+      type: 'GET',
     },
   ],
 };

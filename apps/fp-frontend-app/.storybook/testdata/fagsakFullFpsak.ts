@@ -26,6 +26,7 @@ export const fagsakFullFpsak: Fagsak = {
     diskresjonskode: 'UDEF',
     fødselsdato: '1993-03-05',
     dødsdato: null,
+    språkkode: '-',
   },
   brukerManglerAdresse: false,
   annenPart: {
@@ -36,6 +37,7 @@ export const fagsakFullFpsak: Fagsak = {
     diskresjonskode: 'UDEF',
     fødselsdato: '1991-03-05',
     dødsdato: null,
+    språkkode: '-',
   },
   annenpartBehandling: null,
   familiehendelse: {
@@ -121,18 +123,22 @@ export const fagsakFullFpsak: Fagsak = {
         {
           href: '/fpsak/api/behandling/person/personoversikt?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
           rel: 'behandling-personoversikt',
+          type: 'GET',
         },
         {
           href: '/fpsak/api/behandling/familiehendelse/v2?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
           rel: 'familiehendelse-v2',
+          type: 'GET',
         },
         {
           href: '/fpsak/api/brev/bestill',
           rel: 'brev-bestill',
+          type: 'GET',
         },
         {
           href: '/fpsak/api/brev/forhandsvis',
           rel: 'brev-vis',
+          type: 'GET',
         },
       ],
       behandlingTillatteOperasjoner: {

@@ -9,6 +9,27 @@ import type { FagsakEnkel } from '@navikt/fp-types';
 
 import { FagsakSokSakIndex } from './FagsakSokSakIndex';
 
+const defaultSak = {
+  saksnummer: '1',
+  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  relasjonsRolleType: '-',
+  status: FagsakStatus.OPPRETTET,
+  aktørId: '',
+  person: {
+    aktørId: null,
+    navn: '',
+    fødselsnummer: '',
+    kjønn: '-',
+    diskresjonskode: null,
+    fødselsdato: '',
+    dødsdato: null,
+    dodsdato: undefined,
+    språkkode: '-',
+  },
+  barnFødt: '',
+  opprettet: '',
+} as const;
+
 const meta = {
   title: 'sak/sak-sok',
   component: FagsakSokSakIndex,
@@ -39,17 +60,16 @@ export const Default: Story = {
   args: {
     fagsaker: [
       {
+        ...defaultSak,
         saksnummer: '1',
         fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-        relasjonsRolleType: '',
-        status: FagsakStatus.OPPRETTET,
       },
       {
+        ...defaultSak,
         saksnummer: '2',
         fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-        status: FagsakStatus.OPPRETTET,
       },
-    ] as FagsakEnkel[],
+    ],
   },
 };
 

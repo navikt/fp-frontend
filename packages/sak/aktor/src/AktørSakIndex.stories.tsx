@@ -38,6 +38,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     aktorInfo: {
+      aktørId: null,
       fagsaker: [
         FAGSAK,
         {
@@ -52,6 +53,8 @@ export const Default: Story = {
         dødsdato: null,
         fødselsnummer: '123456233',
         aktørId: '2323',
+        diskresjonskode: null,
+        språkkode: 'NB',
       },
     },
   },
