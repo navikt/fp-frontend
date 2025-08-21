@@ -6,10 +6,12 @@ import { action } from 'storybook/actions';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
+  AksjonspunktType,
   BehandlingResultatType,
   KlageAvvistÅrsak,
   KlageMedholdÅrsak,
   KlageVurdering as klageVurderingCodes,
+  VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
@@ -31,6 +33,16 @@ const aksjonspunkterForPanel: Aksjonspunkt[] = [
     status: AksjonspunktStatus.OPPRETTET,
     begrunnelse: null,
     kanLoses: true,
+    toTrinnsBehandling: false,
+    toTrinnsBehandlingGodkjent: null,
+    vurderPaNyttArsaker: null,
+    besluttersBegrunnelse: null,
+    aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+    vilkarType: VilkarType.OMSORGSVILKARET,
+    erAktivt: true,
+    fristTid: null,
+    endretTidspunkt: null,
+    endretAv: null,
   },
 ];
 

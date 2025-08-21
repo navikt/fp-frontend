@@ -25,3 +25,4 @@ ssh.exe.stackdump
 !.yarn/versions
 
 .nx
+swagger.json

@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
@@ -25,12 +25,22 @@ const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
   },
 };
 
-const lagAksjonspunkt = (apKode: AksjonspunktKode, status: AksjonspunktStatus, begrunnelse?: string): Aksjonspunkt => ({
-  definisjon: apKode,
-  status,
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
   kanLoses: true,
-  begrunnelse: begrunnelse ?? null,
-});
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-besteberegning',
@@ -57,7 +67,11 @@ export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
   args: {
     beregningsgrunnlag: scenarioBG,
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET),
+      {
+        ...aksjonspunktDefault,
+        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        status: AksjonspunktStatus.OPPRETTET,
+      },
     ],
   },
 };
@@ -66,11 +80,12 @@ export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent: Story 
   args: {
     beregningsgrunnlag: scenarioBG,
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(
-        AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-        AksjonspunktStatus.UTFORT,
-        'Min begrunnelse for at besteberegningen er feil',
-      ),
+      {
+        ...aksjonspunktDefault,
+        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Min begrunnelse for at besteberegningen er feil',
+      },
     ],
   },
 };
@@ -79,7 +94,11 @@ export const BesteberegningMedAvvik: Story = {
   args: {
     beregningsgrunnlag: scenarioBG,
     aksjonspunkterForPanel: [
-      lagAksjonspunkt(AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING, AksjonspunktStatus.OPPRETTET),
+      {
+        ...aksjonspunktDefault,
+        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        status: AksjonspunktStatus.OPPRETTET,
+      },
     ],
   },
 };

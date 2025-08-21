@@ -5,9 +5,11 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
+  AksjonspunktType,
   BehandlingType,
   InnsynResultatType,
   Kommunikasjonsretning,
+  VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Innsyn, InnsynDokument } from '@navikt/fp-types';
@@ -20,12 +22,22 @@ const defaultBehandling = {
   behandlingPåVent: false,
 } as Behandling;
 
-const defaultAksjonspunkt: Aksjonspunkt = {
+const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
   status: AksjonspunktStatus.OPPRETTET,
   begrunnelse: null,
   kanLoses: true,
-};
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'prosess/innsyn/prosess-innsyn',
@@ -53,7 +65,7 @@ type Story = StoryObj<typeof meta>;
 export const PanelForVurderingAvInnsyn: Story = {
   args: {
     behandling: defaultBehandling,
-    aksjonspunkterForPanel: [defaultAksjonspunkt],
+    aksjonspunkterForPanel: [aksjonspunktDefault],
     innsyn: {
       dokumenter: [] as InnsynDokument[],
       vedtaksdokumentasjon: [
@@ -75,7 +87,7 @@ export const InnsynSattPaVent: Story = {
     },
     aksjonspunkterForPanel: [
       {
-        ...defaultAksjonspunkt,
+        ...aksjonspunktDefault,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette er en begrunnelse',
       },

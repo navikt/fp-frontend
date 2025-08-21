@@ -2,9 +2,16 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, FagsakYtelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  FagsakYtelseType,
+  NavBrukerKjonn,
+  VilkarType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Fagsak, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 
 import { SakenFaktaIndex } from './SakenFaktaIndex';
 
@@ -19,6 +26,23 @@ const defaultSøknad = {
     },
   },
 } as Soknad;
+
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-saken',
@@ -76,6 +100,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -89,6 +114,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -105,6 +131,7 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -123,6 +150,7 @@ export const DekningsgradErEndret: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
         status: AksjonspunktStatus.UTFORT,
         kanLoses: true,
@@ -148,6 +176,7 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -187,6 +216,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -226,6 +256,7 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
         kanLoses: true,

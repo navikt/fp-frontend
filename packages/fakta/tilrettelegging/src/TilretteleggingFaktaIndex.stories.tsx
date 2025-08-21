@@ -5,12 +5,15 @@ import type { Meta, StoryObj } from '@storybook/react';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
+  AksjonspunktType,
   PermisjonsbeskrivelseType,
   TilretteleggingType,
   UttakArbeidType,
+  VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
+  type Aksjonspunkt,
   type ArbeidOgInntektsmelding,
   type ArbeidsforholdFodselOgTilrettelegging,
   type ArbeidsgiverOpplysningerPerId,
@@ -263,10 +266,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
+
 export const TilretteleggingMedVelferdspermisjon: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -282,6 +303,7 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -297,6 +319,7 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -312,6 +335,7 @@ export const HarOpphold: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -375,6 +399,7 @@ export const ErReadonly: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -433,6 +458,7 @@ export const ErRevurdering: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: 'Dette er en begrunnelse',

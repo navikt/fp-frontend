@@ -7,15 +7,17 @@ import {
   AdresseType,
   AksjonspunktKode,
   AksjonspunktStatus,
+  AksjonspunktType,
   MedlemskapDekningType,
   MedlemskapManuellVurderingType,
   MedlemskapType,
   OppholdstillatelseType,
   PersonstatusType,
   Region,
+  VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { type Medlemskap, MedlemskapAvvik, type Soknad } from '@navikt/fp-types';
+import { type Aksjonspunkt, type Medlemskap, MedlemskapAvvik, type Soknad } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
 
@@ -40,6 +42,23 @@ const defaultSoknad = {
     ],
   },
 } as Soknad;
+
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
 
 const meta = {
   title: 'fakta/fakta-medlemskap-v3',
@@ -194,6 +213,7 @@ export const Default: Story = {
     medlemskap: lagMedlemskap({}),
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -212,6 +232,7 @@ export const ForutgåendeMedlemskap: Story = {
     }),
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -269,6 +290,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
     } as Soknad,
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -292,6 +314,7 @@ export const TidligereVurderingAvMedlemskapMedEtAvvik: Story = {
     }),
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Søker har bodd i Gautemala siden 10.09.2024 ',
@@ -342,6 +365,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
     }),
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: null,
@@ -370,6 +394,7 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
     }),
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: null,

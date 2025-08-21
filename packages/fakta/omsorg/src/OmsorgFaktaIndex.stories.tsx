@@ -3,7 +3,14 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AdresseType, AksjonspunktKode, AksjonspunktStatus, SivilstandType } from '@navikt/fp-kodeverk';
+import {
+  AdresseType,
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  SivilstandType,
+  VilkarType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum, type PersonopplysningerBasis, type Ytelsefordeling } from '@navikt/fp-types';
 
@@ -85,6 +92,16 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
         kanLoses: true,
+        vilkarType: VilkarType.FODSELSVILKARET_MOR,
+        toTrinnsBehandling: false,
+        toTrinnsBehandlingGodkjent: null,
+        vurderPaNyttArsaker: null,
+        besluttersBegrunnelse: null,
+        aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+        erAktivt: true,
+        fristTid: null,
+        endretTidspunkt: null,
+        endretAv: null,
       },
     ],
     alleMerknaderFraBeslutter: {

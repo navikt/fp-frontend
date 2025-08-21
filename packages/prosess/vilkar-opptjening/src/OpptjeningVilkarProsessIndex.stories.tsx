@@ -2,7 +2,13 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  AksjonspunktType,
+  VilkarType,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 
@@ -32,6 +38,23 @@ const defaultOpptjening = {
   },
 } as Opptjening;
 
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
+
 const meta = {
   title: 'prosess/prosess-vilkar-opptjening',
   component: OpptjeningVilkarProsessIndex,
@@ -53,11 +76,11 @@ export const ÅpentAksjonspunkt: Story = {
     opptjening: defaultOpptjening,
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
-    ] as Aksjonspunkt[],
+    ] satisfies Aksjonspunkt[],
   },
 };
 
@@ -67,11 +90,12 @@ export const ÅpentAksjonspunktSvangerskapspenger: Story = {
     opptjening: defaultOpptjening,
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
       },
-    ] as Aksjonspunkt[],
+    ],
   },
 };
 

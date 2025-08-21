@@ -7,13 +7,21 @@ import {
   AdresseType,
   AksjonspunktKode,
   AksjonspunktStatus,
+  AksjonspunktType,
   FarSøkerType,
   NavBrukerKjonn,
   SivilstandType,
   SoknadType,
+  VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
-import type { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  FamilieHendelseSamling,
+  InntektArbeidYtelse,
+  Personoversikt,
+  Soknad,
+} from '@navikt/fp-types';
 
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
 
@@ -102,10 +110,28 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+const aksjonspunktDefault = {
+  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  status: AksjonspunktStatus.OPPRETTET,
+  begrunnelse: null,
+  kanLoses: true,
+  toTrinnsBehandling: false,
+  toTrinnsBehandlingGodkjent: null,
+  vurderPaNyttArsaker: null,
+  besluttersBegrunnelse: null,
+  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  vilkarType: VilkarType.OMSORGSVILKARET,
+  erAktivt: true,
+  fristTid: null,
+  endretTidspunkt: null,
+  endretAv: null,
+} satisfies Aksjonspunkt;
+
 export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -132,6 +158,7 @@ export const UtførtAksjonspunktForOmsorgovertakelse: Story = {
     },
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'dette er en begrunnelse',
@@ -149,6 +176,7 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
         status: AksjonspunktStatus.OPPRETTET,
         begrunnelse: null,
@@ -166,6 +194,7 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'dette er en begrunnelse',
