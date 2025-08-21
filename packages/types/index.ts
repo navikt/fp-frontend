@@ -142,7 +142,6 @@ export type {
   BeregningResultatPeriode,
 } from './src/beregningsresultatTilbakekrevingTsType';
 export type { UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
-export type { Aktivitetskrav } from './src/aktivitetskravTsType';
 export type { Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
