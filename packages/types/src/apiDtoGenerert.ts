@@ -3046,10 +3046,11 @@ export type BeregningsgrunnlagPrStatusOgAndelYtelseDto = {
   oppjustertGrunnlag: number | null;
 };
 
+// TODO: disse også blir undefined
 export type BesteberegningInntektDto = {
-  arbeidsgiverId: string | null;
-  arbeidsgiverIdent: string | null;
-  arbeidsforholdId: string | null;
+  arbeidsgiverId?: string;
+  arbeidsgiverIdent?: string;
+  arbeidsforholdId?: string;
   opptjeningAktivitetType:
     | 'AAP'
     | 'ARBEID'
@@ -3076,23 +3077,21 @@ export type BesteberegningInntektDto = {
 };
 
 export type BesteberegningMånedGrunnlagDto = {
-  inntekter: Array<BesteberegningInntektDto> | null;
+  inntekter: Array<BesteberegningInntektDto>;
   fom: string;
   tom: string;
 };
 
 export type BesteberegninggrunnlagDto = {
-  besteMåneder:
-    | [
-        BesteberegningMånedGrunnlagDto,
-        BesteberegningMånedGrunnlagDto,
-        BesteberegningMånedGrunnlagDto,
-        BesteberegningMånedGrunnlagDto,
-        BesteberegningMånedGrunnlagDto,
-        BesteberegningMånedGrunnlagDto,
-      ]
-    | null;
-  avvik: number | null;
+  besteMåneder: [
+    BesteberegningMånedGrunnlagDto,
+    BesteberegningMånedGrunnlagDto,
+    BesteberegningMånedGrunnlagDto,
+    BesteberegningMånedGrunnlagDto,
+    BesteberegningMånedGrunnlagDto,
+    BesteberegningMånedGrunnlagDto,
+  ];
+  avvik: number;
 };
 
 export type EgenNæringDto = {
@@ -3328,8 +3327,9 @@ export type FordelingDto = {
   fordelBeregningsgrunnlag?: FordelBeregningsgrunnlagDto;
 };
 
+// TODO: her gir OM plutselig undefined og ikke null. Undersøk
 export type ForeldrepengerGrunnlagDto = {
-  besteberegninggrunnlag: BesteberegninggrunnlagDto | null;
+  besteberegninggrunnlag?: BesteberegninggrunnlagDto;
 };
 
 export type FrisinnAndelDto = {

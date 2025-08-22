@@ -96,6 +96,7 @@ const besteberegninggrunnlag: Besteberegninggrunnlag = {
       ],
     },
   ],
+  avvik: 0,
 };
 
 export const beregningsgrunnlag: Beregningsgrunnlag = {
