@@ -53,6 +53,7 @@
   "Search.ReserverBehandling": "Reserver behandlingen ved søk",
 
   "SistBehandledeSaker.SistBehandledeSaker": "Dine siste reserverte behandlinger",
+  "SistBehandledeSaker.KunÅpne": "Vis kun åpne",
   "SistBehandledeSaker.IngenBehandlinger": "Ingen behandlinger",
   "SistBehandledeSaker.Behandling": "Behandling {index}",
   "SistBehandledeSaker.Soker": "Søker",

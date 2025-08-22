@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import {
@@ -10,7 +11,8 @@ import {
   PencilIcon,
   PersonEnvelopeIcon,
 } from '@navikt/aksel-icons';
-import { BodyShort, Heading, HStack, Table, VStack } from '@navikt/ds-react';
+import { BodyShort, Heading, HStack, Spacer, Switch, Table, VStack } from '@navikt/ds-react';
+import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
@@ -20,8 +22,6 @@ import { behandlendeOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 
 import styles from './sistBehandledeSaker.module.css';
-
-const EMPTY_ARRAY: Oppgave[] = [];
 
 interface Props {
   åpneFagsak: (saksnummer: string, behandlingUuid?: string) => void;
@@ -33,7 +33,8 @@ interface Props {
  * Denne komponenten viser de siste fagsakene en nav-ansatt har behandlet.
  */
 export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
-  const { data: sistBehandledeSaker = EMPTY_ARRAY } = useQuery(behandlendeOppgaverOptions());
+  const [ kunÅpne, setkunÅpne ] = useState<boolean>(false);
+  const { data: sisteReserverte = [], isFetching } = useQuery(behandlendeOppgaverOptions(kunÅpne));
 
   return (
     <VStack gap="space-8">
@@ -44,15 +45,20 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
         <Heading size="xsmall" level="2">
           <FormattedMessage id="SistBehandledeSaker.SistBehandledeSaker" />
         </Heading>
+        <Spacer />
+        <Switch position="right" size="small" checked={kunÅpne} onChange={e => setkunÅpne(e.target.checked)}>
+          <FormattedMessage id="SistBehandledeSaker.KunÅpne" />
+        </Switch>
       </HStack>
-      {sistBehandledeSaker.length === 0 && (
+      {isFetching ? (
+        <LoadingPanel />
+      ) : sisteReserverte.length === 0 ? (
         <div className={styles.ingenBehandlinger}>
           <BodyShort size="medium">
             <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" tagName="i" />
           </BodyShort>
         </div>
-      )}
-      {sistBehandledeSaker.length > 0 && (
+      ) : (
         <Table>
           <Table.Header>
             <Table.Row>
@@ -72,7 +78,7 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {sistBehandledeSaker.map(sbs => (
+            {sisteReserverte.map(sbs => (
               <Table.Row key={sbs.id} onClick={() => åpneFagsak(sbs.saksnummer, sbs.behandlingId)}>
                 <Table.DataCell scope="row">{sbs.navn}</Table.DataCell>
                 <Table.DataCell scope="row">{sbs.saksnummer}</Table.DataCell>
