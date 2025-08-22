@@ -2,22 +2,26 @@ import { createContext, type ReactElement, useContext, useMemo, useState } from 
 
 import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 
-type Props = {
+type ContextProps = {
   overrideReadOnly: boolean;
   kanOverstyreAccess: { isEnabled: boolean; employeeHasAccess: boolean };
   overstyringApKode: OverstyringAksjonspunkter;
-};
-
-type InputProps = {
+  initialToggleState?: boolean;
   toggleOverstyring?: (erOverstyrt: boolean) => void;
 };
 
-type InternalProps = { erOverstyrt: boolean; toggleOverstyring: () => void };
+type ContextValues = {
+  overrideReadOnly: boolean;
+  kanOverstyreAccess: { isEnabled: boolean; employeeHasAccess: boolean };
+  overstyringApKode: OverstyringAksjonspunkter;
+  erOverstyrt: boolean;
+  toggleOverstyring: () => void;
+};
 
-const PanelOverstyringContext = createContext<(Props & InternalProps) | null>(null);
+const PanelOverstyringContext = createContext<ContextValues | null>(null);
 
-export const PanelOverstyringProvider = (props: Props & InputProps & { children: ReactElement | null }) => {
-  const [erOverstyrt, setErOverstyrt] = useState(false);
+export const PanelOverstyringProvider = (props: { children: ReactElement | null } & ContextProps) => {
+  const [erOverstyrt, setErOverstyrt] = useState(props.initialToggleState ?? false);
 
   const { children, toggleOverstyring: toggle, ...otherProps } = props;
 
@@ -26,7 +30,7 @@ export const PanelOverstyringProvider = (props: Props & InputProps & { children:
     toggle?.(!erOverstyrt);
   };
 
-  const value = useMemo(
+  const value = useMemo<ContextValues>(
     () => ({
       erOverstyrt,
       toggleOverstyring,
@@ -39,7 +43,7 @@ export const PanelOverstyringProvider = (props: Props & InputProps & { children:
 };
 
 export const usePanelOverstyring = () => {
-  const context = useContext<(Props & InternalProps) | null>(PanelOverstyringContext);
+  const context = useContext<ContextValues | null>(PanelOverstyringContext);
   if (!context) {
     throw new Error('PanelOverstyringContext.Provider er ikke satt opp');
   }

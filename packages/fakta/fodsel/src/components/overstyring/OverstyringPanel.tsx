@@ -1,42 +1,36 @@
-import { useState } from 'react';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HStack } from '@navikt/ds-react';
 import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, isAksjonspunktOpen } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FødselGjeldende } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { OverstyringForm } from './OverstyringForm';
 
 interface Props {
-  kanOverstyre: boolean;
   gjeldende: FødselGjeldende;
   submittable: boolean;
 }
 
-export const OverstyringPanel = ({ kanOverstyre, gjeldende, submittable }: Props) => {
+export const OverstyringPanel = ({ gjeldende, submittable }: Props) => {
   const intl = useIntl();
-  if (!kanOverstyre) return undefined;
 
-  const { aksjonspunkterForPanel, isReadOnly, alleMerknaderFraBeslutter } = usePanelDataContext();
-  const overstyringsAP = aksjonspunkterForPanel.find(
-    a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-  );
-  const harÅpentAP = aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.definisjon));
-  const [erOverstyrt, setErOverstyrt] = useState(!!overstyringsAP);
+  const { erOverstyrt, toggleOverstyring, kanOverstyreAccess } = usePanelOverstyring();
+  const { alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext();
+
   return (
     <>
-      <HStack gap="4">
-        <Heading size="small">
-          <FormattedMessage id="OverstyringPanel.Tittel" />
-        </Heading>
-        {!isReadOnly && !harÅpentAP && (
-          <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
-        )}
-      </HStack>
+      {kanOverstyreAccess.isEnabled && (
+        <HStack gap="4">
+          <Heading size="small">
+            <FormattedMessage id="OverstyringPanel.Tittel" />
+          </Heading>
+          <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
+        </HStack>
+      )}
 
       {erOverstyrt && (
         <FaktaKort
@@ -47,8 +41,7 @@ export const OverstyringPanel = ({ kanOverstyre, gjeldende, submittable }: Props
             isReadOnly={isReadOnly}
             gjeldende={gjeldende}
             submittable={submittable}
-            overstyringsAP={overstyringsAP}
-            avbrytOverstyring={() => setErOverstyrt(false)}
+            avbrytOverstyring={toggleOverstyring}
           />
         </FaktaKort>
       )}

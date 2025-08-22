@@ -220,4 +220,19 @@ describe('FodselFaktaIndex', () => {
       begrunnelse: 'Dette er en begrunnelse',
     });
   });
+
+  it('skal ikke kunne overstyre termindato når det ikke er et aksjonspunkt', async () => {
+    const lagre = vi.fn(() => Promise.resolve());
+    render(<Overstyring submitCallback={lagre} isReadOnly />);
+
+    expect(screen.getByText('Fakta om fødsel')).toBeInTheDocument();
+    expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
+    expect(screen.getByText('Termindato')).toBeInTheDocument();
+    expect(screen.getByText('10.06.2025')).toBeInTheDocument();
+
+    await userEvent.type(screen.getByLabelText('Termindato'), '10.06.2025');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+
+    await userEvent.click(screen.getByText('Bekreft og fortsett'));
+  });
 });
