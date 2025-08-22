@@ -40,6 +40,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
   const [erOverstyrt, setErOverstyrt] = useState(false);
   const [visLeggTilPeriodeForm, setVisLeggTilPeriodeForm] = useState(false);
   const [feilmelding, setFeilmelding] = useState<string | undefined>();
+  const [isDirty, setIsDirty] = useState(false);
 
   const formMethods = useForm<FaktaBegrunnelseFormValues>({
     defaultValues: mellomlagretFormData
@@ -108,6 +109,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
           erRedigerbart={erRedigerbart}
           visLeggTilPeriodeForm={visLeggTilPeriodeForm}
           setVisLeggTilPeriodeForm={setVisLeggTilPeriodeForm}
+          setDirty={setIsDirty}
         />
         <RhfForm formMethods={formMethods} onSubmit={values => bekreft(notEmpty(values.begrunnelse))}>
           <VStack gap="4">
@@ -120,10 +122,10 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
             />
             {erRedigerbart && (
               <FaktaSubmitButton
-                isSubmittable={submittable && !feilmelding}
+                isSubmittable={submittable && !feilmelding && !visLeggTilPeriodeForm}
                 isReadOnly={isReadOnly}
                 isSubmitting={formMethods.formState.isSubmitting}
-                isDirty={formMethods.formState.isDirty}
+                isDirty={isDirty || formMethods.formState.isDirty}
               />
             )}
           </VStack>
