@@ -21,7 +21,6 @@ interface Props {
   fødsel: Fødsel;
   terminbekreftelseDokument: DokumentLinkReferanse | undefined;
   submittable: boolean;
-  kanOverstyre: boolean;
 }
 
 /**
@@ -29,7 +28,7 @@ interface Props {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
-export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokument, kanOverstyre }: Props) => {
+export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokument }: Props) => {
   const { aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_TERMINBEKREFTELSE);
@@ -37,7 +36,7 @@ export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumen
 
   return (
     <VStack gap="space-16">
-      <OverstyringPanel kanOverstyre={kanOverstyre} gjeldende={fødsel.gjeldende} submittable={submittable} />
+      <OverstyringPanel gjeldende={fødsel.gjeldende} submittable={submittable} />
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
           {terminbekreftelseAp && <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />}

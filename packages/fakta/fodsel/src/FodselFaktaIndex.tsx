@@ -15,7 +15,6 @@ interface Props {
   fødsel: Fødsel;
   terminbekreftelseDokument: DokumentLinkReferanse | undefined;
   submittable: boolean;
-  kanOverstyre: boolean;
 }
 
 export const FodselFaktaIndex = (props: Props) => (

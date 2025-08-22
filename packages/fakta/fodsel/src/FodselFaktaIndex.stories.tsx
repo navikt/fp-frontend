@@ -3,7 +3,13 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  type PanelDataArgs,
+  type PanelOverstyringContextArgs,
+  withMellomlagretFormData,
+  withPanelData,
+  withPanelOverstyring,
+} from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
@@ -41,11 +47,11 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
-  decorators: [withMellomlagretFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData, withPanelOverstyring],
   args: {
+    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
     submittable: true,
     isReadOnly: false,
-    kanOverstyre: false,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
     terminbekreftelseDokument: {
@@ -96,7 +102,7 @@ const meta = {
     },
   },
   render: args => <FodselFaktaIndex {...args} />,
-} satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & PanelOverstyringContextArgs & ComponentProps<typeof FodselFaktaIndex>>;
 
 export default meta;
 
@@ -349,12 +355,12 @@ export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
 
 export const Overstyring: Story = {
   args: {
-    kanOverstyre: true,
+    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
   },
 };
 export const Overstyrt: Story = {
   args: {
-    kanOverstyre: true,
+    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
     isReadOnly: true,
     aksjonspunkterForPanel: [
       {

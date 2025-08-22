@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
@@ -17,20 +17,23 @@ interface Props {
   gjeldende: FødselGjeldende;
   isReadOnly: boolean;
   submittable: boolean;
-  overstyringsAP: Aksjonspunkt | undefined;
   avbrytOverstyring: () => void;
 }
 
 type FormValues = ErBarnFødtFormValues & TermindatoFormValues & FaktaBegrunnelseFormValues;
 
-export const OverstyringForm = ({ gjeldende, isReadOnly, submittable, avbrytOverstyring, overstyringsAP }: Props) => {
-  const { submitCallback } = usePanelDataContext();
+// TODO(siri): legg til mellomlagring når den støtter lagring av flere forms i samme panel
+export const OverstyringForm = ({ gjeldende, isReadOnly, submittable, avbrytOverstyring }: Props) => {
+  const intl = useIntl();
+  const { aksjonspunkterForPanel, submitCallback } = usePanelDataContext();
 
+  const overstyringsAP = aksjonspunkterForPanel.find(
+    a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+  );
   const formMethods = useForm<FormValues>({
     defaultValues: initialValues(gjeldende, overstyringsAP),
   });
   const finnesBarnIFReg = gjeldende.barn.some(b => b.kilde === 'FOLKEREGISTER');
-
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values))}>
       <VStack gap="6">
@@ -57,8 +60,9 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, submittable, avbrytOver
               isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
+              buttonText={intl.formatMessage({ id: 'OverstyringForm.Bekreft' })}
             />
-            <Button variant="secondary" size="small" type="button" onClick={() => avbrytOverstyring()}>
+            <Button variant="secondary" size="small" type="button" onClick={avbrytOverstyring}>
               <FormattedMessage id="OverstyringForm.Avbryt" />
             </Button>
           </HStack>

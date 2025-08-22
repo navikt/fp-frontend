@@ -8,6 +8,7 @@ import { FodselFaktaIndex } from '@navikt/fp-fakta-fodsel';
 import { AksjonspunktKode, fodselsvilkarene } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Dokument } from '@navikt/fp-types';
+import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { useFagsakApi } from '../../../data/fagsakApi';
@@ -15,8 +16,8 @@ import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel'
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE, AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL];
 const OVERSTYRING_KODER = [AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL];
+const AKSJONSPUNKT_KODER = [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE, AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL];
 
 export const FodselvilkaretFaktaInitPanel = () => {
   const intl = useIntl();
@@ -29,32 +30,40 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const api = useBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
-
+  console.log(rettigheter);
+  const harÅpenOverstyrnig = standardPanelProps.aksjonspunkterForPanel.some(
+    a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+  );
   const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling, skalPanelVisesIMeny));
   const { data: alleDokumenter = [] } = useQuery(
     fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon),
   );
 
   const terminbekreftelseDokument = finnTerminBekreftelse(alleDokumenter, fagsak.saksnummer);
-
   return (
-    <FaktaDefaultInitPanel
-      standardPanelProps={standardPanelProps}
-      faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
-      faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
-      skalPanelVisesIMeny={skalPanelVisesIMeny}
+    <PanelOverstyringProvider
+      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL}
+      kanOverstyreAccess={rettigheter.kanOverstyreAccess}
+      overrideReadOnly={standardPanelProps.readOnly}
+      initialToggleState={harÅpenOverstyrnig}
     >
-      {faktafødsel ? (
-        <FodselFaktaIndex
-          fødsel={faktafødsel}
-          terminbekreftelseDokument={terminbekreftelseDokument}
-          submittable={standardPanelProps.submittable}
-          kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
-        />
-      ) : (
-        <LoadingPanel />
-      )}
-    </FaktaDefaultInitPanel>
+      <FaktaDefaultInitPanel
+        standardPanelProps={standardPanelProps}
+        faktaPanelKode={FaktaPanelCode.FODSELSVILKARET}
+        faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Fodsel' })}
+        skalPanelVisesIMeny={skalPanelVisesIMeny}
+      >
+        {faktafødsel ? (
+          <FodselFaktaIndex
+            fødsel={faktafødsel}
+            terminbekreftelseDokument={terminbekreftelseDokument}
+            submittable={standardPanelProps.submittable}
+          />
+        ) : (
+          <LoadingPanel />
+        )}
+      </FaktaDefaultInitPanel>
+    </PanelOverstyringProvider>
   );
 };
 
