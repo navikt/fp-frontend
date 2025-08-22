@@ -45,6 +45,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
 
+    await userEvent.clear(screen.getAllByRole('textbox')[2]);
+    await userEvent.clear(screen.getAllByRole('textbox')[3]);
     await userEvent.type(screen.getAllByRole('textbox')[2], '8');
     await userEvent.type(screen.getAllByRole('textbox')[3], '0');
     await userEvent.click(screen.getByText('Legg til'));
@@ -117,6 +119,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
+    await userEvent.clear(screen.getAllByRole('textbox')[2]);
+    await userEvent.clear(screen.getAllByRole('textbox')[3]);
     await userEvent.type(screen.getAllByRole('textbox')[2], '8');
     await userEvent.type(screen.getAllByRole('textbox')[3], '3');
     await userEvent.click(screen.getByText('Legg til'));
@@ -126,6 +130,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '12.02.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '25.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.MODREKVOTE);
+    await userEvent.clear(screen.getAllByRole('textbox')[2]);
+    await userEvent.clear(screen.getAllByRole('textbox')[3]);
     await userEvent.type(screen.getAllByRole('textbox')[2], '1');
     await userEvent.type(screen.getAllByRole('textbox')[3], '2.4');
     await userEvent.click(screen.getByText('Legg til'));
@@ -144,6 +150,10 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getAllByTitle('Vis mer')[1]);
     await userEvent.clear(screen.getByLabelText('Fra og med'));
     await userEvent.type(screen.getByLabelText('Fra og med'), '16.02.2022');
+    await userEvent.clear(screen.getAllByRole('textbox')[2]);
+    await userEvent.clear(screen.getAllByRole('textbox')[3]);
+    await userEvent.type(screen.getAllByRole('textbox')[2], '1');
+    await userEvent.type(screen.getAllByRole('textbox')[3], '2.4');
     await userEvent.click(screen.getByText('Oppdater'));
 
     expect(screen.queryByText('Du må rette disse feilene før du kan fortsette:')).not.toBeInTheDocument();
