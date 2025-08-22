@@ -1,5 +1,5 @@
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import type { Beregningsgrunnlag, BeregningsgrunnlagAndel, Besteberegninggrunnlag } from '@navikt/fp-types';
+import type { Beregningsgrunnlag, Besteberegninggrunnlag } from '@navikt/fp-types';
 
 const besteberegninggrunnlag: Besteberegninggrunnlag = {
   besteMåneder: [
@@ -114,6 +114,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
       periodeAarsaker: [],
       beregningsgrunnlagPrStatusOgAndel: [
         {
+          dtoType: 'GENERELL',
           aktivitetStatus: 'AT',
           beregningsperiodeFom: '2019-10-01',
           beregningsperiodeTom: '2019-12-31',
@@ -134,6 +135,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           skalFastsetteGrunnlag: false,
         },
         {
+          dtoType: 'GENERELL',
           beregningsperiodeFom: '2019-10-01',
           beregningsperiodeTom: '2019-12-31',
           aktivitetStatus: 'DP',
@@ -147,7 +149,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           belopPrAarEtterAOrdningen: 120000.0,
           erTilkommetAndel: false,
           skalFastsetteGrunnlag: false,
-        } as BeregningsgrunnlagAndel,
+        },
       ],
     },
   ],
@@ -159,4 +161,16 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
   grunnbeløp: 99858,
   dekningsgrad: 100,
   erOverstyrtInntekt: false,
+  skjæringstidspunkt: '',
+  sammenligningsgrunnlag: {
+    sammenligningsgrunnlagFom: undefined,
+    sammenligningsgrunnlagTom: undefined,
+    rapportertPrAar: undefined,
+    avvikPromille: undefined,
+    avvikProsent: undefined,
+    sammenligningsgrunnlagType: undefined,
+    differanseBeregnet: undefined,
+  },
+  andelerMedGraderingUtenBG: [],
+  forlengelseperioder: [],
 };

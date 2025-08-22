@@ -2612,13 +2612,13 @@ export type BeregningsgrunnlagDto = {
     | 'VENTELØNN_VARTPENGER'
     | '-'
   >;
-  beregningsgrunnlagPeriode?: Array<BeregningsgrunnlagPeriodeDto>;
+  beregningsgrunnlagPeriode: Array<BeregningsgrunnlagPeriodeDto>;
   sammenligningsgrunnlag: SammenligningsgrunnlagDto;
-  sammenligningsgrunnlagPrStatus?: Array<SammenligningsgrunnlagDto>;
+  sammenligningsgrunnlagPrStatus: Array<SammenligningsgrunnlagDto>;
   halvG?: number;
   grunnbeløp?: number;
   faktaOmBeregning?: FaktaOmBeregningDto;
-  andelerMedGraderingUtenBG?: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
+  andelerMedGraderingUtenBG: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
   hjemmel?:
     | 'F_9_9'
     | 'F_9_8_8_28'
@@ -2653,7 +2653,7 @@ export type BeregningsgrunnlagDto = {
   erOverstyrtInntekt: boolean;
   vilkårsperiodeFom?: string;
   inntektsgrunnlag?: InntektsgrunnlagDto;
-  forlengelseperioder?: Array<Periode>;
+  forlengelseperioder: Array<Periode>;
 };
 
 export type BeregningsgrunnlagPeriodeDto = {
@@ -2835,18 +2835,18 @@ export type BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
     | 'TY'
     | 'VENTELØNN_VARTPENGER'
     | '-';
-  beregningsperiodeFom: string | null;
-  beregningsperiodeTom: string | null;
-  beregnetPrAar: number | null;
-  overstyrtPrAar: number | null;
-  bruttoPrAar: number | null;
-  avkortetPrAar: number | null;
-  redusertPrAar: number | null;
-  erTidsbegrensetArbeidsforhold: boolean | null;
-  erNyIArbeidslivet: boolean | null;
-  lonnsendringIBeregningsperioden: boolean | null;
-  andelsnr: number | null;
-  besteberegningPrAar: number | null;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
   inntektskategori:
     | 'ARBEIDSTAKER'
     | 'FRILANSER'
@@ -2859,16 +2859,16 @@ export type BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
     | 'FISKER'
     | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
     | '-';
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
-  fastsattAvSaksbehandler: boolean | null;
-  lagtTilAvSaksbehandler: boolean | null;
-  belopPrMndEtterAOrdningen: number | null;
-  belopPrAarEtterAOrdningen: number | null;
-  dagsats: number | null;
-  originalDagsatsFraTilstøtendeYtelse: number | null;
-  fordeltPrAar: number | null;
-  erTilkommetAndel: boolean | null;
-  skalFastsetteGrunnlag: boolean | null;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
 };
 
 export type BeregningsgrunnlagPrStatusOgAndelFlDto = {
@@ -2948,18 +2948,18 @@ export type BeregningsgrunnlagPrStatusOgAndelSnDto = {
     | 'TY'
     | 'VENTELØNN_VARTPENGER'
     | '-';
-  beregningsperiodeFom: string | null;
-  beregningsperiodeTom: string | null;
-  beregnetPrAar: number | null;
-  overstyrtPrAar: number | null;
-  bruttoPrAar: number | null;
-  avkortetPrAar: number | null;
-  redusertPrAar: number | null;
-  erTidsbegrensetArbeidsforhold: boolean | null;
-  erNyIArbeidslivet: boolean | null;
-  lonnsendringIBeregningsperioden: boolean | null;
-  andelsnr: number | null;
-  besteberegningPrAar: number | null;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
   inntektskategori:
     | 'ARBEIDSTAKER'
     | 'FRILANSER'
@@ -2972,19 +2972,19 @@ export type BeregningsgrunnlagPrStatusOgAndelSnDto = {
     | 'FISKER'
     | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
     | '-';
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
-  fastsattAvSaksbehandler: boolean | null;
-  lagtTilAvSaksbehandler: boolean | null;
-  belopPrMndEtterAOrdningen: number | null;
-  belopPrAarEtterAOrdningen: number | null;
-  dagsats: number | null;
-  originalDagsatsFraTilstøtendeYtelse: number | null;
-  fordeltPrAar: number | null;
-  erTilkommetAndel: boolean | null;
-  skalFastsetteGrunnlag: boolean | null;
-  pgiSnitt: number | null;
-  pgiVerdier: Array<PgiDto> | null;
-  næringer: Array<EgenNæringDto> | null;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  pgiSnitt?: number;
+  pgiVerdier?: Array<PgiDto>;
+  næringer?: Array<EgenNæringDto>;
 };
 
 export type BeregningsgrunnlagPrStatusOgAndelYtelseDto = {
@@ -3095,20 +3095,20 @@ export type BesteberegninggrunnlagDto = {
 };
 
 export type EgenNæringDto = {
-  utenlandskvirksomhetsnavn: string | null;
-  orgnr: string | null;
-  erVarigEndret: boolean | null;
-  erNyoppstartet: boolean | null;
+  utenlandskvirksomhetsnavn?: string;
+  orgnr: string;
+  erVarigEndret?: boolean;
+  erNyoppstartet?: boolean;
   virksomhetType: 'DAGMAMMA' | 'FISKE' | 'FRILANSER' | 'JORDBRUK_SKOGBRUK' | 'ANNEN' | '-';
-  begrunnelse: string | null;
-  endringsdato: string | null;
-  oppstartsdato: string | null;
-  opphørsdato: string | null;
-  regnskapsførerNavn: string | null;
-  regnskapsførerTlf: string | null;
-  kanRegnskapsførerKontaktes: boolean | null;
-  erNyIArbeidslivet: boolean | null;
-  oppgittInntekt: number | null;
+  begrunnelse?: string;
+  endringsdato?: string;
+  oppstartsdato?: string;
+  opphørsdato?: string;
+  regnskapsførerNavn?: string;
+  regnskapsførerTlf?: string;
+  kanRegnskapsførerKontaktes?: boolean;
+  erNyIArbeidslivet?: boolean;
+  oppgittInntekt?: number;
 };
 
 export type FaktaOmBeregningAndelDto = {
@@ -3539,8 +3539,8 @@ export type PermisjonDto = {
 };
 
 export type PgiDto = {
-  beløp: number | null;
-  årstall: number | null;
+  beløp: number;
+  årstall: number;
 };
 
 export type RefusjonAndelTilVurderingDto = {
