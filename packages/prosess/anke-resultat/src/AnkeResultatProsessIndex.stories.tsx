@@ -8,8 +8,8 @@ import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import { AnkeResultatProsessIndex } from './AnkeResultatProsessIndex';
 
 const ankeVurderingResultat = {
-  ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
-  ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
+  ankeVurdering: AnkeVurderingKodeverk.ANKE_AVVIS,
+  ankeVurderingOmgjoer: '-',
   påAnketKlageBehandlingUuid: '1',
   erAnkerIkkePart: true,
   erIkkeKonkret: true,
@@ -51,7 +51,6 @@ export const ResultatVedStadfestYtelsesvedtak: Story = {
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
         ankeVurdering: AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
-        ankeVurderingOmgjoer: '-',
       },
     },
   },
