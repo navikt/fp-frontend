@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
-import { UttakÅrsak, UttakType } from '@navikt/fp-types';
 
 import { DelOppPeriodeModal } from './DelOppPeriodeModal';
 
@@ -20,8 +19,9 @@ const meta = {
     periode: {
       fom: '2022-11-01',
       tom: '2022-11-23',
-      type: UttakType.UTSETTELSE,
-      årsak: UttakÅrsak.INNLEGGELSE_SØKER,
+      type: 'UTSETTELSE',
+      årsak: 'INNLEGGELSE_SØKER',
+      morsStillingsprosent: null,
       aktivitetskravGrunnlag: [],
     },
   },

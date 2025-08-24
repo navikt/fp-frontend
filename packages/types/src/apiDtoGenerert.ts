@@ -661,9 +661,9 @@ export type AksjonspunktGodkjenningDto = {
 };
 
 export type AktivitetskravGrunnlagArbeid = {
-  orgNummer?: string;
-  stillingsprosent?: number;
-  permisjon?: Permisjon;
+  orgNummer: string;
+  stillingsprosent: number;
+  permisjon: Permisjon;
 };
 
 export type AndreYtelserDto = {
@@ -902,9 +902,9 @@ export type DokumentasjonVurderingBehovDto = {
     | 'AKTIVITETSKRAV_ARBEID_OG_UTDANNING'
     | 'AKTIVITETSKRAV_IKKE_OPPGITT'
     | 'TIDLIG_OPPSTART_FAR';
-  vurdering?: 'GODKJENT' | 'GODKJENT_AUTOMATISK' | 'IKKE_GODKJENT' | 'IKKE_DOKUMENTERT';
-  morsStillingsprosent?: number;
-  aktivitetskravGrunnlag?: Array<AktivitetskravGrunnlagArbeid>;
+  vurdering: 'GODKJENT' | 'GODKJENT_AUTOMATISK' | 'IKKE_GODKJENT' | 'IKKE_DOKUMENTERT' | null;
+  morsStillingsprosent: number | null;
+  aktivitetskravGrunnlag: Array<AktivitetskravGrunnlagArbeid>;
 };
 
 export type EgenVirksomhetDto = {
@@ -1323,8 +1323,8 @@ export type OverføringsperiodeDto = {
 };
 
 export type Permisjon = {
-  prosent?: number;
-  type?: '-' | 'UTDANNING' | 'FORELDREPENGER' | 'PERMITTERING' | 'ANNEN_PERMISJON';
+  prosent: number;
+  type: '-' | 'UTDANNING' | 'FORELDREPENGER' | 'PERMITTERING' | 'ANNEN_PERMISJON';
 };
 
 export type PermisjonPeriodeDto = {

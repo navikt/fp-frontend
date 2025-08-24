@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Table } from '@navikt/ds-react';
 import { calcDaysAndWeeks } from '@navikt/ft-utils';
 
-import { type DokumentasjonVurderingBehov, UttakType } from '@navikt/fp-types';
+import { type DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { getFormatertPeriode } from '../../utils/periodeUtils';
 import { UttakDokumentasjonFaktaDetailForm } from '../UttakDokumentasjonFaktaDetailForm';
@@ -13,11 +13,11 @@ import { UttakVurderingStatus } from './UttakVurderingStatus';
 
 import styles from './uttakDokumentasjonFaktaTable.module.css';
 
-const finnType = (type: UttakType) => {
-  if (type === UttakType.UTSETTELSE) {
+const finnType = (type: DokumentasjonVurderingBehov['type']) => {
+  if (type === 'UTSETTELSE') {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Utsettelse" />;
   }
-  if (type === UttakType.OVERFØRING) {
+  if (type === 'OVERFØRING') {
     return <FormattedMessage id="UttakDokumentasjonFaktaTable.Overforing" />;
   }
   return <FormattedMessage id="UttakDokumentasjonFaktaTable.Uttak" />;

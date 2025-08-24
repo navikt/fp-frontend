@@ -10,14 +10,7 @@ import {
   VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import {
-  type Aksjonspunkt,
-  type AktivitetskravGrunnlagArbeid,
-  type DokumentasjonVurderingBehov,
-  UttakÅrsak,
-  UttakType,
-  UttakVurdering,
-} from '@navikt/fp-types';
+import { type Aksjonspunkt, type DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 import { UttakDokumentasjonFaktaIndex } from './UttakDokumentasjonFaktaIndex';
 
@@ -38,7 +31,7 @@ const aktivitetskravGrunnlagListe = [
       type: AktivitetskravPermisjonType.UDEFINERT,
     },
   },
-] as AktivitetskravGrunnlagArbeid[];
+];
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
@@ -61,40 +54,48 @@ const opprettetDokumentasjonVurderingBehovListe = [
   {
     fom: '2022-11-01',
     tom: '2023-01-07',
-    type: UttakType.UTSETTELSE,
-    årsak: UttakÅrsak.INNLEGGELSE_SØKER,
+    type: 'UTSETTELSE',
+    årsak: 'INNLEGGELSE_SØKER',
     aktivitetskravGrunnlag: [],
+    vurdering: null,
+    morsStillingsprosent: null,
   },
   {
     fom: '2022-01-08',
     tom: '2022-02-13',
-    type: UttakType.OVERFØRING,
-    årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
+    type: 'OVERFØRING',
+    årsak: 'SYKDOM_ANNEN_FORELDER',
     aktivitetskravGrunnlag: [],
+    vurdering: null,
+    morsStillingsprosent: null,
   },
   {
     fom: '2022-11-18',
     tom: '2022-12-03',
-    type: UttakType.UTTAK,
-    årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
+    type: 'UTTAK',
+    årsak: 'AKTIVITETSKRAV_ARBEID',
     aktivitetskravGrunnlag: aktivitetskravGrunnlagListe,
+    vurdering: null,
+    morsStillingsprosent: null,
   },
   {
     fom: '2022-11-15',
     tom: '2022-11-20',
-    type: UttakType.UTTAK,
-    årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
+    type: 'UTTAK',
+    årsak: 'TIDLIG_OPPSTART_FAR',
     aktivitetskravGrunnlag: [],
+    vurdering: null,
+    morsStillingsprosent: null,
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 const automatiskAvklartBehovListe = [
   {
     fom: '2022-11-18',
     tom: '2022-12-03',
-    type: UttakType.UTTAK,
-    årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
-    vurdering: UttakVurdering.GODKJENT_AUTOMATISK,
+    type: 'UTTAK',
+    årsak: 'AKTIVITETSKRAV_ARBEID',
+    vurdering: 'GODKJENT_AUTOMATISK',
     aktivitetskravGrunnlag: [
       {
         orgNummer: '123456789',
@@ -105,8 +106,9 @@ const automatiskAvklartBehovListe = [
         },
       },
     ],
+    morsStillingsprosent: null,
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon',
@@ -146,37 +148,40 @@ const utfortDokumentasjonVurderingBehovListe = [
   {
     fom: '2024-07-30',
     tom: '2024-08-02',
-    type: UttakType.UTSETTELSE,
-    årsak: UttakÅrsak.INNLEGGELSE_SØKER,
-    vurdering: UttakVurdering.IKKE_GODKJENT,
+    type: 'UTSETTELSE',
+    årsak: 'INNLEGGELSE_SØKER',
+    vurdering: 'IKKE_GODKJENT',
     aktivitetskravGrunnlag: [],
+    morsStillingsprosent: null,
   },
   {
     fom: '2024-02-08',
     tom: '2024-02-13',
-    type: UttakType.OVERFØRING,
-    årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
-    vurdering: UttakVurdering.GODKJENT,
+    type: 'OVERFØRING',
+    årsak: 'SYKDOM_ANNEN_FORELDER',
+    vurdering: 'GODKJENT',
     aktivitetskravGrunnlag: [],
+    morsStillingsprosent: null,
   },
   {
     fom: '2024-05-30',
     tom: '2024-06-11',
-    type: UttakType.UTTAK,
-    årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
-    vurdering: UttakVurdering.GODKJENT,
+    type: 'UTTAK',
+    årsak: 'AKTIVITETSKRAV_ARBEID',
+    vurdering: 'GODKJENT',
     morsStillingsprosent: 60,
     aktivitetskravGrunnlag: aktivitetskravGrunnlagListe,
   },
   {
     fom: '2024-08-07',
     tom: '2024-08-23',
-    type: UttakType.UTTAK,
-    årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
-    vurdering: UttakVurdering.IKKE_DOKUMENTERT,
+    type: 'UTTAK',
+    årsak: 'TIDLIG_OPPSTART_FAR',
+    vurdering: 'IKKE_DOKUMENTERT',
     aktivitetskravGrunnlag: [],
+    morsStillingsprosent: null,
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
   args: {
@@ -210,10 +215,11 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
       {
         fom: '2022-12-08',
         tom: '2022-12-13',
-        type: UttakType.UTTAK,
-        årsak: UttakÅrsak.HV_ØVELSE,
-        vurdering: UttakVurdering.GODKJENT,
+        type: 'UTTAK',
+        årsak: 'HV_ØVELSE',
+        vurdering: 'GODKJENT',
         aktivitetskravGrunnlag: [],
+        morsStillingsprosent: null,
       },
     ],
     submittable: true,
