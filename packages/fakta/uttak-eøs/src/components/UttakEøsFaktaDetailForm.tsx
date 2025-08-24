@@ -58,6 +58,14 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
     }
   };
 
+  const oppdaterTrekkdagerOgTrekkuker = (fraOgTil?: string, tilOgMed?: string) => {
+    if (fraOgTil && tilOgMed) {
+      const dagerOgUker = calcDaysAndWeeks(fraOgTil, tilOgMed);
+      formMethods.setValue('trekkuker', dagerOgUker.weeks?.toString() ?? '0');
+      formMethods.setValue('trekkdager', dagerOgUker.days?.toString() ?? '0');
+    }
+  };
+
   return (
     <>
       <RhfForm formMethods={formMethods} onSubmit={values => oppdater(transformValues(values))}>
@@ -70,6 +78,9 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 control={formMethods.control}
                 validate={[required, hasValidDate]}
                 isReadOnly={isReadOnly}
+                onChange={value => {
+                  oppdaterTrekkdagerOgTrekkuker(value, formMethods.getValues('tom'));
+                }}
               />
               <RhfDatepicker
                 name="tom"
@@ -78,6 +89,9 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 validate={[required, hasValidDate, validerTomEtterFom(intl, formMethods.getValues)]}
                 isReadOnly={isReadOnly}
                 fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
+                onChange={value => {
+                  oppdaterTrekkdagerOgTrekkuker(formMethods.getValues('fom'), value);
+                }}
               />
               {slettPeriode && !isReadOnly && (
                 <Button
