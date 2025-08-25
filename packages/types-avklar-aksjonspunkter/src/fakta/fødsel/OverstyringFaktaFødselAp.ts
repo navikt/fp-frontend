@@ -4,7 +4,6 @@ import type { AksjonspunktTilBekreftelse } from '../../AksjonspunktTilBekreftels
 
 export type OverstyringFaktaFødselAp = {
   termindato: string | undefined;
-  erBarnFødt: boolean;
   barn?: {
     fødselsdato: string;
     dødsdato?: string;
