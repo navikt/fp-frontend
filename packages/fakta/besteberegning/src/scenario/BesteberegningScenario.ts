@@ -162,15 +162,6 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
   dekningsgrad: 100,
   erOverstyrtInntekt: false,
   skjæringstidspunkt: '',
-  sammenligningsgrunnlag: {
-    sammenligningsgrunnlagFom: undefined,
-    sammenligningsgrunnlagTom: undefined,
-    rapportertPrAar: undefined,
-    avvikPromille: undefined,
-    avvikProsent: undefined,
-    sammenligningsgrunnlagType: undefined,
-    differanseBeregnet: undefined,
-  },
   andelerMedGraderingUtenBG: [],
   forlengelseperioder: [],
 };
