@@ -1,0 +1,6099 @@
+import{g as tN,r as P,u as ug,_ as hd,s as yd,c as La,a as be,b as k,d as og,e as Da,T as Eg,S as Yt,R as aN,f as Iu,W as dg,A as mg,h as Rr,j as le,i as qr,X as Ng,P as Pu,t as fg,k as Rg,o as cg,M as vg,l as Ag,E as Sg,m as kl,n as _g,p as Jt,q as Tg,w as gg,v as Ig}from"./iframe-Cd763g67.js";import{r as Pg}from"./index-Crr5pnTi.js";import"./preload-helper-D9Z9MdNV.js";var lN=Pg();const Xs=tN(lN);function hg(e,l){var r=e.values,t=hd(e,["values"]),i=l.values,u=hd(l,["values"]);return yd(i,r)&&yd(t,u)}function iN(e){var l=ug(),r=l.formatMessage,t=l.textComponent,i=t===void 0?P.Fragment:t,u=e.id,o=e.description,d=e.defaultMessage,N=e.values,f=e.children,R=e.tagName,A=R===void 0?i:R,S=e.ignoreTag,_={id:u,description:o,defaultMessage:d},G=r(_,N,{ignoreTag:S});return typeof f=="function"?f(Array.isArray(G)?G:[G]):A?P.createElement(A,null,G):P.createElement(P.Fragment,null,G)}iN.displayName="FormattedMessage";var Kn=P.memo(iN,hg);Kn.displayName="MemoizedFormattedMessage";var nt=(e=>(e.SJEKK_TERMINBEKREFTELSE="5001",e.AVKLAR_DEKNINGSGRAD="5002",e.ADOPSJONSDOKUMENTAJON="5004",e.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN="5005",e.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE="5006",e.SOKNADSFRISTVILKARET="5007",e.OMSORGSOVERTAKELSE="5008",e.MANUELL_VURDERING_AV_OMSORGSVILKARET="5011",e.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD="5012",e.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD="5013",e.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD="5014",e.FORESLA_VEDTAK="5015",e.FATTER_VEDTAK="5016",e.SOKERS_OPPLYSNINGSPLIKT_MANU="5017",e.AVKLAR_LOVLIG_OPPHOLD="5019",e.AVKLAR_OM_BRUKER_ER_BOSATT="5020",e.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE="5021",e.AVKLAR_OPPHOLDSRETT="5023",e.VURDER_MEDLEMSKAPSVILKÅRET="5101",e.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR="5102",e.VARSEL_REVURDERING_ETTERKONTROLL="5025",e.VARSEL_REVURDERING_MANUELL="5026",e.SJEKK_MANGLENDE_FØDSEL="5027",e.FORESLA_VEDTAK_MANUELT="5028",e.KONTROLLER_STOR_ETTERBETALING_SØKER="5029",e.AVKLAR_VERGE="5030",e.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN="5031",e.VURDERE_ANNEN_YTELSE="5033",e.VURDERE_DOKUMENT="5034",e.VURDERE_INNTEKTSMELDING_KLAGE="5003",e.BEHANDLE_KLAGE_NFP="5035",e.BEHANDLE_KLAGE_NK="5036",e.VURDER_INNSYN="5037",e.REGISTRER_PAPIRSOKNAD_FORELDREPENGER="5040",e.VURDER_ARBEIDSFORHOLD_PERMISJON="5041",e.VURDER_SOKNADSFRIST_FORELDREPENGER="5043",e.KONTROLLER_AUTOMATISK_BESTEBEREGNING="5048",e.VURDER_PERIODER_MED_OPPTJENING="5051",e.AVKLAR_FORTSATT_MEDLEMSKAP="5053",e.AVKLAR_VILKAR_FOR_FORELDREANSVAR="5054",e.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST="5055",e.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING="5056",e.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER="5057",e.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER="5096",e.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG="5060",e.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG="5061",e.MANUELL_KONTROLL_AV_BESTEBEREGNING="5062",e.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE="5063",e.FAKTA_UTTAK_INGEN_PERIODER_KODE="5064",e.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE="5065",e.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE="5066",e.TETTE_SAKER="5067",e.AUTOMATISK_MARKERING_AV_UTENLANDSSAK="5068",e.ANNENPART_EØS="5069",e.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART="5103",e.FASTSETT_UTTAKPERIODER="5071",e.TILKNYTTET_STORTINGET="5072",e.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE="5073",e.VURDER_UTTAK_DOKUMENTASJON="5074",e.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN="5075",e.KONTROLLER_OPPLYSNINGER_OM_DØD="5076",e.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST="5077",e.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET="5078",e.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT="5079",e.VURDERING_AV_FORMKRAV_KLAGE_NFP="5082",e.VURDER_FORMKRAV_NK="5083",e.VURDER_FEILUTBETALING="5084",e.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING="5085",e.AVKLAR_ANNEN_FORELDER_RETT="5086",e.SOKERS_OPPLYSNINGSPLIKT_OVST="6002",e.OVERSTYR_FODSELSVILKAR="6003",e.OVERSTYR_ADOPSJONSVILKAR="6004",e.OVERSTYR_MEDLEMSKAPSVILKAR="6005",e.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE="6017",e.OVERSTYR_SOKNADSFRISTVILKAR="6006",e.OVERSTYRING_AV_UTTAKPERIODER="6008",e.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR="6009",e.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP="6010",e.OVERSTYRING_AV_OPPTJENINGSVILKARET="6011",e.OVERSTYR_DEKNINGSGRAD="6016",e.OVERSTYRING_AV_RETT_OG_OMSORG="6018",e.VURDER_OPPTJENINGSVILKARET="5089",e.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR="6012",e.OVERSTYR_AVKLAR_STARTDATO="6045",e.OVERSTYR_FAKTA_UTTAK="6065",e.OVERSTYR_FAKTA_UTTAK_EØS="6103",e.AUTO_MANUELT_SATT_PÅ_VENT="7001",e.AUTO_VENT_PÅ_FODSELREGISTRERING="7002",e.AUTO_VENTER_PÅ_KOMPLETT_SOKNAD="7003",e.AUTO_VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG="7019",e.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN="7033",e.FODSELTILRETTELEGGING="5091",e.SVANGERSKAPSVILKARET="5092",e.VURDER_FARESIGNALER="5095",e.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS="5038",e.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE="5039",e.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE="5042",e.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD="5047",e.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET="5049",e.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG="5050",e.VURDER_FAKTA_FOR_ATFL_SN="5058",e.AVKLAR_AKTIVITETER="5052",e.OVERSTYRING_AV_BEREGNINGSAKTIVITETER="6014",e.OVERSTYRING_AV_BEREGNINGSGRUNNLAG="6015",e.FORDEL_BEREGNINGSGRUNNLAG="5046",e.VURDER_REFUSJON_BERGRUNN="5059",e.AVKLAR_ARBEIDSFORHOLD="5080",e.VURDER_TILBAKETREKK="5090",e))(nt||{}),sN=(e=>(e.MANUELL="MANU",e.AUTOPUNKT="AUTO",e.OVERSTYRING="OVST",e.SAKSBEHANDLEROVERSTYRING="SAOV",e))(sN||{}),On=(e=>(e.ARBEID="ARBEID",e.AAP="AAP",e.DAGPENGER="DAGPENGER",e.FORELDREPENGER="FORELDREPENGER",e.FRILANS="FRILANS",e.MILITAR_ELLER_SIVILTJENESTE="MILITÆR_ELLER_SIVILTJENESTE",e.NARING="NÆRING",e.OMSORGSPENGER="OMSORGSPENGER",e.OPPLARINGSPENGER="OPPLÆRINGSPENGER",e.PLEIEPENGER="PLEIEPENGER",e.SVANGERSKAPSPENGER="SVANGERSKAPSPENGER",e.SYKEPENGER="SYKEPENGER",e.VARTPENGER="VARTPENGER",e.VIDERE_ETTERUTDANNING="VIDERE_ETTERUTDANNING",e.UTENLANDSK_ARBEIDSFORHOLD="UTENLANDSK_ARBEIDSFORHOLD",e.VENTELØNN_VARTPENGER="VENTELØNN_VARTPENGER",e.ETTERLONN_SLUTTPAKKE="ETTERLØNN_SLUTTPAKKE",e))(On||{}),uN=(e=>(e.FODSELSVILKARET_MOR="FP_VK_1",e.SVANGERSKAPVILKARET="SVP_VK_1",e.MEDLEMSKAPSVILKARET="FP_VK_2",e.MEDLEMSKAPSVILKÅRET_LØPENDE="FP_VK_2_L",e.MEDLEMSKAPSVILKARET_FORUTGAENDE="FP_VK_2_F",e.SOKNADFRISTVILKARET="FP_VK_3",e.ADOPSJONSVILKARET="FP_VK_4",e.OMSORGSVILKARET="FP_VK_5",e.FORELDREANSVARSVILKARET_2_LEDD="FP_VK_8",e.FODSELSVILKARET_FAR="FP_VK_11",e.ADOPSJONSVILKARET_FORELDREPENGER="FP_VK_16",e.OPPTJENINGSPERIODE="FP_VK_21",e.OPPTJENINGSVILKARET="FP_VK_23",e.FORELDREANSVARSVILKARET_4_LEDD="FP_VK_33",e.SOKERSOPPLYSNINGSPLIKT="FP_VK_34",e.BEREGNINGSGRUNNLAGVILKARET="FP_VK_41",e))(uN||{});const yg=(e,l)=>{if(e==null)throw Error("Data er ikke oppgitt");return e},$t=e=>La({"navds-typo--spacing":e.spacing,"navds-typo--truncate":e.truncate,"navds-typo--semibold":e.weight==="semibold",[`navds-typo--align-${e.align}`]:e.align,[`navds-typo--color-${e.textColor}`]:e.textColor,"navds-typo--visually-hidden":e.visuallyHidden,"navds-typo--uppercase":e.uppercase});var pg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const hu=P.forwardRef((e,l)=>{var{className:r,size:t="medium",as:i="p",spacing:u,truncate:o,weight:d="regular",align:N,visuallyHidden:f,textColor:R}=e,A=pg(e,["className","size","as","spacing","truncate","weight","align","visuallyHidden","textColor"]);const{cn:S}=be();return k.createElement(i,Object.assign({},A,{ref:l,className:S(r,"navds-body-long",`navds-body-long--${t}`,$t({spacing:u,truncate:o,weight:d,align:N,visuallyHidden:f,textColor:R}))}))});var bg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Nr=P.forwardRef((e,l)=>{var{className:r,size:t="medium",as:i="p",spacing:u,truncate:o,weight:d="regular",align:N,visuallyHidden:f,textColor:R}=e,A=bg(e,["className","size","as","spacing","truncate","weight","align","visuallyHidden","textColor"]);const{cn:S}=be();return k.createElement(i,Object.assign({},A,{ref:l,className:S(r,"navds-body-short",`navds-body-short--${t}`,$t({spacing:u,truncate:o,weight:d,align:N,visuallyHidden:f,textColor:R}))}))});var Lg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Dg=P.forwardRef((e,l)=>{var{className:r,size:t="medium",spacing:i,uppercase:u,as:o="p",truncate:d,weight:N="regular",align:f,visuallyHidden:R,textColor:A}=e,S=Lg(e,["className","size","spacing","uppercase","as","truncate","weight","align","visuallyHidden","textColor"]);const{cn:_}=be();return k.createElement(o,Object.assign({},S,{ref:l,className:_(r,"navds-detail",$t({spacing:i,truncate:d,weight:N,align:f,visuallyHidden:R,textColor:A,uppercase:u}),{"navds-detail--small":t==="small"})}))});var Gg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const ai=P.forwardRef((e,l)=>{var{children:r,className:t,size:i,spacing:u,as:o="p",showIcon:d=!1}=e,N=Gg(e,["children","className","size","spacing","as","showIcon"]);const{cn:f}=be();return k.createElement(o,Object.assign({},N,{ref:l,className:f("navds-error-message","navds-label",t,$t({spacing:u}),{"navds-label--small":i==="small","navds-error-message--show-icon":d})}),d&&k.createElement("svg",{viewBox:"0 0 17 16",fill:"none",xmlns:"http://www.w3.org/2000/svg",focusable:!1,"aria-hidden":!0},k.createElement("path",{fillRule:"evenodd",clipRule:"evenodd",d:"M3.49209 11.534L8.11398 2.7594C8.48895 2.04752 9.50833 2.04743 9.88343 2.75924L14.5073 11.5339C14.8582 12.1998 14.3753 13 13.6226 13H4.37685C3.6242 13 3.14132 12.1999 3.49209 11.534ZM9.74855 10.495C9.74855 10.9092 9.41276 11.245 8.99855 11.245C8.58433 11.245 8.24855 10.9092 8.24855 10.495C8.24855 10.0808 8.58433 9.74497 8.99855 9.74497C9.41276 9.74497 9.74855 10.0808 9.74855 10.495ZM9.49988 5.49997C9.49988 5.22383 9.27602 4.99997 8.99988 4.99997C8.72373 4.99997 8.49988 5.22383 8.49988 5.49997V7.99997C8.49988 8.27611 8.72373 8.49997 8.99988 8.49997C9.27602 8.49997 9.49988 8.27611 9.49988 7.99997V5.49997Z",fill:"currentColor"})),r)});var Og=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};P.forwardRef((e,l)=>{var{level:r="1",size:t,className:i,as:u,spacing:o,align:d,visuallyHidden:N,textColor:f}=e,R=Og(e,["level","size","className","as","spacing","align","visuallyHidden","textColor"]);const{cn:A}=be(),S=u??`h${r}`;return k.createElement(S,Object.assign({},R,{ref:l,className:A(i,"navds-heading",`navds-heading--${t}`,$t({spacing:o,align:d,visuallyHidden:N,textColor:f}))}))});var kg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};P.forwardRef((e,l)=>{var{className:r,spacing:t,as:i="p"}=e,u=kg(e,["className","spacing","as"]);const{cn:o}=be();return k.createElement(i,Object.assign({},u,{ref:l,className:o(r,"navds-ingress",{"navds-typo--spacing":!!t})}))});var Fg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const At=P.forwardRef((e,l)=>{var{className:r,size:t="medium",as:i="label",spacing:u,visuallyHidden:o,textColor:d}=e,N=Fg(e,["className","size","as","spacing","visuallyHidden","textColor"]);const{cn:f}=be();return k.createElement(i,Object.assign({},N,{ref:l,className:f(r,"navds-label",$t({spacing:u,visuallyHidden:o,textColor:d}),{"navds-label--small":t==="small"})}))});function oN(e,l=166,r=!1){let t;function i(...u){const o=()=>{t=void 0,e.apply(this,u)};!t&&r&&o(),clearTimeout(t),t=setTimeout(o,l)}return i.clear=()=>{clearTimeout(t)},i}function fr(e,l){const r=Object.entries(e).filter(([t])=>!l.includes(t));return Object.fromEntries(r)}const pd=globalThis?.document?P.useLayoutEffect:()=>{};let bd=0;function Kg(e){const[l,r]=P.useState(e),t=e||l;return P.useEffect(()=>{l==null&&(bd+=1,r(`aksel-id-${bd}`))},[l]),t}const Ld=k.useId;function Ga(e){var l;if(Ld!==void 0){const r=Ld();return e??r.replace(/(:)/g,"")}return(l=Kg(e))!==null&&l!==void 0?l:""}function Dd(e,l=[]){const r=P.useRef(e);return P.useEffect(()=>{r.current=e}),P.useCallback((...t)=>{var i;return(i=r.current)===null||i===void 0?void 0:i.call(r,...t)},l)}function yu({value:e,defaultValue:l,onChange:r}){const t=Dd(r),[i,u]=P.useState(l),o=e!==void 0,d=o?e:i,N=Dd(f=>{const A=typeof f=="function"?f(d):f;o||u(A),t(A)},[o,t,d]);return[d,N]}let Gd=0;function Vg(e){const[l,r]=P.useState(e),t=e||l;return P.useEffect(()=>{l==null&&(Gd+=1,r(`aksel-icon-${Gd}`))},[l]),t}const Od=k.useId;function tr(e){var l;return Od!==void 0?Od().replace(/(:)/g,""):(l=Vg(e))!==null&&l!==void 0?l:""}var Mg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Bg=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=Mg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M16.47 21.03a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 1 0-1.06-1.06l-2.22 2.22V9.5a.75.75 0 0 0-1.5 0v9.19l-2.22-2.22a.75.75 0 1 0-1.06 1.06zM4.03 7.53l2.22-2.22v9.19a.75.75 0 0 0 1.5 0V5.31l2.22 2.22a.75.75 0 1 0 1.06-1.06l-3.5-3.5a.75.75 0 0 0-1.06 0l-3.5 3.5a.75.75 0 0 0 1.06 1.06",clipRule:"evenodd"}))});var wg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Ug=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=wg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 21.75c5.385 0 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25 2.25 6.615 2.25 12s4.365 9.75 9.75 9.75m4.954-12.475a.813.813 0 0 0-1.24-1.05l-5.389 6.368L7.7 11.967a.812.812 0 0 0-1.15 1.15l3.25 3.25a.81.81 0 0 0 1.195-.05z",clipRule:"evenodd"}))});var xg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const EN=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=xg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M5.97 9.47a.75.75 0 0 1 1.06 0L12 14.44l4.97-4.97a.75.75 0 1 1 1.06 1.06l-5.5 5.5a.75.75 0 0 1-1.06 0l-5.5-5.5a.75.75 0 0 1 0-1.06",clipRule:"evenodd"}))});var qg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Hg=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=qg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 2.25a.75.75 0 0 1 .656.387l9.527 17.25A.75.75 0 0 1 21.526 21H2.474a.75.75 0 0 1-.657-1.113l9.526-17.25A.75.75 0 0 1 12 2.25M12 8.75a.75.75 0 0 1 .75.75v4a.75.75 0 0 1-1.5 0v-4a.75.75 0 0 1 .75-.75m-1 7.75a1 1 0 1 1 2 0 1 1 0 0 1-2 0",clipRule:"evenodd"}))});var Cg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const jg=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=Cg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M3.25 4A.75.75 0 0 1 4 3.25h16a.75.75 0 0 1 .75.75v16a.75.75 0 0 1-.75.75H4a.75.75 0 0 1-.75-.75zM11 7.75a1 1 0 1 1 2 0 1 1 0 0 1-2 0m-1.25 3a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 .75.75v4.75h.75a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1 0-1.5h.75v-4h-.75a.75.75 0 0 1-.75-.75",clipRule:"evenodd"}))});var Yg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const dN=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=Yg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M10.5 3.25a7.25 7.25 0 1 0 4.569 12.88l5.411 5.41a.75.75 0 1 0 1.06-1.06l-5.41-5.411A7.25 7.25 0 0 0 10.5 3.25M4.75 10.5a5.75 5.75 0 1 1 11.5 0 5.75 5.75 0 0 1-11.5 0",clipRule:"evenodd"}))});var Jg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const mN=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=Jg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 2.25A4.75 4.75 0 0 0 7.25 7v2.25H7A1.75 1.75 0 0 0 5.25 11v9c0 .414.336.75.75.75h12a.75.75 0 0 0 .75-.75v-9A1.75 1.75 0 0 0 17 9.25h-.25V7A4.75 4.75 0 0 0 12 2.25m3.25 7V7a3.25 3.25 0 0 0-6.5 0v2.25zM12 13a1.5 1.5 0 0 0-.75 2.8V17a.75.75 0 0 0 1.5 0v-1.2A1.5 1.5 0 0 0 12 13",clipRule:"evenodd"}))});var $g=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Wg=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=$g(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 2.25a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5m0 12A6.75 6.75 0 0 0 5.25 21a.75.75 0 0 0 .75.75h6.525c.173 0 .294-.172.262-.341a2.3 2.3 0 0 1 .007-.85l.5-2.5a2.25 2.25 0 0 1 .615-1.15l1.423-1.423a.24.24 0 0 0-.048-.384A6.75 6.75 0 0 0 12 14.25m8.53 1.22a2.164 2.164 0 0 0-3.06 0l-2.5 2.5a.75.75 0 0 0-.205.383l-.5 2.5a.75.75 0 0 0 .882.882l2.5-.5a.75.75 0 0 0 .383-.205l2.5-2.5a2.164 2.164 0 0 0 0-3.06",clipRule:"evenodd"}))});var zg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Xg=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=zg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M18.03 18.53a.75.75 0 0 1-1.06 0l-3.5-3.5a.75.75 0 1 1 1.06-1.06l2.22 2.22V6a.75.75 0 0 1 1.5 0v10.19l2.22-2.22a.75.75 0 1 1 1.06 1.06zM2.75 6.25a.75.75 0 0 0 0 1.5h9.5a.75.75 0 0 0 0-1.5zm0 5a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5zM2 17a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5A.75.75 0 0 1 2 17",clipRule:"evenodd"}))});var Zg=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Qg=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=Zg(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M18.03 5.47a.75.75 0 0 0-1.06 0l-3.5 3.5a.75.75 0 1 0 1.06 1.06l2.22-2.22V18a.75.75 0 0 0 1.5 0V7.81l2.22 2.22a.75.75 0 1 0 1.06-1.06zM2.75 17.75a.75.75 0 0 1 0-1.5h9.5a.75.75 0 0 1 0 1.5zm0-5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zM2 7c0 .414.336.75.75.75h5.5a.75.75 0 0 0 0-1.5h-5.5A.75.75 0 0 0 2 7",clipRule:"evenodd"}))});var eI=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Zs=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=eI(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",d:"M6.53 5.47a.75.75 0 0 0-1.06 1.06L10.94 12l-5.47 5.47a.75.75 0 1 0 1.06 1.06L12 13.06l5.47 5.47a.75.75 0 1 0 1.06-1.06L13.06 12l5.47-5.47a.75.75 0 0 0-1.06-1.06L12 10.94z"}))});var nI=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const rI=P.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=nI(e,["title","titleId"]);let u=tr();return u=r?t||"title-"+u:void 0,P.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?P.createElement("title",{id:u},r):null,P.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M7.742 2.47a.75.75 0 0 1 .53-.22h7.456a.75.75 0 0 1 .53.22l5.272 5.272c.141.14.22.331.22.53v7.456a.75.75 0 0 1-.22.53l-5.272 5.272a.75.75 0 0 1-.53.22H8.272a.75.75 0 0 1-.53-.22L2.47 16.258a.75.75 0 0 1-.22-.53V8.272a.75.75 0 0 1 .22-.53zm1.288 5.5a.75.75 0 0 0-1.06 1.06L10.94 12l-2.97 2.97a.75.75 0 1 0 1.06 1.06L12 13.06l2.97 2.97a.75.75 0 1 0 1.06-1.06L13.06 12l2.97-2.97a.75.75 0 0 0-1.06-1.06L12 10.94z",clipRule:"evenodd"}))});function Oa(e,l,{checkForDefaultPrevented:r=!0}={}){return function(i){if(e?.(i),r===!1||!i.defaultPrevented)return l?.(i)}}const[tL,tI]=og({name:"ModalContext",errorMessage:"<Modal.Header> must be used within a <Modal>"});function bs(e){return(l={})=>{const r=l.width?String(l.width):e.defaultWidth;return e.formats[r]||e.formats[e.defaultWidth]}}function Ra(e){return(l,r)=>{const t=r?.context?String(r.context):"standalone";let i;if(t==="formatting"&&e.formattingValues){const o=e.defaultFormattingWidth||e.defaultWidth,d=r?.width?String(r.width):o;i=e.formattingValues[d]||e.formattingValues[o]}else{const o=e.defaultWidth,d=r?.width?String(r.width):e.defaultWidth;i=e.values[d]||e.values[o]}const u=e.argumentCallback?e.argumentCallback(l):l;return i[u]}}function ca(e){return(l,r={})=>{const t=r.width,i=t&&e.matchPatterns[t]||e.matchPatterns[e.defaultMatchWidth],u=l.match(i);if(!u)return null;const o=u[0],d=t&&e.parsePatterns[t]||e.parsePatterns[e.defaultParseWidth],N=Array.isArray(d)?lI(d,A=>A.test(o)):aI(d,A=>A.test(o));let f;f=e.valueCallback?e.valueCallback(N):N,f=r.valueCallback?r.valueCallback(f):f;const R=l.slice(o.length);return{value:f,rest:R}}}function aI(e,l){for(const r in e)if(Object.prototype.hasOwnProperty.call(e,r)&&l(e[r]))return r}function lI(e,l){for(let r=0;r<e.length;r++)if(l(e[r]))return r}function iI(e){return(l,r={})=>{const t=l.match(e.matchPattern);if(!t)return null;const i=t[0],u=l.match(e.parsePattern);if(!u)return null;let o=e.valueCallback?e.valueCallback(u[0]):u[0];o=r.valueCallback?r.valueCallback(o):o;const d=l.slice(i.length);return{value:o,rest:d}}}const sI={lessThanXSeconds:{one:"mindre enn ett sekund",other:"mindre enn {{count}} sekunder"},xSeconds:{one:"ett sekund",other:"{{count}} sekunder"},halfAMinute:"et halvt minutt",lessThanXMinutes:{one:"mindre enn ett minutt",other:"mindre enn {{count}} minutter"},xMinutes:{one:"ett minutt",other:"{{count}} minutter"},aboutXHours:{one:"omtrent en time",other:"omtrent {{count}} timer"},xHours:{one:"en time",other:"{{count}} timer"},xDays:{one:"en dag",other:"{{count}} dager"},aboutXWeeks:{one:"omtrent en uke",other:"omtrent {{count}} uker"},xWeeks:{one:"en uke",other:"{{count}} uker"},aboutXMonths:{one:"omtrent en måned",other:"omtrent {{count}} måneder"},xMonths:{one:"en måned",other:"{{count}} måneder"},aboutXYears:{one:"omtrent ett år",other:"omtrent {{count}} år"},xYears:{one:"ett år",other:"{{count}} år"},overXYears:{one:"over ett år",other:"over {{count}} år"},almostXYears:{one:"nesten ett år",other:"nesten {{count}} år"}},uI=(e,l,r)=>{let t;const i=sI[e];return typeof i=="string"?t=i:l===1?t=i.one:t=i.other.replace("{{count}}",String(l)),r?.addSuffix?r.comparison&&r.comparison>0?"om "+t:t+" siden":t},oI={full:"EEEE d. MMMM y",long:"d. MMMM y",medium:"d. MMM y",short:"dd.MM.y"},EI={full:"'kl'. HH:mm:ss zzzz",long:"HH:mm:ss z",medium:"HH:mm:ss",short:"HH:mm"},dI={full:"{{date}} 'kl.' {{time}}",long:"{{date}} 'kl.' {{time}}",medium:"{{date}} {{time}}",short:"{{date}} {{time}}"},mI={date:bs({formats:oI,defaultWidth:"full"}),time:bs({formats:EI,defaultWidth:"full"}),dateTime:bs({formats:dI,defaultWidth:"full"})},NI={lastWeek:"'forrige' eeee 'kl.' p",yesterday:"'i går kl.' p",today:"'i dag kl.' p",tomorrow:"'i morgen kl.' p",nextWeek:"EEEE 'kl.' p",other:"P"},fI=(e,l,r,t)=>NI[e],RI={narrow:["f.Kr.","e.Kr."],abbreviated:["f.Kr.","e.Kr."],wide:["før Kristus","etter Kristus"]},cI={narrow:["1","2","3","4"],abbreviated:["Q1","Q2","Q3","Q4"],wide:["1. kvartal","2. kvartal","3. kvartal","4. kvartal"]},vI={narrow:["J","F","M","A","M","J","J","A","S","O","N","D"],abbreviated:["jan.","feb.","mars","apr.","mai","juni","juli","aug.","sep.","okt.","nov.","des."],wide:["januar","februar","mars","april","mai","juni","juli","august","september","oktober","november","desember"]},AI={narrow:["S","M","T","O","T","F","L"],short:["sø","ma","ti","on","to","fr","lø"],abbreviated:["søn","man","tir","ons","tor","fre","lør"],wide:["søndag","mandag","tirsdag","onsdag","torsdag","fredag","lørdag"]},SI={narrow:{am:"a",pm:"p",midnight:"midnatt",noon:"middag",morning:"på morg.",afternoon:"på etterm.",evening:"på kvelden",night:"på natten"},abbreviated:{am:"a.m.",pm:"p.m.",midnight:"midnatt",noon:"middag",morning:"på morg.",afternoon:"på etterm.",evening:"på kvelden",night:"på natten"},wide:{am:"a.m.",pm:"p.m.",midnight:"midnatt",noon:"middag",morning:"på morgenen",afternoon:"på ettermiddagen",evening:"på kvelden",night:"på natten"}},_I=(e,l)=>Number(e)+".",TI={ordinalNumber:_I,era:Ra({values:RI,defaultWidth:"wide"}),quarter:Ra({values:cI,defaultWidth:"wide",argumentCallback:e=>e-1}),month:Ra({values:vI,defaultWidth:"wide"}),day:Ra({values:AI,defaultWidth:"wide"}),dayPeriod:Ra({values:SI,defaultWidth:"wide"})},gI=/^(\d+)\.?/i,II=/\d+/i,PI={narrow:/^(f\.? ?Kr\.?|fvt\.?|e\.? ?Kr\.?|evt\.?)/i,abbreviated:/^(f\.? ?Kr\.?|fvt\.?|e\.? ?Kr\.?|evt\.?)/i,wide:/^(før Kristus|før vår tid|etter Kristus|vår tid)/i},hI={any:[/^f/i,/^e/i]},yI={narrow:/^[1234]/i,abbreviated:/^q[1234]/i,wide:/^[1234](\.)? kvartal/i},pI={any:[/1/i,/2/i,/3/i,/4/i]},bI={narrow:/^[jfmasond]/i,abbreviated:/^(jan|feb|mars?|apr|mai|juni?|juli?|aug|sep|okt|nov|des)\.?/i,wide:/^(januar|februar|mars|april|mai|juni|juli|august|september|oktober|november|desember)/i},LI={narrow:[/^j/i,/^f/i,/^m/i,/^a/i,/^m/i,/^j/i,/^j/i,/^a/i,/^s/i,/^o/i,/^n/i,/^d/i],any:[/^ja/i,/^f/i,/^mar/i,/^ap/i,/^mai/i,/^jun/i,/^jul/i,/^aug/i,/^s/i,/^o/i,/^n/i,/^d/i]},DI={narrow:/^[smtofl]/i,short:/^(sø|ma|ti|on|to|fr|lø)/i,abbreviated:/^(søn|man|tir|ons|tor|fre|lør)/i,wide:/^(søndag|mandag|tirsdag|onsdag|torsdag|fredag|lørdag)/i},GI={any:[/^s/i,/^m/i,/^ti/i,/^o/i,/^to/i,/^f/i,/^l/i]},OI={narrow:/^(midnatt|middag|(på) (morgenen|ettermiddagen|kvelden|natten)|[ap])/i,any:/^([ap]\.?\s?m\.?|midnatt|middag|(på) (morgenen|ettermiddagen|kvelden|natten))/i},kI={any:{am:/^a(\.?\s?m\.?)?$/i,pm:/^p(\.?\s?m\.?)?$/i,midnight:/^midn/i,noon:/^midd/i,morning:/morgen/i,afternoon:/ettermiddag/i,evening:/kveld/i,night:/natt/i}},FI={ordinalNumber:iI({matchPattern:gI,parsePattern:II,valueCallback:e=>parseInt(e,10)}),era:ca({matchPatterns:PI,defaultMatchWidth:"wide",parsePatterns:hI,defaultParseWidth:"any"}),quarter:ca({matchPatterns:yI,defaultMatchWidth:"wide",parsePatterns:pI,defaultParseWidth:"any",valueCallback:e=>e+1}),month:ca({matchPatterns:bI,defaultMatchWidth:"wide",parsePatterns:LI,defaultParseWidth:"any"}),day:ca({matchPatterns:DI,defaultMatchWidth:"wide",parsePatterns:GI,defaultParseWidth:"any"}),dayPeriod:ca({matchPatterns:OI,defaultMatchWidth:"any",parsePatterns:kI,defaultParseWidth:"any"})},KI={code:"nb",formatDistance:uI,formatLong:mI,formatRelative:fI,localize:TI,match:FI,options:{weekStartsOn:1,firstWeekContainsDate:4}},VI={global:{dateLocale:KI,showMore:"Vis mer",showLess:"Vis mindre",readOnly:"Skrivebeskyttet",close:"Lukk"},Alert:{closeAlert:"Lukk varsel",closeMessage:"Lukk melding",error:"Feil",info:"Informasjon",success:"Suksess",warning:"Advarsel"},Chips:{Removable:{labelSuffix:"slett"}},Combobox:{addOption:"Legg til",loading:"Søker…",maxSelected:"{selected} av maks {limit} er valgt."},CopyButton:{title:"Kopier",activeText:"Kopiert!"},DatePicker:{chooseDate:"Velg dato",chooseDates:"Velg datoer",chooseDateRange:"Velg start- og sluttdato",chooseMonth:"Velg måned",week:"Uke",weekNumber:"Uke {week}",selectWeekNumber:"Velg uke {week}",month:"Måned",goToNextMonth:"Gå til neste måned",goToPreviousMonth:"Gå til forrige måned",year:"År",goToNextYear:"Gå til neste år",goToPreviousYear:"Gå til forrige år",openDatePicker:"Åpne datovelger",openMonthPicker:"Åpne månedsvelger",closeDatePicker:"Lukk datovelger",closeMonthPicker:"Lukk månedsvelger"},ErrorSummary:{heading:"Du må rette disse feilene før du kan fortsette:"},FileUpload:{dropzone:{button:"Velg fil",buttonMultiple:"Velg filer",dragAndDrop:"Dra og slipp filen her",dragAndDropMultiple:"Dra og slipp filer her",drop:"Slipp",or:"eller",disabled:"Filopplasting er deaktivert",disabledFilelimit:"Du kan ikke laste opp flere filer"},item:{retryButtonTitle:"Prøv å laste opp filen på nytt",deleteButtonTitle:"Slett filen",uploading:"Laster opp…",downloading:"Laster ned…"}},FormProgress:{step:"Steg {activeStep} av {totalSteps}",showAllSteps:"Vis alle steg",hideAllSteps:"Skjul alle steg"},FormSummary:{editAnswer:"Endre svar"},GuidePanel:{illustrationLabel:"Illustrasjon av veileder"},HelpText:{title:"Mer informasjon"},Loader:{title:"Venter…"},Pagination:{previous:"Forrige",next:"Neste"},ProgressBar:{progress:"{current} av {max}",progressUnknown:"Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder."},Search:{clear:"Tøm feltet",search:"Søk"},Textarea:{maxLength:"Tekstområde med plass til {maxLength} tegn.",charsTooMany:"{chars} tegn for mye",charsLeft:"{chars} tegn igjen"},Timeline:{dateFormat:"dd.MM.yyyy",dayFormat:"dd.MM",monthFormat:"MMM yy",yearFormat:"yyyy",Row:{noPeriods:"Ingen perioder",period:"{start} til {end}"},Period:{success:"Suksess",warning:"Advarsel",danger:"Fare",info:"Info",neutral:"Nøytral",period:"{status} fra {start} til {end}"},Pin:{pin:"Pin: {date}"},Zoom:{zoom:"Zoom tidslinjen {start} til {end}",reset:"Tilbakestill tidsperspektiv"}}},MI=P.createContext({locale:VI}),NN=()=>P.useContext(MI);var BI=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const wI=P.forwardRef((e,l)=>{var r,t,i,{rootElement:u,asChild:o}=e,d=BI(e,["rootElement","asChild"]);const N=Da(!1),f=(r=NN())===null||r===void 0?void 0:r.rootElement,R=(t=u??f)!==null&&t!==void 0?t:(i=globalThis?.document)===null||i===void 0?void 0:i.body,A=o?Yt:"div";return N?R?Xs.createPortal(k.createElement(Eg,{theme:N.theme,asChild:!0,hasBackground:!1,"data-color":N.color},k.createElement(A,Object.assign({ref:l,"data-aksel-portal":""},d))),R):null:R?Xs.createPortal(k.createElement(A,Object.assign({ref:l,"data-aksel-portal":""},d)),R):null}),qt=Math.min,vt=Math.max,Jl=Math.round,Fl=Math.floor,Pr=e=>({x:e,y:e}),UI={left:"right",right:"left",bottom:"top",top:"bottom"},xI={start:"end",end:"start"};function Qs(e,l,r){return vt(e,qt(l,r))}function ka(e,l){return typeof e=="function"?e(l):e}function St(e){return e.split("-")[0]}function Fa(e){return e.split("-")[1]}function fN(e){return e==="x"?"y":"x"}function pu(e){return e==="y"?"height":"width"}function Ht(e){return["top","bottom"].includes(St(e))?"y":"x"}function bu(e){return fN(Ht(e))}function qI(e,l,r){r===void 0&&(r=!1);const t=Fa(e),i=bu(e),u=pu(i);let o=i==="x"?t===(r?"end":"start")?"right":"left":t==="start"?"bottom":"top";return l.reference[u]>l.floating[u]&&(o=$l(o)),[o,$l(o)]}function HI(e){const l=$l(e);return[eu(e),l,eu(l)]}function eu(e){return e.replace(/start|end/g,l=>xI[l])}function CI(e,l,r){const t=["left","right"],i=["right","left"],u=["top","bottom"],o=["bottom","top"];switch(e){case"top":case"bottom":return r?l?i:t:l?t:i;case"left":case"right":return l?u:o;default:return[]}}function jI(e,l,r,t){const i=Fa(e);let u=CI(St(e),r==="start",t);return i&&(u=u.map(o=>o+"-"+i),l&&(u=u.concat(u.map(eu)))),u}function $l(e){return e.replace(/left|right|bottom|top/g,l=>UI[l])}function YI(e){return{top:0,right:0,bottom:0,left:0,...e}}function RN(e){return typeof e!="number"?YI(e):{top:e,right:e,bottom:e,left:e}}function Wl(e){const{x:l,y:r,width:t,height:i}=e;return{width:t,height:i,top:r,left:l,right:l+t,bottom:r+i,x:l,y:r}}function kd(e,l,r){let{reference:t,floating:i}=e;const u=Ht(l),o=bu(l),d=pu(o),N=St(l),f=u==="y",R=t.x+t.width/2-i.width/2,A=t.y+t.height/2-i.height/2,S=t[d]/2-i[d]/2;let _;switch(N){case"top":_={x:R,y:t.y-i.height};break;case"bottom":_={x:R,y:t.y+t.height};break;case"right":_={x:t.x+t.width,y:A};break;case"left":_={x:t.x-i.width,y:A};break;default:_={x:t.x,y:t.y}}switch(Fa(l)){case"start":_[o]-=S*(r&&f?-1:1);break;case"end":_[o]+=S*(r&&f?-1:1);break}return _}const JI=async(e,l,r)=>{const{placement:t="bottom",strategy:i="absolute",middleware:u=[],platform:o}=r,d=u.filter(Boolean),N=await(o.isRTL==null?void 0:o.isRTL(l));let f=await o.getElementRects({reference:e,floating:l,strategy:i}),{x:R,y:A}=kd(f,t,N),S=t,_={},G=0;for(let g=0;g<d.length;g++){const{name:T,fn:y}=d[g],{x:L,y:p,data:w,reset:D}=await y({x:R,y:A,initialPlacement:t,placement:S,strategy:i,middlewareData:_,rects:f,platform:o,elements:{reference:e,floating:l}});R=L??R,A=p??A,_={..._,[T]:{..._[T],...w}},D&&G<=50&&(G++,typeof D=="object"&&(D.placement&&(S=D.placement),D.rects&&(f=D.rects===!0?await o.getElementRects({reference:e,floating:l,strategy:i}):D.rects),{x:R,y:A}=kd(f,S,N)),g=-1)}return{x:R,y:A,placement:S,strategy:i,middlewareData:_}};async function cN(e,l){var r;l===void 0&&(l={});const{x:t,y:i,platform:u,rects:o,elements:d,strategy:N}=e,{boundary:f="clippingAncestors",rootBoundary:R="viewport",elementContext:A="floating",altBoundary:S=!1,padding:_=0}=ka(l,e),G=RN(_),T=d[S?A==="floating"?"reference":"floating":A],y=Wl(await u.getClippingRect({element:(r=await(u.isElement==null?void 0:u.isElement(T)))==null||r?T:T.contextElement||await(u.getDocumentElement==null?void 0:u.getDocumentElement(d.floating)),boundary:f,rootBoundary:R,strategy:N})),L=A==="floating"?{x:t,y:i,width:o.floating.width,height:o.floating.height}:o.reference,p=await(u.getOffsetParent==null?void 0:u.getOffsetParent(d.floating)),w=await(u.isElement==null?void 0:u.isElement(p))?await(u.getScale==null?void 0:u.getScale(p))||{x:1,y:1}:{x:1,y:1},D=Wl(u.convertOffsetParentRelativeRectToViewportRelativeRect?await u.convertOffsetParentRelativeRectToViewportRelativeRect({elements:d,rect:L,offsetParent:p,strategy:N}):L);return{top:(y.top-D.top+G.top)/w.y,bottom:(D.bottom-y.bottom+G.bottom)/w.y,left:(y.left-D.left+G.left)/w.x,right:(D.right-y.right+G.right)/w.x}}const $I=e=>({name:"arrow",options:e,async fn(l){const{x:r,y:t,placement:i,rects:u,platform:o,elements:d,middlewareData:N}=l,{element:f,padding:R=0}=ka(e,l)||{};if(f==null)return{};const A=RN(R),S={x:r,y:t},_=bu(i),G=pu(_),g=await o.getDimensions(f),T=_==="y",y=T?"top":"left",L=T?"bottom":"right",p=T?"clientHeight":"clientWidth",w=u.reference[G]+u.reference[_]-S[_]-u.floating[G],D=S[_]-u.reference[_],q=await(o.getOffsetParent==null?void 0:o.getOffsetParent(f));let B=q?q[p]:0;(!B||!await(o.isElement==null?void 0:o.isElement(q)))&&(B=d.floating[p]||u.floating[G]);const U=w/2-D/2,Y=B/2-g[G]/2-1,ne=qt(A[y],Y),ee=qt(A[L],Y),H=ne,V=B-g[G]-ee,M=B/2-g[G]/2+U,z=Qs(H,M,V),re=!N.arrow&&Fa(i)!=null&&M!==z&&u.reference[G]/2-(M<H?ne:ee)-g[G]/2<0,X=re?M<H?M-H:M-V:0;return{[_]:S[_]+X,data:{[_]:z,centerOffset:M-z-X,...re&&{alignmentOffset:X}},reset:re}}}),WI=function(e){return e===void 0&&(e={}),{name:"flip",options:e,async fn(l){var r,t;const{placement:i,middlewareData:u,rects:o,initialPlacement:d,platform:N,elements:f}=l,{mainAxis:R=!0,crossAxis:A=!0,fallbackPlacements:S,fallbackStrategy:_="bestFit",fallbackAxisSideDirection:G="none",flipAlignment:g=!0,...T}=ka(e,l);if((r=u.arrow)!=null&&r.alignmentOffset)return{};const y=St(i),L=Ht(d),p=St(d)===d,w=await(N.isRTL==null?void 0:N.isRTL(f.floating)),D=S||(p||!g?[$l(d)]:HI(d)),q=G!=="none";!S&&q&&D.push(...jI(d,g,G,w));const B=[d,...D],U=await cN(l,T),Y=[];let ne=((t=u.flip)==null?void 0:t.overflows)||[];if(R&&Y.push(U[y]),A){const M=qI(i,o,w);Y.push(U[M[0]],U[M[1]])}if(ne=[...ne,{placement:i,overflows:Y}],!Y.every(M=>M<=0)){var ee,H;const M=(((ee=u.flip)==null?void 0:ee.index)||0)+1,z=B[M];if(z)return{data:{index:M,overflows:ne},reset:{placement:z}};let re=(H=ne.filter(X=>X.overflows[0]<=0).sort((X,$)=>X.overflows[1]-$.overflows[1])[0])==null?void 0:H.placement;if(!re)switch(_){case"bestFit":{var V;const X=(V=ne.filter($=>{if(q){const Z=Ht($.placement);return Z===L||Z==="y"}return!0}).map($=>[$.placement,$.overflows.filter(Z=>Z>0).reduce((Z,Ee)=>Z+Ee,0)]).sort(($,Z)=>$[1]-Z[1])[0])==null?void 0:V[0];X&&(re=X);break}case"initialPlacement":re=d;break}if(i!==re)return{reset:{placement:re}}}return{}}}};async function zI(e,l){const{placement:r,platform:t,elements:i}=e,u=await(t.isRTL==null?void 0:t.isRTL(i.floating)),o=St(r),d=Fa(r),N=Ht(r)==="y",f=["left","top"].includes(o)?-1:1,R=u&&N?-1:1,A=ka(l,e);let{mainAxis:S,crossAxis:_,alignmentAxis:G}=typeof A=="number"?{mainAxis:A,crossAxis:0,alignmentAxis:null}:{mainAxis:A.mainAxis||0,crossAxis:A.crossAxis||0,alignmentAxis:A.alignmentAxis};return d&&typeof G=="number"&&(_=d==="end"?G*-1:G),N?{x:_*R,y:S*f}:{x:S*f,y:_*R}}const XI=function(e){return e===void 0&&(e=0),{name:"offset",options:e,async fn(l){var r,t;const{x:i,y:u,placement:o,middlewareData:d}=l,N=await zI(l,e);return o===((r=d.offset)==null?void 0:r.placement)&&(t=d.arrow)!=null&&t.alignmentOffset?{}:{x:i+N.x,y:u+N.y,data:{...N,placement:o}}}}},ZI=function(e){return e===void 0&&(e={}),{name:"shift",options:e,async fn(l){const{x:r,y:t,placement:i}=l,{mainAxis:u=!0,crossAxis:o=!1,limiter:d={fn:T=>{let{x:y,y:L}=T;return{x:y,y:L}}},...N}=ka(e,l),f={x:r,y:t},R=await cN(l,N),A=Ht(St(i)),S=fN(A);let _=f[S],G=f[A];if(u){const T=S==="y"?"top":"left",y=S==="y"?"bottom":"right",L=_+R[T],p=_-R[y];_=Qs(L,_,p)}if(o){const T=A==="y"?"top":"left",y=A==="y"?"bottom":"right",L=G+R[T],p=G-R[y];G=Qs(L,G,p)}const g=d.fn({...l,[S]:_,[A]:G});return{...g,data:{x:g.x-r,y:g.y-t,enabled:{[S]:u,[A]:o}}}}}};function li(){return typeof window<"u"}function Wt(e){return vN(e)?(e.nodeName||"").toLowerCase():"#document"}function Vn(e){var l;return(e==null||(l=e.ownerDocument)==null?void 0:l.defaultView)||window}function pr(e){var l;return(l=(vN(e)?e.ownerDocument:e.document)||window.document)==null?void 0:l.documentElement}function vN(e){return li()?e instanceof Node||e instanceof Vn(e).Node:!1}function Ye(e){return li()?e instanceof Element||e instanceof Vn(e).Element:!1}function Cn(e){return li()?e instanceof HTMLElement||e instanceof Vn(e).HTMLElement:!1}function zl(e){return!li()||typeof ShadowRoot>"u"?!1:e instanceof ShadowRoot||e instanceof Vn(e).ShadowRoot}function Ka(e){const{overflow:l,overflowX:r,overflowY:t,display:i}=rr(e);return/auto|scroll|overlay|hidden|clip/.test(l+t+r)&&!["inline","contents"].includes(i)}function QI(e){return["table","td","th"].includes(Wt(e))}function ii(e){return[":popover-open",":modal"].some(l=>{try{return e.matches(l)}catch{return!1}})}function Lu(e){const l=si(),r=Ye(e)?rr(e):e;return["transform","translate","scale","rotate","perspective"].some(t=>r[t]?r[t]!=="none":!1)||(r.containerType?r.containerType!=="normal":!1)||!l&&(r.backdropFilter?r.backdropFilter!=="none":!1)||!l&&(r.filter?r.filter!=="none":!1)||["transform","translate","scale","rotate","perspective","filter"].some(t=>(r.willChange||"").includes(t))||["paint","layout","strict","content"].some(t=>(r.contain||"").includes(t))}function eP(e){let l=Hr(e);for(;Cn(l)&&!xr(l);){if(Lu(l))return l;if(ii(l))return null;l=Hr(l)}return null}function si(){return typeof CSS>"u"||!CSS.supports?!1:CSS.supports("-webkit-backdrop-filter","none")}function xr(e){return["html","body","#document"].includes(Wt(e))}function rr(e){return Vn(e).getComputedStyle(e)}function ui(e){return Ye(e)?{scrollLeft:e.scrollLeft,scrollTop:e.scrollTop}:{scrollLeft:e.scrollX,scrollTop:e.scrollY}}function Hr(e){if(Wt(e)==="html")return e;const l=e.assignedSlot||e.parentNode||zl(e)&&e.host||pr(e);return zl(l)?l.host:l}function AN(e){const l=Hr(e);return xr(l)?e.ownerDocument?e.ownerDocument.body:e.body:Cn(l)&&Ka(l)?l:AN(l)}function et(e,l,r){var t;l===void 0&&(l=[]),r===void 0&&(r=!0);const i=AN(e),u=i===((t=e.ownerDocument)==null?void 0:t.body),o=Vn(i);if(u){const d=nu(o);return l.concat(o,o.visualViewport||[],Ka(i)?i:[],d&&r?et(d):[])}return l.concat(i,et(i,[],r))}function nu(e){return e.parent&&Object.getPrototypeOf(e.parent)?e.frameElement:null}function SN(e){const l=rr(e);let r=parseFloat(l.width)||0,t=parseFloat(l.height)||0;const i=Cn(e),u=i?e.offsetWidth:r,o=i?e.offsetHeight:t,d=Jl(r)!==u||Jl(t)!==o;return d&&(r=u,t=o),{width:r,height:t,$:d}}function Du(e){return Ye(e)?e:e.contextElement}function xt(e){const l=Du(e);if(!Cn(l))return Pr(1);const r=l.getBoundingClientRect(),{width:t,height:i,$:u}=SN(l);let o=(u?Jl(r.width):r.width)/t,d=(u?Jl(r.height):r.height)/i;return(!o||!Number.isFinite(o))&&(o=1),(!d||!Number.isFinite(d))&&(d=1),{x:o,y:d}}const nP=Pr(0);function _N(e){const l=Vn(e);return!si()||!l.visualViewport?nP:{x:l.visualViewport.offsetLeft,y:l.visualViewport.offsetTop}}function rP(e,l,r){return l===void 0&&(l=!1),!r||l&&r!==Vn(e)?!1:l}function _t(e,l,r,t){l===void 0&&(l=!1),r===void 0&&(r=!1);const i=e.getBoundingClientRect(),u=Du(e);let o=Pr(1);l&&(t?Ye(t)&&(o=xt(t)):o=xt(e));const d=rP(u,r,t)?_N(u):Pr(0);let N=(i.left+d.x)/o.x,f=(i.top+d.y)/o.y,R=i.width/o.x,A=i.height/o.y;if(u){const S=Vn(u),_=t&&Ye(t)?Vn(t):t;let G=S,g=nu(G);for(;g&&t&&_!==G;){const T=xt(g),y=g.getBoundingClientRect(),L=rr(g),p=y.left+(g.clientLeft+parseFloat(L.paddingLeft))*T.x,w=y.top+(g.clientTop+parseFloat(L.paddingTop))*T.y;N*=T.x,f*=T.y,R*=T.x,A*=T.y,N+=p,f+=w,G=Vn(g),g=nu(G)}}return Wl({width:R,height:A,x:N,y:f})}function Gu(e,l){const r=ui(e).scrollLeft;return l?l.left+r:_t(pr(e)).left+r}function TN(e,l,r){r===void 0&&(r=!1);const t=e.getBoundingClientRect(),i=t.left+l.scrollLeft-(r?0:Gu(e,t)),u=t.top+l.scrollTop;return{x:i,y:u}}function tP(e){let{elements:l,rect:r,offsetParent:t,strategy:i}=e;const u=i==="fixed",o=pr(t),d=l?ii(l.floating):!1;if(t===o||d&&u)return r;let N={scrollLeft:0,scrollTop:0},f=Pr(1);const R=Pr(0),A=Cn(t);if((A||!A&&!u)&&((Wt(t)!=="body"||Ka(o))&&(N=ui(t)),Cn(t))){const _=_t(t);f=xt(t),R.x=_.x+t.clientLeft,R.y=_.y+t.clientTop}const S=o&&!A&&!u?TN(o,N,!0):Pr(0);return{width:r.width*f.x,height:r.height*f.y,x:r.x*f.x-N.scrollLeft*f.x+R.x+S.x,y:r.y*f.y-N.scrollTop*f.y+R.y+S.y}}function aP(e){return Array.from(e.getClientRects())}function lP(e){const l=pr(e),r=ui(e),t=e.ownerDocument.body,i=vt(l.scrollWidth,l.clientWidth,t.scrollWidth,t.clientWidth),u=vt(l.scrollHeight,l.clientHeight,t.scrollHeight,t.clientHeight);let o=-r.scrollLeft+Gu(e);const d=-r.scrollTop;return rr(t).direction==="rtl"&&(o+=vt(l.clientWidth,t.clientWidth)-i),{width:i,height:u,x:o,y:d}}function iP(e,l){const r=Vn(e),t=pr(e),i=r.visualViewport;let u=t.clientWidth,o=t.clientHeight,d=0,N=0;if(i){u=i.width,o=i.height;const f=si();(!f||f&&l==="fixed")&&(d=i.offsetLeft,N=i.offsetTop)}return{width:u,height:o,x:d,y:N}}function sP(e,l){const r=_t(e,!0,l==="fixed"),t=r.top+e.clientTop,i=r.left+e.clientLeft,u=Cn(e)?xt(e):Pr(1),o=e.clientWidth*u.x,d=e.clientHeight*u.y,N=i*u.x,f=t*u.y;return{width:o,height:d,x:N,y:f}}function Fd(e,l,r){let t;if(l==="viewport")t=iP(e,r);else if(l==="document")t=lP(pr(e));else if(Ye(l))t=sP(l,r);else{const i=_N(e);t={x:l.x-i.x,y:l.y-i.y,width:l.width,height:l.height}}return Wl(t)}function gN(e,l){const r=Hr(e);return r===l||!Ye(r)||xr(r)?!1:rr(r).position==="fixed"||gN(r,l)}function uP(e,l){const r=l.get(e);if(r)return r;let t=et(e,[],!1).filter(d=>Ye(d)&&Wt(d)!=="body"),i=null;const u=rr(e).position==="fixed";let o=u?Hr(e):e;for(;Ye(o)&&!xr(o);){const d=rr(o),N=Lu(o);!N&&d.position==="fixed"&&(i=null),(u?!N&&!i:!N&&d.position==="static"&&!!i&&["absolute","fixed"].includes(i.position)||Ka(o)&&!N&&gN(e,o))?t=t.filter(R=>R!==o):i=d,o=Hr(o)}return l.set(e,t),t}function oP(e){let{element:l,boundary:r,rootBoundary:t,strategy:i}=e;const o=[...r==="clippingAncestors"?ii(l)?[]:uP(l,this._c):[].concat(r),t],d=o[0],N=o.reduce((f,R)=>{const A=Fd(l,R,i);return f.top=vt(A.top,f.top),f.right=qt(A.right,f.right),f.bottom=qt(A.bottom,f.bottom),f.left=vt(A.left,f.left),f},Fd(l,d,i));return{width:N.right-N.left,height:N.bottom-N.top,x:N.left,y:N.top}}function EP(e){const{width:l,height:r}=SN(e);return{width:l,height:r}}function dP(e,l,r){const t=Cn(l),i=pr(l),u=r==="fixed",o=_t(e,!0,u,l);let d={scrollLeft:0,scrollTop:0};const N=Pr(0);if(t||!t&&!u)if((Wt(l)!=="body"||Ka(i))&&(d=ui(l)),t){const S=_t(l,!0,u,l);N.x=S.x+l.clientLeft,N.y=S.y+l.clientTop}else i&&(N.x=Gu(i));const f=i&&!t&&!u?TN(i,d):Pr(0),R=o.left+d.scrollLeft-N.x-f.x,A=o.top+d.scrollTop-N.y-f.y;return{x:R,y:A,width:o.width,height:o.height}}function Ls(e){return rr(e).position==="static"}function Kd(e,l){if(!Cn(e)||rr(e).position==="fixed")return null;if(l)return l(e);let r=e.offsetParent;return pr(e)===r&&(r=r.ownerDocument.body),r}function IN(e,l){const r=Vn(e);if(ii(e))return r;if(!Cn(e)){let i=Hr(e);for(;i&&!xr(i);){if(Ye(i)&&!Ls(i))return i;i=Hr(i)}return r}let t=Kd(e,l);for(;t&&QI(t)&&Ls(t);)t=Kd(t,l);return t&&xr(t)&&Ls(t)&&!Lu(t)?r:t||eP(e)||r}const mP=async function(e){const l=this.getOffsetParent||IN,r=this.getDimensions,t=await r(e.floating);return{reference:dP(e.reference,await l(e.floating),e.strategy),floating:{x:0,y:0,width:t.width,height:t.height}}};function NP(e){return rr(e).direction==="rtl"}const fP={convertOffsetParentRelativeRectToViewportRelativeRect:tP,getDocumentElement:pr,getClippingRect:oP,getOffsetParent:IN,getElementRects:mP,getClientRects:aP,getDimensions:EP,getScale:xt,isElement:Ye,isRTL:NP};function PN(e,l){return e.x===l.x&&e.y===l.y&&e.width===l.width&&e.height===l.height}function RP(e,l){let r=null,t;const i=pr(e);function u(){var d;clearTimeout(t),(d=r)==null||d.disconnect(),r=null}function o(d,N){d===void 0&&(d=!1),N===void 0&&(N=1),u();const f=e.getBoundingClientRect(),{left:R,top:A,width:S,height:_}=f;if(d||l(),!S||!_)return;const G=Fl(A),g=Fl(i.clientWidth-(R+S)),T=Fl(i.clientHeight-(A+_)),y=Fl(R),p={rootMargin:-G+"px "+-g+"px "+-T+"px "+-y+"px",threshold:vt(0,qt(1,N))||1};let w=!0;function D(q){const B=q[0].intersectionRatio;if(B!==N){if(!w)return o();B?o(!1,B):t=setTimeout(()=>{o(!1,1e-7)},1e3)}B===1&&!PN(f,e.getBoundingClientRect())&&o(),w=!1}try{r=new IntersectionObserver(D,{...p,root:i.ownerDocument})}catch{r=new IntersectionObserver(D,p)}r.observe(e)}return o(!0),u}function Vd(e,l,r,t){t===void 0&&(t={});const{ancestorScroll:i=!0,ancestorResize:u=!0,elementResize:o=typeof ResizeObserver=="function",layoutShift:d=typeof IntersectionObserver=="function",animationFrame:N=!1}=t,f=Du(e),R=i||u?[...f?et(f):[],...et(l)]:[];R.forEach(y=>{i&&y.addEventListener("scroll",r,{passive:!0}),u&&y.addEventListener("resize",r)});const A=f&&d?RP(f,r):null;let S=-1,_=null;o&&(_=new ResizeObserver(y=>{let[L]=y;L&&L.target===f&&_&&(_.unobserve(l),cancelAnimationFrame(S),S=requestAnimationFrame(()=>{var p;(p=_)==null||p.observe(l)})),r()}),f&&!N&&_.observe(f),_.observe(l));let G,g=N?_t(e):null;N&&T();function T(){const y=_t(e);g&&!PN(g,y)&&r(),g=y,G=requestAnimationFrame(T)}return r(),()=>{var y;R.forEach(L=>{i&&L.removeEventListener("scroll",r),u&&L.removeEventListener("resize",r)}),A?.(),(y=_)==null||y.disconnect(),_=null,N&&cancelAnimationFrame(G)}}const cP=XI,vP=ZI,AP=WI,Md=$I,SP=(e,l,r)=>{const t=new Map,i={platform:fP,...r},u={...i.platform,_c:t};return JI(e,l,{...i,platform:u})};var Hl=typeof document<"u"?P.useLayoutEffect:P.useEffect;function Xl(e,l){if(e===l)return!0;if(typeof e!=typeof l)return!1;if(typeof e=="function"&&e.toString()===l.toString())return!0;let r,t,i;if(e&&l&&typeof e=="object"){if(Array.isArray(e)){if(r=e.length,r!==l.length)return!1;for(t=r;t--!==0;)if(!Xl(e[t],l[t]))return!1;return!0}if(i=Object.keys(e),r=i.length,r!==Object.keys(l).length)return!1;for(t=r;t--!==0;)if(!{}.hasOwnProperty.call(l,i[t]))return!1;for(t=r;t--!==0;){const u=i[t];if(!(u==="_owner"&&e.$$typeof)&&!Xl(e[u],l[u]))return!1}return!0}return e!==e&&l!==l}function hN(e){return typeof window>"u"?1:(e.ownerDocument.defaultView||window).devicePixelRatio||1}function Bd(e,l){const r=hN(e);return Math.round(l*r)/r}function Ds(e){const l=P.useRef(e);return Hl(()=>{l.current=e}),l}function _P(e){e===void 0&&(e={});const{placement:l="bottom",strategy:r="absolute",middleware:t=[],platform:i,elements:{reference:u,floating:o}={},transform:d=!0,whileElementsMounted:N,open:f}=e,[R,A]=P.useState({x:0,y:0,strategy:r,placement:l,middlewareData:{},isPositioned:!1}),[S,_]=P.useState(t);Xl(S,t)||_(t);const[G,g]=P.useState(null),[T,y]=P.useState(null),L=P.useCallback($=>{$!==q.current&&(q.current=$,g($))},[]),p=P.useCallback($=>{$!==B.current&&(B.current=$,y($))},[]),w=u||G,D=o||T,q=P.useRef(null),B=P.useRef(null),U=P.useRef(R),Y=N!=null,ne=Ds(N),ee=Ds(i),H=Ds(f),V=P.useCallback(()=>{if(!q.current||!B.current)return;const $={placement:l,strategy:r,middleware:S};ee.current&&($.platform=ee.current),SP(q.current,B.current,$).then(Z=>{const Ee={...Z,isPositioned:H.current!==!1};M.current&&!Xl(U.current,Ee)&&(U.current=Ee,lN.flushSync(()=>{A(Ee)}))})},[S,l,r,ee,H]);Hl(()=>{f===!1&&U.current.isPositioned&&(U.current.isPositioned=!1,A($=>({...$,isPositioned:!1})))},[f]);const M=P.useRef(!1);Hl(()=>(M.current=!0,()=>{M.current=!1}),[]),Hl(()=>{if(w&&(q.current=w),D&&(B.current=D),w&&D){if(ne.current)return ne.current(w,D,V);V()}},[w,D,V,ne,Y]);const z=P.useMemo(()=>({reference:q,floating:B,setReference:L,setFloating:p}),[L,p]),re=P.useMemo(()=>({reference:w,floating:D}),[w,D]),X=P.useMemo(()=>{const $={position:r,left:0,top:0};if(!re.floating)return $;const Z=Bd(re.floating,R.x),Ee=Bd(re.floating,R.y);return d?{...$,transform:"translate("+Z+"px, "+Ee+"px)",...hN(re.floating)>=1.5&&{willChange:"transform"}}:{position:r,left:Z,top:Ee}},[r,d,re.floating,R.x,R.y]);return P.useMemo(()=>({...R,update:V,refs:z,elements:re,floatingStyles:X}),[R,V,z,re,X])}const TP=e=>{function l(r){return{}.hasOwnProperty.call(r,"current")}return{name:"arrow",options:e,fn(r){const{element:t,padding:i}=typeof e=="function"?e(r):e;return t&&l(t)?t.current!=null?Md({element:t.current,padding:i}).fn(r):{}:t?Md({element:t,padding:i}).fn(r):{}}}},gP=(e,l)=>({...cP(e),options:[e,l]}),IP=(e,l)=>({...vP(e),options:[e,l]}),PP=(e,l)=>({...AP(e),options:[e,l]}),hP=(e,l)=>({...TP(e),options:[e,l]}),wd=/(\w+)/g;function yP(e,l){const r=Array.isArray(e)?e:pP(e);for(const t of l){if(!t)continue;let i=t;for(let u=0;u<r.length;u++){const o=i[r[u]];o!==void 0&&(i=o)}if(typeof i=="string")return i}throw new Error(`Error translating key. Keypath '${e}' does not resolve to a string.`)}function pP(e){const l=[];let r=wd.exec(e);for(;r;){const[,t,i]=r;l.push(t||i),r=wd.exec(e)}return l}const bP=/{[^}]*}/g;function It(e,...l){const r=NN(),t=r.translations||[],i=[...l,...Array.isArray(t)?t.map(o=>o[e]):[t[e]],r.locale[e]];return(o,d)=>{const N=yP(o,i);return d?N.replace(bP,f=>{const R=f.substring(1,f.length-1);if(d[R]===void 0){const A=JSON.stringify(d);throw new Error(`Error translating key '${o}'. No replacement syntax ({}) found for key '${R}'. The following replacements were passed: '${A}'`)}return d[R]}):N}}var LP=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const DP=P.forwardRef((e,l)=>{var{className:r,size:t="medium",title:i,transparent:u=!1,variant:o="neutral",id:d,"data-color":N}=e,f=LP(e,["className","size","title","transparent","variant","id","data-color"]);const{cn:R}=be(),A=Ga(),S=It("Loader");return k.createElement("svg",Object.assign({"aria-labelledby":d??`loader-${A}`,ref:l,className:R("navds-loader",r,`navds-loader--${t}`,`navds-loader--${o}`,{"navds-loader--transparent":u}),focusable:"false",viewBox:"0 0 50 50",preserveAspectRatio:"xMidYMid","data-color":N??GP(o)},fr(f,["children"]),{"data-variant":o}),k.createElement("title",{id:d??`loader-${A}`},i||S("title")),k.createElement("circle",{className:R("navds-loader__background"),xmlns:"http://www.w3.org/2000/svg",cx:"25",cy:"25",r:"20",fill:"none"}),k.createElement("circle",{className:R("navds-loader__foreground"),cx:"25",cy:"25",r:"20",fill:"none",strokeDasharray:"50 155"}))});function GP(e){switch(e){case"neutral":return"neutral";case"inverted":return"neutral";case"interaction":return;default:return"neutral"}}var OP=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const oi=P.forwardRef((e,l)=>{var{as:r="button",variant:t="primary",className:i,children:u,size:o="medium",loading:d=!1,disabled:N,icon:f,iconPosition:R="left",onKeyUp:A,"data-color":S}=e,_=OP(e,["as","variant","className","children","size","loading","disabled","icon","iconPosition","onKeyUp","data-color"]);const{cn:G}=be(),g=N||d?fr(_,["href"]):_,T=y=>{y.key===" "&&!N&&!d&&y.currentTarget.click()};return k.createElement(r,Object.assign({},r!=="button"?{role:"button"}:{},{"data-color":S??kP(t),"data-variant":FP(t)},g,{ref:l,onKeyUp:Oa(A,T),className:G(i,"navds-button",`navds-button--${t}`,`navds-button--${o}`,{"navds-button--loading":d,"navds-button--icon-only":!!f&&!u,"navds-button--disabled":N??d}),disabled:N??d?!0:void 0}),f&&R==="left"&&k.createElement("span",{className:G("navds-button__icon")},f),d&&k.createElement(DP,{size:o}),u&&k.createElement(At,{as:"span",size:o==="medium"?"medium":"small"},u),f&&R==="right"&&k.createElement("span",{className:G("navds-button__icon")},f))});function kP(e){switch(e){case"primary-neutral":case"secondary-neutral":case"tertiary-neutral":return"neutral";case"danger":return"danger";default:return}}function FP(e){switch(e){case"primary":case"primary-neutral":case"danger":return"primary";case"secondary":case"secondary-neutral":return"secondary";case"tertiary":case"tertiary-neutral":return"tertiary";default:return"primary"}}var KP=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const VP={error:rI,warning:Hg,info:jg,success:Ug},MP=P.forwardRef((e,l)=>{var{children:r,className:t,variant:i,size:u="medium",fullWidth:o=!1,contentMaxWidth:d=!0,inline:N=!1,closeButton:f=!1,onClose:R}=e,A=KP(e,["children","className","variant","size","fullWidth","contentMaxWidth","inline","closeButton","onClose"]);const{cn:S}=be(),_=It("Alert"),G=VP[i];return k.createElement("div",Object.assign({},A,{"data-color":BP(i),"data-variant":i,ref:l,className:S(t,"navds-alert",`navds-alert--${i}`,`navds-alert--${u}`,{"navds-alert--full-width":o,"navds-alert--inline":N,"navds-alert--close-button":f})}),k.createElement(G,{title:_(i),className:S("navds-alert__icon")}),k.createElement(hu,{as:"div",size:u,className:S("navds-alert__wrapper",d&&"navds-alert__wrapper--maxwidth")},r),f&&!N&&k.createElement("div",{className:S("navds-alert__button-wrapper")},k.createElement(oi,{className:S("navds-alert__button"),size:"small",variant:"tertiary-neutral",onClick:R,type:"button",icon:k.createElement(Zs,{title:["error","warning"].includes(i)?_("closeAlert"):_("closeMessage")})})))});function BP(e){switch(e){case"warning":return"warning";case"error":return"danger";case"info":return"info";case"success":return"success";default:return"info"}}function wP(){const e=navigator.userAgentData;return e!=null&&e.platform?e.platform:navigator.platform}function UP(){const e=navigator.userAgentData;return e&&Array.isArray(e.brands)?e.brands.map(l=>{let{brand:r,version:t}=l;return r+"/"+t}).join(" "):navigator.userAgent}function xP(){return/apple/i.test(navigator.vendor)}function qP(){return wP().toLowerCase().startsWith("mac")&&!navigator.maxTouchPoints}function HP(){return UP().includes("jsdom/")}const CP="input:not([type='hidden']):not([disabled]),[contenteditable]:not([contenteditable='false']),textarea:not([disabled])";function Ud(e){let l=e.activeElement;for(;((r=l)==null||(r=r.shadowRoot)==null?void 0:r.activeElement)!=null;){var r;l=l.shadowRoot.activeElement}return l}function pa(e,l){if(!e||!l)return!1;const r=l.getRootNode==null?void 0:l.getRootNode();if(e.contains(l))return!0;if(r&&zl(r)){let t=l;for(;t;){if(e===t)return!0;t=t.parentNode||t.host}}return!1}function Ut(e){return"composedPath"in e?e.composedPath()[0]:e.target}function Gs(e,l){if(l==null)return!1;if("composedPath"in e)return e.composedPath().includes(l);const r=e;return r.target!=null&&l.contains(r.target)}function jP(e){return e.matches("html,body")}function Rt(e){return e?.ownerDocument||document}function YP(e){return Cn(e)&&e.matches(CP)}function JP(e){if(!e||HP())return!0;try{return e.matches(":focus-visible")}catch{return!0}}function Os(e,l,r){r===void 0&&(r=!0);let t=e.filter(u=>{var o;return u.parentId===l&&((o=u.context)==null?void 0:o.open)}),i=t;for(;i.length;)i=r?e.filter(u=>{var o;return(o=i)==null?void 0:o.some(d=>{var N;return u.parentId===d.id&&((N=u.context)==null?void 0:N.open)})}):e,t=t.concat(i);return t}function $P(e){return"nativeEvent"in e}function ru(e,l){const r=["mouse","pen"];return r.push("",void 0),r.includes(e)}var Ct=typeof document<"u"?P.useLayoutEffect:P.useEffect;const WP={...aN};function Kl(e){const l=P.useRef(e);return Ct(()=>{l.current=e}),l}const zP=WP.useInsertionEffect,XP=zP||(e=>e());function Br(e){const l=P.useRef(()=>{});return XP(()=>{l.current=e}),P.useCallback(function(){for(var r=arguments.length,t=new Array(r),i=0;i<r;i++)t[i]=arguments[i];return l.current==null?void 0:l.current(...t)},[])}const ZP="data-floating-ui-focusable",xd="active",qd="selected",QP={...aN};let Hd=!1,eh=0;const Cd=()=>"floating-ui-"+Math.random().toString(36).slice(2,6)+eh++;function nh(){const[e,l]=P.useState(()=>Hd?Cd():void 0);return Ct(()=>{e==null&&l(Cd())},[]),P.useEffect(()=>{Hd=!0},[]),e}const rh=QP.useId,th=rh||nh;function ah(){const e=new Map;return{emit(l,r){var t;(t=e.get(l))==null||t.forEach(i=>i(r))},on(l,r){e.has(l)||e.set(l,new Set),e.get(l).add(r)},off(l,r){var t;(t=e.get(l))==null||t.delete(r)}}}const lh=P.createContext(null),ih=P.createContext(null),yN=()=>{var e;return((e=P.useContext(lh))==null?void 0:e.id)||null},Ou=()=>P.useContext(ih);function ku(e){return"data-floating-ui-"+e}function nr(e){e.current!==-1&&(clearTimeout(e.current),e.current=-1)}const jd=ku("safe-polygon");function ks(e,l,r){if(r&&!ru(r))return 0;if(typeof e=="number")return e;if(typeof e=="function"){const t=e();return typeof t=="number"?t:t?.[l]}return e?.[l]}function Fs(e){return typeof e=="function"?e():e}function sh(e,l){l===void 0&&(l={});const{open:r,onOpenChange:t,dataRef:i,events:u,elements:o}=e,{enabled:d=!0,delay:N=0,handleClose:f=null,mouseOnly:R=!1,restMs:A=0,move:S=!0}=l,_=Ou(),G=yN(),g=Kl(f),T=Kl(N),y=Kl(r),L=Kl(A),p=P.useRef(),w=P.useRef(-1),D=P.useRef(),q=P.useRef(-1),B=P.useRef(!0),U=P.useRef(!1),Y=P.useRef(()=>{}),ne=P.useRef(!1),ee=P.useCallback(()=>{var X;const $=(X=i.current.openEvent)==null?void 0:X.type;return $?.includes("mouse")&&$!=="mousedown"},[i]);P.useEffect(()=>{if(!d)return;function X($){let{open:Z}=$;Z||(nr(w),nr(q),B.current=!0,ne.current=!1)}return u.on("openchange",X),()=>{u.off("openchange",X)}},[d,u]),P.useEffect(()=>{if(!d||!g.current||!r)return;function X(Z){ee()&&t(!1,Z,"hover")}const $=Rt(o.floating).documentElement;return $.addEventListener("mouseleave",X),()=>{$.removeEventListener("mouseleave",X)}},[o.floating,r,t,d,g,ee]);const H=P.useCallback(function(X,$,Z){$===void 0&&($=!0),Z===void 0&&(Z="hover");const Ee=ks(T.current,"close",p.current);Ee&&!D.current?(nr(w),w.current=window.setTimeout(()=>t(!1,X,Z),Ee)):$&&(nr(w),t(!1,X,Z))},[T,t]),V=Br(()=>{Y.current(),D.current=void 0}),M=Br(()=>{if(U.current){const X=Rt(o.floating).body;X.style.pointerEvents="",X.removeAttribute(jd),U.current=!1}}),z=Br(()=>i.current.openEvent?["click","mousedown"].includes(i.current.openEvent.type):!1);P.useEffect(()=>{if(!d)return;function X(Re){if(nr(w),B.current=!1,R&&!ru(p.current)||Fs(L.current)>0&&!ks(T.current,"open"))return;const Te=ks(T.current,"open",p.current);Te?w.current=window.setTimeout(()=>{y.current||t(!0,Re,"hover")},Te):r||t(!0,Re,"hover")}function $(Re){if(z()){M();return}Y.current();const Te=Rt(o.floating);if(nr(q),ne.current=!1,g.current&&i.current.floatingContext){r||nr(w),D.current=g.current({...i.current.floatingContext,tree:_,x:Re.clientX,y:Re.clientY,onClose(){M(),V(),z()||H(Re,!0,"safe-polygon")}});const Je=D.current;Te.addEventListener("mousemove",Je),Y.current=()=>{Te.removeEventListener("mousemove",Je)};return}(p.current==="touch"?!pa(o.floating,Re.relatedTarget):!0)&&H(Re)}function Z(Re){z()||i.current.floatingContext&&(g.current==null||g.current({...i.current.floatingContext,tree:_,x:Re.clientX,y:Re.clientY,onClose(){M(),V(),z()||H(Re)}})(Re))}function Ee(){nr(w)}function ue(Re){z()||H(Re,!1)}if(Ye(o.domReference)){const Re=o.domReference,Te=o.floating;return r&&Re.addEventListener("mouseleave",Z),S&&Re.addEventListener("mousemove",X,{once:!0}),Re.addEventListener("mouseenter",X),Re.addEventListener("mouseleave",$),Te&&(Te.addEventListener("mouseleave",Z),Te.addEventListener("mouseenter",Ee),Te.addEventListener("mouseleave",ue)),()=>{r&&Re.removeEventListener("mouseleave",Z),S&&Re.removeEventListener("mousemove",X),Re.removeEventListener("mouseenter",X),Re.removeEventListener("mouseleave",$),Te&&(Te.removeEventListener("mouseleave",Z),Te.removeEventListener("mouseenter",Ee),Te.removeEventListener("mouseleave",ue))}}},[o,d,e,R,S,H,V,M,t,r,y,_,T,g,i,z,L]),Ct(()=>{var X;if(d&&r&&(X=g.current)!=null&&X.__options.blockPointerEvents&&ee()){U.current=!0;const Z=o.floating;if(Ye(o.domReference)&&Z){var $;const Ee=Rt(o.floating).body;Ee.setAttribute(jd,"");const ue=o.domReference,Re=_==null||($=_.nodesRef.current.find(Te=>Te.id===G))==null||($=$.context)==null?void 0:$.elements.floating;return Re&&(Re.style.pointerEvents=""),Ee.style.pointerEvents="none",ue.style.pointerEvents="auto",Z.style.pointerEvents="auto",()=>{Ee.style.pointerEvents="",ue.style.pointerEvents="",Z.style.pointerEvents=""}}}},[d,r,G,o,_,g,ee]),Ct(()=>{r||(p.current=void 0,ne.current=!1,V(),M())},[r,V,M]),P.useEffect(()=>()=>{V(),nr(w),nr(q),M()},[d,o.domReference,V,M]);const re=P.useMemo(()=>{function X($){p.current=$.pointerType}return{onPointerDown:X,onPointerEnter:X,onMouseMove($){const{nativeEvent:Z}=$;function Ee(){!B.current&&!y.current&&t(!0,Z,"hover")}R&&!ru(p.current)||r||Fs(L.current)===0||ne.current&&$.movementX**2+$.movementY**2<2||(nr(q),p.current==="touch"?Ee():(ne.current=!0,q.current=window.setTimeout(Ee,Fs(L.current))))}}},[R,t,r,y,L]);return P.useMemo(()=>d?{reference:re}:{},[d,re])}function Ks(e,l){if(!e||!l)return!1;const r=l.getRootNode==null?void 0:l.getRootNode();if(e.contains(l))return!0;if(r&&zl(r)){let t=l;for(;t;){if(e===t)return!0;t=t.parentNode||t.host}}return!1}function uh(e){return"composedPath"in e?e.composedPath()[0]:e.target}const oh={pointerdown:"onPointerDown",mousedown:"onMouseDown",click:"onClick"},Eh={pointerdown:"onPointerDownCapture",mousedown:"onMouseDownCapture",click:"onClickCapture"},Yd=e=>{var l,r;return{escapeKey:typeof e=="boolean"?e:(l=e?.escapeKey)!=null?l:!1,outsidePress:typeof e=="boolean"?e:(r=e?.outsidePress)!=null?r:!0}};function dh(e,l){l===void 0&&(l={});const{open:r,onOpenChange:t,elements:i,dataRef:u}=e,{enabled:o=!0,escapeKey:d=!0,outsidePress:N=!0,outsidePressEvent:f="pointerdown",referencePress:R=!1,referencePressEvent:A="pointerdown",ancestorScroll:S=!1,bubbles:_,capture:G}=l,g=Ou(),T=Br(typeof N=="function"?N:()=>!1),y=typeof N=="function"?T:N,L=P.useRef(!1),p=P.useRef(!1),{escapeKey:w,outsidePress:D}=Yd(_),{escapeKey:q,outsidePress:B}=Yd(G),U=P.useRef(!1),Y=Br(z=>{var re;if(!r||!o||!d||z.key!=="Escape"||U.current)return;const X=(re=u.current.floatingContext)==null?void 0:re.nodeId,$=g?Os(g.nodesRef.current,X):[];if(!w&&(z.stopPropagation(),$.length>0)){let Z=!0;if($.forEach(Ee=>{var ue;if((ue=Ee.context)!=null&&ue.open&&!Ee.context.dataRef.current.__escapeKeyBubbles){Z=!1;return}}),!Z)return}t(!1,$P(z)?z.nativeEvent:z,"escape-key")}),ne=Br(z=>{var re;const X=()=>{var $;Y(z),($=Ut(z))==null||$.removeEventListener("keydown",X)};(re=Ut(z))==null||re.addEventListener("keydown",X)}),ee=Br(z=>{var re;const X=L.current;L.current=!1;const $=p.current;if(p.current=!1,f==="click"&&$||X||typeof y=="function"&&!y(z))return;const Z=Ut(z),Ee="["+ku("inert")+"]",ue=Rt(i.floating).querySelectorAll(Ee);let Re=Ye(Z)?Z:null;for(;Re&&!xr(Re);){const xe=Hr(Re);if(xr(xe)||!Ye(xe))break;Re=xe}if(ue.length&&Ye(Z)&&!jP(Z)&&!pa(Z,i.floating)&&Array.from(ue).every(xe=>!pa(Re,xe)))return;if(Cn(Z)&&M){const xe=xr(Z),qe=rr(Z),Pe=/auto|scroll/,Oe=xe||Pe.test(qe.overflowX),nn=xe||Pe.test(qe.overflowY),ze=Oe&&Z.clientWidth>0&&Z.scrollWidth>Z.clientWidth,Xe=nn&&Z.clientHeight>0&&Z.scrollHeight>Z.clientHeight,pn=qe.direction==="rtl",He=Xe&&(pn?z.offsetX<=Z.offsetWidth-Z.clientWidth:z.offsetX>Z.clientWidth),sn=ze&&z.offsetY>Z.clientHeight;if(He||sn)return}const Te=(re=u.current.floatingContext)==null?void 0:re.nodeId,Tn=g&&Os(g.nodesRef.current,Te).some(xe=>{var qe;return Gs(z,(qe=xe.context)==null?void 0:qe.elements.floating)});if(Gs(z,i.floating)||Gs(z,i.domReference)||Tn)return;const Je=g?Os(g.nodesRef.current,Te):[];if(Je.length>0){let xe=!0;if(Je.forEach(qe=>{var Pe;if((Pe=qe.context)!=null&&Pe.open&&!qe.context.dataRef.current.__outsidePressBubbles){xe=!1;return}}),!xe)return}t(!1,z,"outside-press")}),H=Br(z=>{var re;const X=()=>{var $;ee(z),($=Ut(z))==null||$.removeEventListener(f,X)};(re=Ut(z))==null||re.addEventListener(f,X)});P.useEffect(()=>{if(!r||!o)return;u.current.__escapeKeyBubbles=w,u.current.__outsidePressBubbles=D;let z=-1;function re(ue){t(!1,ue,"ancestor-scroll")}function X(){window.clearTimeout(z),U.current=!0}function $(){z=window.setTimeout(()=>{U.current=!1},si()?5:0)}const Z=Rt(i.floating);d&&(Z.addEventListener("keydown",q?ne:Y,q),Z.addEventListener("compositionstart",X),Z.addEventListener("compositionend",$)),y&&Z.addEventListener(f,B?H:ee,B);let Ee=[];return S&&(Ye(i.domReference)&&(Ee=et(i.domReference)),Ye(i.floating)&&(Ee=Ee.concat(et(i.floating))),!Ye(i.reference)&&i.reference&&i.reference.contextElement&&(Ee=Ee.concat(et(i.reference.contextElement)))),Ee=Ee.filter(ue=>{var Re;return ue!==((Re=Z.defaultView)==null?void 0:Re.visualViewport)}),Ee.forEach(ue=>{ue.addEventListener("scroll",re,{passive:!0})}),()=>{d&&(Z.removeEventListener("keydown",q?ne:Y,q),Z.removeEventListener("compositionstart",X),Z.removeEventListener("compositionend",$)),y&&Z.removeEventListener(f,B?H:ee,B),Ee.forEach(ue=>{ue.removeEventListener("scroll",re)}),window.clearTimeout(z)}},[u,i,d,y,f,r,t,S,o,w,D,Y,q,ne,ee,B,H]),P.useEffect(()=>{L.current=!1},[y,f]);const V=P.useMemo(()=>({onKeyDown:Y,...R&&{[oh[A]]:z=>{t(!1,z.nativeEvent,"reference-press")},...A!=="click"&&{onClick(z){t(!1,z.nativeEvent,"reference-press")}}}}),[Y,t,R,A]),M=P.useMemo(()=>({onKeyDown:Y,onMouseDown(){p.current=!0},onMouseUp(){p.current=!0},[Eh[f]]:()=>{L.current=!0}}),[Y,f]);return P.useMemo(()=>o?{reference:V,floating:M}:{},[o,V,M])}function mh(e){const{open:l=!1,onOpenChange:r,elements:t}=e,i=th(),u=P.useRef({}),[o]=P.useState(()=>ah()),d=yN()!=null,[N,f]=P.useState(t.reference),R=Br((_,G,g)=>{u.current.openEvent=_?G:void 0,o.emit("openchange",{open:_,event:G,reason:g,nested:d}),r?.(_,G,g)}),A=P.useMemo(()=>({setPositionReference:f}),[]),S=P.useMemo(()=>({reference:N||t.reference||null,floating:t.floating||null,domReference:t.reference}),[N,t.reference,t.floating]);return P.useMemo(()=>({dataRef:u,open:l,onOpenChange:R,elements:S,events:o,floatingId:i,refs:A}),[l,R,S,o,i,A])}function Nh(e){e===void 0&&(e={});const{nodeId:l}=e,r=mh({...e,elements:{reference:null,floating:null,...e.elements}}),t=e.rootContext||r,i=t.elements,[u,o]=P.useState(null),[d,N]=P.useState(null),R=i?.domReference||u,A=P.useRef(null),S=Ou();Ct(()=>{R&&(A.current=R)},[R]);const _=_P({...e,elements:{...i,...d&&{reference:d}}}),G=P.useCallback(p=>{const w=Ye(p)?{getBoundingClientRect:()=>p.getBoundingClientRect(),getClientRects:()=>p.getClientRects(),contextElement:p}:p;N(w),_.refs.setReference(w)},[_.refs]),g=P.useCallback(p=>{(Ye(p)||p===null)&&(A.current=p,o(p)),(Ye(_.refs.reference.current)||_.refs.reference.current===null||p!==null&&!Ye(p))&&_.refs.setReference(p)},[_.refs]),T=P.useMemo(()=>({..._.refs,setReference:g,setPositionReference:G,domReference:A}),[_.refs,g,G]),y=P.useMemo(()=>({..._.elements,domReference:R}),[_.elements,R]),L=P.useMemo(()=>({..._,...t,refs:T,elements:y,nodeId:l}),[_,T,y,l,t]);return Ct(()=>{t.dataRef.current.floatingContext=L;const p=S?.nodesRef.current.find(w=>w.id===l);p&&(p.context=L)}),P.useMemo(()=>({..._,context:L,refs:T,elements:y}),[_,T,y,L])}function Vs(){return qP()&&xP()}function fh(e,l){l===void 0&&(l={});const{open:r,onOpenChange:t,events:i,dataRef:u,elements:o}=e,{enabled:d=!0,visibleOnly:N=!0}=l,f=P.useRef(!1),R=P.useRef(-1),A=P.useRef(!0);P.useEffect(()=>{if(!d)return;const _=Vn(o.domReference);function G(){!r&&Cn(o.domReference)&&o.domReference===Ud(Rt(o.domReference))&&(f.current=!0)}function g(){A.current=!0}function T(){A.current=!1}return _.addEventListener("blur",G),Vs()&&(_.addEventListener("keydown",g,!0),_.addEventListener("pointerdown",T,!0)),()=>{_.removeEventListener("blur",G),Vs()&&(_.removeEventListener("keydown",g,!0),_.removeEventListener("pointerdown",T,!0))}},[o.domReference,r,d]),P.useEffect(()=>{if(!d)return;function _(G){let{reason:g}=G;(g==="reference-press"||g==="escape-key")&&(f.current=!0)}return i.on("openchange",_),()=>{i.off("openchange",_)}},[i,d]),P.useEffect(()=>()=>{nr(R)},[]);const S=P.useMemo(()=>({onMouseLeave(){f.current=!1},onFocus(_){if(f.current)return;const G=Ut(_.nativeEvent);if(N&&Ye(G)){if(Vs()&&!_.relatedTarget){if(!A.current&&!YP(G))return}else if(!JP(G))return}t(!0,_.nativeEvent,"focus")},onBlur(_){f.current=!1;const G=_.relatedTarget,g=_.nativeEvent,T=Ye(G)&&G.hasAttribute(ku("focus-guard"))&&G.getAttribute("data-type")==="outside";R.current=window.setTimeout(()=>{var y;const L=Ud(o.domReference?o.domReference.ownerDocument:document);!G&&L===o.domReference||pa((y=u.current.floatingContext)==null?void 0:y.refs.floating.current,L)||pa(o.domReference,L)||T||t(!1,g,"focus")})}}),[u,o.domReference,t,N]);return P.useMemo(()=>d?{reference:S}:{},[d,S])}function Ms(e,l,r){const t=new Map,i=r==="item";let u=e;if(i&&e){const{[xd]:o,[qd]:d,...N}=e;u=N}return{...r==="floating"&&{tabIndex:-1,[ZP]:""},...u,...l.map(o=>{const d=o?o[r]:null;return typeof d=="function"?e?d(e):null:d}).concat(e).reduce((o,d)=>(d&&Object.entries(d).forEach(N=>{let[f,R]=N;if(!(i&&[xd,qd].includes(f)))if(f.indexOf("on")===0){if(t.has(f)||t.set(f,[]),typeof R=="function"){var A;(A=t.get(f))==null||A.push(R),o[f]=function(){for(var S,_=arguments.length,G=new Array(_),g=0;g<_;g++)G[g]=arguments[g];return(S=t.get(f))==null?void 0:S.map(T=>T(...G)).find(T=>T!==void 0)}}}else o[f]=R}),o),{})}}function Rh(e){e===void 0&&(e=[]);const l=e.map(d=>d?.reference),r=e.map(d=>d?.floating),t=e.map(d=>d?.item),i=P.useCallback(d=>Ms(d,e,"reference"),l),u=P.useCallback(d=>Ms(d,e,"floating"),r),o=P.useCallback(d=>Ms(d,e,"item"),t);return P.useMemo(()=>({getReferenceProps:i,getFloatingProps:u,getItemProps:o}),[i,u,o])}function ch(e,l,r){r===void 0&&(r=!0);let t=e.filter(u=>{var o;return u.parentId===l&&((o=u.context)==null?void 0:o.open)}),i=t;for(;i.length;)i=r?e.filter(u=>{var o;return(o=i)==null?void 0:o.some(d=>{var N;return u.parentId===d.id&&((N=u.context)==null?void 0:N.open)})}):e,t=t.concat(i);return t}function Jd(e,l){const[r,t]=e;let i=!1;const u=l.length;for(let o=0,d=u-1;o<u;d=o++){const[N,f]=l[o]||[0,0],[R,A]=l[d]||[0,0];f>=t!=A>=t&&r<=(R-N)*(t-f)/(A-f)+N&&(i=!i)}return i}function vh(e,l){return e[0]>=l.x&&e[0]<=l.x+l.width&&e[1]>=l.y&&e[1]<=l.y+l.height}function Ah(e){e===void 0&&(e={});const{buffer:l=.5,blockPointerEvents:r=!1,requireIntent:t=!0}=e;let i,u=!1,o=null,d=null,N=performance.now();function f(A,S){const _=performance.now(),G=_-N;if(o===null||d===null||G===0)return o=A,d=S,N=_,null;const g=A-o,T=S-d,L=Math.sqrt(g*g+T*T)/G;return o=A,d=S,N=_,L}const R=A=>{let{x:S,y:_,placement:G,elements:g,onClose:T,nodeId:y,tree:L}=A;return function(w){function D(){clearTimeout(i),T()}if(clearTimeout(i),!g.domReference||!g.floating||G==null||S==null||_==null)return;const{clientX:q,clientY:B}=w,U=[q,B],Y=uh(w),ne=w.type==="mouseleave",ee=Ks(g.floating,Y),H=Ks(g.domReference,Y),V=g.domReference.getBoundingClientRect(),M=g.floating.getBoundingClientRect(),z=G.split("-")[0],re=S>M.right-M.width/2,X=_>M.bottom-M.height/2,$=vh(U,V),Z=M.width>V.width,Ee=M.height>V.height,ue=(Z?V:M).left,Re=(Z?V:M).right,Te=(Ee?V:M).top,Tn=(Ee?V:M).bottom;if(ee&&(u=!0,!ne))return;if(H&&(u=!1),H&&!ne){u=!0;return}if(ne&&Ye(w.relatedTarget)&&Ks(g.floating,w.relatedTarget)||L&&ch(L.nodesRef.current,y).some(qe=>{let{context:Pe}=qe;return Pe?.open}))return;if(z==="top"&&_>=V.bottom-1||z==="bottom"&&_<=V.top+1||z==="left"&&S>=V.right-1||z==="right"&&S<=V.left+1)return D();let Je=[];switch(z){case"top":Je=[[ue,V.top+1],[ue,M.bottom-1],[Re,M.bottom-1],[Re,V.top+1]];break;case"bottom":Je=[[ue,M.top+1],[ue,V.bottom-1],[Re,V.bottom-1],[Re,M.top+1]];break;case"left":Je=[[M.right-1,Tn],[M.right-1,Te],[V.left+1,Te],[V.left+1,Tn]];break;case"right":Je=[[V.right-1,Tn],[V.right-1,Te],[M.left+1,Te],[M.left+1,Tn]];break}function xe(qe){let[Pe,Oe]=qe;switch(z){case"top":{const nn=[Z?Pe+l/2:re?Pe+l*4:Pe-l*4,Oe+l+1],ze=[Z?Pe-l/2:re?Pe+l*4:Pe-l*4,Oe+l+1],Xe=[[M.left,re||Z?M.bottom-l:M.top],[M.right,re?Z?M.bottom-l:M.top:M.bottom-l]];return[nn,ze,...Xe]}case"bottom":{const nn=[Z?Pe+l/2:re?Pe+l*4:Pe-l*4,Oe-l],ze=[Z?Pe-l/2:re?Pe+l*4:Pe-l*4,Oe-l],Xe=[[M.left,re||Z?M.top+l:M.bottom],[M.right,re?Z?M.top+l:M.bottom:M.top+l]];return[nn,ze,...Xe]}case"left":{const nn=[Pe+l+1,Ee?Oe+l/2:X?Oe+l*4:Oe-l*4],ze=[Pe+l+1,Ee?Oe-l/2:X?Oe+l*4:Oe-l*4];return[...[[X||Ee?M.right-l:M.left,M.top],[X?Ee?M.right-l:M.left:M.right-l,M.bottom]],nn,ze]}case"right":{const nn=[Pe-l,Ee?Oe+l/2:X?Oe+l*4:Oe-l*4],ze=[Pe-l,Ee?Oe-l/2:X?Oe+l*4:Oe-l*4],Xe=[[X||Ee?M.left+l:M.right,M.top],[X?Ee?M.left+l:M.right:M.left+l,M.bottom]];return[nn,ze,...Xe]}}}if(!Jd([q,B],Je)){if(u&&!$)return D();if(!ne&&t){const qe=f(w.clientX,w.clientY);if(qe!==null&&qe<.1)return D()}Jd([q,B],xe([S,_]))?!u&&t&&(i=window.setTimeout(D,40)):D()}}};return R.__options={blockPointerEvents:r},R}const pN=()=>{const{cn:e}=be();return k.createElement(mN,{"aria-hidden":!0,className:e("navds-form-field__readonly-icon")})},bN=()=>{const{cn:e}=be();return k.createElement(mN,{title:It("global")("readOnly"),className:e("navds-form-field__readonly-icon")})};var Sh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const _h=P.forwardRef((e,l)=>{var{className:r,header:t,children:i,open:u,defaultOpen:o=!1,onClick:d,size:N="medium",onOpenChange:f}=e,R=Sh(e,["className","header","children","open","defaultOpen","onClick","size","onOpenChange"]);const{cn:A}=be(),[S,_]=yu({defaultValue:o,value:u,onChange:f}),G=N==="small"?"small":"medium";return k.createElement("div",{className:A("navds-read-more",`navds-read-more--${N}`,r,{"navds-read-more--open":S}),"data-volume":"low"},k.createElement("button",Object.assign({},R,{ref:l,type:"button",className:A("navds-read-more__button","navds-body-short",{"navds-body-short--small":N==="small"}),onClick:Oa(d,()=>_(g=>!g)),"aria-expanded":S,"data-state":S?"open":"closed"}),k.createElement(EN,{className:A("navds-read-more__expand-icon"),"aria-hidden":!0}),k.createElement("span",null,t)),k.createElement(hu,{as:"div","aria-hidden":!S,className:A("navds-read-more__content",{"navds-read-more__content--closed":!S}),size:G,"data-state":S?"open":"closed"},i))}),Zl=P.createContext(null),Ei=(e,l)=>{var r,t,i;const{size:u,error:o,errorId:d}=e,N=P.useContext(Zl),f=Ga(),R=(r=e.id)!==null&&r!==void 0?r:`${l}-${f}`,A=d??`${l}-error-${f}`,S=`${l}-description-${f}`,_=N?.disabled||e.disabled,G=(N?.readOnly||e.readOnly)&&!_||void 0,g=!_&&!G&&!!(o||N?.error),T=!_&&!G&&!!o&&typeof o!="boolean",y=Object.assign({},g?{"aria-invalid":!0}:{});return e?.required,{showErrorMsg:T,hasError:g,errorId:A,inputDescriptionId:S,size:(t=u??N?.size)!==null&&t!==void 0?t:"medium",readOnly:G,inputProps:Object.assign(Object.assign({id:R},y),{"aria-describedby":La(e["aria-describedby"],{[S]:e.description&&!Ql(e.description),[A]:T,[(i=N?.errorId)!==null&&i!==void 0?i:""]:g&&N?.error})||void 0,disabled:_})}};function Ql(e,l=!0){if(k.isValidElement(e)){if(e.type===_h)return!0;if(e.props.children&&l)return Ql(e.props.children,!1)}else if(Array.isArray(e))return e.some(r=>Ql(r,l));return!1}function cn(e,l,r,t){return t?typeof t=="string"?{[`--__${e}c-${l}-${r}-xs`]:t}:Object.fromEntries(Object.entries(t).map(([i,u])=>[`--__${e}c-${l}-${r}-${i}`,u])):{}}const Th={"--ax-spacing-32":"--ax-space-128","--ax-spacing-24":"--ax-space-96","--ax-spacing-20":"--ax-space-80","--ax-spacing-18":"--ax-space-72","--ax-spacing-16":"--ax-space-64","--ax-spacing-14":"--ax-space-56","--ax-spacing-12":"--ax-space-48","--ax-spacing-11":"--ax-space-44","--ax-spacing-10":"--ax-space-40","--ax-spacing-9":"--ax-space-36","--ax-spacing-8":"--ax-space-32","--ax-spacing-7":"--ax-space-28","--ax-spacing-6":"--ax-space-24","--ax-spacing-5":"--ax-space-20","--ax-spacing-4":"--ax-space-16","--ax-spacing-3":"--ax-space-12","--ax-spacing-2":"--ax-space-8","--ax-spacing-1-alt":"--ax-space-6","--ax-spacing-1":"--ax-space-4","--ax-spacing-05":"--ax-space-2","--ax-spacing-0":"--ax-space-0"},gh={full:"full",xlarge:"12",large:"8",medium:"4",small:"2"},$d=(e,l,r,t,i,u)=>l.split(" ").map((o,d,N)=>{var f,R;if(e==="margin-inline"&&o==="full")return`calc((100vw - ${100/N.length}%)/-2)`;if(e==="padding-inline"&&o==="full")return`calc((100vw - ${100/N.length}%)/2)`;if(["mi","mb"].includes(e)&&o==="auto")return"auto";let A=`var(--${u}-${r}-${o})`;if(t.includes(o))A=o==="px"?"1px":o;else if(r==="spacing"&&o.startsWith("space"))A=`var(--${u}-${o})`;else if(r==="spacing"){const S=`--${u}-spacing-${o}`;A=`var(${(f=Th[S])!==null&&f!==void 0?f:S})`}else if(r==="radius"){const S=(R=gh[o])!==null&&R!==void 0?R:o;A=`var(--${u}-radius-${S})`}return i?o==="0"?"0":`calc(-1 * ${A})`:A}).join(" ");function kn(e,l,r,t,i,u=!1,o=[]){if(!i)return{};if(typeof i=="string")return{[`--__${e}c-${l}-${r}-xs`]:$d(r,i,t,o,u,e)};const d={};return Object.entries(i).forEach(([N,f])=>{d[`--__${e}c-${l}-${r}-${N}`]=$d(r,f,t,o,u,e)}),d}const Fu=["className","padding","paddingInline","paddingBlock","margin","marginInline","marginBlock","width","minWidth","maxWidth","height","minHeight","maxHeight","position","inset","top","right","bottom","left","overflow","overflowX","overflowY","flexBasis","flexGrow","flexShrink","gridColumn"],Ku=({children:e,className:l,padding:r,paddingInline:t,paddingBlock:i,margin:u,marginInline:o,marginBlock:d,width:N,minWidth:f,maxWidth:R,height:A,minHeight:S,maxHeight:_,position:G,inset:g,top:T,right:y,left:L,bottom:p,overflow:w,overflowX:D,overflowY:q,flexBasis:B,flexGrow:U,flexShrink:Y,gridColumn:ne})=>{const ee=Da(!1),{cn:H}=be(),V=ee?"ax":"a",M=Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({},kn(V,"r","p","spacing",r)),kn(V,"r","pi","spacing",t)),kn(V,"r","pb","spacing",i)),kn(V,"r","m","spacing",u)),kn(V,"r","mi","spacing",o)),kn(V,"r","mb","spacing",d)),cn(V,"r","w",N)),cn(V,"r","minw",f)),cn(V,"r","maxw",R)),cn(V,"r","h",A)),cn(V,"r","minh",S)),cn(V,"r","maxh",_)),cn(V,"r","position",G)),kn(V,"r","inset","spacing",g)),kn(V,"r","top","spacing",T)),kn(V,"r","right","spacing",y)),kn(V,"r","bottom","spacing",p)),kn(V,"r","left","spacing",L)),cn(V,"r","overflow",w)),cn(V,"r","overflowx",D)),cn(V,"r","overflowy",q)),cn(V,"r","flex-basis",B)),cn(V,"r","flex-grow",U)),cn(V,"r","flex-shrink",Y)),cn(V,"r","grid-column",ne));return k.createElement(Yt,{className:H({className:l,"navds-r-p":r,"navds-r-pi":t,"navds-r-pb":i,"navds-r-m":u,"navds-r-mi":o,"navds-r-mb":d,"navds-r-w":N,"navds-r-minw":f,"navds-r-maxw":R,"navds-r-h":A,"navds-r-minh":S,"navds-r-maxh":_,"navds-r-position":G,"navds-r-inset":g,"navds-r-top":T,"navds-r-right":y,"navds-r-bottom":p,"navds-r-left":L,"navds-r-overflow":w,"navds-r-overflowx":D,"navds-r-overflowy":q,"navds-r-flex-basis":B,"navds-r-flex-grow":U,"navds-r-flex-shrink":Y,"navds-r-grid-column":ne}),style:M},e)};var Ih=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Ph=P.forwardRef((e,l)=>{var{children:r,className:t,as:i="div",background:u,borderColor:o,borderWidth:d,borderRadius:N,shadow:f,style:R,asChild:A}=e,S=Ih(e,["children","className","as","background","borderColor","borderWidth","borderRadius","shadow","style","asChild"]);const{cn:_}=be(),G=Object.assign(Object.assign(Object.assign({},R),{"--__axc-box-background":u?`var(--ax-bg-${u})`:void 0,"--__axc-box-shadow":f?`var(--ax-shadow-${f})`:void 0,"--__axc-box-border-color":o?`var(--ax-border-${o})`:void 0,"--__axc-box-border-width":d?d.split(" ").map(T=>`${T}px`).join(" "):void 0}),kn("ax","box","radius","radius",N,!1,["0"])),g=A?Yt:i;return k.createElement(Ku,Object.assign({},S),k.createElement(g,Object.assign({},fr(S,Fu),{ref:l,style:G,className:_("navds-box",t,{"navds-box-bg":u,"navds-box-border-color":o,"navds-box-border-width":d,"navds-box-radius":N,"navds-box-shadow":f})}),r))});var hh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const yh=P.forwardRef((e,l)=>{var{children:r,className:t,as:i="div",background:u,borderColor:o,borderWidth:d,borderRadius:N,shadow:f,style:R,asChild:A}=e,S=hh(e,["children","className","as","background","borderColor","borderWidth","borderRadius","shadow","style","asChild"]);const _=Da(!1),{cn:G}=be(),g=_?"ax":"a",T=Object.assign(Object.assign(Object.assign({},R),{[`--__${g}c-box-background`]:u?`var(--a-${u})`:void 0,[`--__${g}c-box-shadow`]:f?`var(--a-shadow-${f})`:void 0,[`--__${g}c-box-border-color`]:o?`var(--a-${o})`:void 0,[`--__${g}c-box-border-width`]:d?d.split(" ").map(L=>`${L}px`).join(" "):void 0}),kn(g,"box","radius","radius",N,!1,["0"])),y=A?Yt:i;return k.createElement(Ku,Object.assign({},S),k.createElement(y,Object.assign({},fr(S,Fu),{ref:l,style:T,className:G("navds-box",t,{"navds-box-bg":u,"navds-box-border-color":o,"navds-box-border-width":d,"navds-box-border-radius":N,"navds-box-shadow":f})}),r))}),LN=yh;LN.New=Ph;var ph=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const DN=P.forwardRef((e,l)=>{var{children:r,className:t,as:i="div",align:u,justify:o,wrap:d=!0,gap:N,style:f,direction:R="row",asChild:A}=e,S=ph(e,["children","className","as","align","justify","wrap","gap","style","direction","asChild"]);const G=Da(!1)?"ax":"a",{cn:g}=be(),T=Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({},f),kn(G,"stack","gap","spacing",N)),cn(G,"stack","direction",R)),cn(G,"stack","align",u)),cn(G,"stack","justify",o)),y=A?Yt:i;return k.createElement(Ku,Object.assign({},S),k.createElement(y,Object.assign({},fr(S,Fu),{ref:l,style:T,className:g("navds-stack",t,{"navds-vstack":R==="column","navds-hstack":R==="row","navds-stack-gap":N,"navds-stack-align":u,"navds-stack-justify":o,"navds-stack-direction":R,"navds-stack-wrap":d})}),r))});var bh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Vu=P.forwardRef((e,l)=>{var{as:r="div"}=e,t=bh(e,["as"]);return k.createElement(DN,Object.assign({as:r},t,{ref:l,direction:"row"}))});var Lh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Tt=P.forwardRef((e,l)=>{var{as:r="div"}=e,t=Lh(e,["as"]);return k.createElement(DN,Object.assign({as:r},t,{ref:l,direction:"column",wrap:!1}))});var Dh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Gh=P.forwardRef((e,l)=>{var{className:r}=e,t=Dh(e,["className"]);const{cn:i}=be();return k.createElement("tbody",Object.assign({},t,{ref:l,className:i("navds-table__body",r)}))});var Oh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const GN=P.forwardRef((e,l)=>{var{className:r,children:t,align:i,textSize:u}=e,o=Oh(e,["className","children","align","textSize"]);const{cn:d}=be();return k.createElement("th",Object.assign({ref:l,className:d("navds-table__header-cell","navds-label",r,{[`navds-table__header-cell--align-${i}`]:i,"navds-label--small":u==="small"})},o),t)}),ON=P.createContext(null);var kh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Fh=P.forwardRef((e,l)=>{var r,t,i,u,{className:o,children:d,sortable:N=!1,sortKey:f}=e,R=kh(e,["className","children","sortable","sortKey"]);const A=P.useContext(ON),{cn:S}=be();return N&&!f&&console.warn("ColumnHeader with `sortable=true` must have a sortKey."),k.createElement(GN,Object.assign({scope:"col",ref:l,className:S(o),"aria-sort":N?((r=A?.sort)===null||r===void 0?void 0:r.orderBy)===f?(t=A?.sort)===null||t===void 0?void 0:t.direction:"none":void 0},R),N?k.createElement("button",{type:"button",className:S("navds-table__sort-button"),onClick:N&&f?()=>{var _;return(_=A?.onSortChange)===null||_===void 0?void 0:_.call(A,f)}:void 0},d,((i=A?.sort)===null||i===void 0?void 0:i.orderBy)===f?((u=A?.sort)===null||u===void 0?void 0:u.direction)==="descending"?k.createElement(Xg,{"aria-hidden":!0}):k.createElement(Qg,{"aria-hidden":!0}):k.createElement(Bg,{"aria-hidden":!0})):d)});var Kh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const kN=P.forwardRef((e,l)=>{var{className:r,children:t="",align:i,textSize:u}=e,o=Kh(e,["className","children","align","textSize"]);const{cn:d}=be();return k.createElement(Nr,Object.assign({as:"td",ref:l,className:d("navds-table__data-cell",r,{[`navds-table__data-cell--align-${i}`]:i}),size:u},o),t)});var Vh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Mh=globalThis?.matchMedia?globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches:!1;function Bh(e){const l=parseFloat(e);return!Number.isNaN(l)&&Number.isFinite(l)}function Wd(e){return typeof e=="string"&&e[e.length-1]==="%"&&Bh(e.substring(0,e.length-1))}function Bs(e,l){l===0&&e?.style&&(e.style.display="none")}function wh(e,l){l===0&&e?.style&&(e.style.display="")}const Uh=e=>{var{children:l,className:r,innerClassName:t,duration:i=250,easing:u="ease",height:o}=e,d=Vh(e,["children","className","innerClassName","duration","easing","height"]);const{cn:N}=be(),f=P.useRef(o),R=P.useRef(null),A=P.useRef(),S=P.useRef(),_=P.useRef(o),G=P.useRef("visible"),g=Mh?0:i;typeof _.current=="number"?(typeof o!="string"&&(_.current=o<0?0:o),G.current="hidden"):Wd(_.current)&&(_.current=o==="0%"?0:o,G.current="hidden");const[T,y]=P.useState(_.current),[L,p]=P.useState(G.current),[w,D]=P.useState(!1);P.useEffect(()=>{Bs(R.current,_.current)},[]),P.useEffect(()=>{if(o!==f.current&&R.current){wh(R.current,f.current),R.current.style.overflow="hidden";const Y=R.current.offsetHeight;R.current.style.overflow="";const ne=g;let ee,H,V="hidden",M;const z=f.current==="auto";typeof o=="number"?(ee=o<0?0:o,H=ee):Wd(o)?(ee=o==="0%"?0:o,H=ee):(ee=Y,H="auto",V=void 0),z&&(H=ee,ee=Y),y(ee),p("hidden"),D(!z),clearTimeout(S.current),clearTimeout(A.current),z?(M=!0,S.current=setTimeout(()=>{y(H),p(V),D(M)},50),A.current=setTimeout(()=>{D(!1),Bs(R.current,H)},ne)):S.current=setTimeout(()=>{y(H),p(V),D(!1),o!=="auto"&&Bs(R.current,ee)},ne)}return f.current=o,()=>{clearTimeout(S.current),clearTimeout(A.current)}},[o]);const q={height:T,overflow:L};w&&(q.transition=`height ${g}ms ${u} 0ms`,q.WebkitTransition=q.transition);const U=typeof d["aria-hidden"]<"u"?d["aria-hidden"]:o===0;return k.createElement("div",Object.assign({},d,{className:N(r),style:q}),k.createElement("div",{"aria-hidden":U,className:N(t),ref:R},l))};var xh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const FN=P.forwardRef((e,l)=>{var{className:r,selected:t=!1,shadeOnHover:i=!0}=e,u=xh(e,["className","selected","shadeOnHover"]);const{cn:o}=be();return k.createElement("tr",Object.assign({},u,{ref:l,className:o("navds-table__row",r,{"navds-table__row--selected":t,"navds-table__row--shade-on-hover":i})}))});var qh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Hh=P.forwardRef((e,l)=>{var{className:r,children:t,content:i,togglePlacement:u="left",defaultOpen:o=!1,open:d,onOpenChange:N,expansionDisabled:f=!1,expandOnRowClick:R=!1,colSpan:A=999,contentGutter:S,onClick:_}=e,G=qh(e,["className","children","content","togglePlacement","defaultOpen","open","onOpenChange","expansionDisabled","expandOnRowClick","colSpan","contentGutter","onClick"]);const{cn:g}=be(),[T,y]=yu({defaultValue:o,value:d,onChange:N}),L=It("global"),p=Ga(),w=q=>{y(B=>!B),q.stopPropagation()},D=q=>{R&&!f&&!KN(q.target)&&w(q)};return k.createElement(k.Fragment,null,k.createElement(FN,Object.assign({},G,{ref:l,className:g("navds-table__expandable-row",r,{"navds-table__expandable-row--open":T,"navds-table__expandable-row--expansion-disabled":f,"navds-table__expandable-row--clickable":R}),onClick:Oa(_,D)}),u==="right"&&t,k.createElement(kN,{className:g("navds-table__toggle-expand-cell",{"navds-table__toggle-expand-cell--open":T}),onClick:f?()=>null:w},!f&&k.createElement("button",{className:g("navds-table__toggle-expand-button"),type:"button","aria-controls":p,"aria-expanded":T,onClick:w},k.createElement(EN,{className:g("navds-table__expandable-icon"),title:L(T?"showLess":"showMore")}))),u==="left"&&t),k.createElement("tr",{"data-state":T?"open":"closed",className:g("navds-table__expanded-row"),"aria-hidden":!T,id:p},k.createElement("td",{colSpan:A,className:g("navds-table__expanded-row-cell")},k.createElement(Uh,{className:g("navds-table__expanded-row-collapse"),innerClassName:g(`navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${S??u}`),height:T?"auto":0,duration:150,easing:"cubic-bezier(0.39,0.57,0.56,1)"},i))))});function KN(e){return e.nodeName==="TD"||e.nodeName==="TH"||!e.parentElement?!1:["BUTTON","DETAILS","LABEL","SELECT","TEXTAREA","INPUT","A"].includes(e.nodeName)?!0:KN(e.parentElement)}var Ch=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const jh=P.forwardRef((e,l)=>{var{className:r}=e,t=Ch(e,["className"]);const{cn:i}=be();return k.createElement("thead",Object.assign({},t,{ref:l,className:i("navds-table__header",r)}))});var Yh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Be=P.forwardRef((e,l)=>{var{className:r,zebraStripes:t=!1,size:i="medium",onSortChange:u,sort:o,stickyHeader:d=!1}=e,N=Yh(e,["className","zebraStripes","size","onSortChange","sort","stickyHeader"]);const{cn:f}=be();return k.createElement(ON.Provider,{value:{onSortChange:u,sort:o}},k.createElement("table",Object.assign({},N,{ref:l,className:f("navds-table",`navds-table--${i}`,r,{"navds-table--zebra-stripes":t,"navds-table--sticky-header":d})})))});Be.Header=jh;Be.Body=Gh;Be.Row=FN;Be.ColumnHeader=Fh;Be.HeaderCell=GN;Be.DataCell=kN;Be.ExpandableRow=Hh;var Jh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const $h=P.forwardRef((e,l)=>{var{children:r,className:t,variant:i,size:u="medium",icon:o,"data-color":d}=e,N=Jh(e,["children","className","variant","size","icon","data-color"]);const{cn:f}=be(),R=i?.endsWith("-filled")&&"strong",A=i?.endsWith("-moderate")&&"moderate";return k.createElement(Nr,Object.assign({"data-color":d??Wh(i),"data-variant":R||A||"outline"},N,{ref:l,as:"span",size:u==="medium"?"medium":"small",className:f("navds-tag",t,`navds-tag--${i}`,`navds-tag--${u}`)}),o&&k.createElement("span",{className:f("navds-tag__icon--left")},o),r)});function Wh(e){switch(e){case"warning":case"warning-filled":case"warning-moderate":return"warning";case"error":case"error-filled":case"error-moderate":return"danger";case"info":case"info-filled":case"info-moderate":case"alt3":case"alt3-filled":case"alt3-moderate":return"info";case"success":case"success-filled":case"success-moderate":return"success";case"neutral":case"neutral-filled":case"neutral-moderate":return"neutral";case"alt1":case"alt1-filled":case"alt1-moderate":return"meta-purple";case"alt2":case"alt2-filled":case"alt2-moderate":return"meta-lime";default:return"neutral"}}var zh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Xh=P.forwardRef((e,l)=>{var{children:r,className:t,arrow:i=!0,placement:u="top",open:o,defaultOpen:d=!1,onOpenChange:N,offset:f,content:R,delay:A=150,id:S,keys:_,maxChar:G=80,describesChild:g=!1}=e,T=zh(e,["children","className","arrow","placement","open","defaultOpen","onOpenChange","offset","content","delay","id","keys","maxChar","describesChild"]);const{cn:y}=be(),[L,p]=yu({defaultValue:d,value:o,onChange:N}),w=P.useRef(null),D=tI(!1),q=D?D.ref.current:void 0,{x:B,y:U,strategy:Y,context:ne,placement:ee,middlewareData:{arrow:{x:H,y:V}={},hide:{referenceHidden:M}={}},refs:z}=Nh({placement:u,open:L,onOpenChange:ue=>p(ue),middleware:[gP(f??(i?8:4)),IP(),PP({padding:5,fallbackPlacements:["bottom","top"]}),hP({element:w,padding:5})],whileElementsMounted:D?(ue,Re,Te)=>Vd(ue,Re,Te,{animationFrame:!0}):Vd,strategy:D?"fixed":void 0}),{getReferenceProps:re,getFloatingProps:X}=Rh([sh(ne,{handleClose:Ah(),restMs:A}),fh(ne),dh(ne)]),$=Ga(S),Z=Iu(l,z.setFloating);if(!r||r?.type===k.Fragment||r===k.Fragment)return console.error("<Tooltip> children needs to be a single ReactElement and not: <React.Fragment/> | <></>"),null;R?.length>G&&L&&console.warn(`Because of strict accessibility concers we encourage all Tooltips to have less than 80 characters. Can be overwritten with the maxChar-prop
+
+Length:${R.length}
+Tooltip-content: ${R}`);const Ee=g?L?{"aria-describedby":$}:{title:R}:{"aria-label":R};return k.createElement(k.Fragment,null,k.createElement(Yt,Object.assign({ref:z.setReference},re(),Ee,{"aria-keyshortcuts":_?_.join("+"):void 0}),r),k.createElement(wI,{rootElement:q,asChild:!0},L&&k.createElement("div",Object.assign({},X(Object.assign(Object.assign({},T),{ref:Z,style:{position:Y,top:U??0,left:B??0,visibility:M?"hidden":"visible"},role:"tooltip",id:$,className:y("navds-tooltip","navds-detail navds-detail--small",t)})),{"data-side":ee,"data-state":"open"}),R,_&&k.createElement("span",{className:y("navds-tooltip__keys"),"aria-hidden":!0},_.map(ue=>k.createElement(Dg,{as:"kbd",key:ue,className:y("navds-tooltip__key")},ue))),i&&k.createElement("div",{ref:ue=>{w.current=ue},className:y("navds-tooltip__arrow"),style:{left:H!=null?`${H}px`:"",top:V!=null?`${V}px`:"",right:"",bottom:"",[{top:"bottom",right:"left",bottom:"top",left:"right"}[ee]]:"-3.5px"}}))))}),Zh=e=>{const l=Ei(e,"fieldset");return Object.assign(Object.assign({},l),{inputProps:{"aria-describedby":La(e["aria-describedby"],{[l.inputDescriptionId]:e.description&&!Ql(e.description)})||void 0}})};var Qh=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const ey=P.forwardRef((e,l)=>{var r,t,i;const{inputProps:u,errorId:o,showErrorMsg:d,hasError:N,size:f,readOnly:R,inputDescriptionId:A}=Zh(e),{cn:S}=be(),_=P.useContext(Zl),{children:G,className:g,errorPropagation:T=!0,legend:y,description:L,hideLegend:p,nativeReadOnly:w=!0}=e,D=Qh(e,["children","className","errorPropagation","legend","description","hideLegend","nativeReadOnly"]);return k.createElement(Zl.Provider,{value:{error:T?(r=e.error)!==null&&r!==void 0?r:_?.error:void 0,errorId:La({[o]:d,[(t=_?.errorId)!==null&&t!==void 0?t:""]:!!_?.error}),size:f,disabled:(i=e.disabled)!==null&&i!==void 0?i:!1,readOnly:R}},k.createElement("fieldset",Object.assign({},fr(D,["errorId","error","size","readOnly"]),u,{ref:l,className:S(g,"navds-fieldset",`navds-fieldset--${f}`,{"navds-fieldset--error":N,"navds-fieldset--readonly":R})}),k.createElement(At,{size:f,as:"legend",className:S("navds-fieldset__legend",{"navds-sr-only":!!p})},R&&(w?k.createElement(pN,null):k.createElement(bN,null)),y),!!L&&k.createElement(Nr,{className:S("navds-fieldset__description",{"navds-sr-only":!!p}),id:A,size:f??"medium",as:"div"},e.description),G,k.createElement("div",{id:o,"aria-relevant":"additions removals","aria-live":"polite",className:S("navds-fieldset__error")},d&&k.createElement(ai,{size:f,showIcon:!0},e.error))))});var ny=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const VN=P.createContext(null);P.forwardRef((e,l)=>{var r,t,{value:i,defaultValue:u,onChange:o=()=>{},children:d,className:N}=e,f=ny(e,["value","defaultValue","onChange","children","className"]);const{cn:R}=be(),A=P.useContext(Zl),[S,_]=P.useState(u??[]),G=g=>{const T=i??S,y=T.includes(g)?T.filter(L=>L!==g):[...T,g];i===void 0&&_(y),o(y)};return k.createElement(ey,Object.assign({},f,{ref:l,className:R(N,"navds-checkbox-group",`navds-checkbox-group--${(t=(r=f.size)!==null&&r!==void 0?r:A?.size)!==null&&t!==void 0?t:"medium"}`),nativeReadOnly:!1}),k.createElement(VN.Provider,{value:{value:i,defaultValue:u,toggleValue:G}},k.createElement("div",{className:R("navds-checkboxes")},d)))});var ry=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const ty=e=>{const l=P.useContext(VN),r=Ei(fr(e,["description","children"]),"checkbox"),{inputProps:t,readOnly:i}=r,u=ry(r,["inputProps","readOnly"]);return l&&(e.checked&&console.warn("`checked` is unsupported on <Checkbox> elements within a <CheckboxGroup>. Please set a `value` or `defaultValue` on <CheckboxGroup> instead."),e.value===void 0&&console.warn("A <Checkbox> element within a <CheckboxGroup> requires a `value` property.")),Object.assign(Object.assign({},u),{readOnly:i,nested:!!l,inputProps:Object.assign(Object.assign({},t),{checked:l?.value?l.value.includes(e.value):e.checked,defaultChecked:l?.defaultValue?l.defaultValue.includes(e.value):e.defaultChecked,onChange:o=>{var d;i||((d=e.onChange)===null||d===void 0||d.call(e,o),l?.toggleValue(e.value))},onClick:o=>{var d;if(i){o.preventDefault();return}(d=e?.onClick)===null||d===void 0||d.call(e,o)}})})},ay=P.forwardRef((e,l)=>{const{cn:r}=be(),{inputProps:t,hasError:i,size:u,readOnly:o,nested:d}=ty(e);return k.createElement("div",{className:r(e.className,"navds-checkbox",`navds-checkbox--${u}`,{"navds-checkbox--error":i,"navds-checkbox--disabled":t.disabled,"navds-checkbox--readonly":o}),"data-color":i?"danger":e["data-color"]},k.createElement("input",Object.assign({},fr(e,["children","size","error","description","hideLabel","indeterminate","errorId","readOnly"]),fr(t,["aria-invalid"]),{type:"checkbox",className:r("navds-checkbox__input"),ref:N=>{var f;N&&(N.indeterminate=(f=e.indeterminate)!==null&&f!==void 0?f:!1),typeof l=="function"?l(N):l!=null&&(l.current=N)}})),k.createElement("label",{htmlFor:t.id,className:r("navds-checkbox__label")},k.createElement("span",{className:r("navds-checkbox__icon")},k.createElement("svg",{xmlns:"http://www.w3.org/2000/svg",width:"0.8125rem",height:"0.625rem",viewBox:"0 0 13 10",fill:"none",focusable:!1,role:"img","aria-hidden":!0},k.createElement("path",{d:"M4.03524 6.41478L10.4752 0.404669C11.0792 -0.160351 12.029 -0.130672 12.5955 0.47478C13.162 1.08027 13.1296 2.03007 12.5245 2.59621L5.02111 9.59934C4.74099 9.85904 4.37559 10 4.00025 10C3.60651 10 3.22717 9.84621 2.93914 9.56111L0.439143 7.06111C-0.146381 6.47558 -0.146381 5.52542 0.439143 4.93989C1.02467 4.35437 1.97483 4.35437 2.56036 4.93989L4.03524 6.41478Z",fill:"currentColor"}))),k.createElement("span",{className:r("navds-checkbox__icon-indeterminate")}),k.createElement("span",{className:r("navds-checkbox__content",{"navds-sr-only":e.hideLabel})},k.createElement(Nr,{as:"span",size:u,className:r("navds-checkbox__label-text")},!d&&o&&k.createElement(bN,null),e.children),e.description&&k.createElement(Nr,{as:"span",size:u,className:r("navds-form-field__subdescription navds-checkbox__description")},e.description))))}),MN=P.createContext(null);var ly=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const BN=P.forwardRef((e,l)=>{var r,{className:t,children:i,disabled:u,onClick:o}=e,d=ly(e,["className","children","disabled","onClick"]);const{cn:N}=be(),f=It("Search"),R=P.useContext(MN);if(R===null)return console.warn("<Search.Button> has to be wrapped in <Search />"),null;const{size:A,variant:S,handleClick:_}=R;return k.createElement(oi,Object.assign({type:"submit"},d,{ref:l,size:A,variant:S==="secondary"?"secondary":"primary",className:N("navds-search__button-search",t),disabled:(r=R?.disabled)!==null&&r!==void 0?r:u,onClick:Oa(o,_),icon:k.createElement(dN,Object.assign({},i?{"aria-hidden":!0}:{title:f("search")}))}),i)});var iy=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const tu=P.forwardRef((e,l)=>{const{inputProps:r,size:t="medium",inputDescriptionId:i,errorId:u,showErrorMsg:o,hasError:d}=Ei(e,"searchfield"),{className:N,hideLabel:f=!0,label:R,description:A,value:S,clearButtonLabel:_,onClear:G,clearButton:g=!0,children:T,variant:y="primary",defaultValue:L,onChange:p,onSearchClick:w,htmlSize:D,"data-color":q}=e,B=iy(e,["className","hideLabel","label","description","value","clearButtonLabel","onClear","clearButton","children","variant","defaultValue","onChange","onSearchClick","htmlSize","data-color"]),{cn:U}=be(),Y=P.useRef(null),ne=Iu(Y,l),[ee,H]=P.useState(L??""),V=X=>{S===void 0&&H(X),p?.(X)},M=X=>{var $,Z;G?.(X),V(""),(Z=($=Y.current)===null||$===void 0?void 0:$.focus)===null||Z===void 0||Z.call($)},z=()=>{w?.(`${S??ee}`)},re=g&&!r.disabled&&(S??ee);return k.createElement("div",{onKeyDown:X=>{var $;X.key==="Escape"&&(!(($=Y.current)===null||$===void 0)&&$.value&&X.preventDefault(),M({trigger:"Escape",event:X}))},className:U(N,"navds-form-field",`navds-form-field--${t}`,"navds-search",{"navds-search--error":d,"navds-search--disabled":r.disabled,"navds-search--with-size":D}),"data-color":q},k.createElement(At,{htmlFor:r.id,size:t,className:U("navds-form-field__label",{"navds-sr-only":f})},R),!!A&&k.createElement(Nr,{className:U("navds-form-field__description",{"navds-sr-only":f}),id:i,size:t,as:"div"},A),k.createElement("div",{className:U("navds-search__wrapper")},k.createElement("div",{className:U("navds-search__wrapper-inner")},y==="simple"&&k.createElement(dN,{"aria-hidden":!0,className:U("navds-search__search-icon")}),k.createElement("input",Object.assign({ref:ne},fr(B,["error","errorId","size","readOnly"]),r,{value:S??ee,onChange:X=>V(X.target.value),type:"search",className:U(N,"navds-search__input",`navds-search__input--${y}`,"navds-text-field__input","navds-body-short",`navds-body-short--${t}`)},D?{size:Number(D)}:{})),re&&k.createElement(sy,{handleClear:M,size:t,clearButtonLabel:_})),k.createElement(MN.Provider,{value:{size:t,disabled:r.disabled,variant:y,handleClick:z}},T||y!=="simple"&&k.createElement(BN,{"data-color":q}))),k.createElement("div",{className:U("navds-form-field__error"),id:u,"aria-relevant":"additions removals","aria-live":"polite"},o&&k.createElement(ai,{size:t,showIcon:!0},e.error)))});function sy({size:e,clearButtonLabel:l,handleClear:r}){const{cn:t}=be(),i=Da(!1),u=It("Search");return i?k.createElement(oi,{className:t("navds-search__button-clear"),variant:"tertiary","data-color":"neutral",size:e==="medium"?"small":"xsmall",icon:k.createElement(Zs,{"aria-hidden":!0}),title:l||u("clear"),onClick:o=>r({trigger:"Click",event:o}),type:"button"}):k.createElement("button",{type:"button",onClick:o=>r({trigger:"Click",event:o}),className:t("navds-search__button-clear")},k.createElement("span",{className:t("navds-sr-only")},l||u("clear")),k.createElement(Zs,{"aria-hidden":!0}))}tu.Button=BN;var uy=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const zd=(e,l,r)=>{const{outerHeightStyle:t,overflow:i}=l;return r.current<20&&(t>0&&Math.abs((e.outerHeightStyle||0)-t)>1||e.overflow!==i)?(r.current+=1,l):e},Xd=e=>(e?.ownerDocument||document).defaultView||window;function Vl(e){return parseInt(e,10)||0}const oy=P.forwardRef((e,l)=>{var r,t,{className:i,onChange:u,maxRows:o,minRows:d=1,autoScrollbar:N,style:f,value:R}=e,A=uy(e,["className","onChange","maxRows","minRows","autoScrollbar","style","value"]);const{current:S}=P.useRef(R!=null),_=P.useRef(null),G=Iu(_,l),g=P.useRef(null),T=P.useRef(0),[y,L]=P.useState({outerHeightStyle:0}),p=k.useCallback(()=>{const B=_.current,Y=Xd(B).getComputedStyle(B);if(Y.width==="0px")return{outerHeightStyle:0};const ne=g.current;ne.style.width=Y.width,ne.value=B.value||A.placeholder||"x",ne.value.slice(-1)===`
+`&&(ne.value+=" ");const ee=Y.boxSizing,H=Vl(Y.paddingBottom)+Vl(Y.paddingTop),V=Vl(Y.borderBottomWidth)+Vl(Y.borderTopWidth),M=ne.scrollHeight-H;ne.value="x";const z=ne.scrollHeight-H;let re=M;d&&(re=Math.max(Number(d)*z,re)),o&&(re=Math.min(Number(o)*z,re)),re=Math.max(re,z);const X=re+(ee==="border-box"?H+V:0),$=Math.abs(re-M)<=1;return{outerHeightStyle:X,overflow:$}},[o,d,A.placeholder]),w=()=>{const B=p();Zd(B)||L(U=>zd(U,B,T))};pd(()=>{const B=()=>{const H=p();Zd(H)||Xs.flushSync(()=>{L(V=>zd(V,H,T))})},U=oN(()=>{var H,V,M;if(T.current=0,!((H=_.current)===null||H===void 0)&&H.style.height||!((V=_.current)===null||V===void 0)&&V.style.width){((M=_.current)===null||M===void 0?void 0:M.style.overflow)==="hidden"&&L(z=>Object.assign(Object.assign({},z),{overflow:!1}));return}B()},166,!0),Y=_.current,ne=Xd(Y);ne.addEventListener("resize",U);let ee;return typeof ResizeObserver<"u"&&(ee=new ResizeObserver(U),ee.observe(Y)),()=>{U.clear(),ne.removeEventListener("resize",U),ee&&ee.disconnect()}},[p]),pd(()=>{w()}),P.useEffect(()=>{T.current=0},[R]);const D=B=>{T.current=0,S||w(),u&&u(B)},q=Object.assign({"--__ac-textarea-height":y.outerHeightStyle+"px","--__axc-textarea-height":y.outerHeightStyle+"px",overflow:y.overflow&&!N&&!(!((r=_.current)===null||r===void 0)&&r.style.height)&&!(!((t=_.current)===null||t===void 0)&&t.style.width)?"hidden":void 0},f);return k.createElement(k.Fragment,null,k.createElement("textarea",Object.assign({value:R,onChange:D,ref:G,rows:d,style:q},A,{className:i})),k.createElement("textarea",{"aria-hidden":!0,className:i,readOnly:!0,ref:g,tabIndex:-1,style:Object.assign({visibility:"hidden",position:"absolute",overflow:"hidden",height:0,top:0,left:0,transform:"translateZ(0)"},f)}))});function Zd(e){return e==null||Object.keys(e).length===0||e.outerHeightStyle===0&&!e.overflow}const Ey=({maxLengthId:e,maxLength:l,currentLength:r,size:t,i18n:i})=>{const{cn:u}=be(),o=It("Textarea",{charsLeft:i?.counterLeft?`{chars} ${i.counterLeft}`:void 0,charsTooMany:i?.counterTooMuch?`{chars} ${i.counterTooMuch}`:void 0}),d=l-r,[N,f]=P.useState(d);return P.useEffect(()=>{const R=oN(()=>{f(d)},2e3);return R(),()=>{R.clear()}},[d]),k.createElement(k.Fragment,null,k.createElement("span",{id:e,className:u("navds-sr-only")},o("maxLength",{maxLength:l})),d<20&&k.createElement("span",{role:"status",className:u("navds-textarea__sr-counter navds-sr-only")},Qd(N,o)),k.createElement(Nr,{className:u("navds-textarea__counter",{"navds-textarea__counter--error":d<0}),size:t},Qd(d,o)))},Qd=(e,l)=>e<0?l("charsTooMany",{chars:Math.abs(e)}):l("charsLeft",{chars:e});var dy=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const my=P.forwardRef((e,l)=>{var r,t,i;const{inputProps:u,errorId:o,showErrorMsg:d,hasError:N,size:f,inputDescriptionId:R}=Ei(e,"textarea"),{label:A,className:S,description:_,maxLength:G,hideLabel:g=!1,resize:T,UNSAFE_autoScrollbar:y,i18n:L,readOnly:p}=e,w=dy(e,["label","className","description","maxLength","hideLabel","resize","UNSAFE_autoScrollbar","i18n","readOnly"]),{cn:D}=be(),q=Ga(),B=G!==void 0&&G>0,[U,Y]=P.useState((r=e?.defaultValue)!==null&&r!==void 0?r:""),ne=()=>{let H=w?.minRows?w?.minRows:3;return f==="small"&&(H=w?.minRows?w?.minRows:2),H},ee=La(u["aria-describedby"],{[q??""]:B});return k.createElement("div",{className:D(S,"navds-form-field",`navds-form-field--${f}`,{"navds-form-field--disabled":!!u.disabled,"navds-form-field--readonly":p,"navds-textarea--readonly":p,"navds-textarea--error":N,"navds-textarea--autoscrollbar":y,[`navds-textarea--resize-${T===!0?"both":T}`]:T})},k.createElement(At,{htmlFor:u.id,size:f,className:D("navds-form-field__label",{"navds-sr-only":g})},p&&k.createElement(pN,null),A),!!_&&k.createElement(Nr,{className:D("navds-form-field__description",{"navds-sr-only":g}),id:R,size:f,as:"div"},_),k.createElement(oy,Object.assign({},fr(w,["error","errorId","size"]),u,{onChange:Oa(e.onChange,e.value===void 0?H=>Y(H.target.value):void 0),minRows:ne(),autoScrollbar:y,ref:l,readOnly:p,className:D("navds-textarea__input","navds-body-short",`navds-body-short--${f??"medium"}`)},ee?{"aria-describedby":ee}:{})),B&&!p&&!u.disabled&&k.createElement(Ey,{maxLengthId:q,maxLength:G,currentLength:(i=(t=e.value)===null||t===void 0?void 0:t.length)!==null&&i!==void 0?i:U.length,size:f,i18n:L}),k.createElement("div",{className:D("navds-form-field__error"),id:o,"aria-relevant":"additions removals","aria-live":"polite"},d&&k.createElement(ai,{size:f,showIcon:!0},e.error)))});function Ny(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var em={exports:{}},va={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var nm;function fy(){if(nm)return va;nm=1;var e=Symbol.for("react.transitional.element"),l=Symbol.for("react.fragment");function r(t,i,u){var o=null;if(u!==void 0&&(o=""+u),i.key!==void 0&&(o=""+i.key),"key"in i){u={};for(var d in i)d!=="key"&&(u[d]=i[d])}else u=i;return i=u.ref,{$$typeof:e,type:t,key:o,ref:i!==void 0?i:null,props:u}}return va.Fragment=l,va.jsx=r,va.jsxs=r,va}var rm;function Ry(){return rm||(rm=1,em.exports=fy()),em.exports}var hr=Ry();const cy=({children:e})=>!e||Array.isArray(e)&&e.length===0?null:hr.jsx(MP,{variant:"warning",size:"small",children:hr.jsx(Tt,{gap:"space-8",children:k.Children.map(e,l=>hr.jsx(Nr,{size:"small",children:l},dg(l)?l.key:l))})}),Va={"HelpText.Aksjonspunkt":"Aksjonspunkt","HelpText.Aksjonspunkt.BehandletAksjonspunkt":"Behandlet aksjonspunkt: ","DataFetchPendingModal.LosningenJobberMedBehandlingen":"Løsningen jobber med behandlingen...","Behandling.EditedField":"Saksbehandler har endret feltets verdi","OkAvbrytModal.Ok":"OK","OkAvbrytModal.Avbryt":"Avbryt","OverstyringKnapp.Overstyring":"Overstyr","OverstyringKnapp.HarOverstyrt":"Har overstyrt","PeriodFieldArray.LeggTilPeriode":"Legg til periode","ExpandableTableRow.Apne":"Åpne rad","ExpandableTableRow.Lukke":"Lukk rad","Calendar.Day.0":"søndag","Calendar.Day.1":"mandag","Calendar.Day.2":"tirsdag","Calendar.Day.3":"onsdag","Calendar.Day.4":"torsdag","Calendar.Day.5":"fredag","Calendar.Day.6":"lørdag","Calendar.Day.Short.0":"søn","Calendar.Day.Short.1":"man","Calendar.Day.Short.2":"tir","Calendar.Day.Short.3":"ons","Calendar.Day.Short.4":"tor","Calendar.Day.Short.5":"fre","Calendar.Day.Short.6":"lør","Calendar.Month.0":"Januar","Calendar.Month.1":"Februar","Calendar.Month.2":"Mars","Calendar.Month.3":"April","Calendar.Month.4":"Mai","Calendar.Month.5":"Juni","Calendar.Month.6":"Juli","Calendar.Month.7":"August","Calendar.Month.8":"September","Calendar.Month.9":"Oktober","Calendar.Month.10":"November","Calendar.Month.11":"Desember","UtvidbarTekst.VisMer":"Vis mer","UtvidbarTekst.VisMindre":"Vis mindre","KopierbarTekst.Kopier":"Klikk for å kopiere","KopierbarTekst.Kopiert":"Kopiert!"};Rr(Va);var tm={exports:{}};/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/var am;function vy(){return am||(am=1,function(e){(function(){var l={}.hasOwnProperty;function r(){for(var u="",o=0;o<arguments.length;o++){var d=arguments[o];d&&(u=i(u,t.call(this,d)))}return u}function t(u){if(typeof u=="string"||typeof u=="number")return this&&this[u]||u;if(typeof u!="object")return"";if(Array.isArray(u))return r.apply(this,u);if(u.toString!==Object.prototype.toString&&!u.toString.toString().includes("[native code]"))return u.toString();var o="";for(var d in u)l.call(u,d)&&u[d]&&(o=i(o,this&&this[d]||d));return o}function i(u,o){return o?u?u+" "+o:u+o:u}e.exports?(r.default=r,e.exports=r):window.classNames=r})()}(tm)),tm.exports}var Ay=vy();const Mu=Ny(Ay),Sy="_borderbox_1a0x6_1",_y="_error_1a0x6_5",Ty="_warning_1a0x6_8",gy={borderbox:Sy,error:_y,warning:Ty},Iy=Mu.bind(gy),lm=({error:e=!1,className:l,children:r})=>hr.jsx(LN.New,{padding:"4",className:Iy("borderbox",{error:e},l),children:r}),Py="_aksjonspunkt_11wjs_1",hy="_erAksjonspunktApent_11wjs_4",yy="_erIkkeGodkjentAvBeslutter_11wjs_8",py={aksjonspunkt:Py,erAksjonspunktApent:hy,erIkkeGodkjentAvBeslutter:yy};Mu.bind(py);Rr(Va);Rr(Va);const by="_divider_1jpov_1",Ly="_dividerParagraf_1jpov_8",Dy="_leftPanel_1jpov_11",Gy="_rightPanel_1jpov_14",Oy={divider:by,dividerParagraf:Ly,leftPanel:Dy,rightPanel:Gy};Mu.bind(Oy);const ky=()=>hr.jsx("span",{"data-testid":"editedIcon",children:hr.jsx(Wg,{title:"Saksbehandler har endret feltets verdi",height:20,width:20,color:"var(--ax-text-neutral)"})});Rr(Va);const Fy=Rr(Va),Ky=({tekst:e,children:l})=>{const[r,t]=P.useState(!1);if(!e)return l;const i=async()=>{await navigator.clipboard.writeText(e),t(!0),setTimeout(()=>{t(!1)},1e3)};return hr.jsx(Xh,{content:Fy.formatMessage({id:r?"KopierbarTekst.Kopiert":"KopierbarTekst.Kopier"}),children:hr.jsx("span",{"aria-hidden":"true",onClick:i,children:l??e})})},im={default:"_default_af3od_1",rød:"_rød_af3od_5"},ba=({beløp:e,kr:l=!1,rød:r=!1})=>{const t=e?.toString().replace(/\s/g,"");return hr.jsx(Ky,{tekst:t,children:hr.jsxs("span",{className:r?im.rød:im.default,children:[t?mg(t):"-",t&&l&&" kr"]})})},Vy=e=>!!e||e===0,sm=e=>e??0,My=e=>Vy(e.overstyrtPrAar)?sm(e.overstyrtPrAar):sm(e.beregnetPrAar),ws=e=>(e.beregningsgrunnlagPrStatusOgAndel||[]).map(r=>My(r)).reduce((r,t)=>r+t,0),Us=e=>e.flatMap(l=>l.inntekter).map(({inntekt:l})=>l).reduce((l,r)=>l+r,0)*2,um=(e,l)=>e>l,wN=({periode:e,besteMåneder:l})=>le.jsxs(Tt,{gap:"space-16",children:[le.jsxs(Be,{children:[le.jsx(Be.Header,{children:le.jsxs(Be.Row,{children:[le.jsx(Be.HeaderCell,{scope:"col"}),le.jsx(Be.HeaderCell,{scope:"col",children:le.jsx(Kn,{id:"ResultatGrunnlag.BeregningEtterKap8"})}),le.jsx(Be.HeaderCell,{scope:"col",children:le.jsx(Kn,{id:"ResultatGrunnlag.BeregningEtterBesteberegning"})})]})}),le.jsx(Be.Body,{children:le.jsxs(Be.Row,{children:[le.jsx(Be.DataCell,{textSize:"small",children:le.jsx(Kn,{id:"ResultatGrunnlag.BruttoBeregningsgrunnlag"})}),le.jsx(Be.DataCell,{textSize:"small",children:le.jsx(ba,{beløp:ws(e)})}),le.jsx(Be.DataCell,{textSize:"small",children:le.jsx(ba,{beløp:Us(l)})})]})})]}),le.jsxs(Nr,{size:"small",children:[um(ws(e),Us(l))&&le.jsx(Kn,{id:"ResultatGrunnlag.Kap8GirBesteBeregning"}),!um(ws(e),Us(l))&&le.jsx(Kn,{id:"ResultatGrunnlag.Kap1473GirBesteBeregning"})]})]});wN.__docgenInfo={description:`BesteberegningResultatGrunnlagPanel
+
+Presentasjonskomponent. Viser sammenligning av kap 8 beregning og §14-7, ledd 3 beregning.`,methods:[],displayName:"BesteberegningResultatGrunnlagPanel",props:{periode:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  beregningsgrunnlagPeriodeFom?: string;
+  beregningsgrunnlagPeriodeTom?: string;
+  beregnetPrAar?: number;
+  bruttoPrAar?: number;
+  bruttoInkludertBortfaltNaturalytelsePrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  periodeAarsaker?: Array<
+    | 'NATURALYTELSE_BORTFALT'
+    | 'ARBEIDSFORHOLD_AVSLUTTET'
+    | 'NATURALYTELSE_TILKOMMER'
+    | 'ENDRING_I_REFUSJONSKRAV'
+    | 'REFUSJON_OPPHØRER'
+    | 'GRADERING'
+    | 'GRADERING_OPPHØRER'
+    | 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+    | 'TILKOMMET_INNTEKT'
+    | 'TILKOMMET_INNTEKT_MANUELT'
+    | 'TILKOMMET_INNTEKT_AVSLUTTET'
+    | 'REFUSJON_AVSLÅTT'
+    | 'REPRESENTERER_STORTINGET'
+    | 'REPRESENTERER_STORTINGET_AVSLUTTET'
+    | '-'
+  >;
+  dagsats?: number;
+  beregningsgrunnlagPrStatusOgAndel?: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
+}`,signature:{properties:[{key:"beregningsgrunnlagPeriodeFom",value:{name:"string",required:!1}},{key:"beregningsgrunnlagPeriodeTom",value:{name:"string",required:!1}},{key:"beregnetPrAar",value:{name:"number",required:!1}},{key:"bruttoPrAar",value:{name:"number",required:!1}},{key:"bruttoInkludertBortfaltNaturalytelsePrAar",value:{name:"number",required:!1}},{key:"avkortetPrAar",value:{name:"number",required:!1}},{key:"redusertPrAar",value:{name:"number",required:!1}},{key:"periodeAarsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'NATURALYTELSE_BORTFALT'
+| 'ARBEIDSFORHOLD_AVSLUTTET'
+| 'NATURALYTELSE_TILKOMMER'
+| 'ENDRING_I_REFUSJONSKRAV'
+| 'REFUSJON_OPPHØRER'
+| 'GRADERING'
+| 'GRADERING_OPPHØRER'
+| 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+| 'TILKOMMET_INNTEKT'
+| 'TILKOMMET_INNTEKT_MANUELT'
+| 'TILKOMMET_INNTEKT_AVSLUTTET'
+| 'REFUSJON_AVSLÅTT'
+| 'REPRESENTERER_STORTINGET'
+| 'REPRESENTERER_STORTINGET_AVSLUTTET'
+| '-'`,elements:[{name:"literal",value:"'NATURALYTELSE_BORTFALT'"},{name:"literal",value:"'ARBEIDSFORHOLD_AVSLUTTET'"},{name:"literal",value:"'NATURALYTELSE_TILKOMMER'"},{name:"literal",value:"'ENDRING_I_REFUSJONSKRAV'"},{name:"literal",value:"'REFUSJON_OPPHØRER'"},{name:"literal",value:"'GRADERING'"},{name:"literal",value:"'GRADERING_OPPHØRER'"},{name:"literal",value:"'ENDRING_I_AKTIVITETER_SØKT_FOR'"},{name:"literal",value:"'TILKOMMET_INNTEKT'"},{name:"literal",value:"'TILKOMMET_INNTEKT_MANUELT'"},{name:"literal",value:"'TILKOMMET_INNTEKT_AVSLUTTET'"},{name:"literal",value:"'REFUSJON_AVSLÅTT'"},{name:"literal",value:"'REPRESENTERER_STORTINGET'"},{name:"literal",value:"'REPRESENTERER_STORTINGET_AVSLUTTET'"},{name:"literal",value:"'-'"}]}],raw:`Array<
+  | 'NATURALYTELSE_BORTFALT'
+  | 'ARBEIDSFORHOLD_AVSLUTTET'
+  | 'NATURALYTELSE_TILKOMMER'
+  | 'ENDRING_I_REFUSJONSKRAV'
+  | 'REFUSJON_OPPHØRER'
+  | 'GRADERING'
+  | 'GRADERING_OPPHØRER'
+  | 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+  | 'TILKOMMET_INNTEKT'
+  | 'TILKOMMET_INNTEKT_MANUELT'
+  | 'TILKOMMET_INNTEKT_AVSLUTTET'
+  | 'REFUSJON_AVSLÅTT'
+  | 'REPRESENTERER_STORTINGET'
+  | 'REPRESENTERER_STORTINGET_AVSLUTTET'
+  | '-'
+>`,required:!1}},{key:"dagsats",value:{name:"number",required:!1}},{key:"beregningsgrunnlagPrStatusOgAndel",value:{name:"Array",elements:[{name:"intersection",raw:`(
+  | ({
+      dtoType: 'AT';
+    } & BeregningsgrunnlagPrStatusOgAndelAtDto)
+  | ({
+      dtoType: 'GENERELL';
+    } & BeregningsgrunnlagPrStatusOgAndelDtoFelles)
+  | ({
+      dtoType: 'FL';
+    } & BeregningsgrunnlagPrStatusOgAndelFlDto)
+  | ({
+      dtoType: 'SN';
+    } & BeregningsgrunnlagPrStatusOgAndelSnDto)
+  | ({
+      dtoType: 'KUN_YTELSE';
+    } & BeregningsgrunnlagPrStatusOgAndelYtelseDto)
+) & {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,elements:[{name:"unknown"},{name:"signature",type:"object",raw:`{
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"beregningsperiodeFom",value:{name:"string",required:!1}},{key:"beregningsperiodeTom",value:{name:"string",required:!1}},{key:"beregnetPrAar",value:{name:"number",required:!1}},{key:"overstyrtPrAar",value:{name:"number",required:!1}},{key:"bruttoPrAar",value:{name:"number",required:!1}},{key:"avkortetPrAar",value:{name:"number",required:!1}},{key:"redusertPrAar",value:{name:"number",required:!1}},{key:"erTidsbegrensetArbeidsforhold",value:{name:"boolean",required:!1}},{key:"erNyIArbeidslivet",value:{name:"boolean",required:!1}},{key:"lonnsendringIBeregningsperioden",value:{name:"boolean",required:!1}},{key:"andelsnr",value:{name:"number",required:!1}},{key:"besteberegningPrAar",value:{name:"number",required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"belopPrMndEtterAOrdningen",value:{name:"number",required:!1}},{key:"belopPrAarEtterAOrdningen",value:{name:"number",required:!1}},{key:"dagsats",value:{name:"number",required:!1}},{key:"originalDagsatsFraTilstøtendeYtelse",value:{name:"number",required:!1}},{key:"fordeltPrAar",value:{name:"number",required:!1}},{key:"erTilkommetAndel",value:{name:"boolean",required:!1}},{key:"skalFastsetteGrunnlag",value:{name:"boolean",required:!1}},{key:"dtoType",value:{name:"string",required:!0}}]}}]}],raw:"Array<BeregningsgrunnlagPrStatusOgAndelDto>",required:!1}}]}},description:""},besteMåneder:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  inntekter: Array<BesteberegningInntektDto>;
+  fom: string;
+  tom: string;
+}`,signature:{properties:[{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverId?: string;
+  arbeidsgiverIdent?: string;
+  arbeidsforholdId?: string;
+  opptjeningAktivitetType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  inntekt: number;
+}`,signature:{properties:[{key:"arbeidsgiverId",value:{name:"string",required:!1}},{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"opptjeningAktivitetType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"inntekt",value:{name:"number",required:!0}}]}}],raw:"Array<BesteberegningInntektDto>",required:!0}},{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Månedsgrunnlag[]"},description:""}}};const By="_colWidth_horwr_1",Cl={colWidth:By,månedRad:"_månedRad_horwr_6",månedAktivitet:"_månedAktivitet_horwr_10",månedInntekt:"_månedInntekt_horwr_14"},wy=e=>{const l=qr(e).format("MMMM - YYYY");return l.charAt(0).toUpperCase()+l.slice(1)},Uy=(e,l,r)=>{const t=e.arbeidsgiverId?l[e.arbeidsgiverId]:void 0;return t?Ng(t):r.OpptjeningAktivitetType.find(i=>i.kode===e.opptjeningAktivitetType)?.navn??""},xy=({inntekt:e,arbeidsgiverOpplysninger:l,alleKodeverk:r})=>le.jsxs(Be.Row,{className:Cl.månedRad,children:[le.jsx(Be.DataCell,{textSize:"small",className:Cl.månedAktivitet,children:Uy(e,l,r)}),le.jsx(Be.DataCell,{textSize:"small",className:Cl.månedInntekt,children:le.jsx(ba,{beløp:e.inntekt})})]}),qy=({inntekter:e})=>le.jsxs(Be.Row,{children:[le.jsx(Be.HeaderCell,{textSize:"small",children:le.jsx(Kn,{id:"Inntekttabell.Sum"})}),le.jsx(Be.HeaderCell,{textSize:"small",children:le.jsx(ba,{beløp:e.map(({inntekt:l})=>l).reduce((l,r)=>l+r,0)})})]},"sum"),Hy=({inntekter:e,arbeidsgiverOpplysninger:l,alleKodeverk:r})=>le.jsxs(Be,{children:[le.jsx(Be.Header,{children:le.jsxs(Be.Row,{children:[le.jsx(Be.HeaderCell,{scope:"col",children:le.jsx(Kn,{id:"BesteberegningProsessPanel.Måned.Inntekt.Aktivitet"})}),le.jsx(Be.HeaderCell,{scope:"col",children:le.jsx(Kn,{id:"BesteberegningProsessPanel.Måned.Inntekt.Inntekt"})})]})}),le.jsxs(Be.Body,{children:[e.map(t=>le.jsx(xy,{inntekt:t,arbeidsgiverOpplysninger:l,alleKodeverk:r},`${t.arbeidsforholdId}-${t.arbeidsgiverId}-${t.inntekt}`)),e.length>0&&le.jsx(qy,{inntekter:e})]})]}),xs=({måneder:e,arbeidsgiverOpplysninger:l,alleKodeverk:r})=>le.jsx(Vu,{gap:"space-8",children:e.map(t=>le.jsxs("div",{className:Cl.colWidth,children:[le.jsx(Nr,{size:"small",children:wy(t.fom)}),le.jsx(Hy,{inntekter:t.inntekter,arbeidsgiverOpplysninger:l,alleKodeverk:r})]},t.fom))}),Cy=e=>e.flatMap(r=>r.inntekter).map(({inntekt:r})=>r).reduce((r,t)=>r+t,0)/6*12,jy=e=>[...e].sort((l,r)=>qr(l.fom).diff(qr(r.fom))),UN=({besteMåneder:e,arbeidsgiverOpplysninger:l,alleKodeverk:r})=>{const t=jy(e);return le.jsxs(Tt,{gap:"space-16",children:[le.jsxs(At,{size:"small",children:[le.jsx(Kn,{id:"Inntekttabell.Tittel"})," "]}),le.jsx(xs,{måneder:t.slice(0,2),arbeidsgiverOpplysninger:l,alleKodeverk:r}),le.jsx(xs,{måneder:t.slice(2,4),arbeidsgiverOpplysninger:l,alleKodeverk:r}),le.jsx(xs,{måneder:t.slice(4,6),arbeidsgiverOpplysninger:l,alleKodeverk:r}),le.jsx(At,{size:"small",children:le.jsx(Kn,{id:"Inntekttabell.BeregnetÅrsinntekt",values:{inntekt:le.jsx(ba,{beløp:Cy(e)})}})})]})};UN.__docgenInfo={description:`BesteManederVisningPanel
+
+Presentasjonskomponent. Viser månedene som brukes i beregning etter §14-7, tredje ledd`,methods:[],displayName:"BesteMånederVisningPanel",props:{besteMåneder:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  inntekter: Array<BesteberegningInntektDto>;
+  fom: string;
+  tom: string;
+}`,signature:{properties:[{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverId?: string;
+  arbeidsgiverIdent?: string;
+  arbeidsforholdId?: string;
+  opptjeningAktivitetType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  inntekt: number;
+}`,signature:{properties:[{key:"arbeidsgiverId",value:{name:"string",required:!1}},{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"opptjeningAktivitetType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"inntekt",value:{name:"number",required:!0}}]}}],raw:"Array<BesteberegningInntektDto>",required:!0}},{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Månedsgrunnlag[]"},description:""},arbeidsgiverOpplysninger:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""},alleKodeverk:{required:!0,tsType:{name:"intersection",raw:`KodeverkMedSammeVerditype & {
+  Avslagsårsak: AvslagsårsakKodeverk;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
+  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+}`,elements:[{name:"signature",type:"object",raw:`{
+  [K in Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>]: KodeverkMedNavn<
+    K extends KodeverkType ? K : unknown
+  >[];
+}`,signature:{properties:[{key:{name:"Exclude",elements:[{name:"signature",type:"object",raw:`{
+  AdresseType: AdresseType;
+  AktivitetskravPermisjonType: AktivitetskravPermisjonType;
+  AktivitetStatus: AktivitetStatus;
+  AnkeOmgjørÅrsak: AnkeOmgjorArsak;
+  Arbeidskategori: Arbeidskategori;
+  ArbeidType: ArbeidType;
+  Avslagsårsak: Avslagsarsak;
+  BehandlingResultatType: BehandlingResultatType;
+  BehandlingStatus: BehandlingStatus;
+  BehandlingType: BehandlingType;
+  BehandlingÅrsakType: BehandlingArsakType;
+  FamilieHendelseType: FamilieHendelseType;
+  FaresignalVurdering: FaresignalVurdering;
+  FagsakStatus: FagsakStatus;
+  FagsakYtelseType: FagsakYtelseType;
+  FagsakMarkering: FagsakMarkeringKode;
+  FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
+  FarSøkerType: FarSøkerType;
+  FordelingPeriodeKilde: FordelingPeriodeKilde;
+  ForeldreType: ForeldreType;
+  HistorikkAktør: HistorikkAktor;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsak;
+  KlageHjemmel: KlageHjemmel;
+  KlageAvvistÅrsak: KlageAvvistÅrsak;
+  KlageMedholdÅrsak: KlageMedholdÅrsak;
+  KonsekvensForYtelsen: KonsekvensForYtelsen;
+  Landkoder: Landkode;
+  ManuellBehandlingÅrsak: ManuellBehandlingÅrsak;
+  MedlemskapDekningType: MedlemskapDekningType;
+  MedlemskapManuellVurderingType: MedlemskapManuellVurderingType;
+  MedlemskapType: MedlemskapType;
+  MorsAktivitet: MorsAktivitet;
+  NaturalYtelseType: NaturalYtelseType;
+  InnsynResultatType: InnsynResultatType;
+  OmsorgsovertakelseVilkårType: OmsorgsovertakelseVilkårType;
+  OppholdÅrsak: OppholdArsakType;
+  OppgaveType: OppgaveType;
+  OppholdstillatelseType: OppholdstillatelseType;
+  OpptjeningAktivitetType: OpptjeningAktivitetType;
+  OverføringÅrsak: OverforingArsak;
+  PermisjonsbeskrivelseType: PermisjonsbeskrivelseType;
+  PeriodeResultatÅrsak: PeriodeResultatÅrsak;
+  PersonstatusType: PersonstatusType;
+  Region: Region;
+  RelasjonsRolleType: RelasjonsRolleType;
+  RevurderingVarslingÅrsak: RevurderingVarslingÅrsak;
+  SivilstandType: SivilstandType;
+  SkjermlenkeType: SkjermlenkeType;
+  StønadskontoType: StonadskontoType;
+  UtsettelseÅrsak: UtsettelseÅrsak;
+  UttakArbeidType: UttakArbeidType;
+  UttakPeriodeType: UttakPeriodeType;
+  UttakUtsettelseType: UttakUtsettelseType;
+  Venteårsak: VenteArsakType;
+  VergeType: VergeType;
+  VilkårType: VilkarType;
+  VirksomhetType: NaringsvirksomhetType;
+  VurderÅrsak: VurderÅrsak;
+}`,signature:{properties:[{key:"AdresseType",value:{name:"AdresseType",required:!0}},{key:"AktivitetskravPermisjonType",value:{name:"AktivitetskravPermisjonType",required:!0}},{key:"AktivitetStatus",value:{name:"AktivitetStatus",required:!0}},{key:"AnkeOmgjørÅrsak",value:{name:"AnkeOmgjorArsak",required:!0}},{key:"Arbeidskategori",value:{name:"Arbeidskategori",required:!0}},{key:"ArbeidType",value:{name:"ArbeidType",required:!0}},{key:"Avslagsårsak",value:{name:"Avslagsarsak",required:!0}},{key:"BehandlingResultatType",value:{name:"BehandlingResultatType",required:!0}},{key:"BehandlingStatus",value:{name:"BehandlingStatus",required:!0}},{key:"BehandlingType",value:{name:"BehandlingType",required:!0}},{key:"BehandlingÅrsakType",value:{name:"BehandlingArsakType",required:!0}},{key:"FamilieHendelseType",value:{name:"FamilieHendelseType",required:!0}},{key:"FaresignalVurdering",value:{name:"FaresignalVurdering",required:!0}},{key:"FagsakStatus",value:{name:"FagsakStatus",required:!0}},{key:"FagsakYtelseType",value:{name:"FagsakYtelseType",required:!0}},{key:"FagsakMarkering",value:{name:"FagsakMarkeringKode",required:!0}},{key:"FaktaOmBeregningTilfelle",value:{name:"FaktaOmBeregningTilfelle",required:!0}},{key:"FarSøkerType",value:{name:"FarSøkerType",required:!0}},{key:"FordelingPeriodeKilde",value:{name:"FordelingPeriodeKilde",required:!0}},{key:"ForeldreType",value:{name:"ForeldreType",required:!0}},{key:"HistorikkAktør",value:{name:"HistorikkAktor",required:!0}},{key:"GraderingAvslagÅrsak",value:{name:"GraderingAvslagÅrsak",required:!0}},{key:"KlageHjemmel",value:{name:"KlageHjemmel",required:!0}},{key:"KlageAvvistÅrsak",value:{name:"KlageAvvistÅrsak",required:!0}},{key:"KlageMedholdÅrsak",value:{name:"KlageMedholdÅrsak",required:!0}},{key:"KonsekvensForYtelsen",value:{name:"KonsekvensForYtelsen",required:!0}},{key:"Landkoder",value:{name:"Landkode",required:!0}},{key:"ManuellBehandlingÅrsak",value:{name:"ManuellBehandlingÅrsak",required:!0}},{key:"MedlemskapDekningType",value:{name:"MedlemskapDekningType",required:!0}},{key:"MedlemskapManuellVurderingType",value:{name:"MedlemskapManuellVurderingType",required:!0}},{key:"MedlemskapType",value:{name:"MedlemskapType",required:!0}},{key:"MorsAktivitet",value:{name:"MorsAktivitet",required:!0}},{key:"NaturalYtelseType",value:{name:"NaturalYtelseType",required:!0}},{key:"InnsynResultatType",value:{name:"InnsynResultatType",required:!0}},{key:"OmsorgsovertakelseVilkårType",value:{name:"OmsorgsovertakelseVilkårType",required:!0}},{key:"OppholdÅrsak",value:{name:"OppholdArsakType",required:!0}},{key:"OppgaveType",value:{name:"OppgaveType",required:!0}},{key:"OppholdstillatelseType",value:{name:"OppholdstillatelseType",required:!0}},{key:"OpptjeningAktivitetType",value:{name:"OpptjeningAktivitetType",required:!0}},{key:"OverføringÅrsak",value:{name:"OverforingArsak",required:!0}},{key:"PermisjonsbeskrivelseType",value:{name:"PermisjonsbeskrivelseType",required:!0}},{key:"PeriodeResultatÅrsak",value:{name:"PeriodeResultatÅrsak",required:!0}},{key:"PersonstatusType",value:{name:"PersonstatusType",required:!0}},{key:"Region",value:{name:"Region",required:!0}},{key:"RelasjonsRolleType",value:{name:"RelasjonsRolleType",required:!0}},{key:"RevurderingVarslingÅrsak",value:{name:"RevurderingVarslingÅrsak",required:!0}},{key:"SivilstandType",value:{name:"SivilstandType",required:!0}},{key:"SkjermlenkeType",value:{name:"SkjermlenkeType",required:!0}},{key:"StønadskontoType",value:{name:"StonadskontoType",required:!0}},{key:"UtsettelseÅrsak",value:{name:"UtsettelseÅrsak",required:!0}},{key:"UttakArbeidType",value:{name:"UttakArbeidType",required:!0}},{key:"UttakPeriodeType",value:{name:"UttakPeriodeType",required:!0}},{key:"UttakUtsettelseType",value:{name:"UttakUtsettelseType",required:!0}},{key:"Venteårsak",value:{name:"VenteArsakType",required:!0}},{key:"VergeType",value:{name:"union",raw:"'BARN' | 'FBARN' | 'VOKSEN' | 'ADVOKAT' | 'ANNEN_F'",elements:[{name:"literal",value:"'BARN'"},{name:"literal",value:"'FBARN'"},{name:"literal",value:"'VOKSEN'"},{name:"literal",value:"'ADVOKAT'"},{name:"literal",value:"'ANNEN_F'"}],required:!0}},{key:"VilkårType",value:{name:"VilkarType",required:!0}},{key:"VirksomhetType",value:{name:"NaringsvirksomhetType",required:!0}},{key:"VurderÅrsak",value:{name:"VurderÅrsak",required:!0}}]}},{name:"union",raw:"'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'",elements:[{name:"literal",value:"'Avslagsårsak'"},{name:"literal",value:"'PeriodeResultatÅrsak'"},{name:"literal",value:"'GraderingAvslagÅrsak'"}]}],raw:"Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>",required:!0},value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:`KodeverkMedNavn<
+  K extends KodeverkType ? K : unknown
+>[]`}}]}},{name:"signature",type:"object",raw:`{
+  Avslagsårsak: AvslagsårsakKodeverk;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
+  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+}`,signature:{properties:[{key:"Avslagsårsak",value:{name:"Record",elements:[{name:"VilkarType"},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn<'Avslagsårsak'>[]"}],raw:"Record<VilkarType, KodeverkMedNavn<'Avslagsårsak'>[]>",required:!0}},{key:"GraderingAvslagÅrsak",value:{name:"Array",elements:[{name:"intersection",raw:`KodeverkMedNavn<'GraderingAvslagÅrsak'> & {
+  lovHjemmel: string;
+}`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`},{name:"signature",type:"object",raw:`{
+  lovHjemmel: string;
+}`,signature:{properties:[{key:"lovHjemmel",value:{name:"string",required:!0}}]}}]}],raw:"GraderingAvslagÅrsakKodeverk[]",required:!0}},{key:"PeriodeResultatÅrsak",value:{name:"Array",elements:[{name:"intersection",raw:`KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
+  lovHjemmel: string;
+  sortering: string;
+  utfallType: string;
+  gyldigForLovendringer: string[];
+  uttakTyper: string[];
+  valgbarForKonto: string[];
+  synligForRolle: string[];
+}`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`},{name:"signature",type:"object",raw:`{
+  lovHjemmel: string;
+  sortering: string;
+  utfallType: string;
+  gyldigForLovendringer: string[];
+  uttakTyper: string[];
+  valgbarForKonto: string[];
+  synligForRolle: string[];
+}`,signature:{properties:[{key:"lovHjemmel",value:{name:"string",required:!0}},{key:"sortering",value:{name:"string",required:!0}},{key:"utfallType",value:{name:"string",required:!0}},{key:"gyldigForLovendringer",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"uttakTyper",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"valgbarForKonto",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"synligForRolle",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]}}]}],raw:"PeriodeResultatÅrsakKodeverk[]",required:!0}}]}}]},description:""}}};var Ma=e=>e.type==="checkbox",ct=e=>e instanceof Date,yn=e=>e==null;const xN=e=>typeof e=="object";var ln=e=>!yn(e)&&!Array.isArray(e)&&xN(e)&&!ct(e),qN=e=>ln(e)&&e.target?Ma(e.target)?e.target.checked:e.target.value:e,Yy=e=>e.substring(0,e.search(/\.\d+(\.|$)/))||e,HN=(e,l)=>e.has(Yy(l)),Jy=e=>{const l=e.constructor&&e.constructor.prototype;return ln(l)&&l.hasOwnProperty("isPrototypeOf")},Bu=typeof window<"u"&&typeof window.HTMLElement<"u"&&typeof document<"u";function mn(e){let l;const r=Array.isArray(e),t=typeof FileList<"u"?e instanceof FileList:!1;if(e instanceof Date)l=new Date(e);else if(!(Bu&&(e instanceof Blob||t))&&(r||ln(e)))if(l=r?[]:Object.create(Object.getPrototypeOf(e)),!r&&!Jy(e))l=e;else for(const i in e)e.hasOwnProperty(i)&&(l[i]=mn(e[i]));else return e;return l}var di=e=>/^\w*$/.test(e),an=e=>e===void 0,wu=e=>Array.isArray(e)?e.filter(Boolean):[],Uu=e=>wu(e.replace(/["|']|\]/g,"").split(/\.|\[/)),oe=(e,l,r)=>{if(!l||!ln(e))return r;const t=(di(l)?[l]:Uu(l)).reduce((i,u)=>yn(i)?i:i[u],e);return an(t)||t===e?an(e[l])?r:e[l]:t},Hn=e=>typeof e=="boolean",je=(e,l,r)=>{let t=-1;const i=di(l)?[l]:Uu(l),u=i.length,o=u-1;for(;++t<u;){const d=i[t];let N=r;if(t!==o){const f=e[d];N=ln(f)||Array.isArray(f)?f:isNaN(+i[t+1])?{}:[]}if(d==="__proto__"||d==="constructor"||d==="prototype")return;e[d]=N,e=e[d]}};const ei={BLUR:"blur",FOCUS_OUT:"focusout",CHANGE:"change"},dr={onBlur:"onBlur",onChange:"onChange",onSubmit:"onSubmit",onTouched:"onTouched",all:"all"},Mr={max:"max",min:"min",maxLength:"maxLength",minLength:"minLength",pattern:"pattern",required:"required",validate:"validate"},xu=k.createContext(null);xu.displayName="HookFormContext";const Ba=()=>k.useContext(xu),$y=e=>{const{children:l,...r}=e;return k.createElement(xu.Provider,{value:r},l)};var CN=(e,l,r,t=!0)=>{const i={defaultValues:l._defaultValues};for(const u in e)Object.defineProperty(i,u,{get:()=>{const o=u;return l._proxyFormState[o]!==dr.all&&(l._proxyFormState[o]=!t||dr.all),r&&(r[o]=!0),e[o]}});return i};const qu=typeof window<"u"?k.useLayoutEffect:k.useEffect;function Wy(e){const l=Ba(),{control:r=l.control,disabled:t,name:i,exact:u}=e||{},[o,d]=k.useState(r._formState),N=k.useRef({isDirty:!1,isLoading:!1,dirtyFields:!1,touchedFields:!1,validatingFields:!1,isValidating:!1,isValid:!1,errors:!1});return qu(()=>r._subscribe({name:i,formState:N.current,exact:u,callback:f=>{!t&&d({...r._formState,...f})}}),[i,t,u]),k.useEffect(()=>{N.current.isValid&&r._setValid(!0)},[r]),k.useMemo(()=>CN(o,r,N.current,!1),[o,r])}var Ir=e=>typeof e=="string",jN=(e,l,r,t,i)=>Ir(e)?(t&&l.watch.add(e),oe(r,e,i)):Array.isArray(e)?e.map(u=>(t&&l.watch.add(u),oe(r,u))):(t&&(l.watchAll=!0),r),au=e=>yn(e)||!xN(e);function wr(e,l,r=new WeakSet){if(au(e)||au(l))return e===l;if(ct(e)&&ct(l))return e.getTime()===l.getTime();const t=Object.keys(e),i=Object.keys(l);if(t.length!==i.length)return!1;if(r.has(e)||r.has(l))return!0;r.add(e),r.add(l);for(const u of t){const o=e[u];if(!i.includes(u))return!1;if(u!=="ref"){const d=l[u];if(ct(o)&&ct(d)||ln(o)&&ln(d)||Array.isArray(o)&&Array.isArray(d)?!wr(o,d,r):o!==d)return!1}}return!0}function zy(e){const l=Ba(),{control:r=l.control,name:t,defaultValue:i,disabled:u,exact:o,compute:d}=e||{},N=k.useRef(i),f=k.useRef(d),R=k.useRef(void 0);f.current=d;const A=k.useMemo(()=>r._getWatch(t,N.current),[r,t]),[S,_]=k.useState(f.current?f.current(A):A);return qu(()=>r._subscribe({name:t,formState:{values:!0},exact:o,callback:G=>{if(!u){const g=jN(t,r._names,G.values||r._formValues,!1,N.current);if(f.current){const T=f.current(g);wr(T,R.current)||(_(T),R.current=T)}else _(g)}}}),[r,u,t,o]),k.useEffect(()=>r._removeUnmounted()),S}function YN(e){const l=Ba(),{name:r,disabled:t,control:i=l.control,shouldUnregister:u,defaultValue:o}=e,d=HN(i._names.array,r),N=k.useMemo(()=>oe(i._formValues,r,oe(i._defaultValues,r,o)),[i,r,o]),f=zy({control:i,name:r,defaultValue:N,exact:!0}),R=Wy({control:i,name:r,exact:!0}),A=k.useRef(e),S=k.useRef(i.register(r,{...e.rules,value:f,...Hn(e.disabled)?{disabled:e.disabled}:{}}));A.current=e;const _=k.useMemo(()=>Object.defineProperties({},{invalid:{enumerable:!0,get:()=>!!oe(R.errors,r)},isDirty:{enumerable:!0,get:()=>!!oe(R.dirtyFields,r)},isTouched:{enumerable:!0,get:()=>!!oe(R.touchedFields,r)},isValidating:{enumerable:!0,get:()=>!!oe(R.validatingFields,r)},error:{enumerable:!0,get:()=>oe(R.errors,r)}}),[R,r]),G=k.useCallback(L=>S.current.onChange({target:{value:qN(L),name:r},type:ei.CHANGE}),[r]),g=k.useCallback(()=>S.current.onBlur({target:{value:oe(i._formValues,r),name:r},type:ei.BLUR}),[r,i._formValues]),T=k.useCallback(L=>{const p=oe(i._fields,r);p&&L&&(p._f.ref={focus:()=>L.focus&&L.focus(),select:()=>L.select&&L.select(),setCustomValidity:w=>L.setCustomValidity(w),reportValidity:()=>L.reportValidity()})},[i._fields,r]),y=k.useMemo(()=>({name:r,value:f,...Hn(t)||R.disabled?{disabled:R.disabled||t}:{},onChange:G,onBlur:g,ref:T}),[r,t,R.disabled,G,g,T,f]);return k.useEffect(()=>{const L=i._options.shouldUnregister||u;i.register(r,{...A.current.rules,...Hn(A.current.disabled)?{disabled:A.current.disabled}:{}});const p=(w,D)=>{const q=oe(i._fields,w);q&&q._f&&(q._f.mount=D)};if(p(r,!0),L){const w=mn(oe(i._options.defaultValues,r));je(i._defaultValues,r,w),an(oe(i._formValues,r))&&je(i._formValues,r,w)}return!d&&i.register(r),()=>{(d?L&&!i._state.action:L)?i.unregister(r):p(r,!1)}},[r,i,d,u]),k.useEffect(()=>{i._setDisabledField({disabled:t,name:r})},[t,r,i]),k.useMemo(()=>({field:y,formState:R,fieldState:_}),[y,R,_])}var Xy=(e,l,r,t,i)=>l?{...r[e],types:{...r[e]&&r[e].types?r[e].types:{},[t]:i||!0}}:{},ha=e=>Array.isArray(e)?e:[e],om=()=>{let e=[];return{get observers(){return e},next:i=>{for(const u of e)u.next&&u.next(i)},subscribe:i=>(e.push(i),{unsubscribe:()=>{e=e.filter(u=>u!==i)}}),unsubscribe:()=>{e=[]}}},Fn=e=>ln(e)&&!Object.keys(e).length,Hu=e=>e.type==="file",mr=e=>typeof e=="function",ni=e=>{if(!Bu)return!1;const l=e?e.ownerDocument:0;return e instanceof(l&&l.defaultView?l.defaultView.HTMLElement:HTMLElement)},JN=e=>e.type==="select-multiple",Cu=e=>e.type==="radio",Zy=e=>Cu(e)||Ma(e),qs=e=>ni(e)&&e.isConnected;function Qy(e,l){const r=l.slice(0,-1).length;let t=0;for(;t<r;)e=an(e)?t++:e[l[t++]];return e}function e0(e){for(const l in e)if(e.hasOwnProperty(l)&&!an(e[l]))return!1;return!0}function un(e,l){const r=Array.isArray(l)?l:di(l)?[l]:Uu(l),t=r.length===1?e:Qy(e,r),i=r.length-1,u=r[i];return t&&delete t[u],i!==0&&(ln(t)&&Fn(t)||Array.isArray(t)&&e0(t))&&un(e,r.slice(0,-1)),e}var $N=e=>{for(const l in e)if(mr(e[l]))return!0;return!1};function ri(e,l={}){const r=Array.isArray(e);if(ln(e)||r)for(const t in e)Array.isArray(e[t])||ln(e[t])&&!$N(e[t])?(l[t]=Array.isArray(e[t])?[]:{},ri(e[t],l[t])):yn(e[t])||(l[t]=!0);return l}function WN(e,l,r){const t=Array.isArray(e);if(ln(e)||t)for(const i in e)Array.isArray(e[i])||ln(e[i])&&!$N(e[i])?an(l)||au(r[i])?r[i]=Array.isArray(e[i])?ri(e[i],[]):{...ri(e[i])}:WN(e[i],yn(l)?{}:l[i],r[i]):r[i]=!wr(e[i],l[i]);return r}var Aa=(e,l)=>WN(e,l,ri(l));const Em={value:!1,isValid:!1},dm={value:!0,isValid:!0};var zN=e=>{if(Array.isArray(e)){if(e.length>1){const l=e.filter(r=>r&&r.checked&&!r.disabled).map(r=>r.value);return{value:l,isValid:!!l.length}}return e[0].checked&&!e[0].disabled?e[0].attributes&&!an(e[0].attributes.value)?an(e[0].value)||e[0].value===""?dm:{value:e[0].value,isValid:!0}:dm:Em}return Em},XN=(e,{valueAsNumber:l,valueAsDate:r,setValueAs:t})=>an(e)?e:l?e===""?NaN:e&&+e:r&&Ir(e)?new Date(e):t?t(e):e;const mm={isValid:!1,value:null};var ZN=e=>Array.isArray(e)?e.reduce((l,r)=>r&&r.checked&&!r.disabled?{isValid:!0,value:r.value}:l,mm):mm;function Nm(e){const l=e.ref;return Hu(l)?l.files:Cu(l)?ZN(e.refs).value:JN(l)?[...l.selectedOptions].map(({value:r})=>r):Ma(l)?zN(e.refs).value:XN(an(l.value)?e.ref.value:l.value,e)}var n0=(e,l,r,t)=>{const i={};for(const u of e){const o=oe(l,u);o&&je(i,u,o._f)}return{criteriaMode:r,names:[...e],fields:i,shouldUseNativeValidation:t}},ti=e=>e instanceof RegExp,Sa=e=>an(e)?e:ti(e)?e.source:ln(e)?ti(e.value)?e.value.source:e.value:e,fm=e=>({isOnSubmit:!e||e===dr.onSubmit,isOnBlur:e===dr.onBlur,isOnChange:e===dr.onChange,isOnAll:e===dr.all,isOnTouch:e===dr.onTouched});const Rm="AsyncFunction";var r0=e=>!!e&&!!e.validate&&!!(mr(e.validate)&&e.validate.constructor.name===Rm||ln(e.validate)&&Object.values(e.validate).find(l=>l.constructor.name===Rm)),t0=e=>e.mount&&(e.required||e.min||e.max||e.maxLength||e.minLength||e.pattern||e.validate),cm=(e,l,r)=>!r&&(l.watchAll||l.watch.has(e)||[...l.watch].some(t=>e.startsWith(t)&&/^\.\w+/.test(e.slice(t.length))));const ya=(e,l,r,t)=>{for(const i of r||Object.keys(e)){const u=oe(e,i);if(u){const{_f:o,...d}=u;if(o){if(o.refs&&o.refs[0]&&l(o.refs[0],i)&&!t)return!0;if(o.ref&&l(o.ref,o.name)&&!t)return!0;if(ya(d,l))break}else if(ln(d)&&ya(d,l))break}}};function vm(e,l,r){const t=oe(e,r);if(t||di(r))return{error:t,name:r};const i=r.split(".");for(;i.length;){const u=i.join("."),o=oe(l,u),d=oe(e,u);if(o&&!Array.isArray(o)&&r!==u)return{name:r};if(d&&d.type)return{name:u,error:d};if(d&&d.root&&d.root.type)return{name:`${u}.root`,error:d.root};i.pop()}return{name:r}}var a0=(e,l,r,t)=>{r(e);const{name:i,...u}=e;return Fn(u)||Object.keys(u).length>=Object.keys(l).length||Object.keys(u).find(o=>l[o]===(!t||dr.all))},l0=(e,l,r)=>!e||!l||e===l||ha(e).some(t=>t&&(r?t===l:t.startsWith(l)||l.startsWith(t))),i0=(e,l,r,t,i)=>i.isOnAll?!1:!r&&i.isOnTouch?!(l||e):(r?t.isOnBlur:i.isOnBlur)?!e:(r?t.isOnChange:i.isOnChange)?e:!0,s0=(e,l)=>!wu(oe(e,l)).length&&un(e,l),u0=(e,l,r)=>{const t=ha(oe(e,r));return je(t,"root",l[r]),je(e,r,t),e},jl=e=>Ir(e);function Am(e,l,r="validate"){if(jl(e)||Array.isArray(e)&&e.every(jl)||Hn(e)&&!e)return{type:r,message:jl(e)?e:"",ref:l}}var wt=e=>ln(e)&&!ti(e)?e:{value:e,message:""},Sm=async(e,l,r,t,i,u)=>{const{ref:o,refs:d,required:N,maxLength:f,minLength:R,min:A,max:S,pattern:_,validate:G,name:g,valueAsNumber:T,mount:y}=e._f,L=oe(r,g);if(!y||l.has(g))return{};const p=d?d[0]:o,w=H=>{i&&p.reportValidity&&(p.setCustomValidity(Hn(H)?"":H||""),p.reportValidity())},D={},q=Cu(o),B=Ma(o),U=q||B,Y=(T||Hu(o))&&an(o.value)&&an(L)||ni(o)&&o.value===""||L===""||Array.isArray(L)&&!L.length,ne=Xy.bind(null,g,t,D),ee=(H,V,M,z=Mr.maxLength,re=Mr.minLength)=>{const X=H?V:M;D[g]={type:H?z:re,message:X,ref:o,...ne(H?z:re,X)}};if(u?!Array.isArray(L)||!L.length:N&&(!U&&(Y||yn(L))||Hn(L)&&!L||B&&!zN(d).isValid||q&&!ZN(d).isValid)){const{value:H,message:V}=jl(N)?{value:!!N,message:N}:wt(N);if(H&&(D[g]={type:Mr.required,message:V,ref:p,...ne(Mr.required,V)},!t))return w(V),D}if(!Y&&(!yn(A)||!yn(S))){let H,V;const M=wt(S),z=wt(A);if(!yn(L)&&!isNaN(L)){const re=o.valueAsNumber||L&&+L;yn(M.value)||(H=re>M.value),yn(z.value)||(V=re<z.value)}else{const re=o.valueAsDate||new Date(L),X=Ee=>new Date(new Date().toDateString()+" "+Ee),$=o.type=="time",Z=o.type=="week";Ir(M.value)&&L&&(H=$?X(L)>X(M.value):Z?L>M.value:re>new Date(M.value)),Ir(z.value)&&L&&(V=$?X(L)<X(z.value):Z?L<z.value:re<new Date(z.value))}if((H||V)&&(ee(!!H,M.message,z.message,Mr.max,Mr.min),!t))return w(D[g].message),D}if((f||R)&&!Y&&(Ir(L)||u&&Array.isArray(L))){const H=wt(f),V=wt(R),M=!yn(H.value)&&L.length>+H.value,z=!yn(V.value)&&L.length<+V.value;if((M||z)&&(ee(M,H.message,V.message),!t))return w(D[g].message),D}if(_&&!Y&&Ir(L)){const{value:H,message:V}=wt(_);if(ti(H)&&!L.match(H)&&(D[g]={type:Mr.pattern,message:V,ref:o,...ne(Mr.pattern,V)},!t))return w(V),D}if(G){if(mr(G)){const H=await G(L,r),V=Am(H,p);if(V&&(D[g]={...V,...ne(Mr.validate,V.message)},!t))return w(V.message),D}else if(ln(G)){let H={};for(const V in G){if(!Fn(H)&&!t)break;const M=Am(await G[V](L,r),p,V);M&&(H={...M,...ne(V,M.message)},w(M.message),t&&(D[g]=H))}if(!Fn(H)&&(D[g]={ref:p,...H},!t))return D}}return w(!0),D};const o0={mode:dr.onSubmit,reValidateMode:dr.onChange,shouldFocusError:!0};function E0(e={}){let l={...o0,...e},r={submitCount:0,isDirty:!1,isReady:!1,isLoading:mr(l.defaultValues),isValidating:!1,isSubmitted:!1,isSubmitting:!1,isSubmitSuccessful:!1,isValid:!1,touchedFields:{},dirtyFields:{},validatingFields:{},errors:l.errors||{},disabled:l.disabled||!1},t={},i=ln(l.defaultValues)||ln(l.values)?mn(l.defaultValues||l.values)||{}:{},u=l.shouldUnregister?{}:mn(i),o={action:!1,mount:!1,watch:!1},d={mount:new Set,disabled:new Set,unMount:new Set,array:new Set,watch:new Set},N,f=0;const R={isDirty:!1,dirtyFields:!1,validatingFields:!1,touchedFields:!1,isValidating:!1,isValid:!1,errors:!1};let A={...R};const S={array:om(),state:om()},_=l.criteriaMode===dr.all,G=h=>K=>{clearTimeout(f),f=setTimeout(h,K)},g=async h=>{if(!l.disabled&&(R.isValid||A.isValid||h)){const K=l.resolver?Fn((await B()).errors):await Y(t,!0);K!==r.isValid&&S.state.next({isValid:K})}},T=(h,K)=>{!l.disabled&&(R.isValidating||R.validatingFields||A.isValidating||A.validatingFields)&&((h||Array.from(d.mount)).forEach(C=>{C&&(K?je(r.validatingFields,C,K):un(r.validatingFields,C))}),S.state.next({validatingFields:r.validatingFields,isValidating:!Fn(r.validatingFields)}))},y=(h,K=[],C,se,ae=!0,te=!0)=>{if(se&&C&&!l.disabled){if(o.action=!0,te&&Array.isArray(oe(t,h))){const fe=C(oe(t,h),se.argA,se.argB);ae&&je(t,h,fe)}if(te&&Array.isArray(oe(r.errors,h))){const fe=C(oe(r.errors,h),se.argA,se.argB);ae&&je(r.errors,h,fe),s0(r.errors,h)}if((R.touchedFields||A.touchedFields)&&te&&Array.isArray(oe(r.touchedFields,h))){const fe=C(oe(r.touchedFields,h),se.argA,se.argB);ae&&je(r.touchedFields,h,fe)}(R.dirtyFields||A.dirtyFields)&&(r.dirtyFields=Aa(i,u)),S.state.next({name:h,isDirty:ee(h,K),dirtyFields:r.dirtyFields,errors:r.errors,isValid:r.isValid})}else je(u,h,K)},L=(h,K)=>{je(r.errors,h,K),S.state.next({errors:r.errors})},p=h=>{r.errors=h,S.state.next({errors:r.errors,isValid:!1})},w=(h,K,C,se)=>{const ae=oe(t,h);if(ae){const te=oe(u,h,an(C)?oe(i,h):C);an(te)||se&&se.defaultChecked||K?je(u,h,K?te:Nm(ae._f)):M(h,te),o.mount&&g()}},D=(h,K,C,se,ae)=>{let te=!1,fe=!1;const Le={name:h};if(!l.disabled){if(!C||se){(R.isDirty||A.isDirty)&&(fe=r.isDirty,r.isDirty=Le.isDirty=ee(),te=fe!==Le.isDirty);const Fe=wr(oe(i,h),K);fe=!!oe(r.dirtyFields,h),Fe?un(r.dirtyFields,h):je(r.dirtyFields,h,!0),Le.dirtyFields=r.dirtyFields,te=te||(R.dirtyFields||A.dirtyFields)&&fe!==!Fe}if(C){const Fe=oe(r.touchedFields,h);Fe||(je(r.touchedFields,h,C),Le.touchedFields=r.touchedFields,te=te||(R.touchedFields||A.touchedFields)&&Fe!==C)}te&&ae&&S.state.next(Le)}return te?Le:{}},q=(h,K,C,se)=>{const ae=oe(r.errors,h),te=(R.isValid||A.isValid)&&Hn(K)&&r.isValid!==K;if(l.delayError&&C?(N=G(()=>L(h,C)),N(l.delayError)):(clearTimeout(f),N=null,C?je(r.errors,h,C):un(r.errors,h)),(C?!wr(ae,C):ae)||!Fn(se)||te){const fe={...se,...te&&Hn(K)?{isValid:K}:{},errors:r.errors,name:h};r={...r,...fe},S.state.next(fe)}},B=async h=>{T(h,!0);const K=await l.resolver(u,l.context,n0(h||d.mount,t,l.criteriaMode,l.shouldUseNativeValidation));return T(h),K},U=async h=>{const{errors:K}=await B(h);if(h)for(const C of h){const se=oe(K,C);se?je(r.errors,C,se):un(r.errors,C)}else r.errors=K;return K},Y=async(h,K,C={valid:!0})=>{for(const se in h){const ae=h[se];if(ae){const{_f:te,...fe}=ae;if(te){const Le=d.array.has(te.name),Fe=ae._f&&r0(ae._f);Fe&&R.validatingFields&&T([se],!0);const vn=await Sm(ae,d.disabled,u,_,l.shouldUseNativeValidation&&!K,Le);if(Fe&&R.validatingFields&&T([se]),vn[te.name]&&(C.valid=!1,K))break;!K&&(oe(vn,te.name)?Le?u0(r.errors,vn,te.name):je(r.errors,te.name,vn[te.name]):un(r.errors,te.name))}!Fn(fe)&&await Y(fe,K,C)}}return C.valid},ne=()=>{for(const h of d.unMount){const K=oe(t,h);K&&(K._f.refs?K._f.refs.every(C=>!qs(C)):!qs(K._f.ref))&&qe(h)}d.unMount=new Set},ee=(h,K)=>!l.disabled&&(h&&K&&je(u,h,K),!wr(Ee(),i)),H=(h,K,C)=>jN(h,d,{...o.mount?u:an(K)?i:Ir(h)?{[h]:K}:K},C,K),V=h=>wu(oe(o.mount?u:i,h,l.shouldUnregister?oe(i,h,[]):[])),M=(h,K,C={})=>{const se=oe(t,h);let ae=K;if(se){const te=se._f;te&&(!te.disabled&&je(u,h,XN(K,te)),ae=ni(te.ref)&&yn(K)?"":K,JN(te.ref)?[...te.ref.options].forEach(fe=>fe.selected=ae.includes(fe.value)):te.refs?Ma(te.ref)?te.refs.forEach(fe=>{(!fe.defaultChecked||!fe.disabled)&&(Array.isArray(ae)?fe.checked=!!ae.find(Le=>Le===fe.value):fe.checked=ae===fe.value||!!ae)}):te.refs.forEach(fe=>fe.checked=fe.value===ae):Hu(te.ref)?te.ref.value="":(te.ref.value=ae,te.ref.type||S.state.next({name:h,values:mn(u)})))}(C.shouldDirty||C.shouldTouch)&&D(h,ae,C.shouldTouch,C.shouldDirty,!0),C.shouldValidate&&Z(h)},z=(h,K,C)=>{for(const se in K){if(!K.hasOwnProperty(se))return;const ae=K[se],te=h+"."+se,fe=oe(t,te);(d.array.has(h)||ln(ae)||fe&&!fe._f)&&!ct(ae)?z(te,ae,C):M(te,ae,C)}},re=(h,K,C={})=>{const se=oe(t,h),ae=d.array.has(h),te=mn(K);je(u,h,te),ae?(S.array.next({name:h,values:mn(u)}),(R.isDirty||R.dirtyFields||A.isDirty||A.dirtyFields)&&C.shouldDirty&&S.state.next({name:h,dirtyFields:Aa(i,u),isDirty:ee(h,te)})):se&&!se._f&&!yn(te)?z(h,te,C):M(h,te,C),cm(h,d)&&S.state.next({...r,name:h}),S.state.next({name:o.mount?h:void 0,values:mn(u)})},X=async h=>{o.mount=!0;const K=h.target;let C=K.name,se=!0;const ae=oe(t,C),te=Fe=>{se=Number.isNaN(Fe)||ct(Fe)&&isNaN(Fe.getTime())||wr(Fe,oe(u,C,Fe))},fe=fm(l.mode),Le=fm(l.reValidateMode);if(ae){let Fe,vn;const Cr=K.type?Nm(ae._f):qN(h),Yn=h.type===ei.BLUR||h.type===ei.FOCUS_OUT,Xt=!t0(ae._f)&&!l.resolver&&!oe(r.errors,C)&&!ae._f.deps||i0(Yn,oe(r.touchedFields,C),r.isSubmitted,Le,fe),tt=cm(C,d,Yn);je(u,C,Cr),Yn?(!K||!K.readOnly)&&(ae._f.onBlur&&ae._f.onBlur(h),N&&N(0)):ae._f.onChange&&ae._f.onChange(h);const at=D(C,Cr,Yn),Zt=!Fn(at)||tt;if(!Yn&&S.state.next({name:C,type:h.type,values:mn(u)}),Xt)return(R.isValid||A.isValid)&&(l.mode==="onBlur"?Yn&&g():Yn||g()),Zt&&S.state.next({name:C,...tt?{}:at});if(!Yn&&tt&&S.state.next({...r}),l.resolver){const{errors:Pt}=await B([C]);if(te(Cr),se){const Qt=vm(r.errors,t,C),Ca=vm(Pt,t,Qt.name||C);Fe=Ca.error,C=Ca.name,vn=Fn(Pt)}}else T([C],!0),Fe=(await Sm(ae,d.disabled,u,_,l.shouldUseNativeValidation))[C],T([C]),te(Cr),se&&(Fe?vn=!1:(R.isValid||A.isValid)&&(vn=await Y(t,!0)));se&&(ae._f.deps&&Z(ae._f.deps),q(C,vn,Fe,at))}},$=(h,K)=>{if(oe(r.errors,K)&&h.focus)return h.focus(),1},Z=async(h,K={})=>{let C,se;const ae=ha(h);if(l.resolver){const te=await U(an(h)?h:ae);C=Fn(te),se=h?!ae.some(fe=>oe(te,fe)):C}else h?(se=(await Promise.all(ae.map(async te=>{const fe=oe(t,te);return await Y(fe&&fe._f?{[te]:fe}:fe)}))).every(Boolean),!(!se&&!r.isValid)&&g()):se=C=await Y(t);return S.state.next({...!Ir(h)||(R.isValid||A.isValid)&&C!==r.isValid?{}:{name:h},...l.resolver||!h?{isValid:C}:{},errors:r.errors}),K.shouldFocus&&!se&&ya(t,$,h?ae:d.mount),se},Ee=h=>{const K={...o.mount?u:i};return an(h)?K:Ir(h)?oe(K,h):h.map(C=>oe(K,C))},ue=(h,K)=>({invalid:!!oe((K||r).errors,h),isDirty:!!oe((K||r).dirtyFields,h),error:oe((K||r).errors,h),isValidating:!!oe(r.validatingFields,h),isTouched:!!oe((K||r).touchedFields,h)}),Re=h=>{h&&ha(h).forEach(K=>un(r.errors,K)),S.state.next({errors:h?r.errors:{}})},Te=(h,K,C)=>{const se=(oe(t,h,{_f:{}})._f||{}).ref,ae=oe(r.errors,h)||{},{ref:te,message:fe,type:Le,...Fe}=ae;je(r.errors,h,{...Fe,...K,ref:se}),S.state.next({name:h,errors:r.errors,isValid:!1}),C&&C.shouldFocus&&se&&se.focus&&se.focus()},Tn=(h,K)=>mr(h)?S.state.subscribe({next:C=>"values"in C&&h(H(void 0,K),C)}):H(h,K,!0),Je=h=>S.state.subscribe({next:K=>{l0(h.name,K.name,h.exact)&&a0(K,h.formState||R,on,h.reRenderRoot)&&h.callback({values:{...u},...r,...K,defaultValues:i})}}).unsubscribe,xe=h=>(o.mount=!0,A={...A,...h.formState},Je({...h,formState:A})),qe=(h,K={})=>{for(const C of h?ha(h):d.mount)d.mount.delete(C),d.array.delete(C),K.keepValue||(un(t,C),un(u,C)),!K.keepError&&un(r.errors,C),!K.keepDirty&&un(r.dirtyFields,C),!K.keepTouched&&un(r.touchedFields,C),!K.keepIsValidating&&un(r.validatingFields,C),!l.shouldUnregister&&!K.keepDefaultValue&&un(i,C);S.state.next({values:mn(u)}),S.state.next({...r,...K.keepDirty?{isDirty:ee()}:{}}),!K.keepIsValid&&g()},Pe=({disabled:h,name:K})=>{(Hn(h)&&o.mount||h||d.disabled.has(K))&&(h?d.disabled.add(K):d.disabled.delete(K))},Oe=(h,K={})=>{let C=oe(t,h);const se=Hn(K.disabled)||Hn(l.disabled);return je(t,h,{...C||{},_f:{...C&&C._f?C._f:{ref:{name:h}},name:h,mount:!0,...K}}),d.mount.add(h),C?Pe({disabled:Hn(K.disabled)?K.disabled:l.disabled,name:h}):w(h,!0,K.value),{...se?{disabled:K.disabled||l.disabled}:{},...l.progressive?{required:!!K.required,min:Sa(K.min),max:Sa(K.max),minLength:Sa(K.minLength),maxLength:Sa(K.maxLength),pattern:Sa(K.pattern)}:{},name:h,onChange:X,onBlur:X,ref:ae=>{if(ae){Oe(h,K),C=oe(t,h);const te=an(ae.value)&&ae.querySelectorAll&&ae.querySelectorAll("input,select,textarea")[0]||ae,fe=Zy(te),Le=C._f.refs||[];if(fe?Le.find(Fe=>Fe===te):te===C._f.ref)return;je(t,h,{_f:{...C._f,...fe?{refs:[...Le.filter(qs),te,...Array.isArray(oe(i,h))?[{}]:[]],ref:{type:te.type,name:h}}:{ref:te}}}),w(h,!1,void 0,te)}else C=oe(t,h,{}),C._f&&(C._f.mount=!1),(l.shouldUnregister||K.shouldUnregister)&&!(HN(d.array,h)&&o.action)&&d.unMount.add(h)}}},nn=()=>l.shouldFocusError&&ya(t,$,d.mount),ze=h=>{Hn(h)&&(S.state.next({disabled:h}),ya(t,(K,C)=>{const se=oe(t,C);se&&(K.disabled=se._f.disabled||h,Array.isArray(se._f.refs)&&se._f.refs.forEach(ae=>{ae.disabled=se._f.disabled||h}))},0,!1))},Xe=(h,K)=>async C=>{let se;C&&(C.preventDefault&&C.preventDefault(),C.persist&&C.persist());let ae=mn(u);if(S.state.next({isSubmitting:!0}),l.resolver){const{errors:te,values:fe}=await B();r.errors=te,ae=mn(fe)}else await Y(t);if(d.disabled.size)for(const te of d.disabled)un(ae,te);if(un(r.errors,"root"),Fn(r.errors)){S.state.next({errors:{}});try{await h(ae,C)}catch(te){se=te}}else K&&await K({...r.errors},C),nn(),setTimeout(nn);if(S.state.next({isSubmitted:!0,isSubmitting:!1,isSubmitSuccessful:Fn(r.errors)&&!se,submitCount:r.submitCount+1,errors:r.errors}),se)throw se},pn=(h,K={})=>{oe(t,h)&&(an(K.defaultValue)?re(h,mn(oe(i,h))):(re(h,K.defaultValue),je(i,h,mn(K.defaultValue))),K.keepTouched||un(r.touchedFields,h),K.keepDirty||(un(r.dirtyFields,h),r.isDirty=K.defaultValue?ee(h,mn(oe(i,h))):ee()),K.keepError||(un(r.errors,h),R.isValid&&g()),S.state.next({...r}))},He=(h,K={})=>{const C=h?mn(h):i,se=mn(C),ae=Fn(h),te=ae?i:se;if(K.keepDefaultValues||(i=C),!K.keepValues){if(K.keepDirtyValues){const fe=new Set([...d.mount,...Object.keys(Aa(i,u))]);for(const Le of Array.from(fe))oe(r.dirtyFields,Le)?je(te,Le,oe(u,Le)):re(Le,oe(te,Le))}else{if(Bu&&an(h))for(const fe of d.mount){const Le=oe(t,fe);if(Le&&Le._f){const Fe=Array.isArray(Le._f.refs)?Le._f.refs[0]:Le._f.ref;if(ni(Fe)){const vn=Fe.closest("form");if(vn){vn.reset();break}}}}if(K.keepFieldsRef)for(const fe of d.mount)re(fe,oe(te,fe));else t={}}u=l.shouldUnregister?K.keepDefaultValues?mn(i):{}:mn(te),S.array.next({values:{...te}}),S.state.next({values:{...te}})}d={mount:K.keepDirtyValues?d.mount:new Set,unMount:new Set,array:new Set,disabled:new Set,watch:new Set,watchAll:!1,focus:""},o.mount=!R.isValid||!!K.keepIsValid||!!K.keepDirtyValues,o.watch=!!l.shouldUnregister,S.state.next({submitCount:K.keepSubmitCount?r.submitCount:0,isDirty:ae?!1:K.keepDirty?r.isDirty:!!(K.keepDefaultValues&&!wr(h,i)),isSubmitted:K.keepIsSubmitted?r.isSubmitted:!1,dirtyFields:ae?{}:K.keepDirtyValues?K.keepDefaultValues&&u?Aa(i,u):r.dirtyFields:K.keepDefaultValues&&h?Aa(i,h):K.keepDirty?r.dirtyFields:{},touchedFields:K.keepTouched?r.touchedFields:{},errors:K.keepErrors?r.errors:{},isSubmitSuccessful:K.keepIsSubmitSuccessful?r.isSubmitSuccessful:!1,isSubmitting:!1,defaultValues:i})},sn=(h,K)=>He(mr(h)?h(u):h,K),lr=(h,K={})=>{const C=oe(t,h),se=C&&C._f;if(se){const ae=se.refs?se.refs[0]:se.ref;ae.focus&&(ae.focus(),K.shouldSelect&&mr(ae.select)&&ae.select())}},on=h=>{r={...r,...h}},jn={control:{register:Oe,unregister:qe,getFieldState:ue,handleSubmit:Xe,setError:Te,_subscribe:Je,_runSchema:B,_focusError:nn,_getWatch:H,_getDirty:ee,_setValid:g,_setFieldArray:y,_setDisabledField:Pe,_setErrors:p,_getFieldArray:V,_reset:He,_resetDefaultValues:()=>mr(l.defaultValues)&&l.defaultValues().then(h=>{sn(h,l.resetOptions),S.state.next({isLoading:!1})}),_removeUnmounted:ne,_disableForm:ze,_subjects:S,_proxyFormState:R,get _fields(){return t},get _formValues(){return u},get _state(){return o},set _state(h){o=h},get _defaultValues(){return i},get _names(){return d},set _names(h){d=h},get _formState(){return r},get _options(){return l},set _options(h){l={...l,...h}}},subscribe:xe,trigger:Z,register:Oe,handleSubmit:Xe,watch:Tn,setValue:re,getValues:Ee,reset:sn,resetField:pn,clearErrors:Re,unregister:qe,setError:Te,setFocus:lr,getFieldState:ue};return{...jn,formControl:jn}}function d0(e={}){const l=k.useRef(void 0),r=k.useRef(void 0),[t,i]=k.useState({isDirty:!1,isValidating:!1,isLoading:mr(e.defaultValues),isSubmitted:!1,isSubmitting:!1,isSubmitSuccessful:!1,isValid:!1,submitCount:0,dirtyFields:{},touchedFields:{},validatingFields:{},errors:e.errors||{},disabled:e.disabled||!1,isReady:!1,defaultValues:mr(e.defaultValues)?void 0:e.defaultValues});if(!l.current)if(e.formControl)l.current={...e.formControl,formState:t},e.defaultValues&&!mr(e.defaultValues)&&e.formControl.reset(e.defaultValues,e.resetOptions);else{const{formControl:o,...d}=E0(e);l.current={...d,formState:t}}const u=l.current.control;return u._options=e,qu(()=>{const o=u._subscribe({formState:u._proxyFormState,callback:()=>i({...u._formState}),reRenderRoot:!0});return i(d=>({...d,isReady:!0})),u._formState.isReady=!0,o},[u]),k.useEffect(()=>u._disableForm(e.disabled),[u,e.disabled]),k.useEffect(()=>{e.mode&&(u._options.mode=e.mode),e.reValidateMode&&(u._options.reValidateMode=e.reValidateMode)},[u,e.mode,e.reValidateMode]),k.useEffect(()=>{e.errors&&(u._setErrors(e.errors),u._focusError())},[u,e.errors]),k.useEffect(()=>{e.shouldUnregister&&u._subjects.state.next({values:u._getWatch()})},[u,e.shouldUnregister]),k.useEffect(()=>{if(u._proxyFormState.isDirty){const o=u._getDirty();o!==t.isDirty&&u._subjects.state.next({isDirty:o})}},[u,t.isDirty]),k.useEffect(()=>{e.values&&!wr(e.values,r.current)?(u._reset(e.values,{keepFieldsRef:!0,...u._options.resetOptions}),r.current=e.values,i(o=>({...o}))):u._resetDefaultValues()},[u,e.values]),k.useEffect(()=>{u._state.mount||(u._setValid(),u._state.mount=!0),u._state.watch&&(u._state.watch=!1,u._subjects.state.next({...u._formState})),u._removeUnmounted()}),l.current.formState=CN(t,u),l.current}function m0(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var _m={exports:{}},_a={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var Tm;function N0(){if(Tm)return _a;Tm=1;var e=Symbol.for("react.transitional.element"),l=Symbol.for("react.fragment");function r(t,i,u){var o=null;if(u!==void 0&&(o=""+u),i.key!==void 0&&(o=""+i.key),"key"in i){u={};for(var d in i)d!=="key"&&(u[d]=i[d])}else u=i;return i=u.ref,{$$typeof:e,type:t,key:o,ref:i!==void 0?i:null,props:u}}return _a.Fragment=l,_a.jsx=r,_a.jsxs=r,_a}var gm;function f0(){return gm||(gm=1,_m.exports=N0()),_m.exports}var _n=f0();const QN=e=>e.reduce((l,r,t)=>({...l,[t]:i=>r(i)||!0}),{}),lu=(e,l)=>l.split(".").reduce((r,t)=>r!==void 0?r[t]:r,e)?.message,R0=({label:e,validate:l=[],readOnly:r=!1,onChange:t,onClick:i,className:u,...o})=>{const{name:d,control:N,disabled:f}=o,{formState:{errors:R}}=Ba(),{field:A}=YN({name:d,control:N,rules:{validate:P.useMemo(()=>QN(l),[l])}}),S=lu(R,d);return _n.jsxs(_n.Fragment,{children:[_n.jsx(ay,{size:"small",disabled:f||r,checked:A.value===!0,className:u,error:!!S,...A,onChange:_=>{A.onChange(_),t&&t(_.currentTarget.checked)},onClick:()=>{i&&i()},children:e}),S&&_n.jsx(ai,{children:lu(R,d)})]})};var iu={exports:{}},c0=iu.exports,Im;function v0(){return Im||(Im=1,function(e,l){(function(r,t){e.exports=t()})(c0,function(){var r={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"},t=/(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g,i=/\d/,u=/\d\d/,o=/\d\d?/,d=/\d*[^-_:/,()\s\d]+/,N={},f=function(T){return(T=+T)+(T>68?1900:2e3)},R=function(T){return function(y){this[T]=+y}},A=[/[+-]\d\d:?(\d\d)?|Z/,function(T){(this.zone||(this.zone={})).offset=function(y){if(!y||y==="Z")return 0;var L=y.match(/([+-]|\d\d)/g),p=60*L[1]+(+L[2]||0);return p===0?0:L[0]==="+"?-p:p}(T)}],S=function(T){var y=N[T];return y&&(y.indexOf?y:y.s.concat(y.f))},_=function(T,y){var L,p=N.meridiem;if(p){for(var w=1;w<=24;w+=1)if(T.indexOf(p(w,0,y))>-1){L=w>12;break}}else L=T===(y?"pm":"PM");return L},G={A:[d,function(T){this.afternoon=_(T,!1)}],a:[d,function(T){this.afternoon=_(T,!0)}],Q:[i,function(T){this.month=3*(T-1)+1}],S:[i,function(T){this.milliseconds=100*+T}],SS:[u,function(T){this.milliseconds=10*+T}],SSS:[/\d{3}/,function(T){this.milliseconds=+T}],s:[o,R("seconds")],ss:[o,R("seconds")],m:[o,R("minutes")],mm:[o,R("minutes")],H:[o,R("hours")],h:[o,R("hours")],HH:[o,R("hours")],hh:[o,R("hours")],D:[o,R("day")],DD:[u,R("day")],Do:[d,function(T){var y=N.ordinal,L=T.match(/\d+/);if(this.day=L[0],y)for(var p=1;p<=31;p+=1)y(p).replace(/\[|\]/g,"")===T&&(this.day=p)}],w:[o,R("week")],ww:[u,R("week")],M:[o,R("month")],MM:[u,R("month")],MMM:[d,function(T){var y=S("months"),L=(S("monthsShort")||y.map(function(p){return p.slice(0,3)})).indexOf(T)+1;if(L<1)throw new Error;this.month=L%12||L}],MMMM:[d,function(T){var y=S("months").indexOf(T)+1;if(y<1)throw new Error;this.month=y%12||y}],Y:[/[+-]?\d+/,R("year")],YY:[u,function(T){this.year=f(T)}],YYYY:[/\d{4}/,R("year")],Z:A,ZZ:A};function g(T){var y,L;y=T,L=N&&N.formats;for(var p=(T=y.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,function(ne,ee,H){var V=H&&H.toUpperCase();return ee||L[H]||r[H]||L[V].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,function(M,z,re){return z||re.slice(1)})})).match(t),w=p.length,D=0;D<w;D+=1){var q=p[D],B=G[q],U=B&&B[0],Y=B&&B[1];p[D]=Y?{regex:U,parser:Y}:q.replace(/^\[|\]$/g,"")}return function(ne){for(var ee={},H=0,V=0;H<w;H+=1){var M=p[H];if(typeof M=="string")V+=M.length;else{var z=M.regex,re=M.parser,X=ne.slice(V),$=z.exec(X)[0];re.call(ee,$),ne=ne.replace($,"")}}return function(Z){var Ee=Z.afternoon;if(Ee!==void 0){var ue=Z.hours;Ee?ue<12&&(Z.hours+=12):ue===12&&(Z.hours=0),delete Z.afternoon}}(ee),ee}}return function(T,y,L){L.p.customParseFormat=!0,T&&T.parseTwoDigitYear&&(f=T.parseTwoDigitYear);var p=y.prototype,w=p.parse;p.parse=function(D){var q=D.date,B=D.utc,U=D.args;this.$u=B;var Y=U[1];if(typeof Y=="string"){var ne=U[2]===!0,ee=U[3]===!0,H=ne||ee,V=U[2];ee&&(V=U[2]),N=this.$locale(),!ne&&V&&(N=L.Ls[V]),this.$d=function(X,$,Z,Ee){try{if(["x","X"].indexOf($)>-1)return new Date(($==="X"?1e3:1)*X);var ue=g($)(X),Re=ue.year,Te=ue.month,Tn=ue.day,Je=ue.hours,xe=ue.minutes,qe=ue.seconds,Pe=ue.milliseconds,Oe=ue.zone,nn=ue.week,ze=new Date,Xe=Tn||(Re||Te?1:ze.getDate()),pn=Re||ze.getFullYear(),He=0;Re&&!Te||(He=Te>0?Te-1:ze.getMonth());var sn,lr=Je||0,on=xe||0,ir=qe||0,jn=Pe||0;return Oe?new Date(Date.UTC(pn,He,Xe,lr,on,ir,jn+60*Oe.offset*1e3)):Z?new Date(Date.UTC(pn,He,Xe,lr,on,ir,jn)):(sn=new Date(pn,He,Xe,lr,on,ir,jn),nn&&(sn=Ee(sn).week(nn).toDate()),sn)}catch{return new Date("")}}(q,Y,B,L),this.init(),V&&V!==!0&&(this.$L=this.locale(V).$L),H&&q!=this.format(Y)&&(this.$d=new Date("")),N={}}else if(Y instanceof Array)for(var M=Y.length,z=1;z<=M;z+=1){U[1]=Y[z-1];var re=L.apply(this,U);if(re.isValid()){this.$d=re.$d,this.$L=re.$L,this.init();break}z===M&&(this.$d=new Date(""))}else w.call(this,D)}}})}(iu)),iu.exports}var A0=v0();const S0=m0(A0),_0="_textarea_14c7r_1",T0="_readOnlyField_14c7r_7",Pm={textarea:_0,readOnlyField:T0},g0=e=>e!=null&&e!=="",I0=({label:e,value:l,isEdited:r=!1,type:t,hideLabel:i,size:u})=>g0(l)?_n.jsxs(Tt,{gap:"space-4",children:[e&&!i&&_n.jsx(At,{size:u,children:e}),_n.jsxs(Vu,{gap:"space-8",align:"center",wrap:!1,children:[_n.jsx(hu,{className:t==="textarea"?Pm.textarea:Pm.readOnlyField,size:u,children:l}),r&&_n.jsx(ky,{})]})]}):null;qr.extend(S0);const P0="_textAreaFieldWithBadges_bdz0b_1",h0="_etikettWrapper_bdz0b_4",hm={textAreaFieldWithBadges:P0,etikettWrapper:h0},y0=({name:e,control:l,label:r,readOnly:t,maxLength:i,badges:u,validate:o=[],parse:d=_=>_,className:N,description:f,isEdited:R,size:A="small",...S})=>{const{formState:{errors:_}}=Ba(),{field:G}=YN({name:e,control:l,rules:{validate:P.useMemo(()=>QN(o),[o])}});return t?_n.jsx(I0,{size:A,label:r,value:G.value,type:"textarea",isEdited:R,hideLabel:S.hideLabel}):_n.jsxs("div",{className:u?hm.textAreaFieldWithBadges:null,children:[u&&_n.jsx("div",{className:hm.etikettWrapper,children:u.map(({type:g,titleText:T})=>_n.jsx($h,{variant:g,size:"small",children:T},T))}),_n.jsx(my,{size:A,label:r,description:f,className:N,autoComplete:"off",...G,onChange:g=>G.onChange(g.currentTarget.value!==""?d(g.currentTarget.value):null),value:G.value?G.value:"",error:lu(_,e),maxLength:i,...S})]})},p0=({formMethods:e,onSubmit:l,children:r,className:t,setDataOnUnmount:i})=>{const{handleSubmit:u,getValues:o}=e;return P.useEffect(()=>()=>{i&&i(o())},[]),_n.jsx($y,{...e,children:_n.jsx("form",{className:t,onSubmit:l?u(d=>l(d)):void 0,children:r})})},wa={"AdresseVisning.Adresse":"Adresse","ForelderPanel.Soker":"Søker","ForelderPanel.AnnenForelder":"Annen forelder","AlleBarnPanel.Barn":"Barn","AlleBarnPanel.BarnNr":"Barn {nummer}","AlleBarnPanel.Fodt":"Født","AlleBarnPanel.Dod":"Død","PersonPanel.RolleOgNavn":"{rolle, select, BRUKER {Søker, } ANNEN_PART {Den andre forelderen, } BARN {Barnet, } other {} }{navn}","PersonPanel.Beskrivelse.Bruker":"Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene","PersonPanel.Beskrivelse.Barn":"Adresser for barnet registrert i folkeregisteret gyldige på skjæringstidspunktet","PersonPanel.Beskrivelse.Annenpart":"Adresser for den andre forelderen registrert i folkeregisteret gyldige på skjæringstidspunktet","PersonPanel.Fodt":"Født {dato}","PersonPanel.Dod":"Død {dato}","AdresseTabell.IngenAdresse":"Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.","AdresseTabell.SammeAdresse":"Den andre forelderen har samme adresse som søker på skjæringstidspunktet","AdresseTabell.PeriodeLabel":"Periode","AdresseTabell.AdresseLabel":"Adresse","AdresseTabell.TypeLabel":"Type","MerkePanel.Dod":"DØD","MerkePanel.DodTittel":"Personen er død","MerkePanel.DodFodt":"DØDFØDT","MerkePanel.Diskresjon6":"Kode 6","MerkePanel.Diskresjon7":"Kode 7","MerkePanel.EgenAnsatt":"Nav","MerkePanel.Verge":"Verge","MerkePanel.Diskresjon6Tittel":"Personen har diskresjonsmerking kode 6","MerkePanel.Diskresjon7Tittel":"Personen har diskresjonsmerking kode 7","MerkePanel.EgenAnsattTittel":"Personen er ansatt i Nav","MerkePanel.VergeTittel":"Personen har verge","SubmitButton.ConfirmInformation":"Bekreft og fortsett","FaktaBegrunnelseTextField.BegrunnEndringene":"Begrunn endringene","FaktaBegrunnelseTextField.Vurdering":"Vurdering","FaktaBegrunnelseTextField.Begrunnelse":"Begrunnelse","TrueFalseInput.True":"Ja","TrueFalseInput.False":"Nei","FaktaKilde.Soknad":"FRA SØKNADEN","FaktaKilde.FREG":"FRA FOLKEREGISTERET","FaktaKilde.MEDL":"FRA MEDLEMSKAPSREGISTERET","FaktaKilde.Ukjent":"FRA UKJENT KILDE","FaktaKilde.SBH":"FRA SAKSBEHANDLER"},Hs=Rr(wa),b0=Rg(3),L0=cg(1500),Ua=({control:e,isReadOnly:l,isSubmittable:r,hasBegrunnelse:t,label:i,hasReadOnlyLabel:u=!1,hasVurderingText:o=!1,size:d})=>{const N=o?"FaktaBegrunnelseTextField.Vurdering":"FaktaBegrunnelseTextField.BegrunnEndringene",f=()=>l?u?Hs.formatMessage({id:"FaktaBegrunnelseTextField.Begrunnelse"}):"":i??Hs.formatMessage({id:N});return le.jsx(Pu,{value:Hs,children:(r||t)&&le.jsx(y0,{name:"begrunnelse",control:e,label:f(),validate:[fg,b0,L0,vg],maxLength:1500,readOnly:l,size:d})})},D0=e=>e&&Array.isArray(e)?e[0]?.begrunnelse??"":e&&!Array.isArray(e)&&e.begrunnelse?e.begrunnelse:"";Ua.initialValues=e=>({begrunnelse:Ag(D0(e)??void 0)});Ua.transformValues=e=>({begrunnelse:yg(e.begrunnelse)});Ua.__docgenInfo={description:"",methods:[{name:"initialValues",docblock:null,modifiers:["static"],params:[{name:"aksjonspunkt",optional:!0,type:{name:"union",raw:"Aksjonspunkt[] | Aksjonspunkt",elements:[{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  definisjon:
+    | '5001'
+    | '5027'
+    | '5004'
+    | '5005'
+    | '5006'
+    | '5007'
+    | '5008'
+    | '5011'
+    | '5012'
+    | '5013'
+    | '5014'
+    | '5015'
+    | '5016'
+    | '5017'
+    | '5002'
+    | '5026'
+    | '5028'
+    | '5030'
+    | '5031'
+    | '5033'
+    | '5034'
+    | '5003'
+    | '5035'
+    | '5037'
+    | '5038'
+    | '5039'
+    | '5040'
+    | '5043'
+    | '5046'
+    | '5047'
+    | '5049'
+    | '5051'
+    | '5052'
+    | '5054'
+    | '5055'
+    | '5057'
+    | '5058'
+    | '5059'
+    | '5060'
+    | '5061'
+    | '5068'
+    | '5064'
+    | '5065'
+    | '5063'
+    | '5066'
+    | '5071'
+    | '5072'
+    | '5069'
+    | '5073'
+    | '5076'
+    | '5077'
+    | '5085'
+    | '5082'
+    | '5084'
+    | '5029'
+    | '5086'
+    | '5089'
+    | '5041'
+    | '5062'
+    | '5091'
+    | '5092'
+    | '5095'
+    | '5096'
+    | '5074'
+    | '5101'
+    | '5102'
+    | '5103'
+    | '6002'
+    | '6003'
+    | '6004'
+    | '6005'
+    | '6006'
+    | '6008'
+    | '6009'
+    | '6010'
+    | '6011'
+    | '6065'
+    | '6014'
+    | '6015'
+    | '6045'
+    | '6016'
+    | '6018'
+    | '6017'
+    | '6103'
+    | '7001'
+    | '7002'
+    | '7003'
+    | '7005'
+    | '7007'
+    | '7008'
+    | '7011'
+    | '7013'
+    | '7014'
+    | '7020'
+    | '7030'
+    | '7033'
+    | '7037'
+    | '7039'
+    | '7040'
+    | "UNDEFINED('null')"
+    | '5009'
+    | '5019'
+    | '5020'
+    | '5021'
+    | '5022'
+    | '5023'
+    | '5024'
+    | '5025'
+    | '5032'
+    | '5036'
+    | '5042'
+    | '5044'
+    | '5045'
+    | '5048'
+    | '5050'
+    | '5053'
+    | '5056'
+    | '5067'
+    | '5070'
+    | '5075'
+    | '5078'
+    | '5079'
+    | '5080'
+    | '5081'
+    | '5083'
+    | '5087'
+    | '5088'
+    | '5090'
+    | '5093'
+    | '5094'
+    | '5097'
+    | '5098'
+    | '5099'
+    | '6007'
+    | '6012'
+    | '6013'
+    | '6068'
+    | '6070'
+    | '7004'
+    | '7006'
+    | '7009'
+    | '7015'
+    | '7016'
+    | '7017'
+    | '7018'
+    | '7019'
+    | '7021'
+    | '7022'
+    | '7023'
+    | '7024'
+    | '7025'
+    | '7026'
+    | '7027'
+    | '7028'
+    | '7029'
+    | '7032'
+    | '7034'
+    | '7035'
+    | '7036'
+    | '7038'
+    | '7041';
+  status: 'AVBR' | 'OPPR' | 'UTFO';
+  begrunnelse: string | null;
+  vilkarType:
+    | 'FP_VK_1'
+    | 'FP_VK_11'
+    | 'FP_VK_16'
+    | 'FP_VK_2'
+    | 'FP_VK_2_F'
+    | 'FP_VK_2_L'
+    | 'FP_VK_3'
+    | 'FP_VK_4'
+    | 'FP_VK_5'
+    | 'FP_VK_8'
+    | 'FP_VK_33'
+    | 'FP_VK_34'
+    | 'FP_VK_21'
+    | 'FP_VK_23'
+    | 'FP_VK_41'
+    | 'SVP_VK_1'
+    | '-';
+  toTrinnsBehandling: boolean;
+  toTrinnsBehandlingGodkjent: boolean | null;
+  vurderPaNyttArsaker: Array<
+    'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+  > | null;
+  besluttersBegrunnelse: string | null;
+  aksjonspunktType: 'AUTO' | 'MANU' | 'OVST' | 'SAOV' | '-';
+  kanLoses: boolean;
+  erAktivt: boolean;
+  fristTid: string | null;
+  endretTidspunkt: string | null;
+  endretAv: string | null;
+}`,signature:{properties:[{key:"definisjon",value:{name:"union",raw:`| '5001'
+| '5027'
+| '5004'
+| '5005'
+| '5006'
+| '5007'
+| '5008'
+| '5011'
+| '5012'
+| '5013'
+| '5014'
+| '5015'
+| '5016'
+| '5017'
+| '5002'
+| '5026'
+| '5028'
+| '5030'
+| '5031'
+| '5033'
+| '5034'
+| '5003'
+| '5035'
+| '5037'
+| '5038'
+| '5039'
+| '5040'
+| '5043'
+| '5046'
+| '5047'
+| '5049'
+| '5051'
+| '5052'
+| '5054'
+| '5055'
+| '5057'
+| '5058'
+| '5059'
+| '5060'
+| '5061'
+| '5068'
+| '5064'
+| '5065'
+| '5063'
+| '5066'
+| '5071'
+| '5072'
+| '5069'
+| '5073'
+| '5076'
+| '5077'
+| '5085'
+| '5082'
+| '5084'
+| '5029'
+| '5086'
+| '5089'
+| '5041'
+| '5062'
+| '5091'
+| '5092'
+| '5095'
+| '5096'
+| '5074'
+| '5101'
+| '5102'
+| '5103'
+| '6002'
+| '6003'
+| '6004'
+| '6005'
+| '6006'
+| '6008'
+| '6009'
+| '6010'
+| '6011'
+| '6065'
+| '6014'
+| '6015'
+| '6045'
+| '6016'
+| '6018'
+| '6017'
+| '6103'
+| '7001'
+| '7002'
+| '7003'
+| '7005'
+| '7007'
+| '7008'
+| '7011'
+| '7013'
+| '7014'
+| '7020'
+| '7030'
+| '7033'
+| '7037'
+| '7039'
+| '7040'
+| "UNDEFINED('null')"
+| '5009'
+| '5019'
+| '5020'
+| '5021'
+| '5022'
+| '5023'
+| '5024'
+| '5025'
+| '5032'
+| '5036'
+| '5042'
+| '5044'
+| '5045'
+| '5048'
+| '5050'
+| '5053'
+| '5056'
+| '5067'
+| '5070'
+| '5075'
+| '5078'
+| '5079'
+| '5080'
+| '5081'
+| '5083'
+| '5087'
+| '5088'
+| '5090'
+| '5093'
+| '5094'
+| '5097'
+| '5098'
+| '5099'
+| '6007'
+| '6012'
+| '6013'
+| '6068'
+| '6070'
+| '7004'
+| '7006'
+| '7009'
+| '7015'
+| '7016'
+| '7017'
+| '7018'
+| '7019'
+| '7021'
+| '7022'
+| '7023'
+| '7024'
+| '7025'
+| '7026'
+| '7027'
+| '7028'
+| '7029'
+| '7032'
+| '7034'
+| '7035'
+| '7036'
+| '7038'
+| '7041'`,elements:[{name:"literal",value:"'5001'"},{name:"literal",value:"'5027'"},{name:"literal",value:"'5004'"},{name:"literal",value:"'5005'"},{name:"literal",value:"'5006'"},{name:"literal",value:"'5007'"},{name:"literal",value:"'5008'"},{name:"literal",value:"'5011'"},{name:"literal",value:"'5012'"},{name:"literal",value:"'5013'"},{name:"literal",value:"'5014'"},{name:"literal",value:"'5015'"},{name:"literal",value:"'5016'"},{name:"literal",value:"'5017'"},{name:"literal",value:"'5002'"},{name:"literal",value:"'5026'"},{name:"literal",value:"'5028'"},{name:"literal",value:"'5030'"},{name:"literal",value:"'5031'"},{name:"literal",value:"'5033'"},{name:"literal",value:"'5034'"},{name:"literal",value:"'5003'"},{name:"literal",value:"'5035'"},{name:"literal",value:"'5037'"},{name:"literal",value:"'5038'"},{name:"literal",value:"'5039'"},{name:"literal",value:"'5040'"},{name:"literal",value:"'5043'"},{name:"literal",value:"'5046'"},{name:"literal",value:"'5047'"},{name:"literal",value:"'5049'"},{name:"literal",value:"'5051'"},{name:"literal",value:"'5052'"},{name:"literal",value:"'5054'"},{name:"literal",value:"'5055'"},{name:"literal",value:"'5057'"},{name:"literal",value:"'5058'"},{name:"literal",value:"'5059'"},{name:"literal",value:"'5060'"},{name:"literal",value:"'5061'"},{name:"literal",value:"'5068'"},{name:"literal",value:"'5064'"},{name:"literal",value:"'5065'"},{name:"literal",value:"'5063'"},{name:"literal",value:"'5066'"},{name:"literal",value:"'5071'"},{name:"literal",value:"'5072'"},{name:"literal",value:"'5069'"},{name:"literal",value:"'5073'"},{name:"literal",value:"'5076'"},{name:"literal",value:"'5077'"},{name:"literal",value:"'5085'"},{name:"literal",value:"'5082'"},{name:"literal",value:"'5084'"},{name:"literal",value:"'5029'"},{name:"literal",value:"'5086'"},{name:"literal",value:"'5089'"},{name:"literal",value:"'5041'"},{name:"literal",value:"'5062'"},{name:"literal",value:"'5091'"},{name:"literal",value:"'5092'"},{name:"literal",value:"'5095'"},{name:"literal",value:"'5096'"},{name:"literal",value:"'5074'"},{name:"literal",value:"'5101'"},{name:"literal",value:"'5102'"},{name:"literal",value:"'5103'"},{name:"literal",value:"'6002'"},{name:"literal",value:"'6003'"},{name:"literal",value:"'6004'"},{name:"literal",value:"'6005'"},{name:"literal",value:"'6006'"},{name:"literal",value:"'6008'"},{name:"literal",value:"'6009'"},{name:"literal",value:"'6010'"},{name:"literal",value:"'6011'"},{name:"literal",value:"'6065'"},{name:"literal",value:"'6014'"},{name:"literal",value:"'6015'"},{name:"literal",value:"'6045'"},{name:"literal",value:"'6016'"},{name:"literal",value:"'6018'"},{name:"literal",value:"'6017'"},{name:"literal",value:"'6103'"},{name:"literal",value:"'7001'"},{name:"literal",value:"'7002'"},{name:"literal",value:"'7003'"},{name:"literal",value:"'7005'"},{name:"literal",value:"'7007'"},{name:"literal",value:"'7008'"},{name:"literal",value:"'7011'"},{name:"literal",value:"'7013'"},{name:"literal",value:"'7014'"},{name:"literal",value:"'7020'"},{name:"literal",value:"'7030'"},{name:"literal",value:"'7033'"},{name:"literal",value:"'7037'"},{name:"literal",value:"'7039'"},{name:"literal",value:"'7040'"},{name:"literal",value:`"UNDEFINED('null')"`},{name:"literal",value:"'5009'"},{name:"literal",value:"'5019'"},{name:"literal",value:"'5020'"},{name:"literal",value:"'5021'"},{name:"literal",value:"'5022'"},{name:"literal",value:"'5023'"},{name:"literal",value:"'5024'"},{name:"literal",value:"'5025'"},{name:"literal",value:"'5032'"},{name:"literal",value:"'5036'"},{name:"literal",value:"'5042'"},{name:"literal",value:"'5044'"},{name:"literal",value:"'5045'"},{name:"literal",value:"'5048'"},{name:"literal",value:"'5050'"},{name:"literal",value:"'5053'"},{name:"literal",value:"'5056'"},{name:"literal",value:"'5067'"},{name:"literal",value:"'5070'"},{name:"literal",value:"'5075'"},{name:"literal",value:"'5078'"},{name:"literal",value:"'5079'"},{name:"literal",value:"'5080'"},{name:"literal",value:"'5081'"},{name:"literal",value:"'5083'"},{name:"literal",value:"'5087'"},{name:"literal",value:"'5088'"},{name:"literal",value:"'5090'"},{name:"literal",value:"'5093'"},{name:"literal",value:"'5094'"},{name:"literal",value:"'5097'"},{name:"literal",value:"'5098'"},{name:"literal",value:"'5099'"},{name:"literal",value:"'6007'"},{name:"literal",value:"'6012'"},{name:"literal",value:"'6013'"},{name:"literal",value:"'6068'"},{name:"literal",value:"'6070'"},{name:"literal",value:"'7004'"},{name:"literal",value:"'7006'"},{name:"literal",value:"'7009'"},{name:"literal",value:"'7015'"},{name:"literal",value:"'7016'"},{name:"literal",value:"'7017'"},{name:"literal",value:"'7018'"},{name:"literal",value:"'7019'"},{name:"literal",value:"'7021'"},{name:"literal",value:"'7022'"},{name:"literal",value:"'7023'"},{name:"literal",value:"'7024'"},{name:"literal",value:"'7025'"},{name:"literal",value:"'7026'"},{name:"literal",value:"'7027'"},{name:"literal",value:"'7028'"},{name:"literal",value:"'7029'"},{name:"literal",value:"'7032'"},{name:"literal",value:"'7034'"},{name:"literal",value:"'7035'"},{name:"literal",value:"'7036'"},{name:"literal",value:"'7038'"},{name:"literal",value:"'7041'"}],required:!0}},{key:"status",value:{name:"union",raw:"'AVBR' | 'OPPR' | 'UTFO'",elements:[{name:"literal",value:"'AVBR'"},{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"}],required:!0}},{key:"begrunnelse",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"vilkarType",value:{name:"union",raw:`| 'FP_VK_1'
+| 'FP_VK_11'
+| 'FP_VK_16'
+| 'FP_VK_2'
+| 'FP_VK_2_F'
+| 'FP_VK_2_L'
+| 'FP_VK_3'
+| 'FP_VK_4'
+| 'FP_VK_5'
+| 'FP_VK_8'
+| 'FP_VK_33'
+| 'FP_VK_34'
+| 'FP_VK_21'
+| 'FP_VK_23'
+| 'FP_VK_41'
+| 'SVP_VK_1'
+| '-'`,elements:[{name:"literal",value:"'FP_VK_1'"},{name:"literal",value:"'FP_VK_11'"},{name:"literal",value:"'FP_VK_16'"},{name:"literal",value:"'FP_VK_2'"},{name:"literal",value:"'FP_VK_2_F'"},{name:"literal",value:"'FP_VK_2_L'"},{name:"literal",value:"'FP_VK_3'"},{name:"literal",value:"'FP_VK_4'"},{name:"literal",value:"'FP_VK_5'"},{name:"literal",value:"'FP_VK_8'"},{name:"literal",value:"'FP_VK_33'"},{name:"literal",value:"'FP_VK_34'"},{name:"literal",value:"'FP_VK_21'"},{name:"literal",value:"'FP_VK_23'"},{name:"literal",value:"'FP_VK_41'"},{name:"literal",value:"'SVP_VK_1'"},{name:"literal",value:"'-'"}],required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandlingGodkjent",value:{name:"union",raw:"boolean | null",elements:[{name:"boolean"},{name:"null"}],required:!0}},{key:"vurderPaNyttArsaker",value:{name:"union",raw:`Array<
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+> | null`,elements:[{name:"Array",elements:[{name:"union",raw:"'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'",elements:[{name:"literal",value:"'FEIL_FAKTA'"},{name:"literal",value:"'FEIL_LOV'"},{name:"literal",value:"'SKJØNN'"},{name:"literal",value:"'UTREDNING'"},{name:"literal",value:"'SAKSFLYT'"},{name:"literal",value:"'BEGRUNNELSE'"},{name:"literal",value:"'-'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'FEIL_REGEL'"}]}],raw:`Array<
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+>`},{name:"null"}],required:!0}},{key:"besluttersBegrunnelse",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"aksjonspunktType",value:{name:"union",raw:"'AUTO' | 'MANU' | 'OVST' | 'SAOV' | '-'",elements:[{name:"literal",value:"'AUTO'"},{name:"literal",value:"'MANU'"},{name:"literal",value:"'OVST'"},{name:"literal",value:"'SAOV'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"erAktivt",value:{name:"boolean",required:!0}},{key:"fristTid",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"endretTidspunkt",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"endretAv",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}}]}}],raw:"Aksjonspunkt[]"},{name:"signature",type:"object",raw:`{
+  definisjon:
+    | '5001'
+    | '5027'
+    | '5004'
+    | '5005'
+    | '5006'
+    | '5007'
+    | '5008'
+    | '5011'
+    | '5012'
+    | '5013'
+    | '5014'
+    | '5015'
+    | '5016'
+    | '5017'
+    | '5002'
+    | '5026'
+    | '5028'
+    | '5030'
+    | '5031'
+    | '5033'
+    | '5034'
+    | '5003'
+    | '5035'
+    | '5037'
+    | '5038'
+    | '5039'
+    | '5040'
+    | '5043'
+    | '5046'
+    | '5047'
+    | '5049'
+    | '5051'
+    | '5052'
+    | '5054'
+    | '5055'
+    | '5057'
+    | '5058'
+    | '5059'
+    | '5060'
+    | '5061'
+    | '5068'
+    | '5064'
+    | '5065'
+    | '5063'
+    | '5066'
+    | '5071'
+    | '5072'
+    | '5069'
+    | '5073'
+    | '5076'
+    | '5077'
+    | '5085'
+    | '5082'
+    | '5084'
+    | '5029'
+    | '5086'
+    | '5089'
+    | '5041'
+    | '5062'
+    | '5091'
+    | '5092'
+    | '5095'
+    | '5096'
+    | '5074'
+    | '5101'
+    | '5102'
+    | '5103'
+    | '6002'
+    | '6003'
+    | '6004'
+    | '6005'
+    | '6006'
+    | '6008'
+    | '6009'
+    | '6010'
+    | '6011'
+    | '6065'
+    | '6014'
+    | '6015'
+    | '6045'
+    | '6016'
+    | '6018'
+    | '6017'
+    | '6103'
+    | '7001'
+    | '7002'
+    | '7003'
+    | '7005'
+    | '7007'
+    | '7008'
+    | '7011'
+    | '7013'
+    | '7014'
+    | '7020'
+    | '7030'
+    | '7033'
+    | '7037'
+    | '7039'
+    | '7040'
+    | "UNDEFINED('null')"
+    | '5009'
+    | '5019'
+    | '5020'
+    | '5021'
+    | '5022'
+    | '5023'
+    | '5024'
+    | '5025'
+    | '5032'
+    | '5036'
+    | '5042'
+    | '5044'
+    | '5045'
+    | '5048'
+    | '5050'
+    | '5053'
+    | '5056'
+    | '5067'
+    | '5070'
+    | '5075'
+    | '5078'
+    | '5079'
+    | '5080'
+    | '5081'
+    | '5083'
+    | '5087'
+    | '5088'
+    | '5090'
+    | '5093'
+    | '5094'
+    | '5097'
+    | '5098'
+    | '5099'
+    | '6007'
+    | '6012'
+    | '6013'
+    | '6068'
+    | '6070'
+    | '7004'
+    | '7006'
+    | '7009'
+    | '7015'
+    | '7016'
+    | '7017'
+    | '7018'
+    | '7019'
+    | '7021'
+    | '7022'
+    | '7023'
+    | '7024'
+    | '7025'
+    | '7026'
+    | '7027'
+    | '7028'
+    | '7029'
+    | '7032'
+    | '7034'
+    | '7035'
+    | '7036'
+    | '7038'
+    | '7041';
+  status: 'AVBR' | 'OPPR' | 'UTFO';
+  begrunnelse: string | null;
+  vilkarType:
+    | 'FP_VK_1'
+    | 'FP_VK_11'
+    | 'FP_VK_16'
+    | 'FP_VK_2'
+    | 'FP_VK_2_F'
+    | 'FP_VK_2_L'
+    | 'FP_VK_3'
+    | 'FP_VK_4'
+    | 'FP_VK_5'
+    | 'FP_VK_8'
+    | 'FP_VK_33'
+    | 'FP_VK_34'
+    | 'FP_VK_21'
+    | 'FP_VK_23'
+    | 'FP_VK_41'
+    | 'SVP_VK_1'
+    | '-';
+  toTrinnsBehandling: boolean;
+  toTrinnsBehandlingGodkjent: boolean | null;
+  vurderPaNyttArsaker: Array<
+    'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+  > | null;
+  besluttersBegrunnelse: string | null;
+  aksjonspunktType: 'AUTO' | 'MANU' | 'OVST' | 'SAOV' | '-';
+  kanLoses: boolean;
+  erAktivt: boolean;
+  fristTid: string | null;
+  endretTidspunkt: string | null;
+  endretAv: string | null;
+}`,signature:{properties:[{key:"definisjon",value:{name:"union",raw:`| '5001'
+| '5027'
+| '5004'
+| '5005'
+| '5006'
+| '5007'
+| '5008'
+| '5011'
+| '5012'
+| '5013'
+| '5014'
+| '5015'
+| '5016'
+| '5017'
+| '5002'
+| '5026'
+| '5028'
+| '5030'
+| '5031'
+| '5033'
+| '5034'
+| '5003'
+| '5035'
+| '5037'
+| '5038'
+| '5039'
+| '5040'
+| '5043'
+| '5046'
+| '5047'
+| '5049'
+| '5051'
+| '5052'
+| '5054'
+| '5055'
+| '5057'
+| '5058'
+| '5059'
+| '5060'
+| '5061'
+| '5068'
+| '5064'
+| '5065'
+| '5063'
+| '5066'
+| '5071'
+| '5072'
+| '5069'
+| '5073'
+| '5076'
+| '5077'
+| '5085'
+| '5082'
+| '5084'
+| '5029'
+| '5086'
+| '5089'
+| '5041'
+| '5062'
+| '5091'
+| '5092'
+| '5095'
+| '5096'
+| '5074'
+| '5101'
+| '5102'
+| '5103'
+| '6002'
+| '6003'
+| '6004'
+| '6005'
+| '6006'
+| '6008'
+| '6009'
+| '6010'
+| '6011'
+| '6065'
+| '6014'
+| '6015'
+| '6045'
+| '6016'
+| '6018'
+| '6017'
+| '6103'
+| '7001'
+| '7002'
+| '7003'
+| '7005'
+| '7007'
+| '7008'
+| '7011'
+| '7013'
+| '7014'
+| '7020'
+| '7030'
+| '7033'
+| '7037'
+| '7039'
+| '7040'
+| "UNDEFINED('null')"
+| '5009'
+| '5019'
+| '5020'
+| '5021'
+| '5022'
+| '5023'
+| '5024'
+| '5025'
+| '5032'
+| '5036'
+| '5042'
+| '5044'
+| '5045'
+| '5048'
+| '5050'
+| '5053'
+| '5056'
+| '5067'
+| '5070'
+| '5075'
+| '5078'
+| '5079'
+| '5080'
+| '5081'
+| '5083'
+| '5087'
+| '5088'
+| '5090'
+| '5093'
+| '5094'
+| '5097'
+| '5098'
+| '5099'
+| '6007'
+| '6012'
+| '6013'
+| '6068'
+| '6070'
+| '7004'
+| '7006'
+| '7009'
+| '7015'
+| '7016'
+| '7017'
+| '7018'
+| '7019'
+| '7021'
+| '7022'
+| '7023'
+| '7024'
+| '7025'
+| '7026'
+| '7027'
+| '7028'
+| '7029'
+| '7032'
+| '7034'
+| '7035'
+| '7036'
+| '7038'
+| '7041'`,elements:[{name:"literal",value:"'5001'"},{name:"literal",value:"'5027'"},{name:"literal",value:"'5004'"},{name:"literal",value:"'5005'"},{name:"literal",value:"'5006'"},{name:"literal",value:"'5007'"},{name:"literal",value:"'5008'"},{name:"literal",value:"'5011'"},{name:"literal",value:"'5012'"},{name:"literal",value:"'5013'"},{name:"literal",value:"'5014'"},{name:"literal",value:"'5015'"},{name:"literal",value:"'5016'"},{name:"literal",value:"'5017'"},{name:"literal",value:"'5002'"},{name:"literal",value:"'5026'"},{name:"literal",value:"'5028'"},{name:"literal",value:"'5030'"},{name:"literal",value:"'5031'"},{name:"literal",value:"'5033'"},{name:"literal",value:"'5034'"},{name:"literal",value:"'5003'"},{name:"literal",value:"'5035'"},{name:"literal",value:"'5037'"},{name:"literal",value:"'5038'"},{name:"literal",value:"'5039'"},{name:"literal",value:"'5040'"},{name:"literal",value:"'5043'"},{name:"literal",value:"'5046'"},{name:"literal",value:"'5047'"},{name:"literal",value:"'5049'"},{name:"literal",value:"'5051'"},{name:"literal",value:"'5052'"},{name:"literal",value:"'5054'"},{name:"literal",value:"'5055'"},{name:"literal",value:"'5057'"},{name:"literal",value:"'5058'"},{name:"literal",value:"'5059'"},{name:"literal",value:"'5060'"},{name:"literal",value:"'5061'"},{name:"literal",value:"'5068'"},{name:"literal",value:"'5064'"},{name:"literal",value:"'5065'"},{name:"literal",value:"'5063'"},{name:"literal",value:"'5066'"},{name:"literal",value:"'5071'"},{name:"literal",value:"'5072'"},{name:"literal",value:"'5069'"},{name:"literal",value:"'5073'"},{name:"literal",value:"'5076'"},{name:"literal",value:"'5077'"},{name:"literal",value:"'5085'"},{name:"literal",value:"'5082'"},{name:"literal",value:"'5084'"},{name:"literal",value:"'5029'"},{name:"literal",value:"'5086'"},{name:"literal",value:"'5089'"},{name:"literal",value:"'5041'"},{name:"literal",value:"'5062'"},{name:"literal",value:"'5091'"},{name:"literal",value:"'5092'"},{name:"literal",value:"'5095'"},{name:"literal",value:"'5096'"},{name:"literal",value:"'5074'"},{name:"literal",value:"'5101'"},{name:"literal",value:"'5102'"},{name:"literal",value:"'5103'"},{name:"literal",value:"'6002'"},{name:"literal",value:"'6003'"},{name:"literal",value:"'6004'"},{name:"literal",value:"'6005'"},{name:"literal",value:"'6006'"},{name:"literal",value:"'6008'"},{name:"literal",value:"'6009'"},{name:"literal",value:"'6010'"},{name:"literal",value:"'6011'"},{name:"literal",value:"'6065'"},{name:"literal",value:"'6014'"},{name:"literal",value:"'6015'"},{name:"literal",value:"'6045'"},{name:"literal",value:"'6016'"},{name:"literal",value:"'6018'"},{name:"literal",value:"'6017'"},{name:"literal",value:"'6103'"},{name:"literal",value:"'7001'"},{name:"literal",value:"'7002'"},{name:"literal",value:"'7003'"},{name:"literal",value:"'7005'"},{name:"literal",value:"'7007'"},{name:"literal",value:"'7008'"},{name:"literal",value:"'7011'"},{name:"literal",value:"'7013'"},{name:"literal",value:"'7014'"},{name:"literal",value:"'7020'"},{name:"literal",value:"'7030'"},{name:"literal",value:"'7033'"},{name:"literal",value:"'7037'"},{name:"literal",value:"'7039'"},{name:"literal",value:"'7040'"},{name:"literal",value:`"UNDEFINED('null')"`},{name:"literal",value:"'5009'"},{name:"literal",value:"'5019'"},{name:"literal",value:"'5020'"},{name:"literal",value:"'5021'"},{name:"literal",value:"'5022'"},{name:"literal",value:"'5023'"},{name:"literal",value:"'5024'"},{name:"literal",value:"'5025'"},{name:"literal",value:"'5032'"},{name:"literal",value:"'5036'"},{name:"literal",value:"'5042'"},{name:"literal",value:"'5044'"},{name:"literal",value:"'5045'"},{name:"literal",value:"'5048'"},{name:"literal",value:"'5050'"},{name:"literal",value:"'5053'"},{name:"literal",value:"'5056'"},{name:"literal",value:"'5067'"},{name:"literal",value:"'5070'"},{name:"literal",value:"'5075'"},{name:"literal",value:"'5078'"},{name:"literal",value:"'5079'"},{name:"literal",value:"'5080'"},{name:"literal",value:"'5081'"},{name:"literal",value:"'5083'"},{name:"literal",value:"'5087'"},{name:"literal",value:"'5088'"},{name:"literal",value:"'5090'"},{name:"literal",value:"'5093'"},{name:"literal",value:"'5094'"},{name:"literal",value:"'5097'"},{name:"literal",value:"'5098'"},{name:"literal",value:"'5099'"},{name:"literal",value:"'6007'"},{name:"literal",value:"'6012'"},{name:"literal",value:"'6013'"},{name:"literal",value:"'6068'"},{name:"literal",value:"'6070'"},{name:"literal",value:"'7004'"},{name:"literal",value:"'7006'"},{name:"literal",value:"'7009'"},{name:"literal",value:"'7015'"},{name:"literal",value:"'7016'"},{name:"literal",value:"'7017'"},{name:"literal",value:"'7018'"},{name:"literal",value:"'7019'"},{name:"literal",value:"'7021'"},{name:"literal",value:"'7022'"},{name:"literal",value:"'7023'"},{name:"literal",value:"'7024'"},{name:"literal",value:"'7025'"},{name:"literal",value:"'7026'"},{name:"literal",value:"'7027'"},{name:"literal",value:"'7028'"},{name:"literal",value:"'7029'"},{name:"literal",value:"'7032'"},{name:"literal",value:"'7034'"},{name:"literal",value:"'7035'"},{name:"literal",value:"'7036'"},{name:"literal",value:"'7038'"},{name:"literal",value:"'7041'"}],required:!0}},{key:"status",value:{name:"union",raw:"'AVBR' | 'OPPR' | 'UTFO'",elements:[{name:"literal",value:"'AVBR'"},{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"}],required:!0}},{key:"begrunnelse",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"vilkarType",value:{name:"union",raw:`| 'FP_VK_1'
+| 'FP_VK_11'
+| 'FP_VK_16'
+| 'FP_VK_2'
+| 'FP_VK_2_F'
+| 'FP_VK_2_L'
+| 'FP_VK_3'
+| 'FP_VK_4'
+| 'FP_VK_5'
+| 'FP_VK_8'
+| 'FP_VK_33'
+| 'FP_VK_34'
+| 'FP_VK_21'
+| 'FP_VK_23'
+| 'FP_VK_41'
+| 'SVP_VK_1'
+| '-'`,elements:[{name:"literal",value:"'FP_VK_1'"},{name:"literal",value:"'FP_VK_11'"},{name:"literal",value:"'FP_VK_16'"},{name:"literal",value:"'FP_VK_2'"},{name:"literal",value:"'FP_VK_2_F'"},{name:"literal",value:"'FP_VK_2_L'"},{name:"literal",value:"'FP_VK_3'"},{name:"literal",value:"'FP_VK_4'"},{name:"literal",value:"'FP_VK_5'"},{name:"literal",value:"'FP_VK_8'"},{name:"literal",value:"'FP_VK_33'"},{name:"literal",value:"'FP_VK_34'"},{name:"literal",value:"'FP_VK_21'"},{name:"literal",value:"'FP_VK_23'"},{name:"literal",value:"'FP_VK_41'"},{name:"literal",value:"'SVP_VK_1'"},{name:"literal",value:"'-'"}],required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandlingGodkjent",value:{name:"union",raw:"boolean | null",elements:[{name:"boolean"},{name:"null"}],required:!0}},{key:"vurderPaNyttArsaker",value:{name:"union",raw:`Array<
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+> | null`,elements:[{name:"Array",elements:[{name:"union",raw:"'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'",elements:[{name:"literal",value:"'FEIL_FAKTA'"},{name:"literal",value:"'FEIL_LOV'"},{name:"literal",value:"'SKJØNN'"},{name:"literal",value:"'UTREDNING'"},{name:"literal",value:"'SAKSFLYT'"},{name:"literal",value:"'BEGRUNNELSE'"},{name:"literal",value:"'-'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'FEIL_REGEL'"}]}],raw:`Array<
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+>`},{name:"null"}],required:!0}},{key:"besluttersBegrunnelse",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"aksjonspunktType",value:{name:"union",raw:"'AUTO' | 'MANU' | 'OVST' | 'SAOV' | '-'",elements:[{name:"literal",value:"'AUTO'"},{name:"literal",value:"'MANU'"},{name:"literal",value:"'OVST'"},{name:"literal",value:"'SAOV'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"erAktivt",value:{name:"boolean",required:!0}},{key:"fristTid",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"endretTidspunkt",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"endretAv",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}}]}}]}}],returns:{type:{name:"signature",type:"object",raw:`{
+  begrunnelse: string | undefined;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"union",raw:"string | undefined",elements:[{name:"string"},{name:"undefined"}],required:!0}}]}}}},{name:"transformValues",docblock:null,modifiers:["static"],params:[{name:"values",optional:!1,type:{name:"signature",type:"object",raw:`{
+  begrunnelse: string | undefined;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"union",raw:"string | undefined",elements:[{name:"string"},{name:"undefined"}],required:!0}}]},alias:"FaktaBegrunnelseFormValues"}}],returns:{type:{name:"signature",type:"object",raw:`{
+  begrunnelse: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!0}}]}}}}],displayName:"FaktaBegrunnelseTextField",props:{control:{required:!0,tsType:{name:"UseControllerProps['control']",raw:"UseControllerProps<T>['control']"},description:""},isReadOnly:{required:!0,tsType:{name:"boolean"},description:""},isSubmittable:{required:!0,tsType:{name:"boolean"},description:""},hasBegrunnelse:{required:!0,tsType:{name:"boolean"},description:""},label:{required:!1,tsType:{name:"string"},description:""},hasReadOnlyLabel:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},hasVurderingText:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},size:{required:!1,tsType:{name:"union",raw:"'small' | 'medium'",elements:[{name:"literal",value:"'small'"},{name:"literal",value:"'medium'"}]},description:""}}};const G0=Rr(wa),O0=(e,l,r)=>!r||l?!0:!e,ef=({isReadOnly:e,isSubmittable:l,buttonText:r,onClick:t,isSubmitting:i,isDirty:u})=>le.jsx(Pu,{value:G0,children:!e&&le.jsx("div",{children:le.jsxs(oi,{size:"small",variant:"primary",loading:i,disabled:O0(u,i,l),onClick:t||Sg,type:t?"button":"submit",children:[!!r&&r,!r&&le.jsx(Kn,{id:"SubmitButton.ConfirmInformation"})]})})});ef.__docgenInfo={description:"FaktaSubmitButton",methods:[],displayName:"FaktaSubmitButton",props:{buttonText:{required:!1,tsType:{name:"string"},description:""},isReadOnly:{required:!0,tsType:{name:"boolean"},description:""},isSubmittable:{required:!0,tsType:{name:"boolean"},description:""},onClick:{required:!1,tsType:{name:"signature",type:"function",raw:"(event: React.MouseEvent) => void",signature:{arguments:[{type:{name:"ReactMouseEvent",raw:"React.MouseEvent"},name:"event"}],return:{name:"void"}}},description:""},isSubmitting:{required:!0,tsType:{name:"boolean"},description:""},isDirty:{required:!0,tsType:{name:"boolean"},description:""}}};Rr(wa);var Pa={exports:{}};/**
+ * @license
+ * Lodash <https://lodash.com/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */var k0=Pa.exports,ym;function F0(){return ym||(ym=1,function(e,l){(function(){var r,t="4.17.21",i=200,u="Unsupported core-js use. Try https://npms.io/search?q=ponyfill.",o="Expected a function",d="Invalid `variable` option passed into `_.template`",N="__lodash_hash_undefined__",f=500,R="__lodash_placeholder__",A=1,S=2,_=4,G=1,g=2,T=1,y=2,L=4,p=8,w=16,D=32,q=64,B=128,U=256,Y=512,ne=30,ee="...",H=800,V=16,M=1,z=2,re=3,X=1/0,$=9007199254740991,Z=17976931348623157e292,Ee=NaN,ue=4294967295,Re=ue-1,Te=ue>>>1,Tn=[["ary",B],["bind",T],["bindKey",y],["curry",p],["curryRight",w],["flip",Y],["partial",D],["partialRight",q],["rearg",U]],Je="[object Arguments]",xe="[object Array]",qe="[object AsyncFunction]",Pe="[object Boolean]",Oe="[object Date]",nn="[object DOMException]",ze="[object Error]",Xe="[object Function]",pn="[object GeneratorFunction]",He="[object Map]",sn="[object Number]",lr="[object Null]",on="[object Object]",ir="[object Promise]",jn="[object Proxy]",h="[object RegExp]",K="[object Set]",C="[object String]",se="[object Symbol]",ae="[object Undefined]",te="[object WeakMap]",fe="[object WeakSet]",Le="[object ArrayBuffer]",Fe="[object DataView]",vn="[object Float32Array]",Cr="[object Float64Array]",Yn="[object Int8Array]",Xt="[object Int16Array]",tt="[object Int32Array]",at="[object Uint8Array]",Zt="[object Uint8ClampedArray]",Pt="[object Uint16Array]",Qt="[object Uint32Array]",Ca=/\b__p \+= '';/g,Df=/\b(__p \+=) '' \+/g,Gf=/(__e\(.*?\)|\b__t\)) \+\n'';/g,Wu=/&(?:amp|lt|gt|quot|#39);/g,zu=/[&<>"']/g,Of=RegExp(Wu.source),kf=RegExp(zu.source),Ff=/<%-([\s\S]+?)%>/g,Kf=/<%([\s\S]+?)%>/g,Xu=/<%=([\s\S]+?)%>/g,Vf=/\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,Mf=/^\w*$/,Bf=/[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g,ci=/[\\^$.*+?()[\]{}|]/g,wf=RegExp(ci.source),vi=/^\s+/,Uf=/\s/,xf=/\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,qf=/\{\n\/\* \[wrapped with (.+)\] \*/,Hf=/,? & /,Cf=/[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g,jf=/[()=,{}\[\]\/\s]/,Yf=/\\(\\)?/g,Jf=/\$\{([^\\}]*(?:\\.[^\\}]*)*)\}/g,Zu=/\w*$/,$f=/^[-+]0x[0-9a-f]+$/i,Wf=/^0b[01]+$/i,zf=/^\[object .+?Constructor\]$/,Xf=/^0o[0-7]+$/i,Zf=/^(?:0|[1-9]\d*)$/,Qf=/[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g,ja=/($^)/,eR=/['\n\r\u2028\u2029\\]/g,Ya="\\ud800-\\udfff",nR="\\u0300-\\u036f",rR="\\ufe20-\\ufe2f",tR="\\u20d0-\\u20ff",Qu=nR+rR+tR,eo="\\u2700-\\u27bf",no="a-z\\xdf-\\xf6\\xf8-\\xff",aR="\\xac\\xb1\\xd7\\xf7",lR="\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf",iR="\\u2000-\\u206f",sR=" \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000",ro="A-Z\\xc0-\\xd6\\xd8-\\xde",to="\\ufe0e\\ufe0f",ao=aR+lR+iR+sR,Ai="['’]",uR="["+Ya+"]",lo="["+ao+"]",Ja="["+Qu+"]",io="\\d+",oR="["+eo+"]",so="["+no+"]",uo="[^"+Ya+ao+io+eo+no+ro+"]",Si="\\ud83c[\\udffb-\\udfff]",ER="(?:"+Ja+"|"+Si+")",oo="[^"+Ya+"]",_i="(?:\\ud83c[\\udde6-\\uddff]){2}",Ti="[\\ud800-\\udbff][\\udc00-\\udfff]",ht="["+ro+"]",Eo="\\u200d",mo="(?:"+so+"|"+uo+")",dR="(?:"+ht+"|"+uo+")",No="(?:"+Ai+"(?:d|ll|m|re|s|t|ve))?",fo="(?:"+Ai+"(?:D|LL|M|RE|S|T|VE))?",Ro=ER+"?",co="["+to+"]?",mR="(?:"+Eo+"(?:"+[oo,_i,Ti].join("|")+")"+co+Ro+")*",NR="\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])",fR="\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])",vo=co+Ro+mR,RR="(?:"+[oR,_i,Ti].join("|")+")"+vo,cR="(?:"+[oo+Ja+"?",Ja,_i,Ti,uR].join("|")+")",vR=RegExp(Ai,"g"),AR=RegExp(Ja,"g"),gi=RegExp(Si+"(?="+Si+")|"+cR+vo,"g"),SR=RegExp([ht+"?"+so+"+"+No+"(?="+[lo,ht,"$"].join("|")+")",dR+"+"+fo+"(?="+[lo,ht+mo,"$"].join("|")+")",ht+"?"+mo+"+"+No,ht+"+"+fo,fR,NR,io,RR].join("|"),"g"),_R=RegExp("["+Eo+Ya+Qu+to+"]"),TR=/[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/,gR=["Array","Buffer","DataView","Date","Error","Float32Array","Float64Array","Function","Int8Array","Int16Array","Int32Array","Map","Math","Object","Promise","RegExp","Set","String","Symbol","TypeError","Uint8Array","Uint8ClampedArray","Uint16Array","Uint32Array","WeakMap","_","clearTimeout","isFinite","parseInt","setTimeout"],IR=-1,$e={};$e[vn]=$e[Cr]=$e[Yn]=$e[Xt]=$e[tt]=$e[at]=$e[Zt]=$e[Pt]=$e[Qt]=!0,$e[Je]=$e[xe]=$e[Le]=$e[Pe]=$e[Fe]=$e[Oe]=$e[ze]=$e[Xe]=$e[He]=$e[sn]=$e[on]=$e[h]=$e[K]=$e[C]=$e[te]=!1;var Ce={};Ce[Je]=Ce[xe]=Ce[Le]=Ce[Fe]=Ce[Pe]=Ce[Oe]=Ce[vn]=Ce[Cr]=Ce[Yn]=Ce[Xt]=Ce[tt]=Ce[He]=Ce[sn]=Ce[on]=Ce[h]=Ce[K]=Ce[C]=Ce[se]=Ce[at]=Ce[Zt]=Ce[Pt]=Ce[Qt]=!0,Ce[ze]=Ce[Xe]=Ce[te]=!1;var PR={À:"A",Á:"A",Â:"A",Ã:"A",Ä:"A",Å:"A",à:"a",á:"a",â:"a",ã:"a",ä:"a",å:"a",Ç:"C",ç:"c",Ð:"D",ð:"d",È:"E",É:"E",Ê:"E",Ë:"E",è:"e",é:"e",ê:"e",ë:"e",Ì:"I",Í:"I",Î:"I",Ï:"I",ì:"i",í:"i",î:"i",ï:"i",Ñ:"N",ñ:"n",Ò:"O",Ó:"O",Ô:"O",Õ:"O",Ö:"O",Ø:"O",ò:"o",ó:"o",ô:"o",õ:"o",ö:"o",ø:"o",Ù:"U",Ú:"U",Û:"U",Ü:"U",ù:"u",ú:"u",û:"u",ü:"u",Ý:"Y",ý:"y",ÿ:"y",Æ:"Ae",æ:"ae",Þ:"Th",þ:"th",ß:"ss",Ā:"A",Ă:"A",Ą:"A",ā:"a",ă:"a",ą:"a",Ć:"C",Ĉ:"C",Ċ:"C",Č:"C",ć:"c",ĉ:"c",ċ:"c",č:"c",Ď:"D",Đ:"D",ď:"d",đ:"d",Ē:"E",Ĕ:"E",Ė:"E",Ę:"E",Ě:"E",ē:"e",ĕ:"e",ė:"e",ę:"e",ě:"e",Ĝ:"G",Ğ:"G",Ġ:"G",Ģ:"G",ĝ:"g",ğ:"g",ġ:"g",ģ:"g",Ĥ:"H",Ħ:"H",ĥ:"h",ħ:"h",Ĩ:"I",Ī:"I",Ĭ:"I",Į:"I",İ:"I",ĩ:"i",ī:"i",ĭ:"i",į:"i",ı:"i",Ĵ:"J",ĵ:"j",Ķ:"K",ķ:"k",ĸ:"k",Ĺ:"L",Ļ:"L",Ľ:"L",Ŀ:"L",Ł:"L",ĺ:"l",ļ:"l",ľ:"l",ŀ:"l",ł:"l",Ń:"N",Ņ:"N",Ň:"N",Ŋ:"N",ń:"n",ņ:"n",ň:"n",ŋ:"n",Ō:"O",Ŏ:"O",Ő:"O",ō:"o",ŏ:"o",ő:"o",Ŕ:"R",Ŗ:"R",Ř:"R",ŕ:"r",ŗ:"r",ř:"r",Ś:"S",Ŝ:"S",Ş:"S",Š:"S",ś:"s",ŝ:"s",ş:"s",š:"s",Ţ:"T",Ť:"T",Ŧ:"T",ţ:"t",ť:"t",ŧ:"t",Ũ:"U",Ū:"U",Ŭ:"U",Ů:"U",Ű:"U",Ų:"U",ũ:"u",ū:"u",ŭ:"u",ů:"u",ű:"u",ų:"u",Ŵ:"W",ŵ:"w",Ŷ:"Y",ŷ:"y",Ÿ:"Y",Ź:"Z",Ż:"Z",Ž:"Z",ź:"z",ż:"z",ž:"z",Ĳ:"IJ",ĳ:"ij",Œ:"Oe",œ:"oe",ŉ:"'n",ſ:"s"},hR={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"},yR={"&amp;":"&","&lt;":"<","&gt;":">","&quot;":'"',"&#39;":"'"},pR={"\\":"\\","'":"'","\n":"n","\r":"r","\u2028":"u2028","\u2029":"u2029"},bR=parseFloat,LR=parseInt,Ao=typeof kl=="object"&&kl&&kl.Object===Object&&kl,DR=typeof self=="object"&&self&&self.Object===Object&&self,fn=Ao||DR||Function("return this")(),Ii=l&&!l.nodeType&&l,lt=Ii&&!0&&e&&!e.nodeType&&e,So=lt&&lt.exports===Ii,Pi=So&&Ao.process,Jn=function(){try{var O=lt&&lt.require&&lt.require("util").types;return O||Pi&&Pi.binding&&Pi.binding("util")}catch{}}(),_o=Jn&&Jn.isArrayBuffer,To=Jn&&Jn.isDate,go=Jn&&Jn.isMap,Io=Jn&&Jn.isRegExp,Po=Jn&&Jn.isSet,ho=Jn&&Jn.isTypedArray;function Mn(O,j,x){switch(x.length){case 0:return O.call(j);case 1:return O.call(j,x[0]);case 2:return O.call(j,x[0],x[1]);case 3:return O.call(j,x[0],x[1],x[2])}return O.apply(j,x)}function GR(O,j,x,de){for(var Se=-1,Ke=O==null?0:O.length;++Se<Ke;){var En=O[Se];j(de,En,x(En),O)}return de}function $n(O,j){for(var x=-1,de=O==null?0:O.length;++x<de&&j(O[x],x,O)!==!1;);return O}function OR(O,j){for(var x=O==null?0:O.length;x--&&j(O[x],x,O)!==!1;);return O}function yo(O,j){for(var x=-1,de=O==null?0:O.length;++x<de;)if(!j(O[x],x,O))return!1;return!0}function jr(O,j){for(var x=-1,de=O==null?0:O.length,Se=0,Ke=[];++x<de;){var En=O[x];j(En,x,O)&&(Ke[Se++]=En)}return Ke}function $a(O,j){var x=O==null?0:O.length;return!!x&&yt(O,j,0)>-1}function hi(O,j,x){for(var de=-1,Se=O==null?0:O.length;++de<Se;)if(x(j,O[de]))return!0;return!1}function Ze(O,j){for(var x=-1,de=O==null?0:O.length,Se=Array(de);++x<de;)Se[x]=j(O[x],x,O);return Se}function Yr(O,j){for(var x=-1,de=j.length,Se=O.length;++x<de;)O[Se+x]=j[x];return O}function yi(O,j,x,de){var Se=-1,Ke=O==null?0:O.length;for(de&&Ke&&(x=O[++Se]);++Se<Ke;)x=j(x,O[Se],Se,O);return x}function kR(O,j,x,de){var Se=O==null?0:O.length;for(de&&Se&&(x=O[--Se]);Se--;)x=j(x,O[Se],Se,O);return x}function pi(O,j){for(var x=-1,de=O==null?0:O.length;++x<de;)if(j(O[x],x,O))return!0;return!1}var FR=bi("length");function KR(O){return O.split("")}function VR(O){return O.match(Cf)||[]}function po(O,j,x){var de;return x(O,function(Se,Ke,En){if(j(Se,Ke,En))return de=Ke,!1}),de}function Wa(O,j,x,de){for(var Se=O.length,Ke=x+(de?1:-1);de?Ke--:++Ke<Se;)if(j(O[Ke],Ke,O))return Ke;return-1}function yt(O,j,x){return j===j?$R(O,j,x):Wa(O,bo,x)}function MR(O,j,x,de){for(var Se=x-1,Ke=O.length;++Se<Ke;)if(de(O[Se],j))return Se;return-1}function bo(O){return O!==O}function Lo(O,j){var x=O==null?0:O.length;return x?Di(O,j)/x:Ee}function bi(O){return function(j){return j==null?r:j[O]}}function Li(O){return function(j){return O==null?r:O[j]}}function Do(O,j,x,de,Se){return Se(O,function(Ke,En,Ue){x=de?(de=!1,Ke):j(x,Ke,En,Ue)}),x}function BR(O,j){var x=O.length;for(O.sort(j);x--;)O[x]=O[x].value;return O}function Di(O,j){for(var x,de=-1,Se=O.length;++de<Se;){var Ke=j(O[de]);Ke!==r&&(x=x===r?Ke:x+Ke)}return x}function Gi(O,j){for(var x=-1,de=Array(O);++x<O;)de[x]=j(x);return de}function wR(O,j){return Ze(j,function(x){return[x,O[x]]})}function Go(O){return O&&O.slice(0,Ko(O)+1).replace(vi,"")}function Bn(O){return function(j){return O(j)}}function Oi(O,j){return Ze(j,function(x){return O[x]})}function ea(O,j){return O.has(j)}function Oo(O,j){for(var x=-1,de=O.length;++x<de&&yt(j,O[x],0)>-1;);return x}function ko(O,j){for(var x=O.length;x--&&yt(j,O[x],0)>-1;);return x}function UR(O,j){for(var x=O.length,de=0;x--;)O[x]===j&&++de;return de}var xR=Li(PR),qR=Li(hR);function HR(O){return"\\"+pR[O]}function CR(O,j){return O==null?r:O[j]}function pt(O){return _R.test(O)}function jR(O){return TR.test(O)}function YR(O){for(var j,x=[];!(j=O.next()).done;)x.push(j.value);return x}function ki(O){var j=-1,x=Array(O.size);return O.forEach(function(de,Se){x[++j]=[Se,de]}),x}function Fo(O,j){return function(x){return O(j(x))}}function Jr(O,j){for(var x=-1,de=O.length,Se=0,Ke=[];++x<de;){var En=O[x];(En===j||En===R)&&(O[x]=R,Ke[Se++]=x)}return Ke}function za(O){var j=-1,x=Array(O.size);return O.forEach(function(de){x[++j]=de}),x}function JR(O){var j=-1,x=Array(O.size);return O.forEach(function(de){x[++j]=[de,de]}),x}function $R(O,j,x){for(var de=x-1,Se=O.length;++de<Se;)if(O[de]===j)return de;return-1}function WR(O,j,x){for(var de=x+1;de--;)if(O[de]===j)return de;return de}function bt(O){return pt(O)?XR(O):FR(O)}function sr(O){return pt(O)?ZR(O):KR(O)}function Ko(O){for(var j=O.length;j--&&Uf.test(O.charAt(j)););return j}var zR=Li(yR);function XR(O){for(var j=gi.lastIndex=0;gi.test(O);)++j;return j}function ZR(O){return O.match(gi)||[]}function QR(O){return O.match(SR)||[]}var ec=function O(j){j=j==null?fn:Lt.defaults(fn.Object(),j,Lt.pick(fn,gR));var x=j.Array,de=j.Date,Se=j.Error,Ke=j.Function,En=j.Math,Ue=j.Object,Fi=j.RegExp,nc=j.String,Wn=j.TypeError,Xa=x.prototype,rc=Ke.prototype,Dt=Ue.prototype,Za=j["__core-js_shared__"],Qa=rc.toString,we=Dt.hasOwnProperty,tc=0,Vo=function(){var n=/[^.]+$/.exec(Za&&Za.keys&&Za.keys.IE_PROTO||"");return n?"Symbol(src)_1."+n:""}(),el=Dt.toString,ac=Qa.call(Ue),lc=fn._,ic=Fi("^"+Qa.call(we).replace(ci,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$"),nl=So?j.Buffer:r,$r=j.Symbol,rl=j.Uint8Array,Mo=nl?nl.allocUnsafe:r,tl=Fo(Ue.getPrototypeOf,Ue),Bo=Ue.create,wo=Dt.propertyIsEnumerable,al=Xa.splice,Uo=$r?$r.isConcatSpreadable:r,na=$r?$r.iterator:r,it=$r?$r.toStringTag:r,ll=function(){try{var n=dt(Ue,"defineProperty");return n({},"",{}),n}catch{}}(),sc=j.clearTimeout!==fn.clearTimeout&&j.clearTimeout,uc=de&&de.now!==fn.Date.now&&de.now,oc=j.setTimeout!==fn.setTimeout&&j.setTimeout,il=En.ceil,sl=En.floor,Ki=Ue.getOwnPropertySymbols,Ec=nl?nl.isBuffer:r,xo=j.isFinite,dc=Xa.join,mc=Fo(Ue.keys,Ue),dn=En.max,An=En.min,Nc=de.now,fc=j.parseInt,qo=En.random,Rc=Xa.reverse,Vi=dt(j,"DataView"),ra=dt(j,"Map"),Mi=dt(j,"Promise"),Gt=dt(j,"Set"),ta=dt(j,"WeakMap"),aa=dt(Ue,"create"),ul=ta&&new ta,Ot={},cc=mt(Vi),vc=mt(ra),Ac=mt(Mi),Sc=mt(Gt),_c=mt(ta),ol=$r?$r.prototype:r,la=ol?ol.valueOf:r,Ho=ol?ol.toString:r;function c(n){if(en(n)&&!_e(n)&&!(n instanceof pe)){if(n instanceof zn)return n;if(we.call(n,"__wrapped__"))return CE(n)}return new zn(n)}var kt=function(){function n(){}return function(a){if(!Qe(a))return{};if(Bo)return Bo(a);n.prototype=a;var s=new n;return n.prototype=r,s}}();function El(){}function zn(n,a){this.__wrapped__=n,this.__actions__=[],this.__chain__=!!a,this.__index__=0,this.__values__=r}c.templateSettings={escape:Ff,evaluate:Kf,interpolate:Xu,variable:"",imports:{_:c}},c.prototype=El.prototype,c.prototype.constructor=c,zn.prototype=kt(El.prototype),zn.prototype.constructor=zn;function pe(n){this.__wrapped__=n,this.__actions__=[],this.__dir__=1,this.__filtered__=!1,this.__iteratees__=[],this.__takeCount__=ue,this.__views__=[]}function Tc(){var n=new pe(this.__wrapped__);return n.__actions__=bn(this.__actions__),n.__dir__=this.__dir__,n.__filtered__=this.__filtered__,n.__iteratees__=bn(this.__iteratees__),n.__takeCount__=this.__takeCount__,n.__views__=bn(this.__views__),n}function gc(){if(this.__filtered__){var n=new pe(this);n.__dir__=-1,n.__filtered__=!0}else n=this.clone(),n.__dir__*=-1;return n}function Ic(){var n=this.__wrapped__.value(),a=this.__dir__,s=_e(n),E=a<0,m=s?n.length:0,v=Kv(0,m,this.__views__),I=v.start,b=v.end,F=b-I,J=E?b:I-1,W=this.__iteratees__,Q=W.length,ie=0,Ne=An(F,this.__takeCount__);if(!s||!E&&m==F&&Ne==F)return NE(n,this.__actions__);var ve=[];e:for(;F--&&ie<Ne;){J+=a;for(var Ie=-1,Ae=n[J];++Ie<Q;){var ye=W[Ie],De=ye.iteratee,xn=ye.type,Pn=De(Ae);if(xn==z)Ae=Pn;else if(!Pn){if(xn==M)continue e;break e}}ve[ie++]=Ae}return ve}pe.prototype=kt(El.prototype),pe.prototype.constructor=pe;function st(n){var a=-1,s=n==null?0:n.length;for(this.clear();++a<s;){var E=n[a];this.set(E[0],E[1])}}function Pc(){this.__data__=aa?aa(null):{},this.size=0}function hc(n){var a=this.has(n)&&delete this.__data__[n];return this.size-=a?1:0,a}function yc(n){var a=this.__data__;if(aa){var s=a[n];return s===N?r:s}return we.call(a,n)?a[n]:r}function pc(n){var a=this.__data__;return aa?a[n]!==r:we.call(a,n)}function bc(n,a){var s=this.__data__;return this.size+=this.has(n)?0:1,s[n]=aa&&a===r?N:a,this}st.prototype.clear=Pc,st.prototype.delete=hc,st.prototype.get=yc,st.prototype.has=pc,st.prototype.set=bc;function br(n){var a=-1,s=n==null?0:n.length;for(this.clear();++a<s;){var E=n[a];this.set(E[0],E[1])}}function Lc(){this.__data__=[],this.size=0}function Dc(n){var a=this.__data__,s=dl(a,n);if(s<0)return!1;var E=a.length-1;return s==E?a.pop():al.call(a,s,1),--this.size,!0}function Gc(n){var a=this.__data__,s=dl(a,n);return s<0?r:a[s][1]}function Oc(n){return dl(this.__data__,n)>-1}function kc(n,a){var s=this.__data__,E=dl(s,n);return E<0?(++this.size,s.push([n,a])):s[E][1]=a,this}br.prototype.clear=Lc,br.prototype.delete=Dc,br.prototype.get=Gc,br.prototype.has=Oc,br.prototype.set=kc;function Lr(n){var a=-1,s=n==null?0:n.length;for(this.clear();++a<s;){var E=n[a];this.set(E[0],E[1])}}function Fc(){this.size=0,this.__data__={hash:new st,map:new(ra||br),string:new st}}function Kc(n){var a=Il(this,n).delete(n);return this.size-=a?1:0,a}function Vc(n){return Il(this,n).get(n)}function Mc(n){return Il(this,n).has(n)}function Bc(n,a){var s=Il(this,n),E=s.size;return s.set(n,a),this.size+=s.size==E?0:1,this}Lr.prototype.clear=Fc,Lr.prototype.delete=Kc,Lr.prototype.get=Vc,Lr.prototype.has=Mc,Lr.prototype.set=Bc;function ut(n){var a=-1,s=n==null?0:n.length;for(this.__data__=new Lr;++a<s;)this.add(n[a])}function wc(n){return this.__data__.set(n,N),this}function Uc(n){return this.__data__.has(n)}ut.prototype.add=ut.prototype.push=wc,ut.prototype.has=Uc;function ur(n){var a=this.__data__=new br(n);this.size=a.size}function xc(){this.__data__=new br,this.size=0}function qc(n){var a=this.__data__,s=a.delete(n);return this.size=a.size,s}function Hc(n){return this.__data__.get(n)}function Cc(n){return this.__data__.has(n)}function jc(n,a){var s=this.__data__;if(s instanceof br){var E=s.__data__;if(!ra||E.length<i-1)return E.push([n,a]),this.size=++s.size,this;s=this.__data__=new Lr(E)}return s.set(n,a),this.size=s.size,this}ur.prototype.clear=xc,ur.prototype.delete=qc,ur.prototype.get=Hc,ur.prototype.has=Cc,ur.prototype.set=jc;function Co(n,a){var s=_e(n),E=!s&&Nt(n),m=!s&&!E&&Qr(n),v=!s&&!E&&!m&&Mt(n),I=s||E||m||v,b=I?Gi(n.length,nc):[],F=b.length;for(var J in n)(a||we.call(n,J))&&!(I&&(J=="length"||m&&(J=="offset"||J=="parent")||v&&(J=="buffer"||J=="byteLength"||J=="byteOffset")||kr(J,F)))&&b.push(J);return b}function jo(n){var a=n.length;return a?n[$i(0,a-1)]:r}function Yc(n,a){return Pl(bn(n),ot(a,0,n.length))}function Jc(n){return Pl(bn(n))}function Bi(n,a,s){(s!==r&&!or(n[a],s)||s===r&&!(a in n))&&Dr(n,a,s)}function ia(n,a,s){var E=n[a];(!(we.call(n,a)&&or(E,s))||s===r&&!(a in n))&&Dr(n,a,s)}function dl(n,a){for(var s=n.length;s--;)if(or(n[s][0],a))return s;return-1}function $c(n,a,s,E){return Wr(n,function(m,v,I){a(E,m,s(m),I)}),E}function Yo(n,a){return n&&Ar(a,Nn(a),n)}function Wc(n,a){return n&&Ar(a,Dn(a),n)}function Dr(n,a,s){a=="__proto__"&&ll?ll(n,a,{configurable:!0,enumerable:!0,value:s,writable:!0}):n[a]=s}function wi(n,a){for(var s=-1,E=a.length,m=x(E),v=n==null;++s<E;)m[s]=v?r:Ss(n,a[s]);return m}function ot(n,a,s){return n===n&&(s!==r&&(n=n<=s?n:s),a!==r&&(n=n>=a?n:a)),n}function Xn(n,a,s,E,m,v){var I,b=a&A,F=a&S,J=a&_;if(s&&(I=m?s(n,E,m,v):s(n)),I!==r)return I;if(!Qe(n))return n;var W=_e(n);if(W){if(I=Mv(n),!b)return bn(n,I)}else{var Q=Sn(n),ie=Q==Xe||Q==pn;if(Qr(n))return cE(n,b);if(Q==on||Q==Je||ie&&!m){if(I=F||ie?{}:KE(n),!b)return F?yv(n,Wc(I,n)):hv(n,Yo(I,n))}else{if(!Ce[Q])return m?n:{};I=Bv(n,Q,b)}}v||(v=new ur);var Ne=v.get(n);if(Ne)return Ne;v.set(n,I),Ed(n)?n.forEach(function(Ae){I.add(Xn(Ae,a,s,Ae,n,v))}):ud(n)&&n.forEach(function(Ae,ye){I.set(ye,Xn(Ae,a,s,ye,n,v))});var ve=J?F?ls:as:F?Dn:Nn,Ie=W?r:ve(n);return $n(Ie||n,function(Ae,ye){Ie&&(ye=Ae,Ae=n[ye]),ia(I,ye,Xn(Ae,a,s,ye,n,v))}),I}function zc(n){var a=Nn(n);return function(s){return Jo(s,n,a)}}function Jo(n,a,s){var E=s.length;if(n==null)return!E;for(n=Ue(n);E--;){var m=s[E],v=a[m],I=n[m];if(I===r&&!(m in n)||!v(I))return!1}return!0}function $o(n,a,s){if(typeof n!="function")throw new Wn(o);return Na(function(){n.apply(r,s)},a)}function sa(n,a,s,E){var m=-1,v=$a,I=!0,b=n.length,F=[],J=a.length;if(!b)return F;s&&(a=Ze(a,Bn(s))),E?(v=hi,I=!1):a.length>=i&&(v=ea,I=!1,a=new ut(a));e:for(;++m<b;){var W=n[m],Q=s==null?W:s(W);if(W=E||W!==0?W:0,I&&Q===Q){for(var ie=J;ie--;)if(a[ie]===Q)continue e;F.push(W)}else v(a,Q,E)||F.push(W)}return F}var Wr=TE(vr),Wo=TE(xi,!0);function Xc(n,a){var s=!0;return Wr(n,function(E,m,v){return s=!!a(E,m,v),s}),s}function ml(n,a,s){for(var E=-1,m=n.length;++E<m;){var v=n[E],I=a(v);if(I!=null&&(b===r?I===I&&!Un(I):s(I,b)))var b=I,F=v}return F}function Zc(n,a,s,E){var m=n.length;for(s=ge(s),s<0&&(s=-s>m?0:m+s),E=E===r||E>m?m:ge(E),E<0&&(E+=m),E=s>E?0:md(E);s<E;)n[s++]=a;return n}function zo(n,a){var s=[];return Wr(n,function(E,m,v){a(E,m,v)&&s.push(E)}),s}function Rn(n,a,s,E,m){var v=-1,I=n.length;for(s||(s=Uv),m||(m=[]);++v<I;){var b=n[v];a>0&&s(b)?a>1?Rn(b,a-1,s,E,m):Yr(m,b):E||(m[m.length]=b)}return m}var Ui=gE(),Xo=gE(!0);function vr(n,a){return n&&Ui(n,a,Nn)}function xi(n,a){return n&&Xo(n,a,Nn)}function Nl(n,a){return jr(a,function(s){return Fr(n[s])})}function Et(n,a){a=Xr(a,n);for(var s=0,E=a.length;n!=null&&s<E;)n=n[Sr(a[s++])];return s&&s==E?n:r}function Zo(n,a,s){var E=a(n);return _e(n)?E:Yr(E,s(n))}function gn(n){return n==null?n===r?ae:lr:it&&it in Ue(n)?Fv(n):Jv(n)}function qi(n,a){return n>a}function Qc(n,a){return n!=null&&we.call(n,a)}function ev(n,a){return n!=null&&a in Ue(n)}function nv(n,a,s){return n>=An(a,s)&&n<dn(a,s)}function Hi(n,a,s){for(var E=s?hi:$a,m=n[0].length,v=n.length,I=v,b=x(v),F=1/0,J=[];I--;){var W=n[I];I&&a&&(W=Ze(W,Bn(a))),F=An(W.length,F),b[I]=!s&&(a||m>=120&&W.length>=120)?new ut(I&&W):r}W=n[0];var Q=-1,ie=b[0];e:for(;++Q<m&&J.length<F;){var Ne=W[Q],ve=a?a(Ne):Ne;if(Ne=s||Ne!==0?Ne:0,!(ie?ea(ie,ve):E(J,ve,s))){for(I=v;--I;){var Ie=b[I];if(!(Ie?ea(Ie,ve):E(n[I],ve,s)))continue e}ie&&ie.push(ve),J.push(Ne)}}return J}function rv(n,a,s,E){return vr(n,function(m,v,I){a(E,s(m),v,I)}),E}function ua(n,a,s){a=Xr(a,n),n=wE(n,a);var E=n==null?n:n[Sr(Qn(a))];return E==null?r:Mn(E,n,s)}function Qo(n){return en(n)&&gn(n)==Je}function tv(n){return en(n)&&gn(n)==Le}function av(n){return en(n)&&gn(n)==Oe}function oa(n,a,s,E,m){return n===a?!0:n==null||a==null||!en(n)&&!en(a)?n!==n&&a!==a:lv(n,a,s,E,oa,m)}function lv(n,a,s,E,m,v){var I=_e(n),b=_e(a),F=I?xe:Sn(n),J=b?xe:Sn(a);F=F==Je?on:F,J=J==Je?on:J;var W=F==on,Q=J==on,ie=F==J;if(ie&&Qr(n)){if(!Qr(a))return!1;I=!0,W=!1}if(ie&&!W)return v||(v=new ur),I||Mt(n)?OE(n,a,s,E,m,v):Ov(n,a,F,s,E,m,v);if(!(s&G)){var Ne=W&&we.call(n,"__wrapped__"),ve=Q&&we.call(a,"__wrapped__");if(Ne||ve){var Ie=Ne?n.value():n,Ae=ve?a.value():a;return v||(v=new ur),m(Ie,Ae,s,E,v)}}return ie?(v||(v=new ur),kv(n,a,s,E,m,v)):!1}function iv(n){return en(n)&&Sn(n)==He}function Ci(n,a,s,E){var m=s.length,v=m,I=!E;if(n==null)return!v;for(n=Ue(n);m--;){var b=s[m];if(I&&b[2]?b[1]!==n[b[0]]:!(b[0]in n))return!1}for(;++m<v;){b=s[m];var F=b[0],J=n[F],W=b[1];if(I&&b[2]){if(J===r&&!(F in n))return!1}else{var Q=new ur;if(E)var ie=E(J,W,F,n,a,Q);if(!(ie===r?oa(W,J,G|g,E,Q):ie))return!1}}return!0}function eE(n){if(!Qe(n)||qv(n))return!1;var a=Fr(n)?ic:zf;return a.test(mt(n))}function sv(n){return en(n)&&gn(n)==h}function uv(n){return en(n)&&Sn(n)==K}function ov(n){return en(n)&&Dl(n.length)&&!!$e[gn(n)]}function nE(n){return typeof n=="function"?n:n==null?Gn:typeof n=="object"?_e(n)?aE(n[0],n[1]):tE(n):Id(n)}function ji(n){if(!ma(n))return mc(n);var a=[];for(var s in Ue(n))we.call(n,s)&&s!="constructor"&&a.push(s);return a}function Ev(n){if(!Qe(n))return Yv(n);var a=ma(n),s=[];for(var E in n)E=="constructor"&&(a||!we.call(n,E))||s.push(E);return s}function Yi(n,a){return n<a}function rE(n,a){var s=-1,E=Ln(n)?x(n.length):[];return Wr(n,function(m,v,I){E[++s]=a(m,v,I)}),E}function tE(n){var a=ss(n);return a.length==1&&a[0][2]?ME(a[0][0],a[0][1]):function(s){return s===n||Ci(s,n,a)}}function aE(n,a){return os(n)&&VE(a)?ME(Sr(n),a):function(s){var E=Ss(s,n);return E===r&&E===a?_s(s,n):oa(a,E,G|g)}}function fl(n,a,s,E,m){n!==a&&Ui(a,function(v,I){if(m||(m=new ur),Qe(v))dv(n,a,I,s,fl,E,m);else{var b=E?E(ds(n,I),v,I+"",n,a,m):r;b===r&&(b=v),Bi(n,I,b)}},Dn)}function dv(n,a,s,E,m,v,I){var b=ds(n,s),F=ds(a,s),J=I.get(F);if(J){Bi(n,s,J);return}var W=v?v(b,F,s+"",n,a,I):r,Q=W===r;if(Q){var ie=_e(F),Ne=!ie&&Qr(F),ve=!ie&&!Ne&&Mt(F);W=F,ie||Ne||ve?_e(b)?W=b:rn(b)?W=bn(b):Ne?(Q=!1,W=cE(F,!0)):ve?(Q=!1,W=vE(F,!0)):W=[]:fa(F)||Nt(F)?(W=b,Nt(b)?W=Nd(b):(!Qe(b)||Fr(b))&&(W=KE(F))):Q=!1}Q&&(I.set(F,W),m(W,F,E,v,I),I.delete(F)),Bi(n,s,W)}function lE(n,a){var s=n.length;if(s)return a+=a<0?s:0,kr(a,s)?n[a]:r}function iE(n,a,s){a.length?a=Ze(a,function(v){return _e(v)?function(I){return Et(I,v.length===1?v[0]:v)}:v}):a=[Gn];var E=-1;a=Ze(a,Bn(ce()));var m=rE(n,function(v,I,b){var F=Ze(a,function(J){return J(v)});return{criteria:F,index:++E,value:v}});return BR(m,function(v,I){return Pv(v,I,s)})}function mv(n,a){return sE(n,a,function(s,E){return _s(n,E)})}function sE(n,a,s){for(var E=-1,m=a.length,v={};++E<m;){var I=a[E],b=Et(n,I);s(b,I)&&Ea(v,Xr(I,n),b)}return v}function Nv(n){return function(a){return Et(a,n)}}function Ji(n,a,s,E){var m=E?MR:yt,v=-1,I=a.length,b=n;for(n===a&&(a=bn(a)),s&&(b=Ze(n,Bn(s)));++v<I;)for(var F=0,J=a[v],W=s?s(J):J;(F=m(b,W,F,E))>-1;)b!==n&&al.call(b,F,1),al.call(n,F,1);return n}function uE(n,a){for(var s=n?a.length:0,E=s-1;s--;){var m=a[s];if(s==E||m!==v){var v=m;kr(m)?al.call(n,m,1):Xi(n,m)}}return n}function $i(n,a){return n+sl(qo()*(a-n+1))}function fv(n,a,s,E){for(var m=-1,v=dn(il((a-n)/(s||1)),0),I=x(v);v--;)I[E?v:++m]=n,n+=s;return I}function Wi(n,a){var s="";if(!n||a<1||a>$)return s;do a%2&&(s+=n),a=sl(a/2),a&&(n+=n);while(a);return s}function he(n,a){return ms(BE(n,a,Gn),n+"")}function Rv(n){return jo(Bt(n))}function cv(n,a){var s=Bt(n);return Pl(s,ot(a,0,s.length))}function Ea(n,a,s,E){if(!Qe(n))return n;a=Xr(a,n);for(var m=-1,v=a.length,I=v-1,b=n;b!=null&&++m<v;){var F=Sr(a[m]),J=s;if(F==="__proto__"||F==="constructor"||F==="prototype")return n;if(m!=I){var W=b[F];J=E?E(W,F,b):r,J===r&&(J=Qe(W)?W:kr(a[m+1])?[]:{})}ia(b,F,J),b=b[F]}return n}var oE=ul?function(n,a){return ul.set(n,a),n}:Gn,vv=ll?function(n,a){return ll(n,"toString",{configurable:!0,enumerable:!1,value:gs(a),writable:!0})}:Gn;function Av(n){return Pl(Bt(n))}function Zn(n,a,s){var E=-1,m=n.length;a<0&&(a=-a>m?0:m+a),s=s>m?m:s,s<0&&(s+=m),m=a>s?0:s-a>>>0,a>>>=0;for(var v=x(m);++E<m;)v[E]=n[E+a];return v}function Sv(n,a){var s;return Wr(n,function(E,m,v){return s=a(E,m,v),!s}),!!s}function Rl(n,a,s){var E=0,m=n==null?E:n.length;if(typeof a=="number"&&a===a&&m<=Te){for(;E<m;){var v=E+m>>>1,I=n[v];I!==null&&!Un(I)&&(s?I<=a:I<a)?E=v+1:m=v}return m}return zi(n,a,Gn,s)}function zi(n,a,s,E){var m=0,v=n==null?0:n.length;if(v===0)return 0;a=s(a);for(var I=a!==a,b=a===null,F=Un(a),J=a===r;m<v;){var W=sl((m+v)/2),Q=s(n[W]),ie=Q!==r,Ne=Q===null,ve=Q===Q,Ie=Un(Q);if(I)var Ae=E||ve;else J?Ae=ve&&(E||ie):b?Ae=ve&&ie&&(E||!Ne):F?Ae=ve&&ie&&!Ne&&(E||!Ie):Ne||Ie?Ae=!1:Ae=E?Q<=a:Q<a;Ae?m=W+1:v=W}return An(v,Re)}function EE(n,a){for(var s=-1,E=n.length,m=0,v=[];++s<E;){var I=n[s],b=a?a(I):I;if(!s||!or(b,F)){var F=b;v[m++]=I===0?0:I}}return v}function dE(n){return typeof n=="number"?n:Un(n)?Ee:+n}function wn(n){if(typeof n=="string")return n;if(_e(n))return Ze(n,wn)+"";if(Un(n))return Ho?Ho.call(n):"";var a=n+"";return a=="0"&&1/n==-X?"-0":a}function zr(n,a,s){var E=-1,m=$a,v=n.length,I=!0,b=[],F=b;if(s)I=!1,m=hi;else if(v>=i){var J=a?null:Dv(n);if(J)return za(J);I=!1,m=ea,F=new ut}else F=a?[]:b;e:for(;++E<v;){var W=n[E],Q=a?a(W):W;if(W=s||W!==0?W:0,I&&Q===Q){for(var ie=F.length;ie--;)if(F[ie]===Q)continue e;a&&F.push(Q),b.push(W)}else m(F,Q,s)||(F!==b&&F.push(Q),b.push(W))}return b}function Xi(n,a){return a=Xr(a,n),n=wE(n,a),n==null||delete n[Sr(Qn(a))]}function mE(n,a,s,E){return Ea(n,a,s(Et(n,a)),E)}function cl(n,a,s,E){for(var m=n.length,v=E?m:-1;(E?v--:++v<m)&&a(n[v],v,n););return s?Zn(n,E?0:v,E?v+1:m):Zn(n,E?v+1:0,E?m:v)}function NE(n,a){var s=n;return s instanceof pe&&(s=s.value()),yi(a,function(E,m){return m.func.apply(m.thisArg,Yr([E],m.args))},s)}function Zi(n,a,s){var E=n.length;if(E<2)return E?zr(n[0]):[];for(var m=-1,v=x(E);++m<E;)for(var I=n[m],b=-1;++b<E;)b!=m&&(v[m]=sa(v[m]||I,n[b],a,s));return zr(Rn(v,1),a,s)}function fE(n,a,s){for(var E=-1,m=n.length,v=a.length,I={};++E<m;){var b=E<v?a[E]:r;s(I,n[E],b)}return I}function Qi(n){return rn(n)?n:[]}function es(n){return typeof n=="function"?n:Gn}function Xr(n,a){return _e(n)?n:os(n,a)?[n]:HE(Ve(n))}var _v=he;function Zr(n,a,s){var E=n.length;return s=s===r?E:s,!a&&s>=E?n:Zn(n,a,s)}var RE=sc||function(n){return fn.clearTimeout(n)};function cE(n,a){if(a)return n.slice();var s=n.length,E=Mo?Mo(s):new n.constructor(s);return n.copy(E),E}function ns(n){var a=new n.constructor(n.byteLength);return new rl(a).set(new rl(n)),a}function Tv(n,a){var s=a?ns(n.buffer):n.buffer;return new n.constructor(s,n.byteOffset,n.byteLength)}function gv(n){var a=new n.constructor(n.source,Zu.exec(n));return a.lastIndex=n.lastIndex,a}function Iv(n){return la?Ue(la.call(n)):{}}function vE(n,a){var s=a?ns(n.buffer):n.buffer;return new n.constructor(s,n.byteOffset,n.length)}function AE(n,a){if(n!==a){var s=n!==r,E=n===null,m=n===n,v=Un(n),I=a!==r,b=a===null,F=a===a,J=Un(a);if(!b&&!J&&!v&&n>a||v&&I&&F&&!b&&!J||E&&I&&F||!s&&F||!m)return 1;if(!E&&!v&&!J&&n<a||J&&s&&m&&!E&&!v||b&&s&&m||!I&&m||!F)return-1}return 0}function Pv(n,a,s){for(var E=-1,m=n.criteria,v=a.criteria,I=m.length,b=s.length;++E<I;){var F=AE(m[E],v[E]);if(F){if(E>=b)return F;var J=s[E];return F*(J=="desc"?-1:1)}}return n.index-a.index}function SE(n,a,s,E){for(var m=-1,v=n.length,I=s.length,b=-1,F=a.length,J=dn(v-I,0),W=x(F+J),Q=!E;++b<F;)W[b]=a[b];for(;++m<I;)(Q||m<v)&&(W[s[m]]=n[m]);for(;J--;)W[b++]=n[m++];return W}function _E(n,a,s,E){for(var m=-1,v=n.length,I=-1,b=s.length,F=-1,J=a.length,W=dn(v-b,0),Q=x(W+J),ie=!E;++m<W;)Q[m]=n[m];for(var Ne=m;++F<J;)Q[Ne+F]=a[F];for(;++I<b;)(ie||m<v)&&(Q[Ne+s[I]]=n[m++]);return Q}function bn(n,a){var s=-1,E=n.length;for(a||(a=x(E));++s<E;)a[s]=n[s];return a}function Ar(n,a,s,E){var m=!s;s||(s={});for(var v=-1,I=a.length;++v<I;){var b=a[v],F=E?E(s[b],n[b],b,s,n):r;F===r&&(F=n[b]),m?Dr(s,b,F):ia(s,b,F)}return s}function hv(n,a){return Ar(n,us(n),a)}function yv(n,a){return Ar(n,kE(n),a)}function vl(n,a){return function(s,E){var m=_e(s)?GR:$c,v=a?a():{};return m(s,n,ce(E,2),v)}}function Ft(n){return he(function(a,s){var E=-1,m=s.length,v=m>1?s[m-1]:r,I=m>2?s[2]:r;for(v=n.length>3&&typeof v=="function"?(m--,v):r,I&&In(s[0],s[1],I)&&(v=m<3?r:v,m=1),a=Ue(a);++E<m;){var b=s[E];b&&n(a,b,E,v)}return a})}function TE(n,a){return function(s,E){if(s==null)return s;if(!Ln(s))return n(s,E);for(var m=s.length,v=a?m:-1,I=Ue(s);(a?v--:++v<m)&&E(I[v],v,I)!==!1;);return s}}function gE(n){return function(a,s,E){for(var m=-1,v=Ue(a),I=E(a),b=I.length;b--;){var F=I[n?b:++m];if(s(v[F],F,v)===!1)break}return a}}function pv(n,a,s){var E=a&T,m=da(n);function v(){var I=this&&this!==fn&&this instanceof v?m:n;return I.apply(E?s:this,arguments)}return v}function IE(n){return function(a){a=Ve(a);var s=pt(a)?sr(a):r,E=s?s[0]:a.charAt(0),m=s?Zr(s,1).join(""):a.slice(1);return E[n]()+m}}function Kt(n){return function(a){return yi(Td(_d(a).replace(vR,"")),n,"")}}function da(n){return function(){var a=arguments;switch(a.length){case 0:return new n;case 1:return new n(a[0]);case 2:return new n(a[0],a[1]);case 3:return new n(a[0],a[1],a[2]);case 4:return new n(a[0],a[1],a[2],a[3]);case 5:return new n(a[0],a[1],a[2],a[3],a[4]);case 6:return new n(a[0],a[1],a[2],a[3],a[4],a[5]);case 7:return new n(a[0],a[1],a[2],a[3],a[4],a[5],a[6])}var s=kt(n.prototype),E=n.apply(s,a);return Qe(E)?E:s}}function bv(n,a,s){var E=da(n);function m(){for(var v=arguments.length,I=x(v),b=v,F=Vt(m);b--;)I[b]=arguments[b];var J=v<3&&I[0]!==F&&I[v-1]!==F?[]:Jr(I,F);if(v-=J.length,v<s)return bE(n,a,Al,m.placeholder,r,I,J,r,r,s-v);var W=this&&this!==fn&&this instanceof m?E:n;return Mn(W,this,I)}return m}function PE(n){return function(a,s,E){var m=Ue(a);if(!Ln(a)){var v=ce(s,3);a=Nn(a),s=function(b){return v(m[b],b,m)}}var I=n(a,s,E);return I>-1?m[v?a[I]:I]:r}}function hE(n){return Or(function(a){var s=a.length,E=s,m=zn.prototype.thru;for(n&&a.reverse();E--;){var v=a[E];if(typeof v!="function")throw new Wn(o);if(m&&!I&&gl(v)=="wrapper")var I=new zn([],!0)}for(E=I?E:s;++E<s;){v=a[E];var b=gl(v),F=b=="wrapper"?is(v):r;F&&Es(F[0])&&F[1]==(B|p|D|U)&&!F[4].length&&F[9]==1?I=I[gl(F[0])].apply(I,F[3]):I=v.length==1&&Es(v)?I[b]():I.thru(v)}return function(){var J=arguments,W=J[0];if(I&&J.length==1&&_e(W))return I.plant(W).value();for(var Q=0,ie=s?a[Q].apply(this,J):W;++Q<s;)ie=a[Q].call(this,ie);return ie}})}function Al(n,a,s,E,m,v,I,b,F,J){var W=a&B,Q=a&T,ie=a&y,Ne=a&(p|w),ve=a&Y,Ie=ie?r:da(n);function Ae(){for(var ye=arguments.length,De=x(ye),xn=ye;xn--;)De[xn]=arguments[xn];if(Ne)var Pn=Vt(Ae),qn=UR(De,Pn);if(E&&(De=SE(De,E,m,Ne)),v&&(De=_E(De,v,I,Ne)),ye-=qn,Ne&&ye<J){var tn=Jr(De,Pn);return bE(n,a,Al,Ae.placeholder,s,De,tn,b,F,J-ye)}var Er=Q?s:this,Vr=ie?Er[n]:n;return ye=De.length,b?De=$v(De,b):ve&&ye>1&&De.reverse(),W&&F<ye&&(De.length=F),this&&this!==fn&&this instanceof Ae&&(Vr=Ie||da(Vr)),Vr.apply(Er,De)}return Ae}function yE(n,a){return function(s,E){return rv(s,n,a(E),{})}}function Sl(n,a){return function(s,E){var m;if(s===r&&E===r)return a;if(s!==r&&(m=s),E!==r){if(m===r)return E;typeof s=="string"||typeof E=="string"?(s=wn(s),E=wn(E)):(s=dE(s),E=dE(E)),m=n(s,E)}return m}}function rs(n){return Or(function(a){return a=Ze(a,Bn(ce())),he(function(s){var E=this;return n(a,function(m){return Mn(m,E,s)})})})}function _l(n,a){a=a===r?" ":wn(a);var s=a.length;if(s<2)return s?Wi(a,n):a;var E=Wi(a,il(n/bt(a)));return pt(a)?Zr(sr(E),0,n).join(""):E.slice(0,n)}function Lv(n,a,s,E){var m=a&T,v=da(n);function I(){for(var b=-1,F=arguments.length,J=-1,W=E.length,Q=x(W+F),ie=this&&this!==fn&&this instanceof I?v:n;++J<W;)Q[J]=E[J];for(;F--;)Q[J++]=arguments[++b];return Mn(ie,m?s:this,Q)}return I}function pE(n){return function(a,s,E){return E&&typeof E!="number"&&In(a,s,E)&&(s=E=r),a=Kr(a),s===r?(s=a,a=0):s=Kr(s),E=E===r?a<s?1:-1:Kr(E),fv(a,s,E,n)}}function Tl(n){return function(a,s){return typeof a=="string"&&typeof s=="string"||(a=er(a),s=er(s)),n(a,s)}}function bE(n,a,s,E,m,v,I,b,F,J){var W=a&p,Q=W?I:r,ie=W?r:I,Ne=W?v:r,ve=W?r:v;a|=W?D:q,a&=~(W?q:D),a&L||(a&=-4);var Ie=[n,a,m,Ne,Q,ve,ie,b,F,J],Ae=s.apply(r,Ie);return Es(n)&&UE(Ae,Ie),Ae.placeholder=E,xE(Ae,n,a)}function ts(n){var a=En[n];return function(s,E){if(s=er(s),E=E==null?0:An(ge(E),292),E&&xo(s)){var m=(Ve(s)+"e").split("e"),v=a(m[0]+"e"+(+m[1]+E));return m=(Ve(v)+"e").split("e"),+(m[0]+"e"+(+m[1]-E))}return a(s)}}var Dv=Gt&&1/za(new Gt([,-0]))[1]==X?function(n){return new Gt(n)}:hs;function LE(n){return function(a){var s=Sn(a);return s==He?ki(a):s==K?JR(a):wR(a,n(a))}}function Gr(n,a,s,E,m,v,I,b){var F=a&y;if(!F&&typeof n!="function")throw new Wn(o);var J=E?E.length:0;if(J||(a&=-97,E=m=r),I=I===r?I:dn(ge(I),0),b=b===r?b:ge(b),J-=m?m.length:0,a&q){var W=E,Q=m;E=m=r}var ie=F?r:is(n),Ne=[n,a,s,E,m,W,Q,v,I,b];if(ie&&jv(Ne,ie),n=Ne[0],a=Ne[1],s=Ne[2],E=Ne[3],m=Ne[4],b=Ne[9]=Ne[9]===r?F?0:n.length:dn(Ne[9]-J,0),!b&&a&(p|w)&&(a&=-25),!a||a==T)var ve=pv(n,a,s);else a==p||a==w?ve=bv(n,a,b):(a==D||a==(T|D))&&!m.length?ve=Lv(n,a,s,E):ve=Al.apply(r,Ne);var Ie=ie?oE:UE;return xE(Ie(ve,Ne),n,a)}function DE(n,a,s,E){return n===r||or(n,Dt[s])&&!we.call(E,s)?a:n}function GE(n,a,s,E,m,v){return Qe(n)&&Qe(a)&&(v.set(a,n),fl(n,a,r,GE,v),v.delete(a)),n}function Gv(n){return fa(n)?r:n}function OE(n,a,s,E,m,v){var I=s&G,b=n.length,F=a.length;if(b!=F&&!(I&&F>b))return!1;var J=v.get(n),W=v.get(a);if(J&&W)return J==a&&W==n;var Q=-1,ie=!0,Ne=s&g?new ut:r;for(v.set(n,a),v.set(a,n);++Q<b;){var ve=n[Q],Ie=a[Q];if(E)var Ae=I?E(Ie,ve,Q,a,n,v):E(ve,Ie,Q,n,a,v);if(Ae!==r){if(Ae)continue;ie=!1;break}if(Ne){if(!pi(a,function(ye,De){if(!ea(Ne,De)&&(ve===ye||m(ve,ye,s,E,v)))return Ne.push(De)})){ie=!1;break}}else if(!(ve===Ie||m(ve,Ie,s,E,v))){ie=!1;break}}return v.delete(n),v.delete(a),ie}function Ov(n,a,s,E,m,v,I){switch(s){case Fe:if(n.byteLength!=a.byteLength||n.byteOffset!=a.byteOffset)return!1;n=n.buffer,a=a.buffer;case Le:return!(n.byteLength!=a.byteLength||!v(new rl(n),new rl(a)));case Pe:case Oe:case sn:return or(+n,+a);case ze:return n.name==a.name&&n.message==a.message;case h:case C:return n==a+"";case He:var b=ki;case K:var F=E&G;if(b||(b=za),n.size!=a.size&&!F)return!1;var J=I.get(n);if(J)return J==a;E|=g,I.set(n,a);var W=OE(b(n),b(a),E,m,v,I);return I.delete(n),W;case se:if(la)return la.call(n)==la.call(a)}return!1}function kv(n,a,s,E,m,v){var I=s&G,b=as(n),F=b.length,J=as(a),W=J.length;if(F!=W&&!I)return!1;for(var Q=F;Q--;){var ie=b[Q];if(!(I?ie in a:we.call(a,ie)))return!1}var Ne=v.get(n),ve=v.get(a);if(Ne&&ve)return Ne==a&&ve==n;var Ie=!0;v.set(n,a),v.set(a,n);for(var Ae=I;++Q<F;){ie=b[Q];var ye=n[ie],De=a[ie];if(E)var xn=I?E(De,ye,ie,a,n,v):E(ye,De,ie,n,a,v);if(!(xn===r?ye===De||m(ye,De,s,E,v):xn)){Ie=!1;break}Ae||(Ae=ie=="constructor")}if(Ie&&!Ae){var Pn=n.constructor,qn=a.constructor;Pn!=qn&&"constructor"in n&&"constructor"in a&&!(typeof Pn=="function"&&Pn instanceof Pn&&typeof qn=="function"&&qn instanceof qn)&&(Ie=!1)}return v.delete(n),v.delete(a),Ie}function Or(n){return ms(BE(n,r,JE),n+"")}function as(n){return Zo(n,Nn,us)}function ls(n){return Zo(n,Dn,kE)}var is=ul?function(n){return ul.get(n)}:hs;function gl(n){for(var a=n.name+"",s=Ot[a],E=we.call(Ot,a)?s.length:0;E--;){var m=s[E],v=m.func;if(v==null||v==n)return m.name}return a}function Vt(n){var a=we.call(c,"placeholder")?c:n;return a.placeholder}function ce(){var n=c.iteratee||Is;return n=n===Is?nE:n,arguments.length?n(arguments[0],arguments[1]):n}function Il(n,a){var s=n.__data__;return xv(a)?s[typeof a=="string"?"string":"hash"]:s.map}function ss(n){for(var a=Nn(n),s=a.length;s--;){var E=a[s],m=n[E];a[s]=[E,m,VE(m)]}return a}function dt(n,a){var s=CR(n,a);return eE(s)?s:r}function Fv(n){var a=we.call(n,it),s=n[it];try{n[it]=r;var E=!0}catch{}var m=el.call(n);return E&&(a?n[it]=s:delete n[it]),m}var us=Ki?function(n){return n==null?[]:(n=Ue(n),jr(Ki(n),function(a){return wo.call(n,a)}))}:ys,kE=Ki?function(n){for(var a=[];n;)Yr(a,us(n)),n=tl(n);return a}:ys,Sn=gn;(Vi&&Sn(new Vi(new ArrayBuffer(1)))!=Fe||ra&&Sn(new ra)!=He||Mi&&Sn(Mi.resolve())!=ir||Gt&&Sn(new Gt)!=K||ta&&Sn(new ta)!=te)&&(Sn=function(n){var a=gn(n),s=a==on?n.constructor:r,E=s?mt(s):"";if(E)switch(E){case cc:return Fe;case vc:return He;case Ac:return ir;case Sc:return K;case _c:return te}return a});function Kv(n,a,s){for(var E=-1,m=s.length;++E<m;){var v=s[E],I=v.size;switch(v.type){case"drop":n+=I;break;case"dropRight":a-=I;break;case"take":a=An(a,n+I);break;case"takeRight":n=dn(n,a-I);break}}return{start:n,end:a}}function Vv(n){var a=n.match(qf);return a?a[1].split(Hf):[]}function FE(n,a,s){a=Xr(a,n);for(var E=-1,m=a.length,v=!1;++E<m;){var I=Sr(a[E]);if(!(v=n!=null&&s(n,I)))break;n=n[I]}return v||++E!=m?v:(m=n==null?0:n.length,!!m&&Dl(m)&&kr(I,m)&&(_e(n)||Nt(n)))}function Mv(n){var a=n.length,s=new n.constructor(a);return a&&typeof n[0]=="string"&&we.call(n,"index")&&(s.index=n.index,s.input=n.input),s}function KE(n){return typeof n.constructor=="function"&&!ma(n)?kt(tl(n)):{}}function Bv(n,a,s){var E=n.constructor;switch(a){case Le:return ns(n);case Pe:case Oe:return new E(+n);case Fe:return Tv(n,s);case vn:case Cr:case Yn:case Xt:case tt:case at:case Zt:case Pt:case Qt:return vE(n,s);case He:return new E;case sn:case C:return new E(n);case h:return gv(n);case K:return new E;case se:return Iv(n)}}function wv(n,a){var s=a.length;if(!s)return n;var E=s-1;return a[E]=(s>1?"& ":"")+a[E],a=a.join(s>2?", ":" "),n.replace(xf,`{
+/* [wrapped with `+a+`] */
+`)}function Uv(n){return _e(n)||Nt(n)||!!(Uo&&n&&n[Uo])}function kr(n,a){var s=typeof n;return a=a??$,!!a&&(s=="number"||s!="symbol"&&Zf.test(n))&&n>-1&&n%1==0&&n<a}function In(n,a,s){if(!Qe(s))return!1;var E=typeof a;return(E=="number"?Ln(s)&&kr(a,s.length):E=="string"&&a in s)?or(s[a],n):!1}function os(n,a){if(_e(n))return!1;var s=typeof n;return s=="number"||s=="symbol"||s=="boolean"||n==null||Un(n)?!0:Mf.test(n)||!Vf.test(n)||a!=null&&n in Ue(a)}function xv(n){var a=typeof n;return a=="string"||a=="number"||a=="symbol"||a=="boolean"?n!=="__proto__":n===null}function Es(n){var a=gl(n),s=c[a];if(typeof s!="function"||!(a in pe.prototype))return!1;if(n===s)return!0;var E=is(s);return!!E&&n===E[0]}function qv(n){return!!Vo&&Vo in n}var Hv=Za?Fr:ps;function ma(n){var a=n&&n.constructor,s=typeof a=="function"&&a.prototype||Dt;return n===s}function VE(n){return n===n&&!Qe(n)}function ME(n,a){return function(s){return s==null?!1:s[n]===a&&(a!==r||n in Ue(s))}}function Cv(n){var a=bl(n,function(E){return s.size===f&&s.clear(),E}),s=a.cache;return a}function jv(n,a){var s=n[1],E=a[1],m=s|E,v=m<(T|y|B),I=E==B&&s==p||E==B&&s==U&&n[7].length<=a[8]||E==(B|U)&&a[7].length<=a[8]&&s==p;if(!(v||I))return n;E&T&&(n[2]=a[2],m|=s&T?0:L);var b=a[3];if(b){var F=n[3];n[3]=F?SE(F,b,a[4]):b,n[4]=F?Jr(n[3],R):a[4]}return b=a[5],b&&(F=n[5],n[5]=F?_E(F,b,a[6]):b,n[6]=F?Jr(n[5],R):a[6]),b=a[7],b&&(n[7]=b),E&B&&(n[8]=n[8]==null?a[8]:An(n[8],a[8])),n[9]==null&&(n[9]=a[9]),n[0]=a[0],n[1]=m,n}function Yv(n){var a=[];if(n!=null)for(var s in Ue(n))a.push(s);return a}function Jv(n){return el.call(n)}function BE(n,a,s){return a=dn(a===r?n.length-1:a,0),function(){for(var E=arguments,m=-1,v=dn(E.length-a,0),I=x(v);++m<v;)I[m]=E[a+m];m=-1;for(var b=x(a+1);++m<a;)b[m]=E[m];return b[a]=s(I),Mn(n,this,b)}}function wE(n,a){return a.length<2?n:Et(n,Zn(a,0,-1))}function $v(n,a){for(var s=n.length,E=An(a.length,s),m=bn(n);E--;){var v=a[E];n[E]=kr(v,s)?m[v]:r}return n}function ds(n,a){if(!(a==="constructor"&&typeof n[a]=="function")&&a!="__proto__")return n[a]}var UE=qE(oE),Na=oc||function(n,a){return fn.setTimeout(n,a)},ms=qE(vv);function xE(n,a,s){var E=a+"";return ms(n,wv(E,Wv(Vv(E),s)))}function qE(n){var a=0,s=0;return function(){var E=Nc(),m=V-(E-s);if(s=E,m>0){if(++a>=H)return arguments[0]}else a=0;return n.apply(r,arguments)}}function Pl(n,a){var s=-1,E=n.length,m=E-1;for(a=a===r?E:a;++s<a;){var v=$i(s,m),I=n[v];n[v]=n[s],n[s]=I}return n.length=a,n}var HE=Cv(function(n){var a=[];return n.charCodeAt(0)===46&&a.push(""),n.replace(Bf,function(s,E,m,v){a.push(m?v.replace(Yf,"$1"):E||s)}),a});function Sr(n){if(typeof n=="string"||Un(n))return n;var a=n+"";return a=="0"&&1/n==-X?"-0":a}function mt(n){if(n!=null){try{return Qa.call(n)}catch{}try{return n+""}catch{}}return""}function Wv(n,a){return $n(Tn,function(s){var E="_."+s[0];a&s[1]&&!$a(n,E)&&n.push(E)}),n.sort()}function CE(n){if(n instanceof pe)return n.clone();var a=new zn(n.__wrapped__,n.__chain__);return a.__actions__=bn(n.__actions__),a.__index__=n.__index__,a.__values__=n.__values__,a}function zv(n,a,s){(s?In(n,a,s):a===r)?a=1:a=dn(ge(a),0);var E=n==null?0:n.length;if(!E||a<1)return[];for(var m=0,v=0,I=x(il(E/a));m<E;)I[v++]=Zn(n,m,m+=a);return I}function Xv(n){for(var a=-1,s=n==null?0:n.length,E=0,m=[];++a<s;){var v=n[a];v&&(m[E++]=v)}return m}function Zv(){var n=arguments.length;if(!n)return[];for(var a=x(n-1),s=arguments[0],E=n;E--;)a[E-1]=arguments[E];return Yr(_e(s)?bn(s):[s],Rn(a,1))}var Qv=he(function(n,a){return rn(n)?sa(n,Rn(a,1,rn,!0)):[]}),eA=he(function(n,a){var s=Qn(a);return rn(s)&&(s=r),rn(n)?sa(n,Rn(a,1,rn,!0),ce(s,2)):[]}),nA=he(function(n,a){var s=Qn(a);return rn(s)&&(s=r),rn(n)?sa(n,Rn(a,1,rn,!0),r,s):[]});function rA(n,a,s){var E=n==null?0:n.length;return E?(a=s||a===r?1:ge(a),Zn(n,a<0?0:a,E)):[]}function tA(n,a,s){var E=n==null?0:n.length;return E?(a=s||a===r?1:ge(a),a=E-a,Zn(n,0,a<0?0:a)):[]}function aA(n,a){return n&&n.length?cl(n,ce(a,3),!0,!0):[]}function lA(n,a){return n&&n.length?cl(n,ce(a,3),!0):[]}function iA(n,a,s,E){var m=n==null?0:n.length;return m?(s&&typeof s!="number"&&In(n,a,s)&&(s=0,E=m),Zc(n,a,s,E)):[]}function jE(n,a,s){var E=n==null?0:n.length;if(!E)return-1;var m=s==null?0:ge(s);return m<0&&(m=dn(E+m,0)),Wa(n,ce(a,3),m)}function YE(n,a,s){var E=n==null?0:n.length;if(!E)return-1;var m=E-1;return s!==r&&(m=ge(s),m=s<0?dn(E+m,0):An(m,E-1)),Wa(n,ce(a,3),m,!0)}function JE(n){var a=n==null?0:n.length;return a?Rn(n,1):[]}function sA(n){var a=n==null?0:n.length;return a?Rn(n,X):[]}function uA(n,a){var s=n==null?0:n.length;return s?(a=a===r?1:ge(a),Rn(n,a)):[]}function oA(n){for(var a=-1,s=n==null?0:n.length,E={};++a<s;){var m=n[a];E[m[0]]=m[1]}return E}function $E(n){return n&&n.length?n[0]:r}function EA(n,a,s){var E=n==null?0:n.length;if(!E)return-1;var m=s==null?0:ge(s);return m<0&&(m=dn(E+m,0)),yt(n,a,m)}function dA(n){var a=n==null?0:n.length;return a?Zn(n,0,-1):[]}var mA=he(function(n){var a=Ze(n,Qi);return a.length&&a[0]===n[0]?Hi(a):[]}),NA=he(function(n){var a=Qn(n),s=Ze(n,Qi);return a===Qn(s)?a=r:s.pop(),s.length&&s[0]===n[0]?Hi(s,ce(a,2)):[]}),fA=he(function(n){var a=Qn(n),s=Ze(n,Qi);return a=typeof a=="function"?a:r,a&&s.pop(),s.length&&s[0]===n[0]?Hi(s,r,a):[]});function RA(n,a){return n==null?"":dc.call(n,a)}function Qn(n){var a=n==null?0:n.length;return a?n[a-1]:r}function cA(n,a,s){var E=n==null?0:n.length;if(!E)return-1;var m=E;return s!==r&&(m=ge(s),m=m<0?dn(E+m,0):An(m,E-1)),a===a?WR(n,a,m):Wa(n,bo,m,!0)}function vA(n,a){return n&&n.length?lE(n,ge(a)):r}var AA=he(WE);function WE(n,a){return n&&n.length&&a&&a.length?Ji(n,a):n}function SA(n,a,s){return n&&n.length&&a&&a.length?Ji(n,a,ce(s,2)):n}function _A(n,a,s){return n&&n.length&&a&&a.length?Ji(n,a,r,s):n}var TA=Or(function(n,a){var s=n==null?0:n.length,E=wi(n,a);return uE(n,Ze(a,function(m){return kr(m,s)?+m:m}).sort(AE)),E});function gA(n,a){var s=[];if(!(n&&n.length))return s;var E=-1,m=[],v=n.length;for(a=ce(a,3);++E<v;){var I=n[E];a(I,E,n)&&(s.push(I),m.push(E))}return uE(n,m),s}function Ns(n){return n==null?n:Rc.call(n)}function IA(n,a,s){var E=n==null?0:n.length;return E?(s&&typeof s!="number"&&In(n,a,s)?(a=0,s=E):(a=a==null?0:ge(a),s=s===r?E:ge(s)),Zn(n,a,s)):[]}function PA(n,a){return Rl(n,a)}function hA(n,a,s){return zi(n,a,ce(s,2))}function yA(n,a){var s=n==null?0:n.length;if(s){var E=Rl(n,a);if(E<s&&or(n[E],a))return E}return-1}function pA(n,a){return Rl(n,a,!0)}function bA(n,a,s){return zi(n,a,ce(s,2),!0)}function LA(n,a){var s=n==null?0:n.length;if(s){var E=Rl(n,a,!0)-1;if(or(n[E],a))return E}return-1}function DA(n){return n&&n.length?EE(n):[]}function GA(n,a){return n&&n.length?EE(n,ce(a,2)):[]}function OA(n){var a=n==null?0:n.length;return a?Zn(n,1,a):[]}function kA(n,a,s){return n&&n.length?(a=s||a===r?1:ge(a),Zn(n,0,a<0?0:a)):[]}function FA(n,a,s){var E=n==null?0:n.length;return E?(a=s||a===r?1:ge(a),a=E-a,Zn(n,a<0?0:a,E)):[]}function KA(n,a){return n&&n.length?cl(n,ce(a,3),!1,!0):[]}function VA(n,a){return n&&n.length?cl(n,ce(a,3)):[]}var MA=he(function(n){return zr(Rn(n,1,rn,!0))}),BA=he(function(n){var a=Qn(n);return rn(a)&&(a=r),zr(Rn(n,1,rn,!0),ce(a,2))}),wA=he(function(n){var a=Qn(n);return a=typeof a=="function"?a:r,zr(Rn(n,1,rn,!0),r,a)});function UA(n){return n&&n.length?zr(n):[]}function xA(n,a){return n&&n.length?zr(n,ce(a,2)):[]}function qA(n,a){return a=typeof a=="function"?a:r,n&&n.length?zr(n,r,a):[]}function fs(n){if(!(n&&n.length))return[];var a=0;return n=jr(n,function(s){if(rn(s))return a=dn(s.length,a),!0}),Gi(a,function(s){return Ze(n,bi(s))})}function zE(n,a){if(!(n&&n.length))return[];var s=fs(n);return a==null?s:Ze(s,function(E){return Mn(a,r,E)})}var HA=he(function(n,a){return rn(n)?sa(n,a):[]}),CA=he(function(n){return Zi(jr(n,rn))}),jA=he(function(n){var a=Qn(n);return rn(a)&&(a=r),Zi(jr(n,rn),ce(a,2))}),YA=he(function(n){var a=Qn(n);return a=typeof a=="function"?a:r,Zi(jr(n,rn),r,a)}),JA=he(fs);function $A(n,a){return fE(n||[],a||[],ia)}function WA(n,a){return fE(n||[],a||[],Ea)}var zA=he(function(n){var a=n.length,s=a>1?n[a-1]:r;return s=typeof s=="function"?(n.pop(),s):r,zE(n,s)});function XE(n){var a=c(n);return a.__chain__=!0,a}function XA(n,a){return a(n),n}function hl(n,a){return a(n)}var ZA=Or(function(n){var a=n.length,s=a?n[0]:0,E=this.__wrapped__,m=function(v){return wi(v,n)};return a>1||this.__actions__.length||!(E instanceof pe)||!kr(s)?this.thru(m):(E=E.slice(s,+s+(a?1:0)),E.__actions__.push({func:hl,args:[m],thisArg:r}),new zn(E,this.__chain__).thru(function(v){return a&&!v.length&&v.push(r),v}))});function QA(){return XE(this)}function eS(){return new zn(this.value(),this.__chain__)}function nS(){this.__values__===r&&(this.__values__=dd(this.value()));var n=this.__index__>=this.__values__.length,a=n?r:this.__values__[this.__index__++];return{done:n,value:a}}function rS(){return this}function tS(n){for(var a,s=this;s instanceof El;){var E=CE(s);E.__index__=0,E.__values__=r,a?m.__wrapped__=E:a=E;var m=E;s=s.__wrapped__}return m.__wrapped__=n,a}function aS(){var n=this.__wrapped__;if(n instanceof pe){var a=n;return this.__actions__.length&&(a=new pe(this)),a=a.reverse(),a.__actions__.push({func:hl,args:[Ns],thisArg:r}),new zn(a,this.__chain__)}return this.thru(Ns)}function lS(){return NE(this.__wrapped__,this.__actions__)}var iS=vl(function(n,a,s){we.call(n,s)?++n[s]:Dr(n,s,1)});function sS(n,a,s){var E=_e(n)?yo:Xc;return s&&In(n,a,s)&&(a=r),E(n,ce(a,3))}function uS(n,a){var s=_e(n)?jr:zo;return s(n,ce(a,3))}var oS=PE(jE),ES=PE(YE);function dS(n,a){return Rn(yl(n,a),1)}function mS(n,a){return Rn(yl(n,a),X)}function NS(n,a,s){return s=s===r?1:ge(s),Rn(yl(n,a),s)}function ZE(n,a){var s=_e(n)?$n:Wr;return s(n,ce(a,3))}function QE(n,a){var s=_e(n)?OR:Wo;return s(n,ce(a,3))}var fS=vl(function(n,a,s){we.call(n,s)?n[s].push(a):Dr(n,s,[a])});function RS(n,a,s,E){n=Ln(n)?n:Bt(n),s=s&&!E?ge(s):0;var m=n.length;return s<0&&(s=dn(m+s,0)),Gl(n)?s<=m&&n.indexOf(a,s)>-1:!!m&&yt(n,a,s)>-1}var cS=he(function(n,a,s){var E=-1,m=typeof a=="function",v=Ln(n)?x(n.length):[];return Wr(n,function(I){v[++E]=m?Mn(a,I,s):ua(I,a,s)}),v}),vS=vl(function(n,a,s){Dr(n,s,a)});function yl(n,a){var s=_e(n)?Ze:rE;return s(n,ce(a,3))}function AS(n,a,s,E){return n==null?[]:(_e(a)||(a=a==null?[]:[a]),s=E?r:s,_e(s)||(s=s==null?[]:[s]),iE(n,a,s))}var SS=vl(function(n,a,s){n[s?0:1].push(a)},function(){return[[],[]]});function _S(n,a,s){var E=_e(n)?yi:Do,m=arguments.length<3;return E(n,ce(a,4),s,m,Wr)}function TS(n,a,s){var E=_e(n)?kR:Do,m=arguments.length<3;return E(n,ce(a,4),s,m,Wo)}function gS(n,a){var s=_e(n)?jr:zo;return s(n,Ll(ce(a,3)))}function IS(n){var a=_e(n)?jo:Rv;return a(n)}function PS(n,a,s){(s?In(n,a,s):a===r)?a=1:a=ge(a);var E=_e(n)?Yc:cv;return E(n,a)}function hS(n){var a=_e(n)?Jc:Av;return a(n)}function yS(n){if(n==null)return 0;if(Ln(n))return Gl(n)?bt(n):n.length;var a=Sn(n);return a==He||a==K?n.size:ji(n).length}function pS(n,a,s){var E=_e(n)?pi:Sv;return s&&In(n,a,s)&&(a=r),E(n,ce(a,3))}var bS=he(function(n,a){if(n==null)return[];var s=a.length;return s>1&&In(n,a[0],a[1])?a=[]:s>2&&In(a[0],a[1],a[2])&&(a=[a[0]]),iE(n,Rn(a,1),[])}),pl=uc||function(){return fn.Date.now()};function LS(n,a){if(typeof a!="function")throw new Wn(o);return n=ge(n),function(){if(--n<1)return a.apply(this,arguments)}}function ed(n,a,s){return a=s?r:a,a=n&&a==null?n.length:a,Gr(n,B,r,r,r,r,a)}function nd(n,a){var s;if(typeof a!="function")throw new Wn(o);return n=ge(n),function(){return--n>0&&(s=a.apply(this,arguments)),n<=1&&(a=r),s}}var Rs=he(function(n,a,s){var E=T;if(s.length){var m=Jr(s,Vt(Rs));E|=D}return Gr(n,E,a,s,m)}),rd=he(function(n,a,s){var E=T|y;if(s.length){var m=Jr(s,Vt(rd));E|=D}return Gr(a,E,n,s,m)});function td(n,a,s){a=s?r:a;var E=Gr(n,p,r,r,r,r,r,a);return E.placeholder=td.placeholder,E}function ad(n,a,s){a=s?r:a;var E=Gr(n,w,r,r,r,r,r,a);return E.placeholder=ad.placeholder,E}function ld(n,a,s){var E,m,v,I,b,F,J=0,W=!1,Q=!1,ie=!0;if(typeof n!="function")throw new Wn(o);a=er(a)||0,Qe(s)&&(W=!!s.leading,Q="maxWait"in s,v=Q?dn(er(s.maxWait)||0,a):v,ie="trailing"in s?!!s.trailing:ie);function Ne(tn){var Er=E,Vr=m;return E=m=r,J=tn,I=n.apply(Vr,Er),I}function ve(tn){return J=tn,b=Na(ye,a),W?Ne(tn):I}function Ie(tn){var Er=tn-F,Vr=tn-J,Pd=a-Er;return Q?An(Pd,v-Vr):Pd}function Ae(tn){var Er=tn-F,Vr=tn-J;return F===r||Er>=a||Er<0||Q&&Vr>=v}function ye(){var tn=pl();if(Ae(tn))return De(tn);b=Na(ye,Ie(tn))}function De(tn){return b=r,ie&&E?Ne(tn):(E=m=r,I)}function xn(){b!==r&&RE(b),J=0,E=F=m=b=r}function Pn(){return b===r?I:De(pl())}function qn(){var tn=pl(),Er=Ae(tn);if(E=arguments,m=this,F=tn,Er){if(b===r)return ve(F);if(Q)return RE(b),b=Na(ye,a),Ne(F)}return b===r&&(b=Na(ye,a)),I}return qn.cancel=xn,qn.flush=Pn,qn}var DS=he(function(n,a){return $o(n,1,a)}),GS=he(function(n,a,s){return $o(n,er(a)||0,s)});function OS(n){return Gr(n,Y)}function bl(n,a){if(typeof n!="function"||a!=null&&typeof a!="function")throw new Wn(o);var s=function(){var E=arguments,m=a?a.apply(this,E):E[0],v=s.cache;if(v.has(m))return v.get(m);var I=n.apply(this,E);return s.cache=v.set(m,I)||v,I};return s.cache=new(bl.Cache||Lr),s}bl.Cache=Lr;function Ll(n){if(typeof n!="function")throw new Wn(o);return function(){var a=arguments;switch(a.length){case 0:return!n.call(this);case 1:return!n.call(this,a[0]);case 2:return!n.call(this,a[0],a[1]);case 3:return!n.call(this,a[0],a[1],a[2])}return!n.apply(this,a)}}function kS(n){return nd(2,n)}var FS=_v(function(n,a){a=a.length==1&&_e(a[0])?Ze(a[0],Bn(ce())):Ze(Rn(a,1),Bn(ce()));var s=a.length;return he(function(E){for(var m=-1,v=An(E.length,s);++m<v;)E[m]=a[m].call(this,E[m]);return Mn(n,this,E)})}),cs=he(function(n,a){var s=Jr(a,Vt(cs));return Gr(n,D,r,a,s)}),id=he(function(n,a){var s=Jr(a,Vt(id));return Gr(n,q,r,a,s)}),KS=Or(function(n,a){return Gr(n,U,r,r,r,a)});function VS(n,a){if(typeof n!="function")throw new Wn(o);return a=a===r?a:ge(a),he(n,a)}function MS(n,a){if(typeof n!="function")throw new Wn(o);return a=a==null?0:dn(ge(a),0),he(function(s){var E=s[a],m=Zr(s,0,a);return E&&Yr(m,E),Mn(n,this,m)})}function BS(n,a,s){var E=!0,m=!0;if(typeof n!="function")throw new Wn(o);return Qe(s)&&(E="leading"in s?!!s.leading:E,m="trailing"in s?!!s.trailing:m),ld(n,a,{leading:E,maxWait:a,trailing:m})}function wS(n){return ed(n,1)}function US(n,a){return cs(es(a),n)}function xS(){if(!arguments.length)return[];var n=arguments[0];return _e(n)?n:[n]}function qS(n){return Xn(n,_)}function HS(n,a){return a=typeof a=="function"?a:r,Xn(n,_,a)}function CS(n){return Xn(n,A|_)}function jS(n,a){return a=typeof a=="function"?a:r,Xn(n,A|_,a)}function YS(n,a){return a==null||Jo(n,a,Nn(a))}function or(n,a){return n===a||n!==n&&a!==a}var JS=Tl(qi),$S=Tl(function(n,a){return n>=a}),Nt=Qo(function(){return arguments}())?Qo:function(n){return en(n)&&we.call(n,"callee")&&!wo.call(n,"callee")},_e=x.isArray,WS=_o?Bn(_o):tv;function Ln(n){return n!=null&&Dl(n.length)&&!Fr(n)}function rn(n){return en(n)&&Ln(n)}function zS(n){return n===!0||n===!1||en(n)&&gn(n)==Pe}var Qr=Ec||ps,XS=To?Bn(To):av;function ZS(n){return en(n)&&n.nodeType===1&&!fa(n)}function QS(n){if(n==null)return!0;if(Ln(n)&&(_e(n)||typeof n=="string"||typeof n.splice=="function"||Qr(n)||Mt(n)||Nt(n)))return!n.length;var a=Sn(n);if(a==He||a==K)return!n.size;if(ma(n))return!ji(n).length;for(var s in n)if(we.call(n,s))return!1;return!0}function e_(n,a){return oa(n,a)}function n_(n,a,s){s=typeof s=="function"?s:r;var E=s?s(n,a):r;return E===r?oa(n,a,r,s):!!E}function vs(n){if(!en(n))return!1;var a=gn(n);return a==ze||a==nn||typeof n.message=="string"&&typeof n.name=="string"&&!fa(n)}function r_(n){return typeof n=="number"&&xo(n)}function Fr(n){if(!Qe(n))return!1;var a=gn(n);return a==Xe||a==pn||a==qe||a==jn}function sd(n){return typeof n=="number"&&n==ge(n)}function Dl(n){return typeof n=="number"&&n>-1&&n%1==0&&n<=$}function Qe(n){var a=typeof n;return n!=null&&(a=="object"||a=="function")}function en(n){return n!=null&&typeof n=="object"}var ud=go?Bn(go):iv;function t_(n,a){return n===a||Ci(n,a,ss(a))}function a_(n,a,s){return s=typeof s=="function"?s:r,Ci(n,a,ss(a),s)}function l_(n){return od(n)&&n!=+n}function i_(n){if(Hv(n))throw new Se(u);return eE(n)}function s_(n){return n===null}function u_(n){return n==null}function od(n){return typeof n=="number"||en(n)&&gn(n)==sn}function fa(n){if(!en(n)||gn(n)!=on)return!1;var a=tl(n);if(a===null)return!0;var s=we.call(a,"constructor")&&a.constructor;return typeof s=="function"&&s instanceof s&&Qa.call(s)==ac}var As=Io?Bn(Io):sv;function o_(n){return sd(n)&&n>=-$&&n<=$}var Ed=Po?Bn(Po):uv;function Gl(n){return typeof n=="string"||!_e(n)&&en(n)&&gn(n)==C}function Un(n){return typeof n=="symbol"||en(n)&&gn(n)==se}var Mt=ho?Bn(ho):ov;function E_(n){return n===r}function d_(n){return en(n)&&Sn(n)==te}function m_(n){return en(n)&&gn(n)==fe}var N_=Tl(Yi),f_=Tl(function(n,a){return n<=a});function dd(n){if(!n)return[];if(Ln(n))return Gl(n)?sr(n):bn(n);if(na&&n[na])return YR(n[na]());var a=Sn(n),s=a==He?ki:a==K?za:Bt;return s(n)}function Kr(n){if(!n)return n===0?n:0;if(n=er(n),n===X||n===-X){var a=n<0?-1:1;return a*Z}return n===n?n:0}function ge(n){var a=Kr(n),s=a%1;return a===a?s?a-s:a:0}function md(n){return n?ot(ge(n),0,ue):0}function er(n){if(typeof n=="number")return n;if(Un(n))return Ee;if(Qe(n)){var a=typeof n.valueOf=="function"?n.valueOf():n;n=Qe(a)?a+"":a}if(typeof n!="string")return n===0?n:+n;n=Go(n);var s=Wf.test(n);return s||Xf.test(n)?LR(n.slice(2),s?2:8):$f.test(n)?Ee:+n}function Nd(n){return Ar(n,Dn(n))}function R_(n){return n?ot(ge(n),-$,$):n===0?n:0}function Ve(n){return n==null?"":wn(n)}var c_=Ft(function(n,a){if(ma(a)||Ln(a)){Ar(a,Nn(a),n);return}for(var s in a)we.call(a,s)&&ia(n,s,a[s])}),fd=Ft(function(n,a){Ar(a,Dn(a),n)}),Ol=Ft(function(n,a,s,E){Ar(a,Dn(a),n,E)}),v_=Ft(function(n,a,s,E){Ar(a,Nn(a),n,E)}),A_=Or(wi);function S_(n,a){var s=kt(n);return a==null?s:Yo(s,a)}var __=he(function(n,a){n=Ue(n);var s=-1,E=a.length,m=E>2?a[2]:r;for(m&&In(a[0],a[1],m)&&(E=1);++s<E;)for(var v=a[s],I=Dn(v),b=-1,F=I.length;++b<F;){var J=I[b],W=n[J];(W===r||or(W,Dt[J])&&!we.call(n,J))&&(n[J]=v[J])}return n}),T_=he(function(n){return n.push(r,GE),Mn(Rd,r,n)});function g_(n,a){return po(n,ce(a,3),vr)}function I_(n,a){return po(n,ce(a,3),xi)}function P_(n,a){return n==null?n:Ui(n,ce(a,3),Dn)}function h_(n,a){return n==null?n:Xo(n,ce(a,3),Dn)}function y_(n,a){return n&&vr(n,ce(a,3))}function p_(n,a){return n&&xi(n,ce(a,3))}function b_(n){return n==null?[]:Nl(n,Nn(n))}function L_(n){return n==null?[]:Nl(n,Dn(n))}function Ss(n,a,s){var E=n==null?r:Et(n,a);return E===r?s:E}function D_(n,a){return n!=null&&FE(n,a,Qc)}function _s(n,a){return n!=null&&FE(n,a,ev)}var G_=yE(function(n,a,s){a!=null&&typeof a.toString!="function"&&(a=el.call(a)),n[a]=s},gs(Gn)),O_=yE(function(n,a,s){a!=null&&typeof a.toString!="function"&&(a=el.call(a)),we.call(n,a)?n[a].push(s):n[a]=[s]},ce),k_=he(ua);function Nn(n){return Ln(n)?Co(n):ji(n)}function Dn(n){return Ln(n)?Co(n,!0):Ev(n)}function F_(n,a){var s={};return a=ce(a,3),vr(n,function(E,m,v){Dr(s,a(E,m,v),E)}),s}function K_(n,a){var s={};return a=ce(a,3),vr(n,function(E,m,v){Dr(s,m,a(E,m,v))}),s}var V_=Ft(function(n,a,s){fl(n,a,s)}),Rd=Ft(function(n,a,s,E){fl(n,a,s,E)}),M_=Or(function(n,a){var s={};if(n==null)return s;var E=!1;a=Ze(a,function(v){return v=Xr(v,n),E||(E=v.length>1),v}),Ar(n,ls(n),s),E&&(s=Xn(s,A|S|_,Gv));for(var m=a.length;m--;)Xi(s,a[m]);return s});function B_(n,a){return cd(n,Ll(ce(a)))}var w_=Or(function(n,a){return n==null?{}:mv(n,a)});function cd(n,a){if(n==null)return{};var s=Ze(ls(n),function(E){return[E]});return a=ce(a),sE(n,s,function(E,m){return a(E,m[0])})}function U_(n,a,s){a=Xr(a,n);var E=-1,m=a.length;for(m||(m=1,n=r);++E<m;){var v=n==null?r:n[Sr(a[E])];v===r&&(E=m,v=s),n=Fr(v)?v.call(n):v}return n}function x_(n,a,s){return n==null?n:Ea(n,a,s)}function q_(n,a,s,E){return E=typeof E=="function"?E:r,n==null?n:Ea(n,a,s,E)}var vd=LE(Nn),Ad=LE(Dn);function H_(n,a,s){var E=_e(n),m=E||Qr(n)||Mt(n);if(a=ce(a,4),s==null){var v=n&&n.constructor;m?s=E?new v:[]:Qe(n)?s=Fr(v)?kt(tl(n)):{}:s={}}return(m?$n:vr)(n,function(I,b,F){return a(s,I,b,F)}),s}function C_(n,a){return n==null?!0:Xi(n,a)}function j_(n,a,s){return n==null?n:mE(n,a,es(s))}function Y_(n,a,s,E){return E=typeof E=="function"?E:r,n==null?n:mE(n,a,es(s),E)}function Bt(n){return n==null?[]:Oi(n,Nn(n))}function J_(n){return n==null?[]:Oi(n,Dn(n))}function $_(n,a,s){return s===r&&(s=a,a=r),s!==r&&(s=er(s),s=s===s?s:0),a!==r&&(a=er(a),a=a===a?a:0),ot(er(n),a,s)}function W_(n,a,s){return a=Kr(a),s===r?(s=a,a=0):s=Kr(s),n=er(n),nv(n,a,s)}function z_(n,a,s){if(s&&typeof s!="boolean"&&In(n,a,s)&&(a=s=r),s===r&&(typeof a=="boolean"?(s=a,a=r):typeof n=="boolean"&&(s=n,n=r)),n===r&&a===r?(n=0,a=1):(n=Kr(n),a===r?(a=n,n=0):a=Kr(a)),n>a){var E=n;n=a,a=E}if(s||n%1||a%1){var m=qo();return An(n+m*(a-n+bR("1e-"+((m+"").length-1))),a)}return $i(n,a)}var X_=Kt(function(n,a,s){return a=a.toLowerCase(),n+(s?Sd(a):a)});function Sd(n){return Ts(Ve(n).toLowerCase())}function _d(n){return n=Ve(n),n&&n.replace(Qf,xR).replace(AR,"")}function Z_(n,a,s){n=Ve(n),a=wn(a);var E=n.length;s=s===r?E:ot(ge(s),0,E);var m=s;return s-=a.length,s>=0&&n.slice(s,m)==a}function Q_(n){return n=Ve(n),n&&kf.test(n)?n.replace(zu,qR):n}function eT(n){return n=Ve(n),n&&wf.test(n)?n.replace(ci,"\\$&"):n}var nT=Kt(function(n,a,s){return n+(s?"-":"")+a.toLowerCase()}),rT=Kt(function(n,a,s){return n+(s?" ":"")+a.toLowerCase()}),tT=IE("toLowerCase");function aT(n,a,s){n=Ve(n),a=ge(a);var E=a?bt(n):0;if(!a||E>=a)return n;var m=(a-E)/2;return _l(sl(m),s)+n+_l(il(m),s)}function lT(n,a,s){n=Ve(n),a=ge(a);var E=a?bt(n):0;return a&&E<a?n+_l(a-E,s):n}function iT(n,a,s){n=Ve(n),a=ge(a);var E=a?bt(n):0;return a&&E<a?_l(a-E,s)+n:n}function sT(n,a,s){return s||a==null?a=0:a&&(a=+a),fc(Ve(n).replace(vi,""),a||0)}function uT(n,a,s){return(s?In(n,a,s):a===r)?a=1:a=ge(a),Wi(Ve(n),a)}function oT(){var n=arguments,a=Ve(n[0]);return n.length<3?a:a.replace(n[1],n[2])}var ET=Kt(function(n,a,s){return n+(s?"_":"")+a.toLowerCase()});function dT(n,a,s){return s&&typeof s!="number"&&In(n,a,s)&&(a=s=r),s=s===r?ue:s>>>0,s?(n=Ve(n),n&&(typeof a=="string"||a!=null&&!As(a))&&(a=wn(a),!a&&pt(n))?Zr(sr(n),0,s):n.split(a,s)):[]}var mT=Kt(function(n,a,s){return n+(s?" ":"")+Ts(a)});function NT(n,a,s){return n=Ve(n),s=s==null?0:ot(ge(s),0,n.length),a=wn(a),n.slice(s,s+a.length)==a}function fT(n,a,s){var E=c.templateSettings;s&&In(n,a,s)&&(a=r),n=Ve(n),a=Ol({},a,E,DE);var m=Ol({},a.imports,E.imports,DE),v=Nn(m),I=Oi(m,v),b,F,J=0,W=a.interpolate||ja,Q="__p += '",ie=Fi((a.escape||ja).source+"|"+W.source+"|"+(W===Xu?Jf:ja).source+"|"+(a.evaluate||ja).source+"|$","g"),Ne="//# sourceURL="+(we.call(a,"sourceURL")?(a.sourceURL+"").replace(/\s/g," "):"lodash.templateSources["+ ++IR+"]")+`
+`;n.replace(ie,function(Ae,ye,De,xn,Pn,qn){return De||(De=xn),Q+=n.slice(J,qn).replace(eR,HR),ye&&(b=!0,Q+=`' +
+__e(`+ye+`) +
+'`),Pn&&(F=!0,Q+=`';
+`+Pn+`;
+__p += '`),De&&(Q+=`' +
+((__t = (`+De+`)) == null ? '' : __t) +
+'`),J=qn+Ae.length,Ae}),Q+=`';
+`;var ve=we.call(a,"variable")&&a.variable;if(!ve)Q=`with (obj) {
+`+Q+`
+}
+`;else if(jf.test(ve))throw new Se(d);Q=(F?Q.replace(Ca,""):Q).replace(Df,"$1").replace(Gf,"$1;"),Q="function("+(ve||"obj")+`) {
+`+(ve?"":`obj || (obj = {});
+`)+"var __t, __p = ''"+(b?", __e = _.escape":"")+(F?`, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+`:`;
+`)+Q+`return __p
+}`;var Ie=gd(function(){return Ke(v,Ne+"return "+Q).apply(r,I)});if(Ie.source=Q,vs(Ie))throw Ie;return Ie}function RT(n){return Ve(n).toLowerCase()}function cT(n){return Ve(n).toUpperCase()}function vT(n,a,s){if(n=Ve(n),n&&(s||a===r))return Go(n);if(!n||!(a=wn(a)))return n;var E=sr(n),m=sr(a),v=Oo(E,m),I=ko(E,m)+1;return Zr(E,v,I).join("")}function AT(n,a,s){if(n=Ve(n),n&&(s||a===r))return n.slice(0,Ko(n)+1);if(!n||!(a=wn(a)))return n;var E=sr(n),m=ko(E,sr(a))+1;return Zr(E,0,m).join("")}function ST(n,a,s){if(n=Ve(n),n&&(s||a===r))return n.replace(vi,"");if(!n||!(a=wn(a)))return n;var E=sr(n),m=Oo(E,sr(a));return Zr(E,m).join("")}function _T(n,a){var s=ne,E=ee;if(Qe(a)){var m="separator"in a?a.separator:m;s="length"in a?ge(a.length):s,E="omission"in a?wn(a.omission):E}n=Ve(n);var v=n.length;if(pt(n)){var I=sr(n);v=I.length}if(s>=v)return n;var b=s-bt(E);if(b<1)return E;var F=I?Zr(I,0,b).join(""):n.slice(0,b);if(m===r)return F+E;if(I&&(b+=F.length-b),As(m)){if(n.slice(b).search(m)){var J,W=F;for(m.global||(m=Fi(m.source,Ve(Zu.exec(m))+"g")),m.lastIndex=0;J=m.exec(W);)var Q=J.index;F=F.slice(0,Q===r?b:Q)}}else if(n.indexOf(wn(m),b)!=b){var ie=F.lastIndexOf(m);ie>-1&&(F=F.slice(0,ie))}return F+E}function TT(n){return n=Ve(n),n&&Of.test(n)?n.replace(Wu,zR):n}var gT=Kt(function(n,a,s){return n+(s?" ":"")+a.toUpperCase()}),Ts=IE("toUpperCase");function Td(n,a,s){return n=Ve(n),a=s?r:a,a===r?jR(n)?QR(n):VR(n):n.match(a)||[]}var gd=he(function(n,a){try{return Mn(n,r,a)}catch(s){return vs(s)?s:new Se(s)}}),IT=Or(function(n,a){return $n(a,function(s){s=Sr(s),Dr(n,s,Rs(n[s],n))}),n});function PT(n){var a=n==null?0:n.length,s=ce();return n=a?Ze(n,function(E){if(typeof E[1]!="function")throw new Wn(o);return[s(E[0]),E[1]]}):[],he(function(E){for(var m=-1;++m<a;){var v=n[m];if(Mn(v[0],this,E))return Mn(v[1],this,E)}})}function hT(n){return zc(Xn(n,A))}function gs(n){return function(){return n}}function yT(n,a){return n==null||n!==n?a:n}var pT=hE(),bT=hE(!0);function Gn(n){return n}function Is(n){return nE(typeof n=="function"?n:Xn(n,A))}function LT(n){return tE(Xn(n,A))}function DT(n,a){return aE(n,Xn(a,A))}var GT=he(function(n,a){return function(s){return ua(s,n,a)}}),OT=he(function(n,a){return function(s){return ua(n,s,a)}});function Ps(n,a,s){var E=Nn(a),m=Nl(a,E);s==null&&!(Qe(a)&&(m.length||!E.length))&&(s=a,a=n,n=this,m=Nl(a,Nn(a)));var v=!(Qe(s)&&"chain"in s)||!!s.chain,I=Fr(n);return $n(m,function(b){var F=a[b];n[b]=F,I&&(n.prototype[b]=function(){var J=this.__chain__;if(v||J){var W=n(this.__wrapped__),Q=W.__actions__=bn(this.__actions__);return Q.push({func:F,args:arguments,thisArg:n}),W.__chain__=J,W}return F.apply(n,Yr([this.value()],arguments))})}),n}function kT(){return fn._===this&&(fn._=lc),this}function hs(){}function FT(n){return n=ge(n),he(function(a){return lE(a,n)})}var KT=rs(Ze),VT=rs(yo),MT=rs(pi);function Id(n){return os(n)?bi(Sr(n)):Nv(n)}function BT(n){return function(a){return n==null?r:Et(n,a)}}var wT=pE(),UT=pE(!0);function ys(){return[]}function ps(){return!1}function xT(){return{}}function qT(){return""}function HT(){return!0}function CT(n,a){if(n=ge(n),n<1||n>$)return[];var s=ue,E=An(n,ue);a=ce(a),n-=ue;for(var m=Gi(E,a);++s<n;)a(s);return m}function jT(n){return _e(n)?Ze(n,Sr):Un(n)?[n]:bn(HE(Ve(n)))}function YT(n){var a=++tc;return Ve(n)+a}var JT=Sl(function(n,a){return n+a},0),$T=ts("ceil"),WT=Sl(function(n,a){return n/a},1),zT=ts("floor");function XT(n){return n&&n.length?ml(n,Gn,qi):r}function ZT(n,a){return n&&n.length?ml(n,ce(a,2),qi):r}function QT(n){return Lo(n,Gn)}function eg(n,a){return Lo(n,ce(a,2))}function ng(n){return n&&n.length?ml(n,Gn,Yi):r}function rg(n,a){return n&&n.length?ml(n,ce(a,2),Yi):r}var tg=Sl(function(n,a){return n*a},1),ag=ts("round"),lg=Sl(function(n,a){return n-a},0);function ig(n){return n&&n.length?Di(n,Gn):0}function sg(n,a){return n&&n.length?Di(n,ce(a,2)):0}return c.after=LS,c.ary=ed,c.assign=c_,c.assignIn=fd,c.assignInWith=Ol,c.assignWith=v_,c.at=A_,c.before=nd,c.bind=Rs,c.bindAll=IT,c.bindKey=rd,c.castArray=xS,c.chain=XE,c.chunk=zv,c.compact=Xv,c.concat=Zv,c.cond=PT,c.conforms=hT,c.constant=gs,c.countBy=iS,c.create=S_,c.curry=td,c.curryRight=ad,c.debounce=ld,c.defaults=__,c.defaultsDeep=T_,c.defer=DS,c.delay=GS,c.difference=Qv,c.differenceBy=eA,c.differenceWith=nA,c.drop=rA,c.dropRight=tA,c.dropRightWhile=aA,c.dropWhile=lA,c.fill=iA,c.filter=uS,c.flatMap=dS,c.flatMapDeep=mS,c.flatMapDepth=NS,c.flatten=JE,c.flattenDeep=sA,c.flattenDepth=uA,c.flip=OS,c.flow=pT,c.flowRight=bT,c.fromPairs=oA,c.functions=b_,c.functionsIn=L_,c.groupBy=fS,c.initial=dA,c.intersection=mA,c.intersectionBy=NA,c.intersectionWith=fA,c.invert=G_,c.invertBy=O_,c.invokeMap=cS,c.iteratee=Is,c.keyBy=vS,c.keys=Nn,c.keysIn=Dn,c.map=yl,c.mapKeys=F_,c.mapValues=K_,c.matches=LT,c.matchesProperty=DT,c.memoize=bl,c.merge=V_,c.mergeWith=Rd,c.method=GT,c.methodOf=OT,c.mixin=Ps,c.negate=Ll,c.nthArg=FT,c.omit=M_,c.omitBy=B_,c.once=kS,c.orderBy=AS,c.over=KT,c.overArgs=FS,c.overEvery=VT,c.overSome=MT,c.partial=cs,c.partialRight=id,c.partition=SS,c.pick=w_,c.pickBy=cd,c.property=Id,c.propertyOf=BT,c.pull=AA,c.pullAll=WE,c.pullAllBy=SA,c.pullAllWith=_A,c.pullAt=TA,c.range=wT,c.rangeRight=UT,c.rearg=KS,c.reject=gS,c.remove=gA,c.rest=VS,c.reverse=Ns,c.sampleSize=PS,c.set=x_,c.setWith=q_,c.shuffle=hS,c.slice=IA,c.sortBy=bS,c.sortedUniq=DA,c.sortedUniqBy=GA,c.split=dT,c.spread=MS,c.tail=OA,c.take=kA,c.takeRight=FA,c.takeRightWhile=KA,c.takeWhile=VA,c.tap=XA,c.throttle=BS,c.thru=hl,c.toArray=dd,c.toPairs=vd,c.toPairsIn=Ad,c.toPath=jT,c.toPlainObject=Nd,c.transform=H_,c.unary=wS,c.union=MA,c.unionBy=BA,c.unionWith=wA,c.uniq=UA,c.uniqBy=xA,c.uniqWith=qA,c.unset=C_,c.unzip=fs,c.unzipWith=zE,c.update=j_,c.updateWith=Y_,c.values=Bt,c.valuesIn=J_,c.without=HA,c.words=Td,c.wrap=US,c.xor=CA,c.xorBy=jA,c.xorWith=YA,c.zip=JA,c.zipObject=$A,c.zipObjectDeep=WA,c.zipWith=zA,c.entries=vd,c.entriesIn=Ad,c.extend=fd,c.extendWith=Ol,Ps(c,c),c.add=JT,c.attempt=gd,c.camelCase=X_,c.capitalize=Sd,c.ceil=$T,c.clamp=$_,c.clone=qS,c.cloneDeep=CS,c.cloneDeepWith=jS,c.cloneWith=HS,c.conformsTo=YS,c.deburr=_d,c.defaultTo=yT,c.divide=WT,c.endsWith=Z_,c.eq=or,c.escape=Q_,c.escapeRegExp=eT,c.every=sS,c.find=oS,c.findIndex=jE,c.findKey=g_,c.findLast=ES,c.findLastIndex=YE,c.findLastKey=I_,c.floor=zT,c.forEach=ZE,c.forEachRight=QE,c.forIn=P_,c.forInRight=h_,c.forOwn=y_,c.forOwnRight=p_,c.get=Ss,c.gt=JS,c.gte=$S,c.has=D_,c.hasIn=_s,c.head=$E,c.identity=Gn,c.includes=RS,c.indexOf=EA,c.inRange=W_,c.invoke=k_,c.isArguments=Nt,c.isArray=_e,c.isArrayBuffer=WS,c.isArrayLike=Ln,c.isArrayLikeObject=rn,c.isBoolean=zS,c.isBuffer=Qr,c.isDate=XS,c.isElement=ZS,c.isEmpty=QS,c.isEqual=e_,c.isEqualWith=n_,c.isError=vs,c.isFinite=r_,c.isFunction=Fr,c.isInteger=sd,c.isLength=Dl,c.isMap=ud,c.isMatch=t_,c.isMatchWith=a_,c.isNaN=l_,c.isNative=i_,c.isNil=u_,c.isNull=s_,c.isNumber=od,c.isObject=Qe,c.isObjectLike=en,c.isPlainObject=fa,c.isRegExp=As,c.isSafeInteger=o_,c.isSet=Ed,c.isString=Gl,c.isSymbol=Un,c.isTypedArray=Mt,c.isUndefined=E_,c.isWeakMap=d_,c.isWeakSet=m_,c.join=RA,c.kebabCase=nT,c.last=Qn,c.lastIndexOf=cA,c.lowerCase=rT,c.lowerFirst=tT,c.lt=N_,c.lte=f_,c.max=XT,c.maxBy=ZT,c.mean=QT,c.meanBy=eg,c.min=ng,c.minBy=rg,c.stubArray=ys,c.stubFalse=ps,c.stubObject=xT,c.stubString=qT,c.stubTrue=HT,c.multiply=tg,c.nth=vA,c.noConflict=kT,c.noop=hs,c.now=pl,c.pad=aT,c.padEnd=lT,c.padStart=iT,c.parseInt=sT,c.random=z_,c.reduce=_S,c.reduceRight=TS,c.repeat=uT,c.replace=oT,c.result=U_,c.round=ag,c.runInContext=O,c.sample=IS,c.size=yS,c.snakeCase=ET,c.some=pS,c.sortedIndex=PA,c.sortedIndexBy=hA,c.sortedIndexOf=yA,c.sortedLastIndex=pA,c.sortedLastIndexBy=bA,c.sortedLastIndexOf=LA,c.startCase=mT,c.startsWith=NT,c.subtract=lg,c.sum=ig,c.sumBy=sg,c.template=fT,c.times=CT,c.toFinite=Kr,c.toInteger=ge,c.toLength=md,c.toLower=RT,c.toNumber=er,c.toSafeInteger=R_,c.toString=Ve,c.toUpper=cT,c.trim=vT,c.trimEnd=AT,c.trimStart=ST,c.truncate=_T,c.unescape=TT,c.uniqueId=YT,c.upperCase=gT,c.upperFirst=Ts,c.each=ZE,c.eachRight=QE,c.first=$E,Ps(c,function(){var n={};return vr(c,function(a,s){we.call(c.prototype,s)||(n[s]=a)}),n}(),{chain:!1}),c.VERSION=t,$n(["bind","bindKey","curry","curryRight","partial","partialRight"],function(n){c[n].placeholder=c}),$n(["drop","take"],function(n,a){pe.prototype[n]=function(s){s=s===r?1:dn(ge(s),0);var E=this.__filtered__&&!a?new pe(this):this.clone();return E.__filtered__?E.__takeCount__=An(s,E.__takeCount__):E.__views__.push({size:An(s,ue),type:n+(E.__dir__<0?"Right":"")}),E},pe.prototype[n+"Right"]=function(s){return this.reverse()[n](s).reverse()}}),$n(["filter","map","takeWhile"],function(n,a){var s=a+1,E=s==M||s==re;pe.prototype[n]=function(m){var v=this.clone();return v.__iteratees__.push({iteratee:ce(m,3),type:s}),v.__filtered__=v.__filtered__||E,v}}),$n(["head","last"],function(n,a){var s="take"+(a?"Right":"");pe.prototype[n]=function(){return this[s](1).value()[0]}}),$n(["initial","tail"],function(n,a){var s="drop"+(a?"":"Right");pe.prototype[n]=function(){return this.__filtered__?new pe(this):this[s](1)}}),pe.prototype.compact=function(){return this.filter(Gn)},pe.prototype.find=function(n){return this.filter(n).head()},pe.prototype.findLast=function(n){return this.reverse().find(n)},pe.prototype.invokeMap=he(function(n,a){return typeof n=="function"?new pe(this):this.map(function(s){return ua(s,n,a)})}),pe.prototype.reject=function(n){return this.filter(Ll(ce(n)))},pe.prototype.slice=function(n,a){n=ge(n);var s=this;return s.__filtered__&&(n>0||a<0)?new pe(s):(n<0?s=s.takeRight(-n):n&&(s=s.drop(n)),a!==r&&(a=ge(a),s=a<0?s.dropRight(-a):s.take(a-n)),s)},pe.prototype.takeRightWhile=function(n){return this.reverse().takeWhile(n).reverse()},pe.prototype.toArray=function(){return this.take(ue)},vr(pe.prototype,function(n,a){var s=/^(?:filter|find|map|reject)|While$/.test(a),E=/^(?:head|last)$/.test(a),m=c[E?"take"+(a=="last"?"Right":""):a],v=E||/^find/.test(a);m&&(c.prototype[a]=function(){var I=this.__wrapped__,b=E?[1]:arguments,F=I instanceof pe,J=b[0],W=F||_e(I),Q=function(ye){var De=m.apply(c,Yr([ye],b));return E&&ie?De[0]:De};W&&s&&typeof J=="function"&&J.length!=1&&(F=W=!1);var ie=this.__chain__,Ne=!!this.__actions__.length,ve=v&&!ie,Ie=F&&!Ne;if(!v&&W){I=Ie?I:new pe(this);var Ae=n.apply(I,b);return Ae.__actions__.push({func:hl,args:[Q],thisArg:r}),new zn(Ae,ie)}return ve&&Ie?n.apply(this,b):(Ae=this.thru(Q),ve?E?Ae.value()[0]:Ae.value():Ae)})}),$n(["pop","push","shift","sort","splice","unshift"],function(n){var a=Xa[n],s=/^(?:push|sort|unshift)$/.test(n)?"tap":"thru",E=/^(?:pop|shift)$/.test(n);c.prototype[n]=function(){var m=arguments;if(E&&!this.__chain__){var v=this.value();return a.apply(_e(v)?v:[],m)}return this[s](function(I){return a.apply(_e(I)?I:[],m)})}}),vr(pe.prototype,function(n,a){var s=c[a];if(s){var E=s.name+"";we.call(Ot,E)||(Ot[E]=[]),Ot[E].push({name:a,func:s})}}),Ot[Al(r,y).name]=[{name:"wrapper",func:r}],pe.prototype.clone=Tc,pe.prototype.reverse=gc,pe.prototype.value=Ic,c.prototype.at=ZA,c.prototype.chain=QA,c.prototype.commit=eS,c.prototype.next=nS,c.prototype.plant=tS,c.prototype.reverse=aS,c.prototype.toJSON=c.prototype.valueOf=c.prototype.value=lS,c.prototype.first=c.prototype.head,na&&(c.prototype[na]=rS),c},Lt=ec();lt?((lt.exports=Lt)._=Lt,Ii._=Lt):fn._=Lt}).call(k0)}(Pa,Pa.exports)),Pa.exports}F0();Rr(wa);const nf=P.forwardRef((e,l)=>le.jsx(Vu,{gap:"space-8",style:{display:"flex"},...e,ref:l}));nf.displayName="FaktaGruppe";nf.__docgenInfo={description:"",methods:[],displayName:"FaktaGruppe"};var Cs={exports:{}};/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/var pm;function K0(){return pm||(pm=1,function(e){(function(){var l={}.hasOwnProperty;function r(){for(var u="",o=0;o<arguments.length;o++){var d=arguments[o];d&&(u=i(u,t.call(this,d)))}return u}function t(u){if(typeof u=="string"||typeof u=="number")return this&&this[u]||u;if(typeof u!="object")return"";if(Array.isArray(u))return r.apply(this,u);if(u.toString!==Object.prototype.toString&&!u.toString.toString().includes("[native code]"))return u.toString();var o="";for(var d in u)l.call(u,d)&&u[d]&&(o=i(o,this&&this[d]||d));return o}function i(u,o){return o?u?u+" "+o:u+o:u}e.exports?(r.default=r,e.exports=r):window.classNames=r})()}(Cs)),Cs.exports}var V0=K0();const M0=tN(V0),B0="_boks_nm7fe_1",w0="_harBorderLeft_nm7fe_8",U0="_harBorderTop_nm7fe_12",x0={boks:B0,harBorderLeft:w0,harBorderTop:U0};M0.bind(x0);var js={exports:{}};/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/var bm;function q0(){return bm||(bm=1,function(e){(function(){var l={}.hasOwnProperty;function r(){for(var u="",o=0;o<arguments.length;o++){var d=arguments[o];d&&(u=i(u,t(d)))}return u}function t(u){if(typeof u=="string"||typeof u=="number")return u;if(typeof u!="object")return"";if(Array.isArray(u))return r.apply(null,u);if(u.toString!==Object.prototype.toString&&!u.toString.toString().includes("[native code]"))return u.toString();var o="";for(var d in u)l.call(u,d)&&u[d]&&(o=i(o,d));return o}function i(u,o){return o?u?u+" "+o:u+o:u}e.exports?(r.default=r,e.exports=r):window.classNames=r})()}(js)),js.exports}q0();function H0(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var Lm={exports:{}},Ta={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var Dm;function C0(){if(Dm)return Ta;Dm=1;var e=Symbol.for("react.transitional.element"),l=Symbol.for("react.fragment");function r(t,i,u){var o=null;if(u!==void 0&&(o=""+u),i.key!==void 0&&(o=""+i.key),"key"in i){u={};for(var d in i)d!=="key"&&(u[d]=i[d])}else u=i;return i=u.ref,{$$typeof:e,type:t,key:o,ref:i!==void 0?i:null,props:u}}return Ta.Fragment=l,Ta.jsx=r,Ta.jsxs=r,Ta}var Gm;function j0(){return Gm||(Gm=1,Lm.exports=C0()),Lm.exports}var Ur=j0();const Y0="_autocompleteSuggestion__substring_uvuzd_1",J0="_autocompleteSuggestion__inner_uvuzd_4",ga={autocompleteSuggestion__substring:Y0,autocompleteSuggestion__inner:J0,"autocompleteSuggestion--active":"_autocompleteSuggestion--active_uvuzd_12"};class $0 extends k.Component{constructor(l){super(l),this.state={value:l.value},this.onClick=this.onClick.bind(this),this.onMouseMove=this.onMouseMove.bind(this)}onClick(){const{onClick:l}=this.props,{value:r}=this.state;l(r)}onMouseMove(){const{setSuggestionIndex:l,index:r}=this.props;l(r)}render(){const{match:l,active:r,avoidBlur:t,id:i}=this.props,{value:u}=this.state.value,o=u.toLowerCase().startsWith(l.toLowerCase());return Ur.jsx("li",{id:i,role:"option","aria-selected":r,onClick:this.onClick,onMouseMove:this.onMouseMove,onFocus:t,onMouseDown:t,onKeyDown:t,className:"autocompleteSuggestion typo-normal",children:o?Ur.jsxs("span",{className:`${ga.autocompleteSuggestion__inner} ${r?ga["autocompleteSuggestion--active"]:""}`,children:[u.substring(0,l.length),Ur.jsx("span",{className:ga.autocompleteSuggestion__substring,children:u.substring(l.length)})]}):Ur.jsx("span",{className:`${ga.autocompleteSuggestion__inner} ${r?ga["autocompleteSuggestion--active"]:""}`,children:u})})}}const W0="_autocomplete_cj8jr_1",z0="_autocomplete__suggestions_cj8jr_27",Ys={autocomplete:W0,autocomplete__suggestions:z0,"autocomplete__suggestions--hidden":"_autocomplete__suggestions--hidden_cj8jr_31"};class aL extends k.Component{input;inputRef;constructor(l){super(l),this.state={activeSuggestionIndex:-1,hasFocus:!1,shouldShowSuggestions:!0,setAriaActiveDescendant:!1,shouldBlur:!0,blurDelay:null},this.inputRef=r=>{this.input=r},this.onChange=this.onChange.bind(this),this.onBlur=this.onBlur.bind(this),this.onKeyDown=this.onKeyDown.bind(this),this.onFocus=this.onFocus.bind(this),this.setValue=this.setValue.bind(this),this.setSuggestionIndex=this.setSuggestionIndex.bind(this),this.avoidBlur=this.avoidBlur.bind(this),this.clearBlurDelay=this.clearBlurDelay.bind(this),this.onSearchButtonClick=this.onSearchButtonClick.bind(this)}componentWillUnmount(){const{blurDelay:l}=this.state;l&&(clearTimeout(l),this.setState({blurDelay:null}))}onChange(l){const{onChange:r}=this.props;this.setState({activeSuggestionIndex:-1,shouldShowSuggestions:!0}),r(l)}onSearchButtonClick(l){const{onSearchButtonClick:r}=this.props;l.preventDefault(),r&&r()}onKeyDown(l){const{shouldShowSuggestions:r}=this.state;let{activeSuggestionIndex:t}=this.state;const{suggestions:i}=this.props,u=t>-1;switch(this.setState({setAriaActiveDescendant:l.keyCode===38||l.keyCode===40}),l.keyCode){case 9:u&&r&&this.setValue(i[t]);break;case 13:u&&r?(l.preventDefault(),this.setValue(i[t])):r&&i.length===1?this.setValue(i[0]):this.setState({shouldShowSuggestions:!1});break;case 27:r&&i.length>0&&(l.preventDefault(),this.setState({shouldShowSuggestions:!1}));break;case 38:r&&(l.preventDefault(),t=t-1===-2?-1:t-1,this.setState({activeSuggestionIndex:t}));break;case 40:r&&(l.preventDefault(),t=t+1===i.length?i.length-1:t+1,this.setState({activeSuggestionIndex:t}));break}}onFocus(){this.setState({hasFocus:!0,activeSuggestionIndex:-1})}onBlur(){const l=setTimeout(()=>{const{shouldBlur:t}=this.state;t&&this.setState({hasFocus:!1})},10);this.setState({blurDelay:l});const{onBlur:r}=this.props;r&&r()}setSuggestionIndex(l){this.setState({activeSuggestionIndex:l}),this.clearBlurDelay()}setValue(l){this.setState({shouldShowSuggestions:!1,activeSuggestionIndex:-1},()=>{this.inputRef.focus()}),this.clearBlurDelay();const{onSelect:r}=this.props;r(l)}avoidBlur(){this.setState({shouldBlur:!1})}clearBlurDelay(){const{blurDelay:l}=this.state;l&&(clearTimeout(l),this.setState({blurDelay:null})),this.setState({shouldBlur:!0})}render(){const{suggestions:l,id:r,ariaLabel:t,placeholder:i,value:u,name:o,shouldFocusOnMount:d,isLoading:N}=this.props,{activeSuggestionIndex:f,setAriaActiveDescendant:R,hasFocus:A,shouldShowSuggestions:S}=this.state,_=A&&S&&l.length>0,G=R&&f>-1?`${r}-item-${f}`:void 0;return Ur.jsxs("div",{className:`${Ys.autocomplete} autocomplete`,"aria-expanded":_,"aria-owns":`${r}-suggestions`,"aria-haspopup":"listbox",children:[Ur.jsx(tu,{variant:"primary",id:r,name:o,"aria-label":t,"aria-autocomplete":"list","aria-controls":`${r}-suggestions`,"aria-activedescendant":G,placeholder:i,value:u,autoComplete:"off",onChange:this.onChange,onBlur:this.onBlur,onKeyDown:this.onKeyDown,onFocus:this.onFocus,ref:g=>{this.inputRef=g},className:"typo-normal",autoFocus:d,label:t,hideLabel:!0,children:Ur.jsx(tu.Button,{loading:N,onClick:this.onSearchButtonClick})}),Ur.jsx("ul",{id:`${r}-suggestions`,role:"listbox",className:_?Ys.autocomplete__suggestions:Ys["autocomplete__suggestions--hidden"],children:_&&l.map((g,T)=>Ur.jsx($0,{id:`${r}-item-${T}`,index:T,value:g,match:u,active:T===f,onClick:this.setValue,setSuggestionIndex:this.setSuggestionIndex,avoidBlur:this.avoidBlur},g.key))})]})}}var su=function(e,l){return su=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(r,t){r.__proto__=t}||function(r,t){for(var i in t)Object.prototype.hasOwnProperty.call(t,i)&&(r[i]=t[i])},su(e,l)};function cr(e,l){if(typeof l!="function"&&l!==null)throw new TypeError("Class extends value "+String(l)+" is not a constructor or null");su(e,l);function r(){this.constructor=e}e.prototype=l===null?Object.create(l):(r.prototype=l.prototype,new r)}var me=function(){return me=Object.assign||function(e){for(var l,r=1,t=arguments.length;r<t;r++){l=arguments[r];for(var i in l)Object.prototype.hasOwnProperty.call(l,i)&&(e[i]=l[i])}return e},me.apply(this,arguments)};function mi(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r}function gr(e,l,r){if(arguments.length===2)for(var t=0,i=l.length,u;t<i;t++)(u||!(t in l))&&(u||(u=Array.prototype.slice.call(l,0,t)),u[t]=l[t]);return e.concat(u||Array.prototype.slice.call(l))}function _r(e,l){var r=l&&l.cache?l.cache:tp,t=l&&l.serializer?l.serializer:np,i=l&&l.strategy?l.strategy:Q0;return i(e,{cache:r,serializer:t})}function X0(e){return e==null||typeof e=="number"||typeof e=="boolean"}function Z0(e,l,r,t){var i=X0(t)?t:r(t),u=l.get(i);return typeof u>"u"&&(u=e.call(this,t),l.set(i,u)),u}function rf(e,l,r){var t=Array.prototype.slice.call(arguments,3),i=r(t),u=l.get(i);return typeof u>"u"&&(u=e.apply(this,t),l.set(i,u)),u}function tf(e,l,r,t,i){return r.bind(l,e,t,i)}function Q0(e,l){var r=e.length===1?Z0:rf;return tf(e,this,r,l.cache.create(),l.serializer)}function ep(e,l){return tf(e,this,rf,l.cache.create(),l.serializer)}var np=function(){return JSON.stringify(arguments)},rp=function(){function e(){this.cache=Object.create(null)}return e.prototype.get=function(l){return this.cache[l]},e.prototype.set=function(l,r){this.cache[l]=r},e}(),tp={create:function(){return new rp}},Tr={variadic:ep},Ge;(function(e){e[e.EXPECT_ARGUMENT_CLOSING_BRACE=1]="EXPECT_ARGUMENT_CLOSING_BRACE",e[e.EMPTY_ARGUMENT=2]="EMPTY_ARGUMENT",e[e.MALFORMED_ARGUMENT=3]="MALFORMED_ARGUMENT",e[e.EXPECT_ARGUMENT_TYPE=4]="EXPECT_ARGUMENT_TYPE",e[e.INVALID_ARGUMENT_TYPE=5]="INVALID_ARGUMENT_TYPE",e[e.EXPECT_ARGUMENT_STYLE=6]="EXPECT_ARGUMENT_STYLE",e[e.INVALID_NUMBER_SKELETON=7]="INVALID_NUMBER_SKELETON",e[e.INVALID_DATE_TIME_SKELETON=8]="INVALID_DATE_TIME_SKELETON",e[e.EXPECT_NUMBER_SKELETON=9]="EXPECT_NUMBER_SKELETON",e[e.EXPECT_DATE_TIME_SKELETON=10]="EXPECT_DATE_TIME_SKELETON",e[e.UNCLOSED_QUOTE_IN_ARGUMENT_STYLE=11]="UNCLOSED_QUOTE_IN_ARGUMENT_STYLE",e[e.EXPECT_SELECT_ARGUMENT_OPTIONS=12]="EXPECT_SELECT_ARGUMENT_OPTIONS",e[e.EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE=13]="EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE",e[e.INVALID_PLURAL_ARGUMENT_OFFSET_VALUE=14]="INVALID_PLURAL_ARGUMENT_OFFSET_VALUE",e[e.EXPECT_SELECT_ARGUMENT_SELECTOR=15]="EXPECT_SELECT_ARGUMENT_SELECTOR",e[e.EXPECT_PLURAL_ARGUMENT_SELECTOR=16]="EXPECT_PLURAL_ARGUMENT_SELECTOR",e[e.EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT=17]="EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT",e[e.EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT=18]="EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT",e[e.INVALID_PLURAL_ARGUMENT_SELECTOR=19]="INVALID_PLURAL_ARGUMENT_SELECTOR",e[e.DUPLICATE_PLURAL_ARGUMENT_SELECTOR=20]="DUPLICATE_PLURAL_ARGUMENT_SELECTOR",e[e.DUPLICATE_SELECT_ARGUMENT_SELECTOR=21]="DUPLICATE_SELECT_ARGUMENT_SELECTOR",e[e.MISSING_OTHER_CLAUSE=22]="MISSING_OTHER_CLAUSE",e[e.INVALID_TAG=23]="INVALID_TAG",e[e.INVALID_TAG_NAME=25]="INVALID_TAG_NAME",e[e.UNMATCHED_CLOSING_TAG=26]="UNMATCHED_CLOSING_TAG",e[e.UNCLOSED_TAG=27]="UNCLOSED_TAG"})(Ge||(Ge={}));var We;(function(e){e[e.literal=0]="literal",e[e.argument=1]="argument",e[e.number=2]="number",e[e.date=3]="date",e[e.time=4]="time",e[e.select=5]="select",e[e.plural=6]="plural",e[e.pound=7]="pound",e[e.tag=8]="tag"})(We||(We={}));var jt;(function(e){e[e.number=0]="number",e[e.dateTime=1]="dateTime"})(jt||(jt={}));function Om(e){return e.type===We.literal}function ap(e){return e.type===We.argument}function af(e){return e.type===We.number}function lf(e){return e.type===We.date}function sf(e){return e.type===We.time}function uf(e){return e.type===We.select}function of(e){return e.type===We.plural}function lp(e){return e.type===We.pound}function Ef(e){return e.type===We.tag}function df(e){return!!(e&&typeof e=="object"&&e.type===jt.number)}function uu(e){return!!(e&&typeof e=="object"&&e.type===jt.dateTime)}var mf=/[ \xA0\u1680\u2000-\u200A\u202F\u205F\u3000]/,ip=/(?:[Eec]{1,6}|G{1,5}|[Qq]{1,5}|(?:[yYur]+|U{1,5})|[ML]{1,5}|d{1,2}|D{1,3}|F{1}|[abB]{1,5}|[hkHK]{1,2}|w{1,2}|W{1}|m{1,2}|s{1,2}|[zZOvVxX]{1,4})(?=([^']*'[^']*')*[^']*$)/g;function sp(e){var l={};return e.replace(ip,function(r){var t=r.length;switch(r[0]){case"G":l.era=t===4?"long":t===5?"narrow":"short";break;case"y":l.year=t===2?"2-digit":"numeric";break;case"Y":case"u":case"U":case"r":throw new RangeError("`Y/u/U/r` (year) patterns are not supported, use `y` instead");case"q":case"Q":throw new RangeError("`q/Q` (quarter) patterns are not supported");case"M":case"L":l.month=["numeric","2-digit","short","long","narrow"][t-1];break;case"w":case"W":throw new RangeError("`w/W` (week) patterns are not supported");case"d":l.day=["numeric","2-digit"][t-1];break;case"D":case"F":case"g":throw new RangeError("`D/F/g` (day) patterns are not supported, use `d` instead");case"E":l.weekday=t===4?"long":t===5?"narrow":"short";break;case"e":if(t<4)throw new RangeError("`e..eee` (weekday) patterns are not supported");l.weekday=["short","long","narrow","short"][t-4];break;case"c":if(t<4)throw new RangeError("`c..ccc` (weekday) patterns are not supported");l.weekday=["short","long","narrow","short"][t-4];break;case"a":l.hour12=!0;break;case"b":case"B":throw new RangeError("`b/B` (period) patterns are not supported, use `a` instead");case"h":l.hourCycle="h12",l.hour=["numeric","2-digit"][t-1];break;case"H":l.hourCycle="h23",l.hour=["numeric","2-digit"][t-1];break;case"K":l.hourCycle="h11",l.hour=["numeric","2-digit"][t-1];break;case"k":l.hourCycle="h24",l.hour=["numeric","2-digit"][t-1];break;case"j":case"J":case"C":throw new RangeError("`j/J/C` (hour) patterns are not supported, use `h/H/K/k` instead");case"m":l.minute=["numeric","2-digit"][t-1];break;case"s":l.second=["numeric","2-digit"][t-1];break;case"S":case"A":throw new RangeError("`S/A` (second) patterns are not supported, use `s` instead");case"z":l.timeZoneName=t<4?"short":"long";break;case"Z":case"O":case"v":case"V":case"X":case"x":throw new RangeError("`Z/O/v/V/X/x` (timeZone) patterns are not supported, use `z` instead")}return""}),l}var up=/[\t-\r \x85\u200E\u200F\u2028\u2029]/i;function op(e){if(e.length===0)throw new Error("Number skeleton cannot be empty");for(var l=e.split(up).filter(function(S){return S.length>0}),r=[],t=0,i=l;t<i.length;t++){var u=i[t],o=u.split("/");if(o.length===0)throw new Error("Invalid number skeleton");for(var d=o[0],N=o.slice(1),f=0,R=N;f<R.length;f++){var A=R[f];if(A.length===0)throw new Error("Invalid number skeleton")}r.push({stem:d,options:N})}return r}function Ep(e){return e.replace(/^(.*?)-/,"")}var km=/^\.(?:(0+)(\*)?|(#+)|(0+)(#+))$/g,Nf=/^(@+)?(\+|#+)?[rs]?$/g,dp=/(\*)(0+)|(#+)(0+)|(0+)/g,ff=/^(0+)$/;function Fm(e){var l={};return e[e.length-1]==="r"?l.roundingPriority="morePrecision":e[e.length-1]==="s"&&(l.roundingPriority="lessPrecision"),e.replace(Nf,function(r,t,i){return typeof i!="string"?(l.minimumSignificantDigits=t.length,l.maximumSignificantDigits=t.length):i==="+"?l.minimumSignificantDigits=t.length:t[0]==="#"?l.maximumSignificantDigits=t.length:(l.minimumSignificantDigits=t.length,l.maximumSignificantDigits=t.length+(typeof i=="string"?i.length:0)),""}),l}function Rf(e){switch(e){case"sign-auto":return{signDisplay:"auto"};case"sign-accounting":case"()":return{currencySign:"accounting"};case"sign-always":case"+!":return{signDisplay:"always"};case"sign-accounting-always":case"()!":return{signDisplay:"always",currencySign:"accounting"};case"sign-except-zero":case"+?":return{signDisplay:"exceptZero"};case"sign-accounting-except-zero":case"()?":return{signDisplay:"exceptZero",currencySign:"accounting"};case"sign-never":case"+_":return{signDisplay:"never"}}}function mp(e){var l;if(e[0]==="E"&&e[1]==="E"?(l={notation:"engineering"},e=e.slice(2)):e[0]==="E"&&(l={notation:"scientific"},e=e.slice(1)),l){var r=e.slice(0,2);if(r==="+!"?(l.signDisplay="always",e=e.slice(2)):r==="+?"&&(l.signDisplay="exceptZero",e=e.slice(2)),!ff.test(e))throw new Error("Malformed concise eng/scientific notation");l.minimumIntegerDigits=e.length}return l}function Km(e){var l={},r=Rf(e);return r||l}function Np(e){for(var l={},r=0,t=e;r<t.length;r++){var i=t[r];switch(i.stem){case"percent":case"%":l.style="percent";continue;case"%x100":l.style="percent",l.scale=100;continue;case"currency":l.style="currency",l.currency=i.options[0];continue;case"group-off":case",_":l.useGrouping=!1;continue;case"precision-integer":case".":l.maximumFractionDigits=0;continue;case"measure-unit":case"unit":l.style="unit",l.unit=Ep(i.options[0]);continue;case"compact-short":case"K":l.notation="compact",l.compactDisplay="short";continue;case"compact-long":case"KK":l.notation="compact",l.compactDisplay="long";continue;case"scientific":l=me(me(me({},l),{notation:"scientific"}),i.options.reduce(function(N,f){return me(me({},N),Km(f))},{}));continue;case"engineering":l=me(me(me({},l),{notation:"engineering"}),i.options.reduce(function(N,f){return me(me({},N),Km(f))},{}));continue;case"notation-simple":l.notation="standard";continue;case"unit-width-narrow":l.currencyDisplay="narrowSymbol",l.unitDisplay="narrow";continue;case"unit-width-short":l.currencyDisplay="code",l.unitDisplay="short";continue;case"unit-width-full-name":l.currencyDisplay="name",l.unitDisplay="long";continue;case"unit-width-iso-code":l.currencyDisplay="symbol";continue;case"scale":l.scale=parseFloat(i.options[0]);continue;case"rounding-mode-floor":l.roundingMode="floor";continue;case"rounding-mode-ceiling":l.roundingMode="ceil";continue;case"rounding-mode-down":l.roundingMode="trunc";continue;case"rounding-mode-up":l.roundingMode="expand";continue;case"rounding-mode-half-even":l.roundingMode="halfEven";continue;case"rounding-mode-half-down":l.roundingMode="halfTrunc";continue;case"rounding-mode-half-up":l.roundingMode="halfExpand";continue;case"integer-width":if(i.options.length>1)throw new RangeError("integer-width stems only accept a single optional option");i.options[0].replace(dp,function(N,f,R,A,S,_){if(f)l.minimumIntegerDigits=R.length;else{if(A&&S)throw new Error("We currently do not support maximum integer digits");if(_)throw new Error("We currently do not support exact integer digits")}return""});continue}if(ff.test(i.stem)){l.minimumIntegerDigits=i.stem.length;continue}if(km.test(i.stem)){if(i.options.length>1)throw new RangeError("Fraction-precision stems only accept a single optional option");i.stem.replace(km,function(N,f,R,A,S,_){return R==="*"?l.minimumFractionDigits=f.length:A&&A[0]==="#"?l.maximumFractionDigits=A.length:S&&_?(l.minimumFractionDigits=S.length,l.maximumFractionDigits=S.length+_.length):(l.minimumFractionDigits=f.length,l.maximumFractionDigits=f.length),""});var u=i.options[0];u==="w"?l=me(me({},l),{trailingZeroDisplay:"stripIfInteger"}):u&&(l=me(me({},l),Fm(u)));continue}if(Nf.test(i.stem)){l=me(me({},l),Fm(i.stem));continue}var o=Rf(i.stem);o&&(l=me(me({},l),o));var d=mp(i.stem);d&&(l=me(me({},l),d))}return l}var Ml={"001":["H","h"],419:["h","H","hB","hb"],AC:["H","h","hb","hB"],AD:["H","hB"],AE:["h","hB","hb","H"],AF:["H","hb","hB","h"],AG:["h","hb","H","hB"],AI:["H","h","hb","hB"],AL:["h","H","hB"],AM:["H","hB"],AO:["H","hB"],AR:["h","H","hB","hb"],AS:["h","H"],AT:["H","hB"],AU:["h","hb","H","hB"],AW:["H","hB"],AX:["H"],AZ:["H","hB","h"],BA:["H","hB","h"],BB:["h","hb","H","hB"],BD:["h","hB","H"],BE:["H","hB"],BF:["H","hB"],BG:["H","hB","h"],BH:["h","hB","hb","H"],BI:["H","h"],BJ:["H","hB"],BL:["H","hB"],BM:["h","hb","H","hB"],BN:["hb","hB","h","H"],BO:["h","H","hB","hb"],BQ:["H"],BR:["H","hB"],BS:["h","hb","H","hB"],BT:["h","H"],BW:["H","h","hb","hB"],BY:["H","h"],BZ:["H","h","hb","hB"],CA:["h","hb","H","hB"],CC:["H","h","hb","hB"],CD:["hB","H"],CF:["H","h","hB"],CG:["H","hB"],CH:["H","hB","h"],CI:["H","hB"],CK:["H","h","hb","hB"],CL:["h","H","hB","hb"],CM:["H","h","hB"],CN:["H","hB","hb","h"],CO:["h","H","hB","hb"],CP:["H"],CR:["h","H","hB","hb"],CU:["h","H","hB","hb"],CV:["H","hB"],CW:["H","hB"],CX:["H","h","hb","hB"],CY:["h","H","hb","hB"],CZ:["H"],DE:["H","hB"],DG:["H","h","hb","hB"],DJ:["h","H"],DK:["H"],DM:["h","hb","H","hB"],DO:["h","H","hB","hb"],DZ:["h","hB","hb","H"],EA:["H","h","hB","hb"],EC:["h","H","hB","hb"],EE:["H","hB"],EG:["h","hB","hb","H"],EH:["h","hB","hb","H"],ER:["h","H"],ES:["H","hB","h","hb"],ET:["hB","hb","h","H"],FI:["H"],FJ:["h","hb","H","hB"],FK:["H","h","hb","hB"],FM:["h","hb","H","hB"],FO:["H","h"],FR:["H","hB"],GA:["H","hB"],GB:["H","h","hb","hB"],GD:["h","hb","H","hB"],GE:["H","hB","h"],GF:["H","hB"],GG:["H","h","hb","hB"],GH:["h","H"],GI:["H","h","hb","hB"],GL:["H","h"],GM:["h","hb","H","hB"],GN:["H","hB"],GP:["H","hB"],GQ:["H","hB","h","hb"],GR:["h","H","hb","hB"],GT:["h","H","hB","hb"],GU:["h","hb","H","hB"],GW:["H","hB"],GY:["h","hb","H","hB"],HK:["h","hB","hb","H"],HN:["h","H","hB","hb"],HR:["H","hB"],HU:["H","h"],IC:["H","h","hB","hb"],ID:["H"],IE:["H","h","hb","hB"],IL:["H","hB"],IM:["H","h","hb","hB"],IN:["h","H"],IO:["H","h","hb","hB"],IQ:["h","hB","hb","H"],IR:["hB","H"],IS:["H"],IT:["H","hB"],JE:["H","h","hb","hB"],JM:["h","hb","H","hB"],JO:["h","hB","hb","H"],JP:["H","K","h"],KE:["hB","hb","H","h"],KG:["H","h","hB","hb"],KH:["hB","h","H","hb"],KI:["h","hb","H","hB"],KM:["H","h","hB","hb"],KN:["h","hb","H","hB"],KP:["h","H","hB","hb"],KR:["h","H","hB","hb"],KW:["h","hB","hb","H"],KY:["h","hb","H","hB"],KZ:["H","hB"],LA:["H","hb","hB","h"],LB:["h","hB","hb","H"],LC:["h","hb","H","hB"],LI:["H","hB","h"],LK:["H","h","hB","hb"],LR:["h","hb","H","hB"],LS:["h","H"],LT:["H","h","hb","hB"],LU:["H","h","hB"],LV:["H","hB","hb","h"],LY:["h","hB","hb","H"],MA:["H","h","hB","hb"],MC:["H","hB"],MD:["H","hB"],ME:["H","hB","h"],MF:["H","hB"],MG:["H","h"],MH:["h","hb","H","hB"],MK:["H","h","hb","hB"],ML:["H"],MM:["hB","hb","H","h"],MN:["H","h","hb","hB"],MO:["h","hB","hb","H"],MP:["h","hb","H","hB"],MQ:["H","hB"],MR:["h","hB","hb","H"],MS:["H","h","hb","hB"],MT:["H","h"],MU:["H","h"],MV:["H","h"],MW:["h","hb","H","hB"],MX:["h","H","hB","hb"],MY:["hb","hB","h","H"],MZ:["H","hB"],NA:["h","H","hB","hb"],NC:["H","hB"],NE:["H"],NF:["H","h","hb","hB"],NG:["H","h","hb","hB"],NI:["h","H","hB","hb"],NL:["H","hB"],NO:["H","h"],NP:["H","h","hB"],NR:["H","h","hb","hB"],NU:["H","h","hb","hB"],NZ:["h","hb","H","hB"],OM:["h","hB","hb","H"],PA:["h","H","hB","hb"],PE:["h","H","hB","hb"],PF:["H","h","hB"],PG:["h","H"],PH:["h","hB","hb","H"],PK:["h","hB","H"],PL:["H","h"],PM:["H","hB"],PN:["H","h","hb","hB"],PR:["h","H","hB","hb"],PS:["h","hB","hb","H"],PT:["H","hB"],PW:["h","H"],PY:["h","H","hB","hb"],QA:["h","hB","hb","H"],RE:["H","hB"],RO:["H","hB"],RS:["H","hB","h"],RU:["H"],RW:["H","h"],SA:["h","hB","hb","H"],SB:["h","hb","H","hB"],SC:["H","h","hB"],SD:["h","hB","hb","H"],SE:["H"],SG:["h","hb","H","hB"],SH:["H","h","hb","hB"],SI:["H","hB"],SJ:["H"],SK:["H"],SL:["h","hb","H","hB"],SM:["H","h","hB"],SN:["H","h","hB"],SO:["h","H"],SR:["H","hB"],SS:["h","hb","H","hB"],ST:["H","hB"],SV:["h","H","hB","hb"],SX:["H","h","hb","hB"],SY:["h","hB","hb","H"],SZ:["h","hb","H","hB"],TA:["H","h","hb","hB"],TC:["h","hb","H","hB"],TD:["h","H","hB"],TF:["H","h","hB"],TG:["H","hB"],TH:["H","h"],TJ:["H","h"],TL:["H","hB","hb","h"],TM:["H","h"],TN:["h","hB","hb","H"],TO:["h","H"],TR:["H","hB"],TT:["h","hb","H","hB"],TW:["hB","hb","h","H"],TZ:["hB","hb","H","h"],UA:["H","hB","h"],UG:["hB","hb","H","h"],UM:["h","hb","H","hB"],US:["h","hb","H","hB"],UY:["h","H","hB","hb"],UZ:["H","hB","h"],VA:["H","h","hB"],VC:["h","hb","H","hB"],VE:["h","H","hB","hb"],VG:["h","hb","H","hB"],VI:["h","hb","H","hB"],VN:["H","h"],VU:["h","H"],WF:["H","hB"],WS:["h","H"],XK:["H","hB","h"],YE:["h","hB","hb","H"],YT:["H","hB"],ZA:["H","h","hb","hB"],ZM:["h","hb","H","hB"],ZW:["H","h"],"af-ZA":["H","h","hB","hb"],"ar-001":["h","hB","hb","H"],"ca-ES":["H","h","hB"],"en-001":["h","hb","H","hB"],"en-HK":["h","hb","H","hB"],"en-IL":["H","h","hb","hB"],"en-MY":["h","hb","H","hB"],"es-BR":["H","h","hB","hb"],"es-ES":["H","h","hB","hb"],"es-GQ":["H","h","hB","hb"],"fr-CA":["H","h","hB"],"gl-ES":["H","h","hB"],"gu-IN":["hB","hb","h","H"],"hi-IN":["hB","h","H"],"it-CH":["H","h","hB"],"it-IT":["H","h","hB"],"kn-IN":["hB","h","H"],"ml-IN":["hB","h","H"],"mr-IN":["hB","hb","h","H"],"pa-IN":["hB","hb","h","H"],"ta-IN":["hB","h","hb","H"],"te-IN":["hB","h","H"],"zu-ZA":["H","hB","hb","h"]};function fp(e,l){for(var r="",t=0;t<e.length;t++){var i=e.charAt(t);if(i==="j"){for(var u=0;t+1<e.length&&e.charAt(t+1)===i;)u++,t++;var o=1+(u&1),d=u<2?1:3+(u>>1),N="a",f=Rp(l);for((f=="H"||f=="k")&&(d=0);d-- >0;)r+=N;for(;o-- >0;)r=f+r}else i==="J"?r+="H":r+=i}return r}function Rp(e){var l=e.hourCycle;if(l===void 0&&e.hourCycles&&e.hourCycles.length&&(l=e.hourCycles[0]),l)switch(l){case"h24":return"k";case"h23":return"H";case"h12":return"h";case"h11":return"K";default:throw new Error("Invalid hourCycle")}var r=e.language,t;r!=="root"&&(t=e.maximize().region);var i=Ml[t||""]||Ml[r||""]||Ml["".concat(r,"-001")]||Ml["001"];return i[0]}var Js,cp=new RegExp("^".concat(mf.source,"*")),vp=new RegExp("".concat(mf.source,"*$"));function ke(e,l){return{start:e,end:l}}var Ap=!!String.prototype.startsWith&&"_a".startsWith("a",1),Sp=!!String.fromCodePoint,_p=!!Object.fromEntries,Tp=!!String.prototype.codePointAt,gp=!!String.prototype.trimStart,Ip=!!String.prototype.trimEnd,Pp=!!Number.isSafeInteger,hp=Pp?Number.isSafeInteger:function(e){return typeof e=="number"&&isFinite(e)&&Math.floor(e)===e&&Math.abs(e)<=9007199254740991},ou=!0;try{var yp=vf("([^\\p{White_Space}\\p{Pattern_Syntax}]*)","yu");ou=((Js=yp.exec("a"))===null||Js===void 0?void 0:Js[0])==="a"}catch{ou=!1}var Vm=Ap?function(e,l,r){return e.startsWith(l,r)}:function(e,l,r){return e.slice(r,r+l.length)===l},Eu=Sp?String.fromCodePoint:function(){for(var e=[],l=0;l<arguments.length;l++)e[l]=arguments[l];for(var r="",t=e.length,i=0,u;t>i;){if(u=e[i++],u>1114111)throw RangeError(u+" is not a valid code point");r+=u<65536?String.fromCharCode(u):String.fromCharCode(((u-=65536)>>10)+55296,u%1024+56320)}return r},Mm=_p?Object.fromEntries:function(e){for(var l={},r=0,t=e;r<t.length;r++){var i=t[r],u=i[0],o=i[1];l[u]=o}return l},cf=Tp?function(e,l){return e.codePointAt(l)}:function(e,l){var r=e.length;if(!(l<0||l>=r)){var t=e.charCodeAt(l),i;return t<55296||t>56319||l+1===r||(i=e.charCodeAt(l+1))<56320||i>57343?t:(t-55296<<10)+(i-56320)+65536}},pp=gp?function(e){return e.trimStart()}:function(e){return e.replace(cp,"")},bp=Ip?function(e){return e.trimEnd()}:function(e){return e.replace(vp,"")};function vf(e,l){return new RegExp(e,l)}var du;if(ou){var Bm=vf("([^\\p{White_Space}\\p{Pattern_Syntax}]*)","yu");du=function(e,l){var r;Bm.lastIndex=l;var t=Bm.exec(e);return(r=t[1])!==null&&r!==void 0?r:""}}else du=function(e,l){for(var r=[];;){var t=cf(e,l);if(t===void 0||Af(t)||Op(t))break;r.push(t),l+=t>=65536?2:1}return Eu.apply(void 0,r)};var Lp=function(){function e(l,r){r===void 0&&(r={}),this.message=l,this.position={offset:0,line:1,column:1},this.ignoreTag=!!r.ignoreTag,this.locale=r.locale,this.requiresOtherClause=!!r.requiresOtherClause,this.shouldParseSkeletons=!!r.shouldParseSkeletons}return e.prototype.parse=function(){if(this.offset()!==0)throw Error("parser can only be used once");return this.parseMessage(0,"",!1)},e.prototype.parseMessage=function(l,r,t){for(var i=[];!this.isEOF();){var u=this.char();if(u===123){var o=this.parseArgument(l,t);if(o.err)return o;i.push(o.val)}else{if(u===125&&l>0)break;if(u===35&&(r==="plural"||r==="selectordinal")){var d=this.clonePosition();this.bump(),i.push({type:We.pound,location:ke(d,this.clonePosition())})}else if(u===60&&!this.ignoreTag&&this.peek()===47){if(t)break;return this.error(Ge.UNMATCHED_CLOSING_TAG,ke(this.clonePosition(),this.clonePosition()))}else if(u===60&&!this.ignoreTag&&mu(this.peek()||0)){var o=this.parseTag(l,r);if(o.err)return o;i.push(o.val)}else{var o=this.parseLiteral(l,r);if(o.err)return o;i.push(o.val)}}}return{val:i,err:null}},e.prototype.parseTag=function(l,r){var t=this.clonePosition();this.bump();var i=this.parseTagName();if(this.bumpSpace(),this.bumpIf("/>"))return{val:{type:We.literal,value:"<".concat(i,"/>"),location:ke(t,this.clonePosition())},err:null};if(this.bumpIf(">")){var u=this.parseMessage(l+1,r,!0);if(u.err)return u;var o=u.val,d=this.clonePosition();if(this.bumpIf("</")){if(this.isEOF()||!mu(this.char()))return this.error(Ge.INVALID_TAG,ke(d,this.clonePosition()));var N=this.clonePosition(),f=this.parseTagName();return i!==f?this.error(Ge.UNMATCHED_CLOSING_TAG,ke(N,this.clonePosition())):(this.bumpSpace(),this.bumpIf(">")?{val:{type:We.tag,value:i,children:o,location:ke(t,this.clonePosition())},err:null}:this.error(Ge.INVALID_TAG,ke(d,this.clonePosition())))}else return this.error(Ge.UNCLOSED_TAG,ke(t,this.clonePosition()))}else return this.error(Ge.INVALID_TAG,ke(t,this.clonePosition()))},e.prototype.parseTagName=function(){var l=this.offset();for(this.bump();!this.isEOF()&&Gp(this.char());)this.bump();return this.message.slice(l,this.offset())},e.prototype.parseLiteral=function(l,r){for(var t=this.clonePosition(),i="";;){var u=this.tryParseQuote(r);if(u){i+=u;continue}var o=this.tryParseUnquoted(l,r);if(o){i+=o;continue}var d=this.tryParseLeftAngleBracket();if(d){i+=d;continue}break}var N=ke(t,this.clonePosition());return{val:{type:We.literal,value:i,location:N},err:null}},e.prototype.tryParseLeftAngleBracket=function(){return!this.isEOF()&&this.char()===60&&(this.ignoreTag||!Dp(this.peek()||0))?(this.bump(),"<"):null},e.prototype.tryParseQuote=function(l){if(this.isEOF()||this.char()!==39)return null;switch(this.peek()){case 39:return this.bump(),this.bump(),"'";case 123:case 60:case 62:case 125:break;case 35:if(l==="plural"||l==="selectordinal")break;return null;default:return null}this.bump();var r=[this.char()];for(this.bump();!this.isEOF();){var t=this.char();if(t===39)if(this.peek()===39)r.push(39),this.bump();else{this.bump();break}else r.push(t);this.bump()}return Eu.apply(void 0,r)},e.prototype.tryParseUnquoted=function(l,r){if(this.isEOF())return null;var t=this.char();return t===60||t===123||t===35&&(r==="plural"||r==="selectordinal")||t===125&&l>0?null:(this.bump(),Eu(t))},e.prototype.parseArgument=function(l,r){var t=this.clonePosition();if(this.bump(),this.bumpSpace(),this.isEOF())return this.error(Ge.EXPECT_ARGUMENT_CLOSING_BRACE,ke(t,this.clonePosition()));if(this.char()===125)return this.bump(),this.error(Ge.EMPTY_ARGUMENT,ke(t,this.clonePosition()));var i=this.parseIdentifierIfPossible().value;if(!i)return this.error(Ge.MALFORMED_ARGUMENT,ke(t,this.clonePosition()));if(this.bumpSpace(),this.isEOF())return this.error(Ge.EXPECT_ARGUMENT_CLOSING_BRACE,ke(t,this.clonePosition()));switch(this.char()){case 125:return this.bump(),{val:{type:We.argument,value:i,location:ke(t,this.clonePosition())},err:null};case 44:return this.bump(),this.bumpSpace(),this.isEOF()?this.error(Ge.EXPECT_ARGUMENT_CLOSING_BRACE,ke(t,this.clonePosition())):this.parseArgumentOptions(l,r,i,t);default:return this.error(Ge.MALFORMED_ARGUMENT,ke(t,this.clonePosition()))}},e.prototype.parseIdentifierIfPossible=function(){var l=this.clonePosition(),r=this.offset(),t=du(this.message,r),i=r+t.length;this.bumpTo(i);var u=this.clonePosition(),o=ke(l,u);return{value:t,location:o}},e.prototype.parseArgumentOptions=function(l,r,t,i){var u,o=this.clonePosition(),d=this.parseIdentifierIfPossible().value,N=this.clonePosition();switch(d){case"":return this.error(Ge.EXPECT_ARGUMENT_TYPE,ke(o,N));case"number":case"date":case"time":{this.bumpSpace();var f=null;if(this.bumpIf(",")){this.bumpSpace();var R=this.clonePosition(),A=this.parseSimpleArgStyleIfPossible();if(A.err)return A;var S=bp(A.val);if(S.length===0)return this.error(Ge.EXPECT_ARGUMENT_STYLE,ke(this.clonePosition(),this.clonePosition()));var _=ke(R,this.clonePosition());f={style:S,styleLocation:_}}var G=this.tryParseArgumentClose(i);if(G.err)return G;var g=ke(i,this.clonePosition());if(f&&Vm(f?.style,"::",0)){var T=pp(f.style.slice(2));if(d==="number"){var A=this.parseNumberSkeletonFromString(T,f.styleLocation);return A.err?A:{val:{type:We.number,value:t,location:g,style:A.val},err:null}}else{if(T.length===0)return this.error(Ge.EXPECT_DATE_TIME_SKELETON,g);var y=T;this.locale&&(y=fp(T,this.locale));var S={type:jt.dateTime,pattern:y,location:f.styleLocation,parsedOptions:this.shouldParseSkeletons?sp(y):{}},L=d==="date"?We.date:We.time;return{val:{type:L,value:t,location:g,style:S},err:null}}}return{val:{type:d==="number"?We.number:d==="date"?We.date:We.time,value:t,location:g,style:(u=f?.style)!==null&&u!==void 0?u:null},err:null}}case"plural":case"selectordinal":case"select":{var p=this.clonePosition();if(this.bumpSpace(),!this.bumpIf(","))return this.error(Ge.EXPECT_SELECT_ARGUMENT_OPTIONS,ke(p,me({},p)));this.bumpSpace();var w=this.parseIdentifierIfPossible(),D=0;if(d!=="select"&&w.value==="offset"){if(!this.bumpIf(":"))return this.error(Ge.EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE,ke(this.clonePosition(),this.clonePosition()));this.bumpSpace();var A=this.tryParseDecimalInteger(Ge.EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE,Ge.INVALID_PLURAL_ARGUMENT_OFFSET_VALUE);if(A.err)return A;this.bumpSpace(),w=this.parseIdentifierIfPossible(),D=A.val}var q=this.tryParsePluralOrSelectOptions(l,d,r,w);if(q.err)return q;var G=this.tryParseArgumentClose(i);if(G.err)return G;var B=ke(i,this.clonePosition());return d==="select"?{val:{type:We.select,value:t,options:Mm(q.val),location:B},err:null}:{val:{type:We.plural,value:t,options:Mm(q.val),offset:D,pluralType:d==="plural"?"cardinal":"ordinal",location:B},err:null}}default:return this.error(Ge.INVALID_ARGUMENT_TYPE,ke(o,N))}},e.prototype.tryParseArgumentClose=function(l){return this.isEOF()||this.char()!==125?this.error(Ge.EXPECT_ARGUMENT_CLOSING_BRACE,ke(l,this.clonePosition())):(this.bump(),{val:!0,err:null})},e.prototype.parseSimpleArgStyleIfPossible=function(){for(var l=0,r=this.clonePosition();!this.isEOF();){var t=this.char();switch(t){case 39:{this.bump();var i=this.clonePosition();if(!this.bumpUntil("'"))return this.error(Ge.UNCLOSED_QUOTE_IN_ARGUMENT_STYLE,ke(i,this.clonePosition()));this.bump();break}case 123:{l+=1,this.bump();break}case 125:{if(l>0)l-=1;else return{val:this.message.slice(r.offset,this.offset()),err:null};break}default:this.bump();break}}return{val:this.message.slice(r.offset,this.offset()),err:null}},e.prototype.parseNumberSkeletonFromString=function(l,r){var t=[];try{t=op(l)}catch{return this.error(Ge.INVALID_NUMBER_SKELETON,r)}return{val:{type:jt.number,tokens:t,location:r,parsedOptions:this.shouldParseSkeletons?Np(t):{}},err:null}},e.prototype.tryParsePluralOrSelectOptions=function(l,r,t,i){for(var u,o=!1,d=[],N=new Set,f=i.value,R=i.location;;){if(f.length===0){var A=this.clonePosition();if(r!=="select"&&this.bumpIf("=")){var S=this.tryParseDecimalInteger(Ge.EXPECT_PLURAL_ARGUMENT_SELECTOR,Ge.INVALID_PLURAL_ARGUMENT_SELECTOR);if(S.err)return S;R=ke(A,this.clonePosition()),f=this.message.slice(A.offset,this.offset())}else break}if(N.has(f))return this.error(r==="select"?Ge.DUPLICATE_SELECT_ARGUMENT_SELECTOR:Ge.DUPLICATE_PLURAL_ARGUMENT_SELECTOR,R);f==="other"&&(o=!0),this.bumpSpace();var _=this.clonePosition();if(!this.bumpIf("{"))return this.error(r==="select"?Ge.EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT:Ge.EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT,ke(this.clonePosition(),this.clonePosition()));var G=this.parseMessage(l+1,r,t);if(G.err)return G;var g=this.tryParseArgumentClose(_);if(g.err)return g;d.push([f,{value:G.val,location:ke(_,this.clonePosition())}]),N.add(f),this.bumpSpace(),u=this.parseIdentifierIfPossible(),f=u.value,R=u.location}return d.length===0?this.error(r==="select"?Ge.EXPECT_SELECT_ARGUMENT_SELECTOR:Ge.EXPECT_PLURAL_ARGUMENT_SELECTOR,ke(this.clonePosition(),this.clonePosition())):this.requiresOtherClause&&!o?this.error(Ge.MISSING_OTHER_CLAUSE,ke(this.clonePosition(),this.clonePosition())):{val:d,err:null}},e.prototype.tryParseDecimalInteger=function(l,r){var t=1,i=this.clonePosition();this.bumpIf("+")||this.bumpIf("-")&&(t=-1);for(var u=!1,o=0;!this.isEOF();){var d=this.char();if(d>=48&&d<=57)u=!0,o=o*10+(d-48),this.bump();else break}var N=ke(i,this.clonePosition());return u?(o*=t,hp(o)?{val:o,err:null}:this.error(r,N)):this.error(l,N)},e.prototype.offset=function(){return this.position.offset},e.prototype.isEOF=function(){return this.offset()===this.message.length},e.prototype.clonePosition=function(){return{offset:this.position.offset,line:this.position.line,column:this.position.column}},e.prototype.char=function(){var l=this.position.offset;if(l>=this.message.length)throw Error("out of bound");var r=cf(this.message,l);if(r===void 0)throw Error("Offset ".concat(l," is at invalid UTF-16 code unit boundary"));return r},e.prototype.error=function(l,r){return{val:null,err:{kind:l,message:this.message,location:r}}},e.prototype.bump=function(){if(!this.isEOF()){var l=this.char();l===10?(this.position.line+=1,this.position.column=1,this.position.offset+=1):(this.position.column+=1,this.position.offset+=l<65536?1:2)}},e.prototype.bumpIf=function(l){if(Vm(this.message,l,this.offset())){for(var r=0;r<l.length;r++)this.bump();return!0}return!1},e.prototype.bumpUntil=function(l){var r=this.offset(),t=this.message.indexOf(l,r);return t>=0?(this.bumpTo(t),!0):(this.bumpTo(this.message.length),!1)},e.prototype.bumpTo=function(l){if(this.offset()>l)throw Error("targetOffset ".concat(l," must be greater than or equal to the current offset ").concat(this.offset()));for(l=Math.min(l,this.message.length);;){var r=this.offset();if(r===l)break;if(r>l)throw Error("targetOffset ".concat(l," is at invalid UTF-16 code unit boundary"));if(this.bump(),this.isEOF())break}},e.prototype.bumpSpace=function(){for(;!this.isEOF()&&Af(this.char());)this.bump()},e.prototype.peek=function(){if(this.isEOF())return null;var l=this.char(),r=this.offset(),t=this.message.charCodeAt(r+(l>=65536?2:1));return t??null},e}();function mu(e){return e>=97&&e<=122||e>=65&&e<=90}function Dp(e){return mu(e)||e===47}function Gp(e){return e===45||e===46||e>=48&&e<=57||e===95||e>=97&&e<=122||e>=65&&e<=90||e==183||e>=192&&e<=214||e>=216&&e<=246||e>=248&&e<=893||e>=895&&e<=8191||e>=8204&&e<=8205||e>=8255&&e<=8256||e>=8304&&e<=8591||e>=11264&&e<=12271||e>=12289&&e<=55295||e>=63744&&e<=64975||e>=65008&&e<=65533||e>=65536&&e<=983039}function Af(e){return e>=9&&e<=13||e===32||e===133||e>=8206&&e<=8207||e===8232||e===8233}function Op(e){return e>=33&&e<=35||e===36||e>=37&&e<=39||e===40||e===41||e===42||e===43||e===44||e===45||e>=46&&e<=47||e>=58&&e<=59||e>=60&&e<=62||e>=63&&e<=64||e===91||e===92||e===93||e===94||e===96||e===123||e===124||e===125||e===126||e===161||e>=162&&e<=165||e===166||e===167||e===169||e===171||e===172||e===174||e===176||e===177||e===182||e===187||e===191||e===215||e===247||e>=8208&&e<=8213||e>=8214&&e<=8215||e===8216||e===8217||e===8218||e>=8219&&e<=8220||e===8221||e===8222||e===8223||e>=8224&&e<=8231||e>=8240&&e<=8248||e===8249||e===8250||e>=8251&&e<=8254||e>=8257&&e<=8259||e===8260||e===8261||e===8262||e>=8263&&e<=8273||e===8274||e===8275||e>=8277&&e<=8286||e>=8592&&e<=8596||e>=8597&&e<=8601||e>=8602&&e<=8603||e>=8604&&e<=8607||e===8608||e>=8609&&e<=8610||e===8611||e>=8612&&e<=8613||e===8614||e>=8615&&e<=8621||e===8622||e>=8623&&e<=8653||e>=8654&&e<=8655||e>=8656&&e<=8657||e===8658||e===8659||e===8660||e>=8661&&e<=8691||e>=8692&&e<=8959||e>=8960&&e<=8967||e===8968||e===8969||e===8970||e===8971||e>=8972&&e<=8991||e>=8992&&e<=8993||e>=8994&&e<=9e3||e===9001||e===9002||e>=9003&&e<=9083||e===9084||e>=9085&&e<=9114||e>=9115&&e<=9139||e>=9140&&e<=9179||e>=9180&&e<=9185||e>=9186&&e<=9254||e>=9255&&e<=9279||e>=9280&&e<=9290||e>=9291&&e<=9311||e>=9472&&e<=9654||e===9655||e>=9656&&e<=9664||e===9665||e>=9666&&e<=9719||e>=9720&&e<=9727||e>=9728&&e<=9838||e===9839||e>=9840&&e<=10087||e===10088||e===10089||e===10090||e===10091||e===10092||e===10093||e===10094||e===10095||e===10096||e===10097||e===10098||e===10099||e===10100||e===10101||e>=10132&&e<=10175||e>=10176&&e<=10180||e===10181||e===10182||e>=10183&&e<=10213||e===10214||e===10215||e===10216||e===10217||e===10218||e===10219||e===10220||e===10221||e===10222||e===10223||e>=10224&&e<=10239||e>=10240&&e<=10495||e>=10496&&e<=10626||e===10627||e===10628||e===10629||e===10630||e===10631||e===10632||e===10633||e===10634||e===10635||e===10636||e===10637||e===10638||e===10639||e===10640||e===10641||e===10642||e===10643||e===10644||e===10645||e===10646||e===10647||e===10648||e>=10649&&e<=10711||e===10712||e===10713||e===10714||e===10715||e>=10716&&e<=10747||e===10748||e===10749||e>=10750&&e<=11007||e>=11008&&e<=11055||e>=11056&&e<=11076||e>=11077&&e<=11078||e>=11079&&e<=11084||e>=11085&&e<=11123||e>=11124&&e<=11125||e>=11126&&e<=11157||e===11158||e>=11159&&e<=11263||e>=11776&&e<=11777||e===11778||e===11779||e===11780||e===11781||e>=11782&&e<=11784||e===11785||e===11786||e===11787||e===11788||e===11789||e>=11790&&e<=11798||e===11799||e>=11800&&e<=11801||e===11802||e===11803||e===11804||e===11805||e>=11806&&e<=11807||e===11808||e===11809||e===11810||e===11811||e===11812||e===11813||e===11814||e===11815||e===11816||e===11817||e>=11818&&e<=11822||e===11823||e>=11824&&e<=11833||e>=11834&&e<=11835||e>=11836&&e<=11839||e===11840||e===11841||e===11842||e>=11843&&e<=11855||e>=11856&&e<=11857||e===11858||e>=11859&&e<=11903||e>=12289&&e<=12291||e===12296||e===12297||e===12298||e===12299||e===12300||e===12301||e===12302||e===12303||e===12304||e===12305||e>=12306&&e<=12307||e===12308||e===12309||e===12310||e===12311||e===12312||e===12313||e===12314||e===12315||e===12316||e===12317||e>=12318&&e<=12319||e===12320||e===12336||e===64830||e===64831||e>=65093&&e<=65094}function Nu(e){e.forEach(function(l){if(delete l.location,uf(l)||of(l))for(var r in l.options)delete l.options[r].location,Nu(l.options[r].value);else af(l)&&df(l.style)||(lf(l)||sf(l))&&uu(l.style)?delete l.style.location:Ef(l)&&Nu(l.children)})}function kp(e,l){l===void 0&&(l={}),l=me({shouldParseSkeletons:!0,requiresOtherClause:!0},l);var r=new Lp(e,l).parse();if(r.err){var t=SyntaxError(Ge[r.err.kind]);throw t.location=r.err.location,t.originalMessage=r.err.message,t}return l?.captureLocation||Nu(r.val),r.val}var yr;(function(e){e.MISSING_VALUE="MISSING_VALUE",e.INVALID_VALUE="INVALID_VALUE",e.MISSING_INTL_API="MISSING_INTL_API"})(yr||(yr={}));var rt=function(e){cr(l,e);function l(r,t,i){var u=e.call(this,r)||this;return u.code=t,u.originalMessage=i,u}return l.prototype.toString=function(){return"[formatjs Error: ".concat(this.code,"] ").concat(this.message)},l}(Error),wm=function(e){cr(l,e);function l(r,t,i,u){return e.call(this,'Invalid values for "'.concat(r,'": "').concat(t,'". Options are "').concat(Object.keys(i).join('", "'),'"'),yr.INVALID_VALUE,u)||this}return l}(rt),Fp=function(e){cr(l,e);function l(r,t,i){return e.call(this,'Value for "'.concat(r,'" must be of type ').concat(t),yr.INVALID_VALUE,i)||this}return l}(rt),Kp=function(e){cr(l,e);function l(r,t){return e.call(this,'The intl string context variable "'.concat(r,'" was not provided to the string "').concat(t,'"'),yr.MISSING_VALUE,t)||this}return l}(rt),hn;(function(e){e[e.literal=0]="literal",e[e.object=1]="object"})(hn||(hn={}));function Vp(e){return e.length<2?e:e.reduce(function(l,r){var t=l[l.length-1];return!t||t.type!==hn.literal||r.type!==hn.literal?l.push(r):t.value+=r.value,l},[])}function Sf(e){return typeof e=="function"}function Yl(e,l,r,t,i,u,o){if(e.length===1&&Om(e[0]))return[{type:hn.literal,value:e[0].value}];for(var d=[],N=0,f=e;N<f.length;N++){var R=f[N];if(Om(R)){d.push({type:hn.literal,value:R.value});continue}if(lp(R)){typeof u=="number"&&d.push({type:hn.literal,value:r.getNumberFormat(l).format(u)});continue}var A=R.value;if(!(i&&A in i))throw new Kp(A,o);var S=i[A];if(ap(R)){(!S||typeof S=="string"||typeof S=="number")&&(S=typeof S=="string"||typeof S=="number"?String(S):""),d.push({type:typeof S=="string"?hn.literal:hn.object,value:S});continue}if(lf(R)){var _=typeof R.style=="string"?t.date[R.style]:uu(R.style)?R.style.parsedOptions:void 0;d.push({type:hn.literal,value:r.getDateTimeFormat(l,_).format(S)});continue}if(sf(R)){var _=typeof R.style=="string"?t.time[R.style]:uu(R.style)?R.style.parsedOptions:t.time.medium;d.push({type:hn.literal,value:r.getDateTimeFormat(l,_).format(S)});continue}if(af(R)){var _=typeof R.style=="string"?t.number[R.style]:df(R.style)?R.style.parsedOptions:void 0;_&&_.scale&&(S=S*(_.scale||1)),d.push({type:hn.literal,value:r.getNumberFormat(l,_).format(S)});continue}if(Ef(R)){var G=R.children,g=R.value,T=i[g];if(!Sf(T))throw new Fp(g,"function",o);var y=Yl(G,l,r,t,i,u),L=T(y.map(function(D){return D.value}));Array.isArray(L)||(L=[L]),d.push.apply(d,L.map(function(D){return{type:typeof D=="string"?hn.literal:hn.object,value:D}}))}if(uf(R)){var p=R.options[S]||R.options.other;if(!p)throw new wm(R.value,S,Object.keys(R.options),o);d.push.apply(d,Yl(p.value,l,r,t,i));continue}if(of(R)){var p=R.options["=".concat(S)];if(!p){if(!Intl.PluralRules)throw new rt(`Intl.PluralRules is not available in this environment.
+Try polyfilling it using "@formatjs/intl-pluralrules"
+`,yr.MISSING_INTL_API,o);var w=r.getPluralRules(l,{type:R.pluralType}).select(S-(R.offset||0));p=R.options[w]||R.options.other}if(!p)throw new wm(R.value,S,Object.keys(R.options),o);d.push.apply(d,Yl(p.value,l,r,t,i,S-(R.offset||0)));continue}}return Vp(d)}function Mp(e,l){return l?me(me(me({},e||{}),l||{}),Object.keys(e).reduce(function(r,t){return r[t]=me(me({},e[t]),l[t]||{}),r},{})):e}function Bp(e,l){return l?Object.keys(e).reduce(function(r,t){return r[t]=Mp(e[t],l[t]),r},me({},e)):e}function $s(e){return{create:function(){return{get:function(l){return e[l]},set:function(l,r){e[l]=r}}}}}function wp(e){return e===void 0&&(e={number:{},dateTime:{},pluralRules:{}}),{getNumberFormat:_r(function(){for(var l,r=[],t=0;t<arguments.length;t++)r[t]=arguments[t];return new((l=Intl.NumberFormat).bind.apply(l,gr([void 0],r,!1)))},{cache:$s(e.number),strategy:Tr.variadic}),getDateTimeFormat:_r(function(){for(var l,r=[],t=0;t<arguments.length;t++)r[t]=arguments[t];return new((l=Intl.DateTimeFormat).bind.apply(l,gr([void 0],r,!1)))},{cache:$s(e.dateTime),strategy:Tr.variadic}),getPluralRules:_r(function(){for(var l,r=[],t=0;t<arguments.length;t++)r[t]=arguments[t];return new((l=Intl.PluralRules).bind.apply(l,gr([void 0],r,!1)))},{cache:$s(e.pluralRules),strategy:Tr.variadic})}}var _f=function(){function e(l,r,t,i){r===void 0&&(r=e.defaultLocale);var u=this;if(this.formatterCache={number:{},dateTime:{},pluralRules:{}},this.format=function(N){var f=u.formatToParts(N);if(f.length===1)return f[0].value;var R=f.reduce(function(A,S){return!A.length||S.type!==hn.literal||typeof A[A.length-1]!="string"?A.push(S.value):A[A.length-1]+=S.value,A},[]);return R.length<=1?R[0]||"":R},this.formatToParts=function(N){return Yl(u.ast,u.locales,u.formatters,u.formats,N,void 0,u.message)},this.resolvedOptions=function(){var N;return{locale:((N=u.resolvedLocale)===null||N===void 0?void 0:N.toString())||Intl.NumberFormat.supportedLocalesOf(u.locales)[0]}},this.getAst=function(){return u.ast},this.locales=r,this.resolvedLocale=e.resolveLocale(r),typeof l=="string"){if(this.message=l,!e.__parse)throw new TypeError("IntlMessageFormat.__parse must be set to process `message` of type `string`");var o=i||{};o.formatters;var d=mi(o,["formatters"]);this.ast=e.__parse(l,me(me({},d),{locale:this.resolvedLocale}))}else this.ast=l;if(!Array.isArray(this.ast))throw new TypeError("A message must be provided as a String or AST.");this.formats=Bp(e.formats,t),this.formatters=i&&i.formatters||wp(this.formatterCache)}return Object.defineProperty(e,"defaultLocale",{get:function(){return e.memoizedDefaultLocale||(e.memoizedDefaultLocale=new Intl.NumberFormat().resolvedOptions().locale),e.memoizedDefaultLocale},enumerable:!1,configurable:!0}),e.memoizedDefaultLocale=null,e.resolveLocale=function(l){if(!(typeof Intl.Locale>"u")){var r=Intl.NumberFormat.supportedLocalesOf(l);return r.length>0?new Intl.Locale(r[0]):new Intl.Locale(typeof l=="string"?l:l[0])}},e.__parse=kp,e.formats={number:{integer:{maximumFractionDigits:0},currency:{style:"currency"},percent:{style:"percent"}},date:{short:{month:"numeric",day:"numeric",year:"2-digit"},medium:{month:"short",day:"numeric",year:"numeric"},long:{month:"long",day:"numeric",year:"numeric"},full:{weekday:"long",month:"long",day:"numeric",year:"numeric"}},time:{short:{hour:"numeric",minute:"numeric"},medium:{hour:"numeric",minute:"numeric",second:"numeric"},long:{hour:"numeric",minute:"numeric",second:"numeric",timeZoneName:"short"},full:{hour:"numeric",minute:"numeric",second:"numeric",timeZoneName:"short"}}},e}(),gt;(function(e){e.FORMAT_ERROR="FORMAT_ERROR",e.UNSUPPORTED_FORMATTER="UNSUPPORTED_FORMATTER",e.INVALID_CONFIG="INVALID_CONFIG",e.MISSING_DATA="MISSING_DATA",e.MISSING_TRANSLATION="MISSING_TRANSLATION"})(gt||(gt={}));var xa=function(e){cr(l,e);function l(r,t,i){var u=this,o=i?i instanceof Error?i:new Error(String(i)):void 0;return u=e.call(this,"[@formatjs/intl Error ".concat(r,"] ").concat(t,`
+`).concat(o?`
+`.concat(o.message,`
+`).concat(o.stack):""))||this,u.code=r,typeof Error.captureStackTrace=="function"&&Error.captureStackTrace(u,l),u}return l}(Error),Up=function(e){cr(l,e);function l(r,t){return e.call(this,gt.UNSUPPORTED_FORMATTER,r,t)||this}return l}(xa),xp=function(e){cr(l,e);function l(r,t){return e.call(this,gt.INVALID_CONFIG,r,t)||this}return l}(xa),Um=function(e){cr(l,e);function l(r,t){return e.call(this,gt.MISSING_DATA,r,t)||this}return l}(xa),ar=function(e){cr(l,e);function l(r,t,i){var u=e.call(this,gt.FORMAT_ERROR,"".concat(r,`
+Locale: `).concat(t,`
+`),i)||this;return u.locale=t,u}return l}(xa),Ws=function(e){cr(l,e);function l(r,t,i,u){var o=e.call(this,"".concat(r,`
+MessageID: `).concat(i?.id,`
+Default Message: `).concat(i?.defaultMessage,`
+Description: `).concat(i?.description,`
+`),t,u)||this;return o.descriptor=i,o.locale=t,o}return l}(ar),qp=function(e){cr(l,e);function l(r,t){var i=e.call(this,gt.MISSING_TRANSLATION,'Missing message: "'.concat(r.id,'" for locale "').concat(t,'", using ').concat(r.defaultMessage?"default message (".concat(typeof r.defaultMessage=="string"?r.defaultMessage:r.defaultMessage.map(function(u){var o;return(o=u.value)!==null&&o!==void 0?o:JSON.stringify(u)}).join(),")"):"id"," as fallback."))||this;return i.descriptor=r,i}return l}(xa);function Hp(e,l,r){if(r===void 0&&(r=Error),!e)throw new r(l)}function zt(e,l,r){return r===void 0&&(r={}),l.reduce(function(t,i){return i in e?t[i]=e[i]:i in r&&(t[i]=r[i]),t},{})}var Cp=function(e){},jp=function(e){},Tf={formats:{},messages:{},timeZone:void 0,defaultLocale:"en",defaultFormats:{},fallbackOnEmptyString:!0,onError:Cp,onWarn:jp};function gf(){return{dateTime:{},number:{},message:{},relativeTime:{},pluralRules:{},list:{},displayNames:{}}}function ft(e){return{create:function(){return{get:function(l){return e[l]},set:function(l,r){e[l]=r}}}}}function Yp(e){e===void 0&&(e=gf());var l=Intl.RelativeTimeFormat,r=Intl.ListFormat,t=Intl.DisplayNames,i=_r(function(){for(var d,N=[],f=0;f<arguments.length;f++)N[f]=arguments[f];return new((d=Intl.DateTimeFormat).bind.apply(d,gr([void 0],N,!1)))},{cache:ft(e.dateTime),strategy:Tr.variadic}),u=_r(function(){for(var d,N=[],f=0;f<arguments.length;f++)N[f]=arguments[f];return new((d=Intl.NumberFormat).bind.apply(d,gr([void 0],N,!1)))},{cache:ft(e.number),strategy:Tr.variadic}),o=_r(function(){for(var d,N=[],f=0;f<arguments.length;f++)N[f]=arguments[f];return new((d=Intl.PluralRules).bind.apply(d,gr([void 0],N,!1)))},{cache:ft(e.pluralRules),strategy:Tr.variadic});return{getDateTimeFormat:i,getNumberFormat:u,getMessageFormat:_r(function(d,N,f,R){return new _f(d,N,f,me({formatters:{getNumberFormat:u,getDateTimeFormat:i,getPluralRules:o}},R||{}))},{cache:ft(e.message),strategy:Tr.variadic}),getRelativeTimeFormat:_r(function(){for(var d=[],N=0;N<arguments.length;N++)d[N]=arguments[N];return new(l.bind.apply(l,gr([void 0],d,!1)))},{cache:ft(e.relativeTime),strategy:Tr.variadic}),getPluralRules:o,getListFormat:_r(function(){for(var d=[],N=0;N<arguments.length;N++)d[N]=arguments[N];return new(r.bind.apply(r,gr([void 0],d,!1)))},{cache:ft(e.list),strategy:Tr.variadic}),getDisplayNames:_r(function(){for(var d=[],N=0;N<arguments.length;N++)d[N]=arguments[N];return new(t.bind.apply(t,gr([void 0],d,!1)))},{cache:ft(e.displayNames),strategy:Tr.variadic})}}function ju(e,l,r,t){var i=e&&e[l],u;if(i&&(u=i[r]),u)return u;t(new Up("No ".concat(l," format named: ").concat(r)))}function Bl(e,l){return Object.keys(e).reduce(function(r,t){return r[t]=me({timeZone:l},e[t]),r},{})}function xm(e,l){var r=Object.keys(me(me({},e),l));return r.reduce(function(t,i){return t[i]=me(me({},e[i]||{}),l[i]||{}),t},{})}function qm(e,l){if(!l)return e;var r=_f.formats;return me(me(me({},r),e),{date:xm(Bl(r.date,l),Bl(e.date||{},l)),time:xm(Bl(r.time,l),Bl(e.time||{},l))})}var fu=function(e,l,r,t,i){var u=e.locale,o=e.formats,d=e.messages,N=e.defaultLocale,f=e.defaultFormats,R=e.fallbackOnEmptyString,A=e.onError,S=e.timeZone,_=e.defaultRichTextElements;r===void 0&&(r={id:""});var G=r.id,g=r.defaultMessage;Hp(!!G,"[@formatjs/intl] An `id` must be provided to format a message. You can either:\n1. Configure your build toolchain with [babel-plugin-formatjs](https://formatjs.github.io/docs/tooling/babel-plugin)\nor [@formatjs/ts-transformer](https://formatjs.github.io/docs/tooling/ts-transformer) OR\n2. Configure your `eslint` config to include [eslint-plugin-formatjs](https://formatjs.github.io/docs/tooling/linter#enforce-id)\nto autofix this issue");var T=String(G),y=d&&Object.prototype.hasOwnProperty.call(d,T)&&d[T];if(Array.isArray(y)&&y.length===1&&y[0].type===We.literal)return y[0].value;if(!t&&y&&typeof y=="string"&&!_)return y.replace(/'\{(.*?)\}'/gi,"{$1}");if(t=me(me({},_),t||{}),o=qm(o,S),f=qm(f,S),!y){if(R===!1&&y==="")return y;if((!g||u&&u.toLowerCase()!==N.toLowerCase())&&A(new qp(r,u)),g)try{var L=l.getMessageFormat(g,N,f,i);return L.format(t)}catch(p){return A(new Ws('Error formatting default message for: "'.concat(T,'", rendering default message verbatim'),u,r,p)),typeof g=="string"?g:T}return T}try{var L=l.getMessageFormat(y,u,o,me({formatters:l},i||{}));return L.format(t)}catch(p){A(new Ws('Error formatting message: "'.concat(T,'", using ').concat(g?"default message":"id"," as fallback."),u,r,p))}if(g)try{var L=l.getMessageFormat(g,N,f,i);return L.format(t)}catch(p){A(new Ws('Error formatting the default message for: "'.concat(T,'", rendering message verbatim'),u,r,p))}return typeof y=="string"?y:typeof g=="string"?g:T},Jp=["formatMatcher","timeZone","hour12","weekday","era","year","month","day","hour","minute","second","timeZoneName","hourCycle","dateStyle","timeStyle","calendar","numberingSystem","fractionalSecondDigits"];function qa(e,l,r,t){var i=e.locale,u=e.formats,o=e.onError,d=e.timeZone;t===void 0&&(t={});var N=t.format,f=me(me({},d&&{timeZone:d}),N&&ju(u,l,N,o)),R=zt(t,Jp,f);return l==="time"&&!R.hour&&!R.minute&&!R.second&&!R.timeStyle&&!R.dateStyle&&(R=me(me({},R),{hour:"numeric",minute:"numeric"})),r(i,R)}function $p(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],o=u===void 0?{}:u,d=typeof i=="string"?new Date(i||0):i;try{return qa(e,"date",l,o).format(d)}catch(N){e.onError(new ar("Error formatting date.",e.locale,N))}return String(d)}function Wp(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],o=u===void 0?{}:u,d=typeof i=="string"?new Date(i||0):i;try{return qa(e,"time",l,o).format(d)}catch(N){e.onError(new ar("Error formatting time.",e.locale,N))}return String(d)}function zp(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],o=r[2],d=o===void 0?{}:o,N=typeof i=="string"?new Date(i||0):i,f=typeof u=="string"?new Date(u||0):u;try{return qa(e,"dateTimeRange",l,d).formatRange(N,f)}catch(R){e.onError(new ar("Error formatting date time range.",e.locale,R))}return String(N)}function Xp(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],o=u===void 0?{}:u,d=typeof i=="string"?new Date(i||0):i;try{return qa(e,"date",l,o).formatToParts(d)}catch(N){e.onError(new ar("Error formatting date.",e.locale,N))}return[]}function Zp(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],o=u===void 0?{}:u,d=typeof i=="string"?new Date(i||0):i;try{return qa(e,"time",l,o).formatToParts(d)}catch(N){e.onError(new ar("Error formatting time.",e.locale,N))}return[]}var Qp=["style","type","fallback","languageDisplay"];function eb(e,l,r,t){var i=e.locale,u=e.onError,o=Intl.DisplayNames;o||u(new rt(`Intl.DisplayNames is not available in this environment.
+Try polyfilling it using "@formatjs/intl-displaynames"
+`,yr.MISSING_INTL_API));var d=zt(t,Qp);try{return l(i,d).of(r)}catch(N){u(new ar("Error formatting display name.",i,N))}}var nb=["type","style"],Hm=Date.now();function rb(e){return"".concat(Hm,"_").concat(e,"_").concat(Hm)}function tb(e,l,r,t){t===void 0&&(t={});var i=If(e,l,r,t).reduce(function(u,o){var d=o.value;return typeof d!="string"?u.push(d):typeof u[u.length-1]=="string"?u[u.length-1]+=d:u.push(d),u},[]);return i.length===1?i[0]:i.length===0?"":i}function If(e,l,r,t){var i=e.locale,u=e.onError;t===void 0&&(t={});var o=Intl.ListFormat;o||u(new rt(`Intl.ListFormat is not available in this environment.
+Try polyfilling it using "@formatjs/intl-listformat"
+`,yr.MISSING_INTL_API));var d=zt(t,nb);try{var N={},f=r.map(function(R,A){if(typeof R=="object"){var S=rb(A);return N[S]=R,S}return String(R)});return l(i,d).formatToParts(f).map(function(R){return R.type==="literal"?R:me(me({},R),{value:N[R.value]||R.value})})}catch(R){u(new ar("Error formatting list.",i,R))}return r}var ab=["type"];function lb(e,l,r,t){var i=e.locale,u=e.onError;t===void 0&&(t={}),Intl.PluralRules||u(new rt(`Intl.PluralRules is not available in this environment.
+Try polyfilling it using "@formatjs/intl-pluralrules"
+`,yr.MISSING_INTL_API));var o=zt(t,ab);try{return l(i,o).select(r)}catch(d){u(new ar("Error formatting plural.",i,d))}return"other"}var ib=["numeric","style"];function sb(e,l,r){var t=e.locale,i=e.formats,u=e.onError;r===void 0&&(r={});var o=r.format,d=!!o&&ju(i,"relative",o,u)||{},N=zt(r,ib,d);return l(t,N)}function ub(e,l,r,t,i){i===void 0&&(i={}),t||(t="second");var u=Intl.RelativeTimeFormat;u||e.onError(new rt(`Intl.RelativeTimeFormat is not available in this environment.
+Try polyfilling it using "@formatjs/intl-relativetimeformat"
+`,yr.MISSING_INTL_API));try{return sb(e,l,i).format(r,t)}catch(o){e.onError(new ar("Error formatting relative time.",e.locale,o))}return String(r)}var ob=["style","currency","unit","unitDisplay","useGrouping","minimumIntegerDigits","minimumFractionDigits","maximumFractionDigits","minimumSignificantDigits","maximumSignificantDigits","compactDisplay","currencyDisplay","currencySign","notation","signDisplay","unit","unitDisplay","numberingSystem","trailingZeroDisplay","roundingPriority","roundingIncrement","roundingMode"];function Pf(e,l,r){var t=e.locale,i=e.formats,u=e.onError;r===void 0&&(r={});var o=r.format,d=o&&ju(i,"number",o,u)||{},N=zt(r,ob,d);return l(t,N)}function Eb(e,l,r,t){t===void 0&&(t={});try{return Pf(e,l,t).format(r)}catch(i){e.onError(new ar("Error formatting number.",e.locale,i))}return String(r)}function db(e,l,r,t){t===void 0&&(t={});try{return Pf(e,l,t).formatToParts(r)}catch(i){e.onError(new ar("Error formatting number.",e.locale,i))}return[]}function mb(e){var l=e?e[Object.keys(e)[0]]:void 0;return typeof l=="string"}function Nb(e){e.onWarn&&e.defaultRichTextElements&&mb(e.messages||{})&&e.onWarn(`[@formatjs/intl] "defaultRichTextElements" was specified but "message" was not pre-compiled. 
+Please consider using "@formatjs/cli" to pre-compile your messages for performance.
+For more details see https://formatjs.github.io/docs/getting-started/message-distribution`)}function fb(e,l){var r=Yp(l),t=me(me({},Tf),e),i=t.locale,u=t.defaultLocale,o=t.onError;return i?!Intl.NumberFormat.supportedLocalesOf(i).length&&o?o(new Um('Missing locale data for locale: "'.concat(i,'" in Intl.NumberFormat. Using default locale: "').concat(u,'" as fallback. See https://formatjs.github.io/docs/react-intl#runtime-requirements for more details'))):!Intl.DateTimeFormat.supportedLocalesOf(i).length&&o&&o(new Um('Missing locale data for locale: "'.concat(i,'" in Intl.DateTimeFormat. Using default locale: "').concat(u,'" as fallback. See https://formatjs.github.io/docs/react-intl#runtime-requirements for more details'))):(o&&o(new xp('"locale" was not configured, using "'.concat(u,'" as fallback. See https://formatjs.github.io/docs/react-intl/api#intlshape for more details'))),t.locale=t.defaultLocale||"en"),Nb(t),me(me({},t),{formatters:r,formatNumber:Eb.bind(null,t,r.getNumberFormat),formatNumberToParts:db.bind(null,t,r.getNumberFormat),formatRelativeTime:ub.bind(null,t,r.getRelativeTimeFormat),formatDate:$p.bind(null,t,r.getDateTimeFormat),formatDateToParts:Xp.bind(null,t,r.getDateTimeFormat),formatTime:Wp.bind(null,t,r.getDateTimeFormat),formatDateTimeRange:zp.bind(null,t,r.getDateTimeFormat),formatTimeToParts:Zp.bind(null,t,r.getDateTimeFormat),formatPlural:lb.bind(null,t,r.getPluralRules),formatMessage:fu.bind(null,t,r),$t:fu.bind(null,t,r),formatList:tb.bind(null,t,r.getListFormat),formatListToParts:If.bind(null,t,r.getListFormat),formatDisplayName:eb.bind(null,t,r.getDisplayNames)})}function Rb(e,l,r){if(r===void 0&&(r=Error),!e)throw new r(l)}function cb(e){Rb(e,"[React Intl] Could not find required `intl` object. <IntlProvider> needs to exist in the component ancestry.")}var vb=me(me({},Tf),{textComponent:P.Fragment}),Ab={key:42},Sb=function(e){return P.isValidElement(e)?P.createElement(P.Fragment,Ab,e):e},_b=function(e){var l;return(l=P.Children.map(e,Sb))!==null&&l!==void 0?l:[]};function Tb(e){return function(l){return e(P.Children.toArray(l))}}var Cm={exports:{}},Me={};/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var jm;function gb(){if(jm)return Me;jm=1;var e=typeof Symbol=="function"&&Symbol.for,l=e?Symbol.for("react.element"):60103,r=e?Symbol.for("react.portal"):60106,t=e?Symbol.for("react.fragment"):60107,i=e?Symbol.for("react.strict_mode"):60108,u=e?Symbol.for("react.profiler"):60114,o=e?Symbol.for("react.provider"):60109,d=e?Symbol.for("react.context"):60110,N=e?Symbol.for("react.async_mode"):60111,f=e?Symbol.for("react.concurrent_mode"):60111,R=e?Symbol.for("react.forward_ref"):60112,A=e?Symbol.for("react.suspense"):60113,S=e?Symbol.for("react.suspense_list"):60120,_=e?Symbol.for("react.memo"):60115,G=e?Symbol.for("react.lazy"):60116,g=e?Symbol.for("react.block"):60121,T=e?Symbol.for("react.fundamental"):60117,y=e?Symbol.for("react.responder"):60118,L=e?Symbol.for("react.scope"):60119;function p(D){if(typeof D=="object"&&D!==null){var q=D.$$typeof;switch(q){case l:switch(D=D.type,D){case N:case f:case t:case u:case i:case A:return D;default:switch(D=D&&D.$$typeof,D){case d:case R:case G:case _:case o:return D;default:return q}}case r:return q}}}function w(D){return p(D)===f}return Me.AsyncMode=N,Me.ConcurrentMode=f,Me.ContextConsumer=d,Me.ContextProvider=o,Me.Element=l,Me.ForwardRef=R,Me.Fragment=t,Me.Lazy=G,Me.Memo=_,Me.Portal=r,Me.Profiler=u,Me.StrictMode=i,Me.Suspense=A,Me.isAsyncMode=function(D){return w(D)||p(D)===N},Me.isConcurrentMode=w,Me.isContextConsumer=function(D){return p(D)===d},Me.isContextProvider=function(D){return p(D)===o},Me.isElement=function(D){return typeof D=="object"&&D!==null&&D.$$typeof===l},Me.isForwardRef=function(D){return p(D)===R},Me.isFragment=function(D){return p(D)===t},Me.isLazy=function(D){return p(D)===G},Me.isMemo=function(D){return p(D)===_},Me.isPortal=function(D){return p(D)===r},Me.isProfiler=function(D){return p(D)===u},Me.isStrictMode=function(D){return p(D)===i},Me.isSuspense=function(D){return p(D)===A},Me.isValidElementType=function(D){return typeof D=="string"||typeof D=="function"||D===t||D===f||D===u||D===i||D===A||D===S||typeof D=="object"&&D!==null&&(D.$$typeof===G||D.$$typeof===_||D.$$typeof===o||D.$$typeof===d||D.$$typeof===R||D.$$typeof===T||D.$$typeof===y||D.$$typeof===L||D.$$typeof===g)},Me.typeOf=p,Me}var Ym;function Ib(){return Ym||(Ym=1,Cm.exports=gb()),Cm.exports}var zs,Jm;function Pb(){if(Jm)return zs;Jm=1;var e=Ib(),l={childContextTypes:!0,contextType:!0,contextTypes:!0,defaultProps:!0,displayName:!0,getDefaultProps:!0,getDerivedStateFromError:!0,getDerivedStateFromProps:!0,mixins:!0,propTypes:!0,type:!0},r={name:!0,length:!0,prototype:!0,caller:!0,callee:!0,arguments:!0,arity:!0},t={$$typeof:!0,render:!0,defaultProps:!0,displayName:!0,propTypes:!0},i={$$typeof:!0,compare:!0,defaultProps:!0,displayName:!0,propTypes:!0,type:!0},u={};u[e.ForwardRef]=t,u[e.Memo]=i;function o(G){return e.isMemo(G)?i:u[G.$$typeof]||l}var d=Object.defineProperty,N=Object.getOwnPropertyNames,f=Object.getOwnPropertySymbols,R=Object.getOwnPropertyDescriptor,A=Object.getPrototypeOf,S=Object.prototype;function _(G,g,T){if(typeof g!="string"){if(S){var y=A(g);y&&y!==S&&_(G,y,T)}var L=N(g);f&&(L=L.concat(f(g)));for(var p=o(G),w=o(g),D=0;D<L.length;++D){var q=L[D];if(!r[q]&&!(T&&T[q])&&!(w&&w[q])&&!(p&&p[q])){var B=R(g,q);try{d(G,q,B)}catch{}}}}return G}return zs=_,zs}Pb();var Yu=typeof window<"u"&&!window.__REACT_INTL_BYPASS_GLOBAL_CONTEXT__?window.__REACT_INTL_CONTEXT__||(window.__REACT_INTL_CONTEXT__=P.createContext(null)):P.createContext(null);Yu.Consumer;Yu.Provider;var hb=Yu;function hf(){var e=P.useContext(hb);return cb(e),e}var Ru;(function(e){e.formatDate="FormattedDate",e.formatTime="FormattedTime",e.formatNumber="FormattedNumber",e.formatList="FormattedList",e.formatDisplayName="FormattedDisplayName"})(Ru||(Ru={}));var cu;(function(e){e.formatDate="FormattedDateParts",e.formatTime="FormattedTimeParts",e.formatNumber="FormattedNumberParts",e.formatList="FormattedListParts"})(cu||(cu={}));function yf(e){var l=function(r){var t=hf(),i=r.value,u=r.children,o=mi(r,["value","children"]),d=typeof i=="string"?new Date(i||0):i,N=e==="formatDate"?t.formatDateToParts(d,o):t.formatTimeToParts(d,o);return u(N)};return l.displayName=cu[e],l}function Ha(e){var l=function(r){var t=hf(),i=r.value,u=r.children,o=mi(r,["value","children"]),d=t[e](i,o);if(typeof u=="function")return u(d);var N=t.textComponent||P.Fragment;return P.createElement(N,null,d)};return l.displayName=Ru[e],l}function pf(e){return e&&Object.keys(e).reduce(function(l,r){var t=e[r];return l[r]=Sf(t)?Tb(t):t,l},{})}var $m=function(e,l,r,t){for(var i=[],u=4;u<arguments.length;u++)i[u-4]=arguments[u];var o=pf(t),d=fu.apply(void 0,gr([e,l,r,o],i,!1));return Array.isArray(d)?_b(d):d},yb=function(e,l){var r=e.defaultRichTextElements,t=mi(e,["defaultRichTextElements"]),i=pf(r),u=fb(me(me(me({},vb),t),{defaultRichTextElements:i}),l),o={locale:u.locale,timeZone:u.timeZone,fallbackOnEmptyString:u.fallbackOnEmptyString,formats:u.formats,defaultLocale:u.defaultLocale,defaultFormats:u.defaultFormats,messages:u.messages,onError:u.onError,defaultRichTextElements:i};return me(me({},u),{formatMessage:$m.bind(null,o,u.formatters),$t:$m.bind(null,o,u.formatters)})};Ha("formatDate");Ha("formatTime");Ha("formatNumber");Ha("formatList");Ha("formatDisplayName");yf("formatDate");yf("formatTime");function Ju(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var vu={exports:{}},pb=vu.exports,Wm;function bb(){return Wm||(Wm=1,function(e,l){(function(r,t){e.exports=t()})(pb,function(){var r,t,i=1e3,u=6e4,o=36e5,d=864e5,N=/\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,f=31536e6,R=2628e6,A=/^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/,S={years:f,months:R,days:d,hours:o,minutes:u,seconds:i,milliseconds:1,weeks:6048e5},_=function(q){return q instanceof w},G=function(q,B,U){return new w(q,U,B.$l)},g=function(q){return t.p(q)+"s"},T=function(q){return q<0},y=function(q){return T(q)?Math.ceil(q):Math.floor(q)},L=function(q){return Math.abs(q)},p=function(q,B){return q?T(q)?{negative:!0,format:""+L(q)+B}:{negative:!1,format:""+q+B}:{negative:!1,format:""}},w=function(){function q(U,Y,ne){var ee=this;if(this.$d={},this.$l=ne,U===void 0&&(this.$ms=0,this.parseFromMilliseconds()),Y)return G(U*S[g(Y)],this);if(typeof U=="number")return this.$ms=U,this.parseFromMilliseconds(),this;if(typeof U=="object")return Object.keys(U).forEach(function(M){ee.$d[g(M)]=U[M]}),this.calMilliseconds(),this;if(typeof U=="string"){var H=U.match(A);if(H){var V=H.slice(2).map(function(M){return M!=null?Number(M):0});return this.$d.years=V[0],this.$d.months=V[1],this.$d.weeks=V[2],this.$d.days=V[3],this.$d.hours=V[4],this.$d.minutes=V[5],this.$d.seconds=V[6],this.calMilliseconds(),this}}return this}var B=q.prototype;return B.calMilliseconds=function(){var U=this;this.$ms=Object.keys(this.$d).reduce(function(Y,ne){return Y+(U.$d[ne]||0)*S[ne]},0)},B.parseFromMilliseconds=function(){var U=this.$ms;this.$d.years=y(U/f),U%=f,this.$d.months=y(U/R),U%=R,this.$d.days=y(U/d),U%=d,this.$d.hours=y(U/o),U%=o,this.$d.minutes=y(U/u),U%=u,this.$d.seconds=y(U/i),U%=i,this.$d.milliseconds=U},B.toISOString=function(){var U=p(this.$d.years,"Y"),Y=p(this.$d.months,"M"),ne=+this.$d.days||0;this.$d.weeks&&(ne+=7*this.$d.weeks);var ee=p(ne,"D"),H=p(this.$d.hours,"H"),V=p(this.$d.minutes,"M"),M=this.$d.seconds||0;this.$d.milliseconds&&(M+=this.$d.milliseconds/1e3,M=Math.round(1e3*M)/1e3);var z=p(M,"S"),re=U.negative||Y.negative||ee.negative||H.negative||V.negative||z.negative,X=H.format||V.format||z.format?"T":"",$=(re?"-":"")+"P"+U.format+Y.format+ee.format+X+H.format+V.format+z.format;return $==="P"||$==="-P"?"P0D":$},B.toJSON=function(){return this.toISOString()},B.format=function(U){var Y=U||"YYYY-MM-DDTHH:mm:ss",ne={Y:this.$d.years,YY:t.s(this.$d.years,2,"0"),YYYY:t.s(this.$d.years,4,"0"),M:this.$d.months,MM:t.s(this.$d.months,2,"0"),D:this.$d.days,DD:t.s(this.$d.days,2,"0"),H:this.$d.hours,HH:t.s(this.$d.hours,2,"0"),m:this.$d.minutes,mm:t.s(this.$d.minutes,2,"0"),s:this.$d.seconds,ss:t.s(this.$d.seconds,2,"0"),SSS:t.s(this.$d.milliseconds,3,"0")};return Y.replace(N,function(ee,H){return H||String(ne[ee])})},B.as=function(U){return this.$ms/S[g(U)]},B.get=function(U){var Y=this.$ms,ne=g(U);return ne==="milliseconds"?Y%=1e3:Y=ne==="weeks"?y(Y/S[ne]):this.$d[ne],Y||0},B.add=function(U,Y,ne){var ee;return ee=Y?U*S[g(Y)]:_(U)?U.$ms:G(U,this).$ms,G(this.$ms+ee*(ne?-1:1),this)},B.subtract=function(U,Y){return this.add(U,Y,!0)},B.locale=function(U){var Y=this.clone();return Y.$l=U,Y},B.clone=function(){return G(this.$ms,this)},B.humanize=function(U){return r().add(this.$ms,"ms").locale(this.$l).fromNow(!U)},B.valueOf=function(){return this.asMilliseconds()},B.milliseconds=function(){return this.get("milliseconds")},B.asMilliseconds=function(){return this.as("milliseconds")},B.seconds=function(){return this.get("seconds")},B.asSeconds=function(){return this.as("seconds")},B.minutes=function(){return this.get("minutes")},B.asMinutes=function(){return this.as("minutes")},B.hours=function(){return this.get("hours")},B.asHours=function(){return this.as("hours")},B.days=function(){return this.get("days")},B.asDays=function(){return this.as("days")},B.weeks=function(){return this.get("weeks")},B.asWeeks=function(){return this.as("weeks")},B.months=function(){return this.get("months")},B.asMonths=function(){return this.as("months")},B.years=function(){return this.get("years")},B.asYears=function(){return this.as("years")},q}(),D=function(q,B,U){return q.add(B.years()*U,"y").add(B.months()*U,"M").add(B.days()*U,"d").add(B.hours()*U,"h").add(B.minutes()*U,"m").add(B.seconds()*U,"s").add(B.milliseconds()*U,"ms")};return function(q,B,U){r=U,t=U().$utils(),U.duration=function(ee,H){var V=U.locale();return G(ee,{$l:V},H)},U.isDuration=_;var Y=B.prototype.add,ne=B.prototype.subtract;B.prototype.add=function(ee,H){return _(ee)?D(this,ee,1):Y.bind(this)(ee,H)},B.prototype.subtract=function(ee,H){return _(ee)?D(this,ee,-1):ne.bind(this)(ee,H)}}})}(vu)),vu.exports}var Lb=bb();const Db=Ju(Lb);var Au={exports:{}},Gb=Au.exports,zm;function Ob(){return zm||(zm=1,function(e,l){(function(r,t){e.exports=t()})(Gb,function(){var r="day";return function(t,i,u){var o=function(f){return f.add(4-f.isoWeekday(),r)},d=i.prototype;d.isoWeekYear=function(){return o(this).year()},d.isoWeek=function(f){if(!this.$utils().u(f))return this.add(7*(f-this.isoWeek()),r);var R,A,S,_,G=o(this),g=(R=this.isoWeekYear(),A=this.$u,S=(A?u.utc:u)().year(R).startOf("year"),_=4-S.isoWeekday(),S.isoWeekday()>4&&(_+=7),S.add(_,r));return G.diff(g,"week")+1},d.isoWeekday=function(f){return this.$utils().u(f)?this.day()||7:this.day(this.day()%7?f:f-7)};var N=d.startOf;d.startOf=function(f,R){var A=this.$utils(),S=!!A.u(R)||R;return A.p(f)==="isoweek"?S?this.date(this.date()-(this.isoWeekday()-1)).startOf("day"):this.date(this.date()-1-(this.isoWeekday()-1)+7).endOf("day"):N.bind(this)(f,R)}}})}(Au)),Au.exports}var kb=Ob();const Fb=Ju(kb);var Su={exports:{}},Kb=Su.exports,Xm;function Vb(){return Xm||(Xm=1,function(e,l){(function(r,t){e.exports=t()})(Kb,function(){var r="minute",t=/[+-]\d\d(?::?\d\d)?/g,i=/([+-]|\d\d)/g;return function(u,o,d){var N=o.prototype;d.utc=function(g){var T={date:g,utc:!0,args:arguments};return new o(T)},N.utc=function(g){var T=d(this.toDate(),{locale:this.$L,utc:!0});return g?T.add(this.utcOffset(),r):T},N.local=function(){return d(this.toDate(),{locale:this.$L,utc:!1})};var f=N.parse;N.parse=function(g){g.utc&&(this.$u=!0),this.$utils().u(g.$offset)||(this.$offset=g.$offset),f.call(this,g)};var R=N.init;N.init=function(){if(this.$u){var g=this.$d;this.$y=g.getUTCFullYear(),this.$M=g.getUTCMonth(),this.$D=g.getUTCDate(),this.$W=g.getUTCDay(),this.$H=g.getUTCHours(),this.$m=g.getUTCMinutes(),this.$s=g.getUTCSeconds(),this.$ms=g.getUTCMilliseconds()}else R.call(this)};var A=N.utcOffset;N.utcOffset=function(g,T){var y=this.$utils().u;if(y(g))return this.$u?0:y(this.$offset)?A.call(this):this.$offset;if(typeof g=="string"&&(g=function(D){D===void 0&&(D="");var q=D.match(t);if(!q)return null;var B=(""+q[0]).match(i)||["-",0,0],U=B[0],Y=60*+B[1]+ +B[2];return Y===0?0:U==="+"?Y:-Y}(g),g===null))return this;var L=Math.abs(g)<=16?60*g:g,p=this;if(T)return p.$offset=L,p.$u=g===0,p;if(g!==0){var w=this.$u?this.toDate().getTimezoneOffset():-1*this.utcOffset();(p=this.local().add(L+w,r)).$offset=L,p.$x.$localOffset=w}else p=this.utc();return p};var S=N.format;N.format=function(g){var T=g||(this.$u?"YYYY-MM-DDTHH:mm:ss[Z]":"");return S.call(this,T)},N.valueOf=function(){var g=this.$utils().u(this.$offset)?0:this.$offset+(this.$x.$localOffset||this.$d.getTimezoneOffset());return this.$d.valueOf()-6e4*g},N.isUTC=function(){return!!this.$u},N.toISOString=function(){return this.toDate().toISOString()},N.toString=function(){return this.toDate().toUTCString()};var _=N.toDate;N.toDate=function(g){return g==="s"&&this.$offset?d(this.format("YYYY-MM-DD HH:mm:ss:SSS")).toDate():_.call(this)};var G=N.diff;N.diff=function(g,T,y){if(g&&this.$u===g.$u)return G.call(this,g,T,y);var L=this.local(),p=d(g).local();return G.call(L,p,T,y)}}})}(Su)),Su.exports}var Mb=Vb();const Bb=Ju(Mb),wb=gf(),Ni=e=>yb({locale:"nb-NO",messages:e},wb),fi={"Malform.Bokmal":"Bokmål","Malform.Nynorsk":"Nynorsk","Malform.Engelsk":"Engelsk","DateTimeLabel.Kl":" kl. ","PeriodLabel.DateToday":"d.d.","Dato.AntallDagerOgUker":"{weeks, plural, =0 {} one {# uke}  other {# uker}}{seperator}{days, plural,=0 {} one {# dag} other {# dager}}","Dato.NullDager":"0 dager","Dato.TidenesEnde":"Antall uker og dager -"};Ni(fi);var _u={exports:{}},Ub=_u.exports,Zm;function xb(){return Zm||(Zm=1,function(e,l){(function(r,t){e.exports=t(qr)})(Ub,function(r){function t(o){return o&&typeof o=="object"&&"default"in o?o:{default:o}}var i=t(r),u={name:"nb",weekdays:"søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag".split("_"),weekdaysShort:"sø._ma._ti._on._to._fr._lø.".split("_"),weekdaysMin:"sø_ma_ti_on_to_fr_lø".split("_"),months:"januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember".split("_"),monthsShort:"jan._feb._mars_april_mai_juni_juli_aug._sep._okt._nov._des.".split("_"),ordinal:function(o){return o+"."},weekStart:1,yearStart:4,formats:{LT:"HH:mm",LTS:"HH:mm:ss",L:"DD.MM.YYYY",LL:"D. MMMM YYYY",LLL:"D. MMMM YYYY [kl.] HH:mm",LLLL:"dddd D. MMMM YYYY [kl.] HH:mm"},relativeTime:{future:"om %s",past:"%s siden",s:"noen sekunder",m:"ett minutt",mm:"%d minutter",h:"en time",hh:"%d timer",d:"en dag",dd:"%d dager",M:"en måned",MM:"%d måneder",y:"ett år",yy:"%d år"}};return i.default.locale(u,null,!0),u})}(_u)),_u.exports}xb();qr.extend(Bb);qr.extend(Fb);qr.extend(Db);Ni(fi);Ni(fi);var Qm={exports:{}},Ia={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var eN;function qb(){if(eN)return Ia;eN=1;var e=Symbol.for("react.transitional.element"),l=Symbol.for("react.fragment");function r(t,i,u){var o=null;if(u!==void 0&&(o=""+u),i.key!==void 0&&(o=""+i.key),"key"in i){u={};for(var d in i)d!=="key"&&(u[d]=i[d])}else u=i;return i=u.ref,{$$typeof:e,type:t,key:o,ref:i!==void 0?i:null,props:u}}return Ia.Fragment=l,Ia.jsx=r,Ia.jsxs=r,Ia}var nN;function Hb(){return nN||(nN=1,Qm.exports=qb()),Qm.exports}Hb();Ni(fi);P.createContext({});var Tu={exports:{}},Cb=Tu.exports,rN;function jb(){return rN||(rN=1,function(e,l){(function(r,t){e.exports=t()})(Cb,function(){var r={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"},t=/(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g,i=/\d/,u=/\d\d/,o=/\d\d?/,d=/\d*[^-_:/,()\s\d]+/,N={},f=function(T){return(T=+T)+(T>68?1900:2e3)},R=function(T){return function(y){this[T]=+y}},A=[/[+-]\d\d:?(\d\d)?|Z/,function(T){(this.zone||(this.zone={})).offset=function(y){if(!y||y==="Z")return 0;var L=y.match(/([+-]|\d\d)/g),p=60*L[1]+(+L[2]||0);return p===0?0:L[0]==="+"?-p:p}(T)}],S=function(T){var y=N[T];return y&&(y.indexOf?y:y.s.concat(y.f))},_=function(T,y){var L,p=N.meridiem;if(p){for(var w=1;w<=24;w+=1)if(T.indexOf(p(w,0,y))>-1){L=w>12;break}}else L=T===(y?"pm":"PM");return L},G={A:[d,function(T){this.afternoon=_(T,!1)}],a:[d,function(T){this.afternoon=_(T,!0)}],Q:[i,function(T){this.month=3*(T-1)+1}],S:[i,function(T){this.milliseconds=100*+T}],SS:[u,function(T){this.milliseconds=10*+T}],SSS:[/\d{3}/,function(T){this.milliseconds=+T}],s:[o,R("seconds")],ss:[o,R("seconds")],m:[o,R("minutes")],mm:[o,R("minutes")],H:[o,R("hours")],h:[o,R("hours")],HH:[o,R("hours")],hh:[o,R("hours")],D:[o,R("day")],DD:[u,R("day")],Do:[d,function(T){var y=N.ordinal,L=T.match(/\d+/);if(this.day=L[0],y)for(var p=1;p<=31;p+=1)y(p).replace(/\[|\]/g,"")===T&&(this.day=p)}],w:[o,R("week")],ww:[u,R("week")],M:[o,R("month")],MM:[u,R("month")],MMM:[d,function(T){var y=S("months"),L=(S("monthsShort")||y.map(function(p){return p.slice(0,3)})).indexOf(T)+1;if(L<1)throw new Error;this.month=L%12||L}],MMMM:[d,function(T){var y=S("months").indexOf(T)+1;if(y<1)throw new Error;this.month=y%12||y}],Y:[/[+-]?\d+/,R("year")],YY:[u,function(T){this.year=f(T)}],YYYY:[/\d{4}/,R("year")],Z:A,ZZ:A};function g(T){var y,L;y=T,L=N&&N.formats;for(var p=(T=y.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,function(ne,ee,H){var V=H&&H.toUpperCase();return ee||L[H]||r[H]||L[V].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,function(M,z,re){return z||re.slice(1)})})).match(t),w=p.length,D=0;D<w;D+=1){var q=p[D],B=G[q],U=B&&B[0],Y=B&&B[1];p[D]=Y?{regex:U,parser:Y}:q.replace(/^\[|\]$/g,"")}return function(ne){for(var ee={},H=0,V=0;H<w;H+=1){var M=p[H];if(typeof M=="string")V+=M.length;else{var z=M.regex,re=M.parser,X=ne.slice(V),$=z.exec(X)[0];re.call(ee,$),ne=ne.replace($,"")}}return function(Z){var Ee=Z.afternoon;if(Ee!==void 0){var ue=Z.hours;Ee?ue<12&&(Z.hours+=12):ue===12&&(Z.hours=0),delete Z.afternoon}}(ee),ee}}return function(T,y,L){L.p.customParseFormat=!0,T&&T.parseTwoDigitYear&&(f=T.parseTwoDigitYear);var p=y.prototype,w=p.parse;p.parse=function(D){var q=D.date,B=D.utc,U=D.args;this.$u=B;var Y=U[1];if(typeof Y=="string"){var ne=U[2]===!0,ee=U[3]===!0,H=ne||ee,V=U[2];ee&&(V=U[2]),N=this.$locale(),!ne&&V&&(N=L.Ls[V]),this.$d=function(X,$,Z,Ee){try{if(["x","X"].indexOf($)>-1)return new Date(($==="X"?1e3:1)*X);var ue=g($)(X),Re=ue.year,Te=ue.month,Tn=ue.day,Je=ue.hours,xe=ue.minutes,qe=ue.seconds,Pe=ue.milliseconds,Oe=ue.zone,nn=ue.week,ze=new Date,Xe=Tn||(Re||Te?1:ze.getDate()),pn=Re||ze.getFullYear(),He=0;Re&&!Te||(He=Te>0?Te-1:ze.getMonth());var sn,lr=Je||0,on=xe||0,ir=qe||0,jn=Pe||0;return Oe?new Date(Date.UTC(pn,He,Xe,lr,on,ir,jn+60*Oe.offset*1e3)):Z?new Date(Date.UTC(pn,He,Xe,lr,on,ir,jn)):(sn=new Date(pn,He,Xe,lr,on,ir,jn),nn&&(sn=Ee(sn).week(nn).toDate()),sn)}catch{return new Date("")}}(q,Y,B,L),this.init(),V&&V!==!0&&(this.$L=this.locale(V).$L),H&&q!=this.format(Y)&&(this.$d=new Date("")),N={}}else if(Y instanceof Array)for(var M=Y.length,z=1;z<=M;z+=1){U[1]=Y[z-1];var re=L.apply(this,U);if(re.isValid()){this.$d=re.$d,this.$L=re.$L,this.init();break}z===M&&(this.$d=new Date(""))}else w.call(this,D)}}})}(Tu)),Tu.exports}var Yb=jb();const Jb=H0(Yb);qr.extend(Jb);Rr(wa);const bf=({aksjonspunkt:e,readOnly:l,submittable:r,submitCallback:t})=>{const[i,u]=P.useState(!1),{mellomlagretFormData:o,setMellomlagretFormData:d}=_g(),N=d0({defaultValues:o??$b(e)}),f=N.watch("begrunnelse");return le.jsxs(Tt,{gap:"space-16",children:[e.status===Jt.OPPRETTET&&le.jsx(cy,{children:[le.jsx(Kn,{id:"BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll"},"BesteberegningAksjonspunktTekst")]}),le.jsx(p0,{formMethods:N,onSubmit:R=>t(Wb(R)),setDataOnUnmount:d,children:le.jsxs(Tt,{gap:"space-16",children:[le.jsx(R0,{name:"besteberegningErKorrektValg",control:N.control,label:le.jsx(Kn,{id:"BesteberegningProsessPanel.Aksjonspunkt.Radiotekst"}),readOnly:l,onChange:()=>u(!i)}),le.jsx(Ua,{control:N.control,isSubmittable:r,isReadOnly:l,hasBegrunnelse:!!f,hasVurderingText:!0}),le.jsx(ef,{isSubmittable:r&&i,isSubmitting:N.formState.isSubmitting,isDirty:N.formState.isDirty,isReadOnly:l})]})})]})},$b=e=>{const l=e.status===Jt.UTFORT;return{...Ua.initialValues(e),besteberegningErKorrektValg:l?!0:void 0}},Wb=e=>({kode:nt.MANUELL_KONTROLL_AV_BESTEBEREGNING,begrunnelse:e.begrunnelse,besteberegningErKorrekt:!!e.besteberegningErKorrektValg});bf.__docgenInfo={description:`KontrollerBesteberegningPanel
+
+Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.`,methods:[],displayName:"KontrollerBesteberegningPanel",props:{aksjonspunkt:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  definisjon:
+    | '5001'
+    | '5027'
+    | '5004'
+    | '5005'
+    | '5006'
+    | '5007'
+    | '5008'
+    | '5011'
+    | '5012'
+    | '5013'
+    | '5014'
+    | '5015'
+    | '5016'
+    | '5017'
+    | '5002'
+    | '5026'
+    | '5028'
+    | '5030'
+    | '5031'
+    | '5033'
+    | '5034'
+    | '5003'
+    | '5035'
+    | '5037'
+    | '5038'
+    | '5039'
+    | '5040'
+    | '5043'
+    | '5046'
+    | '5047'
+    | '5049'
+    | '5051'
+    | '5052'
+    | '5054'
+    | '5055'
+    | '5057'
+    | '5058'
+    | '5059'
+    | '5060'
+    | '5061'
+    | '5068'
+    | '5064'
+    | '5065'
+    | '5063'
+    | '5066'
+    | '5071'
+    | '5072'
+    | '5069'
+    | '5073'
+    | '5076'
+    | '5077'
+    | '5085'
+    | '5082'
+    | '5084'
+    | '5029'
+    | '5086'
+    | '5089'
+    | '5041'
+    | '5062'
+    | '5091'
+    | '5092'
+    | '5095'
+    | '5096'
+    | '5074'
+    | '5101'
+    | '5102'
+    | '5103'
+    | '6002'
+    | '6003'
+    | '6004'
+    | '6005'
+    | '6006'
+    | '6008'
+    | '6009'
+    | '6010'
+    | '6011'
+    | '6065'
+    | '6014'
+    | '6015'
+    | '6045'
+    | '6016'
+    | '6018'
+    | '6017'
+    | '6103'
+    | '7001'
+    | '7002'
+    | '7003'
+    | '7005'
+    | '7007'
+    | '7008'
+    | '7011'
+    | '7013'
+    | '7014'
+    | '7020'
+    | '7030'
+    | '7033'
+    | '7037'
+    | '7039'
+    | '7040'
+    | "UNDEFINED('null')"
+    | '5009'
+    | '5019'
+    | '5020'
+    | '5021'
+    | '5022'
+    | '5023'
+    | '5024'
+    | '5025'
+    | '5032'
+    | '5036'
+    | '5042'
+    | '5044'
+    | '5045'
+    | '5048'
+    | '5050'
+    | '5053'
+    | '5056'
+    | '5067'
+    | '5070'
+    | '5075'
+    | '5078'
+    | '5079'
+    | '5080'
+    | '5081'
+    | '5083'
+    | '5087'
+    | '5088'
+    | '5090'
+    | '5093'
+    | '5094'
+    | '5097'
+    | '5098'
+    | '5099'
+    | '6007'
+    | '6012'
+    | '6013'
+    | '6068'
+    | '6070'
+    | '7004'
+    | '7006'
+    | '7009'
+    | '7015'
+    | '7016'
+    | '7017'
+    | '7018'
+    | '7019'
+    | '7021'
+    | '7022'
+    | '7023'
+    | '7024'
+    | '7025'
+    | '7026'
+    | '7027'
+    | '7028'
+    | '7029'
+    | '7032'
+    | '7034'
+    | '7035'
+    | '7036'
+    | '7038'
+    | '7041';
+  status: 'AVBR' | 'OPPR' | 'UTFO';
+  begrunnelse: string | null;
+  vilkarType:
+    | 'FP_VK_1'
+    | 'FP_VK_11'
+    | 'FP_VK_16'
+    | 'FP_VK_2'
+    | 'FP_VK_2_F'
+    | 'FP_VK_2_L'
+    | 'FP_VK_3'
+    | 'FP_VK_4'
+    | 'FP_VK_5'
+    | 'FP_VK_8'
+    | 'FP_VK_33'
+    | 'FP_VK_34'
+    | 'FP_VK_21'
+    | 'FP_VK_23'
+    | 'FP_VK_41'
+    | 'SVP_VK_1'
+    | '-';
+  toTrinnsBehandling: boolean;
+  toTrinnsBehandlingGodkjent: boolean | null;
+  vurderPaNyttArsaker: Array<
+    'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+  > | null;
+  besluttersBegrunnelse: string | null;
+  aksjonspunktType: 'AUTO' | 'MANU' | 'OVST' | 'SAOV' | '-';
+  kanLoses: boolean;
+  erAktivt: boolean;
+  fristTid: string | null;
+  endretTidspunkt: string | null;
+  endretAv: string | null;
+}`,signature:{properties:[{key:"definisjon",value:{name:"union",raw:`| '5001'
+| '5027'
+| '5004'
+| '5005'
+| '5006'
+| '5007'
+| '5008'
+| '5011'
+| '5012'
+| '5013'
+| '5014'
+| '5015'
+| '5016'
+| '5017'
+| '5002'
+| '5026'
+| '5028'
+| '5030'
+| '5031'
+| '5033'
+| '5034'
+| '5003'
+| '5035'
+| '5037'
+| '5038'
+| '5039'
+| '5040'
+| '5043'
+| '5046'
+| '5047'
+| '5049'
+| '5051'
+| '5052'
+| '5054'
+| '5055'
+| '5057'
+| '5058'
+| '5059'
+| '5060'
+| '5061'
+| '5068'
+| '5064'
+| '5065'
+| '5063'
+| '5066'
+| '5071'
+| '5072'
+| '5069'
+| '5073'
+| '5076'
+| '5077'
+| '5085'
+| '5082'
+| '5084'
+| '5029'
+| '5086'
+| '5089'
+| '5041'
+| '5062'
+| '5091'
+| '5092'
+| '5095'
+| '5096'
+| '5074'
+| '5101'
+| '5102'
+| '5103'
+| '6002'
+| '6003'
+| '6004'
+| '6005'
+| '6006'
+| '6008'
+| '6009'
+| '6010'
+| '6011'
+| '6065'
+| '6014'
+| '6015'
+| '6045'
+| '6016'
+| '6018'
+| '6017'
+| '6103'
+| '7001'
+| '7002'
+| '7003'
+| '7005'
+| '7007'
+| '7008'
+| '7011'
+| '7013'
+| '7014'
+| '7020'
+| '7030'
+| '7033'
+| '7037'
+| '7039'
+| '7040'
+| "UNDEFINED('null')"
+| '5009'
+| '5019'
+| '5020'
+| '5021'
+| '5022'
+| '5023'
+| '5024'
+| '5025'
+| '5032'
+| '5036'
+| '5042'
+| '5044'
+| '5045'
+| '5048'
+| '5050'
+| '5053'
+| '5056'
+| '5067'
+| '5070'
+| '5075'
+| '5078'
+| '5079'
+| '5080'
+| '5081'
+| '5083'
+| '5087'
+| '5088'
+| '5090'
+| '5093'
+| '5094'
+| '5097'
+| '5098'
+| '5099'
+| '6007'
+| '6012'
+| '6013'
+| '6068'
+| '6070'
+| '7004'
+| '7006'
+| '7009'
+| '7015'
+| '7016'
+| '7017'
+| '7018'
+| '7019'
+| '7021'
+| '7022'
+| '7023'
+| '7024'
+| '7025'
+| '7026'
+| '7027'
+| '7028'
+| '7029'
+| '7032'
+| '7034'
+| '7035'
+| '7036'
+| '7038'
+| '7041'`,elements:[{name:"literal",value:"'5001'"},{name:"literal",value:"'5027'"},{name:"literal",value:"'5004'"},{name:"literal",value:"'5005'"},{name:"literal",value:"'5006'"},{name:"literal",value:"'5007'"},{name:"literal",value:"'5008'"},{name:"literal",value:"'5011'"},{name:"literal",value:"'5012'"},{name:"literal",value:"'5013'"},{name:"literal",value:"'5014'"},{name:"literal",value:"'5015'"},{name:"literal",value:"'5016'"},{name:"literal",value:"'5017'"},{name:"literal",value:"'5002'"},{name:"literal",value:"'5026'"},{name:"literal",value:"'5028'"},{name:"literal",value:"'5030'"},{name:"literal",value:"'5031'"},{name:"literal",value:"'5033'"},{name:"literal",value:"'5034'"},{name:"literal",value:"'5003'"},{name:"literal",value:"'5035'"},{name:"literal",value:"'5037'"},{name:"literal",value:"'5038'"},{name:"literal",value:"'5039'"},{name:"literal",value:"'5040'"},{name:"literal",value:"'5043'"},{name:"literal",value:"'5046'"},{name:"literal",value:"'5047'"},{name:"literal",value:"'5049'"},{name:"literal",value:"'5051'"},{name:"literal",value:"'5052'"},{name:"literal",value:"'5054'"},{name:"literal",value:"'5055'"},{name:"literal",value:"'5057'"},{name:"literal",value:"'5058'"},{name:"literal",value:"'5059'"},{name:"literal",value:"'5060'"},{name:"literal",value:"'5061'"},{name:"literal",value:"'5068'"},{name:"literal",value:"'5064'"},{name:"literal",value:"'5065'"},{name:"literal",value:"'5063'"},{name:"literal",value:"'5066'"},{name:"literal",value:"'5071'"},{name:"literal",value:"'5072'"},{name:"literal",value:"'5069'"},{name:"literal",value:"'5073'"},{name:"literal",value:"'5076'"},{name:"literal",value:"'5077'"},{name:"literal",value:"'5085'"},{name:"literal",value:"'5082'"},{name:"literal",value:"'5084'"},{name:"literal",value:"'5029'"},{name:"literal",value:"'5086'"},{name:"literal",value:"'5089'"},{name:"literal",value:"'5041'"},{name:"literal",value:"'5062'"},{name:"literal",value:"'5091'"},{name:"literal",value:"'5092'"},{name:"literal",value:"'5095'"},{name:"literal",value:"'5096'"},{name:"literal",value:"'5074'"},{name:"literal",value:"'5101'"},{name:"literal",value:"'5102'"},{name:"literal",value:"'5103'"},{name:"literal",value:"'6002'"},{name:"literal",value:"'6003'"},{name:"literal",value:"'6004'"},{name:"literal",value:"'6005'"},{name:"literal",value:"'6006'"},{name:"literal",value:"'6008'"},{name:"literal",value:"'6009'"},{name:"literal",value:"'6010'"},{name:"literal",value:"'6011'"},{name:"literal",value:"'6065'"},{name:"literal",value:"'6014'"},{name:"literal",value:"'6015'"},{name:"literal",value:"'6045'"},{name:"literal",value:"'6016'"},{name:"literal",value:"'6018'"},{name:"literal",value:"'6017'"},{name:"literal",value:"'6103'"},{name:"literal",value:"'7001'"},{name:"literal",value:"'7002'"},{name:"literal",value:"'7003'"},{name:"literal",value:"'7005'"},{name:"literal",value:"'7007'"},{name:"literal",value:"'7008'"},{name:"literal",value:"'7011'"},{name:"literal",value:"'7013'"},{name:"literal",value:"'7014'"},{name:"literal",value:"'7020'"},{name:"literal",value:"'7030'"},{name:"literal",value:"'7033'"},{name:"literal",value:"'7037'"},{name:"literal",value:"'7039'"},{name:"literal",value:"'7040'"},{name:"literal",value:`"UNDEFINED('null')"`},{name:"literal",value:"'5009'"},{name:"literal",value:"'5019'"},{name:"literal",value:"'5020'"},{name:"literal",value:"'5021'"},{name:"literal",value:"'5022'"},{name:"literal",value:"'5023'"},{name:"literal",value:"'5024'"},{name:"literal",value:"'5025'"},{name:"literal",value:"'5032'"},{name:"literal",value:"'5036'"},{name:"literal",value:"'5042'"},{name:"literal",value:"'5044'"},{name:"literal",value:"'5045'"},{name:"literal",value:"'5048'"},{name:"literal",value:"'5050'"},{name:"literal",value:"'5053'"},{name:"literal",value:"'5056'"},{name:"literal",value:"'5067'"},{name:"literal",value:"'5070'"},{name:"literal",value:"'5075'"},{name:"literal",value:"'5078'"},{name:"literal",value:"'5079'"},{name:"literal",value:"'5080'"},{name:"literal",value:"'5081'"},{name:"literal",value:"'5083'"},{name:"literal",value:"'5087'"},{name:"literal",value:"'5088'"},{name:"literal",value:"'5090'"},{name:"literal",value:"'5093'"},{name:"literal",value:"'5094'"},{name:"literal",value:"'5097'"},{name:"literal",value:"'5098'"},{name:"literal",value:"'5099'"},{name:"literal",value:"'6007'"},{name:"literal",value:"'6012'"},{name:"literal",value:"'6013'"},{name:"literal",value:"'6068'"},{name:"literal",value:"'6070'"},{name:"literal",value:"'7004'"},{name:"literal",value:"'7006'"},{name:"literal",value:"'7009'"},{name:"literal",value:"'7015'"},{name:"literal",value:"'7016'"},{name:"literal",value:"'7017'"},{name:"literal",value:"'7018'"},{name:"literal",value:"'7019'"},{name:"literal",value:"'7021'"},{name:"literal",value:"'7022'"},{name:"literal",value:"'7023'"},{name:"literal",value:"'7024'"},{name:"literal",value:"'7025'"},{name:"literal",value:"'7026'"},{name:"literal",value:"'7027'"},{name:"literal",value:"'7028'"},{name:"literal",value:"'7029'"},{name:"literal",value:"'7032'"},{name:"literal",value:"'7034'"},{name:"literal",value:"'7035'"},{name:"literal",value:"'7036'"},{name:"literal",value:"'7038'"},{name:"literal",value:"'7041'"}],required:!0}},{key:"status",value:{name:"union",raw:"'AVBR' | 'OPPR' | 'UTFO'",elements:[{name:"literal",value:"'AVBR'"},{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"}],required:!0}},{key:"begrunnelse",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"vilkarType",value:{name:"union",raw:`| 'FP_VK_1'
+| 'FP_VK_11'
+| 'FP_VK_16'
+| 'FP_VK_2'
+| 'FP_VK_2_F'
+| 'FP_VK_2_L'
+| 'FP_VK_3'
+| 'FP_VK_4'
+| 'FP_VK_5'
+| 'FP_VK_8'
+| 'FP_VK_33'
+| 'FP_VK_34'
+| 'FP_VK_21'
+| 'FP_VK_23'
+| 'FP_VK_41'
+| 'SVP_VK_1'
+| '-'`,elements:[{name:"literal",value:"'FP_VK_1'"},{name:"literal",value:"'FP_VK_11'"},{name:"literal",value:"'FP_VK_16'"},{name:"literal",value:"'FP_VK_2'"},{name:"literal",value:"'FP_VK_2_F'"},{name:"literal",value:"'FP_VK_2_L'"},{name:"literal",value:"'FP_VK_3'"},{name:"literal",value:"'FP_VK_4'"},{name:"literal",value:"'FP_VK_5'"},{name:"literal",value:"'FP_VK_8'"},{name:"literal",value:"'FP_VK_33'"},{name:"literal",value:"'FP_VK_34'"},{name:"literal",value:"'FP_VK_21'"},{name:"literal",value:"'FP_VK_23'"},{name:"literal",value:"'FP_VK_41'"},{name:"literal",value:"'SVP_VK_1'"},{name:"literal",value:"'-'"}],required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandlingGodkjent",value:{name:"union",raw:"boolean | null",elements:[{name:"boolean"},{name:"null"}],required:!0}},{key:"vurderPaNyttArsaker",value:{name:"union",raw:`Array<
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+> | null`,elements:[{name:"Array",elements:[{name:"union",raw:"'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'",elements:[{name:"literal",value:"'FEIL_FAKTA'"},{name:"literal",value:"'FEIL_LOV'"},{name:"literal",value:"'SKJØNN'"},{name:"literal",value:"'UTREDNING'"},{name:"literal",value:"'SAKSFLYT'"},{name:"literal",value:"'BEGRUNNELSE'"},{name:"literal",value:"'-'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'FEIL_REGEL'"}]}],raw:`Array<
+  'FEIL_FAKTA' | 'FEIL_LOV' | 'SKJØNN' | 'UTREDNING' | 'SAKSFLYT' | 'BEGRUNNELSE' | '-' | 'ANNET' | 'FEIL_REGEL'
+>`},{name:"null"}],required:!0}},{key:"besluttersBegrunnelse",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"aksjonspunktType",value:{name:"union",raw:"'AUTO' | 'MANU' | 'OVST' | 'SAOV' | '-'",elements:[{name:"literal",value:"'AUTO'"},{name:"literal",value:"'MANU'"},{name:"literal",value:"'OVST'"},{name:"literal",value:"'SAOV'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"erAktivt",value:{name:"boolean",required:!0}},{key:"fristTid",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"endretTidspunkt",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"endretAv",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}}]}},description:""},submitCallback:{required:!0,tsType:{name:"signature",type:"function",raw:"(data: ManuellKontrollBesteberegningAP) => Promise<void>",signature:{arguments:[{type:{name:"intersection",raw:`{
+  besteberegningErKorrekt: boolean;
+} & AksjonspunktTilBekreftelse<AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING>`,elements:[{name:"signature",type:"object",raw:`{
+  besteberegningErKorrekt: boolean;
+}`,signature:{properties:[{key:"besteberegningErKorrekt",value:{name:"boolean",required:!0}}]}},{name:"signature",type:"object",raw:`{
+  kode: T;
+  begrunnelse?: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}}]}}]},name:"data"}],return:{name:"Promise",elements:[{name:"void"}],raw:"Promise<void>"}}},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},submittable:{required:!0,tsType:{name:"boolean"},description:""}}};const Lf=({beregningsgrunnlag:e,arbeidsgiverOpplysninger:l,submittable:r})=>{const{alleKodeverk:t,aksjonspunkterForPanel:i,submitCallback:u,isReadOnly:o}=Tg(),{ytelsesspesifiktGrunnlag:d,beregningsgrunnlagPeriode:N}=e,f=d?.ytelsetype==="FP"?d.besteberegninggrunnlag:void 0;if(!f)return null;const R=N[0],A=i.find(S=>S.definisjon===nt.KONTROLLER_AUTOMATISK_BESTEBEREGNING||S.definisjon===nt.MANUELL_KONTROLL_AV_BESTEBEREGNING);return le.jsxs(Tt,{gap:"space-16",children:[!!A&&le.jsx(bf,{aksjonspunkt:A,submitCallback:u,submittable:r,readOnly:o}),le.jsx(lm,{children:le.jsx(wN,{periode:R,besteMåneder:f.besteMåneder})}),le.jsx(lm,{children:le.jsx(UN,{besteMåneder:f.besteMåneder,arbeidsgiverOpplysninger:l,alleKodeverk:t})})]})};Lf.__docgenInfo={description:`BesteberegningPanel
+
+Container komponent. Holder paneler for resultat av besteberegning og inntektsgrunnlag`,methods:[],displayName:"BesteberegningPanel",props:{beregningsgrunnlag:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  avklaringsbehov: Array<AvklaringsbehovDto>;
+  skjaeringstidspunktBeregning: string;
+  skjæringstidspunkt: string;
+  aktivitetStatus?: Array<
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-'
+  >;
+  beregningsgrunnlagPeriode: Array<BeregningsgrunnlagPeriodeDto>;
+  sammenligningsgrunnlagPrStatus: Array<SammenligningsgrunnlagDto>;
+  halvG?: number;
+  grunnbeløp?: number;
+  faktaOmBeregning?: FaktaOmBeregningDto;
+  andelerMedGraderingUtenBG: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
+  hjemmel?:
+    | 'F_9_9'
+    | 'F_9_8_8_28'
+    | 'F_9_9_8_28_8_30'
+    | 'F_9_9_8_35'
+    | 'F_9_9_8_38'
+    | 'F_9_9_8_40'
+    | 'F_9_9_8_41'
+    | 'F_9_9_8_42'
+    | 'F_9_9_8_43'
+    | 'F_9_9_8_47'
+    | 'F_9_9_8_49'
+    | 'F_14_7'
+    | 'F_14_7_8_30'
+    | 'F_14_7_8_28_8_30'
+    | 'F_14_7_8_35'
+    | 'F_14_7_8_38'
+    | 'F_14_7_8_40'
+    | 'F_14_7_8_41'
+    | 'F_14_7_8_42'
+    | 'F_14_7_8_43'
+    | 'F_14_7_8_47'
+    | 'F_14_7_8_49'
+    | 'F_22_13_6'
+    | 'COV_1_5'
+    | 'KORONALOVEN_3'
+    | '-';
+  faktaOmFordeling?: FordelingDto;
+  dekningsgrad?: number;
+  ytelsesspesifiktGrunnlag?: YtelsespesifiktGrunnlagDto;
+  refusjonTilVurdering?: RefusjonTilVurderingDto;
+  erOverstyrtInntekt: boolean;
+  vilkårsperiodeFom?: string;
+  inntektsgrunnlag?: InntektsgrunnlagDto;
+  forlengelseperioder: Array<Periode>;
+}`,signature:{properties:[{key:"avklaringsbehov",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  definisjon:
+    | 'FASTSETT_BG_AT_FL'
+    | 'VURDER_VARIG_ENDRT_NYOPPSTR_NAERNG_SN'
+    | 'VURDER_VARIG_ENDRT_ARB_SITSJN_MDL_INAKTV'
+    | 'FORDEL_BG'
+    | 'FASTSETT_BG_TB_ARB'
+    | 'VURDER_NYTT_INNTKTSFRHLD'
+    | 'VURDER_REPRSNTR_STORTNGT'
+    | 'FASTSETT_BG_SN_NY_I_ARB_LIVT'
+    | 'AVKLAR_AKTIVITETER'
+    | 'VURDER_FAKTA_ATFL_SN'
+    | 'VURDER_REFUSJONSKRAV'
+    | 'OVST_BEREGNINGSAKTIVITETER'
+    | 'OVST_INNTEKT'
+    | 'AUTO_VENT_PAA_INNTKT_RAP_FRST'
+    | 'AUTO_VENT_PAA_SISTE_AAP_DP_MELDKRT'
+    | 'AUTO_VENT_FRISINN'
+    | 'INGEN_AKTIVITETER';
+  status: 'OPPR' | 'UTFO' | 'AVBR';
+  kanLoses: boolean;
+  erTrukket: boolean;
+  begrunnelse?: string;
+  vurdertAv?: string;
+  vurdertTidspunkt?: string;
+}`,signature:{properties:[{key:"definisjon",value:{name:"union",raw:`| 'FASTSETT_BG_AT_FL'
+| 'VURDER_VARIG_ENDRT_NYOPPSTR_NAERNG_SN'
+| 'VURDER_VARIG_ENDRT_ARB_SITSJN_MDL_INAKTV'
+| 'FORDEL_BG'
+| 'FASTSETT_BG_TB_ARB'
+| 'VURDER_NYTT_INNTKTSFRHLD'
+| 'VURDER_REPRSNTR_STORTNGT'
+| 'FASTSETT_BG_SN_NY_I_ARB_LIVT'
+| 'AVKLAR_AKTIVITETER'
+| 'VURDER_FAKTA_ATFL_SN'
+| 'VURDER_REFUSJONSKRAV'
+| 'OVST_BEREGNINGSAKTIVITETER'
+| 'OVST_INNTEKT'
+| 'AUTO_VENT_PAA_INNTKT_RAP_FRST'
+| 'AUTO_VENT_PAA_SISTE_AAP_DP_MELDKRT'
+| 'AUTO_VENT_FRISINN'
+| 'INGEN_AKTIVITETER'`,elements:[{name:"literal",value:"'FASTSETT_BG_AT_FL'"},{name:"literal",value:"'VURDER_VARIG_ENDRT_NYOPPSTR_NAERNG_SN'"},{name:"literal",value:"'VURDER_VARIG_ENDRT_ARB_SITSJN_MDL_INAKTV'"},{name:"literal",value:"'FORDEL_BG'"},{name:"literal",value:"'FASTSETT_BG_TB_ARB'"},{name:"literal",value:"'VURDER_NYTT_INNTKTSFRHLD'"},{name:"literal",value:"'VURDER_REPRSNTR_STORTNGT'"},{name:"literal",value:"'FASTSETT_BG_SN_NY_I_ARB_LIVT'"},{name:"literal",value:"'AVKLAR_AKTIVITETER'"},{name:"literal",value:"'VURDER_FAKTA_ATFL_SN'"},{name:"literal",value:"'VURDER_REFUSJONSKRAV'"},{name:"literal",value:"'OVST_BEREGNINGSAKTIVITETER'"},{name:"literal",value:"'OVST_INNTEKT'"},{name:"literal",value:"'AUTO_VENT_PAA_INNTKT_RAP_FRST'"},{name:"literal",value:"'AUTO_VENT_PAA_SISTE_AAP_DP_MELDKRT'"},{name:"literal",value:"'AUTO_VENT_FRISINN'"},{name:"literal",value:"'INGEN_AKTIVITETER'"}],required:!0}},{key:"status",value:{name:"union",raw:"'OPPR' | 'UTFO' | 'AVBR'",elements:[{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"},{name:"literal",value:"'AVBR'"}],required:!0}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"erTrukket",value:{name:"boolean",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"vurdertAv",value:{name:"string",required:!1}},{key:"vurdertTidspunkt",value:{name:"string",required:!1}}]}}],raw:"Array<AvklaringsbehovDto>",required:!0}},{key:"skjaeringstidspunktBeregning",value:{name:"string",required:!0}},{key:"skjæringstidspunkt",value:{name:"string",required:!0}},{key:"aktivitetStatus",value:{name:"Array",elements:[{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}]}],raw:`Array<
+  | 'MIDL_INAKTIV'
+  | 'AAP'
+  | 'AT'
+  | 'DP'
+  | 'SP_AV_DP'
+  | 'PSB_AV_DP'
+  | 'FL'
+  | 'MS'
+  | 'SN'
+  | 'AT_FL'
+  | 'AT_SN'
+  | 'FL_SN'
+  | 'AT_FL_SN'
+  | 'BA'
+  | 'KUN_YTELSE'
+  | 'TY'
+  | 'VENTELØNN_VARTPENGER'
+  | '-'
+>`,required:!1}},{key:"beregningsgrunnlagPeriode",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  beregningsgrunnlagPeriodeFom?: string;
+  beregningsgrunnlagPeriodeTom?: string;
+  beregnetPrAar?: number;
+  bruttoPrAar?: number;
+  bruttoInkludertBortfaltNaturalytelsePrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  periodeAarsaker?: Array<
+    | 'NATURALYTELSE_BORTFALT'
+    | 'ARBEIDSFORHOLD_AVSLUTTET'
+    | 'NATURALYTELSE_TILKOMMER'
+    | 'ENDRING_I_REFUSJONSKRAV'
+    | 'REFUSJON_OPPHØRER'
+    | 'GRADERING'
+    | 'GRADERING_OPPHØRER'
+    | 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+    | 'TILKOMMET_INNTEKT'
+    | 'TILKOMMET_INNTEKT_MANUELT'
+    | 'TILKOMMET_INNTEKT_AVSLUTTET'
+    | 'REFUSJON_AVSLÅTT'
+    | 'REPRESENTERER_STORTINGET'
+    | 'REPRESENTERER_STORTINGET_AVSLUTTET'
+    | '-'
+  >;
+  dagsats?: number;
+  beregningsgrunnlagPrStatusOgAndel?: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
+}`,signature:{properties:[{key:"beregningsgrunnlagPeriodeFom",value:{name:"string",required:!1}},{key:"beregningsgrunnlagPeriodeTom",value:{name:"string",required:!1}},{key:"beregnetPrAar",value:{name:"number",required:!1}},{key:"bruttoPrAar",value:{name:"number",required:!1}},{key:"bruttoInkludertBortfaltNaturalytelsePrAar",value:{name:"number",required:!1}},{key:"avkortetPrAar",value:{name:"number",required:!1}},{key:"redusertPrAar",value:{name:"number",required:!1}},{key:"periodeAarsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'NATURALYTELSE_BORTFALT'
+| 'ARBEIDSFORHOLD_AVSLUTTET'
+| 'NATURALYTELSE_TILKOMMER'
+| 'ENDRING_I_REFUSJONSKRAV'
+| 'REFUSJON_OPPHØRER'
+| 'GRADERING'
+| 'GRADERING_OPPHØRER'
+| 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+| 'TILKOMMET_INNTEKT'
+| 'TILKOMMET_INNTEKT_MANUELT'
+| 'TILKOMMET_INNTEKT_AVSLUTTET'
+| 'REFUSJON_AVSLÅTT'
+| 'REPRESENTERER_STORTINGET'
+| 'REPRESENTERER_STORTINGET_AVSLUTTET'
+| '-'`,elements:[{name:"literal",value:"'NATURALYTELSE_BORTFALT'"},{name:"literal",value:"'ARBEIDSFORHOLD_AVSLUTTET'"},{name:"literal",value:"'NATURALYTELSE_TILKOMMER'"},{name:"literal",value:"'ENDRING_I_REFUSJONSKRAV'"},{name:"literal",value:"'REFUSJON_OPPHØRER'"},{name:"literal",value:"'GRADERING'"},{name:"literal",value:"'GRADERING_OPPHØRER'"},{name:"literal",value:"'ENDRING_I_AKTIVITETER_SØKT_FOR'"},{name:"literal",value:"'TILKOMMET_INNTEKT'"},{name:"literal",value:"'TILKOMMET_INNTEKT_MANUELT'"},{name:"literal",value:"'TILKOMMET_INNTEKT_AVSLUTTET'"},{name:"literal",value:"'REFUSJON_AVSLÅTT'"},{name:"literal",value:"'REPRESENTERER_STORTINGET'"},{name:"literal",value:"'REPRESENTERER_STORTINGET_AVSLUTTET'"},{name:"literal",value:"'-'"}]}],raw:`Array<
+  | 'NATURALYTELSE_BORTFALT'
+  | 'ARBEIDSFORHOLD_AVSLUTTET'
+  | 'NATURALYTELSE_TILKOMMER'
+  | 'ENDRING_I_REFUSJONSKRAV'
+  | 'REFUSJON_OPPHØRER'
+  | 'GRADERING'
+  | 'GRADERING_OPPHØRER'
+  | 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+  | 'TILKOMMET_INNTEKT'
+  | 'TILKOMMET_INNTEKT_MANUELT'
+  | 'TILKOMMET_INNTEKT_AVSLUTTET'
+  | 'REFUSJON_AVSLÅTT'
+  | 'REPRESENTERER_STORTINGET'
+  | 'REPRESENTERER_STORTINGET_AVSLUTTET'
+  | '-'
+>`,required:!1}},{key:"dagsats",value:{name:"number",required:!1}},{key:"beregningsgrunnlagPrStatusOgAndel",value:{name:"Array",elements:[{name:"intersection",raw:`(
+  | ({
+      dtoType: 'AT';
+    } & BeregningsgrunnlagPrStatusOgAndelAtDto)
+  | ({
+      dtoType: 'GENERELL';
+    } & BeregningsgrunnlagPrStatusOgAndelDtoFelles)
+  | ({
+      dtoType: 'FL';
+    } & BeregningsgrunnlagPrStatusOgAndelFlDto)
+  | ({
+      dtoType: 'SN';
+    } & BeregningsgrunnlagPrStatusOgAndelSnDto)
+  | ({
+      dtoType: 'KUN_YTELSE';
+    } & BeregningsgrunnlagPrStatusOgAndelYtelseDto)
+) & {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,elements:[{name:"unknown"},{name:"signature",type:"object",raw:`{
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"beregningsperiodeFom",value:{name:"string",required:!1}},{key:"beregningsperiodeTom",value:{name:"string",required:!1}},{key:"beregnetPrAar",value:{name:"number",required:!1}},{key:"overstyrtPrAar",value:{name:"number",required:!1}},{key:"bruttoPrAar",value:{name:"number",required:!1}},{key:"avkortetPrAar",value:{name:"number",required:!1}},{key:"redusertPrAar",value:{name:"number",required:!1}},{key:"erTidsbegrensetArbeidsforhold",value:{name:"boolean",required:!1}},{key:"erNyIArbeidslivet",value:{name:"boolean",required:!1}},{key:"lonnsendringIBeregningsperioden",value:{name:"boolean",required:!1}},{key:"andelsnr",value:{name:"number",required:!1}},{key:"besteberegningPrAar",value:{name:"number",required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"belopPrMndEtterAOrdningen",value:{name:"number",required:!1}},{key:"belopPrAarEtterAOrdningen",value:{name:"number",required:!1}},{key:"dagsats",value:{name:"number",required:!1}},{key:"originalDagsatsFraTilstøtendeYtelse",value:{name:"number",required:!1}},{key:"fordeltPrAar",value:{name:"number",required:!1}},{key:"erTilkommetAndel",value:{name:"boolean",required:!1}},{key:"skalFastsetteGrunnlag",value:{name:"boolean",required:!1}},{key:"dtoType",value:{name:"string",required:!0}}]}}]}],raw:"Array<BeregningsgrunnlagPrStatusOgAndelDto>",required:!1}}]}}],raw:"Array<BeregningsgrunnlagPeriodeDto>",required:!0}},{key:"sammenligningsgrunnlagPrStatus",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  sammenligningsgrunnlagFom?: string;
+  sammenligningsgrunnlagTom?: string;
+  rapportertPrAar?: number;
+  avvikPromille?: number;
+  avvikProsent?: number;
+  sammenligningsgrunnlagType?:
+    | 'SAMMENLIGNING_AT'
+    | 'SAMMENLIGNING_FL'
+    | 'SAMMENLIGNING_AT_FL'
+    | 'SAMMENLIGNING_SN'
+    | 'SAMMENLIGNING_ATFL_SN'
+    | 'SAMMENLIGNING_MIDL_INAKTIV';
+  differanseBeregnet?: number;
+}`,signature:{properties:[{key:"sammenligningsgrunnlagFom",value:{name:"string",required:!1}},{key:"sammenligningsgrunnlagTom",value:{name:"string",required:!1}},{key:"rapportertPrAar",value:{name:"number",required:!1}},{key:"avvikPromille",value:{name:"number",required:!1}},{key:"avvikProsent",value:{name:"number",required:!1}},{key:"sammenligningsgrunnlagType",value:{name:"union",raw:`| 'SAMMENLIGNING_AT'
+| 'SAMMENLIGNING_FL'
+| 'SAMMENLIGNING_AT_FL'
+| 'SAMMENLIGNING_SN'
+| 'SAMMENLIGNING_ATFL_SN'
+| 'SAMMENLIGNING_MIDL_INAKTIV'`,elements:[{name:"literal",value:"'SAMMENLIGNING_AT'"},{name:"literal",value:"'SAMMENLIGNING_FL'"},{name:"literal",value:"'SAMMENLIGNING_AT_FL'"},{name:"literal",value:"'SAMMENLIGNING_SN'"},{name:"literal",value:"'SAMMENLIGNING_ATFL_SN'"},{name:"literal",value:"'SAMMENLIGNING_MIDL_INAKTIV'"}],required:!1}},{key:"differanseBeregnet",value:{name:"number",required:!1}}]}}],raw:"Array<SammenligningsgrunnlagDto>",required:!0}},{key:"halvG",value:{name:"number",required:!1}},{key:"grunnbeløp",value:{name:"number",required:!1}},{key:"faktaOmBeregning",value:{name:"signature",type:"object",raw:`{
+  saksopplysninger?: Saksopplysninger;
+  kortvarigeArbeidsforhold?: Array<KortvarigeArbeidsforholdDto>;
+  frilansAndel?: FaktaOmBeregningAndelDto;
+  kunYtelse?: KunYtelseDto;
+  faktaOmBeregningTilfeller?: Array<
+    | 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'
+    | 'VURDER_SN_NY_I_ARBEIDSLIVET'
+    | 'VURDER_NYOPPSTARTET_FL'
+    | 'FASTSETT_MAANEDSINNTEKT_FL'
+    | 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+    | 'VURDER_LØNNSENDRING'
+    | 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+    | 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'
+    | 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'
+    | 'VURDER_ETTERLØNN_SLUTTPAKKE'
+    | 'FASTSETT_ETTERLØNN_SLUTTPAKKE'
+    | 'VURDER_MOTTAR_YTELSE'
+    | 'VURDER_BESTEBEREGNING'
+    | 'VURDER_MILITÆR_SIVILTJENESTE'
+    | 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'
+    | 'FASTSETT_BG_KUN_YTELSE'
+    | 'TILSTØTENDE_YTELSE'
+    | 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'
+    | '-'
+  >;
+  arbeidstakerOgFrilanserISammeOrganisasjonListe?: Array<ATogFliSammeOrganisasjonDto>;
+  arbeidsforholdMedLønnsendringUtenIM?: Array<FaktaOmBeregningAndelDto>;
+  vurderMottarYtelse?: VurderMottarYtelseDto;
+  avklarAktiviteter?: AvklarAktiviteterDto;
+  vurderBesteberegning?: VurderBesteberegningDto;
+  andelerForFaktaOmBeregning: Array<AndelForFaktaOmBeregningDto>;
+  vurderMilitaer?: VurderMilitærDto;
+  refusjonskravSomKommerForSentListe?: Array<RefusjonskravSomKommerForSentDto>;
+}`,signature:{properties:[{key:"saksopplysninger",value:{name:"signature",type:"object",raw:`{
+  arbeidsforholdMedLønnsendring?: Array<ArbeidsforholdDto>;
+  lønnsendringSaksopplysning?: Array<LønnsendringSaksopplysningDto>;
+  kortvarigeArbeidsforhold?: Array<ArbeidsforholdDto>;
+}`,signature:{properties:[{key:"arbeidsforholdMedLønnsendring",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  arbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"arbeidType",value:{name:"union",raw:"'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET'",elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}}]},required:!0}],raw:"Array<ArbeidsforholdDto>",required:!1}},{key:"lønnsendringSaksopplysning",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  sisteLønnsendringsdato: string;
+  lønnsendringscenario:
+    | 'MANUELT_BEHANDLET'
+    | 'DELVIS_MÅNEDSINNTEKT_SISTE_MND'
+    | 'FULL_MÅNEDSINNTEKT_EN_MND'
+    | 'FULL_MÅNEDSINNTEKT_TO_MND';
+  arbeidsforhold: ArbeidsforholdDto;
+}`,signature:{properties:[{key:"sisteLønnsendringsdato",value:{name:"string",required:!0}},{key:"lønnsendringscenario",value:{name:"union",raw:`| 'MANUELT_BEHANDLET'
+| 'DELVIS_MÅNEDSINNTEKT_SISTE_MND'
+| 'FULL_MÅNEDSINNTEKT_EN_MND'
+| 'FULL_MÅNEDSINNTEKT_TO_MND'`,elements:[{name:"literal",value:"'MANUELT_BEHANDLET'"},{name:"literal",value:"'DELVIS_MÅNEDSINNTEKT_SISTE_MND'"},{name:"literal",value:"'FULL_MÅNEDSINNTEKT_EN_MND'"},{name:"literal",value:"'FULL_MÅNEDSINNTEKT_TO_MND'"}],required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  arbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"arbeidType",value:{name:"union",raw:"'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET'",elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}}]},required:!0}}]}}],raw:"Array<LønnsendringSaksopplysningDto>",required:!1}},{key:"kortvarigeArbeidsforhold",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  arbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"arbeidType",value:{name:"union",raw:"'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET'",elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}}]},required:!0}],raw:"Array<ArbeidsforholdDto>",required:!1}}]},required:!1}},{key:"kortvarigeArbeidsforhold",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  erTidsbegrensetArbeidsforhold?: boolean;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"erTidsbegrensetArbeidsforhold",value:{name:"boolean",required:!1}}]}}],raw:"Array<KortvarigeArbeidsforholdDto>",required:!1}},{key:"frilansAndel",value:{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}}]},required:!1}},{key:"kunYtelse",value:{name:"signature",type:"object",raw:`{
+  andeler?: Array<AndelMedBeløpDto>;
+  fodendeKvinneMedDP: boolean;
+  erBesteberegning?: boolean;
+}`,signature:{properties:[{key:"andeler",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  fastsattBelopPrMnd?: number;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"fastsattBelopPrMnd",value:{name:"number",required:!1}}]}}],raw:"Array<AndelMedBeløpDto>",required:!1}},{key:"fodendeKvinneMedDP",value:{name:"boolean",required:!0}},{key:"erBesteberegning",value:{name:"boolean",required:!1}}]},required:!1}},{key:"faktaOmBeregningTilfeller",value:{name:"Array",elements:[{name:"union",raw:`| 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'
+| 'VURDER_SN_NY_I_ARBEIDSLIVET'
+| 'VURDER_NYOPPSTARTET_FL'
+| 'FASTSETT_MAANEDSINNTEKT_FL'
+| 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+| 'VURDER_LØNNSENDRING'
+| 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+| 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'
+| 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'
+| 'VURDER_ETTERLØNN_SLUTTPAKKE'
+| 'FASTSETT_ETTERLØNN_SLUTTPAKKE'
+| 'VURDER_MOTTAR_YTELSE'
+| 'VURDER_BESTEBEREGNING'
+| 'VURDER_MILITÆR_SIVILTJENESTE'
+| 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'
+| 'FASTSETT_BG_KUN_YTELSE'
+| 'TILSTØTENDE_YTELSE'
+| 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'
+| '-'`,elements:[{name:"literal",value:"'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'"},{name:"literal",value:"'VURDER_SN_NY_I_ARBEIDSLIVET'"},{name:"literal",value:"'VURDER_NYOPPSTARTET_FL'"},{name:"literal",value:"'FASTSETT_MAANEDSINNTEKT_FL'"},{name:"literal",value:"'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'"},{name:"literal",value:"'VURDER_LØNNSENDRING'"},{name:"literal",value:"'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'"},{name:"literal",value:"'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'"},{name:"literal",value:"'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'"},{name:"literal",value:"'VURDER_ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'FASTSETT_ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'VURDER_MOTTAR_YTELSE'"},{name:"literal",value:"'VURDER_BESTEBEREGNING'"},{name:"literal",value:"'VURDER_MILITÆR_SIVILTJENESTE'"},{name:"literal",value:"'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'"},{name:"literal",value:"'FASTSETT_BG_KUN_YTELSE'"},{name:"literal",value:"'TILSTØTENDE_YTELSE'"},{name:"literal",value:"'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'"},{name:"literal",value:"'-'"}]}],raw:`Array<
+  | 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'
+  | 'VURDER_SN_NY_I_ARBEIDSLIVET'
+  | 'VURDER_NYOPPSTARTET_FL'
+  | 'FASTSETT_MAANEDSINNTEKT_FL'
+  | 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+  | 'VURDER_LØNNSENDRING'
+  | 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+  | 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'
+  | 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'
+  | 'VURDER_ETTERLØNN_SLUTTPAKKE'
+  | 'FASTSETT_ETTERLØNN_SLUTTPAKKE'
+  | 'VURDER_MOTTAR_YTELSE'
+  | 'VURDER_BESTEBEREGNING'
+  | 'VURDER_MILITÆR_SIVILTJENESTE'
+  | 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'
+  | 'FASTSETT_BG_KUN_YTELSE'
+  | 'TILSTØTENDE_YTELSE'
+  | 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'
+  | '-'
+>`,required:!1}},{key:"arbeidstakerOgFrilanserISammeOrganisasjonListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  inntektPrMnd?: number;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"inntektPrMnd",value:{name:"number",required:!1}}]}}],raw:"Array<ATogFliSammeOrganisasjonDto>",required:!1}},{key:"arbeidsforholdMedLønnsendringUtenIM",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}}]},required:!1}],raw:"Array<FaktaOmBeregningAndelDto>",required:!1}},{key:"vurderMottarYtelse",value:{name:"signature",type:"object",raw:`{
+  erFrilans?: boolean;
+  frilansMottarYtelse?: boolean;
+  frilansInntektPrMnd?: number;
+  arbeidstakerAndelerUtenIM?: Array<ArbeidstakerUtenInntektsmeldingAndelDto>;
+}`,signature:{properties:[{key:"erFrilans",value:{name:"boolean",required:!1}},{key:"frilansMottarYtelse",value:{name:"boolean",required:!1}},{key:"frilansInntektPrMnd",value:{name:"number",required:!1}},{key:"arbeidstakerAndelerUtenIM",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  mottarYtelse?: boolean;
+  inntektPrMnd?: number;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"mottarYtelse",value:{name:"boolean",required:!1}},{key:"inntektPrMnd",value:{name:"number",required:!1}}]}}],raw:"Array<ArbeidstakerUtenInntektsmeldingAndelDto>",required:!1}}]},required:!1}},{key:"avklarAktiviteter",value:{name:"signature",type:"object",raw:`{
+  aktiviteterTomDatoMapping?: Array<AktivitetTomDatoMappingDto>;
+  skjæringstidspunkt: string;
+}`,signature:{properties:[{key:"aktiviteterTomDatoMapping",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  tom: string;
+  aktiviteter: Array<BeregningAktivitetDto>;
+}`,signature:{properties:[{key:"tom",value:{name:"string",required:!0}},{key:"aktiviteter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  eksternArbeidsforholdId?: string;
+  fom: string;
+  tom?: string;
+  arbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  skalBrukes?: boolean;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"skalBrukes",value:{name:"boolean",required:!1}}]}}],raw:"Array<BeregningAktivitetDto>",required:!0}}]}}],raw:"Array<AktivitetTomDatoMappingDto>",required:!1}},{key:"skjæringstidspunkt",value:{name:"string",required:!0}}]},required:!1}},{key:"vurderBesteberegning",value:{name:"signature",type:"object",raw:`{
+  skalHaBesteberegning?: boolean;
+}`,signature:{properties:[{key:"skalHaBesteberegning",value:{name:"boolean",required:!1}}]},required:!1}},{key:"andelerForFaktaOmBeregning",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  belopReadOnly?: number;
+  fastsattBelop?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  refusjonskrav?: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  andelsnr?: number;
+  skalKunneEndreAktivitet?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+}`,signature:{properties:[{key:"belopReadOnly",value:{name:"number",required:!1}},{key:"fastsattBelop",value:{name:"number",required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"refusjonskrav",value:{name:"number",required:!1}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"andelsnr",value:{name:"number",required:!1}},{key:"skalKunneEndreAktivitet",value:{name:"boolean",required:!1}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}}]}}],raw:"Array<AndelForFaktaOmBeregningDto>",required:!0}},{key:"vurderMilitaer",value:{name:"signature",type:"object",raw:`{
+  harMilitaer?: boolean;
+}`,signature:{properties:[{key:"harMilitaer",value:{name:"boolean",required:!1}}]},required:!1}},{key:"refusjonskravSomKommerForSentListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent: string;
+  erRefusjonskravGyldig?: boolean;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!0}},{key:"erRefusjonskravGyldig",value:{name:"boolean",required:!1}}]}}],raw:"Array<RefusjonskravSomKommerForSentDto>",required:!1}}]},required:!1}},{key:"andelerMedGraderingUtenBG",value:{name:"Array",elements:[{name:"intersection",raw:`(
+  | ({
+      dtoType: 'AT';
+    } & BeregningsgrunnlagPrStatusOgAndelAtDto)
+  | ({
+      dtoType: 'GENERELL';
+    } & BeregningsgrunnlagPrStatusOgAndelDtoFelles)
+  | ({
+      dtoType: 'FL';
+    } & BeregningsgrunnlagPrStatusOgAndelFlDto)
+  | ({
+      dtoType: 'SN';
+    } & BeregningsgrunnlagPrStatusOgAndelSnDto)
+  | ({
+      dtoType: 'KUN_YTELSE';
+    } & BeregningsgrunnlagPrStatusOgAndelYtelseDto)
+) & {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,elements:[{name:"unknown"},{name:"signature",type:"object",raw:`{
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"beregningsperiodeFom",value:{name:"string",required:!1}},{key:"beregningsperiodeTom",value:{name:"string",required:!1}},{key:"beregnetPrAar",value:{name:"number",required:!1}},{key:"overstyrtPrAar",value:{name:"number",required:!1}},{key:"bruttoPrAar",value:{name:"number",required:!1}},{key:"avkortetPrAar",value:{name:"number",required:!1}},{key:"redusertPrAar",value:{name:"number",required:!1}},{key:"erTidsbegrensetArbeidsforhold",value:{name:"boolean",required:!1}},{key:"erNyIArbeidslivet",value:{name:"boolean",required:!1}},{key:"lonnsendringIBeregningsperioden",value:{name:"boolean",required:!1}},{key:"andelsnr",value:{name:"number",required:!1}},{key:"besteberegningPrAar",value:{name:"number",required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"belopPrMndEtterAOrdningen",value:{name:"number",required:!1}},{key:"belopPrAarEtterAOrdningen",value:{name:"number",required:!1}},{key:"dagsats",value:{name:"number",required:!1}},{key:"originalDagsatsFraTilstøtendeYtelse",value:{name:"number",required:!1}},{key:"fordeltPrAar",value:{name:"number",required:!1}},{key:"erTilkommetAndel",value:{name:"boolean",required:!1}},{key:"skalFastsetteGrunnlag",value:{name:"boolean",required:!1}},{key:"dtoType",value:{name:"string",required:!0}}]}}]}],raw:"Array<BeregningsgrunnlagPrStatusOgAndelDto>",required:!0}},{key:"hjemmel",value:{name:"union",raw:`| 'F_9_9'
+| 'F_9_8_8_28'
+| 'F_9_9_8_28_8_30'
+| 'F_9_9_8_35'
+| 'F_9_9_8_38'
+| 'F_9_9_8_40'
+| 'F_9_9_8_41'
+| 'F_9_9_8_42'
+| 'F_9_9_8_43'
+| 'F_9_9_8_47'
+| 'F_9_9_8_49'
+| 'F_14_7'
+| 'F_14_7_8_30'
+| 'F_14_7_8_28_8_30'
+| 'F_14_7_8_35'
+| 'F_14_7_8_38'
+| 'F_14_7_8_40'
+| 'F_14_7_8_41'
+| 'F_14_7_8_42'
+| 'F_14_7_8_43'
+| 'F_14_7_8_47'
+| 'F_14_7_8_49'
+| 'F_22_13_6'
+| 'COV_1_5'
+| 'KORONALOVEN_3'
+| '-'`,elements:[{name:"literal",value:"'F_9_9'"},{name:"literal",value:"'F_9_8_8_28'"},{name:"literal",value:"'F_9_9_8_28_8_30'"},{name:"literal",value:"'F_9_9_8_35'"},{name:"literal",value:"'F_9_9_8_38'"},{name:"literal",value:"'F_9_9_8_40'"},{name:"literal",value:"'F_9_9_8_41'"},{name:"literal",value:"'F_9_9_8_42'"},{name:"literal",value:"'F_9_9_8_43'"},{name:"literal",value:"'F_9_9_8_47'"},{name:"literal",value:"'F_9_9_8_49'"},{name:"literal",value:"'F_14_7'"},{name:"literal",value:"'F_14_7_8_30'"},{name:"literal",value:"'F_14_7_8_28_8_30'"},{name:"literal",value:"'F_14_7_8_35'"},{name:"literal",value:"'F_14_7_8_38'"},{name:"literal",value:"'F_14_7_8_40'"},{name:"literal",value:"'F_14_7_8_41'"},{name:"literal",value:"'F_14_7_8_42'"},{name:"literal",value:"'F_14_7_8_43'"},{name:"literal",value:"'F_14_7_8_47'"},{name:"literal",value:"'F_14_7_8_49'"},{name:"literal",value:"'F_22_13_6'"},{name:"literal",value:"'COV_1_5'"},{name:"literal",value:"'KORONALOVEN_3'"},{name:"literal",value:"'-'"}],required:!1}},{key:"faktaOmFordeling",value:{name:"signature",type:"object",raw:`{
+  vurderNyttInntektsforholdDto?: VurderNyttInntektsforholdDto;
+  vurderRepresentererStortinget?: VurderRepresentererStortingetDto;
+  fordelBeregningsgrunnlag?: FordelBeregningsgrunnlagDto;
+}`,signature:{properties:[{key:"vurderNyttInntektsforholdDto",value:{name:"signature",type:"object",raw:`{
+  vurderInntektsforholdPerioder: Array<VurderInntektsforholdPeriodeDto>;
+  harMottattOmsorgsstønadEllerFosterhjemsgodtgjørelse: boolean;
+}`,signature:{properties:[{key:"vurderInntektsforholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  inntektsforholdListe: Array<InntektsforholdDto>;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"inntektsforholdListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  arbeidsgiverId?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  periode: Periode;
+  inntektFraInntektsmeldingPrÅr?: number;
+  bruttoInntektPrÅr?: number;
+  skalRedusereUtbetaling?: boolean;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"arbeidsgiverId",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"periode",value:{name:"signature",type:"object",raw:`{
+  fom: string | null;
+  tom: string | null;
+}`,signature:{properties:[{key:"fom",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"tom",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}}]},required:!0}},{key:"inntektFraInntektsmeldingPrÅr",value:{name:"number",required:!1}},{key:"bruttoInntektPrÅr",value:{name:"number",required:!1}},{key:"skalRedusereUtbetaling",value:{name:"boolean",required:!1}}]}}],raw:"Array<InntektsforholdDto>",required:!0}}]}}],raw:"Array<VurderInntektsforholdPeriodeDto>",required:!0}},{key:"harMottattOmsorgsstønadEllerFosterhjemsgodtgjørelse",value:{name:"boolean",required:!0}}]},required:!1}},{key:"vurderRepresentererStortinget",value:{name:"signature",type:"object",raw:`{
+  stortingsperiodeFom?: string;
+  stortingsperiodeTom?: string;
+  representererStortinget?: boolean;
+}`,signature:{properties:[{key:"stortingsperiodeFom",value:{name:"string",required:!1}},{key:"stortingsperiodeTom",value:{name:"string",required:!1}},{key:"representererStortinget",value:{name:"boolean",required:!1}}]},required:!1}},{key:"fordelBeregningsgrunnlag",value:{name:"signature",type:"object",raw:`{
+  fordelBeregningsgrunnlagPerioder: Array<FordelBeregningsgrunnlagPeriodeDto>;
+  arbeidsforholdTilFordeling: Array<FordelBeregningsgrunnlagArbeidsforholdDto>;
+}`,signature:{properties:[{key:"fordelBeregningsgrunnlagPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom?: string;
+  fordelBeregningsgrunnlagAndeler: Array<FordelBeregningsgrunnlagAndelDto>;
+  harPeriodeAarsakGraderingEllerRefusjon?: boolean;
+  skalRedigereInntekt?: boolean;
+  skalPreutfyllesMedBeregningsgrunnlag?: boolean;
+  skalKunneEndreRefusjon?: boolean;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!1}},{key:"fordelBeregningsgrunnlagAndeler",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  fordelingForrigeBehandlingPrAar?: number;
+  refusjonskravPrAar?: number;
+  fordeltPrAar?: number;
+  belopFraInntektsmeldingPrAar?: number;
+  refusjonskravFraInntektsmeldingPrAar?: number;
+  nyttArbeidsforhold?: boolean;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"fordelingForrigeBehandlingPrAar",value:{name:"number",required:!1}},{key:"refusjonskravPrAar",value:{name:"number",required:!1}},{key:"fordeltPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrAar",value:{name:"number",required:!1}},{key:"refusjonskravFraInntektsmeldingPrAar",value:{name:"number",required:!1}},{key:"nyttArbeidsforhold",value:{name:"boolean",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}}]}}],raw:"Array<FordelBeregningsgrunnlagAndelDto>",required:!0}},{key:"harPeriodeAarsakGraderingEllerRefusjon",value:{name:"boolean",required:!1}},{key:"skalRedigereInntekt",value:{name:"boolean",required:!1}},{key:"skalPreutfyllesMedBeregningsgrunnlag",value:{name:"boolean",required:!1}},{key:"skalKunneEndreRefusjon",value:{name:"boolean",required:!1}}]}}],raw:"Array<FordelBeregningsgrunnlagPeriodeDto>",required:!0}},{key:"arbeidsforholdTilFordeling",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType?:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+  perioderMedGraderingEllerRefusjon: Array<NyPeriodeDto>;
+  permisjon?: PermisjonDto;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!1}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}},{key:"perioderMedGraderingEllerRefusjon",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erRefusjon?: boolean;
+  erGradering?: boolean;
+  erSøktYtelse?: boolean;
+  fom?: string;
+  tom?: string;
+}`,signature:{properties:[{key:"erRefusjon",value:{name:"boolean",required:!1}},{key:"erGradering",value:{name:"boolean",required:!1}},{key:"erSøktYtelse",value:{name:"boolean",required:!1}},{key:"fom",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!1}}]}}],raw:"Array<NyPeriodeDto>",required:!0}},{key:"permisjon",value:{name:"signature",type:"object",raw:`{
+  permisjonFom: string;
+  permisjonTom: string;
+}`,signature:{properties:[{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!0}}]},required:!1}}]}}],raw:"Array<FordelBeregningsgrunnlagArbeidsforholdDto>",required:!0}}]},required:!1}}]},required:!1}},{key:"dekningsgrad",value:{name:"number",required:!1}},{key:"ytelsesspesifiktGrunnlag",value:{name:"intersection",raw:`(
+  | ({
+      ytelsetype: 'OMP';
+    } & OmsorgspengeGrunnlagDto)
+  | ({
+      ytelsetype: 'SVP';
+    } & SvangerskapspengerGrunnlagDto)
+  | ({
+      ytelsetype: 'FP';
+    } & ForeldrepengerGrunnlagDto)
+  | ({
+      ytelsetype: 'FRISINN';
+    } & FrisinnGrunnlagDto)
+) & {
+  ytelsetype: string;
+}`,elements:[{name:"unknown"},{name:"signature",type:"object",raw:`{
+  ytelsetype: string;
+}`,signature:{properties:[{key:"ytelsetype",value:{name:"string",required:!0}}]}}],required:!1}},{key:"refusjonTilVurdering",value:{name:"signature",type:"object",raw:`{
+  andeler: Array<RefusjonAndelTilVurderingDto>;
+}`,signature:{properties:[{key:"andeler",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  tidligereUtbetalinger?: Array<TidligereUtbetalingDto>;
+  nyttRefusjonskravFom?: string;
+  fastsattNyttRefusjonskravFom?: string;
+  tidligsteMuligeRefusjonsdato?: string;
+  arbeidsgiver?: Arbeidsgiver;
+  internArbeidsforholdRef?: string;
+  eksternArbeidsforholdRef?: string;
+  skalKunneFastsetteDelvisRefusjon?: boolean;
+  fastsattDelvisRefusjonPrMnd?: number;
+  maksTillattDelvisRefusjonPrMnd?: number;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"tidligereUtbetalinger",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom?: string;
+  erTildeltRefusjon: boolean;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!1}},{key:"erTildeltRefusjon",value:{name:"boolean",required:!0}}]}}],raw:"Array<TidligereUtbetalingDto>",required:!1}},{key:"nyttRefusjonskravFom",value:{name:"string",required:!1}},{key:"fastsattNyttRefusjonskravFom",value:{name:"string",required:!1}},{key:"tidligsteMuligeRefusjonsdato",value:{name:"string",required:!1}},{key:"arbeidsgiver",value:{name:"signature",type:"object",raw:`{
+  identifikator?: string;
+  indexKey?: string;
+  orgnr?: string;
+  aktørId?: string;
+  erVirksomhet?: boolean;
+}`,signature:{properties:[{key:"identifikator",value:{name:"string",required:!1}},{key:"indexKey",value:{name:"string",required:!1}},{key:"orgnr",value:{name:"string",required:!1}},{key:"aktørId",value:{name:"string",required:!1}},{key:"erVirksomhet",value:{name:"boolean",required:!1}}]},required:!1}},{key:"internArbeidsforholdRef",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdRef",value:{name:"string",required:!1}},{key:"skalKunneFastsetteDelvisRefusjon",value:{name:"boolean",required:!1}},{key:"fastsattDelvisRefusjonPrMnd",value:{name:"number",required:!1}},{key:"maksTillattDelvisRefusjonPrMnd",value:{name:"number",required:!1}}]}}],raw:"Array<RefusjonAndelTilVurderingDto>",required:!0}}]},required:!1}},{key:"erOverstyrtInntekt",value:{name:"boolean",required:!0}},{key:"vilkårsperiodeFom",value:{name:"string",required:!1}},{key:"inntektsgrunnlag",value:{name:"signature",type:"object",raw:`{
+  måneder: Array<InntektsgrunnlagMånedDto>;
+  pgiGrunnlag: Array<PgiPrÅrDto>;
+  sammenligningsgrunnlagInntekter: Array<InntektsgrunnlagMånedDto>;
+  beregningsgrunnlagInntekter: Array<InntektsgrunnlagMånedDto>;
+}`,signature:{properties:[{key:"måneder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  inntekter?: Array<InntektsgrunnlagInntektDto>;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  inntektAktivitetType: 'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-';
+  beløp?: number;
+  arbeidsgiverIdent?: string;
+}`,signature:{properties:[{key:"inntektAktivitetType",value:{name:"union",raw:"'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-'",elements:[{name:"literal",value:"'ARBEIDSTAKERINNTEKT'"},{name:"literal",value:"'FRILANSINNTEKT'"},{name:"literal",value:"'YTELSEINNTEKT'"},{name:"literal",value:"'-'"}],required:!0}},{key:"beløp",value:{name:"number",required:!1}},{key:"arbeidsgiverIdent",value:{name:"string",required:!1}}]}}],raw:"Array<InntektsgrunnlagInntektDto>",required:!1}}]}}],raw:"Array<InntektsgrunnlagMånedDto>",required:!0}},{key:"pgiGrunnlag",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  år: number;
+  inntekter?: Array<PgiGrunnlagDto>;
+}`,signature:{properties:[{key:"år",value:{name:"number",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  pgiType: 'LØNN' | 'NÆRING' | '-';
+  beløp?: number;
+}`,signature:{properties:[{key:"pgiType",value:{name:"union",raw:"'LØNN' | 'NÆRING' | '-'",elements:[{name:"literal",value:"'LØNN'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'-'"}],required:!0}},{key:"beløp",value:{name:"number",required:!1}}]}}],raw:"Array<PgiGrunnlagDto>",required:!1}}]}}],raw:"Array<PgiPrÅrDto>",required:!0}},{key:"sammenligningsgrunnlagInntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  inntekter?: Array<InntektsgrunnlagInntektDto>;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  inntektAktivitetType: 'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-';
+  beløp?: number;
+  arbeidsgiverIdent?: string;
+}`,signature:{properties:[{key:"inntektAktivitetType",value:{name:"union",raw:"'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-'",elements:[{name:"literal",value:"'ARBEIDSTAKERINNTEKT'"},{name:"literal",value:"'FRILANSINNTEKT'"},{name:"literal",value:"'YTELSEINNTEKT'"},{name:"literal",value:"'-'"}],required:!0}},{key:"beløp",value:{name:"number",required:!1}},{key:"arbeidsgiverIdent",value:{name:"string",required:!1}}]}}],raw:"Array<InntektsgrunnlagInntektDto>",required:!1}}]}}],raw:"Array<InntektsgrunnlagMånedDto>",required:!0}},{key:"beregningsgrunnlagInntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  inntekter?: Array<InntektsgrunnlagInntektDto>;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  inntektAktivitetType: 'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-';
+  beløp?: number;
+  arbeidsgiverIdent?: string;
+}`,signature:{properties:[{key:"inntektAktivitetType",value:{name:"union",raw:"'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-'",elements:[{name:"literal",value:"'ARBEIDSTAKERINNTEKT'"},{name:"literal",value:"'FRILANSINNTEKT'"},{name:"literal",value:"'YTELSEINNTEKT'"},{name:"literal",value:"'-'"}],required:!0}},{key:"beløp",value:{name:"number",required:!1}},{key:"arbeidsgiverIdent",value:{name:"string",required:!1}}]}}],raw:"Array<InntektsgrunnlagInntektDto>",required:!1}}]}}],raw:"Array<InntektsgrunnlagMånedDto>",required:!0}}]},required:!1}},{key:"forlengelseperioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string | null;
+  tom: string | null;
+}`,signature:{properties:[{key:"fom",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"tom",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}}]},required:!0}],raw:"Array<Periode>",required:!0}}]}},description:""},arbeidsgiverOpplysninger:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""},submittable:{required:!0,tsType:{name:"boolean"},description:""}}};const zb={"BesteberegningProsessPanel.Måned.Inntekt.Aktivitet":"Aktivitet","BesteberegningProsessPanel.Måned.Inntekt.Inntekt":"Inntekt","Inntekttabell.Tittel":"Inntektsgrunnlag for besteberegning","Inntekttabell.Sum":"Total for måned","Inntekttabell.BeregnetÅrsinntekt":"Beregnet årsinntekt: {inntekt}","ResultatGrunnlag.BruttoBeregningsgrunnlag":"Brutto beregningsgrunnlag","ResultatGrunnlag.BeregningEtterBesteberegning":"Beregning etter § 14-7, 3. ledd","ResultatGrunnlag.BeregningEtterKap8":"Beregning etter § 14-7, 1. ledd","ResultatGrunnlag.Kap8GirBesteBeregning":"Beregning etter § 14-7, 1. ledd gir beste beregning.","ResultatGrunnlag.Kap1473GirBesteBeregning":"Beregning etter § 14-7, 3. ledd gir beste beregning.","BesteberegningProsessPanel.Aksjonspunkt.Radiotekst":"Beregningen er riktig, fortsett behandlingen.","BesteberegningProsessPanel.Aksjonspunkt.HelpText":"Saken er automatisk besteberegnet, vennligst kontroller beregningen","BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll":"Saken er tatt ut til kontroll på grunn av stort avvik mellom 3. og 1. ledd. Vennligst kontroller beregningen"},Xb=Rr(zb),gu=e=>le.jsx(Pu,{value:Xb,children:le.jsx(Lf,{...e})});gu.__docgenInfo={description:"",methods:[],displayName:"BesteberegningFaktaIndex",props:{beregningsgrunnlag:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  avklaringsbehov: Array<AvklaringsbehovDto>;
+  skjaeringstidspunktBeregning: string;
+  skjæringstidspunkt: string;
+  aktivitetStatus?: Array<
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-'
+  >;
+  beregningsgrunnlagPeriode: Array<BeregningsgrunnlagPeriodeDto>;
+  sammenligningsgrunnlagPrStatus: Array<SammenligningsgrunnlagDto>;
+  halvG?: number;
+  grunnbeløp?: number;
+  faktaOmBeregning?: FaktaOmBeregningDto;
+  andelerMedGraderingUtenBG: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
+  hjemmel?:
+    | 'F_9_9'
+    | 'F_9_8_8_28'
+    | 'F_9_9_8_28_8_30'
+    | 'F_9_9_8_35'
+    | 'F_9_9_8_38'
+    | 'F_9_9_8_40'
+    | 'F_9_9_8_41'
+    | 'F_9_9_8_42'
+    | 'F_9_9_8_43'
+    | 'F_9_9_8_47'
+    | 'F_9_9_8_49'
+    | 'F_14_7'
+    | 'F_14_7_8_30'
+    | 'F_14_7_8_28_8_30'
+    | 'F_14_7_8_35'
+    | 'F_14_7_8_38'
+    | 'F_14_7_8_40'
+    | 'F_14_7_8_41'
+    | 'F_14_7_8_42'
+    | 'F_14_7_8_43'
+    | 'F_14_7_8_47'
+    | 'F_14_7_8_49'
+    | 'F_22_13_6'
+    | 'COV_1_5'
+    | 'KORONALOVEN_3'
+    | '-';
+  faktaOmFordeling?: FordelingDto;
+  dekningsgrad?: number;
+  ytelsesspesifiktGrunnlag?: YtelsespesifiktGrunnlagDto;
+  refusjonTilVurdering?: RefusjonTilVurderingDto;
+  erOverstyrtInntekt: boolean;
+  vilkårsperiodeFom?: string;
+  inntektsgrunnlag?: InntektsgrunnlagDto;
+  forlengelseperioder: Array<Periode>;
+}`,signature:{properties:[{key:"avklaringsbehov",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  definisjon:
+    | 'FASTSETT_BG_AT_FL'
+    | 'VURDER_VARIG_ENDRT_NYOPPSTR_NAERNG_SN'
+    | 'VURDER_VARIG_ENDRT_ARB_SITSJN_MDL_INAKTV'
+    | 'FORDEL_BG'
+    | 'FASTSETT_BG_TB_ARB'
+    | 'VURDER_NYTT_INNTKTSFRHLD'
+    | 'VURDER_REPRSNTR_STORTNGT'
+    | 'FASTSETT_BG_SN_NY_I_ARB_LIVT'
+    | 'AVKLAR_AKTIVITETER'
+    | 'VURDER_FAKTA_ATFL_SN'
+    | 'VURDER_REFUSJONSKRAV'
+    | 'OVST_BEREGNINGSAKTIVITETER'
+    | 'OVST_INNTEKT'
+    | 'AUTO_VENT_PAA_INNTKT_RAP_FRST'
+    | 'AUTO_VENT_PAA_SISTE_AAP_DP_MELDKRT'
+    | 'AUTO_VENT_FRISINN'
+    | 'INGEN_AKTIVITETER';
+  status: 'OPPR' | 'UTFO' | 'AVBR';
+  kanLoses: boolean;
+  erTrukket: boolean;
+  begrunnelse?: string;
+  vurdertAv?: string;
+  vurdertTidspunkt?: string;
+}`,signature:{properties:[{key:"definisjon",value:{name:"union",raw:`| 'FASTSETT_BG_AT_FL'
+| 'VURDER_VARIG_ENDRT_NYOPPSTR_NAERNG_SN'
+| 'VURDER_VARIG_ENDRT_ARB_SITSJN_MDL_INAKTV'
+| 'FORDEL_BG'
+| 'FASTSETT_BG_TB_ARB'
+| 'VURDER_NYTT_INNTKTSFRHLD'
+| 'VURDER_REPRSNTR_STORTNGT'
+| 'FASTSETT_BG_SN_NY_I_ARB_LIVT'
+| 'AVKLAR_AKTIVITETER'
+| 'VURDER_FAKTA_ATFL_SN'
+| 'VURDER_REFUSJONSKRAV'
+| 'OVST_BEREGNINGSAKTIVITETER'
+| 'OVST_INNTEKT'
+| 'AUTO_VENT_PAA_INNTKT_RAP_FRST'
+| 'AUTO_VENT_PAA_SISTE_AAP_DP_MELDKRT'
+| 'AUTO_VENT_FRISINN'
+| 'INGEN_AKTIVITETER'`,elements:[{name:"literal",value:"'FASTSETT_BG_AT_FL'"},{name:"literal",value:"'VURDER_VARIG_ENDRT_NYOPPSTR_NAERNG_SN'"},{name:"literal",value:"'VURDER_VARIG_ENDRT_ARB_SITSJN_MDL_INAKTV'"},{name:"literal",value:"'FORDEL_BG'"},{name:"literal",value:"'FASTSETT_BG_TB_ARB'"},{name:"literal",value:"'VURDER_NYTT_INNTKTSFRHLD'"},{name:"literal",value:"'VURDER_REPRSNTR_STORTNGT'"},{name:"literal",value:"'FASTSETT_BG_SN_NY_I_ARB_LIVT'"},{name:"literal",value:"'AVKLAR_AKTIVITETER'"},{name:"literal",value:"'VURDER_FAKTA_ATFL_SN'"},{name:"literal",value:"'VURDER_REFUSJONSKRAV'"},{name:"literal",value:"'OVST_BEREGNINGSAKTIVITETER'"},{name:"literal",value:"'OVST_INNTEKT'"},{name:"literal",value:"'AUTO_VENT_PAA_INNTKT_RAP_FRST'"},{name:"literal",value:"'AUTO_VENT_PAA_SISTE_AAP_DP_MELDKRT'"},{name:"literal",value:"'AUTO_VENT_FRISINN'"},{name:"literal",value:"'INGEN_AKTIVITETER'"}],required:!0}},{key:"status",value:{name:"union",raw:"'OPPR' | 'UTFO' | 'AVBR'",elements:[{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"},{name:"literal",value:"'AVBR'"}],required:!0}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"erTrukket",value:{name:"boolean",required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"vurdertAv",value:{name:"string",required:!1}},{key:"vurdertTidspunkt",value:{name:"string",required:!1}}]}}],raw:"Array<AvklaringsbehovDto>",required:!0}},{key:"skjaeringstidspunktBeregning",value:{name:"string",required:!0}},{key:"skjæringstidspunkt",value:{name:"string",required:!0}},{key:"aktivitetStatus",value:{name:"Array",elements:[{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}]}],raw:`Array<
+  | 'MIDL_INAKTIV'
+  | 'AAP'
+  | 'AT'
+  | 'DP'
+  | 'SP_AV_DP'
+  | 'PSB_AV_DP'
+  | 'FL'
+  | 'MS'
+  | 'SN'
+  | 'AT_FL'
+  | 'AT_SN'
+  | 'FL_SN'
+  | 'AT_FL_SN'
+  | 'BA'
+  | 'KUN_YTELSE'
+  | 'TY'
+  | 'VENTELØNN_VARTPENGER'
+  | '-'
+>`,required:!1}},{key:"beregningsgrunnlagPeriode",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  beregningsgrunnlagPeriodeFom?: string;
+  beregningsgrunnlagPeriodeTom?: string;
+  beregnetPrAar?: number;
+  bruttoPrAar?: number;
+  bruttoInkludertBortfaltNaturalytelsePrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  periodeAarsaker?: Array<
+    | 'NATURALYTELSE_BORTFALT'
+    | 'ARBEIDSFORHOLD_AVSLUTTET'
+    | 'NATURALYTELSE_TILKOMMER'
+    | 'ENDRING_I_REFUSJONSKRAV'
+    | 'REFUSJON_OPPHØRER'
+    | 'GRADERING'
+    | 'GRADERING_OPPHØRER'
+    | 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+    | 'TILKOMMET_INNTEKT'
+    | 'TILKOMMET_INNTEKT_MANUELT'
+    | 'TILKOMMET_INNTEKT_AVSLUTTET'
+    | 'REFUSJON_AVSLÅTT'
+    | 'REPRESENTERER_STORTINGET'
+    | 'REPRESENTERER_STORTINGET_AVSLUTTET'
+    | '-'
+  >;
+  dagsats?: number;
+  beregningsgrunnlagPrStatusOgAndel?: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
+}`,signature:{properties:[{key:"beregningsgrunnlagPeriodeFom",value:{name:"string",required:!1}},{key:"beregningsgrunnlagPeriodeTom",value:{name:"string",required:!1}},{key:"beregnetPrAar",value:{name:"number",required:!1}},{key:"bruttoPrAar",value:{name:"number",required:!1}},{key:"bruttoInkludertBortfaltNaturalytelsePrAar",value:{name:"number",required:!1}},{key:"avkortetPrAar",value:{name:"number",required:!1}},{key:"redusertPrAar",value:{name:"number",required:!1}},{key:"periodeAarsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'NATURALYTELSE_BORTFALT'
+| 'ARBEIDSFORHOLD_AVSLUTTET'
+| 'NATURALYTELSE_TILKOMMER'
+| 'ENDRING_I_REFUSJONSKRAV'
+| 'REFUSJON_OPPHØRER'
+| 'GRADERING'
+| 'GRADERING_OPPHØRER'
+| 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+| 'TILKOMMET_INNTEKT'
+| 'TILKOMMET_INNTEKT_MANUELT'
+| 'TILKOMMET_INNTEKT_AVSLUTTET'
+| 'REFUSJON_AVSLÅTT'
+| 'REPRESENTERER_STORTINGET'
+| 'REPRESENTERER_STORTINGET_AVSLUTTET'
+| '-'`,elements:[{name:"literal",value:"'NATURALYTELSE_BORTFALT'"},{name:"literal",value:"'ARBEIDSFORHOLD_AVSLUTTET'"},{name:"literal",value:"'NATURALYTELSE_TILKOMMER'"},{name:"literal",value:"'ENDRING_I_REFUSJONSKRAV'"},{name:"literal",value:"'REFUSJON_OPPHØRER'"},{name:"literal",value:"'GRADERING'"},{name:"literal",value:"'GRADERING_OPPHØRER'"},{name:"literal",value:"'ENDRING_I_AKTIVITETER_SØKT_FOR'"},{name:"literal",value:"'TILKOMMET_INNTEKT'"},{name:"literal",value:"'TILKOMMET_INNTEKT_MANUELT'"},{name:"literal",value:"'TILKOMMET_INNTEKT_AVSLUTTET'"},{name:"literal",value:"'REFUSJON_AVSLÅTT'"},{name:"literal",value:"'REPRESENTERER_STORTINGET'"},{name:"literal",value:"'REPRESENTERER_STORTINGET_AVSLUTTET'"},{name:"literal",value:"'-'"}]}],raw:`Array<
+  | 'NATURALYTELSE_BORTFALT'
+  | 'ARBEIDSFORHOLD_AVSLUTTET'
+  | 'NATURALYTELSE_TILKOMMER'
+  | 'ENDRING_I_REFUSJONSKRAV'
+  | 'REFUSJON_OPPHØRER'
+  | 'GRADERING'
+  | 'GRADERING_OPPHØRER'
+  | 'ENDRING_I_AKTIVITETER_SØKT_FOR'
+  | 'TILKOMMET_INNTEKT'
+  | 'TILKOMMET_INNTEKT_MANUELT'
+  | 'TILKOMMET_INNTEKT_AVSLUTTET'
+  | 'REFUSJON_AVSLÅTT'
+  | 'REPRESENTERER_STORTINGET'
+  | 'REPRESENTERER_STORTINGET_AVSLUTTET'
+  | '-'
+>`,required:!1}},{key:"dagsats",value:{name:"number",required:!1}},{key:"beregningsgrunnlagPrStatusOgAndel",value:{name:"Array",elements:[{name:"intersection",raw:`(
+  | ({
+      dtoType: 'AT';
+    } & BeregningsgrunnlagPrStatusOgAndelAtDto)
+  | ({
+      dtoType: 'GENERELL';
+    } & BeregningsgrunnlagPrStatusOgAndelDtoFelles)
+  | ({
+      dtoType: 'FL';
+    } & BeregningsgrunnlagPrStatusOgAndelFlDto)
+  | ({
+      dtoType: 'SN';
+    } & BeregningsgrunnlagPrStatusOgAndelSnDto)
+  | ({
+      dtoType: 'KUN_YTELSE';
+    } & BeregningsgrunnlagPrStatusOgAndelYtelseDto)
+) & {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,elements:[{name:"unknown"},{name:"signature",type:"object",raw:`{
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"beregningsperiodeFom",value:{name:"string",required:!1}},{key:"beregningsperiodeTom",value:{name:"string",required:!1}},{key:"beregnetPrAar",value:{name:"number",required:!1}},{key:"overstyrtPrAar",value:{name:"number",required:!1}},{key:"bruttoPrAar",value:{name:"number",required:!1}},{key:"avkortetPrAar",value:{name:"number",required:!1}},{key:"redusertPrAar",value:{name:"number",required:!1}},{key:"erTidsbegrensetArbeidsforhold",value:{name:"boolean",required:!1}},{key:"erNyIArbeidslivet",value:{name:"boolean",required:!1}},{key:"lonnsendringIBeregningsperioden",value:{name:"boolean",required:!1}},{key:"andelsnr",value:{name:"number",required:!1}},{key:"besteberegningPrAar",value:{name:"number",required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"belopPrMndEtterAOrdningen",value:{name:"number",required:!1}},{key:"belopPrAarEtterAOrdningen",value:{name:"number",required:!1}},{key:"dagsats",value:{name:"number",required:!1}},{key:"originalDagsatsFraTilstøtendeYtelse",value:{name:"number",required:!1}},{key:"fordeltPrAar",value:{name:"number",required:!1}},{key:"erTilkommetAndel",value:{name:"boolean",required:!1}},{key:"skalFastsetteGrunnlag",value:{name:"boolean",required:!1}},{key:"dtoType",value:{name:"string",required:!0}}]}}]}],raw:"Array<BeregningsgrunnlagPrStatusOgAndelDto>",required:!1}}]}}],raw:"Array<BeregningsgrunnlagPeriodeDto>",required:!0}},{key:"sammenligningsgrunnlagPrStatus",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  sammenligningsgrunnlagFom?: string;
+  sammenligningsgrunnlagTom?: string;
+  rapportertPrAar?: number;
+  avvikPromille?: number;
+  avvikProsent?: number;
+  sammenligningsgrunnlagType?:
+    | 'SAMMENLIGNING_AT'
+    | 'SAMMENLIGNING_FL'
+    | 'SAMMENLIGNING_AT_FL'
+    | 'SAMMENLIGNING_SN'
+    | 'SAMMENLIGNING_ATFL_SN'
+    | 'SAMMENLIGNING_MIDL_INAKTIV';
+  differanseBeregnet?: number;
+}`,signature:{properties:[{key:"sammenligningsgrunnlagFom",value:{name:"string",required:!1}},{key:"sammenligningsgrunnlagTom",value:{name:"string",required:!1}},{key:"rapportertPrAar",value:{name:"number",required:!1}},{key:"avvikPromille",value:{name:"number",required:!1}},{key:"avvikProsent",value:{name:"number",required:!1}},{key:"sammenligningsgrunnlagType",value:{name:"union",raw:`| 'SAMMENLIGNING_AT'
+| 'SAMMENLIGNING_FL'
+| 'SAMMENLIGNING_AT_FL'
+| 'SAMMENLIGNING_SN'
+| 'SAMMENLIGNING_ATFL_SN'
+| 'SAMMENLIGNING_MIDL_INAKTIV'`,elements:[{name:"literal",value:"'SAMMENLIGNING_AT'"},{name:"literal",value:"'SAMMENLIGNING_FL'"},{name:"literal",value:"'SAMMENLIGNING_AT_FL'"},{name:"literal",value:"'SAMMENLIGNING_SN'"},{name:"literal",value:"'SAMMENLIGNING_ATFL_SN'"},{name:"literal",value:"'SAMMENLIGNING_MIDL_INAKTIV'"}],required:!1}},{key:"differanseBeregnet",value:{name:"number",required:!1}}]}}],raw:"Array<SammenligningsgrunnlagDto>",required:!0}},{key:"halvG",value:{name:"number",required:!1}},{key:"grunnbeløp",value:{name:"number",required:!1}},{key:"faktaOmBeregning",value:{name:"signature",type:"object",raw:`{
+  saksopplysninger?: Saksopplysninger;
+  kortvarigeArbeidsforhold?: Array<KortvarigeArbeidsforholdDto>;
+  frilansAndel?: FaktaOmBeregningAndelDto;
+  kunYtelse?: KunYtelseDto;
+  faktaOmBeregningTilfeller?: Array<
+    | 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'
+    | 'VURDER_SN_NY_I_ARBEIDSLIVET'
+    | 'VURDER_NYOPPSTARTET_FL'
+    | 'FASTSETT_MAANEDSINNTEKT_FL'
+    | 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+    | 'VURDER_LØNNSENDRING'
+    | 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+    | 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'
+    | 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'
+    | 'VURDER_ETTERLØNN_SLUTTPAKKE'
+    | 'FASTSETT_ETTERLØNN_SLUTTPAKKE'
+    | 'VURDER_MOTTAR_YTELSE'
+    | 'VURDER_BESTEBEREGNING'
+    | 'VURDER_MILITÆR_SIVILTJENESTE'
+    | 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'
+    | 'FASTSETT_BG_KUN_YTELSE'
+    | 'TILSTØTENDE_YTELSE'
+    | 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'
+    | '-'
+  >;
+  arbeidstakerOgFrilanserISammeOrganisasjonListe?: Array<ATogFliSammeOrganisasjonDto>;
+  arbeidsforholdMedLønnsendringUtenIM?: Array<FaktaOmBeregningAndelDto>;
+  vurderMottarYtelse?: VurderMottarYtelseDto;
+  avklarAktiviteter?: AvklarAktiviteterDto;
+  vurderBesteberegning?: VurderBesteberegningDto;
+  andelerForFaktaOmBeregning: Array<AndelForFaktaOmBeregningDto>;
+  vurderMilitaer?: VurderMilitærDto;
+  refusjonskravSomKommerForSentListe?: Array<RefusjonskravSomKommerForSentDto>;
+}`,signature:{properties:[{key:"saksopplysninger",value:{name:"signature",type:"object",raw:`{
+  arbeidsforholdMedLønnsendring?: Array<ArbeidsforholdDto>;
+  lønnsendringSaksopplysning?: Array<LønnsendringSaksopplysningDto>;
+  kortvarigeArbeidsforhold?: Array<ArbeidsforholdDto>;
+}`,signature:{properties:[{key:"arbeidsforholdMedLønnsendring",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  arbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"arbeidType",value:{name:"union",raw:"'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET'",elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}}]},required:!0}],raw:"Array<ArbeidsforholdDto>",required:!1}},{key:"lønnsendringSaksopplysning",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  sisteLønnsendringsdato: string;
+  lønnsendringscenario:
+    | 'MANUELT_BEHANDLET'
+    | 'DELVIS_MÅNEDSINNTEKT_SISTE_MND'
+    | 'FULL_MÅNEDSINNTEKT_EN_MND'
+    | 'FULL_MÅNEDSINNTEKT_TO_MND';
+  arbeidsforhold: ArbeidsforholdDto;
+}`,signature:{properties:[{key:"sisteLønnsendringsdato",value:{name:"string",required:!0}},{key:"lønnsendringscenario",value:{name:"union",raw:`| 'MANUELT_BEHANDLET'
+| 'DELVIS_MÅNEDSINNTEKT_SISTE_MND'
+| 'FULL_MÅNEDSINNTEKT_EN_MND'
+| 'FULL_MÅNEDSINNTEKT_TO_MND'`,elements:[{name:"literal",value:"'MANUELT_BEHANDLET'"},{name:"literal",value:"'DELVIS_MÅNEDSINNTEKT_SISTE_MND'"},{name:"literal",value:"'FULL_MÅNEDSINNTEKT_EN_MND'"},{name:"literal",value:"'FULL_MÅNEDSINNTEKT_TO_MND'"}],required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  arbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"arbeidType",value:{name:"union",raw:"'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET'",elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}}]},required:!0}}]}}],raw:"Array<LønnsendringSaksopplysningDto>",required:!1}},{key:"kortvarigeArbeidsforhold",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverReferanse?: string;
+  arbeidType?: 'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET';
+}`,signature:{properties:[{key:"arbeidsgiverReferanse",value:{name:"string",required:!1}},{key:"arbeidType",value:{name:"union",raw:"'ORDINÆRT_ARBEID' | 'SELVSTENDIG_NÆRINGSDRIVENDE' | 'FRILANS' | 'ANNET'",elements:[{name:"literal",value:"'ORDINÆRT_ARBEID'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'ANNET'"}],required:!1}}]},required:!0}],raw:"Array<ArbeidsforholdDto>",required:!1}}]},required:!1}},{key:"kortvarigeArbeidsforhold",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  erTidsbegrensetArbeidsforhold?: boolean;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"erTidsbegrensetArbeidsforhold",value:{name:"boolean",required:!1}}]}}],raw:"Array<KortvarigeArbeidsforholdDto>",required:!1}},{key:"frilansAndel",value:{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}}]},required:!1}},{key:"kunYtelse",value:{name:"signature",type:"object",raw:`{
+  andeler?: Array<AndelMedBeløpDto>;
+  fodendeKvinneMedDP: boolean;
+  erBesteberegning?: boolean;
+}`,signature:{properties:[{key:"andeler",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  fastsattBelopPrMnd?: number;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"fastsattBelopPrMnd",value:{name:"number",required:!1}}]}}],raw:"Array<AndelMedBeløpDto>",required:!1}},{key:"fodendeKvinneMedDP",value:{name:"boolean",required:!0}},{key:"erBesteberegning",value:{name:"boolean",required:!1}}]},required:!1}},{key:"faktaOmBeregningTilfeller",value:{name:"Array",elements:[{name:"union",raw:`| 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'
+| 'VURDER_SN_NY_I_ARBEIDSLIVET'
+| 'VURDER_NYOPPSTARTET_FL'
+| 'FASTSETT_MAANEDSINNTEKT_FL'
+| 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+| 'VURDER_LØNNSENDRING'
+| 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+| 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'
+| 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'
+| 'VURDER_ETTERLØNN_SLUTTPAKKE'
+| 'FASTSETT_ETTERLØNN_SLUTTPAKKE'
+| 'VURDER_MOTTAR_YTELSE'
+| 'VURDER_BESTEBEREGNING'
+| 'VURDER_MILITÆR_SIVILTJENESTE'
+| 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'
+| 'FASTSETT_BG_KUN_YTELSE'
+| 'TILSTØTENDE_YTELSE'
+| 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'
+| '-'`,elements:[{name:"literal",value:"'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'"},{name:"literal",value:"'VURDER_SN_NY_I_ARBEIDSLIVET'"},{name:"literal",value:"'VURDER_NYOPPSTARTET_FL'"},{name:"literal",value:"'FASTSETT_MAANEDSINNTEKT_FL'"},{name:"literal",value:"'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'"},{name:"literal",value:"'VURDER_LØNNSENDRING'"},{name:"literal",value:"'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'"},{name:"literal",value:"'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'"},{name:"literal",value:"'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'"},{name:"literal",value:"'VURDER_ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'FASTSETT_ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'VURDER_MOTTAR_YTELSE'"},{name:"literal",value:"'VURDER_BESTEBEREGNING'"},{name:"literal",value:"'VURDER_MILITÆR_SIVILTJENESTE'"},{name:"literal",value:"'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'"},{name:"literal",value:"'FASTSETT_BG_KUN_YTELSE'"},{name:"literal",value:"'TILSTØTENDE_YTELSE'"},{name:"literal",value:"'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'"},{name:"literal",value:"'-'"}]}],raw:`Array<
+  | 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'
+  | 'VURDER_SN_NY_I_ARBEIDSLIVET'
+  | 'VURDER_NYOPPSTARTET_FL'
+  | 'FASTSETT_MAANEDSINNTEKT_FL'
+  | 'FASTSETT_BG_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+  | 'VURDER_LØNNSENDRING'
+  | 'FASTSETT_MÅNEDSLØNN_ARBEIDSTAKER_UTEN_INNTEKTSMELDING'
+  | 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'
+  | 'FASTSETT_BESTEBEREGNING_FØDENDE_KVINNE'
+  | 'VURDER_ETTERLØNN_SLUTTPAKKE'
+  | 'FASTSETT_ETTERLØNN_SLUTTPAKKE'
+  | 'VURDER_MOTTAR_YTELSE'
+  | 'VURDER_BESTEBEREGNING'
+  | 'VURDER_MILITÆR_SIVILTJENESTE'
+  | 'VURDER_REFUSJONSKRAV_SOM_HAR_KOMMET_FOR_SENT'
+  | 'FASTSETT_BG_KUN_YTELSE'
+  | 'TILSTØTENDE_YTELSE'
+  | 'FASTSETT_ENDRET_BEREGNINGSGRUNNLAG'
+  | '-'
+>`,required:!1}},{key:"arbeidstakerOgFrilanserISammeOrganisasjonListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  inntektPrMnd?: number;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"inntektPrMnd",value:{name:"number",required:!1}}]}}],raw:"Array<ATogFliSammeOrganisasjonDto>",required:!1}},{key:"arbeidsforholdMedLønnsendringUtenIM",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}}]},required:!1}],raw:"Array<FaktaOmBeregningAndelDto>",required:!1}},{key:"vurderMottarYtelse",value:{name:"signature",type:"object",raw:`{
+  erFrilans?: boolean;
+  frilansMottarYtelse?: boolean;
+  frilansInntektPrMnd?: number;
+  arbeidstakerAndelerUtenIM?: Array<ArbeidstakerUtenInntektsmeldingAndelDto>;
+}`,signature:{properties:[{key:"erFrilans",value:{name:"boolean",required:!1}},{key:"frilansMottarYtelse",value:{name:"boolean",required:!1}},{key:"frilansInntektPrMnd",value:{name:"number",required:!1}},{key:"arbeidstakerAndelerUtenIM",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  mottarYtelse?: boolean;
+  inntektPrMnd?: number;
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"mottarYtelse",value:{name:"boolean",required:!1}},{key:"inntektPrMnd",value:{name:"number",required:!1}}]}}],raw:"Array<ArbeidstakerUtenInntektsmeldingAndelDto>",required:!1}}]},required:!1}},{key:"avklarAktiviteter",value:{name:"signature",type:"object",raw:`{
+  aktiviteterTomDatoMapping?: Array<AktivitetTomDatoMappingDto>;
+  skjæringstidspunkt: string;
+}`,signature:{properties:[{key:"aktiviteterTomDatoMapping",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  tom: string;
+  aktiviteter: Array<BeregningAktivitetDto>;
+}`,signature:{properties:[{key:"tom",value:{name:"string",required:!0}},{key:"aktiviteter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  eksternArbeidsforholdId?: string;
+  fom: string;
+  tom?: string;
+  arbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  skalBrukes?: boolean;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"skalBrukes",value:{name:"boolean",required:!1}}]}}],raw:"Array<BeregningAktivitetDto>",required:!0}}]}}],raw:"Array<AktivitetTomDatoMappingDto>",required:!1}},{key:"skjæringstidspunkt",value:{name:"string",required:!0}}]},required:!1}},{key:"vurderBesteberegning",value:{name:"signature",type:"object",raw:`{
+  skalHaBesteberegning?: boolean;
+}`,signature:{properties:[{key:"skalHaBesteberegning",value:{name:"boolean",required:!1}}]},required:!1}},{key:"andelerForFaktaOmBeregning",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  belopReadOnly?: number;
+  fastsattBelop?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  refusjonskrav?: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  andelsnr?: number;
+  skalKunneEndreAktivitet?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+}`,signature:{properties:[{key:"belopReadOnly",value:{name:"number",required:!1}},{key:"fastsattBelop",value:{name:"number",required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"refusjonskrav",value:{name:"number",required:!1}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"andelsnr",value:{name:"number",required:!1}},{key:"skalKunneEndreAktivitet",value:{name:"boolean",required:!1}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}}]}}],raw:"Array<AndelForFaktaOmBeregningDto>",required:!0}},{key:"vurderMilitaer",value:{name:"signature",type:"object",raw:`{
+  harMilitaer?: boolean;
+}`,signature:{properties:[{key:"harMilitaer",value:{name:"boolean",required:!1}}]},required:!1}},{key:"refusjonskravSomKommerForSentListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent: string;
+  erRefusjonskravGyldig?: boolean;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!0}},{key:"erRefusjonskravGyldig",value:{name:"boolean",required:!1}}]}}],raw:"Array<RefusjonskravSomKommerForSentDto>",required:!1}}]},required:!1}},{key:"andelerMedGraderingUtenBG",value:{name:"Array",elements:[{name:"intersection",raw:`(
+  | ({
+      dtoType: 'AT';
+    } & BeregningsgrunnlagPrStatusOgAndelAtDto)
+  | ({
+      dtoType: 'GENERELL';
+    } & BeregningsgrunnlagPrStatusOgAndelDtoFelles)
+  | ({
+      dtoType: 'FL';
+    } & BeregningsgrunnlagPrStatusOgAndelFlDto)
+  | ({
+      dtoType: 'SN';
+    } & BeregningsgrunnlagPrStatusOgAndelSnDto)
+  | ({
+      dtoType: 'KUN_YTELSE';
+    } & BeregningsgrunnlagPrStatusOgAndelYtelseDto)
+) & {
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,elements:[{name:"unknown"},{name:"signature",type:"object",raw:`{
+  aktivitetStatus?:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  dtoType: string;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"beregningsperiodeFom",value:{name:"string",required:!1}},{key:"beregningsperiodeTom",value:{name:"string",required:!1}},{key:"beregnetPrAar",value:{name:"number",required:!1}},{key:"overstyrtPrAar",value:{name:"number",required:!1}},{key:"bruttoPrAar",value:{name:"number",required:!1}},{key:"avkortetPrAar",value:{name:"number",required:!1}},{key:"redusertPrAar",value:{name:"number",required:!1}},{key:"erTidsbegrensetArbeidsforhold",value:{name:"boolean",required:!1}},{key:"erNyIArbeidslivet",value:{name:"boolean",required:!1}},{key:"lonnsendringIBeregningsperioden",value:{name:"boolean",required:!1}},{key:"andelsnr",value:{name:"number",required:!1}},{key:"besteberegningPrAar",value:{name:"number",required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!1}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"belopPrMndEtterAOrdningen",value:{name:"number",required:!1}},{key:"belopPrAarEtterAOrdningen",value:{name:"number",required:!1}},{key:"dagsats",value:{name:"number",required:!1}},{key:"originalDagsatsFraTilstøtendeYtelse",value:{name:"number",required:!1}},{key:"fordeltPrAar",value:{name:"number",required:!1}},{key:"erTilkommetAndel",value:{name:"boolean",required:!1}},{key:"skalFastsetteGrunnlag",value:{name:"boolean",required:!1}},{key:"dtoType",value:{name:"string",required:!0}}]}}]}],raw:"Array<BeregningsgrunnlagPrStatusOgAndelDto>",required:!0}},{key:"hjemmel",value:{name:"union",raw:`| 'F_9_9'
+| 'F_9_8_8_28'
+| 'F_9_9_8_28_8_30'
+| 'F_9_9_8_35'
+| 'F_9_9_8_38'
+| 'F_9_9_8_40'
+| 'F_9_9_8_41'
+| 'F_9_9_8_42'
+| 'F_9_9_8_43'
+| 'F_9_9_8_47'
+| 'F_9_9_8_49'
+| 'F_14_7'
+| 'F_14_7_8_30'
+| 'F_14_7_8_28_8_30'
+| 'F_14_7_8_35'
+| 'F_14_7_8_38'
+| 'F_14_7_8_40'
+| 'F_14_7_8_41'
+| 'F_14_7_8_42'
+| 'F_14_7_8_43'
+| 'F_14_7_8_47'
+| 'F_14_7_8_49'
+| 'F_22_13_6'
+| 'COV_1_5'
+| 'KORONALOVEN_3'
+| '-'`,elements:[{name:"literal",value:"'F_9_9'"},{name:"literal",value:"'F_9_8_8_28'"},{name:"literal",value:"'F_9_9_8_28_8_30'"},{name:"literal",value:"'F_9_9_8_35'"},{name:"literal",value:"'F_9_9_8_38'"},{name:"literal",value:"'F_9_9_8_40'"},{name:"literal",value:"'F_9_9_8_41'"},{name:"literal",value:"'F_9_9_8_42'"},{name:"literal",value:"'F_9_9_8_43'"},{name:"literal",value:"'F_9_9_8_47'"},{name:"literal",value:"'F_9_9_8_49'"},{name:"literal",value:"'F_14_7'"},{name:"literal",value:"'F_14_7_8_30'"},{name:"literal",value:"'F_14_7_8_28_8_30'"},{name:"literal",value:"'F_14_7_8_35'"},{name:"literal",value:"'F_14_7_8_38'"},{name:"literal",value:"'F_14_7_8_40'"},{name:"literal",value:"'F_14_7_8_41'"},{name:"literal",value:"'F_14_7_8_42'"},{name:"literal",value:"'F_14_7_8_43'"},{name:"literal",value:"'F_14_7_8_47'"},{name:"literal",value:"'F_14_7_8_49'"},{name:"literal",value:"'F_22_13_6'"},{name:"literal",value:"'COV_1_5'"},{name:"literal",value:"'KORONALOVEN_3'"},{name:"literal",value:"'-'"}],required:!1}},{key:"faktaOmFordeling",value:{name:"signature",type:"object",raw:`{
+  vurderNyttInntektsforholdDto?: VurderNyttInntektsforholdDto;
+  vurderRepresentererStortinget?: VurderRepresentererStortingetDto;
+  fordelBeregningsgrunnlag?: FordelBeregningsgrunnlagDto;
+}`,signature:{properties:[{key:"vurderNyttInntektsforholdDto",value:{name:"signature",type:"object",raw:`{
+  vurderInntektsforholdPerioder: Array<VurderInntektsforholdPeriodeDto>;
+  harMottattOmsorgsstønadEllerFosterhjemsgodtgjørelse: boolean;
+}`,signature:{properties:[{key:"vurderInntektsforholdPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  inntektsforholdListe: Array<InntektsforholdDto>;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"inntektsforholdListe",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  arbeidsgiverId?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  periode: Periode;
+  inntektFraInntektsmeldingPrÅr?: number;
+  bruttoInntektPrÅr?: number;
+  skalRedusereUtbetaling?: boolean;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"arbeidsgiverId",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"periode",value:{name:"signature",type:"object",raw:`{
+  fom: string | null;
+  tom: string | null;
+}`,signature:{properties:[{key:"fom",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"tom",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}}]},required:!0}},{key:"inntektFraInntektsmeldingPrÅr",value:{name:"number",required:!1}},{key:"bruttoInntektPrÅr",value:{name:"number",required:!1}},{key:"skalRedusereUtbetaling",value:{name:"boolean",required:!1}}]}}],raw:"Array<InntektsforholdDto>",required:!0}}]}}],raw:"Array<VurderInntektsforholdPeriodeDto>",required:!0}},{key:"harMottattOmsorgsstønadEllerFosterhjemsgodtgjørelse",value:{name:"boolean",required:!0}}]},required:!1}},{key:"vurderRepresentererStortinget",value:{name:"signature",type:"object",raw:`{
+  stortingsperiodeFom?: string;
+  stortingsperiodeTom?: string;
+  representererStortinget?: boolean;
+}`,signature:{properties:[{key:"stortingsperiodeFom",value:{name:"string",required:!1}},{key:"stortingsperiodeTom",value:{name:"string",required:!1}},{key:"representererStortinget",value:{name:"boolean",required:!1}}]},required:!1}},{key:"fordelBeregningsgrunnlag",value:{name:"signature",type:"object",raw:`{
+  fordelBeregningsgrunnlagPerioder: Array<FordelBeregningsgrunnlagPeriodeDto>;
+  arbeidsforholdTilFordeling: Array<FordelBeregningsgrunnlagArbeidsforholdDto>;
+}`,signature:{properties:[{key:"fordelBeregningsgrunnlagPerioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom?: string;
+  fordelBeregningsgrunnlagAndeler: Array<FordelBeregningsgrunnlagAndelDto>;
+  harPeriodeAarsakGraderingEllerRefusjon?: boolean;
+  skalRedigereInntekt?: boolean;
+  skalPreutfyllesMedBeregningsgrunnlag?: boolean;
+  skalKunneEndreRefusjon?: boolean;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!1}},{key:"fordelBeregningsgrunnlagAndeler",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  andelsnr: number;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  inntektskategori:
+    | 'ARBEIDSTAKER'
+    | 'FRILANSER'
+    | 'SELVSTENDIG_NÆRINGSDRIVENDE'
+    | 'DAGPENGER'
+    | 'ARBEIDSAVKLARINGSPENGER'
+    | 'SJØMANN'
+    | 'DAGMAMMA'
+    | 'JORDBRUKER'
+    | 'FISKER'
+    | 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+    | '-';
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  kilde:
+    | 'SAKSBEHANDLER_KOFAKBER'
+    | 'PROSESS_BESTEBEREGNING'
+    | 'SAKSBEHANDLER_FORDELING'
+    | 'PROSESS_PERIODISERING'
+    | 'PROSESS_OMFORDELING'
+    | 'PROSESS_START'
+    | 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT';
+  lagtTilAvSaksbehandler?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  andelIArbeid: Array<number>;
+  fordelingForrigeBehandlingPrAar?: number;
+  refusjonskravPrAar?: number;
+  fordeltPrAar?: number;
+  belopFraInntektsmeldingPrAar?: number;
+  refusjonskravFraInntektsmeldingPrAar?: number;
+  nyttArbeidsforhold?: boolean;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+}`,signature:{properties:[{key:"andelsnr",value:{name:"number",required:!0}},{key:"arbeidsforhold",value:{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}}]},required:!1}},{key:"inntektskategori",value:{name:"union",raw:`| 'ARBEIDSTAKER'
+| 'FRILANSER'
+| 'SELVSTENDIG_NÆRINGSDRIVENDE'
+| 'DAGPENGER'
+| 'ARBEIDSAVKLARINGSPENGER'
+| 'SJØMANN'
+| 'DAGMAMMA'
+| 'JORDBRUKER'
+| 'FISKER'
+| 'ARBEIDSTAKER_UTEN_FERIEPENGER'
+| '-'`,elements:[{name:"literal",value:"'ARBEIDSTAKER'"},{name:"literal",value:"'FRILANSER'"},{name:"literal",value:"'SELVSTENDIG_NÆRINGSDRIVENDE'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'ARBEIDSAVKLARINGSPENGER'"},{name:"literal",value:"'SJØMANN'"},{name:"literal",value:"'DAGMAMMA'"},{name:"literal",value:"'JORDBRUKER'"},{name:"literal",value:"'FISKER'"},{name:"literal",value:"'ARBEIDSTAKER_UTEN_FERIEPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"kilde",value:{name:"union",raw:`| 'SAKSBEHANDLER_KOFAKBER'
+| 'PROSESS_BESTEBEREGNING'
+| 'SAKSBEHANDLER_FORDELING'
+| 'PROSESS_PERIODISERING'
+| 'PROSESS_OMFORDELING'
+| 'PROSESS_START'
+| 'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'`,elements:[{name:"literal",value:"'SAKSBEHANDLER_KOFAKBER'"},{name:"literal",value:"'PROSESS_BESTEBEREGNING'"},{name:"literal",value:"'SAKSBEHANDLER_FORDELING'"},{name:"literal",value:"'PROSESS_PERIODISERING'"},{name:"literal",value:"'PROSESS_OMFORDELING'"},{name:"literal",value:"'PROSESS_START'"},{name:"literal",value:"'PROSESS_PERIODISERING_TILKOMMET_INNTEKT'"}],required:!0}},{key:"lagtTilAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"fastsattAvSaksbehandler",value:{name:"boolean",required:!1}},{key:"andelIArbeid",value:{name:"Array",elements:[{name:"number"}],raw:"Array<number>",required:!0}},{key:"fordelingForrigeBehandlingPrAar",value:{name:"number",required:!1}},{key:"refusjonskravPrAar",value:{name:"number",required:!1}},{key:"fordeltPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrAar",value:{name:"number",required:!1}},{key:"refusjonskravFraInntektsmeldingPrAar",value:{name:"number",required:!1}},{key:"nyttArbeidsforhold",value:{name:"boolean",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!0}}]}}],raw:"Array<FordelBeregningsgrunnlagAndelDto>",required:!0}},{key:"harPeriodeAarsakGraderingEllerRefusjon",value:{name:"boolean",required:!1}},{key:"skalRedigereInntekt",value:{name:"boolean",required:!1}},{key:"skalPreutfyllesMedBeregningsgrunnlag",value:{name:"boolean",required:!1}},{key:"skalKunneEndreRefusjon",value:{name:"boolean",required:!1}}]}}],raw:"Array<FordelBeregningsgrunnlagPeriodeDto>",required:!0}},{key:"arbeidsforholdTilFordeling",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  arbeidsgiverIdent?: string;
+  startdato?: string;
+  opphoersdato?: string;
+  arbeidsforholdId?: string;
+  eksternArbeidsforholdId?: string;
+  arbeidsforholdType?:
+    | 'AAP'
+    | 'ARBEID'
+    | 'DAGPENGER'
+    | 'FORELDREPENGER'
+    | 'FRILANS'
+    | 'MILITÆR_ELLER_SIVILTJENESTE'
+    | 'NÆRING'
+    | 'OMSORGSPENGER'
+    | 'OPPLÆRINGSPENGER'
+    | 'PLEIEPENGER'
+    | 'FRISINN'
+    | 'ETTERLØNN_SLUTTPAKKE'
+    | 'SVANGERSKAPSPENGER'
+    | 'SYKEPENGER'
+    | 'SYKEPENGER_AV_DAGPENGER'
+    | 'PLEIEPENGER_AV_DAGPENGER'
+    | 'VENTELØNN_VARTPENGER'
+    | 'VIDERE_ETTERUTDANNING'
+    | 'UTENLANDSK_ARBEIDSFORHOLD'
+    | 'UTDANNINGSPERMISJON'
+    | '-';
+  refusjonPrAar?: number;
+  belopFraInntektsmeldingPrMnd?: number;
+  organisasjonstype?: 'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-';
+  naturalytelseBortfaltPrÅr?: number;
+  naturalytelseTilkommetPrÅr?: number;
+  perioderMedGraderingEllerRefusjon: Array<NyPeriodeDto>;
+  permisjon?: PermisjonDto;
+}`,signature:{properties:[{key:"arbeidsgiverIdent",value:{name:"string",required:!1}},{key:"startdato",value:{name:"string",required:!1}},{key:"opphoersdato",value:{name:"string",required:!1}},{key:"arbeidsforholdId",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdId",value:{name:"string",required:!1}},{key:"arbeidsforholdType",value:{name:"union",raw:`| 'AAP'
+| 'ARBEID'
+| 'DAGPENGER'
+| 'FORELDREPENGER'
+| 'FRILANS'
+| 'MILITÆR_ELLER_SIVILTJENESTE'
+| 'NÆRING'
+| 'OMSORGSPENGER'
+| 'OPPLÆRINGSPENGER'
+| 'PLEIEPENGER'
+| 'FRISINN'
+| 'ETTERLØNN_SLUTTPAKKE'
+| 'SVANGERSKAPSPENGER'
+| 'SYKEPENGER'
+| 'SYKEPENGER_AV_DAGPENGER'
+| 'PLEIEPENGER_AV_DAGPENGER'
+| 'VENTELØNN_VARTPENGER'
+| 'VIDERE_ETTERUTDANNING'
+| 'UTENLANDSK_ARBEIDSFORHOLD'
+| 'UTDANNINGSPERMISJON'
+| '-'`,elements:[{name:"literal",value:"'AAP'"},{name:"literal",value:"'ARBEID'"},{name:"literal",value:"'DAGPENGER'"},{name:"literal",value:"'FORELDREPENGER'"},{name:"literal",value:"'FRILANS'"},{name:"literal",value:"'MILITÆR_ELLER_SIVILTJENESTE'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'OMSORGSPENGER'"},{name:"literal",value:"'OPPLÆRINGSPENGER'"},{name:"literal",value:"'PLEIEPENGER'"},{name:"literal",value:"'FRISINN'"},{name:"literal",value:"'ETTERLØNN_SLUTTPAKKE'"},{name:"literal",value:"'SVANGERSKAPSPENGER'"},{name:"literal",value:"'SYKEPENGER'"},{name:"literal",value:"'SYKEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'PLEIEPENGER_AV_DAGPENGER'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'VIDERE_ETTERUTDANNING'"},{name:"literal",value:"'UTENLANDSK_ARBEIDSFORHOLD'"},{name:"literal",value:"'UTDANNINGSPERMISJON'"},{name:"literal",value:"'-'"}],required:!1}},{key:"refusjonPrAar",value:{name:"number",required:!1}},{key:"belopFraInntektsmeldingPrMnd",value:{name:"number",required:!1}},{key:"organisasjonstype",value:{name:"union",raw:"'JURIDISK_ENHET' | 'VIRKSOMHET' | 'KUNSTIG' | '-'",elements:[{name:"literal",value:"'JURIDISK_ENHET'"},{name:"literal",value:"'VIRKSOMHET'"},{name:"literal",value:"'KUNSTIG'"},{name:"literal",value:"'-'"}],required:!1}},{key:"naturalytelseBortfaltPrÅr",value:{name:"number",required:!1}},{key:"naturalytelseTilkommetPrÅr",value:{name:"number",required:!1}},{key:"perioderMedGraderingEllerRefusjon",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  erRefusjon?: boolean;
+  erGradering?: boolean;
+  erSøktYtelse?: boolean;
+  fom?: string;
+  tom?: string;
+}`,signature:{properties:[{key:"erRefusjon",value:{name:"boolean",required:!1}},{key:"erGradering",value:{name:"boolean",required:!1}},{key:"erSøktYtelse",value:{name:"boolean",required:!1}},{key:"fom",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!1}}]}}],raw:"Array<NyPeriodeDto>",required:!0}},{key:"permisjon",value:{name:"signature",type:"object",raw:`{
+  permisjonFom: string;
+  permisjonTom: string;
+}`,signature:{properties:[{key:"permisjonFom",value:{name:"string",required:!0}},{key:"permisjonTom",value:{name:"string",required:!0}}]},required:!1}}]}}],raw:"Array<FordelBeregningsgrunnlagArbeidsforholdDto>",required:!0}}]},required:!1}}]},required:!1}},{key:"dekningsgrad",value:{name:"number",required:!1}},{key:"ytelsesspesifiktGrunnlag",value:{name:"intersection",raw:`(
+  | ({
+      ytelsetype: 'OMP';
+    } & OmsorgspengeGrunnlagDto)
+  | ({
+      ytelsetype: 'SVP';
+    } & SvangerskapspengerGrunnlagDto)
+  | ({
+      ytelsetype: 'FP';
+    } & ForeldrepengerGrunnlagDto)
+  | ({
+      ytelsetype: 'FRISINN';
+    } & FrisinnGrunnlagDto)
+) & {
+  ytelsetype: string;
+}`,elements:[{name:"unknown"},{name:"signature",type:"object",raw:`{
+  ytelsetype: string;
+}`,signature:{properties:[{key:"ytelsetype",value:{name:"string",required:!0}}]}}],required:!1}},{key:"refusjonTilVurdering",value:{name:"signature",type:"object",raw:`{
+  andeler: Array<RefusjonAndelTilVurderingDto>;
+}`,signature:{properties:[{key:"andeler",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  aktivitetStatus:
+    | 'MIDL_INAKTIV'
+    | 'AAP'
+    | 'AT'
+    | 'DP'
+    | 'SP_AV_DP'
+    | 'PSB_AV_DP'
+    | 'FL'
+    | 'MS'
+    | 'SN'
+    | 'AT_FL'
+    | 'AT_SN'
+    | 'FL_SN'
+    | 'AT_FL_SN'
+    | 'BA'
+    | 'KUN_YTELSE'
+    | 'TY'
+    | 'VENTELØNN_VARTPENGER'
+    | '-';
+  tidligereUtbetalinger?: Array<TidligereUtbetalingDto>;
+  nyttRefusjonskravFom?: string;
+  fastsattNyttRefusjonskravFom?: string;
+  tidligsteMuligeRefusjonsdato?: string;
+  arbeidsgiver?: Arbeidsgiver;
+  internArbeidsforholdRef?: string;
+  eksternArbeidsforholdRef?: string;
+  skalKunneFastsetteDelvisRefusjon?: boolean;
+  fastsattDelvisRefusjonPrMnd?: number;
+  maksTillattDelvisRefusjonPrMnd?: number;
+}`,signature:{properties:[{key:"aktivitetStatus",value:{name:"union",raw:`| 'MIDL_INAKTIV'
+| 'AAP'
+| 'AT'
+| 'DP'
+| 'SP_AV_DP'
+| 'PSB_AV_DP'
+| 'FL'
+| 'MS'
+| 'SN'
+| 'AT_FL'
+| 'AT_SN'
+| 'FL_SN'
+| 'AT_FL_SN'
+| 'BA'
+| 'KUN_YTELSE'
+| 'TY'
+| 'VENTELØNN_VARTPENGER'
+| '-'`,elements:[{name:"literal",value:"'MIDL_INAKTIV'"},{name:"literal",value:"'AAP'"},{name:"literal",value:"'AT'"},{name:"literal",value:"'DP'"},{name:"literal",value:"'SP_AV_DP'"},{name:"literal",value:"'PSB_AV_DP'"},{name:"literal",value:"'FL'"},{name:"literal",value:"'MS'"},{name:"literal",value:"'SN'"},{name:"literal",value:"'AT_FL'"},{name:"literal",value:"'AT_SN'"},{name:"literal",value:"'FL_SN'"},{name:"literal",value:"'AT_FL_SN'"},{name:"literal",value:"'BA'"},{name:"literal",value:"'KUN_YTELSE'"},{name:"literal",value:"'TY'"},{name:"literal",value:"'VENTELØNN_VARTPENGER'"},{name:"literal",value:"'-'"}],required:!0}},{key:"tidligereUtbetalinger",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom?: string;
+  erTildeltRefusjon: boolean;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!1}},{key:"erTildeltRefusjon",value:{name:"boolean",required:!0}}]}}],raw:"Array<TidligereUtbetalingDto>",required:!1}},{key:"nyttRefusjonskravFom",value:{name:"string",required:!1}},{key:"fastsattNyttRefusjonskravFom",value:{name:"string",required:!1}},{key:"tidligsteMuligeRefusjonsdato",value:{name:"string",required:!1}},{key:"arbeidsgiver",value:{name:"signature",type:"object",raw:`{
+  identifikator?: string;
+  indexKey?: string;
+  orgnr?: string;
+  aktørId?: string;
+  erVirksomhet?: boolean;
+}`,signature:{properties:[{key:"identifikator",value:{name:"string",required:!1}},{key:"indexKey",value:{name:"string",required:!1}},{key:"orgnr",value:{name:"string",required:!1}},{key:"aktørId",value:{name:"string",required:!1}},{key:"erVirksomhet",value:{name:"boolean",required:!1}}]},required:!1}},{key:"internArbeidsforholdRef",value:{name:"string",required:!1}},{key:"eksternArbeidsforholdRef",value:{name:"string",required:!1}},{key:"skalKunneFastsetteDelvisRefusjon",value:{name:"boolean",required:!1}},{key:"fastsattDelvisRefusjonPrMnd",value:{name:"number",required:!1}},{key:"maksTillattDelvisRefusjonPrMnd",value:{name:"number",required:!1}}]}}],raw:"Array<RefusjonAndelTilVurderingDto>",required:!0}}]},required:!1}},{key:"erOverstyrtInntekt",value:{name:"boolean",required:!0}},{key:"vilkårsperiodeFom",value:{name:"string",required:!1}},{key:"inntektsgrunnlag",value:{name:"signature",type:"object",raw:`{
+  måneder: Array<InntektsgrunnlagMånedDto>;
+  pgiGrunnlag: Array<PgiPrÅrDto>;
+  sammenligningsgrunnlagInntekter: Array<InntektsgrunnlagMånedDto>;
+  beregningsgrunnlagInntekter: Array<InntektsgrunnlagMånedDto>;
+}`,signature:{properties:[{key:"måneder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  inntekter?: Array<InntektsgrunnlagInntektDto>;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  inntektAktivitetType: 'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-';
+  beløp?: number;
+  arbeidsgiverIdent?: string;
+}`,signature:{properties:[{key:"inntektAktivitetType",value:{name:"union",raw:"'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-'",elements:[{name:"literal",value:"'ARBEIDSTAKERINNTEKT'"},{name:"literal",value:"'FRILANSINNTEKT'"},{name:"literal",value:"'YTELSEINNTEKT'"},{name:"literal",value:"'-'"}],required:!0}},{key:"beløp",value:{name:"number",required:!1}},{key:"arbeidsgiverIdent",value:{name:"string",required:!1}}]}}],raw:"Array<InntektsgrunnlagInntektDto>",required:!1}}]}}],raw:"Array<InntektsgrunnlagMånedDto>",required:!0}},{key:"pgiGrunnlag",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  år: number;
+  inntekter?: Array<PgiGrunnlagDto>;
+}`,signature:{properties:[{key:"år",value:{name:"number",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  pgiType: 'LØNN' | 'NÆRING' | '-';
+  beløp?: number;
+}`,signature:{properties:[{key:"pgiType",value:{name:"union",raw:"'LØNN' | 'NÆRING' | '-'",elements:[{name:"literal",value:"'LØNN'"},{name:"literal",value:"'NÆRING'"},{name:"literal",value:"'-'"}],required:!0}},{key:"beløp",value:{name:"number",required:!1}}]}}],raw:"Array<PgiGrunnlagDto>",required:!1}}]}}],raw:"Array<PgiPrÅrDto>",required:!0}},{key:"sammenligningsgrunnlagInntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  inntekter?: Array<InntektsgrunnlagInntektDto>;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  inntektAktivitetType: 'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-';
+  beløp?: number;
+  arbeidsgiverIdent?: string;
+}`,signature:{properties:[{key:"inntektAktivitetType",value:{name:"union",raw:"'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-'",elements:[{name:"literal",value:"'ARBEIDSTAKERINNTEKT'"},{name:"literal",value:"'FRILANSINNTEKT'"},{name:"literal",value:"'YTELSEINNTEKT'"},{name:"literal",value:"'-'"}],required:!0}},{key:"beløp",value:{name:"number",required:!1}},{key:"arbeidsgiverIdent",value:{name:"string",required:!1}}]}}],raw:"Array<InntektsgrunnlagInntektDto>",required:!1}}]}}],raw:"Array<InntektsgrunnlagMånedDto>",required:!0}},{key:"beregningsgrunnlagInntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string;
+  tom: string;
+  inntekter?: Array<InntektsgrunnlagInntektDto>;
+}`,signature:{properties:[{key:"fom",value:{name:"string",required:!0}},{key:"tom",value:{name:"string",required:!0}},{key:"inntekter",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  inntektAktivitetType: 'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-';
+  beløp?: number;
+  arbeidsgiverIdent?: string;
+}`,signature:{properties:[{key:"inntektAktivitetType",value:{name:"union",raw:"'ARBEIDSTAKERINNTEKT' | 'FRILANSINNTEKT' | 'YTELSEINNTEKT' | '-'",elements:[{name:"literal",value:"'ARBEIDSTAKERINNTEKT'"},{name:"literal",value:"'FRILANSINNTEKT'"},{name:"literal",value:"'YTELSEINNTEKT'"},{name:"literal",value:"'-'"}],required:!0}},{key:"beløp",value:{name:"number",required:!1}},{key:"arbeidsgiverIdent",value:{name:"string",required:!1}}]}}],raw:"Array<InntektsgrunnlagInntektDto>",required:!1}}]}}],raw:"Array<InntektsgrunnlagMånedDto>",required:!0}}]},required:!1}},{key:"forlengelseperioder",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  fom: string | null;
+  tom: string | null;
+}`,signature:{properties:[{key:"fom",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}},{key:"tom",value:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}],required:!0}}]},required:!0}],raw:"Array<Periode>",required:!0}}]}},description:""},arbeidsgiverOpplysninger:{required:!0,tsType:{name:"Record",elements:[{name:"string"},{name:"union",raw:`| (ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+| (ArbeidsgiverOpplysningerDto & { erPrivatPerson: false })`,elements:[{name:"unknown"},{name:"unknown"}]}],raw:"Record<string, ArbeidsgiverOpplysninger>"},description:""},submittable:{required:!0,tsType:{name:"boolean"},description:""}}};const Zb={besteMåneder:[{fom:"2020-01-01",tom:"2020-01-31",inntekter:[{opptjeningAktivitetType:On.DAGPENGER,inntekt:5531},{opptjeningAktivitetType:On.ARBEID,arbeidsgiverId:"974652269",inntekt:2e4}]},{fom:"2020-02-01",tom:"2020-02-29",inntekter:[{opptjeningAktivitetType:On.DAGPENGER,inntekt:5531}]},{fom:"2020-03-01",tom:"2020-03-31",inntekter:[{opptjeningAktivitetType:On.DAGPENGER,inntekt:5531},{opptjeningAktivitetType:On.ARBEID,arbeidsgiverId:"974652269",inntekt:4321},{opptjeningAktivitetType:On.DAGPENGER,inntekt:354},{opptjeningAktivitetType:On.ARBEID,arbeidsgiverId:"6823424234232",inntekt:32894}]},{fom:"2020-04-01",tom:"2020-04-30",inntekter:[{opptjeningAktivitetType:On.DAGPENGER,inntekt:5531},{opptjeningAktivitetType:On.ARBEID,arbeidsgiverId:"974652269",inntekt:25322}]},{fom:"2020-05-01",tom:"2020-05-31",inntekter:[{opptjeningAktivitetType:On.DAGPENGER,inntekt:354},{opptjeningAktivitetType:On.DAGPENGER,inntekt:5531}]},{fom:"2020-06-01",tom:"2020-06-30",inntekter:[{opptjeningAktivitetType:On.DAGPENGER,inntekt:5531},{opptjeningAktivitetType:On.DAGPENGER,inntekt:354}]}],avvik:0},Ri={avklaringsbehov:[],skjaeringstidspunktBeregning:"2020-01-13",aktivitetStatus:["AT","DP"],beregningsgrunnlagPeriode:[{beregningsgrunnlagPeriodeFom:"2020-01-13",beregnetPrAar:56e4,bruttoPrAar:75e4,bruttoInkludertBortfaltNaturalytelsePrAar:0,avkortetPrAar:6e5,redusertPrAar:6e5,periodeAarsaker:[],beregningsgrunnlagPrStatusOgAndel:[{dtoType:"GENERELL",aktivitetStatus:"AT",beregningsperiodeFom:"2019-10-01",beregningsperiodeTom:"2019-12-31",beregnetPrAar:36e4,andelsnr:1,besteberegningPrAar:4e5,inntektskategori:"ARBEIDSTAKER",arbeidsforhold:{arbeidsgiverIdent:"974652269",startdato:"2019-02-03",opphoersdato:"2020-02-03",arbeidsforholdType:"ARBEID",belopFraInntektsmeldingPrMnd:3e4,organisasjonstype:"VIRKSOMHET"},lagtTilAvSaksbehandler:!1,erTilkommetAndel:!1,skalFastsetteGrunnlag:!1},{dtoType:"GENERELL",beregningsperiodeFom:"2019-10-01",beregningsperiodeTom:"2019-12-31",aktivitetStatus:"DP",beregnetPrAar:2e5,andelsnr:2,besteberegningPrAar:35e4,inntektskategori:"DAGPENGER",fastsattAvSaksbehandler:!1,lagtTilAvSaksbehandler:!1,belopPrMndEtterAOrdningen:1e4,belopPrAarEtterAOrdningen:12e4,erTilkommetAndel:!1,skalFastsetteGrunnlag:!1}]}],ytelsesspesifiktGrunnlag:{besteberegninggrunnlag:Zb,ytelsetype:"FP"},sammenligningsgrunnlagPrStatus:[],grunnbeløp:99858,dekningsgrad:100,erOverstyrtInntekt:!1,skjæringstidspunkt:"",andelerMedGraderingUtenBG:[],forlengelseperioder:[]},Qb={974652269:{erPrivatPerson:!1,navn:"BEDRIFT AS",identifikator:"974652269",referanse:"974652269"},6823424234232:{erPrivatPerson:!0,navn:"Testy Test",identifikator:"6823424234232",referanse:"123",fødselsdato:"1943-03-03"}},$u={definisjon:nt.VURDER_INNSYN,status:Jt.OPPRETTET,begrunnelse:null,kanLoses:!0,toTrinnsBehandling:!1,toTrinnsBehandlingGodkjent:null,vurderPaNyttArsaker:null,besluttersBegrunnelse:null,aksjonspunktType:sN.AUTOPUNKT,vilkarType:uN.OMSORGSVILKARET,erAktivt:!0,fristTid:null,endretTidspunkt:null,endretAv:null},lL={title:"fakta/fakta-besteberegning",component:gu,decorators:[gg,Ig],args:{submittable:!0,arbeidsgiverOpplysninger:Qb},render:e=>le.jsx(gu,{...e})},wl={args:{aksjonspunkterForPanel:[],beregningsgrunnlag:Ri}},Ul={args:{beregningsgrunnlag:Ri,aksjonspunkterForPanel:[{...$u,definisjon:nt.KONTROLLER_AUTOMATISK_BESTEBEREGNING,status:Jt.OPPRETTET}]}},xl={args:{beregningsgrunnlag:Ri,aksjonspunkterForPanel:[{...$u,definisjon:nt.KONTROLLER_AUTOMATISK_BESTEBEREGNING,status:Jt.UTFORT,begrunnelse:"Min begrunnelse for at besteberegningen er feil"}]}},ql={args:{beregningsgrunnlag:Ri,aksjonspunkterForPanel:[{...$u,definisjon:nt.KONTROLLER_AUTOMATISK_BESTEBEREGNING,status:Jt.OPPRETTET}]}};wl.parameters={...wl.parameters,docs:{...wl.parameters?.docs,source:{originalSource:`{
+  args: {
+    aksjonspunkterForPanel: [],
+    beregningsgrunnlag: scenarioBG
+  }
+}`,...wl.parameters?.docs?.source}}};Ul.parameters={...Ul.parameters,docs:{...Ul.parameters?.docs,source:{originalSource:`{
+  args: {
+    beregningsgrunnlag: scenarioBG,
+    aksjonspunkterForPanel: [{
+      ...aksjonspunktDefault,
+      definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+      status: AksjonspunktStatus.OPPRETTET
+    }]
+  }
+}`,...Ul.parameters?.docs?.source}}};xl.parameters={...xl.parameters,docs:{...xl.parameters?.docs,source:{originalSource:`{
+  args: {
+    beregningsgrunnlag: scenarioBG,
+    aksjonspunkterForPanel: [{
+      ...aksjonspunktDefault,
+      definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+      status: AksjonspunktStatus.UTFORT,
+      begrunnelse: 'Min begrunnelse for at besteberegningen er feil'
+    }]
+  }
+}`,...xl.parameters?.docs?.source}}};ql.parameters={...ql.parameters,docs:{...ql.parameters?.docs,source:{originalSource:`{
+  args: {
+    beregningsgrunnlag: scenarioBG,
+    aksjonspunkterForPanel: [{
+      ...aksjonspunktDefault,
+      definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+      status: AksjonspunktStatus.OPPRETTET
+    }]
+  }
+}`,...ql.parameters?.docs?.source}}};const iL=["BesteberegningMedDagpengerOgArbeid","BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt","BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent","BesteberegningMedAvvik"];export{ql as BesteberegningMedAvvik,wl as BesteberegningMedDagpengerOgArbeid,xl as BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent,Ul as BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt,iL as __namedExportsOrder,lL as default};
