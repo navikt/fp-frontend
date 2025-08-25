@@ -20,7 +20,7 @@
     "storybook": "storybook dev --quiet -p 7067"
   },
   "dependencies": {
-    "@navikt/ft-ui-komponenter": "6.1.2",
+    "@navikt/ds-react": "7.28.1",
     "@navikt/ft-utils": "3.8.2",
     "react": "19.1.1",
     "react-intl": "7.1.11"

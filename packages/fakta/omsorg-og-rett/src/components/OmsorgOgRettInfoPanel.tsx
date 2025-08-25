@@ -64,11 +64,9 @@ export const OmsorgOgRettInfoPanel = ({
     <VStack gap="space-24">
       {!isReadOnly && harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
-          <>
-            {harAleneomsorgAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
-            {harRettAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
-            {overstyringAksjonspunkter.length > 0 && <FormattedMessage id="OmsorgOgRettInfoPanel.Overstyring" />}
-          </>
+          {harAleneomsorgAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
+          {harRettAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}
+          {overstyringAksjonspunkter.length > 0 && <FormattedMessage id="OmsorgOgRettInfoPanel.Overstyring" />}
         </AksjonspunktHelpTextHTML>
       )}
       {!harUløsteAksjonspunkter && omsorgOgRett.rettighetstype && (

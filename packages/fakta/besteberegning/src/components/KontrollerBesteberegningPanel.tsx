@@ -42,12 +42,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
     <VStack gap="space-16">
       {aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
         <AksjonspunktHelpTextHTML>
-          {[
-            <FormattedMessage
-              key="BesteberegningAksjonspunktTekst"
-              id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll"
-            />,
-          ]}
+          <FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll" />
         </AksjonspunktHelpTextHTML>
       )}
       <RhfForm

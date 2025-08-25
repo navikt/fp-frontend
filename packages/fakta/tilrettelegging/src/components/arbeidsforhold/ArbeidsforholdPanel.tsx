@@ -108,7 +108,7 @@ export const ArbeidsforholdPanel = ({
     <VStack gap="space-16">
       {visInfoAlert && (
         <AksjonspunktHelpTextHTML>
-          {[<FormattedMessage id="TilretteleggingFaktaForm.UndersokNarmere" key="svangerskapspengerAp" />]}
+          <FormattedMessage id="TilretteleggingFaktaForm.UndersokNarmere" />
         </AksjonspunktHelpTextHTML>
       )}
       <RhfCheckbox

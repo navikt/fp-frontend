@@ -138,7 +138,7 @@ export const TotrinnskontrollBeslutterForm = ({
       <VStack gap="space-24">
         {!readOnly && (
           <AksjonspunktHelpTextHTML>
-            {[<FormattedMessage key={1} id="HelpText.ToTrinnsKontroll" />]}
+            <FormattedMessage id="HelpText.ToTrinnsKontroll" />
           </AksjonspunktHelpTextHTML>
         )}
         <AksjonspunktGodkjenningFieldArray

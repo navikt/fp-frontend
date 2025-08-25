@@ -104,6 +104,7 @@ const FAGSAK = {
     kjønn: 'M',
     fødselsdato: '2000-01-01',
   },
+  brukerManglerAdresse: true,
   fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
   status: FagsakStatus.UNDER_BEHANDLING,
   behandlinger: ALLE_BEHANDLINGER,

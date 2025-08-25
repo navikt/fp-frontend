@@ -1,9 +1,7 @@
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
-import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
+import { Alert } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
-
-import styles from './ukjentAdresseMeldingIndex.module.css';
 
 import messages from '../i18n/nb_NO.json';
 
@@ -17,12 +15,8 @@ const intl = createIntl(messages);
  */
 export const UkjentAdresseMeldingIndex = () => (
   <RawIntlProvider value={intl}>
-    <div className={styles.ukjentAdresseMargins}>
-      <AksjonspunktHelpTextHTML>
-        <b>
-          <FormattedMessage id="UkjentAdresse.Text" />
-        </b>
-      </AksjonspunktHelpTextHTML>
-    </div>
+    <Alert variant="warning" size="small">
+      <FormattedMessage id="UkjentAdresse.Text" tagName="b" />
+    </Alert>
   </RawIntlProvider>
 );
