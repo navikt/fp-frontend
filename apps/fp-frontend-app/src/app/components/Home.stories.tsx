@@ -21,14 +21,16 @@ const withIntl = getIntlDecorator(messages);
 
 const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
-const PERSON: Person = {
+const PERSON = {
   navn: 'Espen Utvikler',
   fødselsnummer: '121221',
   kjønn: KjønnkodeEnum.MANN,
   fødselsdato: '2000-01-02',
   aktørId: '12121221',
   dødsdato: null,
-};
+  diskresjonskode: null,
+  språkkode: '-',
+} satisfies Person;
 
 const AKTØR_INFO = {
   fagsaker: [
@@ -40,6 +42,7 @@ const AKTØR_INFO = {
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',
       person: PERSON,
+      relasjonsRolleType: '-',
     },
     {
       saksnummer: '252523',
@@ -49,9 +52,11 @@ const AKTØR_INFO = {
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',
       person: PERSON,
+      relasjonsRolleType: '-',
     },
   ],
   person: PERSON,
+  aktørId: null,
 } satisfies Aktor;
 
 const NAV_ANSATT = {

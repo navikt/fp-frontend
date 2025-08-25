@@ -53,9 +53,12 @@ export const Default: Story = {
           dødsdato: null,
           fødselsnummer: '1010',
           kjønn: KjønnkodeEnum.MANN,
+          diskresjonskode: null,
+          språkkode: 'NB',
         },
         barnFødt: '2019-12-12',
         opprettet: '',
+        relasjonsRolleType: '-',
       },
     ],
     fagsakOppgaver: [

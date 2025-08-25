@@ -1,93 +1,26 @@
-import type { BeregningsgrunnlagArbeidsforhold } from './beregningsgrunnlagArbeidsforholdTsType';
+import type {
+  FordelBeregningsgrunnlagAndelDto,
+  FordelBeregningsgrunnlagArbeidsforholdDto,
+  FordelBeregningsgrunnlagPeriodeDto,
+  FordelingDto,
+  NyPeriodeDto,
+  RefusjonAndelTilVurderingDto,
+  RefusjonTilVurderingDto,
+  TidligereUtbetalingDto,
+} from './apiDtoGenerert.ts';
 
-export type TidligereUtbetalinger = Readonly<{
-  fom: string;
-  tom?: string;
-  erTildeltRefusjon: boolean;
-}>;
+export type TidligereUtbetalinger = TidligereUtbetalingDto;
 
-export type RefusjonTilVurderingAndel = Readonly<{
-  aktivitetStatus: string;
-  tidligereUtbetalinger?: TidligereUtbetalinger[];
-  nyttRefusjonskravFom: string;
-  fastsattNyttRefusjonskravFom?: string;
-  tidligsteMuligeRefusjonsdato: string;
-  arbeidsgiver?: {
-    arbeidsgiverOrgnr?: string;
-    arbeidsgiverAktørId?: string;
-  };
-  internArbeidsforholdRef?: string;
-  eksternArbeidsforholdRef?: string;
-  skalKunneFastsetteDelvisRefusjon: boolean;
-  fastsattDelvisRefusjonPrMnd?: number;
-  maksTillattDelvisRefusjonPrMnd?: number;
-}>;
+export type RefusjonTilVurderingAndel = RefusjonAndelTilVurderingDto;
 
-export type RefusjonTilVurdering = Readonly<{
-  andeler: RefusjonTilVurderingAndel[];
-}>;
+export type RefusjonTilVurdering = RefusjonTilVurderingDto;
 
-export type PerioderMedGraderingEllerRefusjon = Readonly<{
-  erRefusjon?: boolean;
-  erGradering?: boolean;
-  erSøktYtelse?: boolean;
-  fom?: string;
-  tom?: string;
-}>;
+export type PerioderMedGraderingEllerRefusjon = NyPeriodeDto;
 
-export type ArbeidsforholdTilFordeling = Readonly<{
-  aktørId?: number;
-  arbeidsforholdId?: string;
-  arbeidsgiverIdent?: string;
-  arbeidsforholdType?: string;
-  arbeidsgiverId?: string;
-  arbeidsgiverNavn?: string;
-  belopFraInntektsmeldingPrMnd?: number;
-  eksternArbeidsforholdId?: string;
-  naturalytelseBortfaltPrÅr?: number;
-  naturalytelseTilkommetPrÅr?: number;
-  opphoersdato?: string;
-  organisasjonstype?: string;
-  perioderMedGraderingEllerRefusjon?: PerioderMedGraderingEllerRefusjon[];
-  permisjon?: {
-    permisjonFom?: string;
-    permisjonTom?: string;
-  };
-  refusjonPrAar?: number;
-  startdato?: string;
-}>;
+export type ArbeidsforholdTilFordeling = FordelBeregningsgrunnlagArbeidsforholdDto;
 
-export type FordelBeregningsgrunnlagAndel = Readonly<{
-  aktivitetStatus?: string;
-  andelIArbeid?: number[];
-  andelsnr?: number;
-  arbeidsforhold?: BeregningsgrunnlagArbeidsforhold;
-  arbeidsforholdType?: string;
-  belopFraInntektsmeldingPrAar?: number;
-  fordelingForrigeBehandlingPrAar?: number;
-  fordeltPrAar?: number;
-  inntektskategori?: string;
-  lagtTilAvSaksbehandler?: boolean;
-  nyttArbeidsforhold?: boolean;
-  refusjonskravFraInntektsmeldingPrAar?: number;
-  refusjonskravPrAar?: number;
-  kilde?: string;
-}>;
+export type FordelBeregningsgrunnlagAndel = FordelBeregningsgrunnlagAndelDto;
 
-export type FordelBeregningsgrunnlagPeriode = Readonly<{
-  fom?: string;
-  fordelBeregningsgrunnlagAndeler?: FordelBeregningsgrunnlagAndel[];
-  skalRedigereInntekt?: boolean;
-  skalPreutfyllesMedBeregningsgrunnlag?: boolean;
-  skalKunneEndreRefusjon?: boolean;
-  tom?: string;
-}>;
+export type FordelBeregningsgrunnlagPeriode = FordelBeregningsgrunnlagPeriodeDto;
 
-type FordelBeregningsgrunnlag = Readonly<{
-  arbeidsforholdTilFordeling?: ArbeidsforholdTilFordeling[];
-  fordelBeregningsgrunnlagPerioder?: FordelBeregningsgrunnlagPeriode[];
-}>;
-
-export type FaktaOmFordeling = Readonly<{
-  fordelBeregningsgrunnlag?: FordelBeregningsgrunnlag;
-}>;
+export type FaktaOmFordeling = FordelingDto;

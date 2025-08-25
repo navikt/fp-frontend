@@ -14,6 +14,8 @@ const fagsakPersonFar: Person = {
   fødselsnummer: '12345678910',
   kjønn: NavBrukerKjonn.MANN,
   aktørId: '234',
+  diskresjonskode: null,
+  språkkode: 'NB',
 };
 
 const fagsakPersonMor: Person = {
@@ -23,6 +25,8 @@ const fagsakPersonMor: Person = {
   fødselsnummer: '65656578787',
   kjønn: NavBrukerKjonn.KVINNE,
   aktørId: 'test',
+  diskresjonskode: null,
+  språkkode: 'NB',
 };
 
 const meta = {

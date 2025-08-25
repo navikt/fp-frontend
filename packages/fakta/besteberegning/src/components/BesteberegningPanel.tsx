@@ -25,10 +25,14 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
   const { alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly } = usePanelDataContext<BesteberegningAP>();
 
   const { ytelsesspesifiktGrunnlag, beregningsgrunnlagPeriode } = beregningsgrunnlag;
-  const besteberegninggrunnlag = ytelsesspesifiktGrunnlag?.besteberegninggrunnlag;
+
+  const besteberegninggrunnlag =
+    ytelsesspesifiktGrunnlag?.ytelsetype === 'FP' ? ytelsesspesifiktGrunnlag.besteberegninggrunnlag : undefined;
+
   if (!besteberegninggrunnlag) {
     return null;
   }
+
   const førstePeriode = beregningsgrunnlagPeriode[0];
   const besteberegningAP = aksjonspunkterForPanel.find(
     ap =>

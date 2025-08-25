@@ -20,6 +20,8 @@ describe('VisittkortSakIndex', () => {
     dødsdato: null,
     fødselsnummer: '12345678910',
     aktørId: '111111',
+    diskresjonskode: null,
+    språkkode: 'NB',
   };
 
   it('skal vise etikett for dødsdato', async () => {

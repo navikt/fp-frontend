@@ -1,5 +1,5 @@
 import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import type { Beregningsgrunnlag, BeregningsgrunnlagAndel, Besteberegninggrunnlag } from '@navikt/fp-types';
+import type { Beregningsgrunnlag, Besteberegninggrunnlag } from '@navikt/fp-types';
 
 const besteberegninggrunnlag: Besteberegninggrunnlag = {
   besteMåneder: [
@@ -96,6 +96,7 @@ const besteberegninggrunnlag: Besteberegninggrunnlag = {
       ],
     },
   ],
+  avvik: 0,
 };
 
 export const beregningsgrunnlag: Beregningsgrunnlag = {
@@ -113,6 +114,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
       periodeAarsaker: [],
       beregningsgrunnlagPrStatusOgAndel: [
         {
+          dtoType: 'GENERELL',
           aktivitetStatus: 'AT',
           beregningsperiodeFom: '2019-10-01',
           beregningsperiodeTom: '2019-12-31',
@@ -121,8 +123,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           besteberegningPrAar: 400000.0,
           inntektskategori: 'ARBEIDSTAKER',
           arbeidsforhold: {
-            arbeidsgiverNavn: 'BEDRIFT AS',
-            arbeidsgiverId: '974652269',
+            arbeidsgiverIdent: '974652269',
             startdato: '2019-02-03',
             opphoersdato: '2020-02-03',
             arbeidsforholdType: 'ARBEID',
@@ -134,6 +135,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           skalFastsetteGrunnlag: false,
         },
         {
+          dtoType: 'GENERELL',
           beregningsperiodeFom: '2019-10-01',
           beregningsperiodeTom: '2019-12-31',
           aktivitetStatus: 'DP',
@@ -147,7 +149,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           belopPrAarEtterAOrdningen: 120000.0,
           erTilkommetAndel: false,
           skalFastsetteGrunnlag: false,
-        } as BeregningsgrunnlagAndel,
+        },
       ],
     },
   ],
@@ -159,4 +161,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
   grunnbeløp: 99858,
   dekningsgrad: 100,
   erOverstyrtInntekt: false,
+  skjæringstidspunkt: '',
+  andelerMedGraderingUtenBG: [],
+  forlengelseperioder: [],
 };

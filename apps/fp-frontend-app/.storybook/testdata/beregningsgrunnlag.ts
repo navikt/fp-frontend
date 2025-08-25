@@ -24,6 +24,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
       periodeAarsaker: [],
       beregningsgrunnlagPrStatusOgAndel: [
         {
+          dtoType: 'GENERELL',
           aktivitetStatus: 'AT',
           beregningsperiodeFom: '2024-11-01',
           beregningsperiodeTom: '2025-01-31',
@@ -43,6 +44,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           skalFastsetteGrunnlag: true,
         },
         {
+          dtoType: 'GENERELL',
           aktivitetStatus: 'FL',
           beregningsperiodeFom: '2024-11-01',
           beregningsperiodeTom: '2025-01-31',
@@ -93,6 +95,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
           ],
         },
       ],
+      skjæringstidspunkt: '',
     },
     andelerForFaktaOmBeregning: [
       {
@@ -298,5 +301,11 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
         ],
       },
     ],
+    pgiGrunnlag: [],
+    sammenligningsgrunnlagInntekter: [],
+    beregningsgrunnlagInntekter: [],
   },
+  skjæringstidspunkt: '',
+  andelerMedGraderingUtenBG: [],
+  forlengelseperioder: [],
 };

@@ -1,18 +1,11 @@
-import type { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+import type {
+  BesteberegninggrunnlagDto,
+  BesteberegningInntektDto,
+  BesteberegningMånedGrunnlagDto,
+} from './apiDtoGenerert.ts';
 
-export type Månedsgrunnlag = Readonly<{
-  fom: string;
-  tom: string;
-  inntekter: BesteberegningInntekt[];
-}>;
+export type Månedsgrunnlag = BesteberegningMånedGrunnlagDto;
 
-export type BesteberegningInntekt = Readonly<{
-  arbeidsgiverId?: string;
-  arbeidsforholdId?: string;
-  opptjeningAktivitetType: OpptjeningAktivitetType;
-  inntekt: number;
-}>;
+export type BesteberegningInntekt = BesteberegningInntektDto;
 
-export type Besteberegninggrunnlag = Readonly<{
-  besteMåneder: Månedsgrunnlag[];
-}>;
+export type Besteberegninggrunnlag = BesteberegninggrunnlagDto;

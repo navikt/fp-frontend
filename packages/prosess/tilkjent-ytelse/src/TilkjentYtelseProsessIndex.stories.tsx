@@ -6,7 +6,6 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   AktivitetStatus,
-  ArbeidsforholdHandlingType,
   NavBrukerKjonn,
   OpptjeningAktivitetType,
   SoknadType,
@@ -43,16 +42,23 @@ const personoversikt = {
   },
 } as Personoversikt;
 
-const beregningresultat = {
+const beregningresultat: BeregningsresultatDagytelse = {
   perioder: [
     {
       andeler: [
         {
           uttak: {
             stonadskontoType: StonadskontoType.FELLESPERIODE,
+            gradering: false,
           },
           aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
           arbeidsforholdType: OpptjeningAktivitetType.ARBEID,
+          arbeidsgiverReferanse: '',
+          refusjon: 0,
+          tilSoker: 0,
+          utbetalingsgrad: 0,
+          sisteUtbetalingsdato: '',
+          eksternArbeidsforholdId: '',
         },
       ],
       fom: '2018-01-01',
@@ -64,9 +70,16 @@ const beregningresultat = {
         {
           uttak: {
             stonadskontoType: StonadskontoType.FORELDREPENGER,
+            gradering: false,
           },
           aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
-          arbeidsforholdType: ArbeidsforholdHandlingType.NYTT_ARBEIDSFORHOLD,
+          arbeidsforholdType: 'ARBEID',
+          arbeidsgiverReferanse: '',
+          refusjon: 0,
+          tilSoker: 0,
+          utbetalingsgrad: 0,
+          sisteUtbetalingsdato: '',
+          eksternArbeidsforholdId: '',
         },
       ],
       fom: '2019-02-01',
@@ -74,7 +87,7 @@ const beregningresultat = {
       dagsats: 100,
     },
   ],
-} as BeregningsresultatDagytelse;
+};
 
 const søknad = {
   mottattDato: '2019-01-10',

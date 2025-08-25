@@ -12,13 +12,9 @@ export type {
   Beregningsgrunnlag,
   BeregningsgrunnlagAndel,
   SammenligningsgrunlagProp,
-  YtelseGrunnlag,
   BeregningsgrunnlagPeriodeProp,
   PgiVerdier,
   Næring,
-  InntektsgrunnlagMåned,
-  Inntektsgrunnlag,
-  InntektsgrunnlagInntekt,
 } from './src/beregningsgrunnlagTsType';
 export type {
   FaktaOmBeregning,
@@ -142,7 +138,6 @@ export type {
   BeregningResultatPeriode,
 } from './src/beregningsresultatTilbakekrevingTsType';
 export type { UttakKontrollerAktivitetskrav } from './src/uttakKontrollerAktivitetskravTsType';
-export type { Aktivitetskrav } from './src/aktivitetskravTsType';
 export type { Aktor } from './src/aktorTsType';
 export type { Kjønnkode } from './src/Kjonnkode';
 export { KjønnkodeEnum } from './src/Kjonnkode';
@@ -184,9 +179,9 @@ export { SvpTilretteleggingFomKilde } from './src/fodselOgTilretteleggingTsType'
 export type { InfotrygdVedtak, Vedtak, VedtakArbeidsforhold, VedtakUtbetaling, Sak } from './src/infotrygdVedtakTsType';
 export type { Vilkarperiode } from './src/vilkarperiodeTsType';
 export type { ApiLink } from './src/apiLink';
-export type { Oppgave } from './src/oppgaveTsType.tsx';
-export type { Beskrivelse } from './src/oppgaveTsType.tsx';
-export type { OppgaveDokument } from './src/oppgaveTsType.ts';
+export type { Oppgave } from './src/oppgaveTsType';
+export type { Beskrivelse } from './src/oppgaveTsType';
+export type { OppgaveDokument } from './src/oppgaveTsType';
 export type { OneOf } from './src/oneOf';
 export type { BrevOverstyring } from './src/brevOverstyring';
 export type {

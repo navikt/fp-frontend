@@ -17,14 +17,16 @@ import { AktørIndex } from './AktørIndex';
 
 const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 
-const PERSON: Person = {
+const PERSON = {
   navn: 'Espen Utvikler',
   fødselsnummer: '11111111111',
   kjønn: KjønnkodeEnum.MANN,
   fødselsdato: '2000-01-02',
   dødsdato: null,
   aktørId: '22222222',
-};
+  diskresjonskode: null,
+  språkkode: '-',
+} satisfies Person;
 
 const AKTØR_INFO = {
   fagsaker: [
@@ -36,6 +38,7 @@ const AKTØR_INFO = {
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',
       person: PERSON,
+      relasjonsRolleType: '-',
     },
     {
       saksnummer: '252523',
@@ -45,9 +48,11 @@ const AKTØR_INFO = {
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',
       person: PERSON,
+      relasjonsRolleType: '-',
     },
   ],
   person: PERSON,
+  aktørId: null,
 } satisfies Aktor;
 
 const meta = {
@@ -102,6 +107,7 @@ export const IngenFagsaker: Story = {
           HttpResponse.json({
             fagsaker: [],
             person: { ...PERSON, aktørId: null },
+            aktørId: null,
           } satisfies Aktor),
         ),
       ],

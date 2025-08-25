@@ -57,10 +57,13 @@ export const Default: Story = {
           fødselsnummer: '1010',
           aktørId: '23',
           kjønn: KjønnkodeEnum.MANN,
+          diskresjonskode: null,
+          språkkode: 'NB',
         },
         barnFødt: '2019-12-12',
         aktørId: '23',
         opprettet: '',
+        relasjonsRolleType: '-',
       },
     ],
     fagsakOppgaver: [

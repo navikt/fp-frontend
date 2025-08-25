@@ -36,9 +36,7 @@ export const VedtakInnvilgetPanel = ({
           <HStack gap="space-8">
             <VStack gap="space-4">
               <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>
-              <Label size="small">
-                {formatCurrencyWithKr((beregningsresultat as BeregningsresultatEs).beregnetTilkjentYtelse)}
-              </Label>
+              <Label size="small">{formatCurrencyWithKr(beregningsresultat.beregnetTilkjentYtelse)}</Label>
             </VStack>
             <VStack gap="space-4">
               <Detail>{intl.formatMessage({ id: 'VedtakForm.AntallBarn' })}</Detail>
