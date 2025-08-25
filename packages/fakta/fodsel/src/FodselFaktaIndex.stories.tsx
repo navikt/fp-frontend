@@ -15,7 +15,7 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   status: AksjonspunktStatus.OPPRETTET,
   begrunnelse: null,
   kanLoses: true,
@@ -49,6 +49,7 @@ const meta = {
   component: FodselFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData, withPanelOverstyring],
   args: {
+    kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
     submittable: true,
     isReadOnly: false,
@@ -353,17 +354,36 @@ export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
   },
 };
 
-export const Overstyring: Story = {
+export const OverstyringSomOverstyrer: Story = {
   args: {
     kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
   },
 };
-export const Overstyrt: Story = {
+
+export const OverstyrtSettSomOverstyrer: Story = {
   args: {
     kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
+    initialToggleState: true,
     isReadOnly: true,
     aksjonspunkterForPanel: [
       {
+        ...aksjonspunktDefault,
+        definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Denne saken har blitt overstyrt',
+        kanLoses: false,
+      },
+    ],
+  },
+};
+export const OverstyrtSettSomSBH: Story = {
+  args: {
+    kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
+    initialToggleState: true,
+    isReadOnly: true,
+    aksjonspunkterForPanel: [
+      {
+        ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Denne saken har blitt overstyrt',
