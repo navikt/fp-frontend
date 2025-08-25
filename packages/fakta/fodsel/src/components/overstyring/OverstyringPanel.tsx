@@ -18,8 +18,10 @@ interface Props {
 export const OverstyringPanel = ({ gjeldende, submittable }: Props) => {
   const intl = useIntl();
 
-  const { erOverstyrt, toggleOverstyring, kanOverstyreAccess } = usePanelOverstyring();
-  const { alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext();
+  const { erOverstyrt, toggleOverstyring, kanOverstyreAccess, overrideReadOnly } = usePanelOverstyring();
+  const { alleMerknaderFraBeslutter } = usePanelDataContext();
+
+  const readOnly = !erOverstyrt || overrideReadOnly || !kanOverstyreAccess.isEnabled;
 
   return (
     <>
@@ -38,7 +40,7 @@ export const OverstyringPanel = ({ gjeldende, submittable }: Props) => {
           merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]}
         >
           <OverstyringForm
-            isReadOnly={isReadOnly}
+            isReadOnly={readOnly}
             gjeldende={gjeldende}
             submittable={submittable}
             avbrytOverstyring={toggleOverstyring}

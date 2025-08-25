@@ -5,7 +5,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { FodselFaktaIndex } from '@navikt/fp-fakta-fodsel';
-import { AksjonspunktKode, fodselsvilkarene } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, fodselsvilkarene } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { Dokument } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
@@ -30,8 +30,10 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const api = useBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
+
   console.log(rettigheter);
-  const harÅpenOverstyrnig = standardPanelProps.aksjonspunkterForPanel.some(
+
+  const harOverstyrigAP = standardPanelProps.aksjonspunkterForPanel.some(
     a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
   );
   const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling, skalPanelVisesIMeny));
@@ -45,7 +47,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL}
       kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       overrideReadOnly={standardPanelProps.readOnly}
-      initialToggleState={harÅpenOverstyrnig}
+      initialToggleState={harOverstyrigAP}
     >
       <FaktaDefaultInitPanel
         standardPanelProps={standardPanelProps}
