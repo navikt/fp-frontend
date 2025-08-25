@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { PlusCircleIcon } from '@navikt/aksel-icons';
@@ -23,6 +23,7 @@ interface Props {
   erRedigerbart?: boolean;
   visLeggTilPeriodeForm?: boolean;
   setVisLeggTilPeriodeForm: (vis: boolean) => void;
+  setDirty: (isDirty: boolean) => void;
 }
 
 export const UttakEøsFaktaTable = ({
@@ -32,6 +33,7 @@ export const UttakEøsFaktaTable = ({
   erRedigerbart,
   visLeggTilPeriodeForm,
   setVisLeggTilPeriodeForm,
+  setDirty,
 }: Props) => {
   return (
     <VStack gap="space-16">
@@ -58,6 +60,7 @@ export const UttakEøsFaktaTable = ({
                 annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
                 setPerioder={setPerioder}
                 isReadOnly={isReadOnly}
+                setDirty={setDirty}
               />
             );
           })}
@@ -81,6 +84,7 @@ export const UttakEøsFaktaTable = ({
                     [...prevPerioder, nyPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom))),
                   );
                   setVisLeggTilPeriodeForm(false);
+                  setDirty(true);
                 }}
                 avbryt={() => setVisLeggTilPeriodeForm(false)}
               />
@@ -110,9 +114,10 @@ interface RadProps {
   annenForelderUttakEøsPeriode: AnnenforelderUttakEøsPeriode;
   setPerioder: React.Dispatch<React.SetStateAction<AnnenforelderUttakEøsPeriode[]>>;
   isReadOnly: boolean;
+  setDirty: (isDirty: boolean) => void;
 }
 
-const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly }: RadProps) => {
+const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly, setDirty }: RadProps) => {
   const [erÅpen, setErÅpen] = useState(false);
 
   const oppdaterPeriode = (oppdatertPeriode: AnnenforelderUttakEøsPeriode) => {
@@ -123,6 +128,7 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly }: RadProp
       );
       return [...perioderSomIkkeErOppdatert, oppdatertPeriode].sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
     });
+    setDirty(true);
   };
 
   const slettPeriode = () => {
@@ -132,6 +138,7 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly }: RadProp
         periode => periode.fom !== annenForelderUttakEøsPeriode.fom && periode.tom !== annenForelderUttakEøsPeriode.tom,
       );
     });
+    setDirty(true);
   };
 
   const avbryt = () => {

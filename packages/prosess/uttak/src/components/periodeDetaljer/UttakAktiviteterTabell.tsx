@@ -241,6 +241,7 @@ export const UttakAktiviteterTabell = ({
                           name={`aktiviteter.${index}.weeks`}
                           control={control}
                           className={styles.numberWidth}
+                          hideLabel
                           readOnly={isReadOnly}
                           validate={[
                             required,
@@ -255,6 +256,7 @@ export const UttakAktiviteterTabell = ({
                         name={`aktiviteter.${index}.days`}
                         control={control}
                         className={styles.numberWidth}
+                        hideLabel
                         readOnly={isReadOnly}
                         validate={[
                           required,
@@ -273,6 +275,7 @@ export const UttakAktiviteterTabell = ({
                       <RhfNumericField
                         name={`aktiviteter.${index}.utbetalingsgrad`}
                         control={control}
+                        hideLabel
                         validate={[
                           required,
                           minValue0,

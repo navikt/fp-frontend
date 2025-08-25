@@ -20,7 +20,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
     expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -45,13 +45,15 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
 
+    await userEvent.clear(screen.getAllByRole('textbox')[2]);
+    await userEvent.clear(screen.getAllByRole('textbox')[3]);
     await userEvent.type(screen.getAllByRole('textbox')[2], '8');
     await userEvent.type(screen.getAllByRole('textbox')[3], '0');
     await userEvent.click(screen.getByText('Legg til'));
 
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -80,7 +82,7 @@ describe('UttakFaktaEøsIndex', () => {
     expect(screen.getByText('Vil du slette denne perioden?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('OK'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -117,6 +119,8 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
+    await userEvent.clear(screen.getAllByRole('textbox')[2]);
+    await userEvent.clear(screen.getAllByRole('textbox')[3]);
     await userEvent.type(screen.getAllByRole('textbox')[2], '8');
     await userEvent.type(screen.getAllByRole('textbox')[3], '3');
     await userEvent.click(screen.getByText('Legg til'));
@@ -126,13 +130,15 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.type(screen.getByLabelText('Fra og med'), '12.02.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '25.02.2022');
     await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.MODREKVOTE);
+    await userEvent.clear(screen.getAllByRole('textbox')[2]);
+    await userEvent.clear(screen.getAllByRole('textbox')[3]);
     await userEvent.type(screen.getAllByRole('textbox')[2], '1');
     await userEvent.type(screen.getAllByRole('textbox')[3], '2.4');
     await userEvent.click(screen.getByText('Legg til'));
 
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('Du må rette disse feilene før du kan fortsette:')).toBeInTheDocument();
@@ -144,6 +150,10 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getAllByTitle('Vis mer')[1]);
     await userEvent.clear(screen.getByLabelText('Fra og med'));
     await userEvent.type(screen.getByLabelText('Fra og med'), '16.02.2022');
+    await userEvent.clear(screen.getAllByRole('textbox')[2]);
+    await userEvent.clear(screen.getAllByRole('textbox')[3]);
+    await userEvent.type(screen.getAllByRole('textbox')[2], '1');
+    await userEvent.type(screen.getAllByRole('textbox')[3], '2.4');
     await userEvent.click(screen.getByText('Oppdater'));
 
     expect(screen.queryByText('Du må rette disse feilene før du kan fortsette:')).not.toBeInTheDocument();
@@ -184,7 +194,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByTitle('Overstyr'));
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {

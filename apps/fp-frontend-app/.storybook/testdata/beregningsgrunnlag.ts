@@ -306,15 +306,6 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
     beregningsgrunnlagInntekter: [],
   },
   skjæringstidspunkt: '',
-  sammenligningsgrunnlag: {
-    sammenligningsgrunnlagFom: undefined,
-    sammenligningsgrunnlagTom: undefined,
-    rapportertPrAar: undefined,
-    avvikPromille: undefined,
-    avvikProsent: undefined,
-    sammenligningsgrunnlagType: undefined,
-    differanseBeregnet: undefined,
-  },
   andelerMedGraderingUtenBG: [],
   forlengelseperioder: [],
 };

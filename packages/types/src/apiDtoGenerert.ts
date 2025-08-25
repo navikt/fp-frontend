@@ -2613,7 +2613,6 @@ export type BeregningsgrunnlagDto = {
     | '-'
   >;
   beregningsgrunnlagPeriode: Array<BeregningsgrunnlagPeriodeDto>;
-  sammenligningsgrunnlag: SammenligningsgrunnlagDto;
   sammenligningsgrunnlagPrStatus: Array<SammenligningsgrunnlagDto>;
   halvG?: number;
   grunnbeløp?: number;
