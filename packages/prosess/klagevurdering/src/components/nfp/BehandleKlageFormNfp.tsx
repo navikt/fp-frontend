@@ -118,7 +118,7 @@ export const BehandleKlageFormNfp = ({
         </Heading>
         {!readOnlySubmitButton && (
           <AksjonspunktHelpTextHTML>
-            {[<FormattedMessage id="Klage.ResolveKlage.HelpText" key={AksjonspunktKode.BEHANDLE_KLAGE_NFP} />]}
+            <FormattedMessage id="Klage.ResolveKlage.HelpText" />
           </AksjonspunktHelpTextHTML>
         )}
         <KlageVurderingRadioOptionsNfp

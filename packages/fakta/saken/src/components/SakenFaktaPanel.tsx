@@ -52,13 +52,13 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
     <VStack gap="space-32">
       {harÅpneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkterForPanel) && (
         <AksjonspunktHelpTextHTML>
-          {[<FormattedMessage key="OpptjeningUtland" id="SakenFaktaPanel.OpptjeningUtland" />]}
+          <FormattedMessage id="SakenFaktaPanel.OpptjeningUtland" />
         </AksjonspunktHelpTextHTML>
       )}
       {harÅpneAksjonspunkter &&
         aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD) && (
           <AksjonspunktHelpTextHTML>
-            {[<FormattedMessage key="AvklarDekningsgrad" id="SakenFaktaPanel.AvklarDekningsgrad" />]}
+            <FormattedMessage id="SakenFaktaPanel.AvklarDekningsgrad" />
           </AksjonspunktHelpTextHTML>
         )}
       <VStack gap="space-40">

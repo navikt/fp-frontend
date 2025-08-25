@@ -101,11 +101,11 @@ export const FagsakProfileIndex = ({
 
   return (
     <div className={styles.panelPadding}>
-      {fagsak.brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
-      {shouldRedirectToBehandlinger && (
-        <Navigate to={findPathToBehandling(fagsak.saksnummer, location, fagsakData.getAlleBehandlinger())} />
-      )}
       <VStack gap="space-20">
+        {fagsak.brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
+        {shouldRedirectToBehandlinger && (
+          <Navigate to={findPathToBehandling(fagsak.saksnummer, location, fagsakData.getAlleBehandlinger())} />
+        )}
         {!shouldRedirectToBehandlinger && (
           <HStack justify="space-between" align="start">
             <div>

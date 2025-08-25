@@ -78,7 +78,7 @@ export const SimuleringPanel = ({
           {aksjonspunktTittler.length > 0 &&
             aksjonspunktTittler.map(tittel => (
               <div key={tittel.key}>
-                <AksjonspunktHelpTextHTML>{[tittel]}</AksjonspunktHelpTextHTML>
+                <AksjonspunktHelpTextHTML>{tittel}</AksjonspunktHelpTextHTML>
               </div>
             ))}
           <SimuleringSummary

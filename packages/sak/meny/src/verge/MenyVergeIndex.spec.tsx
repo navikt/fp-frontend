@@ -24,8 +24,8 @@ describe('MenyVergeIndex', () => {
     await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'FBARN');
     await userEvent.type(screen.getByLabelText('Navn'), 'Ola Nordmann');
     await userEvent.type(screen.getByLabelText('Fødselsnummer'), '11427635718');
-    await userEvent.type(screen.getByLabelText('Periode f.o.m.'), '01.01.2025');
-    await userEvent.type(screen.getByLabelText('Periode t.o.m.'), '31.12.2025');
+    await userEvent.type(screen.getByLabelText('Fra og med'), '01.01.2025');
+    await userEvent.type(screen.getByLabelText('Til og med'), '31.12.2025');
     await userEvent.click(screen.getByText('Opprett'));
 
     expect(opprettVerge).toHaveBeenNthCalledWith(1, {
@@ -47,8 +47,8 @@ describe('MenyVergeIndex', () => {
     await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'ADVOKAT');
     await userEvent.type(screen.getByLabelText('Navn'), 'Advokatfirma AS');
     await userEvent.type(screen.getByLabelText('Organisasjonsnummer'), '123456789');
-    await userEvent.type(screen.getByLabelText('Periode f.o.m.'), '01.01.2025');
-    await userEvent.type(screen.getByLabelText('Periode t.o.m.'), '31.12.2025');
+    await userEvent.type(screen.getByLabelText('Fra og med'), '01.01.2025');
+    await userEvent.type(screen.getByLabelText('Til og med'), '31.12.2025');
     await userEvent.click(screen.getByText('Opprett'));
 
     expect(opprettVerge).toHaveBeenNthCalledWith(1, {

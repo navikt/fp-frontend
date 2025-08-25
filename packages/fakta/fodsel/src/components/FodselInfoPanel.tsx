@@ -37,10 +37,8 @@ export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumen
     <VStack gap="space-16">
       {harÅpneAksjonspunkter && (
         <AksjonspunktHelpTextHTML>
-          <>
-            {terminbekreftelseAp && <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />}
-            {manglendeFødselAp && <FormattedMessage id="FodselInfoPanel.SjekkManglendeFødsel" />}
-          </>
+          {terminbekreftelseAp && <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />}
+          {manglendeFødselAp && <FormattedMessage id="FodselInfoPanel.SjekkManglendeFødsel" />}
         </AksjonspunktHelpTextHTML>
       )}
 

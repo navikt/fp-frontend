@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@navikt/ds-react": "7.28.1",
-    "@navikt/ft-ui-komponenter": "6.1.2",
+    "@navikt/ft-ui-komponenter": "6.2.0",
     "@navikt/ft-utils": "3.8.2",
     "react": "19.1.1",
     "react-intl": "7.1.11"

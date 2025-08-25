@@ -1,4 +1,3 @@
-import { type ReactElement } from 'react';
 import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -58,16 +57,6 @@ const buildInitialValues = (
   };
 };
 
-const findAksjonspunktHelpTexts = (erAksjonspunktForeldreansvar: boolean): ReactElement[] =>
-  erAksjonspunktForeldreansvar
-    ? [<FormattedMessage key="CheckInformation" id="OmsorgOgForeldreansvarInfoPanel.CheckInformationForeldreansvar" />]
-    : [
-        <FormattedMessage
-          key="CheckInformation"
-          id="OmsorgOgForeldreansvarInfoPanel.CheckInformationOmsorgsovertakelse"
-        />,
-      ];
-
 interface Props {
   soknad: Soknad;
   personoversikt: Personoversikt;
@@ -125,7 +114,15 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
     >
       <VStack gap="space-20">
         {!isReadOnly && harÅpneAksjonspunkter && (
-          <AksjonspunktHelpTextHTML>{findAksjonspunktHelpTexts(erAksjonspunktForeldreansvar)}</AksjonspunktHelpTextHTML>
+          <AksjonspunktHelpTextHTML>
+            <FormattedMessage
+              id={
+                erAksjonspunktForeldreansvar
+                  ? 'OmsorgOgForeldreansvarInfoPanel.CheckInformationForeldreansvar'
+                  : 'OmsorgOgForeldreansvarInfoPanel.CheckInformationOmsorgsovertakelse'
+              }
+            />
+          </AksjonspunktHelpTextHTML>
         )}
         <OmsorgOgForeldreansvarFaktaForm
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
