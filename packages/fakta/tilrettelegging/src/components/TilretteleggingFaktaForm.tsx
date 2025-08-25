@@ -144,13 +144,11 @@ export const TilretteleggingFaktaForm = ({
       <VStack gap="space-32">
         {harÅpneAksjonspunkter && (
           <AksjonspunktHelpTextHTML>
-            <FormattedMessage
-              id={
-                skalVurdereVelferdspermisjoner
-                  ? 'TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner'
-                  : 'TilretteleggingFaktaForm.Aksjonspunkt'
-              }
-            />
+            {skalVurdereVelferdspermisjoner ? (
+              <FormattedMessage id="TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner" />
+            ) : (
+              <FormattedMessage id="TilretteleggingFaktaForm.Aksjonspunkt" />
+            )}
           </AksjonspunktHelpTextHTML>
         )}
         <HStack gap="space-16" wrap>
