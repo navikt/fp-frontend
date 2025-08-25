@@ -1,8 +1,9 @@
 import { type IntlShape } from 'react-intl';
 
+import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+
 import { VurderingsAlternativ } from '../../types/FormValues';
 import { erUttaksperiodeMedAktivitetskravArbeid } from './DokumentasjonVurderingBehovFormMapper';
-import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 
 type RadioProps = {
   value: string;

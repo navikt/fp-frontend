@@ -4,8 +4,9 @@ import { CheckmarkCircleFillIcon, CircleFillIcon, FileXMarkFillIcon, XMarkOctago
 import { HStack } from '@navikt/ds-react';
 import { assertUnreachable } from '@navikt/ft-utils';
 
-import { IconLabel } from '../IconLabel';
 import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
+
+import { IconLabel } from '../IconLabel';
 
 interface Props {
   vurdering: DokumentasjonVurderingBehov['vurdering'];
