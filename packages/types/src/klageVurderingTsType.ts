@@ -36,4 +36,5 @@ export type KlageVurdering = Readonly<{
   aktuelleHjemler?: string[];
   underBehandlingKabal?: boolean;
   behandletAvKabal?: boolean;
+  mottattDato?: string;
 }>;

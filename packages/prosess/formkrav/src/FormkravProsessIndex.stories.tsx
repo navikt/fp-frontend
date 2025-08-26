@@ -46,6 +46,7 @@ export const FormkravPanelForAksjonspunktNfp: Story = {
         klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
         fritekstTilBrev: 'test',
       },
+      mottattDato: '2025-08-26',
     } as KlageVurdering,
     aksjonspunkterForPanel: [
       {
@@ -64,6 +65,7 @@ export const FormkravPanelForAksjonspunktKaIkkePåklagd: Story = {
         erKlagefirstOverholdt: true,
         erKlageKonkret: true,
       },
+      mottattDato: '2025-08-26',
     } as KlageVurdering,
     aksjonspunkterForPanel: [],
   },
@@ -78,6 +80,7 @@ export const FormkravPanelForAksjonspunktKaValgtBehandling: Story = {
         erKlagerPart: true,
         erSignert: true,
       },
+      mottattDato: '2025-08-26',
     } as KlageVurdering,
     aksjonspunkterForPanel: [],
   },

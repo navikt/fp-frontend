@@ -15,6 +15,7 @@ type KlageFormkravBasic = {
   };
   vedtakBehandlingUuid?: string;
   fritekstTilBrev?: string;
+  mottattDato?: string;
 };
 
 export type KlageFormkravAp = KlageFormkravBasic &

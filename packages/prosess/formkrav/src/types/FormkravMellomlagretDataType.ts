@@ -1,6 +1,6 @@
 export type FormkravMellomlagretDataType = {
   kode: string;
-  begrunnelse: string;
+  begrunnelse?: string;
   behandlingUuid: string;
   erKlagerPart: boolean;
   erFristOverholdt: boolean;
@@ -14,4 +14,5 @@ export type FormkravMellomlagretDataType = {
   };
   paKlagdBehandlingUuid?: string;
   fritekstTilBrev?: string;
+  mottattDato?: string;
 };
