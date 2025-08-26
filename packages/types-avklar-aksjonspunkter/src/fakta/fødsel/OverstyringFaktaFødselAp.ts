@@ -4,8 +4,10 @@ import type { AksjonspunktTilBekreftelse } from '../../AksjonspunktTilBekreftels
 
 export type OverstyringFaktaFødselAp = {
   termindato: string | undefined;
-  barn?: {
-    fødselsdato: string;
-    dødsdato?: string;
-  }[];
+  barn:
+    | {
+        fødselsdato: string;
+        dødsdato?: string;
+      }[]
+    | null;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL>;
