@@ -657,11 +657,11 @@ export type ArbeidsforholdDto = {
 };
 
 export type Arbeidsgiver = {
-  identifikator?: string;
-  erVirksomhet?: boolean;
-  orgnr?: string;
   indexKey?: string;
+  orgnr?: string;
   aktørId?: string;
+  erVirksomhet?: boolean;
+  identifikator?: string;
 };
 
 export type AvklarAleneomsorgVurderingDto = {
@@ -997,8 +997,8 @@ export type InntektsmeldingSomIkkeKommerDto = {
 
 export type InternArbeidsforholdRef = {
   referanse?: string;
-  uuidreferanse?: string;
   indexKey?: string;
+  uuidreferanse?: string;
 };
 
 export type KanIkkeOppgiBegrunnelse = {
@@ -1015,6 +1015,7 @@ export type KlageFormkravAksjonspunktDto = {
   erSignert: boolean | null;
   erTilbakekreving: boolean | null;
   fritekstTilBrev: string | null;
+  mottattDato: string | null;
   begrunnelse: string | null;
   tilbakekrevingInfo: KlageTilbakekrevingDto | null;
   vedtakBehandlingUuid: string | null;
@@ -1593,7 +1594,7 @@ export type UttakResultatPeriodeLagreDto = {
   periodeResultatÅrsak: PeriodeResultatÅrsak;
   utsettelseType: UttakUtsettelseType;
   oppholdÅrsak: OppholdÅrsak;
-  flerbarnsdager?: boolean;
+  flerbarnsdager: boolean;
   samtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
   graderingInnvilget?: boolean;
@@ -2240,18 +2241,17 @@ export type BeregningsgrunnlagArbeidsforholdDto = {
   naturalytelseTilkommetPrÅr?: number;
 };
 
-// TODO: nullable?
 export type BeregningsgrunnlagDto = {
   avklaringsbehov: Array<AvklaringsbehovDto>;
   skjaeringstidspunktBeregning: string;
   skjæringstidspunkt: string;
   aktivitetStatus?: Array<AktivitetStatus>;
   beregningsgrunnlagPeriode: Array<BeregningsgrunnlagPeriodeDto>;
-  sammenligningsgrunnlagPrStatus: Array<SammenligningsgrunnlagDto>;
+  sammenligningsgrunnlagPrStatus?: Array<SammenligningsgrunnlagDto>;
   halvG?: number;
   grunnbeløp?: number;
   faktaOmBeregning?: FaktaOmBeregningDto;
-  andelerMedGraderingUtenBG: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
+  andelerMedGraderingUtenBG?: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
   hjemmel?: Hjemmel;
   faktaOmFordeling?: FordelingDto;
   dekningsgrad?: number;
@@ -2260,7 +2260,7 @@ export type BeregningsgrunnlagDto = {
   erOverstyrtInntekt: boolean;
   vilkårsperiodeFom?: string;
   inntektsgrunnlag?: InntektsgrunnlagDto;
-  forlengelseperioder: Array<Periode>;
+  forlengelseperioder?: Array<Periode>;
 };
 
 export type BeregningsgrunnlagPeriodeDto = {
@@ -2273,35 +2273,36 @@ export type BeregningsgrunnlagPeriodeDto = {
   redusertPrAar?: number;
   periodeAarsaker?: Array<PeriodeÅrsak>;
   dagsats?: number;
+  inntektsgradering?: number;
   beregningsgrunnlagPrStatusOgAndel?: Array<BeregningsgrunnlagPrStatusOgAndelDto>;
 };
 
 export type BeregningsgrunnlagPrStatusOgAndelAtDto = {
-  aktivitetStatus: AktivitetStatus | null;
-  beregningsperiodeFom: string | null;
-  beregningsperiodeTom: string | null;
-  beregnetPrAar: number | null;
-  overstyrtPrAar: number | null;
-  bruttoPrAar: number | null;
-  avkortetPrAar: number | null;
-  redusertPrAar: number | null;
-  erTidsbegrensetArbeidsforhold: boolean | null;
-  erNyIArbeidslivet: boolean | null;
-  lonnsendringIBeregningsperioden: boolean | null;
-  andelsnr: number | null;
-  besteberegningPrAar: number | null;
-  inntektskategori: Inntektskategori | null;
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
-  fastsattAvSaksbehandler: boolean | null;
-  lagtTilAvSaksbehandler: boolean | null;
-  belopPrMndEtterAOrdningen: number | null;
-  belopPrAarEtterAOrdningen: number | null;
-  dagsats: number | null;
-  originalDagsatsFraTilstøtendeYtelse: number | null;
-  fordeltPrAar: number | null;
-  erTilkommetAndel: boolean | null;
-  skalFastsetteGrunnlag: boolean | null;
-  bortfaltNaturalytelse: number | null;
+  aktivitetStatus: AktivitetStatus;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?: Inntektskategori;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  bortfaltNaturalytelse?: number;
 };
 
 export type BeregningsgrunnlagPrStatusOgAndelDto = (
@@ -2349,7 +2350,7 @@ export type BeregningsgrunnlagPrStatusOgAndelDto = (
 };
 
 export type BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
-  aktivitetStatus?: AktivitetStatus;
+  aktivitetStatus: AktivitetStatus;
   beregningsperiodeFom?: string;
   beregningsperiodeTom?: string;
   beregnetPrAar?: number;
@@ -2376,31 +2377,31 @@ export type BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
 };
 
 export type BeregningsgrunnlagPrStatusOgAndelFlDto = {
-  aktivitetStatus: AktivitetStatus | null;
-  beregningsperiodeFom: string | null;
-  beregningsperiodeTom: string | null;
-  beregnetPrAar: number | null;
-  overstyrtPrAar: number | null;
-  bruttoPrAar: number | null;
-  avkortetPrAar: number | null;
-  redusertPrAar: number | null;
-  erTidsbegrensetArbeidsforhold: boolean | null;
-  erNyIArbeidslivet: boolean | null;
-  lonnsendringIBeregningsperioden: boolean | null;
-  andelsnr: number | null;
-  besteberegningPrAar: number | null;
-  inntektskategori: Inntektskategori | null;
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
-  fastsattAvSaksbehandler: boolean | null;
-  lagtTilAvSaksbehandler: boolean | null;
-  belopPrMndEtterAOrdningen: number | null;
-  belopPrAarEtterAOrdningen: number | null;
-  dagsats: number | null;
-  originalDagsatsFraTilstøtendeYtelse: number | null;
-  fordeltPrAar: number | null;
-  erTilkommetAndel: boolean | null;
-  skalFastsetteGrunnlag: boolean | null;
-  erNyoppstartet: boolean | null;
+  aktivitetStatus: AktivitetStatus;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?: Inntektskategori;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  erNyoppstartet?: boolean;
 };
 
 export type BeregningsgrunnlagPrStatusOgAndelSnDto = {
@@ -2434,33 +2435,33 @@ export type BeregningsgrunnlagPrStatusOgAndelSnDto = {
 };
 
 export type BeregningsgrunnlagPrStatusOgAndelYtelseDto = {
-  aktivitetStatus: AktivitetStatus | null;
-  beregningsperiodeFom: string | null;
-  beregningsperiodeTom: string | null;
-  beregnetPrAar: number | null;
-  overstyrtPrAar: number | null;
-  bruttoPrAar: number | null;
-  avkortetPrAar: number | null;
-  redusertPrAar: number | null;
-  erTidsbegrensetArbeidsforhold: boolean | null;
-  erNyIArbeidslivet: boolean | null;
-  lonnsendringIBeregningsperioden: boolean | null;
-  andelsnr: number | null;
-  besteberegningPrAar: number | null;
-  inntektskategori: Inntektskategori | null;
-  arbeidsforhold: BeregningsgrunnlagArbeidsforholdDto | null;
-  fastsattAvSaksbehandler: boolean | null;
-  lagtTilAvSaksbehandler: boolean | null;
-  belopPrMndEtterAOrdningen: number | null;
-  belopPrAarEtterAOrdningen: number | null;
-  dagsats: number | null;
-  originalDagsatsFraTilstøtendeYtelse: number | null;
-  fordeltPrAar: number | null;
-  erTilkommetAndel: boolean | null;
-  skalFastsetteGrunnlag: boolean | null;
-  belopFraMeldekortPrMnd: number | null;
-  belopFraMeldekortPrAar: number | null;
-  oppjustertGrunnlag: number | null;
+  aktivitetStatus: AktivitetStatus;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  beregnetPrAar?: number;
+  overstyrtPrAar?: number;
+  bruttoPrAar?: number;
+  avkortetPrAar?: number;
+  redusertPrAar?: number;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erNyIArbeidslivet?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  andelsnr?: number;
+  besteberegningPrAar?: number;
+  inntektskategori?: Inntektskategori;
+  arbeidsforhold?: BeregningsgrunnlagArbeidsforholdDto;
+  fastsattAvSaksbehandler?: boolean;
+  lagtTilAvSaksbehandler?: boolean;
+  belopPrMndEtterAOrdningen?: number;
+  belopPrAarEtterAOrdningen?: number;
+  dagsats?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  fordeltPrAar?: number;
+  erTilkommetAndel?: boolean;
+  skalFastsetteGrunnlag?: boolean;
+  belopFraMeldekortPrMnd?: number;
+  belopFraMeldekortPrAar?: number;
+  oppjustertGrunnlag?: number;
 };
 
 export type BesteberegningInntektDto = {
@@ -2490,20 +2491,20 @@ export type BesteberegninggrunnlagDto = {
 };
 
 export type EgenNæringDto = {
-  utenlandskvirksomhetsnavn: string | null;
-  orgnr: string | null;
-  erVarigEndret: boolean | null;
-  erNyoppstartet: boolean | null;
-  virksomhetType: VirksomhetType | null;
-  begrunnelse: string | null;
-  endringsdato: string | null;
-  oppstartsdato: string | null;
-  opphørsdato: string | null;
-  regnskapsførerNavn: string | null;
-  regnskapsførerTlf: string | null;
-  kanRegnskapsførerKontaktes: boolean | null;
-  erNyIArbeidslivet: boolean | null;
-  oppgittInntekt: number | null;
+  utenlandskvirksomhetsnavn?: string;
+  orgnr?: string;
+  erVarigEndret?: boolean;
+  erNyoppstartet?: boolean;
+  virksomhetType?: VirksomhetType;
+  begrunnelse?: string;
+  endringsdato?: string;
+  oppstartsdato?: string;
+  opphørsdato?: string;
+  regnskapsførerNavn?: string;
+  regnskapsførerTlf?: string;
+  kanRegnskapsførerKontaktes?: boolean;
+  erNyIArbeidslivet?: boolean;
+  oppgittInntekt?: number;
 };
 
 export type FaktaOmBeregningAndelDto = {
@@ -2614,13 +2615,13 @@ export type ForeldrepengerGrunnlagDto = {
 };
 
 export type FrisinnAndelDto = {
-  oppgittInntekt: number | null;
+  oppgittInntekt?: number;
   statusSøktFor: AktivitetStatus;
 };
 
 export type FrisinnGrunnlagDto = {
-  opplysningerFL: SøknadsopplysningerDto | null;
-  opplysningerSN: SøknadsopplysningerDto | null;
+  opplysningerFL?: SøknadsopplysningerDto;
+  opplysningerSN?: SøknadsopplysningerDto;
   perioderSøktFor: Array<OpplystPeriodeDto>;
   frisinnPerioder: Array<FrisinnPeriodeDto>;
   avslagsårsakPrPeriode: Array<AvslagsårsakPrPeriodeDto>;
@@ -2629,7 +2630,7 @@ export type FrisinnGrunnlagDto = {
 export type FrisinnPeriodeDto = {
   fom: string;
   tom: string;
-  oppgittArbeidsinntekt: number | null;
+  oppgittArbeidsinntekt?: number;
   frisinnAndeler: Array<FrisinnAndelDto>;
 };
 
@@ -2744,7 +2745,7 @@ export type NyPeriodeDto = {
 };
 
 export type OmsorgspengeGrunnlagDto = {
-  skalAvviksvurdere: boolean | null;
+  skalAvviksvurdere?: boolean;
 };
 
 export type OpplystPeriodeDto = {
@@ -2817,8 +2818,8 @@ export type PermisjonDto = {
 };
 
 export type PgiDto = {
-  beløp: number | null;
-  årstall: number | null;
+  beløp?: number;
+  årstall?: number;
 };
 
 export type RefusjonAndelTilVurderingDto = {
@@ -2873,9 +2874,9 @@ export type SvangerskapspengerGrunnlagDto = {
 };
 
 export type SøknadsopplysningerDto = {
-  oppgittÅrsinntekt: number | null;
-  oppgittInntekt: number | null;
-  erNyoppstartet: boolean | null;
+  oppgittÅrsinntekt?: number;
+  oppgittInntekt?: number;
+  erNyoppstartet?: boolean;
 };
 
 export type TidligereUtbetalingDto = {
@@ -3005,7 +3006,7 @@ export type FødselDto = {
 };
 
 export type Gjeldende = {
-  termin?: Termin;
+  termin: Termin;
   utstedtdato?: Utstedtdato;
   antallBarn?: AntallBarn;
   barn?: Array<GjeldendeBarn>;
@@ -3099,6 +3100,7 @@ export type KlagebehandlingDto = {
   aktuelleHjemler: Array<KlageHjemmel> | null;
   underBehandlingKabal: boolean | null;
   behandletAvKabal: boolean | null;
+  mottattDato: string | null;
 };
 
 export type MottattKlagedokumentDto = {
@@ -3114,6 +3116,7 @@ export type KlageFormKravAksjonspunktMellomlagringDto = {
   erSignert?: boolean;
   erTilbakekreving?: boolean;
   klageTilbakekreving?: KlageTilbakekrevingDto;
+  mottattDato?: string;
   begrunnelse?: string;
   fritekstTilBrev?: string;
   paKlagdBehandlingUuid?: string;
@@ -8155,22 +8158,6 @@ export type HentBeregningsgrunnlagInputResponses = {
   default: unknown;
 };
 
-export type HentBeregningsgrunnlagInputLegacyData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningBeregning/hentBeregningsgrunnlagInputLegacy';
-};
-
-export type HentBeregningsgrunnlagInputLegacyResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
 export type HentGjeldendeSatserData = {
   body?: never;
   path?: never;
@@ -8186,36 +8173,6 @@ export type HentGjeldendeSatserResponses = {
 };
 
 export type HentGjeldendeSatserResponse = HentGjeldendeSatserResponses[keyof HentGjeldendeSatserResponses];
-
-export type HentInfOmBehandlingerMedDiffData = {
-  body?: never;
-  path?: never;
-  query?: never;
-  url: '/api/forvaltningBeregning/sjekkDiffInntektRegisterMotInntektsmelding';
-};
-
-export type HentInfOmBehandlingerMedDiffResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
-
-export type HentRefusjonskravperioderInputData = {
-  body?: never;
-  path?: never;
-  query: {
-    behandlingUuid: string;
-  };
-  url: '/api/forvaltningBeregning/hentRefusjonskravperioderInput';
-};
-
-export type HentRefusjonskravperioderInputResponses = {
-  /**
-   * default response
-   */
-  default: unknown;
-};
 
 export type LagreNySatsData = {
   body?: never;
@@ -9241,6 +9198,20 @@ export type AvstemOverlappForPeriodeData = {
 };
 
 export type AvstemOverlappForPeriodeResponses = {
+  /**
+   * default response
+   */
+  default: unknown;
+};
+
+export type AvstemOverlappFrisinnData = {
+  body?: never;
+  path?: never;
+  query?: never;
+  url: '/api/forvaltningUttrekk/avstemOverlappFrisinn';
+};
+
+export type AvstemOverlappFrisinnResponses = {
   /**
    * default response
    */
