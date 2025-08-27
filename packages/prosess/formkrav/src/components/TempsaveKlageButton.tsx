@@ -11,12 +11,13 @@ import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagret
 export const IKKE_PA_KLAGD_VEDTAK = 'ikkePaklagdVedtak';
 
 export type FormValues = {
-  erKlagerPart: boolean;
-  erFristOverholdt: boolean;
-  erKonkret: boolean;
-  erSignert: boolean;
-  begrunnelse: string;
-  vedtak: string;
+  erKlagerPart?: boolean;
+  erFristOverholdt?: boolean;
+  erKonkret?: boolean;
+  erSignert?: boolean;
+  begrunnelse?: string;
+  vedtak?: string;
+  mottattDato?: string;
   fritekstTilBrev?: string;
 };
 
@@ -35,10 +36,10 @@ export const skalLagreFritekstfelt = (formVerdier: FormValues): boolean =>
 
 const getPåklagdBehandling = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
-  påklagdVedtak: string,
+  påklagdVedtak?: string,
 ): AvsluttetBehandling | undefined => avsluttedeBehandlinger.find(behandling => behandling.uuid === påklagdVedtak);
 
-export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak: string): boolean => {
+export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak?: string): boolean => {
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
   return (
     !!behandling &&
@@ -48,7 +49,7 @@ export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], 
 
 export const påklagdTilbakekrevingInfo = (
   avsluttedeBehandlinger: AvsluttetBehandling[],
-  påklagdVedtak: string,
+  påklagdVedtak?: string,
 ): TilbakekrevingInfo | undefined => {
   const erTilbakekrevingVedtak = erTilbakekreving(avsluttedeBehandlinger, påklagdVedtak);
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
@@ -70,14 +71,15 @@ const transformValues = (
   kode: aksjonspunktCode,
   begrunnelse: values.begrunnelse,
   behandlingUuid,
-  erKlagerPart: values.erKlagerPart,
-  erFristOverholdt: values.erFristOverholdt,
-  erKonkret: values.erKonkret,
-  erSignert: values.erSignert,
+  erKlagerPart: !!values.erKlagerPart,
+  erFristOverholdt: !!values.erFristOverholdt,
+  erKonkret: !!values.erKonkret,
+  erSignert: !!values.erSignert,
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
   klageTilbakekreving: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
   paKlagdBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
   fritekstTilBrev: skalLagreFritekstfelt(values) ? values.fritekstTilBrev : undefined,
+  mottattDato: values.mottattDato,
 });
 
 interface Props {

@@ -44,6 +44,7 @@ describe('FormkravProsessIndex', () => {
       erTilbakekreving: false,
       fritekstTilBrev: undefined,
       kode: '5082',
+      mottattDato: '2025-08-26',
       tilbakekrevingInfo: undefined,
       vedtakBehandlingUuid: '1',
     });
@@ -81,6 +82,7 @@ describe('FormkravProsessIndex', () => {
       erSignert: true,
       erTilbakekreving: false,
       fritekstTilBrev: 'Dette er en fritekst',
+      mottattDato: '2025-08-26',
       kode: '5082',
       klageTilbakekreving: undefined,
       paKlagdBehandlingUuid: '1',
