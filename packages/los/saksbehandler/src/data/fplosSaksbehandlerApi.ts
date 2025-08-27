@@ -109,10 +109,11 @@ export const hentNyeOgFerdigstilteOppgaverOptions = (sakslisteId: number) =>
         .json<NyeOgFerdigstilteOppgaver[]>(),
   });
 
-export const behandlendeOppgaverOptions = () =>
+export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
   queryOptions({
-    queryKey: [LosUrl.BEHANDLEDE_OPPGAVER],
-    queryFn: () => kyExtended.get(LosUrl.BEHANDLEDE_OPPGAVER).json<Oppgave[]>(),
+    queryKey: [LosUrl.BEHANDLEDE_OPPGAVER, kunAktive],
+    queryFn: () =>
+      kyExtended.get(LosUrl.BEHANDLEDE_OPPGAVER, { searchParams: { kunAktive: kunAktive } }).json<Oppgave[]>(),
   });
 
 export const søkFagsakPost = (searchString: string, skalReservere: boolean) =>

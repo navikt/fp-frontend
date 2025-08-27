@@ -18,11 +18,9 @@ import {
 } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, FamilieHendelse, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
-
-import { FodselSammenligningPanel } from './FodselSammenligningPanel';
 
 const minLength3 = minLength(3);
 const maxLength10000 = maxLength(10000);
@@ -50,13 +48,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   sendVarsel: undefined,
 });
 
-const nullSafe = (value: FamilieHendelse | null): FamilieHendelse => value ?? ({} as FamilieHendelse);
-
 interface Props {
-  familiehendelse: FamilieHendelseSamling;
-  soknad: Soknad;
-  soknadOriginalBehandling: Soknad;
-  familiehendelseOriginalBehandling: FamilieHendelse;
   previewCallback: (data: ForhandsvisData) => void;
 }
 
@@ -65,13 +57,7 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av varsel om revurdering i søknad.
  */
-export const VarselOmRevurderingForm = ({
-  familiehendelse,
-  soknad,
-  soknadOriginalBehandling,
-  familiehendelseOriginalBehandling,
-  previewCallback,
-}: Props) => {
+export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
   const intl = useIntl();
 
   const { isReadOnly, alleKodeverk, behandling, submitCallback, aksjonspunkterForPanel } =
@@ -111,15 +97,6 @@ export const VarselOmRevurderingForm = ({
       fritekst: formVerdier.fritekst ?? ' ',
     });
   };
-
-  const { avklartBarn } = nullSafe(familiehendelse.register);
-  const { termindato } = nullSafe(familiehendelse.gjeldende);
-  const { vedtaksDatoSomSvangerskapsuke } = nullSafe(familiehendelse.gjeldende);
-
-  const erAutomatiskRevurdering = behandling.behandlingÅrsaker.reduce(
-    (result, current) => result || current.erAutomatiskRevurdering,
-    false,
-  );
   const ventearsaker = alleKodeverk['Venteårsak'] ?? [];
   const language = getLanguageFromSprakkode(behandling.språkkode);
   return (
@@ -134,17 +111,6 @@ export const VarselOmRevurderingForm = ({
               <AksjonspunktHelpTextHTML>
                 <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
               </AksjonspunktHelpTextHTML>
-              {erAutomatiskRevurdering && (
-                <FodselSammenligningPanel
-                  behandlingsType={behandling.type}
-                  avklartBarn={avklartBarn}
-                  termindato={termindato}
-                  vedtaksDatoSomSvangerskapsuke={vedtaksDatoSomSvangerskapsuke}
-                  soknad={soknad}
-                  soknadOriginalBehandling={soknadOriginalBehandling}
-                  familiehendelseOriginalBehandling={familiehendelseOriginalBehandling}
-                />
-              )}
               <VStack gap="space-12">
                 <RhfRadioGroupNew name="sendVarsel" control={formMethods.control} validate={[required]}>
                   <HStack gap="space-16">

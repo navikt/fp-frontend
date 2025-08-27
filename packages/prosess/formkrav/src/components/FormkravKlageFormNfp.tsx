@@ -3,8 +3,8 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
-import { hasValidText, required } from '@navikt/ft-form-validators';
+import { RhfDatepicker,RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { dateBeforeOrEqualToToday, hasValidDate, hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -60,7 +60,9 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefi
   const klageVurderingResultatNFP = klageVurdering ? klageVurdering.klageVurderingResultatNFP : null;
 
   if (!klageFormkavResultatNfp) {
-    return undefined;
+    return  {
+      mottattDato: klageVurdering ? klageVurdering.mottattDato : undefined,
+    };
   }
 
   return {
@@ -71,17 +73,19 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefi
     erFristOverholdt: klageFormkavResultatNfp.erKlagefirstOverholdt,
     erSignert: klageFormkavResultatNfp.erSignert,
     fritekstTilBrev: klageVurderingResultatNFP ? klageVurderingResultatNFP.fritekstTilBrev : undefined,
+    mottattDato: klageVurdering ? klageVurdering.mottattDato : undefined,
   };
 };
 
 const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBehandling[]): KlageFormkravAp => ({
-  erKlagerPart: values.erKlagerPart,
-  erFristOverholdt: values.erFristOverholdt,
-  erKonkret: values.erKonkret,
-  erSignert: values.erSignert,
+  erKlagerPart: !!values.erKlagerPart,
+  erFristOverholdt: !!values.erFristOverholdt,
+  erKonkret: !!values.erKonkret,
+  erSignert: !!values.erSignert,
   begrunnelse: values.begrunnelse,
   kode: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
   vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
+  mottattDato: values.mottattDato,
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
   tilbakekrevingInfo: påklagdTilbakekrevingInfo(avsluttedeBehandlinger, values.vedtak),
   fritekstTilBrev: skalLagreFritekstfelt(values) ? values.fritekstTilBrev : undefined,
@@ -143,7 +147,7 @@ export const FormkravKlageFormNfp = ({
           )}
           <VStack gap="space-24">
             <HStack gap="space-40">
-              <div>
+              <VStack gap="space-16">
                 <RhfSelect
                   name="vedtak"
                   control={formMethods.control}
@@ -153,7 +157,14 @@ export const FormkravKlageFormNfp = ({
                   selectValues={klageBareVedtakOptions}
                   className={styles.selectBredde}
                 />
-              </div>
+                <RhfDatepicker
+                  control={formMethods.control}
+                  name="mottattDato"
+                  label={intl.formatMessage({ id: 'Klage.Formkrav.MottattDato' })}
+                  validate={[required, hasValidDate, dateBeforeOrEqualToToday]}
+                  isReadOnly={isReadOnly}
+                />
+              </VStack>
               <VStack gap="space-20">
                 <HStack gap="space-16">
                   <RhfRadioGroupNew
