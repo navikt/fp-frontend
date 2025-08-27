@@ -1,41 +1,47 @@
 import type {
-  AktivitetTomDatoMappingDto,
-  AndelForFaktaOmBeregningDto,
-  ArbeidstakerUtenInntektsmeldingAndelDto,
-  ATogFliSammeOrganisasjonDto,
-  AvklarAktiviteterDto,
-  BeregningAktivitetDto,
-  FaktaOmBeregningAndelDto,
-  FaktaOmBeregningDto,
-  KortvarigeArbeidsforholdDto,
-  KunYtelseDto,
-  RefusjonskravSomKommerForSentDto,
-  VurderBesteberegningDto,
-  VurderMottarYtelseDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AktivitetTomDatoMappingDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AndelForFaktaOmBeregningDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ArbeidstakerUtenInntektsmeldingAndelDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ATogFLISammeOrganisasjonDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AvklarAktiviteterDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningAktivitetDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KortvarigeArbeidsforholdDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KunYtelseDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravSomKommerForSentDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderBesteberegningDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMottarYtelseDto,
 } from './apiDtoGenerert.ts';
 
-export type FaktaOmBeregningAndel = FaktaOmBeregningAndelDto;
+export type FaktaOmBeregningAndel =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto;
 
-export type AndelForFaktaOmBeregning = AndelForFaktaOmBeregningDto;
+export type AndelForFaktaOmBeregning =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AndelForFaktaOmBeregningDto;
 
-export type RefusjonskravSomKommerForSentListe = RefusjonskravSomKommerForSentDto;
+export type RefusjonskravSomKommerForSentListe =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravSomKommerForSentDto;
 
-export type VurderBesteberegning = VurderBesteberegningDto;
+export type VurderBesteberegning = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderBesteberegningDto;
 
-export type BeregningAktivitet = BeregningAktivitetDto;
+export type BeregningAktivitet = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningAktivitetDto;
 
-export type AvklarBeregningAktiviteter = AktivitetTomDatoMappingDto;
+export type AvklarBeregningAktiviteter =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AktivitetTomDatoMappingDto;
 
-export type AvklarBeregningAktiviteterMap = AvklarAktiviteterDto;
+export type AvklarBeregningAktiviteterMap =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_AvklarAktiviteterDto;
 
-export type KortvarigAndel = KortvarigeArbeidsforholdDto;
+export type KortvarigAndel = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KortvarigeArbeidsforholdDto;
 
-export type ArbeidstakerUtenIMAndel = ArbeidstakerUtenInntektsmeldingAndelDto;
+export type ArbeidstakerUtenIMAndel =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ArbeidstakerUtenInntektsmeldingAndelDto;
 
-export type KunYtelse = KunYtelseDto;
+export type KunYtelse = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_KunYtelseDto;
 
-export type VurderMottarYtelse = VurderMottarYtelseDto;
+export type VurderMottarYtelse = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMottarYtelseDto;
 
-export type ATFLSammeOrgAndel = ATogFliSammeOrganisasjonDto;
+export type ATFLSammeOrgAndel = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_ATogFLISammeOrganisasjonDto;
 
-export type FaktaOmBeregning = FaktaOmBeregningDto;
+export type FaktaOmBeregning = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningDto;

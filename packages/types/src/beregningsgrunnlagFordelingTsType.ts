@@ -1,26 +1,33 @@
 import type {
-  FordelBeregningsgrunnlagAndelDto,
-  FordelBeregningsgrunnlagArbeidsforholdDto,
-  FordelBeregningsgrunnlagPeriodeDto,
-  FordelingDto,
-  NyPeriodeDto,
-  RefusjonAndelTilVurderingDto,
-  RefusjonTilVurderingDto,
-  TidligereUtbetalingDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagAndelDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagArbeidsforholdDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagPeriodeDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelingDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_NyPeriodeDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonAndelTilVurderingDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonTilVurderingDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_TidligereUtbetalingDto,
 } from './apiDtoGenerert.ts';
 
-export type TidligereUtbetalinger = TidligereUtbetalingDto;
+export type TidligereUtbetalinger =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_TidligereUtbetalingDto;
 
-export type RefusjonTilVurderingAndel = RefusjonAndelTilVurderingDto;
+export type RefusjonTilVurderingAndel =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonAndelTilVurderingDto;
 
-export type RefusjonTilVurdering = RefusjonTilVurderingDto;
+export type RefusjonTilVurdering =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_refusjon_RefusjonTilVurderingDto;
 
-export type PerioderMedGraderingEllerRefusjon = NyPeriodeDto;
+export type PerioderMedGraderingEllerRefusjon =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_NyPeriodeDto;
 
-export type ArbeidsforholdTilFordeling = FordelBeregningsgrunnlagArbeidsforholdDto;
+export type ArbeidsforholdTilFordeling =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagArbeidsforholdDto;
 
-export type FordelBeregningsgrunnlagAndel = FordelBeregningsgrunnlagAndelDto;
+export type FordelBeregningsgrunnlagAndel =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagAndelDto;
 
-export type FordelBeregningsgrunnlagPeriode = FordelBeregningsgrunnlagPeriodeDto;
+export type FordelBeregningsgrunnlagPeriode =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelBeregningsgrunnlagPeriodeDto;
 
-export type FaktaOmFordeling = FordelingDto;
+export type FaktaOmFordeling = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FordelingDto;
