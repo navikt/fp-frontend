@@ -31,18 +31,6 @@ yarn install
 yarn build
 ```
 
-For å kjøre opp applikasjonen:
-
-```
-yarn dev
-```
-
-For å kjøre opp storybook. Gå inn i aktuell pakke og kjør:
-
-```
-yarn storybook
-```
-
 En kan kjøre tester og linting både fra rot og fra de ulike pakkene:
 
 ```
@@ -52,7 +40,32 @@ yarn eslint
 yarn stylelint
 ```
 
-## Utvikling mot lokal kode i ft-frontend-saksbehandling
+## Utvikling
+### 1. Vite Mode
+
+Vi har en utviklingsmetode vi kaller for "Vite mode".
+Den gjør at du kan bruke server som er deployet (eller i autotest) som utgangspunkt.
+Fordelen er at du får brukt helt "ekte" dev data, men med frontend servert fra din localhost.
+
+1. cd til appen `cd apps/fp-frontend-app`
+2. Kjør `yarn dev`. Nå har du lokal vite-server kjørende på `localhost:9010`
+3. Gå til ingress i dev (https://fpsak.intern.dev.nav.no/) eller autotest (http://localhost:9000/)
+4. **Aktiver Vite-mode**:
+  - Legg til `/vite-on` i slutten av URL-en du bruker i nettleseren (fra steg 3)
+  - Dette setter en cookie kalt `use-local-vite-server` i nettleseren din
+  - Cookien instruerer den deployede serveren til å sende deg en spesiell `index.html`
+  - Denne HTML-filen laster JavaScript fra din lokale utviklingsserver.
+  - Du vil nå se endringer du gjør lokalt mens du bruker den deployede backend-en
+
+### 2. Storybook
+
+For å kjøre opp storybook. Gå inn i aktuell pakke og kjør:
+
+```
+yarn storybook
+```
+
+### Utvikling mot lokal kode i ft-frontend-saksbehandling
 
 ```
 cd fp-frontend
