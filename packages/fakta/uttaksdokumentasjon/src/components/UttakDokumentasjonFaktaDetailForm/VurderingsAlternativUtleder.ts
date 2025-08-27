@@ -1,6 +1,6 @@
 import { type IntlShape } from 'react-intl';
 
-import { UttakÅrsak, UttakType } from '@navikt/fp-types';
+import type { UttakÅrsak, UttakType } from '@navikt/fp-types';
 
 import { VurderingsAlternativ } from '../../types/FormValues';
 import { erUttaksperiodeMedAktivitetskravArbeid } from './DokumentasjonVurderingBehovFormMapper';

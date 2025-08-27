@@ -1341,8 +1341,8 @@ export type tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehov
 };
 
 export type tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto_Permisjon = {
-  prosent?: number;
-  type?: foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType;
+  prosent: number;
+  type: foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType;
 };
 
 export type tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto_Vurdering =
@@ -2571,7 +2571,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   skjaeringstidspunktBeregning: string;
   skjæringstidspunkt: string;
   aktivitetStatus?: Array<folketrygdloven_kalkulus_kodeverk_AktivitetStatus>;
-  beregningsgrunnlagPeriode?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto>;
+  beregningsgrunnlagPeriode: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto>;
   sammenligningsgrunnlagPrStatus?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto>;
   halvG?: number;
   grunnbeløp?: number;
@@ -3052,7 +3052,7 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_Beste
 };
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_ForeldrepengerGrunnlagDto = {
-  besteberegninggrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;
+  besteberegninggrunnlag: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;
 };
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto = {

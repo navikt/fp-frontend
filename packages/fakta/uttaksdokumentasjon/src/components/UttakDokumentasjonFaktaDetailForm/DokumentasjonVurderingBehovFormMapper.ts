@@ -1,11 +1,16 @@
 import { assertUnreachable } from '@navikt/ft-utils';
 
-import { type DokumentasjonVurderingBehov, UttakÅrsak, UttakType, UttakVurdering } from '@navikt/fp-types';
+import {
+  type DokumentasjonVurderingBehov,
+  type UttakType,
+  type UttakVurdering,
+  type UttakÅrsak,
+} from '@navikt/fp-types';
 
 import { type FormValues, VurderingsAlternativ } from '../../types/FormValues';
 
 export function erUttaksperiodeMedAktivitetskravArbeid(type: UttakType, årsak: UttakÅrsak) {
-  return årsak === UttakÅrsak.AKTIVITETSKRAV_ARBEID && type === UttakType.UTTAK;
+  return årsak === 'AKTIVITETSKRAV_ARBEID' && type === 'UTTAK';
 }
 
 function mapVurderingsAlternativTilUttakVurdering(vurdering: VurderingsAlternativ): UttakVurdering {
@@ -13,11 +18,11 @@ function mapVurderingsAlternativTilUttakVurdering(vurdering: VurderingsAlternati
     case VurderingsAlternativ.GODKJENT:
     case VurderingsAlternativ.GODKJENT_OVER75:
     case VurderingsAlternativ.GODKJENT_UNDER75:
-      return UttakVurdering.GODKJENT;
+      return 'GODKJENT';
     case VurderingsAlternativ.IKKE_GODKJENT:
-      return UttakVurdering.IKKE_GODKJENT;
+      return 'IKKE_GODKJENT';
     case VurderingsAlternativ.IKKE_DOKUMENTERT:
-      return UttakVurdering.IKKE_DOKUMENTERT;
+      return 'IKKE_DOKUMENTERT';
     default:
       return assertUnreachable(vurdering);
   }
@@ -28,8 +33,8 @@ function mapUttakVurderingTilVurderingsAlternativ(
 ): VurderingsAlternativ {
   const vurdering = dokumentasjonVurderingBehov.vurdering!;
   switch (vurdering) {
-    case UttakVurdering.GODKJENT_AUTOMATISK:
-    case UttakVurdering.GODKJENT: {
+    case 'GODKJENT_AUTOMATISK':
+    case 'GODKJENT': {
       if (erUttaksperiodeMedAktivitetskravArbeid(dokumentasjonVurderingBehov.type, dokumentasjonVurderingBehov.årsak)) {
         return dokumentasjonVurderingBehov.morsStillingsprosent
           ? VurderingsAlternativ.GODKJENT_UNDER75
@@ -37,9 +42,9 @@ function mapUttakVurderingTilVurderingsAlternativ(
       }
       return VurderingsAlternativ.GODKJENT;
     }
-    case UttakVurdering.IKKE_GODKJENT:
+    case 'IKKE_GODKJENT':
       return VurderingsAlternativ.IKKE_GODKJENT;
-    case UttakVurdering.IKKE_DOKUMENTERT:
+    case 'IKKE_DOKUMENTERT':
       return VurderingsAlternativ.IKKE_DOKUMENTERT;
     default:
       return assertUnreachable(vurdering);
@@ -63,7 +68,7 @@ export const tilFormValues = (value: DokumentasjonVurderingBehov): FormValues =>
     {
       ...value,
       vurdering:
-        value.vurdering && value.vurdering !== UttakVurdering.GODKJENT_AUTOMATISK
+        value.vurdering && value.vurdering !== 'GODKJENT_AUTOMATISK'
           ? mapUttakVurderingTilVurderingsAlternativ(value)
           : undefined,
       morsStillingsprosent: erUttaksperiodeMedAktivitetskravArbeid(value.type, value.årsak)
