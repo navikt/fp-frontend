@@ -26,7 +26,6 @@ import type {
   Dokument,
   DokumentasjonVurderingBehov,
   FaktaArbeidsforhold,
-  FamilieHendelse,
   FamilieHendelseSamling,
   Feriepengegrunnlag,
   Fødsel,
@@ -183,8 +182,6 @@ export const BehandlingRel = {
   UTTAK_KONTROLLER_FAKTA_PERIODER_V2: 'uttak-kontroller-fakta-perioder-v2',
   UTTAK_ANNEN_FORELDER_EOS: 'uttak-annen-forelder-eos',
   FAKTA_ARBEIDSFORHOLD: 'fakta-arbeidsforhold',
-  FAMILIEHENDELSE_ORIGINAL_BEHANDLING: 'familiehendelse-original-behandling',
-  SOKNAD_ORIGINAL_BEHANDLING: 'soknad-original-behandling',
   INNTEKTSMELDINGER: 'inntektsmeldinger',
   INNTEKT_ARBEID_YTELSE: 'inntekt-arbeid-ytelse',
   UTLAND_DOK_STATUS: 'utland-dok-status',
@@ -487,22 +484,6 @@ const getFaktaArbeidsforholdOptions = (links: ApiLink[]) => (behandling: Behandl
     staleTime: Infinity,
   });
 
-const getFamiliehendelseOrigninalBehandlingOptions = (links: ApiLink[]) => (behandling: Behandling) =>
-  queryOptions({
-    queryKey: [BehandlingRel.FAMILIEHENDELSE_ORIGINAL_BEHANDLING, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('FAMILIEHENDELSE_ORIGINAL_BEHANDLING', links)).json<FamilieHendelse>(),
-    enabled: harLenke(behandling, 'FAMILIEHENDELSE_ORIGINAL_BEHANDLING'),
-    staleTime: Infinity,
-  });
-
-const getSøknadOriginalBehandlingOptions = (links: ApiLink[]) => (behandling: Behandling) =>
-  queryOptions({
-    queryKey: [BehandlingRel.SOKNAD_ORIGINAL_BEHANDLING, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('SOKNAD_ORIGINAL_BEHANDLING', links)).json<Soknad>(),
-    enabled: harLenke(behandling, 'SOKNAD_ORIGINAL_BEHANDLING'),
-    staleTime: Infinity,
-  });
-
 const getInntektsmeldingerOptions = (links: ApiLink[]) => (behandling: Behandling) =>
   queryOptions({
     queryKey: [BehandlingRel.INNTEKTSMELDINGER, behandling.uuid, behandling.versjon],
@@ -758,8 +739,6 @@ export const useBehandlingApi = (behandling: Behandling) => {
     uttakKontrollerFaktaPerioderOptions: getUttakKontrollerFaktaPerioderOptions(links),
     uttakAnnenpartEøsOptions: getUttakAnnenpartEøsOptions(links),
     faktaArbeidsforholdOptions: getFaktaArbeidsforholdOptions(links),
-    familiehendelseOrigninalBehandlingOptions: getFamiliehendelseOrigninalBehandlingOptions(links),
-    søknadOriginalBehandlingOptions: getSøknadOriginalBehandlingOptions(links),
     arbeidOgInntektOptions: getArbeidOgInntektOptions(links),
     inntektsmeldingerOptions: getInntektsmeldingerOptions(links),
     inntektArbeidYtelseOptions: getInntektArbeidYtelseOptions(links),

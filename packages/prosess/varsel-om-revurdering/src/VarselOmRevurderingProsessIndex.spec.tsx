@@ -17,15 +17,6 @@ describe('VarselOmRevurderingProsessIndex', () => {
     expect(await screen.findByText('Varsel om revurdering')).toBeInTheDocument();
     expect(screen.getByText('Vurder om varsel om revurdering skal sendes til søker')).toBeInTheDocument();
 
-    expect(screen.getByText('Opplysninger om fødsel fra søknaden')).toBeInTheDocument();
-    expect(screen.getByText('Utstedt dato')).toBeInTheDocument();
-    expect(screen.getByText('02.01.2019')).toBeInTheDocument();
-    expect(screen.getAllByText('Fødselsdato')).toHaveLength(2);
-    expect(screen.getAllByText('10.01.2019')).toHaveLength(2);
-    expect(screen.getByText('Antall barn')).toBeInTheDocument();
-
-    expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
-
     await userEvent.click(screen.getByText('Ikke send varsel til søker'));
 
     const vurderingInput = utils.getByLabelText('Begrunnelse');
@@ -92,16 +83,6 @@ describe('VarselOmRevurderingProsessIndex', () => {
 
     expect(await screen.findByText('Varsel om revurdering')).toBeInTheDocument();
     expect(screen.getByText('Vurder om varsel om revurdering skal sendes til søker')).toBeInTheDocument();
-
-    expect(screen.getByText('Vedtak')).toBeInTheDocument();
-    expect(screen.getByText('Termindato')).toBeInTheDocument();
-    expect(screen.getByText('01.01.2019')).toBeInTheDocument();
-    expect(screen.getByText('Antall barn')).toBeInTheDocument();
-
-    expect(screen.getByText('Fødselsdato')).toBeInTheDocument();
-    expect(screen.getByText('10.01.2019')).toBeInTheDocument();
-
-    expect(screen.getByText('Opplysninger om fødsel fra folkeregisteret')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Ikke send varsel til søker'));
 
