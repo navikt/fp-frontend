@@ -1,4 +1,4 @@
-import type { FagsakSøkDto } from './apiDtoGenerert.ts';
+import type { tjenester_fagsak_dto_FagsakSøkDto } from './apiDtoGenerert.ts';
 //
 // export type FagsakEnkel = Readonly<{
 //   saksnummer: string;
@@ -11,4 +11,4 @@ import type { FagsakSøkDto } from './apiDtoGenerert.ts';
 //   person: Person;
 // }>;
 
-export type FagsakEnkel = FagsakSøkDto;
+export type FagsakEnkel = tjenester_fagsak_dto_FagsakSøkDto;

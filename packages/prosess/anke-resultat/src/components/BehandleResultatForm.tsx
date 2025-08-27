@@ -121,7 +121,7 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
   </VStack>
 );
 
-const hentSpråkkode = (ankeOmgjoerArsak?: string): string => {
+const hentSpråkkode = (ankeOmgjoerArsak: string | undefined | string): string => {
   switch (ankeOmgjoerArsak) {
     case AnkeVurderingOmgjoer.ANKE_TIL_UGUNST:
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
