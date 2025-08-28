@@ -43,7 +43,8 @@ export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], 
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
   return (
     !!behandling &&
-    (behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING)
+    (behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
+      behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING)
   );
 };
 

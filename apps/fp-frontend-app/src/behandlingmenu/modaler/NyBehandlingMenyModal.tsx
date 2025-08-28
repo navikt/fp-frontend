@@ -15,12 +15,12 @@ import { useLagNyBehandling } from '../../data/polling/useLagNyBehandling';
 import { FagsakData } from '../../fagsak/FagsakData';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
-  BehandlingType.FORSTEGANGSSOKNAD,
-  BehandlingType.KLAGE,
-  BehandlingType.REVURDERING,
-  BehandlingType.DOKUMENTINNSYN,
-  BehandlingType.TILBAKEKREVING,
-  BehandlingType.TILBAKEKREVING_REVURDERING,
+  BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  BehandlingTypeEnum.KLAGE,
+  BehandlingTypeEnum.REVURDERING,
+  BehandlingTypeEnum.DOKUMENTINNSYN,
+  BehandlingTypeEnum.TILBAKEKREVING,
+  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
 ];
 
 const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
@@ -28,7 +28,7 @@ const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKont
     b =>
       b.gjeldendeVedtak &&
       b.status === BehandlingStatus.AVSLUTTET &&
-      (b.type === BehandlingType.FORSTEGANGSSOKNAD || b.type === BehandlingType.REVURDERING),
+      (b.type === BehandlingTypeEnum.FORSTEGANGSSOKNAD || b.type === BehandlingTypeEnum.REVURDERING),
   );
   return behandling ? behandling.uuid : undefined;
 };
@@ -62,8 +62,8 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   );
 
   const erTilbakekreving =
-    behandling?.type === BehandlingType.TILBAKEKREVING ||
-    behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+    behandling?.type === BehandlingTypeEnum.TILBAKEKREVING ||
+    behandling?.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;
   const isRevurderingOpprettedAktivert =
     erTilbakekrevingAktivert && !navAnsatt.kanVeilede && erTilbakekreving && !!behandlingUuid;
   const { data: kanRevurderingOpprettes = false } = useQuery(

@@ -13,7 +13,7 @@ const defaultBehandling = {
   uuid: '1',
   versjon: 1,
   språkkode: 'NN',
-  type: BehandlingType.FORSTEGANGSSOKNAD,
+  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
 } as Behandling;
 
 const aksjonspunkterForPanel = [
@@ -47,7 +47,7 @@ export const ForRevurdering: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
     },
   },
 };

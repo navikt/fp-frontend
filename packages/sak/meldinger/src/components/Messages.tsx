@@ -178,14 +178,14 @@ const getfiltrerteRevurderingVarslingArsaker = (
   revurderingVarslingArsaker: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[],
   fagsakYtelseType: string,
 ): KodeverkMedNavn<'RevurderingVarslingÅrsak'>[] => {
-  if (fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD) {
+  if (fagsakYtelseType === 'ES') {
     return revurderingVarslingArsaker.filter(
       arsak =>
         arsak.kode === RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER ||
         arsak.kode === RevurderingVarslingÅrsak.ANNET,
     );
   }
-  if (fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
+  if (fagsakYtelseType === 'SVP') {
     return revurderingVarslingArsaker.filter(
       arsak =>
         arsak.kode !== RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&

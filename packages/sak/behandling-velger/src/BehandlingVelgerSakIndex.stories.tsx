@@ -55,7 +55,7 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '1',
-        type: BehandlingType.FORSTEGANGSSOKNAD,
+        type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
         status: BehandlingStatus.AVSLUTTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
@@ -75,7 +75,7 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '2',
-        type: BehandlingType.DOKUMENTINNSYN,
+        type: BehandlingTypeEnum.DOKUMENTINNSYN,
         status: BehandlingStatus.OPPRETTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
@@ -95,7 +95,7 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '3',
-        type: BehandlingType.REVURDERING,
+        type: BehandlingTypeEnum.REVURDERING,
         status: BehandlingStatus.OPPRETTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
@@ -111,7 +111,7 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '4',
-        type: BehandlingType.FORSTEGANGSSOKNAD,
+        type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
         status: BehandlingStatus.AVSLUTTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,

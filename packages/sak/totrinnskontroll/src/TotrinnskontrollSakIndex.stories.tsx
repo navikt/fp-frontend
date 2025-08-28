@@ -26,7 +26,7 @@ const DEFAULT_BEHANDLING = {
   uuid: '1',
   versjon: 2,
   status: BehandlingStatus.FATTER_VEDTAK,
-  type: BehandlingType.FORSTEGANGSSOKNAD,
+  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
   behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
   behandlingsresultat: {
@@ -54,7 +54,7 @@ const meta = {
     onSubmit: action('button-click') as (params: ApData) => Promise<void>,
     location: LOCATION,
     forhandsvisVedtaksbrev: action('button-click'),
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     alleKodeverk: alleKodeverk,
     createLocationForSkjermlenke: () => LOCATION,
     setBeslutterFormData: () => undefined,

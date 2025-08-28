@@ -33,7 +33,8 @@ export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModa
   });
 
   const venteårsaker =
-    behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
+    behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
+    behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING
       ? notEmpty(alleFpTilbakeKodeverk)['Venteårsak']
       : notEmpty(alleFpSakKodeverk)['Venteårsak'];
 
@@ -43,8 +44,8 @@ export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModa
       ventearsaker={venteårsaker}
       lukkModal={lukkModal}
       erTilbakekreving={
-        behandling.type === BehandlingType.TILBAKEKREVING ||
-        behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
+        behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
+        behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING
       }
     />
   );

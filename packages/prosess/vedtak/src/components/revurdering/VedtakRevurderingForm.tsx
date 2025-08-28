@@ -175,7 +175,7 @@ const finnInvilgetRevurderingTekst = (
   beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): string => {
-  if (ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD) {
+  if (ytelseTypeKode === 'ES') {
     return intl.formatMessage({ id: hentResultattekst(true, beregningResultat, originaltBeregningResultat) });
   }
   const konsekvens = lagKonsekvensForYtelsenTekst(alleKodeverk, konsekvenserForYtelsen);

@@ -18,7 +18,7 @@ import type { FormkravMellomlagretDataType } from './types/FormkravMellomlagretD
 const avsluttedeBehandlinger = [
   {
     uuid: '1',
-    type: BehandlingType.FORSTEGANGSSOKNAD,
+    type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     avsluttet: '2017-08-02T00:54:25.455',
   },
 ];

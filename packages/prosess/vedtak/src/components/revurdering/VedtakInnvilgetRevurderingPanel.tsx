@@ -30,7 +30,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => (
   <VStack gap="space-16">
-    {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD && beregningsresultat && 'antallBarn' in beregningsresultat && (
+    {ytelseTypeKode === 'ES' && beregningsresultat && 'antallBarn' in beregningsresultat && (
       <HStack gap="space-8">
         <VStack gap="space-4">
           <Detail>
@@ -46,7 +46,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
         </VStack>
       </HStack>
     )}
-    {(ytelseTypeKode === FagsakYtelseType.FORELDREPENGER || ytelseTypeKode === FagsakYtelseType.SVANGERSKAPSPENGER) && (
+    {(ytelseTypeKode === 'FP' || ytelseTypeKode === 'SVP') && (
       <>
         {revurderingsÅrsakString && (
           <VStack gap="space-4">

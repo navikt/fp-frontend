@@ -68,21 +68,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     brukerManglerAdresse: false,
   },
 };
 
 export const ForSvangerskapspenger: Story = {
   args: {
-    fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
+    fagsakYtelseType: 'SVP',
     brukerManglerAdresse: false,
   },
 };
 
 export const BrukerManglerAdresse: Story = {
   args: {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     brukerManglerAdresse: true,
   },
 };

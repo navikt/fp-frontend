@@ -69,7 +69,7 @@ export const StartdatoForForeldrepengerOgDekningsgradMedAnnenPart: Story = {
   args: {
     aksjonspunkterForPanel: [],
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
       bruker: {
         navn: 'Helga Utvikler',
       },
@@ -84,7 +84,7 @@ export const KanIkkeOverstyreDekningsgrad: Story = {
   args: {
     aksjonspunkterForPanel: [],
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
       bruker: {
         navn: 'Helga Utvikler',
       },
@@ -122,7 +122,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
       },
     ],
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
+      fagsakYtelseType: 'SVP',
     } as Fagsak,
   },
 };
@@ -184,7 +184,7 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
       },
     ],
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
       bruker: {
         navn: 'Helga Utvikler',
         kjønn: NavBrukerKjonn.KVINNE,
@@ -224,7 +224,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
       },
     ],
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
       bruker: {
         navn: 'Helga Utvikler',
         kjønn: NavBrukerKjonn.KVINNE,
@@ -264,7 +264,7 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
       },
     ],
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
       bruker: {
         navn: 'Helga Utvikler',
         kjønn: NavBrukerKjonn.KVINNE,

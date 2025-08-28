@@ -37,7 +37,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
   const varseltekst = watch('varseltekst');
   const videreBehandling = watch('videreBehandling');
 
-  const isForeldrepenger = fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER;
+  const isForeldrepenger = fagsak.fagsakYtelseType === 'FP';
 
   const previewMessage = (e: React.MouseEvent): void => {
     previewCallback({ mottaker: '', fritekst: varseltekst ?? ' ' });

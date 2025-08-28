@@ -32,23 +32,23 @@ type Story = StoryObj<typeof meta>;
 
 export const ForMorVedFødsel: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.FODSEL, ForeldreType.MOR),
+    soknadData: new SoknadData('ES', FamilieHendelseType.FODSEL, ForeldreType.MOR),
   },
 };
 
 export const ForFarVedFødsel: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.FODSEL, ForeldreType.FAR),
+    soknadData: new SoknadData('ES', FamilieHendelseType.FODSEL, ForeldreType.FAR),
   },
 };
 
 export const ForMorVedAdopsjon: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
+    soknadData: new SoknadData('ES', FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
   },
 };
 export const ForFarVedAdopsjon: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.ADOPSJON, ForeldreType.FAR),
+    soknadData: new SoknadData('ES', FamilieHendelseType.ADOPSJON, ForeldreType.FAR),
   },
 };

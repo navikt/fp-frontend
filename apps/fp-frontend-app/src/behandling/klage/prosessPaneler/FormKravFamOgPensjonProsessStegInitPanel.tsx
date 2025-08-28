@@ -25,8 +25,8 @@ export const FormKravFamOgPensjonProsessStegInitPanel = () => {
     .filter(b => b.status === BehandlingStatus.AVSLUTTET)
     .filter(
       b =>
-        (b.type !== BehandlingType.KLAGE || isKlageAvvist(b.behandlingsresultat?.type)) &&
-        b.type !== BehandlingType.ANKE,
+        (b.type !== BehandlingTypeEnum.KLAGE || isKlageAvvist(b.behandlingsresultat?.type)) &&
+        b.type !== BehandlingTypeEnum.ANKE,
     )
     .map(b => ({
       uuid: b.uuid,

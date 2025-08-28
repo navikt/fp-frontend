@@ -55,8 +55,8 @@ export const FagsakIndex = () => {
   const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuidFraUrl, behandling?.versjon);
   const fagsakBehandling = fagsakData?.getBehandling(behandlingUuidFraUrl);
   const erTilbakekreving =
-    fagsakBehandling?.type === BehandlingType.TILBAKEKREVING ||
-    fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+    fagsakBehandling?.type === BehandlingTypeEnum.TILBAKEKREVING ||
+    fagsakBehandling?.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;
 
   const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
   const [visSideMeny, setVisSideMeny] = useState(true);

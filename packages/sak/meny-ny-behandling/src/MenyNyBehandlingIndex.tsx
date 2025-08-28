@@ -9,7 +9,10 @@ import { type BehandlingOppretting, type FormValues, NyBehandlingModal } from '.
 
 import messages from '../i18n/nb_NO.json';
 
-const TILBAKEKREVING_BEHANDLINGSTYPER = [BehandlingType.TILBAKEKREVING, BehandlingType.TILBAKEKREVING_REVURDERING];
+const TILBAKEKREVING_BEHANDLINGSTYPER = [
+  BehandlingTypeEnum.TILBAKEKREVING,
+  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
+];
 
 const intl = createIntl(messages);
 

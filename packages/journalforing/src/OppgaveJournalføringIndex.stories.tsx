@@ -48,7 +48,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
     navn: 'Svingen sag og høvleri',
     id: '999999999',
   },
-  ytelseType: FagsakYtelseType.FORELDREPENGER,
+  ytelseType: 'FP',
   dokumenter: [
     {
       dokumentId: '999999999',
@@ -73,7 +73,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
     ? [
         {
           saksnummer: '125416592',
-          ytelseType: FagsakYtelseType.FORELDREPENGER,
+          ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-05-02',
           status: FagsakStatus.LOPENDE,
@@ -84,7 +84,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
         },
         {
           saksnummer: '125416597',
-          ytelseType: FagsakYtelseType.FORELDREPENGER,
+          ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-05-02',
           status: FagsakStatus.UNDER_BEHANDLING,
@@ -95,7 +95,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
         },
         {
           saksnummer: '155462542',
-          ytelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
+          ytelseType: 'SVP',
           opprettetDato: '2022-03-02',
           status: FagsakStatus.AVSLUTTET,
           familieHendelseJf: {
@@ -105,7 +105,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
         },
         {
           saksnummer: '175419131',
-          ytelseType: FagsakYtelseType.FORELDREPENGER,
+          ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-02-02',
           status: FagsakStatus.OPPRETTET,

@@ -8,7 +8,7 @@ describe('readOnlyUtils', () => {
     uuid: '1',
     versjon: 1,
     status: BehandlingStatus.BEHANDLING_UTREDES,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
+    type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     behandlingPåVent: false,
     behandlingHenlagt: false,
   } as Behandling;

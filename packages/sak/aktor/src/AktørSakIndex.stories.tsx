@@ -11,7 +11,7 @@ import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const FAGSAK = {
   saksnummer: '35425245',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: 'FP',
   status: FagsakStatus.UNDER_BEHANDLING,
   opprettet: '2020-01-01',
   endret: '2020-01-01',

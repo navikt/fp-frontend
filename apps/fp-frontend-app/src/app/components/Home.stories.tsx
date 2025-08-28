@@ -36,7 +36,7 @@ const AKTØR_INFO = {
   fagsaker: [
     {
       saksnummer: '123',
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
       status: FagsakStatus.OPPRETTET,
       aktørId: '1345345',
       barnFødt: '2024-01-03',
@@ -46,7 +46,7 @@ const AKTØR_INFO = {
     },
     {
       saksnummer: '252523',
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: 'ES',
       status: FagsakStatus.LOPENDE,
       aktørId: '1345345',
       barnFødt: '2024-01-03',

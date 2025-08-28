@@ -4723,8 +4723,8 @@ export type foreldrepenger_domene_modell_kodeverk_FaktaOmBeregningTilfelle =
 export type foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum = 'SKJUL' | 'OPPRETT' | 'FJERN';
 
 export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto = {
-  fom: string | null;
-  tom: string | null;
+  fom: string;
+  tom: string;
   erSlettet: boolean | null;
   erEndret: boolean | null;
   erLagtTil: boolean | null;
@@ -4836,7 +4836,7 @@ export type tjenester_behandling_historikk_HistorikkinnslagDto_Linje = {
 export type tjenester_behandling_historikk_HistorikkinnslagDto_Linje_Type = 'TEKST' | 'LINJESKIFT';
 
 export type tjenester_behandling_kontroll_dto_KontrollresultatDto = {
-  kontrollresultat: foreldrepenger_behandlingslager_risikoklassifisering_Kontrollresultat | null;
+  kontrollresultat: foreldrepenger_behandlingslager_risikoklassifisering_Kontrollresultat;
   iayFaresignaler: tjenester_behandling_kontroll_dto_KontrollresultatDto_FaresignalgruppeDto | null;
   medlFaresignaler: tjenester_behandling_kontroll_dto_KontrollresultatDto_FaresignalgruppeDto | null;
   faresignalVurdering: foreldrepenger_behandlingslager_risikoklassifisering_FaresignalVurdering | null;
@@ -4852,19 +4852,19 @@ export type tjenester_behandling_vedtak_dto_TotrinnsBeregningDto = {
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto = {
-  aksjonspunktKode: string | null;
-  opptjeningAktiviteter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto> | null;
+  aksjonspunktKode: string;
+  opptjeningAktiviteter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto>;
   beregningDto: tjenester_behandling_vedtak_dto_TotrinnsBeregningDto | null;
   besluttersBegrunnelse: string | null;
   totrinnskontrollGodkjent: boolean | null;
-  vurderPaNyttArsaker: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak> | null;
-  uttakPerioder: Array<foreldrepenger_domene_uttak_UttakPeriodeEndringDto> | null;
+  vurderPaNyttArsaker: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
+  uttakPerioder: Array<foreldrepenger_domene_uttak_UttakPeriodeEndringDto>;
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto = {
-  aktivitetType: string | null;
-  erEndring: boolean | null;
-  godkjent: boolean | null;
+  aktivitetType: string;
+  erEndring: boolean;
+  godkjent: boolean;
   arbeidsgiverReferanse: string | null;
   arbeidsgiverNavn: string | null;
   orgnr: string | null;
@@ -4872,7 +4872,7 @@ export type tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto = {
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto = {
-  skjermlenkeType: string | null;
+  skjermlenkeType: string;
   totrinnskontrollAksjonspunkter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto>;
 };
 
@@ -4899,8 +4899,8 @@ export type tjenester_fagsak_dto_FagsakFullDto = {
 };
 
 export type tjenester_fagsak_dto_FagsakMarkeringDto = {
-  fagsakMarkering: foreldrepenger_behandlingslager_fagsak_egenskaper_FagsakMarkering | null;
-  kortNavn: string | null;
+  fagsakMarkering: foreldrepenger_behandlingslager_fagsak_egenskaper_FagsakMarkering;
+  kortNavn: string;
 };
 
 export type tjenester_fagsak_dto_FagsakNotatDto = {

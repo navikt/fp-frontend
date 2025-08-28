@@ -51,11 +51,11 @@ const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: 
     return 'VedtakForm.ResultatKlageAvvist';
   }
 
-  if (ytelseType === FagsakYtelseType.ENGANGSSTONAD) {
+  if (ytelseType === 'ES') {
     return 'VedtakForm.EngangsstonadIkkeInnvilget';
   }
 
-  if (ytelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
+  if (ytelseType === 'SVP') {
     return 'VedtakForm.SvangerskapspengerIkkeInnvilget';
   }
 
@@ -70,11 +70,11 @@ const finnInnvilgetResultatText = (behandlingResultatTypeKode: string, ytelseTyp
     return 'VedtakForm.ResultatKlageMedhold';
   }
 
-  if (ytelseType === FagsakYtelseType.ENGANGSSTONAD) {
+  if (ytelseType === 'ES') {
     return 'VedtakForm.VilkarStatusInnvilgetEngangsstonad';
   }
 
-  if (ytelseType === FagsakYtelseType.SVANGERSKAPSPENGER) {
+  if (ytelseType === 'SVP') {
     return 'VedtakForm.SvangerskapspengerInnvilget';
   }
 

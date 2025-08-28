@@ -32,12 +32,12 @@ type Story = StoryObj<typeof meta>;
 
 export const ForMorVedFødsel: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, FamilieHendelseType.FODSEL, ForeldreType.MOR),
+    soknadData: new SoknadData('SVP', FamilieHendelseType.FODSEL, ForeldreType.MOR),
   },
 };
 
 export const ForFarVedFodsel: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.SVANGERSKAPSPENGER, FamilieHendelseType.FODSEL, ForeldreType.FAR),
+    soknadData: new SoknadData('SVP', FamilieHendelseType.FODSEL, ForeldreType.FAR),
   },
 };

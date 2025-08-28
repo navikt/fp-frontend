@@ -17,17 +17,17 @@ const withIntl = getIntlDecorator(messages);
 
 const BEHANDLINGER_PÅ_VENT = [
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     behandlingFrist: dayjs().format(ISO_DATE_FORMAT),
     antall: 10,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    fagsakYtelseType: 'ES',
     behandlingFrist: dayjs().add(5, 'd').format(ISO_DATE_FORMAT),
     antall: 4,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    fagsakYtelseType: 'ES',
     behandlingFrist: dayjs().add(5, 'w').format(ISO_DATE_FORMAT),
     antall: 14,
   },

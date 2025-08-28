@@ -93,7 +93,8 @@ export const TotrinnskontrollSakIndex = ({
   setBeslutterFormData,
 }: Props) => {
   const erTilbakekreving =
-    BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+    BehandlingTypeEnum.TILBAKEKREVING === behandling.type ||
+    BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandling.type;
 
   const submitHandler = (values: FormValues) => {
     const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning.map(apData => ({
@@ -132,7 +133,7 @@ export const TotrinnskontrollSakIndex = ({
 
   const sorterteTotrinnskontrollSkjermlenkeContext = erTilbakekreving
     ? sorterteSkjermlenkeCodesForTilbakekreving.flatMap(s => {
-        const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s.kode);
+        const context = behandling.totrinnskontrollÅrsaker?.find(el => el.skjermlenkeType === s.kode);
         return context ? [context] : [];
       })
     : behandling.totrinnskontrollÅrsaker;

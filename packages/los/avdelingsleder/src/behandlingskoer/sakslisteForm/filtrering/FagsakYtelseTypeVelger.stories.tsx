@@ -5,8 +5,6 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
-
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
@@ -35,8 +33,8 @@ const meta = {
   render: args => {
     const formMethods = useForm({
       defaultValues: {
-        [FagsakYtelseType.FORELDREPENGER]: true,
-        [FagsakYtelseType.ENGANGSSTONAD]: true,
+        ['FP']: true,
+        ['ES']: true,
       },
     });
 

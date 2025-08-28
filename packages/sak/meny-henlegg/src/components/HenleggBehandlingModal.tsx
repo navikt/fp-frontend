@@ -27,23 +27,29 @@ export type ForhåndsvisHenleggParams = {
 };
 
 const henleggArsakerPerBehandlingType = {
-  [BehandlingType.KLAGE]: [BehandlingResultatType.HENLAGT_KLAGE_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
-  [BehandlingType.ANKE]: [BehandlingResultatType.HENLAGT_ANKE_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
-  [BehandlingType.DOKUMENTINNSYN]: [
+  [BehandlingTypeEnum.KLAGE]: [
+    BehandlingResultatType.HENLAGT_KLAGE_TRUKKET,
+    BehandlingResultatType.HENLAGT_FEILOPPRETTET,
+  ],
+  [BehandlingTypeEnum.ANKE]: [
+    BehandlingResultatType.HENLAGT_ANKE_TRUKKET,
+    BehandlingResultatType.HENLAGT_FEILOPPRETTET,
+  ],
+  [BehandlingTypeEnum.DOKUMENTINNSYN]: [
     BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
     BehandlingResultatType.HENLAGT_FEILOPPRETTET,
   ],
-  [BehandlingType.TILBAKEKREVING]: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
-  [BehandlingType.TILBAKEKREVING_REVURDERING]: [
+  [BehandlingTypeEnum.TILBAKEKREVING]: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
+  [BehandlingTypeEnum.TILBAKEKREVING_REVURDERING]: [
     BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_MED_BREV,
     BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_UTEN_BREV,
   ],
-  [BehandlingType.REVURDERING]: [
+  [BehandlingTypeEnum.REVURDERING]: [
     BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
     BehandlingResultatType.HENLAGT_FEILOPPRETTET,
     BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
   ],
-  [BehandlingType.FORSTEGANGSSOKNAD]: [
+  [BehandlingTypeEnum.FORSTEGANGSSOKNAD]: [
     BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
     BehandlingResultatType.HENLAGT_FEILOPPRETTET,
     BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
@@ -185,7 +191,7 @@ const forhåndsvisHenleggBehandlingDoc =
   };
 
 const showHenleggelseFritekst = (behandlingTypeKode: string, årsakKode?: string): boolean =>
-  BehandlingType.TILBAKEKREVING_REVURDERING === behandlingTypeKode &&
+  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandlingTypeKode &&
   BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === årsakKode;
 
 const disableHovedKnapp = (
@@ -201,10 +207,10 @@ const disableHovedKnapp = (
 };
 
 const getShowLink = (behandlingType: BehandlingType, arsakKode?: string, fritekst?: string): boolean => {
-  if (behandlingType === BehandlingType.TILBAKEKREVING) {
+  if (behandlingType === BehandlingTypeEnum.TILBAKEKREVING) {
     return BehandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
   }
-  if (behandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
+  if (behandlingType === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
     return BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
   }
 
@@ -225,9 +231,7 @@ const getHenleggÅrsaker = (
   const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
   return typerForBehandlingType
     .filter(
-      type =>
-        ytelseType !== FagsakYtelseType.ENGANGSSTONAD ||
-        (ytelseType === FagsakYtelseType.ENGANGSSTONAD && type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER),
+      type => ytelseType !== 'ES' || (ytelseType === 'ES' && type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER),
     )
     .flatMap(type => {
       const typer = behandlingResultatTyper.find(brt => brt.kode === type);

@@ -67,8 +67,8 @@ export const Default: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
-        fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
             andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
@@ -92,8 +92,8 @@ export const MedToSakslister: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
-        fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
             andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
@@ -110,8 +110,8 @@ export const MedToSakslister: Story = {
       {
         sakslisteId: 2,
         navn: 'Saksliste 2',
-        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.KLAGE],
-        fagsakYtelseTyper: [FagsakYtelseType.SVANGERSKAPSPENGER],
+        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.KLAGE],
+        fagsakYtelseTyper: ['SVP'],
         andreKriterier: [
           {
             andreKriterierType: AndreKriterierType.UTBETALING_TIL_BRUKER,
@@ -187,8 +187,8 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
-        fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
             andreKriterierType: AndreKriterierType.TIL_BESLUTTER,

@@ -71,7 +71,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
               ))}
             </RhfRadioGroupNew>
 
-            {selectedFagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && (
+            {selectedFagsakYtelseType !== 'SVP' && (
               <RhfRadioGroupNew
                 name="familieHendelseType"
                 control={formMethods.control}

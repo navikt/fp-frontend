@@ -15,7 +15,7 @@ import messages from '../../../i18n/nb_NO.json';
 
 const FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE = {
   saksnummer: '1234567',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: 'FP',
   bruker: { navn: 'Kari Nordmann' },
   annenPart: { navn: 'Ola Nordmann' },
   relasjonsRolleType: RelasjonsRolleType.MOR,

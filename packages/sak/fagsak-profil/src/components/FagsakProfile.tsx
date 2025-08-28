@@ -9,7 +9,7 @@ import type { KodeverkMedNavn } from '@navikt/fp-types';
 import { SidePanelProfileKnapp } from './SidePanelProfileKnapp.tsx';
 
 const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean => {
-  const erForeldrepenger = saksKode === FagsakYtelseType.FORELDREPENGER;
+  const erForeldrepenger = saksKode === 'FP';
   const gyldigDekningsGrad = dekningsgrad === 100 || dekningsgrad === 80;
 
   return erForeldrepenger && gyldigDekningsGrad;

@@ -5,50 +5,50 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { TilBehandlingPanel } from './TilBehandlingPanel';
 
 import messages from '../../../i18n/nb_NO.json';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 const withIntl = getIntlDecorator(messages);
 
 const OPPGAVER_PER_DATO = [
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+    fagsakYtelseType: 'FP',
+    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     opprettetDato: dayjs().format(ISO_DATE_FORMAT),
     antall: 1,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+    fagsakYtelseType: 'FP',
+    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     opprettetDato: dayjs().subtract(3, 'd').format(ISO_DATE_FORMAT),
     antall: 2,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.KLAGE,
+    fagsakYtelseType: 'FP',
+    behandlingType: BehandlingTypeEnum.KLAGE,
     opprettetDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
     antall: 2,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+    fagsakYtelseType: 'FP',
+    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     opprettetDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
     antall: 6,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.DOKUMENTINNSYN,
+    fagsakYtelseType: 'FP',
+    behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
     opprettetDato: dayjs().subtract(10, 'd').format(ISO_DATE_FORMAT),
     antall: 3,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.DOKUMENTINNSYN,
+    fagsakYtelseType: 'FP',
+    behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
     opprettetDato: dayjs().subtract(16, 'd').format(ISO_DATE_FORMAT),
     antall: 3,
   },

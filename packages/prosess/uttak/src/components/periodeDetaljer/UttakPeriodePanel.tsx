@@ -213,7 +213,7 @@ export const UttakPeriodePanel = ({
     : perioderAnnenpart.some(p => !erEøsPeriode(p) && p.flerbarnsdager);
 
   const erRevurderingFørEndringsdato =
-    behandling.type === BehandlingType.REVURDERING && valgtPeriode.tom < endringsdato;
+    behandling.type === BehandlingTypeEnum.REVURDERING && valgtPeriode.tom < endringsdato;
 
   const visForrigePeriode = () => {
     setValgtPeriodeIndex(index => (index === 0 || index === undefined ? index : index - 1));

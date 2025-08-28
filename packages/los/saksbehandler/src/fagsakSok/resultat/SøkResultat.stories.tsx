@@ -44,7 +44,7 @@ export const Default: Story = {
       {
         saksnummer: '12213234',
         aktørId: '',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+        fagsakYtelseType: 'FP',
         status: FagsakStatus.UNDER_BEHANDLING,
         person: {
           navn: 'Espen Utvikler',
@@ -71,10 +71,10 @@ export const Default: Story = {
         personnummer: '1010',
         navn: 'Espen Utvikler',
         system: 'SAK',
-        behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
+        behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
         opprettetTidspunkt: '2020-01-01',
         behandlingsfrist: '2020-01-01',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+        fagsakYtelseType: 'FP',
         erTilSaksbehandling: true,
         behandlingId: '12344',
         andreKriterier: [],

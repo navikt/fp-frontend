@@ -47,7 +47,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   const fagsakBehandlingerInfo = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
   const harApenRevurdering = fagsakBehandlingerInfo.some(
-    b => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET,
+    b => b.type === BehandlingTypeEnum.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET,
   );
 
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);

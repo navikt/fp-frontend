@@ -30,11 +30,7 @@ type RadioOption = {
   disabled: boolean;
 };
 
-const ytelseSelectValg: FagsakYtelseType[] = [
-  FagsakYtelseType.ENGANGSSTONAD,
-  FagsakYtelseType.FORELDREPENGER,
-  FagsakYtelseType.SVANGERSKAPSPENGER,
-];
+const ytelseSelectValg: FagsakYtelseType[] = ['ES', 'FP', 'SVP'];
 
 export const transformValues = (
   values: JournalføringFormValues,

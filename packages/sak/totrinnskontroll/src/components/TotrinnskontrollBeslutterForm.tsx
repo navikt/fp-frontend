@@ -115,8 +115,8 @@ export const TotrinnskontrollBeslutterForm = ({
   beslutterFormData,
   setBeslutterFormData,
 }: Props) => {
-  const erKlage = behandling && behandling.type === BehandlingType.KLAGE;
-  const erAnke = behandling && behandling.type === BehandlingType.ANKE;
+  const erKlage = behandling && behandling.type === BehandlingTypeEnum.KLAGE;
+  const erAnke = behandling && behandling.type === BehandlingTypeEnum.ANKE;
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
     [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
     behandling.behandlingsresultat,

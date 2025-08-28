@@ -62,7 +62,7 @@ const ALLE_BEHANDLINGER = [
     behandlingKøet: false,
     behandlingPåVent: false,
     kanHenleggeBehandling: true,
-    type: BehandlingType.REVURDERING,
+    type: BehandlingTypeEnum.REVURDERING,
     status: BehandlingStatus.BEHANDLING_UTREDES,
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
@@ -81,7 +81,7 @@ const ALLE_BEHANDLINGER = [
 
 const FAGSAK = {
   saksnummer: '123',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: 'FP',
   status: FagsakStatus.UNDER_BEHANDLING,
   behandlinger: ALLE_BEHANDLINGER,
   sakSkalTilInfotrygd: false,

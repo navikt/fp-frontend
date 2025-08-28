@@ -15,7 +15,8 @@ export const useKodeverk = (behandlingType?: string): AlleKodeverk | AlleKodever
   const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
 
   const erTilbakekreving =
-    BehandlingType.TILBAKEKREVING === behandlingType || BehandlingType.TILBAKEKREVING_REVURDERING === behandlingType;
+    BehandlingTypeEnum.TILBAKEKREVING === behandlingType ||
+    BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandlingType;
   return notEmpty(erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak);
 };
 

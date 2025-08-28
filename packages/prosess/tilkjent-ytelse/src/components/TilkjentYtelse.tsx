@@ -207,7 +207,7 @@ export const TilkjentYtelse = ({
           valgtBeregningsresultatPeriode={valgtPeriode.periode}
           velgNestePeriode={velgNestePeriode}
           velgForrigePeriode={velgForrigePeriode}
-          erSøknadSvangerskapspenger={fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER}
+          erSøknadSvangerskapspenger={fagsak.fagsakYtelseType === 'SVP'}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           lukkPeriode={lukkPeriode}
         />

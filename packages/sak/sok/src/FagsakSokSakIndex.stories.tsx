@@ -11,7 +11,7 @@ import { FagsakSokSakIndex } from './FagsakSokSakIndex';
 
 const defaultSak = {
   saksnummer: '1',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: 'FP',
   relasjonsRolleType: '-',
   status: FagsakStatus.OPPRETTET,
   aktørId: '',
@@ -62,12 +62,12 @@ export const Default: Story = {
       {
         ...defaultSak,
         saksnummer: '1',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+        fagsakYtelseType: 'FP',
       },
       {
         ...defaultSak,
         saksnummer: '2',
-        fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+        fagsakYtelseType: 'ES',
       },
     ],
   },

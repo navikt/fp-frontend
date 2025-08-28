@@ -65,7 +65,7 @@ export const PanelForInnvilgetVedtak: Story = {
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-          tittel: BehandlingType.FORSTEGANGSSOKNAD,
+          tittel: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
           opprettetDato: '2019-01-01',
         },
       ],
@@ -88,7 +88,7 @@ export const PanelForAvvistVedtak: Story = {
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-          tittel: BehandlingType.FORSTEGANGSSOKNAD,
+          tittel: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
           opprettetDato: '2019-01-01',
         },
       ],
@@ -120,7 +120,7 @@ export const PanelForAvvistVedtakReadonly: Story = {
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-          tittel: BehandlingType.FORSTEGANGSSOKNAD,
+          tittel: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
           opprettetDato: '2019-01-01',
         },
       ],

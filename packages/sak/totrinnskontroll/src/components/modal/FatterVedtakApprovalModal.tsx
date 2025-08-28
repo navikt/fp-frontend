@@ -14,16 +14,16 @@ const getInfoTextCode = (
   isOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
 ) => {
-  if (behandlingtypeKode === BehandlingType.TILBAKEKREVING) {
+  if (behandlingtypeKode === BehandlingTypeEnum.TILBAKEKREVING) {
     return 'FatterVedtakApprovalModal.Tilbakekreving';
   }
-  if (behandlingtypeKode === BehandlingType.TILBAKEKREVING_REVURDERING) {
+  if (behandlingtypeKode === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
     return 'FatterVedtakApprovalModal.TilbakekrevingRevurdering';
   }
-  if (behandlingtypeKode === BehandlingType.KLAGE) {
+  if (behandlingtypeKode === BehandlingTypeEnum.KLAGE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
-  if (behandlingtypeKode === BehandlingType.ANKE) {
+  if (behandlingtypeKode === BehandlingTypeEnum.ANKE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionAnke';
   }
   if (harSammeResultatSomOriginalBehandling) {
@@ -39,10 +39,10 @@ const getInfoTextCode = (
 };
 
 const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: BehandlingType) => {
-  if (behandlingTypeKode === BehandlingType.KLAGE) {
+  if (behandlingTypeKode === BehandlingTypeEnum.KLAGE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
-  if (behandlingTypeKode === BehandlingType.ANKE) {
+  if (behandlingTypeKode === BehandlingTypeEnum.ANKE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionAnke';
   }
   if (isOpphor) {

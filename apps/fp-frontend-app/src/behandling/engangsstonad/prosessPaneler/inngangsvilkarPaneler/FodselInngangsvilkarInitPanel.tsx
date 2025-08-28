@@ -44,7 +44,7 @@ export const FodselInngangsvilkarInitPanel = () => {
       hentInngangsvilkarPanelTekst={paneltekst}
     >
       <FodselVilkarProsessIndex
-        ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD}
+        ytelseTypeKode={'ES'}
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         status={standardPanelProps.status}
         vilkar={standardPanelProps.vilkar}

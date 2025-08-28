@@ -61,7 +61,7 @@ export const VedtakProsessIndex = ({
 
   return (
     <RawIntlProvider value={intl}>
-      {behandling.type !== BehandlingType.REVURDERING ? (
+      {behandling.type !== BehandlingTypeEnum.REVURDERING ? (
         <VedtakForm
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}

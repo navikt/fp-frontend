@@ -10,6 +10,7 @@ import { type Location } from 'history';
 import type { SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
+  foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
   TotrinnskontrollSkjermlenkeContext,
@@ -23,7 +24,7 @@ const VurderPåNyttPunkter = ({
   vurderPaNyttArsaker,
   vurderArsaker,
 }: {
-  vurderPaNyttArsaker: VurderÅrsak[] | undefined;
+  vurderPaNyttArsaker: foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak[];
   vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[] | KodeverkMedNavnTilbakekreving<'VurderÅrsak'>[];
 }) => (
   <div className={styles.approvalItem}>
@@ -58,7 +59,6 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
   lagLenke,
 }: Props) => {
   const intl = useIntl();
-
   return (
     <>
       <div className={styles.resultatFraGodkjenningTextContainer}>
@@ -115,7 +115,9 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
                         />
                       )}
                     </div>
-                    <pre className={styles.approvalItem}>{decodeHtmlEntity(aksjonspunkt.besluttersBegrunnelse)}</pre>
+                    <pre className={styles.approvalItem}>
+                      {decodeHtmlEntity(aksjonspunkt.besluttersBegrunnelse ?? undefined)}
+                    </pre>
                   </div>
                 );
               })}

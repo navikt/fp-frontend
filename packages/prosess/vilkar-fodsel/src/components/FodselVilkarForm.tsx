@@ -67,10 +67,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
   });
 
   const alleAvslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.FODSELSVILKARET_MOR];
-  const avslagsarsaker = getFodselVilkarAvslagsarsaker(
-    ytelseTypeKode === FagsakYtelseType.FORELDREPENGER,
-    alleAvslagsarsaker,
-  );
+  const avslagsarsaker = getFodselVilkarAvslagsarsaker(ytelseTypeKode === 'FP', alleAvslagsarsaker);
 
   const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;

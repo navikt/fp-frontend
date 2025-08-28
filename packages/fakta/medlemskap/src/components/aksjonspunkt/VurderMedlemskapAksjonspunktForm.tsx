@@ -89,7 +89,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
         <VStack gap={isReadOnly ? '2' : '6'}>
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
-            erRevurdering={behandling.type === BehandlingType.REVURDERING}
+            erRevurdering={behandling.type === BehandlingTypeEnum.REVURDERING}
             avslagsarsaker={avslagsarsaker}
             readOnly={isReadOnly}
             ytelse={fagsak.fagsakYtelseType}

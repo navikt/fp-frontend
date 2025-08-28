@@ -27,7 +27,7 @@ export const lagVurderingsAlternativer = (
   erForutgående: boolean,
   erRevurdering: boolean,
 ): RadioOption[] => {
-  if (ytelse === FagsakYtelseType.ENGANGSSTONAD) {
+  if (ytelse === 'ES') {
     return erForutgående ? [oppfylt, delvisOppfylt, ikkeOppfylt] : [oppfylt, ikkeOppfylt];
   }
   if (erRevurdering) {

@@ -59,7 +59,7 @@ const defaultAksjonspunkter = [defaultAksjonspunkt];
 const defaultBehandling = {
   uuid: '1',
   versjon: 1,
-  type: BehandlingType.FORSTEGANGSSOKNAD,
+  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
   status: BehandlingStatus.BEHANDLING_UTREDES,
   språkkode: 'NB',
   behandlingsresultat: {
@@ -140,7 +140,7 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
     behandling: defaultBehandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -154,7 +154,7 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -175,7 +175,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
@@ -193,7 +193,7 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -212,7 +212,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -224,7 +224,7 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
     behandling: defaultBehandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -254,7 +254,7 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -312,7 +312,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
     },
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -455,7 +455,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       },
     ],
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -474,7 +474,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: 'ES',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -492,7 +492,7 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: 'ES',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -507,7 +507,7 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: 'ES',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -522,7 +522,7 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: 'ES',
     } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -555,7 +555,7 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: 'ES',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -570,7 +570,7 @@ export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOversty
   args: {
     behandling: defaultBehandling,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
+      fagsakYtelseType: 'SVP',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -585,7 +585,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
@@ -597,7 +597,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -608,7 +608,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
@@ -621,7 +621,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -632,7 +632,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
@@ -644,7 +644,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -655,7 +655,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
@@ -668,7 +668,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -679,7 +679,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
@@ -690,7 +690,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -701,7 +701,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
@@ -710,7 +710,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
     } as Behandling,
     originaltBeregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -721,7 +721,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       status: BehandlingStatus.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
@@ -730,7 +730,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
     } as Behandling,
     originaltBeregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -741,7 +741,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
         opphørsdato: '2024-11-01',
@@ -750,7 +750,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -761,7 +761,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
@@ -770,7 +770,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -792,7 +792,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
@@ -802,7 +802,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -832,7 +832,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
         opphørsdato: '2024-11-01',
@@ -841,7 +841,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
@@ -874,7 +874,7 @@ export const LegacyOverstyring: Story = {
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -896,7 +896,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
     } as Fagsak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
@@ -909,7 +909,7 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
       saksnummer: '1234567',
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+      fagsakYtelseType: 'FP',
       bruker: { navn: 'Kari Nordmann' },
       annenPart: { navn: 'Ola Nordmann' },
       relasjonsRolleType: RelasjonsRolleType.MOR,

@@ -12,7 +12,7 @@ import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 export const fagsakFullFpsak: Fagsak = {
   saksnummer: '1',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: 'FP',
   relasjonsRolleType: RelasjonsRolleType.MOR,
   status: FagsakStatus.UNDER_BEHANDLING,
   aktørId: '9921487132273',
@@ -49,23 +49,23 @@ export const fagsakFullFpsak: Fagsak = {
   fagsakMarkeringer: [],
   behandlingTypeKanOpprettes: [
     {
-      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+      behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: BehandlingType.REVURDERING,
+      behandlingType: BehandlingTypeEnum.REVURDERING,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: BehandlingType.ANKE,
+      behandlingType: BehandlingTypeEnum.ANKE,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: BehandlingType.KLAGE,
+      behandlingType: BehandlingTypeEnum.KLAGE,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: BehandlingType.DOKUMENTINNSYN,
+      behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
       kanOppretteBehandling: true,
     },
   ],
@@ -73,7 +73,7 @@ export const fagsakFullFpsak: Fagsak = {
     {
       uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       versjon: 26,
-      type: BehandlingType.FORSTEGANGSSOKNAD,
+      type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
       status: BehandlingStatus.BEHANDLING_UTREDES,
       opprettet: '2025-03-05T16:42:58',
       avsluttet: null,

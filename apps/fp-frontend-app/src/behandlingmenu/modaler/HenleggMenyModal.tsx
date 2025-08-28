@@ -35,7 +35,8 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
   });
 
   const behandlingresultatTyper =
-    behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
+    behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
+    behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING
       ? notEmpty(alleFpTilbakeKodeverk)['BehandlingResultatType']
       : notEmpty(alleFpSakKodeverk)['BehandlingResultatType'];
 
@@ -76,7 +77,8 @@ const useVisForhandsvisningAvHenleggelse = (behandling: BehandlingAppKontekst) =
   });
 
   const erTilbakekreving =
-    BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+    BehandlingTypeEnum.TILBAKEKREVING === behandling.type ||
+    BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandling.type;
 
   return (data: ForhåndsvisHenleggParams): void => {
     if (erTilbakekreving) {

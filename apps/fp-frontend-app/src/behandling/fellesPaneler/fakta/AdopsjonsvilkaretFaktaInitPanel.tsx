@@ -42,7 +42,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
         <AdopsjonFaktaIndex
           familiehendelse={familiehendelse}
           soknad={søknad}
-          isForeldrepengerFagsak={fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
+          isForeldrepengerFagsak={fagsak.fagsakYtelseType === 'FP'}
           submittable={standardPanelProps.submittable}
         />
       ) : (

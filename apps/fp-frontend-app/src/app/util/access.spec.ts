@@ -25,7 +25,7 @@ describe('access', () => {
 
     const validBehandlingStatuser = [BehandlingStatus.OPPRETTET, BehandlingStatus.BEHANDLING_UTREDES];
     const validBehandlingStatus = validBehandlingStatuser[0];
-    const validBehandlingTyper = BehandlingType.FORSTEGANGSSOKNAD;
+    const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
 
     it('saksbehandler skal ha skrivetilgang', () => {
       const accessForSaksbehandler = writeAccess(
@@ -69,7 +69,7 @@ describe('access', () => {
 
     const validBehandlingStatuser = [BehandlingStatus.BEHANDLING_UTREDES];
     const validBehandlingStatus = validBehandlingStatuser[0];
-    const validBehandlingTyper = BehandlingType.FORSTEGANGSSOKNAD;
+    const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
 
     const saksbehandlerOgOverstyrerAnsatt = { ...saksbehandlerAnsatt, kanOverstyre: true };
     const veilederOgOverstyrerAnsatt = { ...veilederAnsatt, kanOverstyre: false };

@@ -7,32 +7,32 @@ import { MenyNyBehandlingIndex } from './MenyNyBehandlingIndex';
 
 const BEHANDLINGSTYPER = [
   {
-    kode: BehandlingType.FORSTEGANGSSOKNAD,
+    kode: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Førstegangssøknad',
   },
   {
-    kode: BehandlingType.REVURDERING,
+    kode: BehandlingTypeEnum.REVURDERING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Revurdering',
   },
   {
-    kode: BehandlingType.KLAGE,
+    kode: BehandlingTypeEnum.KLAGE,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Klage',
   },
   {
-    kode: BehandlingType.DOKUMENTINNSYN,
+    kode: BehandlingTypeEnum.DOKUMENTINNSYN,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Dokumentinnsyn',
   },
   {
-    kode: BehandlingType.TILBAKEKREVING,
+    kode: BehandlingTypeEnum.TILBAKEKREVING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Tilbakekreving',
   },
   {
-    kode: BehandlingType.TILBAKEKREVING_REVURDERING,
+    kode: BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Tilbakekreving revurdering',
   },
@@ -40,15 +40,15 @@ const BEHANDLINGSTYPER = [
 
 const BEHANDLING_OPPRETTING = [
   {
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     kanOppretteBehandling: true,
   },
   {
-    behandlingType: BehandlingType.REVURDERING,
+    behandlingType: BehandlingTypeEnum.REVURDERING,
     kanOppretteBehandling: true,
   },
   {
-    behandlingType: BehandlingType.KLAGE,
+    behandlingType: BehandlingTypeEnum.KLAGE,
     kanOppretteBehandling: true,
   },
 ];
@@ -72,7 +72,7 @@ const meta = {
   args: {
     lagNyBehandling: action('button-click'),
     lukkModal: action('button-click'),
-    ytelseType: FagsakYtelseType.FORELDREPENGER,
+    ytelseType: 'FP',
     saksnummer: '123',
     behandlingUuid: '1',
     behandlingstyper: BEHANDLINGSTYPER,

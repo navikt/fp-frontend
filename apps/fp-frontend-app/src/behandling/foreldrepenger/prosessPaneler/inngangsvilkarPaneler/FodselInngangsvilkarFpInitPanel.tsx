@@ -45,7 +45,7 @@ export const FodselInngangsvilkarFpInitPanel = () => {
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
     >
       <FodselVilkarProsessIndex
-        ytelseTypeKode={FagsakYtelseType.FORELDREPENGER}
+        ytelseTypeKode={'FP'}
         status={standardPanelProps.status}
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         vilkar={standardPanelProps.vilkar}

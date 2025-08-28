@@ -49,7 +49,7 @@ const meta = {
   component: MenyHenleggIndex,
   args: {
     behandlingResultatTyper: BEHANDLINGRESULTAT_TYPER,
-    ytelseType: FagsakYtelseType.FORELDREPENGER,
+    ytelseType: 'FP',
     gaaTilSokeside: action('button-click'),
     henleggBehandling: () => {
       action('button-click');
@@ -68,7 +68,7 @@ export const ForFørstegangssøknad: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingType.FORSTEGANGSSOKNAD,
+      type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     } as Behandling,
   },
 };
@@ -78,7 +78,7 @@ export const ForKlage: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingType.KLAGE,
+      type: BehandlingTypeEnum.KLAGE,
     } as Behandling,
   },
 };
@@ -88,7 +88,7 @@ export const ForInnsyn: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingType.DOKUMENTINNSYN,
+      type: BehandlingTypeEnum.DOKUMENTINNSYN,
     } as Behandling,
   },
 };
@@ -98,7 +98,7 @@ export const ForTilbakekreving: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingType.TILBAKEKREVING,
+      type: BehandlingTypeEnum.TILBAKEKREVING,
     } as Behandling,
   },
 };
@@ -108,7 +108,7 @@ export const ForTilbakekrevingRevurdering: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingType.TILBAKEKREVING_REVURDERING,
+      type: BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
     } as Behandling,
   },
 };
@@ -118,7 +118,7 @@ export const ForRevurdering: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
     } as Behandling,
   },
 };

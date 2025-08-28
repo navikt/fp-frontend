@@ -27,14 +27,14 @@ export {
   isKlageAvvist,
 } from './src/behandlingResultatType';
 export { BehandlingResultatTypeTilbakekreving } from './src/behandlingResultatTypeTilbakekreving';
-export { BehandlingStatus } from './src/behandlingStatus';
-export { BehandlingType } from './src/behandlingType';
+export { type BehandlingStatus, BehandlingStatusEnum } from './src/behandlingStatus';
+export { type BehandlingType, BehandlingTypeEnum } from './src/behandlingType';
 export { BeregningsgrunnlagAndeltype } from './src/beregningsgrunnlagAndeltyper';
 export { Dekningsgrad } from './src/dekningsgrad';
 export { DiskresjonskodeType } from './src/diskresjonskodeType';
 export { DokumentMalType } from './src/dokumentMalType';
-export { FagsakStatus } from './src/fagsakStatus';
-export { FagsakYtelseType } from './src/fagsakYtelseType';
+export { type FagsakStatus, FagsakStatusEnum } from './src/fagsakStatus';
+export { type FagsakYtelseType } from './src/fagsakYtelseType';
 export { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
 export { FamilieHendelseType } from './src/familieHendelseType';
 export { ForeldelseVurderingType } from './src/foreldelseVurderingType';

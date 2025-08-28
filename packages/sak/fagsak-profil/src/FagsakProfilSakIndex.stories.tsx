@@ -27,7 +27,7 @@ export const Default: Story = {
   args: {
     saksnummer: '232341251',
     fagsakYtelseType: {
-      kode: FagsakYtelseType.FORELDREPENGER,
+      kode: 'FP',
       kodeverk: 'FAGSAK_YTELSE_TYPE',
       navn: 'Foreldrepenger',
     },

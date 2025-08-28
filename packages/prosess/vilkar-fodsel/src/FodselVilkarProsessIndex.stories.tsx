@@ -24,7 +24,7 @@ const meta = {
         lovReferanse: '§§Dette er en lovreferanse',
       },
     ] as Vilkar[],
-    ytelseTypeKode: FagsakYtelseType.FORELDREPENGER,
+    ytelseTypeKode: 'FP',
   },
   render: args => <FodselVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselVilkarProsessIndex>>;

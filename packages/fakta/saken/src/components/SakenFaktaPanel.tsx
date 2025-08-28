@@ -84,7 +84,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             />
           )}
-          {fagsak.fagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && !!soknad && (
+          {fagsak.fagsakYtelseType !== 'SVP' && !!soknad && (
             <StartdatoForForeldrepengerperiodenForm
               aksjonspunkt={aksjonspunkterForPanel.find(
                 ap => ap.definisjon === AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
@@ -96,7 +96,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
             />
           )}
         </HStack>
-        {soknad && !automatiskAp && fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER && (
+        {soknad && !automatiskAp && fagsak.fagsakYtelseType === 'FP' && (
           <DekningradForm
             søknad={soknad}
             fagsak={fagsak}

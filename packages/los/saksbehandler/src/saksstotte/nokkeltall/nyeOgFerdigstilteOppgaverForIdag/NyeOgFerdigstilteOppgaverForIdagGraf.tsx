@@ -7,12 +7,12 @@ import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 import type { NyeOgFerdigstilteOppgaver } from '../../../typer/nyeOgFerdigstilteOppgaverTsType';
 
 const behandlingstypeOrder = [
-  BehandlingType.TILBAKEKREVING_REVURDERING,
-  BehandlingType.TILBAKEKREVING,
-  BehandlingType.DOKUMENTINNSYN,
-  BehandlingType.KLAGE,
-  BehandlingType.REVURDERING,
-  BehandlingType.FORSTEGANGSSOKNAD,
+  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
+  BehandlingTypeEnum.TILBAKEKREVING,
+  BehandlingTypeEnum.DOKUMENTINNSYN,
+  BehandlingTypeEnum.KLAGE,
+  BehandlingTypeEnum.REVURDERING,
+  BehandlingTypeEnum.FORSTEGANGSSOKNAD,
 ];
 
 interface Props {
@@ -24,7 +24,7 @@ interface Props {
 export const NyeOgFerdigstilteOppgaverForIdagGraf = ({ height, nyeOgFerdigstilteOppgaver, behandlingTyper }: Props) => {
   const intl = useIntl();
   const behandlingTypeNavnForYAkse = behandlingstypeOrder.map(bType => {
-    if (bType === BehandlingType.FORSTEGANGSSOKNAD) {
+    if (bType === BehandlingTypeEnum.FORSTEGANGSSOKNAD) {
       return intl.formatMessage({ id: 'NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling' });
     }
 
