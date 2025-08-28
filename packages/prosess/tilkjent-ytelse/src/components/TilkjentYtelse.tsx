@@ -15,7 +15,7 @@ import { BodyShort, Button, HStack, Timeline, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { FagsakYtelseType, SoknadType } from '@navikt/fp-kodeverk';
+import { SoknadType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,

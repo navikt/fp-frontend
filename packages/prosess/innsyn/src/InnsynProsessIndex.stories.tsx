@@ -6,7 +6,7 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   AksjonspunktType,
-  BehandlingType,
+  BehandlingTypeEnum,
   InnsynResultatType,
   Kommunikasjonsretning,
   VilkarType,

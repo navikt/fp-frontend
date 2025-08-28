@@ -1,11 +1,11 @@
-import type {
-  BehandlingArsakType,
-  BehandlingResultatTypeTilbakekreving,
-  BehandlingType,
-  HistorikkAktor,
-  SkjermlenkeTypeTilbakekreving,
-  VenteArsakType,
-  VurderÅrsak,
+import {
+  BehandlingArsakTypeEnum,
+  type BehandlingResultatTypeTilbakekreving,
+  BehandlingTypeEnum,
+  type HistorikkAktor,
+  type SkjermlenkeTypeTilbakekreving,
+  type VenteArsakType,
+  type VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
 import type { VergeType } from './vergeTsType';
@@ -14,8 +14,8 @@ import type { VergeType } from './vergeTsType';
 
 //Mapping mellom KodeverkTypeTilbakekreving og enums/union-types med verdier
 type KodeverkEnumMap = {
-  BehandlingType: BehandlingType;
-  BehandlingÅrsakType: BehandlingArsakType;
+  BehandlingType: BehandlingTypeEnum;
+  BehandlingÅrsakType: BehandlingArsakTypeEnum;
   BehandlingResultatType: BehandlingResultatTypeTilbakekreving;
   HistorikkAktør: HistorikkAktor;
   SkjermlenkeType: SkjermlenkeTypeTilbakekreving;

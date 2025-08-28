@@ -4797,7 +4797,7 @@ export type tjenester_behandling_dto_behandling_FagsakBehandlingDto = {
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto> | null;
   links: Array<rest_ResourceLink>;
   behandlingTillatteOperasjoner: tjenester_behandling_dto_BehandlingOperasjonerDto | null;
-  brevmaler: Array<foreldrepenger_kontrakter_formidling_v3_BrevmalDto> | null;
+  brevmaler: Array<foreldrepenger_kontrakter_formidling_v3_BrevmalDto>;
   totrinnskontrollÅrsaker: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto>;
   totrinnskontrollReadonly: boolean | null;
   risikoAksjonspunkt: tjenester_behandling_aksjonspunkt_AksjonspunktDto | null;

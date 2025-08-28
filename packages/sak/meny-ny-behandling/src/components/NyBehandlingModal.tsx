@@ -6,7 +6,7 @@ import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingArsakTypeEnum, BehandlingType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
