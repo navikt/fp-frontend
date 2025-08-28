@@ -270,8 +270,8 @@ export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
 };
 
 export type tjenester_behandling_dto_behandling_BehandlingÅrsakDto = {
-  erAutomatiskRevurdering: boolean;
-  behandlingArsakType: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType;
+  erAutomatiskRevurdering: boolean | null;
+  behandlingArsakType: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType | null;
   manueltOpprettet: boolean;
 };
 
@@ -599,39 +599,39 @@ export type tjenester_behandling_dto_AsyncPollingStatus_Status =
 
 export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   id: number | null;
-  uuid: string | null;
-  versjon: number | null;
-  type: foreldrepenger_behandlingslager_behandling_BehandlingType | null;
-  status: foreldrepenger_behandlingslager_behandling_BehandlingStatus | null;
+  uuid: string;
+  versjon: number;
+  type: foreldrepenger_behandlingslager_behandling_BehandlingType;
+  status: foreldrepenger_behandlingslager_behandling_BehandlingStatus;
   fagsakId: number | null;
-  opprettet: string | null;
+  opprettet: string;
   avsluttet: string | null;
   endret: string | null;
   endretAvBrukernavn: string | null;
-  behandlendeEnhetId: string | null;
-  behandlendeEnhetNavn: string | null;
-  erAktivPapirsoknad: boolean | null;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
+  erAktivPapirsoknad: boolean;
   førsteÅrsak: tjenester_behandling_dto_behandling_BehandlingÅrsakDto | null;
   behandlingsfristTid: string | null;
-  gjeldendeVedtak: boolean | null;
+  gjeldendeVedtak: boolean;
   erPaaVent: boolean | null;
   originalVedtaksDato: string | null;
-  behandlingHenlagt: boolean | null;
+  behandlingHenlagt: boolean;
   behandlingPaaVent: boolean | null;
-  behandlingPåVent: boolean | null;
+  behandlingPåVent: boolean;
   fristBehandlingPåVent: string | null;
   fristBehandlingPaaVent: string | null;
   venteArsakKode: string | null;
   venteÅrsakKode: string | null;
   sprakkode: foreldrepenger_behandlingslager_geografisk_Språkkode | null;
-  språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode | null;
-  behandlingKøet: boolean | null;
+  språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode;
+  behandlingKøet: boolean;
   ansvarligSaksbehandler: string | null;
-  toTrinnsBehandling: boolean | null;
+  toTrinnsBehandling: boolean;
   behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto | null;
-  behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto> | null;
+  behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto> | null;
-  links: Array<rest_ResourceLink> | null;
+  links: Array<rest_ResourceLink>;
   ansvarligBeslutter: string | null;
   aksjonspunkt: Array<tjenester_behandling_aksjonspunkt_AksjonspunktDto> | null;
   harSøknad: boolean | null;
@@ -1089,11 +1089,11 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | '-';
 
 export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
-  identifikator?: string;
-  erVirksomhet?: boolean;
   orgnr?: string;
   indexKey?: string;
   aktørId?: string;
+  identifikator?: string;
+  erVirksomhet?: boolean;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType =
@@ -1111,8 +1111,8 @@ export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType 
 
 export type foreldrepenger_domene_typer_InternArbeidsforholdRef = {
   referanse?: string;
-  uuidreferanse?: string;
   indexKey?: string;
+  uuidreferanse?: string;
 };
 
 export type foreldrepenger_domene_uttak_fakta_uttak_DokumentasjonVurderingBehov_Behov_Type =
@@ -1377,33 +1377,33 @@ export type tjenester_behandling_uttak_dto_AvklarAnnenforelderHarRettDto = {
 };
 
 export type tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerAnnenpartEØSDto = {
-  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto> | null;
+  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto>;
   begrunnelse: string | null;
 };
 
 export type tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmDødDto = {
-  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto> | null;
+  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto>;
   begrunnelse: string | null;
 };
 
 export type tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmSøknadsfristDto = {
-  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto> | null;
+  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto>;
   begrunnelse: string | null;
 };
 
 export type tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerRealitetsBehandlingEllerKlageDto =
   {
-    perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto> | null;
+    perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto>;
     begrunnelse: string | null;
   };
 
 export type tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakPerioderDto = {
-  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto> | null;
+  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto>;
   begrunnelse: string | null;
 };
 
 export type tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakStortingsrepresentantDto = {
-  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto> | null;
+  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto>;
   begrunnelse: string | null;
 };
 
@@ -1447,22 +1447,22 @@ export type tjenester_behandling_uttak_eøs_EøsUttakPeriodeDto = {
 };
 
 export type tjenester_behandling_uttak_fakta_FaktaUttakDto_GraderingAktivitetUtenBGDto = {
-  perioder: Array<tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto> | null;
+  perioder: Array<tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto>;
   begrunnelse: string | null;
 };
 
 export type tjenester_behandling_uttak_fakta_FaktaUttakDto_GraderingUkjentAktivitetDto = {
-  perioder: Array<tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto> | null;
+  perioder: Array<tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto>;
   begrunnelse: string | null;
 };
 
 export type tjenester_behandling_uttak_fakta_FaktaUttakDto_IngenPerioderDto = {
-  perioder: Array<tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto> | null;
+  perioder: Array<tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto>;
   begrunnelse: string | null;
 };
 
 export type tjenester_behandling_uttak_fakta_FaktaUttakDto_ManueltSattStartdatoDto = {
-  perioder: Array<tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto> | null;
+  perioder: Array<tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto>;
   begrunnelse: string | null;
 };
 
@@ -1653,9 +1653,9 @@ export type tjenester_registrering_dto_VirksomhetDto = {
 };
 
 export type tjenester_registrering_es_ManuellRegistreringEngangsstonadDto = {
-  tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType | null;
-  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType | null;
-  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType | null;
+  tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;
+  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
+  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
   rettigheter: tjenester_registrering_dto_RettigheterDto | null;
   oppholdINorge: boolean | null;
   harTidligereOppholdUtenlands: boolean | null;
@@ -1680,9 +1680,9 @@ export type tjenester_registrering_es_ManuellRegistreringEngangsstonadDto = {
 };
 
 export type tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto = {
-  tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType | null;
-  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType | null;
-  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType | null;
+  tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;
+  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
+  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
   rettigheter: tjenester_registrering_dto_RettigheterDto | null;
   oppholdINorge: boolean | null;
   harTidligereOppholdUtenlands: boolean | null;
@@ -1709,9 +1709,9 @@ export type tjenester_registrering_fp_ManuellRegistreringEndringsøknadDto = {
 };
 
 export type tjenester_registrering_fp_ManuellRegistreringForeldrepengerDto = {
-  tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType | null;
-  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType | null;
-  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType | null;
+  tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;
+  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
+  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
   rettigheter: tjenester_registrering_dto_RettigheterDto | null;
   oppholdINorge: boolean | null;
   harTidligereOppholdUtenlands: boolean | null;
@@ -1761,9 +1761,9 @@ export type tjenester_registrering_fp_TidsromPermisjonDto = {
 };
 
 export type tjenester_registrering_svp_ManuellRegistreringSvangerskapspengerDto = {
-  tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType | null;
-  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType | null;
-  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType | null;
+  tema: foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;
+  soknadstype: foreldrepenger_behandlingslager_fagsak_FagsakYtelseType;
+  soker: foreldrepenger_behandlingslager_behandling_søknad_ForeldreType;
   rettigheter: tjenester_registrering_dto_RettigheterDto | null;
   oppholdINorge: boolean | null;
   harTidligereOppholdUtenlands: boolean | null;
@@ -2095,8 +2095,8 @@ export type foreldrepenger_domene_iay_modell_NaturalYtelse = {
 
 export type foreldrepenger_domene_iay_modell_Refusjon = {
   fom?: string;
-  refusjonsbeløp?: foreldrepenger_domene_typer_Beløp;
   indexKey?: string;
+  refusjonsbeløp?: foreldrepenger_domene_typer_Beløp;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING' | '-';
@@ -4764,38 +4764,38 @@ export type tjenester_behandling_dto_behandling_AnnenPartBehandlingDto = {
 export type tjenester_behandling_dto_behandling_FagsakBehandlingDto = {
   id: number | null;
   uuid: string;
-  versjon: number | null;
-  type: foreldrepenger_behandlingslager_behandling_BehandlingType | null;
-  status: foreldrepenger_behandlingslager_behandling_BehandlingStatus | null;
+  versjon: number;
+  type: foreldrepenger_behandlingslager_behandling_BehandlingType;
+  status: foreldrepenger_behandlingslager_behandling_BehandlingStatus;
   fagsakId: number | null;
-  opprettet: string | null;
+  opprettet: string;
   avsluttet: string | null;
   endret: string | null;
   endretAvBrukernavn: string | null;
-  behandlendeEnhetId: string | null;
-  behandlendeEnhetNavn: string | null;
-  erAktivPapirsoknad: boolean | null;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
+  erAktivPapirsoknad: boolean;
   førsteÅrsak: tjenester_behandling_dto_behandling_BehandlingÅrsakDto | null;
   behandlingsfristTid: string | null;
-  gjeldendeVedtak: boolean | null;
+  gjeldendeVedtak: boolean;
   erPaaVent: boolean | null;
   originalVedtaksDato: string | null;
-  behandlingHenlagt: boolean | null;
+  behandlingHenlagt: boolean;
   behandlingPaaVent: boolean | null;
-  behandlingPåVent: boolean | null;
+  behandlingPåVent: boolean;
   fristBehandlingPåVent: string | null;
   fristBehandlingPaaVent: string | null;
   venteArsakKode: string | null;
   venteÅrsakKode: string | null;
   sprakkode: foreldrepenger_behandlingslager_geografisk_Språkkode | null;
-  språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode | null;
-  behandlingKøet: boolean | null;
+  språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode;
+  behandlingKøet: boolean;
   ansvarligSaksbehandler: string | null;
-  toTrinnsBehandling: boolean | null;
+  toTrinnsBehandling: boolean;
   behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto | null;
-  behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto> | null;
+  behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto> | null;
-  links: Array<rest_ResourceLink> | null;
+  links: Array<rest_ResourceLink>;
   behandlingTillatteOperasjoner: tjenester_behandling_dto_BehandlingOperasjonerDto | null;
   brevmaler: Array<foreldrepenger_kontrakter_formidling_v3_BrevmalDto> | null;
   totrinnskontrollÅrsaker: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto> | null;
@@ -4873,7 +4873,7 @@ export type tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto = {
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto = {
   skjermlenkeType: string | null;
-  totrinnskontrollAksjonspunkter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto> | null;
+  totrinnskontrollAksjonspunkter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto>;
 };
 
 export type tjenester_fagsak_dto_FagsakFullDto = {
@@ -6074,9 +6074,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_HendelseDto = (
 ) & {
   id: string;
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_HendelseWrapperDto = {
@@ -6085,52 +6085,52 @@ export type foreldrepenger_kontrakter_abonnent_v2_HendelseWrapperDto = {
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_AdressebeskyttelseHendelseDto = {
-  id: string | null;
-  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype | null;
+  id: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødHendelseDto = {
-  id: string | null;
-  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype | null;
+  id: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   dødsdato: string | null;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødfødselHendelseDto = {
-  id: string | null;
-  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype | null;
+  id: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   dødfødselsdato: string | null;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_FødselHendelseDto = {
-  id: string | null;
-  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype | null;
+  id: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørIdForeldre: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   fødselsdato: string | null;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto = {
-  id: string | null;
-  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype | null;
+  id: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   utflyttingsdato: string | null;
-  alleAktørId: Array<string> | null;
   avsenderSystem: string | null;
   hendelsetype: string | null;
+  alleAktørId: Array<string> | null;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto = {
