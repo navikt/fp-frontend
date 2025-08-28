@@ -1,20 +1,23 @@
 import type {
-  BeregningsgrunnlagDto,
-  BeregningsgrunnlagPeriodeDto,
-  BeregningsgrunnlagPrStatusOgAndelSnDto,
-  EgenNæringDto,
-  PgiDto,
-  SammenligningsgrunnlagDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto,
 } from './apiDtoGenerert.ts';
 
-export type Næring = EgenNæringDto;
+export type Næring = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto;
 
-export type PgiVerdier = PgiDto;
+export type PgiVerdier = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto;
 
-export type BeregningsgrunnlagAndel = BeregningsgrunnlagPrStatusOgAndelSnDto;
+export type BeregningsgrunnlagAndel =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto;
 
-export type SammenligningsgrunlagProp = SammenligningsgrunnlagDto;
+export type SammenligningsgrunlagProp =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto;
 
-export type BeregningsgrunnlagPeriodeProp = BeregningsgrunnlagPeriodeDto;
+export type BeregningsgrunnlagPeriodeProp =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPeriodeDto;
 
-export type Beregningsgrunnlag = BeregningsgrunnlagDto;
+export type Beregningsgrunnlag = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagDto;

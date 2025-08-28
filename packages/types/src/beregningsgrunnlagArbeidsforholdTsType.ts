@@ -1,4 +1,4 @@
-import type { BeregningsgrunnlagArbeidsforholdDto } from './apiDtoGenerert.ts';
+import type { folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto } from './apiDtoGenerert.ts';
 
 // export type BeregningsgrunnlagArbeidsforhold = Readonly<{
 //   arbeidsgiverNavn?: string;
@@ -21,4 +21,5 @@ import type { BeregningsgrunnlagArbeidsforholdDto } from './apiDtoGenerert.ts';
 //   stillingsProsent?: number;
 // }>;
 
-export type BeregningsgrunnlagArbeidsforhold = BeregningsgrunnlagArbeidsforholdDto;
+export type BeregningsgrunnlagArbeidsforhold =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;

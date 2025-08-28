@@ -3,8 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 
-import { UttakÅrsak, UttakType, UttakVurdering } from '@navikt/fp-types';
-
 import * as stories from './UttakDokumentasjonFaktaIndex.stories';
 
 const {
@@ -63,35 +61,35 @@ describe('UttakDokumentasjonFaktaIndex', () => {
           fom: '2022-01-08',
           morsStillingsprosent: undefined,
           tom: '2022-02-13',
-          type: UttakType.OVERFØRING,
-          årsak: UttakÅrsak.SYKDOM_ANNEN_FORELDER,
-          vurdering: UttakVurdering.GODKJENT,
+          type: 'OVERFØRING',
+          årsak: 'SYKDOM_ANNEN_FORELDER',
+          vurdering: 'GODKJENT',
           aktivitetskravGrunnlag: [],
         },
         {
           fom: '2022-11-01',
           morsStillingsprosent: undefined,
           tom: '2023-01-07',
-          type: UttakType.UTSETTELSE,
-          årsak: UttakÅrsak.INNLEGGELSE_SØKER,
-          vurdering: UttakVurdering.IKKE_GODKJENT,
+          type: 'UTSETTELSE',
+          årsak: 'INNLEGGELSE_SØKER',
+          vurdering: 'IKKE_GODKJENT',
           aktivitetskravGrunnlag: [],
         },
         {
           fom: '2022-11-15',
           morsStillingsprosent: undefined,
           tom: '2022-11-20',
-          type: UttakType.UTTAK,
-          årsak: UttakÅrsak.TIDLIG_OPPSTART_FAR,
-          vurdering: UttakVurdering.GODKJENT,
+          type: 'UTTAK',
+          årsak: 'TIDLIG_OPPSTART_FAR',
+          vurdering: 'GODKJENT',
           aktivitetskravGrunnlag: [],
         },
         {
           fom: '2022-11-18',
           tom: '2022-12-03',
-          type: UttakType.UTTAK,
-          årsak: UttakÅrsak.AKTIVITETSKRAV_ARBEID,
-          vurdering: UttakVurdering.GODKJENT,
+          type: 'UTTAK',
+          årsak: 'AKTIVITETSKRAV_ARBEID',
+          vurdering: 'GODKJENT',
           morsStillingsprosent: '60',
           aktivitetskravGrunnlag: [
             {

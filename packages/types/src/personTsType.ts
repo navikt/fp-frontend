@@ -1,4 +1,4 @@
-import type { PersonDto } from './apiDtoGenerert.ts';
+import type { tjenester_fagsak_dto_PersonDto } from './apiDtoGenerert.ts';
 
 // export type Person = Readonly<{
 //   navn: string;
@@ -10,4 +10,4 @@ import type { PersonDto } from './apiDtoGenerert.ts';
 //   aktørId: string | null;
 // }>;
 
-export type Person = PersonDto;
+export type Person = tjenester_fagsak_dto_PersonDto;

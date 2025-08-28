@@ -1,3 +1,3 @@
-import type { AksjonspunktDto } from './apiDtoGenerert';
+import type { tjenester_behandling_aksjonspunkt_AksjonspunktDto } from './apiDtoGenerert';
 
-export type Aksjonspunkt = AksjonspunktDto;
+export type Aksjonspunkt = tjenester_behandling_aksjonspunkt_AksjonspunktDto;

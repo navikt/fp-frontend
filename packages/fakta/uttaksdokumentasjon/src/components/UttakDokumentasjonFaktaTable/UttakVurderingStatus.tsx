@@ -4,7 +4,7 @@ import { CheckmarkCircleFillIcon, CircleFillIcon, FileXMarkFillIcon, XMarkOctago
 import { HStack } from '@navikt/ds-react';
 import { assertUnreachable } from '@navikt/ft-utils';
 
-import { UttakVurdering } from '@navikt/fp-types';
+import { type UttakVurdering } from '@navikt/fp-types';
 
 import { IconLabel } from '../IconLabel';
 
@@ -23,7 +23,7 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
     );
   }
   switch (vurdering) {
-    case UttakVurdering.GODKJENT:
+    case 'GODKJENT':
       return (
         <HStack gap="space-4">
           <CheckmarkCircleFillIcon color="var(--ax-text-success-decoration)" />
@@ -34,21 +34,21 @@ export const UttakVurderingStatus = ({ vurdering, morsStillingsprosent }: Props)
           )}
         </HStack>
       );
-    case UttakVurdering.IKKE_GODKJENT:
+    case 'IKKE_GODKJENT':
       return (
         <IconLabel
           icon={<XMarkOctagonFillIcon color="var(--ax-text-danger-decoration)" />}
           formattedMessageId="UttakDokumentasjonFaktaTable.IkkeGodkjent"
         />
       );
-    case UttakVurdering.IKKE_DOKUMENTERT:
+    case 'IKKE_DOKUMENTERT':
       return (
         <IconLabel
           icon={<FileXMarkFillIcon color="var(--ax-text-neutral-subtle)" />}
           formattedMessageId="UttakDokumentasjonFaktaTable.ManglerDok"
         />
       );
-    case UttakVurdering.GODKJENT_AUTOMATISK:
+    case 'GODKJENT_AUTOMATISK':
       return (
         <IconLabel
           icon={<CheckmarkCircleFillIcon color="var(--ax-text-success-decoration)" />}

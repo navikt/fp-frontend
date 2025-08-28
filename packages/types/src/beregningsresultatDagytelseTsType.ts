@@ -1,7 +1,7 @@
 import type {
-  BeregningsresultatMedUttaksplanDto,
-  BeregningsresultatPeriodeAndelDto,
-  BeregningsresultatPeriodeDto,
+  tjenester_behandling_beregningsresultat_dto_BeregningsresultatMedUttaksplanDto,
+  tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeAndelDto,
+  tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeDto,
 } from './apiDtoGenerert.ts';
 //
 // export type BeregningsresultatPeriodeAndel = Readonly<{
@@ -19,8 +19,10 @@ import type {
 //   arbeidsforholdType: OpptjeningAktivitetType;
 // }>;
 
-export type BeregningsresultatPeriodeAndel = BeregningsresultatPeriodeAndelDto;
+export type BeregningsresultatPeriodeAndel =
+  tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeAndelDto;
 
-export type BeregningsresultatPeriode = BeregningsresultatPeriodeDto;
+export type BeregningsresultatPeriode = tjenester_behandling_beregningsresultat_dto_BeregningsresultatPeriodeDto;
 
-export type BeregningsresultatDagytelse = BeregningsresultatMedUttaksplanDto;
+export type BeregningsresultatDagytelse =
+  tjenester_behandling_beregningsresultat_dto_BeregningsresultatMedUttaksplanDto;

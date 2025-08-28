@@ -1,4 +1,4 @@
-import type { ArbeidsgiverOpplysningerDto } from './apiDtoGenerert.ts';
+import type { tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto } from './apiDtoGenerert.ts';
 
 // export type ArbeidsgiverOpplysninger = Readonly<
 //   | {
@@ -19,8 +19,8 @@ import type { ArbeidsgiverOpplysningerDto } from './apiDtoGenerert.ts';
 // TODO: Hvordan løse?
 
 export type ArbeidsgiverOpplysninger =
-  | (ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
-  | (ArbeidsgiverOpplysningerDto & { erPrivatPerson: false });
+  | (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: true; fødselsdato: string })
+  | (tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto & { erPrivatPerson: false });
 
 export type ArbeidsgiverOpplysningerPerId = Record<string, ArbeidsgiverOpplysninger>;
 

@@ -1,8 +1,8 @@
-import type { AktoerInfoDto } from './apiDtoGenerert.ts';
+import type { tjenester_fagsak_dto_AktoerInfoDto } from './apiDtoGenerert.ts';
 
 // export type Aktor = Readonly<{
 //   fagsaker: FagsakEnkel[];
 //   person: Person;
 // }>;
 
-export type Aktor = AktoerInfoDto;
+export type Aktor = tjenester_fagsak_dto_AktoerInfoDto;

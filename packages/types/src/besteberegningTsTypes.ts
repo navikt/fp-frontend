@@ -1,11 +1,14 @@
 import type {
-  BesteberegninggrunnlagDto,
-  BesteberegningInntektDto,
-  BesteberegningMånedGrunnlagDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningInntektDto,
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
 } from './apiDtoGenerert.ts';
 
-export type Månedsgrunnlag = BesteberegningMånedGrunnlagDto;
+export type Månedsgrunnlag =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto;
 
-export type BesteberegningInntekt = BesteberegningInntektDto;
+export type BesteberegningInntekt =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningInntektDto;
 
-export type Besteberegninggrunnlag = BesteberegninggrunnlagDto;
+export type Besteberegninggrunnlag =
+  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;

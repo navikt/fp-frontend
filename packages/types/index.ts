@@ -153,7 +153,7 @@ export type {
   DokumentasjonVurderingBehov,
   AktivitetskravGrunnlagArbeid,
 } from './src/dokumentasjonVurderingBehovTsType';
-export { UttakType, UttakVurdering, UttakÅrsak } from './src/dokumentasjonVurderingBehovTsType';
+export type { UttakType, UttakVurdering, UttakÅrsak } from './src/dokumentasjonVurderingBehovTsType';
 export type {
   VilkarsVurdertePerioderWrapper,
   VilkarsVurdertPeriode,
