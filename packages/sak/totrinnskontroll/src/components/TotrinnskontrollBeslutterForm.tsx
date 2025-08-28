@@ -13,7 +13,6 @@ import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
-  TotrinnskontrollAksjonspunkt,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 
@@ -22,10 +21,10 @@ import {
   AksjonspunktGodkjenningFieldArray,
 } from './AksjonspunktGodkjenningFieldArray';
 
-const erAlleGodkjent = (formState: TotrinnskontrollAksjonspunkt[] = []) =>
+const erAlleGodkjent = (formState: AksjonspunktGodkjenningData[] = []) =>
   formState.every(ap => ap.totrinnskontrollGodkjent);
 
-const erAlleGodkjentEllerAvvist = (formState: TotrinnskontrollAksjonspunkt[] = []) =>
+const erAlleGodkjentEllerAvvist = (formState: AksjonspunktGodkjenningData[] = []) =>
   formState.every(ap => ap.totrinnskontrollGodkjent !== undefined && ap.totrinnskontrollGodkjent !== null);
 
 const harIkkeKonsekvenserForYtelsen = (
@@ -79,7 +78,7 @@ const buildInitialValues = (totrinnskontrollSkjermlenkeContext: Totrinnskontroll
     .map(ap => ({
       aksjonspunktKode: ap.aksjonspunktKode,
       totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
-      besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse),
+      besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse ?? undefined),
       ...finnArsaker(ap.vurderPaNyttArsaker ? ap.vurderPaNyttArsaker : []),
     })),
 });

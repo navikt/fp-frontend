@@ -4792,7 +4792,7 @@ export type tjenester_behandling_dto_behandling_FagsakBehandlingDto = {
   behandlingKøet: boolean;
   ansvarligSaksbehandler: string | null;
   toTrinnsBehandling: boolean;
-  behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto | null;
+  behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto> | null;
   links: Array<rest_ResourceLink>;
@@ -4843,7 +4843,7 @@ export type tjenester_behandling_kontroll_dto_KontrollresultatDto = {
 };
 
 export type tjenester_behandling_kontroll_dto_KontrollresultatDto_FaresignalgruppeDto = {
-  faresignaler: Array<string> | null;
+  faresignaler: Array<string>;
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnsBeregningDto = {
@@ -4856,7 +4856,7 @@ export type tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto = 
   opptjeningAktiviteter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto>;
   beregningDto: tjenester_behandling_vedtak_dto_TotrinnsBeregningDto | null;
   besluttersBegrunnelse: string | null;
-  totrinnskontrollGodkjent: boolean | null;
+  totrinnskontrollGodkjent: boolean;
   vurderPaNyttArsaker: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
   uttakPerioder: Array<foreldrepenger_domene_uttak_UttakPeriodeEndringDto>;
 };
@@ -4872,7 +4872,13 @@ export type tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto = {
 };
 
 export type tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto = {
-  skjermlenkeType: string;
+  skjermlenkeType:
+    | 'VEDTAK'
+    | 'FAKTA_OM_MEDLEMSKAP'
+    | 'FAKTA_UTTAK'
+    | 'KLAGE_BEH_NFP'
+    | 'FORMKRAV_KLAGE_NFP'
+    | 'PUNKT_FOR_MEDLEMSKAP_LØPENDE';
   totrinnskontrollAksjonspunkter: Array<tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto>;
 };
 

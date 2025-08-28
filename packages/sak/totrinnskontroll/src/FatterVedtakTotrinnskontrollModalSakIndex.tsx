@@ -25,7 +25,7 @@ export const FatterVedtakTotrinnskontrollModalSakIndex = ({
     <FatterVedtakApprovalModal
       closeEvent={closeEvent}
       allAksjonspunktApproved={allAksjonspunktApproved}
-      behandlingsresultat={behandling.behandlingsresultat ?? undefined}
+      behandlingsresultat={behandling.behandlingsresultat}
       behandlingStatusKode={behandling.status}
       behandlingTypeKode={behandling.type}
       harSammeResultatSomOriginalBehandling={behandling.behandlingsresultat?.erRevurderingMedUendretUtfall || false}
