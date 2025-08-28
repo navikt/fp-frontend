@@ -1,30 +1,18 @@
-import { HistorikkAktor, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import type {
+  tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto,
+  tjenester_behandling_historikk_HistorikkinnslagDto,
+} from './apiDtoGenerert.ts';
 
-export type Historikkinnslag = Readonly<{
-  aktør: HistorikkUtfører;
-  opprettetTidspunkt: string;
-  behandlingUuid: string | null;
-  skjermlenke: SkjermlenkeType | null;
-  dokumenter: HistorikkInnslagDokumentLink[] | null;
-  tittel: string | null;
-  linjer: Linje[];
-}>;
+// export type Historikkinnslag = Readonly<{
+//   aktør: HistorikkUtfører;
+//   opprettetTidspunkt: string;
+//   behandlingUuid: string | null;
+//   skjermlenke: SkjermlenkeType | null;
+//   dokumenter: HistorikkInnslagDokumentLink[] | null;
+//   tittel: string | null;
+//   linjer: Linje[];
+// }>;
 
-type Linje =
-  | {
-      type: 'TEKST';
-      tekst: string;
-    }
-  | { type: 'LINJESKIFT' };
+export type Historikkinnslag = tjenester_behandling_historikk_HistorikkinnslagDto;
 
-type HistorikkUtfører = {
-  type: HistorikkAktor;
-  ident: string | null;
-};
-
-export type HistorikkInnslagDokumentLink = Readonly<{
-  dokumentId: string;
-  journalpostId: string;
-  tag: string;
-  utgått: boolean;
-}>;
+export type HistorikkInnslagDokumentLink = tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto;

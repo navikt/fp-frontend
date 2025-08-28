@@ -41,7 +41,7 @@ export const OverstyringPanelDef = ({ vilkar, vilkarKoder, panelTekstKode, medle
       medlemskap={medlemskap}
       avslagsarsaker={avslagsarsaker}
       panelTittelKode={panelTekstKode}
-      lovReferanse={vilkar.length > 0 ? vilkar[0].lovReferanse : undefined}
+      lovReferanse={vilkar[0]?.lovReferanse ?? undefined}
       status={standardProps.status}
     />
   );

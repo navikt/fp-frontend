@@ -4806,29 +4806,29 @@ export type tjenester_behandling_dto_behandling_FagsakBehandlingDto = {
 };
 
 export type tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto = {
-  tag: string | null;
-  journalpostId: string | null;
-  dokumentId: string | null;
-  utgått: boolean | null;
+  tag: string;
+  journalpostId: string;
+  dokumentId: string;
+  utgått: boolean;
 };
 
 export type tjenester_behandling_historikk_HistorikkinnslagDto = {
   behandlingUuid: string | null;
-  aktør: tjenester_behandling_historikk_HistorikkinnslagDto_HistorikkAktørDto | null;
+  aktør: tjenester_behandling_historikk_HistorikkinnslagDto_HistorikkAktørDto;
   skjermlenke: foreldrepenger_behandlingslager_behandling_skjermlenke_SkjermlenkeType | null;
-  opprettetTidspunkt: string | null;
+  opprettetTidspunkt: string;
   dokumenter: Array<tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto> | null;
   tittel: string | null;
-  linjer: Array<tjenester_behandling_historikk_HistorikkinnslagDto_Linje> | null;
+  linjer: Array<tjenester_behandling_historikk_HistorikkinnslagDto_Linje>;
 };
 
 export type tjenester_behandling_historikk_HistorikkinnslagDto_HistorikkAktørDto = {
-  type: foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør | null;
+  type: foreldrepenger_behandlingslager_behandling_historikk_HistorikkAktør;
   ident: string | null;
 };
 
 export type tjenester_behandling_historikk_HistorikkinnslagDto_Linje = {
-  type: tjenester_behandling_historikk_HistorikkinnslagDto_Linje_Type | null;
+  type: tjenester_behandling_historikk_HistorikkinnslagDto_Linje_Type;
   tekst: string | null;
 };
 

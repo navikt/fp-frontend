@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode, FagsakYtelseType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 
 import {
@@ -45,7 +45,7 @@ export const FodselInngangsvilkarFpInitPanel = () => {
       hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
     >
       <FodselVilkarProsessIndex
-        ytelseTypeKode={'FP'}
+        ytelseTypeKode="FP"
         status={standardPanelProps.status}
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         vilkar={standardPanelProps.vilkar}
