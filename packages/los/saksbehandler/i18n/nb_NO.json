@@ -11,6 +11,8 @@
   "ReservasjonsstatusPanel.Reservert": "Reservert av {navn}",
   "ReservasjonsstatusPanel.Ingen": "Ingen reservasjon",
   "ReservasjonsstatusPanel.ReservertPaMeg": "Reservert på meg",
+  "ReservasjonsstatusPanel.OpphevReservasjon": "Opphev reservasjon",
+  "ReservasjonsstatusPanel.Reserver": "Reserver",
 
   "ReservertOppgaveTabell.Soker": "Søker",
   "ReservertOppgaveTabell.Sak": "Sak",

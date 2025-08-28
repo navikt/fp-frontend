@@ -1,5 +1,5 @@
 import { FaceFrownIcon, FaceLaughIcon } from '@navikt/aksel-icons';
-import { Button, HStack } from '@navikt/ds-react';
+import { Button, HStack, Tooltip } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -58,20 +58,24 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid }: Props) =
           { navn: oppgaveForBehandling.reservasjonStatus.reservertAvNavn },
         )}
       {erReservert && oppgaveForBehandling.reservasjonStatus.erReservertAvInnloggetBruker && (
-        <Button
-          icon={<FaceFrownIcon aria-hidden />}
-          variant="tertiary-neutral"
-          size="small"
-          onClick={() => opphevOppgavereservasjon(oppgaveForBehandling.id)}
-        />
+        <Tooltip content={intl.formatMessage({ id: 'ReservasjonsstatusPanel.OpphevReservasjon' })}>
+          <Button
+            icon={<FaceFrownIcon aria-hidden />}
+            variant="tertiary-neutral"
+            size="small"
+            onClick={() => opphevOppgavereservasjon(oppgaveForBehandling.id)}
+          />
+        </Tooltip>
       )}
       {!erReservert && !!oppgaveForBehandling && (
-        <Button
-          icon={<FaceLaughIcon aria-hidden />}
-          variant="tertiary-neutral"
-          size="small"
-          onClick={() => reserverOppgave(oppgaveForBehandling.id)}
-        />
+        <Tooltip content={intl.formatMessage({ id: 'ReservasjonsstatusPanel.Reserver' })}>
+          <Button
+            icon={<FaceLaughIcon aria-hidden />}
+            variant="tertiary-neutral"
+            size="small"
+            onClick={() => reserverOppgave(oppgaveForBehandling.id)}
+          />
+        </Tooltip>
       )}
     </HStack>
   );
