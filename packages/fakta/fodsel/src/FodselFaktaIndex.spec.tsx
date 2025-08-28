@@ -10,7 +10,7 @@ const {
   APTerminbekreftelse,
   APSjekkManglendeFødselPåEngangstønad,
   APSjekkManglendeFødselPåForeldrepenger,
-  Overstyring,
+  OverstyringSomOverstyrer,
 } = composeStories(stories);
 
 describe('FodselFaktaIndex', () => {
@@ -136,7 +136,6 @@ describe('FodselFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5027',
-      erBarnFødt: true,
       barn: [
         {
           fødselsdato: '2025-05-04',
@@ -169,14 +168,14 @@ describe('FodselFaktaIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5027',
-      erBarnFødt: false,
+      barn: null,
       begrunnelse: 'Dette er en begrunnelse',
     });
   });
 
   it('skal overstyre termindato og legge til et barn', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    render(<Overstyring submitCallback={lagre} />);
+    render(<OverstyringSomOverstyrer submitCallback={lagre} />);
 
     expect(screen.getByText('Fakta om fødsel')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Overstyr'));
@@ -200,13 +199,12 @@ describe('FodselFaktaIndex', () => {
 
     await userEvent.type(overstyringBoks.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
-    await userEvent.click(overstyringBoks.getByText('Bekreft og fortsett'));
+    await userEvent.click(overstyringBoks.getByText('Bekreft'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '6019',
       termindato: '2025-06-11',
-      erBarnFødt: true,
       barn: [
         {
           fødselsdato: '2025-06-03',
@@ -221,18 +219,16 @@ describe('FodselFaktaIndex', () => {
     });
   });
 
-  it('skal ikke kunne overstyre termindato når det ikke er et aksjonspunkt', async () => {
+  it('skal ikke kunne overstyre når det finnes åpent fødselaksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    render(<Overstyring submitCallback={lagre} isReadOnly />);
+    render(
+      <OverstyringSomOverstyrer
+        aksjonspunkterForPanel={APTerminbekreftelse.args.aksjonspunkterForPanel}
+        submitCallback={lagre}
+      />,
+    );
 
-    expect(screen.getByText('Fakta om fødsel')).toBeInTheDocument();
+    expect(screen.queryByText('Fakta om fødsel')).not.toBeInTheDocument();
     expect(screen.queryByText('Overstyr')).not.toBeInTheDocument();
-    expect(screen.getByText('Termindato')).toBeInTheDocument();
-    expect(screen.getByText('10.06.2025')).toBeInTheDocument();
-
-    await userEvent.type(screen.getByLabelText('Termindato'), '10.06.2025');
-    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
-
-    await userEvent.click(screen.getByText('Bekreft og fortsett'));
   });
 });

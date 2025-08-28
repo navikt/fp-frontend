@@ -19,34 +19,40 @@ export const OverstyringPanel = ({ gjeldende, submittable }: Props) => {
   const intl = useIntl();
 
   const { erOverstyrt, toggleOverstyring, kanOverstyreAccess, overrideReadOnly } = usePanelOverstyring();
-  const { alleMerknaderFraBeslutter } = usePanelDataContext();
+  const { alleMerknaderFraBeslutter, aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
 
   const readOnly = !erOverstyrt || overrideReadOnly || !kanOverstyreAccess.isEnabled;
 
-  return (
-    <>
-      {kanOverstyreAccess.isEnabled && (
-        <HStack gap="4">
-          <Heading size="small">
-            <FormattedMessage id="OverstyringPanel.Tittel" />
-          </Heading>
-          <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
-        </HStack>
-      )}
+  const overstyringAP = aksjonspunkterForPanel.find(
+    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+  );
 
-      {erOverstyrt && (
-        <FaktaKort
-          label={intl.formatMessage({ id: 'OverstyringForm.Tittel' })}
-          merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]}
-        >
-          <OverstyringForm
-            isReadOnly={readOnly}
-            gjeldende={gjeldende}
-            submittable={submittable}
-            avbrytOverstyring={toggleOverstyring}
-          />
-        </FaktaKort>
-      )}
-    </>
+  return (
+    (overstyringAP || (!overstyringAP && !harÅpneAksjonspunkter)) && (
+      <>
+        {kanOverstyreAccess.isEnabled && (
+          <HStack gap="4">
+            <Heading size="small">
+              <FormattedMessage id="OverstyringPanel.Tittel" />
+            </Heading>
+            <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
+          </HStack>
+        )}
+
+        {erOverstyrt && (
+          <FaktaKort
+            label={intl.formatMessage({ id: 'OverstyringForm.Tittel' })}
+            merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]}
+          >
+            <OverstyringForm
+              isReadOnly={readOnly}
+              gjeldende={gjeldende}
+              submittable={submittable}
+              avbrytOverstyring={toggleOverstyring}
+            />
+          </FaktaKort>
+        )}
+      </>
+    )
   );
 };

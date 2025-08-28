@@ -364,7 +364,7 @@ export const OverstyrtSettSomOverstyrer: Story = {
   args: {
     kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
     initialToggleState: true,
-    isReadOnly: true,
+    isReadOnly: false,
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
@@ -380,7 +380,7 @@ export const OverstyrtSettSomSBH: Story = {
   args: {
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     initialToggleState: true,
-    isReadOnly: true,
+    isReadOnly: false,
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
