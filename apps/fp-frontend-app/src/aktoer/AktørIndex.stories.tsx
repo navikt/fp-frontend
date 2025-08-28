@@ -33,7 +33,7 @@ const AKTØR_INFO = {
     {
       saksnummer: '123',
       fagsakYtelseType: 'FP',
-      status: FagsakStatus.OPPRETTET,
+      status: FagsakStatusEnum.OPPRETTET,
       aktørId: '1345345',
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',
@@ -43,7 +43,7 @@ const AKTØR_INFO = {
     {
       saksnummer: '252523',
       fagsakYtelseType: 'ES',
-      status: FagsakStatus.LOPENDE,
+      status: FagsakStatusEnum.LOPENDE,
       aktørId: '1345345',
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',

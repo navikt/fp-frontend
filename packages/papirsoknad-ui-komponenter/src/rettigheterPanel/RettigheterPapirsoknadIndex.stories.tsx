@@ -4,7 +4,7 @@ import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakYtelseType, FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 
 import { SoknadData } from '../felles/SoknadData';
 import { RettigheterPapirsoknadIndex } from './RettigheterPapirsoknadIndex';

@@ -1,4 +1,6 @@
-export enum BehandlingArsakType {
+import type { foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType } from '@navikt/fp-types';
+
+export enum BehandlingArsakTypeEnum {
   FEIL_I_LOVANDVENDELSE = 'RE-LOV',
   FEIL_REGELVERKSFORSTAELSE = 'RE-RGLF',
   FEIL_ELLER_ENDRET_FAKTA = 'RE-FEFAKTA',
@@ -29,3 +31,5 @@ export enum BehandlingArsakType {
   REBEREGN_FERIEPENGER = 'REBEREGN-FERIEPENGER',
   RE_UTSATT_START = 'RE-UTSATT-START',
 }
+
+export type BehandlingArsakType = foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType;

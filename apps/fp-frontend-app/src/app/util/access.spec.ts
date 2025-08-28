@@ -20,10 +20,10 @@ describe('access', () => {
   const veilederAnsatt = { kanVeilede: true } as NavAnsatt;
 
   describe('writeAccess', () => {
-    const validFagsakStatuser = [FagsakStatus.OPPRETTET, FagsakStatus.UNDER_BEHANDLING];
+    const validFagsakStatuser = [FagsakStatusEnum.OPPRETTET, FagsakStatusEnum.UNDER_BEHANDLING];
     const validFagsakStatus = validFagsakStatuser[0];
 
-    const validBehandlingStatuser = [BehandlingStatus.OPPRETTET, BehandlingStatus.BEHANDLING_UTREDES];
+    const validBehandlingStatuser = [BehandlingStatusEnum.OPPRETTET, BehandlingStatusEnum.BEHANDLING_UTREDES];
     const validBehandlingStatus = validBehandlingStatuser[0];
     const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
 
@@ -64,10 +64,10 @@ describe('access', () => {
   });
 
   describe('kanOverstyreAccess', () => {
-    const validFagsakStatuser = [FagsakStatus.UNDER_BEHANDLING];
+    const validFagsakStatuser = [FagsakStatusEnum.UNDER_BEHANDLING];
     const validFagsakStatus = validFagsakStatuser[0];
 
-    const validBehandlingStatuser = [BehandlingStatus.BEHANDLING_UTREDES];
+    const validBehandlingStatuser = [BehandlingStatusEnum.BEHANDLING_UTREDES];
     const validBehandlingStatus = validBehandlingStatuser[0];
     const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
 

@@ -7,7 +7,7 @@ import { AksjonspunktHelpTextHTML, EditedIcon } from '@navikt/ft-ui-komponenter'
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingType, ManuellBehandlingÅrsak, StonadskontoType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, ManuellBehandlingÅrsak, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,

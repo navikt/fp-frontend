@@ -253,7 +253,7 @@ export type tjenester_behandling_dto_behandling_BehandlingDto = {
 
 export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
   id: number | null;
-  type: foreldrepenger_behandlingslager_behandling_BehandlingResultatType | null;
+  type: foreldrepenger_behandlingslager_behandling_BehandlingResultatType;
   avslagsarsak: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak | null;
   avslagsarsakFritekst: string | null;
   rettenTil: foreldrepenger_behandlingslager_behandling_RettenTil | null;
@@ -271,7 +271,7 @@ export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
 
 export type tjenester_behandling_dto_behandling_BehandlingÅrsakDto = {
   erAutomatiskRevurdering: boolean | null;
-  behandlingArsakType: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType | null;
+  behandlingArsakType: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType;
   manueltOpprettet: boolean;
 };
 
@@ -628,12 +628,12 @@ export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   behandlingKøet: boolean;
   ansvarligSaksbehandler: string | null;
   toTrinnsBehandling: boolean;
-  behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto | null;
+  behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto> | null;
   links: Array<rest_ResourceLink>;
   ansvarligBeslutter: string | null;
-  aksjonspunkt: Array<tjenester_behandling_aksjonspunkt_AksjonspunktDto> | null;
+  aksjonspunkt: Array<tjenester_behandling_aksjonspunkt_AksjonspunktDto>;
   harSøknad: boolean | null;
   harRegisterdata: boolean | null;
   harSattEndringsdato: boolean | null;

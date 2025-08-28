@@ -17,7 +17,7 @@ export { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplet
 export { Arbeidskategori } from './src/arbeidskategori';
 export { ArbeidType } from './src/arbeidType';
 export { Avslagsarsak } from './src/avslagsarsakCodes';
-export { BehandlingArsakType } from './src/behandlingArsakType';
+export { type BehandlingArsakType, BehandlingArsakTypeEnum } from './src/behandlingArsakType';
 export {
   BehandlingResultatType,
   isAvslag,
@@ -34,7 +34,7 @@ export { Dekningsgrad } from './src/dekningsgrad';
 export { DiskresjonskodeType } from './src/diskresjonskodeType';
 export { DokumentMalType } from './src/dokumentMalType';
 export { type FagsakStatus, FagsakStatusEnum } from './src/fagsakStatus';
-export { type FagsakYtelseType } from './src/fagsakYtelseType';
+export { type FagsakYtelseType, FagsakYtelseTypeEnum } from './src/fagsakYtelseType';
 export { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
 export { FamilieHendelseType } from './src/familieHendelseType';
 export { ForeldelseVurderingType } from './src/foreldelseVurderingType';
@@ -47,7 +47,7 @@ export { KanIkkeOppgiAnnenForelderArsak } from './src/kanIkkeOppgiAnnenForelderA
 export { KlageVurdering } from './src/klageVurdering';
 export { KlageVurderingOmgjoer } from './src/klageVurderingOmgjoer';
 export { Kommunikasjonsretning } from './src/kommunikasjonsretning';
-export { KonsekvensForYtelsen } from './src/konsekvensForYtelsen';
+export { type KonsekvensForYtelsen, KonsekvensForYtelsenEnum } from './src/konsekvensForYtelsen';
 export { Landkode } from './src/landkoder';
 export { MottakerType } from './src/mottakerTyper';
 export { NaringsvirksomhetType } from './src/naringsvirksomhetType';

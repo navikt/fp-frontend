@@ -7,12 +7,12 @@ import { dateFormat } from '@navikt/ft-utils';
 
 import {
   AksjonspunktKode,
-  BehandlingArsakType,
-  FagsakYtelseType,
+  type BehandlingArsakType,
+  BehandlingArsakTypeEnum,
   isAvslag,
   isInnvilget,
   isOpphor,
-  KonsekvensForYtelsen,
+  type KonsekvensForYtelsen,
   VedtakbrevType,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -77,9 +77,9 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
     .map(({ behandlingArsakType }) => behandlingArsakType)
     .some(
       bt =>
-        bt === BehandlingArsakType.ETTER_KLAGE ||
-        bt === BehandlingArsakType.KLAGE_U_INNTK ||
-        bt === BehandlingArsakType.KLAGE_M_INNTK,
+        bt === BehandlingArsakTypeEnum.ETTER_KLAGE ||
+        bt === BehandlingArsakTypeEnum.KLAGE_U_INNTK ||
+        bt === BehandlingArsakTypeEnum.KLAGE_M_INNTK,
     );
 
 const lagÅrsakString = (revurderingAarsaker: BehandlingArsakType[], alleKodeverk: AlleKodeverk): string | undefined => {
@@ -88,10 +88,10 @@ const lagÅrsakString = (revurderingAarsaker: BehandlingArsakType[], alleKodever
   }
   const aarsakTekstList = [];
   const endringFraBrukerAarsak = revurderingAarsaker.find(
-    aarsak => aarsak === BehandlingArsakType.RE_ENDRING_FRA_BRUKER,
+    aarsak => aarsak === BehandlingArsakTypeEnum.RE_ENDRING_FRA_BRUKER,
   );
   const alleAndreAarsakerNavn = revurderingAarsaker
-    .filter(aarsak => aarsak !== BehandlingArsakType.RE_ENDRING_FRA_BRUKER)
+    .filter(aarsak => aarsak !== BehandlingArsakTypeEnum.RE_ENDRING_FRA_BRUKER)
     .map(aarsak => alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === aarsak)?.navn ?? '');
   // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
   if (endringFraBrukerAarsak !== undefined) {
@@ -171,7 +171,7 @@ const finnInvilgetRevurderingTekst = (
   ytelseTypeKode: string,
   alleKodeverk: AlleKodeverk,
   tilbakekrevingText: string | undefined,
-  konsekvenserForYtelsen?: KonsekvensForYtelsen[],
+  konsekvenserForYtelsen: KonsekvensForYtelsen[],
   beregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
   originaltBeregningResultat?: BeregningsresultatDagytelse | BeregningsresultatEs,
 ): string => {
@@ -267,7 +267,7 @@ export const VedtakRevurderingForm = ({
       fagsak.fagsakYtelseType,
       alleKodeverk,
       tilbakekrevingtekst,
-      konsekvenserForYtelsen,
+      konsekvenserForYtelsen ?? [],
       beregningsresultat,
       beregningsresultatOriginalBehandling,
     );

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveReservasjonForlengetModal } from './OppgaveReservasjonForlengetModal';

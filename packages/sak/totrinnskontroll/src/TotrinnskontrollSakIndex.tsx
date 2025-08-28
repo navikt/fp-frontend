@@ -141,7 +141,7 @@ export const TotrinnskontrollSakIndex = ({
   const lagLenke = (skjermlenkeCode: SkjermlenkeType): Location | undefined =>
     createLocationForSkjermlenke(location, skjermlenkeCode);
 
-  const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;
+  const erStatusFatterVedtak = behandling.status === BehandlingStatusEnum.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk['SkjermlenkeType'];
   const vurderArsaker = alleKodeverk['VurderÅrsak'];
   const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);

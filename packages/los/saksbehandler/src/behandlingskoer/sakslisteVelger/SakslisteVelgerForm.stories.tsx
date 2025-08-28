@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingTypeEnum, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';

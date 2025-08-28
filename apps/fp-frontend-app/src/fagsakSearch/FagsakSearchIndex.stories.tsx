@@ -18,7 +18,7 @@ const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.
 const FAGSAK_1 = {
   saksnummer: '12345',
   fagsakYtelseType: 'ES',
-  status: FagsakStatus.OPPRETTET,
+  status: FagsakStatusEnum.OPPRETTET,
   aktørId: '1',
   barnFødt: '2019-10-10',
   opprettet: '',

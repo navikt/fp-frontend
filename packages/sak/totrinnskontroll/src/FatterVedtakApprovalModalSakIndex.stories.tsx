@@ -21,7 +21,7 @@ export const EtterFatterVedtakOgGodkjent: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatus.FATTER_VEDTAK,
+      status: BehandlingStatusEnum.FATTER_VEDTAK,
       type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     } as BehandlingAppKontekst,
     allAksjonspunktApproved: true,
@@ -32,7 +32,7 @@ export const EtterGodkjenning: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatus.FATTER_VEDTAK,
+      status: BehandlingStatusEnum.FATTER_VEDTAK,
       type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
@@ -46,7 +46,7 @@ export const EtterGodkjenningAvKlage: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatus.FATTER_VEDTAK,
+      status: BehandlingStatusEnum.FATTER_VEDTAK,
       type: BehandlingTypeEnum.KLAGE,
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
@@ -60,7 +60,7 @@ export const EtterTilbakesendingTilSaksbehandler: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatus.FATTER_VEDTAK,
+      status: BehandlingStatusEnum.FATTER_VEDTAK,
       type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,

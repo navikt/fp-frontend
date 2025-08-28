@@ -23,7 +23,7 @@ import { calcDaysAndWeeks, createWeekAndDay, ISO_DATE_FORMAT, periodFormat } fro
 import dayjs from 'dayjs';
 
 import {
-  BehandlingStatus,
+  BehandlingStatusEnum,
   OppholdArsakType,
   PeriodeResultatType,
   RelasjonsRolleType,
@@ -283,7 +283,7 @@ const finnLabelForPeriode = (
 
   const dager = calcDaysAndWeeks(periode.start, periode.end).formattedString;
   const manueltEndret =
-    periode.begrunnelse && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK
+    periode.begrunnelse && behandlingStatusKode === BehandlingStatusEnum.FATTER_VEDTAK
       ? intl.formatMessage({ id: 'UttakTidslinje.ManueltEditert' })
       : '';
 
@@ -313,7 +313,7 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
   if (periode.erGradert) {
     return <PercentIcon />;
   }
-  if (periode.begrunnelse && behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK) {
+  if (periode.begrunnelse && behandlingStatusKode === BehandlingStatusEnum.FATTER_VEDTAK) {
     return <PersonPencilIcon />;
   }
   if (periode.harUtsettelse) {

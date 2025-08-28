@@ -24,7 +24,7 @@ export const FormKravKlageInstansProsessStegInitPanel = () => {
   const alleIkkeHenlagteBehandlinger = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
   const avsluttedeBehandlinger = alleIkkeHenlagteBehandlinger
-    .filter(b => b.status === BehandlingStatus.AVSLUTTET)
+    .filter(b => b.status === BehandlingStatusEnum.AVSLUTTET)
     .filter(
       b =>
         (b.type !== BehandlingTypeEnum.KLAGE || isKlageAvvist(b.behandlingsresultat?.type)) &&

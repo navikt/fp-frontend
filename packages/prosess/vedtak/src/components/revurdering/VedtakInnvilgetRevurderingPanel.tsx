@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';

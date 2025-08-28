@@ -13,7 +13,7 @@ const defaultSak = {
   saksnummer: '1',
   fagsakYtelseType: 'FP',
   relasjonsRolleType: '-',
-  status: FagsakStatus.OPPRETTET,
+  status: FagsakStatusEnum.OPPRETTET,
   aktørId: '',
   person: {
     aktørId: null,

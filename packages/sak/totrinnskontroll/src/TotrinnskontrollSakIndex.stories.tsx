@@ -25,7 +25,7 @@ const LOCATION = {
 const DEFAULT_BEHANDLING = {
   uuid: '1',
   versjon: 2,
-  status: BehandlingStatus.FATTER_VEDTAK,
+  status: BehandlingStatusEnum.FATTER_VEDTAK,
   type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
   behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
@@ -111,7 +111,7 @@ export const ForSaksbehandler: Story = {
   args: {
     behandling: {
       ...DEFAULT_BEHANDLING,
-      status: BehandlingStatus.BEHANDLING_UTREDES,
+      status: BehandlingStatusEnum.BEHANDLING_UTREDES,
       totrinnskontrollÅrsaker: [
         {
           skjermlenkeType: SkjermlenkeType.FORMKRAV_KLAGE_NFP,

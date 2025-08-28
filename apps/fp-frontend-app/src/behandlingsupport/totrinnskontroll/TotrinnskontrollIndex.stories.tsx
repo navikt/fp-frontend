@@ -100,7 +100,7 @@ const BEHANDLING = {
   behandlingPåVent: false,
   kanHenleggeBehandling: true,
   type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-  status: BehandlingStatus.FATTER_VEDTAK,
+  status: BehandlingStatusEnum.FATTER_VEDTAK,
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',
   erAktivPapirsoknad: false,
@@ -117,7 +117,7 @@ const BEHANDLING = {
 const FAGSAK = {
   saksnummer: '123',
   fagsakYtelseType: 'FP',
-  status: FagsakStatus.UNDER_BEHANDLING,
+  status: FagsakStatusEnum.UNDER_BEHANDLING,
   behandlinger: [BEHANDLING],
   sakSkalTilInfotrygd: false,
   behandlingTypeKanOpprettes: [] as BehandlingOppretting[],

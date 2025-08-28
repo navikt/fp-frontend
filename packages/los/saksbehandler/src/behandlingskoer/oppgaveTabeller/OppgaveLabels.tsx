@@ -2,7 +2,7 @@ import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack, Tag } from '@navikt/ds-react';
 
-import { AndreKriterierType, BehandlingType } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
@@ -94,6 +94,7 @@ const hentAlleBehandlingstypeKortnavn = (intl: IntlShape) => ({
   [BehandlingTypeEnum.REVURDERING]: intl.formatMessage({ id: 'OppgaveLabels.Revurdering' }),
   [BehandlingTypeEnum.TILBAKEKREVING]: intl.formatMessage({ id: 'OppgaveLabels.Tilbake' }),
   [BehandlingTypeEnum.TILBAKEKREVING_REVURDERING]: intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }),
+  '-': intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }), // TODO: finnes bare for TS, fjernes?
 });
 
 const hentAndreKriterierNavn = (

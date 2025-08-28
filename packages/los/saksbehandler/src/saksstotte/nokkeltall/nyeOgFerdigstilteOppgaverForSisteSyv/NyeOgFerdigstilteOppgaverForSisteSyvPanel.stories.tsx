@@ -2,7 +2,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { NyeOgFerdigstilteOppgaverForSisteSyvPanel } from './NyeOgFerdigstilteOppgaverForSisteSyvPanel';

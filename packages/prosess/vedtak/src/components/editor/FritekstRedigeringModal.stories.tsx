@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FagsakMarkeringKode, FagsakYtelseType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { FagsakMarkeringKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, type PanelDataArgs, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type { Fagsak } from '@navikt/fp-types';
 

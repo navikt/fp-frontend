@@ -90,7 +90,7 @@ export const TotrinnskontrollIndex = ({
     godkjennTotrinnsaksjonspunkter(params);
   };
 
-  const erStatusFatterVedtak = valgtBehandling.status === BehandlingStatus.FATTER_VEDTAK;
+  const erStatusFatterVedtak = valgtBehandling.status === BehandlingStatusEnum.FATTER_VEDTAK;
 
   return (
     <>

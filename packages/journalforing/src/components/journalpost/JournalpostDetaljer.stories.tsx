@@ -73,19 +73,19 @@ const detaljertJournalpostMal = {
       saksnummer: '125416597',
       ytelseType: 'FP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatus.LOPENDE,
+      status: FagsakStatusEnum.LOPENDE,
     },
     {
       saksnummer: '155462542',
       ytelseType: 'SVP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatus.AVSLUTTET,
+      status: FagsakStatusEnum.AVSLUTTET,
     },
     {
       saksnummer: '175419131',
       ytelseType: 'FP',
       opprettetDato: '2022-01-03',
-      status: FagsakStatus.AVSLUTTET,
+      status: FagsakStatusEnum.AVSLUTTET,
     },
   ],
 } as Journalpost;
@@ -118,7 +118,7 @@ const journalpostKlage = {
       saksnummer: '125416597',
       ytelseType: 'FP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatus.LOPENDE,
+      status: FagsakStatusEnum.LOPENDE,
     },
   ],
 } as Journalpost;

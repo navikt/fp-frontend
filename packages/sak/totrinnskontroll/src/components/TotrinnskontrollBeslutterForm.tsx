@@ -118,7 +118,7 @@ export const TotrinnskontrollBeslutterForm = ({
   const erKlage = behandling && behandling.type === BehandlingTypeEnum.KLAGE;
   const erAnke = behandling && behandling.type === BehandlingTypeEnum.ANKE;
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
-    [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
+    [KonsekvensForYtelsenEnum.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsenEnum.INGEN_ENDRING],
     behandling.behandlingsresultat,
   );
 

@@ -10,7 +10,7 @@ describe('BeslutterModalIndex', () => {
     uuid: '1',
     versjon: 2,
     type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-    status: BehandlingStatus.FATTER_VEDTAK,
+    status: BehandlingStatusEnum.FATTER_VEDTAK,
     behandlingsresultat: {
       type: BehandlingResultatType.OPPHOR,
       erRevurderingMedUendretUtfall: true,

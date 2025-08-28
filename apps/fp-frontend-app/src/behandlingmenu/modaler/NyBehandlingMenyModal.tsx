@@ -27,7 +27,7 @@ const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKont
   const behandling = behandlinger.find(
     b =>
       b.gjeldendeVedtak &&
-      b.status === BehandlingStatus.AVSLUTTET &&
+      b.status === BehandlingStatusEnum.AVSLUTTET &&
       (b.type === BehandlingTypeEnum.FORSTEGANGSSOKNAD || b.type === BehandlingTypeEnum.REVURDERING),
   );
   return behandling ? behandling.uuid : undefined;

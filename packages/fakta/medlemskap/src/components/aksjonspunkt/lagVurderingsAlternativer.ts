@@ -1,5 +1,3 @@
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
-
 import { MedlemskapVurdering } from '../../types/vurderingMedlemskapForm';
 
 const oppfylt = {

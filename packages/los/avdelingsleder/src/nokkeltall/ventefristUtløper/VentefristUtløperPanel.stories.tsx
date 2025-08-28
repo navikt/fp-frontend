@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';

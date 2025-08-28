@@ -5,7 +5,7 @@ import { HStack, Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { type BehandlingType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 import { oppgaverÅpneEllerPåVentOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';

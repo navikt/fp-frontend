@@ -15,7 +15,7 @@ export const behandling: Behandling = {
   uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
   versjon: 26,
   type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-  status: BehandlingStatus.BEHANDLING_UTREDES,
+  status: BehandlingStatusEnum.BEHANDLING_UTREDES,
   opprettet: '2025-03-05T16:42:58',
   avsluttet: null,
   behandlendeEnhetId: '4867',

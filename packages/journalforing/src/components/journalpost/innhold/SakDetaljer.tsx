@@ -78,13 +78,13 @@ const velgSakLenke = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
 
 const finnTagProps = (statusKode: string): TagProps | null => {
   switch (statusKode) {
-    case FagsakStatus.AVSLUTTET:
+    case FagsakStatusEnum.AVSLUTTET:
       return { variant: 'neutral', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Avsluttet" /> };
-    case FagsakStatus.LOPENDE:
+    case FagsakStatusEnum.LOPENDE:
       return { variant: 'warning', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Løpende" /> };
-    case FagsakStatus.OPPRETTET:
+    case FagsakStatusEnum.OPPRETTET:
       return { variant: 'alt1', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Opprettet" /> };
-    case FagsakStatus.UNDER_BEHANDLING:
+    case FagsakStatusEnum.UNDER_BEHANDLING:
       return { variant: 'alt2', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.UnderBehandling" /> };
     default:
       return null;

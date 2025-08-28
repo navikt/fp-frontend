@@ -32,7 +32,7 @@ export const Default: Story = {
       navn: 'Foreldrepenger',
     },
     fagsakMarkeringTekster: ['Næring', 'Utland'],
-    fagsakStatus: { kode: FagsakStatus.OPPRETTET, kodeverk: 'FAGSAK_STATUS', navn: 'Opprettet' },
+    fagsakStatus: { kode: FagsakStatusEnum.OPPRETTET, kodeverk: 'FAGSAK_STATUS', navn: 'Opprettet' },
     dekningsgrad: 100,
     toggleSideMeny: action('button-click'),
     visSideMeny: true,

@@ -4,14 +4,13 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
-
-import { BehandlingType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
 import { NyeOgFerdigstilteOppgaverForIdagPanel } from './NyeOgFerdigstilteOppgaverForIdagPanel';
 
 import messages from '../../../../i18n/nb_NO.json';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 const withIntl = getIntlDecorator(messages);
 

@@ -7,7 +7,7 @@ describe('readOnlyUtils', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    status: BehandlingStatus.BEHANDLING_UTREDES,
+    status: BehandlingStatusEnum.BEHANDLING_UTREDES,
     type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     behandlingPåVent: false,
     behandlingHenlagt: false,

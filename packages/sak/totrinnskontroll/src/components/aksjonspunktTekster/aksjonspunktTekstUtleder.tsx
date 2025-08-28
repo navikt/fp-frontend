@@ -153,7 +153,7 @@ const getTextForKlage = (
   behandlingStaus: foreldrepenger_behandlingslager_behandling_BehandlingStatus,
   behandlingsresultat: Behandlingsresultat | null,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  if (behandlingStaus === BehandlingStatus.FATTER_VEDTAK) {
+  if (behandlingStaus === BehandlingStatusEnum.FATTER_VEDTAK) {
     return [getTextForKlageHelper(behandlingsresultat)];
   }
   return [];

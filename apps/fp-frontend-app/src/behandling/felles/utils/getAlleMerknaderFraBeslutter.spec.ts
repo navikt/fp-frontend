@@ -30,7 +30,7 @@ describe('getAlleMerknaderFraBeslutter', () => {
   ];
 
   it('skal hente alle merknader fra beslutter når behandlingstatus er BEHANDLING_UTREDER', () => {
-    const merknader = getAlleMerknaderFraBeslutter(BehandlingStatus.BEHANDLING_UTREDES, aksjonspunkter);
+    const merknader = getAlleMerknaderFraBeslutter(BehandlingStatusEnum.BEHANDLING_UTREDES, aksjonspunkter);
 
     expect(merknader).toEqual({
       [aksjonspunkter[0].definisjon]: {
@@ -40,7 +40,7 @@ describe('getAlleMerknaderFraBeslutter', () => {
   });
 
   it('skal ikke hente merknader  behandlingstatus er ulik BEHANDLING_UTREDER', () => {
-    const merknader = getAlleMerknaderFraBeslutter(BehandlingStatus.AVSLUTTET, aksjonspunkter);
+    const merknader = getAlleMerknaderFraBeslutter(BehandlingStatusEnum.AVSLUTTET, aksjonspunkter);
 
     expect(merknader).toEqual({});
   });

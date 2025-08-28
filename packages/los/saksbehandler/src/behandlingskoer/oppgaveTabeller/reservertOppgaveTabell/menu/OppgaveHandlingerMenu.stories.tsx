@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../../../data/fplosSaksbehandlerApi';

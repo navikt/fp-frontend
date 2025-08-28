@@ -6,7 +6,7 @@ import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, BehandlingType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingTypeEnum, VilkarType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';

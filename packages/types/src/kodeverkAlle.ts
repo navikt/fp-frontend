@@ -6,13 +6,13 @@ import {
   Arbeidskategori,
   ArbeidType,
   Avslagsarsak,
-  BehandlingArsakType,
+  BehandlingArsakTypeEnum,
   BehandlingResultatType,
-  BehandlingStatus,
-  BehandlingType,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
   FagsakMarkeringKode,
-  FagsakStatus,
-  FagsakYtelseType,
+  FagsakStatusEnum,
+  FagsakYtelseTypeEnum,
   FaktaOmBeregningTilfelle,
   FamilieHendelseType,
   FaresignalVurdering,
@@ -25,7 +25,7 @@ import {
   KlageAvvistÅrsak,
   KlageHjemmel,
   KlageMedholdÅrsak,
-  KonsekvensForYtelsen,
+  KonsekvensForYtelsenEnum,
   Landkode,
   ManuellBehandlingÅrsak,
   MedlemskapDekningType,
@@ -70,13 +70,13 @@ type KodeverkEnumMap = {
   ArbeidType: ArbeidType;
   Avslagsårsak: Avslagsarsak;
   BehandlingResultatType: BehandlingResultatType;
-  BehandlingStatus: BehandlingStatus;
-  BehandlingType: BehandlingType;
-  BehandlingÅrsakType: BehandlingArsakType;
+  BehandlingStatus: BehandlingStatusEnum;
+  BehandlingType: BehandlingTypeEnum;
+  BehandlingÅrsakType: BehandlingArsakTypeEnum;
   FamilieHendelseType: FamilieHendelseType;
   FaresignalVurdering: FaresignalVurdering;
-  FagsakStatus: FagsakStatus;
-  FagsakYtelseType: FagsakYtelseType;
+  FagsakStatus: FagsakStatusEnum;
+  FagsakYtelseType: FagsakYtelseTypeEnum;
   FagsakMarkering: FagsakMarkeringKode;
   FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
   FarSøkerType: FarSøkerType;
@@ -87,7 +87,7 @@ type KodeverkEnumMap = {
   KlageHjemmel: KlageHjemmel;
   KlageAvvistÅrsak: KlageAvvistÅrsak;
   KlageMedholdÅrsak: KlageMedholdÅrsak;
-  KonsekvensForYtelsen: KonsekvensForYtelsen;
+  KonsekvensForYtelsen: KonsekvensForYtelsenEnum;
   Landkoder: Landkode;
   ManuellBehandlingÅrsak: ManuellBehandlingÅrsak;
   MedlemskapDekningType: MedlemskapDekningType;

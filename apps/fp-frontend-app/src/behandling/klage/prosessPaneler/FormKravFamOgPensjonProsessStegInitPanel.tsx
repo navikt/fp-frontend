@@ -22,7 +22,7 @@ export const FormKravFamOgPensjonProsessStegInitPanel = () => {
   const { behandling, alleBehandlinger, hentOgSettBehandling } = use(BehandlingDataContext);
 
   const avsluttedeBehandlinger = alleBehandlinger
-    .filter(b => b.status === BehandlingStatus.AVSLUTTET)
+    .filter(b => b.status === BehandlingStatusEnum.AVSLUTTET)
     .filter(
       b =>
         (b.type !== BehandlingTypeEnum.KLAGE || isKlageAvvist(b.behandlingsresultat?.type)) &&

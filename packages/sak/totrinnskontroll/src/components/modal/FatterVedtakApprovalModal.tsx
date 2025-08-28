@@ -52,7 +52,7 @@ const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: Beha
 };
 
 const isStatusFatterVedtak = (behandlingStatusKode: BehandlingStatus) =>
-  behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK;
+  behandlingStatusKode === BehandlingStatusEnum.FATTER_VEDTAK;
 
 const utledInfoTextCode = (
   allAksjonspunktApproved: boolean,

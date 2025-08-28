@@ -8,13 +8,12 @@ import {
   AksjonspunktStatus,
   AksjonspunktType,
   Avslagsarsak,
-  BehandlingArsakType,
+  BehandlingArsakTypeEnum,
   BehandlingResultatType,
-  BehandlingStatus,
-  BehandlingType,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
   FagsakMarkeringKode,
-  FagsakYtelseType,
-  KonsekvensForYtelsen,
+  KonsekvensForYtelsenEnum,
   OppgaveType,
   RelasjonsRolleType,
   VedtakbrevType,
@@ -60,7 +59,7 @@ const defaultBehandling = {
   uuid: '1',
   versjon: 1,
   type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-  status: BehandlingStatus.BEHANDLING_UTREDES,
+  status: BehandlingStatusEnum.BEHANDLING_UTREDES,
   språkkode: 'NB',
   behandlingsresultat: {
     type: BehandlingResultatType.INNVILGET,
@@ -71,7 +70,7 @@ const defaultBehandling = {
   aksjonspunkt: defaultAksjonspunkter,
   behandlingÅrsaker: [
     {
-      behandlingArsakType: BehandlingArsakType.ANNET,
+      behandlingArsakType: BehandlingArsakTypeEnum.ANNET,
     },
   ],
 } as Behandling;
@@ -150,7 +149,7 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
     } as Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
@@ -165,7 +164,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
@@ -204,7 +203,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -485,7 +484,7 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
     },
     beregningsresultat: {
       antallBarn: 2,
@@ -589,8 +588,8 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
-          KonsekvensForYtelsen.ENDRING_I_BEREGNING,
-          KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
+          KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING,
+          KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
         ],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
@@ -609,12 +608,12 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
     behandling: {
       ...defaultBehandling,
       type: BehandlingTypeEnum.REVURDERING,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
-          KonsekvensForYtelsen.ENDRING_I_BEREGNING,
-          KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
+          KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING,
+          KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
         ],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
@@ -636,8 +635,8 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
-          KonsekvensForYtelsen.ENDRING_I_BEREGNING,
-          KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
+          KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING,
+          KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
         ],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
@@ -656,12 +655,12 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
     behandling: {
       ...defaultBehandling,
       type: BehandlingTypeEnum.REVURDERING,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
-          KonsekvensForYtelsen.ENDRING_I_BEREGNING,
-          KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER,
+          KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING,
+          KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
         ],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
@@ -680,11 +679,11 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
     behandling: {
       ...defaultBehandling,
       type: BehandlingTypeEnum.REVURDERING,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [KonsekvensForYtelsen.FORELDREPENGER_OPPHØRER],
+        konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
@@ -722,7 +721,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
     behandling: {
       ...defaultBehandling,
       type: BehandlingTypeEnum.REVURDERING,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -764,7 +763,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
+        konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
     } as Behandling,
@@ -795,7 +794,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       type: BehandlingTypeEnum.REVURDERING,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
-        konsekvenserForYtelsen: [KonsekvensForYtelsen.ENDRING_I_BEREGNING],
+        konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING],
         avslagsarsak: Avslagsarsak.MANN_ADOPTERER_IKKE_ALENE,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
       },
@@ -863,7 +862,7 @@ export const LegacyOverstyring: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatus.AVSLUTTET,
+      status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
@@ -885,7 +884,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatus.OPPRETTET,
+      status: BehandlingStatusEnum.OPPRETTET,
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,

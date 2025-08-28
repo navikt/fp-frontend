@@ -76,7 +76,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-05-02',
-          status: FagsakStatus.LOPENDE,
+          status: FagsakStatusEnum.LOPENDE,
           familieHendelseJf: {
             familiehHendelseDato: '2022-04-15',
             familihendelseType: FamilieHendelseType.FODSEL,
@@ -87,7 +87,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-05-02',
-          status: FagsakStatus.UNDER_BEHANDLING,
+          status: FagsakStatusEnum.UNDER_BEHANDLING,
           familieHendelseJf: {
             familiehHendelseDato: '2022-04-15',
             familihendelseType: FamilieHendelseType.ADOPSJON,
@@ -97,7 +97,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           saksnummer: '155462542',
           ytelseType: 'SVP',
           opprettetDato: '2022-03-02',
-          status: FagsakStatus.AVSLUTTET,
+          status: FagsakStatusEnum.AVSLUTTET,
           familieHendelseJf: {
             familiehHendelseDato: '2022-02-01',
             familihendelseType: FamilieHendelseType.TERMIN,
@@ -108,7 +108,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-02-02',
-          status: FagsakStatus.OPPRETTET,
+          status: FagsakStatusEnum.OPPRETTET,
           familieHendelseJf: {
             familiehHendelseDato: '2022-03-01',
             familihendelseType: FamilieHendelseType.OMSORG,

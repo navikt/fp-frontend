@@ -4,13 +4,7 @@ import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import {
-  AndreKriterierType,
-  BehandlingType,
-  FagsakYtelseType,
-  KøSortering,
-  OppgaveBehandlingStatus,
-} from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingTypeEnum, KøSortering, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
