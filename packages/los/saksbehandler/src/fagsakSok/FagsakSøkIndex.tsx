@@ -66,7 +66,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
         return [];
       }
 
-      const oppgaver = await hentOppgaverForFagsaker(fagsakerResultat);
+      const oppgaver = await hentOppgaverForFagsaker(fagsakerResultat.map(f => f.saksnummer));
 
       if (fagsakerResultat.length === 1) {
         if (oppgaver.length === 1) {
