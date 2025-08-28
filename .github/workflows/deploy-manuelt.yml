@@ -19,9 +19,8 @@ jobs:
     name: Deploy dev
     permissions:
       id-token: write
-    uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@main
+    uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@537d02cd3858c9cc0b2ea9d99e0e06327c899ff4
     with:
       gar: true
       image: ${{ inputs.image }}
       cluster: ${{ inputs.environment }}-gcp
-    secrets: inherit
