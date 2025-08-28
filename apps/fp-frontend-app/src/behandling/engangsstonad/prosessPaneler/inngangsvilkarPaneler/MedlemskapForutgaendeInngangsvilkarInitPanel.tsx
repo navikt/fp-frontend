@@ -26,12 +26,12 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
 
   const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(behandling));
 
-  const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkter.some(
+  const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
     ap =>
       ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR &&
       ap.status !== AksjonspunktStatus.AVBRUTT,
   );
-  const harÅpentMedlemskapAksjonspunkt = standardPanelProps.aksjonspunkter.some(
+  const harÅpentMedlemskapAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
     ap =>
       ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR &&
       ap.status == AksjonspunktStatus.OPPRETTET,

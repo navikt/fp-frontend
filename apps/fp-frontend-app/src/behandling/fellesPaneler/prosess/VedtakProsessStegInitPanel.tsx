@@ -202,7 +202,7 @@ const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): str
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
-  const kunLukkedeAksjonspunkt = harKunLukkedeAksjonspunkt(aksjonspunkt, standardPanelProps.aksjonspunkter);
+  const kunLukkedeAksjonspunkt = harKunLukkedeAksjonspunkt(aksjonspunkt, standardPanelProps.aksjonspunkterForPanel);
 
   if (kunLukkedeAksjonspunkt && harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_OPPFYLT)) {
     return VilkarUtfallType.IKKE_OPPFYLT;

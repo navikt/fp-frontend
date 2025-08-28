@@ -20,9 +20,9 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  const paneltekst = hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkter);
+  const paneltekst = hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkterForPanel);
 
-  return standardPanelProps.aksjonspunkter.length === 0 ? (
+  return standardPanelProps.aksjonspunkterForPanel.length === 0 ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
       vilkarKoder={VILKAR_KODER}

@@ -56,7 +56,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
           beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          readOnly={standardPanelProps.readOnly}
+          readOnly={standardPanelProps.isReadOnly}
           submittable={standardPanelProps.submittable}
         />
       ) : (

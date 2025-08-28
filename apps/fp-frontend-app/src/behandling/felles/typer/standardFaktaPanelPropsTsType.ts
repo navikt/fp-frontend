@@ -3,11 +3,11 @@ import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 export type StandardFaktaPanelProps = Readonly<{
   behandling: Behandling;
-  aksjonspunkter: Aksjonspunkt[];
-  readOnly: boolean;
-  submittable: boolean;
-  harApneAksjonspunkter: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
   alleKodeverk: AlleKodeverk;
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+  aksjonspunkterForPanel: Aksjonspunkt[];
+  isReadOnly: boolean;
+  submittable: boolean;
+  harÅpneAksjonspunkter: boolean;
+  submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
 }>;

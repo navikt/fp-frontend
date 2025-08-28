@@ -28,7 +28,7 @@ export const OverstyringPanelDef = ({ vilkar, vilkarKoder, panelTekstKode, medle
 
   const standardProps = useStandardProsessPanelProps([overstyringApKode], vilkarKoder);
 
-  const skalVises = skalViseProsessPanel(standardProps.aksjonspunkter, vilkarKoder, vilkar);
+  const skalVises = skalViseProsessPanel(standardProps.aksjonspunkterForPanel, vilkarKoder, vilkar);
 
   const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk['Avslagsårsak'], vilkar[0].vilkarType);
 

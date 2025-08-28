@@ -32,7 +32,7 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;
 
-  const skalHenteData = standardPanelProps.isAksjonspunktOpen || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
+  const skalHenteData = standardPanelProps.harÅpneAksjonspunkter || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
 
   const { data: beregningsresultatDagytelse } = useQuery(api.beregningsresultatDagytelseOptions(behandling));
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));

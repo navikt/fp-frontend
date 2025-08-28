@@ -30,7 +30,7 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;
 
-  const skalHenteData = standardPanelProps.isAksjonspunktOpen || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
+  const skalHenteData = standardPanelProps.harÅpneAksjonspunkter || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
 
   const api = useBehandlingApi(behandling);
 

@@ -29,7 +29,7 @@ export const FortsattMedlemskapProsessStegInitPanel = () => {
         prosessPanelKode={ProsessStegCode.FORTSATTMEDLEMSKAP}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FortsattMedlemskap' })}
         skalPanelVisesIMeny={skalViseProsessPanel(
-          standardPanelProps.aksjonspunkter,
+          standardPanelProps.aksjonspunkterForPanel,
           VILKAR_KODER,
           standardPanelProps.vilkar,
         )}
