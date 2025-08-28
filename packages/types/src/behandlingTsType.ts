@@ -1,20 +1,20 @@
-import type { Aksjonspunkt } from './aksjonspunktTsType';
-import type { BehandlingFellesData } from './behandlingAppKontekstTsType';
-import type { Vilkar } from './vilkarTsType';
+import type { tjenester_behandling_dto_behandling_UtvidetBehandlingDto } from './apiDtoGenerert.ts';
 
-export type Behandling = BehandlingFellesData &
-  Readonly<{
-    aksjonspunkt: Aksjonspunkt[];
-    harSøknad: boolean;
-    harSattEndringsdato: boolean;
-    sjekkSimuleringResultat: boolean;
-    taskStatus?: {
-      message: string;
-      pending: boolean;
-      status: string;
-      readOnly: boolean;
-      eta?: string;
-    } | null;
-    vilkår: Vilkar[];
-    alleUttaksperioderAvslått: boolean;
-  }>;
+// export type Behandling = BehandlingFellesData &
+//   Readonly<{
+//     aksjonspunkt: Aksjonspunkt[];
+//     harSøknad: boolean;
+//     harSattEndringsdato: boolean;
+//     sjekkSimuleringResultat: boolean;
+//     taskStatus?: {
+//       message: string;
+//       pending: boolean;
+//       status: string;
+//       readOnly: boolean;
+//       eta?: string;
+//     } | null;
+//     vilkår: Vilkar[];
+//     alleUttaksperioderAvslått: boolean;
+//   }>;
+
+export type Behandling = tjenester_behandling_dto_behandling_UtvidetBehandlingDto;

@@ -9,7 +9,7 @@ import {
   BehandlingArsakType,
   BehandlingStatus,
   BehandlingType,
-  FagsakYtelseType,
+  type FagsakYtelseType,
   SkjermlenkeType,
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
@@ -154,7 +154,7 @@ export const TotrinnskontrollSakIndex = ({
           readOnly={readOnly}
           onSubmit={submitHandler}
           forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-          erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
+          erForeldrepengerFagsak={fagsakYtelseType === 'FP'}
           skjemalenkeTyper={skjemalenkeTyper}
           erBehandlingEtterKlage={erBehandlingEtterKlage}
           faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
@@ -168,7 +168,7 @@ export const TotrinnskontrollSakIndex = ({
         <TotrinnskontrollSaksbehandlerPanel
           behandling={behandling}
           totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
+          erForeldrepengerFagsak={fagsakYtelseType === 'FP'}
           erTilbakekreving={erTilbakekreving}
           skjemalenkeTyper={skjemalenkeTyper}
           lagLenke={lagLenke}

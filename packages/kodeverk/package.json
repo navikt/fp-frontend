@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
+    "@navikt/fp-types": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "eslint": "9.33.0",
     "typescript": "5.9.2"

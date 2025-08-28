@@ -270,9 +270,9 @@ export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
 };
 
 export type tjenester_behandling_dto_behandling_BehandlingÅrsakDto = {
-  erAutomatiskRevurdering: boolean | null;
-  behandlingArsakType: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType | null;
-  manueltOpprettet: boolean | null;
+  erAutomatiskRevurdering: boolean;
+  behandlingArsakType: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType;
+  manueltOpprettet: boolean;
 };
 
 export type tjenester_behandling_dto_behandling_SkjæringstidspunktDto = {
@@ -4737,16 +4737,16 @@ export type foreldrepenger_kontrakter_formidling_v3_BrevmalDto = {
 };
 
 export type tjenester_behandling_dto_BehandlingOperasjonerDto = {
-  uuid: string | null;
-  behandlingKanBytteEnhet: boolean | null;
-  behandlingKanHenlegges: boolean | null;
-  behandlingKanGjenopptas: boolean | null;
-  behandlingKanOpnesForEndringer: boolean | null;
-  behandlingKanMerkesHaster: boolean | null;
-  behandlingKanSettesPaVent: boolean | null;
-  behandlingKanSendeMelding: boolean | null;
-  behandlingFraBeslutter: boolean | null;
-  behandlingTilGodkjenning: boolean | null;
+  uuid: string;
+  behandlingKanBytteEnhet: boolean;
+  behandlingKanHenlegges: boolean;
+  behandlingKanGjenopptas: boolean;
+  behandlingKanOpnesForEndringer: boolean;
+  behandlingKanMerkesHaster: boolean;
+  behandlingKanSettesPaVent: boolean;
+  behandlingKanSendeMelding: boolean;
+  behandlingFraBeslutter: boolean;
+  behandlingTilGodkjenning: boolean;
   vergeBehandlingsmeny: foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum | null;
 };
 
@@ -4763,7 +4763,7 @@ export type tjenester_behandling_dto_behandling_AnnenPartBehandlingDto = {
 
 export type tjenester_behandling_dto_behandling_FagsakBehandlingDto = {
   id: number | null;
-  uuid: string | null;
+  uuid: string;
   versjon: number | null;
   type: foreldrepenger_behandlingslager_behandling_BehandlingType | null;
   status: foreldrepenger_behandlingslager_behandling_BehandlingStatus | null;

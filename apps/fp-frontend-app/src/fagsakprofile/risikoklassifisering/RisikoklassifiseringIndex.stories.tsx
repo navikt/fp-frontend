@@ -93,12 +93,12 @@ const ALLE_BEHANDLINGER = [
 
 const FAGSAK = {
   saksnummer: '123',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: 'FP',
   status: FagsakStatus.UNDER_BEHANDLING,
   behandlinger: ALLE_BEHANDLINGER,
   sakSkalTilInfotrygd: false,
   behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
-} as Fagsak;
+} satisfies Fagsak;
 
 const meta = {
   title: 'fagsak/RisikoklassifiseringIndex',
