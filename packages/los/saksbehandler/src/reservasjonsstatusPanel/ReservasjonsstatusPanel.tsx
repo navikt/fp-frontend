@@ -1,14 +1,9 @@
 import { FaceFrownIcon, FaceLaughIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Tooltip } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
-import {
-  LosUrl,
-  oppgaverForFagsakerOptions,
-  opphevReservasjon,
-  reserverOppgavePost,
-} from '../data/fplosSaksbehandlerApi';
+import { oppgaverForFagsakerOptions, opphevReservasjon, reserverOppgavePost } from '../data/fplosSaksbehandlerApi';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -20,27 +15,21 @@ interface Props {
 }
 
 export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid }: Props) => {
-  const { data: reserverteOppgaver = [] } = useQuery(oppgaverForFagsakerOptions([saksnummer]));
-
-  const queryClient = useQueryClient();
+  const { data: reserverteOppgaver = [], refetch } = useQuery(oppgaverForFagsakerOptions([saksnummer]));
 
   const oppgaveForBehandling = reserverteOppgaver.find(ro => ro.behandlingId === behandlingUuid);
 
   const { mutate: opphevOppgavereservasjon } = useMutation({
     mutationFn: opphevReservasjon,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVER_FOR_FAGSAKER],
-      });
+      refetch();
     },
   });
 
   const { mutateAsync: reserverOppgave } = useMutation({
     mutationFn: reserverOppgavePost,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: [LosUrl.OPPGAVER_FOR_FAGSAKER],
-      });
+      refetch();
     },
   });
 
