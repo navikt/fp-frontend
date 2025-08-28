@@ -55,12 +55,12 @@ const BEHANDLING_OPPRETTING = [
 
 const REVURDERINGARSAKER = [
   {
-    kode: BehandlingArsakType.KLAGE_U_INNTK,
+    kode: BehandlingArsakTypeEnum.KLAGE_U_INNTK,
     kodeverk: 'BEHANDLING_ARSAK_TYPE',
     navn: 'Klage uten inntekt',
   },
   {
-    kode: BehandlingArsakType.FØDSEL,
+    kode: BehandlingArsakTypeEnum.FØDSEL,
     kodeverk: 'BEHANDLING_ARSAK_TYPE',
     navn: 'Fødsel',
   },
@@ -98,12 +98,12 @@ export const ForTilbakekreving: Story = {
   args: {
     tilbakekrevingRevurderingArsaker: [
       {
-        kode: BehandlingArsakType.RE_KLAGE_KA,
+        kode: BehandlingArsakTypeEnum.RE_KLAGE_KA,
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage KA',
       },
       {
-        kode: BehandlingArsakType.RE_KLAGE_NFP,
+        kode: BehandlingArsakTypeEnum.RE_KLAGE_NFP,
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage NFP',
       },

@@ -6,7 +6,6 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   AksjonspunktType,
-  FagsakYtelseType,
   NavBrukerKjonn,
   VilkarType,
 } from '@navikt/fp-kodeverk';

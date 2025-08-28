@@ -6,9 +6,9 @@ import { type Location } from 'history';
 import {
   AksjonspunktKode,
   AksjonspunktKodeTilbakekreving,
-  BehandlingArsakType,
-  BehandlingStatus,
-  BehandlingType,
+  BehandlingArsakTypeEnum,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
   type FagsakYtelseType,
   SkjermlenkeType,
   VurderÅrsak,
@@ -125,9 +125,9 @@ export const TotrinnskontrollSakIndex = ({
         .map(({ behandlingArsakType }) => behandlingArsakType)
         .some(
           bt =>
-            bt === BehandlingArsakType.ETTER_KLAGE ||
-            bt === BehandlingArsakType.KLAGE_U_INNTK ||
-            bt === BehandlingArsakType.KLAGE_M_INNTK,
+            bt === BehandlingArsakTypeEnum.ETTER_KLAGE ||
+            bt === BehandlingArsakTypeEnum.KLAGE_U_INNTK ||
+            bt === BehandlingArsakTypeEnum.KLAGE_M_INNTK,
         )
     : false;
 

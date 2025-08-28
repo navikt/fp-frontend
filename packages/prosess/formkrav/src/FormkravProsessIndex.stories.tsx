@@ -6,7 +6,7 @@ import { action } from 'storybook/actions';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  BehandlingType,
+  BehandlingTypeEnum,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';

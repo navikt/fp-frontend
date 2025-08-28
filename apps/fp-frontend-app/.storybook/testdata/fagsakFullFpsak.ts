@@ -82,7 +82,7 @@ export const fagsakFullFpsak: Fagsak = {
       erAktivPapirsoknad: false,
       førsteÅrsak: {
         erAutomatiskRevurdering: false,
-        behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
+        behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
         manueltOpprettet: false,
       },
       gjeldendeVedtak: false,
@@ -115,7 +115,7 @@ export const fagsakFullFpsak: Fagsak = {
       behandlingÅrsaker: [
         {
           erAutomatiskRevurdering: false,
-          behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
+          behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
           manueltOpprettet: false,
         },
       ],

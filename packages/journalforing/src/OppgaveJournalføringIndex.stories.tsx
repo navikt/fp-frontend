@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { FagsakStatus, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 

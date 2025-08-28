@@ -4,9 +4,9 @@ import type { DecoratorFunction } from 'storybook/internal/types';
 
 import { AksjonspunktStatus, BehandlingStatusEnum, BehandlingTypeEnum, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { PanelDataProvider } from '@navikt/fp-utils';
 
-import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { alleKodeverk } from '../mocks/alleKodeverk';
 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];

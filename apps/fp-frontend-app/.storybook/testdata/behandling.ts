@@ -23,7 +23,7 @@ export const behandling: Behandling = {
   erAktivPapirsoknad: false,
   førsteÅrsak: {
     erAutomatiskRevurdering: false,
-    behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
+    behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
     manueltOpprettet: false,
   },
   gjeldendeVedtak: false,
@@ -56,7 +56,7 @@ export const behandling: Behandling = {
   behandlingÅrsaker: [
     {
       erAutomatiskRevurdering: false,
-      behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
+      behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
       manueltOpprettet: false,
     },
   ],

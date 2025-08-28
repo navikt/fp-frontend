@@ -5,7 +5,7 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Button, CopyButton, Detail, HStack, Label, Spacer, Tag, type TagProps, VStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum, FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 import type { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
 

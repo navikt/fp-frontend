@@ -7,8 +7,7 @@ import {
   AksjonspunktStatus,
   Avslagsarsak,
   BehandlingResultatType,
-  BehandlingType,
-  FagsakYtelseType,
+  BehandlingTypeEnum,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';

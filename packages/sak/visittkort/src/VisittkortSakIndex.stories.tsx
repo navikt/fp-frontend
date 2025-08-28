@@ -41,7 +41,7 @@ export const UtenAnnenPart: Story = {
   args: {
     erMor: false,
     bruker: fagsakPersonFar,
-    familiehendelse: undefined,
+    familiehendelse: null,
   },
 };
 
@@ -51,6 +51,7 @@ export const PersonopplysningerForBeggeParter: Story = {
     bruker: fagsakPersonFar,
     annenPart: fagsakPersonMor,
     lenkeTilAnnenPart: 'testlenke til annen part',
+    familiehendelse: null,
   },
 };
 
@@ -63,6 +64,7 @@ export const PersonopplysningerForBeggeParterMedLangtNavn: Story = {
       navn: 'Espen Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler',
     },
     lenkeTilAnnenPart: 'testlenke til annen part',
+    familiehendelse: null,
   },
 };
 
@@ -72,6 +74,7 @@ export const MedDiskresjonskodeOgDødAnnenpart: Story = {
     bruker: { ...fagsakPersonFar, diskresjonskode: DiskresjonskodeType.KODE6 },
     annenPart: { ...fagsakPersonMor, dødsdato: '2024-02-01' },
     lenkeTilAnnenPart: 'testlenke til annen part',
+    familiehendelse: null,
   },
 };
 
@@ -81,6 +84,7 @@ export const ForAnnenPartDerAktørIdErUkjent: Story = {
     bruker: fagsakPersonMor,
     annenPart: { ...fagsakPersonFar, aktørId: null },
     lenkeTilAnnenPart: 'testlenke til annen part',
+    familiehendelse: null,
   },
 };
 
@@ -88,6 +92,7 @@ export const MedVergeOgBrukerUnder18: Story = {
   args: {
     harVergeIÅpenBehandling: true,
     bruker: { ...fagsakPersonMor, fødselsdato: dayjs().subtract(17, 'years').format(ISO_DATE_FORMAT) },
+    familiehendelse: null,
   },
 };
 

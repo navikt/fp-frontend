@@ -9,7 +9,7 @@ import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } 
 
 import styles from './behandlingInformasjon.module.css';
 
-const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakType.RE_KLAGE_KA, BehandlingArsakType.RE_KLAGE_NFP];
+const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakTypeEnum.RE_KLAGE_KA, BehandlingArsakTypeEnum.RE_KLAGE_NFP];
 
 const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean =>
   !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);

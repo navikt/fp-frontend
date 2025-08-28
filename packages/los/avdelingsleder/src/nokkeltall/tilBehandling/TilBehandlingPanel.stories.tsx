@@ -5,13 +5,13 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
 import { TilBehandlingPanel } from './TilBehandlingPanel';
 
 import messages from '../../../i18n/nb_NO.json';
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 const withIntl = getIntlDecorator(messages);
 

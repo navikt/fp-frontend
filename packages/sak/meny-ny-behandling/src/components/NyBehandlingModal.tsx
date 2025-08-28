@@ -21,43 +21,43 @@ const createOptions = (
 
 // TODO Denne inndelinga burde vel flyttast til DB (KODELISTE.EKSTRA_DATA)?
 const manuelleRevurderingsArsakerES = [
-  BehandlingArsakType.ANNET,
-  BehandlingArsakType.FEIL_I_LOVANDVENDELSE,
-  BehandlingArsakType.FEIL_ELLER_ENDRET_FAKTA,
-  BehandlingArsakType.FEIL_REGELVERKSFORSTAELSE,
-  BehandlingArsakType.FEIL_PROSESSUELL,
+  BehandlingArsakTypeEnum.ANNET,
+  BehandlingArsakTypeEnum.FEIL_I_LOVANDVENDELSE,
+  BehandlingArsakTypeEnum.FEIL_ELLER_ENDRET_FAKTA,
+  BehandlingArsakTypeEnum.FEIL_REGELVERKSFORSTAELSE,
+  BehandlingArsakTypeEnum.FEIL_PROSESSUELL,
 ];
 
 const manuelleRevurderingsArsakerFP = [
-  BehandlingArsakType.BEREEGNINGSGRUNNLAG,
-  BehandlingArsakType.MEDLEMSKAP,
-  BehandlingArsakType.OPPTJENING,
-  BehandlingArsakType.FORDELING,
-  BehandlingArsakType.INNTEKT,
-  BehandlingArsakType.DØD,
-  BehandlingArsakType.SØKERS_RELASJON,
-  BehandlingArsakType.SØKNADSFRIST,
-  BehandlingArsakType.KLAGE_U_INNTK,
-  BehandlingArsakType.KLAGE_M_INNTK,
+  BehandlingArsakTypeEnum.BEREEGNINGSGRUNNLAG,
+  BehandlingArsakTypeEnum.MEDLEMSKAP,
+  BehandlingArsakTypeEnum.OPPTJENING,
+  BehandlingArsakTypeEnum.FORDELING,
+  BehandlingArsakTypeEnum.INNTEKT,
+  BehandlingArsakTypeEnum.DØD,
+  BehandlingArsakTypeEnum.SØKERS_RELASJON,
+  BehandlingArsakTypeEnum.SØKNADSFRIST,
+  BehandlingArsakTypeEnum.KLAGE_U_INNTK,
+  BehandlingArsakTypeEnum.KLAGE_M_INNTK,
 ];
 
 const manuelleRevurderingsArsakerSVP = [
-  BehandlingArsakType.KLAGE_U_INNTK,
-  BehandlingArsakType.KLAGE_M_INNTK,
-  BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
-  BehandlingArsakType.RE_ENDRING_FRA_BRUKER,
-  BehandlingArsakType.FØDSEL,
-  BehandlingArsakType.DØD,
-  BehandlingArsakType.ANNET,
-  BehandlingArsakType.INNTEKT,
+  BehandlingArsakTypeEnum.KLAGE_U_INNTK,
+  BehandlingArsakTypeEnum.KLAGE_M_INNTK,
+  BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
+  BehandlingArsakTypeEnum.RE_ENDRING_FRA_BRUKER,
+  BehandlingArsakTypeEnum.FØDSEL,
+  BehandlingArsakTypeEnum.DØD,
+  BehandlingArsakTypeEnum.ANNET,
+  BehandlingArsakTypeEnum.INNTEKT,
 ];
 
 const TilbakekrevingRevurderingArsaker = [
-  BehandlingArsakType.RE_FORELDELSE,
-  BehandlingArsakType.RE_VILKÅR,
-  BehandlingArsakType.RE_KLAGE_KA,
-  BehandlingArsakType.RE_KLAGE_NFP,
-  BehandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT,
+  BehandlingArsakTypeEnum.RE_FORELDELSE,
+  BehandlingArsakTypeEnum.RE_VILKÅR,
+  BehandlingArsakTypeEnum.RE_KLAGE_KA,
+  BehandlingArsakTypeEnum.RE_KLAGE_NFP,
+  BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT,
 ];
 
 const getBehandlingAarsaker = (

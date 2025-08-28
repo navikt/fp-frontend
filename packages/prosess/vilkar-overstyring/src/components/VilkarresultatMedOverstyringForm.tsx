@@ -11,7 +11,7 @@ import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurdering
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  BehandlingType,
+  BehandlingTypeEnum,
   type OverstyringAksjonspunkter,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';

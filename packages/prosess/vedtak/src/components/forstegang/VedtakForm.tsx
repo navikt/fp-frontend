@@ -7,9 +7,8 @@ import { decodeHtmlEntity } from '@navikt/ft-utils';
 
 import {
   AksjonspunktKode,
-  BehandlingArsakType as klageBehandlingArsakType,
+  BehandlingArsakTypeEnum,
   BehandlingResultatType,
-  FagsakYtelseType,
   isAvslag,
   isInnvilget,
   isKlageOmgjort,
@@ -101,9 +100,9 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
     .map(({ behandlingArsakType }) => behandlingArsakType)
     .some(
       bt =>
-        bt === klageBehandlingArsakType.ETTER_KLAGE ||
-        bt === klageBehandlingArsakType.KLAGE_U_INNTK ||
-        bt === klageBehandlingArsakType.KLAGE_M_INNTK,
+        bt === BehandlingArsakTypeEnum.ETTER_KLAGE ||
+        bt === BehandlingArsakTypeEnum.KLAGE_U_INNTK ||
+        bt === BehandlingArsakTypeEnum.KLAGE_M_INNTK,
     );
 
 const finnVedtakstatusTekst = (

@@ -12,3 +12,9 @@ export type TotrinnskontrollSkjermlenkeContext = tjenester_behandling_vedtak_dto
 export type BehandlingTillatteOperasjoner = tjenester_behandling_dto_BehandlingOperasjonerDto;
 
 export type BehandlingAppKontekst = tjenester_behandling_dto_behandling_FagsakBehandlingDto;
+
+export enum VergeBehandlingmenyValg {
+  OPPRETT = 'OPPRETT',
+  FJERN = 'FJERN',
+  SKJUL = 'SKJUL',
+}

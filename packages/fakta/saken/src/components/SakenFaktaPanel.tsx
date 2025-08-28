@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type {
   AvklarDekningsgradAp,

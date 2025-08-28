@@ -109,7 +109,7 @@ const BEHANDLING = {
   totrinnskontrollÅrsaker: TOTRINNSKONTROLL_AKSJONSPUNKTER,
   behandlingÅrsaker: [
     {
-      behandlingArsakType: BehandlingArsakType.ANNET,
+      behandlingArsakType: BehandlingArsakTypeEnum.ANNET,
     },
   ],
 } as BehandlingAppKontekst;

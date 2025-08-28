@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakStatus, FagsakYtelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 

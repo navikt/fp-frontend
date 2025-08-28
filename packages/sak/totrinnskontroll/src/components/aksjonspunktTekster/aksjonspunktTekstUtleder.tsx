@@ -6,7 +6,7 @@ import { dateFormat } from '@navikt/ft-utils';
 import {
   AksjonspunktKode,
   BehandlingResultatType,
-  BehandlingStatus,
+  BehandlingStatusEnum,
   isFaktaUttakAksjonspunkt,
   isUttakAksjonspunkt,
 } from '@navikt/fp-kodeverk';
