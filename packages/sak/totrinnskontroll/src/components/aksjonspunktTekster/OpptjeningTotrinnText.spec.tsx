@@ -17,22 +17,28 @@ const lagOpptjeningAktivitetArbeidMedNavn = (resultat: string): OpptjeningAktivi
   arbeidsgiverNavn: 'Andersen Transport AS',
   orgnr: '1234567890',
   godkjent: resultat === 'GODKJENT',
+  arbeidsgiverReferanse: null,
+  privatpersonFødselsdato: null,
 });
 
 const lagOpptjeningAktivitetArbeidUtenNavn = (resultat: string): OpptjeningAktiviteter => ({
   erEndring: resultat === 'ENDRING',
   aktivitetType: 'Arbeid',
-  arbeidsgiverNavn: undefined,
+  arbeidsgiverNavn: null,
   orgnr: '1234567890',
   godkjent: resultat === 'GODKJENT',
+  arbeidsgiverReferanse: null,
+  privatpersonFødselsdato: null,
 });
 
 const lagOpptjeningAktivitet = (resultat: string): OpptjeningAktiviteter => ({
   erEndring: resultat === 'ENDRING',
   aktivitetType: 'Aktivitet',
-  arbeidsgiverNavn: undefined,
-  orgnr: undefined,
+  arbeidsgiverNavn: null,
+  orgnr: null,
   godkjent: resultat === 'GODKJENT',
+  arbeidsgiverReferanse: null,
+  privatpersonFødselsdato: null,
 });
 
 describe('OpptjeningTotrinnnText', () => {

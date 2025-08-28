@@ -10,9 +10,10 @@ import { formaterFritekst } from '@navikt/ft-utils';
 import {
   BehandlingResultatType,
   BehandlingResultatTypeTilbakekreving,
-  BehandlingType,
+  type BehandlingType,
+  BehandlingTypeEnum,
   DokumentMalType,
-  FagsakYtelseType,
+  type FagsakYtelseType,
 } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
@@ -54,6 +55,7 @@ const henleggArsakerPerBehandlingType = {
     BehandlingResultatType.HENLAGT_FEILOPPRETTET,
     BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
   ],
+  '-': [],
 };
 
 export type FormValues = {

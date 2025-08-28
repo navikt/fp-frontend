@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  BehandlingType,
+  BehandlingTypeEnum,
   DokumentMalType,
   RevurderingVarslingÅrsak,
 } from '@navikt/fp-kodeverk';
