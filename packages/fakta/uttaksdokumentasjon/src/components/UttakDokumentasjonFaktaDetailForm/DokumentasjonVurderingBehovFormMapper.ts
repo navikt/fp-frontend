@@ -2,9 +2,9 @@ import { assertUnreachable } from '@navikt/ft-utils';
 
 import {
   type DokumentasjonVurderingBehov,
+  type UttakÅrsak,
   type UttakType,
   type UttakVurdering,
-  type UttakÅrsak,
 } from '@navikt/fp-types';
 
 import { type FormValues, VurderingsAlternativ } from '../../types/FormValues';
