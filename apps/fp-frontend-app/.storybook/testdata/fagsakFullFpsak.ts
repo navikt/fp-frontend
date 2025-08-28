@@ -186,7 +186,7 @@ export const fagsakFullFpsak: Fagsak = {
     {
       behandlingUuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       aktør: {
-        type: HistorikkAktor.SOKER,
+        type: HistorikkAktorEnum.SOKER,
         ident: null,
       },
       skjermlenke: null,
@@ -205,7 +205,7 @@ export const fagsakFullFpsak: Fagsak = {
     {
       behandlingUuid: null,
       aktør: {
-        type: HistorikkAktor.ARBEIDSGIVER,
+        type: HistorikkAktorEnum.ARBEIDSGIVER,
         ident: null,
       },
       skjermlenke: null,

@@ -39,7 +39,7 @@ export { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
 export { FamilieHendelseType } from './src/familieHendelseType';
 export { ForeldelseVurderingType } from './src/foreldelseVurderingType';
 export { ForeldreType } from './src/foreldreType';
-export { HistorikkAktor } from './src/historikkAktor';
+export { type HistorikkAktor, HistorikkAktorEnum } from './src/historikkAktor';
 export { InnsynResultatType } from './src/innsynResultatType';
 export { InntektAktivitetType } from './src/inntektAktivitetType';
 export { Inntektskategori } from './src/inntektskategorier';
