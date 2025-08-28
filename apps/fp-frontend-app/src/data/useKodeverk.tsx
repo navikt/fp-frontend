@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 

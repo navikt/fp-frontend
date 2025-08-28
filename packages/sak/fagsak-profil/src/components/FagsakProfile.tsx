@@ -3,7 +3,6 @@ import { useMediaQuery } from 'react-responsive';
 
 import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-react';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { SidePanelProfileKnapp } from './SidePanelProfileKnapp.tsx';

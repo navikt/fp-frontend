@@ -4,8 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
-
-import { BehandlingStatus } from '@navikt/fp-kodeverk';
 import { type TotrinnskontrollFormValues, TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
@@ -16,6 +14,7 @@ import { useKodeverk } from '../../data/useKodeverk';
 import { FagsakData } from '../../fagsak/FagsakData';
 import { SupportHeaderAndContent } from '../SupportHeader';
 import { BeslutterModalIndex } from './BeslutterModalIndex';
+import { BehandlingStatusEnum } from '@navikt/fp-kodeverk';
 
 type Values = {
   fatterVedtakAksjonspunktDto: {

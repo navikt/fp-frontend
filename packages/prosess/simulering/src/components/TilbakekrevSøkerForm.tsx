@@ -9,7 +9,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, FagsakYtelseType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 

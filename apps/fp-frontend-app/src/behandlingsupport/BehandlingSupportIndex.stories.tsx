@@ -3,8 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
-
-import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -22,6 +20,7 @@ import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingSupportIndex } from './BehandlingSupportIndex';
 
 import messages from '../../i18n/nb_NO.json';
+import { BehandlingStatusEnum, BehandlingTypeEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
 
 const withIntl = getIntlDecorator(messages);
 
@@ -50,6 +49,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
 };
 
+// @ts-expect-error -- fiks senere
 const BEHANDLING = {
   versjon: 2,
   uuid: '1',
@@ -134,6 +134,7 @@ export const SkalViseFraBeslutter: Story = {
           behandlingTillatteOperasjoner: {
             ...BEHANDLING_TILLATTE_OPERASJONER,
             behandlingFraBeslutter: true,
+            uuid: '',
           },
         },
       ],
@@ -153,6 +154,7 @@ export const SkalViseFraGodkjenning: Story = {
           behandlingTillatteOperasjoner: {
             ...BEHANDLING_TILLATTE_OPERASJONER,
             behandlingTilGodkjenning: true,
+            uuid: '',
           },
         },
       ],

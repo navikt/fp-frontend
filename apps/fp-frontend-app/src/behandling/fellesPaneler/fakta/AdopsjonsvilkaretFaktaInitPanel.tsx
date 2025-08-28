@@ -5,7 +5,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
-import { adopsjonsvilkarene, AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { adopsjonsvilkarene, AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';

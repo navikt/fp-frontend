@@ -5,7 +5,7 @@ import type { DecoratorFunction } from 'storybook/internal/types';
 import { FagsakProfilSakIndex } from './FagsakProfilSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
-import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum, FagsakYtelseTypeEnum } from '@navikt/fp-kodeverk';
 
 const withStylerovider: DecoratorFunction<ReactRenderer> = Story => (
   <div style={{ width: '600px', backgroundColor: 'var(--ax-bg-default)', padding: '30px' }}>
@@ -26,7 +26,7 @@ export const Default: Story = {
   args: {
     saksnummer: '232341251',
     fagsakYtelseType: {
-      kode: 'FP',
+      kode: FagsakYtelseTypeEnum.FORELDREPENGER,
       kodeverk: 'FAGSAK_YTELSE_TYPE',
       navn: 'Foreldrepenger',
     },

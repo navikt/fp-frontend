@@ -12,10 +12,11 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
-  BehandlingArsakType,
+  type BehandlingArsakType,
+  BehandlingArsakTypeEnum,
   BehandlingResultatTypeTilbakekreving,
-  BehandlingStatus,
-  BehandlingType,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -59,6 +60,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
     behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
     behandling.førsteÅrsak &&
+    // @ts-expect-error -- denne tror jeg er utdatert??
     BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
 
   const api = useBehandlingApi(behandling);
@@ -131,11 +133,14 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   }
   const { type } = beregningsresultat;
 
+  // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
   if (type === BehandlingResultatTypeTilbakekreving.INGEN_TILBAKEBETALING) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
+  // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
   return type === BehandlingResultatTypeTilbakekreving.DELVIS_TILBAKEBETALING ||
+    // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
     type === BehandlingResultatTypeTilbakekreving.FULL_TILBAKEBETALING
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;

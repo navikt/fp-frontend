@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, BehandlingStatus, BehandlingType, isKlageAvvist } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingStatusEnum, BehandlingTypeEnum, isKlageAvvist } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
 

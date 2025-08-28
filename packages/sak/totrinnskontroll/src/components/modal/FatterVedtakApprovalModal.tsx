@@ -5,9 +5,9 @@ import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-reac
 
 import {
   BehandlingResultatType,
-  BehandlingStatus,
+  type BehandlingStatus,
   BehandlingStatusEnum,
-  BehandlingType,
+  type BehandlingType,
   BehandlingTypeEnum,
 } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
@@ -123,6 +123,7 @@ export const FatterVedtakApprovalModal = ({
     allAksjonspunktApproved,
     behandlingStatusKode,
     behandlingTypeKode,
+    // @ts-expect-error -- fikses senere
     behandlingsresultat,
     isBehandlingsresultatOpphor,
     harSammeResultatSomOriginalBehandling,

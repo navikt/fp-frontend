@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { BehandlingResultatType, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BeslutterModalIndex } from './BeslutterModalIndex';

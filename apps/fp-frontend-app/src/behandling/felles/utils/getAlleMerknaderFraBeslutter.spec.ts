@@ -2,7 +2,7 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   AksjonspunktType,
-  BehandlingStatus,
+  BehandlingStatusEnum,
   VilkarType,
 } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';

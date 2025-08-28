@@ -6,7 +6,7 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, DokumentMalType, VenteArsakType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, DokumentMalType, VenteArsakType } from '@navikt/fp-kodeverk';
 import {
   type ForhåndsvisBrevParams,
   MeldingerSakIndex,

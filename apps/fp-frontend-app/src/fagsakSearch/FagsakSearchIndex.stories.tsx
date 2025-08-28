@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 
-import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
@@ -12,6 +11,7 @@ import { notEmpty } from '@navikt/fp-utils';
 import { initFetchFpsak } from '../../.storybook/testdata';
 import { FagsakRel, FagsakUrl, initFetchOptions, useFagsakApi, wrapUrl } from '../data/fagsakApi';
 import { FagsakSearchIndex } from './FagsakSearchIndex';
+import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 
 const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.find(link => link.rel === rel)).href));
 

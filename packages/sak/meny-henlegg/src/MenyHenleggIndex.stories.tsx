@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingResultatType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 import { MenyHenleggIndex } from './MenyHenleggIndex';

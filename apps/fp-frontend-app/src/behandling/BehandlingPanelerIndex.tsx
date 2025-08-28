@@ -5,7 +5,6 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -15,6 +14,7 @@ import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
 import { BehandlingDataContext } from './felles/utils/behandlingDataContext';
 import { lazyWithRetry } from './lazyUtils';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 const ForeldrepengerPaneler = lazyWithRetry(() => import('./foreldrepenger/ForeldrepengerPaneler'));
 const EngangsstonadPaneler = lazyWithRetry(() => import('./engangsstonad/EngangsstonadPaneler'));

@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 
-import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aktor, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';

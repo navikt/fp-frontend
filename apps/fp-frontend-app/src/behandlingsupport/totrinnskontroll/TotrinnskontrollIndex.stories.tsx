@@ -6,11 +6,10 @@ import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
-  BehandlingArsakType,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakStatus,
-  FagsakYtelseType,
+  BehandlingArsakTypeEnum,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
+  FagsakStatusEnum,
 } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
@@ -53,8 +52,12 @@ const createAksjonspunkt = (aksjonspunktKode: string) =>
   ({
     aksjonspunktKode,
     opptjeningAktiviteter: [],
+    besluttersBegrunnelse: 'begrunnelse',
+    totrinnskontrollGodkjent: false,
+    beregningDto: { fastsattVarigEndringNaering: false, faktaOmBeregningTilfeller: [] },
     vurderPaNyttArsaker: [],
-  }) as TotrinnskontrollAksjonspunkt;
+    uttakPerioder: [],
+  }) satisfies TotrinnskontrollAksjonspunkt;
 
 const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
   {
@@ -93,6 +96,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
 };
 
+// @ts-expect-error -- fiks senere
 const BEHANDLING = {
   versjon: 2,
   uuid: '1',

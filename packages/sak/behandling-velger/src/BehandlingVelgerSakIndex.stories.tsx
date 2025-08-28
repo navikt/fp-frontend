@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 import type { BehandlingAppKontekst, Behandlingsresultat } from '@navikt/fp-types';
 

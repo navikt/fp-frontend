@@ -5,7 +5,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Location } from 'history';
 
-import { BehandlingType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 import { useTrackRouteParam } from '@navikt/fp-utils';

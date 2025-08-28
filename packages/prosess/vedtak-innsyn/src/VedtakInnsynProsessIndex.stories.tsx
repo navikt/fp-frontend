@@ -6,7 +6,7 @@ import { action } from 'storybook/actions';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  BehandlingType,
+  BehandlingTypeEnum,
   InnsynResultatType,
   Kommunikasjonsretning,
 } from '@navikt/fp-kodeverk';

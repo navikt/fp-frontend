@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';

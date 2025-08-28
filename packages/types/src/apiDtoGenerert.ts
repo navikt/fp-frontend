@@ -182,8 +182,7 @@ export type foreldrepenger_behandlingslager_behandling_vilkår_VilkårType =
   | 'FP_VK_21'
   | 'FP_VK_23'
   | 'FP_VK_41'
-  | 'SVP_VK_1'
-  | '-';
+  | 'SVP_VK_1';
 
 export type foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType =
   | 'OPPFYLT'
@@ -281,11 +280,11 @@ export type tjenester_behandling_dto_behandling_SkjæringstidspunktDto = {
 };
 
 export type tjenester_behandling_vilkår_VilkårDto = {
-  vilkarType: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType | null;
-  vilkarStatus: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType | null;
+  vilkarType: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
+  vilkarStatus: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType;
   avslagKode: string | null;
   lovReferanse: string | null;
-  overstyrbar: boolean | null;
+  overstyrbar: boolean;
   evaluering: string | null;
   input: string | null;
 };
@@ -582,7 +581,7 @@ export type tjenester_behandling_aksjonspunkt_AksjonspunktDto = {
 export type tjenester_behandling_dto_AsyncPollingStatus = {
   status: tjenester_behandling_dto_AsyncPollingStatus_Status | null;
   eta: string | null;
-  message: string | null;
+  message: string;
   pollIntervalMillis: number | null;
   location: string | null;
   cancelUri: string | null;
@@ -630,13 +629,13 @@ export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   toTrinnsBehandling: boolean;
   behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
-  vilkår: Array<tjenester_behandling_vilkår_VilkårDto> | null;
+  vilkår: Array<tjenester_behandling_vilkår_VilkårDto>;
   links: Array<rest_ResourceLink>;
   ansvarligBeslutter: string | null;
   aksjonspunkt: Array<tjenester_behandling_aksjonspunkt_AksjonspunktDto>;
-  harSøknad: boolean | null;
+  harSøknad: boolean;
   harRegisterdata: boolean | null;
-  harSattEndringsdato: boolean | null;
+  harSattEndringsdato: boolean;
   alleUttaksperioderAvslått: boolean | null;
   sjekkSimuleringResultat?: boolean;
   taskStatus: tjenester_behandling_dto_AsyncPollingStatus | null;
@@ -4792,7 +4791,7 @@ export type tjenester_behandling_dto_behandling_FagsakBehandlingDto = {
   behandlingKøet: boolean;
   ansvarligSaksbehandler: string | null;
   toTrinnsBehandling: boolean;
-  behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
+  behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto | null;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
   vilkår: Array<tjenester_behandling_vilkår_VilkårDto> | null;
   links: Array<rest_ResourceLink>;
