@@ -40,7 +40,6 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
       overstyringApKode={AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR}
       kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       overrideReadOnly={standardPanelProps.isReadOnly}
-      aksjonspunkter={standardPanelProps.aksjonspunkter}
     >
       <ProsessDefaultInitOverstyringPanel
         standardPanelProps={standardPanelProps}
