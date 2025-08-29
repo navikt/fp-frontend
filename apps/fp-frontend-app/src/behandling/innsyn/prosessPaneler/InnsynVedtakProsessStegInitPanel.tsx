@@ -6,16 +6,16 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingResultatType, erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
 import type { Behandling } from '@navikt/fp-types';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 export const InnsynVedtakProsessStegInitPanel = () => {
   const intl = useIntl();
@@ -75,8 +75,8 @@ export const InnsynVedtakProsessStegInitPanel = () => {
 
 const getVedtakStatus = (behandling: Behandling): string => {
   const { aksjonspunkt, behandlingsresultat } = behandling;
-  const harApentAksjonpunkt = aksjonspunkt.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  if (aksjonspunkt.length === 0 || harApentAksjonpunkt) {
+  const harÅpentAksjonspunkt = aksjonspunkt.some(erAksjonspunktÅpent);
+  if (aksjonspunkt.length === 0 || harÅpentAksjonspunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
   return behandlingsresultat?.type === BehandlingResultatType.INNSYN_INNVILGET ||

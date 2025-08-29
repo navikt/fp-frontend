@@ -25,7 +25,7 @@ interface Props {
 export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOverstyre }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, harÅpneAksjonspunkter, isReadOnly, submitCallback } =
+  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isReadOnly, submitCallback } =
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
   annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
@@ -91,7 +91,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
           <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
         )}
       </HStack>
-      {harÅpneAksjonspunkter && (
+      {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="UttakEøsFaktaForm.Aksjonspunkt" />
         </AksjonspunktHelpTextHTML>

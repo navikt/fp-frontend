@@ -1,6 +1,13 @@
 import { useState } from 'react';
 
-import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
+export type ProsessPanelMenyData = {
+  id: string;
+  tekst: string;
+  erAktiv: boolean;
+  harÅpentAksjonspunkt: boolean;
+  status: string;
+  skalVisesIMeny: boolean;
+};
 
 export const useProsessPanelMenyData = () => {
   const [prosessPanelMenyData, setProsessPanelMenyData] = useState<ProsessPanelMenyData[]>([]);
@@ -19,7 +26,7 @@ export const useProsessPanelMenyData = () => {
   };
 
   return {
-    prosessPanelMenyData: prosessPanelMenyData.filter(d => d.skalVisesImeny),
+    prosessPanelMenyData: prosessPanelMenyData.filter(d => d.skalVisesIMeny),
     settProsessPanelMenyData,
   };
 };

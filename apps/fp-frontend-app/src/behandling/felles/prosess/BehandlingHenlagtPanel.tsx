@@ -5,8 +5,8 @@ import { BodyShort } from '@navikt/ds-react';
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
-import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
+import type { ProsessPanelMenyData } from './useProsessPanelMenyData';
 
 const ID = 'henlagt';
 
@@ -26,9 +26,9 @@ export const BehandlingHenlagtPanel = ({ valgtProsessSteg, settProsessPanelMenyD
       id: ID,
       tekst: intl.formatMessage({ id: 'BehandlingHenlagtPanel.Header' }),
       erAktiv: erValgt,
-      harApentAksjonspunkt: false,
+      harÅpentAksjonspunkt: false,
       status: VilkarUtfallType.IKKE_VURDERT,
-      skalVisesImeny: true,
+      skalVisesIMeny: true,
     });
     setPanelValgt(erValgt);
   }, [valgtProsessSteg]);

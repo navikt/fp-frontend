@@ -9,11 +9,11 @@ import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknad
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
 import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SOKNADSFRISTVILKARET, AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR];
 
@@ -48,14 +48,14 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
         skalPanelVisesIMeny={skalViseProsessPanel(
           standardPanelProps.aksjonspunkterForPanel,
           VILKAR_KODER,
-          standardPanelProps.vilkar,
+          standardPanelProps.vilkårForPanel,
         )}
       >
         <>
           {!harSoknadsfristAp && (
             <OverstyringPanelDef
-              vilkar={standardPanelProps.vilkar}
-              vilkarKoder={VILKAR_KODER}
+              vilkår={standardPanelProps.vilkårForPanel}
+              vilkårKoder={VILKAR_KODER}
               panelTekstKode="Behandlingspunkt.Soknadsfristvilkaret"
             />
           )}

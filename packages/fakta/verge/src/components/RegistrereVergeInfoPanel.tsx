@@ -42,7 +42,7 @@ interface Props {
 export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter, harÅpneAksjonspunkter, isReadOnly } =
+  const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter, harÅpentAksjonspunkt, isReadOnly } =
     usePanelDataContext<AvklarVergeAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
@@ -59,7 +59,7 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
 
   return (
     <VStack gap="space-20">
-      {harÅpneAksjonspunkter && (
+      {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           {intl.formatMessage({ id: 'RegistrereVergeInfoPanel.AksjonspunktTekst' })}
         </AksjonspunktHelpTextHTML>

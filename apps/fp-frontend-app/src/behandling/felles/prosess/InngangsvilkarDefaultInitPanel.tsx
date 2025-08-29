@@ -3,17 +3,17 @@ import { type ReactElement, use, useEffect, useState } from 'react';
 import { type OverstyringAksjonspunkter, VilkarType } from '@navikt/fp-kodeverk';
 import { MellomlagretFormDataProvider, PanelDataProvider, PanelOverstyringProvider } from '@navikt/fp-utils';
 
-import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
-import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { BehandlingDataContext } from '../context/BehandlingDataContext';
 import { InngangsvilkårPanelDataContext } from './InngangsvilkarDefaultInitWrapper';
 import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useInngangsvilkarRegistrerer } from './useInngangsvilkarRegistrerer';
+import type { StandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 interface Props {
   standardPanelProps: StandardProsessPanelProps;
-  vilkarKoder?: VilkarType[];
-  inngangsvilkarPanelKode: string;
-  hentInngangsvilkarPanelTekst: string;
+  vilkårKoder?: VilkarType[];
+  inngangsvilkårPanelKode: string;
+  hentInngangsvilkårPanelTekst: string;
   children: ReactElement;
 }
 
@@ -40,7 +40,7 @@ export const InngangsvilkarOverstyringDefaultInitPanel = (
       overrideReadOnly={
         props.standardPanelProps.isReadOnly ||
         props.overrideReadOnly ||
-        (harÅpentInngangsvilkårAksjonspunkt && !(props.standardPanelProps.harÅpneAksjonspunkter || erOverstyrt))
+        (harÅpentInngangsvilkårAksjonspunkt && !(props.standardPanelProps.harÅpentAksjonspunkt || erOverstyrt))
       }
       toggleOverstyring={toggleOverstyring}
     >
@@ -51,9 +51,9 @@ export const InngangsvilkarOverstyringDefaultInitPanel = (
 
 export const InngangsvilkarDefaultInitPanel = ({
   standardPanelProps,
-  vilkarKoder,
-  inngangsvilkarPanelKode,
-  hentInngangsvilkarPanelTekst,
+  vilkårKoder,
+  inngangsvilkårPanelKode,
+  hentInngangsvilkårPanelTekst,
   erOverstyrt = false,
   children,
 }: Props & { erOverstyrt?: boolean }) => {
@@ -63,15 +63,15 @@ export const InngangsvilkarDefaultInitPanel = ({
 
   const skalVises = skalViseProsessPanel(
     standardPanelProps.aksjonspunkterForPanel,
-    vilkarKoder,
-    standardPanelProps.vilkar,
+    vilkårKoder,
+    standardPanelProps.vilkårForPanel,
   );
 
   useInngangsvilkarRegistrerer(
-    inngangsvilkarPanelKode,
-    hentInngangsvilkarPanelTekst,
+    inngangsvilkårPanelKode,
+    hentInngangsvilkårPanelTekst,
     skalVises,
-    standardPanelProps.harÅpneAksjonspunkter,
+    standardPanelProps.harÅpentAksjonspunkt,
     standardPanelProps.status,
     erOverstyrt,
   );
@@ -84,7 +84,7 @@ export const InngangsvilkarDefaultInitPanel = ({
         behandling={behandling}
         fagsak={fagsak}
         aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
-        harÅpneAksjonspunkter={standardPanelProps.harÅpneAksjonspunkter}
+        harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
         alleKodeverk={alleKodeverk}
         submitCallback={standardPanelProps.submitCallback}
         isReadOnly={standardPanelProps.isReadOnly}

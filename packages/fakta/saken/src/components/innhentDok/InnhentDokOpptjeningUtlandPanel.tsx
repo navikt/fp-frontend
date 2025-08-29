@@ -27,7 +27,7 @@ type FormValues = {
 
 interface Props {
   readOnly: boolean;
-  harApneAksjonspunkter: boolean;
+  harÅpentAksjonspunkt: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   submittable: boolean;
   submitCallback: (data: MerkOpptjeningUtlandAp) => Promise<void>;
@@ -37,7 +37,7 @@ interface Props {
 
 export const InnhentDokOpptjeningUtlandPanel = ({
   readOnly,
-  harApneAksjonspunkter,
+  harÅpentAksjonspunkt,
   aksjonspunkt,
   alleMerknaderFraBeslutter,
   submittable,
@@ -69,7 +69,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
         </Heading>
         <AksjonspunktBox
           className={styles.aksjonspunktMargin}
-          erAksjonspunktApent={harApneAksjonspunkter}
+          erAksjonspunktApent={harÅpentAksjonspunkt}
           erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
         >
           <VStack gap="space-16">

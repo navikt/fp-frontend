@@ -9,7 +9,7 @@ type Props<AP_TYPE extends AksjonspunktType> = {
   behandling: Behandling;
   fagsak: Fagsak;
   aksjonspunkterForPanel: Aksjonspunkt[];
-  harÅpneAksjonspunkter: boolean;
+  harÅpentAksjonspunkt: boolean;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   isReadOnly: boolean;

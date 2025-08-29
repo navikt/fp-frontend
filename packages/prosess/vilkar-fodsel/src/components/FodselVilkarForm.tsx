@@ -7,7 +7,7 @@ import { BTag } from '@navikt/ft-utils';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
+  erAksjonspunktÅpent,
   FagsakYtelseType,
   VilkarType,
   VilkarUtfallType,
@@ -50,7 +50,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
@@ -72,7 +72,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     alleAvslagsarsaker,
   );
 
-  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
@@ -84,7 +84,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'FodselVilkarForm.Fodsel' })}
-        isAksjonspunktOpen={harÅpneAksjonspunkter}
+        isAksjonspunktOpen={harÅpentAksjonspunkt}
         readOnlySubmitButton={readOnlySubmitButton}
         readOnly={isReadOnly}
         lovReferanse={lovReferanse}

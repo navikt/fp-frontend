@@ -53,7 +53,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<AksjonspunktData>();
@@ -74,7 +74,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
     : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
   const avslagsarsaker = alleKodeverk['Avslagsårsak'][vilkarTypeKode];
 
-  const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm

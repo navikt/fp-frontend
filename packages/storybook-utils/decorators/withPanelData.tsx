@@ -3,17 +3,16 @@ import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
 import {
-  AksjonspunktStatus,
   BehandlingStatus,
   BehandlingType,
+  erAksjonspunktÅpent,
   FagsakYtelseType,
   RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
+import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { PanelDataProvider } from '@navikt/fp-utils';
 
-import type { FaktaAksjonspunkt } from '../../types-avklar-aksjonspunkter/src/FaktaAksjonspunkt';
-import type { ProsessAksjonspunkt } from '../../types-avklar-aksjonspunkter/src/ProsessAksjonspunkt';
 import { alleKodeverk } from '../mocks/alleKodeverk';
 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
@@ -66,7 +65,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       fagsak={fagsak ?? DEFAULT_FAGSAK}
       behandling={behandling ?? DEFAULT_BEHANDLING}
       aksjonspunkterForPanel={aksjonspunkter}
-      harÅpneAksjonspunkter={aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET)}
+      harÅpentAksjonspunkt={aksjonspunkter.some(erAksjonspunktÅpent)}
       alleKodeverk={alleKodeverk}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter ?? {}}
       isReadOnly={isReadOnly ?? false}

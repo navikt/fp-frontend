@@ -9,9 +9,9 @@ import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeResultatProsessIndex } from '@navikt/fp-prosess-anke-resultat';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FORESLA_VEDTAK,

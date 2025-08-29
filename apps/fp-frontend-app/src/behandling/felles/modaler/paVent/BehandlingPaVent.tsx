@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
-import { AksjonspunktKode, isAksjonspunktOpen } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, erAksjonspunktÅpent } from '@navikt/fp-kodeverk';
 import { type FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 
@@ -45,7 +45,7 @@ export const BehandlingPaVent = ({
   }, [behandling.versjon, skalIkkeViseModal]);
 
   const erManueltSattPaVent = behandling.aksjonspunkt
-    .filter(ap => isAksjonspunktOpen(ap.status))
+    .filter(erAksjonspunktÅpent)
     .some(ap => ap.definisjon === AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT);
 
   return (

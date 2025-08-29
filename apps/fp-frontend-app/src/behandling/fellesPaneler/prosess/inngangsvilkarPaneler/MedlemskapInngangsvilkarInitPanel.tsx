@@ -28,17 +28,17 @@ export const MedlemskapInngangsvilkarInitPanel = () => {
   return (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="MEDLEMSKAP"
-      hentInngangsvilkarPanelTekst=""
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="MEDLEMSKAP"
+      hentInngangsvilkårPanelTekst=""
       overstyringApKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR}
       overrideReadOnly={harMedlemskapsAksjonspunkt}
     >
       <>
         {!harÅpentMedlemskapAksjonspunkt && !isFetching && (
           <OverstyringPanelDef
-            vilkar={standardPanelProps.vilkar}
-            vilkarKoder={VILKAR_KODER}
+            vilkår={standardPanelProps.vilkårForPanel}
+            vilkårKoder={VILKAR_KODER}
             panelTekstKode="Inngangsvilkar.Medlemskapsvilkaret"
             medlemskap={medlemskap}
           />

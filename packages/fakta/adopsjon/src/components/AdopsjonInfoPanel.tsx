@@ -112,7 +112,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
     alleKodeverk,
     submitCallback,
     aksjonspunkterForPanel,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     alleMerknaderFraBeslutter,
     isReadOnly,
   } = usePanelDataContext<AksjonspunktData[]>();
@@ -129,7 +129,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
 
   return (
     <VStack gap="space-16">
-      {harÅpneAksjonspunkter && (
+      {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>{getHelpTexts(aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
       <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>

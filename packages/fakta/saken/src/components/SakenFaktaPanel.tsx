@@ -35,7 +35,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
     aksjonspunkterForPanel,
     submitCallback,
     alleMerknaderFraBeslutter,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     fagsak,
     isReadOnly,
   } = usePanelDataContext<
@@ -50,12 +50,12 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
 
   return (
     <VStack gap="space-32">
-      {harÅpneAksjonspunkter && erMarkertUtenlandssak(aksjonspunkterForPanel) && (
+      {harÅpentAksjonspunkt && erMarkertUtenlandssak(aksjonspunkterForPanel) && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="SakenFaktaPanel.OpptjeningUtland" />
         </AksjonspunktHelpTextHTML>
       )}
-      {harÅpneAksjonspunkter &&
+      {harÅpentAksjonspunkt &&
         aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD) && (
           <AksjonspunktHelpTextHTML>
             <FormattedMessage id="SakenFaktaPanel.AvklarDekningsgrad" />
@@ -77,7 +77,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
             <InnhentDokOpptjeningUtlandPanel
               dokStatus={utlandDokStatus?.dokStatus}
               readOnly={isReadOnly}
-              harApneAksjonspunkter={harÅpneAksjonspunkter}
+              harÅpentAksjonspunkt={harÅpentAksjonspunkt}
               aksjonspunkt={automatiskMarkeringAvUtenlandssakAp}
               submittable={submittable}
               submitCallback={submitCallback}

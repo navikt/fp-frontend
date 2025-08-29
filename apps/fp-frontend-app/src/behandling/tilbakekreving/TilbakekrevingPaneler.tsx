@@ -5,10 +5,10 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { useFagsakApi } from '../../data/fagsakApi';
+import { BehandlingDataContext } from '../felles/context/BehandlingDataContext';
 import { FaktaMeny } from '../felles/fakta/FaktaMeny';
 import { BehandlingPaVent } from '../felles/modaler/paVent/BehandlingPaVent';
 import { ProsessMeny } from '../felles/prosess/ProsessMeny';
-import { BehandlingDataContext } from '../felles/utils/behandlingDataContext';
 import { VergeFaktaInitPanel } from '../fellesPaneler/fakta/VergeFaktaInitPanel';
 import { FeilutbetalingFaktaInitPanel } from './faktaPaneler/FeilutbetalingFaktaInitPanel';
 import { ForeldelseProsessInitPanel } from './prosessPaneler/ForeldelseProsessInitPanel';
