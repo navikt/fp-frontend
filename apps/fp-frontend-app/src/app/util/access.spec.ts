@@ -1,4 +1,10 @@
-import { BehandlingStatus, BehandlingType, FagsakStatus } from '@navikt/fp-kodeverk';
+import {
+  type BehandlingStatus,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
+  type FagsakStatus,
+  FagsakStatusEnum,
+} from '@navikt/fp-kodeverk';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { kanOverstyreAccess, writeAccess } from './access';
@@ -6,8 +12,8 @@ import { kanOverstyreAccess, writeAccess } from './access';
 const forEachFagsakAndBehandlingStatus = (
   callback: (fagsakStatus: FagsakStatus, behandlingStatus: BehandlingStatus) => void,
 ) =>
-  Object.values(FagsakStatus).forEach(fagsakStatus =>
-    Object.values(BehandlingStatus).forEach(behandlingStatus => callback(fagsakStatus, behandlingStatus)),
+  Object.values(FagsakStatusEnum).forEach(fagsakStatus =>
+    Object.values(BehandlingStatusEnum).forEach(behandlingStatus => callback(fagsakStatus, behandlingStatus)),
   );
 
 const getTestName = (accessName: string, expected: boolean, fagsakStatus: string, behandlingStatus: string): string =>

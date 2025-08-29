@@ -20,7 +20,7 @@ import {
   FordelingPeriodeKilde,
   ForeldreType,
   GraderingAvslagÅrsak,
-  HistorikkAktor,
+  HistorikkAktorEnum,
   InnsynResultatType,
   KlageAvvistÅrsak,
   KlageHjemmel,
@@ -82,7 +82,7 @@ type KodeverkEnumMap = {
   FarSøkerType: FarSøkerType;
   FordelingPeriodeKilde: FordelingPeriodeKilde;
   ForeldreType: ForeldreType;
-  HistorikkAktør: HistorikkAktor;
+  HistorikkAktør: HistorikkAktorEnum;
   GraderingAvslagÅrsak: GraderingAvslagÅrsak;
   KlageHjemmel: KlageHjemmel;
   KlageAvvistÅrsak: KlageAvvistÅrsak;

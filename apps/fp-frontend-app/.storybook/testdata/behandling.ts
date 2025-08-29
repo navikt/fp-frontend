@@ -2,10 +2,10 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   AksjonspunktType,
-  BehandlingArsakType,
+  BehandlingArsakTypeEnum,
   BehandlingResultatType,
-  BehandlingStatus,
-  BehandlingType,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -49,9 +49,11 @@ export const behandling: Behandling = {
     erRevurderingMedUendretUtfall: false,
     skjæringstidspunkt: {
       dato: '2025-02-12',
+      utenMinsterett: null,
     },
     opphørsdato: null,
     vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+    endretDekningsgrad: null,
   },
   behandlingÅrsaker: [
     {
@@ -67,6 +69,8 @@ export const behandling: Behandling = {
       avslagKode: null,
       lovReferanse: '§§ 21-3',
       overstyrbar: true,
+      evaluering: null,
+      input: null,
     },
     {
       vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
@@ -74,6 +78,8 @@ export const behandling: Behandling = {
       avslagKode: null,
       lovReferanse: '§ 14-2',
       overstyrbar: true,
+      evaluering: null,
+      input: null,
     },
     {
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
@@ -81,6 +87,8 @@ export const behandling: Behandling = {
       avslagKode: null,
       lovReferanse: '§ 14-5, 1. ledd',
       overstyrbar: true,
+      evaluering: null,
+      input: null,
     },
     {
       vilkarType: VilkarType.OPPTJENINGSVILKARET,
@@ -88,6 +96,8 @@ export const behandling: Behandling = {
       avslagKode: null,
       lovReferanse: '§ 14-6',
       overstyrbar: true,
+      evaluering: null,
+      input: null,
     },
     {
       vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
@@ -95,6 +105,8 @@ export const behandling: Behandling = {
       avslagKode: null,
       lovReferanse: '§ 14-7',
       overstyrbar: true,
+      evaluering: null,
+      input: null,
     },
     {
       vilkarType: VilkarType.OPPTJENINGSPERIODE,
@@ -102,6 +114,8 @@ export const behandling: Behandling = {
       avslagKode: null,
       lovReferanse: '§ 14-6 og 14-10',
       overstyrbar: true,
+      evaluering: null,
+      input: null,
     },
   ],
   links: [
@@ -304,4 +318,18 @@ export const behandling: Behandling = {
   alleUttaksperioderAvslått: false,
   sjekkSimuleringResultat: false,
   taskStatus: null,
+  id: null,
+  fagsakId: null,
+  endret: null,
+  endretAvBrukernavn: null,
+  behandlingsfristTid: null,
+  erPaaVent: null,
+  originalVedtaksDato: null,
+  behandlingPaaVent: null,
+  fristBehandlingPaaVent: null,
+  venteArsakKode: null,
+  sprakkode: null,
+  ansvarligBeslutter: null,
+  harRegisterdata: null,
+  behandlingKoet: null,
 };

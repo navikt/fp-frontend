@@ -37,4 +37,7 @@ export const Avatar = ({ aktørType }: Props) => {
     case '-':
       return ''; // TODO [JOHANNES] - eller kast feil?
   }
+
+  // TODO [JOHANNES] -- ikke sikker på hvorfor switch ikke er exhaustive
+  return '';
 };

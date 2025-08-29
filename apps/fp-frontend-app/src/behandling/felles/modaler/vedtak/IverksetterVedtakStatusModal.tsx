@@ -3,16 +3,15 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
-import { BehandlingResultatType, BehandlingResultatTypeTilbakekreving } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType } from '@navikt/fp-kodeverk';
+import type { Behandlingsresultat } from '@navikt/fp-types';
 
 import styles from './iverksetterVedtakStatusModal.module.css';
 
 interface Props {
   lukkModal: () => void;
   visModal: boolean;
-  behandlingsresultat?: {
-    type: BehandlingResultatType | BehandlingResultatTypeTilbakekreving;
-  };
+  behandlingsresultat?: Behandlingsresultat;
 }
 
 /**

@@ -1,11 +1,10 @@
 import {
-  BehandlingArsakType,
+  BehandlingArsakTypeEnum,
   BehandlingResultatType,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakStatus,
-  FagsakYtelseType,
-  HistorikkAktor,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
+  FagsakStatusEnum,
+  HistorikkAktorEnum,
   RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
@@ -108,9 +107,11 @@ export const fagsakFullFpsak: Fagsak = {
         erRevurderingMedUendretUtfall: false,
         skjæringstidspunkt: {
           dato: '2025-02-12',
+          utenMinsterett: null,
         },
         opphørsdato: null,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        endretDekningsgrad: null,
       },
       behandlingÅrsaker: [
         {
@@ -152,6 +153,7 @@ export const fagsakFullFpsak: Fagsak = {
         behandlingTilGodkjenning: false,
         behandlingKanMerkesHaster: false,
         vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+        uuid: '',
       },
       brevmaler: [
         {
@@ -180,6 +182,19 @@ export const fagsakFullFpsak: Fagsak = {
         faresignalVurdering: null,
       },
       ugunstAksjonspunkt: null,
+      id: null,
+      fagsakId: null,
+      endret: null,
+      endretAvBrukernavn: null,
+      behandlingsfristTid: null,
+      erPaaVent: null,
+      originalVedtaksDato: null,
+      behandlingPaaVent: null,
+      fristBehandlingPaaVent: null,
+      venteArsakKode: null,
+      sprakkode: null,
+      vilkår: null,
+      behandlingKoet: null,
     },
   ],
   historikkinnslag: [

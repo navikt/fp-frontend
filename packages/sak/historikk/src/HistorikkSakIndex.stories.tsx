@@ -2,7 +2,7 @@ import { ExpandVerticalIcon } from '@navikt/aksel-icons';
 import { Button, Tooltip } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { HistorikkAktor, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import { HistorikkAktorEnum, SkjermlenkeType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
 import type { Historikkinnslag } from '@navikt/fp-types';
 
@@ -48,7 +48,7 @@ const historikkInnslag: Historikkinnslag[] = [
         tekst:
           '__Perioden 21.10.2024 - 30.11.2024__ er satt til __Lagt til Opphold, Årsak: Annen forelder har uttak av Fellesperiode__.',
       },
-      { type: 'LINJESKIFT' },
+      { type: 'LINJESKIFT', tekst: null },
       {
         type: 'TEKST',
         tekst: 'Bruker har rett på uttak med gradering',
