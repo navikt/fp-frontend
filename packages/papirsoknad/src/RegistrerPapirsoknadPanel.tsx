@@ -4,6 +4,7 @@ import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { Heading, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
+
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 

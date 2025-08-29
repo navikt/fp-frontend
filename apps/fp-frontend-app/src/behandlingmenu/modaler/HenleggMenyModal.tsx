@@ -3,13 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
+import { BehandlingTypeEnum, type FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { type ForhåndsvisHenleggParams, MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../data/behandlingApi';
 import { forhåndsvisTilbakekrevingHenleggelse, useFagsakApi, useFagsakBehandlingApi } from '../../data/fagsakApi';
-import { BehandlingTypeEnum, type FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 interface Props {
   behandling: Behandling;

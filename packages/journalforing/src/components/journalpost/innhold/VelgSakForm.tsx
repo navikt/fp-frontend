@@ -6,6 +6,7 @@ import { Alert, BodyShort, Button, HStack, Radio, Spacer, VStack } from '@navikt
 import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
+import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { notEmpty } from '@navikt/fp-utils';
 
 import type { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
@@ -15,7 +16,6 @@ import type { Journalpost } from '../../../typer/journalpostTsType';
 import { erEndeligJournalført } from '../../../utils/journalpostTilstandUtils';
 
 import styles from './velgSakForm.module.css';
-import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 const TOM_ARRAY: JournalFagsak[] = [];
 

@@ -2,10 +2,11 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
+import { FagsakStatusEnum, FagsakYtelseTypeEnum } from '@navikt/fp-kodeverk';
+
 import { FagsakProfilSakIndex } from './FagsakProfilSakIndex';
 
 import '@navikt/ft-ui-komponenter/dist/style.css';
-import { FagsakStatusEnum, FagsakYtelseTypeEnum } from '@navikt/fp-kodeverk';
 
 const withStylerovider: DecoratorFunction<ReactRenderer> = Story => (
   <div style={{ width: '600px', backgroundColor: 'var(--ax-bg-default)', padding: '30px' }}>

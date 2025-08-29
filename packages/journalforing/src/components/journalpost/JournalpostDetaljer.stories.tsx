@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
+
+import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -9,7 +11,6 @@ import { DokumentTittel } from '../../utils/dokumentTittel';
 import { JournalpostDetaljer } from './JournalpostDetaljer';
 
 import messages from '../../../i18n/nb_NO.json';
-import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 
 const withIntl = getIntlDecorator(messages);
 

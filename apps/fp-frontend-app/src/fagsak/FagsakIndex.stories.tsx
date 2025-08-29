@@ -5,6 +5,8 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import type { DecoratorFunction } from 'storybook/internal/types';
+
+import { BehandlingStatusEnum, BehandlingTypeEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -22,7 +24,6 @@ import { RequestPendingProvider } from '../data/polling/RequestPendingContext';
 import { FagsakIndex } from './FagsakIndex';
 
 import messages from '../../i18n/nb_NO.json';
-import { BehandlingStatusEnum, BehandlingTypeEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
 
 const withIntl = getIntlDecorator(messages);
 
