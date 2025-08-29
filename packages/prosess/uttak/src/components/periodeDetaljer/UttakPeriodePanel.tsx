@@ -165,7 +165,7 @@ interface Props {
   uttakStonadskontoer: UttakStonadskontoer;
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;
   erTilknyttetStortinget: boolean;
-  harÅpneAksjonspunkter: boolean;
+  harÅpentAksjonspunkt: boolean;
   endringsdato: string;
 }
 
@@ -182,7 +182,7 @@ export const UttakPeriodePanel = ({
   uttakStonadskontoer,
   setValgtPeriodeIndex,
   erTilknyttetStortinget,
-  harÅpneAksjonspunkter,
+  harÅpentAksjonspunkt,
   endringsdato,
 }: Props) => {
   const intl = useIntl();
@@ -228,7 +228,7 @@ export const UttakPeriodePanel = ({
         <HStack align="center" justify="space-between">
           <Label size="small">
             <FormattedMessage id="UttakTimeLineData.PeriodeData.Detaljer" />
-            {!erValgtPeriodeEøsPeriode && !!valgtPeriode.begrunnelse && !harÅpneAksjonspunkter && <EditedIcon />}
+            {!erValgtPeriodeEøsPeriode && !!valgtPeriode.begrunnelse && !harÅpentAksjonspunkt && <EditedIcon />}
           </Label>
           {!isReadOnly && erHovedsøkersPeriode && !erValgtPeriodeEøsPeriode && !erRevurderingFørEndringsdato && (
             <>

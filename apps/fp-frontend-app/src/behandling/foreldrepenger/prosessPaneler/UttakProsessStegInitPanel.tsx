@@ -10,9 +10,9 @@ import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
 import type { ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt } from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const getStatusFromUttakresultat = (behandling: Behandling): string => {
   if (!harLenke(behandling, 'UTTAKSRESULTAT')) {
@@ -49,7 +49,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
 
   const overstyrtStatus = getStatusFromUttakresultat(behandling);
 
-  const skalHenteData = standardPanelProps.harÅpneAksjonspunkter || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
+  const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
 
   const api = useBehandlingApi(behandling);
 

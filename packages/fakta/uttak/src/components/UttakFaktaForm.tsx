@@ -13,8 +13,8 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
+  erAksjonspunktÅpent,
   FamilieHendelseType,
-  isAksjonspunktOpen,
   RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import type {
@@ -32,22 +32,20 @@ import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFa
 import { UttakFaktaTable } from './UttakFaktaTable';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
-  aksjonspunkter
-    .filter(ap => ap.status === AksjonspunktStatus.OPPRETTET)
-    .map(ap => {
-      const førsteUttaksdato = ytelsefordeling?.førsteUttaksdato ?? undefined;
-      const førsteUttak = {
-        value: dateFormat(førsteUttaksdato),
-      };
+  aksjonspunkter.filter(erAksjonspunktÅpent).map(ap => {
+    const førsteUttaksdato = ytelsefordeling?.førsteUttaksdato ?? undefined;
+    const førsteUttak = {
+      value: dateFormat(førsteUttaksdato),
+    };
 
-      return (
-        <FormattedMessage
-          key={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}`}
-          id={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}`}
-          values={førsteUttak}
-        />
-      );
-    });
+    return (
+      <FormattedMessage
+        key={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}`}
+        id={`UttakFaktaForm.Aksjonspunkt.${ap.definisjon}`}
+        values={førsteUttak}
+      />
+    );
+  });
 
 const leggTilAksjonspunktMarkering = (
   perioder: KontrollerFaktaPeriode[],
@@ -256,7 +254,7 @@ export const UttakFaktaForm = ({
 
   const [erOverstyrt, setErOverstyrt] = useState(false);
 
-  const harApneAksjonspunkter = aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status));
+  const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
   const aksjonspunktTekster = finnAksjonspunktTekster(aksjonspunkterForPanel, ytelsefordeling);
 
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
@@ -271,7 +269,7 @@ export const UttakFaktaForm = ({
           <OverstyringKnapp onClick={() => setErOverstyrt(true)} erOverstyrt={erOverstyrt} />
         )}
       </HStack>
-      {harApneAksjonspunkter && <AksjonspunktHelpTextHTML>{aksjonspunktTekster}</AksjonspunktHelpTextHTML>}
+      {harÅpentAksjonspunkt && <AksjonspunktHelpTextHTML>{aksjonspunktTekster}</AksjonspunktHelpTextHTML>}
       {feilmelding && (
         <ErrorSummary>
           <ErrorSummary.Item>{feilmelding}</ErrorSummary.Item>

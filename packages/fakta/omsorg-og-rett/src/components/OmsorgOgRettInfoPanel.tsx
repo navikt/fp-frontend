@@ -21,7 +21,7 @@ export const OmsorgOgRettInfoPanel = ({
   submittable,
   kanOverstyre,
 }: OmsorgOgRettProps) => {
-  const { alleKodeverk, aksjonspunkterForPanel, isReadOnly, harÅpneAksjonspunkter } = usePanelDataContext();
+  const { alleKodeverk, aksjonspunkterForPanel, isReadOnly, harÅpentAksjonspunkt } = usePanelDataContext();
 
   const aksjonspunkter = aksjonspunkterForPanel.filter(
     a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
@@ -62,7 +62,7 @@ export const OmsorgOgRettInfoPanel = ({
   const harUløsteAksjonspunkter = opprettetRettAPUtenResultat || opprettetAleneomsorgAPUtenResultat;
   return (
     <VStack gap="space-24">
-      {!isReadOnly && harÅpneAksjonspunkter && (
+      {!isReadOnly && harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           {harAleneomsorgAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderOmAleneomsorg" />}
           {harRettAp && <FormattedMessage id="OmsorgOgRettInfoPanel.VurderAndreForelderRett" />}

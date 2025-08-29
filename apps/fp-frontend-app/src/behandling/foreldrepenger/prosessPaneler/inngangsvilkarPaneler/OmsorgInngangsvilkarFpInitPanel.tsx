@@ -18,9 +18,9 @@ export const OmsorgInngangsvilkarFpInitPanel = () => {
   return (
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="OMSORG"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="OMSORG"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
     >
       <OmsorgVilkarProsessIndex
         status={standardPanelProps.status}

@@ -4,7 +4,7 @@ import { ExclamationmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { Alert, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, erAksjonspunktÅpent } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat, Medlemskap } from '@navikt/fp-types';
 import { MedlemskapAvvik } from '@navikt/fp-types';
 
@@ -53,10 +53,10 @@ export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
     const { avvik, manuellBehandlingResultat: resultat } = medlemskap;
 
     if (aksjonspunkter.length === 0) return <></>;
-    const opprettetAp = aksjonspunkter.filter(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-    const utførtAp = aksjonspunkter.filter(ap => ap.status === AksjonspunktStatus.UTFORT);
+    const åpneAksjonspunkt = aksjonspunkter.filter(erAksjonspunktÅpent);
+    const utførteAksjonspunkt = aksjonspunkter.filter(ap => ap.status === AksjonspunktStatus.UTFORT);
 
-    if (opprettetAp.length > 0) {
+    if (åpneAksjonspunkt.length > 0) {
       return (
         <VStack gap="space-8">
           {[...new Set(avvik.map(getFormateringsIdForAvvik))].map(a => (
@@ -66,7 +66,7 @@ export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
           ))}
         </VStack>
       );
-    } else if (resultat && opprettetAp.length === 0 && utførtAp.length > 0) {
+    } else if (resultat && åpneAksjonspunkt.length === 0 && utførteAksjonspunkt.length > 0) {
       const vurdering = getVurdering(resultat);
 
       const text = intl.formatMessage({ id: 'AksjonspunktHelpText.ErMedlem' }, { vurdering });

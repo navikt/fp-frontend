@@ -12,16 +12,17 @@ import {
   type KlagevurderingForhåndsvisData,
   KlagevurderingProsessIndex,
 } from '@navikt/fp-prosess-klagevurdering';
+import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 import { KlageBehandlingModal } from '../modaler/KlageBehandlingModal';
 
 interface Props {
-  aksjonspunktKoder?: string[];
+  aksjonspunktKoder?: Aksjonspunkt['definisjon'][];
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
 }

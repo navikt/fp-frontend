@@ -44,7 +44,7 @@ export const SimuleringPanel = ({
   tilbakekrevingvalg,
   arbeidsgiverOpplysningerPerId,
 }: Props) => {
-  const { aksjonspunkterForPanel, submitCallback, isReadOnly, harÅpneAksjonspunkter, fagsak, behandling } =
+  const { aksjonspunkterForPanel, submitCallback, isReadOnly, harÅpentAksjonspunkt, fagsak, behandling } =
     usePanelDataContext<SimuleringAksjonspunkt[]>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
@@ -67,7 +67,7 @@ export const SimuleringPanel = ({
   const skalHaForm =
     hasAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkterForPanel) ||
     hasAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkterForPanel);
-  const aksjonspunktTittler = harÅpneAksjonspunkter ? lagAksjonspunktTitler(aksjonspunkterForPanel) : [];
+  const aksjonspunktTittler = harÅpentAksjonspunkt ? lagAksjonspunktTitler(aksjonspunkterForPanel) : [];
   return (
     <VStack gap="space-32">
       <Heading size="small" level="2">

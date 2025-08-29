@@ -12,8 +12,8 @@ import { notEmpty } from '@navikt/fp-utils';
 import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useBehandlingApi } from '../data/behandlingApi';
 import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
+import { BehandlingDataContext } from './felles/context/BehandlingDataContext';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
-import { BehandlingDataContext } from './felles/utils/behandlingDataContext';
 import { lazyWithRetry } from './lazyUtils';
 
 const ForeldrepengerPaneler = lazyWithRetry(() => import('./foreldrepenger/ForeldrepengerPaneler'));
