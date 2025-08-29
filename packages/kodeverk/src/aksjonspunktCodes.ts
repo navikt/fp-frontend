@@ -9,8 +9,7 @@ export type OverstyringAksjonspunkter =
   | AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR
   | AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP
   | AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
-  | AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET
-  | AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL;
+  | AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET;
 
 export enum AksjonspunktKode {
   SJEKK_TERMINBEKREFTELSE = '5001',
