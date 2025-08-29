@@ -50,7 +50,7 @@ export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, 
           </div>
         </div>
         <div className={styles.rightColumn}>
-          <SaksstøttePaneler valgtSakslisteId={valgtSakslisteId} åpneFagsak={åpneFagsak} />
+          <SaksstøttePaneler åpneFagsak={åpneFagsak} />
         </div>
       </div>
     </>

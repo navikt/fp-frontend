@@ -5,7 +5,6 @@ import type { Oppgave, ReservasjonStatus, SaksbehandlerProfil } from '@navikt/fp
 import type { AlleKodeverkLos, FagsakEnkel } from '@navikt/fp-types';
 
 import type { Driftsmelding } from '../typer/driftsmeldingTsType';
-import type { NyeOgFerdigstilteOppgaver } from '../typer/nyeOgFerdigstilteOppgaverTsType';
 import type { Saksbehandler } from '../typer/saksbehandlerTsType';
 import type { Saksliste } from '../typer/sakslisteTsType';
 
@@ -44,7 +43,6 @@ export const LosUrl = {
   SAKSLISTE_SAKSBEHANDLERE: wrapUrl('fplos/api/saksbehandler/saksliste/saksbehandlere'),
   BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('fplos/api/saksbehandler/oppgaver/antall'),
   OPPGAVER_TIL_BEHANDLING: wrapUrl('fplos/api/saksbehandler/oppgaver'),
-  HENT_NYE_OG_FERDIGSTILTE_OPPGAVER: wrapUrl('fplos/api/saksbehandler/nøkkeltall/nye-og-ferdigstilte-oppgaver'),
 };
 
 export const getSakslisteSaksbehandlere = (sakslisteId: number) =>
@@ -98,15 +96,6 @@ export const reserverteOppgaverOptions = () =>
   queryOptions({
     queryKey: [LosUrl.RESERVERTE_OPPGAVER],
     queryFn: () => kyExtended.get(LosUrl.RESERVERTE_OPPGAVER).json<Oppgave[]>(),
-  });
-
-export const hentNyeOgFerdigstilteOppgaverOptions = (sakslisteId: number) =>
-  queryOptions({
-    queryKey: [LosUrl.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER, sakslisteId],
-    queryFn: () =>
-      kyExtended
-        .get(LosUrl.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER, { searchParams: { sakslisteId } })
-        .json<NyeOgFerdigstilteOppgaver[]>(),
   });
 
 export const behandlendeOppgaverOptions = (kunAktive: boolean) =>
