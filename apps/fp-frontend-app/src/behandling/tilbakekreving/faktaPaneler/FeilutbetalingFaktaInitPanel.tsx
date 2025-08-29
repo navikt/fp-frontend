@@ -51,7 +51,6 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
           kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
           kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
           isAksjonspunktOpen={standardPanelProps.harÅpneAksjonspunkter}
-          isReadOnly={standardPanelProps.isReadOnly}
           {...standardPanelProps}
         />
       ) : (
