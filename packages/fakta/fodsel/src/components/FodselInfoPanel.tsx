@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { HGrid, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { Fødsel } from '@navikt/fp-types';
 import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -13,13 +13,14 @@ import { SjekkTerminbekreftelseForm } from './aksjonspunkt/SjekkTerminbekreftels
 import { FaktaFraFReg } from './fakta/FaktaFraFReg';
 import { FaktaFraSøknad } from './fakta/FaktaFraSøknad';
 import { Situasjon } from './fakta/Situasjon';
+import { OverstyringPanel } from './overstyring/OverstyringPanel';
 
 const { SJEKK_TERMINBEKREFTELSE, SJEKK_MANGLENDE_FØDSEL } = AksjonspunktKode;
 
 interface Props {
   fødsel: Fødsel;
-  submittable: boolean;
   terminbekreftelseDokument: DokumentLinkReferanse | undefined;
+  submittable: boolean;
 }
 
 /**
@@ -28,19 +29,23 @@ interface Props {
  * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
 export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokument }: Props) => {
-  const { aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
+  const { aksjonspunkterForPanel } = usePanelDataContext();
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_TERMINBEKREFTELSE);
   const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FØDSEL);
 
   return (
     <VStack gap="space-16">
-      {harÅpneAksjonspunkter && (
-        <AksjonspunktHelpTextHTML>
-          {terminbekreftelseAp && <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />}
-          {manglendeFødselAp && <FormattedMessage id="FodselInfoPanel.SjekkManglendeFødsel" />}
-        </AksjonspunktHelpTextHTML>
-      )}
+      <OverstyringPanel gjeldende={fødsel.gjeldende} submittable={submittable} />
+
+      <AksjonspunktHelpTextHTML>
+        {terminbekreftelseAp?.status === AksjonspunktStatus.OPPRETTET && (
+          <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />
+        )}
+        {manglendeFødselAp?.status === AksjonspunktStatus.OPPRETTET && (
+          <FormattedMessage id="FodselInfoPanel.SjekkManglendeFødsel" />
+        )}
+      </AksjonspunktHelpTextHTML>
 
       <Situasjon gjeldende={fødsel.gjeldende} />
 
