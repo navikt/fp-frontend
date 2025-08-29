@@ -19,7 +19,7 @@ export const FodselInngangsvilkarFpInitPanel = () => {
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
 
-  return standardPanelProps.aksjonspunkter.length === 0 ? (
+  return standardPanelProps.aksjonspunkterForPanel.length === 0 ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
       vilkarKoder={VILKAR_KODER}

@@ -28,7 +28,7 @@ export const FaktaDefaultInitPanel = ({
     faktaPanelKode,
     faktaPanelMenyTekst,
     skalPanelVisesIMeny,
-    standardPanelProps.harApneAksjonspunkter,
+    standardPanelProps.harÅpneAksjonspunkter,
   );
 
   return (
@@ -38,10 +38,10 @@ export const FaktaDefaultInitPanel = ({
           behandling={behandling}
           fagsak={fagsak}
           alleKodeverk={alleKodeverk}
-          aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
-          harÅpneAksjonspunkter={standardPanelProps.harApneAksjonspunkter}
+          aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
+          harÅpneAksjonspunkter={standardPanelProps.harÅpneAksjonspunkter}
           submitCallback={standardPanelProps.submitCallback}
-          isReadOnly={standardPanelProps.readOnly}
+          isReadOnly={standardPanelProps.isReadOnly}
           alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
         >
           {children}

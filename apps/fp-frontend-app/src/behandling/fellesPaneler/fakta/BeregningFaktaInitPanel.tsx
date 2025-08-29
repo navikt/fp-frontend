@@ -68,7 +68,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           skalKunneOverstyreAktiviteter
-          readOnly={standardPanelProps.readOnly}
+          readOnly={standardPanelProps.isReadOnly}
           submittable={standardPanelProps.submittable}
         />
       ) : (

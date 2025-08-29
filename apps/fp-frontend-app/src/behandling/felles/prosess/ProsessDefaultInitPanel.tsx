@@ -21,7 +21,7 @@ interface Props {
 
 export const ProsessDefaultInitPanel = (props: Props) => {
   const { standardPanelProps } = props;
-  const harApentAksjonspunkt = standardPanelProps.isAksjonspunktOpen;
+  const harApentAksjonspunkt = standardPanelProps.harÅpneAksjonspunkter;
 
   return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
 };
@@ -30,7 +30,7 @@ export const ProsessDefaultInitOverstyringPanel = (props: Props) => {
   const { erOverstyrt } = usePanelOverstyring();
 
   const { standardPanelProps } = props;
-  const harApentAksjonspunkt = erOverstyrt || standardPanelProps.isAksjonspunktOpen;
+  const harApentAksjonspunkt = erOverstyrt || standardPanelProps.harÅpneAksjonspunkter;
 
   return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
 };
@@ -70,15 +70,15 @@ const ProsessPanel = ({
     <MellomlagretFormDataProvider behandling={behandling}>
       <ProsessPanelWrapper
         erPanelValgt={erPanelValgt}
-        erAksjonspunktOpent={standardPanelProps.isAksjonspunktOpen}
+        erAksjonspunktOpent={standardPanelProps.harÅpneAksjonspunkter}
         status={status}
       >
         {skalVisePanel ? (
           <PanelDataProvider
             behandling={behandling}
             fagsak={fagsak}
-            aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
-            harÅpneAksjonspunkter={standardPanelProps.isAksjonspunktOpen}
+            aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
+            harÅpneAksjonspunkter={standardPanelProps.harÅpneAksjonspunkter}
             alleKodeverk={alleKodeverk}
             submitCallback={standardPanelProps.submitCallback}
             isReadOnly={standardPanelProps.isReadOnly}

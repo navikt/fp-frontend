@@ -52,7 +52,7 @@ export const VarselProsessStegInitPanel = () => {
   });
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 
-  const skalPanelVisesIMeny = skalViseProsessPanel(standardPanelProps.aksjonspunkter);
+  const skalPanelVisesIMeny = skalViseProsessPanel(standardPanelProps.aksjonspunkterForPanel);
 
   const { mutate: forhåndsvis } = useMutation({
     mutationFn: (values: VarselOmRevurderingForhåndsvisData) =>

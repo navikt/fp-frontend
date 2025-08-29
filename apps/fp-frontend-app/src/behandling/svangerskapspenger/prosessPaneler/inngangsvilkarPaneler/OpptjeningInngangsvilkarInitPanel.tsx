@@ -25,7 +25,7 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
   const { behandling } = use(BehandlingDataContext);
 
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
-  const harIngenAksjonspunkt = standardPanelProps.aksjonspunkter.length === 0;
+  const harIngenAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.length === 0;
 
   const api = useBehandlingApi(behandling);
 

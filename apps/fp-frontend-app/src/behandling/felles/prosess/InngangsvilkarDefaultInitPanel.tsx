@@ -40,7 +40,7 @@ export const InngangsvilkarOverstyringDefaultInitPanel = (
       overrideReadOnly={
         props.standardPanelProps.isReadOnly ||
         props.overrideReadOnly ||
-        (harÅpentInngangsvilkårAksjonspunkt && !(props.standardPanelProps.isAksjonspunktOpen || erOverstyrt))
+        (harÅpentInngangsvilkårAksjonspunkt && !(props.standardPanelProps.harÅpneAksjonspunkter || erOverstyrt))
       }
       toggleOverstyring={toggleOverstyring}
     >
@@ -61,13 +61,17 @@ export const InngangsvilkarDefaultInitPanel = ({
 
   const { erPanelValgt } = use(InngangsvilkårPanelDataContext);
 
-  const skalVises = skalViseProsessPanel(standardPanelProps.aksjonspunkter, vilkarKoder, standardPanelProps.vilkar);
+  const skalVises = skalViseProsessPanel(
+    standardPanelProps.aksjonspunkterForPanel,
+    vilkarKoder,
+    standardPanelProps.vilkar,
+  );
 
   useInngangsvilkarRegistrerer(
     inngangsvilkarPanelKode,
     hentInngangsvilkarPanelTekst,
     skalVises,
-    standardPanelProps.isAksjonspunktOpen,
+    standardPanelProps.harÅpneAksjonspunkter,
     standardPanelProps.status,
     erOverstyrt,
   );
@@ -79,8 +83,8 @@ export const InngangsvilkarDefaultInitPanel = ({
       <PanelDataProvider
         behandling={behandling}
         fagsak={fagsak}
-        aksjonspunkterForPanel={standardPanelProps.aksjonspunkter}
-        harÅpneAksjonspunkter={standardPanelProps.isAksjonspunktOpen}
+        aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
+        harÅpneAksjonspunkter={standardPanelProps.harÅpneAksjonspunkter}
         alleKodeverk={alleKodeverk}
         submitCallback={standardPanelProps.submitCallback}
         isReadOnly={standardPanelProps.isReadOnly}

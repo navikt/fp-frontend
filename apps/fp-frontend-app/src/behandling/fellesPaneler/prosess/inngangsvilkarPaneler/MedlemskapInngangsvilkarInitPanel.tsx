@@ -18,10 +18,10 @@ export const MedlemskapInngangsvilkarInitPanel = () => {
 
   const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(standardPanelProps.behandling));
 
-  const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkter.some(
+  const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET && ap.status !== AksjonspunktStatus.AVBRUTT,
   );
-  const harÅpentMedlemskapAksjonspunkt = standardPanelProps.aksjonspunkter.some(
+  const harÅpentMedlemskapAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET && ap.status == AksjonspunktStatus.OPPRETTET,
   );
 

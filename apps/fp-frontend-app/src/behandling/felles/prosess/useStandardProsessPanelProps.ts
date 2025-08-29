@@ -93,8 +93,8 @@ const finnStatus = (vilkar: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
 };
 
 export const useStandardProsessPanelProps = (
-  aksjonspunktKoder?: string[],
-  vilkarKoder?: VilkarType[],
+  aksjonspunktKoder: string[] = [],
+  vilkarKoder: VilkarType[] = [],
   lagringSideEffekter?: (aksjonspunkter: ProsessAksjonspunkt[]) => () => void,
 ): StandardProsessPanelProps => {
   const {
@@ -109,24 +109,23 @@ export const useStandardProsessPanelProps = (
 
   const { aksjonspunkt: aksjonspunkter, vilkår } = behandling;
 
-  const aksjonspunkterForSteg =
-    aksjonspunkter && aksjonspunktKoder
-      ? aksjonspunkter.filter(ap => aksjonspunktKoder.some(ak => ak === ap.definisjon))
-      : [];
+  const aksjonspunkterForPanel = aksjonspunkter
+    ? aksjonspunkter.filter(ap => aksjonspunktKoder.some(ak => ak === ap.definisjon))
+    : [];
 
   const vilkarForSteg = vilkår && vilkarKoder ? vilkår.filter(v => vilkarKoder.some(vk => vk === v.vilkarType)) : [];
 
   const isReadOnly = erReadOnly(behandling, vilkarForSteg, rettigheter, false);
 
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForSteg);
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
 
-  const harApneAksjonspunkter = aksjonspunkterForSteg.some(
+  const harÅpneAksjonspunkter = aksjonspunkterForPanel.some(
     ap => ap.status === AksjonspunktStatus.OPPRETTET && ap.kanLoses,
   );
 
-  const status = finnStatus(vilkarForSteg, aksjonspunkterForSteg);
+  const status = finnStatus(vilkarForSteg, aksjonspunkterForPanel);
 
-  const readOnlySubmitButton = !aksjonspunkterForSteg.some(ap => ap.kanLoses) || VilkarUtfallType.OPPFYLT === status;
+  const readOnlySubmitButton = !aksjonspunkterForPanel.some(ap => ap.kanLoses) || VilkarUtfallType.OPPFYLT === status;
 
   const standardlagringSideEffekter = () => () => {
     oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
@@ -136,7 +135,7 @@ export const useStandardProsessPanelProps = (
     lagringSideEffekter || standardlagringSideEffekter,
     fagsak,
     behandling,
-    aksjonspunkterForSteg,
+    aksjonspunkterForPanel,
     lagreAksjonspunkter,
     lagreOverstyrteAksjonspunkter,
   );
@@ -144,8 +143,8 @@ export const useStandardProsessPanelProps = (
   return {
     fagsak: fagsak,
     behandling: behandling,
-    isAksjonspunktOpen: harApneAksjonspunkter,
-    aksjonspunkter: aksjonspunkterForSteg,
+    harÅpneAksjonspunkter,
+    aksjonspunkterForPanel,
     vilkar: vilkarForSteg,
     alleKodeverk: alleKodeverk,
     alleMerknaderFraBeslutter,

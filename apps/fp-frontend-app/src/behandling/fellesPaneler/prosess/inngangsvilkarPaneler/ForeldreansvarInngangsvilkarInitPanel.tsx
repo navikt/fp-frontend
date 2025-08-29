@@ -33,8 +33,10 @@ export const ForeldreansvarInngangsvilkarInitPanel = () => {
       vilkarKoder={VILKAR_KODER}
       inngangsvilkarPanelKode="FORELDREANSVARSVILKARET"
       hentInngangsvilkarPanelTekst={
-        standardPanelProps.aksjonspunkter.length > 0
-          ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[standardPanelProps.aksjonspunkter[0].definisjon] })
+        standardPanelProps.aksjonspunkterForPanel.length > 0
+          ? intl.formatMessage({
+              id: AKSJONSPUNKT_TEKST_PER_KODE[standardPanelProps.aksjonspunkterForPanel[0].definisjon],
+            })
           : ''
       }
     >
