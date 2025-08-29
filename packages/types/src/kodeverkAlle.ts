@@ -124,7 +124,7 @@ type KodeverkEnumMap = {
 
 export type KodeverkType = keyof KodeverkEnumMap;
 
-type AvslagsårsakKodeverk = Record<VilkarType, KodeverkMedNavn<'Avslagsårsak'>[]>;
+type AvslagsårsakKodeverk = Record<VilkarType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>; // TODO [JOHANNES]
 export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
   lovHjemmel: string;
   sortering: string;

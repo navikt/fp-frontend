@@ -193,7 +193,7 @@ export const fagsakFullFpsak: Fagsak = {
       fristBehandlingPaaVent: null,
       venteArsakKode: null,
       sprakkode: null,
-      vilkår: null,
+      vilkår: [],
       behandlingKoet: null,
     },
   ],

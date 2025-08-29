@@ -126,7 +126,7 @@ const FAGSAK = {
       toTrinnsBehandling: false,
       behandlingsresultat: null,
       behandlingÅrsaker: [],
-      vilkår: null,
+      vilkår: [],
       links: [],
       brevmaler: [],
       totrinnskontrollÅrsaker: [],
