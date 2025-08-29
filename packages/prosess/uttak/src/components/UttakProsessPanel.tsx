@@ -4,7 +4,13 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, AksjonspunktStatus, PeriodeResultatType, StonadskontoType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  erAksjonspunktÅpent,
+  PeriodeResultatType,
+  StonadskontoType,
+} from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -265,9 +271,9 @@ export const UttakProsessPanel = ({
     });
   };
 
-  const harÅpneAksjonspunkter = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
   const erTilknyttetStortinget = aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.TILKNYTTET_STORTINGET && harÅpneAksjonspunkter,
+    ap => ap.definisjon === AksjonspunktKode.TILKNYTTET_STORTINGET && harÅpentAksjonspunkt,
   );
 
   const erBekreftKnappDisablet = useMemo(() => {
@@ -302,11 +308,11 @@ export const UttakProsessPanel = ({
         <Heading size="small" level="2">
           <FormattedMessage id="UttakPanel.Title" />
         </Heading>
-        {!isReadOnly && kanOverstyre && (!harÅpneAksjonspunkter || harOverstyrAp) && (
+        {!isReadOnly && kanOverstyre && (!harÅpentAksjonspunkt || harOverstyrAp) && (
           <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
         )}
       </HStack>
-      {aksjonspunkterForPanel.length > 0 && harÅpneAksjonspunkter && (
+      {aksjonspunkterForPanel.length > 0 && harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>{hentApTekster(uttaksresultat, aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
       <DisponibleStonadskontoerPanel
@@ -342,7 +348,7 @@ export const UttakProsessPanel = ({
           uttakStonadskontoer={stønadskonto}
           setValgtPeriodeIndex={setValgtPeriodeIndex}
           erTilknyttetStortinget={erTilknyttetStortinget}
-          harÅpneAksjonspunkter={harÅpneAksjonspunkter}
+          harÅpentAksjonspunkt={harÅpentAksjonspunkt}
           endringsdato={uttaksresultat.endringsdato}
         />
       )}

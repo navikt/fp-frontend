@@ -7,13 +7,13 @@ import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../../felles/context/BehandlingDataContext';
 import {
   InngangsvilkarDefaultInitPanel,
   InngangsvilkarOverstyringDefaultInitPanel,
 } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_OPPTJENINGSVILKARET];
 
@@ -34,29 +34,29 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
   return harIngenAksjonspunkt ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
     >
       <OverstyringPanelDef
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
+        vilkår={standardPanelProps.vilkårForPanel}
+        vilkårKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
       />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
     >
       <>
         {opptjening && (
           <OpptjeningVilkarProsessIndex
             erSvpFagsak
-            lovReferanse={standardPanelProps.vilkar[0].lovReferanse ?? undefined}
+            lovReferanse={standardPanelProps.vilkårForPanel[0].lovReferanse ?? undefined}
             opptjening={opptjening}
             readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
             status={standardPanelProps.status}

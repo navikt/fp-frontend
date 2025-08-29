@@ -26,10 +26,10 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
 
   return (
     <InngangsvilkarDefaultInitPanel
-      vilkarKoder={VILKAR_KODER}
+      vilkårKoder={VILKAR_KODER}
       standardPanelProps={standardPanelProps}
-      inngangsvilkarPanelKode="SVANGERSKAP"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
+      inngangsvilkårPanelKode="SVANGERSKAP"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SvangerskapVilkarForm.FyllerVilkår' })}
     >
       <>
         {svangerskapspengerTilrettelegging && (

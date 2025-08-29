@@ -17,20 +17,20 @@ const filtrerAvslagsarsaker = (
     : avslagsarsaker[vilkarTypeKode];
 
 interface Props {
-  vilkar: Vilkar[];
-  vilkarKoder: VilkarType[];
+  vilkår: Vilkar[];
+  vilkårKoder: VilkarType[];
   medlemskap?: Medlemskap;
   panelTekstKode: string;
 }
 
-export const OverstyringPanelDef = ({ vilkar, vilkarKoder, panelTekstKode, medlemskap }: Props) => {
+export const OverstyringPanelDef = ({ vilkår, vilkårKoder, panelTekstKode, medlemskap }: Props) => {
   const { overstyringApKode } = usePanelOverstyring();
 
-  const standardProps = useStandardProsessPanelProps([overstyringApKode], vilkarKoder);
+  const standardProps = useStandardProsessPanelProps([overstyringApKode], vilkårKoder);
 
-  const skalVises = skalViseProsessPanel(standardProps.aksjonspunkterForPanel, vilkarKoder, vilkar);
+  const skalVises = skalViseProsessPanel(standardProps.aksjonspunkterForPanel, vilkårKoder, vilkår);
 
-  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk['Avslagsårsak'], vilkar[0].vilkarType);
+  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk['Avslagsårsak'], vilkår[0].vilkarType);
 
   if (!skalVises) {
     return null;

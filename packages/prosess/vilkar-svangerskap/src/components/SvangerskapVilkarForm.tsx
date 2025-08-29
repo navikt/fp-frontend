@@ -71,7 +71,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     aksjonspunkterForPanel,
     alleMerknaderFraBeslutter,
     behandling,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     submitCallback,
     alleKodeverk,
     isReadOnly,
@@ -102,7 +102,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
 
   const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.SVANGERSKAPVILKARET];
 
-  const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm
@@ -112,7 +112,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
-        isAksjonspunktOpen={harÅpneAksjonspunkter}
+        isAksjonspunktOpen={harÅpentAksjonspunkt}
         readOnlySubmitButton={readOnlySubmitButton}
         readOnly={isReadOnly}
         originalErVilkarOk={originalErVilkarOk}

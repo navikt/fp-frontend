@@ -25,28 +25,28 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
   return standardPanelProps.aksjonspunkterForPanel.length === 0 ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="ADOPSJON"
-      hentInngangsvilkarPanelTekst={paneltekst}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="ADOPSJON"
+      hentInngangsvilkårPanelTekst={paneltekst}
       overstyringApKode={AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR}
     >
       <OverstyringPanelDef
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
+        vilkår={standardPanelProps.vilkårForPanel}
+        vilkårKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
       />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="ADOPSJON"
-      hentInngangsvilkarPanelTekst={paneltekst}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="ADOPSJON"
+      hentInngangsvilkårPanelTekst={paneltekst}
     >
       <AdopsjonVilkarProsessIndex
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         status={standardPanelProps.status}
-        vilkar={standardPanelProps.vilkar}
+        vilkar={standardPanelProps.vilkårForPanel}
       />
     </InngangsvilkarDefaultInitPanel>
   );

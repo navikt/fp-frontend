@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, erAksjonspunktÅpent, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -56,7 +56,7 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
@@ -74,7 +74,7 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
 
   const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.ADOPSJONSVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
   const { lovReferanse } = vilkar[0];
 
@@ -86,7 +86,7 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'AdopsjonVilkarForm.Adopsjon' })}
-        isAksjonspunktOpen={harÅpneAksjonspunkter}
+        isAksjonspunktOpen={harÅpentAksjonspunkt}
         readOnlySubmitButton={readOnlySubmitButton}
         readOnly={isReadOnly}
         lovReferanse={lovReferanse ?? undefined}

@@ -22,33 +22,33 @@ export const FodselInngangsvilkarFpInitPanel = () => {
   return standardPanelProps.aksjonspunkterForPanel.length === 0 ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="FODSEL"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="FODSEL"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
       overstyringApKode={
-        standardPanelProps.vilkar.some(v => v.vilkarType === VilkarType.FODSELSVILKARET_MOR)
+        standardPanelProps.vilkårForPanel.some(v => v.vilkarType === VilkarType.FODSELSVILKARET_MOR)
           ? AksjonspunktKode.OVERSTYR_FODSELSVILKAR
           : AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
       }
     >
       <OverstyringPanelDef
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
+        vilkår={standardPanelProps.vilkårForPanel}
+        vilkårKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
       />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="FODSEL"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="FODSEL"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
     >
       <FodselVilkarProsessIndex
         ytelseTypeKode="FP"
         status={standardPanelProps.status}
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-        vilkar={standardPanelProps.vilkar}
+        vilkar={standardPanelProps.vilkårForPanel}
       />
     </InngangsvilkarDefaultInitPanel>
   );

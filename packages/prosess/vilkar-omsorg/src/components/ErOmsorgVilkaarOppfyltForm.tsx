@@ -44,7 +44,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
     submitCallback,
     isReadOnly,
     alleMerknaderFraBeslutter,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
   } = usePanelDataContext<AksjonspunktData>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
@@ -60,7 +60,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
 
   const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.OMSORGSVILKARET];
 
-  const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm

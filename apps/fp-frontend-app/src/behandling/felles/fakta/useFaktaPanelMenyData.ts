@@ -1,10 +1,16 @@
 import { useState } from 'react';
 
-import type { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
-
 export type FaktaPanelMedÅpentApInfo = {
   urlCode: string;
   text: string;
+};
+
+export type FaktaPanelMenyData = {
+  id: string;
+  tekst: string;
+  erAktiv: boolean;
+  harÅpentAksjonspunkt: boolean;
+  skalVisesIMeny: boolean;
 };
 
 export const useFaktaPanelMenyData = (
@@ -24,11 +30,11 @@ export const useFaktaPanelMenyData = (
       return newData;
     });
 
-    setFaktaPanelMedÅpentApInfo?.(data.harApneAksjonspunkter ? { urlCode: data.id, text: data.tekst } : undefined);
+    setFaktaPanelMedÅpentApInfo?.(data.harÅpentAksjonspunkt ? { urlCode: data.id, text: data.tekst } : undefined);
   };
 
   return {
-    faktaPanelMenyData: faktaPanelMenyData.filter(d => d.skalVisesImeny),
+    faktaPanelMenyData: faktaPanelMenyData.filter(d => d.skalVisesIMeny),
     settFaktaPanelMenyData,
   };
 };

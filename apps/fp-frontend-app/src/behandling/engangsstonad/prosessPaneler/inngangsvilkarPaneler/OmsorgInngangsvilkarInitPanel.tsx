@@ -21,9 +21,9 @@ export const OmsorgInngangsvilkarInitPanel = () => {
   return (
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="OMSORG"
-      hentInngangsvilkarPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkterForPanel)}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="OMSORG"
+      hentInngangsvilkårPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkterForPanel)}
     >
       <OmsorgVilkarProsessIndex
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}

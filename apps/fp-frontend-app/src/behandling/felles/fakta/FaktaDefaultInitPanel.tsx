@@ -3,9 +3,9 @@ import { type ReactElement, use } from 'react';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import { MellomlagretFormDataProvider, PanelDataProvider } from '@navikt/fp-utils';
 
-import type { StandardFaktaPanelProps } from '../typer/standardFaktaPanelPropsTsType';
-import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { BehandlingDataContext } from '../context/BehandlingDataContext';
 import { useFaktaMenyRegistrerer } from './useFaktaMenyRegistrerer';
+import type { StandardFaktaPanelProps } from './useStandardFaktaPanelProps';
 
 interface Props {
   standardPanelProps: StandardFaktaPanelProps;
@@ -28,7 +28,7 @@ export const FaktaDefaultInitPanel = ({
     faktaPanelKode,
     faktaPanelMenyTekst,
     skalPanelVisesIMeny,
-    standardPanelProps.harÅpneAksjonspunkter,
+    standardPanelProps.harÅpentAksjonspunkt,
   );
 
   return (
@@ -39,7 +39,7 @@ export const FaktaDefaultInitPanel = ({
           fagsak={fagsak}
           alleKodeverk={alleKodeverk}
           aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
-          harÅpneAksjonspunkter={standardPanelProps.harÅpneAksjonspunkter}
+          harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
           submitCallback={standardPanelProps.submitCallback}
           isReadOnly={standardPanelProps.isReadOnly}
           alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}

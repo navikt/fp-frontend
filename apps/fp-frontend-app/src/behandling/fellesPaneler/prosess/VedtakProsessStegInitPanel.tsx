@@ -6,19 +6,27 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, AksjonspunktStatus, isAvslag, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import {
+  AksjonspunktKode,
+  AksjonspunktStatus,
+  erAksjonspunktÅpent,
+  isAvslag,
+  VilkarUtfallType,
+} from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, type VedtakForhåndsvisData, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
 import type { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { IverksetterVedtakStatusModal } from '../../felles/modaler/vedtak/IverksetterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
-import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import type { StandardProsessPanelProps } from '../../felles/typer/standardProsessPanelPropsTsType.ts';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
+import {
+  type StandardProsessPanelProps,
+  useStandardProsessPanelProps,
+} from '../../felles/prosess/useStandardProsessPanelProps';
 
 const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FATTER_VEDTAK,
@@ -189,7 +197,7 @@ const harRelevantAksjonspunktDefinisjon = (ap: Aksjonspunkt): boolean => {
 };
 
 const harRelevantOgÅpentAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => {
-  return aksjonspunkter.some(ap => harRelevantAksjonspunktDefinisjon(ap) && ap.status === AksjonspunktStatus.OPPRETTET);
+  return aksjonspunkter.some(ap => harRelevantAksjonspunktDefinisjon(ap) && erAksjonspunktÅpent(ap));
 };
 
 const harVilkarMedStatus = (vilkår: Vilkar[], status: VilkarUtfallType): boolean => {

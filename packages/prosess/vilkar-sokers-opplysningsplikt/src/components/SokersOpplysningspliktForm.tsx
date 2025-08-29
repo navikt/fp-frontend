@@ -164,7 +164,7 @@ export const SokersOpplysningspliktForm = ({
     alleKodeverk,
     submitCallback,
     alleMerknaderFraBeslutter,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     behandling,
   } = usePanelDataContext<BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp>();
@@ -193,7 +193,7 @@ export const SokersOpplysningspliktForm = ({
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkarOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm

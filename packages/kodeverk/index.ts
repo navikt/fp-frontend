@@ -6,7 +6,7 @@ export {
 } from './src/aksjonspunktCodes';
 export type { OverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
-export { AksjonspunktStatus, isAksjonspunktOpen } from './src/aksjonspunktStatus';
+export { AksjonspunktStatus, erAksjonspunktÅpent } from './src/aksjonspunktStatus';
 export { AksjonspunktType } from './src/aksjonspunktType';
 export { AktivitetStatus } from './src/aktivitetStatus';
 export { AnkeOmgjorArsak } from './src/ankeOmgjorArsak';

@@ -25,29 +25,29 @@ export const FodselInngangsvilkarInitPanel = () => {
   return standardPanelProps.aksjonspunkterForPanel.length === 0 ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="FODSEL"
-      hentInngangsvilkarPanelTekst={paneltekst}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="FODSEL"
+      hentInngangsvilkårPanelTekst={paneltekst}
       overstyringApKode={AksjonspunktKode.OVERSTYR_FODSELSVILKAR}
     >
       <OverstyringPanelDef
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
+        vilkår={standardPanelProps.vilkårForPanel}
+        vilkårKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Fodselsvilkaret"
       />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="FODSEL"
-      hentInngangsvilkarPanelTekst={paneltekst}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="FODSEL"
+      hentInngangsvilkårPanelTekst={paneltekst}
     >
       <FodselVilkarProsessIndex
         ytelseTypeKode="ES"
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         status={standardPanelProps.status}
-        vilkar={standardPanelProps.vilkar}
+        vilkar={standardPanelProps.vilkårForPanel}
       />
     </InngangsvilkarDefaultInitPanel>
   );

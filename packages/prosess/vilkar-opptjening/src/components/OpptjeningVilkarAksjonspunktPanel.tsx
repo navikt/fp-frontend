@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -49,7 +49,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
     behandling,
     aksjonspunkterForPanel,
     submitCallback,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
@@ -64,7 +64,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
       mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat),
   });
 
-  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
+  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
@@ -90,7 +90,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
     <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
-        isAksjonspunktOpen={harÅpneAksjonspunkter}
+        isAksjonspunktOpen={harÅpentAksjonspunkt}
         readOnlySubmitButton={readOnlySubmitButton}
         readOnly={isReadOnly}
         lovReferanse={lovReferanse}

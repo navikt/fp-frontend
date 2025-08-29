@@ -7,26 +7,26 @@ const DEFAULT_PANEL_VALGT = 'default';
 export const useProsessMenyRegistrerer = (
   id: string,
   tekst: string,
-  skalVisesImeny: boolean,
-  harApentAksjonspunkt: boolean,
+  skalVisesIMeny: boolean,
+  harÅpentAksjonspunkt: boolean,
   status: string,
   skalMarkeresSomAktiv: boolean,
 ) => {
   const { valgtProsessSteg, settProsessPanelMenyData } = use(ProsessMenyContext);
 
   const erAktiv =
-    skalVisesImeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
+    skalVisesIMeny && (valgtProsessSteg === id || (skalMarkeresSomAktiv && valgtProsessSteg === DEFAULT_PANEL_VALGT));
 
   useEffect(() => {
     settProsessPanelMenyData({
       id,
       tekst,
       erAktiv,
-      harApentAksjonspunkt,
+      harÅpentAksjonspunkt,
       status,
-      skalVisesImeny,
+      skalVisesIMeny,
     });
-  }, [skalVisesImeny, erAktiv, harApentAksjonspunkt, status]);
+  }, [skalVisesIMeny, erAktiv, harÅpentAksjonspunkt, status]);
 
-  return skalVisesImeny && erAktiv;
+  return skalVisesIMeny && erAktiv;
 };
