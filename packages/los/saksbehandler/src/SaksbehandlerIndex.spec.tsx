@@ -14,6 +14,5 @@ describe('SaksbehandlerIndex', () => {
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();
     expect(await screen.findByTitle('Søk')).toBeInTheDocument();
     expect(screen.getByText('Dine siste reserverte behandlinger')).toBeInTheDocument();
-    expect(screen.getByText('Statistikk')).toBeInTheDocument();
   });
 });

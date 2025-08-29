@@ -118,17 +118,6 @@
   "MerkePanel.Diskresjon6Tittel": "Personen har diskresjonsmerking kode 6",
   "MerkePanel.Diskresjon7Tittel": "Personen har diskresjonsmerking kode 7",
 
-  "NyeOgFerdigstilteOppgaverForSisteSyvPanel.SisteSyv": "For de siste 7 dager",
-
-  "NyeOgFerdigstilteOppgaverForSisteSyvGraf.Ferdigstilte": "Ferdigstilte",
-  "NyeOgFerdigstilteOppgaverForSisteSyvGraf.Nye": "Nye",
-  "NyeOgFerdigstilteOppgaverForSisteSyvGraf.FerdigstiltAntall": "Ferdigstilte: {antall}",
-  "NyeOgFerdigstilteOppgaverForSisteSyvGraf.NyeAntall": "Nye: {antall}",
-
-  "NyeOgFerdigstilteOppgaverForIdagGraf.Ferdigstilte": "Ferdigstilte",
-  "NyeOgFerdigstilteOppgaverForIdagGraf.Nye": "Nye",
-  "NyeOgFerdigstilteOppgaverForIdagGraf.Førstegangsbehandling": "Førstegangsbeh.",
-
   "SakslisteVelgerForm.Saksliste": "Behandlingskø",
   "SakslisteVelgerForm.IkkeOppfort": "Du er ikke lagt til i noen behandlingskøer",
   "SakslisteVelgerForm.Stonadstype": "Stønad",
@@ -145,10 +134,6 @@
   "SakslisteVelgerForm.VisFærre": "Se færre",
   "SakslisteVelgerForm.Andre": "{antallAndre} andre",
   "SakslisteVelgerForm.FilterForKoen": "Filtere for køen",
-
-  "SaksbehandlerNokkeltallPanel.Statistikk": "Statistikk",
-  "SaksbehandlerNokkeltallPanel.ForAlle": "For alle saksbehandlere",
-  "SaksbehandlerNokkeltallPanel.ForAlleDetaljer": "Statistikk for alle som jobber med foreldrepenger, engangsstønad og svangerskapspenger",
 
   "NotatModal.SkrivNotat": "Legg til notat på reservasjon",
   "NotatModal.Notat": "Notat"
