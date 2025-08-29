@@ -28,7 +28,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
 
   const api = useBehandlingApi(behandling);
 
-  const harSoknadsfristAp = standardPanelProps.aksjonspunkter.some(
+  const harSoknadsfristAp = standardPanelProps.aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.SOKNADSFRISTVILKARET,
   );
 
@@ -46,7 +46,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
         prosessPanelKode={ProsessStegCode.SOEKNADSFRIST}
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Soknadsfristvilkaret' })}
         skalPanelVisesIMeny={skalViseProsessPanel(
-          standardPanelProps.aksjonspunkter,
+          standardPanelProps.aksjonspunkterForPanel,
           VILKAR_KODER,
           standardPanelProps.vilkar,
         )}

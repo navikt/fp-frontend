@@ -55,7 +55,7 @@ const getBekreftAksjonspunktFaktaCallback =
 
 export const useStandardFaktaPanelProps = (
   aksjonspunktKoder?: string[],
-  overstyringApCodes: string[] = [],
+  overstyringApKoder: string[] = [],
 ): StandardFaktaPanelProps => {
   const {
     behandling,
@@ -69,11 +69,11 @@ export const useStandardFaktaPanelProps = (
 
   const { aksjonspunkt } = behandling;
 
-  const aksjonspunkterForSteg =
+  const aksjonspunkterForPanel =
     aksjonspunkt && aksjonspunktKoder ? aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [];
 
-  const readOnly = erReadOnly(behandling, [], rettigheter, false);
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForSteg);
+  const isReadOnly = erReadOnly(behandling, [], rettigheter, false);
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
 
   const submitCallback = getBekreftAksjonspunktFaktaCallback(
     fagsak,
@@ -81,17 +81,18 @@ export const useStandardFaktaPanelProps = (
     oppdaterProsessStegOgFaktaPanelIUrl,
     lagreAksjonspunkter,
     lagreOverstyrteAksjonspunkter,
-    overstyringApCodes,
+    overstyringApKoder,
   );
 
   return {
     behandling,
     submittable:
-      !aksjonspunkterForSteg.some(ap => isAksjonspunktOpen(ap.status)) || aksjonspunkterForSteg.some(ap => ap.kanLoses),
-    harApneAksjonspunkter: aksjonspunkterForSteg.some(ap => isAksjonspunktOpen(ap.status) && ap.kanLoses),
+      !aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status)) ||
+      aksjonspunkterForPanel.some(ap => ap.kanLoses),
+    harÅpneAksjonspunkter: aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status) && ap.kanLoses),
     alleKodeverk,
-    aksjonspunkter: aksjonspunkterForSteg,
-    readOnly,
+    aksjonspunkterForPanel,
+    isReadOnly,
     alleMerknaderFraBeslutter,
     submitCallback,
   };

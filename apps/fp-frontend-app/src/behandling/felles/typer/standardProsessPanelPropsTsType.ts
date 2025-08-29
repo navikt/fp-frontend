@@ -6,11 +6,11 @@ export interface StandardProsessPanelProps {
   fagsak: Fagsak;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+  aksjonspunkterForPanel: Aksjonspunkt[];
   submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   status: string;
   isReadOnly: boolean;
   readOnlySubmitButton: boolean;
-  aksjonspunkter: Aksjonspunkt[];
   vilkar: Vilkar[];
-  isAksjonspunktOpen: boolean;
+  harÅpneAksjonspunkter: boolean;
 }
