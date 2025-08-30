@@ -9,7 +9,7 @@ import { PanelDataProvider } from '@navikt/fp-utils';
 
 import { alleKodeverk } from '../mocks/alleKodeverk';
 
-type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
+export type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 export type PanelDataArgs = {
   fagsak?: Fagsak;
