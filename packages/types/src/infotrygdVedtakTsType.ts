@@ -1,68 +1,17 @@
-export type VedtakArbeidsforhold = {
-  arbeidsgiverOrgnr: string;
-  inntekt: number;
-  inntektsperiode?: {
-    kode: string;
-    termnavn: string;
-  };
-  refusjon: boolean;
-  identdato: string;
-  opprinneligIdentdato: string;
-};
+import type {
+  tjenester_infotrygd_InfotrygdVedtakDto,
+  tjenester_infotrygd_InfotrygdVedtakDto_Arbeidsforhold,
+  tjenester_infotrygd_InfotrygdVedtakDto_SakDto,
+  tjenester_infotrygd_InfotrygdVedtakDto_Utbetaling,
+  tjenester_infotrygd_InfotrygdVedtakDto_Vedtak,
+} from './apiDtoGenerert.ts';
 
-export type VedtakUtbetaling = {
-  periode: {
-    fom: string;
-    tom: string;
-  };
-  utbetalingsgrad: number;
-  erRefusjon: boolean;
-  dagsats: number;
-  identdato: string;
-  opprinneligIdentdato: string;
-};
+export type VedtakArbeidsforhold = tjenester_infotrygd_InfotrygdVedtakDto_Arbeidsforhold;
 
-export type Vedtak = {
-  identdato: string;
-  opphørFom?: string;
-  opprinneligIdentdato: string;
-  periode: {
-    fom: string;
-    tom: string;
-  };
-  registrert: string;
-  saksbehandlerId: string;
-  arbeidskategori?: {
-    kode: string;
-    termnavn: string;
-  };
-  arbeidsforhold?: VedtakArbeidsforhold[];
-  dekningsgrad: number;
-  fødselsdatoBarn?: string;
-  utbetalinger?: VedtakUtbetaling[];
-  gradering?: number;
-};
+export type VedtakUtbetaling = tjenester_infotrygd_InfotrygdVedtakDto_Utbetaling;
 
-export type Sak = {
-  iverksatt: string;
-  resultat: string;
-  registrert: string;
-  sakId: string;
-  mottatt: string;
-  type: string;
-  vedtatt: string;
-  valg: string;
-  nivaa: string;
-};
+export type Vedtak = tjenester_infotrygd_InfotrygdVedtakDto_Vedtak;
 
-export type InfotrygdVedtak = {
-  vedtakKjeder: {
-    opprinneligIdentdato: string;
-    behandlingstema: {
-      kode: string;
-      termnavn: string;
-    };
-    vedtak: Vedtak[];
-  }[];
-  saker: Sak[];
-};
+export type Sak = tjenester_infotrygd_InfotrygdVedtakDto_SakDto;
+
+export type InfotrygdVedtak = tjenester_infotrygd_InfotrygdVedtakDto;

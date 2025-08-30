@@ -5360,14 +5360,14 @@ export type vedtak_felles_prosesstask_rest_dto_ProsessTaskIdDto = {
 };
 
 export type foreldrepenger_mottak_vedtak_rest_InfotrygdRestanseDto = {
-  fnr: string | null;
-  valg: string | null;
-  type: string | null;
-  registrert: string | null;
-  mottatt: string | null;
-  vedtatt: string | null;
-  reellEnhet: string | null;
-  behandlendeEnhet: string | null;
+  fnr: string;
+  valg: string;
+  type: string;
+  registrert: string;
+  mottatt: string;
+  vedtatt: string;
+  reellEnhet: string;
+  behandlendeEnhet: string;
 };
 
 export type tjenester_forvaltning_fpoversikt_FpoversiktMigreringRestTjeneste_TaskInput = {
@@ -6159,71 +6159,71 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto = {
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto = {
-  saker: Array<tjenester_infotrygd_InfotrygdVedtakDto_SakDto> | null;
-  vedtakKjeder: Array<tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede> | null;
+  saker: Array<tjenester_infotrygd_InfotrygdVedtakDto_SakDto>;
+  vedtakKjeder: Array<tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede>;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_Arbeidsforhold = {
-  arbeidsgiverOrgnr: string | null;
-  inntekt: number | null;
+  arbeidsgiverOrgnr: string;
+  inntekt: number;
   inntektsperiode: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode | null;
-  refusjon: boolean | null;
-  refusjonTom: string | null;
-  identdato: string | null;
-  opprinneligIdentdato: string | null;
+  refusjon: boolean;
+  refusjonTom: string;
+  identdato: string;
+  opprinneligIdentdato: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode = {
-  kode: string | null;
-  termnavn: string | null;
+  kode: string;
+  termnavn: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_Periode = {
-  fom: string | null;
-  tom: string | null;
+  fom: string;
+  tom: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_SakDto = {
-  resultat: string | null;
-  registrert: string | null;
-  sakId: string | null;
-  type: string | null;
-  vedtatt: string | null;
-  valg: string | null;
-  undervalg: string | null;
-  nivaa: string | null;
+  resultat: string;
+  registrert: string;
+  sakId: string;
+  type: string;
+  vedtatt: string;
+  valg: string;
+  undervalg: string;
+  nivaa: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_Utbetaling = {
-  periode: tjenester_infotrygd_InfotrygdVedtakDto_Periode | null;
-  utbetalingsgrad: number | null;
-  arbeidsgiverOrgnr: string | null;
-  erRefusjon: boolean | null;
-  dagsats: number | null;
-  identdato: string | null;
-  opprinneligIdentdato: string | null;
+  periode: tjenester_infotrygd_InfotrygdVedtakDto_Periode;
+  utbetalingsgrad: number;
+  arbeidsgiverOrgnr: string;
+  erRefusjon: boolean;
+  dagsats: number;
+  identdato: string;
+  opprinneligIdentdato: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_Vedtak = {
   behandlingstema: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode | null;
-  identdato: string | null;
+  identdato: string;
   opphørFom: string | null;
-  opprinneligIdentdato: string | null;
-  periode: tjenester_infotrygd_InfotrygdVedtakDto_Periode | null;
-  registrert: string | null;
-  saksbehandlerId: string | null;
+  opprinneligIdentdato: string;
+  periode: tjenester_infotrygd_InfotrygdVedtakDto_Periode;
+  registrert: string;
+  saksbehandlerId: string;
   arbeidskategori: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode | null;
   arbeidsforhold: Array<tjenester_infotrygd_InfotrygdVedtakDto_Arbeidsforhold> | null;
-  dekningsgrad: number | null;
+  dekningsgrad: number;
   fødselsdatoBarn: string | null;
   gradering: number | null;
   utbetalinger: Array<tjenester_infotrygd_InfotrygdVedtakDto_Utbetaling> | null;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede = {
-  opprinneligIdentdato: string | null;
-  behandlingstema: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode | null;
-  vedtak: Array<tjenester_infotrygd_InfotrygdVedtakDto_Vedtak> | null;
+  opprinneligIdentdato: string;
+  behandlingstema: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode;
+  vedtak: Array<tjenester_infotrygd_InfotrygdVedtakDto_Vedtak>;
 };
 
 export type vedtak_hendelser_behandling_Aksjonspunktstatus = 'AVBRUTT' | 'OPPRETTET' | 'UTFØRT';

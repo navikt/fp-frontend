@@ -18,10 +18,10 @@ export const VedtakDetaljerPanel = ({ vedtak }: Props) => (
       <Tabs.Tab value="utbetalinger" label={<FormattedMessage id="VedtakDetaljerPanel.Utbetalinger" />} />
     </Tabs.List>
     <Tabs.Panel value="arbeidshforhold">
-      <ArbeidsforholdPanel alleArbeidsforhold={vedtak.arbeidsforhold} />
+      <ArbeidsforholdPanel alleArbeidsforhold={vedtak.arbeidsforhold ?? undefined} />
     </Tabs.Panel>
     <Tabs.Panel value="utbetalinger">
-      <UtbetalingerPanel utbetalinger={vedtak.utbetalinger} />
+      <UtbetalingerPanel utbetalinger={vedtak.utbetalinger ?? undefined} />
     </Tabs.Panel>
   </Tabs>
 );
