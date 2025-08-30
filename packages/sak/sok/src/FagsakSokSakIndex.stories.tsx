@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
@@ -11,9 +11,9 @@ import { FagsakSokSakIndex } from './FagsakSokSakIndex';
 
 const defaultSak = {
   saksnummer: '1',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: 'FP',
   relasjonsRolleType: '-',
-  status: FagsakStatus.OPPRETTET,
+  status: FagsakStatusEnum.OPPRETTET,
   aktørId: '',
   person: {
     aktørId: null,
@@ -62,12 +62,12 @@ export const Default: Story = {
       {
         ...defaultSak,
         saksnummer: '1',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+        fagsakYtelseType: 'FP',
       },
       {
         ...defaultSak,
         saksnummer: '2',
-        fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+        fagsakYtelseType: 'ES',
       },
     ],
   },

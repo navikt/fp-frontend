@@ -5,7 +5,6 @@ import { Heading, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 
@@ -85,7 +84,7 @@ export const RegistrerPapirsoknadPanel = ({
           fagsakYtelseType={fagsak.fagsakYtelseType}
           alleKodeverk={kodeverk}
         />
-        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.ENGANGSSTONAD && (
+        {soknadData && soknadData.getFagsakYtelseType() === 'ES' && (
           <EngangsstonadPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
@@ -94,7 +93,7 @@ export const RegistrerPapirsoknadPanel = ({
             alleKodeverk={kodeverk}
           />
         )}
-        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.FORELDREPENGER && (
+        {soknadData && soknadData.getFagsakYtelseType() === 'FP' && (
           <ForeldrepengerPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}
@@ -105,7 +104,7 @@ export const RegistrerPapirsoknadPanel = ({
             erEndringssøknad={erEndringssøknad}
           />
         )}
-        {soknadData && soknadData.getFagsakYtelseType() === FagsakYtelseType.SVANGERSKAPSPENGER && (
+        {soknadData && soknadData.getFagsakYtelseType() === 'SVP' && (
           <SvangerskapspengerPapirsoknadIndex
             onSubmitUfullstendigsoknad={lagreUfullstendigSøknadOgAvslutt}
             onSubmit={lagreFullstendigSøknad}

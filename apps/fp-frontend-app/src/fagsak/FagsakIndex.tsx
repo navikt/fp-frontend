@@ -5,7 +5,7 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Location } from 'history';
 
-import { BehandlingType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 import { useTrackRouteParam } from '@navikt/fp-utils';
@@ -55,8 +55,8 @@ export const FagsakIndex = () => {
   const [harHentetFagsak, fagsakData] = useHentFagsak(selectedSaksnummer, behandlingUuidFraUrl, behandling?.versjon);
   const fagsakBehandling = fagsakData?.getBehandling(behandlingUuidFraUrl);
   const erTilbakekreving =
-    fagsakBehandling?.type === BehandlingType.TILBAKEKREVING ||
-    fagsakBehandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+    fagsakBehandling?.type === BehandlingTypeEnum.TILBAKEKREVING ||
+    fagsakBehandling?.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;
 
   const { hentOgSettBehandling } = useHentBehandling(erTilbakekreving, setBehandling, behandlingUuidFraUrl);
   const [visSideMeny, setVisSideMeny] = useState(true);

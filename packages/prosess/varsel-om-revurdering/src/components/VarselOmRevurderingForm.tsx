@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  BehandlingType,
+  BehandlingTypeEnum,
   DokumentMalType,
   RevurderingVarslingÅrsak,
 } from '@navikt/fp-kodeverk';
@@ -183,8 +183,8 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
         hasManualPaVent
         ventearsak={null}
         erTilbakekreving={
-          behandling.type === BehandlingType.TILBAKEKREVING ||
-          behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
+          behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
+          behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING
         }
       />
     </>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, type FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { type ForhåndsvisHenleggParams, MenyHenleggIndex } from '@navikt/fp-sak-meny-henlegg';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -35,7 +35,8 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
   });
 
   const behandlingresultatTyper =
-    behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING
+    behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
+    behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING
       ? notEmpty(alleFpTilbakeKodeverk)['BehandlingResultatType']
       : notEmpty(alleFpSakKodeverk)['BehandlingResultatType'];
 
@@ -76,7 +77,8 @@ const useVisForhandsvisningAvHenleggelse = (behandling: BehandlingAppKontekst) =
   });
 
   const erTilbakekreving =
-    BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+    BehandlingTypeEnum.TILBAKEKREVING === behandling.type ||
+    BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandling.type;
 
   return (data: ForhåndsvisHenleggParams): void => {
     if (erTilbakekreving) {

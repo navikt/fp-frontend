@@ -8,7 +8,7 @@ import {
   RobotSmileIcon,
 } from '@navikt/aksel-icons';
 
-import { HistorikkAktor } from '@navikt/fp-kodeverk';
+import { type HistorikkAktor, HistorikkAktorEnum } from '@navikt/fp-kodeverk';
 
 interface Props {
   aktørType: HistorikkAktor;
@@ -18,9 +18,9 @@ export const Avatar = ({ aktørType }: Props) => {
   const intl = useIntl();
 
   switch (aktørType) {
-    case HistorikkAktor.SAKSBEHANDLER:
+    case HistorikkAktorEnum.SAKSBEHANDLER:
       return <PersonHeadsetIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Saksbehandler' })} />;
-    case HistorikkAktor.SOKER:
+    case HistorikkAktorEnum.SOKER:
       return (
         <PersonFillIcon
           fontSize={24}
@@ -28,11 +28,16 @@ export const Avatar = ({ aktørType }: Props) => {
           title={intl.formatMessage({ id: 'Historikkinnslag.Soker' })}
         />
       );
-    case HistorikkAktor.BESLUTTER:
+    case HistorikkAktorEnum.BESLUTTER:
       return <PersonCheckmarkIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Beslutter' })} />;
-    case HistorikkAktor.VEDTAKSLOSNINGEN:
+    case HistorikkAktorEnum.VEDTAKSLOSNINGEN:
       return <RobotSmileIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Vedtakslosninger' })} />;
-    case HistorikkAktor.ARBEIDSGIVER:
+    case HistorikkAktorEnum.ARBEIDSGIVER:
       return <PersonSuitIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Arbeidsgiver' })} />;
+    case '-':
+      return ''; // TODO [JOHANNES] -- eller kast feil?
   }
+
+  // TODO [JOHANNES] -- ikke sikker på hvorfor switch ikke er exhaustive
+  return '';
 };

@@ -3,7 +3,13 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
-import { BehandlingResultatType, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import {
+  BehandlingResultatType,
+  type BehandlingStatus,
+  BehandlingStatusEnum,
+  type BehandlingType,
+  BehandlingTypeEnum,
+} from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 import styles from './fatterVedtakApprovalModal.module.css';
@@ -14,16 +20,16 @@ const getInfoTextCode = (
   isOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
 ) => {
-  if (behandlingtypeKode === BehandlingType.TILBAKEKREVING) {
+  if (behandlingtypeKode === BehandlingTypeEnum.TILBAKEKREVING) {
     return 'FatterVedtakApprovalModal.Tilbakekreving';
   }
-  if (behandlingtypeKode === BehandlingType.TILBAKEKREVING_REVURDERING) {
+  if (behandlingtypeKode === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
     return 'FatterVedtakApprovalModal.TilbakekrevingRevurdering';
   }
-  if (behandlingtypeKode === BehandlingType.KLAGE) {
+  if (behandlingtypeKode === BehandlingTypeEnum.KLAGE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
-  if (behandlingtypeKode === BehandlingType.ANKE) {
+  if (behandlingtypeKode === BehandlingTypeEnum.ANKE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionAnke';
   }
   if (harSammeResultatSomOriginalBehandling) {
@@ -39,10 +45,10 @@ const getInfoTextCode = (
 };
 
 const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: BehandlingType) => {
-  if (behandlingTypeKode === BehandlingType.KLAGE) {
+  if (behandlingTypeKode === BehandlingTypeEnum.KLAGE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
-  if (behandlingTypeKode === BehandlingType.ANKE) {
+  if (behandlingTypeKode === BehandlingTypeEnum.ANKE) {
     return 'FatterVedtakApprovalModal.ModalDescriptionAnke';
   }
   if (isOpphor) {
@@ -52,7 +58,7 @@ const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: Beha
 };
 
 const isStatusFatterVedtak = (behandlingStatusKode: BehandlingStatus) =>
-  behandlingStatusKode === BehandlingStatus.FATTER_VEDTAK;
+  behandlingStatusKode === BehandlingStatusEnum.FATTER_VEDTAK;
 
 const utledInfoTextCode = (
   allAksjonspunktApproved: boolean,

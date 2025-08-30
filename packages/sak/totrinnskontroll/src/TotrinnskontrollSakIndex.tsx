@@ -6,10 +6,10 @@ import { type Location } from 'history';
 import {
   AksjonspunktKode,
   AksjonspunktKodeTilbakekreving,
-  BehandlingArsakType,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakYtelseType,
+  BehandlingArsakTypeEnum,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
+  type FagsakYtelseType,
   SkjermlenkeType,
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
@@ -93,7 +93,8 @@ export const TotrinnskontrollSakIndex = ({
   setBeslutterFormData,
 }: Props) => {
   const erTilbakekreving =
-    BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+    BehandlingTypeEnum.TILBAKEKREVING === behandling.type ||
+    BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandling.type;
 
   const submitHandler = (values: FormValues) => {
     const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning.map(apData => ({
@@ -124,15 +125,15 @@ export const TotrinnskontrollSakIndex = ({
         .map(({ behandlingArsakType }) => behandlingArsakType)
         .some(
           bt =>
-            bt === BehandlingArsakType.ETTER_KLAGE ||
-            bt === BehandlingArsakType.KLAGE_U_INNTK ||
-            bt === BehandlingArsakType.KLAGE_M_INNTK,
+            bt === BehandlingArsakTypeEnum.ETTER_KLAGE ||
+            bt === BehandlingArsakTypeEnum.KLAGE_U_INNTK ||
+            bt === BehandlingArsakTypeEnum.KLAGE_M_INNTK,
         )
     : false;
 
   const sorterteTotrinnskontrollSkjermlenkeContext = erTilbakekreving
     ? sorterteSkjermlenkeCodesForTilbakekreving.flatMap(s => {
-        const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s.kode);
+        const context = behandling.totrinnskontrollÅrsaker?.find(el => el.skjermlenkeType === s.kode);
         return context ? [context] : [];
       })
     : behandling.totrinnskontrollÅrsaker;
@@ -140,7 +141,7 @@ export const TotrinnskontrollSakIndex = ({
   const lagLenke = (skjermlenkeCode: SkjermlenkeType): Location | undefined =>
     createLocationForSkjermlenke(location, skjermlenkeCode);
 
-  const erStatusFatterVedtak = behandling.status === BehandlingStatus.FATTER_VEDTAK;
+  const erStatusFatterVedtak = behandling.status === BehandlingStatusEnum.FATTER_VEDTAK;
   const skjemalenkeTyper = alleKodeverk['SkjermlenkeType'];
   const vurderArsaker = alleKodeverk['VurderÅrsak'];
   const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);
@@ -154,7 +155,7 @@ export const TotrinnskontrollSakIndex = ({
           readOnly={readOnly}
           onSubmit={submitHandler}
           forhandsvisVedtaksbrev={forhandsvisVedtaksbrev}
-          erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
+          erForeldrepengerFagsak={fagsakYtelseType === 'FP'}
           skjemalenkeTyper={skjemalenkeTyper}
           erBehandlingEtterKlage={erBehandlingEtterKlage}
           faktaOmBeregningTilfeller={faktaOmBeregningTilfeller}
@@ -168,7 +169,7 @@ export const TotrinnskontrollSakIndex = ({
         <TotrinnskontrollSaksbehandlerPanel
           behandling={behandling}
           totrinnskontrollSkjermlenkeContext={sorterteTotrinnskontrollSkjermlenkeContext}
-          erForeldrepengerFagsak={fagsakYtelseType === FagsakYtelseType.FORELDREPENGER}
+          erForeldrepengerFagsak={fagsakYtelseType === 'FP'}
           erTilbakekreving={erTilbakekreving}
           skjemalenkeTyper={skjemalenkeTyper}
           lagLenke={lagLenke}

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingTypeEnum, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
@@ -25,8 +25,8 @@ const SAKSLISTER = [
       til: 4,
       erDynamiskPeriode: true,
     },
-    behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD],
-    fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+    behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD],
+    fagsakYtelseTyper: ['FP'],
     andreKriterier: [
       {
         andreKriterierType: AndreKriterierType.TIL_BESLUTTER,

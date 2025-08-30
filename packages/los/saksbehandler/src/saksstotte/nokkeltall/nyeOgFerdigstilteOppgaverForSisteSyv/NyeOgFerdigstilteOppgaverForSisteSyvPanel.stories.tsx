@@ -2,7 +2,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { NyeOgFerdigstilteOppgaverForSisteSyvPanel } from './NyeOgFerdigstilteOppgaverForSisteSyvPanel';
@@ -25,25 +25,25 @@ export const Default: Story = {
     height: 200,
     nyeOgFerdigstilteOppgaver: [
       {
-        behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+        behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
         antallNye: 10,
         antallFerdigstilte: 20,
         dato: dayjs().subtract(1, 'd').format(ISO_DATE_FORMAT),
       },
       {
-        behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+        behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
         antallNye: 30,
         antallFerdigstilte: 15,
         dato: dayjs().subtract(3, 'd').format(ISO_DATE_FORMAT),
       },
       {
-        behandlingType: BehandlingType.KLAGE,
+        behandlingType: BehandlingTypeEnum.KLAGE,
         antallNye: 23,
         antallFerdigstilte: 2,
         dato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
       },
       {
-        behandlingType: BehandlingType.KLAGE,
+        behandlingType: BehandlingTypeEnum.KLAGE,
         antallNye: 23,
         antallFerdigstilte: 2,
         dato: dayjs().subtract(5, 'd').format(ISO_DATE_FORMAT),

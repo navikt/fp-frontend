@@ -1,4 +1,4 @@
-import { BehandlingStatus, BehandlingType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, BehandlingTypeEnum, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Behandling, Vilkar } from '@navikt/fp-types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
@@ -7,8 +7,8 @@ describe('readOnlyUtils', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    status: BehandlingStatus.BEHANDLING_UTREDES,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
+    status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+    type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     behandlingPåVent: false,
     behandlingHenlagt: false,
   } as Behandling;
@@ -18,6 +18,10 @@ describe('readOnlyUtils', () => {
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
       overstyrbar: true,
+      avslagKode: null,
+      lovReferanse: null,
+      evaluering: null,
+      input: null,
     },
   ];
 

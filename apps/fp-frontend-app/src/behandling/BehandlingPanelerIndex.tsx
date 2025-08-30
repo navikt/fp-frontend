@@ -5,7 +5,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -33,7 +33,7 @@ export const BehandlingPanelerIndex = () => {
   const location = useLocation();
 
   const erFørstegangssøknadEllerRevurdering =
-    behandling.type === BehandlingType.FORSTEGANGSSOKNAD || behandling.type === BehandlingType.REVURDERING;
+    behandling.type === BehandlingTypeEnum.FORSTEGANGSSOKNAD || behandling.type === BehandlingTypeEnum.REVURDERING;
 
   const behandlingApi = useBehandlingApi(behandling);
 
@@ -70,7 +70,7 @@ export const BehandlingPanelerIndex = () => {
           kodeverk={alleKodeverk}
         />
       )}
-      {fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER && erFørstegangssøknadEllerRevurdering && (
+      {fagsak.fagsakYtelseType === 'FP' && erFørstegangssøknadEllerRevurdering && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <ForeldrepengerPaneler
@@ -82,7 +82,7 @@ export const BehandlingPanelerIndex = () => {
           </ErrorBoundary>
         </Suspense>
       )}
-      {fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER && erFørstegangssøknadEllerRevurdering && (
+      {fagsak.fagsakYtelseType === 'SVP' && erFørstegangssøknadEllerRevurdering && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <SvangerskapspengerPaneler
@@ -94,7 +94,7 @@ export const BehandlingPanelerIndex = () => {
           </ErrorBoundary>
         </Suspense>
       )}
-      {fagsak.fagsakYtelseType === FagsakYtelseType.ENGANGSSTONAD && erFørstegangssøknadEllerRevurdering && (
+      {fagsak.fagsakYtelseType === 'ES' && erFørstegangssøknadEllerRevurdering && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <EngangsstonadPaneler
@@ -106,21 +106,21 @@ export const BehandlingPanelerIndex = () => {
           </ErrorBoundary>
         </Suspense>
       )}
-      {behandling.type === BehandlingType.DOKUMENTINNSYN && (
+      {behandling.type === BehandlingTypeEnum.DOKUMENTINNSYN && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <InnsynPaneler valgtProsessSteg={query['punkt']} />
           </ErrorBoundary>
         </Suspense>
       )}
-      {behandling.type === BehandlingType.ANKE && (
+      {behandling.type === BehandlingTypeEnum.ANKE && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <AnkePaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
           </ErrorBoundary>
         </Suspense>
       )}
-      {behandling.type === BehandlingType.KLAGE && (
+      {behandling.type === BehandlingTypeEnum.KLAGE && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <KlagePaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
@@ -139,5 +139,5 @@ export const BehandlingPanelerIndex = () => {
 };
 
 const erTilbakekreving = (behandlingTypeKode?: string): boolean =>
-  behandlingTypeKode === BehandlingType.TILBAKEKREVING ||
-  behandlingTypeKode === BehandlingType.TILBAKEKREVING_REVURDERING;
+  behandlingTypeKode === BehandlingTypeEnum.TILBAKEKREVING ||
+  behandlingTypeKode === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;

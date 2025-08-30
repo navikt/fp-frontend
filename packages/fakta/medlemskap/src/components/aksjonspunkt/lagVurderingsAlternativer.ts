@@ -1,5 +1,3 @@
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
-
 import { MedlemskapVurdering } from '../../types/vurderingMedlemskapForm';
 
 const oppfylt = {
@@ -27,7 +25,7 @@ export const lagVurderingsAlternativer = (
   erForutgående: boolean,
   erRevurdering: boolean,
 ): RadioOption[] => {
-  if (ytelse === FagsakYtelseType.ENGANGSSTONAD) {
+  if (ytelse === 'ES') {
     return erForutgående ? [oppfylt, delvisOppfylt, ikkeOppfylt] : [oppfylt, ikkeOppfylt];
   }
   if (erRevurdering) {

@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { FagsakStatus, FagsakYtelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
@@ -11,8 +11,8 @@ import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const FAGSAK = {
   saksnummer: '35425245',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  status: FagsakStatus.UNDER_BEHANDLING,
+  fagsakYtelseType: 'FP',
+  status: FagsakStatusEnum.UNDER_BEHANDLING,
   opprettet: '2020-01-01',
   endret: '2020-01-01',
 } as FagsakEnkel;

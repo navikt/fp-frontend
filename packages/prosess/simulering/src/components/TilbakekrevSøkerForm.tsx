@@ -9,7 +9,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, FagsakYtelseType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -37,7 +37,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
   const varseltekst = watch('varseltekst');
   const videreBehandling = watch('videreBehandling');
 
-  const isForeldrepenger = fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER;
+  const isForeldrepenger = fagsak.fagsakYtelseType === 'FP';
 
   const previewMessage = (e: React.MouseEvent): void => {
     previewCallback({ mottaker: '', fritekst: varseltekst ?? ' ' });

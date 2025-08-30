@@ -2596,6 +2596,7 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
+    "@navikt/fp-types": "workspace:*"
     eslint: 9.33.0
     typescript: 5.9.2
   languageName: unknown

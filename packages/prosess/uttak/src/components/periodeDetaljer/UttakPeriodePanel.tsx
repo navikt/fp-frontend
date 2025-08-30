@@ -7,7 +7,7 @@ import { AksjonspunktHelpTextHTML, EditedIcon } from '@navikt/ft-ui-komponenter'
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingType, ManuellBehandlingÅrsak, StonadskontoType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, ManuellBehandlingÅrsak, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
@@ -213,7 +213,7 @@ export const UttakPeriodePanel = ({
     : perioderAnnenpart.some(p => !erEøsPeriode(p) && p.flerbarnsdager);
 
   const erRevurderingFørEndringsdato =
-    behandling.type === BehandlingType.REVURDERING && valgtPeriode.tom < endringsdato;
+    behandling.type === BehandlingTypeEnum.REVURDERING && valgtPeriode.tom < endringsdato;
 
   const visForrigePeriode = () => {
     setValgtPeriodeIndex(index => (index === 0 || index === undefined ? index : index - 1));

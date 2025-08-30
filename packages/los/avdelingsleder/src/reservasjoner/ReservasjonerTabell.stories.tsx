@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
@@ -58,7 +58,7 @@ export const VisTabellMedReservasjoner: Story = {
               reservertTilTidspunkt: '2020-01-10',
               oppgaveId: 1,
               oppgaveSaksNr: '122234',
-              behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+              behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
             },
             {
               reservertAvUid: 'gtfbrt-tbrtb',
@@ -66,7 +66,7 @@ export const VisTabellMedReservasjoner: Story = {
               reservertTilTidspunkt: '2020-01-01',
               oppgaveId: 2,
               oppgaveSaksNr: '23454',
-              behandlingType: BehandlingType.KLAGE,
+              behandlingType: BehandlingTypeEnum.KLAGE,
             },
           ]),
         ),

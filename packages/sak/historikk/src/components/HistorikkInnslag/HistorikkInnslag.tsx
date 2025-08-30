@@ -5,7 +5,7 @@ import { BodyLong, BodyShort, Box, type BoxNewProps, Button, Detail, HStack, VSt
 import { dateTimeFormat } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { HistorikkAktor, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import { type HistorikkAktor, HistorikkAktorEnum, SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
@@ -25,11 +25,12 @@ interface Props {
 }
 
 const backgrounds: Record<HistorikkAktor, BoxNewProps['background']> = {
-  [HistorikkAktor.ARBEIDSGIVER]: 'info-moderate',
-  [HistorikkAktor.BESLUTTER]: 'success-moderate',
-  [HistorikkAktor.VEDTAKSLOSNINGEN]: 'neutral-moderate',
-  [HistorikkAktor.SAKSBEHANDLER]: 'meta-purple-moderate',
-  [HistorikkAktor.SOKER]: 'warning-moderate',
+  [HistorikkAktorEnum.ARBEIDSGIVER]: 'info-moderate',
+  [HistorikkAktorEnum.BESLUTTER]: 'success-moderate',
+  [HistorikkAktorEnum.VEDTAKSLOSNINGEN]: 'neutral-moderate',
+  [HistorikkAktorEnum.SAKSBEHANDLER]: 'meta-purple-moderate',
+  [HistorikkAktorEnum.SOKER]: 'warning-moderate',
+  '-': 'info-moderate',
 };
 
 export const HistorikkInnslag = ({
@@ -62,7 +63,7 @@ export const HistorikkInnslag = ({
 
           {skjermlenke && (
             <Skjermlenke
-              skjermlenke={skjermlenke}
+              skjermlenke={skjermlenke as SkjermlenkeType}
               behandlingLocation={behandlingLocation}
               alleKodeverk={alleKodeverk}
               createLocationForSkjermlenke={createLocationForSkjermlenke}
@@ -74,7 +75,7 @@ export const HistorikkInnslag = ({
               {linjerSomSkalVises.map((linje, index) =>
                 linje.type === 'TEKST' ? (
                   <BodyLong key={`${linje.tekst}-${index}`} size="medium">
-                    {parseBoldText(linje.tekst)}
+                    {parseBoldText(linje.tekst ?? '')}
                   </BodyLong>
                 ) : (
                   <br key={`${linje.type}-${index}`} />

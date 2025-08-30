@@ -56,7 +56,7 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
         {opptjening && (
           <OpptjeningVilkarProsessIndex
             erSvpFagsak
-            lovReferanse={standardPanelProps.vilkar[0].lovReferanse}
+            lovReferanse={standardPanelProps.vilkar[0].lovReferanse ?? undefined}
             opptjening={opptjening}
             readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
             status={standardPanelProps.status}

@@ -77,20 +77,20 @@ export const OpptjeningTotrinnText = ({ aktivitet }: Props) => {
   if (aktivitet.erEndring) {
     return mapAktivitetTextEndring(
       aktivitet.aktivitetType ? aktivitet.aktivitetType.toLowerCase() : undefined,
-      aktivitet.arbeidsgiverNavn,
-      aktivitet.orgnr,
+      aktivitet.arbeidsgiverNavn ?? '',
+      aktivitet.orgnr ?? '',
     );
   }
   if (aktivitet.godkjent) {
     return mapAktivitetTextGodkjenning(
       aktivitet.aktivitetType ? aktivitet.aktivitetType.toLowerCase() : undefined,
-      aktivitet.arbeidsgiverNavn,
-      aktivitet.orgnr,
+      aktivitet.arbeidsgiverNavn ?? '',
+      aktivitet.orgnr ?? '',
     );
   }
   return mapAktivitetTextUnderkjenning(
     aktivitet.aktivitetType ? aktivitet.aktivitetType.toLowerCase() : undefined,
-    aktivitet.arbeidsgiverNavn,
-    aktivitet.orgnr,
+    aktivitet.arbeidsgiverNavn ?? '',
+    aktivitet.orgnr ?? '',
   );
 };

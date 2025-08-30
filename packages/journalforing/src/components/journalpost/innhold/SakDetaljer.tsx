@@ -5,7 +5,7 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Button, CopyButton, Detail, HStack, Label, Spacer, Tag, type TagProps, VStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { FagsakStatus, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum, FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 import type { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
 
@@ -78,13 +78,13 @@ const velgSakLenke = (saksnummer: string): string => `/fagsak/${saksnummer}/`;
 
 const finnTagProps = (statusKode: string): TagProps | null => {
   switch (statusKode) {
-    case FagsakStatus.AVSLUTTET:
+    case FagsakStatusEnum.AVSLUTTET:
       return { variant: 'neutral', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Avsluttet" /> };
-    case FagsakStatus.LOPENDE:
+    case FagsakStatusEnum.LOPENDE:
       return { variant: 'warning', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Løpende" /> };
-    case FagsakStatus.OPPRETTET:
+    case FagsakStatusEnum.OPPRETTET:
       return { variant: 'alt1', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.Opprettet" /> };
-    case FagsakStatus.UNDER_BEHANDLING:
+    case FagsakStatusEnum.UNDER_BEHANDLING:
       return { variant: 'alt2', size: 'xsmall', children: <FormattedMessage id="Journal.Sak.UnderBehandling" /> };
     default:
       return null;

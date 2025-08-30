@@ -193,3 +193,4 @@ export type {
   BarnHendelseData,
 } from './src/fødsel';
 export type { AnnenforelderUttakEøsPeriode } from './src/faktaUttakEøsPeriode';
+export * from './src/apiDtoGenerert';

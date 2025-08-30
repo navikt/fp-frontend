@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 
-import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aktor, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
@@ -32,8 +32,8 @@ const AKTØR_INFO = {
   fagsaker: [
     {
       saksnummer: '123',
-      fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-      status: FagsakStatus.OPPRETTET,
+      fagsakYtelseType: 'FP',
+      status: FagsakStatusEnum.OPPRETTET,
       aktørId: '1345345',
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',
@@ -42,8 +42,8 @@ const AKTØR_INFO = {
     },
     {
       saksnummer: '252523',
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-      status: FagsakStatus.LOPENDE,
+      fagsakYtelseType: 'ES',
+      status: FagsakStatusEnum.LOPENDE,
       aktørId: '1345345',
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',

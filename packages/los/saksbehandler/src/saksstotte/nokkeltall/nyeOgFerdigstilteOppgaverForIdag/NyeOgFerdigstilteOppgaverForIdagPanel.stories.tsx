@@ -5,7 +5,7 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosSaksbehandlerApi';
@@ -39,25 +39,25 @@ export const Default: Story = {
     height: 300,
     nyeOgFerdigstilteOppgaver: [
       {
-        behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+        behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
         antallNye: 10,
         antallFerdigstilte: 20,
         dato: dayjs().format(ISO_DATE_FORMAT),
       },
       {
-        behandlingType: BehandlingType.KLAGE,
+        behandlingType: BehandlingTypeEnum.KLAGE,
         antallNye: 23,
         antallFerdigstilte: 2,
         dato: dayjs().format(ISO_DATE_FORMAT),
       },
       {
-        behandlingType: BehandlingType.REVURDERING,
+        behandlingType: BehandlingTypeEnum.REVURDERING,
         antallNye: 3,
         antallFerdigstilte: 24,
         dato: dayjs().format(ISO_DATE_FORMAT),
       },
       {
-        behandlingType: BehandlingType.DOKUMENTINNSYN,
+        behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
         antallNye: 23,
         antallFerdigstilte: 12,
         dato: dayjs().format(ISO_DATE_FORMAT),

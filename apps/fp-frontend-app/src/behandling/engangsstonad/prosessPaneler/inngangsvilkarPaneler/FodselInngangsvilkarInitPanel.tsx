@@ -1,6 +1,6 @@
 import { type IntlShape, useIntl } from 'react-intl';
 
-import { AksjonspunktKode, FagsakYtelseType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
@@ -44,7 +44,7 @@ export const FodselInngangsvilkarInitPanel = () => {
       hentInngangsvilkarPanelTekst={paneltekst}
     >
       <FodselVilkarProsessIndex
-        ytelseTypeKode={FagsakYtelseType.ENGANGSSTONAD}
+        ytelseTypeKode="ES"
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         status={standardPanelProps.status}
         vilkar={standardPanelProps.vilkar}

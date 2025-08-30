@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingType, FagsakYtelseType, KøSortering } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingTypeEnum, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
@@ -67,8 +67,8 @@ export const Default: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
-        fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
             andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
@@ -92,8 +92,8 @@ export const MedToSakslister: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
-        fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
             andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
@@ -110,8 +110,8 @@ export const MedToSakslister: Story = {
       {
         sakslisteId: 2,
         navn: 'Saksliste 2',
-        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.KLAGE],
-        fagsakYtelseTyper: [FagsakYtelseType.SVANGERSKAPSPENGER],
+        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.KLAGE],
+        fagsakYtelseTyper: ['SVP'],
         andreKriterier: [
           {
             andreKriterierType: AndreKriterierType.UTBETALING_TIL_BRUKER,
@@ -187,8 +187,8 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingType.FORSTEGANGSSOKNAD, BehandlingType.REVURDERING],
-        fagsakYtelseTyper: [FagsakYtelseType.FORELDREPENGER],
+        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
             andreKriterierType: AndreKriterierType.TIL_BESLUTTER,

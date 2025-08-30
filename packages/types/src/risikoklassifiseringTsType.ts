@@ -1,10 +1,3 @@
-export type Risikoklassifisering = Readonly<{
-  kontrollresultat: string;
-  faresignalVurdering?: string | null;
-  iayFaresignaler?: {
-    faresignaler: string[];
-  } | null;
-  medlFaresignaler?: {
-    faresignaler: string[];
-  } | null;
-}>;
+import type { tjenester_behandling_kontroll_dto_KontrollresultatDto } from './apiDtoGenerert.ts';
+
+export type Risikoklassifisering = tjenester_behandling_kontroll_dto_KontrollresultatDto;

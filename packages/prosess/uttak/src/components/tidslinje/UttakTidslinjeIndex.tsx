@@ -3,7 +3,7 @@ import React from 'react';
 import { calcDays, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingType, OppholdArsakType, SoknadType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, OppholdArsakType, SoknadType, StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
@@ -70,7 +70,7 @@ const finnTidslinjeTider = (
     søknad.soknadType === SoknadType.FODSEL
       ? (endredFodselsDato ?? familiehendelseDate)
       : søknad.omsorgsovertakelseDato;
-  const isRevurdering = behandling.type === BehandlingType.REVURDERING;
+  const isRevurdering = behandling.type === BehandlingTypeEnum.REVURDERING;
 
   const barnFraTps = familiehendelse.register?.avklartBarn ?? [];
   const dodeBarn =

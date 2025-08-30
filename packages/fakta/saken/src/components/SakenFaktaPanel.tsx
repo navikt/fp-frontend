@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type {
   AvklarDekningsgradAp,
@@ -84,7 +84,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
               alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             />
           )}
-          {fagsak.fagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && !!soknad && (
+          {fagsak.fagsakYtelseType !== 'SVP' && !!soknad && (
             <StartdatoForForeldrepengerperiodenForm
               aksjonspunkt={aksjonspunkterForPanel.find(
                 ap => ap.definisjon === AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
@@ -96,7 +96,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
             />
           )}
         </HStack>
-        {soknad && !automatiskAp && fagsak.fagsakYtelseType === FagsakYtelseType.FORELDREPENGER && (
+        {soknad && !automatiskAp && fagsak.fagsakYtelseType === 'FP' && (
           <DekningradForm
             søknad={soknad}
             fagsak={fagsak}

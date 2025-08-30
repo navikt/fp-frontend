@@ -5,13 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  FagsakYtelseType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -67,10 +61,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
   });
 
   const alleAvslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.FODSELSVILKARET_MOR];
-  const avslagsarsaker = getFodselVilkarAvslagsarsaker(
-    ytelseTypeKode === FagsakYtelseType.FORELDREPENGER,
-    alleAvslagsarsaker,
-  );
+  const avslagsarsaker = getFodselVilkarAvslagsarsaker(ytelseTypeKode === 'FP', alleAvslagsarsaker);
 
   const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
   const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
@@ -87,7 +78,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
         isAksjonspunktOpen={harÅpneAksjonspunkter}
         readOnlySubmitButton={readOnlySubmitButton}
         readOnly={isReadOnly}
-        lovReferanse={lovReferanse}
+        lovReferanse={lovReferanse ?? undefined}
         originalErVilkarOk={originalErVilkarOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}

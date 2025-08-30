@@ -1,4 +1,10 @@
-import { BehandlingStatus, BehandlingType, FagsakStatus } from '@navikt/fp-kodeverk';
+import {
+  type BehandlingStatus,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
+  type FagsakStatus,
+  FagsakStatusEnum,
+} from '@navikt/fp-kodeverk';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { kanOverstyreAccess, writeAccess } from './access';
@@ -6,8 +12,8 @@ import { kanOverstyreAccess, writeAccess } from './access';
 const forEachFagsakAndBehandlingStatus = (
   callback: (fagsakStatus: FagsakStatus, behandlingStatus: BehandlingStatus) => void,
 ) =>
-  Object.values(FagsakStatus).forEach(fagsakStatus =>
-    Object.values(BehandlingStatus).forEach(behandlingStatus => callback(fagsakStatus, behandlingStatus)),
+  Object.values(FagsakStatusEnum).forEach(fagsakStatus =>
+    Object.values(BehandlingStatusEnum).forEach(behandlingStatus => callback(fagsakStatus, behandlingStatus)),
   );
 
 const getTestName = (accessName: string, expected: boolean, fagsakStatus: string, behandlingStatus: string): string =>
@@ -20,12 +26,12 @@ describe('access', () => {
   const veilederAnsatt = { kanVeilede: true } as NavAnsatt;
 
   describe('writeAccess', () => {
-    const validFagsakStatuser = [FagsakStatus.OPPRETTET, FagsakStatus.UNDER_BEHANDLING];
+    const validFagsakStatuser = [FagsakStatusEnum.OPPRETTET, FagsakStatusEnum.UNDER_BEHANDLING];
     const validFagsakStatus = validFagsakStatuser[0];
 
-    const validBehandlingStatuser = [BehandlingStatus.OPPRETTET, BehandlingStatus.BEHANDLING_UTREDES];
+    const validBehandlingStatuser = [BehandlingStatusEnum.OPPRETTET, BehandlingStatusEnum.BEHANDLING_UTREDES];
     const validBehandlingStatus = validBehandlingStatuser[0];
-    const validBehandlingTyper = BehandlingType.FORSTEGANGSSOKNAD;
+    const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
 
     it('saksbehandler skal ha skrivetilgang', () => {
       const accessForSaksbehandler = writeAccess(
@@ -64,12 +70,12 @@ describe('access', () => {
   });
 
   describe('kanOverstyreAccess', () => {
-    const validFagsakStatuser = [FagsakStatus.UNDER_BEHANDLING];
+    const validFagsakStatuser = [FagsakStatusEnum.UNDER_BEHANDLING];
     const validFagsakStatus = validFagsakStatuser[0];
 
-    const validBehandlingStatuser = [BehandlingStatus.BEHANDLING_UTREDES];
+    const validBehandlingStatuser = [BehandlingStatusEnum.BEHANDLING_UTREDES];
     const validBehandlingStatus = validBehandlingStatuser[0];
-    const validBehandlingTyper = BehandlingType.FORSTEGANGSSOKNAD;
+    const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
 
     const saksbehandlerOgOverstyrerAnsatt = { ...saksbehandlerAnsatt, kanOverstyre: true };
     const veilederOgOverstyrerAnsatt = { ...veilederAnsatt, kanOverstyre: false };

@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, BehandlingTypeEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
@@ -34,10 +34,10 @@ const RESERVERTE_OPPGAVER = [
     personnummer: '233',
     navn: 'Helge Utvikler',
     system: 'SAK',
-    behandlingstype: BehandlingType.KLAGE,
+    behandlingstype: BehandlingTypeEnum.KLAGE,
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: [],
@@ -53,10 +53,10 @@ const RESERVERTE_OPPGAVER = [
     personnummer: '233',
     navn: 'Bjarne Bjærke',
     system: 'SAK',
-    behandlingstype: BehandlingType.KLAGE,
+    behandlingstype: BehandlingTypeEnum.KLAGE,
     opprettetTidspunkt: '2023-01-01',
     behandlingsfrist: '2023-01-01',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: [],
@@ -72,10 +72,10 @@ const RESERVERTE_OPPGAVER = [
     personnummer: '233',
     navn: 'Borgil Bø',
     system: 'SAK',
-    behandlingstype: BehandlingType.REVURDERING,
+    behandlingstype: BehandlingTypeEnum.REVURDERING,
     opprettetTidspunkt: '2024-01-01',
     behandlingsfrist: '2024-01-01',
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FagsakYtelseType, FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 
@@ -32,23 +32,23 @@ type Story = StoryObj<typeof meta>;
 
 export const ForMorVedFødsel: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.FODSEL, ForeldreType.MOR),
+    soknadData: new SoknadData('ES', FamilieHendelseType.FODSEL, ForeldreType.MOR),
   },
 };
 
 export const ForFarVedFødsel: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.FODSEL, ForeldreType.FAR),
+    soknadData: new SoknadData('ES', FamilieHendelseType.FODSEL, ForeldreType.FAR),
   },
 };
 
 export const ForMorVedAdopsjon: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
+    soknadData: new SoknadData('ES', FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
   },
 };
 export const ForFarVedAdopsjon: Story = {
   args: {
-    soknadData: new SoknadData(FagsakYtelseType.ENGANGSSTONAD, FamilieHendelseType.ADOPSJON, ForeldreType.FAR),
+    soknadData: new SoknadData('ES', FamilieHendelseType.ADOPSJON, ForeldreType.FAR),
   },
 };

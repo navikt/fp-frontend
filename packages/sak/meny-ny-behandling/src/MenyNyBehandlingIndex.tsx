@@ -2,14 +2,17 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import { type BehandlingOppretting, type FormValues, NyBehandlingModal } from './components/NyBehandlingModal';
 
 import messages from '../i18n/nb_NO.json';
 
-const TILBAKEKREVING_BEHANDLINGSTYPER = [BehandlingType.TILBAKEKREVING, BehandlingType.TILBAKEKREVING_REVURDERING];
+const TILBAKEKREVING_BEHANDLINGSTYPER = [
+  BehandlingTypeEnum.TILBAKEKREVING,
+  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
+];
 
 const intl = createIntl(messages);
 

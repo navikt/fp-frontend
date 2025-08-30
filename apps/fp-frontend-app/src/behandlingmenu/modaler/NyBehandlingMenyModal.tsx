@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -15,20 +15,20 @@ import { useLagNyBehandling } from '../../data/polling/useLagNyBehandling';
 import { FagsakData } from '../../fagsak/FagsakData';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
-  BehandlingType.FORSTEGANGSSOKNAD,
-  BehandlingType.KLAGE,
-  BehandlingType.REVURDERING,
-  BehandlingType.DOKUMENTINNSYN,
-  BehandlingType.TILBAKEKREVING,
-  BehandlingType.TILBAKEKREVING_REVURDERING,
+  BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  BehandlingTypeEnum.KLAGE,
+  BehandlingTypeEnum.REVURDERING,
+  BehandlingTypeEnum.DOKUMENTINNSYN,
+  BehandlingTypeEnum.TILBAKEKREVING,
+  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
 ];
 
 const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
   const behandling = behandlinger.find(
     b =>
       b.gjeldendeVedtak &&
-      b.status === BehandlingStatus.AVSLUTTET &&
-      (b.type === BehandlingType.FORSTEGANGSSOKNAD || b.type === BehandlingType.REVURDERING),
+      b.status === BehandlingStatusEnum.AVSLUTTET &&
+      (b.type === BehandlingTypeEnum.FORSTEGANGSSOKNAD || b.type === BehandlingTypeEnum.REVURDERING),
   );
   return behandling ? behandling.uuid : undefined;
 };
@@ -62,8 +62,8 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   );
 
   const erTilbakekreving =
-    behandling?.type === BehandlingType.TILBAKEKREVING ||
-    behandling?.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+    behandling?.type === BehandlingTypeEnum.TILBAKEKREVING ||
+    behandling?.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;
   const isRevurderingOpprettedAktivert =
     erTilbakekrevingAktivert && !navAnsatt.kanVeilede && erTilbakekreving && !!behandlingUuid;
   const { data: kanRevurderingOpprettes = false } = useQuery(

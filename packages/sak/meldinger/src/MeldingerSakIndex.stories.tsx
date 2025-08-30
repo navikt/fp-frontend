@@ -2,7 +2,7 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { DokumentMalType, FagsakYtelseType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
+import { DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
@@ -68,21 +68,21 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     brukerManglerAdresse: false,
   },
 };
 
 export const ForSvangerskapspenger: Story = {
   args: {
-    fagsakYtelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
+    fagsakYtelseType: 'SVP',
     brukerManglerAdresse: false,
   },
 };
 
 export const BrukerManglerAdresse: Story = {
   args: {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     brukerManglerAdresse: true,
   },
 };

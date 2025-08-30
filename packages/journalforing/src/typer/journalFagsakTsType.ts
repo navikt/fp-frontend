@@ -1,4 +1,4 @@
-import { FagsakStatus, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { type FagsakStatus, type FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
 
 export type FamilieHendelse = Readonly<{
   familiehHendelseDato?: string;

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 import type { BehandlingAppKontekst, Behandlingsresultat } from '@navikt/fp-types';
 
@@ -55,8 +55,8 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '1',
-        type: BehandlingType.FORSTEGANGSSOKNAD,
-        status: BehandlingStatus.AVSLUTTET,
+        type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+        status: BehandlingStatusEnum.AVSLUTTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
         opprettet: '2017-08-02T02:04:25.455',
@@ -75,8 +75,8 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '2',
-        type: BehandlingType.DOKUMENTINNSYN,
-        status: BehandlingStatus.OPPRETTET,
+        type: BehandlingTypeEnum.DOKUMENTINNSYN,
+        status: BehandlingStatusEnum.OPPRETTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
         opprettet: '2017-08-01T02:04:25.455',
@@ -95,8 +95,8 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '3',
-        type: BehandlingType.REVURDERING,
-        status: BehandlingStatus.OPPRETTET,
+        type: BehandlingTypeEnum.REVURDERING,
+        status: BehandlingStatusEnum.OPPRETTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
         opprettet: '2017-10-02T02:04:25.455',
@@ -111,8 +111,8 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '4',
-        type: BehandlingType.FORSTEGANGSSOKNAD,
-        status: BehandlingStatus.AVSLUTTET,
+        type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+        status: BehandlingStatusEnum.AVSLUTTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
         opprettet: '2017-07-12T02:04:25.455',

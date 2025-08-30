@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, BehandlingTypeEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -12,7 +12,12 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navikt/fp-types';
+import type {
+  BehandlingAppKontekst,
+  BehandlingOppretting,
+  BehandlingTillatteOperasjoner,
+  Fagsak,
+} from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -48,26 +53,58 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanSettesPaVent: true,
   behandlingKanMerkesHaster: false,
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-};
+  uuid: null,
+} satisfies BehandlingTillatteOperasjoner;
 
 const BEHANDLING = {
   versjon: 2,
   uuid: '1',
   behandlingKøet: false,
   behandlingPåVent: false,
-  kanHenleggeBehandling: true,
-  type: BehandlingType.REVURDERING,
-  status: BehandlingStatus.BEHANDLING_UTREDES,
+  type: BehandlingTypeEnum.REVURDERING,
+  status: BehandlingStatusEnum.BEHANDLING_UTREDES,
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',
   erAktivPapirsoknad: false,
   behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
-} as BehandlingAppKontekst;
+  id: null,
+  fagsakId: null,
+  opprettet: '',
+  avsluttet: null,
+  endret: null,
+  endretAvBrukernavn: null,
+  førsteÅrsak: null,
+  behandlingsfristTid: null,
+  gjeldendeVedtak: false,
+  erPaaVent: null,
+  originalVedtaksDato: null,
+  behandlingHenlagt: false,
+  behandlingPaaVent: null,
+  fristBehandlingPåVent: null,
+  fristBehandlingPaaVent: null,
+  venteArsakKode: null,
+  venteÅrsakKode: null,
+  sprakkode: null,
+  språkkode: '-',
+  ansvarligSaksbehandler: null,
+  toTrinnsBehandling: false,
+  behandlingsresultat: null,
+  behandlingÅrsaker: [],
+  vilkår: [],
+  links: [],
+  brevmaler: [],
+  totrinnskontrollÅrsaker: [],
+  totrinnskontrollReadonly: null,
+  risikoAksjonspunkt: null,
+  kontrollResultat: null,
+  ugunstAksjonspunkt: null,
+  behandlingKoet: null,
+} satisfies BehandlingAppKontekst;
 
 const FAGSAK = {
   saksnummer: '123',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  status: FagsakStatus.UNDER_BEHANDLING,
+  fagsakYtelseType: 'FP',
+  status: FagsakStatusEnum.UNDER_BEHANDLING,
   behandlinger: [BEHANDLING],
   sakSkalTilInfotrygd: false,
   behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
@@ -78,7 +115,34 @@ const FAGSAK = {
       opprettetTidspunkt: '2024-10-10',
     },
   ],
-} as Fagsak;
+  relasjonsRolleType: '-',
+  aktørId: '',
+  dekningsgrad: 0,
+  bruker: {
+    aktørId: null,
+    navn: '',
+    fødselsnummer: '',
+    kjønn: '-',
+    diskresjonskode: null,
+    fødselsdato: '',
+    dødsdato: null,
+    dodsdato: undefined,
+    språkkode: '-',
+  },
+  brukerManglerAdresse: false,
+  annenPart: null,
+  annenpartBehandling: null,
+  familiehendelse: null,
+  fagsakMarkeringer: [],
+  historikkinnslag: [],
+  kontrollResultat: {
+    kontrollresultat: '-',
+    iayFaresignaler: null,
+    medlFaresignaler: null,
+    faresignalVurdering: null,
+  },
+  harVergeIÅpenBehandling: false,
+} satisfies Fagsak;
 
 const meta = {
   title: 'fagsak/BehandlingSupportIndex',
@@ -134,6 +198,7 @@ export const SkalViseFraBeslutter: Story = {
           behandlingTillatteOperasjoner: {
             ...BEHANDLING_TILLATTE_OPERASJONER,
             behandlingFraBeslutter: true,
+            uuid: '',
           },
         },
       ],
@@ -153,6 +218,7 @@ export const SkalViseFraGodkjenning: Story = {
           behandlingTillatteOperasjoner: {
             ...BEHANDLING_TILLATTE_OPERASJONER,
             behandlingTilGodkjenning: true,
+            uuid: '',
           },
         },
       ],

@@ -8,12 +8,11 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { BehandlingType, KonsekvensForYtelsen, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, KonsekvensForYtelsenEnum, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
-  TotrinnskontrollAksjonspunkt,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 
@@ -22,10 +21,10 @@ import {
   AksjonspunktGodkjenningFieldArray,
 } from './AksjonspunktGodkjenningFieldArray';
 
-const erAlleGodkjent = (formState: TotrinnskontrollAksjonspunkt[] = []) =>
+const erAlleGodkjent = (formState: AksjonspunktGodkjenningData[] = []) =>
   formState.every(ap => ap.totrinnskontrollGodkjent);
 
-const erAlleGodkjentEllerAvvist = (formState: TotrinnskontrollAksjonspunkt[] = []) =>
+const erAlleGodkjentEllerAvvist = (formState: AksjonspunktGodkjenningData[] = []) =>
   formState.every(ap => ap.totrinnskontrollGodkjent !== undefined && ap.totrinnskontrollGodkjent !== null);
 
 const harIkkeKonsekvenserForYtelsen = (
@@ -79,7 +78,7 @@ const buildInitialValues = (totrinnskontrollSkjermlenkeContext: Totrinnskontroll
     .map(ap => ({
       aksjonspunktKode: ap.aksjonspunktKode,
       totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
-      besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse),
+      besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse ?? undefined),
       ...finnArsaker(ap.vurderPaNyttArsaker ? ap.vurderPaNyttArsaker : []),
     })),
 });
@@ -115,10 +114,10 @@ export const TotrinnskontrollBeslutterForm = ({
   beslutterFormData,
   setBeslutterFormData,
 }: Props) => {
-  const erKlage = behandling && behandling.type === BehandlingType.KLAGE;
-  const erAnke = behandling && behandling.type === BehandlingType.ANKE;
+  const erKlage = behandling && behandling.type === BehandlingTypeEnum.KLAGE;
+  const erAnke = behandling && behandling.type === BehandlingTypeEnum.ANKE;
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
-    [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
+    [KonsekvensForYtelsenEnum.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsenEnum.INGEN_ENDRING],
     behandling.behandlingsresultat,
   );
 

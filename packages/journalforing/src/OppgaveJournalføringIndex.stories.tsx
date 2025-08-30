@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { FagsakStatus, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum, FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -48,7 +48,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
     navn: 'Svingen sag og høvleri',
     id: '999999999',
   },
-  ytelseType: FagsakYtelseType.FORELDREPENGER,
+  ytelseType: 'FP',
   dokumenter: [
     {
       dokumentId: '999999999',
@@ -73,10 +73,10 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
     ? [
         {
           saksnummer: '125416592',
-          ytelseType: FagsakYtelseType.FORELDREPENGER,
+          ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-05-02',
-          status: FagsakStatus.LOPENDE,
+          status: FagsakStatusEnum.LOPENDE,
           familieHendelseJf: {
             familiehHendelseDato: '2022-04-15',
             familihendelseType: FamilieHendelseType.FODSEL,
@@ -84,10 +84,10 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
         },
         {
           saksnummer: '125416597',
-          ytelseType: FagsakYtelseType.FORELDREPENGER,
+          ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-05-02',
-          status: FagsakStatus.UNDER_BEHANDLING,
+          status: FagsakStatusEnum.UNDER_BEHANDLING,
           familieHendelseJf: {
             familiehHendelseDato: '2022-04-15',
             familihendelseType: FamilieHendelseType.ADOPSJON,
@@ -95,9 +95,9 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
         },
         {
           saksnummer: '155462542',
-          ytelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
+          ytelseType: 'SVP',
           opprettetDato: '2022-03-02',
-          status: FagsakStatus.AVSLUTTET,
+          status: FagsakStatusEnum.AVSLUTTET,
           familieHendelseJf: {
             familiehHendelseDato: '2022-02-01',
             familihendelseType: FamilieHendelseType.TERMIN,
@@ -105,10 +105,10 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
         },
         {
           saksnummer: '175419131',
-          ytelseType: FagsakYtelseType.FORELDREPENGER,
+          ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-02-02',
-          status: FagsakStatus.OPPRETTET,
+          status: FagsakStatusEnum.OPPRETTET,
           familieHendelseJf: {
             familiehHendelseDato: '2022-03-01',
             familihendelseType: FamilieHendelseType.OMSORG,

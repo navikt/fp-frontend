@@ -6,7 +6,7 @@ import { Alert, BodyShort, Button, HStack, Radio, Spacer, VStack } from '@navikt
 import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { notEmpty } from '@navikt/fp-utils';
 
 import type { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';
@@ -30,11 +30,7 @@ type RadioOption = {
   disabled: boolean;
 };
 
-const ytelseSelectValg: FagsakYtelseType[] = [
-  FagsakYtelseType.ENGANGSSTONAD,
-  FagsakYtelseType.FORELDREPENGER,
-  FagsakYtelseType.SVANGERSKAPSPENGER,
-];
+const ytelseSelectValg: FagsakYtelseType[] = ['ES', 'FP', 'SVP'];
 
 export const transformValues = (
   values: JournalføringFormValues,

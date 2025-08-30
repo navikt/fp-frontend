@@ -6,11 +6,10 @@ import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
-  BehandlingArsakType,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakStatus,
-  FagsakYtelseType,
+  BehandlingArsakTypeEnum,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
+  FagsakStatusEnum,
 } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
@@ -22,6 +21,7 @@ import {
 import type {
   BehandlingAppKontekst,
   BehandlingOppretting,
+  BehandlingTillatteOperasjoner,
   Fagsak,
   TotrinnskontrollAksjonspunkt,
 } from '@navikt/fp-types';
@@ -53,8 +53,12 @@ const createAksjonspunkt = (aksjonspunktKode: string) =>
   ({
     aksjonspunktKode,
     opptjeningAktiviteter: [],
+    besluttersBegrunnelse: 'begrunnelse',
+    totrinnskontrollGodkjent: false,
+    beregningDto: { fastsattVarigEndringNaering: false, faktaOmBeregningTilfeller: [] },
     vurderPaNyttArsaker: [],
-  }) as TotrinnskontrollAksjonspunkt;
+    uttakPerioder: [],
+  }) satisfies TotrinnskontrollAksjonspunkt;
 
 const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
   {
@@ -91,16 +95,17 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-};
+  uuid: null,
+  behandlingKanMerkesHaster: false,
+} satisfies BehandlingTillatteOperasjoner;
 
 const BEHANDLING = {
   versjon: 2,
   uuid: '1',
   behandlingKøet: false,
   behandlingPåVent: false,
-  kanHenleggeBehandling: true,
-  type: BehandlingType.FORSTEGANGSSOKNAD,
-  status: BehandlingStatus.FATTER_VEDTAK,
+  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  status: BehandlingStatusEnum.FATTER_VEDTAK,
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',
   erAktivPapirsoknad: false,
@@ -109,15 +114,46 @@ const BEHANDLING = {
   totrinnskontrollÅrsaker: TOTRINNSKONTROLL_AKSJONSPUNKTER,
   behandlingÅrsaker: [
     {
-      behandlingArsakType: BehandlingArsakType.ANNET,
+      behandlingArsakType: BehandlingArsakTypeEnum.ANNET,
+      erAutomatiskRevurdering: null,
+      manueltOpprettet: false,
     },
   ],
-} as BehandlingAppKontekst;
+  id: null,
+  fagsakId: null,
+  opprettet: '',
+  avsluttet: null,
+  endret: null,
+  endretAvBrukernavn: null,
+  førsteÅrsak: null,
+  behandlingsfristTid: null,
+  gjeldendeVedtak: false,
+  erPaaVent: null,
+  originalVedtaksDato: null,
+  behandlingHenlagt: false,
+  behandlingPaaVent: null,
+  fristBehandlingPåVent: null,
+  fristBehandlingPaaVent: null,
+  venteArsakKode: null,
+  venteÅrsakKode: null,
+  sprakkode: null,
+  språkkode: '-',
+  ansvarligSaksbehandler: null,
+  behandlingsresultat: null,
+  vilkår: [],
+  links: [],
+  brevmaler: [],
+  totrinnskontrollReadonly: null,
+  risikoAksjonspunkt: null,
+  kontrollResultat: null,
+  ugunstAksjonspunkt: null,
+  behandlingKoet: null,
+} satisfies BehandlingAppKontekst;
 
 const FAGSAK = {
   saksnummer: '123',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  status: FagsakStatus.UNDER_BEHANDLING,
+  fagsakYtelseType: 'FP',
+  status: FagsakStatusEnum.UNDER_BEHANDLING,
   behandlinger: [BEHANDLING],
   sakSkalTilInfotrygd: false,
   behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
@@ -128,7 +164,34 @@ const FAGSAK = {
       opprettetTidspunkt: '2024-10-10',
     },
   ],
-} as Fagsak;
+  relasjonsRolleType: '-',
+  aktørId: '',
+  dekningsgrad: 0,
+  bruker: {
+    aktørId: null,
+    navn: '',
+    fødselsnummer: '',
+    kjønn: '-',
+    diskresjonskode: null,
+    fødselsdato: '',
+    dødsdato: null,
+    dodsdato: undefined,
+    språkkode: '-',
+  },
+  brukerManglerAdresse: false,
+  annenPart: null,
+  annenpartBehandling: null,
+  familiehendelse: null,
+  fagsakMarkeringer: [],
+  historikkinnslag: [],
+  kontrollResultat: {
+    kontrollresultat: '-',
+    iayFaresignaler: null,
+    medlFaresignaler: null,
+    faresignalVurdering: null,
+  },
+  harVergeIÅpenBehandling: false,
+} satisfies Fagsak;
 
 const meta = {
   title: 'fagsak/TotrinnskontrollIndex',

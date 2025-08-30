@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { BehandlingType, FagsakStatus, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, FagsakStatusEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
@@ -48,8 +48,8 @@ export const Default: Story = {
     fagsaker: [
       {
         saksnummer: '12213234',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-        status: FagsakStatus.UNDER_BEHANDLING,
+        fagsakYtelseType: 'FP',
+        status: FagsakStatusEnum.UNDER_BEHANDLING,
         person: {
           navn: 'Espen Utvikler',
           fødselsdato: '1980-10-10',
@@ -76,10 +76,10 @@ export const Default: Story = {
         personnummer: '1010',
         navn: 'Espen Utvikler',
         system: 'SAK',
-        behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
+        behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
         opprettetTidspunkt: '2020-01-01',
         behandlingsfrist: '2020-01-01',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+        fagsakYtelseType: 'FP',
         erTilSaksbehandling: true,
         behandlingId: '12344',
         andreKriterier: [],
@@ -94,10 +94,10 @@ export const Default: Story = {
         personnummer: '1010',
         navn: 'Espen Utvikler',
         system: 'SAK',
-        behandlingstype: BehandlingType.FORSTEGANGSSOKNAD,
+        behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
         opprettetTidspunkt: '2020-01-01',
         behandlingsfrist: '2020-01-01',
-        fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+        fagsakYtelseType: 'FP',
         erTilSaksbehandling: true,
         behandlingId: '12344',
         andreKriterier: [],

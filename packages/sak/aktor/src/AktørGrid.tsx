@@ -16,7 +16,7 @@ interface Props {
 export const AktørGrid = ({ aktorInfo, fagsakStatuser, fagsakYtelseTyper, renderSomLenke }: Props) => {
   return (
     <>
-      <VisittkortSakIndex bruker={aktorInfo.person} />
+      <VisittkortSakIndex bruker={aktorInfo.person} familiehendelse={null} />
       <VStack gap="space-16" align="center" margin="5">
         {aktorInfo.fagsaker.length ? (
           aktorInfo.fagsaker.map(fagsak => {

@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { formatCurrencyWithKr } from '@navikt/ft-utils';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { Behandlingsresultat, BeregningsresultatDagytelse, BeregningsresultatEs } from '@navikt/fp-types';
 
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
@@ -30,7 +29,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => (
   <VStack gap="space-16">
-    {ytelseTypeKode === FagsakYtelseType.ENGANGSSTONAD && beregningsresultat && 'antallBarn' in beregningsresultat && (
+    {ytelseTypeKode === 'ES' && beregningsresultat && 'antallBarn' in beregningsresultat && (
       <HStack gap="space-8">
         <VStack gap="space-4">
           <Detail>
@@ -46,7 +45,7 @@ export const VedtakInnvilgetRevurderingPanel = ({
         </VStack>
       </HStack>
     )}
-    {(ytelseTypeKode === FagsakYtelseType.FORELDREPENGER || ytelseTypeKode === FagsakYtelseType.SVANGERSKAPSPENGER) && (
+    {(ytelseTypeKode === 'FP' || ytelseTypeKode === 'SVP') && (
       <>
         {revurderingsÅrsakString && (
           <VStack gap="space-4">

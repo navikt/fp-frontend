@@ -2,13 +2,7 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import {
-  BehandlingResultatType,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakYtelseType,
-  SkjermlenkeType,
-} from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingStatusEnum, BehandlingTypeEnum, SkjermlenkeType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 import type { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
@@ -25,8 +19,8 @@ const LOCATION = {
 const DEFAULT_BEHANDLING = {
   uuid: '1',
   versjon: 2,
-  status: BehandlingStatus.FATTER_VEDTAK,
-  type: BehandlingType.FORSTEGANGSSOKNAD,
+  status: BehandlingStatusEnum.FATTER_VEDTAK,
+  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
   behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
   behandlingsresultat: {
@@ -54,7 +48,7 @@ const meta = {
     onSubmit: action('button-click') as (params: ApData) => Promise<void>,
     location: LOCATION,
     forhandsvisVedtaksbrev: action('button-click'),
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     alleKodeverk: alleKodeverk,
     createLocationForSkjermlenke: () => LOCATION,
     setBeslutterFormData: () => undefined,
@@ -78,10 +72,12 @@ export const ForBeslutter: Story = {
               opptjeningAktiviteter: [],
               beregningDto: {
                 fastsattVarigEndringNaering: false,
-                faktaOmBeregningTilfeller: [''],
+                faktaOmBeregningTilfeller: ['-'],
               },
               vurderPaNyttArsaker: [],
               uttakPerioder: [],
+              besluttersBegrunnelse: null,
+              totrinnskontrollGodkjent: false,
             },
           ],
         },
@@ -93,15 +89,16 @@ export const ForBeslutter: Story = {
               opptjeningAktiviteter: [],
               beregningDto: {
                 fastsattVarigEndringNaering: false,
-                faktaOmBeregningTilfeller: [''],
+                faktaOmBeregningTilfeller: ['-'],
               },
               vurderPaNyttArsaker: [],
               uttakPerioder: [],
-              arbeidforholdDtos: [],
+              besluttersBegrunnelse: null,
+              totrinnskontrollGodkjent: false,
             },
           ],
         },
-      ] as TotrinnskontrollSkjermlenkeContext[],
+      ] satisfies TotrinnskontrollSkjermlenkeContext[],
     },
     readOnly: false,
   },
@@ -111,7 +108,7 @@ export const ForSaksbehandler: Story = {
   args: {
     behandling: {
       ...DEFAULT_BEHANDLING,
-      status: BehandlingStatus.BEHANDLING_UTREDES,
+      status: BehandlingStatusEnum.BEHANDLING_UTREDES,
       totrinnskontrollÅrsaker: [
         {
           skjermlenkeType: SkjermlenkeType.FORMKRAV_KLAGE_NFP,
@@ -121,13 +118,12 @@ export const ForSaksbehandler: Story = {
               opptjeningAktiviteter: [],
               beregningDto: {
                 fastsattVarigEndringNaering: false,
-                faktaOmBeregningTilfeller: [''],
+                faktaOmBeregningTilfeller: ['-'],
               },
               besluttersBegrunnelse: 'Denne er ikke godkjent fordi...',
               totrinnskontrollGodkjent: false,
               vurderPaNyttArsaker: ['FEIL_LOV', 'FEIL_FAKTA'],
               uttakPerioder: [],
-              arbeidforholdDtos: [],
             },
           ],
         },
@@ -139,14 +135,16 @@ export const ForSaksbehandler: Story = {
               opptjeningAktiviteter: [],
               beregningDto: {
                 fastsattVarigEndringNaering: false,
-                faktaOmBeregningTilfeller: [''],
+                faktaOmBeregningTilfeller: ['-'],
               },
               totrinnskontrollGodkjent: true,
               uttakPerioder: [],
+              besluttersBegrunnelse: null,
+              vurderPaNyttArsaker: [],
             },
           ],
         },
-      ] as TotrinnskontrollSkjermlenkeContext[],
+      ] satisfies TotrinnskontrollSkjermlenkeContext[],
     },
     readOnly: true,
   },

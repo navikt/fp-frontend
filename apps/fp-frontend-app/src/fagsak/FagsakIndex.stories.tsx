@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { BehandlingStatus, BehandlingType, FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, BehandlingTypeEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -65,9 +65,8 @@ const ALLE_BEHANDLINGER = [
     uuid: '1',
     behandlingKøet: false,
     behandlingPåVent: false,
-    kanHenleggeBehandling: true,
-    type: BehandlingType.REVURDERING,
-    status: BehandlingStatus.BEHANDLING_UTREDES,
+    type: BehandlingTypeEnum.REVURDERING,
+    status: BehandlingStatusEnum.BEHANDLING_UTREDES,
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
     erAktivPapirsoknad: false,
@@ -78,8 +77,8 @@ const ALLE_BEHANDLINGER = [
 
 const FAGSAK = {
   saksnummer: '352018689',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-  status: FagsakStatus.UNDER_BEHANDLING,
+  fagsakYtelseType: 'FP',
+  status: FagsakStatusEnum.UNDER_BEHANDLING,
   behandlinger: ALLE_BEHANDLINGER,
   sakSkalTilInfotrygd: false,
   behandlingTypeKanOpprettes: [] as BehandlingOppretting[],

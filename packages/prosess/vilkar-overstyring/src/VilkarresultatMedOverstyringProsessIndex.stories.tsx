@@ -7,8 +7,7 @@ import {
   AksjonspunktStatus,
   Avslagsarsak,
   BehandlingResultatType,
-  BehandlingType,
-  FagsakYtelseType,
+  BehandlingTypeEnum,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -27,7 +26,7 @@ import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOve
 const defaultBehandling = {
   uuid: '1',
   versjon: 1,
-  type: BehandlingType.FORSTEGANGSSOKNAD,
+  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
   aksjonspunkt: [] as Aksjonspunkt[],
 } as Behandling;
 
@@ -79,7 +78,7 @@ export const OverstyringspanelForMedlemskap: Story = {
     avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET],
     behandling: {
       ...defaultBehandling,
-      type: BehandlingType.REVURDERING,
+      type: BehandlingTypeEnum.REVURDERING,
     } as Behandling,
   },
 };
@@ -113,7 +112,7 @@ export const OverstyringErUtførtForMedlemskap: Story = {
 export const OverstyringForForutgåendeMedlemskap: Story = {
   args: {
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: 'ES',
     } as Fagsak,
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     avslagsarsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
@@ -124,7 +123,7 @@ export const OverstyringForForutgåendeMedlemskap: Story = {
 export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
   args: {
     fagsak: {
-      fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+      fagsakYtelseType: 'ES',
     } as Fagsak,
     panelTittelKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,

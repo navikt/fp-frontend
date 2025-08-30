@@ -11,7 +11,7 @@ import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurdering
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  BehandlingType,
+  BehandlingTypeEnum,
   type OverstyringAksjonspunkter,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -232,7 +232,7 @@ export const VilkarresultatMedOverstyringForm = ({
                 avslagsarsaker={avslagsarsaker}
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={fagsak.fagsakYtelseType}
-                erRevurdering={behandling.type === BehandlingType.REVURDERING}
+                erRevurdering={behandling.type === BehandlingTypeEnum.REVURDERING}
                 erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
               />
             ) : (

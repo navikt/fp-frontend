@@ -5,7 +5,7 @@ import { Box, Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
@@ -71,7 +71,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
               ))}
             </RhfRadioGroupNew>
 
-            {selectedFagsakYtelseType !== FagsakYtelseType.SVANGERSKAPSPENGER && (
+            {selectedFagsakYtelseType !== 'SVP' && (
               <RhfRadioGroupNew
                 name="familieHendelseType"
                 control={formMethods.control}

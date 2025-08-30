@@ -6,7 +6,7 @@ import { action } from 'storybook/actions';
 import {
   AksjonspunktKode,
   AksjonspunktStatus,
-  BehandlingType,
+  BehandlingTypeEnum,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
@@ -18,7 +18,7 @@ import type { FormkravMellomlagretDataType } from './types/FormkravMellomlagretD
 const avsluttedeBehandlinger = [
   {
     uuid: '1',
-    type: BehandlingType.FORSTEGANGSSOKNAD,
+    type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     avsluttet: '2017-08-02T00:54:25.455',
   },
 ];

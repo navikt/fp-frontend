@@ -6,7 +6,7 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingType, DokumentMalType, VenteArsakType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, DokumentMalType, VenteArsakType } from '@navikt/fp-kodeverk';
 import {
   type ForhåndsvisBrevParams,
   MeldingerSakIndex,
@@ -163,8 +163,8 @@ const getSubmitCallback =
       values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING ||
       values.brevmalkode === DokumentMalType.ETTERLYS_INNTEKTSMELDING;
     const erTilbakekreving =
-      BehandlingType.TILBAKEKREVING === behandling.type ||
-      BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+      BehandlingTypeEnum.TILBAKEKREVING === behandling.type ||
+      BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandling.type;
 
     setShowMessageModal(!skalSettePåVent);
 
@@ -225,7 +225,8 @@ const useVisForhandsvisningAvMelding = (behandling: BehandlingAppKontekst) => {
   });
 
   const erTilbakekreving =
-    BehandlingType.TILBAKEKREVING === behandling.type || BehandlingType.TILBAKEKREVING_REVURDERING === behandling.type;
+    BehandlingTypeEnum.TILBAKEKREVING === behandling.type ||
+    BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandling.type;
 
   return (params: ForhåndsvisBrevParams): void => {
     if (erTilbakekreving) {

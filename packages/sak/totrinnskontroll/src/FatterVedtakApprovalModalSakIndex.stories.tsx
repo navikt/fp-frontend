@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingResultatType, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FatterVedtakTotrinnskontrollModalSakIndex } from './FatterVedtakTotrinnskontrollModalSakIndex';
@@ -21,8 +21,8 @@ export const EtterFatterVedtakOgGodkjent: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatus.FATTER_VEDTAK,
-      type: BehandlingType.FORSTEGANGSSOKNAD,
+      status: BehandlingStatusEnum.FATTER_VEDTAK,
+      type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     } as BehandlingAppKontekst,
     allAksjonspunktApproved: true,
   },
@@ -32,8 +32,8 @@ export const EtterGodkjenning: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatus.FATTER_VEDTAK,
-      type: BehandlingType.FORSTEGANGSSOKNAD,
+      status: BehandlingStatusEnum.FATTER_VEDTAK,
+      type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
       },
@@ -46,8 +46,8 @@ export const EtterGodkjenningAvKlage: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatus.FATTER_VEDTAK,
-      type: BehandlingType.KLAGE,
+      status: BehandlingStatusEnum.FATTER_VEDTAK,
+      type: BehandlingTypeEnum.KLAGE,
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
       },
@@ -60,8 +60,8 @@ export const EtterTilbakesendingTilSaksbehandler: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatus.FATTER_VEDTAK,
-      type: BehandlingType.FORSTEGANGSSOKNAD,
+      status: BehandlingStatusEnum.FATTER_VEDTAK,
+      type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
       },

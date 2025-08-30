@@ -15,7 +15,7 @@ import { BodyShort, Button, HStack, Timeline, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { FagsakYtelseType, SoknadType } from '@navikt/fp-kodeverk';
+import { SoknadType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -207,7 +207,7 @@ export const TilkjentYtelse = ({
           valgtBeregningsresultatPeriode={valgtPeriode.periode}
           velgNestePeriode={velgNestePeriode}
           velgForrigePeriode={velgForrigePeriode}
-          erSøknadSvangerskapspenger={fagsak.fagsakYtelseType === FagsakYtelseType.SVANGERSKAPSPENGER}
+          erSøknadSvangerskapspenger={fagsak.fagsakYtelseType === 'SVP'}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           lukkPeriode={lukkPeriode}
         />

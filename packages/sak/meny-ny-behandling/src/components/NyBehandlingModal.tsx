@@ -6,7 +6,7 @@ import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingArsakTypeEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
@@ -21,43 +21,43 @@ const createOptions = (
 
 // TODO Denne inndelinga burde vel flyttast til DB (KODELISTE.EKSTRA_DATA)?
 const manuelleRevurderingsArsakerES = [
-  BehandlingArsakType.ANNET,
-  BehandlingArsakType.FEIL_I_LOVANDVENDELSE,
-  BehandlingArsakType.FEIL_ELLER_ENDRET_FAKTA,
-  BehandlingArsakType.FEIL_REGELVERKSFORSTAELSE,
-  BehandlingArsakType.FEIL_PROSESSUELL,
+  BehandlingArsakTypeEnum.ANNET,
+  BehandlingArsakTypeEnum.FEIL_I_LOVANDVENDELSE,
+  BehandlingArsakTypeEnum.FEIL_ELLER_ENDRET_FAKTA,
+  BehandlingArsakTypeEnum.FEIL_REGELVERKSFORSTAELSE,
+  BehandlingArsakTypeEnum.FEIL_PROSESSUELL,
 ];
 
 const manuelleRevurderingsArsakerFP = [
-  BehandlingArsakType.BEREEGNINGSGRUNNLAG,
-  BehandlingArsakType.MEDLEMSKAP,
-  BehandlingArsakType.OPPTJENING,
-  BehandlingArsakType.FORDELING,
-  BehandlingArsakType.INNTEKT,
-  BehandlingArsakType.DØD,
-  BehandlingArsakType.SØKERS_RELASJON,
-  BehandlingArsakType.SØKNADSFRIST,
-  BehandlingArsakType.KLAGE_U_INNTK,
-  BehandlingArsakType.KLAGE_M_INNTK,
+  BehandlingArsakTypeEnum.BEREEGNINGSGRUNNLAG,
+  BehandlingArsakTypeEnum.MEDLEMSKAP,
+  BehandlingArsakTypeEnum.OPPTJENING,
+  BehandlingArsakTypeEnum.FORDELING,
+  BehandlingArsakTypeEnum.INNTEKT,
+  BehandlingArsakTypeEnum.DØD,
+  BehandlingArsakTypeEnum.SØKERS_RELASJON,
+  BehandlingArsakTypeEnum.SØKNADSFRIST,
+  BehandlingArsakTypeEnum.KLAGE_U_INNTK,
+  BehandlingArsakTypeEnum.KLAGE_M_INNTK,
 ];
 
 const manuelleRevurderingsArsakerSVP = [
-  BehandlingArsakType.KLAGE_U_INNTK,
-  BehandlingArsakType.KLAGE_M_INNTK,
-  BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
-  BehandlingArsakType.RE_ENDRING_FRA_BRUKER,
-  BehandlingArsakType.FØDSEL,
-  BehandlingArsakType.DØD,
-  BehandlingArsakType.ANNET,
-  BehandlingArsakType.INNTEKT,
+  BehandlingArsakTypeEnum.KLAGE_U_INNTK,
+  BehandlingArsakTypeEnum.KLAGE_M_INNTK,
+  BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
+  BehandlingArsakTypeEnum.RE_ENDRING_FRA_BRUKER,
+  BehandlingArsakTypeEnum.FØDSEL,
+  BehandlingArsakTypeEnum.DØD,
+  BehandlingArsakTypeEnum.ANNET,
+  BehandlingArsakTypeEnum.INNTEKT,
 ];
 
 const TilbakekrevingRevurderingArsaker = [
-  BehandlingArsakType.RE_FORELDELSE,
-  BehandlingArsakType.RE_VILKÅR,
-  BehandlingArsakType.RE_KLAGE_KA,
-  BehandlingArsakType.RE_KLAGE_NFP,
-  BehandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT,
+  BehandlingArsakTypeEnum.RE_FORELDELSE,
+  BehandlingArsakTypeEnum.RE_VILKÅR,
+  BehandlingArsakTypeEnum.RE_KLAGE_KA,
+  BehandlingArsakTypeEnum.RE_KLAGE_NFP,
+  BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT,
 ];
 
 const getBehandlingAarsaker = (
@@ -66,16 +66,16 @@ const getBehandlingAarsaker = (
   alleRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[],
   alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[],
 ): KodeverkMedNavn<'BehandlingÅrsakType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[] => {
-  if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === BehandlingType.TILBAKEKREVING_REVURDERING) {
+  if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
     return TilbakekrevingRevurderingArsaker.flatMap(ar => {
       const arsak = alleTilbakekrevingRevurderingArsaker.find(el => el.kode === ar);
       return arsak ? [arsak] : [];
     });
   }
 
-  if (alleRevurderingArsaker && valgtBehandlingType === BehandlingType.REVURDERING) {
-    const isForeldrepenger = ytelseType === FagsakYtelseType.FORELDREPENGER;
-    const isSvangerskap = ytelseType === FagsakYtelseType.SVANGERSKAPSPENGER;
+  if (alleRevurderingArsaker && valgtBehandlingType === BehandlingTypeEnum.REVURDERING) {
+    const isForeldrepenger = ytelseType === 'FP';
+    const isSvangerskap = ytelseType === 'SVP';
     let manuelleRevurderingsArsaker = isForeldrepenger ? manuelleRevurderingsArsakerFP : manuelleRevurderingsArsakerES;
     if (isSvangerskap) {
       manuelleRevurderingsArsaker = manuelleRevurderingsArsakerSVP;
@@ -101,10 +101,10 @@ const getEnabledBehandlingstyper = (
   },
 ) =>
   behandlingstyper.filter(bt => {
-    if (bt.kode === BehandlingType.TILBAKEKREVING) {
+    if (bt.kode === BehandlingTypeEnum.TILBAKEKREVING) {
       return kanTilbakekrevingOpprettes.kanBehandlingOpprettes;
     }
-    if (bt.kode === BehandlingType.TILBAKEKREVING_REVURDERING) {
+    if (bt.kode === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
       return kanTilbakekrevingOpprettes.kanRevurderingOpprettes;
     }
     return behandlingOppretting.some(bo => bo.behandlingType === bt.kode && bo.kanOppretteBehandling);
@@ -207,7 +207,7 @@ export const NyBehandlingModal = ({
               selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
               className={styles.typeBredde}
             />
-            {valgtBehandlingTypeKode === BehandlingType.FORSTEGANGSSOKNAD && (
+            {valgtBehandlingTypeKode === BehandlingTypeEnum.FORSTEGANGSSOKNAD && (
               <RhfCheckbox
                 name="nyBehandlingEtterKlage"
                 control={formMethods.control}

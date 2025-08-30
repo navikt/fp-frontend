@@ -7,9 +7,10 @@ import { BodyShort, HStack } from '@navikt/ds-react';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import type { SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
+import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
+  foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
   TotrinnskontrollSkjermlenkeContext,
@@ -23,7 +24,7 @@ const VurderPåNyttPunkter = ({
   vurderPaNyttArsaker,
   vurderArsaker,
 }: {
-  vurderPaNyttArsaker: VurderÅrsak[] | undefined;
+  vurderPaNyttArsaker: foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak[];
   vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[] | KodeverkMedNavnTilbakekreving<'VurderÅrsak'>[];
 }) => (
   <div className={styles.approvalItem}>
@@ -58,7 +59,6 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
   lagLenke,
 }: Props) => {
   const intl = useIntl();
-
   return (
     <>
       <div className={styles.resultatFraGodkjenningTextContainer}>
@@ -71,7 +71,7 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
         );
 
         if (aksjonspunkter.length > 0) {
-          const lenke = lagLenke(context.skjermlenkeType);
+          const lenke = lagLenke(context.skjermlenkeType as SkjermlenkeType); // TODO [JOHANNES] -- gjør SkjermlenkeType til enum i BE
           return (
             <React.Fragment key={context.skjermlenkeType}>
               {lenke && skjermlenkeTypeKodeverk && (
@@ -115,7 +115,9 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
                         />
                       )}
                     </div>
-                    <pre className={styles.approvalItem}>{decodeHtmlEntity(aksjonspunkt.besluttersBegrunnelse)}</pre>
+                    <pre className={styles.approvalItem}>
+                      {decodeHtmlEntity(aksjonspunkt.besluttersBegrunnelse ?? undefined)}
+                    </pre>
                   </div>
                 );
               })}

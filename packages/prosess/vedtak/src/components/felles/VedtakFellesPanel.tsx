@@ -8,11 +8,11 @@ import { Alert, BodyShort, Button, Heading, HStack, Label, Link, VStack } from '
 import {
   AksjonspunktKode,
   Avslagsarsak,
-  BehandlingStatus as behandlingStatusCode,
+  BehandlingStatusEnum,
   isAvslag,
   isInnvilget,
   isOpphor,
-  KonsekvensForYtelsen,
+  KonsekvensForYtelsenEnum,
 } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@navikt/fp-types';
@@ -28,12 +28,12 @@ import { VedtakHelpTextPanel } from './VedtakHelpTextPanel';
 import styles from './vedtakFellesPanel.module.css';
 
 const finnTekstkodeFraBehandlingstatus = (behandlingStatus: string): string =>
-  behandlingStatus === behandlingStatusCode.AVSLUTTET || behandlingStatus === behandlingStatusCode.IVERKSETTER_VEDTAK
+  behandlingStatus === BehandlingStatusEnum.AVSLUTTET || behandlingStatus === BehandlingStatusEnum.IVERKSETTER_VEDTAK
     ? 'VedtakForm.vedtak'
     : 'VedtakForm.ForslagTilVedtak';
 
 const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean =>
-  behandlingStatusKode === behandlingStatusCode.BEHANDLING_UTREDES;
+  behandlingStatusKode === BehandlingStatusEnum.BEHANDLING_UTREDES;
 
 const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
   aksjonspunkter?.some(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK) || skalBrukeManueltBrev
@@ -114,7 +114,7 @@ export const VedtakFellesPanel = ({
     taskStatus?.status !== ApiPollingStatus.DELAYED;
 
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
-    [KonsekvensForYtelsen.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsen.INGEN_ENDRING],
+    [KonsekvensForYtelsenEnum.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsenEnum.INGEN_ENDRING],
     behandlingsresultat,
   );
 
@@ -125,7 +125,7 @@ export const VedtakFellesPanel = ({
   return (
     <VStack gap="space-16">
       <HStack gap="space-8">
-        {status === behandlingStatusCode.AVSLUTTET && (
+        {status === BehandlingStatusEnum.AVSLUTTET && (
           <>
             {erInnvilget && <CheckmarkCircleFillIcon className={styles.innvilgetImage} />}
             {!erInnvilget && <XMarkOctagonFillIcon className={styles.avslattImage} />}

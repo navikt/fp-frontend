@@ -5,7 +5,7 @@ import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
@@ -15,10 +15,10 @@ import { DatoSorteringValg } from './DatoSorteringValg';
 const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
   valgteBehandlingtyper &&
   valgteBehandlingtyper.some(
-    type => type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING,
+    type => type === BehandlingTypeEnum.TILBAKEKREVING || type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
   ) &&
   !valgteBehandlingtyper.some(
-    type => type !== BehandlingType.TILBAKEKREVING && type !== BehandlingType.TILBAKEKREVING_REVURDERING,
+    type => type !== BehandlingTypeEnum.TILBAKEKREVING && type !== BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
   );
 
 interface Props {

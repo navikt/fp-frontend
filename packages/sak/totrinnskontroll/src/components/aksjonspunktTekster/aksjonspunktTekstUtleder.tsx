@@ -6,11 +6,17 @@ import { dateFormat } from '@navikt/ft-utils';
 import {
   AksjonspunktKode,
   BehandlingResultatType,
-  BehandlingStatus,
+  BehandlingStatusEnum,
   isFaktaUttakAksjonspunkt,
   isUttakAksjonspunkt,
 } from '@navikt/fp-kodeverk';
-import type { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
+import type {
+  Behandlingsresultat,
+  foreldrepenger_behandlingslager_behandling_BehandlingStatus,
+  KodeverkMedNavn,
+  tjenester_behandling_dto_behandling_BehandlingsresultatDto,
+  TotrinnskontrollAksjonspunkt,
+} from '@navikt/fp-types';
 
 import {
   totrinnskontrollaksjonspunktTextCodes,
@@ -112,7 +118,7 @@ const getFaktaOmBeregningText = (
 };
 
 const getTextForKlageHelper = (
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingsresultat: Behandlingsresultat | null,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
   let aksjonspunktTextId = '';
   switch (behandlingsresultat?.type) {
@@ -144,10 +150,10 @@ const getTextForKlageHelper = (
 };
 
 const getTextForKlage = (
-  behandlingStaus: BehandlingStatus,
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingStaus: foreldrepenger_behandlingslager_behandling_BehandlingStatus,
+  behandlingsresultat: Behandlingsresultat | null,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  if (behandlingStaus === BehandlingStatus.FATTER_VEDTAK) {
+  if (behandlingStaus === BehandlingStatusEnum.FATTER_VEDTAK) {
     return [getTextForKlageHelper(behandlingsresultat)];
   }
   return [];
@@ -169,11 +175,11 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolea
 
 export const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
-  behandlingStatus: BehandlingStatus,
+  behandlingStatus: foreldrepenger_behandlingslager_behandling_BehandlingStatus,
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
-  behandlingsresultat?: Behandlingsresultat,
+  behandlingsresultat: tjenester_behandling_dto_behandling_BehandlingsresultatDto | null,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);

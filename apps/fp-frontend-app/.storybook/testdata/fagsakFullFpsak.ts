@@ -1,20 +1,19 @@
 import {
-  BehandlingArsakType,
+  BehandlingArsakTypeEnum,
   BehandlingResultatType,
-  BehandlingStatus,
-  BehandlingType,
-  FagsakStatus,
-  FagsakYtelseType,
-  HistorikkAktor,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
+  FagsakStatusEnum,
+  HistorikkAktorEnum,
   RelasjonsRolleType,
 } from '@navikt/fp-kodeverk';
 import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 export const fagsakFullFpsak: Fagsak = {
   saksnummer: '1',
-  fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+  fagsakYtelseType: 'FP',
   relasjonsRolleType: RelasjonsRolleType.MOR,
-  status: FagsakStatus.UNDER_BEHANDLING,
+  status: FagsakStatusEnum.UNDER_BEHANDLING,
   aktørId: '9921487132273',
   sakSkalTilInfotrygd: false,
   dekningsgrad: 100,
@@ -49,23 +48,23 @@ export const fagsakFullFpsak: Fagsak = {
   fagsakMarkeringer: [],
   behandlingTypeKanOpprettes: [
     {
-      behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+      behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: BehandlingType.REVURDERING,
+      behandlingType: BehandlingTypeEnum.REVURDERING,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: BehandlingType.ANKE,
+      behandlingType: BehandlingTypeEnum.ANKE,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: BehandlingType.KLAGE,
+      behandlingType: BehandlingTypeEnum.KLAGE,
       kanOppretteBehandling: false,
     },
     {
-      behandlingType: BehandlingType.DOKUMENTINNSYN,
+      behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
       kanOppretteBehandling: true,
     },
   ],
@@ -73,8 +72,8 @@ export const fagsakFullFpsak: Fagsak = {
     {
       uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       versjon: 26,
-      type: BehandlingType.FORSTEGANGSSOKNAD,
-      status: BehandlingStatus.BEHANDLING_UTREDES,
+      type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+      status: BehandlingStatusEnum.BEHANDLING_UTREDES,
       opprettet: '2025-03-05T16:42:58',
       avsluttet: null,
       behandlendeEnhetId: '4867',
@@ -82,7 +81,7 @@ export const fagsakFullFpsak: Fagsak = {
       erAktivPapirsoknad: false,
       førsteÅrsak: {
         erAutomatiskRevurdering: false,
-        behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
+        behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
         manueltOpprettet: false,
       },
       gjeldendeVedtak: false,
@@ -108,14 +107,16 @@ export const fagsakFullFpsak: Fagsak = {
         erRevurderingMedUendretUtfall: false,
         skjæringstidspunkt: {
           dato: '2025-02-12',
+          utenMinsterett: null,
         },
         opphørsdato: null,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        endretDekningsgrad: null,
       },
       behandlingÅrsaker: [
         {
           erAutomatiskRevurdering: false,
-          behandlingArsakType: BehandlingArsakType.RE_ENDRET_INNTEKTSMELDING,
+          behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
           manueltOpprettet: false,
         },
       ],
@@ -152,6 +153,7 @@ export const fagsakFullFpsak: Fagsak = {
         behandlingTilGodkjenning: false,
         behandlingKanMerkesHaster: false,
         vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
+        uuid: '',
       },
       brevmaler: [
         {
@@ -180,13 +182,26 @@ export const fagsakFullFpsak: Fagsak = {
         faresignalVurdering: null,
       },
       ugunstAksjonspunkt: null,
+      id: null,
+      fagsakId: null,
+      endret: null,
+      endretAvBrukernavn: null,
+      behandlingsfristTid: null,
+      erPaaVent: null,
+      originalVedtaksDato: null,
+      behandlingPaaVent: null,
+      fristBehandlingPaaVent: null,
+      venteArsakKode: null,
+      sprakkode: null,
+      vilkår: [],
+      behandlingKoet: null,
     },
   ],
   historikkinnslag: [
     {
       behandlingUuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       aktør: {
-        type: HistorikkAktor.SOKER,
+        type: HistorikkAktorEnum.SOKER,
         ident: null,
       },
       skjermlenke: null,
@@ -205,7 +220,7 @@ export const fagsakFullFpsak: Fagsak = {
     {
       behandlingUuid: null,
       aktør: {
-        type: HistorikkAktor.ARBEIDSGIVER,
+        type: HistorikkAktorEnum.ARBEIDSGIVER,
         ident: null,
       },
       skjermlenke: null,

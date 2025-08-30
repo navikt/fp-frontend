@@ -1,38 +1,38 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingArsakType, BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingArsakTypeEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 import { MenyNyBehandlingIndex } from './MenyNyBehandlingIndex';
 
 const BEHANDLINGSTYPER = [
   {
-    kode: BehandlingType.FORSTEGANGSSOKNAD,
+    kode: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Førstegangssøknad',
   },
   {
-    kode: BehandlingType.REVURDERING,
+    kode: BehandlingTypeEnum.REVURDERING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Revurdering',
   },
   {
-    kode: BehandlingType.KLAGE,
+    kode: BehandlingTypeEnum.KLAGE,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Klage',
   },
   {
-    kode: BehandlingType.DOKUMENTINNSYN,
+    kode: BehandlingTypeEnum.DOKUMENTINNSYN,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Dokumentinnsyn',
   },
   {
-    kode: BehandlingType.TILBAKEKREVING,
+    kode: BehandlingTypeEnum.TILBAKEKREVING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Tilbakekreving',
   },
   {
-    kode: BehandlingType.TILBAKEKREVING_REVURDERING,
+    kode: BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
     kodeverk: 'BEHANDLING_TYPE',
     navn: 'Tilbakekreving revurdering',
   },
@@ -40,27 +40,27 @@ const BEHANDLINGSTYPER = [
 
 const BEHANDLING_OPPRETTING = [
   {
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     kanOppretteBehandling: true,
   },
   {
-    behandlingType: BehandlingType.REVURDERING,
+    behandlingType: BehandlingTypeEnum.REVURDERING,
     kanOppretteBehandling: true,
   },
   {
-    behandlingType: BehandlingType.KLAGE,
+    behandlingType: BehandlingTypeEnum.KLAGE,
     kanOppretteBehandling: true,
   },
 ];
 
 const REVURDERINGARSAKER = [
   {
-    kode: BehandlingArsakType.KLAGE_U_INNTK,
+    kode: BehandlingArsakTypeEnum.KLAGE_U_INNTK,
     kodeverk: 'BEHANDLING_ARSAK_TYPE',
     navn: 'Klage uten inntekt',
   },
   {
-    kode: BehandlingArsakType.FØDSEL,
+    kode: BehandlingArsakTypeEnum.FØDSEL,
     kodeverk: 'BEHANDLING_ARSAK_TYPE',
     navn: 'Fødsel',
   },
@@ -72,7 +72,7 @@ const meta = {
   args: {
     lagNyBehandling: action('button-click'),
     lukkModal: action('button-click'),
-    ytelseType: FagsakYtelseType.FORELDREPENGER,
+    ytelseType: 'FP',
     saksnummer: '123',
     behandlingUuid: '1',
     behandlingstyper: BEHANDLINGSTYPER,
@@ -98,12 +98,12 @@ export const ForTilbakekreving: Story = {
   args: {
     tilbakekrevingRevurderingArsaker: [
       {
-        kode: BehandlingArsakType.RE_KLAGE_KA,
+        kode: BehandlingArsakTypeEnum.RE_KLAGE_KA,
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage KA',
       },
       {
-        kode: BehandlingArsakType.RE_KLAGE_NFP,
+        kode: BehandlingArsakTypeEnum.RE_KLAGE_NFP,
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage NFP',
       },

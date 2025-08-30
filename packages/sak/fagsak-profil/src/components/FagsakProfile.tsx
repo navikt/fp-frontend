@@ -3,13 +3,12 @@ import { useMediaQuery } from 'react-responsive';
 
 import { BodyShort, Heading, HStack, Tag, Tooltip, VStack } from '@navikt/ds-react';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 import { SidePanelProfileKnapp } from './SidePanelProfileKnapp.tsx';
 
 const visSakDekningsgrad = (saksKode: string, dekningsgrad?: number): boolean => {
-  const erForeldrepenger = saksKode === FagsakYtelseType.FORELDREPENGER;
+  const erForeldrepenger = saksKode === 'FP';
   const gyldigDekningsGrad = dekningsgrad === 100 || dekningsgrad === 80;
 
   return erForeldrepenger && gyldigDekningsGrad;

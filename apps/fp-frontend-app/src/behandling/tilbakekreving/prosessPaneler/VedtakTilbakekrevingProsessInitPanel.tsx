@@ -12,10 +12,11 @@ import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import {
-  BehandlingArsakType,
+  type BehandlingArsakType,
+  BehandlingArsakTypeEnum,
   BehandlingResultatTypeTilbakekreving,
-  BehandlingStatus,
-  BehandlingType,
+  BehandlingStatusEnum,
+  BehandlingTypeEnum,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -33,7 +34,7 @@ import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
 const AKSJONSPUNKT_KODER = [VedtakAksjonspunktCode.FORESLA_VEDTAK];
 
-const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakType.RE_KLAGE_KA, BehandlingArsakType.RE_KLAGE_NFP];
+const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakTypeEnum.RE_KLAGE_KA, BehandlingArsakTypeEnum.RE_KLAGE_NFP];
 
 interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
@@ -47,7 +48,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   const fagsakBehandlingerInfo = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
   const harApenRevurdering = fagsakBehandlingerInfo.some(
-    b => b.type === BehandlingType.REVURDERING && b.status !== BehandlingStatus.AVSLUTTET,
+    b => b.type === BehandlingTypeEnum.REVURDERING && b.status !== BehandlingStatusEnum.AVSLUTTET,
   );
 
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
@@ -59,7 +60,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
     behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
     behandling.førsteÅrsak &&
-    BehandlingArsakType.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
+    BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
 
   const api = useBehandlingApi(behandling);
 

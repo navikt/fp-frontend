@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FagsakStatus, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -47,7 +47,7 @@ const detaljertJournalpostMal = {
     navn: 'Svingen sag og høvleri',
     id: '999999999',
   },
-  ytelseType: FagsakYtelseType.FORELDREPENGER,
+  ytelseType: 'FP',
   dokumenter: [
     {
       dokumentId: '999999999',
@@ -71,21 +71,21 @@ const detaljertJournalpostMal = {
   fagsaker: [
     {
       saksnummer: '125416597',
-      ytelseType: FagsakYtelseType.FORELDREPENGER,
+      ytelseType: 'FP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatus.LOPENDE,
+      status: FagsakStatusEnum.LOPENDE,
     },
     {
       saksnummer: '155462542',
-      ytelseType: FagsakYtelseType.SVANGERSKAPSPENGER,
+      ytelseType: 'SVP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatus.AVSLUTTET,
+      status: FagsakStatusEnum.AVSLUTTET,
     },
     {
       saksnummer: '175419131',
-      ytelseType: FagsakYtelseType.FORELDREPENGER,
+      ytelseType: 'FP',
       opprettetDato: '2022-01-03',
-      status: FagsakStatus.AVSLUTTET,
+      status: FagsakStatusEnum.AVSLUTTET,
     },
   ],
 } as Journalpost;
@@ -104,7 +104,7 @@ const journalpostKlage = {
     navn: 'Søker Søkersen',
     id: '12048714373',
   },
-  ytelseType: FagsakYtelseType.FORELDREPENGER,
+  ytelseType: 'FP',
   dokumenter: [
     {
       dokumentId: '999999997',
@@ -116,9 +116,9 @@ const journalpostKlage = {
   fagsaker: [
     {
       saksnummer: '125416597',
-      ytelseType: FagsakYtelseType.FORELDREPENGER,
+      ytelseType: 'FP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatus.LOPENDE,
+      status: FagsakStatusEnum.LOPENDE,
     },
   ],
 } as Journalpost;

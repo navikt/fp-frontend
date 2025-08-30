@@ -1,80 +1,20 @@
-import type { BehandlingArsakType, BehandlingStatus, BehandlingType, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import type {
+  tjenester_behandling_dto_behandling_BehandlingÅrsakDto,
+  tjenester_behandling_dto_behandling_FagsakBehandlingDto,
+  tjenester_behandling_dto_BehandlingOperasjonerDto,
+  tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto,
+} from './apiDtoGenerert.ts';
 
-import type { Aksjonspunkt } from './aksjonspunktTsType';
-import type { ApiLink } from './apiLink';
-import type { Behandlingsresultat } from './behandlingsresultatTsType';
-import type { Risikoklassifisering } from './risikoklassifiseringTsType';
-import type { TotrinnskontrollAksjonspunkt } from './totrinnskontrollAksjonspunktTsType';
+export type BehandlingÅrsak = tjenester_behandling_dto_behandling_BehandlingÅrsakDto;
 
-export type BehandlingFellesData = Readonly<{
-  versjon: number;
-  uuid: string;
-  status: BehandlingStatus;
-  type: BehandlingType;
-  fristBehandlingPåVent: string | null;
-  venteÅrsakKode: string | null;
-  behandlingPåVent: boolean;
-  behandlingHenlagt: boolean;
-  behandlingsresultat?: Behandlingsresultat;
-  links: ApiLink[];
-  opprettet: string;
-  avsluttet?: string | null;
-  erAktivPapirsoknad: boolean;
-  gjeldendeVedtak: boolean;
-  språkkode: string;
-  behandlendeEnhetId: string;
-  behandlendeEnhetNavn: string;
-  behandlingKøet: boolean;
-  toTrinnsBehandling: boolean;
-  behandlingÅrsaker: BehandlingÅrsak[];
-  ansvarligSaksbehandler?: string | null;
-  kanHenleggeBehandling?: boolean;
-  førsteÅrsak?: BehandlingÅrsak;
-}>;
+export type TotrinnskontrollSkjermlenkeContext = tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto;
 
-export type BehandlingÅrsak = {
-  behandlingArsakType: BehandlingArsakType;
-  manueltOpprettet: boolean;
-  erAutomatiskRevurdering: boolean;
-};
+export type BehandlingTillatteOperasjoner = tjenester_behandling_dto_BehandlingOperasjonerDto;
 
-type Brevmal = {
-  kode: string;
-  navn: string;
-  tilgjengelig: boolean;
-};
-
-export type TotrinnskontrollSkjermlenkeContext = Readonly<{
-  skjermlenkeType: SkjermlenkeType;
-  totrinnskontrollAksjonspunkter: TotrinnskontrollAksjonspunkt[];
-}>;
+export type BehandlingAppKontekst = tjenester_behandling_dto_behandling_FagsakBehandlingDto;
 
 export enum VergeBehandlingmenyValg {
   OPPRETT = 'OPPRETT',
   FJERN = 'FJERN',
   SKJUL = 'SKJUL',
 }
-
-export type BehandlingTillatteOperasjoner = Readonly<{
-  behandlingFraBeslutter: boolean;
-  behandlingKanSendeMelding: boolean;
-  behandlingTilGodkjenning: boolean;
-  behandlingKanBytteEnhet: boolean;
-  behandlingKanHenlegges: boolean;
-  behandlingKanGjenopptas: boolean;
-  behandlingKanOpnesForEndringer: boolean;
-  behandlingKanSettesPaVent: boolean;
-  behandlingKanMerkesHaster: boolean;
-  vergeBehandlingsmeny: VergeBehandlingmenyValg;
-}>;
-
-export type BehandlingAppKontekst = BehandlingFellesData &
-  Readonly<{
-    behandlingTillatteOperasjoner: BehandlingTillatteOperasjoner;
-    brevmaler: Brevmal[];
-    totrinnskontrollÅrsaker: TotrinnskontrollSkjermlenkeContext[];
-    totrinnskontrollReadonly: boolean;
-    risikoAksjonspunkt: Aksjonspunkt | null;
-    kontrollResultat: Risikoklassifisering;
-    ugunstAksjonspunkt: boolean | null;
-  }>;

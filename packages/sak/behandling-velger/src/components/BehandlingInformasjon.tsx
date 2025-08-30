@@ -4,12 +4,12 @@ import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icon
 import { BodyShort, Box, HStack, Label, Spacer, Tooltip, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import { BehandlingArsakType, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingArsakTypeEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import styles from './behandlingInformasjon.module.css';
 
-const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakType.RE_KLAGE_KA, BehandlingArsakType.RE_KLAGE_NFP];
+const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakTypeEnum.RE_KLAGE_KA, BehandlingArsakTypeEnum.RE_KLAGE_NFP];
 
 const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean =>
   !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
@@ -37,7 +37,8 @@ export const BehandlingInformasjon = ({
   const intl = useIntl();
 
   const erTilbakekreving =
-    behandling.type === BehandlingType.TILBAKEKREVING || behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING;
+    behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
+    behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;
 
   const behandlingType = erTilbakekreving
     ? alleKodeverkTilbakekreving['BehandlingType']
@@ -54,7 +55,7 @@ export const BehandlingInformasjon = ({
           <div className={styles.arsakPadding}>
             <Label size="small">{behandlingType.find(bt => bt.kode === behandling.type)?.navn ?? ''}</Label>
           </div>
-          {(behandling.type === BehandlingType.REVURDERING || behandling.type === BehandlingType.KLAGE) &&
+          {(behandling.type === BehandlingTypeEnum.REVURDERING || behandling.type === BehandlingTypeEnum.KLAGE) &&
             behandling.førsteÅrsak?.behandlingArsakType && (
               <>
                 -
@@ -65,7 +66,7 @@ export const BehandlingInformasjon = ({
                 </BodyShort>
               </>
             )}
-          {behandling.type === BehandlingType.TILBAKEKREVING_REVURDERING &&
+          {behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING &&
             erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak?.behandlingArsakType) && (
               <>
                 -

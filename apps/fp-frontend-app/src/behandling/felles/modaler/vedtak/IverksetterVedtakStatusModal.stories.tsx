@@ -29,6 +29,20 @@ export const VisIverksetterVedtakAvslatt: Story = {
   args: {
     behandlingsresultat: {
       type: BehandlingResultatType.AVSLATT,
+      id: 1,
+      avslagsarsak: null,
+      avslagsarsakFritekst: null,
+      rettenTil: null,
+      konsekvenserForYtelsen: null,
+      vedtaksbrev: null,
+      vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+      overskrift: null,
+      fritekstbrev: null,
+      harRedigertVedtaksbrev: false,
+      erRevurderingMedUendretUtfall: null,
+      skjæringstidspunkt: null,
+      endretDekningsgrad: null,
+      opphørsdato: null,
     },
   },
 };

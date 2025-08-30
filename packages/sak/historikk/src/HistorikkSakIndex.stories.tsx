@@ -2,7 +2,7 @@ import { ExpandVerticalIcon } from '@navikt/aksel-icons';
 import { Button, Tooltip } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { HistorikkAktor, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import { HistorikkAktorEnum, SkjermlenkeType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
 import type { Historikkinnslag } from '@navikt/fp-types';
 
@@ -25,7 +25,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'b88a9745-6e08-4f72-831b-20fb0dd53b34',
     aktør: {
-      type: HistorikkAktor.SAKSBEHANDLER,
+      type: HistorikkAktorEnum.SAKSBEHANDLER,
       ident: 'Z994283',
     },
     skjermlenke: SkjermlenkeType.FAKTA_UTTAK,
@@ -48,7 +48,7 @@ const historikkInnslag: Historikkinnslag[] = [
         tekst:
           '__Perioden 21.10.2024 - 30.11.2024__ er satt til __Lagt til Opphold, Årsak: Annen forelder har uttak av Fellesperiode__.',
       },
-      { type: 'LINJESKIFT' },
+      { type: 'LINJESKIFT', tekst: null },
       {
         type: 'TEKST',
         tekst: 'Bruker har rett på uttak med gradering',
@@ -58,7 +58,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'bf4b6b71-f3a3-4fbf-8cde-0d1cbc182f4f',
     aktør: {
-      type: HistorikkAktor.SAKSBEHANDLER,
+      type: HistorikkAktorEnum.SAKSBEHANDLER,
       ident: 'Z991198',
     },
     skjermlenke: null,
@@ -74,7 +74,7 @@ const historikkInnslag: Historikkinnslag[] = [
   },
   {
     behandlingUuid: '999951',
-    aktør: { type: HistorikkAktor.VEDTAKSLOSNINGEN, ident: null },
+    aktør: { type: HistorikkAktorEnum.VEDTAKSLOSNINGEN, ident: null },
     opprettetTidspunkt: '2024-09-19T12:16:14.499',
     tittel: 'Dette er en tittel',
     skjermlenke: null,
@@ -87,7 +87,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'b1f9bd3b-d6b9-4de8-b214-0f0c53cbbe1f',
     aktør: {
-      type: HistorikkAktor.SAKSBEHANDLER,
+      type: HistorikkAktorEnum.SAKSBEHANDLER,
       ident: 'Z991198',
     },
     skjermlenke: SkjermlenkeType.PUNKT_FOR_MEDLEMSKAP_LØPENDE,
@@ -108,7 +108,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'd63aa31e-f3bb-4f50-a1c1-d4395c052c54',
     aktør: {
-      type: HistorikkAktor.BESLUTTER,
+      type: HistorikkAktorEnum.BESLUTTER,
       ident: 'Z993179',
     },
     skjermlenke: SkjermlenkeType.VEDTAK,
@@ -125,7 +125,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: '6488585a-8320-4b48-bc20-bc67fb714643',
     aktør: {
-      type: HistorikkAktor.VEDTAKSLOSNINGEN,
+      type: HistorikkAktorEnum.VEDTAKSLOSNINGEN,
       ident: null,
     },
     skjermlenke: null,
@@ -147,7 +147,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'd63aa31e-f3bb-4f50-a1c1-d4395c052c54',
     aktør: {
-      type: HistorikkAktor.SAKSBEHANDLER,
+      type: HistorikkAktorEnum.SAKSBEHANDLER,
       ident: 'Z991753',
     },
     skjermlenke: SkjermlenkeType.FAKTA_OM_MEDLEMSKAP,
@@ -168,7 +168,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: '1b1b6855-5069-42ba-855d-e3d201999db4',
     aktør: {
-      type: HistorikkAktor.VEDTAKSLOSNINGEN,
+      type: HistorikkAktorEnum.VEDTAKSLOSNINGEN,
       ident: null,
     },
     skjermlenke: null,
@@ -185,7 +185,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: null,
     aktør: {
-      type: HistorikkAktor.ARBEIDSGIVER,
+      type: HistorikkAktorEnum.ARBEIDSGIVER,
       ident: null,
     },
     skjermlenke: null,
@@ -203,7 +203,7 @@ const historikkInnslag: Historikkinnslag[] = [
   },
   {
     behandlingUuid: '1b1b6855-5069-42ba-855d-e3d201999db4',
-    aktør: { type: HistorikkAktor.SOKER, ident: null },
+    aktør: { type: HistorikkAktorEnum.SOKER, ident: null },
     skjermlenke: null,
     opprettetTidspunkt: '2024-07-10T15:15:41.879',
     dokumenter: [

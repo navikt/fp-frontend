@@ -1,4 +1,4 @@
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { type FagsakYtelseType } from '@navikt/fp-kodeverk';
 
 import type { JournalDokument } from './journalDokumentTsType';
 import type { JournalFagsak } from './journalFagsakTsType';

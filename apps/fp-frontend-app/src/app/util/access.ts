@@ -1,11 +1,18 @@
-import { BehandlingStatus, BehandlingType, FagsakStatus } from '@navikt/fp-kodeverk';
+import {
+  type BehandlingStatus,
+  BehandlingStatusEnum,
+  type BehandlingType,
+  BehandlingTypeEnum,
+  type FagsakStatus,
+  FagsakStatusEnum,
+} from '@navikt/fp-kodeverk';
 import type { Aksess, AksessRettigheter, NavAnsatt } from '@navikt/fp-types';
 
 const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanVeilede;
 const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanSaksbehandle;
 const kanOverstyre = (navAnsatt: NavAnsatt): boolean => kanSaksbehandle(navAnsatt) && navAnsatt.kanOverstyre;
 const isBehandlingAvTilbakekreving = (type?: BehandlingType): boolean =>
-  type ? type === BehandlingType.TILBAKEKREVING || type === BehandlingType.TILBAKEKREVING_REVURDERING : false;
+  type ? type === BehandlingTypeEnum.TILBAKEKREVING || type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING : false;
 
 const accessibleFor =
   (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => boolean)[]) =>
@@ -50,14 +57,14 @@ const accessSelector =
 
 export const writeAccess = accessSelector(
   [kanSaksbehandle],
-  [FagsakStatus.OPPRETTET, FagsakStatus.UNDER_BEHANDLING],
-  [BehandlingStatus.OPPRETTET, BehandlingStatus.BEHANDLING_UTREDES],
+  [FagsakStatusEnum.OPPRETTET, FagsakStatusEnum.UNDER_BEHANDLING],
+  [BehandlingStatusEnum.OPPRETTET, BehandlingStatusEnum.BEHANDLING_UTREDES],
 );
 
 export const kanOverstyreAccess = accessSelector(
   [kanOverstyre],
-  [FagsakStatus.UNDER_BEHANDLING],
-  [BehandlingStatus.BEHANDLING_UTREDES],
+  [FagsakStatusEnum.UNDER_BEHANDLING],
+  [BehandlingStatusEnum.BEHANDLING_UTREDES],
 );
 
 export const getAccessRights = (

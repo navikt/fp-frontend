@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { BehandlingResultatType, BehandlingStatus, BehandlingType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BeslutterModalIndex } from './BeslutterModalIndex';
@@ -9,8 +9,8 @@ describe('BeslutterModalIndex', () => {
   const behandling = {
     uuid: '1',
     versjon: 2,
-    type: BehandlingType.FORSTEGANGSSOKNAD,
-    status: BehandlingStatus.FATTER_VEDTAK,
+    type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    status: BehandlingStatusEnum.FATTER_VEDTAK,
     behandlingsresultat: {
       type: BehandlingResultatType.OPPHOR,
       erRevurderingMedUendretUtfall: true,
