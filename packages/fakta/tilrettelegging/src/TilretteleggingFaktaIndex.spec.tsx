@@ -3,9 +3,9 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import type { foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto } from '@navikt/fp-types';
 
 import * as stories from './TilretteleggingFaktaIndex.stories';
-import type { foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto } from '@navikt/fp-types';
 
 const {
   TilretteleggingMedVelferdspermisjon,
