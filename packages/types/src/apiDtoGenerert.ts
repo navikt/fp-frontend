@@ -2281,20 +2281,20 @@ export type tjenester_behandling_arbeidsforhold_ArbeidsgiverOversiktDto = {
 };
 
 export type foreldrepenger_domene_arbeidsforhold_dto_IAYYtelseDto = {
-  relatertTilgrensendeYtelserForSoker?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
-  relatertTilgrensendeYtelserForAnnenForelder?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  relatertTilgrensendeYtelserForSoker: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  relatertTilgrensendeYtelserForAnnenForelder: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
 };
 
 export type foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto = {
-  relatertYtelseNavn?: string;
-  tilgrensendeYtelserListe?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto_TilgrensendeYtelserDto>;
+  relatertYtelseNavn: string;
+  tilgrensendeYtelserListe: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto_TilgrensendeYtelserDto>;
 };
 
 export type foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto_TilgrensendeYtelserDto = {
-  periodeFraDato?: string;
-  periodeTilDato?: string;
-  statusNavn?: string;
+  periodeFraDato: string;
+  periodeTilDato: string;
+  statusNavn: string;
   saksNummer?: string;
 };
 

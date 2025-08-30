@@ -1,15 +1,8 @@
-export type RelatertTilgrensedYtelse = Readonly<{
-  relatertYtelseNavn: string;
-  tilgrensendeYtelserListe: {
-    periodeTilDato: string;
-    periodeFraDato: string;
-    statusNavn: string;
-    saksNummer?: string;
-  }[];
-}>;
+import type {
+  foreldrepenger_domene_arbeidsforhold_dto_IAYYtelseDto,
+  foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto,
+} from './apiDtoGenerert.ts';
 
-export type InntektArbeidYtelse = Readonly<{
-  relatertTilgrensendeYtelserForSoker: RelatertTilgrensedYtelse[];
-  relatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
-}>;
+export type RelatertTilgrensedYtelse = foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto;
+
+export type InntektArbeidYtelse = foreldrepenger_domene_arbeidsforhold_dto_IAYYtelseDto;
