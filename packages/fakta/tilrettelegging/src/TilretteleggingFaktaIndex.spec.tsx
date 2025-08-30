@@ -2,8 +2,8 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
-import type { AksjonspunktType } from '@navikt/fp-storybook-utils/decorators/withPanelData.tsx';
+import { AksjonspunktKode, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
@@ -57,9 +57,9 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5091',
+      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
-      fødselsdato: undefined,
+      fødselsdato: '',
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
         {
@@ -121,7 +121,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
           begrunnelse: null,
         },
       ],
-    } satisfies AksjonspunktType);
+    } satisfies BekreftSvangerskapspengerAp);
   });
 
   it('skal validere at en må velge minst ett arbeidsforhold og at alle velferdspermisjoner er vurdert', async () => {
