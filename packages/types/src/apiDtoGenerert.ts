@@ -12,6 +12,7 @@ export type abakus_callback_registerdata_ReferanseDto = {
 };
 
 export type foreldrepenger_behandlingslager_behandling_BehandlingResultatType =
+  | TEMP_FP_TILBAKE_BEHANDLINGRESULTATTYPE
   | 'IKKE_FASTSATT'
   | 'INNVILGET'
   | 'AVSLÅTT'
@@ -47,6 +48,20 @@ export type foreldrepenger_behandlingslager_behandling_BehandlingResultatType =
   | 'INNSYN_AVVIST'
   | 'HENLAGT_INNSYN_TRUKKET';
 
+// TODO [JOHANNES] -- midlertidig extend type frem til fptilbake genereres
+type TEMP_FP_TILBAKE_BEHANDLINGRESULTATTYPE =
+  | 'IKKE_FASTSATT'
+  | 'FASTSATT'
+  | 'HENLAGT_FEILOPPRETTET'
+  | 'HENLAGT_FEILOPPRETTET_MED_BREV'
+  | 'HENLAGT_FEILOPPRETTET_UTEN_BREV'
+  | 'HENLAGT_KRAVGRUNNLAG_NULLSTILT'
+  | 'HENLAGT_TEKNISK_VEDLIKEHOLD'
+  | 'HENLAGT'
+  | 'INGEN_TILBAKEBETALING'
+  | 'DELVIS_TILBAKEBETALING'
+  | 'FULL_TILBAKEBETALING';
+
 export type foreldrepenger_behandlingslager_behandling_BehandlingStatus = 'AVSLU' | 'FVED' | 'IVED' | 'OPPRE' | 'UTRED';
 
 export type foreldrepenger_behandlingslager_behandling_BehandlingType =
@@ -60,6 +75,7 @@ export type foreldrepenger_behandlingslager_behandling_BehandlingType =
   | '-';
 
 export type foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType =
+  | TEMP_FRA_FP_TILBAKE_ÅRSAK
   | 'RE-LOV'
   | 'RE-RGLF'
   | 'RE-FEFAKTA'
@@ -106,6 +122,15 @@ export type foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType =
   | 'RE-TILST-YT-INNVIL'
   | 'RE-TILST-YT-OPPH'
   | '-';
+
+// TODO [JOHANNES] -- midlertidig extend type frem til fptilbake genereres
+type TEMP_FRA_FP_TILBAKE_ÅRSAK =
+  | 'RE_KLAGE_NFP'
+  | 'RE_KLAGE_KA'
+  | 'RE_VILKÅR'
+  | 'RE_FORELDELSE'
+  | 'RE_FEILUTBETALT_BELØP_REDUSERT'
+  | 'FATTET_AV_ANNEN_INSTANS';
 
 export type foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen =
   | 'FORELDREPENGER_OPPHØRER'
