@@ -1357,8 +1357,8 @@ export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDto
 };
 
 export type tjenester_behandling_uttak_dto_ArbeidsforholdDto = {
-  arbeidsgiverReferanse?: string;
-  arbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  arbeidsgiverReferanse: string | null; // TODO [JOHANNES] -- usikker hvorfor denne blir feil i openapi spec
+  arbeidType: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
 };
 
 export type tjenester_behandling_uttak_dto_AvklarAleneomsorgVurderingDto = {

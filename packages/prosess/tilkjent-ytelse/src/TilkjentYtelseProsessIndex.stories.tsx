@@ -161,6 +161,8 @@ export const MedFeriepengegrunnlag: Story = {
           opptjeningsår: 2,
           årsbeløp: 500000,
           erBrukerMottaker: true,
+          arbeidsgiverId: '',
+          arbeidsforholdId: '',
         },
       ],
     },

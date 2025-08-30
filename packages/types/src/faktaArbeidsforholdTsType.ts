@@ -1,6 +1,3 @@
-import type { UttakArbeidType } from '@navikt/fp-kodeverk';
+import type { tjenester_behandling_uttak_dto_ArbeidsforholdDto } from './apiDtoGenerert.ts';
 
-export type FaktaArbeidsforhold = Readonly<{
-  arbeidsgiverReferanse?: string | null;
-  arbeidType: UttakArbeidType;
-}>;
+export type FaktaArbeidsforhold = tjenester_behandling_uttak_dto_ArbeidsforholdDto;
