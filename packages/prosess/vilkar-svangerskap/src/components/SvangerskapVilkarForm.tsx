@@ -7,7 +7,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, TilretteleggingType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -25,12 +25,11 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): boolean => {
   const finnesAnnenTilretteleggingEnnHel = arbfor.tilretteleggingDatoer.some(
-    (dato: ArbeidsforholdTilretteleggingDato) => dato.type !== TilretteleggingType.HEL_TILRETTELEGGING,
+    (dato: ArbeidsforholdTilretteleggingDato) => dato.type !== 'HEL_TILRETTELEGGING',
   );
   const finnesHelTilretteleggingEtterBehovOppstår = arbfor.tilretteleggingDatoer.some(
     (dato: ArbeidsforholdTilretteleggingDato) =>
-      dato.type === TilretteleggingType.HEL_TILRETTELEGGING &&
-      dayjs(dato.fom).isAfter(dayjs(arbfor.tilretteleggingBehovFom)),
+      dato.type === 'HEL_TILRETTELEGGING' && dayjs(dato.fom).isAfter(dayjs(arbfor.tilretteleggingBehovFom)),
   );
   return finnesAnnenTilretteleggingEnnHel || finnesHelTilretteleggingEtterBehovOppstår;
 };

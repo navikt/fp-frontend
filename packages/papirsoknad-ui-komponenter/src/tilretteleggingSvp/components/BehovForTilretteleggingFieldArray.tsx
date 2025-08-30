@@ -6,8 +6,6 @@ import { Box } from '@navikt/ds-react';
 import { PeriodFieldArray, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { maxValue, required } from '@navikt/ft-form-validators';
 
-import { TilretteleggingType } from '@navikt/fp-kodeverk';
-
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
 import { type Tilrettelegging } from '../types';
 
@@ -60,19 +58,13 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' })}
               validate={[required]}
               selectValues={[
-                <option value={TilretteleggingType.HEL_TILRETTELEGGING} key={TilretteleggingType.HEL_TILRETTELEGGING}>
+                <option value="HEL_TILRETTELEGGING" key="HEL_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanGjennomfores' })}
                 </option>,
-                <option
-                  value={TilretteleggingType.DELVIS_TILRETTELEGGING}
-                  key={TilretteleggingType.DELVIS_TILRETTELEGGING}
-                >
+                <option value="DELVIS_TILRETTELEGGING" key="DELVIS_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.RedusertArbeid' })}
                 </option>,
-                <option
-                  value={TilretteleggingType.INGEN_TILRETTELEGGING}
-                  key={TilretteleggingType.INGEN_TILRETTELEGGING}
-                >
+                <option value="INGEN_TILRETTELEGGING" key="INGEN_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores' })}
                 </option>,
               ]}

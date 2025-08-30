@@ -1266,23 +1266,23 @@ export type tjenester_behandling_svp_BekreftSvangerskapspengervilkårDto = {
 };
 
 export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
-  tilretteleggingId?: number;
-  tilretteleggingBehovFom?: string;
-  tilretteleggingDatoer?: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
-  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
-  arbeidsgiverReferanse?: string;
-  opplysningerOmRisiko?: string;
-  opplysningerOmTilrettelegging?: string;
-  kopiertFraTidligereBehandling?: boolean;
-  mottattTidspunkt?: string;
-  internArbeidsforholdReferanse?: string;
-  eksternArbeidsforholdReferanse?: string;
-  skalBrukes?: boolean;
-  kanTilrettelegges?: boolean;
-  stillingsprosentStartTilrettelegging?: number;
-  velferdspermisjoner?: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
-  avklarteOppholdPerioder?: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
-  begrunnelse?: string;
+  tilretteleggingId: number;
+  tilretteleggingBehovFom: string;
+  tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
+  uttakArbeidType: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  arbeidsgiverReferanse: string;
+  opplysningerOmRisiko: string | null;
+  opplysningerOmTilrettelegging: string | null;
+  kopiertFraTidligereBehandling: boolean | null;
+  mottattTidspunkt: string | null;
+  internArbeidsforholdReferanse: string | null;
+  eksternArbeidsforholdReferanse: string | null;
+  skalBrukes: boolean;
+  kanTilrettelegges: boolean;
+  stillingsprosentStartTilrettelegging: number | null;
+  velferdspermisjoner: Array<tjenester_behandling_svp_VelferdspermisjonDto>;
+  avklarteOppholdPerioder: Array<tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto>;
+  begrunnelse: string | null;
 };
 
 export type tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto = {
@@ -1300,20 +1300,20 @@ export type tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto_SvpOppholdKilde
   | 'TIDLIGERE_VEDTAK';
 
 export type tjenester_behandling_svp_SvpTilretteleggingDatoDto = {
-  fom?: string;
-  type?: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
-  stillingsprosent?: number;
-  overstyrtUtbetalingsgrad?: number;
-  kilde?: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
-  mottattDato?: string;
+  fom: string;
+  type: foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
+  stillingsprosent: number | null;
+  overstyrtUtbetalingsgrad: number | null;
+  kilde: foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpTilretteleggingFomKilde;
+  mottattDato: string | null;
 };
 
 export type tjenester_behandling_svp_VelferdspermisjonDto = {
-  permisjonFom?: string;
-  permisjonTom?: string;
-  permisjonsprosent?: number;
-  type?: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
-  erGyldig?: boolean;
+  permisjonFom: string;
+  permisjonTom: string;
+  permisjonsprosent: number;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+  erGyldig: boolean | null;
 };
 
 export type tjenester_behandling_søknad_aksjonspunkt_BekreftSokersOpplysningspliktManuDto = {
@@ -1382,8 +1382,8 @@ export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDto
 };
 
 export type tjenester_behandling_uttak_dto_ArbeidsforholdDto = {
-  arbeidsgiverReferanse?: string;
-  arbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  arbeidsgiverReferanse: string | null; // TODO [JOHANNES] -- usikker hvorfor denne blir feil i openapi spec
+  arbeidType: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
 };
 
 export type tjenester_behandling_uttak_dto_AvklarAleneomsorgVurderingDto = {
@@ -3928,8 +3928,8 @@ export type tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold = {
 export type tjenester_behandling_svp_SvpTilretteleggingDto = {
   termindato?: string;
   fødselsdato?: string;
-  arbeidsforholdListe?: Array<tjenester_behandling_svp_SvpArbeidsforholdDto>;
-  saksbehandlet?: boolean;
+  arbeidsforholdListe: Array<tjenester_behandling_svp_SvpArbeidsforholdDto>;
+  saksbehandlet: boolean;
 };
 
 export type foreldrepenger_behandlingslager_behandling_DokumentTypeId =

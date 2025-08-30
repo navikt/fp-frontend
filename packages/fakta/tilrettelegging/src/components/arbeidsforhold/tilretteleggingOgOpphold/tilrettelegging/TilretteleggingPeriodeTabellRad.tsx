@@ -5,12 +5,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Table, Tag } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { TilretteleggingType } from '@navikt/fp-kodeverk';
-import {
-  type ArbeidsforholdFodselOgTilrettelegging,
-  type ArbeidsforholdTilretteleggingDato,
-  SvpTilretteleggingFomKilde,
-} from '@navikt/fp-types';
+import { type ArbeidsforholdFodselOgTilrettelegging, type ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
 
 import {
   finnProsentSvangerskapspenger,
@@ -27,8 +22,7 @@ const utledTypeTekst = (
   tilrettelegging: ArbeidsforholdTilretteleggingDato,
 ): string => {
   const velferdspermisjonsprosent = finnVelferdspermisjonprosent(arbeidsforhold);
-  const stillingsprosent =
-    tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING ? 100 : tilrettelegging.stillingsprosent;
+  const stillingsprosent = tilrettelegging.type === 'INGEN_TILRETTELEGGING' ? 100 : tilrettelegging.stillingsprosent;
   const prosent =
     tilrettelegging.fom && stillingsprosent
       ? finnProsentSvangerskapspenger(tilrettelegging, stillingsprosentArbeidsforhold, velferdspermisjonsprosent)
@@ -39,16 +33,13 @@ const utledTypeTekst = (
 };
 
 const utledKilde = (intl: IntlShape, tilrettelegging: ArbeidsforholdTilretteleggingDato): string => {
-  if (
-    tilrettelegging.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER ||
-    tilrettelegging.fom === undefined
-  ) {
+  if (tilrettelegging.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' || tilrettelegging.fom === undefined) {
     return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
   }
-  if (tilrettelegging.kilde === SvpTilretteleggingFomKilde.ENDRET_AV_SAKSBEHANDLER) {
+  if (tilrettelegging.kilde === 'ENDRET_AV_SAKSBEHANDLER') {
     return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.EndretAvSaksbehandler' });
   }
-  if (tilrettelegging.kilde === SvpTilretteleggingFomKilde.TIDLIGERE_VEDTAK) {
+  if (tilrettelegging.kilde === 'TIDLIGERE_VEDTAK') {
     return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.TidligereVedtak' });
   }
   return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Soknad' });

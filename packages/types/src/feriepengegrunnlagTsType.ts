@@ -1,14 +1,8 @@
-import type { AktivitetStatus } from '@navikt/fp-kodeverk';
+import type {
+  tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagAndelDto,
+  tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagDto,
+} from './apiDtoGenerert.ts';
 
-export type FeriepengegrunnlagAndel = Readonly<{
-  aktivitetStatus: AktivitetStatus;
-  opptjeningsår: number;
-  årsbeløp: number;
-  erBrukerMottaker: boolean;
-  arbeidsgiverId?: string;
-  arbeidsforholdId?: string;
-}>;
+export type FeriepengegrunnlagAndel = tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagAndelDto;
 
-export type Feriepengegrunnlag = Readonly<{
-  andeler: FeriepengegrunnlagAndel[];
-}>;
+export type Feriepengegrunnlag = tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagDto;

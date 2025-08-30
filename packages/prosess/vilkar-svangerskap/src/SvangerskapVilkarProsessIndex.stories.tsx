@@ -2,13 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  Avslagsarsak,
-  TilretteleggingType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -63,7 +57,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
         {
           tilretteleggingDatoer: [
             {
-              type: TilretteleggingType.DELVIS_TILRETTELEGGING,
+              type: 'DELVIS_TILRETTELEGGING',
             },
           ],
         } as ArbeidsforholdFodselOgTilrettelegging,

@@ -20,7 +20,7 @@ import styles from './uttakEøsFaktaDetailForm.module.css';
 type FormValues = {
   fom: string;
   tom: string;
-  trekkonto: 'FELLESPERIODE' | 'MØDREKVOTE' | 'FEDREKVOTE';
+  trekkonto: AnnenforelderUttakEøsPeriode['trekkonto'];
   trekkdager: string;
   trekkuker: string;
 };

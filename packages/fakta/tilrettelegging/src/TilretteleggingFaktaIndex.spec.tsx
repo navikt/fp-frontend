@@ -2,7 +2,8 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import type { BekreftSvangerskapspengerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import * as stories from './TilretteleggingFaktaIndex.stories';
 
@@ -56,8 +57,9 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5091',
+      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
+      // @ts-expect-error -- trolig programmeringsfeil, bør ikke være undefined utifra typinga
       fødselsdato: undefined,
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
@@ -83,6 +85,8 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
               type: 'HEL_TILRETTELEGGING',
+              stillingsprosent: null,
+              overstyrtUtbetalingsgrad: null,
             },
           ],
           tilretteleggingId: 1116961,
@@ -100,17 +104,25 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+              erGyldig: null,
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+              erGyldig: null,
             },
           ],
+          opplysningerOmRisiko: null,
+          opplysningerOmTilrettelegging: null,
+          kopiertFraTidligereBehandling: null,
+          mottattTidspunkt: null,
+          internArbeidsforholdReferanse: null,
+          begrunnelse: null,
         },
       ],
-    });
+    } satisfies BekreftSvangerskapspengerAp);
   });
 
   it('skal validere at en må velge minst ett arbeidsforhold og at alle velferdspermisjoner er vurdert', async () => {
@@ -334,8 +346,9 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5091',
+      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
+      // @ts-expect-error -- trolig programmeringsfeil, bør ikke være undefined utifra typinga
       fødselsdato: undefined,
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
@@ -368,6 +381,8 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
               type: 'HEL_TILRETTELEGGING',
+              stillingsprosent: null,
+              overstyrtUtbetalingsgrad: null,
             },
           ],
           tilretteleggingId: 1116961,
@@ -385,17 +400,25 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+              erGyldig: null,
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+              erGyldig: null,
             },
           ],
+          opplysningerOmRisiko: null,
+          opplysningerOmTilrettelegging: null,
+          kopiertFraTidligereBehandling: null,
+          mottattTidspunkt: null,
+          internArbeidsforholdReferanse: null,
+          begrunnelse: null,
         },
       ],
-    });
+    } satisfies BekreftSvangerskapspengerAp);
   });
 
   it('skal slette oppholdsperiode', async () => {

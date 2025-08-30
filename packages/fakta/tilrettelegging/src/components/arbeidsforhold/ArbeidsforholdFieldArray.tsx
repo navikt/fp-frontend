@@ -82,7 +82,7 @@ export const ArbeidsforholdFieldArray = ({
           iaya => iaya.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse,
         );
 
-        const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse);
+        const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse ?? undefined);
 
         const visInfoAlert = af
           ? !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af.fom, af.tom)
