@@ -60,7 +60,6 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
     behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
     behandling.førsteÅrsak &&
-    // @ts-expect-error -- [JOHANNES] noe iffy med fptilbake vs fpsak typer?
     BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
 
   const api = useBehandlingApi(behandling);
@@ -133,14 +132,11 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   }
   const { type } = beregningsresultat;
 
-  // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
   if (type === BehandlingResultatTypeTilbakekreving.INGEN_TILBAKEBETALING) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
   return type === BehandlingResultatTypeTilbakekreving.DELVIS_TILBAKEBETALING ||
-    // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
     type === BehandlingResultatTypeTilbakekreving.FULL_TILBAKEBETALING
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;
