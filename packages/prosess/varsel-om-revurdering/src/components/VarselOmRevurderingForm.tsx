@@ -18,7 +18,11 @@ import {
 } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak,
+  foreldrepenger_dokumentbestiller_DokumentMalType,
+} from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -26,8 +30,8 @@ const minLength3 = minLength(3);
 const maxLength10000 = maxLength(10000);
 
 export type ForhandsvisData = {
-  arsakskode: string;
-  dokumentMal: string;
+  arsakskode: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
+  dokumentMal: foreldrepenger_dokumentbestiller_DokumentMalType;
   fritekst: string;
 };
 

@@ -3262,27 +3262,27 @@ export type tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagDto = 
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto = {
-  søknad?: tjenester_behandling_fødsel_dto_FødselDto_Søknad;
-  register?: tjenester_behandling_fødsel_dto_FødselDto_Register;
-  gjeldende?: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende;
+  søknad: tjenester_behandling_fødsel_dto_FødselDto_Søknad;
+  register: tjenester_behandling_fødsel_dto_FødselDto_Register;
+  gjeldende: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData = {
-  fødselsdato?: string;
-  dødsdato?: string;
+  fødselsdato: string;
+  dødsdato: string | null;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende = {
-  termin: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Termin;
-  utstedtdato?: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Utstedtdato;
-  antallBarn?: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_AntallBarn;
-  barn?: Array<tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn>;
-  fødselDokumetasjonStatus?: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumetasjonStatus;
+  termin: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Termin | null;
+  utstedtdato: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Utstedtdato | null;
+  antallBarn: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_AntallBarn;
+  barn: Array<tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn>;
+  fødselDokumetasjonStatus: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumetasjonStatus;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_AntallBarn = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  antall?: number;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  antall: number;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumetasjonStatus =
@@ -3291,30 +3291,30 @@ export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumet
   | 'IKKE_VURDERT';
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  barn?: tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
-  kanOverstyres?: boolean;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  barn: tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
+  kanOverstyres: boolean;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Termin = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  termindato?: string;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  termindato: string;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Utstedtdato = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  utstedtdato?: string;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  utstedtdato: string;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Register = {
-  barn?: Array<tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData>;
+  barn: Array<tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData>;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Søknad = {
-  barn?: Array<tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData>;
-  termindato?: string;
-  utstedtdato?: string;
-  antallBarn?: number;
+  barn: Array<tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData>;
+  termindato: string | null;
+  utstedtdato: string | null;
+  antallBarn: number;
 };
 
 export type tjenester_behandling_fødsel_dto_Kilde = 'SAKSBEHANDLER' | 'SØKNAD' | 'FOLKEREGISTER';

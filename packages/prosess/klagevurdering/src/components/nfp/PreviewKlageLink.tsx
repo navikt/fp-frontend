@@ -4,8 +4,12 @@ import { FormattedMessage } from 'react-intl';
 import { Link } from '@navikt/ds-react';
 
 import { DokumentMalType, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
+import type { foreldrepenger_dokumentbestiller_DokumentMalType } from '@navikt/fp-types';
 
-const getBrevKode = (klageVurdertAvKa: boolean, klageVurdering?: string): string | undefined => {
+const getBrevKode = (
+  klageVurdertAvKa: boolean,
+  klageVurdering?: string,
+): foreldrepenger_dokumentbestiller_DokumentMalType | undefined => {
   switch (klageVurdering) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
       return klageVurdertAvKa ? DokumentMalType.KLAGE_STADFESTET : DokumentMalType.KLAGE_OVERSENDT;
@@ -22,7 +26,7 @@ const getBrevKode = (klageVurdertAvKa: boolean, klageVurdering?: string): string
 
 export type KlagevurderingForhåndsvisData = {
   fritekst: string;
-  dokumentMal?: string;
+  dokumentMal?: foreldrepenger_dokumentbestiller_DokumentMalType;
   erOpphevetKlage: boolean;
 };
 
