@@ -99,7 +99,6 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanMerkesHaster: false,
 } satisfies BehandlingTillatteOperasjoner;
 
-// @ts-expect-error -- fiks senere
 const BEHANDLING = {
   versjon: 2,
   uuid: '1',

@@ -132,14 +132,11 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   }
   const { type } = beregningsresultat;
 
-  // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
   if (type === BehandlingResultatTypeTilbakekreving.INGEN_TILBAKEBETALING) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
   return type === BehandlingResultatTypeTilbakekreving.DELVIS_TILBAKEBETALING ||
-    // @ts-expect-error [FPTILBAKE] --  her blandes typer med fpTilbake
     type === BehandlingResultatTypeTilbakekreving.FULL_TILBAKEBETALING
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;

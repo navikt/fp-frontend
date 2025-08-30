@@ -56,7 +56,6 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   uuid: null,
 } satisfies BehandlingTillatteOperasjoner;
 
-// @ts-expect-error -- fiks senere
 const BEHANDLING = {
   versjon: 2,
   uuid: '1',
