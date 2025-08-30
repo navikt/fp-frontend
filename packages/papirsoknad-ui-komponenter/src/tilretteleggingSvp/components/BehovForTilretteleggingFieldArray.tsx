@@ -58,13 +58,13 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
               label={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.BehovForTilrettelegging' })}
               validate={[required]}
               selectValues={[
-                <option value={'HEL_TILRETTELEGGING'} key={'HEL_TILRETTELEGGING'}>
+                <option value="HEL_TILRETTELEGGING" key="HEL_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanGjennomfores' })}
                 </option>,
-                <option value={'DELVIS_TILRETTELEGGING'} key={'DELVIS_TILRETTELEGGING'}>
+                <option value="DELVIS_TILRETTELEGGING" key="DELVIS_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.RedusertArbeid' })}
                 </option>,
-                <option value={'INGEN_TILRETTELEGGING'} key={'INGEN_TILRETTELEGGING'}>
+                <option value="INGEN_TILRETTELEGGING" key="INGEN_TILRETTELEGGING">
                   {intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.KanIkkeGjennomfores' })}
                 </option>,
               ]}
