@@ -10,7 +10,6 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
 
 const formatId = (id: string | null): string => {
-  // TODO: finn util som oppdager unødvendig sjekker som undefined her
   if (id === null || id === undefined || id === '-') {
     return IKKE_PAA_ANKET_BEHANDLING_ID;
   }

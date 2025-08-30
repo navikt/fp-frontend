@@ -35,7 +35,7 @@ export const Avatar = ({ aktørType }: Props) => {
     case HistorikkAktorEnum.ARBEIDSGIVER:
       return <PersonSuitIcon fontSize={24} title={intl.formatMessage({ id: 'Historikkinnslag.Arbeidsgiver' })} />;
     case '-':
-      return ''; // TODO [JOHANNES] - eller kast feil?
+      return ''; // TODO [JOHANNES] -- eller kast feil?
   }
 
   // TODO [JOHANNES] -- ikke sikker på hvorfor switch ikke er exhaustive
