@@ -1182,9 +1182,9 @@ export type tjenester_behandling_dekningsgrad_AvklarDekningsgradDto = {
 };
 
 export type tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDokumentDto = {
-  fikkInnsyn: boolean | null;
-  journalpostId: string | null;
-  dokumentId: string | null;
+  fikkInnsyn: boolean;
+  journalpostId: string;
+  dokumentId: string;
 };
 
 export type tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDto = {
@@ -3320,22 +3320,22 @@ export type tjenester_behandling_fødsel_dto_FødselDto_Søknad = {
 export type tjenester_behandling_fødsel_dto_Kilde = 'SAKSBEHANDLER' | 'SØKNAD' | 'FOLKEREGISTER';
 
 export type tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto = {
-  behandlingUuid: string | null;
-  tittel: string | null;
-  opprettetDato: string | null;
+  behandlingUuid: string;
+  tittel: string;
+  opprettetDato: string;
 };
 
 export type tjenester_behandling_innsyn_InnsynDokumentDto = {
-  fikkInnsyn: boolean | null;
-  journalpostId: string | null;
-  dokumentId: string | null;
+  fikkInnsyn: boolean;
+  journalpostId: string;
+  dokumentId: string;
 };
 
 export type tjenester_behandling_innsyn_InnsynsbehandlingDto = {
-  innsynMottattDato: string | null;
-  innsynResultatType: foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType | null;
-  vedtaksdokumentasjon: Array<tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto> | null;
-  dokumenter: Array<tjenester_behandling_innsyn_InnsynDokumentDto> | null;
+  innsynMottattDato: string;
+  innsynResultatType: foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType;
+  vedtaksdokumentasjon: Array<tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto>;
+  dokumenter: Array<tjenester_behandling_innsyn_InnsynDokumentDto>;
 };
 
 export type foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak =
