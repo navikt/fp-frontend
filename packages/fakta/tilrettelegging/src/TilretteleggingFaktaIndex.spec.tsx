@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
 
 import * as stories from './TilretteleggingFaktaIndex.stories';
+import type { foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto } from '@navikt/fp-types';
 
 const {
   TilretteleggingMedVelferdspermisjon,
@@ -56,9 +57,9 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5091',
+      '@type': '5091',
       begrunnelse: 'Dette er en begrunnelse',
-      fødselsdato: undefined,
+      fødselsdato: null,
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
         {
@@ -83,6 +84,8 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
               type: 'HEL_TILRETTELEGGING',
+              stillingsprosent: null,
+              overstyrtUtbetalingsgrad: null,
             },
           ],
           tilretteleggingId: 1116961,
@@ -100,17 +103,25 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+              erGyldig: null,
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+              erGyldig: null,
             },
           ],
+          opplysningerOmRisiko: null,
+          opplysningerOmTilrettelegging: null,
+          kopiertFraTidligereBehandling: null,
+          mottattTidspunkt: null,
+          internArbeidsforholdReferanse: null,
+          begrunnelse: null,
         },
       ],
-    });
+    } satisfies foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto);
   });
 
   it('skal validere at en må velge minst ett arbeidsforhold og at alle velferdspermisjoner er vurdert', async () => {
@@ -334,9 +345,9 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5091',
+      '@type': '5091',
       begrunnelse: 'Dette er en begrunnelse',
-      fødselsdato: undefined,
+      fødselsdato: null,
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
         {
@@ -368,6 +379,8 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
               type: 'HEL_TILRETTELEGGING',
+              stillingsprosent: null,
+              overstyrtUtbetalingsgrad: null,
             },
           ],
           tilretteleggingId: 1116961,
@@ -385,17 +398,25 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+              erGyldig: null,
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+              erGyldig: null,
             },
           ],
+          opplysningerOmRisiko: null,
+          opplysningerOmTilrettelegging: null,
+          kopiertFraTidligereBehandling: null,
+          mottattTidspunkt: null,
+          internArbeidsforholdReferanse: null,
+          begrunnelse: null,
         },
       ],
-    });
+    } satisfies foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto);
   });
 
   it('skal slette oppholdsperiode', async () => {
