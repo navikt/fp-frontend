@@ -132,7 +132,7 @@ export const beregningsgrunnlag: Beregningsgrunnlag = {
   dekningsgrad: 100,
   ytelsesspesifiktGrunnlag: {
     ytelsetype: 'FP',
-    // @ts-expect-error: orker ikke mocke akkurat nå
+    // @ts-expect-error: mock ved behov
     besteberegninggrunnlag: { besteMåneder: [], avvik: 0 },
   },
   erOverstyrtInntekt: false,
