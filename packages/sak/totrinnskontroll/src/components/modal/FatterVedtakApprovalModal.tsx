@@ -123,7 +123,6 @@ export const FatterVedtakApprovalModal = ({
     allAksjonspunktApproved,
     behandlingStatusKode,
     behandlingTypeKode,
-    // @ts-expect-error -- fikses senere
     behandlingsresultat,
     isBehandlingsresultatOpphor,
     harSammeResultatSomOriginalBehandling,
