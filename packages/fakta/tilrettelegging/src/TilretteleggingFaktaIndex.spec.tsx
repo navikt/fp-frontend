@@ -416,7 +416,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
           begrunnelse: null,
         },
       ],
-    } satisfies AksjonspunktType);
+    });
   });
 
   it('skal slette oppholdsperiode', async () => {
