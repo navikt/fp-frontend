@@ -12,7 +12,6 @@ import type {
   ArbeidsforholdTilretteleggingDato,
   SvpAvklartOppholdPeriode,
 } from '@navikt/fp-types';
-import { SvpTilretteleggingFomKilde } from '@navikt/fp-types';
 
 import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
 import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';
@@ -71,7 +70,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
     appendTilrettelegging({
       fom: undefined,
       type: undefined,
-      kilde: SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER,
+      kilde: 'REGISTRERT_AV_SAKSBEHANDLER',
     });
   };
 

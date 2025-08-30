@@ -2,8 +2,6 @@ import { composeStories } from '@storybook/react';
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { TilretteleggingType } from '@navikt/fp-kodeverk';
-
 import * as stories from './BehovForTilretteleggingPanel.stories';
 
 const { Default } = composeStories(stories);
@@ -87,10 +85,7 @@ describe('BehovForTilretteleggingPanel', () => {
       næringsdrivende.getByLabelText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med'),
       '11.01.2024',
     );
-    await userEvent.selectOptions(
-      næringsdrivende.getByLabelText('Behov for tilrettelegging'),
-      TilretteleggingType.HEL_TILRETTELEGGING,
-    );
+    await userEvent.selectOptions(næringsdrivende.getByLabelText('Behov for tilrettelegging'), 'HEL_TILRETTELEGGING');
     await userEvent.type(næringsdrivende.getByLabelText('Fra dato'), '01.01.2024');
     await userEvent.type(næringsdrivende.getByLabelText('Stillingsprosent'), '80');
 
@@ -103,10 +98,7 @@ describe('BehovForTilretteleggingPanel', () => {
       frilans.getByLabelText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med'),
       '12.02.2024',
     );
-    await userEvent.selectOptions(
-      frilans.getByLabelText('Behov for tilrettelegging'),
-      TilretteleggingType.DELVIS_TILRETTELEGGING,
-    );
+    await userEvent.selectOptions(frilans.getByLabelText('Behov for tilrettelegging'), 'DELVIS_TILRETTELEGGING');
     await userEvent.type(frilans.getByLabelText('Fra dato'), '02.02.2024');
     await userEvent.type(frilans.getByLabelText('Stillingsprosent'), '90');
 
@@ -120,10 +112,7 @@ describe('BehovForTilretteleggingPanel', () => {
       arbeidstaker.getByLabelText('Jordmor/lege oppgir at tilrettelegging er nødvendig fra og med'),
       '13.03.2024',
     );
-    await userEvent.selectOptions(
-      arbeidstaker.getByLabelText('Behov for tilrettelegging'),
-      TilretteleggingType.INGEN_TILRETTELEGGING,
-    );
+    await userEvent.selectOptions(arbeidstaker.getByLabelText('Behov for tilrettelegging'), 'INGEN_TILRETTELEGGING');
     await userEvent.type(arbeidstaker.getByLabelText('Fra dato'), '03.03.2024');
     await userEvent.type(arbeidstaker.getByLabelText('Stillingsprosent'), '100');
 
@@ -140,7 +129,7 @@ describe('BehovForTilretteleggingPanel', () => {
             {
               dato: '2024-03-03',
               stillingsprosent: '100',
-              tilretteleggingType: TilretteleggingType.INGEN_TILRETTELEGGING,
+              tilretteleggingType: 'INGEN_TILRETTELEGGING',
             },
           ],
         },
@@ -151,7 +140,7 @@ describe('BehovForTilretteleggingPanel', () => {
             {
               dato: '2024-02-02',
               stillingsprosent: '90',
-              tilretteleggingType: TilretteleggingType.DELVIS_TILRETTELEGGING,
+              tilretteleggingType: 'DELVIS_TILRETTELEGGING',
             },
           ],
         },
@@ -162,7 +151,7 @@ describe('BehovForTilretteleggingPanel', () => {
             {
               dato: '2024-01-01',
               stillingsprosent: '80',
-              tilretteleggingType: TilretteleggingType.HEL_TILRETTELEGGING,
+              tilretteleggingType: 'HEL_TILRETTELEGGING',
             },
           ],
         },

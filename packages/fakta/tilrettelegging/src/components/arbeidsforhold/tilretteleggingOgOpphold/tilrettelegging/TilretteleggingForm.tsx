@@ -7,13 +7,11 @@ import { RhfDatepicker, RhfNumericField, RhfRadioGroupNew } from '@navikt/ft-for
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
-import { TilretteleggingType } from '@navikt/fp-kodeverk';
 import type {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   SvpAvklartOppholdPeriode,
 } from '@navikt/fp-types';
-import { SvpTilretteleggingFomKilde } from '@navikt/fp-types';
 
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 
@@ -75,14 +73,14 @@ export const finnProsentSvangerskapspenger = (
   velferdspermisjonprosent: number,
   brukOverstyrtUtbetalingsgrad = true,
 ): number | undefined => {
-  if (tilrettelegging.type === TilretteleggingType.HEL_TILRETTELEGGING) {
+  if (tilrettelegging.type === 'HEL_TILRETTELEGGING') {
     return undefined;
   }
   if (brukOverstyrtUtbetalingsgrad && tilrettelegging.overstyrtUtbetalingsgrad) {
     return tilrettelegging.overstyrtUtbetalingsgrad;
   }
 
-  return tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING
+  return tilrettelegging.type === 'INGEN_TILRETTELEGGING'
     ? 100
     : finnUtbetalingsgradForTilrettelegging(
         stillingsprosentArbeidsforhold,
@@ -159,17 +157,18 @@ export const TilretteleggingForm = ({
   const lagreIForm = (values: FormValues) => {
     const lagreFormValues = values[index];
     const kilde =
-      lagreFormValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER || erNyPeriode
-        ? SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER
-        : SvpTilretteleggingFomKilde.ENDRET_AV_SAKSBEHANDLER;
+      lagreFormValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' || erNyPeriode
+        ? 'REGISTRERT_AV_SAKSBEHANDLER'
+        : 'ENDRET_AV_SAKSBEHANDLER';
+
     const v = {
       ...lagreFormValues,
       overstyrtUtbetalingsgrad:
         lagreFormValues.overstyrtUtbetalingsgrad !== prosentSvangerskapspenger
           ? lagreFormValues.overstyrtUtbetalingsgrad
-          : undefined,
+          : null,
       kilde,
-    };
+    } as const;
     oppdaterTilrettelegging(v);
     formMethods.reset({ [index]: v });
     return Promise.resolve();
@@ -233,22 +232,22 @@ export const TilretteleggingForm = ({
             validate={[required]}
             isReadOnly={readOnly}
           >
-            <Radio value={TilretteleggingType.HEL_TILRETTELEGGING} size="small">
+            <Radio value="HEL_TILRETTELEGGING" size="small">
               <FormattedMessage id="TilretteleggingForm.KanGjennomfores" />
             </Radio>
-            <Radio value={TilretteleggingType.DELVIS_TILRETTELEGGING} size="small">
+            <Radio value="DELVIS_TILRETTELEGGING" size="small">
               <FormattedMessage id="TilretteleggingForm.RedusertArbeid" />
             </Radio>
-            <Radio value={TilretteleggingType.INGEN_TILRETTELEGGING} size="small">
+            <Radio value="INGEN_TILRETTELEGGING" size="small">
               <FormattedMessage id="TilretteleggingForm.KanIkkeGjennomfores" />
             </Radio>
           </RhfRadioGroupNew>
-          {formValues.type === TilretteleggingType.DELVIS_TILRETTELEGGING && (
+          {formValues.type === 'DELVIS_TILRETTELEGGING' && (
             <>
               {(tilrettelegging.stillingsprosent === undefined ||
-                tilrettelegging.type !== TilretteleggingType.DELVIS_TILRETTELEGGING ||
+                tilrettelegging.type !== 'DELVIS_TILRETTELEGGING' ||
                 erNyPeriode ||
-                formValues.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER) && (
+                formValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER') && (
                 <RhfNumericField
                   name={`${index}.stillingsprosent`}
                   control={formMethods.control}

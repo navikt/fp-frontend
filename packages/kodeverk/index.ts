@@ -68,7 +68,6 @@ export { SammenligningType } from './src/sammenligningType';
 export { SivilstandType } from './src/sivilstandType';
 export { SoknadType } from './src/soknadType';
 export { StonadskontoType } from './src/stonadskontoType';
-export { TilretteleggingType } from './src/tilretteleggingType';
 export { FagsakMarkeringKode } from './src/fagsakMarkeringKode';
 export { UtsettelseArsakCode } from './src/utsettelseArsakCodes';
 export { UttakArbeidType } from './src/uttakArbeidType';

@@ -5,8 +5,7 @@ import { BodyShort, Detail, HStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { TilretteleggingType } from '@navikt/fp-kodeverk';
-import { type ArbeidsforholdTilretteleggingDato, SvpTilretteleggingFomKilde } from '@navikt/fp-types';
+import { type ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
 
 const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string => {
   const dager = dayjs(termindato).diff(fom, 'days');
@@ -14,20 +13,20 @@ const finnTekst = (intl: IntlShape, termindato: string, fom?: string): string =>
 };
 
 const finnProsentSvangerskapspenger = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
-  if (tilrettelegging.type === TilretteleggingType.HEL_TILRETTELEGGING) {
+  if (tilrettelegging.type === 'HEL_TILRETTELEGGING') {
     return 0;
   }
-  if (tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING) {
+  if (tilrettelegging.type === 'INGEN_TILRETTELEGGING') {
     return 100;
   }
   return tilrettelegging.overstyrtUtbetalingsgrad ?? 0;
 };
 
 const finnProsentArbeid = (tilrettelegging: ArbeidsforholdTilretteleggingDato): number => {
-  if (tilrettelegging.type === TilretteleggingType.HEL_TILRETTELEGGING) {
+  if (tilrettelegging.type === 'HEL_TILRETTELEGGING') {
     return 100;
   }
-  if (tilrettelegging.type === TilretteleggingType.INGEN_TILRETTELEGGING) {
+  if (tilrettelegging.type === 'INGEN_TILRETTELEGGING') {
     return 0;
   }
   return tilrettelegging.stillingsprosent ?? 0;
@@ -55,7 +54,7 @@ export const TilretteleggingInfoPanel = ({
     ? intl.formatMessage({ id: 'TilretteleggingInfoPanel.TreUker' })
     : finnTekst(intl, termindato, tomDato);
 
-  const registrertAvSaksbehandler = tilrettelegging.kilde === SvpTilretteleggingFomKilde.REGISTRERT_AV_SAKSBEHANDLER;
+  const registrertAvSaksbehandler = tilrettelegging.kilde === 'REGISTRERT_AV_SAKSBEHANDLER';
 
   return (
     <div
