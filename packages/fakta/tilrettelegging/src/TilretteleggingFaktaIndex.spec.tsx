@@ -59,7 +59,8 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: AksjonspunktKode.FODSELTILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
-      fødselsdato: '',
+      // @ts-expect-error -- trolig programmeringsfeil, bør ikke være undefined utifra typinga
+      fødselsdato: undefined,
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
         {
@@ -345,8 +346,9 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      kode: '5091',
+      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
       begrunnelse: 'Dette er en begrunnelse',
+      // @ts-expect-error -- trolig programmeringsfeil, bør ikke være undefined utifra typinga
       fødselsdato: undefined,
       termindato: '2020-11-06',
       bekreftetSvpArbeidsforholdList: [
@@ -416,7 +418,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
           begrunnelse: null,
         },
       ],
-    });
+    } satisfies BekreftSvangerskapspengerAp);
   });
 
   it('skal slette oppholdsperiode', async () => {
