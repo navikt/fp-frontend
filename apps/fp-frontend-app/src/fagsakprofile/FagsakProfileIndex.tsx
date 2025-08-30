@@ -6,6 +6,7 @@ import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
+import { ReservasjonsstatusPanel } from '@navikt/fp-los-saksbehandler';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
@@ -80,7 +81,7 @@ export const FagsakProfileIndex = ({
 
   const location = useLocation();
 
-  const sakLinks = notEmpty(initFetchQuery.data).sakLinks;
+  const { sakLinks } = notEmpty(initFetchQuery.data);
   const arbeidstakerHref = sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href;
   const ainntektHref = sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href;
 
@@ -123,13 +124,16 @@ export const FagsakProfileIndex = ({
               errorMessageCallback={addErrorMessage}
               errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Meny' })}
             >
-              <BehandlingMenuIndex
-                fagsakData={fagsakData}
-                behandlingUuid={behandlingUuid}
-                setBehandling={setBehandling}
-                hentOgSettBehandling={hentOgSettBehandling}
-                behandling={behandling}
-              />
+              <VStack gap="space-12">
+                <BehandlingMenuIndex
+                  fagsakData={fagsakData}
+                  behandlingUuid={behandlingUuid}
+                  setBehandling={setBehandling}
+                  hentOgSettBehandling={hentOgSettBehandling}
+                  behandling={behandling}
+                />
+                <ReservasjonsstatusPanel saksnummer={fagsak.saksnummer} behandlingUuid={behandlingUuid} />
+              </VStack>
             </ErrorBoundary>
           </HStack>
         )}
