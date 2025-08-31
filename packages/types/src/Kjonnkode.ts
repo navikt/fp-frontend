@@ -1,9 +1,9 @@
-import { stringEnum } from './stringEnum';
+import type { foreldrepenger_behandlingslager_aktør_NavBrukerKjønn } from './apiDtoGenerert.ts';
 
-export const KjønnkodeEnum = stringEnum({
+export const KjønnkodeEnum = {
   KVINNE: 'K',
   MANN: 'M',
   UDEFINERT: '-',
-});
+} satisfies Record<string, Kjønnkode>;
 
-export type Kjønnkode = (typeof KjønnkodeEnum)[keyof typeof KjønnkodeEnum];
+export type Kjønnkode = foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
