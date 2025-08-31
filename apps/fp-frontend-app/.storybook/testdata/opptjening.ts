@@ -29,6 +29,10 @@ export const opptjening: Opptjening = {
       erGodkjent: null,
       erEndret: false,
       begrunnelse: null,
+      originalFom: null,
+      originalTom: null,
+      erManueltOpprettet: null,
+      erPeriodeEndret: null,
     },
     {
       aktivitetType: OpptjeningAktivitetType.ARBEID,
@@ -41,7 +45,11 @@ export const opptjening: Opptjening = {
       erGodkjent: true,
       erEndret: false,
       begrunnelse: null,
+      originalFom: null,
+      originalTom: null,
+      erManueltOpprettet: null,
+      erPeriodeEndret: null,
     },
   ],
-  ferdiglignetNæring: null,
+  ferdiglignetNæring: [],
 };

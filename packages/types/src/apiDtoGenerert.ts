@@ -3432,49 +3432,49 @@ export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAkti
   | '-';
 
 export type foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto = {
-  opptjeningFom?: string;
-  opptjeningTom?: string;
-  opptjeningperiode?: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_OpptjeningPeriodeDto;
-  fastsattOpptjeningAktivitetList?: Array<foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto>;
+  opptjeningFom: string;
+  opptjeningTom: string;
+  opptjeningperiode: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_OpptjeningPeriodeDto;
+  fastsattOpptjeningAktivitetList: Array<foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto>;
 };
 
 export type foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto = {
-  fom?: string;
-  tom?: string;
-  klasse?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetKlassifisering;
+  fom: string;
+  tom: string;
+  klasse: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetKlassifisering;
 };
 
 export type foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_OpptjeningPeriodeDto = {
-  måneder?: number;
-  dager?: number;
+  måneder: number;
+  dager: number;
 };
 
 export type foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto = {
-  år?: string;
-  beløp?: number;
+  år: string;
+  beløp: number;
 };
 
 export type foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto = {
-  aktivitetType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
-  originalFom?: string;
-  originalTom?: string;
-  opptjeningFom?: string;
-  opptjeningTom?: string;
-  arbeidsgiverReferanse?: string;
-  arbeidsforholdRef?: string;
-  stillingsandel?: number;
-  naringRegistreringsdato?: string;
-  erManueltOpprettet?: boolean;
-  erGodkjent?: boolean;
-  erEndret?: boolean;
-  begrunnelse?: string;
-  erPeriodeEndret?: boolean;
+  aktivitetType: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
+  originalFom: string | null;
+  originalTom: string | null;
+  opptjeningFom: string;
+  opptjeningTom: string;
+  arbeidsgiverReferanse: string | null;
+  arbeidsforholdRef: string | null;
+  stillingsandel: number;
+  naringRegistreringsdato: string | null;
+  erManueltOpprettet: boolean | null;
+  erGodkjent: boolean | null;
+  erEndret: boolean;
+  begrunnelse: string | null;
+  erPeriodeEndret: boolean | null;
 };
 
 export type foreldrepenger_domene_opptjening_dto_OpptjeningDto = {
-  fastsattOpptjening?: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto;
-  opptjeningAktivitetList?: Array<foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto>;
-  ferdiglignetNæring?: Array<foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto>;
+  fastsattOpptjening: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto;
+  opptjeningAktivitetList: Array<foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto>;
+  ferdiglignetNæring: Array<foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto>;
 };
 
 export type tjenester_behandling_personopplysning_PersonopplysningTilbakeDto = {
@@ -4372,21 +4372,21 @@ export type tjenester_behandling_uttak_dto_UttakResultatPerioderDto_FilterDto = 
 export type foreldrepenger_behandlingslager_behandling_vedtak_OppgaveType = 'VUR_KONSEKVENS' | 'VUR_DOKUMENT';
 
 export type tjenester_behandling_vedtak_dto_OppgaveDto = {
-  oppgaveId?: string;
-  oppgavetype?: foreldrepenger_behandlingslager_behandling_vedtak_OppgaveType;
-  beskrivelser?: Array<tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse>;
-  dokumenter?: Array<tjenester_behandling_vedtak_dto_OppgaveDto_Dokument>;
+  oppgaveId: string;
+  oppgavetype: foreldrepenger_behandlingslager_behandling_vedtak_OppgaveType;
+  beskrivelser: Array<tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse>;
+  dokumenter: Array<tjenester_behandling_vedtak_dto_OppgaveDto_Dokument>;
 };
 
 export type tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse = {
-  header?: string;
-  kommentarer?: Array<string>;
+  header: string | null;
+  kommentarer: Array<string>;
 };
 
 export type tjenester_behandling_vedtak_dto_OppgaveDto_Dokument = {
-  journalpostId?: string;
-  dokumentId?: string;
-  tittel?: string;
+  journalpostId: string;
+  dokumentId: string;
+  tittel: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_verge_VergeType =
