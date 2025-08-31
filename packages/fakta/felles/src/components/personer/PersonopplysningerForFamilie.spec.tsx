@@ -4,7 +4,7 @@ import { expect } from 'vitest';
 
 import { AdresseType, SivilstandType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import { KjønnkodeEnum, type Personoversikt } from '@navikt/fp-types';
+import { KjønnkodeEnum, type Personadresse, type Personoversikt } from '@navikt/fp-types';
 
 import { PersonopplysningerForFamilie } from './PersonopplysningerForFamilie';
 
@@ -16,7 +16,9 @@ const adresse1 = {
   postNummer: '4123',
   poststed: 'Bobygda',
   land: 'Norge',
-};
+  adresselinje2: null,
+  adresselinje3: null,
+} satisfies Personadresse;
 
 const adresse2 = {
   fom: '2019-01-01',
@@ -26,7 +28,9 @@ const adresse2 = {
   postNummer: '0203',
   poststed: 'Bobygda',
   land: 'Norge',
-};
+  adresselinje2: null,
+  adresselinje3: null,
+} satisfies Personadresse;
 
 const personoversikt: Personoversikt = {
   bruker: {

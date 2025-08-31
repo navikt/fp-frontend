@@ -59,6 +59,8 @@ const personoversikt: Personoversikt = {
         postNummer: '1000',
         poststed: 'Oslo',
         land: 'Norge',
+        adresselinje2: null,
+        adresselinje3: null,
       },
     ],
   },

@@ -16,6 +16,7 @@ import {
   type Aksjonspunkt,
   KjønnkodeEnum,
   type OmsorgOgRett,
+  type Personadresse,
   type PersonopplysningerBasis,
   Rettighetstype,
   Verdi,
@@ -31,7 +32,9 @@ const adresse1 = {
   postNummer: '4123',
   poststed: 'Bobygda',
   land: 'Norge',
-};
+  adresselinje2: null,
+  adresselinje3: null,
+} satisfies Personadresse;
 
 const adresse2 = {
   fom: '2019-01-01',
@@ -41,7 +44,9 @@ const adresse2 = {
   postNummer: '0203',
   poststed: 'Bobygda',
   land: 'Norge',
-};
+  adresselinje2: null,
+  adresselinje3: null,
+} satisfies Personadresse;
 
 const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',

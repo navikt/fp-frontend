@@ -3510,15 +3510,15 @@ export type foreldrepenger_behandlingslager_behandling_personopplysning_Sivilsta
   | 'UGIF';
 
 export type tjenester_behandling_personopplysning_PersonadresseDto = {
-  fom?: string;
-  tom?: string;
-  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
-  adresselinje1?: string;
-  adresselinje2?: string;
-  adresselinje3?: string;
-  postNummer?: string;
-  poststed?: string;
-  land?: string;
+  fom: string;
+  tom: string;
+  adresseType: foreldrepenger_behandlingslager_aktør_AdresseType | null;
+  adresselinje1: string | null;
+  adresselinje2: string | null;
+  adresselinje3: string | null;
+  postNummer: string | null;
+  poststed: string | null;
+  land: string | null;
 };
 
 export type tjenester_behandling_personopplysning_PersonopplysningBasisDto = {
