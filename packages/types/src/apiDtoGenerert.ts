@@ -4188,7 +4188,7 @@ export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_Simul
 
 export type tjenester_behandling_tilbakekreving_TilbakekrevingValgDto = {
   grunnerTilReduksjon?: boolean;
-  videreBehandling?: foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling;
+  videreBehandling: foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling;
   varseltekst?: string;
 };
 
@@ -4416,8 +4416,8 @@ export type foreldrepenger_domene_person_verge_dto_VergeDto = {
 };
 
 export type tjenester_behandling_ytelsefordeling_YtelseFordelingDto = {
-  overstyrtOmsorg?: boolean;
-  førsteUttaksdato?: string;
+  overstyrtOmsorg: boolean | null;
+  førsteUttaksdato: string;
   ønskerJustertVedFødsel?: boolean;
 };
 
