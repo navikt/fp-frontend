@@ -1,9 +1,3 @@
-export type NavAnsatt = Readonly<{
-  navn: string;
-  brukernavn: string;
-  kanBehandleKode6: boolean; // los
-  kanOppgavestyre: boolean; // los
-  kanOverstyre: boolean;
-  kanSaksbehandle: boolean;
-  kanVeilede: boolean;
-}>;
+import type { foreldrepenger_tilganger_InnloggetNavAnsattDto } from './apiDtoGenerert.ts';
+
+export type NavAnsatt = foreldrepenger_tilganger_InnloggetNavAnsattDto;

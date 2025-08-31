@@ -6330,14 +6330,14 @@ export type foreldrepenger_behandlingslager_aktør_OrganisasjonsEnhet = {
 };
 
 export type foreldrepenger_tilganger_InnloggetNavAnsattDto = {
-  brukernavn?: string;
-  navn?: string;
-  kanSaksbehandle?: boolean;
-  kanVeilede?: boolean;
-  kanOverstyre?: boolean;
-  kanOppgavestyre?: boolean;
-  kanBehandleKode6?: boolean;
-  funksjonellTid?: string;
+  brukernavn: string;
+  navn: string;
+  kanSaksbehandle: boolean;
+  kanVeilede: boolean;
+  kanOverstyre: boolean;
+  kanOppgavestyre: boolean;
+  kanBehandleKode6: boolean;
+  funksjonellTid: string;
 };
 
 export type tjenester_saksbehandler_dto_InitLinksDto = {
