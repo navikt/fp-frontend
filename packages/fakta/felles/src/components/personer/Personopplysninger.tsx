@@ -3,6 +3,7 @@ import { FormattedMessage, RawIntlProvider } from 'react-intl';
 import { BodyShort, Box, Detail, HStack, Label, VStack } from '@navikt/ds-react';
 import { Gender, GenderIcon } from '@navikt/ft-plattform-komponenter';
 import { createIntl, dateFormat } from '@navikt/ft-utils';
+
 import {
   type AlleKodeverk,
   type foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType,
