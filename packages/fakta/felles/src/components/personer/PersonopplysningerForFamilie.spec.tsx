@@ -41,6 +41,9 @@ const personoversikt: Personoversikt = {
     fødselsdato: '1989-01-01',
     dødsdato: null,
     adresser: [adresse1, adresse2],
+    fnr: null,
+    diskresjonskode: null,
+    vn: null,
   },
   annenPart: {
     navn: 'Petra Utvikler',
@@ -50,6 +53,9 @@ const personoversikt: Personoversikt = {
     fødselsdato: '1989-01-01',
     dødsdato: null,
     adresser: [adresse1, adresse2],
+    fnr: null,
+    diskresjonskode: null,
+    vn: null,
   },
   barn: [
     {
@@ -60,6 +66,9 @@ const personoversikt: Personoversikt = {
       aktoerId: '3',
       kjønn: KjønnkodeEnum.KVINNE,
       sivilstand: SivilstandType.UGIFT,
+      fnr: null,
+      diskresjonskode: null,
+      vn: null,
     },
     {
       navn: 'Snuppa Utvikler',
@@ -69,6 +78,9 @@ const personoversikt: Personoversikt = {
       aktoerId: '4',
       kjønn: KjønnkodeEnum.KVINNE,
       sivilstand: SivilstandType.UGIFT,
+      fnr: null,
+      diskresjonskode: null,
+      vn: null,
     },
   ],
 };

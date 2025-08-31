@@ -52,6 +52,9 @@ const defaultBruker: PersonopplysningerBasis = {
   fødselsdato: '1989-01-01',
   dødsdato: null,
   adresser: [adresse1, adresse2],
+  fnr: null,
+  diskresjonskode: null,
+  vn: null,
 };
 const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
@@ -61,6 +64,9 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   fødselsdato: '1989-01-01',
   dødsdato: null,
   adresser: [adresse1, adresse2],
+  fnr: null,
+  diskresjonskode: null,
+  vn: null,
 };
 const defaultBarn: PersonopplysningerBasis = {
   navn: 'Tutta Utvikler',
@@ -70,6 +76,9 @@ const defaultBarn: PersonopplysningerBasis = {
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: SivilstandType.UGIFT,
+  fnr: null,
+  diskresjonskode: null,
+  vn: null,
 };
 
 const ytelsefordeling = {} as Ytelsefordeling;

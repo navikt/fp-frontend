@@ -3522,21 +3522,22 @@ export type tjenester_behandling_personopplysning_PersonadresseDto = {
 };
 
 export type tjenester_behandling_personopplysning_PersonopplysningBasisDto = {
-  fnr?: string;
-  aktoerId?: string;
-  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  fnr: string | null;
+  aktoerId: string;
+  diskresjonskode: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode | null;
+  vn: string | null;
   navn?: string;
-  kjønn?: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
-  sivilstand?: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
-  dødsdato?: string;
-  fødselsdato?: string;
-  adresser?: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+  dødsdato: string | null;
+  fødselsdato: string;
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
 };
 
 export type tjenester_behandling_personopplysning_PersonoversiktDto = {
-  bruker?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
-  annenPart?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
-  barn?: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
+  bruker: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+  annenPart: tjenester_behandling_personopplysning_PersonopplysningBasisDto | null;
+  barn: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
 };
 
 export type foreldrepenger_behandlingslager_aktør_OppholdstillatelseType = 'MIDLERTIDIG' | 'PERMANENT' | '-';

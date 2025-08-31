@@ -22,6 +22,9 @@ export const personoversikt: Personoversikt = {
         land: 'Norge',
       },
     ],
+    fnr: null,
+    diskresjonskode: null,
+    vn: null,
   },
   annenPart: {
     aktoerId: '9921528317364',
@@ -43,6 +46,9 @@ export const personoversikt: Personoversikt = {
         land: 'Norge',
       },
     ],
+    fnr: null,
+    diskresjonskode: null,
+    vn: null,
   },
   barn: [
     {
@@ -65,6 +71,9 @@ export const personoversikt: Personoversikt = {
           land: 'Norge',
         },
       ],
+      fnr: null,
+      diskresjonskode: null,
+      vn: null,
     },
   ],
 };
