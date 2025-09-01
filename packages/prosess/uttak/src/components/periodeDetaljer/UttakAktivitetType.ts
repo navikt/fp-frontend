@@ -1,6 +1,6 @@
 import type {
-  foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
   foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak,
+  foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
   foreldrepenger_behandlingslager_uttak_fp_GraderingAvslagÅrsak,
   foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak,
 } from '@navikt/fp-types';
