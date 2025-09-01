@@ -1,6 +1,4 @@
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
-import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
@@ -12,7 +10,6 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
-import type { NyeOgFerdigstilteOppgaver } from './typer/nyeOgFerdigstilteOppgaverTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
 import type { Saksliste } from './typer/sakslisteTsType';
 
@@ -143,57 +140,6 @@ const SAKSLISTE_SAKSBEHANDLERE = [
   },
 ] satisfies Saksbehandler[];
 
-const NYE_OG_FERDIGSTILTE_OPPGAVER = [
-  {
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-    antallNye: 10,
-    antallFerdigstilte: 20,
-    dato: dayjs().format(ISO_DATE_FORMAT),
-  },
-  {
-    behandlingType: BehandlingTypeEnum.KLAGE,
-    antallNye: 23,
-    antallFerdigstilte: 2,
-    dato: dayjs().format(ISO_DATE_FORMAT),
-  },
-  {
-    behandlingType: BehandlingTypeEnum.REVURDERING,
-    antallNye: 3,
-    antallFerdigstilte: 24,
-    dato: dayjs().format(ISO_DATE_FORMAT),
-  },
-  {
-    behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
-    antallNye: 23,
-    antallFerdigstilte: 12,
-    dato: dayjs().format(ISO_DATE_FORMAT),
-  },
-  {
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-    antallNye: 10,
-    antallFerdigstilte: 20,
-    dato: dayjs().subtract(1, 'd').format(ISO_DATE_FORMAT),
-  },
-  {
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-    antallNye: 30,
-    antallFerdigstilte: 15,
-    dato: dayjs().subtract(3, 'd').format(ISO_DATE_FORMAT),
-  },
-  {
-    behandlingType: BehandlingTypeEnum.KLAGE,
-    antallNye: 23,
-    antallFerdigstilte: 2,
-    dato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
-  },
-  {
-    behandlingType: BehandlingTypeEnum.KLAGE,
-    antallNye: 23,
-    antallFerdigstilte: 2,
-    dato: dayjs().subtract(5, 'd').format(ISO_DATE_FORMAT),
-  },
-] as NyeOgFerdigstilteOppgaver[];
-
 const BEHANDLEDE_OPPGAVER = [
   {
     id: 1,
@@ -250,7 +196,6 @@ const meta = {
         http.get('https://www.test.com/api/result', () => HttpResponse.json(OPPGAVER_TIL_BEHANDLING)),
         http.get(LosUrl.HENT_RESERVASJONSSTATUS, () => new HttpResponse(null, { status: 200 })),
         http.get(LosUrl.BEHANDLEDE_OPPGAVER, () => HttpResponse.json(BEHANDLEDE_OPPGAVER)),
-        http.get(LosUrl.HENT_NYE_OG_FERDIGSTILTE_OPPGAVER, () => HttpResponse.json(NYE_OG_FERDIGSTILTE_OPPGAVER)),
         http.get(LosUrl.FORLENG_OPPGAVERESERVASJON, () => new HttpResponse(null, { status: 200 })),
       ],
     },
