@@ -115,6 +115,6 @@ RegistrereVergeForm.transformValues = ({
   gyldigFom,
   gyldigTom: gyldigTom != null && gyldigTom !== '' ? gyldigTom : undefined,
   ...(vergeType === 'ADVOKAT'
-    ? { organisasjonsnummer: notEmpty(values.organisasjonsnummer), fnr: undefined }
-    : { fnr: notEmpty(values.fnr), organisasjonsnummer: undefined }),
+    ? { organisasjonsnummer: notEmpty(values.organisasjonsnummer) }
+    : { fnr: notEmpty(values.fnr) }),
 });
