@@ -33,15 +33,6 @@ export type {
 } from './src/beregningsgrunnlagFaktaTsType';
 export type { Månedsgrunnlag, BesteberegningInntekt, Besteberegninggrunnlag } from './src/besteberegningTsTypes';
 export type { BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
-export type {
-  RefusjonTilVurderingAndel,
-  TidligereUtbetalinger,
-  FordelBeregningsgrunnlagPeriode,
-  ArbeidsforholdTilFordeling,
-  FordelBeregningsgrunnlagAndel,
-  PerioderMedGraderingEllerRefusjon,
-  FaktaOmFordeling,
-} from './src/beregningsgrunnlagFordelingTsType';
 export type { Feriepengegrunnlag, FeriepengegrunnlagAndel } from './src/feriepengegrunnlagTsType';
 export type { BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export type {
