@@ -61,9 +61,6 @@
   "SistBehandledeSaker.Status": "Status",
   "SistBehandledeSaker.ErReservert": "Reservert",
 
-  "NyeOgFerdigstilteOppgaverForIdagPanel.NyeOgFerdigstilte": "Nye og ferdigstilte behandlinger",
-  "NyeOgFerdigstilteOppgaverForIdagPanel.IDag": "For i dag",
-
   "OppgaveErReservertAvAnnenModal.ReservertAv": "{saksbehandlernavn} ({saksbehandlerid}) arbeider nå med denne behandlingen (reservert fram t.o.m {date} - {time})",
   "OppgaveErReservertAvAnnenModal.ReservertAvEnkel": "En annen saksbehandler arbeider nå med denne behandlingen",
   "OppgaveErReservertAvAnnenModal.Ok": "OK",
