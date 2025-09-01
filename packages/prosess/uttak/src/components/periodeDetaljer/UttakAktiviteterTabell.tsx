@@ -18,6 +18,7 @@ import { formaterArbeidsgiver } from '@navikt/ft-utils';
 import { UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type {
   ArbeidsgiverOpplysningerPerId,
+  foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType,
   KodeverkMedNavn,
   PeriodeSoker,
   PeriodeSokerAktivitet,
@@ -139,7 +140,11 @@ const validerUkerOgDager = (getValues: UseFormGetValues<UttakAktivitetType>, ind
 };
 
 const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
-  (getValues: UseFormGetValues<UttakAktivitetType>, utsettelseType: string, intl: IntlShape) =>
+  (
+    getValues: UseFormGetValues<UttakAktivitetType>,
+    utsettelseType: foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType,
+    intl: IntlShape,
+  ) =>
   (ukerEllerDager: string) => {
     const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
     return harUtsettelsestype && getValues('erOppfylt') && parseFloat(ukerEllerDager) > 0
@@ -247,7 +252,11 @@ export const UttakAktiviteterTabell = ({
                             required,
                             hasValidInteger,
                             maxLength3,
-                            validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
+                            validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(
+                              getValues,
+                              utsettelseType ?? '-',
+                              intl,
+                            ),
                           ]}
                         />
                       </span>
@@ -262,7 +271,11 @@ export const UttakAktiviteterTabell = ({
                           required,
                           hasValidDecimal,
                           maxLength3,
-                          validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(getValues, utsettelseType, intl),
+                          validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt(
+                            getValues,
+                            utsettelseType ?? '-',
+                            intl,
+                          ),
                         ]}
                       />
                     </HStack>
