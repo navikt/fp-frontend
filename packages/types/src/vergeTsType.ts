@@ -3,7 +3,8 @@ import type {
   foreldrepenger_domene_person_verge_dto_VergeDto,
 } from './apiDtoGenerert.ts';
 
-// NOTE [JOHANNES] -- siden denne ikke kommer fra backend velger jeg å endre null felter til undefined siden det er mer kompatibelt med form.
+// NOTE [JOHANNES] -- backend returnerer strengt tatt 'null's.
+// Men for å slippe refaktorere form logikken (hvor undefined er naturlig å bruke) er relevant felter overskrevet.
 export type Verge = Omit<
   foreldrepenger_domene_person_verge_dto_VergeDto,
   'gyldigTom' | 'fnr' | 'organisasjonsnummer'
