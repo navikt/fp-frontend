@@ -207,8 +207,10 @@ const useVisForhandsvisningAvMelding = (behandling: BehandlingAppKontekst) => {
     mutationFn: (params: ForhåndsvisBrevParams) =>
       api.forhåndsvisMelding({
         behandlingUuid: behandling.uuid,
+        // @ts-expect-error -- brevmalkode må kodes som string union ikke string
         dokumentMal: params.brevmalkode,
         fritekst: params.fritekst || ' ',
+        // @ts-expect-error -- arsakskode må kodes som string union ikke string
         arsakskode: params.arsakskode,
       }),
     onSuccess: response => {

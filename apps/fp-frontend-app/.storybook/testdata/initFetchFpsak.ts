@@ -9,6 +9,7 @@ export const initFetchFpsak: InitDataFpSak = {
     kanOverstyre: false,
     kanOppgavestyre: false,
     kanBehandleKode6: false,
+    funksjonellTid: '',
   },
   behandlendeEnheter: [
     {

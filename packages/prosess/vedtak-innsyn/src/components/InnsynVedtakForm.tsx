@@ -9,7 +9,12 @@ import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@n
 
 import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Dokument, InnsynDokument } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  Dokument,
+  foreldrepenger_dokumentbestiller_DokumentMalType,
+  InnsynDokument,
+} from '@navikt/fp-types';
 import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -23,7 +28,7 @@ const minLength3 = minLength(3);
 export type VedtakInnsynForhandsvisData = {
   fritekst: string;
   mottaker: string;
-  dokumentMal: string;
+  dokumentMal: foreldrepenger_dokumentbestiller_DokumentMalType;
 };
 
 const getPreviewCallback =
@@ -34,7 +39,7 @@ const getPreviewCallback =
     const data = {
       fritekst: begrunnelse ?? ' ',
       mottaker: '',
-      dokumentMal: DokumentMalType.INNSYN_SVAR,
+      dokumentMal: DokumentMalType.INNSYN_SVAR as const,
     };
     previewCallback(data);
   };

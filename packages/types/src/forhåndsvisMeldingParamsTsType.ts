@@ -1,8 +1,3 @@
-export type ForhåndsvisMeldingParams = Readonly<{
-  behandlingUuid: string;
-  dokumentMal?: string;
-  arsakskode?: string;
-  automatiskVedtaksbrev?: boolean;
-  tittel?: string;
-  fritekst?: string;
-}>;
+import type { foreldrepenger_dokumentbestiller_dto_ForhåndsvisDokumentDto } from './apiDtoGenerert.ts';
+
+export type ForhåndsvisMeldingParams = foreldrepenger_dokumentbestiller_dto_ForhåndsvisDokumentDto;

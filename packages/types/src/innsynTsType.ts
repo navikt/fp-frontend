@@ -1,18 +1,11 @@
-export type InnsynDokument = Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  fikkInnsyn: boolean;
-}>;
+import type {
+  tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto,
+  tjenester_behandling_innsyn_InnsynDokumentDto,
+  tjenester_behandling_innsyn_InnsynsbehandlingDto,
+} from './apiDtoGenerert.ts';
 
-export type InnsynVedtaksdokument = Readonly<{
-  behandlingUuid: string;
-  tittel: string;
-  opprettetDato: string;
-}>;
+export type InnsynDokument = tjenester_behandling_innsyn_InnsynDokumentDto;
 
-export type Innsyn = Readonly<{
-  innsynMottattDato: string;
-  innsynResultatType: string;
-  vedtaksdokumentasjon: InnsynVedtaksdokument[];
-  dokumenter: InnsynDokument[];
-}>;
+export type InnsynVedtaksdokument = tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto;
+
+export type Innsyn = tjenester_behandling_innsyn_InnsynsbehandlingDto;

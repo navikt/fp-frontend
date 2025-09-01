@@ -1,17 +1,11 @@
-export type Oppgave = {
-  oppgaveId: string;
-  oppgavetype: string;
-  beskrivelser: Beskrivelse[];
-  dokumenter: OppgaveDokument[];
-};
+import type {
+  tjenester_behandling_vedtak_dto_OppgaveDto,
+  tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse,
+  tjenester_behandling_vedtak_dto_OppgaveDto_Dokument,
+} from './apiDtoGenerert.ts';
 
-export type Beskrivelse = {
-  header: string | null;
-  kommentarer: string[];
-};
+export type Oppgave = tjenester_behandling_vedtak_dto_OppgaveDto;
 
-export type OppgaveDokument = {
-  journalpostId: string;
-  dokumentId: string;
-  tittel: string | null;
-};
+export type Beskrivelse = tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse;
+
+export type OppgaveDokument = tjenester_behandling_vedtak_dto_OppgaveDto_Dokument;

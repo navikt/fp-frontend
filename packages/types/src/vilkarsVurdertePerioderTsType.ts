@@ -1,3 +1,4 @@
+// TODO [JOHANNES] -- tilbakekreving
 export type AktsomhetInfo = {
   sarligGrunner: string[];
   harGrunnerTilReduksjon: boolean;

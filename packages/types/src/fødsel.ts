@@ -1,46 +1,20 @@
-export type BarnHendelseData = { fødselsdato: string; dødsdato: string | null };
+import type {
+  tjenester_behandling_fødsel_dto_FødselDto,
+  tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData,
+  tjenester_behandling_fødsel_dto_FødselDto_Gjeldende,
+  tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn,
+  tjenester_behandling_fødsel_dto_FødselDto_Register,
+  tjenester_behandling_fødsel_dto_FødselDto_Søknad,
+} from './apiDtoGenerert.ts';
 
-export type Fødsel = {
-  søknad: FødselSøknad;
-  register: FødselRegister;
-  gjeldende: FødselGjeldende;
-};
+export type BarnHendelseData = tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
 
-export type FødselSøknad = {
-  barn: BarnHendelseData[];
-  termindato: string | null;
-  utstedtdato: string | null;
-  antallBarn: number;
-};
+export type Fødsel = tjenester_behandling_fødsel_dto_FødselDto;
 
-export type FødselRegister = {
-  barn: BarnHendelseData[];
-};
+export type FødselSøknad = tjenester_behandling_fødsel_dto_FødselDto_Søknad;
 
-type FødselDtoGjeldendeUtstedtdato = {
-  kilde: Kilde;
-  utstedtdato: string;
-};
+export type FødselRegister = tjenester_behandling_fødsel_dto_FødselDto_Register;
 
-export type FødselGjeldende = {
-  termin: FødselDtoGjeldendeTermindato | null;
-  utstedtdato: FødselDtoGjeldendeUtstedtdato | null;
-  barn: FødselDtoGjeldendeBarn[];
-  antallBarn: FødselDtoGjeldendeAntallBarn;
-  fødselDokumetasjonStatus: 'DOKUMENTERT' | 'IKKE_DOKUMENTERT' | 'IKKE_VURDERT';
-};
+export type FødselGjeldende = tjenester_behandling_fødsel_dto_FødselDto_Gjeldende;
 
-type FødselDtoGjeldendeTermindato = {
-  kilde: Kilde;
-  termindato: string;
-};
-
-type FødselDtoGjeldendeAntallBarn = { kilde: Kilde; antall: number };
-
-export type FødselDtoGjeldendeBarn = {
-  kilde: Kilde;
-  barn: BarnHendelseData;
-  kanOverstyres: boolean;
-};
-
-type Kilde = 'SAKSBEHANDLER' | 'SØKNAD' | 'FOLKEREGISTER';
+export type FødselDtoGjeldendeBarn = tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn;

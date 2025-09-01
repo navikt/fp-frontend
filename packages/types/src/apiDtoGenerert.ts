@@ -1182,9 +1182,9 @@ export type tjenester_behandling_dekningsgrad_AvklarDekningsgradDto = {
 };
 
 export type tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDokumentDto = {
-  fikkInnsyn: boolean | null;
-  journalpostId: string | null;
-  dokumentId: string | null;
+  fikkInnsyn: boolean;
+  journalpostId: string;
+  dokumentId: string;
 };
 
 export type tjenester_behandling_innsyn_aksjonspunkt_VurderInnsynDto = {
@@ -2281,20 +2281,20 @@ export type tjenester_behandling_arbeidsforhold_ArbeidsgiverOversiktDto = {
 };
 
 export type foreldrepenger_domene_arbeidsforhold_dto_IAYYtelseDto = {
-  relatertTilgrensendeYtelserForSoker?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
-  relatertTilgrensendeYtelserForAnnenForelder?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  relatertTilgrensendeYtelserForSoker: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  relatertTilgrensendeYtelserForAnnenForelder: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto>;
 };
 
 export type foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto = {
-  relatertYtelseNavn?: string;
-  tilgrensendeYtelserListe?: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto_TilgrensendeYtelserDto>;
+  relatertYtelseNavn: string;
+  tilgrensendeYtelserListe: Array<foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto_TilgrensendeYtelserDto>;
 };
 
 export type foreldrepenger_domene_arbeidsforhold_dto_RelaterteYtelserDto_TilgrensendeYtelserDto = {
-  periodeFraDato?: string;
-  periodeTilDato?: string;
-  statusNavn?: string;
+  periodeFraDato: string;
+  periodeTilDato: string;
+  statusNavn: string;
   saksNummer?: string;
 };
 
@@ -3262,27 +3262,27 @@ export type tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagDto = 
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto = {
-  søknad?: tjenester_behandling_fødsel_dto_FødselDto_Søknad;
-  register?: tjenester_behandling_fødsel_dto_FødselDto_Register;
-  gjeldende?: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende;
+  søknad: tjenester_behandling_fødsel_dto_FødselDto_Søknad;
+  register: tjenester_behandling_fødsel_dto_FødselDto_Register;
+  gjeldende: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData = {
-  fødselsdato?: string;
-  dødsdato?: string;
+  fødselsdato: string;
+  dødsdato: string | null;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende = {
-  termin: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Termin;
-  utstedtdato?: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Utstedtdato;
-  antallBarn?: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_AntallBarn;
-  barn?: Array<tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn>;
-  fødselDokumetasjonStatus?: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumetasjonStatus;
+  termin: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Termin | null;
+  utstedtdato: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Utstedtdato | null;
+  antallBarn: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_AntallBarn;
+  barn: Array<tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn>;
+  fødselDokumetasjonStatus: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumetasjonStatus;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_AntallBarn = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  antall?: number;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  antall: number;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumetasjonStatus =
@@ -3291,51 +3291,51 @@ export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumet
   | 'IKKE_VURDERT';
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  barn?: tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
-  kanOverstyres?: boolean;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  barn: tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
+  kanOverstyres: boolean;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Termin = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  termindato?: string;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  termindato: string;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Utstedtdato = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  utstedtdato?: string;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  utstedtdato: string;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Register = {
-  barn?: Array<tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData>;
+  barn: Array<tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData>;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Søknad = {
-  barn?: Array<tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData>;
-  termindato?: string;
-  utstedtdato?: string;
-  antallBarn?: number;
+  barn: Array<tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData>;
+  termindato: string | null;
+  utstedtdato: string | null;
+  antallBarn: number;
 };
 
 export type tjenester_behandling_fødsel_dto_Kilde = 'SAKSBEHANDLER' | 'SØKNAD' | 'FOLKEREGISTER';
 
 export type tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto = {
-  behandlingUuid: string | null;
-  tittel: string | null;
-  opprettetDato: string | null;
+  behandlingUuid: string;
+  tittel: string;
+  opprettetDato: string;
 };
 
 export type tjenester_behandling_innsyn_InnsynDokumentDto = {
-  fikkInnsyn: boolean | null;
-  journalpostId: string | null;
-  dokumentId: string | null;
+  fikkInnsyn: boolean;
+  journalpostId: string;
+  dokumentId: string;
 };
 
 export type tjenester_behandling_innsyn_InnsynsbehandlingDto = {
-  innsynMottattDato: string | null;
-  innsynResultatType: foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType | null;
-  vedtaksdokumentasjon: Array<tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto> | null;
-  dokumenter: Array<tjenester_behandling_innsyn_InnsynDokumentDto> | null;
+  innsynMottattDato: string;
+  innsynResultatType: foreldrepenger_behandlingslager_behandling_innsyn_InnsynResultatType;
+  vedtaksdokumentasjon: Array<tjenester_behandling_dto_behandling_InnsynVedtaksdokumentasjonDto>;
+  dokumenter: Array<tjenester_behandling_innsyn_InnsynDokumentDto>;
 };
 
 export type foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak =
@@ -3432,49 +3432,49 @@ export type foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAkti
   | '-';
 
 export type foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto = {
-  opptjeningFom?: string;
-  opptjeningTom?: string;
-  opptjeningperiode?: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_OpptjeningPeriodeDto;
-  fastsattOpptjeningAktivitetList?: Array<foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto>;
+  opptjeningFom: string;
+  opptjeningTom: string;
+  opptjeningperiode: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_OpptjeningPeriodeDto;
+  fastsattOpptjeningAktivitetList: Array<foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto>;
 };
 
 export type foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto = {
-  fom?: string;
-  tom?: string;
-  klasse?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetKlassifisering;
+  fom: string;
+  tom: string;
+  klasse: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetKlassifisering;
 };
 
 export type foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_OpptjeningPeriodeDto = {
-  måneder?: number;
-  dager?: number;
+  måneder: number;
+  dager: number;
 };
 
 export type foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto = {
-  år?: string;
-  beløp?: number;
+  år: string;
+  beløp: number;
 };
 
 export type foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto = {
-  aktivitetType?: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
-  originalFom?: string;
-  originalTom?: string;
-  opptjeningFom?: string;
-  opptjeningTom?: string;
-  arbeidsgiverReferanse?: string;
-  arbeidsforholdRef?: string;
-  stillingsandel?: number;
-  naringRegistreringsdato?: string;
-  erManueltOpprettet?: boolean;
-  erGodkjent?: boolean;
-  erEndret?: boolean;
-  begrunnelse?: string;
-  erPeriodeEndret?: boolean;
+  aktivitetType: foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;
+  originalFom: string | null;
+  originalTom: string | null;
+  opptjeningFom: string;
+  opptjeningTom: string;
+  arbeidsgiverReferanse: string | null;
+  arbeidsforholdRef: string | null;
+  stillingsandel: number;
+  naringRegistreringsdato: string | null;
+  erManueltOpprettet: boolean | null;
+  erGodkjent: boolean | null;
+  erEndret: boolean;
+  begrunnelse: string | null;
+  erPeriodeEndret: boolean | null;
 };
 
 export type foreldrepenger_domene_opptjening_dto_OpptjeningDto = {
-  fastsattOpptjening?: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto;
-  opptjeningAktivitetList?: Array<foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto>;
-  ferdiglignetNæring?: Array<foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto>;
+  fastsattOpptjening: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto;
+  opptjeningAktivitetList: Array<foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto>;
+  ferdiglignetNæring: Array<foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto>;
 };
 
 export type tjenester_behandling_personopplysning_PersonopplysningTilbakeDto = {
@@ -3510,33 +3510,34 @@ export type foreldrepenger_behandlingslager_behandling_personopplysning_Sivilsta
   | 'UGIF';
 
 export type tjenester_behandling_personopplysning_PersonadresseDto = {
-  fom?: string;
-  tom?: string;
-  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
-  adresselinje1?: string;
-  adresselinje2?: string;
-  adresselinje3?: string;
-  postNummer?: string;
-  poststed?: string;
-  land?: string;
+  fom: string;
+  tom: string;
+  adresseType: foreldrepenger_behandlingslager_aktør_AdresseType | null;
+  adresselinje1: string | null;
+  adresselinje2: string | null;
+  adresselinje3: string | null;
+  postNummer: string | null;
+  poststed: string | null;
+  land: string | null;
 };
 
 export type tjenester_behandling_personopplysning_PersonopplysningBasisDto = {
-  fnr?: string;
-  aktoerId?: string;
-  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  fnr: string | null;
+  aktoerId: string;
+  diskresjonskode: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode | null;
+  vn: string | null;
   navn?: string;
-  kjønn?: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
-  sivilstand?: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
-  dødsdato?: string;
-  fødselsdato?: string;
-  adresser?: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+  dødsdato: string | null;
+  fødselsdato: string;
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
 };
 
 export type tjenester_behandling_personopplysning_PersonoversiktDto = {
-  bruker?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
-  annenPart?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
-  barn?: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
+  bruker: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+  annenPart: tjenester_behandling_personopplysning_PersonopplysningBasisDto | null;
+  barn: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
 };
 
 export type foreldrepenger_behandlingslager_aktør_OppholdstillatelseType = 'MIDLERTIDIG' | 'PERMANENT' | '-';
@@ -4187,7 +4188,7 @@ export type foreldrepenger_kontrakter_simulering_resultat_v1_SimuleringDto_Simul
 
 export type tjenester_behandling_tilbakekreving_TilbakekrevingValgDto = {
   grunnerTilReduksjon?: boolean;
-  videreBehandling?: foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling;
+  videreBehandling: foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling;
   varseltekst?: string;
 };
 
@@ -4372,21 +4373,21 @@ export type tjenester_behandling_uttak_dto_UttakResultatPerioderDto_FilterDto = 
 export type foreldrepenger_behandlingslager_behandling_vedtak_OppgaveType = 'VUR_KONSEKVENS' | 'VUR_DOKUMENT';
 
 export type tjenester_behandling_vedtak_dto_OppgaveDto = {
-  oppgaveId?: string;
-  oppgavetype?: foreldrepenger_behandlingslager_behandling_vedtak_OppgaveType;
-  beskrivelser?: Array<tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse>;
-  dokumenter?: Array<tjenester_behandling_vedtak_dto_OppgaveDto_Dokument>;
+  oppgaveId: string;
+  oppgavetype: foreldrepenger_behandlingslager_behandling_vedtak_OppgaveType;
+  beskrivelser: Array<tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse>;
+  dokumenter: Array<tjenester_behandling_vedtak_dto_OppgaveDto_Dokument>;
 };
 
 export type tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse = {
-  header?: string;
-  kommentarer?: Array<string>;
+  header: string | null;
+  kommentarer: Array<string>;
 };
 
 export type tjenester_behandling_vedtak_dto_OppgaveDto_Dokument = {
-  journalpostId?: string;
-  dokumentId?: string;
-  tittel?: string;
+  journalpostId: string;
+  dokumentId: string;
+  tittel: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_verge_VergeType =
@@ -4415,8 +4416,8 @@ export type foreldrepenger_domene_person_verge_dto_VergeDto = {
 };
 
 export type tjenester_behandling_ytelsefordeling_YtelseFordelingDto = {
-  overstyrtOmsorg?: boolean;
-  førsteUttaksdato?: string;
+  overstyrtOmsorg: boolean | null;
+  førsteUttaksdato: string;
   ønskerJustertVedFødsel?: boolean;
 };
 
@@ -5360,14 +5361,14 @@ export type vedtak_felles_prosesstask_rest_dto_ProsessTaskIdDto = {
 };
 
 export type foreldrepenger_mottak_vedtak_rest_InfotrygdRestanseDto = {
-  fnr: string | null;
-  valg: string | null;
-  type: string | null;
-  registrert: string | null;
-  mottatt: string | null;
-  vedtatt: string | null;
-  reellEnhet: string | null;
-  behandlendeEnhet: string | null;
+  fnr: string;
+  valg: string;
+  type: string;
+  registrert: string;
+  mottatt: string;
+  vedtatt: string;
+  reellEnhet: string;
+  behandlendeEnhet: string;
 };
 
 export type tjenester_forvaltning_fpoversikt_FpoversiktMigreringRestTjeneste_TaskInput = {
@@ -6159,71 +6160,71 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto = {
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto = {
-  saker: Array<tjenester_infotrygd_InfotrygdVedtakDto_SakDto> | null;
-  vedtakKjeder: Array<tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede> | null;
+  saker: Array<tjenester_infotrygd_InfotrygdVedtakDto_SakDto>;
+  vedtakKjeder: Array<tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede>;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_Arbeidsforhold = {
-  arbeidsgiverOrgnr: string | null;
-  inntekt: number | null;
+  arbeidsgiverOrgnr: string;
+  inntekt: number;
   inntektsperiode: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode | null;
-  refusjon: boolean | null;
-  refusjonTom: string | null;
-  identdato: string | null;
-  opprinneligIdentdato: string | null;
+  refusjon: boolean;
+  refusjonTom: string;
+  identdato: string;
+  opprinneligIdentdato: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode = {
-  kode: string | null;
-  termnavn: string | null;
+  kode: string;
+  termnavn: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_Periode = {
-  fom: string | null;
-  tom: string | null;
+  fom: string;
+  tom: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_SakDto = {
-  resultat: string | null;
-  registrert: string | null;
-  sakId: string | null;
-  type: string | null;
-  vedtatt: string | null;
-  valg: string | null;
-  undervalg: string | null;
-  nivaa: string | null;
+  resultat: string;
+  registrert: string;
+  sakId: string;
+  type: string;
+  vedtatt: string;
+  valg: string;
+  undervalg: string;
+  nivaa: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_Utbetaling = {
-  periode: tjenester_infotrygd_InfotrygdVedtakDto_Periode | null;
-  utbetalingsgrad: number | null;
-  arbeidsgiverOrgnr: string | null;
-  erRefusjon: boolean | null;
-  dagsats: number | null;
-  identdato: string | null;
-  opprinneligIdentdato: string | null;
+  periode: tjenester_infotrygd_InfotrygdVedtakDto_Periode;
+  utbetalingsgrad: number;
+  arbeidsgiverOrgnr: string;
+  erRefusjon: boolean;
+  dagsats: number;
+  identdato: string;
+  opprinneligIdentdato: string;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_Vedtak = {
   behandlingstema: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode | null;
-  identdato: string | null;
+  identdato: string;
   opphørFom: string | null;
-  opprinneligIdentdato: string | null;
-  periode: tjenester_infotrygd_InfotrygdVedtakDto_Periode | null;
-  registrert: string | null;
-  saksbehandlerId: string | null;
+  opprinneligIdentdato: string;
+  periode: tjenester_infotrygd_InfotrygdVedtakDto_Periode;
+  registrert: string;
+  saksbehandlerId: string;
   arbeidskategori: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode | null;
   arbeidsforhold: Array<tjenester_infotrygd_InfotrygdVedtakDto_Arbeidsforhold> | null;
-  dekningsgrad: number | null;
+  dekningsgrad: number;
   fødselsdatoBarn: string | null;
   gradering: number | null;
   utbetalinger: Array<tjenester_infotrygd_InfotrygdVedtakDto_Utbetaling> | null;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_VedtakKjede = {
-  opprinneligIdentdato: string | null;
-  behandlingstema: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode | null;
-  vedtak: Array<tjenester_infotrygd_InfotrygdVedtakDto_Vedtak> | null;
+  opprinneligIdentdato: string;
+  behandlingstema: tjenester_infotrygd_InfotrygdVedtakDto_InfotrygdKode;
+  vedtak: Array<tjenester_infotrygd_InfotrygdVedtakDto_Vedtak>;
 };
 
 export type vedtak_hendelser_behandling_Aksjonspunktstatus = 'AVBRUTT' | 'OPPRETTET' | 'UTFØRT';
@@ -6330,14 +6331,14 @@ export type foreldrepenger_behandlingslager_aktør_OrganisasjonsEnhet = {
 };
 
 export type foreldrepenger_tilganger_InnloggetNavAnsattDto = {
-  brukernavn?: string;
-  navn?: string;
-  kanSaksbehandle?: boolean;
-  kanVeilede?: boolean;
-  kanOverstyre?: boolean;
-  kanOppgavestyre?: boolean;
-  kanBehandleKode6?: boolean;
-  funksjonellTid?: string;
+  brukernavn: string;
+  navn: string;
+  kanSaksbehandle: boolean;
+  kanVeilede: boolean;
+  kanOverstyre: boolean;
+  kanOppgavestyre: boolean;
+  kanBehandleKode6: boolean;
+  funksjonellTid: string;
 };
 
 export type tjenester_saksbehandler_dto_InitLinksDto = {

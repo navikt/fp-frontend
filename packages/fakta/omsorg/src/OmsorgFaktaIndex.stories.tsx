@@ -12,7 +12,12 @@ import {
   VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { KjønnkodeEnum, type PersonopplysningerBasis, type Ytelsefordeling } from '@navikt/fp-types';
+import {
+  KjønnkodeEnum,
+  type Personadresse,
+  type PersonopplysningerBasis,
+  type Ytelsefordeling,
+} from '@navikt/fp-types';
 
 import { OmsorgFaktaIndex } from './OmsorgFaktaIndex';
 
@@ -24,7 +29,9 @@ const adresse1 = {
   postNummer: '4123',
   poststed: 'Bobygda',
   land: 'Norge',
-};
+  adresselinje2: null,
+  adresselinje3: null,
+} satisfies Personadresse;
 const adresse2 = {
   fom: '2019-01-01',
   tom: '2023-01-01',
@@ -33,7 +40,9 @@ const adresse2 = {
   postNummer: '0203',
   poststed: 'Bobygda',
   land: 'Norge',
-};
+  adresselinje2: null,
+  adresselinje3: null,
+} satisfies Personadresse;
 
 const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',
@@ -43,6 +52,9 @@ const defaultBruker: PersonopplysningerBasis = {
   fødselsdato: '1989-01-01',
   dødsdato: null,
   adresser: [adresse1, adresse2],
+  fnr: null,
+  diskresjonskode: null,
+  vn: null,
 };
 const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
@@ -52,6 +64,9 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   fødselsdato: '1989-01-01',
   dødsdato: null,
   adresser: [adresse1, adresse2],
+  fnr: null,
+  diskresjonskode: null,
+  vn: null,
 };
 const defaultBarn: PersonopplysningerBasis = {
   navn: 'Tutta Utvikler',
@@ -61,6 +76,9 @@ const defaultBarn: PersonopplysningerBasis = {
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: SivilstandType.UGIFT,
+  fnr: null,
+  diskresjonskode: null,
+  vn: null,
 };
 
 const ytelsefordeling = {} as Ytelsefordeling;

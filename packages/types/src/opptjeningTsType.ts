@@ -1,41 +1,18 @@
-import type { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
+import type {
+  foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto,
+  foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto,
+  foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto,
+  foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto,
+  foreldrepenger_domene_opptjening_dto_OpptjeningDto,
+} from './apiDtoGenerert.ts';
 
-export type OpptjeningAktivitet = {
-  aktivitetType: OpptjeningAktivitetType;
-  opptjeningFom: string;
-  opptjeningTom: string;
-  arbeidsgiverReferanse: string | null;
-  arbeidsforholdRef: string | null;
-  stillingsandel: number;
-  naringRegistreringsdato: string | null;
-  erGodkjent: boolean | null;
-  erEndret: boolean;
-  begrunnelse?: string | null;
-};
+export type OpptjeningAktivitet = foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto;
 
-export type FastsattOpptjeningAktivitet = {
-  fom: string;
-  tom: string;
-  klasse: string;
-};
+export type FastsattOpptjeningAktivitet =
+  foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto_FastsattOpptjeningAktivitetDto;
 
-export type FastsattOpptjening = {
-  opptjeningFom: string;
-  opptjeningTom: string;
-  opptjeningperiode: {
-    måneder: number;
-    dager: number;
-  };
-  fastsattOpptjeningAktivitetList?: FastsattOpptjeningAktivitet[];
-};
+export type FastsattOpptjening = foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto;
 
-export type FerdiglignetNæring = {
-  år: string;
-  beløp: number;
-};
+export type FerdiglignetNæring = foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto;
 
-export type Opptjening = {
-  fastsattOpptjening: FastsattOpptjening;
-  opptjeningAktivitetList?: OpptjeningAktivitet[];
-  ferdiglignetNæring?: FerdiglignetNæring[] | null;
-};
+export type Opptjening = foreldrepenger_domene_opptjening_dto_OpptjeningDto;

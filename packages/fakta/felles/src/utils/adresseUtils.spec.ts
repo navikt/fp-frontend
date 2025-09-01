@@ -1,6 +1,7 @@
 import { expect } from 'vitest';
 
 import { AdresseType } from '@navikt/fp-kodeverk';
+import type { Personadresse } from '@navikt/fp-types';
 
 import { erPersonAdresserLike, formaterAdresse, getNyesteAdresse } from './adresseUtils';
 
@@ -20,7 +21,8 @@ describe('formaterAdresse', () => {
         poststed: 'Oslo',
         postNummer: '1234',
         land: 'Norge',
-      };
+        adresseType: null,
+      } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
       expect(formatertAdresse).toBe('Adresse 1, Adresse 2, Adresse 3, 1234 Oslo');
     });
@@ -31,7 +33,11 @@ describe('formaterAdresse', () => {
         adresselinje2: 'Adresse 2',
         poststed: 'Oslo',
         postNummer: '1234',
-      };
+        adresseType: null,
+        adresselinje1: null,
+        adresselinje3: null,
+        land: null,
+      } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
       expect(formatertAdresse).toBe('Adresse 2, 1234 Oslo');
     });
@@ -42,7 +48,11 @@ describe('formaterAdresse', () => {
         adresselinje1: 'Utenlandsadresse 1',
         poststed: 'Helsinki',
         postNummer: '1234',
-      };
+        adresseType: null,
+        adresselinje2: null,
+        adresselinje3: null,
+        land: null,
+      } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
       expect(formatertAdresse).toBe('Utenlandsadresse 1, 1234 Helsinki');
     });
@@ -54,7 +64,10 @@ describe('formaterAdresse', () => {
         poststed: 'Oslo',
         land: 'Norge',
         postNummer: '1234',
-      };
+        adresseType: null,
+        adresselinje2: null,
+        adresselinje3: null,
+      } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
       expect(formatertAdresse).toBe('Adresse 1, 1234 Oslo');
     });
@@ -66,7 +79,10 @@ describe('formaterAdresse', () => {
         poststed: 'Helsinki',
         land: 'Finland',
         postNummer: '1234',
-      };
+        adresseType: null,
+        adresselinje2: null,
+        adresselinje3: null,
+      } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
       expect(formatertAdresse).toBe('Utenlandsadresse 1, 1234 Helsinki, Finland');
     });
@@ -76,7 +92,12 @@ describe('formaterAdresse', () => {
         ...defaultPeriode,
         poststed: 'Oslo',
         postNummer: '1234',
-      };
+        adresseType: null,
+        adresselinje1: null,
+        adresselinje2: null,
+        adresselinje3: null,
+        land: null,
+      } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
       expect(formatertAdresse).toBe('1234 Oslo');
     });
@@ -85,11 +106,51 @@ describe('formaterAdresse', () => {
   describe('getNyesteAdresse', () => {
     it('skal returnere nyeste postadresse', () => {
       const adresser = [
-        { fom: '2021-01-01', tom: '2022-01-31', adresseType: AdresseType.BOSTEDSADRESSE },
-        { fom: '2019-01-01', tom: '2021-01-31', adresseType: AdresseType.POSTADRESSE },
-        { fom: '2020-01-01', tom: '2022-01-31', adresseType: AdresseType.POSTADRESSE_UTLAND },
-        { fom: '2022-01-01', tom: '2022-01-31', adresseType: AdresseType.POSTADRESSE },
-      ];
+        {
+          fom: '2021-01-01',
+          tom: '2022-01-31',
+          adresseType: AdresseType.BOSTEDSADRESSE,
+          adresselinje1: null,
+          adresselinje2: null,
+          adresselinje3: null,
+          postNummer: null,
+          poststed: null,
+          land: null,
+        },
+        {
+          fom: '2019-01-01',
+          tom: '2021-01-31',
+          adresseType: AdresseType.POSTADRESSE,
+          adresselinje1: null,
+          adresselinje2: null,
+          adresselinje3: null,
+          postNummer: null,
+          poststed: null,
+          land: null,
+        },
+        {
+          fom: '2020-01-01',
+          tom: '2022-01-31',
+          adresseType: AdresseType.POSTADRESSE_UTLAND,
+          adresselinje1: null,
+          adresselinje2: null,
+          adresselinje3: null,
+          postNummer: null,
+          poststed: null,
+          land: null,
+        },
+        {
+          fom: '2022-01-01',
+          tom: '2022-01-31',
+          adresseType: AdresseType.POSTADRESSE,
+          adresselinje1: null,
+          adresselinje2: null,
+          adresselinje3: null,
+          postNummer: null,
+          poststed: null,
+          land: null,
+        },
+      ] satisfies Personadresse[];
 
       const nyesteAdresse = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);
       expect(nyesteAdresse).toEqual(adresser[3]);
@@ -106,7 +167,7 @@ describe('formaterAdresse', () => {
       postNummer: '5511',
       poststed: 'Ukjent',
       land: 'Norge',
-    };
+    } satisfies Personadresse;
 
     it('skal gi true for like adresser', () => {
       expect(erPersonAdresserLike([defaultAdresse], [defaultAdresse])).toBeTruthy();

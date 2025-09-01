@@ -3,7 +3,7 @@ import { expect } from 'vitest';
 
 import { AdresseType, PersonstatusType, Region } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
-import type { Medlemskap } from '@navikt/fp-types';
+import type { Medlemskap, Personadresse } from '@navikt/fp-types';
 
 import { formaterUtenlandsopphold, getSisteBostedsLand, getSistePersonstatus, getSisteRegion } from './situasjonUtils';
 
@@ -57,10 +57,40 @@ describe('situasjonUtils', () => {
       const medlemskap: Medlemskap = {
         ...defaultMedlemskapProps,
         adresser: [
-          { fom: '2022-06-02', tom: '2025-02-01', adresseType: AdresseType.BOSTEDSADRESSE, land: 'Norge' },
-          { fom: '2022-07-01', tom: '2025-02-01', adresseType: AdresseType.BOSTEDSADRESSE, land: 'Finland' },
-          { fom: '2022-07-01', tom: '2025-02-01', adresseType: AdresseType.POSTADRESSE, land: 'USA' },
-        ],
+          {
+            fom: '2022-06-02',
+            tom: '2025-02-01',
+            adresseType: AdresseType.BOSTEDSADRESSE,
+            land: 'Norge',
+            adresselinje1: null,
+            adresselinje2: null,
+            adresselinje3: null,
+            postNummer: null,
+            poststed: null,
+          },
+          {
+            fom: '2022-07-01',
+            tom: '2025-02-01',
+            adresseType: AdresseType.BOSTEDSADRESSE,
+            land: 'Finland',
+            adresselinje1: null,
+            adresselinje2: null,
+            adresselinje3: null,
+            postNummer: null,
+            poststed: null,
+          },
+          {
+            fom: '2022-07-01',
+            tom: '2025-02-01',
+            adresseType: AdresseType.POSTADRESSE,
+            land: 'USA',
+            adresselinje1: null,
+            adresselinje2: null,
+            adresselinje3: null,
+            postNummer: null,
+            poststed: null,
+          },
+        ] satisfies Personadresse[],
       };
       expect(getSisteBostedsLand(medlemskap, intl)).toBe('I utlandet');
     });

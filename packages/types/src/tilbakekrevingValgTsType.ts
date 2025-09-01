@@ -1,6 +1,3 @@
-export type TilbakekrevingValg = Readonly<{
-  erTilbakekrevingVilkårOppfylt: boolean;
-  grunnerTilReduksjon: boolean;
-  videreBehandling: string;
-  varseltekst: string;
-}>;
+import type { tjenester_behandling_tilbakekreving_TilbakekrevingValgDto } from './apiDtoGenerert.ts';
+
+export type TilbakekrevingValg = tjenester_behandling_tilbakekreving_TilbakekrevingValgDto;

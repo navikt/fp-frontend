@@ -15,7 +15,11 @@ import {
   DokumentMalType,
   type FagsakYtelseType,
 } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
+import type {
+  foreldrepenger_dokumentbestiller_DokumentMalType,
+  KodeverkMedNavn,
+  KodeverkMedNavnTilbakekreving,
+} from '@navikt/fp-types';
 
 import styles from './henleggBehandlingModal.module.css';
 
@@ -23,7 +27,7 @@ const maxLength1500 = maxLength(1500);
 
 export type ForhåndsvisHenleggParams = {
   behandlingUuid: string;
-  dokumentMal: string;
+  dokumentMal: foreldrepenger_dokumentbestiller_DokumentMalType;
   fritekst?: string;
 };
 

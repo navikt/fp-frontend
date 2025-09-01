@@ -59,8 +59,13 @@ const personoversikt: Personoversikt = {
         postNummer: '1000',
         poststed: 'Oslo',
         land: 'Norge',
+        adresselinje2: null,
+        adresselinje3: null,
       },
     ],
+    fnr: null,
+    diskresjonskode: null,
+    vn: null,
   },
   annenPart: {
     navn: 'Espen Utvikler',
@@ -70,6 +75,9 @@ const personoversikt: Personoversikt = {
     fødselsdato: '1989-01-01',
     dødsdato: '2021-01-01',
     adresser: [],
+    fnr: null,
+    diskresjonskode: null,
+    vn: null,
   },
   barn: [],
 };

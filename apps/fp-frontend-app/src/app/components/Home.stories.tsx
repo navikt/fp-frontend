@@ -7,7 +7,7 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 
 import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
-import type { Aktor, Person } from '@navikt/fp-types';
+import type { Aktor, NavAnsatt, Person } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -67,7 +67,8 @@ const NAV_ANSATT = {
   kanOverstyre: true,
   kanSaksbehandle: true,
   kanVeilede: true,
-};
+  funksjonellTid: '',
+} satisfies NavAnsatt;
 
 const meta = {
   title: 'app/Home',

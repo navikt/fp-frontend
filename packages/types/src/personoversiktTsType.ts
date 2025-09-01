@@ -1,19 +1,8 @@
-import type { SivilstandType } from '@navikt/fp-kodeverk';
+import type {
+  tjenester_behandling_personopplysning_PersonopplysningBasisDto,
+  tjenester_behandling_personopplysning_PersonoversiktDto,
+} from './apiDtoGenerert.ts';
 
-import type { Personadresse } from './personadresseTsType';
+export type PersonopplysningerBasis = tjenester_behandling_personopplysning_PersonopplysningBasisDto;
 
-export type PersonopplysningerBasis = Readonly<{
-  navn: string;
-  aktoerId: string;
-  kjønn: string;
-  sivilstand: SivilstandType;
-  dødsdato: string | null;
-  fødselsdato: string;
-  adresser: Personadresse[];
-}>;
-
-export type Personoversikt = Readonly<{
-  bruker: PersonopplysningerBasis;
-  annenPart?: PersonopplysningerBasis;
-  barn: PersonopplysningerBasis[];
-}>;
+export type Personoversikt = tjenester_behandling_personopplysning_PersonoversiktDto;
