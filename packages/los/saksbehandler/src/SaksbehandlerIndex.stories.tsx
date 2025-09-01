@@ -1,6 +1,4 @@
-import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
-import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
@@ -12,7 +10,6 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { LosUrl } from './data/fplosSaksbehandlerApi';
 import { SaksbehandlerIndex } from './SaksbehandlerIndex';
-import type { NyeOgFerdigstilteOppgaver } from './typer/nyeOgFerdigstilteOppgaverTsType';
 import type { Saksbehandler } from './typer/saksbehandlerTsType';
 import type { Saksliste } from './typer/sakslisteTsType';
 
