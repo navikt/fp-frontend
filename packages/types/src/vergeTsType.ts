@@ -1,17 +1,16 @@
-import type { OneOf } from './oneOf';
+import type {
+  foreldrepenger_behandlingslager_behandling_verge_VergeType,
+  foreldrepenger_domene_person_verge_dto_VergeDto,
+} from './apiDtoGenerert.ts';
 
-export type Verge = {
-  navn: string;
-  gyldigFom: string;
-  gyldigTom: string | null;
-  vergeType: VergeType;
-} & OneOf<{ fnr: string }, { organisasjonsnummer: string }>;
-
-export type OpprettVergeParams = {
-  navn: string;
-  gyldigFom: string;
+// NOTE [JOHANNES] -- siden denne ikke kommer fra backend velger jeg å endre null felter til undefined siden det er mer kompatibelt med form.
+export type Verge = Omit<
+  foreldrepenger_domene_person_verge_dto_VergeDto,
+  'gyldigTom' | 'fnr' | 'organisasjonsnummer'
+> & {
   gyldigTom?: string;
-  vergeType: VergeType;
-} & OneOf<{ fnr: string }, { organisasjonsnummer: string }>;
+  fnr?: string;
+  organisasjonsnummer?: string;
+};
 
-export type VergeType = 'BARN' | 'FBARN' | 'VOKSEN' | 'ADVOKAT' | 'ANNEN_F';
+export type VergeType = foreldrepenger_behandlingslager_behandling_verge_VergeType;
