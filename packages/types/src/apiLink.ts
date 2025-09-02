@@ -1,4 +1,4 @@
-import type { rest_ResourceLink } from './apiDtoGenerert.ts';
+import type { rest_ResourceLink } from './apiDtoGenerert';
 
 // export type ApiLink = Readonly<{
 //   href: string;

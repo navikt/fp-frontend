@@ -1,7 +1,7 @@
 import type {
   tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagAndelDto,
   tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagDto,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type FeriepengegrunnlagAndel = tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagAndelDto;
 

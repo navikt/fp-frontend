@@ -4,7 +4,7 @@ import type {
   tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto,
   tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto_AktivitetskravGrunnlagArbeid,
   tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto_Vurdering,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type DokumentasjonVurderingBehov = tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto;
 

@@ -1,3 +1,3 @@
-import type { tjenester_behandling_beregningsresultat_dto_BeregningsresultatEngangsstønadDto } from './apiDtoGenerert.ts';
+import type { tjenester_behandling_beregningsresultat_dto_BeregningsresultatEngangsstønadDto } from './apiDtoGenerert';
 
 export type BeregningsresultatEs = tjenester_behandling_beregningsresultat_dto_BeregningsresultatEngangsstønadDto;

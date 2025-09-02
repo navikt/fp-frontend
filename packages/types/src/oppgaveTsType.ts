@@ -2,7 +2,7 @@ import type {
   tjenester_behandling_vedtak_dto_OppgaveDto,
   tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse,
   tjenester_behandling_vedtak_dto_OppgaveDto_Dokument,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type Oppgave = tjenester_behandling_vedtak_dto_OppgaveDto;
 

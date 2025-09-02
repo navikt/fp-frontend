@@ -5,7 +5,7 @@ import type {
   tjenester_fagsak_dto_FagsakMarkeringDto,
   tjenester_fagsak_dto_FagsakNotatDto,
   tjenester_fagsak_dto_SakHendelseDto,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type BehandlingOppretting = tjenester_behandling_dto_BehandlingOpprettingDto;
 
