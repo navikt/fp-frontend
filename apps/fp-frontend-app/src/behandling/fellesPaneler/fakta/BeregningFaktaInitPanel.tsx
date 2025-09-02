@@ -62,7 +62,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
       {!isFetching ? (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          vilkår={lagBGVilkår(behandling.vilkår ?? undefined, beregningsgrunnlag)}
+          vilkar={lagBGVilkår(behandling.vilkår ?? undefined, beregningsgrunnlag)}
           beregningsgrunnlag={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
