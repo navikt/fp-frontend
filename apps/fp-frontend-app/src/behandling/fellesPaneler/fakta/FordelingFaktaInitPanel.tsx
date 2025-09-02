@@ -52,7 +52,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
       {!isFetching ? (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          beregningsgrunnlagVilkår={lagBGVilkår(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
+          beregningsgrunnlagVilkår={lagBGVilkår(standardPanelProps.behandling.vilkår ?? [], beregningsgrunnlag)}
           beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

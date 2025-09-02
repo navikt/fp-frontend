@@ -159,7 +159,7 @@ interface Props {
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
-  vilkår?: Vilkar[];
+  vilkår: Vilkar[];
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
