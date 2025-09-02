@@ -12,7 +12,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './dokumentasjonFaktaForm.module.css';
@@ -30,7 +30,7 @@ interface Props {
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  soknad: Soknad;
+  soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -135,10 +135,13 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgs
   !!omsorgsovertakelseDato &&
   dayjs(fodselsdatoer[id]).isSameOrBefore(dayjs(omsorgsovertakelseDato).subtract(15, 'years'));
 
-DokumentasjonFaktaForm.initialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato,
-  barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge ?? soknad.barnetsAnkomstTilNorgeDato,
-  fodselsdatoer: familiehendelse?.adopsjonFodelsedatoer ?? soknad.adopsjonFodelsedatoer,
+DokumentasjonFaktaForm.initialValues = (
+  soknad: tjenester_behandling_søknad_SoknadAdopsjonDto,
+  familiehendelse: FamilieHendelse,
+): FormValues => ({
+  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato ?? undefined,
+  barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge ?? soknad.barnetsAnkomstTilNorgeDato ?? undefined,
+  fodselsdatoer: familiehendelse?.adopsjonFodelsedatoer ?? soknad.adopsjonFodelsedatoer ?? undefined,
 });
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
@@ -149,7 +152,7 @@ DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumenter
 });
 
 const isAdopsjonFodelsedatoerEdited =
-  (soknad: Soknad, familiehendelse: FamilieHendelse) =>
+  (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, familiehendelse: FamilieHendelse) =>
   (id: string): boolean => {
     const editedStatus = diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
     // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output

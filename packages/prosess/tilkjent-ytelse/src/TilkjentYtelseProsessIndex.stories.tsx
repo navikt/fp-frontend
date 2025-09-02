@@ -95,12 +95,35 @@ const søknad = {
   omsorgsovertakelseDato: '2019-01-10',
   fodselsdatoer: {
     1: '2019-01-01',
-  } as { [key: number]: string },
+  },
   adopsjonFodelsedatoer: {
     1: '2019-01-01',
-  } as { [key: number]: string },
+  },
   termindato: '2019-02-01',
-} as Soknad;
+  begrunnelseForSenInnsending: null,
+  antallBarn: 0,
+  oppgittTilknytning: {
+    oppholdNorgeNa: false,
+    oppholdSistePeriode: false,
+    oppholdNestePeriode: false,
+    utlandsoppholdFor: [],
+    utlandsoppholdEtter: [],
+  },
+  manglendeVedlegg: [],
+  oppgittFordeling: {
+    startDatoForPermisjon: null,
+    dekningsgrader: null,
+  },
+  søknadsfrist: {
+    mottattDato: null,
+    utledetSøknadsfrist: null,
+    søknadsperiodeStart: null,
+    søknadsperiodeSlutt: null,
+    dagerOversittetFrist: null,
+  },
+  farSokerType: null,
+  utstedtdato: null,
+} satisfies Soknad;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   1: {

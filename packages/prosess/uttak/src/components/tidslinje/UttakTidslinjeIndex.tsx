@@ -45,16 +45,25 @@ const getFodselTerminDato = (søknad: Soknad, gjeldendeFamiliehendelse: FamilieH
   if (gjeldendeFamiliehendelse?.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0) {
     return gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato;
   }
-  const { fodselsdatoer, termindato, adopsjonFodelsedatoer } = søknad;
-  if (fodselsdatoer && Object.keys(fodselsdatoer).length > 0) {
-    return Object.values(fodselsdatoer)[0];
+
+  if (søknad.soknadType === SoknadType.FODSEL) {
+    const { termindato, fodselsdatoer } = søknad;
+    if (fodselsdatoer && Object.keys(fodselsdatoer).length > 0) {
+      return Object.values(fodselsdatoer)[0];
+    }
+    if (termindato) {
+      return termindato;
+    }
   }
-  if (termindato) {
-    return termindato;
+
+  if (søknad.soknadType === SoknadType.ADOPSJON) {
+    const { adopsjonFodelsedatoer } = søknad;
+
+    if (adopsjonFodelsedatoer && Object.keys(adopsjonFodelsedatoer).length > 0) {
+      return Object.values(adopsjonFodelsedatoer)[0];
+    }
   }
-  if (adopsjonFodelsedatoer && Object.keys(adopsjonFodelsedatoer).length > 0) {
-    return Object.values(adopsjonFodelsedatoer)[0];
-  }
+
   return undefined;
 };
 
@@ -88,7 +97,7 @@ const finnTidslinjeTider = (
 
   const customTimesBuilder = {
     soknad: finnSøknadsdato(søknad),
-    fodsel: fødselsdato,
+    fodsel: fødselsdato ?? undefined,
     revurdering: isRevurdering ? endringsdato : undefined,
     dodSoker: personoversikt?.bruker?.dødsdato ?? undefined,
   };
