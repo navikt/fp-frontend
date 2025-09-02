@@ -13,6 +13,8 @@ import type {
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
+  foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
+  foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak,
   PeriodeSoker,
   PeriodeSokerAktivitet,
   Uttaksresultat,
@@ -68,11 +70,11 @@ const erEøsPeriode = (
 };
 
 const hentApTekst = (
-  manuellBehandlingÅrsak: ManuellBehandlingÅrsak,
+  manuellBehandlingÅrsak: foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak,
   alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto: UttakStonadskontoer,
-  periodeTypeKode: string,
+  periodeTypeKode: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
 ): ReactElement[] => {
   const aksjonspunktTekster = [];
 
@@ -295,7 +297,7 @@ export const UttakPeriodePanel = ({
                   alleKodeverk,
                   arbeidsgiverOpplysningerPerId,
                   uttakStonadskontoer,
-                  valgtPeriode.periodeType,
+                  valgtPeriode.periodeType ?? '-',
                 )}
               </AksjonspunktHelpTextHTML>
             )}

@@ -13,6 +13,7 @@ import type {
   AarsakFilter,
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
+  foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType,
   GraderingAvslagÅrsakKodeverk,
   KodeverkMedNavn,
   PeriodeResultatÅrsakKodeverk,
@@ -178,7 +179,7 @@ const lagOptionsTilGraderingAvslagsårsakerSelect = (alleKodeverk: AlleKodeverk)
 };
 
 const hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling = (
-  utsettelseType: string,
+  utsettelseType: foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType,
   aktiviteter: PeriodeSokerAktivitet[],
   intl: IntlShape,
   erOppfylt?: boolean,
@@ -231,7 +232,7 @@ const byggDefaultValues = (
     flerbarnsdager: valgtPeriode.flerbarnsdager,
     oppholdArsak: valgtPeriode.oppholdÅrsak,
     aktiviteter: sorterteAktiviteter.map(a => ({
-      stønadskontoType: a.stønadskontoType!,
+      stønadskontoType: a.stønadskontoType ?? '-',
       weeks: finnUker(a, valgtPeriode),
       days: finnDager(a, valgtPeriode),
       utbetalingsgrad: !kontoIkkeSatt && a.utbetalingsgrad ? a.utbetalingsgrad.toString() : '0',
@@ -337,7 +338,7 @@ export const UttakPeriodeForm = ({
   const graderingAvslagsårsakOptions = lagOptionsTilGraderingAvslagsårsakerSelect(alleKodeverk);
 
   const warning1 = hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling(
-    valgtPeriode.utsettelseType,
+    valgtPeriode.utsettelseType ?? '-',
     valgtPeriode.aktiviteter,
     intl,
     erOppfylt,

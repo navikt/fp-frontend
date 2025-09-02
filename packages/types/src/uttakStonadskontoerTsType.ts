@@ -1,32 +1,14 @@
-import { StonadskontoType, UttakArbeidType } from '@navikt/fp-kodeverk';
+import type {
+  tjenester_behandling_uttak_dto_AktivitetIdentifikatorDto,
+  tjenester_behandling_uttak_dto_AktivitetSaldoDto,
+  tjenester_behandling_uttak_dto_SaldoerDto,
+  tjenester_behandling_uttak_dto_StønadskontoDto,
+} from './apiDtoGenerert.ts';
 
-export type AktivitetIdentifikator = Readonly<{
-  uttakArbeidType: UttakArbeidType;
-  arbeidsforholdId?: string;
-  arbeidsgiverReferanse: string;
-}>;
+export type AktivitetIdentifikator = tjenester_behandling_uttak_dto_AktivitetIdentifikatorDto;
 
-export type AktivitetSaldo = Readonly<{
-  aktivitetIdentifikator: AktivitetIdentifikator;
-  saldo: number;
-}>;
+export type AktivitetSaldo = tjenester_behandling_uttak_dto_AktivitetSaldoDto;
 
-export type Stonadskonto = Readonly<{
-  stonadskontotype: string;
-  maxDager: number;
-  saldo: number;
-  aktivitetSaldoDtoList: AktivitetSaldo[];
-  gyldigForbruk: boolean;
-  kontoUtvidelser?: {
-    prematurdager: number;
-    flerbarnsdager: number;
-  };
-  kontoReduksjoner?: {
-    annenForelderEøsUttak: number;
-  };
-}>;
+export type Stonadskonto = tjenester_behandling_uttak_dto_StønadskontoDto;
 
-export type UttakStonadskontoer = Readonly<{
-  stonadskontoer: Record<StonadskontoType, Stonadskonto>;
-  tapteDagerFpff: number;
-}>;
+export type UttakStonadskontoer = tjenester_behandling_uttak_dto_SaldoerDto;
