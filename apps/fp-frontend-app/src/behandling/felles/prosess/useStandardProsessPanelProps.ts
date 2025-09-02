@@ -18,12 +18,14 @@ export interface StandardProsessPanelProps {
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel: Aksjonspunkt[];
+  aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
   status: string;
   isReadOnly: boolean;
   readOnlySubmitButton: boolean;
   vilkårForPanel: Vilkar[];
   harÅpentAksjonspunkt: boolean;
+  isAksjonspunktOpen: boolean;
 }
 
 export const useStandardProsessPanelProps = (
@@ -76,6 +78,8 @@ export const useStandardProsessPanelProps = (
     fagsak,
     behandling,
     harÅpentAksjonspunkt,
+    isAksjonspunktOpen: harÅpentAksjonspunkt,
+    aksjonspunkter: aksjonspunkterForPanel,
     aksjonspunkterForPanel,
     vilkårForPanel,
     alleKodeverk,
