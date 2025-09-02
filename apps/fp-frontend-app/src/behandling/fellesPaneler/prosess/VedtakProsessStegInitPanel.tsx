@@ -168,7 +168,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
               tilbakekrevingvalg={tilbakekrevingValg}
               simuleringResultat={simuleringResultat}
               beregningsgrunnlag={beregningsgrunnlag}
-              vilkår={standardPanelProps.behandling.vilkår}
+              vilkår={standardPanelProps.behandling.vilkår ?? []}
               previewCallback={forhandsvis}
               oppgaver={oppgaver}
               ferdigstillOppgave={ferdigstillOppgave}
@@ -206,17 +206,17 @@ const harVilkarMedStatus = (vilkår: Vilkar[], status: VilkarUtfallType): boolea
 
 const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): string => {
   const { vilkår, aksjonspunkt, behandlingsresultat } = standardPanelProps.behandling;
-  if (vilkår.length === 0) {
+  if (vilkår?.length === 0) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 
   const kunLukkedeAksjonspunkt = harKunLukkedeAksjonspunkt(aksjonspunkt, standardPanelProps.aksjonspunkterForPanel);
 
-  if (kunLukkedeAksjonspunkt && harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_OPPFYLT)) {
+  if (kunLukkedeAksjonspunkt && harVilkarMedStatus(vilkår ?? [], VilkarUtfallType.IKKE_OPPFYLT)) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
-  if (harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_VURDERT) || harRelevantOgÅpentAksjonspunkt(aksjonspunkt)) {
+  if (harVilkarMedStatus(vilkår ?? [], VilkarUtfallType.IKKE_VURDERT) || harRelevantOgÅpentAksjonspunkt(aksjonspunkt)) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 

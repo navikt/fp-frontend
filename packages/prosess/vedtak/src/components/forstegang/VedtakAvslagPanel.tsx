@@ -9,7 +9,7 @@ import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
 interface Props {
-  vilkår?: Vilkar[];
+  vilkår: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
   språkkode: string;
   isReadOnly: boolean;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const VedtakAvslagPanel = ({
-  vilkår = [],
+  vilkår,
   behandlingsresultat,
   språkkode,
   isReadOnly,

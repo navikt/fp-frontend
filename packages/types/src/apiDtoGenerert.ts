@@ -655,7 +655,7 @@ export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   toTrinnsBehandling: boolean;
   behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
   behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
-  vilkår: Array<tjenester_behandling_vilkår_VilkårDto>;
+  vilkår?: Array<tjenester_behandling_vilkår_VilkårDto>;
   links: Array<rest_ResourceLink>;
   ansvarligBeslutter: string | null;
   aksjonspunkt: Array<tjenester_behandling_aksjonspunkt_AksjonspunktDto>;
