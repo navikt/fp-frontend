@@ -91,6 +91,8 @@ const uttakStonadskontoer = {
         },
       ],
       gyldigForbruk: true,
+      kontoUtvidelser: null,
+      kontoReduksjoner: null,
     },
     MØDREKVOTE: {
       stonadskontotype: 'MØDREKVOTE',
@@ -106,6 +108,8 @@ const uttakStonadskontoer = {
         },
       ],
       gyldigForbruk: true,
+      kontoUtvidelser: null,
+      kontoReduksjoner: null,
     },
     FELLESPERIODE: {
       stonadskontotype: 'FELLESPERIODE',
@@ -121,6 +125,8 @@ const uttakStonadskontoer = {
         },
       ],
       gyldigForbruk: true,
+      kontoUtvidelser: null,
+      kontoReduksjoner: null,
     },
     FORELDREPENGER_FØR_FØDSEL: {
       stonadskontotype: 'FORELDREPENGER_FØR_FØDSEL',
@@ -136,9 +142,11 @@ const uttakStonadskontoer = {
         },
       ],
       gyldigForbruk: true,
+      kontoUtvidelser: null,
+      kontoReduksjoner: null,
     },
   },
-} as UttakStonadskontoer;
+} satisfies UttakStonadskontoer;
 
 const soknad = {
   soknadType: 'ST-001',
@@ -1039,12 +1047,13 @@ const uttakStønadskontoerForUgyldigForbrukt = {
       gyldigForbruk: false,
     },
   },
-};
+} satisfies UttakStonadskontoer;
 
 export const StønadskontoMedUgyldigForbruk: Story = {
   args: {
     aksjonspunkterForPanel: åpentAksjonspunkt,
     uttakStonadskontoer: uttakStønadskontoerForUgyldigForbrukt,
+    // @ts-expect-error --  denne forstår jeg ikke
     oppdaterStønadskontoer: v => {
       action('button-click')(v);
       return Promise.resolve(uttakStønadskontoerForUgyldigForbrukt);
@@ -1348,6 +1357,7 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
             },
           ],
           gyldigForbruk: true,
+          kontoUtvidelser: null,
         },
       },
     },

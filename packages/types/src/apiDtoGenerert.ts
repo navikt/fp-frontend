@@ -4197,21 +4197,22 @@ export type foreldrepenger_behandlingslager_behandling_tilbakekreving_Varselteks
 };
 
 export type tjenester_behandling_uttak_dto_AktivitetIdentifikatorDto = {
-  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
-  arbeidsgiverReferanse?: string;
+  uttakArbeidType: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  arbeidsgiverReferanse: string;
   arbeidsforholdId?: string;
 };
 
 export type tjenester_behandling_uttak_dto_AktivitetSaldoDto = {
-  aktivitetIdentifikator?: tjenester_behandling_uttak_dto_AktivitetIdentifikatorDto;
-  saldo?: number;
+  aktivitetIdentifikator: tjenester_behandling_uttak_dto_AktivitetIdentifikatorDto;
+  saldo: number;
 };
 
 export type tjenester_behandling_uttak_dto_SaldoerDto = {
-  stonadskontoer?: {
+  // TODO: finne ut hvorfor denne ikke indekseres på type
+  stonadskontoer: {
     [key: string]: tjenester_behandling_uttak_dto_StønadskontoDto;
   };
-  tapteDagerFpff?: number;
+  tapteDagerFpff: number;
 };
 
 export type tjenester_behandling_uttak_dto_SaldoerDto_SaldoVisningStønadskontoType =
@@ -4226,22 +4227,22 @@ export type tjenester_behandling_uttak_dto_SaldoerDto_SaldoVisningStønadskontoT
   | 'MINSTERETT';
 
 export type tjenester_behandling_uttak_dto_StønadskontoDto = {
-  stonadskontotype?: tjenester_behandling_uttak_dto_SaldoerDto_SaldoVisningStønadskontoType;
-  maxDager?: number;
-  saldo?: number;
-  aktivitetSaldoDtoList?: Array<tjenester_behandling_uttak_dto_AktivitetSaldoDto>;
-  gyldigForbruk?: boolean;
-  kontoUtvidelser?: tjenester_behandling_uttak_dto_StønadskontoDto_KontoUtvidelser;
-  kontoReduksjoner?: tjenester_behandling_uttak_dto_StønadskontoDto_KontoReduksjoner;
+  stonadskontotype: tjenester_behandling_uttak_dto_SaldoerDto_SaldoVisningStønadskontoType;
+  maxDager: number;
+  saldo: number;
+  aktivitetSaldoDtoList: Array<tjenester_behandling_uttak_dto_AktivitetSaldoDto>;
+  gyldigForbruk: boolean;
+  kontoUtvidelser: tjenester_behandling_uttak_dto_StønadskontoDto_KontoUtvidelser | null;
+  kontoReduksjoner: tjenester_behandling_uttak_dto_StønadskontoDto_KontoReduksjoner | null;
 };
 
 export type tjenester_behandling_uttak_dto_StønadskontoDto_KontoReduksjoner = {
-  annenForelderEøsUttak?: number;
+  annenForelderEøsUttak: number;
 };
 
 export type tjenester_behandling_uttak_dto_StønadskontoDto_KontoUtvidelser = {
-  prematurdager?: number;
-  flerbarnsdager?: number;
+  prematurdager: number;
+  flerbarnsdager: number;
 };
 
 export type tjenester_behandling_uttak_dto_BehandlingMedUttaksperioderDto = {
@@ -4330,21 +4331,21 @@ export type tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto = {
 };
 
 export type tjenester_behandling_uttak_dto_UttakResultatPeriodeDto = {
-  fom?: string;
-  tom?: string;
-  aktiviteter?: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto>;
-  periodeResultatType?: foreldrepenger_behandlingslager_uttak_PeriodeResultatType;
+  fom: string;
+  tom: string;
+  aktiviteter: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto>;
+  periodeResultatType: foreldrepenger_behandlingslager_uttak_PeriodeResultatType;
   begrunnelse?: string;
-  periodeResultatÅrsak?: foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak;
-  manuellBehandlingÅrsak?: foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak;
-  graderingAvslagÅrsak?: foreldrepenger_behandlingslager_uttak_fp_GraderingAvslagÅrsak;
-  flerbarnsdager?: boolean;
+  periodeResultatÅrsak: foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak;
+  manuellBehandlingÅrsak: foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak;
+  graderingAvslagÅrsak: foreldrepenger_behandlingslager_uttak_fp_GraderingAvslagÅrsak;
+  flerbarnsdager: boolean;
   samtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
-  graderingInnvilget?: boolean;
+  graderingInnvilget: boolean;
   periodeType?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType;
   utsettelseType?: foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType;
-  oppholdÅrsak?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak;
   mottattDato?: string;
   tidligstMottattDato?: string;
   erUtbetalingRedusertTilMorsStillingsprosent?: boolean;
@@ -4354,20 +4355,20 @@ export type tjenester_behandling_uttak_dto_UttakResultatPeriodeDto = {
 };
 
 export type tjenester_behandling_uttak_dto_UttakResultatPerioderDto = {
-  perioderSøker?: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeDto>;
-  perioderAnnenpart?: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeDto>;
+  perioderSøker: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeDto>;
+  perioderAnnenpart: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeDto>;
   annenForelderHarRett?: boolean;
   aleneomsorg?: boolean;
   annenForelderRettEØS?: boolean;
   oppgittAnnenForelderRettEØS?: boolean;
-  årsakFilter?: tjenester_behandling_uttak_dto_UttakResultatPerioderDto_FilterDto;
-  endringsdato?: string;
+  årsakFilter: tjenester_behandling_uttak_dto_UttakResultatPerioderDto_FilterDto;
+  endringsdato: string;
 };
 
 export type tjenester_behandling_uttak_dto_UttakResultatPerioderDto_FilterDto = {
-  kreverSammenhengendeUttakTom?: string;
-  utenMinsterett?: boolean;
-  søkerErMor?: boolean;
+  kreverSammenhengendeUttakTom: string;
+  utenMinsterett: boolean;
+  søkerErMor: boolean;
 };
 
 export type foreldrepenger_behandlingslager_behandling_vedtak_OppgaveType = 'VUR_KONSEKVENS' | 'VUR_DOKUMENT';
