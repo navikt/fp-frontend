@@ -1,4 +1,4 @@
-import type { folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto } from './apiDtoGenerert.ts';
+import type { folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto } from './apiDtoGenerert';
 
 // export type BeregningsgrunnlagArbeidsforhold = Readonly<{
 //   arbeidsgiverNavn?: string;

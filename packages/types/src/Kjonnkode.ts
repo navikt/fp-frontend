@@ -1,4 +1,4 @@
-import type { foreldrepenger_behandlingslager_aktør_NavBrukerKjønn } from './apiDtoGenerert.ts';
+import type { foreldrepenger_behandlingslager_aktør_NavBrukerKjønn } from './apiDtoGenerert';
 
 export const KjønnkodeEnum = {
   KVINNE: 'K',

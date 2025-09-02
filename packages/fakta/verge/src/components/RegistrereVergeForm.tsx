@@ -12,27 +12,14 @@ import {
 import { createIntl, TIDENES_ENDE } from '@navikt/ft-utils';
 
 import type { FaktaBegrunnelseFormValues } from '@navikt/fp-fakta-felles';
-import type {
-  KodeverkMedNavn,
-  KodeverkMedNavnTilbakekreving,
-  OpprettVergeParams,
-  Verge,
-  VergeType,
-} from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving, Verge, VergeType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-export type VergeFormValues = {
-  navn: string;
-  gyldigFom: string;
-  gyldigTom?: string;
-  fnr?: string;
-  organisasjonsnummer?: string;
-  vergeType: VergeType;
-};
+export type VergeFormValues = Verge;
 
 interface Props {
   readOnly: boolean;
@@ -122,7 +109,7 @@ RegistrereVergeForm.transformValues = ({
   gyldigFom,
   gyldigTom,
   ...values
-}: VergeFormValues): OpprettVergeParams => ({
+}: VergeFormValues): Verge => ({
   vergeType,
   navn,
   gyldigFom,

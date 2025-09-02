@@ -1,7 +1,7 @@
 import type {
   tjenester_behandling_vedtak_dto_TotrinnskontrollAksjonspunkterDto,
   tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type OpptjeningAktiviteter = tjenester_behandling_vedtak_dto_TotrinnskontrollAktivitetDto;
 

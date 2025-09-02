@@ -3,7 +3,7 @@ import type {
   tjenester_behandling_dto_behandling_FagsakBehandlingDto,
   tjenester_behandling_dto_BehandlingOperasjonerDto,
   tjenester_behandling_vedtak_dto_TotrinnskontrollSkjermlenkeContextDto,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type BehandlingÅrsak = tjenester_behandling_dto_behandling_BehandlingÅrsakDto;
 

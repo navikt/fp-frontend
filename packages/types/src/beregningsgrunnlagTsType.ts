@@ -5,7 +5,7 @@ import type {
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SammenligningsgrunnlagDto,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type Næring = folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto;
 

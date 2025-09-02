@@ -4409,11 +4409,11 @@ export type foreldrepenger_domene_person_verge_dto_VergeBackendDto = {
 
 export type foreldrepenger_domene_person_verge_dto_VergeDto = {
   vergeType: foreldrepenger_behandlingslager_behandling_verge_VergeType;
-  gyldigFom?: string;
-  gyldigTom?: string;
-  navn?: string;
-  fnr?: string;
-  organisasjonsnummer?: string;
+  gyldigFom: string;
+  gyldigTom: string | null;
+  navn: string;
+  fnr: string | null;
+  organisasjonsnummer: string | null;
 };
 
 export type tjenester_behandling_ytelsefordeling_YtelseFordelingDto = {

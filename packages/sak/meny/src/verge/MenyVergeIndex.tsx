@@ -7,7 +7,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { createIntl } from '@navikt/ft-utils';
 
 import { RegistrereVergeForm, type VergeFormValues } from '@navikt/fp-fakta-verge';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, OpprettVergeParams, Verge } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 
 import messages from '../../i18n/nb_NO.json';
 
@@ -24,7 +24,7 @@ interface Props {
   lukkModal: () => void;
   type: 'OPPRETT' | 'FJERN';
   fjernVerge: () => void;
-  opprettVerge: (values: OpprettVergeParams) => void;
+  opprettVerge: (values: Verge) => void;
 }
 
 export const MenyVergeIndex = ({ verge, type, fjernVerge, opprettVerge, lukkModal, alleKodeverk }: Props) => {

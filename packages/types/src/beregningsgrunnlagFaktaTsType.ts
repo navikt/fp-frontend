@@ -12,7 +12,7 @@ import type {
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_RefusjonskravSomKommerForSentDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderBesteberegningDto,
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderMottarYtelseDto,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type FaktaOmBeregningAndel =
   folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_FaktaOmBeregningAndelDto;

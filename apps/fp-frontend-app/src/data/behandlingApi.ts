@@ -41,7 +41,6 @@ import type {
   Medlemskap,
   OmsorgOgRett,
   Oppgave,
-  OpprettVergeParams,
   Opptjening,
   PeriodeSoker,
   Personoversikt,
@@ -614,7 +613,7 @@ const getFortsettBehandling = (links: ApiLink[]) => (params: { behandlingUuid: s
     json: params,
   });
 
-const getOpprettVergeV2 = (links: ApiLink[]) => (params: OpprettVergeParams) =>
+const getOpprettVergeV2 = (links: ApiLink[]) => (params: Verge) =>
   kyExtended.post(getUrlFromRel('VERGE_OPPRETT_V2', links), {
     json: params,
   });
