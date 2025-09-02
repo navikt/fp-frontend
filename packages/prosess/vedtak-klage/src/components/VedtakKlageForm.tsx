@@ -5,8 +5,8 @@ import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   BehandlingResultatType,
+  erAksjonspunktÅpent,
   isKlageOmgjort,
   KlageAvvistÅrsak,
   KlageVurdering as klageVurderingCodes,
@@ -51,9 +51,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
   const lagreVedtak = () => {
     setIsSubmitting(true);
 
-    const behandlingAksjonspunktKodes = aksjonspunkterForPanel
-      .filter(ap => ap.status === AksjonspunktStatus.OPPRETTET)
-      .map(ap => ap.definisjon);
+    const behandlingAksjonspunktKodes = aksjonspunkterForPanel.filter(erAksjonspunktÅpent).map(ap => ap.definisjon);
     const input = behandlingAksjonspunktKodes.map(apCode => ({
       kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLA_VEDTAK, AksjonspunktKode.FORESLA_VEDTAK_MANUELT),
     }));

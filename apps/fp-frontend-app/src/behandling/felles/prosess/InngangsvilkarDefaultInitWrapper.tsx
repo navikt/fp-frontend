@@ -8,10 +8,9 @@ import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Behandling } from '@navikt/fp-types';
 
-import type { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
-import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { BehandlingDataContext } from '../context/BehandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
-import { useInngangsvilkårPanelData } from './useInngangsvilkårPanelData';
+import { type InngangsvilkarPanelData, useInngangsvilkårPanelData } from './useInngangsvilkårPanelData';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
 
 interface Props {
@@ -49,7 +48,7 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={harÅpentInngangsvilkårAksjonspunkt}
+      harÅpentAksjonspunkt={harÅpentInngangsvilkårAksjonspunkt}
       status={status}
       skalSkjulePanel={!erPanelValgt}
     >
@@ -121,7 +120,7 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: B
   if (behandling.behandlingHenlagt) {
     return false;
   }
-  if (paneler.some(p => p.harApentAksjonspunkt)) {
+  if (paneler.some(p => p.harÅpentAksjonspunkt)) {
     return true;
   }
   if (paneler.some(p => p.status === VilkarUtfallType.IKKE_OPPFYLT)) {

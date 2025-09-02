@@ -57,7 +57,7 @@ interface Props {
  * Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
 export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mottattDato, søknadsfrist }: Props) => {
-  const { aksjonspunkterForPanel, isReadOnly, submitCallback, harÅpneAksjonspunkter } =
+  const { aksjonspunkterForPanel, isReadOnly, submitCallback, harÅpentAksjonspunkt } =
     usePanelDataContext<VurderSoknadsfristAp>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, mottattDato, søknadsfrist);
@@ -84,7 +84,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
         <Heading size="small" level="2">
           <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.Soknadsfrist" />
         </Heading>
-        {harÅpneAksjonspunkter && (
+        {harÅpentAksjonspunkt && (
           <AksjonspunktHelpTextHTML>
             <FormattedMessage
               id="VurderSoknadsfristForeldrepengerForm.AksjonspunktHelpText"

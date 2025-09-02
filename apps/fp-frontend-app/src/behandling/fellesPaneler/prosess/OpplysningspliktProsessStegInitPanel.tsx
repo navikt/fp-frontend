@@ -10,10 +10,10 @@ import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vil
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_OVST,
@@ -43,7 +43,11 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
       skalPanelVisesIMeny={
         standardPanelProps.behandling.type !== BehandlingTypeEnum.REVURDERING
-          ? skalViseProsessPanel(standardPanelProps.aksjonspunkterForPanel, VILKAR_KODER, standardPanelProps.vilkar)
+          ? skalViseProsessPanel(
+              standardPanelProps.aksjonspunkterForPanel,
+              VILKAR_KODER,
+              standardPanelProps.vilkårForPanel,
+            )
           : false
       }
     >

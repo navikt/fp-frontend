@@ -4,10 +4,9 @@ import { ProcessMenu, ProcessMenuStepType } from '@navikt/ft-plattform-komponent
 
 import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 
-import type { ProsessPanelMenyData } from '../typer/prosessPanelMenyData';
-import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { BehandlingDataContext } from '../context/BehandlingDataContext';
 import { BehandlingHenlagtPanel } from './BehandlingHenlagtPanel';
-import { useProsessPanelMenyData } from './useProsessPanelMenyData';
+import { type ProsessPanelMenyData, useProsessPanelMenyData } from './useProsessPanelMenyData';
 
 import styles from './prosessMeny.module.css';
 
@@ -30,7 +29,7 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
   };
 
   const steg = prosessPanelMenyData.map(data => {
-    const type = finnProsessmenyType(data.status, data.harApentAksjonspunkt);
+    const type = finnProsessmenyType(data.status, data.harÅpentAksjonspunkt);
     return {
       label: data.tekst ?? '',
       isActive: data.erAktiv,
@@ -84,8 +83,8 @@ const ProsessMenyProvider = (props: PropsContext): JSX.Element => {
   return <ProsessMenyContext.Provider value={values}>{children}</ProsessMenyContext.Provider>;
 };
 
-const finnProsessmenyType = (status?: string, harApentAksjonspunkt?: boolean): ProcessMenuStepType => {
-  if (harApentAksjonspunkt) {
+const finnProsessmenyType = (status?: string, harÅpentAksjonspunkt?: boolean): ProcessMenuStepType => {
+  if (harÅpentAksjonspunkt) {
     return ProcessMenuStepType.warning;
   }
   if (status === VilkarUtfallType.OPPFYLT) {

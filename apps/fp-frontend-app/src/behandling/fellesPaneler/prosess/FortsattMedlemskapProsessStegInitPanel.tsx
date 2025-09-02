@@ -31,12 +31,12 @@ export const FortsattMedlemskapProsessStegInitPanel = () => {
         skalPanelVisesIMeny={skalViseProsessPanel(
           standardPanelProps.aksjonspunkterForPanel,
           VILKAR_KODER,
-          standardPanelProps.vilkar,
+          standardPanelProps.vilkårForPanel,
         )}
       >
         <OverstyringPanelDef
-          vilkar={standardPanelProps.vilkar}
-          vilkarKoder={VILKAR_KODER}
+          vilkår={standardPanelProps.vilkårForPanel}
+          vilkårKoder={VILKAR_KODER}
           panelTekstKode="Behandlingspunkt.FortsattMedlemskap"
         />
       </ProsessDefaultInitOverstyringPanel>

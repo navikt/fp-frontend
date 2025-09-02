@@ -20,14 +20,14 @@ import messages from '../../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
+  avslagsårsaker: KodeverkMedNavn<'Avslagsårsak'>[];
   readOnly: boolean;
   ytelse: string;
   erForutgående: boolean;
   erRevurdering: boolean;
 }
 
-export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForutgående, erRevurdering }: Props) => {
+export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erForutgående, erRevurdering }: Props) => {
   const { watch, control } = useFormContext<VurderMedlemskapFormValues>();
   const vurdering = watch('vurdering');
   const avslagskode = watch('avslagskode');
@@ -63,7 +63,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsarsaker, erForu
                 ? 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel.ReadOnly'
                 : 'VurderMedlemsskapAksjonspunktForm.AvslagsarsakLabel',
             })}
-            selectValues={avslagsarsaker.map(aa => (
+            selectValues={avslagsårsaker.map(aa => (
               <option key={aa.kode} value={aa.kode}>
                 {aa.navn}
               </option>

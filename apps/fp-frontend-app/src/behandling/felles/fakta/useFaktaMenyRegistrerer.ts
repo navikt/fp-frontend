@@ -7,23 +7,23 @@ const DEFAULT_PANEL_VALGT = 'default';
 export const useFaktaMenyRegistrerer = (
   id: string,
   tekst: string,
-  skalVisesImeny: boolean,
-  harApneAksjonspunkter: boolean,
+  skalVisesIMeny: boolean,
+  harÅpentAksjonspunkt: boolean,
 ) => {
   const { valgtFaktaSteg, settFaktaPanelMenyData } = use(FaktaMenyContext);
 
   const erAktiv =
-    skalVisesImeny && (valgtFaktaSteg === id || (harApneAksjonspunkter && valgtFaktaSteg === DEFAULT_PANEL_VALGT));
+    skalVisesIMeny && (valgtFaktaSteg === id || (harÅpentAksjonspunkt && valgtFaktaSteg === DEFAULT_PANEL_VALGT));
 
   useEffect(() => {
     settFaktaPanelMenyData({
       id,
       tekst,
       erAktiv,
-      harApneAksjonspunkter,
-      skalVisesImeny,
+      harÅpentAksjonspunkt,
+      skalVisesIMeny,
     });
-  }, [skalVisesImeny, erAktiv, harApneAksjonspunkter]);
+  }, [skalVisesIMeny, erAktiv, harÅpentAksjonspunkt]);
 
-  return skalVisesImeny && erAktiv;
+  return skalVisesIMeny && erAktiv;
 };

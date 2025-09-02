@@ -17,7 +17,7 @@ import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
 import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPollingOperasjoner';
 import { FagsakData } from '../fagsak/FagsakData';
 import { BehandlingPanelerIndex } from './BehandlingPanelerIndex';
-import { BehandlingDataProvider } from './felles/utils/behandlingDataContext';
+import { BehandlingDataProvider } from './felles/context/BehandlingDataContext';
 import { lazyWithRetry } from './lazyUtils';
 
 const BehandlingPapirsoknadIndex = lazyWithRetry(() => import('./papirsoknad/BehandlingPapirsoknadIndex'));

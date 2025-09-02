@@ -76,7 +76,7 @@ export const TilretteleggingFaktaForm = ({
 }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpneAksjonspunkter } =
+  const { aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
     usePanelDataContext<BekreftSvangerskapspengerAp>();
   const uttakArbeidTyper = alleKodeverk['UttakArbeidType'];
 
@@ -142,7 +142,7 @@ export const TilretteleggingFaktaForm = ({
   return (
     <RhfForm formMethods={formMethods} setDataOnUnmount={setMellomlagretFormData} onSubmit={onSubmit}>
       <VStack gap="space-32">
-        {harÅpneAksjonspunkter && (
+        {harÅpentAksjonspunkt && (
           <AksjonspunktHelpTextHTML>
             {skalVurdereVelferdspermisjoner ? (
               <FormattedMessage id="TilretteleggingFaktaForm.AksjonspunktOgVelferdspermisjoner" />

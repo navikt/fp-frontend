@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 type Props = {
   status: string;
   readOnlySubmitButton: boolean;
-  vilkar: Vilkar[];
+  vilkår: Vilkar[];
 };
 
 export const AdopsjonVilkarProsessIndex = (props: Props) => (

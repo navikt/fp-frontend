@@ -159,7 +159,7 @@ interface Props {
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
-  vilkar?: Vilkar[];
+  vilkår?: Vilkar[];
   beregningErManueltFastsatt: boolean;
   oppgaver?: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
@@ -170,7 +170,7 @@ export const VedtakForm = ({
   beregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
-  vilkar,
+  vilkår,
   beregningErManueltFastsatt,
   oppgaver,
   ferdigstillOppgave,
@@ -190,8 +190,6 @@ export const VedtakForm = ({
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const { trigger } = formMethods;
-
   const { harRedigertBrev } = useVedtakEditeringContext();
 
   const [harValgtÅRedigereVedtaksbrev, setHarValgtÅRedigereVedtaksbrev] = useState(
@@ -202,7 +200,7 @@ export const VedtakForm = ({
   const tilbakekrevingtekst = getTilbakekrevingText(simuleringResultat, tilbakekrevingvalg);
   const vedtakstatusTekst = finnVedtakstatusTekst(intl, fagsak.fagsakYtelseType, behandlingsresultat);
 
-  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(previewCallback, trigger, begrunnelse);
+  const forhåndsvisDefaultBrev = hentForhåndsvisManueltBrevCallback(previewCallback, formMethods.trigger, begrunnelse);
 
   return (
     <RhfForm
@@ -243,7 +241,7 @@ export const VedtakForm = ({
               isReadOnly={isReadOnly}
               språkkode={språkkode}
               alleKodeverk={alleKodeverk}
-              vilkar={vilkar}
+              vilkår={vilkår}
               beregningErManueltFastsatt={beregningErManueltFastsatt}
               skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
             />

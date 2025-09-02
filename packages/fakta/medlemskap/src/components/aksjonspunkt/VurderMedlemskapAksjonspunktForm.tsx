@@ -79,7 +79,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
       medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
     });
   };
-  const avslagsarsaker = alleKodeverk['Avslagsårsak'][
+  const avslagsårsaker = alleKodeverk['Avslagsårsak'][
     erForutgåendeAksjonspunkt ? VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE : VilkarType.MEDLEMSKAPSVILKARET
   ].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
 
@@ -90,7 +90,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
           <MedlemskapVurderinger
             erForutgående={erForutgåendeAksjonspunkt}
             erRevurdering={behandling.type === BehandlingTypeEnum.REVURDERING}
-            avslagsarsaker={avslagsarsaker}
+            avslagsårsaker={avslagsårsaker}
             readOnly={isReadOnly}
             ytelse={fagsak.fagsakYtelseType}
           />

@@ -10,8 +10,8 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   BehandlingTypeEnum,
+  erAksjonspunktÅpent,
   type OverstyringAksjonspunkter,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -115,9 +115,9 @@ const transformValues = (values: FormValues, overstyringApKode: OverstyringAksjo
 
 interface Props {
   medlemskapManuellBehandlingResultat?: ManuellBehandlingResultat;
-  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
+  avslagsårsaker: KodeverkMedNavn<'Avslagsårsak'>[];
   status: string;
-  panelTittelKode: string;
+  panelTekstKode: string;
   lovReferanse?: string;
 }
 
@@ -128,9 +128,9 @@ interface Props {
  * Resultatet kan overstyres av Nav-ansatt med overstyr-rettighet.
  */
 export const VilkarresultatMedOverstyringForm = ({
-  panelTittelKode,
+  panelTekstKode,
   lovReferanse,
-  avslagsarsaker,
+  avslagsårsaker,
   medlemskapManuellBehandlingResultat,
   status,
 }: Props) => {
@@ -159,17 +159,14 @@ export const VilkarresultatMedOverstyringForm = ({
     toggleOverstyring();
   };
 
-  const erVilkarOk = formMethods.watch('erVilkarOk');
+  const erVilkårOk = formMethods.watch('erVilkarOk');
 
   const aksjonspunkt = behandling.aksjonspunkt.find(ap => ap.definisjon === overstyringApKode);
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isSolvable =
-    aksjonspunkt !== undefined
-      ? !(aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && !aksjonspunkt.kanLoses)
-      : false;
+    aksjonspunkt !== undefined ? !(erAksjonspunktÅpent(aksjonspunkt) && !aksjonspunkt.kanLoses) : false;
 
-  const erOppfylt = VilkarUtfallType.OPPFYLT === status;
-  const originalErVilkarOk = VilkarUtfallType.IKKE_VURDERT !== status ? erOppfylt : undefined;
+  const originalErVilkårOk = VilkarUtfallType.IKKE_VURDERT !== status ? VilkarUtfallType.OPPFYLT === status : undefined;
 
   return (
     <RhfForm
@@ -180,34 +177,34 @@ export const VilkarresultatMedOverstyringForm = ({
       <VStack gap="space-8">
         <VStack gap="space-16">
           <HStack gap="space-8">
-            {!erOverstyrt && originalErVilkarOk !== undefined && (
+            {!erOverstyrt && originalErVilkårOk !== undefined && (
               <>
-                {originalErVilkarOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
-                {!originalErVilkarOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+                {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
+                {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
               </>
             )}
             <Heading size="small" level="3">
-              <FormattedMessage id={panelTittelKode} />
+              <FormattedMessage id={panelTekstKode} />
             </Heading>
             {lovReferanse && <Detail className={styles.vilkar}>{lovReferanse}</Detail>}
           </HStack>
           <HStack gap="space-8">
-            {originalErVilkarOk && (
+            {originalErVilkårOk && (
               <Label size="small">
                 <FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />
               </Label>
             )}
-            {originalErVilkarOk === false && (
+            {originalErVilkårOk === false && (
               <Label size="small">
                 <FormattedMessage id="VilkarresultatMedOverstyringForm.ErIkkeOppfylt" />
               </Label>
             )}
-            {originalErVilkarOk === undefined && (
+            {originalErVilkårOk === undefined && (
               <BodyShort size="small">
                 <FormattedMessage id="VilkarresultatMedOverstyringForm.IkkeBehandlet" />
               </BodyShort>
             )}
-            {originalErVilkarOk !== undefined &&
+            {originalErVilkårOk !== undefined &&
               !isHidden(kanOverstyreAccess.isEnabled, aksjonspunkt ? [aksjonspunkt] : [], overstyringApKode) && (
                 <OverstyringKnapp onClick={togglePa} erOverstyrt={erOverstyrt || overrideReadOnly} />
               )}
@@ -217,7 +214,7 @@ export const VilkarresultatMedOverstyringForm = ({
           <OverstyringPanel
             erOverstyrt={erOverstyrt}
             isSolvable={erOverstyrt || isSolvable}
-            erVilkarOk={erVilkarOk}
+            erVilkårOk={erVilkårOk}
             hasAksjonspunkt={hasAksjonspunkt}
             overrideReadOnly={overrideReadOnly}
             isSubmitting={formMethods.formState.isSubmitting}
@@ -229,7 +226,7 @@ export const VilkarresultatMedOverstyringForm = ({
           >
             {erOverstyringAvMedlemskap(overstyringApKode) ? (
               <MedlemskapVurderinger
-                avslagsarsaker={avslagsarsaker}
+                avslagsårsaker={avslagsårsaker}
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={fagsak.fagsakYtelseType}
                 erRevurdering={behandling.type === BehandlingTypeEnum.REVURDERING}
@@ -237,10 +234,10 @@ export const VilkarresultatMedOverstyringForm = ({
               />
             ) : (
               <VilkarResultPicker
-                avslagsarsaker={avslagsarsaker}
-                readOnly={overrideReadOnly || !erOverstyrt}
-                customVilkarOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
-                customVilkarIkkeOppfyltText={
+                avslagsårsaker={avslagsårsaker}
+                isReadOnly={overrideReadOnly || !erOverstyrt}
+                customVilkårOppfyltText={<FormattedMessage id="VilkarresultatMedOverstyringForm.ErOppfylt" />}
+                customVilkårIkkeOppfyltText={
                   <FormattedMessage id="VilkarresultatMedOverstyringForm.VilkarIkkeOppfylt" values={{ b: BTag }} />
                 }
               />

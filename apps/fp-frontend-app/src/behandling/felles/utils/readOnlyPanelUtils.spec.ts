@@ -13,7 +13,7 @@ describe('readOnlyUtils', () => {
     behandlingHenlagt: false,
   } as Behandling;
 
-  const vilkar: Vilkar[] = [
+  const vilkår: Vilkar[] = [
     {
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
@@ -60,7 +60,7 @@ describe('readOnlyUtils', () => {
 
   it('skal ikke være readonly', () => {
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling, vilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling, vilkår, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(false);
   });
@@ -74,14 +74,14 @@ describe('readOnlyUtils', () => {
       },
     };
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling, vilkar, nyRettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling, vilkår, nyRettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });
 
   it('skal være readonly når en har fetch error', () => {
     const hasFetchError = true;
-    const readOnly = erReadOnly(behandling, vilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling, vilkår, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });
@@ -94,20 +94,20 @@ describe('readOnlyUtils', () => {
       },
     };
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandlingMedReadOnly as Behandling, vilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandlingMedReadOnly as Behandling, vilkår, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });
 
   it('skal være readonly når en har minst ett ikke overstyrbart vilkar', () => {
-    const nyeVilkar = [
+    const nyeVilkår = [
       {
-        ...vilkar[0],
+        ...vilkår[0],
         overstyrbar: false,
       },
     ];
     const hasFetchError = false;
-    const readOnly = erReadOnly(behandling, nyeVilkar, rettigheter, hasFetchError);
+    const readOnly = erReadOnly(behandling, nyeVilkår, rettigheter, hasFetchError);
 
     expect(readOnly).toBe(true);
   });

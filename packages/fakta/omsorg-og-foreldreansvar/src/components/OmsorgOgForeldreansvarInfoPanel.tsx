@@ -82,7 +82,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
   const {
     aksjonspunkterForPanel,
     alleMerknaderFraBeslutter,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     submitCallback,
     isReadOnly,
     alleKodeverk,
@@ -113,7 +113,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
       onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]))}
     >
       <VStack gap="space-20">
-        {!isReadOnly && harÅpneAksjonspunkter && (
+        {!isReadOnly && harÅpentAksjonspunkt && (
           <AksjonspunktHelpTextHTML>
             <FormattedMessage
               id={

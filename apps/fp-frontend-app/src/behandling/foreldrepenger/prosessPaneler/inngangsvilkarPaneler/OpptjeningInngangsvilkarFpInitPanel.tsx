@@ -31,28 +31,28 @@ export const OpptjeningInngangsvilkarFpInitPanel = () => {
   return harIngenAksjonspunkt ? (
     <InngangsvilkarOverstyringDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
     >
       <OverstyringPanelDef
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
+        vilkår={standardPanelProps.vilkårForPanel}
+        vilkårKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Opptjeningsvilkaret"
       />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="OPPTJENINGSVILKARET"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
     >
       <>
         {opptjening && (
           <OpptjeningVilkarProsessIndex
-            lovReferanse={standardPanelProps.vilkar[0].lovReferanse ?? undefined}
+            lovReferanse={standardPanelProps.vilkårForPanel[0].lovReferanse ?? undefined}
             readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
             status={standardPanelProps.status}
             opptjening={opptjening}

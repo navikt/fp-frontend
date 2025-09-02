@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -24,31 +24,16 @@ type FormValues = {
 
 interface Props {
   status: string;
-  vilkar: Vilkar[];
+  vilkår: Vilkar[];
   readOnlySubmitButton: boolean;
 }
-
-const buildInitialValues = (
-  aksjonspunkter: Aksjonspunkt[],
-  status: string,
-  behandlingsresultat?: Behandling['behandlingsresultat'],
-): FormValues => ({
-  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
-  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
-});
-
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp => ({
-  ...VilkarResultPicker.transformValues(values),
-  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon, AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN),
-});
 
 /**
  * AdopsjonVilkarForm
  *
  * Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
  */
-export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Props) => {
+export const AdopsjonVilkarForm = ({ vilkår, readOnlySubmitButton, status }: Props) => {
   const intl = useIntl();
 
   const {
@@ -56,7 +41,7 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
@@ -72,11 +57,9 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.ADOPSJONSVILKARET];
+  const avslagsårsaker = alleKodeverk['Avslagsårsak'][VilkarType.ADOPSJONSVILKARET];
 
-  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
-  const { lovReferanse } = vilkar[0];
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm
@@ -86,11 +69,11 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'AdopsjonVilkarForm.Adopsjon' })}
-        isAksjonspunktOpen={harÅpneAksjonspunkter}
+        harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={isReadOnly}
-        lovReferanse={lovReferanse ?? undefined}
-        originalErVilkarOk={originalErVilkarOk}
+        isReadOnly={isReadOnly}
+        lovReferanse={vilkår[0]?.lovReferanse ?? undefined}
+        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -100,10 +83,10 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
         </Label>
         <VStack gap="space-16">
           <VilkarResultPicker
-            avslagsarsaker={avslagsarsaker}
-            readOnly={isReadOnly}
-            customVilkarOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
-            customVilkarIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
+            avslagsårsaker={avslagsårsaker}
+            isReadOnly={isReadOnly}
+            customVilkårOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.Oppfylt" />}
+            customVilkårIkkeOppfyltText={<FormattedMessage id="AdopsjonVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
           />
           <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         </VStack>
@@ -111,3 +94,18 @@ export const AdopsjonVilkarForm = ({ vilkar, readOnlySubmitButton, status }: Pro
     </RhfForm>
   );
 };
+
+const buildInitialValues = (
+  aksjonspunkter: Aksjonspunkt[],
+  status: string,
+  behandlingsresultat?: Behandling['behandlingsresultat'],
+): FormValues => ({
+  ...VilkarResultPicker.buildInitialValues(aksjonspunkter, status, behandlingsresultat),
+  ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
+});
+
+const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): VurdereYtelseSammeBarnSokerAp => ({
+  ...VilkarResultPicker.transformValues(values),
+  ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon, AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN),
+});

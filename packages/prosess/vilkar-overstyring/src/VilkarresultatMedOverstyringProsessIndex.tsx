@@ -12,8 +12,8 @@ const intl = createIntl(messages);
 
 interface Props {
   medlemskap?: Medlemskap;
-  avslagsarsaker: KodeverkMedNavn<'Avslagsårsak'>[];
-  panelTittelKode: string;
+  avslagsårsaker: KodeverkMedNavn<'Avslagsårsak'>[];
+  panelTekstKode: string;
   lovReferanse?: string;
   status: string;
 }
