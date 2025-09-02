@@ -122,7 +122,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
       {!isFetching ? (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          beregningsgrunnlagsvilkår={lagBGVilkår(standardPanelProps.vilkårForPanel, beregningsgrunnlag)}
+          beregningsgrunnlagsvilkar={lagBGVilkår(standardPanelProps.vilkårForPanel, beregningsgrunnlag)}
           beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
