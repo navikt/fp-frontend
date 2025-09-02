@@ -94,7 +94,7 @@ const meta = {
   component: VedtakProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData, withRouter],
   args: {
-    vilkar: defaultVilkar,
+    vilkår: defaultVilkar,
     previewCallback: action('button-click'),
     ferdigstillOppgave: action('button-click') as (oppgaveId: string) => Promise<void>,
   },
@@ -814,7 +814,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         },
       ],
     } as Beregningsgrunnlag,
-    vilkar: [
+    vilkår: [
       {
         lovReferanse: '§§Dette er en lovreferanse',
         vilkarType: VilkarType.SOKNADFRISTVILKARET,

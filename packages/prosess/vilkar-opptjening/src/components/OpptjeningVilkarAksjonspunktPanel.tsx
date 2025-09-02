@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -64,8 +64,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
       mellomlagretFormData ?? buildInitialValues(aksjonspunkterForPanel, status, behandling.behandlingsresultat),
   });
 
-  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
 
@@ -90,11 +89,11 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
     <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
-        isAksjonspunktOpen={harÅpentAksjonspunkt}
+        harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={isReadOnly}
+        isReadOnly={isReadOnly}
         lovReferanse={lovReferanse}
-        originalErVilkarOk={originalErVilkarOk}
+        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -111,8 +110,8 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
         </Label>
         <VStack gap="space-16">
           <VilkarResultPicker
-            readOnly={isReadOnly}
-            customVilkarOppfyltText={
+            isReadOnly={isReadOnly}
+            customVilkårOppfyltText={
               <FormattedMessage
                 id={
                   erSvpFagsak
@@ -121,7 +120,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
                 }
               />
             }
-            customVilkarIkkeOppfyltText={
+            customVilkårIkkeOppfyltText={
               <FormattedMessage
                 id={
                   erSvpFagsak

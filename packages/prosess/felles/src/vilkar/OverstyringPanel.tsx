@@ -23,7 +23,7 @@ const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) =>
 interface Props {
   erOverstyrt: boolean;
   isSolvable: boolean;
-  erVilkarOk?: boolean;
+  erVilkårOk?: boolean;
   hasAksjonspunkt: boolean;
   overrideReadOnly: boolean;
   isSubmitting: boolean;
@@ -36,7 +36,7 @@ interface Props {
 export const OverstyringPanel = ({
   erOverstyrt,
   isSolvable,
-  erVilkarOk,
+  erVilkårOk,
   hasAksjonspunkt,
   overrideReadOnly,
   isSubmitting,
@@ -70,7 +70,7 @@ export const OverstyringPanel = ({
             readOnly={overrideReadOnly || !erOverstyrt}
           />
         )}
-        {!erOverstyrt && erVilkarOk !== undefined && (
+        {!erOverstyrt && erVilkårOk !== undefined && (
           <HStack gap="space-8">
             <EditedIcon />
             <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Endret' })}</BodyShort>

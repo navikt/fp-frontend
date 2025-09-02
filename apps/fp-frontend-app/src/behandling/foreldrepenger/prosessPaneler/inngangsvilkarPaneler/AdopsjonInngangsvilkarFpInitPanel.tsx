@@ -43,7 +43,7 @@ export const AdopsjonInngangsvilkarFpInitPanel = () => {
       <AdopsjonVilkarProsessIndex
         status={standardPanelProps.status}
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-        vilkar={standardPanelProps.vilkårForPanel}
+        vilkår={standardPanelProps.vilkårForPanel}
       />
     </InngangsvilkarDefaultInitPanel>
   );

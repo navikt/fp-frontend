@@ -55,8 +55,8 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
-  const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
+  const bgVilkar = vilkår.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }
@@ -122,7 +122,7 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
       {!isFetching ? (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          beregningsgrunnlagsvilkar={lagBGVilkar(standardPanelProps.vilkårForPanel, beregningsgrunnlag)}
+          beregningsgrunnlagsvilkår={lagBGVilkår(standardPanelProps.vilkårForPanel, beregningsgrunnlag)}
           beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}

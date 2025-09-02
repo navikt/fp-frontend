@@ -191,9 +191,9 @@ export const SokersOpplysningspliktForm = ({
   });
 
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
-  const erVilkarOk = formMethods.watch('erVilkarOk');
+  const erVilkårOk = formMethods.watch('erVilkarOk');
 
-  const originalErVilkarOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm
@@ -207,11 +207,11 @@ export const SokersOpplysningspliktForm = ({
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SokersOpplysningspliktForm.SokersOpplysningsplikt' })}
-        isAksjonspunktOpen={!readOnlySubmitButton}
-        isDirty={hasAksjonspunkt ? formMethods.formState.isDirty : erVilkarOk !== initialValues.erVilkarOk}
+        harÅpentAksjonspunkt={!readOnlySubmitButton}
+        isDirty={hasAksjonspunkt ? formMethods.formState.isDirty : erVilkårOk !== initialValues.erVilkarOk}
         readOnlySubmitButton={hasSoknad ? readOnlySubmitButton : !formMethods.formState.isDirty || readOnlySubmitButton}
-        readOnly={isReadOnly}
-        originalErVilkarOk={originalErVilkarOk}
+        isReadOnly={isReadOnly}
+        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isSubmitting={formMethods.formState.isSubmitting}
       >
@@ -264,7 +264,7 @@ export const SokersOpplysningspliktForm = ({
           )}
           {isReadOnly && (
             <div>
-              {originalErVilkarOk === false && behandling.behandlingsresultat?.avslagsarsak && (
+              {originalErVilkårOk === false && behandling.behandlingsresultat?.avslagsarsak && (
                 <BodyShort size="small">
                   {alleKodeverk['Avslagsårsak'][VilkarType.SOKERSOPPLYSNINGSPLIKT].find(
                     type => type.kode === behandling.behandlingsresultat?.avslagsarsak,

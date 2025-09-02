@@ -168,7 +168,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
               tilbakekrevingvalg={tilbakekrevingValg}
               simuleringResultat={simuleringResultat}
               beregningsgrunnlag={beregningsgrunnlag}
-              vilkar={standardPanelProps.behandling.vilkår}
+              vilkår={standardPanelProps.behandling.vilkår}
               previewCallback={forhandsvis}
               oppgaver={oppgaver}
               ferdigstillOppgave={ferdigstillOppgave}

@@ -52,7 +52,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
       {!isFetching ? (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          beregningsgrunnlagVilkår={lagBGVilkar(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
+          beregningsgrunnlagVilkår={lagBGVilkår(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
           beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -106,26 +106,26 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagBGVilkar = (vilkar: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
-  if (!vilkar) {
+const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
+  if (!vilkår) {
     return null;
   }
-  const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
-  if (!bgVilkar || !beregningsgrunnlag) {
+  const bgVilkår = vilkår.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  if (!bgVilkår || !beregningsgrunnlag) {
     return null;
   }
   return {
-    ...bgVilkar,
+    ...bgVilkår,
     perioder: [
       {
-        avslagKode: bgVilkar.avslagKode ?? undefined,
+        avslagKode: bgVilkår.avslagKode ?? undefined,
         vurderesIBehandlingen: true,
         merknadParametere: {},
         periode: {
           fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
           tom: TIDENES_ENDE,
         },
-        vilkarStatus: bgVilkar.vilkarStatus,
+        vilkarStatus: bgVilkår.vilkarStatus,
       },
     ],
   };

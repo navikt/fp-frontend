@@ -48,7 +48,7 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
   return (
     <ProsessPanelWrapper
       erPanelValgt={erPanelValgt}
-      erAksjonspunktOpent={harÅpentInngangsvilkårAksjonspunkt}
+      harÅpentAksjonspunkt={harÅpentInngangsvilkårAksjonspunkt}
       status={status}
       skalSkjulePanel={!erPanelValgt}
     >

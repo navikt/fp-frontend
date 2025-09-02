@@ -81,8 +81,8 @@ export const KlageresultatProsessStegInitPanel = () => {
 };
 
 const getVedtakStatus = (behandlingsresultat?: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[] = []) => {
-  const harÅpentAksjonpunkt = aksjonspunkter.some(erAksjonspunktÅpent);
-  if (aksjonspunkter.length === 0 || harÅpentAksjonpunkt) {
+  const harÅpentAksjonspunkt = aksjonspunkter.some(erAksjonspunktÅpent);
+  if (aksjonspunkter.length === 0 || harÅpentAksjonspunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 

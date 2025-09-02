@@ -20,17 +20,13 @@ interface Props {
 }
 
 export const ProsessDefaultInitPanel = (props: Props) => {
-  const { standardPanelProps } = props;
-  const harÅpentAksjonspunkt = standardPanelProps.harÅpentAksjonspunkt;
-
-  return <ProsessPanel {...props} harÅpentAksjonspunkt={harÅpentAksjonspunkt} />;
+  return <ProsessPanel {...props} harÅpentAksjonspunkt={props.standardPanelProps.harÅpentAksjonspunkt} />;
 };
 
 export const ProsessDefaultInitOverstyringPanel = (props: Props) => {
   const { erOverstyrt } = usePanelOverstyring();
 
-  const { standardPanelProps } = props;
-  const harÅpentAksjonspunkt = erOverstyrt || standardPanelProps.harÅpentAksjonspunkt;
+  const harÅpentAksjonspunkt = erOverstyrt || props.standardPanelProps.harÅpentAksjonspunkt;
 
   return <ProsessPanel {...props} harÅpentAksjonspunkt={harÅpentAksjonspunkt} />;
 };
@@ -70,7 +66,7 @@ const ProsessPanel = ({
     <MellomlagretFormDataProvider behandling={behandling}>
       <ProsessPanelWrapper
         erPanelValgt={erPanelValgt}
-        erAksjonspunktOpent={standardPanelProps.harÅpentAksjonspunkt}
+        harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
         status={status}
       >
         {skalVisePanel ? (

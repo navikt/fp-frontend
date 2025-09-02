@@ -34,7 +34,7 @@ export const BehandlingHenlagtPanel = ({ valgtProsessSteg, settProsessPanelMenyD
   }, [valgtProsessSteg]);
 
   return (
-    <ProsessPanelWrapper erPanelValgt={erPanelValgt} erAksjonspunktOpent={false} status={VilkarUtfallType.OPPFYLT}>
+    <ProsessPanelWrapper erPanelValgt={erPanelValgt} harÅpentAksjonspunkt={false} status={VilkarUtfallType.OPPFYLT}>
       <BodyShort size="small">
         <FormattedMessage id="BehandlingHenlagtPanel.Henlagt" />
       </BodyShort>

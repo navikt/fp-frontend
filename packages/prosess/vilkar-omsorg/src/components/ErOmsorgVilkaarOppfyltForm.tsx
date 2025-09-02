@@ -58,9 +58,9 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.OMSORGSVILKARET];
+  const avslagsårsaker = alleKodeverk['Avslagsårsak'][VilkarType.OMSORGSVILKARET];
 
-  const originalErVilkarOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm
@@ -70,10 +70,10 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Omsorg' })}
-        isAksjonspunktOpen={!readOnlySubmitButton}
+        harÅpentAksjonspunkt={!readOnlySubmitButton}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={isReadOnly}
-        originalErVilkarOk={originalErVilkarOk}
+        isReadOnly={isReadOnly}
+        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -83,10 +83,10 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
             <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.VilkaretOppfylt" />
           </Label>
           <VilkarResultPicker
-            avslagsarsaker={avslagsarsaker}
-            readOnly={isReadOnly}
-            customVilkarOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
-            customVilkarIkkeOppfyltText={
+            avslagsårsaker={avslagsårsaker}
+            isReadOnly={isReadOnly}
+            customVilkårOppfyltText={<FormattedMessage id="ErOmsorgVilkaarOppfyltForm.Oppfylt" />}
+            customVilkårIkkeOppfyltText={
               <FormattedMessage id="ErOmsorgVilkaarOppfyltForm.IkkeOppfylt" values={{ b: BTag }} />
             }
           />

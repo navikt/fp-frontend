@@ -48,7 +48,7 @@ export const FodselInngangsvilkarFpInitPanel = () => {
         ytelseTypeKode="FP"
         status={standardPanelProps.status}
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-        vilkar={standardPanelProps.vilkårForPanel}
+        vilkår={standardPanelProps.vilkårForPanel}
       />
     </InngangsvilkarDefaultInitPanel>
   );

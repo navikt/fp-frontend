@@ -7,14 +7,14 @@ import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 // TODO Spesifikk ES-kodar bør ikkje ligga her
-const avslagsarsakerES = ['1002', '1003', '1032'];
-const filtrerAvslagsarsaker = (
-  avslagsarsaker: { [key: string]: KodeverkMedNavn<'Avslagsårsak'>[] },
+const avslagsårsakerES = ['1002', '1003', '1032'];
+const filtrerAvslagsårsaker = (
+  avslagsårsaker: { [key: string]: KodeverkMedNavn<'Avslagsårsak'>[] },
   vilkarTypeKode: string,
 ): KodeverkMedNavn<'Avslagsårsak'>[] =>
   vilkarTypeKode === VilkarType.FODSELSVILKARET_MOR
-    ? avslagsarsaker[vilkarTypeKode].filter(arsak => !avslagsarsakerES.includes(arsak.kode))
-    : avslagsarsaker[vilkarTypeKode];
+    ? avslagsårsaker[vilkarTypeKode].filter(årsak => !avslagsårsakerES.includes(årsak.kode))
+    : avslagsårsaker[vilkarTypeKode];
 
 interface Props {
   vilkår: Vilkar[];
@@ -30,7 +30,7 @@ export const OverstyringPanelDef = ({ vilkår, vilkårKoder, panelTekstKode, med
 
   const skalVises = skalViseProsessPanel(standardProps.aksjonspunkterForPanel, vilkårKoder, vilkår);
 
-  const avslagsarsaker = filtrerAvslagsarsaker(standardProps.alleKodeverk['Avslagsårsak'], vilkår[0].vilkarType);
+  const avslagsårsaker = filtrerAvslagsårsaker(standardProps.alleKodeverk['Avslagsårsak'], vilkår[0].vilkarType);
 
   if (!skalVises) {
     return null;
@@ -39,9 +39,9 @@ export const OverstyringPanelDef = ({ vilkår, vilkårKoder, panelTekstKode, med
   return (
     <VilkarresultatMedOverstyringProsessIndex
       medlemskap={medlemskap}
-      avslagsarsaker={avslagsarsaker}
-      panelTittelKode={panelTekstKode}
-      lovReferanse={vilkar[0]?.lovReferanse ?? undefined}
+      avslagsårsaker={avslagsårsaker}
+      panelTekstKode={panelTekstKode}
+      lovReferanse={vilkår[0]?.lovReferanse ?? undefined}
       status={standardProps.status}
     />
   );
