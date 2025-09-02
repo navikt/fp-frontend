@@ -16,12 +16,12 @@ const intl = createIntl(messages);
 interface Props {
   title: string;
   lovReferanse?: string;
-  isAksjonspunktOpen: boolean;
+  harÅpentAksjonspunkt: boolean;
   readOnlySubmitButton: boolean;
-  originalErVilkarOk?: boolean;
+  originalErVilkårOk?: boolean;
   erIkkeGodkjentAvBeslutter: boolean;
   rendreFakta?: () => ReactNode;
-  readOnly: boolean;
+  isReadOnly: boolean;
   isDirty?: boolean;
   isSubmitting: boolean;
   children: ReactNode | ReactNode[];
@@ -30,10 +30,10 @@ interface Props {
 export const ProsessPanelTemplate = ({
   lovReferanse,
   title,
-  originalErVilkarOk,
-  isAksjonspunktOpen,
+  originalErVilkårOk,
+  harÅpentAksjonspunkt,
   readOnlySubmitButton,
-  readOnly,
+  isReadOnly,
   rendreFakta,
   isDirty,
   erIkkeGodkjentAvBeslutter,
@@ -42,10 +42,10 @@ export const ProsessPanelTemplate = ({
 }: Props) => (
   <VStack gap="space-16">
     <HStack gap="space-8">
-      {originalErVilkarOk !== undefined && (
+      {originalErVilkårOk !== undefined && (
         <>
-          {originalErVilkarOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
-          {!originalErVilkarOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+          {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
+          {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
         </>
       )}
       <Heading size="small" level="3">
@@ -54,23 +54,23 @@ export const ProsessPanelTemplate = ({
       {lovReferanse && <Detail className={styles.vilkar}>{lovReferanse}</Detail>}
     </HStack>
     <HStack gap="space-8">
-      {originalErVilkarOk && <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Label>}
-      {originalErVilkarOk === false && (
+      {originalErVilkårOk && <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Label>}
+      {originalErVilkårOk === false && (
         <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErIkkeOppfylt' })}</Label>
       )}
-      {!isAksjonspunktOpen && originalErVilkarOk === undefined && (
+      {!harÅpentAksjonspunkt && originalErVilkårOk === undefined && (
         <BodyShort size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.IkkeBehandlet' })}</BodyShort>
       )}
     </HStack>
     <AksjonspunktBox
       className={styles.aksjonspunktMargin}
-      erAksjonspunktApent={isAksjonspunktOpen}
+      erAksjonspunktApent={harÅpentAksjonspunkt}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >
       <VStack gap="space-16">
         <div>{children}</div>
         <ProsessStegSubmitButton
-          isReadOnly={readOnly}
+          isReadOnly={isReadOnly}
           isSubmittable={!readOnlySubmitButton}
           isDirty={isDirty}
           isSubmitting={isSubmitting}

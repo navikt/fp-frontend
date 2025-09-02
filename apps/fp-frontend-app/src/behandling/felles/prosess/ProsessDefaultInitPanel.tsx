@@ -4,10 +4,10 @@ import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { MellomlagretFormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
-import type { StandardProsessPanelProps } from '../typer/standardProsessPanelPropsTsType';
-import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { BehandlingDataContext } from '../context/BehandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import { useProsessMenyRegistrerer } from './useProsessMenyRegistrerer';
+import type { StandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 interface Props {
   skalPanelVisesIMeny: boolean;
@@ -20,23 +20,19 @@ interface Props {
 }
 
 export const ProsessDefaultInitPanel = (props: Props) => {
-  const { standardPanelProps } = props;
-  const harApentAksjonspunkt = standardPanelProps.harÅpneAksjonspunkter;
-
-  return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
+  return <ProsessPanel {...props} harÅpentAksjonspunkt={props.standardPanelProps.harÅpentAksjonspunkt} />;
 };
 
 export const ProsessDefaultInitOverstyringPanel = (props: Props) => {
   const { erOverstyrt } = usePanelOverstyring();
 
-  const { standardPanelProps } = props;
-  const harApentAksjonspunkt = erOverstyrt || standardPanelProps.harÅpneAksjonspunkter;
+  const harÅpentAksjonspunkt = erOverstyrt || props.standardPanelProps.harÅpentAksjonspunkt;
 
-  return <ProsessPanel {...props} harApentAksjonspunkt={harApentAksjonspunkt} />;
+  return <ProsessPanel {...props} harÅpentAksjonspunkt={harÅpentAksjonspunkt} />;
 };
 
 interface ProsessPanel {
-  harApentAksjonspunkt: boolean;
+  harÅpentAksjonspunkt: boolean;
 }
 
 const ProsessPanel = ({
@@ -46,7 +42,7 @@ const ProsessPanel = ({
   prosessPanelKode,
   prosessPanelMenyTekst,
   standardPanelProps,
-  harApentAksjonspunkt,
+  harÅpentAksjonspunkt,
   children,
 }: Props & ProsessPanel) => {
   const { behandling, fagsak, alleKodeverk } = use(BehandlingDataContext);
@@ -59,18 +55,18 @@ const ProsessPanel = ({
     prosessPanelKode,
     prosessPanelMenyTekst,
     skalPanelVisesIMeny,
-    harApentAksjonspunkt,
+    harÅpentAksjonspunkt,
     status,
-    markertSomAktiv || harApentAksjonspunkt,
+    markertSomAktiv || harÅpentAksjonspunkt,
   );
 
-  const skalVisePanel = erPanelValgt && (harApentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
+  const skalVisePanel = erPanelValgt && (harÅpentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
 
   return (
     <MellomlagretFormDataProvider behandling={behandling}>
       <ProsessPanelWrapper
         erPanelValgt={erPanelValgt}
-        erAksjonspunktOpent={standardPanelProps.harÅpneAksjonspunkter}
+        harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
         status={status}
       >
         {skalVisePanel ? (
@@ -78,7 +74,7 @@ const ProsessPanel = ({
             behandling={behandling}
             fagsak={fagsak}
             aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
-            harÅpneAksjonspunkter={standardPanelProps.harÅpneAksjonspunkter}
+            harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
             alleKodeverk={alleKodeverk}
             submitCallback={standardPanelProps.submitCallback}
             isReadOnly={standardPanelProps.isReadOnly}

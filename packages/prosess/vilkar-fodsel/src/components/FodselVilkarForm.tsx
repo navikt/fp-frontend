@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -16,7 +16,7 @@ import type { Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar } from '@navikt/
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-const avslagsarsakerES = ['1002', '1003', '1032'];
+const avslagsårsakerES = ['1002', '1003', '1032'];
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -26,7 +26,7 @@ type FormValues = {
 
 interface Props {
   status: string;
-  vilkar: Vilkar[];
+  vilkår: Vilkar[];
   ytelseTypeKode: string;
   readOnlySubmitButton: boolean;
 }
@@ -36,7 +36,7 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
-export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode, vilkar }: Props) => {
+export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode, vilkår }: Props) => {
   const intl = useIntl();
 
   const {
@@ -44,7 +44,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
@@ -60,12 +60,12 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const alleAvslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.FODSELSVILKARET_MOR];
-  const avslagsarsaker = getFodselVilkarAvslagsarsaker(ytelseTypeKode === 'FP', alleAvslagsarsaker);
+  const avslagsårsaker = getFodselVilkarAvslagsårsaker(
+    ytelseTypeKode === 'FP',
+    alleKodeverk['Avslagsårsak'][VilkarType.FODSELSVILKARET_MOR],
+  );
 
-  const isOpenAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const originalErVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
-  const { lovReferanse } = vilkar[0];
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm
@@ -75,11 +75,11 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'FodselVilkarForm.Fodsel' })}
-        isAksjonspunktOpen={harÅpneAksjonspunkter}
+        harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={isReadOnly}
-        lovReferanse={lovReferanse ?? undefined}
-        originalErVilkarOk={originalErVilkarOk}
+        isReadOnly={isReadOnly}
+        lovReferanse={vilkår[0]?.lovReferanse ?? undefined}
+        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -89,10 +89,10 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
             <FormattedMessage id="FodselVilkarForm.TidligereUtbetaltStonad" />
           </Label>
           <VilkarResultPicker
-            avslagsarsaker={avslagsarsaker}
-            readOnly={isReadOnly}
-            customVilkarOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
-            customVilkarIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
+            avslagsårsaker={avslagsårsaker}
+            isReadOnly={isReadOnly}
+            customVilkårOppfyltText={<FormattedMessage id="FodselVilkarForm.Oppfylt" />}
+            customVilkårIkkeOppfyltText={<FormattedMessage id="FodselVilkarForm.IkkeOppfylt" values={{ b: BTag }} />}
           />
           <ProsessStegBegrunnelseTextFieldNew useAllWidth readOnly={isReadOnly} />
         </VStack>
@@ -116,10 +116,10 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Vu
   kode: validerApKodeOgHentApEnum(aksjonspunkter[0].definisjon, AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN),
 });
 
-const getFodselVilkarAvslagsarsaker = (
+const getFodselVilkarAvslagsårsaker = (
   isFpFagsak: boolean,
-  fodselsvilkarAvslagskoder: KodeverkMedNavn<'Avslagsårsak'>[],
+  fødselsvilkårAvslagskoder: KodeverkMedNavn<'Avslagsårsak'>[],
 ): KodeverkMedNavn<'Avslagsårsak'>[] =>
   isFpFagsak
-    ? fodselsvilkarAvslagskoder.filter(arsak => !avslagsarsakerES.includes(arsak.kode))
-    : fodselsvilkarAvslagskoder;
+    ? fødselsvilkårAvslagskoder.filter(arsak => !avslagsårsakerES.includes(arsak.kode))
+    : fødselsvilkårAvslagskoder;

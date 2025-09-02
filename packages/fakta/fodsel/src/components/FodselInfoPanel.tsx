@@ -28,14 +28,14 @@ interface Props {
  * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
 export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokument }: Props) => {
-  const { aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
+  const { aksjonspunkterForPanel, harÅpentAksjonspunkt } = usePanelDataContext();
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_TERMINBEKREFTELSE);
   const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FØDSEL);
 
   return (
     <VStack gap="space-16">
-      {harÅpneAksjonspunkter && (
+      {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           {terminbekreftelseAp && <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />}
           {manglendeFødselAp && <FormattedMessage id="FodselInfoPanel.SjekkManglendeFødsel" />}

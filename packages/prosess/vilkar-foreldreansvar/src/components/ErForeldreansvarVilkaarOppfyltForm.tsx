@@ -53,7 +53,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<AksjonspunktData>();
@@ -72,9 +72,9 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
   const vilkarTypeKode = isForeldreansvar2Ledd
     ? VilkarType.FORELDREANSVARSVILKARET_2_LEDD
     : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
-  const avslagsarsaker = alleKodeverk['Avslagsårsak'][vilkarTypeKode];
+  const avslagsårsaker = alleKodeverk['Avslagsårsak'][vilkarTypeKode];
 
-  const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm
@@ -84,10 +84,10 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'ErForeldreansvarVilkaarOppfyltForm.Foreldreansvar' })}
-        isAksjonspunktOpen={!readOnlySubmitButton}
+        harÅpentAksjonspunkt={!readOnlySubmitButton}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={isReadOnly}
-        originalErVilkarOk={originalErVilkarOk}
+        isReadOnly={isReadOnly}
+        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -97,12 +97,12 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
             <FormattedMessage id="ErForeldreansvarVilkaarOppfyltForm.RettTilStonad" />
           </Label>
           <VilkarResultPicker
-            avslagsarsaker={avslagsarsaker}
-            readOnly={isReadOnly}
-            customVilkarOppfyltText={
+            avslagsårsaker={avslagsårsaker}
+            isReadOnly={isReadOnly}
+            customVilkårOppfyltText={
               <FormattedMessage id={isEngangsstonad ? 'FodselVilkarForm.OppfyltEs' : 'FodselVilkarForm.OppfyltFp'} />
             }
-            customVilkarIkkeOppfyltText={
+            customVilkårIkkeOppfyltText={
               <FormattedMessage
                 id={isEngangsstonad ? 'FodselVilkarForm.IkkeOppfyltEs' : 'FodselVilkarForm.IkkeOppfyltFp'}
                 values={{ b: BTag }}

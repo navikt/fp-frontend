@@ -24,7 +24,7 @@ const PanelContainer = ({ skalSkjulePanel = false, children }: PanelContainerOwn
 
 interface Props {
   erPanelValgt: boolean;
-  erAksjonspunktOpent: boolean;
+  harÅpentAksjonspunkt: boolean;
   status: string;
   skalSkjulePanel?: boolean;
   children: ReactElement | ReactElement[] | null;
@@ -32,7 +32,7 @@ interface Props {
 
 export const ProsessPanelWrapper = ({
   erPanelValgt,
-  erAksjonspunktOpent,
+  harÅpentAksjonspunkt,
   status,
   skalSkjulePanel = false,
   children,
@@ -41,7 +41,7 @@ export const ProsessPanelWrapper = ({
     return null;
   }
 
-  if (erPanelValgt && status === VilkarUtfallType.IKKE_VURDERT && !erAksjonspunktOpent) {
+  if (erPanelValgt && status === VilkarUtfallType.IKKE_VURDERT && !harÅpentAksjonspunkt) {
     return (
       <PanelContainer>
         <BodyShort size="small">

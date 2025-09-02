@@ -11,7 +11,7 @@ import {
 } from '@navikt/fp-papirsoknad';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
-import { BehandlingDataContext } from '../felles/utils/behandlingDataContext';
+import { BehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
 /**
  * BehandlingPapirsoknadIndex

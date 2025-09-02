@@ -6,16 +6,16 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingResultatType, erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakKlageForhandsvisData, VedtakKlageProsessIndex } from '@navikt/fp-prosess-vedtak-klage';
 import type { Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.FORESLA_VEDTAK,
@@ -81,8 +81,8 @@ export const KlageresultatProsessStegInitPanel = () => {
 };
 
 const getVedtakStatus = (behandlingsresultat?: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[] = []) => {
-  const harApentAksjonpunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  if (aksjonspunkter.length === 0 || harApentAksjonpunkt) {
+  const harÅpentAksjonspunkt = aksjonspunkter.some(erAksjonspunktÅpent);
+  if (aksjonspunkter.length === 0 || harÅpentAksjonspunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
 

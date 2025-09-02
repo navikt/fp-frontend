@@ -5,9 +5,8 @@ import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { HStack } from '@navikt/ds-react';
 import { SideMenu } from '@navikt/ft-plattform-komponenter';
 
-import type { FaktaPanelMenyData } from '../typer/faktaPanelMenyData';
-import { BehandlingDataContext } from '../utils/behandlingDataContext';
-import { type FaktaPanelMedÅpentApInfo, useFaktaPanelMenyData } from './useFaktaPanelMenyData';
+import { BehandlingDataContext } from '../context/BehandlingDataContext';
+import { type FaktaPanelMedÅpentApInfo, type FaktaPanelMenyData, useFaktaPanelMenyData } from './useFaktaPanelMenyData';
 
 import styles from './faktaMeny.module.css';
 
@@ -37,7 +36,7 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setFaktaPanelMedÅ
             links={faktaPanelMenyData.map(data => ({
               label: data.tekst,
               active: data.erAktiv,
-              icon: data.harApneAksjonspunkter ? (
+              icon: data.harÅpentAksjonspunkt ? (
                 <ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" />
               ) : undefined,
             }))}

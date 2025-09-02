@@ -213,7 +213,7 @@ interface Props {
   beregningsresultat?: BeregningsresultatDagytelse | BeregningsresultatEs;
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
-  vilkar: Vilkar[];
+  vilkår: Vilkar[];
   beregningErManueltFastsatt: boolean;
   beregningsresultatOriginalBehandling?: BeregningsresultatDagytelse | BeregningsresultatEs;
   oppgaver?: Oppgave[];
@@ -225,7 +225,7 @@ export const VedtakRevurderingForm = ({
   beregningsresultat,
   tilbakekrevingvalg,
   simuleringResultat,
-  vilkar,
+  vilkår,
   beregningErManueltFastsatt,
   beregningsresultatOriginalBehandling,
   oppgaver,
@@ -327,10 +327,10 @@ export const VedtakRevurderingForm = ({
           if (erAvslatt) {
             return (
               <VedtakAvslagArsakOgBegrunnelsePanel
-                vilkar={vilkar}
+                vilkår={vilkår}
                 behandlingsresultat={behandlingsresultat}
                 språkkode={språkkode}
-                erReadOnly={isReadOnly}
+                isReadOnly={isReadOnly}
                 alleKodeverk={alleKodeverk}
                 skalBrukeOverstyrendeFritekstBrev={skalBrukeOverstyrendeFritekstBrev}
               />

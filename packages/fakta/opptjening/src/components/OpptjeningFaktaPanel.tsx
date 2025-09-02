@@ -89,7 +89,7 @@ export const OpptjeningFaktaPanel = ({
   const {
     aksjonspunkterForPanel,
     alleMerknaderFraBeslutter,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     submitCallback,
     isReadOnly,
     alleKodeverk,
@@ -189,7 +189,7 @@ export const OpptjeningFaktaPanel = ({
 
   return (
     <VStack gap="space-24" className={styles.container}>
-      {harÅpneAksjonspunkter && (
+      {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}
         </AksjonspunktHelpTextHTML>

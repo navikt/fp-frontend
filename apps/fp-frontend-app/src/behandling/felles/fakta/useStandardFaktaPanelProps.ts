@@ -1,17 +1,69 @@
 import { use } from 'react';
 
-import { isAksjonspunktOpen } from '@navikt/fp-kodeverk';
-import type { Behandling, Fagsak } from '@navikt/fp-types';
+import { erAksjonspunktÅpent } from '@navikt/fp-kodeverk';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
-import type { StandardFaktaPanelProps } from '../typer/standardFaktaPanelPropsTsType';
-import { BehandlingDataContext } from '../utils/behandlingDataContext';
+import { BehandlingDataContext } from '../context/BehandlingDataContext';
 import { getAlleMerknaderFraBeslutter } from '../utils/getAlleMerknaderFraBeslutter';
 import { erReadOnly } from '../utils/readOnlyPanelUtils';
 
 const DEFAULT_FAKTA_KODE = 'default';
 const DEFAULT_PROSESS_STEG_KODE = 'default';
+
+export type StandardFaktaPanelProps = Readonly<{
+  behandling: Behandling;
+  alleKodeverk: AlleKodeverk;
+  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
+  aksjonspunkterForPanel: Aksjonspunkt[];
+  isReadOnly: boolean;
+  submittable: boolean;
+  harÅpentAksjonspunkt: boolean;
+  submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
+}>;
+
+export const useStandardFaktaPanelProps = (
+  aksjonspunktKoder: Aksjonspunkt['definisjon'][] = [],
+  overstyringKoder: Aksjonspunkt['definisjon'][] = [],
+): StandardFaktaPanelProps => {
+  const {
+    behandling,
+    rettigheter,
+    fagsak,
+    lagreAksjonspunkter,
+    lagreOverstyrteAksjonspunkter,
+    oppdaterProsessStegOgFaktaPanelIUrl,
+    alleKodeverk,
+  } = use(BehandlingDataContext);
+
+  const { aksjonspunkt } = behandling;
+
+  const aksjonspunkterForPanel = aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
+
+  const isReadOnly = erReadOnly(behandling, [], rettigheter, false);
+  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
+
+  const submitCallback = getBekreftAksjonspunktFaktaCallback(
+    fagsak,
+    behandling,
+    oppdaterProsessStegOgFaktaPanelIUrl,
+    lagreAksjonspunkter,
+    lagreOverstyrteAksjonspunkter,
+    overstyringKoder,
+  );
+
+  return {
+    behandling,
+    submittable: !aksjonspunkterForPanel.some(erAksjonspunktÅpent) || aksjonspunkterForPanel.some(ap => ap.kanLoses),
+    harÅpentAksjonspunkt: aksjonspunkterForPanel.some(ap => erAksjonspunktÅpent(ap) && ap.kanLoses),
+    alleKodeverk,
+    aksjonspunkterForPanel,
+    isReadOnly,
+    alleMerknaderFraBeslutter,
+    submitCallback,
+  };
+};
 
 const getBekreftAksjonspunktFaktaCallback =
   (
@@ -52,48 +104,3 @@ const getBekreftAksjonspunktFaktaCallback =
       bekreftedeAksjonspunktDtoer: model,
     }).then(() => oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE));
   };
-
-export const useStandardFaktaPanelProps = (
-  aksjonspunktKoder?: string[],
-  overstyringApKoder: string[] = [],
-): StandardFaktaPanelProps => {
-  const {
-    behandling,
-    rettigheter,
-    fagsak,
-    lagreAksjonspunkter,
-    lagreOverstyrteAksjonspunkter,
-    oppdaterProsessStegOgFaktaPanelIUrl,
-    alleKodeverk,
-  } = use(BehandlingDataContext);
-
-  const { aksjonspunkt } = behandling;
-
-  const aksjonspunkterForPanel =
-    aksjonspunkt && aksjonspunktKoder ? aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon)) : [];
-
-  const isReadOnly = erReadOnly(behandling, [], rettigheter, false);
-  const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
-
-  const submitCallback = getBekreftAksjonspunktFaktaCallback(
-    fagsak,
-    behandling,
-    oppdaterProsessStegOgFaktaPanelIUrl,
-    lagreAksjonspunkter,
-    lagreOverstyrteAksjonspunkter,
-    overstyringApKoder,
-  );
-
-  return {
-    behandling,
-    submittable:
-      !aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status)) ||
-      aksjonspunkterForPanel.some(ap => ap.kanLoses),
-    harÅpneAksjonspunkter: aksjonspunkterForPanel.some(ap => isAksjonspunktOpen(ap.status) && ap.kanLoses),
-    alleKodeverk,
-    aksjonspunkterForPanel,
-    isReadOnly,
-    alleMerknaderFraBeslutter,
-    submitCallback,
-  };
-};

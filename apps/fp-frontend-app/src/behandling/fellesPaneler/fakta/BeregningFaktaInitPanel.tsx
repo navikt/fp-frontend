@@ -19,9 +19,9 @@ import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 
@@ -62,7 +62,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
       {!isFetching ? (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          vilkar={lagBGVilkar(behandling?.vilkår ?? undefined, beregningsgrunnlag)}
+          vilkar={lagBGVilkår(behandling.vilkår ?? undefined, beregningsgrunnlag)}
           beregningsgrunnlag={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -111,11 +111,11 @@ const lagModifisertCallback =
     return submitCallback(transformerteData);
   };
 
-const lagBGVilkar = (vilkar?: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
-  if (!vilkar) {
+const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
+  if (!vilkår) {
     return null;
   }
-  const bgVilkar = vilkar.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkår.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }

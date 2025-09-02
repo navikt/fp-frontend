@@ -11,10 +11,10 @@ import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekrevingMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { ProsessMenyContext } from '../../felles/prosess/ProsessMeny';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.VURDER_FEILUTBETALING,
@@ -46,7 +46,7 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
   });
 
   const harVedtakspanel = prosessPanelMenyData.some(
-    d => d.id === ProsessStegCode.VEDTAK && (d.status !== VilkarUtfallType.IKKE_VURDERT || d.harApentAksjonspunkt),
+    d => d.id === ProsessStegCode.VEDTAK && (d.status !== VilkarUtfallType.IKKE_VURDERT || d.harÅpentAksjonspunkt),
   );
 
   return (

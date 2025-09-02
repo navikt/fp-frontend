@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktStatus, erAksjonspunktÅpent } from '@navikt/fp-kodeverk';
 import { type AvklartRisikoklassifiseringAp, RisikoklassifiseringSakIndex } from '@navikt/fp-sak-risikoklassifisering';
 import type { AksessRettigheter, Behandling, BehandlingAppKontekst, Fagsak, NavAnsatt } from '@navikt/fp-types';
 import { notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
@@ -101,7 +101,7 @@ const RisikoklassifiseringBehandling = ({
   const location = useLocation();
 
   useEffect(() => {
-    if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === AksjonspunktStatus.OPPRETTET && !isRiskPanelOpen) {
+    if (!!risikoAksjonspunkt && erAksjonspunktÅpent(risikoAksjonspunkt) && !isRiskPanelOpen) {
       navigate(getRiskPanelLocationCreator(location)(true));
     }
     if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === AksjonspunktStatus.UTFORT) {

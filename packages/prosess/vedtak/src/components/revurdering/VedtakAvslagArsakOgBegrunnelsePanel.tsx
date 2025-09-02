@@ -40,19 +40,19 @@ const getAvslagArsak = (
 };
 
 interface Props {
-  vilkar: Vilkar[];
+  vilkår: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
   språkkode: string;
-  erReadOnly: boolean;
+  isReadOnly: boolean;
   alleKodeverk: AlleKodeverk;
   skalBrukeOverstyrendeFritekstBrev: boolean;
 }
 
 export const VedtakAvslagArsakOgBegrunnelsePanel = ({
-  vilkar,
+  vilkår,
   behandlingsresultat,
   språkkode,
-  erReadOnly,
+  isReadOnly,
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => {
@@ -63,7 +63,7 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   } = useFormContext();
 
   const isRequiredFn = (value?: string | number | boolean) => value !== undefined || isDirty;
-  const avslagsårsak = getAvslagArsak(alleKodeverk, vilkar, behandlingsresultat);
+  const avslagsårsak = getAvslagArsak(alleKodeverk, vilkår, behandlingsresultat);
 
   return (
     <VStack gap="space-16">
@@ -82,7 +82,7 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
           label={<FormattedMessage id="VedtakForm.Fritekst" />}
           validate={[requiredIfCustomFunctionIsTrueNew(isRequiredFn), minLength3, maxLength1500, hasValidText]}
           maxLength={1500}
-          readOnly={erReadOnly}
+          readOnly={isReadOnly}
           parse={formaterFritekst}
           badges={[
             {
@@ -92,7 +92,7 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
           ]}
         />
       )}
-      {erReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
+      {isReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
         <VStack gap="space-4">
           <Detail>
             <FormattedMessage id="VedtakForm.Fritekst" />
