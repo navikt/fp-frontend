@@ -5,8 +5,7 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktStatus, erAksjonspunktÅpent } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, ManuellBehandlingResultat, Medlemskap } from '@navikt/fp-types';
-import { MedlemskapAvvik } from '@navikt/fp-types';
+import type { Aksjonspunkt, ManuellBehandlingResultat, Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
 
 import { MedlemskapVurdering } from '../types/vurderingMedlemskapForm';
 import { InfoBox } from './InfoBox';
@@ -18,16 +17,16 @@ interface Props {
 
 function getFormateringsIdForAvvik(avvik: MedlemskapAvvik) {
   switch (avvik) {
-    case MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD:
-    case MedlemskapAvvik.BOSATT_MANGLENDE_BOSTEDSADRESSE:
-    case MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS:
-    case MedlemskapAvvik.BOSATT_UTENLANDSADRESSE:
+    case 'BOSATT_UTENLANDSOPPHOLD':
+    case 'BOSATT_MANGLENDE_BOSTEDSADRESSE':
+    case 'BOSATT_UGYLDIG_PERSONSTATUS':
+    case 'BOSATT_UTENLANDSADRESSE':
       return 'AksjonspunktHelpText.Bosatt';
-    case MedlemskapAvvik.MEDL_PERIODER:
+    case 'MEDL_PERIODER':
       return 'AksjonspunktHelpText.MedlPerioder';
-    case MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD:
+    case 'TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD':
       return 'AksjonspunktHelpText.Oppholdsrett';
-    case MedlemskapAvvik.EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT:
+    case 'EØS_MANGLENDE_ANSETTELSE_MED_INNTEKT':
       return 'AksjonspunktHelpText.EØSManglendeAnsettelseMedInntekt';
   }
 }

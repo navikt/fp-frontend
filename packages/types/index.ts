@@ -100,10 +100,10 @@ export type {
   LegacyMedlemPeriode,
   RegionPeriode,
   PersonstatusPeriode,
+  MedlemskapAvvik,
   MedlemskapPeriode,
   OppholdstillatelsePeriode,
 } from './src/medlemskapTsType';
-export { MedlemskapAvvik } from './src/medlemskapTsType';
 export type { Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export type { AnkeVurdering } from './src/ankeVurderingTsType';
 export type { KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';

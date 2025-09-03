@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 import { erPersonAdresserLike, Personopplysninger } from '@navikt/fp-fakta-felles';
-import { type AlleKodeverk, type Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
+import { type AlleKodeverk, type Medlemskap, type MedlemskapAvvik } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForAdresser } from '../ekspansjonsKort/medlemsAvvik';

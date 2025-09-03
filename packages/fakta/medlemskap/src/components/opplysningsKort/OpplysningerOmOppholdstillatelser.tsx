@@ -4,7 +4,7 @@ import { BodyLong, BodyShort, Box, ReadMore, Table } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
-import { type AlleKodeverk, MedlemskapAvvik, type OppholdstillatelsePeriode } from '@navikt/fp-types';
+import { type AlleKodeverk, type MedlemskapAvvik, type OppholdstillatelsePeriode } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForOppholdstillatelser } from '../ekspansjonsKort/medlemsAvvik';
