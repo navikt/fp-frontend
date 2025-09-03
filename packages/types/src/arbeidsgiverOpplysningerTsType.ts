@@ -1,4 +1,4 @@
-import type { tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto } from './apiDtoGenerert.ts';
+import type { tjenester_behandling_arbeidsforhold_ArbeidsgiverOpplysningerDto } from './apiDtoGenerert';
 
 // export type ArbeidsgiverOpplysninger = Readonly<
 //   | {

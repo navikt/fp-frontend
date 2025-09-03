@@ -13,7 +13,7 @@ const meta = {
   component: FodselVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    vilkar: [
+    vilkår: [
       {
         lovReferanse: '§§Dette er en lovreferanse',
       },

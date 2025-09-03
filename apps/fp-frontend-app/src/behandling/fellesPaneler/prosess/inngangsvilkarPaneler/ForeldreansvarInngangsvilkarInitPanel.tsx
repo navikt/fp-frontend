@@ -30,9 +30,9 @@ export const ForeldreansvarInngangsvilkarInitPanel = () => {
   return (
     <InngangsvilkarDefaultInitPanel
       standardPanelProps={standardPanelProps}
-      vilkarKoder={VILKAR_KODER}
-      inngangsvilkarPanelKode="FORELDREANSVARSVILKARET"
-      hentInngangsvilkarPanelTekst={
+      vilkårKoder={VILKAR_KODER}
+      inngangsvilkårPanelKode="FORELDREANSVARSVILKARET"
+      hentInngangsvilkårPanelTekst={
         standardPanelProps.aksjonspunkterForPanel.length > 0
           ? intl.formatMessage({
               id: AKSJONSPUNKT_TEKST_PER_KODE[standardPanelProps.aksjonspunkterForPanel[0].definisjon],
@@ -42,7 +42,7 @@ export const ForeldreansvarInngangsvilkarInitPanel = () => {
     >
       <ForeldreansvarVilkarProsessIndex
         isEngangsstonad
-        isForeldreansvar2Ledd={standardPanelProps.vilkar.some(
+        isForeldreansvar2Ledd={standardPanelProps.vilkårForPanel.some(
           v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
         )}
         status={standardPanelProps.status}

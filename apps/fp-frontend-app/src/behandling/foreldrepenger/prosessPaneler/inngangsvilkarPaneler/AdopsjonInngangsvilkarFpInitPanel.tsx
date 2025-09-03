@@ -21,29 +21,29 @@ export const AdopsjonInngangsvilkarFpInitPanel = () => {
 
   return standardPanelProps.aksjonspunkterForPanel.length === 0 ? (
     <InngangsvilkarOverstyringDefaultInitPanel
-      vilkarKoder={VILKAR_KODER}
+      vilkårKoder={VILKAR_KODER}
       standardPanelProps={standardPanelProps}
-      inngangsvilkarPanelKode="ADOPSJON"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
+      inngangsvilkårPanelKode="ADOPSJON"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
       overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP}
     >
       <OverstyringPanelDef
-        vilkar={standardPanelProps.vilkar}
-        vilkarKoder={VILKAR_KODER}
+        vilkår={standardPanelProps.vilkårForPanel}
+        vilkårKoder={VILKAR_KODER}
         panelTekstKode="Inngangsvilkar.Adopsjonsvilkaret"
       />
     </InngangsvilkarOverstyringDefaultInitPanel>
   ) : (
     <InngangsvilkarDefaultInitPanel
-      vilkarKoder={VILKAR_KODER}
+      vilkårKoder={VILKAR_KODER}
       standardPanelProps={standardPanelProps}
-      inngangsvilkarPanelKode="ADOPSJON"
-      hentInngangsvilkarPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
+      inngangsvilkårPanelKode="ADOPSJON"
+      hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
     >
       <AdopsjonVilkarProsessIndex
         status={standardPanelProps.status}
         readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-        vilkar={standardPanelProps.vilkar}
+        vilkår={standardPanelProps.vilkårForPanel}
       />
     </InngangsvilkarDefaultInitPanel>
   );

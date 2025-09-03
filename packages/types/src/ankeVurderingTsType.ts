@@ -1,4 +1,4 @@
-import type { tjenester_behandling_anke_AnkebehandlingDto } from './apiDtoGenerert.ts';
+import type { tjenester_behandling_anke_AnkebehandlingDto } from './apiDtoGenerert';
 
 // export type AnkeVurdering = Readonly<{
 //   ankeVurderingResultat?: {

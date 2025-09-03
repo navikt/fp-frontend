@@ -1,7 +1,7 @@
 import type {
   tjenester_behandling_historikk_HistorikkInnslagDokumentLinkDto,
   tjenester_behandling_historikk_HistorikkinnslagDto,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 // export type Historikkinnslag = Readonly<{
 //   aktør: HistorikkUtfører;

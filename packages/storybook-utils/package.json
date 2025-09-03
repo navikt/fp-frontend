@@ -28,6 +28,7 @@
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
+    "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",
     "@tanstack/react-query-devtools": "5.85.3",
     "eslint": "9.33.0",
     "typescript": "5.9.2"

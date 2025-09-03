@@ -9,9 +9,9 @@ import { adopsjonsvilkarene, AksjonspunktKode, SoknadType } from '@navikt/fp-kod
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
@@ -24,7 +24,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
 
   const { behandling, fagsak } = use(BehandlingDataContext);
 
-  const skalPanelVisesIMeny = behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType));
+  const skalPanelVisesIMeny = (behandling.vilkår ?? []).some(v => adopsjonsvilkarene.some(av => av === v.vilkarType));
 
   const api = useBehandlingApi(behandling);
 

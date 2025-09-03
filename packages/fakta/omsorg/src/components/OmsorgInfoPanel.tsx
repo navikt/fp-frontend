@@ -42,7 +42,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     isReadOnly,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<BekreftOmsorgVurderingAp>();
@@ -57,7 +57,7 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
 
   return (
     <VStack gap="space-32">
-      {!isReadOnly && harÅpneAksjonspunkter && (
+      {!isReadOnly && harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="OmsorgInfoPanel.VurderOmsorg" />
         </AksjonspunktHelpTextHTML>

@@ -35,7 +35,7 @@ interface Props {
   tilbakekrevingvalg?: TilbakekrevingValg;
   simuleringResultat?: SimuleringResultat;
   beregningsgrunnlag?: Beregningsgrunnlag;
-  vilkar: Vilkar[];
+  vilkår: Vilkar[];
   previewCallback: (data: VedtakForhåndsvisData) => void;
   oppgaver?: Oppgave[];
   ferdigstillOppgave: (oppgaveId: string) => Promise<void>;
@@ -47,7 +47,7 @@ export const VedtakProsessIndex = ({
   tilbakekrevingvalg,
   simuleringResultat,
   beregningsgrunnlag,
-  vilkar,
+  vilkår,
   previewCallback,
   oppgaver,
   ferdigstillOppgave,
@@ -67,7 +67,7 @@ export const VedtakProsessIndex = ({
           tilbakekrevingvalg={tilbakekrevingvalg}
           simuleringResultat={simuleringResultat}
           beregningsresultat={beregningsresultat}
-          vilkar={vilkar}
+          vilkår={vilkår}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           oppgaver={oppgaver}
           ferdigstillOppgave={ferdigstillOppgave}
@@ -78,7 +78,7 @@ export const VedtakProsessIndex = ({
           tilbakekrevingvalg={tilbakekrevingvalg}
           simuleringResultat={simuleringResultat}
           beregningsresultat={beregningsresultat}
-          vilkar={vilkar}
+          vilkår={vilkår}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
           oppgaver={oppgaver}

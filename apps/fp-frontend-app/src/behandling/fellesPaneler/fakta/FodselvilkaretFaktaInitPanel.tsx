@@ -11,9 +11,9 @@ import type { Dokument } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { useFagsakApi } from '../../../data/fagsakApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE, AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL];
 
@@ -22,7 +22,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const { behandling, fagsak } = use(BehandlingDataContext);
 
-  const skalPanelVisesIMeny = behandling.vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType));
+  const skalPanelVisesIMeny = (behandling.vilkår ?? []).some(v => fodselsvilkarene.some(fv => fv === v.vilkarType));
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 

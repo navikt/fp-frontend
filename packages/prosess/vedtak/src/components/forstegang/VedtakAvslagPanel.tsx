@@ -9,7 +9,7 @@ import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types
 import { VedtakFritekstPanel } from '../felles/VedtakFritekstPanel';
 
 interface Props {
-  vilkar?: Vilkar[];
+  vilkår: Vilkar[];
   behandlingsresultat?: Behandlingsresultat;
   språkkode: string;
   isReadOnly: boolean;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const VedtakAvslagPanel = ({
-  vilkar = [],
+  vilkår,
   behandlingsresultat,
   språkkode,
   isReadOnly,
@@ -31,10 +31,10 @@ export const VedtakAvslagPanel = ({
   const textCode = beregningErManueltFastsatt ? 'VedtakForm.Fritekst.Beregningsgrunnlag' : 'VedtakForm.Fritekst';
   return (
     <>
-      {getAvslagÅrsak(vilkar, alleKodeverk, behandlingsresultat) && (
+      {getAvslagÅrsak(vilkår, alleKodeverk, behandlingsresultat) && (
         <div>
           <Label size="small">{intl.formatMessage({ id: 'VedtakForm.ArsakTilAvslag' })}</Label>
-          <BodyShort size="small">{getAvslagÅrsak(vilkar, alleKodeverk, behandlingsresultat)}</BodyShort>
+          <BodyShort size="small">{getAvslagÅrsak(vilkår, alleKodeverk, behandlingsresultat)}</BodyShort>
         </div>
       )}
       {!skalBrukeOverstyrendeFritekstBrev && (

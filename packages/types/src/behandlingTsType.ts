@@ -1,4 +1,4 @@
-import type { tjenester_behandling_dto_behandling_UtvidetBehandlingDto } from './apiDtoGenerert.ts';
+import type { tjenester_behandling_dto_behandling_UtvidetBehandlingDto } from './apiDtoGenerert';
 
 // export type Behandling = BehandlingFellesData &
 //   Readonly<{

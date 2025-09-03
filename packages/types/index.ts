@@ -33,15 +33,6 @@ export type {
 } from './src/beregningsgrunnlagFaktaTsType';
 export type { Månedsgrunnlag, BesteberegningInntekt, Besteberegninggrunnlag } from './src/besteberegningTsTypes';
 export type { BeregningsgrunnlagArbeidsforhold } from './src/beregningsgrunnlagArbeidsforholdTsType';
-export type {
-  RefusjonTilVurderingAndel,
-  TidligereUtbetalinger,
-  FordelBeregningsgrunnlagPeriode,
-  ArbeidsforholdTilFordeling,
-  FordelBeregningsgrunnlagAndel,
-  PerioderMedGraderingEllerRefusjon,
-  FaktaOmFordeling,
-} from './src/beregningsgrunnlagFordelingTsType';
 export type { Feriepengegrunnlag, FeriepengegrunnlagAndel } from './src/feriepengegrunnlagTsType';
 export type { BeregningsresultatEs } from './src/beregningsresultatEsTsType';
 export type {
@@ -144,7 +135,7 @@ export type { Personoversikt, PersonopplysningerBasis } from './src/personoversi
 export type { Personadresse } from './src/personadresseTsType';
 export type { KontrollerFaktaPeriode } from './src/kontrollerFaktaPeriode';
 export type { AksessRettigheter, Aksess } from './src/aksessRettigheterTsType';
-export type { Verge, OpprettVergeParams, VergeType } from './src/vergeTsType';
+export type { Verge, VergeType } from './src/vergeTsType';
 export type { ForhåndsvisMeldingParams } from './src/forhåndsvisMeldingParamsTsType';
 export type { ManueltArbeidsforhold } from './src/manueltArbeidsforholdTsType';
 export type { ManglendeInntektsmeldingVurdering } from './src/manglendeInntektsmeldingVurderingTsType';
@@ -179,7 +170,6 @@ export type { ApiLink } from './src/apiLink';
 export type { Oppgave } from './src/oppgaveTsType';
 export type { Beskrivelse } from './src/oppgaveTsType';
 export type { OppgaveDokument } from './src/oppgaveTsType';
-export type { OneOf } from './src/oneOf';
 export type { BrevOverstyring } from './src/brevOverstyring';
 export type {
   Fødsel,

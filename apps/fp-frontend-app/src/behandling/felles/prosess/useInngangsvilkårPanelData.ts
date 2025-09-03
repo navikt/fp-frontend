@@ -1,6 +1,11 @@
 import { useState } from 'react';
 
-import type { InngangsvilkarPanelData } from '../typer/inngangsvilkarPanelData';
+export type InngangsvilkarPanelData = {
+  id: string;
+  aksjonspunktTekst?: string;
+  harÅpentAksjonspunkt: boolean;
+  status: string;
+};
 
 export const useInngangsvilkårPanelData = () => {
   const [inngangsvilkårPanelData, setInngangsvilkårPanelData] = useState<InngangsvilkarPanelData[]>([]);

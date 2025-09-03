@@ -14,7 +14,7 @@ interface Props {
   ytelseTypeKode: string;
   status: string;
   readOnlySubmitButton: boolean;
-  vilkar: Vilkar[];
+  vilkår: Vilkar[];
 }
 
 export const FodselVilkarProsessIndex = (props: Props) => (

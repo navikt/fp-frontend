@@ -24,10 +24,10 @@ import type { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandlingApi';
+import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedtakStatusModal';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
-import { BehandlingDataContext } from '../../felles/utils/behandlingDataContext';
 import { ÅpenRevurderingModal } from '../modaler/ÅpenRevurderingModal';
 
 import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
@@ -47,7 +47,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
 
   const fagsakBehandlingerInfo = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
-  const harApenRevurdering = fagsakBehandlingerInfo.some(
+  const harÅpenRevurdering = fagsakBehandlingerInfo.some(
     b => b.type === BehandlingTypeEnum.REVURDERING && b.status !== BehandlingStatusEnum.AVSLUTTET,
   );
 
@@ -85,7 +85,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
         tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}
       />
 
-      <ÅpenRevurderingModal harÅpenRevurdering={harApenRevurdering} />
+      <ÅpenRevurderingModal harÅpenRevurdering={harÅpenRevurdering} />
 
       <ProsessDefaultInitPanel
         standardPanelProps={standardPanelProps}

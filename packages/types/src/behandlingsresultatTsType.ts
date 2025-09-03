@@ -1,4 +1,4 @@
-import type { tjenester_behandling_dto_behandling_BehandlingsresultatDto } from './apiDtoGenerert.ts';
+import type { tjenester_behandling_dto_behandling_BehandlingsresultatDto } from './apiDtoGenerert';
 
 // export type Behandlingsresultat = Readonly<{
 //   id: number;

@@ -71,7 +71,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     aksjonspunkterForPanel,
     alleMerknaderFraBeslutter,
     behandling,
-    harÅpneAksjonspunkter,
+    harÅpentAksjonspunkt,
     submitCallback,
     alleKodeverk,
     isReadOnly,
@@ -100,9 +100,9 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     }
   }, [erVilkarOk]);
 
-  const avslagsarsaker = alleKodeverk['Avslagsårsak'][VilkarType.SVANGERSKAPVILKARET];
+  const avslagsårsaker = alleKodeverk['Avslagsårsak'][VilkarType.SVANGERSKAPVILKARET];
 
-  const originalErVilkarOk = harÅpneAksjonspunkter ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm
@@ -112,10 +112,10 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
-        isAksjonspunktOpen={harÅpneAksjonspunkter}
+        harÅpentAksjonspunkt={harÅpentAksjonspunkt}
         readOnlySubmitButton={readOnlySubmitButton}
-        readOnly={isReadOnly}
-        originalErVilkarOk={originalErVilkarOk}
+        isReadOnly={isReadOnly}
+        originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
         isDirty={formMethods.formState.isDirty}
         isSubmitting={formMethods.formState.isSubmitting}
@@ -130,11 +130,11 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
             </Label>
           )}
           <VilkarResultPicker
-            avslagsarsaker={avslagsarsaker}
-            readOnly={isReadOnly}
+            avslagsårsaker={avslagsårsaker}
+            isReadOnly={isReadOnly}
             skalKunneInnvilge={finnesUttak}
-            customVilkarOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
-            customVilkarIkkeOppfyltText={
+            customVilkårOppfyltText={<FormattedMessage id="SvangerskapVilkarForm.Oppfylt" />}
+            customVilkårIkkeOppfyltText={
               <FormattedMessage id="SvangerskapVilkarForm.IkkeOppfylt" values={{ b: BTag }} />
             }
           />

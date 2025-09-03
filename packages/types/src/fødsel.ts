@@ -5,7 +5,7 @@ import type {
   tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn,
   tjenester_behandling_fødsel_dto_FødselDto_Register,
   tjenester_behandling_fødsel_dto_FødselDto_Søknad,
-} from './apiDtoGenerert.ts';
+} from './apiDtoGenerert';
 
 export type BarnHendelseData = tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
 

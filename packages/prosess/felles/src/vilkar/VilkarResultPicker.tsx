@@ -7,7 +7,7 @@ import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksjonspunktStatus, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 
 import styles from './vilkarResultPicker.module.css';
@@ -16,7 +16,7 @@ import messages from '../../i18n/nb_NO.json';
 
 const intl = createIntl(messages);
 
-const getIsAvslagCodeRequired = (erVilkarOk: boolean, avslagCode?: string) => () => erVilkarOk === false && !avslagCode;
+const getIsAvslagCodeRequired = (erVilkårOk: boolean, avslagCode?: string) => () => erVilkårOk === false && !avslagCode;
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -24,71 +24,74 @@ type FormValues = {
 };
 
 interface Props {
-  avslagsarsaker?: KodeverkMedNavn<'Avslagsårsak'>[];
-  customVilkarIkkeOppfyltText: string | ReactElement;
-  customVilkarOppfyltText: string | ReactElement;
-  readOnly: boolean;
+  avslagsårsaker?: KodeverkMedNavn<'Avslagsårsak'>[];
+  customVilkårIkkeOppfyltText: string | ReactElement;
+  customVilkårOppfyltText: string | ReactElement;
+  isReadOnly: boolean;
   skalKunneInnvilge?: boolean;
   validatorsForRadioOptions?: ((value: string | number | boolean) => string | null | undefined)[];
 }
 
-const sorterAvslagsArsaker = (
-  avslagsarsakerUsortert: KodeverkMedNavn<'Avslagsårsak'>[],
-): KodeverkMedNavn<'Avslagsårsak'>[] => avslagsarsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
+const sorterAvslagsårsaker = (
+  avslagsårsakerUsortert: KodeverkMedNavn<'Avslagsårsak'>[],
+): KodeverkMedNavn<'Avslagsårsak'>[] => avslagsårsakerUsortert.toSorted((k1, k2) => k1.navn.localeCompare(k2.navn));
 
-/**
- * VilkarResultPicker
- *
- * Presentasjonskomponent. Lar Nav-ansatt velge om vilkåret skal oppfylles eller avvises.
- */
 export const VilkarResultPicker = ({
-  avslagsarsaker,
-  customVilkarIkkeOppfyltText,
-  customVilkarOppfyltText,
-  readOnly,
+  avslagsårsaker,
+  customVilkårIkkeOppfyltText,
+  customVilkårOppfyltText,
+  isReadOnly,
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
 }: Props) => {
   // TODO (TOR) useFormContext manglar typing
   const { getValues, watch, control } = useFormContext();
-  const erVilkarOk = watch('erVilkarOk');
+  const erVilkårOk = watch('erVilkarOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
 
   return (
     <VStack gap="space-16" paddingInline="4">
-      {readOnly && erVilkarOk !== undefined && (
+      {isReadOnly && erVilkårOk !== undefined && (
         <HStack gap="space-8">
-          {erVilkarOk && <CheckmarkIcon className={styles.godkjentImage} />}
-          {!erVilkarOk && <XMarkOctagonIcon className={styles.avslattImage} />}
-          {erVilkarOk && <BodyShort size="small">{customVilkarOppfyltText}</BodyShort>}
-          {!erVilkarOk && <BodyShort size="small">{customVilkarIkkeOppfyltText}</BodyShort>}
+          {erVilkårOk && (
+            <>
+              <CheckmarkIcon className={styles.godkjentImage} />
+              <BodyShort size="small">{customVilkårOppfyltText}</BodyShort>
+            </>
+          )}
+          {!erVilkårOk && (
+            <>
+              <XMarkOctagonIcon className={styles.avslattImage} />
+              <BodyShort size="small">{customVilkårIkkeOppfyltText}</BodyShort>
+            </>
+          )}
         </HStack>
       )}
 
-      {(!readOnly || erVilkarOk === undefined) && (
-        <RhfRadioGroupNew name="erVilkarOk" control={control} validate={radioValidators} isReadOnly={readOnly}>
+      {(!isReadOnly || erVilkårOk === undefined) && (
+        <RhfRadioGroupNew name="erVilkarOk" control={control} validate={radioValidators} isReadOnly={isReadOnly}>
           <Radio value={true} size="small" disabled={!skalKunneInnvilge}>
-            {customVilkarOppfyltText}
+            {customVilkårOppfyltText}
           </Radio>
           <Radio value={false} size="small">
-            {customVilkarIkkeOppfyltText}
+            {customVilkårIkkeOppfyltText}
           </Radio>
         </RhfRadioGroupNew>
       )}
-      {erVilkarOk !== undefined && !erVilkarOk && avslagsarsaker && (
+      {erVilkårOk !== undefined && !erVilkårOk && avslagsårsaker && (
         <RhfSelect
           name="avslagskode"
           control={control}
           label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-          selectValues={sorterAvslagsArsaker(avslagsarsaker || []).map(aa => (
+          selectValues={sorterAvslagsårsaker(avslagsårsaker || []).map(aa => (
             <option key={aa.kode} value={aa.kode}>
               {aa.navn}
             </option>
           ))}
-          readOnly={readOnly}
+          readOnly={isReadOnly}
           className={styles.selectBredde}
-          validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkarOk, getValues('avslagskode')))]}
+          validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkårOk, getValues('avslagskode')))]}
         />
       )}
     </VStack>
@@ -100,12 +103,11 @@ VilkarResultPicker.buildInitialValues = (
   status: string,
   behandlingsresultat?: Behandlingsresultat,
 ): FormValues => {
-  const isOpenAksjonspunkt = aksjonspunkter.some(ap => ap.status === AksjonspunktStatus.OPPRETTET);
-  const erVilkarOk = isOpenAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const erVilkårOk = aksjonspunkter.some(erAksjonspunktÅpent) ? undefined : VilkarUtfallType.OPPFYLT === status;
   return {
-    erVilkarOk,
+    erVilkarOk: erVilkårOk,
     avslagskode:
-      erVilkarOk === false && behandlingsresultat?.avslagsarsak ? behandlingsresultat.avslagsarsak : undefined,
+      erVilkårOk === false && behandlingsresultat?.avslagsarsak ? behandlingsresultat.avslagsarsak : undefined,
   };
 };
 

@@ -17,7 +17,7 @@ export const useInngangsvilkarRegistrerer = (
       settIngangsvilkårPanelData({
         id,
         status,
-        harApentAksjonspunkt: erOverstyrt || erAksjonspunktApent,
+        harÅpentAksjonspunkt: erOverstyrt || erAksjonspunktApent,
         aksjonspunktTekst: erOverstyrt || erAksjonspunktApent ? aksjonspunktTekst : undefined,
       });
     }
