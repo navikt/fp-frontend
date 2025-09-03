@@ -1,3 +1,4 @@
+// TODO: Kommer fra kontrakter.simulering
 export type SimuleringPeriode = Readonly<{
   fom: string;
   tom: string;

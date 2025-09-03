@@ -4,7 +4,7 @@ import { BodyLong, BodyShort, Box, Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { sorterPerioder } from '@navikt/fp-fakta-felles';
-import { type AlleKodeverk, MedlemskapAvvik, type MedlemskapPeriode } from '@navikt/fp-types';
+import { type AlleKodeverk, type MedlemskapAvvik, type MedlemskapPeriode } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';
 import { relevantForMedl } from '../ekspansjonsKort/medlemsAvvik';

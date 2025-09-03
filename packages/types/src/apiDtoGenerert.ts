@@ -3853,30 +3853,30 @@ export type foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik =
   | 'MEDL_PERIODER';
 
 export type tjenester_behandling_medlem_MedlemskapDto = {
-  manuellBehandlingResultat?: tjenester_behandling_medlem_MedlemskapDto_ManuellBehandlingResultat;
-  legacyManuellBehandling?: tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling;
-  regioner?: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
-  personstatuser?: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
-  utenlandsopphold?: Array<tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold>;
-  adresser?: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
-  oppholdstillatelser?: Array<tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse>;
-  medlemskapsperioder?: Array<tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode>;
-  avvik?: Array<foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik>;
-  annenpart?: tjenester_behandling_medlem_MedlemskapDto_Annenpart;
+  manuellBehandlingResultat: tjenester_behandling_medlem_MedlemskapDto_ManuellBehandlingResultat | null;
+  legacyManuellBehandling: tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling | null;
+  regioner: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
+  personstatuser: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
+  utenlandsopphold: Array<tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold>;
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  oppholdstillatelser: Array<tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse>;
+  medlemskapsperioder: Array<tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode>;
+  avvik: Array<foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik>;
+  annenpart: tjenester_behandling_medlem_MedlemskapDto_Annenpart | null;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Annenpart = {
-  adresser?: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
-  regioner?: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
-  personstatuser?: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  regioner: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
+  personstatuser: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling = {
-  perioder?: Array<tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_MedlemPeriode>;
+  perioder: Array<tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_MedlemPeriode>;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_MedlemPeriode = {
-  vurderingsdato?: string;
+  vurderingsdato: string;
   oppholdsrettVurdering?: boolean;
   erEosBorger?: boolean;
   lovligOppholdVurdering?: boolean;
@@ -3886,44 +3886,44 @@ export type tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_Me
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_ManuellBehandlingResultat = {
-  avslagskode?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
-  medlemFom?: string;
-  opphørFom?: string;
+  avslagskode: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak | null;
+  medlemFom: string | null;
+  opphørFom: string | null;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode = {
-  fom?: string;
-  tom?: string;
-  erMedlem?: boolean;
-  lovvalgsland?: string;
-  studieland?: string;
-  medlemskapType?: foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType;
-  dekningType?: foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekningType;
-  beslutningsdato?: string;
+  fom: string;
+  tom: string | null;
+  erMedlem: boolean;
+  lovvalgsland: string | null;
+  studieland: string | null;
+  medlemskapType: foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType;
+  dekningType: foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekningType;
+  beslutningsdato: string;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse = {
-  fom?: string;
-  tom?: string;
-  type?: foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
+  fom: string;
+  tom: string | null;
+  type: foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Personstatus = {
-  fom?: string;
-  tom?: string;
-  type?: foreldrepenger_behandlingslager_aktør_PersonstatusType;
+  fom: string;
+  tom: string | null;
+  type: foreldrepenger_behandlingslager_aktør_PersonstatusType;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Region = {
-  fom?: string;
-  tom?: string;
-  type?: foreldrepenger_behandlingslager_geografisk_Region;
+  fom: string;
+  tom: string | null;
+  type: foreldrepenger_behandlingslager_geografisk_Region;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold = {
-  fom?: string;
-  tom?: string;
-  landkode?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  fom: string;
+  tom: string | null;
+  landkode: foreldrepenger_behandlingslager_geografisk_Landkoder;
 };
 
 export type tjenester_behandling_svp_SvpTilretteleggingDto = {
