@@ -138,7 +138,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
               .filter(d => valgteDokumentIder.includes(d.dokumentId))
               .forEach(dokument => {
                 if (dokument) {
-                  åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel);
+                  åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
                 }
               })
           }
@@ -188,7 +188,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                   hideLabel
                   checked={valgteDokumentIder.includes(document.dokumentId)}
                   onChange={() => toggleValgDokument(document.dokumentId)}
-                  aria-labelledby={document.tittel}
+                  aria-labelledby={document.tittel ?? undefined}
                 >
                   {' '}
                 </Checkbox>
@@ -206,7 +206,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                   saksnummer={saksnummer}
                   journalpostId={document.journalpostId}
                   dokumentId={document.dokumentId}
-                  dokumentTittel={document.tittel}
+                  dokumentTittel={document.tittel ?? undefined}
                 />
               </Table.DataCell>
               <Table.DataCell>{document.gjelderFor}</Table.DataCell>

@@ -4561,15 +4561,15 @@ export type tjenester_brev_BrevRestTjeneste_MellomlagreHtmlDto = {
 export type foreldrepenger_dokumentarkiv_Kommunikasjonsretning = 'INN' | 'UT' | 'NOTAT';
 
 export type tjenester_dokument_dto_DokumentDto = {
-  journalpostId?: string;
-  dokumentId?: string;
-  behandlinger?: Array<number>;
-  behandlingUuidList?: Array<string>;
-  tidspunkt?: string;
-  tittel?: string;
-  kommunikasjonsretning?: foreldrepenger_dokumentarkiv_Kommunikasjonsretning;
-  gjelderFor?: string;
-  arbeidsgiverReferanse?: string;
+  journalpostId: string;
+  dokumentId: string;
+  behandlinger: Array<number> | null;
+  behandlingUuidList: Array<string> | null;
+  tidspunkt: string | null;
+  tittel: string | null;
+  kommunikasjonsretning: foreldrepenger_dokumentarkiv_Kommunikasjonsretning;
+  gjelderFor: string | null;
+  arbeidsgiverReferanse: string | null;
 };
 
 export type foreldrepenger_behandlingslager_behandling_DokumentKategori =

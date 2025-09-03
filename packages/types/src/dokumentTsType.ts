@@ -1,9 +1,3 @@
-export type Dokument = Readonly<{
-  journalpostId: string;
-  dokumentId: string;
-  behandlingUuidList?: string[];
-  tittel?: string;
-  tidspunkt?: string;
-  kommunikasjonsretning: string;
-  gjelderFor: string | null;
-}>;
+import type { tjenester_dokument_dto_DokumentDto } from './apiDtoGenerert.ts';
+
+export type Dokument = tjenester_dokument_dto_DokumentDto;
