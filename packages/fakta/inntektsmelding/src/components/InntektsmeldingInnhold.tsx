@@ -64,7 +64,7 @@ export const InntektsmeldingInnhold = ({
 
         <Startdato
           ytelse={alleKodeverk['FagsakYtelseType'].find(k => k.kode === fagsak.fagsakYtelseType)?.navn ?? ''}
-          startDatoPermisjon={inntektsmelding.startDatoPermisjon}
+          startDatoPermisjon={inntektsmelding.startDatoPermisjon ?? undefined}
         />
 
         <KildeSystem kildeSystem={inntektsmelding.kildeSystem} />

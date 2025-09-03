@@ -4,13 +4,16 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import { ArbeidsforholdKomplettVurderingType, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { AksjonspunktÅrsak, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import { AksjonspunktÅrsak, type AoIArbeidsforhold, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { ArbeidsforholdFaktaIndex } from './ArbeidsforholdFaktaIndex';
 import { BekreftetPermisjonStatus } from './kodeverk/bekreftetPermisjonStatus';
 
 const fellesInntektsmeldingFelter = {
+  arbeidsgiverIdent: '910909088',
+  eksternArbeidsforholdId: 'ARB001-001',
   innsendingstidspunkt: '2021-12-06T00:00:00',
+  internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
   kildeSystem: 'Altinn',
   bortfalteNaturalytelser: [],
   refusjonsperioder: [],
@@ -18,7 +21,25 @@ const fellesInntektsmeldingFelter = {
   behandlingsIdeer: [],
   tilknyttedeBehandlingIder: [],
   aktiveNaturalytelser: [],
+  begrunnelse: null,
+  saksbehandlersVurdering: null,
+  startDatoPermisjon: null,
+  årsak: null,
+  refusjonPrMnd: null,
 };
+
+const defaultArbeidsforhold = {
+  arbeidsgiverIdent: '',
+  fom: '2019-12-06',
+  stillingsprosent: 100,
+  tom: '2022-12-31',
+  begrunnelse: 'Dette er en begrunnelse',
+  saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+  internArbeidsforholdId: null,
+  eksternArbeidsforholdId: null,
+  årsak: null,
+  permisjonOgMangel: null,
+} satisfies AoIArbeidsforhold;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
   11212: {
@@ -59,12 +80,12 @@ export const ArbeidsforholdetSkalBenyttesUtenInntektsmelding: Story = {
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           eksternArbeidsforholdId: 'ARB001-001',
           fom: '2000-04-19',
           tom: '9999-12-31',
-          stillingsprosent: 100,
           saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
           begrunnelse: 'Dette er en begrunnelse 3',
         },
@@ -81,6 +102,7 @@ export const ManueltOpprettetArbeidsforhold: Story = {
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
           fom: '2022-01-31',
           tom: '9999-12-31',
@@ -112,6 +134,7 @@ export const ArbeidsforholdetErIkkeAktivt: Story = {
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           eksternArbeidsforholdId: 'ARB001-001',
@@ -134,6 +157,7 @@ export const SokerErIPermisjon: Story = {
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           eksternArbeidsforholdId: 'ARB001-001',
@@ -162,6 +186,7 @@ export const SokerErIkkeIPermisjon: Story = {
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           eksternArbeidsforholdId: 'ARB001-001',
@@ -190,6 +215,7 @@ export const OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger: Story = 
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           eksternArbeidsforholdId: 'ARB001-001',
@@ -212,6 +238,7 @@ export const FjernArbeidsforholdet: Story = {
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           eksternArbeidsforholdId: 'ARB001-001',
@@ -236,30 +263,31 @@ export const ArbeidsforholdetErOpprettetBasertPåIM: Story = {
         {
           ...fellesInntektsmeldingFelter,
           inntektPrMnd: 25500.0,
-          refusjonPrMnd: undefined,
+          refusjonPrMnd: null,
           arbeidsgiverIdent: '999999999',
-          eksternArbeidsforholdId: undefined,
-          internArbeidsforholdId: undefined,
+          eksternArbeidsforholdId: null,
+          internArbeidsforholdId: null,
           kontaktpersonNavn: 'Dolly Dollesen',
           kontaktpersonNummer: '99999999',
           journalpostId: '524273715',
           dokumentId: '548466069',
           motattDato: '2022-01-19',
-          begrunnelse: undefined,
-          saksbehandlersVurdering: undefined,
+          begrunnelse: null,
+          saksbehandlersVurdering: null,
         },
       ],
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
-          internArbeidsforholdId: undefined,
-          eksternArbeidsforholdId: undefined,
+          internArbeidsforholdId: null,
+          eksternArbeidsforholdId: null,
           fom: '2022-01-19',
           tom: '9999-12-31',
           stillingsprosent: 100.0,
-          årsak: undefined,
+          årsak: null,
           saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-          permisjonOgMangel: undefined,
+          permisjonOgMangel: null,
           begrunnelse: 'Mottatt IM',
         },
       ],
@@ -290,6 +318,7 @@ export const FlereArbeidsforholdITabell: Story = {
     arbeidOgInntekt: {
       arbeidsforhold: [
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
           internArbeidsforholdId: 'c14b0c78-eb1f-4d8e-b73f-7f385a5e67d2',
           eksternArbeidsforholdId: 'V999999999R50049082SS157848L0001',
@@ -300,6 +329,7 @@ export const FlereArbeidsforholdITabell: Story = {
           begrunnelse: null,
         },
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999998',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           eksternArbeidsforholdId: 'ARB001-001',
@@ -310,6 +340,7 @@ export const FlereArbeidsforholdITabell: Story = {
           begrunnelse: 'Dette er en begrunnelse 1',
         },
         {
+          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '11212',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
           eksternArbeidsforholdId: 'ARB001-001',
@@ -324,7 +355,7 @@ export const FlereArbeidsforholdITabell: Story = {
         {
           ...fellesInntektsmeldingFelter,
           inntektPrMnd: 30000,
-          refusjonPrMnd: undefined,
+          refusjonPrMnd: null,
           arbeidsgiverIdent: '999999999',
           eksternArbeidsforholdId: 'V999999999R50049082SS157848L0001',
           internArbeidsforholdId: 'c14b0c78-eb1f-4d8e-b73f-7f385a5e67d2',
@@ -337,7 +368,7 @@ export const FlereArbeidsforholdITabell: Story = {
         {
           ...fellesInntektsmeldingFelter,
           inntektPrMnd: 40000,
-          refusjonPrMnd: undefined,
+          refusjonPrMnd: null,
           arbeidsgiverIdent: '999999998',
           eksternArbeidsforholdId: 'ARB001-001',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',

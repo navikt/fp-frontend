@@ -71,7 +71,9 @@ export const ManglendeInntektsmeldingForm = ({
       behandlingVersjon,
       vurdering: formValues.saksbehandlersVurdering!,
       arbeidsgiverIdent: radData.arbeidsgiverIdent,
-      internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
+      internArbeidsforholdRef: erEttArbeidsforhold
+        ? (arbeidsforholdForRad[0].internArbeidsforholdId ?? undefined)
+        : undefined,
       begrunnelse: formValues.begrunnelse!,
     };
     return lagreVurdering(params)

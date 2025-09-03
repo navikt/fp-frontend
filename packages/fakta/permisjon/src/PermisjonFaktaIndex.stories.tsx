@@ -61,6 +61,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
+          årsak: 'PERMISJON',
         },
         {
           arbeidsgiverIdent: '91090909+',
@@ -76,6 +77,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
+          årsak: 'PERMISJON',
         },
       ],
       inntektsmeldinger: [],
@@ -165,6 +167,7 @@ export const FlereArbeidsforhold: Story = {
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
+          årsak: 'PERMISJON',
         },
         {
           arbeidsgiverIdent: '910909090',
@@ -196,6 +199,10 @@ export const FlereArbeidsforhold: Story = {
           refusjonPrMnd: 20000,
           journalpostId: '1',
           dokumentId: '2',
+          årsak: null,
+          begrunnelse: null,
+          saksbehandlersVurdering: null,
+          startDatoPermisjon: null,
         },
       ],
       inntekter: [
@@ -307,6 +314,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
+          årsak: 'PERMISJON',
         },
         {
           arbeidsgiverIdent: '910909088',
@@ -322,6 +330,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
+          årsak: 'PERMISJON',
         },
       ],
       inntektsmeldinger: [
@@ -337,6 +346,10 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           refusjonPrMnd: 20000,
           journalpostId: '1',
           dokumentId: '2',
+          årsak: null,
+          begrunnelse: null,
+          saksbehandlersVurdering: null,
+          startDatoPermisjon: null,
         },
         {
           ...fellesInntektsmeldingFelter,
@@ -349,6 +362,11 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           motattDato: '2021-12-06',
           journalpostId: '1',
           dokumentId: '2',
+          refusjonPrMnd: null,
+          årsak: null,
+          begrunnelse: null,
+          saksbehandlersVurdering: null,
+          startDatoPermisjon: null,
         },
       ],
       inntekter: [
@@ -413,6 +431,7 @@ export const VisFødselsdatoNårPrivatperson: Story = {
           },
           saksbehandlersVurdering: null,
           begrunnelse: null,
+          årsak: 'PERMISJON',
         },
       ],
       inntektsmeldinger: [],

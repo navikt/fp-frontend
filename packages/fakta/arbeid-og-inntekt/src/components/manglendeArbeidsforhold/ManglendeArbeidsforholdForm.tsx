@@ -95,7 +95,7 @@ export const ManglendeArbeidsforholdForm = ({
       return registrerArbeidsforhold({
         behandlingUuid,
         behandlingVersjon,
-        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
         arbeidsgiverNavn: radData.arbeidsgiverNavn,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
@@ -110,10 +110,10 @@ export const ManglendeArbeidsforholdForm = ({
     return lagreVurdering({
       behandlingUuid,
       behandlingVersjon,
-      vurdering: formValues.saksbehandlersVurdering!,
-      begrunnelse: formValues.begrunnelse!,
+      vurdering: formValues.saksbehandlersVurdering,
+      begrunnelse: formValues.begrunnelse,
       arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-      internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+      internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
     })
       .then(oppdater)
       .finally(() => formMethods.reset(formValues));
