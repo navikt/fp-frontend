@@ -13,7 +13,6 @@ const fellesInntektsmeldingFelter = {
   arbeidsgiverIdent: '910909088',
   eksternArbeidsforholdId: 'ARB001-001',
   innsendingstidspunkt: '2021-12-06T00:00:00',
-  internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
   kildeSystem: 'Altinn',
   bortfalteNaturalytelser: [],
   refusjonsperioder: [],
@@ -26,6 +25,7 @@ const fellesInntektsmeldingFelter = {
   startDatoPermisjon: null,
   årsak: null,
   refusjonPrMnd: null,
+  internArbeidsforholdId: null,
 };
 
 const defaultArbeidsforhold = {
@@ -34,7 +34,7 @@ const defaultArbeidsforhold = {
   stillingsprosent: 100,
   tom: '2022-12-31',
   begrunnelse: 'Dette er en begrunnelse',
-  saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+  saksbehandlersVurdering: null,
   internArbeidsforholdId: null,
   eksternArbeidsforholdId: null,
   årsak: null,
@@ -263,31 +263,22 @@ export const ArbeidsforholdetErOpprettetBasertPåIM: Story = {
         {
           ...fellesInntektsmeldingFelter,
           inntektPrMnd: 25500.0,
-          refusjonPrMnd: null,
           arbeidsgiverIdent: '999999999',
-          eksternArbeidsforholdId: null,
-          internArbeidsforholdId: null,
           kontaktpersonNavn: 'Dolly Dollesen',
           kontaktpersonNummer: '99999999',
           journalpostId: '524273715',
           dokumentId: '548466069',
           motattDato: '2022-01-19',
-          begrunnelse: null,
-          saksbehandlersVurdering: null,
         },
       ],
       arbeidsforhold: [
         {
           ...defaultArbeidsforhold,
           arbeidsgiverIdent: '999999999',
-          internArbeidsforholdId: null,
-          eksternArbeidsforholdId: null,
           fom: '2022-01-19',
           tom: '9999-12-31',
           stillingsprosent: 100.0,
-          årsak: null,
           saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-          permisjonOgMangel: null,
           begrunnelse: 'Mottatt IM',
         },
       ],
@@ -325,8 +316,6 @@ export const FlereArbeidsforholdITabell: Story = {
           fom: '2019-12-06',
           tom: '9999-12-31',
           stillingsprosent: 100,
-          saksbehandlersVurdering: null,
-          begrunnelse: null,
         },
         {
           ...defaultArbeidsforhold,
@@ -355,7 +344,6 @@ export const FlereArbeidsforholdITabell: Story = {
         {
           ...fellesInntektsmeldingFelter,
           inntektPrMnd: 30000,
-          refusjonPrMnd: null,
           arbeidsgiverIdent: '999999999',
           eksternArbeidsforholdId: 'V999999999R50049082SS157848L0001',
           internArbeidsforholdId: 'c14b0c78-eb1f-4d8e-b73f-7f385a5e67d2',
@@ -368,7 +356,6 @@ export const FlereArbeidsforholdITabell: Story = {
         {
           ...fellesInntektsmeldingFelter,
           inntektPrMnd: 40000,
-          refusjonPrMnd: null,
           arbeidsgiverIdent: '999999998',
           eksternArbeidsforholdId: 'ARB001-001',
           internArbeidsforholdId: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
