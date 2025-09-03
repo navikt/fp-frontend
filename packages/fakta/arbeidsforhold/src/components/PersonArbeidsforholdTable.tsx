@@ -124,7 +124,7 @@ const utledNavn = (
       ? eksternArbeidsforholdId
       : undefined;
 
-  return formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternId);
+  return formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternId ?? undefined);
 };
 
 const utledNøkkel = (

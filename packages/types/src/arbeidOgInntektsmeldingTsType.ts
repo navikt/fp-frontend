@@ -1,4 +1,10 @@
-import type { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import type {
+  foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidOgInntektsmeldingDto,
+  foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto,
+  foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto,
+  foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto,
+  foreldrepenger_domene_iay_modell_NaturalYtelse,
+} from './apiDtoGenerert.ts';
 
 export enum AksjonspunktÅrsak {
   MANGLENDE_INNTEKTSMELDING = 'MANGLENDE_INNTEKTSMELDING',
@@ -6,88 +12,12 @@ export enum AksjonspunktÅrsak {
   PERMISJON_UTEN_SLUTTDATO = 'PERMISJON_UTEN_SLUTTDATO',
 }
 
-type PermisjonOgMangel = Readonly<{
-  permisjonFom: string;
-  permisjonTom?: string;
-  type: PermisjonsbeskrivelseType;
-  årsak?: AksjonspunktÅrsak;
-  permisjonStatus?: string;
-}>;
+export type Inntektsmelding = foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto;
 
-export type Inntektsmelding = Readonly<{
-  inntektPrMnd: number;
-  refusjonPrMnd?: number;
-  arbeidsgiverIdent: string;
-  eksternArbeidsforholdId?: string | null;
-  internArbeidsforholdId?: string;
-  kontaktpersonNavn: string;
-  kontaktpersonNummer: string;
-  journalpostId: string;
-  dokumentId: string;
-  motattDato: string;
-  innsendingstidspunkt: string;
-  årsak?: AksjonspunktÅrsak | null;
-  saksbehandlersVurdering?: string | null;
-  begrunnelse?: string | null;
-  kildeSystem: string;
-  startDatoPermisjon?: string;
-  aktiveNaturalytelser: AktivNaturalYtelse[];
-  refusjonsperioder: Refusjonsperiode[];
-  innsendingsårsak: keyof typeof InntektsmeldingInnsendingsårsak;
-  tilknyttedeBehandlingIder: string[];
-}>;
+export type AktivNaturalYtelse = foreldrepenger_domene_iay_modell_NaturalYtelse;
 
-type Refusjonsperiode = {
-  refusjonsbeløp: Beløp;
-  indexKey: string;
-  fom: string;
-};
+export type Arbeidsforhold = foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto;
 
-export type AktivNaturalYtelse = Readonly<{
-  periode: { fomDato: string; tomDato: string };
-  beloepPerMnd: Beløp;
-  type: string;
-  indexKey: string;
-}>;
+export type Inntektspost = foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto;
 
-type Beløp = {
-  verdi: number;
-};
-
-export const InntektsmeldingInnsendingsårsak = {
-  NY: 'Ny',
-  ENDRING: 'Endring',
-  UDEFINERT: 'Udefinert',
-};
-
-export type Arbeidsforhold = Readonly<{
-  arbeidsgiverIdent: string;
-  internArbeidsforholdId?: string;
-  eksternArbeidsforholdId?: string;
-  fom: string;
-  tom: string;
-  stillingsprosent: number;
-  årsak?: AksjonspunktÅrsak | null;
-  permisjonOgMangel?: PermisjonOgMangel | null;
-  saksbehandlersVurdering: string | null;
-  begrunnelse: string | null;
-}>;
-
-export type Inntektspost = Readonly<{
-  beløp: number;
-  fom: string;
-  tom: string;
-  type: string;
-}>;
-
-export type Inntekt = Readonly<{
-  arbeidsgiverIdent: string;
-  inntekter: Inntektspost[];
-}>;
-
-export type ArbeidOgInntektsmelding = Readonly<{
-  inntektsmeldinger: Inntektsmelding[];
-  arbeidsforhold: Arbeidsforhold[];
-  inntekter: Inntekt[];
-  skjæringstidspunkt: string;
-}>;
+export type ArbeidOgInntektsmelding = foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidOgInntektsmeldingDto;

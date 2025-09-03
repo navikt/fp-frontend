@@ -172,8 +172,8 @@ const sorterInntektsmeldinger = ({
   }
 
   return inntektsmeldinger.slice().sort((a, b) => {
-    const aValue = a[sortKey];
-    const bValue = b[sortKey];
+    const aValue = a[sortKey] ?? undefined;
+    const bValue = b[sortKey] ?? undefined;
 
     return sorterStreng(aValue, bValue);
   });

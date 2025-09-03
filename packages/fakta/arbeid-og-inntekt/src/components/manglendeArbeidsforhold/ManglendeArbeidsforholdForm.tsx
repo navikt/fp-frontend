@@ -18,7 +18,12 @@ import {
 } from '@navikt/ft-form-validators';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import type { Inntektsmelding, ManglendeInntektsmeldingVurdering, ManueltArbeidsforhold } from '@navikt/fp-types';
+import type {
+  foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType,
+  Inntektsmelding,
+  ManglendeInntektsmeldingVurdering,
+  ManueltArbeidsforhold,
+} from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -31,7 +36,7 @@ const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
 type FormValues = {
-  saksbehandlersVurdering?: string;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
   fom?: string;
   tom?: string;
   stillingsprosent?: number;
@@ -90,7 +95,7 @@ export const ManglendeArbeidsforholdForm = ({
       return registrerArbeidsforhold({
         behandlingUuid,
         behandlingVersjon,
-        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+        internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
         arbeidsgiverNavn: radData.arbeidsgiverNavn,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
@@ -105,10 +110,10 @@ export const ManglendeArbeidsforholdForm = ({
     return lagreVurdering({
       behandlingUuid,
       behandlingVersjon,
-      vurdering: formValues.saksbehandlersVurdering!,
-      begrunnelse: formValues.begrunnelse!,
+      vurdering: formValues.saksbehandlersVurdering,
+      begrunnelse: formValues.begrunnelse,
       arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-      internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId,
+      internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
     })
       .then(oppdater)
       .finally(() => formMethods.reset(formValues));

@@ -150,7 +150,6 @@ export type {
 } from './src/vilkarsVurdertePerioderTsType';
 export type {
   ArbeidOgInntektsmelding,
-  Inntekt,
   Arbeidsforhold as AoIArbeidsforhold,
   Inntektsmelding,
   Inntektspost,

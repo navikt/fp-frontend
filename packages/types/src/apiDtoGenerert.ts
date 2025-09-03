@@ -2082,26 +2082,26 @@ export type foreldrepenger_behandlingslager_behandling_arbeidsforhold_Arbeidsfor
   | '-';
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto = {
-  inntektPrMnd?: number;
-  refusjonPrMnd?: number;
-  arbeidsgiverIdent?: string;
-  eksternArbeidsforholdId?: string;
-  internArbeidsforholdId?: string;
-  kontaktpersonNavn?: string;
-  kontaktpersonNummer?: string;
-  journalpostId?: string;
-  dokumentId?: string;
-  motattDato?: string;
-  innsendingstidspunkt?: string;
-  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
-  begrunnelse?: string;
-  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
-  kildeSystem?: string;
-  startDatoPermisjon?: string;
-  aktiveNaturalytelser?: Array<foreldrepenger_domene_iay_modell_NaturalYtelse>;
-  refusjonsperioder?: Array<foreldrepenger_domene_iay_modell_Refusjon>;
-  innsendingsårsak?: foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak;
-  tilknyttedeBehandlingIder?: Array<string>;
+  inntektPrMnd: number;
+  refusjonPrMnd: number | null;
+  arbeidsgiverIdent: string;
+  eksternArbeidsforholdId: string | null;
+  internArbeidsforholdId: string | null;
+  kontaktpersonNavn: string;
+  kontaktpersonNummer: string;
+  journalpostId: string;
+  dokumentId: string;
+  motattDato: string;
+  innsendingstidspunkt: string;
+  årsak: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak | null;
+  begrunnelse: string | null;
+  saksbehandlersVurdering: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType | null;
+  kildeSystem: string;
+  startDatoPermisjon: string | null;
+  aktiveNaturalytelser: Array<foreldrepenger_domene_iay_modell_NaturalYtelse>;
+  refusjonsperioder: Array<foreldrepenger_domene_iay_modell_Refusjon>;
+  innsendingsårsak: foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak;
+  tilknyttedeBehandlingIder: Array<string>;
 };
 
 export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
@@ -2112,16 +2112,16 @@ export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
   | 'PERMISJON_UTEN_SLUTTDATO';
 
 export type foreldrepenger_domene_iay_modell_NaturalYtelse = {
-  periode?: foreldrepenger_domene_tid_DatoIntervallEntitet;
-  beloepPerMnd?: foreldrepenger_domene_typer_Beløp;
-  type?: foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType;
-  indexKey?: string;
+  periode: foreldrepenger_domene_tid_DatoIntervallEntitet;
+  beloepPerMnd: foreldrepenger_domene_typer_Beløp;
+  type: foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType;
+  indexKey: string;
 };
 
 export type foreldrepenger_domene_iay_modell_Refusjon = {
-  fom?: string;
-  indexKey?: string;
-  refusjonsbeløp?: foreldrepenger_domene_typer_Beløp;
+  fom: string;
+  indexKey: string;
+  refusjonsbeløp: foreldrepenger_domene_typer_Beløp;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING' | '-';
@@ -2149,8 +2149,8 @@ export type foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType =
   | '-';
 
 export type foreldrepenger_domene_tid_DatoIntervallEntitet = {
-  fomDato?: string;
-  tomDato?: string;
+  fomDato: string;
+  tomDato: string;
 };
 
 export type foreldrepenger_domene_typer_Beløp = {
@@ -2159,41 +2159,41 @@ export type foreldrepenger_domene_typer_Beløp = {
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidOgInntektsmeldingDto = {
-  inntektsmeldinger?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto>;
-  arbeidsforhold?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto>;
-  inntekter?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto>;
-  skjæringstidspunkt?: string;
+  inntektsmeldinger: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto>;
+  arbeidsforhold: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto>;
+  inntekter: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto>;
+  skjæringstidspunkt: string;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto = {
-  arbeidsgiverIdent?: string;
-  internArbeidsforholdId?: string;
-  eksternArbeidsforholdId?: string;
-  fom?: string;
-  tom?: string;
-  stillingsprosent?: number;
-  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
-  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
-  permisjonOgMangel?: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto;
-  begrunnelse?: string;
+  arbeidsgiverIdent: string;
+  internArbeidsforholdId: string | null;
+  eksternArbeidsforholdId: string | null;
+  fom: string;
+  tom: string;
+  stillingsprosent: number;
+  årsak: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak | null;
+  saksbehandlersVurdering: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType | null;
+  permisjonOgMangel: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto | null;
+  begrunnelse: string | null;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto = {
-  arbeidsgiverIdent?: string;
-  inntekter?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto>;
+  arbeidsgiverIdent: string;
+  inntekter: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto>;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto = {
-  beløp?: number;
-  fom?: string;
-  tom?: string;
-  type?: foreldrepenger_domene_iay_modell_kodeverk_InntektspostType;
+  beløp: number;
+  fom: string;
+  tom: string;
+  type: foreldrepenger_domene_iay_modell_kodeverk_InntektspostType;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto = {
-  permisjonFom?: string;
+  permisjonFom: string;
   permisjonTom?: string;
-  type?: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
   årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
   permisjonStatus?: foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus;
 };
