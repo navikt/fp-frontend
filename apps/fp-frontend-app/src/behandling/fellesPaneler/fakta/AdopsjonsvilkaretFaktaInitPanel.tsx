@@ -31,6 +31,8 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
 
+  const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
+
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
@@ -38,9 +40,10 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Adopsjon' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {familiehendelse && søknad && søknad.soknadType === SoknadType.ADOPSJON ? (
+      {søknad?.soknadType === SoknadType.ADOPSJON &&
+      gjeldendeFamiliehendelse?.['@type'] === 'foreldrepenger.familiehendelse.rest.AvklartDataAdopsjonDto' ? (
         <AdopsjonFaktaIndex
-          familiehendelse={familiehendelse}
+          gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
           soknad={søknad}
           isForeldrepengerFagsak={fagsak.fagsakYtelseType === 'FP'}
           submittable={standardPanelProps.submittable}

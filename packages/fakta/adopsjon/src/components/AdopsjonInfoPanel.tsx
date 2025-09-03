@@ -8,7 +8,11 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, FamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
+  tjenester_behandling_søknad_SoknadAdopsjonDto,
+} from '@navikt/fp-types';
 import type {
   BekreftDokumentertDatoAksjonspunktAp,
   BekreftEktefelleAksjonspunktAp,
@@ -46,7 +50,7 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
 
 const buildInitialValues = (
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto,
-  familiehendelse: FamilieHendelse,
+  familiehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
   allAksjonspunkter: Aksjonspunkt[],
 ): FormValues => {
   const aksjonspunkter = allAksjonspunkter.filter(ap => adopsjonAksjonspunkter.some(kode => kode === ap.definisjon));
@@ -99,7 +103,7 @@ interface Props {
   submittable: boolean;
   isForeldrepengerFagsak: boolean;
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto;
 }
 
 /**

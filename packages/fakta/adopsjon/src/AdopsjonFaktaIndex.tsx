@@ -2,7 +2,10 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FamilieHendelseSamling, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
+import type {
+  foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
+  tjenester_behandling_søknad_SoknadAdopsjonDto,
+} from '@navikt/fp-types';
 
 import { AdopsjonInfoPanel } from './components/AdopsjonInfoPanel';
 
@@ -12,16 +15,21 @@ const intl = createIntl(messages);
 
 interface Props {
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
-  familiehendelse: FamilieHendelseSamling;
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto;
   isForeldrepengerFagsak: boolean;
   submittable: boolean;
 }
 
-export const AdopsjonFaktaIndex = ({ soknad, familiehendelse, isForeldrepengerFagsak, submittable }: Props) => (
+export const AdopsjonFaktaIndex = ({
+  soknad,
+  gjeldendeFamiliehendelse,
+  isForeldrepengerFagsak,
+  submittable,
+}: Props) => (
   <RawIntlProvider value={intl}>
     <AdopsjonInfoPanel
       soknad={soknad}
-      gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+      gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
       isForeldrepengerFagsak={isForeldrepengerFagsak}
       submittable={submittable}
     />
