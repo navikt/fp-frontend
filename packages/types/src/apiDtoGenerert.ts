@@ -3348,15 +3348,15 @@ export type foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak =
   | '-';
 
 export type tjenester_behandling_klage_KlageFormkravResultatDto = {
-  paKlagdBehandlingId: number | null;
-  paKlagdBehandlingUuid: string | null;
-  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType | null;
-  begrunnelse: string | null;
-  erKlagerPart: boolean | null;
-  erKlageKonkret: boolean | null;
-  erKlagefirstOverholdt: boolean | null;
-  erSignert: boolean | null;
-  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak> | null;
+  paKlagdBehandlingId: number;
+  paKlagdBehandlingUuid: string;
+  paklagdBehandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
+  begrunnelse: string;
+  erKlagerPart: boolean;
+  erKlageKonkret: boolean;
+  erKlagefirstOverholdt: boolean;
+  erSignert: boolean;
+  avvistArsaker: Array<foreldrepenger_behandlingslager_behandling_klage_KlageAvvistÅrsak>;
 };
 
 export type tjenester_behandling_klage_KlageVurderingResultatDto = {

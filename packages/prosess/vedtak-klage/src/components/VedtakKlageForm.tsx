@@ -8,7 +8,6 @@ import {
   BehandlingResultatType,
   erAksjonspunktÅpent,
   isKlageOmgjort,
-  KlageAvvistÅrsak,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
@@ -114,7 +113,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
     </VStack>
   );
 };
-const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering): KlageAvvistÅrsak[] => {
+const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering) => {
   if (klageVurderingResultat) {
     if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
       return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;

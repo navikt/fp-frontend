@@ -55,12 +55,12 @@ const lagHjemlerMedNavn = (
 const lagHjemmelsKoder = (kodeverkVerdier: string[]): string[] => kodeverkVerdier.map(kode => kode);
 
 const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): KlageFormType => ({
-  klageMedholdArsak: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageMedholdArsak),
-  klageVurderingOmgjoer: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurderingOmgjoer),
-  klageHjemmel: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageHjemmel),
-  klageVurdering: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurdering),
-  begrunnelse: klageVurderingResultat ? klageVurderingResultat.begrunnelse : undefined,
-  fritekstTilBrev: klageVurderingResultat ? klageVurderingResultat.fritekstTilBrev : undefined,
+  klageMedholdArsak: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageMedholdArsak ?? undefined),
+  klageVurderingOmgjoer: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurderingOmgjoer ?? undefined),
+  klageHjemmel: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageHjemmel ?? undefined),
+  klageVurdering: definertKodeverdiEllerUndefined(klageVurderingResultat?.klageVurdering ?? undefined),
+  begrunnelse: klageVurderingResultat?.begrunnelse ?? undefined,
+  fritekstTilBrev: klageVurderingResultat?.fritekstTilBrev ?? undefined,
 });
 
 interface Props {
@@ -89,7 +89,7 @@ export const BehandleKlageFormNfp = ({
   const intl = useIntl();
   const [visSubmitModal, setVisSubmitModal] = useState<boolean>(false);
 
-  const defaultValues = buildInitialValues(klageVurdering.klageVurderingResultatNFP);
+  const defaultValues = buildInitialValues(klageVurdering.klageVurderingResultatNFP ?? undefined);
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<KlageFormType>();
 

@@ -22,8 +22,19 @@ interface Props {
   readOnlySubmitButton: boolean;
 }
 
+const tomKlageVurdering = {
+  klageFormkravResultatNFP: null,
+  klageVurderingResultatNFP: null,
+  klageFormkravResultatKA: null,
+  klageVurderingResultatNK: null,
+  aktuelleHjemler: null,
+  underBehandlingKabal: null,
+  behandletAvKabal: null,
+  mottattDato: null,
+};
+
 export const FormkravProsessIndex = ({
-  klageVurdering = {},
+  klageVurdering = tomKlageVurdering,
   avsluttedeBehandlinger,
   readOnlySubmitButton,
   lagreFormkravVurdering,
