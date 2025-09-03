@@ -134,7 +134,6 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
-  console.log(dato, soknad);
   return (
     <RhfForm
       formMethods={formMethods}
