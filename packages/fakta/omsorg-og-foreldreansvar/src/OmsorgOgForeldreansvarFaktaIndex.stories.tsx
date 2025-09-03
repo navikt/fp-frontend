@@ -39,7 +39,7 @@ const soknad = {
   antallBarn: 2,
   soknadType: SoknadType.ADOPSJON,
   farSokerType: FarSøkerType.ADOPTERER_ALENE,
-  omsorgsovertakelseDato: '2022-09-14',
+  omsorgsovertakelseDato: null,
   barnetsAnkomstTilNorgeDato: '2022-09-13',
   mottattDato: '',
   begrunnelseForSenInnsending: null,

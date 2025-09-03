@@ -32,7 +32,7 @@ describe('SokersOpplysningspliktVilkarProsessIndex', () => {
       inntektsmeldingerSomIkkeKommer: [
         {
           aktørId: undefined,
-          brukerHarSagtAtIkkeKommer: undefined,
+          brukerHarSagtAtIkkeKommer: false,
           organisasjonsnummer: '1234',
         },
       ],
