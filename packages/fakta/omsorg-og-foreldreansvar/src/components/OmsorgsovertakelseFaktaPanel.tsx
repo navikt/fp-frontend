@@ -90,7 +90,7 @@ OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendel
 
 const finnOmsorgsovertakelseDato = (søknad: Soknad) => {
   if (søknad.soknadType === SoknadType.ADOPSJON) {
-    return søknad.omsorgsovertakelseDato;
+    return søknad.omsorgsovertakelseDato ?? undefined;
   }
 
   return undefined;

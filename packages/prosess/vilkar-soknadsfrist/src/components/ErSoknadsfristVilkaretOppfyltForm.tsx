@@ -51,9 +51,9 @@ const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | un
         ? familiehendelse.avklartBarn[0].fodselsdato
         : soknadFodselsdato;
     const termindato = familiehendelse?.termindato ?? soknad.termindato;
-    return fodselsdato || termindato;
+    return (fodselsdato || termindato) ?? undefined;
   }
-  return familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato;
+  return familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato ?? undefined;
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({

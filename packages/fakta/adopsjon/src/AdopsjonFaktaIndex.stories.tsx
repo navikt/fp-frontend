@@ -25,15 +25,41 @@ const familieHendelse = {
 } as FamilieHendelseSamling;
 
 const soknad = {
-  fodselsdatoer: { 1: '2019-01-10' } as Record<number, string>,
-  termindato: '2019-01-01',
-  utstedtdato: '2019-01-02',
   antallBarn: 1,
-  soknadType: SoknadType.FODSEL,
+  adopsjonFodelsedatoer: { 1: '2019-01-10' },
+  soknadType: SoknadType.ADOPSJON,
   farSokerType: FarSøkerType.ADOPTERER_ALENE,
+  mottattDato: '',
+  begrunnelseForSenInnsending: null,
   omsorgsovertakelseDato: '2022-09-14',
   barnetsAnkomstTilNorgeDato: '2022-09-13',
-} as Soknad;
+  oppgittTilknytning: {
+    oppholdNorgeNa: false,
+    oppholdSistePeriode: false,
+    oppholdNestePeriode: false,
+    utlandsoppholdFor: [],
+    utlandsoppholdEtter: [],
+  },
+  manglendeVedlegg: [],
+  oppgittFordeling: {
+    startDatoForPermisjon: null,
+    dekningsgrader: {
+      avklartDekningsgrad: null,
+      søker: {
+        søknadsdato: '',
+        dekningsgrad: 0,
+      },
+      annenPart: null,
+    },
+  },
+  søknadsfrist: {
+    mottattDato: null,
+    utledetSøknadsfrist: null,
+    søknadsperiodeStart: null,
+    søknadsperiodeSlutt: null,
+    dagerOversittetFrist: null,
+  },
+} satisfies Soknad;
 
 const merknaderFraBeslutter = {
   notAccepted: false,

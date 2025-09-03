@@ -29,7 +29,7 @@ const buildInitialValues = (
   mottattDato: string,
   søknadsfrist?: Søknadsfrist,
 ): FormValues => {
-  const upgMottattDato = søknadsfrist?.mottattDato;
+  const upgMottattDato = søknadsfrist?.mottattDato ?? undefined;
   return {
     gyldigSenFremsetting:
       aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : upgMottattDato !== mottattDato,

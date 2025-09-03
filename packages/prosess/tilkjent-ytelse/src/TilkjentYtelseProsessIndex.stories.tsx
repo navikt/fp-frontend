@@ -92,11 +92,7 @@ const beregningresultat: BeregningsresultatDagytelse = {
 const søknad = {
   mottattDato: '2019-01-10',
   soknadType: SoknadType.FODSEL,
-  omsorgsovertakelseDato: '2019-01-10',
   fodselsdatoer: {
-    1: '2019-01-01',
-  },
-  adopsjonFodelsedatoer: {
     1: '2019-01-01',
   },
   termindato: '2019-02-01',

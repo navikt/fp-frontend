@@ -4017,18 +4017,18 @@ export type tjenester_behandling_søknad_ManglendeVedleggDto = {
 
 export type tjenester_behandling_søknad_OppgittFordelingDto = {
   startDatoForPermisjon: string | null;
-  dekningsgrader: tjenester_behandling_søknad_OppgittFordelingDto_DekningsgradInfoDto | null;
+  dekningsgrader: tjenester_behandling_søknad_OppgittFordelingDto_DekningsgradInfoDto;
 };
 
 export type tjenester_behandling_søknad_OppgittFordelingDto_DekningsgradInfoDto = {
   avklartDekningsgrad: number | null;
-  søker: tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto | null;
+  søker: tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto;
   annenPart: tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto | null;
 };
 
 export type tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto = {
-  søknadsdato: string | null;
-  dekningsgrad: number | null;
+  søknadsdato: string;
+  dekningsgrad: number;
 };
 
 export type tjenester_behandling_søknad_OppgittTilknytningDto = {
