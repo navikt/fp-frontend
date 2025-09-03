@@ -108,7 +108,14 @@ const søknad = {
   manglendeVedlegg: [],
   oppgittFordeling: {
     startDatoForPermisjon: null,
-    dekningsgrader: null,
+    dekningsgrader: {
+      avklartDekningsgrad: null,
+      søker: {
+        søknadsdato: '',
+        dekningsgrad: 0,
+      },
+      annenPart: null,
+    },
   },
   søknadsfrist: {
     mottattDato: null,
