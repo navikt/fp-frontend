@@ -8,7 +8,7 @@ import { BTag } from '@navikt/ft-utils';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { type Aksjonspunkt, type OmsorgOgRett, Verdi } from '@navikt/fp-types';
+import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -41,10 +41,10 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
 
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? {
-      harAleneomsorg: harAleneomsorg === undefined ? undefined : harAleneomsorg === Verdi.JA,
-      harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === Verdi.JA,
-      harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === Verdi.JA,
-      mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === Verdi.JA,
+      harAleneomsorg: harAleneomsorg === undefined ? undefined : harAleneomsorg === 'JA',
+      harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === 'JA',
+      harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === 'JA',
+      mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === 'JA',
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
@@ -59,8 +59,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
       ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
     });
 
-  const skalAvklareUforetrygd =
-    omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;
+  const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === 'JA';
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>

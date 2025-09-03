@@ -1,24 +1,24 @@
 import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { type OmsorgOgRett, Rettighetstype, Verdi } from '@navikt/fp-types';
+import { type OmsorgOgRett } from '@navikt/fp-types';
 
 export const omsorgOgRett: OmsorgOgRett = {
   søknad: {
-    søkerHarAleneomsorg: Verdi.NEI,
+    søkerHarAleneomsorg: 'NEI',
     annenpartIdent: null,
     annenpartBostedsland: null,
     annenpartRettighet: {
-      harRettNorge: Verdi.JA,
-      harOppholdEØS: Verdi.IKKE_RELEVANT,
-      harRettEØS: Verdi.IKKE_RELEVANT,
-      harUføretrygd: Verdi.IKKE_RELEVANT,
+      harRettNorge: 'JA',
+      harOppholdEØS: 'IKKE_RELEVANT',
+      harRettEØS: 'IKKE_RELEVANT',
+      harUføretrygd: 'IKKE_RELEVANT',
     },
   },
   registerdata: {
-    harAnnenpartUføretrygd: Verdi.IKKE_RELEVANT,
-    harAnnenpartForeldrepenger: Verdi.NEI,
-    harAnnenpartEngangsstønad: Verdi.NEI,
+    harAnnenpartUføretrygd: 'IKKE_RELEVANT',
+    harAnnenpartForeldrepenger: 'NEI',
+    harAnnenpartEngangsstønad: 'NEI',
   },
   manuellBehandlingResultat: null,
   relasjonsRolleType: RelasjonsRolleType.MOR,
-  rettighetstype: Rettighetstype.BEGGE_RETT,
+  rettighetstype: 'BEGGE_RETT',
 };

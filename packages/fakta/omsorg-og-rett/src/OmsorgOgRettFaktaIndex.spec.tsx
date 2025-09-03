@@ -3,8 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
-import { Rettighetstype } from '@navikt/fp-types';
-
 import * as stories from './OmsorgOgRettFaktaIndex.stories';
 
 const {
@@ -205,7 +203,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const utils = render(<KanOverstyreMor submitCallback={lagreVurdering} />);
 
     await userEvent.click(screen.getByTitle('Overstyr'));
-    await userEvent.selectOptions(utils.getByLabelText('Rettighetstype'), Rettighetstype.BEGGE_RETT);
+    await userEvent.selectOptions(utils.getByLabelText('Rettighetstype'), 'BEGGE_RETT');
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -215,7 +213,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
       kode: '6018',
       begrunnelse: 'Dette er en begrunnelse',
-      rettighetstype: Rettighetstype.BEGGE_RETT,
+      rettighetstype: 'BEGGE_RETT',
     });
   });
 });

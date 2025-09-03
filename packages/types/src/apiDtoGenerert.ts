@@ -4433,36 +4433,36 @@ export type foreldrepenger_behandlingslager_behandling_personopplysning_Relasjon
   | '-';
 
 export type tjenester_behandling_ytelsefordeling_OmsorgOgRettDto = {
-  søknad?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
-  registerdata?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData;
-  manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
-  rettighetstype?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
-  relasjonsRolleType?: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
+  søknad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
+  registerdata: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData | null;
+  manuellBehandlingResultat: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat | null;
+  rettighetstype: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype | null;
+  relasjonsRolleType: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
 };
 
 export type tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat = {
-  søkerHarAleneomsorg?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
-  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  annenpartRettighet: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet | null;
 };
 
 export type tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData = {
-  harAnnenpartUføretrygd?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
-  harAnnenpartForeldrepenger?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
-  harAnnenpartEngangsstønad?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartForeldrepenger: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartEngangsstønad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
 };
 
 export type tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet = {
-  harRettNorge?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
-  harOppholdEØS?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
-  harRettEØS?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
-  harUføretrygd?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
 };
 
 export type tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad = {
-  søkerHarAleneomsorg?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
-  annenpartIdent?: string;
-  annenpartBostedsland?: foreldrepenger_behandlingslager_geografisk_Landkoder;
-  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  annenpartIdent: string | null;
+  annenpartBostedsland: foreldrepenger_behandlingslager_geografisk_Landkoder | null;
+  annenpartRettighet: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet | null;
 };
 
 export type tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi = 'JA' | 'NEI' | 'IKKE_RELEVANT';

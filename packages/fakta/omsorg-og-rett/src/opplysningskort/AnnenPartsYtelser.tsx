@@ -2,7 +2,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Label, Table } from '@navikt/ds-react';
 
-import { type OmsorgOgRett, Verdi } from '@navikt/fp-types';
+import { type OmsorgOgRett } from '@navikt/fp-types';
 
 interface Props {
   omsorgOgRett: OmsorgOgRett;
@@ -13,9 +13,9 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
     return null;
   }
 
-  const harAnnenpartUføretrygd = omsorgOgRett.registerdata.harAnnenpartUføretrygd ?? Verdi.IKKE_RELEVANT;
-  const harAnnenpartForeldrepenger = omsorgOgRett.registerdata.harAnnenpartForeldrepenger ?? Verdi.IKKE_RELEVANT;
-  const harAnnenpartEngangsstønad = omsorgOgRett.registerdata.harAnnenpartEngangsstønad ?? Verdi.IKKE_RELEVANT;
+  const harAnnenpartUføretrygd = omsorgOgRett.registerdata.harAnnenpartUføretrygd ?? 'IKKE_RELEVANT';
+  const harAnnenpartForeldrepenger = omsorgOgRett.registerdata.harAnnenpartForeldrepenger ?? 'IKKE_RELEVANT';
+  const harAnnenpartEngangsstønad = omsorgOgRett.registerdata.harAnnenpartEngangsstønad ?? 'IKKE_RELEVANT';
 
   return (
     <Table>
@@ -28,7 +28,7 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
         </Table.Row>
       </Table.Header>
       <Table.Body>
-        {harAnnenpartUføretrygd !== Verdi.IKKE_RELEVANT && (
+        {harAnnenpartUføretrygd !== 'IKKE_RELEVANT' && (
           <Table.Row>
             <>
               <Table.DataCell>
@@ -48,7 +48,7 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
           </Table.Row>
         )}
 
-        {harAnnenpartForeldrepenger !== Verdi.IKKE_RELEVANT && (
+        {harAnnenpartForeldrepenger !== 'IKKE_RELEVANT' && (
           <Table.Row>
             <>
               <Table.DataCell>
@@ -67,7 +67,7 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
             </>
           </Table.Row>
         )}
-        {harAnnenpartEngangsstønad !== Verdi.IKKE_RELEVANT && (
+        {harAnnenpartEngangsstønad !== 'IKKE_RELEVANT' && (
           <Table.Row>
             <>
               <Table.DataCell>
