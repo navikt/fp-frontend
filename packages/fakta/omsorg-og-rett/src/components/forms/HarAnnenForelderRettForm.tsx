@@ -6,7 +6,7 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { type Aksjonspunkt, type OmsorgOgRett, Verdi } from '@navikt/fp-types';
+import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -37,15 +37,14 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, submittab
 
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? {
-      harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === Verdi.JA,
-      mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === Verdi.JA,
-      harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === Verdi.JA,
+      harAnnenForelderRett: harRettNorge === undefined ? undefined : harRettNorge === 'JA',
+      mottarAnnenForelderUforetrygd: harUføretrygd === undefined ? undefined : harUføretrygd === 'JA',
+      harAnnenForelderRettEØS: harRettEØS === undefined ? undefined : harRettEØS === 'JA',
       ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     },
   });
 
-  const skalAvklareUforetrygd =
-    omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === Verdi.JA;
+  const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === 'JA';
 
   const transformerFeltverdier = (feltVerdier: FormValues) =>
     submitCallback({

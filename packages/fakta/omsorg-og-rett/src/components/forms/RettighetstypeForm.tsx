@@ -9,14 +9,18 @@ import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
-import { type Aksjonspunkt, type OmsorgOgRett, Rettighetstype } from '@navikt/fp-types';
+import {
+  type Aksjonspunkt,
+  type foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype,
+  type OmsorgOgRett,
+} from '@navikt/fp-types';
 import type { OverstyringRettigheterAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
 
 type FormValues = {
-  rettighetstype: Rettighetstype;
+  rettighetstype: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
   begrunnelse: string;
 };
 
@@ -28,13 +32,13 @@ interface Props {
 }
 
 const RETTIGHETSTYPER = {
-  [Rettighetstype.ALENEOMSORG]: 'Rettighetstype.Aleneomsorg',
-  [Rettighetstype.BEGGE_RETT]: 'Rettighetstype.BeggeRett',
-  [Rettighetstype.BEGGE_RETT_EØS]: 'Rettighetstype.BeggeRettEØS',
-  [Rettighetstype.BARE_MOR_RETT]: 'Rettighetstype.BareMorRett',
-  [Rettighetstype.BARE_FAR_RETT]: 'Rettighetstype.BareFarRett',
-  [Rettighetstype.BARE_FAR_RETT_MOR_UFØR]: 'Rettighetstype.BareFarRettMorUfør',
-} as Record<string, string>;
+  ALENEOMSORG: 'Rettighetstype.Aleneomsorg',
+  BEGGE_RETT: 'Rettighetstype.BeggeRett',
+  BEGGE_RETT_EØS: 'Rettighetstype.BeggeRettEØS',
+  BARE_MOR_RETT: 'Rettighetstype.BareMorRett',
+  BARE_FAR_RETT: 'Rettighetstype.BareFarRett',
+  BARE_FAR_RETT_MOR_UFØR: 'Rettighetstype.BareFarRettMorUfør',
+} satisfies Record<foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype, string>;
 
 export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, kanOverstyre }: Props) => {
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<OverstyringRettigheterAp>();
@@ -56,19 +60,9 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
     });
   const rettighetstyper =
     omsorgOgRett.relasjonsRolleType === RelasjonsRolleType.MOR
-      ? [
-          Rettighetstype.ALENEOMSORG,
-          Rettighetstype.BEGGE_RETT,
-          Rettighetstype.BEGGE_RETT_EØS,
-          Rettighetstype.BARE_MOR_RETT,
-        ]
-      : [
-          Rettighetstype.ALENEOMSORG,
-          Rettighetstype.BEGGE_RETT,
-          Rettighetstype.BEGGE_RETT_EØS,
-          Rettighetstype.BARE_FAR_RETT,
-          Rettighetstype.BARE_FAR_RETT_MOR_UFØR,
-        ];
+      ? (['ALENEOMSORG', 'BEGGE_RETT', 'BEGGE_RETT_EØS', 'BARE_MOR_RETT'] as const)
+      : (['ALENEOMSORG', 'BEGGE_RETT', 'BEGGE_RETT_EØS', 'BARE_FAR_RETT', 'BARE_FAR_RETT_MOR_UFØR'] as const);
+
   const [erOverstyrt, setErOverstyrt] = useState(!!aksjonspunkt?.begrunnelse);
   const readOnly = !erOverstyrt || isReadOnly || !kanOverstyre;
   return (
