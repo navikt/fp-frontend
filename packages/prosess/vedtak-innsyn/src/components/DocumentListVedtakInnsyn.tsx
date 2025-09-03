@@ -53,7 +53,7 @@ export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
                     saksnummer={saksNr}
                     journalpostId={document.journalpostId}
                     dokumentId={document.dokumentId}
-                    dokumentTittel={document.tittel}
+                    dokumentTittel={document.tittel ?? undefined}
                   />
                 </Table.DataCell>
               </Table.Row>

@@ -112,7 +112,7 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
                     saksnummer={saksNr}
                     journalpostId={document.journalpostId}
                     dokumentId={document.dokumentId}
-                    dokumentTittel={document.tittel}
+                    dokumentTittel={document.tittel ?? undefined}
                   />
                 </Table.DataCell>
                 <Table.DataCell hidden={readOnly}>
