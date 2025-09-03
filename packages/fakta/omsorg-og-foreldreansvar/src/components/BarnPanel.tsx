@@ -31,8 +31,7 @@ export const BarnPanel = ({ alleMerknaderFraBeslutter, soknad }: Props) => {
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
       <VStack gap="space-8">
-        {soknad.soknadType === SoknadType.ADOPSJON &&
-          adopsjonFodelsedatoer &&
+        {adopsjonFodelsedatoer &&
           Object.keys(adopsjonFodelsedatoer).map(key => (
             <div key={`${key}`}>
               <Label size="small">

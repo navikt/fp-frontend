@@ -51,7 +51,7 @@ export const DekningradApForm = ({
 }: Props) => {
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      dekningsgrad: søknad.oppgittFordeling.dekningsgrader?.avklartDekningsgrad ?? undefined,
+      dekningsgrad: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ?? undefined,
       begrunnelse: aksjonspunkt.begrunnelse ?? '',
     },
   });
