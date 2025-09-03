@@ -1494,17 +1494,17 @@ export type tjenester_behandling_uttak_fakta_FaktaUttakDto_ManueltSattStartdatoD
 export type tjenester_behandling_uttak_fakta_FaktaUttakPeriodeDto = {
   fom: string;
   tom: string;
-  uttakPeriodeType?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType;
-  utsettelseÅrsak?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_UtsettelseÅrsak;
-  overføringÅrsak?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OverføringÅrsak;
-  oppholdÅrsak?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak;
-  arbeidstidsprosent?: number;
-  arbeidsforhold?: tjenester_behandling_uttak_dto_ArbeidsforholdDto;
-  samtidigUttaksprosent?: number;
-  flerbarnsdager?: boolean;
-  morsAktivitet?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_MorsAktivitet;
-  periodeKilde?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde;
-  begrunnelse?: string;
+  uttakPeriodeType: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType | null;
+  utsettelseÅrsak: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_UtsettelseÅrsak | null;
+  overføringÅrsak: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OverføringÅrsak | null;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak | null;
+  arbeidstidsprosent: number | null;
+  arbeidsforhold?: tjenester_behandling_uttak_dto_ArbeidsforholdDto | null;
+  samtidigUttaksprosent: number | null;
+  flerbarnsdager: boolean | null;
+  morsAktivitet: foreldrepenger_behandlingslager_behandling_ytelsefordeling_MorsAktivitet | null;
+  periodeKilde: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde;
+  begrunnelse: string | null;
 };
 
 export type tjenester_behandling_vedtak_aksjonspunkt_AksjonspunktGodkjenningDto = {
