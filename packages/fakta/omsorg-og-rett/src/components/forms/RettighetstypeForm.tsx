@@ -32,12 +32,12 @@ interface Props {
 }
 
 const RETTIGHETSTYPER = {
-  ALENEOMSORG: '"Aleneomsorg"',
-  BEGGE_RETT: '"BeggeRett"',
-  BEGGE_RETT_EØS: '"BeggeRettEØS"',
-  BARE_MOR_RETT: '"BareMorRett"',
-  BARE_FAR_RETT: '"BareFarRett"',
-  BARE_FAR_RETT_MOR_UFØR: '"BareFarRettMorUfør"',
+  ALENEOMSORG: 'Rettighetstype.Aleneomsorg',
+  BEGGE_RETT: 'Rettighetstype.BeggeRett',
+  BEGGE_RETT_EØS: 'Rettighetstype.BeggeRettEØS',
+  BARE_MOR_RETT: 'Rettighetstype.BareMorRett',
+  BARE_FAR_RETT: 'Rettighetstype.BareFarRett',
+  BARE_FAR_RETT_MOR_UFØR: 'Rettighetstype.BareFarRettMorUfør',
 } satisfies Record<foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype, string>;
 
 export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, kanOverstyre }: Props) => {
