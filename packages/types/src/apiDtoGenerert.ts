@@ -4009,41 +4009,41 @@ export type foreldrepenger_behandlingslager_behandling_DokumentTypeId =
 export type foreldrepenger_familiehendelse_rest_SøknadType = 'ST-001' | 'ST-002';
 
 export type tjenester_behandling_søknad_ManglendeVedleggDto = {
-  dokumentType: foreldrepenger_behandlingslager_behandling_DokumentTypeId | null;
-  dokumentTittel: string | null;
-  arbeidsgiverReferanse: string | null;
-  brukerHarSagtAtIkkeKommer: boolean | null;
+  dokumentType: foreldrepenger_behandlingslager_behandling_DokumentTypeId;
+  dokumentTittel: string;
+  arbeidsgiverReferanse: string;
+  brukerHarSagtAtIkkeKommer: boolean;
 };
 
 export type tjenester_behandling_søknad_OppgittFordelingDto = {
   startDatoForPermisjon: string | null;
-  dekningsgrader: tjenester_behandling_søknad_OppgittFordelingDto_DekningsgradInfoDto | null;
+  dekningsgrader: tjenester_behandling_søknad_OppgittFordelingDto_DekningsgradInfoDto;
 };
 
 export type tjenester_behandling_søknad_OppgittFordelingDto_DekningsgradInfoDto = {
   avklartDekningsgrad: number | null;
-  søker: tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto | null;
+  søker: tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto;
   annenPart: tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto | null;
 };
 
 export type tjenester_behandling_søknad_OppgittFordelingDto_OppgittDekningsgradDto = {
-  søknadsdato: string | null;
-  dekningsgrad: number | null;
+  søknadsdato: string;
+  dekningsgrad: number;
 };
 
 export type tjenester_behandling_søknad_OppgittTilknytningDto = {
-  oppholdNorgeNa: boolean | null;
-  oppholdSistePeriode: boolean | null;
-  oppholdNestePeriode: boolean | null;
-  utlandsoppholdFor: Array<tjenester_behandling_søknad_UtlandsoppholdDto> | null;
-  utlandsoppholdEtter: Array<tjenester_behandling_søknad_UtlandsoppholdDto> | null;
+  oppholdNorgeNa: boolean;
+  oppholdSistePeriode: boolean;
+  oppholdNestePeriode: boolean;
+  utlandsoppholdFor: Array<tjenester_behandling_søknad_UtlandsoppholdDto>;
+  utlandsoppholdEtter: Array<tjenester_behandling_søknad_UtlandsoppholdDto>;
 };
 
 export type tjenester_behandling_søknad_SoknadDto = {
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType | null;
-  mottattDato: string | null;
+  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  mottattDato: string;
   begrunnelseForSenInnsending: string | null;
-  antallBarn: number | null;
+  antallBarn: number;
   oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto | null;
   manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto> | null;
   oppgittFordeling: tjenester_behandling_søknad_OppgittFordelingDto | null;
@@ -4059,9 +4059,9 @@ export type tjenester_behandling_søknad_SøknadsfristDto = {
 };
 
 export type tjenester_behandling_søknad_UtlandsoppholdDto = {
-  landNavn: string | null;
-  fom: string | null;
-  tom: string | null;
+  landNavn: string;
+  fom: string;
+  tom: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType =
@@ -4073,14 +4073,14 @@ export type foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType =
   | '-';
 
 export type tjenester_behandling_søknad_SoknadAdopsjonDto = {
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType | null;
-  mottattDato: string | null;
+  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  mottattDato: string;
   begrunnelseForSenInnsending: string | null;
-  antallBarn: number | null;
-  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto | null;
-  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto> | null;
-  oppgittFordeling: tjenester_behandling_søknad_OppgittFordelingDto | null;
-  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto | null;
+  antallBarn: number;
+  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
+  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
+  oppgittFordeling: tjenester_behandling_søknad_OppgittFordelingDto;
+  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
   omsorgsovertakelseDato: string | null;
   barnetsAnkomstTilNorgeDato: string | null;
   adopsjonFodelsedatoer: {
@@ -4090,14 +4090,14 @@ export type tjenester_behandling_søknad_SoknadAdopsjonDto = {
 };
 
 export type tjenester_behandling_søknad_SoknadFodselDto = {
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType | null;
-  mottattDato: string | null;
+  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  mottattDato: string;
   begrunnelseForSenInnsending: string | null;
-  antallBarn: number | null;
-  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto | null;
-  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto> | null;
-  oppgittFordeling: tjenester_behandling_søknad_OppgittFordelingDto | null;
-  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto | null;
+  antallBarn: number;
+  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
+  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
+  oppgittFordeling: tjenester_behandling_søknad_OppgittFordelingDto;
+  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
   utstedtdato: string | null;
   termindato: string | null;
   farSokerType: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType | null;

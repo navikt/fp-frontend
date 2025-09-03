@@ -42,7 +42,8 @@ export const DekningradForm = ({
 
   const dekningsgrad =
     søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ??
-    søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad;
+    søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad ??
+    undefined;
 
   const defaultValues = {
     dekningsgrad,
@@ -77,9 +78,7 @@ export const DekningradForm = ({
           <FormattedMessage
             id="DekningsgradForm.DekningsgradForeldrepenger"
             values={{
-              dekningsgrad:
-                søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ??
-                søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad,
+              dekningsgrad,
             }}
           />
           {kanOverstyreAccess && (

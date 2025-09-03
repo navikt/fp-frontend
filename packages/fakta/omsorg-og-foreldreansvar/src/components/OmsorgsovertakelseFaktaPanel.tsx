@@ -7,7 +7,7 @@ import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, SoknadType } from '@navikt/fp-kodeverk';
 import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
@@ -61,7 +61,7 @@ export const OmsorgsovertakelseFaktaPanel = ({
           label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
-          isEdited={isNotEqual(soknad.omsorgsovertakelseDato, familiehendelse.omsorgsovertakelseDato)}
+          isEdited={isNotEqual(finnOmsorgsovertakelseDato(soknad), familiehendelse.omsorgsovertakelseDato)}
         />
         {erAksjonspunktForeldreansvar && (
           <RhfDatepicker
@@ -84,6 +84,14 @@ export const OmsorgsovertakelseFaktaPanel = ({
 };
 
 OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato,
+  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? finnOmsorgsovertakelseDato(soknad),
   foreldreansvarDato: familiehendelse.foreldreansvarDato,
 });
+
+const finnOmsorgsovertakelseDato = (søknad: Soknad) => {
+  if (søknad.soknadType === SoknadType.ADOPSJON) {
+    return søknad.omsorgsovertakelseDato ?? undefined;
+  }
+
+  return undefined;
+};

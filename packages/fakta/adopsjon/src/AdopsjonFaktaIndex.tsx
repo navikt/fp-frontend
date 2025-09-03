@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { FamilieHendelseSamling, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
 
 import { AdopsjonInfoPanel } from './components/AdopsjonInfoPanel';
 
@@ -11,7 +11,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  soknad: Soknad;
+  soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
   familiehendelse: FamilieHendelseSamling;
   isForeldrepengerFagsak: boolean;
   submittable: boolean;

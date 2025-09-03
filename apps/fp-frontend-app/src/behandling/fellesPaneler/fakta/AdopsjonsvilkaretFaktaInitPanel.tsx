@@ -5,7 +5,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
-import { adopsjonsvilkarene, AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { adopsjonsvilkarene, AksjonspunktKode, SoknadType } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -38,7 +38,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Adopsjon' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {familiehendelse && søknad ? (
+      {familiehendelse && søknad && søknad.soknadType === SoknadType.ADOPSJON ? (
         <AdopsjonFaktaIndex
           familiehendelse={familiehendelse}
           soknad={søknad}

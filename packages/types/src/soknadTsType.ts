@@ -1,59 +1,22 @@
-import type { FarSøkerType } from '@navikt/fp-kodeverk';
+import type {
+  tjenester_behandling_søknad_ManglendeVedleggDto,
+  tjenester_behandling_søknad_SoknadAdopsjonDto,
+  tjenester_behandling_søknad_SoknadFodselDto,
+  tjenester_behandling_søknad_SøknadsfristDto,
+  tjenester_behandling_søknad_UtlandsoppholdDto,
+} from './apiDtoGenerert.ts';
 
-export type ManglendeVedleggSoknad = Readonly<{
-  dokumentType: string; // Brukes kun som sorteringsnøkkel, ikke kodeverk
-  dokumentTittel: string;
-  arbeidsgiverReferanse: string;
-  brukerHarSagtAtIkkeKommer: boolean;
-}>;
+export type ManglendeVedleggSoknad = tjenester_behandling_søknad_ManglendeVedleggDto;
 
-export type UtlandsoppholdPeriode = Readonly<{
-  landNavn: string;
-  fom: string;
-  tom: string;
-}>;
+export type UtlandsoppholdPeriode = tjenester_behandling_søknad_UtlandsoppholdDto;
 
-export type Søknadsfrist = Readonly<{
-  mottattDato?: string;
-  utledetSøknadsfrist?: string;
-  søknadsperiodeStart?: string;
-  søknadsperiodeSlutt?: string;
-  dagerOversittetFrist?: number;
-}>;
+export type Søknadsfrist = tjenester_behandling_søknad_SøknadsfristDto;
 
-export type Soknad = Readonly<{
-  soknadType: string;
-  mottattDato: string;
-  begrunnelseForSenInnsending: string | null;
-  antallBarn: number;
-  oppgittTilknytning: {
-    oppholdNorgeNa: boolean;
-    oppholdSistePeriode: boolean;
-    oppholdNestePeriode: boolean;
-    utlandsoppholdFor: UtlandsoppholdPeriode[];
-    utlandsoppholdEtter: UtlandsoppholdPeriode[];
-  };
-  manglendeVedlegg: ManglendeVedleggSoknad[];
-  oppgittFordeling: {
-    startDatoForPermisjon?: string;
-    dekningsgrader: {
-      avklartDekningsgrad?: number;
-      søker: {
-        søknadsdato: string;
-        dekningsgrad: number;
-      };
-      annenPart: {
-        søknadsdato: string;
-        dekningsgrad: number;
-      } | null;
-    };
-  };
-  søknadsfrist: Søknadsfrist;
-  utstedtdato: string | null;
-  termindato?: string;
-  fodselsdatoer?: Record<number, string>;
-  omsorgsovertakelseDato?: string;
-  barnetsAnkomstTilNorgeDato?: string;
-  adopsjonFodelsedatoer?: Record<number, string>;
-  farSokerType?: FarSøkerType | null;
-}>;
+// TODO: burde løses med tydeligere json subtypes i backend
+export type Soknad =
+  | ({
+      soknadType: 'ST-002';
+    } & tjenester_behandling_søknad_SoknadAdopsjonDto)
+  | ({
+      soknadType: 'ST-001';
+    } & tjenester_behandling_søknad_SoknadFodselDto);

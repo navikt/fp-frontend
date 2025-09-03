@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label, VStack } from '@navikt/ds-react';
 import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, SoknadType } from '@navikt/fp-kodeverk';
 import type { Soknad } from '@navikt/fp-types';
 
 interface Props {
@@ -19,6 +19,11 @@ interface Props {
  */
 export const BarnPanel = ({ alleMerknaderFraBeslutter, soknad }: Props) => {
   const intl = useIntl();
+
+  if (soknad.soknadType !== SoknadType.ADOPSJON) {
+    return null;
+  }
+
   const { adopsjonFodelsedatoer } = soknad;
   return (
     <FaktaGruppe

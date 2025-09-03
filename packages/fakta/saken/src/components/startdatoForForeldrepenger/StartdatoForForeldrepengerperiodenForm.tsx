@@ -30,13 +30,13 @@ const capitalizeFirstLetter = (landNavn: string): string => {
 };
 
 const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormValues => ({
-  startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon,
+  startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon ?? undefined,
   begrunnelse: aksjonspunkt?.begrunnelse ?? '',
 });
 
 const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
-  opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon,
+  opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon ?? undefined,
   startdatoFraSoknad: notEmpty(values.startdatoFraSoknad),
   begrunnelse: values.begrunnelse,
 });

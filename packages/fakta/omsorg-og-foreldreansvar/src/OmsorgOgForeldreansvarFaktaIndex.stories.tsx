@@ -35,12 +35,41 @@ const defaultFamilieHendelse = {
 } as FamilieHendelseSamling;
 
 const soknad = {
-  adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' } as { [key: number]: string },
-  utstedtdato: '2019-01-02',
+  adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' },
   antallBarn: 2,
   soknadType: SoknadType.ADOPSJON,
   farSokerType: FarSøkerType.ADOPTERER_ALENE,
-} as Soknad;
+  omsorgsovertakelseDato: null,
+  barnetsAnkomstTilNorgeDato: '2022-09-13',
+  mottattDato: '',
+  begrunnelseForSenInnsending: null,
+  oppgittTilknytning: {
+    oppholdNorgeNa: false,
+    oppholdSistePeriode: false,
+    oppholdNestePeriode: false,
+    utlandsoppholdFor: [],
+    utlandsoppholdEtter: [],
+  },
+  manglendeVedlegg: [],
+  oppgittFordeling: {
+    startDatoForPermisjon: null,
+    dekningsgrader: {
+      avklartDekningsgrad: null,
+      søker: {
+        søknadsdato: '',
+        dekningsgrad: 0,
+      },
+      annenPart: null,
+    },
+  },
+  søknadsfrist: {
+    mottattDato: null,
+    utledetSøknadsfrist: null,
+    søknadsperiodeStart: null,
+    søknadsperiodeSlutt: null,
+    dagerOversittetFrist: null,
+  },
+} satisfies Soknad;
 
 const personoversikt: Personoversikt = {
   bruker: {
