@@ -1,8 +1,4 @@
-export type ManglendeInntektsmeldingVurdering = Readonly<{
-  behandlingUuid: string;
-  behandlingVersjon: number;
-  vurdering: string;
-  begrunnelse: string;
-  arbeidsgiverIdent: string;
-  internArbeidsforholdRef?: string;
-}>;
+import type { foreldrepenger_domene_arbeidInntektsmelding_ManglendeOpplysningerVurderingDto } from './apiDtoGenerert.ts';
+
+export type ManglendeInntektsmeldingVurdering =
+  foreldrepenger_domene_arbeidInntektsmelding_ManglendeOpplysningerVurderingDto;

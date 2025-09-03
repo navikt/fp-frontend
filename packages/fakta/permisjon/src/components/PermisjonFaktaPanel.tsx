@@ -98,8 +98,8 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
           submitCallback({
             kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
             arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
-              internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId,
-              arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent,
+              internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId ?? undefined,
+              arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent ?? undefined,
               permisjonStatus: a.permisjonStatus,
             })),
             begrunnelse: values.begrunnelse,

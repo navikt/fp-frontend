@@ -8,7 +8,10 @@ import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import type { ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
+import type {
+  foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType,
+  ManglendeInntektsmeldingVurdering,
+} from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -19,7 +22,7 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 type FormValues = {
-  saksbehandlersVurdering?: string;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
   begrunnelse?: string;
 };
 
@@ -68,7 +71,9 @@ export const ManglendeInntektsmeldingForm = ({
       behandlingVersjon,
       vurdering: formValues.saksbehandlersVurdering!,
       arbeidsgiverIdent: radData.arbeidsgiverIdent,
-      internArbeidsforholdRef: erEttArbeidsforhold ? arbeidsforholdForRad[0].internArbeidsforholdId : undefined,
+      internArbeidsforholdRef: erEttArbeidsforhold
+        ? (arbeidsforholdForRad[0].internArbeidsforholdId ?? undefined)
+        : undefined,
       begrunnelse: formValues.begrunnelse!,
     };
     return lagreVurdering(params)

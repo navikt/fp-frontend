@@ -3,7 +3,7 @@ import { type PropsWithChildren } from 'react';
 import { Box, ExpansionCard, HStack, VStack } from '@navikt/ds-react';
 
 import { type FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
-import { MedlemskapAvvik } from '@navikt/fp-types';
+import { type MedlemskapAvvik } from '@navikt/fp-types';
 
 import { AvvikMerknad } from './AvvikMerknad';
 import { AvvikStatus } from './AvvikStatus';

@@ -2082,26 +2082,26 @@ export type foreldrepenger_behandlingslager_behandling_arbeidsforhold_Arbeidsfor
   | '-';
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto = {
-  inntektPrMnd?: number;
-  refusjonPrMnd?: number;
-  arbeidsgiverIdent?: string;
-  eksternArbeidsforholdId?: string;
-  internArbeidsforholdId?: string;
-  kontaktpersonNavn?: string;
-  kontaktpersonNummer?: string;
-  journalpostId?: string;
-  dokumentId?: string;
-  motattDato?: string;
-  innsendingstidspunkt?: string;
-  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
-  begrunnelse?: string;
-  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
-  kildeSystem?: string;
-  startDatoPermisjon?: string;
-  aktiveNaturalytelser?: Array<foreldrepenger_domene_iay_modell_NaturalYtelse>;
-  refusjonsperioder?: Array<foreldrepenger_domene_iay_modell_Refusjon>;
-  innsendingsårsak?: foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak;
-  tilknyttedeBehandlingIder?: Array<string>;
+  inntektPrMnd: number;
+  refusjonPrMnd: number | null;
+  arbeidsgiverIdent: string;
+  eksternArbeidsforholdId: string | null;
+  internArbeidsforholdId: string | null;
+  kontaktpersonNavn: string;
+  kontaktpersonNummer: string;
+  journalpostId: string;
+  dokumentId: string;
+  motattDato: string;
+  innsendingstidspunkt: string;
+  årsak: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak | null;
+  begrunnelse: string | null;
+  saksbehandlersVurdering: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType | null;
+  kildeSystem: string;
+  startDatoPermisjon: string | null;
+  aktiveNaturalytelser: Array<foreldrepenger_domene_iay_modell_NaturalYtelse>;
+  refusjonsperioder: Array<foreldrepenger_domene_iay_modell_Refusjon>;
+  innsendingsårsak: foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak;
+  tilknyttedeBehandlingIder: Array<string>;
 };
 
 export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
@@ -2112,16 +2112,16 @@ export type foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak =
   | 'PERMISJON_UTEN_SLUTTDATO';
 
 export type foreldrepenger_domene_iay_modell_NaturalYtelse = {
-  periode?: foreldrepenger_domene_tid_DatoIntervallEntitet;
-  beloepPerMnd?: foreldrepenger_domene_typer_Beløp;
-  type?: foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType;
-  indexKey?: string;
+  periode: foreldrepenger_domene_tid_DatoIntervallEntitet;
+  beloepPerMnd: foreldrepenger_domene_typer_Beløp;
+  type: foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType;
+  indexKey: string;
 };
 
 export type foreldrepenger_domene_iay_modell_Refusjon = {
-  fom?: string;
-  indexKey?: string;
-  refusjonsbeløp?: foreldrepenger_domene_typer_Beløp;
+  fom: string;
+  indexKey: string;
+  refusjonsbeløp: foreldrepenger_domene_typer_Beløp;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING' | '-';
@@ -2149,8 +2149,8 @@ export type foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType =
   | '-';
 
 export type foreldrepenger_domene_tid_DatoIntervallEntitet = {
-  fomDato?: string;
-  tomDato?: string;
+  fomDato: string;
+  tomDato: string;
 };
 
 export type foreldrepenger_domene_typer_Beløp = {
@@ -2159,41 +2159,41 @@ export type foreldrepenger_domene_typer_Beløp = {
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidOgInntektsmeldingDto = {
-  inntektsmeldinger?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto>;
-  arbeidsforhold?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto>;
-  inntekter?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto>;
-  skjæringstidspunkt?: string;
+  inntektsmeldinger: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektsmeldingDto>;
+  arbeidsforhold: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto>;
+  inntekter: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto>;
+  skjæringstidspunkt: string;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto = {
-  arbeidsgiverIdent?: string;
-  internArbeidsforholdId?: string;
-  eksternArbeidsforholdId?: string;
-  fom?: string;
-  tom?: string;
-  stillingsprosent?: number;
-  årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
-  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
-  permisjonOgMangel?: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto;
-  begrunnelse?: string;
+  arbeidsgiverIdent: string;
+  internArbeidsforholdId: string | null;
+  eksternArbeidsforholdId: string | null;
+  fom: string;
+  tom: string;
+  stillingsprosent: number;
+  årsak: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak | null;
+  saksbehandlersVurdering: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType | null;
+  permisjonOgMangel: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto | null;
+  begrunnelse: string | null;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto = {
-  arbeidsgiverIdent?: string;
-  inntekter?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto>;
+  arbeidsgiverIdent: string;
+  inntekter: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto>;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto = {
-  beløp?: number;
-  fom?: string;
-  tom?: string;
-  type?: foreldrepenger_domene_iay_modell_kodeverk_InntektspostType;
+  beløp: number;
+  fom: string;
+  tom: string;
+  type: foreldrepenger_domene_iay_modell_kodeverk_InntektspostType;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto = {
-  permisjonFom?: string;
+  permisjonFom: string;
   permisjonTom?: string;
-  type?: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
+  type: foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;
   årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
   permisjonStatus?: foreldrepenger_domene_iay_modell_kodeverk_BekreftetPermisjonStatus;
 };
@@ -3853,30 +3853,30 @@ export type foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik =
   | 'MEDL_PERIODER';
 
 export type tjenester_behandling_medlem_MedlemskapDto = {
-  manuellBehandlingResultat?: tjenester_behandling_medlem_MedlemskapDto_ManuellBehandlingResultat;
-  legacyManuellBehandling?: tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling;
-  regioner?: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
-  personstatuser?: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
-  utenlandsopphold?: Array<tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold>;
-  adresser?: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
-  oppholdstillatelser?: Array<tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse>;
-  medlemskapsperioder?: Array<tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode>;
-  avvik?: Array<foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik>;
-  annenpart?: tjenester_behandling_medlem_MedlemskapDto_Annenpart;
+  manuellBehandlingResultat: tjenester_behandling_medlem_MedlemskapDto_ManuellBehandlingResultat | null;
+  legacyManuellBehandling: tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling | null;
+  regioner: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
+  personstatuser: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
+  utenlandsopphold: Array<tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold>;
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  oppholdstillatelser: Array<tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse>;
+  medlemskapsperioder: Array<tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode>;
+  avvik: Array<foreldrepenger_inngangsvilkaar_medlemskap_MedlemskapAvvik>;
+  annenpart: tjenester_behandling_medlem_MedlemskapDto_Annenpart | null;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Annenpart = {
-  adresser?: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
-  regioner?: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
-  personstatuser?: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  regioner: Array<tjenester_behandling_medlem_MedlemskapDto_Region>;
+  personstatuser: Array<tjenester_behandling_medlem_MedlemskapDto_Personstatus>;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling = {
-  perioder?: Array<tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_MedlemPeriode>;
+  perioder: Array<tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_MedlemPeriode>;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_MedlemPeriode = {
-  vurderingsdato?: string;
+  vurderingsdato: string;
   oppholdsrettVurdering?: boolean;
   erEosBorger?: boolean;
   lovligOppholdVurdering?: boolean;
@@ -3886,44 +3886,44 @@ export type tjenester_behandling_medlem_MedlemskapDto_LegacyManuellBehandling_Me
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_ManuellBehandlingResultat = {
-  avslagskode?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
-  medlemFom?: string;
-  opphørFom?: string;
+  avslagskode: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak | null;
+  medlemFom: string | null;
+  opphørFom: string | null;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode = {
-  fom?: string;
-  tom?: string;
-  erMedlem?: boolean;
-  lovvalgsland?: string;
-  studieland?: string;
-  medlemskapType?: foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType;
-  dekningType?: foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekningType;
-  beslutningsdato?: string;
+  fom: string;
+  tom: string | null;
+  erMedlem: boolean;
+  lovvalgsland: string | null;
+  studieland: string | null;
+  medlemskapType: foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapType;
+  dekningType: foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekningType;
+  beslutningsdato: string;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse = {
-  fom?: string;
-  tom?: string;
-  type?: foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
+  fom: string;
+  tom: string | null;
+  type: foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Personstatus = {
-  fom?: string;
-  tom?: string;
-  type?: foreldrepenger_behandlingslager_aktør_PersonstatusType;
+  fom: string;
+  tom: string | null;
+  type: foreldrepenger_behandlingslager_aktør_PersonstatusType;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Region = {
-  fom?: string;
-  tom?: string;
-  type?: foreldrepenger_behandlingslager_geografisk_Region;
+  fom: string;
+  tom: string | null;
+  type: foreldrepenger_behandlingslager_geografisk_Region;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Utenlandsopphold = {
-  fom?: string;
-  tom?: string;
-  landkode?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  fom: string;
+  tom: string | null;
+  landkode: foreldrepenger_behandlingslager_geografisk_Landkoder;
 };
 
 export type tjenester_behandling_svp_SvpTilretteleggingDto = {

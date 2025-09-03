@@ -17,7 +17,7 @@ import {
   VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import { type Aksjonspunkt, type Medlemskap, MedlemskapAvvik, type Soknad } from '@navikt/fp-types';
+import { type Aksjonspunkt, type Medlemskap, type Soknad } from '@navikt/fp-types';
 
 import { MedlemskapFaktaIndex } from './MedlemskapFaktaIndex';
 
@@ -77,12 +77,12 @@ type Story = StoryObj<typeof meta>;
 const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
   manuellBehandlingResultat: null,
   avvik: [
-    MedlemskapAvvik.BOSATT_UTENLANDSOPPHOLD,
-    MedlemskapAvvik.BOSATT_UTENLANDSADRESSE,
-    MedlemskapAvvik.BOSATT_MANGLENDE_BOSTEDSADRESSE,
-    MedlemskapAvvik.BOSATT_UGYLDIG_PERSONSTATUS,
-    MedlemskapAvvik.MEDL_PERIODER,
-    MedlemskapAvvik.TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD,
+    'BOSATT_UTENLANDSOPPHOLD',
+    'BOSATT_UTENLANDSADRESSE',
+    'BOSATT_MANGLENDE_BOSTEDSADRESSE',
+    'BOSATT_UGYLDIG_PERSONSTATUS',
+    'MEDL_PERIODER',
+    'TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD',
   ],
   legacyManuellBehandling: null,
   oppholdstillatelser: [
@@ -228,7 +228,7 @@ export const ForutgåendeMedlemskap: Story = {
     medlemskap: lagMedlemskap({
       legacyManuellBehandling: null,
       manuellBehandlingResultat: null,
-      avvik: [MedlemskapAvvik.BOSATT_UTENLANDSADRESSE],
+      avvik: ['BOSATT_UTENLANDSADRESSE'],
     }),
     aksjonspunkterForPanel: [
       {
@@ -247,7 +247,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
     medlemskap: lagMedlemskap({
       legacyManuellBehandling: null,
       manuellBehandlingResultat: null,
-      avvik: [MedlemskapAvvik.BOSATT_UTENLANDSADRESSE],
+      avvik: ['BOSATT_UTENLANDSADRESSE'],
       adresser: [
         {
           fom: '2024-09-10',
