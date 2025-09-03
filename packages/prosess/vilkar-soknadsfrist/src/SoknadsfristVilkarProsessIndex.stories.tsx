@@ -11,31 +11,64 @@ import {
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
 
 const soknad = {
   soknadType: SoknadType.FODSEL,
-  mottattDato: '2019-01-01',
-  fodselsdatoer: { 1: '2019-01-01' } as { [key: number]: string },
+  utstedtdato: '2019-01-01',
+  termindato: '2019-01-01',
+  fodselsdatoer: { 1: '2019-01-01' },
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
   søknadsfrist: {
-    mottattDato: '2019-01-01',
     utledetSøknadsfrist: '2019-07-01',
     dagerOversittetFrist: 2,
+    søknadsperiodeStart: null,
+    søknadsperiodeSlutt: null,
   },
-} as Soknad;
+  antallBarn: 0,
+  oppgittTilknytning: {
+    oppholdNorgeNa: false,
+    oppholdSistePeriode: false,
+    oppholdNestePeriode: false,
+    utlandsoppholdFor: [],
+    utlandsoppholdEtter: [],
+  },
+  manglendeVedlegg: [],
+  oppgittFordeling: {
+    startDatoForPermisjon: null,
+    dekningsgrader: {
+      avklartDekningsgrad: null,
+      søker: {
+        søknadsdato: '',
+        dekningsgrad: 0,
+      },
+      annenPart: null,
+    },
+  },
+  farSokerType: null,
+} satisfies Soknad;
 
 const familiehendelse = {
-  gjeldende: {
-    avklartBarn: [
-      {
-        fodselsdato: '2019-01-02',
-      },
-    ],
-  },
-} as FamilieHendelseSamling;
+  avklartBarn: [
+    {
+      fodselsdato: '2019-01-02',
+      dodsdato: null,
+    },
+  ],
+  '@type': 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto',
+  soknadType: 'ST-001',
+  skjaringstidspunkt: '',
+  dokumentasjonForligger: null,
+  dokumentasjonForeligger: null,
+  brukAntallBarnFraTps: null,
+  termindato: null,
+  antallBarnTermin: null,
+  utstedtdato: null,
+  morForSykVedFodsel: null,
+  vedtaksDatoSomSvangerskapsuke: null,
+} satisfies FamilieHendelse;
 
 const meta = {
   title: 'prosess/prosess-vilkar-soknadsfrist',
@@ -43,7 +76,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     soknad,
-    familiehendelse,
+    gjeldendeFamiliehendelse: familiehendelse,
   },
   render: args => <SoknadsfristVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof SoknadsfristVilkarProsessIndex>>;

@@ -45,24 +45,37 @@ const findTextCode = (soknad: Soknad, familiehendelse: FamilieHendelse): string 
   return 'ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato';
 };
 
-const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | undefined => {
-  if (soknad.soknadType === SoknadType.FODSEL) {
-    if (familiehendelse['@type'] === 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto') {
-      const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
-      const fodselsdato =
-        familiehendelse.avklartBarn && (familiehendelse.avklartBarn ?? []).length > 0
-          ? familiehendelse.avklartBarn[0].fodselsdato
-          : soknadFodselsdato;
-      const termindato = familiehendelse?.termindato ?? soknad.termindato;
-      return (fodselsdato || termindato) ?? undefined;
-    }
-    return undefined;
-  }
-  if (familiehendelse['@type'] === 'foreldrepenger.familiehendelse.rest.AvklartDataOmsorgDto') {
-    return familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato ?? undefined;
+const findDateFraSøknad = (søknad: Soknad) => {
+  if (søknad.soknadType === SoknadType.FODSEL) {
+    const fødselsDato = søknad.fodselsdatoer ? Object.values(søknad.fodselsdatoer)[0] : undefined;
+
+    return fødselsDato ?? søknad.termindato ?? undefined;
   }
 
-  return undefined;
+  return søknad.omsorgsovertakelseDato ?? undefined;
+};
+
+const findDateFraFamiliehendelse = (familiehendelse: FamilieHendelse) => {
+  switch (familiehendelse['@type']) {
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataOmsorgDto':
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataAdopsjonDto':
+      return familiehendelse.omsorgsovertakelseDato ?? undefined;
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto': {
+      const fødselsDato =
+        familiehendelse.avklartBarn && (familiehendelse.avklartBarn ?? []).length > 0
+          ? familiehendelse.avklartBarn[0].fodselsdato
+          : undefined;
+
+      return fødselsDato ?? familiehendelse.termindato ?? undefined;
+    }
+  }
+};
+
+const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | undefined => {
+  const familiehendelseDato = findDateFraFamiliehendelse(familiehendelse);
+  const søknadDato = findDateFraSøknad(soknad);
+  console.log(søknadDato, familiehendelseDato);
+  return søknadDato ?? familiehendelseDato;
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
@@ -159,18 +172,20 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
           <VStack gap="space-24">
             <VStack gap="space-4">
               <Detail>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
-              <span className="typo-normal">{soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}</span>
+              <span className="typo-normal1">
+                {soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}
+              </span>
             </VStack>
             <VStack gap="space-4">
               <Detail>
                 {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
               </Detail>
-              <span className="typo-normal">{soknad.begrunnelseForSenInnsending ?? '-'}</span>
+              <span className="typo-normal2">{soknad.begrunnelseForSenInnsending ?? '-'}</span>
             </VStack>
           </VStack>
           <VStack gap="space-4">
             {textCode && <Detail>{intl.formatMessage({ id: textCode })}</Detail>}
-            <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
+            <span className="typo-normal3">{dato && <DateLabel dateString={dato} />}</span>
           </VStack>
         </HStack>
         <RhfRadioGroupNew name="erVilkarOk" control={formMethods.control} validate={[required]} isReadOnly={isReadOnly}>

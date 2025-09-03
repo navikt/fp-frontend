@@ -45,7 +45,7 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) 
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgForeldreansvar' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {søknad && gjeldendeFamiliehendelse && erOmsorgsHendelse && inntektArbeidYtelse ? (
+      {søknad && erOmsorgsHendelse && inntektArbeidYtelse ? (
         <OmsorgOgForeldreansvarFaktaIndex
           soknad={søknad}
           gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
