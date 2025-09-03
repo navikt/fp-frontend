@@ -1,5 +1,7 @@
 import type { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
 
+import type { foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType } from './apiDtoGenerert.ts';
+
 export enum AksjonspunktÅrsak {
   MANGLENDE_INNTEKTSMELDING = 'MANGLENDE_INNTEKTSMELDING',
   INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD = 'INNTEKTSMELDING_UTEN_ARBEIDSFORHOLD',
@@ -27,7 +29,7 @@ export type Inntektsmelding = Readonly<{
   motattDato: string;
   innsendingstidspunkt: string;
   årsak?: AksjonspunktÅrsak | null;
-  saksbehandlersVurdering?: string | null;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType | null;
   begrunnelse?: string | null;
   kildeSystem: string;
   startDatoPermisjon?: string;
@@ -69,7 +71,7 @@ export type Arbeidsforhold = Readonly<{
   stillingsprosent: number;
   årsak?: AksjonspunktÅrsak | null;
   permisjonOgMangel?: PermisjonOgMangel | null;
-  saksbehandlersVurdering: string | null;
+  saksbehandlersVurdering: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType | null;
   begrunnelse: string | null;
 }>;
 

@@ -111,9 +111,8 @@ const finnOverstyrtTom = (arbeidsforhold: AoIArbeidsforhold): string | undefined
   if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE) {
     return arbeidsforhold.tom;
   }
-  const skalBrukeMedJustertPeriode =
-    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE;
-  return skalBrukeMedJustertPeriode ? arbeidsforhold.tom : undefined;
+
+  return undefined;
 };
 
 const utledAktivtArbeidsforholdLabel = (arbeidsforhold: AoIArbeidsforhold): string => {
