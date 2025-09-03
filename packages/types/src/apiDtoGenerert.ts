@@ -4963,8 +4963,8 @@ export type foreldrepenger_familiehendelse_rest_FamiliehendelseDto = (
       '@type': 'foreldrepenger.familiehendelse.rest.AvklartDataOmsorgDto';
     } & foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto)
 ) & {
-  soknadType?: foreldrepenger_familiehendelse_rest_SøknadType;
-  skjaringstidspunkt?: string;
+  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  skjaringstidspunkt: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType =
@@ -4989,8 +4989,8 @@ export type foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto = {
   fødselsdatoer: {
     [key: string]: string;
   } | null;
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType | null;
-  skjaringstidspunkt: string | null;
+  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  skjaringstidspunkt: string;
 };
 
 export type foreldrepenger_familiehendelse_rest_AvklartDataFodselDto = {
@@ -5015,13 +5015,13 @@ export type foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto = {
   fødselsdatoer: {
     [key: string]: string;
   } | null;
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType | null;
-  skjaringstidspunkt: string | null;
+  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  skjaringstidspunkt: string;
 };
 
 export type foreldrepenger_familiehendelse_rest_FamilieHendelseGrunnlagDto = {
   oppgitt?: foreldrepenger_familiehendelse_rest_FamiliehendelseDto;
-  gjeldende?: foreldrepenger_familiehendelse_rest_FamiliehendelseDto;
+  gjeldende: foreldrepenger_familiehendelse_rest_FamiliehendelseDto; // TODO: denne kan være null. FE behandler den alltid som NotNull
   register?: foreldrepenger_familiehendelse_rest_FamiliehendelseDto;
 };
 

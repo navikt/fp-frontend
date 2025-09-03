@@ -8,11 +8,14 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, SoknadType } from '@navikt/fp-kodeverk';
-import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto, Soknad } from '@navikt/fp-types';
 
 import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
 
-const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
+const getAntallBarn = (
+  soknad: Soknad,
+  familiehendelse: foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto,
+): number => {
   const antallBarn = soknad.antallBarn ?? NaN;
   return familiehendelse.antallBarnTilBeregning ?? antallBarn;
 };
@@ -27,7 +30,7 @@ interface Props {
   erAksjonspunktForeldreansvar: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   soknad: Soknad;
-  familiehendelse: FamilieHendelse;
+  familiehendelse: foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto;
 }
 
 /**
@@ -83,9 +86,12 @@ export const OmsorgsovertakelseFaktaPanel = ({
   );
 };
 
-OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? finnOmsorgsovertakelseDato(soknad),
-  foreldreansvarDato: familiehendelse.foreldreansvarDato,
+OmsorgsovertakelseFaktaPanel.buildInitialValues = (
+  soknad: Soknad,
+  familiehendelse: foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto,
+): FormValues => ({
+  omsorgsovertakelseDato: familiehendelse.omsorgsovertakelseDato ?? finnOmsorgsovertakelseDato(soknad),
+  foreldreansvarDato: familiehendelse.foreldreansvarDato ?? undefined,
 });
 
 const finnOmsorgsovertakelseDato = (søknad: Soknad) => {

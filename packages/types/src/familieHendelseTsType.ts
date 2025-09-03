@@ -1,33 +1,11 @@
-export type AvklartBarn = Readonly<{
-  fodselsdato: string;
-  dodsdato: string | null;
-}>;
+import type {
+  foreldrepenger_familiehendelse_rest_AvklartBarnDto,
+  foreldrepenger_familiehendelse_rest_FamiliehendelseDto,
+  foreldrepenger_familiehendelse_rest_FamilieHendelseGrunnlagDto,
+} from './apiDtoGenerert.ts';
 
-// TODO(siri): gjør dette til en union type basert på @type
-export type FamilieHendelse = Readonly<{
-  skjaringstidspunkt: string;
-  avklartBarn?: AvklartBarn[];
-  brukAntallBarnFraTps?: boolean;
-  dokumentasjonForeligger?: boolean;
-  termindato?: string;
-  antallBarnTermin?: number;
-  utstedtdato?: string;
-  morForSykVedFodsel?: boolean;
-  vedtaksDatoSomSvangerskapsuke?: number;
-  soknadType: string;
-  adopsjonFodelsedatoer?: Record<number, string>;
-  omsorgsovertakelseDato?: string;
-  antallBarnTilBeregning?: number;
-  ektefellesBarn?: boolean;
-  mannAdoptererAlene?: boolean;
-  vilkarType?: string;
-  ankomstNorge?: string;
-  erOverstyrt?: boolean;
-  foreldreansvarDato?: string;
-}>;
+export type AvklartBarn = foreldrepenger_familiehendelse_rest_AvklartBarnDto;
 
-export type FamilieHendelseSamling = Readonly<{
-  oppgitt: FamilieHendelse;
-  gjeldende: FamilieHendelse;
-  register: FamilieHendelse | null;
-}>;
+export type FamilieHendelse = foreldrepenger_familiehendelse_rest_FamiliehendelseDto;
+
+export type FamilieHendelseSamling = foreldrepenger_familiehendelse_rest_FamilieHendelseGrunnlagDto;

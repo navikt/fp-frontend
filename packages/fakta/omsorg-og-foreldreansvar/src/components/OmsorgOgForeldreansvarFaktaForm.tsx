@@ -12,7 +12,7 @@ import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   AlleKodeverk,
-  FamilieHendelse,
+  foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto,
   InntektArbeidYtelse,
   KodeverkMedNavn,
   Personoversikt,
@@ -46,7 +46,7 @@ const getDescriptionText = (vilkarCode?: string): ReactElement => {
 
 interface Props {
   soknad: Soknad;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto;
   readOnly: boolean;
   vilkarTypes: KodeverkMedNavn<'OmsorgsovertakelseVilkårType'>[];
   erAksjonspunktForeldreansvar: boolean;
@@ -131,7 +131,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
 
 OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (
   soknad: Soknad,
-  gjeldendeFamiliehendelse: FamilieHendelse,
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
   alleKodeverk: AlleKodeverk,
 ): OmsorgOgForeldreansvarFormValues => ({

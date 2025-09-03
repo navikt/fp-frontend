@@ -17,7 +17,7 @@ import {
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
-  FamilieHendelseSamling,
+  foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto,
   InntektArbeidYtelse,
   Personoversikt,
   Soknad,
@@ -26,13 +26,14 @@ import type {
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
 
 const defaultFamilieHendelse = {
-  gjeldende: {
-    termindato: '2019-01-01',
-    utstedtdato: '2019-01-01',
-    antallBarnTermin: 1,
-    dokumentasjonForeligger: true,
-  },
-} as FamilieHendelseSamling;
+  omsorgsovertakelseDato: null,
+  vilkarType: null,
+  antallBarnTilBeregning: null,
+  foreldreansvarDato: null,
+  fødselsdatoer: null,
+  soknadType: 'ST-002',
+  skjaringstidspunkt: '',
+} satisfies foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto;
 
 const soknad = {
   adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' },
@@ -137,7 +138,7 @@ const meta = {
   args: {
     submittable: true,
     soknad,
-    familiehendelse: defaultFamilieHendelse,
+    gjeldendeFamiliehendelse: defaultFamilieHendelse,
     personoversikt,
     inntektArbeidYtelse,
   },
@@ -184,14 +185,11 @@ export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
 
 export const UtførtAksjonspunktForOmsorgovertakelse: Story = {
   args: {
-    familiehendelse: {
+    gjeldendeFamiliehendelse: {
       ...defaultFamilieHendelse,
-      gjeldende: {
-        ...defaultFamilieHendelse.gjeldende,
-        omsorgsovertakelseDato: '2021-01-01',
-        foreldreansvarDato: '2021-02-02',
-        vilkarType: 'FP_VK_8',
-      },
+      omsorgsovertakelseDato: '2021-01-01',
+      foreldreansvarDato: '2021-02-02',
+      vilkarType: 'FP_VK_8',
     },
     aksjonspunkterForPanel: [
       {
@@ -238,13 +236,10 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
         kanLoses: false,
       },
     ],
-    familiehendelse: {
+    gjeldendeFamiliehendelse: {
       ...defaultFamilieHendelse,
-      gjeldende: {
-        ...defaultFamilieHendelse.gjeldende,
-        omsorgsovertakelseDato: '2021-01-01',
-        foreldreansvarDato: '2021-02-02',
-      },
+      omsorgsovertakelseDato: '2021-01-01',
+      foreldreansvarDato: '2021-02-02',
     },
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,

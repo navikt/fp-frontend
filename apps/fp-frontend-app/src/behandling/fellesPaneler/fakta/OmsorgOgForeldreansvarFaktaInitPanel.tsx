@@ -34,6 +34,10 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) 
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalPanelVisesIMeny));
   const { data: inntektArbeidYtelse } = useQuery(api.inntektArbeidYtelseOptions(behandling));
 
+  const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
+  const erOmsorgsHendelse =
+    gjeldendeFamiliehendelse?.['@type'] === 'foreldrepenger.familiehendelse.rest.AvklartDataOmsorgDto';
+
   return (
     <FaktaDefaultInitPanel
       standardPanelProps={standardPanelProps}
@@ -41,10 +45,10 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) 
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgForeldreansvar' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {søknad && familiehendelse && inntektArbeidYtelse ? (
+      {søknad && gjeldendeFamiliehendelse && erOmsorgsHendelse && inntektArbeidYtelse ? (
         <OmsorgOgForeldreansvarFaktaIndex
           soknad={søknad}
-          familiehendelse={familiehendelse}
+          gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
           inntektArbeidYtelse={inntektArbeidYtelse}
           personoversikt={personoversikt}
           submittable={standardPanelProps.submittable}
