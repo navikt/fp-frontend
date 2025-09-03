@@ -26,6 +26,7 @@ const soknad = {
     dagerOversittetFrist: 2,
     søknadsperiodeStart: null,
     søknadsperiodeSlutt: null,
+    mottattDato: '2019-01-01',
   },
   antallBarn: 0,
   oppgittTilknytning: {
@@ -48,6 +49,7 @@ const soknad = {
     },
   },
   farSokerType: null,
+  mottattDato: '2019-01-01',
 } satisfies Soknad;
 
 const familiehendelse = {

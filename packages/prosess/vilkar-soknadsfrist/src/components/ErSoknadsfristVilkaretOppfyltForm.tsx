@@ -71,11 +71,19 @@ const findDateFraFamiliehendelse = (familiehendelse: FamilieHendelse) => {
   }
 };
 
+/**
+ * Prioritert rekkefølge er:
+ * 1. dato fra familiehendelse.fodselsdato
+ * 2. dato fra søknad.fødselsdato
+ * 3. termindato fra familiehendelse
+ * 4. termindato fra søknad
+ * 5. omsorgsovertakelseDato fra familiehendelse
+ * 6. omsorgsovertakelseDato fra søknad
+ */
 const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | undefined => {
   const familiehendelseDato = findDateFraFamiliehendelse(familiehendelse);
   const søknadDato = findDateFraSøknad(soknad);
-  console.log(søknadDato, familiehendelseDato);
-  return søknadDato ?? familiehendelseDato;
+  return familiehendelseDato ?? søknadDato;
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
@@ -126,7 +134,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
-
+  console.log(dato, soknad);
   return (
     <RhfForm
       formMethods={formMethods}
