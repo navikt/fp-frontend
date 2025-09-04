@@ -10,7 +10,7 @@ import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   AlleKodeverk,
-  FamilieHendelse,
+  foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto,
   Personoversikt,
   RelatertTilgrensedYtelse,
   Soknad,
@@ -36,7 +36,7 @@ const transformValues = (
 
 const buildInitialValues = (
   soknad: Soknad,
-  gjeldendeFamiliehendelse: FamilieHendelse,
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
   aksjonspunkter: Aksjonspunkt[],
   alleKodeverk: AlleKodeverk,
@@ -60,7 +60,7 @@ const buildInitialValues = (
 interface Props {
   soknad: Soknad;
   personoversikt: Personoversikt;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto;
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
   submittable: boolean;
 }

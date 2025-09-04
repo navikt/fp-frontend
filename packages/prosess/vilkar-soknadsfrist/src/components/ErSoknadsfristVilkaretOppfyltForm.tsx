@@ -31,29 +31,59 @@ type FormValues = {
 
 const findTextCode = (soknad: Soknad, familiehendelse: FamilieHendelse): string => {
   if (soknad.soknadType === SoknadType.FODSEL) {
-    const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
-    const fodselsdato =
-      familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
-        ? familiehendelse.avklartBarn[0].fodselsdato
-        : soknadFodselsdato;
-    return fodselsdato
-      ? 'ErSoknadsfristVilkaretOppfyltForm.Fodselsdato'
-      : 'ErSoknadsfristVilkaretOppfyltForm.Termindato';
+    if (familiehendelse['@type'] === 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto') {
+      const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
+      const fodselsdato =
+        familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
+          ? familiehendelse.avklartBarn[0].fodselsdato
+          : soknadFodselsdato;
+      return fodselsdato
+        ? 'ErSoknadsfristVilkaretOppfyltForm.Fodselsdato'
+        : 'ErSoknadsfristVilkaretOppfyltForm.Termindato';
+    }
   }
   return 'ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato';
 };
 
-const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | undefined => {
-  if (soknad.soknadType === SoknadType.FODSEL) {
-    const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
-    const fodselsdato =
-      familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
-        ? familiehendelse.avklartBarn[0].fodselsdato
-        : soknadFodselsdato;
-    const termindato = familiehendelse?.termindato ?? soknad.termindato;
-    return (fodselsdato || termindato) ?? undefined;
+const findDateFraSøknad = (søknad: Soknad) => {
+  if (søknad.soknadType === SoknadType.FODSEL) {
+    const fødselsDato = søknad.fodselsdatoer ? Object.values(søknad.fodselsdatoer)[0] : undefined;
+
+    return fødselsDato ?? søknad.termindato ?? undefined;
   }
-  return familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato ?? undefined;
+
+  return søknad.omsorgsovertakelseDato ?? undefined;
+};
+
+const findDateFraFamiliehendelse = (familiehendelse: FamilieHendelse) => {
+  switch (familiehendelse['@type']) {
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataOmsorgDto':
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataAdopsjonDto':
+      return familiehendelse.omsorgsovertakelseDato ?? undefined;
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto': {
+      const fødselsDato =
+        familiehendelse.avklartBarn && (familiehendelse.avklartBarn ?? []).length > 0
+          ? familiehendelse.avklartBarn[0].fodselsdato
+          : undefined;
+
+      return fødselsDato ?? familiehendelse.termindato ?? undefined;
+    }
+  }
+};
+
+/**
+ * Prioritert rekkefølge er:
+ * 1. dato fra familiehendelse.fodselsdato
+ * 2. dato fra søknad.fødselsdato
+ * 3. termindato fra familiehendelse
+ * 4. termindato fra søknad
+ * 5. omsorgsovertakelseDato fra familiehendelse
+ * 6. omsorgsovertakelseDato fra søknad
+ */
+const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | undefined => {
+  const familiehendelseDato = findDateFraFamiliehendelse(familiehendelse);
+  const søknadDato = findDateFraSøknad(soknad);
+  return familiehendelseDato ?? søknadDato;
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
@@ -104,7 +134,6 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
   const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
-
   return (
     <RhfForm
       formMethods={formMethods}

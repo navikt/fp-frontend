@@ -62,7 +62,7 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
           {harSoknadsfristAp && søknad && familiehendelse && (
             <SoknadsfristVilkarProsessIndex
               soknad={søknad}
-              familiehendelse={familiehendelse}
+              gjeldendeFamiliehendelse={familiehendelse.gjeldende}
               status={standardPanelProps.status}
               readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
             />

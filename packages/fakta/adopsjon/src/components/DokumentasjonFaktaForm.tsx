@@ -12,7 +12,10 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { FamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
+import type {
+  foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
+  tjenester_behandling_søknad_SoknadAdopsjonDto,
+} from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './dokumentasjonFaktaForm.module.css';
@@ -29,7 +32,7 @@ interface Props {
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto;
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
@@ -137,7 +140,7 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgs
 
 DokumentasjonFaktaForm.initialValues = (
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto,
-  familiehendelse: FamilieHendelse,
+  familiehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
 ): FormValues => ({
   omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato ?? undefined,
   barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge ?? soknad.barnetsAnkomstTilNorgeDato ?? undefined,
@@ -152,7 +155,10 @@ DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumenter
 });
 
 const isAdopsjonFodelsedatoerEdited =
-  (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, familiehendelse: FamilieHendelse) =>
+  (
+    soknad: tjenester_behandling_søknad_SoknadAdopsjonDto,
+    familiehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
+  ) =>
   (id: string): boolean => {
     const editedStatus = diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
     // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output

@@ -10,8 +10,8 @@ import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
-  FamilieHendelse,
   foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType,
+  foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
 } from '@navikt/fp-types';
 import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -22,7 +22,7 @@ interface Props {
   farSokerType: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType | undefined;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto;
 }
 
 export type FormValues = {
@@ -82,8 +82,10 @@ export const MannAdoptererAleneFaktaForm = ({
   );
 };
 
-MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
-  mannAdoptererAlene: familiehendelse ? familiehendelse.mannAdoptererAlene : undefined,
+MannAdoptererAleneFaktaForm.buildInitialValues = (
+  familiehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
+): FormValues => ({
+  mannAdoptererAlene: familiehendelse.mannAdoptererAlene ?? undefined,
 });
 
 MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): BekreftMannAdoptererAksjonspunktAp => ({

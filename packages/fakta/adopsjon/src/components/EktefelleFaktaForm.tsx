@@ -8,14 +8,14 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { FamilieHendelse } from '@navikt/fp-types';
+import type { foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto } from '@navikt/fp-types';
 import type { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './ektefelleFaktaForm.module.css';
 
 interface Props {
   readOnly: boolean;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  gjeldendeFamiliehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -66,7 +66,9 @@ export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMer
   );
 };
 
-EktefelleFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
+EktefelleFaktaForm.buildInitialValues = (
+  familiehendelse: foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto,
+): FormValues => ({
   ektefellesBarn:
     familiehendelse && familiehendelse.ektefellesBarn !== null ? familiehendelse.ektefellesBarn : undefined,
 });

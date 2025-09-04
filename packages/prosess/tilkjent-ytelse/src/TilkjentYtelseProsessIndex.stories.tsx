@@ -29,11 +29,14 @@ const defaultFamiliehendelse = {
     avklartBarn: [
       {
         fodselsdato: '2019-01-01',
+        dodsdato: null,
       },
     ],
-    omsorgsovertakelseDato: '2019-01-01',
     soknadType: SoknadType.FODSEL,
-  } as FamilieHendelse,
+    '@type': 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto',
+    skjaringstidspunkt: '',
+    // @ts-expect-error -- venter på at typer types som undefined
+  } satisfies FamilieHendelse,
 } as FamilieHendelseSamling;
 
 const personoversikt = {

@@ -1,3 +1,4 @@
+// TODO [JOHANNES] -- tilbakekreving
 export type BeregningResultatPeriode = {
   periode: {
     fom: string;

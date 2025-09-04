@@ -41,9 +41,26 @@ const finnSøknadsdato = (søknad: Soknad): string => {
   return søknadsdato;
 };
 
+const getAvklartBarn = (familiehendelse?: FamilieHendelse) => {
+  if (familiehendelse?.['@type'] === 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto') {
+    return familiehendelse.avklartBarn ?? [];
+  }
+
+  return [];
+};
+
+const getBrukAntallBarnFraTps = (familiehendelse?: FamilieHendelse) => {
+  if (familiehendelse?.['@type'] === 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto') {
+    return familiehendelse.brukAntallBarnFraTps;
+  }
+
+  return null;
+};
+
 const getFodselTerminDato = (søknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): string | undefined => {
-  if (gjeldendeFamiliehendelse?.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0) {
-    return gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato;
+  const avklartBarn = getAvklartBarn(gjeldendeFamiliehendelse);
+  if (avklartBarn.length > 0) {
+    return avklartBarn[0].fodselsdato ?? undefined;
   }
 
   if (søknad.soknadType === SoknadType.FODSEL) {
@@ -74,25 +91,27 @@ const finnTidslinjeTider = (
   personoversikt: Personoversikt,
   endringsdato: string,
 ): TidslinjeTimes => {
-  const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
+  const gjeldendeFamiliehendelse = familiehendelse.gjeldende;
+  const registerFamiliehendelse = familiehendelse.register;
   const familiehendelseDate = getFodselTerminDato(søknad, gjeldendeFamiliehendelse);
-  const endredFodselsDato =
-    gjeldendeFamiliehendelse?.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
-      ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato
-      : undefined;
+
+  const avklartBarn = getAvklartBarn(gjeldendeFamiliehendelse);
+
+  const endredFodselsDato = avklartBarn && avklartBarn.length > 0 ? avklartBarn[0].fodselsdato : undefined;
   const fødselsdato =
     søknad.soknadType === SoknadType.FODSEL
       ? (endredFodselsDato ?? familiehendelseDate)
       : søknad.omsorgsovertakelseDato;
   const isRevurdering = behandling.type === BehandlingTypeEnum.REVURDERING;
 
-  const barnFraTps = familiehendelse.register?.avklartBarn ?? [];
+  const barnFraTps = getAvklartBarn(registerFamiliehendelse);
+
   const dodeBarn =
     gjeldendeFamiliehendelse &&
-    !gjeldendeFamiliehendelse.brukAntallBarnFraTps &&
-    gjeldendeFamiliehendelse.avklartBarn &&
-    gjeldendeFamiliehendelse.avklartBarn.length > 0
-      ? gjeldendeFamiliehendelse.avklartBarn.filter(barn => barn.dodsdato)
+    !getBrukAntallBarnFraTps(registerFamiliehendelse) &&
+    avklartBarn &&
+    avklartBarn.length > 0
+      ? avklartBarn.filter(barn => barn.dodsdato)
       : barnFraTps.filter(barn => barn.dodsdato);
 
   const customTimesBuilder = {

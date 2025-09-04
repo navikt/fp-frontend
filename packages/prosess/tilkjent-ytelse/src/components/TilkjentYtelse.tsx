@@ -15,7 +15,6 @@ import { BodyShort, Button, HStack, Timeline, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { SoknadType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -223,20 +222,27 @@ const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
 
 const getFamiliehendelseData = (familieHendelseSamling: FamilieHendelseSamling): { dato?: string; textId: string } => {
   const familieHendelse = familieHendelseSamling.gjeldende ?? familieHendelseSamling.oppgitt;
-  if (familieHendelse.soknadType === SoknadType.FODSEL) {
-    if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
-      return { dato: familieHendelse.avklartBarn[0].fodselsdato, textId: 'TilkjentYtelse.Fodselsdato' };
-    }
-    return { dato: familieHendelse.termindato, textId: 'TilkjentYtelse.Termindato' };
-  }
-  if (familieHendelse.omsorgsovertakelseDato) {
-    return { dato: familieHendelse.omsorgsovertakelseDato, textId: 'TilkjentYtelse.Omsorgsovertakelsesdato' };
-  }
 
-  return {
-    dato: familieHendelse.adopsjonFodelsedatoer ? familieHendelse.adopsjonFodelsedatoer[0] : undefined,
-    textId: 'TilkjentYtelse.Fodselsdato',
-  };
+  switch (familieHendelse['@type']) {
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto': {
+      if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
+        return { dato: familieHendelse.avklartBarn[0].fodselsdato ?? undefined, textId: 'TilkjentYtelse.Fodselsdato' };
+      }
+      return { dato: familieHendelse.termindato ?? undefined, textId: 'TilkjentYtelse.Termindato' };
+    }
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataAdopsjonDto': {
+      return {
+        dato: familieHendelse.adopsjonFodelsedatoer ? familieHendelse.adopsjonFodelsedatoer[0] : undefined,
+        textId: 'TilkjentYtelse.Fodselsdato',
+      };
+    }
+    case 'foreldrepenger.familiehendelse.rest.AvklartDataOmsorgDto': {
+      return {
+        dato: familieHendelse.omsorgsovertakelseDato ?? undefined,
+        textId: 'TilkjentYtelse.Omsorgsovertakelsesdato',
+      };
+    }
+  }
 };
 
 const formatPerioder = (perioder: BeregningsresultatPeriode[] = []): Periode[] =>
