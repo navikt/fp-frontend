@@ -1,40 +1,8 @@
-import type { KlageAvvistÅrsak, KlageHjemmel, KlageMedholdÅrsak } from '@navikt/fp-kodeverk';
+import type {
+  tjenester_behandling_klage_KlagebehandlingDto,
+  tjenester_behandling_klage_KlageVurderingResultatDto,
+} from './apiDtoGenerert.ts';
 
-export type KlageVurderingResultat = Readonly<{
-  klageVurdertAv: string;
-  klageVurdering?: string;
-  fritekstTilBrev?: string;
-  klageMedholdArsak?: KlageMedholdÅrsak;
-  klageVurderingOmgjoer?: string;
-  klageHjemmel?: KlageHjemmel;
-  begrunnelse?: string;
-}>;
+export type KlageVurderingResultat = tjenester_behandling_klage_KlageVurderingResultatDto;
 
-export type KlageVurdering = Readonly<{
-  klageVurderingResultatNK?: KlageVurderingResultat;
-  klageVurderingResultatNFP?: KlageVurderingResultat;
-  klageFormkravResultatKA?: {
-    avvistArsaker: KlageAvvistÅrsak[];
-    paKlagdBehandlingUuid: string;
-    paklagdBehandlingType: string;
-    begrunnelse: string;
-    erKlagerPart: boolean;
-    erKlageKonkret: boolean;
-    erKlagefirstOverholdt: boolean;
-    erSignert: boolean;
-  };
-  klageFormkravResultatNFP?: {
-    avvistArsaker: KlageAvvistÅrsak[];
-    paKlagdBehandlingUuid: string;
-    paklagdBehandlingType: string;
-    begrunnelse: string;
-    erKlagerPart: boolean;
-    erKlageKonkret: boolean;
-    erKlagefirstOverholdt: boolean;
-    erSignert: boolean;
-  };
-  aktuelleHjemler?: string[];
-  underBehandlingKabal?: boolean;
-  behandletAvKabal?: boolean;
-  mottattDato?: string;
-}>;
+export type KlageVurdering = tjenester_behandling_klage_KlagebehandlingDto;

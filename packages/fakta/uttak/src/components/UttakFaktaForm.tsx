@@ -258,7 +258,6 @@ export const UttakFaktaForm = ({
   const aksjonspunktTekster = finnAksjonspunktTekster(aksjonspunkterForPanel, ytelsefordeling);
 
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
-
   return (
     <VStack gap="space-32">
       <HStack gap="space-16">
