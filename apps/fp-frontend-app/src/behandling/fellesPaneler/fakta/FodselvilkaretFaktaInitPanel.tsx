@@ -63,7 +63,7 @@ const finnTerminBekreftelse = (dokumentliste: Dokument[], saksnummer: string) =>
         saksnummer,
         journalpostId: terminbekreftelseDokument.journalpostId,
         dokumentId: terminbekreftelseDokument.dokumentId,
-        dokumentTittel: terminbekreftelseDokument.tittel,
+        dokumentTittel: terminbekreftelseDokument.tittel ?? undefined,
       }
     : undefined;
 };

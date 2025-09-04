@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Detail, Label, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
-import { type AlleKodeverk, type Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
+import { type AlleKodeverk, type Medlemskap, type MedlemskapAvvik } from '@navikt/fp-types';
 
 import { EkspansjonsKort } from '../../ekspansjonsKort/EkspansjonsKort';
 import { relevantForPersonstatus } from '../../ekspansjonsKort/medlemsAvvik';

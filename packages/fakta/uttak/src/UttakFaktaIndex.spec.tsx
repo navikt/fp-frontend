@@ -2,6 +2,7 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import type { KontrollerFaktaPeriodeMedApMarkering } from './typer/kontrollerFaktaPeriodeMedApMarkering.ts';
 import * as stories from './UttakFaktaIndex.stories';
 
 const {
@@ -67,15 +68,21 @@ describe('UttakFaktaIndex', () => {
             tom: '2022-12-01',
             originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
+            // @ts-expect-error -- typene i formet er inkonsekvente
             samtidigUttaksprosent: '10',
             uttakPeriodeType: 'MØDREKVOTE',
             aksjonspunktType: undefined,
             arbeidsforhold: undefined,
+            // @ts-expect-error -- typene i formet er inkonsekvente
             arbeidstidsprosent: undefined,
             flerbarnsdager: false,
-            morsAktivitet: undefined,
+            begrunnelse: null,
+            oppholdÅrsak: null,
+            overføringÅrsak: null,
+            utsettelseÅrsak: null,
+            morsAktivitet: null,
           },
-        ],
+        ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
       },
     ]);
   });
@@ -126,7 +133,11 @@ describe('UttakFaktaIndex', () => {
             arbeidstidsprosent: 10,
             flerbarnsdager: true,
             aksjonspunktType: undefined,
-            morsAktivitet: undefined,
+            begrunnelse: null,
+            oppholdÅrsak: null,
+            overføringÅrsak: null,
+            utsettelseÅrsak: null,
+            morsAktivitet: null,
           },
           {
             fom: '2022-12-02',
@@ -140,6 +151,12 @@ describe('UttakFaktaIndex', () => {
             },
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
+            begrunnelse: null,
+            oppholdÅrsak: null,
+            overføringÅrsak: null,
+            utsettelseÅrsak: null,
+            morsAktivitet: null,
+            samtidigUttaksprosent: null,
           },
           {
             fom: '2022-12-11',
@@ -153,8 +170,14 @@ describe('UttakFaktaIndex', () => {
             },
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
+            begrunnelse: null,
+            oppholdÅrsak: null,
+            overføringÅrsak: null,
+            utsettelseÅrsak: null,
+            morsAktivitet: null,
+            samtidigUttaksprosent: null,
           },
-        ],
+        ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
       },
     ]);
   });
@@ -251,6 +274,7 @@ describe('UttakFaktaIndex', () => {
             tom: '2022-12-01',
             originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
+            // @ts-expect-error -- formet er ikke helt konsekvent og gir både nulls og undefines
             samtidigUttaksprosent: undefined,
             uttakPeriodeType: 'MØDREKVOTE',
             arbeidsforhold: {
@@ -260,9 +284,13 @@ describe('UttakFaktaIndex', () => {
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
             aksjonspunktType: undefined,
-            morsAktivitet: undefined,
+            morsAktivitet: null,
+            utsettelseÅrsak: null,
+            oppholdÅrsak: null,
+            overføringÅrsak: null,
+            begrunnelse: null,
           },
-        ],
+        ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
       },
     ]);
   });

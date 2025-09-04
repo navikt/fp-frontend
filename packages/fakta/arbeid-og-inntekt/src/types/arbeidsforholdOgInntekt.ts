@@ -1,7 +1,12 @@
-import type { AoIArbeidsforhold, Inntektsmelding, Inntektspost } from '@navikt/fp-types';
+import type {
+  AoIArbeidsforhold,
+  foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType,
+  Inntektsmelding,
+  Inntektspost,
+} from '@navikt/fp-types';
 
 export type Avklaring = {
-  saksbehandlersVurdering?: string;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
   begrunnelse?: string;
   arbeidsgiverNavn?: string;
   fom?: string;

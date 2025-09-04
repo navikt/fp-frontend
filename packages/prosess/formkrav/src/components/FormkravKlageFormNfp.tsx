@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfDatepicker,RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
@@ -60,8 +60,8 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefi
   const klageVurderingResultatNFP = klageVurdering ? klageVurdering.klageVurderingResultatNFP : null;
 
   if (!klageFormkavResultatNfp) {
-    return  {
-      mottattDato: klageVurdering ? klageVurdering.mottattDato : undefined,
+    return {
+      mottattDato: klageVurdering?.mottattDato ?? undefined,
     };
   }
 
@@ -72,8 +72,8 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefi
     erKonkret: klageFormkavResultatNfp.erKlageKonkret,
     erFristOverholdt: klageFormkavResultatNfp.erKlagefirstOverholdt,
     erSignert: klageFormkavResultatNfp.erSignert,
-    fritekstTilBrev: klageVurderingResultatNFP ? klageVurderingResultatNFP.fritekstTilBrev : undefined,
-    mottattDato: klageVurdering ? klageVurdering.mottattDato : undefined,
+    fritekstTilBrev: klageVurderingResultatNFP?.fritekstTilBrev ?? undefined,
+    mottattDato: klageVurdering?.mottattDato ?? undefined,
   };
 };
 

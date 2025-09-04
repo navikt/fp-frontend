@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { BodyShort, Label } from '@navikt/ds-react';
 import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
-import { MedlemskapAvvik, type Soknad, type UtlandsoppholdPeriode } from '@navikt/fp-types';
+import { type MedlemskapAvvik, type Soknad, type UtlandsoppholdPeriode } from '@navikt/fp-types';
 
 import { toTitleCapitalization } from '../../utils/stringUtils';
 import { EkspansjonsKort } from '../ekspansjonsKort/EkspansjonsKort';

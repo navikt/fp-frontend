@@ -1,12 +1,3 @@
-export type ManueltArbeidsforhold = Readonly<{
-  behandlingUuid: string;
-  behandlingVersjon: number;
-  begrunnelse: string;
-  arbeidsgiverIdent: string;
-  internArbeidsforholdRef?: string;
-  arbeidsgiverNavn: string;
-  fom: string;
-  tom?: string;
-  stillingsprosent: number;
-  vurdering: string;
-}>;
+import type { foreldrepenger_domene_arbeidInntektsmelding_ManueltArbeidsforholdDto } from './apiDtoGenerert.ts';
+
+export type ManueltArbeidsforhold = foreldrepenger_domene_arbeidInntektsmelding_ManueltArbeidsforholdDto;

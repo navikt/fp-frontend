@@ -100,10 +100,10 @@ export type {
   LegacyMedlemPeriode,
   RegionPeriode,
   PersonstatusPeriode,
+  MedlemskapAvvik,
   MedlemskapPeriode,
   OppholdstillatelsePeriode,
 } from './src/medlemskapTsType';
-export { MedlemskapAvvik } from './src/medlemskapTsType';
 export type { Risikoklassifisering } from './src/risikoklassifiseringTsType';
 export type { AnkeVurdering } from './src/ankeVurderingTsType';
 export type { KlageVurdering, KlageVurderingResultat } from './src/klageVurderingTsType';
@@ -150,7 +150,6 @@ export type {
 } from './src/vilkarsVurdertePerioderTsType';
 export type {
   ArbeidOgInntektsmelding,
-  Inntekt,
   Arbeidsforhold as AoIArbeidsforhold,
   Inntektsmelding,
   Inntektspost,
