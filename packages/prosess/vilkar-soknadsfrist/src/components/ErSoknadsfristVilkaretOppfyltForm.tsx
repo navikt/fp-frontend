@@ -179,20 +179,18 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
           <VStack gap="space-24">
             <VStack gap="space-4">
               <Detail>{intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.MottattDato' })}</Detail>
-              <span className="typo-normal1">
-                {soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}
-              </span>
+              <span className="typo-normal">{soknad.mottattDato && <DateLabel dateString={soknad.mottattDato} />}</span>
             </VStack>
             <VStack gap="space-4">
               <Detail>
                 {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.ExplanationFromApplication' })}
               </Detail>
-              <span className="typo-normal2">{soknad.begrunnelseForSenInnsending ?? '-'}</span>
+              <span className="typo-normal">{soknad.begrunnelseForSenInnsending ?? '-'}</span>
             </VStack>
           </VStack>
           <VStack gap="space-4">
             {textCode && <Detail>{intl.formatMessage({ id: textCode })}</Detail>}
-            <span className="typo-normal3">{dato && <DateLabel dateString={dato} />}</span>
+            <span className="typo-normal">{dato && <DateLabel dateString={dato} />}</span>
           </VStack>
         </HStack>
         <RhfRadioGroupNew name="erVilkarOk" control={formMethods.control} validate={[required]} isReadOnly={isReadOnly}>
