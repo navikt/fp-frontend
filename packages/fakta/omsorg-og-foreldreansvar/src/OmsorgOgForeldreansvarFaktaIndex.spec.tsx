@@ -19,6 +19,7 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
 
     expect(screen.getByText('Opplysninger om omsorg')).toBeInTheDocument();
     const omsorgsovertakelseInput = utils.getByLabelText('Dato for omsorgsovertakelse');
+    await userEvent.clear(omsorgsovertakelseInput);
     await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
     fireEvent.blur(omsorgsovertakelseInput);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();
@@ -65,7 +66,12 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
   it('skal løse aksjonspunkt for avklaring av vilkår', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunktForAvklareVilkårForForeldreansvar submitCallback={lagre} />);
+    const utils = render(
+      <ÅpentAksjonspunktForAvklareVilkårForForeldreansvar
+        {...ÅpentAksjonspunktForAvklareVilkårForForeldreansvar.args}
+        submitCallback={lagre}
+      />,
+    );
 
     expect(await screen.findByText('Kontroller opplysninger om foreldreansvar og omsorg')).toBeInTheDocument();
     expect(screen.queryByText('Velg vilkår som skal anvendes')).not.toBeInTheDocument();
@@ -73,9 +79,11 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
     expect(screen.getByText('Foreldreansvar og omsorg')).toBeInTheDocument();
     expect(screen.queryByText('Opplysninger om omsorg')).not.toBeInTheDocument();
     const omsorgsovertakelseInput = utils.getByLabelText('Dato for omsorgsovertakelse');
+    await userEvent.clear(omsorgsovertakelseInput);
     await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
     fireEvent.blur(omsorgsovertakelseInput);
     const foreldreansvarInput = utils.getByLabelText('Dato for foreldreansvar');
+    await userEvent.clear(foreldreansvarInput);
     await userEvent.type(foreldreansvarInput, '20.09.2022');
     fireEvent.blur(foreldreansvarInput);
     expect(screen.getByText('Antall barn')).toBeInTheDocument();

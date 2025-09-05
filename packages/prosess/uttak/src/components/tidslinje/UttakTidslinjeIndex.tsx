@@ -1,16 +1,15 @@
 import React from 'react';
 
-import { calcDays, ISO_DATE_FORMAT } from '@navikt/ft-utils';
+import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingTypeEnum, OppholdArsakType, SoknadType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum, OppholdArsakType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
   Behandling,
   Fagsak,
   FamilieHendelse,
-  FamilieHendelseSamling,
   foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak,
   foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
   PeriodeSoker,
@@ -41,74 +40,32 @@ const finnSøknadsdato = (søknad: Soknad): string => {
   return søknadsdato;
 };
 
-const getFodselTerminDato = (søknad: Soknad, gjeldendeFamiliehendelse: FamilieHendelse): string | undefined => {
-  if (gjeldendeFamiliehendelse?.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0) {
-    return gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato;
-  }
-
-  if (søknad.soknadType === SoknadType.FODSEL) {
-    const { termindato, fodselsdatoer } = søknad;
-    if (fodselsdatoer && Object.keys(fodselsdatoer).length > 0) {
-      return Object.values(fodselsdatoer)[0];
-    }
-    if (termindato) {
-      return termindato;
-    }
-  }
-
-  if (søknad.soknadType === SoknadType.ADOPSJON) {
-    const { adopsjonFodelsedatoer } = søknad;
-
-    if (adopsjonFodelsedatoer && Object.keys(adopsjonFodelsedatoer).length > 0) {
-      return Object.values(adopsjonFodelsedatoer)[0];
-    }
-  }
-
-  return undefined;
+const utledFamiliehendelseDato = (gjeldendeFamiliehendelse: FamilieHendelse): string | undefined => {
+  return (
+    gjeldendeFamiliehendelse.adopsjon?.omsorgsovertakelseDato ||
+    gjeldendeFamiliehendelse.fødselTermin?.fødselsdato ||
+    gjeldendeFamiliehendelse.fødselTermin?.termindato ||
+    undefined
+  );
 };
 
 const finnTidslinjeTider = (
   behandling: Behandling,
   søknad: Soknad,
-  familiehendelse: FamilieHendelseSamling,
+  familiehendelse: FamilieHendelse,
   personoversikt: Personoversikt,
   endringsdato: string,
 ): TidslinjeTimes => {
-  const gjeldendeFamiliehendelse = familiehendelse?.gjeldende;
-  const familiehendelseDate = getFodselTerminDato(søknad, gjeldendeFamiliehendelse);
-  const endredFodselsDato =
-    gjeldendeFamiliehendelse?.avklartBarn && gjeldendeFamiliehendelse.avklartBarn.length > 0
-      ? gjeldendeFamiliehendelse.avklartBarn[0].fodselsdato
-      : undefined;
-  const fødselsdato =
-    søknad.soknadType === SoknadType.FODSEL
-      ? (endredFodselsDato ?? familiehendelseDate)
-      : søknad.omsorgsovertakelseDato;
+  const familiehendelseDato = utledFamiliehendelseDato(familiehendelse);
+
   const isRevurdering = behandling.type === BehandlingTypeEnum.REVURDERING;
 
-  const barnFraTps = familiehendelse.register?.avklartBarn ?? [];
-  const dodeBarn =
-    gjeldendeFamiliehendelse &&
-    !gjeldendeFamiliehendelse.brukAntallBarnFraTps &&
-    gjeldendeFamiliehendelse.avklartBarn &&
-    gjeldendeFamiliehendelse.avklartBarn.length > 0
-      ? gjeldendeFamiliehendelse.avklartBarn.filter(barn => barn.dodsdato)
-      : barnFraTps.filter(barn => barn.dodsdato);
-
-  const customTimesBuilder = {
+  return {
     soknad: finnSøknadsdato(søknad),
-    fodsel: fødselsdato ?? undefined,
+    fodsel: familiehendelseDato,
     revurdering: isRevurdering ? endringsdato : undefined,
     dodSoker: personoversikt?.bruker?.dødsdato ?? undefined,
   };
-
-  dodeBarn.forEach((barn, index: number) => {
-    Object.defineProperty(customTimesBuilder, `barndod${index}`, {
-      value: dayjs(barn.dodsdato, ISO_DATE_FORMAT).toDate(),
-      enumerable: true,
-    });
-  });
-  return customTimesBuilder;
 };
 
 const leggTidslinjedataTilPeriode = (
@@ -149,7 +106,7 @@ interface Props {
   perioderSøker: PeriodeSoker[];
   perioderAnnenpart: PeriodeSoker[] | AnnenforelderUttakEøsPeriode[];
   valgtPeriodeIndex: number | undefined;
-  familiehendelse: FamilieHendelseSamling;
+  familiehendelse: FamilieHendelse;
   endringsdato: string;
   tilknyttetStortinget: boolean;
   setValgtPeriodeIndex: React.Dispatch<React.SetStateAction<number | undefined>>;

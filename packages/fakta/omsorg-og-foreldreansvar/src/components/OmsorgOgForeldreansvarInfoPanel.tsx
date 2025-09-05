@@ -8,9 +8,9 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
+  AdopsjonFamilieHendelse,
   Aksjonspunkt,
   AlleKodeverk,
-  FamilieHendelse,
   Personoversikt,
   RelatertTilgrensedYtelse,
   Soknad,
@@ -36,7 +36,7 @@ const transformValues = (
 
 const buildInitialValues = (
   soknad: Soknad,
-  gjeldendeFamiliehendelse: FamilieHendelse,
+  adopsjon: AdopsjonFamilieHendelse,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
   aksjonspunkter: Aksjonspunkt[],
   alleKodeverk: AlleKodeverk,
@@ -49,7 +49,7 @@ const buildInitialValues = (
   return {
     ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(
       soknad,
-      gjeldendeFamiliehendelse,
+      adopsjon,
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
       alleKodeverk,
     ),
@@ -60,7 +60,7 @@ const buildInitialValues = (
 interface Props {
   soknad: Soknad;
   personoversikt: Personoversikt;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  adopsjon: AdopsjonFamilieHendelse;
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
   submittable: boolean;
 }
@@ -74,7 +74,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
   submittable,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
   soknad,
-  gjeldendeFamiliehendelse,
+  adopsjon,
   personoversikt,
 }: Props) => {
   const intl = useIntl();
@@ -93,7 +93,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
   const formMethods = useForm<FormValues>({
     defaultValues: buildInitialValues(
       soknad,
-      gjeldendeFamiliehendelse,
+      adopsjon,
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
       aksjonspunkterForPanel,
       alleKodeverk,
@@ -130,7 +130,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           vilkarTypes={alleKodeverk['OmsorgsovertakelseVilkårType']}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
-          gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+          adopsjon={adopsjon}
           personoversikt={personoversikt}
         />
         <FaktaBegrunnelseTextField

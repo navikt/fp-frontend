@@ -8,14 +8,9 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, SoknadType } from '@navikt/fp-kodeverk';
-import type { FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
-
-const getAntallBarn = (soknad: Soknad, familiehendelse: FamilieHendelse): number => {
-  const antallBarn = soknad.antallBarn ?? NaN;
-  return familiehendelse.antallBarnTilBeregning ?? antallBarn;
-};
 
 export type FormValues = {
   omsorgsovertakelseDato?: string;
@@ -27,7 +22,7 @@ interface Props {
   erAksjonspunktForeldreansvar: boolean;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   soknad: Soknad;
-  familiehendelse: FamilieHendelse;
+  adopsjon: AdopsjonFamilieHendelse;
 }
 
 /**
@@ -38,10 +33,10 @@ export const OmsorgsovertakelseFaktaPanel = ({
   erAksjonspunktForeldreansvar,
   alleMerknaderFraBeslutter,
   soknad,
-  familiehendelse,
+  adopsjon,
 }: Props) => {
   const intl = useIntl();
-  const antallBarn = getAntallBarn(soknad, familiehendelse);
+  const antallBarn = adopsjon.antallBarn;
 
   const { control } = useFormContext<OmsorgOgForeldreansvarFormValues>();
 
@@ -61,7 +56,7 @@ export const OmsorgsovertakelseFaktaPanel = ({
           label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
-          isEdited={isNotEqual(finnOmsorgsovertakelseDato(soknad), familiehendelse.omsorgsovertakelseDato)}
+          isEdited={isNotEqual(finnOmsorgsovertakelseDato(soknad), adopsjon.omsorgsovertakelseDato)}
         />
         {erAksjonspunktForeldreansvar && (
           <RhfDatepicker
@@ -83,9 +78,9 @@ export const OmsorgsovertakelseFaktaPanel = ({
   );
 };
 
-OmsorgsovertakelseFaktaPanel.buildInitialValues = (soknad: Soknad, familiehendelse: FamilieHendelse): FormValues => ({
-  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? finnOmsorgsovertakelseDato(soknad),
-  foreldreansvarDato: familiehendelse.foreldreansvarDato,
+OmsorgsovertakelseFaktaPanel.buildInitialValues = (adopsjon: AdopsjonFamilieHendelse): FormValues => ({
+  omsorgsovertakelseDato: adopsjon.omsorgsovertakelseDato,
+  foreldreansvarDato: adopsjon.foreldreansvarDato,
 });
 
 const finnOmsorgsovertakelseDato = (søknad: Soknad) => {

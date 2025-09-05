@@ -23,7 +23,7 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   Behandling,
   Fagsak,
-  FamilieHendelseSamling,
+  FamilieHendelse,
   Personoversikt,
   Soknad,
   UttakStonadskontoer,
@@ -51,15 +51,10 @@ const åpentAksjonspunkt: Aksjonspunkt[] = [
 ];
 
 const familiehendelse = {
-  gjeldende: {
-    skjaringstidspunkt: '2019-11-04',
-    avklartBarn: [
-      {
-        fodselsdato: '2019-11-04',
-      },
-    ],
+  fødselTermin: {
+    fødselsdato: '2019-11-04',
   },
-} as FamilieHendelseSamling;
+} as FamilieHendelse;
 
 const behandling = {
   uuid: '1',
@@ -151,9 +146,6 @@ const uttakStonadskontoer = {
 const soknad = {
   soknadType: 'ST-001',
   mottattDato: '2019-11-18',
-  fodselsdatoer: {
-    1: '2019-11-04',
-  } as { [key: number]: string },
   søknadsfrist: {
     mottattDato: '2019-11-18',
     utledetSøknadsfrist: '2020-01-31',

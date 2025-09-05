@@ -1,33 +1,20 @@
-export type AvklartBarn = Readonly<{
-  fodselsdato: string;
-  dodsdato: string | null;
-}>;
-
-// TODO(siri): gjør dette til en union type basert på @type
 export type FamilieHendelse = Readonly<{
-  skjaringstidspunkt: string;
-  avklartBarn?: AvklartBarn[];
-  brukAntallBarnFraTps?: boolean;
-  dokumentasjonForeligger?: boolean;
-  termindato?: string;
-  antallBarnTermin?: number;
-  utstedtdato?: string;
-  morForSykVedFodsel?: boolean;
-  vedtaksDatoSomSvangerskapsuke?: number;
-  soknadType: string;
-  adopsjonFodelsedatoer?: Record<number, string>;
-  omsorgsovertakelseDato?: string;
-  antallBarnTilBeregning?: number;
-  ektefellesBarn?: boolean;
-  mannAdoptererAlene?: boolean;
-  vilkarType?: string;
-  ankomstNorge?: string;
-  erOverstyrt?: boolean;
-  foreldreansvarDato?: string;
+  fødselTermin?: FødselTerminFamilieHendelse;
+  adopsjon?: AdopsjonFamilieHendelse;
 }>;
 
-export type FamilieHendelseSamling = Readonly<{
-  oppgitt: FamilieHendelse;
-  gjeldende: FamilieHendelse;
-  register: FamilieHendelse | null;
+export type FødselTerminFamilieHendelse = Readonly<{
+  termindato?: string;
+  fødselsdato?: string;
+}>;
+
+export type AdopsjonFamilieHendelse = Readonly<{
+  antallBarn: number;
+  fødselsdatoer: Record<number, string>;
+  omsorgsovertakelseDato: string;
+  foreldreansvarDato: string;
+  omsorgsovertakelseVilkårType: string;
+  ektefellesBarn: boolean;
+  mannAdoptererAlene: boolean;
+  ankomstNorge?: string;
 }>;

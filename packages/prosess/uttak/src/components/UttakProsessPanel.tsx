@@ -16,7 +16,7 @@ import type {
   Aksjonspunkt,
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
-  FamilieHendelseSamling,
+  FamilieHendelse,
   PeriodeSoker,
   Personoversikt,
   Soknad,
@@ -161,7 +161,7 @@ const transformValues = (perioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[
 interface Props {
   uttaksresultat: Uttaksresultat;
   uttakStonadskontoer: UttakStonadskontoer;
-  familiehendelse: FamilieHendelseSamling;
+  familiehendelse: FamilieHendelse;
   soknad: Soknad;
   personoversikt: Personoversikt;
   kanOverstyre: boolean;
