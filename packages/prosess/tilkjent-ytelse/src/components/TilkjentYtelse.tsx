@@ -15,13 +15,12 @@ import { BodyShort, Button, HStack, Timeline, VStack } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { SoknadType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatPeriode,
   Fagsak,
-  FamilieHendelseSamling,
+  FamilieHendelse,
   Kjønnkode,
 } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
@@ -39,7 +38,7 @@ type Periode = {
 interface Props {
   beregningsresultatPeriode?: BeregningsresultatPeriode[];
   søknadsdato: string;
-  familiehendelseSamling: FamilieHendelseSamling;
+  familieHendelse: FamilieHendelse;
   hovedsøkerKjønnKode?: Kjønnkode;
   alleKodeverk: AlleKodeverk;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -54,7 +53,7 @@ interface Props {
 export const TilkjentYtelse = ({
   beregningsresultatPeriode,
   søknadsdato,
-  familiehendelseSamling,
+  familieHendelse,
   hovedsøkerKjønnKode,
   alleKodeverk,
   arbeidsgiverOpplysningerPerId,
@@ -120,7 +119,7 @@ export const TilkjentYtelse = ({
     }
   };
 
-  const familiehendelseData = getFamiliehendelseData(familiehendelseSamling);
+  const familiehendelseData = getFamiliehendelseData(familieHendelse);
 
   return (
     <VStack gap="space-16">
@@ -221,22 +220,17 @@ const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
   return graderteAndeler.length > 0;
 };
 
-const getFamiliehendelseData = (familieHendelseSamling: FamilieHendelseSamling): { dato?: string; textId: string } => {
-  const familieHendelse = familieHendelseSamling.gjeldende ?? familieHendelseSamling.oppgitt;
-  if (familieHendelse.soknadType === SoknadType.FODSEL) {
-    if (familieHendelse.avklartBarn && familieHendelse.avklartBarn.length > 0) {
-      return { dato: familieHendelse.avklartBarn[0].fodselsdato, textId: 'TilkjentYtelse.Fodselsdato' };
-    }
-    return { dato: familieHendelse.termindato, textId: 'TilkjentYtelse.Termindato' };
+const getFamiliehendelseData = (familieHendelse: FamilieHendelse): { dato?: string; textId: string } => {
+  if (familieHendelse.adopsjon?.omsorgsovertakelseDato) {
+    return { dato: familieHendelse.adopsjon.omsorgsovertakelseDato, textId: 'TilkjentYtelse.Omsorgsovertakelsesdato' };
   }
-  if (familieHendelse.omsorgsovertakelseDato) {
-    return { dato: familieHendelse.omsorgsovertakelseDato, textId: 'TilkjentYtelse.Omsorgsovertakelsesdato' };
+  if (familieHendelse.fødselTermin?.fødselsdato) {
+    return { dato: familieHendelse.fødselTermin.fødselsdato, textId: 'TilkjentYtelse.Fodselsdato' };
   }
-
-  return {
-    dato: familieHendelse.adopsjonFodelsedatoer ? familieHendelse.adopsjonFodelsedatoer[0] : undefined,
-    textId: 'TilkjentYtelse.Fodselsdato',
-  };
+  if (familieHendelse.fødselTermin?.termindato) {
+    return { dato: familieHendelse.fødselTermin.termindato, textId: 'TilkjentYtelse.Termindato' };
+  }
+  return { dato: undefined, textId: 'TilkjentYtelse.Fodselsdato' };
 };
 
 const formatPerioder = (perioder: BeregningsresultatPeriode[] = []): Periode[] =>

@@ -26,7 +26,7 @@ import type {
   Dokument,
   DokumentasjonVurderingBehov,
   FaktaArbeidsforhold,
-  FamilieHendelseSamling,
+  FamilieHendelse,
   Feriepengegrunnlag,
   Fødsel,
   FodselOgTilrettelegging,
@@ -160,7 +160,7 @@ export const BehandlingRel = {
   FEILUTBETALING_AARSAK: 'feilutbetalingAarsak',
   BEREGNINGRESULTAT_DAGYTELSE: 'beregningsresultat-dagytelse',
   FAKTA_FØDSEL: 'fakta-fødsel',
-  FAMILIEHENDELSE: 'familiehendelse-v2',
+  FAMILIEHENDELSE: 'familiehendelse-v3',
   SOKNAD: 'soknad',
   FERIEPENGEGRUNNLAG: 'feriepengegrunnlag',
   TILBAKEKREVINGVALG: 'tilbakekrevingvalg',
@@ -315,10 +315,11 @@ const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: Behandling, is
     staleTime: Infinity,
   });
 };
-const getFamiliehendelseOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
+
+const getfamiliehendelseOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) =>
   queryOptions({
     queryKey: [BehandlingRel.FAMILIEHENDELSE, behandling.uuid, behandling.versjon],
-    queryFn: () => kyExtended.get(getUrlFromRel('FAMILIEHENDELSE', links)).json<FamilieHendelseSamling>(),
+    queryFn: () => kyExtended.get(getUrlFromRel('FAMILIEHENDELSE', links)).json<FamilieHendelse>(),
     enabled: harLenke(behandling, 'FAMILIEHENDELSE') && isEnabled,
     staleTime: Infinity,
   });
@@ -720,7 +721,7 @@ export const useBehandlingApi = (behandling: Behandling) => {
     åpneForNyVurderingAOI: getÅpneForNyVurderingAOI(links),
     søknadOptions: getSøknadOptions(links),
     faktaFødselOptions: getFaktaFødselOptions(links),
-    familiehendelseOptions: getFamiliehendelseOptions(links),
+    familiehendelseOptions: getfamiliehendelseOptions(links),
     beregningsresultatDagytelseOptions: getBeregningsresultatDagytelseOptions(links),
     beregningDagytelseOriginalBehandlingOptions: getBeregningDagytelseOriginalBehandlingOptions(links),
     simuleringResultatOptions: getSimuleringResultatOptions(links),

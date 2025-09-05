@@ -5,7 +5,7 @@ import { createIntl } from '@navikt/ft-utils';
 import type {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
-  FamilieHendelseSamling,
+  FamilieHendelse,
   Feriepengegrunnlag,
   Personoversikt,
   Soknad,
@@ -19,7 +19,7 @@ const intl = createIntl(messages);
 
 interface Props {
   beregningresultat: BeregningsresultatDagytelse;
-  familiehendelse: FamilieHendelseSamling;
+  familiehendelse: FamilieHendelse;
   personoversikt: Personoversikt;
   søknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

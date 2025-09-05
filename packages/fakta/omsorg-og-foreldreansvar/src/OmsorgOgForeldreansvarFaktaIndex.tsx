@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FamilieHendelseSamling, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, InntektArbeidYtelse, Personoversikt, Soknad } from '@navikt/fp-types';
 
 import { OmsorgOgForeldreansvarInfoPanel } from './components/OmsorgOgForeldreansvarInfoPanel';
 
@@ -11,7 +11,7 @@ import messages from '../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  familiehendelse: FamilieHendelseSamling;
+  adopsjon: AdopsjonFamilieHendelse;
   soknad: Soknad;
   personoversikt: Personoversikt;
   inntektArbeidYtelse: InntektArbeidYtelse;
@@ -19,7 +19,7 @@ interface Props {
 }
 
 export const OmsorgOgForeldreansvarFaktaIndex = ({
-  familiehendelse,
+  adopsjon,
   soknad,
   personoversikt,
   inntektArbeidYtelse,
@@ -27,7 +27,7 @@ export const OmsorgOgForeldreansvarFaktaIndex = ({
 }: Props) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgForeldreansvarInfoPanel
-      gjeldendeFamiliehendelse={familiehendelse.gjeldende}
+      adopsjon={adopsjon}
       soknad={soknad}
       personoversikt={personoversikt}
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={

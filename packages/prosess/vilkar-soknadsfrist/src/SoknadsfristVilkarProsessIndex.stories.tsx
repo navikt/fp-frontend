@@ -11,14 +11,13 @@ import {
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, Behandling, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
 
 const soknad = {
   soknadType: SoknadType.FODSEL,
   mottattDato: '2019-01-01',
-  fodselsdatoer: { 1: '2019-01-01' } as { [key: number]: string },
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
   søknadsfrist: {
     mottattDato: '2019-01-01',
@@ -28,14 +27,10 @@ const soknad = {
 } as Soknad;
 
 const familiehendelse = {
-  gjeldende: {
-    avklartBarn: [
-      {
-        fodselsdato: '2019-01-02',
-      },
-    ],
+  fødselTermin: {
+    fødselsdato: '2019-01-02',
   },
-} as FamilieHendelseSamling;
+} as FamilieHendelse;
 
 const meta = {
   title: 'prosess/prosess-vilkar-soknadsfrist',
