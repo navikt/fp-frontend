@@ -54,8 +54,8 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
   const api = useBehandlingApi(behandling);
 
   const { data: uttaksresultat } = useQuery(api.uttaksresultatPerioderOptions(behandling));
-  const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
+  const { data: familieHendelse } = useQuery(api.familiehendelseOptions(behandling, skalHenteData));
   const { data: uttakStønadskontoer } = useQuery(api.uttakStønadskontoerOptions(behandling));
   const { data: annenForelderUttakEøs } = useQuery(api.uttakAnnenpartEøsOptions(behandling));
 
@@ -71,14 +71,14 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
       skalPanelVisesIMeny
       overstyrtStatus={overstyrtStatus}
     >
-      {uttaksresultat && familiehendelse && søknad && uttakStønadskontoer ? (
+      {uttaksresultat && søknad && familieHendelse && uttakStønadskontoer ? (
         <UttakProsessIndex
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           personoversikt={personoversikt}
           oppdaterStønadskontoer={oppdaterStønadskontoer}
           uttaksresultat={uttaksresultat}
-          familiehendelse={familiehendelse}
+          familiehendelse={familieHendelse}
           soknad={søknad}
           uttakStonadskontoer={uttakStønadskontoer}
           annenForelderUttakEøs={annenForelderUttakEøs}

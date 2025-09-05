@@ -10,9 +10,9 @@ import { EditedIcon, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import type {
+  AdopsjonFamilieHendelse,
   Aksjonspunkt,
   AlleKodeverk,
-  FamilieHendelse,
   InntektArbeidYtelse,
   KodeverkMedNavn,
   Personoversikt,
@@ -46,7 +46,7 @@ const getDescriptionText = (vilkarCode?: string): ReactElement => {
 
 interface Props {
   soknad: Soknad;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  adopsjon: AdopsjonFamilieHendelse;
   readOnly: boolean;
   vilkarTypes: KodeverkMedNavn<'OmsorgsovertakelseVilkårType'>[];
   erAksjonspunktForeldreansvar: boolean;
@@ -66,7 +66,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
   erAksjonspunktForeldreansvar,
   alleMerknaderFraBeslutter,
   personoversikt,
-  gjeldendeFamiliehendelse,
+  adopsjon,
 }: Props) => {
   const intl = useIntl();
 
@@ -82,7 +82,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
           alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
-          familiehendelse={gjeldendeFamiliehendelse}
+          adopsjon={adopsjon}
         />
         {!erAksjonspunktForeldreansvar && <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />}
       </HGrid>
@@ -118,7 +118,7 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
                 <Label size="small" as="span">
                   {vilkarTypes.find(d => d.kode === vilkarType)?.navn}
                 </Label>
-                {hasValue(gjeldendeFamiliehendelse.vilkarType) && <EditedIcon />}
+                {hasValue(adopsjon.omsorgsovertakelseVilkårType) && <EditedIcon />}
               </div>
             )}
             <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
@@ -131,12 +131,12 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
 
 OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (
   soknad: Soknad,
-  gjeldendeFamiliehendelse: FamilieHendelse,
+  adopsjon: AdopsjonFamilieHendelse,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
   alleKodeverk: AlleKodeverk,
 ): OmsorgOgForeldreansvarFormValues => ({
-  vilkarType: gjeldendeFamiliehendelse.vilkarType ? gjeldendeFamiliehendelse.vilkarType : '',
-  ...OmsorgsovertakelseFaktaPanel.buildInitialValues(soknad, gjeldendeFamiliehendelse),
+  vilkarType: adopsjon.omsorgsovertakelseVilkårType ? adopsjon.omsorgsovertakelseVilkårType : '',
+  ...OmsorgsovertakelseFaktaPanel.buildInitialValues(adopsjon),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, alleKodeverk),
 });
 

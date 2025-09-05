@@ -41,10 +41,10 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) 
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.OmsorgOgForeldreansvar' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {søknad && familiehendelse && inntektArbeidYtelse ? (
+      {søknad && familiehendelse?.adopsjon && inntektArbeidYtelse ? (
         <OmsorgOgForeldreansvarFaktaIndex
           soknad={søknad}
-          familiehendelse={familiehendelse}
+          adopsjon={familiehendelse.adopsjon}
           inntektArbeidYtelse={inntektArbeidYtelse}
           personoversikt={personoversikt}
           submittable={standardPanelProps.submittable}

@@ -8,7 +8,7 @@ import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
-  FamilieHendelseSamling,
+  FamilieHendelse,
   Feriepengegrunnlag,
   Kjønnkode,
   Personoversikt,
@@ -21,7 +21,7 @@ import { TilkjentYtelse } from './TilkjentYtelse';
 
 interface Props {
   beregningresultat: BeregningsresultatDagytelse;
-  familiehendelse: FamilieHendelseSamling;
+  familiehendelse: FamilieHendelse;
   personoversikt: Personoversikt;
   søknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -52,7 +52,7 @@ export const TilkjentYtelsePanel = ({
         <TilkjentYtelse
           beregningsresultatPeriode={beregningresultat.perioder}
           søknadsdato={søknadMottattDato}
-          familiehendelseSamling={familiehendelse}
+          familieHendelse={familiehendelse}
           hovedsøkerKjønnKode={personoversikt?.bruker ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
           alleKodeverk={alleKodeverk}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}

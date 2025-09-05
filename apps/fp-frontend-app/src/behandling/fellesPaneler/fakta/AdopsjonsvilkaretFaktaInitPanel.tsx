@@ -38,9 +38,9 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Adopsjon' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {familiehendelse && søknad && søknad.soknadType === SoknadType.ADOPSJON ? (
+      {familiehendelse?.adopsjon && søknad && søknad.soknadType === SoknadType.ADOPSJON ? (
         <AdopsjonFaktaIndex
-          familiehendelse={familiehendelse}
+          adopsjon={familiehendelse.adopsjon}
           soknad={søknad}
           isForeldrepengerFagsak={fagsak.fagsakYtelseType === 'FP'}
           submittable={standardPanelProps.submittable}

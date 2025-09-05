@@ -12,7 +12,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { FamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './dokumentasjonFaktaForm.module.css';
@@ -29,7 +29,7 @@ interface Props {
   readOnly: boolean;
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  adopsjon: AdopsjonFamilieHendelse;
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
@@ -42,7 +42,7 @@ interface Props {
 export const DokumentasjonFaktaForm = ({
   readOnly,
   soknad,
-  gjeldendeFamiliehendelse,
+  adopsjon,
   erForeldrepengerFagsak,
   hasEktefellesBarnAksjonspunkt,
   alleMerknaderFraBeslutter,
@@ -54,7 +54,7 @@ export const DokumentasjonFaktaForm = ({
   const omsorgsovertakelseDato = watch('omsorgsovertakelseDato');
   const barnetsAnkomstTilNorgeDato = watch('barnetsAnkomstTilNorgeDato');
 
-  const getAdopsjonsdatoEditedStatusForId = isAdopsjonFodelsedatoerEdited(soknad, gjeldendeFamiliehendelse);
+  const getAdopsjonsdatoEditedStatusForId = isAdopsjonFodelsedatoerEdited(soknad, adopsjon);
 
   return (
     <FaktaGruppe
@@ -72,7 +72,7 @@ export const DokumentasjonFaktaForm = ({
           }
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
-          isEdited={isNotEqual(soknad.omsorgsovertakelseDato, gjeldendeFamiliehendelse.omsorgsovertakelseDato)}
+          isEdited={isNotEqual(soknad.omsorgsovertakelseDato, adopsjon.omsorgsovertakelseDato)}
         />
         {erForeldrepengerFagsak && barnetsAnkomstTilNorgeDato && (
           <RhfDatepicker
@@ -81,7 +81,7 @@ export const DokumentasjonFaktaForm = ({
             label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
             validate={[hasValidDate]}
             isReadOnly={readOnly}
-            isEdited={isNotEqual(soknad.barnetsAnkomstTilNorgeDato, gjeldendeFamiliehendelse.ankomstNorge)}
+            isEdited={isNotEqual(soknad.barnetsAnkomstTilNorgeDato, adopsjon.ankomstNorge)}
           />
         )}
         {Object.keys(fodselsdatoer).map((id, i) => (
@@ -135,13 +135,10 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgs
   !!omsorgsovertakelseDato &&
   dayjs(fodselsdatoer[id]).isSameOrBefore(dayjs(omsorgsovertakelseDato).subtract(15, 'years'));
 
-DokumentasjonFaktaForm.initialValues = (
-  soknad: tjenester_behandling_søknad_SoknadAdopsjonDto,
-  familiehendelse: FamilieHendelse,
-): FormValues => ({
-  omsorgsovertakelseDato: familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato ?? undefined,
-  barnetsAnkomstTilNorgeDato: familiehendelse?.ankomstNorge ?? soknad.barnetsAnkomstTilNorgeDato ?? undefined,
-  fodselsdatoer: familiehendelse?.adopsjonFodelsedatoer ?? soknad.adopsjonFodelsedatoer ?? undefined,
+DokumentasjonFaktaForm.initialValues = (adopsjon: AdopsjonFamilieHendelse): FormValues => ({
+  omsorgsovertakelseDato: adopsjon.omsorgsovertakelseDato,
+  barnetsAnkomstTilNorgeDato: adopsjon.ankomstNorge,
+  fodselsdatoer: adopsjon.fødselsdatoer,
 });
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
@@ -152,9 +149,9 @@ DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumenter
 });
 
 const isAdopsjonFodelsedatoerEdited =
-  (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, familiehendelse: FamilieHendelse) =>
+  (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, adopsjon: AdopsjonFamilieHendelse) =>
   (id: string): boolean => {
-    const editedStatus = diff(soknad.adopsjonFodelsedatoer, familiehendelse.adopsjonFodelsedatoer);
+    const editedStatus = diff(soknad.adopsjonFodelsedatoer, adopsjon.fødselsdatoer);
     // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output
     return editedStatus ? editedStatus[id] : false;
   };
