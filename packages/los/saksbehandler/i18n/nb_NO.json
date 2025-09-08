@@ -8,11 +8,11 @@
 
   "LedigOppgaveRad.Saksnr": "Kopier saksnummer",
 
-  "ReservasjonsstatusPanel.Reservert": "Reservert av {navn}",
+  "ReservasjonsstatusPanel.Reservert": "Reservert på {navn}",
   "ReservasjonsstatusPanel.Ingen": "Ingen reservasjon",
-  "ReservasjonsstatusPanel.ReservertPaMeg": "Reservert på meg",
   "ReservasjonsstatusPanel.OpphevReservasjon": "Opphev reservasjon",
-  "ReservasjonsstatusPanel.Reserver": "Reserver",
+  "ReservasjonsstatusPanel.Reserver": "Reserver på meg",
+  "ReservasjonsstatusPanel.ErReservertPaDeg": "Er reservert på deg",
 
   "ReservertOppgaveTabell.Soker": "Søker",
   "ReservertOppgaveTabell.Sak": "Sak",

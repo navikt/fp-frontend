@@ -1,4 +1,7 @@
-import { FaceFrownIcon, FaceLaughIcon } from '@navikt/aksel-icons';
+import { useEffect, useState } from 'react';
+import { FormattedMessage, RawIntlProvider } from 'react-intl';
+
+import { PadlockLockedIcon } from '@navikt/aksel-icons';
 import { Button, HStack, Tooltip } from '@navikt/ds-react';
 import { createIntl } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -15,9 +18,19 @@ interface Props {
 }
 
 export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid }: Props) => {
-  const { data: reserverteOppgaver = [], refetch } = useQuery(oppgaverForFagsakerOptions([saksnummer]));
+  const [erReservertAvInnloggetBruker, setErReservertAvInnloggetBruker] = useState(false);
+
+  const { data: reserverteOppgaver = [], refetch } = useQuery({
+    ...oppgaverForFagsakerOptions([saksnummer]),
+    refetchInterval: erReservertAvInnloggetBruker ? false : 10000,
+  });
 
   const oppgaveForBehandling = reserverteOppgaver.find(ro => ro.behandlingId === behandlingUuid);
+  const erReservert = oppgaveForBehandling?.reservasjonStatus.erReservert;
+
+  useEffect(() => {
+    setErReservertAvInnloggetBruker(oppgaveForBehandling?.reservasjonStatus.erReservertAvInnloggetBruker || false);
+  }, [erReservert]);
 
   const { mutate: opphevOppgavereservasjon } = useMutation({
     mutationFn: opphevReservasjon,
@@ -33,39 +46,34 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid }: Props) =
     },
   });
 
-  const erReservert = oppgaveForBehandling?.reservasjonStatus.erReservert;
-
   return (
-    <HStack gap="space-8" align="center">
-      {!erReservert && intl.formatMessage({ id: 'ReservasjonsstatusPanel.Ingen' })}
-      {oppgaveForBehandling?.reservasjonStatus.erReservertAvInnloggetBruker &&
-        intl.formatMessage({ id: 'ReservasjonsstatusPanel.ReservertPaMeg' })}
-      {erReservert &&
-        !oppgaveForBehandling?.reservasjonStatus.erReservertAvInnloggetBruker &&
-        intl.formatMessage(
-          { id: 'ReservasjonsstatusPanel.Reservert' },
-          { navn: oppgaveForBehandling.reservasjonStatus.reservertAvNavn },
+    <RawIntlProvider value={intl}>
+      <HStack gap="space-8" align="center">
+        {!erReservert && !!oppgaveForBehandling && (
+          <Button size="small" onClick={() => reserverOppgave(oppgaveForBehandling.id)}>
+            <FormattedMessage id="ReservasjonsstatusPanel.Reserver" />
+          </Button>
         )}
-      {erReservert && oppgaveForBehandling.reservasjonStatus.erReservertAvInnloggetBruker && (
-        <Tooltip content={intl.formatMessage({ id: 'ReservasjonsstatusPanel.OpphevReservasjon' })}>
-          <Button
-            icon={<FaceFrownIcon aria-hidden />}
-            variant="tertiary-neutral"
-            size="small"
-            onClick={() => opphevOppgavereservasjon(oppgaveForBehandling.id)}
-          />
-        </Tooltip>
-      )}
-      {!erReservert && !!oppgaveForBehandling && (
-        <Tooltip content={intl.formatMessage({ id: 'ReservasjonsstatusPanel.Reserver' })}>
-          <Button
-            icon={<FaceLaughIcon aria-hidden />}
-            variant="tertiary-neutral"
-            size="small"
-            onClick={() => reserverOppgave(oppgaveForBehandling.id)}
-          />
-        </Tooltip>
-      )}
-    </HStack>
+        {erReservert && oppgaveForBehandling.reservasjonStatus.erReservertAvInnloggetBruker && (
+          <Tooltip content={intl.formatMessage({ id: 'ReservasjonsstatusPanel.ErReservertPaDeg' })}>
+            <Button
+              size="small"
+              variant="primary-neutral"
+              onClick={() => opphevOppgavereservasjon(oppgaveForBehandling.id)}
+            >
+              <FormattedMessage id="ReservasjonsstatusPanel.OpphevReservasjon" />
+            </Button>
+          </Tooltip>
+        )}
+        {erReservert && !oppgaveForBehandling?.reservasjonStatus.erReservertAvInnloggetBruker && (
+          <Button size="small" variant="primary-neutral" disabled icon={<PadlockLockedIcon aria-hidden />}>
+            <FormattedMessage
+              id="ReservasjonsstatusPanel.Reservert"
+              values={{ navn: oppgaveForBehandling.reservasjonStatus.reservertAvNavn }}
+            />
+          </Button>
+        )}
+      </HStack>
+    </RawIntlProvider>
   );
 };
