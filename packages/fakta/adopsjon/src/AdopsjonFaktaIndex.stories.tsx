@@ -11,18 +11,20 @@ import {
   VilkarType,
 } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
-import type { Aksjonspunkt, FamilieHendelseSamling, Soknad } from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, Aksjonspunkt, Soknad } from '@navikt/fp-types';
 
 import { AdopsjonFaktaIndex } from './AdopsjonFaktaIndex';
 
-const familieHendelse = {
-  gjeldende: {
-    adopsjonFodelsedatoer: {
-      1: '2018-01-01',
-      2: '2000-01-02',
-    } as Record<number, string>,
-  },
-} as FamilieHendelseSamling;
+const adopsjon = {
+  antallBarn: 2,
+  omsorgsovertakelseDato: '2022-09-14',
+  ankomstNorge: '2022-09-13',
+  mannAdoptererAlene: false,
+  fødselsdatoer: {
+    1: '2018-01-01',
+    2: '2000-01-02',
+  } as Record<number, string>,
+} as AdopsjonFamilieHendelse;
 
 const soknad = {
   antallBarn: 1,
@@ -71,7 +73,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     soknad,
-    familiehendelse: familieHendelse,
+    adopsjon: adopsjon,
     submittable: true,
     isForeldrepengerFagsak: true,
   },

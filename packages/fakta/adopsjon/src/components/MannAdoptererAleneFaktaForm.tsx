@@ -9,8 +9,8 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
+  AdopsjonFamilieHendelse,
   AlleKodeverk,
-  FamilieHendelse,
   foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType,
 } from '@navikt/fp-types';
 import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -22,7 +22,7 @@ interface Props {
   farSokerType: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType | undefined;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  adopsjon: AdopsjonFamilieHendelse;
 }
 
 export type FormValues = {
@@ -39,7 +39,7 @@ export const MannAdoptererAleneFaktaForm = ({
   readOnly,
   alleKodeverk,
   alleMerknaderFraBeslutter,
-  gjeldendeFamiliehendelse,
+  adopsjon,
 }: Props) => {
   const intl = useIntl();
   const { control } = useFormContext<FormValues>();
@@ -64,7 +64,7 @@ export const MannAdoptererAleneFaktaForm = ({
           name="mannAdoptererAlene"
           control={control}
           hideLegend
-          isEdited={hasValue(gjeldendeFamiliehendelse.mannAdoptererAlene)}
+          isEdited={hasValue(adopsjon.mannAdoptererAlene)}
           validate={[required]}
           isReadOnly={readOnly}
         >
@@ -82,8 +82,8 @@ export const MannAdoptererAleneFaktaForm = ({
   );
 };
 
-MannAdoptererAleneFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
-  mannAdoptererAlene: familiehendelse ? familiehendelse.mannAdoptererAlene : undefined,
+MannAdoptererAleneFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHendelse): FormValues => ({
+  mannAdoptererAlene: adopsjon ? adopsjon.mannAdoptererAlene : undefined,
 });
 
 MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): BekreftMannAdoptererAksjonspunktAp => ({

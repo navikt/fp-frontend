@@ -5,7 +5,7 @@ import { createIntl } from '@navikt/ft-utils';
 import type {
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
-  FamilieHendelseSamling,
+  FamilieHendelse,
   PeriodeSoker,
   Personoversikt,
   Soknad,
@@ -23,7 +23,7 @@ interface Props {
   uttakStonadskontoer: UttakStonadskontoer;
   soknad: Soknad;
   uttaksresultat: Uttaksresultat;
-  familiehendelse: FamilieHendelseSamling;
+  familiehendelse: FamilieHendelse;
   personoversikt: Personoversikt;
   kanOverstyre: boolean;
   oppdaterStønadskontoer: (params: {

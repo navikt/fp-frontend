@@ -8,7 +8,11 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, FamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
+import type {
+  AdopsjonFamilieHendelse,
+  Aksjonspunkt,
+  tjenester_behandling_søknad_SoknadAdopsjonDto,
+} from '@navikt/fp-types';
 import type {
   BekreftDokumentertDatoAksjonspunktAp,
   BekreftEktefelleAksjonspunktAp,
@@ -44,24 +48,20 @@ const getHelpTexts = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   return helpTexts;
 };
 
-const buildInitialValues = (
-  soknad: tjenester_behandling_søknad_SoknadAdopsjonDto,
-  familiehendelse: FamilieHendelse,
-  allAksjonspunkter: Aksjonspunkt[],
-): FormValues => {
+const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, allAksjonspunkter: Aksjonspunkt[]): FormValues => {
   const aksjonspunkter = allAksjonspunkter.filter(ap => adopsjonAksjonspunkter.some(kode => kode === ap.definisjon));
 
   let mannAdoptererAleneValues = {};
   if (hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter)) {
-    mannAdoptererAleneValues = MannAdoptererAleneFaktaForm.buildInitialValues(familiehendelse);
+    mannAdoptererAleneValues = MannAdoptererAleneFaktaForm.buildInitialValues(adopsjon);
   }
   let omAdopsjonGjelderEktefellesBarn = {};
   if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter)) {
-    omAdopsjonGjelderEktefellesBarn = EktefelleFaktaForm.buildInitialValues(familiehendelse);
+    omAdopsjonGjelderEktefellesBarn = EktefelleFaktaForm.buildInitialValues(adopsjon);
   }
 
   return {
-    ...DokumentasjonFaktaForm.initialValues(soknad, familiehendelse),
+    ...DokumentasjonFaktaForm.initialValues(adopsjon),
     ...omAdopsjonGjelderEktefellesBarn,
     ...mannAdoptererAleneValues,
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter[0]),
@@ -99,7 +99,7 @@ interface Props {
   submittable: boolean;
   isForeldrepengerFagsak: boolean;
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  adopsjon: AdopsjonFamilieHendelse;
 }
 
 /**
@@ -107,7 +107,7 @@ interface Props {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Adopsjonsvilkåret.
  */
-export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad, gjeldendeFamiliehendelse }: Props) => {
+export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad, adopsjon }: Props) => {
   const {
     alleKodeverk,
     submitCallback,
@@ -120,7 +120,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: mellomlagretFormData ?? buildInitialValues(soknad, gjeldendeFamiliehendelse, aksjonspunkterForPanel),
+    defaultValues: mellomlagretFormData ?? buildInitialValues(adopsjon, aksjonspunkterForPanel),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -139,7 +139,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
               <DokumentasjonFaktaForm
                 readOnly={isReadOnly}
                 soknad={soknad}
-                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+                adopsjon={adopsjon}
                 erForeldrepengerFagsak={isForeldrepengerFagsak}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(
@@ -152,14 +152,14 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
               <EktefelleFaktaForm
                 readOnly={isReadOnly}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+                adopsjon={adopsjon}
               />
             )}
             {hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel) && (
               <MannAdoptererAleneFaktaForm
                 farSokerType={soknad.farSokerType ?? undefined}
                 readOnly={isReadOnly}
-                gjeldendeFamiliehendelse={gjeldendeFamiliehendelse}
+                adopsjon={adopsjon}
                 alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
                 alleKodeverk={alleKodeverk}
               />

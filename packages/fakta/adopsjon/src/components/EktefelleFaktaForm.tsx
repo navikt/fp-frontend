@@ -8,14 +8,14 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { FamilieHendelse } from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse } from '@navikt/fp-types';
 import type { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import styles from './ektefelleFaktaForm.module.css';
 
 interface Props {
   readOnly: boolean;
-  gjeldendeFamiliehendelse: FamilieHendelse;
+  adopsjon: AdopsjonFamilieHendelse;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -28,7 +28,7 @@ export type FormValues = {
  *
  * Setter opp aksjonspunktet for vurdering av om det er ektefelles barn som adopteres.
  */
-export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMerknaderFraBeslutter }: Props) => {
+export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutter }: Props) => {
   const intl = useIntl();
   const { control } = useFormContext<FormValues>();
 
@@ -50,7 +50,7 @@ export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMer
           hideLegend
           validate={[required]}
           isReadOnly={readOnly}
-          isEdited={hasValue(gjeldendeFamiliehendelse.ektefellesBarn)}
+          isEdited={hasValue(adopsjon.ektefellesBarn)}
         >
           <HStack gap="space-16">
             <Radio value={false} size="small">
@@ -66,9 +66,8 @@ export const EktefelleFaktaForm = ({ readOnly, gjeldendeFamiliehendelse, alleMer
   );
 };
 
-EktefelleFaktaForm.buildInitialValues = (familiehendelse: FamilieHendelse): FormValues => ({
-  ektefellesBarn:
-    familiehendelse && familiehendelse.ektefellesBarn !== null ? familiehendelse.ektefellesBarn : undefined,
+EktefelleFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHendelse): FormValues => ({
+  ektefellesBarn: adopsjon && adopsjon.ektefellesBarn !== null ? adopsjon.ektefellesBarn : undefined,
 });
 
 EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelleAksjonspunktAp => ({

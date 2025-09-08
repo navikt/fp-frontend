@@ -8,7 +8,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, AksjonspunktStatus, SoknadType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -29,31 +29,22 @@ type FormValues = {
   begrunnelse?: string;
 };
 
-const findTextCode = (soknad: Soknad, familiehendelse: FamilieHendelse): string => {
-  if (soknad.soknadType === SoknadType.FODSEL) {
-    const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
-    const fodselsdato =
-      familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
-        ? familiehendelse.avklartBarn[0].fodselsdato
-        : soknadFodselsdato;
-    return fodselsdato
+const findTextCode = (familiehendelse: FamilieHendelse): string => {
+  if (familiehendelse.fødselTermin) {
+    return familiehendelse.fødselTermin.fødselsdato
       ? 'ErSoknadsfristVilkaretOppfyltForm.Fodselsdato'
       : 'ErSoknadsfristVilkaretOppfyltForm.Termindato';
   }
   return 'ErSoknadsfristVilkaretOppfyltForm.Omsorgsovertakelsesdato';
 };
 
-const findDate = (soknad: Soknad, familiehendelse: FamilieHendelse): string | undefined => {
-  if (soknad.soknadType === SoknadType.FODSEL) {
-    const soknadFodselsdato = soknad.fodselsdatoer ? Object.values(soknad.fodselsdatoer)[0] : undefined;
-    const fodselsdato =
-      familiehendelse?.avklartBarn && familiehendelse.avklartBarn.length > 0
-        ? familiehendelse.avklartBarn[0].fodselsdato
-        : soknadFodselsdato;
-    const termindato = familiehendelse?.termindato ?? soknad.termindato;
-    return (fodselsdato || termindato) ?? undefined;
-  }
-  return familiehendelse?.omsorgsovertakelseDato ?? soknad.omsorgsovertakelseDato ?? undefined;
+const findDate = (familiehendelse: FamilieHendelse): string | undefined => {
+  return (
+    familiehendelse.adopsjon?.omsorgsovertakelseDato ||
+    familiehendelse.fødselTermin?.fødselsdato ||
+    familiehendelse.fødselTermin?.termindato ||
+    undefined
+  );
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
@@ -98,8 +89,8 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const dato = findDate(soknad, gjeldendeFamiliehendelse);
-  const textCode = findTextCode(soknad, gjeldendeFamiliehendelse);
+  const dato = findDate(gjeldendeFamiliehendelse);
+  const textCode = findTextCode(gjeldendeFamiliehendelse);
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 

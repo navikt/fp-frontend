@@ -17,7 +17,6 @@ import type {
   ArbeidsgiverOpplysningerPerId,
   BeregningsresultatDagytelse,
   FamilieHendelse,
-  FamilieHendelseSamling,
   Personoversikt,
   Soknad,
 } from '@navikt/fp-types';
@@ -25,16 +24,11 @@ import type {
 import { TilkjentYtelseProsessIndex } from './TilkjentYtelseProsessIndex';
 
 const defaultFamiliehendelse = {
-  gjeldende: {
-    avklartBarn: [
-      {
-        fodselsdato: '2019-01-01',
-      },
-    ],
-    omsorgsovertakelseDato: '2019-01-01',
-    soknadType: SoknadType.FODSEL,
-  } as FamilieHendelse,
-} as FamilieHendelseSamling;
+  fødselTermin: {
+    fødselsdato: '2019-01-01',
+    termindato: '2019-01-01',
+  },
+} as FamilieHendelse;
 
 const personoversikt = {
   bruker: {
@@ -199,15 +193,9 @@ export const MedBarnFodtLengeForForstePeriode: Story = {
   args: {
     aksjonspunkterForPanel: [],
     familiehendelse: {
-      ...defaultFamiliehendelse,
-      gjeldende: {
-        avklartBarn: [
-          {
-            fodselsdato: '2017-01-01',
-          },
-        ],
-        soknadType: SoknadType.FODSEL,
-      } as FamilieHendelse,
-    },
+      fødselTermin: {
+        fødselsdato: '2017-01-01',
+      },
+    } as FamilieHendelse,
   },
 };
