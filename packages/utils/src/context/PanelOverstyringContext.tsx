@@ -1,26 +1,30 @@
 import { createContext, type ReactElement, useContext, useMemo, useState } from 'react';
 
-import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 
-type ContextProps = {
+interface ContextProps {
   overrideReadOnly: boolean;
   kanOverstyreAccess: { isEnabled: boolean; employeeHasAccess: boolean };
-  overstyringApKode: OverstyringAksjonspunkter;
+  overstyringApKode: AksjonspunktKode;
   initialToggleState?: boolean;
   toggleOverstyring?: (erOverstyrt: boolean) => void;
-};
+}
 
-type ContextValues = {
+interface ContextValues<T extends AksjonspunktKode> {
   overrideReadOnly: boolean;
   kanOverstyreAccess: { isEnabled: boolean; employeeHasAccess: boolean };
-  overstyringApKode: OverstyringAksjonspunkter;
+  overstyringApKode: T;
   erOverstyrt: boolean;
   toggleOverstyring: () => void;
-};
+}
 
-const PanelOverstyringContext = createContext<ContextValues | null>(null);
+const PanelOverstyringContext = createContext<ContextValues<AksjonspunktKode> | null>(null);
 
-export const PanelOverstyringProvider = (props: { children: ReactElement | null } & ContextProps) => {
+export const PanelOverstyringProvider = (
+  props: {
+    children: ReactElement | null;
+  } & ContextProps,
+) => {
   const [erOverstyrt, setErOverstyrt] = useState(props.initialToggleState ?? false);
 
   const { children, toggleOverstyring: toggle, ...otherProps } = props;
@@ -30,7 +34,7 @@ export const PanelOverstyringProvider = (props: { children: ReactElement | null 
     toggle?.(!erOverstyrt);
   };
 
-  const value = useMemo<ContextValues>(
+  const value = useMemo(
     () => ({
       erOverstyrt,
       toggleOverstyring,
@@ -39,11 +43,11 @@ export const PanelOverstyringProvider = (props: { children: ReactElement | null 
     [erOverstyrt, toggleOverstyring, otherProps],
   );
 
-  return <PanelOverstyringContext value={value}>{children}</PanelOverstyringContext>;
+  return <PanelOverstyringContext.Provider value={value}>{children}</PanelOverstyringContext.Provider>;
 };
 
-export const usePanelOverstyring = () => {
-  const context = useContext<ContextValues | null>(PanelOverstyringContext);
+export const usePanelOverstyring = <T extends AksjonspunktKode>() => {
+  const context = useContext(PanelOverstyringContext) as ContextValues<T> | null;
   if (!context) {
     throw new Error('PanelOverstyringContext.Provider er ikke satt opp');
   }

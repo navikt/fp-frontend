@@ -19,7 +19,7 @@ export const OverstyringPanel = ({ gjeldende, submittable }: Props) => {
   const intl = useIntl();
 
   const { erOverstyrt, toggleOverstyring, kanOverstyreAccess, overrideReadOnly } = usePanelOverstyring();
-  const { alleMerknaderFraBeslutter, aksjonspunkterForPanel, harÅpneAksjonspunkter } = usePanelDataContext();
+  const { alleMerknaderFraBeslutter, aksjonspunkterForPanel, harÅpentAksjonspunkt } = usePanelDataContext();
 
   const readOnly = !erOverstyrt || overrideReadOnly || !kanOverstyreAccess.isEnabled;
 
@@ -28,7 +28,7 @@ export const OverstyringPanel = ({ gjeldende, submittable }: Props) => {
   );
 
   return (
-    (overstyringAP || (!overstyringAP && !harÅpneAksjonspunkter)) && (
+    (overstyringAP || (!overstyringAP && !harÅpentAksjonspunkt)) && (
       <>
         {kanOverstyreAccess.isEnabled && (
           <HStack gap="4">
