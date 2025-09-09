@@ -65,6 +65,8 @@ export const FlyttReservasjonModal = ({
     [],
   );
 
+  console.log('tst');
+
   const søkFormMethods = useForm<SøkFormValues>();
   const brukerIdentValue = søkFormMethods.watch('brukerIdent');
 
