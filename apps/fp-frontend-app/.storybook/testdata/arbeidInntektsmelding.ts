@@ -31,8 +31,7 @@ export const arbeidInntektsmelding: ArbeidOgInntektsmelding = {
       fom: '2024-03-05',
       tom: '9999-12-31',
       stillingsprosent: 75.0,
-
-      permisjonOgMangel: null,
+      saksbehandlersVurdering: '-',
     },
   ],
   inntekter: [

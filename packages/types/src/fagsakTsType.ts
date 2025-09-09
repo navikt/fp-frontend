@@ -17,25 +17,4 @@ export type Saksnotat = tjenester_fagsak_dto_FagsakNotatDto;
 
 export type Saksmarkering = tjenester_fagsak_dto_FagsakMarkeringDto;
 
-// export type Fagsak = Readonly<{
-//   saksnummer: string;
-//   fagsakYtelseType: FagsakYtelseType;
-//   relasjonsRolleType: RelasjonsRolleType;
-//   status: FagsakStatus;
-//   dekningsgrad: number;
-//   aktørId: string;
-//   harVergeIÅpenBehandling: boolean;
-//   sakSkalTilInfotrygd: boolean;
-//   behandlingTypeKanOpprettes: BehandlingOppretting[];
-//   bruker: Person;
-//   annenPart: Person | null;
-//   annenpartBehandling: AnnenPartBehandling | null;
-//   fagsakMarkeringer?: Saksmarkering[];
-//   familiehendelse?: FagsakHendelse;
-//   behandlinger: BehandlingAppKontekst[];
-//   brukerManglerAdresse: boolean;
-//   historikkinnslag: Historikkinnslag[];
-//   kontrollResultat: Risikoklassifisering;
-//   notater: Saksnotat[];
-// }>;
 export type Fagsak = tjenester_fagsak_dto_FagsakFullDto;

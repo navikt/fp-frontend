@@ -227,7 +227,7 @@ describe('UttakProsessIndex', () => {
             periodeResultatÅrsak: '4103',
             periodeType: null,
             samtidigUttak: false,
-            samtidigUttaksprosent: null,
+
             tom: '2022-12-21',
             utsettelseType: '-',
           },

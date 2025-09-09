@@ -5,7 +5,7 @@ export const alleInntektsmeldinger: Inntektsmelding[] = [
     inntektPrMnd: 20000.0,
     refusjonPrMnd: 41666.0,
     arbeidsgiverIdent: '992257822',
-    eksternArbeidsforholdId: null,
+
     internArbeidsforholdId: 'c33a8ee0-84cb-4705-a249-40cf52b51b48',
     kontaktpersonNavn: 'Corpolarsen',
     kontaktpersonNummer: '41925090',

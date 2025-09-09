@@ -17,7 +17,7 @@ export const behandling: Behandling = {
   type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
   status: BehandlingStatusEnum.BEHANDLING_UTREDES,
   opprettet: '2025-03-05T16:42:58',
-  avsluttet: null,
+
   behandlendeEnhetId: '4867',
   behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser foreldrepenger',
   erAktivPapirsoknad: false,
@@ -29,31 +29,26 @@ export const behandling: Behandling = {
   gjeldendeVedtak: false,
   behandlingHenlagt: false,
   behandlingPåVent: false,
-  fristBehandlingPåVent: null,
-  venteÅrsakKode: null,
+
   språkkode: 'NB',
   behandlingKøet: false,
-  ansvarligSaksbehandler: null,
+
   toTrinnsBehandling: false,
   behandlingsresultat: {
     id: 999951,
     type: BehandlingResultatType.IKKE_FASTSATT,
-    avslagsarsak: null,
-    avslagsarsakFritekst: null,
+
     rettenTil: '-',
     konsekvenserForYtelsen: [],
     vedtaksbrev: '-',
-    overskrift: null,
-    fritekstbrev: null,
+
     harRedigertVedtaksbrev: false,
     erRevurderingMedUendretUtfall: false,
     skjæringstidspunkt: {
       dato: '2025-02-12',
-      utenMinsterett: null,
     },
-    opphørsdato: null,
+
     vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
-    endretDekningsgrad: null,
   },
   behandlingÅrsaker: [
     {
@@ -295,19 +290,4 @@ export const behandling: Behandling = {
   harSattEndringsdato: false,
   alleUttaksperioderAvslått: false,
   sjekkSimuleringResultat: false,
-  taskStatus: null,
-  id: null,
-  fagsakId: null,
-  endret: null,
-  endretAvBrukernavn: null,
-  behandlingsfristTid: null,
-  erPaaVent: null,
-  originalVedtaksDato: null,
-  behandlingPaaVent: null,
-  fristBehandlingPaaVent: null,
-  venteArsakKode: null,
-  sprakkode: null,
-  ansvarligBeslutter: null,
-  harRegisterdata: null,
-  behandlingKoet: null,
 };

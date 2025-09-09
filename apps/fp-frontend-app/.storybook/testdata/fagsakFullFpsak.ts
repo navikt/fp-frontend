@@ -38,7 +38,7 @@ export const fagsakFullFpsak: Fagsak = {
 
     språkkode: '-',
   },
-  annenpartBehandling: null,
+
   familiehendelse: {
     hendelseType: 'FODSL',
     hendelseDato: '2025-03-05',
@@ -75,7 +75,7 @@ export const fagsakFullFpsak: Fagsak = {
       type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
       status: BehandlingStatusEnum.BEHANDLING_UTREDES,
       opprettet: '2025-03-05T16:42:58',
-      avsluttet: null,
+
       behandlendeEnhetId: '4867',
       behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser foreldrepenger',
       erAktivPapirsoknad: false,
@@ -87,31 +87,26 @@ export const fagsakFullFpsak: Fagsak = {
       gjeldendeVedtak: false,
       behandlingHenlagt: false,
       behandlingPåVent: false,
-      fristBehandlingPåVent: null,
-      venteÅrsakKode: null,
+
       språkkode: 'NB',
       behandlingKøet: false,
-      ansvarligSaksbehandler: null,
+
       toTrinnsBehandling: false,
       behandlingsresultat: {
         id: 999951,
         type: BehandlingResultatType.IKKE_FASTSATT,
-        avslagsarsak: null,
-        avslagsarsakFritekst: null,
+
         rettenTil: '-',
         konsekvenserForYtelsen: [],
         vedtaksbrev: '-',
-        overskrift: null,
-        fritekstbrev: null,
+
         harRedigertVedtaksbrev: false,
         erRevurderingMedUendretUtfall: false,
         skjæringstidspunkt: {
           dato: '2025-02-12',
-          utenMinsterett: null,
         },
-        opphørsdato: null,
+
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
-        endretDekningsgrad: null,
       },
       behandlingÅrsaker: [
         {
@@ -169,27 +164,12 @@ export const fagsakFullFpsak: Fagsak = {
       ],
       totrinnskontrollÅrsaker: [],
       totrinnskontrollReadonly: true,
-      risikoAksjonspunkt: null,
+
       kontrollResultat: {
         kontrollresultat: 'IKKE_HOY',
-        iayFaresignaler: null,
-        medlFaresignaler: null,
-        faresignalVurdering: null,
       },
-      ugunstAksjonspunkt: null,
-      id: null,
-      fagsakId: null,
-      endret: null,
-      endretAvBrukernavn: null,
-      behandlingsfristTid: null,
-      erPaaVent: null,
-      originalVedtaksDato: null,
-      behandlingPaaVent: null,
-      fristBehandlingPaaVent: null,
-      venteArsakKode: null,
-      sprakkode: null,
+
       vilkår: [],
-      behandlingKoet: null,
     },
   ],
   historikkinnslag: [
@@ -197,9 +177,8 @@ export const fagsakFullFpsak: Fagsak = {
       behandlingUuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       aktør: {
         type: HistorikkAktorEnum.SOKER,
-        ident: null,
       },
-      skjermlenke: null,
+
       opprettetTidspunkt: '2025-03-05T16:43:01.957',
       dokumenter: [
         {
@@ -213,12 +192,10 @@ export const fagsakFullFpsak: Fagsak = {
       linjer: [],
     },
     {
-      behandlingUuid: null,
       aktør: {
         type: HistorikkAktorEnum.ARBEIDSGIVER,
-        ident: null,
       },
-      skjermlenke: null,
+
       opprettetTidspunkt: '2025-03-05T16:43:05.499',
       dokumenter: [
         {
@@ -235,9 +212,6 @@ export const fagsakFullFpsak: Fagsak = {
   notater: [],
   kontrollResultat: {
     kontrollresultat: 'IKKE_HOY',
-    iayFaresignaler: null,
-    medlFaresignaler: null,
-    faresignalVurdering: null,
   },
   harVergeIÅpenBehandling: false,
 };

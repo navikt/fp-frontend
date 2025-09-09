@@ -22,7 +22,7 @@ interface Props {
   erMor: boolean;
   bruker: Person;
   annenPart: Person | null;
-  familiehendelse: FagsakHendelse | null;
+  familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
   harVergeIÅpenBehandling: boolean;
   erTilbakekreving: boolean;

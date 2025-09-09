@@ -106,11 +106,13 @@ const søknad = {
         søknadsdato: '',
         dekningsgrad: 0,
       },
+      annenPart: {
+        søknadsdato: '',
+        dekningsgrad: undefined,
+      },
     },
   },
   søknadsfrist: {},
-  farSokerType: null,
-  utstedtdato: null,
 } satisfies Soknad;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {

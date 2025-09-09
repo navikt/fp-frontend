@@ -37,7 +37,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
 
     expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.KontrollerOpplysninger');
@@ -53,7 +52,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VurderEktefellesBarn');
   });
@@ -68,7 +66,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene');
   });
@@ -83,7 +80,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VilkarOverstyrt');
   });
@@ -99,7 +95,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger');
   });
@@ -114,7 +109,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd');
   });
@@ -130,7 +124,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.VurderSokersRelasjon');
   });
@@ -145,7 +138,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.SjekkTerminbekreftelse');
   });
@@ -160,7 +152,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.SjekkManglendeFødsel');
   });
@@ -175,7 +166,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.VilkarOverstyrt');
   });
@@ -191,7 +181,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd');
   });
@@ -207,7 +196,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES');
   });
@@ -222,7 +210,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP');
   });
@@ -237,7 +224,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling');
   });
@@ -253,7 +239,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
@@ -268,7 +253,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
@@ -284,7 +268,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
@@ -299,7 +282,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
@@ -314,7 +296,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
   });
@@ -330,7 +311,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap');
   });
@@ -345,7 +325,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarLovligOpphold');
   });
@@ -360,7 +339,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VurderSokerBosatt');
   });
@@ -375,7 +353,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarOppholdsrett');
   });
@@ -390,7 +367,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
   });
@@ -401,7 +377,6 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
       beregningDto: {
         fastsattVarigEndringNaering: true,
-        faktaOmBeregningTilfeller: null,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
@@ -410,7 +385,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.VarigEndring');
   });
@@ -421,7 +395,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
@@ -430,7 +403,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.IkkeVarigEndring');
   });
@@ -457,7 +429,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
@@ -482,7 +453,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
@@ -502,7 +472,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -513,7 +482,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
@@ -532,7 +500,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -543,7 +510,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
@@ -563,7 +529,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -574,7 +539,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.OverstyrUttak.PeriodeEndret');
   });
@@ -593,7 +557,6 @@ describe('aksjonspunktTekstUtleder', () => {
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -604,7 +567,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
   });
@@ -623,7 +585,6 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -634,7 +595,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
@@ -652,7 +612,6 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
       beregningDto: {
         fastsattVarigEndringNaering: false,
-        faktaOmBeregningTilfeller: null,
       },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -663,7 +622,6 @@ describe('aksjonspunktTekstUtleder', () => {
       faktaOmBeregningTilfeller,
       erTilbakekreving,
       aksjonspunkt,
-      null,
     );
     expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
@@ -750,17 +708,9 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
       beregningDto: {
         faktaOmBeregningTilfeller: [FaktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD],
-        fastsattVarigEndringNaering: null,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      beregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-      null,
-    );
+    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]).toEqual(
       <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,
     );
@@ -778,17 +728,9 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
       beregningDto: {
         faktaOmBeregningTilfeller: [FaktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON],
-        fastsattVarigEndringNaering: null,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      beregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-      null,
-    );
+    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]).toEqual(<div key="Vurder at og fl">Vurder at og fl</div>);
   });
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
@@ -813,17 +755,9 @@ describe('aksjonspunktTekstUtleder', () => {
           FaktaOmBeregningTilfelle.VURDER_BESTEBEREGNING,
           FaktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD,
         ],
-        fastsattVarigEndringNaering: null,
       },
     } satisfies TotrinnskontrollAksjonspunkt;
-    const message = getAksjonspunkttekst(
-      true,
-      behandlingStatus,
-      beregningTilfeller,
-      erTilbakekreving,
-      aksjonspunkt,
-      null,
-    );
+    const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
     expect(message[0]).toEqual(<div key="Vurder besteberegning">Vurder besteberegning</div>);
     expect(message[1]).toEqual(
       <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,

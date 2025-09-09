@@ -16,7 +16,6 @@ const defaultSak = {
   status: FagsakStatusEnum.OPPRETTET,
   aktørId: '',
   person: {
-    aktørId: null,
     navn: '',
     fødselsnummer: '',
     kjønn: '-',

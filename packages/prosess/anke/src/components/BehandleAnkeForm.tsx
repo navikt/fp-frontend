@@ -9,7 +9,7 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 
 const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
 
-const formatId = (id: string | null): string => {
+const formatId = (id: string | undefined): string => {
   if (id === null || id === undefined || id === '-') {
     return IKKE_PAA_ANKET_BEHANDLING_ID;
   }

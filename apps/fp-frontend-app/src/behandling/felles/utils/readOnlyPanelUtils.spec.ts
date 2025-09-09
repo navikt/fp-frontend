@@ -18,8 +18,6 @@ describe('readOnlyUtils', () => {
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
       overstyrbar: true,
-
-      lovReferanse: null,
     },
   ];
 

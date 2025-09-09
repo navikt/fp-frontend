@@ -8,7 +8,6 @@ export const fødsel: Fødsel = {
       },
     ],
     termindato: '2025-03-05',
-    utstedtdato: null,
     antallBarn: 1,
   },
   register: {
@@ -28,7 +27,6 @@ export const fødsel: Fødsel = {
       kilde: 'SØKNAD',
       antall: 1,
     },
-    utstedtdato: null,
     barn: [
       {
         kilde: 'FOLKEREGISTER',

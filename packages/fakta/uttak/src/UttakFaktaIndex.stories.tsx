@@ -69,7 +69,6 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -77,15 +76,9 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
         fom: '2022-11-12',
         tom: '2022-12-01',
         uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
-        arbeidsforhold: null,
+
         flerbarnsdager: false,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        arbeidstidsprosent: null,
-        samtidigUttaksprosent: null,
-        morsAktivitet: null,
       },
     ],
     kanOverstyre: false,
@@ -96,7 +89,6 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
   args: {
     aksjonspunkterForPanel: [],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -104,15 +96,9 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
         fom: '2022-11-12',
         tom: '2022-12-01',
         uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
-        arbeidsforhold: null,
+
         flerbarnsdager: false,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        arbeidstidsprosent: null,
-        samtidigUttaksprosent: null,
-        morsAktivitet: null,
       },
     ],
     kanOverstyre: true,
@@ -131,7 +117,6 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -147,10 +132,6 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
         samtidigUttaksprosent: 80,
         flerbarnsdager: true,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        morsAktivitet: null,
       },
       {
         fom: '2022-12-02',
@@ -163,11 +144,6 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
         },
         flerbarnsdager: false,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        samtidigUttaksprosent: null,
-        morsAktivitet: null,
       },
       {
         fom: '2022-12-11',
@@ -180,11 +156,6 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
         },
         flerbarnsdager: false,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        samtidigUttaksprosent: null,
-        morsAktivitet: null,
       },
     ],
     kanOverstyre: false,
@@ -203,7 +174,6 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -212,14 +182,6 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
         tom: '2022-12-01',
         utsettelseÅrsak: UtsettelseÅrsak.ARBEID,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        uttakPeriodeType: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        arbeidstidsprosent: null,
-        arbeidsforhold: null,
-        samtidigUttaksprosent: null,
-        flerbarnsdager: null,
-        morsAktivitet: null,
       },
     ],
     kanOverstyre: false,
@@ -238,7 +200,6 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -248,13 +209,6 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
         overføringÅrsak: OverføringÅrsak.IKKE_RETT_ANNEN_FORELDER,
         uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        oppholdÅrsak: null,
-        arbeidstidsprosent: null,
-        arbeidsforhold: null,
-        samtidigUttaksprosent: null,
-        flerbarnsdager: null,
-        morsAktivitet: null,
       },
     ],
     kanOverstyre: false,
@@ -273,7 +227,6 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [],
@@ -293,7 +246,6 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -308,11 +260,6 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
         },
         flerbarnsdager: false,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        samtidigUttaksprosent: null,
-        morsAktivitet: null,
       },
     ],
     kanOverstyre: false,
@@ -331,7 +278,6 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -346,11 +292,6 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
         },
         flerbarnsdager: false,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        samtidigUttaksprosent: null,
-        morsAktivitet: null,
       },
     ],
     kanOverstyre: false,
@@ -369,7 +310,6 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -386,9 +326,6 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
         morsAktivitet: 'ARBEID',
         flerbarnsdager: true,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
       },
     ],
     kanOverstyre: false,
@@ -408,7 +345,6 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -426,9 +362,6 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
         flerbarnsdager: true,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
         begrunnelse: 'Dette er en gammel begrunnelse',
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
       },
     ],
     kanOverstyre: false,
@@ -448,7 +381,6 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       },
     ],
     ytelsefordeling: {
-      overstyrtOmsorg: null,
       førsteUttaksdato: '2022-01-31',
     },
     uttakKontrollerFaktaPerioder: [
@@ -464,10 +396,6 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
         samtidigUttaksprosent: 80,
         flerbarnsdager: true,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        morsAktivitet: null,
       },
       {
         fom: '2022-12-02',
@@ -480,11 +408,6 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
         },
         flerbarnsdager: false,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        samtidigUttaksprosent: null,
-        morsAktivitet: null,
       },
       {
         fom: '2022-12-11',
@@ -497,11 +420,6 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
         },
         flerbarnsdager: false,
         periodeKilde: FordelingPeriodeKilde.SØKNAD,
-        utsettelseÅrsak: null,
-        overføringÅrsak: null,
-        oppholdÅrsak: null,
-        samtidigUttaksprosent: null,
-        morsAktivitet: null,
       },
     ],
     kanOverstyre: false,

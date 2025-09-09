@@ -2094,8 +2094,8 @@ export type foreldrepenger_domene_iay_modell_NaturalYtelse = {
 };
 
 export type foreldrepenger_domene_iay_modell_Refusjon = {
-  fom?: string;
-  refusjonsbeløp?: foreldrepenger_domene_typer_Beløp;
+  fom: string;
+  refusjonsbeløp: foreldrepenger_domene_typer_Beløp;
   indexKey?: string;
 };
 
@@ -2124,8 +2124,8 @@ export type foreldrepenger_domene_iay_modell_kodeverk_NaturalYtelseType =
   | '-';
 
 export type foreldrepenger_domene_tid_DatoIntervallEntitet = {
-  fomDato?: string;
-  tomDato?: string;
+  fomDato: string;
+  tomDato: string;
 };
 
 export type foreldrepenger_domene_typer_Beløp = {
@@ -2154,12 +2154,12 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto = 
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektDto = {
-  arbeidsgiverIdent?: string;
+  arbeidsgiverIdent: string;
   inntekter?: Array<foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto>;
 };
 
 export type foreldrepenger_domene_arbeidInntektsmelding_dto_InntektspostDto = {
-  beløp?: number;
+  beløp: number;
   fom?: string;
   tom?: string;
   type?: foreldrepenger_domene_iay_modell_kodeverk_InntektspostType;
@@ -3238,7 +3238,7 @@ export type tjenester_behandling_beregningsresultat_dto_FeriepengegrunnlagDto = 
 
 export type tjenester_behandling_fødsel_dto_FødselDto = {
   søknad: tjenester_behandling_fødsel_dto_FødselDto_Søknad;
-  register?: tjenester_behandling_fødsel_dto_FødselDto_Register;
+  register: tjenester_behandling_fødsel_dto_FødselDto_Register;
   gjeldende: tjenester_behandling_fødsel_dto_FødselDto_Gjeldende;
 };
 
@@ -3266,9 +3266,9 @@ export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_FødselDokumet
   | 'IKKE_VURDERT';
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_GjeldendeBarn = {
-  kilde?: tjenester_behandling_fødsel_dto_Kilde;
-  barn?: tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
-  kanOverstyres?: boolean;
+  kilde: tjenester_behandling_fødsel_dto_Kilde;
+  barn: tjenester_behandling_fødsel_dto_FødselDto_BarnHendelseData;
+  kanOverstyres: boolean;
 };
 
 export type tjenester_behandling_fødsel_dto_FødselDto_Gjeldende_Termin = {
@@ -3884,13 +3884,13 @@ export type tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse = {
 
 export type tjenester_behandling_medlem_MedlemskapDto_Personstatus = {
   fom: string;
-  tom?: string;
-  type?: foreldrepenger_behandlingslager_aktør_PersonstatusType;
+  tom: string;
+  type: foreldrepenger_behandlingslager_aktør_PersonstatusType;
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Region = {
   fom: string;
-  tom?: string;
+  tom: string;
   type: foreldrepenger_behandlingslager_geografisk_Region;
 };
 
@@ -4304,21 +4304,21 @@ export type tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto = {
 };
 
 export type tjenester_behandling_uttak_dto_UttakResultatPeriodeDto = {
-  fom?: string;
-  tom?: string;
-  aktiviteter?: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto>;
+  fom: string;
+  tom: string;
+  aktiviteter: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto>;
   periodeResultatType?: foreldrepenger_behandlingslager_uttak_PeriodeResultatType;
   begrunnelse?: string;
-  periodeResultatÅrsak?: foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak;
+  periodeResultatÅrsak: foreldrepenger_behandlingslager_uttak_fp_PeriodeResultatÅrsak;
   manuellBehandlingÅrsak?: foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak;
   graderingAvslagÅrsak?: foreldrepenger_behandlingslager_uttak_fp_GraderingAvslagÅrsak;
-  flerbarnsdager?: boolean;
+  flerbarnsdager: boolean;
   samtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
-  graderingInnvilget?: boolean;
+  graderingInnvilget: boolean;
   periodeType?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType;
   utsettelseType?: foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType;
-  oppholdÅrsak?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak;
+  oppholdÅrsak: foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak;
   mottattDato?: string;
   tidligstMottattDato?: string;
   erUtbetalingRedusertTilMorsStillingsprosent?: boolean;
@@ -4382,9 +4382,9 @@ export type foreldrepenger_domene_person_verge_dto_VergeBackendDto = {
 
 export type foreldrepenger_domene_person_verge_dto_VergeDto = {
   vergeType: foreldrepenger_behandlingslager_behandling_verge_VergeType;
-  gyldigFom?: string;
+  gyldigFom: string;
   gyldigTom?: string;
-  navn?: string;
+  navn: string;
   fnr?: string;
   organisasjonsnummer?: string;
 };
@@ -6196,10 +6196,10 @@ export type tjenester_infotrygd_InfotrygdVedtakDto_Periode = {
 
 export type tjenester_infotrygd_InfotrygdVedtakDto_SakDto = {
   resultat?: string;
-  registrert?: string;
+  registrert: string;
   sakId?: string;
   type?: string;
-  vedtatt?: string;
+  vedtatt: string;
   valg?: string;
   undervalg?: string;
   nivaa?: string;

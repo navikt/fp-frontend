@@ -59,8 +59,8 @@ interface Rad {
   id: number;
   label: string;
   aktivitetTypeKode: string;
-  arbeidsforholdRef: string | null;
-  arbeidsgiverReferanse: string | null;
+  arbeidsforholdRef?: string;
+  arbeidsgiverReferanse?: string;
 }
 
 const lagPerioder = (

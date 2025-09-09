@@ -32,7 +32,7 @@ const defaultAntallBarn: FieldArrayRow = {
 
 type FieldArrayRow = {
   fødselsdato: string;
-  dødsdato: string | null;
+  dødsdato?: string;
   kanOverstyres: boolean;
   kilde: FaktaKilde;
 };
@@ -212,7 +212,6 @@ const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
   const antallBarn = antallBarnFraSoknad > 0 ? antallBarnFraSoknad : 1;
   return Array<FieldArrayRow>(antallBarn).fill({
     fødselsdato: '',
-
     kanOverstyres: true,
     kilde: 'SAKSBEHANDLER',
   });

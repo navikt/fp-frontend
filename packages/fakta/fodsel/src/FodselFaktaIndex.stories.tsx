@@ -176,7 +176,6 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
           },
         ],
         termindato: '2025-04-14',
-        utstedtdato: null,
         antallBarn: 1,
       },
       register: {
@@ -192,7 +191,6 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
           kilde: 'SØKNAD',
           antall: 1,
         },
-        utstedtdato: null,
         barn: [
           {
             kilde: 'SØKNAD',

@@ -17,9 +17,6 @@ const defaultMedlemskapProps: Medlemskap = {
   utenlandsopphold: [],
   oppholdstillatelser: [],
   avvik: [],
-
-
-  annenpart: null,
 };
 
 const intl = createIntl(messages);
@@ -62,30 +59,18 @@ describe('situasjonUtils', () => {
             tom: '2025-02-01',
             adresseType: AdresseType.BOSTEDSADRESSE,
             land: 'Norge',
-            adresselinje1: null,
-
-
-            ,
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
             adresseType: AdresseType.BOSTEDSADRESSE,
             land: 'Finland',
-            adresselinje1: null,
-
-
-            ,
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
             adresseType: AdresseType.POSTADRESSE,
             land: 'USA',
-            adresselinje1: null,
-
-
-            ,
           },
         ] satisfies Personadresse[],
       };

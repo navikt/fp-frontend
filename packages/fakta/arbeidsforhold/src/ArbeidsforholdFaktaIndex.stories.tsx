@@ -20,8 +20,6 @@ const fellesInntektsmeldingFelter = {
   behandlingsIdeer: [],
   tilknyttedeBehandlingIder: [],
   aktiveNaturalytelser: [],
-
-  internArbeidsforholdId: null,
 };
 
 const defaultArbeidsforhold = {
@@ -30,11 +28,7 @@ const defaultArbeidsforhold = {
   stillingsprosent: 100,
   tom: '2022-12-31',
   begrunnelse: 'Dette er en begrunnelse',
-
-  internArbeidsforholdId: null,
-  eksternArbeidsforholdId: null,
-
-  permisjonOgMangel: null,
+  saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
 } satisfies AoIArbeidsforhold;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {

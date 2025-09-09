@@ -85,8 +85,6 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
               type: 'HEL_TILRETTELEGGING',
-
-
             },
           ],
           tilretteleggingId: 1116961,
@@ -104,20 +102,14 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
-
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
-
             },
           ],
-
-
-          ,
-
         },
       ],
     } satisfies BekreftSvangerskapspengerAp);
@@ -379,8 +371,6 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               kilde: 'SØKNAD',
               mottattDato: '2020-02-20',
               type: 'HEL_TILRETTELEGGING',
-
-
             },
           ],
           tilretteleggingId: 1116961,
@@ -398,20 +388,14 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
               permisjonTom: '2019-08-06',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
-
             },
             {
               permisjonFom: '2019-10-03',
               permisjonTom: '2019-10-03',
               permisjonsprosent: 50,
               type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
-
             },
           ],
-
-
-          ,
-
         },
       ],
     } satisfies BekreftSvangerskapspengerAp);

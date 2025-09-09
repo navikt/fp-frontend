@@ -38,7 +38,6 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     aktorInfo: {
-      aktørId: null,
       fagsaker: [
         FAGSAK,
         {

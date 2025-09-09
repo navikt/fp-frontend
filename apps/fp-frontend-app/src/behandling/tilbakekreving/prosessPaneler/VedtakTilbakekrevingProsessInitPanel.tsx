@@ -60,6 +60,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
     behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
     behandling.førsteÅrsak &&
+    // @ts-expect-error -- feil i typene
     BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
 
   const api = useBehandlingApi(behandling);
@@ -132,11 +133,14 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   }
   const { type } = beregningsresultat;
 
+  // @ts-expect-error -- feil i typene
   if (type === BehandlingResultatTypeTilbakekreving.INGEN_TILBAKEBETALING) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
+  // @ts-expect-error -- feil i typene
   return type === BehandlingResultatTypeTilbakekreving.DELVIS_TILBAKEBETALING ||
+    // @ts-expect-error -- feil i typene
     type === BehandlingResultatTypeTilbakekreving.FULL_TILBAKEBETALING
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;

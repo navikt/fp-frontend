@@ -52,7 +52,6 @@ const AKTØR_INFO = {
     },
   ],
   person: PERSON,
-  aktørId: null,
 } satisfies Aktor;
 
 const meta = {
@@ -106,8 +105,7 @@ export const IngenFagsaker: Story = {
         http.get(FagsakUrl.AKTOER_INFO, () =>
           HttpResponse.json({
             fagsaker: [],
-            person: { ...PERSON, aktørId: null },
-            aktørId: null,
+            person: { ...PERSON },
           } satisfies Aktor),
         ),
       ],

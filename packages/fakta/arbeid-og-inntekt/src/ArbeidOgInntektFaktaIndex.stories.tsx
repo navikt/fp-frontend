@@ -32,11 +32,7 @@ const defaultArbeidsforhold = {
   fom: '2019-12-06',
   stillingsprosent: 100,
   tom: '2022-12-31',
-
-  internArbeidsforholdId: null,
-  eksternArbeidsforholdId: null,
-
-  permisjonOgMangel: null,
+  saksbehandlersVurdering: '-',
 } satisfies AoIArbeidsforhold;
 
 const meta = {
@@ -162,8 +158,6 @@ export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story =
           tom: '9999-12-31',
           stillingsprosent: 100,
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
-
-          permisjonOgMangel: null,
         },
       ],
       inntektsmeldinger: [],
@@ -203,7 +197,6 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
           saksbehandlersVurdering:
             ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
           begrunnelse: 'Vil innehente inntektsmelding fordi...',
-          permisjonOgMangel: null,
         },
       ],
       inntektsmeldinger: [],
@@ -282,8 +275,6 @@ export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
           stillingsprosent: 100,
           saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
           begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
-
-          permisjonOgMangel: null,
         },
       ],
       inntektsmeldinger: [
@@ -337,8 +328,6 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
           stillingsprosent: 100,
           saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
           begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
-
-          permisjonOgMangel: null,
         },
       ],
       inntektsmeldinger: [
@@ -380,13 +369,13 @@ export const IngenAksjonspunktMenTilbakehoppMuligForOverstyrer: Story = {
       arbeidsforhold: [
         {
           ...defaultArbeidsforhold,
-          ...defaultArbeidsforhold,
           arbeidsgiverIdent: '910909088',
           internArbeidsforholdId: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
           eksternArbeidsforholdId: 'ARB001-001',
           fom: '2021-10-06',
           tom: '2021-12-12',
           stillingsprosent: 100,
+          saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
         },
       ],
       inntektsmeldinger: [
@@ -470,10 +459,6 @@ export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet: Story = {
           tom: '2022-12-31',
           begrunnelse: 'Dette er en begrunnelse',
           saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
-          internArbeidsforholdId: null,
-          eksternArbeidsforholdId: null,
-
-          permisjonOgMangel: null,
         },
       ],
       inntektsmeldinger: [],
@@ -768,9 +753,9 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
         {
           ...fellesInntektsmeldingFelter,
           arbeidsgiverIdent: '910909092',
-          eksternArbeidsforholdId: null,
+
           inntektPrMnd: 10000,
-          internArbeidsforholdId: null,
+
           kontaktpersonNavn: 'Espen Utvikler',
           kontaktpersonNummer: '55599999',
           motattDato: '2021-12-06',
@@ -1029,6 +1014,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
             permisjonTom: '2022-12-01',
             type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
           },
+          saksbehandlersVurdering: '-',
         },
       ],
       inntektsmeldinger: [
@@ -1108,8 +1094,7 @@ export const FoerRegisterinnhenting: Story = {
           inntektPrMnd: 40000.0,
 
           arbeidsgiverIdent: '947064649',
-          eksternArbeidsforholdId: null,
-          internArbeidsforholdId: null,
+
           kontaktpersonNavn: 'Dolly Dollesen',
           kontaktpersonNummer: '99999999',
           journalpostId: '524975324',
@@ -1191,8 +1176,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           inntektPrMnd: 20000.0,
 
           arbeidsgiverIdent: '972674818',
-          eksternArbeidsforholdId: null,
-          internArbeidsforholdId: null,
+
           kontaktpersonNavn: 'Dolly Dollesen',
           kontaktpersonNummer: '99999999',
           journalpostId: '524975527',
