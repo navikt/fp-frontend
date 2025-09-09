@@ -74,12 +74,12 @@ jobs:
       - name: Installere dependencies
         run: yarn install --immutable
       - name: Build
-        run: yarn build-${{ inputs.app }}
+        run: yarn build --scope=@navikt/${{ inputs.app }}
       - name: Run linting
-        run: yarn stylelint && yarn eslint:changed && yarn tsc:changed
+        run: yarn stylelint --scope=@navikt/${{ inputs.app }} && yarn eslint:changed --scope=@navikt/${{ inputs.app }} && yarn tsc:changed --scope=@navikt/${{ inputs.app }}
       - name: Run tests
         id: run-tests
-        run: yarn test:changed
+        run: yarn test:changed --scope=@navikt/${{ inputs.app }}
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"

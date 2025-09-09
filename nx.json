@@ -17,17 +17,17 @@
     },
     "tsc": {
       "inputs": ["default", "^production", "{workspaceRoot}/tsconfig.json"],
-      "dependsOn": ["build"],
+      "dependsOn": ["^tsc"],
       "cache": true
     },
     "test": {
       "inputs": ["default", "^production", "{workspaceRoot}/jest-config/jest.config.ts"],
-      "dependsOn": ["build"],
+      "dependsOn": ["^test"],
       "cache": true
     },
     "eslint": {
       "inputs": ["default", "^production", "{workspaceRoot}/eslint/*.js"],
-      "dependsOn": ["build"],
+      "dependsOn": ["^eslint"],
       "cache": true
     }
   },
