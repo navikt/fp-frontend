@@ -25,13 +25,13 @@ export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamili
 };
 
 export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_FamilieHendelseDto = {
-  fødselTermin?: tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminFamilieHendelseDto;
-  adopsjon?: tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto;
+  fødselTermin: tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminFamilieHendelseDto | null;
+  adopsjon: tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto | null;
 };
 
 export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminFamilieHendelseDto = {
-  termindato?: string;
-  fødselsdato?: string;
+  termindato: string | null;
+  fødselsdato: string | null;
 };
 
 export type foreldrepenger_behandlingslager_behandling_BehandlingResultatType =
