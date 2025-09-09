@@ -26,23 +26,23 @@ const isTest = import.meta.env.MODE === 'test';
 const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
 export const LosUrl = {
-  KODEVERK_LOS: wrapUrl('fplos/api/kodeverk'),
-  DRIFTSMELDINGER: wrapUrl('fplos/api/driftsmeldinger'),
-  SØK_FAGSAK: wrapUrl('fpsak/api/fagsak/sok'),
-  SAKSLISTE: wrapUrl('fplos/api/saksbehandler/saksliste'),
-  RESERVERTE_OPPGAVER: wrapUrl('fplos/api/reservasjon/reserverte-oppgaver'),
-  BEHANDLEDE_OPPGAVER: wrapUrl('fplos/api/reservasjon/tidligere-reserverte'),
-  RESERVER_OPPGAVE: wrapUrl('fplos/api/reservasjon/reserver'),
-  OPPGAVER_FOR_FAGSAKER: wrapUrl('fplos/api/saksbehandler/oppgaver/oppgaver-for-fagsaker'),
-  HENT_RESERVASJONSSTATUS: wrapUrl('fplos/api/reservasjon/reservasjon-status'),
-  OPPHEV_OPPGAVERESERVASJON: wrapUrl('fplos/api/reservasjon/opphev-reservasjon'),
-  ENDRE_OPPGAVERESERVASJON: wrapUrl('fplos/api/reservasjon/endre-varighet'),
-  FLYTT_RESERVASJON: wrapUrl('fplos/api/reservasjon/flytt-reservasjon'),
-  FORLENG_OPPGAVERESERVASJON: wrapUrl('fplos/api/reservasjon/forleng'),
-  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: wrapUrl('fplos/api/reservasjon/flytt-reservasjon/søk'),
-  SAKSLISTE_SAKSBEHANDLERE: wrapUrl('fplos/api/saksbehandler/saksliste/saksbehandlere'),
-  BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('fplos/api/saksbehandler/oppgaver/antall'),
-  OPPGAVER_TIL_BEHANDLING: wrapUrl('fplos/api/saksbehandler/oppgaver'),
+  KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
+  DRIFTSMELDINGER: wrapUrl('/fplos/api/driftsmeldinger'),
+  SØK_FAGSAK: wrapUrl('/fpsak/api/fagsak/sok'),
+  SAKSLISTE: wrapUrl('/fplos/api/saksbehandler/saksliste'),
+  RESERVERTE_OPPGAVER: wrapUrl('/fplos/api/reservasjon/reserverte-oppgaver'),
+  BEHANDLEDE_OPPGAVER: wrapUrl('/fplos/api/reservasjon/tidligere-reserverte'),
+  RESERVER_OPPGAVE: wrapUrl('/fplos/api/reservasjon/reserver'),
+  OPPGAVER_FOR_FAGSAKER: wrapUrl('/fplos/api/saksbehandler/oppgaver/oppgaver-for-fagsaker'),
+  HENT_RESERVASJONSSTATUS: wrapUrl('/fplos/api/reservasjon/reservasjon-status'),
+  OPPHEV_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/opphev-reservasjon'),
+  ENDRE_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/endre-varighet'),
+  FLYTT_RESERVASJON: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon'),
+  FORLENG_OPPGAVERESERVASJON: wrapUrl('/fplos/api/reservasjon/forleng'),
+  FLYTT_RESERVASJON_SAKSBEHANDLER_SOK: wrapUrl('/fplos/api/reservasjon/flytt-reservasjon/søk'),
+  SAKSLISTE_SAKSBEHANDLERE: wrapUrl('/fplos/api/saksbehandler/saksliste/saksbehandlere'),
+  BEHANDLINGSKO_OPPGAVE_ANTALL: wrapUrl('/fplos/api/saksbehandler/oppgaver/antall'),
+  OPPGAVER_TIL_BEHANDLING: wrapUrl('/fplos/api/saksbehandler/oppgaver'),
 };
 
 export const getSakslisteSaksbehandlere = (sakslisteId: number) =>
@@ -66,12 +66,19 @@ export const getOppgaverTilBehandling = (sakslisteId: number, oppgaveIder?: stri
 
 export const doGetRequest = <T>(url: string) => kyExtended.get(url).json<T>();
 
-export const getOppgaverForFagsaker = (fagsaker: FagsakEnkel[]) =>
+export const getOppgaverForFagsaker = (saksnummer: string[]) =>
   kyExtended
     .get(LosUrl.OPPGAVER_FOR_FAGSAKER, {
-      searchParams: { saksnummerListe: fagsaker.map(f => `${f.saksnummer}`).join(',') },
+      searchParams: { saksnummerListe: saksnummer.join(',') },
     })
     .json<Oppgave[]>();
+
+export const oppgaverForFagsakerOptions = (saksnummer: string[]) =>
+  queryOptions({
+    queryKey: [LosUrl.OPPGAVER_FOR_FAGSAKER, saksnummer],
+    queryFn: () => getOppgaverForFagsaker(saksnummer),
+    staleTime: Infinity,
+  });
 
 export const losKodeverkOptions = () =>
   queryOptions({
