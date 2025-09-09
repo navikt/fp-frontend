@@ -2148,7 +2148,7 @@ export type foreldrepenger_domene_arbeidInntektsmelding_dto_ArbeidsforholdDto = 
   tom: string;
   stillingsprosent: number;
   årsak?: foreldrepenger_domene_arbeidsforhold_impl_AksjonspunktÅrsak;
-  saksbehandlersVurdering: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
+  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
   permisjonOgMangel?: foreldrepenger_domene_arbeidInntektsmelding_dto_PermisjonOgMangelDto;
   begrunnelse?: string;
 };

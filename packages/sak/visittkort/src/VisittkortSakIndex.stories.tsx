@@ -78,7 +78,7 @@ export const ForAnnenPartDerAktørIdErUkjent: Story = {
   args: {
     erMor: true,
     bruker: fagsakPersonMor,
-    annenPart: { ...fagsakPersonFar },
+    annenPart: { ...fagsakPersonFar, aktørId: undefined },
     lenkeTilAnnenPart: 'testlenke til annen part',
   },
 };

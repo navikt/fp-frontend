@@ -105,7 +105,7 @@ export const IngenFagsaker: Story = {
         http.get(FagsakUrl.AKTOER_INFO, () =>
           HttpResponse.json({
             fagsaker: [],
-            person: { ...PERSON },
+            person: { ...PERSON, aktørId: undefined },
           } satisfies Aktor),
         ),
       ],

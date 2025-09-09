@@ -13,7 +13,7 @@ const intl = createIntl(messages);
 interface Props {
   erMor?: boolean;
   bruker: Person;
-  annenPart?: Person | null;
+  annenPart?: Person;
   familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
   harVergeIÅpenBehandling?: boolean;
@@ -22,7 +22,7 @@ interface Props {
 
 export const VisittkortSakIndex = ({
   bruker,
-  annenPart = null,
+  annenPart,
   familiehendelse,
   lenkeTilAnnenPart,
   erMor = true,

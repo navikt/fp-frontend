@@ -28,7 +28,6 @@ const defaultArbeidsforhold = {
   stillingsprosent: 100,
   tom: '2022-12-31',
   begrunnelse: 'Dette er en begrunnelse',
-  saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
 } satisfies AoIArbeidsforhold;
 
 const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
