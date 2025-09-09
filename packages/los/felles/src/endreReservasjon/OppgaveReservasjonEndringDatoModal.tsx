@@ -34,8 +34,6 @@ export const OppgaveReservasjonEndringDatoModal = ({
     },
   });
 
-  console.log('test');
-
   return (
     <RhfForm<FormValues> formMethods={søkFormMethods} onSubmit={values => endreOppgavereservasjon(values.reserverTil)}>
       <NavModal
