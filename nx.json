@@ -2,28 +2,32 @@
   "namedInputs": {
     "default": ["{projectRoot}/**/*"],
     "prod": ["!{projectRoot}/**/*.spec.tsx"],
-    "production": ["default"]
+    "production": ["prod"]
+  },
+  "workspaceLayout": {
+    "appsDir": "apps",
+    "libsDir": "packages"
   },
   "targetDefaults": {
-    "test": {
-      "inputs": ["default", "^prod", "{workspaceRoot}/jest-config/jest.config.ts"],
-      "dependsOn": ["build"],
-      "cache": true
-    },
-    "tsc": {
-      "inputs": ["default", "{workspaceRoot}/tsconfig.json"],
-      "dependsOn": ["build"],
-      "cache": true
-    },
-    "eslint": {
-      "inputs": ["default", "{workspaceRoot}/eslint/*.js"],
-      "dependsOn": ["build"],
-      "cache": true
-    },
     "build": {
       "inputs": ["prod"],
       "dependsOn": ["^build"],
       "outputs": ["{projectRoot}/dist"],
+      "cache": true
+    },
+    "tsc": {
+      "inputs": ["default", "^production", "{workspaceRoot}/tsconfig.json"],
+      "dependsOn": ["build"],
+      "cache": true
+    },
+    "test": {
+      "inputs": ["default", "^production", "{workspaceRoot}/jest-config/jest.config.ts"],
+      "dependsOn": ["build"],
+      "cache": true
+    },
+    "eslint": {
+      "inputs": ["default", "^production", "{workspaceRoot}/eslint/*.js"],
+      "dependsOn": ["build"],
       "cache": true
     }
   },
