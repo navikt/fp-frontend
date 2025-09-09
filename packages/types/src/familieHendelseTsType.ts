@@ -1,20 +1,12 @@
-export type FamilieHendelse = Readonly<{
-  fødselTermin?: FødselTerminFamilieHendelse;
-  adopsjon?: AdopsjonFamilieHendelse;
-}>;
+import type {
+  tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto,
+  tjenester_familiehendelse_FamiliehendelseRestTjeneste_FamilieHendelseDto,
+  tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminFamilieHendelseDto,
+} from './apiDtoGenerert.ts';
 
-export type FødselTerminFamilieHendelse = Readonly<{
-  termindato?: string;
-  fødselsdato?: string;
-}>;
+export type FamilieHendelse = tjenester_familiehendelse_FamiliehendelseRestTjeneste_FamilieHendelseDto;
 
-export type AdopsjonFamilieHendelse = Readonly<{
-  antallBarn: number;
-  fødselsdatoer: Record<number, string>;
-  omsorgsovertakelseDato: string;
-  foreldreansvarDato: string;
-  omsorgsovertakelseVilkårType: string;
-  ektefellesBarn: boolean;
-  mannAdoptererAlene: boolean;
-  ankomstNorge?: string;
-}>;
+export type FødselTerminFamilieHendelse =
+  tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminFamilieHendelseDto;
+
+export type AdopsjonFamilieHendelse = tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto;
