@@ -137,7 +137,7 @@ const isAgeAbove15 = (fodselsdatoer: Record<number, string>, id: number, omsorgs
 
 DokumentasjonFaktaForm.initialValues = (adopsjon: AdopsjonFamilieHendelse): FormValues => ({
   omsorgsovertakelseDato: adopsjon.omsorgsovertakelseDato,
-  barnetsAnkomstTilNorgeDato: adopsjon.ankomstNorge,
+  barnetsAnkomstTilNorgeDato: adopsjon.ankomstNorge ?? undefined,
   fodselsdatoer: adopsjon.fødselsdatoer,
 });
 

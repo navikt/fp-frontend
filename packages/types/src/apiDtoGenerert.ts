@@ -11,6 +11,29 @@ export type abakus_callback_registerdata_ReferanseDto = {
   referanse: string;
 };
 
+export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto = {
+  antallBarn: number;
+  fødselsdatoer: {
+    [key: string]: string;
+  };
+  omsorgsovertakelseDato: string;
+  foreldreansvarDato: string;
+  omsorgsovertakelseVilkårType: foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType;
+  ektefellesBarn: boolean;
+  mannAdoptererAlene: boolean;
+  ankomstNorge: string | null;
+};
+
+export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_FamilieHendelseDto = {
+  fødselTermin?: tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminFamilieHendelseDto;
+  adopsjon?: tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto;
+};
+
+export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_FødselTerminFamilieHendelseDto = {
+  termindato?: string;
+  fødselsdato?: string;
+};
+
 export type foreldrepenger_behandlingslager_behandling_BehandlingResultatType =
   | TEMP_FP_TILBAKE_BEHANDLINGRESULTATTYPE
   | 'IKKE_FASTSATT'
