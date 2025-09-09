@@ -55,6 +55,7 @@ const AKTØR_INFO = {
     },
   ],
   person: PERSON,
+  aktørId: undefined,
 } satisfies Aktor;
 
 const NAV_ANSATT = {
