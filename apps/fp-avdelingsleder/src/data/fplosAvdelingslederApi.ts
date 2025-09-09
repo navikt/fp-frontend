@@ -13,7 +13,6 @@ import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEll
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
-
 type BehandlendeEnheter = {
   enhetId: string;
   enhetNavn: string;
@@ -25,7 +24,6 @@ export type InitDataFpSak = {
   links: ApiLink[];
   sakLinks: ApiLink[];
 };
-
 const kyExtended = ky.extend({
   retry: 0,
   timeout: 15000,
@@ -46,7 +44,6 @@ const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 export const FagsakUrl = {
   INIT_FETCH: wrapUrl('/fpsak/api/init-fetch'),
 };
-
 export const LosUrl = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
   AVDELINGER: wrapUrl('/fplos/api/avdelingsleder/avdelinger'),
@@ -96,7 +93,6 @@ export const initFetchOptions = () =>
     queryFn: () => kyExtended.get(FagsakUrl.INIT_FETCH).json<InitDataFpSak>(),
     staleTime: Infinity,
   });
-
 export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL, avdelingEnhet],

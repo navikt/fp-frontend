@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
@@ -17,17 +16,17 @@ const withIntl = getIntlDecorator(messages);
 
 const BEHANDLINGER_PÅ_VENT = [
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
+    fagsakYtelseType: 'FP',
     behandlingFrist: dayjs().format(ISO_DATE_FORMAT),
     antall: 10,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    fagsakYtelseType: 'ES',
     behandlingFrist: dayjs().add(5, 'd').format(ISO_DATE_FORMAT),
     antall: 4,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
+    fagsakYtelseType: 'ES',
     behandlingFrist: dayjs().add(5, 'w').format(ISO_DATE_FORMAT),
     antall: 14,
   },

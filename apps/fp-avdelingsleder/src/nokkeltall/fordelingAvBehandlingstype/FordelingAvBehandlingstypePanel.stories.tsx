@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingType, FagsakYtelseType } from '@navikt/fp-kodeverk';
+import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
@@ -15,32 +15,32 @@ const withIntl = getIntlDecorator(messages);
 
 const OPPGAVER_FOR_AVDELING = [
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.FORSTEGANGSSOKNAD,
+    fagsakYtelseType: 'FP',
+    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
     tilBehandling: true,
     antall: 10,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-    behandlingType: BehandlingType.KLAGE,
+    fagsakYtelseType: 'ES',
+    behandlingType: BehandlingTypeEnum.KLAGE,
     tilBehandling: true,
     antall: 4,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-    behandlingType: BehandlingType.REVURDERING,
+    fagsakYtelseType: 'ES',
+    behandlingType: BehandlingTypeEnum.REVURDERING,
     tilBehandling: true,
     antall: 14,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.ENGANGSSTONAD,
-    behandlingType: BehandlingType.REVURDERING,
+    fagsakYtelseType: 'ES',
+    behandlingType: BehandlingTypeEnum.REVURDERING,
     tilBehandling: false,
     antall: 4,
   },
   {
-    fagsakYtelseType: FagsakYtelseType.FORELDREPENGER,
-    behandlingType: BehandlingType.TILBAKEKREVING,
+    fagsakYtelseType: 'FP',
+    behandlingType: BehandlingTypeEnum.TILBAKEKREVING,
     tilBehandling: false,
     antall: 6,
   },
