@@ -1,5 +1,5 @@
 {
-  "name": "@navikt/fp-los-avdelingsleder",
+  "name": "@navikt/fp-avdelingsleder",
   "license": "MIT",
   "private": true,
   "module": "src/main.tsx",

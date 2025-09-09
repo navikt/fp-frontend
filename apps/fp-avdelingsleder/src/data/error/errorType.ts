@@ -1,5 +1,3 @@
-import { ApiPollingStatus } from '@navikt/fp-konstanter';
-
 export enum ErrorType {
   GENERAL_ERROR = 'GENERAL_ERROR',
   POLLING_TIMEOUT = 'POLLING_TIMEOUT',
@@ -37,13 +35,13 @@ type RequestGatewayTimeoutOrNotFoundError = {
 
 type PollingHaltedError = {
   type: ErrorType.POLLING_HALTED_OR_DELAYED;
-  status: ApiPollingStatus.HALTED;
+  status: 'HALTED';
   message: string;
 };
 
 type PollingDelayedError = {
   type: ErrorType.POLLING_HALTED_OR_DELAYED;
-  status: ApiPollingStatus.DELAYED;
+  status: 'DELAYED';
   message: string;
   eta: string;
 };

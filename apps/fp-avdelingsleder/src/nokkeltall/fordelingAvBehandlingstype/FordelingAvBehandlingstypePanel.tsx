@@ -1,11 +1,10 @@
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
-import { Label, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { HStack, Label, Radio, VStack } from '@navikt/ds-react';
+import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { FagsakYtelseType } from '@navikt/fp-kodeverk';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { oppgaverForAvdelingOptions } from '../../data/fplosAvdelingslederApi';
@@ -61,29 +60,22 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
         <Label size="small">
           <FormattedMessage id="FordelingAvBehandlingstypePanel.Fordeling" />
         </Label>
-        <RhfRadioGroup
-          name="valgtYtelseType"
-          control={formMethods.control}
-          isHorizontal
-          radios={[
-            {
-              value: FagsakYtelseType.FORELDREPENGER,
-              label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.FORELDREPENGER),
-            },
-            {
-              value: FagsakYtelseType.ENGANGSSTONAD,
-              label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.ENGANGSSTONAD),
-            },
-            {
-              value: FagsakYtelseType.SVANGERSKAPSPENGER,
-              label: finnFagsakYtelseTypeNavn(fagsakYtelseTyper, FagsakYtelseType.SVANGERSKAPSPENGER),
-            },
-            {
-              value: ALLE_YTELSETYPER_VALGT,
-              label: <FormattedMessage id="FordelingAvBehandlingstypePanel.Alle" />,
-            },
-          ]}
-        />
+        <RhfRadioGroupNew name="valgtYtelseType" control={formMethods.control}>
+          <HStack gap="space-16">
+            <Radio value="FP" size="small">
+              {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'FP')}
+            </Radio>
+            <Radio value="ES" size="small">
+              {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'ES')}
+            </Radio>
+            <Radio value="SVP" size="small">
+              {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'SVP')}
+            </Radio>
+            <Radio value={ALLE_YTELSETYPER_VALGT} size="small">
+              <FormattedMessage id="FordelingAvBehandlingstypePanel.Alle" />
+            </Radio>
+          </HStack>
+        </RhfRadioGroupNew>
         <FordelingAvBehandlingstypeGraf
           height={height}
           behandlingTyper={behandlingTyper}

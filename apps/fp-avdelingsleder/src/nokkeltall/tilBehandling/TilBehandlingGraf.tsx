@@ -1,27 +1,28 @@
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingType } from '@navikt/fp-kodeverk';
+import { type BehandlingType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 const behandlingstypeOrder = [
-  BehandlingType.TILBAKEKREVING_REVURDERING,
-  BehandlingType.TILBAKEKREVING,
-  BehandlingType.DOKUMENTINNSYN,
-  BehandlingType.KLAGE,
-  BehandlingType.REVURDERING,
-  BehandlingType.FORSTEGANGSSOKNAD,
+  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
+  BehandlingTypeEnum.TILBAKEKREVING,
+  BehandlingTypeEnum.DOKUMENTINNSYN,
+  BehandlingTypeEnum.KLAGE,
+  BehandlingTypeEnum.REVURDERING,
+  BehandlingTypeEnum.FORSTEGANGSSOKNAD,
 ];
 
 const behandlingstypeFarger = {
-  [BehandlingType.TILBAKEKREVING_REVURDERING]: '#ef5d28',
-  [BehandlingType.TILBAKEKREVING]: '#ff842f',
-  [BehandlingType.DOKUMENTINNSYN]: '#ffd23b',
-  [BehandlingType.KLAGE]: '#826ba1',
-  [BehandlingType.REVURDERING]: '#3385d1',
-  [BehandlingType.FORSTEGANGSSOKNAD]: '#85d5f0',
-  [BehandlingType.ANKE]: '#85d5f0',
+  [BehandlingTypeEnum.TILBAKEKREVING_REVURDERING]: '#ef5d28',
+  [BehandlingTypeEnum.TILBAKEKREVING]: '#ff842f',
+  [BehandlingTypeEnum.DOKUMENTINNSYN]: '#ffd23b',
+  [BehandlingTypeEnum.KLAGE]: '#826ba1',
+  [BehandlingTypeEnum.REVURDERING]: '#3385d1',
+  [BehandlingTypeEnum.FORSTEGANGSSOKNAD]: '#85d5f0',
+  [BehandlingTypeEnum.ANKE]: '#85d5f0',
+  '-': '#85d5f0', // Eksisterer for TS: burde ikke inntreffe
 };
 
 export interface OppgaveForDatoGraf {
