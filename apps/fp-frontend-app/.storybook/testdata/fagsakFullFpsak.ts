@@ -24,7 +24,7 @@ export const fagsakFullFpsak: Fagsak = {
     kjønn: 'K',
     diskresjonskode: 'UDEF',
     fødselsdato: '1993-03-05',
-    dødsdato: null,
+
     språkkode: '-',
   },
   brukerManglerAdresse: false,
@@ -35,7 +35,7 @@ export const fagsakFullFpsak: Fagsak = {
     kjønn: 'M',
     diskresjonskode: 'UDEF',
     fødselsdato: '1991-03-05',
-    dødsdato: null,
+
     språkkode: '-',
   },
   annenpartBehandling: null,

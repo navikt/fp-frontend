@@ -212,7 +212,7 @@ const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
   const antallBarn = antallBarnFraSoknad > 0 ? antallBarnFraSoknad : 1;
   return Array<FieldArrayRow>(antallBarn).fill({
     fødselsdato: '',
-    dødsdato: null,
+
     kanOverstyres: true,
     kilde: 'SAKSBEHANDLER',
   });

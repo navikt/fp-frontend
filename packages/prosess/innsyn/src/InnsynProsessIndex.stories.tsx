@@ -25,18 +25,13 @@ const defaultBehandling = {
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 
 const meta = {
@@ -55,7 +50,6 @@ const meta = {
         gjelderFor: null,
         behandlinger: null,
         behandlingUuidList: null,
-        arbeidsgiverReferanse: null,
       },
     ],
   },

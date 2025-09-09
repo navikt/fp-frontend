@@ -123,14 +123,14 @@ const FAGSAK = {
     navn: '',
     fødselsnummer: '',
     kjønn: '-',
-    diskresjonskode: null,
+
     fødselsdato: '',
-    dødsdato: null,
+
     dodsdato: undefined,
     språkkode: '-',
   },
   brukerManglerAdresse: false,
-  annenPart: null,
+
   annenpartBehandling: null,
   familiehendelse: null,
   fagsakMarkeringer: [],

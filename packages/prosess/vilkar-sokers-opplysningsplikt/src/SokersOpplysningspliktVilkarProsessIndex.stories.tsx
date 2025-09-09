@@ -48,7 +48,6 @@ export const ÅpentAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
     readOnlySubmitButton: false,

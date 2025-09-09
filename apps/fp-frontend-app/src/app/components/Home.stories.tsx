@@ -27,8 +27,7 @@ const PERSON = {
   kjønn: KjønnkodeEnum.MANN,
   fødselsdato: '2000-01-02',
   aktørId: '12121221',
-  dødsdato: null,
-  diskresjonskode: null,
+
   språkkode: '-',
 } satisfies Person;
 

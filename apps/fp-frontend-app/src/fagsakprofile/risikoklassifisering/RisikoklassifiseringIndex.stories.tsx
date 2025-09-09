@@ -90,18 +90,13 @@ const FAGSAK = {
       risikoAksjonspunkt: {
         definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         vilkarType: null,
         toTrinnsBehandling: false,
-        toTrinnsBehandlingGodkjent: null,
-        vurderPaNyttArsaker: null,
-        besluttersBegrunnelse: null,
+
         aksjonspunktType: '-',
         kanLoses: false,
         erAktivt: false,
-        fristTid: null,
-        endretTidspunkt: null,
-        endretAv: null,
       },
       id: null,
       fagsakId: null,
@@ -145,14 +140,14 @@ const FAGSAK = {
     navn: '',
     fødselsnummer: '',
     kjønn: '-',
-    diskresjonskode: null,
+
     fødselsdato: '',
-    dødsdato: null,
+
     dodsdato: undefined,
     språkkode: '-',
   },
   brukerManglerAdresse: false,
-  annenPart: null,
+
   annenpartBehandling: null,
   familiehendelse: null,
   fagsakMarkeringer: [],

@@ -30,8 +30,6 @@ const adresse1 = {
   postNummer: '4123',
   poststed: 'Bobygda',
   land: 'Norge',
-  adresselinje2: null,
-  adresselinje3: null,
 } satisfies Personadresse;
 
 const adresse2 = {
@@ -42,8 +40,6 @@ const adresse2 = {
   postNummer: '0203',
   poststed: 'Bobygda',
   land: 'Norge',
-  adresselinje2: null,
-  adresselinje3: null,
 } satisfies Personadresse;
 
 const defaultBruker: PersonopplysningerBasis = {
@@ -52,11 +48,8 @@ const defaultBruker: PersonopplysningerBasis = {
   kjønn: KjønnkodeEnum.MANN,
   sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
-  dødsdato: null,
+
   adresser: [adresse1, adresse2],
-  fnr: null,
-  diskresjonskode: null,
-  vn: null,
 };
 
 const defaultAnnenPart: PersonopplysningerBasis = {
@@ -65,24 +58,18 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
-  dødsdato: null,
+
   adresser: [adresse1, adresse2],
-  fnr: null,
-  diskresjonskode: null,
-  vn: null,
 };
 
 const defaultBarn: PersonopplysningerBasis = {
   navn: 'Tutta Utvikler',
   fødselsdato: '2018-01-01',
-  dødsdato: null,
+
   adresser: [adresse2],
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: SivilstandType.UGIFT,
-  fnr: null,
-  diskresjonskode: null,
-  vn: null,
 };
 
 const defaultOmsorgOgRett: OmsorgOgRett = {
@@ -102,7 +89,7 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
     harAnnenpartForeldrepenger: 'NEI',
     harAnnenpartEngangsstønad: 'NEI',
   },
-  manuellBehandlingResultat: null,
+
   relasjonsRolleType: RelasjonsRolleType.FAR,
   rettighetstype: 'BEGGE_RETT',
 };
@@ -110,12 +97,8 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
 const aleneOmsorgForOmsorgOgRett: OmsorgOgRett = {
   søknad: {
     søkerHarAleneomsorg: 'JA',
-    annenpartIdent: null,
-    annenpartBostedsland: null,
-    annenpartRettighet: null,
   },
-  registerdata: null,
-  manuellBehandlingResultat: null,
+
   relasjonsRolleType: RelasjonsRolleType.MOR,
   rettighetstype: 'ALENEOMSORG',
 };
@@ -191,8 +174,7 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
     omsorgOgRett: {
       søknad: {
         søkerHarAleneomsorg: 'NEI',
-        annenpartIdent: null,
-        annenpartBostedsland: null,
+
         annenpartRettighet: {
           harRettNorge: 'JA',
           harOppholdEØS: 'IKKE_RELEVANT',
@@ -205,7 +187,7 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
         harAnnenpartForeldrepenger: 'NEI',
         harAnnenpartEngangsstønad: 'NEI',
       },
-      manuellBehandlingResultat: null,
+
       relasjonsRolleType: RelasjonsRolleType.FAR,
       rettighetstype: 'BEGGE_RETT',
     },
@@ -227,8 +209,7 @@ export const AvklarAnnenForelderRettBareFarRett: Story = {
     omsorgOgRett: {
       søknad: {
         søkerHarAleneomsorg: 'NEI',
-        annenpartIdent: null,
-        annenpartBostedsland: null,
+
         annenpartRettighet: {
           harRettNorge: 'NEI',
           harOppholdEØS: 'IKKE_RELEVANT',
@@ -263,8 +244,7 @@ export const RevurderingManuell: Story = {
     omsorgOgRett: {
       søknad: {
         søkerHarAleneomsorg: 'NEI',
-        annenpartIdent: null,
-        annenpartBostedsland: null,
+
         annenpartRettighet: {
           harRettNorge: 'NEI',
           harOppholdEØS: 'JA',
@@ -299,8 +279,7 @@ export const KanOverstyreMor: Story = {
     omsorgOgRett: {
       søknad: {
         søkerHarAleneomsorg: 'NEI',
-        annenpartIdent: null,
-        annenpartBostedsland: null,
+
         annenpartRettighet: {
           harRettNorge: 'JA',
           harOppholdEØS: 'IKKE_RELEVANT',
@@ -313,7 +292,7 @@ export const KanOverstyreMor: Story = {
         harAnnenpartForeldrepenger: 'NEI',
         harAnnenpartEngangsstønad: 'NEI',
       },
-      manuellBehandlingResultat: null,
+
       relasjonsRolleType: RelasjonsRolleType.MOR,
       rettighetstype: 'BEGGE_RETT',
     },
@@ -327,8 +306,7 @@ export const KanOverstyreFarOgAlleredeLøstAP: Story = {
     omsorgOgRett: {
       søknad: {
         søkerHarAleneomsorg: 'NEI',
-        annenpartIdent: null,
-        annenpartBostedsland: null,
+
         annenpartRettighet: {
           harRettNorge: 'JA',
           harOppholdEØS: 'IKKE_RELEVANT',

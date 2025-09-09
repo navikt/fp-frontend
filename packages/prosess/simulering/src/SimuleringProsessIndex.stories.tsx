@@ -142,7 +142,7 @@ export const AksjonspunktVurderFeilutbetaling: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-        begrunnelse: null,
+
         status: AksjonspunktStatus.OPPRETTET,
       },
     ] as Aksjonspunkt[],
@@ -154,7 +154,7 @@ export const AksjonspunktKontrollerEtterbetaling: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-        begrunnelse: null,
+
         status: AksjonspunktStatus.OPPRETTET,
       },
     ] as Aksjonspunkt[],
@@ -166,12 +166,11 @@ export const AksjonspunktVurderFeilutbetalingOgEtterbetaling: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-        begrunnelse: null,
+
         status: AksjonspunktStatus.OPPRETTET,
       },
       {
         definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
   },

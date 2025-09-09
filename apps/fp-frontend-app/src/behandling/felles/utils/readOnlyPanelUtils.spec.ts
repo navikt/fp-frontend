@@ -18,10 +18,8 @@ describe('readOnlyUtils', () => {
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
       overstyrbar: true,
-      avslagKode: null,
+
       lovReferanse: null,
-      evaluering: null,
-      input: null,
     },
   ];
 

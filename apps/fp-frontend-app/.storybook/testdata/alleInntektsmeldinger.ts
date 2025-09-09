@@ -13,9 +13,7 @@ export const alleInntektsmeldinger: Inntektsmelding[] = [
     dokumentId: '12345678',
     motattDato: '2025-03-05',
     innsendingstidspunkt: '2025-03-05T16:43:02.948918',
-    årsak: null,
-    begrunnelse: null,
-    saksbehandlersVurdering: null,
+
     kildeSystem: 'FS22',
     startDatoPermisjon: '2025-02-12',
     aktiveNaturalytelser: [],

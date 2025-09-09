@@ -10,7 +10,6 @@ export const dokumenter: Dokument[] = [
     kommunikasjonsretning: 'INN',
     gjelderFor: null,
     behandlinger: null,
-    arbeidsgiverReferanse: null,
   },
   {
     journalpostId: '35164102',
@@ -21,6 +20,5 @@ export const dokumenter: Dokument[] = [
     kommunikasjonsretning: 'INN',
     gjelderFor: 'NAV FAMILIE- OG PENSJONSYTELSER OSLO',
     behandlinger: null,
-    arbeidsgiverReferanse: null,
   },
 ];

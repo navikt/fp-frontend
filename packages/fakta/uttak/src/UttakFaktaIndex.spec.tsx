@@ -76,7 +76,7 @@ describe('UttakFaktaIndex', () => {
             // @ts-expect-error -- typene i formet er inkonsekvente
             arbeidstidsprosent: undefined,
             flerbarnsdager: false,
-            begrunnelse: null,
+
             oppholdÅrsak: null,
             overføringÅrsak: null,
             utsettelseÅrsak: null,
@@ -133,7 +133,7 @@ describe('UttakFaktaIndex', () => {
             arbeidstidsprosent: 10,
             flerbarnsdager: true,
             aksjonspunktType: undefined,
-            begrunnelse: null,
+
             oppholdÅrsak: null,
             overføringÅrsak: null,
             utsettelseÅrsak: null,
@@ -151,7 +151,7 @@ describe('UttakFaktaIndex', () => {
             },
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
-            begrunnelse: null,
+
             oppholdÅrsak: null,
             overføringÅrsak: null,
             utsettelseÅrsak: null,
@@ -170,7 +170,7 @@ describe('UttakFaktaIndex', () => {
             },
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
-            begrunnelse: null,
+
             oppholdÅrsak: null,
             overføringÅrsak: null,
             utsettelseÅrsak: null,
@@ -288,7 +288,6 @@ describe('UttakFaktaIndex', () => {
             utsettelseÅrsak: null,
             oppholdÅrsak: null,
             overføringÅrsak: null,
-            begrunnelse: null,
           },
         ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
       },

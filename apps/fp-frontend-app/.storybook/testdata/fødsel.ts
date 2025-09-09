@@ -5,7 +5,6 @@ export const fødsel: Fødsel = {
     barn: [
       {
         fødselsdato: '2025-03-05',
-        dødsdato: null,
       },
     ],
     termindato: '2025-03-05',
@@ -16,7 +15,6 @@ export const fødsel: Fødsel = {
     barn: [
       {
         fødselsdato: '2025-03-05',
-        dødsdato: null,
       },
     ],
   },
@@ -36,7 +34,6 @@ export const fødsel: Fødsel = {
         kilde: 'FOLKEREGISTER',
         barn: {
           fødselsdato: '2025-03-05',
-          dødsdato: null,
         },
         kanOverstyres: false,
       },

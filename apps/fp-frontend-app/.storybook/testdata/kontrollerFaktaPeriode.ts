@@ -15,7 +15,6 @@ export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
     flerbarnsdager: false,
     morsAktivitet: null,
     periodeKilde: FordelingPeriodeKilde.SØKNAD,
-    begrunnelse: null,
   },
   {
     fom: '2025-03-05',
@@ -30,7 +29,6 @@ export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
     flerbarnsdager: false,
     morsAktivitet: null,
     periodeKilde: FordelingPeriodeKilde.SØKNAD,
-    begrunnelse: null,
   },
   {
     fom: '2025-06-18',
@@ -45,6 +43,5 @@ export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
     flerbarnsdager: false,
     morsAktivitet: null,
     periodeKilde: FordelingPeriodeKilde.SØKNAD,
-    begrunnelse: null,
   },
 ];

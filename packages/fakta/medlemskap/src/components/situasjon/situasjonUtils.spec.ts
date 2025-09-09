@@ -17,8 +17,8 @@ const defaultMedlemskapProps: Medlemskap = {
   utenlandsopphold: [],
   oppholdstillatelser: [],
   avvik: [],
-  manuellBehandlingResultat: null,
-  legacyManuellBehandling: null,
+
+
   annenpart: null,
 };
 
@@ -63,10 +63,9 @@ describe('situasjonUtils', () => {
             adresseType: AdresseType.BOSTEDSADRESSE,
             land: 'Norge',
             adresselinje1: null,
-            adresselinje2: null,
-            adresselinje3: null,
-            postNummer: null,
-            poststed: null,
+
+
+            ,
           },
           {
             fom: '2022-07-01',
@@ -74,10 +73,9 @@ describe('situasjonUtils', () => {
             adresseType: AdresseType.BOSTEDSADRESSE,
             land: 'Finland',
             adresselinje1: null,
-            adresselinje2: null,
-            adresselinje3: null,
-            postNummer: null,
-            poststed: null,
+
+
+            ,
           },
           {
             fom: '2022-07-01',
@@ -85,10 +83,9 @@ describe('situasjonUtils', () => {
             adresseType: AdresseType.POSTADRESSE,
             land: 'USA',
             adresselinje1: null,
-            adresselinje2: null,
-            adresselinje3: null,
-            postNummer: null,
-            poststed: null,
+
+
+            ,
           },
         ] satisfies Personadresse[],
       };

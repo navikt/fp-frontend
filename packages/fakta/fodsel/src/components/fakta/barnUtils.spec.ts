@@ -39,7 +39,6 @@ describe('barnUtils', () => {
             ...barnMedDødsdatoIFreg,
             barn: {
               fødselsdato: '2025-05-28',
-              dødsdato: null,
             },
           },
         ]),

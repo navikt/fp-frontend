@@ -20,9 +20,9 @@ const defaultSak = {
     navn: '',
     fødselsnummer: '',
     kjønn: '-',
-    diskresjonskode: null,
+
     fødselsdato: '',
-    dødsdato: null,
+
     dodsdato: undefined,
     språkkode: '-',
   },

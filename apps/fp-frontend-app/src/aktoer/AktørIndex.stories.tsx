@@ -22,9 +22,9 @@ const PERSON = {
   fødselsnummer: '11111111111',
   kjønn: KjønnkodeEnum.MANN,
   fødselsdato: '2000-01-02',
-  dødsdato: null,
+
   aktørId: '22222222',
-  diskresjonskode: null,
+
   språkkode: '-',
 } satisfies Person;
 

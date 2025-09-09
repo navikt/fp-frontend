@@ -10,22 +10,22 @@ import { VisittkortSakIndex } from './VisittkortSakIndex';
 const fagsakPersonFar: Person = {
   navn: 'Espen Utvikler',
   fødselsdato: '1979-01-01',
-  dødsdato: null,
+
   fødselsnummer: '12345678910',
   kjønn: NavBrukerKjonn.MANN,
   aktørId: '234',
-  diskresjonskode: null,
+
   språkkode: 'NB',
 };
 
 const fagsakPersonMor: Person = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
-  dødsdato: null,
+
   fødselsnummer: '65656578787',
   kjønn: NavBrukerKjonn.KVINNE,
   aktørId: 'test',
-  diskresjonskode: null,
+
   språkkode: 'NB',
 };
 

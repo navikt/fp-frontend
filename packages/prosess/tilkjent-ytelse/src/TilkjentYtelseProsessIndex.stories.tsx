@@ -90,7 +90,7 @@ const søknad = {
     1: '2019-01-01',
   },
   termindato: '2019-02-01',
-  begrunnelseForSenInnsending: null,
+
   antallBarn: 0,
   oppgittTilknytning: {
     oppholdNorgeNa: false,
@@ -101,23 +101,14 @@ const søknad = {
   },
   manglendeVedlegg: [],
   oppgittFordeling: {
-    startDatoForPermisjon: null,
     dekningsgrader: {
-      avklartDekningsgrad: null,
       søker: {
         søknadsdato: '',
         dekningsgrad: 0,
       },
-      annenPart: null,
     },
   },
-  søknadsfrist: {
-    mottattDato: null,
-    utledetSøknadsfrist: null,
-    søknadsperiodeStart: null,
-    søknadsperiodeSlutt: null,
-    dagerOversittetFrist: null,
-  },
+  søknadsfrist: {},
   farSokerType: null,
   utstedtdato: null,
 } satisfies Soknad;

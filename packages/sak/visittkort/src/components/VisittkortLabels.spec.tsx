@@ -17,10 +17,10 @@ describe('VisittkortSakIndex', () => {
     navn: 'Olga Utvikler',
     kjønn: NavBrukerKjonn.KVINNE,
     fødselsdato: '1979-01-01',
-    dødsdato: null,
+
     fødselsnummer: '12345678910',
     aktørId: '111111',
-    diskresjonskode: null,
+
     språkkode: 'NB',
   };
 

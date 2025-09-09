@@ -30,7 +30,6 @@ const tomKlageVurdering = {
   aktuelleHjemler: null,
   underBehandlingKabal: null,
   behandletAvKabal: null,
-  mottattDato: null,
 };
 
 export const FormkravProsessIndex = ({

@@ -24,7 +24,6 @@ export const beregningresultatDagytelse = {
           stillingsprosent: 75,
         },
         {
-          arbeidsgiverReferanse: null,
           refusjon: 0,
           tilSoker: 0,
           uttak: {
@@ -67,7 +66,6 @@ export const beregningresultatDagytelse = {
           stillingsprosent: 75,
         },
         {
-          arbeidsgiverReferanse: null,
           refusjon: 0,
           tilSoker: 0,
           uttak: {
@@ -110,7 +108,6 @@ export const beregningresultatDagytelse = {
           stillingsprosent: 75,
         },
         {
-          arbeidsgiverReferanse: null,
           refusjon: 0,
           tilSoker: 0,
           uttak: {
@@ -153,7 +150,6 @@ export const beregningresultatDagytelse = {
           stillingsprosent: 75,
         },
         {
-          arbeidsgiverReferanse: null,
           refusjon: 0,
           tilSoker: 0,
           uttak: {

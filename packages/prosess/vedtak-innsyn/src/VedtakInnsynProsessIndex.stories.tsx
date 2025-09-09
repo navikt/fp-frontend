@@ -24,7 +24,6 @@ const defaultAksjonspunkter = [
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: null,
   },
 ] as Aksjonspunkt[];
 
@@ -45,7 +44,6 @@ const meta = {
         gjelderFor: null,
         behandlinger: null,
         behandlingUuidList: null,
-        arbeidsgiverReferanse: null,
       },
     ],
   },

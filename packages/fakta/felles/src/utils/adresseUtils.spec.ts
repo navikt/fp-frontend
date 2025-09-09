@@ -35,7 +35,7 @@ describe('formaterAdresse', () => {
         postNummer: '1234',
         adresseType: null,
         adresselinje1: null,
-        adresselinje3: null,
+
         land: null,
       } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
@@ -49,8 +49,7 @@ describe('formaterAdresse', () => {
         poststed: 'Helsinki',
         postNummer: '1234',
         adresseType: null,
-        adresselinje2: null,
-        adresselinje3: null,
+
         land: null,
       } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
@@ -65,8 +64,6 @@ describe('formaterAdresse', () => {
         land: 'Norge',
         postNummer: '1234',
         adresseType: null,
-        adresselinje2: null,
-        adresselinje3: null,
       } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
       expect(formatertAdresse).toBe('Adresse 1, 1234 Oslo');
@@ -80,8 +77,6 @@ describe('formaterAdresse', () => {
         land: 'Finland',
         postNummer: '1234',
         adresseType: null,
-        adresselinje2: null,
-        adresselinje3: null,
       } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
       expect(formatertAdresse).toBe('Utenlandsadresse 1, 1234 Helsinki, Finland');
@@ -94,8 +89,7 @@ describe('formaterAdresse', () => {
         postNummer: '1234',
         adresseType: null,
         adresselinje1: null,
-        adresselinje2: null,
-        adresselinje3: null,
+
         land: null,
       } satisfies Personadresse;
       const formatertAdresse = formaterAdresse(adresse);
@@ -111,10 +105,9 @@ describe('formaterAdresse', () => {
           tom: '2022-01-31',
           adresseType: AdresseType.BOSTEDSADRESSE,
           adresselinje1: null,
-          adresselinje2: null,
-          adresselinje3: null,
-          postNummer: null,
-          poststed: null,
+
+
+          ,
           land: null,
         },
         {
@@ -122,10 +115,9 @@ describe('formaterAdresse', () => {
           tom: '2021-01-31',
           adresseType: AdresseType.POSTADRESSE,
           adresselinje1: null,
-          adresselinje2: null,
-          adresselinje3: null,
-          postNummer: null,
-          poststed: null,
+
+
+          ,
           land: null,
         },
         {
@@ -133,10 +125,9 @@ describe('formaterAdresse', () => {
           tom: '2022-01-31',
           adresseType: AdresseType.POSTADRESSE_UTLAND,
           adresselinje1: null,
-          adresselinje2: null,
-          adresselinje3: null,
-          postNummer: null,
-          poststed: null,
+
+
+          ,
           land: null,
         },
         {
@@ -144,10 +135,9 @@ describe('formaterAdresse', () => {
           tom: '2022-01-31',
           adresseType: AdresseType.POSTADRESSE,
           adresselinje1: null,
-          adresselinje2: null,
-          adresselinje3: null,
-          postNummer: null,
-          poststed: null,
+
+
+          ,
           land: null,
         },
       ] satisfies Personadresse[];
@@ -162,8 +152,7 @@ describe('formaterAdresse', () => {
       ...defaultPeriode,
       adresseType: 'BOSTEDSADRESSE',
       adresselinje1: null,
-      adresselinje2: null,
-      adresselinje3: null,
+
       postNummer: '5511',
       poststed: 'Ukjent',
       land: 'Norge',

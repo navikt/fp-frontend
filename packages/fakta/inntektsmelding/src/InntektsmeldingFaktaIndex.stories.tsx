@@ -72,7 +72,7 @@ export const InntektsmeldingDefault: Story = {
         inntektPrMnd: 10000.5,
         innsendingstidspunkt: '2024-07-20T00:00:00',
         startDatoPermisjon: '2024-10-10',
-        refusjonPrMnd: null,
+
         journalpostId: '1',
         refusjonsperioder: [
           {
@@ -86,9 +86,6 @@ export const InntektsmeldingDefault: Story = {
             fom: '2024-01-09',
           },
         ],
-        årsak: null,
-        begrunnelse: null,
-        saksbehandlersVurdering: null,
       },
       {
         ...inntektsmeldingmal,
@@ -96,13 +93,9 @@ export const InntektsmeldingDefault: Story = {
         inntektPrMnd: 20000,
         innsendingstidspunkt: '2024-08-01T00:00:00',
         kildeSystem: 'FS22',
-        refusjonPrMnd: null,
+
         arbeidsgiverIdent: '2',
         journalpostId: '2',
-        årsak: null,
-        begrunnelse: null,
-        saksbehandlersVurdering: null,
-        startDatoPermisjon: null,
       },
       {
         ...inntektsmeldingmal,
@@ -128,9 +121,6 @@ export const InntektsmeldingDefault: Story = {
             indexKey: '2',
           },
         ],
-        årsak: null,
-        begrunnelse: null,
-        saksbehandlersVurdering: null,
       },
     ],
   },

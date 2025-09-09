@@ -66,56 +66,44 @@ export const behandling: Behandling = {
     {
       vilkarType: VilkarType.SOKERSOPPLYSNINGSPLIKT,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§§ 21-3',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-2',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-5, 1. ledd',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.OPPTJENINGSVILKARET,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-6',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
       vilkarStatus: VilkarUtfallType.IKKE_VURDERT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-7',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.OPPTJENINGSPERIODE,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-6 og 14-10',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
   ],
   links: [
@@ -294,18 +282,13 @@ export const behandling: Behandling = {
     {
       definisjon: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
       status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: null,
+
       vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
       toTrinnsBehandling: true,
-      toTrinnsBehandlingGodkjent: null,
-      vurderPaNyttArsaker: null,
-      besluttersBegrunnelse: null,
+
       aksjonspunktType: AksjonspunktType.MANUELL,
       kanLoses: true,
       erAktivt: true,
-      fristTid: null,
-      endretTidspunkt: null,
-      endretAv: null,
     },
   ],
   harSøknad: true,

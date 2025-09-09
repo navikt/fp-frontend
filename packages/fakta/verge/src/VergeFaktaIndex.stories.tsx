@@ -18,18 +18,13 @@ const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.AVKLAR_VERGE,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: null,
+
     kanLoses: true,
     toTrinnsBehandling: false,
-    toTrinnsBehandlingGodkjent: null,
-    vurderPaNyttArsaker: null,
-    besluttersBegrunnelse: null,
+
     aksjonspunktType: AksjonspunktType.AUTOPUNKT,
     vilkarType: VilkarType.OMSORGSVILKARET,
     erAktivt: true,
-    fristTid: null,
-    endretTidspunkt: null,
-    endretAv: null,
   },
 ];
 
