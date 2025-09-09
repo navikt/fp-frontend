@@ -205,11 +205,6 @@ export const behandling: Behandling = {
       type: 'GET',
     },
     {
-      href: '/fpsak/api/behandling/familiehendelse/v2?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
-      rel: 'familiehendelse-v2',
-      type: 'GET',
-    },
-    {
       href: '/fpsak/api/behandling/fodsel/fakta-fodsel?uuid=a47091ce-638c-403a-8ef9-b4419b4d4313',
       rel: 'fakta-fødsel',
       type: 'GET',
