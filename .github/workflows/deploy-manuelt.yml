@@ -1,25 +1,25 @@
 name: Deploy manuelt
 on:
   workflow_dispatch:
-    inputs:
-      image:
-        required: true
-        type: string
-        description: 'Image tag to deploy (example 2023.03.10.080433-f821119)'
-      environment:
-        required: true
-        type: choice
-        description: 'The environment to deployed to (dev|prod)'
-        options:
-          - dev
-          - prod
-      app:
-        required: true
-        type: choice
-        description: 'Application to deploy ()'
-        options:
-          - fp-frontend
-          - los-avdelingsleder
+ß    inputs:
+  image:
+    required: true
+    type: string
+    description: 'Image tag to deploy (example 2023.03.10.080433-f821119)'
+  environment:
+    required: true
+    type: choice
+    description: 'The environment to deployed to (dev|prod)'
+    options:
+      - dev
+      - prod
+  app:
+    required: true
+    type: choice
+    description: 'Application to deploy ()'
+    options:
+      - fp-frontend
+      - los-avdelingsleder
 
 jobs:
   deploy:
@@ -31,9 +31,3 @@ jobs:
       gar: true
       image: ${{ inputs.image }}
       cluster: ${{ inputs.environment }}-gcp
-<<<<<<< HEAD
-=======
-      image_suffix: '/${{ inputs.app }}'
-      deploy_context: '/${{ inputs.app }}'
-    secrets: inherit
->>>>>>> 71323b98c9 (FIX)
