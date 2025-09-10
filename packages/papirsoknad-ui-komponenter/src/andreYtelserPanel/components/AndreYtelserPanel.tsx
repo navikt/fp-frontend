@@ -79,11 +79,11 @@ const CheckboxWithInfo = ({
   const { watch } = useFormContext<AndreYtelserFormValue>();
   const valgteArbeidstyper = watch(`${ANDRE_YTELSER_NAME_PREFIX}.${ANDRE_YTELSER_TYPER_NAME}`);
 
-  const [visPerioder, setVisPeriode] = useState(valgteArbeidstyper.includes(arbeidstype.kode));
+  const [visPerioder, setVisPerioder] = useState(valgteArbeidstyper.includes(arbeidstype.kode));
 
   return (
     <VStack gap="space-12">
-      <Checkbox value={arbeidstype.kode} onClick={() => setVisPeriode(!visPerioder)} disabled={readOnly}>
+      <Checkbox value={arbeidstype.kode} onClick={() => setVisPerioder(!visPerioder)} disabled={readOnly}>
         {arbeidstype.navn}
       </Checkbox>
       {visPerioder && (

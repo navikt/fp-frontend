@@ -56,10 +56,7 @@ export const AvklarFaresignalerForm = ({
   const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === FaresignalVurdering.INNVIRKNING;
 
   return (
-    <RhfForm
-      formMethods={formMethods}
-      onSubmit={(values: Values) => submitCallback && submitCallback(transformValues(values))}
-    >
+    <RhfForm formMethods={formMethods} onSubmit={(values: Values) => submitCallback?.(transformValues(values))}>
       <VStack gap="space-16">
         <RhfTextarea
           name={begrunnelseFieldName}
