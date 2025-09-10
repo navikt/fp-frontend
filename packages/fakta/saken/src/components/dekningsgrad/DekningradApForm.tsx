@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
@@ -129,7 +129,7 @@ export const DekningradApForm = ({
                 </Box.New>
               )}
             </HStack>
-            <RhfRadioGroupNew
+            <RhfRadioGroup
               name="dekningsgrad"
               control={formMethods.control}
               label={<FormattedMessage id="DekningradApForm.HvilkenDekningsgrad" />}
@@ -142,7 +142,7 @@ export const DekningradApForm = ({
               <Radio value={100} size="small">
                 <FormattedMessage id="DekningradApForm.100" />
               </Radio>
-            </RhfRadioGroupNew>
+            </RhfRadioGroup>
             <RhfTextarea
               name="begrunnelse"
               control={formMethods.control}

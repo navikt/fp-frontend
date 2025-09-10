@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfRadioGroupNew, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfRadioGroup, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   harSammeFodselsnummerSomSoker,
   hasValidFodselsnummer,
@@ -86,7 +86,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
               <Heading size="small" level="4">
                 {formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.Title' })}
               </Heading>
-              <RhfRadioGroupNew
+              <RhfRadioGroup
                 name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.arsak`}
                 control={control}
                 hideLegend
@@ -99,7 +99,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                 <Radio value={KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR} size="small">
                   <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2" />
                 </Radio>
-              </RhfRadioGroupNew>
+              </RhfRadioGroup>
               {kanIkkeOppgiBegrunnelse?.arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
                 <>
                   <RhfSelect

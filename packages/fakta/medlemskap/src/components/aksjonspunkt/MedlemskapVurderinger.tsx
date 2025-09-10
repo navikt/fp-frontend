@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Radio, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -39,7 +39,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
   return (
     <RawIntlProvider value={intl}>
       <VStack gap={readOnly ? '2' : '6'}>
-        <RhfRadioGroupNew
+        <RhfRadioGroup
           name="vurdering"
           control={control}
           label={
@@ -53,7 +53,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
               <FormattedMessage id={option.label} />
             </Radio>
           ))}
-        </RhfRadioGroupNew>
+        </RhfRadioGroup>
         {vurdering && [MedlemskapVurdering.DELVIS_OPPFYLT, MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) && (
           <RhfSelect
             name="avslagskode"

@@ -2,7 +2,7 @@ import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, ErrorMessage, HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfRadioGroupNew, RhfTextarea, useCustomValidation } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfRadioGroup, RhfTextarea, useCustomValidation } from '@navikt/ft-form-hooks';
 import { hasValidText, isRequiredMessage, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -59,7 +59,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
 
   return (
     <VStack gap="space-12">
-      <RhfRadioGroupNew
+      <RhfRadioGroup
         name={`${FIELD_ARRAY_NAME}.${index}.totrinnskontrollGodkjent`}
         control={control}
         isReadOnly={readOnly}
@@ -73,7 +73,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
             <FormattedMessage id="ApprovalField.Vurder" />
           </Radio>
         </HStack>
-      </RhfRadioGroupNew>
+      </RhfRadioGroup>
       {totrinnskontrollGodkjent === false && (
         <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
           <VStack gap="space-8">

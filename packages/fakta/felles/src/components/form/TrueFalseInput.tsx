@@ -2,7 +2,7 @@ import React from 'react';
 import { type FieldValues, type UseControllerProps, useFormContext } from 'react-hook-form';
 
 import { Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -36,7 +36,7 @@ export const TrueFalseInput = <T extends FieldValues>({
   const value = watch(name);
 
   return (
-    <RhfRadioGroupNew name={name} control={control} label={label} validate={[required]} isReadOnly={readOnly}>
+    <RhfRadioGroup name={name} control={control} label={label} validate={[required]} isReadOnly={readOnly}>
       <VStack gap="space-2">
         <VStack gap="space-16">
           <Radio value={true} size="small">
@@ -51,6 +51,6 @@ export const TrueFalseInput = <T extends FieldValues>({
           {value === false && falseContent}
         </VStack>
       </VStack>
-    </RhfRadioGroupNew>
+    </RhfRadioGroup>
   );
 };

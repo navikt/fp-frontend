@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, HStack, Link, Radio, VStack } from '@navikt/ds-react';
-import { ReadOnlyField, RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
+import { ReadOnlyField, RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -116,7 +116,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
                 <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
               </AksjonspunktHelpTextHTML>
               <VStack gap="space-12">
-                <RhfRadioGroupNew name="sendVarsel" control={formMethods.control} validate={[required]}>
+                <RhfRadioGroup name="sendVarsel" control={formMethods.control} validate={[required]}>
                   <HStack gap="space-16">
                     <Radio value={true} size="small">
                       <FormattedMessage id="VarselOmRevurderingForm.SendVarsel" />
@@ -125,7 +125,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
                       <FormattedMessage id="VarselOmRevurderingForm.IkkeSendVarsel" />
                     </Radio>
                   </HStack>
-                </RhfRadioGroupNew>
+                </RhfRadioGroup>
                 {formVerdier.sendVarsel && (
                   <ArrowBox>
                     <VStack gap="space-8">

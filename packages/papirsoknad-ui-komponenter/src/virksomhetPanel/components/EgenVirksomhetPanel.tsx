@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
@@ -34,7 +34,7 @@ export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) =>
         <Heading size="small" level="3">
           <FormattedMessage id="Registrering.EgenVirksomhet.Title" />
         </Heading>
-        <RhfRadioGroupNew
+        <RhfRadioGroup
           name={`${EGEN_VIRKSOMHET_NAME_PREFIX}.harArbeidetIEgenVirksomhet`}
           control={control}
           validate={[required]}
@@ -47,7 +47,7 @@ export const EgenVirksomhetPanel = ({ readOnly = true, alleKodeverk }: Props) =>
           <Radio value={true} size="small">
             <FormattedMessage id="Registrering.EgenVirksomhet.Yes" />
           </Radio>
-        </RhfRadioGroupNew>
+        </RhfRadioGroup>
         {harArbeidetIEgenVirksomhet && <RegistrerVirksomhetPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />}
       </VStack>
     </BorderBox>

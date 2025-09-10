@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
@@ -60,7 +60,7 @@ export const SorteringVelger = ({
   const sortering = watch('sortering');
 
   return (
-    <RhfRadioGroupNew
+    <RhfRadioGroup
       name="sortering"
       control={control}
       label={<FormattedMessage id="SorteringVelger.Sortering" />}
@@ -102,6 +102,6 @@ export const SorteringVelger = ({
             )}
           </VStack>
         ))}
-    </RhfRadioGroupNew>
+    </RhfRadioGroup>
   );
 };

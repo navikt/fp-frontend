@@ -3,7 +3,7 @@ import { useFieldArray, useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, HStack, Label, Link, Radio, ReadMore, Table, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfNumericField, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { maxValue, minValue, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -147,7 +147,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   </Table.Body>
                 </Table>
               )}
-              <RhfRadioGroupNew
+              <RhfRadioGroup
                 name={`perioder.${0}.vurdering`}
                 control={formMethods.control}
                 label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
@@ -159,7 +159,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                     <FormattedMessage id={alt.label} />
                   </Radio>
                 ))}
-              </RhfRadioGroupNew>
+              </RhfRadioGroup>
               {formMethods.watch(`perioder.0.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
                 <RhfNumericField
                   name="perioder.0.morsStillingsprosent"
@@ -201,7 +201,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                     <BodyShort weight="semibold">{getFormatertPeriode(periode)}</BodyShort>
                     <BodyShort>{calcDaysAndWeeks(periode.fom, periode.tom).formattedString}</BodyShort>
                   </HStack>
-                  <RhfRadioGroupNew
+                  <RhfRadioGroup
                     name={`perioder.${index}.vurdering`}
                     control={formMethods.control}
                     label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.Vurdering" />}
@@ -213,7 +213,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                         <FormattedMessage id={alt.label} />
                       </Radio>
                     ))}
-                  </RhfRadioGroupNew>
+                  </RhfRadioGroup>
                   {formMethods.watch(`perioder.${index}.vurdering`) === VurderingsAlternativ.GODKJENT_UNDER75 && (
                     <RhfNumericField
                       label={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.Label" />}
