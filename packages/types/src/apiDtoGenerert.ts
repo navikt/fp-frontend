@@ -1089,11 +1089,11 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | '-';
 
 export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
-  indexKey?: string;
-  orgnr?: string;
-  aktørId?: string;
   identifikator?: string;
   erVirksomhet?: boolean;
+  aktørId?: string;
+  indexKey?: string;
+  orgnr?: string;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType =
@@ -1111,8 +1111,8 @@ export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType 
 
 export type foreldrepenger_domene_typer_InternArbeidsforholdRef = {
   referanse?: string;
-  indexKey?: string;
   uuidreferanse?: string;
+  indexKey?: string;
 };
 
 export type foreldrepenger_domene_uttak_fakta_uttak_DokumentasjonVurderingBehov_Behov_Type =
@@ -4322,9 +4322,9 @@ export type tjenester_behandling_uttak_dto_UttakResultatPeriodeDto = {
   mottattDato?: string;
   tidligstMottattDato?: string;
   erUtbetalingRedusertTilMorsStillingsprosent?: boolean;
-  gradertAktivitet?: tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto;
   periodeResultatÅrsakLovhjemmel?: string;
   graderingsAvslagÅrsakLovhjemmel?: string;
+  gradertAktivitet?: tjenester_behandling_uttak_dto_UttakResultatPeriodeAktivitetDto;
 };
 
 export type tjenester_behandling_uttak_dto_UttakResultatPerioderDto = {
@@ -6100,9 +6100,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_HendelseDto = (
 ) & {
   id: string;
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
+  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
-  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_HendelseWrapperDto = {
@@ -6114,9 +6114,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_AdressebeskyttelseHendelse
   id: string;
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
-  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødHendelseDto = {
@@ -6124,9 +6124,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødHendelseDto = {
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   dødsdato?: string;
+  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
-  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødfødselHendelseDto = {
@@ -6134,9 +6134,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødfødselHendelseDto = {
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   dødfødselsdato?: string;
+  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
-  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_FalskIdentitetHendelseDto = {
@@ -6144,9 +6144,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_FalskIdentitetHendelseDto 
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   erFalsk?: boolean;
+  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
-  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_FødselHendelseDto = {
@@ -6154,9 +6154,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_FødselHendelseDto = {
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørIdForeldre: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   fødselsdato?: string;
+  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
-  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto = {
@@ -6164,9 +6164,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto = {
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   utflyttingsdato?: string;
+  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
-  alleAktørId?: Array<string>;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto = {
