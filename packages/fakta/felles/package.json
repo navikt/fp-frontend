@@ -40,8 +40,8 @@
     "@navikt/fp-storybook-utils": "workspace:*",
     "@testing-library/dom": "10.4.1",
     "@testing-library/react": "16.3.0",
-    "eslint": "9.33.0",
-    "stylelint": "16.23.1",
+    "eslint": "9.35.0",
+    "stylelint": "16.24.0",
     "typescript": "5.9.2",
     "vitest": "3.2.4"
   }
