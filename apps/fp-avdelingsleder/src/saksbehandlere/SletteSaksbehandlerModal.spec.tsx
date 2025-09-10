@@ -1,9 +1,9 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { vi } from 'vitest';
 
 import * as stories from './SletteSaksbehandlerModal.stories';
-
 const { Default } = composeStories(stories);
 
 describe('SletteSaksbehandlerModal', () => {
