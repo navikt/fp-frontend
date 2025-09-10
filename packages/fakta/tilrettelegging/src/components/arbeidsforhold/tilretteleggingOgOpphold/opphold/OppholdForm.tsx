@@ -2,7 +2,7 @@ import { FormProvider, useForm, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateRangesNotOverlapping, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -167,7 +167,7 @@ export const OppholdForm = ({
               isReadOnly={forVisning}
             />
           </HStack>
-          <RhfRadioGroupNew
+          <RhfRadioGroup
             name={`${index}.oppholdÅrsak`}
             control={formMethods.control}
             label={intl.formatMessage({ id: 'OppholdForm.GrunnTilOpphold' })}
@@ -180,7 +180,7 @@ export const OppholdForm = ({
             <Radio value="FERIE" size="small">
               <FormattedMessage id="OppholdForm.Ferie" />
             </Radio>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
           {!forVisning && (
             <HStack gap="space-8">
               <Button

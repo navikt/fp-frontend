@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
@@ -154,7 +154,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
         <DocumentListInnsyn saksNr={fagsak.saksnummer} documents={documents} readOnly={isReadOnly} />
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         <VStack gap="space-12">
-          <RhfRadioGroupNew
+          <RhfRadioGroup
             name="innsynResultatType"
             control={formMethods.control}
             label={<FormattedMessage id="InnsynForm.Resultat" />}
@@ -169,12 +169,12 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
                 </Radio>
               ))}
             </HStack>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
           {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
             innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
             <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
               <VStack gap="space-16">
-                <RhfRadioGroupNew
+                <RhfRadioGroup
                   name="sattPaVent"
                   control={formMethods.control}
                   label={<FormattedMessage id="InnsynForm.VelgVidereAksjon" />}
@@ -190,7 +190,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
                       <FormattedMessage id="InnsynForm.ForeslåOgFatteVedtak" />
                     </Radio>
                   </HStack>
-                </RhfRadioGroupNew>
+                </RhfRadioGroup>
                 {sattPaVent && (
                   <RhfDatepicker
                     name="fristDato"

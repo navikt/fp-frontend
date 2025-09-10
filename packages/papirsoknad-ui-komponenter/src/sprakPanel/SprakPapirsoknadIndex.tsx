@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
@@ -32,7 +32,7 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.Sprak' })}
         </Heading>
-        <RhfRadioGroupNew name="språkkode" control={control} validate={[required]} isReadOnly={readOnly}>
+        <RhfRadioGroup name="språkkode" control={control} validate={[required]} isReadOnly={readOnly}>
           <Radio value={sprakvalg.BOKMAL} size="small">
             {intl.formatMessage({ id: 'Registrering.Sprak.Bokmal' })}
           </Radio>
@@ -42,7 +42,7 @@ export const SprakPapirsoknadIndex = ({ readOnly }: Props) => {
           <Radio value={sprakvalg.ENGELSK} size="small">
             {intl.formatMessage({ id: 'Registrering.Sprak.Engelsk' })}
           </Radio>
-        </RhfRadioGroupNew>
+        </RhfRadioGroup>
       </VStack>
     </BorderBox>
   );

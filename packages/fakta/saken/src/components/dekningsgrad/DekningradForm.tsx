@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { PencilFillIcon, PencilIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
@@ -124,7 +124,7 @@ export const DekningradForm = ({
       </div>
       <Box.New background="neutral-moderate" padding="5">
         <VStack gap="space-24">
-          <RhfRadioGroupNew
+          <RhfRadioGroup
             name="dekningsgrad"
             control={formMethods.control}
             label={<FormattedMessage id="DekningsgradForm.Dekningsgrad" />}
@@ -163,7 +163,7 @@ export const DekningradForm = ({
                 )}
               </Radio>
             </HStack>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
           <RhfTextarea
             name="begrunnelse"
             control={formMethods.control}

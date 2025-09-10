@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
@@ -73,7 +73,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
           erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}
         >
           <VStack gap="space-16">
-            <RhfRadioGroupNew
+            <RhfRadioGroup
               name="dokStatus"
               control={formMethods.control}
               label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
@@ -86,7 +86,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
               <Radio value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_IKKE_BLI_INNHENTET} size="small">
                 <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentesIkke" values={{ b: BTag }} />
               </Radio>
-            </RhfRadioGroupNew>
+            </RhfRadioGroup>
             <FaktaBegrunnelseTextField
               control={formMethods.control}
               isSubmittable={submittable}

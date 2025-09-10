@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm, RhfRadioGroupNew, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfRadioGroup, RhfTextarea, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   hasValidDate,
@@ -132,7 +132,7 @@ export const ManglendeArbeidsforholdForm = ({
       </div>
       <RhfForm formMethods={formMethods} onSubmit={lagre}>
         <VStack gap="space-16">
-          <RhfRadioGroupNew
+          <RhfRadioGroup
             name="saksbehandlersVurdering"
             control={formMethods.control}
             label={
@@ -173,7 +173,7 @@ export const ManglendeArbeidsforholdForm = ({
             <Radio value={ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING} size="small">
               <FormattedMessage id="ManglendeOpplysningerForm.OpprettArbeidsforhold" />
             </Radio>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
           {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
             <HStack gap="space-16">
               <RhfDatepicker

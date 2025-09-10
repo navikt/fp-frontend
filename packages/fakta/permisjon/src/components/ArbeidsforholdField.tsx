@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { CheckmarkIcon, ExclamationmarkTriangleFillIcon, QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Detail, HStack, Label, Popover, Radio, Tooltip, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 
@@ -191,7 +191,7 @@ export const ArbeidsforholdField = ({
           {!inntektsmelding && inntektsposter && (
             <InntektsposterPanel inntektsposter={inntektsposter} skjæringstidspunkt={skjæringstidspunkt} />
           )}
-          <RhfRadioGroupNew
+          <RhfRadioGroup
             name={`${FIELD_ARRAY_NAME}.${index}.permisjonStatus`}
             control={control}
             label={
@@ -250,7 +250,7 @@ export const ArbeidsforholdField = ({
             <Radio value={BekreftetPermisjonStatus.BRUK_PERMISJON} size="small">
               <FormattedMessage id="ArbeidsforholdFieldArray.IkkeTaMedArbeidsforhold" />
             </Radio>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
         </VStack>
       </HStack>
     </ArbeidsforholdBoks>

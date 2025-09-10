@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Detail, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat, periodFormat } from '@navikt/ft-utils';
@@ -131,7 +131,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
           <VStack gap="space-16">
             <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
             <VStack gap="space-12">
-              <RhfRadioGroupNew
+              <RhfRadioGroup
                 name="gyldigSenFremsetting"
                 control={formMethods.control}
                 validate={[required]}
@@ -146,7 +146,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
                     <FormattedMessage id="VurderSoknadsfristForeldrepengerForm.IkkeGyldigGrunn" />
                   </Radio>
                 </HStack>
-              </RhfRadioGroupNew>
+              </RhfRadioGroup>
               {gyldigSenFremsetting && (
                 <ArrowBox>
                   <RhfDatepicker

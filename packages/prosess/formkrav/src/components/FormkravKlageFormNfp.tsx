@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Detail, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { dateBeforeOrEqualToToday, hasValidDate, hasValidText, required } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
@@ -167,7 +167,7 @@ export const FormkravKlageFormNfp = ({
               </VStack>
               <VStack gap="space-20">
                 <HStack gap="space-16">
-                  <RhfRadioGroupNew
+                  <RhfRadioGroup
                     name="erKlagerPart"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKlagerPart' })}
@@ -182,8 +182,8 @@ export const FormkravKlageFormNfp = ({
                         <FormattedMessage id="Klage.Formkrav.Nei" />
                       </Radio>
                     </HStack>
-                  </RhfRadioGroupNew>
-                  <RhfRadioGroupNew
+                  </RhfRadioGroup>
+                  <RhfRadioGroup
                     name="erKonkret"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErKonkret' })}
@@ -198,10 +198,10 @@ export const FormkravKlageFormNfp = ({
                         <FormattedMessage id="Klage.Formkrav.Nei" />
                       </Radio>
                     </HStack>
-                  </RhfRadioGroupNew>
+                  </RhfRadioGroup>
                 </HStack>
                 <HStack gap="space-16">
-                  <RhfRadioGroupNew
+                  <RhfRadioGroup
                     name="erFristOverholdt"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErFristOverholdt' })}
@@ -216,8 +216,8 @@ export const FormkravKlageFormNfp = ({
                         <FormattedMessage id="Klage.Formkrav.Nei" />
                       </Radio>
                     </HStack>
-                  </RhfRadioGroupNew>
-                  <RhfRadioGroupNew
+                  </RhfRadioGroup>
+                  <RhfRadioGroup
                     name="erSignert"
                     control={formMethods.control}
                     label={intl.formatMessage({ id: 'Klage.Formkrav.ErSignert' })}
@@ -232,7 +232,7 @@ export const FormkravKlageFormNfp = ({
                         <FormattedMessage id="Klage.Formkrav.Nei" />
                       </Radio>
                     </HStack>
-                  </RhfRadioGroupNew>
+                  </RhfRadioGroup>
                 </HStack>
               </VStack>
             </HStack>

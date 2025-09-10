@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -45,7 +45,7 @@ export const KlageVurderingRadioOptionsNfp = ({
   ));
   return (
     <VStack gap="space-12">
-      <RhfRadioGroupNew name="klageVurdering" control={control} validate={[required]} isReadOnly={readOnly}>
+      <RhfRadioGroup name="klageVurdering" control={control} validate={[required]} isReadOnly={readOnly}>
         <HStack gap="space-16">
           <Radio value={klageVurderingType.MEDHOLD_I_KLAGE} size="small">
             <FormattedMessage id="Klage.ResolveKlage.ChangeVedtak" />
@@ -54,7 +54,7 @@ export const KlageVurderingRadioOptionsNfp = ({
             <FormattedMessage id="Klage.ResolveKlage.KeepVedtakNfp" />
           </Radio>
         </HStack>
-      </RhfRadioGroupNew>
+      </RhfRadioGroup>
       {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
         <ArrowBox>
           <VStack gap="space-16">
@@ -67,12 +67,7 @@ export const KlageVurderingRadioOptionsNfp = ({
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
             />
-            <RhfRadioGroupNew
-              name="klageVurderingOmgjoer"
-              control={control}
-              validate={[required]}
-              isReadOnly={readOnly}
-            >
+            <RhfRadioGroup name="klageVurderingOmgjoer" control={control} validate={[required]} isReadOnly={readOnly}>
               <Radio value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} size="small">
                 <FormattedMessage id="Klage.Behandle.Omgjort" />
               </Radio>
@@ -82,7 +77,7 @@ export const KlageVurderingRadioOptionsNfp = ({
               <Radio value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} size="small">
                 <FormattedMessage id="Klage.Behandle.DelvisOmgjort" />
               </Radio>
-            </RhfRadioGroupNew>
+            </RhfRadioGroup>
           </VStack>
         </ArrowBox>
       )}

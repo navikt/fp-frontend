@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { FødselGjeldende } from '@navikt/fp-types';
@@ -30,7 +30,7 @@ export const ErBarnFødt = ({ isReadOnly, isEdited, finnesBarnIFReg, antallBarnI
 
   return (
     <VStack gap="space-16">
-      <RhfRadioGroupNew
+      <RhfRadioGroup
         control={control}
         name="erBarnFødt"
         isEdited={isEdited}
@@ -47,7 +47,7 @@ export const ErBarnFødt = ({ isReadOnly, isEdited, finnesBarnIFReg, antallBarnI
             <FormattedMessage id="ErBarnFødt.Nei" />
           </Radio>
         </HStack>
-      </RhfRadioGroupNew>
+      </RhfRadioGroup>
       {erBarnFødt && <BarnFieldArray isReadOnly={isReadOnly} />}
     </VStack>
   );

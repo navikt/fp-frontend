@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, Button, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
@@ -389,7 +389,7 @@ export const UttakPeriodeForm = ({
         {erHovedsøkersPeriode && !isReadOnly && (
           <>
             <VStack gap="space-12">
-              <RhfRadioGroupNew name="erOppfylt" control={formMethods.control} hideLegend validate={[required]}>
+              <RhfRadioGroup name="erOppfylt" control={formMethods.control} hideLegend validate={[required]}>
                 <HStack gap="space-16">
                   <Radio value={true} size="small">
                     <FormattedMessage id="UttakActivity.Oppfylt" />
@@ -398,7 +398,7 @@ export const UttakPeriodeForm = ({
                     <FormattedMessage id="UttakActivity.IkkeOppfylt" />
                   </Radio>
                 </HStack>
-              </RhfRadioGroupNew>
+              </RhfRadioGroup>
               {erOppfylt !== undefined && (
                 <ArrowBox alignOffset={erOppfylt ? 0 : 92}>
                   <VStack gap="space-16">
@@ -413,7 +413,7 @@ export const UttakPeriodeForm = ({
                     />
                     {valgtPeriode.gradertAktivitet && erOppfylt && (
                       <>
-                        <RhfRadioGroupNew
+                        <RhfRadioGroup
                           name="graderingInnvilget"
                           control={formMethods.control}
                           label={intl.formatMessage({ id: 'UttakActivity.Gradering' })}
@@ -427,7 +427,7 @@ export const UttakPeriodeForm = ({
                               <FormattedMessage id="UttakActivity.IkkeOppfylt" />
                             </Radio>
                           </HStack>
-                        </RhfRadioGroupNew>
+                        </RhfRadioGroup>
                         {graderingInnvilget === false && (
                           <RhfSelect
                             name="graderingAvslagAarsak"

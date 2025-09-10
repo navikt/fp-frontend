@@ -2,7 +2,7 @@ import React from 'react';
 import { type FieldValues, type UseControllerProps, useFormContext } from 'react-hook-form';
 
 import { HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -41,7 +41,7 @@ export const TrueFalseInput = <T extends FieldValues>({
 
   if (isHorizontal) {
     return (
-      <RhfRadioGroupNew
+      <RhfRadioGroup
         name={name}
         control={control}
         label={label}
@@ -60,12 +60,12 @@ export const TrueFalseInput = <T extends FieldValues>({
           {value === true && trueContent}
           {value === false && falseContent}
         </VStack>
-      </RhfRadioGroupNew>
+      </RhfRadioGroup>
     );
   }
 
   return (
-    <RhfRadioGroupNew
+    <RhfRadioGroup
       name={name}
       control={control}
       label={label}
@@ -86,6 +86,6 @@ export const TrueFalseInput = <T extends FieldValues>({
           {value === false && falseContent}
         </VStack>
       </VStack>
-    </RhfRadioGroupNew>
+    </RhfRadioGroup>
   );
 };

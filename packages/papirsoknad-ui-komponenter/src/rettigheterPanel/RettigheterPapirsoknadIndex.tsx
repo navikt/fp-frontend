@@ -1,7 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 
 import { Heading, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -65,13 +65,13 @@ export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => 
         <Heading size="small" level="3">
           {intl.formatMessage({ id: 'Registrering.Rettigheter.Title' })}
         </Heading>
-        <RhfRadioGroupNew name="rettigheter" control={control} isReadOnly={readOnly}>
+        <RhfRadioGroup name="rettigheter" control={control} isReadOnly={readOnly}>
           {options.map(o => (
             <Radio key={o.value} value={o.value} size="small">
               {o.label}
             </Radio>
           ))}
-        </RhfRadioGroupNew>
+        </RhfRadioGroup>
       </VStack>
     </BorderBox>
   );

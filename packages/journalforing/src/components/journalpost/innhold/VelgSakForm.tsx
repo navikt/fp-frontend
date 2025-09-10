@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert, BodyShort, Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
@@ -131,7 +131,7 @@ export const VelgSakForm = ({
       )}
       <VStack gap="space-32">
         <VStack gap="space-16">
-          <RhfRadioGroupNew name={radioFieldName} control={formMethods.control} validate={[required]}>
+          <RhfRadioGroup name={radioFieldName} control={formMethods.control} validate={[required]}>
             {lagRadioOptions(journalpost).map(option => (
               <Radio
                 key={option.value}
@@ -142,7 +142,7 @@ export const VelgSakForm = ({
                 {option.label}
               </Radio>
             ))}
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
           {sakValg === LAG_NY_SAK && (
             <RhfSelect
               name={selectFieldName}
