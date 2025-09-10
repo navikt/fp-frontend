@@ -6,8 +6,11 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
+# Bruk ARG til å bestemme kva app som skal kopierast
+ARG APP_NAME
+
 COPY server /app
-COPY ./apps/fp-frontend-app/dist /app/public
+COPY ./apps/${APP_NAME}/dist /app/public
 
 EXPOSE 8080
 CMD ["dist/server.js"]

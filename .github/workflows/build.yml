@@ -100,6 +100,7 @@ jobs:
         if: inputs.build-image
         uses: navikt/fp-gha-workflows/.github/actions/build-push-docker-image@main # ratchet:exclude
         with:
+          APP_NAME: ${{ inputs.app }}
           build-version: ${{ steps.generate-build-version.outputs.build-version }}
           push-image: ${{ inputs.push-image }}
       - name: Archive code coverage results
