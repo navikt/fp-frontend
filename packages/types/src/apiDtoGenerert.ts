@@ -1244,8 +1244,8 @@ export type tjenester_behandling_svp_SvpArbeidsforholdDto = {
   tilretteleggingId: number;
   tilretteleggingBehovFom: string;
   tilretteleggingDatoer: Array<tjenester_behandling_svp_SvpTilretteleggingDatoDto>;
-  uttakArbeidType: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
-  arbeidsgiverReferanse: string;
+  uttakArbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  arbeidsgiverReferanse?: string;
   opplysningerOmRisiko?: string;
   opplysningerOmTilrettelegging?: string;
   kopiertFraTidligereBehandling?: boolean;
