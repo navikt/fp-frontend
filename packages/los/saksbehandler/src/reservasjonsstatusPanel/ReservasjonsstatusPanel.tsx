@@ -18,18 +18,18 @@ interface Props {
 }
 
 export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid }: Props) => {
-  const [erReservertAvInnloggetBruker, setErReservertAvInnloggetBruker] = useState(false);
+  const [erOppgaveReservert, setErOppgaveReservert] = useState(false);
 
   const { data: reserverteOppgaver = [], refetch } = useQuery({
     ...oppgaverForFagsakerOptions([saksnummer]),
-    refetchInterval: erReservertAvInnloggetBruker ? false : 10000,
+    refetchInterval: erOppgaveReservert ? false : 30000,
   });
 
   const oppgaveForBehandling = reserverteOppgaver.find(ro => ro.behandlingId === behandlingUuid);
   const erReservert = oppgaveForBehandling?.reservasjonStatus.erReservert;
 
   useEffect(() => {
-    setErReservertAvInnloggetBruker(oppgaveForBehandling?.reservasjonStatus.erReservertAvInnloggetBruker || false);
+    setErOppgaveReservert(erReservert || false);
   }, [erReservert]);
 
   const { mutate: opphevOppgavereservasjon } = useMutation({
