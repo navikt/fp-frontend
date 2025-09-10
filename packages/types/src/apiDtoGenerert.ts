@@ -1089,11 +1089,11 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | '-';
 
 export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
-  identifikator?: string;
-  erVirksomhet?: boolean;
   aktørId?: string;
   indexKey?: string;
   orgnr?: string;
+  identifikator?: string;
+  erVirksomhet?: boolean;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType =
@@ -1111,8 +1111,8 @@ export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType 
 
 export type foreldrepenger_domene_typer_InternArbeidsforholdRef = {
   referanse?: string;
-  uuidreferanse?: string;
   indexKey?: string;
+  uuidreferanse?: string;
 };
 
 export type foreldrepenger_domene_uttak_fakta_uttak_DokumentasjonVurderingBehov_Behov_Type =
@@ -2095,8 +2095,8 @@ export type foreldrepenger_domene_iay_modell_NaturalYtelse = {
 
 export type foreldrepenger_domene_iay_modell_Refusjon = {
   fom: string;
-  refusjonsbeløp: foreldrepenger_domene_typer_Beløp;
   indexKey?: string;
+  refusjonsbeløp: foreldrepenger_domene_typer_Beløp;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING' | '-';
@@ -4725,9 +4725,9 @@ export type foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum = 'S
 export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto = {
   fom: string;
   tom: string;
+  erSlettet?: boolean;
   erEndret?: boolean;
   erLagtTil?: boolean;
-  erSlettet?: boolean;
 };
 
 export type foreldrepenger_kontrakter_formidling_v3_BrevmalDto = {
