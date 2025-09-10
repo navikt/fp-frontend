@@ -47,12 +47,6 @@ export const AvdelingslederIndex = ({ navAnsatt }: Props) => {
 
   const alleKodeverkQuery = useQuery(losKodeverkOptions());
 
-  useEffect(() => {
-    if (alleKodeverkQuery.isError) {
-      setLosErIkkeTilgjengelig();
-    }
-  }, [alleKodeverkQuery.isError]);
-
   const { data: filtrerteAvdelinger, status: avdelingerStatus } = useQuery({
     ...avdelingerOptions(!!navAnsatt?.kanOppgavestyre),
     select: avdelinger => avdelinger.filter(a => !!navAnsatt?.kanBehandleKode6 || !a.kreverKode6),
