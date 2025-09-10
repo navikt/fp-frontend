@@ -962,14 +962,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/config-helpers@npm:^0.3.0, @eslint/config-helpers@npm:^0.3.1":
+"@eslint/config-helpers@npm:^0.3.1":
   version: 0.3.1
   resolution: "@eslint/config-helpers@npm:0.3.1"
   checksum: b95c239264078a430761afb344402d517134289a7d8b69a6ff1378ebe5eec9da6ad22b5e6d193b9e02899aeda30817ac47178d5927247092cc6d73a52f8d07c9
   languageName: node
   linkType: hard
 
-"@eslint/core@npm:^0.15.0, @eslint/core@npm:^0.15.2":
+"@eslint/core@npm:^0.15.2":
   version: 0.15.2
   resolution: "@eslint/core@npm:0.15.2"
   dependencies:
@@ -996,6 +996,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@eslint/js@npm:9.35.0":
   version: 9.35.0
   resolution: "@eslint/js@npm:9.35.0"
@@ -1008,6 +1009,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@eslint/js@npm:9.33.0":
   version: 9.33.0
   resolution: "@eslint/js@npm:9.33.0"
@@ -1023,7 +1026,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@eslint/plugin-kit@npm:^0.3.4, @eslint/plugin-kit@npm:^0.3.5":
+"@eslint/plugin-kit@npm:^0.3.5":
   version: 0.3.5
   resolution: "@eslint/plugin-kit@npm:0.3.5"
   dependencies:
@@ -1619,6 +1622,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@navikt/aksel-icons@npm:7.29.1, @navikt/aksel-icons@npm:^7.29.1":
   version: 7.29.1
   resolution: "@navikt/aksel-icons@npm:7.29.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-icons%2F7.29.1%2Fdd3a4014c46263847d74a531a9b4cf2850bbe018"
@@ -1648,6 +1652,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@navikt/ds-css@npm:7.29.1":
   version: 7.29.1
   resolution: "@navikt/ds-css@npm:7.29.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.29.1%2Ffac35f81f5620714b47e5e3ed02671b896b0ba71"
@@ -1673,28 +1678,12 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@navikt/ds-css@npm:7.28.1":
   version: 7.28.1
   resolution: "@navikt/ds-css@npm:7.28.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-css%2F7.28.1%2Fe740d3d10a8cdc51405c05b6106ed65a9880c2ec"
   checksum: f618a7883d26f07aa981ba007a6b3f34e0838ea43e76a18051de28f94950701760ddd0f77a01e82afb54ccf51818d28bd87eca5ff0a3aa3dbc4e262d0d345242
-  languageName: node
-  linkType: hard
-
-"@navikt/ds-react@npm:7.26.0":
-  version: 7.26.0
-  resolution: "@navikt/ds-react@npm:7.26.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fds-react%2F7.26.0%2F07f92564bf49776d9b53da470d28d638af35391b"
-  dependencies:
-    "@floating-ui/react": 0.27.8
-    "@floating-ui/react-dom": ^2.0.9
-    "@navikt/aksel-icons": ^7.26.0
-    "@navikt/ds-tokens": ^7.26.0
-    clsx: ^2.1.0
-    date-fns: ^4.0.0
-    react-day-picker: 9.7.0
-  peerDependencies:
-    "@types/react": ">=17.0.30"
-    react: ">=17.0.0 || >19.0.0-rc"
-  checksum: 5a135bd27dbccb9dbae4ea7817a14611033c5ea4007adfa4ab1f2547cc3336b7c5ac8a16a537fd175ead81d52329a1acea0fa8f0501223b336f8c0cdc8bee660
   languageName: node
   linkType: hard
 
@@ -1756,9 +1745,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-avdelingsleder@workspace:apps/fp-avdelingsleder"
   dependencies:
-    "@navikt/aksel-icons": 7.26.0
-    "@navikt/ds-css": 7.26.0
-    "@navikt/ds-react": 7.26.0
+    "@navikt/aksel-icons": 7.28.1
+    "@navikt/ds-css": 7.28.1
+    "@navikt/ds-react": 7.28.1
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -1767,32 +1756,32 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
-    "@navikt/ft-form-hooks": 9.0.1
-    "@navikt/ft-form-validators": 4.1.1
-    "@navikt/ft-ui-komponenter": 6.0.1
-    "@navikt/ft-utils": 3.7.1
-    "@storybook/react": 9.1.1
-    "@storybook/react-vite": 9.1.1
-    "@tanstack/react-query": 5.84.1
+    "@navikt/ft-form-hooks": 9.1.4
+    "@navikt/ft-form-validators": 4.2.2
+    "@navikt/ft-ui-komponenter": 6.2.0
+    "@navikt/ft-utils": 3.8.2
+    "@storybook/react": 9.1.2
+    "@storybook/react-vite": 9.1.2
+    "@tanstack/react-query": 5.85.3
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
     "@types/lodash.debounce": 4.0.9
     dayjs: 1.11.13
-    eslint: 9.32.0
+    eslint: 9.33.0
     history: 5.3.0
     ky: 1.8.2
     lodash.debounce: 4.0.8
-    msw: 2.10.4
+    msw: 2.10.5
     msw-storybook-addon: 2.0.5
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
     react-router-dom: 7.8.0
-    storybook: 9.1.1
+    storybook: 9.1.2
     stylelint: 16.23.1
     typescript: 5.9.2
-    vite: 7.1.1
+    vite: 7.1.2
     vitest: 3.2.4
   languageName: unknown
   linkType: soft
@@ -4818,6 +4807,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@navikt/ft-form-validators@npm:4.2.5, @navikt/ft-form-validators@npm:^4.2.5":
   version: 4.2.5
   resolution: "@navikt/ft-form-validators@npm:4.2.5::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-validators%2F4.2.5%2F7d77b66bdb9021a46d9ab0092d914818893eb4a4"
@@ -4835,6 +4825,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@navikt/ft-form-validators@npm:4.2.2, @navikt/ft-form-validators@npm:^4.2.2":
   version: 4.2.2
   resolution: "@navikt/ft-form-validators@npm:4.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-form-validators%2F4.2.2%2F903aa0ebc718e3d50da160a7876460e05586e125"
@@ -5011,6 +5003,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@navikt/ft-ui-komponenter@npm:6.2.2, @navikt/ft-ui-komponenter@npm:^6.2.2":
   version: 6.2.2
   resolution: "@navikt/ft-ui-komponenter@npm:6.2.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-ui-komponenter%2F6.2.2%2Fa8cab2355160c0e90a9f5e737db1a7a8b4f0d047"
@@ -5041,6 +5034,9 @@ __metadata:
   linkType: hard
 
 "@navikt/ft-ui-komponenter@npm:6.2.0, @navikt/ft-ui-komponenter@npm:^6.0.1, @navikt/ft-ui-komponenter@npm:^6.2.0":
+=======
+"@navikt/ft-ui-komponenter@npm:6.2.0, @navikt/ft-ui-komponenter@npm:^6.2.0":
+>>>>>>> f8a3eaf939 (FIX)
   version: 6.2.0
   resolution: "@navikt/ft-ui-komponenter@npm:6.2.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-ui-komponenter%2F6.2.0%2F960328063ed5a9cd2cb315e63a14cb96fe81d6d5"
 >>>>>>> 7d20736c4b (FIX)
@@ -5067,6 +5063,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@navikt/ft-utils@npm:3.8.4, @navikt/ft-utils@npm:^3.8.4":
   version: 3.8.4
   resolution: "@navikt/ft-utils@npm:3.8.4::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-utils%2F3.8.4%2F3bfbc1c3f097edb457c4e41227cb4db06382bd03"
@@ -5086,6 +5083,9 @@ __metadata:
   linkType: hard
 
 "@navikt/ft-utils@npm:3.8.2, @navikt/ft-utils@npm:^3.7.1, @navikt/ft-utils@npm:^3.8.2":
+=======
+"@navikt/ft-utils@npm:3.8.2, @navikt/ft-utils@npm:^3.8.2":
+>>>>>>> f8a3eaf939 (FIX)
   version: 3.8.2
   resolution: "@navikt/ft-utils@npm:3.8.2::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Fft-utils%2F3.8.2%2F16d88b71830c06b1ecb24ae74c3b0c15b8e51f72"
 >>>>>>> 7d20736c4b (FIX)
@@ -6316,6 +6316,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@storybook/builder-vite@npm:9.1.5":
   version: 9.1.5
   resolution: "@storybook/builder-vite@npm:9.1.5"
@@ -6333,6 +6334,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@storybook/builder-vite@npm:9.1.2":
   version: 9.1.2
   resolution: "@storybook/builder-vite@npm:9.1.2"
@@ -6347,6 +6350,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 "@storybook/csf-plugin@npm:9.1.5":
   version: 9.1.5
@@ -6363,6 +6367,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@storybook/csf-plugin@npm:9.1.2":
   version: 9.1.2
   resolution: "@storybook/csf-plugin@npm:9.1.2"
@@ -6383,6 +6389,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@storybook/react-dom-shim@npm:9.1.5":
   version: 9.1.5
   resolution: "@storybook/react-dom-shim@npm:9.1.5"
@@ -6398,6 +6405,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@storybook/react-dom-shim@npm:9.1.2":
   version: 9.1.2
   resolution: "@storybook/react-dom-shim@npm:9.1.2"
@@ -6410,6 +6419,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 "@storybook/react-vite@npm:9.1.5":
   version: 9.1.5
@@ -6437,6 +6447,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@storybook/react-vite@npm:9.1.2":
   version: 9.1.2
   resolution: "@storybook/react-vite@npm:9.1.2"
@@ -6461,6 +6473,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@storybook/react@npm:9.1.5":
   version: 9.1.5
   resolution: "@storybook/react@npm:9.1.5"
@@ -6483,6 +6496,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@storybook/react@npm:9.1.2":
   version: 9.1.2
   resolution: "@storybook/react@npm:9.1.2"
@@ -6503,6 +6518,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@tanstack/query-core@npm:5.87.4":
   version: 5.87.4
   resolution: "@tanstack/query-core@npm:5.87.4"
@@ -6515,6 +6531,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@tanstack/query-core@npm:5.85.3":
   version: 5.85.3
   resolution: "@tanstack/query-core@npm:5.85.3"
@@ -6543,6 +6561,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@tanstack/react-query@npm:5.87.4":
   version: 5.87.4
   resolution: "@tanstack/react-query@npm:5.87.4"
@@ -6558,6 +6577,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "@tanstack/react-query@npm:5.85.3":
   version: 5.85.3
   resolution: "@tanstack/react-query@npm:5.85.3"
@@ -9666,6 +9687,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "eslint@npm:9.35.0":
   version: 9.35.0
   resolution: "eslint@npm:9.35.0"
@@ -9720,6 +9742,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "eslint@npm:9.33.0":
   version: 9.33.0
   resolution: "eslint@npm:9.33.0"
@@ -12800,6 +12824,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "msw@npm:2.11.2":
   version: 2.11.2
   resolution: "msw@npm:2.11.2"
@@ -12837,6 +12862,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "msw@npm:2.10.5":
   version: 2.10.5
   resolution: "msw@npm:2.10.5"
@@ -15533,6 +15560,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "storybook@npm:9.1.5":
   version: 9.1.5
   resolution: "storybook@npm:9.1.5"
@@ -15564,6 +15592,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "storybook@npm:9.1.2":
   version: 9.1.2
   resolution: "storybook@npm:9.1.2"
@@ -16642,6 +16672,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "vite@npm:7.1.5":
   version: 7.1.5
   resolution: "vite@npm:7.1.5"
@@ -16701,6 +16732,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> f8a3eaf939 (FIX)
 "vite@npm:7.1.2":
   version: 7.1.2
   resolution: "vite@npm:7.1.2"
