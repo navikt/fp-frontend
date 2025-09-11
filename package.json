@@ -39,8 +39,8 @@
     "packages/**/*"
   ],
   "devDependencies": {
-    "@hey-api/openapi-ts": "0.82.5",
-    "@navikt/aksel-stylelint": "7.29.1",
+    "@hey-api/openapi-ts": "0.83.1",
+    "@navikt/aksel-stylelint": "7.30.0",
     "@sentry/cli": "2.53.0",
     "@storybook/addon-a11y": "9.1.5",
     "@storybook/addon-links": "9.1.5",

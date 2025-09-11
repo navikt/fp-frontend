@@ -1259,12 +1259,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/codegen-core@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@hey-api/codegen-core@npm:0.0.1"
+"@hey-api/codegen-core@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@hey-api/codegen-core@npm:0.1.0"
   peerDependencies:
     typescript: ">=5.5.3"
-  checksum: f8225579bfcb423bea7792feb803fb91e8ebe094c224c11385d2325c743386e4fcf3087a0886f54e5a8b1702b9a2cc5d583b771eb9f485b4ae6cd83c439b5c38
+  checksum: ad55b5d1850e279c06185d24dc16faa503f5b9c9897d821701b5e161330c255af057de87e600e404372bb6e8b1bbcbe2aa821e27066ca161d6186829a4355bf1
   languageName: node
   linkType: hard
 
@@ -1280,25 +1280,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/openapi-ts@npm:0.82.5":
-  version: 0.82.5
-  resolution: "@hey-api/openapi-ts@npm:0.82.5"
+"@hey-api/openapi-ts@npm:0.83.1":
+  version: 0.83.1
+  resolution: "@hey-api/openapi-ts@npm:0.83.1"
   dependencies:
-    "@hey-api/codegen-core": ^0.0.1
+    "@hey-api/codegen-core": ^0.1.0
     "@hey-api/json-schema-ref-parser": 1.1.0
     ansi-colors: 4.1.3
     c12: 2.0.1
     color-support: 1.1.3
     commander: 13.0.0
     handlebars: 4.7.8
-    js-yaml: 4.1.0
     open: 10.1.2
     semver: 7.7.2
   peerDependencies:
     typescript: ">=5.5.3"
   bin:
     openapi-ts: bin/index.cjs
-  checksum: c05fc0084a2e08d8516dd94c7136482073e4589eb47b7f2178618fba28ea786497808eab8cb978706fd365c226bce430ae745de170e05f815809564a250219b5
+  checksum: dd39c8d1ea77f22e1720bf4acf32213f24b7254f9bd2839573232cba498b7b4e6d6d42964a303c5093069cace16a79b9a6cfa6808c7faab1ed18cfaf92520239
   languageName: node
   linkType: hard
 
@@ -1664,10 +1663,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-stylelint@npm:7.29.1":
-  version: 7.29.1
-  resolution: "@navikt/aksel-stylelint@npm:7.29.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.29.1%2F9fbc1758619ee5ce6131d7238cf5c71b62278cb3"
-  checksum: 3b59bf26c4d7854b06ddf69c995f4fd84bb5647792a274c5d87341e4d6b13d155619d9c8205299dcfb9eb81cba28323cca0c91139c3437a9aaff9db3e3eb0bb0
+"@navikt/aksel-stylelint@npm:7.30.0":
+  version: 7.30.0
+  resolution: "@navikt/aksel-stylelint@npm:7.30.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.30.0%2F0b7215bc20dd97dbc96b0c0dfe3a5b309642d9bd"
+  checksum: f6dc553cd99eacb085a0d676960e29fe99316889702f479dbe3c3abc9442c77729f5ddaa880d2de3fe4b379b39ce28d954b251bf066e966f0da63fc3f8e8d850
   languageName: node
   linkType: hard
 
@@ -2600,7 +2599,7 @@ __metadata:
     eslint: 9.35.0
     history: 5.3.0
     ky: 1.10.0
-    msw: 2.11.1
+    msw: 2.11.2
     msw-storybook-addon: 2.0.5
     react: 19.1.1
     react-dom: 19.1.1
@@ -2644,7 +2643,7 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.35.0
     ky: 1.10.0
-    msw: 2.11.1
+    msw: 2.11.2
     msw-storybook-addon: 2.0.5
     react: 19.1.1
     react-hook-form: 7.62.0
@@ -2711,7 +2710,7 @@ __metadata:
     history: 5.3.0
     ky: 1.10.0
     lodash.debounce: 4.0.8
-    msw: 2.11.1
+    msw: 2.11.2
     msw-storybook-addon: 2.0.5
     react: 19.1.1
     react-hook-form: 7.62.0
@@ -2788,7 +2787,7 @@ __metadata:
     dayjs: 1.11.18
     eslint: 9.35.0
     ky: 1.10.0
-    msw: 2.11.1
+    msw: 2.11.2
     msw-storybook-addon: 2.0.5
     react: 19.1.1
     react-dom: 19.1.1
@@ -9860,8 +9859,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": 0.82.5
-    "@navikt/aksel-stylelint": 7.29.1
+    "@hey-api/openapi-ts": 0.83.1
+    "@navikt/aksel-stylelint": 7.30.0
     "@sentry/cli": 2.53.0
     "@storybook/addon-a11y": 9.1.5
     "@storybook/addon-links": 9.1.5
@@ -12422,9 +12421,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"msw@npm:2.11.1":
-  version: 2.11.1
-  resolution: "msw@npm:2.11.1"
+"msw@npm:2.11.2":
+  version: 2.11.2
+  resolution: "msw@npm:2.11.2"
   dependencies:
     "@bundled-es-modules/cookie": ^2.0.1
     "@bundled-es-modules/statuses": ^1.0.1
@@ -12440,6 +12439,7 @@ __metadata:
     outvariant: ^1.4.3
     path-to-regexp: ^6.3.0
     picocolors: ^1.1.1
+    rettime: ^0.7.0
     strict-event-emitter: ^0.5.1
     tough-cookie: ^6.0.0
     type-fest: ^4.26.1
@@ -12451,7 +12451,7 @@ __metadata:
       optional: true
   bin:
     msw: cli/index.js
-  checksum: df5326ddc6c1845d39e374018f56629c0f012ec44aa7eae5807c33f86ddb7207dd811b171abeab37cb850431ac41523f843f5696d1fbc3a26c449bb249b523f4
+  checksum: 599aa3ed6e5043479bef473fa427a7aaf343d32aedba301ec62cac1a30c50b2a2898c4b9fe11b939ab03768807860eff64ce2fbdd28f78d0c6be4f4318d8b276
   languageName: node
   linkType: hard
 
@@ -14331,6 +14331,13 @@ __metadata:
   version: 0.12.0
   resolution: "retry@npm:0.12.0"
   checksum: 623bd7d2e5119467ba66202d733ec3c2e2e26568074923bc0585b6b99db14f357e79bdedb63cab56cec47491c4a0da7e6021a7465ca6dc4f481d3898fdd3158c
+  languageName: node
+  linkType: hard
+
+"rettime@npm:^0.7.0":
+  version: 0.7.0
+  resolution: "rettime@npm:0.7.0"
+  checksum: 1ad3984a4f8000adf56c623882170115d7453b3bbaed56429a40077b067fad98c1c5db9a58e63793add15a97006fa7c817516d985c3347df40b5d274dc087803
   languageName: node
   linkType: hard
 
