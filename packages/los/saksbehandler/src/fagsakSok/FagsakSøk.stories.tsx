@@ -53,11 +53,11 @@ export const Default: Story = {
         person: {
           navn: 'Espen Utvikler',
           fødselsdato: '1980-10-10',
-          dødsdato: null,
+
           fødselsnummer: '1010',
           aktørId: '23',
           kjønn: KjønnkodeEnum.MANN,
-          diskresjonskode: null,
+
           språkkode: 'NB',
         },
         barnFødt: '2019-12-12',

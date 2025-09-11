@@ -76,7 +76,7 @@ export const ForBeslutter: Story = {
               },
               vurderPaNyttArsaker: [],
               uttakPerioder: [],
-              besluttersBegrunnelse: null,
+
               totrinnskontrollGodkjent: false,
             },
           ],
@@ -93,7 +93,7 @@ export const ForBeslutter: Story = {
               },
               vurderPaNyttArsaker: [],
               uttakPerioder: [],
-              besluttersBegrunnelse: null,
+
               totrinnskontrollGodkjent: false,
             },
           ],
@@ -139,7 +139,7 @@ export const ForSaksbehandler: Story = {
               },
               totrinnskontrollGodkjent: true,
               uttakPerioder: [],
-              besluttersBegrunnelse: null,
+
               vurderPaNyttArsaker: [],
             },
           ],

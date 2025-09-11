@@ -14,18 +14,14 @@ describe('getAlleMerknaderFraBeslutter', () => {
     {
       status: AksjonspunktStatus.OPPRETTET,
       definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-      begrunnelse: null,
+
       kanLoses: true,
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
-      vurderPaNyttArsaker: null,
-      besluttersBegrunnelse: null,
+
       aksjonspunktType: AksjonspunktType.MANUELL,
       erAktivt: true,
-      fristTid: null,
-      endretTidspunkt: null,
-      endretAv: null,
     },
   ];
 

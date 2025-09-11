@@ -35,18 +35,13 @@ const åpentAksjonspunkt: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: null,
+
     kanLoses: true,
     toTrinnsBehandling: true,
-    toTrinnsBehandlingGodkjent: null,
-    vurderPaNyttArsaker: null,
-    besluttersBegrunnelse: null,
+
     aksjonspunktType: AksjonspunktType.MANUELL,
     vilkarType: VilkarType.OMSORGSVILKARET,
     erAktivt: true,
-    fristTid: null,
-    endretTidspunkt: null,
-    endretAv: null,
   },
 ];
 
@@ -86,8 +81,6 @@ const uttakStonadskontoer = {
         },
       ],
       gyldigForbruk: true,
-      kontoUtvidelser: null,
-      kontoReduksjoner: null,
     },
     MØDREKVOTE: {
       stonadskontotype: 'MØDREKVOTE',
@@ -103,8 +96,6 @@ const uttakStonadskontoer = {
         },
       ],
       gyldigForbruk: true,
-      kontoUtvidelser: null,
-      kontoReduksjoner: null,
     },
     FELLESPERIODE: {
       stonadskontotype: 'FELLESPERIODE',
@@ -120,8 +111,6 @@ const uttakStonadskontoer = {
         },
       ],
       gyldigForbruk: true,
-      kontoUtvidelser: null,
-      kontoReduksjoner: null,
     },
     FORELDREPENGER_FØR_FØDSEL: {
       stonadskontotype: 'FORELDREPENGER_FØR_FØDSEL',
@@ -137,8 +126,6 @@ const uttakStonadskontoer = {
         },
       ],
       gyldigForbruk: true,
-      kontoUtvidelser: null,
-      kontoReduksjoner: null,
     },
   },
 } satisfies UttakStonadskontoer;
@@ -1349,7 +1336,6 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
             },
           ],
           gyldigForbruk: true,
-          kontoUtvidelser: null,
         },
       },
     },

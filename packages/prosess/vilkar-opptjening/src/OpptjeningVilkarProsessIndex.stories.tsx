@@ -41,18 +41,13 @@ const defaultOpptjening = {
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 
 const meta = {
@@ -93,7 +88,6 @@ export const ÅpentAksjonspunktSvangerskapspenger: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ],
   },
@@ -131,7 +125,6 @@ export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
   },
@@ -150,7 +143,6 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
   },

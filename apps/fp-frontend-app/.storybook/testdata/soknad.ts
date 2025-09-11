@@ -3,7 +3,7 @@ import type { Soknad } from '@navikt/fp-types';
 export const soknad: Soknad = {
   soknadType: 'ST-001',
   mottattDato: '2025-03-05',
-  begrunnelseForSenInnsending: null,
+
   antallBarn: 1,
   oppgittTilknytning: {
     oppholdNorgeNa: true,
@@ -21,7 +21,10 @@ export const soknad: Soknad = {
         søknadsdato: '2025-03-05',
         dekningsgrad: 100,
       },
-      annenPart: null,
+      annenPart: {
+        søknadsdato: '',
+        dekningsgrad: undefined,
+      },
     },
   },
   søknadsfrist: {
@@ -31,9 +34,8 @@ export const soknad: Soknad = {
     søknadsperiodeSlutt: '2025-10-07',
     dagerOversittetFrist: 0,
   },
-  utstedtdato: null,
   termindato: '2025-03-05',
-  farSokerType: null,
+
   fodselsdatoer: {
     '1': '2025-03-05',
   },

@@ -11,18 +11,13 @@ import { FodselFaktaIndex } from './FodselFaktaIndex';
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 
 const apTerminbekreftelse: Aksjonspunkt = {
@@ -63,7 +58,6 @@ const meta = {
         barn: [
           {
             fødselsdato: '2025-06-03',
-            dødsdato: null,
           },
         ],
       },
@@ -86,7 +80,6 @@ const meta = {
             kilde: 'FOLKEREGISTER',
             barn: {
               fødselsdato: '2025-06-03',
-              dødsdato: null,
             },
             kanOverstyres: false,
           },
@@ -180,11 +173,9 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
         barn: [
           {
             fødselsdato: '2025-05-04',
-            dødsdato: null,
           },
         ],
         termindato: '2025-04-14',
-        utstedtdato: null,
         antallBarn: 1,
       },
       register: {
@@ -200,13 +191,11 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
           kilde: 'SØKNAD',
           antall: 1,
         },
-        utstedtdato: null,
         barn: [
           {
             kilde: 'SØKNAD',
             barn: {
               fødselsdato: '2025-05-04',
-              dødsdato: null,
             },
             kanOverstyres: true,
           },
@@ -234,7 +223,6 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
         barn: [
           {
             fødselsdato: '2025-06-25',
-            dødsdato: null,
           },
         ],
       },
@@ -257,7 +245,6 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
             kilde: 'FOLKEREGISTER',
             barn: {
               fødselsdato: '2025-06-25',
-              dødsdato: null,
             },
             kanOverstyres: false,
           },
@@ -304,7 +291,6 @@ export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
           },
           {
             fødselsdato: '2025-05-28',
-            dødsdato: null,
           },
         ],
       },
@@ -335,7 +321,6 @@ export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
             kilde: 'FOLKEREGISTER',
             barn: {
               fødselsdato: '2025-05-28',
-              dødsdato: null,
             },
             kanOverstyres: false,
           },

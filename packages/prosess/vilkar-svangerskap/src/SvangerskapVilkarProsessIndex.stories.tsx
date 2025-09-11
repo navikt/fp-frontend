@@ -32,7 +32,6 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
     isReadOnly: false,
@@ -47,7 +46,6 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
     readOnlySubmitButton: false,

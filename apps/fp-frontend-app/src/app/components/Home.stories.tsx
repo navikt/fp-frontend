@@ -27,8 +27,7 @@ const PERSON = {
   kjønn: KjønnkodeEnum.MANN,
   fødselsdato: '2000-01-02',
   aktørId: '12121221',
-  dødsdato: null,
-  diskresjonskode: null,
+
   språkkode: '-',
 } satisfies Person;
 
@@ -56,7 +55,7 @@ const AKTØR_INFO = {
     },
   ],
   person: PERSON,
-  aktørId: null,
+  aktørId: undefined,
 } satisfies Aktor;
 
 const NAV_ANSATT = {

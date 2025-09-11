@@ -32,7 +32,7 @@ const soknad = {
   soknadType: SoknadType.ADOPSJON,
   farSokerType: FarSøkerType.ADOPTERER_ALENE,
   mottattDato: '',
-  begrunnelseForSenInnsending: null,
+
   omsorgsovertakelseDato: '2022-09-14',
   barnetsAnkomstTilNorgeDato: '2022-09-13',
   oppgittTilknytning: {
@@ -44,23 +44,18 @@ const soknad = {
   },
   manglendeVedlegg: [],
   oppgittFordeling: {
-    startDatoForPermisjon: null,
     dekningsgrader: {
-      avklartDekningsgrad: null,
       søker: {
         søknadsdato: '',
         dekningsgrad: 0,
       },
-      annenPart: null,
+      annenPart: {
+        søknadsdato: '',
+        dekningsgrad: undefined,
+      },
     },
   },
-  søknadsfrist: {
-    mottattDato: null,
-    utledetSøknadsfrist: null,
-    søknadsperiodeStart: null,
-    søknadsperiodeSlutt: null,
-    dagerOversittetFrist: null,
-  },
+  søknadsfrist: {},
 } satisfies Soknad;
 
 const merknaderFraBeslutter = {
@@ -86,18 +81,13 @@ type Story = StoryObj<typeof meta>;
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 
 export const AksjonspunktForAdopsjonsvilkåret: Story = {
@@ -107,7 +97,7 @@ export const AksjonspunktForAdopsjonsvilkåret: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -124,7 +114,7 @@ export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -141,7 +131,7 @@ export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -158,7 +148,7 @@ export const IkkeVisBarnetsAnkomstDatoForEngangsstønad: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],

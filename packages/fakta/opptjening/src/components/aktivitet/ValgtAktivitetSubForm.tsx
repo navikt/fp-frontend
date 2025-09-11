@@ -24,8 +24,8 @@ const getOppdragsgiverIntlId = (valgtAktivitetstype?: string): string =>
     : 'ActivityPanel.Arbeidsgiver';
 
 const finnArbeidsgivertekst = (
-  arbeidsgiverReferanse: string | null,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
+  arbeidsgiverReferanse?: string,
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverReferanse
     ? arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]
@@ -43,10 +43,10 @@ const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
 
 interface Props {
   valgtAktivitetstype?: string;
-  arbeidsgiverReferanse: string | null;
+  arbeidsgiverReferanse?: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   stillingsandel: number;
-  naringRegistreringsdato: string | null;
+  naringRegistreringsdato?: string;
   ferdiglignetNæring: FerdiglignetNæring[];
 }
 
@@ -74,7 +74,7 @@ export const ValgtAktivitetSubForm = ({
             <FormattedMessage id={getOppdragsgiverIntlId(valgtAktivitetstype)} />
           </Label>
           <BodyShort size="small">
-            {finnArbeidsgivertekst(arbeidsgiverReferanse, arbeidsgiverOpplysningerPerId)}
+            {finnArbeidsgivertekst(arbeidsgiverOpplysningerPerId, arbeidsgiverReferanse)}
           </BodyShort>
         </div>
         {erAvType(valgtAktivitetstype, OpptjeningAktivitetType.ARBEID) && (

@@ -214,20 +214,20 @@ describe('UttakProsessIndex', () => {
                 uttakArbeidType: 'ORDINÆRT_ARBEID',
               },
             ],
-            begrunnelse: null,
+
             flerbarnsdager: false,
             fom: '2022-11-10',
             graderingAvslagÅrsak: '-',
             graderingInnvilget: false,
             gradertAktivitet: null,
             manuellBehandlingÅrsak: '-',
-            mottattDato: null,
+
             oppholdÅrsak: '-',
             periodeResultatType: 'AVSLÅTT',
             periodeResultatÅrsak: '4103',
             periodeType: null,
             samtidigUttak: false,
-            samtidigUttaksprosent: null,
+
             tom: '2022-12-21',
             utsettelseType: '-',
           },

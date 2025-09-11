@@ -8,9 +8,6 @@ export const dokumenter: Dokument[] = [
     tidspunkt: '2025-03-05T17:00:37',
     tittel: 'Inntektsmelding',
     kommunikasjonsretning: 'INN',
-    gjelderFor: null,
-    behandlinger: null,
-    arbeidsgiverReferanse: null,
   },
   {
     journalpostId: '35164102',
@@ -20,7 +17,5 @@ export const dokumenter: Dokument[] = [
     tittel: 'Søknad for foreldrepenger',
     kommunikasjonsretning: 'INN',
     gjelderFor: 'NAV FAMILIE- OG PENSJONSYTELSER OSLO',
-    behandlinger: null,
-    arbeidsgiverReferanse: null,
   },
 ];

@@ -32,6 +32,5 @@ export const Default: Story = {
     ventearsaker: VENTEARSAKER,
     ventearsak: VenteArsakType.ENDRE_TILKJENT_YTELSE,
     lukkCallback: action('button-click'),
-    frist: null,
   },
 };

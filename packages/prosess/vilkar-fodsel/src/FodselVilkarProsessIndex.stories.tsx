@@ -32,7 +32,6 @@ export const ÅpentAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
     readOnlySubmitButton: false,

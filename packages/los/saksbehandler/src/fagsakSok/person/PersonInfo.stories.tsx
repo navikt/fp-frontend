@@ -26,7 +26,7 @@ export const PersonkortMedDiskresjonskodeForMann: Story = {
       kjønn: KjønnkodeEnum.MANN,
       diskresjonskode: DiskresjonskodeType.KODE7,
       fødselsdato: '1980-10-10',
-      dødsdato: null,
+
       fødselsnummer: '23232332',
       aktørId: '111111',
       språkkode: '-',
@@ -43,7 +43,7 @@ export const PersonkortForDødKvinne: Story = {
       dødsdato: '2020-10-10',
       fødselsnummer: '23232332',
       aktørId: '111111',
-      diskresjonskode: null,
+
       språkkode: '-',
     },
   },

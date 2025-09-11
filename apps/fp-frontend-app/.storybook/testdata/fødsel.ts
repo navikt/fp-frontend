@@ -5,18 +5,15 @@ export const fødsel: Fødsel = {
     barn: [
       {
         fødselsdato: '2025-03-05',
-        dødsdato: null,
       },
     ],
     termindato: '2025-03-05',
-    utstedtdato: null,
     antallBarn: 1,
   },
   register: {
     barn: [
       {
         fødselsdato: '2025-03-05',
-        dødsdato: null,
       },
     ],
   },
@@ -30,13 +27,11 @@ export const fødsel: Fødsel = {
       kilde: 'SØKNAD',
       antall: 1,
     },
-    utstedtdato: null,
     barn: [
       {
         kilde: 'FOLKEREGISTER',
         barn: {
           fødselsdato: '2025-03-05',
-          dødsdato: null,
         },
         kanOverstyres: false,
       },
