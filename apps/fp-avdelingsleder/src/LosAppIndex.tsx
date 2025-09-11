@@ -11,14 +11,14 @@ import { HTTPError } from 'ky';
 
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
 
-import { ErrorType, type FpError } from './data/error/errorType';
-import { useRestApiError, useRestApiErrorDispatcher } from './data/error/RestApiErrorContext';
-import { initFetchOptions } from './data/fplosAvdelingslederApi';
 import { Dekorator } from './app/Dekorator';
 import { ErrorBoundary } from './app/ErrorBoundary';
 import { Home } from './app/Home';
+import { ErrorType, type FpError } from './data/error/errorType';
+import { useRestApiError, useRestApiErrorDispatcher } from './data/error/RestApiErrorContext';
+import { initFetchOptions } from './data/fplosAvdelingslederApi';
 
-import '../globalCss/global.module.css';
+import './globalCss/global.module.css';
 
 import messages from '../i18n/nb_NO.json';
 
