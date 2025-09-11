@@ -13,11 +13,10 @@ const intl = createIntl(messages);
 interface Props {
   verge: Verge | undefined;
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
-  submittable: boolean;
 }
 
-export const VergeFaktaIndex = ({ verge, alleKodeverk, submittable }: Props) => (
+export const VergeFaktaIndex = ({ verge, alleKodeverk }: Props) => (
   <RawIntlProvider value={intl}>
-    <RegistrereVergeInfoPanel verge={verge} alleKodeverk={alleKodeverk} submittable={submittable} />
+    <RegistrereVergeInfoPanel verge={verge} alleKodeverk={alleKodeverk} />
   </RawIntlProvider>
 );

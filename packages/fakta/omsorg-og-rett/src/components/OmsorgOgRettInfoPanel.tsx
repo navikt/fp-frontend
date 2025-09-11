@@ -14,13 +14,9 @@ import { AleneomsorgForm } from './forms/AleneomsorgForm';
 import { HarAnnenForelderRettForm } from './forms/HarAnnenForelderRettForm';
 import { RettighetstypeForm } from './forms/RettighetstypeForm.tsx';
 
-export const OmsorgOgRettInfoPanel = ({
-  personoversikt,
-  omsorgOgRett,
-  submittable,
-  kanOverstyre,
-}: OmsorgOgRettProps) => {
-  const { alleKodeverk, aksjonspunkterForPanel, isReadOnly, harÅpentAksjonspunkt } = usePanelDataContext();
+export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOverstyre }: OmsorgOgRettProps) => {
+  const { alleKodeverk, isSubmittable, aksjonspunkterForPanel, isReadOnly, harÅpentAksjonspunkt } =
+    usePanelDataContext();
 
   const aksjonspunkter = aksjonspunkterForPanel.filter(
     a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
@@ -71,7 +67,6 @@ export const OmsorgOgRettInfoPanel = ({
         <Box.New background="neutral-moderate" padding="5">
           <RettighetstypeForm
             omsorgOgRett={omsorgOgRett}
-            submittable={submittable}
             aksjonspunkt={overstyringAksjonspunkter[0]}
             kanOverstyre={kanOverstyre}
           />
@@ -85,20 +80,20 @@ export const OmsorgOgRettInfoPanel = ({
       {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
 
       {(opprettetAleneomsorgAPUtenResultat || aleneomsorgAPMedResultat) && (
-        <AleneomsorgForm omsorgOgRett={omsorgOgRett} submittable={submittable} aksjonspunkt={aksjonspunkter[0]} />
+        <AleneomsorgForm omsorgOgRett={omsorgOgRett} aksjonspunkt={aksjonspunkter[0]} isSubmittable={isSubmittable} />
       )}
       {(opprettetRettAPUtenResultat || rettAPMedResultat) && (
         <HarAnnenForelderRettForm
           omsorgOgRett={omsorgOgRett}
-          submittable={submittable}
+          isSubmittable={isSubmittable}
           aksjonspunkt={aksjonspunkter[0]}
         />
       )}
       {resultatUtenAp && søkerHarAleneomsorgResultat !== 'IKKE_RELEVANT' && (
-        <AleneomsorgForm omsorgOgRett={omsorgOgRett} submittable={false} />
+        <AleneomsorgForm omsorgOgRett={omsorgOgRett} isSubmittable={false} />
       )}
       {resultatUtenAp && søkerHarAleneomsorgResultat === 'IKKE_RELEVANT' && (
-        <HarAnnenForelderRettForm omsorgOgRett={omsorgOgRett} submittable={false} />
+        <HarAnnenForelderRettForm omsorgOgRett={omsorgOgRett} isSubmittable={false} />
       )}
     </VStack>
   );

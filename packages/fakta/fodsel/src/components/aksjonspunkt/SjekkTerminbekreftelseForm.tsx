@@ -37,15 +37,15 @@ type FormValues = {
   FaktaBegrunnelseFormValues;
 
 interface Props {
-  submittable: boolean;
   aksjonspunkt: Aksjonspunkt;
   fødsel: Fødsel;
 }
 
-export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, submittable, aksjonspunkt }: Props) => {
+export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkTerminbekreftelseAp>();
+  const { submitCallback, isSubmittable, alleMerknaderFraBeslutter, isReadOnly } =
+    usePanelDataContext<SjekkTerminbekreftelseAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -105,7 +105,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
 
           <FaktaBegrunnelseTextField
             control={formMethods.control}
-            isSubmittable={submittable}
+            isSubmittable={isSubmittable}
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
             size="medium"
@@ -120,7 +120,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, su
 
           {aksjonspunkt && !isReadOnly && (
             <FaktaSubmitButton
-              isSubmittable={submittable}
+              isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
