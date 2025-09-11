@@ -18,6 +18,7 @@ if (app === null) {
 }
 
 const environment = window.location.hostname;
+
 const isDevelopment = import.meta.env.MODE === 'development';
 
 if (!isDevelopment) {
