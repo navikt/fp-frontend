@@ -66,7 +66,6 @@ const buildInitialValues = (klageVurderingResultat?: KlageVurderingResultat): Kl
 interface Props {
   previewCallback: (data: KlagevurderingForhåndsvisData) => void;
   saveKlage: (data: TransformedValues) => void;
-  readOnlySubmitButton?: boolean;
   klageVurdering: KlageVurdering;
   alleAktuelleHjemler: string[];
 }
@@ -76,14 +75,9 @@ interface Props {
  *
  * Presentasjonskomponent. Setter opp aksjonspunktet for behandling av klage (NFP).
  */
-export const BehandleKlageFormNfp = ({
-  klageVurdering,
-  previewCallback,
-  saveKlage,
-  readOnlySubmitButton,
-  alleAktuelleHjemler,
-}: Props) => {
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<KlageVurderingResultatAp>();
+export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlage, alleAktuelleHjemler }: Props) => {
+  const { behandling, alleKodeverk, submitCallback, isReadOnly, isSubmittable } =
+    usePanelDataContext<KlageVurderingResultatAp>();
 
   const hjemmlerMedNavn = lagHjemlerMedNavn(alleKodeverk['KlageHjemmel'], lagHjemmelsKoder(alleAktuelleHjemler));
   const intl = useIntl();
@@ -116,7 +110,7 @@ export const BehandleKlageFormNfp = ({
         <Heading size="small" level="2">
           {intl.formatMessage({ id: 'Klage.ResolveKlage.Title' })}
         </Heading>
-        {!readOnlySubmitButton && (
+        {isSubmittable && (
           <AksjonspunktHelpTextHTML>
             <FormattedMessage id="Klage.ResolveKlage.HelpText" />
           </AksjonspunktHelpTextHTML>
@@ -144,7 +138,7 @@ export const BehandleKlageFormNfp = ({
                   lukkModal={lukkModal}
                   valgtHjemmel={hjemmlerMedNavn.find(hj => hj.kode === formValues.klageHjemmel)?.navn}
                   readOnly={isReadOnly}
-                  isSubmittable={!readOnlySubmitButton}
+                  isSubmittable={isSubmittable}
                   isSubmitting={formMethods.formState.isSubmitting}
                   isDirty={formMethods.formState.isValid}
                 />
@@ -153,7 +147,7 @@ export const BehandleKlageFormNfp = ({
             {formValues.klageVurdering !== klageVurderingType.STADFESTE_YTELSESVEDTAK && (
               <ProsessStegSubmitButtonNew
                 isReadOnly={isReadOnly}
-                isSubmittable={!readOnlySubmitButton}
+                isSubmittable={isSubmittable}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}
               />

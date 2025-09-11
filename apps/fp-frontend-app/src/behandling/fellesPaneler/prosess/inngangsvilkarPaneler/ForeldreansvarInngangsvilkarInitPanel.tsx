@@ -46,7 +46,6 @@ export const ForeldreansvarInngangsvilkarInitPanel = () => {
           v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
         )}
         status={standardPanelProps.status}
-        readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
       />
     </InngangsvilkarDefaultInitPanel>
   );

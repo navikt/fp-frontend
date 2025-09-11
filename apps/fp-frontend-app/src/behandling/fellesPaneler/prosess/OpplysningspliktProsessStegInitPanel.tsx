@@ -55,7 +55,6 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
         <SokersOpplysningspliktVilkarProsessIndex
           soknad={søknad}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
           status={standardPanelProps.status}
         />
       ) : (

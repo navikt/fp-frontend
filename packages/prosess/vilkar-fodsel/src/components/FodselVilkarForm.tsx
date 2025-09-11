@@ -28,7 +28,6 @@ interface Props {
   status: string;
   vilkår: Vilkar[];
   ytelseTypeKode: string;
-  readOnlySubmitButton: boolean;
 }
 
 /**
@@ -36,11 +35,12 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av Fødselsvilkåret.
  */
-export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode, vilkår }: Props) => {
+export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkår }: Props) => {
   const intl = useIntl();
 
   const {
     behandling,
+    isSubmittable,
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
@@ -76,7 +76,7 @@ export const FodselVilkarForm = ({ readOnlySubmitButton, status, ytelseTypeKode,
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'FodselVilkarForm.Fodsel' })}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
-        readOnlySubmitButton={readOnlySubmitButton}
+        isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
         lovReferanse={vilkår[0]?.lovReferanse ?? undefined}
         originalErVilkårOk={originalErVilkårOk}
