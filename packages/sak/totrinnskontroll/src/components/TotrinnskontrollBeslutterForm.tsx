@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
-import { ariaCheck } from '@navikt/ft-form-validators';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
@@ -172,7 +171,6 @@ export const TotrinnskontrollBeslutterForm = ({
               formMethods.formState.isSubmitting
             }
             loading={formMethods.formState.isSubmitting}
-            onClick={ariaCheck}
           >
             <FormattedMessage id="ToTrinnsForm.SendTilbake" />
           </Button>
