@@ -11,7 +11,7 @@ on:
         type: choice
         description: 'Applikasjon som skal deployes fra branch'
         options:
-          - fp-frontend
+          - fp-frontend-app
           - fp-avdelingsleder
 
 jobs:
@@ -44,3 +44,5 @@ jobs:
       branch: ${{ inputs.branch }}
       image: ${{ needs.build-app.outputs.build-version }}
       cluster: dev-gcp
+      image_suffix: '/${{ inputs.app }}'
+      deploy_context: '/${{ inputs.app }}'
