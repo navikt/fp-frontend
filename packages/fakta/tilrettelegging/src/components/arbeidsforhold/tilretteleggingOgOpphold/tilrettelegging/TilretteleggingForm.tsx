@@ -3,7 +3,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Button, HStack, Radio, Spacer, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfNumericField, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfNumericField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidDecimal, maxValue, minValue, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -225,7 +225,7 @@ export const TilretteleggingForm = ({
             ]}
             isReadOnly={readOnly}
           />
-          <RhfRadioGroupNew
+          <RhfRadioGroup
             name={`${index}.type`}
             control={formMethods.control}
             label={intl.formatMessage({ id: 'TilretteleggingForm.Tilretteleggingsbehov' })}
@@ -241,7 +241,7 @@ export const TilretteleggingForm = ({
             <Radio value="INGEN_TILRETTELEGGING" size="small">
               <FormattedMessage id="TilretteleggingForm.KanIkkeGjennomfores" />
             </Radio>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
           {formValues.type === 'DELVIS_TILRETTELEGGING' && (
             <>
               {(tilrettelegging.stillingsprosent === undefined ||

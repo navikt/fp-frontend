@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Button, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
@@ -56,10 +56,7 @@ export const AvklarFaresignalerForm = ({
   const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === FaresignalVurdering.INNVIRKNING;
 
   return (
-    <RhfForm
-      formMethods={formMethods}
-      onSubmit={(values: Values) => submitCallback && submitCallback(transformValues(values))}
-    >
+    <RhfForm formMethods={formMethods} onSubmit={(values: Values) => submitCallback?.(transformValues(values))}>
       <VStack gap="space-16">
         <RhfTextarea
           name={begrunnelseFieldName}
@@ -69,7 +66,7 @@ export const AvklarFaresignalerForm = ({
           maxLength={1500}
           readOnly={readOnly}
         />
-        <RhfRadioGroupNew
+        <RhfRadioGroup
           name={VURDERING_HOVEDKATEGORI}
           control={formMethods.control}
           label={<FormattedMessage id="Risikopanel.RhfForm.Resultat" />}
@@ -82,7 +79,7 @@ export const AvklarFaresignalerForm = ({
             </Radio>
             {harValgtReelle && (
               <ArrowBox alignOffset={20}>
-                <RhfRadioGroupNew
+                <RhfRadioGroup
                   name={IKKE_REELLE_VURDERINGER_UNDERKATEGORI}
                   control={formMethods.control}
                   validate={[required]}
@@ -93,7 +90,7 @@ export const AvklarFaresignalerForm = ({
                       {vurdering.navn}
                     </Radio>
                   ))}
-                </RhfRadioGroupNew>
+                </RhfRadioGroup>
               </ArrowBox>
             )}
           </VStack>
@@ -101,7 +98,7 @@ export const AvklarFaresignalerForm = ({
             {faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INGEN_INNVIRKNING)?.navn ??
               ''}
           </Radio>
-        </RhfRadioGroupNew>
+        </RhfRadioGroup>
         <div>
           <Button
             size="small"

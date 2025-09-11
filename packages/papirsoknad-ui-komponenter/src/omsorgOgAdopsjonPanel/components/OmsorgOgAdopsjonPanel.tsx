@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroupNew, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateBeforeOrEqualToToday,
   hasValidDate,
@@ -88,7 +88,7 @@ export const OmsorgOgAdopsjonPanel = ({
           />
         </Heading>
         {isForeldrepengerFagsak && familieHendelseType === FamilieHendelseType.ADOPSJON && (
-          <RhfRadioGroupNew
+          <RhfRadioGroup
             //@ts-expect-error Her er det noko rart med typane
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
             control={control}
@@ -104,7 +104,7 @@ export const OmsorgOgAdopsjonPanel = ({
                 <FormattedMessage id="Registrering.Adopsjon.Nei" />
               </Radio>
             </HStack>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
         )}
         <RhfDatepicker
           name={`${OMSORG_NAME_PREFIX}.omsorgsovertakelsesdato`}

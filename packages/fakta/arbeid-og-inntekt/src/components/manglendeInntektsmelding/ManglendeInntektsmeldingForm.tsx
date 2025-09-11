@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
@@ -95,7 +95,7 @@ export const ManglendeInntektsmeldingForm = ({
             </Alert>
           </div>
         )}
-        <RhfRadioGroupNew
+        <RhfRadioGroup
           name="saksbehandlersVurdering"
           control={formMethods.control}
           label={
@@ -148,7 +148,7 @@ export const ManglendeInntektsmeldingForm = ({
               <FormattedMessage id="InntektsmeldingInnhentesForm.GåVidere" />
             </Radio>
           </VStack>
-        </RhfRadioGroupNew>
+        </RhfRadioGroup>
         <RhfTextarea
           name="begrunnelse"
           control={formMethods.control}

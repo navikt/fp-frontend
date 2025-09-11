@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
@@ -71,7 +71,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
               </option>
             ))}
           />
-          <RhfRadioGroupNew name="ytelseType" control={formMethods.control}>
+          <RhfRadioGroup name="ytelseType" control={formMethods.control}>
             <HStack gap="space-16">
               <Radio value="FP" size="small">
                 {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'FP')}
@@ -86,7 +86,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
                 <FormattedMessage id="TilBehandlingPanel.Alle" />
               </Radio>
             </HStack>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
         </HStack>
         <TilBehandlingGraf
           height={height}

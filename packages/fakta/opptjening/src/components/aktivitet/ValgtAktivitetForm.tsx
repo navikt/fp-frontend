@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
@@ -199,7 +199,7 @@ export const ValgtAktivitetForm = ({
             ferdiglignetNæring={ferdiglignetNæring}
           />
           {!skalIkkeKunneEditere(harAksjonspunkt, erGodkjent, erEndret) && (
-            <RhfRadioGroupNew
+            <RhfRadioGroup
               name="erGodkjent"
               control={formMethods.control}
               hideLegend
@@ -215,7 +215,7 @@ export const ValgtAktivitetForm = ({
                   <FormattedMessage id="ActivityPanel.IkkeGodkjent" values={{ b: BTag }} />
                 </Radio>
               </HStack>
-            </RhfRadioGroupNew>
+            </RhfRadioGroup>
           )}
           <RhfTextarea
             name="begrunnelse"

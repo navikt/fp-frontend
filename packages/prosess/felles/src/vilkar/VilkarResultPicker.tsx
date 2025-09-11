@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form';
 
 import { CheckmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
@@ -70,14 +70,14 @@ export const VilkarResultPicker = ({
       )}
 
       {(!isReadOnly || erVilkårOk === undefined) && (
-        <RhfRadioGroupNew name="erVilkarOk" control={control} validate={radioValidators} isReadOnly={isReadOnly}>
+        <RhfRadioGroup name="erVilkarOk" control={control} validate={radioValidators} isReadOnly={isReadOnly}>
           <Radio value={true} size="small" disabled={!skalKunneInnvilge}>
             {customVilkårOppfyltText}
           </Radio>
           <Radio value={false} size="small">
             {customVilkårIkkeOppfyltText}
           </Radio>
-        </RhfRadioGroupNew>
+        </RhfRadioGroup>
       )}
       {erVilkårOk !== undefined && !erVilkårOk && avslagsårsaker && (
         <RhfSelect

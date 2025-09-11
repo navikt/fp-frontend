@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Box, Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { FamilieHendelseType } from '@navikt/fp-kodeverk';
@@ -58,7 +58,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
           </Heading>
 
           <HStack gap="20">
-            <RhfRadioGroupNew
+            <RhfRadioGroup
               name="fagsakYtelseType"
               control={formMethods.control}
               label={<FormattedMessage id="Registrering.Omsoknaden.soknadstype" />}
@@ -69,10 +69,10 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
                   {fyt.navn}
                 </Radio>
               ))}
-            </RhfRadioGroupNew>
+            </RhfRadioGroup>
 
             {selectedFagsakYtelseType !== 'SVP' && (
-              <RhfRadioGroupNew
+              <RhfRadioGroup
                 name="familieHendelseType"
                 control={formMethods.control}
                 label={<FormattedMessage id="Registrering.Omsoknaden.Tema" />}
@@ -85,10 +85,10 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
                       {bmt.navn}
                     </Radio>
                   ))}
-              </RhfRadioGroupNew>
+              </RhfRadioGroup>
             )}
 
-            <RhfRadioGroupNew
+            <RhfRadioGroup
               name="foreldreType"
               control={formMethods.control}
               label={<FormattedMessage id="Registrering.Omsoknaden.Soker" />}
@@ -99,7 +99,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
                   {ft.navn}
                 </Radio>
               ))}
-            </RhfRadioGroupNew>
+            </RhfRadioGroup>
           </HStack>
 
           <Box style={{ textAlign: 'end' }}>

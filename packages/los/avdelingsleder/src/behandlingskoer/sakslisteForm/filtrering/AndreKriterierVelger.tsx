@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfCheckbox, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -70,7 +70,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
           {values[akt.kode] && (
             <div className={styles.arrowbox}>
               <ArrowBox alignOffset={30}>
-                <RhfRadioGroupNew
+                <RhfRadioGroup
                   name={`${akt.kode}_inkluder`}
                   control={control}
                   onChange={skalInkludere =>
@@ -87,7 +87,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
                   <Radio value={false} size="small">
                     <FormattedMessage id="AndreKriterierVelger.Fjern" />
                   </Radio>
-                </RhfRadioGroupNew>
+                </RhfRadioGroup>
               </ArrowBox>
             </div>
           )}

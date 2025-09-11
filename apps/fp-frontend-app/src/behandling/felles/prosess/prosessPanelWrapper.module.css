@@ -7,11 +7,8 @@
 }
 
 :global(.dark) .steg {
-  box-shadow: -4px 1px 6px 1px var(--ax-bg-neutral-strong);
-}
-
-:global(.dark) .steg {
   border-top: 1px solid var(--ax-neutral-700);
+  box-shadow: -4px 1px 6px 1px var(--ax-bg-neutral-strong);
 }
 
 .steg.skalSkjulePanel {

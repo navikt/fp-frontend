@@ -2,7 +2,7 @@ import { useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Alert, Heading, HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfDatepicker, RhfRadioGroupNew, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfRadioGroup, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -83,7 +83,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
           <Heading size="small" level="3">
             {intl.formatMessage({ id: 'Registrering.TerminOgFodsel.Tittel' })}
           </Heading>
-          <RhfRadioGroupNew
+          <RhfRadioGroup
             name="erBarnetFodt"
             control={control}
             label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.ErBarnetFodt' })}
@@ -96,7 +96,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
             <Radio value={false} size="small">
               <FormattedMessage id="Registrering.TerminOgFodsel.ErIkkeFodt" />
             </Radio>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
           {erBarnetFodt !== undefined && (
             <VStack gap="space-16">
               {erBarnetFodt === false && (

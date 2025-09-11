@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { QuestionmarkDiamondIcon } from '@navikt/aksel-icons';
 import { BodyShort, HStack, Link, Radio, Tooltip, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew, RhfTextarea } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
@@ -58,7 +58,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
         maxLength={1500}
         readOnly={readOnly}
       />
-      <RhfRadioGroupNew
+      <RhfRadioGroup
         name="videreBehandling"
         control={control}
         label={<FormattedMessage id="Simulering.videreBehandling" />}
@@ -118,7 +118,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
             <FormattedMessage id="Simulering.avvent" />
           </Radio>
         </VStack>
-      </RhfRadioGroupNew>
+      </RhfRadioGroup>
     </VStack>
   );
 };

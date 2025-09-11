@@ -127,11 +127,11 @@ const CheckboxWithInfo = ({
   const { watch, control } = useFormContext<VirksomhetFormValues>();
   const valgteÅrsaker = watch(`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.varigEndretEllerStartetSisteFireArArsak`);
 
-  const [visPerioder, setVisPeriode] = useState(valgteÅrsaker.includes(value));
+  const [visPerioder, setVisPerioder] = useState(valgteÅrsaker.includes(value));
 
   return (
     <VStack gap="space-12">
-      <Checkbox value={value} onClick={() => setVisPeriode(!visPerioder)} disabled={readOnly}>
+      <Checkbox value={value} onClick={() => setVisPerioder(!visPerioder)} disabled={readOnly}>
         {label}
       </Checkbox>
       {visPerioder && (

@@ -2,7 +2,7 @@ import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { HStack, Label, Radio, VStack } from '@navikt/ds-react';
-import { RhfForm, RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
@@ -57,7 +57,7 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
           <FormattedMessage id="VentefristUtløperPanel.SattPaVent" />
         </Label>
         <HStack gap="space-16">
-          <RhfRadioGroupNew name="valgtYtelsetype" control={formMethods.control}>
+          <RhfRadioGroup name="valgtYtelsetype" control={formMethods.control}>
             <HStack gap="space-16">
               <Radio value="FP" size="small">
                 {finnFagsakYtelseTypeNavn(fagsakYtelseTyper, 'FP')}
@@ -72,7 +72,7 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
                 <FormattedMessage id="VentefristUtløperPanel.Alle" />
               </Radio>
             </HStack>
-          </RhfRadioGroupNew>
+          </RhfRadioGroup>
         </HStack>
         <VentefristUtløperGraf
           height={height}

@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, HStack, Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroupNew } from '@navikt/ft-form-hooks';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
@@ -44,7 +44,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
         <div>
           <hr className={styles.hr} />
         </div>
-        <RhfRadioGroupNew
+        <RhfRadioGroup
           name="ektefellesBarn"
           control={control}
           hideLegend
@@ -60,7 +60,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
               <FormattedMessage id="EktefelleFaktaForm.ErValg" />
             </Radio>
           </HStack>
-        </RhfRadioGroupNew>
+        </RhfRadioGroup>
       </VStack>
     </FaktaGruppe>
   );
