@@ -11,23 +11,23 @@ import { type Location } from 'history';
 import type { NavAnsatt } from '@navikt/fp-types';
 import { useTrackRouteParam } from '@navikt/fp-utils';
 
-import { EndreSakslisterPanel } from '../../behandlingskoer/EndreSakslisterPanel';
-import { IkkeTilgangTilAvdelingslederPanel } from '../../components/IkkeTilgangTilAvdelingslederPanel';
+import { EndreSakslisterPanel } from '../behandlingskoer/EndreSakslisterPanel';
+import { IkkeTilgangTilAvdelingslederPanel } from '../components/IkkeTilgangTilAvdelingslederPanel';
 import {
   avdelingerOptions,
   losKodeverkOptions,
   saksbehandlareForAvdelingOptions,
-} from '../../data/fplosAvdelingslederApi';
+} from '../data/fplosAvdelingslederApi';
 import {
   getValueFromLocalStorage,
   removeValueFromLocalStorage,
   setValueInLocalStorage,
-} from '../../data/localStorageHelper';
-import { GrupperPanel } from '../../grupper/GrupperPanel';
-import { NokkeltallPanel } from '../../nokkeltall/NokkeltallPanel';
-import { ReservasjonerTabell } from '../../reservasjoner/ReservasjonerTabell';
-import { SaksbehandlerePanel } from '../../saksbehandlere/SaksbehandlerePanel';
-import type { Avdeling } from '../../typer/avdelingTsType';
+} from '../data/localStorageHelper';
+import { GrupperPanel } from '../grupper/GrupperPanel';
+import { NokkeltallPanel } from '../nokkeltall/NokkeltallPanel';
+import { ReservasjonerTabell } from '../reservasjoner/ReservasjonerTabell';
+import { SaksbehandlerePanel } from '../saksbehandlere/SaksbehandlerePanel';
+import type { Avdeling } from '../typer/avdelingTsType';
 import { AvdelingslederPanels } from './avdelingslederPanels';
 
 import styles from './avdelingslederIndex.module.css';

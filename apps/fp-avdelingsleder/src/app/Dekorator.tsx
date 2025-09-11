@@ -9,8 +9,8 @@ import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-k
 import { DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
 import type { NavAnsatt } from '@navikt/fp-types';
 
-import { ErrorType, type FpError } from '../../data/error/errorType';
-import { useRestApiError, useRestApiErrorDispatcher } from '../../data/error/RestApiErrorContext';
+import { ErrorType, type FpError } from '../data/error/errorType';
+import { useRestApiError, useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 
 type QueryStrings = {
   errorcode?: string;
