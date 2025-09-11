@@ -23,8 +23,8 @@ jobs:
     with:
       runs-on: 'ubuntu-latest-8-cores'
       node-version: '22.17.1'
-      build-image: ${{ github.ref_name == 'master' }} # default: true
-      push-image: ${{ github.ref_name == 'master' }} # default: false
+      build-image: ${{ github.ref_name == 'los-app' }} # default: true
+      push-image: ${{ github.ref_name == 'los-app' }} # default: false
       run-knip: true
       app: fp-avdelingsleder
     secrets: inherit
@@ -33,7 +33,7 @@ jobs:
     name: Deploy dev
     permissions:
       id-token: write
-    if: github.ref_name == 'master'
+    if: github.ref_name == 'los-app'
     needs: build-app
     uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@main
     with:
