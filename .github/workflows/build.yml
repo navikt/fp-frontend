@@ -1,4 +1,5 @@
 name: Build app
+
 on:
   workflow_call:
     inputs:
