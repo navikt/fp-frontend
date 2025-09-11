@@ -9,6 +9,7 @@ on:
       - '.deploy/fp-avdelingsleder/**'
       - '.deploy/naiserator.yaml'
       - '.github/workflows/build-fp-avdelingsleder.yml'
+      - '.github/workflows/build.yml'
       - 'Dockerfile'
       - 'yarn.lock'
 
