@@ -33,17 +33,22 @@ const transformValues = (values: FormValues): AvklarVergeAp => ({
 interface Props {
   alleKodeverk: AlleKodeverk | AlleKodeverkTilbakekreving;
   verge: Verge | undefined;
-  submittable: boolean;
 }
 
 /**
  * TODO: fjern aksjonspunktet AVKLAR_VERGE når det ikke lenger er i bruk
  */
-export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: Props) => {
+export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, submitCallback, alleMerknaderFraBeslutter, harÅpentAksjonspunkt, isReadOnly } =
-    usePanelDataContext<AvklarVergeAp>();
+  const {
+    aksjonspunkterForPanel,
+    submitCallback,
+    isSubmittable,
+    alleMerknaderFraBeslutter,
+    harÅpentAksjonspunkt,
+    isReadOnly,
+  } = usePanelDataContext<AvklarVergeAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -84,12 +89,12 @@ export const RegistrereVergeInfoPanel = ({ submittable, verge, alleKodeverk }: P
             <>
               <FaktaBegrunnelseTextField
                 control={formMethods.control}
-                isSubmittable={submittable}
+                isSubmittable={isSubmittable}
                 isReadOnly={isReadOnly}
                 hasBegrunnelse={!!begrunnelse}
               />
               <FaktaSubmitButton
-                isSubmittable={submittable && !!valgtVergeType}
+                isSubmittable={isSubmittable && !!valgtVergeType}
                 isReadOnly={isReadOnly}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}

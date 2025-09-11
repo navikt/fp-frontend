@@ -63,7 +63,6 @@ interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
   status: string;
-  readOnlySubmitButton: boolean;
 }
 
 /**
@@ -71,15 +70,10 @@ interface Props {
  *
  * Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
-export const ErSoknadsfristVilkaretOppfyltForm = ({
-  readOnlySubmitButton,
-  soknad,
-  gjeldendeFamiliehendelse,
-  status,
-}: Props) => {
+export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehendelse, status }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, behandling, isReadOnly, submitCallback, alleKodeverk } =
+  const { isSubmittable, aksjonspunkterForPanel, behandling, isReadOnly, submitCallback, alleKodeverk } =
     usePanelDataContext<SoknadsfristAp>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, status);
@@ -175,7 +169,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({
         <ProsessStegBegrunnelseTextFieldNew readOnly={isReadOnly} />
         <ProsessStegSubmitButtonNew
           isReadOnly={isReadOnly}
-          isSubmittable={!readOnlySubmitButton}
+          isSubmittable={isSubmittable}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
         />

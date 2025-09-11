@@ -36,7 +36,6 @@ export const SvangerskapInngangsvilkarInitPanel = () => {
           <SvangerskapVilkarProsessIndex
             svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
             status={standardPanelProps.status}
-            readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
           />
         )}
         {!svangerskapspengerTilrettelegging && <LoadingPanel />}

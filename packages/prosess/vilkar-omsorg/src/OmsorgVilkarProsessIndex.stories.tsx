@@ -51,7 +51,6 @@ export const ÅpentAksjonspunkt: Story = {
         status: AksjonspunktStatus.OPPRETTET,
       },
     ],
-    readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
   },
 };
@@ -67,7 +66,7 @@ export const OppfyltVilkår: Story = {
       },
     ] as Aksjonspunkt[],
     isReadOnly: true,
-    readOnlySubmitButton: true,
+    isSubmittable: false,
     status: VilkarUtfallType.OPPFYLT,
   },
 };
@@ -91,7 +90,7 @@ export const AvslåttVilkår: Story = {
       },
     ],
     isReadOnly: true,
-    readOnlySubmitButton: true,
+    isSubmittable: false,
     status: VilkarUtfallType.IKKE_OPPFYLT,
   },
 };

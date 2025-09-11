@@ -66,7 +66,6 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     soknad: defaultSoknad,
-    submittable: true,
   },
   render: args => <MedlemskapFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof MedlemskapFaktaIndex>>;

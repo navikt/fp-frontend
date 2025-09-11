@@ -3,7 +3,6 @@ import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
-import type { BesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { BesteberegningResultatGrunnlagPanel } from './BesteberegningResultatGrunnlagPanel';
@@ -13,7 +12,6 @@ import { KontrollerBesteberegningPanel } from './KontrollerBesteberegningPanel';
 interface Props {
   beregningsgrunnlag: Beregningsgrunnlag;
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
-  submittable: boolean;
 }
 
 /**
@@ -21,8 +19,8 @@ interface Props {
  *
  * Container komponent. Holder paneler for resultat av besteberegning og inntektsgrunnlag
  */
-export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysninger, submittable }: Props) => {
-  const { alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly } = usePanelDataContext<BesteberegningAP>();
+export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysninger }: Props) => {
+  const { alleKodeverk, aksjonspunkterForPanel } = usePanelDataContext();
 
   const { ytelsesspesifiktGrunnlag, beregningsgrunnlagPeriode } = beregningsgrunnlag;
 
@@ -41,14 +39,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
   );
   return (
     <VStack gap="space-16">
-      {!!besteberegningAP && (
-        <KontrollerBesteberegningPanel
-          aksjonspunkt={besteberegningAP}
-          submitCallback={submitCallback}
-          submittable={submittable}
-          readOnly={isReadOnly}
-        />
-      )}
+      {!!besteberegningAP && <KontrollerBesteberegningPanel aksjonspunkt={besteberegningAP} />}
       <BorderBox>
         <BesteberegningResultatGrunnlagPanel
           periode={førstePeriode}

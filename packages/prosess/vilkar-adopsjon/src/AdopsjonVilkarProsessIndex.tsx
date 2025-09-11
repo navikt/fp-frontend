@@ -12,7 +12,6 @@ const intl = createIntl(messages);
 
 type Props = {
   status: string;
-  readOnlySubmitButton: boolean;
   vilkår: Vilkar[];
 };
 

@@ -64,7 +64,6 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
               soknad={søknad}
               familiehendelse={familiehendelse}
               status={standardPanelProps.status}
-              readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
             />
           )}
         </>

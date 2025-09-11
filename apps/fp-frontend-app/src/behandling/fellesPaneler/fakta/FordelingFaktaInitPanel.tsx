@@ -57,7 +57,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           readOnly={standardPanelProps.isReadOnly}
-          submittable={standardPanelProps.submittable}
+          submittable={standardPanelProps.isSubmittable}
         />
       ) : (
         <LoadingPanel />

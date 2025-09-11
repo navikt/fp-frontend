@@ -41,7 +41,6 @@ const meta = {
       relasjonsRolleType: RelasjonsRolleType.FAR,
     } as Fagsak,
     kanOverstyre: false,
-    submittable: true,
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,

@@ -152,7 +152,6 @@ interface Props {
   uttakKontrollerFaktaPerioder: KontrollerFaktaPeriode[];
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
-  submittable: boolean;
   kanOverstyre: boolean;
 }
 
@@ -161,13 +160,18 @@ export const UttakFaktaForm = ({
   arbeidsgiverOpplysningerPerId,
   faktaArbeidsforhold,
   ytelsefordeling,
-  submittable,
   kanOverstyre,
 }: Props) => {
   const intl = useIntl();
 
-  const { alleKodeverk, submitCallback, fagsak, aksjonspunkterForPanel, isReadOnly } =
-    usePanelDataContext<BekreftUttaksperioderAp[]>();
+  const {
+    alleKodeverk,
+    isSubmittable: submittable,
+    submitCallback,
+    fagsak,
+    aksjonspunkterForPanel,
+    isReadOnly,
+  } = usePanelDataContext<BekreftUttaksperioderAp[]>();
 
   const sortertListe = [...uttakKontrollerFaktaPerioder].sort((krav1, krav2) =>
     dayjs(krav1.fom).diff(dayjs(krav2.fom)),

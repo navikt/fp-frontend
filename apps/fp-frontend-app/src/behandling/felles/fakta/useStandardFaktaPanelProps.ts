@@ -18,7 +18,7 @@ export type StandardFaktaPanelProps = Readonly<{
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   aksjonspunkterForPanel: Aksjonspunkt[];
   isReadOnly: boolean;
-  submittable: boolean;
+  isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
   submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
 }>;
@@ -55,7 +55,7 @@ export const useStandardFaktaPanelProps = (
 
   return {
     behandling,
-    submittable: !aksjonspunkterForPanel.some(erAksjonspunktÅpent) || aksjonspunkterForPanel.some(ap => ap.kanLoses),
+    isSubmittable: !aksjonspunkterForPanel.some(erAksjonspunktÅpent) || aksjonspunkterForPanel.some(ap => ap.kanLoses),
     harÅpentAksjonspunkt: aksjonspunkterForPanel.some(ap => erAksjonspunktÅpent(ap) && ap.kanLoses),
     alleKodeverk,
     aksjonspunkterForPanel,

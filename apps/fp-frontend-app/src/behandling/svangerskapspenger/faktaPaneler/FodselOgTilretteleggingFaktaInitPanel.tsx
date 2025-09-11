@@ -48,7 +48,6 @@ export const FodselOgTilretteleggingFaktaInitPanel = ({ arbeidsgiverOpplysninger
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
           arbeidOgInntekt={arbeidOgInntekt}
           svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-          submittable={standardPanelProps.submittable}
           readonly={
             standardPanelProps.isReadOnly ||
             !AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))

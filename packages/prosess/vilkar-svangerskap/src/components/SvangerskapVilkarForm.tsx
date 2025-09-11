@@ -62,15 +62,15 @@ const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp 
 
 interface Props {
   status: string;
-  readOnlySubmitButton: boolean;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 }
 
-export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspengerTilrettelegging, status }: Props) => {
+export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, status }: Props) => {
   const {
     aksjonspunkterForPanel,
     alleMerknaderFraBeslutter,
     behandling,
+    isSubmittable,
     harÅpentAksjonspunkt,
     submitCallback,
     alleKodeverk,
@@ -113,7 +113,7 @@ export const SvangerskapVilkarForm = ({ readOnlySubmitButton, svangerskapspenger
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SvangerskapVilkarForm.Svangerskap' })}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
-        readOnlySubmitButton={readOnlySubmitButton}
+        isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}

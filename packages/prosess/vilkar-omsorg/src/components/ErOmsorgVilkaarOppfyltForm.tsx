@@ -26,7 +26,6 @@ type AksjonspunktData = Array<OmsorgsvilkarAp | VurdereYtelseSammeBarnSokerAp>;
 
 interface Props {
   status: string;
-  readOnlySubmitButton: boolean;
 }
 
 /**
@@ -34,7 +33,7 @@ interface Props {
  *
  * Setter opp aksjonspunkter for avklaring av omsorgsvilkåret.
  */
-export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Props) => {
+export const ErOmsorgVilkaarOppfyltForm = ({ status }: Props) => {
   const intl = useIntl();
 
   const {
@@ -45,6 +44,7 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
     isReadOnly,
     alleMerknaderFraBeslutter,
     harÅpentAksjonspunkt,
+    isSubmittable,
   } = usePanelDataContext<AksjonspunktData>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
@@ -70,8 +70,8 @@ export const ErOmsorgVilkaarOppfyltForm = ({ readOnlySubmitButton, status }: Pro
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'ErOmsorgVilkaarOppfyltForm.Omsorg' })}
-        harÅpentAksjonspunkt={!readOnlySubmitButton}
-        readOnlySubmitButton={readOnlySubmitButton}
+        harÅpentAksjonspunkt={isSubmittable}
+        isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}

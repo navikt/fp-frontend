@@ -45,7 +45,6 @@ export const BesteberegningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: 
         <BesteberegningFaktaIndex
           arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId}
           beregningsgrunnlag={beregningsgrunnlag}
-          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

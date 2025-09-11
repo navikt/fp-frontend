@@ -92,7 +92,6 @@ const meta = {
   component: OmsorgFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    submittable: true,
     ytelsefordeling,
   },
   render: args => <OmsorgFaktaIndex {...args} />,

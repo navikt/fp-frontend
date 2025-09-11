@@ -15,16 +15,9 @@ interface Props {
   soknad: Soknad;
   personoversikt: Personoversikt;
   inntektArbeidYtelse: InntektArbeidYtelse;
-  submittable: boolean;
 }
 
-export const OmsorgOgForeldreansvarFaktaIndex = ({
-  adopsjon,
-  soknad,
-  personoversikt,
-  inntektArbeidYtelse,
-  submittable,
-}: Props) => (
+export const OmsorgOgForeldreansvarFaktaIndex = ({ adopsjon, soknad, personoversikt, inntektArbeidYtelse }: Props) => (
   <RawIntlProvider value={intl}>
     <OmsorgOgForeldreansvarInfoPanel
       adopsjon={adopsjon}
@@ -33,7 +26,6 @@ export const OmsorgOgForeldreansvarFaktaIndex = ({
       innvilgetRelatertTilgrensendeYtelserForAnnenForelder={
         inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder
       }
-      submittable={submittable}
     />
   </RawIntlProvider>
 );

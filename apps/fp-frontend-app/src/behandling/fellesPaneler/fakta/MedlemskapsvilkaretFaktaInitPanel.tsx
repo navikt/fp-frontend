@@ -37,11 +37,7 @@ export const MedlemskapsvilkaretFaktaInitPanel = () => {
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Medlemskap' })}
       skalPanelVisesIMeny={behandling.harSøknad}
     >
-      {medlemskap && søknad ? (
-        <MedlemskapFaktaIndex medlemskap={medlemskap} soknad={søknad} submittable={standardPanelProps.submittable} />
-      ) : (
-        <LoadingPanel />
-      )}
+      {medlemskap && søknad ? <MedlemskapFaktaIndex medlemskap={medlemskap} soknad={søknad} /> : <LoadingPanel />}
     </FaktaDefaultInitPanel>
   );
 };

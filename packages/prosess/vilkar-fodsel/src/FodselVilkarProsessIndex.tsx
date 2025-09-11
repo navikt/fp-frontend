@@ -13,7 +13,6 @@ const intl = createIntl(messages);
 interface Props {
   ytelseTypeKode: string;
   status: string;
-  readOnlySubmitButton: boolean;
   vilkår: Vilkar[];
 }
 

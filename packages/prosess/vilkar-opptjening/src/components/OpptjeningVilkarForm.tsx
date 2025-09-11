@@ -8,7 +8,6 @@ interface Props {
   fastsattOpptjening: FastsattOpptjening;
   status: string;
   lovReferanse?: string;
-  readOnlySubmitButton: boolean;
   erSvpFagsak: boolean;
 }
 
@@ -17,19 +16,12 @@ interface Props {
  *
  * Presentasjonskomponent. Viser resultatet av opptjeningsvilkåret.
  */
-export const OpptjeningVilkarForm = ({
-  fastsattOpptjening,
-  status,
-  lovReferanse,
-  readOnlySubmitButton,
-  erSvpFagsak,
-}: Props) => {
+export const OpptjeningVilkarForm = ({ fastsattOpptjening, status, lovReferanse, erSvpFagsak }: Props) => {
   const { aksjonspunkterForPanel } = usePanelDataContext();
 
   if (aksjonspunkterForPanel.length > 0) {
     return (
       <OpptjeningVilkarAksjonspunktPanel
-        readOnlySubmitButton={readOnlySubmitButton}
         status={status}
         lovReferanse={lovReferanse}
         fastsattOpptjening={fastsattOpptjening}

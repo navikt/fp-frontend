@@ -20,7 +20,6 @@ import { InfoBox } from '../InfoBox';
 import { MedlemskapVurderinger } from './MedlemskapVurderinger';
 
 interface Props {
-  submittable: boolean;
   aksjonspunkt: Aksjonspunkt;
   manuellBehandlingResultat: ManuellBehandlingResultat | null;
 }
@@ -52,8 +51,8 @@ const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isRead
  *
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
-export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, manuellBehandlingResultat }: Props) => {
-  const { fagsak, behandling, submitCallback, isReadOnly, alleKodeverk } = usePanelDataContext<
+export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandlingResultat }: Props) => {
+  const { fagsak, behandling, submitCallback, isReadOnly, isSubmittable, alleKodeverk } = usePanelDataContext<
     VurderMedlemskapAp | VurderForutgaendeMedlemskapAp
   >();
 
@@ -98,7 +97,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ submittable, aksjonspunkt, ma
             control={formMethods.control}
             hasReadOnlyLabel
             isReadOnly={isReadOnly}
-            isSubmittable={submittable}
+            isSubmittable={isSubmittable}
             hasBegrunnelse={!!begrunnelseVerdi}
           />
           {!isReadOnly && (

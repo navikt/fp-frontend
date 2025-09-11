@@ -13,19 +13,10 @@ const intl = createIntl(messages);
 interface Props {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   status: string;
-  readOnlySubmitButton: boolean;
 }
 
-export const SvangerskapVilkarProsessIndex = ({
-  status,
-  readOnlySubmitButton,
-  svangerskapspengerTilrettelegging,
-}: Props) => (
+export const SvangerskapVilkarProsessIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <SvangerskapVilkarForm
-      status={status}
-      readOnlySubmitButton={readOnlySubmitButton}
-      svangerskapspengerTilrettelegging={svangerskapspengerTilrettelegging}
-    />
+    <SvangerskapVilkarForm {...props} />
   </RawIntlProvider>
 );

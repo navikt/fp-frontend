@@ -28,7 +28,6 @@ interface Props {
   omsorgOgRett: OmsorgOgRett;
   aksjonspunkt?: Aksjonspunkt;
   kanOverstyre: boolean;
-  submittable: boolean;
 }
 
 const RETTIGHETSTYPER = {
@@ -40,8 +39,9 @@ const RETTIGHETSTYPER = {
   BARE_FAR_RETT_MOR_UFØR: 'Rettighetstype.BareFarRettMorUfør',
 } satisfies Record<foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype, string>;
 
-export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, kanOverstyre }: Props) => {
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<OverstyringRettigheterAp>();
+export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }: Props) => {
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
+    usePanelDataContext<OverstyringRettigheterAp>();
 
   const rettighetstype = omsorgOgRett.rettighetstype ?? undefined;
 
@@ -93,13 +93,13 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, submittable, ka
 
           <FaktaBegrunnelseTextField
             control={formMethods.control}
-            isSubmittable={submittable}
+            isSubmittable={isSubmittable}
             isReadOnly={readOnly}
             hasBegrunnelse={true}
             hasVurderingText
           />
           <FaktaSubmitButton
-            isSubmittable={submittable}
+            isSubmittable={isSubmittable}
             isReadOnly={readOnly}
             isSubmitting={formMethods.formState.isSubmitting}
             isDirty={formMethods.formState.isDirty}

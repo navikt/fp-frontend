@@ -11,7 +11,7 @@ import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-f
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData } from '@navikt/fp-utils';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './innhentDokOpptjeningUtlandPanel.module.css';
 
@@ -26,25 +26,15 @@ type FormValues = {
 };
 
 interface Props {
-  readOnly: boolean;
-  harÅpentAksjonspunkt: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  submittable: boolean;
-  submitCallback: (data: MerkOpptjeningUtlandAp) => Promise<void>;
   aksjonspunkt: Aksjonspunkt;
   dokStatus?: string;
 }
 
-export const InnhentDokOpptjeningUtlandPanel = ({
-  readOnly,
-  harÅpentAksjonspunkt,
-  aksjonspunkt,
-  alleMerknaderFraBeslutter,
-  submittable,
-  submitCallback,
-  dokStatus,
-}: Props) => {
+export const InnhentDokOpptjeningUtlandPanel = ({ aksjonspunkt, dokStatus }: Props) => {
   const intl = useIntl();
+
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, harÅpentAksjonspunkt, isSubmittable } =
+    usePanelDataContext<MerkOpptjeningUtlandAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -78,7 +68,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({
               control={formMethods.control}
               label={<FormattedMessage id="InnhentDokOpptjeningUtlandPanel.InnhentelseDok" />}
               validate={[required]}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
             >
               <Radio value={OpptjeningIUtlandDokStatus.DOKUMENTASJON_VIL_BLI_INNHENTET} size="small">
                 <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.Innhentes" />
@@ -89,16 +79,16 @@ export const InnhentDokOpptjeningUtlandPanel = ({
             </RhfRadioGroup>
             <FaktaBegrunnelseTextField
               control={formMethods.control}
-              isSubmittable={submittable}
-              isReadOnly={readOnly}
+              isSubmittable={isSubmittable}
+              isReadOnly={isReadOnly}
               hasBegrunnelse={!!begrunnelse}
               label={intl.formatMessage({ id: 'InnhentDokOpptjeningUtlandPanel.Begrunnelse' })}
             />
             <FaktaSubmitButton
-              isSubmittable={submittable}
+              isSubmittable={isSubmittable}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
             />
           </VStack>
         </AksjonspunktBox>

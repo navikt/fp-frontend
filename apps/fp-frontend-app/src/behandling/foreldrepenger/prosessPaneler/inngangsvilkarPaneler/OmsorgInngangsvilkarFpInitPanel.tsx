@@ -22,10 +22,7 @@ export const OmsorgInngangsvilkarFpInitPanel = () => {
       inngangsvilkårPanelKode="OMSORG"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
     >
-      <OmsorgVilkarProsessIndex
-        status={standardPanelProps.status}
-        readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-      />
+      <OmsorgVilkarProsessIndex status={standardPanelProps.status} />
     </InngangsvilkarDefaultInitPanel>
   );
 };

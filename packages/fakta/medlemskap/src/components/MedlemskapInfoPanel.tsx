@@ -19,7 +19,6 @@ import { SituasjonOversikt } from './situasjon/SituasjonOversikt';
 interface Props {
   medlemskap: Medlemskap;
   soknad: Soknad;
-  submittable: boolean;
 }
 
 /**
@@ -27,7 +26,7 @@ interface Props {
  *
  * Har ansvar for å vise faktapanelene for medlemskap.
  */
-export const MedlemskapInfoPanel = ({ medlemskap, soknad, submittable }: Props) => {
+export const MedlemskapInfoPanel = ({ medlemskap, soknad }: Props) => {
   const { aksjonspunkterForPanel, alleKodeverk, fagsak, isReadOnly } = usePanelDataContext();
 
   const aksjonspunkt = aksjonspunkterForPanel.find(
@@ -41,7 +40,6 @@ export const MedlemskapInfoPanel = ({ medlemskap, soknad, submittable }: Props) 
         <AksjonspunktHelpText aksjonspunkter={aksjonspunkterForPanel} medlemskap={medlemskap} />
         {medlemskap.manuellBehandlingResultat && isReadOnly && aksjonspunkt && (
           <VurderMedlemskapAksjonspunktForm
-            submittable={submittable}
             manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
             aksjonspunkt={aksjonspunkt}
           />
@@ -90,7 +88,6 @@ export const MedlemskapInfoPanel = ({ medlemskap, soknad, submittable }: Props) 
           <VurderMedlemskapAksjonspunktForm
             manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
             aksjonspunkt={aksjonspunkt}
-            submittable={submittable}
           />
         )}
       </VStack>

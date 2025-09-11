@@ -12,15 +12,10 @@ const intl = createIntl(messages);
 
 interface Props {
   soknad: Soknad;
-  readOnlySubmitButton: boolean;
 }
 
-export const VurderSoknadsfristForeldrepengerIndex = ({ soknad, readOnlySubmitButton }: Props) => (
+export const VurderSoknadsfristForeldrepengerIndex = ({ soknad }: Props) => (
   <RawIntlProvider value={intl}>
-    <VurderSoknadsfristForeldrepengerForm
-      mottattDato={soknad.mottattDato}
-      søknadsfrist={soknad.søknadsfrist}
-      readOnlySubmitButton={readOnlySubmitButton}
-    />
+    <VurderSoknadsfristForeldrepengerForm mottattDato={soknad.mottattDato} søknadsfrist={soknad.søknadsfrist} />
   </RawIntlProvider>
 );

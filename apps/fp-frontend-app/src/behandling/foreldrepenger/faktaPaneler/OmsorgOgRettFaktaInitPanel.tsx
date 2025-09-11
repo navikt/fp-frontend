@@ -46,7 +46,6 @@ export const OmsorgOgRettFaktaInitPanel = ({ personoversikt }: Props) => {
         <OmsorgOgRettFaktaIndex
           omsorgOgRett={omsorgOgRett}
           personoversikt={personoversikt}
-          submittable={standardPanelProps.submittable}
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled}
         />
       ) : (

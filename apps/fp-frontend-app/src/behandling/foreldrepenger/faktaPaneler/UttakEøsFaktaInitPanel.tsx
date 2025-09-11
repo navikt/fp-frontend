@@ -41,7 +41,6 @@ export const UttakEøsFaktaInitPanel = () => {
         <UttakFaktaEøsIndex
           kanOverstyre={rettigheter.kanOverstyreAccess.isEnabled && behandling.harSattEndringsdato}
           annenForelderUttakEøs={annenForelderUttakEøs}
-          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

@@ -10,7 +10,6 @@ const intl = createIntl(messages);
 
 interface Props {
   status: string;
-  readOnlySubmitButton: boolean;
 }
 
 export const OmsorgVilkarProsessIndex = (props: Props) => (

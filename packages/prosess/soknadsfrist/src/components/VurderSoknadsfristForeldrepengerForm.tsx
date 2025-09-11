@@ -48,7 +48,6 @@ const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
 interface Props {
   mottattDato: string;
   søknadsfrist?: Søknadsfrist;
-  readOnlySubmitButton: boolean;
 }
 
 /**
@@ -56,8 +55,8 @@ interface Props {
  *
  * Setter opp aksjonspunktet for vurdering av søknadsfristvilkåret.
  */
-export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mottattDato, søknadsfrist }: Props) => {
-  const { aksjonspunkterForPanel, isReadOnly, submitCallback, harÅpentAksjonspunkt } =
+export const VurderSoknadsfristForeldrepengerForm = ({ mottattDato, søknadsfrist }: Props) => {
+  const { aksjonspunkterForPanel, isReadOnly, submitCallback, isSubmittable, harÅpentAksjonspunkt } =
     usePanelDataContext<VurderSoknadsfristAp>();
 
   const initialValues = buildInitialValues(aksjonspunkterForPanel, mottattDato, søknadsfrist);
@@ -161,7 +160,7 @@ export const VurderSoknadsfristForeldrepengerForm = ({ readOnlySubmitButton, mot
             </VStack>
             <ProsessStegSubmitButtonNew
               isReadOnly={isReadOnly}
-              isSubmittable={!readOnlySubmitButton}
+              isSubmittable={isSubmittable}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />

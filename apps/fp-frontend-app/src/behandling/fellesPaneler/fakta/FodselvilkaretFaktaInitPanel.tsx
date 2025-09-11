@@ -44,11 +44,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {faktafødsel ? (
-        <FodselFaktaIndex
-          fødsel={faktafødsel}
-          terminbekreftelseDokument={terminbekreftelseDokument}
-          submittable={standardPanelProps.submittable}
-        />
+        <FodselFaktaIndex fødsel={faktafødsel} terminbekreftelseDokument={terminbekreftelseDokument} />
       ) : (
         <LoadingPanel />
       )}

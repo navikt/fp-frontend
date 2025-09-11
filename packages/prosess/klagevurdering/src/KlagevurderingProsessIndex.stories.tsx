@@ -22,7 +22,6 @@ const meta = {
   args: {
     saveKlage: action('button-click') as (data: TransformedValues) => Promise<void>,
     previewCallback: action('button-click') as (data: KlagevurderingForhåndsvisData) => Promise<void>,
-    readOnlySubmitButton: false,
   },
   render: props => {
     return <KlagevurderingProsessIndex {...props} />;

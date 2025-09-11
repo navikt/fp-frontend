@@ -62,7 +62,6 @@ interface Props {
   personoversikt: Personoversikt;
   adopsjon: AdopsjonFamilieHendelse;
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
-  submittable: boolean;
 }
 
 /**
@@ -71,7 +70,6 @@ interface Props {
  * Har ansvar for å sette opp form for faktapenelet til Omsorgsvilkåret.
  */
 export const OmsorgOgForeldreansvarInfoPanel = ({
-  submittable,
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
   soknad,
   adopsjon,
@@ -84,6 +82,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
     alleMerknaderFraBeslutter,
     harÅpentAksjonspunkt,
     submitCallback,
+    isSubmittable,
     isReadOnly,
     alleKodeverk,
   } = usePanelDataContext<
@@ -135,7 +134,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
         />
         <FaktaBegrunnelseTextField
           control={formMethods.control}
-          isSubmittable={submittable}
+          isSubmittable={isSubmittable}
           isReadOnly={isReadOnly}
           hasBegrunnelse={!!begrunnelse}
           label={intl.formatMessage({
@@ -145,7 +144,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           })}
         />
         <FaktaSubmitButton
-          isSubmittable={submittable}
+          isSubmittable={isSubmittable}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
           isReadOnly={isReadOnly}

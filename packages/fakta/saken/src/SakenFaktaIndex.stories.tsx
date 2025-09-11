@@ -48,7 +48,6 @@ const meta = {
   component: SakenFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    submittable: true,
     soknad: defaultSøknad,
     kanOverstyreAccess: true,
   },

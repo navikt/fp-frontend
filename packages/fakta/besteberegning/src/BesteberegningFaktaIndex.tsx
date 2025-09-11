@@ -13,7 +13,6 @@ const intl = createIntl(messages);
 interface Props {
   beregningsgrunnlag: Beregningsgrunnlag;
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
-  submittable: boolean;
 }
 
 export const BesteberegningFaktaIndex = (props: Props) => (

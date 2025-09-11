@@ -96,7 +96,6 @@ type AksjonspunktData =
   | BekreftMannAdoptererAksjonspunktAp;
 
 interface Props {
-  submittable: boolean;
   isForeldrepengerFagsak: boolean;
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
   adopsjon: AdopsjonFamilieHendelse;
@@ -107,7 +106,7 @@ interface Props {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Adopsjonsvilkåret.
  */
-export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad, adopsjon }: Props) => {
+export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: Props) => {
   const {
     alleKodeverk,
     submitCallback,
@@ -115,6 +114,7 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
     harÅpentAksjonspunkt,
     alleMerknaderFraBeslutter,
     isReadOnly,
+    isSubmittable,
   } = usePanelDataContext<AksjonspunktData[]>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
@@ -169,12 +169,12 @@ export const AdopsjonInfoPanel = ({ submittable, isForeldrepengerFagsak, soknad,
             <>
               <FaktaBegrunnelseTextField
                 control={formMethods.control}
-                isSubmittable={submittable}
+                isSubmittable={isSubmittable}
                 isReadOnly={isReadOnly}
                 hasBegrunnelse={!!begrunnelse}
               />
               <FaktaSubmitButton
-                isSubmittable={submittable}
+                isSubmittable={isSubmittable}
                 isReadOnly={isReadOnly}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={formMethods.formState.isDirty}

@@ -17,18 +17,14 @@ type FormValues = ErBarnFødtFormValues & FaktaBegrunnelseFormValues;
 
 interface Props {
   fødsel: Fødsel;
-  submittable: boolean;
   aksjonspunkt: Aksjonspunkt;
 }
 
-export const SjekkManglendeFødselForm = ({
-  submittable,
-  aksjonspunkt,
-  fødsel: { gjeldende, søknad, register },
-}: Props) => {
+export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, søknad, register } }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFødselAp>();
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
+    usePanelDataContext<SjekkManglendeFødselAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
   const dokumentasjonForeliggerIsEdited = gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER');
@@ -73,7 +69,7 @@ export const SjekkManglendeFødselForm = ({
           />
           <FaktaBegrunnelseTextField
             control={formMethods.control}
-            isSubmittable={submittable}
+            isSubmittable={isSubmittable}
             isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
             size="medium"
@@ -82,7 +78,7 @@ export const SjekkManglendeFødselForm = ({
 
           {aksjonspunkt && !isReadOnly && (
             <FaktaSubmitButton
-              isSubmittable={submittable}
+              isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}

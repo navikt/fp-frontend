@@ -91,7 +91,6 @@ const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
 interface Props {
   innsyn?: Innsyn;
   alleDokumenter?: Dokument[];
-  readOnlySubmitButton: boolean;
 }
 
 /**
@@ -99,10 +98,10 @@ interface Props {
  *
  * Viser panelet som håndterer avklaring av innsyn.
  */
-export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }: Props) => {
+export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
   const intl = useIntl();
 
-  const { fagsak, alleKodeverk, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
+  const { fagsak, alleKodeverk, isSubmittable, aksjonspunkterForPanel, submitCallback, isReadOnly, behandling } =
     usePanelDataContext<VurderInnsynAp>();
 
   const defaultValues = getDefaultValues(aksjonspunkterForPanel, behandling.fristBehandlingPåVent, innsyn);
@@ -207,7 +206,7 @@ export const InnsynForm = ({ innsyn, readOnlySubmitButton, alleDokumenter = [] }
         </VStack>
         <ProsessStegSubmitButtonNew
           isReadOnly={isReadOnly}
-          isSubmittable={!readOnlySubmitButton}
+          isSubmittable={isSubmittable}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}
           text={sattPaVent ? intl.formatMessage({ id: 'SubmitButton.SettPåVent' }) : undefined}

@@ -18,6 +18,7 @@ export type PanelDataArgs = {
   isReadOnly?: boolean;
   submitCallback?: (data: AksjonspunktType) => Promise<void>;
   alleMerknaderFraBeslutter?: { [key: string]: { notAccepted?: boolean } };
+  isSubmittable?: boolean;
 };
 
 const promiseAction =
@@ -49,8 +50,15 @@ const DEFAULT_FAGSAK = {
 } as Fagsak;
 
 export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) => {
-  const { fagsak, behandling, aksjonspunkterForPanel, isReadOnly, submitCallback, alleMerknaderFraBeslutter } =
-    context.args as PanelDataArgs;
+  const {
+    fagsak,
+    behandling,
+    aksjonspunkterForPanel,
+    isReadOnly,
+    submitCallback,
+    alleMerknaderFraBeslutter,
+    isSubmittable,
+  } = context.args as PanelDataArgs;
 
   const aksjonspunkter = aksjonspunkterForPanel ?? [];
 
@@ -64,6 +72,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter ?? {}}
       isReadOnly={isReadOnly ?? false}
       submitCallback={submitCallback ?? promiseAction()}
+      isSubmittable={isSubmittable ?? true}
     >
       <Story />
     </PanelDataProvider>

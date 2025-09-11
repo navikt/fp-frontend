@@ -13,7 +13,6 @@ const intl = createIntl(messages);
 interface Props {
   innsyn?: Innsyn;
   alleDokumenter?: Dokument[];
-  readOnlySubmitButton: boolean;
 }
 
 export const InnsynProsessIndex = (props: Props) => (

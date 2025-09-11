@@ -8,8 +8,9 @@ import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
 import { AksjonspunktKode, AksjonspunktStatus, NavBrukerKjonn } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ManIcon } from '../../icons/Man';
 import { UnknownIcon } from '../../icons/Unknown';
@@ -34,21 +35,12 @@ type FormValues = {
 
 interface Props {
   søknad: Soknad;
-  fagsak: Fagsak;
   aksjonspunkt: Aksjonspunkt;
-  submitCallback: (data: AvklarDekningsgradAp) => Promise<void>;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  readOnly: boolean;
 }
 
-export const DekningradApForm = ({
-  søknad,
-  fagsak,
-  aksjonspunkt,
-  submitCallback,
-  readOnly,
-  alleMerknaderFraBeslutter,
-}: Props) => {
+export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
+  const { submitCallback, alleMerknaderFraBeslutter, fagsak, isReadOnly } = usePanelDataContext<AvklarDekningsgradAp>();
+
   const formMethods = useForm<FormValues>({
     defaultValues: {
       dekningsgrad: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ?? undefined,
@@ -134,7 +126,7 @@ export const DekningradApForm = ({
               control={formMethods.control}
               label={<FormattedMessage id="DekningradApForm.HvilkenDekningsgrad" />}
               validate={[required]}
-              isReadOnly={readOnly}
+              isReadOnly={isReadOnly}
             >
               <Radio value={80} size="small">
                 <FormattedMessage id="DekningradApForm.80" />
@@ -149,13 +141,13 @@ export const DekningradApForm = ({
               label={<FormattedMessage id="DekningradApForm.Begrunnelse" />}
               validate={[required, minLength3, maxLength1500, hasValidText]}
               maxLength={1500}
-              readOnly={readOnly}
+              readOnly={isReadOnly}
             />
             <div>
               <Button
                 variant="primary"
                 size="small"
-                disabled={readOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+                disabled={isReadOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
                 loading={formMethods.formState.isSubmitting}
               >
                 <FormattedMessage id="DekningradApForm.Bekreft" />

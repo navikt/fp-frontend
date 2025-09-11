@@ -15,13 +15,17 @@ import { UttakDokumentasjonFaktaTable } from './UttakDokumentasjonFaktaTable/Utt
 
 interface Props {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
-  submittable: boolean;
 }
 
-export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov, submittable }: Props) => {
+export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Props) => {
   const intl = useIntl();
 
-  const { submitCallback, aksjonspunkterForPanel, isReadOnly } = usePanelDataContext<VurderDokumentasjonAp>();
+  const {
+    submitCallback,
+    aksjonspunkterForPanel,
+    isReadOnly,
+    isSubmittable: submittable,
+  } = usePanelDataContext<VurderDokumentasjonAp>();
 
   const readOnly = isReadOnly || aksjonspunkterForPanel.length === 0;
 

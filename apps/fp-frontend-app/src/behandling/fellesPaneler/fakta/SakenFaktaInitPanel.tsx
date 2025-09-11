@@ -48,7 +48,6 @@ export const SakenFaktaInitPanel = () => {
       <SakenFaktaIndex
         soknad={søknad}
         utlandDokStatus={utlandDokStatus}
-        submittable={standardPanelProps.submittable}
         kanOverstyreAccess={rettigheter.kanOverstyreAccess.isEnabled}
       />
     </FaktaDefaultInitPanel>

@@ -14,7 +14,6 @@ const intl = createIntl(messages);
 interface Props {
   fødsel: Fødsel;
   terminbekreftelseDokument: DokumentLinkReferanse | undefined;
-  submittable: boolean;
 }
 
 export const FodselFaktaIndex = (props: Props) => (

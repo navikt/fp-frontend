@@ -52,7 +52,6 @@ const meta = {
   args: {
     arbeidsgiverOpplysningerPerId,
     kanOverstyre: false,
-    submittable: true,
     faktaArbeidsforhold: [
       {
         arbeidsgiverReferanse: '910909088',

@@ -25,10 +25,7 @@ export const OmsorgInngangsvilkarInitPanel = () => {
       inngangsvilkårPanelKode="OMSORG"
       hentInngangsvilkårPanelTekst={hentAksjonspunktTekst(intl, standardPanelProps.aksjonspunkterForPanel)}
     >
-      <OmsorgVilkarProsessIndex
-        readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-        status={standardPanelProps.status}
-      />
+      <OmsorgVilkarProsessIndex status={standardPanelProps.status} />
     </InngangsvilkarDefaultInitPanel>
   );
 };

@@ -55,7 +55,6 @@ export const UttakFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props) =>
           uttakKontrollerFaktaPerioder={uttakKontrollerFaktaPerioder}
           ytelsefordeling={ytelsefordeling}
           faktaArbeidsforhold={faktaArbeidsforhold}
-          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

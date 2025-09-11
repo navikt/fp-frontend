@@ -36,7 +36,6 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
       },
     ] as Aksjonspunkt[],
     isReadOnly: false,
-    readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
   },
 };
@@ -50,7 +49,6 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
         begrunnelse: null,
       },
     ] as Aksjonspunkt[],
-    readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
     svangerskapspengerTilrettelegging: {
       arbeidsforholdListe: [
@@ -76,7 +74,7 @@ export const OppfyltVilkår: Story = {
       },
     ] as Aksjonspunkt[],
     isReadOnly: true,
-    readOnlySubmitButton: true,
+    isSubmittable: false,
     status: VilkarUtfallType.OPPFYLT,
   },
 };
@@ -98,7 +96,7 @@ export const AvslåttVilkår: Story = {
       },
     ] as Aksjonspunkt[],
     isReadOnly: true,
-    readOnlySubmitButton: true,
+    isSubmittable: false,
     status: VilkarUtfallType.IKKE_OPPFYLT,
   },
 };
