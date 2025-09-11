@@ -1,29 +1,22 @@
 name: Deploy manuelt
 on:
   workflow_dispatch:
-ß    inputs:
-  image:
-    required: true
-    type: string
-    description: 'Image tag to deploy (example 2023.03.10.080433-f821119)'
-  environment:
-    required: true
-    type: choice
-    description: 'The environment to deployed to (dev|prod)'
-    options:
-      - dev
-      - prod
-  app:
-    required: true
-    type: choice
-    description: 'Application to deploy ()'
-    options:
-      - fp-frontend
-      - los-avdelingsleder
+    inputs:
+      image:
+        required: true
+        type: string
+        description: 'Image tag to deploy (example 2023.03.10.080433-f821119)'
+      environment:
+        required: true
+        type: choice
+        description: 'The environment to deployed to (dev|prod)'
+        options:
+          - dev
+          - prod
 
 jobs:
   deploy:
-    name: Deploy
+    name: Deploy dev
     permissions:
       id-token: write
     uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@d82a6fe449f56938a073da20baca50bed596a800
