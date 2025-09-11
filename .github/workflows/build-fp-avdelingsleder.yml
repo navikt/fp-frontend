@@ -28,6 +28,7 @@ jobs:
       push-image: ${{ github.ref_name == 'los-app' }} # default: false
       run-knip: true
       app: fp-avdelingsleder
+      image_suffix: '/fp-avdelingsleder'
     secrets: inherit
 
   deploy-dev:
@@ -41,6 +42,8 @@ jobs:
       gar: true
       image: ${{ needs.build-app.outputs.build-version }}
       cluster: dev-gcp
+      image_suffix: '/fp-avdelingsleder'
+      deploy_context: '/fp-avdelingsleder'
     secrets: inherit
 
   deploy-prod:
