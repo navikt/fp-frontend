@@ -11,7 +11,6 @@ import { BarnFieldArray, type BarnFormValues } from './BarnFieldArray';
 
 interface Props {
   isReadOnly: boolean;
-  isEdited?: boolean;
   finnesBarnIFReg: boolean;
   antallBarnISøknad: number;
 }
@@ -20,7 +19,7 @@ export type ErBarnFødtFormValues = {
   erBarnFødt: boolean | undefined;
 } & BarnFormValues;
 
-export const ErBarnFødt = ({ isReadOnly, isEdited, finnesBarnIFReg, antallBarnISøknad }: Props) => {
+export const ErBarnFødt = ({ isReadOnly, finnesBarnIFReg, antallBarnISøknad }: Props) => {
   const intl = useIntl();
 
   const { control, watch } = useFormContext<ErBarnFødtFormValues>();
@@ -32,7 +31,6 @@ export const ErBarnFødt = ({ isReadOnly, isEdited, finnesBarnIFReg, antallBarnI
       <RhfRadioGroup
         control={control}
         name="erBarnFødt"
-        isEdited={isEdited}
         label={intl.formatMessage({ id: 'ErBarnFødt.Label' }, { antallBarn: antallBarnISøknad })}
         validate={[required]}
         isReadOnly={isReadOnly}
