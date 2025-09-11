@@ -5,7 +5,7 @@ import { captureException, withScope } from '@sentry/browser';
 
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 
-import { ErrorType, type FpError } from '../../data/error/errorType';
+import { ErrorType, type FpError } from '../data/error/errorType';
 
 const isDevelopment = import.meta.env.MODE === 'development';
 
