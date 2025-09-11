@@ -1,5 +1,4 @@
 name: Build app
-
 on:
   workflow_call:
     inputs:
@@ -32,6 +31,11 @@ on:
         required: false
         type: string
         description: Alternativ branch å bygge fra
+      image_suffix:
+        required: false
+        type: string
+        description: 'The suffix of the image to be deployed'
+        default: ''
       app:
         required: false
         type: string
@@ -103,6 +107,7 @@ jobs:
         with:
           build-version: ${{ steps.generate-build-version.outputs.build-version }}
           push-image: ${{ inputs.push-image }}
+          image_suffix: ${{ inputs.image_suffix }}
           build_args: |
             APP_NAME=${{ inputs.app }}
       - name: Archive code coverage results
