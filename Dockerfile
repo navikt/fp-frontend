@@ -6,8 +6,9 @@ ENV NODE_ENV production
 
 WORKDIR /app
 
-# Bruk ARG til å bestemme kva app som skal kopierast
-ARG APP_NAME
+# ARG with default value
+ARG APP_NAME=fp-frontend-app
+ENV APP_NAME=${APP_NAME}
 
 COPY server /app
 COPY ./apps/${APP_NAME}/dist /app/public
