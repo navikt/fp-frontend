@@ -2,7 +2,6 @@ import React from 'react';
 import { FormattedMessage, RawIntlProvider } from 'react-intl';
 
 import { Button } from '@navikt/ds-react';
-import { ariaCheck } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../../../i18n/nb_NO.json';
@@ -37,7 +36,7 @@ export const FaktaSubmitButton = ({ isReadOnly, isSubmittable, buttonText, onCli
           variant="primary"
           loading={isSubmitting}
           disabled={isDisabled(isDirty, isSubmitting, isSubmittable)}
-          onClick={onClick || ariaCheck}
+          onClick={onClick}
           type={onClick ? 'button' : 'submit'}
         >
           {!!buttonText && buttonText}

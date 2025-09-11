@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button, Radio, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
-import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode, FaresignalVurdering } from '@navikt/fp-kodeverk';
@@ -101,11 +101,11 @@ export const AvklarFaresignalerForm = ({
         </RhfRadioGroup>
         <div>
           <Button
+            type="submit"
             size="small"
             variant="primary"
             loading={formMethods.formState.isSubmitting}
             disabled={!formMethods.formState.isDirty || readOnly || formMethods.formState.isSubmitting}
-            onClick={ariaCheck}
           >
             <FormattedMessage id="Risikopanel.RhfForm.Bekreft" />
           </Button>

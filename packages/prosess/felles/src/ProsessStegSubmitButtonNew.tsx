@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Button } from '@navikt/ds-react';
-import { ariaCheck } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
 import messages from '../i18n/nb_NO.json';
@@ -50,7 +49,7 @@ export const ProsessStegSubmitButton = ({
           variant="primary"
           loading={isSubmitting}
           disabled={isDisabled(isSubmitting, isSubmittable, isDirty, hasEmptyRequiredFields)}
-          onClick={onClick || ariaCheck}
+          onClick={onClick}
           type={onClick ? 'button' : 'submit'}
         >
           {text ?? intl.formatMessage({ id: 'SubmitButton.ConfirmInformation' })}
