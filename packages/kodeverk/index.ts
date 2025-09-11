@@ -4,7 +4,7 @@ export {
   isUttakAksjonspunkt,
   isFaktaUttakAksjonspunkt,
 } from './src/aksjonspunktCodes';
-export type { OverstyringAksjonspunkter } from './src/aksjonspunktCodes';
+export type { OverstyringAksjonspunkter, VilkårOverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
 export { AksjonspunktStatus, erAksjonspunktÅpent } from './src/aksjonspunktStatus';
 export { AksjonspunktType } from './src/aksjonspunktType';

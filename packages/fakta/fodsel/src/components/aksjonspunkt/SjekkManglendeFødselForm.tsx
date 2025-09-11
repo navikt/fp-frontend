@@ -31,7 +31,6 @@ export const SjekkManglendeFødselForm = ({
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } = usePanelDataContext<SjekkManglendeFødselAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
-  const dokumentasjonForeliggerIsEdited = gjeldende.barn.some(b => b.kilde === 'SAKSBEHANDLER');
 
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues(gjeldende, aksjonspunkt),
@@ -67,7 +66,6 @@ export const SjekkManglendeFødselForm = ({
           )}
           <ErBarnFødt
             isReadOnly={isReadOnly}
-            isEdited={dokumentasjonForeliggerIsEdited}
             finnesBarnIFReg={finnesBarnIFReg}
             antallBarnISøknad={søknad.antallBarn}
           />
