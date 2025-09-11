@@ -127,7 +127,6 @@ const retryHandler = () => {
   if (import.meta.env.MODE === 'test') {
     return ZERO_RETRIES;
   }
-
   return (failureCount: number, error: Error) => {
     if (error instanceof HTTPError) {
       if (error.response.status === 401 || error.response.status === 403) {
