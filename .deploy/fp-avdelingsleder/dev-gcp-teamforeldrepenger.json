@@ -4,7 +4,7 @@
   "minReplicas": "1",
   "maxReplicas": "2",
   "env": "development",
-  "groups": ["e6508a2a-2e74-450e-ad24-eb1b2b4625c6"],
+  "groups": ["27e77109-fef2-48ce-a174-269074490353", "e6508a2a-2e74-450e-ad24-eb1b2b4625c6"],
   "externals": ["fpsak-api.dev-fss-pub.nais.io", "fplos.dev-fss-pub.nais.io"],
   "proxyRedirects": [
     {
