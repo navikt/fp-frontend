@@ -2,10 +2,11 @@ import { queryOptions } from '@tanstack/react-query';
 import ky from 'ky';
 
 import type { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos, ApiLink, NavAnsatt } from '@navikt/fp-types';
+import type { AlleKodeverkLos } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
 import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
+import type { InnloggetBruker } from '../typer/innloggetBruker';
 import type { OppgaverForAvdeling } from '../typer/oppgaverForAvdelingTsType';
 import type { OppgaveForDato } from '../typer/oppgaverForDatoTsType';
 import type { OppgaverForForsteStonadsdag } from '../typer/oppgaverForForsteStonadsdagTsType';
@@ -13,17 +14,12 @@ import type { OppgaverSomErApneEllerPaVent } from '../typer/oppgaverSomErApneEll
 import type { Reservasjon } from '../typer/reservasjonTsType';
 import type { SaksbehandlereOgSaksbehandlerGrupper } from '../typer/saksbehandlereOgSaksbehandlerGrupper';
 import type { SakslisteAvdeling } from '../typer/sakslisteAvdelingTsType';
-type BehandlendeEnheter = {
-  enhetId: string;
-  enhetNavn: string;
-}[];
 
-export type InitDataFpSak = {
-  behandlendeEnheter: BehandlendeEnheter;
-  innloggetBruker: NavAnsatt;
-  links: ApiLink[];
-  sakLinks: ApiLink[];
+export type InitDataLos = {
+  innloggetBruker: InnloggetBruker;
+  avdelinger: Avdeling[];
 };
+
 const kyExtended = ky.extend({
   retry: 0,
   timeout: 15000,
@@ -41,12 +37,9 @@ const kyExtended = ky.extend({
 const isTest = import.meta.env.MODE === 'test';
 const wrapUrl = (url: string) => (isTest ? `https://www.test.com${url}` : url);
 
-export const FagsakUrl = {
-  INIT_FETCH: wrapUrl('/fpsak/api/init-fetch'),
-};
 export const LosUrl = {
   KODEVERK_LOS: wrapUrl('/fplos/api/kodeverk'),
-  AVDELINGER: wrapUrl('/fplos/api/avdelingsleder/avdelinger'),
+  INIT_FETCH: wrapUrl('/fplos/api/avdelingsleder/init-fetch'),
   SAKSBEHANDLERE_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/saksbehandlere'),
   OPPGAVE_AVDELING_ANTALL: wrapUrl('/fplos/api/avdelingsleder/oppgaver/avdelingantall'),
   SAKSLISTER_FOR_AVDELING: wrapUrl('/fplos/api/avdelingsleder/sakslister'),
@@ -89,10 +82,10 @@ export const LosUrl = {
 
 export const initFetchOptions = () =>
   queryOptions({
-    queryKey: [FagsakUrl.INIT_FETCH],
-    queryFn: () => kyExtended.get(FagsakUrl.INIT_FETCH).json<InitDataFpSak>(),
-    staleTime: Infinity,
+    queryKey: [LosUrl.INIT_FETCH],
+    queryFn: () => kyExtended.get(LosUrl.INIT_FETCH).json<InitDataLos>(),
   });
+
 export const oppgaverForAvdelingAntallOptions = (avdelingEnhet: string) =>
   queryOptions({
     queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL, avdelingEnhet],
@@ -139,13 +132,6 @@ export const grupperOptions = (avdelingEnhet: string) =>
       kyExtended
         .get(LosUrl.HENT_GRUPPER, { searchParams: { avdelingEnhet } })
         .json<SaksbehandlereOgSaksbehandlerGrupper>(),
-  });
-
-export const avdelingerOptions = (isEnabled: boolean) =>
-  queryOptions({
-    queryKey: [LosUrl.AVDELINGER],
-    queryFn: () => kyExtended.get(LosUrl.AVDELINGER).json<Avdeling[]>(),
-    enabled: isEnabled,
   });
 
 export const oppgaverPerFørsteStønadsdagOptions = (avdelingEnhet: string) =>

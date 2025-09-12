@@ -94,7 +94,7 @@ const LosAppIndex = () => {
           navAnsatt={navAnsatt}
         />
         <ErrorBoundary errorMessageCallback={addErrorMessageAndSetAsCrashed} showChild>
-          {shouldRenderHome && <Home headerHeight={headerHeight} navAnsatt={navAnsatt} />}
+          {shouldRenderHome && <Home headerHeight={headerHeight} initData={initFetchQuery.data} />}
         </ErrorBoundary>
         {hasForbiddenErrors && <ForbiddenPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
         {hasUnauthorizedErrors && <UnauthorizedPage renderSomLenke={tekst => <Link to="/">{tekst}</Link>} />}
