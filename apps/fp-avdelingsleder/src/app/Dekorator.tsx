@@ -7,10 +7,10 @@ import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 
 import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
 import { DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
-import type { NavAnsatt } from '@navikt/fp-types';
 
 import { ErrorType, type FpError } from '../data/error/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
+import type { InnloggetBruker } from '../typer/innloggetBruker';
 
 type QueryStrings = {
   errorcode?: string;
@@ -24,7 +24,7 @@ interface Props {
   hideErrorMessages?: boolean;
   theme: ComponentProps<typeof Theme>['theme'];
   setTheme: (theme: ComponentProps<typeof Theme>['theme']) => void;
-  navAnsatt: NavAnsatt;
+  navAnsatt: InnloggetBruker;
 }
 
 export const Dekorator = ({

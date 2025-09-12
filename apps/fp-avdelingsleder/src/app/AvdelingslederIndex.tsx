@@ -8,16 +8,11 @@ import { formatQueryString, parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 import { type Location } from 'history';
 
-import type { NavAnsatt } from '@navikt/fp-types';
 import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import { EndreSakslisterPanel } from '../behandlingskoer/EndreSakslisterPanel';
 import { IkkeTilgangTilAvdelingslederPanel } from '../components/IkkeTilgangTilAvdelingslederPanel';
-import {
-  avdelingerOptions,
-  losKodeverkOptions,
-  saksbehandlareForAvdelingOptions,
-} from '../data/fplosAvdelingslederApi';
+import { type InitDataLos, losKodeverkOptions, saksbehandlareForAvdelingOptions } from '../data/fplosAvdelingslederApi';
 import {
   getValueFromLocalStorage,
   removeValueFromLocalStorage,
@@ -33,10 +28,10 @@ import { AvdelingslederPanels } from './avdelingslederPanels';
 import styles from './avdelingslederIndex.module.css';
 
 interface Props {
-  navAnsatt?: NavAnsatt;
+  initData: InitDataLos;
 }
 
-export const AvdelingslederIndex = ({ navAnsatt }: Props) => {
+export const AvdelingslederIndex = ({ initData }: Props) => {
   const navigate = useNavigate();
   const [valgtAvdelingEnhet, setValgtAvdelingEnhet] = useState<string>();
 
@@ -47,18 +42,11 @@ export const AvdelingslederIndex = ({ navAnsatt }: Props) => {
 
   const alleKodeverkQuery = useQuery(losKodeverkOptions());
 
-  const { data: filtrerteAvdelinger, status: avdelingerStatus } = useQuery({
-    ...avdelingerOptions(!!navAnsatt?.kanOppgavestyre),
-    select: avdelinger => avdelinger.filter(a => !!navAnsatt?.kanBehandleKode6 || !a.kreverKode6),
-  });
-
   const { data: avdelingensSaksbehandlere } = useQuery(saksbehandlareForAvdelingOptions(valgtAvdelingEnhet));
 
   useEffect(() => {
-    if (avdelingerStatus === 'success') {
-      setAvdeling(setValgtAvdelingEnhet, filtrerteAvdelinger, valgtAvdelingEnhet);
-    }
-  }, [avdelingerStatus]);
+    setAvdeling(setValgtAvdelingEnhet, initData.avdelinger, valgtAvdelingEnhet);
+  }, []);
 
   const getAvdelingslederPanelLocation = (avdelingslederPanel: string) => ({
     ...location,
@@ -66,10 +54,10 @@ export const AvdelingslederIndex = ({ navAnsatt }: Props) => {
   });
   const activeAvdelingslederPanel = activeAvdelingslederPanelTemp || getPanelFromUrlOrDefault(location);
 
-  if (!navAnsatt?.kanOppgavestyre) {
+  if (!initData.innloggetBruker?.kanOppgavestyre) {
     return <IkkeTilgangTilAvdelingslederPanel />;
   }
-  if (alleKodeverkQuery.isPending || avdelingerStatus !== 'success' || valgtAvdelingEnhet === undefined) {
+  if (alleKodeverkQuery.isPending || valgtAvdelingEnhet === undefined) {
     return <LoadingPanel />;
   }
 
@@ -88,7 +76,7 @@ export const AvdelingslederIndex = ({ navAnsatt }: Props) => {
           value={valgtAvdelingEnhet}
           className={styles.paddingSelect}
         >
-          {filtrerteAvdelinger.map(avdeling => (
+          {initData.avdelinger.map(avdeling => (
             <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
               {`${avdeling.avdelingEnhet} ${avdeling.navn}`}
             </option>
