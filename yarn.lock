@@ -1777,7 +1777,7 @@ __metadata:
     react: 19.1.1
     react-hook-form: 7.62.0
     react-intl: 7.1.11
-    react-router-dom: 7.8.0
+    react-router-dom: 7.8.1
     storybook: 9.1.2
     stylelint: 16.23.1
     typescript: 5.9.2
@@ -14458,6 +14458,7 @@ __metadata:
   linkType: hard
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "react-router-dom@npm:7.8.2":
   version: 7.8.2
   resolution: "react-router-dom@npm:7.8.2"
@@ -14474,6 +14475,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> 2f2db6b42c (fix)
 "react-router-dom@npm:7.8.1":
   version: 7.8.1
   resolution: "react-router-dom@npm:7.8.1"
@@ -14487,6 +14490,7 @@ __metadata:
   languageName: node
   linkType: hard
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 "react-router@npm:7.8.2":
   version: 7.8.2
@@ -14508,6 +14512,8 @@ __metadata:
   languageName: node
   linkType: hard
 
+=======
+>>>>>>> 2f2db6b42c (fix)
 "react-router@npm:7.8.1":
   version: 7.8.1
   resolution: "react-router@npm:7.8.1"
