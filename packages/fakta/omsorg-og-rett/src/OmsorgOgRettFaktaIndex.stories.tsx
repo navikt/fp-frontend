@@ -130,7 +130,6 @@ const meta = {
       ...defaultOmsorgOgRett,
       relasjonsRolleType: RelasjonsRolleType.FAR,
     },
-    submittable: true,
   },
   render: args => <OmsorgOgRettFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgOgRettFaktaIndex>>;

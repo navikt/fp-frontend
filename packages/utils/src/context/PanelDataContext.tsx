@@ -14,6 +14,7 @@ type Props<AP_TYPE extends AksjonspunktType> = {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   isReadOnly: boolean;
   submitCallback: (aksjonspunktData: AP_TYPE) => Promise<void>;
+  isSubmittable: boolean;
 };
 
 const PanelDataContext = createContext<Props<AksjonspunktType> | null>(null);

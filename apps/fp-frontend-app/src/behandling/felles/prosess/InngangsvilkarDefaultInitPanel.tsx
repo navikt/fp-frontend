@@ -89,6 +89,7 @@ export const InngangsvilkarDefaultInitPanel = ({
         submitCallback={standardPanelProps.submitCallback}
         isReadOnly={standardPanelProps.isReadOnly}
         alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
+        isSubmittable={!standardPanelProps.readOnlySubmitButton}
       >
         {skalViseVilkårIPanel ? children : null}
       </PanelDataProvider>

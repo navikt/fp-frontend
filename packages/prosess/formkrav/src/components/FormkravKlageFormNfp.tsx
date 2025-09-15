@@ -93,7 +93,6 @@ const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBe
 
 interface Props {
   klageVurdering: KlageVurdering;
-  readOnlySubmitButton?: boolean;
   avsluttedeBehandlinger: AvsluttetBehandling[];
   lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
 }
@@ -103,15 +102,11 @@ interface Props {
  *
  * Setter opp aksjonspunktet for formkrav klage (NFP).
  */
-export const FormkravKlageFormNfp = ({
-  klageVurdering,
-  readOnlySubmitButton,
-  avsluttedeBehandlinger,
-  lagreFormkravVurdering,
-}: Props) => {
+export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, lagreFormkravVurdering }: Props) => {
   const intl = useIntl();
 
-  const { behandling, alleKodeverk, submitCallback, isReadOnly } = usePanelDataContext<KlageFormkravAp>();
+  const { behandling, isSubmittable, alleKodeverk, submitCallback, isReadOnly } =
+    usePanelDataContext<KlageFormkravAp>();
 
   const klageBareVedtakOptions = getKlagBareVedtak(avsluttedeBehandlinger, intl, alleKodeverk);
 
@@ -140,7 +135,7 @@ export const FormkravKlageFormNfp = ({
           </Detail>
         </VStack>
         <VStack gap="space-24">
-          {!readOnlySubmitButton && (
+          {isSubmittable && (
             <AksjonspunktHelpTextHTML>
               <FormattedMessage id="Klage.Formkrav.HelpText" />
             </AksjonspunktHelpTextHTML>
@@ -252,7 +247,7 @@ export const FormkravKlageFormNfp = ({
           <HStack justify="space-between">
             <ProsessStegSubmitButtonNew
               isReadOnly={isReadOnly}
-              isSubmittable={!readOnlySubmitButton}
+              isSubmittable={isSubmittable}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}
             />

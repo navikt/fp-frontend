@@ -44,7 +44,6 @@ const meta = {
   component: InnsynProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    readOnlySubmitButton: false,
     alleDokumenter: [
       {
         journalpostId: '2',

@@ -13,7 +13,6 @@ const intl = createIntl(messages);
 export interface OmsorgOgRettProps {
   personoversikt: Personoversikt;
   omsorgOgRett: OmsorgOgRett;
-  submittable: boolean;
   kanOverstyre: boolean;
 }
 

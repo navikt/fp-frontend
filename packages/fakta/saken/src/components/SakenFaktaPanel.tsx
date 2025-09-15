@@ -5,12 +5,6 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
-import type {
-  AvklarDekningsgradAp,
-  MerkOpptjeningUtlandAp,
-  OverstyringAvklarStartdatoForPeriodenAp,
-  OverstyringDekningsgradAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { DekningradApForm } from './dekningsgrad/DekningradApForm';
@@ -23,24 +17,14 @@ interface Props {
   utlandDokStatus?: {
     dokStatus?: string;
   };
-  submittable: boolean;
   kanOverstyreAccess: boolean;
 }
 
 const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
 
-export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOverstyreAccess }: Props) => {
-  const {
-    aksjonspunkterForPanel,
-    submitCallback,
-    alleMerknaderFraBeslutter,
-    harÅpentAksjonspunkt,
-    fagsak,
-    isReadOnly,
-  } = usePanelDataContext<
-    MerkOpptjeningUtlandAp | OverstyringAvklarStartdatoForPeriodenAp | OverstyringDekningsgradAp | AvklarDekningsgradAp
-  >();
+export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }: Props) => {
+  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, fagsak } = usePanelDataContext();
 
   const automatiskMarkeringAvUtenlandssakAp = aksjonspunkterForPanel.find(
     ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
@@ -62,26 +46,12 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
           </AksjonspunktHelpTextHTML>
         )}
       <VStack gap="space-40">
-        {soknad && automatiskAp && (
-          <DekningradApForm
-            søknad={soknad}
-            fagsak={fagsak}
-            aksjonspunkt={automatiskAp}
-            submitCallback={submitCallback}
-            readOnly={isReadOnly}
-            alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-          />
-        )}
+        {soknad && automatiskAp && <DekningradApForm søknad={soknad} aksjonspunkt={automatiskAp} />}
         <HStack gap="space-40">
           {automatiskMarkeringAvUtenlandssakAp && (
             <InnhentDokOpptjeningUtlandPanel
               dokStatus={utlandDokStatus?.dokStatus}
-              readOnly={isReadOnly}
-              harÅpentAksjonspunkt={harÅpentAksjonspunkt}
               aksjonspunkt={automatiskMarkeringAvUtenlandssakAp}
-              submittable={submittable}
-              submitCallback={submitCallback}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
             />
           )}
           {fagsak.fagsakYtelseType !== 'SVP' && !!soknad && (
@@ -89,22 +59,12 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, submittable, kanOvers
               aksjonspunkt={aksjonspunkterForPanel.find(
                 ap => ap.definisjon === AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
               )}
-              submitCallback={submitCallback}
-              readOnly={isReadOnly}
-              alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
               soknad={soknad}
             />
           )}
         </HStack>
         {soknad && !automatiskAp && fagsak.fagsakYtelseType === 'FP' && (
-          <DekningradForm
-            søknad={soknad}
-            fagsak={fagsak}
-            aksjonspunkt={overstyringsAp}
-            submitCallback={submitCallback}
-            readOnly={isReadOnly}
-            kanOverstyreAccess={kanOverstyreAccess}
-          />
+          <DekningradForm søknad={soknad} aksjonspunkt={overstyringsAp} kanOverstyreAccess={kanOverstyreAccess} />
         )}
       </VStack>
     </VStack>

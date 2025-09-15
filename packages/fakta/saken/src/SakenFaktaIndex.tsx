@@ -14,7 +14,6 @@ interface Props {
     dokStatus?: string;
   };
   kanOverstyreAccess: boolean;
-  submittable: boolean;
 }
 
 const intl = createIntl(messages);

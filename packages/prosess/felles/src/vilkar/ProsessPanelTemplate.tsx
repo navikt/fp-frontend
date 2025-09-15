@@ -17,7 +17,7 @@ interface Props {
   title: string;
   lovReferanse?: string;
   harÅpentAksjonspunkt: boolean;
-  readOnlySubmitButton: boolean;
+  isSubmittable: boolean;
   originalErVilkårOk?: boolean;
   erIkkeGodkjentAvBeslutter: boolean;
   rendreFakta?: () => ReactNode;
@@ -32,7 +32,7 @@ export const ProsessPanelTemplate = ({
   title,
   originalErVilkårOk,
   harÅpentAksjonspunkt,
-  readOnlySubmitButton,
+  isSubmittable,
   isReadOnly,
   rendreFakta,
   isDirty,
@@ -71,7 +71,7 @@ export const ProsessPanelTemplate = ({
         <div>{children}</div>
         <ProsessStegSubmitButton
           isReadOnly={isReadOnly}
-          isSubmittable={!readOnlySubmitButton}
+          isSubmittable={isSubmittable}
           isDirty={isDirty}
           isSubmitting={isSubmitting}
         />

@@ -14,7 +14,6 @@ interface Props {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   arbeidOgInntekt?: ArbeidOgInntektsmelding;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  submittable: boolean;
   readonly: boolean;
 }
 

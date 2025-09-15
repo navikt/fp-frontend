@@ -142,7 +142,6 @@ type FormValues = {
 interface Props {
   soknad: Soknad;
   status: string;
-  readOnlySubmitButton: boolean;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
 }
 
@@ -151,17 +150,13 @@ interface Props {
  *
  * Informasjon om søkers informasjonsplikt er godkjent eller avvist.
  */
-export const SokersOpplysningspliktForm = ({
-  soknad,
-  readOnlySubmitButton,
-  status,
-  arbeidsgiverOpplysningerPerId,
-}: Props) => {
+export const SokersOpplysningspliktForm = ({ soknad, status, arbeidsgiverOpplysningerPerId }: Props) => {
   const intl = useIntl();
 
   const {
     aksjonspunkterForPanel,
     alleKodeverk,
+    isSubmittable,
     submitCallback,
     alleMerknaderFraBeslutter,
     harÅpentAksjonspunkt,
@@ -207,9 +202,9 @@ export const SokersOpplysningspliktForm = ({
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'SokersOpplysningspliktForm.SokersOpplysningsplikt' })}
-        harÅpentAksjonspunkt={!readOnlySubmitButton}
+        harÅpentAksjonspunkt={isSubmittable}
         isDirty={hasAksjonspunkt ? formMethods.formState.isDirty : erVilkårOk !== initialValues.erVilkarOk}
-        readOnlySubmitButton={hasSoknad ? readOnlySubmitButton : !formMethods.formState.isDirty || readOnlySubmitButton}
+        isSubmittable={hasSoknad ? isSubmittable : formMethods.formState.isDirty || isSubmittable}
         isReadOnly={isReadOnly}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}

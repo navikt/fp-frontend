@@ -74,7 +74,6 @@ const meta = {
   args: {
     soknad,
     adopsjon: adopsjon,
-    submittable: true,
     isForeldrepengerFagsak: true,
   },
   render: args => <AdopsjonFaktaIndex {...args} />,

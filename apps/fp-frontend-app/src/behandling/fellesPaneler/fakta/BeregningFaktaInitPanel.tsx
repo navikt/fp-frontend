@@ -69,7 +69,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
           erOverstyrer={rettigheter.kanOverstyreAccess.isEnabled}
           skalKunneOverstyreAktiviteter
           readOnly={standardPanelProps.isReadOnly}
-          submittable={standardPanelProps.submittable}
+          submittable={standardPanelProps.isSubmittable}
         />
       ) : (
         <LoadingPanel />

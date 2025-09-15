@@ -25,10 +25,10 @@ type FormValues = {
 interface Props {
   omsorgOgRett: OmsorgOgRett;
   aksjonspunkt?: Aksjonspunkt;
-  submittable: boolean;
+  isSubmittable: boolean;
 }
 
-export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Props) => {
+export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: Props) => {
   const { submitCallback, isReadOnly, alleMerknaderFraBeslutter } =
     usePanelDataContext<BekreftAleneomsorgVurderingAp>();
   const harAleneomsorg = omsorgOgRett.manuellBehandlingResultat?.søkerHarAleneomsorg ?? undefined;
@@ -84,13 +84,13 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, submittable }: Pro
 
           <FaktaBegrunnelseTextField
             control={formMethods.control}
-            isSubmittable={submittable}
+            isSubmittable={isSubmittable}
             isReadOnly={isReadOnlyOrApIsNull}
             hasBegrunnelse={true}
             hasVurderingText
           />
           <FaktaSubmitButton
-            isSubmittable={submittable}
+            isSubmittable={isSubmittable}
             isReadOnly={isReadOnlyOrApIsNull}
             isSubmitting={formMethods.formState.isSubmitting}
             isDirty={formMethods.formState.isDirty}

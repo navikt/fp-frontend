@@ -21,7 +21,6 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   faktaArbeidsforhold?: FaktaArbeidsforhold[];
   kanOverstyre: boolean;
-  submittable: boolean;
 }
 
 export const UttakFaktaIndex = (props: Props) => (

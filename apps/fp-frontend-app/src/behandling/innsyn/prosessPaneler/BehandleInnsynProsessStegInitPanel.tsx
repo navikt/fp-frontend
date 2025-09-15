@@ -32,15 +32,7 @@ export const BehandleInnsynProsessStegInitPanel = () => {
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Innsyn' })}
       skalPanelVisesIMeny
     >
-      {isFetching ? (
-        <LoadingPanel />
-      ) : (
-        <InnsynProsessIndex
-          innsyn={innsyn}
-          alleDokumenter={innsynDokumenter}
-          readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
-        />
-      )}
+      {isFetching ? <LoadingPanel /> : <InnsynProsessIndex innsyn={innsyn} alleDokumenter={innsynDokumenter} />}
     </ProsessDefaultInitPanel>
   );
 };
