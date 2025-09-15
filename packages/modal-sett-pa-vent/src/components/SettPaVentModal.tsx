@@ -128,7 +128,7 @@ export const SettPaVentModal = ({
             size="small"
             variant="primary"
             style={{ paddingInline: '36px' }}
-            onClick={showAvbryt ? () => {} : cancelEvent}
+            onClick={showAvbryt ? undefined : cancelEvent}
             disabled={!venteArsakHasChanged && !fristHasChanged}
           >
             <FormattedMessage id="SettPaVentModal.Ok" />
