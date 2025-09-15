@@ -8,10 +8,10 @@ import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { notEmpty } from '@navikt/fp-utils';
 
-import { initFetchFpsak } from '../../../.storybook/testdata';
-import { FagsakRel, FagsakUrl, initFetchOptions, wrapUrl } from '../../data/fagsakApi';
+import { initFetchFpsak } from '../../../.storybook/testdata/index.ts';
+import { FagsakRel, FagsakUrl, initFetchOptions, wrapUrl } from '../../data/fagsakApi.ts';
 import { UtvidEllerMinskKnapp } from '../UtvidEllerMinskKnapp.tsx';
-import { DokumentIndex } from './DokumentIndex';
+import { DokumentIndex } from './DokumentIndex.tsx';
 
 import messages from '../../../i18n/nb_NO.json';
 

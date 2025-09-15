@@ -3,10 +3,10 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - 'apps/fp-frontend-app/**'
+      - 'apps/fp-frontend/**'
       - 'packages/**'
       - 'server/**'
-      - '.deploy/fp-frontend-app/**'
+      - '.deploy/fp-frontend/**'
       - '.deploy/naiserator.yaml'
       - '.github/workflows/build-fp-frontend.yml'
       - '.github/workflows/build.yml'
@@ -27,8 +27,8 @@ jobs:
       build-image: ${{ github.ref_name == 'master' }} # default: true
       push-image: ${{ github.ref_name == 'master' }} # default: false
       run-knip: true
-      app: fp-frontend-app
-      image_suffix: '/fp-frontend-app'
+      app: fp-frontend
+      image_suffix: '/fp-frontend'
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN  }}
@@ -44,8 +44,8 @@ jobs:
       gar: true
       image: ${{ needs.build-app.outputs.build-version }}
       cluster: dev-gcp
-      image_suffix: '/fp-frontend-app'
-      deploy_context: '/fp-frontend-app'
+      image_suffix: '/fp-frontend'
+      deploy_context: '/fp-frontend'
 
   deploy-prod:
     name: Deploy prod
@@ -58,5 +58,5 @@ jobs:
       gar: true
       image: ${{ needs.build-app.outputs.build-version }}
       cluster: prod-gcp
-      image_suffix: '/fp-frontend-app'
-      deploy_context: '/fp-frontend-app'
+      image_suffix: '/fp-frontend'
+      deploy_context: '/fp-frontend'

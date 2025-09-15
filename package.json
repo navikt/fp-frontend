@@ -21,7 +21,7 @@
     "stylelint": "lerna run stylelint --stream",
     "prettier": "lerna run prettier --stream",
     "clean": "lerna run clean --stream",
-    "dev": "yarn lerna run dev --scope=@navikt/fp-frontend-app",
+    "dev": "yarn lerna run dev --scope=@navikt/fp-frontend",
     "dev-avdelingsleder": "yarn lerna run dev --scope=@navikt/fp-avdelingsleder",
     "build": "lerna run build --stream",
     "up": "docker-compose up -d --remove-orphans --build",

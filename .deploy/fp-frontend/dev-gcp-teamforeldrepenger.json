@@ -1,5 +1,5 @@
 {
-  "app": "fp-frontend-app",
+  "app": "fp-frontend",
   "ingresses": ["https://fpsak.intern.dev.nav.no"],
   "minReplicas": "1",
   "maxReplicas": "2",

@@ -11,7 +11,7 @@ on:
         type: choice
         description: 'Applikasjon som skal deployes fra branch'
         options:
-          - fp-frontend-app
+          - fp-frontend
           - fp-avdelingsleder
 
 jobs:

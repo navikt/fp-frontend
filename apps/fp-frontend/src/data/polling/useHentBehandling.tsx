@@ -4,7 +4,7 @@ import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { hentBehandling, hentBehandlingTilbakekreving } from '../behandlingApi';
-import { useRequestPendingContext } from '../polling/RequestPendingContext';
+import { useRequestPendingContext } from './RequestPendingContext';
 import { doPolling, useTaskStatusChecker } from './pollingUtils';
 
 export const useHentBehandling = (

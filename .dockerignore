@@ -1,5 +1,5 @@
 *
-!./apps/fp-frontend-app/dist
+!./apps/fp-frontend/dist
 !./apps/fp-avdelingsleder/dist
 !./server/dist
 !./server/node_modules

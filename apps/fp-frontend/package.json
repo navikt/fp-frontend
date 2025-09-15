@@ -1,5 +1,5 @@
 {
-  "name": "@navikt/fp-frontend-app",
+  "name": "@navikt/fp-frontend",
   "version": "1.0.0",
   "module": "src/main.tsx",
   "license": "MIT",
