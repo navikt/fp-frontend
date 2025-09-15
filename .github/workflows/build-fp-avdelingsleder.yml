@@ -29,7 +29,9 @@ jobs:
       run-knip: true
       app: fp-avdelingsleder
       image_suffix: '/fp-avdelingsleder'
-    secrets: inherit
+    secrets:
+      READER_TOKEN: ${{ secrets.READER_TOKEN }}
+      SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN  }}
 
   deploy-dev:
     name: Deploy dev
@@ -57,4 +59,6 @@ jobs:
       gar: true
       image: ${{ needs.build-app.outputs.build-version }}
       cluster: prod-gcp
+      image_suffix: '/fp-avdelingsleder'
+      deploy_context: '/fp-avdelingsleder'
     secrets: inherit

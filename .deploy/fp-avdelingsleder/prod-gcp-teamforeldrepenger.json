@@ -8,11 +8,6 @@
   "externals": ["fpsak-api.prod-fss-pub.nais.io", "fplos.prod-fss-pub.nais.io"],
   "proxyRedirects": [
     {
-      "path": "/fpsak/api",
-      "url": "https://fpsak-api.prod-fss-pub.nais.io",
-      "scope": "api://prod-fss.teamforeldrepenger.fpsak/.default"
-    },
-    {
       "path": "/fplos/api",
       "url": "https://fplos.prod-fss-pub.nais.io",
       "scope": "api://prod-fss.teamforeldrepenger.fplos/.default"
