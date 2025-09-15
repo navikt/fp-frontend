@@ -146,6 +146,7 @@ describe('FodselFaktaIndex', () => {
           dødsdato: '2025-05-05',
         },
       ],
+      termindato: '2025-04-14',
       begrunnelse: 'Dette er en begrunnelse',
     });
   });
@@ -169,6 +170,7 @@ describe('FodselFaktaIndex', () => {
     expect(lagre).toHaveBeenNthCalledWith(1, {
       kode: '5027',
       barn: null,
+      termindato: '2025-05-06',
       begrunnelse: 'Dette er en begrunnelse',
     });
   });
@@ -219,7 +221,7 @@ describe('FodselFaktaIndex', () => {
     });
   });
 
-  it('skal ikke kunne overstyre når det finnes åpent fødselaksjonspunkt', async () => {
+  it('skal ikke kunne overstyre når det finnes fødselaksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
     render(
       <OverstyringSomOverstyrer

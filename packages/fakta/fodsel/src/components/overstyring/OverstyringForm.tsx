@@ -8,7 +8,7 @@ import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmit
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FødselGjeldende } from '@navikt/fp-types';
 import type { OverstyringFaktaFødselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
 import { Termindato, type TermindatoFormValues } from '../form/Termindato';
@@ -72,14 +72,14 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Pr
 };
 
 const initialValues = (gjeldende: FødselGjeldende, overstyringsAP?: Aksjonspunkt) => ({
-  termindato: gjeldende.termin?.termindato ?? '',
+  ...Termindato.initialValues(gjeldende),
   ...ErBarnFødt.initialValues(gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(overstyringsAP),
 });
 
 const transformValues = (values: FormValues): OverstyringFaktaFødselAp => ({
   kode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-  termindato: notEmpty(values.termindato),
+  ...Termindato.transformValues(values),
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

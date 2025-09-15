@@ -21,6 +21,8 @@
   "FaktaFraSøknad.Terminbekreftelse": "Terminbekreftelse",
   "FaktaFraSøknad.VisTerminbekreftelse": "Vis terminbekreftelse",
   "Situasjon.OpplysningerGjeldende": "Gjeldende opplysninger",
+  "Termindato.EndreTermindato": "Åpne redigering av termindato",
+  "Termindato.AvbrytRedigering": "Avbryt redigering av termindato",
   "Label.NummerertBarn": "Barn {nummer}",
   "Label.Barn": "Barn",
   "Label.Fødselsdato": "Fødselsdato",

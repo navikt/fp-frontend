@@ -18,39 +18,29 @@ export const OverstyringPanel = ({ gjeldende }: Props) => {
   const intl = useIntl();
 
   const { erOverstyrt, toggleOverstyring, kanOverstyreAccess, overrideReadOnly } = usePanelOverstyring();
-  const { alleMerknaderFraBeslutter, aksjonspunkterForPanel, harÅpentAksjonspunkt } = usePanelDataContext();
+  const { alleMerknaderFraBeslutter } = usePanelDataContext();
 
   const readOnly = !erOverstyrt || overrideReadOnly || !kanOverstyreAccess.isEnabled;
 
-  const overstyringAP = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-  );
-
   return (
-    (overstyringAP || (!overstyringAP && !harÅpentAksjonspunkt)) && (
-      <>
-        {kanOverstyreAccess.isEnabled && (
-          <HStack gap="4">
-            <Heading size="small">
-              <FormattedMessage id="OverstyringPanel.Tittel" />
-            </Heading>
-            <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
-          </HStack>
-        )}
+    <>
+      {kanOverstyreAccess.isEnabled && (
+        <HStack gap="4">
+          <Heading size="small">
+            <FormattedMessage id="OverstyringPanel.Tittel" />
+          </Heading>
+          <OverstyringKnapp onClick={toggleOverstyring} erOverstyrt={erOverstyrt} />
+        </HStack>
+      )}
 
-        {erOverstyrt && (
-          <FaktaKort
-            label={intl.formatMessage({ id: 'OverstyringForm.Tittel' })}
-            merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]}
-          >
-            <OverstyringForm
-              isReadOnly={readOnly}
-              gjeldende={gjeldende}
-              avbrytOverstyring={toggleOverstyring}
-            />
-          </FaktaKort>
-        )}
-      </>
-    )
+      {erOverstyrt && (
+        <FaktaKort
+          label={intl.formatMessage({ id: 'OverstyringForm.Tittel' })}
+          merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]}
+        >
+          <OverstyringForm isReadOnly={readOnly} gjeldende={gjeldende} avbrytOverstyring={toggleOverstyring} />
+        </FaktaKort>
+      )}
+    </>
   );
 };

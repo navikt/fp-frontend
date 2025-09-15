@@ -15,7 +15,7 @@ import { FaktaFraSøknad } from './fakta/FaktaFraSøknad';
 import { Situasjon } from './fakta/Situasjon';
 import { OverstyringPanel } from './overstyring/OverstyringPanel';
 
-const { SJEKK_TERMINBEKREFTELSE, SJEKK_MANGLENDE_FØDSEL } = AksjonspunktKode;
+const { SJEKK_TERMINBEKREFTELSE, SJEKK_MANGLENDE_FØDSEL, OVERSTYRING_AV_FAKTA_OM_FØDSEL } = AksjonspunktKode;
 
 interface Props {
   fødsel: Fødsel;
@@ -32,10 +32,13 @@ export const FodselInfoPanel = ({ fødsel, terminbekreftelseDokument }: Props) =
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_TERMINBEKREFTELSE);
   const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FØDSEL);
+  const overstyringAP = aksjonspunkterForPanel.find(ap => ap.definisjon === OVERSTYRING_AV_FAKTA_OM_FØDSEL);
 
   return (
     <VStack gap="space-16">
-      <OverstyringPanel gjeldende={fødsel.gjeldende} />
+      {(!(terminbekreftelseAp || manglendeFødselAp) || overstyringAP) && (
+        <OverstyringPanel gjeldende={fødsel.gjeldende} />
+      )}
 
       <AksjonspunktHelpTextHTML>
         {terminbekreftelseAp?.status === AksjonspunktStatus.OPPRETTET && (

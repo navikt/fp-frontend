@@ -387,7 +387,7 @@ export const OverstyrtSettSomSBH: Story = {
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Denne saken har blitt overstyrt',
         kanLoses: false,
-      } as Aksjonspunkt,
+      },
     ],
   },
 };

@@ -37,10 +37,10 @@ export const ErBarnFødt = ({ isReadOnly, finnesBarnIFReg, antallBarnISøknad }:
         size="medium"
       >
         <HStack gap="space-16">
-          <Radio value={true} size="small">
+          <Radio value={true}>
             <FormattedMessage id="ErBarnFødt.Ja" />
           </Radio>
-          <Radio value={false} size="small" disabled={finnesBarnIFReg}>
+          <Radio value={false} disabled={finnesBarnIFReg}>
             <FormattedMessage id="ErBarnFødt.Nei" />
           </Radio>
         </HStack>

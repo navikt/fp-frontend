@@ -12,8 +12,9 @@ import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
+import { Termindato, type TermindatoFormValues, TermindatoMedReadonlyToggle } from '../form/Termindato';
 
-type FormValues = ErBarnFødtFormValues & FaktaBegrunnelseFormValues;
+type FormValues = ErBarnFødtFormValues & TermindatoFormValues & FaktaBegrunnelseFormValues;
 
 interface Props {
   fødsel: Fødsel;
@@ -60,11 +61,11 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
               />
             </Alert>
           )}
-          <ErBarnFødt
-            isReadOnly={isReadOnly}
-            finnesBarnIFReg={finnesBarnIFReg}
-            antallBarnISøknad={søknad.antallBarn}
-          />
+
+          <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} />
+
+          <ErBarnFødt isReadOnly={isReadOnly} finnesBarnIFReg={finnesBarnIFReg} antallBarnISøknad={søknad.antallBarn} />
+
           <FaktaBegrunnelseTextField
             control={formMethods.control}
             isSubmittable={isSubmittable}
@@ -89,12 +90,14 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
 };
 
 const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
+  ...Termindato.initialValues(gjeldende),
   ...ErBarnFødt.initialValues(gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
 const transformValues = (values: FormValues): SjekkManglendeFødselAp => ({
   kode: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
+  ...Termindato.transformValues(values),
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
