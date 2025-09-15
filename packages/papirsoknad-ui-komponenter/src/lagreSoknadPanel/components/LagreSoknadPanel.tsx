@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, Heading, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfTextarea } from '@navikt/ft-form-hooks';
-import { ariaCheck, hasValidText, maxLength } from '@navikt/ft-form-validators';
+import { hasValidText, maxLength } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
 const maxLength1500 = maxLength(1500);
@@ -71,7 +71,6 @@ export const LagreSoknadPanel = ({
               variant="primary"
               loading={submitting}
               disabled={readOnly || submitting}
-              onClick={ariaCheck}
             >
               <FormattedMessage id="Registrering.SaveApplication.SaveButton" />
             </Button>

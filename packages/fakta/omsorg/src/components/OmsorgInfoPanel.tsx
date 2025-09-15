@@ -34,16 +34,16 @@ const transformValues = (values: FormValues): BekreftOmsorgVurderingAp => ({
 interface Props {
   personoversikt: Personoversikt;
   ytelsefordeling: Ytelsefordeling;
-  submittable: boolean;
 }
 
-export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }: Props) => {
+export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling }: Props) => {
   const {
     alleKodeverk,
     aksjonspunkterForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
     isReadOnly,
+    isSubmittable,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<BekreftOmsorgVurderingAp>();
 
@@ -76,13 +76,13 @@ export const OmsorgInfoPanel = ({ personoversikt, ytelsefordeling, submittable }
 
             <FaktaBegrunnelseTextField
               control={formMethods.control}
-              isSubmittable={submittable}
+              isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}
               hasBegrunnelse={true}
               hasVurderingText
             />
             <FaktaSubmitButton
-              isSubmittable={submittable}
+              isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}
               isSubmitting={formMethods.formState.isSubmitting}
               isDirty={formMethods.formState.isDirty}

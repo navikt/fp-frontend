@@ -26,7 +26,6 @@ type FormValues = {
 interface Props {
   fastsattOpptjening: FastsattOpptjening;
   status: string;
-  readOnlySubmitButton: boolean;
   lovReferanse?: string;
   erSvpFagsak: boolean;
 }
@@ -36,17 +35,12 @@ interface Props {
  *
  * Viser panel for å løse aksjonspunkt for avslått opptjeningsvilkår
  */
-export const OpptjeningVilkarAksjonspunktPanel = ({
-  readOnlySubmitButton,
-  lovReferanse,
-  status,
-  fastsattOpptjening,
-  erSvpFagsak,
-}: Props) => {
+export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsattOpptjening, erSvpFagsak }: Props) => {
   const intl = useIntl();
 
   const {
     behandling,
+    isSubmittable,
     aksjonspunkterForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
@@ -90,7 +84,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.Opptjeningsvilkaret' })}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
-        readOnlySubmitButton={readOnlySubmitButton}
+        isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
         lovReferanse={lovReferanse}
         originalErVilkårOk={originalErVilkårOk}

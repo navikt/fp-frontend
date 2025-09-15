@@ -58,7 +58,6 @@ interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
   aoiArbeidsforhold: AoIArbeidsforhold[];
-  submittable: boolean;
   readonly: boolean;
 }
 
@@ -71,12 +70,11 @@ export const TilretteleggingFaktaForm = ({
   arbeidsgiverOpplysningerPerId,
   svangerskapspengerTilrettelegging,
   aoiArbeidsforhold,
-  submittable,
   readonly,
 }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
+  const { isSubmittable, aksjonspunkterForPanel, alleKodeverk, submitCallback, harÅpentAksjonspunkt } =
     usePanelDataContext<BekreftSvangerskapspengerAp>();
   const uttakArbeidTyper = alleKodeverk['UttakArbeidType'];
 
@@ -210,7 +208,7 @@ export const TilretteleggingFaktaForm = ({
           readOnly={readonly}
         />
         <FaktaSubmitButton
-          isSubmittable={submittable}
+          isSubmittable={isSubmittable}
           isReadOnly={readonly}
           isSubmitting={formMethods.formState.isSubmitting}
           isDirty={formMethods.formState.isDirty}

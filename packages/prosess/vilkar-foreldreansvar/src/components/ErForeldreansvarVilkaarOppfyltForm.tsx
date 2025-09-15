@@ -32,7 +32,6 @@ interface Props {
   isForeldreansvar2Ledd: boolean;
   isEngangsstonad: boolean;
   status: string;
-  readOnlySubmitButton: boolean;
 }
 
 /**
@@ -40,17 +39,13 @@ interface Props {
  *
  * Setter opp aksjonspunkter for avklaring av foreldreansvarvilkåret 2 eller 4 ledd.
  */
-export const ErForeldreansvarVilkaarOppfyltForm = ({
-  readOnlySubmitButton,
-  isEngangsstonad,
-  isForeldreansvar2Ledd,
-  status,
-}: Props) => {
+export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, isForeldreansvar2Ledd, status }: Props) => {
   const intl = useIntl();
 
   const {
     behandling,
     alleKodeverk,
+    isSubmittable,
     aksjonspunkterForPanel,
     submitCallback,
     harÅpentAksjonspunkt,
@@ -84,8 +79,8 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({
     >
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'ErForeldreansvarVilkaarOppfyltForm.Foreldreansvar' })}
-        harÅpentAksjonspunkt={!readOnlySubmitButton}
-        readOnlySubmitButton={readOnlySubmitButton}
+        harÅpentAksjonspunkt={isSubmittable}
+        isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
         originalErVilkårOk={originalErVilkårOk}
         erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}

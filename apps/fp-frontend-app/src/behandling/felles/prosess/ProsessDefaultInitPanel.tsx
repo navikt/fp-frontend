@@ -79,6 +79,7 @@ const ProsessPanel = ({
             submitCallback={standardPanelProps.submitCallback}
             isReadOnly={standardPanelProps.isReadOnly}
             alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
+            isSubmittable={!standardPanelProps.readOnlySubmitButton}
           >
             {children}
           </PanelDataProvider>

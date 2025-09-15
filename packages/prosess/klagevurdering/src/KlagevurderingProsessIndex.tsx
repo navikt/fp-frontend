@@ -18,15 +18,9 @@ interface Props {
   klageVurdering: KlageVurdering;
   previewCallback: (data: KlagevurderingForhåndsvisData) => void;
   saveKlage: (data: TransformedValues) => void;
-  readOnlySubmitButton: boolean;
 }
 
-export const KlagevurderingProsessIndex = ({
-  klageVurdering,
-  saveKlage,
-  previewCallback,
-  readOnlySubmitButton,
-}: Props) => {
+export const KlagevurderingProsessIndex = ({ klageVurdering, saveKlage, previewCallback }: Props) => {
   const { aksjonspunkterForPanel } = usePanelDataContext();
   return (
     <RawIntlProvider value={intl}>
@@ -36,7 +30,6 @@ export const KlagevurderingProsessIndex = ({
           klageVurdering={klageVurdering}
           saveKlage={saveKlage}
           previewCallback={previewCallback}
-          readOnlySubmitButton={readOnlySubmitButton}
           alleAktuelleHjemler={klageVurdering.aktuelleHjemler ? klageVurdering.aktuelleHjemler : []}
         />
       )}

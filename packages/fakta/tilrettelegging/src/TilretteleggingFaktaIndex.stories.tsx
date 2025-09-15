@@ -255,7 +255,6 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     arbeidsgiverOpplysningerPerId: ARBEIDSGIVEROPPLYSNINGER_PER_ID,
-    submittable: true,
     readonly: false,
   },
   render: args => <TilretteleggingFaktaIndex {...args} />,

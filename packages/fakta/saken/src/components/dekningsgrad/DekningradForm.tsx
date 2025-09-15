@@ -8,8 +8,9 @@ import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './dekningradForm.module.css';
 
@@ -23,22 +24,14 @@ type FormValues = {
 
 interface Props {
   aksjonspunkt?: Aksjonspunkt;
-  fagsak: Fagsak;
   søknad: Soknad;
-  submitCallback: (data: OverstyringDekningsgradAp) => Promise<void>;
-  readOnly: boolean;
   kanOverstyreAccess: boolean;
 }
 
-export const DekningradForm = ({
-  aksjonspunkt,
-  fagsak,
-  søknad,
-  submitCallback,
-  readOnly,
-  kanOverstyreAccess,
-}: Props) => {
+export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Props) => {
   const intl = useIntl();
+
+  const { submitCallback, fagsak, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
 
   const dekningsgrad =
     søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ??
@@ -84,8 +77,8 @@ export const DekningradForm = ({
           {kanOverstyreAccess && (
             <PencilFillIcon
               title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
-              className={readOnly ? styles.editIconReadonly : styles.editIcon}
-              onClick={readOnly ? undefined : () => setVisEditeringsmodus(true)}
+              className={isReadOnly ? styles.editIconReadonly : styles.editIcon}
+              onClick={isReadOnly ? undefined : () => setVisEditeringsmodus(true)}
             />
           )}
         </HStack>
@@ -147,7 +140,7 @@ export const DekningradForm = ({
                 return null;
               },
             ]}
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnly}
           >
             <HStack gap="space-16">
               <Radio value={80} size="small">
@@ -170,13 +163,13 @@ export const DekningradForm = ({
             label={<FormattedMessage id="DekningsgradForm.Begrunnelse" />}
             validate={[required, minLength3, maxLength1500, hasValidText]}
             maxLength={1500}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
           />
           <div>
             <Button
               variant="primary"
               size="small"
-              disabled={readOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
+              disabled={isReadOnly || !formMethods.formState.isDirty || formMethods.formState.isSubmitting}
               loading={formMethods.formState.isSubmitting}
             >
               <FormattedMessage id="DekningsgradForm.Bekreft" />

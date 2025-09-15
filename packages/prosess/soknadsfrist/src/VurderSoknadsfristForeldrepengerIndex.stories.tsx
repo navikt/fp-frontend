@@ -24,7 +24,6 @@ const meta = {
   component: VurderSoknadsfristForeldrepengerIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    readOnlySubmitButton: false,
     soknad,
     aksjonspunkterForPanel: [
       {

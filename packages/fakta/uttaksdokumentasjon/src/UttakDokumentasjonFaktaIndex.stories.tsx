@@ -122,7 +122,6 @@ export const AksjonspunktMedUavklartePerioder: Story = {
       },
     ],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
-    submittable: true,
   },
 };
 
@@ -130,7 +129,6 @@ export const ReadonlyAutomatiskAvklartPeriodeAAReg: Story = {
   args: {
     aksjonspunkterForPanel: [],
     dokumentasjonVurderingBehov: automatiskAvklartBehovListe,
-    submittable: true,
   },
 };
 
@@ -183,7 +181,6 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
     ],
     dokumentasjonVurderingBehov: utfortDokumentasjonVurderingBehovListe,
     isReadOnly: true,
-    submittable: false,
   },
 };
 
@@ -208,7 +205,6 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
         aktivitetskravGrunnlag: [],
       },
     ],
-    submittable: true,
   },
 };
 
@@ -216,6 +212,5 @@ export const UavklartePerioderMenIkkeAksjonspunktEnnå: Story = {
   args: {
     aksjonspunkterForPanel: [],
     dokumentasjonVurderingBehov: opprettetDokumentasjonVurderingBehovListe,
-    submittable: true,
   },
 };

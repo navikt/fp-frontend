@@ -13,7 +13,6 @@ const intl = createIntl(messages);
 interface Props {
   soknad: Soknad;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
-  readOnlySubmitButton: boolean;
   status: string;
 }
 

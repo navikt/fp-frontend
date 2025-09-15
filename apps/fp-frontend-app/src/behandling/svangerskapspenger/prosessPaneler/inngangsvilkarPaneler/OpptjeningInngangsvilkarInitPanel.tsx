@@ -58,7 +58,6 @@ export const OpptjeningInngangsvilkarInitPanel = () => {
             erSvpFagsak
             lovReferanse={standardPanelProps.vilkårForPanel[0].lovReferanse ?? undefined}
             opptjening={opptjening}
-            readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
             status={standardPanelProps.status}
           />
         )}

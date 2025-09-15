@@ -55,7 +55,6 @@ const meta = {
   component: OpptjeningVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    readOnlySubmitButton: false,
     status: VilkarUtfallType.IKKE_VURDERT,
     lovReferanse: '§§Dette er en lovreferanse',
     erSvpFagsak: false,

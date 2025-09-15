@@ -120,7 +120,6 @@ const meta = {
   component: OmsorgOgForeldreansvarFaktaIndex,
   decorators: [withPanelData],
   args: {
-    submittable: true,
     soknad,
     adopsjon: defaultAdopsjon,
     personoversikt,

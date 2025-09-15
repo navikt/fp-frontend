@@ -14,16 +14,10 @@ interface Props {
   soknad: Soknad;
   familiehendelse: FamilieHendelse;
   status: string;
-  readOnlySubmitButton: boolean;
 }
 
-export const SoknadsfristVilkarProsessIndex = ({ soknad, familiehendelse, status, readOnlySubmitButton }: Props) => (
+export const SoknadsfristVilkarProsessIndex = ({ soknad, familiehendelse, status }: Props) => (
   <RawIntlProvider value={intl}>
-    <ErSoknadsfristVilkaretOppfyltForm
-      soknad={soknad}
-      gjeldendeFamiliehendelse={familiehendelse}
-      status={status}
-      readOnlySubmitButton={readOnlySubmitButton}
-    />
+    <ErSoknadsfristVilkaretOppfyltForm soknad={soknad} gjeldendeFamiliehendelse={familiehendelse} status={status} />
   </RawIntlProvider>
 );

@@ -14,23 +14,15 @@ interface Props {
   opptjening: Opptjening;
   lovReferanse?: string;
   erSvpFagsak?: boolean;
-  readOnlySubmitButton: boolean;
   status: string;
 }
 
-export const OpptjeningVilkarProsessIndex = ({
-  opptjening,
-  lovReferanse,
-  readOnlySubmitButton,
-  status,
-  erSvpFagsak = false,
-}: Props) => (
+export const OpptjeningVilkarProsessIndex = ({ opptjening, lovReferanse, status, erSvpFagsak = false }: Props) => (
   <RawIntlProvider value={intl}>
     <OpptjeningVilkarForm
       fastsattOpptjening={opptjening.fastsattOpptjening}
       status={status}
       lovReferanse={lovReferanse}
-      readOnlySubmitButton={readOnlySubmitButton}
       erSvpFagsak={erSvpFagsak}
     />
   </RawIntlProvider>

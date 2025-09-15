@@ -38,7 +38,6 @@ const meta = {
   component: FodselFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    submittable: true,
     isReadOnly: false,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},

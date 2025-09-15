@@ -14,16 +14,10 @@ interface Props {
   soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
   adopsjon: AdopsjonFamilieHendelse;
   isForeldrepengerFagsak: boolean;
-  submittable: boolean;
 }
 
-export const AdopsjonFaktaIndex = ({ soknad, adopsjon, isForeldrepengerFagsak, submittable }: Props) => (
+export const AdopsjonFaktaIndex = (props: Props) => (
   <RawIntlProvider value={intl}>
-    <AdopsjonInfoPanel
-      soknad={soknad}
-      adopsjon={adopsjon}
-      isForeldrepengerFagsak={isForeldrepengerFagsak}
-      submittable={submittable}
-    />
+    <AdopsjonInfoPanel {...props} />
   </RawIntlProvider>
 );
