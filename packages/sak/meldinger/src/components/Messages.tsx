@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Button, HStack, Link, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
-import { ariaCheck, hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
+import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
 import { DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
@@ -151,7 +151,6 @@ export const Messages = ({
             variant="primary"
             loading={formState.isSubmitting}
             disabled={formState.isSubmitting || kanVeilede}
-            onClick={ariaCheck}
           >
             <FormattedMessage id="Messages.Submit" />
           </Button>

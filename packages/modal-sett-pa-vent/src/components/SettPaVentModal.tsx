@@ -3,13 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
-import {
-  ariaCheck,
-  dateAfterOrEqualToToday,
-  dateBeforeToday,
-  hasValidDate,
-  required,
-} from '@navikt/ft-form-validators';
+import { dateAfterOrEqualToToday, dateBeforeToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
@@ -134,7 +128,7 @@ export const SettPaVentModal = ({
             size="small"
             variant="primary"
             style={{ paddingInline: '36px' }}
-            onClick={showAvbryt ? ariaCheck : cancelEvent}
+            onClick={showAvbryt ? undefined : cancelEvent}
             disabled={!venteArsakHasChanged && !fristHasChanged}
           >
             <FormattedMessage id="SettPaVentModal.Ok" />
