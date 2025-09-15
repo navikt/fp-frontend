@@ -24,8 +24,8 @@ jobs:
     with:
       runs-on: 'ubuntu-latest-8-cores'
       node-version: '22.17.1'
-      build-image: ${{ github.ref_name == 'master' }} # default: true
-      push-image: ${{ github.ref_name == 'master' }} # default: false
+      build-image: ${{ github.ref_name == 'los-app' }} # default: true
+      push-image: ${{ github.ref_name == 'los-app' }} # default: false
       run-knip: true
       app: fp-frontend
       image_suffix: '/fp-frontend'
