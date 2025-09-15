@@ -81,7 +81,7 @@ export const FagsakProfileIndex = ({
 
   const location = useLocation();
 
-  const { sakLinks } = notEmpty(initFetchQuery.data);
+  const { sakLinks, innloggetBruker } = notEmpty(initFetchQuery.data);
   const arbeidstakerHref = sakLinks.find(l => l.rel === 'arbeidstaker-redirect')?.href;
   const ainntektHref = sakLinks.find(l => l.rel === 'ainntekt-redirect')?.href;
 
@@ -132,7 +132,11 @@ export const FagsakProfileIndex = ({
                   hentOgSettBehandling={hentOgSettBehandling}
                   behandling={behandling}
                 />
-                <ReservasjonsstatusPanel saksnummer={fagsak.saksnummer} behandlingUuid={behandlingUuid} />
+                <ReservasjonsstatusPanel
+                  saksnummer={fagsak.saksnummer}
+                  behandlingUuid={behandlingUuid}
+                  erVeileder={innloggetBruker.kanVeilede}
+                />
               </VStack>
             </ErrorBoundary>
           </HStack>

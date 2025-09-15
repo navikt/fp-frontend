@@ -64,11 +64,7 @@ export const BehandlingMenuIndex = ({
   const fagsak = fagsakData.getFagsak();
   const behandlingAppContext = fagsakData.getBehandling(behandlingUuid);
 
-  const menyData = hentMenyData(behandlingAppContext, fagsak);
-
-  if (navAnsatt.kanVeilede) {
-    return null;
-  }
+  const menyData = hentMenyData(behandlingAppContext, fagsak, navAnsatt.kanVeilede);
 
   return (
     <>
@@ -157,7 +153,7 @@ export const BehandlingMenuIndex = ({
   );
 };
 
-const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak) => {
+const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fagsak, kanVeilede: boolean) => {
   const erPaVent = behandling ? behandling.behandlingPåVent : false;
   const behandlingTillatteOperasjoner = behandling?.behandlingTillatteOperasjoner;
 
@@ -169,35 +165,35 @@ const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fag
 
   return {
     [ModalType.TA_AV_VENT]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanGjenopptas,
+      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanGjenopptas,
       text: getTaAvVentMenytekst(),
     },
     [ModalType.SETT_PÅ_VENT]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanSettesPaVent,
+      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanSettesPaVent,
       text: getSettPaVentMenytekst(),
     },
     [ModalType.HENLEGG]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanHenlegges,
+      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanHenlegges,
       text: getHenleggMenytekst(),
     },
     [ModalType.ENDRE_BEHANDLENDE_ENHET]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanBytteEnhet,
+      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanBytteEnhet,
       text: getEndreEnhetMenytekst(),
     },
     [ModalType.ÅPNE_FOR_ENDRINGER]: {
-      disabled: !behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
+      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
       text: getApneForEndringerMenytekst(),
     },
     [ModalType.NY_BEHANDLING]: {
-      disabled: fagsak.sakSkalTilInfotrygd,
+      disabled: kanVeilede || fagsak.sakSkalTilInfotrygd,
       text: getNyBehandlingMenytekst(),
     },
     [ModalType.ENDRE_FAGSAK_MARKERING]: {
-      disabled: fagsak.sakSkalTilInfotrygd,
+      disabled: kanVeilede || fagsak.sakSkalTilInfotrygd,
       text: getEndreUtlandMenytekst(),
     },
     [ModalType.VERGE]: {
-      disabled: !(!erPaVent && (skalViseOpprettVerge || skalViseFjernVerge)),
+      disabled: kanVeilede || !(!erPaVent && (skalViseOpprettVerge || skalViseFjernVerge)),
       text: getVergeMenytekst(skalViseOpprettVerge),
     },
     [ModalType.MERK_SOM_HASTER]: {
