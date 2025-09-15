@@ -2561,9 +2561,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-frontend-app@workspace:apps/fp-frontend-app":
+"@navikt/fp-frontend@workspace:apps/fp-frontend":
   version: 0.0.0-use.local
-  resolution: "@navikt/fp-frontend-app@workspace:apps/fp-frontend-app"
+  resolution: "@navikt/fp-frontend@workspace:apps/fp-frontend"
   dependencies:
     "@navikt/aksel-icons": 7.30.1
     "@navikt/ds-css": 7.30.1
