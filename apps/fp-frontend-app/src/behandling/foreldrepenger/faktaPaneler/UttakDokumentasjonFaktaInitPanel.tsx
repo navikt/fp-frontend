@@ -31,10 +31,7 @@ export const UttakDokumentasjonFaktaInitPanel = () => {
       skalPanelVisesIMeny={harLenke(behandling, 'DOKUMENTASJON_VURDERING_BEHOV')}
     >
       {dokumentasjonVurderingBehov ? (
-        <UttakDokumentasjonFaktaIndex
-          dokumentasjonVurderingBehov={dokumentasjonVurderingBehov}
-          submittable={standardPanelProps.submittable}
-        />
+        <UttakDokumentasjonFaktaIndex dokumentasjonVurderingBehov={dokumentasjonVurderingBehov} />
       ) : (
         <LoadingPanel />
       )}

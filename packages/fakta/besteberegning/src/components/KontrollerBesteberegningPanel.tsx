@@ -9,8 +9,8 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
-import type { ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData } from '@navikt/fp-utils';
+import type { BesteberegningAP, ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 type FormValues = {
   begrunnelse: string | undefined;
@@ -19,9 +19,6 @@ type FormValues = {
 
 interface Props {
   aksjonspunkt: Aksjonspunkt;
-  submitCallback: (data: ManuellKontrollBesteberegningAP) => Promise<void>;
-  readOnly: boolean;
-  submittable: boolean;
 }
 
 /**
@@ -29,8 +26,10 @@ interface Props {
  *
  * Formkomponent. Lar saksbehandler vurdere om den automatiske besteberegningen er korrekt utført.
  */
-export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submittable, submitCallback }: Props) => {
+export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
   const [erKnappEnabled, setErKnappEnabled] = useState(false);
+
+  const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<BesteberegningAP>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -55,21 +54,21 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt, readOnly, submitta
             name="besteberegningErKorrektValg"
             control={formMethods.control}
             label={<FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.Radiotekst" />}
-            readOnly={readOnly}
+            readOnly={isReadOnly}
             onChange={() => setErKnappEnabled(!erKnappEnabled)}
           />
           <FaktaBegrunnelseTextField
             control={formMethods.control}
-            isSubmittable={submittable}
-            isReadOnly={readOnly}
+            isSubmittable={isSubmittable}
+            isReadOnly={isReadOnly}
             hasBegrunnelse={!!begrunnelse}
             hasVurderingText
           />
           <FaktaSubmitButton
-            isSubmittable={submittable && erKnappEnabled}
+            isSubmittable={isSubmittable && erKnappEnabled}
             isSubmitting={formMethods.formState.isSubmitting}
             isDirty={formMethods.formState.isDirty}
-            isReadOnly={readOnly}
+            isReadOnly={isReadOnly}
           />
         </VStack>
       </RhfForm>

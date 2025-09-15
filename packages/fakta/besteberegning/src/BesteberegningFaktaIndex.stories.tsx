@@ -47,7 +47,6 @@ const meta = {
   component: BesteberegningFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    submittable: true,
     arbeidsgiverOpplysninger,
   },
   render: args => <BesteberegningFaktaIndex {...args} />,

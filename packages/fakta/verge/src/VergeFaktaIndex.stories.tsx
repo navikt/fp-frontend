@@ -42,7 +42,6 @@ const meta = {
   component: VergeFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    submittable: true,
     aksjonspunkterForPanel,
     alleKodeverk: { ...alleKodeverk, ...alleKodeverkTilbakekreving },
     alleMerknaderFraBeslutter: {

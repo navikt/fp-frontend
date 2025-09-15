@@ -25,7 +25,6 @@ type FormValues = {
 interface Props {
   status: string;
   vilkår: Vilkar[];
-  readOnlySubmitButton: boolean;
 }
 
 /**
@@ -33,7 +32,7 @@ interface Props {
  *
  * Setter opp aksjonspunktet for avklaring av Adopsjonsvilkåret.
  */
-export const AdopsjonVilkarForm = ({ vilkår, readOnlySubmitButton, status }: Props) => {
+export const AdopsjonVilkarForm = ({ vilkår, status }: Props) => {
   const intl = useIntl();
 
   const {
@@ -43,6 +42,7 @@ export const AdopsjonVilkarForm = ({ vilkår, readOnlySubmitButton, status }: Pr
     submitCallback,
     harÅpentAksjonspunkt,
     isReadOnly,
+    isSubmittable,
     alleMerknaderFraBeslutter,
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
 
@@ -70,7 +70,7 @@ export const AdopsjonVilkarForm = ({ vilkår, readOnlySubmitButton, status }: Pr
       <ProsessPanelTemplate
         title={intl.formatMessage({ id: 'AdopsjonVilkarForm.Adopsjon' })}
         harÅpentAksjonspunkt={harÅpentAksjonspunkt}
-        readOnlySubmitButton={readOnlySubmitButton}
+        isSubmittable={isSubmittable}
         isReadOnly={isReadOnly}
         lovReferanse={vilkår[0]?.lovReferanse ?? undefined}
         originalErVilkårOk={originalErVilkårOk}

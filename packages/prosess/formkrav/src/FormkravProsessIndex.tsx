@@ -19,7 +19,6 @@ interface Props {
   klageVurdering?: KlageVurdering;
   avsluttedeBehandlinger: AvsluttetBehandling[];
   lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
-  readOnlySubmitButton: boolean;
 }
 
 const tomKlageVurdering = {
@@ -36,7 +35,6 @@ const tomKlageVurdering = {
 export const FormkravProsessIndex = ({
   klageVurdering = tomKlageVurdering,
   avsluttedeBehandlinger,
-  readOnlySubmitButton,
   lagreFormkravVurdering,
 }: Props) => {
   const { aksjonspunkterForPanel } = usePanelDataContext();
@@ -46,7 +44,6 @@ export const FormkravProsessIndex = ({
       {aksjonspunkterForPanel.some(a => a.definisjon === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
         <FormkravKlageFormNfp
           klageVurdering={klageVurdering}
-          readOnlySubmitButton={readOnlySubmitButton}
           avsluttedeBehandlinger={avsluttedeBehandlinger}
           lagreFormkravVurdering={lagreFormkravVurdering}
         />

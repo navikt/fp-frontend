@@ -18,7 +18,6 @@ const { SJEKK_TERMINBEKREFTELSE, SJEKK_MANGLENDE_FØDSEL } = AksjonspunktKode;
 
 interface Props {
   fødsel: Fødsel;
-  submittable: boolean;
   terminbekreftelseDokument: DokumentLinkReferanse | undefined;
 }
 
@@ -27,7 +26,7 @@ interface Props {
  *
  * Har ansvar for å sette opp formen for faktapenelet til Fødselsvilkåret.
  */
-export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokument }: Props) => {
+export const FodselInfoPanel = ({ fødsel, terminbekreftelseDokument }: Props) => {
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt } = usePanelDataContext();
 
   const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_TERMINBEKREFTELSE);
@@ -49,13 +48,9 @@ export const FodselInfoPanel = ({ submittable, fødsel, terminbekreftelseDokumen
         <FaktaFraFReg register={fødsel.register} />
       </HGrid>
 
-      {terminbekreftelseAp && (
-        <SjekkTerminbekreftelseForm submittable={submittable} fødsel={fødsel} aksjonspunkt={terminbekreftelseAp} />
-      )}
+      {terminbekreftelseAp && <SjekkTerminbekreftelseForm fødsel={fødsel} aksjonspunkt={terminbekreftelseAp} />}
 
-      {manglendeFødselAp && (
-        <SjekkManglendeFødselForm submittable={submittable} fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />
-      )}
+      {manglendeFødselAp && <SjekkManglendeFødselForm fødsel={fødsel} aksjonspunkt={manglendeFødselAp} />}
     </VStack>
   );
 };

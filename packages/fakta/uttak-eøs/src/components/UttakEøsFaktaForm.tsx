@@ -18,14 +18,13 @@ import { UttakEøsFaktaTable } from './UttakEøsFaktaTable';
 
 interface Props {
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[];
-  submittable: boolean;
   kanOverstyre: boolean;
 }
 
-export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOverstyre }: Props) => {
+export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Props) => {
   const intl = useIntl();
 
-  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isReadOnly, submitCallback } =
+  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback } =
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
   annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
@@ -122,7 +121,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, submittable, kanOve
             />
             {erRedigerbart && (
               <FaktaSubmitButton
-                isSubmittable={submittable && !feilmelding && !visLeggTilPeriodeForm}
+                isSubmittable={isSubmittable && !feilmelding && !visLeggTilPeriodeForm}
                 isReadOnly={isReadOnly}
                 isSubmitting={formMethods.formState.isSubmitting}
                 isDirty={isDirty || formMethods.formState.isDirty}

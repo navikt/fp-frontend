@@ -29,7 +29,6 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     lagreFormkravVurdering: action('button-click') as (data: FormkravMellomlagretDataType) => Promise<void>,
-    readOnlySubmitButton: false,
     avsluttedeBehandlinger,
   },
   render: args => <FormkravProsessIndex {...args} />,

@@ -47,7 +47,6 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) 
           adopsjon={familiehendelse.adopsjon}
           inntektArbeidYtelse={inntektArbeidYtelse}
           personoversikt={personoversikt}
-          submittable={standardPanelProps.submittable}
         />
       ) : (
         <LoadingPanel />

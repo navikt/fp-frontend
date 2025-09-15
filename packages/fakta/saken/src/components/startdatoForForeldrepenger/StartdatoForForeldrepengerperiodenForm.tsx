@@ -12,7 +12,7 @@ import dayjs from 'dayjs';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { notEmpty, useMellomlagretFormData } from '@navikt/fp-utils';
+import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './startdatoForForeldrepengerperiodenForm.module.css';
 
@@ -51,9 +51,6 @@ const getValidateIsBefore2019 = (getValues: UseFormGetValues<FormValues>, intl: 
 interface Props {
   aksjonspunkt?: Aksjonspunkt;
   soknad: Soknad;
-  submitCallback: (data: OverstyringAvklarStartdatoForPeriodenAp) => Promise<void>;
-  readOnly: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
 /**
@@ -61,14 +58,11 @@ interface Props {
  *
  * Overstyring av startdato for foreldrepengerperioden.
  */
-export const StartdatoForForeldrepengerperiodenForm = ({
-  submitCallback,
-  aksjonspunkt,
-  soknad,
-  alleMerknaderFraBeslutter,
-  readOnly,
-}: Props) => {
+export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }: Props) => {
   const intl = useIntl();
+
+  const { submitCallback, alleMerknaderFraBeslutter, isReadOnly } =
+    usePanelDataContext<OverstyringAvklarStartdatoForPeriodenAp>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
@@ -102,8 +96,8 @@ export const StartdatoForForeldrepengerperiodenForm = ({
             </BodyShort>
             <PencilFillIcon
               title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
-              className={readOnly ? styles.editIconReadonly : styles.editIcon}
-              onClick={readOnly ? undefined : slåPåEditering}
+              className={isReadOnly ? styles.editIconReadonly : styles.editIcon}
+              onClick={isReadOnly ? undefined : slåPåEditering}
             />
           </HStack>
         )}
@@ -121,7 +115,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
                 control={formMethods.control}
                 label={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.Startdato' })}
                 validate={[required, hasValidDate, getValidateIsBefore2019(formMethods.getValues, intl)]}
-                isReadOnly={readOnly}
+                isReadOnly={isReadOnly}
               />
               <RhfTextarea
                 name="begrunnelse"
@@ -129,7 +123,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({
                 label={<FormattedMessage id="StartdatoForForeldrepengerperiodenForm.Vurdering" />}
                 validate={[required, minLength3, maxLength1500, hasValidText]}
                 maxLength={1500}
-                readOnly={readOnly}
+                readOnly={isReadOnly}
               />
               <HStack gap="space-8">
                 <Button

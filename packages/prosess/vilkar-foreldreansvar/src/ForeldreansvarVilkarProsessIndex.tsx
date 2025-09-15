@@ -12,7 +12,6 @@ interface Props {
   isForeldreansvar2Ledd: boolean;
   isEngangsstonad: boolean;
   status: string;
-  readOnlySubmitButton: boolean;
 }
 
 export const ForeldreansvarVilkarProsessIndex = (props: Props) => (

@@ -13,17 +13,16 @@ const intl = createIntl(messages);
 
 interface Props {
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov[];
-  submittable: boolean;
 }
 
-export const UttakDokumentasjonFaktaIndex = ({ dokumentasjonVurderingBehov, submittable }: Props) => {
+export const UttakDokumentasjonFaktaIndex = ({ dokumentasjonVurderingBehov }: Props) => {
   const sorterteBehov = [...dokumentasjonVurderingBehov].sort((krav1, krav2) =>
     dayjs(krav1.fom).diff(dayjs(krav2.fom)),
   );
 
   return (
     <RawIntlProvider value={intl}>
-      <UttakDokumentasjonFaktaForm dokumentasjonVurderingBehov={sorterteBehov} submittable={submittable} />
+      <UttakDokumentasjonFaktaForm dokumentasjonVurderingBehov={sorterteBehov} />
     </RawIntlProvider>
   );
 };

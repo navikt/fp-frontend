@@ -36,11 +36,7 @@ export const VergeFaktaInitPanel = () => {
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
       {!isFetching ? (
-        <VergeFaktaIndex
-          verge={verge}
-          alleKodeverk={standardPanelProps.alleKodeverk}
-          submittable={standardPanelProps.submittable}
-        />
+        <VergeFaktaIndex verge={verge} alleKodeverk={standardPanelProps.alleKodeverk} />
       ) : (
         <LoadingPanel />
       )}
