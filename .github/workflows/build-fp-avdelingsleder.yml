@@ -46,7 +46,6 @@ jobs:
       cluster: dev-gcp
       image_suffix: '/fp-avdelingsleder'
       deploy_context: '/fp-avdelingsleder'
-    secrets: inherit
 
   deploy-prod:
     name: Deploy prod
@@ -61,4 +60,3 @@ jobs:
       cluster: prod-gcp
       image_suffix: '/fp-avdelingsleder'
       deploy_context: '/fp-avdelingsleder'
-    secrets: inherit
