@@ -46,6 +46,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanGjenopptas: false,
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
+  behandlingKanMerkesHaster: true,
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
 };
 
@@ -73,21 +74,22 @@ const FAGSAK = {
   behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
 } as Fagsak;
 
+const HANDLERS = [
+  http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
+  http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
+  http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
+  http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_OPPRETTES), () => HttpResponse.json(false)),
+  http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES), () => HttpResponse.json(false)),
+  http.post(getHref(FagsakRel.ENDRE_SAK_MARKERING), () => new HttpResponse(null, { status: 200 })),
+];
+
 const meta = {
   title: 'fagsak/BehandlingMenuIndex',
   decorators: [withIntl, withRouter, withQueryClient],
   component: BehandlingMenuIndex,
   parameters: {
     msw: {
-      handlers: [
-        http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak)),
-        http.get(FagsakUrl.INIT_FETCH_FPTILBAKE, () => HttpResponse.json(initFetchFptilbake)),
-        http.get(getHref(FagsakRel.KODEVERK), () => HttpResponse.json(alleKodeverk)),
-        http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
-        http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_OPPRETTES), () => HttpResponse.json(false)),
-        http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES), () => HttpResponse.json(false)),
-        http.post(getHref(FagsakRel.ENDRE_SAK_MARKERING), () => new HttpResponse(null, { status: 200 })),
-      ],
+      handlers: HANDLERS.concat(http.get(FagsakUrl.INIT_FETCH, () => HttpResponse.json(initFetchFpsak))),
     },
   },
   args: {
@@ -118,5 +120,44 @@ export const ValgNårBehandlingErValgt: Story = {
 export const ValgNårBehandlingIkkeErValgt: Story = {
   args: {
     fagsakData: new FagsakData(FAGSAK),
+  },
+};
+
+export const ValgNårVeileder: Story = {
+  parameters: {
+    msw: {
+      handlers: HANDLERS.concat(
+        http.get(FagsakUrl.INIT_FETCH, () =>
+          HttpResponse.json({
+            ...initFetchFpsak,
+            innloggetBruker: { ...initFetchFpsak.innloggetBruker, kanVeilede: true },
+          }),
+        ),
+      ),
+    },
+  },
+  args: {
+    behandlingUuid: '1',
+    fagsakData: new FagsakData({
+      ...FAGSAK,
+      behandlinger: [
+        {
+          ...ALLE_BEHANDLINGER[0],
+          behandlingTillatteOperasjoner: {
+            uuid: '1',
+            behandlingFraBeslutter: false,
+            behandlingKanSendeMelding: false,
+            behandlingTilGodkjenning: false,
+            behandlingKanBytteEnhet: false,
+            behandlingKanHenlegges: false,
+            behandlingKanGjenopptas: false,
+            behandlingKanOpnesForEndringer: false,
+            behandlingKanSettesPaVent: false,
+            behandlingKanMerkesHaster: true,
+            vergeBehandlingsmeny: VergeBehandlingmenyValg.SKJUL,
+          },
+        },
+      ],
+    }),
   },
 };

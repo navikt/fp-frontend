@@ -165,23 +165,23 @@ const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fag
 
   return {
     [ModalType.TA_AV_VENT]: {
-      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanGjenopptas,
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanGjenopptas,
       text: getTaAvVentMenytekst(),
     },
     [ModalType.SETT_PÅ_VENT]: {
-      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanSettesPaVent,
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanSettesPaVent,
       text: getSettPaVentMenytekst(),
     },
     [ModalType.HENLEGG]: {
-      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanHenlegges,
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanHenlegges,
       text: getHenleggMenytekst(),
     },
     [ModalType.ENDRE_BEHANDLENDE_ENHET]: {
-      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanBytteEnhet,
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanBytteEnhet,
       text: getEndreEnhetMenytekst(),
     },
     [ModalType.ÅPNE_FOR_ENDRINGER]: {
-      disabled: kanVeilede || !behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
+      disabled: !behandlingTillatteOperasjoner?.behandlingKanOpnesForEndringer,
       text: getApneForEndringerMenytekst(),
     },
     [ModalType.NY_BEHANDLING]: {
@@ -193,7 +193,7 @@ const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fag
       text: getEndreUtlandMenytekst(),
     },
     [ModalType.VERGE]: {
-      disabled: kanVeilede || !(!erPaVent && (skalViseOpprettVerge || skalViseFjernVerge)),
+      disabled: kanVeilede || erPaVent || (!skalViseOpprettVerge && !skalViseFjernVerge),
       text: getVergeMenytekst(skalViseOpprettVerge),
     },
     [ModalType.MERK_SOM_HASTER]: {

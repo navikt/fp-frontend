@@ -135,7 +135,7 @@ export const FagsakProfileIndex = ({
                 <ReservasjonsstatusPanel
                   saksnummer={fagsak.saksnummer}
                   behandlingUuid={behandlingUuid}
-                  erVeileder={innloggetBruker.kanVeilede}
+                  kanVeilede={innloggetBruker.kanVeilede}
                 />
               </VStack>
             </ErrorBoundary>
