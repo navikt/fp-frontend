@@ -20,7 +20,7 @@ const formatText = (intl: IntlShape, saksbehandler?: SaksbehandlerProfil): strin
     return intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesIkke' });
   }
 
-  return saksbehandler ? `${saksbehandler.navn}` : '';
+  return `${saksbehandler.navn}`;
 };
 
 type SøkFormValues = {

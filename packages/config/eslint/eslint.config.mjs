@@ -79,7 +79,9 @@ export default [
       ],
       '@typescript-eslint/no-explicit-any': ERROR,
       '@typescript-eslint/ban-ts-comment': ERROR,
-      '@typescript-eslint/no-unnecessary-condition': 'error',
+      '@typescript-eslint/no-unnecessary-condition': ERROR,
+      '@typescript-eslint/no-unsafe-enum-comparison': OFF,
+      '@typescript-eslint/no-misused-promises': OFF,
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,

@@ -27,7 +27,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const hentSaksbehandler = (brukerIdent: string) => {
-      args.hentSaksbehandler?.(brukerIdent);
+      args.hentSaksbehandler(brukerIdent);
       setArgs(oldArgs => ({ ...oldArgs, hentSaksbehandlerIsPending: false, hentSaksbehandlerIsSuccess: true }));
     };
 

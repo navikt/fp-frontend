@@ -57,7 +57,7 @@ export const BehovForTilretteleggingPanel = ({ readOnly }: Props) => {
           </Heading>
 
           {formState.isSubmitted && formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message && (
-            <ErrorMessage>{formState.errors[TILRETTELEGGING_NAME_PREFIX]?.notRegisteredInput?.message}</ErrorMessage>
+            <ErrorMessage>{formState.errors[TILRETTELEGGING_NAME_PREFIX].notRegisteredInput.message}</ErrorMessage>
           )}
 
           <TrueFalseInput

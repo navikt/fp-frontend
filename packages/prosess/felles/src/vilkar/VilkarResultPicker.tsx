@@ -90,7 +90,7 @@ export const VilkarResultPicker = ({
             </option>
           ))}
           readOnly={isReadOnly}
-          className={styles.selectBredde}
+          className={styles['selectBredde']}
           validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkårOk, getValues('avslagskode')))]}
         />
       )}

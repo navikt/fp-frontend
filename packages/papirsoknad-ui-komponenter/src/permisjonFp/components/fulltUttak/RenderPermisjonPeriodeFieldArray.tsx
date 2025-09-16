@@ -60,6 +60,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
   const morsAktivitetTyper = alleKodeverk['MorsAktivitet'];
 
   //@ts-expect-error Dette bør fjernast. '-' er gammalt rask
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   if (morsAktivitetTyper.filter(({ kode }) => kode === '-').length === 0) {
     //@ts-expect-error Dette bør fjernast. '-' er gammalt rask
     morsAktivitetTyper.unshift({ kode: '-', navn: '', kodeverk: '' });
