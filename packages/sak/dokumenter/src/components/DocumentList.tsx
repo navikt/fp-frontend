@@ -137,9 +137,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
             documents
               .filter(d => valgteDokumentIder.includes(d.dokumentId))
               .forEach(dokument => {
-                if (dokument) {
-                  åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
-                }
+                åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
               })
           }
           className={styles.openDocumentButton}

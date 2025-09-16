@@ -236,9 +236,7 @@ const getHenleggÅrsaker = (
 ): (KodeverkMedNavn<'BehandlingResultatType'> | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>)[] => {
   const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
   return typerForBehandlingType
-    .filter(
-      type => ytelseType !== 'ES' || (ytelseType === 'ES' && type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER),
-    )
+    .filter(type => ytelseType !== 'ES' || type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER)
     .flatMap(type => {
       const typer = behandlingResultatTyper.find(brt => brt.kode === type);
       return typer ? [typer] : [];

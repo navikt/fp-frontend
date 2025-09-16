@@ -82,6 +82,7 @@ export default [
       '@typescript-eslint/no-unnecessary-condition': ERROR,
       '@typescript-eslint/no-unsafe-enum-comparison': OFF,
       '@typescript-eslint/no-misused-promises': OFF,
+      '@typescript-eslint/no-unsafe-call': OFF, // Denne feiler for .stories pga parameters
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,

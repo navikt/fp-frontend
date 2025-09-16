@@ -97,7 +97,6 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
     >
       {(field, index) => {
         const erForsteRad = index === 0;
-
         const periode = watch(getPrefix(index));
 
         const periodeFomForTidlig = erPeriodeFormFør01012019(periode.periodeFom);

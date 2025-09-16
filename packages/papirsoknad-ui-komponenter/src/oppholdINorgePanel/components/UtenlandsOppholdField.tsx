@@ -104,7 +104,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
   const land = countrySelectValues(countryCodes);
 
   return (
-    <PeriodFieldArray<FormValues>
+    <PeriodFieldArray
       fields={fields}
       titleText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.AngiOpphold' })}
       bodyText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Add' })}
@@ -115,7 +115,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
     >
       {(field, index, getRemoveButton) => (
         <React.Fragment key={field.id}>
-          <HStack key={field.id} gap="space-16" paddingBlock="2">
+          <HStack gap="space-16" paddingBlock="2">
             <RhfSelect
               name={`${name}.${index}.land`}
               control={control}

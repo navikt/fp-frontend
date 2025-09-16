@@ -48,7 +48,7 @@ export const MenyHenleggIndex = ({
       begrunnelse: formValues.begrunnelse ?? '',
       fritekst: formValues.fritekst,
     };
-    henleggBehandling(henleggBehandlingDto).then(() => {
+    void henleggBehandling(henleggBehandlingDto).then(() => {
       setErHenlagt(true);
     });
   };

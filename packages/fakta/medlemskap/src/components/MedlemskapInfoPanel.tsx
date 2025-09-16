@@ -1,5 +1,3 @@
-import { FormattedMessage } from 'react-intl';
-
 import { VStack } from '@navikt/ds-react';
 
 import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
@@ -34,65 +32,61 @@ export const MedlemskapInfoPanel = ({ medlemskap, soknad }: Props) => {
   );
   const harAksjonspunkt = !!aksjonspunkt;
 
-  if (medlemskap) {
-    return (
-      <VStack gap="space-24">
-        <AksjonspunktHelpText aksjonspunkter={aksjonspunkterForPanel} medlemskap={medlemskap} />
-        {medlemskap.manuellBehandlingResultat && isReadOnly && aksjonspunkt && (
-          <VurderMedlemskapAksjonspunktForm
-            manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-            aksjonspunkt={aksjonspunkt}
-          />
-        )}
+  return (
+    <VStack gap="space-24">
+      <AksjonspunktHelpText aksjonspunkter={aksjonspunkterForPanel} medlemskap={medlemskap} />
+      {medlemskap.manuellBehandlingResultat && isReadOnly && aksjonspunkt && (
+        <VurderMedlemskapAksjonspunktForm
+          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
+          aksjonspunkt={aksjonspunkt}
+        />
+      )}
 
-        {medlemskap.legacyManuellBehandling && !medlemskap.manuellBehandlingResultat && (
-          <VurderMedlemsskapLegacyAksjonspunktVisning
-            legacyManuellBehandling={medlemskap.legacyManuellBehandling}
-            alleKodeverk={alleKodeverk}
-          />
-        )}
-        <SituasjonOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
+      {medlemskap.legacyManuellBehandling && !medlemskap.manuellBehandlingResultat && (
+        <VurderMedlemsskapLegacyAksjonspunktVisning
+          legacyManuellBehandling={medlemskap.legacyManuellBehandling}
+          alleKodeverk={alleKodeverk}
+        />
+      )}
+      <SituasjonOversikt medlemskap={medlemskap} soknad={soknad} alleKodeverk={alleKodeverk} />
 
-        <VStack gap="space-8">
-          <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.avvik} skalViseAvvik={harAksjonspunkt} />
-          <OpplysningerOmAdresser
-            medlemskap={medlemskap}
-            avvik={medlemskap.avvik}
-            brukerNavn={fagsak.bruker.navn}
-            annenpartNavn={fagsak.annenPart?.navn}
-            alleKodeverk={alleKodeverk}
-            skalViseAvvik={harAksjonspunkt}
-          />
-          <OpplysningerOmPersonstatus
-            medlemskap={medlemskap}
-            avvik={medlemskap.avvik}
-            brukerNavn={fagsak.bruker.navn}
-            annenpartNavn={fagsak.annenPart?.navn}
-            alleKodeverk={alleKodeverk}
-            skalViseAvvik={harAksjonspunkt}
-          />
-          <OpplysningerFraMedlemskapsregister
-            medlemskapsperioder={medlemskap.medlemskapsperioder}
-            avvik={medlemskap.avvik}
-            alleKodeverk={alleKodeverk}
-            skalViseAvvik={harAksjonspunkt}
-          />
-          <OpplysningerOmOppholdstillatelser
-            oppholdstillatelser={medlemskap.oppholdstillatelser}
-            avvik={medlemskap.avvik}
-            alleKodeverk={alleKodeverk}
-            skalViseAvvik={harAksjonspunkt}
-          />
-        </VStack>
-        {!isReadOnly && aksjonspunkt && (
-          <VurderMedlemskapAksjonspunktForm
-            manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
-            aksjonspunkt={aksjonspunkt}
-          />
-        )}
+      <VStack gap="space-8">
+        <OpplysningerOmUtenlandsopphold soknad={soknad} avvik={medlemskap.avvik} skalViseAvvik={harAksjonspunkt} />
+        <OpplysningerOmAdresser
+          medlemskap={medlemskap}
+          avvik={medlemskap.avvik}
+          brukerNavn={fagsak.bruker.navn}
+          annenpartNavn={fagsak.annenPart?.navn}
+          alleKodeverk={alleKodeverk}
+          skalViseAvvik={harAksjonspunkt}
+        />
+        <OpplysningerOmPersonstatus
+          medlemskap={medlemskap}
+          avvik={medlemskap.avvik}
+          brukerNavn={fagsak.bruker.navn}
+          annenpartNavn={fagsak.annenPart?.navn}
+          alleKodeverk={alleKodeverk}
+          skalViseAvvik={harAksjonspunkt}
+        />
+        <OpplysningerFraMedlemskapsregister
+          medlemskapsperioder={medlemskap.medlemskapsperioder}
+          avvik={medlemskap.avvik}
+          alleKodeverk={alleKodeverk}
+          skalViseAvvik={harAksjonspunkt}
+        />
+        <OpplysningerOmOppholdstillatelser
+          oppholdstillatelser={medlemskap.oppholdstillatelser}
+          avvik={medlemskap.avvik}
+          alleKodeverk={alleKodeverk}
+          skalViseAvvik={harAksjonspunkt}
+        />
       </VStack>
-    );
-  } else {
-    return <FormattedMessage id="MedlemskapInfoPanel.ManglerPersonopplysninger" />;
-  }
+      {!isReadOnly && aksjonspunkt && (
+        <VurderMedlemskapAksjonspunktForm
+          manuellBehandlingResultat={medlemskap.manuellBehandlingResultat}
+          aksjonspunkt={aksjonspunkt}
+        />
+      )}
+    </VStack>
+  );
 };
