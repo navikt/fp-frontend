@@ -1,5 +1,5 @@
 import { composeStories } from '@storybook/react';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
@@ -161,40 +161,55 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();
 
-    const neiRadioButtons = screen.getAllByLabelText('Nei') as HTMLInputElement[];
-    const checkedNeiRadioButtons = neiRadioButtons.filter(radio => radio.checked);
+    const radiogrupper = screen.getAllByRole('group');
+    expect(radiogrupper).toHaveLength(3);
+    radiogrupper.forEach(rg => expect(rg).toHaveAttribute('aria-readonly', 'true'));
 
-    expect(checkedNeiRadioButtons).toHaveLength(3);
-    checkedNeiRadioButtons.forEach(radio => {
-      expect(radio).toBeDisabled();
-    });
+    const jaRadios = screen.getAllByLabelText('Ja');
+    const neiRadios = screen.getAllByLabelText('Nei');
+
+    expect(jaRadios).toHaveLength(3);
+    expect(neiRadios).toHaveLength(3);
+
+    expect(jaRadios[0]).not.toBeChecked();
+    expect(neiRadios[0]).toBeChecked();
+    expect(jaRadios[1]).not.toBeChecked();
+    expect(neiRadios[1]).toBeChecked();
+    expect(jaRadios[2]).not.toBeChecked();
+    expect(neiRadios[2]).toBeChecked();
   });
 
   it('skal vise i readonly modus for historisk valgte options når revurdering åpnes', async () => {
     render(<RevurderingManuell isReadOnly={true} />);
 
     expect(await screen.findByText('Rettighetstype')).toBeInTheDocument();
-    expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
+
+    expect(screen.getByLabelText(/Har annen forelder rett til foreldrepenger i Norge?/)).toBeInTheDocument();
     expect(
-      screen.getByText('Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?'),
+      screen.getByLabelText(/Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?/),
     ).toBeInTheDocument();
-    expect(screen.getByText('Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?')).toBeInTheDocument();
+    expect(screen.getByLabelText(/Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?/)).toBeInTheDocument();
+
+    const radiogrupper = screen.getAllByRole('group');
+
+    expect(radiogrupper).toHaveLength(3);
+    radiogrupper.forEach(rg => expect(rg).toHaveAttribute('aria-readonly', 'true'));
+
+    const jaRadios = screen.getAllByLabelText('Ja');
+    const neiRadios = screen.getAllByLabelText('Nei');
+
+    expect(jaRadios).toHaveLength(3);
+    expect(neiRadios).toHaveLength(3);
+
+    expect(jaRadios[0]).not.toBeChecked();
+    expect(neiRadios[0]).toBeChecked();
+    expect(jaRadios[1]).not.toBeChecked();
+    expect(neiRadios[1]).toBeChecked();
+    expect(jaRadios[2]).toBeChecked();
+    expect(neiRadios[2]).not.toBeChecked();
+
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();
-
-    const neiRadioButtons = screen.getAllByLabelText('Nei') as HTMLInputElement[];
-    const checkedNeiRadioButtons = neiRadioButtons.filter(radio => radio.checked);
-    expect(checkedNeiRadioButtons).toHaveLength(2);
-    checkedNeiRadioButtons.forEach(radio => {
-      expect(radio).toBeDisabled();
-    });
-
-    const jaRadioButtons = screen.getAllByLabelText('Ja') as HTMLInputElement[];
-    const checkedJaRadioButtons = jaRadioButtons.filter(radio => radio.checked);
-    expect(checkedJaRadioButtons).toHaveLength(1);
-    checkedJaRadioButtons.forEach(radio => {
-      expect(radio).toBeDisabled();
-    });
   });
 
   it('skal kunne ovestyre', async () => {

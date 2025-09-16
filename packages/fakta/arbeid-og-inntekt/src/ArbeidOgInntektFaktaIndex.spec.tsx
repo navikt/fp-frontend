@@ -134,11 +134,10 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     await userEvent.click(screen.getByTitle('Vis mer'));
     expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
 
-    const radioknapper = screen.getAllByRole('radio', { hidden: true });
-    expect(radioknapper).toHaveLength(3);
-    expect(radioknapper[0]).toBeDisabled();
-    expect(radioknapper[0]).toBeChecked();
-    expect(radioknapper[1]).toBeDisabled();
+    expect(screen.getByLabelText(/Må inntektsmelding innhentes?/)).toHaveAttribute('aria-readonly', 'true');
+    expect(
+      screen.getByLabelText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
+    ).toBeChecked();
     expect(screen.getByText('Vil innehente inntektsmelding fordi...')).toBeInTheDocument();
   });
 
@@ -319,12 +318,8 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     await userEvent.click(screen.getByTitle('Vis mer'));
     expect(await screen.findByTitle('Vis mindre')).toBeInTheDocument();
 
-    const radioKnapper = screen.getAllByRole('radio', { hidden: true });
-    expect(radioKnapper).toHaveLength(3);
-    expect(radioKnapper[0]).toBeDisabled();
-    expect(radioKnapper[1]).toBeDisabled();
-    expect(radioKnapper[2]).toBeDisabled();
-    expect(radioKnapper[2]).toBeChecked();
+    expect(screen.getByLabelText(/Skal vi bruke denne inntektsmeldingen?/)).toHaveAttribute('aria-readonly', 'true');
+    expect(screen.getByLabelText('Opprett arbeidsforhold basert på inntektsmeldingen')).toBeChecked();
     expect(screen.getByText('Jeg opprettet arbeidsforhold fordi...')).toBeInTheDocument();
   });
 
