@@ -764,6 +764,9 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
       '@type': '5003';
     } & tjenester_behandling_vedtak_aksjonspunkt_VurdereInntektsmeldingFørVedtakDto)
   | ({
+      '@type': '5061';
+    } & tjenester_behandling_ytelsefordeling_BekreftFaktaForOmsorgVurderingDto)
+  | ({
       '@type': '5012';
     } & tjenester_registrering_es_ManuellRegistreringEngangsstonadDto)
   | ({
@@ -1310,7 +1313,6 @@ export type tjenester_behandling_søknad_aksjonspunkt_SoknadsfristAksjonspunktDt
 
 export type tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDto = {
   ansesMottattDato?: string;
-  harGyldigGrunn?: boolean;
   begrunnelse?: string;
 };
 
@@ -1352,7 +1354,6 @@ export type tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehov
   | 'IKKE_DOKUMENTERT';
 
 export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDto = {
-  vurderingBehov?: Array<tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto>;
   begrunnelse?: string;
 };
 
@@ -1508,6 +1509,11 @@ export type tjenester_behandling_vedtak_aksjonspunkt_VurdereDokumentFørVedtakDt
 };
 
 export type tjenester_behandling_vedtak_aksjonspunkt_VurdereInntektsmeldingFørVedtakDto = {
+  begrunnelse?: string;
+};
+
+export type tjenester_behandling_ytelsefordeling_BekreftFaktaForOmsorgVurderingDto = {
+  omsorg: boolean;
   begrunnelse?: string;
 };
 
@@ -3048,11 +3054,11 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_Beste
     folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
     folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegningMånedGrunnlagDto,
   ];
-  avvik: number;
+  avvik?: number;
 };
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_ForeldrepengerGrunnlagDto = {
-  besteberegninggrunnlag: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;
+  besteberegninggrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;
 };
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto = {
@@ -3980,8 +3986,6 @@ export type foreldrepenger_behandlingslager_behandling_DokumentTypeId =
   | 'ANNET'
   | '-';
 
-export type foreldrepenger_familiehendelse_rest_SøknadType = 'ST-001' | 'ST-002';
-
 export type tjenester_behandling_søknad_ManglendeVedleggDto = {
   dokumentType: foreldrepenger_behandlingslager_behandling_DokumentTypeId;
   dokumentTittel: string;
@@ -4014,7 +4018,7 @@ export type tjenester_behandling_søknad_OppgittTilknytningDto = {
 };
 
 export type tjenester_behandling_søknad_SoknadDto = {
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  soknadType: tjenester_behandling_søknad_SøknadType;
   mottattDato: string;
   begrunnelseForSenInnsending?: string;
   antallBarn: number;
@@ -4023,6 +4027,8 @@ export type tjenester_behandling_søknad_SoknadDto = {
   oppgittFordeling: tjenester_behandling_søknad_OppgittFordelingDto;
   søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
 };
+
+export type tjenester_behandling_søknad_SøknadType = 'ST-001' | 'ST-002';
 
 export type tjenester_behandling_søknad_SøknadsfristDto = {
   mottattDato?: string;
@@ -4047,7 +4053,7 @@ export type foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType =
   | '-';
 
 export type tjenester_behandling_søknad_SoknadAdopsjonDto = {
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  soknadType: tjenester_behandling_søknad_SøknadType;
   mottattDato: string;
   begrunnelseForSenInnsending?: string;
   antallBarn: number;
@@ -4064,7 +4070,7 @@ export type tjenester_behandling_søknad_SoknadAdopsjonDto = {
 };
 
 export type tjenester_behandling_søknad_SoknadFodselDto = {
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
+  soknadType: tjenester_behandling_søknad_SøknadType;
   mottattDato: string;
   begrunnelseForSenInnsending?: string;
   antallBarn: number;
@@ -4081,7 +4087,7 @@ export type tjenester_behandling_søknad_SoknadFodselDto = {
 };
 
 export type tjenester_behandling_søknad_SoknadBackendDto = {
-  soknadType?: foreldrepenger_familiehendelse_rest_SøknadType;
+  soknadType?: tjenester_behandling_søknad_SøknadType;
   mottattDato?: string;
   oppgittAleneomsorg?: boolean;
 };
@@ -4725,9 +4731,9 @@ export type foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum = 'S
 export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto = {
   fom: string;
   tom: string;
-  erSlettet?: boolean;
   erEndret?: boolean;
   erLagtTil?: boolean;
+  erSlettet?: boolean;
 };
 
 export type foreldrepenger_kontrakter_formidling_v3_BrevmalDto = {
@@ -4930,73 +4936,6 @@ export type foreldrepenger_behandlingslager_behandling_familiehendelse_Omsorgsov
   | 'FP_VK_8'
   | 'FP_VK_33'
   | '-';
-
-export type foreldrepenger_familiehendelse_rest_AvklartBarnDto = {
-  fodselsdato: string;
-  dodsdato?: string;
-};
-
-export type foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto = {
-  mannAdoptererAlene?: boolean;
-  ektefellesBarn?: boolean;
-  omsorgsovertakelseDato?: string;
-  ankomstNorge?: string;
-  adopsjonFodelsedatoer?: {
-    [key: string]: string;
-  };
-  fødselsdatoer?: {
-    [key: string]: string;
-  };
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
-  skjaringstidspunkt: string;
-};
-
-export type foreldrepenger_familiehendelse_rest_AvklartDataFodselDto = {
-  dokumentasjonForligger?: boolean;
-  dokumentasjonForeligger?: boolean;
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
-  skjaringstidspunkt: string;
-  avklartBarn?: Array<foreldrepenger_familiehendelse_rest_AvklartBarnDto>;
-  brukAntallBarnFraTps?: boolean;
-  termindato?: string;
-  antallBarnTermin?: number;
-  utstedtdato?: string;
-  morForSykVedFodsel?: boolean;
-  vedtaksDatoSomSvangerskapsuke?: number;
-};
-
-export type foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto = {
-  omsorgsovertakelseDato?: string;
-  vilkarType?: foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType;
-  antallBarnTilBeregning?: number;
-  foreldreansvarDato?: string;
-  fødselsdatoer?: {
-    [key: string]: string;
-  };
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
-  skjaringstidspunkt: string;
-};
-
-export type foreldrepenger_familiehendelse_rest_FamilieHendelseGrunnlagDto = {
-  oppgitt?: foreldrepenger_familiehendelse_rest_FamiliehendelseDto;
-  gjeldende?: foreldrepenger_familiehendelse_rest_FamiliehendelseDto;
-  register?: foreldrepenger_familiehendelse_rest_FamiliehendelseDto;
-};
-
-export type foreldrepenger_familiehendelse_rest_FamiliehendelseDto = (
-  | ({
-      '@type': 'foreldrepenger.familiehendelse.rest.AvklartDataAdopsjonDto';
-    } & foreldrepenger_familiehendelse_rest_AvklartDataAdopsjonDto)
-  | ({
-      '@type': 'foreldrepenger.familiehendelse.rest.AvklartDataFodselDto';
-    } & foreldrepenger_familiehendelse_rest_AvklartDataFodselDto)
-  | ({
-      '@type': 'foreldrepenger.familiehendelse.rest.AvklartDataOmsorgDto';
-    } & foreldrepenger_familiehendelse_rest_AvklartDataOmsorgDto)
-) & {
-  soknadType: foreldrepenger_familiehendelse_rest_SøknadType;
-  skjaringstidspunkt: string;
-};
 
 export type tjenester_familiehendelse_FamiliehendelseRestTjeneste_AdopsjonFamilieHendelseDto = {
   antallBarn: number;
@@ -6100,9 +6039,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_HendelseDto = (
 ) & {
   id: string;
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_HendelseWrapperDto = {
@@ -6114,9 +6053,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_AdressebeskyttelseHendelse
   id: string;
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødHendelseDto = {
@@ -6124,9 +6063,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødHendelseDto = {
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   dødsdato?: string;
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødfødselHendelseDto = {
@@ -6134,9 +6073,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødfødselHendelseDto = {
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   dødfødselsdato?: string;
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_FalskIdentitetHendelseDto = {
@@ -6144,9 +6083,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_FalskIdentitetHendelseDto 
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   erFalsk?: boolean;
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_FødselHendelseDto = {
@@ -6154,9 +6093,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_FødselHendelseDto = {
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørIdForeldre: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   fødselsdato?: string;
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto = {
@@ -6164,9 +6103,9 @@ export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto = {
   endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
   aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
   utflyttingsdato?: string;
-  alleAktørId?: Array<string>;
   avsenderSystem?: string;
   hendelsetype?: string;
+  alleAktørId?: Array<string>;
 };
 
 export type tjenester_infotrygd_InfotrygdVedtakDto = {
@@ -6479,6 +6418,17 @@ export type vedtak_felles_prosesstask_rest_dto_SokeFilterDto = {
   tekst: string;
   sisteKjoeretidspunktFraOgMed?: string;
   sisteKjoeretidspunktTilOgMed?: string;
+};
+
+export type tjenester_behandling_søknad_aksjonspunkt_VurderSøknadsfristDtoWritable = {
+  ansesMottattDato?: string;
+  harGyldigGrunn?: boolean;
+  begrunnelse?: string;
+};
+
+export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDtoWritable = {
+  vurderingBehov?: Array<tjenester_behandling_uttak_dokumentasjon_DokumentasjonVurderingBehovDto>;
+  begrunnelse?: string;
 };
 
 export type CallbackData = {
@@ -8201,28 +8151,6 @@ export type SokFagsakerResponses = {
 };
 
 export type SokFagsakerResponse = SokFagsakerResponses[keyof SokFagsakerResponses];
-
-export type GetFamiliehendelseGrunnlagDtoData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/behandling/familiehendelse/v2';
-};
-
-export type GetFamiliehendelseGrunnlagDtoResponses = {
-  /**
-   * Returnerer hele FamilieHendelse grunnlaget
-   */
-  200: foreldrepenger_familiehendelse_rest_FamilieHendelseGrunnlagDto;
-};
-
-export type GetFamiliehendelseGrunnlagDtoResponse =
-  GetFamiliehendelseGrunnlagDtoResponses[keyof GetFamiliehendelseGrunnlagDtoResponses];
 
 export type HentFamiliehendelseData = {
   body?: never;
