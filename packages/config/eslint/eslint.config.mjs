@@ -27,7 +27,15 @@ export default [
     languageOptions: { globals: globals.browser },
   },
   pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  {
+    languageOptions: {
+      parserOptions: {
+        projectService: '../typescript/tsconfig.json',
+        tsconfigRootDir: import.meta.dirname,
+      },
+    },
+  },
   pluginReact.configs.flat.recommended,
   jsxA11y.flatConfigs.recommended,
   importPlugin.flatConfigs.recommended,
@@ -71,6 +79,7 @@ export default [
       ],
       '@typescript-eslint/no-explicit-any': ERROR,
       '@typescript-eslint/ban-ts-comment': ERROR,
+      '@typescript-eslint/no-unnecessary-condition': 'error',
 
       // Note: you must disable the base rule as it can report incorrect errors
       'no-use-before-define': OFF,
