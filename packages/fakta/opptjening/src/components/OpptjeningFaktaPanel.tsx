@@ -31,7 +31,7 @@ const getAksjonspunktHelpTexts = (opptjeningAktiviteter: OpptjeningAktivitet[]):
   }
 
   const aktivitetTypes = opptjeningAktiviteter.filter(
-    a => (a.erGodkjent === undefined || a.erGodkjent === null || a.begrunnelse) && a.stillingsandel !== 0,
+    a => (a.erGodkjent === undefined || a.begrunnelse) && a.stillingsandel !== 0,
   );
   if (aktivitetTypes.length === 1) {
     texts.push(<FormattedMessage id="OpptjeningFaktaForm.EttArbeidKanGodkjennes" key="EttArbeidKanGodkjennes" />);
@@ -131,7 +131,7 @@ export const OpptjeningFaktaPanel = ({
   );
 
   useEffect(() => {
-    const index = formVerdierForAlleAktiviteter.findIndex(a => a.erGodkjent === undefined || a.erGodkjent === null);
+    const index = formVerdierForAlleAktiviteter.findIndex(a => a.erGodkjent === undefined);
     setValgtAktivitetIndex(index !== -1 ? index : undefined);
   }, [formVerdierForAlleAktiviteter]);
 
@@ -150,7 +150,7 @@ export const OpptjeningFaktaPanel = ({
       }))
       .filter(b => b.begrunnelse);
 
-    submitCallback({
+    void submitCallback({
       opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
       kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
     }).then(() => setIsSubmitting(false));
@@ -183,9 +183,7 @@ export const OpptjeningFaktaPanel = ({
     setValgtAktivitetIndex(undefined);
   };
 
-  const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(
-    a => a.erGodkjent === null || a.erGodkjent === undefined,
-  );
+  const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(a => a.erGodkjent === undefined);
 
   return (
     <VStack gap="space-24" className={styles.container}>
@@ -250,9 +248,7 @@ export const OpptjeningFaktaPanel = ({
 const finnInitialFokusAktivitet = (opptjeningsAktiviteter: OpptjeningAktivitet[]) => {
   if (opptjeningsAktiviteter.length === 0) return undefined;
 
-  const førsteAktivitetSomIkkeErGodkjent = opptjeningsAktiviteter.findIndex(
-    a => a.erGodkjent === undefined || a.erGodkjent === null,
-  );
+  const førsteAktivitetSomIkkeErGodkjent = opptjeningsAktiviteter.findIndex(a => a.erGodkjent === undefined);
   if (førsteAktivitetSomIkkeErGodkjent !== -1) return førsteAktivitetSomIkkeErGodkjent;
   return 0;
 };

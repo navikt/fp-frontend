@@ -135,7 +135,7 @@ OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
   alleKodeverk: AlleKodeverk,
 ): OmsorgOgForeldreansvarFormValues => ({
-  vilkarType: adopsjon.omsorgsovertakelseVilkårType ? adopsjon.omsorgsovertakelseVilkårType : '',
+  vilkarType: adopsjon.omsorgsovertakelseVilkårType,
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(adopsjon),
   ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, alleKodeverk),
 });

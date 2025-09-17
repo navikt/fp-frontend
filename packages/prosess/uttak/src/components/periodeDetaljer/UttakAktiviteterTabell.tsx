@@ -47,6 +47,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     arbeidsforhold = arbeidsgiverOpplysninger
       ? formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternArbeidsforholdId)
       : arbeidsgiverReferanse;
@@ -146,7 +147,7 @@ const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
     intl: IntlShape,
   ) =>
   (ukerEllerDager: string) => {
-    const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+    const harUtsettelsestype = utsettelseType !== '-';
     return harUtsettelsestype && getValues('erOppfylt') && parseFloat(ukerEllerDager) > 0
       ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' })
       : null;

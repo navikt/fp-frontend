@@ -62,7 +62,7 @@ const finnTilgjengeligeUker = (stønadskontoer?: Stonadskonto[]): { uker: number
       type !== StonadskontoType.MINSTERETT &&
       type !== StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE
     ) {
-      return sum + (konto.maxDager ?? 0);
+      return sum + konto.maxDager;
     }
     return sum;
   }, 0);
@@ -81,11 +81,12 @@ const utledNavn = (
 ): string => {
   const { arbeidsgiverReferanse, uttakArbeidType } = arbforhold;
 
-  if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
+  if (uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
     return intl.formatMessage({ id: uttakArbeidTypeTekstCodes[uttakArbeidType] });
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     return arbeidsgiverOpplysninger ? formaterArbeidsgiver(arbeidsgiverOpplysninger) : arbeidsgiverReferanse;
   }
 
@@ -116,7 +117,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
       return undefined;
     }
 
-    const aktiviteterMedNavn = (valgtKonto?.aktivitetSaldoDtoList ?? []).map(aktivitet => ({
+    const aktiviteterMedNavn = valgtKonto.aktivitetSaldoDtoList.map(aktivitet => ({
       ...aktivitet,
       navn: utledNavn(aktivitet.aktivitetIdentifikator, arbeidsgiverOpplysningerPerId, intl),
     }));

@@ -146,7 +146,7 @@ TilbakekrevSøkerForm.initialValues = (
 
 TilbakekrevSøkerForm.transformValues = (values: FeilutbetalingFormValues): VurderFeilutbetalingAp => {
   const { videreBehandling, varseltekst, begrunnelse } = values;
-  if (videreBehandling?.endsWith(IKKE_SEND)) {
+  if (videreBehandling.endsWith(IKKE_SEND)) {
     return {
       kode: AksjonspunktKode.VURDER_FEILUTBETALING,
       begrunnelse,
