@@ -32,7 +32,7 @@ const finnArbeidsforhold = (
 
 const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: string, tomDato: string): boolean => {
   const dato = dayjs(tilretteleggingBehovFom);
-  return !(dato.isBefore(dayjs(fomDato)) || dato.isAfter(dayjs(tomDato)));
+  return !(dato.isBefore(dayjs(fomDato || undefined)) || dato.isAfter(dayjs(tomDato || undefined)));
 };
 
 const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {

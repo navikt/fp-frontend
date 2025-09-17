@@ -121,7 +121,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                   tilrettelegging={rad}
                   readOnly={readOnly}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
-                  openRad
+                  openRad={rad.fom === ''}
                   fjernTilrettelegging={fjernTilrettelegging}
                   setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                   stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
@@ -143,7 +143,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 opphold={rad}
                 readOnly={readOnly}
                 index={arbeidsforholdIndex + oppholdIndex}
-                openRad
+                openRad={rad.fom === ''}
                 fjernOpphold={fjernOpphold}
                 setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                 arbeidsforhold={arbeidsforhold}

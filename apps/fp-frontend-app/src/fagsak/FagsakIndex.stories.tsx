@@ -13,7 +13,7 @@ import {
   getIntlDecorator,
   withQueryClient,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, BehandlingTillatteOperasjoner, Fagsak } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -57,7 +57,8 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-};
+  behandlingKanMerkesHaster: false,
+} satisfies BehandlingTillatteOperasjoner;
 
 const ALLE_BEHANDLINGER = [
   {
@@ -72,8 +73,17 @@ const ALLE_BEHANDLINGER = [
     erAktivPapirsoknad: false,
     opprettet: '2024-08-02T00:54:25.455',
     behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
+    gjeldendeVedtak: false,
+    behandlingHenlagt: false,
+    språkkode: '-',
+    toTrinnsBehandling: false,
+    behandlingÅrsaker: [],
+    vilkår: [],
+    links: [],
+    brevmaler: [],
+    totrinnskontrollÅrsaker: [],
   },
-] as BehandlingAppKontekst[];
+] satisfies BehandlingAppKontekst[];
 
 const FAGSAK = {
   saksnummer: '352018689',
@@ -81,7 +91,7 @@ const FAGSAK = {
   status: FagsakStatusEnum.UNDER_BEHANDLING,
   behandlinger: ALLE_BEHANDLINGER,
   sakSkalTilInfotrygd: false,
-  behandlingTypeKanOpprettes: [] as BehandlingOppretting[],
+  behandlingTypeKanOpprettes: [],
   notater: [
     {
       notat: 'Dette er et notat',
@@ -94,8 +104,22 @@ const FAGSAK = {
     fødselsnummer: '020400242344',
     kjønn: 'M',
     fødselsdato: '2000-01-01',
+    språkkode: '-',
   },
-} as Fagsak;
+  relasjonsRolleType: '-',
+  aktørId: '',
+  dekningsgrad: 0,
+  brukerManglerAdresse: false,
+  fagsakMarkeringer: [],
+  historikkinnslag: [],
+  kontrollResultat: {
+    kontrollresultat: '-',
+    iayFaresignaler: undefined,
+    medlFaresignaler: undefined,
+    faresignalVurdering: undefined,
+  },
+  harVergeIÅpenBehandling: false,
+} satisfies Fagsak;
 
 const fagsakFpTilbake = {
   behandlingTypeKanOpprettes: [],
