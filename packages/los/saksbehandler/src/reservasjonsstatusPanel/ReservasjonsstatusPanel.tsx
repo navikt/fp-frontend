@@ -15,9 +15,10 @@ const intl = createIntl(messages);
 interface Props {
   saksnummer: string;
   behandlingUuid?: string;
+  kanVeilede: boolean;
 }
 
-export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid }: Props) => {
+export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid, kanVeilede }: Props) => {
   const [erOppgaveReservert, setErOppgaveReservert] = useState(false);
 
   const { data: reserverteOppgaver = [], refetch } = useQuery({
@@ -49,7 +50,7 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid }: Props) =
   return (
     <RawIntlProvider value={intl}>
       <HStack gap="space-8" align="center">
-        {!erReservert && !!oppgaveForBehandling && (
+        {!kanVeilede && !erReservert && !!oppgaveForBehandling && (
           <Button size="small" onClick={() => reserverOppgave(oppgaveForBehandling.id)}>
             <FormattedMessage id="ReservasjonsstatusPanel.Reserver" />
           </Button>
@@ -60,6 +61,7 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid }: Props) =
               size="small"
               variant="primary-neutral"
               onClick={() => opphevOppgavereservasjon(oppgaveForBehandling.id)}
+              disabled={kanVeilede}
             >
               <FormattedMessage id="ReservasjonsstatusPanel.OpphevReservasjon" />
             </Button>
