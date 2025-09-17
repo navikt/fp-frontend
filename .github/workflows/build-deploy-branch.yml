@@ -27,7 +27,6 @@ jobs:
       node-version: '22.17.1'
       push-image: true
       branch: ${{ inputs.branch }}
-      bake-target: ${{ inputs.app }}
       run-knip: true
     secrets:
       READER_TOKEN: ${{ secrets.READER_TOKEN }}
