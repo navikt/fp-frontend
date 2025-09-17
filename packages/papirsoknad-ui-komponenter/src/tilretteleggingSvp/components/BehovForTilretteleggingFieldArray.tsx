@@ -7,7 +7,7 @@ import { PeriodFieldArray, RhfDatepicker, RhfSelect, RhfTextField } from '@navik
 import { maxValue, required } from '@navikt/ft-form-validators';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
-import { type Tilrettelegging } from '../types';
+import { type FormValues, type Tilrettelegging } from '../types';
 
 const maxValue3 = maxValue(100);
 
@@ -19,14 +19,16 @@ const defaultTilrettelegging: Tilrettelegging = {
 
 interface Props {
   readOnly: boolean;
-  name: string;
+  name:
+    | 'tilretteleggingArbeidsforhold.tilretteleggingFrilans'
+    | 'tilretteleggingArbeidsforhold.tilretteleggingSelvstendigNaringsdrivende'
+    | `tilretteleggingArbeidsforhold.tilretteleggingForArbeidsgiver.${number}.tilretteleggingArbeidsgiver`;
 }
 
 export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => {
   const intl = useIntl();
 
-  // TODO (TOR) Manglar type
-  const { control } = useFormContext();
+  const { control } = useFormContext<FormValues>();
 
   const { fields, remove, append } = useFieldArray({
     control,

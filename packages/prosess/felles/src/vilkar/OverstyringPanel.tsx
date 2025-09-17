@@ -17,6 +17,10 @@ const intl = createIntl(messages);
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
+type FormValues = {
+  begrunnelse?: string;
+};
+
 const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) =>
   value !== undefined || isDirty ? required(value) : undefined;
 
@@ -45,12 +49,13 @@ export const OverstyringPanel = ({
   erIkkeGodkjentAvBeslutter,
   children,
 }: Props) => {
-  // TODO (TOR) Manglar type
   const {
     formState: { isDirty },
     control,
-  } = useFormContext();
+  } = useFormContext<FormValues>();
+
   const isRequiredFn = getIsBegrunnelseRequired(isDirty);
+
   return (
     <AksjonspunktBox
       className={styles.aksjonspunktMargin}

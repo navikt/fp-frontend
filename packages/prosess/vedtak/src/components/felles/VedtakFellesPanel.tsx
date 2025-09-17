@@ -19,6 +19,7 @@ import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@na
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData.ts';
+import type { VedtakFormValues } from '../../types/VedtakFormValues.ts';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext.tsx';
 import { LegacyOverstyrtVedtaksbrev } from './LegacyOverstyrtVedtaksbrev.tsx';
 import { OppgaveTabell } from './OppgaveTabell.tsx';
@@ -95,7 +96,7 @@ export const VedtakFellesPanel = ({
 
   const {
     formState: { isSubmitting },
-  } = useFormContext();
+  } = useFormContext<VedtakFormValues>();
 
   const { harRedigertBrev } = useVedtakEditeringContext();
 
