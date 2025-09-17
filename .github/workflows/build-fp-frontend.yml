@@ -20,12 +20,12 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    uses: navikt/fp-frontend/.github/workflows/build.yml@los-app
+    uses: navikt/fp-frontend/.github/workflows/build.yml@master
     with:
       runs-on: 'ubuntu-latest-8-cores'
       node-version: '22.17.1'
-      build-image: ${{ github.ref_name == 'los-app' }} # default: true
-      push-image: ${{ github.ref_name == 'los-app' }} # default: false
+      build-image: ${{ github.ref_name == 'master' }} # default: true
+      push-image: ${{ github.ref_name == 'master' }} # default: false
       run-knip: true
       app: fp-frontend
       image_suffix: '/fp-frontend'
@@ -37,7 +37,7 @@ jobs:
     name: Deploy dev
     permissions:
       id-token: write
-    if: github.ref_name == 'los-app'
+    if: github.ref_name == 'master'
     needs: build-app
     uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@d82a6fe449f56938a073da20baca50bed596a800
     with:
