@@ -30,7 +30,7 @@ export const VelferdspermisjonTabellRad = ({
   readOnly,
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => {
-  const erIkkeValgt = velferdspermisjon.erGyldig === undefined || velferdspermisjon.erGyldig === null;
+  const erIkkeValgt = velferdspermisjon.erGyldig === undefined;
 
   const [open, setOpen] = useState(erIkkeValgt);
 

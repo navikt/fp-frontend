@@ -27,7 +27,7 @@ export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props
 
   return (
     <>
-      {oppgave.reservertAv && navAnsatt.brukernavn === oppgave?.reservertAv && (
+      {oppgave.reservertAv && navAnsatt.brukernavn === oppgave.reservertAv && (
         <BodyShort>
           <FormattedMessage id="Oppgavetabell.SakenErTattAv" />
           <Tag size="small" variant="alt3" style={{ marginLeft: '0.5rem' }}>

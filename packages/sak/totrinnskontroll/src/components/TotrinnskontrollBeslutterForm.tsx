@@ -24,7 +24,7 @@ const erAlleGodkjent = (formState: AksjonspunktGodkjenningData[] = []) =>
   formState.every(ap => ap.totrinnskontrollGodkjent);
 
 const erAlleGodkjentEllerAvvist = (formState: AksjonspunktGodkjenningData[] = []) =>
-  formState.every(ap => ap.totrinnskontrollGodkjent !== undefined && ap.totrinnskontrollGodkjent !== null);
+  formState.every(ap => ap.totrinnskontrollGodkjent !== undefined);
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: string[],
@@ -78,7 +78,7 @@ const buildInitialValues = (totrinnskontrollSkjermlenkeContext: Totrinnskontroll
       aksjonspunktKode: ap.aksjonspunktKode,
       totrinnskontrollGodkjent: ap.totrinnskontrollGodkjent,
       besluttersBegrunnelse: decodeHtmlEntity(ap.besluttersBegrunnelse ?? undefined),
-      ...finnArsaker(ap.vurderPaNyttArsaker ? ap.vurderPaNyttArsaker : []),
+      ...finnArsaker(ap.vurderPaNyttArsaker),
     })),
 });
 
@@ -113,8 +113,8 @@ export const TotrinnskontrollBeslutterForm = ({
   beslutterFormData,
   setBeslutterFormData,
 }: Props) => {
-  const erKlage = behandling && behandling.type === BehandlingTypeEnum.KLAGE;
-  const erAnke = behandling && behandling.type === BehandlingTypeEnum.ANKE;
+  const erKlage = behandling.type === BehandlingTypeEnum.KLAGE;
+  const erAnke = behandling.type === BehandlingTypeEnum.ANKE;
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
     [KonsekvensForYtelsenEnum.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsenEnum.INGEN_ENDRING],
     behandling.behandlingsresultat,

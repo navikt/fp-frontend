@@ -30,7 +30,7 @@ export const BrevInnhold = ({
 }: Props) => {
   const { isReadOnly, fagsak } = usePanelDataContext();
 
-  const harPraksisUtsettelse = !!fagsak.fagsakMarkeringer?.some(
+  const harPraksisUtsettelse = fagsak.fagsakMarkeringer.some(
     markering => markering.fagsakMarkering === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
   );
 

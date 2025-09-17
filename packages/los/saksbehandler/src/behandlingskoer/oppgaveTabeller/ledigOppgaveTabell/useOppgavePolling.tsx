@@ -87,7 +87,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
   });
 
   useEffect(() => {
-    pollEtterOppgaver({ oppgaveIder: undefined });
+    void pollEtterOppgaver({ oppgaveIder: undefined });
   }, []);
 
   useEffect(() => {
@@ -97,7 +97,7 @@ export const useOppgavePolling = (valgtSakslisteId: number) => {
         setNyeBehandlinger(tilBehandling.filter(o => !oppgaverTilBehandling.some(ob => ob.id === o.id)));
       }
 
-      pollEtterOppgaver({ oppgaveIder: tilBehandling.map(o => o.id).join(',') });
+      void pollEtterOppgaver({ oppgaveIder: tilBehandling.map(o => o.id).join(',') });
     }
   }, [isSuccess]);
 

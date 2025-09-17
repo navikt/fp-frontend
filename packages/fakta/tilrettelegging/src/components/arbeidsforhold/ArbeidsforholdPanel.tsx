@@ -28,11 +28,7 @@ const validerTidligereEnn =
     const treUkerFørTermindato = dayjs(termindato).subtract(3, 'week').subtract(1, 'day');
     const tidligsteTidspunkt = fødselsdato ? dayjs.min(treUkerFørTermindato, dayjs(fødselsdato)) : treUkerFørTermindato;
 
-    if (
-      tidligsteTidspunkt &&
-      tilretteleggingFomDato.isValid() &&
-      !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)
-    ) {
+    if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
       return intl.formatMessage(
         {
           id: 'TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn',

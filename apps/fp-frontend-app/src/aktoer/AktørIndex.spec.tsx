@@ -28,7 +28,7 @@ describe('AktørIndex', () => {
   //TODO Denne feilar av og til
   it.skip('skal feile på api-kall', async () => {
     applyRequestHandlers(AktørInfoKallFeilet.parameters['msw'] as MswParameters['msw']);
-    await render(<AktørInfoKallFeilet />);
+    render(<AktørInfoKallFeilet />);
 
     expect(await screen.findByText(/Det har oppstått en teknisk feil i denne behandlingen./)).toBeInTheDocument();
     expect(screen.getByText(/Meld feilen i Porten. Ta med feilmeldingsteksten./)).toBeInTheDocument();

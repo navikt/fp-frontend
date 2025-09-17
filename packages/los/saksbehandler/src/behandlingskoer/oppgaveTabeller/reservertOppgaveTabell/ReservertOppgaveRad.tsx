@@ -37,9 +37,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
       return;
     }
 
-    if (valgtOppgave) {
-      reserverOppgave(valgtOppgave);
-    }
+    reserverOppgave(valgtOppgave);
   };
 
   return (
@@ -49,7 +47,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
       onKeyDown={enableTableEvents ? (event: React.KeyboardEvent) => goToFagsak(event, oppgave) : undefined}
       className={styles.isUnderBehandling}
     >
-      <Table.DataCell>{oppgave.navn ?? '<navn>'}</Table.DataCell>
+      <Table.DataCell>{oppgave.navn}</Table.DataCell>
       <Table.DataCell>
         <HStack align="center" ref={refCopyButton} wrap={false}>
           <BodyShort>{oppgave.saksnummer}</BodyShort>

@@ -35,7 +35,7 @@ export const useEditorJs = (
   const intl = useIntl();
 
   const { fagsak } = usePanelDataContext();
-  const harPraksisUtsettelse = !!fagsak.fagsakMarkeringer?.some(
+  const harPraksisUtsettelse = fagsak.fagsakMarkeringer.some(
     markering => markering.fagsakMarkering === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
   );
 
@@ -163,6 +163,7 @@ class CustomList extends EditorjsList {
       .filter(item =>
         // https://github.com/editor-js/list/issues/119
         // @ts-expect-error Fiks
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
         ['Unordered'].includes(item.label),
       )
       .map(item => ({

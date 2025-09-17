@@ -106,7 +106,7 @@ const meta = {
       <VedtakEditeringProvider
         behandling={args.behandling ?? defaultBehandling}
         hentBrevOverstyring={() => {
-          return redigertHtml && args.brevOverstyring
+          return redigertHtml
             ? Promise.resolve({
                 opprinneligHtml: args.brevOverstyring.opprinneligHtml,
                 redigertHtml,

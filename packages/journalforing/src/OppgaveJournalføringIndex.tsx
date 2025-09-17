@@ -149,7 +149,7 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
         harHentetFerdigJournalpost={hentJournalpostStatus === 'success'}
         valgtJournalpost={valgtJournalpost}
         hentJournalpost={hentJournalpost}
-        antallOppgaver={alleOppgaver ? alleOppgaver.length : undefined}
+        antallOppgaver={alleOppgaver.length}
       />
       {visModal && (
         <JournalførtSubmitModal

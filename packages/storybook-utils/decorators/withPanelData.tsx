@@ -9,6 +9,7 @@ import { PanelDataProvider } from '@navikt/fp-utils';
 
 import { alleKodeverk } from '../mocks/alleKodeverk';
 
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 export type PanelDataArgs = {
