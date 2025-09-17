@@ -44,8 +44,7 @@ export const VilkarResultPicker = ({
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
 }: Props) => {
-  // TODO (TOR) useFormContext manglar typing
-  const { getValues, watch, control } = useFormContext();
+  const { getValues, watch, control } = useFormContext<FormValues>();
   const erVilkårOk = watch('erVilkarOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];

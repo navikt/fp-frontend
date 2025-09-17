@@ -7,6 +7,7 @@ import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import { type ArbeidsforholdFodselOgTilrettelegging, type ArbeidsforholdTilretteleggingDato } from '@navikt/fp-types';
 
+import type { TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import {
   finnProsentSvangerskapspenger,
   finnVelferdspermisjonprosent,
@@ -46,7 +47,7 @@ const utledKilde = (intl: IntlShape, tilrettelegging: ArbeidsforholdTilrettelegg
 };
 
 interface Props {
-  navn: string;
+  navn: `arbeidsforhold.${number}.tilretteleggingDatoer.${number}`;
   tilrettelegging: ArbeidsforholdTilretteleggingDato;
   readOnly: boolean;
   index: number;
@@ -75,7 +76,7 @@ export const TilretteleggingPeriodeTabellRad = ({
   const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
-  const { setValue } = useFormContext();
+  const { setValue } = useFormContext<TilretteleggingFormValues>();
 
   const oppdaterTilrettelegging = (values: ArbeidsforholdTilretteleggingDato) => {
     setOpen(false);

@@ -45,11 +45,10 @@ export const ProsessStegBegrunnelseTextField = ({
   useAllWidth = false,
   notRequired = false,
 }: Props) => {
-  // TODO (TOR) Manglar type
   const {
     formState: { isDirty },
     control,
-  } = useFormContext();
+  } = useFormContext<FormValues>();
 
   const isRequiredFn = notRequired ? () => false : getIsBegrunnelseRequired(isDirty);
   return (
