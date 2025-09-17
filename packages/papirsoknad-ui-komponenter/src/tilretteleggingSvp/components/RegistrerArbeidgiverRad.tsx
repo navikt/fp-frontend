@@ -16,7 +16,6 @@ import type { FormValues } from '../types';
 import { BehovForTilretteleggingFieldArray } from './BehovForTilretteleggingFieldArray';
 
 const FA_PREFIX = `${TILRETTELEGGING_NAME_PREFIX}.${TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME}`;
-const getPrefix = (index: number) => `${FA_PREFIX}.${index}`;
 
 interface Props {
   index: number;
@@ -69,7 +68,7 @@ export const RegistrerArbeidsgiverRad = ({ open, readOnly = false, index, remove
             />
           </HStack>
           <BehovForTilretteleggingFieldArray
-            name={`${getPrefix(index)}.${BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME}`}
+            name={`${FA_PREFIX}.${index}.${BEHOV_FOR_TILRETTELEGGING_FIELD_ARRAY_NAME}`}
             readOnly={readOnly}
           />
         </VStack>

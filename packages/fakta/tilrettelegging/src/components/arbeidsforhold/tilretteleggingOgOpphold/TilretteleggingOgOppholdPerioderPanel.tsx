@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useFieldArray } from 'react-hook-form';
+import { useFieldArray, useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
 import { PlusIcon } from '@navikt/aksel-icons';
@@ -10,9 +10,12 @@ import dayjs from 'dayjs';
 import type {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
+  OppholdÅrsak,
   SvpAvklartOppholdPeriode,
+  TilretteleggingType,
 } from '@navikt/fp-types';
 
+import type { TilretteleggingFormValues } from '../../../types/TilretteleggingFormValues';
 import { OppholdPeriodeTabellRad } from './opphold/OppholdPeriodeTabellRad';
 import { TilretteleggingPeriodeTabellRad } from './tilrettelegging/TilretteleggingPeriodeTabellRad';
 
@@ -44,33 +47,39 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
   stillingsprosentArbeidsforhold,
   termindato,
 }: Props) => {
-  const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer`;
-  const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder`;
+  const tilretteleggingStateName = `arbeidsforhold.${arbeidsforholdIndex}.tilretteleggingDatoer` as const;
+  const oppholdPerioderStateName = `arbeidsforhold.${arbeidsforholdIndex}.avklarteOppholdPerioder` as const;
 
   const [erLeggTilKnapperDisablet, setErLeggTilKnapperDisablet] = useState(false);
 
+  const { control } = useFormContext<TilretteleggingFormValues>();
+
   const { append: appendTilrettelegging, remove: removeTilrettelegging } = useFieldArray({
     name: tilretteleggingStateName,
+    control,
   });
-  const { append: appendOpphold, remove: removeOpphold } = useFieldArray({ name: oppholdPerioderStateName });
+  const { append: appendOpphold, remove: removeOpphold } = useFieldArray({ name: oppholdPerioderStateName, control });
 
   const { tilretteleggingDatoer, avklarteOppholdPerioder } = arbeidsforhold;
 
   const leggTilOpphold = () => {
     setErLeggTilKnapperDisablet(true);
     appendOpphold({
-      fom: undefined,
-      tom: undefined,
-      oppholdÅrsak: undefined,
+      fom: '',
+      tom: '',
+      oppholdÅrsak: undefined as unknown as OppholdÅrsak,
       oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
     });
   };
   const leggTilTilrettelegging = () => {
     setErLeggTilKnapperDisablet(true);
     appendTilrettelegging({
-      fom: undefined,
-      type: undefined,
+      fom: '',
+      type: undefined as unknown as TilretteleggingType,
       kilde: 'REGISTRERT_AV_SAKSBEHANDLER',
+      stillingsprosent: null,
+      overstyrtUtbetalingsgrad: null,
+      mottattDato: null,
     });
   };
 
@@ -113,15 +122,14 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
                 ? dayjs(nesteTilrettelegging.fom).subtract(1, 'day').format(ISO_DATE_FORMAT)
                 : dayjs(termindato).subtract(3, 'week').subtract(1, 'day').format(ISO_DATE_FORMAT);
 
-              const navn = `${tilretteleggingStateName}.${tilretteleggingIndex}`;
               return (
                 <TilretteleggingPeriodeTabellRad
-                  key={navn}
-                  navn={navn}
+                  key={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
+                  navn={`${tilretteleggingStateName}.${tilretteleggingIndex}`}
                   tilrettelegging={rad}
                   readOnly={readOnly}
                   index={arbeidsforholdIndex + tilretteleggingIndex}
-                  openRad={rad.fom === undefined}
+                  openRad={rad.fom === ''}
                   fjernTilrettelegging={fjernTilrettelegging}
                   setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                   stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
@@ -135,15 +143,14 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
             const oppholdIndex = avklarteOppholdPerioder.findIndex(
               t => t.fom === rad.fom && t.tom === rad.tom && t.oppholdKilde === rad.oppholdKilde,
             );
-            const navn = `${oppholdPerioderStateName}.${oppholdIndex}`;
             return (
               <OppholdPeriodeTabellRad
-                key={navn}
-                navn={navn}
+                key={`${oppholdPerioderStateName}.${oppholdIndex}`}
+                navn={`${oppholdPerioderStateName}.${oppholdIndex}`}
                 opphold={rad}
                 readOnly={readOnly}
                 index={arbeidsforholdIndex + oppholdIndex}
-                openRad={rad.fom === undefined}
+                openRad={rad.fom === ''}
                 fjernOpphold={fjernOpphold}
                 setLeggTilKnapperDisablet={setErLeggTilKnapperDisablet}
                 arbeidsforhold={arbeidsforhold}
