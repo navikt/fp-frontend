@@ -1,6 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './OppgaverSomErApneEllerPaVentPanel.stories';
 
@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 describe('OppgaverSomErApneEllerPaVentPanel', () => {
   // TODO echarts-testing
   it.skip('skal vise graffilter', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(
       await screen.findByText('Åpne behandlinger foreldrepenger fordelt på første uttaksdag fra søknad'),

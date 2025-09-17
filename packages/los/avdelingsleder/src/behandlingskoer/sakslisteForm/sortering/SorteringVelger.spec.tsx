@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SorteringVelger.stories';
 
@@ -13,7 +13,7 @@ const {
 
 describe('SorteringVelger', () => {
   it('skal vise tre sorteringsvalg når mange behandlingstyper er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw']);
+    applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw'] as MswParameters['msw']);
     render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();
@@ -24,7 +24,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise datovelger der dynamisk periode ikke er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw']);
+    applyRequestHandlers(SorteringsvelgerNårMangeBehandlingstyperErValgt.parameters['msw'] as MswParameters['msw']);
     render(<SorteringsvelgerNårMangeBehandlingstyperErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise datovelger der dynamisk periode er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårDynamiskPeriodeErValgt.parameters['msw']);
+    applyRequestHandlers(SorteringsvelgerNårDynamiskPeriodeErValgt.parameters['msw'] as MswParameters['msw']);
     render(<SorteringsvelgerNårDynamiskPeriodeErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByText('Ta kun med behandlinger med dato')).toBeInTheDocument();
@@ -46,7 +46,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise vis beløpvelger når Feilutbetalt beløp er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw']);
+    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
 
@@ -58,7 +58,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i fra-beløpfelt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw']);
+    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
 
@@ -73,7 +73,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i til-beløpfelt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw']);
+    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
 
@@ -88,7 +88,7 @@ describe('SorteringVelger', () => {
   });
 
   it('skal vise fem sorteringsvalg når kun tilbakekreving er valgt', async () => {
-    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw']);
+    applyRequestHandlers(SorteringsvelgerNårKunTilbakekrevingErValgt.parameters['msw'] as MswParameters['msw']);
     render(<SorteringsvelgerNårKunTilbakekrevingErValgt />);
     expect(await screen.findByText('Dato for behandlingsfrist')).toBeInTheDocument();
     expect(await screen.findByLabelText('Dato for behandlingsfrist')).toBeChecked();

@@ -1,6 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './AktørIndex.stories';
 
@@ -8,7 +8,7 @@ const { Default, IngenFagsaker, AktørInfoKallFeilet } = composeStories(stories)
 
 describe('AktørIndex', () => {
   it('skal vise lister med fagsaker', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
@@ -18,7 +18,7 @@ describe('AktørIndex', () => {
   });
 
   it('skal ikke ha noen fagsaker i fpsak', async () => {
-    applyRequestHandlers(IngenFagsaker.parameters['msw']);
+    applyRequestHandlers(IngenFagsaker.parameters['msw'] as MswParameters['msw']);
     render(<IngenFagsaker />);
 
     expect(await screen.findByText('Ukjent navn, mangler norsk id-nr')).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('AktørIndex', () => {
 
   //TODO Denne feilar av og til
   it.skip('skal feile på api-kall', async () => {
-    applyRequestHandlers(AktørInfoKallFeilet.parameters['msw']);
+    applyRequestHandlers(AktørInfoKallFeilet.parameters['msw'] as MswParameters['msw']);
     await render(<AktørInfoKallFeilet />);
 
     expect(await screen.findByText(/Det har oppstått en teknisk feil i denne behandlingen./)).toBeInTheDocument();

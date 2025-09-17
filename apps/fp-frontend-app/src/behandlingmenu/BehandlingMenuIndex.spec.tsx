@@ -1,6 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './BehandlingMenuIndex.stories';
 
@@ -8,7 +8,7 @@ const { ValgNårBehandlingErValgt, ValgNårBehandlingIkkeErValgt } = composeStor
 
 describe('BehandlingMenuIndex', () => {
   it('skal vise alle menyhandlinger når behandling er valgt', async () => {
-    applyRequestHandlers(ValgNårBehandlingErValgt.parameters['msw']);
+    applyRequestHandlers(ValgNårBehandlingErValgt.parameters['msw'] as MswParameters['msw']);
     render(<ValgNårBehandlingErValgt />);
 
     expect(await screen.findByText('Sett behandlingen på vent')).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('BehandlingMenuIndex', () => {
   });
 
   it('skal vise kun to valg når behandling ikke er valgt', async () => {
-    applyRequestHandlers(ValgNårBehandlingIkkeErValgt.parameters['msw']);
+    applyRequestHandlers(ValgNårBehandlingIkkeErValgt.parameters['msw'] as MswParameters['msw']);
     render(<ValgNårBehandlingIkkeErValgt />);
 
     expect(await screen.findByText('Opprett ny behandling')).toBeInTheDocument();

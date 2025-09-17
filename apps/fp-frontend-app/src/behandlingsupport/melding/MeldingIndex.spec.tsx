@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import { DokumentMalType } from '@navikt/fp-kodeverk';
 
@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('MeldingIndex', () => {
   it('skal vise meldinger når mottakere og brevmaler har blitt hentet fra server', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
     expect(await screen.findByText('Mal 1')).toBeInTheDocument();
     expect(screen.getByText('Mal 2')).toBeInTheDocument();
@@ -20,7 +20,7 @@ describe('MeldingIndex', () => {
   });
 
   it('skal sende melding og så lukke modal', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();
@@ -36,7 +36,7 @@ describe('MeldingIndex', () => {
   });
 
   it('skal sende melding og sette saken på vent hvis INNHENT_DOK', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();

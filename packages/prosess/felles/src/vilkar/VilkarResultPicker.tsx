@@ -46,6 +46,7 @@ export const VilkarResultPicker = ({
 }: Props) => {
   // TODO (TOR) useFormContext manglar typing
   const { getValues, watch, control } = useFormContext();
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- [JOHANNES] vurder senere
   const erVilkårOk = watch('erVilkarOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
@@ -84,13 +85,14 @@ export const VilkarResultPicker = ({
           name="avslagskode"
           control={control}
           label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-          selectValues={sorterAvslagsårsaker(avslagsårsaker || []).map(aa => (
+          selectValues={sorterAvslagsårsaker(avslagsårsaker).map(aa => (
             <option key={aa.kode} value={aa.kode}>
               {aa.navn}
             </option>
           ))}
           readOnly={isReadOnly}
           className={styles['selectBredde']}
+          //eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] vurder senere
           validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkårOk, getValues('avslagskode')))]}
         />
       )}

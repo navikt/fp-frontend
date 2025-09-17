@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './GjeldendeSakslisterTabell.stories';
 
@@ -9,7 +9,7 @@ const { TabellNårDetIkkeFinnesBehandlingskøer, TabellNårDetFinnesEnBehandling
 
 describe('GjeldendeSakslisterTabell', () => {
   it('skal vise at ingen behandlingskøer er laget og så legge til en ny kø', async () => {
-    applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
+    applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw'] as MswParameters['msw']);
     render(<TabellNårDetIkkeFinnesBehandlingskøer />);
     expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
     expect(screen.queryByText('Navn')).not.toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('GjeldendeSakslisterTabell', () => {
   });
 
   it('skal vise slette kø ved å trykke på ikon for sletting', async () => {
-    applyRequestHandlers(TabellNårDetFinnesEnBehandlingskø.parameters['msw']);
+    applyRequestHandlers(TabellNårDetFinnesEnBehandlingskø.parameters['msw'] as MswParameters['msw']);
     render(<TabellNårDetFinnesEnBehandlingskø />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
@@ -35,7 +35,7 @@ describe('GjeldendeSakslisterTabell', () => {
   });
 
   it('skal legge til en ny kø ved bruk av tastaturet (enter)', async () => {
-    applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw']);
+    applyRequestHandlers(TabellNårDetIkkeFinnesBehandlingskøer.parameters['msw'] as MswParameters['msw']);
     render(<TabellNårDetIkkeFinnesBehandlingskøer />);
     expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
     expect(screen.queryByText('Navn')).not.toBeInTheDocument();

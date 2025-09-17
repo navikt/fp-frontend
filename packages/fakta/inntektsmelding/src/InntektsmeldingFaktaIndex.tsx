@@ -118,6 +118,7 @@ export const InntektsmeldingFaktaIndex = ({
                   <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
                 </Table.DataCell>
                 <Table.DataCell>
+                  {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                   {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? '-'}
                 </Table.DataCell>
                 <Table.DataCell>
@@ -155,7 +156,9 @@ const sorterInntektsmeldinger = ({
 }) => {
   if (sortKey === 'arbeidsgiverIdent') {
     return inntektsmeldinger.slice().sort((a, b) => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
       const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverIdent]?.navn;
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
       const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverIdent]?.navn;
 
       return sorterStreng(navnA, navnB);

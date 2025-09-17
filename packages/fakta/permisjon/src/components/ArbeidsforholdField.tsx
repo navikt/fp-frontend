@@ -111,6 +111,7 @@ export const ArbeidsforholdField = ({
                 <FormattedMessage id="ArbeidsforholdFieldArray.Periode" />
               </Label>
               <BodyShort size="small">
+                {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                 {arbeidsforhold ? (
                   <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
                 ) : (
@@ -125,6 +126,7 @@ export const ArbeidsforholdField = ({
               <BodyShort size="small">
                 <FormattedMessage
                   id={
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
                     arbeidsforhold
                       ? 'ArbeidsforholdFieldArray.AaRegisteret'
                       : 'ArbeidsforholdFieldArray.Inntektsmelding'

@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './OppgaveHandlingerMenu.stories';
 
@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('OppgaveHandlingerMenu', () => {
   it('skal vise fire meny-knapper for reserverte oppgaver', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('OppgaveHandlingerMenu', () => {
   });
 
   it('skal åpne modal for å forlenge reservasjon', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -38,7 +38,7 @@ describe('OppgaveHandlingerMenu', () => {
   });
 
   it('skal åpne modal for å reservere med dato', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();
@@ -53,7 +53,7 @@ describe('OppgaveHandlingerMenu', () => {
   });
 
   it('skal åpne og lukke modal for å flytte reservasjon', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Handlinger på oppgave')).toBeInTheDocument();

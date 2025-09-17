@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './AndreKriterierVelger.stories';
 
@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('AndreKriterierVelger', () => {
   it('skal vise checkboxer for andre kriterier der Til beslutter er valgt fra før', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Til beslutter')).toBeInTheDocument();
     expect(getByLabelText('Til beslutter')).toBeChecked();
@@ -18,7 +18,7 @@ describe('AndreKriterierVelger', () => {
   });
 
   it('skal velge Registrer papirsøknad og fjerne dette fra køen', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getAllByLabelText } = render(<Default />);
     expect(await screen.findByText('Registrer papirsøknad')).toBeInTheDocument();
 

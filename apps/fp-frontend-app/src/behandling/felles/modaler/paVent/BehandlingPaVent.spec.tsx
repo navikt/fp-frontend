@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './BehandlingPaVent.stories';
 
@@ -9,7 +9,7 @@ const { BehandlingSattPåVent, BehandlingSattManueltPåVent } = composeStories(s
 
 describe('BehandlingPaVent', () => {
   it('skal vise at behandling er satt på vent', async () => {
-    applyRequestHandlers(BehandlingSattPåVent.parameters['msw']);
+    applyRequestHandlers(BehandlingSattPåVent.parameters['msw'] as MswParameters['msw']);
     render(<BehandlingSattPåVent />);
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();
@@ -21,7 +21,7 @@ describe('BehandlingPaVent', () => {
   it('skal vise at behandling er satt på vent manuelt og så endre årsak og lagre', async () => {
     const åpneSøkeside = vi.fn();
 
-    applyRequestHandlers(BehandlingSattManueltPåVent.parameters['msw']);
+    applyRequestHandlers(BehandlingSattManueltPåVent.parameters['msw'] as MswParameters['msw']);
     render(<BehandlingSattManueltPåVent opneSokeside={åpneSøkeside} />);
 
     expect(await screen.findByText('Behandlingen er satt på vent')).toBeInTheDocument();

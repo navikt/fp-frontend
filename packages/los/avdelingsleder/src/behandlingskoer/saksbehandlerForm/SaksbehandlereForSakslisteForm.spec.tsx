@@ -1,6 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SaksbehandlereForSakslisteForm.stories';
 
@@ -8,14 +8,14 @@ const { IngenSaksbehandlere, ToSaksbehandlere, SaksbehandlereSomErGruppert } = c
 
 describe('SaksbehandlereForSakslisteForm', () => {
   it('skal vise tekst som viser at ingen saksbehandlere er tilknyttet', async () => {
-    applyRequestHandlers(IngenSaksbehandlere.parameters['msw']);
+    applyRequestHandlers(IngenSaksbehandlere.parameters['msw'] as MswParameters['msw']);
     render(<IngenSaksbehandlere />);
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
     expect(await screen.findByText('Avdelingen har ingen saksbehandlere tilknyttet')).toBeInTheDocument();
   });
 
   it('skal vise to saksbehandlere i listen', async () => {
-    applyRequestHandlers(ToSaksbehandlere.parameters['msw']);
+    applyRequestHandlers(ToSaksbehandlere.parameters['msw'] as MswParameters['msw']);
     render(<ToSaksbehandlere />);
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe('SaksbehandlereForSakslisteForm', () => {
   });
 
   it.skip('skal vise gruppe og liste med alle saksbehandlere', async () => {
-    applyRequestHandlers(SaksbehandlereSomErGruppert.parameters['msw']);
+    applyRequestHandlers(SaksbehandlereSomErGruppert.parameters['msw'] as MswParameters['msw']);
     render(<SaksbehandlereSomErGruppert />);
     expect(await screen.findByText('Saksbehandlere')).toBeInTheDocument();
     expect(screen.getByText('Gruppenavn')).toBeInTheDocument();

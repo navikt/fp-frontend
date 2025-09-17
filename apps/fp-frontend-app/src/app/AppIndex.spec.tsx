@@ -2,7 +2,7 @@ import { Context as ResponsiveContext } from 'react-responsive';
 
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor, within } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 import { expect } from 'vitest';
 
 import * as stories from './AppIndex.stories';
@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('AppIndex', () => {
   it('skal rendre app med korrekt informasjon', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <Default />

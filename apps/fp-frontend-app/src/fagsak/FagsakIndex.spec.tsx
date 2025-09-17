@@ -3,7 +3,7 @@ import { Context as ResponsiveContext } from 'react-responsive';
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './FagsakIndex.stories';
 
@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('FagsakIndex', () => {
   it('skal vise fagsak-delen av app og vente på at behandling skal vises', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Faresignaler')).toBeInTheDocument();
@@ -33,7 +33,7 @@ describe('FagsakIndex', () => {
   });
 
   it('skal vise åpning og lukking av sidepanel ved storskjerm', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1702 }}>
         <Default />
@@ -49,7 +49,7 @@ describe('FagsakIndex', () => {
   });
 
   it('skal skjule knapp for åpning eller lukking av sidepanel ved småskjerm', async () => {
-    applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1408 }}>
         <Default />
