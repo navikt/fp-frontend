@@ -10,6 +10,8 @@ import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@n
 import { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
+import type { VedtakFormValues } from '../../types/VedtakFormValues';
+
 import styles from './vedtakAvslagArsakOgBegrunnelsePanel.module.css';
 
 const maxLength1500 = maxLength(1500);
@@ -56,11 +58,10 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
   alleKodeverk,
   skalBrukeOverstyrendeFritekstBrev,
 }: Props) => {
-  // TODO (TOR) Manglar typing
   const {
     formState: { isDirty },
     control,
-  } = useFormContext();
+  } = useFormContext<VedtakFormValues>();
 
   const isRequiredFn = (value?: string | number | boolean) => value !== undefined || isDirty;
   const avslagsårsak = getAvslagArsak(alleKodeverk, vilkår, behandlingsresultat);

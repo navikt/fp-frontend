@@ -44,8 +44,7 @@ export const VilkarResultPicker = ({
   skalKunneInnvilge = true,
   validatorsForRadioOptions,
 }: Props) => {
-  // TODO (TOR) useFormContext manglar typing
-  const { getValues, watch, control } = useFormContext();
+  const { getValues, watch, control } = useFormContext<FormValues>();
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- [JOHANNES] vurder senere
   const erVilkårOk = watch('erVilkarOk');
 

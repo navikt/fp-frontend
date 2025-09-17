@@ -162,6 +162,8 @@ export type {
 export { AksjonspunktÅrsak } from './src/arbeidOgInntektsmeldingTsType';
 export type {
   FodselOgTilrettelegging,
+  OppholdÅrsak,
+  TilretteleggingType,
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
   Permisjon,

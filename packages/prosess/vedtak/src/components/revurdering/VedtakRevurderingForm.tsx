@@ -40,6 +40,7 @@ import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakResultType } from '../../kodeverk/vedtakResultType';
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
+import type { VedtakFormValues } from '../../types/VedtakFormValues';
 import { useVedtakEditeringContext } from '../../VedtakEditeringContext';
 import { VedtakFellesPanel } from '../felles/VedtakFellesPanel';
 import { getTilbakekrevingText } from '../felles/VedtakHelper';
@@ -183,7 +184,7 @@ const finnInvilgetRevurderingTekst = (
 };
 
 const transformValues = (
-  values: FormValues,
+  values: VedtakFormValues,
   aksjonspunkter: Aksjonspunkt[],
   harOverstyrtVedtaksbrev: boolean,
 ): RevurderingVedtakAksjonspunkter[] =>
@@ -203,10 +204,6 @@ const transformValues = (
       begrunnelse: values.begrunnelse,
       skalBrukeOverstyrendeFritekstBrev: harOverstyrtVedtaksbrev,
     }));
-
-interface FormValues {
-  begrunnelse?: string;
-}
 
 interface Props {
   previewCallback: (data: VedtakForhåndsvisData) => void;
@@ -244,9 +241,9 @@ export const VedtakRevurderingForm = ({
 
   const { behandlingsresultat, språkkode, aksjonspunkt, behandlingÅrsaker } = behandling;
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<VedtakFormValues>();
 
-  const formMethods = useForm<FormValues>({
+  const formMethods = useForm<VedtakFormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(behandling),
   });
 
@@ -293,7 +290,7 @@ export const VedtakRevurderingForm = ({
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) =>
+      onSubmit={(values: VedtakFormValues) =>
         submitCallback(transformValues(values, aksjonspunkt, harValgtÅRedigereVedtaksbrev))
       }
       setDataOnUnmount={setMellomlagretFormData}

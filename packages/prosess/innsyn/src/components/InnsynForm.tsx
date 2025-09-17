@@ -20,15 +20,8 @@ import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DocumentListInnsyn } from './DocumentListInnsyn';
+import type { InnsynFormValues } from './InnsynFormValues';
 import { VedtakDocuments } from './VedtakDocuments';
-
-type FormValues = {
-  mottattDato?: string;
-  innsynResultatType?: string;
-  fristDato?: string;
-  sattPaVent?: boolean;
-  begrunnelse?: string;
-};
 
 const hentDokumenterMedNavnOgFikkInnsyn = (dokumenter: InnsynDokument[]): Record<string, boolean> =>
   dokumenter.reduce((acc: Record<string, boolean>, d: InnsynDokument) => {
@@ -43,7 +36,7 @@ const getDefaultValues = (
   aksjonspunkter: Aksjonspunkt[],
   fristBehandlingPåVent?: string,
   innsyn?: Innsyn,
-): FormValues => ({
+): InnsynFormValues => ({
   mottattDato: innsyn?.innsynMottattDato,
   innsynResultatType: innsyn?.innsynResultatType,
   fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
@@ -52,7 +45,7 @@ const getDefaultValues = (
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
 });
 
-const getDocumentsStatus = (values: FormValues, documents: Dokument[]) =>
+const getDocumentsStatus = (values: InnsynFormValues, documents: Dokument[]) =>
   documents.map(document => ({
     dokumentId: document.dokumentId,
     journalpostId: document.journalpostId,
@@ -60,7 +53,7 @@ const getDocumentsStatus = (values: FormValues, documents: Dokument[]) =>
     fikkInnsyn: !!values[`dokument_${document.dokumentId}`],
   }));
 
-const getFilteredValues = (values: FormValues) =>
+const getFilteredValues = (values: InnsynFormValues) =>
   Object.keys(values)
     .filter(valueKey => !valueKey.startsWith('dokument_'))
     .reduce(
@@ -74,10 +67,10 @@ const getFilteredValues = (values: FormValues) =>
     );
 
 // @ts-expect-error Fiks
-const transformValues = (values: FormValues, documents: Dokument[]): VurderInnsynAp => ({
+const transformValues = (values: InnsynFormValues, documents: Dokument[]): VurderInnsynAp => ({
   kode: AksjonspunktKode.VURDER_INNSYN,
   innsynDokumenter: getDocumentsStatus(values, documents),
-  ...(getFilteredValues(values) as FormValues),
+  ...(getFilteredValues(values) as InnsynFormValues),
 });
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
@@ -107,9 +100,9 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
 
   const defaultValues = getDefaultValues(aksjonspunkterForPanel, behandling.fristBehandlingPåVent, innsyn);
 
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
+  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<InnsynFormValues>();
 
-  const formMethods = useForm<FormValues>({
+  const formMethods = useForm<InnsynFormValues>({
     defaultValues: mellomlagretFormData ?? defaultValues,
   });
 
@@ -127,7 +120,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, alleDokumenter))}
+      onSubmit={(values: InnsynFormValues) => submitCallback(transformValues(values, alleDokumenter))}
       setDataOnUnmount={setMellomlagretFormData}
     >
       <VStack gap="space-16">
