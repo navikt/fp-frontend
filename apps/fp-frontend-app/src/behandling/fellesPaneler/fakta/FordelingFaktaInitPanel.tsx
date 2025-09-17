@@ -52,7 +52,7 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
       {!isFetching ? (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          beregningsgrunnlagVilkår={lagBGVilkår(standardPanelProps.behandling.vilkår ?? [], beregningsgrunnlag)}
+          beregningsgrunnlagVilkår={lagBGVilkår(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
           beregningsgrunnlagListe={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -89,28 +89,31 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 };
 
 const lagModifisertCallback =
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
-  (
-    aksjonspunkterSomSkalLagres:
-      | FordelBeregningsgrunnlagAP
-      | VurderRefusjonBeregningsgrunnlagAP
-      | VurderNyttInntektsforholdAP,
-  ) => {
-    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
-      ? aksjonspunkterSomSkalLagres
-      : [aksjonspunkterSomSkalLagres];
-    const transformerteData = apListe.map(apData => ({
-      kode: mapBGKodeTilFpsakKode(apData.kode),
-      ...apData.grunnlag[0],
-    }));
-    return submitCallback(transformerteData);
-  };
+    (
+      aksjonspunkterSomSkalLagres:
+        | VurderRefusjonBeregningsgrunnlagAP
+        // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+        | FordelBeregningsgrunnlagAP
+        // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+        | VurderNyttInntektsforholdAP,
+    ) => {
+      const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
+        ? aksjonspunkterSomSkalLagres
+        : [aksjonspunkterSomSkalLagres];
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      const transformerteData = apListe.map(apData => ({
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
+        kode: mapBGKodeTilFpsakKode(apData.kode),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        ...apData.grunnlag[0],
+      }));
+      return submitCallback(transformerteData);
+    };
 
 const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
-  if (!vilkår) {
-    return null;
-  }
-  const bgVilkår = vilkår.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkår = vilkår.find(v => v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkår || !beregningsgrunnlag) {
     return null;
   }
@@ -122,7 +125,7 @@ const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag
         vurderesIBehandlingen: true,
         merknadParametere: {},
         periode: {
-          fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
+          fom: beregningsgrunnlag.skjaeringstidspunktBeregning,
           tom: TIDENES_ENDE,
         },
         vilkarStatus: bgVilkår.vilkarStatus,

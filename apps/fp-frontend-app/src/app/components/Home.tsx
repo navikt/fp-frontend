@@ -59,7 +59,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
 
   const navigate = useNavigate();
   const åpneFagsak = (saksnummer: string, behandlingUuid?: string) => {
-    navigate(getFagsakHref(saksnummer, behandlingUuid));
+    void navigate(getFagsakHref(saksnummer, behandlingUuid));
   };
 
   const location = useLocation();

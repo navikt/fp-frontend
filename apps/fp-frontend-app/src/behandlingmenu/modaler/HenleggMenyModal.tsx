@@ -41,7 +41,7 @@ export const HenleggMenyModal = ({ behandling, behandlingAppKontekst, fagsakYtel
       : notEmpty(alleFpSakKodeverk)['BehandlingResultatType'];
 
   const navigate = useNavigate();
-  const gåTilSokeside = () => navigate('/');
+  const gåTilSokeside = () => void navigate('/');
 
   const forhåndsvisHenleggBehandling = useVisForhandsvisningAvHenleggelse(behandlingAppKontekst);
 

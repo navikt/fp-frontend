@@ -71,6 +71,7 @@ type NyBehandlendeEnhet = {
 };
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
 type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp;
 
 export type AksjonspunktArgs = {
@@ -79,6 +80,7 @@ export type AksjonspunktArgs = {
   saksnummer: string;
   bekreftedeAksjonspunktDtoer: ({
     '@type': string;
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
   } & AksjonspunktType)[];
 };
 
@@ -88,6 +90,7 @@ export type OverstyrteAksjonspunktArgs = {
   saksnummer: string;
   overstyrteAksjonspunktDtoer: ({
     '@type': string;
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
   } & AksjonspunktType)[];
 };
 

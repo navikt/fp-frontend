@@ -40,7 +40,7 @@ export const RisikoklassifiseringIndex = ({ fagsakData, behandling, setBehandlin
   const location = useLocation();
 
   const toggleRiskPanel = () => {
-    navigate(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
+    void navigate(getRiskPanelLocationCreator(location)(!isRiskPanelOpen));
   };
 
   const { kodeverkOptions } = useFagsakApi();
@@ -102,17 +102,17 @@ const RisikoklassifiseringBehandling = ({
 
   useEffect(() => {
     if (!!risikoAksjonspunkt && erAksjonspunktÅpent(risikoAksjonspunkt) && !isRiskPanelOpen) {
-      navigate(getRiskPanelLocationCreator(location)(true));
+      void navigate(getRiskPanelLocationCreator(location)(true));
     }
     if (!!risikoAksjonspunkt && risikoAksjonspunkt.status === AksjonspunktStatus.UTFORT) {
-      navigate(getRiskPanelLocationCreator(location)(false));
+      void navigate(getRiskPanelLocationCreator(location)(false));
     }
   }, [!!risikoAksjonspunkt, behandling.uuid, behandling.versjon]);
 
   const { lagreAksjonspunkter } = useBehandlingPollingOperasjoner(behandling, setBehandling);
 
   const lagreRisikoklassifiseringAksjonspunkt = (values: AvklartRisikoklassifiseringAp) => {
-    lagreAksjonspunkter({
+    void lagreAksjonspunkter({
       behandlingUuid: behandling.uuid,
       behandlingVersjon: behandling.versjon,
       saksnummer: fagsak.saksnummer,

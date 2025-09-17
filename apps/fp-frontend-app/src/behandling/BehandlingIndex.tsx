@@ -162,7 +162,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl =
       newLocation = getFaktaLocation(newLocation)();
     }
 
-    navigate(newLocation);
+    void navigate(newLocation);
   };
 
 const formatName = (bpName = ''): string => replaceNorwegianCharacters(bpName.toLowerCase());

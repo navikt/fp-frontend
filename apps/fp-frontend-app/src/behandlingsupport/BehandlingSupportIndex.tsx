@@ -82,7 +82,7 @@ export const BehandlingSupportIndex = ({
 
   const changeRouteCallback = (supportPanel: string) => {
     const getSupportPanelLocation = getSupportPanelLocationCreator(location);
-    navigate(getSupportPanelLocation(supportPanel));
+    void navigate(getSupportPanelLocation(supportPanel));
   };
 
   return (

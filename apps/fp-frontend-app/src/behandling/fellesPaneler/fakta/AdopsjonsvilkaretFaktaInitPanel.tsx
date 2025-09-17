@@ -24,7 +24,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
 
   const { behandling, fagsak } = use(BehandlingDataContext);
 
-  const skalPanelVisesIMeny = (behandling.vilkår ?? []).some(v => adopsjonsvilkarene.some(av => av === v.vilkarType));
+  const skalPanelVisesIMeny = behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType));
 
   const api = useBehandlingApi(behandling);
 

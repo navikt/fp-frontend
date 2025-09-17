@@ -84,8 +84,8 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   const location = useLocation();
 
   const gåTilNyBehandling = (nyBehandling: Behandling) => {
-    const pathname = pathToBehandling(fagsak.saksnummer, nyBehandling?.uuid);
-    navigate(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
+    const pathname = pathToBehandling(fagsak.saksnummer, nyBehandling.uuid);
+    void navigate(getLocationWithDefaultProsessStegAndFakta({ ...location, pathname }));
   };
 
   const { lagNyBehandling } = useLagNyBehandling(gåTilNyBehandling);

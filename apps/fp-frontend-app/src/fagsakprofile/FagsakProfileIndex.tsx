@@ -36,10 +36,7 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
 };
 
 const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
-  if (!fagsak.fagsakMarkeringer) {
-    return [];
-  }
-  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn) as string[];
+  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn);
 };
 
 interface Props {

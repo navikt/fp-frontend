@@ -75,10 +75,6 @@ export const TotrinnskontrollIndex = ({
     },
   });
 
-  if (!valgtBehandling.totrinnskontrollÅrsaker) {
-    return null;
-  }
-
   const onSubmit = (totrinnskontrollData: Values) => {
     const params = {
       behandlingUuid: valgtBehandling.uuid,

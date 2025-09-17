@@ -47,7 +47,7 @@ export const useStandardProsessPanelProps = (
 
   const aksjonspunkterForPanel = aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
 
-  const vilkårForPanel = (vilkår ?? []).filter(v => vilkårKoder.includes(v.vilkarType));
+  const vilkårForPanel = vilkår.filter(v => vilkårKoder.includes(v.vilkarType));
 
   const isReadOnly = erReadOnly(behandling, vilkårForPanel, rettigheter, false);
 
