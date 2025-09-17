@@ -67,7 +67,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
     appendOpphold({
       fom: '',
       tom: '',
-      oppholdÅrsak: '' as OppholdÅrsak,
+      oppholdÅrsak: undefined as unknown as OppholdÅrsak,
       oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
     });
   };
@@ -75,7 +75,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
     setErLeggTilKnapperDisablet(true);
     appendTilrettelegging({
       fom: '',
-      type: '' as TilretteleggingType,
+      type: undefined as unknown as TilretteleggingType,
       kilde: 'REGISTRERT_AV_SAKSBEHANDLER',
       stillingsprosent: null,
       overstyrtUtbetalingsgrad: null,
