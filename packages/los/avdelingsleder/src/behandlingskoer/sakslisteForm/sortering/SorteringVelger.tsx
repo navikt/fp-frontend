@@ -57,6 +57,7 @@ export const SorteringVelger = ({
 
   const koSorteringer = useLosKodeverk('KøSortering');
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- [JOHANNES] vent på typet form
   const sortering = watch('sortering');
 
   return (

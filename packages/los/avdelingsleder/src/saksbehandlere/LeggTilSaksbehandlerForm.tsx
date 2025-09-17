@@ -63,9 +63,6 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
   };
 
   const formattedText = useMemo((): string => {
-    if (saksbehandlerStatus === 'success' && !saksbehandler) {
-      return intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesIkke' });
-    }
     if (!saksbehandler) {
       return '';
     }

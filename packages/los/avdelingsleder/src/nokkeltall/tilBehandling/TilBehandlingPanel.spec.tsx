@@ -13,8 +13,8 @@ describe('TilBehandlingPanel', () => {
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Antall åpne oppgaver pr dato')).toBeInTheDocument();
 
-    expect((screen.getByText('2 siste uker') as HTMLOptionElement).selected).toBeTruthy();
-    expect((screen.getByText('4 siste uker') as HTMLOptionElement).selected).toBeFalsy();
+    expect(screen.getByText<HTMLOptionElement>('2 siste uker').selected).toBeTruthy();
+    expect(screen.getByText<HTMLOptionElement>('4 siste uker').selected).toBeFalsy();
 
     expect(getByLabelText('Foreldrepenger')).not.toBeChecked();
     expect(getByLabelText('Engangsstønad')).not.toBeChecked();

@@ -56,7 +56,7 @@ export const UttakDokumentasjonFaktaTable = ({
     }
   };
 
-  useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov?.find(oa => !oa.vurdering)?.fom), []);
+  useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov.find(oa => !oa.vurdering)?.fom), []);
 
   const oppdaterPeriode = (oppdatertKrav: { perioder: DokumentasjonVurderingBehov[] }) => {
     const { perioder } = oppdatertKrav;

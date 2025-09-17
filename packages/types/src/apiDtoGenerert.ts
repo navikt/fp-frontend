@@ -1358,7 +1358,7 @@ export type tjenester_behandling_uttak_dokumentasjon_VurderUttakDokumentasjonDto
 
 export type tjenester_behandling_uttak_dto_ArbeidsforholdDto = {
   arbeidsgiverReferanse?: string;
-  arbeidType: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
+  arbeidType?: foreldrepenger_behandlingslager_uttak_UttakArbeidType;
 };
 
 export type tjenester_behandling_uttak_dto_AvklarAleneomsorgVurderingDto = {

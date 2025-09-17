@@ -114,7 +114,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
         size="small"
         value={activeAvdelingslederPanel}
         onChange={(avdelingslederPanel: string) => {
-          navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
+          void navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
         }}
         className={styles.paddingHeader}
       >

@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-argument -- [JOHANNES] vent på typet form */
+
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 

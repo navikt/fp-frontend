@@ -87,7 +87,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
       throw new Error('Reservasjon må være valgt');
     }
     await flyttOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, ...params });
-    hentAvdelingensReservasjoner();
+    void hentAvdelingensReservasjoner();
   };
 
   return (

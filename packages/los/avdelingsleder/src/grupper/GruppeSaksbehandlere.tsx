@@ -107,7 +107,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
   };
 
   const toggleSelected = (option: string, isSelected: boolean) => {
-    const selectedOption = filteredOptions.find(o => o.toLowerCase().includes(option?.toLowerCase()));
+    const selectedOption = filteredOptions.find(o => o.toLowerCase().includes(option.toLowerCase()));
     const navnOgBrukerIdent = selectedOption?.replace(')', '').split(' (');
     const alreadySelected = sorterteGrupperteSaksbehandlere.some(
       gs => navnOgBrukerIdent && gs.brukerIdent === navnOgBrukerIdent[1],
@@ -128,6 +128,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
           control={formMethods.control}
           label={intl.formatMessage({ id: 'GruppeSaksbehandlere.Navn' })}
           validate={[required, minLength3, maxLength100, hasValidName]}
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
           onBlur={value => lagreNavnDebounce(value)}
           className={styles.navn}
         />

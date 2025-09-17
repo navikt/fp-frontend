@@ -67,6 +67,7 @@ const getFilteredValues = (values: FormValues) =>
       (acc, valueKey) => ({
         ...acc,
         // @ts-expect-error Fiks
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         [valueKey]: values[valueKey],
       }),
       {},

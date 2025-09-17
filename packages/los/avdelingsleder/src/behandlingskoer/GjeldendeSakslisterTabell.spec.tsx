@@ -40,7 +40,7 @@ describe('GjeldendeSakslisterTabell', () => {
     expect(await screen.findByText('Ingen behandlingskøer er laget')).toBeInTheDocument();
     expect(screen.queryByText('Navn')).not.toBeInTheDocument();
 
-    await fireEvent.keyDown(screen.getByText('Legg til behandlingskø'), {
+    fireEvent.keyDown(screen.getByText('Legg til behandlingskø'), {
       key: 'Enter',
       code: 'Enter',
       keyCode: 13,

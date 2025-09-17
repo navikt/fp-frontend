@@ -36,7 +36,7 @@ const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean =>
   behandlingStatusKode === BehandlingStatusEnum.BEHANDLING_UTREDES;
 
 const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
-  aksjonspunkter?.some(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK) || skalBrukeManueltBrev
+  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK) || skalBrukeManueltBrev
     ? 'VedtakForm.TilGodkjenning'
     : 'VedtakForm.FattVedtak';
 
