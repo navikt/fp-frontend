@@ -34,7 +34,7 @@ const utledTypeTekst = (
 };
 
 const utledKilde = (intl: IntlShape, tilrettelegging: ArbeidsforholdTilretteleggingDato): string => {
-  if (tilrettelegging.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' || tilrettelegging.fom === undefined) {
+  if (tilrettelegging.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' || tilrettelegging.fom === '') {
     return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Saksbehandler' });
   }
   if (tilrettelegging.kilde === 'ENDRET_AV_SAKSBEHANDLER') {
