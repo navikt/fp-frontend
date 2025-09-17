@@ -33,7 +33,7 @@ interface Props {
  * Denne komponenten viser de siste fagsakene en nav-ansatt har behandlet.
  */
 export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
-  const [ kunÅpne, setkunÅpne ] = useState<boolean>(false);
+  const [kunÅpne, setkunÅpne] = useState<boolean>(false);
   const { data: sisteReserverte = [], isFetching } = useQuery(behandlendeOppgaverOptions(kunÅpne));
 
   return (

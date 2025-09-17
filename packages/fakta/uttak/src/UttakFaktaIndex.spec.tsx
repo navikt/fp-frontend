@@ -21,7 +21,7 @@ describe('UttakFaktaIndex', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect( screen.getByTitle('Vis mer')).toBeInTheDocument();
+    expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
     expect(screen.queryByTitle('Overstyr')).not.toBeInTheDocument();
   });
 
