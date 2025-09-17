@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('FagsakIndex', () => {
   it('skal vise fagsak-delen av app og vente på at behandling skal vises', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Faresignaler')).toBeInTheDocument();
@@ -33,7 +33,7 @@ describe('FagsakIndex', () => {
   });
 
   it('skal vise åpning og lukking av sidepanel ved storskjerm', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1702 }}>
         <Default />
@@ -49,7 +49,7 @@ describe('FagsakIndex', () => {
   });
 
   it('skal skjule knapp for åpning eller lukking av sidepanel ved småskjerm', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1408 }}>
         <Default />

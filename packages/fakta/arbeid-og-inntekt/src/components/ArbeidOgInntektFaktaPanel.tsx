@@ -83,12 +83,12 @@ export const ArbeidOgInntektFaktaPanel = ({
   const oppdaterTabellData = (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => {
     setTabellRader(data);
     setÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
-    tableRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    tableRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   };
 
   const lagreOgFortsett = () => {
     setErKnappTrykket(true);
-    submitCallback({
+    void submitCallback({
       kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     });
   };

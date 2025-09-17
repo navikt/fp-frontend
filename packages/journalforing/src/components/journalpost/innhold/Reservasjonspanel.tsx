@@ -18,10 +18,7 @@ type Props = Readonly<{
  */
 export const Reservasjonspanel = ({ oppgave, reserverOppgave, navAnsatt }: Props) => {
   const reserverOppgaveAction = () => {
-    if (!oppgave) {
-      throw new Error('Prøver å reservere uten å ha valgt oppgave, ugyldig tilstand.');
-    }
-    const reservasjonFor = !oppgave?.reservertAv ? navAnsatt.brukernavn : '';
+    const reservasjonFor = !oppgave.reservertAv ? navAnsatt.brukernavn : '';
     reserverOppgave({
       journalpostId: oppgave.journalpostId,
       reserverFor: reservasjonFor,

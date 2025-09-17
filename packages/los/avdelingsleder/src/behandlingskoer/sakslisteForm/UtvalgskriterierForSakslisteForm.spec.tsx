@@ -9,21 +9,21 @@ const { MedGittNavn, MedDefaultNavn } = composeStories(stories);
 
 describe('UtvalgskriterierForSakslisteForm', () => {
   it('skal vise sakslistenavn som saksbehandler har skrive inn', async () => {
-    await applyRequestHandlers(MedGittNavn.parameters['msw']);
+    applyRequestHandlers(MedGittNavn.parameters['msw']);
     render(<MedGittNavn />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
     expect(await screen.findByLabelText('Navn')).toHaveValue('liste');
   });
 
   it('skal vise default sakslistenavn', async () => {
-    await applyRequestHandlers(MedDefaultNavn.parameters['msw']);
+    applyRequestHandlers(MedDefaultNavn.parameters['msw']);
     render(<MedDefaultNavn />);
     expect(await screen.findByText('Navn')).toBeInTheDocument();
     expect(await screen.findByLabelText('Navn')).toHaveValue('Ny behandlingskø');
   });
 
   it('skal vise feilmelding når en fjerner nok tegn til at navnet blir færre enn 3 tegn langt', async () => {
-    await applyRequestHandlers(MedGittNavn.parameters['msw']);
+    applyRequestHandlers(MedGittNavn.parameters['msw']);
     const { getByLabelText } = render(<MedGittNavn />);
 
     expect(await screen.findByText('Navn')).toBeInTheDocument();

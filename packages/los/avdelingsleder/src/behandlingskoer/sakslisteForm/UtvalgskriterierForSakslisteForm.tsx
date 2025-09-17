@@ -77,7 +77,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
     mutationFn: (values: { sakslisteId: number; navn: string; avdelingEnhet: string }) =>
       lagreSakslisteNavn(values.sakslisteId, values.navn, values.avdelingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },

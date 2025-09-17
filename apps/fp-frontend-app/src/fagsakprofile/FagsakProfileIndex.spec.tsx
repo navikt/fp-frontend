@@ -8,7 +8,7 @@ const { BehandlingErValgt, BehandlingErIkkeValgt } = composeStories(stories);
 
 describe('FagsakProfileIndex', () => {
   it('skal vise en behandling i liste når behandling er valgt', async () => {
-    await applyRequestHandlers(BehandlingErValgt.parameters['msw']);
+    applyRequestHandlers(BehandlingErValgt.parameters['msw']);
     render(<BehandlingErValgt />);
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe('FagsakProfileIndex', () => {
   });
 
   it('skal vise alle behandlinger i liste når ingen behandling er valgt', async () => {
-    await applyRequestHandlers(BehandlingErIkkeValgt.parameters['msw']);
+    applyRequestHandlers(BehandlingErIkkeValgt.parameters['msw']);
     render(<BehandlingErIkkeValgt />);
 
     expect(await screen.findByText('Foreldrepenger')).toBeInTheDocument();

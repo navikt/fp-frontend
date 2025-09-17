@@ -83,7 +83,7 @@ const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['beha
     );
 
 const lagÅrsakString = (revurderingAarsaker: BehandlingArsakType[], alleKodeverk: AlleKodeverk): string | undefined => {
-  if (revurderingAarsaker === undefined || revurderingAarsaker.length < 1) {
+  if (revurderingAarsaker.length < 1) {
     return undefined;
   }
   const aarsakTekstList = [];

@@ -107,7 +107,7 @@ const finnFamilieHendelseTekstKode = (hendelseType: string): string => {
 };
 
 const utledFamileihendelsetekst = (familieHendelseJf?: FamilieHendelse): ReactElement | null => {
-  if (!familieHendelseJf?.familihendelseType || !familieHendelseJf?.familiehHendelseDato) {
+  if (!familieHendelseJf?.familihendelseType || !familieHendelseJf.familiehHendelseDato) {
     return null;
   }
   const tekstKode = finnFamilieHendelseTekstKode(familieHendelseJf.familihendelseType);

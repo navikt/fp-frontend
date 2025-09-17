@@ -64,7 +64,7 @@ describe('FodselFaktaIndex', () => {
     });
   });
 
-  it('skal vise fakta i revurdering ved fødselshendlese', async () => {
+  it('skal vise fakta i revurdering ved fødselshendlese', () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<Default submitCallback={lagre} />);

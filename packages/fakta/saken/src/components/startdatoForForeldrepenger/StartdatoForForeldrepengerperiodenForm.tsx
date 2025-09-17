@@ -30,13 +30,13 @@ const capitalizeFirstLetter = (landNavn: string): string => {
 };
 
 const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormValues => ({
-  startdatoFraSoknad: soknad.oppgittFordeling?.startDatoForPermisjon ?? undefined,
+  startdatoFraSoknad: soknad.oppgittFordeling.startDatoForPermisjon ?? undefined,
   begrunnelse: aksjonspunkt?.begrunnelse ?? '',
 });
 
 const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
   kode: AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
-  opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon ?? undefined,
+  opprinneligDato: soknad.oppgittFordeling.startDatoForPermisjon ?? undefined,
   startdatoFraSoknad: notEmpty(values.startdatoFraSoknad),
   begrunnelse: values.begrunnelse,
 });
@@ -90,9 +90,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
         {!visEditeringsmodus && (
           <HStack gap="space-8">
             <BodyShort size="small">
-              {soknad.oppgittFordeling
-                ? capitalizeFirstLetter(dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))
-                : '-'}
+              {capitalizeFirstLetter(dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))}
             </BodyShort>
             <PencilFillIcon
               title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}

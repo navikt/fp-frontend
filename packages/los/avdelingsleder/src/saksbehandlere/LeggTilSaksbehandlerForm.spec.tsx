@@ -9,7 +9,7 @@ const { Default, SaksbehandlerFinnesIkke } = composeStories(stories);
 
 describe('LeggTilSaksbehandlerForm', () => {
   it('skal vise at oppgitt brukerident ikke finnes', async () => {
-    await applyRequestHandlers(SaksbehandlerFinnesIkke.parameters['msw']);
+    applyRequestHandlers(SaksbehandlerFinnesIkke.parameters['msw']);
     const utils = render(<SaksbehandlerFinnesIkke />);
 
     expect(await screen.findByText('Legg til saksbehandler')).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('LeggTilSaksbehandlerForm', () => {
   });
 
   it('skal finne brukerident og så legge saksbehandler til listen', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     const utils = render(<Default />);
 
     expect(await screen.findByText('Legg til saksbehandler')).toBeInTheDocument();

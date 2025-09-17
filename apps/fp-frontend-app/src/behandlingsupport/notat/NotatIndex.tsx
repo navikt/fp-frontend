@@ -23,7 +23,7 @@ export const NotatIndex = ({ fagsak, toggleVisUtvidetBehandlingDetaljerKnapp }: 
     mutationFn: (valuesToStore: { saksnummer: string; notat: string }) =>
       api.lagreNotat(valuesToStore.saksnummer, valuesToStore.notat),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [FagsakRel.FETCH_FAGSAK],
       });
     },

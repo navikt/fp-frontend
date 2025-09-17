@@ -68,7 +68,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
 
   const today = dayjs().toDate();
 
-  const skalViseDødsdato = !isReadOnly || barn.some(b => b.dødsdato !== null);
+  const skalViseDødsdato = !isReadOnly || barn.some(b => b.dødsdato !== undefined);
 
   return (
     <VStack gap="space-8">

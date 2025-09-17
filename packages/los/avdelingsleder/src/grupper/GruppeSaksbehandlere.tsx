@@ -49,7 +49,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
     mutationFn: (valuesToStore: { brukerIdent: string; gruppeId: number }) =>
       leggSaksbehandlerTilGruppe(valuesToStore.brukerIdent, valgAvdeldingEnhet, valuesToStore.gruppeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.HENT_GRUPPER],
       });
     },
@@ -59,7 +59,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
     mutationFn: (valuesToStore: { brukerIdent: string; gruppeId: number }) =>
       fjernSaksbehandlerFraGruppe(valuesToStore.brukerIdent, valgAvdeldingEnhet, valuesToStore.gruppeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.HENT_GRUPPER],
       });
     },
@@ -69,7 +69,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
     mutationFn: (valuesToStore: { gruppeId: number; gruppeNavn: string }) =>
       endreGruppenavn(valuesToStore.gruppeId, valuesToStore.gruppeNavn, valgAvdeldingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.HENT_GRUPPER],
       });
     },

@@ -8,13 +8,13 @@ const { FaresignalerOppdaget, VenterPåFaresignalerNårBehandlingIkkeErValgt } =
 
 describe('RisikoklassifiseringIndex', () => {
   it('skal vise at faresignaler er oppdaget', async () => {
-    await applyRequestHandlers(FaresignalerOppdaget.parameters['msw']);
+    applyRequestHandlers(FaresignalerOppdaget.parameters['msw']);
     render(<FaresignalerOppdaget />);
     expect(await screen.findByText('Faresignaler oppdaget')).toBeInTheDocument();
   });
 
   it('skal vise at en venter på faresignaler når behandling ikke er valgt', async () => {
-    await applyRequestHandlers(VenterPåFaresignalerNårBehandlingIkkeErValgt.parameters['msw']);
+    applyRequestHandlers(VenterPåFaresignalerNårBehandlingIkkeErValgt.parameters['msw']);
     render(<VenterPåFaresignalerNårBehandlingIkkeErValgt />);
     expect(await screen.findByText('Venter på mulige faresignaler')).toBeInTheDocument();
   });

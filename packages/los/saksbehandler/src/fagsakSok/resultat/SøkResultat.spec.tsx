@@ -8,7 +8,7 @@ const { Default } = composeStories(stories);
 
 describe('SøkResultat', () => {
   it('skal vise en tabell med en rad og tilhørende kolonnedata', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Saksnummer')).toBeInTheDocument();

@@ -9,7 +9,7 @@ const { Default, TomTabell, MedSaksbehandlerUtenAnsattAvdeling } = composeStorie
 
 describe('SaksbehandlereTabell', () => {
   it('skal vise to saksbehandlere i tabell', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Navn')).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('SaksbehandlereTabell', () => {
   });
 
   it('skal fjerne en saksbehandler ved å trykk på fjern-knappen', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Navn')).toBeInTheDocument();
@@ -40,7 +40,7 @@ describe('SaksbehandlereTabell', () => {
   });
 
   it('skal sortere saksbehandlere etter ansattAvdeling og navn', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     const sortedNames = ['Hildegunn', 'Espen Utvikler', 'Steffen'];
@@ -53,7 +53,7 @@ describe('SaksbehandlereTabell', () => {
   });
 
   it('skal sortere saksbehandlere med ansattAvdeling null sist', async () => {
-    await applyRequestHandlers(MedSaksbehandlerUtenAnsattAvdeling.parameters['msw']);
+    applyRequestHandlers(MedSaksbehandlerUtenAnsattAvdeling.parameters['msw']);
     render(<MedSaksbehandlerUtenAnsattAvdeling />);
     const sortedNames = ['Hildegunn', 'Ukjent saksbehandler (X11111)'];
 

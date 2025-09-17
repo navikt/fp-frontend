@@ -152,6 +152,5 @@ const isAdopsjonFodelsedatoerEdited =
   (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, adopsjon: AdopsjonFamilieHendelse) =>
   (id: string): boolean => {
     const editedStatus = diff(soknad.adopsjonFodelsedatoer, adopsjon.fødselsdatoer);
-    // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output
     return editedStatus ? editedStatus[id] : false;
   };

@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('BehandlingstypeVelger', () => {
   it('skal vise checkboxer for behandlingstyper', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Førstegangsbehandling')).toBeChecked();
@@ -17,7 +17,7 @@ describe('BehandlingstypeVelger', () => {
   });
 
   it('skal velge klage', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Klage')).not.toBeChecked();

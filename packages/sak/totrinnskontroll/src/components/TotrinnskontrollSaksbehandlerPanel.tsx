@@ -28,7 +28,7 @@ const VurderPåNyttPunkter = ({
   vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[] | KodeverkMedNavnTilbakekreving<'VurderÅrsak'>[];
 }) => (
   <div className={styles.approvalItem}>
-    {vurderPaNyttArsaker?.map(item => (
+    {vurderPaNyttArsaker.map(item => (
       <HStack gap="space-8" key={item}>
         <XMarkOctagonIcon className={styles.xmark} />
         <div>{vurderArsaker.find(arsak => item === arsak.kode)?.navn}</div>
@@ -110,7 +110,7 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
                         </HStack>
                       ) : (
                         <VurderPåNyttPunkter
-                          vurderPaNyttArsaker={aksjonspunkt?.vurderPaNyttArsaker}
+                          vurderPaNyttArsaker={aksjonspunkt.vurderPaNyttArsaker}
                           vurderArsaker={vurderArsaker}
                         />
                       )}

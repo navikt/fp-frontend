@@ -8,25 +8,25 @@ const { VisAktør, VisSøk, VisLosIkkeTilgjengelig, VisSideIkkeFunnet } = compos
 
 describe('Home', () => {
   it('skal rendre aktør-panel', async () => {
-    await applyRequestHandlers(VisAktør.parameters['msw']);
+    applyRequestHandlers(VisAktør.parameters['msw']);
     render(<VisAktør />);
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
   });
 
   it('skal rendre søke-panel', async () => {
-    await applyRequestHandlers(VisSøk.parameters['msw']);
+    applyRequestHandlers(VisSøk.parameters['msw']);
     render(<VisSøk />);
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
   });
 
   it('skal rendre los-ikke-tilgjengelig-panel', async () => {
-    await applyRequestHandlers(VisLosIkkeTilgjengelig.parameters['msw']);
+    applyRequestHandlers(VisLosIkkeTilgjengelig.parameters['msw']);
     render(<VisLosIkkeTilgjengelig />);
     expect(await screen.findByText('FPLOS er ikke tilgjengelig')).toBeInTheDocument();
   });
 
   it('skal rendre side-ikke-funnet-panel', async () => {
-    await applyRequestHandlers(VisSideIkkeFunnet.parameters['msw']);
+    applyRequestHandlers(VisSideIkkeFunnet.parameters['msw']);
     render(<VisSideIkkeFunnet />);
     expect(await screen.findByText('Beklager, vi finner ikke siden du leter etter.')).toBeInTheDocument();
   });

@@ -51,11 +51,7 @@ export const DokumentDetaljer = ({
     return (
       <HStack className={styles.dokContainer} gap="0 4" align="center" wrap={false}>
         <RhfTextField
-          name={
-            dokumentTittelStyresAvJournalpostTittel
-              ? 'journalpostTittel'
-              : `journalpostDokumenter.${docFieldIndex}.tittel`
-          }
+          name="journalpostTittel"
           control={control}
           validate={[required, hasValidText]}
           readOnly={dokumentTittelStyresAvJournalpostTittel}

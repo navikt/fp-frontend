@@ -8,7 +8,7 @@ const { Default } = composeStories(stories);
 
 describe('SaksbehandlerIndex', () => {
   it('skal saksbehandler-los', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     await render(<Default />);
     expect(await screen.findByText('Behandlingskø')).toBeInTheDocument();
     expect(await screen.findByText('Neste i køen')).toBeInTheDocument();

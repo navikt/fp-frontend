@@ -54,12 +54,12 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                       <FormattedMessage id="ArbeidsforholdInformasjonPanel.ArbeidsforholdId" />
                     </Label>
                     <div>
-                      {a?.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length < 50 && (
+                      {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length < 50 && (
                         <div>
                           <BodyShort size="small">{a.eksternArbeidsforholdId}</BodyShort>
                         </div>
                       )}
-                      {a?.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
+                      {a.eksternArbeidsforholdId && a.eksternArbeidsforholdId.length >= 50 && (
                         <Tooltip content={delOppAId(a.eksternArbeidsforholdId)}>
                           <BodyShort size="small">{`${a.eksternArbeidsforholdId.substring(0, 50)}...`}</BodyShort>
                         </Tooltip>

@@ -74,7 +74,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     }
     await endreOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, reserverTil });
     setShowReservasjonEndringDatoModal(false);
-    hentAvdelingensReservasjoner();
+    void hentAvdelingensReservasjoner();
   };
 
   const { mutateAsync: flyttOppgavereservasjonRequest } = useMutation({

@@ -8,7 +8,7 @@ const { Default } = composeStories(stories);
 
 describe('GrupperPanel', () => {
   it('skal vise gruppe i tabell', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
     expect(await screen.findByText('Grupper')).toBeInTheDocument();
     expect(screen.getByText('Id')).toBeInTheDocument();

@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('AppIndex', () => {
   it('skal rendre app med korrekt informasjon', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(
       <ResponsiveContext.Provider value={{ width: 1000 }}>
         <Default />

@@ -43,7 +43,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
     onSuccess: () => {
       resetSaksbehandlerSøk();
       formMethods.reset();
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSBEHANDLERE_FOR_AVDELING],
       });
     },

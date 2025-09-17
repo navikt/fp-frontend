@@ -21,8 +21,8 @@ describe('UttakFaktaIndex', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
-    expect(await screen.queryByTitle('Overstyr')).not.toBeInTheDocument();
+    expect( screen.getByTitle('Vis mer')).toBeInTheDocument();
+    expect(screen.queryByTitle('Overstyr')).not.toBeInTheDocument();
   });
 
   it('skal kunne overstyre når det ikke er aksjonspunkter og en er overstyrer', async () => {
@@ -32,13 +32,13 @@ describe('UttakFaktaIndex', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
+    expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Overstyr'));
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
+    expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
@@ -313,7 +313,7 @@ describe('UttakFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Opphold'));
 
-    expect(await utils.getByLabelText('Årsak')).toBeInTheDocument();
+    expect(utils.getByLabelText('Årsak')).toBeInTheDocument();
     expect(utils.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
     expect(utils.queryByLabelText('Stønadskonto')).not.toBeInTheDocument();
     expect(utils.queryByLabelText('Gradering %')).not.toBeInTheDocument();

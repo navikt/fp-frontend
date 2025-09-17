@@ -225,8 +225,8 @@ const finnPeriode = (
     avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
   ) {
     return {
-      fom: avklaring?.fom,
-      tom: avklaring?.tom,
+      fom: avklaring.fom,
+      tom: avklaring.tom,
     };
   }
 

@@ -91,7 +91,7 @@ export const useEditorJs = (
       const redigertTekst = harPraksisUtsettelse
         ? lagRedigerbartInnholdWrapper(html, undefined)
         : lagRedigerbartInnholdWrapper(html, footer);
-      mellomlagreOgHentPåNytt(redigertTekst);
+      void mellomlagreOgHentPåNytt(redigertTekst);
     }
   };
 
@@ -105,7 +105,7 @@ export const useEditorJs = (
     const innhold = await editor.save();
     refCurrentHtml.current = edjsHTML().parse(innhold);
 
-    mellomlagreOgHentPåNytt(null);
+    void mellomlagreOgHentPåNytt(null);
   };
 
   const lagreEndringer = async () => {
@@ -117,7 +117,7 @@ export const useEditorJs = (
       const redigertTekst = harPraksisUtsettelse
         ? lagRedigerbartInnholdWrapper(html, undefined)
         : lagRedigerbartInnholdWrapper(html, footer);
-      mellomlagreOgHentPåNytt(redigertTekst);
+      void mellomlagreOgHentPåNytt(redigertTekst);
     }
   };
 

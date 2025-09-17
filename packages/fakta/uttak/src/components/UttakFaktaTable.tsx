@@ -32,11 +32,9 @@ const getTypeTekst = (
     const navn = alleKodeverk['OppholdÅrsak'].find(k => k.kode === periode.oppholdÅrsak)?.navn;
     return intl.formatMessage({ id: 'UttakFaktaTabel.Opphold' }, { arsak: navn?.replace('har uttak av', '') });
   }
-  if (årsaktype === Årsakstype.UTSETTELSE) {
-    const navn = alleKodeverk['UtsettelseÅrsak'].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
-    return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
-  }
-  return '';
+
+  const navn = alleKodeverk['UtsettelseÅrsak'].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
+  return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
 };
 
 interface Props {

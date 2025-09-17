@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('AndreKriterierVelger', () => {
   it('skal vise checkboxer for andre kriterier der Til beslutter er valgt fra før', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Til beslutter')).toBeInTheDocument();
     expect(getByLabelText('Til beslutter')).toBeChecked();
@@ -18,7 +18,7 @@ describe('AndreKriterierVelger', () => {
   });
 
   it('skal velge Registrer papirsøknad og fjerne dette fra køen', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     const { getAllByLabelText } = render(<Default />);
     expect(await screen.findByText('Registrer papirsøknad')).toBeInTheDocument();
 

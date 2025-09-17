@@ -16,7 +16,7 @@ export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, ba
   const intl = useIntl();
 
   const annenpartAdresser = annenPart?.adresser ?? [];
-  const barnAdresser = barn?.flatMap(b => b.adresser) ?? [];
+  const barnAdresser = barn.flatMap(b => b.adresser);
   return (
     <EkspansjonsKort
       tittel={intl.formatMessage(
@@ -51,8 +51,8 @@ export const OpplysningerOmAdresser = ({ personoversikt: { bruker, annenPart, ba
           />
         </>
       )}
-      {barn && <AvsnittSkiller dividerParagraf />}
-      {barn?.map(b => (
+      <AvsnittSkiller dividerParagraf />
+      {barn.map(b => (
         <Personopplysninger
           key={b.aktoerId}
           showIcon={false}

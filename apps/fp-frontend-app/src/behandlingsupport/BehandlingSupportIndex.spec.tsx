@@ -8,7 +8,7 @@ const { NårBehandlingErValgt, SkalViseFraBeslutter } = composeStories(stories);
 
 describe('BehandlingSupportIndex', () => {
   it('skal vise historikk-panelet som default', async () => {
-    await applyRequestHandlers(NårBehandlingErValgt.parameters['msw']);
+    applyRequestHandlers(NårBehandlingErValgt.parameters['msw']);
     render(<NårBehandlingErValgt />);
 
     expect(await screen.findAllByText('Historikk')).toHaveLength(2);
@@ -21,7 +21,7 @@ describe('BehandlingSupportIndex', () => {
   });
 
   it('skal vise beslutter-panel', async () => {
-    await applyRequestHandlers(SkalViseFraBeslutter.parameters['msw']);
+    applyRequestHandlers(SkalViseFraBeslutter.parameters['msw']);
     render(<SkalViseFraBeslutter />);
 
     expect(await screen.findByTitle('Fra beslutter')).toBeInTheDocument();

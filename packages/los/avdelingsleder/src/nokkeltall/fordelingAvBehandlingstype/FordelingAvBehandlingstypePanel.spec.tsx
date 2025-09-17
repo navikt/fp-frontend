@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 describe('FordelingAvBehandlingstypePanel', () => {
   // TODO echarts-testing
   it.skip('skal vise graffilter', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Antall åpne oppgaver nå')).toBeInTheDocument();
 

@@ -83,7 +83,7 @@ export const MannAdoptererAleneFaktaForm = ({
 };
 
 MannAdoptererAleneFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHendelse): FormValues => ({
-  mannAdoptererAlene: adopsjon ? adopsjon.mannAdoptererAlene : undefined,
+  mannAdoptererAlene: adopsjon.mannAdoptererAlene,
 });
 
 MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): BekreftMannAdoptererAksjonspunktAp => ({

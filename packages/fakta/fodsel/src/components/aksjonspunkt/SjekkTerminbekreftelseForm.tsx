@@ -118,7 +118,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, ak
             </Alert>
           )}
 
-          {aksjonspunkt && !isReadOnly && (
+          {!isReadOnly && (
             <FaktaSubmitButton
               isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}

@@ -11,7 +11,7 @@ const { Default } = composeStories(stories);
 
 describe('TotrinnskontrollIndex', () => {
   it('skal vise modal når beslutter godkjenner', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     render(<Default />);
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();

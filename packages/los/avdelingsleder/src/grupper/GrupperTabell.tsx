@@ -24,7 +24,7 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
   const { mutate: fjernGruppe } = useMutation({
     mutationFn: (valuesToStore: { gruppeId: number }) => slettGruppe(valuesToStore.gruppeId, valgAvdeldingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.HENT_GRUPPER],
       });
     },
@@ -53,7 +53,7 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {grupper.saksbehandlerGrupper?.map(saksbehandlerGruppe => (
+            {grupper.saksbehandlerGrupper.map(saksbehandlerGruppe => (
               <Table.ExpandableRow
                 key={saksbehandlerGruppe.gruppeId}
                 expandOnRowClick

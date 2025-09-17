@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('FagsakYtelseTypeVelger', () => {
   it('skal vise checkboxer for stønadstyper og så velge engangsstønad', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Stønadstype')).toBeInTheDocument();
     expect(getByLabelText('Foreldrepenger')).toBeChecked();

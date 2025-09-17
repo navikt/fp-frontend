@@ -98,7 +98,7 @@ export const GjeldendeSakslisterTabell = ({
     mutationFn: (values: { sakslisteId: number }) => slettSaksliste(values.sakslisteId, valgtAvdelingEnhet),
     onSuccess: () => {
       resetValgtSakslisteId();
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },
