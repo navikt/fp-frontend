@@ -82,6 +82,7 @@ export const createLocationForSkjermlenke = (
   skjermlenkeCode: string,
 ): Location | undefined => {
   const skjermlenke = skjermlenkeCodes[skjermlenkeCode];
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (!skjermlenke) {
     return undefined;
   }

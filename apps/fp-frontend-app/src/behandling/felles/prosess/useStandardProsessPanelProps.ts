@@ -117,26 +117,24 @@ const getBekreftAksjonspunktProsessCallback =
 
     const etterLagringCallback = lagringSideEffectsCallback(apListe);
 
-    if (lagreOverstyrteAksjonspunkter) {
-      const aksjonspunkterTilLagring = aksjonspunkter.filter(ap =>
-        apListe.some(apModel => apModel.kode === ap.definisjon),
-      );
-      const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring.some(
-        ap =>
-          ap.aksjonspunktType === AksjonspunktType.OVERSTYRING ||
-          ap.aksjonspunktType === AksjonspunktType.SAKSBEHANDLEROVERSTYRING,
-      );
+    const aksjonspunkterTilLagring = aksjonspunkter.filter(ap =>
+      apListe.some(apModel => apModel.kode === ap.definisjon),
+    );
+    const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring.some(
+      ap =>
+        ap.aksjonspunktType === AksjonspunktType.OVERSTYRING ||
+        ap.aksjonspunktType === AksjonspunktType.SAKSBEHANDLEROVERSTYRING,
+    );
 
-      if (apListe.length === 0) {
-        throw Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
-      }
+    if (apListe.length === 0) {
+      throw Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
+    }
 
-      if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {
-        return lagreOverstyrteAksjonspunkter({
-          ...params,
-          overstyrteAksjonspunktDtoer: models,
-        }).then(etterLagringCallback);
-      }
+    if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {
+      return lagreOverstyrteAksjonspunkter({
+        ...params,
+        overstyrteAksjonspunktDtoer: models,
+      }).then(etterLagringCallback);
     }
 
     return lagreAksjonspunkter({

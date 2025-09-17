@@ -99,23 +99,24 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 };
 
 const lagModifisertCallback =
+  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
-  (aksjonspunkterSomSkalLagres: SubmitBeregningType) => {
-    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
-      ? aksjonspunkterSomSkalLagres
-      : [aksjonspunkterSomSkalLagres];
-    const transformerteData = apListe.map(apData => ({
-      kode: mapBGKodeTilFpsakKode(apData.kode),
-      ...apData.grunnlag[0],
-    }));
-    return submitCallback(transformerteData);
-  };
+    (aksjonspunkterSomSkalLagres: SubmitBeregningType) => {
+      const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
+        ? aksjonspunkterSomSkalLagres
+        : [aksjonspunkterSomSkalLagres];
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      const transformerteData = apListe.map(apData => ({
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
+        kode: mapBGKodeTilFpsakKode(apData.kode),
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        ...apData.grunnlag[0],
+      }));
+      return submitCallback(transformerteData);
+    };
 
 const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
-  if (!vilkår) {
-    return null;
-  }
-  const bgVilkar = vilkår.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkår.find(v => v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }
@@ -126,7 +127,7 @@ const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag
         avslagKode: bgVilkar.avslagKode ?? undefined,
         vurderesIBehandlingen: true,
         periode: {
-          fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
+          fom: beregningsgrunnlag.skjaeringstidspunktBeregning,
           tom: TIDENES_ENDE,
         },
         merknadParametere: {},

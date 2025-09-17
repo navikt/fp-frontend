@@ -94,7 +94,7 @@ const BehandlingIndexWrapper = ({
   const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useBehandlingPollingOperasjoner(
     behandling,
     oppdatertBehandling => {
-      if (oppdatertBehandling && skalOppdatereEtterBekreftelseAvAp) {
+      if (skalOppdatereEtterBekreftelseAvAp) {
         setBehandling(oppdatertBehandling);
       }
     },

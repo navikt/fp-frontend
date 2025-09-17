@@ -31,7 +31,7 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
   const steg = prosessPanelMenyData.map(data => {
     const type = finnProsessmenyType(data.status, data.harÅpentAksjonspunkt);
     return {
-      label: data.tekst ?? '',
+      label: data.tekst,
       isActive: data.erAktiv,
       type,
     };

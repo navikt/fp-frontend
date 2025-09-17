@@ -68,7 +68,7 @@ const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag
         vurderesIBehandlingen: true,
         merknadParametere: {},
         periode: {
-          fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
+          fom: beregningsgrunnlag.skjaeringstidspunktBeregning,
           tom: TIDENES_ENDE,
         },
         vilkarStatus: bgVilkar.vilkarStatus,
