@@ -88,7 +88,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
+  const antallDagerSoknadLevertForSent = soknad.søknadsfrist.dagerOversittetFrist;
 
   return (
     <RhfForm

@@ -29,6 +29,7 @@ const wait = (ms: number) =>
   });
 
 const isPollingResponse = (response: PollingResponse | Oppgave[]): response is PollingResponse => {
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] fiks senere
   return (response as PollingResponse).status !== undefined;
 };
 

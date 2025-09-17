@@ -56,12 +56,12 @@ const getLovHjemmeler = (aksjonspunktCode: string): string =>
   aksjonspunktCode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA';
 
 const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefined => {
-  const klageFormkavResultatNfp = klageVurdering ? klageVurdering.klageFormkravResultatNFP : null;
-  const klageVurderingResultatNFP = klageVurdering ? klageVurdering.klageVurderingResultatNFP : null;
+  const klageFormkavResultatNfp = klageVurdering.klageFormkravResultatNFP;
+  const klageVurderingResultatNFP = klageVurdering.klageVurderingResultatNFP;
 
   if (!klageFormkavResultatNfp) {
     return {
-      mottattDato: klageVurdering?.mottattDato ?? undefined,
+      mottattDato: klageVurdering.mottattDato ?? undefined,
     };
   }
 
@@ -73,7 +73,7 @@ const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefi
     erFristOverholdt: klageFormkavResultatNfp.erKlagefirstOverholdt,
     erSignert: klageFormkavResultatNfp.erSignert,
     fritekstTilBrev: klageVurderingResultatNFP?.fritekstTilBrev ?? undefined,
-    mottattDato: klageVurdering?.mottattDato ?? undefined,
+    mottattDato: klageVurdering.mottattDato ?? undefined,
   };
 };
 

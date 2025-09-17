@@ -3988,7 +3988,7 @@ export type foreldrepenger_behandlingslager_behandling_DokumentTypeId =
 export type tjenester_behandling_søknad_ManglendeVedleggDto = {
   dokumentType: foreldrepenger_behandlingslager_behandling_DokumentTypeId;
   dokumentTittel: string;
-  arbeidsgiverReferanse: string;
+  arbeidsgiverReferanse?: string;
   brukerHarSagtAtIkkeKommer: boolean;
 };
 

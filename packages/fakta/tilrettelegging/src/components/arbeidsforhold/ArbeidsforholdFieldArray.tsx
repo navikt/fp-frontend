@@ -104,8 +104,10 @@ export const ArbeidsforholdFieldArray = ({
                     <HStack gap="space-16" align="center">
                       <Buildings3Icon color="var(--ax-accent-700)" className={styles.image} />
                       <Heading size="small" level="3">
+                        {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                         {arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}
                       </Heading>
+                      {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                       {arbeidsgiverOpplysning?.identifikator && (
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       )}

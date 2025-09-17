@@ -50,6 +50,7 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
   const { annenPart: dgAnnenpart, søker: dgSøker } = søknad.oppgittFordeling.dekningsgrader;
 
   const erAksjonspunktApent = aksjonspunkt.status === AksjonspunktStatus.OPPRETTET;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   const erIkkeGodkjentAvBeslutter = !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted;
 
   return (
@@ -101,11 +102,9 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
                           <FormattedMessage
                             id="DekningradApForm.SøknadSendt"
                             values={{
-                              dato: dgAnnenpart
-                                ? dateFormat(dgAnnenpart.søknadsdato, {
-                                    month: 'long',
-                                  })
-                                : '-',
+                              dato: dateFormat(dgAnnenpart.søknadsdato, {
+                                month: 'long',
+                              }),
                             }}
                           />
                         </BodyShort>
@@ -114,7 +113,7 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
                     <Heading size="xsmall" level="3">
                       <FormattedMessage
                         id="DekningradApForm.HarValgt"
-                        values={{ dekningsgrad: dgAnnenpart?.dekningsgrad }}
+                        values={{ dekningsgrad: dgAnnenpart.dekningsgrad }}
                       />
                     </Heading>
                   </VStack>

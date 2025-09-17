@@ -79,9 +79,7 @@ export const ArbeidsforholdPanel = ({
 
   const termindato = watch('termindato');
 
-  const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(
-    permisjon => permisjon.erGyldig === undefined || permisjon.erGyldig === null,
-  );
+  const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined);
 
   const oppdaterOverstyrtUtbetalingsgrad = (velferdspermisjonprosent: number) => {
     arbeidsforhold.tilretteleggingDatoer.forEach((tilrettelegging, index) => {

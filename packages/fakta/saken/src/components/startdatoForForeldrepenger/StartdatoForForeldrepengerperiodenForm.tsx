@@ -104,6 +104,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
             className={styles.aksjonspunktMargin}
             erAksjonspunktApent={false}
             erIkkeGodkjentAvBeslutter={
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
               !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
             }
           >

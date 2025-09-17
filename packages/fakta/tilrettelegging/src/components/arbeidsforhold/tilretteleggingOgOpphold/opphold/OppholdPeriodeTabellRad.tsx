@@ -12,10 +12,6 @@ import { OppholdForm } from './OppholdForm';
 import styles from './oppholdPeriodeTabellRad.module.css';
 
 const utledTypeTekst = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
-  if (opphold.oppholdÅrsak === undefined) {
-    return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Opphold' });
-  }
-
   return opphold.oppholdÅrsak === 'FERIE'
     ? intl.formatMessage({
         id: 'TilretteleggingPerioderTabellRad.Ferie',

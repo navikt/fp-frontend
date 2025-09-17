@@ -15,7 +15,7 @@ interface Props {
  * Definerer hvordan driftsmeldinger vises.
  */
 export const DriftsmeldingPanel = ({ driftsmeldinger }: Props) => {
-  if (driftsmeldinger === undefined || driftsmeldinger.length === 0) {
+  if (driftsmeldinger.length === 0) {
     return null;
   }
 

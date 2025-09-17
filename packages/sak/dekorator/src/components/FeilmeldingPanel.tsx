@@ -31,9 +31,7 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
   const toggleModalOnClick = (event: React.MouseEvent | React.KeyboardEvent, index: number): void => {
     setErModalÅpen(!erModalÅpen);
     setValgtFeilmeldingIndex(index);
-    if (event) {
-      event.preventDefault();
-    }
+    event.preventDefault();
   };
 
   const toggleModalOnKeyDown = (event: React.KeyboardEvent, index: number): void => {

@@ -50,6 +50,7 @@ const gradertArbforhold = (
     if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
       return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
     }
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
       const { navn, identifikator } = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
       arbeidsforhold = navn ? `${navn}` : arbeidsforhold;

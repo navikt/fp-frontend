@@ -221,6 +221,7 @@ export const VilkarresultatMedOverstyringForm = ({
             isPristine={!formMethods.formState.isDirty}
             toggleAv={toggleAv}
             erIkkeGodkjentAvBeslutter={
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
               aksjonspunkt ? !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted : false
             }
           >

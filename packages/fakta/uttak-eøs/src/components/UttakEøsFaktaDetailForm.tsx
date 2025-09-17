@@ -79,6 +79,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 validate={[required, hasValidDate]}
                 isReadOnly={isReadOnly}
                 onChange={value => {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
                   oppdaterTrekkdagerOgTrekkuker(value, formMethods.getValues('tom'));
                 }}
               />
@@ -90,6 +91,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 isReadOnly={isReadOnly}
                 fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
                 onChange={value => {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
                   oppdaterTrekkdagerOgTrekkuker(formMethods.getValues('fom'), value);
                 }}
               />

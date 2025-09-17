@@ -261,6 +261,7 @@ export const TilretteleggingForm = ({
                     const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
                       stillingsprosentArbeidsforhold,
                       velferdspermisjonprosent,
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
                       value,
                     );
                     formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
