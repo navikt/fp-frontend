@@ -1,0 +1,4 @@
+{
+  "extends": "@navikt/fp-config-typescript",
+  "include": ["./src/", "../../@types/externals.d.ts"]
+}
