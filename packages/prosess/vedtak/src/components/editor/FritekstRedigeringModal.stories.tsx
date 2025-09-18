@@ -16,11 +16,25 @@ import messages from '../../../i18n/nb_NO.json';
 const FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE = {
   saksnummer: '1234567',
   fagsakYtelseType: 'FP',
-  bruker: { navn: 'Kari Nordmann' },
-  annenPart: { navn: 'Ola Nordmann' },
+  bruker: {
+    navn: 'Kari Nordmann',
+    fødselsnummer: '',
+    kjønn: '-',
+    fødselsdato: '',
+    språkkode: '-',
+  },
+  annenPart: {
+    navn: 'Ola Nordmann',
+    fødselsnummer: '',
+    kjønn: '-',
+    fødselsdato: '',
+    språkkode: '-',
+  },
   relasjonsRolleType: RelasjonsRolleType.MOR,
   annenpartBehandling: {
     relasjonsRolleType: RelasjonsRolleType.FAR,
+    saksnummer: '',
+    behandlingUuid: '',
   },
   fagsakMarkeringer: [
     {
@@ -28,7 +42,23 @@ const FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE = {
       kortNavn: 'Utsettelse',
     },
   ],
-} as Fagsak;
+  status: 'OPPR',
+  aktørId: '',
+  sakSkalTilInfotrygd: false,
+  dekningsgrad: 0,
+  brukerManglerAdresse: false,
+  behandlingTypeKanOpprettes: [],
+  behandlinger: [],
+  historikkinnslag: [],
+  notater: [],
+  kontrollResultat: {
+    kontrollresultat: '-',
+    iayFaresignaler: undefined,
+    medlFaresignaler: undefined,
+    faresignalVurdering: undefined,
+  },
+  harVergeIÅpenBehandling: false,
+} satisfies Fagsak;
 
 const withIntl = getIntlDecorator(messages);
 

@@ -20,7 +20,7 @@ const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement =>
     return (
       <ChevronRightDoubleIcon
         title={intl.formatMessage({ id: 'DocumentListInnsyn.Motta' })}
-        className={styles.imageInn}
+        className={styles['imageInn']}
       />
     );
   }
@@ -28,19 +28,19 @@ const getDirectionImage = (document: Dokument, intl: IntlShape): ReactElement =>
     return (
       <ChevronLeftDoubleIcon
         title={intl.formatMessage({ id: 'DocumentListInnsyn.Send' })}
-        className={styles.imageSend}
+        className={styles['imageSend']}
       />
     );
   }
   return (
     <ChevronDownDoubleIcon
       title={intl.formatMessage({ id: 'DocumentListInnsyn.Intern' })}
-      className={styles.imageIntern}
+      className={styles['imageIntern']}
     />
   );
 };
 
-const noLabelHack = (): ReactElement => <span className={styles.hidden}>-</span>;
+const noLabelHack = (): ReactElement => <span className={styles['hidden']}>-</span>;
 
 interface Props {
   saksNr: string;
@@ -62,7 +62,7 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
 
   if (documents.length === 0) {
     return (
-      <BodyShort size="small" className={styles.noDocuments}>
+      <BodyShort size="small" className={styles['noDocuments']}>
         <FormattedMessage id="DocumentListInnsyn.NoDocuments" />
       </BodyShort>
     );
@@ -70,7 +70,7 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
 
   return (
     <div>
-      <Heading size="small" level="2" className={styles.noDocuments}>
+      <Heading size="small" level="2" className={styles['noDocuments']}>
         <FormattedMessage id="DocumentListInnsyn.VelgInnsynsDok" />
       </Heading>
       <Table>
@@ -103,11 +103,11 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
             const dokId = parseInt(document.dokumentId, 10);
             return (
               <Table.Row key={dokId}>
-                <Table.DataCell className={styles.checkboxCol}>
+                <Table.DataCell className={styles['checkboxCol']}>
                   <RhfCheckbox label={noLabelHack()} name={`dokument_${dokId}`} control={control} disabled={readOnly} />
                 </Table.DataCell>
                 <Table.DataCell hidden={readOnly}>{img}</Table.DataCell>
-                <Table.DataCell className={styles.linkCol}>
+                <Table.DataCell className={styles['linkCol']}>
                   <DokumentLink
                     saksnummer={saksNr}
                     journalpostId={document.journalpostId}

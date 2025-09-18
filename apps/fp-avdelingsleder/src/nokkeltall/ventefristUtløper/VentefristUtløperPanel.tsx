@@ -41,7 +41,7 @@ export const VentefristUtløperPanel = ({ height, valgtAvdelingEnhet, getValueFr
   const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
 
   const stringFromStorage = getValueFromLocalStorage(formName);
-  const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
+  const lagredeVerdier = stringFromStorage ? (JSON.parse(stringFromStorage) as FormValues) : undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues: lagredeVerdier ?? formDefaultValues,

@@ -45,7 +45,7 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
   const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
   const stringFromStorage = getValueFromLocalStorage(formName);
 
-  const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
+  const lagredeVerdier = stringFromStorage ? (JSON.parse(stringFromStorage) as FormValues) : undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues: lagredeVerdier ?? formDefaultValues,
@@ -92,17 +92,13 @@ export const TilBehandlingPanel = ({ height, valgtAvdelingEnhet, getValueFromLoc
           height={height}
           isToUkerValgt={values.ukevalg === UKE_2}
           behandlingTyper={behandlingTyper}
-          oppgaverPerDato={
+          oppgaverPerDato={slaSammenLikeBehandlingstyperOgDatoer(
             oppgaverPerDato
-              ? slaSammenLikeBehandlingstyperOgDatoer(
-                  oppgaverPerDato
-                    .filter(ofa =>
-                      values.ytelseType === ALLE_YTELSETYPER_VALGT ? true : values.ytelseType === ofa.fagsakYtelseType,
-                    )
-                    .filter(ofa => erDatoInnenforPeriode(ofa, values.ukevalg)),
-                )
-              : []
-          }
+              .filter(ofa =>
+                values.ytelseType === ALLE_YTELSETYPER_VALGT ? true : values.ytelseType === ofa.fagsakYtelseType,
+              )
+              .filter(ofa => erDatoInnenforPeriode(ofa, values.ukevalg)),
+          )}
         />
       </VStack>
     </RhfForm>

@@ -51,8 +51,8 @@ export const JournalpostIndex = ({
   const valgtDokument = dokumenter && dokumenter.length > 0 ? dokumenter[0] : undefined;
 
   return (
-    <div className={styles.container}>
-      <div className={styles.oppgaveKolonne}>
+    <div className={styles['container']}>
+      <div className={styles['oppgaveKolonne']}>
         <JournalpostDetaljer
           avbrytVisningAvJournalpost={avbrytVisningAvJournalpost}
           journalpost={journalpostOppdatertMedSøker ?? journalpost}
@@ -70,7 +70,7 @@ export const JournalpostIndex = ({
         />
       </div>
       {valgtDokument && (
-        <div className={styles.pdfKolonne}>
+        <div className={styles['pdfKolonne']}>
           <DokumentIndex dokumenter={journalpost.dokumenter} />
         </div>
       )}

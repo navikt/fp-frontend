@@ -30,8 +30,6 @@ import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const THEME_LOCALE_STORAGE_KEY = 'fp-frontend-theme';
 
-const EMPTY_ARRAY = new Array<FpError>();
-
 const intl = createIntl(messages);
 
 export const AppIndexWrapper = () => {
@@ -78,7 +76,7 @@ const AppIndex = () => {
     );
   };
 
-  const errorMessages = useRestApiError() ?? EMPTY_ARRAY;
+  const errorMessages = useRestApiError();
   const queryStrings = parseQueryString(location.search);
   const hasForbiddenErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_FORBIDDEN);
   const hasUnauthorizedErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_UNAUTHORIZED);
@@ -166,7 +164,9 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
       });
     } else {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const feildataJson = await error.response.json();
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
         addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: feildataJson.feilmelding ?? error.message });
       } catch {
         addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });
@@ -183,7 +183,7 @@ const useThemeFromLocalStorage = () => {
   const body = document.body;
 
   const [theme, setTheme] = useState<Theme>(() => {
-    const currentTheme = (localStorage.getItem(THEME_LOCALE_STORAGE_KEY) as Theme) ?? 'light';
+    const currentTheme = (localStorage.getItem(THEME_LOCALE_STORAGE_KEY) ?? 'light') as Theme;
     body.classList.add(currentTheme);
     return currentTheme;
   });

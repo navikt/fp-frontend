@@ -10,7 +10,7 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 const IKKE_PAA_ANKET_BEHANDLING_ID = '0';
 
 const formatId = (id: string | undefined): string => {
-  if (id === null || id === undefined || id === '-') {
+  if (id === undefined || id === '-') {
     return IKKE_PAA_ANKET_BEHANDLING_ID;
   }
   return id;
@@ -47,8 +47,8 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
 
   const ankeOmgorArsaker = alleKodeverk['AnkeOmgjørÅrsak'];
 
-  const behandlesKabal = ankeVurdering?.underBehandlingKabal || false;
-  const behandletKabal = ankeVurdering?.behandletAvKabal || false;
+  const behandlesKabal = ankeVurdering.underBehandlingKabal || false;
+  const behandletKabal = ankeVurdering.behandletAvKabal || false;
 
   return (
     <VStack gap="space-16">
@@ -106,22 +106,22 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
                 <Label size="small">
                   <FormattedMessage id="Ankebehandling.Avvisning" />
                 </Label>
-                {avr?.erAnkerIkkePart && (
+                {avr.erAnkerIkkePart && (
                   <BodyShort size="small">
                     <FormattedMessage id="Ankebehandling.Avvisning.IkkePart" />
                   </BodyShort>
                 )}
-                {avr?.erIkkeKonkret && (
+                {avr.erIkkeKonkret && (
                   <BodyShort size="small">
                     <FormattedMessage id="Ankebehandling.Avvisning.IkkeKonkret" />
                   </BodyShort>
                 )}
-                {avr?.erFristIkkeOverholdt && (
+                {avr.erFristIkkeOverholdt && (
                   <BodyShort size="small">
                     <FormattedMessage id="Ankebehandling.Avvisning.IkkeFrist" />
                   </BodyShort>
                 )}
-                {avr?.erIkkeSignert && (
+                {avr.erIkkeSignert && (
                   <BodyShort size="small">
                     <FormattedMessage id="Ankebehandling.Avvisning.IkkeSignert" />
                   </BodyShort>
@@ -132,7 +132,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
                   <FormattedMessage id="Ankebehandling.Realitetsbehandles" />
                 </Label>
                 <BodyShort size="small">
-                  {avr?.erSubsidiartRealitetsbehandles ? (
+                  {avr.erSubsidiartRealitetsbehandles ? (
                     <FormattedMessage id="Ankebehandling.Realitetsbehandles.Ja" />
                   ) : (
                     <FormattedMessage id="Ankebehandling.Realitetsbehandles.Nei" />
@@ -148,18 +148,18 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
                   <FormattedMessage id="Ankebehandling.Avvisning" />
                 </Label>
                 <BodyShort size="small">
-                  {ankeOmgorArsaker.find(aoa => aoa.kode === avr?.ankeOmgjoerArsak)?.navn}
+                  {ankeOmgorArsaker.find(aoa => aoa.kode === avr.ankeOmgjoerArsak)?.navn}
                 </BodyShort>
               </VStack>
               <VStack gap="space-4">
                 <BodyShort size="small">
-                  {avr?.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
+                  {avr.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
                   )}
-                  {avr?.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_UGUNST && (
+                  {avr.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_UGUNST && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
                   )}
-                  {avr?.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
+                  {avr.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
                   )}
                 </BodyShort>

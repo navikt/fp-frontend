@@ -36,10 +36,7 @@ const findPathToBehandling = (saksnummer: string, location: Location, alleBehand
 };
 
 const finnFagsakMarkeringTekst = (fagsak: Fagsak): string[] => {
-  if (!fagsak.fagsakMarkeringer) {
-    return [];
-  }
-  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn) as string[];
+  return fagsak.fagsakMarkeringer.map(m => m.kortNavn).filter(navn => !!navn);
 };
 
 interface Props {
@@ -101,7 +98,7 @@ export const FagsakProfileIndex = ({
     });
 
   return (
-    <div className={styles.panelPadding}>
+    <div className={styles['panelPadding']}>
       <VStack gap="space-20">
         {fagsak.brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
         {shouldRedirectToBehandlinger && (
@@ -145,7 +142,9 @@ export const FagsakProfileIndex = ({
         <VStack
           gap="space-24"
           className={
-            visUtvidetBehandlingDetaljer ? styles.skjulUtvidetBehandlingDetaljer : styles.visUtvidetBehandlingDetaljer
+            visUtvidetBehandlingDetaljer
+              ? styles['skjulUtvidetBehandlingDetaljer']
+              : styles['visUtvidetBehandlingDetaljer']
           }
         >
           {!shouldRedirectToBehandlinger && (

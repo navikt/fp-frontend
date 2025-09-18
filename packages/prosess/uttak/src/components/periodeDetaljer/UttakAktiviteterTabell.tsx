@@ -47,6 +47,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     arbeidsforhold = arbeidsgiverOpplysninger
       ? formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternArbeidsforholdId)
       : arbeidsgiverReferanse;
@@ -146,7 +147,7 @@ const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
     intl: IntlShape,
   ) =>
   (ukerEllerDager: string) => {
-    const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
+    const harUtsettelsestype = utsettelseType !== '-';
     return harUtsettelsestype && getValues('erOppfylt') && parseFloat(ukerEllerDager) > 0
       ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' })
       : null;
@@ -184,7 +185,7 @@ export const UttakAktiviteterTabell = ({
   const aktiviteterFraFormState = watch('aktiviteter');
 
   return (
-    <div className={styles.tableOverflow}>
+    <div className={styles['tableOverflow']}>
       {fields.length > 0 && (
         <Table>
           <Table.Header>
@@ -222,12 +223,12 @@ export const UttakAktiviteterTabell = ({
               return (
                 <Table.Row key={field.id}>
                   <Table.DataCell>
-                    <BodyShort size="small" className={styles.forsteKolWidth}>
+                    <BodyShort size="small" className={styles['forsteKolWidth']}>
                       {arbeidsforholdData.arbeidsforhold}
                     </BodyShort>
                   </Table.DataCell>
                   <Table.DataCell>
-                    <div className={styles.selectStonad}>
+                    <div className={styles['selectStonad']}>
                       <RhfSelect
                         name={`aktiviteter.${index}.stønadskontoType`}
                         control={control}
@@ -241,11 +242,11 @@ export const UttakAktiviteterTabell = ({
                   </Table.DataCell>
                   <Table.DataCell>
                     <HStack gap="space-8" align="center">
-                      <span className={styles.weekPosition}>
+                      <span className={styles['weekPosition']}>
                         <RhfNumericField
                           name={`aktiviteter.${index}.weeks`}
                           control={control}
-                          className={styles.numberWidth}
+                          className={styles['numberWidth']}
                           hideLabel
                           readOnly={isReadOnly}
                           validate={[
@@ -260,11 +261,11 @@ export const UttakAktiviteterTabell = ({
                           ]}
                         />
                       </span>
-                      {isReadOnly ? <div>/</div> : <div className={styles.verticalCharPlacementInTable}>/</div>}
+                      {isReadOnly ? <div>/</div> : <div className={styles['verticalCharPlacementInTable']}>/</div>}
                       <RhfNumericField
                         name={`aktiviteter.${index}.days`}
                         control={control}
-                        className={styles.numberWidth}
+                        className={styles['numberWidth']}
                         hideLabel
                         readOnly={isReadOnly}
                         validate={[
@@ -284,7 +285,7 @@ export const UttakAktiviteterTabell = ({
                     <BodyShort size="small">{arbeidsforholdData.prosentArbeidText}</BodyShort>
                   </Table.DataCell>
                   <Table.DataCell>
-                    <div className={styles.utbetalingsgrad}>
+                    <div className={styles['utbetalingsgrad']}>
                       <RhfNumericField
                         name={`aktiviteter.${index}.utbetalingsgrad`}
                         control={control}

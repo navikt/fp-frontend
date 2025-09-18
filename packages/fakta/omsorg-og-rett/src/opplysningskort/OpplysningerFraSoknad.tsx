@@ -46,7 +46,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett, alleKodeverk }: Props) => 
           </Table.Row>
         </Table.Header>
         <Table.Body>
-          {annenpartIdent !== null && (
+          {annenpartIdent !== undefined && (
             <Table.Row>
               <>
                 <Table.DataCell>
@@ -63,7 +63,7 @@ export const OpplysningerFraSoknad = ({ omsorgOgRett, alleKodeverk }: Props) => 
               </>
             </Table.Row>
           )}
-          {annenpartBostedsland !== null && (
+          {annenpartBostedsland !== undefined && (
             <Table.Row>
               <>
                 <Table.DataCell>

@@ -34,13 +34,13 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
         valuesToStore.inkluder,
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },
@@ -68,7 +68,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
             }}
           />
           {values[akt.kode] && (
-            <div className={styles.arrowbox}>
+            <div className={styles['arrowbox']}>
               <ArrowBox alignOffset={30}>
                 <RhfRadioGroup
                   name={`${akt.kode}_inkluder`}

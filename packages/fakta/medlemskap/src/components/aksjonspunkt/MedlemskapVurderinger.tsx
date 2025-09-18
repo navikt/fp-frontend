@@ -54,6 +54,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
             </Radio>
           ))}
         </RhfRadioGroup>
+        {/* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere */}
         {vurdering && [MedlemskapVurdering.DELVIS_OPPFYLT, MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) && (
           <RhfSelect
             name="avslagskode"
@@ -86,6 +87,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
           />
         )}
         {erForutgående &&
+          /* eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere */
           vurdering &&
           [MedlemskapVurdering.IKKE_OPPFYLT].includes(vurdering) &&
           avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE && (

@@ -58,7 +58,7 @@ export const KlageresultatProsessStegInitPanel = () => {
         visModal={visFatterVedtakModal}
         lukkModal={() => {
           toggleFatterVedtakModal(false);
-          navigate('/');
+          void navigate('/');
         }}
         tekst={intl.formatMessage({ id: 'FatterVedtakStatusModal.KlagenErFerdigbehandlet' })}
       />

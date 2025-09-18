@@ -98,7 +98,7 @@ export const VedtakAvslagArsakOgBegrunnelsePanel = ({
           <Detail>
             <FormattedMessage id="VedtakForm.Fritekst" />
           </Detail>
-          <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
+          <div className={styles['fritekstItem']}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
         </VStack>
       )}
     </VStack>

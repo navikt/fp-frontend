@@ -76,9 +76,7 @@ export const PermisjonPanel = ({ foreldreType, readOnly, alleKodeverk, erEndring
         <PermisjonGraderingPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
         <PermisjonOppholdPanel readOnly={readOnly} alleKodeverk={alleKodeverk} />
         {formState.isSubmitted && formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message && (
-          <ErrorMessage>
-            {formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX]?.notRegisteredInput?.message}
-          </ErrorMessage>
+          <ErrorMessage>{formState.errors[TIDSROM_PERMISJON_FORM_NAME_PREFIX].notRegisteredInput.message}</ErrorMessage>
         )}
       </VStack>
     </BorderBox>

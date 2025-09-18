@@ -113,7 +113,7 @@ const getStatus = (
   }
   if (
     ('erOppfylt' in periode && periode.erOppfylt === true) ||
-    (periode.periodeResultatType === PeriodeResultatType.INNVILGET && !tilknyttetStortinget)
+    periode.periodeResultatType === PeriodeResultatType.INNVILGET
   ) {
     return 'success';
   }

@@ -30,7 +30,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const fjernFeilmeldinger = () => {
-      args.fjernFeilmeldinger?.();
+      args.fjernFeilmeldinger();
       setArgs(oldArgs => ({ ...oldArgs, feilmeldinger: [] }));
     };
 

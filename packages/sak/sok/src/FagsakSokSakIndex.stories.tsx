@@ -43,7 +43,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const searchFagsakCallback = (params: { searchString: string }) => {
-      args.searchFagsakCallback?.(params);
+      args.searchFagsakCallback(params);
       setArgs(oldArgs => ({ ...oldArgs, searchResultReceived: true }));
       return Promise.resolve<FagsakEnkel[] | undefined>(args.fagsaker);
     };

@@ -25,7 +25,7 @@ interface Props {
  */
 export const IngenBehandlingValgtPanel = ({ numBehandlinger }: Props) => (
   <RawIntlProvider value={intl}>
-    <div className={styles.noSelectedBehandlingPanel}>
+    <div className={styles['noSelectedBehandlingPanel']}>
       <Alert variant="info">
         <BodyShort size="small">
           <FormattedMessage id={getMessage(numBehandlinger)} />

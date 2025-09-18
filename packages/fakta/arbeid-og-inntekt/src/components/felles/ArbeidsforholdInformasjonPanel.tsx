@@ -54,7 +54,7 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
             {sorterteInntektsposter
               .filter((_inntekt, index) => (visAlleMåneder ? true : index < 3))
               .map(inntekt => (
-                <HStack gap="space-8" className={styles.bredde} key={inntekt.fom}>
+                <HStack gap="space-8" className={styles['bredde']} key={inntekt.fom}>
                   <BodyShort size="small">
                     <FormattedMessage id={`ArbeidsforholdInformasjonPanel.${dayjs(inntekt.fom).month() + 1}`} />
                   </BodyShort>
@@ -74,7 +74,7 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
             href=""
           >
             <span>
-              <BodyShort size="small" className={styles.inline}>
+              <BodyShort size="small" className={styles['inline']}>
                 <FormattedMessage
                   id={
                     visAlleMåneder
@@ -84,7 +84,11 @@ export const ArbeidsforholdInformasjonPanel = ({ saksnummer, skjæringstidspunkt
                 />
               </BodyShort>
             </span>
-            {visAlleMåneder ? <ChevronUpIcon className={styles.arrow} /> : <ChevronDownIcon className={styles.arrow} />}
+            {visAlleMåneder ? (
+              <ChevronUpIcon className={styles['arrow']} />
+            ) : (
+              <ChevronDownIcon className={styles['arrow']} />
+            )}
           </Link>
         </VStack>
       )}

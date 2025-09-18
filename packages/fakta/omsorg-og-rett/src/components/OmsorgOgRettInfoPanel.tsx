@@ -74,9 +74,7 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
       )}
 
       <OpplysningerFraSoknad omsorgOgRett={omsorgOgRett} alleKodeverk={alleKodeverk} />
-      {personoversikt.bruker?.adresser && (
-        <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
-      )}
+      <OpplysningerOmAdresser alleKodeverk={alleKodeverk} personoversikt={personoversikt} />
       {omsorgOgRett.registerdata && <AnnenPartsYtelser omsorgOgRett={omsorgOgRett} />}
 
       {(opprettetAleneomsorgAPUtenResultat || aleneomsorgAPMedResultat) && (

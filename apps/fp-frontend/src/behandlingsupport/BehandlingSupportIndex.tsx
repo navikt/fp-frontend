@@ -82,47 +82,47 @@ export const BehandlingSupportIndex = ({
 
   const changeRouteCallback = (supportPanel: string) => {
     const getSupportPanelLocation = getSupportPanelLocationCreator(location);
-    navigate(getSupportPanelLocation(supportPanel));
+    void navigate(getSupportPanelLocation(supportPanel));
   };
 
   return (
     <Tabs value={aktivtSupportPanel} onChange={changeRouteCallback}>
-      <Tabs.List className={styles.tabContainer}>
+      <Tabs.List className={styles['tabContainer']}>
         {skalViseFraBeslutter && (
           <Tabs.Tab
-            className={styles.tab}
+            className={styles['tab']}
             value={SupportTabs.FRA_BESLUTTER}
             icon={<ArrowUndoIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.FraBeslutter' })} />}
           />
         )}
         {skalViseTilGodkjenning && (
           <Tabs.Tab
-            className={styles.tab}
+            className={styles['tab']}
             value={SupportTabs.TIL_BESLUTTER}
             icon={<PersonCheckmarkFillIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Godkjenning' })} />}
           />
         )}
         <Tabs.Tab
-          className={styles.tab}
+          className={styles['tab']}
           value={SupportTabs.HISTORIKK}
           icon={<ClockDashedIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Historikk' })} />}
         />
         <Tabs.Tab
-          className={styles.tab}
+          className={styles['tab']}
           value={SupportTabs.MELDINGER}
           icon={<PaperplaneIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Melding' })} />}
         />
         <Tabs.Tab
-          className={styles.tab}
+          className={styles['tab']}
           value={SupportTabs.DOKUMENTER}
           icon={<FolderIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Dokumenter' })} />}
         />
         <Tabs.Tab
-          className={styles.tab}
+          className={styles['tab']}
           value={SupportTabs.NOTATER}
           icon={
-            <div className={styles.pencilSvgContainer}>
-              {fagsak.notater.length > 0 && <div className={styles.ulesteNotater}>{fagsak.notater.length}</div>}
+            <div className={styles['pencilSvgContainer']}>
+              {fagsak.notater.length > 0 && <div className={styles['ulesteNotater']}>{fagsak.notater.length}</div>}
               <DocPencilIcon title={intl.formatMessage({ id: 'BehandlingSupportIndex.Notatblokk' })} />
             </div>
           }

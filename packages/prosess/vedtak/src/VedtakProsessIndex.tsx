@@ -93,7 +93,7 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
   aksjonspunkter: Aksjonspunkt[],
   beregningsgrunnlag?: Beregningsgrunnlag,
 ): boolean => {
-  if (!beregningsgrunnlag || !aksjonspunkter) {
+  if (!beregningsgrunnlag) {
     return false;
   }
   const behandlingHarLøstBGAP = aksjonspunkter.find(

@@ -45,7 +45,7 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
   const fagsakYtelseTyper = useLosKodeverk('FagsakYtelseType');
   const behandlingTyper = useLosKodeverk('BehandlingType');
   const stringFromStorage = getValueFromLocalStorage(formName);
-  const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
+  const lagredeVerdier = stringFromStorage ? (JSON.parse(stringFromStorage) as FormValues) : undefined;
 
   const formMethods = useForm<FormValues>({
     defaultValues: lagredeVerdier ?? formDefaultValues,
@@ -79,15 +79,9 @@ export const FordelingAvBehandlingstypePanel = ({ height, valgtAvdelingEnhet, ge
         <FordelingAvBehandlingstypeGraf
           height={height}
           behandlingTyper={behandlingTyper}
-          oppgaverForAvdeling={
-            oppgaverForAvdeling
-              ? oppgaverForAvdeling.filter(ofa =>
-                  values.valgtYtelseType === ALLE_YTELSETYPER_VALGT
-                    ? true
-                    : values.valgtYtelseType === ofa.fagsakYtelseType,
-                )
-              : []
-          }
+          oppgaverForAvdeling={oppgaverForAvdeling.filter(ofa =>
+            values.valgtYtelseType === ALLE_YTELSETYPER_VALGT ? true : values.valgtYtelseType === ofa.fagsakYtelseType,
+          )}
         />
       </VStack>
     </RhfForm>

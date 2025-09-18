@@ -58,7 +58,7 @@ describe('JournalpostDetaljer', () => {
     const journalfør = vi.fn();
 
     render(<VisJournalpostKlage submitJournalføring={journalfør} />);
-    expect(await screen.getByText('Journalfør').closest('button')).toBeDisabled();
+    expect(screen.getByText('Journalfør').closest('button')).toBeDisabled();
     expect(screen.getByText('Avbryt').closest('button')).toBeEnabled();
 
     expect(screen.getAllByRole('radio')).toHaveLength(3);

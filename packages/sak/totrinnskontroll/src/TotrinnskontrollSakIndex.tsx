@@ -120,20 +120,18 @@ export const TotrinnskontrollSakIndex = ({
     });
   };
 
-  const erBehandlingEtterKlage = behandling
-    ? behandling.behandlingÅrsaker
-        .map(({ behandlingArsakType }) => behandlingArsakType)
-        .some(
-          bt =>
-            bt === BehandlingArsakTypeEnum.ETTER_KLAGE ||
-            bt === BehandlingArsakTypeEnum.KLAGE_U_INNTK ||
-            bt === BehandlingArsakTypeEnum.KLAGE_M_INNTK,
-        )
-    : false;
+  const erBehandlingEtterKlage = behandling.behandlingÅrsaker
+    .map(({ behandlingArsakType }) => behandlingArsakType)
+    .some(
+      bt =>
+        bt === BehandlingArsakTypeEnum.ETTER_KLAGE ||
+        bt === BehandlingArsakTypeEnum.KLAGE_U_INNTK ||
+        bt === BehandlingArsakTypeEnum.KLAGE_M_INNTK,
+    );
 
   const sorterteTotrinnskontrollSkjermlenkeContext = erTilbakekreving
     ? sorterteSkjermlenkeCodesForTilbakekreving.flatMap(s => {
-        const context = behandling.totrinnskontrollÅrsaker?.find(el => el.skjermlenkeType === s.kode);
+        const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s.kode);
         return context ? [context] : [];
       })
     : behandling.totrinnskontrollÅrsaker;

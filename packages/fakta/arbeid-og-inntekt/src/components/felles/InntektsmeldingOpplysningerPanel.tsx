@@ -106,7 +106,7 @@ export const InntektsmeldingOpplysningerPanel = ({
           />
         </BodyShort>
       </HStack>
-      {inntektsmelding.refusjonPrMnd !== undefined && inntektsmelding.refusjonPrMnd !== null && (
+      {inntektsmelding.refusjonPrMnd !== undefined && (
         <HStack gap="space-16">
           <Label size="small">
             <FormattedMessage id="InntektsmeldingOpplysningerPanel.Refusjonsbeløp" />
@@ -121,14 +121,14 @@ export const InntektsmeldingOpplysningerPanel = ({
         journalpostId={inntektsmelding.journalpostId}
         dokumentId={inntektsmelding.dokumentId}
       >
-        <BodyShort size="small" className={styles.inline}>
+        <BodyShort size="small" className={styles['inline']}>
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
         </BodyShort>
-        <FileFillIcon className={styles.docIcon} />
+        <FileFillIcon className={styles['docIcon']} />
       </DokumentLink>
     </VStack>
     <HStack gap="space-16">
-      <PhoneFillIcon className={styles.phoneIcon} />
+      <PhoneFillIcon className={styles['phoneIcon']} />
       <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />

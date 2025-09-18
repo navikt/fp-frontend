@@ -111,7 +111,7 @@ export const ManueltLagtTilArbeidsforholdForm = ({
       formValues,
     );
 
-    registrerArbeidsforhold(params).then(
+    void registrerArbeidsforhold(params).then(
       getOppdaterTabellOgLukkRad(oppdaterTabell, lukkArbeidsforholdRad, erNyttArbeidsforhold),
     );
   };

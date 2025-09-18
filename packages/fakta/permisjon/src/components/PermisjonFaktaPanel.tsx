@@ -99,6 +99,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
             kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
             arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
               internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId ?? undefined,
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
               arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent ?? undefined,
               permisjonStatus: a.permisjonStatus,
             })),

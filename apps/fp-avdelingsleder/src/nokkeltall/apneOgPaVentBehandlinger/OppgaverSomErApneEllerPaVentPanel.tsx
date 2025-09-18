@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment  -- [JOHANNES] venter på FormValues blir typet */
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -61,6 +62,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
         </HStack>
         <OppgaverSomErApneEllerPaVentGraf
           height={height}
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           oppgaverApneEllerPaVent={oppgaverApneEllerPaVent.filter(oav => values[oav.behandlingType])}
         />
       </VStack>

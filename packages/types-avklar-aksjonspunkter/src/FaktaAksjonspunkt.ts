@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend */
 import type {
   AvklarBeregningsaktiviteterAP,
   BeregningFaktaAP,

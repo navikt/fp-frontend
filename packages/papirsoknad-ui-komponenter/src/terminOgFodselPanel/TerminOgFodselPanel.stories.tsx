@@ -18,7 +18,6 @@ const meta = {
   },
   render: (args, { parameters: { submitCallback } }) => {
     const formMethods = useForm();
-
     return (
       <RhfForm
         formMethods={formMethods}

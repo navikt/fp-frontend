@@ -114,7 +114,7 @@ describe('UttakDokumentasjonFaktaIndex', () => {
     });
   });
 
-  it('skal vise bekreftet periode i tabell når behandling er avsluttet', async () => {
+  it('skal vise bekreftet periode i tabell når behandling er avsluttet', () => {
     render(<AksjonspunktSomErBekreftetOgBehandlingAvsluttet />);
 
     expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
@@ -160,9 +160,9 @@ describe('UttakDokumentasjonFaktaIndex', () => {
     });
   });
 
-  it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', async () => {
+  it('skal vise tabellrader som ikke kan ekspanderes når det ikke er aksjonspunkt', () => {
     render(<UavklartePerioderMenIkkeAksjonspunktEnnå />);
     expect(screen.queryByText('Kontroller dokumentasjon')).not.toBeInTheDocument();
-    expect(await screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
+    expect(screen.queryByAltText('Åpne rad')).not.toBeInTheDocument();
   });
 });

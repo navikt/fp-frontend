@@ -159,9 +159,9 @@ const hentMenyData = (behandling: BehandlingAppKontekst | undefined, fagsak: Fag
 
   const vergeMenyvalg = behandlingTillatteOperasjoner?.vergeBehandlingsmeny;
   const skalViseFjernVerge =
-    vergeMenyvalg === VergeBehandlingmenyValg.FJERN && !!behandling?.uuid && !!behandling?.versjon;
+    vergeMenyvalg === VergeBehandlingmenyValg.FJERN && !!behandling?.uuid && !!behandling.versjon;
   const skalViseOpprettVerge =
-    vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && !!behandling?.uuid && !!behandling?.versjon;
+    vergeMenyvalg === VergeBehandlingmenyValg.OPPRETT && !!behandling?.uuid && !!behandling.versjon;
 
   return {
     [ModalType.TA_AV_VENT]: {

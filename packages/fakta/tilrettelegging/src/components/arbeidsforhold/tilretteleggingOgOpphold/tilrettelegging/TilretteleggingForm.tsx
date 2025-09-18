@@ -251,7 +251,7 @@ export const TilretteleggingForm = ({
                 <RhfNumericField
                   name={`${index}.stillingsprosent`}
                   control={formMethods.control}
-                  className={styles.arbeidsprosent}
+                  className={styles['arbeidsprosent']}
                   readOnly={readOnly}
                   label={intl.formatMessage({ id: 'TilretteleggingForm.Arbeidsprosent' })}
                   description={intl.formatMessage({ id: 'TilretteleggingForm.ArbeidsprosentBeskrivelse' })}
@@ -261,6 +261,7 @@ export const TilretteleggingForm = ({
                     const utbetalingsgrad = finnUtbetalingsgradForTilrettelegging(
                       stillingsprosentArbeidsforhold,
                       velferdspermisjonprosent,
+                      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
                       value,
                     );
                     formMethods.setValue(`${index}.overstyrtUtbetalingsgrad`, utbetalingsgrad, { shouldDirty: true });
@@ -270,7 +271,7 @@ export const TilretteleggingForm = ({
               <RhfNumericField
                 name={`${index}.overstyrtUtbetalingsgrad`}
                 control={formMethods.control}
-                className={styles.utbetalingsgrad}
+                className={styles['utbetalingsgrad']}
                 readOnly={readOnly}
                 label={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvp' })}
                 description={intl.formatMessage({ id: 'TilretteleggingForm.ProsentSvpBeskrivelse' })}

@@ -26,7 +26,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const toggleVisAlleBehandlinger = () => {
-      args.toggleVisAlleBehandlinger?.();
+      args.toggleVisAlleBehandlinger();
       setArgs(oldArgs => ({ ...oldArgs, skalViseAlleBehandlinger: !oldArgs.skalViseAlleBehandlinger }));
     };
 

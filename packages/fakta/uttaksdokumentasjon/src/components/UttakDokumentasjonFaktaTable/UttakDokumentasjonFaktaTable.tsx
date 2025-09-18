@@ -56,7 +56,7 @@ export const UttakDokumentasjonFaktaTable = ({
     }
   };
 
-  useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov?.find(oa => !oa.vurdering)?.fom), []);
+  useEffect(() => velgDokBehovFomDato(dokumentasjonVurderingBehov.find(oa => !oa.vurdering)?.fom), []);
 
   const oppdaterPeriode = (oppdatertKrav: { perioder: DokumentasjonVurderingBehov[] }) => {
     const { perioder } = oppdatertKrav;
@@ -115,10 +115,10 @@ export const UttakDokumentasjonFaktaTable = ({
               expandOnRowClick
               shadeOnHover
               togglePlacement="right"
-              className={styles.expansionContentOuter}
+              className={styles['expansionContentOuter']}
               content={
                 valgtDokBehovFomDatoer.includes(behov.fom) && (
-                  <div className={styles.expansionContentInner}>
+                  <div className={styles['expansionContentInner']}>
                     <UttakDokumentasjonFaktaDetailForm
                       key={behov.fom}
                       behov={behov}

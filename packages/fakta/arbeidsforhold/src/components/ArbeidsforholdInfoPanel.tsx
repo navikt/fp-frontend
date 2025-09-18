@@ -52,6 +52,7 @@ const getSortArbeidsforholdFn =
   (a1: AoIArbeidsforhold, a2: AoIArbeidsforhold): number => {
     const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent];
     const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     if (arbeidsgiverOpplysningerA1 && arbeidsgiverOpplysningerA2) {
       const i = arbeidsgiverOpplysningerA1.navn.localeCompare(arbeidsgiverOpplysningerA2.navn);
       if (i !== 0) {

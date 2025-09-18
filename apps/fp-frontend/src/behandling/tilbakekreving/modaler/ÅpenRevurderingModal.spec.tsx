@@ -15,16 +15,19 @@ describe('ÅpenRevurderingModal', () => {
 
   it('skal vise og lukke modal for åpen revurdering', async () => {
     await Default.run({ args: { harÅpenRevurdering: true } });
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalledTimes(1);
 
     expect(screen.getByText('Åpen revurdering')).toBeInTheDocument();
     expect(screen.getByText(/Det finnes en åpen revurdering som kan påvirke/)).toBeInTheDocument();
     await userEvent.click(screen.getByText('OK'));
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(HTMLDialogElement.prototype.close).toHaveBeenCalledTimes(1);
   });
 
   it('skal ikke vise modal når ingen åpen revurdering', async () => {
     await Default.run({ args: { harÅpenRevurdering: false } });
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(HTMLDialogElement.prototype.showModal).toHaveBeenCalledTimes(0);
   });
 });

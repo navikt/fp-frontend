@@ -56,7 +56,7 @@ const lagModifisertCallback =
   };
 
 const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
-  const bgVilkar = vilkår.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkår.find(v => v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }
@@ -68,7 +68,7 @@ const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag
         vurderesIBehandlingen: true,
         merknadParametere: {},
         periode: {
-          fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
+          fom: beregningsgrunnlag.skjaeringstidspunktBeregning,
           tom: TIDENES_ENDE,
         },
         vilkarStatus: bgVilkar.vilkarStatus,

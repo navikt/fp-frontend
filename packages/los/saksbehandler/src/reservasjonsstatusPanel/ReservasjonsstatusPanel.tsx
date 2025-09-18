@@ -36,14 +36,14 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid, kanVeilede
   const { mutate: opphevOppgavereservasjon } = useMutation({
     mutationFn: opphevReservasjon,
     onSuccess: () => {
-      refetch();
+      void refetch();
     },
   });
 
   const { mutateAsync: reserverOppgave } = useMutation({
     mutationFn: reserverOppgavePost,
     onSuccess: () => {
-      refetch();
+      void refetch();
     },
   });
 
@@ -67,7 +67,7 @@ export const ReservasjonsstatusPanel = ({ saksnummer, behandlingUuid, kanVeilede
             </Button>
           </Tooltip>
         )}
-        {erReservert && !oppgaveForBehandling?.reservasjonStatus.erReservertAvInnloggetBruker && (
+        {erReservert && !oppgaveForBehandling.reservasjonStatus.erReservertAvInnloggetBruker && (
           <Button size="small" variant="primary-neutral" disabled icon={<PadlockLockedIcon aria-hidden />}>
             <FormattedMessage
               id="ReservasjonsstatusPanel.Reservert"

@@ -10,9 +10,6 @@ import { PersonInfo } from './person/PersonInfo';
 import { SøkResultat } from './resultat/SøkResultat';
 
 const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): boolean => {
-  if (!fagsaker) {
-    return false;
-  }
   return (
     fagsaker.length > 1 ||
     (fagsaker.length === 1 &&
@@ -61,7 +58,7 @@ export const FagsakSøk = ({
       resetSearch={resetSearch}
       kanSaksbehandle={kanSaksbehandle}
     />
-    {searchResultReceived && fagsaker && fagsaker.length === 0 && (
+    {searchResultReceived && fagsaker.length === 0 && (
       <BodyShort>
         <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
       </BodyShort>

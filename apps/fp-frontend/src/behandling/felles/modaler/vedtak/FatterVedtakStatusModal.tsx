@@ -22,7 +22,7 @@ export const FatterVedtakStatusModal = ({ visModal = false, lukkModal, tekst }: 
     <Modal width="small" open={visModal} aria-label={tekst} onClose={lukkModal}>
       <Modal.Body>
         <HStack gap="space-24">
-          <CheckmarkCircleFillIcon className={styles.image} />
+          <CheckmarkCircleFillIcon className={styles['image']} />
           <VStack gap="space-4">
             <Label size="small">{tekst}</Label>
             <BodyShort size="small">

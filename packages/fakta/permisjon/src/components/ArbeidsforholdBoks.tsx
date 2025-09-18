@@ -14,7 +14,7 @@ interface Props {
 
 export const ArbeidsforholdBoks = ({ harÅpentAksjonspunkt, harBorderTop, children }: Props) => (
   <div
-    className={classNames(styles.boks, {
+    className={classNames(styles['boks'], {
       aksjonspunkt: harÅpentAksjonspunkt,
       harBorderTop,
     })}

@@ -44,7 +44,7 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
       return await pollOgHentData(setPollingPending, location);
     } catch (error) {
       if (error instanceof HTTPError) {
-        const data = await error.response.json();
+        const data = await error.response.json<PollingResponse>();
         if (isPollingDelayedOrHalted(data)) {
           setPollingPending(false);
           //Ikke vent på at behandling blir oppdatert, men hent gammel versjon (som da er read only)
@@ -84,6 +84,7 @@ const pollOgHentData = async (setPollingPending: PollingPendingFn, location: str
 
 const isPollingResponse = (response: PollingResponse | Behandling): response is PollingResponse => {
   const pollingResponse = response as PollingResponse;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
   return pollingResponse.pending !== undefined && pollingResponse.location !== undefined;
 };
 

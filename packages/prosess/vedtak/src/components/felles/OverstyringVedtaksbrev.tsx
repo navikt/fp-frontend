@@ -38,7 +38,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
 
   useEffect(() => {
     if (harRedigertBrev) {
-      hentBrevOverstyring().then(setBrevOverstyring);
+      void hentBrevOverstyring().then(setBrevOverstyring);
     }
   }, []);
 

@@ -47,10 +47,7 @@ export const PersonArbeidsforholdTable = ({
       </Table.Header>
       <Table.Body>
         {alleArbeidsforhold.map(arbeidsforhold => {
-          const stillingsprosent =
-            arbeidsforhold.stillingsprosent !== undefined && arbeidsforhold.stillingsprosent !== null
-              ? `${arbeidsforhold.stillingsprosent.toFixed(2)} %`
-              : '';
+          const stillingsprosent = `${arbeidsforhold.stillingsprosent.toFixed(2)} %`;
           const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.motattDato;
           return (
             <Table.ExpandableRow
@@ -116,6 +113,7 @@ const utledNavn = (
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverIdent];
   if (saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     return arbeidsgiverOpplysninger?.navn;
   }
 

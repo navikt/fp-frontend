@@ -34,10 +34,10 @@ export const BehandlingskoerIndex = ({ valgtSakslisteId, setValgtSakslisteId, å
     if (oppgave.reservasjonStatus.erReservert) {
       åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     } else {
-      reserverOppgave(oppgave.id).then(nyOppgaveStatus => {
-        if (nyOppgaveStatus?.erReservert && nyOppgaveStatus.erReservertAvInnloggetBruker) {
+      void reserverOppgave(oppgave.id).then(nyOppgaveStatus => {
+        if (nyOppgaveStatus.erReservert && nyOppgaveStatus.erReservertAvInnloggetBruker) {
           åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
-        } else if (nyOppgaveStatus?.erReservert && !nyOppgaveStatus.erReservertAvInnloggetBruker) {
+        } else if (nyOppgaveStatus.erReservert && !nyOppgaveStatus.erReservertAvInnloggetBruker) {
           setReservertAvAnnenSaksbehandler(true);
           setReservertOppgave(oppgave);
           setReservertOppgaveStatus(nyOppgaveStatus);

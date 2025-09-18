@@ -26,7 +26,7 @@ export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksb
     mutationFn: (values: { brukerIdent: string; checked: boolean }) =>
       lagreSakslisteSaksbehandler(valgtSaksliste.sakslisteId, values.brukerIdent, values.checked, valgtAvdelingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },

@@ -77,7 +77,7 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
           {kanOverstyreAccess && (
             <PencilFillIcon
               title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
-              className={isReadOnly ? styles.editIconReadonly : styles.editIcon}
+              className={isReadOnly ? styles['editIconReadonly'] : styles['editIcon']}
               onClick={isReadOnly ? undefined : () => setVisEditeringsmodus(true)}
             />
           )}
@@ -107,7 +107,7 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
         }).then(slåAvEditeringAvStartdato)
       }
     >
-      <div className={styles.header}>
+      <div className={styles['header']}>
         <HStack gap="space-8" align="center">
           <PencilIcon aria-hidden height={24} width={24} />
           <Heading size="small" level="3">

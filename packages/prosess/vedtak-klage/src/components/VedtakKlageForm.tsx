@@ -55,7 +55,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
       kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLA_VEDTAK, AksjonspunktKode.FORESLA_VEDTAK_MANUELT),
     }));
 
-    submitCallback(input).then(() => setIsSubmitting(false));
+    void submitCallback(input).then(() => setIsSubmitting(false));
   };
 
   return (
@@ -114,26 +114,24 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
   );
 };
 const getAvvisningsAarsaker = (klageVurderingResultat: KlageVurdering) => {
-  if (klageVurderingResultat) {
-    if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
-      return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;
-    }
-    if (klageVurderingResultat.klageFormkravResultatNFP) {
-      return klageVurderingResultat.klageFormkravResultatNFP.avvistArsaker;
-    }
+  if (klageVurderingResultat.klageFormkravResultatKA && klageVurderingResultat.klageVurderingResultatNK) {
+    return klageVurderingResultat.klageFormkravResultatKA.avvistArsaker;
+  }
+  if (klageVurderingResultat.klageFormkravResultatNFP) {
+    return klageVurderingResultat.klageFormkravResultatNFP.avvistArsaker;
   }
   return [];
 };
 
 const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: AlleKodeverk): string | null => {
-  if (klageVurderingResultat?.klageVurderingResultatNK?.klageMedholdArsak) {
+  if (klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak) {
     return (
       alleKodeverk['KlageMedholdÅrsak'].find(
         ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNK?.klageMedholdArsak,
       )?.navn ?? ''
     );
   }
-  if (klageVurderingResultat?.klageVurderingResultatNFP?.klageMedholdArsak) {
+  if (klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak) {
     return (
       alleKodeverk['KlageMedholdÅrsak'].find(
         ({ kode }) => kode === klageVurderingResultat.klageVurderingResultatNFP?.klageMedholdArsak,
@@ -156,7 +154,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
     case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
       return 'VedtakKlageForm.HjemmsendUtenOpphev';
     case klageVurderingCodes.MEDHOLD_I_KLAGE:
-      return OMGJOER_TEKST_MAP[klageResultat?.klageVurderingOmgjoer ?? ''];
+      return OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer ?? ''];
     default:
       return 'VedtakKlageForm.IkkeFastsatt';
   }

@@ -43,7 +43,7 @@ OmsorgFaktaFields.initialValues = (ytelsefordeling: Ytelsefordeling, omsorgAp: A
   omsorg:
     omsorgAp.length > 0 &&
     omsorgAp[0]?.status !== AksjonspunktStatus.OPPRETTET &&
-    ytelsefordeling.overstyrtOmsorg !== null
+    ytelsefordeling.overstyrtOmsorg !== undefined
       ? ytelsefordeling.overstyrtOmsorg
       : undefined,
 });

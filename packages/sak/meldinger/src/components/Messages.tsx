@@ -73,10 +73,6 @@ export const Messages = ({
     fagsakYtelseType,
   );
 
-  if (!behandling.språkkode) {
-    return null;
-  }
-
   const { formState, control } = formMethods;
 
   const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
@@ -112,7 +108,7 @@ export const Messages = ({
               {mal.navn}
             </option>
           ))}
-          className={styles.bredde}
+          className={styles['bredde']}
         />
         {erVarselOmRevurdering && (
           <RhfSelect
@@ -125,7 +121,7 @@ export const Messages = ({
                 {cause.navn}
               </option>
             ))}
-            className={styles.bredde}
+            className={styles['bredde']}
           />
         )}
         {showFritekst(brevmalkode, arsakskode) && (
@@ -141,7 +137,7 @@ export const Messages = ({
         )}
         {brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
         <HStack justify="space-between">
-          {(!erVarselOmRevurdering || (erVarselOmRevurdering && arsakskode !== undefined)) && (
+          {(!erVarselOmRevurdering || arsakskode !== undefined) && (
             <Link href="#" onClick={forhåndsvis} onKeyDown={e => (e.key === 'Enter' ? forhåndsvis(e) : null)}>
               <FormattedMessage id="Messages.Preview" />
             </Link>

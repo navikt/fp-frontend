@@ -29,7 +29,7 @@ export const OppgaveErReservertAvAnnenModal = ({
 
   return (
     <NavModal
-      className={styles.modal}
+      className={styles['modal']}
       open
       aria-label={intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.ReservertAvEnkel' })}
       onClose={lukk}
@@ -37,7 +37,7 @@ export const OppgaveErReservertAvAnnenModal = ({
       <NavModal.Body>
         <HStack gap="space-16" wrap={false} align="center">
           <ExclamationmarkTriangleFillIcon
-            className={styles.image}
+            className={styles['image']}
             title={intl.formatMessage({ id: 'OppgaveErReservertAvAnnenModal.ReservertAvEnkel' })}
           />
           <Label size="small">
@@ -50,7 +50,7 @@ export const OppgaveErReservertAvAnnenModal = ({
               }}
             />
           </Label>
-          <Button className={styles.okButton} size="small" variant="primary" onClick={lukk} autoFocus type="button">
+          <Button className={styles['okButton']} size="small" variant="primary" onClick={lukk} autoFocus type="button">
             <FormattedMessage id="OppgaveErReservertAvAnnenModal.Ok" />
           </Button>
         </HStack>

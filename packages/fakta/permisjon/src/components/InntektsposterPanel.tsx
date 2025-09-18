@@ -53,13 +53,17 @@ export const InntektsposterPanel = ({ inntektsposter, skjæringstidspunkt }: Pro
             href=""
           >
             <span>
-              <BodyShort size="small" className={styles.inline}>
+              <BodyShort size="small" className={styles['inline']}>
                 <FormattedMessage
                   id={visAlleMåneder ? 'InntektsposterPanel.FaerreManeder' : 'InntektsposterPanel.TidligereManeder'}
                 />
               </BodyShort>
             </span>
-            {visAlleMåneder ? <ChevronUpIcon className={styles.arrow} /> : <ChevronDownIcon className={styles.arrow} />}
+            {visAlleMåneder ? (
+              <ChevronUpIcon className={styles['arrow']} />
+            ) : (
+              <ChevronDownIcon className={styles['arrow']} />
+            )}
           </Link>
         </VStack>
       )}

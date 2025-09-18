@@ -26,7 +26,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
 
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback } =
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
-  annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
+  annenForelderUttakEøs.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
     annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];

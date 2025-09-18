@@ -37,7 +37,7 @@ const kanSendesTilGodkjenning = (behandlingStatusKode: string): boolean =>
   behandlingStatusKode === BehandlingStatusEnum.BEHANDLING_UTREDES;
 
 const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
-  aksjonspunkter?.some(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK) || skalBrukeManueltBrev
+  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK) || skalBrukeManueltBrev
     ? 'VedtakForm.TilGodkjenning'
     : 'VedtakForm.FattVedtak';
 
@@ -128,8 +128,8 @@ export const VedtakFellesPanel = ({
       <HStack gap="space-8">
         {status === BehandlingStatusEnum.AVSLUTTET && (
           <>
-            {erInnvilget && <CheckmarkCircleFillIcon className={styles.innvilgetImage} />}
-            {!erInnvilget && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+            {erInnvilget && <CheckmarkCircleFillIcon className={styles['innvilgetImage']} />}
+            {!erInnvilget && <XMarkOctagonFillIcon className={styles['avslattImage']} />}
           </>
         )}
         <Heading size="small" level="2">
@@ -137,13 +137,13 @@ export const VedtakFellesPanel = ({
         </Heading>
       </HStack>
       <HStack gap="space-8">
-        <div className={styles.space}>
+        <div className={styles['space']}>
           <Label size="small">
             {vedtakstatusTekst}
             {tilbakekrevingtekst && `. ${intl.formatMessage({ id: tilbakekrevingtekst })}`}
           </Label>
         </div>
-        <div className={styles.space}>
+        <div className={styles['space']}>
           {skalViseLink && harIkkeKonsekvensForYtelse && kanBehandles && (
             <Link href="#" onClick={previewAutomatiskBrev}>
               <span>
@@ -155,11 +155,11 @@ export const VedtakFellesPanel = ({
                   }
                 />
               </span>
-              <ArrowForwardIcon className={styles.pil} />
+              <ArrowForwardIcon className={styles['pil']} />
             </Link>
           )}
           {skalViseLink && harIkkeKonsekvensForYtelse && !kanBehandles && (
-            <BodyShort size="small" className={styles.disabletLink}>
+            <BodyShort size="small" className={styles['disabletLink']}>
               <FormattedMessage
                 id={
                   erBehandlingEtterKlage
@@ -180,7 +180,7 @@ export const VedtakFellesPanel = ({
                 e.preventDefault();
               }}
             >
-              <PencilIcon className={styles.blyant} />
+              <PencilIcon className={styles['blyant']} />
               <span>
                 <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
               </span>
@@ -188,8 +188,8 @@ export const VedtakFellesPanel = ({
           )}
           {skalProdusereBrev && (isReadOnly || harValgtÅRedigereVedtaksbrev) && (
             <>
-              <PencilIcon className={styles.blyantDisablet} />
-              <BodyShort size="small" className={styles.disabletLink}>
+              <PencilIcon className={styles['blyantDisablet']} />
+              <BodyShort size="small" className={styles['disabletLink']}>
                 <FormattedMessage id="VedtakFellesPanel.RedigerVedtaksbrev" />
               </BodyShort>
             </>
@@ -197,7 +197,7 @@ export const VedtakFellesPanel = ({
         </div>
       </HStack>
       {!skalProdusereBrev && (
-        <Alert variant="info" size="small" className={styles.alert}>
+        <Alert variant="info" size="small" className={styles['alert']}>
           <BodyShort size="small">
             <FormattedMessage id="VedtakFellesPanel.IngenVedtaksbrev" />
           </BodyShort>

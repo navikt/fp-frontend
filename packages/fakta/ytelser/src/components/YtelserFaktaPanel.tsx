@@ -18,14 +18,13 @@ export const YtelserFaktaPanel = ({ inntektArbeidYtelse }: Props) => (
       </Heading>
       <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForSoker} />
     </VStack>
-    {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder &&
-      inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
-        <VStack gap="space-16">
-          <Heading size="small" level="3">
-            <FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" />
-          </Heading>
-          <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder} />
-        </VStack>
-      )}
+    {inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder.length > 0 && (
+      <VStack gap="space-16">
+        <Heading size="small" level="3">
+          <FormattedMessage id="YtelserFaktaPanel.AnnenPartsYtelser" />
+        </Heading>
+        <PersonYtelserTable ytelser={inntektArbeidYtelse.relatertTilgrensendeYtelserForAnnenForelder} />
+      </VStack>
+    )}
   </VStack>
 );

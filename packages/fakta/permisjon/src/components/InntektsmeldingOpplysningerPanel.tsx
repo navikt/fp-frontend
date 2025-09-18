@@ -55,14 +55,14 @@ export const InntektsmeldingOpplysningerPanel = ({ saksnummer, inntektsmelding }
       dokumentId={inntektsmelding.dokumentId}
     >
       <HStack gap="space-4">
-        <BodyShort size="small" className={styles.inline}>
+        <BodyShort size="small" className={styles['inline']}>
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.ÅpneInntektsmelding" />
         </BodyShort>
-        <FileFillIcon className={styles.docIcon} />
+        <FileFillIcon className={styles['docIcon']} />
       </HStack>
     </DokumentLink>
     <HStack gap="space-16" align="center">
-      <PhoneFillIcon className={styles.phoneIcon} />
+      <PhoneFillIcon className={styles['phoneIcon']} />
       <VStack gap="space-4">
         <Label size="small">
           <FormattedMessage id="InntektsmeldingOpplysningerPanel.Kontaktinfo" />

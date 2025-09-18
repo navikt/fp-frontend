@@ -75,7 +75,7 @@ export const RegistrerVirksomhetPanel = ({ readOnly = false, alleKodeverk }: Pro
       </Table>
 
       {errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.virksomheter?.root?.message && (
-        <ErrorMessage>{errors[EGEN_VIRKSOMHET_NAME_PREFIX]?.virksomheter.root?.message}</ErrorMessage>
+        <ErrorMessage>{errors[EGEN_VIRKSOMHET_NAME_PREFIX].virksomheter.root.message}</ErrorMessage>
       )}
       <div>
         <Button

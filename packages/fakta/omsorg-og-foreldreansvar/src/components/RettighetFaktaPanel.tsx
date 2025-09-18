@@ -47,8 +47,8 @@ export const RettighetFaktaPanel = ({ alleMerknaderFraBeslutter }: Props) => {
           >
             {ytelser.map(ytelse =>
               getLopendeOrAvsluttetYtelser(ytelse).map(y => (
-                <div className={styles.wrapper} key={`${ytelse.relatertYtelseNavn}-${y.periodeFraDato}`}>
-                  <BodyShort size="small" className={styles.iverksatt}>
+                <div className={styles['wrapper']} key={`${ytelse.relatertYtelseNavn}-${y.periodeFraDato}`}>
+                  <BodyShort size="small" className={styles['iverksatt']}>
                     <FormattedMessage
                       id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
                       values={{ ytelseType: ytelse.relatertYtelseNavn }}

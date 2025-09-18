@@ -181,9 +181,15 @@ const DEFAULT_ARBEID_OG_INNTEKT = {
     {
       arbeidsgiverIdent: '1',
       internArbeidsforholdId: '555864629-null',
+      fom: '',
+      tom: '',
+      stillingsprosent: 0,
     },
   ],
-} as ArbeidOgInntektsmelding;
+  inntektsmeldinger: [],
+  inntekter: [],
+  skjæringstidspunkt: '',
+} satisfies ArbeidOgInntektsmelding;
 
 const SPESIELL_ARBEID_OG_INNTEKT = {
   inntektsmeldinger: [
@@ -191,6 +197,17 @@ const SPESIELL_ARBEID_OG_INNTEKT = {
       arbeidsgiverIdent: '999999999',
       motattDato: '2020-03-20',
       refusjonPrMnd: 5170.0,
+      inntektPrMnd: 0,
+      kontaktpersonNavn: '',
+      kontaktpersonNummer: '',
+      journalpostId: '',
+      dokumentId: '',
+      innsendingstidspunkt: '',
+      kildeSystem: '',
+      aktiveNaturalytelser: [],
+      refusjonsperioder: [],
+      innsendingsårsak: '-',
+      tilknyttedeBehandlingIder: [],
     },
   ],
   arbeidsforhold: [
@@ -199,9 +216,12 @@ const SPESIELL_ARBEID_OG_INNTEKT = {
       arbeidsgiverIdent: '999999999',
       fom: '2019-04-01',
       stillingsprosent: 100.0,
+      tom: '',
     },
   ],
-} as ArbeidOgInntektsmelding;
+  inntekter: [],
+  skjæringstidspunkt: '',
+} satisfies ArbeidOgInntektsmelding;
 
 const ARBEIDSGIVEROPPLYSNINGER_PER_ID: ArbeidsgiverOpplysningerPerId = {
   1: {

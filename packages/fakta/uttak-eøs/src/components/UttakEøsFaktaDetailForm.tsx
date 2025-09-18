@@ -79,6 +79,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 validate={[required, hasValidDate]}
                 isReadOnly={isReadOnly}
                 onChange={value => {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
                   oppdaterTrekkdagerOgTrekkuker(value, formMethods.getValues('tom'));
                 }}
               />
@@ -90,6 +91,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
                 isReadOnly={isReadOnly}
                 fromDate={dayjs(fom, ISO_DATE_FORMAT).toDate()}
                 onChange={value => {
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
                   oppdaterTrekkdagerOgTrekkuker(formMethods.getValues('fom'), value);
                 }}
               />
@@ -118,7 +120,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               id: 'UttakEøsFaktaDetailForm.Stønadskonto',
             })}
             control={formMethods.control}
-            className={styles.select}
+            className={styles['select']}
             selectValues={lagGyldigeKontotyperOption(fagsak)}
             readOnly={isReadOnly}
             validate={[required]}
@@ -129,7 +131,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               <RhfNumericField
                 name="trekkuker"
                 control={formMethods.control}
-                className={styles.numberWidth}
+                className={styles['numberWidth']}
                 readOnly={isReadOnly}
                 validate={[required, hasValidInteger]}
               />
@@ -137,13 +139,13 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               <RhfNumericField
                 name="trekkdager"
                 control={formMethods.control}
-                className={styles.numberWidth}
+                className={styles['numberWidth']}
                 readOnly={isReadOnly}
                 validate={[required, hasValidDecimal]}
               />
             </HStack>
           </VStack>
-          <HStack gap="4" className={styles.marginBtn}>
+          <HStack gap="4" className={styles['marginBtn']}>
             <Button
               size="small"
               variant="primary"

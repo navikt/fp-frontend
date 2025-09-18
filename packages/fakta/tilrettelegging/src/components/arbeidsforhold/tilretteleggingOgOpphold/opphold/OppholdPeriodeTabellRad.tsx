@@ -12,7 +12,7 @@ import { OppholdForm } from './OppholdForm';
 
 import styles from './oppholdPeriodeTabellRad.module.css';
 
-const utledTypeTekst = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
+const utledTypeTekst = (intl: IntlShape, opphold: Partial<SvpAvklartOppholdPeriode>) => {
   if (opphold.oppholdÅrsak === undefined) {
     return intl.formatMessage({ id: 'TilretteleggingPerioderTabellRad.Opphold' });
   }
@@ -102,7 +102,7 @@ export const OppholdPeriodeTabellRad = ({
         />
       }
       togglePlacement="right"
-      className={open ? styles.openRow : styles.row}
+      className={open ? styles['openRow'] : styles['row']}
     >
       <Table.DataCell>
         {opphold.fom ? (

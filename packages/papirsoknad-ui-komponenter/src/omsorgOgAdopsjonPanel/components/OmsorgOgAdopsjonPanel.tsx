@@ -134,7 +134,7 @@ export const OmsorgOgAdopsjonPanel = ({
             control={control}
             label={formatMessage({ id: 'Registrering.Adopsjon.AntallBarn' })}
             readOnly={readOnly}
-            className={styles.barnInput}
+            className={styles['barnInput']}
             parse={value => {
               const parsedValue = parseInt(value.toString(), 10);
               return Number.isNaN(parsedValue) ? value : parsedValue;

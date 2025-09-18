@@ -23,7 +23,7 @@ export const FeriepengerPanel = ({ feriepengegrunnlag, alleKodeverk, arbeidsgive
 
   const { andeler } = feriepengegrunnlag;
 
-  if (!andeler || andeler.length < 1) {
+  if (andeler.length < 1) {
     return null;
   }
 

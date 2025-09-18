@@ -1,6 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './SistBehandledeSaker.stories';
 
@@ -8,7 +8,7 @@ const { Default, IngenBehandlinger } = composeStories(stories);
 
 describe('SistBehandledeSaker', () => {
   it('skal vise sist behandlede saker', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     render(<Default />);
     expect(await screen.findByText('Dine siste reserverte behandlinger')).toBeInTheDocument();
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
@@ -16,7 +16,7 @@ describe('SistBehandledeSaker', () => {
   });
 
   it('skal vise ingen behandlinger', async () => {
-    await applyRequestHandlers(IngenBehandlinger.parameters['msw']);
+    applyRequestHandlers(IngenBehandlinger.parameters['msw'] as MswParameters['msw']);
     render(<IngenBehandlinger />);
     expect(await screen.findByText('Dine siste reserverte behandlinger')).toBeInTheDocument();
     expect(await screen.findByText('Ingen behandlinger')).toBeInTheDocument();

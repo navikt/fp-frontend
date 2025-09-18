@@ -43,11 +43,11 @@ const InntektRad = ({
   arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId;
   alleKodeverk: AlleKodeverk;
 }): ReactElement => (
-  <Table.Row className={styles.månedRad}>
-    <Table.DataCell textSize="small" className={styles.månedAktivitet}>
+  <Table.Row className={styles['månedRad']}>
+    <Table.DataCell textSize="small" className={styles['månedAktivitet']}>
       {lagVisningsNavn(inntekt, arbeidsgiverOpplysninger, alleKodeverk)}
     </Table.DataCell>
-    <Table.DataCell textSize="small" className={styles.månedInntekt}>
+    <Table.DataCell textSize="small" className={styles['månedInntekt']}>
       <BeløpLabel beløp={inntekt.inntekt} />
     </Table.DataCell>
   </Table.Row>
@@ -107,7 +107,7 @@ const RadMedMåneder = ({ måneder, arbeidsgiverOpplysninger, alleKodeverk }: Ra
   <HStack gap="space-8">
     {måneder.map(månedsgrunnlag => {
       return (
-        <div className={styles.colWidth} key={månedsgrunnlag.fom}>
+        <div className={styles['colWidth']} key={månedsgrunnlag.fom}>
           <BodyShort size="small">{formaterMånedOgÅr(månedsgrunnlag.fom)}</BodyShort>
           <Inntekttabell
             inntekter={månedsgrunnlag.inntekter}

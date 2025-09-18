@@ -92,6 +92,7 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   perioder.forEach(p => {
     const ikkeGyldigeAktiviteter = p.aktiviteter.filter(
       a =>
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
         stønadskonto.stonadskontoer[a.stønadskontoType as StonadskontoType] === undefined &&
         !!a.trekkdagerDesimaler &&
         a.trekkdagerDesimaler > 0,
@@ -121,8 +122,11 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
 
   // TODO Dette ser feil ut. Burde det vera const konto = stønadskonto.stonadskontoer[StonadskontoType.FLERBARNSDAGER];
   // @ts-expect-error Fiks
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const konto = stønadskonto[StonadskontoType.FLERBARNSDAGER];
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (feil.length === 0 && konto && !konto.gyldigForbruk) {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
     feil.push(intl.formatMessage({ id: 'UttakPanel.InvalidTrekkDagerFlerbarnsdager' }, { maxDays: konto.maxDager }));
   }
 
@@ -191,7 +195,7 @@ const getPerioderAnnenpart = (
   uttaksresultat: Uttaksresultat,
   annenForelderUttakEøs: AnnenforelderUttakEøsPeriode[] | undefined,
 ) => {
-  if (uttaksresultat.perioderAnnenpart && uttaksresultat.perioderAnnenpart.length > 0) {
+  if (uttaksresultat.perioderAnnenpart.length > 0) {
     return uttaksresultat.perioderAnnenpart;
   }
   if (annenForelderUttakEøs) {
@@ -251,7 +255,7 @@ export const UttakProsessPanel = ({
 
   const bekreftAksjonspunkter = () => {
     setIsSubmitting(true);
-    submitCallback(transformValues(perioder, aksjonspunkterForPanel));
+    void submitCallback(transformValues(perioder, aksjonspunkterForPanel));
   };
 
   const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
@@ -260,15 +264,17 @@ export const UttakProsessPanel = ({
     setPerioder(nyePerioder);
     setIsDirty(true);
 
-    oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder }).then(oppdatertStønadskonto => {
-      setStønadskonto(oppdatertStønadskonto);
-      if (oppdatertePerioder.length === 2) {
-        const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
-        setValgtPeriodeIndex(perioderAnnenpart.length + index);
-      } else {
-        visPeriode(perioderAnnenpart.concat(nyePerioder));
-      }
-    });
+    void oppdaterStønadskontoer({ behandlingUuid: behandling.uuid, perioder: nyePerioder }).then(
+      oppdatertStønadskonto => {
+        setStønadskonto(oppdatertStønadskonto);
+        if (oppdatertePerioder.length === 2) {
+          const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
+          setValgtPeriodeIndex(perioderAnnenpart.length + index);
+        } else {
+          visPeriode(perioderAnnenpart.concat(nyePerioder));
+        }
+      },
+    );
   };
 
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
@@ -316,7 +322,7 @@ export const UttakProsessPanel = ({
         <AksjonspunktHelpTextHTML>{hentApTekster(uttaksresultat, aksjonspunkterForPanel)}</AksjonspunktHelpTextHTML>
       )}
       <DisponibleStonadskontoerPanel
-        stønadskontoer={stønadskonto.stonadskontoer ? Object.values(stønadskonto.stonadskontoer) : undefined}
+        stønadskontoer={Object.values(stønadskonto.stonadskontoer)}
         arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
       />
       <UttakTidslinjeIndex

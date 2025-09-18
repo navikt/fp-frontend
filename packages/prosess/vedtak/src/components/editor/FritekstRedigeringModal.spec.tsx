@@ -15,6 +15,7 @@ describe('FritekstRedigeringModal', () => {
       writable: true,
       value: vi.fn().mockImplementation(query => ({
         matches: false,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         media: query,
         onchange: null,
         addListener: vi.fn(), // Deprecated
@@ -40,6 +41,7 @@ describe('FritekstRedigeringModal', () => {
     expect(forhåndsvisBrev).toHaveBeenNthCalledWith(1, {
       automatiskVedtaksbrev: false,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
     });
   });

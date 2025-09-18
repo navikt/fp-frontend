@@ -359,7 +359,7 @@ export const saksbehandlgerSøk = (brukerIdent: string) =>
     .post(LosUrl.SAKSBEHANDLER_SOK, {
       json: { brukerIdent },
     })
-    .json<SaksbehandlerProfil>();
+    .json<SaksbehandlerProfil | null>();
 
 export const opprettNySaksbehandler = (brukerIdent: string, avdelingEnhet: string) =>
   kyExtended

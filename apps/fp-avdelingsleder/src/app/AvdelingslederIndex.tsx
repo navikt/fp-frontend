@@ -54,7 +54,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
   });
   const activeAvdelingslederPanel = activeAvdelingslederPanelTemp || getPanelFromUrlOrDefault(location);
 
-  if (!initData.innloggetBruker?.kanOppgavestyre) {
+  if (!initData.innloggetBruker.kanOppgavestyre) {
     return <IkkeTilgangTilAvdelingslederPanel />;
   }
   if (alleKodeverkQuery.isPending || valgtAvdelingEnhet === undefined) {
@@ -62,7 +62,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
   }
 
   return (
-    <div key={valgtAvdelingEnhet} className={styles.container}>
+    <div key={valgtAvdelingEnhet} className={styles['container']}>
       <HStack justify="end" padding="2">
         <Select
           size="small"
@@ -74,7 +74,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
             setValgtAvdelingEnhet(index);
           }}
           value={valgtAvdelingEnhet}
-          className={styles.paddingSelect}
+          className={styles['paddingSelect']}
         >
           {initData.avdelinger.map(avdeling => (
             <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
@@ -87,9 +87,9 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
         size="small"
         value={activeAvdelingslederPanel}
         onChange={(avdelingslederPanel: string) => {
-          navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
+          void navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
         }}
-        className={styles.paddingHeader}
+        className={styles['paddingHeader']}
       >
         <Tabs.List>
           <Tabs.Tab

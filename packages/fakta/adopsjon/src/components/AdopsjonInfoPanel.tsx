@@ -135,7 +135,7 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
       <RhfForm formMethods={formMethods} onSubmit={onSubmit} setDataOnUnmount={setMellomlagretFormData}>
         <VStack gap="space-24">
           <HStack gap="space-16" wrap>
-            <div className={styles.leftCol}>
+            <div className={styles['leftCol']}>
               <DokumentasjonFaktaForm
                 readOnly={isReadOnly}
                 soknad={soknad}
@@ -165,7 +165,7 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
               />
             )}
           </HStack>
-          {aksjonspunkterForPanel && aksjonspunkterForPanel.length > 0 && (
+          {aksjonspunkterForPanel.length > 0 && (
             <>
               <FaktaBegrunnelseTextField
                 control={formMethods.control}

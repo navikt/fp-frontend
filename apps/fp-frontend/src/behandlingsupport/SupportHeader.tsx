@@ -28,7 +28,7 @@ export const SupportHeaderAndContent = ({
 
   return (
     <VStack gap="space-16">
-      <div className={styles.header}>
+      <div className={styles['header']}>
         <HStack justify="space-between">
           <HStack gap="space-4" align="center">
             <Heading size="small" level="2">
@@ -36,10 +36,10 @@ export const SupportHeaderAndContent = ({
             </Heading>
             {toggleVisUtvidetBehandlingDetaljerKnapp}
           </HStack>
-          {!!antall && antall > 0 && <div className={styles.circle}>{antall}</div>}
+          {!!antall && antall > 0 && <div className={styles['circle']}>{antall}</div>}
         </HStack>
       </div>
-      <div className={brukPadding ? styles.container : undefined}>
+      <div className={brukPadding ? styles['container'] : undefined}>
         <ErrorBoundary
           errorMessageCallback={addErrorMessage}
           errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Support' })}

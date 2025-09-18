@@ -24,7 +24,7 @@ const UtenlandsoppholdListe = ({
         {utlandsopphold.map(({ fom, tom, landNavn }) => (
           <li key={fom}>
             <BodyShort size="small">
-              <PeriodLabel dateStringFom={fom} dateStringTom={tom ?? undefined} />{' '}
+              <PeriodLabel dateStringFom={fom} dateStringTom={tom} />{' '}
               <FormattedMessage
                 id="OpplysningerOmUtenlandsopphold.iLand"
                 values={{ land: toTitleCapitalization(landNavn) }}

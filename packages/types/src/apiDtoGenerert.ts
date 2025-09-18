@@ -4366,7 +4366,7 @@ export type tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse = {
 export type tjenester_behandling_vedtak_dto_OppgaveDto_Dokument = {
   journalpostId: string;
   dokumentId: string;
-  tittel: string;
+  tittel?: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_verge_VergeType =

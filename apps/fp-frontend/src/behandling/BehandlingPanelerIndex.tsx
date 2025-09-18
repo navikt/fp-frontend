@@ -65,7 +65,7 @@ export const BehandlingPanelerIndex = () => {
         <BehandlingPaVent
           behandling={behandling}
           opneSokeside={() => {
-            navigate('/');
+            void navigate('/');
           }}
           kodeverk={alleKodeverk}
         />

@@ -33,7 +33,7 @@ export const SletteSakslisteModal = ({ valgtSaksliste, cancel, submit }: Props) 
       </Modal.Header>
       <Modal.Footer>
         <Button
-          className={styles.submitButton}
+          className={styles['submitButton']}
           size="small"
           variant="primary"
           onClick={() => submit(valgtSaksliste)}
@@ -42,7 +42,7 @@ export const SletteSakslisteModal = ({ valgtSaksliste, cancel, submit }: Props) 
         >
           <FormattedMessage id="SletteSakslisteModal.Ja" />
         </Button>
-        <Button className={styles.cancelButton} size="small" variant="secondary" onClick={cancel} type="button">
+        <Button className={styles['cancelButton']} size="small" variant="secondary" onClick={cancel} type="button">
           <FormattedMessage id="SletteSakslisteModal.Nei" />
         </Button>
       </Modal.Footer>

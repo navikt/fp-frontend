@@ -3,6 +3,7 @@ import { createContext, type ReactElement, useContext, useMemo } from 'react';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 type Props<AP_TYPE extends AksjonspunktType> = {

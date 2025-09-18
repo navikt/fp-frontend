@@ -36,14 +36,14 @@ export const FagsakSearch = ({
   searchResultAccessDenied,
   alleKodeverk,
 }: Props) => (
-  <div className={styles.container}>
+  <div className={styles['container']}>
     <SearchForm
       searchFagsakCallback={searchFagsakCallback}
       searchStarted={searchStarted}
       searchResultAccessDenied={searchResultAccessDenied}
     />
     {searchResultReceived && fagsaker.length === 0 && (
-      <BodyShort size="small" className={styles.label}>
+      <BodyShort size="small" className={styles['label']}>
         <FormattedMessage id="FagsakSearch.ZeroSearchResults" />
       </BodyShort>
     )}

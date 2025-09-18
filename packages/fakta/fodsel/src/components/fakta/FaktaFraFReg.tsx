@@ -56,7 +56,7 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
   return (
     <div>
       {barn.map(({ fødselsdato, dødsdato }, index) => (
-        <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles.grid}>
+        <HStack key={fødselsdato + dødsdato} gap="space-24" wrap={false} className={styles['grid']}>
           <ReadOnlyField
             size="medium"
             label={<FormattedMessage id="Label.Barn" />}

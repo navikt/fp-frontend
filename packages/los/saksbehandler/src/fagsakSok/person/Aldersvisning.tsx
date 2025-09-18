@@ -19,7 +19,7 @@ interface Props {
 export const Aldersvisning = ({ erDød, alder, dødsdato }: Props) => {
   if (erDød) {
     return (
-      <BodyShort size="small" className={styles.displayInline}>
+      <BodyShort size="small" className={styles['displayInline']}>
         {dødsdato ? <DateLabel dateString={dødsdato} /> : <FormattedMessage id="Person.ManglerDodsdato" />}
       </BodyShort>
     );

@@ -216,7 +216,7 @@ export const TilkjentYtelse = ({
 };
 
 const sjekkOmGradert = (periode: BeregningsresultatPeriode): boolean => {
-  const graderteAndeler = (periode.andeler ?? []).filter(andel => andel.uttak && andel.uttak.gradering === true);
+  const graderteAndeler = (periode.andeler ?? []).filter(andel => andel.uttak.gradering === true);
   return graderteAndeler.length > 0;
 };
 

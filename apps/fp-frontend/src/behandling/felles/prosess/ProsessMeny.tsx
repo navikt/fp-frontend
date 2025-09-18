@@ -31,19 +31,19 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
   const steg = prosessPanelMenyData.map(data => {
     const type = finnProsessmenyType(data.status, data.harÅpentAksjonspunkt);
     return {
-      label: data.tekst ?? '',
+      label: data.tekst,
       isActive: data.erAktiv,
       type,
     };
   });
 
   return (
-    <div className={styles.container}>
-      <div className={styles.meny} data-testid="prosess-meny">
+    <div className={styles['container']}>
+      <div className={styles['meny']} data-testid="prosess-meny">
         <ProcessMenu
           steps={steg}
           onClick={oppdaterProsessPanelIUrl}
-          stepArrowContainerStyle={styles.stepArrowContainer}
+          stepArrowContainerStyle={styles['stepArrowContainer']}
         />
       </div>
       <ProsessMenyProvider

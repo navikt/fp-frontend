@@ -25,9 +25,9 @@ export const OppgaveReservasjonForlengetModal = ({ oppgave, closeModal }: Props)
       onClose={closeModal as () => void}
     >
       <NavModal.Body>
-        <HStack gap="space-20" align="center" className={styles.padding}>
+        <HStack gap="space-20" align="center" className={styles['padding']}>
           <CheckmarkCircleFillIcon
-            className={styles.image}
+            className={styles['image']}
             title={intl.formatMessage({ id: 'OppgaveReservasjonForlengetModal.Reservert' })}
           />
           <VStack gap="space-4">

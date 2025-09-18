@@ -55,7 +55,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
 
     await userEvent.click(screen.getByText('Avbryt'));
 
-    expect(await screen.getAllByRole('button')).toHaveLength(1);
+    expect(screen.getAllByRole('button')).toHaveLength(1);
   });
 
   it('skal overstyre og fylle ut medlemskapsvilkåret ikke er oppfylt og så lagre', async () => {

@@ -88,7 +88,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
 
   const erVilkarOk = formMethods.watch('erVilkarOk');
 
-  const antallDagerSoknadLevertForSent = soknad?.søknadsfrist?.dagerOversittetFrist;
+  const antallDagerSoknadLevertForSent = soknad.søknadsfrist.dagerOversittetFrist;
 
   return (
     <RhfForm
@@ -103,7 +103,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
           </Heading>
           <span className="typo-normal">
             <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart1" />
-            <span className={styles.days}>
+            <span className={styles['days']}>
               <FormattedMessage
                 id="ErSoknadsfristVilkaretOppfyltForm.ApplicationReceivedPart2"
                 values={{ numberOfDays: antallDagerSoknadLevertForSent }}
@@ -116,11 +116,11 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
           </span>
         </VStack>
         <HStack justify="space-between">
-          <Box.New className={styles.panel}>
+          <Box.New className={styles['panel']}>
             <Heading size="small" level="3">
               {intl.formatMessage({ id: 'ErSoknadsfristVilkaretOppfyltForm.Consider' })}
             </Heading>
-            <ul className={styles.hyphen}>
+            <ul className={styles['hyphen']}>
               <li>
                 <FormattedMessage id="ErSoknadsfristVilkaretOppfyltForm.Question1" />
               </li>

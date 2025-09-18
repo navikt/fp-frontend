@@ -36,25 +36,25 @@ export const OppgaveTabell = ({ velgOppgaveOgHentJournalpost, navAnsatt, reserve
     <Table>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell className={styles.headerText}>
+          <Table.HeaderCell className={styles['headerText']}>
             <FormattedMessage id="Oppgavetabell.Opprettet" />
           </Table.HeaderCell>
-          <Table.HeaderCell className={styles.headerText}>
+          <Table.HeaderCell className={styles['headerText']}>
             <FormattedMessage id="Oppgavetabell.YtelseType" />
           </Table.HeaderCell>
-          <Table.HeaderCell className={styles.headerText}>
+          <Table.HeaderCell className={styles['headerText']}>
             <FormattedMessage id="Oppgavetabell.Beskrivelse" />
           </Table.HeaderCell>
-          <Table.HeaderCell className={styles.headerText}>
+          <Table.HeaderCell className={styles['headerText']}>
             <FormattedMessage id="Oppgavetabell.Saksbehandler" />
           </Table.HeaderCell>
-          <Table.HeaderCell className={styles.headerText}>
+          <Table.HeaderCell className={styles['headerText']}>
             <FormattedMessage id="Oppgavetabell.Bruker" />
           </Table.HeaderCell>
-          <Table.HeaderCell className={styles.headerText}>
+          <Table.HeaderCell className={styles['headerText']}>
             <FormattedMessage id="Oppgavetabell.Frist" />
           </Table.HeaderCell>
-          <Table.HeaderCell className={styles.headerText}>
+          <Table.HeaderCell className={styles['headerText']}>
             <FormattedMessage id="Oppgavetabell.Enhet" />
           </Table.HeaderCell>
           <Table.HeaderCell />

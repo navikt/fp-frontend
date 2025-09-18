@@ -54,6 +54,7 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, isForeldre
   } = usePanelDataContext<AksjonspunktData>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
 

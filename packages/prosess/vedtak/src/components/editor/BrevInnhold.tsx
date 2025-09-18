@@ -30,7 +30,7 @@ export const BrevInnhold = ({
 }: Props) => {
   const { isReadOnly, fagsak } = usePanelDataContext();
 
-  const harPraksisUtsettelse = !!fagsak.fagsakMarkeringer?.some(
+  const harPraksisUtsettelse = fagsak.fagsakMarkeringer.some(
     markering => markering.fagsakMarkering === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
   );
 
@@ -39,15 +39,15 @@ export const BrevInnhold = ({
 
   return (
     <>
-      <div className={styles.dokument}>
+      <div className={styles['dokument']}>
         <div className="brev-wrapper">
           <style>{` ${brevStiler} `}</style>
-          <div className={styles.logo} dangerouslySetInnerHTML={{ __html: navLogo }} />
-          <div className={styles.header} dangerouslySetInnerHTML={{ __html: header }} />
+          <div className={styles['logo']} dangerouslySetInnerHTML={{ __html: navLogo }} />
+          <div className={styles['header']} dangerouslySetInnerHTML={{ __html: header }} />
           <div id="content">
-            <div id={EDITOR_HOLDER_ID} className={styles.redigerbartInnhold} />
+            <div id={EDITOR_HOLDER_ID} className={styles['redigerbartInnhold']} />
           </div>
-          {!harPraksisUtsettelse && <div className={styles.footer} dangerouslySetInnerHTML={{ __html: footer }} />}
+          {!harPraksisUtsettelse && <div className={styles['footer']} dangerouslySetInnerHTML={{ __html: footer }} />}
         </div>
       </div>
       <footer>

@@ -20,7 +20,7 @@ const formatText = (intl: IntlShape, saksbehandler?: SaksbehandlerProfil): strin
     return intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesIkke' });
   }
 
-  return saksbehandler ? `${saksbehandler.navn}` : '';
+  return `${saksbehandler.navn}`;
 };
 
 type SøkFormValues = {
@@ -75,7 +75,7 @@ export const FlyttReservasjonModal = ({
 
   return (
     <NavModal
-      className={styles.modal}
+      className={styles['modal']}
       open
       aria-label={intl.formatMessage({ id: 'FlyttReservasjonModal.FlyttReservasjon' })}
       onClose={closeModal}
@@ -130,7 +130,7 @@ export const FlyttReservasjonModal = ({
             />
             <HStack gap="space-8" justify="end">
               <Button
-                className={styles.cancelButton}
+                className={styles['cancelButton']}
                 size="small"
                 variant="secondary"
                 onClick={closeModal}
@@ -139,7 +139,7 @@ export const FlyttReservasjonModal = ({
                 <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
               </Button>
               <Button
-                className={styles.submitButton}
+                className={styles['submitButton']}
                 size="small"
                 variant="primary"
                 disabled={!saksbehandler || !begrunnelseValue || begrunnelseValue.length < 3}

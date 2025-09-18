@@ -14,7 +14,7 @@ interface Props {
 
 export const Boks = ({ harBorderTop = false, harBorderLeft = true, children }: Props) => (
   <div
-    className={classNames(styles.boks, {
+    className={classNames(styles['boks'], {
       harBorderLeft,
       harBorderTop,
     })}

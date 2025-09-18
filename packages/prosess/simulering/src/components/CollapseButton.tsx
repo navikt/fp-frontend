@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const CollapseButton = ({ toggleDetails, showDetails, mottakerIndex }: Props) => (
-  <button type="button" className={styles.invisibleButton} onClick={() => toggleDetails(mottakerIndex)}>
+  <button type="button" className={styles['invisibleButton']} onClick={() => toggleDetails(mottakerIndex)}>
     <FormattedMessage id={buttonText(showDetails)} />
     {showDetails ? <ChevronUpIcon /> : <ChevronDownIcon />}
   </button>

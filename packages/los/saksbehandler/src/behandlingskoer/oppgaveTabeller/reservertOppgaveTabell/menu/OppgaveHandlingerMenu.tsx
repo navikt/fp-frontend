@@ -46,7 +46,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
     onSuccess: () => {
       setVisForlengetReservasjonModal(true);
 
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.RESERVERTE_OPPGAVER],
       });
 
@@ -58,7 +58,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
     mutationFn: (values: { brukerIdent: string; begrunnelse: string }) =>
       flyttReservasjonPost(oppgave.id, values.brukerIdent, values.begrunnelse),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.RESERVERTE_OPPGAVER],
       });
     },
@@ -68,7 +68,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
     mutationFn: () => forlengReservasjonPost(oppgave.id),
     onSuccess: () => {
       setVisForlengetReservasjonModal(true);
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.RESERVERTE_OPPGAVER],
       });
     },
@@ -77,7 +77,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
   const { mutate: opphevOppgavereservasjon } = useMutation({
     mutationFn: () => opphevReservasjon(oppgave.id),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.RESERVERTE_OPPGAVER],
       });
     },
@@ -101,7 +101,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
             variant="tertiary-neutral"
             icon={
               <MenuElipsisVerticalCircleIcon
-                className={styles.image}
+                className={styles['image']}
                 title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.OppgaveHandlinger' })}
               />
             }

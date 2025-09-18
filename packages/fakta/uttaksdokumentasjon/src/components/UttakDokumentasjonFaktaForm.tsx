@@ -41,7 +41,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
 
   const bekreft = (begrunnelse: string) => {
     setErBekreftKnappTrykket(true);
-    submitCallback({
+    void submitCallback({
       kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
       vurderingBehov: dokBehov,
       begrunnelse,
@@ -64,7 +64,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
 
   const begrunnelse = formMethods.watch('begrunnelse');
 
-  const isSubmittable = submittable && dokBehov?.every(a => a.vurdering) && !!begrunnelse;
+  const isSubmittable = submittable && dokBehov.every(a => a.vurdering) && !!begrunnelse;
 
   const [isDirty, setIsDirty] = useState<boolean>(false);
 

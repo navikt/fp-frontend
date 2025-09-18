@@ -78,7 +78,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
 
   return (
     <div
-      className={styles.container}
+      className={styles['container']}
       style={{ height: `calc(100vh - ${top}px)` }}
       ref={el => {
         if (el) {
@@ -87,12 +87,12 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
       }}
     >
       {sorterteNotater.length > 0 && (
-        <div className={styles.thechats} ref={bottomEl}>
+        <div className={styles['thechats']} ref={bottomEl}>
           <VStack gap="space-8">
             {sorterteNotater.map((notat, index) => (
-              <div key={notat.opprettetTidspunkt} className={index === 0 ? styles.marginTop : undefined}>
+              <div key={notat.opprettetTidspunkt} className={index === 0 ? styles['marginTop'] : undefined}>
                 <Chat
-                  className={styles.chat}
+                  className={styles['chat']}
                   name={
                     saksbehandlerNavn === notat.opprettetAv
                       ? intl.formatMessage({ id: 'NotatPanel.Du' })
@@ -101,7 +101,9 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
                   timestamp={formatTimestamp(intl, notat.opprettetTidspunkt)}
                   position={saksbehandlerNavn === notat.opprettetAv ? 'right' : 'left'}
                 >
-                  <Chat.Bubble className={saksbehandlerNavn === notat.opprettetAv ? styles.bubbleSelf : styles.bubble}>
+                  <Chat.Bubble
+                    className={saksbehandlerNavn === notat.opprettetAv ? styles['bubbleSelf'] : styles['bubble']}
+                  >
                     {notat.notat}
                   </Chat.Bubble>
                 </Chat>
@@ -111,14 +113,14 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
         </div>
       )}
       {sorterteNotater.length === 0 && (
-        <div className={styles.textAlign}>
-          <BodyShort className={styles.ingen}>
+        <div className={styles['textAlign']}>
+          <BodyShort className={styles['ingen']}>
             <FormattedMessage id="NotatPanel.Ingen" />
           </BodyShort>
         </div>
       )}
       {kanSaksbehandle && (
-        <div className={styles.form}>
+        <div className={styles['form']}>
           <RhfForm formMethods={formMethods} onSubmit={lagre}>
             <VStack gap="space-16">
               <RhfTextarea
@@ -141,7 +143,7 @@ export const NotatPanel = ({ saksnummer, notater, lagreNotat, saksbehandlerNavn,
         </div>
       )}
       {!kanSaksbehandle && (
-        <div className={styles.alert}>
+        <div className={styles['alert']}>
           <Alert variant="info">
             <FormattedMessage id="NotatPanel.KunSaksbehandler" />
           </Alert>

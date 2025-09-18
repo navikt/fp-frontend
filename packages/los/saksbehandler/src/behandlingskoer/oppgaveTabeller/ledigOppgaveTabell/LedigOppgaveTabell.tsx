@@ -20,20 +20,20 @@ export const LedigOppgaveTabell = ({ reserverOppgave, antallOppgaver = 0, valgtS
   const { oppgaverTilBehandling, nyeBehandlinger, isMaxPollingAttemptsReached } = useOppgavePolling(valgtSakslisteId);
 
   return (
-    <VStack gap="space-16" className={styles.tabell}>
+    <VStack gap="space-16" className={styles['tabell']}>
       {isMaxPollingAttemptsReached && <BehandlingPollingTimoutModal />}
-      <VStack gap="space-8" className={styles.padding}>
+      <VStack gap="space-8" className={styles['padding']}>
         <HStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="LedigOppgaveTabell.DineNesteSaker" />
           </Label>
-          <BodyShort size="small" className={styles.grayout}>
+          <BodyShort size="small" className={styles['grayout']}>
             <FormattedMessage id="LedigOppgaveTabell.DineNesteSakerAntall" values={{ totaltAntall: antallOppgaver }} />
           </BodyShort>
         </HStack>
       </VStack>
       {oppgaverTilBehandling.length === 0 && (
-        <BodyShort size="small" className={styles.padding}>
+        <BodyShort size="small" className={styles['padding']}>
           <FormattedMessage id="LedigOppgaveTabell.IngenOppgaver" tagName="i" />
         </BodyShort>
       )}

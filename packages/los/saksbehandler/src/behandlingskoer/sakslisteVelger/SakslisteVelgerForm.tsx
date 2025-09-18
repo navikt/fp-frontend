@@ -223,7 +223,7 @@ export const SakslisteVelgerForm = ({
 
   if (sakslister.length === 0) {
     return (
-      <VStack gap="space-8" className={styles.container}>
+      <VStack gap="space-8" className={styles['container']}>
         <Heading size="xsmall" level="2">
           <FormattedMessage id="SakslisteVelgerForm.Saksliste" />
         </Heading>
@@ -237,7 +237,7 @@ export const SakslisteVelgerForm = ({
   const sorterteSaksbehandlere = saksbehandlere?.toSorted((s1, s2) => s1.navn.localeCompare(s2.navn));
 
   return (
-    <RhfForm formMethods={formMethods} className={styles.container}>
+    <RhfForm formMethods={formMethods} className={styles['container']}>
       <VStack gap="space-24">
         <HStack justify="space-between" align="end">
           <RhfSelect
@@ -249,7 +249,7 @@ export const SakslisteVelgerForm = ({
                 {saksliste.navn}
               </option>
             ))}
-            className={styles.koInput}
+            className={styles['koInput']}
           />
           <Button
             variant="tertiary"
@@ -261,7 +261,7 @@ export const SakslisteVelgerForm = ({
             <FormattedMessage id="SakslisteVelgerForm.FilterForKoen" />
           </Button>
         </HStack>
-        <div className={visKøFiltere ? styles.active : styles.hidden}>
+        <div className={visKøFiltere ? styles['active'] : styles['hidden']}>
           {visKøFiltere && (
             <VStack gap="space-24">
               {valgtSaksliste && (
@@ -272,7 +272,7 @@ export const SakslisteVelgerForm = ({
                         <Label size="small">
                           <FormattedMessage id="SakslisteVelgerForm.Stonadstype" />
                         </Label>
-                        <SackKronerIcon aria-hidden className={styles.grayout} />
+                        <SackKronerIcon aria-hidden className={styles['grayout']} />
                       </HStack>
                       {valgtSaksliste.fagsakYtelseTyper.length > 0 ? (
                         <VStack gap="space-4">
@@ -293,7 +293,7 @@ export const SakslisteVelgerForm = ({
                         <Label size="small">
                           <FormattedMessage id="SakslisteVelgerForm.Behandlingstype" />
                         </Label>
-                        <DocPencilIcon aria-hidden className={styles.grayout} />
+                        <DocPencilIcon aria-hidden className={styles['grayout']} />
                       </HStack>
                       {valgtSaksliste.behandlingTyper.length > 0 ? (
                         <VStack gap="space-4">
@@ -312,7 +312,7 @@ export const SakslisteVelgerForm = ({
                         <Label size="small">
                           <FormattedMessage id="SakslisteVelgerForm.AndreKriterier" />
                         </Label>
-                        <FunnelIcon aria-hidden className={styles.grayout} />
+                        <FunnelIcon aria-hidden className={styles['grayout']} />
                       </HStack>
                       <AndreKriterier saksliste={valgtSaksliste} />
                     </VStack>
@@ -323,7 +323,7 @@ export const SakslisteVelgerForm = ({
                         <Label size="small">
                           <FormattedMessage id="SakslisteVelgerForm.Sortering" />
                         </Label>
-                        <ArrowsUpDownIcon aria-hidden className={styles.grayout} />
+                        <ArrowsUpDownIcon aria-hidden className={styles['grayout']} />
                       </HStack>
                       <BodyShort>{getSorteringsnavn(intl, køSorteringTyper, valgtSaksliste)}</BodyShort>
                     </VStack>
@@ -334,7 +334,7 @@ export const SakslisteVelgerForm = ({
                 <Label size="small">
                   <FormattedMessage id="SakslisteVelgerForm.AndreSomJobber" />
                 </Label>
-                <HStack gap="space-8" className={styles.paddingBottom}>
+                <HStack gap="space-8" className={styles['paddingBottom']}>
                   {sorterteSaksbehandlere
                     ?.slice(
                       0,
@@ -348,7 +348,7 @@ export const SakslisteVelgerForm = ({
                         key={s.brukerIdent.brukerIdent}
                       >
                         <HStack gap="space-8" align="center">
-                          <PersonHeadsetIcon aria-hidden className={styles.grayout} />
+                          <PersonHeadsetIcon aria-hidden className={styles['grayout']} />
                           <BodyShort>{s.navn}</BodyShort>
                         </HStack>
                       </Box.New>
@@ -358,7 +358,7 @@ export const SakslisteVelgerForm = ({
                       {!visAlleSaksbehandlere && (
                         <Box.New background="neutral-moderateA" padding="2" borderRadius="full">
                           <HStack gap="space-8" align="center">
-                            <PlusIcon aria-hidden className={styles.grayout} />
+                            <PlusIcon aria-hidden className={styles['grayout']} />
                             <BodyShort>
                               <FormattedMessage
                                 id="SakslisteVelgerForm.Andre"

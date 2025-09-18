@@ -61,7 +61,7 @@ export const DokumentasjonFaktaForm = ({
       title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
     >
-      <VStack gap="space-16" className={styles.container}>
+      <VStack gap="space-16" className={styles['container']}>
         <RhfDatepicker
           name="omsorgsovertakelseDato"
           control={control}
@@ -101,7 +101,7 @@ export const DokumentasjonFaktaForm = ({
             />
             {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
               <ExclamationmarkTriangleFillIcon
-                className={styles.image}
+                className={styles['image']}
                 title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
               />
             )}
@@ -152,6 +152,7 @@ const isAdopsjonFodelsedatoerEdited =
   (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, adopsjon: AdopsjonFamilieHendelse) =>
   (id: string): boolean => {
     const editedStatus = diff(soknad.adopsjonFodelsedatoer, adopsjon.fødselsdatoer);
-    // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output
+    // @ts-expect-error -- usikker hva denne går ut på
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return editedStatus ? editedStatus[id] : false;
   };

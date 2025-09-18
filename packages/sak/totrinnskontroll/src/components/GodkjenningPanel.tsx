@@ -75,7 +75,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
         </HStack>
       </RhfRadioGroup>
       {totrinnskontrollGodkjent === false && (
-        <ArrowBox alignOffset={totrinnskontrollGodkjent ? 1 : 110}>
+        <ArrowBox alignOffset={110}>
           <VStack gap="space-8">
             <Label size="small">
               <FormattedMessage id="AksjonspunktGodkjenningArsakPanel.Arsak" />

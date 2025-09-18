@@ -35,9 +35,7 @@ const finnesUttakPåArbfor = (arbfor: ArbeidsforholdFodselOgTilrettelegging): bo
 };
 
 const finnesInnvilgetUttak = (svangerskapspengerTilrettelegging: FodselOgTilrettelegging): boolean =>
-  svangerskapspengerTilrettelegging?.arbeidsforholdListe
-    ? svangerskapspengerTilrettelegging.arbeidsforholdListe.some(arbfor => finnesUttakPåArbfor(arbfor))
-    : false;
+  svangerskapspengerTilrettelegging.arbeidsforholdListe.some(arbfor => finnesUttakPåArbfor(arbfor));
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -78,6 +76,7 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
   } = usePanelDataContext<BekreftSvangerskapspengervilkarAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
 

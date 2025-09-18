@@ -58,7 +58,7 @@ export const OverstyringPanel = ({
 
   return (
     <AksjonspunktBox
-      className={styles.aksjonspunktMargin}
+      className={styles['aksjonspunktMargin']}
       erAksjonspunktApent={erOverstyrt}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >
@@ -84,7 +84,7 @@ export const OverstyringPanel = ({
         {erOverstyrt && (
           <>
             <HStack gap="space-8">
-              <ExclamationmarkTriangleFillIcon className={styles.exclamationmarkIcon} />
+              <ExclamationmarkTriangleFillIcon className={styles['exclamationmarkIcon']} />
               <BodyShort size="small">{intl.formatMessage({ id: 'OverstyringPanel.Unntakstilfeller' })}</BodyShort>
             </HStack>
             <HStack gap="space-8">

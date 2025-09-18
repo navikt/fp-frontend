@@ -52,7 +52,7 @@ export const BehandlingInformasjon = ({
     <Box.New borderWidth="2" borderColor="neutral-subtle" borderRadius="large" padding="3">
       <VStack gap="space-4">
         <HStack gap="space-16">
-          <div className={styles.arsakPadding}>
+          <div className={styles['arsakPadding']}>
             <Label size="small">{behandlingType.find(bt => bt.kode === behandling.type)?.navn ?? ''}</Label>
           </div>
           {(behandling.type === BehandlingTypeEnum.REVURDERING || behandling.type === BehandlingTypeEnum.KLAGE) &&
@@ -78,29 +78,29 @@ export const BehandlingInformasjon = ({
           <Spacer />
           {behandling.gjeldendeVedtak && (
             <StarFillIcon
-              className={styles.starImage}
+              className={styles['starImage']}
               title={intl.formatMessage({ id: 'BehandlingPickerItemContent.GjeldendeVedtak' })}
             />
           )}
           {withChevronDown && (
             <ChevronDownIcon
               title={intl.formatMessage({ id: 'BehandlingPickerItemContent.Open' })}
-              className={styles.chevronImage}
+              className={styles['chevronImage']}
             />
           )}
           {withChevronUp && (
             <ChevronUpIcon
               title={intl.formatMessage({ id: 'BehandlingPickerItemContent.Close' })}
-              className={styles.chevronImage}
+              className={styles['chevronImage']}
             />
           )}
         </HStack>
         <div>
-          <hr className={styles.line} />
+          <hr className={styles['line']} />
         </div>
         <VStack gap="space-4">
           <HStack gap="space-4">
-            <div className={styles.firstColumnWidth}>
+            <div className={styles['firstColumnWidth']}>
               <BodyShort size="small">
                 <FormattedMessage id="BehandlingPickerItemContent.Behandlingstatus" />
               </BodyShort>
@@ -113,7 +113,7 @@ export const BehandlingInformasjon = ({
           </HStack>
           <VStack gap="space-16">
             <HStack gap="space-4">
-              <div className={styles.firstColumnWidth}>
+              <div className={styles['firstColumnWidth']}>
                 <BodyShort size="small">
                   <FormattedMessage id="BehandlingPickerItemContent.Resultat" />
                 </BodyShort>
@@ -125,7 +125,7 @@ export const BehandlingInformasjon = ({
               </div>
             </HStack>
             <HStack gap="space-4">
-              <div className={styles.firstColumnWidth}>
+              <div className={styles['firstColumnWidth']}>
                 <BodyShort size="small">
                   <FormattedMessage id="BehandlingPickerItemContent.Opprettet" />
                 </BodyShort>
@@ -138,7 +138,7 @@ export const BehandlingInformasjon = ({
             </HStack>
           </VStack>
           <HStack gap="space-4">
-            <div className={styles.firstColumnWidth}>
+            <div className={styles['firstColumnWidth']}>
               <BodyShort size="small">
                 <FormattedMessage id="BehandlingPickerItemContent.Avsluttet" />
               </BodyShort>
@@ -150,12 +150,12 @@ export const BehandlingInformasjon = ({
                 </BodyShort>
               )}
             </div>
-            <div className={styles.pushRightCorner}>
-              <BodyShort size="small" className={styles.inline}>
+            <div className={styles['pushRightCorner']}>
+              <BodyShort size="small" className={styles['inline']}>
                 <FormattedMessage id="BehandlingPickerItemContent.Enhet" />
               </BodyShort>
               <Tooltip content={behandling.behandlendeEnhetNavn} placement="left">
-                <BodyShort size="small" className={styles.inline}>
+                <BodyShort size="small" className={styles['inline']}>
                   {behandling.behandlendeEnhetId}
                 </BodyShort>
               </Tooltip>

@@ -89,7 +89,7 @@ export const ManglendeInntektsmeldingForm = ({
     <RhfForm formMethods={formMethods} onSubmit={lagre}>
       <VStack gap="space-16">
         {!erEttArbeidsforhold && inntektsmeldingerForRad.length > 0 && (
-          <div className={styles.alertStripe}>
+          <div className={styles['alertStripe']}>
             <Alert variant="info">
               <FormattedMessage id="InntektsmeldingInnhentesForm.InnehentAlle" />
             </Alert>
@@ -104,16 +104,16 @@ export const ManglendeInntektsmeldingForm = ({
               <QuestionmarkDiamondIcon
                 ref={svgRef}
                 onClick={toggleHjelpetekst}
-                className={styles.svg}
+                className={styles['svg']}
                 title={intl.formatMessage({ id: 'InntektsmeldingInnhentesForm.AltHjelpetekst' })}
               />
               <Popover
                 open={openState}
                 onClose={toggleHjelpetekst}
                 anchorEl={svgRef.current}
-                className={styles.hjelpetekst}
+                className={styles['hjelpetekst']}
               >
-                <Popover.Content className={styles.hjelpetekstInnhold}>
+                <Popover.Content className={styles['hjelpetekstInnhold']}>
                   <VStack gap="space-16">
                     <BodyShort>
                       <FormattedMessage id="InntektsmeldingInnhentesForm.HjelpetekstDel1" />

@@ -21,7 +21,7 @@ export const HenlagtBehandlingModal = ({ showModal, closeEvent }: Props) => {
 
   return (
     <Modal
-      className={styles.modal}
+      className={styles['modal']}
       open={showModal}
       aria-label={intl.formatMessage({ id: 'HenlagtBehandlingModal.ModalDescription' })}
       onClose={closeEvent}
@@ -30,7 +30,7 @@ export const HenlagtBehandlingModal = ({ showModal, closeEvent }: Props) => {
         <HStack justify="space-between">
           <HStack gap="space-12">
             <CheckmarkCircleFillIcon
-              className={styles.image}
+              className={styles['image']}
               title={intl.formatMessage({ id: 'HenlagtBehandlingModal.Henlagt' })}
             />
             <VStack gap="space-4">

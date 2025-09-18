@@ -25,7 +25,7 @@ export const BeregningsresultatEngangsstonadForm = ({
   },
 }: Props) => {
   return (
-    <VStack gap="space-16" className={styles.container}>
+    <VStack gap="space-16" className={styles['container']}>
       <Heading size="small" level="2">
         <FormattedMessage id="BeregningEngangsstonadForm.Beregning" />
       </Heading>
@@ -35,14 +35,14 @@ export const BeregningsresultatEngangsstonadForm = ({
             <FormattedMessage id="BeregningEngangsstonadForm.Sats" />
           </Detail>
           <Label size="small">
-            {behandlingResultatstruktur?.satsVerdi ? formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi) : '-'}
+            {behandlingResultatstruktur.satsVerdi ? formatCurrencyWithKr(behandlingResultatstruktur.satsVerdi) : '-'}
           </Label>
         </HStack>
         <HStack justify="space-between">
           <Detail>
             <FormattedMessage id="BeregningEngangsstonadForm.AntallBarn" />
           </Detail>
-          <Label size="small">{behandlingResultatstruktur?.antallBarn ?? '-'}</Label>
+          <Label size="small">{behandlingResultatstruktur.antallBarn}</Label>
         </HStack>
         <AvsnittSkiller dividerParagraf={true} />
         <HStack justify="space-between">
@@ -50,7 +50,7 @@ export const BeregningsresultatEngangsstonadForm = ({
             <FormattedMessage id="BeregningEngangsstonadForm.BeregnetEngangsstonad" />
           </Detail>
           <Label size="small">
-            {behandlingResultatstruktur?.beregnetTilkjentYtelse
+            {behandlingResultatstruktur.beregnetTilkjentYtelse
               ? formatCurrencyWithKr(behandlingResultatstruktur.beregnetTilkjentYtelse)
               : '-'}
           </Label>

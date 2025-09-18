@@ -39,7 +39,7 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
         open
         aria-label={intl.formatMessage({ id: 'DelOppPeriodeModalImpl.ModalDescription' })}
         onClose={cancel}
-        className={styles.modal}
+        className={styles['modal']}
       >
         <Modal.Header>
           <Heading size="small" level="2">
@@ -67,7 +67,7 @@ export const SplittPeriodeModal = ({ fomDato, tomDato, submit, cancel }: Props) 
                 toDate={dayjs(tomDato).toDate()}
               />
               {dato && (
-                <BodyShort size="small" className={styles.dager}>
+                <BodyShort size="small" className={styles['dager']}>
                   {numberOfDaysAndWeeks.formattedString}
                 </BodyShort>
               )}

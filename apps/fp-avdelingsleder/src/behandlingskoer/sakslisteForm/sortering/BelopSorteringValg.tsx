@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-argument -- [JOHANNES] vent på typet form */
+
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -29,13 +31,13 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
     mutationFn: (valuesToStore: { fra: number; til: number }) =>
       lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },
@@ -64,21 +66,21 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
         <RhfTextField
           name="fra"
           control={control}
-          className={styles.dato}
+          className={styles['dato']}
           validate={[hasValidPosOrNegInteger]}
           onChange={value => lagreFraDebounce(value)}
         />
-        <Detail className={styles.beløp}>
+        <Detail className={styles['beløp']}>
           <FormattedMessage id="SorteringVelger.Valuta" />
         </Detail>
         <RhfTextField
           name="til"
           control={control}
-          className={styles.dato}
+          className={styles['dato']}
           validate={[hasValidPosOrNegInteger]}
           onChange={value => lagreTilDebounce(value)}
         />
-        <Detail className={styles.beløp}>
+        <Detail className={styles['beløp']}>
           <FormattedMessage id="SorteringVelger.Valuta" />
         </Detail>
       </HStack>

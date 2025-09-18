@@ -82,9 +82,9 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
   const åpneModal = () => settSkalVisePåVentModal(true);
 
   const håndterSubmitFraModal = (modalValues: ModalFormValues) => {
-    formMethods.trigger().then(isValid => {
+    void formMethods.trigger().then(isValid => {
       if (isValid) {
-        submitCallback({
+        void submitCallback({
           ...formVerdier,
           ...modalValues,
         });
@@ -101,7 +101,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
       fritekst: formVerdier.fritekst ?? ' ',
     });
   };
-  const ventearsaker = alleKodeverk['Venteårsak'] ?? [];
+  const ventearsaker = alleKodeverk['Venteårsak'];
   const language = getLanguageFromSprakkode(behandling.språkkode);
   return (
     <>
@@ -110,7 +110,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
           <Heading size="small" level="2">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
           </Heading>
-          {!isReadOnly && aksjonspunkterForPanel[0].status === AksjonspunktStatus.OPPRETTET && (
+          {!isReadOnly && aksjonspunkterForPanel[0]?.status === AksjonspunktStatus.OPPRETTET && (
             <>
               <AksjonspunktHelpTextHTML>
                 <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />

@@ -5,7 +5,7 @@ import type { ReactRenderer } from '@storybook/react';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
 export const withThemeDecorator: DecoratorFunction<ReactRenderer> = (Story, context) => {
-  const theme = context.globals['theme'];
+  const theme = context.globals['theme'] as string;
 
   useEffect(() => {
     // Dette kan sikkert gjerast på ein bedre måte

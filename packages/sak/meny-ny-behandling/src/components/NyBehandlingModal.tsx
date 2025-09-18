@@ -187,7 +187,7 @@ export const NyBehandlingModal = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={onSubmit}>
       <Modal
-        className={styles.modal}
+        className={styles['modal']}
         open
         aria-label={intl.formatMessage({ id: 'MenyNyBehandlingIndex.ModalDescription' })}
         onClose={cancelEvent}
@@ -205,7 +205,7 @@ export const NyBehandlingModal = ({
               label=""
               validate={[required]}
               selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
-              className={styles.typeBredde}
+              className={styles['typeBredde']}
             />
             {valgtBehandlingTypeKode === BehandlingTypeEnum.FORSTEGANGSSOKNAD && (
               <RhfCheckbox
@@ -221,7 +221,7 @@ export const NyBehandlingModal = ({
                 label=""
                 hideLabel
                 validate={[required]}
-                className={styles.arsakBredde}
+                className={styles['arsakBredde']}
                 selectValues={behandlingArsakTyper.map(b => (
                   <option key={b.kode} value={b.kode}>
                     {b.navn}

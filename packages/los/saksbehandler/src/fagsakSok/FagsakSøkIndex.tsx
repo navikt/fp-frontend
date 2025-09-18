@@ -71,7 +71,7 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       if (fagsakerResultat.length === 1) {
         if (oppgaver.length === 1) {
           velgFagsakOperasjoner(oppgaver[0], false);
-        } else if (oppgaver.length === 0 && fagsakerResultat) {
+        } else if (oppgaver.length === 0) {
           åpneFagsak(fagsakerResultat[0].saksnummer);
         }
       }
@@ -84,18 +84,15 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
     mutationFn: getReservasjonsstatus,
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
   const searchResultAccessDenied =
     //@ts-expect-error response.data når ein refaktorerar feilhåndteringa
-    fagsakError instanceof HTTPError && fagsakError.response.status === 403 ? fagsakError.response?.data : undefined;
+    fagsakError instanceof HTTPError && fagsakError.response.status === 403 ? fagsakError.response.data : undefined;
 
   const erSøkFerdig = isSøkFagsakSuccess && !isHentOppgaverPending;
 
   const goToFagsakEllerApneModal = (oppgave: Oppgave, reservasjonStatus?: ReservasjonStatus) => {
-    if (
-      reservasjonStatus &&
-      (!reservasjonStatus.erReservert ||
-        (reservasjonStatus.erReservert && reservasjonStatus.erReservertAvInnloggetBruker))
-    ) {
+    if (reservasjonStatus && (!reservasjonStatus.erReservert || reservasjonStatus.erReservertAvInnloggetBruker)) {
       åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
     } else if (reservasjonStatus?.erReservert && !reservasjonStatus.erReservertAvInnloggetBruker) {
       setReservertOppgave(oppgave);
@@ -109,14 +106,14 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
       setReservertAvAnnenSaksbehandler(true);
     } else if (!skalReservere) {
       if (skalSjekkeOmReservert) {
-        hentReservasjonsstatus(oppgave.id).then(status => {
+        void hentReservasjonsstatus(oppgave.id).then(status => {
           goToFagsakEllerApneModal(oppgave, status);
         });
       } else {
         åpneFagsak(oppgave.saksnummer, oppgave.behandlingId);
       }
     } else {
-      reserverOppgave(oppgave.id).then(data => {
+      void reserverOppgave(oppgave.id).then(data => {
         goToFagsakEllerApneModal(oppgave, data);
       });
     }
@@ -140,13 +137,14 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
   return (
     <>
       <FagsakSøk
-        fagsaker={fagsaker ?? []}
-        fagsakOppgaver={fagsakOppgaver ?? []}
+        fagsaker={fagsaker}
+        fagsakOppgaver={fagsakOppgaver}
         searchFagsakCallback={sokFagsakFn}
         searchResultReceived={erSøkFerdig}
         åpneFagsak={åpneFagsak}
         selectOppgaveCallback={reserverOppgaveOgApne}
         searchStarted={isHentOppgaverPending || isSøkFagsakPending}
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         searchResultAccessDenied={searchResultAccessDenied}
         resetSearch={resetFagsakSøk}
         kanSaksbehandle={kanSaksbehandle}

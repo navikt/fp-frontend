@@ -49,6 +49,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsa
   } = usePanelDataContext<AvklarOpptjeningsvilkaretAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
 
@@ -63,7 +64,7 @@ export const OpptjeningVilkarAksjonspunktPanel = ({ lovReferanse, status, fastsa
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values));
 
   const validerAtEnKunKanVelgeOppfyltNårEnHarPerioder = (verdi: string | number | boolean) => {
-    if (fastsattOpptjening.fastsattOpptjeningAktivitetList?.length === 0 && verdi === true) {
+    if (fastsattOpptjening.fastsattOpptjeningAktivitetList.length === 0 && verdi === true) {
       return intl.formatMessage({ id: 'OpptjeningVilkarAksjonspunktPanel.KanIkkeVelgeOppfylt' });
     }
     return null;

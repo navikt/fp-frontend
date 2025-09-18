@@ -42,7 +42,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
           <FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />
         </BodyShort>
         <div>
-          <hr className={styles.hr} />
+          <hr className={styles['hr']} />
         </div>
         <RhfRadioGroup
           name="ektefellesBarn"
@@ -67,7 +67,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
 };
 
 EktefelleFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHendelse): FormValues => ({
-  ektefellesBarn: adopsjon && adopsjon.ektefellesBarn !== null ? adopsjon.ektefellesBarn : undefined,
+  ektefellesBarn: adopsjon.ektefellesBarn,
 });
 
 EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelleAksjonspunktAp => ({

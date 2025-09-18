@@ -17,7 +17,7 @@ interface Props {
 export const Beskrivelser = ({ beskrivelser }: Props) => {
   const intl = useIntl();
 
-  const skalSkjuleResterendeBeskrivelser = beskrivelser?.length > 1;
+  const skalSkjuleResterendeBeskrivelser = beskrivelser.length > 1;
   const [erResterendeBeskrivelserSkjult, setErResterendeBeskrivelserSkjult] = useState(
     skalSkjuleResterendeBeskrivelser,
   );
@@ -27,10 +27,11 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
 
   return (
     <VStack gap="space-4">
+      {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
       {beskrivelseForVisning && <BeskrivelseVisning beskrivelse={beskrivelseForVisning} />}
       {skalSkjuleResterendeBeskrivelser && (
         <Button
-          className={styles.button}
+          className={styles['button']}
           variant="tertiary"
           size="xsmall"
           type="button"
@@ -44,7 +45,7 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
         </Button>
       )}
       {!erResterendeBeskrivelserSkjult && (
-        <VStack gap="space-12" className={styles.eldreBeskrivelser}>
+        <VStack gap="space-12" className={styles['eldreBeskrivelser']}>
           {beskrivelserSomSkjules.map(beskrivelse => (
             <BeskrivelseVisning key={beskrivelse.header + beskrivelse.kommentarer[0]} beskrivelse={beskrivelse} />
           ))}

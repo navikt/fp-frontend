@@ -97,20 +97,17 @@ const lagOptionsTilPeriodeÅrsakSelect = (
   );
 
   if (utsettelseType && utsettelseType !== '-') {
-    return filteredNyKodeArray.filter(kv => kv.uttakTyper?.includes('UTSETTELSE')).map(mapTilOption);
+    return filteredNyKodeArray.filter(kv => kv.uttakTyper.includes('UTSETTELSE')).map(mapTilOption);
   }
   return filteredNyKodeArray
-    .filter(kv => kv.uttakTyper?.includes('UTTAK'))
-    .filter(kv => periodeType === '-' || kv.valgbarForKonto?.includes(periodeType))
+    .filter(kv => kv.uttakTyper.includes('UTTAK'))
+    .filter(kv => periodeType === '-' || kv.valgbarForKonto.includes(periodeType))
     .map(mapTilOption);
 };
 
 const getFiltrerPåGyldighetForLovendringer =
   (aarsakFilter: AarsakFilter, periodeFom: string) =>
   (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
-    if (kodeItem.gyldigForLovendringer === undefined) {
-      return true;
-    }
     if (!dayjs(periodeFom).isAfter(aarsakFilter.kreverSammenhengendeUttakTom)) {
       return kodeItem.gyldigForLovendringer.includes('KREVER_SAMMENHENGENDE_UTTAK');
     }
@@ -122,9 +119,6 @@ const getFiltrerPåGyldighetForLovendringer =
 const getFiltrerPåSynlighet =
   (aarsakFilter: AarsakFilter) =>
   (kodeItem: PeriodeResultatÅrsakKodeverk): boolean => {
-    if (kodeItem.synligForRolle === undefined) {
-      return true;
-    }
     return aarsakFilter.søkerErMor
       ? kodeItem.synligForRolle.includes('MOR')
       : kodeItem.synligForRolle.includes('IKKE_MOR');
@@ -184,7 +178,7 @@ const hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling = (
   intl: IntlShape,
   erOppfylt?: boolean,
 ): string | undefined => {
-  if (utsettelseType && utsettelseType === UtsettelseArsakCode.ARBEID && erOppfylt && aktiviteter) {
+  if (utsettelseType === UtsettelseArsakCode.ARBEID && erOppfylt) {
     const prosentIArbeid = aktiviteter.reduce((total, aktivitet): number => total + (aktivitet.prosentArbeid ?? 0), 0);
     if (prosentIArbeid < 100) {
       return intl.formatMessage({ id: 'UttakActivity.MerEn100ProsentOgOgyldigUtsettlse' });
@@ -444,7 +438,7 @@ export const UttakPeriodeForm = ({
               )}
             </VStack>
             {warning && (
-              <Alert size="small" variant="info" className={styles.alert}>
+              <Alert size="small" variant="info" className={styles['alert']}>
                 {warning}
               </Alert>
             )}

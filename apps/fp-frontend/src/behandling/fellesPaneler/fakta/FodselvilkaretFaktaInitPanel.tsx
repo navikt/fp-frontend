@@ -22,7 +22,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
 
   const { behandling, fagsak } = use(BehandlingDataContext);
 
-  const skalPanelVisesIMeny = (behandling.vilkår ?? []).some(v => fodselsvilkarene.some(fv => fv === v.vilkarType));
+  const skalPanelVisesIMeny = behandling.vilkår.some(v => fodselsvilkarene.some(fv => fv === v.vilkarType));
 
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 

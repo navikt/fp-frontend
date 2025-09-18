@@ -26,7 +26,7 @@ export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAns
         velgOppgaveOgHentJournalpost(oppgave);
       }}
       shadeOnHover
-      className={styles.tabellRad}
+      className={styles['tabellRad']}
     >
       <Table.DataCell>
         <DateLabel dateString={oppgave.opprettetDato} />
@@ -69,7 +69,7 @@ export const OppgaveTabellRad = ({ oppgave, velgOppgaveOgHentJournalpost, navAns
       </Table.DataCell>
       <Table.DataCell>{oppgave.enhetId}</Table.DataCell>
       <Table.DataCell>
-        <ChevronRightIcon className={styles.nesteIkon} />
+        <ChevronRightIcon className={styles['nesteIkon']} />
       </Table.DataCell>
     </Table.Row>
   );

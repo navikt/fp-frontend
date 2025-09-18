@@ -33,7 +33,7 @@ import { UttakFaktaTable } from './UttakFaktaTable';
 
 const finnAksjonspunktTekster = (aksjonspunkter: Aksjonspunkt[], ytelsefordeling: Ytelsefordeling) =>
   aksjonspunkter.filter(erAksjonspunktÅpent).map(ap => {
-    const førsteUttaksdato = ytelsefordeling?.førsteUttaksdato ?? undefined;
+    const førsteUttaksdato = ytelsefordeling.førsteUttaksdato;
     const førsteUttak = {
       value: dateFormat(førsteUttaksdato),
     };
@@ -61,6 +61,7 @@ const leggTilAksjonspunktMarkering = (
           ap.status === AksjonspunktStatus.OPPRETTET,
       ) &&
       periode.arbeidsforhold?.arbeidsgiverReferanse &&
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
       !arbeidsgiverOpplysningerPerId[periode.arbeidsforhold?.arbeidsgiverReferanse]
     ) {
       return {
@@ -141,8 +142,7 @@ const validerPerioder = (
     ap => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
   );
 
-  return uttakPerioder.every(a => a.aksjonspunktType === undefined) &&
-    (!harApIngenPerioder || (harApIngenPerioder && uttakPerioder.length > 0))
+  return uttakPerioder.every(a => a.aksjonspunktType === undefined) && (!harApIngenPerioder || uttakPerioder.length > 0)
     ? null
     : '';
 };

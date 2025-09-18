@@ -49,7 +49,7 @@ export const VedtakFritekstPanel = ({ behandlingsresultat, språkkode, isReadOnl
       {isReadOnly && behandlingsresultat?.avslagsarsakFritekst && (
         <VStack gap="space-16">
           <Detail>{intl.formatMessage({ id: labelTextCode })}</Detail>
-          <div className={styles.fritekstItem}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
+          <div className={styles['fritekstItem']}>{decodeHtmlEntity(behandlingsresultat.avslagsarsakFritekst)}</div>
         </VStack>
       )}
     </>

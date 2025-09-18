@@ -24,7 +24,7 @@ interface Props {
 export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
   if (documents.length === 0) {
     return (
-      <BodyShort size="small" className={styles.noDocuments}>
+      <BodyShort size="small" className={styles['noDocuments']}>
         <FormattedMessage id="DocumentListVedtakInnsyn.NoDocuments" />
       </BodyShort>
     );
@@ -32,7 +32,7 @@ export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
 
   return (
     <>
-      <Detail className={styles.noDocuments}>
+      <Detail className={styles['noDocuments']}>
         <FormattedMessage id="DocumentListVedtakInnsyn.InnsynsDok" />
       </Detail>
       <Table>
@@ -48,7 +48,7 @@ export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
             const dokId = parseInt(document.dokumentId, 10);
             return (
               <Table.Row key={dokId}>
-                <Table.DataCell className={styles.linkCol}>
+                <Table.DataCell className={styles['linkCol']}>
                   <DokumentLink
                     saksnummer={saksNr}
                     journalpostId={document.journalpostId}

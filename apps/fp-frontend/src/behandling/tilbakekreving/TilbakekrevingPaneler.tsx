@@ -37,7 +37,7 @@ const TilbakekrevingPaneler = ({ valgtProsessSteg, valgtFaktaSteg }: Props) => {
       <BehandlingPaVent
         key={behandling.versjon}
         behandling={behandling}
-        opneSokeside={() => navigate('/')}
+        opneSokeside={() => void navigate('/')}
         kodeverk={tilbakekrevingKodeverk}
         erTilbakekreving
       />

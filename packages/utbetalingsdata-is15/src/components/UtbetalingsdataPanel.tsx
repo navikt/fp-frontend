@@ -36,7 +36,7 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
   };
 
   return (
-    <VStack gap="space-20" className={styles.container}>
+    <VStack gap="space-20" className={styles['container']}>
       <Heading size="large" level="2">
         <FormattedMessage id="UtbetalingsdataPanel.Heading" />
       </Heading>

@@ -17,7 +17,7 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
   const kodeverkNavn = alleKodeverk['Region'];
 
   const getRegion = (verdi: RegionPeriode): string => {
-    return kodeverkNavn.find(it => it.kode === verdi.type)?.navn ?? `Ukjent region: ${verdi?.type.toLowerCase()}`;
+    return kodeverkNavn.find(it => it.kode === verdi.type)?.navn ?? `Ukjent region: ${verdi.type.toLowerCase()}`;
   };
 
   const sortertRegion = regioner.toSorted(sorterPerioder);
@@ -61,7 +61,7 @@ export const RegionVisning = ({ regioner, erAnnenpart = false, alleKodeverk }: P
               <DateLabel dateString={r.fom} />
             </Table.DataCell>
             <Table.DataCell style={rowStyle(index)}>
-              {!(r.tom === null || r.tom === TIDENES_ENDE) && <DateLabel dateString={r.tom} />}
+              {r.tom !== TIDENES_ENDE && <DateLabel dateString={r.tom} />}
             </Table.DataCell>
           </Table.Row>
         ))}

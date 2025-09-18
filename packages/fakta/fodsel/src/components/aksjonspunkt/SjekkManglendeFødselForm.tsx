@@ -76,7 +76,7 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
             hasVurderingText
           />
 
-          {aksjonspunkt && !isReadOnly && (
+          {!isReadOnly && (
             <FaktaSubmitButton
               isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}

@@ -28,9 +28,9 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setFaktaPanelMedÅ
   const harFaktapaneler = faktaPanelMenyData.length > 0;
 
   return (
-    <HStack className={styles.container} wrap={false}>
+    <HStack className={styles['container']} wrap={false}>
       {harFaktapaneler && (
-        <div className={styles.sideMenu} data-testid="fakta-meny">
+        <div className={styles['sideMenu']} data-testid="fakta-meny">
           <SideMenu
             heading={intl.formatMessage({ id: 'FaktaMeny.FaktaOm' })}
             links={faktaPanelMenyData.map(data => ({
@@ -46,7 +46,7 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setFaktaPanelMedÅ
           />
         </div>
       )}
-      <div className={styles.content}>
+      <div className={styles['content']}>
         <FaktaMenyProvider
           valgtFaktaSteg={valgtFaktaSteg}
           settFaktaPanelMenyData={settFaktaPanelMenyData}

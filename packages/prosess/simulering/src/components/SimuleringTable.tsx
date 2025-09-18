@@ -63,9 +63,9 @@ export const SimuleringTable = ({
       );
 
       return (
-        <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
+        <div className={styles['tableWrapper']} key={`tableIndex${mottakerIndex + 1}`}>
           {tableTitle(mottaker, arbeidsgiverOpplysningerPerId)}
-          <Table key={`tableIndex${mottakerIndex + 1}`} className={styles.simuleringTable}>
+          <Table key={`tableIndex${mottakerIndex + 1}`} className={styles['simuleringTable']}>
             <Table.Header>
               <Table.Row>
                 {skalViseCollapseButton(mottaker.resultatPerFagområde) ? (
@@ -105,7 +105,9 @@ export const SimuleringTable = ({
                   .map((rad, rowIndex) => {
                     const isFeilUtbetalt = rad.feltnavn === simuleringCodes.DIFFERANSE;
                     const isRowToggable = rowToggable(fagOmråde, isFeilUtbetalt);
-                    const borderBottom = isRowToggable ? 'dashed 1px var(--ax-neutral-300)' : 'solid 1px var(--ax-neutral-300)';
+                    const borderBottom = isRowToggable
+                      ? 'dashed 1px var(--ax-neutral-300)'
+                      : 'solid 1px var(--ax-neutral-300)';
                     return (
                       <Table.Row key={`rowIndex${fagIndex + 1}${rowIndex + 1}`}>
                         <Table.DataCell

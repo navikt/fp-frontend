@@ -138,7 +138,7 @@ export const FatterVedtakApprovalModal = ({
 
   return (
     <Modal
-      className={styles.modal}
+      className={styles['modal']}
       open
       aria-label={intl.formatMessage({ id: modalDescriptionTextCode })}
       onClose={closeEvent}
@@ -146,7 +146,7 @@ export const FatterVedtakApprovalModal = ({
       <Modal.Body>
         <HStack justify="space-between" align="center" wrap={false}>
           <HStack gap="space-8">
-            <CheckmarkCircleFillIcon className={styles.image} title={intl.formatMessage({ id: altImgTextCode })} />
+            <CheckmarkCircleFillIcon className={styles['image']} title={intl.formatMessage({ id: altImgTextCode })} />
             <VStack gap="space-4">
               <Label size="small">
                 <FormattedMessage id={infoTextCode} />

@@ -13,14 +13,12 @@ interface Props {
 }
 
 export const FeriepengerPrÅr = ({ alleAndeler, opptjeningsår, alleKodeverk, arbeidsgiverOpplysningerPerId }: Props) => {
-  if (!alleAndeler || alleAndeler.length < 1) {
+  if (alleAndeler.length < 1) {
     return null;
   }
 
   const alleAndelerForÅret = finnAlleAndelerForOpptjeningsår(alleAndeler, opptjeningsår);
-  const andelerPrId = alleAndelerForÅret
-    ? lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk)
-    : [];
+  const andelerPrId = lagAndelerPrIdMap(alleAndelerForÅret, arbeidsgiverOpplysningerPerId, alleKodeverk);
 
   return (
     <div>
@@ -80,9 +78,7 @@ const lagVisningsnavn = (
     }
     return agOpplysning.identifikator ? `${agOpplysning.navn} (${agOpplysning.identifikator})` : agOpplysning.navn;
   }
-  return ferieAndel.aktivitetStatus
-    ? (alleKodeverk['AktivitetStatus'].find(({ kode }) => kode === ferieAndel.aktivitetStatus)?.navn ?? '')
-    : '';
+  return alleKodeverk['AktivitetStatus'].find(({ kode }) => kode === ferieAndel.aktivitetStatus)?.navn ?? '';
 };
 
 type AndelerPrId = {

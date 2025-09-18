@@ -12,11 +12,11 @@ import type { OppdaterMedBruker } from '../../../typer/oppdaterBrukerTsType';
 import styles from './brukerAvsenderPanel.module.css';
 
 const finnAvsenderBilde = (journalpost: Journalpost): ReactElement => {
-  const avsenderId = journalpost.avsender?.id;
+  const avsenderId = journalpost.avsender.id;
   if (avsenderId && avsenderId.length === 9) {
-    return <Buildings3Icon className={styles.ikon} />;
+    return <Buildings3Icon className={styles['ikon']} />;
   }
-  return <SilhouetteIcon className={styles.ikon} />;
+  return <SilhouetteIcon className={styles['ikon']} />;
 };
 
 interface BrukerAvsenderRadProps {
@@ -34,7 +34,7 @@ const BrukerAvsenderRad = ({ navn, id, ikon, title }: BrukerAvsenderRadProps): R
       </Heading>
     )}
     <HStack gap="space-16">
-      <div className={styles.ikonKol}>{ikon}</div>
+      <div className={styles['ikonKol']}>{ikon}</div>
       <div>
         <BodyShort>{navn}</BodyShort>
         <HStack gap="space-4" align="center">
@@ -122,7 +122,7 @@ export const BrukerAvsenderPanel = ({
               <BrukerAvsenderRad
                 navn={brukerTilForhåndsvisning.navn}
                 id={brukerTilForhåndsvisning.fødselsnummer}
-                ikon={<SilhouetteIcon className={styles.ikon} />}
+                ikon={<SilhouetteIcon className={styles['ikon']} />}
               />
               <Button type="button" onClick={knyttSøkerTilJP}>
                 <FormattedMessage id="ValgtOppgave.Søk.KnyttTil" />
@@ -136,11 +136,11 @@ export const BrukerAvsenderPanel = ({
         <BrukerAvsenderRad
           navn={journalpost.bruker.navn}
           id={journalpost.bruker.fnr}
-          ikon={<SilhouetteIcon className={styles.ikon} />}
+          ikon={<SilhouetteIcon className={styles['ikon']} />}
           title={<FormattedMessage id="ValgtOppgave.Søker" />}
         />
       )}
-      {journalpost.avsender?.navn && (
+      {journalpost.avsender.navn && (
         <BrukerAvsenderRad
           navn={journalpost.avsender.navn}
           id={journalpost.avsender.id}

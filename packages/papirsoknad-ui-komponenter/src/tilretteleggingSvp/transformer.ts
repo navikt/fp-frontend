@@ -6,7 +6,9 @@ export const transformTilretteleggingsArbeidsforhold = (
   const transformerteVerdier: TilretteleggingArbeidsforhold[] = [];
 
   if (
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
     tilretteleggingArbeidsforhold?.sokForArbeidsgiver &&
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
     tilretteleggingArbeidsforhold?.tilretteleggingForArbeidsgiver
   ) {
     transformerteVerdier.push(
@@ -18,6 +20,8 @@ export const transformTilretteleggingsArbeidsforhold = (
       })),
     );
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
   if (tilretteleggingArbeidsforhold?.sokForFrilans) {
     transformerteVerdier.push({
       '@type': 'FR',
@@ -25,6 +29,7 @@ export const transformTilretteleggingsArbeidsforhold = (
       tilrettelegginger: tilretteleggingArbeidsforhold.tilretteleggingFrilans,
     });
   }
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
   if (tilretteleggingArbeidsforhold?.sokForSelvstendigNaringsdrivende) {
     transformerteVerdier.push({
       '@type': 'SN',

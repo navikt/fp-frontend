@@ -12,9 +12,9 @@ import styles from './velferdspermisjonTabellRad.module.css';
 
 const utledStyleForRad = (open: boolean, erIkkeValgt: boolean) => {
   if (erIkkeValgt) {
-    return styles.apRow;
+    return styles['apRow'];
   }
-  return open ? styles.openRow : styles.row;
+  return open ? styles['openRow'] : styles['row'];
 };
 
 interface Props {
@@ -30,7 +30,7 @@ export const VelferdspermisjonTabellRad = ({
   readOnly,
   oppdaterOverstyrtUtbetalingsgrad,
 }: Props) => {
-  const erIkkeValgt = velferdspermisjon.erGyldig === undefined || velferdspermisjon.erGyldig === null;
+  const erIkkeValgt = velferdspermisjon.erGyldig === undefined;
 
   const [open, setOpen] = useState(erIkkeValgt);
 

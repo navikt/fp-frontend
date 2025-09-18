@@ -47,7 +47,7 @@ export const RegistrerPapirsoknadPanel = ({
     formValues: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => {
     if (soknadData) {
-      lagrePapirsøknad(
+      void lagrePapirsøknad(
         soknadData.fagsakYtelseType,
         soknadData.familieHendelseType,
         soknadData.foreldreType,
@@ -59,7 +59,7 @@ export const RegistrerPapirsoknadPanel = ({
 
   const lagreUfullstendigSøknadOgAvslutt = () => {
     if (soknadData) {
-      lagrePapirsøknad(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType);
+      void lagrePapirsøknad(soknadData.fagsakYtelseType, soknadData.familieHendelseType, soknadData.foreldreType);
     }
     return Promise.resolve();
   };

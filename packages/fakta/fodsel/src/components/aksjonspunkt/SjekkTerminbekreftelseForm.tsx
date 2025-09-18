@@ -98,7 +98,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, ak
               }}
               validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
               readOnly={isReadOnly}
-              className={styles.bredde}
+              className={styles['bredde']}
               isEdited={isNotEqual(søknad.antallBarn, gjeldende.antallBarn.antall)}
             />
           </HStack>
@@ -118,7 +118,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, ak
             </Alert>
           )}
 
-          {aksjonspunkt && !isReadOnly && (
+          {!isReadOnly && (
             <FaktaSubmitButton
               isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}

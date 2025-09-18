@@ -57,7 +57,7 @@ export const DekoratorMedFeilviserSakIndex = ({
   }, [feilmeldinger.length]);
 
   return (
-    <div ref={fixedHeaderRef} className={styles.container}>
+    <div ref={fixedHeaderRef} className={styles['container']}>
       <RawIntlProvider value={intl}>
         <InternalHeader>
           <InternalHeader.Title href={tittelLenke} onClick={tittelCallback} onContextMenu={tittelCallback}>
