@@ -22,7 +22,7 @@ export const SakDetaljer = ({ sak }: Props) => {
   const famTekst = utledFamileihendelsetekst(sak.familieHendelseJf);
   const intl = useIntl();
   return (
-    <HStack className={styles.sakContainer} gap="0 4" align="center" wrap={false}>
+    <HStack className={styles['sakContainer']} gap="0 4" align="center" wrap={false}>
       <div>
         <VStack gap="space-4">
           <HStack gap="0 2" align="center">
@@ -68,7 +68,7 @@ export const SakDetaljer = ({ sak }: Props) => {
         rel="noreferrer"
         variant="tertiary"
         title={intl.formatMessage({ id: 'DokumentDetaljer.ExternalLink' })}
-        icon={<ExternalLinkIcon className={styles.externalLinkIcon} />}
+        icon={<ExternalLinkIcon className={styles['externalLinkIcon']} />}
       />
     </HStack>
   );

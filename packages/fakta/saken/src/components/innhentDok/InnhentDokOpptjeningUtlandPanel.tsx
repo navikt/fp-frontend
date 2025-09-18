@@ -58,7 +58,7 @@ export const InnhentDokOpptjeningUtlandPanel = ({ aksjonspunkt, dokStatus }: Pro
           <FormattedMessage id="InnhentDokOpptjeningUtlandPanel.OpptjeningUtland" />
         </Heading>
         <AksjonspunktBox
-          className={styles.aksjonspunktMargin}
+          className={styles['aksjonspunktMargin']}
           erAksjonspunktApent={harÅpentAksjonspunkt}
           // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
           erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted}

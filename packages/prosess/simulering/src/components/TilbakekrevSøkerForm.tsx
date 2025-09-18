@@ -70,11 +70,11 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
             <FormattedMessage id="Simulering.gjennomfør" />
           </Radio>
           {videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT && (
-            <div className={styles.varsel}>
+            <div className={styles['varsel']}>
               <ArrowBox alignOffset={20}>
                 <VStack gap="space-16">
                   <HStack gap="space-8">
-                    <BodyShort size="small" className={styles.bold}>
+                    <BodyShort size="small" className={styles['bold']}>
                       <FormattedMessage id="Simulering.varseltekst" />
                     </BodyShort>
                     <Tooltip
@@ -84,7 +84,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
                           : intl.formatMessage({ id: 'Simulering.HjelpetekstEngangsstonad' })
                       }
                     >
-                      <QuestionmarkDiamondIcon className={styles.helpTextImage} />
+                      <QuestionmarkDiamondIcon className={styles['helpTextImage']} />
                     </Tooltip>
                   </HStack>
                   <RhfTextarea

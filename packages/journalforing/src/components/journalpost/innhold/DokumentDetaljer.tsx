@@ -44,12 +44,12 @@ export const DokumentDetaljer = ({
       rel="noreferrer"
       variant="tertiary"
       title={intl.formatMessage({ id: 'DokumentDetaljer.ExternalLink' })}
-      icon={<ExternalLinkIcon aria-hidden className={styles.externalLinkIcon} />}
+      icon={<ExternalLinkIcon aria-hidden className={styles['externalLinkIcon']} />}
     />
   );
   if (dokumentTittelStyresAvJournalpostTittel) {
     return (
-      <HStack className={styles.dokContainer} gap="0 4" align="center" wrap={false}>
+      <HStack className={styles['dokContainer']} gap="0 4" align="center" wrap={false}>
         <RhfTextField
           name="journalpostTittel"
           control={control}
@@ -63,7 +63,7 @@ export const DokumentDetaljer = ({
     );
   }
   return (
-    <HStack className={styles.dokContainer} gap="0 4" align="center" wrap={false}>
+    <HStack className={styles['dokContainer']} gap="0 4" align="center" wrap={false}>
       {kanRedigeres && (
         <>
           {harToggletFritekst && (
@@ -73,7 +73,7 @@ export const DokumentDetaljer = ({
               hideLabel
               validate={[required, hasValidText]}
               readOnly={false}
-              className={styles.input}
+              className={styles['input']}
               maxLength={100}
             />
           )}
@@ -85,7 +85,7 @@ export const DokumentDetaljer = ({
               readOnly={false}
               label={undefined}
               validate={[required]}
-              className={styles.input}
+              className={styles['input']}
               selectValues={dokumentTitler.map(tittel => (
                 <option value={tittel} key={tittel}>
                   {tittel}
@@ -113,7 +113,7 @@ export const DokumentDetaljer = ({
           {erKanalSomErÅpenForEndring(journalpost.kanal) && (
             <Button
               icon={<PencilIcon aria-hidden />}
-              className={styles.editButton}
+              className={styles['editButton']}
               onClick={() => {
                 setKanRedigeres(!kanRedigeres);
               }}

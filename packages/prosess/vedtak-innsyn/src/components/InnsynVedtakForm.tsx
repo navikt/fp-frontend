@@ -158,7 +158,7 @@ export const InnsynVedtakForm = ({
           <Label size="small">
             <FormattedMessage id="InnsynVedtakForm.Vurdering" />
           </Label>
-          <BodyShort size="small" className={styles.wordwrap}>
+          <BodyShort size="small" className={styles['wordwrap']}>
             {decodeHtmlEntity(apVurderInnsynBegrunnelse)}
           </BodyShort>
         </VStack>

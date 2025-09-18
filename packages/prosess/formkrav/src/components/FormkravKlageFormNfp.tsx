@@ -150,7 +150,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
                   validate={[required]}
                   label={intl.formatMessage({ id: 'Klage.Formkrav.VelgVedtak' })}
                   selectValues={klageBareVedtakOptions}
-                  className={styles.selectBredde}
+                  className={styles['selectBredde']}
                 />
                 <RhfDatepicker
                   control={formMethods.control}

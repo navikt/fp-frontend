@@ -103,7 +103,7 @@ export const GraderingOgSamtidigUttakPanel = ({
       </HStack>
       {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
       {!readOnly && arbeidsgiverFinnesIkke && (
-        <div className={styles.alert}>
+        <div className={styles['alert']}>
           <Alert variant="info">
             <FormattedMessage id="UttakFaktaDetailForm.UkjentArbeidsgiver" values={{ aRef }} />
           </Alert>
@@ -119,7 +119,7 @@ export const GraderingOgSamtidigUttakPanel = ({
                 label={<FormattedMessage id="UttakFaktaDetailForm.GraderingProsent" />}
                 forceTwoDecimalDigits
                 validate={[required]}
-                className={styles.gradering}
+                className={styles['gradering']}
                 readOnly={readOnly}
               />
               <RhfSelect

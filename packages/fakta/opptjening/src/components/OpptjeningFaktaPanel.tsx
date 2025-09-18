@@ -186,7 +186,7 @@ export const OpptjeningFaktaPanel = ({
   const harIkkeBehandletAlle = formVerdierForAlleAktiviteter.some(a => a.erGodkjent === undefined);
 
   return (
-    <VStack gap="space-24" className={styles.container}>
+    <VStack gap="space-24" className={styles['container']}>
       {harÅpentAksjonspunkt && (
         <AksjonspunktHelpTextHTML>
           {getAksjonspunktHelpTexts(filtrerteOgSorterteOpptjeningsaktiviteter)}

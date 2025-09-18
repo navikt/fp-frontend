@@ -61,7 +61,7 @@ export const DokumentasjonFaktaForm = ({
       title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
     >
-      <VStack gap="space-16" className={styles.container}>
+      <VStack gap="space-16" className={styles['container']}>
         <RhfDatepicker
           name="omsorgsovertakelseDato"
           control={control}
@@ -101,7 +101,7 @@ export const DokumentasjonFaktaForm = ({
             />
             {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
               <ExclamationmarkTriangleFillIcon
-                className={styles.image}
+                className={styles['image']}
                 title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
               />
             )}

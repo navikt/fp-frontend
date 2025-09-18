@@ -102,7 +102,7 @@ export const OppholdPeriodeTabellRad = ({
         />
       }
       togglePlacement="right"
-      className={open ? styles.openRow : styles.row}
+      className={open ? styles['openRow'] : styles['row']}
     >
       <Table.DataCell>
         {opphold.fom ? (

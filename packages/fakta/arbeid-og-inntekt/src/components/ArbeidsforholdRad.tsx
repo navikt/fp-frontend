@@ -88,7 +88,7 @@ export const ArbeidsforholdRad = ({
         isApOpen: harÅpentAksjonspunkt,
       })}
       content={
-        <VStack gap="space-16" className={harÅpentAksjonspunkt ? styles.panelOpenAp : styles.panelOpen}>
+        <VStack gap="space-16" className={harÅpentAksjonspunkt ? styles['panelOpenAp'] : styles['panelOpen']}>
           {erManueltOpprettet && (
             <ManueltLagtTilArbeidsforholdForm
               behandlingUuid={behandlingUuid}
@@ -167,12 +167,15 @@ export const ArbeidsforholdRad = ({
     >
       <Table.DataCell>
         {!harÅpentAksjonspunkt && (
-          <CheckmarkIcon title={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })} className={styles.checkmarkIcon} />
+          <CheckmarkIcon
+            title={intl.formatMessage({ id: 'ArbeidsforholdRad.Ok' })}
+            className={styles['checkmarkIcon']}
+          />
         )}
         {harÅpentAksjonspunkt && (
           <ExclamationmarkTriangleFillIcon
             title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
-            className={styles.exclamationmarkIcon}
+            className={styles['exclamationmarkIcon']}
           />
         )}
       </Table.DataCell>

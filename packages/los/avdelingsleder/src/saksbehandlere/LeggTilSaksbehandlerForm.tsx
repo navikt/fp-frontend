@@ -85,7 +85,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
             label={intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.Brukerident' })}
             validate={[required]}
           />
-          <div className={styles.button}>
+          <div className={styles['button']}>
             <Button
               size="small"
               variant="secondary"

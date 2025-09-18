@@ -110,7 +110,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   const lagreTomDatoDebounce = useDebounce('tomDato', lagreTomDato);
 
   return (
-    <div className={styles.arrowBoxWidth}>
+    <div className={styles['arrowBoxWidth']}>
       <ArrowBox>
         <VStack gap="space-8">
           <Detail>
@@ -122,7 +122,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                 <RhfTextField
                   name="fra"
                   control={control}
-                  className={styles.dato}
+                  className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
                   validate={[hasValidPosOrNegInteger]}
                   onBlur={value => lagreFra(value)}
@@ -133,14 +133,14 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                   </Detail>
                 )}
               </div>
-              <Detail className={styles.dager}>
+              <Detail className={styles['dager']}>
                 <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
               </Detail>
               <div>
                 <RhfTextField
                   name="til"
                   control={control}
-                  className={styles.dato}
+                  className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
                   validate={[hasValidPosOrNegInteger]}
                   onBlur={value => lagreTil(value)}
@@ -151,7 +151,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                   </Detail>
                 )}
               </div>
-              <Detail className={styles.dagerMedBindestrek}>
+              <Detail className={styles['dagerMedBindestrek']}>
                 <FormattedMessage id="SorteringVelger.Dager" />
               </Detail>
             </HStack>

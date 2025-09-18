@@ -108,13 +108,13 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
                     {d.navn}
                   </option>
                 ))}
-                className={styles.breddeSelect}
+                className={styles['breddeSelect']}
                 readOnly={readOnly}
                 disabled={readOnly}
               />
             )}
             {readOnly && vilkarType && (
-              <div className={styles.vilkarTypeReadOnly}>
+              <div className={styles['vilkarTypeReadOnly']}>
                 <Label size="small" as="span">
                   {vilkarTypes.find(d => d.kode === vilkarType)?.navn}
                 </Label>

@@ -89,7 +89,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
   }
 
   return (
-    <div key={valgtAvdelingEnhet} className={styles.container}>
+    <div key={valgtAvdelingEnhet} className={styles['container']}>
       <HStack justify="end" padding="2">
         <Select
           size="small"
@@ -101,7 +101,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
             setValgtAvdelingEnhet(index);
           }}
           value={valgtAvdelingEnhet}
-          className={styles.paddingSelect}
+          className={styles['paddingSelect']}
         >
           {filtrerteAvdelinger.map(avdeling => (
             <option key={avdeling.avdelingEnhet} value={avdeling.avdelingEnhet}>
@@ -116,7 +116,7 @@ const AvdelingslederIndex = ({ navAnsatt, setLosErIkkeTilgjengelig }: Props) => 
         onChange={(avdelingslederPanel: string) => {
           void navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
         }}
-        className={styles.paddingHeader}
+        className={styles['paddingHeader']}
       >
         <Tabs.List>
           <Tabs.Tab

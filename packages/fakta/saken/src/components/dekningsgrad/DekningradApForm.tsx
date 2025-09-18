@@ -155,7 +155,7 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
           </VStack>
         </RhfForm>
       </AksjonspunktBox>
-      {!erIkkeGodkjentAvBeslutter && !erAksjonspunktApent && <hr className={styles.hr} />}
+      {!erIkkeGodkjentAvBeslutter && !erAksjonspunktApent && <hr className={styles['hr']} />}
     </VStack>
   );
 };

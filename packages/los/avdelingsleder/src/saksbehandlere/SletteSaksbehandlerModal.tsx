@@ -37,7 +37,7 @@ export const SletteSaksbehandlerModal = ({ valgtSaksbehandler, closeSletteModal,
       </NavModal.Header>
       <NavModal.Footer>
         <Button
-          className={styles.submitButton}
+          className={styles['submitButton']}
           size="small"
           variant="primary"
           onClick={() => fjernSaksbehandler(valgtSaksbehandler)}
@@ -47,7 +47,7 @@ export const SletteSaksbehandlerModal = ({ valgtSaksbehandler, closeSletteModal,
           <FormattedMessage id="SletteSaksbehandlerModal.Ja" />
         </Button>
         <Button
-          className={styles.cancelButton}
+          className={styles['cancelButton']}
           size="small"
           variant="secondary"
           onClick={closeSletteModal}

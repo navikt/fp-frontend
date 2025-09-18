@@ -32,7 +32,10 @@ export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
 
   return (
     <VStack gap="space-16">
-      <ReadMore header={<FormattedMessage id="Simulering.Etterbetaling.ReadMoreTittel" />} className={styles.readMore}>
+      <ReadMore
+        header={<FormattedMessage id="Simulering.Etterbetaling.ReadMoreTittel" />}
+        className={styles['readMore']}
+      >
         <FormattedMessage id="Simulering.Etterbetaling.ReadMoreInnhold" />
       </ReadMore>
       <RhfTextarea

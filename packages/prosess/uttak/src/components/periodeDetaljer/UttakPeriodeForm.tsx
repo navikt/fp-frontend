@@ -438,7 +438,7 @@ export const UttakPeriodeForm = ({
               )}
             </VStack>
             {warning && (
-              <Alert size="small" variant="info" className={styles.alert}>
+              <Alert size="small" variant="info" className={styles['alert']}>
                 {warning}
               </Alert>
             )}

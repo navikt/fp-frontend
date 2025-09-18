@@ -39,8 +39,8 @@ export const SistBehandledeSaker = ({ åpneFagsak }: Props) => {
   return (
     <VStack gap="space-8">
       <HStack gap="space-8" align="center">
-        <div className={styles.iconBackground}>
-          <ClockDashedIcon aria-hidden className={styles.clockIcon} />
+        <div className={styles['iconBackground']}>
+          <ClockDashedIcon aria-hidden className={styles['clockIcon']} />
         </div>
         <Heading size="xsmall" level="2">
           <FormattedMessage id="SistBehandledeSaker.SistBehandledeSaker" />
@@ -68,7 +68,7 @@ const SistBehandledeSakerContent = ({
 
   if (!sisteReserverte.length) {
     return (
-      <div className={styles.ingenBehandlinger}>
+      <div className={styles['ingenBehandlinger']}>
         <BodyShort size="medium">
           <FormattedMessage id="SistBehandledeSaker.IngenBehandlinger" tagName="i" />
         </BodyShort>
@@ -109,7 +109,7 @@ const SistBehandledeSakerContent = ({
               )}
             </Table.DataCell>
             <Table.DataCell scope="row">
-              <ChevronRightCircleFillIcon aria-hidden className={styles.pointerIcon} />
+              <ChevronRightCircleFillIcon aria-hidden className={styles['pointerIcon']} />
             </Table.DataCell>
           </Table.Row>
         ))}

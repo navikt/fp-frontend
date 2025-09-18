@@ -39,7 +39,7 @@ export const HoyRisikoTittel = ({
     <ExpansionCard
       aria-label={intl.formatMessage({ id: 'Risikopanel.Tittel' })}
       open={isRiskPanelOpen}
-      className={styles.hoyRisikoPanel}
+      className={styles['hoyRisikoPanel']}
     >
       <ExpansionCard.Header onClick={toggleRiskPanel}>
         <ExpansionCard.Title>

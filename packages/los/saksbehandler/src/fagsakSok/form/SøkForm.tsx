@@ -74,7 +74,7 @@ export const SøkForm = ({ onSubmit, searchResultAccessDenied, searchStarted, re
         )}
         {searchResultAccessDenied?.feilmelding && (
           <HStack gap="space-8">
-            <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
+            <ExclamationmarkTriangleFillIcon className={styles['advarselIcon']} />
             {searchResultAccessDenied.feilmelding}
           </HStack>
         )}

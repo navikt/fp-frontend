@@ -65,7 +65,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
             <UtvalgskriterierForSakslisteForm valgtSaksliste={valgtSaksliste} valgtAvdelingEnhet={valgtAvdelingEnhet} />
             <HStack gap="space-16" justify="center">
               <ArrowDownIcon
-                className={styles.arrow}
+                className={styles['arrow']}
                 title={intl.formatMessage({ id: 'EndreSakslisterPanel.KnyttetMotSaksbehandlere' })}
               />
               <FormattedMessage id="EndreSakslisterPanel.KnyttetMotSaksbehandlere" />

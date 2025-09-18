@@ -80,7 +80,7 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
   });
 
   return (
-    <div className={styles.content} style={{ margin: `${headerHeight}px auto 0` }}>
+    <div className={styles['content']} style={{ margin: `${headerHeight}px auto 0` }}>
       <Routes>
         <Route
           path="/"

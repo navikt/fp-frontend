@@ -44,7 +44,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
       </HStack>
       {!harEttArbeidsforhold && (
         <>
-          <AvsnittSkiller dividerParagraf className={styles.skiller} />
+          <AvsnittSkiller dividerParagraf className={styles['skiller']} />
           {inntektsmeldingForArbeidsforhold.map(({ arbeidsforhold: a, inntektsmelding: im }) => {
             return (
               <React.Fragment key={`${a.arbeidsgiverIdent}${a.internArbeidsforholdId}`}>
@@ -79,10 +79,10 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                         <Spacer />
                         <div>
                           <ExclamationmarkTriangleFillIcon
-                            className={styles.aksjonpunktImage}
+                            className={styles['aksjonpunktImage']}
                             title={intl.formatMessage({ id: 'ArbeidsforholdRad.Aksjonspunkt' })}
                           />
-                          <div className={styles.ikkeMottatt}>
+                          <div className={styles['ikkeMottatt']}>
                             <Label size="small">
                               <FormattedMessage id="ArbeidsforholdInformasjonPanel.ImIkkeMottatt" />
                             </Label>
@@ -156,7 +156,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                         href=""
                       >
                         <span>
-                          <BodyShort size="small" className={styles.inline}>
+                          <BodyShort size="small" className={styles['inline']}>
                             <FormattedMessage
                               id={
                                 !a.internArbeidsforholdId || !visInfoOmIm[a.internArbeidsforholdId]
@@ -167,15 +167,15 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                           </BodyShort>
                         </span>
                         {a.internArbeidsforholdId && visInfoOmIm[a.internArbeidsforholdId] ? (
-                          <ChevronUpIcon className={styles.arrow} />
+                          <ChevronUpIcon className={styles['arrow']} />
                         ) : (
-                          <ChevronDownIcon className={styles.arrow} />
+                          <ChevronDownIcon className={styles['arrow']} />
                         )}
                       </Link>
                     </>
                   )}
                 </VStack>
-                <AvsnittSkiller dividerParagraf className={styles.skiller} />
+                <AvsnittSkiller dividerParagraf className={styles['skiller']} />
               </React.Fragment>
             );
           })}

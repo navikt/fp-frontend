@@ -24,7 +24,7 @@ export const Dokumenter = ({ dokumenter }: Props) => {
   ) : (
     <VStack gap="space-8">
       <Button
-        className={styles.button}
+        className={styles['button']}
         variant="tertiary"
         size="xsmall"
         type="button"
@@ -36,7 +36,7 @@ export const Dokumenter = ({ dokumenter }: Props) => {
           : intl.formatMessage({ id: 'Dokumenter.SkjulDokumenter' }, { antall: dokumenter.length })}
       </Button>
       {!erDokumenterSkjult && (
-        <VStack gap="space-4" className={styles.andreDokumenter}>
+        <VStack gap="space-4" className={styles['andreDokumenter']}>
           {dokumenter.map(dokument => (
             <DokumentVisning key={dokument.dokumentId} dokument={dokument} />
           ))}

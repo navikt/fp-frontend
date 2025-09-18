@@ -113,7 +113,7 @@ export const UtvalgskriterierForSakslisteForm = ({ valgtSaksliste, valgtAvdeling
               validate={[required, minLength3, maxLength100, hasValidName]}
               // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
               onChange={value => lagreNavn(value)}
-              className={styles.bredde}
+              className={styles['bredde']}
             />
             <HStack justify="space-between">
               <VStack gap="space-16">

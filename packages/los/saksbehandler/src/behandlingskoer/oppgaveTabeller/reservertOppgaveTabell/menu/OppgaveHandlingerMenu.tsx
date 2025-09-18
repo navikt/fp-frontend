@@ -101,7 +101,7 @@ export const OppgaveHandlingerMenu = ({ oppgave, setEnableTableEvents, brukernav
             variant="tertiary-neutral"
             icon={
               <MenuElipsisVerticalCircleIcon
-                className={styles.image}
+                className={styles['image']}
                 title={intl.formatMessage({ id: 'OppgaveHandlingerMenu.OppgaveHandlinger' })}
               />
             }

@@ -32,7 +32,7 @@ export const VelferdspermisjonPanel = ({
         {velferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined) && (
           <ExclamationmarkTriangleFillIcon
             title={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg' })}
-            className={styles.image}
+            className={styles['image']}
           />
         )}
       </HStack>

@@ -46,7 +46,7 @@ export const JournalførtSubmitModal = ({ saksnummer, lukkModal, showModal, isLo
           {!isLoading && lenke && (
             <>
               <HStack justify="center">
-                <CheckmarkCircleIcon className={styles.ferdigIkon} />
+                <CheckmarkCircleIcon className={styles['ferdigIkon']} />
               </HStack>
               <HStack justify="center">
                 <BodyShort>

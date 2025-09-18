@@ -125,7 +125,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
   }, [valgtKonto, stønadskontoerMedNavn]);
 
   return (
-    <div className={styles.disponibeltUttak}>
+    <div className={styles['disponibeltUttak']}>
       <HStack gap="space-16">
         <Label size="small">
           <FormattedMessage id="TimeLineInfo.Stonadinfo.DisponibleStonadsdager" />
@@ -137,7 +137,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
           />
         </BodyShort>
       </HStack>
-      <div className={styles.tabs}>
+      <div className={styles['tabs']}>
         <ul>
           {stønadskontoerMedNavn.map(k => (
             <StonadsdagerTab
@@ -150,7 +150,7 @@ export const DisponibleStonadskontoerPanel = ({ stønadskontoer, arbeidsgiverOpp
         </ul>
       </div>
       {valgtKonto && sorterteAktiviteter && sorterteAktiviteter.length > 0 && (
-        <div className={styles.visKonto}>
+        <div className={styles['visKonto']}>
           <VStack gap="4">
             {valgtKonto.kontoReduksjoner?.annenForelderEøsUttak && (
               <FormattedMessage

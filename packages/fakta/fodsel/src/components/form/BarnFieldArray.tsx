@@ -72,7 +72,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
 
   return (
     <VStack gap="space-8">
-      <Table className={styles.tableNoBorder} size="small">
+      <Table className={styles['tableNoBorder']} size="small">
         <Table.Header>
           <Table.Row>
             {fields.length > 1 && (
@@ -137,7 +137,7 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                     />
                   </Table.DataCell>
                 )}
-                <Table.DataCell className={styles.rowDescription}>
+                <Table.DataCell className={styles['rowDescription']}>
                   <HStack gap="space-8" align="center">
                     <Detail>{getLabelForFaktaKilde(isDirty ? 'SAKSBEHANDLER' : field.kilde)}</Detail>
                     {!isReadOnly && (

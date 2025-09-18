@@ -68,7 +68,7 @@ export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: P
             }}
           />
           {values[akt.kode] && (
-            <div className={styles.arrowbox}>
+            <div className={styles['arrowbox']}>
               <ArrowBox alignOffset={30}>
                 <RhfRadioGroup
                   name={`${akt.kode}_inkluder`}

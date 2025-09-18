@@ -47,10 +47,10 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles['container']}>
       {feilmeldinger.map((message, index) => (
         <React.Fragment key={message.melding}>
-          <Detail className={styles.wordWrap}>{`${decodeHtmlEntity(message.melding)} `}</Detail>
+          <Detail className={styles['wordWrap']}>{`${decodeHtmlEntity(message.melding)} `}</Detail>
           {message.tilleggsInfo && (
             <Detail>
               <Link
@@ -65,7 +65,7 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
           )}
         </React.Fragment>
       ))}
-      <div className={styles.lukkContainer}>
+      <div className={styles['lukkContainer']}>
         <Button variant="tertiary" icon={<XMarkIcon color="white" />} onClick={fjernFeilmeldinger} type="button" />
       </div>
       {erModalÅpen && (

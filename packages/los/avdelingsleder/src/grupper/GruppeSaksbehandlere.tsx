@@ -130,7 +130,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
           validate={[required, minLength3, maxLength100, hasValidName]}
           // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
           onBlur={value => lagreNavnDebounce(value)}
-          className={styles.navn}
+          className={styles['navn']}
         />
         <VStack gap="space-16">
           <UNSAFE_Combobox
@@ -141,7 +141,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
             selectedOptions={[]}
             onChange={setFilterValue}
             onToggleSelected={toggleSelected}
-            className={styles.saksbehandlerCombo}
+            className={styles['saksbehandlerCombo']}
           />
 
           <VStack gap="space-8">
@@ -158,7 +158,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
                 <div>{`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}</div>
                 <div>
                   <XMarkIcon
-                    className={styles.removeIcon}
+                    className={styles['removeIcon']}
                     onMouseDown={() =>
                       fjernSaksbehandler({
                         brukerIdent: saksbehandler.brukerIdent,

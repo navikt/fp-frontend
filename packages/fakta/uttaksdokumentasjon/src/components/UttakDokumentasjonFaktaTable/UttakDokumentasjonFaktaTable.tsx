@@ -115,10 +115,10 @@ export const UttakDokumentasjonFaktaTable = ({
               expandOnRowClick
               shadeOnHover
               togglePlacement="right"
-              className={styles.expansionContentOuter}
+              className={styles['expansionContentOuter']}
               content={
                 valgtDokBehovFomDatoer.includes(behov.fom) && (
-                  <div className={styles.expansionContentInner}>
+                  <div className={styles['expansionContentInner']}>
                     <UttakDokumentasjonFaktaDetailForm
                       key={behov.fom}
                       behov={behov}

@@ -58,7 +58,7 @@ export const MannAdoptererAleneFaktaForm = ({
           </BodyShort>
         )}
         <div>
-          <hr className={styles.hr} />
+          <hr className={styles['hr']} />
         </div>
         <RhfRadioGroup
           name="mannAdoptererAlene"

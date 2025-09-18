@@ -70,7 +70,7 @@ export const VirksomhetIdentifikasjonPanel = ({ index, readOnly, alleKodeverk }:
             <RhfSelect
               name={`${VIRKSOMHET_FORM_NAME_PREFIX}.${index}.landJobberFra`}
               control={control}
-              className={styles.landBredde}
+              className={styles['landBredde']}
               selectValues={countrySelectValues(sortedCountriesByName)}
               validate={[required]}
               label={intl.formatMessage({ id: 'Registrering.VirksomhetIdentifikasjonPanel.Country' })}

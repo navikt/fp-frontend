@@ -39,8 +39,8 @@ export const FagsakGrid = ({
           toggleSideMeny={toggleSideMeny}
         />
       )}
-      <div className={styles.gridContainer}>
-        <div className={styles.leftColumn}>
+      <div className={styles['gridContainer']}>
+        <div className={styles['leftColumn']}>
           {isBigScreen && (
             <VisittkortMedKnapp
               visittkortContent={visittkortContent}
@@ -50,7 +50,7 @@ export const FagsakGrid = ({
           )}
           {behandlingContent}
         </div>
-        <div className={visSideMeny || isWrappedUnder ? styles.rightColumn : styles.rightColumnHidden}>
+        <div className={visSideMeny || isWrappedUnder ? styles['rightColumn'] : styles['rightColumnHidden']}>
           <div>{profileAndNavigationContent}</div>
           <div>{supportContent}</div>
         </div>
@@ -74,7 +74,7 @@ const VisittkortMedKnapp = ({
   }
   return (
     <>
-      <span className={styles.floatRight}>
+      <span className={styles['floatRight']}>
         <SidePanelKnapp toggleSideMeny={toggleSideMeny} visSideMeny={visSideMeny} />
       </span>
       {visittkortContent()}

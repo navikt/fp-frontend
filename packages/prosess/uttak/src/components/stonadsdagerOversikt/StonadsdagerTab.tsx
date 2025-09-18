@@ -60,7 +60,7 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
   const uker = Math.floor(stønadskonto.maxDager / 5);
 
   return (
-    <div className={styles.tabs}>
+    <div className={styles['tabs']}>
       <li role="presentation" className={classNames('tab', { aktiv, error: !stønadskonto.gyldigForbruk })}>
         <button
           role="tab"

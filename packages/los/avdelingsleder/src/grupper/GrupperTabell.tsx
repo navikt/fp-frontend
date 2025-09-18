@@ -70,7 +70,7 @@ export const GrupperTabell = ({ valgAvdeldingEnhet, grupper, avdelingensSaksbeha
                 <Table.DataCell>{saksbehandlerGruppe.saksbehandlere.length}</Table.DataCell>
                 <Table.DataCell>
                   <XMarkIcon
-                    className={styles.removeIcon}
+                    className={styles['removeIcon']}
                     onMouseDown={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
                     onKeyDown={() => fjernGruppe({ gruppeId: saksbehandlerGruppe.gruppeId })}
                   />

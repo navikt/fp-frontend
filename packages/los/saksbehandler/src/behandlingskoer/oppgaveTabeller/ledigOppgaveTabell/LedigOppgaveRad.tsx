@@ -37,7 +37,7 @@ export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Pr
       key={oppgave.id}
       onMouseDown={(event: React.MouseEvent) => goToFagsak(event, oppgave)}
       onKeyDown={(event: React.KeyboardEvent) => goToFagsak(event, oppgave)}
-      className={erNyBehandling ? styles.fadeIn : undefined}
+      className={erNyBehandling ? styles['fadeIn'] : undefined}
     >
       <Table.DataCell>{oppgave.navn}</Table.DataCell>
       <Table.DataCell>
@@ -45,9 +45,9 @@ export const LedigOppgaveRad = ({ oppgave, reserverOppgave, erNyBehandling }: Pr
           <BodyShort>{oppgave.saksnummer}</BodyShort>
           <Tooltip content={intl.formatMessage({ id: 'LedigOppgaveRad.Saksnr' })}>
             <CopyButton
-              activeIcon={<CheckmarkIcon className={styles.image} aria-hidden />}
+              activeIcon={<CheckmarkIcon className={styles['image']} aria-hidden />}
               copyText={oppgave.saksnummer}
-              icon={<FilesIcon aria-hidden className={styles.image} />}
+              icon={<FilesIcon aria-hidden className={styles['image']} />}
             />
           </Tooltip>
         </HStack>

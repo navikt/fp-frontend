@@ -42,7 +42,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
           <FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />
         </BodyShort>
         <div>
-          <hr className={styles.hr} />
+          <hr className={styles['hr']} />
         </div>
         <RhfRadioGroup
           name="ektefellesBarn"

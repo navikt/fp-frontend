@@ -120,7 +120,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               id: 'UttakEøsFaktaDetailForm.Stønadskonto',
             })}
             control={formMethods.control}
-            className={styles.select}
+            className={styles['select']}
             selectValues={lagGyldigeKontotyperOption(fagsak)}
             readOnly={isReadOnly}
             validate={[required]}
@@ -131,7 +131,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               <RhfNumericField
                 name="trekkuker"
                 control={formMethods.control}
-                className={styles.numberWidth}
+                className={styles['numberWidth']}
                 readOnly={isReadOnly}
                 validate={[required, hasValidInteger]}
               />
@@ -139,13 +139,13 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
               <RhfNumericField
                 name="trekkdager"
                 control={formMethods.control}
-                className={styles.numberWidth}
+                className={styles['numberWidth']}
                 readOnly={isReadOnly}
                 validate={[required, hasValidDecimal]}
               />
             </HStack>
           </VStack>
-          <HStack gap="4" className={styles.marginBtn}>
+          <HStack gap="4" className={styles['marginBtn']}>
             <Button
               size="small"
               variant="primary"

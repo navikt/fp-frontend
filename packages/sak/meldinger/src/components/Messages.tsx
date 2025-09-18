@@ -108,7 +108,7 @@ export const Messages = ({
               {mal.navn}
             </option>
           ))}
-          className={styles.bredde}
+          className={styles['bredde']}
         />
         {erVarselOmRevurdering && (
           <RhfSelect
@@ -121,7 +121,7 @@ export const Messages = ({
                 {cause.navn}
               </option>
             ))}
-            className={styles.bredde}
+            className={styles['bredde']}
           />
         )}
         {showFritekst(brevmalkode, arsakskode) && (

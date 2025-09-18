@@ -136,7 +136,7 @@ export const GjeldendeSakslisterTabell = ({
         <Label size="small">
           <FormattedMessage id="GjeldendeSakslisterTabell.GjeldendeLister" />
         </Label>
-        <div className={styles.grayBox}>
+        <div className={styles['grayBox']}>
           <BodyShort size="small">
             <FormattedMessage id="GjeldendeSakslisterTabell.OppgaverForAvdeling" />
           </BodyShort>
@@ -165,7 +165,7 @@ export const GjeldendeSakslisterTabell = ({
             {sakslister.map((saksliste, index) => (
               <Table.ExpandableRow
                 key={saksliste.sakslisteId}
-                className={saksliste.sakslisteId === valgtSakslisteId ? styles.isSelected : undefined}
+                className={saksliste.sakslisteId === valgtSakslisteId ? styles['isSelected'] : undefined}
                 onOpenChange={isOpen => setValgtSaksliste(isOpen, saksliste.sakslisteId)}
                 content={saksliste.sakslisteId === valgtSakslisteId ? children : undefined}
                 open={saksliste.sakslisteId === valgtSakslisteId}
@@ -190,7 +190,7 @@ export const GjeldendeSakslisterTabell = ({
                     }}
                   >
                     <XMarkIcon
-                      className={styles.removeImage}
+                      className={styles['removeImage']}
                       onMouseDown={() => setValgtSakslisteForSletting(saksliste)}
                       onKeyDown={() => setValgtSakslisteForSletting(saksliste)}
                     />
@@ -202,7 +202,7 @@ export const GjeldendeSakslisterTabell = ({
         </Table>
       )}
       <Link onClick={lagNySaksliste} onKeyDown={lagNySakslisteFn}>
-        <Detail className={styles.imageText}>
+        <Detail className={styles['imageText']}>
           <FormattedMessage id="GjeldendeSakslisterTabell.LeggTilListe" />
         </Detail>
         <PlusCircleIcon />

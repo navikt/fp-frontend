@@ -179,14 +179,14 @@ export const VilkarresultatMedOverstyringForm = ({
           <HStack gap="space-8">
             {!erOverstyrt && originalErVilkårOk !== undefined && (
               <>
-                {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
-                {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+                {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles['godkjentImage']} />}
+                {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles['avslattImage']} />}
               </>
             )}
             <Heading size="small" level="3">
               <FormattedMessage id={panelTekstKode} />
             </Heading>
-            {lovReferanse && <Detail className={styles.vilkar}>{lovReferanse}</Detail>}
+            {lovReferanse && <Detail className={styles['vilkar']}>{lovReferanse}</Detail>}
           </HStack>
           <HStack gap="space-8">
             {originalErVilkårOk && (

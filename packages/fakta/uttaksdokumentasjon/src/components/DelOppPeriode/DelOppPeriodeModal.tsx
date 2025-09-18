@@ -41,7 +41,7 @@ export const DelOppPeriodeModal = ({ periode, cancel, submit }: Props) => {
         open
         aria-label={intl.formatMessage({ id: 'DelOppPeriodeModal.Periode' })}
         onClose={cancel}
-        className={styles.modal}
+        className={styles['modal']}
       >
         <Modal.Header>
           <Heading size="small" level="2">

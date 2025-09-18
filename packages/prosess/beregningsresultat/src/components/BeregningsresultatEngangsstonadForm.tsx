@@ -25,7 +25,7 @@ export const BeregningsresultatEngangsstonadForm = ({
   },
 }: Props) => {
   return (
-    <VStack gap="space-16" className={styles.container}>
+    <VStack gap="space-16" className={styles['container']}>
       <Heading size="small" level="2">
         <FormattedMessage id="BeregningEngangsstonadForm.Beregning" />
       </Heading>

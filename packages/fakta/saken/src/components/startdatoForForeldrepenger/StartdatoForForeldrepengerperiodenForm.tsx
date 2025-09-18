@@ -94,14 +94,14 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
             </BodyShort>
             <PencilFillIcon
               title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
-              className={isReadOnly ? styles.editIconReadonly : styles.editIcon}
+              className={isReadOnly ? styles['editIconReadonly'] : styles['editIcon']}
               onClick={isReadOnly ? undefined : slåPåEditering}
             />
           </HStack>
         )}
         {visEditeringsmodus && (
           <AksjonspunktBox
-            className={styles.aksjonspunktMargin}
+            className={styles['aksjonspunktMargin']}
             erAksjonspunktApent={false}
             erIkkeGodkjentAvBeslutter={
               // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access

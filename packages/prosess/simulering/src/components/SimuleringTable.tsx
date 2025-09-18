@@ -63,9 +63,9 @@ export const SimuleringTable = ({
       );
 
       return (
-        <div className={styles.tableWrapper} key={`tableIndex${mottakerIndex + 1}`}>
+        <div className={styles['tableWrapper']} key={`tableIndex${mottakerIndex + 1}`}>
           {tableTitle(mottaker, arbeidsgiverOpplysningerPerId)}
-          <Table key={`tableIndex${mottakerIndex + 1}`} className={styles.simuleringTable}>
+          <Table key={`tableIndex${mottakerIndex + 1}`} className={styles['simuleringTable']}>
             <Table.Header>
               <Table.Row>
                 {skalViseCollapseButton(mottaker.resultatPerFagområde) ? (

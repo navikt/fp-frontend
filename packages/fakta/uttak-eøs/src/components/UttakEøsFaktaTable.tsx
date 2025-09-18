@@ -39,7 +39,7 @@ export const UttakEøsFaktaTable = ({
     <VStack gap="space-16">
       <Table>
         <Table.Header>
-          <Table.Row className={styles.headerRow}>
+          <Table.Row className={styles['headerRow']}>
             <Table.HeaderCell scope="col">
               <FormattedMessage id="UttakEøsFaktaTable.Periode" />
             </Table.HeaderCell>
@@ -74,7 +74,7 @@ export const UttakEøsFaktaTable = ({
       {erRedigerbart && (
         <>
           {visLeggTilPeriodeForm && (
-            <VStack gap="4" className={styles.panel}>
+            <VStack gap="4" className={styles['panel']}>
               <Heading size="small">
                 <FormattedMessage id="UttakEøsFaktaForm.NyPeriode" />
               </Heading>
@@ -159,7 +159,7 @@ const Rad = ({ annenForelderUttakEøsPeriode, setPerioder, isReadOnly, setDirty 
       contentGutter="none"
       content={
         erÅpen && (
-          <div className={styles.panelOpen}>
+          <div className={styles['panelOpen']}>
             <UttakEøsFaktaDetailForm
               annenForelderUttakEøsPeriode={annenForelderUttakEøsPeriode}
               oppdater={oppdaterPeriode}

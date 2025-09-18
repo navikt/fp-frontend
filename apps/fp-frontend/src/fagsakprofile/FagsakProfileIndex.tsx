@@ -98,7 +98,7 @@ export const FagsakProfileIndex = ({
     });
 
   return (
-    <div className={styles.panelPadding}>
+    <div className={styles['panelPadding']}>
       <VStack gap="space-20">
         {fagsak.brukerManglerAdresse && <UkjentAdresseMeldingIndex />}
         {shouldRedirectToBehandlinger && (
@@ -142,7 +142,9 @@ export const FagsakProfileIndex = ({
         <VStack
           gap="space-24"
           className={
-            visUtvidetBehandlingDetaljer ? styles.skjulUtvidetBehandlingDetaljer : styles.visUtvidetBehandlingDetaljer
+            visUtvidetBehandlingDetaljer
+              ? styles['skjulUtvidetBehandlingDetaljer']
+              : styles['visUtvidetBehandlingDetaljer']
           }
         >
           {!shouldRedirectToBehandlinger && (

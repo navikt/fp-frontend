@@ -46,7 +46,7 @@ export const EndreUtlandModal = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={submitCallback}>
       <Modal
-        className={styles.modal}
+        className={styles['modal']}
         open
         aria-label={intl.formatMessage({ id: 'MenyEndreUtlandIndex.UtlandTittel' })}
         onClose={cancelEvent}

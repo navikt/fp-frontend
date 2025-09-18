@@ -30,7 +30,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
   const intl = useIntl();
   if (kommunikasjonsretning === Kommunikasjonsretning.INN) {
     return (
-      <span className={styles.kommunikasjonsretning}>
+      <span className={styles['kommunikasjonsretning']}>
         <ChevronRightCircleFillIcon
           color="var(--ax-meta-purple-900)"
           width={25}
@@ -43,7 +43,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
   }
   if (kommunikasjonsretning === Kommunikasjonsretning.UT) {
     return (
-      <span className={styles.kommunikasjonsretning}>
+      <span className={styles['kommunikasjonsretning']}>
         <ChevronLeftCircleFillIcon
           color="var(--ax-meta-purple-500)"
           width={25}
@@ -55,7 +55,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
     );
   }
   return (
-    <span className={styles.kommunikasjonsretning}>
+    <span className={styles['kommunikasjonsretning']}>
       <NotePencilFillIcon
         color="var(--ax-neutral-800)"
         width={25}
@@ -124,7 +124,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
 
   if (documents.length === 0) {
     return (
-      <BodyShort size="small" className={styles.noDocuments}>
+      <BodyShort size="small" className={styles['noDocuments']}>
         <FormattedMessage id="DocumentList.NoDocuments" />
       </BodyShort>
     );
@@ -140,7 +140,7 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                 åpneDokument(saksnummer, dokument.journalpostId, dokument.dokumentId, dokument.tittel ?? undefined);
               })
           }
-          className={styles.openDocumentButton}
+          className={styles['openDocumentButton']}
           size="small"
           variant="primary"
         >
@@ -198,7 +198,10 @@ export const DocumentList = ({ documents, behandlingUuid, saksnummer }: Props) =
                 {document.behandlingUuidList &&
                   behandlingUuid &&
                   document.behandlingUuidList.includes(behandlingUuid) && (
-                    <StarFillIcon className={styles.image} title={intl.formatMessage({ id: 'DocumentList.IBruk' })} />
+                    <StarFillIcon
+                      className={styles['image']}
+                      title={intl.formatMessage({ id: 'DocumentList.IBruk' })}
+                    />
                   )}
                 <DokumentLink
                   saksnummer={saksnummer}

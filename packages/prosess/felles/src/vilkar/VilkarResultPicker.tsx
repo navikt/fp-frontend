@@ -56,13 +56,13 @@ export const VilkarResultPicker = ({
         <HStack gap="space-8">
           {erVilkårOk && (
             <>
-              <CheckmarkIcon className={styles.godkjentImage} />
+              <CheckmarkIcon className={styles['godkjentImage']} />
               <BodyShort size="small">{customVilkårOppfyltText}</BodyShort>
             </>
           )}
           {!erVilkårOk && (
             <>
-              <XMarkOctagonIcon className={styles.avslattImage} />
+              <XMarkOctagonIcon className={styles['avslattImage']} />
               <BodyShort size="small">{customVilkårIkkeOppfyltText}</BodyShort>
             </>
           )}

@@ -44,14 +44,14 @@ export const ProsessPanelTemplate = ({
     <HStack gap="space-8">
       {originalErVilkårOk !== undefined && (
         <>
-          {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
-          {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+          {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles['godkjentImage']} />}
+          {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles['avslattImage']} />}
         </>
       )}
       <Heading size="small" level="3">
         {title}
       </Heading>
-      {lovReferanse && <Detail className={styles.vilkar}>{lovReferanse}</Detail>}
+      {lovReferanse && <Detail className={styles['vilkar']}>{lovReferanse}</Detail>}
     </HStack>
     <HStack gap="space-8">
       {originalErVilkårOk && <Label size="small">{intl.formatMessage({ id: 'ProsessPanelTemplate.ErOppfylt' })}</Label>}
@@ -63,7 +63,7 @@ export const ProsessPanelTemplate = ({
       )}
     </HStack>
     <AksjonspunktBox
-      className={styles.aksjonspunktMargin}
+      className={styles['aksjonspunktMargin']}
       erAksjonspunktApent={harÅpentAksjonspunkt}
       erIkkeGodkjentAvBeslutter={erIkkeGodkjentAvBeslutter}
     >

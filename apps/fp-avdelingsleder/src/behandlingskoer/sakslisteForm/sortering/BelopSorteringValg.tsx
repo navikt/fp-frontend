@@ -66,21 +66,21 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
         <RhfTextField
           name="fra"
           control={control}
-          className={styles.dato}
+          className={styles['dato']}
           validate={[hasValidPosOrNegInteger]}
           onChange={value => lagreFraDebounce(value)}
         />
-        <Detail className={styles.beløp}>
+        <Detail className={styles['beløp']}>
           <FormattedMessage id="SorteringVelger.Valuta" />
         </Detail>
         <RhfTextField
           name="til"
           control={control}
-          className={styles.dato}
+          className={styles['dato']}
           validate={[hasValidPosOrNegInteger]}
           onChange={value => lagreTilDebounce(value)}
         />
-        <Detail className={styles.beløp}>
+        <Detail className={styles['beløp']}>
           <FormattedMessage id="SorteringVelger.Valuta" />
         </Detail>
       </HStack>

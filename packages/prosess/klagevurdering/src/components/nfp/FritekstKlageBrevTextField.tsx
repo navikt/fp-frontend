@@ -18,7 +18,7 @@ export const FritekstBrevTextField = ({ språkkode, readOnly = true }: Props) =>
   const { control } = useFormContext<KlageFormType>();
 
   return (
-    <div className={styles.fritekstTilBrevTextArea}>
+    <div className={styles['fritekstTilBrevTextArea']}>
       <RhfTextarea
         name="fritekstTilBrev"
         control={control}
