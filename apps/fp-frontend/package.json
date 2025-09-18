@@ -112,7 +112,7 @@
     "@navikt/ft-prosess-beregningsgrunnlag": "11.1.12",
     "@navikt/ft-prosess-tilbakekreving": "8.1.12",
     "@navikt/ft-prosess-tilbakekreving-foreldelse": "8.1.20",
-    "@navikt/ft-prosess-tilbakekreving-vedtak": "6.2.1",
+    "@navikt/ft-prosess-tilbakekreving-vedtak": "6.2.2",
     "@navikt/ft-ui-komponenter": "6.2.4",
     "@navikt/ft-utils": "3.8.6",
     "@popperjs/core": "2.11.8",
