@@ -104,7 +104,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
   const land = countrySelectValues(countryCodes);
 
   return (
-    <PeriodFieldArray<FormValues>
+    <PeriodFieldArray
       fields={fields}
       titleText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.AngiOpphold' })}
       bodyText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Add' })}
