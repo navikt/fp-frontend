@@ -66,7 +66,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
       >
         <VStack gap="space-16">
           <HStack gap="space-16">
-            <Termindato isReadOnly={isReadOnly} />
+            <Termindato isReadOnly={isReadOnly} isRequired />
 
             <RhfDatepicker
               control={formMethods.control}

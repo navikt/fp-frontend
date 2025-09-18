@@ -108,6 +108,8 @@ export default meta;
 
 type Story = StoryObj<typeof meta>;
 
+export const Default: Story = {};
+
 export const APTerminbekreftelse: Story = {
   args: {
     aksjonspunkterForPanel: [apTerminbekreftelse],
@@ -279,6 +281,49 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
   },
 };
 
+export const SjekkManglendeFødselUtenTermindatoFraSøknad = {
+  args: {
+    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
+    fødsel: {
+      søknad: {
+        barn: [
+          {
+            fødselsdato: '2025-06-04',
+            dødsdato: null,
+            barnNummer: 1,
+          },
+        ],
+        termindato: null,
+        utstedtdato: null,
+        antallBarn: 1,
+      },
+      register: {
+        barn: [],
+      },
+      gjeldende: {
+        termin: null,
+        utstedtdato: null,
+        antallBarn: {
+          kilde: 'SØKNAD',
+          antall: 1,
+        },
+        barn: [
+          {
+            kilde: 'SØKNAD',
+            barn: {
+              fødselsdato: '2025-06-04',
+              dødsdato: null,
+              barnNummer: 1,
+            },
+            kanOverstyres: true,
+          },
+        ],
+        fødselDokumetasjonStatus: 'IKKE_VURDERT',
+      },
+    },
+  },
+};
+
 export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
   args: {
     isReadOnly: true,
@@ -291,8 +336,6 @@ export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
     terminbekreftelseDokument: undefined,
   },
 };
-
-export const Default: Story = {};
 
 export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
   args: {

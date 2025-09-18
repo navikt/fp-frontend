@@ -33,6 +33,8 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
     defaultValues: mellomlagretFormData ?? initialValues(gjeldende, aksjonspunkt),
   });
 
+  const erBarnFødt = formMethods.watch('erBarnFødt');
+
   const begrunnelse = formMethods.watch('begrunnelse');
   const finnesBarnIFReg = gjeldende.barn.some(b => b.kilde === 'FOLKEREGISTER');
   const diffIAntallBarn = register.barn.length > 0 && register.barn.length !== søknad.antallBarn;
@@ -62,7 +64,7 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
             </Alert>
           )}
 
-          <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} />
+          <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} isRequired={erBarnFødt === false} />
 
           <ErBarnFødt isReadOnly={isReadOnly} finnesBarnIFReg={finnesBarnIFReg} antallBarnISøknad={søknad.antallBarn} />
 

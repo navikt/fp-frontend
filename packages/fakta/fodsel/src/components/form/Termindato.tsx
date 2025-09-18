@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { type ComponentProps, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
@@ -9,7 +9,13 @@ import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@na
 
 import { type FaktaKilde, getLabelForFaktaKilde } from '@navikt/fp-fakta-felles';
 import type { FødselGjeldende } from '@navikt/fp-types';
-import { maxTermindato, minTermindato, notEmpty } from '@navikt/fp-utils';
+import { maxTermindato, minTermindato } from '@navikt/fp-utils';
+
+const notRequiredValidation: ComponentProps<typeof RhfDatepicker>['validate'] = [
+  hasValidDate,
+  dateAfterOrEqual(minTermindato()),
+  dateBeforeOrEqual(maxTermindato()),
+];
 
 export type TermindatoFormValues = {
   termindato?: string;
@@ -18,9 +24,10 @@ export type TermindatoFormValues = {
 
 interface TermindatoProps {
   isReadOnly: boolean;
+  isRequired?: boolean;
 }
 
-export const Termindato = ({ isReadOnly }: TermindatoProps) => {
+export const Termindato = ({ isReadOnly, isRequired = true }: TermindatoProps) => {
   const intl = useIntl();
   const { control } = useFormContext<TermindatoFormValues>();
 
@@ -30,7 +37,7 @@ export const Termindato = ({ isReadOnly }: TermindatoProps) => {
       name="termindato"
       size="medium"
       label={intl.formatMessage({ id: 'Label.Termindato' })}
-      validate={[required, hasValidDate, dateAfterOrEqual(minTermindato()), dateBeforeOrEqual(maxTermindato())]}
+      validate={isRequired ? [required, ...notRequiredValidation] : notRequiredValidation}
       fromDate={minTermindato().toDate()}
       toDate={maxTermindato().toDate()}
       defaultMonth={new Date()}
@@ -41,13 +48,15 @@ export const Termindato = ({ isReadOnly }: TermindatoProps) => {
 
 interface TermindatoMedReadonlyToggleProps {
   isReadOnly: boolean;
+  isRequired?: boolean;
 }
 
-export const TermindatoMedReadonlyToggle = ({ isReadOnly }: TermindatoMedReadonlyToggleProps) => {
+export const TermindatoMedReadonlyToggle = ({ isReadOnly, isRequired }: TermindatoMedReadonlyToggleProps) => {
   const intl = useIntl();
   const { getValues, getFieldState, resetField } = useFormContext<TermindatoFormValues>();
 
-  const [erRedigerbar, setErRedigerbar] = useState(isReadOnly);
+  const harInitiellTermindato = getValues('termindato');
+  const [erRedigerbar, setErRedigerbar] = useState(isReadOnly || !harInitiellTermindato);
   const { isDirty } = getFieldState('termindato');
   const kilde = getValues('termindatoKilde');
 
@@ -63,17 +72,17 @@ export const TermindatoMedReadonlyToggle = ({ isReadOnly }: TermindatoMedReadonl
 
   return (
     <HStack gap="2">
-      <Termindato isReadOnly={isReadOnly || !erRedigerbar} />
+      <Termindato isReadOnly={isReadOnly || !erRedigerbar} isRequired={isRequired} />
 
       <HStack
         gap="2"
         align="center"
         paddingBlock={isReadOnly || !erRedigerbar ? 'space-24 space-0' : 'space-32 space-0'}
       >
-        {!isReadOnly && (
+        {!isReadOnly && harInitiellTermindato && (
           <Button
             size="small"
-            icon={ erRedigerbar?<XMarkIcon aria-hidden/> :<PencilIcon aria-hidden />}
+            icon={erRedigerbar ? <XMarkIcon aria-hidden /> : <PencilIcon aria-hidden />}
             title={intl.formatMessage({
               id: erRedigerbar ? 'Termindato.AvbrytRedigering' : 'Termindato.EndreTermindato',
             })}
@@ -93,5 +102,5 @@ Termindato.initialValues = (gjeldende: FødselGjeldende) => ({
 });
 
 Termindato.transformValues = (values: TermindatoFormValues) => ({
-  termindato: notEmpty(values.termindato),
+  termindato: values.termindato || null,
 });

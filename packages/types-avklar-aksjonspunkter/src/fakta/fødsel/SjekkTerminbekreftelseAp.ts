@@ -4,6 +4,6 @@ import type { AksjonspunktTilBekreftelse } from '../../AksjonspunktTilBekreftels
 
 export type SjekkTerminbekreftelseAp = {
   utstedtdato: string;
-  termindato: string;
+  termindato: string | null;
   antallBarn: number;
 } & AksjonspunktTilBekreftelse<AksjonspunktKode.SJEKK_TERMINBEKREFTELSE>;
