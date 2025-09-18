@@ -1,10 +1,18 @@
 import {
+  Aktsomhet,
   BehandlingArsakTypeEnum,
   type BehandlingResultatTypeTilbakekreving,
   BehandlingTypeEnum,
+  ForeldelseVurderingType,
+  HendelseType,
+  HendelseUnderType,
   type HistorikkAktor,
+  SærligGrunn,
   type SkjermlenkeTypeTilbakekreving,
+  TilbakekrevingVidereBehandling,
+  VedtakResultatType,
   type VenteArsakType,
+  VilkårResultat,
   type VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
@@ -22,6 +30,14 @@ type KodeverkEnumMap = {
   Venteårsak: VenteArsakType;
   VurderÅrsak: VurderÅrsak;
   VergeType: VergeType;
+  Aktsomhet: Aktsomhet;
+  VedtakResultatType: VedtakResultatType;
+  HendelseType: HendelseType;
+  SærligGrunn: SærligGrunn;
+  ForeldelseVurderingType: ForeldelseVurderingType;
+  VilkårResultat: VilkårResultat;
+  HendelseUnderType: HendelseUnderType;
+  VidereBehandling: TilbakekrevingVidereBehandling;
 };
 
 export type TilbakekrevingKodeverkType = keyof KodeverkEnumMap;

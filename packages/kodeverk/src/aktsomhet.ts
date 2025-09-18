@@ -1,0 +1,5 @@
+export enum Aktsomhet {
+  FORSETT = 'FORSETT',
+  GROVT_UAKTSOM = 'GROVT_UAKTSOM',
+  SIMPEL_UAKTSOM = 'SIMPEL_UAKTSOM',
+}

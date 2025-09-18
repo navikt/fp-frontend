@@ -105,3 +105,8 @@ export { MedlemskapDekningType } from './src/medlemskapDekningType';
 export { MedlemskapType } from './src/medlemskapType';
 export { VedtakbrevType } from './src/vedtakbrevType';
 export { OppgaveBehandlingStatus } from './src/oppgaveBehandlingStatus';
+export { Aktsomhet } from './src/aktsomhet';
+export { HendelseType } from './src/hendelseType';
+export { HendelseUnderType } from './src/hendelseUnderType';
+export { SærligGrunn } from './src/særligGrunn';
+export { VilkårResultat } from './src/vilkårResultat';

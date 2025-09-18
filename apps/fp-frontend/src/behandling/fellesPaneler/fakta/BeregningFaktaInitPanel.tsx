@@ -78,8 +78,9 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
   );
 };
 
-const Wrapper = (props: ComponentProps<typeof BeregningFaktaIndex>) => {
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
+const Wrapper = (props: Omit<ComponentProps<typeof BeregningFaktaIndex>, 'formData' | 'setFormData'>) => {
+  const { mellomlagretFormData, setMellomlagretFormData } =
+    useMellomlagretFormData<React.ComponentProps<typeof BeregningFaktaIndex>['formData']>();
   return <BeregningFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };
 
@@ -100,12 +101,13 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 
 const lagModifisertCallback =
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
-  (aksjonspunkterSomSkalLagres: SubmitBeregningType) => {
+  (aksjonspunkterSomSkalLagres: SubmitBeregningType[]) => {
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
     const transformerteData = apListe.map(apData => ({
       kode: mapBGKodeTilFpsakKode(apData.kode),
+      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
       ...apData.grunnlag[0],
     }));
     return submitCallback(transformerteData);
@@ -145,5 +147,6 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgr
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
+  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
   return [nyttBG];
 };
