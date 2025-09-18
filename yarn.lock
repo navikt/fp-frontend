@@ -901,12 +901,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/codegen-core@npm:^0.0.1":
-  version: 0.0.1
-  resolution: "@hey-api/codegen-core@npm:0.0.1"
+"@hey-api/codegen-core@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@hey-api/codegen-core@npm:0.1.0"
   peerDependencies:
     typescript: ">=5.5.3"
-  checksum: f8225579bfcb423bea7792feb803fb91e8ebe094c224c11385d2325c743386e4fcf3087a0886f54e5a8b1702b9a2cc5d583b771eb9f485b4ae6cd83c439b5c38
+  checksum: ad55b5d1850e279c06185d24dc16faa503f5b9c9897d821701b5e161330c255af057de87e600e404372bb6e8b1bbcbe2aa821e27066ca161d6186829a4355bf1
   languageName: node
   linkType: hard
 
@@ -922,25 +922,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/openapi-ts@npm:0.82.5":
-  version: 0.82.5
-  resolution: "@hey-api/openapi-ts@npm:0.82.5"
+"@hey-api/openapi-ts@npm:0.83.1":
+  version: 0.83.1
+  resolution: "@hey-api/openapi-ts@npm:0.83.1"
   dependencies:
-    "@hey-api/codegen-core": ^0.0.1
+    "@hey-api/codegen-core": ^0.1.0
     "@hey-api/json-schema-ref-parser": 1.1.0
     ansi-colors: 4.1.3
     c12: 2.0.1
     color-support: 1.1.3
     commander: 13.0.0
     handlebars: 4.7.8
-    js-yaml: 4.1.0
     open: 10.1.2
     semver: 7.7.2
   peerDependencies:
     typescript: ">=5.5.3"
   bin:
     openapi-ts: bin/index.cjs
-  checksum: c05fc0084a2e08d8516dd94c7136482073e4589eb47b7f2178618fba28ea786497808eab8cb978706fd365c226bce430ae745de170e05f815809564a250219b5
+  checksum: dd39c8d1ea77f22e1720bf4acf32213f24b7254f9bd2839573232cba498b7b4e6d6d42964a303c5093069cace16a79b9a6cfa6808c7faab1ed18cfaf92520239
   languageName: node
   linkType: hard
 
@@ -5619,18 +5618,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-a11y@npm:9.1.5":
-  version: 9.1.5
-  resolution: "@storybook/addon-a11y@npm:9.1.5"
-  dependencies:
-    "@storybook/global": ^5.0.0
-    axe-core: ^4.2.0
-  peerDependencies:
-    storybook: ^9.1.5
-  checksum: 028afbffd2b6071e97123f9d4b6d5703cf70c49f9ed68b47bf772ac01e71c5188a504af791e7390295b30b7faecdf0299d6da4b5d18796af813a00c03acd0120
-  languageName: node
-  linkType: hard
-
 "@storybook/addon-a11y@npm:9.1.6":
   version: 9.1.6
   resolution: "@storybook/addon-a11y@npm:9.1.6"
@@ -5643,18 +5630,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@storybook/addon-links@npm:9.1.5":
-  version: 9.1.5
-  resolution: "@storybook/addon-links@npm:9.1.5"
+"@storybook/addon-links@npm:9.1.6":
+  version: 9.1.6
+  resolution: "@storybook/addon-links@npm:9.1.6"
   dependencies:
     "@storybook/global": ^5.0.0
   peerDependencies:
     react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0-beta
-    storybook: ^9.1.5
+    storybook: ^9.1.6
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: c33630c61a4bbbc74ddfa5f2c9dc5abe310d0de39064df739f4b441208b4df0900edd800ecd8b275f3613a9a8412f8f250dc322ec7fc5aa7aad8c6cf94efae3f
+  checksum: fc779b9efc93d0ece17493b1f5862d564f6489be1b4b0f2bc4dea3d6ef40988218d3a638e48c6c5f1f7ca4e61ec4213d8eb19ee56414234ed20818bd2401bc62
   languageName: node
   linkType: hard
 
@@ -9270,11 +9257,11 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": 0.82.5
+    "@hey-api/openapi-ts": 0.83.1
     "@navikt/aksel-stylelint": 7.30.1
     "@sentry/cli": 2.53.0
-    "@storybook/addon-a11y": 9.1.5
-    "@storybook/addon-links": 9.1.5
+    "@storybook/addon-a11y": 9.1.6
+    "@storybook/addon-links": 9.1.6
     "@storybook/react": 9.1.5
     "@testing-library/jest-dom": 6.8.0
     "@types/react": 19.1.12
