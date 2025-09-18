@@ -7,6 +7,7 @@ import { PeriodLabel } from '@navikt/ft-ui-komponenter';
 
 import type { ArbeidsforholdFodselOgTilrettelegging, SvpAvklartOppholdPeriode } from '@navikt/fp-types';
 
+import type { TilretteleggingFormValues } from '../../../../types/TilretteleggingFormValues';
 import { OppholdForm } from './OppholdForm';
 
 import styles from './oppholdPeriodeTabellRad.module.css';
@@ -39,7 +40,7 @@ const utledKilde = (intl: IntlShape, opphold: SvpAvklartOppholdPeriode) => {
 };
 
 interface Props {
-  navn: string;
+  navn: `arbeidsforhold.${number}.avklarteOppholdPerioder.${number}`;
   opphold: SvpAvklartOppholdPeriode;
   readOnly: boolean;
   index: number;
@@ -64,7 +65,7 @@ export const OppholdPeriodeTabellRad = ({
   const intl = useIntl();
   const [open, setOpen] = useState(openRad);
 
-  const { setValue } = useFormContext();
+  const { setValue } = useFormContext<TilretteleggingFormValues>();
 
   const oppdaterOpphold = (values: SvpAvklartOppholdPeriode) => {
     setOpen(false);

@@ -1,4 +1,6 @@
 import type {
+  foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak,
+  foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType,
   tjenester_behandling_svp_SvpArbeidsforholdDto,
   tjenester_behandling_svp_SvpAvklartOppholdPeriodeDto,
   tjenester_behandling_svp_SvpTilretteleggingDatoDto,
@@ -15,3 +17,7 @@ export type SvpAvklartOppholdPeriode = tjenester_behandling_svp_SvpAvklartOpphol
 export type ArbeidsforholdFodselOgTilrettelegging = tjenester_behandling_svp_SvpArbeidsforholdDto;
 
 export type FodselOgTilrettelegging = tjenester_behandling_svp_SvpTilretteleggingDto;
+
+export type OppholdÅrsak = foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+
+export type TilretteleggingType = foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;

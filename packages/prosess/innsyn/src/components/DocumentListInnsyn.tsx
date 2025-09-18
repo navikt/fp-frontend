@@ -11,6 +11,7 @@ import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import type { Dokument } from '@navikt/fp-types';
 
 import { DokumentLink } from '../../../../ui-komponenter';
+import type { InnsynFormValues } from './InnsynFormValues';
 
 import styles from './documentListInnsyn.module.css';
 
@@ -57,8 +58,7 @@ interface Props {
 export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Props) => {
   const intl = useIntl();
 
-  // TODO (TOR) Manglar type
-  const { control } = useFormContext();
+  const { control } = useFormContext<InnsynFormValues>();
 
   if (documents.length === 0) {
     return (
