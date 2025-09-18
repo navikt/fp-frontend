@@ -5,8 +5,14 @@ import { useNavigate } from 'react-router-dom';
 import type { Theme } from '@navikt/ds-react';
 import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 
-import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
-import { DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
+import {
+  ApiPollingStatus,
+  AVDELINGSLEDER_URL_NAME,
+  FPSAK_URL_NAME,
+  RETTSKILDE_URL,
+  SYSTEMRUTINE_URL,
+} from '@navikt/fp-konstanter';
+import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
 
 import { ErrorType, type FpError } from '../data/error/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
@@ -52,6 +58,12 @@ export const Dekorator = ({
     e.preventDefault();
   };
 
+  const interneLenker = new Array<DekoratorLenke>();
+  interneLenker.push({
+    tekst: intl.formatMessage({ id: 'Dekorator.Foreldrepenger' }),
+    callback: () => (window.location.href = window.location.href.replace(AVDELINGSLEDER_URL_NAME, FPSAK_URL_NAME)),
+  });
+
   const eksterneLenker = [
     {
       tekst: intl.formatMessage({ id: 'Dekorator.Rettskilde' }),
@@ -65,13 +77,13 @@ export const Dekorator = ({
 
   return (
     <DekoratorMedFeilviserSakIndex
-      tittel={intl.formatMessage({ id: 'Dekorator.Foreldrepenger' })}
+      tittel={intl.formatMessage({ id: 'Dekorator.Avdelingsleder' })}
       tittelCallback={visLos}
       navAnsattNavn={navAnsatt.navn}
       feilmeldinger={hideErrorMessages ? [] : formaterFeilmeldinger(intl, errorMessages, queryStrings, crashMessage)}
       fjernFeilmeldinger={removeErrorMessages}
       setSiteHeight={setSiteHeight}
-      interneLenker={[]}
+      interneLenker={interneLenker}
       eksterneLenker={eksterneLenker}
       theme={theme}
       setTheme={setTheme}

@@ -2,6 +2,7 @@ export { ProsessStegCode } from './src/prosessStegCodes';
 export { FaktaPanelCode } from './src/faktaPanelCodes';
 export { ApiPollingStatus } from './src/apiPollingStatus';
 export { skjermlenkeCodes, skjermlenkeCodesFpTilbake } from './src/skjermlenkeCodes';
+export { FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME } from './src/appnavn';
 
 export {
   LINK_TIL_BESTE_BEREGNING_REGNEARK,
