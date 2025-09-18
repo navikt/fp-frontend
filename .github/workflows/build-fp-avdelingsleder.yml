@@ -22,7 +22,7 @@ jobs:
       id-token: write
     uses: navikt/fp-frontend/.github/workflows/build.yml@los-app # midlertidig til vi er på master
     with:
-      runs-on: 'ubuntu-latest-8-cores'
+      runs-on: 'ubuntu-latest'
       node-version: '22.17.1'
       build-image: ${{ github.ref_name == 'master' }} # default: true
       push-image: ${{ github.ref_name == 'master' }} # default: false
