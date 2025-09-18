@@ -1,12 +1,10 @@
 import { useEffect, useState } from 'react';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { useIntl } from 'react-intl';
 import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 
-import { Heading } from '@navikt/ds-react';
 import { useMutation } from '@tanstack/react-query';
 
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
-import { AvdelingslederIndex } from '@navikt/fp-los-avdelingsleder-old';
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import type { NavAnsatt } from '@navikt/fp-types';
@@ -22,7 +20,6 @@ import { FagsakIndex } from '../../fagsak/FagsakIndex';
 import { FagsakSearchIndex } from '../../fagsakSearch/FagsakSearchIndex';
 import {
   aktoerRoutePath,
-  avdelingslederRoutePath,
   fagsakRoutePath,
   getFagsakHref,
   journalføringRoutePath,
@@ -93,18 +90,6 @@ export const Home = ({ headerHeight, navAnsatt }: Props) => {
               />
             ) : (
               <FagsakSearchIndex />
-            )
-          }
-        />
-        <Route
-          path={avdelingslederRoutePath}
-          element={
-            erLosTilgjengelig ? (
-              <AvdelingslederIndex setLosErIkkeTilgjengelig={setLosErIkkeTilgjengelig} navAnsatt={navAnsatt} />
-            ) : (
-              <Heading size="small" level="2">
-                <FormattedMessage id="Los.IkkeTilgjengelig" />
-              </Heading>
             )
           }
         />

@@ -3,7 +3,6 @@ import type { Location, Search } from 'history';
 
 import { skjermlenkeCodes } from '@navikt/fp-konstanter';
 
-export const AVDELINGSLEDER_PATH = 'avdelingsleder';
 export const JOURNALFØRING_PATH = 'journalforing';
 export const UTBETALINGSDATA_PATH = 'utbetalingsdata';
 
@@ -19,7 +18,6 @@ type QueryParams = {
 
 export const journalføringRoutePath = `/${JOURNALFØRING_PATH}`;
 export const utbetalingsdataIs15RoutePath = `/${UTBETALINGSDATA_PATH}`;
-export const avdelingslederRoutePath = `/${AVDELINGSLEDER_PATH}`;
 export const fagsakRoutePath = '/fagsak/:saksnummer//*';
 export const aktoerRoutePath = '/aktoer/:aktoerId';
 export const behandlingerRoutePath = '/behandling//*';

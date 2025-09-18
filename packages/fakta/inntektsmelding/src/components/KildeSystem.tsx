@@ -14,6 +14,8 @@ export const KildeSystem = ({ kildeSystem }: { kildeSystem: string }) => {
 
 const getKilde = (kildeSystem: string, intl: IntlShape) => {
   switch (kildeSystem.toUpperCase()) {
+    case '':
+      return intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.ukjent' });
     case 'NAV_NO':
       return intl.formatMessage({ id: 'InntektsmeldingFaktaPanel.kilde.nav' });
     case 'ALTINN':

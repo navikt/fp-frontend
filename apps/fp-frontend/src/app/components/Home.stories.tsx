@@ -128,12 +128,6 @@ export const VisSøk: Story = {
   },
 };
 
-export const VisLosIkkeTilgjengelig: Story = {
-  parameters: {
-    url: '/avdelingsleder',
-  },
-};
-
 export const VisSideIkkeFunnet: Story = {
   parameters: {
     url: '/tadgadfsf',

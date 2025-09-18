@@ -4,7 +4,7 @@ import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './Home.stories';
 
-const { VisAktør, VisSøk, VisLosIkkeTilgjengelig, VisSideIkkeFunnet } = composeStories(stories);
+const { VisAktør, VisSøk,VisLosIkkeTilgjengelig, VisSideIkkeFunnet } = composeStories(stories);
 
 describe('Home', () => {
   it('skal rendre aktør-panel', async () => {
