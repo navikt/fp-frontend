@@ -47,12 +47,6 @@ export const TermindatoMedReadonlyToggle = ({ isReadOnly }: TermindatoMedReadonl
   const intl = useIntl();
   const { getValues, getFieldState, resetField } = useFormContext<TermindatoFormValues>();
 
-  // isReadOnly == true = false -> kan ikke redigere
-  // isReadOnly == false = true -> kan redigere
-
-  // skal endres hvis
-  //!isReadOnly && erRedigerbar
-
   const [erRedigerbar, setErRedigerbar] = useState(isReadOnly);
   const { isDirty } = getFieldState('termindato');
   const kilde = getValues('termindatoKilde');
@@ -95,7 +89,7 @@ export const TermindatoMedReadonlyToggle = ({ isReadOnly }: TermindatoMedReadonl
 
 Termindato.initialValues = (gjeldende: FødselGjeldende) => ({
   termindato: gjeldende.termin?.termindato ?? '',
-  termindatoKilde: notEmpty(gjeldende.termin?.kilde),
+  termindatoKilde: gjeldende.termin?.kilde ?? 'SØKNAD',
 });
 
 Termindato.transformValues = (values: TermindatoFormValues) => ({
