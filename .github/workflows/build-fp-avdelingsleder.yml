@@ -20,7 +20,7 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    uses: navikt/fp-frontend/.github/workflows/build.yml@los-app # midlertidig til vi er på master
+    uses: navikt/fp-frontend/.github/workflows/build.yml@master # midlertidig til vi er på master
     with:
       runs-on: 'ubuntu-latest'
       node-version: '22.17.1'
