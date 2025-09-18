@@ -26,10 +26,10 @@ const FAGSAK_1 = {
     navn: 'Petra',
     fødselsnummer: '232323',
     fødselsdato: '1980-10-10',
-    dødsdato: null,
+
     aktørId: '111111',
     kjønn: KjønnkodeEnum.KVINNE,
-    diskresjonskode: null,
+
     språkkode: '-',
   },
   relasjonsRolleType: '-',

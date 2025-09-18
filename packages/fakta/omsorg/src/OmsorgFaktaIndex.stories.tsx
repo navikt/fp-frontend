@@ -29,8 +29,6 @@ const adresse1 = {
   postNummer: '4123',
   poststed: 'Bobygda',
   land: 'Norge',
-  adresselinje2: null,
-  adresselinje3: null,
 } satisfies Personadresse;
 const adresse2 = {
   fom: '2019-01-01',
@@ -40,8 +38,6 @@ const adresse2 = {
   postNummer: '0203',
   poststed: 'Bobygda',
   land: 'Norge',
-  adresselinje2: null,
-  adresselinje3: null,
 } satisfies Personadresse;
 
 const defaultBruker: PersonopplysningerBasis = {
@@ -50,11 +46,8 @@ const defaultBruker: PersonopplysningerBasis = {
   kjønn: KjønnkodeEnum.MANN,
   sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
-  dødsdato: null,
+
   adresser: [adresse1, adresse2],
-  fnr: null,
-  diskresjonskode: null,
-  vn: null,
 };
 const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
@@ -62,11 +55,8 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: SivilstandType.SAMBOER,
   fødselsdato: '1989-01-01',
-  dødsdato: null,
+
   adresser: [adresse1, adresse2],
-  fnr: null,
-  diskresjonskode: null,
-  vn: null,
 };
 const defaultBarn: PersonopplysningerBasis = {
   navn: 'Tutta Utvikler',
@@ -76,9 +66,6 @@ const defaultBarn: PersonopplysningerBasis = {
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
   sivilstand: SivilstandType.UGIFT,
-  fnr: null,
-  diskresjonskode: null,
-  vn: null,
 };
 
 const ytelsefordeling = {} as Ytelsefordeling;
@@ -107,18 +94,13 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
       {
         definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
         vilkarType: VilkarType.FODSELSVILKARET_MOR,
         toTrinnsBehandling: false,
-        toTrinnsBehandlingGodkjent: null,
-        vurderPaNyttArsaker: null,
-        besluttersBegrunnelse: null,
+
         aksjonspunktType: AksjonspunktType.AUTOPUNKT,
         erAktivt: true,
-        fristTid: null,
-        endretTidspunkt: null,
-        endretAv: null,
       },
     ],
     alleMerknaderFraBeslutter: {

@@ -27,7 +27,6 @@ export const ÅpentAksjonspunkt2Ledd: Story = {
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
     status: VilkarUtfallType.IKKE_VURDERT,
@@ -80,7 +79,6 @@ export const ÅpentAksjonspunkt4Ledd: Story = {
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
     isReadOnly: false,

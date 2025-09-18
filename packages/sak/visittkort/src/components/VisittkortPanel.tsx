@@ -21,8 +21,8 @@ const utledKjonn = (kjonn: string): Gender => {
 interface Props {
   erMor: boolean;
   bruker: Person;
-  annenPart: Person | null;
-  familiehendelse: FagsakHendelse | null;
+  annenPart?: Person;
+  familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
   harVergeIÅpenBehandling: boolean;
   erTilbakekreving: boolean;

@@ -40,18 +40,13 @@ const aktivitetskravGrunnlagListe = [
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 
 const opprettetDokumentasjonVurderingBehovListe = [
@@ -122,7 +117,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -196,7 +191,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
         status: AksjonspunktStatus.UTFORT,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],

@@ -40,18 +40,13 @@ import { VedtakProsessIndex } from './VedtakProsessIndex';
 const defaultAksjonspunkt = {
   definisjon: AksjonspunktKode.FORESLA_VEDTAK,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 const defaultAksjonspunkter = [defaultAksjonspunkt];
 
@@ -281,7 +276,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: null,
+
           kanLoses: false,
           toTrinnsBehandling: true,
         },
@@ -289,21 +284,21 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: null,
+
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: null,
+
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: null,
+
           kanLoses: false,
           toTrinnsBehandling: true,
         },
@@ -358,7 +353,6 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
         beskrivelser: [
           {
-            header: null,
             kommentarer: ['VL: Se sto mottatt 24.02.25'],
           },
         ],
@@ -377,7 +371,6 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
             ],
           },
           {
-            header: null,
             kommentarer: ['VL: Se sto mottatt 20.02.25'],
           },
         ],
@@ -386,7 +379,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       {
         oppgaveId: '3',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] }],
+        beskrivelser: [{ kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] }],
         dokumenter: [
           {
             journalpostId: '123',
@@ -408,7 +401,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       {
         oppgaveId: '4',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra studiested/skole'] }],
+        beskrivelser: [{ kommentarer: ['VL: Bekreftelse fra studiested/skole'] }],
         dokumenter: [
           {
             journalpostId: '123',
@@ -428,7 +421,6 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
             ],
           },
           {
-            header: null,
             kommentarer: [
               'Han har AAP, så det er greit å vite om han får Foreldrepenger før man evt stanser denne ytelsen.',
             ],
@@ -437,7 +429,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
             header: '--- 19.02.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
             kommentarer: ['Må ringe bruker for å avklare AAP og Foreldrepenger', 'Undersøk dette før vi går videre'],
           },
-          { header: null, kommentarer: ['VL: Søknad om foreldrepenger ved fødsel'] },
+          { kommentarer: ['VL: Søknad om foreldrepenger ved fødsel'] },
         ],
         dokumenter: [
           {
@@ -820,9 +812,6 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         vilkarType: VilkarType.SOKNADFRISTVILKARET,
         vilkarStatus: VilkarUtfallType.IKKE_OPPFYLT,
         overstyrbar: true,
-        avslagKode: null,
-        evaluering: null,
-        input: null,
       },
     ],
     isReadOnly: false,

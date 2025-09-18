@@ -21,16 +21,7 @@ interface Props {
   lagreFormkravVurdering: (data: FormkravMellomlagretDataType) => void;
 }
 
-const tomKlageVurdering = {
-  klageFormkravResultatNFP: null,
-  klageVurderingResultatNFP: null,
-  klageFormkravResultatKA: null,
-  klageVurderingResultatNK: null,
-  aktuelleHjemler: null,
-  underBehandlingKabal: null,
-  behandletAvKabal: null,
-  mottattDato: null,
-};
+const tomKlageVurdering = {};
 
 export const FormkravProsessIndex = ({
   klageVurdering = tomKlageVurdering,

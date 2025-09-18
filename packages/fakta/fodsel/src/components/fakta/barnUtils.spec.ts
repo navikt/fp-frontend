@@ -7,7 +7,7 @@ import { erBarnUlike, erGjeldendeBarnLike, formaterLiv } from './barnUtils';
 describe('barnUtils', () => {
   describe('formaterLiv', () => {
     it('skal formatere fødselsdato', () => {
-      expect(formaterLiv({ fødselsdato: '2025-05-28', dødsdato: null })).toBe('f. 28.05.2025');
+      expect(formaterLiv({ fødselsdato: '2025-05-28' })).toBe('f. 28.05.2025');
     });
     it('skal formatere fødsel og dødsdato', () => {
       expect(formaterLiv({ fødselsdato: '2025-05-28', dødsdato: '2025-06-01' })).toBe('f. 28.05.2025 - d. 01.06.2025');
@@ -39,7 +39,6 @@ describe('barnUtils', () => {
             ...barnMedDødsdatoIFreg,
             barn: {
               fødselsdato: '2025-05-28',
-              dødsdato: null,
             },
           },
         ]),

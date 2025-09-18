@@ -52,7 +52,7 @@ export const ÅpentAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         vilkarType: VilkarType.SOKNADFRISTVILKARET,
       },
     ] as Aksjonspunkt[],

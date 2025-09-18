@@ -7,7 +7,6 @@ export const faktaArbeidsforhold: FaktaArbeidsforhold[] = [
     arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
   },
   {
-    arbeidsgiverReferanse: null,
     arbeidType: UttakArbeidType.FRILANS,
   },
 ];

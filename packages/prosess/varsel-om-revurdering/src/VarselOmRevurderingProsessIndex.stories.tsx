@@ -20,7 +20,6 @@ const aksjonspunkterForPanel = [
   {
     definisjon: AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: null,
   },
 ] as Aksjonspunkt[];
 

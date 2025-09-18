@@ -4,8 +4,7 @@ import { type OmsorgOgRett } from '@navikt/fp-types';
 export const omsorgOgRett: OmsorgOgRett = {
   søknad: {
     søkerHarAleneomsorg: 'NEI',
-    annenpartIdent: null,
-    annenpartBostedsland: null,
+
     annenpartRettighet: {
       harRettNorge: 'JA',
       harOppholdEØS: 'IKKE_RELEVANT',
@@ -18,7 +17,7 @@ export const omsorgOgRett: OmsorgOgRett = {
     harAnnenpartForeldrepenger: 'NEI',
     harAnnenpartEngangsstønad: 'NEI',
   },
-  manuellBehandlingResultat: null,
+
   relasjonsRolleType: RelasjonsRolleType.MOR,
   rettighetstype: 'BEGGE_RETT',
 };

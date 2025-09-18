@@ -26,7 +26,11 @@ import styles from './valgtAktivitetForm.module.css';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-const skalIkkeKunneEditere = (hasAksjonspunkt: boolean, erGodkjent: boolean | null, erEndret: boolean): boolean => {
+const skalIkkeKunneEditere = (
+  hasAksjonspunkt: boolean,
+  erGodkjent: boolean | undefined,
+  erEndret: boolean,
+): boolean => {
   if (!hasAksjonspunkt) {
     return true;
   }
@@ -46,7 +50,7 @@ const finnMånederOgDager = (opptjeningFom: string, opptjeningTom: string): Reac
 };
 
 const finnBegrunnelseLabel = (
-  erGodkjent: boolean | null,
+  erGodkjent: boolean | undefined,
   erEndret: boolean,
   readOnly: boolean,
   hasAksjonspunkt: boolean,

@@ -76,7 +76,7 @@ export const ArbeidsforholdFieldArray = ({
     <>
       {fields.map((field, index: number) => {
         const arbeidsforhold = sorterteArbeidsforhold[index];
-        const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
+        const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse ?? ''];
 
         const alleIafAf = aoiArbeidsforhold.filter(
           iaya => iaya.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse,

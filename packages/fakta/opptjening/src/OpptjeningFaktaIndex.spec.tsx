@@ -56,7 +56,6 @@ describe('OpptjeningFaktaIndex', () => {
       kode: '5051',
       opptjeningsaktiviteter: [
         {
-          arbeidsforholdRef: null,
           arbeidsgiverReferanse: '1',
           aktivitetType: 'NÆRING',
           begrunnelse: 'Dette er en begrunnelse',
@@ -65,7 +64,6 @@ describe('OpptjeningFaktaIndex', () => {
           opptjeningTom: '2019-10-24',
         },
         {
-          arbeidsforholdRef: null,
           arbeidsgiverReferanse: '1',
           aktivitetType: 'SYKEPENGER',
           begrunnelse: 'Dette er en begrunnelse 2',

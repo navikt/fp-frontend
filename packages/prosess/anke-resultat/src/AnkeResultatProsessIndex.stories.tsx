@@ -17,21 +17,16 @@ const ankeVurderingResultat = {
   erIkkeSignert: true,
   erSubsidiartRealitetsbehandles: true,
   begrunnelse: 'Dette er en begrunnelse',
-  fritekstTilBrev: null,
+
   ankeOmgjoerArsak: '-',
-  erMerknaderMottatt: null,
-  merknadKommentar: null,
+
   trygderettVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
   trygderettOmgjoerArsak: '-',
   trygderettVurderingOmgjoer: '-',
-  sendtTilTrygderettenDato: null,
 } as const;
 
 const ankeVurderingDefault = {
   ankeVurderingResultat: ankeVurderingResultat,
-  underBehandlingKabal: null,
-  underBehandlingKabalTrygderett: null,
-  behandletAvKabal: null,
 };
 
 const meta = {

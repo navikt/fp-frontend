@@ -67,7 +67,7 @@ const createInitialValues = (
     if (aksjonspunkt) {
       return {
         ...felles,
-        ...createMedlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat ?? null),
+        ...createMedlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat),
       };
     } else {
       return felles;

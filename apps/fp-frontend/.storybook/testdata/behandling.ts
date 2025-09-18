@@ -17,7 +17,7 @@ export const behandling: Behandling = {
   type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
   status: BehandlingStatusEnum.BEHANDLING_UTREDES,
   opprettet: '2025-03-05T16:42:58',
-  avsluttet: null,
+
   behandlendeEnhetId: '4867',
   behandlendeEnhetNavn: 'Nav familie- og pensjonsytelser foreldrepenger',
   erAktivPapirsoknad: false,
@@ -29,31 +29,26 @@ export const behandling: Behandling = {
   gjeldendeVedtak: false,
   behandlingHenlagt: false,
   behandlingPåVent: false,
-  fristBehandlingPåVent: null,
-  venteÅrsakKode: null,
+
   språkkode: 'NB',
   behandlingKøet: false,
-  ansvarligSaksbehandler: null,
+
   toTrinnsBehandling: false,
   behandlingsresultat: {
     id: 999951,
     type: BehandlingResultatType.IKKE_FASTSATT,
-    avslagsarsak: null,
-    avslagsarsakFritekst: null,
+
     rettenTil: '-',
     konsekvenserForYtelsen: [],
     vedtaksbrev: '-',
-    overskrift: null,
-    fritekstbrev: null,
+
     harRedigertVedtaksbrev: false,
     erRevurderingMedUendretUtfall: false,
     skjæringstidspunkt: {
       dato: '2025-02-12',
-      utenMinsterett: null,
     },
-    opphørsdato: null,
+
     vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
-    endretDekningsgrad: null,
   },
   behandlingÅrsaker: [
     {
@@ -66,56 +61,44 @@ export const behandling: Behandling = {
     {
       vilkarType: VilkarType.SOKERSOPPLYSNINGSPLIKT,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§§ 21-3',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-2',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-5, 1. ledd',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.OPPTJENINGSVILKARET,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-6',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
       vilkarStatus: VilkarUtfallType.IKKE_VURDERT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-7',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
     {
       vilkarType: VilkarType.OPPTJENINGSPERIODE,
       vilkarStatus: VilkarUtfallType.OPPFYLT,
-      avslagKode: null,
+
       lovReferanse: '§ 14-6 og 14-10',
       overstyrbar: true,
-      evaluering: null,
-      input: null,
     },
   ],
   links: [
@@ -294,37 +277,17 @@ export const behandling: Behandling = {
     {
       definisjon: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
       status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: null,
+
       vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
       toTrinnsBehandling: true,
-      toTrinnsBehandlingGodkjent: null,
-      vurderPaNyttArsaker: null,
-      besluttersBegrunnelse: null,
+
       aksjonspunktType: AksjonspunktType.MANUELL,
       kanLoses: true,
       erAktivt: true,
-      fristTid: null,
-      endretTidspunkt: null,
-      endretAv: null,
     },
   ],
   harSøknad: true,
   harSattEndringsdato: false,
   alleUttaksperioderAvslått: false,
   sjekkSimuleringResultat: false,
-  taskStatus: null,
-  id: null,
-  fagsakId: null,
-  endret: null,
-  endretAvBrukernavn: null,
-  behandlingsfristTid: null,
-  erPaaVent: null,
-  originalVedtaksDato: null,
-  behandlingPaaVent: null,
-  fristBehandlingPaaVent: null,
-  venteArsakKode: null,
-  sprakkode: null,
-  ansvarligBeslutter: null,
-  harRegisterdata: null,
-  behandlingKoet: null,
 };

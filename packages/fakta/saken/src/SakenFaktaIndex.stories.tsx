@@ -29,18 +29,13 @@ const defaultSøknad = {
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 
 const meta = {
@@ -101,7 +96,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -115,7 +110,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -132,7 +127,7 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -177,7 +172,7 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -217,7 +212,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],

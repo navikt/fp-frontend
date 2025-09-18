@@ -2,8 +2,6 @@ import { PersonstatusType, Region } from '@navikt/fp-kodeverk';
 import type { Medlemskap } from '@navikt/fp-types';
 
 export const medlemskap: Medlemskap = {
-  manuellBehandlingResultat: null,
-  legacyManuellBehandling: null,
   regioner: [
     {
       fom: '1993-03-05',
@@ -25,8 +23,7 @@ export const medlemskap: Medlemskap = {
       tom: '2050-01-01',
       adresseType: 'BOSTEDSADRESSE',
       adresselinje1: 'Trondheimsveien 1',
-      adresselinje2: null,
-      adresselinje3: null,
+
       postNummer: '5511',
       poststed: 'Oslo',
       land: 'Norge',
@@ -42,8 +39,7 @@ export const medlemskap: Medlemskap = {
         tom: '2050-01-01',
         adresseType: 'BOSTEDSADRESSE',
         adresselinje1: 'Trondheimsveien 1',
-        adresselinje2: null,
-        adresselinje3: null,
+
         postNummer: '5511',
         poststed: 'Oslo',
         land: 'Norge',

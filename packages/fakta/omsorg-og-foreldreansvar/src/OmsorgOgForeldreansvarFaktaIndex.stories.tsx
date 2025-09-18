@@ -30,10 +30,10 @@ const soknad = {
   antallBarn: 2,
   soknadType: SoknadType.ADOPSJON,
   farSokerType: FarSøkerType.ADOPTERER_ALENE,
-  omsorgsovertakelseDato: null,
+
   barnetsAnkomstTilNorgeDato: '2022-09-13',
   mottattDato: '',
-  begrunnelseForSenInnsending: null,
+
   oppgittTilknytning: {
     oppholdNorgeNa: false,
     oppholdSistePeriode: false,
@@ -43,23 +43,18 @@ const soknad = {
   },
   manglendeVedlegg: [],
   oppgittFordeling: {
-    startDatoForPermisjon: null,
     dekningsgrader: {
-      avklartDekningsgrad: null,
       søker: {
         søknadsdato: '',
         dekningsgrad: 0,
       },
-      annenPart: null,
+      annenPart: {
+        søknadsdato: '',
+        dekningsgrad: undefined,
+      },
     },
   },
-  søknadsfrist: {
-    mottattDato: null,
-    utledetSøknadsfrist: null,
-    søknadsperiodeStart: null,
-    søknadsperiodeSlutt: null,
-    dagerOversittetFrist: null,
-  },
+  søknadsfrist: {},
 } satisfies Soknad;
 
 const personoversikt: Personoversikt = {
@@ -69,7 +64,7 @@ const personoversikt: Personoversikt = {
     kjønn: NavBrukerKjonn.KVINNE,
     sivilstand: SivilstandType.GIFT,
     fødselsdato: '1979-01-01',
-    dødsdato: null,
+
     adresser: [
       {
         fom: '2019-01-01',
@@ -79,13 +74,8 @@ const personoversikt: Personoversikt = {
         postNummer: '1000',
         poststed: 'Oslo',
         land: 'Norge',
-        adresselinje2: null,
-        adresselinje3: null,
       },
     ],
-    fnr: null,
-    diskresjonskode: null,
-    vn: null,
   },
   annenPart: {
     navn: 'Espen Utvikler',
@@ -95,9 +85,6 @@ const personoversikt: Personoversikt = {
     fødselsdato: '1989-01-01',
     dødsdato: '2021-01-01',
     adresser: [],
-    fnr: null,
-    diskresjonskode: null,
-    vn: null,
   },
   barn: [],
 };
@@ -147,18 +134,13 @@ type Story = StoryObj<typeof meta>;
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 
 export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
@@ -168,7 +150,7 @@ export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -210,7 +192,7 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],

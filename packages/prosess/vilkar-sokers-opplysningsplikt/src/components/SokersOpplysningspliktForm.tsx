@@ -83,7 +83,8 @@ const buildInitialValues = (
     .reduce(
       (acc, mv) => ({
         ...acc,
-        [lagArbeidsgiverKey(arbeidsgiverOpplysningerPerId[mv.arbeidsgiverReferanse])]: mv.brukerHarSagtAtIkkeKommer,
+        [lagArbeidsgiverKey(arbeidsgiverOpplysningerPerId[mv.arbeidsgiverReferanse ?? ''])]:
+          mv.brukerHarSagtAtIkkeKommer,
       }),
       {},
     );
@@ -116,7 +117,7 @@ const transformValues = (
     kode,
     erVilkarOk: values.erVilkarOk || false,
     inntektsmeldingerSomIkkeKommer: arbeidsgiverReferanser.map(agRef => {
-      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef];
+      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef ?? ''];
       return {
         // backend sender fødselsdato i orgnummer feltet for privatpersoner... fiks dette
         organisasjonsnummer: arbeidsgiverOpplysninger.erPrivatPerson
