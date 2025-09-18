@@ -40,7 +40,7 @@ const meta = {
     const { data: kodeverkLos } = useQuery(losKodeverkOptions());
 
     const lagNySaksliste = () => {
-      args.lagNySaksliste?.();
+      args.lagNySaksliste();
       setArgs(oldArgs => ({
         ...oldArgs,
         sakslister: oldArgs.sakslister.concat({

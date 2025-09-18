@@ -34,7 +34,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
     mutationFn: () => opprettNySaksliste(valgtAvdelingEnhet),
     onSuccess: () => {
       setValgtSakslisteId(undefined);
-      refetchSakslister();
+      void refetchSakslister();
     },
   });
 

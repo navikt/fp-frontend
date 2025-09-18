@@ -28,8 +28,6 @@ import '@navikt/ft-form-hooks/dist/style.css';
 import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
-const EMPTY_ARRAY = new Array<FpError>();
-
 const intl = createIntl(messages);
 
 export const LosAppIndexWrapper = () => {
@@ -68,7 +66,7 @@ const LosAppIndex = () => {
     );
   };
 
-  const errorMessages = useRestApiError() ?? EMPTY_ARRAY;
+  const errorMessages = useRestApiError();
   const queryStrings = parseQueryString(location.search);
   const hasForbiddenErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_FORBIDDEN);
   const hasUnauthorizedErrors = errorMessages.some(o => o.type === ErrorType.REQUEST_UNAUTHORIZED);
@@ -152,12 +150,13 @@ const getErrorHandler = (addErrorMessage: (data: FpError) => void) => async (err
     } else if (error.response.status === 504 || error.response.status === 404) {
       addErrorMessage({
         type: ErrorType.REQUEST_GATEWAY_TIMEOUT_OR_NOT_FOUND,
-        //@ts-expect-error Fiks
-        location: error.response?.config?.url,
+        location: error.response.url,
       });
     } else {
       try {
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         const feildataJson = await error.response.json();
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
         addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: feildataJson.feilmelding ?? error.message });
       } catch {
         addErrorMessage({ type: ErrorType.GENERAL_ERROR, message: error.message });

@@ -44,7 +44,7 @@ export const Dekorator = ({
   const navigate = useNavigate();
   const visLos = (e: React.SyntheticEvent) => {
     if (e.type === 'click') {
-      navigate('/');
+      void navigate('/');
     }
     if (e.type === 'contextmenu') {
       window.open('/', '_newtab');
@@ -114,6 +114,7 @@ const formaterFeilmeldinger = (
           const decoded = decodeHtmlEntity(feilmelding.message);
           addIfNotExists(feilmeldinger, {
             melding: intl.formatMessage({ id: 'Rest.ErrorMessage.General' }),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             tilleggsInfo: decoded ? parseErrorDetails(decoded) : undefined,
           });
         }
@@ -161,6 +162,7 @@ const formaterFeilmeldinger = (
 
 const parseErrorDetails = (details: string) => {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return JSON.parse(details);
   } catch {
     return 'Kunne ikke tolke feildetaljer';

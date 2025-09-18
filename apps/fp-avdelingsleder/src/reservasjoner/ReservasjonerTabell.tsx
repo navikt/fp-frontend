@@ -74,7 +74,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     }
     await endreOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, reserverTil });
     setShowReservasjonEndringDatoModal(false);
-    hentAvdelingensReservasjoner();
+    void hentAvdelingensReservasjoner();
   };
 
   const { mutateAsync: flyttOppgavereservasjonRequest } = useMutation({
@@ -87,7 +87,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
       throw new Error('Reservasjon må være valgt');
     }
     await flyttOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, ...params });
-    hentAvdelingensReservasjoner();
+    void hentAvdelingensReservasjoner();
   };
 
   return (

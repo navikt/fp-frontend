@@ -1,7 +1,7 @@
 import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './BehandlingstypeVelger.stories';
 
@@ -9,7 +9,7 @@ const { Default } = composeStories(stories);
 
 describe('BehandlingstypeVelger', () => {
   it('skal vise checkboxer for behandlingstyper', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Førstegangsbehandling')).toBeChecked();
@@ -17,7 +17,7 @@ describe('BehandlingstypeVelger', () => {
   });
 
   it('skal velge klage', async () => {
-    await applyRequestHandlers(Default.parameters['msw']);
+    applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
     const { getByLabelText } = render(<Default />);
     expect(await screen.findByText('Behandlingstype')).toBeInTheDocument();
     expect(getByLabelText('Klage')).not.toBeChecked();

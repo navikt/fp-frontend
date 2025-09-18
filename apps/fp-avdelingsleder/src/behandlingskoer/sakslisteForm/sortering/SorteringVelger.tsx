@@ -43,13 +43,13 @@ export const SorteringVelger = ({
     mutationFn: (valuesToStore: { sorteringType: string }) =>
       lagreSakslisteSortering(valgtSakslisteId, valuesToStore.sorteringType, valgtAvdelingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },
@@ -57,6 +57,7 @@ export const SorteringVelger = ({
 
   const koSorteringer = useLosKodeverk('KøSortering');
 
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- [JOHANNES] vent på typet form
   const sortering = watch('sortering');
 
   return (

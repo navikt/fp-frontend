@@ -43,7 +43,7 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
     onSuccess: () => {
       resetSaksbehandlerSøk();
       formMethods.reset();
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSBEHANDLERE_FOR_AVDELING],
       });
     },
@@ -63,9 +63,6 @@ export const LeggTilSaksbehandlerForm = ({ valgtAvdelingEnhet, avdelingensSaksbe
   };
 
   const formattedText = useMemo((): string => {
-    if (saksbehandlerStatus === 'success' && !saksbehandler) {
-      return intl.formatMessage({ id: 'LeggTilSaksbehandlerForm.FinnesIkke' });
-    }
     if (!saksbehandler) {
       return '';
     }

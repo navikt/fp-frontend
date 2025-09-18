@@ -54,7 +54,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
   });
   const activeAvdelingslederPanel = activeAvdelingslederPanelTemp || getPanelFromUrlOrDefault(location);
 
-  if (!initData.innloggetBruker?.kanOppgavestyre) {
+  if (!initData.innloggetBruker.kanOppgavestyre) {
     return <IkkeTilgangTilAvdelingslederPanel />;
   }
   if (alleKodeverkQuery.isPending || valgtAvdelingEnhet === undefined) {
@@ -87,7 +87,7 @@ export const AvdelingslederIndex = ({ initData }: Props) => {
         size="small"
         value={activeAvdelingslederPanel}
         onChange={(avdelingslederPanel: string) => {
-          navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
+          void navigate(getAvdelingslederPanelLocation(avdelingslederPanel));
         }}
         className={styles.paddingHeader}
       >
