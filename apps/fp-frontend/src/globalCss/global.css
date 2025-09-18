@@ -1,0 +1,19 @@
+html {
+  height: 100%;
+}
+
+body {
+  background-color: var(--ax-bg-default);
+  color: var(--ax-text-neutral);
+  height: calc(100vh - var(--header-height));
+  line-height: 1.42857143;
+  margin: 0;
+}
+
+:global(#app) {
+  height: 100%;
+}
+
+:root {
+  --header-height: 80px; /* Set dynamically with JS when it changes */
+}
