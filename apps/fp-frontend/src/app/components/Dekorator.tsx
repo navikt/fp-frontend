@@ -6,14 +6,20 @@ import type { Theme } from '@navikt/ds-react';
 import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { ApiPollingStatus, RETTSKILDE_URL, SYSTEMRUTINE_URL } from '@navikt/fp-konstanter';
+import {
+  ApiPollingStatus,
+  AVDELINGSLEDER_URL_NAME,
+  FPSAK_URL_NAME,
+  RETTSKILDE_URL,
+  SYSTEMRUTINE_URL,
+} from '@navikt/fp-konstanter';
 import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { ErrorType, type FpError } from '../../data/error/errorType';
 import { useRestApiError, useRestApiErrorDispatcher } from '../../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../../data/fagsakApi';
-import { AVDELINGSLEDER_PATH, JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
+import { JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
 
 type QueryStrings = {
   errorcode?: string;
@@ -55,10 +61,6 @@ export const Dekorator = ({
     }
     e.preventDefault();
   };
-  const visAvdelingslederside = (e: React.SyntheticEvent) => {
-    navigate(AVDELINGSLEDER_PATH);
-    e.preventDefault();
-  };
 
   const visJournalføringside = (e: React.SyntheticEvent) => {
     navigate(JOURNALFØRING_PATH);
@@ -76,7 +78,7 @@ export const Dekorator = ({
   if (kanOppgavestyre) {
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
-      callback: (e: React.SyntheticEvent) => visAvdelingslederside(e),
+      callback: () => (window.location.href = window.location.href.replace(FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME)),
     });
   }
   if (kanSaksbehandle) {

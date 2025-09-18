@@ -50,7 +50,6 @@
     "@navikt/fp-journalforing": "workspace:*",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
-    "@navikt/fp-los-avdelingsleder-old": "workspace:*",
     "@navikt/fp-los-saksbehandler": "workspace:*",
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",
     "@navikt/fp-papirsoknad": "workspace:*",
