@@ -1091,9 +1091,9 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | '-';
 
 export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
-  orgnr?: string;
   aktørId?: string;
   indexKey?: string;
+  orgnr?: string;
   identifikator?: string;
   erVirksomhet?: boolean;
 };
@@ -4730,9 +4730,9 @@ export type foreldrepenger_domene_person_verge_dto_VergeBehandlingsmenyEnum = 'S
 export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto = {
   fom: string;
   tom: string;
+  erSlettet?: boolean;
   erEndret?: boolean;
   erLagtTil?: boolean;
-  erSlettet?: boolean;
 };
 
 export type foreldrepenger_kontrakter_formidling_v3_BrevmalDto = {

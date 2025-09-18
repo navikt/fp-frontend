@@ -15,13 +15,14 @@
     "test:changed": "lerna run test --stream --since origin/master",
     "tsc": "lerna run tsc --stream",
     "tsc:changed": "lerna run tsc --stream --since origin/master",
-    "eslint": "lerna run eslint --stream",
+    "eslint": "lerna run eslint",
     "eslint:fix": "lerna run eslint:fix --stream",
     "eslint:changed": "lerna run eslint --stream --since origin/master",
     "stylelint": "lerna run stylelint --stream",
     "prettier": "lerna run prettier --stream",
     "clean": "lerna run clean --stream",
-    "dev": "yarn lerna run dev --scope=@navikt/fp-frontend-app",
+    "dev": "yarn lerna run dev --scope=@navikt/fp-frontend",
+    "dev-avdelingsleder": "yarn lerna run dev --scope=@navikt/fp-avdelingsleder",
     "build": "lerna run build --stream",
     "up": "docker-compose up -d --remove-orphans --build",
     "down": "docker-compose down",
@@ -68,9 +69,8 @@
     "@adobe/css-tools": "4.3.2",
     "@types/react": "19.1.2",
     "axios": "1.11.0",
-    "react": "19.1.0",
-    "react-dom": "19.1.0",
-    "react-test-renderer": "19.1.0"
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
   },
   "lint-staged": {
     "apps/**/*.{ts,tsx,js,jsx, css}": "prettier --write",

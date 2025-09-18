@@ -6,6 +6,13 @@ on:
         description: 'Branch name'
         type: string
         required: true
+      app:
+        required: true
+        type: choice
+        description: 'Applikasjon som skal deployes fra branch'
+        options:
+          - fp-frontend
+          - fp-avdelingsleder
 
 jobs:
   build-app:
@@ -33,5 +40,8 @@ jobs:
     uses: navikt/fp-gha-workflows/.github/workflows/deploy.yml@d82a6fe449f56938a073da20baca50bed596a800
     with:
       gar: true
+      branch: ${{ inputs.branch }}
       image: ${{ needs.build-app.outputs.build-version }}
       cluster: dev-gcp
+      image_suffix: '/${{ inputs.app }}'
+      deploy_context: '/${{ inputs.app }}'

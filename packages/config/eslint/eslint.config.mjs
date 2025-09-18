@@ -44,7 +44,7 @@ export default [
     rules: {
       ...vitest.configs.recommended.rules,
       'max-len': [ERROR, 160],
-      'no-console': WARNING,
+      'no-console': ERROR,
       'no-debugger': WARNING,
       'react/function-component-definition': [
         'error',
