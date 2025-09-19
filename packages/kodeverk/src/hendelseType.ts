@@ -1,5 +1,1 @@
-export enum HendelseType {
-  MEDLEMSKAP = 'MEDLEMSKAP',
-  OKONOMI_FEIL = 'OKONOMI_FEIL',
-  FP_BEREGNING_TYPE = 'BEREGNING_TYPE',
-}
+export type HendelseType = 'MEDLEMSKAP' | 'OKONOMI_FEIL' | 'BEREGNING_TYPE';

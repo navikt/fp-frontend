@@ -1,18 +1,18 @@
 import {
-  Aktsomhet,
+  type Aktsomhet,
   BehandlingArsakTypeEnum,
   type BehandlingResultatTypeTilbakekreving,
   BehandlingTypeEnum,
   ForeldelseVurderingType,
-  HendelseType,
-  HendelseUnderType,
+  type HendelseType,
+  type HendelseUnderType,
   type HistorikkAktor,
-  SærligGrunn,
+  type SærligGrunn,
   type SkjermlenkeTypeTilbakekreving,
   TilbakekrevingVidereBehandling,
   VedtakResultatType,
   type VenteArsakType,
-  VilkårResultat,
+  type VilkårResultat,
   type VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
