@@ -3,13 +3,19 @@ import type { ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
-import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
+import {
+  type PanelDataArgs,
+  type PanelOverstyringContextArgs,
+  withMellomlagretFormData,
+  withPanelData,
+  withPanelOverstyring,
+} from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   status: AksjonspunktStatus.OPPRETTET,
   begrunnelse: null,
   kanLoses: true,
@@ -41,8 +47,10 @@ const merknaderFraBeslutter = {
 const meta = {
   title: 'fakta/fakta-fodsel',
   component: FodselFaktaIndex,
-  decorators: [withMellomlagretFormData, withPanelData],
+  decorators: [withMellomlagretFormData, withPanelData, withPanelOverstyring],
   args: {
+    kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
+    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
     isReadOnly: false,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
@@ -94,10 +102,13 @@ const meta = {
     },
   },
   render: args => <FodselFaktaIndex {...args} />,
-} satisfies Meta<PanelDataArgs & ComponentProps<typeof FodselFaktaIndex>>;
+} satisfies Meta<PanelDataArgs & PanelOverstyringContextArgs & ComponentProps<typeof FodselFaktaIndex>>;
+
 export default meta;
 
 type Story = StoryObj<typeof meta>;
+
+export const Default: Story = {};
 
 export const APTerminbekreftelse: Story = {
   args: {
@@ -270,7 +281,50 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
   },
 };
 
-export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
+export const APSjekkManglendeFødselUtenTermindatoFraSøknad = {
+  args: {
+    aksjonspunkterForPanel: [apSjekkManglendeFødsel],
+    fødsel: {
+      søknad: {
+        barn: [
+          {
+            fødselsdato: '2025-06-04',
+            dødsdato: null,
+            barnNummer: 1,
+          },
+        ],
+        termindato: null,
+        utstedtdato: null,
+        antallBarn: 1,
+      },
+      register: {
+        barn: [],
+      },
+      gjeldende: {
+        termin: null,
+        utstedtdato: null,
+        antallBarn: {
+          kilde: 'SØKNAD',
+          antall: 1,
+        },
+        barn: [
+          {
+            kilde: 'SØKNAD',
+            barn: {
+              fødselsdato: '2025-06-04',
+              dødsdato: null,
+              barnNummer: 1,
+            },
+            kanOverstyres: true,
+          },
+        ],
+        fødselDokumetasjonStatus: 'IKKE_VURDERT',
+      },
+    },
+  },
+};
+
+export const APSjekkManglendeFødselUtførtOgUtført: Story = {
   args: {
     isReadOnly: true,
     aksjonspunkterForPanel: [
@@ -283,9 +337,7 @@ export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
   },
 };
 
-export const Default: Story = {};
-
-export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
+export const APSjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
   args: {
     terminbekreftelseDokument: undefined,
     fødsel: {
@@ -341,5 +393,45 @@ export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
         ],
       },
     },
+  },
+};
+
+export const OverstyringSomOverstyrer: Story = {
+  args: {
+    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
+  },
+};
+
+export const OverstyrtSettSomOverstyrer: Story = {
+  args: {
+    kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
+    initialToggleState: true,
+    isReadOnly: false,
+    aksjonspunkterForPanel: [
+      {
+        ...aksjonspunktDefault,
+        definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Denne saken har blitt overstyrt',
+        kanLoses: false,
+      },
+    ],
+  },
+};
+
+export const OverstyrtSettSomSBH: Story = {
+  args: {
+    kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
+    initialToggleState: true,
+    isReadOnly: false,
+    aksjonspunkterForPanel: [
+      {
+        ...aksjonspunktDefault,
+        definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+        status: AksjonspunktStatus.UTFORT,
+        begrunnelse: 'Denne saken har blitt overstyrt',
+        kanLoses: false,
+      },
+    ],
   },
 };

@@ -307,11 +307,11 @@ const getBeregningsresultatDagytelseOptions =
       staleTime: Infinity,
     });
 
-const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) => {
+const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: Behandling) => {
   return queryOptions({
     queryKey: [BehandlingRel.FAKTA_FØDSEL, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('FAKTA_FØDSEL', links)).json<Fødsel>(),
-    enabled: harLenke(behandling, 'FAKTA_FØDSEL') && isEnabled,
+    enabled: harLenke(behandling, 'FAKTA_FØDSEL'),
     staleTime: Infinity,
   });
 };
