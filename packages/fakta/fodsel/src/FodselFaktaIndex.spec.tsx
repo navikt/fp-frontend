@@ -189,6 +189,8 @@ describe('FodselFaktaIndex', () => {
       expect(screen.getByText('Overstyring av fødselsdetaljer')).toBeInTheDocument();
 
       const overstyringBoks = within(screen.getByLabelText('Overstyring av fødselsdetaljer'));
+
+      await userEvent.click(overstyringBoks.getByRole('button', { name: 'Åpne redigering av termindato' }));
       const terminInput = overstyringBoks.getByLabelText('Termindato');
       expect(terminInput).toHaveValue('10.06.2025');
       await userEvent.clear(terminInput);

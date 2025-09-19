@@ -12,7 +12,8 @@ import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
-import { Termindato, type TermindatoFormValues, TermindatoMedReadonlyToggle } from '../form/Termindato';
+import { Termindato, type TermindatoFormValues } from '../form/Termindato';
+import { TermindatoMedReadonlyToggle } from '../form/TermindatoMedReadonlyToggle.tsx';
 
 type FormValues = ErBarnFødtFormValues & TermindatoFormValues & FaktaBegrunnelseFormValues;
 
@@ -32,8 +33,6 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? initialValues(gjeldende, aksjonspunkt),
   });
-
-  const erBarnFødt = formMethods.watch('erBarnFødt');
 
   const begrunnelse = formMethods.watch('begrunnelse');
   const finnesBarnIFReg = gjeldende.barn.some(b => b.kilde === 'FOLKEREGISTER');
@@ -64,7 +63,7 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
             </Alert>
           )}
 
-          <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} isRequired={erBarnFødt === false} />
+          <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} />
 
           <ErBarnFødt isReadOnly={isReadOnly} finnesBarnIFReg={finnesBarnIFReg} antallBarnISøknad={søknad.antallBarn} />
 

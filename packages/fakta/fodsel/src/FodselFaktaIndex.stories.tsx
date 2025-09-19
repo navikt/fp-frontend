@@ -281,7 +281,7 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
   },
 };
 
-export const SjekkManglendeFødselUtenTermindatoFraSøknad = {
+export const APSjekkManglendeFødselUtenTermindatoFraSøknad = {
   args: {
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
     fødsel: {
@@ -324,7 +324,7 @@ export const SjekkManglendeFødselUtenTermindatoFraSøknad = {
   },
 };
 
-export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
+export const APSjekkManglendeFødselUtførtOgUtført: Story = {
   args: {
     isReadOnly: true,
     aksjonspunkterForPanel: [
@@ -337,7 +337,7 @@ export const ReadonlyPanelMedUtførtSjekkManglendeFødselAP: Story = {
   },
 };
 
-export const SjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
+export const APSjekkManglendeFødselVedDødfødselForEnTvilling: Story = {
   args: {
     terminbekreftelseDokument: undefined,
     fødsel: {
@@ -418,6 +418,7 @@ export const OverstyrtSettSomOverstyrer: Story = {
     ],
   },
 };
+
 export const OverstyrtSettSomSBH: Story = {
   args: {
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },

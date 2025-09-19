@@ -3,7 +3,7 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AksjonspunktTilBekreftelse } from '../../AksjonspunktTilBekreftelse';
 
 export type OverstyringFaktaFødselAp = {
-  termindato: string | undefined;
+  termindato: string | null;
   barn:
     | {
         fødselsdato: string;

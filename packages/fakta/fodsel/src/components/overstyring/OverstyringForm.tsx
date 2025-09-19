@@ -12,6 +12,7 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { ErBarnFødt, type ErBarnFødtFormValues } from '../form/ErBarnFødt';
 import { Termindato, type TermindatoFormValues } from '../form/Termindato';
+import { TermindatoMedReadonlyToggle } from '../form/TermindatoMedReadonlyToggle';
 
 interface Props {
   gjeldende: FødselGjeldende;
@@ -36,7 +37,7 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Pr
   return (
     <RhfForm formMethods={formMethods} onSubmit={values => submitCallback(transformValues(values))}>
       <VStack gap="6">
-        <Termindato isReadOnly={isReadOnly} />
+        <TermindatoMedReadonlyToggle isReadOnly={isReadOnly} />
 
         <ErBarnFødt
           isReadOnly={isReadOnly}
