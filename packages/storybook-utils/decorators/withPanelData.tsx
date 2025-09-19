@@ -25,7 +25,7 @@ const promiseAction =
   () =>
   (...args: [AksjonspunktType]): Promise<AksjonspunktType> => {
     action('button-click')(...args);
-    // @ts-expect-error feil etter fiks av ft-types
+    // @ts-expect-error Johannes ser på denne - feil etter fiks av ft-types
     return Promise.resolve();
   };
 
@@ -72,7 +72,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       alleKodeverk={alleKodeverk}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter ?? {}}
       isReadOnly={isReadOnly ?? false}
-      // @ts-expect-error feil etter fiks av ft-types
+      // @ts-expect-error Johannes ser på denne - feil etter fiks av ft-types
       submitCallback={submitCallback ?? promiseAction()}
       isSubmittable={isSubmittable ?? true}
     >
