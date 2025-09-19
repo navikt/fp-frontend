@@ -1,0 +1,1 @@
+export type HendelseUnderType = 'IKKE_INNTEKT' | 'IKKE_YRKESAKTIV' | 'OKONOMI_FEIL_TREKK' | 'IKKE_BOSATT';

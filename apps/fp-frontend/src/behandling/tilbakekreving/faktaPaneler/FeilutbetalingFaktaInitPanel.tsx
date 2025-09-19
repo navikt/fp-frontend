@@ -52,6 +52,8 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
           kodeverkSamlingFpsak={standardPanelProps.alleKodeverk}
           isAksjonspunktOpen={standardPanelProps.harÅpentAksjonspunkt}
           {...standardPanelProps}
+          // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
+          submitCallback={standardPanelProps.submitCallback}
         />
       ) : (
         <LoadingPanel />
@@ -60,7 +62,8 @@ export const FeilutbetalingFaktaInitPanel = ({ tilbakekrevingKodeverk }: Props) 
   );
 };
 
-const Wrapper = (props: ComponentProps<typeof FeilutbetalingFaktaIndex>) => {
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
+const Wrapper = (props: Omit<ComponentProps<typeof FeilutbetalingFaktaIndex>, 'formData' | 'setFormData'>) => {
+  const { mellomlagretFormData, setMellomlagretFormData } =
+    useMellomlagretFormData<React.ComponentProps<typeof FeilutbetalingFaktaIndex>['formData']>();
   return <FeilutbetalingFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };

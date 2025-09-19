@@ -96,9 +96,11 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
       >
         {beregningsresultat && vedtaksbrev ? (
           <Wrapper
+            // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
             beregningsresultat={beregningsresultat}
             vedtaksbrev={vedtaksbrev}
             kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
+            // @ts-expect-error Johannes ser på denne - oppdater function i ft-repo
             fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
             erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage ?? false}
             erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt ?? false}
@@ -112,8 +114,9 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   );
 };
 
-const Wrapper = (props: ComponentProps<typeof VedtakTilbakekrevingProsessIndex>) => {
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
+const Wrapper = (props: Omit<ComponentProps<typeof VedtakTilbakekrevingProsessIndex>, 'formData' | 'setFormData'>) => {
+  const { mellomlagretFormData, setMellomlagretFormData } =
+    useMellomlagretFormData<React.ComponentProps<typeof VedtakTilbakekrevingProsessIndex>['formData']>();
   return (
     <VedtakTilbakekrevingProsessIndex
       {...props}

@@ -57,8 +57,10 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
           perioderForeldelse={perioderForeldelse}
           vilkarvurderingsperioder={vilkårvurderingsperioder}
           vilkarvurdering={vilkårvurdering}
+          // @ts-expect-error Johannes ser på denne - Ser ut som det er feil i ft-repoet
           kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
           beregnBelop={(data: BeregnBeløpParams) => beregnBeløp(data)}
+          // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
           relasjonsRolleType={fagsak.relasjonsRolleType}
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk['RelasjonsRolleType']}
           {...standardPanelProps}
@@ -70,8 +72,9 @@ export const TilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }: Props
   );
 };
 
-const Wrapper = (props: ComponentProps<typeof TilbakekrevingProsessIndex>) => {
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
+const Wrapper = (props: Omit<ComponentProps<typeof TilbakekrevingProsessIndex>, 'formData' | 'setFormData'>) => {
+  const { mellomlagretFormData, setMellomlagretFormData } =
+    useMellomlagretFormData<React.ComponentProps<typeof TilbakekrevingProsessIndex>['formData']>();
   return (
     <TilbakekrevingProsessIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />
   );
