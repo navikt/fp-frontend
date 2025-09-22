@@ -155,25 +155,29 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
               validate={[required]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.skalGraderes`}
+                control={control}
+                label={<FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />}
+              />
+            </div>
 
-            <RhfCheckbox
-              name={`${getPrefix(index)}.skalGraderes`}
-              control={control}
-              label={<FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />}
-            />
-
-            <RhfCheckbox
-              name={`${getPrefix(index)}.flerbarnsdager`}
-              control={control}
-              readOnly={readOnly}
-              label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
-            />
-
-            <RhfCheckbox
-              name={`${getPrefix(index)}.harSamtidigUttak`}
-              control={control}
-              label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
-            />
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.flerbarnsdager`}
+                control={control}
+                readOnly={readOnly}
+                label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
+              />
+            </div>
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.harSamtidigUttak`}
+                control={control}
+                label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
+              />
+            </div>
             {harSamtidigUttak && (
               <RhfTextField
                 name={`${getPrefix(index)}.samtidigUttaksprosent`}

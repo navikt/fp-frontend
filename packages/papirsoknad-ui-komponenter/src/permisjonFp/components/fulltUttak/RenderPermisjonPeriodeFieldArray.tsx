@@ -161,18 +161,22 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               />
             )}
 
-            <RhfCheckbox
-              name={`${getPrefix(index)}.flerbarnsdager`}
-              control={control}
-              readOnly={readOnly}
-              label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
-            />
-            <RhfCheckbox
-              name={`${getPrefix(index)}.harSamtidigUttak`}
-              control={control}
-              readOnly={readOnly}
-              label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
-            />
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.flerbarnsdager`}
+                control={control}
+                readOnly={readOnly}
+                label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
+              />
+            </div>
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.harSamtidigUttak`}
+                control={control}
+                readOnly={readOnly}
+                label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
+              />
+            </div>
 
             {periode.harSamtidigUttak && (
               <RhfTextField

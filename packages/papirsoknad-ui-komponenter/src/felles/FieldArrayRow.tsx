@@ -17,10 +17,13 @@ export const FieldArrayRow = ({ children, remove, readOnly, index }: Props) => {
     <>
       {index > 0 && <AvsnittSkiller spaceUnder spaceAbove />}
       <HStack wrap={false} justify="space-between">
-        <HStack wrap gap="space-16">
+        <HStack wrap gap="space-8">
           {children}
         </HStack>
-        <RhfFieldArrayRemoveButton skjul={readOnly} remove={remove} index={index} />
+
+        <div>
+          <RhfFieldArrayRemoveButton skjul={readOnly} remove={remove} index={index} />
+        </div>
       </HStack>
     </>
   );
