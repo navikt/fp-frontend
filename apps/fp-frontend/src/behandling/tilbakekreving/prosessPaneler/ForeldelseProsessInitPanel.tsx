@@ -62,6 +62,7 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
           relasjonsRolleType={fagsak.relasjonsRolleType}
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk['RelasjonsRolleType']}
           {...standardPanelProps}
+          behandlingUuid={behandling.uuid}
         />
       ) : (
         <LoadingPanel />

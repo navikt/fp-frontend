@@ -106,6 +106,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
             erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage ?? false}
             erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt ?? false}
             {...standardPanelProps}
+            behandlingUuid={behandling.uuid}
           />
         ) : (
           <LoadingPanel />
