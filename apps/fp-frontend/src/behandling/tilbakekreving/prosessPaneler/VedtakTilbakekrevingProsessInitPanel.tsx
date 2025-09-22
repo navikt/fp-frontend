@@ -102,6 +102,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
             kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
             // @ts-expect-error Johannes ser på denne - oppdater function i ft-repo
             fetchPreviewVedtaksbrev={forhandsvisVedtaksbrev}
+            behandlingUuid={behandling.uuid}
             erRevurderingTilbakekrevingKlage={erRevurderingTilbakekrevingKlage ?? false}
             erRevurderingTilbakekrevingFeilBeløpBortfalt={erRevurderingTilbakekrevingFeilBeløpBortfalt ?? false}
             {...standardPanelProps}
