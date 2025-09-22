@@ -28,7 +28,7 @@ export const Situasjon = ({ gjeldende: { barn, termin, utstedtdato, antallBarn }
           />
           {barn[0].barn.dødsdato && (
             <FaktaBox
-              key={barn[0].barn.fødselsdato}
+              key={barn[0].barn.fødselsdato + barn[0].barn.dødsdato}
               kilde={barn[0].kilde}
               value={<DateLabel dateString={barn[0].barn.dødsdato} />}
               label={intl.formatMessage({ id: 'Label.Dødsdato' })}

@@ -29,6 +29,7 @@ interface Props {
 export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
   const [erKnappEnabled, setErKnappEnabled] = useState(false);
 
+  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
   const { submitCallback, isSubmittable, isReadOnly } = usePanelDataContext<BesteberegningAP>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();

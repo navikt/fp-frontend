@@ -40,6 +40,7 @@ export const FaktaDefaultInitPanel = ({
           alleKodeverk={alleKodeverk}
           aksjonspunkterForPanel={standardPanelProps.aksjonspunkterForPanel}
           harÅpentAksjonspunkt={standardPanelProps.harÅpentAksjonspunkt}
+          // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
           submitCallback={standardPanelProps.submitCallback}
           isReadOnly={standardPanelProps.isReadOnly}
           alleMerknaderFraBeslutter={standardPanelProps.alleMerknaderFraBeslutter}
