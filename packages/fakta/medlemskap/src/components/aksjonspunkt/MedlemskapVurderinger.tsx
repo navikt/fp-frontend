@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, RawIntlProvider } from 'react-intl';
+import { RawIntlProvider } from 'react-intl';
 
 import { Radio, VStack } from '@navikt/ds-react';
 import { RhfDatepicker, RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
@@ -50,7 +50,7 @@ export const MedlemskapVurderinger = ({ readOnly, ytelse, avslagsårsaker, erFor
         >
           {lagVurderingsAlternativer(ytelse, erForutgående, erRevurdering).map(option => (
             <Radio key={option.value} value={option.value} size="small">
-              <FormattedMessage id={option.label} />
+              {option.label}
             </Radio>
           ))}
         </RhfRadioGroup>

@@ -2,7 +2,7 @@ import { type ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -64,10 +64,10 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
   }, []);
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
-      emptyPeriodTemplate={defaultOverforingPeriode}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
+      emptyTemplate={defaultOverforingPeriode}
+      addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       readOnly={readOnly}
       append={append}
       remove={remove}
@@ -122,6 +122,6 @@ export const RenderOverforingAvKvoterFieldArray = ({ selectValues, readOnly }: P
           />
         </FieldArrayRow>
       )}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };

@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
-import { PeriodFieldArray, RhfCheckbox, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -82,10 +82,10 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
   }, []);
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
-      emptyPeriodTemplate={defaultGraderingPeriode}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
+      emptyTemplate={defaultGraderingPeriode}
+      addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       readOnly={readOnly}
       remove={remove}
       append={append}
@@ -191,7 +191,7 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
           </FieldArrayRow>
         );
       }}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;

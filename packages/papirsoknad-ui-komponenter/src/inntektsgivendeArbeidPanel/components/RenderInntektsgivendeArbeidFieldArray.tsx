@@ -2,7 +2,7 @@ import { type ReactElement } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { PeriodFieldArray, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, maxLength } from '@navikt/ft-form-validators';
 
 import { Landkode } from '@navikt/fp-kodeverk';
@@ -45,11 +45,11 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
   const sortedCountriesByName = alleKodeverk['Landkoder'].slice().sort((a, b) => a.navn.localeCompare(b.navn));
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
-      bodyText={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.LeggTilArbeidsforhold' })}
+      addButtonText={intl.formatMessage({ id: 'Registrering.InntektsgivendeArbeid.LeggTilArbeidsforhold' })}
       readOnly={readOnly}
-      emptyPeriodTemplate={{ arbeidsgiver: '', periodeFom: '', periodeTom: '', land: '' }}
+      emptyTemplate={{ arbeidsgiver: '', periodeFom: '', periodeTom: '', land: '' }}
       remove={remove}
       append={append}
     >
@@ -88,6 +88,6 @@ export const RenderInntektsgivendeArbeidFieldArray = ({ alleKodeverk, readOnly }
           />
         </FieldArrayRow>
       )}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };
