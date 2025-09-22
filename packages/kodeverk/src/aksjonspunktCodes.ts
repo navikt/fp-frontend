@@ -1,16 +1,5 @@
 // TODO Fjern denne fila og heller legg aksjonspunkta på pakkene dei blir brukt i
 
-export type OverstyringAksjonspunkter =
-  | AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR
-  | AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR
-  | AksjonspunktKode.OVERSTYR_FODSELSVILKAR
-  | AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR
-  | AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE
-  | AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR
-  | AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP
-  | AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
-  | AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET;
-
 export enum AksjonspunktKode {
   SJEKK_TERMINBEKREFTELSE = '5001',
   AVKLAR_DEKNINGSGRAD = '5002',
@@ -35,6 +24,7 @@ export enum AksjonspunktKode {
   VARSEL_REVURDERING_ETTERKONTROLL = '5025', // Utgått, brukes i historikk
   VARSEL_REVURDERING_MANUELL = '5026',
   SJEKK_MANGLENDE_FØDSEL = '5027',
+  OVERSTYRING_AV_FAKTA_OM_FØDSEL = '6019',
   FORESLA_VEDTAK_MANUELT = '5028',
   KONTROLLER_STOR_ETTERBETALING_SØKER = '5029',
   AVKLAR_VERGE = '5030',
@@ -122,6 +112,21 @@ export enum AksjonspunktKode {
   VURDER_TILBAKETREKK = '5090', // Utgått, brukes kun til å vise tidligere løst aksjonspunkt
 }
 
+export type VilkårOverstyringAksjonspunkter =
+  | AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR
+  | AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR
+  | AksjonspunktKode.OVERSTYR_FODSELSVILKAR
+  | AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR
+  | AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE
+  | AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR
+  | AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP
+  | AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
+  | AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET;
+
+export type OverstyringAksjonspunkter =
+  | VilkårOverstyringAksjonspunkter
+  | AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL;
+
 const uttakAksjonspunkter = [
   AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
   AksjonspunktKode.FASTSETT_UTTAKPERIODER,
@@ -144,11 +149,6 @@ const faktaUttakAksjonspunkter = [
   AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
 ];
 
-const aksjonspunktIsOfType =
-  (validAksjonspunktCodes: string[]) =>
-  (aksjonspunktCode: string): boolean =>
-    validAksjonspunktCodes.includes(aksjonspunktCode);
-
 type Aksjonspunkt = Readonly<{
   definisjon: string;
   status: string;
@@ -166,6 +166,11 @@ type Aksjonspunkt = Readonly<{
 
 export const hasAksjonspunkt = (aksjonspunktKode: string, aksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktKode);
+
+const aksjonspunktIsOfType =
+  (validAksjonspunktCodes: string[]) =>
+  (aksjonspunktCode: string): boolean =>
+    validAksjonspunktCodes.includes(aksjonspunktCode);
 
 export const isUttakAksjonspunkt = aksjonspunktIsOfType(uttakAksjonspunkter);
 
