@@ -6,10 +6,11 @@
   "DokumentasjonFaktaForm.ApplicationInformation": "Adopsjonsopplysninger fra søknad",
   "DokumentasjonFaktaForm.Omsorgsovertakelsesdato": "Dato for omsorgsovertakelse",
   "DokumentasjonFaktaForm.Stebarnsadopsjon": "Dato for stebarnsadopsjon",
-  "DokumentasjonFaktaForm.Fodselsdato": "Fødselsdato for barn {number}",
+  "DokumentasjonFaktaForm.Fodselsdato": "Fødselsdato",
   "DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret": "Antall barn som fyller vilkåret",
   "DokumentasjonFaktaForm.BarnErOver15Ar": "Barnet er over 15 år ved omsorgsovertakelsen",
-  "DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge": "Dato for barnets ankomst til Norge (ved utenlandsadopsjon)",
+  "DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Label": "Dato for barnets ankomst til Norge",
+  "DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Description": "ved utenlandsadopsjon",
 
   "MannAdoptererAleneFaktaForm.ApplicationInformation": "Mann adopterer",
   "MannAdoptererAleneFaktaForm.Opplysninger": "Opplysninger oppgitt i søknaden",

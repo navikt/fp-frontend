@@ -2,10 +2,9 @@ import { useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
-import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
-import { RhfDatepicker } from '@navikt/ft-form-hooks';
+import { HStack, Label, VStack } from '@navikt/ds-react';
+import { ReadOnlyField, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { diff } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
@@ -14,6 +13,7 @@ import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AdopsjonFamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 import styles from './dokumentasjonFaktaForm.module.css';
 
@@ -34,11 +34,6 @@ interface Props {
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
-/**
- * DokumentasjonFaktaForm
- *
- * Presentasjonskomponent. Setter opp aksjonspunktet for avklaring av adopsjonsopplysninger i søknaden.
- */
 export const DokumentasjonFaktaForm = ({
   readOnly,
   soknad,
@@ -56,12 +51,13 @@ export const DokumentasjonFaktaForm = ({
 
   const getAdopsjonsdatoEditedStatusForId = isAdopsjonFodelsedatoerEdited(soknad, adopsjon);
 
+  const fødselsdatoer = Object.keys(fodselsdatoer);
   return (
-    <FaktaGruppe
-      title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
+    <FaktaKort
+      label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
     >
-      <VStack gap="space-16" className={styles.container}>
+      <VStack gap="space-16">
         <RhfDatepicker
           name="omsorgsovertakelseDato"
           control={control}
@@ -70,6 +66,7 @@ export const DokumentasjonFaktaForm = ({
               ? intl.formatMessage({ id: 'DokumentasjonFaktaForm.Stebarnsadopsjon' })
               : intl.formatMessage({ id: 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato' })
           }
+          size="small"
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
           isEdited={isNotEqual(soknad.omsorgsovertakelseDato, adopsjon.omsorgsovertakelseDato)}
@@ -78,41 +75,53 @@ export const DokumentasjonFaktaForm = ({
           <RhfDatepicker
             name="barnetsAnkomstTilNorgeDato"
             control={control}
-            label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge' })}
+            label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Label' })}
+            description={intl.formatMessage({
+              id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Description',
+            })}
+            size="small"
             validate={[hasValidDate]}
             isReadOnly={readOnly}
             isEdited={isNotEqual(soknad.barnetsAnkomstTilNorgeDato, adopsjon.ankomstNorge)}
           />
         )}
-        {Object.keys(fodselsdatoer).map((id, i) => (
+        {fødselsdatoer.map((id, i) => (
           <HStack gap="space-16" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
+            {fødselsdatoer.length > 1 && (
+              <Label size="small" className={i === 0 ? styles.topMarginFirstRow : styles.topMargin}>
+                Barn {i + 1}
+              </Label>
+            )}
             <RhfDatepicker
               name={`fodselsdatoer.${id}`}
               control={control}
-              label={intl.formatMessage(
-                {
-                  id: 'DokumentasjonFaktaForm.Fodselsdato',
-                },
-                { number: i + 1 },
-              )}
+              label={intl.formatMessage({
+                id: 'DokumentasjonFaktaForm.Fodselsdato',
+              })}
+              hideLabel={i > 0}
+              size="small"
               validate={[required, hasValidDate]}
               isReadOnly={readOnly}
               isEdited={getAdopsjonsdatoEditedStatusForId(id)}
             />
             {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
               <ExclamationmarkTriangleFillIcon
-                className={styles.image}
                 title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
+                className={i === 0 ? styles.topMarginFirstRow : styles.topMargin}
+                color="var(--ax-warning-700)"
+                height={24}
+                width={24}
               />
             )}
           </HStack>
         ))}
-        <div>
-          <Label size="small">{intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}</Label>
-          <BodyShort size="small">{findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}</BodyShort>
-        </div>
+        <ReadOnlyField
+          size="small"
+          label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}
+          value={findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}
+        />
       </VStack>
-    </FaktaGruppe>
+    </FaktaKort>
   );
 };
 

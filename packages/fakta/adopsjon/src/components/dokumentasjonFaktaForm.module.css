@@ -1,11 +1,10 @@
-.container {
-  padding: 0;
-  width: 100%;
+.topMarginFirstRow {
+  margin-top: 30px;
+}
+.topMargin {
+  margin-top: 4px;
 }
 
-.image {
-  color: var(--ax-warning-700);
-  height: 35px;
-  margin-top: 27px;
-  width: 35px;
+.label {
+  margin-top: 30px;
 }

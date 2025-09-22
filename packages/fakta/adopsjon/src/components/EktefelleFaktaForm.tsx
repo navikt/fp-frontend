@@ -1,17 +1,15 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, HStack, Radio, VStack } from '@navikt/ds-react';
+import { Radio } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AdopsjonFamilieHendelse } from '@navikt/fp-types';
 import type { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-
-import styles from './ektefelleFaktaForm.module.css';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
   readOnly: boolean;
@@ -33,36 +31,26 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
   const { control } = useFormContext<FormValues>();
 
   return (
-    <FaktaGruppe
-      title={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
+    <FaktaKort
+      label={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
     >
-      <VStack gap="space-8" width="100%">
-        <BodyShort size="small">
-          <FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />
-        </BodyShort>
-        <div>
-          <hr className={styles.hr} />
-        </div>
-        <RhfRadioGroup
-          name="ektefellesBarn"
-          control={control}
-          hideLegend
-          validate={[required]}
-          isReadOnly={readOnly}
-          isEdited={hasValue(adopsjon.ektefellesBarn)}
-        >
-          <HStack gap="space-16">
-            <Radio value={false} size="small">
-              <FormattedMessage id="EktefelleFaktaForm.ErIkkeValg" />
-            </Radio>
-            <Radio value={true} size="small">
-              <FormattedMessage id="EktefelleFaktaForm.ErValg" />
-            </Radio>
-          </HStack>
-        </RhfRadioGroup>
-      </VStack>
-    </FaktaGruppe>
+      <RhfRadioGroup
+        name="ektefellesBarn"
+        control={control}
+        label={<FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />}
+        validate={[required]}
+        isReadOnly={readOnly}
+        isEdited={hasValue(adopsjon.ektefellesBarn)}
+      >
+        <Radio value={false}>
+          <FormattedMessage id="EktefelleFaktaForm.ErIkkeValg" />
+        </Radio>
+        <Radio value={true}>
+          <FormattedMessage id="EktefelleFaktaForm.ErValg" />
+        </Radio>
+      </RhfRadioGroup>
+    </FaktaKort>
   );
 };
 
