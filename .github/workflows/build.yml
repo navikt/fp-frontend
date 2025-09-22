@@ -88,10 +88,10 @@ jobs:
       - name: Build
         run: yarn build --scope=@navikt/${{ inputs.app }}
       - name: Run linting
-        run: yarn stylelint --scope=@navikt/${{ inputs.app }} && yarn eslint --scope=@navikt/${{ inputs.app }} && yarn tsc --scope=@navikt/${{ inputs.app }}
+        run: yarn stylelint && yarn eslint:changed && yarn tsc:changed
       - name: Run tests
         id: run-tests
-        run: yarn test --scope=@navikt/${{ inputs.app }}
+        run: yarn test:changed
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"
