@@ -71,6 +71,7 @@ export const FlyttReservasjonModal = ({
   const lagreFormMethods = useForm<LagreFormValues>({
     defaultValues: { begrunnelse: flyttetBegrunnelse },
   });
+
   const begrunnelseValue = lagreFormMethods.watch('begrunnelse');
 
   return (
