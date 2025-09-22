@@ -80,13 +80,8 @@ export const Messages = ({
   const { formState, control } = formMethods;
 
   const forhåndsvis = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (brevmalkode && fritekst) {
+    if (brevmalkode) {
       forhåndsvisBrev({ brevmalkode, fritekst, arsakskode });
-    } else if (!fritekst) {
-      formMethods.setError('fritekst', {
-        type: 'manual',
-        message: intl.formatMessage({ id: 'Messages.FritekstRequired' }),
-      });
     }
     e.preventDefault();
   };
