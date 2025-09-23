@@ -18,7 +18,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const lagreNotat = (params: { saksnummer: string; notat: string }) => {
-      args.lagreNotat?.(params);
+      args.lagreNotat(params);
       setArgs(oldArgs => ({
         ...oldArgs,
         notater: oldArgs.notater.concat({

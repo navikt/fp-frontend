@@ -69,7 +69,7 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
   } = useMutation({
     mutationFn: ferdigstillJournalføring,
     onSuccess: () => {
-      innhentAlleOppgaverPåNytt();
+      void innhentAlleOppgaverPåNytt();
       avbrytVisningAvJournalpost();
     },
   });
@@ -81,7 +81,7 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
   } = useMutation({
     mutationFn: knyttJournalpostTilAnnenSak,
     onSuccess: () => {
-      innhentAlleOppgaverPåNytt();
+      void innhentAlleOppgaverPåNytt();
       avbrytVisningAvJournalpost();
     },
   });
@@ -89,14 +89,14 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
   const { mutate: reserverOppgave } = useMutation({
     mutationFn: reserverBruker,
     onSuccess: () => {
-      innhentAlleOppgaverPåNytt();
+      void innhentAlleOppgaverPåNytt();
     },
   });
 
   const { mutate: flyttTilGosys } = useMutation({
     mutationFn: flyttOppgaveTilGosys,
     onSuccess: () => {
-      innhentAlleOppgaverPåNytt();
+      void innhentAlleOppgaverPåNytt();
     },
   });
 
@@ -149,7 +149,7 @@ const JournalforingIndex = ({ navAnsatt }: Props) => {
         harHentetFerdigJournalpost={hentJournalpostStatus === 'success'}
         valgtJournalpost={valgtJournalpost}
         hentJournalpost={hentJournalpost}
-        antallOppgaver={alleOppgaver ? alleOppgaver.length : undefined}
+        antallOppgaver={alleOppgaver.length}
       />
       {visModal && (
         <JournalførtSubmitModal

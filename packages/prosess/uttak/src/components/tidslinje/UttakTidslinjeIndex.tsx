@@ -33,7 +33,7 @@ const OppholdArsakMapper = {
 
 const finnSøknadsdato = (søknad: Soknad): string => {
   const { mottattDato } = søknad;
-  const søknadsdato = søknad.søknadsfrist?.mottattDato ?? søknad.mottattDato;
+  const søknadsdato = søknad.søknadsfrist.mottattDato ?? søknad.mottattDato;
   if (dayjs(mottattDato) < dayjs(søknadsdato)) {
     return mottattDato;
   }
@@ -64,7 +64,7 @@ const finnTidslinjeTider = (
     soknad: finnSøknadsdato(søknad),
     fodsel: familiehendelseDato,
     revurdering: isRevurdering ? endringsdato : undefined,
-    dodSoker: personoversikt?.bruker?.dødsdato ?? undefined,
+    dodSoker: personoversikt.bruker.dødsdato,
   };
 };
 

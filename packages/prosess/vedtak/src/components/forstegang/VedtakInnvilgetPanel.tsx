@@ -29,7 +29,7 @@ export const VedtakInnvilgetPanel = ({
   const intl = useIntl();
   return (
     <>
-      {ytelseTypeKode === 'ES' && beregningsresultat && 'antallBarn' in beregningsresultat && (
+      {ytelseTypeKode === 'ES' && 'antallBarn' in beregningsresultat && (
         <HStack gap="space-8">
           <VStack gap="space-4">
             <Detail>{intl.formatMessage({ id: 'VedtakForm.beregnetTilkjentYtelse' })}</Detail>

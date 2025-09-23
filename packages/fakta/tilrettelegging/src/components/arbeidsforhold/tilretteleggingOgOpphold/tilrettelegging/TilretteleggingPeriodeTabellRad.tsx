@@ -114,7 +114,7 @@ export const TilretteleggingPeriodeTabellRad = ({
         />
       }
       togglePlacement="right"
-      className={open ? styles.openRow : styles.row}
+      className={open ? styles['openRow'] : styles['row']}
     >
       <Table.DataCell>
         {tilrettelegging.fom ? (

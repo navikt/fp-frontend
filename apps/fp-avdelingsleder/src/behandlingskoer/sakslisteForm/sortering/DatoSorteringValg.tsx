@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-argument -- [JOHANNES] vent på typet form */
+
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
@@ -36,13 +38,13 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
     mutationFn: (valuesToStore: { fra: number; til: number }) =>
       lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },
@@ -51,13 +53,13 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   const { mutate: lagreSakslisteSorteringErDynamiskPeriode } = useMutation({
     mutationFn: () => lagreSakslisteSorteringDynamiskPeriode(valgtSakslisteId, valgtAvdelingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },
@@ -72,13 +74,13 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
         valuesToStore.tomDato,
       ),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_ANTALL, valgtSakslisteId, valgtAvdelingEnhet],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.OPPGAVE_AVDELING_ANTALL],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSLISTER_FOR_AVDELING],
       });
     },
@@ -109,7 +111,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   const lagreTomDatoDebounce = useDebounce('tomDato', lagreTomDato);
 
   return (
-    <div className={styles.arrowBoxWidth}>
+    <div className={styles['arrowBoxWidth']}>
       <ArrowBox>
         <VStack gap="space-8">
           <Detail>
@@ -121,7 +123,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                 <RhfTextField
                   name="fra"
                   control={control}
-                  className={styles.dato}
+                  className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Fom' })}
                   validate={[hasValidPosOrNegInteger]}
                   onBlur={value => lagreFra(value)}
@@ -132,14 +134,14 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                   </Detail>
                 )}
               </div>
-              <Detail className={styles.dager}>
+              <Detail className={styles['dager']}>
                 <FormattedMessage id="SorteringVelger.DagerMedBindestrek" />
               </Detail>
               <div>
                 <RhfTextField
                   name="til"
                   control={control}
-                  className={styles.dato}
+                  className={styles['dato']}
                   label={intl.formatMessage({ id: 'SorteringVelger.Tom' })}
                   validate={[hasValidPosOrNegInteger]}
                   onBlur={value => lagreTil(value)}
@@ -150,7 +152,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                   </Detail>
                 )}
               </div>
-              <Detail className={styles.dagerMedBindestrek}>
+              <Detail className={styles['dagerMedBindestrek']}>
                 <FormattedMessage id="SorteringVelger.Dager" />
               </Detail>
             </HStack>

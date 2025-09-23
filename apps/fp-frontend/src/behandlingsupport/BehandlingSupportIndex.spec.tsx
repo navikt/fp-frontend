@@ -1,6 +1,6 @@
 import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
-import { applyRequestHandlers } from 'msw-storybook-addon';
+import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
 import * as stories from './BehandlingSupportIndex.stories';
 
@@ -8,7 +8,7 @@ const { NårBehandlingErValgt, SkalViseFraBeslutter } = composeStories(stories);
 
 describe('BehandlingSupportIndex', () => {
   it('skal vise historikk-panelet som default', async () => {
-    await applyRequestHandlers(NårBehandlingErValgt.parameters['msw']);
+    applyRequestHandlers(NårBehandlingErValgt.parameters['msw'] as MswParameters['msw']);
     render(<NårBehandlingErValgt />);
 
     expect(await screen.findAllByText('Historikk')).toHaveLength(2);
@@ -21,7 +21,7 @@ describe('BehandlingSupportIndex', () => {
   });
 
   it('skal vise beslutter-panel', async () => {
-    await applyRequestHandlers(SkalViseFraBeslutter.parameters['msw']);
+    applyRequestHandlers(SkalViseFraBeslutter.parameters['msw'] as MswParameters['msw']);
     render(<SkalViseFraBeslutter />);
 
     expect(await screen.findByTitle('Fra beslutter')).toBeInTheDocument();

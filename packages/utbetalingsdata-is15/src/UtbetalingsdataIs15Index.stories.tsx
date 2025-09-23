@@ -20,7 +20,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const søkInfotrygdVedtak = (params: { searchString: string }) => {
-      args.søkInfotrygdVedtak?.(params);
+      args.søkInfotrygdVedtak(params);
       setArgs(oldArgs => ({ ...oldArgs, isSuccess: true }));
       return Promise.resolve<InfotrygdVedtak | undefined>(args.infotrygdVedtak);
     };

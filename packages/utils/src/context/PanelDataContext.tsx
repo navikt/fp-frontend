@@ -3,6 +3,7 @@ import { createContext, type ReactElement, useContext, useMemo } from 'react';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
+ 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 type Props<AP_TYPE extends AksjonspunktType> = {

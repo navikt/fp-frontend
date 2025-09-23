@@ -52,7 +52,7 @@ export const ProsessStegBegrunnelseTextField = ({
 
   const isRequiredFn = notRequired ? () => false : getIsBegrunnelseRequired(isDirty);
   return (
-    <div className={!useAllWidth ? styles.begrunnelseTextField : ''}>
+    <div className={!useAllWidth ? styles['begrunnelseTextField'] : ''}>
       <RhfTextarea
         name="begrunnelse"
         control={control}

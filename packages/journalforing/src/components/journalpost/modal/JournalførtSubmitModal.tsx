@@ -25,7 +25,7 @@ export const JournalførtSubmitModal = ({ saksnummer, lukkModal, showModal, isLo
     return null;
   }
 
-  const lenke = saksnummer?.saksnummer ? velgSakLenke(saksnummer?.saksnummer) : undefined;
+  const lenke = saksnummer?.saksnummer ? velgSakLenke(saksnummer.saksnummer) : undefined;
 
   return (
     <Modal width="small" open={showModal} onClose={lukkModal} aria-label="journalpost-modal">
@@ -46,7 +46,7 @@ export const JournalførtSubmitModal = ({ saksnummer, lukkModal, showModal, isLo
           {!isLoading && lenke && (
             <>
               <HStack justify="center">
-                <CheckmarkCircleIcon className={styles.ferdigIkon} />
+                <CheckmarkCircleIcon className={styles['ferdigIkon']} />
               </HStack>
               <HStack justify="center">
                 <BodyShort>

@@ -81,13 +81,13 @@ export const Historikk = ({
                 {intl.formatMessage({ id: 'History.FiltrerPaBehandling' })}
               </Checkbox>
             )}
-            <div className={styles.circle}>{filtrerteInnslag.length}</div>
+            <div className={styles['circle']}>{filtrerteInnslag.length}</div>
           </HStack>
         </HStack>
       </Box.New>
       <div
         style={{ height: `calc(100vh - ${top}px)` }}
-        className={styles.overflow}
+        className={styles['overflow']}
         ref={el => {
           if (el) {
             setTop(el.getBoundingClientRect().top);

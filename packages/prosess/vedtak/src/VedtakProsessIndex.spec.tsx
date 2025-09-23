@@ -26,6 +26,7 @@ describe('VedtakProsessIndex', () => {
       writable: true,
       value: vi.fn().mockImplementation(query => ({
         matches: false,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         media: query,
         onchange: null,
         addListener: vi.fn(), // Deprecated
@@ -97,6 +98,7 @@ describe('VedtakProsessIndex', () => {
     expect(forhåndsvis).toHaveBeenNthCalledWith(1, {
       automatiskVedtaksbrev: false,
       dokumentMal: DokumentMalType.FRITEKST_HTML,
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
     });
   });
@@ -238,7 +240,7 @@ describe('VedtakProsessIndex', () => {
     const ferdigstillOppgave = vi.fn();
     render(<OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil ferdigstillOppgave={ferdigstillOppgave} />);
 
-    const visMerKnapper = await screen.getAllByText('Vis mer');
+    const visMerKnapper = screen.getAllByText('Vis mer');
     expect(await screen.findByText('Vedtak')).toBeInTheDocument();
     expect(screen.getByText('Foreldrepenger er innvilget')).toBeInTheDocument();
     expect(screen.getByText('Automatisk vedtaksbrev')).toBeInTheDocument();
@@ -285,7 +287,7 @@ describe('VedtakProsessIndex', () => {
       ),
     ).toBeInTheDocument();
     await userEvent.click(visMerKnapper[1]);
-    await expect(screen.getAllByText('Vis mindre')).toHaveLength(2);
+    expect(screen.getAllByText('Vis mindre')).toHaveLength(2);
     expect(
       screen.getByText(
         'Han har AAP, så det er greit å vite om han får Foreldrepenger før man evt stanser denne ytelsen.',
@@ -308,7 +310,7 @@ describe('VedtakProsessIndex', () => {
     const filIkoner = screen.getAllByLabelText('Åpne dokument');
     expect(filIkoner).toHaveLength(6);
 
-    const ferdigstillOppgaveKnapper = await screen.getAllByText('Ferdigstill oppgave i Gosys');
+    const ferdigstillOppgaveKnapper = screen.getAllByText('Ferdigstill oppgave i Gosys');
     await userEvent.click(ferdigstillOppgaveKnapper[0]);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(1);
     expect(ferdigstillOppgave).toHaveBeenNthCalledWith(1, '1');

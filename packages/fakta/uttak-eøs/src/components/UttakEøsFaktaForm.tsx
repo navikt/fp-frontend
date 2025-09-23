@@ -27,7 +27,7 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback } =
     // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
-  annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
+  annenForelderUttakEøs.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<{
     annenForelderUttakEøsPerioder: AnnenforelderUttakEøsPeriode[];

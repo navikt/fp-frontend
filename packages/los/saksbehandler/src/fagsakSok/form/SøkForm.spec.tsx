@@ -7,7 +7,7 @@ import * as stories from './SøkForm.stories';
 const { Søkeskjema } = composeStories(stories);
 
 describe('SøkForm', () => {
-  it('skal rendre søke-komponent korrekt', async () => {
+  it('skal rendre søke-komponent korrekt', () => {
     render(<Søkeskjema />);
     expect(screen.getByTitle('Søk')).toBeInTheDocument();
     expect(screen.getByText('Du kan søke saksnummer, fødselsnummer eller D-nummer.')).toBeInTheDocument();

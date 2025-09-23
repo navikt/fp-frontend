@@ -18,7 +18,7 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
 
   const getPersonstatus = (verdi: PersonstatusPeriode): string => {
     const kodeverk = kodeverkNavn.find(it => it.kode === verdi.type);
-    return kodeverk?.navn ?? `Ukjent personstatus: ${verdi?.type.toLowerCase()}`;
+    return kodeverk?.navn ?? `Ukjent personstatus: ${verdi.type.toLowerCase()}`;
   };
 
   const sortertPersonstatus = personstatuser.toSorted(sorterPerioder);
@@ -59,7 +59,7 @@ export const PersonstatusVisning = ({ personstatuser, erAnnenpart = false, alleK
               <DateLabel dateString={ps.fom} />
             </Table.DataCell>
             <Table.DataCell style={rowStyle(index)}>
-              {!(ps.tom === null || ps.tom === TIDENES_ENDE) && <DateLabel dateString={ps.tom} />}
+              {ps.tom !== TIDENES_ENDE && <DateLabel dateString={ps.tom} />}
             </Table.DataCell>
           </Table.Row>
         ))}

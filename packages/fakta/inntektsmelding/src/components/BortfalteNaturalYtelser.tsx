@@ -45,6 +45,7 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
       const next = array[index + 1];
 
       const nyFom = current.periode.tomDato;
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
       const nyTom = next?.periode.fomDato;
 
       if (nyFom === TIDENES_ENDE) {

@@ -26,7 +26,7 @@ export const DokumentIndex = ({ dokumenter }: Props) => {
   }
 
   return (
-    <VStack gap="space-16" className={styles.pdfContainer}>
+    <VStack gap="space-16" className={styles['pdfContainer']}>
       <DokumentVelger setValgtDokument={setValgtDokument} valgtDokument={valgtDokument} dokumenter={dokumenter} />
       <PDFVisning dokument={valgtDokument} />
     </VStack>

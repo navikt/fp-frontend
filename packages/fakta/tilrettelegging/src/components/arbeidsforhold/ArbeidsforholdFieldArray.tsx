@@ -32,7 +32,7 @@ const finnArbeidsforhold = (
 
 const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: string, tomDato: string): boolean => {
   const dato = dayjs(tilretteleggingBehovFom);
-  return !(dato.isBefore(dayjs(fomDato)) || dato.isAfter(dayjs(tomDato)));
+  return !(dato.isBefore(dayjs(fomDato || undefined)) || dato.isAfter(dayjs(tomDato || undefined)));
 };
 
 const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
@@ -97,15 +97,17 @@ export const ArbeidsforholdFieldArray = ({
 
         return (
           <React.Fragment key={field.id}>
-            <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles.card}>
-              <ExpansionCard.Header className={styles.cardHeader}>
-                <div className={styles.padding}>
+            <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles['card']}>
+              <ExpansionCard.Header className={styles['cardHeader']}>
+                <div className={styles['padding']}>
                   <HStack gap="space-56" align="center">
                     <HStack gap="space-16" align="center">
-                      <Buildings3Icon color="var(--ax-accent-700)" className={styles.image} />
+                      <Buildings3Icon color="var(--ax-accent-700)" className={styles['image']} />
                       <Heading size="small" level="3">
+                        {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                         {arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}
                       </Heading>
+                      {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                       {arbeidsgiverOpplysning?.identifikator && (
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       )}
@@ -126,7 +128,7 @@ export const ArbeidsforholdFieldArray = ({
                         {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
                       </Tag>
                       {arbeidsforhold.skalBrukes && visInfoAlert && (
-                        <ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" className={styles.image} />
+                        <ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" className={styles['image']} />
                       )}
                     </HStack>
                   </HStack>

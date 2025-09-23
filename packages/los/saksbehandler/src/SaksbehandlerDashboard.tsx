@@ -37,19 +37,19 @@ export const SaksbehandlerDashboard = ({ setLosErIkkeTilgjengelig, åpneFagsak, 
   return (
     <>
       {driftsmeldingerQuery.data && <DriftsmeldingPanel driftsmeldinger={driftsmeldingerQuery.data} />}
-      <div className={styles.gridContainer}>
-        <div className={styles.leftColumn}>
+      <div className={styles['gridContainer']}>
+        <div className={styles['leftColumn']}>
           <BehandlingskoerIndex
             åpneFagsak={åpneFagsak}
             valgtSakslisteId={valgtSakslisteId}
             setValgtSakslisteId={setValgtSakslisteId}
             brukernavn={navAnsatt.brukernavn}
           />
-          <div className={styles.sokContainer}>
+          <div className={styles['sokContainer']}>
             <FagsakSøkIndex åpneFagsak={åpneFagsak} kanSaksbehandle={navAnsatt.kanSaksbehandle || false} />
           </div>
         </div>
-        <div className={styles.rightColumn}>
+        <div className={styles['rightColumn']}>
           <SaksstøttePaneler åpneFagsak={åpneFagsak} />
         </div>
       </div>

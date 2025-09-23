@@ -28,18 +28,18 @@ export const OppgaveTabell = ({ oppgaver, ferdigstillOppgave, isReadOnly }: Prop
       <Table>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell className={styles.headerType} textSize="small">
+            <Table.HeaderCell className={styles['headerType']} textSize="small">
               <FormattedMessage id="OppgaveTabell.Type" />
             </Table.HeaderCell>
             <Table.HeaderCell textSize="small">
               <FormattedMessage id="OppgaveTabell.Beskrivelse" />
             </Table.HeaderCell>
-            {!isReadOnly && <Table.HeaderCell className={styles.headerButton} />}
+            {!isReadOnly && <Table.HeaderCell className={styles['headerButton']} />}
           </Table.Row>
         </Table.Header>
         <Table.Body>
           {oppgaver.map(oppgave => (
-            <Table.Row key={oppgave.oppgaveId} className={styles.row}>
+            <Table.Row key={oppgave.oppgaveId} className={styles['row']}>
               <Table.DataCell>
                 <BodyShort size="small">
                   {alleKodeverk['OppgaveType'].find(o => o.kode === oppgave.oppgavetype)?.navn}

@@ -9,8 +9,7 @@ export const getTilbakekrevingText = (
   simuleringResultat?: SimuleringResultat,
   tilbakekrevingvalg?: TilbakekrevingValg,
 ): string | undefined => {
-  return tilbakekrevingvalg !== null &&
-    tilbakekrevingvalg !== undefined &&
+  return tilbakekrevingvalg !== undefined &&
     simuleringResultat &&
     tilbakekrevingMedInntrekk(tilbakekrevingvalg.videreBehandling, simuleringResultat)
     ? 'VedtakForm.OpprettTilbakekrOgInntrekk'

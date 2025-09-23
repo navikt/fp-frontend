@@ -24,7 +24,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const toggleRiskPanel = () => {
-      args.toggleRiskPanel?.();
+      args.toggleRiskPanel();
       setArgs(oldArgs => ({ ...oldArgs, isPanelOpen: true }));
     };
 

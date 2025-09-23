@@ -21,10 +21,10 @@ export const MerkSomHasterMenyModal = ({ behandling, hentOgSettBehandling, lukkM
     onSuccess: () => {
       hentOgSettBehandling();
 
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [FagsakRel.FETCH_FAGSAK],
       });
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE],
       });
     },

@@ -14,7 +14,7 @@ const {
 } = composeStories(stories);
 
 describe('FodselFaktaIndex', () => {
-  it('skal vise fakta i revurdering ved fødselshendelse', async () => {
+  it('skal vise fakta i revurdering ved fødselshendelse', () => {
     const lagre = vi.fn(() => Promise.resolve());
 
     render(<Default submitCallback={lagre} />);
@@ -227,7 +227,7 @@ describe('FodselFaktaIndex', () => {
       });
     });
 
-    it('skal ikke kunne overstyre når det finnes fødselaksjonspunkt', async () => {
+    it('skal ikke kunne overstyre når det finnes fødselaksjonspunkt', () => {
       const lagre = vi.fn(() => Promise.resolve());
       render(
         <OverstyringSomOverstyrer

@@ -27,10 +27,10 @@ const VurderPåNyttPunkter = ({
   vurderPaNyttArsaker: foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak[];
   vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[] | KodeverkMedNavnTilbakekreving<'VurderÅrsak'>[];
 }) => (
-  <div className={styles.approvalItem}>
-    {vurderPaNyttArsaker?.map(item => (
+  <div className={styles['approvalItem']}>
+    {vurderPaNyttArsaker.map(item => (
       <HStack gap="space-8" key={item}>
-        <XMarkOctagonIcon className={styles.xmark} />
+        <XMarkOctagonIcon className={styles['xmark']} />
         <div>{vurderArsaker.find(arsak => item === arsak.kode)?.navn}</div>
       </HStack>
     ))}
@@ -61,7 +61,7 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
   const intl = useIntl();
   return (
     <>
-      <div className={styles.resultatFraGodkjenningTextContainer}>
+      <div className={styles['resultatFraGodkjenningTextContainer']}>
         <FormattedMessage id="ToTrinnsForm.LøstAksjonspunkt" values={{ b: BTag }} />
       </div>
       {totrinnskontrollSkjermlenkeContext.map(context => {
@@ -75,7 +75,7 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
           return (
             <React.Fragment key={context.skjermlenkeType}>
               {lenke && skjermlenkeTypeKodeverk && (
-                <NavLink to={lenke} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
+                <NavLink to={lenke} onClick={() => window.scroll(0, 0)} className={styles['lenke']}>
                   {skjermlenkeTypeKodeverk.navn}
                 </NavLink>
               )}
@@ -90,32 +90,32 @@ export const TotrinnskontrollSaksbehandlerPanel = ({
                 );
 
                 return (
-                  <div key={aksjonspunkt.aksjonspunktKode} className={styles.approvalItemContainer}>
+                  <div key={aksjonspunkt.aksjonspunktKode} className={styles['approvalItemContainer']}>
                     {aksjonspunktTexts.map((formattedMessage: ReactNode, index: number) => (
                       <div
                         key={aksjonspunkt.aksjonspunktKode.concat('_'.concat(index.toString()))}
-                        className={styles.aksjonspunktTextContainer}
+                        className={styles['aksjonspunktTextContainer']}
                       >
                         <BodyShort size="small">{formattedMessage}</BodyShort>
                       </div>
                     ))}
-                    <div className={styles.approvalItem}>
+                    <div className={styles['approvalItem']}>
                       {aksjonspunkt.totrinnskontrollGodkjent ? (
                         <HStack gap="space-8">
                           <CheckmarkIcon
                             title={intl.formatMessage({ id: 'ToTrinnsForm.Godkjent' })}
-                            className={styles.checkmarkIcon}
+                            className={styles['checkmarkIcon']}
                           />
                           <FormattedMessage id="ToTrinnsForm.Godkjent" />
                         </HStack>
                       ) : (
                         <VurderPåNyttPunkter
-                          vurderPaNyttArsaker={aksjonspunkt?.vurderPaNyttArsaker}
+                          vurderPaNyttArsaker={aksjonspunkt.vurderPaNyttArsaker}
                           vurderArsaker={vurderArsaker}
                         />
                       )}
                     </div>
-                    <pre className={styles.approvalItem}>
+                    <pre className={styles['approvalItem']}>
                       {decodeHtmlEntity(aksjonspunkt.besluttersBegrunnelse ?? undefined)}
                     </pre>
                   </div>

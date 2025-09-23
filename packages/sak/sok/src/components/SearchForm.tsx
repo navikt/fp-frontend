@@ -35,7 +35,7 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
   const searchString = formMethods.watch('searchString');
 
   return (
-    <RhfForm formMethods={formMethods} onSubmit={searchFagsakCallback} className={styles.container}>
+    <RhfForm formMethods={formMethods} onSubmit={searchFagsakCallback} className={styles['container']}>
       <VStack gap="space-8">
         <BodyShort size="small">
           <FormattedMessage id="Search.SearchFagsakOrPerson" />
@@ -58,7 +58,7 @@ export const SearchForm = ({ searchStarted, searchResultAccessDenied, searchFags
         </HStack>
         {searchResultAccessDenied && (
           <HStack gap="space-8" align="end">
-            <ExclamationmarkTriangleFillIcon className={styles.advarselIcon} />
+            <ExclamationmarkTriangleFillIcon className={styles['advarselIcon']} />
             <BodyShort size="small">
               <FormattedMessage id={searchResultAccessDenied.feilmelding} />
             </BodyShort>

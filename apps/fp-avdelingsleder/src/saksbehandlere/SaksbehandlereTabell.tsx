@@ -25,7 +25,7 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
     mutationFn: (valuesToStore: SaksbehandlerProfil) =>
       slettSaksbehandler(valuesToStore.brukerIdent, valgtAvdelingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.SAKSBEHANDLERE_FOR_AVDELING],
       });
       setValgtSaksbehandler(undefined);
@@ -77,7 +77,7 @@ export const SaksbehandlereTabell = ({ saksbehandlere, valgtAvdelingEnhet }: Pro
                 <Table.DataCell>{saksbehandler.ansattAvdeling}</Table.DataCell>
                 <Table.DataCell>
                   <XMarkIcon
-                    className={styles.removeIcon}
+                    className={styles['removeIcon']}
                     onMouseDown={() => setValgtSaksbehandler(saksbehandler)}
                     onKeyDown={() => setValgtSaksbehandler(saksbehandler)}
                   />

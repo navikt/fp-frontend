@@ -50,6 +50,7 @@ export const FodselVilkarForm = ({ status, ytelseTypeKode, vilkår }: Props) => 
   } = usePanelDataContext<VurdereYtelseSammeBarnSokerAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
 

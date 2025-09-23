@@ -44,7 +44,7 @@ export const FritekstRedigeringModal = ({
     if (erValidertOk) {
       setVisValideringsFeil(false);
       setVisFritekstRedigeringModal(false);
-      lagreEndringer();
+      void lagreEndringer();
     } else {
       setVisValideringsFeil(true);
     }
@@ -54,14 +54,14 @@ export const FritekstRedigeringModal = ({
     const erValidertOk = await validerEndringer();
     if (erValidertOk) {
       setVisValideringsFeil(false);
-      forhåndsvis();
+      void forhåndsvis();
     } else {
       setVisValideringsFeil(true);
     }
   };
 
-  const tilbakestill = async () => {
-    tilbakestillEndringer();
+  const tilbakestill = () => {
+    void tilbakestillEndringer();
     setVisTilbakestillAdvarselModal(false);
   };
 

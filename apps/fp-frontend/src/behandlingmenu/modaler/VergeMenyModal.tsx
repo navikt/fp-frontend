@@ -20,16 +20,16 @@ export const VergeMenyModal = ({ behandlingAppKontekst, behandling, hentOgSettBe
   const queryClient = useQueryClient();
   const onBehandlingSuccess = () => {
     hentOgSettBehandling();
-    queryClient.invalidateQueries({
+    void queryClient.invalidateQueries({
       queryKey: [FagsakRel.FETCH_FAGSAK],
     });
-    queryClient.invalidateQueries({
+    void queryClient.invalidateQueries({
       queryKey: [FagsakRel.FETCH_FAGSAKDATA_FPTILBAKE],
     });
-    queryClient.invalidateQueries({
+    void queryClient.invalidateQueries({
       queryKey: [BehandlingRel.VERGE],
     });
-    queryClient.invalidateQueries({
+    void queryClient.invalidateQueries({
       queryKey: [BehandlingRel.VERGE_HENT],
     });
   };

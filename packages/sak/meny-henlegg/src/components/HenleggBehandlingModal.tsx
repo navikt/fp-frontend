@@ -110,7 +110,7 @@ export const HenleggBehandlingModal = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
       <Modal
-        className={styles.modal}
+        className={styles['modal']}
         open
         aria-label={intl.formatMessage({ id: 'HenleggBehandlingModal.ModalDescription' })}
         onClose={cancelEvent}
@@ -125,7 +125,7 @@ export const HenleggBehandlingModal = ({
             <RhfSelect
               name="årsakKode"
               control={formMethods.control}
-              className={styles.selectWidth}
+              className={styles['selectWidth']}
               label={intl.formatMessage({ id: 'HenleggBehandlingModal.ArsakField' })}
               validate={[required]}
               selectValues={henleggArsaker.map(arsak => (
@@ -142,7 +142,7 @@ export const HenleggBehandlingModal = ({
               maxLength={1500}
             />
             {showHenleggelseFritekst(behandlingType, årsakKode) && (
-              <div className={styles.fritekstTilBrevTextArea}>
+              <div className={styles['fritekstTilBrevTextArea']}>
                 <RhfTextarea
                   name="fritekst"
                   control={formMethods.control}
@@ -171,7 +171,7 @@ export const HenleggBehandlingModal = ({
           <Button
             variant="primary"
             size="small"
-            className={styles.button}
+            className={styles['button']}
             disabled={disableHovedKnapp(behandlingType, årsakKode, begrunnelse, fritekst)}
           >
             <FormattedMessage id="HenleggBehandlingModal.HenleggBehandlingSubmit" />
@@ -236,9 +236,7 @@ const getHenleggÅrsaker = (
 ): (KodeverkMedNavn<'BehandlingResultatType'> | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>)[] => {
   const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
   return typerForBehandlingType
-    .filter(
-      type => ytelseType !== 'ES' || (ytelseType === 'ES' && type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER),
-    )
+    .filter(type => ytelseType !== 'ES' || type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER)
     .flatMap(type => {
       const typer = behandlingResultatTyper.find(brt => brt.kode === type);
       return typer ? [typer] : [];

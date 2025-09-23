@@ -60,14 +60,11 @@ export const StonadsdagerTab = ({ stønadskonto, visDagerForKonto, aktiv = false
   const uker = Math.floor(stønadskonto.maxDager / 5);
 
   return (
-    <div className={styles.tabs}>
-      <li
-        role="presentation"
-        className={classNames('tab', { aktiv, error: stønadskonto && !stønadskonto.gyldigForbruk })}
-      >
+    <div className={styles['tabs']}>
+      <li role="presentation" className={classNames('tab', { aktiv, error: !stønadskonto.gyldigForbruk })}>
         <button
           role="tab"
-          className={classNames('tabInner', { error: stønadskonto && !stønadskonto.gyldigForbruk })}
+          className={classNames('tabInner', { error: !stønadskonto.gyldigForbruk })}
           type="button"
           onClick={velgKonto}
           aria-selected={aktiv}

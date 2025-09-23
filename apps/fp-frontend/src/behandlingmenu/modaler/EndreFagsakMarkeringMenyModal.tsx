@@ -29,7 +29,7 @@ export const EndreFagsakMarkeringMenyModal = ({
     mutationFn: (valuesToStore: EndreUtlandFormValues) => api.endreSakMarkering(valuesToStore),
     onSuccess: () => {
       hentOgSettBehandling();
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [FagsakRel.FETCH_FAGSAK],
       });
     },

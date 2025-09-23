@@ -45,6 +45,7 @@ export const VilkarResultPicker = ({
   validatorsForRadioOptions,
 }: Props) => {
   const { getValues, watch, control } = useFormContext<FormValues>();
+   
   const erVilkårOk = watch('erVilkarOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
@@ -55,13 +56,13 @@ export const VilkarResultPicker = ({
         <HStack gap="space-8">
           {erVilkårOk && (
             <>
-              <CheckmarkIcon className={styles.godkjentImage} />
+              <CheckmarkIcon className={styles['godkjentImage']} />
               <BodyShort size="small">{customVilkårOppfyltText}</BodyShort>
             </>
           )}
           {!erVilkårOk && (
             <>
-              <XMarkOctagonIcon className={styles.avslattImage} />
+              <XMarkOctagonIcon className={styles['avslattImage']} />
               <BodyShort size="small">{customVilkårIkkeOppfyltText}</BodyShort>
             </>
           )}
@@ -83,13 +84,14 @@ export const VilkarResultPicker = ({
           name="avslagskode"
           control={control}
           label={intl.formatMessage({ id: 'VilkarResultPicker.Arsak' })}
-          selectValues={sorterAvslagsårsaker(avslagsårsaker || []).map(aa => (
+          selectValues={sorterAvslagsårsaker(avslagsårsaker).map(aa => (
             <option key={aa.kode} value={aa.kode}>
               {aa.navn}
             </option>
           ))}
           readOnly={isReadOnly}
-          className={styles.selectBredde}
+          className={styles['selectBredde']}
+           
           validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkårOk, getValues('avslagskode')))]}
         />
       )}

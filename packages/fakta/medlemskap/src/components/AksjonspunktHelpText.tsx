@@ -30,59 +30,56 @@ function getFormateringsIdForAvvik(avvik: MedlemskapAvvik) {
       return 'AksjonspunktHelpText.EØSManglendeAnsettelseMedInntekt';
   }
 }
-const getVurdering = (resultat: ManuellBehandlingResultat): MedlemskapVurdering | undefined => {
-  if (resultat) {
-    const { opphørFom, avslagskode } = resultat;
+const getVurdering = (resultat: ManuellBehandlingResultat) => {
+  const { opphørFom, avslagskode } = resultat;
 
-    if (avslagskode && opphørFom) {
-      return MedlemskapVurdering.DELVIS_OPPFYLT;
-    } else if (avslagskode && !opphørFom) {
-      return MedlemskapVurdering.IKKE_OPPFYLT;
-    } else if (!opphørFom && !avslagskode) {
-      return MedlemskapVurdering.OPPFYLT;
-    }
+  if (avslagskode && opphørFom) {
+    return MedlemskapVurdering.DELVIS_OPPFYLT;
+  } else if (avslagskode && !opphørFom) {
+    return MedlemskapVurdering.IKKE_OPPFYLT;
+  } else if (!opphørFom && !avslagskode) {
+    return MedlemskapVurdering.OPPFYLT;
   }
+
   return undefined;
 };
 
 export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
   const intl = useIntl();
 
-  if (medlemskap.avvik) {
-    const { avvik, manuellBehandlingResultat: resultat } = medlemskap;
+  const { avvik, manuellBehandlingResultat: resultat } = medlemskap;
 
-    if (aksjonspunkter.length === 0) return <></>;
-    const åpneAksjonspunkt = aksjonspunkter.filter(erAksjonspunktÅpent);
-    const utførteAksjonspunkt = aksjonspunkter.filter(ap => ap.status === AksjonspunktStatus.UTFORT);
+  const åpneAksjonspunkt = aksjonspunkter.filter(erAksjonspunktÅpent);
+  const utførteAksjonspunkt = aksjonspunkter.filter(ap => ap.status === AksjonspunktStatus.UTFORT);
 
-    if (åpneAksjonspunkt.length > 0) {
-      return (
-        <VStack gap="space-8">
-          {[...new Set(avvik.map(getFormateringsIdForAvvik))].map(a => (
-            <AksjonspunktHelpTextHTML key={a}>
-              {intl.formatMessage({ id: a }) + intl.formatMessage({ id: 'AksjonspunktHelpText.Postfix' })}
-            </AksjonspunktHelpTextHTML>
-          ))}
-        </VStack>
-      );
-    } else if (resultat && åpneAksjonspunkt.length === 0 && utførteAksjonspunkt.length > 0) {
-      const vurdering = getVurdering(resultat);
+  if (åpneAksjonspunkt.length > 0) {
+    return (
+      <VStack gap="space-8">
+        {[...new Set(avvik.map(getFormateringsIdForAvvik))].map(a => (
+          <AksjonspunktHelpTextHTML key={a}>
+            {intl.formatMessage({ id: a }) + intl.formatMessage({ id: 'AksjonspunktHelpText.Postfix' })}
+          </AksjonspunktHelpTextHTML>
+        ))}
+      </VStack>
+    );
+  } else if (resultat && åpneAksjonspunkt.length === 0 && utførteAksjonspunkt.length > 0) {
+    const vurdering = getVurdering(resultat);
 
-      const text = intl.formatMessage({ id: 'AksjonspunktHelpText.ErMedlem' }, { vurdering });
+    const text = intl.formatMessage({ id: 'AksjonspunktHelpText.ErMedlem' }, { vurdering });
 
-      switch (vurdering) {
-        case MedlemskapVurdering.OPPFYLT:
-          return (
-            <Alert variant="success" size="small">
-              {text}
-            </Alert>
-          );
-        case MedlemskapVurdering.DELVIS_OPPFYLT:
-          return <InfoBox Icon={ExclamationmarkIcon}>{text}</InfoBox>;
-        case MedlemskapVurdering.IKKE_OPPFYLT:
-          return <InfoBox Icon={XMarkOctagonIcon}>{text}</InfoBox>;
-      }
+    switch (vurdering) {
+      case MedlemskapVurdering.OPPFYLT:
+        return (
+          <Alert variant="success" size="small">
+            {text}
+          </Alert>
+        );
+      case MedlemskapVurdering.DELVIS_OPPFYLT:
+        return <InfoBox Icon={ExclamationmarkIcon}>{text}</InfoBox>;
+      case MedlemskapVurdering.IKKE_OPPFYLT:
+        return <InfoBox Icon={XMarkOctagonIcon}>{text}</InfoBox>;
     }
   }
+
   return <></>;
 };

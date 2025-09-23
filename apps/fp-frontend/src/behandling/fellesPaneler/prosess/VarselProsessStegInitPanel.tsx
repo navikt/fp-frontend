@@ -48,7 +48,7 @@ export const VarselProsessStegInitPanel = () => {
   const navigate = useNavigate();
 
   const lagringSideEffekter = getLagringSideeffekter(setSkalOppdatereEtterBekreftelseAvAp, () => {
-    navigate('/');
+    void navigate('/');
   });
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, [], lagringSideEffekter);
 

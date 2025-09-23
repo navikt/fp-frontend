@@ -28,8 +28,8 @@ export const useHentFagsak = (
 
   useEffect(() => {
     if (!erBehandlingEndretFraUndefined) {
-      refetchFagsak();
-      refetchFpTilbakeFagsak();
+      void refetchFagsak();
+      void refetchFpTilbakeFagsak();
     }
   }, [behandlingUuid, behandlingVersjon]);
 

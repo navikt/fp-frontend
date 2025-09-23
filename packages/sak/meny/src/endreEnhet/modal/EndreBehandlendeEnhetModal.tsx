@@ -60,7 +60,7 @@ export const EndreBehandlendeEnhetModal = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={handleSubmit}>
       <Modal
-        className={styles.modal}
+        className={styles['modal']}
         open
         aria-label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.ModalDescription' })}
         onClose={lukkModal}
@@ -78,7 +78,7 @@ export const EndreBehandlendeEnhetModal = ({
               label={intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.NyEnhetField' })}
               validate={[required]}
               selectValues={selectOptions}
-              className={styles.selectWidth}
+              className={styles['selectWidth']}
             />
             <RhfTextarea
               name="begrunnelse"
@@ -90,7 +90,7 @@ export const EndreBehandlendeEnhetModal = ({
           </VStack>
         </Modal.Body>
         <Modal.Footer>
-          <Button size="small" variant="primary" className={styles.button} disabled={!(nyEnhet && begrunnelse)}>
+          <Button size="small" variant="primary" className={styles['button']} disabled={!(nyEnhet && begrunnelse)}>
             {intl.formatMessage({ id: 'EndreBehandlendeEnhetModal.Ok' })}
           </Button>
           <Button size="small" variant="secondary" onClick={lukkModal} type="button">

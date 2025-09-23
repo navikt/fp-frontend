@@ -36,49 +36,45 @@ const buildVarigEndringBeregningText = (
 const buildUttakText = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] =>
-  aksjonspunkt.uttakPerioder
-    ? aksjonspunkt.uttakPerioder.map(
-        (uttakperiode): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
-          const fom = dateFormat(uttakperiode.fom);
-          const tom = dateFormat(uttakperiode.tom);
-          let id;
+  aksjonspunkt.uttakPerioder.map(
+    (uttakperiode): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
+      const fom = dateFormat(uttakperiode.fom);
+      const tom = dateFormat(uttakperiode.tom);
+      let id;
 
-          if (uttakperiode.erSlettet) {
-            id = 'ToTrinnsForm.AvklarUttak.PeriodeSlettet';
-          } else if (uttakperiode.erLagtTil) {
-            id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
-          } else if (
-            uttakperiode.erEndret &&
-            (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
-              aksjonspunkt.aksjonspunktKode === AksjonspunktKode.TILKNYTTET_STORTINGET)
-          ) {
-            id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
-          } else if (
-            uttakperiode.erEndret &&
-            aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
-          ) {
-            id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-          } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYR_FAKTA_UTTAK) {
-            id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-          } else if (uttakperiode.erEndret) {
-            id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
-          } else {
-            id = 'ToTrinnsForm.AvklarUttak.PeriodeAvklart';
-          }
+      if (uttakperiode.erSlettet) {
+        id = 'ToTrinnsForm.AvklarUttak.PeriodeSlettet';
+      } else if (uttakperiode.erLagtTil) {
+        id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
+      } else if (
+        uttakperiode.erEndret &&
+        (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
+          aksjonspunkt.aksjonspunktKode === AksjonspunktKode.TILKNYTTET_STORTINGET)
+      ) {
+        id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
+      } else if (
+        uttakperiode.erEndret &&
+        aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
+      ) {
+        id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
+      } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYR_FAKTA_UTTAK) {
+        id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
+      } else if (uttakperiode.erEndret) {
+        id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
+      } else {
+        id = 'ToTrinnsForm.AvklarUttak.PeriodeAvklart';
+      }
 
-          return <FormattedMessage key={id} id={id} values={{ a: fom, b: tom }} />;
-        },
-      )
-    : [];
+      return <FormattedMessage key={id} id={id} values={{ a: fom, b: tom }} />;
+    },
+  );
 
 const buildOpptjeningText = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] =>
-  aksjonspunkt.opptjeningAktiviteter
-    ? aksjonspunkt.opptjeningAktiviteter.map(aktivitet => (
-        <OpptjeningTotrinnText key={aktivitet.aktivitetType} aktivitet={aktivitet} />
-      ))
-    : [];
+  aksjonspunkt.opptjeningAktiviteter.map(aktivitet => (
+    <OpptjeningTotrinnText key={aktivitet.aktivitetType} aktivitet={aktivitet} />
+  ));
 
 const getTextFromAksjonspunktkode = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
@@ -193,18 +189,10 @@ export const getAksjonspunkttekst = (
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN) {
     return getFaktaOmBeregningText(faktaOmBeregningTilfeller, aksjonspunkt.beregningDto);
   }
-  if (
-    isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) &&
-    aksjonspunkt.uttakPerioder &&
-    aksjonspunkt.uttakPerioder.length > 0
-  ) {
+  if (isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder.length > 0) {
     return buildUttakText(aksjonspunkt);
   }
-  if (
-    isFaktaUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) &&
-    aksjonspunkt.uttakPerioder &&
-    aksjonspunkt.uttakPerioder.length > 0
-  ) {
+  if (isFaktaUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder.length > 0) {
     return buildUttakText(aksjonspunkt);
   }
 

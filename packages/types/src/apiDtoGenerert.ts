@@ -4059,7 +4059,7 @@ export type tjenester_behandling_søknad_SoknadAdopsjonDto = {
   antallBarn: number;
   oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
   manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
-  oppgittFordeling: tjenester_behandling_søknad_OppgittFordelingDto;
+  oppgittFordeling?: tjenester_behandling_søknad_OppgittFordelingDto;
   søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
   omsorgsovertakelseDato?: string;
   barnetsAnkomstTilNorgeDato?: string;
@@ -4367,7 +4367,7 @@ export type tjenester_behandling_vedtak_dto_OppgaveDto_Beskrivelse = {
 export type tjenester_behandling_vedtak_dto_OppgaveDto_Dokument = {
   journalpostId: string;
   dokumentId: string;
-  tittel: string;
+  tittel?: string;
 };
 
 export type foreldrepenger_behandlingslager_behandling_verge_VergeType =

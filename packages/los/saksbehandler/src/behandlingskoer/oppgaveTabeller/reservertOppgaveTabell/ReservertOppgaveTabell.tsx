@@ -55,13 +55,13 @@ export const ReservertOppgaveTabell = ({ reserverOppgave, brukernavn }: Props) =
       : sorterteOppgaver;
 
   return (
-    <div className={styles.tabell}>
-      <VStack gap="space-8" className={styles.headerPadding}>
+    <div className={styles['tabell']}>
+      <VStack gap="space-8" className={styles['headerPadding']}>
         <HStack gap="space-8">
           <Label size="small">
             <FormattedMessage id="ReservertOppgaveTabell.ReserverteOppgaver" />
           </Label>
-          <BodyShort size="small" className={styles.grayout}>
+          <BodyShort size="small" className={styles['grayout']}>
             <FormattedMessage
               id="ReservertOppgaveTabell.AntallOppgaver"
               values={{ reservertAntall: reserverteOppgaver.length }}
@@ -133,6 +133,7 @@ const comparator = (a: Oppgave, b: Oppgave, orderBy: TableHeaders) => {
       : 1;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (b[orderBy] === undefined || a[orderBy] === undefined || b[orderBy] < a[orderBy]) {
     return -1;
   }

@@ -31,7 +31,7 @@ export const IverksetterVedtakStatusModal = ({ lukkModal, visModal, behandlingsr
     <Modal open={visModal} aria-label={imageAltText} onClose={lukkModal}>
       <Modal.Body>
         <HStack gap="space-24">
-          <CheckmarkCircleFillIcon className={styles.image} />
+          <CheckmarkCircleFillIcon className={styles['image']} />
           <VStack gap="space-4">
             <Label size="small">
               {erVedtakAvslatt ? (

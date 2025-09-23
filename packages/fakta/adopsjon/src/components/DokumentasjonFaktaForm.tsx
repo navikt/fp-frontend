@@ -88,7 +88,7 @@ export const DokumentasjonFaktaForm = ({
         {fødselsdatoer.map((id, i) => (
           <HStack gap="space-16" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
             {fødselsdatoer.length > 1 && (
-              <Label size="small" className={i === 0 ? styles.topMarginFirstRow : styles.topMargin}>
+              <Label size="small" className={i === 0 ? styles['topMarginFirstRow'] : styles['topMargin']}>
                 <FormattedMessage id="DokumentasjonFaktaForm.BarnNr" values={{ nummer: i + 1 }} />
               </Label>
             )}
@@ -105,7 +105,7 @@ export const DokumentasjonFaktaForm = ({
             {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
               <ExclamationmarkTriangleFillIcon
                 title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
-                className={i === 0 ? styles.topMarginFirstRow : styles.topMargin}
+                className={i === 0 ? styles['topMarginFirstRow'] : styles['topMargin']}
                 color="var(--ax-warning-700)"
                 height={24}
                 width={24}
@@ -159,6 +159,7 @@ const isAdopsjonFodelsedatoerEdited =
   (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, adopsjon: AdopsjonFamilieHendelse) =>
   (id: string): boolean => {
     const editedStatus = diff(soknad.adopsjonFodelsedatoer, adopsjon.fødselsdatoer);
-    // @ts-expect-error diff bør endrast så den gir ein meir forutsigbar output
+    // @ts-expect-error -- usikker hva denne går ut på
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return editedStatus ? editedStatus[id] : false;
   };

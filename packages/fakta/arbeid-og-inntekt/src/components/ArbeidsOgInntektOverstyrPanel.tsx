@@ -87,7 +87,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
           </AksjonspunktHelpTextHTML>
         )}
         {arbeidsforhold.length === 0 && inntektsmeldinger.length === 0 && erOverstyrer && (
-          <div className={styles.alertStripe}>
+          <div className={styles['alertStripe']}>
             <Alert variant="info">
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.IngenArbeidsforhold" />
             </Alert>

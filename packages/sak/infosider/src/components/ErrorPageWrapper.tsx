@@ -23,7 +23,7 @@ interface Props {
  */
 export const ErrorPageWrapper = ({ children, titleCode = 'GenericErrorPage.Header' }: Props) => (
   <RawIntlProvider value={intl}>
-    <div className={styles.pageContainer}>
+    <div className={styles['pageContainer']}>
       <Heading size="large" level="3">
         <FormattedMessage id={titleCode} values={{ br: <br /> }} />
       </Heading>

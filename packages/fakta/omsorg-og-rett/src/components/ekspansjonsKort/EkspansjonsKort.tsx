@@ -17,7 +17,7 @@ export const EkspansjonsKort = ({ tittel, kilde, defaultOpen, children }: PropsW
         <HStack gap="space-16" wrap={false}>
           <div>
             <ExpansionCard.Title size="small">{tittel}</ExpansionCard.Title>
-            {kilde !== null && <ExpansionCard.Description>{getLabelForFaktaKilde(kilde)}</ExpansionCard.Description>}
+            <ExpansionCard.Description>{getLabelForFaktaKilde(kilde)}</ExpansionCard.Description>
           </div>
         </HStack>
       </ExpansionCard.Header>

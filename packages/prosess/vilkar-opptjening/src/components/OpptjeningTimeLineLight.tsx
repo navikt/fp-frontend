@@ -84,20 +84,16 @@ export const OpptjeningTimeLineLight = ({ opptjeningPeriods, opptjeningFomDate, 
   };
 
   const velgNestePeriode = (): void => {
-    if (perioder) {
-      const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) + 1;
-      if (nyIndex < perioder.length) {
-        setValgtPeriod(perioder[nyIndex]);
-      }
+    const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) + 1;
+    if (nyIndex < perioder.length) {
+      setValgtPeriod(perioder[nyIndex]);
     }
   };
 
   const velgForrigePeriode = (): void => {
-    if (perioder) {
-      const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) - 1;
-      if (nyIndex >= 0) {
-        setValgtPeriod(perioder[nyIndex]);
-      }
+    const nyIndex = perioder.findIndex(oa => oa.opptjeningsperiode?.fom === valgtPeriod?.opptjeningsperiode?.fom) - 1;
+    if (nyIndex >= 0) {
+      setValgtPeriod(perioder[nyIndex]);
     }
   };
 

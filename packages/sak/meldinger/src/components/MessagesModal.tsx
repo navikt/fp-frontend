@@ -20,7 +20,7 @@ export const MessagesModal = ({ showModal, closeEvent }: Props) => {
   const intl = useIntl();
   return (
     <Modal
-      className={styles.modal}
+      className={styles['modal']}
       open={showModal}
       aria-label={intl.formatMessage({ id: 'MessagesModal.description' })}
       onClose={closeEvent}
@@ -29,7 +29,7 @@ export const MessagesModal = ({ showModal, closeEvent }: Props) => {
         <HStack justify="space-between" align="center">
           <HStack gap="space-8" align="center">
             <CheckmarkCircleFillIcon
-              className={styles.image}
+              className={styles['image']}
               title={intl.formatMessage({ id: 'MessagesModal.description' })}
             />
             <Label size="small">

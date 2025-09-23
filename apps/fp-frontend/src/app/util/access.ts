@@ -8,8 +8,8 @@ import {
 } from '@navikt/fp-kodeverk';
 import type { Aksess, AksessRettigheter, NavAnsatt } from '@navikt/fp-types';
 
-const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanVeilede;
-const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt && navAnsatt.kanSaksbehandle;
+const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt.kanVeilede;
+const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt.kanSaksbehandle;
 const kanOverstyre = (navAnsatt: NavAnsatt): boolean => kanSaksbehandle(navAnsatt) && navAnsatt.kanOverstyre;
 const isBehandlingAvTilbakekreving = (type?: BehandlingType): boolean =>
   type ? type === BehandlingTypeEnum.TILBAKEKREVING || type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING : false;
@@ -22,7 +22,7 @@ const accessibleFor =
 const enabledFor =
   (validFagsakStauses: FagsakStatus[], validBehandlingStatuses: BehandlingStatus[]) =>
   (fagsakStatus: FagsakStatus, isTilbakekrevingBehandling: boolean, behandlingStatus?: BehandlingStatus): boolean =>
-    (isTilbakekrevingBehandling || (!!fagsakStatus && validFagsakStauses.includes(fagsakStatus))) &&
+    (isTilbakekrevingBehandling || validFagsakStauses.includes(fagsakStatus)) &&
     !!behandlingStatus &&
     validBehandlingStatuses.includes(behandlingStatus);
 

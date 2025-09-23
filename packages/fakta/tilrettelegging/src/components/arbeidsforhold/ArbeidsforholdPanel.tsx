@@ -28,11 +28,7 @@ const validerTidligereEnn =
     const treUkerFørTermindato = dayjs(termindato).subtract(3, 'week').subtract(1, 'day');
     const tidligsteTidspunkt = fødselsdato ? dayjs.min(treUkerFørTermindato, dayjs(fødselsdato)) : treUkerFørTermindato;
 
-    if (
-      tidligsteTidspunkt &&
-      tilretteleggingFomDato.isValid() &&
-      !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)
-    ) {
+    if (tilretteleggingFomDato.isValid() && !tilretteleggingFomDato.isBefore(tidligsteTidspunkt)) {
       return intl.formatMessage(
         {
           id: 'TilretteleggingForArbeidsgiverPanel.TilretteleggingTidligereEnn',
@@ -83,9 +79,7 @@ export const ArbeidsforholdPanel = ({
 
   const termindato = watch('termindato');
 
-  const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(
-    permisjon => permisjon.erGyldig === undefined || permisjon.erGyldig === null,
-  );
+  const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined);
 
   const oppdaterOverstyrtUtbetalingsgrad = (velferdspermisjonprosent: number) => {
     arbeidsforhold.tilretteleggingDatoer.forEach((tilrettelegging, index) => {

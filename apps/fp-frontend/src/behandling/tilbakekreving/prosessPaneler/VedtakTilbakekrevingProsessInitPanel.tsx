@@ -81,7 +81,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
         visModal={visFatterVedtakModal}
         lukkModal={() => {
           setVisFatterVedtakModal(false);
-          navigate('/');
+          void navigate('/');
         }}
         tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}
       />
@@ -129,7 +129,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof VedtakTilbakekrevingProsessIn
 };
 
 const erTilbakekrevingÅrsakKlage = (årsak: BehandlingArsakType): boolean =>
-  !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
+  tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
 
 const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   if (!beregningsresultat) {

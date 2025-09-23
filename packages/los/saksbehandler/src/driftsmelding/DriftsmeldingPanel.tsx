@@ -15,17 +15,17 @@ interface Props {
  * Definerer hvordan driftsmeldinger vises.
  */
 export const DriftsmeldingPanel = ({ driftsmeldinger }: Props) => {
-  if (driftsmeldinger === undefined || driftsmeldinger.length === 0) {
+  if (driftsmeldinger.length === 0) {
     return null;
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles['container']}>
       <VStack gap="space-8">
         {driftsmeldinger.map(message => (
           <HStack gap="space-8" key={message.id}>
-            <ExclamationmarkTriangleFillIcon className={styles.driftsInfo} />
-            <Detail className={styles.wordWrap}>{message.melding}</Detail>
+            <ExclamationmarkTriangleFillIcon className={styles['driftsInfo']} />
+            <Detail className={styles['wordWrap']}>{message.melding}</Detail>
           </HStack>
         ))}
       </VStack>

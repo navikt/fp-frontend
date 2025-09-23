@@ -17,7 +17,7 @@ export const FerdigstillOppgaveKnapp = ({ oppgave, ferdigstillOppgave }: Props) 
 
   return (
     <Button
-      className={styles.knapp}
+      className={styles['knapp']}
       size="small"
       variant="secondary"
       onClick={async () => {

@@ -28,8 +28,8 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const skalPanelVisesIMeny =
-    (behandling.vilkår ?? []).some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
-    (behandling.vilkår ?? []).some(
+    behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
+    behandling.vilkår.some(
       v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === VilkarUtfallType.OPPFYLT,
     );
 

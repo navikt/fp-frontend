@@ -62,7 +62,7 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
       {!isFetching ? (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
-          vilkar={lagBGVilkår(behandling.vilkår ?? [], beregningsgrunnlag)}
+          vilkar={lagBGVilkår(behandling.vilkår, beregningsgrunnlag)}
           beregningsgrunnlag={lagFormatertBG(beregningsgrunnlag)}
           submitCallback={lagModifisertCallback(standardPanelProps.submitCallback)}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
@@ -105,19 +105,16 @@ const lagModifisertCallback =
     const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
+
     const transformerteData = apListe.map(apData => ({
       kode: mapBGKodeTilFpsakKode(apData.kode),
-      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
-      ...apData.grunnlag[0],
     }));
+    // @ts-expect-error -- gale typer
     return submitCallback(transformerteData);
   };
 
 const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
-  if (!vilkår) {
-    return null;
-  }
-  const bgVilkar = vilkår.find(v => v.vilkarType && v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkår.find(v => v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }
@@ -128,7 +125,7 @@ const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag
         avslagKode: bgVilkar.avslagKode ?? undefined,
         vurderesIBehandlingen: true,
         periode: {
-          fom: beregningsgrunnlag ? beregningsgrunnlag.skjaeringstidspunktBeregning : '',
+          fom: beregningsgrunnlag.skjaeringstidspunktBeregning,
           tom: TIDENES_ENDE,
         },
         merknadParametere: {},

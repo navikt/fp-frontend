@@ -4,6 +4,7 @@ export const lazyWithRetry = <T>(
   componentImport: () => Promise<{ default: ComponentType<T> }>,
 ): LazyExoticComponent<ComponentType<T>> =>
   lazy<ComponentType<T>>(async () => {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const pageHasAlreadyBeenForceRefreshed = JSON.parse(
       window.localStorage.getItem('page-has-been-force-refreshed') ?? 'false',
     );

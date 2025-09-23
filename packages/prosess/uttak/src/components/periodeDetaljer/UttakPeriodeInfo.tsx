@@ -28,12 +28,12 @@ const OppholdArsakKontoNavn = {
 
 const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean): string => {
   if (valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET && !erTilknyttetStortinget) {
-    return styles.greenDetailsPeriod;
+    return styles['greenDetailsPeriod'];
   }
   if (valgtPeriode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING || erTilknyttetStortinget) {
-    return styles.orangeDetailsPeriod;
+    return styles['orangeDetailsPeriod'];
   }
-  return styles.redDetailsPeriod;
+  return styles['redDetailsPeriod'];
 };
 
 const periodeIsInnvilget = (valgtPeriode: PeriodeSoker): boolean =>
@@ -50,6 +50,7 @@ const gradertArbforhold = (
     if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
       return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
     }
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
       const { navn, identifikator } = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
       arbeidsforhold = navn ? `${navn}` : arbeidsforhold;
@@ -214,13 +215,13 @@ export const UttakPeriodeInfo = ({
                 <RhfNumericField
                   name="samtidigUttaksprosent"
                   control={control}
-                  className={styles.numberFieldLength}
+                  className={styles['numberFieldLength']}
                   readOnly={isReadOnly}
                   label={intl.formatMessage({ id: 'UttakInfo.SamtidigUttaksprosent' })}
                   validate={[required, maxValue100, hasValidDecimal]}
                   forceTwoDecimalDigits
                 />
-                {!isReadOnly && <div className={styles.suffix}>%</div>}
+                {!isReadOnly && <div className={styles['suffix']}>%</div>}
               </HStack>
             )}
           </div>
@@ -254,7 +255,7 @@ export const UttakPeriodeInfo = ({
         )}
       </HStack>
       {valgtPeriode.oppholdÅrsak !== '-' && (
-        <div className={styles.select}>
+        <div className={styles['select']}>
           <Detail>
             <FormattedMessage id="UttakInfo.Opphold.AnnenForelder" />
           </Detail>

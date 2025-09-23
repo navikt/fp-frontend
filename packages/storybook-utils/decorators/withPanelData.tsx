@@ -9,6 +9,7 @@ import { PanelDataProvider } from '@navikt/fp-utils';
 
 import { alleKodeverk } from '../mocks/alleKodeverk';
 
+ 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 export type PanelDataArgs = {
@@ -37,18 +38,62 @@ const DEFAULT_BEHANDLING = {
   status: BehandlingStatusEnum.BEHANDLING_UTREDES,
   behandlingPåVent: false,
   behandlingHenlagt: false,
-} as Behandling;
+  opprettet: '',
+  behandlendeEnhetId: '',
+  behandlendeEnhetNavn: '',
+  erAktivPapirsoknad: false,
+  gjeldendeVedtak: false,
+  behandlingKøet: false,
+  toTrinnsBehandling: false,
+  behandlingÅrsaker: [],
+  vilkår: [],
+  links: [],
+  aksjonspunkt: [],
+  harSøknad: false,
+  harSattEndringsdato: false,
+} satisfies Behandling;
 
 const DEFAULT_FAGSAK = {
   saksnummer: '1234567',
   fagsakYtelseType: 'FP',
-  bruker: { navn: 'Kari Nordmann' },
-  annenPart: { navn: 'Ola Nordmann' },
+  bruker: {
+    navn: 'Kari Nordmann',
+    fødselsnummer: '',
+    kjønn: '-',
+    fødselsdato: '',
+    språkkode: 'NB',
+  },
+  annenPart: {
+    navn: 'Ola Nordmann',
+    fødselsnummer: '',
+    kjønn: '-',
+    fødselsdato: '',
+    språkkode: 'NB',
+  },
   relasjonsRolleType: RelasjonsRolleType.MOR,
   annenpartBehandling: {
     relasjonsRolleType: RelasjonsRolleType.FAR,
+    saksnummer: '',
+    behandlingUuid: '',
   },
-} as Fagsak;
+  status: 'OPPR',
+  aktørId: '',
+  sakSkalTilInfotrygd: false,
+  dekningsgrad: 0,
+  brukerManglerAdresse: false,
+  fagsakMarkeringer: [],
+  behandlingTypeKanOpprettes: [],
+  behandlinger: [],
+  historikkinnslag: [],
+  notater: [],
+  kontrollResultat: {
+    kontrollresultat: '-',
+    iayFaresignaler: undefined,
+    medlFaresignaler: undefined,
+    faresignalVurdering: undefined,
+  },
+  harVergeIÅpenBehandling: false,
+} satisfies Fagsak;
 
 export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) => {
   const {

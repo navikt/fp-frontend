@@ -35,9 +35,8 @@ const getCorrectEmptyArbeidsForhold = (
 
   let arbeidsforholdMedPositivSaldoFinnes = false;
 
-  const konto = stonadskonto?.stonadskontoer
-    ? stonadskonto?.stonadskontoer[periodeTypeKode as StonadskontoType]
-    : undefined;
+  const konto = stonadskonto.stonadskontoer[periodeTypeKode as StonadskontoType];
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (konto?.aktivitetSaldoDtoList) {
     konto.aktivitetSaldoDtoList.forEach(item => {
       if (item.saldo === 0) {
@@ -59,6 +58,7 @@ const getCorrectEmptyArbeidsForhold = (
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] må da være falsk positiv?
   return arbeidsforholdMedPositivSaldoFinnes ? arbeidsForholdMedNullDagerIgjenArray : [];
 };
 
