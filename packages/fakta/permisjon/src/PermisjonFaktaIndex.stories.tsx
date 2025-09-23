@@ -309,7 +309,6 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           },
 
           årsak: 'PERMISJON',
-          saksbehandlersVurdering: '-',
         },
         {
           arbeidsgiverIdent: '910909088',
