@@ -37,7 +37,7 @@ interface Props {
 }
 
 const finnFristFraBehandling = (behandling: BehandlingAppKontekst) =>
-  behandling.behandlingPåVent ? behandling.fristBehandlingPåVent : null;
+  behandling.behandlingPåVent ? behandling.fristBehandlingPåVent : undefined;
 
 /**
  * MeldingIndex
@@ -68,7 +68,7 @@ export const MeldingIndex = ({
     innloggetBruker: { kanVeilede },
   } = notEmpty(initFetchQuery.data);
 
-  const ventearsaker = useFpSakKodeverk('Venteårsak') || [];
+  const ventearsaker = useFpSakKodeverk('Venteårsak');
   const revurderingVarslingArsak = useFpSakKodeverk('RevurderingVarslingÅrsak');
 
   const { mutateAsync: sendMelding, status: meldingStatus } = useMutation({
@@ -85,7 +85,7 @@ export const MeldingIndex = ({
   );
 
   const handleSubmitFromModal = () => {
-    navigate('/');
+    void navigate('/');
   };
 
   const forhåndsvisBrev = useVisForhandsvisningAvMelding(valgtBehandling);

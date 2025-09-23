@@ -40,7 +40,7 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
               readOnly={readOnly}
               maxLength={200}
               hideLabel
-              className={styles.inputField}
+              className={styles['inputField']}
             />
           )}
           {!harToggletFritekst && (
@@ -50,7 +50,7 @@ export const JournalpostTittelForm = ({ journalpost, readOnly }: Props) => {
               readOnly={readOnly}
               label={undefined}
               hideLabel
-              className={styles.inputField}
+              className={styles['inputField']}
               validate={[required]}
               selectValues={dokumentTitler.map(tittel => (
                 <option value={tittel} key={tittel}>

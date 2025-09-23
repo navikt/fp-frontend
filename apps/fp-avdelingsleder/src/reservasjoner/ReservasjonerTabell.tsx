@@ -74,7 +74,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
     }
     await endreOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, reserverTil });
     setShowReservasjonEndringDatoModal(false);
-    hentAvdelingensReservasjoner();
+    void hentAvdelingensReservasjoner();
   };
 
   const { mutateAsync: flyttOppgavereservasjonRequest } = useMutation({
@@ -87,7 +87,7 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
       throw new Error('Reservasjon må være valgt');
     }
     await flyttOppgavereservasjonRequest({ oppgaveId: valgtReservasjon.oppgaveId, ...params });
-    hentAvdelingensReservasjoner();
+    void hentAvdelingensReservasjoner();
   };
 
   return (
@@ -143,16 +143,16 @@ export const ReservasjonerTabell = ({ valgtAvdelingEnhet }: Props) => {
                 </Table.DataCell>
                 <Table.DataCell>
                   <CalendarIcon
-                    className={styles.calendarIcon}
+                    className={styles['calendarIcon']}
                     onClick={() => showReservasjonEndringDato(reservasjon)}
                   />
                 </Table.DataCell>
                 <Table.DataCell>
-                  <PersonGroupIcon className={styles.flyttIcon} onClick={() => showFlytteModal(reservasjon)} />
+                  <PersonGroupIcon className={styles['flyttIcon']} onClick={() => showFlytteModal(reservasjon)} />
                 </Table.DataCell>
                 <Table.DataCell>
                   <XMarkIcon
-                    className={styles.removeIcon}
+                    className={styles['removeIcon']}
                     onClick={() => opphevOppgaveReservasjon({ oppgaveId: reservasjon.oppgaveId })}
                   />
                 </Table.DataCell>

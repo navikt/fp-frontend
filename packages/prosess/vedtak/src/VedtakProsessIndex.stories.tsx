@@ -40,18 +40,13 @@ import { VedtakProsessIndex } from './VedtakProsessIndex';
 const defaultAksjonspunkt = {
   definisjon: AksjonspunktKode.FORESLA_VEDTAK,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 const defaultAksjonspunkter = [defaultAksjonspunkt];
 
@@ -64,6 +59,8 @@ const defaultBehandling = {
   behandlingsresultat: {
     type: BehandlingResultatType.INNVILGET,
     vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+    id: 0,
+    harRedigertVedtaksbrev: false,
   },
   behandlingPåVent: false,
   behandlingHenlagt: false,
@@ -71,9 +68,22 @@ const defaultBehandling = {
   behandlingÅrsaker: [
     {
       behandlingArsakType: BehandlingArsakTypeEnum.ANNET,
+      erAutomatiskRevurdering: false,
+      manueltOpprettet: false,
     },
   ],
-} as Behandling;
+  opprettet: '',
+  behandlendeEnhetId: '',
+  behandlendeEnhetNavn: '',
+  erAktivPapirsoknad: false,
+  gjeldendeVedtak: false,
+  behandlingKøet: false,
+  toTrinnsBehandling: false,
+  vilkår: [],
+  links: [],
+  harSøknad: false,
+  harSattEndringsdato: false,
+} satisfies Behandling;
 
 const defaultVilkar = [
   {
@@ -82,12 +92,45 @@ const defaultVilkar = [
     vilkarStatus: VilkarUtfallType.OPPFYLT,
     overstyrbar: true,
   },
-] as Vilkar[];
+] satisfies Vilkar[];
 
 const defaultberegningresultatDagytelse = {
-  antallBarn: 1,
-  beregnetTilkjentYtelse: 10000,
-} as BeregningsresultatDagytelse;
+  perioder: undefined,
+} satisfies BeregningsresultatDagytelse;
+
+const defaultSak = {
+  fagsakYtelseType: 'FP',
+  saksnummer: '',
+  relasjonsRolleType: '-',
+  status: 'AVSLU',
+  aktørId: '',
+  sakSkalTilInfotrygd: false,
+  dekningsgrad: 0,
+  bruker: {
+    aktørId: undefined,
+    navn: '',
+    fødselsnummer: '',
+    kjønn: '-',
+    diskresjonskode: undefined,
+    fødselsdato: '',
+    dødsdato: undefined,
+    dodsdato: undefined,
+    språkkode: '-',
+  },
+  brukerManglerAdresse: false,
+  fagsakMarkeringer: [],
+  behandlingTypeKanOpprettes: [],
+  behandlinger: [],
+  historikkinnslag: [],
+  notater: [],
+  kontrollResultat: {
+    kontrollresultat: '-',
+    iayFaresignaler: undefined,
+    medlFaresignaler: undefined,
+    faresignalVurdering: undefined,
+  },
+  harVergeIÅpenBehandling: false,
+} satisfies Fagsak;
 
 const meta = {
   title: 'prosess/prosess-vedtak',
@@ -111,7 +154,7 @@ const meta = {
       <VedtakEditeringProvider
         behandling={args.behandling ?? defaultBehandling}
         hentBrevOverstyring={() => {
-          return redigertHtml && args.brevOverstyring
+          return redigertHtml
             ? Promise.resolve({
                 opprinneligHtml: args.brevOverstyring.opprinneligHtml,
                 redigertHtml,
@@ -138,9 +181,7 @@ export const InnvilgetForeldrepengerTilGodkjenningForSaksbehandler: Story = {
   args: {
     behandling: defaultBehandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
 };
@@ -150,11 +191,9 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
     behandling: {
       ...defaultBehandling,
       status: BehandlingStatusEnum.AVSLUTTET,
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -170,12 +209,11 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
         type: BehandlingResultatType.INNVILGET,
         harRedigertVedtaksbrev: true,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: redigertInnhold },
   },
@@ -188,12 +226,12 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -207,12 +245,12 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -222,9 +260,7 @@ export const InnvilgetForeldrepengerDerBeregningErManueltFastsatt: Story = {
   args: {
     behandling: defaultBehandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -249,12 +285,12 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -281,7 +317,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: null,
+
           kanLoses: false,
           toTrinnsBehandling: true,
         },
@@ -289,30 +325,28 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: null,
+
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: null,
+
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
           status: AksjonspunktStatus.OPPRETTET,
-          begrunnelse: null,
+
           kanLoses: false,
           toTrinnsBehandling: true,
         },
       ],
     },
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -358,7 +392,6 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         oppgavetype: OppgaveType.VUR_KONSEKVENS,
         beskrivelser: [
           {
-            header: null,
             kommentarer: ['VL: Se sto mottatt 24.02.25'],
           },
         ],
@@ -377,7 +410,6 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
             ],
           },
           {
-            header: null,
             kommentarer: ['VL: Se sto mottatt 20.02.25'],
           },
         ],
@@ -386,7 +418,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       {
         oppgaveId: '3',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] }],
+        beskrivelser: [{ kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] }],
         dokumenter: [
           {
             journalpostId: '123',
@@ -408,7 +440,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       {
         oppgaveId: '4',
         oppgavetype: OppgaveType.VUR_DOKUMENT,
-        beskrivelser: [{ header: null, kommentarer: ['VL: Bekreftelse fra studiested/skole'] }],
+        beskrivelser: [{ kommentarer: ['VL: Bekreftelse fra studiested/skole'] }],
         dokumenter: [
           {
             journalpostId: '123',
@@ -428,7 +460,6 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
             ],
           },
           {
-            header: null,
             kommentarer: [
               'Han har AAP, så det er greit å vite om han får Foreldrepenger før man evt stanser denne ytelsen.',
             ],
@@ -437,7 +468,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
             header: '--- 19.02.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
             kommentarer: ['Må ringe bruker for å avklare AAP og Foreldrepenger', 'Undersøk dette før vi går videre'],
           },
-          { header: null, kommentarer: ['VL: Søknad om foreldrepenger ved fødsel'] },
+          { kommentarer: ['VL: Søknad om foreldrepenger ved fødsel'] },
         ],
         dokumenter: [
           {
@@ -453,9 +484,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ],
       },
     ],
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -473,8 +502,10 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerUtenOverstyrin
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
+      ...defaultSak,
+      ...defaultSak,
       fagsakYtelseType: 'ES',
-    } as Fagsak,
+    },
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -491,8 +522,9 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
+      ...defaultSak,
       fagsakYtelseType: 'ES',
-    } as Fagsak,
+    },
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -506,8 +538,9 @@ export const InnvilgetEngangsstønadTilGodkjenningForSaksbehandlerMedOverstyring
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
+      ...defaultSak,
       fagsakYtelseType: 'ES',
-    } as Fagsak,
+    },
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -521,8 +554,9 @@ export const InnvilgetEngangsstønadDerBeregningErManueltFastsatt: Story = {
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
+      ...defaultSak,
       fagsakYtelseType: 'ES',
-    } as Fagsak,
+    },
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -547,15 +581,18 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,
     } as BeregningsresultatEs,
     fagsak: {
+      ...defaultSak,
       fagsakYtelseType: 'ES',
-    } as Fagsak,
+    },
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -569,8 +606,9 @@ export const InnvilgetSvangerskapspengerTilGodkjenningForSaksbehandlerMedOversty
   args: {
     behandling: defaultBehandling,
     fagsak: {
+      ...defaultSak,
       fagsakYtelseType: 'SVP',
-    } as Fagsak,
+    },
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -592,12 +630,12 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
           KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
         ],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -616,12 +654,12 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
           KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
         ],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -639,12 +677,12 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
           KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
         ],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -663,12 +701,12 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
           KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
         ],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -685,12 +723,12 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -705,12 +743,12 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     originaltBeregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -725,12 +763,12 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     originaltBeregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -745,12 +783,12 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
         type: BehandlingResultatType.OPPHOR,
         opphørsdato: '2024-11-01',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -765,12 +803,12 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -797,12 +835,12 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING],
         avslagsarsak: Avslagsarsak.MANN_ADOPTERER_IKKE_ALENE,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -820,9 +858,6 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
         vilkarType: VilkarType.SOKNADFRISTVILKARET,
         vilkarStatus: VilkarUtfallType.IKKE_OPPFYLT,
         overstyrbar: true,
-        avslagKode: null,
-        evaluering: null,
-        input: null,
       },
     ],
     isReadOnly: false,
@@ -839,12 +874,12 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
         type: BehandlingResultatType.OPPHOR,
         opphørsdato: '2024-11-01',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     beregningsgrunnlag: {
       beregningsgrunnlagPeriode: [
         {
@@ -872,12 +907,12 @@ export const LegacyOverstyring: Story = {
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: true,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -894,12 +929,12 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
-    fagsak: {
-      fagsakYtelseType: 'FP',
-    } as Fagsak,
+    fagsak: defaultSak,
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -910,13 +945,28 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
     behandling: defaultBehandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: {
+      ...defaultSak,
       saksnummer: '1234567',
       fagsakYtelseType: 'FP',
-      bruker: { navn: 'Kari Nordmann' },
-      annenPart: { navn: 'Ola Nordmann' },
+      bruker: {
+        navn: 'Kari Nordmann',
+        fødselsnummer: '',
+        kjønn: '-',
+        fødselsdato: '',
+        språkkode: '-',
+      },
+      annenPart: {
+        navn: 'Ola Nordmann',
+        fødselsnummer: '',
+        kjønn: '-',
+        fødselsdato: '',
+        språkkode: '-',
+      },
       relasjonsRolleType: RelasjonsRolleType.MOR,
       annenpartBehandling: {
         relasjonsRolleType: RelasjonsRolleType.FAR,
+        saksnummer: '',
+        behandlingUuid: '',
       },
       fagsakMarkeringer: [
         {
@@ -924,7 +974,7 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
           kortNavn: 'Utsettelse',
         },
       ],
-    } as Fagsak,
+    },
     isReadOnly: false,
     brevOverstyring: { opprinneligHtml: mal, redigertHtml: null },
   },
@@ -938,8 +988,10 @@ export const SkalIkkeProduseresBrev: Story = {
         type: BehandlingResultatType.INNVILGET,
         avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
+        id: 0,
+        harRedigertVedtaksbrev: false,
       },
-    } as Behandling,
+    } satisfies Behandling,
     beregningsresultat: {
       antallBarn: 2,
       beregnetTilkjentYtelse: 10000,

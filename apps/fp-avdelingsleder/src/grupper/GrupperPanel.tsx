@@ -20,7 +20,7 @@ export const GrupperPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehandlere }: 
   const { mutate: lagGruppe, status } = useMutation({
     mutationFn: () => opprettGruppe(valgtAvdelingEnhet),
     onSuccess: () => {
-      hentGrupperPåNytt();
+      void hentGrupperPåNytt();
     },
   });
 

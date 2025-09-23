@@ -34,8 +34,8 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
   const { submitCallback, fagsak, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
 
   const dekningsgrad =
-    søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ??
-    søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad ??
+    søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad ??
+    søknad.oppgittFordeling?.dekningsgrader.søker.dekningsgrad ??
     undefined;
 
   const defaultValues = {
@@ -77,7 +77,7 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
           {kanOverstyreAccess && (
             <PencilFillIcon
               title={intl.formatMessage({ id: 'DekningsgradForm.EndreDekningsgrad' })}
-              className={isReadOnly ? styles.editIconReadonly : styles.editIcon}
+              className={isReadOnly ? styles['editIconReadonly'] : styles['editIcon']}
               onClick={isReadOnly ? undefined : () => setVisEditeringsmodus(true)}
             />
           )}
@@ -107,7 +107,7 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
         }).then(slåAvEditeringAvStartdato)
       }
     >
-      <div className={styles.header}>
+      <div className={styles['header']}>
         <HStack gap="space-8" align="center">
           <PencilIcon aria-hidden height={24} width={24} />
           <Heading size="small" level="3">
@@ -146,13 +146,13 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
               <Radio value={80} size="small">
                 {intl.formatMessage(
                   { id: 'DekningsgradForm.80' },
-                  { erSatt: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad === 80 },
+                  { erSatt: søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad === 80 },
                 )}
               </Radio>
               <Radio value={100} size="small">
                 {intl.formatMessage(
                   { id: 'DekningsgradForm.100' },
-                  { erSatt: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad === 100 },
+                  { erSatt: søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad === 100 },
                 )}
               </Radio>
             </HStack>

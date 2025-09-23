@@ -7,7 +7,7 @@ export const personoversikt: Personoversikt = {
     navn: 'Kristine Kalv',
     kjønn: 'K',
     sivilstand: SivilstandType.UGIFT,
-    dødsdato: null,
+
     fødselsdato: '1993-03-05',
     adresser: [
       {
@@ -15,23 +15,19 @@ export const personoversikt: Personoversikt = {
         tom: '2050-01-01',
         adresseType: 'BOSTEDSADRESSE',
         adresselinje1: 'Trondheimsveien 1',
-        adresselinje2: null,
-        adresselinje3: null,
+
         postNummer: '5511',
         poststed: 'Oslo',
         land: 'Norge',
       },
     ],
-    fnr: null,
-    diskresjonskode: null,
-    vn: null,
   },
   annenPart: {
     aktoerId: '9921528317364',
     navn: 'Asbjørn Lemur',
     kjønn: 'M',
     sivilstand: SivilstandType.UGIFT,
-    dødsdato: null,
+
     fødselsdato: '1991-03-05',
     adresser: [
       {
@@ -39,16 +35,12 @@ export const personoversikt: Personoversikt = {
         tom: '2050-01-01',
         adresseType: 'BOSTEDSADRESSE',
         adresselinje1: 'Trondheimsveien 1',
-        adresselinje2: null,
-        adresselinje3: null,
+
         postNummer: '5511',
         poststed: 'Oslo',
         land: 'Norge',
       },
     ],
-    fnr: null,
-    diskresjonskode: null,
-    vn: null,
   },
   barn: [
     {
@@ -56,7 +48,7 @@ export const personoversikt: Personoversikt = {
       navn: 'Ole Duck',
       kjønn: 'K',
       sivilstand: SivilstandType.UGIFT,
-      dødsdato: null,
+
       fødselsdato: '2025-03-05',
       adresser: [
         {
@@ -64,16 +56,12 @@ export const personoversikt: Personoversikt = {
           tom: '2050-01-01',
           adresseType: 'BOSTEDSADRESSE',
           adresselinje1: 'Trondheimsveien 1',
-          adresselinje2: null,
-          adresselinje3: null,
+
           postNummer: '5511',
           poststed: 'Oslo',
           land: 'Norge',
         },
       ],
-      fnr: null,
-      diskresjonskode: null,
-      vn: null,
     },
   ],
 };

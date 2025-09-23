@@ -26,7 +26,11 @@ import styles from './valgtAktivitetForm.module.css';
 const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
-const skalIkkeKunneEditere = (hasAksjonspunkt: boolean, erGodkjent: boolean | null, erEndret: boolean): boolean => {
+const skalIkkeKunneEditere = (
+  hasAksjonspunkt: boolean,
+  erGodkjent: boolean | undefined,
+  erEndret: boolean,
+): boolean => {
   if (!hasAksjonspunkt) {
     return true;
   }
@@ -46,7 +50,7 @@ const finnMånederOgDager = (opptjeningFom: string, opptjeningTom: string): Reac
 };
 
 const finnBegrunnelseLabel = (
-  erGodkjent: boolean | null,
+  erGodkjent: boolean | undefined,
   erEndret: boolean,
   readOnly: boolean,
   hasAksjonspunkt: boolean,
@@ -121,7 +125,7 @@ export const ValgtAktivitetForm = ({
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
       <FaktaGruppe
-        className={styles.panel}
+        className={styles['panel']}
         merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}
       >
         <VStack gap="space-24">
@@ -132,7 +136,7 @@ export const ValgtAktivitetForm = ({
               </Heading>
               <HStack gap="space-8">
                 <Button
-                  className={styles.margin}
+                  className={styles['margin']}
                   size="xsmall"
                   icon={<ArrowLeftIcon aria-hidden />}
                   onClick={velgForrigeAktivitet}
@@ -143,7 +147,7 @@ export const ValgtAktivitetForm = ({
                   <FormattedMessage id="Timeline.prevPeriodShort" />
                 </Button>
                 <Button
-                  className={styles.margin}
+                  className={styles['margin']}
                   size="xsmall"
                   icon={<ArrowRightIcon aria-hidden />}
                   onClick={velgNesteAktivitet}
@@ -165,7 +169,7 @@ export const ValgtAktivitetForm = ({
               </HStack>
             </HStack>
             <HStack gap="space-4">
-              <div className={styles.colMargin}>
+              <div className={styles['colMargin']}>
                 <Label size="small">
                   <FormattedMessage id="ActivityPanel.Period" />
                 </Label>

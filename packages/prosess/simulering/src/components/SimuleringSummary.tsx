@@ -27,12 +27,12 @@ export const SimuleringSummary = ({
   ingenPerioderMedAvvik,
 }: Props) => (
   <VStack gap="space-16">
-    <BodyShort size="small" className={styles.summaryTitle}>
+    <BodyShort size="small" className={styles['summaryTitle']}>
       <FormattedMessage id="Simulering.bruker" />
     </BodyShort>
-    <div className={styles.infoSummary}>
+    <div className={styles['infoSummary']}>
       {ingenPerioderMedAvvik && (
-        <div className={styles.ingenPerioder}>
+        <div className={styles['ingenPerioder']}>
           <FormattedMessage id="Simulering.ingenPerioder" />
         </div>
       )}
@@ -51,7 +51,7 @@ export const SimuleringSummary = ({
             <BodyShort size="small">
               <FormattedMessage id="Simulering.tilbakekreving" />:
             </BodyShort>
-            <BodyShort weight="semibold" size="small" className={styles.number}>
+            <BodyShort weight="semibold" size="small" className={styles['number']}>
               <BeløpLabel beløp={feilutbetaling} rød={feilutbetaling < 0} />
             </BodyShort>
           </HStack>
@@ -60,7 +60,7 @@ export const SimuleringSummary = ({
               <BodyShort size="small">
                 <FormattedMessage id="Simulering.inntrekk" />:
               </BodyShort>
-              <BodyShort weight="semibold" size="small" className={styles.number}>
+              <BodyShort weight="semibold" size="small" className={styles['number']}>
                 <BeløpLabel beløp={inntrekk} rød={inntrekk < 0} />
               </BodyShort>
             </HStack>

@@ -36,7 +36,7 @@ export const JournalføringHeader = ({
   }, [valgtJournalpost]);
 
   return (
-    <HStack className={styles.header}>
+    <HStack className={styles['header']}>
       <div>
         <HStack gap="space-32" align="center">
           {valgtJournalpost && (

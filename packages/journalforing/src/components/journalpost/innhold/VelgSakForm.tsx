@@ -147,7 +147,7 @@ export const VelgSakForm = ({
             <RhfSelect
               name={selectFieldName}
               control={formMethods.control}
-              className={styles.ytelseSelect}
+              className={styles['ytelseSelect']}
               validate={[required]}
               label={intl.formatMessage({ id: 'Journal.Sak.VelgYtelse' })}
               selectValues={ytelseSelectValg.map(ytelseType => (

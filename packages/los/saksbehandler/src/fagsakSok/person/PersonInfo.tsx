@@ -24,10 +24,13 @@ export const PersonInfo = ({ person }: Props) => {
   return (
     <HStack gap="space-16">
       {kjønn === KjønnkodeEnum.KVINNE && (
-        <FigureOutwardFillIcon className={styles.kvinneIcon} title={intl.formatMessage({ id: 'Person.ImageText' })} />
+        <FigureOutwardFillIcon
+          className={styles['kvinneIcon']}
+          title={intl.formatMessage({ id: 'Person.ImageText' })}
+        />
       )}
       {kjønn === KjønnkodeEnum.MANN && (
-        <FigureInwardFillIcon className={styles.MannIcon} title={intl.formatMessage({ id: 'Person.ImageText' })} />
+        <FigureInwardFillIcon className={styles['MannIcon']} title={intl.formatMessage({ id: 'Person.ImageText' })} />
       )}
       <VStack gap="space-4">
         <Heading size="small" level="2">

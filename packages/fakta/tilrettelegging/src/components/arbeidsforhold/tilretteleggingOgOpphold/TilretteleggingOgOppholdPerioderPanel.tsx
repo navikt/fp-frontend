@@ -77,9 +77,9 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
       fom: '',
       type: undefined as unknown as TilretteleggingType,
       kilde: 'REGISTRERT_AV_SAKSBEHANDLER',
-      stillingsprosent: null,
-      overstyrtUtbetalingsgrad: null,
-      mottattDato: null,
+      stillingsprosent: undefined,
+      overstyrtUtbetalingsgrad: undefined,
+      mottattDato: undefined,
     });
   };
 

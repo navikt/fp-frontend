@@ -41,13 +41,11 @@ export const VurderingFellesProsessStegInitPanel = ({
     oppdaterProsessStegOgFaktaPanelIUrl,
   } = use(BehandlingDataContext);
 
-  const lagringSideEffekter = setSkalOppdatereEtterBekreftelseAvAp
-    ? getLagringSideeffekter(
-        toggleKlageModal,
-        setSkalOppdatereEtterBekreftelseAvAp,
-        oppdaterProsessStegOgFaktaPanelIUrl,
-      )
-    : undefined;
+  const lagringSideEffekter = getLagringSideeffekter(
+    toggleKlageModal,
+    setSkalOppdatereEtterBekreftelseAvAp,
+    oppdaterProsessStegOgFaktaPanelIUrl,
+  );
 
   const standardPanelProps = useStandardProsessPanelProps(aksjonspunktKoder, [], lagringSideEffekter);
 
@@ -87,7 +85,7 @@ export const VurderingFellesProsessStegInitPanel = ({
           visModal={visModalKlageBehandling}
           lukkModal={() => {
             toggleKlageModal(false);
-            navigate('/');
+            void navigate('/');
           }}
         />
         {klageVurdering ? (

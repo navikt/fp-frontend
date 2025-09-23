@@ -35,7 +35,7 @@ export const NotatModal = ({ notat, closeModal, flyttOppgavereservasjon, brukern
 
   return (
     <NavModal
-      className={styles.modal}
+      className={styles['modal']}
       open
       aria-label={intl.formatMessage({ id: 'NotatModal.SkrivNotat' })}
       onClose={closeModal}
@@ -64,10 +64,16 @@ export const NotatModal = ({ notat, closeModal, flyttOppgavereservasjon, brukern
             maxLength={500}
           />
           <HStack gap="space-8" justify="end">
-            <Button className={styles.cancelButton} size="small" variant="secondary" onClick={closeModal} type="button">
+            <Button
+              className={styles['cancelButton']}
+              size="small"
+              variant="secondary"
+              onClick={closeModal}
+              type="button"
+            >
               <FormattedMessage id="FlyttReservasjonModal.Avbryt" />
             </Button>
-            <Button className={styles.submitButton} size="small" variant="primary">
+            <Button className={styles['submitButton']} size="small" variant="primary">
               <FormattedMessage id="FlyttReservasjonModal.Ok" />
             </Button>
           </HStack>

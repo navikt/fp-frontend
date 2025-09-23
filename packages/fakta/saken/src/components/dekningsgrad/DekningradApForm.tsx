@@ -43,13 +43,14 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
 
   const formMethods = useForm<FormValues>({
     defaultValues: {
-      dekningsgrad: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ?? undefined,
+      dekningsgrad: søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad ?? undefined,
       begrunnelse: aksjonspunkt.begrunnelse ?? '',
     },
   });
-  const { annenPart: dgAnnenpart, søker: dgSøker } = søknad.oppgittFordeling.dekningsgrader;
+  const { annenPart: dgAnnenpart, søker: dgSøker } = søknad.oppgittFordeling?.dekningsgrader ?? {};
 
   const erAksjonspunktApent = aksjonspunkt.status === AksjonspunktStatus.OPPRETTET;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   const erIkkeGodkjentAvBeslutter = !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted;
 
   return (
@@ -77,16 +78,18 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
                         <FormattedMessage
                           id="DekningradApForm.SøknadSendt"
                           values={{
-                            dato: dateFormat(dgSøker.søknadsdato, {
-                              month: 'long',
-                            }),
+                            dato: dgSøker
+                              ? dateFormat(dgSøker.søknadsdato, {
+                                  month: 'long',
+                                })
+                              : '-',
                           }}
                         />
                       </BodyShort>
                     </VStack>
                   </HStack>
                   <Heading size="xsmall" level="3">
-                    <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad: dgSøker.dekningsgrad }} />
+                    <FormattedMessage id="DekningradApForm.HarValgt" values={{ dekningsgrad: dgSøker?.dekningsgrad }} />
                   </Heading>
                 </VStack>
               </Box.New>
@@ -156,7 +159,7 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
           </VStack>
         </RhfForm>
       </AksjonspunktBox>
-      {!erIkkeGodkjentAvBeslutter && !erAksjonspunktApent && <hr className={styles.hr} />}
+      {!erIkkeGodkjentAvBeslutter && !erAksjonspunktApent && <hr className={styles['hr']} />}
     </VStack>
   );
 };

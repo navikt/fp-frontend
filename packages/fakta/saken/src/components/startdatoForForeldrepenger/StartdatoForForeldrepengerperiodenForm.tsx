@@ -90,22 +90,21 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
         {!visEditeringsmodus && (
           <HStack gap="space-8">
             <BodyShort size="small">
-              {soknad.oppgittFordeling
-                ? capitalizeFirstLetter(dayjs(soknad.oppgittFordeling.startDatoForPermisjon).format('dddd D MMMM YYYY'))
-                : '-'}
+              {capitalizeFirstLetter(dayjs(soknad.oppgittFordeling?.startDatoForPermisjon).format('dddd D MMMM YYYY'))}
             </BodyShort>
             <PencilFillIcon
               title={intl.formatMessage({ id: 'StartdatoForForeldrepengerperiodenForm.EndreStartdato' })}
-              className={isReadOnly ? styles.editIconReadonly : styles.editIcon}
+              className={isReadOnly ? styles['editIconReadonly'] : styles['editIcon']}
               onClick={isReadOnly ? undefined : slåPåEditering}
             />
           </HStack>
         )}
         {visEditeringsmodus && (
           <AksjonspunktBox
-            className={styles.aksjonspunktMargin}
+            className={styles['aksjonspunktMargin']}
             erAksjonspunktApent={false}
             erIkkeGodkjentAvBeslutter={
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
               !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
             }
           >

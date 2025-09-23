@@ -95,7 +95,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanOpnesForEndringer: true,
   behandlingKanSettesPaVent: true,
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-  uuid: null,
+
   behandlingKanMerkesHaster: false,
 } satisfies BehandlingTillatteOperasjoner;
 
@@ -115,39 +115,22 @@ const BEHANDLING = {
   behandlingÅrsaker: [
     {
       behandlingArsakType: BehandlingArsakTypeEnum.ANNET,
-      erAutomatiskRevurdering: null,
       manueltOpprettet: false,
+      erAutomatiskRevurdering: false,
     },
   ],
-  id: null,
-  fagsakId: null,
+
   opprettet: '',
-  avsluttet: null,
-  endret: null,
-  endretAvBrukernavn: null,
-  førsteÅrsak: null,
-  behandlingsfristTid: null,
+
   gjeldendeVedtak: false,
-  erPaaVent: null,
-  originalVedtaksDato: null,
+
   behandlingHenlagt: false,
-  behandlingPaaVent: null,
-  fristBehandlingPåVent: null,
-  fristBehandlingPaaVent: null,
-  venteArsakKode: null,
-  venteÅrsakKode: null,
-  sprakkode: null,
+
   språkkode: '-',
-  ansvarligSaksbehandler: null,
-  behandlingsresultat: null,
+
   vilkår: [],
   links: [],
   brevmaler: [],
-  totrinnskontrollReadonly: null,
-  risikoAksjonspunkt: null,
-  kontrollResultat: null,
-  ugunstAksjonspunkt: null,
-  behandlingKoet: null,
 } satisfies BehandlingAppKontekst;
 
 const FAGSAK = {
@@ -168,27 +151,21 @@ const FAGSAK = {
   aktørId: '',
   dekningsgrad: 0,
   bruker: {
-    aktørId: null,
     navn: '',
     fødselsnummer: '',
     kjønn: '-',
-    diskresjonskode: null,
+
     fødselsdato: '',
-    dødsdato: null,
+
     dodsdato: undefined,
     språkkode: '-',
   },
   brukerManglerAdresse: false,
-  annenPart: null,
-  annenpartBehandling: null,
-  familiehendelse: null,
+
   fagsakMarkeringer: [],
   historikkinnslag: [],
   kontrollResultat: {
     kontrollresultat: '-',
-    iayFaresignaler: null,
-    medlFaresignaler: null,
-    faresignalVurdering: null,
   },
   harVergeIÅpenBehandling: false,
 } satisfies Fagsak;

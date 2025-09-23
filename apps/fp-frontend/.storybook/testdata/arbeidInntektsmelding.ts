@@ -14,9 +14,7 @@ export const arbeidInntektsmelding: ArbeidOgInntektsmelding = {
       dokumentId: '35164102',
       motattDato: '2025-03-05',
       innsendingstidspunkt: '2025-03-05T16:43:02.948918',
-      årsak: null,
-      begrunnelse: null,
-      saksbehandlersVurdering: null,
+
       kildeSystem: 'FS22',
       startDatoPermisjon: '2025-02-12',
       aktiveNaturalytelser: [],
@@ -33,10 +31,7 @@ export const arbeidInntektsmelding: ArbeidOgInntektsmelding = {
       fom: '2024-03-05',
       tom: '9999-12-31',
       stillingsprosent: 75.0,
-      årsak: null,
-      saksbehandlersVurdering: null,
-      permisjonOgMangel: null,
-      begrunnelse: null,
+      saksbehandlersVurdering: '-',
     },
   ],
   inntekter: [

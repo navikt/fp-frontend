@@ -81,13 +81,13 @@ export const ArbeidsforholdField = ({
         {!harÅpentAksjonspunkt && (
           <CheckmarkIcon
             title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.Ok' })}
-            className={styles.checkmarkIcon}
+            className={styles['checkmarkIcon']}
           />
         )}
         {harÅpentAksjonspunkt && (
           <ExclamationmarkTriangleFillIcon
             title={intl.formatMessage({ id: 'ArbeidsforholdFieldArray.Aksjonspunkt' })}
-            className={styles.exclamationmarkIcon}
+            className={styles['exclamationmarkIcon']}
           />
         )}
         <VStack gap="space-16" width="90%">
@@ -111,6 +111,7 @@ export const ArbeidsforholdField = ({
                 <FormattedMessage id="ArbeidsforholdFieldArray.Periode" />
               </Label>
               <BodyShort size="small">
+                {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                 {arbeidsforhold ? (
                   <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
                 ) : (
@@ -125,6 +126,7 @@ export const ArbeidsforholdField = ({
               <BodyShort size="small">
                 <FormattedMessage
                   id={
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
                     arbeidsforhold
                       ? 'ArbeidsforholdFieldArray.AaRegisteret'
                       : 'ArbeidsforholdFieldArray.Inntektsmelding'
@@ -197,7 +199,7 @@ export const ArbeidsforholdField = ({
             label={
               <HStack gap="space-8">
                 <FormattedMessage id="ArbeidsforholdFieldArray.SkalArbeidsforholdetTasMed" />
-                <div className={styles.image}>
+                <div className={styles['image']}>
                   <Button
                     ref={buttonRef}
                     type="button"
@@ -213,9 +215,9 @@ export const ArbeidsforholdField = ({
                     open={openState}
                     onClose={toggleHjelpetekst}
                     anchorEl={buttonRef.current}
-                    className={styles.hjelpetekst}
+                    className={styles['hjelpetekst']}
                   >
-                    <Popover.Content className={styles.hjelpetekstInnhold}>
+                    <Popover.Content className={styles['hjelpetekstInnhold']}>
                       <VStack gap="space-8">
                         <BodyShort>
                           <FormattedMessage id="ArbeidsforholdFieldArray.HjelpetekstDel1" />

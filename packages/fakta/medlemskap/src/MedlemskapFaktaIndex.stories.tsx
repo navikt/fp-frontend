@@ -46,18 +46,13 @@ const defaultSoknad = {
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
   status: AksjonspunktStatus.OPPRETTET,
-  begrunnelse: null,
+
   kanLoses: true,
   toTrinnsBehandling: false,
-  toTrinnsBehandlingGodkjent: null,
-  vurderPaNyttArsaker: null,
-  besluttersBegrunnelse: null,
+
   aksjonspunktType: AksjonspunktType.AUTOPUNKT,
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
-  fristTid: null,
-  endretTidspunkt: null,
-  endretAv: null,
 } satisfies Aksjonspunkt;
 
 const meta = {
@@ -74,7 +69,6 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
-  manuellBehandlingResultat: null,
   avvik: [
     'BOSATT_UTENLANDSOPPHOLD',
     'BOSATT_UTENLANDSADRESSE',
@@ -83,7 +77,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
     'MEDL_PERIODER',
     'TREDJELAND_MANGLENDE_LOVLIG_OPPHOLD',
   ],
-  legacyManuellBehandling: null,
+
   oppholdstillatelser: [
     {
       fom: '2021-10-13',
@@ -97,7 +91,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       tom: '2022-01-01',
       erMedlem: false,
       lovvalgsland: 'Finland',
-      studieland: null,
+
       medlemskapType: MedlemskapType.AVKLARES,
       dekningType: MedlemskapDekningType.OPPHOR,
       beslutningsdato: '2020-02-01',
@@ -127,8 +121,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       tom: TIDENES_ENDE,
       adresseType: AdresseType.BOSTEDSADRESSE,
       adresselinje1: 'Oslogata 1',
-      adresselinje2: null,
-      adresselinje3: null,
+
       poststed: 'Oslo',
       postNummer: '1234',
       land: 'Norge',
@@ -138,8 +131,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       tom: '2021-01-01',
       adresseType: AdresseType.POSTADRESSE_UTLAND,
       adresselinje1: 'Mäkelänkatu 1B',
-      adresselinje2: null,
-      adresselinje3: null,
+
       poststed: 'Helsinki',
       postNummer: 'FI-00123',
       land: 'Finland',
@@ -171,8 +163,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
         tom: TIDENES_ENDE,
         adresseType: AdresseType.BOSTEDSADRESSE,
         adresselinje1: 'Oslogata 1',
-        adresselinje2: null,
-        adresselinje3: null,
+
         poststed: 'Oslo',
         postNummer: '1234',
         land: 'Norge',
@@ -182,8 +173,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
         tom: '2021-01-01',
         adresseType: AdresseType.POSTADRESSE_UTLAND,
         adresselinje1: 'Mäkelänkatu 1B',
-        adresselinje2: null,
-        adresselinje3: null,
+
         poststed: 'Helsinki',
         postNummer: 'FI-00123',
         land: 'Finland',
@@ -215,7 +205,7 @@ export const Default: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -225,8 +215,6 @@ export const Default: Story = {
 export const ForutgåendeMedlemskap: Story = {
   args: {
     medlemskap: lagMedlemskap({
-      legacyManuellBehandling: null,
-      manuellBehandlingResultat: null,
       avvik: ['BOSATT_UTENLANDSADRESSE'],
     }),
     aksjonspunkterForPanel: [
@@ -234,7 +222,7 @@ export const ForutgåendeMedlemskap: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -244,8 +232,6 @@ export const ForutgåendeMedlemskap: Story = {
 export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
   args: {
     medlemskap: lagMedlemskap({
-      legacyManuellBehandling: null,
-      manuellBehandlingResultat: null,
       avvik: ['BOSATT_UTENLANDSADRESSE'],
       adresser: [
         {
@@ -253,10 +239,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
           tom: TIDENES_ENDE,
           adresseType: AdresseType.POSTADRESSE_UTLAND,
           adresselinje1: 'Kirkeveien 1',
-          adresselinje2: null,
-          adresselinje3: null,
-          postNummer: null,
-          poststed: null,
+
           land: 'Guatemala',
         },
         {
@@ -264,14 +247,12 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
           tom: TIDENES_ENDE,
           adresseType: AdresseType.BOSTEDSADRESSE,
           adresselinje1: 'Krattstien 4',
-          adresselinje2: null,
-          adresselinje3: null,
+
           postNummer: '9515',
           poststed: 'Alta',
           land: 'Norge',
         },
       ],
-      annenpart: null,
       medlemskapsperioder: [],
       oppholdstillatelser: [],
       utenlandsopphold: [],
@@ -292,7 +273,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+
         kanLoses: true,
       },
     ],
@@ -307,8 +288,6 @@ export const TidligereVurderingAvMedlemskapMedEtAvvik: Story = {
       ...VurderingAvMedlemskapMedlemskapMedEtAvvik.args.medlemskap,
       manuellBehandlingResultat: {
         avslagskode: '1025',
-        medlemFom: null,
-        opphørFom: null,
       },
     }),
     aksjonspunkterForPanel: [
@@ -327,7 +306,6 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
   args: {
     isReadOnly: true,
     medlemskap: lagMedlemskap({
-      manuellBehandlingResultat: null,
       avvik: [],
       legacyManuellBehandling: {
         perioder: [
@@ -367,7 +345,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP,
         status: AksjonspunktStatus.UTFORT,
-        begrunnelse: null,
+
         kanLoses: false,
       },
     ],
@@ -378,7 +356,6 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
   args: {
     isReadOnly: true,
     medlemskap: lagMedlemskap({
-      manuellBehandlingResultat: null,
       avvik: [],
       legacyManuellBehandling: {
         perioder: [
@@ -396,7 +373,7 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
         status: AksjonspunktStatus.UTFORT,
-        begrunnelse: null,
+
         kanLoses: false,
       },
     ],

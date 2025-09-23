@@ -32,7 +32,7 @@ const finnArbeidsforhold = (
 
 const erInnenforIntervall = (tilretteleggingBehovFom: string, fomDato: string, tomDato: string): boolean => {
   const dato = dayjs(tilretteleggingBehovFom);
-  return !(dato.isBefore(dayjs(fomDato)) || dato.isAfter(dayjs(tomDato)));
+  return !(dato.isBefore(dayjs(fomDato || undefined)) || dato.isAfter(dayjs(tomDato || undefined)));
 };
 
 const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
@@ -48,7 +48,7 @@ const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
 
 const finnStillingsprosent = (aoiArbeidsforhold: AoIArbeidsforhold[], tilretteleggingBehovFom: string) => {
   const aoiListe = aoiArbeidsforhold.filter(a => erInnenforIntervall(tilretteleggingBehovFom, a.fom, a.tom));
-  return aoiListe.reduce((sum, aoi) => sum + aoi.stillingsprosent, 0);
+  return aoiListe.reduce((sum, aoi) => sum + (aoi.stillingsprosent ?? 0), 0);
 };
 
 interface Props {
@@ -76,7 +76,7 @@ export const ArbeidsforholdFieldArray = ({
     <>
       {fields.map((field, index: number) => {
         const arbeidsforhold = sorterteArbeidsforhold[index];
-        const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse];
+        const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse ?? ''];
 
         const alleIafAf = aoiArbeidsforhold.filter(
           iaya => iaya.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse,
@@ -97,15 +97,17 @@ export const ArbeidsforholdFieldArray = ({
 
         return (
           <React.Fragment key={field.id}>
-            <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles.card}>
-              <ExpansionCard.Header className={styles.cardHeader}>
-                <div className={styles.padding}>
+            <ExpansionCard aria-label="arbeidsgiver" defaultOpen className={styles['card']}>
+              <ExpansionCard.Header className={styles['cardHeader']}>
+                <div className={styles['padding']}>
                   <HStack gap="space-56" align="center">
                     <HStack gap="space-16" align="center">
-                      <Buildings3Icon color="var(--ax-accent-700)" className={styles.image} />
+                      <Buildings3Icon color="var(--ax-accent-700)" className={styles['image']} />
                       <Heading size="small" level="3">
+                        {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                         {arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}
                       </Heading>
+                      {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                       {arbeidsgiverOpplysning?.identifikator && (
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       )}
@@ -126,7 +128,7 @@ export const ArbeidsforholdFieldArray = ({
                         {finnSvpTagTekst(arbeidsforhold.skalBrukes, visInfoAlert)}
                       </Tag>
                       {arbeidsforhold.skalBrukes && visInfoAlert && (
-                        <ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" className={styles.image} />
+                        <ExclamationmarkTriangleFillIcon color="var(--ax-warning-700)" className={styles['image']} />
                       )}
                     </HStack>
                   </HStack>
@@ -138,7 +140,7 @@ export const ArbeidsforholdFieldArray = ({
                   arbeidsforholdIndex={index}
                   readOnly={readOnly}
                   visInfoAlert={arbeidsforhold.skalBrukes && visInfoAlert}
-                  stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+                  stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold ?? 0}
                 />
               </ExpansionCard.Content>
             </ExpansionCard>

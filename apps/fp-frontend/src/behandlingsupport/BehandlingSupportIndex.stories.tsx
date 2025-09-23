@@ -53,7 +53,6 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   behandlingKanSettesPaVent: true,
   behandlingKanMerkesHaster: false,
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
-  uuid: null,
 } satisfies BehandlingTillatteOperasjoner;
 
 const BEHANDLING = {
@@ -67,38 +66,22 @@ const BEHANDLING = {
   behandlendeEnhetNavn: 'Nav Vikafossen',
   erAktivPapirsoknad: false,
   behandlingTillatteOperasjoner: BEHANDLING_TILLATTE_OPERASJONER,
-  id: null,
-  fagsakId: null,
+
   opprettet: '',
-  avsluttet: null,
-  endret: null,
-  endretAvBrukernavn: null,
-  førsteÅrsak: null,
-  behandlingsfristTid: null,
+
   gjeldendeVedtak: false,
-  erPaaVent: null,
-  originalVedtaksDato: null,
+
   behandlingHenlagt: false,
-  behandlingPaaVent: null,
-  fristBehandlingPåVent: null,
-  fristBehandlingPaaVent: null,
-  venteArsakKode: null,
-  venteÅrsakKode: null,
-  sprakkode: null,
+
   språkkode: '-',
-  ansvarligSaksbehandler: null,
+
   toTrinnsBehandling: false,
-  behandlingsresultat: null,
+
   behandlingÅrsaker: [],
   vilkår: [],
   links: [],
   brevmaler: [],
   totrinnskontrollÅrsaker: [],
-  totrinnskontrollReadonly: null,
-  risikoAksjonspunkt: null,
-  kontrollResultat: null,
-  ugunstAksjonspunkt: null,
-  behandlingKoet: null,
 } satisfies BehandlingAppKontekst;
 
 const FAGSAK = {
@@ -119,27 +102,21 @@ const FAGSAK = {
   aktørId: '',
   dekningsgrad: 0,
   bruker: {
-    aktørId: null,
     navn: '',
     fødselsnummer: '',
     kjønn: '-',
-    diskresjonskode: null,
+
     fødselsdato: '',
-    dødsdato: null,
+
     dodsdato: undefined,
     språkkode: '-',
   },
   brukerManglerAdresse: false,
-  annenPart: null,
-  annenpartBehandling: null,
-  familiehendelse: null,
+
   fagsakMarkeringer: [],
   historikkinnslag: [],
   kontrollResultat: {
     kontrollresultat: '-',
-    iayFaresignaler: null,
-    medlFaresignaler: null,
-    faresignalVurdering: null,
   },
   harVergeIÅpenBehandling: false,
 } satisfies Fagsak;
@@ -157,7 +134,6 @@ const meta = {
         http.get(getHref(FagsakRel.KODEVERK_FPTILBAKE), () => HttpResponse.json(alleKodeverkTilbakekreving)),
         http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_OPPRETTES), () => HttpResponse.json(false)),
         http.get(getHref(FagsakRel.KAN_TILBAKEKREVING_REVURDERING_OPPRETTES), () => HttpResponse.json(false)),
-        http.post(getHref(FagsakRel.ENDRE_SAK_MARKERING), () => new HttpResponse(null, { status: 200 })),
       ],
     },
   },

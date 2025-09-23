@@ -59,7 +59,7 @@ const lagDefaultVerdier = (
   const arsakstype = utledÅrsakstype(valgtPeriode);
 
   const aRef =
-    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse !== 'null'
+    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse !== 'undefined'
       ? valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse
       : undefined;
   const aOpplysninger = aRef ? arbeidsgiverOpplysningerPerId[aRef] : undefined;
@@ -84,7 +84,7 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
   arbeidsforhold: values.arbeidsgiverId
     ? {
         arbeidsgiverReferanse:
-          values.arbeidsgiverId.split('-')[0] === 'null' ? null : values.arbeidsgiverId.split('-')[0],
+          values.arbeidsgiverId.split('-')[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-')[0],
         arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
       }
     : undefined,
@@ -255,7 +255,7 @@ export const UttakFaktaDetailForm = ({
               control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.Stonadskonto" />}
               validate={[required]}
-              className={styles.select}
+              className={styles['select']}
               selectValues={sorterteUttakPeriodeTyper.map(vt => (
                 <option key={vt.kode} value={vt.kode}>
                   {vt.navn}
@@ -272,7 +272,7 @@ export const UttakFaktaDetailForm = ({
                   control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles.selectArsak}
+                  className={styles['selectArsak']}
                   selectValues={sorterteUtsettelseÅrsaker.map(vt => (
                     <option key={vt.kode} value={vt.kode}>
                       {vt.navn}
@@ -287,7 +287,7 @@ export const UttakFaktaDetailForm = ({
                   control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles.selectArsak}
+                  className={styles['selectArsak']}
                   selectValues={sorterteOverføringÅrsaker.map(vt => (
                     <option key={vt.kode} value={vt.kode}>
                       {vt.navn}
@@ -302,7 +302,7 @@ export const UttakFaktaDetailForm = ({
                   control={formMethods.control}
                   label={<FormattedMessage id="UttakFaktaDetailForm.Årsak" />}
                   validate={[required]}
-                  className={styles.selectArsak}
+                  className={styles['selectArsak']}
                   selectValues={sorterteOppholdÅrsaker.map(vt => (
                     <option key={vt.kode} value={vt.kode}>
                       {vt.navn}
@@ -327,7 +327,7 @@ export const UttakFaktaDetailForm = ({
               name="morsAktivitet"
               control={formMethods.control}
               label={<FormattedMessage id="UttakFaktaDetailForm.MorsAktivitet" />}
-              className={styles.select}
+              className={styles['select']}
               selectValues={sorterteMorsAktiviteter.map(vt => (
                 <option key={vt.kode} value={vt.kode}>
                   {vt.navn}
@@ -368,7 +368,7 @@ export const UttakFaktaDetailForm = ({
             </div>
           )}
           {!readOnly && (
-            <HStack gap="space-8" className={styles.marginBtn}>
+            <HStack gap="space-8" className={styles['marginBtn']}>
               <Button
                 size="small"
                 variant="secondary"

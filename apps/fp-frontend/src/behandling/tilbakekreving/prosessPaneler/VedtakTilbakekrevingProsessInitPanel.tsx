@@ -60,6 +60,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
     behandling.førsteÅrsak && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak.behandlingArsakType);
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
     behandling.førsteÅrsak &&
+    // @ts-expect-error -- feil i typene
     BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
 
   const api = useBehandlingApi(behandling);
@@ -80,7 +81,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
         visModal={visFatterVedtakModal}
         lukkModal={() => {
           setVisFatterVedtakModal(false);
-          navigate('/');
+          void navigate('/');
         }}
         tekst={intl.formatMessage({ id: 'FatterTilbakekrevingVedtakStatusModal.Sendt' })}
       />
@@ -128,7 +129,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof VedtakTilbakekrevingProsessIn
 };
 
 const erTilbakekrevingÅrsakKlage = (årsak: BehandlingArsakType): boolean =>
-  !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
+  tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
 
 const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   if (!beregningsresultat) {
@@ -136,11 +137,14 @@ const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
   }
   const { type } = beregningsresultat;
 
+  // @ts-expect-error -- feil i typene
   if (type === BehandlingResultatTypeTilbakekreving.INGEN_TILBAKEBETALING) {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
 
+  // @ts-expect-error -- feil i typene
   return type === BehandlingResultatTypeTilbakekreving.DELVIS_TILBAKEBETALING ||
+    // @ts-expect-error -- feil i typene
     type === BehandlingResultatTypeTilbakekreving.FULL_TILBAKEBETALING
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;

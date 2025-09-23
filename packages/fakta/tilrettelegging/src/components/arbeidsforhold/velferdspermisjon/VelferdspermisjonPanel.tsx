@@ -29,10 +29,10 @@ export const VelferdspermisjonPanel = ({
         <Label size="small">
           <FormattedMessage id="TilretteleggingForArbeidsgiverPanel.Velferdspermisjon" />
         </Label>
-        {velferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined || permisjon.erGyldig === null) && (
+        {velferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined) && (
           <ExclamationmarkTriangleFillIcon
             title={intl.formatMessage({ id: 'TilretteleggingForArbeidsgiverPanel.ErPermisjonGyldg' })}
-            className={styles.image}
+            className={styles['image']}
           />
         )}
       </HStack>

@@ -8,7 +8,7 @@ import styles from './aldersvisning.module.css';
 interface Props {
   erDød: boolean;
   alder: number;
-  dødsdato: string | null;
+  dødsdato?: string;
 }
 
 /**
@@ -19,7 +19,7 @@ interface Props {
 export const Aldersvisning = ({ erDød, alder, dødsdato }: Props) => {
   if (erDød) {
     return (
-      <BodyShort size="small" className={styles.displayInline}>
+      <BodyShort size="small" className={styles['displayInline']}>
         {dødsdato ? <DateLabel dateString={dødsdato} /> : <FormattedMessage id="Person.ManglerDodsdato" />}
       </BodyShort>
     );

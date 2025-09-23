@@ -28,7 +28,7 @@ export const InntektsmeldingInnhold = ({
   const intl = useIntl();
 
   return (
-    <VStack gap="space-16" className={styles.container}>
+    <VStack gap="space-16" className={styles['container']}>
       <HStack gap="space-16" justify="space-between" align="start">
         <Heading level="3" size="small">
           <FormattedMessage id="InntektsmeldingFaktaPanel.innsendingstidspunkt" />{' '}

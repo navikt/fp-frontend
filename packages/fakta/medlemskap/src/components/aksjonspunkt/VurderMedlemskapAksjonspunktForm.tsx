@@ -21,12 +21,12 @@ import { MedlemskapVurderinger } from './MedlemskapVurderinger';
 
 interface Props {
   aksjonspunkt: Aksjonspunkt;
-  manuellBehandlingResultat: ManuellBehandlingResultat | null;
+  manuellBehandlingResultat: ManuellBehandlingResultat | undefined;
 }
 
 export const createMedlemskapInitialValues = (
   aksjonspunkt: Aksjonspunkt,
-  resultat: ManuellBehandlingResultat | null,
+  resultat: ManuellBehandlingResultat | undefined,
 ): Partial<VurderMedlemskapFormValues> => {
   const begrunnelse = aksjonspunkt.begrunnelse ?? '';
 

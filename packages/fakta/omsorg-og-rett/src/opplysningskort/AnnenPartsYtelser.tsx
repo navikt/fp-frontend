@@ -13,9 +13,9 @@ export const AnnenPartsYtelser = ({ omsorgOgRett }: Props) => {
     return null;
   }
 
-  const harAnnenpartUføretrygd = omsorgOgRett.registerdata.harAnnenpartUføretrygd ?? 'IKKE_RELEVANT';
-  const harAnnenpartForeldrepenger = omsorgOgRett.registerdata.harAnnenpartForeldrepenger ?? 'IKKE_RELEVANT';
-  const harAnnenpartEngangsstønad = omsorgOgRett.registerdata.harAnnenpartEngangsstønad ?? 'IKKE_RELEVANT';
+  const harAnnenpartUføretrygd = omsorgOgRett.registerdata.harAnnenpartUføretrygd;
+  const harAnnenpartForeldrepenger = omsorgOgRett.registerdata.harAnnenpartForeldrepenger;
+  const harAnnenpartEngangsstønad = omsorgOgRett.registerdata.harAnnenpartEngangsstønad;
 
   return (
     <Table>

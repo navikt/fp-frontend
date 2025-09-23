@@ -35,7 +35,7 @@ export const JournalføringIndex = ({
 }: Props) => (
   <div>
     {!valgtJournalpost && (
-      <div className={styles.sentrertInnhold}>
+      <div className={styles['sentrertInnhold']}>
         <OppgaveTabell
           velgOppgaveOgHentJournalpost={velgOppgaveOgHentJournalpost}
           navAnsatt={navAnsatt}

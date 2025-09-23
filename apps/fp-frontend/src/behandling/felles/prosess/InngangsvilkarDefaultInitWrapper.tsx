@@ -60,7 +60,7 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
                 <FormattedMessage id="InngangsvilkarProsessStegPanelDef.AvventerAvklaringAv" />
                 <Link
                   onClick={(evt: MouseEvent) => {
-                    oppdaterProsessStegOgFaktaPanelIUrl(undefined, faktaPanelMedÅpentApInfo?.urlCode);
+                    oppdaterProsessStegOgFaktaPanelIUrl(undefined, faktaPanelMedÅpentApInfo.urlCode);
                     evt.preventDefault();
                   }}
                 >

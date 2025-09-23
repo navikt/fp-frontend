@@ -108,7 +108,7 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
               alleKodeverk={alleKodeverk}
             />
           )}
-          {aksjonspunkterForPanel && aksjonspunkterForPanel.length > 0 && (
+          {aksjonspunkterForPanel.length > 0 && (
             <>
               <FaktaBegrunnelseTextField
                 control={formMethods.control}

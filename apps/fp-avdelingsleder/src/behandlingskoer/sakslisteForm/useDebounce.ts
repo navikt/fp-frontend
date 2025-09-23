@@ -15,7 +15,7 @@ export const useDebounce = <VALUE, FORM_VALUES extends FieldValues>(
 
   const lagre = useCallback(
     debounce((verdi: VALUE) => {
-      validationTrigger(feltNavn).then(isValid => isValid && funksjon(verdi));
+      void validationTrigger(feltNavn).then(isValid => isValid && funksjon(verdi));
     }, getTimeoutValue()),
     [funksjon],
   );

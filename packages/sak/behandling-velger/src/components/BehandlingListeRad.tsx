@@ -40,7 +40,7 @@ export const BehandlingListeRad = ({
   }
   if (erKunEnBehandling || skalViseAlleBehandlinger) {
     return renderRadSomLenke(
-      styles.linkToBehandling,
+      styles['linkToBehandling'],
       <BehandlingInformasjon
         behandling={behandling}
         withChevronDown={false}
@@ -53,7 +53,7 @@ export const BehandlingListeRad = ({
   }
   if (erAktiv) {
     return (
-      <button type="button" className={styles.toggleShowAllButton} onClick={toggleVisAlleBehandlinger}>
+      <button type="button" className={styles['toggleShowAllButton']} onClick={toggleVisAlleBehandlinger}>
         <BehandlingInformasjon
           behandling={behandling}
           withChevronDown={!skalViseAlleBehandlinger}

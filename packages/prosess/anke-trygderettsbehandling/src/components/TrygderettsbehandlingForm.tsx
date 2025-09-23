@@ -86,7 +86,7 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
               <FormattedMessage id="Ankebehandling.OmgjoeringArsak" />
             </Label>
             <BodyShort size="small">
-              {ankeOmgorArsaker.find(aoa => aoa.kode === avr?.trygderettOmgjoerArsak)?.navn}
+              {ankeOmgorArsaker.find(aoa => aoa.kode === avr.trygderettOmgjoerArsak)?.navn}
             </BodyShort>
           </VStack>
           <VStack gap="space-4">

@@ -22,9 +22,9 @@ const PERSON = {
   fødselsnummer: '11111111111',
   kjønn: KjønnkodeEnum.MANN,
   fødselsdato: '2000-01-02',
-  dødsdato: null,
+
   aktørId: '22222222',
-  diskresjonskode: null,
+
   språkkode: '-',
 } satisfies Person;
 
@@ -52,7 +52,6 @@ const AKTØR_INFO = {
     },
   ],
   person: PERSON,
-  aktørId: null,
 } satisfies Aktor;
 
 const meta = {
@@ -106,8 +105,7 @@ export const IngenFagsaker: Story = {
         http.get(FagsakUrl.AKTOER_INFO, () =>
           HttpResponse.json({
             fagsaker: [],
-            person: { ...PERSON, aktørId: null },
-            aktørId: null,
+            person: { ...PERSON, aktørId: undefined },
           } satisfies Aktor),
         ),
       ],

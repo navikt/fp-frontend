@@ -21,8 +21,8 @@ describe('UttakFaktaIndex', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
-    expect(await screen.queryByTitle('Overstyr')).not.toBeInTheDocument();
+    expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
+    expect(screen.queryByTitle('Overstyr')).not.toBeInTheDocument();
   });
 
   it('skal kunne overstyre når det ikke er aksjonspunkter og en er overstyrer', async () => {
@@ -32,13 +32,13 @@ describe('UttakFaktaIndex', () => {
 
     expect(await screen.findByText('Fakta om uttak')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
+    expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Overstyr'));
 
     expect(await screen.findByText('Legg til periode')).toBeInTheDocument();
 
-    expect(await screen.getByTitle('Vis mer')).toBeInTheDocument();
+    expect(screen.getByTitle('Vis mer')).toBeInTheDocument();
 
     await userEvent.click(screen.getByTitle('Vis mer'));
 
@@ -73,14 +73,8 @@ describe('UttakFaktaIndex', () => {
             uttakPeriodeType: 'MØDREKVOTE',
             aksjonspunktType: undefined,
             arbeidsforhold: undefined,
-            // @ts-expect-error -- typene i formet er inkonsekvente
             arbeidstidsprosent: undefined,
             flerbarnsdager: false,
-            begrunnelse: null,
-            oppholdÅrsak: null,
-            overføringÅrsak: null,
-            utsettelseÅrsak: null,
-            morsAktivitet: null,
           },
         ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
       },
@@ -133,11 +127,6 @@ describe('UttakFaktaIndex', () => {
             arbeidstidsprosent: 10,
             flerbarnsdager: true,
             aksjonspunktType: undefined,
-            begrunnelse: null,
-            oppholdÅrsak: null,
-            overføringÅrsak: null,
-            utsettelseÅrsak: null,
-            morsAktivitet: null,
           },
           {
             fom: '2022-12-02',
@@ -151,12 +140,6 @@ describe('UttakFaktaIndex', () => {
             },
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
-            begrunnelse: null,
-            oppholdÅrsak: null,
-            overføringÅrsak: null,
-            utsettelseÅrsak: null,
-            morsAktivitet: null,
-            samtidigUttaksprosent: null,
           },
           {
             fom: '2022-12-11',
@@ -170,12 +153,6 @@ describe('UttakFaktaIndex', () => {
             },
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
-            begrunnelse: null,
-            oppholdÅrsak: null,
-            overføringÅrsak: null,
-            utsettelseÅrsak: null,
-            morsAktivitet: null,
-            samtidigUttaksprosent: null,
           },
         ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
       },
@@ -274,7 +251,6 @@ describe('UttakFaktaIndex', () => {
             tom: '2022-12-01',
             originalFom: '2022-11-12',
             periodeKilde: 'SAKSBEHANDLER',
-            // @ts-expect-error -- formet er ikke helt konsekvent og gir både nulls og undefines
             samtidigUttaksprosent: undefined,
             uttakPeriodeType: 'MØDREKVOTE',
             arbeidsforhold: {
@@ -284,11 +260,6 @@ describe('UttakFaktaIndex', () => {
             arbeidstidsprosent: 50,
             flerbarnsdager: false,
             aksjonspunktType: undefined,
-            morsAktivitet: null,
-            utsettelseÅrsak: null,
-            oppholdÅrsak: null,
-            overføringÅrsak: null,
-            begrunnelse: null,
           },
         ] satisfies KontrollerFaktaPeriodeMedApMarkering[],
       },
@@ -342,7 +313,7 @@ describe('UttakFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Opphold'));
 
-    expect(await utils.getByLabelText('Årsak')).toBeInTheDocument();
+    expect(utils.getByLabelText('Årsak')).toBeInTheDocument();
     expect(utils.queryByLabelText('Mors aktivitet')).not.toBeInTheDocument();
     expect(utils.queryByLabelText('Stønadskonto')).not.toBeInTheDocument();
     expect(utils.queryByLabelText('Gradering %')).not.toBeInTheDocument();

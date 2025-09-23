@@ -92,7 +92,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
               validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
               readOnly={isReadOnly}
               htmlSize={6}
-              className={styles.rightAlign}
+              className={styles['rightAlign']}
             />
           </HStack>
 
@@ -111,7 +111,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
             </Alert>
           )}
 
-          {aksjonspunkt && !isReadOnly && (
+          {!isReadOnly && (
             <FaktaSubmitButton
               isSubmittable={isSubmittable}
               isReadOnly={isReadOnly}

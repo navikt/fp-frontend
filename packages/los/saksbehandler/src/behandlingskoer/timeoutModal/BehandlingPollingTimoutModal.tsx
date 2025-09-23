@@ -21,7 +21,7 @@ export const BehandlingPollingTimoutModal = () => {
       <NavModal.Body>
         <HStack gap="space-16" align="center">
           <ExclamationmarkTriangleFillIcon
-            className={styles.image}
+            className={styles['image']}
             title={intl.formatMessage({ id: 'BehandlingPollingTimoutModal.TimeoutMelding' })}
           />
           <Label size="small">

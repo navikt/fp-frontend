@@ -31,7 +31,7 @@ const historikkInnslag: Historikkinnslag[] = [
     skjermlenke: SkjermlenkeType.FAKTA_UTTAK,
     opprettetTidspunkt: '2024-12-06T11:59:56.891',
     dokumenter: [],
-    tittel: null,
+
     linjer: [
       {
         type: 'TEKST',
@@ -48,7 +48,7 @@ const historikkInnslag: Historikkinnslag[] = [
         tekst:
           '__Perioden 21.10.2024 - 30.11.2024__ er satt til __Lagt til Opphold, Årsak: Annen forelder har uttak av Fellesperiode__.',
       },
-      { type: 'LINJESKIFT', tekst: null },
+      { type: 'LINJESKIFT' },
       {
         type: 'TEKST',
         tekst: 'Bruker har rett på uttak med gradering',
@@ -61,7 +61,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: HistorikkAktorEnum.SAKSBEHANDLER,
       ident: 'Z991198',
     },
-    skjermlenke: null,
+
     opprettetTidspunkt: '2024-08-04T19:39:14.237',
     dokumenter: [],
     tittel: 'Revurdering opprettet',
@@ -74,10 +74,10 @@ const historikkInnslag: Historikkinnslag[] = [
   },
   {
     behandlingUuid: '999951',
-    aktør: { type: HistorikkAktorEnum.VEDTAKSLOSNINGEN, ident: null },
+    aktør: { type: HistorikkAktorEnum.VEDTAKSLOSNINGEN },
     opprettetTidspunkt: '2024-09-19T12:16:14.499',
     tittel: 'Dette er en tittel',
-    skjermlenke: null,
+
     linjer: [],
     dokumenter: [
       { dokumentId: '1', journalpostId: '2', tag: 'Søknad foreldrepenger', utgått: false },
@@ -92,8 +92,7 @@ const historikkInnslag: Historikkinnslag[] = [
     },
     skjermlenke: SkjermlenkeType.PUNKT_FOR_MEDLEMSKAP_LØPENDE,
     opprettetTidspunkt: '2024-08-04T20:07:08.962',
-    dokumenter: null,
-    tittel: null,
+
     linjer: [
       {
         type: 'TEKST',
@@ -113,8 +112,7 @@ const historikkInnslag: Historikkinnslag[] = [
     },
     skjermlenke: SkjermlenkeType.VEDTAK,
     opprettetTidspunkt: '2024-09-27T16:02:59.251',
-    dokumenter: null,
-    tittel: null,
+
     linjer: [
       {
         type: 'TEKST',
@@ -126,9 +124,8 @@ const historikkInnslag: Historikkinnslag[] = [
     behandlingUuid: '6488585a-8320-4b48-bc20-bc67fb714643',
     aktør: {
       type: HistorikkAktorEnum.VEDTAKSLOSNINGEN,
-      ident: null,
     },
-    skjermlenke: null,
+
     opprettetTidspunkt: '2024-08-04T20:26:04.122',
     dokumenter: [],
     tittel: 'Bytt enhet',
@@ -153,7 +150,7 @@ const historikkInnslag: Historikkinnslag[] = [
     skjermlenke: SkjermlenkeType.FAKTA_OM_MEDLEMSKAP,
     opprettetTidspunkt: '2024-09-19T16:33:54.789',
     dokumenter: [],
-    tittel: null,
+
     linjer: [
       {
         type: 'TEKST',
@@ -169,11 +166,10 @@ const historikkInnslag: Historikkinnslag[] = [
     behandlingUuid: '1b1b6855-5069-42ba-855d-e3d201999db4',
     aktør: {
       type: HistorikkAktorEnum.VEDTAKSLOSNINGEN,
-      ident: null,
     },
-    skjermlenke: null,
+
     opprettetTidspunkt: '2024-07-10T15:15:43.274',
-    dokumenter: null,
+
     tittel: 'Behandling på vent 17.07.2024',
     linjer: [
       {
@@ -183,12 +179,10 @@ const historikkInnslag: Historikkinnslag[] = [
     ],
   },
   {
-    behandlingUuid: null,
     aktør: {
       type: HistorikkAktorEnum.ARBEIDSGIVER,
-      ident: null,
     },
-    skjermlenke: null,
+
     opprettetTidspunkt: '2024-07-11T15:28:06.352',
     dokumenter: [
       {
@@ -203,8 +197,8 @@ const historikkInnslag: Historikkinnslag[] = [
   },
   {
     behandlingUuid: '1b1b6855-5069-42ba-855d-e3d201999db4',
-    aktør: { type: HistorikkAktorEnum.SOKER, ident: null },
-    skjermlenke: null,
+    aktør: { type: HistorikkAktorEnum.SOKER },
+
     opprettetTidspunkt: '2024-07-10T15:15:41.879',
     dokumenter: [
       {

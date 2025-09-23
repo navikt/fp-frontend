@@ -32,11 +32,9 @@ const getTypeTekst = (
     const navn = alleKodeverk['OppholdÅrsak'].find(k => k.kode === periode.oppholdÅrsak)?.navn;
     return intl.formatMessage({ id: 'UttakFaktaTabel.Opphold' }, { arsak: navn?.replace('har uttak av', '') });
   }
-  if (årsaktype === Årsakstype.UTSETTELSE) {
-    const navn = alleKodeverk['UtsettelseÅrsak'].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
-    return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
-  }
-  return '';
+
+  const navn = alleKodeverk['UtsettelseÅrsak'].find(k => k.kode === periode.utsettelseÅrsak)?.navn;
+  return intl.formatMessage({ id: 'UttakFaktaTabel.Utsettelse' }, { arsak: navn });
 };
 
 interface Props {
@@ -109,7 +107,7 @@ export const UttakFaktaTable = ({
     <VStack gap="space-24">
       <Table>
         <Table.Header>
-          <Table.Row className={styles.headerRow}>
+          <Table.Row className={styles['headerRow']}>
             <Table.HeaderCell scope="col">
               <FormattedMessage id="UttakFaktaTable.Periode" />
             </Table.HeaderCell>
@@ -142,7 +140,7 @@ export const UttakFaktaTable = ({
                 contentGutter="none"
                 content={
                   valgteFomDatoer.includes(periode.fom) && (
-                    <div className={periode.aksjonspunktType ? styles.panelOpenAp : styles.panelOpen}>
+                    <div className={periode.aksjonspunktType ? styles['panelOpenAp'] : styles['panelOpen']}>
                       <UttakFaktaDetailForm
                         fagsak={fagsak}
                         valgtPeriode={periode}
@@ -188,7 +186,7 @@ export const UttakFaktaTable = ({
             </div>
           )}
           {visNyPeriode && (
-            <VStack gap="space-16" className={styles.panel}>
+            <VStack gap="space-16" className={styles['panel']}>
               <Heading size="small" level="3">
                 <FormattedMessage id="UttakFaktaForm.NyPeriode" />
               </Heading>

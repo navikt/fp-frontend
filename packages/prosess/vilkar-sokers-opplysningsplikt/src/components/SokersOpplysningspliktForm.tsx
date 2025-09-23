@@ -45,6 +45,7 @@ const formatArbeidsgiver = (
     return '';
   }
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (!arbeidsgiverOpplysninger) {
     return '';
   }
@@ -55,11 +56,10 @@ const formatArbeidsgiver = (
 };
 
 const getSortedManglendeVedlegg = (soknad: Soknad): ManglendeVedleggSoknad[] =>
-  soknad?.manglendeVedlegg
-    ? soknad.manglendeVedlegg.slice().sort((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel))
-    : [];
+  soknad.manglendeVedlegg.slice().sort((mv1, mv2) => mv1.dokumentTittel.localeCompare(mv2.dokumentTittel));
 
-const harSoknad = (soknad: Soknad): boolean => soknad !== null && isObject(soknad);
+// TODO: søknad er vel alltid objekt så denne sjekken er irrelevant??
+const harSoknad = (soknad: Soknad): boolean => isObject(soknad);
 
 const lagArbeidsgiverKey = (arbeidsgiverOpplysninger: ArbeidsgiverOpplysninger): string => {
   return `${arbeidsgiverOpplysninger.erPrivatPerson ? aktørPrefix : orgPrefix}${arbeidsgiverOpplysninger.referanse}`;
@@ -83,7 +83,8 @@ const buildInitialValues = (
     .reduce(
       (acc, mv) => ({
         ...acc,
-        [lagArbeidsgiverKey(arbeidsgiverOpplysningerPerId[mv.arbeidsgiverReferanse])]: mv.brukerHarSagtAtIkkeKommer,
+        [lagArbeidsgiverKey(arbeidsgiverOpplysningerPerId[mv.arbeidsgiverReferanse ?? ''])]:
+          mv.brukerHarSagtAtIkkeKommer,
       }),
       {},
     );
@@ -116,7 +117,7 @@ const transformValues = (
     kode,
     erVilkarOk: values.erVilkarOk || false,
     inntektsmeldingerSomIkkeKommer: arbeidsgiverReferanser.map(agRef => {
-      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef];
+      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef ?? ''];
       return {
         // backend sender fødselsdato i orgnummer feltet for privatpersoner... fiks dette
         organisasjonsnummer: arbeidsgiverOpplysninger.erPrivatPerson
@@ -165,6 +166,7 @@ export const SokersOpplysningspliktForm = ({ soknad, status, arbeidsgiverOpplysn
   } = usePanelDataContext<BekreftSokersOpplysningspliktManuAp | OverstyringSokersOpplysingspliktAp>();
 
   const erIkkeGodkjentAvBeslutter = aksjonspunkterForPanel.some(
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     a => alleMerknaderFraBeslutter[a.definisjon]?.notAccepted,
   );
 

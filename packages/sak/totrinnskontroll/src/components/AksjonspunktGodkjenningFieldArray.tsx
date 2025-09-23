@@ -95,12 +95,15 @@ export const AksjonspunktGodkjenningFieldArray = ({
         return (
           <div key={field.id}>
             {lenke && skjermlenkeTypeKodeverk && (
-              <NavLink to={lenke} onClick={() => window.scroll(0, 0)} className={styles.lenke}>
+              <NavLink to={lenke} onClick={() => window.scroll(0, 0)} className={styles['lenke']}>
                 {skjermlenkeTypeKodeverk.navn}
               </NavLink>
             )}
             {aksjonspunktText.map((formattedMessage, i) => (
-              <div key={aksjonspunktKode.concat('_'.concat(i.toString()))} className={styles.aksjonspunktTextContainer}>
+              <div
+                key={aksjonspunktKode.concat('_'.concat(i.toString()))}
+                className={styles['aksjonspunktTextContainer']}
+              >
                 <BodyShort size="small">{formattedMessage}</BodyShort>
               </div>
             ))}

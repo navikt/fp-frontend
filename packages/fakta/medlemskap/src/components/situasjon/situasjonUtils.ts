@@ -13,7 +13,7 @@ export const getSisteRegion = (medlemskap: Medlemskap, alleKodeverk: AlleKodever
 };
 
 export const getSistePersonstatus = (medlemskap: Medlemskap, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
-  const nyeste = medlemskap.personstatuser.sort(sorterPerioder)[0];
+  const nyeste = medlemskap.personstatuser.sort(sorterPerioder).at(0);
   if (nyeste) {
     return alleKodeverk['PersonstatusType'].find(type => type.kode === nyeste.type)?.navn ?? '';
   }

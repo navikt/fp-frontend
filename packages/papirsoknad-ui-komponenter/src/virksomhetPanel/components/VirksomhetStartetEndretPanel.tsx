@@ -72,7 +72,7 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
               label={<FormattedMessage id="Registrering.VirksomhetStartetPanel.Inntekt" />}
               readOnly={readOnly}
               validate={[hasValidInteger, required]}
-              className={styles.inntektBredde}
+              className={styles['inntektBredde']}
               parse={value => {
                 const parsedValue = parseInt(value.toString(), 10);
                 return Number.isNaN(parsedValue) ? value : parsedValue;

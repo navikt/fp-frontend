@@ -50,10 +50,10 @@ export const Default: Story = {
           navn: 'Espen Utvikler',
           fødselsdato: '1980-10-10',
           aktørId: '1234',
-          dødsdato: null,
+
           fødselsnummer: '1010',
           kjønn: KjønnkodeEnum.MANN,
-          diskresjonskode: null,
+
           språkkode: 'NB',
         },
         barnFødt: '2019-12-12',

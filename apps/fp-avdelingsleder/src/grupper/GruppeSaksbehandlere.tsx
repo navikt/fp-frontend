@@ -49,7 +49,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
     mutationFn: (valuesToStore: { brukerIdent: string; gruppeId: number }) =>
       leggSaksbehandlerTilGruppe(valuesToStore.brukerIdent, valgAvdeldingEnhet, valuesToStore.gruppeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.HENT_GRUPPER],
       });
     },
@@ -59,7 +59,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
     mutationFn: (valuesToStore: { brukerIdent: string; gruppeId: number }) =>
       fjernSaksbehandlerFraGruppe(valuesToStore.brukerIdent, valgAvdeldingEnhet, valuesToStore.gruppeId),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.HENT_GRUPPER],
       });
     },
@@ -69,7 +69,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
     mutationFn: (valuesToStore: { gruppeId: number; gruppeNavn: string }) =>
       endreGruppenavn(valuesToStore.gruppeId, valuesToStore.gruppeNavn, valgAvdeldingEnhet),
     onSuccess: () => {
-      queryClient.invalidateQueries({
+      void queryClient.invalidateQueries({
         queryKey: [LosUrl.HENT_GRUPPER],
       });
     },
@@ -107,7 +107,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
   };
 
   const toggleSelected = (option: string, isSelected: boolean) => {
-    const selectedOption = filteredOptions.find(o => o.toLowerCase().includes(option?.toLowerCase()));
+    const selectedOption = filteredOptions.find(o => o.toLowerCase().includes(option.toLowerCase()));
     const navnOgBrukerIdent = selectedOption?.replace(')', '').split(' (');
     const alreadySelected = sorterteGrupperteSaksbehandlere.some(
       gs => navnOgBrukerIdent && gs.brukerIdent === navnOgBrukerIdent[1],
@@ -128,8 +128,9 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
           control={formMethods.control}
           label={intl.formatMessage({ id: 'GruppeSaksbehandlere.Navn' })}
           validate={[required, minLength3, maxLength100, hasValidName]}
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] bedre typede forms
           onBlur={value => lagreNavnDebounce(value)}
-          className={styles.navn}
+          className={styles['navn']}
         />
         <VStack gap="space-16">
           <UNSAFE_Combobox
@@ -140,7 +141,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
             selectedOptions={[]}
             onChange={setFilterValue}
             onToggleSelected={toggleSelected}
-            className={styles.saksbehandlerCombo}
+            className={styles['saksbehandlerCombo']}
           />
 
           <VStack gap="space-8">
@@ -157,7 +158,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
                 <div>{`${saksbehandler.navn} (${saksbehandler.brukerIdent})`}</div>
                 <div>
                   <XMarkIcon
-                    className={styles.removeIcon}
+                    className={styles['removeIcon']}
                     onMouseDown={() =>
                       fjernSaksbehandler({
                         brukerIdent: saksbehandler.brukerIdent,

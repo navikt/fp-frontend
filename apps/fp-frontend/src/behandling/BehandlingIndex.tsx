@@ -94,7 +94,7 @@ const BehandlingIndexWrapper = ({
   const { lagreAksjonspunkter, lagreOverstyrteAksjonspunkter } = useBehandlingPollingOperasjoner(
     behandling,
     oppdatertBehandling => {
-      if (oppdatertBehandling && skalOppdatereEtterBekreftelseAvAp) {
+      if (skalOppdatereEtterBekreftelseAvAp) {
         setBehandling(oppdatertBehandling);
       }
     },
@@ -162,7 +162,7 @@ const getOppdaterProsessStegOgFaktaPanelIUrl =
       newLocation = getFaktaLocation(newLocation)();
     }
 
-    navigate(newLocation);
+    void navigate(newLocation);
   };
 
 const formatName = (bpName = ''): string => replaceNorwegianCharacters(bpName.toLowerCase());

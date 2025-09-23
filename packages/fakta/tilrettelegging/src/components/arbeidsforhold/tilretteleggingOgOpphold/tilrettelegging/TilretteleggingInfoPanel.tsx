@@ -82,16 +82,14 @@ export const TilretteleggingInfoPanel = ({
                 }}
               />
             </BodyShort>
-            {stillingsprosentArbeidsforhold !== undefined && (
-              <Detail>
-                <FormattedMessage
-                  id="TilretteleggingInfoPanel.AvStillingsprosent"
-                  values={{
-                    stillingsprosent: stillingsprosentArbeidsforhold,
-                  }}
-                />
-              </Detail>
-            )}
+            <Detail>
+              <FormattedMessage
+                id="TilretteleggingInfoPanel.AvStillingsprosent"
+                values={{
+                  stillingsprosent: stillingsprosentArbeidsforhold,
+                }}
+              />
+            </Detail>
           </div>
         </HStack>
         <HStack gap="space-16">

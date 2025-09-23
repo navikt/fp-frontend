@@ -83,12 +83,12 @@ export const ArbeidOgInntektFaktaPanel = ({
   const oppdaterTabellData = (data: (rader: ArbeidsforholdOgInntektRadData[]) => ArbeidsforholdOgInntektRadData[]) => {
     setTabellRader(data);
     setÅpneRadIndexer(finnUløstArbeidsforholdIndex(data(tabellRader)));
-    tableRef?.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    tableRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
   };
 
   const lagreOgFortsett = () => {
     setErKnappTrykket(true);
-    submitCallback({
+    void submitCallback({
       kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
     });
   };
@@ -146,7 +146,7 @@ export const ArbeidOgInntektFaktaPanel = ({
       />
       <Table ref={tableRef}>
         <Table.Header>
-          <Table.Row className={styles.headerRow}>
+          <Table.Row className={styles['headerRow']}>
             <Table.HeaderCell scope="col" />
             <Table.HeaderCell scope="col">
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.Arbeidsforhold" />
@@ -223,7 +223,7 @@ export const ArbeidOgInntektFaktaPanel = ({
       )}
       {skalViseÅpneForNyVurderingKnapp && (
         <VStack gap="space-16">
-          <div className={styles.alertStripe}>
+          <div className={styles['alertStripe']}>
             <Alert variant="info">
               <FormattedMessage id="ArbeidOgInntektFaktaPanel.ApneForNyRevurderingForklaring" />
             </Alert>

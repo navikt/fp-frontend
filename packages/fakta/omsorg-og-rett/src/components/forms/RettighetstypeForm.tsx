@@ -78,7 +78,7 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }:
               control={formMethods.control}
               label={<FormattedMessage id="Rettighetstype.SelectLabel" />}
               validate={[required]}
-              className={styles.selectType}
+              className={styles['selectType']}
               selectValues={rettighetstyper.map(vt => (
                 <option key={vt} value={vt}>
                   <FormattedMessage id={RETTIGHETSTYPER[vt]} />

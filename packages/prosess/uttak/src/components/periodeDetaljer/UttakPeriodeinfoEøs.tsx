@@ -14,7 +14,7 @@ interface Props {
 
 export const UttakPeriodeInfoEØS = ({ valgtPeriode, alleKodeverk }: Props) => {
   return (
-    <VStack gap="space-16" className={styles.greenDetailsPeriod}>
+    <VStack gap="space-16" className={styles['greenDetailsPeriod']}>
       <VStack>
         <HStack justify="space-between">
           <Label size="small">

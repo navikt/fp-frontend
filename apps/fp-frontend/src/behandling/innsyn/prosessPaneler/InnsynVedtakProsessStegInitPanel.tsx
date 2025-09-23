@@ -59,7 +59,7 @@ export const InnsynVedtakProsessStegInitPanel = () => {
           visModal={visIverksetterVedtakModal}
           lukkModal={() => {
             toggleIverksetterVedtakModal(false);
-            navigate('/');
+            void navigate('/');
           }}
           behandlingsresultat={standardPanelProps.behandling.behandlingsresultat}
         />

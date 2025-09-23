@@ -67,7 +67,7 @@ const createInitialValues = (
     if (aksjonspunkt) {
       return {
         ...felles,
-        ...createMedlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat ?? null),
+        ...createMedlemskapInitialValues(aksjonspunkt, medlemskapManuellBehandlingResultat),
       };
     } else {
       return felles;
@@ -181,14 +181,14 @@ export const VilkarresultatMedOverstyringForm = ({
           <HStack gap="space-8">
             {!erOverstyrt && originalErVilkårOk !== undefined && (
               <>
-                {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles.godkjentImage} />}
-                {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles.avslattImage} />}
+                {originalErVilkårOk && <CheckmarkCircleFillIcon className={styles['godkjentImage']} />}
+                {!originalErVilkårOk && <XMarkOctagonFillIcon className={styles['avslattImage']} />}
               </>
             )}
             <Heading size="small" level="3">
               <FormattedMessage id={panelTekstKode} />
             </Heading>
-            {lovReferanse && <Detail className={styles.vilkar}>{lovReferanse}</Detail>}
+            {lovReferanse && <Detail className={styles['vilkar']}>{lovReferanse}</Detail>}
           </HStack>
           <HStack gap="space-8">
             {originalErVilkårOk && (
@@ -223,6 +223,7 @@ export const VilkarresultatMedOverstyringForm = ({
             isPristine={!formMethods.formState.isDirty}
             toggleAv={toggleAv}
             erIkkeGodkjentAvBeslutter={
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
               aksjonspunkt ? !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted : false
             }
           >

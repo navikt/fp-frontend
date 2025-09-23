@@ -55,7 +55,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
 };
 
 EktefelleFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHendelse): FormValues => ({
-  ektefellesBarn: adopsjon && adopsjon.ektefellesBarn !== null ? adopsjon.ektefellesBarn : undefined,
+  ektefellesBarn: adopsjon.ektefellesBarn,
 });
 
 EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelleAksjonspunktAp => ({

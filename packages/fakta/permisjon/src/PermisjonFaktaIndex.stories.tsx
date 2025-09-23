@@ -59,9 +59,9 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
             type: PermisjonsbeskrivelseType.PERMITTERING,
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
-          saksbehandlersVurdering: null,
-          begrunnelse: null,
+
           årsak: 'PERMISJON',
+          saksbehandlersVurdering: '-',
         },
         {
           arbeidsgiverIdent: '91090909+',
@@ -75,9 +75,9 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
             permisjonTom: '2022-12-01',
             type: PermisjonsbeskrivelseType.PERMITTERING,
           },
-          saksbehandlersVurdering: null,
-          begrunnelse: null,
+
           årsak: 'PERMISJON',
+          saksbehandlersVurdering: '-',
         },
       ],
       inntektsmeldinger: [],
@@ -165,9 +165,9 @@ export const FlereArbeidsforhold: Story = {
             type: PermisjonsbeskrivelseType.PERMITTERING,
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
-          saksbehandlersVurdering: null,
-          begrunnelse: null,
+
           årsak: 'PERMISJON',
+          saksbehandlersVurdering: '-',
         },
         {
           arbeidsgiverIdent: '910909090',
@@ -182,8 +182,7 @@ export const FlereArbeidsforhold: Story = {
             type: PermisjonsbeskrivelseType.PERMITTERING,
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
-          saksbehandlersVurdering: null,
-          begrunnelse: null,
+          saksbehandlersVurdering: '-',
         },
       ],
       inntektsmeldinger: [
@@ -199,10 +198,6 @@ export const FlereArbeidsforhold: Story = {
           refusjonPrMnd: 20000,
           journalpostId: '1',
           dokumentId: '2',
-          årsak: null,
-          begrunnelse: null,
-          saksbehandlersVurdering: null,
-          startDatoPermisjon: null,
         },
       ],
       inntekter: [
@@ -312,8 +307,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
             type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
-          saksbehandlersVurdering: null,
-          begrunnelse: null,
+
           årsak: 'PERMISJON',
         },
         {
@@ -328,9 +322,9 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
             type: PermisjonsbeskrivelseType.PERMITTERING,
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
-          saksbehandlersVurdering: null,
-          begrunnelse: null,
+
           årsak: 'PERMISJON',
+          saksbehandlersVurdering: '-',
         },
       ],
       inntektsmeldinger: [
@@ -346,10 +340,6 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           refusjonPrMnd: 20000,
           journalpostId: '1',
           dokumentId: '2',
-          årsak: null,
-          begrunnelse: null,
-          saksbehandlersVurdering: null,
-          startDatoPermisjon: null,
         },
         {
           ...fellesInntektsmeldingFelter,
@@ -362,11 +352,6 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           motattDato: '2021-12-06',
           journalpostId: '1',
           dokumentId: '2',
-          refusjonPrMnd: null,
-          årsak: null,
-          begrunnelse: null,
-          saksbehandlersVurdering: null,
-          startDatoPermisjon: null,
         },
       ],
       inntekter: [
@@ -429,9 +414,9 @@ export const VisFødselsdatoNårPrivatperson: Story = {
             type: PermisjonsbeskrivelseType.PERMITTERING,
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
-          saksbehandlersVurdering: null,
-          begrunnelse: null,
+
           årsak: 'PERMISJON',
+          saksbehandlersVurdering: '-',
         },
       ],
       inntektsmeldinger: [],

@@ -1,5 +1,7 @@
 // TODO Fjern denne fila og heller legg aksjonspunkta på pakkene dei blir brukt i
 
+import type { Aksjonspunkt } from '@navikt/fp-types';
+
 export enum AksjonspunktKode {
   SJEKK_TERMINBEKREFTELSE = '5001',
   AVKLAR_DEKNINGSGRAD = '5002',
@@ -148,21 +150,6 @@ const faktaUttakAksjonspunkter = [
   AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
   AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
 ];
-
-type Aksjonspunkt = Readonly<{
-  definisjon: string;
-  status: string;
-  begrunnelse: string | null;
-  vilkarType?: string | null;
-  toTrinnsBehandling?: boolean;
-  toTrinnsBehandlingGodkjent?: boolean | null;
-  vurderPaNyttArsaker?: string[] | null;
-  besluttersBegrunnelse?: string | null;
-  aksjonspunktType?: string;
-  kanLoses: boolean;
-  endretAv?: string | null;
-  endretTidspunkt?: string | null;
-}>;
 
 export const hasAksjonspunkt = (aksjonspunktKode: string, aksjonspunkter: Aksjonspunkt[]): boolean =>
   aksjonspunkter.some(ap => ap.definisjon === aksjonspunktKode);

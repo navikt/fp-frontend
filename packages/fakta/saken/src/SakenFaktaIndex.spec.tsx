@@ -76,7 +76,7 @@ describe('SakenFaktaIndex', () => {
 
     const startdato = screen.getByText('Startdato som skal benyttes (fra søknad eller fødsel)');
     await userEvent.type(startdato, '{backspace}{backspace}20');
-    await fireEvent.blur(startdato);
+    fireEvent.blur(startdato);
 
     const vurdering = screen.getByText('Vurdering');
     await userEvent.type(vurdering, 'Dette er en vurdering');

@@ -21,8 +21,8 @@ const utledKjonn = (kjonn: string): Gender => {
 interface Props {
   erMor: boolean;
   bruker: Person;
-  annenPart: Person | null;
-  familiehendelse: FagsakHendelse | null;
+  annenPart?: Person;
+  familiehendelse?: FagsakHendelse;
   lenkeTilAnnenPart?: string;
   harVergeIÅpenBehandling: boolean;
   erTilbakekreving: boolean;
@@ -41,7 +41,7 @@ export const VisittkortPanel = ({
 
   if (erTilbakekreving && harVergeIÅpenBehandling) {
     return (
-      <div className={styles.container}>
+      <div className={styles['container']}>
         <PersonCard
           name={bruker.navn}
           fodselsnummer={bruker.fødselsnummer}
@@ -58,7 +58,7 @@ export const VisittkortPanel = ({
   const sekundærBruker = !erMor && annenPart ? bruker : annenPart;
 
   return (
-    <div className={styles.container}>
+    <div className={styles['container']}>
       <HStack wrap={false} align="center">
         {primærBruker.aktørId ? (
           <PersonCard

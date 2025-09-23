@@ -29,9 +29,10 @@ const sorterArbeidsforhold = (
   alleArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[],
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ArbeidsforholdFodselOgTilrettelegging[] =>
-  [...(alleArbeidsforhold || [])].sort((a, b) => {
-    const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse];
-    const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse];
+  [...alleArbeidsforhold].sort((a, b) => {
+    const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse ?? ''];
+    const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse ?? ''];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     return arbeidsgiverOpplysningerA1 && arbeidsgiverOpplysningerA2
       ? arbeidsgiverOpplysningerA1.navn.localeCompare(arbeidsgiverOpplysningerA2.navn)
       : 0;
@@ -48,7 +49,7 @@ const getIsBegrunnelseRequired = (isDirty: boolean) => (value?: string) =>
 const utledOmEnSkalVurdereVelferdspermisjoner = (alleArbeidsforhold: ArbeidsforholdFodselOgTilrettelegging[]) =>
   alleArbeidsforhold.some(arbeidsforhold =>
     filtrerVelferdspermisjoner(arbeidsforhold.velferdspermisjoner, arbeidsforhold.tilretteleggingBehovFom).some(
-      p => p.erGyldig === undefined || p.erGyldig === null,
+      p => p.erGyldig === undefined,
     ),
   );
 
@@ -88,13 +89,13 @@ export const TilretteleggingFaktaForm = ({
   const formMethods = useForm<TilretteleggingFormValues>({
     defaultValues: mellomlagretFormData ?? {
       arbeidsforhold: sorterteArbeidsforhold,
-      termindato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.termindato : '',
-      fødselsdato: svangerskapspengerTilrettelegging ? svangerskapspengerTilrettelegging.fødselsdato : '',
+      termindato: svangerskapspengerTilrettelegging.termindato,
+      fødselsdato: svangerskapspengerTilrettelegging.fødselsdato,
       begrunnelse: getAksjonspunktBegrunnelse(aksjonspunkterForPanel),
     },
   });
 
-  const fødselsdato = svangerskapspengerTilrettelegging?.fødselsdato ?? '';
+  const fødselsdato = svangerskapspengerTilrettelegging.fødselsdato ?? '';
 
   const isRequiredFn = getIsBegrunnelseRequired(formMethods.formState.isDirty);
 

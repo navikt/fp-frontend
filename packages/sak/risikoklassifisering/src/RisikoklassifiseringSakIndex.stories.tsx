@@ -24,7 +24,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const toggleRiskPanel = () => {
-      args.toggleRiskPanel?.();
+      args.toggleRiskPanel();
       setArgs(oldArgs => ({ ...oldArgs, isPanelOpen: true }));
     };
 
@@ -45,9 +45,6 @@ export const LavRisikoklassifisering: Story = {
   args: {
     risikoklassifisering: {
       kontrollresultat: 'IKKE_HOY',
-      iayFaresignaler: null,
-      medlFaresignaler: null,
-      faresignalVurdering: null,
     },
   },
 };
@@ -57,7 +54,6 @@ export const HøyRisikoklassifisering: Story = {
     aksjonspunkt: {
       definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
       status: AksjonspunktStatus.OPPRETTET,
-      begrunnelse: null,
     } as Aksjonspunkt,
     risikoklassifisering: {
       kontrollresultat: 'HOY',
@@ -67,7 +63,6 @@ export const HøyRisikoklassifisering: Story = {
       iayFaresignaler: {
         faresignaler: ['Faresignal 2', 'Faresignal 3', 'Faresignal 4'],
       },
-      faresignalVurdering: null,
     },
   },
 };

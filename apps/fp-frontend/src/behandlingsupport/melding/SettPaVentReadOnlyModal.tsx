@@ -12,7 +12,7 @@ interface Props {
   lukkCallback: () => void;
   ventearsaker: KodeverkMedNavn<'Venteårsak'>[];
   ventearsak?: VenteArsakType;
-  frist: string | null;
+  frist?: string;
 }
 
 export const SettPaVentReadOnlyModal = ({ lukkCallback, ventearsaker, ventearsak, frist }: Props) => {

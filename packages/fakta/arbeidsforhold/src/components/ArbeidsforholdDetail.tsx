@@ -88,13 +88,7 @@ export const ArbeidsforholdDetail = ({ valgtArbeidsforhold }: Props) => {
       )}
       {skalFjerneArbeidsforhold && (
         <BodyShort size="small">
-          <FormattedMessage
-            id={
-              skalFjerneArbeidsforhold
-                ? 'ArbeidsforholdDetail.FjernArbeidsforholdet'
-                : 'ArbeidsforholdDetail.IMIkkeRelevant'
-            }
-          />
+          <FormattedMessage id="ArbeidsforholdDetail.FjernArbeidsforholdet" />
         </BodyShort>
       )}
       <div>

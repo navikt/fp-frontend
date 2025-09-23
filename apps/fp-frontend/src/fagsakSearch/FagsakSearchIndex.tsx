@@ -22,7 +22,7 @@ export const FagsakSearchIndex = () => {
   const navigate = useNavigate();
   const goToFagsak = (saksnummer?: string) => {
     if (saksnummer) {
-      navigate(pathToFagsak(saksnummer));
+      void navigate(pathToFagsak(saksnummer));
     }
   };
 

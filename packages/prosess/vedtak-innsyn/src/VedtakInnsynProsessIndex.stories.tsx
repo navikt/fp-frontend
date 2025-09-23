@@ -24,7 +24,6 @@ const defaultAksjonspunkter = [
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
     status: AksjonspunktStatus.OPPRETTET,
-    begrunnelse: null,
   },
 ] as Aksjonspunkt[];
 
@@ -42,10 +41,6 @@ const meta = {
         tittel: 'Dette er et dokument',
         tidspunkt: '2017-08-02T00:54:25.455',
         kommunikasjonsretning: Kommunikasjonsretning.INN,
-        gjelderFor: null,
-        behandlinger: null,
-        behandlingUuidList: null,
-        arbeidsgiverReferanse: null,
       },
     ],
   },

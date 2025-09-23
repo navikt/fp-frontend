@@ -6,45 +6,27 @@ export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
     fom: '2025-02-12',
     tom: '2025-03-04',
     uttakPeriodeType: UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-    utsettelseÅrsak: null,
-    overføringÅrsak: null,
-    oppholdÅrsak: null,
-    arbeidstidsprosent: null,
-    arbeidsforhold: null,
-    samtidigUttaksprosent: null,
+
     flerbarnsdager: false,
-    morsAktivitet: null,
+
     periodeKilde: FordelingPeriodeKilde.SØKNAD,
-    begrunnelse: null,
   },
   {
     fom: '2025-03-05',
     tom: '2025-06-17',
     uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
-    utsettelseÅrsak: null,
-    overføringÅrsak: null,
-    oppholdÅrsak: null,
-    arbeidstidsprosent: null,
-    arbeidsforhold: null,
-    samtidigUttaksprosent: null,
+
     flerbarnsdager: false,
-    morsAktivitet: null,
+
     periodeKilde: FordelingPeriodeKilde.SØKNAD,
-    begrunnelse: null,
   },
   {
     fom: '2025-06-18',
     tom: '2025-10-07',
     uttakPeriodeType: UttakPeriodeType.FELLESPERIODE,
-    utsettelseÅrsak: null,
-    overføringÅrsak: null,
-    oppholdÅrsak: null,
-    arbeidstidsprosent: null,
-    arbeidsforhold: null,
-    samtidigUttaksprosent: null,
+
     flerbarnsdager: false,
-    morsAktivitet: null,
+
     periodeKilde: FordelingPeriodeKilde.SØKNAD,
-    begrunnelse: null,
   },
 ];

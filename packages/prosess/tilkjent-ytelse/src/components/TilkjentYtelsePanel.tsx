@@ -10,7 +10,6 @@ import type {
   BeregningsresultatDagytelse,
   FamilieHendelse,
   Feriepengegrunnlag,
-  Kjønnkode,
   Personoversikt,
   Soknad,
 } from '@navikt/fp-types';
@@ -41,24 +40,22 @@ export const TilkjentYtelsePanel = ({
   // Utgått aksjonspunkt, viser kun begrunnelse hvis det er løst tidligere
   const vurderTilbaketrekkAPBegrunnelse = finnTilbaketrekkAksjonspunktBegrunnelse(aksjonspunkterForPanel);
 
-  const søknadMottattDato = søknad.søknadsfrist?.mottattDato ?? søknad.mottattDato;
+  const søknadMottattDato = søknad.søknadsfrist.mottattDato ?? søknad.mottattDato;
 
   return (
     <VStack gap="space-16">
       <Heading size="small" level="2">
         <FormattedMessage id="TilkjentYtelse.Title" />
       </Heading>
-      {beregningresultat && (
-        <TilkjentYtelse
-          beregningsresultatPeriode={beregningresultat.perioder}
-          søknadsdato={søknadMottattDato}
-          familieHendelse={familiehendelse}
-          hovedsøkerKjønnKode={personoversikt?.bruker ? (personoversikt.bruker.kjønn as Kjønnkode) : undefined}
-          alleKodeverk={alleKodeverk}
-          arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
-          fagsak={fagsak}
-        />
-      )}
+      <TilkjentYtelse
+        beregningsresultatPeriode={beregningresultat.perioder}
+        søknadsdato={søknadMottattDato}
+        familieHendelse={familiehendelse}
+        hovedsøkerKjønnKode={personoversikt.bruker.kjønn}
+        alleKodeverk={alleKodeverk}
+        arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
+        fagsak={fagsak}
+      />
       {feriepengegrunnlag && (
         <FeriepengerPanel
           feriepengegrunnlag={feriepengegrunnlag}

@@ -20,7 +20,7 @@ const meta = {
     const [args, setArgs] = useState(storyArgs);
 
     const søkInfotrygdVedtak = (params: { searchString: string }) => {
-      args.søkInfotrygdVedtak?.(params);
+      args.søkInfotrygdVedtak(params);
       setArgs(oldArgs => ({ ...oldArgs, isSuccess: true }));
       return Promise.resolve<InfotrygdVedtak | undefined>(args.infotrygdVedtak);
     };
@@ -137,9 +137,6 @@ export const Default: Story = {
                   arbeidsgiverOrgnr: '',
                 },
               ],
-              behandlingstema: null,
-              fødselsdatoBarn: null,
-              gradering: null,
             },
           ],
         },
@@ -167,9 +164,6 @@ export const Default: Story = {
               dekningsgrad: 100,
               fødselsdatoBarn: '2015-08-20',
               gradering: 50,
-              behandlingstema: null,
-              arbeidsforhold: null,
-              utbetalinger: null,
             },
             {
               identdato: '2015-12-18',
@@ -187,10 +181,6 @@ export const Default: Story = {
               },
               dekningsgrad: 100,
               fødselsdatoBarn: '2015-08-20',
-              behandlingstema: null,
-              arbeidsforhold: null,
-              gradering: null,
-              utbetalinger: null,
             },
             {
               identdato: '2016-01-07',
@@ -208,10 +198,6 @@ export const Default: Story = {
               },
               dekningsgrad: 100,
               fødselsdatoBarn: '2015-08-20',
-              behandlingstema: null,
-              arbeidsforhold: null,
-              gradering: null,
-              utbetalinger: null,
             },
           ],
         },

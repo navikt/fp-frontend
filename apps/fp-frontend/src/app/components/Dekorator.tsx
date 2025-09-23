@@ -54,7 +54,7 @@ export const Dekorator = ({
   const navigate = useNavigate();
   const visLos = (e: React.SyntheticEvent) => {
     if (e.type === 'click') {
-      navigate('/');
+      void navigate('/');
     }
     if (e.type === 'contextmenu') {
       window.open('/', '_newtab');
@@ -63,12 +63,12 @@ export const Dekorator = ({
   };
 
   const visJournalføringside = (e: React.SyntheticEvent) => {
-    navigate(JOURNALFØRING_PATH);
+    void navigate(JOURNALFØRING_PATH);
     e.preventDefault();
   };
 
   const visUtbetalingsdataSide = (e: React.SyntheticEvent) => {
-    navigate(UTBETALINGSDATA_PATH);
+    void navigate(UTBETALINGSDATA_PATH);
     e.preventDefault();
   };
 
@@ -154,6 +154,7 @@ const formaterFeilmeldinger = (
           const decoded = decodeHtmlEntity(feilmelding.message);
           addIfNotExists(feilmeldinger, {
             melding: intl.formatMessage({ id: 'Rest.ErrorMessage.General' }),
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
             tilleggsInfo: decoded ? parseErrorDetails(decoded) : undefined,
           });
         }
@@ -201,6 +202,7 @@ const formaterFeilmeldinger = (
 
 const parseErrorDetails = (details: string) => {
   try {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return JSON.parse(details);
   } catch {
     return 'Kunne ikke tolke feildetaljer';

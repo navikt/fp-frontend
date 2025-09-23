@@ -63,7 +63,7 @@ export const KlageVurderingRadioOptionsNfp = ({
               control={control}
               name="klageMedholdArsak"
               selectValues={medholdOptions}
-              className={readOnly ? styles.selectReadOnly : styles.select}
+              className={readOnly ? styles['selectReadOnly'] : styles['select']}
               label={intl.formatMessage({ id: 'Klage.ResolveKlage.Cause' })}
               validate={[required]}
             />
@@ -86,7 +86,7 @@ export const KlageVurderingRadioOptionsNfp = ({
         control={control}
         name="klageHjemmel"
         selectValues={hjemmelOptions}
-        className={readOnly ? styles.selectReadOnly : styles.select}
+        className={readOnly ? styles['selectReadOnly'] : styles['select']}
         label={intl.formatMessage({ id: 'Klage.ResolveKlage.Hjemmel' })}
         validate={[required]}
       />

@@ -85,8 +85,10 @@ export const TimeLineData = ({
           />
         </BodyShort>
         <HStack gap="space-4">
-          {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <CheckmarkIcon className={styles.godkjentImage} />}
-          {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <XMarkIcon className={styles.avslattImage} />}
+          {isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && (
+            <CheckmarkIcon className={styles['godkjentImage']} />
+          )}
+          {!isPeriodGodkjent(fastsattOpptjeningAktivitet.klasse) && <XMarkIcon className={styles['avslattImage']} />}
           <BodyShort size="small">
             <FormattedMessage id={periodStatus(fastsattOpptjeningAktivitet.klasse)} />
           </BodyShort>

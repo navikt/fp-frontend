@@ -72,7 +72,7 @@ export const TilretteleggingForArbeidsgiverFieldArray = ({ readOnly }: Props) =>
 
       {errors[TILRETTELEGGING_NAME_PREFIX]?.[TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME]?.root?.message && (
         <ErrorMessage>
-          {errors[TILRETTELEGGING_NAME_PREFIX]?.[TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME].root?.message}
+          {errors[TILRETTELEGGING_NAME_PREFIX][TILRETTELEGGING_FOR_ARBEIDSGIVER_FIELD_ARRAY_NAME].root.message}
         </ErrorMessage>
       )}
       <div>

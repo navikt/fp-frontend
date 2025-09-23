@@ -10,22 +10,22 @@ import { VisittkortSakIndex } from './VisittkortSakIndex';
 const fagsakPersonFar: Person = {
   navn: 'Espen Utvikler',
   fødselsdato: '1979-01-01',
-  dødsdato: null,
+
   fødselsnummer: '12345678910',
   kjønn: NavBrukerKjonn.MANN,
   aktørId: '234',
-  diskresjonskode: null,
+
   språkkode: 'NB',
 };
 
 const fagsakPersonMor: Person = {
   navn: 'Klara Ku',
   fødselsdato: '1980-01-01',
-  dødsdato: null,
+
   fødselsnummer: '65656578787',
   kjønn: NavBrukerKjonn.KVINNE,
   aktørId: 'test',
-  diskresjonskode: null,
+
   språkkode: 'NB',
 };
 
@@ -41,7 +41,6 @@ export const UtenAnnenPart: Story = {
   args: {
     erMor: false,
     bruker: fagsakPersonFar,
-    familiehendelse: null,
   },
 };
 
@@ -51,7 +50,6 @@ export const PersonopplysningerForBeggeParter: Story = {
     bruker: fagsakPersonFar,
     annenPart: fagsakPersonMor,
     lenkeTilAnnenPart: 'testlenke til annen part',
-    familiehendelse: null,
   },
 };
 
@@ -64,7 +62,6 @@ export const PersonopplysningerForBeggeParterMedLangtNavn: Story = {
       navn: 'Espen Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler Utvikler',
     },
     lenkeTilAnnenPart: 'testlenke til annen part',
-    familiehendelse: null,
   },
 };
 
@@ -74,7 +71,6 @@ export const MedDiskresjonskodeOgDødAnnenpart: Story = {
     bruker: { ...fagsakPersonFar, diskresjonskode: DiskresjonskodeType.KODE6 },
     annenPart: { ...fagsakPersonMor, dødsdato: '2024-02-01' },
     lenkeTilAnnenPart: 'testlenke til annen part',
-    familiehendelse: null,
   },
 };
 
@@ -82,9 +78,8 @@ export const ForAnnenPartDerAktørIdErUkjent: Story = {
   args: {
     erMor: true,
     bruker: fagsakPersonMor,
-    annenPart: { ...fagsakPersonFar, aktørId: null },
+    annenPart: { ...fagsakPersonFar, aktørId: undefined },
     lenkeTilAnnenPart: 'testlenke til annen part',
-    familiehendelse: null,
   },
 };
 
@@ -92,7 +87,6 @@ export const MedVergeOgBrukerUnder18: Story = {
   args: {
     harVergeIÅpenBehandling: true,
     bruker: { ...fagsakPersonMor, fødselsdato: dayjs().subtract(17, 'years').format(ISO_DATE_FORMAT) },
-    familiehendelse: null,
   },
 };
 

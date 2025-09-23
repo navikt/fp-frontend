@@ -37,9 +37,7 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
       return;
     }
 
-    if (valgtOppgave) {
-      reserverOppgave(valgtOppgave);
-    }
+    reserverOppgave(valgtOppgave);
   };
 
   return (
@@ -47,17 +45,17 @@ export const ReservertOppgaveRad = ({ oppgave, reserverOppgave, brukernavn }: Pr
       key={oppgave.id}
       onMouseDown={enableTableEvents ? (event: React.MouseEvent) => goToFagsak(event, oppgave) : undefined}
       onKeyDown={enableTableEvents ? (event: React.KeyboardEvent) => goToFagsak(event, oppgave) : undefined}
-      className={styles.isUnderBehandling}
+      className={styles['isUnderBehandling']}
     >
-      <Table.DataCell>{oppgave.navn ?? '<navn>'}</Table.DataCell>
+      <Table.DataCell>{oppgave.navn}</Table.DataCell>
       <Table.DataCell>
         <HStack align="center" ref={refCopyButton} wrap={false}>
           <BodyShort>{oppgave.saksnummer}</BodyShort>
           <Tooltip content={intl.formatMessage({ id: 'ReservertOppgaveRad.Saksnr' })}>
             <CopyButton
-              activeIcon={<CheckmarkIcon className={styles.image} aria-hidden />}
+              activeIcon={<CheckmarkIcon className={styles['image']} aria-hidden />}
               copyText={oppgave.saksnummer}
-              icon={<FilesIcon aria-hidden className={styles.image} />}
+              icon={<FilesIcon aria-hidden className={styles['image']} />}
             />
           </Tooltip>
         </HStack>
@@ -145,7 +143,7 @@ const NotatKnapp = ({ oppgave, brukernavn }: { oppgave: Oppgave; brukernavn: str
         ref={buttonRef}
         onClick={() => setOpenState(!openState)}
         aria-expanded={openState}
-        icon={<ChatElipsisIcon className={styles.image} aria-hidden />}
+        icon={<ChatElipsisIcon className={styles['image']} aria-hidden />}
         variant="tertiary-neutral"
       ></Button>
       <Popover open={openState} onClose={() => setOpenState(false)} anchorEl={buttonRef.current}>

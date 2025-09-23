@@ -125,7 +125,7 @@ export const ManglendeArbeidsforholdForm = ({
 
   return (
     <VStack gap="space-32">
-      <div className={styles.alertStripe}>
+      <div className={styles['alertStripe']}>
         <Alert variant="info">
           <FormattedMessage id="ManglendeOpplysningerForm.ErMottattMenIkkeReg" />
         </Alert>
@@ -139,7 +139,7 @@ export const ManglendeArbeidsforholdForm = ({
               <HStack gap="space-8">
                 <FormattedMessage id="ManglendeOpplysningerForm.SkalBrukeInntekstmelding" />
                 <QuestionmarkDiamondIcon
-                  className={styles.svg}
+                  className={styles['svg']}
                   ref={buttonRef}
                   onClick={toggleHjelpetekst}
                   title={intl.formatMessage({ id: 'ManglendeOpplysningerForm.AltHjelpetekst' })}
@@ -148,9 +148,9 @@ export const ManglendeArbeidsforholdForm = ({
                   open={openState}
                   onClose={toggleHjelpetekst}
                   anchorEl={buttonRef.current}
-                  className={styles.hjelpetekst}
+                  className={styles['hjelpetekst']}
                 >
-                  <Popover.Content className={styles.hjelpetekstInnhold}>
+                  <Popover.Content className={styles['hjelpetekstInnhold']}>
                     <BodyShort>
                       <FormattedMessage id="ManglendeOpplysningerForm.Hjelpetekst" />
                     </BodyShort>

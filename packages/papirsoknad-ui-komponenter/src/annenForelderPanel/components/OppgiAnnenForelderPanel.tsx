@@ -59,7 +59,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
         label={formatMessage({ id: 'Registrering.TheOtherParent.Fodselsnummer' })}
         parse={value => (value ? value.toString().replace(/\s/g, '') : value)}
         readOnly={readOnly}
-        className={styles.inputBredde}
+        className={styles['inputBredde']}
         validate={
           kanIkkeOppgiAnnenForelder
             ? []
@@ -108,7 +108,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                     label={formatMessage({ id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.Land' })}
                     selectValues={filtrerLandOgLagOptions(sorterteLand)}
                     validate={[required]}
-                    className={styles.inputBredde}
+                    className={styles['inputBredde']}
                     readOnly={readOnly}
                   />
 
@@ -119,7 +119,7 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                       id: 'Registrering.TheOtherParent.CannotSpecifyOtherParent.UtenlandsFodselsnummer',
                     })}
                     validate={[required]}
-                    className={styles.inputBredde}
+                    className={styles['inputBredde']}
                     readOnly={readOnly}
                   />
                 </>

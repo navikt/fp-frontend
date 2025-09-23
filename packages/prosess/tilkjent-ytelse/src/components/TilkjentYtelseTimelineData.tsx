@@ -192,6 +192,7 @@ const createVisningNavnForUttakArbeidstaker = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (!arbeidsgiverOpplysninger?.navn) {
     const opptjeningAktiviteter = alleKodeverk['OpptjeningAktivitetType'];
     return opptjeningAktiviteter.find(({ kode }) => kode === andel.arbeidsforholdType)?.navn ?? '';
@@ -229,7 +230,6 @@ const getGradering = (andel?: BeregningsresultatPeriodeAndel): ReactElement | nu
   if (andel === undefined) {
     return null;
   }
-  const stringId =
-    andel.uttak && andel.uttak.gradering === true ? 'TilkjentYtelse.PeriodeData.Ja' : 'TilkjentYtelse.PeriodeData.Nei';
+  const stringId = andel.uttak.gradering === true ? 'TilkjentYtelse.PeriodeData.Ja' : 'TilkjentYtelse.PeriodeData.Nei';
   return <FormattedMessage id={stringId} />;
 };

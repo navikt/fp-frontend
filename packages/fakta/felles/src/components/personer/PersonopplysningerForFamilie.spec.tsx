@@ -16,8 +16,6 @@ const adresse1 = {
   postNummer: '4123',
   poststed: 'Bobygda',
   land: 'Norge',
-  adresselinje2: null,
-  adresselinje3: null,
 } satisfies Personadresse;
 
 const adresse2 = {
@@ -28,8 +26,6 @@ const adresse2 = {
   postNummer: '0203',
   poststed: 'Bobygda',
   land: 'Norge',
-  adresselinje2: null,
-  adresselinje3: null,
 } satisfies Personadresse;
 
 const personoversikt: Personoversikt = {
@@ -39,11 +35,8 @@ const personoversikt: Personoversikt = {
     kjønn: KjønnkodeEnum.MANN,
     sivilstand: SivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
-    dødsdato: null,
+
     adresser: [adresse1, adresse2],
-    fnr: null,
-    diskresjonskode: null,
-    vn: null,
   },
   annenPart: {
     navn: 'Petra Utvikler',
@@ -51,24 +44,18 @@ const personoversikt: Personoversikt = {
     kjønn: KjønnkodeEnum.KVINNE,
     sivilstand: SivilstandType.SAMBOER,
     fødselsdato: '1989-01-01',
-    dødsdato: null,
+
     adresser: [adresse1, adresse2],
-    fnr: null,
-    diskresjonskode: null,
-    vn: null,
   },
   barn: [
     {
       navn: 'Tutta Utvikler',
       fødselsdato: '2023-01-01',
-      dødsdato: null,
+
       adresser: [adresse1],
       aktoerId: '3',
       kjønn: KjønnkodeEnum.KVINNE,
       sivilstand: SivilstandType.UGIFT,
-      fnr: null,
-      diskresjonskode: null,
-      vn: null,
     },
     {
       navn: 'Snuppa Utvikler',
@@ -78,9 +65,6 @@ const personoversikt: Personoversikt = {
       aktoerId: '4',
       kjønn: KjønnkodeEnum.KVINNE,
       sivilstand: SivilstandType.UGIFT,
-      fnr: null,
-      diskresjonskode: null,
-      vn: null,
     },
   ],
 };

@@ -71,6 +71,7 @@ type NyBehandlendeEnhet = {
 };
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
+
 type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp;
 
 export type AksjonspunktArgs = {

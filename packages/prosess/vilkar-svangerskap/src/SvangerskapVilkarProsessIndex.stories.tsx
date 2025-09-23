@@ -18,7 +18,10 @@ const meta = {
   component: SvangerskapVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    svangerskapspengerTilrettelegging: {} as FodselOgTilrettelegging,
+    svangerskapspengerTilrettelegging: {
+      arbeidsforholdListe: [],
+      saksbehandlet: false,
+    } satisfies FodselOgTilrettelegging,
   },
   render: args => <SvangerskapVilkarProsessIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof SvangerskapVilkarProsessIndex>>;
@@ -32,9 +35,12 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
+        toTrinnsBehandling: false,
+        aksjonspunktType: '-',
+        kanLoses: false,
+        erAktivt: false,
       },
-    ] as Aksjonspunkt[],
+    ],
     isReadOnly: false,
     status: VilkarUtfallType.IKKE_VURDERT,
   },
@@ -46,7 +52,6 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
         status: AksjonspunktStatus.OPPRETTET,
-        begrunnelse: null,
       },
     ] as Aksjonspunkt[],
     status: VilkarUtfallType.IKKE_VURDERT,
