@@ -9,7 +9,7 @@ import { PanelDataProvider } from '@navikt/fp-utils';
 
 import { alleKodeverk } from '../mocks/alleKodeverk';
 
-// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+ 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 export type PanelDataArgs = {
@@ -26,6 +26,7 @@ const promiseAction =
   () =>
   (...args: [AksjonspunktType]): Promise<AksjonspunktType> => {
     action('button-click')(...args);
+    // @ts-expect-error Johannes ser på denne - feil etter fiks av ft-types
     return Promise.resolve();
   };
 
@@ -116,6 +117,7 @@ export const withPanelData: DecoratorFunction<ReactRenderer> = (Story, context) 
       alleKodeverk={alleKodeverk}
       alleMerknaderFraBeslutter={alleMerknaderFraBeslutter ?? {}}
       isReadOnly={isReadOnly ?? false}
+      // @ts-expect-error Johannes ser på denne - feil etter fiks av ft-types
       submitCallback={submitCallback ?? promiseAction()}
       isSubmittable={isSubmittable ?? true}
     >

@@ -462,6 +462,7 @@ export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Aksjonspunkt
   | '6045'
   | '6016'
   | '6018'
+  | '6019'
   | '6017'
   | '6103'
   | '7001'

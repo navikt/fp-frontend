@@ -3,7 +3,7 @@ import { createContext, type ReactElement, useContext, useMemo } from 'react';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
-// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+ 
 type AksjonspunktType = FaktaAksjonspunkt | FaktaAksjonspunkt[] | ProsessAksjonspunkt | ProsessAksjonspunkt[];
 
 type Props<AP_TYPE extends AksjonspunktType> = {
@@ -33,6 +33,7 @@ export const PanelDataProvider = (
 };
 
 export const usePanelDataContext = <AP_TYPE extends AksjonspunktType>() => {
+  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
   const context = useContext<Props<AP_TYPE> | null>(PanelDataContext);
   if (!context) {
     throw new Error('PanelContext.Provider er ikke satt opp');

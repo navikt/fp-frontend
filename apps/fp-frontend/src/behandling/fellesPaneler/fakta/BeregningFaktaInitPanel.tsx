@@ -78,8 +78,9 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
   );
 };
 
-const Wrapper = (props: ComponentProps<typeof BeregningFaktaIndex>) => {
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
+const Wrapper = (props: Omit<ComponentProps<typeof BeregningFaktaIndex>, 'formData' | 'setFormData'>) => {
+  const { mellomlagretFormData, setMellomlagretFormData } =
+    useMellomlagretFormData<React.ComponentProps<typeof BeregningFaktaIndex>['formData']>();
   return <BeregningFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };
 
@@ -99,21 +100,18 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 };
 
 const lagModifisertCallback =
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
-    (aksjonspunkterSomSkalLagres: SubmitBeregningType) => {
-      const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
-        ? aksjonspunkterSomSkalLagres
-        : [aksjonspunkterSomSkalLagres];
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      const transformerteData = apListe.map(apData => ({
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-unsafe-argument
-        kode: mapBGKodeTilFpsakKode(apData.kode),
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        ...apData.grunnlag[0],
-      }));
-      return submitCallback(transformerteData);
-    };
+  (aksjonspunkterSomSkalLagres: SubmitBeregningType[]) => {
+    const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
+      ? aksjonspunkterSomSkalLagres
+      : [aksjonspunkterSomSkalLagres];
+
+    const transformerteData = apListe.map(apData => ({
+      kode: mapBGKodeTilFpsakKode(apData.kode),
+    }));
+    // @ts-expect-error -- gale typer
+    return submitCallback(transformerteData);
+  };
 
 const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
   const bgVilkar = vilkår.find(v => v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
@@ -146,5 +144,6 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgr
     ...beregningsgrunnlag,
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
+  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
   return [nyttBG];
 };

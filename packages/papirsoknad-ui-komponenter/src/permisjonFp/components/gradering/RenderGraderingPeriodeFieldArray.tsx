@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
-import { PeriodFieldArray, RhfCheckbox, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -82,10 +82,10 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
   }, []);
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
-      emptyPeriodTemplate={defaultGraderingPeriode}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
+      emptyTemplate={defaultGraderingPeriode}
+      addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       readOnly={readOnly}
       remove={remove}
       append={append}
@@ -155,25 +155,29 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
               validate={[required]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.skalGraderes`}
+                control={control}
+                label={<FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />}
+              />
+            </div>
 
-            <RhfCheckbox
-              name={`${getPrefix(index)}.skalGraderes`}
-              control={control}
-              label={<FormattedMessage id="Registrering.Permisjon.Gradering.SkalGraderes" />}
-            />
-
-            <RhfCheckbox
-              name={`${getPrefix(index)}.flerbarnsdager`}
-              control={control}
-              readOnly={readOnly}
-              label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
-            />
-
-            <RhfCheckbox
-              name={`${getPrefix(index)}.harSamtidigUttak`}
-              control={control}
-              label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
-            />
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.flerbarnsdager`}
+                control={control}
+                readOnly={readOnly}
+                label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
+              />
+            </div>
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.harSamtidigUttak`}
+                control={control}
+                label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
+              />
+            </div>
             {harSamtidigUttak && (
               <RhfTextField
                 name={`${getPrefix(index)}.samtidigUttaksprosent`}
@@ -191,7 +195,7 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
           </FieldArrayRow>
         );
       }}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };
 const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;

@@ -6,12 +6,7 @@ import { RhfDatepicker, RhfForm, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, hasValidInteger, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
-import {
-  type FaktaBegrunnelseFormValues,
-  FaktaBegrunnelseTextField,
-  FaktaSubmitButton,
-  isNotEqual,
-} from '@navikt/fp-fakta-felles';
+import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
 import type { SjekkTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -41,7 +36,7 @@ interface Props {
   fødsel: Fødsel;
 }
 
-export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, aksjonspunkt }: Props) => {
+export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunkt }: Props) => {
   const intl = useIntl();
 
   const { submitCallback, isSubmittable, alleMerknaderFraBeslutter, isReadOnly } =
@@ -71,10 +66,8 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, ak
       >
         <VStack gap="space-16">
           <HStack gap="space-16">
-            <Termindato
-              isReadOnly={isReadOnly}
-              isEdited={isNotEqual(søknad.termindato, gjeldende.termin?.termindato)}
-            />
+            <Termindato isReadOnly={isReadOnly} isRequired />
+
             <RhfDatepicker
               control={formMethods.control}
               name="utstedtdato"
@@ -84,9 +77,9 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, ak
               isReadOnly={isReadOnly}
               fromDate={minTerminbekreftelseDato().toDate()}
               toDate={maxTerminbekreftelseDato().toDate()}
-              isEdited={isNotEqual(søknad.utstedtdato, gjeldende.utstedtdato?.utstedtdato)}
               defaultMonth={new Date()}
             />
+
             <RhfTextField
               control={formMethods.control}
               name="antallBarn"
@@ -98,8 +91,8 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, ak
               }}
               validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
               readOnly={isReadOnly}
-              className={styles['bredde']}
-              isEdited={isNotEqual(søknad.antallBarn, gjeldende.antallBarn.antall)}
+              htmlSize={6}
+              className={styles['rightAlign']}
             />
           </HStack>
 
@@ -134,16 +127,16 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende, søknad }, ak
 
 const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt): FormValues => ({
   utstedtdato: gjeldende.utstedtdato?.utstedtdato,
-  termindato: gjeldende.termin?.termindato,
   antallBarn: gjeldende.antallBarn.antall,
+  ...Termindato.initialValues(gjeldende),
   ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
 });
 
 const transformValues = (values: FormValues): SjekkTerminbekreftelseAp => ({
   kode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
   utstedtdato: values.utstedtdato!,
-  termindato: values.termindato!,
   antallBarn: values.antallBarn!,
+  ...Termindato.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
 

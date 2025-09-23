@@ -1,0 +1,6 @@
+export type SærligGrunn =
+  | 'GRAD_AV_UAKTSOMHET'
+  | 'HELT_ELLER_DELVIS_NAVS_FEIL'
+  | 'STOERRELSE_BELOEP'
+  | 'TID_FRA_UTBETALING'
+  | 'ANNET';

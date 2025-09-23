@@ -1,8 +1,5 @@
-.bredde {
-  height: fit-content;
-  width: fit-content;
+.rightAlign {
   input {
     text-align: right;
-    width: 90px;
   }
 }

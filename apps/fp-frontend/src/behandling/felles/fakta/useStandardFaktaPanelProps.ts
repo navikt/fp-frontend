@@ -20,7 +20,7 @@ export type StandardFaktaPanelProps = Readonly<{
   isReadOnly: boolean;
   isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+
   submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
 }>;
 
@@ -75,12 +75,12 @@ const getBekreftAksjonspunktFaktaCallback =
     lagreOverstyrteAksjonspunkter: (params: OverstyrteAksjonspunktArgs) => Promise<Behandling>,
     overstyringApCodes?: string[],
   ) =>
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
   (aksjonspunkter: FaktaAksjonspunkt | FaktaAksjonspunkt[]): Promise<void> => {
     const apListe = Array.isArray(aksjonspunkter) ? aksjonspunkter : [aksjonspunkter];
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
     const model = apListe.map(ap => ({
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
+      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       '@type': ap.kode,
       ...ap,
     }));
@@ -95,7 +95,8 @@ const getBekreftAksjonspunktFaktaCallback =
       if (model.length === 0) {
         throw Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument,@typescript-eslint/no-unsafe-member-access
+      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       if (overstyringApCodes.includes(model[0].kode)) {
         return lagreOverstyrteAksjonspunkter({
           ...params,

@@ -4,7 +4,7 @@ export {
   isUttakAksjonspunkt,
   isFaktaUttakAksjonspunkt,
 } from './src/aksjonspunktCodes';
-export type { OverstyringAksjonspunkter } from './src/aksjonspunktCodes';
+export type { OverstyringAksjonspunkter, VilkårOverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
 export { AksjonspunktStatus, erAksjonspunktÅpent } from './src/aksjonspunktStatus';
 export { AksjonspunktType } from './src/aksjonspunktType';
@@ -105,3 +105,8 @@ export { MedlemskapDekningType } from './src/medlemskapDekningType';
 export { MedlemskapType } from './src/medlemskapType';
 export { VedtakbrevType } from './src/vedtakbrevType';
 export { OppgaveBehandlingStatus } from './src/oppgaveBehandlingStatus';
+export type { Aktsomhet } from './src/aktsomhet';
+export type { HendelseType } from './src/hendelseType';
+export type { HendelseUnderType } from './src/hendelseUnderType';
+export type { SærligGrunn } from './src/særligGrunn';
+export type { VilkårResultat } from './src/vilkårResultat';

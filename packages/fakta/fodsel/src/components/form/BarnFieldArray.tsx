@@ -9,9 +9,13 @@ import {
 } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { PlusCircleIcon, TrashIcon } from '@navikt/aksel-icons';
-import { Button, Detail, ErrorMessage, HelpText, HStack, Table, VStack } from '@navikt/ds-react';
-import { ReadOnlyField, RhfDatepicker } from '@navikt/ft-form-hooks';
+import { Detail, ErrorMessage, HelpText, HStack, Table, VStack } from '@navikt/ds-react';
+import {
+  ReadOnlyField,
+  RhfDatepicker,
+  RhfFieldArrayAppendButton,
+  RhfFieldArrayRemoveButton,
+} from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-form-validators';
 import dayjs from 'dayjs';
 
@@ -147,15 +151,12 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
                             <FormattedMessage id="BarnFieldArray.HelpText" />
                           </HelpText>
                         )}
-                        {index !== 0 && field.kanOverstyres && (
-                          <Button
-                            size="medium"
-                            type="button"
-                            variant="tertiary-neutral"
-                            icon={<TrashIcon />}
-                            onClick={() => remove(index)}
-                          />
-                        )}
+                        <RhfFieldArrayRemoveButton
+                          index={index}
+                          remove={remove}
+                          size="small"
+                          skjul={!field.kanOverstyres || isReadOnly}
+                        />
                       </>
                     )}
                   </HStack>
@@ -166,19 +167,16 @@ export const BarnFieldArray = ({ isReadOnly }: Props) => {
         </Table.Body>
       </Table>
       {!isReadOnly && errors.barn && <ErrorMessage>{errors.barn.message}</ErrorMessage>}
-      {!isReadOnly && fields.length < 9 && (
-        <div>
-          <Button
-            onClick={() => append(defaultAntallBarn)}
-            type="button"
-            variant="tertiary-neutral"
-            icon={<PlusCircleIcon aria-hidden />}
-            size="small"
-          >
-            <FormattedMessage id="BarnFieldArray.LeggTilBarn" />
-          </Button>
-        </div>
-      )}
+      <div>
+        <RhfFieldArrayAppendButton
+          append={append}
+          emptyTemplate={defaultAntallBarn}
+          size="small"
+          skjul={isReadOnly || fields.length >= 9}
+        >
+          <FormattedMessage id="BarnFieldArray.LeggTilBarn" />
+        </RhfFieldArrayAppendButton>
+      </div>
     </VStack>
   );
 };
@@ -198,7 +196,7 @@ BarnFieldArray.initialValues = ({ barn, antallBarn }: FødselGjeldende): BarnFor
 BarnFieldArray.transformValues = (
   values: BarnFormValues,
   erBarnFødt: boolean,
-): { barn?: { fødselsdato: string; dødsdato: string | undefined }[] } =>
+): { barn: { fødselsdato: string; dødsdato: string | undefined }[] | null } =>
   erBarnFødt
     ? {
         barn: values.barn.map(({ fødselsdato, dødsdato }) => ({
@@ -206,7 +204,7 @@ BarnFieldArray.transformValues = (
           dødsdato: dødsdato || undefined,
         })),
       }
-    : {};
+    : { barn: null };
 
 const lagBarn = (antallBarnFraSoknad: number): FieldArrayRow[] => {
   const antallBarn = antallBarnFraSoknad > 0 ? antallBarnFraSoknad : 1;

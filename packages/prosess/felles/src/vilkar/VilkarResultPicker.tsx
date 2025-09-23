@@ -45,7 +45,7 @@ export const VilkarResultPicker = ({
   validatorsForRadioOptions,
 }: Props) => {
   const { getValues, watch, control } = useFormContext<FormValues>();
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- [JOHANNES] vurder senere
+   
   const erVilkårOk = watch('erVilkarOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
@@ -91,7 +91,7 @@ export const VilkarResultPicker = ({
           ))}
           readOnly={isReadOnly}
           className={styles['selectBredde']}
-          //eslint-disable-next-line @typescript-eslint/no-unsafe-argument -- [JOHANNES] vurder senere
+           
           validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkårOk, getValues('avslagskode')))]}
         />
       )}

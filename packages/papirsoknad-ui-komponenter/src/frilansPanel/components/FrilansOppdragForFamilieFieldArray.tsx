@@ -2,7 +2,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { PeriodFieldArray, RhfDatepicker, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfFieldArray, RhfTextField } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, maxLength } from '@navikt/ft-form-validators';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
@@ -70,21 +70,23 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
   const sorterteFomDatoer = sortFomDates(perioder);
 
   return (
-    <PeriodFieldArray
-      bodyText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
+    <RhfFieldArray
+      addButtonText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
       fields={fields}
       readOnly={readOnly}
       append={append}
       remove={remove}
+      emptyTemplate={{ fomDato: '', tomDato: '', oppdragsgiver: '' }}
     >
-      {(field, index, getRemoveButton) => {
+      {(field, index, removeButton) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}`;
         return (
-          <HStack key={field.id} gap="space-16" paddingBlock="2" align="end">
+          <HStack key={field.id} gap="space-8" align="end">
             <RhfDatepicker
               name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.fomDato`}
               control={control}
               label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeFom' })}
+              hideLabel={index > 0}
               validate={[
                 hasValidDate,
                 getValiderAtFomDatoErFørFørstePeriode(getValues, namePart1, sorterteFomDatoer, intl),
@@ -100,6 +102,7 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
               name={`${FRILANS_NAME_PREFIX}.oppdragPerioder.${index}.tomDato`}
               control={control}
               label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.periodeTom' })}
+              hideLabel={index > 0}
               validate={[
                 hasValidDate,
                 () => {
@@ -115,11 +118,12 @@ export const FrilansOppdragForFamilieFieldArray = ({ readOnly }: Props) => {
               control={control}
               validate={[maxLength50]}
               label={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.Oppdragsgiver' })}
+              hideLabel={index > 0}
             />
-            {getRemoveButton && <div>{getRemoveButton()}</div>}
+            <div>{removeButton}</div>
           </HStack>
         );
       }}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };

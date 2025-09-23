@@ -24,7 +24,8 @@ describe('AdopsjonFaktaIndex', () => {
 
     expect(await screen.findByText('Barnet er over 15 år ved omsorgsovertakelsen')).toBeInTheDocument();
 
-    expect(screen.getByText('Dato for barnets ankomst til Norge (ved utenlandsadopsjon)')).toBeInTheDocument();
+    expect(screen.getByText('Barnets ankomstdato til Norge')).toBeInTheDocument();
+    expect(screen.getByText('ved utenlandsadopsjon')).toBeInTheDocument();
 
     expect(screen.getByText('Antall barn som fyller vilkåret')).toBeInTheDocument();
 
@@ -59,7 +60,7 @@ describe('AdopsjonFaktaIndex', () => {
 
     expect(screen.queryByText('Ektefelles/samboers barn')).not.toBeInTheDocument();
     expect(screen.getByText('Mann adopterer')).toBeInTheDocument();
-    await userEvent.click(screen.getByText('Adopterer alene'));
+    await userEvent.click(screen.getByText('Ja, adopterer alene'));
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
     await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
@@ -91,13 +92,14 @@ describe('AdopsjonFaktaIndex', () => {
     const utils = render(<AksjonspunktForOmAdopsjonGjelderEktefellesBarn submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen')).toBeInTheDocument();
-    expect(screen.getAllByText('Vurder om det er ektefelles/samboers barn som adopteres')).toHaveLength(2);
+    expect(screen.getByText('Vurder om det er ektefelles/samboers barn som adopteres')).toBeInTheDocument();
 
     expect(screen.getByText('Adopsjonsopplysninger fra søknad')).toBeInTheDocument();
 
     expect(screen.queryByText('Mann adopterer')).not.toBeInTheDocument();
-    expect(screen.getAllByText('Ektefelles/samboers barn')).toHaveLength(2);
-    await userEvent.click(screen.getByText('Ikke ektefelles/samboers barn'));
+    expect(screen.getByText('Ektefelles/samboers barn')).toBeInTheDocument();
+    expect(screen.getByText('Er det ektefelles/samboers barn som adopteres?')).toBeInTheDocument();
+    await userEvent.click(screen.getByText('Nei, det er ikke ektefelles/samboers barn'));
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
     await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
@@ -129,6 +131,6 @@ describe('AdopsjonFaktaIndex', () => {
     render(<IkkeVisBarnetsAnkomstDatoForEngangsstønad submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen')).toBeInTheDocument();
-    expect(screen.queryByText('Dato for barnets ankomst til Norge (ved utenlandsadopsjon)')).not.toBeInTheDocument();
+    expect(screen.queryByText('Barnets ankomstdato til Norge')).not.toBeInTheDocument();
   });
 });

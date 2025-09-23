@@ -58,9 +58,11 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
           perioderForeldelse={perioderForeldelse}
           kodeverkSamlingFpTilbake={tilbakekrevingKodeverk}
           beregnBelop={(data: BeregnBeløpParams) => beregnBeløp(data)}
+          // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
           relasjonsRolleType={fagsak.relasjonsRolleType}
           relasjonsRolleTypeKodeverk={standardPanelProps.alleKodeverk['RelasjonsRolleType']}
           {...standardPanelProps}
+          behandlingUuid={behandling.uuid}
         />
       ) : (
         <LoadingPanel />

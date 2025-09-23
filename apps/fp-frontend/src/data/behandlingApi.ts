@@ -71,7 +71,7 @@ type NyBehandlendeEnhet = {
 };
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
-// eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+ 
 type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp;
 
 export type AksjonspunktArgs = {
@@ -80,7 +80,7 @@ export type AksjonspunktArgs = {
   saksnummer: string;
   bekreftedeAksjonspunktDtoer: ({
     '@type': string;
-    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+     
   } & AksjonspunktType)[];
 };
 
@@ -90,7 +90,7 @@ export type OverstyrteAksjonspunktArgs = {
   saksnummer: string;
   overstyrteAksjonspunktDtoer: ({
     '@type': string;
-    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+     
   } & AksjonspunktType)[];
 };
 
@@ -310,11 +310,11 @@ const getBeregningsresultatDagytelseOptions =
       staleTime: Infinity,
     });
 
-const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: Behandling, isEnabled: boolean) => {
+const getFaktaFødselOptions = (links: ApiLink[]) => (behandling: Behandling) => {
   return queryOptions({
     queryKey: [BehandlingRel.FAKTA_FØDSEL, behandling.uuid, behandling.versjon],
     queryFn: () => kyExtended.get(getUrlFromRel('FAKTA_FØDSEL', links)).json<Fødsel>(),
-    enabled: harLenke(behandling, 'FAKTA_FØDSEL') && isEnabled,
+    enabled: harLenke(behandling, 'FAKTA_FØDSEL'),
     staleTime: Infinity,
   });
 };

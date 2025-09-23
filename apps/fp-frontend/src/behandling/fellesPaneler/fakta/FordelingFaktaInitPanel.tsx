@@ -66,8 +66,11 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
   );
 };
 
-const Wrapper = (props: ComponentProps<typeof FordelBeregningsgrunnlagFaktaIndex>) => {
-  const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData();
+const Wrapper = (
+  props: Omit<ComponentProps<typeof FordelBeregningsgrunnlagFaktaIndex>, 'formData' | 'setFormData'>,
+) => {
+  const { mellomlagretFormData, setMellomlagretFormData } =
+    useMellomlagretFormData<React.ComponentProps<typeof FordelBeregningsgrunnlagFaktaIndex>['formData']>();
   return (
     <FordelBeregningsgrunnlagFaktaIndex
       {...props}
@@ -89,14 +92,14 @@ const mapBGKodeTilFpsakKode = (bgKode: string): string => {
 };
 
 const lagModifisertCallback =
-  // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+   
   (submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>) =>
     (
       aksjonspunkterSomSkalLagres:
         | VurderRefusjonBeregningsgrunnlagAP
-        // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+         
         | FordelBeregningsgrunnlagAP
-        // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents -- [JOHANNES] krever fiks i ft-saksbehandling-frontend
+         
         | VurderNyttInntektsforholdAP,
     ) => {
       const apListe = Array.isArray(aksjonspunkterSomSkalLagres)
@@ -143,5 +146,6 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgr
     beregningsgrunnlagId: '1',
     vilkårsperiodeFom: beregningsgrunnlag.skjaeringstidspunktBeregning,
   };
+  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
   return [nyttBG];
 };

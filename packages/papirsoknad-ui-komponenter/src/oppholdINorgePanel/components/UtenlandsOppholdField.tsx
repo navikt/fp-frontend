@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -104,22 +104,23 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
   const land = countrySelectValues(countryCodes);
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
       titleText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.AngiOpphold' })}
-      bodyText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Add' })}
-      emptyPeriodTemplate={defaultUtenlandsOpphold}
+      addButtonText={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Add' })}
+      emptyTemplate={defaultUtenlandsOpphold}
       readOnly={readOnly}
       remove={remove}
       append={append}
     >
-      {(field, index, getRemoveButton) => (
+      {(field, index, removeButton) => (
         <React.Fragment key={field.id}>
-          <HStack gap="space-16" paddingBlock="2">
+          <HStack gap="space-16" paddingBlock="2" align="end">
             <RhfSelect
               name={`${name}.${index}.land`}
               control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.Country' })}
+              hideLabel={index > 0}
               selectValues={land}
               readOnly={readOnly}
               validate={[required]}
@@ -129,6 +130,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               name={`${name}.${index}.periodeFom`}
               control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeFom' })}
+              hideLabel={index > 0}
               isReadOnly={readOnly}
               validate={[
                 required,
@@ -150,6 +152,7 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               name={`${name}.${index}.periodeTom`}
               control={control}
               label={intl.formatMessage({ id: 'Registrering.RegistreringOpphold.periodeTom' })}
+              hideLabel={index > 0}
               isReadOnly={readOnly}
               validate={[
                 required,
@@ -166,10 +169,10 @@ export const UtenlandsOppholdField = ({ erTidligereOpphold = false, mottattDato,
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            {getRemoveButton && <div>{getRemoveButton()}</div>}
+            <div>{removeButton}</div>
           </HStack>
         </React.Fragment>
       )}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };

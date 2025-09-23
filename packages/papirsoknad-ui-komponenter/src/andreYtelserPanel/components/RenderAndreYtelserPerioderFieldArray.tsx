@@ -2,9 +2,8 @@ import { useEffect } from 'react';
 import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { TrashIcon } from '@navikt/aksel-icons';
-import { Button, HStack } from '@navikt/ds-react';
-import { PeriodFieldArray, RhfDatepicker } from '@navikt/ft-form-hooks';
+import { HStack } from '@navikt/ds-react';
+import { RhfDatepicker, RhfFieldArray } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME } from '../constants';
@@ -34,21 +33,23 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
   }, []);
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
-      bodyText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
+      addButtonText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
+      emptyTemplate={{ periodeFom: '', periodeTom: '' }}
       readOnly={readOnly}
       append={append}
       remove={remove}
     >
-      {(field, index) => {
+      {(field, index, removeButton) => {
         const fieldNamePrefix = `${name}.${index}` as const;
         return (
-          <HStack key={field.id} gap="space-8">
+          <HStack key={field.id} gap="space-8" align="end">
             <RhfDatepicker
               name={`${fieldNamePrefix}.periodeFom`}
               control={control}
-              label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' }) : ''}
+              label={intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeFom' })}
+              hideLabel={index > 0}
               validate={[
                 required,
                 hasValidDate,
@@ -63,7 +64,8 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
             <RhfDatepicker
               name={`${name}.${index}.periodeTom`}
               control={control}
-              label={index === 0 ? intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' }) : ''}
+              label={intl.formatMessage({ id: 'Registrering.AndreYtelser.periodeTom' })}
+              hideLabel={index > 0}
               validate={[
                 required,
                 hasValidDate,
@@ -74,20 +76,10 @@ export const RenderAndreYtelserPerioderFieldArray = ({ readOnly, name }: Props) 
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            {!readOnly && index > 0 && (
-              <div>
-                <Button
-                  size="small"
-                  type="button"
-                  variant="tertiary-neutral"
-                  icon={<TrashIcon />}
-                  onClick={() => remove(index)}
-                />
-              </div>
-            )}
+            <div>{removeButton}</div>
           </HStack>
         );
       }}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };

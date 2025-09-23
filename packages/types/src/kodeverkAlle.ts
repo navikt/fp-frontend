@@ -22,6 +22,7 @@ import {
   GraderingAvslagÅrsak,
   HistorikkAktorEnum,
   InnsynResultatType,
+  Inntektskategori,
   KlageAvvistÅrsak,
   KlageHjemmel,
   KlageMedholdÅrsak,
@@ -120,6 +121,7 @@ type KodeverkEnumMap = {
   VilkårType: VilkarType;
   VirksomhetType: NaringsvirksomhetType;
   VurderÅrsak: VurderÅrsak;
+  Inntektskategori: Inntektskategori;
 };
 
 export type KodeverkType = keyof KodeverkEnumMap;

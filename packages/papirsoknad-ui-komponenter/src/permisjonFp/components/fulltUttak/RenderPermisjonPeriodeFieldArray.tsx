@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Alert } from '@navikt/ds-react';
-import { PeriodFieldArray, RhfCheckbox, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfCheckbox, RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -87,11 +87,15 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
   }, []);
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       readOnly={readOnly}
       fields={fields}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
-      emptyPeriodTemplate={{}}
+      addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
+      emptyTemplate={{
+        periodeType: '',
+        periodeFom: '',
+        periodeTom: '',
+      }}
       append={append}
       remove={remove}
     >
@@ -157,18 +161,22 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
               />
             )}
 
-            <RhfCheckbox
-              name={`${getPrefix(index)}.flerbarnsdager`}
-              control={control}
-              readOnly={readOnly}
-              label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
-            />
-            <RhfCheckbox
-              name={`${getPrefix(index)}.harSamtidigUttak`}
-              control={control}
-              readOnly={readOnly}
-              label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
-            />
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.flerbarnsdager`}
+                control={control}
+                readOnly={readOnly}
+                label={<FormattedMessage id="Registrering.Permisjon.Flerbarnsdager" />}
+              />
+            </div>
+            <div>
+              <RhfCheckbox
+                name={`${getPrefix(index)}.harSamtidigUttak`}
+                control={control}
+                readOnly={readOnly}
+                label={<FormattedMessage id="Registrering.Permisjon.HarSamtidigUttak" />}
+              />
+            </div>
 
             {periode.harSamtidigUttak && (
               <RhfTextField
@@ -188,7 +196,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
           </FieldArrayRow>
         );
       }}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };
 
