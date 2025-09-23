@@ -62,6 +62,11 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
 
+  const ektefellesBarnAP = aksjonspunkterForPanel.find(ap => ap.definisjon === OM_ADOPSJON_GJELDER_EKTEFELLES_BARN);
+  const mannAdoptererAleneAP = aksjonspunkterForPanel.find(
+    ap => ap.definisjon === OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+  );
+
   const formMethods = useForm<FormValues>({
     defaultValues: mellomlagretFormData ?? buildInitialValues(adopsjon, aksjonspunkterForPanel),
   });
@@ -70,10 +75,6 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
 
   const onSubmit = (values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel));
 
-  const ektefellesBarnAP = aksjonspunkterForPanel.find(ap => ap.definisjon === OM_ADOPSJON_GJELDER_EKTEFELLES_BARN);
-  const mannAdoptererAleneAP = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-  );
   return (
     <VStack gap="space-16">
       <AksjonspunktHelpTextHTML>
@@ -135,42 +136,34 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
   );
 };
 
-const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, allAksjonspunkter: Aksjonspunkt[]): FormValues => {
-  const aksjonspunkter = allAksjonspunkter.filter(ap => adopsjonAksjonspunkter.some(kode => kode === ap.definisjon));
-
-  let mannAdoptererAleneValues = {};
-  if (hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter)) {
-    mannAdoptererAleneValues = MannAdoptererAleneFaktaForm.buildInitialValues(adopsjon);
-  }
-  let omAdopsjonGjelderEktefellesBarn = {};
-  if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter)) {
-    omAdopsjonGjelderEktefellesBarn = EktefelleFaktaForm.buildInitialValues(adopsjon);
-  }
+const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterForPanel: Aksjonspunkt[]): FormValues => {
+  const ektefellesBarnAP = hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
+  const mannAdoptererAleneAP = hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
 
   return {
     ...DokumentasjonFaktaForm.initialValues(adopsjon),
-    ...omAdopsjonGjelderEktefellesBarn,
-    ...mannAdoptererAleneValues,
-    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkter[0]),
+    ...(ektefellesBarnAP ? EktefelleFaktaForm.buildInitialValues(adopsjon) : {}),
+    ...(mannAdoptererAleneAP ? MannAdoptererAleneFaktaForm.buildInitialValues(adopsjon) : {}),
+    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel[0]),
   };
 };
 
-const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): AksjonspunktData[] => {
-  const aksjonspunkterArray = new Array<AksjonspunktData>();
-  aksjonspunkterArray.push(DokumentasjonFaktaForm.transformValues(values));
+const transformValues = (values: FormValues, aksjonspunkterForPanel: Aksjonspunkt[]): AksjonspunktData[] => {
+  const ektefellesBarnAP = hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
+  const mannAdoptererAleneAP = hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
 
-  if (hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkter) && values.ektefellesBarn !== undefined) {
-    aksjonspunkterArray.push(EktefelleFaktaForm.transformValues(values.ektefellesBarn));
-  }
-  if (
-    hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkter) &&
-    values.mannAdoptererAlene !== undefined
-  ) {
-    aksjonspunkterArray.push(MannAdoptererAleneFaktaForm.transformValues(values.mannAdoptererAlene));
-  }
+  const aksjonspunkterArray: AksjonspunktData[] = [
+    DokumentasjonFaktaForm.transformValues(values),
+    ...(ektefellesBarnAP && values.ektefellesBarn !== undefined
+      ? [EktefelleFaktaForm.transformValues(values.ektefellesBarn)]
+      : []),
+    ...(mannAdoptererAleneAP && values.mannAdoptererAlene !== undefined
+      ? [MannAdoptererAleneFaktaForm.transformValues(values.mannAdoptererAlene)]
+      : []),
+  ];
 
   return aksjonspunkterArray.map(ap => ({
     ...ap,
-    begrunnelse: values['begrunnelse'],
+    begrunnelse: values.begrunnelse,
   }));
 };

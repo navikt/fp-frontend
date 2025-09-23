@@ -131,6 +131,6 @@ describe('AdopsjonFaktaIndex', () => {
     render(<IkkeVisBarnetsAnkomstDatoForEngangsstønad submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen')).toBeInTheDocument();
-    expect(screen.queryByText('Dato for barnets ankomst til Norge (ved utenlandsadopsjon)')).not.toBeInTheDocument();
+    expect(screen.queryByText('Barnets ankomstdato til Norge')).not.toBeInTheDocument();
   });
 });
