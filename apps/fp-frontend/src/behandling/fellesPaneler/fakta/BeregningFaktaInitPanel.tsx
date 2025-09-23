@@ -106,10 +106,13 @@ const lagModifisertCallback =
       ? aksjonspunkterSomSkalLagres
       : [aksjonspunkterSomSkalLagres];
 
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     const transformerteData = apListe.map(apData => ({
       kode: mapBGKodeTilFpsakKode(apData.kode),
+      // @ts-expect-error -- gale typer
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      ...apData.grunnlag[0],
     }));
-    // @ts-expect-error -- gale typer
     return submitCallback(transformerteData);
   };
 
