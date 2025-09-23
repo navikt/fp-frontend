@@ -62,9 +62,13 @@ export const DokumentasjonFaktaForm = ({
           name="omsorgsovertakelseDato"
           control={control}
           label={
-            erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
-              ? intl.formatMessage({ id: 'DokumentasjonFaktaForm.Stebarnsadopsjon' })
-              : intl.formatMessage({ id: 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato' })
+            <FormattedMessage
+              id={
+                erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
+                  ? 'DokumentasjonFaktaForm.Stebarnsadopsjon'
+                  : 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato'
+              }
+            />
           }
           size="small"
           validate={[required, hasValidDate]}
@@ -75,10 +79,8 @@ export const DokumentasjonFaktaForm = ({
           <RhfDatepicker
             name="barnetsAnkomstTilNorgeDato"
             control={control}
-            label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Label' })}
-            description={intl.formatMessage({
-              id: 'DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Description',
-            })}
+            label={<FormattedMessage id="DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Label" />}
+            description={<FormattedMessage id="DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Description" />}
             size="small"
             validate={[hasValidDate]}
             isReadOnly={readOnly}
@@ -95,9 +97,7 @@ export const DokumentasjonFaktaForm = ({
             <RhfDatepicker
               name={`fodselsdatoer.${id}`}
               control={control}
-              label={intl.formatMessage({
-                id: 'DokumentasjonFaktaForm.Fodselsdato',
-              })}
+              label={<FormattedMessage id="DokumentasjonFaktaForm.Fodselsdato" />}
               hideLabel={i > 0}
               size="small"
               validate={[required, hasValidDate]}
@@ -117,7 +117,7 @@ export const DokumentasjonFaktaForm = ({
         ))}
         <ReadOnlyField
           size="small"
-          label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret' })}
+          label={<FormattedMessage id="DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret" />}
           value={findAntallBarnUnder15(fodselsdatoer, omsorgsovertakelseDato)}
         />
       </VStack>
