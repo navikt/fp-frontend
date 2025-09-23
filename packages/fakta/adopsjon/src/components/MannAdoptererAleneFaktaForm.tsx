@@ -2,7 +2,7 @@ import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { Radio, VStack } from '@navikt/ds-react';
-import { RhfRadioGroup } from '@navikt/ft-form-hooks';
+import { ReadOnlyField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
@@ -46,23 +46,26 @@ export const MannAdoptererAleneFaktaForm = ({
       label={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
     >
-      <VStack gap="space-8" width="100%">
+      <VStack gap="space-16">
+        <ReadOnlyField
+          size="small"
+          label={<FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" />}
+          value={alleKodeverk['FarSøkerType'].find(type => type.kode === farSokerType)?.navn}
+        />
+
         <RhfRadioGroup
           name="mannAdoptererAlene"
           control={control}
-          label={<FormattedMessage id="MannAdoptererAleneFaktaForm.Opplysninger" />}
-          description={
-            farSokerType ? alleKodeverk['FarSøkerType'].find(type => type.kode === farSokerType)?.navn : undefined
-          }
+          label={<FormattedMessage id="MannAdoptererAleneFaktaForm.APSpørsmål" />}
           isEdited={hasValue(adopsjon.mannAdoptererAlene)}
           validate={[required]}
           isReadOnly={readOnly}
         >
           <Radio value={true}>
-            <FormattedMessage id="MannAdoptererAleneFaktaForm.AdoptererAlene" />
+            <FormattedMessage id="MannAdoptererAleneFaktaForm.Ja" />
           </Radio>
           <Radio value={false}>
-            <FormattedMessage id="MannAdoptererAleneFaktaForm.AdoptererIkkeAlene" />
+            <FormattedMessage id="MannAdoptererAleneFaktaForm.Nei" />
           </Radio>
         </RhfRadioGroup>
       </VStack>

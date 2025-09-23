@@ -1,5 +1,5 @@
 import { useFormContext } from 'react-hook-form';
-import { useIntl } from 'react-intl';
+import { FormattedMessage, useIntl } from 'react-intl';
 
 import { ExclamationmarkTriangleFillIcon } from '@navikt/aksel-icons';
 import { HStack, Label, VStack } from '@navikt/ds-react';
@@ -89,7 +89,7 @@ export const DokumentasjonFaktaForm = ({
           <HStack gap="space-16" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
             {fødselsdatoer.length > 1 && (
               <Label size="small" className={i === 0 ? styles.topMarginFirstRow : styles.topMargin}>
-                Barn {i + 1}
+                <FormattedMessage id="DokumentasjonFaktaForm.BarnNr" values={{ nummer: i + 1 }} />
               </Label>
             )}
             <RhfDatepicker

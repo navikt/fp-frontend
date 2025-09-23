@@ -38,16 +38,16 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
       <RhfRadioGroup
         name="ektefellesBarn"
         control={control}
-        label={<FormattedMessage id="EktefelleFaktaForm.EktefellesBarn" />}
+        label={<FormattedMessage id="EktefelleFaktaForm.APSpørsmål" />}
         validate={[required]}
         isReadOnly={readOnly}
         isEdited={hasValue(adopsjon.ektefellesBarn)}
       >
-        <Radio value={false}>
-          <FormattedMessage id="EktefelleFaktaForm.ErIkkeValg" />
-        </Radio>
         <Radio value={true}>
-          <FormattedMessage id="EktefelleFaktaForm.ErValg" />
+          <FormattedMessage id="EktefelleFaktaForm.Ja" />
+        </Radio>
+        <Radio value={false}>
+          <FormattedMessage id="EktefelleFaktaForm.Nei" />
         </Radio>
       </RhfRadioGroup>
     </FaktaKort>
