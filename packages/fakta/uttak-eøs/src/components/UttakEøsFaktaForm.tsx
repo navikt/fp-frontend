@@ -25,7 +25,6 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
   const intl = useIntl();
 
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isSubmittable, isReadOnly, submitCallback } =
-    // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
     usePanelDataContext<BekreftAnnenpartsUttakEøsAp>();
   annenForelderUttakEøs?.sort((a, b) => dayjs(a.fom).diff(dayjs(b.fom)));
 

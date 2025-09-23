@@ -45,7 +45,6 @@ export const SimuleringPanel = ({
   arbeidsgiverOpplysningerPerId,
 }: Props) => {
   const { aksjonspunkterForPanel, submitCallback, isReadOnly, harÅpentAksjonspunkt, fagsak, behandling } =
-    // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
     usePanelDataContext<SimuleringAksjonspunkt[]>();
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();

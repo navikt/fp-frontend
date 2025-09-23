@@ -107,7 +107,6 @@ const lagModifisertCallback =
       : [aksjonspunkterSomSkalLagres];
     const transformerteData = apListe.map(apData => ({
       kode: mapBGKodeTilFpsakKode(apData.kode),
-      // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
       ...apData.grunnlag[0],
     }));
     return submitCallback(transformerteData);
