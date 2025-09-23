@@ -47,7 +47,7 @@ export const PersonArbeidsforholdTable = ({
       </Table.Header>
       <Table.Body>
         {alleArbeidsforhold.map(arbeidsforhold => {
-          const stillingsprosent = `${arbeidsforhold.stillingsprosent.toFixed(2)} %`;
+          const stillingsprosent = `${arbeidsforhold.stillingsprosent?.toFixed(2)} %`;
           const mottattDato = inntektsmeldinger.find(im => erMatch(arbeidsforhold, im))?.motattDato;
           return (
             <Table.ExpandableRow

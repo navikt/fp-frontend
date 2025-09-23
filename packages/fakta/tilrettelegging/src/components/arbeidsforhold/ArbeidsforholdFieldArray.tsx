@@ -48,7 +48,7 @@ const finnSvpTagTekst = (skalBrukes: boolean, visInfoAlert: boolean) => {
 
 const finnStillingsprosent = (aoiArbeidsforhold: AoIArbeidsforhold[], tilretteleggingBehovFom: string) => {
   const aoiListe = aoiArbeidsforhold.filter(a => erInnenforIntervall(tilretteleggingBehovFom, a.fom, a.tom));
-  return aoiListe.reduce((sum, aoi) => sum + aoi.stillingsprosent, 0);
+  return aoiListe.reduce((sum, aoi) => sum + (aoi.stillingsprosent ?? 0), 0);
 };
 
 interface Props {
@@ -140,7 +140,7 @@ export const ArbeidsforholdFieldArray = ({
                   arbeidsforholdIndex={index}
                   readOnly={readOnly}
                   visInfoAlert={arbeidsforhold.skalBrukes && visInfoAlert}
-                  stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold}
+                  stillingsprosentArbeidsforhold={stillingsprosentArbeidsforhold ?? 0}
                 />
               </ExpansionCard.Content>
             </ExpansionCard>
