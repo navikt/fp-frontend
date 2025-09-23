@@ -4,20 +4,23 @@
   "AdopsjonInfoPanel.VurderOmMannAdoptererAlene": "Vurder om mann adopterer alene",
 
   "DokumentasjonFaktaForm.ApplicationInformation": "Adopsjonsopplysninger fra søknad",
-  "DokumentasjonFaktaForm.Omsorgsovertakelsesdato": "Dato for omsorgsovertakelse",
-  "DokumentasjonFaktaForm.Stebarnsadopsjon": "Dato for stebarnsadopsjon",
-  "DokumentasjonFaktaForm.Fodselsdato": "Fødselsdato for barn {number}",
+  "DokumentasjonFaktaForm.Omsorgsovertakelsesdato": "Omsorgsovertakelsesdato",
+  "DokumentasjonFaktaForm.Stebarnsadopsjon": "Stebarnsadopsjonsdato",
+  "DokumentasjonFaktaForm.BarnNr": "Barn {nummer}",
+  "DokumentasjonFaktaForm.Fodselsdato": "Fødselsdato",
   "DokumentasjonFaktaForm.AntallBarnSomFyllerVilkaret": "Antall barn som fyller vilkåret",
   "DokumentasjonFaktaForm.BarnErOver15Ar": "Barnet er over 15 år ved omsorgsovertakelsen",
-  "DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge": "Dato for barnets ankomst til Norge (ved utenlandsadopsjon)",
+  "DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Label": "Barnets ankomstdato til Norge",
+  "DokumentasjonFaktaForm.DatoForBarnetsAnkomstTilNorge.Description": "ved utenlandsadopsjon",
 
   "MannAdoptererAleneFaktaForm.ApplicationInformation": "Mann adopterer",
   "MannAdoptererAleneFaktaForm.Opplysninger": "Opplysninger oppgitt i søknaden",
-  "MannAdoptererAleneFaktaForm.AdoptererIkkeAlene": "Adopterer ikke alene",
-  "MannAdoptererAleneFaktaForm.AdoptererAlene": "Adopterer alene",
+  "MannAdoptererAleneFaktaForm.APSpørsmål": "Vurder om mannen adopterer alene",
+  "MannAdoptererAleneFaktaForm.Ja": "Ja, adopterer alene",
+  "MannAdoptererAleneFaktaForm.Nei": "Nei, adopterer ikke alene",
 
   "EktefelleFaktaForm.ApplicationInformation": "Ektefelles/samboers barn",
-  "EktefelleFaktaForm.EktefellesBarn": "Vurder om det er ektefelles/samboers barn som adopteres",
-  "EktefelleFaktaForm.ErIkkeValg": "Ikke ektefelles/samboers barn",
-  "EktefelleFaktaForm.ErValg": "Ektefelles/samboers barn"
+  "EktefelleFaktaForm.APSpørsmål": "Er det ektefelles/samboers barn som adopteres?",
+  "EktefelleFaktaForm.Ja": "Ja, det er ektefelles/samboers barn",
+  "EktefelleFaktaForm.Nei": "Nei, det er ikke ektefelles/samboers barn"
 }

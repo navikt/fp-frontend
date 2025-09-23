@@ -19,7 +19,7 @@ describe('InntektsgivendeArbeidPapirsoknadIndex', () => {
     expect(await screen.findByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
     expect(screen.getByText(/Vedtaksløsningen foretar oppslag av norske arbeidsforhold /)).toBeInTheDocument();
 
-    await userEvent.click(screen.getByLabelText('Legg til utenlandsk arbeidsforhold'));
+    await userEvent.click(screen.getByRole('button', { name: 'Legg til utenlandsk arbeidsforhold' }));
 
     const arbeidsgiverInput = screen.getByLabelText('Arbeidsgiver');
     await userEvent.type(arbeidsgiverInput, 'test-arbeidsgiver');
@@ -61,7 +61,7 @@ describe('InntektsgivendeArbeidPapirsoknadIndex', () => {
     expect(await screen.findByText('Inntektsgivende arbeid i utlandet')).toBeInTheDocument();
     expect(screen.getByText(/Vedtaksløsningen foretar oppslag av norske arbeidsforhold /)).toBeInTheDocument();
 
-    await userEvent.click(screen.getByLabelText('Legg til utenlandsk arbeidsforhold'));
+    await userEvent.click(screen.getByRole('button', { name: 'Legg til utenlandsk arbeidsforhold' }));
 
     const arbeidsgiverInput = screen.getByLabelText('Arbeidsgiver');
     await userEvent.clear(arbeidsgiverInput);

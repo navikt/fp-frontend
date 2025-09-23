@@ -1,3 +1,4 @@
+import React from 'react';
 import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Box, Heading, HStack, Label, VStack } from '@navikt/ds-react';
@@ -125,15 +126,10 @@ export const VurderMedlemsskapLegacyAksjonspunktVisning = ({ legacyManuellBehand
           <FormattedMessage id="MedlemskapLegacy.TidligereVurdering" />
         </Heading>
         {legacyManuellBehandling.perioder.map((p, index) => (
-          <>
-            <MedlemskapPeriodeVisning
-              key={p.vurderingsdato}
-              medlemsperiode={p}
-              alleKodeverk={alleKodeverk}
-              skalViseDato={skalViseDato}
-            />
+          <React.Fragment key={p.vurderingsdato}>
+            <MedlemskapPeriodeVisning medlemsperiode={p} alleKodeverk={alleKodeverk} skalViseDato={skalViseDato} />
             {index + 1 !== legacyManuellBehandling.perioder.length && <AvsnittSkiller dividerParagraf />}
-          </>
+          </React.Fragment>
         ))}
       </VStack>
     </Box.New>

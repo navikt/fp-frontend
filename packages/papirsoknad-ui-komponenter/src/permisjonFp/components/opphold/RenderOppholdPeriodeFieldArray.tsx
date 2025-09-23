@@ -2,7 +2,7 @@ import { type ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -83,10 +83,10 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
   }, []);
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
-      emptyPeriodTemplate={defaultOppholdPeriode}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
+      emptyTemplate={defaultOppholdPeriode}
+      addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       readOnly={readOnly}
       append={append}
       remove={remove}
@@ -138,6 +138,6 @@ export const RenderOppholdPeriodeFieldArray = ({ oppholdsReasons, readOnly }: Pr
           </div>
         </FieldArrayRow>
       )}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };

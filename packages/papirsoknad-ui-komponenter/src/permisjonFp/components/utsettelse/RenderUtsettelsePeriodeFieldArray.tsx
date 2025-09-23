@@ -2,7 +2,7 @@ import { type ReactElement, useEffect } from 'react';
 import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
-import { PeriodFieldArray, RhfDatepicker, RhfSelect } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfFieldArray, RhfSelect } from '@navikt/ft-form-hooks';
 import {
   dateAfterOrEqual,
   dateBeforeOrEqual,
@@ -97,10 +97,10 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
   const triggerValidationOnChange = () => (isSubmitted ? trigger() : undefined);
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
-      emptyPeriodTemplate={defaultUtsettelsePeriode}
-      bodyText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
+      emptyTemplate={defaultUtsettelsePeriode}
+      addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       readOnly={readOnly}
       append={append}
       remove={remove}
@@ -171,6 +171,6 @@ export const RenderUtsettelsePeriodeFieldArray = ({ utsettelseReasons, utsettels
           />
         </FieldArrayRow>
       )}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };

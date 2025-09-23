@@ -3,7 +3,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form';
 import { useIntl } from 'react-intl';
 
 import { Box } from '@navikt/ds-react';
-import { PeriodFieldArray, RhfDatepicker, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { maxValue, required } from '@navikt/ft-form-validators';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
@@ -43,10 +43,10 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
 
   return (
     <Box.New background="brand-blue-moderateA" padding="3" style={{ borderLeft: '4px solid var(--a-lightblue-700)' }}>
-      <PeriodFieldArray
+      <RhfFieldArray
         fields={fields}
-        emptyPeriodTemplate={defaultTilrettelegging}
-        bodyText={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov' })}
+        emptyTemplate={defaultTilrettelegging}
+        addButtonText={intl.formatMessage({ id: 'BehovForTilrettteleggingFieldArray.LeggTilTilretteleggingsbehov' })}
         readOnly={readOnly}
         append={append}
         remove={remove}
@@ -90,7 +90,7 @@ export const BehovForTilretteleggingFieldArray = ({ readOnly, name }: Props) => 
             />
           </FieldArrayRow>
         )}
-      </PeriodFieldArray>
+      </RhfFieldArray>
     </Box.New>
   );
 };

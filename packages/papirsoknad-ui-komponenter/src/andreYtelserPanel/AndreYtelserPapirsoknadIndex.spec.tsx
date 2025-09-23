@@ -65,11 +65,10 @@ describe('AndreYtelserPapirsoknadIndex', () => {
     expect(await screen.findByText('Andre inntektskilder')).toBeInTheDocument();
 
     await userEvent.click(screen.getByLabelText('Militær eller siviltjeneste'));
-
-    await userEvent.click(screen.getByLabelText('Legg til periode'));
-
     expect(screen.getByText('F.o.m.')).toBeInTheDocument();
     expect(screen.getByText('T.o.m.')).toBeInTheDocument();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Legg til periode' }));
 
     const datoInputs = await screen.findAllByRole('textbox');
     expect(datoInputs).toHaveLength(4);
