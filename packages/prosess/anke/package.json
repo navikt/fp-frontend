@@ -22,7 +22,7 @@
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
-    "@navikt/ft-utils": "3.8.7",
+    "@navikt/ft-utils": "3.8.8",
     "dayjs": "1.11.18",
     "react": "19.1.1",
     "react-intl": "7.1.11"

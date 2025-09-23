@@ -1,12 +1,13 @@
 import React from 'react';
+import type { UseFieldArrayRemove } from 'react-hook-form';
 
-import { TrashIcon } from '@navikt/aksel-icons';
-import { Button, HStack } from '@navikt/ds-react';
+import { HStack } from '@navikt/ds-react';
+import { RhfFieldArrayRemoveButton } from '@navikt/ft-form-hooks';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
 interface Props {
   children: React.ReactNode;
-  remove: (index: number) => void;
+  remove: UseFieldArrayRemove;
   index: number;
   readOnly: boolean;
 }
@@ -16,12 +17,13 @@ export const FieldArrayRow = ({ children, remove, readOnly, index }: Props) => {
     <>
       {index > 0 && <AvsnittSkiller spaceUnder spaceAbove />}
       <HStack wrap={false} justify="space-between">
-        <HStack wrap gap="space-16">
+        <HStack wrap gap="space-8">
           {children}
         </HStack>
-        {!readOnly && index > 0 && (
-          <Button type="button" variant="tertiary-neutral" icon={<TrashIcon />} onClick={() => remove(index)} />
-        )}
+
+        <div>
+          <RhfFieldArrayRemoveButton skjul={readOnly} remove={remove} index={index} />
+        </div>
       </HStack>
     </>
   );

@@ -2,7 +2,7 @@ import { useFieldArray, useFormContext, type UseFormGetValues } from 'react-hook
 import { useIntl } from 'react-intl';
 
 import { HStack } from '@navikt/ds-react';
-import { PeriodFieldArray, RhfDatepicker } from '@navikt/ft-form-hooks';
+import { RhfDatepicker, RhfFieldArray } from '@navikt/ft-form-hooks';
 import { dateAfterOrEqual, dateBeforeOrEqual, hasValidDate, required } from '@navikt/ft-form-validators';
 
 import { FRILANS_NAME_PREFIX } from '../constants';
@@ -38,21 +38,23 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
   });
 
   return (
-    <PeriodFieldArray
+    <RhfFieldArray
       fields={fields}
-      bodyText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
+      addButtonText={intl.formatMessage({ id: 'Registrering.FrilansOppdrag.FieldArray.NyPeriode' })}
+      emptyTemplate={{ periodeFom: '', periodeTom: '' }}
       readOnly={readOnly}
       remove={remove}
       append={append}
     >
-      {(field, index, getRemoveButton) => {
+      {(field, index, removeButton) => {
         const namePart1 = `${FRILANS_NAME_PREFIX}.perioder.${index}`;
         return (
-          <HStack key={field.id} gap="space-16" paddingBlock="2">
+          <HStack key={field.id} gap="space-8" align="end">
             <RhfDatepicker
               name={`${FRILANS_NAME_PREFIX}.perioder.${index}.periodeFom`}
               control={control}
-              label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' }) : ''}
+              label={intl.formatMessage({ id: 'Registrering.Frilans.periodeFom' })}
+              hideLabel={index > 0}
               validate={[
                 required,
                 hasValidDate,
@@ -67,7 +69,8 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
             <RhfDatepicker
               name={`${FRILANS_NAME_PREFIX}.perioder.${index}.periodeTom`}
               control={control}
-              label={index === 0 ? intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' }) : ''}
+              label={intl.formatMessage({ id: 'Registrering.Frilans.periodeTom' })}
+              hideLabel={index > 0}
               validate={[
                 required,
                 hasValidDate,
@@ -79,11 +82,11 @@ export const FrilansPerioderFieldArray = ({ readOnly }: Props) => {
               ]}
               onChange={() => (isSubmitted ? trigger() : undefined)}
             />
-            {getRemoveButton && <div>{getRemoveButton()}</div>}
+            <div>{removeButton}</div>
           </HStack>
         );
       }}
-    </PeriodFieldArray>
+    </RhfFieldArray>
   );
 };
 
