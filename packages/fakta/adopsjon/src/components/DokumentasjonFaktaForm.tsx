@@ -62,13 +62,11 @@ export const DokumentasjonFaktaForm = ({
           name="omsorgsovertakelseDato"
           control={control}
           label={
-            <FormattedMessage
-              id={
-                erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt
-                  ? 'DokumentasjonFaktaForm.Stebarnsadopsjon'
-                  : 'DokumentasjonFaktaForm.Omsorgsovertakelsesdato'
-              }
-            />
+            erForeldrepengerFagsak && hasEktefellesBarnAksjonspunkt ? (
+              <FormattedMessage id="DokumentasjonFaktaForm.Stebarnsadopsjon" />
+            ) : (
+              <FormattedMessage id="DokumentasjonFaktaForm.Omsorgsovertakelsesdato" />
+            )
           }
           size="small"
           validate={[required, hasValidDate]}
