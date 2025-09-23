@@ -23,13 +23,7 @@ import { DokumentasjonFaktaForm, type FormValues as DokFormValues } from './Doku
 import { EktefelleFaktaForm, type FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
 import { type FormValues as MannAdoptererFormValues, MannAdoptererAleneFaktaForm } from './MannAdoptererAleneFaktaForm';
 
-const { ADOPSJONSDOKUMENTAJON, OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } =
-  AksjonspunktKode;
-const adopsjonAksjonspunkter = [
-  OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-  ADOPSJONSDOKUMENTAJON,
-  OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-];
+const { OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, OM_ADOPSJON_GJELDER_EKTEFELLES_BARN } = AksjonspunktKode;
 
 type FormValues = EktefelleFormValues & DokFormValues & MannAdoptererFormValues & FaktaBegrunnelseFormValues;
 
