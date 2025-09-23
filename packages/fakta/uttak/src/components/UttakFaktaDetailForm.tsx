@@ -84,7 +84,7 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
   arbeidsforhold: values.arbeidsgiverId
     ? {
         arbeidsgiverReferanse:
-          values.arbeidsgiverId.split('-')[0] === 'null' ? undefined : values.arbeidsgiverId.split('-')[0],
+          values.arbeidsgiverId.split('-')[0] === 'undefined' ? undefined : values.arbeidsgiverId.split('-')[0],
         arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
       }
     : undefined,
