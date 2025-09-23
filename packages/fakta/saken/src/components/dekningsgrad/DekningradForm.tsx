@@ -34,8 +34,8 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
   const { submitCallback, fagsak, isReadOnly } = usePanelDataContext<OverstyringDekningsgradAp>();
 
   const dekningsgrad =
-    søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad ??
-    søknad.oppgittFordeling.dekningsgrader.søker.dekningsgrad ??
+    søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad ??
+    søknad.oppgittFordeling?.dekningsgrader.søker.dekningsgrad ??
     undefined;
 
   const defaultValues = {
@@ -146,13 +146,13 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
               <Radio value={80} size="small">
                 {intl.formatMessage(
                   { id: 'DekningsgradForm.80' },
-                  { erSatt: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad === 80 },
+                  { erSatt: søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad === 80 },
                 )}
               </Radio>
               <Radio value={100} size="small">
                 {intl.formatMessage(
                   { id: 'DekningsgradForm.100' },
-                  { erSatt: søknad.oppgittFordeling.dekningsgrader.avklartDekningsgrad === 100 },
+                  { erSatt: søknad.oppgittFordeling?.dekningsgrader.avklartDekningsgrad === 100 },
                 )}
               </Radio>
             </HStack>

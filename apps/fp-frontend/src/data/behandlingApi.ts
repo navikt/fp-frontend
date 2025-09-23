@@ -71,7 +71,7 @@ type NyBehandlendeEnhet = {
 };
 
 //TODO (TOR) Bør dela denne i to. Ein eigen for overstyringsaksjonspunkt
- 
+
 type AksjonspunktType = FaktaAksjonspunkt | ProsessAksjonspunkt | AvklartRisikoklassifiseringAp;
 
 export type AksjonspunktArgs = {
@@ -80,7 +80,6 @@ export type AksjonspunktArgs = {
   saksnummer: string;
   bekreftedeAksjonspunktDtoer: ({
     '@type': string;
-     
   } & AksjonspunktType)[];
 };
 
@@ -90,7 +89,6 @@ export type OverstyrteAksjonspunktArgs = {
   saksnummer: string;
   overstyrteAksjonspunktDtoer: ({
     '@type': string;
-     
   } & AksjonspunktType)[];
 };
 
