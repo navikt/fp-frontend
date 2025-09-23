@@ -72,8 +72,9 @@ const meta = {
   component: AdopsjonFaktaIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
+    isReadOnly: false,
     soknad,
-    adopsjon: adopsjon,
+    adopsjon,
     isForeldrepengerFagsak: true,
   },
   render: args => <AdopsjonFaktaIndex {...args} />,
