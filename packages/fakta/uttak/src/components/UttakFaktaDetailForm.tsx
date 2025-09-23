@@ -59,7 +59,7 @@ const lagDefaultVerdier = (
   const arsakstype = utledÅrsakstype(valgtPeriode);
 
   const aRef =
-    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse !== 'null'
+    valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse !== 'undefined'
       ? valgtPeriode.arbeidsforhold?.arbeidsgiverReferanse
       : undefined;
   const aOpplysninger = aRef ? arbeidsgiverOpplysningerPerId[aRef] : undefined;
