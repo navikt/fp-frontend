@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-argument -- [JOHANNES] vent på typet form */
+/* eslint-disable @typescript-eslint/no-unsafe-argument -- [JOHANNES] vent på typet form */
 
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
@@ -14,6 +14,11 @@ import { useDebounce } from '../useDebounce';
 
 import styles from './sorteringVelger.module.css';
 
+export type FormValues = {
+  fra?: string;
+  til?: string;
+};
+
 interface Props {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
@@ -22,13 +27,12 @@ interface Props {
 export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
 
-  // TODO (TOR) Manglar type
-  const { watch, trigger, control } = useFormContext();
+  const { watch, trigger, control } = useFormContext<FormValues>();
   const fraVerdi = watch('fra');
   const tilVerdi = watch('til');
 
   const { mutate: lagreSakslisteSorteringTidsintervallDager } = useMutation({
-    mutationFn: (valuesToStore: { fra: number; til: number }) =>
+    mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined }) =>
       lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
     onSuccess: () => {
       void queryClient.invalidateQueries({
@@ -43,12 +47,12 @@ export const BelopSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet }: Pro
     },
   });
 
-  const lagreFra = (nyFraVerdi: number) =>
+  const lagreFra = (nyFraVerdi: string) =>
     lagreSakslisteSorteringTidsintervallDager({
       fra: nyFraVerdi,
       til: tilVerdi,
     });
-  const lagreTil = (nyTilVerdi: number) =>
+  const lagreTil = (nyTilVerdi: string) =>
     lagreSakslisteSorteringTidsintervallDager({
       fra: fraVerdi,
       til: nyTilVerdi,

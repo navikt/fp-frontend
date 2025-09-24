@@ -5,8 +5,14 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
+
 import { lagreSakslisteFagsakYtelseType, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
+
+export type FormValues = {
+  [key in FagsakYtelseType]?: boolean;
+};
 
 interface Props {
   valgtSakslisteId: number;
@@ -16,8 +22,7 @@ interface Props {
 export const FagsakYtelseTypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
 
-  // TODO (TOR) Manglar type
-  const { control } = useFormContext();
+  const { control } = useFormContext<FormValues>();
 
   const { mutate: lagreFagsakYtelseType } = useMutation({
     mutationFn: (values: { sakslisteId: number; avdelingEnhet: string; fagsakYtelseType: string; checked: boolean }) =>

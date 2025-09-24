@@ -6,10 +6,16 @@ import { RhfCheckbox, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
+import type { AndreKriterierType } from '@navikt/fp-kodeverk';
+
 import { lagreSakslisteAndreKriterier, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
 import styles from './andreKriterierVelger.module.css';
+
+export type FormValues = { [key in AndreKriterierType]?: boolean } & {
+  [K in AndreKriterierType as `${K}_inkluder`]?: boolean;
+};
 
 interface Props {
   valgtSakslisteId: number;
@@ -18,7 +24,7 @@ interface Props {
 
 export const AndreKriterierVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
-  const { setValue, watch, control } = useFormContext();
+  const { setValue, watch, control } = useFormContext<FormValues>();
 
   const values = watch();
 
