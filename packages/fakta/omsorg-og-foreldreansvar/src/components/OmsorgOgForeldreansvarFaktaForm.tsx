@@ -1,27 +1,26 @@
-import { type ReactElement } from 'react';
 import { useFormContext } from 'react-hook-form';
-import { FormattedMessage, useIntl } from 'react-intl';
+import { type IntlShape, useIntl } from 'react-intl';
 
-import { BodyShort, HGrid, Label, VStack } from '@navikt/ds-react';
-import { RhfSelect } from '@navikt/ft-form-hooks';
+import { HGrid, Radio, VStack } from '@navikt/ds-react';
+import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
-import { EditedIcon, FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import type {
   AdopsjonFamilieHendelse,
   Aksjonspunkt,
-  AlleKodeverk,
-  InntektArbeidYtelse,
   KodeverkMedNavn,
   Personoversikt,
+  RelatertTilgrensedYtelse,
   Soknad,
 } from '@navikt/fp-types';
 import type {
   AvklarFaktaForForeldreansvarAksjonspunktAp,
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
 import { BarnPanel } from './BarnPanel';
@@ -29,48 +28,29 @@ import { ForeldrePanel } from './ForeldrePanel';
 import { OmsorgsovertakelseFaktaPanel } from './OmsorgsovertakelseFaktaPanel';
 import { RettighetFaktaPanel } from './RettighetFaktaPanel';
 
-import styles from './omsorgOgForeldreansvarFaktaForm.module.css';
-
-const getDescriptionText = (vilkarCode?: string): ReactElement => {
-  if (vilkarCode === VilkarType.OMSORGSVILKARET) {
-    return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.HelpTextOmsorgTredjeLedd" />;
-  }
-  if (vilkarCode === VilkarType.FORELDREANSVARSVILKARET_2_LEDD) {
-    return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.HelpTextForeldreAndreLedd" />;
-  }
-  if (vilkarCode === VilkarType.FORELDREANSVARSVILKARET_4_LEDD) {
-    return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.HelpTextForeldreFjerdeLedd" />;
-  }
-  return <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.ChooseVilkarToSeeDescription" />;
-};
-
 interface Props {
   soknad: Soknad;
   adopsjon: AdopsjonFamilieHendelse;
   readOnly: boolean;
   vilkarTypes: KodeverkMedNavn<'OmsorgsovertakelseVilkårType'>[];
   erAksjonspunktForeldreansvar: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   personoversikt: Personoversikt;
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
 }
 
-/**
- * OmsorgOgForeldreansvarFaktaForm
- *
- * Setter opp aksjonspunktet for avklaring av fakta for omsorgs og foreldreansvarsvilkåret.
- */
 export const OmsorgOgForeldreansvarFaktaForm = ({
   readOnly,
   vilkarTypes,
   soknad,
   erAksjonspunktForeldreansvar,
-  alleMerknaderFraBeslutter,
   personoversikt,
   adopsjon,
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
 }: Props) => {
   const intl = useIntl();
 
   const { watch, control } = useFormContext<OmsorgOgForeldreansvarFormValues>();
+  const { alleMerknaderFraBeslutter } = usePanelDataContext();
 
   const vilkarType = watch('vilkarType');
 
@@ -80,64 +60,55 @@ export const OmsorgOgForeldreansvarFaktaForm = ({
         <OmsorgsovertakelseFaktaPanel
           readOnly={readOnly}
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
           adopsjon={adopsjon}
         />
-        {!erAksjonspunktForeldreansvar && <RettighetFaktaPanel alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />}
+
+        {!erAksjonspunktForeldreansvar && (
+          <RettighetFaktaPanel
+            farSøkerType={soknad.farSokerType}
+            innvilgetRelatertTilgrensendeYtelserForAnnenForelder={innvilgetRelatertTilgrensendeYtelserForAnnenForelder}
+          />
+        )}
       </HGrid>
       <HGrid gap="space-20" columns="repeat(auto-fit, minmax(16rem, 1fr))">
-        <BarnPanel soknad={soknad} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
-        <ForeldrePanel personoversikt={personoversikt} alleMerknaderFraBeslutter={alleMerknaderFraBeslutter} />
+        <BarnPanel søknad={soknad} />
+        <ForeldrePanel personoversikt={personoversikt} />
       </HGrid>
+
       {!erAksjonspunktForeldreansvar && (
-        <FaktaGruppe
-          title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
+        <FaktaKort
+          label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.VelgVilkaarSomSkalAnvendes' })}
           merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
         >
           <VStack gap="space-16">
-            {!readOnly && (
-              <RhfSelect
-                name="vilkarType"
-                control={control}
-                validate={[required]}
-                hideLabel
-                label=""
-                selectValues={vilkarTypes.map(d => (
-                  <option key={d.kode} value={d.kode}>
-                    {d.navn}
-                  </option>
-                ))}
-                className={styles['breddeSelect']}
-                readOnly={readOnly}
-                disabled={readOnly}
-              />
-            )}
-            {readOnly && vilkarType && (
-              <div className={styles['vilkarTypeReadOnly']}>
-                <Label size="small" as="span">
-                  {vilkarTypes.find(d => d.kode === vilkarType)?.navn}
-                </Label>
-                {hasValue(adopsjon.omsorgsovertakelseVilkårType) && <EditedIcon />}
-              </div>
-            )}
-            <BodyShort size="small">{getDescriptionText(vilkarType)}</BodyShort>
+            <RhfRadioGroup
+              name="vilkarType"
+              control={control}
+              validate={[required]}
+              hideLegend
+              isReadOnly={readOnly}
+              disabled={readOnly}
+              isEdited={hasValue(adopsjon.omsorgsovertakelseVilkårType)}
+            >
+              {vilkarTypes.map(d => (
+                <Radio size="medium" key={d.kode} value={d.kode} description={getDescriptionText(vilkarType, intl)}>
+                  {d.navn}
+                </Radio>
+              ))}
+            </RhfRadioGroup>
           </VStack>
-        </FaktaGruppe>
+        </FaktaKort>
       )}
     </VStack>
   );
 };
 
 OmsorgOgForeldreansvarFaktaForm.buildInitialValues = (
-  soknad: Soknad,
   adopsjon: AdopsjonFamilieHendelse,
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: InntektArbeidYtelse['innvilgetRelatertTilgrensendeYtelserForAnnenForelder'],
-  alleKodeverk: AlleKodeverk,
 ): OmsorgOgForeldreansvarFormValues => ({
   vilkarType: adopsjon.omsorgsovertakelseVilkårType,
   ...OmsorgsovertakelseFaktaPanel.buildInitialValues(adopsjon),
-  ...RettighetFaktaPanel.buildInitialValues(soknad, innvilgetRelatertTilgrensendeYtelserForAnnenForelder, alleKodeverk),
 });
 
 OmsorgOgForeldreansvarFaktaForm.transformValues = (
@@ -155,3 +126,16 @@ OmsorgOgForeldreansvarFaktaForm.transformValues = (
         vilkarType: values.vilkarType,
         kode: AksjonspunktKode.OMSORGSOVERTAKELSE,
       } as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp);
+
+const getDescriptionText = (vilkarCode: string | undefined, intl: IntlShape) => {
+  if (vilkarCode === VilkarType.OMSORGSVILKARET) {
+    return intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.HelpTextOmsorgTredjeLedd' });
+  }
+  if (vilkarCode === VilkarType.FORELDREANSVARSVILKARET_2_LEDD) {
+    return intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.HelpTextForeldreAndreLedd' });
+  }
+  if (vilkarCode === VilkarType.FORELDREANSVARSVILKARET_4_LEDD) {
+    return intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.HelpTextForeldreFjerdeLedd' });
+  }
+  return undefined;
+};

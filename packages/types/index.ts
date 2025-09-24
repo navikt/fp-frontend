@@ -65,7 +65,14 @@ export type {
   SimuleringResultatPerFagområde,
   SimuleringPeriode,
 } from './src/simuleringResultatTsType';
-export type { Soknad, ManglendeVedleggSoknad, UtlandsoppholdPeriode, Søknadsfrist } from './src/soknadTsType';
+export type {
+  Soknad,
+  SøknadAdopsjon,
+  ManglendeVedleggSoknad,
+  UtlandsoppholdPeriode,
+  Søknadsfrist,
+} from './src/soknadTsType';
+export { søknadErAdopsjon } from './src/soknadTsType';
 export type {
   Uttaksresultat,
   PeriodeSoker,

@@ -1,48 +1,46 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Label, VStack } from '@navikt/ds-react';
-import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { HStack, Label, VStack } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, SoknadType } from '@navikt/fp-kodeverk';
-import type { Soknad } from '@navikt/fp-types';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { type Soknad, søknadErAdopsjon } from '@navikt/fp-types';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
+
+import styles from './barnPanel.module.css';
 
 interface Props {
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-  soknad: Soknad;
+  søknad: Soknad;
 }
 
-/**
- * BarnPanel
- *
- * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
- * Viser barn fra søknad
- */
-export const BarnPanel = ({ alleMerknaderFraBeslutter, soknad }: Props) => {
+export const BarnPanel = ({ søknad }: Props) => {
   const intl = useIntl();
 
-  if (soknad.soknadType !== SoknadType.ADOPSJON) {
+  if (!søknadErAdopsjon(søknad)) {
     return null;
   }
 
-  const { adopsjonFodelsedatoer } = soknad;
+  const fødselsdatoer = Object.entries(søknad.adopsjonFodelsedatoer ?? []);
   return (
-    <FaktaGruppe
-      title={intl.formatMessage({ id: 'BarnPanel.BarnDetSøkesOm' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
-    >
+    <FaktaKort label={intl.formatMessage({ id: 'BarnPanel.Tittel' })}>
       <VStack gap="space-8">
-        {adopsjonFodelsedatoer &&
-          Object.keys(adopsjonFodelsedatoer).map(key => (
-            <div key={`${key}`}>
-              <Label size="small">
-                <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
+        {fødselsdatoer.map(([childNumber, fødselsdato], index) => (
+          <HStack gap="space-16" key={`${AksjonspunktKode.OMSORGSOVERTAKELSE}-${childNumber}`}>
+            {fødselsdatoer.length > 1 && (
+              <Label size="medium" className={index === 0 ? styles['topMarginFirstRow'] : styles['topMargin']}>
+                <FormattedMessage id="BarnPanel.BarnNr" values={{ nummer: childNumber }} />
               </Label>
-              <BodyShort size="small">
-                <DateLabel dateString={adopsjonFodelsedatoer[Number.parseInt(key, 10)]} />
-              </BodyShort>
-            </div>
-          ))}
+            )}
+            <ReadOnlyField
+              size="medium"
+              label={<FormattedMessage id="BarnPanel.Fødselsdato" />}
+              hideLabel={index > 0}
+              value={<DateLabel dateString={fødselsdato} />}
+            />
+          </HStack>
+        ))}
       </VStack>
-    </FaktaGruppe>
+    </FaktaKort>
   );
 };

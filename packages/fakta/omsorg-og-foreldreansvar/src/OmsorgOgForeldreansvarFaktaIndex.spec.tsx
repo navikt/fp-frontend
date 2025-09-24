@@ -18,7 +18,7 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
     ).toBeInTheDocument();
 
     expect(screen.getByText('Opplysninger om omsorg')).toBeInTheDocument();
-    const omsorgsovertakelseInput = utils.getByLabelText('Dato for omsorgsovertakelse');
+    const omsorgsovertakelseInput = utils.getByLabelText('Omsorgsovertakelsedato');
     await userEvent.clear(omsorgsovertakelseInput);
     await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
     fireEvent.blur(omsorgsovertakelseInput);
@@ -66,23 +66,18 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
   it('skal løse aksjonspunkt for avklaring av vilkår', async () => {
     const lagre = vi.fn();
 
-    const utils = render(
-      <ÅpentAksjonspunktForAvklareVilkårForForeldreansvar
-        {...ÅpentAksjonspunktForAvklareVilkårForForeldreansvar.args}
-        submitCallback={lagre}
-      />,
-    );
+    const utils = render(<ÅpentAksjonspunktForAvklareVilkårForForeldreansvar submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller opplysninger om foreldreansvar og omsorg')).toBeInTheDocument();
     expect(screen.queryByText('Velg vilkår som skal anvendes')).not.toBeInTheDocument();
 
     expect(screen.getByText('Foreldreansvar og omsorg')).toBeInTheDocument();
     expect(screen.queryByText('Opplysninger om omsorg')).not.toBeInTheDocument();
-    const omsorgsovertakelseInput = utils.getByLabelText('Dato for omsorgsovertakelse');
+    const omsorgsovertakelseInput = utils.getByLabelText('Omsorgsovertakelsedato');
     await userEvent.clear(omsorgsovertakelseInput);
     await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
     fireEvent.blur(omsorgsovertakelseInput);
-    const foreldreansvarInput = utils.getByLabelText('Dato for foreldreansvar');
+    const foreldreansvarInput = utils.getByLabelText('Foreldreansvardato');
     await userEvent.clear(foreldreansvarInput);
     await userEvent.type(foreldreansvarInput, '20.09.2022');
     fireEvent.blur(foreldreansvarInput);
@@ -90,8 +85,10 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
 
     expect(screen.queryByText('Rettighet')).not.toBeInTheDocument();
 
-    expect(screen.getByText(/Barn 1 fødselsdato/)).toBeInTheDocument();
-    expect(screen.getByText('10.01.2019')).toBeInTheDocument();
+    const fødselsdatoInput = screen.getAllByLabelText('Fødselsdato');
+
+    expect(fødselsdatoInput).toHaveLength(2);
+    expect(fødselsdatoInput[0]).toHaveValue('10.01.2019');
     expect(screen.getByText(/Barn 2 fødselsdato/)).toBeInTheDocument();
     expect(screen.getByText('11.01.2019')).toBeInTheDocument();
 

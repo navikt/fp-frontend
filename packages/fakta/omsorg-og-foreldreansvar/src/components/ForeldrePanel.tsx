@@ -1,13 +1,56 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
-import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { Heading, VStack } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
+import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { formaterAdresse, getNyesteAdresse } from '@navikt/fp-fakta-felles';
-import { AdresseType, AksjonspunktKode, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { AdresseType } from '@navikt/fp-kodeverk';
 import type { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
-const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: PersonopplysningerBasis) => {
+interface Props {
+  personoversikt: Personoversikt;
+}
+
+export const ForeldrePanel = ({ personoversikt }: Props) => {
+  const intl = useIntl();
+
+  const beggeForeldre = [
+    lagSøkerdata(personoversikt.bruker),
+    ...(personoversikt.annenPart ? [lagSøkerdata(personoversikt.annenPart)] : []),
+  ];
+
+  return (
+    <FaktaKort label={intl.formatMessage({ id: 'ForeldrePanel.Tittel' })}>
+      <VStack gap="space-16">
+        {beggeForeldre.map(forelder => (
+          <VStack gap="space-8" key={`${forelder.aktoerId}`}>
+            <Heading size="small" level="3">
+              {forelder.navn}
+            </Heading>
+            {!forelder.dødsdato && (
+              <ReadOnlyField
+                size="medium"
+                label={<FormattedMessage id="ForeldrePanel.Address" />}
+                value={forelder.adresse ? formaterAdresse(forelder.adresse) : '-'}
+              />
+            )}
+            {forelder.dødsdato && (
+              <ReadOnlyField
+                size="medium"
+                label={<FormattedMessage id="ForeldrePanel.Dødsdato" />}
+                value={<DateLabel dateString={forelder.dødsdato} />}
+              />
+            )}
+          </VStack>
+        ))}
+      </VStack>
+    </FaktaKort>
+  );
+};
+
+const lagSøkerdata = ({ aktoerId, navn, adresser, dødsdato }: PersonopplysningerBasis) => {
   const postadr = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);
   const bostedsadr = getNyesteAdresse(adresser, AdresseType.BOSTEDSADRESSE);
 
@@ -16,60 +59,5 @@ const lagSøkerdata = ({ aktoerId, navn, kjønn, adresser, dødsdato }: Personop
     navn,
     dødsdato,
     adresse: postadr ?? bostedsadr,
-    erMor: kjønn === NavBrukerKjonn.KVINNE,
   };
-};
-
-interface Props {
-  personoversikt: Personoversikt;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}
-
-/**
- * ForeldrePanel
- *
- * Presentasjonskomponent. Brukes i tilknytning til faktapanel for omsorg.
- */
-export const ForeldrePanel = ({ personoversikt, alleMerknaderFraBeslutter }: Props) => {
-  const intl = useIntl();
-
-  const beggeForeldre = [lagSøkerdata(personoversikt.bruker)];
-  if (personoversikt.annenPart) {
-    beggeForeldre.push(lagSøkerdata(personoversikt.annenPart));
-  }
-
-  return (
-    <FaktaGruppe
-      title={intl.formatMessage({ id: 'ForeldrePanel.Foreldre' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
-    >
-      <VStack gap="space-32">
-        {beggeForeldre.map(foreldre => {
-          return (
-            <VStack gap="space-8" key={`${foreldre.aktoerId}`}>
-              <Heading size="small" level="3">
-                {foreldre.navn}
-              </Heading>
-              <Label size="small">
-                <FormattedMessage id="ForeldrePanel.Address" />
-              </Label>
-              <BodyShort size="small">
-                {foreldre.adresse && !foreldre.dødsdato ? formaterAdresse(foreldre.adresse) : '-'}
-              </BodyShort>
-              {foreldre.dødsdato && (
-                <>
-                  <Label size="small">
-                    <FormattedMessage id="ForeldrePanel.DeathDate" />
-                  </Label>
-                  <BodyShort size="small">
-                    <DateLabel dateString={foreldre.dødsdato} />
-                  </BodyShort>
-                </>
-              )}
-            </VStack>
-          );
-        })}
-      </VStack>
-    </FaktaGruppe>
-  );
 };

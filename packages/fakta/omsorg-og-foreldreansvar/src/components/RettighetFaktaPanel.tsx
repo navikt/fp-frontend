@@ -1,78 +1,65 @@
-import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, VStack } from '@navikt/ds-react';
-import { DateLabel, FaktaGruppe } from '@navikt/ft-ui-komponenter';
+import { VStack } from '@navikt/ds-react';
+import { ReadOnlyField } from '@navikt/ft-form-hooks';
+import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
+import type {
+  foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType,
+  RelatertTilgrensedYtelse,
+} from '@navikt/fp-types';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
-import styles from './rettighetFaktaPanel.module.css';
+interface Props {
+  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
+  farSøkerType: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType | undefined;
+}
+
+export const RettighetFaktaPanel = ({ farSøkerType, innvilgetRelatertTilgrensendeYtelserForAnnenForelder }: Props) => {
+  const intl = useIntl();
+  const { alleKodeverk } = usePanelDataContext();
+
+  const farSøkerTypeNavn = alleKodeverk['FarSøkerType'].find(k => k.kode === farSøkerType)?.navn ?? '-';
+  const ytelser = innvilgetRelatertTilgrensendeYtelserForAnnenForelder;
+
+  return (
+    <FaktaKort label={intl.formatMessage({ id: 'RettighetFaktaPanel.Tittel' })}>
+      <VStack gap="space-16">
+        <ReadOnlyField
+          size="medium"
+          label={<FormattedMessage id="RettighetFaktaPanel.FarSøkerType" />}
+          value={farSøkerTypeNavn}
+        />
+
+        <ReadOnlyField
+          size="medium"
+          label={<FormattedMessage id="RettighetFaktaPanel.AndreYtelseTilMor" />}
+          value={
+            <>
+              {ytelser.map(ytelse =>
+                getLopendeOrAvsluttetYtelser(ytelse).map(y => (
+                  <FormattedMessage
+                    id="RettighetFaktaPanel.YtelseIverksatt"
+                    key={`${ytelse.relatertYtelseNavn}-${y.periodeFraDato}`}
+                    values={{
+                      ytelseType: ytelse.relatertYtelseNavn,
+                      dato: dateFormat(y.periodeFraDato),
+                      br: <br />,
+                    }}
+                  />
+                )),
+              )}
+              {!ytelser.some(y => getLopendeOrAvsluttetYtelser(y).length > 0) && '-'}
+            </>
+          }
+        />
+      </VStack>
+    </FaktaKort>
+  );
+};
 
 const getLopendeOrAvsluttetYtelser = (
   ytelse: RelatertTilgrensedYtelse,
 ): RelatertTilgrensedYtelse['tilgrensendeYtelserListe'] =>
   ytelse.tilgrensendeYtelserListe.filter(y => y.statusNavn !== 'Åpen');
-
-export type FormValues = {
-  ytelser: RelatertTilgrensedYtelse[];
-  farSokerType?: string;
-};
-
-interface Props {
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
-}
-
-/**
- * RettighetFaktaPanel
- */
-export const RettighetFaktaPanel = ({ alleMerknaderFraBeslutter }: Props) => {
-  const intl = useIntl();
-  const { watch } = useFormContext<FormValues>();
-
-  const farSokerType = watch('farSokerType');
-  const ytelser = watch('ytelser');
-
-  return (
-    <FaktaGruppe
-      title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.Rettighet' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
-    >
-      <VStack gap="space-16">
-        <BodyShort size="small">{farSokerType || '-'}</BodyShort>
-        <div>
-          <FaktaGruppe
-            withoutBorder
-            title={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.AndreYtelseTilMor' })}
-          >
-            {ytelser.map(ytelse =>
-              getLopendeOrAvsluttetYtelser(ytelse).map(y => (
-                <div className={styles['wrapper']} key={`${ytelse.relatertYtelseNavn}-${y.periodeFraDato}`}>
-                  <BodyShort size="small" className={styles['iverksatt']}>
-                    <FormattedMessage
-                      id="OmsorgOgForeldreansvarFaktaForm.YtelseIverksatt"
-                      values={{ ytelseType: ytelse.relatertYtelseNavn }}
-                    />
-                    <DateLabel dateString={y.periodeFraDato} />
-                  </BodyShort>
-                </div>
-              )),
-            )}
-            {!ytelser.some(y => getLopendeOrAvsluttetYtelser(y).length > 0) && '-'}
-          </FaktaGruppe>
-        </div>
-      </VStack>
-    </FaktaGruppe>
-  );
-};
-
-RettighetFaktaPanel.buildInitialValues = (
-  soknad: Soknad,
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-  alleKodeverk: AlleKodeverk,
-): FormValues => ({
-  ytelser: innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-  farSokerType: soknad.farSokerType
-    ? (alleKodeverk['FarSøkerType'].find(k => k.kode === soknad.farSokerType)?.navn ?? '')
-    : undefined,
-});

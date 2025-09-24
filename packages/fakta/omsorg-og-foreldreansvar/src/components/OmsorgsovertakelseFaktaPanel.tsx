@@ -1,16 +1,15 @@
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { BodyShort, HStack, Label } from '@navikt/ds-react';
-import { RhfDatepicker } from '@navikt/ft-form-hooks';
+import { VStack } from '@navikt/ds-react';
+import { ReadOnlyField, RhfDatepicker } from '@navikt/ft-form-hooks';
 import { hasValidDate, required } from '@navikt/ft-form-validators';
-import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, SoknadType } from '@navikt/fp-kodeverk';
-import type { AdopsjonFamilieHendelse, Soknad } from '@navikt/fp-types';
-
-import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import { type AdopsjonFamilieHendelse, type Soknad, søknadErAdopsjon } from '@navikt/fp-types';
+import { FaktaKort } from '@navikt/fp-ui-komponenter';
+import { usePanelDataContext } from '@navikt/fp-utils';
 
 export type FormValues = {
   omsorgsovertakelseDato?: string;
@@ -20,40 +19,32 @@ export type FormValues = {
 interface Props {
   readOnly: boolean;
   erAksjonspunktForeldreansvar: boolean;
-  alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   soknad: Soknad;
   adopsjon: AdopsjonFamilieHendelse;
 }
 
-/**
- * OmsorgsovertakelseFaktaPanel
- */
-export const OmsorgsovertakelseFaktaPanel = ({
-  readOnly,
-  erAksjonspunktForeldreansvar,
-  alleMerknaderFraBeslutter,
-  soknad,
-  adopsjon,
-}: Props) => {
+export const OmsorgsovertakelseFaktaPanel = ({ readOnly, erAksjonspunktForeldreansvar, soknad, adopsjon }: Props) => {
   const intl = useIntl();
   const antallBarn = adopsjon.antallBarn;
 
-  const { control } = useFormContext<OmsorgOgForeldreansvarFormValues>();
+  const { control } = useFormContext<FormValues>();
+  const { alleMerknaderFraBeslutter } = usePanelDataContext();
 
   return (
-    <FaktaGruppe
-      title={intl.formatMessage({
+    <FaktaKort
+      label={intl.formatMessage({
         id: erAksjonspunktForeldreansvar
-          ? 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarInfo'
-          : 'OmsorgOgForeldreansvarFaktaForm.OmsorgInfo',
+          ? 'OmsorgsovertakelseFaktaPanel.ForeldreansvarTittel'
+          : 'OmsorgsovertakelseFaktaPanel.OmsorgTittel',
       })}
       merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
     >
-      <HStack gap="space-40">
+      <VStack gap="space-16">
         <RhfDatepicker
           name="omsorgsovertakelseDato"
+          size="medium"
           control={control}
-          label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.OmsorgsovertakelseDate' })}
+          label={<FormattedMessage id="OmsorgsovertakelseFaktaPanel.OmsorgsovertakelseDate" />}
           validate={[required, hasValidDate]}
           isReadOnly={readOnly}
           isEdited={isNotEqual(finnOmsorgsovertakelseDato(soknad), adopsjon.omsorgsovertakelseDato)}
@@ -61,20 +52,20 @@ export const OmsorgsovertakelseFaktaPanel = ({
         {erAksjonspunktForeldreansvar && (
           <RhfDatepicker
             name="foreldreansvarDato"
+            size="medium"
             control={control}
-            label={intl.formatMessage({ id: 'OmsorgOgForeldreansvarFaktaForm.ForeldreansvarDato' })}
+            label={<FormattedMessage id="OmsorgsovertakelseFaktaPanel.ForeldreansvarDato" />}
             validate={[required, hasValidDate]}
             isReadOnly={readOnly}
           />
         )}
-        <div>
-          <Label size="small">
-            <FormattedMessage id="OmsorgOgForeldreansvarFaktaForm.NrOfChildren" />
-          </Label>
-          <BodyShort size="small">{antallBarn}</BodyShort>
-        </div>
-      </HStack>
-    </FaktaGruppe>
+        <ReadOnlyField
+          size="medium"
+          label={<FormattedMessage id="OmsorgsovertakelseFaktaPanel.NrOfChildren" />}
+          value={antallBarn}
+        />
+      </VStack>
+    </FaktaKort>
   );
 };
 
@@ -84,7 +75,7 @@ OmsorgsovertakelseFaktaPanel.buildInitialValues = (adopsjon: AdopsjonFamilieHend
 });
 
 const finnOmsorgsovertakelseDato = (søknad: Soknad) => {
-  if (søknad.soknadType === SoknadType.ADOPSJON) {
+  if (søknadErAdopsjon(søknad)) {
     return søknad.omsorgsovertakelseDato ?? undefined;
   }
 

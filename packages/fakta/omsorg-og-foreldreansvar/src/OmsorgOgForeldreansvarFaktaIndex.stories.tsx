@@ -18,8 +18,8 @@ import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   AdopsjonFamilieHendelse,
   Aksjonspunkt,
-  InntektArbeidYtelse,
   Personoversikt,
+  RelatertTilgrensedYtelse,
   Soknad,
 } from '@navikt/fp-types';
 
@@ -89,20 +89,19 @@ const personoversikt: Personoversikt = {
   barn: [],
 };
 
-const inntektArbeidYtelse = {
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [
-    {
-      tilgrensendeYtelserListe: [
-        {
-          statusNavn: 'Løpende',
-          periodeFraDato: '2019-01-01',
-          saksNummer: '2323',
-        },
-      ],
-      relatertYtelseNavn: 'Foreldrepenger',
-    },
-  ],
-} as InntektArbeidYtelse;
+const innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[] = [
+  {
+    tilgrensendeYtelserListe: [
+      {
+        statusNavn: 'Løpende',
+        periodeFraDato: '2019-01-01',
+        periodeTilDato: '2019-02-02',
+        saksNummer: '2323',
+      },
+    ],
+    relatertYtelseNavn: 'Foreldrepenger',
+  },
+];
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -123,7 +122,7 @@ const meta = {
     soknad,
     adopsjon: defaultAdopsjon,
     personoversikt,
-    inntektArbeidYtelse,
+    innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
   },
   render: args => <OmsorgOgForeldreansvarFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgOgForeldreansvarFaktaIndex>>;

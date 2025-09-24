@@ -10,52 +10,17 @@ import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
   AdopsjonFamilieHendelse,
   Aksjonspunkt,
-  AlleKodeverk,
   Personoversikt,
   RelatertTilgrensedYtelse,
   Soknad,
 } from '@navikt/fp-types';
-import type {
-  AvklarFaktaForForeldreansvarAksjonspunktAp,
-  AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
-} from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
+import type { AksjonpunktSubmitType } from '../types/AksjonpunktSubmitType';
 import type { OmsorgOgForeldreansvarFormValues } from '../types/OmsorgOgForeldreansvarFormValues';
 import { OmsorgOgForeldreansvarFaktaForm } from './OmsorgOgForeldreansvarFaktaForm';
 
 type FormValues = OmsorgOgForeldreansvarFormValues & FaktaBegrunnelseFormValues;
-
-const transformValues = (
-  values: FormValues,
-  aksjonspunkt: Aksjonspunkt,
-): AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp => ({
-  ...OmsorgOgForeldreansvarFaktaForm.transformValues(values, aksjonspunkt),
-  ...FaktaBegrunnelseTextField.transformValues(values),
-});
-
-const buildInitialValues = (
-  soknad: Soknad,
-  adopsjon: AdopsjonFamilieHendelse,
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[],
-  aksjonspunkter: Aksjonspunkt[],
-  alleKodeverk: AlleKodeverk,
-): FormValues => {
-  const aksjonspunkt = aksjonspunkter.find(
-    ap =>
-      ap.definisjon === AksjonspunktKode.OMSORGSOVERTAKELSE ||
-      ap.definisjon === AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-  );
-  return {
-    ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(
-      soknad,
-      adopsjon,
-      innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-      alleKodeverk,
-    ),
-    ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
-  };
-};
 
 interface Props {
   soknad: Soknad;
@@ -64,11 +29,6 @@ interface Props {
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
 }
 
-/**
- * OmsorgOgForeldreansvarInfoPanel
- *
- * Har ansvar for å sette opp form for faktapenelet til Omsorgsvilkåret.
- */
 export const OmsorgOgForeldreansvarInfoPanel = ({
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
   soknad,
@@ -77,26 +37,11 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
 }: Props) => {
   const intl = useIntl();
 
-  const {
-    aksjonspunkterForPanel,
-    alleMerknaderFraBeslutter,
-    harÅpentAksjonspunkt,
-    submitCallback,
-    isSubmittable,
-    isReadOnly,
-    alleKodeverk,
-  } = usePanelDataContext<
-    AvklarFaktaForForeldreansvarAksjonspunktAp | AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp
-  >();
+  const { aksjonspunkterForPanel, harÅpentAksjonspunkt, submitCallback, isSubmittable, isReadOnly, alleKodeverk } =
+    usePanelDataContext<AksjonpunktSubmitType>();
 
   const formMethods = useForm<FormValues>({
-    defaultValues: buildInitialValues(
-      soknad,
-      adopsjon,
-      innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
-      aksjonspunkterForPanel,
-      alleKodeverk,
-    ),
+    defaultValues: buildInitialValues(adopsjon, aksjonspunkterForPanel),
   });
 
   const begrunnelse = formMethods.watch('begrunnelse');
@@ -127,10 +72,10 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           erAksjonspunktForeldreansvar={erAksjonspunktForeldreansvar}
           readOnly={isReadOnly}
           vilkarTypes={alleKodeverk['OmsorgsovertakelseVilkårType']}
-          alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
           soknad={soknad}
           adopsjon={adopsjon}
           personoversikt={personoversikt}
+          innvilgetRelatertTilgrensendeYtelserForAnnenForelder={innvilgetRelatertTilgrensendeYtelserForAnnenForelder}
         />
         <FaktaBegrunnelseTextField
           control={formMethods.control}
@@ -153,3 +98,13 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
     </RhfForm>
   );
 };
+
+const transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): AksjonpunktSubmitType => ({
+  ...OmsorgOgForeldreansvarFaktaForm.transformValues(values, aksjonspunkt),
+  ...FaktaBegrunnelseTextField.transformValues(values),
+});
+
+const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterForPanel: Aksjonspunkt[]): FormValues => ({
+  ...OmsorgOgForeldreansvarFaktaForm.buildInitialValues(adopsjon),
+  ...FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel),
+});
