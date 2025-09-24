@@ -9,8 +9,12 @@ import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
-import { BelopSorteringValg } from './BelopSorteringValg';
-import { DatoSorteringValg } from './DatoSorteringValg';
+import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
+import { DatoSorteringValg, type FormValues as DatoSorteringValgFormValues } from './DatoSorteringValg';
+
+export type FormValues = {
+  sortering?: string;
+} & (BelopSorteringValgFormValues & DatoSorteringValgFormValues);
 
 const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
   valgteBehandlingtyper &&
@@ -36,8 +40,7 @@ export const SorteringVelger = ({
 }: Props) => {
   const queryClient = useQueryClient();
 
-  // TODO (TOR) typing på useFormContext
-  const { resetField, control, watch } = useFormContext();
+  const { resetField, control, watch } = useFormContext<FormValues>();
 
   const { mutate: lagreSortering } = useMutation({
     mutationFn: (valuesToStore: { sorteringType: string }) =>
@@ -57,7 +60,6 @@ export const SorteringVelger = ({
 
   const koSorteringer = useLosKodeverk('KøSortering');
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- [JOHANNES] vent på typet form
   const sortering = watch('sortering');
 
   return (
@@ -70,7 +72,7 @@ export const SorteringVelger = ({
         resetField('til', { defaultValue: '' });
         resetField('fomDato', { defaultValue: '' });
         resetField('tomDato', { defaultValue: '' });
-        resetField('erDynamiskPeriode', { defaultValue: '' });
+        resetField('erDynamiskPeriode', { defaultValue: false });
 
         return lagreSortering({
           sorteringType: String(sorteringType),

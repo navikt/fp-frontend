@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment  -- [JOHANNES] venter på FormValues blir typet */
 import { useForm } from 'react-hook-form';
 import { FormattedMessage } from 'react-intl';
 
@@ -6,7 +5,7 @@ import { HStack, Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { type BehandlingType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 import { oppgaverÅpneEllerPåVentOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
@@ -14,6 +13,10 @@ import { useLosKodeverk } from '../../data/useLosKodeverk';
 import { OppgaverSomErApneEllerPaVentGraf } from './OppgaverSomErApneEllerPaVentGraf';
 
 const formName = 'oppgaverSomErApneEllerPaVent';
+
+type ValgteVerdier = {
+  [key in BehandlingType]?: boolean;
+};
 
 interface Props {
   height: number;
@@ -26,14 +29,14 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
 
   const behandlingTyper = useLosKodeverk('BehandlingType');
   const stringFromStorage = getValueFromLocalStorage(formName);
-  const lagredeVerdier = stringFromStorage ? JSON.parse(stringFromStorage) : undefined;
+  const lagredeVerdier = stringFromStorage ? (JSON.parse(stringFromStorage) as ValgteVerdier) : undefined;
 
   const filtrerteBehandlingstyper = behandlingTyper.filter(
     type =>
       type.kode !== BehandlingTypeEnum.TILBAKEKREVING && type.kode !== BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
   );
 
-  const formDefaultValues = Object.values(filtrerteBehandlingstyper).reduce(
+  const formDefaultValues = filtrerteBehandlingstyper.reduce<ValgteVerdier>(
     (app, type) => ({
       ...app,
       [type.kode]: true,
@@ -41,8 +44,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
     {},
   );
 
-  // TODO (TOR) Mangler typing for useForm
-  const formMethods = useForm({
+  const formMethods = useForm<ValgteVerdier>({
     defaultValues: lagredeVerdier ?? formDefaultValues,
   });
 
@@ -62,7 +64,6 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
         </HStack>
         <OppgaverSomErApneEllerPaVentGraf
           height={height}
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           oppgaverApneEllerPaVent={oppgaverApneEllerPaVent.filter(oav => values[oav.behandlingType])}
         />
       </VStack>

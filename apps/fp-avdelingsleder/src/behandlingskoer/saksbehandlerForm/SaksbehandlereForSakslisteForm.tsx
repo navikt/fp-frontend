@@ -11,11 +11,7 @@ import { type SaksbehandlerProfil } from '@navikt/fp-los-felles';
 import { grupperOptions } from '../../data/fplosAvdelingslederApi';
 import type { SaksbehandlerGruppe } from '../../typer/saksbehandlereOgSaksbehandlerGrupper';
 import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
-import { ValgAvSaksbehandlere } from './ValgAvSaksbehandlere';
-
-type FormValues = {
-  reserverTil: string;
-};
+import { type FormValues, ValgAvSaksbehandlere } from './ValgAvSaksbehandlere';
 
 interface Props {
   valgtSaksliste: SakslisteAvdeling;

@@ -5,10 +5,12 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { type BehandlingType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteBehandlingstype, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
+
+export type FormValues = { [key in BehandlingType]?: boolean };
 
 const behandlingstypeOrder = Object.values(BehandlingTypeEnum);
 
@@ -20,8 +22,7 @@ interface Props {
 export const BehandlingstypeVelger = ({ valgtSakslisteId, valgtAvdelingEnhet }: Props) => {
   const queryClient = useQueryClient();
 
-  // TODO (TOR) Manglar type
-  const { control } = useFormContext();
+  const { control } = useFormContext<FormValues>();
 
   const { mutate: lagreBehandlingstype } = useMutation({
     mutationFn: (valuesToStore: { behandlingType: string; checked: boolean }) =>
