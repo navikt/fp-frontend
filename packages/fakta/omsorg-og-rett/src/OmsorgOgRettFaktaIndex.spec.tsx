@@ -171,12 +171,12 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(jaRadios).toHaveLength(3);
     expect(neiRadios).toHaveLength(3);
 
-    expect(jaRadios[0]).not.toBeChecked();
-    expect(neiRadios[0]).toBeChecked();
-    expect(jaRadios[1]).not.toBeChecked();
-    expect(neiRadios[1]).toBeChecked();
-    expect(jaRadios[2]).not.toBeChecked();
-    expect(neiRadios[2]).toBeChecked();
+    expect(jaRadios[0]!).not.toBeChecked();
+    expect(neiRadios[0]!).toBeChecked();
+    expect(jaRadios[1]!).not.toBeChecked();
+    expect(neiRadios[1]!).toBeChecked();
+    expect(jaRadios[2]!).not.toBeChecked();
+    expect(neiRadios[2]!).toBeChecked();
   });
 
   it('skal vise i readonly modus for historisk valgte options når revurdering åpnes', async () => {
@@ -201,12 +201,12 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(jaRadios).toHaveLength(3);
     expect(neiRadios).toHaveLength(3);
 
-    expect(jaRadios[0]).not.toBeChecked();
-    expect(neiRadios[0]).toBeChecked();
-    expect(jaRadios[1]).not.toBeChecked();
-    expect(neiRadios[1]).toBeChecked();
-    expect(jaRadios[2]).toBeChecked();
-    expect(neiRadios[2]).not.toBeChecked();
+    expect(jaRadios[0]!).not.toBeChecked();
+    expect(neiRadios[0]!).toBeChecked();
+    expect(jaRadios[1]!).not.toBeChecked();
+    expect(neiRadios[1]!).toBeChecked();
+    expect(jaRadios[2]!).toBeChecked();
+    expect(neiRadios[2]!).not.toBeChecked();
 
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();

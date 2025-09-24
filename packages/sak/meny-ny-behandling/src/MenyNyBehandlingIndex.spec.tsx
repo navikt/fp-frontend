@@ -90,7 +90,7 @@ describe('MenyNyBehandlingIndex', () => {
 
     await userEvent.selectOptions(utils.getByRole('combobox', { hidden: true }), 'BT-004');
 
-    await userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[1]!, 'RE-KLAG-U-INNTK');
+    await userEvent.selectOptions(utils.getAllByRole('combobox', { hidden: true })[1]!!, 'RE-KLAG-U-INNTK');
 
     await userEvent.click(screen.getByText('OK'));
 

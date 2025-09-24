@@ -19,7 +19,7 @@ describe('DekoratorSakIndex', () => {
     expect(await screen.findByText('Feilmelding 1')).toBeInTheDocument();
     expect(screen.getByText('Spesialtegn-test: Høna & egget og "test1" og \'test2\'')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('button')[2]!);
+    await userEvent.click(screen.getAllByRole('button')[2]!!);
 
     await waitFor(() => expect(screen.queryByText('Feilmelding 1')).not.toBeInTheDocument());
   });

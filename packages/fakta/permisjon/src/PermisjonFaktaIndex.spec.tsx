@@ -66,7 +66,7 @@ describe('PermisjonFaktaIndex', () => {
     await userEvent.click(
       utils.getByLabelText('Fjern permisjonen og ta med arbeidsforholdet. Vurder om inntektsmelding må innhentes'),
     );
-    await userEvent.click(utils.getAllByLabelText('Ikke ta med arbeidsforholdet')[1]);
+    await userEvent.click(utils.getAllByLabelText('Ikke ta med arbeidsforholdet')[1]!);
 
     await userEvent.type(utils.getByLabelText('Begrunn valget'), 'Dette er en begrunnelse');
 

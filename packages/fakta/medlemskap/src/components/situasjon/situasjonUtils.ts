@@ -8,8 +8,8 @@ import { toTitleCapitalization } from '../../utils/stringUtils';
 
 export const getSisteRegion = (medlemskap: Medlemskap, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
   const alleRegioner = alleKodeverk['Region'];
-  const nyesteRegion = medlemskap.regioner.sort(sorterPerioder)[0];
-  return alleRegioner.find(r => r.kode === nyesteRegion.type)?.navn ?? intl.formatMessage({ id: 'Situasjon.Ukjent' });
+  const nyesteRegion = medlemskap.regioner.sort(sorterPerioder).at(0);
+  return alleRegioner.find(r => r.kode === nyesteRegion?.type)?.navn ?? intl.formatMessage({ id: 'Situasjon.Ukjent' });
 };
 
 export const getSistePersonstatus = (medlemskap: Medlemskap, alleKodeverk: AlleKodeverk, intl: IntlShape): string => {
@@ -41,8 +41,8 @@ export const formaterUtenlandsopphold = (
   }
   const landNavn =
     utenlandsopphold.length === 1
-      ? utenlandsopphold[0].landNavn
-      : (alleKodeverk['Landkoder'].find(type => type.kode === Landkode.NORGE)?.navn ?? '');
+      ? utenlandsopphold[0]?.landNavn
+      : alleKodeverk['Landkoder'].find(type => type.kode === Landkode.NORGE)?.navn;
 
-  return intl.formatMessage({ id: 'Situasjon.ILand' }, { land: toTitleCapitalization(landNavn) });
+  return intl.formatMessage({ id: 'Situasjon.ILand' }, { land: toTitleCapitalization(landNavn ?? '') });
 };

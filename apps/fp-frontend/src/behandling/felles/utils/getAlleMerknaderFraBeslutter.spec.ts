@@ -29,7 +29,7 @@ describe('getAlleMerknaderFraBeslutter', () => {
     const merknader = getAlleMerknaderFraBeslutter(BehandlingStatusEnum.BEHANDLING_UTREDES, aksjonspunkter);
 
     expect(merknader).toEqual({
-      [aksjonspunkter[0].definisjon]: {
+      [aksjonspunkter[0]!.definisjon]: {
         notAccepted: true,
       },
     });

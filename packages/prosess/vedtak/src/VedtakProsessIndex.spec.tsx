@@ -88,7 +88,7 @@ describe('VedtakProsessIndex', () => {
 
     expect(screen.getByText('Innholdet fra det automatiske brevet kan nå redigeres')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Rediger brev')[0]);
+    await userEvent.click(screen.getAllByText('Rediger brev')[0]!);
 
     expect(screen.getByText(/Gjør nødvendige endringer i brevet nedenfor/)).toBeInTheDocument();
 
@@ -120,7 +120,7 @@ describe('VedtakProsessIndex', () => {
 
     await userEvent.click(screen.getByText('Lagre og lukk'));
 
-    await userEvent.click(screen.getAllByText('Forkast redigert brev')[0]);
+    await userEvent.click(screen.getAllByText('Forkast redigert brev')[0]!);
 
     await waitFor(() =>
       expect(screen.queryByText('Innholdet fra det automatiske brevet kan nå redigeres')).not.toBeInTheDocument(),
@@ -268,7 +268,7 @@ describe('VedtakProsessIndex', () => {
     expect(screen.getByText('Kan dere gi tilbakemelding på dette?')).toBeInTheDocument();
     expect(screen.getAllByText('Vis mer')).toHaveLength(2);
     expect(screen.getAllByText('Ferdigstill oppgave i Gosys')).toHaveLength(5);
-    await userEvent.click(visMerKnapper[0]);
+    await userEvent.click(visMerKnapper[0]!);
     expect(screen.getByText('Vis mindre')).toBeInTheDocument();
     expect(screen.getByText('VL: Se sto mottatt 20.02.25')).toBeInTheDocument();
     expect(screen.getByText('VL: Bekreftelse fra arbeidsgiver')).toBeInTheDocument();
@@ -286,7 +286,7 @@ describe('VedtakProsessIndex', () => {
         'Bruker sier at han har søkt Foreldrepenger, han er i permisjon nå. Han har ikke fått svar, han skriver at saksnr er: 12341234.',
       ),
     ).toBeInTheDocument();
-    await userEvent.click(visMerKnapper[1]);
+    await userEvent.click(visMerKnapper[1]!);
     expect(screen.getAllByText('Vis mindre')).toHaveLength(2);
     expect(
       screen.getByText(
@@ -311,19 +311,19 @@ describe('VedtakProsessIndex', () => {
     expect(filIkoner).toHaveLength(6);
 
     const ferdigstillOppgaveKnapper = screen.getAllByText('Ferdigstill oppgave i Gosys');
-    await userEvent.click(ferdigstillOppgaveKnapper[0]);
+    await userEvent.click(ferdigstillOppgaveKnapper[0]!);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(1);
     expect(ferdigstillOppgave).toHaveBeenNthCalledWith(1, '1');
-    await userEvent.click(ferdigstillOppgaveKnapper[1]);
+    await userEvent.click(ferdigstillOppgaveKnapper[1]!);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(2);
     expect(ferdigstillOppgave).toHaveBeenNthCalledWith(2, '2');
-    await userEvent.click(ferdigstillOppgaveKnapper[2]);
+    await userEvent.click(ferdigstillOppgaveKnapper[2]!);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(3);
     expect(ferdigstillOppgave).toHaveBeenNthCalledWith(3, '3');
-    await userEvent.click(ferdigstillOppgaveKnapper[3]);
+    await userEvent.click(ferdigstillOppgaveKnapper[3]!);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(4);
     expect(ferdigstillOppgave).toHaveBeenNthCalledWith(4, '4');
-    await userEvent.click(ferdigstillOppgaveKnapper[4]);
+    await userEvent.click(ferdigstillOppgaveKnapper[4]!);
     expect(ferdigstillOppgave).toHaveBeenCalledTimes(5);
     expect(ferdigstillOppgave).toHaveBeenNthCalledWith(5, '5');
   });

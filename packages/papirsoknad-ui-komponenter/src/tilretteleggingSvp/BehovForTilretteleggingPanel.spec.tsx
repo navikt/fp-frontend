@@ -22,9 +22,9 @@ describe('BehovForTilretteleggingPanel', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(3);
 
-    await userEvent.click(screen.getAllByText('Nei')[0]!);
-    await userEvent.click(screen.getAllByText('Nei')[1]!);
-    await userEvent.click(screen.getAllByText('Nei')[2]!);
+    await userEvent.click(screen.getAllByText('Nei')[0]!!);
+    await userEvent.click(screen.getAllByText('Nei')[1]!!);
+    await userEvent.click(screen.getAllByText('Nei')[2]!!);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -44,9 +44,9 @@ describe('BehovForTilretteleggingPanel', () => {
 
     expect(await screen.findByText('Behov for tilrettelegging')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Ja')[0]!);
-    await userEvent.click(screen.getAllByText('Ja')[1]!);
-    await userEvent.click(screen.getAllByText('Ja')[2]!);
+    await userEvent.click(screen.getAllByText('Ja')[0]!!);
+    await userEvent.click(screen.getAllByText('Ja')[1]!!);
+    await userEvent.click(screen.getAllByText('Ja')[2]!!);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -66,9 +66,9 @@ describe('BehovForTilretteleggingPanel', () => {
 
     expect(await screen.findByText('Behov for tilrettelegging')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Ja')[0]!);
-    await userEvent.click(screen.getAllByText('Ja')[1]!);
-    await userEvent.click(screen.getAllByText('Ja')[2]!);
+    await userEvent.click(screen.getAllByText('Ja')[0]!!);
+    await userEvent.click(screen.getAllByText('Ja')[1]!!);
+    await userEvent.click(screen.getAllByText('Ja')[2]!!);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -171,9 +171,9 @@ describe('BehovForTilretteleggingPanel', () => {
         },
       });
 
-      await userEvent.click(screen.getAllByText('Nei')[0]!);
-      await userEvent.click(screen.getAllByText('Nei')[1]!);
-      await userEvent.click(screen.getAllByText('Ja')[2]!);
+      await userEvent.click(screen.getAllByText('Nei')[0]!!);
+      await userEvent.click(screen.getAllByText('Nei')[1]!!);
+      await userEvent.click(screen.getAllByText('Ja')[2]!!);
 
       await userEvent.click(screen.getByLabelText('Slett rad'));
 
