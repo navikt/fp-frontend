@@ -20,7 +20,7 @@ export const Dokumenter = ({ dokumenter }: Props) => {
   const [erDokumenterSkjult, setErDokumenterSkjult] = useState(true);
 
   return dokumenter.length == 1 ? (
-    <DokumentVisning dokument={dokumenter[0]} />
+    <DokumentVisning dokument={dokumenter[0]!} />
   ) : (
     <VStack gap="space-8">
       <Button

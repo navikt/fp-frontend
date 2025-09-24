@@ -47,7 +47,10 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
       {!erResterendeBeskrivelserSkjult && (
         <VStack gap="space-12" className={styles['eldreBeskrivelser']}>
           {beskrivelserSomSkjules.map(beskrivelse => (
-            <BeskrivelseVisning key={beskrivelse.header + beskrivelse.kommentarer[0]} beskrivelse={beskrivelse} />
+            <BeskrivelseVisning
+              key={(beskrivelse.header ?? '') + (beskrivelse.kommentarer.at(0) ?? '')}
+              beskrivelse={beskrivelse}
+            />
           ))}
         </VStack>
       )}

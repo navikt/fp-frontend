@@ -45,7 +45,6 @@ const formatArbeidsgiver = (
     return '';
   }
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (!arbeidsgiverOpplysninger) {
     return '';
   }
@@ -80,14 +79,16 @@ const buildInitialValues = (
   // fiks og at dette derfor skal brukast etterkvart. Sjå TFP-3076
   const inntektsmeldingerSomIkkeKommer = sorterteManglendeVedlegg
     .filter(mv => !!mv.arbeidsgiverReferanse)
-    .reduce(
-      (acc, mv) => ({
-        ...acc,
-        [lagArbeidsgiverKey(arbeidsgiverOpplysningerPerId[mv.arbeidsgiverReferanse ?? ''])]:
-          mv.brukerHarSagtAtIkkeKommer,
-      }),
-      {},
-    );
+    .reduce((acc, mv) => {
+      const opplysninger = arbeidsgiverOpplysningerPerId[mv.arbeidsgiverReferanse ?? ''];
+      if (opplysninger) {
+        return {
+          ...acc,
+          [lagArbeidsgiverKey(opplysninger)]: mv.brukerHarSagtAtIkkeKommer,
+        };
+      }
+      return acc;
+    }, {});
 
   return {
     inntektsmeldingerSomIkkeKommer,
@@ -116,19 +117,23 @@ const transformValues = (
   return {
     kode,
     erVilkarOk: values.erVilkarOk || false,
-    inntektsmeldingerSomIkkeKommer: arbeidsgiverReferanser.map(agRef => {
-      const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef ?? ''];
-      return {
-        // backend sender fødselsdato i orgnummer feltet for privatpersoner... fiks dette
-        organisasjonsnummer: arbeidsgiverOpplysninger.erPrivatPerson
-          ? undefined
-          : arbeidsgiverOpplysninger.identifikator,
-        aktørId: arbeidsgiverOpplysninger.erPrivatPerson ? arbeidsgiverOpplysninger.referanse : undefined,
-        brukerHarSagtAtIkkeKommer: values.inntektsmeldingerSomIkkeKommer
-          ? values.inntektsmeldingerSomIkkeKommer[lagArbeidsgiverKey(arbeidsgiverOpplysninger)]
-          : false,
-      };
-    }, {}),
+    inntektsmeldingerSomIkkeKommer: arbeidsgiverReferanser
+      .map(agRef => {
+        const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[agRef ?? ''];
+        if (!arbeidsgiverOpplysninger) {
+          return undefined;
+        }
+        return {
+          // backend sender fødselsdato i orgnummer feltet for privatpersoner... fiks dette
+          organisasjonsnummer: arbeidsgiverOpplysninger.erPrivatPerson
+            ? undefined
+            : arbeidsgiverOpplysninger.identifikator,
+          aktørId: arbeidsgiverOpplysninger.erPrivatPerson ? arbeidsgiverOpplysninger.referanse : undefined,
+          brukerHarSagtAtIkkeKommer:
+            (values.inntektsmeldingerSomIkkeKommer ?? {})[lagArbeidsgiverKey(arbeidsgiverOpplysninger)] ?? false,
+        };
+      })
+      .filter(o => o !== undefined),
     ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
   };
 };

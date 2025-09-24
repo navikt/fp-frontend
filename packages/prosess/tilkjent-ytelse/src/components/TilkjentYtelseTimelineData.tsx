@@ -192,8 +192,8 @@ const createVisningNavnForUttakArbeidstaker = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (!arbeidsgiverOpplysninger?.navn) {
+
     const opptjeningAktiviteter = alleKodeverk['OpptjeningAktivitetType'];
     return opptjeningAktiviteter.find(({ kode }) => kode === andel.arbeidsforholdType)?.navn ?? '';
   }

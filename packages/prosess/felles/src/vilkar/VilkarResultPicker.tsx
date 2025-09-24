@@ -45,7 +45,7 @@ export const VilkarResultPicker = ({
   validatorsForRadioOptions,
 }: Props) => {
   const { getValues, watch, control } = useFormContext<FormValues>();
-   
+
   const erVilkårOk = watch('erVilkarOk');
 
   const radioValidators = validatorsForRadioOptions ? validatorsForRadioOptions.concat(required) : [required];
@@ -91,7 +91,6 @@ export const VilkarResultPicker = ({
           ))}
           readOnly={isReadOnly}
           className={styles['selectBredde']}
-           
           validate={[requiredIfCustomFunctionIsTrueNew(getIsAvslagCodeRequired(erVilkårOk, getValues('avslagskode')))]}
         />
       )}

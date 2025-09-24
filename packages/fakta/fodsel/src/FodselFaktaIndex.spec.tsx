@@ -122,11 +122,11 @@ describe('FodselFaktaIndex', () => {
 
       const alleDatofelt = apBoks.getAllByRole('textbox', { hidden: true });
 
-      const fødselsdatoFelt2 = alleDatofelt[2];
+      const fødselsdatoFelt2 = alleDatofelt[2]!;
       await userEvent.type(fødselsdatoFelt2, '05.05.2025');
       fireEvent.blur(fødselsdatoFelt2);
 
-      const dødsdatoFelt = alleDatofelt[3];
+      const dødsdatoFelt = alleDatofelt[3]!;
       await userEvent.type(dødsdatoFelt, '05.05.2025');
       fireEvent.blur(dødsdatoFelt);
 
@@ -203,7 +203,7 @@ describe('FodselFaktaIndex', () => {
 
       await userEvent.click(overstyringBoks.getByText('Legg til barn'));
 
-      await userEvent.type(overstyringBoks.getAllByLabelText('Fødselsdato')[1], '04.06.2025');
+      await userEvent.type(overstyringBoks.getAllByLabelText('Fødselsdato')[1]!, '04.06.2025');
 
       await userEvent.type(overstyringBoks.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 

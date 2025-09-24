@@ -112,7 +112,7 @@ export const konverterHtmlToEditorJsFormat = (html: string): OutputData => {
       switch (element.tagName.toLowerCase()) {
         case 'h1':
         case 'h2':
-          blocks.push({ type: 'header', data: { text: element.innerHTML, level: parseInt(element.tagName[1]) } });
+          blocks.push({ type: 'header', data: { text: element.innerHTML, level: parseInt(element.tagName[1]!) } });
           break;
         case 'p':
           blocks.push({ type: 'paragraph', data: { text: element.innerHTML } });

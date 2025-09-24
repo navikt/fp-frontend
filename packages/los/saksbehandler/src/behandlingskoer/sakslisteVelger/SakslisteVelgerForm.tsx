@@ -39,7 +39,7 @@ const getDefaultSaksliste = (
     removeValueFromLocalStorage('sakslisteId');
   }
 
-  return sorterteSakslister.length > 0 ? sorterteSakslister[0].sakslisteId : undefined;
+  return sorterteSakslister.at(0)?.sakslisteId;
 };
 
 const getFormDefaultValues = (
