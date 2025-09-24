@@ -61,12 +61,14 @@ AndreYtelserPanel.initialValues = (): AndreYtelserFormValue => {
 AndreYtelserPanel.transformValues = ({
   andreYtelser: { andreYtelserTyper, andreYtelserPerioder },
 }: AndreYtelserFormValue): TransformValues => ({
-  [ANDRE_YTELSER_NAME_PREFIX]: andreYtelserTyper.flatMap(kode =>
-    andreYtelserPerioder[kode].map(periode => ({
-      ytelseType: kode,
-      ...periode,
-    })),
-  ),
+  [ANDRE_YTELSER_NAME_PREFIX]: andreYtelserTyper
+    .flatMap(kode =>
+      andreYtelserPerioder[kode]?.map(periode => ({
+        ytelseType: kode,
+        ...periode,
+      })),
+    )
+    .filter(o => o !== undefined),
 });
 
 const CheckboxWithInfo = ({
