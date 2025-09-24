@@ -47,7 +47,8 @@ export const useStandardProsessPanelProps = (
 
   const aksjonspunkterForPanel = aksjonspunkt.filter(ap => aksjonspunktKoder.includes(ap.definisjon));
 
-  const vilkårForPanel = vilkår.filter(v => vilkårKoder.includes(v.vilkarType));
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- vilkår virker å være undefined fra fptilbake
+  const vilkårForPanel = (vilkår ?? []).filter(v => vilkårKoder.includes(v.vilkarType));
 
   const isReadOnly = erReadOnly(behandling, vilkårForPanel, rettigheter, false);
 
