@@ -17,40 +17,38 @@ interface Props {
 export const PersonYtelserTable = ({ ytelser }: Props) => {
   const intl = useIntl();
 
-  const ytelseRows = ytelser
-    ?.map(ytelse => {
-      const ytelseNavn = ytelse.relatertYtelseNavn;
+  const ytelseRows = ytelser?.flatMap(ytelse => {
+    const ytelseNavn = ytelse.relatertYtelseNavn;
 
-      const skalViseLenke =
-        ytelse.relatertYtelseNavn === 'Engangsstonad' ||
-        ytelse.relatertYtelseNavn === 'Foreldrepenger' ||
-        ytelse.relatertYtelseNavn === 'Svangerskapspenger';
+    const skalViseLenke =
+      ytelse.relatertYtelseNavn === 'Engangsstonad' ||
+      ytelse.relatertYtelseNavn === 'Foreldrepenger' ||
+      ytelse.relatertYtelseNavn === 'Svangerskapspenger';
 
-      if (ytelse.tilgrensendeYtelserListe.length === 0) {
-        return [
-          {
-            navn: ytelseNavn,
-            periode: intl.formatMessage({ id: 'PersonYtelserTable.Ingen' }),
-            status: '',
-            saksnummer: '',
-            skalViseLenke,
-          },
-        ];
-      }
-
-      return ytelse.tilgrensendeYtelserListe.map(
-        ({ statusNavn, saksNummer, periodeFraDato, periodeTilDato }, innerIndex) => {
-          return {
-            navn: innerIndex === 0 ? ytelseNavn : '',
-            periode: periodFormat(periodeFraDato, periodeTilDato),
-            status: statusNavn,
-            saksnummer: saksNummer,
-            skalViseLenke,
-          };
+    if (ytelse.tilgrensendeYtelserListe.length === 0) {
+      return [
+        {
+          navn: ytelseNavn,
+          periode: intl.formatMessage({ id: 'PersonYtelserTable.Ingen' }),
+          status: '',
+          saksnummer: '',
+          skalViseLenke,
         },
-      );
-    })
-    .flat();
+      ];
+    }
+
+    return ytelse.tilgrensendeYtelserListe.map(
+      ({ statusNavn, saksNummer, periodeFraDato, periodeTilDato }, innerIndex) => {
+        return {
+          navn: innerIndex === 0 ? ytelseNavn : '',
+          periode: periodFormat(periodeFraDato, periodeTilDato),
+          status: statusNavn,
+          saksnummer: saksNummer,
+          skalViseLenke,
+        };
+      },
+    );
+  });
 
   if (!ytelseRows) {
     return null;

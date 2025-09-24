@@ -51,7 +51,7 @@ export const doPolling = async <T>(response: KyResponse<T>, setPollingPending: P
           return await doGetRequest<Behandling>(data.location);
         }
       }
-      throw new Error();
+      throw error;
     }
   }
 

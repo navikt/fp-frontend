@@ -225,7 +225,7 @@ export const UttakAktiviteterTabell = ({
               );
 
               const samletUtbetalingsgradForAndreAktiviteter = aktiviteterFraFormState.reduce(
-                (sum, aktivitet, i) => (i !== index ? sum + Number.parseInt(aktivitet.utbetalingsgrad, 10) : sum),
+                (sum, aktivitet, i) => (i === index ? sum : sum + Number.parseInt(aktivitet.utbetalingsgrad, 10)),
                 0,
               );
 
