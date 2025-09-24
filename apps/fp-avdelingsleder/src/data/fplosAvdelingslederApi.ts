@@ -213,8 +213,8 @@ export const lagreSakslisteSortering = (sakslisteId: number, sakslisteSorteringV
 
 export const lagreSakslisteSorteringIntervall = (
   sakslisteId: number,
-  fra: number,
-  til: number,
+  fra: string | undefined,
+  til: string | undefined,
   avdelingEnhet: string,
 ) =>
   kyExtended

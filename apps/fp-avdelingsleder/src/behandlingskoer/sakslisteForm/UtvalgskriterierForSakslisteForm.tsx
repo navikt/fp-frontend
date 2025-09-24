@@ -8,10 +8,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { lagreSakslisteNavn, LosUrl } from '../../data/fplosAvdelingslederApi';
 import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
-import { AndreKriterierVelger } from './filtrering/AndreKriterierVelger';
-import { BehandlingstypeVelger } from './filtrering/BehandlingstypeVelger';
-import { FagsakYtelseTypeVelger } from './filtrering/FagsakYtelseTypeVelger';
-import { SorteringVelger } from './sortering/SorteringVelger';
+import {
+  AndreKriterierVelger,
+  type FormValues as AndreKriterierVelgerFormTypes,
+} from './filtrering/AndreKriterierVelger';
+import {
+  BehandlingstypeVelger,
+  type FormValues as BehandlingstypeVelgerFormValues,
+} from './filtrering/BehandlingstypeVelger';
+import {
+  FagsakYtelseTypeVelger,
+  type FormValues as FagsakYtelseTypeVelgerFormValues,
+} from './filtrering/FagsakYtelseTypeVelger';
+import { type FormValues as SorteringVelgerFormValues, SorteringVelger } from './sortering/SorteringVelger';
 import { useDebounce } from './useDebounce';
 
 import styles from './utvalgskriterierForSakslisteForm.module.css';
@@ -22,13 +31,10 @@ const maxLength100 = maxLength(100);
 type FormValues = {
   sakslisteId: number;
   navn: string;
-  sortering?: string;
-  erDynamiskPeriode?: boolean;
-  fra?: string;
-  til?: string;
-  fomDato?: string;
-  tomDato?: string;
-};
+} & AndreKriterierVelgerFormTypes &
+  BehandlingstypeVelgerFormValues &
+  FagsakYtelseTypeVelgerFormValues &
+  SorteringVelgerFormValues;
 
 const buildDefaultValues = (intl: IntlShape, valgtSaksliste: SakslisteAvdeling): FormValues => {
   const behandlingTypes = valgtSaksliste.behandlingTyper

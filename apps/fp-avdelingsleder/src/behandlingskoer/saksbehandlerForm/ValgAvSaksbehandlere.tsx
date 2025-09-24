@@ -7,6 +7,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { lagreSakslisteSaksbehandler, LosUrl } from '../../data/fplosAvdelingslederApi';
 import type { SakslisteAvdeling } from '../../typer/sakslisteAvdelingTsType';
 
+export type FormValues = {
+  [key: string]: boolean;
+};
+
 interface Props {
   valgtSaksliste: SakslisteAvdeling;
   valgtAvdelingEnhet: string;
@@ -19,8 +23,7 @@ interface Props {
 export const ValgAvSaksbehandlere = ({ valgtSaksliste, valgtAvdelingEnhet, saksbehandlere }: Props) => {
   const queryClient = useQueryClient();
 
-  // TODO (TOR) Manglar type
-  const { control } = useFormContext();
+  const { control } = useFormContext<FormValues>();
 
   const { mutate: knyttSaksbehandlerTilSaksliste } = useMutation({
     mutationFn: (values: { brukerIdent: string; checked: boolean }) =>

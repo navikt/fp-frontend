@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-argument -- [JOHANNES] vent på typet form */
+/* eslint-disable @typescript-eslint/no-unsafe-argument -- [JOHANNES] vent på typet form */
 
 import { useFormContext } from 'react-hook-form';
 import { FormattedMessage, useIntl } from 'react-intl';
@@ -24,6 +24,14 @@ import styles from './sorteringVelger.module.css';
 
 dayjs.extend(customParseFormat);
 
+export type FormValues = {
+  fra?: string;
+  til?: string;
+  fomDato?: string;
+  tomDato?: string;
+  erDynamiskPeriode?: boolean;
+};
+
 interface Props {
   valgtSakslisteId: number;
   valgtAvdelingEnhet: string;
@@ -35,7 +43,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   const intl = useIntl();
 
   const { mutate: lagreSakslisteSorteringTidsintervallDager } = useMutation({
-    mutationFn: (valuesToStore: { fra: number; til: number }) =>
+    mutationFn: (valuesToStore: { fra: string | undefined; til: string | undefined }) =>
       lagreSakslisteSorteringIntervall(valgtSakslisteId, valuesToStore.fra, valuesToStore.til, valgtAvdelingEnhet),
     onSuccess: () => {
       void queryClient.invalidateQueries({
@@ -86,19 +94,18 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
     },
   });
 
-  // TODO (TOR) Manglar typing for useFormContext
-  const { watch, control } = useFormContext();
+  const { watch, control } = useFormContext<FormValues>();
   const fraVerdi = watch('fra');
   const tilVerdi = watch('til');
   const fomDatoVerdi = watch('fomDato');
   const tomDatoVerdi = watch('tomDato');
 
-  const lagreFra = (nyFraVerdi: number) =>
+  const lagreFra = (nyFraVerdi: string) =>
     lagreSakslisteSorteringTidsintervallDager({
       fra: nyFraVerdi,
       til: tilVerdi,
     });
-  const lagreTil = (nyTilVerdi: number) =>
+  const lagreTil = (nyTilVerdi: string) =>
     lagreSakslisteSorteringTidsintervallDager({
       fra: fraVerdi,
       til: nyTilVerdi,
@@ -128,7 +135,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                   validate={[hasValidPosOrNegInteger]}
                   onBlur={value => lagreFra(value)}
                 />
-                {(fraVerdi || fraVerdi === 0) && (
+                {(fraVerdi || fraVerdi === '0') && (
                   <Detail>
                     <DateLabel dateString={finnDato(fraVerdi)} />
                   </Detail>
@@ -146,7 +153,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
                   validate={[hasValidPosOrNegInteger]}
                   onBlur={value => lagreTil(value)}
                 />
-                {(tilVerdi || tilVerdi === 0) && (
+                {(tilVerdi || tilVerdi === '0') && (
                   <Detail>
                     <DateLabel dateString={finnDato(tilVerdi)} />
                   </Detail>
@@ -190,7 +197,7 @@ export const DatoSorteringValg = ({ valgtSakslisteId, valgtAvdelingEnhet, erDyna
   );
 };
 
-const finnDato = (antallDager: number) => dayjs().add(antallDager, 'd').format();
+const finnDato = (antallDager: string) => dayjs().add(Number(antallDager), 'd').format();
 
 const getLagreDatoFn =
   (
