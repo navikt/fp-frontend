@@ -156,9 +156,8 @@ const sorterInntektsmeldinger = ({
 }) => {
   if (sortKey === 'arbeidsgiverIdent') {
     return inntektsmeldinger.slice().sort((a, b) => {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
       const navnA = arbeidsgiverOpplysningerPerId[a.arbeidsgiverIdent]?.navn;
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
       const navnB = arbeidsgiverOpplysningerPerId[b.arbeidsgiverIdent]?.navn;
 
       return sorterStreng(navnA, navnB);

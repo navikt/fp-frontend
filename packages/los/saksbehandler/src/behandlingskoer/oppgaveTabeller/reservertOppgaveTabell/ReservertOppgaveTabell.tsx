@@ -133,7 +133,6 @@ const comparator = (a: Oppgave, b: Oppgave, orderBy: TableHeaders) => {
       : 1;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (b[orderBy] === undefined || a[orderBy] === undefined || b[orderBy] < a[orderBy]) {
     return -1;
   }

@@ -154,8 +154,18 @@ export const TilretteleggingForm = ({
   const formValuesRecord = formMethods.watch();
   const formValues = formValuesRecord[index];
 
+  if (!formValues) {
+    // eslint-disable-next-line no-console -- logges vel til Sentry??
+    console.error(`FormValues finne ikke for ${index}`);
+    return null;
+  }
+
   const lagreIForm = (values: FormValues) => {
     const lagreFormValues = values[index];
+    if (!lagreFormValues) {
+      throw new Error(`FormValues finnes ikke for index ${index}`);
+    }
+
     const kilde =
       lagreFormValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' || erNyPeriode
         ? 'REGISTRERT_AV_SAKSBEHANDLER'

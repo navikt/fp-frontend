@@ -59,13 +59,13 @@ const PERIODE_TYPE_IKON_MAP = {
   [UttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: <PersonPregnantIcon />,
 } as Record<string, ReactNode>;
 
-const PERIODE_TYPE_LABEL_MAP = {
+const PERIODE_TYPE_LABEL_MAP: Record<string, string> = {
   [UttakPeriodeType.MODREKVOTE]: 'UttakTidslinje.Modrekvote',
   [UttakPeriodeType.FEDREKVOTE]: 'UttakTidslinje.Fedrekvote',
   [UttakPeriodeType.FELLESPERIODE]: 'UttakTidslinje.Fellesperiode',
   [UttakPeriodeType.FORELDREPENGER]: 'UttakTidslinje.Foreldrepenger',
   [UttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: 'UttakTidslinje.ForeldrepengerForFodsel',
-} as Record<string, string>;
+};
 
 const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslinjedata): number => {
   if (a.periode.fom < b.periode.fom) {
@@ -127,9 +127,9 @@ const finnPeriodeType = (valgtPeriode: PeriodeSoker | AnnenforelderUttakEøsPeri
   }
   const kontoIkkeSatt =
     valgtPeriode.aktiviteter.length === 0 ||
-    (!valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-');
+    (!valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-');
   return !kontoIkkeSatt && valgtPeriode.aktiviteter[0]?.stønadskontoType
-    ? valgtPeriode.aktiviteter[0]?.stønadskontoType
+    ? valgtPeriode.aktiviteter[0].stønadskontoType
     : '';
 };
 
@@ -196,7 +196,7 @@ const slåSammenPinDataOmLikDato = (pinData: PinData[]): PinData[] =>
         .concat({
           dato: data.dato,
           datoITidslinjen: data.datoITidslinjen,
-          tekstIder: data.tekstIder.concat(accData[index].tekstIder),
+          tekstIder: data.tekstIder.concat(accData[index]!.tekstIder),
         });
     }
     return accData.concat(data);
@@ -382,8 +382,8 @@ export const UttakTidslinje = ({
       }
     : undefined;
 
-  const originalFomDato = dayjs(sorterteUttaksperioder[0].periode.fom);
-  const originalTomDato = dayjs(sorterteUttaksperioder[sorterteUttaksperioder.length - 1].periode.tom);
+  const originalFomDato = dayjs(sorterteUttaksperioder[0]?.periode.fom);
+  const originalTomDato = dayjs(sorterteUttaksperioder.at(-1)?.periode.tom);
 
   const pinData = lagPinData(tidslinjeTider, originalFomDato);
 

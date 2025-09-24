@@ -22,7 +22,7 @@ const UttakPeriodeNavn = {
   FORELDREPENGER: 'Foreldrepenger',
   FLERBARNSDAGER: 'Flerbarnsdager',
   UDEFINERT: '-',
-} as Record<string, string>;
+};
 
 interface Props {
   valgtBeregningsresultatPeriode: BeregningsresultatPeriode;
@@ -193,7 +193,6 @@ const createVisningNavnForUttakArbeidstaker = (
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
   if (!arbeidsgiverOpplysninger?.navn) {
-
     const opptjeningAktiviteter = alleKodeverk['OpptjeningAktivitetType'];
     return opptjeningAktiviteter.find(({ kode }) => kode === andel.arbeidsforholdType)?.navn ?? '';
   }

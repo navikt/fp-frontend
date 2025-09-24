@@ -54,7 +54,7 @@ export const FodselInngangsvilkarInitPanel = () => {
 
 const AKSJONSPUNKT_TEKST_PER_KODE = {
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
-} as Record<string, string>;
+};
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>
   aksjonspunkter.length > 0

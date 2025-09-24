@@ -65,7 +65,7 @@ export const FagsakSøk = ({
     )}
     {searchResultReceived && skalViseListe(fagsaker, fagsakOppgaver) && (
       <>
-        <PersonInfo person={fagsaker[0].person} />
+        <PersonInfo person={fagsaker[0]!.person} />
         <BodyShort size="small">
           <FormattedMessage id="FagsakSearch.FlereSakerEllerBehandlinger" />
         </BodyShort>

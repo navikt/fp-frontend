@@ -30,7 +30,7 @@ export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): AlleK
   if (!alleKodeverk) {
     throw new Error('Kodeverk er ikke lastet inn');
   }
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
   if (!alleKodeverk[kodeverkType]) {
     throw new Error(`Kodeverk ${kodeverkType} finnes ikke`);
   }

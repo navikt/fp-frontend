@@ -32,7 +32,7 @@ export const MenyEndreBehandlendeEnhetIndex = ({
   const filtrerteBehandlendeEnheter = behandlendeEnheter.filter(enhet => enhet.enhetId !== behandlendeEnhetId);
 
   const submit = (formValues: FormValues) => {
-    const nyEnhet = filtrerteBehandlendeEnheter[parseInt(formValues.nyEnhet, 10)];
+    const nyEnhet = filtrerteBehandlendeEnheter[parseInt(formValues.nyEnhet, 10)]!;
     const values = {
       enhetNavn: nyEnhet.enhetNavn,
       enhetId: nyEnhet.enhetId,

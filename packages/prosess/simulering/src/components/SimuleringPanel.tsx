@@ -155,7 +155,7 @@ const hentToggleDetaljer =
     if (tableIndex !== -1) {
       const updatedTable = {
         id,
-        show: !showDetails[tableIndex].show,
+        show: !showDetails[tableIndex]?.show,
       };
 
       newShowDetailsArray = [

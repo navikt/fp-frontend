@@ -61,7 +61,6 @@ const leggTilAksjonspunktMarkering = (
           ap.status === AksjonspunktStatus.OPPRETTET,
       ) &&
       periode.arbeidsforhold?.arbeidsgiverReferanse &&
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
       !arbeidsgiverOpplysningerPerId[periode.arbeidsforhold?.arbeidsgiverReferanse]
     ) {
       return {

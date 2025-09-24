@@ -17,6 +17,7 @@ import type {
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   FamilieHendelse,
+  foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon,
   PeriodeSoker,
   Personoversikt,
   Soknad,
@@ -30,7 +31,9 @@ import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import { UttakTidslinjeIndex } from './tidslinje/UttakTidslinjeIndex';
 
-const UTTAK_PANEL_AKSJONSPUNKT_KODER = {
+const UTTAK_PANEL_AKSJONSPUNKT_KODER: Partial<
+  Record<foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon, string>
+> = {
   5067: 'UttakPanel.Aksjonspunkt.5067',
   5069: 'UttakPanel.Aksjonspunkt.5069',
   5072: 'UttakPanel.Aksjonspunkt.5072',
@@ -42,7 +45,7 @@ const UTTAK_PANEL_AKSJONSPUNKT_KODER = {
   5078: 'UttakPanel.Aksjonspunkt.5078',
   5079: 'UttakPanel.Aksjonspunkt.5079',
   5098: 'UttakPanel.Aksjonspunkt.5098',
-} as Record<string, string>;
+};
 
 // TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
 const UttakPeriodeNavn = {
@@ -52,8 +55,11 @@ const UttakPeriodeNavn = {
   FORELDREPENGER_FØR_FØDSEL: 'Foreldrepenger før fødsel',
   FORELDREPENGER: 'Foreldrepenger',
   FLERBARNSDAGER: 'Flerbarnsdager',
-  UDEFINERT: '-',
-} as Record<string, string>;
+  UTEN_AKTIVITETSKRAV: 'Uten aktivitetskrav',
+  MINSTERETT_NESTE_STØNADSPERIODE: 'Minsterett neste stønadsperiode',
+  MINSTERETT: 'minsterett',
+  '-': '-',
+};
 
 const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const filtrerteAksjonspunkter = aksjonspunkter.filter(
@@ -75,7 +81,7 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
     aksjonspunktTekster.push(<FormattedMessage key="generellTekst" id="UttakPanel.Aksjonspunkt.Generell" />);
   }
 
-  if (aksjonspunkter.length === 1 && aksjonspunkter[0].definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER) {
+  if (aksjonspunkter.length === 1 && aksjonspunkter[0]?.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER) {
     if (aksjonspunkter[0].status !== 'UTFO') {
       aksjonspunktTekster.push(<FormattedMessage key="aksjonspunktTekst" id="UttakPanel.Overstyrt.KontrollerPaNytt" />);
     } else {
@@ -92,15 +98,16 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   perioder.forEach(p => {
     const ikkeGyldigeAktiviteter = p.aktiviteter.filter(
       a =>
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
         stønadskonto.stonadskontoer[a.stønadskontoType as StonadskontoType] === undefined &&
         !!a.trekkdagerDesimaler &&
         a.trekkdagerDesimaler > 0,
     );
-    if (p.periodeResultatType === PeriodeResultatType.INNVILGET && ikkeGyldigeAktiviteter.length > 0) {
+
+    const ugyldigKontoType = ikkeGyldigeAktiviteter.at(0)?.stønadskontoType;
+    if (p.periodeResultatType === PeriodeResultatType.INNVILGET && ugyldigKontoType) {
       const feilmelding = intl.formatMessage(
         { id: 'UttakPanel.InvalidStonadskonto' },
-        { konto: UttakPeriodeNavn[ikkeGyldigeAktiviteter[0].stønadskontoType as StonadskontoType] },
+        { konto: UttakPeriodeNavn[ugyldigKontoType] },
       );
       if (!feil.includes(feilmelding)) {
         feil.push(feilmelding);
@@ -110,11 +117,12 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
 
   if (feil.length === 0) {
     const kontoerMedUgyldigForbruk = Object.values(stønadskonto.stonadskontoer).filter(s => !s.gyldigForbruk);
-    if (kontoerMedUgyldigForbruk.length > 0) {
+    const kontoMedUgyldigForbruk = kontoerMedUgyldigForbruk.at(0)?.stonadskontotype;
+    if (kontoMedUgyldigForbruk) {
       feil.push(
         intl.formatMessage(
           { id: 'UttakPanel.KontoMedUgyldigForbruk' },
-          { konto: UttakPeriodeNavn[kontoerMedUgyldigForbruk[0].stonadskontotype] },
+          { konto: UttakPeriodeNavn[kontoMedUgyldigForbruk] },
         ),
       );
     }
@@ -259,7 +267,7 @@ export const UttakProsessPanel = ({
   };
 
   const oppdaterPeriode = (oppdatertePerioder: PeriodeSoker[]) => {
-    const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0].fom);
+    const andrePerioder = perioder.filter(p => p.fom !== oppdatertePerioder[0]?.fom);
     const nyePerioder = [...andrePerioder.concat(oppdatertePerioder)].sort(sortByDate);
     setPerioder(nyePerioder);
     setIsDirty(true);
@@ -268,7 +276,7 @@ export const UttakProsessPanel = ({
       oppdatertStønadskonto => {
         setStønadskonto(oppdatertStønadskonto);
         if (oppdatertePerioder.length === 2) {
-          const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0].fom);
+          const index = nyePerioder.findIndex(p => p.fom === oppdatertePerioder[0]?.fom);
           setValgtPeriodeIndex(perioderAnnenpart.length + index);
         } else {
           visPeriode(perioderAnnenpart.concat(nyePerioder));

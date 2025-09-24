@@ -79,7 +79,7 @@ const isStrictResponse = (response: any): response is HttpResponse<JsonBodyType>
 
 const getMockResponse = (rel: string): (() => HttpResponse<JsonBodyType>) => {
   const responseData = ressursMap[rel] ?? undefined;
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
   if (responseData === undefined)
     return () =>
       HttpResponse.json({ error: `Mangler mock for relasjonslenke i ressursMap for rel: ${rel}` }, { status: 500 });

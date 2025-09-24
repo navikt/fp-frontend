@@ -113,7 +113,6 @@ const utledNavn = (
 ): string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverIdent];
   if (saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
     return arbeidsgiverOpplysninger?.navn;
   }
 

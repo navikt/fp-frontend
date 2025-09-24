@@ -32,7 +32,11 @@ export const FaktaFraFReg = ({ register: { barn } }: Props) => {
 };
 
 const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
-  const barnErLike = !barn.find(erBarnUlike(barn[0]));
+  const barnet = barn.at(0);
+  if (!barnet) {
+    return null;
+  }
+  const barnErLike = !barn.find(erBarnUlike(barnet));
   const harDødtBarn = barn.some(b => b.dødsdato);
 
   if (barnErLike) {
@@ -40,12 +44,12 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
       <VStack gap="space-16">
         <ReadOnlyField
           label={<FormattedMessage id="Label.Fødselsdato" />}
-          value={<DateLabel dateString={barn[0].fødselsdato} />}
+          value={<DateLabel dateString={barnet.fødselsdato} />}
         />
-        {barn[0].dødsdato && (
+        {barnet.dødsdato && (
           <ReadOnlyField
             label={<FormattedMessage id="Label.Dødsdato" />}
-            value={<DateLabel dateString={barn[0].dødsdato} />}
+            value={<DateLabel dateString={barnet.dødsdato} />}
           />
         )}
         <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={barn.length} />

@@ -32,7 +32,7 @@ const sorterArbeidsforhold = (
   [...alleArbeidsforhold].sort((a, b) => {
     const arbeidsgiverOpplysningerA1 = arbeidsgiverOpplysningerPerId[a.arbeidsgiverReferanse ?? ''];
     const arbeidsgiverOpplysningerA2 = arbeidsgiverOpplysningerPerId[b.arbeidsgiverReferanse ?? ''];
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
     return arbeidsgiverOpplysningerA1 && arbeidsgiverOpplysningerA2
       ? arbeidsgiverOpplysningerA1.navn.localeCompare(arbeidsgiverOpplysningerA2.navn)
       : 0;
