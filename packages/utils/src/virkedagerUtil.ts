@@ -1,5 +1,5 @@
 export const finnDager = (trekkdager: number): string => {
-  return trekkdager ? parseFloat((trekkdager % 5).toFixed(1)).toString() : '0';
+  return trekkdager ? Number.parseFloat((trekkdager % 5).toFixed(1)).toString() : '0';
 };
 
 export const finnUker = (trekkdager: number): string => {

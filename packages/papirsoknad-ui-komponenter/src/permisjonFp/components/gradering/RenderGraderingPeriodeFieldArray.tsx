@@ -134,7 +134,7 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
               control={control}
               label={<FormattedMessage id="Registrering.Permisjon.Gradering.Prosentandel" />}
               validate={[required, hasValidDecimal, maxValue100]}
-              normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
+              normalizeOnBlur={value => (Number.isNaN(value) ? value : Number.parseFloat(value.toString()).toFixed(2))}
             />
 
             <RhfTextField

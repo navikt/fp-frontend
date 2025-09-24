@@ -100,7 +100,7 @@ export const DocumentListInnsyn = ({ documents, saksNr, readOnly = false }: Prop
         <Table.Body>
           {documents.map(document => {
             const img = getDirectionImage(document, intl);
-            const dokId = parseInt(document.dokumentId, 10);
+            const dokId = Number.parseInt(document.dokumentId, 10);
             return (
               <Table.Row key={dokId}>
                 <Table.DataCell className={styles['checkboxCol']}>

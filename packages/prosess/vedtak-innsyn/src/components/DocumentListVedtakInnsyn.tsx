@@ -45,7 +45,7 @@ export const DocumentListVedtakInnsyn = ({ documents, saksNr }: Props) => {
         </Table.Header>
         <Table.Body>
           {documents.map(document => {
-            const dokId = parseInt(document.dokumentId, 10);
+            const dokId = Number.parseInt(document.dokumentId, 10);
             return (
               <Table.Row key={dokId}>
                 <Table.DataCell className={styles['linkCol']}>

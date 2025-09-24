@@ -8,9 +8,9 @@ const REMOVE_P_IN_LI_REGEX = /<li[^>]*>\s*(?:<p[^>]*>|<\/p>)+([\s\S]*?)<\/li>/g;
 const ADD_P_IN_LI_REGEX = /<li([^>]*)>(?!\s*<p>)([\s\S]*?)(?!<\/p>)<\/li>/g; // Legg til p-tags inni li-tags for å få korrekt styling i pdf
 
 const fjernMellomromOgPTagsILiTags = (html: string): string =>
-  html.replace(REMOVE_SPACE_REGEX, '$1').replace(REMOVE_P_IN_LI_REGEX, '<li>$1</li>');
+  html.replaceAll(REMOVE_SPACE_REGEX, '$1').replaceAll(REMOVE_P_IN_LI_REGEX, '<li>$1</li>');
 
-export const leggTilPTagsILiTags = (html: string): string => html.replace(ADD_P_IN_LI_REGEX, '<li$1><p>$2</p></li>');
+export const leggTilPTagsILiTags = (html: string): string => html.replaceAll(ADD_P_IN_LI_REGEX, '<li$1><p>$2</p></li>');
 
 export const lagRedigerbartInnholdWrapper = (redigerbartInnhold: string, readonlyFooter: string | undefined) =>
   `<div id="redigerbart-innhold" data-editable="data-editable">${leggTilPTagsILiTags(
@@ -112,7 +112,10 @@ export const konverterHtmlToEditorJsFormat = (html: string): OutputData => {
       switch (element.tagName.toLowerCase()) {
         case 'h1':
         case 'h2':
-          blocks.push({ type: 'header', data: { text: element.innerHTML, level: parseInt(element.tagName[1]) } });
+          blocks.push({
+            type: 'header',
+            data: { text: element.innerHTML, level: Number.parseInt(element.tagName[1]) },
+          });
           break;
         case 'p':
           blocks.push({ type: 'paragraph', data: { text: element.innerHTML } });

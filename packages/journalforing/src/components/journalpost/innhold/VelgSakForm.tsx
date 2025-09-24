@@ -48,7 +48,7 @@ export const transformValues = (
   if (saksnummerValg === LAG_NY_SAK) {
     const valgtYtelse = values[selectFieldName];
     if (!valgtYtelse) {
-      throw Error('Kan ikke journalføre på ny sak uten ytelse');
+      throw new Error('Kan ikke journalføre på ny sak uten ytelse');
     }
     return {
       opprettSak: {

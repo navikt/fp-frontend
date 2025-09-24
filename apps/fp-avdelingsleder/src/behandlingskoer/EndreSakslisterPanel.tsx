@@ -38,7 +38,7 @@ export const EndreSakslisterPanel = ({ valgtAvdelingEnhet, avdelingensSaksbehand
     },
   });
 
-  const nyId = nySakslisteObject ? parseInt(nySakslisteObject.sakslisteId, 10) : undefined;
+  const nyId = nySakslisteObject ? Number.parseInt(nySakslisteObject.sakslisteId, 10) : undefined;
   const valgtSakId = valgtSakslisteId !== undefined ? valgtSakslisteId : nyId;
 
   const valgtSaksliste = sakslister.find(s => s.sakslisteId === valgtSakId);

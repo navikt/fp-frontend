@@ -116,7 +116,6 @@ export const GjeldendeSakslisterTabell = ({
     if (id) {
       setValgtSakslisteId(isOpen ? id : undefined);
     }
-    return Promise.resolve();
   };
 
   const lagNySakslisteFn = (event: KeyboardEvent): void => {

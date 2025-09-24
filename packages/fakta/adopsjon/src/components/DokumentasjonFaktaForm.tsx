@@ -102,7 +102,7 @@ export const DokumentasjonFaktaForm = ({
               isReadOnly={readOnly}
               isEdited={getAdopsjonsdatoEditedStatusForId(id)}
             />
-            {!readOnly && isAgeAbove15(fodselsdatoer, parseInt(id, 10), omsorgsovertakelseDato) && (
+            {!readOnly && isAgeAbove15(fodselsdatoer, Number.parseInt(id, 10), omsorgsovertakelseDato) && (
               <ExclamationmarkTriangleFillIcon
                 title={intl.formatMessage({ id: 'DokumentasjonFaktaForm.BarnErOver15Ar' })}
                 className={i === 0 ? styles['topMarginFirstRow'] : styles['topMargin']}
@@ -127,7 +127,9 @@ const findAntallBarnUnder15 = (
   fodselsdatoer: Record<number, string>,
   omsorgsovertakelseDato?: string,
 ): number | string => {
-  const nrOfNotNullFodselsdatoer = Object.keys(fodselsdatoer).filter(id => fodselsdatoer[parseInt(id, 10)]).length;
+  const nrOfNotNullFodselsdatoer = Object.keys(fodselsdatoer).filter(
+    id => fodselsdatoer[Number.parseInt(id, 10)],
+  ).length;
   if (nrOfNotNullFodselsdatoer === 0 || !omsorgsovertakelseDato) {
     return '-';
   }

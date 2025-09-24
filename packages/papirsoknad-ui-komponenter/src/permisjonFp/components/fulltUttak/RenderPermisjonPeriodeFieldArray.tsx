@@ -184,7 +184,9 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
                 control={control}
                 validate={[hasValidDecimal, maxValue100]}
                 label={intl.formatMessage({ id: 'Registrering.Permisjon.SamtidigUttaksprosent' })}
-                normalizeOnBlur={value => (Number.isNaN(value) ? value : parseFloat(value.toString()).toFixed(2))}
+                normalizeOnBlur={value =>
+                  Number.isNaN(value) ? value : Number.parseFloat(value.toString()).toFixed(2)
+                }
               />
             )}
 
