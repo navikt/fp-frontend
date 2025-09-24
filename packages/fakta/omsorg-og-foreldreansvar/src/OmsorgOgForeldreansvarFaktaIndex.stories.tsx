@@ -25,7 +25,7 @@ import type {
 
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
 
-const soknad = {
+const søknad = {
   adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' },
   antallBarn: 2,
   soknadType: SoknadType.ADOPSJON,
@@ -119,7 +119,7 @@ const meta = {
   component: OmsorgOgForeldreansvarFaktaIndex,
   decorators: [withPanelData],
   args: {
-    soknad,
+    søknad,
     adopsjon: defaultAdopsjon,
     personoversikt,
     innvilgetRelatertTilgrensendeYtelserForAnnenForelder,

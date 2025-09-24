@@ -1,20 +1,19 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { HStack, Label, VStack } from '@navikt/ds-react';
+import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import { type Soknad, søknadErAdopsjon } from '@navikt/fp-types';
+import { type AdopsjonFamilieHendelse, type Soknad, søknadErAdopsjon } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
-
-import styles from './barnPanel.module.css';
 
 interface Props {
   søknad: Soknad;
+  adopsjon: AdopsjonFamilieHendelse;
 }
 
-export const BarnPanel = ({ søknad }: Props) => {
+export const BarnPanel = ({ søknad, adopsjon }: Props) => {
   const intl = useIntl();
 
   if (!søknadErAdopsjon(søknad)) {
@@ -22,22 +21,30 @@ export const BarnPanel = ({ søknad }: Props) => {
   }
 
   const fødselsdatoer = Object.entries(søknad.adopsjonFodelsedatoer ?? []);
+
   return (
     <FaktaKort label={intl.formatMessage({ id: 'BarnPanel.Tittel' })}>
       <VStack gap="space-8">
-        {fødselsdatoer.map(([childNumber, fødselsdato], index) => (
+        <ReadOnlyField
+          size="medium"
+          label={<FormattedMessage id="BarnPanel.AntallBarn" />}
+          value={adopsjon.antallBarn}
+        />
+
+        <Label size="medium">
+          <FormattedMessage id="BarnPanel.Fødselsdato" />
+        </Label>
+
+        {fødselsdatoer.map(([childNumber, fødselsdato]) => (
           <HStack gap="space-16" key={`${AksjonspunktKode.OMSORGSOVERTAKELSE}-${childNumber}`}>
             {fødselsdatoer.length > 1 && (
-              <Label size="medium" className={index === 0 ? styles['topMarginFirstRow'] : styles['topMargin']}>
+              <Label size="small">
                 <FormattedMessage id="BarnPanel.BarnNr" values={{ nummer: childNumber }} />
               </Label>
             )}
-            <ReadOnlyField
-              size="medium"
-              label={<FormattedMessage id="BarnPanel.Fødselsdato" />}
-              hideLabel={index > 0}
-              value={<DateLabel dateString={fødselsdato} />}
-            />
+            <BodyShort size="medium">
+              <DateLabel dateString={fødselsdato} />
+            </BodyShort>
           </HStack>
         ))}
       </VStack>

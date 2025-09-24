@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   adopsjon: AdopsjonFamilieHendelse;
-  soknad: Soknad;
+  søknad: Soknad;
   personoversikt: Personoversikt;
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
 }
