@@ -50,7 +50,7 @@ export const PersonYtelserTable = ({ ytelser }: Props) => {
         },
       );
     })
-    .reduce((allRows, rows) => allRows.concat(rows), []);
+    .flat();
 
   if (!ytelseRows) {
     return null;

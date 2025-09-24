@@ -84,5 +84,5 @@ const getComponentForFamiliehendelse = (familieHendelse: string) => {
   if (familieHendelse === FamilieHendelseType.ADOPSJON) {
     return RegistreringAdopsjonOgOmsorgGrid;
   }
-  throw Error(`Unsupported FamilieHendelseType i papirsoknad for engangsstønad: ${familieHendelse}`);
+  throw new Error(`Unsupported FamilieHendelseType i papirsoknad for engangsstønad: ${familieHendelse}`);
 };

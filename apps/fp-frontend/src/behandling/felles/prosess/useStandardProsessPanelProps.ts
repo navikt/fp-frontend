@@ -128,7 +128,7 @@ const getBekreftAksjonspunktProsessCallback =
     );
 
     if (apListe.length === 0) {
-      throw Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
+      throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
     }
 
     if (aksjonspunkterTilLagring.length === 0 || erOverstyringsaksjonspunkter) {

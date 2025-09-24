@@ -25,6 +25,6 @@ export const lazyWithRetry = <T>(
       // The page has already been reloaded
       // Assuming that user is already using the latest version of the application.
       // Let's let the application crash and raise the error.
-      throw error;
+      throw new Error();
     }
   });

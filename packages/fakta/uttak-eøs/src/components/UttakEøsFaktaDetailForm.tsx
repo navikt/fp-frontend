@@ -204,7 +204,7 @@ const validerTomEtterFom = (intl: IntlShape, getValues: UseFormGetValues<FormVal
 const transformValues = ({ trekkdager, trekkuker, ...rest }: FormValues): AnnenforelderUttakEøsPeriode => {
   return {
     ...rest,
-    trekkdager: Number((parseFloat(trekkuker) * 5 + parseFloat(trekkdager)).toFixed(1)),
+    trekkdager: Number((Number.parseFloat(trekkuker) * 5 + Number.parseFloat(trekkdager)).toFixed(1)),
   };
 };
 

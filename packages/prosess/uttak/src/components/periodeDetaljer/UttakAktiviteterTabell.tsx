@@ -62,7 +62,7 @@ const sjekkOmUtbetalingsgradEr0OmAvslått =
   (intl: IntlShape, erOppfylt: boolean, utsettelseType?: string) =>
   (utbetalingsgrad: string): string | null => {
     const harUtsettelse = !erOppfylt && (!utsettelseType || utsettelseType === '-');
-    if (harUtsettelse && parseFloat(utbetalingsgrad) > 0) {
+    if (harUtsettelse && Number.parseFloat(utbetalingsgrad) > 0) {
       return intl.formatMessage({ id: 'RenderUttakTable.MerEnNullUtaksprosent' });
     }
     return null;
@@ -73,7 +73,12 @@ const sjekkOmUtbetalingsgradMårVæreHøyereEnn0 =
   (utbetalingsgrad: string): string | null => {
     const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
     const erUttak = valgtPeriode.utsettelseType === '-' && !kontoIkkeSatt;
-    if (erUttak && erOppfylt && parseFloat(utbetalingsgrad) <= 0 && samletUtbetalingsgradForAndreAktiviteter === 0) {
+    if (
+      erUttak &&
+      erOppfylt &&
+      Number.parseFloat(utbetalingsgrad) <= 0 &&
+      samletUtbetalingsgradForAndreAktiviteter === 0
+    ) {
       return intl.formatMessage({ id: 'ValidationMessage.HøyereEnn0NårInnvilgetUttak' });
     }
     return null;
@@ -97,7 +102,11 @@ const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 =
   (utbetalingsgrad: string): string | null => {
     const aktiviteter = getValues('aktiviteter');
     const aktivitet = aktiviteter[index];
-    if (parseFloat(aktivitet.weeks) === 0 && parseFloat(aktivitet.days) === 0 && parseFloat(utbetalingsgrad) > 0) {
+    if (
+      Number.parseFloat(aktivitet.weeks) === 0 &&
+      Number.parseFloat(aktivitet.days) === 0 &&
+      Number.parseFloat(utbetalingsgrad) > 0
+    ) {
       return intl.formatMessage({
         id: 'ValidationMessage.ukerOgDagerVidNullUtbetalningsgradMessage',
       });
@@ -126,7 +135,7 @@ const lagPeriodeTypeOptions = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): Re
 const validerUkerOgDager = (getValues: UseFormGetValues<UttakAktivitetType>, index: number) => (value: string) => {
   const weeks = getValues(`aktiviteter.${index}.weeks`);
   const days = getValues(`aktiviteter.${index}.days`);
-  const skalSjekke = parseFloat(weeks) !== 0 || parseFloat(days) !== 0;
+  const skalSjekke = Number.parseFloat(weeks) !== 0 || Number.parseFloat(days) !== 0;
   if (skalSjekke) {
     const requiredMessage = required(value);
     if (requiredMessage) {
@@ -148,7 +157,7 @@ const validerAtUkerEllerDagerErStørreEnn0NårUtsettelseOgOppfylt =
   ) =>
   (ukerEllerDager: string) => {
     const harUtsettelsestype = utsettelseType !== '-';
-    return harUtsettelsestype && getValues('erOppfylt') && parseFloat(ukerEllerDager) > 0
+    return harUtsettelsestype && getValues('erOppfylt') && Number.parseFloat(ukerEllerDager) > 0
       ? intl.formatMessage({ id: 'ValidationMessage.trekkdagerErMerEnnNullUtsettelse' })
       : null;
   };
@@ -216,7 +225,7 @@ export const UttakAktiviteterTabell = ({
               );
 
               const samletUtbetalingsgradForAndreAktiviteter = aktiviteterFraFormState.reduce(
-                (sum, aktivitet, i) => (i !== index ? sum + parseInt(aktivitet.utbetalingsgrad, 10) : sum),
+                (sum, aktivitet, i) => (i !== index ? sum + Number.parseInt(aktivitet.utbetalingsgrad, 10) : sum),
                 0,
               );
 
@@ -306,7 +315,9 @@ export const UttakAktiviteterTabell = ({
                           sjekkOmUtbetalingsgradErHøyereEnnSamtidigUttaksprosent(intl, getValues),
                           (utbetalingsgrad: string) => {
                             const harUtsettelsestype = utsettelseType && utsettelseType !== '-';
-                            return harUtsettelsestype && getValues('erOppfylt') && parseFloat(utbetalingsgrad) > 0
+                            return harUtsettelsestype &&
+                              getValues('erOppfylt') &&
+                              Number.parseFloat(utbetalingsgrad) > 0
                               ? intl.formatMessage({ id: 'ValidationMessage.utbetalingMerEnnNullUtsettelse' })
                               : null;
                           },

@@ -150,7 +150,9 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker)
   if (aktivitet.trekkdagerDesimaler && aktivitet.trekkdagerDesimaler < 0) {
     return '0';
   }
-  return aktivitet.trekkdagerDesimaler ? parseFloat((aktivitet.trekkdagerDesimaler % 5).toFixed(1)).toString() : '0';
+  return aktivitet.trekkdagerDesimaler
+    ? Number.parseFloat((aktivitet.trekkdagerDesimaler % 5).toFixed(1)).toString()
+    : '0';
 };
 
 const sorterGradering = (a: GraderingAvslagÅrsakKodeverk, b: GraderingAvslagÅrsakKodeverk): number => {
@@ -193,7 +195,7 @@ const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
   intl: IntlShape,
 ): string | undefined => {
   const harMerEnn100 = formAktiviteter.some(
-    (aktivitet, index) => parseFloat(aktivitet.utbetalingsgrad) + (aktiviteter[index].prosentArbeid ?? 0) > 100,
+    (aktivitet, index) => Number.parseFloat(aktivitet.utbetalingsgrad) + (aktiviteter[index].prosentArbeid ?? 0) > 100,
   );
   return harMerEnn100 ? intl.formatMessage({ id: 'UttakActivity.MerEn100Prosent' }) : undefined;
 };
@@ -249,7 +251,7 @@ const transformValues = (
       : PeriodeResultatType.AVSLATT,
   graderingAvslagÅrsak: values.graderingAvslagAarsak,
   periodeResultatÅrsak: values.periodeAarsak,
-  samtidigUttaksprosent: values.samtidigUttaksprosent ? parseFloat(values.samtidigUttaksprosent) : undefined,
+  samtidigUttaksprosent: values.samtidigUttaksprosent ? Number.parseFloat(values.samtidigUttaksprosent) : undefined,
   samtidigUttak: values.samtidigUttak,
   flerbarnsdager: values.flerbarnsdager,
   aktiviteter: filtrerteAktiviteter.map((a, index) => {
@@ -257,8 +259,8 @@ const transformValues = (
     return {
       ...a,
       stønadskontoType: aktivitet.stønadskontoType,
-      utbetalingsgrad: parseFloat(aktivitet.utbetalingsgrad),
-      trekkdagerDesimaler: parseFloat(aktivitet.weeks) * 5 + parseFloat(aktivitet.days),
+      utbetalingsgrad: Number.parseFloat(aktivitet.utbetalingsgrad),
+      trekkdagerDesimaler: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
     };
   }),
 });
