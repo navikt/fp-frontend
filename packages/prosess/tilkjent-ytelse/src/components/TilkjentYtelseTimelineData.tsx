@@ -14,14 +14,14 @@ import type {
 } from '@navikt/fp-types';
 
 // TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
-const UttakPeriodeNavn = {
+const UttakPeriodeNavn: Record<string, string> = {
   MØDREKVOTE: 'Mødrekvote',
   FEDREKVOTE: 'Fedrekvote',
   FELLESPERIODE: 'Fellesperiode',
   FORELDREPENGER_FØR_FØDSEL: 'Foreldrepenger før fødsel',
   FORELDREPENGER: 'Foreldrepenger',
   FLERBARNSDAGER: 'Flerbarnsdager',
-  UDEFINERT: '-',
+  '-': '-',
 };
 
 interface Props {

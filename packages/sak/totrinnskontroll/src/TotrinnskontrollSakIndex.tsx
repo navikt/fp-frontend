@@ -131,7 +131,7 @@ export const TotrinnskontrollSakIndex = ({
 
   const sorterteTotrinnskontrollSkjermlenkeContext = erTilbakekreving
     ? sorterteSkjermlenkeCodesForTilbakekreving.flatMap(s => {
-        const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s.kode);
+        const context = behandling.totrinnskontrollÅrsaker.find(el => el.skjermlenkeType === s?.kode);
         return context ? [context] : [];
       })
     : behandling.totrinnskontrollÅrsaker;

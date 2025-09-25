@@ -109,7 +109,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
   return (
     <RhfForm
       formMethods={formMethods}
-      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]))}
+      onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]!))}
     >
       <VStack gap="space-20">
         {!isReadOnly && harÅpentAksjonspunkt && (

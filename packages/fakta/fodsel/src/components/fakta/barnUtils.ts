@@ -8,9 +8,13 @@ export const formaterLiv = ({ fødselsdato, dødsdato }: BarnHendelseData): stri
   return dødsdato ? `f. ${født} - d. ${død}` : `f. ${født}`;
 };
 
-export const erGjeldendeBarnLike = (alleBarn: FødselGjeldende['barn']) =>
-  alleBarn.length > 0 &&
-  !alleBarn.find(({ barn, kilde }) => kilde !== alleBarn[0].kilde || erBarnUlike(alleBarn[0].barn)(barn));
+export const erGjeldendeBarnLike = (alleBarn: FødselGjeldende['barn']) => {
+  const barnet = alleBarn[0];
+  if (!barnet) {
+    return false;
+  }
+  return !alleBarn.find(({ barn, kilde }) => kilde !== barnet.kilde || erBarnUlike(barnet.barn)(barn));
+};
 
 export const erBarnUlike = (sammenlignbartBarn: BarnHendelseData) => (barn: BarnHendelseData) =>
   barn.fødselsdato !== sammenlignbartBarn.fødselsdato || barn.dødsdato !== sammenlignbartBarn.dødsdato;

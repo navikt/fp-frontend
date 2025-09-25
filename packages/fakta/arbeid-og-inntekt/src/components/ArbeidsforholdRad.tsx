@@ -108,7 +108,7 @@ export const ArbeidsforholdRad = ({
             <InntektsmeldingOpplysningerPanel
               saksnummer={saksnummer}
               arbeidsforhold={arbeidsforholdForRad.length > 0 ? arbeidsforholdForRad[0] : undefined}
-              inntektsmelding={inntektsmeldingerForRad[0]}
+              inntektsmelding={inntektsmeldingerForRad[0]!}
               skalViseArbeidsforholdId={false}
               alleKodeverk={alleKodeverk}
               radData={radData}
@@ -137,7 +137,7 @@ export const ArbeidsforholdRad = ({
             <>
               <InntektsmeldingOpplysningerPanel
                 saksnummer={saksnummer}
-                inntektsmelding={inntektsmeldingerForRad[0]}
+                inntektsmelding={inntektsmeldingerForRad[0]!}
                 skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
                 radData={radData}
                 alleKodeverk={alleKodeverk}
@@ -195,7 +195,7 @@ export const ArbeidsforholdRad = ({
       <Table.DataCell>
         <BodyShort>
           {arbeidsforholdForRad.length < 2 && inntektsmeldingerForRad.length === 1 && (
-            <DateLabel dateString={inntektsmeldingerForRad[0].motattDato} />
+            <DateLabel dateString={inntektsmeldingerForRad[0]!.motattDato} />
           )}
           {!manglerInntektsmelding &&
             arbeidsforholdForRad.length > 1 &&

@@ -146,7 +146,7 @@ const formatPaneler = (
     erGradert: erEøsPeriode(periode.periode)
       ? false
       : !!periode.periode.gradertAktivitet && !!periode.periode.graderingInnvilget,
-    erOpphold: erEøsPeriode(periode.periode) ? false : periode.periode.oppholdÅrsak !== OppholdArsakType.UDEFINERT,
+    erOpphold: erEøsPeriode(periode.periode) ? false : periode.periode.oppholdÅrsak !== OppholdArsakType['-'],
     harUtsettelse: erEøsPeriode(periode.periode) ? false : periode.periode.utsettelseType !== '-',
     begrunnelse: erEøsPeriode(periode.periode) ? '' : periode.periode.begrunnelse,
   }));

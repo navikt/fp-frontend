@@ -48,7 +48,7 @@ describe('SaksbehandlereTabell', () => {
     const rows = await screen.findAllByRole('row');
 
     rows.slice(1).forEach((row, index) => {
-      expect(row).toHaveTextContent(sortedNames[index]);
+      expect(row).toHaveTextContent(sortedNames[index]!);
     });
   });
 
@@ -60,7 +60,7 @@ describe('SaksbehandlereTabell', () => {
     const rows = await screen.findAllByRole('row');
 
     rows.slice(1).forEach((row, index) => {
-      expect(row).toHaveTextContent(sortedNames[index]);
+      expect(row).toHaveTextContent(sortedNames[index]!);
     });
   });
 });

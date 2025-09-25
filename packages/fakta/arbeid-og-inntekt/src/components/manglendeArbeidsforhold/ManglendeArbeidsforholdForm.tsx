@@ -87,7 +87,7 @@ export const ManglendeArbeidsforholdForm = ({
     formMethods.reset(defaultValues);
   };
 
-  const inntektsmelding = radData.inntektsmeldingerForRad[0];
+  const inntektsmelding = radData.inntektsmeldingerForRad[0]!;
 
   const lagre = (formValues: FormValues) => {
     const oppdater = getOppdaterTabell(oppdaterTabell, radData, inntektsmelding, formValues);

@@ -65,7 +65,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(1);
     const jaElements = screen.getAllByText('Ja');
-    await userEvent.click(jaElements[jaElements.length - 1]);
+    await userEvent.click(jaElements.at(-1)!);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -100,7 +100,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
     const jaElements = screen.getAllByText('Ja');
-    await userEvent.click(jaElements[jaElements.length - 1]);
+    await userEvent.click(jaElements.at(-1)!);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -124,15 +124,15 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
-    await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
+    await userEvent.click(screen.getAllByText('Nei').at(-1)!);
 
     expect(
       screen.getByText('Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?'),
     ).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
+    await userEvent.click(screen.getAllByText('Nei').at(-1)!);
 
     expect(await screen.findByText('Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[screen.getAllByText('Ja').length - 1]);
+    await userEvent.click(screen.getAllByText('Ja').at(-1)!);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
