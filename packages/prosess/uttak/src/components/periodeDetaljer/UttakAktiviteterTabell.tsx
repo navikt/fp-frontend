@@ -117,18 +117,18 @@ const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 =
     return null;
   };
 
-const GYLDIGE_UTTAK_PERIODER = [
+const GYLDIGE_UTTAK_PERIODER = new Set([
   UttakPeriodeType.FELLESPERIODE,
   UttakPeriodeType.FEDREKVOTE,
   UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
   UttakPeriodeType.FORELDREPENGER,
   UttakPeriodeType.MODREKVOTE,
   UttakPeriodeType.UDEFINERT,
-];
+]);
 
 const lagPeriodeTypeOptions = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.some(p => p === kode))
+    .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.has(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

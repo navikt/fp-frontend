@@ -97,13 +97,13 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
     case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR:
       return {
         ...felles,
-        avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
+        avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
         opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
       };
     case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
       return {
         ...felles,
-        avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
+        avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
         medlemFom: vurdering === MedlemskapVurdering.IKKE_OPPFYLT ? medlemFom : undefined,
       };
     default:
@@ -166,9 +166,9 @@ export const VilkarresultatMedOverstyringForm = ({
   const aksjonspunkt = behandling.aksjonspunkt.find(ap => ap.definisjon === overstyringApKode);
   const hasAksjonspunkt = aksjonspunkt !== undefined;
   const isSolvable =
-    aksjonspunkt !== undefined ? !(erAksjonspunktÅpent(aksjonspunkt) && !aksjonspunkt.kanLoses) : false;
+    aksjonspunkt === undefined ? false : !(erAksjonspunktÅpent(aksjonspunkt) && !aksjonspunkt.kanLoses);
 
-  const originalErVilkårOk = VilkarUtfallType.IKKE_VURDERT !== status ? VilkarUtfallType.OPPFYLT === status : undefined;
+  const originalErVilkårOk = VilkarUtfallType.IKKE_VURDERT === status ? undefined : VilkarUtfallType.OPPFYLT === status;
 
   return (
     <RhfForm

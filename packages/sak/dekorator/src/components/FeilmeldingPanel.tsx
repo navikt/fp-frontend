@@ -73,7 +73,7 @@ export const FeilmeldingPanel = ({ feilmeldinger, fjernFeilmeldinger }: Props) =
           skalViseModal={erModalÅpen}
           lukkModal={toggleModalOnClick as () => void}
           feilmeldingsdetaljer={
-            valgtFeilmeldingIndex ? feilmeldinger.at(valgtFeilmeldingIndex)?.tilleggsInfo : undefined
+            valgtFeilmeldingIndex === undefined ? undefined : feilmeldinger[valgtFeilmeldingIndex]?.tilleggsInfo
           }
         />
       )}

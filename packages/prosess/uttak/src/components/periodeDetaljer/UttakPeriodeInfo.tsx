@@ -119,16 +119,16 @@ const stonadskonto = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk, ko
   return returnText;
 };
 
-const gyldigeÅrsaker = [
+const gyldigeÅrsaker = new Set([
   OppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
   OppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
   OppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
   OppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
-];
+]);
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeÅrsaker.some(årsak => årsak === kode))
+    .filter(({ kode }) => gyldigeÅrsaker.has(kode))
     .map(({ kode }) => (
       <option value={kode} key={kode}>
         {OppholdArsakKontoNavn[kode]}

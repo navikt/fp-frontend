@@ -61,18 +61,7 @@ export const VedtakProsessIndex = ({
 
   return (
     <RawIntlProvider value={intl}>
-      {behandling.type !== BehandlingTypeEnum.REVURDERING ? (
-        <VedtakForm
-          previewCallback={previewCallback}
-          tilbakekrevingvalg={tilbakekrevingvalg}
-          simuleringResultat={simuleringResultat}
-          beregningsresultat={beregningsresultat}
-          vilkår={vilkår}
-          beregningErManueltFastsatt={beregningErManueltFastsatt}
-          oppgaver={oppgaver}
-          ferdigstillOppgave={ferdigstillOppgave}
-        />
-      ) : (
+      {behandling.type === BehandlingTypeEnum.REVURDERING ? (
         <VedtakRevurderingForm
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}
@@ -81,6 +70,17 @@ export const VedtakProsessIndex = ({
           vilkår={vilkår}
           beregningErManueltFastsatt={beregningErManueltFastsatt}
           beregningsresultatOriginalBehandling={originaltBeregningsresultat}
+          oppgaver={oppgaver}
+          ferdigstillOppgave={ferdigstillOppgave}
+        />
+      ) : (
+        <VedtakForm
+          previewCallback={previewCallback}
+          tilbakekrevingvalg={tilbakekrevingvalg}
+          simuleringResultat={simuleringResultat}
+          beregningsresultat={beregningsresultat}
+          vilkår={vilkår}
+          beregningErManueltFastsatt={beregningErManueltFastsatt}
           oppgaver={oppgaver}
           ferdigstillOppgave={ferdigstillOppgave}
         />

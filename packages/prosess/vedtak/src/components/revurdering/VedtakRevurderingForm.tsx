@@ -180,7 +180,7 @@ const finnInvilgetRevurderingTekst = (
     return intl.formatMessage({ id: hentResultattekst(true, beregningResultat, originaltBeregningResultat) });
   }
   const konsekvens = lagKonsekvensForYtelsenTekst(alleKodeverk, konsekvenserForYtelsen);
-  return `${konsekvens}${konsekvens !== '' ? (tilbakekrevingText ?? '') : '. '}`;
+  return `${konsekvens}${konsekvens === '' ? '. ' : (tilbakekrevingText ?? '')}`;
 };
 
 const transformValues = (

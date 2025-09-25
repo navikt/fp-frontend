@@ -122,14 +122,14 @@ const creatIndexHtml = () => {
     })
     .map(path.dirname)
     .map(copyFiles)
-    .filter(subPackage => subPackage);
+    .filter(Boolean);
   const packagesPackages = glob
     .sync(path.join(origDir, 'packages', '**', 'package.json').split(path.sep).join('/'), {
       ignore: '**/node_modules/**',
     })
     .map(path.dirname)
     .map(copyFiles)
-    .filter(subPackage => subPackage);
+    .filter(Boolean);
 
   // Lag index-fil
   const index = generateHTML(packagesApps.concat(packagesPackages));
