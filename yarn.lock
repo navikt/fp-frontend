@@ -951,9 +951,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@hey-api/openapi-ts@npm:0.84.2":
-  version: 0.84.2
-  resolution: "@hey-api/openapi-ts@npm:0.84.2"
+"@hey-api/openapi-ts@npm:0.84.3":
+  version: 0.84.3
+  resolution: "@hey-api/openapi-ts@npm:0.84.3"
   dependencies:
     "@hey-api/codegen-core": ^0.2.0
     "@hey-api/json-schema-ref-parser": 1.1.0
@@ -968,7 +968,7 @@ __metadata:
     typescript: ">=5.5.3"
   bin:
     openapi-ts: bin/index.cjs
-  checksum: c6442fbbf0733e2ba173b720f6d9ff349323ce89e07f1f0d0bddcbd4fd62c249e3c5671270e3d9311f9da2863621cfe64872cafe4e74635d5a6b71521ea5cb8e
+  checksum: 7cafff3d97a5f6241f7162e8997cb041325219463cb77a1837008cdb467b5125df7b602aa615ab9c3c3fa338967857ca3fc0aa7bd56f6d730cdaaf500eef041a
   languageName: node
   linkType: hard
 
@@ -9497,7 +9497,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "fp-frontend@workspace:."
   dependencies:
-    "@hey-api/openapi-ts": 0.84.2
+    "@hey-api/openapi-ts": 0.84.3
     "@navikt/aksel-stylelint": 7.31.0
     "@sentry/cli": 2.55.0
     "@storybook/addon-a11y": 9.1.8
