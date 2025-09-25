@@ -134,9 +134,9 @@ export const SaksbehandlereForSakslisteForm = ({
 
 const antallTilknyttetSaksliste = (saksliste: SakslisteAvdeling, gruppe: SaksbehandlerGruppe) => {
   let matchCount = 0;
-  saksliste.saksbehandlerIdenter.forEach(ident => {
+  for (const ident of saksliste.saksbehandlerIdenter) {
     const matches = gruppe.saksbehandlere.filter(saksbehandler => saksbehandler.brukerIdent === ident);
     matchCount += matches.length;
-  });
+  }
   return matchCount;
 };

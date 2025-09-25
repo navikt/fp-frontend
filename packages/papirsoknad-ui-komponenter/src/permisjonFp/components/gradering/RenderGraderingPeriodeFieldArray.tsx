@@ -238,7 +238,7 @@ const validerAtArbeidsgiverIdErGyldig = (arbeidsgiverIdentifikator: string) => {
 
 const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.some(ga => ga === kode))
+    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}
@@ -247,7 +247,7 @@ const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[]
 
 const mapArbeidskategori = (typer: KodeverkMedNavn<'Arbeidskategori'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigArbeidskategori.some(ga => ga === kode))
+    .filter(({ kode }) => gyldigArbeidskategori.includes(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

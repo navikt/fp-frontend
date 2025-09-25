@@ -19,13 +19,17 @@ describe('intl utbetalingsdata-is15', () => {
     if (missingKeysBokmål.length > 0) {
       writeToConsole('Not found in nb_NO.json:');
     }
-    missingKeysBokmål.forEach(key => writeToConsole(`key ${key}`));
+    for (const key of missingKeysBokmål) {
+      writeToConsole(`key ${key}`);
+    }
 
     const missingKeysCode = Object.keys(nb).filter(key => !stringsInCode.includes(key));
     if (missingKeysCode.length > 0) {
       writeToConsole('Not found in code:');
     }
-    missingKeysCode.forEach(key => writeToConsole(`key ${key}`));
+    for (const key of missingKeysCode) {
+      writeToConsole(`key ${key}`);
+    }
 
     expect(missingKeysBokmål.length).toBe(0);
     expect(missingKeysCode.length).toBe(0);

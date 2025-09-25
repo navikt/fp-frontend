@@ -35,11 +35,7 @@ export const VergeFaktaInitPanel = () => {
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Verge' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {!isFetching ? (
-        <VergeFaktaIndex verge={verge} alleKodeverk={standardPanelProps.alleKodeverk} />
-      ) : (
-        <LoadingPanel />
-      )}
+      {isFetching ? <LoadingPanel /> : <VergeFaktaIndex verge={verge} alleKodeverk={standardPanelProps.alleKodeverk} />}
     </FaktaDefaultInitPanel>
   );
 };

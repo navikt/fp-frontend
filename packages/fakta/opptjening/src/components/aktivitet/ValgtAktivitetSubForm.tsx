@@ -64,10 +64,7 @@ export const ValgtAktivitetSubForm = ({
   ferdiglignetNæring,
 }: Props) => (
   <VStack gap="space-16">
-    {erAvType(
-      valgtAktivitetstype,
-      ...[OpptjeningAktivitetType.ARBEID, OpptjeningAktivitetType.NARING, ...YTELSE_TYPER],
-    ) && (
+    {erAvType(valgtAktivitetstype, OpptjeningAktivitetType.ARBEID, OpptjeningAktivitetType.NARING, ...YTELSE_TYPER) && (
       <HStack gap="space-16">
         <div>
           <Label size="small">

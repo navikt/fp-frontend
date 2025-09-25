@@ -163,7 +163,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     const radiogrupper = screen.getAllByRole('group');
     expect(radiogrupper).toHaveLength(3);
-    radiogrupper.forEach(rg => expect(rg).toHaveAttribute('aria-readonly', 'true'));
+    for (const rg of radiogrupper) {
+      expect(rg).toHaveAttribute('aria-readonly', 'true');
+    }
 
     const jaRadios = screen.getAllByLabelText('Ja');
     const neiRadios = screen.getAllByLabelText('Nei');
@@ -193,7 +195,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const radiogrupper = screen.getAllByRole('group');
 
     expect(radiogrupper).toHaveLength(3);
-    radiogrupper.forEach(rg => expect(rg).toHaveAttribute('aria-readonly', 'true'));
+    for (const rg of radiogrupper) {
+      expect(rg).toHaveAttribute('aria-readonly', 'true');
+    }
 
     const jaRadios = screen.getAllByLabelText('Ja');
     const neiRadios = screen.getAllByLabelText('Nei');

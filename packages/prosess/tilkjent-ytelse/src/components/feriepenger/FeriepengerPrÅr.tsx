@@ -105,7 +105,7 @@ const lagAndelerPrIdMap = (
   alleKodeverk: AlleKodeverk,
 ): AndelerPrId[] => {
   const listeMedAndelerPrId = new Array<AndelerPrId>();
-  andeler.forEach(ferieAndel => {
+  for (const ferieAndel of andeler) {
     const andelTilSøker = ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
     const andelTilRefusjon = !ferieAndel.erBrukerMottaker ? ferieAndel.årsbeløp : 0;
     const id = lagIdentifikator(ferieAndel);
@@ -116,6 +116,6 @@ const lagAndelerPrIdMap = (
     } else {
       listeMedAndelerPrId.push(lagAndelPrId(ferieAndel, arbeidsgiverOpplysningerPerId, alleKodeverk));
     }
-  });
+  }
   return listeMedAndelerPrId;
 };

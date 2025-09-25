@@ -43,9 +43,11 @@ export const OmsorgOgForeldreansvarFaktaInitPanel = ({ personoversikt }: Props) 
     >
       {søknad && familiehendelse?.adopsjon && inntektArbeidYtelse ? (
         <OmsorgOgForeldreansvarFaktaIndex
-          soknad={søknad}
+          søknad={søknad}
           adopsjon={familiehendelse.adopsjon}
-          inntektArbeidYtelse={inntektArbeidYtelse}
+          innvilgetRelatertTilgrensendeYtelserForAnnenForelder={
+            inntektArbeidYtelse.innvilgetRelatertTilgrensendeYtelserForAnnenForelder
+          }
           personoversikt={personoversikt}
         />
       ) : (

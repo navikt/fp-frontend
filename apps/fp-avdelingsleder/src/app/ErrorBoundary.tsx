@@ -40,10 +40,10 @@ export class ErrorBoundary extends Component<OwnProps, State> {
 
     if (!isDevelopment) {
       withScope(scope => {
-        Object.entries(info).forEach(entry => {
+        for (const entry of Object.entries(info)) {
           scope.setExtra(entry[0], entry[1]);
           captureException(error);
-        });
+        }
       });
     }
 

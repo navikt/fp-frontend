@@ -11,10 +11,13 @@ import { kanOverstyreAccess, writeAccess } from './access';
 
 const forEachFagsakAndBehandlingStatus = (
   callback: (fagsakStatus: FagsakStatus, behandlingStatus: BehandlingStatus) => void,
-) =>
-  Object.values(FagsakStatusEnum).forEach(fagsakStatus =>
-    Object.values(BehandlingStatusEnum).forEach(behandlingStatus => callback(fagsakStatus, behandlingStatus)),
-  );
+) => {
+  for (const fagsakStatus of Object.values(FagsakStatusEnum)) {
+    for (const behandlingStatus of Object.values(BehandlingStatusEnum)) {
+      callback(fagsakStatus, behandlingStatus);
+    }
+  }
+};
 
 const getTestName = (accessName: string, expected: boolean, fagsakStatus: string, behandlingStatus: string): string =>
   `skal${

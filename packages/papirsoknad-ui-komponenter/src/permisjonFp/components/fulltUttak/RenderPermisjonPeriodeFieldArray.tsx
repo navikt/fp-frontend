@@ -227,7 +227,7 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) 
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.some(gu => gu === kode))
+    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

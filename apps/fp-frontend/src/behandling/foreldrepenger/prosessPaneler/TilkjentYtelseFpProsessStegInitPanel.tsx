@@ -26,7 +26,7 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
   const { behandling } = use(BehandlingDataContext);
 
-  const overstyrtStatus = behandling.links.find(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
+  const overstyrtStatus = behandling.links.some(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;
 

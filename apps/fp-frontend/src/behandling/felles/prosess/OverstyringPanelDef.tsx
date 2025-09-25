@@ -7,13 +7,13 @@ import { skalViseProsessPanel } from './skalViseProsessPanel';
 import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 // TODO Spesifikk ES-kodar bør ikkje ligga her
-const avslagsårsakerES = ['1002', '1003', '1032'];
+const avslagsårsakerES = new Set(['1002', '1003', '1032']);
 const filtrerAvslagsårsaker = (
   avslagsårsaker: { [key: string]: KodeverkMedNavn<'Avslagsårsak'>[] },
   vilkarTypeKode: string,
 ): KodeverkMedNavn<'Avslagsårsak'>[] =>
   vilkarTypeKode === VilkarType.FODSELSVILKARET_MOR
-    ? avslagsårsaker[vilkarTypeKode]!.filter(årsak => !avslagsårsakerES.includes(årsak.kode))
+    ? avslagsårsaker[vilkarTypeKode]!.filter(årsak => !avslagsårsakerES.has(årsak.kode))
     : avslagsårsaker[vilkarTypeKode]!;
 
 interface Props {

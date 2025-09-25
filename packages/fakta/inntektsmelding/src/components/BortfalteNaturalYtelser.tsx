@@ -32,7 +32,7 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
 
   const bortfalteNaturalytelser = {} as Record<string, AktivNaturalYtelse[]>;
 
-  Object.entries(gruppertPåType).forEach(([key, value]) => {
+  for (const [key, value] of Object.entries(gruppertPåType)) {
     const sortert = value
       .sort((a, b) =>
         sorterPerioder(
@@ -63,7 +63,7 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
         },
       ];
     });
-  });
+  }
 
   return bortfalteNaturalytelser;
 };

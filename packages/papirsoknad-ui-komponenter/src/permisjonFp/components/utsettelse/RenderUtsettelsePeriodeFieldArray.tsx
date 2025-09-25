@@ -55,7 +55,7 @@ const mapTyper = (typer: KodeverkMedNavn<'UtsettelseÅrsak'>[]): ReactElement[] 
 
 const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.some(gup => gup === kode))
+    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

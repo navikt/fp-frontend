@@ -120,7 +120,7 @@ const formaterFeilmeldinger = (
     addIfNotExists(feilmeldinger, { melding: crashMessage });
   }
 
-  alleFeilmeldinger.forEach(feilmelding => {
+  for (const feilmelding of alleFeilmeldinger) {
     switch (feilmelding.type) {
       case ErrorType.POLLING_HALTED_OR_DELAYED:
         if (feilmelding.status === ApiPollingStatus.HALTED) {
@@ -168,7 +168,7 @@ const formaterFeilmeldinger = (
           melding: feilmelding.message,
         });
     }
-  });
+  }
 
   return feilmeldinger;
 };

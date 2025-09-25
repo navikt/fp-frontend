@@ -120,7 +120,9 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Beregning' })}
       skalPanelVisesIMeny
     >
-      {!isFetching ? (
+      {isFetching ? (
+        <LoadingPanel />
+      ) : (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
           beregningsgrunnlagsvilkar={lagBGVilkår(standardPanelProps.vilkårForPanel, beregningsgrunnlag)}
@@ -130,8 +132,6 @@ export const BeregningsgrunnlagProsessStegInitPanel = ({ arbeidsgiverOpplysninge
           isReadOnly={standardPanelProps.isReadOnly}
           readOnlySubmitButton={standardPanelProps.readOnlySubmitButton}
         />
-      ) : (
-        <LoadingPanel />
       )}
     </ProsessDefaultInitPanel>
   );

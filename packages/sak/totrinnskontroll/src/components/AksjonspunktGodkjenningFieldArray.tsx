@@ -95,7 +95,7 @@ export const AksjonspunktGodkjenningFieldArray = ({
         return (
           <div key={field.id}>
             {lenke && skjermlenkeTypeKodeverk && (
-              <NavLink to={lenke} onClick={() => window.scroll(0, 0)} className={styles['lenke']}>
+              <NavLink to={lenke} onClick={() => globalThis.scroll(0, 0)} className={styles['lenke']}>
                 {skjermlenkeTypeKodeverk.navn}
               </NavLink>
             )}

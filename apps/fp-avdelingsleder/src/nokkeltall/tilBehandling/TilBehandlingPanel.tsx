@@ -135,7 +135,7 @@ const finnFagsakYtelseTypeNavn = (
 const slaSammenLikeBehandlingstyperOgDatoer = (oppgaverForAvdeling: OppgaveForDato[]): OppgaveForDatoGraf[] => {
   const sammenslatte: OppgaveForDatoGraf[] = [];
 
-  oppgaverForAvdeling.forEach(o => {
+  for (const o of oppgaverForAvdeling) {
     const index = sammenslatte.findIndex(
       s => s.behandlingType === o.behandlingType && s.opprettetDato === o.opprettetDato,
     );
@@ -148,7 +148,7 @@ const slaSammenLikeBehandlingstyperOgDatoer = (oppgaverForAvdeling: OppgaveForDa
         antall: sammenslatte[index]!.antall + o.antall,
       };
     }
-  });
+  }
 
   return sammenslatte;
 };
