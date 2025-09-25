@@ -129,7 +129,7 @@ const kalkulerTrekkdager = (
   let uttaksgrad = aktivitet.gradering && !!aktivitet.prosentArbeid ? (100 - aktivitet.prosentArbeid) / 100 : 1;
   uttaksgrad = samtidigUttak && !!samtidigUttaksprosent ? samtidigUttaksprosent / 100 : uttaksgrad;
   const trekkdager = uttaksgrad * virkedager;
-  return parseFloat(trekkdager.toFixed(1));
+  return Number.parseFloat(trekkdager.toFixed(1));
 };
 
 const lagPeriode = (valgtPeriode: PeriodeSoker, fom: string, tom: string): PeriodeSoker => {

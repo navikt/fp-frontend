@@ -12,7 +12,7 @@ import { VedtakPanel } from './VedtakPanel';
 
 import styles from './utbetalingsdataPanel.module.css';
 
-const FORELDREPENGER_KODER = ['AP', 'FØ'];
+const FORELDREPENGER_KODER = new Set(['AP', 'FØ']);
 
 interface Props {
   søkInfotrygdVedtak: (params: { searchString: string }) => void;
@@ -89,7 +89,7 @@ export const UtbetalingsdataPanel = ({ søkInfotrygdVedtak, isPending, isSuccess
               <ExpansionCard.Content>
                 <VedtakPanel
                   alleVedtak={vedtakKjede.vedtak}
-                  erForeldrepenger={FORELDREPENGER_KODER.includes(vedtakKjede.behandlingstema.kode)}
+                  erForeldrepenger={FORELDREPENGER_KODER.has(vedtakKjede.behandlingstema.kode)}
                 />
               </ExpansionCard.Content>
             </ExpansionCard>

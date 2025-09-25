@@ -74,7 +74,7 @@ export const VirksomhetStartetEndretPanel = ({ readOnly, index }: Props) => {
               validate={[hasValidInteger, required]}
               className={styles['inntektBredde']}
               parse={value => {
-                const parsedValue = parseInt(value.toString(), 10);
+                const parsedValue = Number.parseInt(value.toString(), 10);
                 return Number.isNaN(parsedValue) ? value : parsedValue;
               }}
             />

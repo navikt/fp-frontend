@@ -93,7 +93,7 @@ const getBekreftAksjonspunktFaktaCallback =
 
     if (overstyringApCodes) {
       if (model.length === 0) {
-        throw Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
+        throw new Error('Det har oppstått en teknisk feil ved lagring av aksjonspunkter. Meld feilen i Porten.');
       }
       // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument

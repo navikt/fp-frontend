@@ -38,7 +38,7 @@ export const BarnPanel = ({ alleMerknaderFraBeslutter, soknad }: Props) => {
                 <FormattedMessage id="BarnPanel.ChildNumberBornData" values={{ childNumber: key }} />
               </Label>
               <BodyShort size="small">
-                <DateLabel dateString={adopsjonFodelsedatoer[parseInt(key, 10)]!} />
+                <DateLabel dateString={adopsjonFodelsedatoer[Number.parseInt(key, 10)]!} />
               </BodyShort>
             </div>
           ))}

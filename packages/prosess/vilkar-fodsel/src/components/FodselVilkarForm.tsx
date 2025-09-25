@@ -16,7 +16,7 @@ import type { Aksjonspunkt, Behandling, KodeverkMedNavn, Vilkar } from '@navikt/
 import type { VurdereYtelseSammeBarnSokerAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
-const avslagsårsakerES = ['1002', '1003', '1032'];
+const avslagsårsakerES = new Set(['1002', '1003', '1032']);
 
 type FormValues = {
   erVilkarOk?: boolean;
@@ -120,6 +120,4 @@ const getFodselVilkarAvslagsårsaker = (
   isFpFagsak: boolean,
   fødselsvilkårAvslagskoder: KodeverkMedNavn<'Avslagsårsak'>[],
 ): KodeverkMedNavn<'Avslagsårsak'>[] =>
-  isFpFagsak
-    ? fødselsvilkårAvslagskoder.filter(arsak => !avslagsårsakerES.includes(arsak.kode))
-    : fødselsvilkårAvslagskoder;
+  isFpFagsak ? fødselsvilkårAvslagskoder.filter(arsak => !avslagsårsakerES.has(arsak.kode)) : fødselsvilkårAvslagskoder;

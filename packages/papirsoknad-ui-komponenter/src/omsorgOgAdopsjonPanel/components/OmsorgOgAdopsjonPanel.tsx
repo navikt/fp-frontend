@@ -138,7 +138,7 @@ export const OmsorgOgAdopsjonPanel = ({
             readOnly={readOnly}
             className={styles['barnInput']}
             parse={value => {
-              const parsedValue = parseInt(value.toString(), 10);
+              const parsedValue = Number.parseInt(value.toString(), 10);
               return Number.isNaN(parsedValue) ? value : parsedValue;
             }}
             validate={[

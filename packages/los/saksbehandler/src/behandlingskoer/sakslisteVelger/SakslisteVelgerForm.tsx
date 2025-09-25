@@ -34,7 +34,7 @@ const getDefaultSaksliste = (
   const lagretSakslisteId = getValueFromLocalStorage('sakslisteId');
   if (lagretSakslisteId) {
     if (sorterteSakslister.some(s => `${s.sakslisteId}` === lagretSakslisteId)) {
-      return parseInt(lagretSakslisteId, 10);
+      return Number.parseInt(lagretSakslisteId, 10);
     }
     removeValueFromLocalStorage('sakslisteId');
   }
@@ -212,7 +212,7 @@ export const SakslisteVelgerForm = ({
   useEffect(() => {
     if (sakslisteId) {
       setValueInLocalStorage('sakslisteId', sakslisteId);
-      const id = parseInt(sakslisteId, 10);
+      const id = Number.parseInt(sakslisteId, 10);
       setValgtSakslisteId(id);
       fetchSaksbehandlere(id);
       fetchAntallOppgaver(id);

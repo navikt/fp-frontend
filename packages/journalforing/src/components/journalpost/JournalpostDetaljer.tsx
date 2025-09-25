@@ -89,7 +89,7 @@ const transformValues = (
   enhet?: string,
 ): JournalførSubmitValue => {
   if (!enhet) {
-    throw Error('Kan ikke journalføre uten at enhet er satt');
+    throw new Error('Kan ikke journalføre uten at enhet er satt');
   }
   return {
     journalpostId: journalpost.journalpostId,

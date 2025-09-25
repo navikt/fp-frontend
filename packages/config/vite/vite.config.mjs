@@ -1,8 +1,8 @@
 import react from '@vitejs/plugin-react';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import { defineConfig, mergeConfig } from 'vite';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const folder = path.dirname(__filename);

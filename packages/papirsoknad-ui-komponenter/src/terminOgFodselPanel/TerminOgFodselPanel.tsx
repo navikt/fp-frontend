@@ -123,8 +123,8 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.AntallBarn' })}
                       readOnly={readOnly}
                       parse={value => {
-                        const parsedValue = parseInt(value.toString(), 10);
-                        return isNaN(parsedValue) ? value : parsedValue;
+                        const parsedValue = Number.parseInt(value.toString(), 10);
+                        return Number.isNaN(parsedValue) ? value : parsedValue;
                       }}
                       validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}
                     />
@@ -159,7 +159,7 @@ export const TerminOgFodselPanel = ({ readOnly, erForeldrepenger = false }: Prop
                       label={intl.formatMessage({ id: 'Registrering.TerminOgFodsel.AntallBarn' })}
                       readOnly={readOnly}
                       parse={value => {
-                        const parsedValue = parseInt(value.toString(), 10);
+                        const parsedValue = Number.parseInt(value.toString(), 10);
                         return Number.isNaN(parsedValue) ? value : parsedValue;
                       }}
                       validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}

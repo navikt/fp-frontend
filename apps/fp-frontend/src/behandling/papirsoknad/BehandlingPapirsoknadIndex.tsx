@@ -92,16 +92,22 @@ const useLagrePapirsøknad = (
   };
 };
 
-const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>
-  aksjonspunkter
-    .map(ap => ap.definisjon)
-    .filter(
+const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => {
+  const ap = aksjonspunkter
+    .map(a => a.definisjon)
+    .find(
       kode =>
         kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD ||
         kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_FORELDREPENGER ||
         kode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
         kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER,
-    )[0]!;
+    );
+
+  if (!ap) {
+    throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');
+  }
+  return ap;
+};
 
 // Default export grunna React.lazy
 // eslint-disable-next-line import/no-default-export

@@ -53,7 +53,7 @@ export const Dekorator = ({
       void navigate('/');
     }
     if (e.type === 'contextmenu') {
-      window.open('/', '_newtab');
+      globalThis.open('/', '_newtab');
     }
     e.preventDefault();
   };
@@ -61,7 +61,8 @@ export const Dekorator = ({
   const interneLenker = new Array<DekoratorLenke>();
   interneLenker.push({
     tekst: intl.formatMessage({ id: 'Dekorator.Foreldrepenger' }),
-    callback: () => (window.location.href = window.location.href.replace(AVDELINGSLEDER_URL_NAME, FPSAK_URL_NAME)),
+    callback: () =>
+      (globalThis.location.href = globalThis.location.href.replace(AVDELINGSLEDER_URL_NAME, FPSAK_URL_NAME)),
   });
 
   const eksterneLenker = [

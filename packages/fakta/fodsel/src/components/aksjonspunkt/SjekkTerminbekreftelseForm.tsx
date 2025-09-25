@@ -86,7 +86,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
               size="medium"
               label={intl.formatMessage({ id: 'Label.AntallBarn' })}
               parse={value => {
-                const parsedValue = parseInt(value.toString(), 10);
+                const parsedValue = Number.parseInt(value.toString(), 10);
                 return Number.isNaN(parsedValue) ? value : parsedValue;
               }}
               validate={[required, hasValidInteger, validateMinAntallBarn, validateMaxAntallBarn]}

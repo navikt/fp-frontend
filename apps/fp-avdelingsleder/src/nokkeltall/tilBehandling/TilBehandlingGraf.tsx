@@ -72,7 +72,7 @@ export const TilBehandlingGraf = ({ height, oppgaverPerDato, isToUkerValgt, beha
             label: {
               formatter: params => {
                 if (params.axisDimension === 'y') {
-                  return parseInt(params.value as string, 10).toString();
+                  return Number.parseInt(params.value as string, 10).toString();
                 }
                 return dayjs(params.value).format(DDMMYYYY_DATE_FORMAT);
               },

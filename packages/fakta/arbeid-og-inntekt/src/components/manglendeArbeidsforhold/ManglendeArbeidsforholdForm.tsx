@@ -195,7 +195,7 @@ export const ManglendeArbeidsforholdForm = ({
                 control={formMethods.control}
                 label={<FormattedMessage id="ManglendeOpplysningerForm.Stillingsprosent" />}
                 parse={value => {
-                  const parsedValue = parseInt(value.toString(), 10);
+                  const parsedValue = Number.parseInt(value.toString(), 10);
                   return Number.isNaN(parsedValue) ? value : parsedValue;
                 }}
                 validate={[required, hasValidInteger, minValue1, maxValue100]}
