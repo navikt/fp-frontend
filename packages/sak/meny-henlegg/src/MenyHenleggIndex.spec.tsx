@@ -14,7 +14,7 @@ describe('MenyHenleggIndex', () => {
     const henleggBehandling = vi.fn(() => Promise.resolve());
     const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
-    expect(screen.getAllByText('Henlegg behandling')[1]!!.closest('button')).toBeDisabled();
+    expect(screen.getAllByText('Henlegg behandling')[1]!.closest('button')).toBeDisabled();
 
     expect(screen.getByText('Søknaden er trukket')).toBeInTheDocument();
     expect(screen.getByText('Behandlingen er feilaktig opprettet')).toBeInTheDocument();
@@ -28,7 +28,7 @@ describe('MenyHenleggIndex', () => {
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    await userEvent.click(screen.getAllByText('Henlegg behandling')[1]!!);
+    await userEvent.click(screen.getAllByText('Henlegg behandling')[1]!);
 
     await waitFor(() => expect(henleggBehandling).toHaveBeenCalledTimes(1));
     expect(henleggBehandling).toHaveBeenNthCalledWith(1, {

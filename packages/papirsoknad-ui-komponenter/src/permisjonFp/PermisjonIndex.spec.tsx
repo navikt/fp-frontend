@@ -25,7 +25,7 @@ describe('PermisjonIndex', () => {
       ),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Fullt uttak')[1]!!);
+    await userEvent.click(screen.getAllByText('Fullt uttak')[1]!);
 
     await userEvent.selectOptions(screen.getByLabelText('Periodetype'), 'MØDREKVOTE');
 
@@ -37,7 +37,7 @@ describe('PermisjonIndex', () => {
     await userEvent.type(tomDatoInput, '20.06.2022');
     fireEvent.blur(tomDatoInput);
 
-    await userEvent.click(screen.getAllByRole('checkbox')[2]!!);
+    await userEvent.click(screen.getAllByRole('checkbox')[2]!);
 
     expect(await screen.findByText('Prosentandel uttak')).toBeInTheDocument();
 
@@ -206,7 +206,7 @@ describe('PermisjonIndex', () => {
     await userEvent.type(tomDatoInput, '20.06.2022');
     fireEvent.blur(tomDatoInput);
 
-    const prosentandelInput = screen.getAllByRole('textbox')[2]!!;
+    const prosentandelInput = screen.getAllByRole('textbox')[2]!;
     await userEvent.type(prosentandelInput, '100');
 
     const virksomhetsnummerInput = screen.getByLabelText('Virksomhetsnummer');
@@ -214,7 +214,7 @@ describe('PermisjonIndex', () => {
 
     await userEvent.selectOptions(screen.getByLabelText('Type arbeid'), 'ARBEIDSTAKER');
 
-    await userEvent.click(screen.getAllByRole('checkbox')[6]!!);
+    await userEvent.click(screen.getAllByRole('checkbox')[6]!);
 
     expect(await screen.findByText('Prosentandel uttak')).toBeInTheDocument();
 
@@ -290,15 +290,15 @@ describe('PermisjonIndex', () => {
       ),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Fullt uttak')[1]!!);
+    await userEvent.click(screen.getAllByText('Fullt uttak')[1]!);
 
     await userEvent.selectOptions(screen.getByLabelText('Periodetype'), 'MØDREKVOTE');
 
-    const fomDatoUttakInput = screen.getAllByLabelText('F.o.m.')[0]!!;
+    const fomDatoUttakInput = screen.getAllByLabelText('F.o.m.')[0]!;
     await userEvent.type(fomDatoUttakInput, '20.05.2022');
     fireEvent.blur(fomDatoUttakInput);
 
-    const tomDatoUttakInput = screen.getAllByLabelText('T.o.m.')[0]!!;
+    const tomDatoUttakInput = screen.getAllByLabelText('T.o.m.')[0]!;
     await userEvent.type(tomDatoUttakInput, '20.06.2022');
     fireEvent.blur(tomDatoUttakInput);
 

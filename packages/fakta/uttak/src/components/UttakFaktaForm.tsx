@@ -61,7 +61,7 @@ const leggTilAksjonspunktMarkering = (
           ap.status === AksjonspunktStatus.OPPRETTET,
       ) &&
       periode.arbeidsforhold?.arbeidsgiverReferanse &&
-      !arbeidsgiverOpplysningerPerId[periode.arbeidsforhold?.arbeidsgiverReferanse]
+      !arbeidsgiverOpplysningerPerId[periode.arbeidsforhold.arbeidsgiverReferanse]
     ) {
       return {
         ...periode,

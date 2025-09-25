@@ -20,8 +20,8 @@ describe('TotrinnskontrollSakIndex', () => {
     expect(screen.getByText('Send til saksbehandler')).toBeEnabled();
 
     const checkboxes = screen.getAllByText('Godkjent');
-    await userEvent.click(checkboxes[0]!!);
-    await userEvent.click(checkboxes[1]!!);
+    await userEvent.click(checkboxes[0]!);
+    await userEvent.click(checkboxes[1]!);
 
     expect(await screen.findByText('Godkjenn vedtaket')).toBeEnabled();
     expect(screen.getByText('Send til saksbehandler').closest('button')).toBeDisabled();
@@ -62,8 +62,8 @@ describe('TotrinnskontrollSakIndex', () => {
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
     expect(screen.getByText('Klageresultat NFP')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Godkjent')[0]!!);
-    await userEvent.click(screen.getAllByText('Vurder på nytt')[1]!!);
+    await userEvent.click(screen.getAllByText('Godkjent')[0]!);
+    await userEvent.click(screen.getAllByText('Vurder på nytt')[1]!);
 
     expect(await screen.findByText('Årsak til retur')).toBeInTheDocument();
 
@@ -71,7 +71,7 @@ describe('TotrinnskontrollSakIndex', () => {
     await userEvent.click(screen.getByText('Regel-/lovanvendelse'));
 
     const begrunnelseInput = utils.getAllByLabelText('Begrunnelse');
-    await userEvent.type(begrunnelseInput[1]!!, 'Dette er en begrunnelse');
+    await userEvent.type(begrunnelseInput[1]!, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Send til saksbehandler'));
 
@@ -109,8 +109,8 @@ describe('TotrinnskontrollSakIndex', () => {
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
     expect(screen.getByText('Klageresultat NFP')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Godkjent')[0]!!);
-    await userEvent.click(screen.getAllByText('Vurder på nytt')[1]!!);
+    await userEvent.click(screen.getAllByText('Godkjent')[0]!);
+    await userEvent.click(screen.getAllByText('Vurder på nytt')[1]!);
 
     expect(await screen.findByText('Årsak til retur')).toBeInTheDocument();
 

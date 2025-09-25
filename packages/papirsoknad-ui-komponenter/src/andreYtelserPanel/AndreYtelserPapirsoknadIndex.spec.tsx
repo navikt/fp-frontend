@@ -72,11 +72,11 @@ describe('AndreYtelserPapirsoknadIndex', () => {
 
     const datoInputs = await screen.findAllByRole('textbox');
     expect(datoInputs).toHaveLength(4);
-    await userEvent.type(datoInputs[0]!!, '14.09.2022');
-    await userEvent.type(datoInputs[1]!!, '15.09.2022');
+    await userEvent.type(datoInputs[0]!, '14.09.2022');
+    await userEvent.type(datoInputs[1]!, '15.09.2022');
 
-    await userEvent.type(datoInputs[2]!!, '10.10.2022');
-    await userEvent.type(datoInputs[3]!!, '11.10.2022');
+    await userEvent.type(datoInputs[2]!, '10.10.2022');
+    await userEvent.type(datoInputs[3]!, '11.10.2022');
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 

@@ -14,6 +14,7 @@ export const useLosKodeverk = <T extends LosKodeverkType>(kodeverkType: T): Alle
     throw new Error('Kodeverk for LOS er ikke lastet inn');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- burde ikke skje, en beholdes
   if (!alleKodeverk[kodeverkType]) {
     throw new Error(`Kodeverk ${kodeverkType} for LOS finnes ikke`);
   }

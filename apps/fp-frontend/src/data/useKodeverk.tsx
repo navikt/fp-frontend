@@ -31,6 +31,7 @@ export const useFpSakKodeverk = <T extends KodeverkType>(kodeverkType: T): AlleK
     throw new Error('Kodeverk er ikke lastet inn');
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- burde ikke skje, en beholdes
   if (!alleKodeverk[kodeverkType]) {
     throw new Error(`Kodeverk ${kodeverkType} finnes ikke`);
   }

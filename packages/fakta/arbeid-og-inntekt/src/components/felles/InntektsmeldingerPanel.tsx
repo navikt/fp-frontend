@@ -148,7 +148,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                             const status = info[a.internArbeidsforholdId];
                             return {
                               ...info,
-                              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
+                               
                               [a.internArbeidsforholdId]: status === undefined || status === false,
                             };
                           });

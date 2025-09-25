@@ -118,7 +118,7 @@ export const InntektsmeldingFaktaIndex = ({
                   <DateTimeLabel dateTimeString={inntektsmelding.innsendingstidspunkt} separator="kl" />
                 </Table.DataCell>
                 <Table.DataCell>
-                  {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
+                  { }
                   {arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]?.navn ?? '-'}
                 </Table.DataCell>
                 <Table.DataCell>

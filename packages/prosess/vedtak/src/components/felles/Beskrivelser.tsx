@@ -27,7 +27,7 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
 
   return (
     <VStack gap="space-4">
-      {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
+      { }
       {beskrivelseForVisning && <BeskrivelseVisning beskrivelse={beskrivelseForVisning} />}
       {skalSkjuleResterendeBeskrivelser && (
         <Button

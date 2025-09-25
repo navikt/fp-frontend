@@ -133,7 +133,7 @@ const comparator = (a: Oppgave, b: Oppgave, orderBy: TableHeaders) => {
       : 1;
   }
 
-  if (b[orderBy] === undefined || a[orderBy] === undefined || b[orderBy] < a[orderBy]) {
+  if (b[orderBy] < a[orderBy]) {
     return -1;
   }
   return b[orderBy] > a[orderBy] ? 1 : 0;
