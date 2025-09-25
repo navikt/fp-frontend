@@ -145,7 +145,7 @@ export const OpptjeningFaktaPanel = ({
         opptjeningFom: a.opptjeningFom,
         opptjeningTom: a.opptjeningTom,
         aktivitetType: a.aktivitetType,
-        erGodkjent: formVerdierForAlleAktiviteter[index]!.erGodkjent!,
+        erGodkjent: !!formVerdierForAlleAktiviteter[index]!.erGodkjent,
         begrunnelse: formVerdierForAlleAktiviteter[index]!.begrunnelse,
       }))
       .filter(b => b.begrunnelse);

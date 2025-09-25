@@ -113,8 +113,8 @@ VilkarResultPicker.buildInitialValues = (
 
 VilkarResultPicker.transformValues = (values: FormValues) =>
   values.erVilkarOk
-    ? { erVilkarOk: values.erVilkarOk }
+    ? { erVilkarOk: true }
     : {
-        erVilkarOk: values.erVilkarOk!,
+        erVilkarOk: false,
         avslagskode: values.avslagskode,
       };

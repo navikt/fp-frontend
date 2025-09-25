@@ -234,11 +234,11 @@ const lagManueltArbeidsforhold = (
   behandlingUuid,
   behandlingVersjon,
   arbeidsgiverIdent: MANUELT_ORG_NR,
-  begrunnelse: formValues.begrunnelse!,
-  arbeidsgiverNavn: formValues.arbeidsgiverNavn!,
-  fom: formValues.fom!,
+  begrunnelse: formValues.begrunnelse ?? '',
+  arbeidsgiverNavn: formValues.arbeidsgiverNavn ?? '',
+  fom: formValues.fom ?? '',
   tom: formValues.tom,
-  stillingsprosent: formValues.stillingsprosent!,
+  stillingsprosent: formValues.stillingsprosent ?? '',
 });
 
 const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) => {
@@ -255,7 +255,7 @@ const getOppdaterTabell =
     const rad: ArbeidsforholdOgInntektRadData = {
       erPrivatPerson: false,
       arbeidsgiverIdent: MANUELT_ORG_NR,
-      arbeidsgiverNavn: formValues.arbeidsgiverNavn!,
+      arbeidsgiverNavn: formValues.arbeidsgiverNavn ?? 'Fant ikke arbeidsgiverNavn',
       avklaring: {
         fom: formValues.fom,
         tom: formValues.tom,

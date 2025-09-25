@@ -69,12 +69,12 @@ export const ManglendeInntektsmeldingForm = ({
     const params = {
       behandlingUuid,
       behandlingVersjon,
-      vurdering: formValues.saksbehandlersVurdering!,
+      vurdering: formValues.saksbehandlersVurdering ?? '',
       arbeidsgiverIdent: radData.arbeidsgiverIdent,
       internArbeidsforholdRef: erEttArbeidsforhold
         ? (arbeidsforholdForRad[0]!.internArbeidsforholdId ?? undefined)
         : undefined,
-      begrunnelse: formValues.begrunnelse!,
+      begrunnelse: formValues.begrunnelse ?? '',
     };
     return lagreVurdering(params)
       .then(getOppdaterTabell(oppdaterTabell, radData, formValues))

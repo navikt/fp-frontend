@@ -335,7 +335,7 @@ const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: bo
 
 const rolleAnnenpart = (fagsak: Fagsak) => {
   if (fagsak.relasjonsRolleType === RelasjonsRolleType.MOR) {
-    const kjønnAnnenpart = fagsak.annenPart!.kjønn;
+    const kjønnAnnenpart = fagsak.annenPart?.kjønn;
     return kjønnAnnenpart === KjønnkodeEnum.KVINNE ? RelasjonsRolleType.MEDMOR : RelasjonsRolleType.FAR;
   }
   return RelasjonsRolleType.MOR;

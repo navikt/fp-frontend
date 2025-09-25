@@ -134,8 +134,8 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
 
 const transformValues = (values: FormValues): SjekkTerminbekreftelseAp => ({
   kode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
-  utstedtdato: values.utstedtdato!,
-  antallBarn: values.antallBarn!,
+  utstedtdato: values.utstedtdato ?? '',
+  antallBarn: values.antallBarn ?? 0,
   ...Termindato.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
