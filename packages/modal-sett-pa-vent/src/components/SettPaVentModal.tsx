@@ -89,9 +89,7 @@ export const SettPaVentModal = ({
                 .filter(
                   va =>
                     !hasManualPaVent ||
-                    (erTilbakekreving
-                      ? inkluderVentearsak(va, ventearsakFraFelt)
-                      : manuelleVenteArsaker.includes(va.kode)),
+                    (erTilbakekreving ? inkluderVentearsak(va, ventearsakFraFelt) : manuelleVenteArsaker.has(va.kode)),
                 )
                 .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                 .map(va => (
@@ -157,7 +155,7 @@ const buildInitialValues = (hasManualPaVent: boolean, frist: string | null, vent
   frist: frist || hasManualPaVent === false ? (frist ?? undefined) : initFrist(),
 });
 
-const manuelleVenteArsaker = [
+const manuelleVenteArsaker = new Set([
   VenteArsakType.AVV_DOK,
   VenteArsakType.AVV_FODSEL,
   VenteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
@@ -168,18 +166,18 @@ const manuelleVenteArsaker = [
   VenteArsakType.UTVIDET_TILSVAR_FRIST,
   VenteArsakType.ENDRE_TILKJENT_YTELSE,
   VenteArsakType.VENT_PÅ_MULIG_MOTREGNING,
-];
+]);
 
-const automatiskeVentearsakerForTilbakekreving = [
+const automatiskeVentearsakerForTilbakekreving = new Set([
   VenteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
   VenteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
-];
+]);
 
 const inkluderVentearsak = (
   ventearsak: KodeverkMedNavn<'Venteårsak'> | KodeverkMedNavnTilbakekreving<'Venteårsak'>,
   valgtVentearsak?: string,
 ): boolean =>
-  automatiskeVentearsakerForTilbakekreving.includes(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true;
+  automatiskeVentearsakerForTilbakekreving.has(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true;
 
 const skalViseFristenTekst = (
   erTilbakekreving: boolean,
