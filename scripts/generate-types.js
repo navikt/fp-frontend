@@ -70,7 +70,7 @@ async function generateTypes() {
 
     // Change to packages/types directory and run prettier
     process.chdir('packages/types');
-    execSync('yarn run prettier', { stdio: 'inherit' });
+    execSync('yarn run prettier > nul 2>&1', { stdio: 'pipe' });
 
     console.log('Script ferdig!');
   } catch (error) {
