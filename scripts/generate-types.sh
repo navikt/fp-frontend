@@ -10,7 +10,7 @@ done
 
 # API endpoint
 URL="https://fpsak-api.intern.dev.nav.no/fpsak/api/openapi.json"
-URL_LOKALT="http://host.docker.internal:8080/fpsak/api/openapi.json"
+URL_LOKALT="localhost:8080/fpsak/api/openapi.json"
 
 if [ "$LOKAL" = true ]; then
   echo "Kjører i lokal modus. Henter lokal token og OpenAPI."
