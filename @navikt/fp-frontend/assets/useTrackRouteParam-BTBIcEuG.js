@@ -1,0 +1,1 @@
+import{u as m,ag as n,H as u}from"./iframe-C5eWLTQ9.js";const p=r=>{const a={parse:c=>c,isQueryParam:!1,...r},s=m(),e=n(),o=a.isQueryParam?u(s.search):e,t=a.parse(o[a.paramName]);return{location:s,selected:t}};export{p as u};
