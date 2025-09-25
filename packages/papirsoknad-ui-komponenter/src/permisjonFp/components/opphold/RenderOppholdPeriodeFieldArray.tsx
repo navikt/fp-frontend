@@ -35,16 +35,16 @@ const defaultOppholdPeriode: OppholdPeriode = {
   årsak: '',
 };
 
-const gyldigeÅrsaker = [
+const gyldigeÅrsaker = new Set([
   OppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
   OppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
   OppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
   OppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
-];
+]);
 
 const mapTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeÅrsaker.includes(kode))
+    .filter(({ kode }) => gyldigeÅrsaker.has(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

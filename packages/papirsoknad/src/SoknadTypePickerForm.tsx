@@ -9,7 +9,7 @@ import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
-const SØKNAD_TYPER = [FamilieHendelseType.ADOPSJON, FamilieHendelseType.FODSEL];
+const SØKNAD_TYPER = new Set([FamilieHendelseType.ADOPSJON, FamilieHendelseType.FODSEL]);
 
 type FormValues = {
   fagsakYtelseType: string;
@@ -79,7 +79,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
                 validate={[required]}
               >
                 {familieHendelseTyper
-                  .filter(({ kode }) => SØKNAD_TYPER.some(st => st === kode))
+                  .filter(({ kode }) => SØKNAD_TYPER.has(kode))
                   .map(bmt => (
                     <Radio key={bmt.kode} value={bmt.kode} size="small">
                       {bmt.navn}
