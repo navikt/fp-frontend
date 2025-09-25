@@ -1090,11 +1090,11 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | '-';
 
 export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
-  indexKey?: string;
-  orgnr?: string;
-  aktørId?: string;
   erVirksomhet?: boolean;
+  orgnr?: string;
   identifikator?: string;
+  indexKey?: string;
+  aktørId?: string;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType =
@@ -1112,8 +1112,8 @@ export type foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType 
 
 export type foreldrepenger_domene_typer_InternArbeidsforholdRef = {
   referanse?: string;
-  indexKey?: string;
   uuidreferanse?: string;
+  indexKey?: string;
 };
 
 export type foreldrepenger_domene_uttak_fakta_uttak_DokumentasjonVurderingBehov_Behov_Type =
@@ -2094,8 +2094,8 @@ export type foreldrepenger_domene_iay_modell_NaturalYtelse = {
 
 export type foreldrepenger_domene_iay_modell_Refusjon = {
   fom: string;
-  indexKey?: string;
   refusjonsbeløp?: foreldrepenger_domene_typer_Beløp;
+  indexKey?: string;
 };
 
 export type foreldrepenger_domene_iay_modell_kodeverk_InntektsmeldingInnsendingsårsak = 'NY' | 'ENDRING' | '-';
@@ -3868,7 +3868,7 @@ export type tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode = {
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse = {
-  fom: string;
+  fom?: string;
   tom?: string;
   type: foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
 };
@@ -4717,8 +4717,8 @@ export type foreldrepenger_domene_uttak_UttakPeriodeEndringDto = {
   fom: string;
   tom: string;
   erSlettet?: boolean;
-  erEndret?: boolean;
   erLagtTil?: boolean;
+  erEndret?: boolean;
 };
 
 export type foreldrepenger_kontrakter_formidling_v3_BrevmalDto = {
