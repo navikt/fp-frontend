@@ -61,7 +61,7 @@ export const OmsorgOgForeldreansvarForm = ({ søknad, adopsjon, harForeldreansva
     >
       <RhfForm
         formMethods={formMethods}
-        onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]))}
+        onSubmit={(values: FormValues) => submitCallback(transformValues(values, aksjonspunkterForPanel[0]!))}
       >
         <VStack gap="space-16">
           <RhfDatepicker
