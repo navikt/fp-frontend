@@ -39,11 +39,11 @@ const defaultGraderingPeriode: GraderingPeriode = {
   skalGraderes: false,
 };
 
-const gyldigArbeidskategori = [
+const gyldigArbeidskategori = new Set([
   Arbeidskategori.ARBEIDSTAKER,
   Arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE,
   Arbeidskategori.FRILANSER,
-];
+]);
 
 const maxValue100 = maxValue(100);
 interface Props {
@@ -247,7 +247,7 @@ const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[]
 
 const mapArbeidskategori = (typer: KodeverkMedNavn<'Arbeidskategori'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigArbeidskategori.includes(kode))
+    .filter(({ kode }) => gyldigArbeidskategori.has(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

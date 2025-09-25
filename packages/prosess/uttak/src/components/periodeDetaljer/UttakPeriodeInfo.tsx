@@ -128,7 +128,7 @@ const gyldigeÅrsaker = [
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeÅrsaker.some(årsak => årsak === kode))
+    .filter(({ kode }) => gyldigeÅrsaker.includes(kode))
     .map(({ kode }) => (
       <option value={kode} key={kode}>
         {OppholdArsakKontoNavn[kode]}

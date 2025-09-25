@@ -79,7 +79,7 @@ export const SoknadTypePickerForm = ({ setSoknadData, fagsakYtelseType, alleKode
                 validate={[required]}
               >
                 {familieHendelseTyper
-                  .filter(({ kode }) => SØKNAD_TYPER.some(st => st === kode))
+                  .filter(({ kode }) => SØKNAD_TYPER.includes(kode))
                   .map(bmt => (
                     <Radio key={bmt.kode} value={bmt.kode} size="small">
                       {bmt.navn}

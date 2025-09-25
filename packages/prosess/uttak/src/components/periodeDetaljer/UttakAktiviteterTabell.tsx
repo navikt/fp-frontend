@@ -125,7 +125,7 @@ const GYLDIGE_UTTAK_PERIODER = [
 
 const lagPeriodeTypeOptions = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.some(p => p === kode))
+    .filter(({ kode }) => GYLDIGE_UTTAK_PERIODER.includes(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

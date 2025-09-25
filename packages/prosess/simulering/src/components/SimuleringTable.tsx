@@ -127,7 +127,7 @@ export const SimuleringTable = ({
               {resultatRader.map((resultat, resultatIndex) => (
                 <Table.Row key={`rowIndex${resultatIndex + 1}`}>
                   <Table.DataCell
-                    style={resultat.feltnavn !== simuleringCodes.INNTREKKNESTEMÅNED ? { fontWeight: 'bold' } : {}}
+                    style={resultat.feltnavn === simuleringCodes.INNTREKKNESTEMÅNED ? {} : { fontWeight: 'bold' }}
                   >
                     <FormattedMessage id={`Simulering.${resultat.feltnavn}`} />
                   </Table.DataCell>

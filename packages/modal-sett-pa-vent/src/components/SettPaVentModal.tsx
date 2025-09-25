@@ -91,7 +91,7 @@ export const SettPaVentModal = ({
                     !hasManualPaVent ||
                     (erTilbakekreving
                       ? inkluderVentearsak(va, ventearsakFraFelt)
-                      : manuelleVenteArsaker.some(mva => mva === va.kode)),
+                      : manuelleVenteArsaker.includes(va.kode)),
                 )
                 .sort((v1, v2) => v1.navn.localeCompare(v2.navn))
                 .map(va => (
@@ -179,9 +179,7 @@ const inkluderVentearsak = (
   ventearsak: KodeverkMedNavn<'Venteårsak'> | KodeverkMedNavnTilbakekreving<'Venteårsak'>,
   valgtVentearsak?: string,
 ): boolean =>
-  automatiskeVentearsakerForTilbakekreving.some(vt => vt === ventearsak.kode)
-    ? ventearsak.kode === valgtVentearsak
-    : true;
+  automatiskeVentearsakerForTilbakekreving.includes(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true;
 
 const skalViseFristenTekst = (
   erTilbakekreving: boolean,
