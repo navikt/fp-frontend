@@ -36,7 +36,7 @@ const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
   if (!barnet) {
     return null;
   }
-  const barnErLike = !barn.find(erBarnUlike(barnet));
+  const barnErLike = !barn.some(erBarnUlike(barnet));
   const harDødtBarn = barn.some(b => b.dødsdato);
 
   if (barnErLike) {

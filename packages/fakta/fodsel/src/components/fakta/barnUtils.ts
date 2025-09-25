@@ -13,7 +13,7 @@ export const erGjeldendeBarnLike = (alleBarn: FødselGjeldende['barn']) => {
   if (!barnet) {
     return false;
   }
-  return !alleBarn.find(({ barn, kilde }) => kilde !== barnet.kilde || erBarnUlike(barnet.barn)(barn));
+  return !alleBarn.some(({ barn, kilde }) => kilde !== barnet.kilde || erBarnUlike(barnet.barn)(barn));
 };
 
 export const erBarnUlike = (sammenlignbartBarn: BarnHendelseData) => (barn: BarnHendelseData) =>

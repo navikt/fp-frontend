@@ -130,7 +130,7 @@ const transformValues = (
             : arbeidsgiverOpplysninger.identifikator,
           aktørId: arbeidsgiverOpplysninger.erPrivatPerson ? arbeidsgiverOpplysninger.referanse : undefined,
           brukerHarSagtAtIkkeKommer:
-            (values.inntektsmeldingerSomIkkeKommer ?? {})[lagArbeidsgiverKey(arbeidsgiverOpplysninger)] ?? false,
+            values.inntektsmeldingerSomIkkeKommer?.[lagArbeidsgiverKey(arbeidsgiverOpplysninger)] ?? false,
         };
       })
       .filter(o => o !== undefined),

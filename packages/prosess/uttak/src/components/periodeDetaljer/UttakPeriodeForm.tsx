@@ -254,20 +254,18 @@ const transformValues = (
   samtidigUttaksprosent: values.samtidigUttaksprosent ? Number.parseFloat(values.samtidigUttaksprosent) : undefined,
   samtidigUttak: values.samtidigUttak,
   flerbarnsdager: values.flerbarnsdager,
-  aktiviteter: filtrerteAktiviteter
-    .map((a, index) => {
-      const aktivitet = values.aktiviteter[index];
-      if (!aktivitet) {
-        return [];
-      }
-      return {
-        ...a,
-        stønadskontoType: aktivitet.stønadskontoType,
-        utbetalingsgrad: Number.parseFloat(aktivitet.utbetalingsgrad),
-        trekkdagerDesimaler: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
-      };
-    })
-    .flat(),
+  aktiviteter: filtrerteAktiviteter.flatMap((a, index) => {
+    const aktivitet = values.aktiviteter[index];
+    if (!aktivitet) {
+      return [];
+    }
+    return {
+      ...a,
+      stønadskontoType: aktivitet.stønadskontoType,
+      utbetalingsgrad: Number.parseFloat(aktivitet.utbetalingsgrad),
+      trekkdagerDesimaler: Number.parseFloat(aktivitet.weeks) * 5 + Number.parseFloat(aktivitet.days),
+    };
+  }),
 });
 
 interface Props {
