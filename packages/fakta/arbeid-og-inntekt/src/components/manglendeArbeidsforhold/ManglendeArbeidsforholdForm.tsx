@@ -102,7 +102,7 @@ export const ManglendeArbeidsforholdForm = ({
         begrunnelse: formValues.begrunnelse ?? '',
         fom: formValues.fom ?? '',
         tom: formValues.tom,
-        stillingsprosent: formValues.stillingsprosent ?? '',
+        stillingsprosent: formValues.stillingsprosent ?? 0,
       })
         .then(oppdater)
         .finally(() => formMethods.reset(formValues));

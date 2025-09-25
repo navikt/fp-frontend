@@ -238,7 +238,7 @@ const lagManueltArbeidsforhold = (
   arbeidsgiverNavn: formValues.arbeidsgiverNavn ?? '',
   fom: formValues.fom ?? '',
   tom: formValues.tom,
-  stillingsprosent: formValues.stillingsprosent ?? '',
+  stillingsprosent: formValues.stillingsprosent ?? 0,
 });
 
 const validerPeriodeRekkefølge = (getValues: UseFormGetValues<FormValues>) => (tom?: string) => {
