@@ -112,11 +112,23 @@ maskinen:
 
 - Legge inn readme for pakkene!
 
-## Intellj og stubs
+## Synkroniser TS-typer for med fpsak DTO-er
 
-Disse må installeres manuelt, følg denne tråden:
+Alle DTO-er fra upstream-tjenester (f.eks. fpsak) er samlet i én generert fil med TypeScript-typer.
+Synkroniser jevnlig for å holde typene oppdatert.
 
-https://intellij-support.jetbrains.com/hc/en-us/community/posts/207725245-React-import-are-not-resolved-in-WebStrom-and-Intellij-2016-2
+- **Synkroniser typer i dev:**
+```bash
+./generate-types.sh
+```
+
+- **Generer typer for lokale endringer (forutsetter at fpsak kjører på port 8080):**
+
+```bash
+  ./generate-types.sh lokal
+```
+
+
 
 ## Workspaces
 
@@ -124,20 +136,6 @@ https://intellij-support.jetbrains.com/hc/en-us/community/posts/207725245-React-
   https://medium.com/@jsilvax/a-workflow-guide-for-lerna-with-yarn-workspaces-60f97481149d
   > If you have common dev dependencies, it’s better to specify them in the workspace root package.json.
   > For instance, this can be dependencies like Jest, Husky, Storybook, Eslint, Prettier, etc.
-
-## Mocks i dev-serveren
-
-Kan konfigureres via å sette opp en `.env`-fil i roten av prosjektet.
-
-### Overstyr enkeltrute (webpack/mocks/fake-error.js)
-
-Nyttig for å teste feilsituasjoner. Overstyres som følger:
-
-```
-FAKE_ERROR_PATH=/fpsak/api/behandling/person/personopplysninger
-FAKE_ERROR_CODE=401
-FAKE_ERROR_BODY={"error":"dette fikk galt"}
-```
 
 ### Licenses and attribution
 
