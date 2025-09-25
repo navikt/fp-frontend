@@ -1,5 +1,4 @@
 import type {
-  AvklarBeregningsaktiviteterAP,
   BeregningFaktaAP,
   BeregningOverstyringAP,
   OverstyrBeregningsaktiviteterAP,
@@ -62,7 +61,6 @@ export type FaktaAksjonspunkt =
   | OverstyringAvklarStartdatoForPeriodenAp
   | AvklarFaktaForForeldreansvarAksjonspunktAp
   | KontrollerBesteberegningAP
-  | AvklarBeregningsaktiviteterAP
   | OverstyrBeregningsaktiviteterAP
   | BeregningFaktaAP
   | BeregningOverstyringAP
