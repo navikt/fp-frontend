@@ -113,7 +113,7 @@ export const saksbehandlareForAvdelingOptions = (avdelingEnhet?: string) =>
   });
 
 // Limit concurrency to 2 requests at once
-const limit = pLimit(1);
+const limit = pLimit(2);
 
 export const oppgaveAntallOptions = (sakslisteId: number, avdelingEnhet: string) =>
   queryOptions({
