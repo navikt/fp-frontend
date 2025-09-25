@@ -13,8 +13,8 @@ const filtrerAvslagsårsaker = (
   vilkarTypeKode: string,
 ): KodeverkMedNavn<'Avslagsårsak'>[] =>
   vilkarTypeKode === VilkarType.FODSELSVILKARET_MOR
-    ? avslagsårsaker[vilkarTypeKode].filter(årsak => !avslagsårsakerES.includes(årsak.kode))
-    : avslagsårsaker[vilkarTypeKode];
+    ? avslagsårsaker[vilkarTypeKode]!.filter(årsak => !avslagsårsakerES.includes(årsak.kode))
+    : avslagsårsaker[vilkarTypeKode]!;
 
 interface Props {
   vilkår: Vilkar[];
@@ -30,7 +30,7 @@ export const OverstyringPanelDef = ({ vilkår, vilkårKoder, panelTekstKode, med
 
   const skalVises = skalViseProsessPanel(standardProps.aksjonspunkterForPanel, vilkårKoder, vilkår);
 
-  const avslagsårsaker = filtrerAvslagsårsaker(standardProps.alleKodeverk['Avslagsårsak'], vilkår[0].vilkarType);
+  const avslagsårsaker = filtrerAvslagsårsaker(standardProps.alleKodeverk['Avslagsårsak'], vilkår[0]!.vilkarType);
 
   if (!skalVises) {
     return null;

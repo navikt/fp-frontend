@@ -12,7 +12,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
 ];
 
-const AKSJONSPUNKT_TEKST_PER_KODE = {
+const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
   [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]:
     'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
   [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
@@ -35,7 +35,7 @@ export const ForeldreansvarInngangsvilkarInitPanel = () => {
       hentInngangsvilkårPanelTekst={
         standardPanelProps.aksjonspunkterForPanel.length > 0
           ? intl.formatMessage({
-              id: AKSJONSPUNKT_TEKST_PER_KODE[standardPanelProps.aksjonspunkterForPanel[0].definisjon],
+              id: AKSJONSPUNKT_TEKST_PER_KODE[standardPanelProps.aksjonspunkterForPanel[0]!.definisjon],
             })
           : ''
       }

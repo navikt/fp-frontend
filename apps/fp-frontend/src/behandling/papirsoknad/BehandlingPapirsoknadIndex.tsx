@@ -101,7 +101,7 @@ const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string =>
         kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_FORELDREPENGER ||
         kode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
         kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER,
-    )[0];
+    )[0]!;
 
 // Default export grunna React.lazy
 // eslint-disable-next-line import/no-default-export

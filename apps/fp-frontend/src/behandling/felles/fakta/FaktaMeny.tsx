@@ -41,7 +41,7 @@ export const FaktaMeny = ({ valgtFaktaSteg, valgtProsessSteg, setFaktaPanelMedÅ
               ) : undefined,
             }))}
             onClick={(index: number) => {
-              oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, faktaPanelMenyData[index].id);
+              oppdaterProsessStegOgFaktaPanelIUrl(valgtProsessSteg, faktaPanelMenyData[index]!.id);
             }}
           />
         </div>

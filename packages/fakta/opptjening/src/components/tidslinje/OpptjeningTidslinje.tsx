@@ -80,7 +80,7 @@ const lagPerioder = (
         rad.arbeidsforholdRef === opptjeningPeriode.arbeidsforholdRef &&
         rad.arbeidsgiverReferanse === opptjeningPeriode.arbeidsgiverReferanse,
     )?.id,
-    status: finnStatus(formVerdierForAlleAktiviteter[index].erGodkjent),
+    status: finnStatus(formVerdierForAlleAktiviteter[index]!.erGodkjent),
   }));
 
 const lagRader = (
