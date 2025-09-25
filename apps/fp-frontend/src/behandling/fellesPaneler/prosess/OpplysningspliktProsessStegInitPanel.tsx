@@ -42,13 +42,13 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
       prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
       skalPanelVisesIMeny={
-        standardPanelProps.behandling.type !== BehandlingTypeEnum.REVURDERING
-          ? skalViseProsessPanel(
+        standardPanelProps.behandling.type === BehandlingTypeEnum.REVURDERING
+          ? false
+          : skalViseProsessPanel(
               standardPanelProps.aksjonspunkterForPanel,
               VILKAR_KODER,
               standardPanelProps.vilkårForPanel,
             )
-          : false
       }
     >
       {søknad ? (

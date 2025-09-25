@@ -147,7 +147,7 @@ const getBekreftAksjonspunktProsessCallback =
 const finnStatus = (vilkår: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
   if (vilkår.length > 0) {
     const vilkårStatusCodes = vilkår.map(v => v.vilkarStatus);
-    if (vilkårStatusCodes.some(vsc => vsc === VilkarUtfallType.IKKE_VURDERT)) {
+    if (vilkårStatusCodes.includes(VilkarUtfallType.IKKE_VURDERT)) {
       return VilkarUtfallType.IKKE_VURDERT;
     }
     return vilkårStatusCodes.every(vsc => vsc === VilkarUtfallType.OPPFYLT)

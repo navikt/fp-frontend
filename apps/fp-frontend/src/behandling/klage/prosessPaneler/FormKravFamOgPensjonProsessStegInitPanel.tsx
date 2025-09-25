@@ -50,14 +50,14 @@ export const FormKravFamOgPensjonProsessStegInitPanel = () => {
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.FormkravKlageNFP' })}
       skalPanelVisesIMeny
     >
-      {!isFetching ? (
+      {isFetching ? (
+        <LoadingPanel />
+      ) : (
         <FormkravProsessIndex
           klageVurdering={klageVurdering}
           avsluttedeBehandlinger={avsluttedeBehandlinger}
           lagreFormkravVurdering={lagreFormkravVurdering}
         />
-      ) : (
-        <LoadingPanel />
       )}
     </ProsessDefaultInitPanel>
   );

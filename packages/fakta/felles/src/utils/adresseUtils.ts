@@ -14,7 +14,7 @@ export const formaterAdresse = (adresse: Personadresse): string => {
 
   const gateadresse = [adresselinje1, adresselinje2, adresselinje3].filter(linje => !!linje).join(', ');
   const postNummerogSted = `${emptyIfnull(postNummer)} ${emptyIfnull(poststed)}`;
-  const adresseLand = land?.toUpperCase() !== PERSON_ADRESSE_LAND_NORGE ? land : undefined;
+  const adresseLand = land?.toUpperCase() === PERSON_ADRESSE_LAND_NORGE ? undefined : land;
 
   return [gateadresse, postNummerogSted, adresseLand]
     .map(linje => linje?.trim())

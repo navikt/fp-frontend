@@ -9,7 +9,7 @@ export const AAREG_URL = 'https://arbeid-og-inntekt.nais.adeo.no/';
 export const FOLKETRYGDLOVEN_KAP14_13_URL = 'https://lovdata.no/nav/folketrygdloven/kap14/%C2%A714-13';
 
 export const getGosysUrl = (fødselsnummer: string) => {
-  const { host } = window.location;
+  const { host } = globalThis.location;
   const envPrefix = host.includes('dev') ? '-q2.dev' : '';
   return `https://gosys${envPrefix}.intern.nav.no/gosys/bruker/brukeroversikt.jsf?fodselsnummer=${fødselsnummer}`;
 };

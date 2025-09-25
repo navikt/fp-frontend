@@ -86,7 +86,7 @@ export const FritekstRedigeringModal = ({
                 variant="tertiary"
                 onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
                   e.preventDefault();
-                  window.open(href, '_blank');
+                  globalThis.open(href, '_blank');
                 }}
                 iconPosition="right"
                 icon={<ExternalLinkIcon aria-hidden />}

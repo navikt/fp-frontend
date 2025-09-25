@@ -98,7 +98,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
         {
           permisjonFom: '2020-02-17',
           permisjonTom: '2020-07-12',
-          permisjonsprosent: 100.0,
+          permisjonsprosent: 100,
           type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
         },
       ],

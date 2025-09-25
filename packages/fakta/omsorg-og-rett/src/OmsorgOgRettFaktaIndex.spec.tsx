@@ -65,7 +65,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(1);
     const jaElements = screen.getAllByText('Ja');
-    await userEvent.click(jaElements[jaElements.length - 1]);
+    await userEvent.click(jaElements.at(-1)!);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -100,7 +100,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
     const jaElements = screen.getAllByText('Ja');
-    await userEvent.click(jaElements[jaElements.length - 1]);
+    await userEvent.click(jaElements.at(-1)!);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -163,7 +163,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     const radiogrupper = screen.getAllByRole('group');
     expect(radiogrupper).toHaveLength(3);
-    radiogrupper.forEach(rg => expect(rg).toHaveAttribute('aria-readonly', 'true'));
+    for (const rg of radiogrupper) {
+      expect(rg).toHaveAttribute('aria-readonly', 'true');
+    }
 
     const jaRadios = screen.getAllByLabelText('Ja');
     const neiRadios = screen.getAllByLabelText('Nei');
@@ -193,7 +195,9 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const radiogrupper = screen.getAllByRole('group');
 
     expect(radiogrupper).toHaveLength(3);
-    radiogrupper.forEach(rg => expect(rg).toHaveAttribute('aria-readonly', 'true'));
+    for (const rg of radiogrupper) {
+      expect(rg).toHaveAttribute('aria-readonly', 'true');
+    }
 
     const jaRadios = screen.getAllByLabelText('Ja');
     const neiRadios = screen.getAllByLabelText('Nei');

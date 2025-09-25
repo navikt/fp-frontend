@@ -77,5 +77,5 @@ export const byggTabellStruktur = (
 
 export const finnUløstArbeidsforholdIndex = (tabellData: ArbeidsforholdOgInntektRadData[]): number[] => {
   const index = tabellData.findIndex(d => d.årsak && !d.avklaring);
-  return index !== -1 ? [index] : [];
+  return index === -1 ? [] : [index];
 };

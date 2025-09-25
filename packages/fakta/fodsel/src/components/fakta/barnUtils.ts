@@ -10,7 +10,7 @@ export const formaterLiv = ({ fødselsdato, dødsdato }: BarnHendelseData): stri
 
 export const erGjeldendeBarnLike = (alleBarn: FødselGjeldende['barn']) =>
   alleBarn.length > 0 &&
-  !alleBarn.find(({ barn, kilde }) => kilde !== alleBarn[0].kilde || erBarnUlike(alleBarn[0].barn)(barn));
+  !alleBarn.some(({ barn, kilde }) => kilde !== alleBarn[0].kilde || erBarnUlike(alleBarn[0].barn)(barn));
 
 export const erBarnUlike = (sammenlignbartBarn: BarnHendelseData) => (barn: BarnHendelseData) =>
   barn.fødselsdato !== sammenlignbartBarn.fødselsdato || barn.dødsdato !== sammenlignbartBarn.dødsdato;

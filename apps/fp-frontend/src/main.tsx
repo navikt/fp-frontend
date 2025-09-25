@@ -17,7 +17,7 @@ if (app === null) {
   throw new Error('No app element');
 }
 
-const environment = window.location.hostname;
+const environment = globalThis.location.hostname;
 
 const isDevelopment = import.meta.env.MODE === 'development';
 

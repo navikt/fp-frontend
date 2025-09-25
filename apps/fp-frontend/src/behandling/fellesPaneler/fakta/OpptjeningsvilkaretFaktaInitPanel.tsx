@@ -44,10 +44,10 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Opptjening' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {!isFetching ? (
-        <OpptjeningFaktaIndex opptjening={opptjening} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />
-      ) : (
+      {isFetching ? (
         <LoadingPanel />
+      ) : (
+        <OpptjeningFaktaIndex opptjening={opptjening} arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId} />
       )}
     </FaktaDefaultInitPanel>
   );

@@ -32,7 +32,7 @@ export const FaktaFraFReg = ({ register: { barn } }: Props) => {
 };
 
 const BarnVisning = ({ barn }: { barn: BarnHendelseData[] }) => {
-  const barnErLike = !barn.find(erBarnUlike(barn[0]));
+  const barnErLike = !barn.some(erBarnUlike(barn[0]));
   const harDødtBarn = barn.some(b => b.dødsdato);
 
   if (barnErLike) {

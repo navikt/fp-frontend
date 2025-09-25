@@ -31,7 +31,7 @@ export const RestApiErrorProvider = ({ children, initialState }: Props): JSX.Ele
       case 'remove':
         return defaultInitialState;
       default:
-        throw new Error();
+        throw new Error("Action type doesn't exist");
     }
   }, initialState || defaultInitialState);
 

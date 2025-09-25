@@ -17,8 +17,8 @@ interface Props {
 }
 
 const scrollUp = (): void => {
-  if (window.innerWidth < 1305) {
-    window.scroll(0, 0);
+  if (globalThis.innerWidth < 1305) {
+    globalThis.scroll(0, 0);
   }
 };
 
