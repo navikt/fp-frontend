@@ -18,14 +18,14 @@ import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   AdopsjonFamilieHendelse,
   Aksjonspunkt,
-  InntektArbeidYtelse,
   Personoversikt,
+  RelatertTilgrensedYtelse,
   Soknad,
 } from '@navikt/fp-types';
 
 import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaIndex';
 
-const soknad = {
+const søknad = {
   adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' },
   antallBarn: 2,
   soknadType: SoknadType.ADOPSJON,
@@ -89,20 +89,30 @@ const personoversikt: Personoversikt = {
   barn: [],
 };
 
-const inntektArbeidYtelse = {
-  innvilgetRelatertTilgrensendeYtelserForAnnenForelder: [
-    {
-      tilgrensendeYtelserListe: [
-        {
-          statusNavn: 'Løpende',
-          periodeFraDato: '2019-01-01',
-          saksNummer: '2323',
-        },
-      ],
-      relatertYtelseNavn: 'Foreldrepenger',
-    },
-  ],
-} as InntektArbeidYtelse;
+const innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[] = [
+  {
+    tilgrensendeYtelserListe: [
+      {
+        statusNavn: 'Løpende',
+        periodeFraDato: '2019-01-01',
+        periodeTilDato: '2019-02-02',
+        saksNummer: '2323',
+      },
+    ],
+    relatertYtelseNavn: 'Foreldrepenger',
+  },
+  {
+    relatertYtelseNavn: 'Svangerskapspenger',
+    tilgrensendeYtelserListe: [
+      {
+        periodeFraDato: '2019-02-03',
+        periodeTilDato: '2019-02-04',
+        statusNavn: 'Under behandling',
+        saksNummer: '12',
+      },
+    ],
+  },
+];
 
 const merknaderFraBeslutter = {
   notAccepted: false,
@@ -120,10 +130,10 @@ const meta = {
   component: OmsorgOgForeldreansvarFaktaIndex,
   decorators: [withPanelData],
   args: {
-    soknad,
+    søknad,
     adopsjon: defaultAdopsjon,
     personoversikt,
-    inntektArbeidYtelse,
+    innvilgetRelatertTilgrensendeYtelserForAnnenForelder,
   },
   render: args => <OmsorgOgForeldreansvarFaktaIndex {...args} />,
 } satisfies Meta<PanelDataArgs & ComponentProps<typeof OmsorgOgForeldreansvarFaktaIndex>>;
