@@ -6,19 +6,19 @@ export const lazyWithRetry = <T>(
   lazy<ComponentType<T>>(async () => {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     const pageHasAlreadyBeenForceRefreshed = JSON.parse(
-      window.localStorage.getItem('page-has-been-force-refreshed') ?? 'false',
+      globalThis.localStorage.getItem('page-has-been-force-refreshed') ?? 'false',
     );
 
     try {
       const component = await componentImport();
-      window.localStorage.setItem('page-has-been-force-refreshed', 'false');
+      globalThis.localStorage.setItem('page-has-been-force-refreshed', 'false');
       return component;
     } catch (error) {
       if (!pageHasAlreadyBeenForceRefreshed) {
         // Assuming that the user is not on the latest version of the application.
         // Let's refresh the page immediately.
-        window.localStorage.setItem('page-has-been-force-refreshed', 'true');
-        window.location.reload();
+        globalThis.localStorage.setItem('page-has-been-force-refreshed', 'true');
+        globalThis.location.reload();
         return { default: () => null };
       }
 

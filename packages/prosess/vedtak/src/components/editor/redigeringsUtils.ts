@@ -127,12 +127,16 @@ export const konverterHtmlToEditorJsFormat = (html: string): OutputData => {
           });
           break;
         default:
-          node.childNodes.forEach(processNode);
+          for (const child of node.childNodes) {
+            processNode(child);
+          }
       }
     }
   };
 
-  doc.body.childNodes.forEach(processNode);
+  for (const child of doc.body.childNodes) {
+    processNode(child);
+  }
 
   return { time: Date.now(), blocks, version: '2.30.8' };
 };

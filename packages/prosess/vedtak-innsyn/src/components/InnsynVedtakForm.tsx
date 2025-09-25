@@ -47,9 +47,11 @@ const getPreviewCallback =
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
   const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === Kommunikasjonsretning.INN);
-  allDocuments.forEach(
-    doc => !filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId) && filteredDocuments.push(doc),
-  );
+  for (const doc of allDocuments) {
+    if (!filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId)) {
+      filteredDocuments.push(doc);
+    }
+  }
   return filteredDocuments;
 };
 

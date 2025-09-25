@@ -1,12 +1,12 @@
 export const getValueFromLocalStorage = (key: string): string | undefined => {
-  const value = window.localStorage.getItem(key);
+  const value = globalThis.localStorage.getItem(key);
   return value !== 'undefined' && value !== null ? value : undefined;
 };
 
 export const setValueInLocalStorage = (key: string, value: string): void => {
-  window.localStorage.setItem(key, value);
+  globalThis.localStorage.setItem(key, value);
 };
 
 export const removeValueFromLocalStorage = (key: string): void => {
-  window.localStorage.removeItem(key);
+  globalThis.localStorage.removeItem(key);
 };

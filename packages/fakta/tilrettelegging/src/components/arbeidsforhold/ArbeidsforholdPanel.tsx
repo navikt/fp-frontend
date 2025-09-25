@@ -82,7 +82,7 @@ export const ArbeidsforholdPanel = ({
   const harUavklartVelferdspermisjon = filtrerteVelferdspermisjoner.some(permisjon => permisjon.erGyldig === undefined);
 
   const oppdaterOverstyrtUtbetalingsgrad = (velferdspermisjonprosent: number) => {
-    arbeidsforhold.tilretteleggingDatoer.forEach((tilrettelegging, index) => {
+    for (const [index, tilrettelegging] of arbeidsforhold.tilretteleggingDatoer.entries()) {
       const prosentSvangerskapspenger = finnProsentSvangerskapspenger(
         tilrettelegging,
         stillingsprosentArbeidsforhold,
@@ -95,7 +95,7 @@ export const ArbeidsforholdPanel = ({
           overstyrtUtbetalingsgrad: prosentSvangerskapspenger,
         });
       }
-    });
+    }
   };
 
   return (

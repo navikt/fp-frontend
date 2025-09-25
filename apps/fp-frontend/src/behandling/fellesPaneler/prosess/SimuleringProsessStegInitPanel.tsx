@@ -59,15 +59,15 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
         harLenke(behandling, 'SIMULERING_RESULTAT') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
       }
     >
-      {!isFetching ? (
+      {isFetching ? (
+        <LoadingPanel />
+      ) : (
         <SimuleringProsessIndex
           tilbakekrevingvalg={tilbakekrevingValg}
           simuleringResultat={simuleringResultat}
           previewFptilbakeCallback={forhåndsvis}
           arbeidsgiverOpplysningerPerId={arbeidsgiverOpplysningerPerId}
         />
-      ) : (
-        <LoadingPanel />
       )}
     </ProsessDefaultInitPanel>
   );

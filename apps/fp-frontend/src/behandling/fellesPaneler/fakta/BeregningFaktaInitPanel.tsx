@@ -59,7 +59,9 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.Beregning' })}
       skalPanelVisesIMeny={harLenke(behandling, 'BEREGNINGSGRUNNLAG')}
     >
-      {!isFetching ? (
+      {isFetching ? (
+        <LoadingPanel />
+      ) : (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
           vilkar={lagBGVilkår(behandling.vilkår, beregningsgrunnlag)}
@@ -71,8 +73,6 @@ export const BeregningFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
           readOnly={standardPanelProps.isReadOnly}
           submittable={standardPanelProps.isSubmittable}
         />
-      ) : (
-        <LoadingPanel />
       )}
     </FaktaDefaultInitPanel>
   );

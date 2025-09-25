@@ -64,12 +64,12 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
 
   const aksjonspunktTekster = [];
 
-  filtrerteAksjonspunkter.forEach(ap => {
+  for (const ap of filtrerteAksjonspunkter) {
     const tekstkode = UTTAK_PANEL_AKSJONSPUNKT_KODER[ap.definisjon];
     if (tekstkode) {
       aksjonspunktTekster.push(<FormattedMessage key={tekstkode} id={tekstkode} />);
     }
-  });
+  }
 
   if (uttaksresultat.perioderSøker.some(p => p.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING)) {
     aksjonspunktTekster.push(<FormattedMessage key="generellTekst" id="UttakPanel.Aksjonspunkt.Generell" />);
@@ -89,7 +89,7 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
 const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadskontoer, intl: IntlShape) => {
   const feil = new Array<string>();
 
-  perioder.forEach(p => {
+  for (const p of perioder) {
     const ikkeGyldigeAktiviteter = p.aktiviteter.filter(
       a =>
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
@@ -106,7 +106,7 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
         feil.push(feilmelding);
       }
     }
-  });
+  }
 
   if (feil.length === 0) {
     const kontoerMedUgyldigForbruk = Object.values(stønadskonto.stonadskontoer).filter(s => !s.gyldigForbruk);

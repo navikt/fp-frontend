@@ -13,14 +13,16 @@ type RadioProps = {
 export const lagVurderingsAlternativer = (intl: IntlShape, type: UttakType, årsak: UttakÅrsak): RadioProps[] => {
   const vurderingsalternativer: RadioProps[] = [];
   if (erUttaksperiodeMedAktivitetskravArbeid(type, årsak)) {
-    vurderingsalternativer.push({
-      value: VurderingsAlternativ.GODKJENT_OVER75,
-      label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.GodkjentOver75' }),
-    });
-    vurderingsalternativer.push({
-      value: VurderingsAlternativ.GODKJENT_UNDER75,
-      label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.GodkjentUnder75' }),
-    });
+    vurderingsalternativer.push(
+      {
+        value: VurderingsAlternativ.GODKJENT_OVER75,
+        label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.GodkjentOver75' }),
+      },
+      {
+        value: VurderingsAlternativ.GODKJENT_UNDER75,
+        label: intl.formatMessage({ id: 'UttakDokumentasjonFaktaDetailForm.GodkjentUnder75' }),
+      },
+    );
   } else {
     vurderingsalternativer.push({
       value: VurderingsAlternativ.GODKJENT,

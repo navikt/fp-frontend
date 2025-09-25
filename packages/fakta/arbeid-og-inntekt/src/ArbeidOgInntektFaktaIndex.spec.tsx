@@ -31,7 +31,7 @@ const {
 const frist = dayjs().add(28, 'days').format(ISO_DATE_FORMAT);
 
 const scrollIntoViewMock = vi.fn();
-window.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
+globalThis.HTMLElement.prototype.scrollIntoView = scrollIntoViewMock;
 
 describe('ArbeidOgInntektFaktaIndex', () => {
   it('skal avklare arbeidsforhold som mangler inntektsmelding og så sette på vent', async () => {

@@ -82,10 +82,10 @@ const useLagrePapirsøknad = (
       bekreftedeAksjonspunktDtoer,
     });
 
-    if (!formValues) {
-      window.scrollTo(0, 0);
-    } else {
+    if (formValues) {
       setErAksjonspunktLagret(true);
+    } else {
+      globalThis.scrollTo(0, 0);
     }
 
     return oppdatertBehandling;

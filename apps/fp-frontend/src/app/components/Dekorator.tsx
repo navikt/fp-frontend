@@ -57,7 +57,7 @@ export const Dekorator = ({
       void navigate('/');
     }
     if (e.type === 'contextmenu') {
-      window.open('/', '_newtab');
+      globalThis.open('/', '_newtab');
     }
     e.preventDefault();
   };
@@ -78,7 +78,8 @@ export const Dekorator = ({
   if (kanOppgavestyre) {
     interneLenker.push({
       tekst: intl.formatMessage({ id: 'Dekorator.Avdelingsleder' }),
-      callback: () => (window.location.href = window.location.href.replace(FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME)),
+      callback: () =>
+        (globalThis.location.href = globalThis.location.href.replace(FPSAK_URL_NAME, AVDELINGSLEDER_URL_NAME)),
     });
   }
   if (kanSaksbehandle) {
@@ -147,7 +148,7 @@ const formaterFeilmeldinger = (
     addIfNotExists(feilmeldinger, { melding: crashMessage });
   }
 
-  alleFeilmeldinger.forEach(feilmelding => {
+  for (const feilmelding of alleFeilmeldinger) {
     switch (feilmelding.type) {
       case ErrorType.POLLING_HALTED_OR_DELAYED:
         if (feilmelding.status === ApiPollingStatus.HALTED) {
@@ -195,7 +196,7 @@ const formaterFeilmeldinger = (
           melding: feilmelding.message,
         });
     }
-  });
+  }
 
   return feilmeldinger;
 };

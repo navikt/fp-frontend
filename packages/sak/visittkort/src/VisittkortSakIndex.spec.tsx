@@ -72,6 +72,8 @@ describe('VisittkortSakIndex', () => {
     ['dødfødsel', ['Født 21.01.2020', 'Død'], FamilieMedDødfødtBarn],
   ])('skal vise visittkort med familiehendelse: %s', (_, expected, Component) => {
     render(<Component />);
-    expected.forEach(text => expect(screen.getByText(text)).toBeInTheDocument());
+    for (const text of expected) {
+      expect(screen.getByText(text)).toBeInTheDocument();
+    }
   });
 });

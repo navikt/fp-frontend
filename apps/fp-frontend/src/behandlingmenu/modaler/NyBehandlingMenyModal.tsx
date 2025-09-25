@@ -77,7 +77,7 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   const revurderingsårsaker = alleFpSakKodeverk ? alleFpSakKodeverk['BehandlingÅrsakType'] : undefined;
 
   const behandlingstyper = notEmpty(alleFpSakKodeverk)['BehandlingType'].filter(bt =>
-    BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES.some(bto => bto === bt.kode),
+    BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES.includes(bt.kode),
   );
 
   const navigate = useNavigate();

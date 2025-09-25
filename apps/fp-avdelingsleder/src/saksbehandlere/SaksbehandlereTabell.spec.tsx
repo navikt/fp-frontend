@@ -47,9 +47,9 @@ describe('SaksbehandlereTabell', () => {
 
     const rows = await screen.findAllByRole('row');
 
-    rows.slice(1).forEach((row, index) => {
+    for (const [index, row] of rows.slice(1).entries()) {
       expect(row).toHaveTextContent(sortedNames[index]);
-    });
+    }
   });
 
   it('skal sortere saksbehandlere med ansattAvdeling null sist', async () => {
@@ -59,8 +59,8 @@ describe('SaksbehandlereTabell', () => {
 
     const rows = await screen.findAllByRole('row');
 
-    rows.slice(1).forEach((row, index) => {
+    for (const [index, row] of rows.slice(1).entries()) {
       expect(row).toHaveTextContent(sortedNames[index]);
-    });
+    }
   });
 });

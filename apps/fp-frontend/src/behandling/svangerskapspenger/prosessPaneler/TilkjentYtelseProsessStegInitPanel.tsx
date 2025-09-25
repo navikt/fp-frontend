@@ -28,7 +28,7 @@ export const TilkjentYtelseProsessStegInitPanel = ({ arbeidsgiverOpplysningerPer
 
   const api = useBehandlingApi(behandling);
 
-  const overstyrtStatus = behandling.links.find(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
+  const overstyrtStatus = behandling.links.some(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_VURDERT;
 

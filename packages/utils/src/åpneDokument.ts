@@ -14,7 +14,7 @@ export const åpneDokument = (
 };
 
 export const åpneVindu = (url: string, target: string, dokumentTittel: string): void => {
-  const dokumentVindu = window.open(url, target);
+  const dokumentVindu = globalThis.open(url, target);
   if (dokumentVindu) {
     setTimeout(() => {
       dokumentVindu.document.title = dokumentTittel;

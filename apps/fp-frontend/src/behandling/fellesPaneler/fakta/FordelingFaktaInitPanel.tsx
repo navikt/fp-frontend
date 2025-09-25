@@ -49,7 +49,9 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Fordeling' })}
       skalPanelVisesIMeny={AKSJONSPUNKT_KODER.some(kode => hasAksjonspunkt(kode, behandling.aksjonspunkt))}
     >
-      {!isFetching ? (
+      {isFetching ? (
+        <LoadingPanel />
+      ) : (
         <Wrapper
           kodeverkSamling={standardPanelProps.alleKodeverk}
           beregningsgrunnlagVilkår={lagBGVilkår(standardPanelProps.behandling.vilkår, beregningsgrunnlag)}
@@ -59,8 +61,6 @@ export const FordelingFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }: Props
           readOnly={standardPanelProps.isReadOnly}
           submittable={standardPanelProps.isSubmittable}
         />
-      ) : (
-        <LoadingPanel />
       )}
     </FaktaDefaultInitPanel>
   );

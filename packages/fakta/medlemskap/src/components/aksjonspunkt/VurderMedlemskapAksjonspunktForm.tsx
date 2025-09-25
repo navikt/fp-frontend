@@ -74,7 +74,7 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
         ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
         : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
       begrunnelse,
-      avslagskode: vurdering !== MedlemskapVurdering.OPPFYLT ? avslagskode : undefined,
+      avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
       opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
       medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
     });
