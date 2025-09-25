@@ -18,7 +18,7 @@ import type {
   AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
 import { OmsorgsovertakelseVilkårForm, type OmsorgsovertakelseVilkårFormValues } from './OmsorgsovertakelseVilkårForm';
 
@@ -38,7 +38,7 @@ interface Props {
   harForeldreansvarAP: boolean;
 }
 
-export const AksjonspunktForm = ({ søknad, adopsjon, harForeldreansvarAP }: Props) => {
+export const OmsorgOgForeldreansvarForm = ({ søknad, adopsjon, harForeldreansvarAP }: Props) => {
   const intl = useIntl();
 
   const { aksjonspunkterForPanel, alleMerknaderFraBeslutter, submitCallback, isReadOnly, isSubmittable } =
@@ -68,7 +68,7 @@ export const AksjonspunktForm = ({ søknad, adopsjon, harForeldreansvarAP }: Pro
             name="omsorgsovertakelseDato"
             size="medium"
             control={formMethods.control}
-            label={<FormattedMessage id="AksjonspunktForm.OmsorgsovertakelseDato" />}
+            label={<FormattedMessage id="AksjonspunktForm.Omsorgsovertakelsesdato" />}
             validate={[required, hasValidDate]}
             isReadOnly={isReadOnly}
             isEdited={isNotEqual(finnOmsorgsovertakelseDato(søknad), adopsjon.omsorgsovertakelseDato)}
@@ -79,7 +79,7 @@ export const AksjonspunktForm = ({ søknad, adopsjon, harForeldreansvarAP }: Pro
               name="foreldreansvarDato"
               size="medium"
               control={formMethods.control}
-              label={<FormattedMessage id="AksjonspunktForm.ForeldreansvarDato" />}
+              label={<FormattedMessage id="AksjonspunktForm.Foreldreansvarsdato" />}
               validate={[required, hasValidDate]}
               isReadOnly={isReadOnly}
             />
@@ -116,18 +116,18 @@ const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterFor
 
 const transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): AksjonpunktSubmitType =>
   aksjonspunkt.definisjon === AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR
-    ? ({
-        omsorgsovertakelseDato: values.omsorgsovertakelseDato,
-        foreldreansvarDato: values.foreldreansvarDato,
+    ? {
+        omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
+        foreldreansvarDato: notEmpty(values.foreldreansvarDato),
         kode: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
         ...FaktaBegrunnelseTextField.transformValues(values),
-      } as AvklarFaktaForForeldreansvarAksjonspunktAp)
-    : ({
-        omsorgsovertakelseDato: values.omsorgsovertakelseDato,
-        vilkarType: values.vilkarType,
+      }
+    : {
+        omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
+        vilkarType: notEmpty(values.vilkarType),
         kode: AksjonspunktKode.OMSORGSOVERTAKELSE,
         ...FaktaBegrunnelseTextField.transformValues(values),
-      } as AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp);
+      };
 
 const finnOmsorgsovertakelseDato = (søknad: Soknad) => {
   if (søknadErAdopsjon(søknad)) {

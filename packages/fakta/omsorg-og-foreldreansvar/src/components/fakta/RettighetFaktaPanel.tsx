@@ -1,8 +1,8 @@
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { VStack } from '@navikt/ds-react';
+import { Label, Link, List, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
-import { dateFormat } from '@navikt/ft-utils';
+import { periodFormat } from '@navikt/ft-utils';
 
 import type {
   foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType,
@@ -21,45 +21,51 @@ export const RettighetFaktaPanel = ({ farSøkerType, innvilgetRelatertTilgrensen
   const { alleKodeverk } = usePanelDataContext();
 
   const farSøkerTypeNavn = alleKodeverk['FarSøkerType'].find(k => k.kode === farSøkerType)?.navn ?? '-';
-  const ytelser = innvilgetRelatertTilgrensendeYtelserForAnnenForelder;
+  const iverksattYtelseForAnnenPart =
+    innvilgetRelatertTilgrensendeYtelserForAnnenForelder.flatMap(mapTilYtelserPerioder);
 
   return (
     <FaktaKort label={intl.formatMessage({ id: 'RettighetFaktaPanel.Tittel' })}>
       <VStack gap="space-16">
         <ReadOnlyField
           size="medium"
-          label={<FormattedMessage id="RettighetFaktaPanel.FarSøkerType" />}
+          label={<FormattedMessage id="RettighetFaktaPanel.FarSøker" />}
           value={farSøkerTypeNavn}
         />
 
-        <ReadOnlyField
-          size="medium"
-          label={<FormattedMessage id="RettighetFaktaPanel.AndreYtelseTilMor" />}
-          value={
-            <>
-              {ytelser.map(ytelse =>
-                getLopendeOrAvsluttetYtelser(ytelse).map(y => (
-                  <FormattedMessage
-                    id="RettighetFaktaPanel.YtelseIverksatt"
-                    key={`${ytelse.relatertYtelseNavn}-${y.periodeFraDato}`}
-                    values={{
-                      ytelseType: ytelse.relatertYtelseNavn,
-                      dato: dateFormat(y.periodeFraDato),
-                      br: <br />,
-                    }}
-                  />
-                )),
-              )}
-              {!ytelser.some(y => getLopendeOrAvsluttetYtelser(y).length > 0) && '-'}
-            </>
-          }
-        />
+        <Label size="medium">
+          <FormattedMessage id="RettighetFaktaPanel.AndreYtelseTilMor" />
+        </Label>
+        {iverksattYtelseForAnnenPart.length > 0 ? (
+          <List as="ul">
+            {iverksattYtelseForAnnenPart.map(y => (
+              <List.Item title={`${y.ytelseNavn}: ${y.periode}`} key={`${y.ytelseNavn}-${y.periode}`}>
+                {y.saksnummer} ({y.status})
+              </List.Item>
+            ))}
+          </List>
+        ) : (
+          '-'
+        )}
       </VStack>
     </FaktaKort>
   );
 };
 
-const getLopendeOrAvsluttetYtelser = (
-  ytelse: RelatertTilgrensedYtelse,
-): RelatertTilgrensedYtelse['tilgrensendeYtelserListe'] =>
-  ytelse.tilgrensendeYtelserListe.filter(y => y.statusNavn !== 'Åpen');
+const mapTilYtelserPerioder = ({ relatertYtelseNavn, tilgrensendeYtelserListe }: RelatertTilgrensedYtelse) => {
+  const skalViseLenke = ['Engangsstonad', 'Foreldrepenger', 'Svangerskapspenger'].includes(relatertYtelseNavn);
+  return tilgrensendeYtelserListe
+    .filter(y => y.statusNavn !== 'Åpen')
+    .map(y => ({
+      periode: periodFormat(y.periodeFraDato, y.periodeTilDato),
+      ytelseNavn: relatertYtelseNavn,
+      status: y.statusNavn,
+      saksnummer: skalViseLenke ? (
+        <Link href={`/fagsak/${y.saksNummer}`} target="_blank">
+          {y.saksNummer}
+        </Link>
+      ) : (
+        y.saksNummer
+      ),
+    }));
+};

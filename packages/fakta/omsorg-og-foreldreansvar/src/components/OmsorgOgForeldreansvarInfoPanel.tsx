@@ -10,7 +10,7 @@ import { usePanelDataContext } from '@navikt/fp-utils';
 import { BarnPanel } from './fakta/BarnPanel';
 import { ForeldrePanel } from './fakta/ForeldrePanel';
 import { RettighetFaktaPanel } from './fakta/RettighetFaktaPanel';
-import { AksjonspunktForm } from './form/AksjonspunktForm';
+import { OmsorgOgForeldreansvarForm } from './form/OmsorgOgForeldreansvarForm';
 
 interface Props {
   søknad: Soknad;
@@ -55,7 +55,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
           />
         )}
       </HGrid>
-      <AksjonspunktForm søknad={søknad} adopsjon={adopsjon} harForeldreansvarAP={harForeldreansvarAP} />
+      <OmsorgOgForeldreansvarForm søknad={søknad} adopsjon={adopsjon} harForeldreansvarAP={harForeldreansvarAP} />
     </VStack>
   );
 };

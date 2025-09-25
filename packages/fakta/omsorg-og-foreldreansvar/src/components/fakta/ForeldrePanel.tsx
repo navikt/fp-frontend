@@ -29,18 +29,17 @@ export const ForeldrePanel = ({ personoversikt }: Props) => {
             <Heading size="small" level="3">
               {forelder.navn}
             </Heading>
-            {!forelder.dødsdato && (
-              <ReadOnlyField
-                size="medium"
-                label={<FormattedMessage id="ForeldrePanel.Address" />}
-                value={forelder.adresse ? formaterAdresse(forelder.adresse) : '-'}
-              />
-            )}
-            {forelder.dødsdato && (
+            {forelder.dødsdato ? (
               <ReadOnlyField
                 size="medium"
                 label={<FormattedMessage id="ForeldrePanel.Dødsdato" />}
                 value={<DateLabel dateString={forelder.dødsdato} />}
+              />
+            ) : (
+              <ReadOnlyField
+                size="medium"
+                label={<FormattedMessage id="ForeldrePanel.Address" />}
+                value={forelder.adresse ? formaterAdresse(forelder.adresse) : '-'}
               />
             )}
           </VStack>

@@ -21,7 +21,7 @@ export type OmsorgsovertakelseVilkårFormValues = {
 export const OmsorgsovertakelseVilkårForm = ({ adopsjon }: Props) => {
   const intl = useIntl();
   const { control } = useFormContext<OmsorgsovertakelseVilkårFormValues>();
-  const { isReadOnly, alleKodeverk } = usePanelDataContext(); // Replace with actual context or prop
+  const { isReadOnly, alleKodeverk } = usePanelDataContext();
 
   return (
     <RhfRadioGroup
@@ -42,8 +42,8 @@ export const OmsorgsovertakelseVilkårForm = ({ adopsjon }: Props) => {
   );
 };
 
-const getDescriptionText = (vilkarType: string, intl: IntlShape) => {
-  switch (vilkarType) {
+const getDescriptionText = (vilkårType: string, intl: IntlShape) => {
+  switch (vilkårType) {
     case VilkarType.OMSORGSVILKARET:
       return intl.formatMessage({ id: 'OmsorgsovertakelseVilkårForm.Description.OmsorgTredjeLedd' });
     case VilkarType.FORELDREANSVARSVILKARET_2_LEDD:

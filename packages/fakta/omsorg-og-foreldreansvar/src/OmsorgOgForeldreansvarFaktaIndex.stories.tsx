@@ -101,6 +101,17 @@ const innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYt
     ],
     relatertYtelseNavn: 'Foreldrepenger',
   },
+  {
+    relatertYtelseNavn: 'Svangerskapspenger',
+    tilgrensendeYtelserListe: [
+      {
+        periodeFraDato: '2019-02-03',
+        periodeTilDato: '2019-02-04',
+        statusNavn: 'Under behandling',
+        saksNummer: '12',
+      },
+    ],
+  },
 ];
 
 const merknaderFraBeslutter = {

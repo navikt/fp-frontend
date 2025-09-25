@@ -28,13 +28,17 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
     expect(screen.getByText('01.01.2021')).toBeInTheDocument();
 
     expect(screen.getByText('Rettighet')).toBeInTheDocument();
+
+    expect(screen.getByText('Far søker')).toBeInTheDocument();
     expect(screen.getByText('Adopterer barnet eller barna alene')).toBeInTheDocument();
-    expect(screen.getByText('Foreldrepenger iverksatt 01.01.2019')).toBeInTheDocument();
+    expect(screen.getByText('Andre ytelser til mor')).toBeInTheDocument();
+    expect(screen.getByText('Foreldrepenger: 01.01.2019 - 02.02.2019')).toBeInTheDocument();
+    expect(screen.getByText('Svangerskapspenger: 03.02.2019 - 04.02.2019')).toBeInTheDocument();
 
     expect(screen.queryByText('Vurder opplysningene om foreldreansvar og omsorg')).not.toBeInTheDocument();
     expect(screen.getByText('Vurder opplysningene om omsorgsovertakelse')).toBeInTheDocument();
 
-    const omsorgsovertakelseInput = screen.getByLabelText('Omsorgsovertakelsedato');
+    const omsorgsovertakelseInput = screen.getByLabelText('Omsorgsovertakelsesdato');
     await userEvent.clear(omsorgsovertakelseInput);
     await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
 
@@ -90,11 +94,11 @@ describe('OmsorgOgForeldreansvarFaktaIndex', () => {
     expect(screen.getByText('Vurder opplysninger om foreldreansvar og omsorg')).toBeInTheDocument();
     expect(screen.queryByText('Vurder opplysningene om omsorgsovertakelse')).not.toBeInTheDocument();
 
-    const omsorgsovertakelseInput = screen.getByLabelText('Omsorgsovertakelsedato');
+    const omsorgsovertakelseInput = screen.getByLabelText('Omsorgsovertakelsesdato');
     await userEvent.clear(omsorgsovertakelseInput);
     await userEvent.type(omsorgsovertakelseInput, '14.09.2022');
 
-    const foreldreansvarInput = screen.getByLabelText('Foreldreansvardato');
+    const foreldreansvarInput = screen.getByLabelText('Foreldreansvarsdato');
     await userEvent.clear(foreldreansvarInput);
     await userEvent.type(foreldreansvarInput, '20.09.2022');
 
