@@ -86,8 +86,8 @@ export const TilkjentYtelse = ({
     setValgtPeriode(perioder.find(periode => periode.id === id));
   };
 
-  const originalStartDato = dayjs(perioder[0].start);
-  const originalEndDato = dayjs(perioder[perioder.length - 1].end);
+  const originalStartDato = dayjs(perioder[0]?.start);
+  const originalEndDato = dayjs(perioder.at(-1)?.end);
 
   const [startDato, setStartDato] = useState(originalStartDato);
   const [endDato, setEndDato] = useState(originalEndDato);

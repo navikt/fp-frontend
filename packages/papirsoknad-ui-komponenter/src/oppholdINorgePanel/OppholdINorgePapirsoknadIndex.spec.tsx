@@ -21,13 +21,13 @@ describe('OppholdINorgePapirsoknadIndex', () => {
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
     expect(screen.getByText('Bor i Norge ved fødselstidspunktet')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[0]);
+    await userEvent.click(screen.getAllByText('Ja')[0]!);
 
     expect(screen.getByText('Bodd i Norge de siste 12 månedene')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[1]!);
 
     expect(screen.getByText('Bor i Norge de neste 12 månedene')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -68,13 +68,13 @@ describe('OppholdINorgePapirsoknadIndex', () => {
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
     expect(screen.getByText('Bor i Norge ved fødselstidspunktet')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[0]);
+    await userEvent.click(screen.getAllByText('Ja')[0]!);
 
     expect(screen.getByText('Bodd i Norge de siste 12 månedene')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Nei')[1]);
+    await userEvent.click(screen.getAllByText('Nei')[1]!);
 
     expect(screen.getByText('Bor i Norge de neste 12 månedene')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -142,13 +142,13 @@ describe('OppholdINorgePapirsoknadIndex', () => {
     expect(await screen.findByText('Opphold i Norge')).toBeInTheDocument();
 
     expect(screen.getByText('Bor i Norge ved fødselstidspunktet')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[0]);
+    await userEvent.click(screen.getAllByText('Ja')[0]!);
 
     expect(screen.getByText('Bodd i Norge de siste 12 månedene')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[1]!);
 
     expect(screen.getByText('Bor i Norge de neste 12 månedene')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Nei')[2]);
+    await userEvent.click(screen.getAllByText('Nei')[2]!);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 

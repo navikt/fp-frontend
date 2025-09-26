@@ -32,22 +32,22 @@ describe('sortAndTagTilbakekreving', () => {
   it('sorterer historikk', () => {
     const sorted = sortAndTagTilbakekreving(historikkInnslagFpsak, historikkInnslagTilbake);
 
-    expect(sorted[0].opprettetTidspunkt).toEqual('2024-12-17T11:06:14.361');
-    expect(sorted[0].erTilbakekreving).toBeTruthy();
+    expect(sorted[0]!.opprettetTidspunkt).toEqual('2024-12-17T11:06:14.361');
+    expect(sorted[0]!.erTilbakekreving).toBeTruthy();
 
-    expect(sorted[1].opprettetTidspunkt).toEqual('2024-12-17T11:06:13.85');
-    expect(sorted[1].erTilbakekreving).toBeFalsy();
+    expect(sorted[1]!.opprettetTidspunkt).toEqual('2024-12-17T11:06:13.85');
+    expect(sorted[1]!.erTilbakekreving).toBeFalsy();
 
-    expect(sorted[2].opprettetTidspunkt).toEqual('2024-12-17T11:06:13.841');
-    expect(sorted[2].erTilbakekreving).toBeTruthy();
+    expect(sorted[2]!.opprettetTidspunkt).toEqual('2024-12-17T11:06:13.841');
+    expect(sorted[2]!.erTilbakekreving).toBeTruthy();
 
-    expect(sorted[3].opprettetTidspunkt).toEqual('2024-12-17T11:06:13.768');
-    expect(sorted[3].erTilbakekreving).toBeFalsy();
+    expect(sorted[3]!.opprettetTidspunkt).toEqual('2024-12-17T11:06:13.768');
+    expect(sorted[3]!.erTilbakekreving).toBeFalsy();
 
-    expect(sorted[4].opprettetTidspunkt).toEqual('2024-12-17T11:06:13.702');
-    expect(sorted[4].erTilbakekreving).toBeTruthy();
+    expect(sorted[4]!.opprettetTidspunkt).toEqual('2024-12-17T11:06:13.702');
+    expect(sorted[4]!.erTilbakekreving).toBeTruthy();
 
-    expect(sorted[5].opprettetTidspunkt).toEqual('2024-12-17T11:03:41.971');
-    expect(sorted[5].erTilbakekreving).toBeFalsy();
+    expect(sorted[5]!.opprettetTidspunkt).toEqual('2024-12-17T11:03:41.971');
+    expect(sorted[5]!.erTilbakekreving).toBeFalsy();
   });
 });

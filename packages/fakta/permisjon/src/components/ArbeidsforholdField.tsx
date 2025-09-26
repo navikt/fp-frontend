@@ -63,13 +63,20 @@ export const ArbeidsforholdField = ({
   const { inntektsmeldinger, inntekter } = arbeidOgInntekt;
 
   const arbeidsforhold = sorterteArbeidsforhold[index];
+  if (!arbeidsforhold) {
+    return null;
+  }
+  const arbeidsgiverOpplysinger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
+  if (!arbeidsgiverOpplysinger) {
+    return null;
+  }
+
   const inntektsmelding = inntektsmeldinger.find(i => erMatch(arbeidsforhold, i));
   const inntektsposter = inntekter.find(
     inntekt => inntekt.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent,
   )?.inntekter;
   const visArbeidsforholdId =
     sorterteArbeidsforhold.filter(a => a.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverIdent).length > 1;
-  const arbeidsgiverOpplysinger = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverIdent];
 
   const buttonRef = useRef<HTMLButtonElement>(null);
   const [openState, setOpenState] = useState(false);
@@ -111,12 +118,7 @@ export const ArbeidsforholdField = ({
                 <FormattedMessage id="ArbeidsforholdFieldArray.Periode" />
               </Label>
               <BodyShort size="small">
-                {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
-                {arbeidsforhold ? (
-                  <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
-                ) : (
-                  '-'
-                )}
+                <PeriodLabel dateStringFom={arbeidsforhold.fom} dateStringTom={arbeidsforhold.tom} />
               </BodyShort>
             </div>
             <div>
@@ -124,14 +126,7 @@ export const ArbeidsforholdField = ({
                 <FormattedMessage id="ArbeidsforholdFieldArray.Kilde" />
               </Label>
               <BodyShort size="small">
-                <FormattedMessage
-                  id={
-                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
-                    arbeidsforhold
-                      ? 'ArbeidsforholdFieldArray.AaRegisteret'
-                      : 'ArbeidsforholdFieldArray.Inntektsmelding'
-                  }
-                />
+                <FormattedMessage id="ArbeidsforholdFieldArray.AaRegisteret" />
               </BodyShort>
             </div>
             <div>

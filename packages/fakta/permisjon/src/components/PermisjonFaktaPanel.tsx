@@ -28,8 +28,8 @@ type FormValues = {
 const getSorterArbeidsforhold =
   (arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId) =>
   (a1: AoIArbeidsforhold, a2: AoIArbeidsforhold): number =>
-    arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent].navn.localeCompare(
-      arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent].navn,
+    arbeidsgiverOpplysningerPerId[a1.arbeidsgiverIdent]!.navn.localeCompare(
+      arbeidsgiverOpplysningerPerId[a2.arbeidsgiverIdent]!.navn,
     );
 
 interface Props {
@@ -56,7 +56,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
     arbeidsforhold: sorterteArbeidsforhold.map(a => ({
       permisjonStatus: a.permisjonOgMangel?.permisjonStatus,
     })),
-    begrunnelse: aksjonspunkterForPanel[0].begrunnelse ?? '',
+    begrunnelse: aksjonspunkterForPanel[0]?.begrunnelse ?? '',
   };
 
   const { mellomlagretFormData, setMellomlagretFormData } = useMellomlagretFormData<FormValues>();
@@ -98,9 +98,8 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
           submitCallback({
             kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
             arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
-              internArbeidsforholdId: sorterteArbeidsforhold[index].internArbeidsforholdId ?? undefined,
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
-              arbeidsgiverIdent: sorterteArbeidsforhold[index].arbeidsgiverIdent ?? undefined,
+              internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
+              arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',
               permisjonStatus: a.permisjonStatus,
             })),
             begrunnelse: values.begrunnelse,

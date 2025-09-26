@@ -22,7 +22,7 @@ import {
 import styles from './uttakFaktaDetailForm.module.css';
 
 type FormValues = FormValuesGraderingOgSamtidigUttak & {
-  arsakstype: string;
+  arsakstype: Årsakstype;
 };
 
 export enum Årsakstype {
@@ -37,7 +37,7 @@ const ÅRSAKSTYPE_TEKST_KODER = {
   [Årsakstype.OVERFØRING]: 'UttakFaktaDetailForm.Overføring',
   [Årsakstype.UTSETTELSE]: 'UttakFaktaDetailForm.Utsettelse',
   [Årsakstype.OPPHOLD]: 'UttakFaktaDetailForm.Opphold',
-} as Record<string, string>;
+};
 
 export const utledÅrsakstype = (valgtPeriode: KontrollerFaktaPeriodeMedApMarkering): Årsakstype => {
   if (valgtPeriode.utsettelseÅrsak) {
@@ -240,7 +240,7 @@ export const UttakFaktaDetailForm = ({
                 isReadOnly={readOnly}
               >
                 <HStack gap="space-16">
-                  {Object.keys(Årsakstype).map(type => (
+                  {Object.values(Årsakstype).map(type => (
                     <Radio key={type} value={type} size="small">
                       <FormattedMessage id={ÅRSAKSTYPE_TEKST_KODER[type]} />
                     </Radio>

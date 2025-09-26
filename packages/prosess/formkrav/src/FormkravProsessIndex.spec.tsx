@@ -25,10 +25,10 @@ describe('FormkravProsessIndex', () => {
 
     await userEvent.selectOptions(utils.getByLabelText('Vedtaket som er påklagd'), '1');
 
-    await userEvent.click(screen.getAllByText('Ja')[0]);
-    await userEvent.click(screen.getAllByText('Ja')[1]);
-    await userEvent.click(screen.getAllByText('Ja')[2]);
-    await userEvent.click(screen.getAllByText('Ja')[3]);
+    await userEvent.click(screen.getAllByText('Ja')[0]!);
+    await userEvent.click(screen.getAllByText('Ja')[1]!);
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
+    await userEvent.click(screen.getAllByText('Ja')[3]!);
 
     expect(screen.queryByText('Fritekst')).not.toBeInTheDocument();
 
@@ -59,10 +59,10 @@ describe('FormkravProsessIndex', () => {
 
     await userEvent.selectOptions(utils.getByLabelText('Vedtaket som er påklagd'), '1');
 
-    await userEvent.click(screen.getAllByText('Nei')[0]);
-    await userEvent.click(screen.getAllByText('Ja')[1]);
-    await userEvent.click(screen.getAllByText('Ja')[2]);
-    await userEvent.click(screen.getAllByText('Ja')[3]);
+    await userEvent.click(screen.getAllByText('Nei')[0]!);
+    await userEvent.click(screen.getAllByText('Ja')[1]!);
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
+    await userEvent.click(screen.getAllByText('Ja')[3]!);
 
     const vurderingInput = utils.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');

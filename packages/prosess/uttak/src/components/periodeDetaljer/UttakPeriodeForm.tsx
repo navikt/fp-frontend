@@ -38,7 +38,7 @@ const erPeriodeOppfylt = (
     return true;
   }
 
-  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
+  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
   if (kontoIkkeSatt) {
     return false;
   }
@@ -47,7 +47,7 @@ const erPeriodeOppfylt = (
     const kodeverkKode = utfallKoder.find(kodeItem => kodeItem.kode === valgtPeriode.periodeResultatÅrsak);
     if (
       (kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') ||
-      valgtPeriode.oppholdÅrsak !== OppholdArsakType.UDEFINERT
+      valgtPeriode.oppholdÅrsak !== OppholdArsakType['-']
     ) {
       return true;
     }
@@ -195,7 +195,7 @@ const hentTekstNårUtbetalingPlusArbeidsprosentMerEn100 = (
   intl: IntlShape,
 ): string | undefined => {
   const harMerEnn100 = formAktiviteter.some(
-    (aktivitet, index) => Number.parseFloat(aktivitet.utbetalingsgrad) + (aktiviteter[index].prosentArbeid ?? 0) > 100,
+    (aktivitet, index) => Number.parseFloat(aktivitet.utbetalingsgrad) + (aktiviteter[index]?.prosentArbeid ?? 0) > 100,
   );
   return harMerEnn100 ? intl.formatMessage({ id: 'UttakActivity.MerEn100Prosent' }) : undefined;
 };
@@ -213,7 +213,7 @@ const byggDefaultValues = (
   sorterteAktiviteter: PeriodeSokerAktivitet[],
   periodeResultatårsakKoder: PeriodeResultatÅrsakKodeverk[],
 ): UttakAktivitetType => {
-  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
+  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
 
   return {
     begrunnelse: valgtPeriode.begrunnelse,
@@ -246,7 +246,7 @@ const transformValues = (
   graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
   oppholdÅrsak: values.oppholdArsak,
   periodeResultatType:
-    values.erOppfylt || values.oppholdArsak !== OppholdArsakType.UDEFINERT
+    values.erOppfylt || values.oppholdArsak !== OppholdArsakType['-']
       ? PeriodeResultatType.INNVILGET
       : PeriodeResultatType.AVSLATT,
   graderingAvslagÅrsak: values.graderingAvslagAarsak,
@@ -254,8 +254,11 @@ const transformValues = (
   samtidigUttaksprosent: values.samtidigUttaksprosent ? Number.parseFloat(values.samtidigUttaksprosent) : undefined,
   samtidigUttak: values.samtidigUttak,
   flerbarnsdager: values.flerbarnsdager,
-  aktiviteter: filtrerteAktiviteter.map((a, index) => {
+  aktiviteter: filtrerteAktiviteter.flatMap((a, index) => {
     const aktivitet = values.aktiviteter[index];
+    if (!aktivitet) {
+      return [];
+    }
     return {
       ...a,
       stønadskontoType: aktivitet.stønadskontoType,
@@ -320,7 +323,7 @@ export const UttakPeriodeForm = ({
   const valgtInnvilgelsesÅrsak = formMethods.watch('periodeAarsak');
   const aktiviteter = formMethods.watch('aktiviteter');
 
-  const stønadskontoType = aktiviteter.length === 1 ? aktiviteter[0].stønadskontoType : StonadskontoType.UDEFINERT;
+  const stønadskontoType = aktiviteter[0]?.stønadskontoType ?? StonadskontoType.UDEFINERT;
 
   const periodeÅrsakOptions = lagOptionsTilPeriodeÅrsakSelect(
     periodeResultatårsakKoder,
@@ -362,7 +365,7 @@ export const UttakPeriodeForm = ({
           erOppfylt={erOppfylt}
           valgtInnvilgelsesÅrsak={valgtInnvilgelsesÅrsak}
         />
-        {valgtPeriode.oppholdÅrsak === OppholdArsakType.UDEFINERT && (
+        {valgtPeriode.oppholdÅrsak === OppholdArsakType['-'] && (
           <UttakAktiviteterTabell
             isReadOnly={isReadOnly}
             periodeTyper={alleKodeverk['UttakPeriodeType']}

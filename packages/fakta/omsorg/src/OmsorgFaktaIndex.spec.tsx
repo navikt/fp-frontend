@@ -22,7 +22,7 @@ describe('OmsorgFaktaIndex', () => {
 
     expect(screen.getByText('Søker har oppgitt å ha omsorg for barnet')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[0]);
+    await userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[0]!);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -47,7 +47,7 @@ describe('OmsorgFaktaIndex', () => {
 
     expect(screen.getByText('Søker har oppgitt å ha omsorg for barnet')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[1]);
+    await userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[1]!);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 

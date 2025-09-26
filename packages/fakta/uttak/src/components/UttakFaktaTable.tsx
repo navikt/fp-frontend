@@ -99,9 +99,7 @@ export const UttakFaktaTable = ({
   };
 
   const sisteMåned =
-    uttakKontrollerFaktaPerioder.length > 0
-      ? new Date(uttakKontrollerFaktaPerioder[uttakKontrollerFaktaPerioder.length - 1].tom)
-      : undefined;
+    uttakKontrollerFaktaPerioder.length > 0 ? new Date(uttakKontrollerFaktaPerioder.at(-1)!.tom) : undefined;
 
   return (
     <VStack gap="space-24">

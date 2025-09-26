@@ -106,7 +106,7 @@ export const OppholdForm = ({
   });
 
   const lagreIForm = (values: FormValues) => {
-    oppdaterOpphold(values[index]);
+    oppdaterOpphold(values[index]!);
     formMethods.reset(values);
     return Promise.resolve();
   };

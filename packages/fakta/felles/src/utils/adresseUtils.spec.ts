@@ -109,7 +109,7 @@ describe('formaterAdresse', () => {
       ] satisfies Personadresse[];
 
       const nyesteAdresse = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);
-      expect(nyesteAdresse).toEqual(adresser[3]);
+      expect(nyesteAdresse).toEqual(adresser[3]!);
     });
   });
 

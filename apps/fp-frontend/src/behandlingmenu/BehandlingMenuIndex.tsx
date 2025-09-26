@@ -81,7 +81,7 @@ export const BehandlingMenuIndex = ({
         <Dropdown.Menu>
           <Dropdown.Menu.List>
             {Object.keys(menyData)
-              .filter(key => !menyData[key].disabled)
+              .filter(key => !menyData[key]!.disabled)
               .map(key => (
                 <Dropdown.Menu.List.Item
                   key={key}
@@ -89,7 +89,7 @@ export const BehandlingMenuIndex = ({
                     setValgtModal(key);
                   }}
                 >
-                  {menyData[key].text}
+                  {menyData[key]!.text}
                 </Dropdown.Menu.List.Item>
               ))}
           </Dropdown.Menu.List>

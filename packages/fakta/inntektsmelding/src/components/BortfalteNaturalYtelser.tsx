@@ -20,8 +20,9 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
   const gruppertPåType = inntektsmelding.aktiveNaturalytelser.reduce(
     (prev, value) => {
       const type = value.type;
-      if (type in prev) {
-        return { ...prev, [type]: [...prev[type], value] };
+      const prevType = prev[type];
+      if (prevType) {
+        return { ...prev, [type]: [...prevType, value] };
       }
 
       return { ...prev, [type]: [value] };
@@ -45,7 +46,7 @@ const konverterAktivePerioderTilBortfaltePerioder = (inntektsmelding: Inntektsme
       const next = array[index + 1];
 
       const nyFom = current.periode.tomDato;
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
       const nyTom = next?.periode.fomDato;
 
       if (nyFom === TIDENES_ENDE) {

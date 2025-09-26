@@ -70,9 +70,9 @@ export const FagsakSøkIndex = ({ åpneFagsak, kanSaksbehandle }: Props) => {
 
       if (fagsakerResultat.length === 1) {
         if (oppgaver.length === 1) {
-          velgFagsakOperasjoner(oppgaver[0], false);
+          velgFagsakOperasjoner(oppgaver[0]!, false);
         } else if (oppgaver.length === 0) {
-          åpneFagsak(fagsakerResultat[0].saksnummer);
+          åpneFagsak(fagsakerResultat[0]!.saksnummer);
         }
       }
 

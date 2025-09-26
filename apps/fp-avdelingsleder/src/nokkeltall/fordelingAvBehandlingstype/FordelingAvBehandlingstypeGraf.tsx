@@ -105,13 +105,14 @@ const slåSammen = (oppgaverForAvdeling: OppgaverForAvdeling[]): number[] => {
   const test = oppgaverForAvdeling.reduce(
     (acc, o) => {
       const index = behandlingstypeOrder.findIndex(bo => bo === o.behandlingType) + 1;
+      const antall = acc[index] ?? 0;
       return {
         ...acc,
-        [index]: acc[index] ? acc[index] + o.antall : o.antall,
+        [index]: antall + o.antall,
       };
     },
     {} as Record<string, number>,
   );
 
-  return behandlingstypeOrder.map((_b, index) => test[index + 1]);
+  return behandlingstypeOrder.map((_b, index) => test[index + 1]!);
 };

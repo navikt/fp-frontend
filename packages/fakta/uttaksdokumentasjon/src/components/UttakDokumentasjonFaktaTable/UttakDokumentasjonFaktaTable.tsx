@@ -61,14 +61,14 @@ export const UttakDokumentasjonFaktaTable = ({
   const oppdaterPeriode = (oppdatertKrav: { perioder: DokumentasjonVurderingBehov[] }) => {
     const { perioder } = oppdatertKrav;
     const oppdaterteDokBehov = dokumentasjonVurderingBehov
-      .filter(aKrav => aKrav.fom !== perioder[0].fom)
+      .filter(aKrav => aKrav.fom !== perioder[0]?.fom)
       .concat(perioder)
       .sort((a1, a2) => a1.fom.localeCompare(a2.fom));
 
     oppdaterDokBehov(oppdaterteDokBehov);
 
     setValgtDokBehovFomDatoer(fomDatoer => {
-      const åpneRaderMinusDenSomErOppdatert = fomDatoer.filter(fom => fom !== perioder[0].fom);
+      const åpneRaderMinusDenSomErOppdatert = fomDatoer.filter(fom => fom !== perioder[0]?.fom);
       const nySomSkalÅpnes = oppdaterteDokBehov.find(oa => !oa.vurdering)?.fom;
       return nySomSkalÅpnes ? åpneRaderMinusDenSomErOppdatert.concat(nySomSkalÅpnes) : åpneRaderMinusDenSomErOppdatert;
     });

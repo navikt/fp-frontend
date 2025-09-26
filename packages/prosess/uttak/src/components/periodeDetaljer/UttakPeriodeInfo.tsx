@@ -23,10 +23,10 @@ const OppholdArsakKontoNavn = {
   UTTAK_FEDREKVOTE_ANNEN_FORELDER: 'Fedrekvote',
   UTTAK_FELLESP_ANNEN_FORELDER: 'Fellesperiode',
   UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'Foreldrepenger',
-  UDEFINERT: '-',
-} as Record<string, string>;
+  '-': '-',
+};
 
-const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean): string => {
+const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean) => {
   if (valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET && !erTilknyttetStortinget) {
     return styles['greenDetailsPeriod'];
   }
@@ -50,7 +50,7 @@ const gradertArbforhold = (
     if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
       return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
     }
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
     if (arbeidsgiverReferanse && arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse]) {
       const { navn, identifikator } = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
       arbeidsforhold = navn ? `${navn}` : arbeidsforhold;
@@ -176,7 +176,7 @@ export const UttakPeriodeInfo = ({
 
   const oppholdArsakTyper = alleKodeverk['OppholdÅrsak'];
 
-  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
+  const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
 
   return (
     <VStack gap="space-16" className={periodeStatusClassName(valgtPeriode, erTilknyttetStortinget)}>

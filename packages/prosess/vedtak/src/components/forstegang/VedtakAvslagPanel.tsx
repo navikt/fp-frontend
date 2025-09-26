@@ -63,10 +63,10 @@ const getAvslagÅrsak = (
     throw new Error('Behandlingsresultat eller avslagsårsak finnes ikke');
   }
 
-  const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0].vilkarType)?.navn ?? '';
+  const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0]?.vilkarType)?.navn ?? '';
 
   const årsak =
-    alleKodeverk['Avslagsårsak'][avslatteVilkar[0].vilkarType].find(
+    alleKodeverk['Avslagsårsak'][avslatteVilkar[0]?.vilkarType ?? '-'].find(
       ({ kode }) => kode === behandlingsresultat.avslagsarsak,
     )?.navn ?? '';
 

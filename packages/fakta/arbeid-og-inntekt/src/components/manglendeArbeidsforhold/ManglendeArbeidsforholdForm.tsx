@@ -87,7 +87,7 @@ export const ManglendeArbeidsforholdForm = ({
     formMethods.reset(defaultValues);
   };
 
-  const inntektsmelding = radData.inntektsmeldingerForRad[0];
+  const inntektsmelding = radData.inntektsmeldingerForRad[0]!;
 
   const lagre = (formValues: FormValues) => {
     const oppdater = getOppdaterTabell(oppdaterTabell, radData, inntektsmelding, formValues);
@@ -99,10 +99,10 @@ export const ManglendeArbeidsforholdForm = ({
         arbeidsgiverNavn: radData.arbeidsgiverNavn,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
         vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
-        begrunnelse: formValues.begrunnelse!,
-        fom: formValues.fom!,
+        begrunnelse: formValues.begrunnelse ?? '',
+        fom: formValues.fom ?? '',
         tom: formValues.tom,
-        stillingsprosent: formValues.stillingsprosent!,
+        stillingsprosent: formValues.stillingsprosent ?? 0,
       })
         .then(oppdater)
         .finally(() => formMethods.reset(formValues));

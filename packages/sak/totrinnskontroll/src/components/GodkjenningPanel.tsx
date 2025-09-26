@@ -41,7 +41,7 @@ export const GodkjenningPanel = ({ index, totrinnskontrollSkjermlenkeContext, re
 
   const aksjonspunktGodkjenning = watch('aksjonspunktGodkjenning');
 
-  const { aksjonspunktKode, totrinnskontrollGodkjent } = aksjonspunktGodkjenning[index];
+  const { aksjonspunktKode, totrinnskontrollGodkjent } = aksjonspunktGodkjenning[index]!;
   const context = totrinnskontrollSkjermlenkeContext.find(c =>
     c.totrinnskontrollAksjonspunkter.some(ta => ta.aksjonspunktKode === aksjonspunktKode),
   );

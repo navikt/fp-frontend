@@ -30,7 +30,7 @@ describe('OpptjeningFaktaIndex', () => {
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
     expect(screen.getByText('Du må skrive minst 3 tegn')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('radio')[0]);
+    await userEvent.click(screen.getAllByRole('radio')[0]!);
 
     await waitFor(() => expect(screen.queryByText('Feltet må fylles ut')).not.toBeInTheDocument());
 
@@ -43,7 +43,7 @@ describe('OpptjeningFaktaIndex', () => {
 
     expect(await screen.findAllByText('Sykepenger')).toHaveLength(2);
 
-    await userEvent.click(screen.getAllByRole('radio')[1]);
+    await userEvent.click(screen.getAllByRole('radio')[1]!);
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse 2');
 
     await userEvent.click(screen.getByText('Oppdater'));

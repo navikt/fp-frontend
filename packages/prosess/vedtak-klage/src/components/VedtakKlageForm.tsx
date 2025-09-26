@@ -21,7 +21,8 @@ const OMGJOER_TEKST_MAP = {
   GUNST_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortGunst',
   UGUNST_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortUgunst',
   DELVIS_MEDHOLD_I_KLAGE: 'VedtakKlageForm.KlageOmgjortDelvis',
-} as Record<string, string>;
+  '-': '',
+};
 
 export type VedtakKlageForhandsvisData = {
   gjelderVedtak: boolean;
@@ -141,7 +142,7 @@ const getOmgjortAarsak = (klageVurderingResultat: KlageVurdering, alleKodeverk: 
   return null;
 };
 
-const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | null => {
+const getResultatText = (behandlingKlageVurdering: KlageVurdering) => {
   const klageResultat =
     behandlingKlageVurdering.klageVurderingResultatNK ?? behandlingKlageVurdering.klageVurderingResultatNFP;
   switch (klageResultat?.klageVurdering) {
@@ -154,7 +155,7 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering): string | nul
     case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
       return 'VedtakKlageForm.HjemmsendUtenOpphev';
     case klageVurderingCodes.MEDHOLD_I_KLAGE:
-      return OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer ?? ''];
+      return klageResultat.klageVurderingOmgjoer ? OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer] : undefined;
     default:
       return 'VedtakKlageForm.IkkeFastsatt';
   }

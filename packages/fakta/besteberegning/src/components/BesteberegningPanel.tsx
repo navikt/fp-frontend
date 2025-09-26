@@ -31,7 +31,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
     return null;
   }
 
-  const førstePeriode = beregningsgrunnlagPeriode[0];
+  const førstePeriode = beregningsgrunnlagPeriode[0]!;
   const besteberegningAP = aksjonspunkterForPanel.find(
     ap =>
       ap.definisjon === AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING ||

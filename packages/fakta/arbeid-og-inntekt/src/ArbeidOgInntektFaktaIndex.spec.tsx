@@ -471,7 +471,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Slett'));
 
-    await userEvent.click(screen.getAllByText('Avbryt')[1]);
+    await userEvent.click(screen.getAllByText('Avbryt')[1]!);
 
     await userEvent.click(screen.getByText('Slett'));
 
@@ -552,7 +552,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     expect(screen.getAllByText('Inntektsmelding mottatt')).toHaveLength(2);
     expect(screen.queryByText('30 000')).not.toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Vis mer')[0]);
+    await userEvent.click(screen.getAllByText('Vis mer')[0]!);
 
     expect(await screen.findAllByText('Inntektsmelding')).toHaveLength(2);
     expect(screen.getByText('30 000')).toBeInTheDocument();
@@ -562,7 +562,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
     expect(screen.getByText('20 000')).toBeInTheDocument();
     expect(screen.getByText('Kontaktinfo')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Vis mindre')[0]);
+    await userEvent.click(screen.getAllByText('Vis mindre')[0]!);
 
     expect(await screen.findAllByText('Vis mer')).toHaveLength(2);
   });
@@ -584,9 +584,9 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       screen.getByText('Jeg tar kontakt med søker eller arbeidsgiver for å innhente inntektsmelding'),
     );
 
-    await userEvent.type(utils.getAllByLabelText('Begrunn valget')[0], 'Dette er en begrunnelse');
+    await userEvent.type(utils.getAllByLabelText('Begrunn valget')[0]!, 'Dette er en begrunnelse');
 
-    await userEvent.click(screen.getAllByText('Lagre')[0]);
+    await userEvent.click(screen.getAllByText('Lagre')[0]!);
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(1));
     expect(lagreVurdering).toHaveBeenNthCalledWith(1, {
@@ -600,9 +600,9 @@ describe('ArbeidOgInntektFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
 
-    await userEvent.type(utils.getAllByLabelText('Begrunn valget')[1], 'Dette er begrunnelse nr 2');
+    await userEvent.type(utils.getAllByLabelText('Begrunn valget')[1]!, 'Dette er begrunnelse nr 2');
 
-    await userEvent.click(screen.getAllByText('Lagre')[1]);
+    await userEvent.click(screen.getAllByText('Lagre')[1]!);
 
     await waitFor(() => expect(lagreVurdering).toHaveBeenCalledTimes(2));
     expect(lagreVurdering).toHaveBeenNthCalledWith(2, {

@@ -47,7 +47,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
     arbeidsforhold = arbeidsgiverOpplysninger
       ? formaterArbeidsgiver(arbeidsgiverOpplysninger, eksternArbeidsforholdId)
       : arbeidsgiverReferanse;
@@ -71,7 +71,7 @@ const sjekkOmUtbetalingsgradEr0OmAvslått =
 const sjekkOmUtbetalingsgradMårVæreHøyereEnn0 =
   (intl: IntlShape, valgtPeriode: PeriodeSoker, samletUtbetalingsgradForAndreAktiviteter: number, erOppfylt: boolean) =>
   (utbetalingsgrad: string): string | null => {
-    const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0].stønadskontoType === '-';
+    const kontoIkkeSatt = !valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-';
     const erUttak = valgtPeriode.utsettelseType === '-' && !kontoIkkeSatt;
     if (
       erUttak &&
@@ -102,6 +102,9 @@ const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 =
   (utbetalingsgrad: string): string | null => {
     const aktiviteter = getValues('aktiviteter');
     const aktivitet = aktiviteter[index];
+    if (!aktivitet) {
+      return null;
+    }
     if (
       Number.parseFloat(aktivitet.weeks) === 0 &&
       Number.parseFloat(aktivitet.days) === 0 &&
@@ -219,7 +222,7 @@ export const UttakAktiviteterTabell = ({
           <Table.Body>
             {fields.map((field, index: number) => {
               const arbeidsforholdData = finnArbeidsforholdNavnOgProsentArbeid(
-                aktiviteter[index],
+                aktiviteter[index]!,
                 arbeidsgiverOpplysningerPerId,
                 intl,
               );

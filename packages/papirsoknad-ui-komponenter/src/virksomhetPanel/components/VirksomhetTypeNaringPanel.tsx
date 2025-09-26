@@ -12,11 +12,12 @@ import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
 
 const naringsvirksomhetTypeOrder = {
+  [NaringsvirksomhetType.FRILANSER]: -1,
   [NaringsvirksomhetType.DAGMAMMA]: 1,
   [NaringsvirksomhetType.FISKE]: 2,
   [NaringsvirksomhetType.JORDBRUK_ELLER_SKOGBRUK]: 3,
   [NaringsvirksomhetType.ANNEN]: 4,
-} as Record<string, number>;
+};
 
 interface Props {
   readOnly: boolean;

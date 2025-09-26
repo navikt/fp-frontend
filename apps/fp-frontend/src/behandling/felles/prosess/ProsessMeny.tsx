@@ -24,7 +24,7 @@ export const ProsessMeny = ({ valgtProsessSteg, valgtFaktaSteg, children }: Prop
 
   const oppdaterProsessPanelIUrl = (index: number) => {
     const panel = prosessPanelMenyData[index];
-    const nyvalgtProsessSteg = panel.erAktiv ? undefined : panel.id;
+    const nyvalgtProsessSteg = panel?.erAktiv ? undefined : panel?.id;
     oppdaterProsessStegOgFaktaPanelIUrl(nyvalgtProsessSteg, valgtFaktaSteg);
   };
 

@@ -11,7 +11,7 @@ export const withThemeDecorator: DecoratorFunction<ReactRenderer> = (Story, cont
     // Dette kan sikkert gjerast på ein bedre måte
     const elements = document.getElementsByClassName('sb-show-main');
     if (elements.length > 0) {
-      elements[0].setAttribute(
+      elements[0]!.setAttribute(
         'style',
         theme === 'dark' ? 'background: #0e151f !important' : 'background: #fff !important',
       );

@@ -13,7 +13,7 @@ const skalViseListe = (fagsaker: FagsakEnkel[], fagsakOppgaver: Oppgave[]): bool
   return (
     fagsaker.length > 1 ||
     (fagsaker.length === 1 &&
-      fagsakOppgaver.filter(oppgave => oppgave.saksnummer === fagsaker[0].saksnummer).length > 1)
+      fagsakOppgaver.filter(oppgave => oppgave.saksnummer === fagsaker.at(0)?.saksnummer).length > 1)
   );
 };
 
@@ -65,7 +65,7 @@ export const FagsakSøk = ({
     )}
     {searchResultReceived && skalViseListe(fagsaker, fagsakOppgaver) && (
       <>
-        <PersonInfo person={fagsaker[0].person} />
+        <PersonInfo person={fagsaker[0]!.person} />
         <BodyShort size="small">
           <FormattedMessage id="FagsakSearch.FlereSakerEllerBehandlinger" />
         </BodyShort>

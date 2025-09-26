@@ -27,9 +27,11 @@ const MAX_ANTALL_BARN = 10;
 const validateMinAntall = (value: number) => (value ? minValue(1)(value) : undefined);
 const validateMaxAntall = (value: number) => (value ? maxValue(10)(value) : undefined);
 
-const getValideringMotAnnenFødselsdato = (index: number, fodselsdato?: string | string[]) => (fDato?: string) => {
-  if (index === 0 && fodselsdato && fDato) {
-    return isDatesEqual(fDato, Array.isArray(fodselsdato) ? fodselsdato[0] : fodselsdato);
+const getValideringMotAnnenFødselsdato = (index: number, fødselsdato?: string | string[]) => (fDato?: string) => {
+  const fødselsdatoList = [fødselsdato].flat().filter(f => f !== undefined);
+  const førsteFodselsdato = fødselsdatoList.at(0);
+  if (index === 0 && førsteFodselsdato && fDato) {
+    return isDatesEqual(fDato, førsteFodselsdato);
   }
   return undefined;
 };

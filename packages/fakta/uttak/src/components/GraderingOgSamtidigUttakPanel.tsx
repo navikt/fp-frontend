@@ -101,7 +101,6 @@ export const GraderingOgSamtidigUttakPanel = ({
           onChange={toggleSamtidigUttaksprosent}
         />
       </HStack>
-      {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
       {!readOnly && arbeidsgiverFinnesIkke && (
         <div className={styles['alert']}>
           <Alert variant="info">

@@ -160,7 +160,7 @@ const hentToggleDetaljer =
     } else {
       const updatedTable = {
         id,
-        show: !showDetails[tableIndex].show,
+        show: !showDetails[tableIndex]?.show,
       };
 
       newShowDetailsArray = [

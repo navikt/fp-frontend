@@ -79,15 +79,21 @@ const buildOpptjeningText = (
 const getTextFromAksjonspunktkode = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  const aksjonspunktTextId = totrinnskontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
-  return aksjonspunktTextId ? [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />] : [];
+  const aksjonspunktTextId = (totrinnskontrollaksjonspunktTextCodes as Record<string, string>)[
+    aksjonspunkt.aksjonspunktKode
+  ];
+  return aksjonspunktTextId && typeof aksjonspunktTextId === 'string'
+    ? [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />]
+    : [];
 };
 
 const getTextFromTilbakekrevingAksjonspunktkode = (
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   const aksjonspunktTextId = totrinnsTilbakekrevingkontrollaksjonspunktTextCodes[aksjonspunkt.aksjonspunktKode];
-  return aksjonspunktTextId ? [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />] : [];
+  return aksjonspunktTextId && typeof aksjonspunktTextId === 'string'
+    ? [<FormattedMessage key={aksjonspunktTextId} id={aksjonspunktTextId} />]
+    : [];
 };
 
 const getTextForForeldreansvarsvilkåretAndreLedd = (

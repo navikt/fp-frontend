@@ -17,6 +17,7 @@ export const FaktaFraSøknad = ({
   terminbekreftelseDokument,
 }: Props) => {
   const intl = useIntl();
+  const barnet = barn[0];
   return (
     <FaktaKort label={intl.formatMessage({ id: 'FaktaFraSøknad.Tittel' })}>
       <VStack gap="space-16">
@@ -33,10 +34,10 @@ export const FaktaFraSøknad = ({
           />
         )}
 
-        {barn.length > 0 && (
+        {barnet && (
           <ReadOnlyField
             label={<FormattedMessage id="Label.Fødselsdato" />}
-            value={<DateLabel dateString={barn[0].fødselsdato} />}
+            value={<DateLabel dateString={barnet.fødselsdato} />}
           />
         )}
         {antallBarn && <ReadOnlyField label={<FormattedMessage id="Label.AntallBarn" />} value={antallBarn} />}

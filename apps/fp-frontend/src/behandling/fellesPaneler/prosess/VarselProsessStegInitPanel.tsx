@@ -23,7 +23,7 @@ const getLagringSideeffekter =
   (setSkalOppdatereEtterBekreftelseAvAp: (skalHenteFagsak: boolean) => void, opneSokeside: () => void) =>
   (aksjonspunkter: ProsessAksjonspunkt[]) => {
     const skalÅpneSøkeside =
-      aksjonspunkter.length > 0 && 'sendVarsel' in aksjonspunkter[0] && aksjonspunkter[0].sendVarsel;
+      aksjonspunkter.length > 0 && 'sendVarsel' in aksjonspunkter[0]! && aksjonspunkter[0].sendVarsel;
 
     setSkalOppdatereEtterBekreftelseAvAp(!skalÅpneSøkeside);
 

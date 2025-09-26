@@ -49,7 +49,7 @@ describe('UttakFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Samtidig uttaksprosent'));
 
-    await userEvent.type(utils.getAllByLabelText('Samtidig uttaksprosent')[1], '10');
+    await userEvent.type(utils.getAllByLabelText('Samtidig uttaksprosent')[1]!, '10');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
@@ -92,7 +92,7 @@ describe('UttakFaktaIndex', () => {
       screen.getByText('Første periode starter ikke på avklart startdato 31.01.2022. Legg inn periode fra startdato'),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByTitle('Vis mer')[0]);
+    await userEvent.click(screen.getAllByTitle('Vis mer')[0]!);
 
     expect(await screen.findByText('Periode til')).toBeInTheDocument();
 

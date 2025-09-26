@@ -53,7 +53,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Ja'));
 
-    await userEvent.click(screen.getAllByText('Oppdater')[0]);
+    await userEvent.click(screen.getAllByText('Oppdater')[0]!);
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -189,11 +189,11 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    const dato = screen.getAllByText('Fra og med')[0];
+    const dato = screen.getAllByText('Fra og med')[0]!;
     await userEvent.type(dato, '{backspace}1');
     fireEvent.blur(dato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(await screen.findByText('Dato kan ikke være senere enn tre uker før termindato')).toBeInTheDocument();
   });
@@ -208,11 +208,11 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    const dato = screen.getAllByText('Fra og med')[0];
+    const dato = screen.getAllByText('Fra og med')[0]!;
     await userEvent.type(dato, lagNyDato('16.03.2020'));
     fireEvent.blur(dato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(
       await screen.findByText('Dato kan ikke være før dato for tilrettelegging fra lege eller jordmor'),
@@ -229,11 +229,11 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    const dato = screen.getAllByText('Fra og med')[0];
+    const dato = screen.getAllByText('Fra og med')[0]!;
     await userEvent.type(dato, lagNyDato('15.08.2020'));
     fireEvent.blur(dato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(await screen.findByText('Flere perioder med samme Fra og med')).toBeInTheDocument();
   });
@@ -256,13 +256,13 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     expect(screen.getByText('Legg til ny periode')).toBeInTheDocument();
     expect(screen.getAllByText('Avbryt')).toHaveLength(3);
 
-    await userEvent.click(screen.getAllByText('Arbeidstakeren kan fortsette med redusert arbeidstid')[2]);
+    await userEvent.click(screen.getAllByText('Arbeidstakeren kan fortsette med redusert arbeidstid')[2]!);
 
     await userEvent.click(screen.getByText('Legg til ny periode'));
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
-    const dato = screen.getAllByText('Fra og med')[2];
+    const dato = screen.getAllByText('Fra og med')[2]!;
     await userEvent.type(dato, lagNyDato('15.09.2020'));
     fireEvent.blur(dato);
 
@@ -284,7 +284,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
     await userEvent.click(screen.getByText('Ja'));
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.click(screen.getAllByText('Slett periode')[1]);
+    await userEvent.click(screen.getAllByText('Slett periode')[1]!);
 
     expect(await screen.findByText('17.03.2020 - 15.10.2020')).toBeInTheDocument();
   });
@@ -315,7 +315,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     expect(await screen.findAllByText('Feltet må fylles ut')).toHaveLength(2);
 
-    const fomDato = screen.getAllByText('Fra og med')[2];
+    const fomDato = screen.getAllByText('Fra og med')[2]!;
     await userEvent.type(fomDato, lagNyDato('14.07.2020'));
     fireEvent.blur(fomDato);
 
@@ -329,7 +329,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Ja'));
 
-    await userEvent.click(screen.getAllByText('Oppdater')[0]);
+    await userEvent.click(screen.getAllByText('Oppdater')[0]!);
 
     await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -407,7 +407,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Slett periode')[1]);
+    await userEvent.click(screen.getAllByText('Slett periode')[1]!);
 
     await waitFor(() => expect(screen.queryByText('15.09.2020 - 20.09.2020')).not.toBeInTheDocument());
   });
@@ -417,18 +417,18 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    const dato = screen.getAllByText('Fra og med')[1];
+    const dato = screen.getAllByText('Fra og med')[1]!;
     await userEvent.type(dato, lagNyDato('17.03.2020'));
     fireEvent.blur(dato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(await screen.findByText('Flere perioder med samme Fra og med')).toBeInTheDocument();
 
     await userEvent.type(dato, lagNyDato('25.09.2020'));
     fireEvent.blur(dato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(await screen.findByText('Flere perioder med samme Fra og med')).toBeInTheDocument();
   });
@@ -438,11 +438,11 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    const dato = screen.getAllByText('Fra og med')[1];
+    const dato = screen.getAllByText('Fra og med')[1]!;
     await userEvent.type(dato, '{backspace}1');
     fireEvent.blur(dato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(await screen.findByText('Dato kan ikke være senere enn tre uker før termindato')).toBeInTheDocument();
   });
@@ -452,11 +452,11 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    const dato = screen.getAllByText('Fra og med')[1];
+    const dato = screen.getAllByText('Fra og med')[1]!;
     await userEvent.type(dato, lagNyDato('16.03.2020'));
     fireEvent.blur(dato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(await screen.findByText('Dato kan ikke være før første tilrettelegging')).toBeInTheDocument();
   });
@@ -466,11 +466,11 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    const tomDato = screen.getAllByText('Til og med')[0];
+    const tomDato = screen.getAllByText('Til og med')[0]!;
     await userEvent.type(tomDato, lagNyDato('26.09.2020'));
     fireEvent.blur(tomDato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(await screen.findByText('Perioder kan ikke overlappe i tid')).toBeInTheDocument();
   });
@@ -480,11 +480,11 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
-    const dato = screen.getAllByText('Fra og med')[1];
+    const dato = screen.getAllByText('Fra og med')[1]!;
     await userEvent.type(dato, lagNyDato('21.09.2020'));
     fireEvent.blur(dato);
 
-    await userEvent.click(screen.getAllByText('Oppdater')[1]);
+    await userEvent.click(screen.getAllByText('Oppdater')[1]!);
 
     expect(await screen.findByText('Dato kan ikke være før fra og med')).toBeInTheDocument();
   });
@@ -513,7 +513,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
       ),
     ).toHaveLength(1);
 
-    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
+    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]!);
 
     expect(await screen.findByText('Skal ikke ha svangerskapspenger')).toBeInTheDocument();
   });
@@ -535,9 +535,9 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
       ),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Oppdater')[0]);
+    await userEvent.click(screen.getAllByText('Oppdater')[0]!);
 
-    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
+    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]!);
 
     await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
@@ -547,7 +547,7 @@ describe('FodselOgTilretteleggingFaktaIndex', () => {
       await screen.findByText('Arbeidsforhold med gyldig permisjon på 100% kan ikke ha svangerskapspenger'),
     ).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]);
+    await userEvent.click(screen.getAllByText('Skal ha svangerskapspenger for arbeidsforholdet')[0]!);
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

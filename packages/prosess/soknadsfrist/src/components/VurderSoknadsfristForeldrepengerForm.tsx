@@ -32,7 +32,7 @@ const buildInitialValues = (
   const upgMottattDato = søknadsfrist?.mottattDato ?? undefined;
   return {
     gyldigSenFremsetting:
-      aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : upgMottattDato !== mottattDato,
+      aksjonspunkter.at(0)?.status === AksjonspunktStatus.OPPRETTET ? undefined : upgMottattDato !== mottattDato,
     ansesMottatt: upgMottattDato,
     ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   };

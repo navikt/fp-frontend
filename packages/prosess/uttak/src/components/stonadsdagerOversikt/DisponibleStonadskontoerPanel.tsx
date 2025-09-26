@@ -27,7 +27,7 @@ const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
   [StonadskontoType.MINSTERETT]: 6,
   [StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE]: 7,
   [StonadskontoType.FLERBARNSDAGER]: 8,
-} as Record<string, number>;
+};
 
 const sorterKontoer = (s1: Stonadskonto, s2: Stonadskonto): number =>
   STØNADSKONTOER_SORTERINGSREKKEFØLGE[s1.stonadskontotype] - STØNADSKONTOER_SORTERINGSREKKEFØLGE[s2.stonadskontotype];
@@ -86,7 +86,7 @@ const utledNavn = (
   }
   if (arbeidsgiverReferanse) {
     const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[arbeidsgiverReferanse];
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
     return arbeidsgiverOpplysninger ? formaterArbeidsgiver(arbeidsgiverOpplysninger) : arbeidsgiverReferanse;
   }
 

@@ -50,7 +50,7 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
   const { annenPart: dgAnnenpart, søker: dgSøker } = søknad.oppgittFordeling?.dekningsgrader ?? {};
 
   const erAksjonspunktApent = aksjonspunkt.status === AksjonspunktStatus.OPPRETTET;
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
   const erIkkeGodkjentAvBeslutter = !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted;
 
   return (

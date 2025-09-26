@@ -63,6 +63,10 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
   const lagNyPeriode = (currentIndex: number, dato: string) => {
     const currentPeriode = fields[currentIndex];
 
+    if (!currentPeriode) {
+      return;
+    }
+
     update(currentIndex, {
       ...currentPeriode,
       tom: dato,
@@ -79,8 +83,8 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
 
   const slåSammenMedPeriodeOver = (currentIndex: number) => {
     const previousIndex = currentIndex - 1;
-    const previousPeriode = fields[previousIndex];
-    update(previousIndex, { ...previousPeriode, vurdering: undefined, tom: fields[currentIndex].tom });
+    const previousPeriode = fields[previousIndex]!;
+    update(previousIndex, { ...previousPeriode, vurdering: undefined, tom: fields[currentIndex]!.tom });
     remove(currentIndex);
   };
 
@@ -98,7 +102,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
             <VStack gap="space-24">
               <div>
                 <DelOppPeriodeButton
-                  display={!readOnly && periodeErMerEnnEnDag(fields[0])}
+                  display={!readOnly && periodeErMerEnnEnDag(fields[0]!)}
                   onClick={() => setValgtPeriodeIndex(0)}
                 />
               </div>
@@ -226,7 +230,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                 </Card.Content>
               </Card>
             ))}
-          {erUttaksperiodeMedAktivitetskravArbeid(fields[0].type, fields[0].årsak) && (
+          {erUttaksperiodeMedAktivitetskravArbeid(fields[0]!.type, fields[0]!.årsak) && (
             <ReadMore
               size="small"
               header={<FormattedMessage id="UttakDokumentasjonFaktaDetailForm.MorsStillingsprosent.ReadMoreTittel" />}
@@ -259,7 +263,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
       </RhfForm>
       {valgtPeriodeIndex !== undefined && (
         <DelOppPeriodeModal
-          periode={fields[valgtPeriodeIndex]}
+          periode={fields[valgtPeriodeIndex]!}
           submit={dato => lagNyPeriode(valgtPeriodeIndex, dato)}
           cancel={() => setValgtPeriodeIndex(undefined)}
         />

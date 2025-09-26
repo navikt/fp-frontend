@@ -53,8 +53,8 @@ describe('SorteringVelger', () => {
     await userEvent.click(screen.getByText('Feilutbetalt beløp'));
 
     expect(await screen.findByText('Ta kun med behandlinger mellom')).toBeInTheDocument();
-    expect(screen.getAllByText('kr')[0]).toBeInTheDocument();
-    expect(screen.getAllByText('kr')[1]).toBeInTheDocument();
+    expect(screen.getAllByText('kr')[0]!).toBeInTheDocument();
+    expect(screen.getAllByText('kr')[1]!).toBeInTheDocument();
   });
 
   it('skal vise feilmelding når en skriver inn bokstaver i fra-beløpfelt', async () => {
@@ -66,7 +66,7 @@ describe('SorteringVelger', () => {
 
     expect(await screen.findByText('Ta kun med behandlinger mellom')).toBeInTheDocument();
 
-    const fraInput = screen.getAllByRole('textbox')[0];
+    const fraInput = screen.getAllByRole('textbox')[0]!;
     await userEvent.type(fraInput, 'bokstaver');
 
     expect(await screen.findByText('Feltet kan kun inneholde tall')).toBeInTheDocument();
@@ -81,7 +81,7 @@ describe('SorteringVelger', () => {
 
     expect(await screen.findByText('Ta kun med behandlinger mellom')).toBeInTheDocument();
 
-    const tilInput = screen.getAllByRole('textbox')[1];
+    const tilInput = screen.getAllByRole('textbox')[1]!;
     await userEvent.type(tilInput, 'bokstaver');
 
     expect(await screen.findByText('Feltet kan kun inneholde tall')).toBeInTheDocument();

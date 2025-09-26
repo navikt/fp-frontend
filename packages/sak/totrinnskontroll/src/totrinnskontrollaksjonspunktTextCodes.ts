@@ -71,6 +71,6 @@ export const totrinnskontrollaksjonspunktTextCodes = {
 
   [AksjonspunktKode.VURDER_REFUSJON_BERGRUNN]: 'ToTrinnsForm.Beregningsgrunnlag.Refusjonsstart',
   [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING]: 'ToTrinnsForm.ArbeidOgInntekt.ManueltOpprettet',
-} as Record<string, string>;
+};
 
 export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes = {} as Record<string, string>;

@@ -148,7 +148,7 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
                             const status = info[a.internArbeidsforholdId];
                             return {
                               ...info,
-                              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vurder senere
+                               
                               [a.internArbeidsforholdId]: status === undefined || status === false,
                             };
                           });
@@ -183,12 +183,12 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
       )}
       {harEttArbeidsforhold &&
         inntektsmeldingForArbeidsforhold.length > 0 &&
-        inntektsmeldingForArbeidsforhold[0].inntektsmelding && (
+        inntektsmeldingForArbeidsforhold[0]!.inntektsmelding && (
           <InntektsmeldingOpplysningerPanel
             saksnummer={saksnummer}
             radData={radData}
             arbeidsforhold={arbeidsforholdForRad[0]}
-            inntektsmelding={inntektsmeldingForArbeidsforhold[0].inntektsmelding}
+            inntektsmelding={inntektsmeldingForArbeidsforhold[0]!.inntektsmelding}
             skalViseArbeidsforholdId={inntektsmeldingerForRad.length > 1}
             alleKodeverk={alleKodeverk}
             ikkeVisInfo
@@ -200,19 +200,19 @@ export const InntektsmeldingerPanel = ({ saksnummer, alleKodeverk, radData }: Pr
             <Label size="small">
               <FormattedMessage id="ArbeidsforholdInformasjonPanel.Stillingsprosent" />
             </Label>
-            <BodyShort size="small">{`${arbeidsforholdForRad[0].stillingsprosent}%`}</BodyShort>
+            <BodyShort size="small">{`${arbeidsforholdForRad[0]!.stillingsprosent}%`}</BodyShort>
           </HStack>
-          {arbeidsforholdForRad[0].permisjonOgMangel && (
+          {arbeidsforholdForRad[0]!.permisjonOgMangel && (
             <HStack gap="space-16">
               <Label size="small">
                 {alleKodeverk['PermisjonsbeskrivelseType'].find(
-                  k => k.kode === arbeidsforholdForRad[0].permisjonOgMangel?.type,
+                  k => k.kode === arbeidsforholdForRad[0]!.permisjonOgMangel?.type,
                 )?.navn ?? ''}
               </Label>
               <BodyShort size="small">
                 <PeriodLabel
-                  dateStringFom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonFom}
-                  dateStringTom={arbeidsforholdForRad[0].permisjonOgMangel.permisjonTom}
+                  dateStringFom={arbeidsforholdForRad[0]!.permisjonOgMangel.permisjonFom}
+                  dateStringTom={arbeidsforholdForRad[0]!.permisjonOgMangel.permisjonTom}
                 />
               </BodyShort>
             </HStack>

@@ -19,13 +19,13 @@ describe('TotrinnskontrollIndex', () => {
 
     const alleGodkjentRadios = screen.getAllByText('Godkjent');
     expect(alleGodkjentRadios).toHaveLength(7);
-    await userEvent.click(notEmpty(alleGodkjentRadios[0]));
-    await userEvent.click(notEmpty(alleGodkjentRadios[1]));
-    await userEvent.click(notEmpty(alleGodkjentRadios[2]));
-    await userEvent.click(notEmpty(alleGodkjentRadios[3]));
-    await userEvent.click(notEmpty(alleGodkjentRadios[4]));
-    await userEvent.click(notEmpty(alleGodkjentRadios[5]));
-    await userEvent.click(notEmpty(alleGodkjentRadios[6]));
+    await userEvent.click(notEmpty(alleGodkjentRadios[0]!));
+    await userEvent.click(notEmpty(alleGodkjentRadios[1]!));
+    await userEvent.click(notEmpty(alleGodkjentRadios[2]!));
+    await userEvent.click(notEmpty(alleGodkjentRadios[3]!));
+    await userEvent.click(notEmpty(alleGodkjentRadios[4]!));
+    await userEvent.click(notEmpty(alleGodkjentRadios[5]!));
+    await userEvent.click(notEmpty(alleGodkjentRadios[6]!));
 
     await userEvent.click(screen.getByText('Godkjenn vedtaket'));
 

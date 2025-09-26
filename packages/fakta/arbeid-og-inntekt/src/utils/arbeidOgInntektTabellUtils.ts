@@ -34,7 +34,7 @@ export const byggTabellStruktur = (
       const arbeidsforholdForRad = arbeidsforhold.filter(harMatchendeArbeidsgiverIdent(af));
       const arbeidsgiverOpplysninger = lagArbeidsgiver(
         af.arbeidsgiverIdent,
-        arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent],
+        arbeidsgiverOpplysningerPerId[af.arbeidsgiverIdent]!,
       );
       const inntektsmeldingerForRad = finnInntektsmeldingerForArbeidsgiver(inntektsmeldinger, af.arbeidsgiverIdent);
       const inntektsposter = inntekter.find(harMatchendeArbeidsgiverIdent(af))?.inntekter ?? [];
@@ -58,7 +58,7 @@ export const byggTabellStruktur = (
     .map<ArbeidsforholdOgInntektRadData>(im => {
       const arbeidsgiverOpplysninger = lagArbeidsgiver(
         im.arbeidsgiverIdent,
-        arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent],
+        arbeidsgiverOpplysningerPerId[im.arbeidsgiverIdent]!,
       );
       const inntektsposter = inntekter.find(harMatchendeArbeidsgiverIdent(im))?.inntekter ?? [];
 

@@ -56,10 +56,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
         skalPanelVisesIMeny={harLenke(behandling, 'FAKTA_FØDSEL')}
       >
         {faktafødsel ? (
-          <FodselFaktaIndex
-            fødsel={faktafødsel}
-            terminbekreftelseDokument={terminbekreftelseDokument}
-          />
+          <FodselFaktaIndex fødsel={faktafødsel} terminbekreftelseDokument={terminbekreftelseDokument} />
         ) : (
           <LoadingPanel />
         )}

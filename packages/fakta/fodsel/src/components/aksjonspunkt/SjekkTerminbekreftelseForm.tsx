@@ -14,6 +14,7 @@ import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import {
   maxTerminbekreftelseDato,
   minTerminbekreftelseDato,
+  notEmpty,
   terminBekreftelseBeforeTodayOrTermindato,
   useMellomlagretFormData,
   usePanelDataContext,
@@ -134,8 +135,8 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
 
 const transformValues = (values: FormValues): SjekkTerminbekreftelseAp => ({
   kode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
-  utstedtdato: values.utstedtdato!,
-  antallBarn: values.antallBarn!,
+  utstedtdato: notEmpty(values.utstedtdato, 'utstedtdato må være satt ved submit'),
+  antallBarn: notEmpty(values.antallBarn, 'antallBarn må være satt ved submit'),
   ...Termindato.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });

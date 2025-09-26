@@ -91,7 +91,7 @@ export const RenderGraderingPeriodeFieldArray = ({ graderingKvoter, readOnly, ar
       append={append}
     >
       {(field, index) => {
-        const { harSamtidigUttak, periodeFom } = graderingValues[index];
+        const { harSamtidigUttak, periodeFom } = graderingValues[index] ?? {};
         const periodeFomForTidlig = periodeFom && dayjs(periodeFom, ISO_DATE_FORMAT).isBefore(dayjs('2019-01-01'));
 
         return (

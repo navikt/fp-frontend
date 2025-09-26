@@ -44,11 +44,11 @@ type FormValues = {
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   kode: validerApKodeOgHentApEnum(
-    aksjonspunkter[0].definisjon,
+    aksjonspunkter[0]?.definisjon,
     AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
     AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
   ),
-  begrunnelse: aksjonspunkter[0].begrunnelse ?? '',
+  begrunnelse: aksjonspunkter[0]?.begrunnelse ?? '',
   sendVarsel: undefined,
 });
 
@@ -167,7 +167,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
               </div>
             </>
           )}
-          {(isReadOnly || aksjonspunkterForPanel[0].status !== AksjonspunktStatus.OPPRETTET) && (
+          {(isReadOnly || aksjonspunkterForPanel[0]?.status !== AksjonspunktStatus.OPPRETTET) && (
             <ReadOnlyField
               size="small"
               label={<FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />}
