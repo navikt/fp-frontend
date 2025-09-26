@@ -2601,12 +2601,33 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   redusertPrAar?: number;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelATDto =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto & {
-    dtoType: 'AT';
-  } & {
-    bortfaltNaturalytelse?: number;
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelATDto = {
+  aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
+  andelsnr?: number;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  avkortetPrAar?: number;
+  belopPrAarEtterAOrdningen?: number;
+  belopPrMndEtterAOrdningen?: number;
+  beregnetPrAar?: number;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  besteberegningPrAar?: number;
+  bortfaltNaturalytelse?: number;
+  bruttoPrAar?: number;
+  dagsats?: number;
+  erNyIArbeidslivet?: boolean;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erTilkommetAndel?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  fordeltPrAar?: number;
+  inntektskategori?: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
+  lagtTilAvSaksbehandler?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  overstyrtPrAar?: number;
+  redusertPrAar?: number;
+  skalFastsetteGrunnlag?: boolean;
+};
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto = (
   | ({
@@ -2652,35 +2673,120 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Beregnin
   dtoType: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDtoFelles =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto & {
-    dtoType: 'GENERELL';
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDtoFelles = {
+  aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
+  andelsnr?: number;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  avkortetPrAar?: number;
+  belopPrAarEtterAOrdningen?: number;
+  belopPrMndEtterAOrdningen?: number;
+  beregnetPrAar?: number;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  besteberegningPrAar?: number;
+  bruttoPrAar?: number;
+  dagsats?: number;
+  erNyIArbeidslivet?: boolean;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erTilkommetAndel?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  fordeltPrAar?: number;
+  inntektskategori?: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
+  lagtTilAvSaksbehandler?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  overstyrtPrAar?: number;
+  redusertPrAar?: number;
+  skalFastsetteGrunnlag?: boolean;
+};
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelFLDto =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto & {
-    dtoType: 'FL';
-  } & {
-    erNyoppstartet?: boolean;
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelFLDto = {
+  aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
+  andelsnr?: number;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  avkortetPrAar?: number;
+  belopPrAarEtterAOrdningen?: number;
+  belopPrMndEtterAOrdningen?: number;
+  beregnetPrAar?: number;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  besteberegningPrAar?: number;
+  bruttoPrAar?: number;
+  dagsats?: number;
+  erNyIArbeidslivet?: boolean;
+  erNyoppstartet?: boolean;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erTilkommetAndel?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  fordeltPrAar?: number;
+  inntektskategori?: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
+  lagtTilAvSaksbehandler?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  overstyrtPrAar?: number;
+  redusertPrAar?: number;
+  skalFastsetteGrunnlag?: boolean;
+};
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto & {
-    dtoType: 'SN';
-  } & {
-    næringer?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto>;
-    pgiSnitt?: number;
-    pgiVerdier?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto>;
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelSNDto = {
+  aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
+  andelsnr?: number;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  avkortetPrAar?: number;
+  belopPrAarEtterAOrdningen?: number;
+  belopPrMndEtterAOrdningen?: number;
+  beregnetPrAar?: number;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  besteberegningPrAar?: number;
+  bruttoPrAar?: number;
+  dagsats?: number;
+  erNyIArbeidslivet?: boolean;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erTilkommetAndel?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  fordeltPrAar?: number;
+  inntektskategori?: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
+  lagtTilAvSaksbehandler?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  næringer?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto>;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  overstyrtPrAar?: number;
+  pgiSnitt?: number;
+  pgiVerdier?: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PgiDto>;
+  redusertPrAar?: number;
+  skalFastsetteGrunnlag?: boolean;
+};
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelYtelseDto =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelDto & {
-    dtoType: 'KUN_YTELSE';
-  } & {
-    belopFraMeldekortPrAar?: number;
-    belopFraMeldekortPrMnd?: number;
-    oppjustertGrunnlag?: number;
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagPrStatusOgAndelYtelseDto = {
+  aktivitetStatus: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
+  andelsnr?: number;
+  arbeidsforhold?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_BeregningsgrunnlagArbeidsforholdDto;
+  avkortetPrAar?: number;
+  belopFraMeldekortPrAar?: number;
+  belopFraMeldekortPrMnd?: number;
+  belopPrAarEtterAOrdningen?: number;
+  belopPrMndEtterAOrdningen?: number;
+  beregnetPrAar?: number;
+  beregningsperiodeFom?: string;
+  beregningsperiodeTom?: string;
+  besteberegningPrAar?: number;
+  bruttoPrAar?: number;
+  dagsats?: number;
+  erNyIArbeidslivet?: boolean;
+  erTidsbegrensetArbeidsforhold?: boolean;
+  erTilkommetAndel?: boolean;
+  fastsattAvSaksbehandler?: boolean;
+  fordeltPrAar?: number;
+  inntektskategori?: folketrygdloven_kalkulus_kodeverk_Inntektskategori;
+  lagtTilAvSaksbehandler?: boolean;
+  lonnsendringIBeregningsperioden?: boolean;
+  oppjustertGrunnlag?: number;
+  originalDagsatsFraTilstøtendeYtelse?: number;
+  overstyrtPrAar?: number;
+  redusertPrAar?: number;
+  skalFastsetteGrunnlag?: boolean;
+};
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_EgenNæringDto = {
   begrunnelse?: string;
@@ -2818,12 +2924,9 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_NyPeriod
   tom?: string;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_OmsorgspengeGrunnlagDto =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_YtelsespesifiktGrunnlagDto & {
-    ytelsetype: 'OMP';
-  } & {
-    skalAvviksvurdere?: boolean;
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_OmsorgspengeGrunnlagDto = {
+  skalAvviksvurdere?: boolean;
+};
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_PermisjonDto = {
   permisjonFom: string;
@@ -2850,10 +2953,9 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_Sammenli
   sammenligningsgrunnlagType?: folketrygdloven_kalkulus_kodeverk_SammenligningsgrunnlagType;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SvangerskapspengerGrunnlagDto =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_YtelsespesifiktGrunnlagDto & {
-    ytelsetype: 'SVP';
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_SvangerskapspengerGrunnlagDto = {
+  [key: string]: unknown;
+};
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_VurderBesteberegningDto = {
   skalHaBesteberegning?: boolean;
@@ -2948,12 +3050,9 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_Beste
   ];
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_ForeldrepengerGrunnlagDto =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_YtelsespesifiktGrunnlagDto & {
-    ytelsetype: 'FP';
-  } & {
-    besteberegninggrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_ForeldrepengerGrunnlagDto = {
+  besteberegninggrunnlag?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_fp_BesteberegninggrunnlagDto;
+};
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto = {
   avslagsårsak: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_frisinn_Avslagsårsak;
@@ -2966,16 +3065,13 @@ export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_
   statusSøktFor: folketrygdloven_kalkulus_kodeverk_AktivitetStatus;
 };
 
-export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnGrunnlagDto =
-  folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_YtelsespesifiktGrunnlagDto & {
-    ytelsetype: 'FRISINN';
-  } & {
-    avslagsårsakPrPeriode: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto>;
-    frisinnPerioder: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnPeriodeDto>;
-    opplysningerFL?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto;
-    opplysningerSN?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto;
-    perioderSøktFor: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_OpplystPeriodeDto>;
-  };
+export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnGrunnlagDto = {
+  avslagsårsakPrPeriode: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_AvslagsårsakPrPeriodeDto>;
+  frisinnPerioder: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnPeriodeDto>;
+  opplysningerFL?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto;
+  opplysningerSN?: folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_SøknadsopplysningerDto;
+  perioderSøktFor: Array<folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_OpplystPeriodeDto>;
+};
 
 export type folketrygdloven_kalkulus_response_v1_beregningsgrunnlag_gui_frisinn_FrisinnPeriodeDto = {
   fom: string;
@@ -3772,7 +3868,7 @@ export type tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode = {
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse = {
-  fom?: string;
+  fom: string;
   tom?: string;
   type: foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
 };
@@ -3875,14 +3971,6 @@ export type foreldrepenger_behandlingslager_behandling_DokumentTypeId =
   | 'ANNET'
   | '-';
 
-export type foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType =
-  | 'ADOPTERER_ALENE'
-  | 'ANDRE_FORELDER_DØD'
-  | 'OVERTATT_OMSORG'
-  | 'OVERTATT_OMSORG_F'
-  | 'ANDRE_FORELD_DØD_F'
-  | '-';
-
 export type tjenester_behandling_søknad_ManglendeVedleggDto = {
   arbeidsgiverReferanse?: string;
   brukerHarSagtAtIkkeKommer: boolean;
@@ -3914,15 +4002,6 @@ export type tjenester_behandling_søknad_OppgittTilknytningDto = {
   utlandsoppholdFor: Array<tjenester_behandling_søknad_UtlandsoppholdDto>;
 };
 
-export type tjenester_behandling_søknad_SoknadAdopsjonDto = tjenester_behandling_søknad_SoknadDto & {
-  adopsjonFodelsedatoer?: {
-    [key: string]: string;
-  };
-  barnetsAnkomstTilNorgeDato?: string;
-  farSokerType?: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType;
-  omsorgsovertakelseDato?: string;
-};
-
 export type tjenester_behandling_søknad_SoknadDto = {
   antallBarn: number;
   begrunnelseForSenInnsending?: string;
@@ -3932,15 +4011,6 @@ export type tjenester_behandling_søknad_SoknadDto = {
   oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
   soknadType: tjenester_behandling_søknad_SøknadType;
   søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
-};
-
-export type tjenester_behandling_søknad_SoknadFodselDto = tjenester_behandling_søknad_SoknadDto & {
-  farSokerType?: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType;
-  fodselsdatoer?: {
-    [key: string]: string;
-  };
-  termindato?: string;
-  utstedtdato?: string;
 };
 
 export type tjenester_behandling_søknad_SøknadType = 'ST-001' | 'ST-002';
@@ -3957,6 +4027,48 @@ export type tjenester_behandling_søknad_UtlandsoppholdDto = {
   fom: string;
   landNavn: string;
   tom: string;
+};
+
+export type foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType =
+  | 'ADOPTERER_ALENE'
+  | 'ANDRE_FORELDER_DØD'
+  | 'OVERTATT_OMSORG'
+  | 'OVERTATT_OMSORG_F'
+  | 'ANDRE_FORELD_DØD_F'
+  | '-';
+
+export type tjenester_behandling_søknad_SoknadAdopsjonDto = {
+  adopsjonFodelsedatoer?: {
+    [key: string]: string;
+  };
+  antallBarn: number;
+  barnetsAnkomstTilNorgeDato?: string;
+  begrunnelseForSenInnsending?: string;
+  farSokerType?: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType;
+  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
+  mottattDato: string;
+  omsorgsovertakelseDato?: string;
+  oppgittFordeling?: tjenester_behandling_søknad_OppgittFordelingDto;
+  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
+  soknadType: tjenester_behandling_søknad_SøknadType;
+  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
+};
+
+export type tjenester_behandling_søknad_SoknadFodselDto = {
+  antallBarn: number;
+  begrunnelseForSenInnsending?: string;
+  farSokerType?: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType;
+  fodselsdatoer?: {
+    [key: string]: string;
+  };
+  manglendeVedlegg: Array<tjenester_behandling_søknad_ManglendeVedleggDto>;
+  mottattDato: string;
+  oppgittFordeling?: tjenester_behandling_søknad_OppgittFordelingDto;
+  oppgittTilknytning: tjenester_behandling_søknad_OppgittTilknytningDto;
+  soknadType: tjenester_behandling_søknad_SøknadType;
+  søknadsfrist: tjenester_behandling_søknad_SøknadsfristDto;
+  termindato?: string;
+  utstedtdato?: string;
 };
 
 export type tjenester_behandling_søknad_SoknadBackendDto = {
@@ -5509,9 +5621,7 @@ export type tjenester_fpoversikt_FpSakInntektsmeldingDto_Refusjon = {
   refusjonsbeløpMnd?: number;
 };
 
-export type tjenester_fpoversikt_EsSak = tjenester_fpoversikt_Sak & {
-  type: 'engangsstønad';
-} & {
+export type tjenester_fpoversikt_EsSak = {
   aksjonspunkt?: Array<tjenester_fpoversikt_Sak_Aksjonspunkt>;
   aktørId?: string;
   avsluttet?: boolean;
@@ -5530,9 +5640,7 @@ export type tjenester_fpoversikt_EsSak_Vedtak = {
   vedtakstidspunkt?: string;
 };
 
-export type tjenester_fpoversikt_FpSak = tjenester_fpoversikt_Sak & {
-  type: 'foreldrepenger';
-} & {
+export type tjenester_fpoversikt_FpSak = {
   aksjonspunkt?: Array<tjenester_fpoversikt_Sak_Aksjonspunkt>;
   aktørId?: string;
   avsluttet?: boolean;
@@ -5723,9 +5831,7 @@ export type tjenester_fpoversikt_Sak_FamilieHendelse = {
   termindato?: string;
 };
 
-export type tjenester_fpoversikt_SvpSak = tjenester_fpoversikt_Sak & {
-  type: 'svangerskapspenger';
-} & {
+export type tjenester_fpoversikt_SvpSak = {
   aksjonspunkt?: Array<tjenester_fpoversikt_Sak_Aksjonspunkt>;
   aktørId?: string;
   avsluttet?: boolean;
@@ -5931,52 +6037,64 @@ export type foreldrepenger_kontrakter_abonnent_v2_HendelseWrapperDto = {
   hendelse: foreldrepenger_kontrakter_abonnent_v2_HendelseDto;
 };
 
-export type foreldrepenger_kontrakter_abonnent_v2_pdl_AdressebeskyttelseHendelseDto =
-  foreldrepenger_kontrakter_abonnent_v2_HendelseDto & {
-    '@type'?: 'ADRESSEBESKYTTELSE';
-  } & {
-    aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
-  };
+export type foreldrepenger_kontrakter_abonnent_v2_pdl_AdressebeskyttelseHendelseDto = {
+  aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  alleAktørId?: Array<string>;
+  avsenderSystem?: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
+  hendelsetype?: string;
+  id: string;
+};
 
-export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødHendelseDto =
-  foreldrepenger_kontrakter_abonnent_v2_HendelseDto & {
-    '@type'?: 'DØD';
-  } & {
-    aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
-    dødsdato?: string;
-  };
+export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødHendelseDto = {
+  aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  alleAktørId?: Array<string>;
+  avsenderSystem?: string;
+  dødsdato?: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
+  hendelsetype?: string;
+  id: string;
+};
 
-export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødfødselHendelseDto =
-  foreldrepenger_kontrakter_abonnent_v2_HendelseDto & {
-    '@type'?: 'DØDFØDSEL';
-  } & {
-    aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
-    dødfødselsdato?: string;
-  };
+export type foreldrepenger_kontrakter_abonnent_v2_pdl_DødfødselHendelseDto = {
+  aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  alleAktørId?: Array<string>;
+  avsenderSystem?: string;
+  dødfødselsdato?: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
+  hendelsetype?: string;
+  id: string;
+};
 
-export type foreldrepenger_kontrakter_abonnent_v2_pdl_FalskIdentitetHendelseDto =
-  foreldrepenger_kontrakter_abonnent_v2_HendelseDto & {
-    '@type'?: 'FALSKID';
-  } & {
-    aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
-    erFalsk?: boolean;
-  };
+export type foreldrepenger_kontrakter_abonnent_v2_pdl_FalskIdentitetHendelseDto = {
+  aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  alleAktørId?: Array<string>;
+  avsenderSystem?: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
+  erFalsk?: boolean;
+  hendelsetype?: string;
+  id: string;
+};
 
-export type foreldrepenger_kontrakter_abonnent_v2_pdl_FødselHendelseDto =
-  foreldrepenger_kontrakter_abonnent_v2_HendelseDto & {
-    '@type'?: 'FØDSEL';
-  } & {
-    aktørIdForeldre: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
-    fødselsdato?: string;
-  };
+export type foreldrepenger_kontrakter_abonnent_v2_pdl_FødselHendelseDto = {
+  aktørIdForeldre: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  alleAktørId?: Array<string>;
+  avsenderSystem?: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
+  fødselsdato?: string;
+  hendelsetype?: string;
+  id: string;
+};
 
-export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto =
-  foreldrepenger_kontrakter_abonnent_v2_HendelseDto & {
-    '@type'?: 'UTFLYTTING';
-  } & {
-    aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
-    utflyttingsdato?: string;
-  };
+export type foreldrepenger_kontrakter_abonnent_v2_pdl_UtflyttingHendelseDto = {
+  aktørId: Array<foreldrepenger_kontrakter_abonnent_v2_AktørIdDto>;
+  alleAktørId?: Array<string>;
+  avsenderSystem?: string;
+  endringstype: foreldrepenger_kontrakter_abonnent_v2_Endringstype;
+  hendelsetype?: string;
+  id: string;
+  utflyttingsdato?: string;
+};
 
 export type tjenester_infotrygd_InfotrygdVedtakDto = {
   saker: Array<tjenester_infotrygd_InfotrygdVedtakDto_SakDto>;
