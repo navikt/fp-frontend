@@ -101,7 +101,6 @@ export const GraderingOgSamtidigUttakPanel = ({
           onChange={toggleSamtidigUttaksprosent}
         />
       </HStack>
-      { }
       {!readOnly && arbeidsgiverFinnesIkke && (
         <div className={styles['alert']}>
           <Alert variant="info">

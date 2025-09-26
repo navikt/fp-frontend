@@ -27,7 +27,6 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
 
   return (
     <VStack gap="space-4">
-      { }
       {beskrivelseForVisning && <BeskrivelseVisning beskrivelse={beskrivelseForVisning} />}
       {skalSkjuleResterendeBeskrivelser && (
         <Button
