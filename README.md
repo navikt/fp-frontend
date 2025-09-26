@@ -119,13 +119,13 @@ Synkroniser jevnlig for å holde typene oppdatert.
 
 - **Synkroniser typer i dev:**
 ```bash
-./generate-types.sh
+yarn generate-types
 ```
 
 - **Generer typer for lokale endringer (forutsetter at fpsak kjører på port 8080):**
 
 ```bash
-  ./generate-types.sh lokal
+  yarn generate-types lokal
 ```
 
 
