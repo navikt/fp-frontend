@@ -255,7 +255,7 @@ const getOppdaterTabell =
     const rad: ArbeidsforholdOgInntektRadData = {
       erPrivatPerson: false,
       arbeidsgiverIdent: MANUELT_ORG_NR,
-      arbeidsgiverNavn: formValues.arbeidsgiverNavn ?? 'Fant ikke arbeidsgiverNavn',
+      arbeidsgiverNavn: formValues.arbeidsgiverNavn ?? '',
       avklaring: {
         fom: formValues.fom,
         tom: formValues.tom,

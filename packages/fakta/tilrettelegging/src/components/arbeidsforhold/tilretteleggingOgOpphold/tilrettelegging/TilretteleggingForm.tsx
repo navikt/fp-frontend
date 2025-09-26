@@ -16,6 +16,7 @@ import type {
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 
 import styles from './tilretteleggingForm.module.css';
+import { notEmpty } from '@navikt/fp-utils';
 
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
@@ -161,10 +162,10 @@ export const TilretteleggingForm = ({
   }
 
   const lagreIForm = (values: FormValues) => {
-    const lagreFormValues = values[index];
-    if (!lagreFormValues) {
-      throw new Error(`FormValues finnes ikke for index ${index}`);
-    }
+    const lagreFormValues = notEmpty(
+      values[index],
+      `TilretteleggingForm sine submitted values finnes ikke for index ${index}`,
+    );
 
     const kilde =
       lagreFormValues.kilde === 'REGISTRERT_AV_SAKSBEHANDLER' || erNyPeriode
