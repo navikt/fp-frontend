@@ -12,11 +12,11 @@ import type {
   ArbeidsforholdTilretteleggingDato,
   SvpAvklartOppholdPeriode,
 } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { TilretteleggingInfoPanel } from './TilretteleggingInfoPanel';
 
 import styles from './tilretteleggingForm.module.css';
-import { notEmpty } from '@navikt/fp-utils';
 
 const maxValue100 = maxValue(100);
 const minValue0 = minValue(0);
