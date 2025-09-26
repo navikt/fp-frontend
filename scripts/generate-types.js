@@ -18,7 +18,7 @@ const URL_LOKALT = 'http://localhost:8080/fpsak/api/openapi.json';
 async function generateTypes() {
   try {
     if (isLokal) {
-      console.log('Kjører i lokal modus. Henter lokal token og OpenAPI.');
+      console.log('Kjører i lokal modus. Henter token fra VTP.');
 
       // Get local token
       const tokenCommand = `curl -X POST "http://localhost:8060/rest/azuread/token" -H "Content-Type: application/x-www-form-urlencoded" --data-urlencode "grant_type=authorization_code" --data-urlencode "code=S123456" --data-urlencode "client_id=autotest" --data-urlencode "scope=api://vtp.teamforeldrepenger.vtp/.default"`;
@@ -70,7 +70,7 @@ async function generateTypes() {
 
     // Change to packages/types directory and run prettier
     process.chdir('packages/types');
-    execSync('yarn run prettier', { stdio: 'inherit' });
+    execSync('yarn prettier --log-level silent', { stdio: 'pipe' });
 
     console.log('Script ferdig!');
   } catch (error) {
