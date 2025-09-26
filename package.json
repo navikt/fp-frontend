@@ -33,7 +33,8 @@
     "storybook-deploy-to-github": "gh-pages -d .storybook-static-build -t true",
     "deploy-storybook": "yarn storybook-clean-deploy-folder && yarn storybook-build-all && yarn storybook-create-deploy-folder && yarn storybook-deploy-to-github",
     "sentry-release": "(SENTRY_RELEASE=$(git rev-parse --short HEAD); node ./scripts/sentry-release.cjs)",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "generate-types": "node ./scripts/generate-types.js"
   },
   "workspaces": [
     "apps/**/*",
