@@ -98,7 +98,7 @@ const slåSammen = (oppgaverForAvdeling: OppgaverForAvdeling[]): number[] => {
   const sammenslått = oppgaverForAvdeling.reduce(
     (acc, o) => {
       const index = behandlingstypeOrder.findIndex(bo => bo === o.behandlingType) + 1;
-      const antall = acc[index] || 0;
+      const antall = acc[index] ?? 0;
       return {
         ...acc,
         [index]: antall + o.antall,
