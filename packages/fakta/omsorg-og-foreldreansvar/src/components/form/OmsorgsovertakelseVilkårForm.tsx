@@ -33,7 +33,8 @@ export const OmsorgsovertakelseVilkårForm = ({ adopsjon }: Props) => {
       size="medium"
       isEdited={hasValue(adopsjon.omsorgsovertakelseVilkårType)}
     >
-      {alleKodeverk['OmsorgsovertakelseVilkårType'].map(d => (
+      {alleKodeverk['OmsorgsovertakelseVilkårType'].filter(d => !!getDescriptionText(d.kode, intl))
+        .map(d => (
         <Radio size="medium" key={d.kode} value={d.kode} description={getDescriptionText(d.kode, intl)}>
           {d.navn}
         </Radio>
