@@ -98,7 +98,7 @@ describe('readOnlyUtils', () => {
   it('skal være readonly når en har minst ett ikke overstyrbart vilkar', () => {
     const nyeVilkår = [
       {
-        ...vilkår[0],
+        ...vilkår[0]!,
         overstyrbar: false,
       },
     ];

@@ -88,7 +88,7 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
   perioderSøker.map(uttak => {
     const { ...uttakPerioder } = uttak;
 
-    if (uttak.oppholdÅrsak !== OppholdArsakType.UDEFINERT) {
+    if (uttak.oppholdÅrsak !== OppholdArsakType['-']) {
       const stonadskonto = OppholdArsakMapper[uttak.oppholdÅrsak];
       const oppholdInfo = {
         stønadskontoType: stonadskonto,

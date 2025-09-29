@@ -101,8 +101,8 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
       BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) &&
       ap.status === AksjonspunktStatus.UTFORT,
   );
-  const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode[0];
-  const andelSomErManueltFastsatt = førstePeriode.beregningsgrunnlagPrStatusOgAndel?.find(
+  const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode.at(0);
+  const andelSomErManueltFastsatt = førstePeriode?.beregningsgrunnlagPrStatusOgAndel?.find(
     andel => andel.overstyrtPrAar || andel.overstyrtPrAar === 0,
   );
   return !!behandlingHarLøstBGAP || !!andelSomErManueltFastsatt;

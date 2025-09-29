@@ -55,7 +55,7 @@ type Story = StoryObj<typeof meta>;
 export const ErIkkeReservert: Story = {
   args: {
     saksnummer: '12345',
-    behandlingUuid: oppgaver[0].behandlingId,
+    behandlingUuid: oppgaver[0]!.behandlingId,
     kanVeilede: false,
   },
 };
@@ -63,7 +63,7 @@ export const ErIkkeReservert: Story = {
 export const ErReservertPåInnloggetBruker: Story = {
   args: {
     saksnummer: '12345',
-    behandlingUuid: oppgaver[1].behandlingId,
+    behandlingUuid: oppgaver[1]!.behandlingId,
     kanVeilede: false,
   },
 };
@@ -71,7 +71,7 @@ export const ErReservertPåInnloggetBruker: Story = {
 export const ErReservertPåAnnenBruker: Story = {
   args: {
     saksnummer: '12345',
-    behandlingUuid: oppgaver[2].behandlingId,
+    behandlingUuid: oppgaver[2]!.behandlingId,
     kanVeilede: false,
   },
 };
@@ -79,7 +79,7 @@ export const ErReservertPåAnnenBruker: Story = {
 export const VeilederReservertPåAnnenBruker: Story = {
   args: {
     saksnummer: '12345',
-    behandlingUuid: oppgaver[2].behandlingId,
+    behandlingUuid: oppgaver[2]!.behandlingId,
     kanVeilede: true,
   },
 };
@@ -87,7 +87,7 @@ export const VeilederReservertPåAnnenBruker: Story = {
 export const VeilederReservertPåInnloggetBruker: Story = {
   args: {
     saksnummer: '12345',
-    behandlingUuid: oppgaver[1].behandlingId,
+    behandlingUuid: oppgaver[1]!.behandlingId,
     kanVeilede: true,
   },
 };

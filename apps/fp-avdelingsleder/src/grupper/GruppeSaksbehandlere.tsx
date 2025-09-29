@@ -114,7 +114,7 @@ export const GruppeSaksbehandlere = ({ valgAvdeldingEnhet, saksbehandlerGruppe, 
     );
 
     if (selectedOption && isSelected && !alreadySelected && navnOgBrukerIdent) {
-      leggTilSaksbehandler({ brukerIdent: navnOgBrukerIdent[1], gruppeId: saksbehandlerGruppe.gruppeId });
+      leggTilSaksbehandler({ brukerIdent: navnOgBrukerIdent[1]!, gruppeId: saksbehandlerGruppe.gruppeId });
     }
   };
 

@@ -136,7 +136,7 @@ export const OppgaverSomErApneEllerPaVentGraf = ({ height, oppgaverApneEllerPaVe
   );
 };
 
-const finnGrafPeriode = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[]): dayjs.Dayjs[] => {
+const finnGrafPeriode = (oppgaverSomErApneEllerPaVent: OppgaverSomErApneEllerPaVent[]): [dayjs.Dayjs, dayjs.Dayjs] => {
   // Data er garantert å gå inntil 6 mnd tilbake og 10 mnd fram i tid. Utliggerne havner på første/siste mnd
   let periodeStart = dayjs().subtract(6, 'M');
   let periodeSlutt = dayjs().add(1, 'M');
@@ -172,7 +172,7 @@ const finnAntallPerDato = (
     {} as Record<string, number>,
   );
 
-  return Object.keys(antallPerDatoOgUkjent).map(k => ({ x: k, y: antallPerDatoOgUkjent[k] }));
+  return Object.keys(antallPerDatoOgUkjent).map(k => ({ x: k, y: antallPerDatoOgUkjent[k]! }));
 };
 
 const lagKoordinatForDato = (dato: dayjs.Dayjs, oppgaver: KoordinatDatoEllerUkjent[]): (number | Date)[] => {

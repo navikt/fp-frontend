@@ -66,8 +66,7 @@ export const ProsessStegBegrunnelseTextField = ({
   );
 };
 
-const getBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string =>
-  aksjonspunkter.length > 0 && aksjonspunkter[0].begrunnelse ? aksjonspunkter[0].begrunnelse : '';
+const getBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string => aksjonspunkter.at(0)?.begrunnelse ?? '';
 
 ProsessStegBegrunnelseTextField.buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   begrunnelse: decodeHtmlEntity(getBegrunnelse(aksjonspunkter)),

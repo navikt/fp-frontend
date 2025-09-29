@@ -45,6 +45,10 @@ export const VelferdspermisjonForm = ({
 
   const lagreForm = (values: FormValues) => {
     const formValues = values[permisjonIndex];
+    if (!formValues) {
+      throw new Error(`Formvalues finnes ikke for index ${permisjonIndex}`);
+    }
+
     setValue(`arbeidsforhold.${arbeidsforholdIndex}.velferdspermisjoner.${permisjonIndex}`, formValues, {
       shouldDirty: true,
     });

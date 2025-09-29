@@ -13,7 +13,8 @@ export const useLosKodeverk = <T extends LosKodeverkType>(kodeverkType: T): Alle
   if (!alleKodeverk) {
     throw new Error('Kodeverk for LOS er ikke lastet inn');
   }
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- burde ikke skje, men beholdes likevel
   if (!alleKodeverk[kodeverkType]) {
     throw new Error(`Kodeverk ${kodeverkType} for LOS finnes ikke`);
   }

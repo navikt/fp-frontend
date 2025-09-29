@@ -49,7 +49,7 @@ const findDate = (familiehendelse: FamilieHendelse): string | undefined => {
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
   erVilkarOk:
-    aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : VilkarUtfallType.OPPFYLT === status,
+    aksjonspunkter[0]?.status === AksjonspunktStatus.OPPRETTET ? undefined : VilkarUtfallType.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 

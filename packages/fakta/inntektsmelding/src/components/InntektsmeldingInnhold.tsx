@@ -27,6 +27,14 @@ export const InntektsmeldingInnhold = ({
   const { alleKodeverk, fagsak, behandling } = usePanelDataContext();
   const intl = useIntl();
 
+  const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent];
+
+  if (!arbeidsgiverOpplysninger) {
+    // eslint-disable-next-line no-console
+    console.error(`Fant ikke arbeidsgiveropplysninger`);
+    return null;
+  }
+
   return (
     <VStack gap="space-16" className={styles['container']}>
       <HStack gap="space-16" justify="space-between" align="start">
@@ -37,12 +45,12 @@ export const InntektsmeldingInnhold = ({
         <LastNedPdfKnapp
           fagsak={fagsak}
           inntektsmelding={inntektsmelding}
-          arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]}
+          arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
         />
       </HStack>
       <HGrid columns={3} gap="space-32">
         <Arbeidsgiver
-          arbeidsgiverOpplysninger={arbeidsgiverOpplysningerPerId[inntektsmelding.arbeidsgiverIdent]}
+          arbeidsgiverOpplysninger={arbeidsgiverOpplysninger}
           arbeidsgiverIdent={inntektsmelding.arbeidsgiverIdent}
         />
 

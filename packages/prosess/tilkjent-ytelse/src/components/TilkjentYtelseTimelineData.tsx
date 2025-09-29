@@ -14,15 +14,15 @@ import type {
 } from '@navikt/fp-types';
 
 // TODO Kva er dette? Kodeverk-navn skal hentast fra databasen!
-const UttakPeriodeNavn = {
+const UttakPeriodeNavn: Record<string, string> = {
   MØDREKVOTE: 'Mødrekvote',
   FEDREKVOTE: 'Fedrekvote',
   FELLESPERIODE: 'Fellesperiode',
   FORELDREPENGER_FØR_FØDSEL: 'Foreldrepenger før fødsel',
   FORELDREPENGER: 'Foreldrepenger',
   FLERBARNSDAGER: 'Flerbarnsdager',
-  UDEFINERT: '-',
-} as Record<string, string>;
+  '-': '-',
+};
 
 interface Props {
   valgtBeregningsresultatPeriode: BeregningsresultatPeriode;
@@ -192,7 +192,6 @@ const createVisningNavnForUttakArbeidstaker = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   const arbeidsgiverOpplysninger = arbeidsgiverOpplysningerPerId[andel.arbeidsgiverReferanse];
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
   if (!arbeidsgiverOpplysninger?.navn) {
     const opptjeningAktiviteter = alleKodeverk['OpptjeningAktivitetType'];
     return opptjeningAktiviteter.find(({ kode }) => kode === andel.arbeidsforholdType)?.navn ?? '';

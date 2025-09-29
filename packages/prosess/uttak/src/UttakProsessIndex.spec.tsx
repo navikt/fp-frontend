@@ -49,7 +49,7 @@ describe('UttakProsessIndex', () => {
     expect(screen.queryByText('Detaljer for valgt periode')).not.toBeInTheDocument();
 
     // Trykk på første periode i tidslinja
-    await userEvent.click(screen.getAllByRole('button')[3]);
+    await userEvent.click(screen.getAllByRole('button')[3]!);
 
     expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
     expect(screen.getAllByText('Foreldrepenger før fødsel')).toHaveLength(2);
@@ -73,7 +73,7 @@ describe('UttakProsessIndex', () => {
     expect(await screen.findByText('Uttak')).toBeInTheDocument();
 
     // Trykk på første periode i tidslinja
-    await userEvent.click(screen.getAllByRole('button')[3]);
+    await userEvent.click(screen.getAllByRole('button')[3]!);
 
     expect(await screen.findByText('11.10.2019 - 31.10.2019')).toBeInTheDocument();
 
@@ -121,8 +121,8 @@ describe('UttakProsessIndex', () => {
     const inputFelter = utils.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(7);
 
-    await userEvent.type(inputFelter[2], '0');
-    await userEvent.type(inputFelter[5], '10');
+    await userEvent.type(inputFelter[2]!, '0');
+    await userEvent.type(inputFelter[5]!, '10');
 
     await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
@@ -136,15 +136,15 @@ describe('UttakProsessIndex', () => {
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.click(screen.getAllByRole('button')[4]);
+    await userEvent.click(screen.getAllByRole('button')[4]!);
 
     expect(await screen.findByText('Detaljer for valgt periode')).toBeInTheDocument();
 
     const dropdowns = utils.getAllByRole('combobox');
     expect(dropdowns).toHaveLength(3);
 
-    await userEvent.selectOptions(dropdowns[0], 'MØDREKVOTE');
-    await userEvent.selectOptions(dropdowns[1], 'FELLESPERIODE');
+    await userEvent.selectOptions(dropdowns[0]!, 'MØDREKVOTE');
+    await userEvent.selectOptions(dropdowns[1]!, 'FELLESPERIODE');
 
     await userEvent.click(screen.getByText('Oppdater'));
 
@@ -265,8 +265,8 @@ describe('UttakProsessIndex', () => {
     const inputFelter = utils.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(7);
 
-    await userEvent.type(inputFelter[2], '0');
-    await userEvent.type(inputFelter[5], '0');
+    await userEvent.type(inputFelter[2]!, '0');
+    await userEvent.type(inputFelter[5]!, '0');
 
     await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
@@ -277,8 +277,8 @@ describe('UttakProsessIndex', () => {
     const inputFelter2 = utils.getAllByRole('textbox');
     expect(inputFelter2).toHaveLength(7);
 
-    await userEvent.type(inputFelter2[2], '0');
-    await userEvent.type(inputFelter2[5], '0');
+    await userEvent.type(inputFelter2[2]!, '0');
+    await userEvent.type(inputFelter2[5]!, '0');
 
     await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering på periode 2');
 
@@ -426,7 +426,7 @@ describe('UttakProsessIndex', () => {
     const inputFelter = utils.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(4);
 
-    await userEvent.type(inputFelter[2], '0');
+    await userEvent.type(inputFelter[2]!, '0');
 
     await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
@@ -453,7 +453,7 @@ describe('UttakProsessIndex', () => {
     const inputFelter = utils.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(4);
 
-    await userEvent.type(inputFelter[2], '0');
+    await userEvent.type(inputFelter[2]!, '0');
 
     await userEvent.type(utils.getByLabelText('Vurdering:'), 'Dette er en vurdering');
 
@@ -479,8 +479,8 @@ describe('UttakProsessIndex', () => {
     const inputFelter = utils.getAllByRole('textbox');
     expect(inputFelter).toHaveLength(4);
 
-    await userEvent.clear(inputFelter[2]);
-    await userEvent.type(inputFelter[2], '45');
+    await userEvent.clear(inputFelter[2]!);
+    await userEvent.type(inputFelter[2]!, '45');
 
     expect(
       screen.queryByText('Samlet utbetalingsgrad og andel i arbeid bør ikke overskride 100%.'),
