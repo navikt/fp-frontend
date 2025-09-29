@@ -110,7 +110,7 @@ export const MedToSakslister: Story = {
       {
         sakslisteId: 2,
         navn: 'Saksliste 2',
-        behandlingTyper: ['BT-003', 'BT-003'],
+        behandlingTyper: ['BT-002', 'BT-003'],
         fagsakYtelseTyper: ['SVP'],
         andreKriterier: [
           {
