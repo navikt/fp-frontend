@@ -160,7 +160,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
               >
                 {vurderingsalternativ.map(alt => (
                   <Radio key={alt.value} value={alt.value} size="small">
-                    <FormattedMessage id={alt.label} />
+                    {alt.label}
                   </Radio>
                 ))}
               </RhfRadioGroup>
@@ -214,7 +214,7 @@ export const UttakDokumentasjonFaktaDetailForm = ({ behov, readOnly, cancel, sub
                   >
                     {vurderingsalternativ.map(alt => (
                       <Radio key={alt.value} value={alt.value} size="small">
-                        <FormattedMessage id={alt.label} />
+                        {alt.label}
                       </Radio>
                     ))}
                   </RhfRadioGroup>
