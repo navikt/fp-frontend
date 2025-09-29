@@ -1,0 +1,4175 @@
+import{g as Gs,r as V,u as Cs,_ as Hd,s as qd,c as Fr,a as _e,b as _,d as Kr,S as wl,e as mv,f as va,Q as a_,j as y,h as Vr,P as Bl,t as js,i as r_,o as t_,N as l_,R as i_,k as gs,l as gl,w as s_,m as Yd,n as Fl,p as vv,q as ca,B as u_,A as Dr,v as o_,x as d_}from"./iframe-Cfo36i8b.js";import{r as m_}from"./index-BLTfrxKM.js";import"./preload-helper-PPVm8Dsz.js";var v_=m_();const c_=Gs(v_);function f_(e,l){var r=e.values,t=Hd(e,["values"]),i=l.values,u=Hd(l,["values"]);return qd(i,r)&&qd(t,u)}function cv(e){var l=Cs(),r=l.formatMessage,t=l.textComponent,i=t===void 0?V.Fragment:t,u=e.id,d=e.description,m=e.defaultMessage,f=e.values,p=e.children,h=e.tagName,R=h===void 0?i:h,A=e.ignoreTag,L={id:u,description:d,defaultMessage:m},w=r(L,f,{ignoreTag:A});return typeof p=="function"?p(Array.isArray(w)?w:[w]):R?V.createElement(R,null,w):V.createElement(V.Fragment,null,w)}cv.displayName="FormattedMessage";var ce=V.memo(cv,f_);ce.displayName="MemoizedFormattedMessage";var rn=(e=>(e.SJEKK_TERMINBEKREFTELSE="5001",e.AVKLAR_DEKNINGSGRAD="5002",e.ADOPSJONSDOKUMENTAJON="5004",e.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN="5005",e.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE="5006",e.SOKNADSFRISTVILKARET="5007",e.OMSORGSOVERTAKELSE="5008",e.MANUELL_VURDERING_AV_OMSORGSVILKARET="5011",e.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD="5012",e.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD="5013",e.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD="5014",e.FORESLA_VEDTAK="5015",e.FATTER_VEDTAK="5016",e.SOKERS_OPPLYSNINGSPLIKT_MANU="5017",e.AVKLAR_LOVLIG_OPPHOLD="5019",e.AVKLAR_OM_BRUKER_ER_BOSATT="5020",e.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE="5021",e.AVKLAR_OPPHOLDSRETT="5023",e.VURDER_MEDLEMSKAPSVILKÅRET="5101",e.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR="5102",e.VARSEL_REVURDERING_ETTERKONTROLL="5025",e.VARSEL_REVURDERING_MANUELL="5026",e.SJEKK_MANGLENDE_FØDSEL="5027",e.OVERSTYRING_AV_FAKTA_OM_FØDSEL="6019",e.FORESLA_VEDTAK_MANUELT="5028",e.KONTROLLER_STOR_ETTERBETALING_SØKER="5029",e.AVKLAR_VERGE="5030",e.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN="5031",e.VURDERE_ANNEN_YTELSE="5033",e.VURDERE_DOKUMENT="5034",e.VURDERE_INNTEKTSMELDING_KLAGE="5003",e.BEHANDLE_KLAGE_NFP="5035",e.BEHANDLE_KLAGE_NK="5036",e.VURDER_INNSYN="5037",e.REGISTRER_PAPIRSOKNAD_FORELDREPENGER="5040",e.VURDER_ARBEIDSFORHOLD_PERMISJON="5041",e.VURDER_SOKNADSFRIST_FORELDREPENGER="5043",e.KONTROLLER_AUTOMATISK_BESTEBEREGNING="5048",e.VURDER_PERIODER_MED_OPPTJENING="5051",e.AVKLAR_FORTSATT_MEDLEMSKAP="5053",e.AVKLAR_VILKAR_FOR_FORELDREANSVAR="5054",e.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST="5055",e.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING="5056",e.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER="5057",e.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER="5096",e.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG="5060",e.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG="5061",e.MANUELL_KONTROLL_AV_BESTEBEREGNING="5062",e.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE="5063",e.FAKTA_UTTAK_INGEN_PERIODER_KODE="5064",e.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE="5065",e.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE="5066",e.TETTE_SAKER="5067",e.AUTOMATISK_MARKERING_AV_UTENLANDSSAK="5068",e.ANNENPART_EØS="5069",e.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART="5103",e.FASTSETT_UTTAKPERIODER="5071",e.TILKNYTTET_STORTINGET="5072",e.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE="5073",e.VURDER_UTTAK_DOKUMENTASJON="5074",e.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN="5075",e.KONTROLLER_OPPLYSNINGER_OM_DØD="5076",e.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST="5077",e.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET="5078",e.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT="5079",e.VURDERING_AV_FORMKRAV_KLAGE_NFP="5082",e.VURDER_FORMKRAV_NK="5083",e.VURDER_FEILUTBETALING="5084",e.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING="5085",e.AVKLAR_ANNEN_FORELDER_RETT="5086",e.SOKERS_OPPLYSNINGSPLIKT_OVST="6002",e.OVERSTYR_FODSELSVILKAR="6003",e.OVERSTYR_ADOPSJONSVILKAR="6004",e.OVERSTYR_MEDLEMSKAPSVILKAR="6005",e.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE="6017",e.OVERSTYR_SOKNADSFRISTVILKAR="6006",e.OVERSTYRING_AV_UTTAKPERIODER="6008",e.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR="6009",e.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP="6010",e.OVERSTYRING_AV_OPPTJENINGSVILKARET="6011",e.OVERSTYR_DEKNINGSGRAD="6016",e.OVERSTYRING_AV_RETT_OG_OMSORG="6018",e.VURDER_OPPTJENINGSVILKARET="5089",e.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR="6012",e.OVERSTYR_AVKLAR_STARTDATO="6045",e.OVERSTYR_FAKTA_UTTAK="6065",e.OVERSTYR_FAKTA_UTTAK_EØS="6103",e.AUTO_MANUELT_SATT_PÅ_VENT="7001",e.AUTO_VENT_PÅ_FODSELREGISTRERING="7002",e.AUTO_VENTER_PÅ_KOMPLETT_SOKNAD="7003",e.AUTO_VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG="7019",e.AUTO_VENT_ANKE_OVERSENDT_TIL_TRYGDERETTEN="7033",e.FODSELTILRETTELEGGING="5091",e.SVANGERSKAPSVILKARET="5092",e.VURDER_FARESIGNALER="5095",e.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS="5038",e.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE="5039",e.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE="5042",e.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD="5047",e.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET="5049",e.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG="5050",e.VURDER_FAKTA_FOR_ATFL_SN="5058",e.AVKLAR_AKTIVITETER="5052",e.OVERSTYRING_AV_BEREGNINGSAKTIVITETER="6014",e.OVERSTYRING_AV_BEREGNINGSGRUNNLAG="6015",e.FORDEL_BEREGNINGSGRUNNLAG="5046",e.VURDER_REFUSJON_BERGRUNN="5059",e.AVKLAR_ARBEIDSFORHOLD="5080",e.VURDER_TILBAKETREKK="5090",e))(rn||{}),fv=(e=>(e.NORGE="NOR",e.ARUBA="ABW",e))(fv||{}),Hs=(e=>(e.BOSTEDSADRESSE="BOSTEDSADRESSE",e.BOSTEDSADRESSE_UTLAND="BOSTEDSADRESSE_UTLAND",e.POSTADRESSE="POSTADRESSE",e.POSTADRESSE_UTLAND="POSTADRESSE_UTLAND",e.MIDLERTIDIG_POSTADRESSE_NORGE="MIDLERTIDIG_POSTADRESSE_NORGE",e.MIDLERTIDIG_POSTADRESSE_UTLAND="MIDLERTIDIG_POSTADRESSE_UTLAND",e.UKJENT_ADRESSE="UKJENT_ADRESSE",e))(Hs||{}),Kl=(e=>(e.SKILT="SKIL",e.ENKE="ENKE",e.GIFT="GIFT",e.GJENNLEVENDEPARTNER="GJPA",e.GIFTLEVERADSKILT="GLAD",e.UOPPGITT="NULL",e.REGISTRERTPARTNER="REPA",e.SAMBOER="SAMB",e.SEPARERTPARTNER="SEPA",e.SEPARERT="SEPR",e.SKILTPARTNER="SKPA",e.UGIFT="UGIF",e))(Kl||{});const g_=(e,l)=>{if(e==null)throw new Error("Data er ikke oppgitt");return e},Ur=e=>Fr({"navds-typo--spacing":e.spacing,"navds-typo--truncate":e.truncate,"navds-typo--semibold":e.weight==="semibold",[`navds-typo--align-${e.align}`]:e.align,[`navds-typo--color-${e.textColor}`]:e.textColor,"navds-typo--visually-hidden":e.visuallyHidden,"navds-typo--uppercase":e.uppercase});var h_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const dr=V.forwardRef((e,l)=>{var{className:r,size:t="medium",as:i="p",spacing:u,truncate:d,weight:m="regular",align:f,visuallyHidden:p,textColor:h}=e,R=h_(e,["className","size","as","spacing","truncate","weight","align","visuallyHidden","textColor"]);const{cn:A}=_e();return _.createElement(i,Object.assign({},R,{ref:l,className:A(r,"navds-body-long",`navds-body-long--${t}`,Ur({spacing:u,truncate:d,weight:m,align:f,visuallyHidden:p,textColor:h}))}))});var p_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const je=V.forwardRef((e,l)=>{var{className:r,size:t="medium",as:i="p",spacing:u,truncate:d,weight:m="regular",align:f,visuallyHidden:p,textColor:h}=e,R=p_(e,["className","size","as","spacing","truncate","weight","align","visuallyHidden","textColor"]);const{cn:A}=_e();return _.createElement(i,Object.assign({},R,{ref:l,className:A(r,"navds-body-short",`navds-body-short--${t}`,Ur({spacing:u,truncate:d,weight:m,align:f,visuallyHidden:p,textColor:h}))}))});var E_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Jd=V.forwardRef((e,l)=>{var{className:r,size:t="medium",spacing:i,uppercase:u,as:d="p",truncate:m,weight:f="regular",align:p,visuallyHidden:h,textColor:R}=e,A=E_(e,["className","size","spacing","uppercase","as","truncate","weight","align","visuallyHidden","textColor"]);const{cn:L}=_e();return _.createElement(d,Object.assign({},A,{ref:l,className:L(r,"navds-detail",Ur({spacing:i,truncate:m,weight:f,align:p,visuallyHidden:h,textColor:R,uppercase:u}),{"navds-detail--small":t==="small"})}))});var y_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Vl=V.forwardRef((e,l)=>{var{children:r,className:t,size:i,spacing:u,as:d="p",showIcon:m=!1}=e,f=y_(e,["children","className","size","spacing","as","showIcon"]);const{cn:p}=_e();return _.createElement(d,Object.assign({},f,{ref:l,className:p("navds-error-message","navds-label",t,Ur({spacing:u}),{"navds-label--small":i==="small","navds-error-message--show-icon":m})}),m&&_.createElement("svg",{viewBox:"0 0 17 16",fill:"none",xmlns:"http://www.w3.org/2000/svg",focusable:!1,"aria-hidden":!0},_.createElement("path",{fillRule:"evenodd",clipRule:"evenodd",d:"M3.49209 11.534L8.11398 2.7594C8.48895 2.04752 9.50833 2.04743 9.88343 2.75924L14.5073 11.5339C14.8582 12.1998 14.3753 13 13.6226 13H4.37685C3.6242 13 3.14132 12.1999 3.49209 11.534ZM9.74855 10.495C9.74855 10.9092 9.41276 11.245 8.99855 11.245C8.58433 11.245 8.24855 10.9092 8.24855 10.495C8.24855 10.0808 8.58433 9.74497 8.99855 9.74497C9.41276 9.74497 9.74855 10.0808 9.74855 10.495ZM9.49988 5.49997C9.49988 5.22383 9.27602 4.99997 8.99988 4.99997C8.72373 4.99997 8.49988 5.22383 8.49988 5.49997V7.99997C8.49988 8.27611 8.72373 8.49997 8.99988 8.49997C9.27602 8.49997 9.49988 8.27611 9.49988 7.99997V5.49997Z",fill:"currentColor"})),r)});var __=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};V.forwardRef((e,l)=>{var{level:r="1",size:t,className:i,as:u,spacing:d,align:m,visuallyHidden:f,textColor:p}=e,h=__(e,["level","size","className","as","spacing","align","visuallyHidden","textColor"]);const{cn:R}=_e(),A=u??`h${r}`;return _.createElement(A,Object.assign({},h,{ref:l,className:R(i,"navds-heading",`navds-heading--${t}`,Ur({spacing:d,align:m,visuallyHidden:f,textColor:p}))}))});var A_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};V.forwardRef((e,l)=>{var{className:r,spacing:t,as:i="p"}=e,u=A_(e,["className","spacing","as"]);const{cn:d}=_e();return _.createElement(i,Object.assign({},u,{ref:l,className:d(r,"navds-ingress",{"navds-typo--spacing":!!t})}))});var R_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const sn=V.forwardRef((e,l)=>{var{className:r,size:t="medium",as:i="label",spacing:u,visuallyHidden:d,textColor:m}=e,f=R_(e,["className","size","as","spacing","visuallyHidden","textColor"]);const{cn:p}=_e();return _.createElement(i,Object.assign({},f,{ref:l,className:p(r,"navds-label",Ur({spacing:u,visuallyHidden:d,textColor:m}),{"navds-label--small":t==="small"})}))});function gv(e,l=166,r=!1){let t;function i(...u){const d=()=>{t=void 0,e.apply(this,u)};!t&&r&&d(),clearTimeout(t),t=setTimeout(d,l)}return i.clear=()=>{clearTimeout(t)},i}function Mn(e,l){const r=Object.entries(e).filter(([t])=>!l.includes(t));return Object.fromEntries(r)}const $d=globalThis?.document?V.useLayoutEffect:()=>{};let Wd=0;function T_(e){const[l,r]=V.useState(e),t=e||l;return V.useEffect(()=>{l==null&&(Wd+=1,r(`aksel-id-${Wd}`))},[l]),t}const Zd=_.useId;function fr(e){var l;return Zd!==void 0?Zd().replace(/(:)/g,""):(l=T_(e))!==null&&l!==void 0?l:""}function zd(e,l=[]){const r=V.useRef(e);return V.useEffect(()=>{r.current=e}),V.useCallback(((...t)=>{var i;return(i=r.current)===null||i===void 0?void 0:i.call(r,...t)}),l)}function qs({value:e,defaultValue:l,onChange:r}){const t=zd(r),[i,u]=V.useState(l),d=e!==void 0,m=d?e:i,f=zd(p=>{const R=typeof p=="function"?p(m):p;d||u(R),t(R)},[d,t,m]);return[m,f]}let Xd=0;function S_(e){const[l,r]=V.useState(e),t=e||l;return V.useEffect(()=>{l==null&&(Xd+=1,r(`aksel-icon-${Xd}`))},[l]),t}const Qd=_.useId;function on(e){var l;return Qd!==void 0?Qd().replace(/(:)/g,""):(l=S_(e))!==null&&l!==void 0?l:""}var O_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const N_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=O_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M16.47 21.03a.75.75 0 0 0 1.06 0l3.5-3.5a.75.75 0 1 0-1.06-1.06l-2.22 2.22V9.5a.75.75 0 0 0-1.5 0v9.19l-2.22-2.22a.75.75 0 1 0-1.06 1.06zM4.03 7.53l2.22-2.22v9.19a.75.75 0 0 0 1.5 0V5.31l2.22 2.22a.75.75 0 1 0 1.06-1.06l-3.5-3.5a.75.75 0 0 0-1.06 0l-3.5 3.5a.75.75 0 0 0 1.06 1.06",clipRule:"evenodd"}))});var k_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const b_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=k_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 21.75c5.385 0 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25 2.25 6.615 2.25 12s4.365 9.75 9.75 9.75m4.954-12.475a.813.813 0 0 0-1.24-1.05l-5.389 6.368L7.7 11.967a.812.812 0 0 0-1.15 1.15l3.25 3.25a.81.81 0 0 0 1.195-.05z",clipRule:"evenodd"}))});var I_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Ul=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=I_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M5.97 9.47a.75.75 0 0 1 1.06 0L12 14.44l4.97-4.97a.75.75 0 1 1 1.06 1.06l-5.5 5.5a.75.75 0 0 1-1.06 0l-5.5-5.5a.75.75 0 0 1 0-1.06",clipRule:"evenodd"}))});var L_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const M_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=L_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 2.25a.75.75 0 0 1 .656.387l9.527 17.25A.75.75 0 0 1 21.526 21H2.474a.75.75 0 0 1-.657-1.113l9.526-17.25A.75.75 0 0 1 12 2.25M12 8.75a.75.75 0 0 1 .75.75v4a.75.75 0 0 1-1.5 0v-4a.75.75 0 0 1 .75-.75m-1 7.75a1 1 0 1 1 2 0 1 1 0 0 1-2 0",clipRule:"evenodd"}))});var P_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const D_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=P_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 6.25a3.25 3.25 0 1 0 0 6.5 3.25 3.25 0 0 0 0-6.5m-2.5 7a.75.75 0 0 0-.75.75v4c0 .414.336.75.75.75h.75V21a.75.75 0 0 0 1.5 0v-2.25h.5V21a.75.75 0 0 0 1.5 0v-2.25h.75a.75.75 0 0 0 .75-.75v-4a.75.75 0 0 0-.75-.75z",clipRule:"evenodd"}))});var w_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const B_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=w_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M9.8 5a2.75 2.75 0 1 1 5.5 0 2.75 2.75 0 0 1-5.5 0m3.5 4a.75.75 0 0 1 .75-.75h2a.75.75 0 0 1 .75.75v7a.75.75 0 0 1-.75.75H14.8V21a.75.75 0 0 1-1.5 0zm-4.193.411a1.75 1.75 0 0 1 1.648-1.161h.295a.75.75 0 0 1 .75.75v12a.75.75 0 0 1-1.5 0v-4.25H7.55a.75.75 0 0 1-.706-1.002z",clipRule:"evenodd"}))});var F_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const K_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=F_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 2.25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5M8.557 9.411a1.75 1.75 0 0 1 1.648-1.161h3.59c.74 0 1.4.465 1.648 1.161l2.263 6.337A.75.75 0 0 1 17 16.75h-2.75V21a.75.75 0 0 1-1.5 0v-4.25h-1.5V21a.75.75 0 0 1-1.5 0v-4.25H7a.75.75 0 0 1-.706-1.002z",clipRule:"evenodd"}))});var V_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const U_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=V_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M3.25 4A.75.75 0 0 1 4 3.25h16a.75.75 0 0 1 .75.75v16a.75.75 0 0 1-.75.75H4a.75.75 0 0 1-.75-.75zM11 7.75a1 1 0 1 1 2 0 1 1 0 0 1-2 0m-1.25 3a.75.75 0 0 1 .75-.75H12a.75.75 0 0 1 .75.75v4.75h.75a.75.75 0 0 1 0 1.5h-3a.75.75 0 0 1 0-1.5h.75v-4h-.75a.75.75 0 0 1-.75-.75",clipRule:"evenodd"}))});var x_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const G_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=x_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M7.227 7.014c0 1.818.992 3.443 2.583 4.255v8.866c0 .21.09.412.245.554l.949.865a.75.75 0 0 0 1.064-.054l2.972-3.32a.75.75 0 0 0-.042-1.043l-.68-.648 1.203-1.971a.75.75 0 0 0-.103-.914l-1.675-1.721v-.44c1.886-.909 3.031-2.486 3.031-4.429a4.76 4.76 0 0 0-4.77-4.764 4.757 4.757 0 0 0-4.777 4.764m3.6 3.068c-1.28-.487-2.1-1.686-2.1-3.068a3.257 3.257 0 0 1 3.276-3.264 3.26 3.26 0 0 1 3.271 3.264c0 1.353-.83 2.554-2.559 3.242a.75.75 0 0 0-.472.697v1.235a.75.75 0 0 0 .212.523l1.482 1.522-1.215 1.991a.75.75 0 0 0 .123.934l.592.564-1.982 2.214-.145-.132v-9.021a.75.75 0 0 0-.483-.701m-.327-3.13a1.501 1.501 0 1 0 2.998.003A1.501 1.501 0 0 0 10.5 6.95",clipRule:"evenodd"}))});var C_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const j_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=C_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M7.227 7.014c0 1.818.992 3.443 2.583 4.255v8.866c0 .21.09.412.245.554l.949.865a.75.75 0 0 0 1.064-.054l2.972-3.32a.75.75 0 0 0-.042-1.043l-.68-.648 1.203-1.971a.75.75 0 0 0-.103-.914l-1.675-1.721v-.44c1.886-.909 3.031-2.486 3.031-4.429a4.76 4.76 0 0 0-4.77-4.764 4.757 4.757 0 0 0-4.777 4.764m3.273-.063a1.501 1.501 0 1 0 2.998.003A1.501 1.501 0 0 0 10.5 6.95",clipRule:"evenodd"}))});var H_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const hv=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=H_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M10.5 3.25a7.25 7.25 0 1 0 4.569 12.88l5.411 5.41a.75.75 0 1 0 1.06-1.06l-5.41-5.411A7.25 7.25 0 0 0 10.5 3.25M4.75 10.5a5.75 5.75 0 1 1 11.5 0 5.75 5.75 0 0 1-11.5 0",clipRule:"evenodd"}))});var q_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const pv=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=q_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 2.25A4.75 4.75 0 0 0 7.25 7v2.25H7A1.75 1.75 0 0 0 5.25 11v9c0 .414.336.75.75.75h12a.75.75 0 0 0 .75-.75v-9A1.75 1.75 0 0 0 17 9.25h-.25V7A4.75 4.75 0 0 0 12 2.25m3.25 7V7a3.25 3.25 0 0 0-6.5 0v2.25zM12 13a1.5 1.5 0 0 0-.75 2.8V17a.75.75 0 0 0 1.5 0v-1.2A1.5 1.5 0 0 0 12 13",clipRule:"evenodd"}))});var Y_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const J_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=Y_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 2.25a5.25 5.25 0 1 0 0 10.5 5.25 5.25 0 0 0 0-10.5m0 12A6.75 6.75 0 0 0 5.25 21a.75.75 0 0 0 .75.75h6.525c.173 0 .294-.172.262-.341a2.3 2.3 0 0 1 .007-.85l.5-2.5a2.25 2.25 0 0 1 .615-1.15l1.423-1.423a.24.24 0 0 0-.048-.384A6.75 6.75 0 0 0 12 14.25m8.53 1.22a2.164 2.164 0 0 0-3.06 0l-2.5 2.5a.75.75 0 0 0-.205.383l-.5 2.5a.75.75 0 0 0 .882.882l2.5-.5a.75.75 0 0 0 .383-.205l2.5-2.5a2.164 2.164 0 0 0 0-3.06",clipRule:"evenodd"}))});var $_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const W_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=$_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M12 2.25a2.75 2.75 0 1 0 0 5.5 2.75 2.75 0 0 0 0-5.5M8.25 9A.75.75 0 0 1 9 8.25h6a.75.75 0 0 1 .75.75v7a.75.75 0 0 1-.75.75h-.75V21a.75.75 0 0 1-1.5 0v-4.25h-1.5V21a.75.75 0 0 1-1.5 0v-4.25H9a.75.75 0 0 1-.75-.75z",clipRule:"evenodd"}))});var Z_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const z_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=Z_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M18.03 18.53a.75.75 0 0 1-1.06 0l-3.5-3.5a.75.75 0 1 1 1.06-1.06l2.22 2.22V6a.75.75 0 0 1 1.5 0v10.19l2.22-2.22a.75.75 0 1 1 1.06 1.06zM2.75 6.25a.75.75 0 0 0 0 1.5h9.5a.75.75 0 0 0 0-1.5zm0 5a.75.75 0 0 0 0 1.5h7.5a.75.75 0 0 0 0-1.5zM2 17a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 0 1.5h-5.5A.75.75 0 0 1 2 17",clipRule:"evenodd"}))});var X_=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Q_=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=X_(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M18.03 5.47a.75.75 0 0 0-1.06 0l-3.5 3.5a.75.75 0 1 0 1.06 1.06l2.22-2.22V18a.75.75 0 0 0 1.5 0V7.81l2.22 2.22a.75.75 0 1 0 1.06-1.06zM2.75 17.75a.75.75 0 0 1 0-1.5h9.5a.75.75 0 0 1 0 1.5zm0-5a.75.75 0 0 1 0-1.5h7.5a.75.75 0 0 1 0 1.5zM2 7c0 .414.336.75.75.75h5.5a.75.75 0 0 0 0-1.5h-5.5A.75.75 0 0 0 2 7",clipRule:"evenodd"}))});var eA=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const hs=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=eA(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",d:"M6.53 5.47a.75.75 0 0 0-1.06 1.06L10.94 12l-5.47 5.47a.75.75 0 1 0 1.06 1.06L12 13.06l5.47 5.47a.75.75 0 1 0 1.06-1.06L13.06 12l5.47-5.47a.75.75 0 0 0-1.06-1.06L12 10.94z"}))});var nA=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const aA=V.forwardRef((e,l)=>{var{title:r,titleId:t}=e,i=nA(e,["title","titleId"]);let u=on();return u=r?t||"title-"+u:void 0,_.createElement("svg",Object.assign({xmlns:"http://www.w3.org/2000/svg",width:"1em",height:"1em",fill:"none",viewBox:"0 0 24 24",focusable:!1,role:"img",ref:l,"aria-labelledby":u},i),r?_.createElement("title",{id:u},r):null,_.createElement("path",{fill:"currentColor",fillRule:"evenodd",d:"M7.742 2.47a.75.75 0 0 1 .53-.22h7.456a.75.75 0 0 1 .53.22l5.272 5.272c.141.14.22.331.22.53v7.456a.75.75 0 0 1-.22.53l-5.272 5.272a.75.75 0 0 1-.53.22H8.272a.75.75 0 0 1-.53-.22L2.47 16.258a.75.75 0 0 1-.22-.53V8.272a.75.75 0 0 1 .22-.53zm1.288 5.5a.75.75 0 0 0-1.06 1.06L10.94 12l-2.97 2.97a.75.75 0 1 0 1.06 1.06L12 13.06l2.97 2.97a.75.75 0 1 0 1.06-1.06L13.06 12l2.97-2.97a.75.75 0 0 0-1.06-1.06L12 10.94z",clipRule:"evenodd"}))});function xr(e,l,{checkForDefaultPrevented:r=!0}={}){return function(i){if(e?.(i),r===!1||!i.defaultPrevented)return l?.(i)}}function ts(e){return(l={})=>{const r=l.width?String(l.width):e.defaultWidth;return e.formats[r]||e.formats[e.defaultWidth]}}function it(e){return(l,r)=>{const t=r?.context?String(r.context):"standalone";let i;if(t==="formatting"&&e.formattingValues){const d=e.defaultFormattingWidth||e.defaultWidth,m=r?.width?String(r.width):d;i=e.formattingValues[m]||e.formattingValues[d]}else{const d=e.defaultWidth,m=r?.width?String(r.width):e.defaultWidth;i=e.values[m]||e.values[d]}const u=e.argumentCallback?e.argumentCallback(l):l;return i[u]}}function st(e){return(l,r={})=>{const t=r.width,i=t&&e.matchPatterns[t]||e.matchPatterns[e.defaultMatchWidth],u=l.match(i);if(!u)return null;const d=u[0],m=t&&e.parsePatterns[t]||e.parsePatterns[e.defaultParseWidth],f=Array.isArray(m)?tA(m,R=>R.test(d)):rA(m,R=>R.test(d));let p;p=e.valueCallback?e.valueCallback(f):f,p=r.valueCallback?r.valueCallback(p):p;const h=l.slice(d.length);return{value:p,rest:h}}}function rA(e,l){for(const r in e)if(Object.prototype.hasOwnProperty.call(e,r)&&l(e[r]))return r}function tA(e,l){for(let r=0;r<e.length;r++)if(l(e[r]))return r}function lA(e){return(l,r={})=>{const t=l.match(e.matchPattern);if(!t)return null;const i=t[0],u=l.match(e.parsePattern);if(!u)return null;let d=e.valueCallback?e.valueCallback(u[0]):u[0];d=r.valueCallback?r.valueCallback(d):d;const m=l.slice(i.length);return{value:d,rest:m}}}const iA={lessThanXSeconds:{one:"mindre enn ett sekund",other:"mindre enn {{count}} sekunder"},xSeconds:{one:"ett sekund",other:"{{count}} sekunder"},halfAMinute:"et halvt minutt",lessThanXMinutes:{one:"mindre enn ett minutt",other:"mindre enn {{count}} minutter"},xMinutes:{one:"ett minutt",other:"{{count}} minutter"},aboutXHours:{one:"omtrent en time",other:"omtrent {{count}} timer"},xHours:{one:"en time",other:"{{count}} timer"},xDays:{one:"en dag",other:"{{count}} dager"},aboutXWeeks:{one:"omtrent en uke",other:"omtrent {{count}} uker"},xWeeks:{one:"en uke",other:"{{count}} uker"},aboutXMonths:{one:"omtrent en måned",other:"omtrent {{count}} måneder"},xMonths:{one:"en måned",other:"{{count}} måneder"},aboutXYears:{one:"omtrent ett år",other:"omtrent {{count}} år"},xYears:{one:"ett år",other:"{{count}} år"},overXYears:{one:"over ett år",other:"over {{count}} år"},almostXYears:{one:"nesten ett år",other:"nesten {{count}} år"}},sA=(e,l,r)=>{let t;const i=iA[e];return typeof i=="string"?t=i:l===1?t=i.one:t=i.other.replace("{{count}}",String(l)),r?.addSuffix?r.comparison&&r.comparison>0?"om "+t:t+" siden":t},uA={full:"EEEE d. MMMM y",long:"d. MMMM y",medium:"d. MMM y",short:"dd.MM.y"},oA={full:"'kl'. HH:mm:ss zzzz",long:"HH:mm:ss z",medium:"HH:mm:ss",short:"HH:mm"},dA={full:"{{date}} 'kl.' {{time}}",long:"{{date}} 'kl.' {{time}}",medium:"{{date}} {{time}}",short:"{{date}} {{time}}"},mA={date:ts({formats:uA,defaultWidth:"full"}),time:ts({formats:oA,defaultWidth:"full"}),dateTime:ts({formats:dA,defaultWidth:"full"})},vA={lastWeek:"'forrige' eeee 'kl.' p",yesterday:"'i går kl.' p",today:"'i dag kl.' p",tomorrow:"'i morgen kl.' p",nextWeek:"EEEE 'kl.' p",other:"P"},cA=(e,l,r,t)=>vA[e],fA={narrow:["f.Kr.","e.Kr."],abbreviated:["f.Kr.","e.Kr."],wide:["før Kristus","etter Kristus"]},gA={narrow:["1","2","3","4"],abbreviated:["Q1","Q2","Q3","Q4"],wide:["1. kvartal","2. kvartal","3. kvartal","4. kvartal"]},hA={narrow:["J","F","M","A","M","J","J","A","S","O","N","D"],abbreviated:["jan.","feb.","mars","apr.","mai","juni","juli","aug.","sep.","okt.","nov.","des."],wide:["januar","februar","mars","april","mai","juni","juli","august","september","oktober","november","desember"]},pA={narrow:["S","M","T","O","T","F","L"],short:["sø","ma","ti","on","to","fr","lø"],abbreviated:["søn","man","tir","ons","tor","fre","lør"],wide:["søndag","mandag","tirsdag","onsdag","torsdag","fredag","lørdag"]},EA={narrow:{am:"a",pm:"p",midnight:"midnatt",noon:"middag",morning:"på morg.",afternoon:"på etterm.",evening:"på kvelden",night:"på natten"},abbreviated:{am:"a.m.",pm:"p.m.",midnight:"midnatt",noon:"middag",morning:"på morg.",afternoon:"på etterm.",evening:"på kvelden",night:"på natten"},wide:{am:"a.m.",pm:"p.m.",midnight:"midnatt",noon:"middag",morning:"på morgenen",afternoon:"på ettermiddagen",evening:"på kvelden",night:"på natten"}},yA=(e,l)=>Number(e)+".",_A={ordinalNumber:yA,era:it({values:fA,defaultWidth:"wide"}),quarter:it({values:gA,defaultWidth:"wide",argumentCallback:e=>e-1}),month:it({values:hA,defaultWidth:"wide"}),day:it({values:pA,defaultWidth:"wide"}),dayPeriod:it({values:EA,defaultWidth:"wide"})},AA=/^(\d+)\.?/i,RA=/\d+/i,TA={narrow:/^(f\.? ?Kr\.?|fvt\.?|e\.? ?Kr\.?|evt\.?)/i,abbreviated:/^(f\.? ?Kr\.?|fvt\.?|e\.? ?Kr\.?|evt\.?)/i,wide:/^(før Kristus|før vår tid|etter Kristus|vår tid)/i},SA={any:[/^f/i,/^e/i]},OA={narrow:/^[1234]/i,abbreviated:/^q[1234]/i,wide:/^[1234](\.)? kvartal/i},NA={any:[/1/i,/2/i,/3/i,/4/i]},kA={narrow:/^[jfmasond]/i,abbreviated:/^(jan|feb|mars?|apr|mai|juni?|juli?|aug|sep|okt|nov|des)\.?/i,wide:/^(januar|februar|mars|april|mai|juni|juli|august|september|oktober|november|desember)/i},bA={narrow:[/^j/i,/^f/i,/^m/i,/^a/i,/^m/i,/^j/i,/^j/i,/^a/i,/^s/i,/^o/i,/^n/i,/^d/i],any:[/^ja/i,/^f/i,/^mar/i,/^ap/i,/^mai/i,/^jun/i,/^jul/i,/^aug/i,/^s/i,/^o/i,/^n/i,/^d/i]},IA={narrow:/^[smtofl]/i,short:/^(sø|ma|ti|on|to|fr|lø)/i,abbreviated:/^(søn|man|tir|ons|tor|fre|lør)/i,wide:/^(søndag|mandag|tirsdag|onsdag|torsdag|fredag|lørdag)/i},LA={any:[/^s/i,/^m/i,/^ti/i,/^o/i,/^to/i,/^f/i,/^l/i]},MA={narrow:/^(midnatt|middag|(på) (morgenen|ettermiddagen|kvelden|natten)|[ap])/i,any:/^([ap]\.?\s?m\.?|midnatt|middag|(på) (morgenen|ettermiddagen|kvelden|natten))/i},PA={any:{am:/^a(\.?\s?m\.?)?$/i,pm:/^p(\.?\s?m\.?)?$/i,midnight:/^midn/i,noon:/^midd/i,morning:/morgen/i,afternoon:/ettermiddag/i,evening:/kveld/i,night:/natt/i}},DA={ordinalNumber:lA({matchPattern:AA,parsePattern:RA,valueCallback:e=>parseInt(e,10)}),era:st({matchPatterns:TA,defaultMatchWidth:"wide",parsePatterns:SA,defaultParseWidth:"any"}),quarter:st({matchPatterns:OA,defaultMatchWidth:"wide",parsePatterns:NA,defaultParseWidth:"any",valueCallback:e=>e+1}),month:st({matchPatterns:kA,defaultMatchWidth:"wide",parsePatterns:bA,defaultParseWidth:"any"}),day:st({matchPatterns:IA,defaultMatchWidth:"wide",parsePatterns:LA,defaultParseWidth:"any"}),dayPeriod:st({matchPatterns:MA,defaultMatchWidth:"any",parsePatterns:PA,defaultParseWidth:"any"})},wA={code:"nb",formatDistance:sA,formatLong:mA,formatRelative:cA,localize:_A,match:DA,options:{weekStartsOn:1,firstWeekContainsDate:4}},BA={global:{dateLocale:wA,showMore:"Vis mer",showLess:"Vis mindre",readOnly:"Skrivebeskyttet",close:"Lukk"},Alert:{closeAlert:"Lukk varsel",closeMessage:"Lukk melding",error:"Feil",info:"Informasjon",success:"Suksess",warning:"Advarsel"},Chips:{Removable:{labelSuffix:"slett"}},Combobox:{addOption:"Legg til",loading:"Søker…",maxSelected:"{selected} av maks {limit} er valgt."},CopyButton:{title:"Kopier",activeText:"Kopiert!"},DatePicker:{chooseDate:"Velg dato",chooseDates:"Velg datoer",chooseDateRange:"Velg start- og sluttdato",chooseMonth:"Velg måned",week:"Uke",weekNumber:"Uke {week}",selectWeekNumber:"Velg uke {week}",month:"Måned",goToNextMonth:"Gå til neste måned",goToPreviousMonth:"Gå til forrige måned",year:"År",goToNextYear:"Gå til neste år",goToPreviousYear:"Gå til forrige år",openDatePicker:"Åpne datovelger",openMonthPicker:"Åpne månedsvelger",closeDatePicker:"Lukk datovelger",closeMonthPicker:"Lukk månedsvelger"},ErrorSummary:{heading:"Du må rette disse feilene før du kan fortsette:"},FileUpload:{dropzone:{button:"Velg fil",buttonMultiple:"Velg filer",dragAndDrop:"Dra og slipp filen her",dragAndDropMultiple:"Dra og slipp filer her",drop:"Slipp",or:"eller",disabled:"Filopplasting er deaktivert",disabledFilelimit:"Du kan ikke laste opp flere filer"},item:{retryButtonTitle:"Prøv å laste opp filen på nytt",deleteButtonTitle:"Slett filen",uploading:"Laster opp…",downloading:"Laster ned…"}},FormProgress:{step:"Steg {activeStep} av {totalSteps}",showAllSteps:"Vis alle steg",hideAllSteps:"Skjul alle steg"},FormSummary:{editAnswer:"Endre svar"},GuidePanel:{illustrationLabel:"Illustrasjon av veileder"},HelpText:{title:"Mer informasjon"},Loader:{title:"Venter…"},Pagination:{previous:"Forrige",next:"Neste"},Process:{active:"Aktiv"},ProgressBar:{progress:"{current} av {max}",progressUnknown:"Fremdrift kan ikke beregnes, antatt tid er {seconds} sekunder."},Search:{clear:"Tøm feltet",search:"Søk"},Textarea:{maxLength:"Tekstområde med plass til {maxLength} tegn.",charsTooMany:"{chars} tegn for mye",charsLeft:"{chars} tegn igjen"},Timeline:{dateFormat:"dd.MM.yyyy",dayFormat:"dd.MM",monthFormat:"MMM yy",yearFormat:"yyyy",Row:{noPeriods:"Ingen perioder",period:"{start} til {end}"},Period:{success:"Suksess",warning:"Advarsel",danger:"Fare",info:"Info",neutral:"Nøytral",period:"{status} fra {start} til {end}"},Pin:{pin:"Pin: {date}"},Zoom:{zoom:"Zoom tidslinjen {start} til {end}",reset:"Tilbakestill tidsperspektiv"}}},FA=V.createContext({locale:BA}),KA=()=>V.useContext(FA),em=/(\w+)/g;function VA(e,l){const r=Array.isArray(e)?e:UA(e);for(const t of l){if(!t)continue;let i=t;for(let u=0;u<r.length;u++){const d=i[r[u]];d!==void 0&&(i=d)}if(typeof i=="string")return i}throw new Error(`Error translating key. Keypath '${e}' does not resolve to a string.`)}function UA(e){const l=[];let r=em.exec(e);for(;r;){const[,t,i]=r;l.push(t||i),r=em.exec(e)}return l}const xA=/{[^}]*}/g;function Ja(e,...l){const r=KA(),t=r.translations||[],i=[...l,...Array.isArray(t)?t.map(d=>d[e]):[t[e]],r.locale[e]];return(d,m)=>{const f=VA(d,i);return m?f.replace(xA,p=>{const h=p.substring(1,p.length-1);if(m[h]===void 0){const R=JSON.stringify(m);throw new Error(`Error translating key '${d}'. No replacement syntax ({}) found for key '${h}'. The following replacements were passed: '${R}'`)}return m[h]}):f}}var GA=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const CA=V.forwardRef((e,l)=>{var{className:r,size:t="medium",title:i,transparent:u=!1,variant:d="neutral",id:m,"data-color":f}=e,p=GA(e,["className","size","title","transparent","variant","id","data-color"]);const{cn:h}=_e(),R=fr(),A=Ja("Loader");return _.createElement("svg",Object.assign({"aria-labelledby":m??`loader-${R}`,ref:l,className:h("navds-loader",r,`navds-loader--${t}`,`navds-loader--${d}`,{"navds-loader--transparent":u}),focusable:"false",viewBox:"0 0 50 50",preserveAspectRatio:"xMidYMid","data-color":f??jA(d)},Mn(p,["children"]),{"data-variant":d}),_.createElement("title",{id:m??`loader-${R}`},i||A("title")),_.createElement("circle",{className:h("navds-loader__background"),xmlns:"http://www.w3.org/2000/svg",cx:"25",cy:"25",r:"20",fill:"none"}),_.createElement("circle",{className:h("navds-loader__foreground"),cx:"25",cy:"25",r:"20",fill:"none",strokeDasharray:"50 155"}))});function jA(e){switch(e){case"neutral":return"neutral";case"inverted":return"neutral";case"interaction":return;default:return"neutral"}}var HA=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Et=V.forwardRef((e,l)=>{var{as:r="button",variant:t="primary",className:i,children:u,size:d="medium",loading:m=!1,disabled:f,icon:p,iconPosition:h="left",onKeyUp:R,"data-color":A}=e,L=HA(e,["as","variant","className","children","size","loading","disabled","icon","iconPosition","onKeyUp","data-color"]);const{cn:w}=_e(),k=f||m?Mn(L,["href"]):L,S=D=>{D.key===" "&&!f&&!m&&D.currentTarget.click()};return _.createElement(r,Object.assign({},r!=="button"?{role:"button"}:{},{"data-color":A??qA(t),"data-variant":YA(t)},k,{ref:l,onKeyUp:xr(R,S),className:w(i,"navds-button",`navds-button--${t}`,`navds-button--${d}`,{"navds-button--loading":m,"navds-button--icon-only":!!p&&!u,"navds-button--disabled":f??m}),disabled:f??m?!0:void 0}),p&&h==="left"&&_.createElement("span",{className:w("navds-button__icon")},p),m&&_.createElement(CA,{size:d}),u&&_.createElement(sn,{as:"span",size:d==="medium"?"medium":"small"},u),p&&h==="right"&&_.createElement("span",{className:w("navds-button__icon")},p))});function qA(e){switch(e){case"primary-neutral":case"secondary-neutral":case"tertiary-neutral":return"neutral";case"danger":return"danger";default:return}}function YA(e){switch(e){case"primary":case"primary-neutral":case"danger":return"primary";case"secondary":case"secondary-neutral":return"secondary";case"tertiary":case"tertiary-neutral":return"tertiary";default:return"primary"}}var JA=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const $A={error:aA,warning:M_,info:U_,success:b_},WA=V.forwardRef((e,l)=>{var{children:r,className:t,variant:i,size:u="medium",fullWidth:d=!1,contentMaxWidth:m=!0,inline:f=!1,closeButton:p=!1,onClose:h}=e,R=JA(e,["children","className","variant","size","fullWidth","contentMaxWidth","inline","closeButton","onClose"]);const{cn:A}=_e(),L=Ja("Alert"),w=$A[i];return _.createElement("div",Object.assign({},R,{"data-color":ZA(i),"data-variant":i,ref:l,className:A(t,"navds-alert",`navds-alert--${i}`,`navds-alert--${u}`,{"navds-alert--full-width":d,"navds-alert--inline":f,"navds-alert--close-button":p})}),_.createElement(w,{title:L(i),className:A("navds-alert__icon")}),_.createElement(dr,{as:"div",size:u,className:A("navds-alert__wrapper",m&&"navds-alert__wrapper--maxwidth")},r),p&&!f&&_.createElement("div",{className:A("navds-alert__button-wrapper")},_.createElement(Et,{className:A("navds-alert__button"),size:"small",variant:"tertiary-neutral",onClick:h,type:"button",icon:_.createElement(hs,{title:["error","warning"].includes(i)?L("closeAlert"):L("closeMessage")})})))});function ZA(e){switch(e){case"warning":return"warning";case"error":return"danger";case"info":return"info";case"success":return"success";default:return"info"}}const Ev=()=>{const{cn:e}=_e();return _.createElement(pv,{"aria-hidden":!0,className:e("navds-form-field__readonly-icon")})},yv=()=>{const{cn:e}=_e();return _.createElement(pv,{title:Ja("global")("readOnly"),className:e("navds-form-field__readonly-icon")})};var zA=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const XA=V.forwardRef((e,l)=>{var{className:r,header:t,children:i,open:u,defaultOpen:d=!1,onClick:m,size:f="medium",onOpenChange:p}=e,h=zA(e,["className","header","children","open","defaultOpen","onClick","size","onOpenChange"]);const{cn:R}=_e(),[A,L]=qs({defaultValue:d,value:u,onChange:p}),w=f==="small"?"small":"medium";return _.createElement("div",{className:R("navds-read-more",`navds-read-more--${f}`,r,{"navds-read-more--open":A}),"data-volume":"low"},_.createElement("button",Object.assign({},h,{ref:l,type:"button",className:R("navds-read-more__button","navds-body-short",{"navds-body-short--small":f==="small"}),onClick:xr(m,()=>L(k=>!k)),"aria-expanded":A,"data-state":A?"open":"closed"}),_.createElement(Ul,{className:R("navds-read-more__expand-icon"),"aria-hidden":!0}),_.createElement("span",null,t)),_.createElement(dr,{as:"div","aria-hidden":!A,className:R("navds-read-more__content",{"navds-read-more__content--closed":!A}),size:w,"data-state":A?"open":"closed"},i))}),Il=V.createContext(null),yt=(e,l)=>{var r,t,i;const{size:u,error:d,errorId:m}=e,f=V.useContext(Il),p=fr(),h=(r=e.id)!==null&&r!==void 0?r:`${l}-${p}`,R=m??`${l}-error-${p}`,A=`${l}-description-${p}`,L=f?.disabled||e.disabled,w=(f?.readOnly||e.readOnly)&&!L||void 0,k=!L&&!w&&!!(d||f?.error),S=!L&&!w&&!!d&&typeof d!="boolean",D=Object.assign({},k?{"aria-invalid":!0}:{});return e?.required,{showErrorMsg:S,hasError:k,errorId:R,inputDescriptionId:A,size:(t=u??f?.size)!==null&&t!==void 0?t:"medium",readOnly:w,inputProps:Object.assign(Object.assign({id:h},D),{"aria-describedby":Fr(e["aria-describedby"],{[A]:e.description&&!Ll(e.description),[R]:S,[(i=f?.errorId)!==null&&i!==void 0?i:""]:k&&f?.error})||void 0,disabled:L})}};function Ll(e,l=!0){if(_.isValidElement(e)){if(e.type===XA)return!0;if(e.props.children&&l)return Ll(e.props.children,!1)}else if(Array.isArray(e))return e.some(r=>Ll(r,l));return!1}var QA=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const eR=V.forwardRef((e,l)=>{const{inputProps:r,errorId:t,showErrorMsg:i,hasError:u,size:d,inputDescriptionId:m,readOnly:f}=yt(e,"select"),{children:p,label:h,className:R,description:A,htmlSize:L,hideLabel:w=!1,style:k}=e,S=QA(e,["children","label","className","description","htmlSize","hideLabel","style"]),{cn:D}=_e(),B={onMouseDown:N=>{f&&(N.preventDefault(),N.target.focus())},onKeyDown:N=>{f&&["ArrowDown","ArrowUp","ArrowRight","ArrowLeft"," "].includes(N.key)&&N.preventDefault()}};return _.createElement("div",{className:D(R,"navds-form-field",`navds-form-field--${d}`,{"navds-form-field--disabled":!!r.disabled,"navds-form-field--readonly":f,"navds-select--error":u,"navds-select--readonly":f})},_.createElement(sn,{htmlFor:r.id,size:d,className:D("navds-form-field__label",{"navds-sr-only":w})},f&&_.createElement(yv,null),h),!!A&&_.createElement(je,{className:D("navds-form-field__description",{"navds-sr-only":w}),id:m,size:d,as:"div"},A),_.createElement("div",{className:D("navds-select__container"),style:k},_.createElement("select",Object.assign({},Mn(S,["error","errorId","size","readOnly"]),r,B,{ref:l,className:D("navds-select__input","navds-body-short",`navds-body-short--${d??"medium"}`),size:L}),p),_.createElement(Ul,{className:D("navds-select__chevron"),"aria-hidden":!0})),_.createElement("div",{className:D("navds-form-field__error"),id:t,"aria-relevant":"additions removals","aria-live":"polite"},i&&_.createElement(Vl,{size:d,showIcon:!0},e.error)))}),xl=V.createContext({open:!1,toggleOpen:()=>{},size:"medium"});var nR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const aR=V.forwardRef((e,l)=>{var{children:r,className:t}=e,i=nR(e,["children","className"]);const{cn:u}=_e(),d=V.useContext(xl),m=Kr(!1);return d===null?(console.error("<ExpansionCard.Content> has to be used within an <ExpansionCard>"),null):_.createElement(dr,Object.assign({"data-color":m?.color},i,{ref:l,as:"div",className:u("navds-expansioncard__content",t,{"navds-expansioncard__content--closed":!d.open}),"aria-hidden":!d.open,size:d.size,"data-open":d.open}),_.createElement("div",{className:u("navds-expansioncard__content-inner")},r))});var rR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const tR=V.forwardRef((e,l)=>{var{className:r}=e,t=rR(e,["className"]);const{cn:i}=_e(),u=V.useContext(xl);return u===null?(console.error("<ExpansionCard.Description> has to be used within an <ExpansionCard>"),null):_.createElement(dr,Object.assign({},t,{as:"p",ref:l,className:i("navds-link-panel__description",r),size:u.size}))});var lR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const iR=V.forwardRef((e,l)=>{var{children:r,className:t}=e,i=lR(e,["children","className"]);const{cn:u}=_e(),d=V.useContext(xl),m=Ja("global");return d===null?(console.error("<ExpansionCard.Header> has to be used within an <ExpansionCard>"),null):_.createElement("div",Object.assign({ref:l},i,{className:u("navds-expansioncard__header",t),"data-open":d.open}),_.createElement("div",{className:u("navds-expansioncard__header-content")},r),_.createElement("button",{className:u("navds-expansioncard__header-button"),onClick:d.toggleOpen,type:"button","aria-expanded":d.open},_.createElement(Ul,{className:u("navds-expansioncard__header-chevron"),title:m("showMore")})))});var sR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const uR=V.forwardRef((e,l)=>{var{className:r,as:t="h3",size:i="medium"}=e,u=sR(e,["className","as","size"]);const{cn:d}=_e();return _.createElement(t,Object.assign({},u,{ref:l,className:d("navds-expansioncard__title",`navds-expansioncard__title--${i}`,"navds-heading",`navds-heading--${i}`,r)}))});var oR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Ba=V.forwardRef((e,l)=>{var{className:r,onToggle:t,open:i,defaultOpen:u=!1,size:d="medium","data-color":m="neutral"}=e,f=oR(e,["className","onToggle","open","defaultOpen","size","data-color"]);const{cn:p}=_e(),h=V.useRef(!(i||u)),[R,A]=qs({value:i,onChange:L=>{t?.(L),h.current=!0},defaultValue:u});return _.createElement(xl.Provider,{value:{open:i??R,toggleOpen:()=>A(L=>!L),size:d}},_.createElement("section",Object.assign({"data-color":m},f,{className:p("navds-expansioncard",r,`navds-expansioncard--${d}`,{"navds-expansioncard--open":i??R,"navds-expansioncard--no-animation":!h.current}),ref:l})))});Ba.Header=iR;Ba.Content=aR;Ba.Title=uR;Ba.Description=tR;function vn(e,l,r,t){return t?typeof t=="string"?{[`--__${e}c-${l}-${r}-xs`]:t}:Object.fromEntries(Object.entries(t).map(([i,u])=>[`--__${e}c-${l}-${r}-${i}`,u])):{}}const dR={"--ax-spacing-32":"--ax-space-128","--ax-spacing-24":"--ax-space-96","--ax-spacing-20":"--ax-space-80","--ax-spacing-18":"--ax-space-72","--ax-spacing-16":"--ax-space-64","--ax-spacing-14":"--ax-space-56","--ax-spacing-12":"--ax-space-48","--ax-spacing-11":"--ax-space-44","--ax-spacing-10":"--ax-space-40","--ax-spacing-9":"--ax-space-36","--ax-spacing-8":"--ax-space-32","--ax-spacing-7":"--ax-space-28","--ax-spacing-6":"--ax-space-24","--ax-spacing-5":"--ax-space-20","--ax-spacing-4":"--ax-space-16","--ax-spacing-3":"--ax-space-12","--ax-spacing-2":"--ax-space-8","--ax-spacing-1-alt":"--ax-space-6","--ax-spacing-1":"--ax-space-4","--ax-spacing-05":"--ax-space-2","--ax-spacing-0":"--ax-space-0"},mR={full:"full",xlarge:"12",large:"8",medium:"4",small:"2"},nm=(e,l,r,t,i,u)=>l.split(" ").map((d,m,f)=>{var p,h;if(e==="margin-inline"&&d==="full")return`calc((100vw - ${100/f.length}%)/-2)`;if(e==="padding-inline"&&d==="full")return`calc((100vw - ${100/f.length}%)/2)`;if(["mi","mb"].includes(e)&&d==="auto")return"auto";let R=`var(--${u}-${r}-${d})`;if(t.includes(d))R=d==="px"?"1px":d;else if(r==="spacing"&&d.startsWith("space"))R=`var(--${u}-${d})`;else if(r==="spacing"){const A=`--${u}-spacing-${d}`;R=`var(${(p=dR[A])!==null&&p!==void 0?p:A})`}else if(r==="radius"){const A=(h=mR[d])!==null&&h!==void 0?h:d;R=`var(--${u}-radius-${A})`}return i?d==="0"?"0":`calc(-1 * ${R})`:R}).join(" ");function In(e,l,r,t,i,u=!1,d=[]){if(!i)return{};if(typeof i=="string")return{[`--__${e}c-${l}-${r}-xs`]:nm(r,i,t,d,u,e)};const m={};return Object.entries(i).forEach(([f,p])=>{m[`--__${e}c-${l}-${r}-${f}`]=nm(r,p,t,d,u,e)}),m}const Ys=["className","padding","paddingInline","paddingBlock","margin","marginInline","marginBlock","width","minWidth","maxWidth","height","minHeight","maxHeight","position","inset","top","right","bottom","left","overflow","overflowX","overflowY","flexBasis","flexGrow","flexShrink","gridColumn"],Js=({children:e,className:l,padding:r,paddingInline:t,paddingBlock:i,margin:u,marginInline:d,marginBlock:m,width:f,minWidth:p,maxWidth:h,height:R,minHeight:A,maxHeight:L,position:w,inset:k,top:S,right:D,left:B,bottom:N,overflow:J,overflowX:M,overflowY:$,flexBasis:G,flexGrow:x,flexShrink:Z,gridColumn:le})=>{const X=Kr(!1),{cn:Y}=_e(),H=X?.isDarkside?"ax":"a",ae=Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({},In(H,"r","p","spacing",r)),In(H,"r","pi","spacing",t)),In(H,"r","pb","spacing",i)),In(H,"r","m","spacing",u)),In(H,"r","mi","spacing",d)),In(H,"r","mb","spacing",m)),vn(H,"r","w",f)),vn(H,"r","minw",p)),vn(H,"r","maxw",h)),vn(H,"r","h",R)),vn(H,"r","minh",A)),vn(H,"r","maxh",L)),vn(H,"r","position",w)),In(H,"r","inset","spacing",k)),In(H,"r","top","spacing",S)),In(H,"r","right","spacing",D)),In(H,"r","bottom","spacing",N)),In(H,"r","left","spacing",B)),vn(H,"r","overflow",J)),vn(H,"r","overflowx",M)),vn(H,"r","overflowy",$)),vn(H,"r","flex-basis",G)),vn(H,"r","flex-grow",x)),vn(H,"r","flex-shrink",Z)),vn(H,"r","grid-column",le));return _.createElement(wl,{className:Y({className:l,"navds-r-p":r,"navds-r-pi":t,"navds-r-pb":i,"navds-r-m":u,"navds-r-mi":d,"navds-r-mb":m,"navds-r-w":f,"navds-r-minw":p,"navds-r-maxw":h,"navds-r-h":R,"navds-r-minh":A,"navds-r-maxh":L,"navds-r-position":w,"navds-r-inset":k,"navds-r-top":S,"navds-r-right":D,"navds-r-bottom":N,"navds-r-left":B,"navds-r-overflow":J,"navds-r-overflowx":M,"navds-r-overflowy":$,"navds-r-flex-basis":G,"navds-r-flex-grow":x,"navds-r-flex-shrink":Z,"navds-r-grid-column":le}),style:ae},e)};var vR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const cR=V.forwardRef((e,l)=>{var{children:r,className:t,as:i="div",background:u,borderColor:d,borderWidth:m,borderRadius:f,shadow:p,style:h,asChild:R}=e,A=vR(e,["children","className","as","background","borderColor","borderWidth","borderRadius","shadow","style","asChild"]);const{cn:L}=_e(),w=Object.assign(Object.assign(Object.assign({},h),{"--__axc-box-background":u?`var(--ax-bg-${u})`:void 0,"--__axc-box-shadow":p?`var(--ax-shadow-${p})`:void 0,"--__axc-box-border-color":d?`var(--ax-border-${d})`:void 0,"--__axc-box-border-width":m?m.split(" ").map(S=>`${S}px`).join(" "):void 0}),In("ax","box","radius","radius",f,!1,["0"])),k=R?wl:i;return _.createElement(Js,Object.assign({},A),_.createElement(k,Object.assign({},Mn(A,Ys),{ref:l,style:w,className:L("navds-box",t,{"navds-box-bg":u,"navds-box-border-color":d,"navds-box-border-width":m,"navds-box-radius":f,"navds-box-shadow":p})}),r))});var fR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const gR=V.forwardRef((e,l)=>{var{children:r,className:t,as:i="div",background:u,borderColor:d,borderWidth:m,borderRadius:f,shadow:p,style:h,asChild:R}=e,A=fR(e,["children","className","as","background","borderColor","borderWidth","borderRadius","shadow","style","asChild"]);const L=Kr(!1),{cn:w}=_e(),k=L?.isDarkside?"ax":"a",S=Object.assign(Object.assign(Object.assign({},h),{[`--__${k}c-box-background`]:u?`var(--a-${u})`:void 0,[`--__${k}c-box-shadow`]:p?`var(--a-shadow-${p})`:void 0,[`--__${k}c-box-border-color`]:d?`var(--a-${d})`:void 0,[`--__${k}c-box-border-width`]:m?m.split(" ").map(B=>`${B}px`).join(" "):void 0}),In(k,"box","radius","radius",f,!1,["0"])),D=R?wl:i;return _.createElement(Js,Object.assign({},A),_.createElement(D,Object.assign({},Mn(A,Ys),{ref:l,style:S,className:w("navds-box",t,{"navds-box-bg":u,"navds-box-border-color":d,"navds-box-border-width":m,"navds-box-border-radius":f&&!L?.isDarkside,"navds-box-radius":f&&L?.isDarkside,"navds-box-shadow":p})}),r))}),mr=gR;mr.New=cR;var hR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const _v=V.forwardRef((e,l)=>{var{children:r,className:t,as:i="div",align:u,justify:d,wrap:m=!0,gap:f,style:p,direction:h="row",asChild:R}=e,A=hR(e,["children","className","as","align","justify","wrap","gap","style","direction","asChild"]);const L=Kr(!1),w=L?.isDarkside?"ax":"a",{cn:k}=_e(),S=Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({},p),In(w,"stack","gap","spacing",f)),vn(w,"stack","direction",h)),vn(w,"stack","align",u)),vn(w,"stack","justify",d)),D=R?wl:i;return _.createElement(Js,Object.assign({},A),_.createElement(D,Object.assign({},Mn(A,Ys),{ref:l,style:S,className:k("navds-stack",t,{"navds-vstack":h==="column","navds-hstack":h==="row","navds-stack-gap":f,"navds-stack-align":u,"navds-stack-justify":d,"navds-stack-direction":h,"navds-stack-wrap":m})}),r))});var pR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const vr=V.forwardRef((e,l)=>{var{as:r="div"}=e,t=pR(e,["as"]);return _.createElement(_v,Object.assign({as:r},t,{ref:l,direction:"row"}))});var ER=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const ma=V.forwardRef((e,l)=>{var{as:r="div"}=e,t=ER(e,["as"]);return _.createElement(_v,Object.assign({as:r},t,{ref:l,direction:"column",wrap:!1}))});var yR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const _R=V.forwardRef((e,l)=>{var{className:r}=e,t=yR(e,["className"]);const{cn:i}=_e();return _.createElement("tbody",Object.assign({},t,{ref:l,className:i("navds-table__body",r)}))});var AR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Av=V.forwardRef((e,l)=>{var{className:r,children:t,align:i,textSize:u}=e,d=AR(e,["className","children","align","textSize"]);const{cn:m}=_e();return _.createElement("th",Object.assign({ref:l,className:m("navds-table__header-cell","navds-label",r,{[`navds-table__header-cell--align-${i}`]:i,"navds-label--small":u==="small"})},d),t)}),Rv=V.createContext(null);var RR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const TR=V.forwardRef((e,l)=>{var r,t,i,u,{className:d,children:m,sortable:f=!1,sortKey:p}=e,h=RR(e,["className","children","sortable","sortKey"]);const R=V.useContext(Rv),{cn:A}=_e();return f&&!p&&console.warn("ColumnHeader with `sortable=true` must have a sortKey."),_.createElement(Av,Object.assign({scope:"col",ref:l,className:A(d),"aria-sort":f?((r=R?.sort)===null||r===void 0?void 0:r.orderBy)===p?(t=R?.sort)===null||t===void 0?void 0:t.direction:"none":void 0},h),f?_.createElement("button",{type:"button",className:A("navds-table__sort-button"),onClick:f&&p?()=>{var L;return(L=R?.onSortChange)===null||L===void 0?void 0:L.call(R,p)}:void 0},m,((i=R?.sort)===null||i===void 0?void 0:i.orderBy)===p?((u=R?.sort)===null||u===void 0?void 0:u.direction)==="descending"?_.createElement(z_,{"aria-hidden":!0}):_.createElement(Q_,{"aria-hidden":!0}):_.createElement(N_,{"aria-hidden":!0})):m)});var SR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Tv=V.forwardRef((e,l)=>{var{className:r,children:t="",align:i,textSize:u}=e,d=SR(e,["className","children","align","textSize"]);const{cn:m}=_e();return _.createElement(je,Object.assign({as:"td",ref:l,className:m("navds-table__data-cell",r,{[`navds-table__data-cell--align-${i}`]:i}),size:u},d),t)});var OR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const NR=globalThis?.matchMedia?globalThis.matchMedia("(prefers-reduced-motion: reduce)").matches:!1;function kR(e){const l=parseFloat(e);return!Number.isNaN(l)&&Number.isFinite(l)}function am(e){return typeof e=="string"&&e[e.length-1]==="%"&&kR(e.substring(0,e.length-1))}function ls(e,l){l===0&&e?.style&&(e.style.display="none")}function bR(e,l){l===0&&e?.style&&(e.style.display="")}const IR=e=>{var{children:l,className:r,innerClassName:t,duration:i=250,easing:u="ease",height:d}=e,m=OR(e,["children","className","innerClassName","duration","easing","height"]);const{cn:f}=_e(),p=V.useRef(d),h=V.useRef(null),R=V.useRef(),A=V.useRef(),L=V.useRef(d),w=V.useRef("visible"),k=NR?0:i;typeof L.current=="number"?(typeof d!="string"&&(L.current=d<0?0:d),w.current="hidden"):am(L.current)&&(L.current=d==="0%"?0:d,w.current="hidden");const[S,D]=V.useState(L.current),[B,N]=V.useState(w.current),[J,M]=V.useState(!1);V.useEffect(()=>{ls(h.current,L.current)},[]),V.useEffect(()=>{if(d!==p.current&&h.current){bR(h.current,p.current),h.current.style.overflow="hidden";const Z=h.current.offsetHeight;h.current.style.overflow="";const le=k;let X,Y,H="hidden",ae;const oe=p.current==="auto";typeof d=="number"?(X=d<0?0:d,Y=X):am(d)?(X=d==="0%"?0:d,Y=X):(X=Z,Y="auto",H=void 0),oe&&(Y=X,X=Z),D(X),N("hidden"),M(!oe),clearTimeout(A.current),clearTimeout(R.current),oe?(ae=!0,A.current=setTimeout(()=>{D(Y),N(H),M(ae)},50),R.current=setTimeout(()=>{M(!1),ls(h.current,Y)},le)):A.current=setTimeout(()=>{D(Y),N(H),M(!1),d!=="auto"&&ls(h.current,X)},le)}return p.current=d,()=>{clearTimeout(A.current),clearTimeout(R.current)}},[d]);const $={height:S,overflow:B};J&&($.transition=`height ${k}ms ${u} 0ms`,$.WebkitTransition=$.transition);const x=typeof m["aria-hidden"]<"u"?m["aria-hidden"]:d===0;return _.createElement("div",Object.assign({},m,{className:f(r),style:$}),_.createElement("div",{"aria-hidden":x,className:f(t),ref:h},l))},LR=new Set(["BUTTON","A","INPUT","SELECT","TEXTAREA","DETAILS","SUMMARY","LABEL"]),MR=new Set(["button","link","checkbox","radio","switch","menuitem","option","tab","textbox","combobox","spinbutton","slider"]);function Sv(e){for(let l=e;l&&l.nodeName!=="TR"&&l.nodeName!=="TH";l=l.parentElement){const r=l.nodeName;if(LR.has(r))return!0;const t=l.getAttribute("role");if(t&&MR.has(t)||l.hasAttribute("tabindex")&&l.getAttribute("tabindex")!=="-1")return!0}return!1}var PR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Ov=V.forwardRef((e,l)=>{var{className:r,selected:t=!1,shadeOnHover:i=!0,onClick:u,onRowClick:d}=e,m=PR(e,["className","selected","shadeOnHover","onClick","onRowClick"]);const{cn:f}=_e(),p=h=>{d&&(Sv(h.target)||d(h))};return _.createElement("tr",Object.assign({},m,{ref:l,className:f("navds-table__row",r,{"navds-table__row--selected":t,"navds-table__row--shade-on-hover":i}),onClick:xr(u,p),"data-interactive":!!d}))});var DR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const wR=V.forwardRef((e,l)=>{var{className:r,children:t,content:i,togglePlacement:u="left",defaultOpen:d=!1,open:m,onOpenChange:f,expansionDisabled:p=!1,expandOnRowClick:h=!1,colSpan:R=999,contentGutter:A,onClick:L}=e,w=DR(e,["className","children","content","togglePlacement","defaultOpen","open","onOpenChange","expansionDisabled","expandOnRowClick","colSpan","contentGutter","onClick"]);const{cn:k}=_e(),[S,D]=qs({defaultValue:d,value:m,onChange:f}),B=Ja("global"),N=fr(),J=$=>{D(G=>!G),$.stopPropagation()},M=$=>{h&&!p&&!Sv($.target)&&J($)};return _.createElement(_.Fragment,null,_.createElement(Ov,Object.assign({},w,{ref:l,className:k("navds-table__expandable-row",r,{"navds-table__expandable-row--open":S,"navds-table__expandable-row--expansion-disabled":p,"navds-table__expandable-row--clickable":h}),onClick:xr(L,M)}),u==="right"&&t,_.createElement(Tv,{className:k("navds-table__toggle-expand-cell",{"navds-table__toggle-expand-cell--open":S}),onClick:p?()=>null:J},!p&&_.createElement("button",{className:k("navds-table__toggle-expand-button"),type:"button","aria-controls":N,"aria-expanded":S,onClick:J},_.createElement(Ul,{className:k("navds-table__expandable-icon"),title:B(S?"showLess":"showMore")}))),u==="left"&&t),_.createElement("tr",{"data-state":S?"open":"closed",className:k("navds-table__expanded-row"),"aria-hidden":!S,id:N},_.createElement("td",{colSpan:R,className:k("navds-table__expanded-row-cell")},_.createElement(IR,{className:k("navds-table__expanded-row-collapse"),innerClassName:k(`navds-table__expanded-row-content navds-table__expanded-row-content--gutter-${A??u}`),height:S?"auto":0,duration:150,easing:"cubic-bezier(0.39,0.57,0.56,1)"},i))))});var BR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const FR=V.forwardRef((e,l)=>{var{className:r}=e,t=BR(e,["className"]);const{cn:i}=_e();return _.createElement("thead",Object.assign({},t,{ref:l,className:i("navds-table__header",r)}))});var KR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const re=V.forwardRef((e,l)=>{var{className:r,zebraStripes:t=!1,size:i="medium",onSortChange:u,sort:d,stickyHeader:m=!1}=e,f=KR(e,["className","zebraStripes","size","onSortChange","sort","stickyHeader"]);const{cn:p}=_e();return _.createElement(Rv.Provider,{value:{onSortChange:u,sort:d}},_.createElement("table",Object.assign({},f,{ref:l,className:p("navds-table",`navds-table--${i}`,r,{"navds-table--zebra-stripes":t,"navds-table--sticky-header":m})})))});re.Header=FR;re.Body=_R;re.Row=Ov;re.ColumnHeader=TR;re.HeaderCell=Av;re.DataCell=Tv;re.ExpandableRow=wR;var VR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const UR=V.forwardRef((e,l)=>{var{children:r,className:t,variant:i,size:u="medium",icon:d,"data-color":m}=e,f=VR(e,["children","className","variant","size","icon","data-color"]);const{cn:p}=_e(),h=i?.endsWith("-filled")&&"strong",R=i?.endsWith("-moderate")&&"moderate";return _.createElement(je,Object.assign({"data-color":m??xR(i),"data-variant":h||R||"outline"},f,{ref:l,as:"span",size:u==="medium"?"medium":"small",className:p("navds-tag",t,`navds-tag--${i}`,`navds-tag--${u}`)}),d&&_.createElement("span",{className:p("navds-tag__icon--left")},d),r)});function xR(e){switch(e){case"warning":case"warning-filled":case"warning-moderate":return"warning";case"error":case"error-filled":case"error-moderate":return"danger";case"info":case"info-filled":case"info-moderate":case"alt3":case"alt3-filled":case"alt3-moderate":return"info";case"success":case"success-filled":case"success-moderate":return"success";case"neutral":case"neutral-filled":case"neutral-moderate":return"neutral";case"alt1":case"alt1-filled":case"alt1-moderate":return"meta-purple";case"alt2":case"alt2-filled":case"alt2-moderate":return"meta-lime";default:return"neutral"}}const GR=(e,l)=>{const r=yt(e,"fieldset");return Object.assign(Object.assign({},r),{inputProps:{"aria-labelledby":e["aria-labelledby"]||Fr(l,{[r.inputDescriptionId]:e.description&&!Ll(e.description)})}})};var CR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const jR=V.forwardRef((e,l)=>{var r,t,i;const u=fr(),{inputProps:d,errorId:m,showErrorMsg:f,hasError:p,size:h,readOnly:R,inputDescriptionId:A}=GR(e,u),{cn:L}=_e(),w=V.useContext(Il),{children:k,className:S,errorPropagation:D=!0,legend:B,description:N,hideLegend:J,nativeReadOnly:M=!0}=e,$=CR(e,["children","className","errorPropagation","legend","description","hideLegend","nativeReadOnly"]);return _.createElement(Il.Provider,{value:{error:D?(r=e.error)!==null&&r!==void 0?r:w?.error:void 0,errorId:Fr({[m]:f,[(t=w?.errorId)!==null&&t!==void 0?t:""]:!!w?.error}),size:h,disabled:(i=e.disabled)!==null&&i!==void 0?i:!1,readOnly:R}},_.createElement("fieldset",Object.assign({},Mn($,["errorId","error","size","readOnly"]),d,{ref:l,className:L(S,"navds-fieldset",`navds-fieldset--${h}`,{"navds-fieldset--error":p,"navds-fieldset--readonly":R})}),_.createElement(sn,{id:u,size:h,as:"legend",className:L("navds-fieldset__legend",{"navds-sr-only":!!J})},R&&(M?_.createElement(Ev,null):_.createElement(yv,null)),B),!!N&&_.createElement(je,{className:L("navds-fieldset__description",{"navds-sr-only":!!J}),id:A,size:h??"medium",as:"div"},e.description),k,_.createElement("div",{id:m,"aria-relevant":"additions removals","aria-live":"polite",className:L("navds-fieldset__error")},f&&_.createElement(Vl,{size:h,showIcon:!0},e.error))))});var HR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const Nv=_.createContext(null),qR=V.forwardRef((e,l)=>{var r,t,{children:i,className:u,name:d,defaultValue:m,value:f,onChange:p=()=>{},required:h,readOnly:R}=e,A=HR(e,["children","className","name","defaultValue","value","onChange","required","readOnly"]);const{cn:L}=_e(),w=V.useContext(Il),k=fr();return _.createElement(jR,Object.assign({},A,{readOnly:R,ref:l,className:L(u,"navds-radio-group",`navds-radio-group--${(t=(r=A.size)!==null&&r!==void 0?r:w?.size)!==null&&t!==void 0?t:"medium"}`),nativeReadOnly:!1}),_.createElement(Nv.Provider,{value:{name:d??`radioGroupName-${k}`,defaultValue:m,value:f,onChange:p,required:h}},_.createElement("div",{className:L("navds-radio-buttons")},i)))});var YR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const JR=e=>{const l=V.useContext(Nv),r=yt(Mn(e,["description"]),"radio"),{inputProps:t,readOnly:i}=r,u=YR(r,["inputProps","readOnly"]);return l||console.warn("<Radio> must be used inside <RadioGroup>."),e?.required!==void 0&&console.warn("required is only supported on <RadioGroup>."),Object.assign(Object.assign({},u),{readOnly:i,inputProps:Object.assign(Object.assign({},t),{name:l?.name,defaultChecked:l?.defaultValue===void 0?void 0:l?.defaultValue===e.value,checked:l?.value===void 0?void 0:l?.value===e.value,onChange:d=>{var m,f;i||((m=e.onChange)===null||m===void 0||m.call(e,d),(f=l?.onChange)===null||f===void 0||f.call(l,e.value))},onClick:d=>{var m;if(i){d.preventDefault();return}(m=e?.onClick)===null||m===void 0||m.call(e,d)},required:l?.required,type:"radio"})})},rm=V.forwardRef((e,l)=>{const{cn:r}=_e(),{inputProps:t,size:i,hasError:u,readOnly:d}=JR(e),m=fr(),f=Kr(!1);return f?.isDarkside?_.createElement("div",{className:r(e.className,"navds-radio",`navds-radio--${i}`,{"navds-radio--error":u,"navds-radio--disabled":t.disabled,"navds-radio--readonly":d}),"data-color":u?"danger":e["data-color"]},_.createElement("input",Object.assign({},Mn(e,["children","size","description","readOnly"]),Mn(t,["aria-invalid","aria-describedby"]),{"aria-describedby":Fr(t["aria-describedby"],{[m]:e.description})||void 0,className:r("navds-radio__input"),ref:l})),_.createElement(je,{as:"label",htmlFor:t.id,className:r("navds-radio__label"),size:i},e.children),e.description&&_.createElement(je,{id:m,size:i,className:r("navds-form-field__subdescription navds-radio__description")},e.description)):_.createElement("div",{className:r(e.className,"navds-radio",`navds-radio--${i}`,{"navds-radio--error":u,"navds-radio--disabled":t.disabled,"navds-radio--readonly":d}),"data-color":u?"danger":e["data-color"]},_.createElement("input",Object.assign({},Mn(e,["children","size","description","readOnly"]),Mn(t,["aria-invalid"]),{className:r("navds-radio__input"),ref:l})),_.createElement("label",{htmlFor:t.id,className:r("navds-radio__label")},_.createElement("span",{className:r("navds-radio__content")},_.createElement(je,{as:"span",size:i},e.children),e.description&&_.createElement(je,{as:"span",size:i,className:r("navds-form-field__subdescription navds-radio__description")},e.description))))}),kv=V.createContext(null);var $R=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const bv=V.forwardRef((e,l)=>{var r,{className:t,children:i,disabled:u,onClick:d}=e,m=$R(e,["className","children","disabled","onClick"]);const{cn:f}=_e(),p=Ja("Search"),h=V.useContext(kv);if(h===null)return console.warn("<Search.Button> has to be wrapped in <Search />"),null;const{size:R,variant:A,handleClick:L}=h;return _.createElement(Et,Object.assign({type:"submit"},m,{ref:l,size:R,variant:A==="secondary"?"secondary":"primary",className:f("navds-search__button-search",t),disabled:(r=h?.disabled)!==null&&r!==void 0?r:u,onClick:xr(d,L),icon:_.createElement(hv,Object.assign({},i?{"aria-hidden":!0}:{title:p("search")}))}),i)});var WR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const ps=V.forwardRef((e,l)=>{const{inputProps:r,size:t="medium",inputDescriptionId:i,errorId:u,showErrorMsg:d,hasError:m}=yt(e,"searchfield"),{className:f,hideLabel:p=!0,label:h,description:R,value:A,clearButtonLabel:L,onClear:w,clearButton:k=!0,children:S,variant:D="primary",defaultValue:B,onChange:N,onSearchClick:J,htmlSize:M,"data-color":$}=e,G=WR(e,["className","hideLabel","label","description","value","clearButtonLabel","onClear","clearButton","children","variant","defaultValue","onChange","onSearchClick","htmlSize","data-color"]),{cn:x}=_e(),Z=V.useRef(null),le=mv(Z,l),[X,Y]=V.useState(B??""),H=he=>{A===void 0&&Y(he),N?.(he)},ae=he=>{var pe,Be;w?.(he),H(""),(Be=(pe=Z.current)===null||pe===void 0?void 0:pe.focus)===null||Be===void 0||Be.call(pe)},oe=()=>{J?.(`${A??X}`)},fe=k&&!r.disabled&&(A??X);return _.createElement("div",{onKeyDown:he=>{var pe;he.key==="Escape"&&(!((pe=Z.current)===null||pe===void 0)&&pe.value&&he.preventDefault(),ae({trigger:"Escape",event:he}))},className:x(f,"navds-form-field",`navds-form-field--${t}`,"navds-search",{"navds-search--error":m,"navds-search--disabled":r.disabled,"navds-search--with-size":M}),"data-color":$},_.createElement(sn,{htmlFor:r.id,size:t,className:x("navds-form-field__label",{"navds-sr-only":p})},h),!!R&&_.createElement(je,{className:x("navds-form-field__description",{"navds-sr-only":p}),id:i,size:t,as:"div"},R),_.createElement("div",{className:x("navds-search__wrapper")},_.createElement("div",{className:x("navds-search__wrapper-inner")},D==="simple"&&_.createElement(hv,{"aria-hidden":!0,className:x("navds-search__search-icon")}),_.createElement("input",Object.assign({ref:le},Mn(G,["error","errorId","size","readOnly"]),r,{value:A??X,onChange:he=>H(he.target.value),type:"search",className:x(f,"navds-search__input",`navds-search__input--${D}`,"navds-text-field__input","navds-body-short",`navds-body-short--${t}`)},M?{size:Number(M)}:{})),fe&&_.createElement(ZR,{handleClear:ae,size:t,clearButtonLabel:L})),_.createElement(kv.Provider,{value:{size:t,disabled:r.disabled,variant:D,handleClick:oe}},S||D!=="simple"&&_.createElement(bv,{"data-color":$}))),_.createElement("div",{className:x("navds-form-field__error"),id:u,"aria-relevant":"additions removals","aria-live":"polite"},d&&_.createElement(Vl,{size:t,showIcon:!0},e.error)))});function ZR({size:e,clearButtonLabel:l,handleClear:r}){const{cn:t}=_e(),i=Kr(!1),u=Ja("Search");return i?.isDarkside?_.createElement(Et,{className:t("navds-search__button-clear"),variant:"tertiary","data-color":"neutral",size:e==="medium"?"small":"xsmall",icon:_.createElement(hs,{"aria-hidden":!0}),title:l||u("clear"),onClick:d=>r({trigger:"Click",event:d}),type:"button"}):_.createElement("button",{type:"button",onClick:d=>r({trigger:"Click",event:d}),className:t("navds-search__button-clear")},_.createElement("span",{className:t("navds-sr-only")},l||u("clear")),_.createElement(hs,{"aria-hidden":!0}))}ps.Button=bv;var zR=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const tm=(e,l,r)=>{const{outerHeightStyle:t,overflow:i}=l;return r.current<20&&(t>0&&Math.abs((e.outerHeightStyle||0)-t)>1||e.overflow!==i)?(r.current+=1,l):e},lm=e=>(e?.ownerDocument||document).defaultView||window;function hl(e){return parseInt(e,10)||0}const XR=V.forwardRef((e,l)=>{var r,t,{className:i,onChange:u,maxRows:d,minRows:m=1,autoScrollbar:f,style:p,value:h}=e,R=zR(e,["className","onChange","maxRows","minRows","autoScrollbar","style","value"]);const{current:A}=V.useRef(h!=null),L=V.useRef(null),w=mv(L,l),k=V.useRef(null),S=V.useRef(0),[D,B]=V.useState({outerHeightStyle:0}),N=_.useCallback(()=>{const G=L.current,Z=lm(G).getComputedStyle(G);if(Z.width==="0px")return{outerHeightStyle:0};const le=k.current;le.style.width=Z.width,le.value=G.value||R.placeholder||"x",le.value.slice(-1)===`
+`&&(le.value+=" ");const X=Z.boxSizing,Y=hl(Z.paddingBottom)+hl(Z.paddingTop),H=hl(Z.borderBottomWidth)+hl(Z.borderTopWidth),ae=le.scrollHeight-Y;le.value="x";const oe=le.scrollHeight-Y;let fe=ae;m&&(fe=Math.max(Number(m)*oe,fe)),d&&(fe=Math.min(Number(d)*oe,fe)),fe=Math.max(fe,oe);const he=fe+(X==="border-box"?Y+H:0),pe=Math.abs(fe-ae)<=1;return{outerHeightStyle:he,overflow:pe}},[d,m,R.placeholder]),J=()=>{const G=N();im(G)||B(x=>tm(x,G,S))};$d(()=>{const G=()=>{const Y=N();im(Y)||c_.flushSync(()=>{B(H=>tm(H,Y,S))})},x=gv(()=>{var Y,H,ae;if(S.current=0,!((Y=L.current)===null||Y===void 0)&&Y.style.height||!((H=L.current)===null||H===void 0)&&H.style.width){((ae=L.current)===null||ae===void 0?void 0:ae.style.overflow)==="hidden"&&B(oe=>Object.assign(Object.assign({},oe),{overflow:!1}));return}G()},166,!0),Z=L.current,le=lm(Z);le.addEventListener("resize",x);let X;return typeof ResizeObserver<"u"&&(X=new ResizeObserver(x),X.observe(Z)),()=>{x.clear(),le.removeEventListener("resize",x),X&&X.disconnect()}},[N]),$d(()=>{J()}),V.useEffect(()=>{S.current=0},[h]);const M=G=>{S.current=0,A||J(),u&&u(G)},$=Object.assign({"--__ac-textarea-height":D.outerHeightStyle+"px","--__axc-textarea-height":D.outerHeightStyle+"px",overflow:D.overflow&&!f&&!(!((r=L.current)===null||r===void 0)&&r.style.height)&&!(!((t=L.current)===null||t===void 0)&&t.style.width)?"hidden":void 0},p);return _.createElement(_.Fragment,null,_.createElement("textarea",Object.assign({value:h,onChange:M,ref:w,rows:m,style:$},R,{className:i})),_.createElement("textarea",{"aria-hidden":!0,className:i,readOnly:!0,ref:k,tabIndex:-1,style:Object.assign({visibility:"hidden",position:"absolute",overflow:"hidden",height:0,top:0,left:0,transform:"translateZ(0)"},p)}))});function im(e){return e==null||Object.keys(e).length===0||e.outerHeightStyle===0&&!e.overflow}const QR=({maxLengthId:e,maxLength:l,currentLength:r,size:t,i18n:i})=>{const{cn:u}=_e(),d=Ja("Textarea",{charsLeft:i?.counterLeft?`{chars} ${i.counterLeft}`:void 0,charsTooMany:i?.counterTooMuch?`{chars} ${i.counterTooMuch}`:void 0}),m=l-r,[f,p]=V.useState(m);return V.useEffect(()=>{const h=gv(()=>{p(m)},2e3);return h(),()=>{h.clear()}},[m]),_.createElement(_.Fragment,null,_.createElement("span",{id:e,className:u("navds-sr-only")},d("maxLength",{maxLength:l})),m<20&&_.createElement("span",{role:"status",className:u("navds-textarea__sr-counter navds-sr-only")},sm(f,d)),_.createElement(je,{className:u("navds-textarea__counter",{"navds-textarea__counter--error":m<0}),size:t},sm(m,d)))},sm=(e,l)=>e<0?l("charsTooMany",{chars:Math.abs(e)}):l("charsLeft",{chars:e});var eT=function(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r};const nT=V.forwardRef((e,l)=>{var r,t,i;const{inputProps:u,errorId:d,showErrorMsg:m,hasError:f,size:p,inputDescriptionId:h}=yt(e,"textarea"),{label:R,className:A,description:L,maxLength:w,hideLabel:k=!1,resize:S,UNSAFE_autoScrollbar:D,i18n:B,readOnly:N}=e,J=eT(e,["label","className","description","maxLength","hideLabel","resize","UNSAFE_autoScrollbar","i18n","readOnly"]),{cn:M}=_e(),$=fr(),G=w!==void 0&&w>0,[x,Z]=V.useState((r=e?.defaultValue)!==null&&r!==void 0?r:""),le=()=>{let Y=J?.minRows?J?.minRows:3;return p==="small"&&(Y=J?.minRows?J?.minRows:2),Y},X=Fr(u["aria-describedby"],{[$??""]:G});return _.createElement("div",{className:M(A,"navds-form-field",`navds-form-field--${p}`,{"navds-form-field--disabled":!!u.disabled,"navds-form-field--readonly":N,"navds-textarea--readonly":N,"navds-textarea--error":f,"navds-textarea--autoscrollbar":D,[`navds-textarea--resize-${S===!0?"both":S}`]:S})},_.createElement(sn,{htmlFor:u.id,size:p,className:M("navds-form-field__label",{"navds-sr-only":k})},N&&_.createElement(Ev,null),R),!!L&&_.createElement(je,{className:M("navds-form-field__description",{"navds-sr-only":k}),id:h,size:p,as:"div"},L),_.createElement(XR,Object.assign({},Mn(J,["error","errorId","size"]),u,{onChange:xr(e.onChange,e.value===void 0?Y=>Z(Y.target.value):void 0),minRows:le(),autoScrollbar:D,ref:l,readOnly:N,className:M("navds-textarea__input","navds-body-short",`navds-body-short--${p??"medium"}`)},X?{"aria-describedby":X}:{})),G&&!N&&!u.disabled&&_.createElement(QR,{maxLengthId:$,maxLength:w,currentLength:(i=(t=e.value)===null||t===void 0?void 0:t.length)!==null&&i!==void 0?i:x.length,size:p,i18n:B}),_.createElement("div",{className:M("navds-form-field__error"),id:d,"aria-relevant":"additions removals","aria-live":"polite"},m&&_.createElement(Vl,{size:p,showIcon:!0},e.error)))}),wr={KVINNE:"K",MANN:"M"};function aT(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var um={exports:{}},ut={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var om;function rT(){if(om)return ut;om=1;var e=Symbol.for("react.transitional.element"),l=Symbol.for("react.fragment");function r(t,i,u){var d=null;if(u!==void 0&&(d=""+u),i.key!==void 0&&(d=""+i.key),"key"in i){u={};for(var m in i)m!=="key"&&(u[m]=i[m])}else u=i;return i=u.ref,{$$typeof:e,type:t,key:d,ref:i!==void 0?i:null,props:u}}return ut.Fragment=l,ut.jsx=r,ut.jsxs=r,ut}var dm;function tT(){return dm||(dm=1,um.exports=rT()),um.exports}var qe=tT();const lT=({children:e})=>{const l=V.Children.toArray(e);return l.length===0?null:qe.jsx(WA,{variant:"warning",size:"small",children:qe.jsx(ma,{gap:"space-8","data-testid":"aksjonspunkt-text-container",children:l.map(r=>qe.jsx(je,{size:"small",children:r},iT(r)))})})},iT=e=>{if(V.isValidElement(e))return e.key;if(typeof e=="string"||typeof e=="number")return`tekst-${e}`},_t={"HelpText.Aksjonspunkt":"Aksjonspunkt","HelpText.Aksjonspunkt.BehandletAksjonspunkt":"Behandlet aksjonspunkt: ","DataFetchPendingModal.LosningenJobberMedBehandlingen":"Løsningen jobber med behandlingen...","Behandling.EditedField":"Saksbehandler har endret feltets verdi","OkAvbrytModal.Ok":"OK","OkAvbrytModal.Avbryt":"Avbryt","OverstyringKnapp.Overstyring":"Overstyr","OverstyringKnapp.HarOverstyrt":"Har overstyrt","PeriodFieldArray.LeggTilPeriode":"Legg til periode","ExpandableTableRow.Apne":"Åpne rad","ExpandableTableRow.Lukke":"Lukk rad","Calendar.Day.0":"søndag","Calendar.Day.1":"mandag","Calendar.Day.2":"tirsdag","Calendar.Day.3":"onsdag","Calendar.Day.4":"torsdag","Calendar.Day.5":"fredag","Calendar.Day.6":"lørdag","Calendar.Day.Short.0":"søn","Calendar.Day.Short.1":"man","Calendar.Day.Short.2":"tir","Calendar.Day.Short.3":"ons","Calendar.Day.Short.4":"tor","Calendar.Day.Short.5":"fre","Calendar.Day.Short.6":"lør","Calendar.Month.0":"Januar","Calendar.Month.1":"Februar","Calendar.Month.2":"Mars","Calendar.Month.3":"April","Calendar.Month.4":"Mai","Calendar.Month.5":"Juni","Calendar.Month.6":"Juli","Calendar.Month.7":"August","Calendar.Month.8":"September","Calendar.Month.9":"Oktober","Calendar.Month.10":"November","Calendar.Month.11":"Desember","UtvidbarTekst.VisMer":"Vis mer","UtvidbarTekst.VisMindre":"Vis mindre","KopierbarTekst.Kopier":"Klikk for å kopiere","KopierbarTekst.Kopiert":"Kopiert!"},mm=va(_t),sT=({onClick:e=()=>{},erOverstyrt:l=!1})=>{const[r,t]=V.useState(l),i=()=>{r||(t(!0),e(!0))};return V.useEffect(()=>{t(l)},[l]),qe.jsx(Et,{variant:r?"tertiary-neutral":"tertiary","data-testid":"overstyringsknapp",type:"button",size:"small",onClick:i,"aria-disabled":l,disabled:l,icon:r?qe.jsx(j_,{"aria-hidden":!0,color:"var(--ax-neutral-400)",height:25,width:25,title:mm.formatMessage({id:"OverstyringKnapp.HarOverstyrt"})}):qe.jsx(G_,{"aria-hidden":!0,color:"var(--ax-accent-500)",height:25,width:25,title:mm.formatMessage({id:"OverstyringKnapp.Overstyring"})})})};var vm={exports:{}};/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/var cm;function uT(){return cm||(cm=1,(function(e){(function(){var l={}.hasOwnProperty;function r(){for(var u="",d=0;d<arguments.length;d++){var m=arguments[d];m&&(u=i(u,t.call(this,m)))}return u}function t(u){if(typeof u=="string"||typeof u=="number")return this&&this[u]||u;if(typeof u!="object")return"";if(Array.isArray(u))return r.apply(this,u);if(u.toString!==Object.prototype.toString&&!u.toString.toString().includes("[native code]"))return u.toString();var d="";for(var m in u)l.call(u,m)&&u[m]&&(d=i(d,this&&this[m]||m));return d}function i(u,d){return d?u?u+" "+d:u+d:u}e.exports?(r.default=r,e.exports=r):window.classNames=r})()})(vm)),vm.exports}var oT=uT();const $s=aT(oT),dT="_borderbox_1a0x6_1",mT="_error_1a0x6_5",vT="_warning_1a0x6_8",cT={borderbox:dT,error:mT,warning:vT},fT=$s.bind(cT),gT=({error:e=!1,className:l,children:r})=>qe.jsx(mr.New,{padding:"4",className:fT("borderbox",{error:e},l),children:r}),hT="_aksjonspunkt_11wjs_1",pT="_erAksjonspunktApent_11wjs_4",ET="_erIkkeGodkjentAvBeslutter_11wjs_8",yT={aksjonspunkt:hT,erAksjonspunktApent:pT,erIkkeGodkjentAvBeslutter:ET};$s.bind(yT);va(_t);const _T=({dateStringFom:e,dateStringTom:l,showTodayString:r=!1})=>qe.jsx(qe.Fragment,{children:a_(e,l,{showTodayString:r})});va(_t);const AT=({withoutBorder:e,error:l,children:r,className:t})=>e?r:qe.jsx(gT,{error:l,className:t,children:r}),Ws=({merknaderFraBeslutter:e,title:l,children:r,withoutBorder:t=!1,className:i=""})=>{const u=!!(e&&e.notAccepted);return qe.jsxs(AT,{withoutBorder:t&&!u,error:u,className:i,children:[l&&qe.jsxs(qe.Fragment,{children:[qe.jsx(sn,{size:"small",children:l}),qe.jsx("div",{style:{marginBottom:"20px"}})]}),r]})},RT="_divider_1jpov_1",TT="_dividerParagraf_1jpov_8",ST="_leftPanel_1jpov_11",OT="_rightPanel_1jpov_14",Es={divider:RT,dividerParagraf:TT,leftPanel:ST,rightPanel:OT},NT=$s.bind(Es),fm=({spaceUnder:e=!1,spaceAbove:l=!1,leftPanel:r=!1,rightPanel:t=!1,dividerParagraf:i=!1,className:u})=>qe.jsxs(qe.Fragment,{children:[l&&qe.jsx("div",{style:{marginBottom:"32px"}}),qe.jsx("div",{className:NT(u,{leftPanel:r,rightPanel:t}),children:qe.jsx("div",{className:i?Es.dividerParagraf:Es.divider})}),e&&qe.jsx("div",{style:{marginBottom:"32px"}})]}),Iv=()=>qe.jsx("span",{"data-testid":"editedIcon",children:qe.jsx(J_,{title:"Saksbehandler har endret feltets verdi",height:20,width:20,color:"var(--ax-text-neutral)"})});va(_t);va(_t);const Lv=({omsorgOgRett:e})=>{if(!e.registerdata)return null;const l=e.registerdata.harAnnenpartUføretrygd,r=e.registerdata.harAnnenpartForeldrepenger,t=e.registerdata.harAnnenpartEngangsstønad;return y.jsxs(re,{children:[y.jsx(re.Header,{children:y.jsxs(re.Row,{children:[y.jsx(re.HeaderCell,{children:y.jsx(ce,{id:"OpplysningsKort.AnnenPartTittel"})}),y.jsx(re.HeaderCell,{})]})}),y.jsxs(re.Body,{children:[l!=="IKKE_RELEVANT"&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"AnnenPartsYtelser.HarAnnenPartUføretrygd"})})}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"AnnenPartsYtelser.HarAnnenPartUføretrygd.Svar",values:{uføretrygd:l}})})})]})}),r!=="IKKE_RELEVANT"&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"AnnenPartsYtelser.Foreldrepenger"})})}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"AnnenPartsYtelser.Foreldrepenger.Svar",values:{foreldrepenger:r}})})})]})}),t!=="IKKE_RELEVANT"&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"AnnenPartsYtelser.Engangsstønad"})})}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"AnnenPartsYtelser.Engangsstønad.Svar",values:{engangsstønad:t}})})})]})})]})]})};Lv.__docgenInfo={description:"",methods:[],displayName:"AnnenPartsYtelser",props:{omsorgOgRett:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
+  registerdata?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData;
+  relasjonsRolleType: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
+  rettighetstype?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  søknad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
+}`,signature:{properties:[{key:"manuellBehandlingResultat",value:{name:"signature",type:"object",raw:`{
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"registerdata",value:{name:"signature",type:"object",raw:`{
+  harAnnenpartEngangsstønad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartForeldrepenger: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harAnnenpartEngangsstønad",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartForeldrepenger",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"relasjonsRolleType",value:{name:"union",raw:`| 'EKTE'
+| 'BARN'
+| 'FARA'
+| 'MORA'
+| 'REPA'
+| 'MMOR'
+| 'ANPA'
+| '-'`,elements:[{name:"literal",value:"'EKTE'"},{name:"literal",value:"'BARN'"},{name:"literal",value:"'FARA'"},{name:"literal",value:"'MORA'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'MMOR'"},{name:"literal",value:"'ANPA'"},{name:"literal",value:"'-'"}],required:!0}},{key:"rettighetstype",value:{name:"union",raw:`| 'ALENEOMSORG'
+| 'BEGGE_RETT'
+| 'BEGGE_RETT_EØS'
+| 'BARE_MOR_RETT'
+| 'BARE_FAR_RETT'
+| 'BARE_FAR_RETT_MOR_UFØR'`,elements:[{name:"literal",value:"'ALENEOMSORG'"},{name:"literal",value:"'BEGGE_RETT'"},{name:"literal",value:"'BEGGE_RETT_EØS'"},{name:"literal",value:"'BARE_MOR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT_MOR_UFØR'"}],required:!1}},{key:"søknad",value:{name:"signature",type:"object",raw:`{
+  annenpartBostedsland?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  annenpartIdent?: string;
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartBostedsland",value:{name:"union",raw:`| '???'
+| 'ABW'
+| 'AFG'
+| 'AGO'
+| 'AIA'
+| 'ALA'
+| 'ALB'
+| 'AND'
+| 'ANT'
+| 'ARE'
+| 'ARG'
+| 'ARM'
+| 'ASM'
+| 'ATG'
+| 'AUS'
+| 'AUT'
+| 'AZE'
+| 'BDI'
+| 'BEL'
+| 'BEN'
+| 'BES'
+| 'BFA'
+| 'BGD'
+| 'BGR'
+| 'BHR'
+| 'BHS'
+| 'BIH'
+| 'BLM'
+| 'BLR'
+| 'BLZ'
+| 'BMU'
+| 'BOL'
+| 'BRA'
+| 'BRB'
+| 'BRN'
+| 'BTN'
+| 'BVT'
+| 'BWA'
+| 'CAF'
+| 'CAN'
+| 'CCK'
+| 'CHE'
+| 'CHL'
+| 'CHN'
+| 'CIV'
+| 'CMR'
+| 'COD'
+| 'COG'
+| 'COK'
+| 'COL'
+| 'COM'
+| 'CPV'
+| 'CRI'
+| 'CSK'
+| 'CUB'
+| 'CUW'
+| 'CXR'
+| 'CYM'
+| 'CYP'
+| 'CZE'
+| 'DDR'
+| 'DEU'
+| 'DJI'
+| 'DMA'
+| 'DNK'
+| 'DOM'
+| 'DZA'
+| 'ECU'
+| 'EGY'
+| 'ERI'
+| 'ESH'
+| 'ESP'
+| 'EST'
+| 'ETH'
+| 'FIN'
+| 'FJI'
+| 'FLK'
+| 'FRA'
+| 'FRO'
+| 'FSM'
+| 'GAB'
+| 'GBR'
+| 'GEO'
+| 'GGY'
+| 'GHA'
+| 'GIB'
+| 'GIN'
+| 'GLP'
+| 'GMB'
+| 'GNB'
+| 'GNQ'
+| 'GRC'
+| 'GRD'
+| 'GRL'
+| 'GTM'
+| 'GUF'
+| 'GUM'
+| 'GUY'
+| 'HKG'
+| 'HMD'
+| 'HND'
+| 'HRV'
+| 'HTI'
+| 'HUN'
+| 'IDN'
+| 'IMN'
+| 'IND'
+| 'IOT'
+| 'IRL'
+| 'IRN'
+| 'IRQ'
+| 'ISL'
+| 'ISR'
+| 'ITA'
+| 'JAM'
+| 'JEY'
+| 'JOR'
+| 'JPN'
+| 'KAZ'
+| 'KEN'
+| 'KGZ'
+| 'KHM'
+| 'KIR'
+| 'KNA'
+| 'KOR'
+| 'KWT'
+| 'LAO'
+| 'LBN'
+| 'LBR'
+| 'LBY'
+| 'LCA'
+| 'LIE'
+| 'LKA'
+| 'LSO'
+| 'LTU'
+| 'LUX'
+| 'LVA'
+| 'MAC'
+| 'MAF'
+| 'MAR'
+| 'MCO'
+| 'MDA'
+| 'MDG'
+| 'MDV'
+| 'MEX'
+| 'MHL'
+| 'MKD'
+| 'MLI'
+| 'MLT'
+| 'MMR'
+| 'MNE'
+| 'MNG'
+| 'MNP'
+| 'MOZ'
+| 'MRT'
+| 'MSR'
+| 'MTQ'
+| 'MUS'
+| 'MWI'
+| 'MYS'
+| 'MYT'
+| 'NAM'
+| 'NCL'
+| 'NER'
+| 'NFK'
+| 'NGA'
+| 'NIC'
+| 'NIU'
+| 'NLD'
+| 'NOR'
+| 'NPL'
+| 'NRU'
+| 'NZL'
+| 'OMN'
+| 'PAK'
+| 'PAN'
+| 'PCN'
+| 'PER'
+| 'PHL'
+| 'PLW'
+| 'PNG'
+| 'POL'
+| 'PRI'
+| 'PRK'
+| 'PRT'
+| 'PRY'
+| 'PSE'
+| 'PYF'
+| 'QAT'
+| 'REU'
+| 'ROU'
+| 'RUS'
+| 'RWA'
+| 'SAU'
+| 'SCG'
+| 'SDN'
+| 'SEN'
+| 'SGP'
+| 'SGS'
+| 'SHN'
+| 'SJM'
+| 'SLB'
+| 'SLE'
+| 'SLV'
+| 'SMR'
+| 'SOM'
+| 'SPM'
+| 'SRB'
+| 'SSD'
+| 'STP'
+| 'SUN'
+| 'SUR'
+| 'SVK'
+| 'SVN'
+| 'SWE'
+| 'SWZ'
+| 'SXM'
+| 'SYC'
+| 'SYR'
+| 'TCA'
+| 'TCD'
+| 'TGO'
+| 'THA'
+| 'TJK'
+| 'TKL'
+| 'TKM'
+| 'TLS'
+| 'TON'
+| 'TTO'
+| 'TUN'
+| 'TUR'
+| 'TUV'
+| 'TWN'
+| 'TZA'
+| 'UGA'
+| 'UKR'
+| 'UMI'
+| 'URY'
+| 'USA'
+| 'UZB'
+| 'VAT'
+| 'VCT'
+| 'VEN'
+| 'VGB'
+| 'VIR'
+| 'VNM'
+| 'VUT'
+| 'WLF'
+| 'WSM'
+| 'XUK'
+| 'XXK'
+| 'XXX'
+| 'YEM'
+| 'YUG'
+| 'ZAF'
+| 'ZMB'
+| 'ZWE'
+| '-'`,elements:[{name:"literal",value:"'???'"},{name:"literal",value:"'ABW'"},{name:"literal",value:"'AFG'"},{name:"literal",value:"'AGO'"},{name:"literal",value:"'AIA'"},{name:"literal",value:"'ALA'"},{name:"literal",value:"'ALB'"},{name:"literal",value:"'AND'"},{name:"literal",value:"'ANT'"},{name:"literal",value:"'ARE'"},{name:"literal",value:"'ARG'"},{name:"literal",value:"'ARM'"},{name:"literal",value:"'ASM'"},{name:"literal",value:"'ATG'"},{name:"literal",value:"'AUS'"},{name:"literal",value:"'AUT'"},{name:"literal",value:"'AZE'"},{name:"literal",value:"'BDI'"},{name:"literal",value:"'BEL'"},{name:"literal",value:"'BEN'"},{name:"literal",value:"'BES'"},{name:"literal",value:"'BFA'"},{name:"literal",value:"'BGD'"},{name:"literal",value:"'BGR'"},{name:"literal",value:"'BHR'"},{name:"literal",value:"'BHS'"},{name:"literal",value:"'BIH'"},{name:"literal",value:"'BLM'"},{name:"literal",value:"'BLR'"},{name:"literal",value:"'BLZ'"},{name:"literal",value:"'BMU'"},{name:"literal",value:"'BOL'"},{name:"literal",value:"'BRA'"},{name:"literal",value:"'BRB'"},{name:"literal",value:"'BRN'"},{name:"literal",value:"'BTN'"},{name:"literal",value:"'BVT'"},{name:"literal",value:"'BWA'"},{name:"literal",value:"'CAF'"},{name:"literal",value:"'CAN'"},{name:"literal",value:"'CCK'"},{name:"literal",value:"'CHE'"},{name:"literal",value:"'CHL'"},{name:"literal",value:"'CHN'"},{name:"literal",value:"'CIV'"},{name:"literal",value:"'CMR'"},{name:"literal",value:"'COD'"},{name:"literal",value:"'COG'"},{name:"literal",value:"'COK'"},{name:"literal",value:"'COL'"},{name:"literal",value:"'COM'"},{name:"literal",value:"'CPV'"},{name:"literal",value:"'CRI'"},{name:"literal",value:"'CSK'"},{name:"literal",value:"'CUB'"},{name:"literal",value:"'CUW'"},{name:"literal",value:"'CXR'"},{name:"literal",value:"'CYM'"},{name:"literal",value:"'CYP'"},{name:"literal",value:"'CZE'"},{name:"literal",value:"'DDR'"},{name:"literal",value:"'DEU'"},{name:"literal",value:"'DJI'"},{name:"literal",value:"'DMA'"},{name:"literal",value:"'DNK'"},{name:"literal",value:"'DOM'"},{name:"literal",value:"'DZA'"},{name:"literal",value:"'ECU'"},{name:"literal",value:"'EGY'"},{name:"literal",value:"'ERI'"},{name:"literal",value:"'ESH'"},{name:"literal",value:"'ESP'"},{name:"literal",value:"'EST'"},{name:"literal",value:"'ETH'"},{name:"literal",value:"'FIN'"},{name:"literal",value:"'FJI'"},{name:"literal",value:"'FLK'"},{name:"literal",value:"'FRA'"},{name:"literal",value:"'FRO'"},{name:"literal",value:"'FSM'"},{name:"literal",value:"'GAB'"},{name:"literal",value:"'GBR'"},{name:"literal",value:"'GEO'"},{name:"literal",value:"'GGY'"},{name:"literal",value:"'GHA'"},{name:"literal",value:"'GIB'"},{name:"literal",value:"'GIN'"},{name:"literal",value:"'GLP'"},{name:"literal",value:"'GMB'"},{name:"literal",value:"'GNB'"},{name:"literal",value:"'GNQ'"},{name:"literal",value:"'GRC'"},{name:"literal",value:"'GRD'"},{name:"literal",value:"'GRL'"},{name:"literal",value:"'GTM'"},{name:"literal",value:"'GUF'"},{name:"literal",value:"'GUM'"},{name:"literal",value:"'GUY'"},{name:"literal",value:"'HKG'"},{name:"literal",value:"'HMD'"},{name:"literal",value:"'HND'"},{name:"literal",value:"'HRV'"},{name:"literal",value:"'HTI'"},{name:"literal",value:"'HUN'"},{name:"literal",value:"'IDN'"},{name:"literal",value:"'IMN'"},{name:"literal",value:"'IND'"},{name:"literal",value:"'IOT'"},{name:"literal",value:"'IRL'"},{name:"literal",value:"'IRN'"},{name:"literal",value:"'IRQ'"},{name:"literal",value:"'ISL'"},{name:"literal",value:"'ISR'"},{name:"literal",value:"'ITA'"},{name:"literal",value:"'JAM'"},{name:"literal",value:"'JEY'"},{name:"literal",value:"'JOR'"},{name:"literal",value:"'JPN'"},{name:"literal",value:"'KAZ'"},{name:"literal",value:"'KEN'"},{name:"literal",value:"'KGZ'"},{name:"literal",value:"'KHM'"},{name:"literal",value:"'KIR'"},{name:"literal",value:"'KNA'"},{name:"literal",value:"'KOR'"},{name:"literal",value:"'KWT'"},{name:"literal",value:"'LAO'"},{name:"literal",value:"'LBN'"},{name:"literal",value:"'LBR'"},{name:"literal",value:"'LBY'"},{name:"literal",value:"'LCA'"},{name:"literal",value:"'LIE'"},{name:"literal",value:"'LKA'"},{name:"literal",value:"'LSO'"},{name:"literal",value:"'LTU'"},{name:"literal",value:"'LUX'"},{name:"literal",value:"'LVA'"},{name:"literal",value:"'MAC'"},{name:"literal",value:"'MAF'"},{name:"literal",value:"'MAR'"},{name:"literal",value:"'MCO'"},{name:"literal",value:"'MDA'"},{name:"literal",value:"'MDG'"},{name:"literal",value:"'MDV'"},{name:"literal",value:"'MEX'"},{name:"literal",value:"'MHL'"},{name:"literal",value:"'MKD'"},{name:"literal",value:"'MLI'"},{name:"literal",value:"'MLT'"},{name:"literal",value:"'MMR'"},{name:"literal",value:"'MNE'"},{name:"literal",value:"'MNG'"},{name:"literal",value:"'MNP'"},{name:"literal",value:"'MOZ'"},{name:"literal",value:"'MRT'"},{name:"literal",value:"'MSR'"},{name:"literal",value:"'MTQ'"},{name:"literal",value:"'MUS'"},{name:"literal",value:"'MWI'"},{name:"literal",value:"'MYS'"},{name:"literal",value:"'MYT'"},{name:"literal",value:"'NAM'"},{name:"literal",value:"'NCL'"},{name:"literal",value:"'NER'"},{name:"literal",value:"'NFK'"},{name:"literal",value:"'NGA'"},{name:"literal",value:"'NIC'"},{name:"literal",value:"'NIU'"},{name:"literal",value:"'NLD'"},{name:"literal",value:"'NOR'"},{name:"literal",value:"'NPL'"},{name:"literal",value:"'NRU'"},{name:"literal",value:"'NZL'"},{name:"literal",value:"'OMN'"},{name:"literal",value:"'PAK'"},{name:"literal",value:"'PAN'"},{name:"literal",value:"'PCN'"},{name:"literal",value:"'PER'"},{name:"literal",value:"'PHL'"},{name:"literal",value:"'PLW'"},{name:"literal",value:"'PNG'"},{name:"literal",value:"'POL'"},{name:"literal",value:"'PRI'"},{name:"literal",value:"'PRK'"},{name:"literal",value:"'PRT'"},{name:"literal",value:"'PRY'"},{name:"literal",value:"'PSE'"},{name:"literal",value:"'PYF'"},{name:"literal",value:"'QAT'"},{name:"literal",value:"'REU'"},{name:"literal",value:"'ROU'"},{name:"literal",value:"'RUS'"},{name:"literal",value:"'RWA'"},{name:"literal",value:"'SAU'"},{name:"literal",value:"'SCG'"},{name:"literal",value:"'SDN'"},{name:"literal",value:"'SEN'"},{name:"literal",value:"'SGP'"},{name:"literal",value:"'SGS'"},{name:"literal",value:"'SHN'"},{name:"literal",value:"'SJM'"},{name:"literal",value:"'SLB'"},{name:"literal",value:"'SLE'"},{name:"literal",value:"'SLV'"},{name:"literal",value:"'SMR'"},{name:"literal",value:"'SOM'"},{name:"literal",value:"'SPM'"},{name:"literal",value:"'SRB'"},{name:"literal",value:"'SSD'"},{name:"literal",value:"'STP'"},{name:"literal",value:"'SUN'"},{name:"literal",value:"'SUR'"},{name:"literal",value:"'SVK'"},{name:"literal",value:"'SVN'"},{name:"literal",value:"'SWE'"},{name:"literal",value:"'SWZ'"},{name:"literal",value:"'SXM'"},{name:"literal",value:"'SYC'"},{name:"literal",value:"'SYR'"},{name:"literal",value:"'TCA'"},{name:"literal",value:"'TCD'"},{name:"literal",value:"'TGO'"},{name:"literal",value:"'THA'"},{name:"literal",value:"'TJK'"},{name:"literal",value:"'TKL'"},{name:"literal",value:"'TKM'"},{name:"literal",value:"'TLS'"},{name:"literal",value:"'TON'"},{name:"literal",value:"'TTO'"},{name:"literal",value:"'TUN'"},{name:"literal",value:"'TUR'"},{name:"literal",value:"'TUV'"},{name:"literal",value:"'TWN'"},{name:"literal",value:"'TZA'"},{name:"literal",value:"'UGA'"},{name:"literal",value:"'UKR'"},{name:"literal",value:"'UMI'"},{name:"literal",value:"'URY'"},{name:"literal",value:"'USA'"},{name:"literal",value:"'UZB'"},{name:"literal",value:"'VAT'"},{name:"literal",value:"'VCT'"},{name:"literal",value:"'VEN'"},{name:"literal",value:"'VGB'"},{name:"literal",value:"'VIR'"},{name:"literal",value:"'VNM'"},{name:"literal",value:"'VUT'"},{name:"literal",value:"'WLF'"},{name:"literal",value:"'WSM'"},{name:"literal",value:"'XUK'"},{name:"literal",value:"'XXK'"},{name:"literal",value:"'XXX'"},{name:"literal",value:"'YEM'"},{name:"literal",value:"'YUG'"},{name:"literal",value:"'ZAF'"},{name:"literal",value:"'ZMB'"},{name:"literal",value:"'ZWE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"annenpartIdent",value:{name:"string",required:!1}},{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!0}}]}},description:""}}};var At=e=>e.type==="checkbox",or=e=>e instanceof Date,Rn=e=>e==null;const Mv=e=>typeof e=="object";var ze=e=>!Rn(e)&&!Array.isArray(e)&&Mv(e)&&!or(e),Pv=e=>ze(e)&&e.target?At(e.target)?e.target.checked:e.target.value:e,kT=e=>e.substring(0,e.search(/\.\d+(\.|$)/))||e,Dv=(e,l)=>e.has(kT(l)),bT=e=>{const l=e.constructor&&e.constructor.prototype;return ze(l)&&l.hasOwnProperty("isPrototypeOf")},Zs=typeof window<"u"&&typeof window.HTMLElement<"u"&&typeof document<"u";function an(e){let l;const r=Array.isArray(e),t=typeof FileList<"u"?e instanceof FileList:!1;if(e instanceof Date)l=new Date(e);else if(!(Zs&&(e instanceof Blob||t))&&(r||ze(e)))if(l=r?[]:Object.create(Object.getPrototypeOf(e)),!r&&!bT(e))l=e;else for(const i in e)e.hasOwnProperty(i)&&(l[i]=an(e[i]));else return e;return l}var Gl=e=>/^\w*$/.test(e),We=e=>e===void 0,zs=e=>Array.isArray(e)?e.filter(Boolean):[],Xs=e=>zs(e.replace(/["|']|\]/g,"").split(/\.|\[/)),ne=(e,l,r)=>{if(!l||!ze(e))return r;const t=(Gl(l)?[l]:Xs(l)).reduce((i,u)=>Rn(i)?i:i[u],e);return We(t)||t===e?We(e[l])?r:e[l]:t},Un=e=>typeof e=="boolean",Ve=(e,l,r)=>{let t=-1;const i=Gl(l)?[l]:Xs(l),u=i.length,d=u-1;for(;++t<u;){const m=i[t];let f=r;if(t!==d){const p=e[m];f=ze(p)||Array.isArray(p)?p:isNaN(+i[t+1])?{}:[]}if(m==="__proto__"||m==="constructor"||m==="prototype")return;e[m]=f,e=e[m]}};const Ml={BLUR:"blur",FOCUS_OUT:"focusout",CHANGE:"change"},oa={onBlur:"onBlur",onChange:"onChange",onSubmit:"onSubmit",onTouched:"onTouched",all:"all"},wa={max:"max",min:"min",maxLength:"maxLength",minLength:"minLength",pattern:"pattern",required:"required",validate:"validate"},Qs=_.createContext(null);Qs.displayName="HookFormContext";const $a=()=>_.useContext(Qs),IT=e=>{const{children:l,...r}=e;return _.createElement(Qs.Provider,{value:r},l)};var wv=(e,l,r,t=!0)=>{const i={defaultValues:l._defaultValues};for(const u in e)Object.defineProperty(i,u,{get:()=>{const d=u;return l._proxyFormState[d]!==oa.all&&(l._proxyFormState[d]=!t||oa.all),r&&(r[d]=!0),e[d]}});return i};const eu=typeof window<"u"?_.useLayoutEffect:_.useEffect;function LT(e){const l=$a(),{control:r=l.control,disabled:t,name:i,exact:u}=e||{},[d,m]=_.useState(r._formState),f=_.useRef({isDirty:!1,isLoading:!1,dirtyFields:!1,touchedFields:!1,validatingFields:!1,isValidating:!1,isValid:!1,errors:!1});return eu(()=>r._subscribe({name:i,formState:f.current,exact:u,callback:p=>{!t&&m({...r._formState,...p})}}),[i,t,u]),_.useEffect(()=>{f.current.isValid&&r._setValid(!0)},[r]),_.useMemo(()=>wv(d,r,f.current,!1),[d,r])}var xn=e=>typeof e=="string",Bv=(e,l,r,t,i)=>xn(e)?(t&&l.watch.add(e),ne(r,e,i)):Array.isArray(e)?e.map(u=>(t&&l.watch.add(u),ne(r,u))):(t&&(l.watchAll=!0),r),ys=e=>Rn(e)||!Mv(e);function Fa(e,l,r=new WeakSet){if(ys(e)||ys(l))return e===l;if(or(e)&&or(l))return e.getTime()===l.getTime();const t=Object.keys(e),i=Object.keys(l);if(t.length!==i.length)return!1;if(r.has(e)||r.has(l))return!0;r.add(e),r.add(l);for(const u of t){const d=e[u];if(!i.includes(u))return!1;if(u!=="ref"){const m=l[u];if(or(d)&&or(m)||ze(d)&&ze(m)||Array.isArray(d)&&Array.isArray(m)?!Fa(d,m,r):d!==m)return!1}}return!0}function MT(e){const l=$a(),{control:r=l.control,name:t,defaultValue:i,disabled:u,exact:d,compute:m}=e||{},f=_.useRef(i),p=_.useRef(m),h=_.useRef(void 0);p.current=m;const R=_.useMemo(()=>r._getWatch(t,f.current),[r,t]),[A,L]=_.useState(p.current?p.current(R):R);return eu(()=>r._subscribe({name:t,formState:{values:!0},exact:d,callback:w=>{if(!u){const k=Bv(t,r._names,w.values||r._formValues,!1,f.current);if(p.current){const S=p.current(k);Fa(S,h.current)||(L(S),h.current=S)}else L(k)}}}),[r,u,t,d]),_.useEffect(()=>r._removeUnmounted()),A}function nu(e){const l=$a(),{name:r,disabled:t,control:i=l.control,shouldUnregister:u,defaultValue:d}=e,m=Dv(i._names.array,r),f=_.useMemo(()=>ne(i._formValues,r,ne(i._defaultValues,r,d)),[i,r,d]),p=MT({control:i,name:r,defaultValue:f,exact:!0}),h=LT({control:i,name:r,exact:!0}),R=_.useRef(e),A=_.useRef(void 0),L=_.useRef(i.register(r,{...e.rules,value:p,...Un(e.disabled)?{disabled:e.disabled}:{}}));R.current=e;const w=_.useMemo(()=>Object.defineProperties({},{invalid:{enumerable:!0,get:()=>!!ne(h.errors,r)},isDirty:{enumerable:!0,get:()=>!!ne(h.dirtyFields,r)},isTouched:{enumerable:!0,get:()=>!!ne(h.touchedFields,r)},isValidating:{enumerable:!0,get:()=>!!ne(h.validatingFields,r)},error:{enumerable:!0,get:()=>ne(h.errors,r)}}),[h,r]),k=_.useCallback(N=>L.current.onChange({target:{value:Pv(N),name:r},type:Ml.CHANGE}),[r]),S=_.useCallback(()=>L.current.onBlur({target:{value:ne(i._formValues,r),name:r},type:Ml.BLUR}),[r,i._formValues]),D=_.useCallback(N=>{const J=ne(i._fields,r);J&&N&&(J._f.ref={focus:()=>N.focus&&N.focus(),select:()=>N.select&&N.select(),setCustomValidity:M=>N.setCustomValidity(M),reportValidity:()=>N.reportValidity()})},[i._fields,r]),B=_.useMemo(()=>({name:r,value:p,...Un(t)||h.disabled?{disabled:h.disabled||t}:{},onChange:k,onBlur:S,ref:D}),[r,t,h.disabled,k,S,D,p]);return _.useEffect(()=>{const N=i._options.shouldUnregister||u,J=A.current;J&&J!==r&&!m&&i.unregister(J),i.register(r,{...R.current.rules,...Un(R.current.disabled)?{disabled:R.current.disabled}:{}});const M=($,G)=>{const x=ne(i._fields,$);x&&x._f&&(x._f.mount=G)};if(M(r,!0),N){const $=an(ne(i._options.defaultValues,r));Ve(i._defaultValues,r,$),We(ne(i._formValues,r))&&Ve(i._formValues,r,$)}return!m&&i.register(r),A.current=r,()=>{(m?N&&!i._state.action:N)?i.unregister(r):M(r,!1)}},[r,i,m,u]),_.useEffect(()=>{i._setDisabledField({disabled:t,name:r})},[t,r,i]),_.useMemo(()=>({field:B,formState:h,fieldState:w}),[B,h,w])}var PT=(e,l,r,t,i)=>l?{...r[e],types:{...r[e]&&r[e].types?r[e].types:{},[t]:i||!0}}:{},gt=e=>Array.isArray(e)?e:[e],gm=()=>{let e=[];return{get observers(){return e},next:i=>{for(const u of e)u.next&&u.next(i)},subscribe:i=>(e.push(i),{unsubscribe:()=>{e=e.filter(u=>u!==i)}}),unsubscribe:()=>{e=[]}}};function Fv(e,l){const r={};for(const t in e)if(e.hasOwnProperty(t)){const i=e[t],u=l[t];if(i&&ze(i)&&u){const d=Fv(i,u);ze(d)&&(r[t]=d)}else e[t]&&(r[t]=u)}return r}var Ln=e=>ze(e)&&!Object.keys(e).length,au=e=>e.type==="file",da=e=>typeof e=="function",Pl=e=>{if(!Zs)return!1;const l=e?e.ownerDocument:0;return e instanceof(l&&l.defaultView?l.defaultView.HTMLElement:HTMLElement)},Kv=e=>e.type==="select-multiple",ru=e=>e.type==="radio",DT=e=>ru(e)||At(e),is=e=>Pl(e)&&e.isConnected;function wT(e,l){const r=l.slice(0,-1).length;let t=0;for(;t<r;)e=We(e)?t++:e[l[t++]];return e}function BT(e){for(const l in e)if(e.hasOwnProperty(l)&&!We(e[l]))return!1;return!0}function Ze(e,l){const r=Array.isArray(l)?l:Gl(l)?[l]:Xs(l),t=r.length===1?e:wT(e,r),i=r.length-1,u=r[i];return t&&delete t[u],i!==0&&(ze(t)&&Ln(t)||Array.isArray(t)&&BT(t))&&Ze(e,r.slice(0,-1)),e}var FT=e=>{for(const l in e)if(da(e[l]))return!0;return!1};function Vv(e){return Array.isArray(e)||ze(e)&&!FT(e)}function _s(e,l={}){for(const r in e)Vv(e[r])?(l[r]=Array.isArray(e[r])?[]:{},_s(e[r],l[r])):Rn(e[r])||(l[r]=!0);return l}function Mr(e,l,r){r||(r=_s(l));for(const t in e)Vv(e[t])?We(l)||ys(r[t])?r[t]=_s(e[t],Array.isArray(e[t])?[]:{}):Mr(e[t],Rn(l)?{}:l[t],r[t]):r[t]=!Fa(e[t],l[t]);return r}const hm={value:!1,isValid:!1},pm={value:!0,isValid:!0};var Uv=e=>{if(Array.isArray(e)){if(e.length>1){const l=e.filter(r=>r&&r.checked&&!r.disabled).map(r=>r.value);return{value:l,isValid:!!l.length}}return e[0].checked&&!e[0].disabled?e[0].attributes&&!We(e[0].attributes.value)?We(e[0].value)||e[0].value===""?pm:{value:e[0].value,isValid:!0}:pm:hm}return hm},xv=(e,{valueAsNumber:l,valueAsDate:r,setValueAs:t})=>We(e)?e:l?e===""?NaN:e&&+e:r&&xn(e)?new Date(e):t?t(e):e;const Em={isValid:!1,value:null};var Gv=e=>Array.isArray(e)?e.reduce((l,r)=>r&&r.checked&&!r.disabled?{isValid:!0,value:r.value}:l,Em):Em;function ym(e){const l=e.ref;return au(l)?l.files:ru(l)?Gv(e.refs).value:Kv(l)?[...l.selectedOptions].map(({value:r})=>r):At(l)?Uv(e.refs).value:xv(We(l.value)?e.ref.value:l.value,e)}var KT=(e,l,r,t)=>{const i={};for(const u of e){const d=ne(l,u);d&&Ve(i,u,d._f)}return{criteriaMode:r,names:[...e],fields:i,shouldUseNativeValidation:t}},Dl=e=>e instanceof RegExp,ot=e=>We(e)?e:Dl(e)?e.source:ze(e)?Dl(e.value)?e.value.source:e.value:e,_m=e=>({isOnSubmit:!e||e===oa.onSubmit,isOnBlur:e===oa.onBlur,isOnChange:e===oa.onChange,isOnAll:e===oa.all,isOnTouch:e===oa.onTouched});const Am="AsyncFunction";var VT=e=>!!e&&!!e.validate&&!!(da(e.validate)&&e.validate.constructor.name===Am||ze(e.validate)&&Object.values(e.validate).find(l=>l.constructor.name===Am)),UT=e=>e.mount&&(e.required||e.min||e.max||e.maxLength||e.minLength||e.pattern||e.validate),Rm=(e,l,r)=>!r&&(l.watchAll||l.watch.has(e)||[...l.watch].some(t=>e.startsWith(t)&&/^\.\w+/.test(e.slice(t.length))));const ht=(e,l,r,t)=>{for(const i of r||Object.keys(e)){const u=ne(e,i);if(u){const{_f:d,...m}=u;if(d){if(d.refs&&d.refs[0]&&l(d.refs[0],i)&&!t)return!0;if(d.ref&&l(d.ref,d.name)&&!t)return!0;if(ht(m,l))break}else if(ze(m)&&ht(m,l))break}}};function Tm(e,l,r){const t=ne(e,r);if(t||Gl(r))return{error:t,name:r};const i=r.split(".");for(;i.length;){const u=i.join("."),d=ne(l,u),m=ne(e,u);if(d&&!Array.isArray(d)&&r!==u)return{name:r};if(m&&m.type)return{name:u,error:m};if(m&&m.root&&m.root.type)return{name:`${u}.root`,error:m.root};i.pop()}return{name:r}}var xT=(e,l,r,t)=>{r(e);const{name:i,...u}=e;return Ln(u)||Object.keys(u).length>=Object.keys(l).length||Object.keys(u).find(d=>l[d]===(!t||oa.all))},GT=(e,l,r)=>!e||!l||e===l||gt(e).some(t=>t&&(r?t===l:t.startsWith(l)||l.startsWith(t))),CT=(e,l,r,t,i)=>i.isOnAll?!1:!r&&i.isOnTouch?!(l||e):(r?t.isOnBlur:i.isOnBlur)?!e:(r?t.isOnChange:i.isOnChange)?e:!0,jT=(e,l)=>!zs(ne(e,l)).length&&Ze(e,l),HT=(e,l,r)=>{const t=gt(ne(e,r));return Ve(t,"root",l[r]),Ve(e,r,t),e};function Sm(e,l,r="validate"){if(xn(e)||Array.isArray(e)&&e.every(xn)||Un(e)&&!e)return{type:r,message:xn(e)?e:"",ref:l}}var Lr=e=>ze(e)&&!Dl(e)?e:{value:e,message:""},Om=async(e,l,r,t,i,u)=>{const{ref:d,refs:m,required:f,maxLength:p,minLength:h,min:R,max:A,pattern:L,validate:w,name:k,valueAsNumber:S,mount:D}=e._f,B=ne(r,k);if(!D||l.has(k))return{};const N=m?m[0]:d,J=Y=>{i&&N.reportValidity&&(N.setCustomValidity(Un(Y)?"":Y||""),N.reportValidity())},M={},$=ru(d),G=At(d),x=$||G,Z=(S||au(d))&&We(d.value)&&We(B)||Pl(d)&&d.value===""||B===""||Array.isArray(B)&&!B.length,le=PT.bind(null,k,t,M),X=(Y,H,ae,oe=wa.maxLength,fe=wa.minLength)=>{const he=Y?H:ae;M[k]={type:Y?oe:fe,message:he,ref:d,...le(Y?oe:fe,he)}};if(u?!Array.isArray(B)||!B.length:f&&(!x&&(Z||Rn(B))||Un(B)&&!B||G&&!Uv(m).isValid||$&&!Gv(m).isValid)){const{value:Y,message:H}=xn(f)?{value:!!f,message:f}:Lr(f);if(Y&&(M[k]={type:wa.required,message:H,ref:N,...le(wa.required,H)},!t))return J(H),M}if(!Z&&(!Rn(R)||!Rn(A))){let Y,H;const ae=Lr(A),oe=Lr(R);if(!Rn(B)&&!isNaN(B)){const fe=d.valueAsNumber||B&&+B;Rn(ae.value)||(Y=fe>ae.value),Rn(oe.value)||(H=fe<oe.value)}else{const fe=d.valueAsDate||new Date(B),he=Xe=>new Date(new Date().toDateString()+" "+Xe),pe=d.type=="time",Be=d.type=="week";xn(ae.value)&&B&&(Y=pe?he(B)>he(ae.value):Be?B>ae.value:fe>new Date(ae.value)),xn(oe.value)&&B&&(H=pe?he(B)<he(oe.value):Be?B<oe.value:fe<new Date(oe.value))}if((Y||H)&&(X(!!Y,ae.message,oe.message,wa.max,wa.min),!t))return J(M[k].message),M}if((p||h)&&!Z&&(xn(B)||u&&Array.isArray(B))){const Y=Lr(p),H=Lr(h),ae=!Rn(Y.value)&&B.length>+Y.value,oe=!Rn(H.value)&&B.length<+H.value;if((ae||oe)&&(X(ae,Y.message,H.message),!t))return J(M[k].message),M}if(L&&!Z&&xn(B)){const{value:Y,message:H}=Lr(L);if(Dl(Y)&&!B.match(Y)&&(M[k]={type:wa.pattern,message:H,ref:d,...le(wa.pattern,H)},!t))return J(H),M}if(w){if(da(w)){const Y=await w(B,r),H=Sm(Y,N);if(H&&(M[k]={...H,...le(wa.validate,H.message)},!t))return J(H.message),M}else if(ze(w)){let Y={};for(const H in w){if(!Ln(Y)&&!t)break;const ae=Sm(await w[H](B,r),N,H);ae&&(Y={...ae,...le(H,ae.message)},J(ae.message),t&&(M[k]=Y))}if(!Ln(Y)&&(M[k]={ref:N,...Y},!t))return M}}return J(!0),M};const qT={mode:oa.onSubmit,reValidateMode:oa.onChange,shouldFocusError:!0};function YT(e={}){let l={...qT,...e},r={submitCount:0,isDirty:!1,isReady:!1,isLoading:da(l.defaultValues),isValidating:!1,isSubmitted:!1,isSubmitting:!1,isSubmitSuccessful:!1,isValid:!1,touchedFields:{},dirtyFields:{},validatingFields:{},errors:l.errors||{},disabled:l.disabled||!1},t={},i=ze(l.defaultValues)||ze(l.values)?an(l.defaultValues||l.values)||{}:{},u=l.shouldUnregister?{}:an(i),d={action:!1,mount:!1,watch:!1},m={mount:new Set,disabled:new Set,unMount:new Set,array:new Set,watch:new Set},f,p=0;const h={isDirty:!1,dirtyFields:!1,validatingFields:!1,touchedFields:!1,isValidating:!1,isValid:!1,errors:!1};let R={...h};const A={array:gm(),state:gm()},L=l.criteriaMode===oa.all,w=T=>P=>{clearTimeout(p),p=setTimeout(T,P)},k=async T=>{if(!l.disabled&&(h.isValid||R.isValid||T)){const P=l.resolver?Ln((await G()).errors):await Z(t,!0);P!==r.isValid&&A.state.next({isValid:P})}},S=(T,P)=>{!l.disabled&&(h.isValidating||h.validatingFields||R.isValidating||R.validatingFields)&&((T||Array.from(m.mount)).forEach(K=>{K&&(P?Ve(r.validatingFields,K,P):Ze(r.validatingFields,K))}),A.state.next({validatingFields:r.validatingFields,isValidating:!Ln(r.validatingFields)}))},D=(T,P=[],K,ee,z=!0,W=!0)=>{if(ee&&K&&!l.disabled){if(d.action=!0,W&&Array.isArray(ne(t,T))){const ue=K(ne(t,T),ee.argA,ee.argB);z&&Ve(t,T,ue)}if(W&&Array.isArray(ne(r.errors,T))){const ue=K(ne(r.errors,T),ee.argA,ee.argB);z&&Ve(r.errors,T,ue),jT(r.errors,T)}if((h.touchedFields||R.touchedFields)&&W&&Array.isArray(ne(r.touchedFields,T))){const ue=K(ne(r.touchedFields,T),ee.argA,ee.argB);z&&Ve(r.touchedFields,T,ue)}(h.dirtyFields||R.dirtyFields)&&(r.dirtyFields=Mr(i,u)),A.state.next({name:T,isDirty:X(T,P),dirtyFields:r.dirtyFields,errors:r.errors,isValid:r.isValid})}else Ve(u,T,P)},B=(T,P)=>{Ve(r.errors,T,P),A.state.next({errors:r.errors})},N=T=>{r.errors=T,A.state.next({errors:r.errors,isValid:!1})},J=(T,P,K,ee)=>{const z=ne(t,T);if(z){const W=ne(u,T,We(K)?ne(i,T):K);We(W)||ee&&ee.defaultChecked||P?Ve(u,T,P?W:ym(z._f)):ae(T,W),d.mount&&k()}},M=(T,P,K,ee,z)=>{let W=!1,ue=!1;const Ne={name:T};if(!l.disabled){if(!K||ee){(h.isDirty||R.isDirty)&&(ue=r.isDirty,r.isDirty=Ne.isDirty=X(),W=ue!==Ne.isDirty);const Le=Fa(ne(i,T),P);ue=!!ne(r.dirtyFields,T),Le?Ze(r.dirtyFields,T):Ve(r.dirtyFields,T,!0),Ne.dirtyFields=r.dirtyFields,W=W||(h.dirtyFields||R.dirtyFields)&&ue!==!Le}if(K){const Le=ne(r.touchedFields,T);Le||(Ve(r.touchedFields,T,K),Ne.touchedFields=r.touchedFields,W=W||(h.touchedFields||R.touchedFields)&&Le!==K)}W&&z&&A.state.next(Ne)}return W?Ne:{}},$=(T,P,K,ee)=>{const z=ne(r.errors,T),W=(h.isValid||R.isValid)&&Un(P)&&r.isValid!==P;if(l.delayError&&K?(f=w(()=>B(T,K)),f(l.delayError)):(clearTimeout(p),f=null,K?Ve(r.errors,T,K):Ze(r.errors,T)),(K?!Fa(z,K):z)||!Ln(ee)||W){const ue={...ee,...W&&Un(P)?{isValid:P}:{},errors:r.errors,name:T};r={...r,...ue},A.state.next(ue)}},G=async T=>{S(T,!0);const P=await l.resolver(u,l.context,KT(T||m.mount,t,l.criteriaMode,l.shouldUseNativeValidation));return S(T),P},x=async T=>{const{errors:P}=await G(T);if(T)for(const K of T){const ee=ne(P,K);ee?Ve(r.errors,K,ee):Ze(r.errors,K)}else r.errors=P;return P},Z=async(T,P,K={valid:!0})=>{for(const ee in T){const z=T[ee];if(z){const{_f:W,...ue}=z;if(W){const Ne=m.array.has(W.name),Le=z._f&&VT(z._f);Le&&h.validatingFields&&S([W.name],!0);const cn=await Om(z,m.disabled,u,L,l.shouldUseNativeValidation&&!P,Ne);if(Le&&h.validatingFields&&S([W.name]),cn[W.name]&&(K.valid=!1,P))break;!P&&(ne(cn,W.name)?Ne?HT(r.errors,cn,W.name):Ve(r.errors,W.name,cn[W.name]):Ze(r.errors,W.name))}!Ln(ue)&&await Z(ue,P,K)}}return K.valid},le=()=>{for(const T of m.unMount){const P=ne(t,T);P&&(P._f.refs?P._f.refs.every(K=>!is(K)):!is(P._f.ref))&&Sa(T)}m.unMount=new Set},X=(T,P)=>!l.disabled&&(T&&P&&Ve(u,T,P),!Fa(Xe(),i)),Y=(T,P,K)=>Bv(T,m,{...d.mount?u:We(P)?i:xn(T)?{[T]:P}:P},K,P),H=T=>zs(ne(d.mount?u:i,T,l.shouldUnregister?ne(i,T,[]):[])),ae=(T,P,K={})=>{const ee=ne(t,T);let z=P;if(ee){const W=ee._f;W&&(!W.disabled&&Ve(u,T,xv(P,W)),z=Pl(W.ref)&&Rn(P)?"":P,Kv(W.ref)?[...W.ref.options].forEach(ue=>ue.selected=z.includes(ue.value)):W.refs?At(W.ref)?W.refs.forEach(ue=>{(!ue.defaultChecked||!ue.disabled)&&(Array.isArray(z)?ue.checked=!!z.find(Ne=>Ne===ue.value):ue.checked=z===ue.value||!!z)}):W.refs.forEach(ue=>ue.checked=ue.value===z):au(W.ref)?W.ref.value="":(W.ref.value=z,W.ref.type||A.state.next({name:T,values:an(u)})))}(K.shouldDirty||K.shouldTouch)&&M(T,z,K.shouldTouch,K.shouldDirty,!0),K.shouldValidate&&Be(T)},oe=(T,P,K)=>{for(const ee in P){if(!P.hasOwnProperty(ee))return;const z=P[ee],W=T+"."+ee,ue=ne(t,W);(m.array.has(T)||ze(z)||ue&&!ue._f)&&!or(z)?oe(W,z,K):ae(W,z,K)}},fe=(T,P,K={})=>{const ee=ne(t,T),z=m.array.has(T),W=an(P);Ve(u,T,W),z?(A.array.next({name:T,values:an(u)}),(h.isDirty||h.dirtyFields||R.isDirty||R.dirtyFields)&&K.shouldDirty&&A.state.next({name:T,dirtyFields:Mr(i,u),isDirty:X(T,W)})):ee&&!ee._f&&!Rn(W)?oe(T,W,K):ae(T,W,K),Rm(T,m)&&A.state.next({...r,name:T}),A.state.next({name:d.mount?T:void 0,values:an(u)})},he=async T=>{d.mount=!0;const P=T.target;let K=P.name,ee=!0;const z=ne(t,K),W=Le=>{ee=Number.isNaN(Le)||or(Le)&&isNaN(Le.getTime())||Fa(Le,ne(u,K,Le))},ue=_m(l.mode),Ne=_m(l.reValidateMode);if(z){let Le,cn;const Ka=P.type?ym(z._f):Pv(T),Hn=T.type===Ml.BLUR||T.type===Ml.FOCUS_OUT,Cr=!UT(z._f)&&!l.resolver&&!ne(r.errors,K)&&!z._f.deps||CT(Hn,ne(r.touchedFields,K),r.isSubmitted,Ne,ue),za=Rm(K,m,Hn);Ve(u,K,Ka),Hn?(!P||!P.readOnly)&&(z._f.onBlur&&z._f.onBlur(T),f&&f(0)):z._f.onChange&&z._f.onChange(T);const Xa=M(K,Ka,Hn),jr=!Ln(Xa)||za;if(!Hn&&A.state.next({name:K,type:T.type,values:an(u)}),Cr)return(h.isValid||R.isValid)&&(l.mode==="onBlur"?Hn&&k():Hn||k()),jr&&A.state.next({name:K,...za?{}:Xa});if(!Hn&&za&&A.state.next({...r}),l.resolver){const{errors:gr}=await G([K]);if(W(Ka),ee){const Hr=Tm(r.errors,t,K),Nt=Tm(gr,t,Hr.name||K);Le=Nt.error,K=Nt.name,cn=Ln(gr)}}else S([K],!0),Le=(await Om(z,m.disabled,u,L,l.shouldUseNativeValidation))[K],S([K]),W(Ka),ee&&(Le?cn=!1:(h.isValid||R.isValid)&&(cn=await Z(t,!0)));ee&&(z._f.deps&&(!Array.isArray(z._f.deps)||z._f.deps.length>0)&&Be(z._f.deps),$(K,cn,Le,Xa))}},pe=(T,P)=>{if(ne(r.errors,P)&&T.focus)return T.focus(),1},Be=async(T,P={})=>{let K,ee;const z=gt(T);if(l.resolver){const W=await x(We(T)?T:z);K=Ln(W),ee=T?!z.some(ue=>ne(W,ue)):K}else T?(ee=(await Promise.all(z.map(async W=>{const ue=ne(t,W);return await Z(ue&&ue._f?{[W]:ue}:ue)}))).every(Boolean),!(!ee&&!r.isValid)&&k()):ee=K=await Z(t);return A.state.next({...!xn(T)||(h.isValid||R.isValid)&&K!==r.isValid?{}:{name:T},...l.resolver||!T?{isValid:K}:{},errors:r.errors}),P.shouldFocus&&!ee&&ht(t,pe,T?z:m.mount),ee},Xe=(T,P)=>{let K={...d.mount?u:i};return P&&(K=Fv(P.dirtyFields?r.dirtyFields:r.touchedFields,K)),We(T)?K:xn(T)?ne(K,T):T.map(ee=>ne(K,ee))},Re=(T,P)=>({invalid:!!ne((P||r).errors,T),isDirty:!!ne((P||r).dirtyFields,T),error:ne((P||r).errors,T),isValidating:!!ne(r.validatingFields,T),isTouched:!!ne((P||r).touchedFields,T)}),na=T=>{T&&gt(T).forEach(P=>Ze(r.errors,P)),A.state.next({errors:T?r.errors:{}})},Tn=(T,P,K)=>{const ee=(ne(t,T,{_f:{}})._f||{}).ref,z=ne(r.errors,T)||{},{ref:W,message:ue,type:Ne,...Le}=z;Ve(r.errors,T,{...Le,...P,ref:ee}),A.state.next({name:T,errors:r.errors,isValid:!1}),K&&K.shouldFocus&&ee&&ee.focus&&ee.focus()},Za=(T,P)=>da(T)?A.state.subscribe({next:K=>"values"in K&&T(Y(void 0,P),K)}):Y(T,P,!0),Pn=T=>A.state.subscribe({next:P=>{GT(T.name,P.name,T.exact)&&xT(P,T.formState||h,Qe,T.reRenderRoot)&&T.callback({values:{...u},...r,...P,defaultValues:i})}}).unsubscribe,ga=T=>(d.mount=!0,R={...R,...T.formState},Pn({...T,formState:R})),Sa=(T,P={})=>{for(const K of T?gt(T):m.mount)m.mount.delete(K),m.array.delete(K),P.keepValue||(Ze(t,K),Ze(u,K)),!P.keepError&&Ze(r.errors,K),!P.keepDirty&&Ze(r.dirtyFields,K),!P.keepTouched&&Ze(r.touchedFields,K),!P.keepIsValidating&&Ze(r.validatingFields,K),!l.shouldUnregister&&!P.keepDefaultValue&&Ze(i,K);A.state.next({values:an(u)}),A.state.next({...r,...P.keepDirty?{isDirty:X()}:{}}),!P.keepIsValid&&k()},Gn=({disabled:T,name:P})=>{(Un(T)&&d.mount||T||m.disabled.has(P))&&(T?m.disabled.add(P):m.disabled.delete(P))},hn=(T,P={})=>{let K=ne(t,T);const ee=Un(P.disabled)||Un(l.disabled);return Ve(t,T,{...K||{},_f:{...K&&K._f?K._f:{ref:{name:T}},name:T,mount:!0,...P}}),m.mount.add(T),K?Gn({disabled:Un(P.disabled)?P.disabled:l.disabled,name:T}):J(T,!0,P.value),{...ee?{disabled:P.disabled||l.disabled}:{},...l.progressive?{required:!!P.required,min:ot(P.min),max:ot(P.max),minLength:ot(P.minLength),maxLength:ot(P.maxLength),pattern:ot(P.pattern)}:{},name:T,onChange:he,onBlur:he,ref:z=>{if(z){hn(T,P),K=ne(t,T);const W=We(z.value)&&z.querySelectorAll&&z.querySelectorAll("input,select,textarea")[0]||z,ue=DT(W),Ne=K._f.refs||[];if(ue?Ne.find(Le=>Le===W):W===K._f.ref)return;Ve(t,T,{_f:{...K._f,...ue?{refs:[...Ne.filter(is),W,...Array.isArray(ne(i,T))?[{}]:[]],ref:{type:W.type,name:T}}:{ref:W}}}),J(T,!1,void 0,W)}else K=ne(t,T,{}),K._f&&(K._f.mount=!1),(l.shouldUnregister||P.shouldUnregister)&&!(Dv(m.array,T)&&d.action)&&m.unMount.add(T)}}},aa=()=>l.shouldFocusError&&ht(t,pe,m.mount),Sn=T=>{Un(T)&&(A.state.next({disabled:T}),ht(t,(P,K)=>{const ee=ne(t,K);ee&&(P.disabled=ee._f.disabled||T,Array.isArray(ee._f.refs)&&ee._f.refs.forEach(z=>{z.disabled=ee._f.disabled||T}))},0,!1))},pn=(T,P)=>async K=>{let ee;K&&(K.preventDefault&&K.preventDefault(),K.persist&&K.persist());let z=an(u);if(A.state.next({isSubmitting:!0}),l.resolver){const{errors:W,values:ue}=await G();r.errors=W,z=an(ue)}else await Z(t);if(m.disabled.size)for(const W of m.disabled)Ze(z,W);if(Ze(r.errors,"root"),Ln(r.errors)){A.state.next({errors:{}});try{await T(z,K)}catch(W){ee=W}}else P&&await P({...r.errors},K),aa(),setTimeout(aa);if(A.state.next({isSubmitted:!0,isSubmitting:!1,isSubmitSuccessful:Ln(r.errors)&&!ee,submitCount:r.submitCount+1,errors:r.errors}),ee)throw ee},Cn=(T,P={})=>{ne(t,T)&&(We(P.defaultValue)?fe(T,an(ne(i,T))):(fe(T,P.defaultValue),Ve(i,T,an(P.defaultValue))),P.keepTouched||Ze(r.touchedFields,T),P.keepDirty||(Ze(r.dirtyFields,T),r.isDirty=P.defaultValue?X(T,an(ne(i,T))):X()),P.keepError||(Ze(r.errors,T),h.isValid&&k()),A.state.next({...r}))},Ge=(T,P={})=>{const K=T?an(T):i,ee=an(K),z=Ln(T),W=z?i:ee;if(P.keepDefaultValues||(i=K),!P.keepValues){if(P.keepDirtyValues){const ue=new Set([...m.mount,...Object.keys(Mr(i,u))]);for(const Ne of Array.from(ue))ne(r.dirtyFields,Ne)?Ve(W,Ne,ne(u,Ne)):fe(Ne,ne(W,Ne))}else{if(Zs&&We(T))for(const ue of m.mount){const Ne=ne(t,ue);if(Ne&&Ne._f){const Le=Array.isArray(Ne._f.refs)?Ne._f.refs[0]:Ne._f.ref;if(Pl(Le)){const cn=Le.closest("form");if(cn){cn.reset();break}}}}if(P.keepFieldsRef)for(const ue of m.mount)fe(ue,ne(W,ue));else t={}}u=l.shouldUnregister?P.keepDefaultValues?an(i):{}:an(W),A.array.next({values:{...W}}),A.state.next({values:{...W}})}m={mount:P.keepDirtyValues?m.mount:new Set,unMount:new Set,array:new Set,disabled:new Set,watch:new Set,watchAll:!1,focus:""},d.mount=!h.isValid||!!P.keepIsValid||!!P.keepDirtyValues,d.watch=!!l.shouldUnregister,A.state.next({submitCount:P.keepSubmitCount?r.submitCount:0,isDirty:z?!1:P.keepDirty?r.isDirty:!!(P.keepDefaultValues&&!Fa(T,i)),isSubmitted:P.keepIsSubmitted?r.isSubmitted:!1,dirtyFields:z?{}:P.keepDirtyValues?P.keepDefaultValues&&u?Mr(i,u):r.dirtyFields:P.keepDefaultValues&&T?Mr(i,T):P.keepDirty?r.dirtyFields:{},touchedFields:P.keepTouched?r.touchedFields:{},errors:P.keepErrors?r.errors:{},isSubmitSuccessful:P.keepIsSubmitSuccessful?r.isSubmitSuccessful:!1,isSubmitting:!1,defaultValues:i})},tn=(T,P)=>Ge(da(T)?T(u):T,P),ra=(T,P={})=>{const K=ne(t,T),ee=K&&K._f;if(ee){const z=ee.refs?ee.refs[0]:ee.ref;z.focus&&(z.focus(),P.shouldSelect&&da(z.select)&&z.select())}},Qe=T=>{r={...r,...T}},jn={control:{register:hn,unregister:Sa,getFieldState:Re,handleSubmit:pn,setError:Tn,_subscribe:Pn,_runSchema:G,_focusError:aa,_getWatch:Y,_getDirty:X,_setValid:k,_setFieldArray:D,_setDisabledField:Gn,_setErrors:N,_getFieldArray:H,_reset:Ge,_resetDefaultValues:()=>da(l.defaultValues)&&l.defaultValues().then(T=>{tn(T,l.resetOptions),A.state.next({isLoading:!1})}),_removeUnmounted:le,_disableForm:Sn,_subjects:A,_proxyFormState:h,get _fields(){return t},get _formValues(){return u},get _state(){return d},set _state(T){d=T},get _defaultValues(){return i},get _names(){return m},set _names(T){m=T},get _formState(){return r},get _options(){return l},set _options(T){l={...l,...T}}},subscribe:ga,trigger:Be,register:hn,handleSubmit:pn,watch:Za,setValue:fe,getValues:Xe,reset:tn,resetField:Cn,clearErrors:na,unregister:Sa,setError:Tn,setFocus:ra,getFieldState:Re};return{...jn,formControl:jn}}function tu(e={}){const l=_.useRef(void 0),r=_.useRef(void 0),[t,i]=_.useState({isDirty:!1,isValidating:!1,isLoading:da(e.defaultValues),isSubmitted:!1,isSubmitting:!1,isSubmitSuccessful:!1,isValid:!1,submitCount:0,dirtyFields:{},touchedFields:{},validatingFields:{},errors:e.errors||{},disabled:e.disabled||!1,isReady:!1,defaultValues:da(e.defaultValues)?void 0:e.defaultValues});if(!l.current)if(e.formControl)l.current={...e.formControl,formState:t},e.defaultValues&&!da(e.defaultValues)&&e.formControl.reset(e.defaultValues,e.resetOptions);else{const{formControl:d,...m}=YT(e);l.current={...m,formState:t}}const u=l.current.control;return u._options=e,eu(()=>{const d=u._subscribe({formState:u._proxyFormState,callback:()=>i({...u._formState}),reRenderRoot:!0});return i(m=>({...m,isReady:!0})),u._formState.isReady=!0,d},[u]),_.useEffect(()=>u._disableForm(e.disabled),[u,e.disabled]),_.useEffect(()=>{e.mode&&(u._options.mode=e.mode),e.reValidateMode&&(u._options.reValidateMode=e.reValidateMode)},[u,e.mode,e.reValidateMode]),_.useEffect(()=>{e.errors&&(u._setErrors(e.errors),u._focusError())},[u,e.errors]),_.useEffect(()=>{e.shouldUnregister&&u._subjects.state.next({values:u._getWatch()})},[u,e.shouldUnregister]),_.useEffect(()=>{if(u._proxyFormState.isDirty){const d=u._getDirty();d!==t.isDirty&&u._subjects.state.next({isDirty:d})}},[u,t.isDirty]),_.useEffect(()=>{e.values&&!Fa(e.values,r.current)?(u._reset(e.values,{keepFieldsRef:!0,...u._options.resetOptions}),r.current=e.values,i(d=>({...d}))):u._resetDefaultValues()},[u,e.values]),_.useEffect(()=>{u._state.mount||(u._setValid(),u._state.mount=!0),u._state.watch&&(u._state.watch=!1,u._subjects.state.next({...u._formState})),u._removeUnmounted()}),l.current.formState=wv(t,u),l.current}var ss={exports:{}};/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/var Nm;function JT(){return Nm||(Nm=1,(function(e){(function(){var l={}.hasOwnProperty;function r(){for(var u="",d=0;d<arguments.length;d++){var m=arguments[d];m&&(u=i(u,t(m)))}return u}function t(u){if(typeof u=="string"||typeof u=="number")return u;if(typeof u!="object")return"";if(Array.isArray(u))return r.apply(null,u);if(u.toString!==Object.prototype.toString&&!u.toString.toString().includes("[native code]"))return u.toString();var d="";for(var m in u)l.call(u,m)&&u[m]&&(d=i(d,m));return d}function i(u,d){return d?u?u+" "+d:u+d:u}e.exports?(r.default=r,e.exports=r):window.classNames=r})()})(ss)),ss.exports}var $T=JT();const WT=Gs($T);function ZT(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var km={exports:{}},dt={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var bm;function zT(){if(bm)return dt;bm=1;var e=Symbol.for("react.transitional.element"),l=Symbol.for("react.fragment");function r(t,i,u){var d=null;if(u!==void 0&&(d=""+u),i.key!==void 0&&(d=""+i.key),"key"in i){u={};for(var m in i)m!=="key"&&(u[m]=i[m])}else u=i;return i=u.ref,{$$typeof:e,type:t,key:d,ref:i!==void 0?i:null,props:u}}return dt.Fragment=l,dt.jsx=r,dt.jsxs=r,dt}var Im;function XT(){return Im||(Im=1,km.exports=zT()),km.exports}var un=XT();const lu=e=>e.reduce((l,r,t)=>({...l,[t]:i=>r(i)||!0}),{}),iu=(e,l)=>l.split(".").reduce((r,t)=>r!==void 0?r[t]:r,e)?.message;var As={exports:{}},QT=As.exports,Lm;function eS(){return Lm||(Lm=1,(function(e,l){(function(r,t){e.exports=t()})(QT,function(){var r={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"},t=/(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g,i=/\d/,u=/\d\d/,d=/\d\d?/,m=/\d*[^-_:/,()\s\d]+/,f={},p=function(S){return(S=+S)+(S>68?1900:2e3)},h=function(S){return function(D){this[S]=+D}},R=[/[+-]\d\d:?(\d\d)?|Z/,function(S){(this.zone||(this.zone={})).offset=(function(D){if(!D||D==="Z")return 0;var B=D.match(/([+-]|\d\d)/g),N=60*B[1]+(+B[2]||0);return N===0?0:B[0]==="+"?-N:N})(S)}],A=function(S){var D=f[S];return D&&(D.indexOf?D:D.s.concat(D.f))},L=function(S,D){var B,N=f.meridiem;if(N){for(var J=1;J<=24;J+=1)if(S.indexOf(N(J,0,D))>-1){B=J>12;break}}else B=S===(D?"pm":"PM");return B},w={A:[m,function(S){this.afternoon=L(S,!1)}],a:[m,function(S){this.afternoon=L(S,!0)}],Q:[i,function(S){this.month=3*(S-1)+1}],S:[i,function(S){this.milliseconds=100*+S}],SS:[u,function(S){this.milliseconds=10*+S}],SSS:[/\d{3}/,function(S){this.milliseconds=+S}],s:[d,h("seconds")],ss:[d,h("seconds")],m:[d,h("minutes")],mm:[d,h("minutes")],H:[d,h("hours")],h:[d,h("hours")],HH:[d,h("hours")],hh:[d,h("hours")],D:[d,h("day")],DD:[u,h("day")],Do:[m,function(S){var D=f.ordinal,B=S.match(/\d+/);if(this.day=B[0],D)for(var N=1;N<=31;N+=1)D(N).replace(/\[|\]/g,"")===S&&(this.day=N)}],w:[d,h("week")],ww:[u,h("week")],M:[d,h("month")],MM:[u,h("month")],MMM:[m,function(S){var D=A("months"),B=(A("monthsShort")||D.map(function(N){return N.slice(0,3)})).indexOf(S)+1;if(B<1)throw new Error;this.month=B%12||B}],MMMM:[m,function(S){var D=A("months").indexOf(S)+1;if(D<1)throw new Error;this.month=D%12||D}],Y:[/[+-]?\d+/,h("year")],YY:[u,function(S){this.year=p(S)}],YYYY:[/\d{4}/,h("year")],Z:R,ZZ:R};function k(S){var D,B;D=S,B=f&&f.formats;for(var N=(S=D.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,function(le,X,Y){var H=Y&&Y.toUpperCase();return X||B[Y]||r[Y]||B[H].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,function(ae,oe,fe){return oe||fe.slice(1)})})).match(t),J=N.length,M=0;M<J;M+=1){var $=N[M],G=w[$],x=G&&G[0],Z=G&&G[1];N[M]=Z?{regex:x,parser:Z}:$.replace(/^\[|\]$/g,"")}return function(le){for(var X={},Y=0,H=0;Y<J;Y+=1){var ae=N[Y];if(typeof ae=="string")H+=ae.length;else{var oe=ae.regex,fe=ae.parser,he=le.slice(H),pe=oe.exec(he)[0];fe.call(X,pe),le=le.replace(pe,"")}}return(function(Be){var Xe=Be.afternoon;if(Xe!==void 0){var Re=Be.hours;Xe?Re<12&&(Be.hours+=12):Re===12&&(Be.hours=0),delete Be.afternoon}})(X),X}}return function(S,D,B){B.p.customParseFormat=!0,S&&S.parseTwoDigitYear&&(p=S.parseTwoDigitYear);var N=D.prototype,J=N.parse;N.parse=function(M){var $=M.date,G=M.utc,x=M.args;this.$u=G;var Z=x[1];if(typeof Z=="string"){var le=x[2]===!0,X=x[3]===!0,Y=le||X,H=x[2];X&&(H=x[2]),f=this.$locale(),!le&&H&&(f=B.Ls[H]),this.$d=(function(he,pe,Be,Xe){try{if(["x","X"].indexOf(pe)>-1)return new Date((pe==="X"?1e3:1)*he);var Re=k(pe)(he),na=Re.year,Tn=Re.month,Za=Re.day,Pn=Re.hours,ga=Re.minutes,Sa=Re.seconds,Gn=Re.milliseconds,hn=Re.zone,aa=Re.week,Sn=new Date,pn=Za||(na||Tn?1:Sn.getDate()),Cn=na||Sn.getFullYear(),Ge=0;na&&!Tn||(Ge=Tn>0?Tn-1:Sn.getMonth());var tn,ra=Pn||0,Qe=ga||0,ta=Sa||0,jn=Gn||0;return hn?new Date(Date.UTC(Cn,Ge,pn,ra,Qe,ta,jn+60*hn.offset*1e3)):Be?new Date(Date.UTC(Cn,Ge,pn,ra,Qe,ta,jn)):(tn=new Date(Cn,Ge,pn,ra,Qe,ta,jn),aa&&(tn=Xe(tn).week(aa).toDate()),tn)}catch{return new Date("")}})($,Z,G,B),this.init(),H&&H!==!0&&(this.$L=this.locale(H).$L),Y&&$!=this.format(Z)&&(this.$d=new Date("")),f={}}else if(Z instanceof Array)for(var ae=Z.length,oe=1;oe<=ae;oe+=1){x[1]=Z[oe-1];var fe=B.apply(this,x);if(fe.isValid()){this.$d=fe.$d,this.$L=fe.$L,this.init();break}oe===ae&&(this.$d=new Date(""))}else J.call(this,M)}}})})(As)),As.exports}var nS=eS();const aS=ZT(nS),rS="_textarea_14c7r_1",tS="_readOnlyField_14c7r_7",Mm={textarea:rS,readOnlyField:tS},lS=e=>e!=null&&e!=="",Cv=({label:e,value:l,isEdited:r=!1,type:t,hideLabel:i,size:u})=>lS(l)?un.jsxs(ma,{gap:"space-4",children:[e&&!i&&un.jsx(sn,{size:u,children:e}),un.jsxs(vr,{gap:"space-8",align:"center",wrap:!1,children:[un.jsx(dr,{className:t==="textarea"?Mm.textarea:Mm.readOnlyField,size:u,children:l}),r&&un.jsx(Iv,{})]})]}):null;Vr.extend(aS);const iS="_noReadOnlyIcon_11vhl_2",sS={noReadOnlyIcon:iS},uS=({label:e,description:l,validate:r=[],onChange:t,children:i,className:u,isReadOnly:d=!1,size:m="small",isEdited:f=!1,hideLegend:p=!1,...h})=>{const{name:R,control:A}=h,{formState:{errors:L}}=$a(),{field:w}=nu({name:R,control:A,rules:{validate:lu(r)}});return un.jsx(qR,{name:R,value:w.value!==void 0?w.value:null,legend:un.jsxs(vr,{justify:"center",gap:"space-8",children:[e,d&&f&&un.jsx(Iv,{})]}),hideLegend:p,"aria-readonly":d,readOnly:d,description:l,size:m,error:iu(L,R),onChange:k=>{t&&t(k),w.onChange(k)},className:WT(u,sS.noReadOnlyIcon),children:i})},oS=({label:e,selectValues:l,validate:r=[],readOnly:t=!1,description:i,hideValueOnDisable:u=!1,onChange:d,className:m,hideLabel:f,isEdited:p,size:h="small",...R})=>{const{name:A,control:L,disabled:w}=R,{formState:{errors:k}}=$a(),{field:S}=nu({name:A,control:L,rules:{validate:V.useMemo(()=>lu(r),[r])}});if(t){const N=l.map(M=>M.props).find(M=>M.value===S.value),J=N?N.children:void 0;return un.jsx(Cv,{value:J,label:e,hideLabel:f,isEdited:p,size:h})}const D=S.value||"",B=!l.map(N=>N.props.value).includes(D)&&D!=="";return B&&console.warn(`No corresponding option found for value '${D}'`),un.jsxs(eR,{size:h,className:m,error:iu(k,A),label:e,description:i,value:u&&w||B?"":S.value,disabled:w,onChange:N=>{d&&d(N),S.onChange(N)},hideLabel:f,children:[un.jsx("option",{style:{display:"none"}}),",",l]})},dS="_textAreaFieldWithBadges_bdz0b_1",mS="_etikettWrapper_bdz0b_4",Pm={textAreaFieldWithBadges:dS,etikettWrapper:mS},vS=({name:e,control:l,label:r,readOnly:t,maxLength:i,badges:u,validate:d=[],parse:m=L=>L,className:f,description:p,isEdited:h,size:R="small",...A})=>{const{formState:{errors:L}}=$a(),{field:w}=nu({name:e,control:l,rules:{validate:V.useMemo(()=>lu(d),[d])}});return t?un.jsx(Cv,{size:R,label:r,value:w.value,type:"textarea",isEdited:h,hideLabel:A.hideLabel}):un.jsxs("div",{className:u?Pm.textAreaFieldWithBadges:null,children:[u&&un.jsx("div",{className:Pm.etikettWrapper,children:u.map(({type:k,titleText:S})=>un.jsx(UR,{variant:k,size:"small",children:S},S))}),un.jsx(nT,{size:R,label:r,description:p,className:f,autoComplete:"off",...w,onChange:k=>w.onChange(k.currentTarget.value!==""?m(k.currentTarget.value):null),value:w.value?w.value:"",error:iu(L,e),maxLength:i,...A})]})},su=({formMethods:e,onSubmit:l,children:r,className:t,setDataOnUnmount:i})=>{const{handleSubmit:u,getValues:d}=e;return V.useEffect(()=>()=>{i&&i(d())},[]),un.jsx(IT,{...e,children:un.jsx("form",{className:t,onSubmit:l?u(m=>l(m)):void 0,children:r})})},Rt={"AdresseVisning.Adresse":"Adresse","ForelderPanel.Soker":"Søker","ForelderPanel.AnnenForelder":"Annen forelder","AlleBarnPanel.Barn":"Barn","AlleBarnPanel.BarnNr":"Barn {nummer}","AlleBarnPanel.Fodt":"Født","AlleBarnPanel.Dod":"Død","PersonPanel.RolleOgNavn":"{rolle, select, BRUKER {Søker, } ANNEN_PART {Den andre forelderen, } BARN {Barnet, } other {} }{navn}","PersonPanel.Beskrivelse.Bruker":"Adresser for søker registrert i folkeregisteret gyldige for de siste 12 månedene","PersonPanel.Beskrivelse.Barn":"Adresser for barnet registrert i folkeregisteret gyldige på skjæringstidspunktet","PersonPanel.Beskrivelse.Annenpart":"Adresser for den andre forelderen registrert i folkeregisteret gyldige på skjæringstidspunktet","PersonPanel.Fodt":"Født {dato}","PersonPanel.Dod":"Død {dato}","AdresseTabell.IngenAdresse":"Ingen adresser funnet for {erAnnenpart, select, true {den andre forelderen} other {søker} }.","AdresseTabell.SammeAdresse":"Den andre forelderen har samme adresse som søker på skjæringstidspunktet","AdresseTabell.PeriodeLabel":"Periode","AdresseTabell.AdresseLabel":"Adresse","AdresseTabell.TypeLabel":"Type","MerkePanel.Dod":"DØD","MerkePanel.DodTittel":"Personen er død","MerkePanel.DodFodt":"DØDFØDT","MerkePanel.Diskresjon6":"Kode 6","MerkePanel.Diskresjon7":"Kode 7","MerkePanel.EgenAnsatt":"Nav","MerkePanel.Verge":"Verge","MerkePanel.Diskresjon6Tittel":"Personen har diskresjonsmerking kode 6","MerkePanel.Diskresjon7Tittel":"Personen har diskresjonsmerking kode 7","MerkePanel.EgenAnsattTittel":"Personen er ansatt i Nav","MerkePanel.VergeTittel":"Personen har verge","SubmitButton.ConfirmInformation":"Bekreft og fortsett","FaktaBegrunnelseTextField.BegrunnEndringene":"Begrunn endringene","FaktaBegrunnelseTextField.Vurdering":"Vurdering","FaktaBegrunnelseTextField.Begrunnelse":"Begrunnelse","TrueFalseInput.True":"Ja","TrueFalseInput.False":"Nei","FaktaKilde.Soknad":"FRA SØKNADEN","FaktaKilde.FREG":"FRA FOLKEREGISTERET","FaktaKilde.MEDL":"FRA MEDLEMSKAPSREGISTERET","FaktaKilde.Ukjent":"FRA UKJENT KILDE","FaktaKilde.SBH":"FRA SAKSBEHANDLER"},us=va(Rt),cS=r_(3),fS=t_(1500),Qn=({control:e,isReadOnly:l,isSubmittable:r,hasBegrunnelse:t,label:i,hasReadOnlyLabel:u=!1,hasVurderingText:d=!1,size:m})=>{const f=d?"FaktaBegrunnelseTextField.Vurdering":"FaktaBegrunnelseTextField.BegrunnEndringene",p=()=>l?u?us.formatMessage({id:"FaktaBegrunnelseTextField.Begrunnelse"}):"":i??us.formatMessage({id:f});return y.jsx(Bl,{value:us,children:(r||t)&&y.jsx(vS,{name:"begrunnelse",control:e,label:p(),validate:[js,cS,fS,l_],maxLength:1500,readOnly:l,size:m})})},gS=e=>e&&Array.isArray(e)?e[0]?.begrunnelse??"":e&&!Array.isArray(e)&&e.begrunnelse?e.begrunnelse:"";Qn.initialValues=e=>({begrunnelse:i_(gS(e)??void 0)});Qn.transformValues=e=>({begrunnelse:g_(e.begrunnelse)});Qn.__docgenInfo={description:"",methods:[{name:"initialValues",docblock:null,modifiers:["static"],params:[{name:"aksjonspunkt",optional:!0,type:{name:"union",raw:"Aksjonspunkt[] | Aksjonspunkt",elements:[{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  aksjonspunktType: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType;
+  begrunnelse?: string;
+  besluttersBegrunnelse?: string;
+  definisjon: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;
+  endretAv?: string;
+  endretTidspunkt?: string;
+  erAktivt: boolean;
+  fristTid?: string;
+  kanLoses: boolean;
+  status: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus;
+  toTrinnsBehandling: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vilkarType?: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
+  vurderPaNyttArsaker?: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
+}`,signature:{properties:[{key:"aksjonspunktType",value:{name:"union",raw:`| 'AUTO'
+| 'MANU'
+| 'OVST'
+| 'SAOV'
+| '-'`,elements:[{name:"literal",value:"'AUTO'"},{name:"literal",value:"'MANU'"},{name:"literal",value:"'OVST'"},{name:"literal",value:"'SAOV'"},{name:"literal",value:"'-'"}],required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"definisjon",value:{name:"union",raw:`| '5001'
+| '5027'
+| '5004'
+| '5005'
+| '5006'
+| '5007'
+| '5008'
+| '5011'
+| '5012'
+| '5013'
+| '5014'
+| '5015'
+| '5016'
+| '5017'
+| '5002'
+| '5026'
+| '5028'
+| '5030'
+| '5031'
+| '5033'
+| '5034'
+| '5003'
+| '5035'
+| '5037'
+| '5038'
+| '5039'
+| '5040'
+| '5043'
+| '5046'
+| '5047'
+| '5049'
+| '5051'
+| '5052'
+| '5054'
+| '5055'
+| '5057'
+| '5058'
+| '5059'
+| '5060'
+| '5061'
+| '5068'
+| '5064'
+| '5065'
+| '5063'
+| '5066'
+| '5071'
+| '5072'
+| '5073'
+| '5076'
+| '5077'
+| '5085'
+| '5082'
+| '5084'
+| '5029'
+| '5086'
+| '5089'
+| '5041'
+| '5062'
+| '5091'
+| '5092'
+| '5095'
+| '5096'
+| '5074'
+| '5101'
+| '5102'
+| '5103'
+| '6002'
+| '6003'
+| '6004'
+| '6005'
+| '6006'
+| '6008'
+| '6009'
+| '6010'
+| '6011'
+| '6065'
+| '6014'
+| '6015'
+| '6045'
+| '6016'
+| '6018'
+| '6019'
+| '6017'
+| '6103'
+| '7001'
+| '7002'
+| '7003'
+| '7005'
+| '7007'
+| '7008'
+| '7011'
+| '7013'
+| '7014'
+| '7020'
+| '7030'
+| '7033'
+| '7037'
+| '7039'
+| '7040'
+| 'UNDEFINED'
+| '5009'
+| '5019'
+| '5020'
+| '5021'
+| '5022'
+| '5023'
+| '5024'
+| '5025'
+| '5032'
+| '5036'
+| '5042'
+| '5044'
+| '5045'
+| '5048'
+| '5050'
+| '5053'
+| '5056'
+| '5067'
+| '5069'
+| '5070'
+| '5075'
+| '5078'
+| '5079'
+| '5080'
+| '5081'
+| '5083'
+| '5087'
+| '5088'
+| '5090'
+| '5093'
+| '5094'
+| '5097'
+| '5098'
+| '5099'
+| '6007'
+| '6012'
+| '6013'
+| '6068'
+| '6070'
+| '7004'
+| '7006'
+| '7009'
+| '7015'
+| '7016'
+| '7017'
+| '7018'
+| '7019'
+| '7021'
+| '7022'
+| '7023'
+| '7024'
+| '7025'
+| '7026'
+| '7027'
+| '7028'
+| '7029'
+| '7032'
+| '7034'
+| '7035'
+| '7036'
+| '7038'
+| '7041'`,elements:[{name:"literal",value:"'5001'"},{name:"literal",value:"'5027'"},{name:"literal",value:"'5004'"},{name:"literal",value:"'5005'"},{name:"literal",value:"'5006'"},{name:"literal",value:"'5007'"},{name:"literal",value:"'5008'"},{name:"literal",value:"'5011'"},{name:"literal",value:"'5012'"},{name:"literal",value:"'5013'"},{name:"literal",value:"'5014'"},{name:"literal",value:"'5015'"},{name:"literal",value:"'5016'"},{name:"literal",value:"'5017'"},{name:"literal",value:"'5002'"},{name:"literal",value:"'5026'"},{name:"literal",value:"'5028'"},{name:"literal",value:"'5030'"},{name:"literal",value:"'5031'"},{name:"literal",value:"'5033'"},{name:"literal",value:"'5034'"},{name:"literal",value:"'5003'"},{name:"literal",value:"'5035'"},{name:"literal",value:"'5037'"},{name:"literal",value:"'5038'"},{name:"literal",value:"'5039'"},{name:"literal",value:"'5040'"},{name:"literal",value:"'5043'"},{name:"literal",value:"'5046'"},{name:"literal",value:"'5047'"},{name:"literal",value:"'5049'"},{name:"literal",value:"'5051'"},{name:"literal",value:"'5052'"},{name:"literal",value:"'5054'"},{name:"literal",value:"'5055'"},{name:"literal",value:"'5057'"},{name:"literal",value:"'5058'"},{name:"literal",value:"'5059'"},{name:"literal",value:"'5060'"},{name:"literal",value:"'5061'"},{name:"literal",value:"'5068'"},{name:"literal",value:"'5064'"},{name:"literal",value:"'5065'"},{name:"literal",value:"'5063'"},{name:"literal",value:"'5066'"},{name:"literal",value:"'5071'"},{name:"literal",value:"'5072'"},{name:"literal",value:"'5073'"},{name:"literal",value:"'5076'"},{name:"literal",value:"'5077'"},{name:"literal",value:"'5085'"},{name:"literal",value:"'5082'"},{name:"literal",value:"'5084'"},{name:"literal",value:"'5029'"},{name:"literal",value:"'5086'"},{name:"literal",value:"'5089'"},{name:"literal",value:"'5041'"},{name:"literal",value:"'5062'"},{name:"literal",value:"'5091'"},{name:"literal",value:"'5092'"},{name:"literal",value:"'5095'"},{name:"literal",value:"'5096'"},{name:"literal",value:"'5074'"},{name:"literal",value:"'5101'"},{name:"literal",value:"'5102'"},{name:"literal",value:"'5103'"},{name:"literal",value:"'6002'"},{name:"literal",value:"'6003'"},{name:"literal",value:"'6004'"},{name:"literal",value:"'6005'"},{name:"literal",value:"'6006'"},{name:"literal",value:"'6008'"},{name:"literal",value:"'6009'"},{name:"literal",value:"'6010'"},{name:"literal",value:"'6011'"},{name:"literal",value:"'6065'"},{name:"literal",value:"'6014'"},{name:"literal",value:"'6015'"},{name:"literal",value:"'6045'"},{name:"literal",value:"'6016'"},{name:"literal",value:"'6018'"},{name:"literal",value:"'6019'"},{name:"literal",value:"'6017'"},{name:"literal",value:"'6103'"},{name:"literal",value:"'7001'"},{name:"literal",value:"'7002'"},{name:"literal",value:"'7003'"},{name:"literal",value:"'7005'"},{name:"literal",value:"'7007'"},{name:"literal",value:"'7008'"},{name:"literal",value:"'7011'"},{name:"literal",value:"'7013'"},{name:"literal",value:"'7014'"},{name:"literal",value:"'7020'"},{name:"literal",value:"'7030'"},{name:"literal",value:"'7033'"},{name:"literal",value:"'7037'"},{name:"literal",value:"'7039'"},{name:"literal",value:"'7040'"},{name:"literal",value:"'UNDEFINED'"},{name:"literal",value:"'5009'"},{name:"literal",value:"'5019'"},{name:"literal",value:"'5020'"},{name:"literal",value:"'5021'"},{name:"literal",value:"'5022'"},{name:"literal",value:"'5023'"},{name:"literal",value:"'5024'"},{name:"literal",value:"'5025'"},{name:"literal",value:"'5032'"},{name:"literal",value:"'5036'"},{name:"literal",value:"'5042'"},{name:"literal",value:"'5044'"},{name:"literal",value:"'5045'"},{name:"literal",value:"'5048'"},{name:"literal",value:"'5050'"},{name:"literal",value:"'5053'"},{name:"literal",value:"'5056'"},{name:"literal",value:"'5067'"},{name:"literal",value:"'5069'"},{name:"literal",value:"'5070'"},{name:"literal",value:"'5075'"},{name:"literal",value:"'5078'"},{name:"literal",value:"'5079'"},{name:"literal",value:"'5080'"},{name:"literal",value:"'5081'"},{name:"literal",value:"'5083'"},{name:"literal",value:"'5087'"},{name:"literal",value:"'5088'"},{name:"literal",value:"'5090'"},{name:"literal",value:"'5093'"},{name:"literal",value:"'5094'"},{name:"literal",value:"'5097'"},{name:"literal",value:"'5098'"},{name:"literal",value:"'5099'"},{name:"literal",value:"'6007'"},{name:"literal",value:"'6012'"},{name:"literal",value:"'6013'"},{name:"literal",value:"'6068'"},{name:"literal",value:"'6070'"},{name:"literal",value:"'7004'"},{name:"literal",value:"'7006'"},{name:"literal",value:"'7009'"},{name:"literal",value:"'7015'"},{name:"literal",value:"'7016'"},{name:"literal",value:"'7017'"},{name:"literal",value:"'7018'"},{name:"literal",value:"'7019'"},{name:"literal",value:"'7021'"},{name:"literal",value:"'7022'"},{name:"literal",value:"'7023'"},{name:"literal",value:"'7024'"},{name:"literal",value:"'7025'"},{name:"literal",value:"'7026'"},{name:"literal",value:"'7027'"},{name:"literal",value:"'7028'"},{name:"literal",value:"'7029'"},{name:"literal",value:"'7032'"},{name:"literal",value:"'7034'"},{name:"literal",value:"'7035'"},{name:"literal",value:"'7036'"},{name:"literal",value:"'7038'"},{name:"literal",value:"'7041'"}],required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}},{key:"erAktivt",value:{name:"boolean",required:!0}},{key:"fristTid",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"status",value:{name:"union",raw:"'AVBR' | 'OPPR' | 'UTFO'",elements:[{name:"literal",value:"'AVBR'"},{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"}],required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"union",raw:`| 'FP_VK_1'
+| 'FP_VK_11'
+| 'FP_VK_16'
+| 'FP_VK_2'
+| 'FP_VK_2_F'
+| 'FP_VK_2_L'
+| 'FP_VK_3'
+| 'FP_VK_4'
+| 'FP_VK_5'
+| 'FP_VK_8'
+| 'FP_VK_33'
+| 'FP_VK_34'
+| 'FP_VK_21'
+| 'FP_VK_23'
+| 'FP_VK_41'
+| 'SVP_VK_1'
+| '-'`,elements:[{name:"literal",value:"'FP_VK_1'"},{name:"literal",value:"'FP_VK_11'"},{name:"literal",value:"'FP_VK_16'"},{name:"literal",value:"'FP_VK_2'"},{name:"literal",value:"'FP_VK_2_F'"},{name:"literal",value:"'FP_VK_2_L'"},{name:"literal",value:"'FP_VK_3'"},{name:"literal",value:"'FP_VK_4'"},{name:"literal",value:"'FP_VK_5'"},{name:"literal",value:"'FP_VK_8'"},{name:"literal",value:"'FP_VK_33'"},{name:"literal",value:"'FP_VK_34'"},{name:"literal",value:"'FP_VK_21'"},{name:"literal",value:"'FP_VK_23'"},{name:"literal",value:"'FP_VK_41'"},{name:"literal",value:"'SVP_VK_1'"},{name:"literal",value:"'-'"}],required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'FEIL_FAKTA'
+| 'FEIL_LOV'
+| 'SKJØNN'
+| 'UTREDNING'
+| 'SAKSFLYT'
+| 'BEGRUNNELSE'
+| '-'
+| 'ANNET'
+| 'FEIL_REGEL'`,elements:[{name:"literal",value:"'FEIL_FAKTA'"},{name:"literal",value:"'FEIL_LOV'"},{name:"literal",value:"'SKJØNN'"},{name:"literal",value:"'UTREDNING'"},{name:"literal",value:"'SAKSFLYT'"},{name:"literal",value:"'BEGRUNNELSE'"},{name:"literal",value:"'-'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'FEIL_REGEL'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>",required:!1}}]}}],raw:"Aksjonspunkt[]"},{name:"signature",type:"object",raw:`{
+  aksjonspunktType: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType;
+  begrunnelse?: string;
+  besluttersBegrunnelse?: string;
+  definisjon: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;
+  endretAv?: string;
+  endretTidspunkt?: string;
+  erAktivt: boolean;
+  fristTid?: string;
+  kanLoses: boolean;
+  status: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus;
+  toTrinnsBehandling: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vilkarType?: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
+  vurderPaNyttArsaker?: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
+}`,signature:{properties:[{key:"aksjonspunktType",value:{name:"union",raw:`| 'AUTO'
+| 'MANU'
+| 'OVST'
+| 'SAOV'
+| '-'`,elements:[{name:"literal",value:"'AUTO'"},{name:"literal",value:"'MANU'"},{name:"literal",value:"'OVST'"},{name:"literal",value:"'SAOV'"},{name:"literal",value:"'-'"}],required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"definisjon",value:{name:"union",raw:`| '5001'
+| '5027'
+| '5004'
+| '5005'
+| '5006'
+| '5007'
+| '5008'
+| '5011'
+| '5012'
+| '5013'
+| '5014'
+| '5015'
+| '5016'
+| '5017'
+| '5002'
+| '5026'
+| '5028'
+| '5030'
+| '5031'
+| '5033'
+| '5034'
+| '5003'
+| '5035'
+| '5037'
+| '5038'
+| '5039'
+| '5040'
+| '5043'
+| '5046'
+| '5047'
+| '5049'
+| '5051'
+| '5052'
+| '5054'
+| '5055'
+| '5057'
+| '5058'
+| '5059'
+| '5060'
+| '5061'
+| '5068'
+| '5064'
+| '5065'
+| '5063'
+| '5066'
+| '5071'
+| '5072'
+| '5073'
+| '5076'
+| '5077'
+| '5085'
+| '5082'
+| '5084'
+| '5029'
+| '5086'
+| '5089'
+| '5041'
+| '5062'
+| '5091'
+| '5092'
+| '5095'
+| '5096'
+| '5074'
+| '5101'
+| '5102'
+| '5103'
+| '6002'
+| '6003'
+| '6004'
+| '6005'
+| '6006'
+| '6008'
+| '6009'
+| '6010'
+| '6011'
+| '6065'
+| '6014'
+| '6015'
+| '6045'
+| '6016'
+| '6018'
+| '6019'
+| '6017'
+| '6103'
+| '7001'
+| '7002'
+| '7003'
+| '7005'
+| '7007'
+| '7008'
+| '7011'
+| '7013'
+| '7014'
+| '7020'
+| '7030'
+| '7033'
+| '7037'
+| '7039'
+| '7040'
+| 'UNDEFINED'
+| '5009'
+| '5019'
+| '5020'
+| '5021'
+| '5022'
+| '5023'
+| '5024'
+| '5025'
+| '5032'
+| '5036'
+| '5042'
+| '5044'
+| '5045'
+| '5048'
+| '5050'
+| '5053'
+| '5056'
+| '5067'
+| '5069'
+| '5070'
+| '5075'
+| '5078'
+| '5079'
+| '5080'
+| '5081'
+| '5083'
+| '5087'
+| '5088'
+| '5090'
+| '5093'
+| '5094'
+| '5097'
+| '5098'
+| '5099'
+| '6007'
+| '6012'
+| '6013'
+| '6068'
+| '6070'
+| '7004'
+| '7006'
+| '7009'
+| '7015'
+| '7016'
+| '7017'
+| '7018'
+| '7019'
+| '7021'
+| '7022'
+| '7023'
+| '7024'
+| '7025'
+| '7026'
+| '7027'
+| '7028'
+| '7029'
+| '7032'
+| '7034'
+| '7035'
+| '7036'
+| '7038'
+| '7041'`,elements:[{name:"literal",value:"'5001'"},{name:"literal",value:"'5027'"},{name:"literal",value:"'5004'"},{name:"literal",value:"'5005'"},{name:"literal",value:"'5006'"},{name:"literal",value:"'5007'"},{name:"literal",value:"'5008'"},{name:"literal",value:"'5011'"},{name:"literal",value:"'5012'"},{name:"literal",value:"'5013'"},{name:"literal",value:"'5014'"},{name:"literal",value:"'5015'"},{name:"literal",value:"'5016'"},{name:"literal",value:"'5017'"},{name:"literal",value:"'5002'"},{name:"literal",value:"'5026'"},{name:"literal",value:"'5028'"},{name:"literal",value:"'5030'"},{name:"literal",value:"'5031'"},{name:"literal",value:"'5033'"},{name:"literal",value:"'5034'"},{name:"literal",value:"'5003'"},{name:"literal",value:"'5035'"},{name:"literal",value:"'5037'"},{name:"literal",value:"'5038'"},{name:"literal",value:"'5039'"},{name:"literal",value:"'5040'"},{name:"literal",value:"'5043'"},{name:"literal",value:"'5046'"},{name:"literal",value:"'5047'"},{name:"literal",value:"'5049'"},{name:"literal",value:"'5051'"},{name:"literal",value:"'5052'"},{name:"literal",value:"'5054'"},{name:"literal",value:"'5055'"},{name:"literal",value:"'5057'"},{name:"literal",value:"'5058'"},{name:"literal",value:"'5059'"},{name:"literal",value:"'5060'"},{name:"literal",value:"'5061'"},{name:"literal",value:"'5068'"},{name:"literal",value:"'5064'"},{name:"literal",value:"'5065'"},{name:"literal",value:"'5063'"},{name:"literal",value:"'5066'"},{name:"literal",value:"'5071'"},{name:"literal",value:"'5072'"},{name:"literal",value:"'5073'"},{name:"literal",value:"'5076'"},{name:"literal",value:"'5077'"},{name:"literal",value:"'5085'"},{name:"literal",value:"'5082'"},{name:"literal",value:"'5084'"},{name:"literal",value:"'5029'"},{name:"literal",value:"'5086'"},{name:"literal",value:"'5089'"},{name:"literal",value:"'5041'"},{name:"literal",value:"'5062'"},{name:"literal",value:"'5091'"},{name:"literal",value:"'5092'"},{name:"literal",value:"'5095'"},{name:"literal",value:"'5096'"},{name:"literal",value:"'5074'"},{name:"literal",value:"'5101'"},{name:"literal",value:"'5102'"},{name:"literal",value:"'5103'"},{name:"literal",value:"'6002'"},{name:"literal",value:"'6003'"},{name:"literal",value:"'6004'"},{name:"literal",value:"'6005'"},{name:"literal",value:"'6006'"},{name:"literal",value:"'6008'"},{name:"literal",value:"'6009'"},{name:"literal",value:"'6010'"},{name:"literal",value:"'6011'"},{name:"literal",value:"'6065'"},{name:"literal",value:"'6014'"},{name:"literal",value:"'6015'"},{name:"literal",value:"'6045'"},{name:"literal",value:"'6016'"},{name:"literal",value:"'6018'"},{name:"literal",value:"'6019'"},{name:"literal",value:"'6017'"},{name:"literal",value:"'6103'"},{name:"literal",value:"'7001'"},{name:"literal",value:"'7002'"},{name:"literal",value:"'7003'"},{name:"literal",value:"'7005'"},{name:"literal",value:"'7007'"},{name:"literal",value:"'7008'"},{name:"literal",value:"'7011'"},{name:"literal",value:"'7013'"},{name:"literal",value:"'7014'"},{name:"literal",value:"'7020'"},{name:"literal",value:"'7030'"},{name:"literal",value:"'7033'"},{name:"literal",value:"'7037'"},{name:"literal",value:"'7039'"},{name:"literal",value:"'7040'"},{name:"literal",value:"'UNDEFINED'"},{name:"literal",value:"'5009'"},{name:"literal",value:"'5019'"},{name:"literal",value:"'5020'"},{name:"literal",value:"'5021'"},{name:"literal",value:"'5022'"},{name:"literal",value:"'5023'"},{name:"literal",value:"'5024'"},{name:"literal",value:"'5025'"},{name:"literal",value:"'5032'"},{name:"literal",value:"'5036'"},{name:"literal",value:"'5042'"},{name:"literal",value:"'5044'"},{name:"literal",value:"'5045'"},{name:"literal",value:"'5048'"},{name:"literal",value:"'5050'"},{name:"literal",value:"'5053'"},{name:"literal",value:"'5056'"},{name:"literal",value:"'5067'"},{name:"literal",value:"'5069'"},{name:"literal",value:"'5070'"},{name:"literal",value:"'5075'"},{name:"literal",value:"'5078'"},{name:"literal",value:"'5079'"},{name:"literal",value:"'5080'"},{name:"literal",value:"'5081'"},{name:"literal",value:"'5083'"},{name:"literal",value:"'5087'"},{name:"literal",value:"'5088'"},{name:"literal",value:"'5090'"},{name:"literal",value:"'5093'"},{name:"literal",value:"'5094'"},{name:"literal",value:"'5097'"},{name:"literal",value:"'5098'"},{name:"literal",value:"'5099'"},{name:"literal",value:"'6007'"},{name:"literal",value:"'6012'"},{name:"literal",value:"'6013'"},{name:"literal",value:"'6068'"},{name:"literal",value:"'6070'"},{name:"literal",value:"'7004'"},{name:"literal",value:"'7006'"},{name:"literal",value:"'7009'"},{name:"literal",value:"'7015'"},{name:"literal",value:"'7016'"},{name:"literal",value:"'7017'"},{name:"literal",value:"'7018'"},{name:"literal",value:"'7019'"},{name:"literal",value:"'7021'"},{name:"literal",value:"'7022'"},{name:"literal",value:"'7023'"},{name:"literal",value:"'7024'"},{name:"literal",value:"'7025'"},{name:"literal",value:"'7026'"},{name:"literal",value:"'7027'"},{name:"literal",value:"'7028'"},{name:"literal",value:"'7029'"},{name:"literal",value:"'7032'"},{name:"literal",value:"'7034'"},{name:"literal",value:"'7035'"},{name:"literal",value:"'7036'"},{name:"literal",value:"'7038'"},{name:"literal",value:"'7041'"}],required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}},{key:"erAktivt",value:{name:"boolean",required:!0}},{key:"fristTid",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"status",value:{name:"union",raw:"'AVBR' | 'OPPR' | 'UTFO'",elements:[{name:"literal",value:"'AVBR'"},{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"}],required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"union",raw:`| 'FP_VK_1'
+| 'FP_VK_11'
+| 'FP_VK_16'
+| 'FP_VK_2'
+| 'FP_VK_2_F'
+| 'FP_VK_2_L'
+| 'FP_VK_3'
+| 'FP_VK_4'
+| 'FP_VK_5'
+| 'FP_VK_8'
+| 'FP_VK_33'
+| 'FP_VK_34'
+| 'FP_VK_21'
+| 'FP_VK_23'
+| 'FP_VK_41'
+| 'SVP_VK_1'
+| '-'`,elements:[{name:"literal",value:"'FP_VK_1'"},{name:"literal",value:"'FP_VK_11'"},{name:"literal",value:"'FP_VK_16'"},{name:"literal",value:"'FP_VK_2'"},{name:"literal",value:"'FP_VK_2_F'"},{name:"literal",value:"'FP_VK_2_L'"},{name:"literal",value:"'FP_VK_3'"},{name:"literal",value:"'FP_VK_4'"},{name:"literal",value:"'FP_VK_5'"},{name:"literal",value:"'FP_VK_8'"},{name:"literal",value:"'FP_VK_33'"},{name:"literal",value:"'FP_VK_34'"},{name:"literal",value:"'FP_VK_21'"},{name:"literal",value:"'FP_VK_23'"},{name:"literal",value:"'FP_VK_41'"},{name:"literal",value:"'SVP_VK_1'"},{name:"literal",value:"'-'"}],required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'FEIL_FAKTA'
+| 'FEIL_LOV'
+| 'SKJØNN'
+| 'UTREDNING'
+| 'SAKSFLYT'
+| 'BEGRUNNELSE'
+| '-'
+| 'ANNET'
+| 'FEIL_REGEL'`,elements:[{name:"literal",value:"'FEIL_FAKTA'"},{name:"literal",value:"'FEIL_LOV'"},{name:"literal",value:"'SKJØNN'"},{name:"literal",value:"'UTREDNING'"},{name:"literal",value:"'SAKSFLYT'"},{name:"literal",value:"'BEGRUNNELSE'"},{name:"literal",value:"'-'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'FEIL_REGEL'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>",required:!1}}]}}]}}],returns:{type:{name:"signature",type:"object",raw:`{
+  begrunnelse: string | undefined;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"union",raw:"string | undefined",elements:[{name:"string"},{name:"undefined"}],required:!0}}]}}}},{name:"transformValues",docblock:null,modifiers:["static"],params:[{name:"values",optional:!1,type:{name:"signature",type:"object",raw:`{
+  begrunnelse: string | undefined;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"union",raw:"string | undefined",elements:[{name:"string"},{name:"undefined"}],required:!0}}]},alias:"FaktaBegrunnelseFormValues"}}],returns:{type:{name:"signature",type:"object",raw:`{
+  begrunnelse: string;
+}`,signature:{properties:[{key:"begrunnelse",value:{name:"string",required:!0}}]}}}}],displayName:"FaktaBegrunnelseTextField",props:{control:{required:!0,tsType:{name:"UseControllerProps['control']",raw:"UseControllerProps<T>['control']"},description:""},isReadOnly:{required:!0,tsType:{name:"boolean"},description:""},isSubmittable:{required:!0,tsType:{name:"boolean"},description:""},hasBegrunnelse:{required:!0,tsType:{name:"boolean"},description:""},label:{required:!1,tsType:{name:"string"},description:""},hasReadOnlyLabel:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},hasVurderingText:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},size:{required:!1,tsType:{name:"union",raw:"'small' | 'medium'",elements:[{name:"literal",value:"'small'"},{name:"literal",value:"'medium'"}]},description:""}}};const hS=va(Rt),pS=(e,l,r)=>!r||l?!0:!e,Cl=({isReadOnly:e,isSubmittable:l,buttonText:r,onClick:t,isSubmitting:i,isDirty:u})=>y.jsx(Bl,{value:hS,children:!e&&y.jsx("div",{children:y.jsxs(Et,{size:"small",variant:"primary",loading:i,disabled:pS(u,i,l),onClick:t,type:t?"button":"submit",children:[!!r&&r,!r&&y.jsx(ce,{id:"SubmitButton.ConfirmInformation"})]})})});Cl.__docgenInfo={description:"FaktaSubmitButton",methods:[],displayName:"FaktaSubmitButton",props:{buttonText:{required:!1,tsType:{name:"string"},description:""},isReadOnly:{required:!0,tsType:{name:"boolean"},description:""},isSubmittable:{required:!0,tsType:{name:"boolean"},description:""},onClick:{required:!1,tsType:{name:"signature",type:"function",raw:"(event: React.MouseEvent) => void",signature:{arguments:[{type:{name:"ReactMouseEvent",raw:"React.MouseEvent"},name:"event"}],return:{name:"void"}}},description:""},isSubmitting:{required:!0,tsType:{name:"boolean"},description:""},isDirty:{required:!0,tsType:{name:"boolean"},description:""}}};const Dm=va(Rt),pt=({name:e,control:l,label:r,readOnly:t,trueLabel:i,trueContent:u,falseLabel:d,falseContent:m})=>{const{watch:f}=$a(),p=f(e);return y.jsx(uS,{name:e,control:l,label:r,validate:[js],isReadOnly:t,children:y.jsxs(ma,{gap:"space-2",children:[y.jsxs(ma,{gap:"space-16",children:[y.jsx(rm,{value:!0,size:"small",children:i??Dm.formatMessage({id:"TrueFalseInput.True"})}),p===!0&&u]}),y.jsxs(ma,{gap:"space-16",children:[y.jsx(rm,{value:!1,size:"small",children:d??Dm.formatMessage({id:"TrueFalseInput.False"})}),p===!1&&m]})]})})};pt.__docgenInfo={description:"",methods:[],displayName:"TrueFalseInput",props:{name:{required:!0,tsType:{name:"UseControllerProps['name']",raw:"UseControllerProps<T>['name']"},description:""},control:{required:!0,tsType:{name:"UseControllerProps['control']",raw:"UseControllerProps<T>['control']"},description:""},label:{required:!0,tsType:{name:"ReactReactNode",raw:"React.ReactNode"},description:""},readOnly:{required:!0,tsType:{name:"boolean"},description:""},trueLabel:{required:!1,tsType:{name:"ReactReactElement",raw:"React.ReactElement"},description:""},trueContent:{required:!1,tsType:{name:"ReactReactElement",raw:"React.ReactElement"},description:""},falseLabel:{required:!1,tsType:{name:"ReactReactElement",raw:"React.ReactElement"},description:""},falseContent:{required:!1,tsType:{name:"ReactReactElement",raw:"React.ReactElement"},description:""}}};const ES=(e,l)=>{const r=new Date(e.tom??gs),t=new Date(l.tom??gs);if(r>t)return-1;if(r<t)return 1;if(e.fom&&!l.fom)return-1;if(!e.fom&&l.fom)return 1;if(e.fom&&l.fom){const i=new Date(e.fom),u=new Date(l.fom);if(i>u)return-1;if(i<u)return 1}return 0};var ft={exports:{}};/**
+ * @license
+ * Lodash <https://lodash.com/>
+ * Copyright OpenJS Foundation and other contributors <https://openjsf.org/>
+ * Released under MIT license <https://lodash.com/license>
+ * Based on Underscore.js 1.8.3 <http://underscorejs.org/LICENSE>
+ * Copyright Jeremy Ashkenas, DocumentCloud and Investigative Reporters & Editors
+ */var yS=ft.exports,wm;function _S(){return wm||(wm=1,(function(e,l){(function(){var r,t="4.17.21",i=200,u="Unsupported core-js use. Try https://npms.io/search?q=ponyfill.",d="Expected a function",m="Invalid `variable` option passed into `_.template`",f="__lodash_hash_undefined__",p=500,h="__lodash_placeholder__",R=1,A=2,L=4,w=1,k=2,S=1,D=2,B=4,N=8,J=16,M=32,$=64,G=128,x=256,Z=512,le=30,X="...",Y=800,H=16,ae=1,oe=2,fe=3,he=1/0,pe=9007199254740991,Be=17976931348623157e292,Xe=NaN,Re=4294967295,na=Re-1,Tn=Re>>>1,Za=[["ary",G],["bind",S],["bindKey",D],["curry",N],["curryRight",J],["flip",Z],["partial",M],["partialRight",$],["rearg",x]],Pn="[object Arguments]",ga="[object Array]",Sa="[object AsyncFunction]",Gn="[object Boolean]",hn="[object Date]",aa="[object DOMException]",Sn="[object Error]",pn="[object Function]",Cn="[object GeneratorFunction]",Ge="[object Map]",tn="[object Number]",ra="[object Null]",Qe="[object Object]",ta="[object Promise]",jn="[object Proxy]",T="[object RegExp]",P="[object Set]",K="[object String]",ee="[object Symbol]",z="[object Undefined]",W="[object WeakMap]",ue="[object WeakSet]",Ne="[object ArrayBuffer]",Le="[object DataView]",cn="[object Float32Array]",Ka="[object Float64Array]",Hn="[object Int8Array]",Cr="[object Int16Array]",za="[object Int32Array]",Xa="[object Uint8Array]",jr="[object Uint8ClampedArray]",gr="[object Uint16Array]",Hr="[object Uint32Array]",Nt=/\b__p \+= '';/g,Tc=/\b(__p \+=) '' \+/g,Sc=/(__e\(.*?\)|\b__t\)) \+\n'';/g,fu=/&(?:amp|lt|gt|quot|#39);/g,gu=/[&<>"']/g,Oc=RegExp(fu.source),Nc=RegExp(gu.source),kc=/<%-([\s\S]+?)%>/g,bc=/<%([\s\S]+?)%>/g,hu=/<%=([\s\S]+?)%>/g,Ic=/\.|\[(?:[^[\]]*|(["'])(?:(?!\1)[^\\]|\\.)*?\1)\]/,Lc=/^\w*$/,Mc=/[^.[\]]+|\[(?:(-?\d+(?:\.\d+)?)|(["'])((?:(?!\2)[^\\]|\\.)*?)\2)\]|(?=(?:\.|\[\])(?:\.|\[\]|$))/g,Yl=/[\\^$.*+?()[\]{}|]/g,Pc=RegExp(Yl.source),Jl=/^\s+/,Dc=/\s/,wc=/\{(?:\n\/\* \[wrapped with .+\] \*\/)?\n?/,Bc=/\{\n\/\* \[wrapped with (.+)\] \*/,Fc=/,? & /,Kc=/[^\x00-\x2f\x3a-\x40\x5b-\x60\x7b-\x7f]+/g,Vc=/[()=,{}\[\]\/\s]/,Uc=/\\(\\)?/g,xc=/\$\{([^\\}]*(?:\\.[^\\}]*)*)\}/g,pu=/\w*$/,Gc=/^[-+]0x[0-9a-f]+$/i,Cc=/^0b[01]+$/i,jc=/^\[object .+?Constructor\]$/,Hc=/^0o[0-7]+$/i,qc=/^(?:0|[1-9]\d*)$/,Yc=/[\xc0-\xd6\xd8-\xf6\xf8-\xff\u0100-\u017f]/g,kt=/($^)/,Jc=/['\n\r\u2028\u2029\\]/g,bt="\\ud800-\\udfff",$c="\\u0300-\\u036f",Wc="\\ufe20-\\ufe2f",Zc="\\u20d0-\\u20ff",Eu=$c+Wc+Zc,yu="\\u2700-\\u27bf",_u="a-z\\xdf-\\xf6\\xf8-\\xff",zc="\\xac\\xb1\\xd7\\xf7",Xc="\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf",Qc="\\u2000-\\u206f",ef=" \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000",Au="A-Z\\xc0-\\xd6\\xd8-\\xde",Ru="\\ufe0e\\ufe0f",Tu=zc+Xc+Qc+ef,$l="['’]",nf="["+bt+"]",Su="["+Tu+"]",It="["+Eu+"]",Ou="\\d+",af="["+yu+"]",Nu="["+_u+"]",ku="[^"+bt+Tu+Ou+yu+_u+Au+"]",Wl="\\ud83c[\\udffb-\\udfff]",rf="(?:"+It+"|"+Wl+")",bu="[^"+bt+"]",Zl="(?:\\ud83c[\\udde6-\\uddff]){2}",zl="[\\ud800-\\udbff][\\udc00-\\udfff]",hr="["+Au+"]",Iu="\\u200d",Lu="(?:"+Nu+"|"+ku+")",tf="(?:"+hr+"|"+ku+")",Mu="(?:"+$l+"(?:d|ll|m|re|s|t|ve))?",Pu="(?:"+$l+"(?:D|LL|M|RE|S|T|VE))?",Du=rf+"?",wu="["+Ru+"]?",lf="(?:"+Iu+"(?:"+[bu,Zl,zl].join("|")+")"+wu+Du+")*",sf="\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])",uf="\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])",Bu=wu+Du+lf,of="(?:"+[af,Zl,zl].join("|")+")"+Bu,df="(?:"+[bu+It+"?",It,Zl,zl,nf].join("|")+")",mf=RegExp($l,"g"),vf=RegExp(It,"g"),Xl=RegExp(Wl+"(?="+Wl+")|"+df+Bu,"g"),cf=RegExp([hr+"?"+Nu+"+"+Mu+"(?="+[Su,hr,"$"].join("|")+")",tf+"+"+Pu+"(?="+[Su,hr+Lu,"$"].join("|")+")",hr+"?"+Lu+"+"+Mu,hr+"+"+Pu,uf,sf,Ou,of].join("|"),"g"),ff=RegExp("["+Iu+bt+Eu+Ru+"]"),gf=/[a-z][A-Z]|[A-Z]{2}[a-z]|[0-9][a-zA-Z]|[a-zA-Z][0-9]|[^a-zA-Z0-9 ]/,hf=["Array","Buffer","DataView","Date","Error","Float32Array","Float64Array","Function","Int8Array","Int16Array","Int32Array","Map","Math","Object","Promise","RegExp","Set","String","Symbol","TypeError","Uint8Array","Uint8ClampedArray","Uint16Array","Uint32Array","WeakMap","_","clearTimeout","isFinite","parseInt","setTimeout"],pf=-1,Ue={};Ue[cn]=Ue[Ka]=Ue[Hn]=Ue[Cr]=Ue[za]=Ue[Xa]=Ue[jr]=Ue[gr]=Ue[Hr]=!0,Ue[Pn]=Ue[ga]=Ue[Ne]=Ue[Gn]=Ue[Le]=Ue[hn]=Ue[Sn]=Ue[pn]=Ue[Ge]=Ue[tn]=Ue[Qe]=Ue[T]=Ue[P]=Ue[K]=Ue[W]=!1;var Ke={};Ke[Pn]=Ke[ga]=Ke[Ne]=Ke[Le]=Ke[Gn]=Ke[hn]=Ke[cn]=Ke[Ka]=Ke[Hn]=Ke[Cr]=Ke[za]=Ke[Ge]=Ke[tn]=Ke[Qe]=Ke[T]=Ke[P]=Ke[K]=Ke[ee]=Ke[Xa]=Ke[jr]=Ke[gr]=Ke[Hr]=!0,Ke[Sn]=Ke[pn]=Ke[W]=!1;var Ef={À:"A",Á:"A",Â:"A",Ã:"A",Ä:"A",Å:"A",à:"a",á:"a",â:"a",ã:"a",ä:"a",å:"a",Ç:"C",ç:"c",Ð:"D",ð:"d",È:"E",É:"E",Ê:"E",Ë:"E",è:"e",é:"e",ê:"e",ë:"e",Ì:"I",Í:"I",Î:"I",Ï:"I",ì:"i",í:"i",î:"i",ï:"i",Ñ:"N",ñ:"n",Ò:"O",Ó:"O",Ô:"O",Õ:"O",Ö:"O",Ø:"O",ò:"o",ó:"o",ô:"o",õ:"o",ö:"o",ø:"o",Ù:"U",Ú:"U",Û:"U",Ü:"U",ù:"u",ú:"u",û:"u",ü:"u",Ý:"Y",ý:"y",ÿ:"y",Æ:"Ae",æ:"ae",Þ:"Th",þ:"th",ß:"ss",Ā:"A",Ă:"A",Ą:"A",ā:"a",ă:"a",ą:"a",Ć:"C",Ĉ:"C",Ċ:"C",Č:"C",ć:"c",ĉ:"c",ċ:"c",č:"c",Ď:"D",Đ:"D",ď:"d",đ:"d",Ē:"E",Ĕ:"E",Ė:"E",Ę:"E",Ě:"E",ē:"e",ĕ:"e",ė:"e",ę:"e",ě:"e",Ĝ:"G",Ğ:"G",Ġ:"G",Ģ:"G",ĝ:"g",ğ:"g",ġ:"g",ģ:"g",Ĥ:"H",Ħ:"H",ĥ:"h",ħ:"h",Ĩ:"I",Ī:"I",Ĭ:"I",Į:"I",İ:"I",ĩ:"i",ī:"i",ĭ:"i",į:"i",ı:"i",Ĵ:"J",ĵ:"j",Ķ:"K",ķ:"k",ĸ:"k",Ĺ:"L",Ļ:"L",Ľ:"L",Ŀ:"L",Ł:"L",ĺ:"l",ļ:"l",ľ:"l",ŀ:"l",ł:"l",Ń:"N",Ņ:"N",Ň:"N",Ŋ:"N",ń:"n",ņ:"n",ň:"n",ŋ:"n",Ō:"O",Ŏ:"O",Ő:"O",ō:"o",ŏ:"o",ő:"o",Ŕ:"R",Ŗ:"R",Ř:"R",ŕ:"r",ŗ:"r",ř:"r",Ś:"S",Ŝ:"S",Ş:"S",Š:"S",ś:"s",ŝ:"s",ş:"s",š:"s",Ţ:"T",Ť:"T",Ŧ:"T",ţ:"t",ť:"t",ŧ:"t",Ũ:"U",Ū:"U",Ŭ:"U",Ů:"U",Ű:"U",Ų:"U",ũ:"u",ū:"u",ŭ:"u",ů:"u",ű:"u",ų:"u",Ŵ:"W",ŵ:"w",Ŷ:"Y",ŷ:"y",Ÿ:"Y",Ź:"Z",Ż:"Z",Ž:"Z",ź:"z",ż:"z",ž:"z",Ĳ:"IJ",ĳ:"ij",Œ:"Oe",œ:"oe",ŉ:"'n",ſ:"s"},yf={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"},_f={"&amp;":"&","&lt;":"<","&gt;":">","&quot;":'"',"&#39;":"'"},Af={"\\":"\\","'":"'","\n":"n","\r":"r","\u2028":"u2028","\u2029":"u2029"},Rf=parseFloat,Tf=parseInt,Fu=typeof gl=="object"&&gl&&gl.Object===Object&&gl,Sf=typeof self=="object"&&self&&self.Object===Object&&self,dn=Fu||Sf||Function("return this")(),Ql=l&&!l.nodeType&&l,Qa=Ql&&!0&&e&&!e.nodeType&&e,Ku=Qa&&Qa.exports===Ql,ei=Ku&&Fu.process,qn=(function(){try{var b=Qa&&Qa.require&&Qa.require("util").types;return b||ei&&ei.binding&&ei.binding("util")}catch{}})(),Vu=qn&&qn.isArrayBuffer,Uu=qn&&qn.isDate,xu=qn&&qn.isMap,Gu=qn&&qn.isRegExp,Cu=qn&&qn.isSet,ju=qn&&qn.isTypedArray;function Dn(b,U,F){switch(F.length){case 0:return b.call(U);case 1:return b.call(U,F[0]);case 2:return b.call(U,F[0],F[1]);case 3:return b.call(U,F[0],F[1],F[2])}return b.apply(U,F)}function Of(b,U,F,te){for(var ge=-1,Me=b==null?0:b.length;++ge<Me;){var en=b[ge];U(te,en,F(en),b)}return te}function Yn(b,U){for(var F=-1,te=b==null?0:b.length;++F<te&&U(b[F],F,b)!==!1;);return b}function Nf(b,U){for(var F=b==null?0:b.length;F--&&U(b[F],F,b)!==!1;);return b}function Hu(b,U){for(var F=-1,te=b==null?0:b.length;++F<te;)if(!U(b[F],F,b))return!1;return!0}function Va(b,U){for(var F=-1,te=b==null?0:b.length,ge=0,Me=[];++F<te;){var en=b[F];U(en,F,b)&&(Me[ge++]=en)}return Me}function Lt(b,U){var F=b==null?0:b.length;return!!F&&pr(b,U,0)>-1}function ni(b,U,F){for(var te=-1,ge=b==null?0:b.length;++te<ge;)if(F(U,b[te]))return!0;return!1}function Ce(b,U){for(var F=-1,te=b==null?0:b.length,ge=Array(te);++F<te;)ge[F]=U(b[F],F,b);return ge}function Ua(b,U){for(var F=-1,te=U.length,ge=b.length;++F<te;)b[ge+F]=U[F];return b}function ai(b,U,F,te){var ge=-1,Me=b==null?0:b.length;for(te&&Me&&(F=b[++ge]);++ge<Me;)F=U(F,b[ge],ge,b);return F}function kf(b,U,F,te){var ge=b==null?0:b.length;for(te&&ge&&(F=b[--ge]);ge--;)F=U(F,b[ge],ge,b);return F}function ri(b,U){for(var F=-1,te=b==null?0:b.length;++F<te;)if(U(b[F],F,b))return!0;return!1}var bf=ti("length");function If(b){return b.split("")}function Lf(b){return b.match(Kc)||[]}function qu(b,U,F){var te;return F(b,function(ge,Me,en){if(U(ge,Me,en))return te=Me,!1}),te}function Mt(b,U,F,te){for(var ge=b.length,Me=F+(te?1:-1);te?Me--:++Me<ge;)if(U(b[Me],Me,b))return Me;return-1}function pr(b,U,F){return U===U?Cf(b,U,F):Mt(b,Yu,F)}function Mf(b,U,F,te){for(var ge=F-1,Me=b.length;++ge<Me;)if(te(b[ge],U))return ge;return-1}function Yu(b){return b!==b}function Ju(b,U){var F=b==null?0:b.length;return F?ii(b,U)/F:Xe}function ti(b){return function(U){return U==null?r:U[b]}}function li(b){return function(U){return b==null?r:b[U]}}function $u(b,U,F,te,ge){return ge(b,function(Me,en,Fe){F=te?(te=!1,Me):U(F,Me,en,Fe)}),F}function Pf(b,U){var F=b.length;for(b.sort(U);F--;)b[F]=b[F].value;return b}function ii(b,U){for(var F,te=-1,ge=b.length;++te<ge;){var Me=U(b[te]);Me!==r&&(F=F===r?Me:F+Me)}return F}function si(b,U){for(var F=-1,te=Array(b);++F<b;)te[F]=U(F);return te}function Df(b,U){return Ce(U,function(F){return[F,b[F]]})}function Wu(b){return b&&b.slice(0,Qu(b)+1).replace(Jl,"")}function wn(b){return function(U){return b(U)}}function ui(b,U){return Ce(U,function(F){return b[F]})}function qr(b,U){return b.has(U)}function Zu(b,U){for(var F=-1,te=b.length;++F<te&&pr(U,b[F],0)>-1;);return F}function zu(b,U){for(var F=b.length;F--&&pr(U,b[F],0)>-1;);return F}function wf(b,U){for(var F=b.length,te=0;F--;)b[F]===U&&++te;return te}var Bf=li(Ef),Ff=li(yf);function Kf(b){return"\\"+Af[b]}function Vf(b,U){return b==null?r:b[U]}function Er(b){return ff.test(b)}function Uf(b){return gf.test(b)}function xf(b){for(var U,F=[];!(U=b.next()).done;)F.push(U.value);return F}function oi(b){var U=-1,F=Array(b.size);return b.forEach(function(te,ge){F[++U]=[ge,te]}),F}function Xu(b,U){return function(F){return b(U(F))}}function xa(b,U){for(var F=-1,te=b.length,ge=0,Me=[];++F<te;){var en=b[F];(en===U||en===h)&&(b[F]=h,Me[ge++]=F)}return Me}function Pt(b){var U=-1,F=Array(b.size);return b.forEach(function(te){F[++U]=te}),F}function Gf(b){var U=-1,F=Array(b.size);return b.forEach(function(te){F[++U]=[te,te]}),F}function Cf(b,U,F){for(var te=F-1,ge=b.length;++te<ge;)if(b[te]===U)return te;return-1}function jf(b,U,F){for(var te=F+1;te--;)if(b[te]===U)return te;return te}function yr(b){return Er(b)?qf(b):bf(b)}function la(b){return Er(b)?Yf(b):If(b)}function Qu(b){for(var U=b.length;U--&&Dc.test(b.charAt(U)););return U}var Hf=li(_f);function qf(b){for(var U=Xl.lastIndex=0;Xl.test(b);)++U;return U}function Yf(b){return b.match(Xl)||[]}function Jf(b){return b.match(cf)||[]}var $f=(function b(U){U=U==null?dn:_r.defaults(dn.Object(),U,_r.pick(dn,hf));var F=U.Array,te=U.Date,ge=U.Error,Me=U.Function,en=U.Math,Fe=U.Object,di=U.RegExp,Wf=U.String,Jn=U.TypeError,Dt=F.prototype,Zf=Me.prototype,Ar=Fe.prototype,wt=U["__core-js_shared__"],Bt=Zf.toString,we=Ar.hasOwnProperty,zf=0,eo=(function(){var n=/[^.]+$/.exec(wt&&wt.keys&&wt.keys.IE_PROTO||"");return n?"Symbol(src)_1."+n:""})(),Ft=Ar.toString,Xf=Bt.call(Fe),Qf=dn._,eg=di("^"+Bt.call(we).replace(Yl,"\\$&").replace(/hasOwnProperty|(function).*?(?=\\\()| for .+?(?=\\\])/g,"$1.*?")+"$"),Kt=Ku?U.Buffer:r,Ga=U.Symbol,Vt=U.Uint8Array,no=Kt?Kt.allocUnsafe:r,Ut=Xu(Fe.getPrototypeOf,Fe),ao=Fe.create,ro=Ar.propertyIsEnumerable,xt=Dt.splice,to=Ga?Ga.isConcatSpreadable:r,Yr=Ga?Ga.iterator:r,er=Ga?Ga.toStringTag:r,Gt=(function(){try{var n=lr(Fe,"defineProperty");return n({},"",{}),n}catch{}})(),ng=U.clearTimeout!==dn.clearTimeout&&U.clearTimeout,ag=te&&te.now!==dn.Date.now&&te.now,rg=U.setTimeout!==dn.setTimeout&&U.setTimeout,Ct=en.ceil,jt=en.floor,mi=Fe.getOwnPropertySymbols,tg=Kt?Kt.isBuffer:r,lo=U.isFinite,lg=Dt.join,ig=Xu(Fe.keys,Fe),nn=en.max,fn=en.min,sg=te.now,ug=U.parseInt,io=en.random,og=Dt.reverse,vi=lr(U,"DataView"),Jr=lr(U,"Map"),ci=lr(U,"Promise"),Rr=lr(U,"Set"),$r=lr(U,"WeakMap"),Wr=lr(Fe,"create"),Ht=$r&&new $r,Tr={},dg=ir(vi),mg=ir(Jr),vg=ir(ci),cg=ir(Rr),fg=ir($r),qt=Ga?Ga.prototype:r,Zr=qt?qt.valueOf:r,so=qt?qt.toString:r;function c(n){if(Ye(n)&&!Ee(n)&&!(n instanceof Oe)){if(n instanceof $n)return n;if(we.call(n,"__wrapped__"))return od(n)}return new $n(n)}var Sr=(function(){function n(){}return function(a){if(!He(a))return{};if(ao)return ao(a);n.prototype=a;var s=new n;return n.prototype=r,s}})();function Yt(){}function $n(n,a){this.__wrapped__=n,this.__actions__=[],this.__chain__=!!a,this.__index__=0,this.__values__=r}c.templateSettings={escape:kc,evaluate:bc,interpolate:hu,variable:"",imports:{_:c}},c.prototype=Yt.prototype,c.prototype.constructor=c,$n.prototype=Sr(Yt.prototype),$n.prototype.constructor=$n;function Oe(n){this.__wrapped__=n,this.__actions__=[],this.__dir__=1,this.__filtered__=!1,this.__iteratees__=[],this.__takeCount__=Re,this.__views__=[]}function gg(){var n=new Oe(this.__wrapped__);return n.__actions__=On(this.__actions__),n.__dir__=this.__dir__,n.__filtered__=this.__filtered__,n.__iteratees__=On(this.__iteratees__),n.__takeCount__=this.__takeCount__,n.__views__=On(this.__views__),n}function hg(){if(this.__filtered__){var n=new Oe(this);n.__dir__=-1,n.__filtered__=!0}else n=this.clone(),n.__dir__*=-1;return n}function pg(){var n=this.__wrapped__.value(),a=this.__dir__,s=Ee(n),o=a<0,v=s?n.length:0,g=Ih(0,v,this.__views__),E=g.start,O=g.end,I=O-E,C=o?O:E-1,j=this.__iteratees__,q=j.length,Q=0,se=fn(I,this.__takeCount__);if(!s||!o&&v==I&&se==I)return Po(n,this.__actions__);var me=[];e:for(;I--&&Q<se;){C+=a;for(var Ae=-1,ve=n[C];++Ae<q;){var Se=j[Ae],ke=Se.iteratee,Kn=Se.type,_n=ke(ve);if(Kn==oe)ve=_n;else if(!_n){if(Kn==ae)continue e;break e}}me[Q++]=ve}return me}Oe.prototype=Sr(Yt.prototype),Oe.prototype.constructor=Oe;function nr(n){var a=-1,s=n==null?0:n.length;for(this.clear();++a<s;){var o=n[a];this.set(o[0],o[1])}}function Eg(){this.__data__=Wr?Wr(null):{},this.size=0}function yg(n){var a=this.has(n)&&delete this.__data__[n];return this.size-=a?1:0,a}function _g(n){var a=this.__data__;if(Wr){var s=a[n];return s===f?r:s}return we.call(a,n)?a[n]:r}function Ag(n){var a=this.__data__;return Wr?a[n]!==r:we.call(a,n)}function Rg(n,a){var s=this.__data__;return this.size+=this.has(n)?0:1,s[n]=Wr&&a===r?f:a,this}nr.prototype.clear=Eg,nr.prototype.delete=yg,nr.prototype.get=_g,nr.prototype.has=Ag,nr.prototype.set=Rg;function Oa(n){var a=-1,s=n==null?0:n.length;for(this.clear();++a<s;){var o=n[a];this.set(o[0],o[1])}}function Tg(){this.__data__=[],this.size=0}function Sg(n){var a=this.__data__,s=Jt(a,n);if(s<0)return!1;var o=a.length-1;return s==o?a.pop():xt.call(a,s,1),--this.size,!0}function Og(n){var a=this.__data__,s=Jt(a,n);return s<0?r:a[s][1]}function Ng(n){return Jt(this.__data__,n)>-1}function kg(n,a){var s=this.__data__,o=Jt(s,n);return o<0?(++this.size,s.push([n,a])):s[o][1]=a,this}Oa.prototype.clear=Tg,Oa.prototype.delete=Sg,Oa.prototype.get=Og,Oa.prototype.has=Ng,Oa.prototype.set=kg;function Na(n){var a=-1,s=n==null?0:n.length;for(this.clear();++a<s;){var o=n[a];this.set(o[0],o[1])}}function bg(){this.size=0,this.__data__={hash:new nr,map:new(Jr||Oa),string:new nr}}function Ig(n){var a=ll(this,n).delete(n);return this.size-=a?1:0,a}function Lg(n){return ll(this,n).get(n)}function Mg(n){return ll(this,n).has(n)}function Pg(n,a){var s=ll(this,n),o=s.size;return s.set(n,a),this.size+=s.size==o?0:1,this}Na.prototype.clear=bg,Na.prototype.delete=Ig,Na.prototype.get=Lg,Na.prototype.has=Mg,Na.prototype.set=Pg;function ar(n){var a=-1,s=n==null?0:n.length;for(this.__data__=new Na;++a<s;)this.add(n[a])}function Dg(n){return this.__data__.set(n,f),this}function wg(n){return this.__data__.has(n)}ar.prototype.add=ar.prototype.push=Dg,ar.prototype.has=wg;function ia(n){var a=this.__data__=new Oa(n);this.size=a.size}function Bg(){this.__data__=new Oa,this.size=0}function Fg(n){var a=this.__data__,s=a.delete(n);return this.size=a.size,s}function Kg(n){return this.__data__.get(n)}function Vg(n){return this.__data__.has(n)}function Ug(n,a){var s=this.__data__;if(s instanceof Oa){var o=s.__data__;if(!Jr||o.length<i-1)return o.push([n,a]),this.size=++s.size,this;s=this.__data__=new Na(o)}return s.set(n,a),this.size=s.size,this}ia.prototype.clear=Bg,ia.prototype.delete=Fg,ia.prototype.get=Kg,ia.prototype.has=Vg,ia.prototype.set=Ug;function uo(n,a){var s=Ee(n),o=!s&&sr(n),v=!s&&!o&&Ya(n),g=!s&&!o&&!v&&br(n),E=s||o||v||g,O=E?si(n.length,Wf):[],I=O.length;for(var C in n)(a||we.call(n,C))&&!(E&&(C=="length"||v&&(C=="offset"||C=="parent")||g&&(C=="buffer"||C=="byteLength"||C=="byteOffset")||La(C,I)))&&O.push(C);return O}function oo(n){var a=n.length;return a?n[Si(0,a-1)]:r}function xg(n,a){return il(On(n),rr(a,0,n.length))}function Gg(n){return il(On(n))}function fi(n,a,s){(s!==r&&!sa(n[a],s)||s===r&&!(a in n))&&ka(n,a,s)}function zr(n,a,s){var o=n[a];(!(we.call(n,a)&&sa(o,s))||s===r&&!(a in n))&&ka(n,a,s)}function Jt(n,a){for(var s=n.length;s--;)if(sa(n[s][0],a))return s;return-1}function Cg(n,a,s,o){return Ca(n,function(v,g,E){a(o,v,s(v),E)}),o}function mo(n,a){return n&&pa(a,ln(a),n)}function jg(n,a){return n&&pa(a,kn(a),n)}function ka(n,a,s){a=="__proto__"&&Gt?Gt(n,a,{configurable:!0,enumerable:!0,value:s,writable:!0}):n[a]=s}function gi(n,a){for(var s=-1,o=a.length,v=F(o),g=n==null;++s<o;)v[s]=g?r:Wi(n,a[s]);return v}function rr(n,a,s){return n===n&&(s!==r&&(n=n<=s?n:s),a!==r&&(n=n>=a?n:a)),n}function Wn(n,a,s,o,v,g){var E,O=a&R,I=a&A,C=a&L;if(s&&(E=v?s(n,o,v,g):s(n)),E!==r)return E;if(!He(n))return n;var j=Ee(n);if(j){if(E=Mh(n),!O)return On(n,E)}else{var q=gn(n),Q=q==pn||q==Cn;if(Ya(n))return Bo(n,O);if(q==Qe||q==Pn||Q&&!v){if(E=I||Q?{}:ed(n),!O)return I?_h(n,jg(E,n)):yh(n,mo(E,n))}else{if(!Ke[q])return v?n:{};E=Ph(n,q,O)}}g||(g=new ia);var se=g.get(n);if(se)return se;g.set(n,E),Id(n)?n.forEach(function(ve){E.add(Wn(ve,a,s,ve,n,g))}):kd(n)&&n.forEach(function(ve,Se){E.set(Se,Wn(ve,a,s,Se,n,g))});var me=C?I?Bi:wi:I?kn:ln,Ae=j?r:me(n);return Yn(Ae||n,function(ve,Se){Ae&&(Se=ve,ve=n[Se]),zr(E,Se,Wn(ve,a,s,Se,n,g))}),E}function Hg(n){var a=ln(n);return function(s){return vo(s,n,a)}}function vo(n,a,s){var o=s.length;if(n==null)return!o;for(n=Fe(n);o--;){var v=s[o],g=a[v],E=n[v];if(E===r&&!(v in n)||!g(E))return!1}return!0}function co(n,a,s){if(typeof n!="function")throw new Jn(d);return tt(function(){n.apply(r,s)},a)}function Xr(n,a,s,o){var v=-1,g=Lt,E=!0,O=n.length,I=[],C=a.length;if(!O)return I;s&&(a=Ce(a,wn(s))),o?(g=ni,E=!1):a.length>=i&&(g=qr,E=!1,a=new ar(a));e:for(;++v<O;){var j=n[v],q=s==null?j:s(j);if(j=o||j!==0?j:0,E&&q===q){for(var Q=C;Q--;)if(a[Q]===q)continue e;I.push(j)}else g(a,q,o)||I.push(j)}return I}var Ca=xo(ha),fo=xo(pi,!0);function qg(n,a){var s=!0;return Ca(n,function(o,v,g){return s=!!a(o,v,g),s}),s}function $t(n,a,s){for(var o=-1,v=n.length;++o<v;){var g=n[o],E=a(g);if(E!=null&&(O===r?E===E&&!Fn(E):s(E,O)))var O=E,I=g}return I}function Yg(n,a,s,o){var v=n.length;for(s=ye(s),s<0&&(s=-s>v?0:v+s),o=o===r||o>v?v:ye(o),o<0&&(o+=v),o=s>o?0:Md(o);s<o;)n[s++]=a;return n}function go(n,a){var s=[];return Ca(n,function(o,v,g){a(o,v,g)&&s.push(o)}),s}function mn(n,a,s,o,v){var g=-1,E=n.length;for(s||(s=wh),v||(v=[]);++g<E;){var O=n[g];a>0&&s(O)?a>1?mn(O,a-1,s,o,v):Ua(v,O):o||(v[v.length]=O)}return v}var hi=Go(),ho=Go(!0);function ha(n,a){return n&&hi(n,a,ln)}function pi(n,a){return n&&ho(n,a,ln)}function Wt(n,a){return Va(a,function(s){return Ma(n[s])})}function tr(n,a){a=Ha(a,n);for(var s=0,o=a.length;n!=null&&s<o;)n=n[Ea(a[s++])];return s&&s==o?n:r}function po(n,a,s){var o=a(n);return Ee(n)?o:Ua(o,s(n))}function En(n){return n==null?n===r?z:ra:er&&er in Fe(n)?bh(n):Gh(n)}function Ei(n,a){return n>a}function Jg(n,a){return n!=null&&we.call(n,a)}function $g(n,a){return n!=null&&a in Fe(n)}function Wg(n,a,s){return n>=fn(a,s)&&n<nn(a,s)}function yi(n,a,s){for(var o=s?ni:Lt,v=n[0].length,g=n.length,E=g,O=F(g),I=1/0,C=[];E--;){var j=n[E];E&&a&&(j=Ce(j,wn(a))),I=fn(j.length,I),O[E]=!s&&(a||v>=120&&j.length>=120)?new ar(E&&j):r}j=n[0];var q=-1,Q=O[0];e:for(;++q<v&&C.length<I;){var se=j[q],me=a?a(se):se;if(se=s||se!==0?se:0,!(Q?qr(Q,me):o(C,me,s))){for(E=g;--E;){var Ae=O[E];if(!(Ae?qr(Ae,me):o(n[E],me,s)))continue e}Q&&Q.push(me),C.push(se)}}return C}function Zg(n,a,s,o){return ha(n,function(v,g,E){a(o,s(v),g,E)}),o}function Qr(n,a,s){a=Ha(a,n),n=td(n,a);var o=n==null?n:n[Ea(zn(a))];return o==null?r:Dn(o,n,s)}function Eo(n){return Ye(n)&&En(n)==Pn}function zg(n){return Ye(n)&&En(n)==Ne}function Xg(n){return Ye(n)&&En(n)==hn}function et(n,a,s,o,v){return n===a?!0:n==null||a==null||!Ye(n)&&!Ye(a)?n!==n&&a!==a:Qg(n,a,s,o,et,v)}function Qg(n,a,s,o,v,g){var E=Ee(n),O=Ee(a),I=E?ga:gn(n),C=O?ga:gn(a);I=I==Pn?Qe:I,C=C==Pn?Qe:C;var j=I==Qe,q=C==Qe,Q=I==C;if(Q&&Ya(n)){if(!Ya(a))return!1;E=!0,j=!1}if(Q&&!j)return g||(g=new ia),E||br(n)?zo(n,a,s,o,v,g):Nh(n,a,I,s,o,v,g);if(!(s&w)){var se=j&&we.call(n,"__wrapped__"),me=q&&we.call(a,"__wrapped__");if(se||me){var Ae=se?n.value():n,ve=me?a.value():a;return g||(g=new ia),v(Ae,ve,s,o,g)}}return Q?(g||(g=new ia),kh(n,a,s,o,v,g)):!1}function eh(n){return Ye(n)&&gn(n)==Ge}function _i(n,a,s,o){var v=s.length,g=v,E=!o;if(n==null)return!g;for(n=Fe(n);v--;){var O=s[v];if(E&&O[2]?O[1]!==n[O[0]]:!(O[0]in n))return!1}for(;++v<g;){O=s[v];var I=O[0],C=n[I],j=O[1];if(E&&O[2]){if(C===r&&!(I in n))return!1}else{var q=new ia;if(o)var Q=o(C,j,I,n,a,q);if(!(Q===r?et(j,C,w|k,o,q):Q))return!1}}return!0}function yo(n){if(!He(n)||Fh(n))return!1;var a=Ma(n)?eg:jc;return a.test(ir(n))}function nh(n){return Ye(n)&&En(n)==T}function ah(n){return Ye(n)&&gn(n)==P}function rh(n){return Ye(n)&&vl(n.length)&&!!Ue[En(n)]}function _o(n){return typeof n=="function"?n:n==null?bn:typeof n=="object"?Ee(n)?To(n[0],n[1]):Ro(n):Cd(n)}function Ai(n){if(!rt(n))return ig(n);var a=[];for(var s in Fe(n))we.call(n,s)&&s!="constructor"&&a.push(s);return a}function th(n){if(!He(n))return xh(n);var a=rt(n),s=[];for(var o in n)o=="constructor"&&(a||!we.call(n,o))||s.push(o);return s}function Ri(n,a){return n<a}function Ao(n,a){var s=-1,o=Nn(n)?F(n.length):[];return Ca(n,function(v,g,E){o[++s]=a(v,g,E)}),o}function Ro(n){var a=Ki(n);return a.length==1&&a[0][2]?ad(a[0][0],a[0][1]):function(s){return s===n||_i(s,n,a)}}function To(n,a){return Ui(n)&&nd(a)?ad(Ea(n),a):function(s){var o=Wi(s,n);return o===r&&o===a?Zi(s,n):et(a,o,w|k)}}function Zt(n,a,s,o,v){n!==a&&hi(a,function(g,E){if(v||(v=new ia),He(g))lh(n,a,E,s,Zt,o,v);else{var O=o?o(Gi(n,E),g,E+"",n,a,v):r;O===r&&(O=g),fi(n,E,O)}},kn)}function lh(n,a,s,o,v,g,E){var O=Gi(n,s),I=Gi(a,s),C=E.get(I);if(C){fi(n,s,C);return}var j=g?g(O,I,s+"",n,a,E):r,q=j===r;if(q){var Q=Ee(I),se=!Q&&Ya(I),me=!Q&&!se&&br(I);j=I,Q||se||me?Ee(O)?j=O:Je(O)?j=On(O):se?(q=!1,j=Bo(I,!0)):me?(q=!1,j=Fo(I,!0)):j=[]:lt(I)||sr(I)?(j=O,sr(O)?j=Pd(O):(!He(O)||Ma(O))&&(j=ed(I))):q=!1}q&&(E.set(I,j),v(j,I,o,g,E),E.delete(I)),fi(n,s,j)}function So(n,a){var s=n.length;if(s)return a+=a<0?s:0,La(a,s)?n[a]:r}function Oo(n,a,s){a.length?a=Ce(a,function(g){return Ee(g)?function(E){return tr(E,g.length===1?g[0]:g)}:g}):a=[bn];var o=-1;a=Ce(a,wn(de()));var v=Ao(n,function(g,E,O){var I=Ce(a,function(C){return C(g)});return{criteria:I,index:++o,value:g}});return Pf(v,function(g,E){return Eh(g,E,s)})}function ih(n,a){return No(n,a,function(s,o){return Zi(n,o)})}function No(n,a,s){for(var o=-1,v=a.length,g={};++o<v;){var E=a[o],O=tr(n,E);s(O,E)&&nt(g,Ha(E,n),O)}return g}function sh(n){return function(a){return tr(a,n)}}function Ti(n,a,s,o){var v=o?Mf:pr,g=-1,E=a.length,O=n;for(n===a&&(a=On(a)),s&&(O=Ce(n,wn(s)));++g<E;)for(var I=0,C=a[g],j=s?s(C):C;(I=v(O,j,I,o))>-1;)O!==n&&xt.call(O,I,1),xt.call(n,I,1);return n}function ko(n,a){for(var s=n?a.length:0,o=s-1;s--;){var v=a[s];if(s==o||v!==g){var g=v;La(v)?xt.call(n,v,1):ki(n,v)}}return n}function Si(n,a){return n+jt(io()*(a-n+1))}function uh(n,a,s,o){for(var v=-1,g=nn(Ct((a-n)/(s||1)),0),E=F(g);g--;)E[o?g:++v]=n,n+=s;return E}function Oi(n,a){var s="";if(!n||a<1||a>pe)return s;do a%2&&(s+=n),a=jt(a/2),a&&(n+=n);while(a);return s}function Te(n,a){return Ci(rd(n,a,bn),n+"")}function oh(n){return oo(Ir(n))}function dh(n,a){var s=Ir(n);return il(s,rr(a,0,s.length))}function nt(n,a,s,o){if(!He(n))return n;a=Ha(a,n);for(var v=-1,g=a.length,E=g-1,O=n;O!=null&&++v<g;){var I=Ea(a[v]),C=s;if(I==="__proto__"||I==="constructor"||I==="prototype")return n;if(v!=E){var j=O[I];C=o?o(j,I,O):r,C===r&&(C=He(j)?j:La(a[v+1])?[]:{})}zr(O,I,C),O=O[I]}return n}var bo=Ht?function(n,a){return Ht.set(n,a),n}:bn,mh=Gt?function(n,a){return Gt(n,"toString",{configurable:!0,enumerable:!1,value:Xi(a),writable:!0})}:bn;function vh(n){return il(Ir(n))}function Zn(n,a,s){var o=-1,v=n.length;a<0&&(a=-a>v?0:v+a),s=s>v?v:s,s<0&&(s+=v),v=a>s?0:s-a>>>0,a>>>=0;for(var g=F(v);++o<v;)g[o]=n[o+a];return g}function ch(n,a){var s;return Ca(n,function(o,v,g){return s=a(o,v,g),!s}),!!s}function zt(n,a,s){var o=0,v=n==null?o:n.length;if(typeof a=="number"&&a===a&&v<=Tn){for(;o<v;){var g=o+v>>>1,E=n[g];E!==null&&!Fn(E)&&(s?E<=a:E<a)?o=g+1:v=g}return v}return Ni(n,a,bn,s)}function Ni(n,a,s,o){var v=0,g=n==null?0:n.length;if(g===0)return 0;a=s(a);for(var E=a!==a,O=a===null,I=Fn(a),C=a===r;v<g;){var j=jt((v+g)/2),q=s(n[j]),Q=q!==r,se=q===null,me=q===q,Ae=Fn(q);if(E)var ve=o||me;else C?ve=me&&(o||Q):O?ve=me&&Q&&(o||!se):I?ve=me&&Q&&!se&&(o||!Ae):se||Ae?ve=!1:ve=o?q<=a:q<a;ve?v=j+1:g=j}return fn(g,na)}function Io(n,a){for(var s=-1,o=n.length,v=0,g=[];++s<o;){var E=n[s],O=a?a(E):E;if(!s||!sa(O,I)){var I=O;g[v++]=E===0?0:E}}return g}function Lo(n){return typeof n=="number"?n:Fn(n)?Xe:+n}function Bn(n){if(typeof n=="string")return n;if(Ee(n))return Ce(n,Bn)+"";if(Fn(n))return so?so.call(n):"";var a=n+"";return a=="0"&&1/n==-he?"-0":a}function ja(n,a,s){var o=-1,v=Lt,g=n.length,E=!0,O=[],I=O;if(s)E=!1,v=ni;else if(g>=i){var C=a?null:Sh(n);if(C)return Pt(C);E=!1,v=qr,I=new ar}else I=a?[]:O;e:for(;++o<g;){var j=n[o],q=a?a(j):j;if(j=s||j!==0?j:0,E&&q===q){for(var Q=I.length;Q--;)if(I[Q]===q)continue e;a&&I.push(q),O.push(j)}else v(I,q,s)||(I!==O&&I.push(q),O.push(j))}return O}function ki(n,a){return a=Ha(a,n),n=td(n,a),n==null||delete n[Ea(zn(a))]}function Mo(n,a,s,o){return nt(n,a,s(tr(n,a)),o)}function Xt(n,a,s,o){for(var v=n.length,g=o?v:-1;(o?g--:++g<v)&&a(n[g],g,n););return s?Zn(n,o?0:g,o?g+1:v):Zn(n,o?g+1:0,o?v:g)}function Po(n,a){var s=n;return s instanceof Oe&&(s=s.value()),ai(a,function(o,v){return v.func.apply(v.thisArg,Ua([o],v.args))},s)}function bi(n,a,s){var o=n.length;if(o<2)return o?ja(n[0]):[];for(var v=-1,g=F(o);++v<o;)for(var E=n[v],O=-1;++O<o;)O!=v&&(g[v]=Xr(g[v]||E,n[O],a,s));return ja(mn(g,1),a,s)}function Do(n,a,s){for(var o=-1,v=n.length,g=a.length,E={};++o<v;){var O=o<g?a[o]:r;s(E,n[o],O)}return E}function Ii(n){return Je(n)?n:[]}function Li(n){return typeof n=="function"?n:bn}function Ha(n,a){return Ee(n)?n:Ui(n,a)?[n]:ud(Pe(n))}var fh=Te;function qa(n,a,s){var o=n.length;return s=s===r?o:s,!a&&s>=o?n:Zn(n,a,s)}var wo=ng||function(n){return dn.clearTimeout(n)};function Bo(n,a){if(a)return n.slice();var s=n.length,o=no?no(s):new n.constructor(s);return n.copy(o),o}function Mi(n){var a=new n.constructor(n.byteLength);return new Vt(a).set(new Vt(n)),a}function gh(n,a){var s=a?Mi(n.buffer):n.buffer;return new n.constructor(s,n.byteOffset,n.byteLength)}function hh(n){var a=new n.constructor(n.source,pu.exec(n));return a.lastIndex=n.lastIndex,a}function ph(n){return Zr?Fe(Zr.call(n)):{}}function Fo(n,a){var s=a?Mi(n.buffer):n.buffer;return new n.constructor(s,n.byteOffset,n.length)}function Ko(n,a){if(n!==a){var s=n!==r,o=n===null,v=n===n,g=Fn(n),E=a!==r,O=a===null,I=a===a,C=Fn(a);if(!O&&!C&&!g&&n>a||g&&E&&I&&!O&&!C||o&&E&&I||!s&&I||!v)return 1;if(!o&&!g&&!C&&n<a||C&&s&&v&&!o&&!g||O&&s&&v||!E&&v||!I)return-1}return 0}function Eh(n,a,s){for(var o=-1,v=n.criteria,g=a.criteria,E=v.length,O=s.length;++o<E;){var I=Ko(v[o],g[o]);if(I){if(o>=O)return I;var C=s[o];return I*(C=="desc"?-1:1)}}return n.index-a.index}function Vo(n,a,s,o){for(var v=-1,g=n.length,E=s.length,O=-1,I=a.length,C=nn(g-E,0),j=F(I+C),q=!o;++O<I;)j[O]=a[O];for(;++v<E;)(q||v<g)&&(j[s[v]]=n[v]);for(;C--;)j[O++]=n[v++];return j}function Uo(n,a,s,o){for(var v=-1,g=n.length,E=-1,O=s.length,I=-1,C=a.length,j=nn(g-O,0),q=F(j+C),Q=!o;++v<j;)q[v]=n[v];for(var se=v;++I<C;)q[se+I]=a[I];for(;++E<O;)(Q||v<g)&&(q[se+s[E]]=n[v++]);return q}function On(n,a){var s=-1,o=n.length;for(a||(a=F(o));++s<o;)a[s]=n[s];return a}function pa(n,a,s,o){var v=!s;s||(s={});for(var g=-1,E=a.length;++g<E;){var O=a[g],I=o?o(s[O],n[O],O,s,n):r;I===r&&(I=n[O]),v?ka(s,O,I):zr(s,O,I)}return s}function yh(n,a){return pa(n,Vi(n),a)}function _h(n,a){return pa(n,Xo(n),a)}function Qt(n,a){return function(s,o){var v=Ee(s)?Of:Cg,g=a?a():{};return v(s,n,de(o,2),g)}}function Or(n){return Te(function(a,s){var o=-1,v=s.length,g=v>1?s[v-1]:r,E=v>2?s[2]:r;for(g=n.length>3&&typeof g=="function"?(v--,g):r,E&&yn(s[0],s[1],E)&&(g=v<3?r:g,v=1),a=Fe(a);++o<v;){var O=s[o];O&&n(a,O,o,g)}return a})}function xo(n,a){return function(s,o){if(s==null)return s;if(!Nn(s))return n(s,o);for(var v=s.length,g=a?v:-1,E=Fe(s);(a?g--:++g<v)&&o(E[g],g,E)!==!1;);return s}}function Go(n){return function(a,s,o){for(var v=-1,g=Fe(a),E=o(a),O=E.length;O--;){var I=E[n?O:++v];if(s(g[I],I,g)===!1)break}return a}}function Ah(n,a,s){var o=a&S,v=at(n);function g(){var E=this&&this!==dn&&this instanceof g?v:n;return E.apply(o?s:this,arguments)}return g}function Co(n){return function(a){a=Pe(a);var s=Er(a)?la(a):r,o=s?s[0]:a.charAt(0),v=s?qa(s,1).join(""):a.slice(1);return o[n]()+v}}function Nr(n){return function(a){return ai(xd(Ud(a).replace(mf,"")),n,"")}}function at(n){return function(){var a=arguments;switch(a.length){case 0:return new n;case 1:return new n(a[0]);case 2:return new n(a[0],a[1]);case 3:return new n(a[0],a[1],a[2]);case 4:return new n(a[0],a[1],a[2],a[3]);case 5:return new n(a[0],a[1],a[2],a[3],a[4]);case 6:return new n(a[0],a[1],a[2],a[3],a[4],a[5]);case 7:return new n(a[0],a[1],a[2],a[3],a[4],a[5],a[6])}var s=Sr(n.prototype),o=n.apply(s,a);return He(o)?o:s}}function Rh(n,a,s){var o=at(n);function v(){for(var g=arguments.length,E=F(g),O=g,I=kr(v);O--;)E[O]=arguments[O];var C=g<3&&E[0]!==I&&E[g-1]!==I?[]:xa(E,I);if(g-=C.length,g<s)return Jo(n,a,el,v.placeholder,r,E,C,r,r,s-g);var j=this&&this!==dn&&this instanceof v?o:n;return Dn(j,this,E)}return v}function jo(n){return function(a,s,o){var v=Fe(a);if(!Nn(a)){var g=de(s,3);a=ln(a),s=function(O){return g(v[O],O,v)}}var E=n(a,s,o);return E>-1?v[g?a[E]:E]:r}}function Ho(n){return Ia(function(a){var s=a.length,o=s,v=$n.prototype.thru;for(n&&a.reverse();o--;){var g=a[o];if(typeof g!="function")throw new Jn(d);if(v&&!E&&tl(g)=="wrapper")var E=new $n([],!0)}for(o=E?o:s;++o<s;){g=a[o];var O=tl(g),I=O=="wrapper"?Fi(g):r;I&&xi(I[0])&&I[1]==(G|N|M|x)&&!I[4].length&&I[9]==1?E=E[tl(I[0])].apply(E,I[3]):E=g.length==1&&xi(g)?E[O]():E.thru(g)}return function(){var C=arguments,j=C[0];if(E&&C.length==1&&Ee(j))return E.plant(j).value();for(var q=0,Q=s?a[q].apply(this,C):j;++q<s;)Q=a[q].call(this,Q);return Q}})}function el(n,a,s,o,v,g,E,O,I,C){var j=a&G,q=a&S,Q=a&D,se=a&(N|J),me=a&Z,Ae=Q?r:at(n);function ve(){for(var Se=arguments.length,ke=F(Se),Kn=Se;Kn--;)ke[Kn]=arguments[Kn];if(se)var _n=kr(ve),Vn=wf(ke,_n);if(o&&(ke=Vo(ke,o,v,se)),g&&(ke=Uo(ke,g,E,se)),Se-=Vn,se&&Se<C){var $e=xa(ke,_n);return Jo(n,a,el,ve.placeholder,s,ke,$e,O,I,C-Se)}var ua=q?s:this,Da=Q?ua[n]:n;return Se=ke.length,O?ke=Ch(ke,O):me&&Se>1&&ke.reverse(),j&&I<Se&&(ke.length=I),this&&this!==dn&&this instanceof ve&&(Da=Ae||at(Da)),Da.apply(ua,ke)}return ve}function qo(n,a){return function(s,o){return Zg(s,n,a(o),{})}}function nl(n,a){return function(s,o){var v;if(s===r&&o===r)return a;if(s!==r&&(v=s),o!==r){if(v===r)return o;typeof s=="string"||typeof o=="string"?(s=Bn(s),o=Bn(o)):(s=Lo(s),o=Lo(o)),v=n(s,o)}return v}}function Pi(n){return Ia(function(a){return a=Ce(a,wn(de())),Te(function(s){var o=this;return n(a,function(v){return Dn(v,o,s)})})})}function al(n,a){a=a===r?" ":Bn(a);var s=a.length;if(s<2)return s?Oi(a,n):a;var o=Oi(a,Ct(n/yr(a)));return Er(a)?qa(la(o),0,n).join(""):o.slice(0,n)}function Th(n,a,s,o){var v=a&S,g=at(n);function E(){for(var O=-1,I=arguments.length,C=-1,j=o.length,q=F(j+I),Q=this&&this!==dn&&this instanceof E?g:n;++C<j;)q[C]=o[C];for(;I--;)q[C++]=arguments[++O];return Dn(Q,v?s:this,q)}return E}function Yo(n){return function(a,s,o){return o&&typeof o!="number"&&yn(a,s,o)&&(s=o=r),a=Pa(a),s===r?(s=a,a=0):s=Pa(s),o=o===r?a<s?1:-1:Pa(o),uh(a,s,o,n)}}function rl(n){return function(a,s){return typeof a=="string"&&typeof s=="string"||(a=Xn(a),s=Xn(s)),n(a,s)}}function Jo(n,a,s,o,v,g,E,O,I,C){var j=a&N,q=j?E:r,Q=j?r:E,se=j?g:r,me=j?r:g;a|=j?M:$,a&=~(j?$:M),a&B||(a&=-4);var Ae=[n,a,v,se,q,me,Q,O,I,C],ve=s.apply(r,Ae);return xi(n)&&ld(ve,Ae),ve.placeholder=o,id(ve,n,a)}function Di(n){var a=en[n];return function(s,o){if(s=Xn(s),o=o==null?0:fn(ye(o),292),o&&lo(s)){var v=(Pe(s)+"e").split("e"),g=a(v[0]+"e"+(+v[1]+o));return v=(Pe(g)+"e").split("e"),+(v[0]+"e"+(+v[1]-o))}return a(s)}}var Sh=Rr&&1/Pt(new Rr([,-0]))[1]==he?function(n){return new Rr(n)}:ns;function $o(n){return function(a){var s=gn(a);return s==Ge?oi(a):s==P?Gf(a):Df(a,n(a))}}function ba(n,a,s,o,v,g,E,O){var I=a&D;if(!I&&typeof n!="function")throw new Jn(d);var C=o?o.length:0;if(C||(a&=-97,o=v=r),E=E===r?E:nn(ye(E),0),O=O===r?O:ye(O),C-=v?v.length:0,a&$){var j=o,q=v;o=v=r}var Q=I?r:Fi(n),se=[n,a,s,o,v,j,q,g,E,O];if(Q&&Uh(se,Q),n=se[0],a=se[1],s=se[2],o=se[3],v=se[4],O=se[9]=se[9]===r?I?0:n.length:nn(se[9]-C,0),!O&&a&(N|J)&&(a&=-25),!a||a==S)var me=Ah(n,a,s);else a==N||a==J?me=Rh(n,a,O):(a==M||a==(S|M))&&!v.length?me=Th(n,a,s,o):me=el.apply(r,se);var Ae=Q?bo:ld;return id(Ae(me,se),n,a)}function Wo(n,a,s,o){return n===r||sa(n,Ar[s])&&!we.call(o,s)?a:n}function Zo(n,a,s,o,v,g){return He(n)&&He(a)&&(g.set(a,n),Zt(n,a,r,Zo,g),g.delete(a)),n}function Oh(n){return lt(n)?r:n}function zo(n,a,s,o,v,g){var E=s&w,O=n.length,I=a.length;if(O!=I&&!(E&&I>O))return!1;var C=g.get(n),j=g.get(a);if(C&&j)return C==a&&j==n;var q=-1,Q=!0,se=s&k?new ar:r;for(g.set(n,a),g.set(a,n);++q<O;){var me=n[q],Ae=a[q];if(o)var ve=E?o(Ae,me,q,a,n,g):o(me,Ae,q,n,a,g);if(ve!==r){if(ve)continue;Q=!1;break}if(se){if(!ri(a,function(Se,ke){if(!qr(se,ke)&&(me===Se||v(me,Se,s,o,g)))return se.push(ke)})){Q=!1;break}}else if(!(me===Ae||v(me,Ae,s,o,g))){Q=!1;break}}return g.delete(n),g.delete(a),Q}function Nh(n,a,s,o,v,g,E){switch(s){case Le:if(n.byteLength!=a.byteLength||n.byteOffset!=a.byteOffset)return!1;n=n.buffer,a=a.buffer;case Ne:return!(n.byteLength!=a.byteLength||!g(new Vt(n),new Vt(a)));case Gn:case hn:case tn:return sa(+n,+a);case Sn:return n.name==a.name&&n.message==a.message;case T:case K:return n==a+"";case Ge:var O=oi;case P:var I=o&w;if(O||(O=Pt),n.size!=a.size&&!I)return!1;var C=E.get(n);if(C)return C==a;o|=k,E.set(n,a);var j=zo(O(n),O(a),o,v,g,E);return E.delete(n),j;case ee:if(Zr)return Zr.call(n)==Zr.call(a)}return!1}function kh(n,a,s,o,v,g){var E=s&w,O=wi(n),I=O.length,C=wi(a),j=C.length;if(I!=j&&!E)return!1;for(var q=I;q--;){var Q=O[q];if(!(E?Q in a:we.call(a,Q)))return!1}var se=g.get(n),me=g.get(a);if(se&&me)return se==a&&me==n;var Ae=!0;g.set(n,a),g.set(a,n);for(var ve=E;++q<I;){Q=O[q];var Se=n[Q],ke=a[Q];if(o)var Kn=E?o(ke,Se,Q,a,n,g):o(Se,ke,Q,n,a,g);if(!(Kn===r?Se===ke||v(Se,ke,s,o,g):Kn)){Ae=!1;break}ve||(ve=Q=="constructor")}if(Ae&&!ve){var _n=n.constructor,Vn=a.constructor;_n!=Vn&&"constructor"in n&&"constructor"in a&&!(typeof _n=="function"&&_n instanceof _n&&typeof Vn=="function"&&Vn instanceof Vn)&&(Ae=!1)}return g.delete(n),g.delete(a),Ae}function Ia(n){return Ci(rd(n,r,vd),n+"")}function wi(n){return po(n,ln,Vi)}function Bi(n){return po(n,kn,Xo)}var Fi=Ht?function(n){return Ht.get(n)}:ns;function tl(n){for(var a=n.name+"",s=Tr[a],o=we.call(Tr,a)?s.length:0;o--;){var v=s[o],g=v.func;if(g==null||g==n)return v.name}return a}function kr(n){var a=we.call(c,"placeholder")?c:n;return a.placeholder}function de(){var n=c.iteratee||Qi;return n=n===Qi?_o:n,arguments.length?n(arguments[0],arguments[1]):n}function ll(n,a){var s=n.__data__;return Bh(a)?s[typeof a=="string"?"string":"hash"]:s.map}function Ki(n){for(var a=ln(n),s=a.length;s--;){var o=a[s],v=n[o];a[s]=[o,v,nd(v)]}return a}function lr(n,a){var s=Vf(n,a);return yo(s)?s:r}function bh(n){var a=we.call(n,er),s=n[er];try{n[er]=r;var o=!0}catch{}var v=Ft.call(n);return o&&(a?n[er]=s:delete n[er]),v}var Vi=mi?function(n){return n==null?[]:(n=Fe(n),Va(mi(n),function(a){return ro.call(n,a)}))}:as,Xo=mi?function(n){for(var a=[];n;)Ua(a,Vi(n)),n=Ut(n);return a}:as,gn=En;(vi&&gn(new vi(new ArrayBuffer(1)))!=Le||Jr&&gn(new Jr)!=Ge||ci&&gn(ci.resolve())!=ta||Rr&&gn(new Rr)!=P||$r&&gn(new $r)!=W)&&(gn=function(n){var a=En(n),s=a==Qe?n.constructor:r,o=s?ir(s):"";if(o)switch(o){case dg:return Le;case mg:return Ge;case vg:return ta;case cg:return P;case fg:return W}return a});function Ih(n,a,s){for(var o=-1,v=s.length;++o<v;){var g=s[o],E=g.size;switch(g.type){case"drop":n+=E;break;case"dropRight":a-=E;break;case"take":a=fn(a,n+E);break;case"takeRight":n=nn(n,a-E);break}}return{start:n,end:a}}function Lh(n){var a=n.match(Bc);return a?a[1].split(Fc):[]}function Qo(n,a,s){a=Ha(a,n);for(var o=-1,v=a.length,g=!1;++o<v;){var E=Ea(a[o]);if(!(g=n!=null&&s(n,E)))break;n=n[E]}return g||++o!=v?g:(v=n==null?0:n.length,!!v&&vl(v)&&La(E,v)&&(Ee(n)||sr(n)))}function Mh(n){var a=n.length,s=new n.constructor(a);return a&&typeof n[0]=="string"&&we.call(n,"index")&&(s.index=n.index,s.input=n.input),s}function ed(n){return typeof n.constructor=="function"&&!rt(n)?Sr(Ut(n)):{}}function Ph(n,a,s){var o=n.constructor;switch(a){case Ne:return Mi(n);case Gn:case hn:return new o(+n);case Le:return gh(n,s);case cn:case Ka:case Hn:case Cr:case za:case Xa:case jr:case gr:case Hr:return Fo(n,s);case Ge:return new o;case tn:case K:return new o(n);case T:return hh(n);case P:return new o;case ee:return ph(n)}}function Dh(n,a){var s=a.length;if(!s)return n;var o=s-1;return a[o]=(s>1?"& ":"")+a[o],a=a.join(s>2?", ":" "),n.replace(wc,`{
+/* [wrapped with `+a+`] */
+`)}function wh(n){return Ee(n)||sr(n)||!!(to&&n&&n[to])}function La(n,a){var s=typeof n;return a=a??pe,!!a&&(s=="number"||s!="symbol"&&qc.test(n))&&n>-1&&n%1==0&&n<a}function yn(n,a,s){if(!He(s))return!1;var o=typeof a;return(o=="number"?Nn(s)&&La(a,s.length):o=="string"&&a in s)?sa(s[a],n):!1}function Ui(n,a){if(Ee(n))return!1;var s=typeof n;return s=="number"||s=="symbol"||s=="boolean"||n==null||Fn(n)?!0:Lc.test(n)||!Ic.test(n)||a!=null&&n in Fe(a)}function Bh(n){var a=typeof n;return a=="string"||a=="number"||a=="symbol"||a=="boolean"?n!=="__proto__":n===null}function xi(n){var a=tl(n),s=c[a];if(typeof s!="function"||!(a in Oe.prototype))return!1;if(n===s)return!0;var o=Fi(s);return!!o&&n===o[0]}function Fh(n){return!!eo&&eo in n}var Kh=wt?Ma:rs;function rt(n){var a=n&&n.constructor,s=typeof a=="function"&&a.prototype||Ar;return n===s}function nd(n){return n===n&&!He(n)}function ad(n,a){return function(s){return s==null?!1:s[n]===a&&(a!==r||n in Fe(s))}}function Vh(n){var a=dl(n,function(o){return s.size===p&&s.clear(),o}),s=a.cache;return a}function Uh(n,a){var s=n[1],o=a[1],v=s|o,g=v<(S|D|G),E=o==G&&s==N||o==G&&s==x&&n[7].length<=a[8]||o==(G|x)&&a[7].length<=a[8]&&s==N;if(!(g||E))return n;o&S&&(n[2]=a[2],v|=s&S?0:B);var O=a[3];if(O){var I=n[3];n[3]=I?Vo(I,O,a[4]):O,n[4]=I?xa(n[3],h):a[4]}return O=a[5],O&&(I=n[5],n[5]=I?Uo(I,O,a[6]):O,n[6]=I?xa(n[5],h):a[6]),O=a[7],O&&(n[7]=O),o&G&&(n[8]=n[8]==null?a[8]:fn(n[8],a[8])),n[9]==null&&(n[9]=a[9]),n[0]=a[0],n[1]=v,n}function xh(n){var a=[];if(n!=null)for(var s in Fe(n))a.push(s);return a}function Gh(n){return Ft.call(n)}function rd(n,a,s){return a=nn(a===r?n.length-1:a,0),function(){for(var o=arguments,v=-1,g=nn(o.length-a,0),E=F(g);++v<g;)E[v]=o[a+v];v=-1;for(var O=F(a+1);++v<a;)O[v]=o[v];return O[a]=s(E),Dn(n,this,O)}}function td(n,a){return a.length<2?n:tr(n,Zn(a,0,-1))}function Ch(n,a){for(var s=n.length,o=fn(a.length,s),v=On(n);o--;){var g=a[o];n[o]=La(g,s)?v[g]:r}return n}function Gi(n,a){if(!(a==="constructor"&&typeof n[a]=="function")&&a!="__proto__")return n[a]}var ld=sd(bo),tt=rg||function(n,a){return dn.setTimeout(n,a)},Ci=sd(mh);function id(n,a,s){var o=a+"";return Ci(n,Dh(o,jh(Lh(o),s)))}function sd(n){var a=0,s=0;return function(){var o=sg(),v=H-(o-s);if(s=o,v>0){if(++a>=Y)return arguments[0]}else a=0;return n.apply(r,arguments)}}function il(n,a){var s=-1,o=n.length,v=o-1;for(a=a===r?o:a;++s<a;){var g=Si(s,v),E=n[g];n[g]=n[s],n[s]=E}return n.length=a,n}var ud=Vh(function(n){var a=[];return n.charCodeAt(0)===46&&a.push(""),n.replace(Mc,function(s,o,v,g){a.push(v?g.replace(Uc,"$1"):o||s)}),a});function Ea(n){if(typeof n=="string"||Fn(n))return n;var a=n+"";return a=="0"&&1/n==-he?"-0":a}function ir(n){if(n!=null){try{return Bt.call(n)}catch{}try{return n+""}catch{}}return""}function jh(n,a){return Yn(Za,function(s){var o="_."+s[0];a&s[1]&&!Lt(n,o)&&n.push(o)}),n.sort()}function od(n){if(n instanceof Oe)return n.clone();var a=new $n(n.__wrapped__,n.__chain__);return a.__actions__=On(n.__actions__),a.__index__=n.__index__,a.__values__=n.__values__,a}function Hh(n,a,s){(s?yn(n,a,s):a===r)?a=1:a=nn(ye(a),0);var o=n==null?0:n.length;if(!o||a<1)return[];for(var v=0,g=0,E=F(Ct(o/a));v<o;)E[g++]=Zn(n,v,v+=a);return E}function qh(n){for(var a=-1,s=n==null?0:n.length,o=0,v=[];++a<s;){var g=n[a];g&&(v[o++]=g)}return v}function Yh(){var n=arguments.length;if(!n)return[];for(var a=F(n-1),s=arguments[0],o=n;o--;)a[o-1]=arguments[o];return Ua(Ee(s)?On(s):[s],mn(a,1))}var Jh=Te(function(n,a){return Je(n)?Xr(n,mn(a,1,Je,!0)):[]}),$h=Te(function(n,a){var s=zn(a);return Je(s)&&(s=r),Je(n)?Xr(n,mn(a,1,Je,!0),de(s,2)):[]}),Wh=Te(function(n,a){var s=zn(a);return Je(s)&&(s=r),Je(n)?Xr(n,mn(a,1,Je,!0),r,s):[]});function Zh(n,a,s){var o=n==null?0:n.length;return o?(a=s||a===r?1:ye(a),Zn(n,a<0?0:a,o)):[]}function zh(n,a,s){var o=n==null?0:n.length;return o?(a=s||a===r?1:ye(a),a=o-a,Zn(n,0,a<0?0:a)):[]}function Xh(n,a){return n&&n.length?Xt(n,de(a,3),!0,!0):[]}function Qh(n,a){return n&&n.length?Xt(n,de(a,3),!0):[]}function ep(n,a,s,o){var v=n==null?0:n.length;return v?(s&&typeof s!="number"&&yn(n,a,s)&&(s=0,o=v),Yg(n,a,s,o)):[]}function dd(n,a,s){var o=n==null?0:n.length;if(!o)return-1;var v=s==null?0:ye(s);return v<0&&(v=nn(o+v,0)),Mt(n,de(a,3),v)}function md(n,a,s){var o=n==null?0:n.length;if(!o)return-1;var v=o-1;return s!==r&&(v=ye(s),v=s<0?nn(o+v,0):fn(v,o-1)),Mt(n,de(a,3),v,!0)}function vd(n){var a=n==null?0:n.length;return a?mn(n,1):[]}function np(n){var a=n==null?0:n.length;return a?mn(n,he):[]}function ap(n,a){var s=n==null?0:n.length;return s?(a=a===r?1:ye(a),mn(n,a)):[]}function rp(n){for(var a=-1,s=n==null?0:n.length,o={};++a<s;){var v=n[a];o[v[0]]=v[1]}return o}function cd(n){return n&&n.length?n[0]:r}function tp(n,a,s){var o=n==null?0:n.length;if(!o)return-1;var v=s==null?0:ye(s);return v<0&&(v=nn(o+v,0)),pr(n,a,v)}function lp(n){var a=n==null?0:n.length;return a?Zn(n,0,-1):[]}var ip=Te(function(n){var a=Ce(n,Ii);return a.length&&a[0]===n[0]?yi(a):[]}),sp=Te(function(n){var a=zn(n),s=Ce(n,Ii);return a===zn(s)?a=r:s.pop(),s.length&&s[0]===n[0]?yi(s,de(a,2)):[]}),up=Te(function(n){var a=zn(n),s=Ce(n,Ii);return a=typeof a=="function"?a:r,a&&s.pop(),s.length&&s[0]===n[0]?yi(s,r,a):[]});function op(n,a){return n==null?"":lg.call(n,a)}function zn(n){var a=n==null?0:n.length;return a?n[a-1]:r}function dp(n,a,s){var o=n==null?0:n.length;if(!o)return-1;var v=o;return s!==r&&(v=ye(s),v=v<0?nn(o+v,0):fn(v,o-1)),a===a?jf(n,a,v):Mt(n,Yu,v,!0)}function mp(n,a){return n&&n.length?So(n,ye(a)):r}var vp=Te(fd);function fd(n,a){return n&&n.length&&a&&a.length?Ti(n,a):n}function cp(n,a,s){return n&&n.length&&a&&a.length?Ti(n,a,de(s,2)):n}function fp(n,a,s){return n&&n.length&&a&&a.length?Ti(n,a,r,s):n}var gp=Ia(function(n,a){var s=n==null?0:n.length,o=gi(n,a);return ko(n,Ce(a,function(v){return La(v,s)?+v:v}).sort(Ko)),o});function hp(n,a){var s=[];if(!(n&&n.length))return s;var o=-1,v=[],g=n.length;for(a=de(a,3);++o<g;){var E=n[o];a(E,o,n)&&(s.push(E),v.push(o))}return ko(n,v),s}function ji(n){return n==null?n:og.call(n)}function pp(n,a,s){var o=n==null?0:n.length;return o?(s&&typeof s!="number"&&yn(n,a,s)?(a=0,s=o):(a=a==null?0:ye(a),s=s===r?o:ye(s)),Zn(n,a,s)):[]}function Ep(n,a){return zt(n,a)}function yp(n,a,s){return Ni(n,a,de(s,2))}function _p(n,a){var s=n==null?0:n.length;if(s){var o=zt(n,a);if(o<s&&sa(n[o],a))return o}return-1}function Ap(n,a){return zt(n,a,!0)}function Rp(n,a,s){return Ni(n,a,de(s,2),!0)}function Tp(n,a){var s=n==null?0:n.length;if(s){var o=zt(n,a,!0)-1;if(sa(n[o],a))return o}return-1}function Sp(n){return n&&n.length?Io(n):[]}function Op(n,a){return n&&n.length?Io(n,de(a,2)):[]}function Np(n){var a=n==null?0:n.length;return a?Zn(n,1,a):[]}function kp(n,a,s){return n&&n.length?(a=s||a===r?1:ye(a),Zn(n,0,a<0?0:a)):[]}function bp(n,a,s){var o=n==null?0:n.length;return o?(a=s||a===r?1:ye(a),a=o-a,Zn(n,a<0?0:a,o)):[]}function Ip(n,a){return n&&n.length?Xt(n,de(a,3),!1,!0):[]}function Lp(n,a){return n&&n.length?Xt(n,de(a,3)):[]}var Mp=Te(function(n){return ja(mn(n,1,Je,!0))}),Pp=Te(function(n){var a=zn(n);return Je(a)&&(a=r),ja(mn(n,1,Je,!0),de(a,2))}),Dp=Te(function(n){var a=zn(n);return a=typeof a=="function"?a:r,ja(mn(n,1,Je,!0),r,a)});function wp(n){return n&&n.length?ja(n):[]}function Bp(n,a){return n&&n.length?ja(n,de(a,2)):[]}function Fp(n,a){return a=typeof a=="function"?a:r,n&&n.length?ja(n,r,a):[]}function Hi(n){if(!(n&&n.length))return[];var a=0;return n=Va(n,function(s){if(Je(s))return a=nn(s.length,a),!0}),si(a,function(s){return Ce(n,ti(s))})}function gd(n,a){if(!(n&&n.length))return[];var s=Hi(n);return a==null?s:Ce(s,function(o){return Dn(a,r,o)})}var Kp=Te(function(n,a){return Je(n)?Xr(n,a):[]}),Vp=Te(function(n){return bi(Va(n,Je))}),Up=Te(function(n){var a=zn(n);return Je(a)&&(a=r),bi(Va(n,Je),de(a,2))}),xp=Te(function(n){var a=zn(n);return a=typeof a=="function"?a:r,bi(Va(n,Je),r,a)}),Gp=Te(Hi);function Cp(n,a){return Do(n||[],a||[],zr)}function jp(n,a){return Do(n||[],a||[],nt)}var Hp=Te(function(n){var a=n.length,s=a>1?n[a-1]:r;return s=typeof s=="function"?(n.pop(),s):r,gd(n,s)});function hd(n){var a=c(n);return a.__chain__=!0,a}function qp(n,a){return a(n),n}function sl(n,a){return a(n)}var Yp=Ia(function(n){var a=n.length,s=a?n[0]:0,o=this.__wrapped__,v=function(g){return gi(g,n)};return a>1||this.__actions__.length||!(o instanceof Oe)||!La(s)?this.thru(v):(o=o.slice(s,+s+(a?1:0)),o.__actions__.push({func:sl,args:[v],thisArg:r}),new $n(o,this.__chain__).thru(function(g){return a&&!g.length&&g.push(r),g}))});function Jp(){return hd(this)}function $p(){return new $n(this.value(),this.__chain__)}function Wp(){this.__values__===r&&(this.__values__=Ld(this.value()));var n=this.__index__>=this.__values__.length,a=n?r:this.__values__[this.__index__++];return{done:n,value:a}}function Zp(){return this}function zp(n){for(var a,s=this;s instanceof Yt;){var o=od(s);o.__index__=0,o.__values__=r,a?v.__wrapped__=o:a=o;var v=o;s=s.__wrapped__}return v.__wrapped__=n,a}function Xp(){var n=this.__wrapped__;if(n instanceof Oe){var a=n;return this.__actions__.length&&(a=new Oe(this)),a=a.reverse(),a.__actions__.push({func:sl,args:[ji],thisArg:r}),new $n(a,this.__chain__)}return this.thru(ji)}function Qp(){return Po(this.__wrapped__,this.__actions__)}var e0=Qt(function(n,a,s){we.call(n,s)?++n[s]:ka(n,s,1)});function n0(n,a,s){var o=Ee(n)?Hu:qg;return s&&yn(n,a,s)&&(a=r),o(n,de(a,3))}function a0(n,a){var s=Ee(n)?Va:go;return s(n,de(a,3))}var r0=jo(dd),t0=jo(md);function l0(n,a){return mn(ul(n,a),1)}function i0(n,a){return mn(ul(n,a),he)}function s0(n,a,s){return s=s===r?1:ye(s),mn(ul(n,a),s)}function pd(n,a){var s=Ee(n)?Yn:Ca;return s(n,de(a,3))}function Ed(n,a){var s=Ee(n)?Nf:fo;return s(n,de(a,3))}var u0=Qt(function(n,a,s){we.call(n,s)?n[s].push(a):ka(n,s,[a])});function o0(n,a,s,o){n=Nn(n)?n:Ir(n),s=s&&!o?ye(s):0;var v=n.length;return s<0&&(s=nn(v+s,0)),cl(n)?s<=v&&n.indexOf(a,s)>-1:!!v&&pr(n,a,s)>-1}var d0=Te(function(n,a,s){var o=-1,v=typeof a=="function",g=Nn(n)?F(n.length):[];return Ca(n,function(E){g[++o]=v?Dn(a,E,s):Qr(E,a,s)}),g}),m0=Qt(function(n,a,s){ka(n,s,a)});function ul(n,a){var s=Ee(n)?Ce:Ao;return s(n,de(a,3))}function v0(n,a,s,o){return n==null?[]:(Ee(a)||(a=a==null?[]:[a]),s=o?r:s,Ee(s)||(s=s==null?[]:[s]),Oo(n,a,s))}var c0=Qt(function(n,a,s){n[s?0:1].push(a)},function(){return[[],[]]});function f0(n,a,s){var o=Ee(n)?ai:$u,v=arguments.length<3;return o(n,de(a,4),s,v,Ca)}function g0(n,a,s){var o=Ee(n)?kf:$u,v=arguments.length<3;return o(n,de(a,4),s,v,fo)}function h0(n,a){var s=Ee(n)?Va:go;return s(n,ml(de(a,3)))}function p0(n){var a=Ee(n)?oo:oh;return a(n)}function E0(n,a,s){(s?yn(n,a,s):a===r)?a=1:a=ye(a);var o=Ee(n)?xg:dh;return o(n,a)}function y0(n){var a=Ee(n)?Gg:vh;return a(n)}function _0(n){if(n==null)return 0;if(Nn(n))return cl(n)?yr(n):n.length;var a=gn(n);return a==Ge||a==P?n.size:Ai(n).length}function A0(n,a,s){var o=Ee(n)?ri:ch;return s&&yn(n,a,s)&&(a=r),o(n,de(a,3))}var R0=Te(function(n,a){if(n==null)return[];var s=a.length;return s>1&&yn(n,a[0],a[1])?a=[]:s>2&&yn(a[0],a[1],a[2])&&(a=[a[0]]),Oo(n,mn(a,1),[])}),ol=ag||function(){return dn.Date.now()};function T0(n,a){if(typeof a!="function")throw new Jn(d);return n=ye(n),function(){if(--n<1)return a.apply(this,arguments)}}function yd(n,a,s){return a=s?r:a,a=n&&a==null?n.length:a,ba(n,G,r,r,r,r,a)}function _d(n,a){var s;if(typeof a!="function")throw new Jn(d);return n=ye(n),function(){return--n>0&&(s=a.apply(this,arguments)),n<=1&&(a=r),s}}var qi=Te(function(n,a,s){var o=S;if(s.length){var v=xa(s,kr(qi));o|=M}return ba(n,o,a,s,v)}),Ad=Te(function(n,a,s){var o=S|D;if(s.length){var v=xa(s,kr(Ad));o|=M}return ba(a,o,n,s,v)});function Rd(n,a,s){a=s?r:a;var o=ba(n,N,r,r,r,r,r,a);return o.placeholder=Rd.placeholder,o}function Td(n,a,s){a=s?r:a;var o=ba(n,J,r,r,r,r,r,a);return o.placeholder=Td.placeholder,o}function Sd(n,a,s){var o,v,g,E,O,I,C=0,j=!1,q=!1,Q=!0;if(typeof n!="function")throw new Jn(d);a=Xn(a)||0,He(s)&&(j=!!s.leading,q="maxWait"in s,g=q?nn(Xn(s.maxWait)||0,a):g,Q="trailing"in s?!!s.trailing:Q);function se($e){var ua=o,Da=v;return o=v=r,C=$e,E=n.apply(Da,ua),E}function me($e){return C=$e,O=tt(Se,a),j?se($e):E}function Ae($e){var ua=$e-I,Da=$e-C,jd=a-ua;return q?fn(jd,g-Da):jd}function ve($e){var ua=$e-I,Da=$e-C;return I===r||ua>=a||ua<0||q&&Da>=g}function Se(){var $e=ol();if(ve($e))return ke($e);O=tt(Se,Ae($e))}function ke($e){return O=r,Q&&o?se($e):(o=v=r,E)}function Kn(){O!==r&&wo(O),C=0,o=I=v=O=r}function _n(){return O===r?E:ke(ol())}function Vn(){var $e=ol(),ua=ve($e);if(o=arguments,v=this,I=$e,ua){if(O===r)return me(I);if(q)return wo(O),O=tt(Se,a),se(I)}return O===r&&(O=tt(Se,a)),E}return Vn.cancel=Kn,Vn.flush=_n,Vn}var S0=Te(function(n,a){return co(n,1,a)}),O0=Te(function(n,a,s){return co(n,Xn(a)||0,s)});function N0(n){return ba(n,Z)}function dl(n,a){if(typeof n!="function"||a!=null&&typeof a!="function")throw new Jn(d);var s=function(){var o=arguments,v=a?a.apply(this,o):o[0],g=s.cache;if(g.has(v))return g.get(v);var E=n.apply(this,o);return s.cache=g.set(v,E)||g,E};return s.cache=new(dl.Cache||Na),s}dl.Cache=Na;function ml(n){if(typeof n!="function")throw new Jn(d);return function(){var a=arguments;switch(a.length){case 0:return!n.call(this);case 1:return!n.call(this,a[0]);case 2:return!n.call(this,a[0],a[1]);case 3:return!n.call(this,a[0],a[1],a[2])}return!n.apply(this,a)}}function k0(n){return _d(2,n)}var b0=fh(function(n,a){a=a.length==1&&Ee(a[0])?Ce(a[0],wn(de())):Ce(mn(a,1),wn(de()));var s=a.length;return Te(function(o){for(var v=-1,g=fn(o.length,s);++v<g;)o[v]=a[v].call(this,o[v]);return Dn(n,this,o)})}),Yi=Te(function(n,a){var s=xa(a,kr(Yi));return ba(n,M,r,a,s)}),Od=Te(function(n,a){var s=xa(a,kr(Od));return ba(n,$,r,a,s)}),I0=Ia(function(n,a){return ba(n,x,r,r,r,a)});function L0(n,a){if(typeof n!="function")throw new Jn(d);return a=a===r?a:ye(a),Te(n,a)}function M0(n,a){if(typeof n!="function")throw new Jn(d);return a=a==null?0:nn(ye(a),0),Te(function(s){var o=s[a],v=qa(s,0,a);return o&&Ua(v,o),Dn(n,this,v)})}function P0(n,a,s){var o=!0,v=!0;if(typeof n!="function")throw new Jn(d);return He(s)&&(o="leading"in s?!!s.leading:o,v="trailing"in s?!!s.trailing:v),Sd(n,a,{leading:o,maxWait:a,trailing:v})}function D0(n){return yd(n,1)}function w0(n,a){return Yi(Li(a),n)}function B0(){if(!arguments.length)return[];var n=arguments[0];return Ee(n)?n:[n]}function F0(n){return Wn(n,L)}function K0(n,a){return a=typeof a=="function"?a:r,Wn(n,L,a)}function V0(n){return Wn(n,R|L)}function U0(n,a){return a=typeof a=="function"?a:r,Wn(n,R|L,a)}function x0(n,a){return a==null||vo(n,a,ln(a))}function sa(n,a){return n===a||n!==n&&a!==a}var G0=rl(Ei),C0=rl(function(n,a){return n>=a}),sr=Eo((function(){return arguments})())?Eo:function(n){return Ye(n)&&we.call(n,"callee")&&!ro.call(n,"callee")},Ee=F.isArray,j0=Vu?wn(Vu):zg;function Nn(n){return n!=null&&vl(n.length)&&!Ma(n)}function Je(n){return Ye(n)&&Nn(n)}function H0(n){return n===!0||n===!1||Ye(n)&&En(n)==Gn}var Ya=tg||rs,q0=Uu?wn(Uu):Xg;function Y0(n){return Ye(n)&&n.nodeType===1&&!lt(n)}function J0(n){if(n==null)return!0;if(Nn(n)&&(Ee(n)||typeof n=="string"||typeof n.splice=="function"||Ya(n)||br(n)||sr(n)))return!n.length;var a=gn(n);if(a==Ge||a==P)return!n.size;if(rt(n))return!Ai(n).length;for(var s in n)if(we.call(n,s))return!1;return!0}function $0(n,a){return et(n,a)}function W0(n,a,s){s=typeof s=="function"?s:r;var o=s?s(n,a):r;return o===r?et(n,a,r,s):!!o}function Ji(n){if(!Ye(n))return!1;var a=En(n);return a==Sn||a==aa||typeof n.message=="string"&&typeof n.name=="string"&&!lt(n)}function Z0(n){return typeof n=="number"&&lo(n)}function Ma(n){if(!He(n))return!1;var a=En(n);return a==pn||a==Cn||a==Sa||a==jn}function Nd(n){return typeof n=="number"&&n==ye(n)}function vl(n){return typeof n=="number"&&n>-1&&n%1==0&&n<=pe}function He(n){var a=typeof n;return n!=null&&(a=="object"||a=="function")}function Ye(n){return n!=null&&typeof n=="object"}var kd=xu?wn(xu):eh;function z0(n,a){return n===a||_i(n,a,Ki(a))}function X0(n,a,s){return s=typeof s=="function"?s:r,_i(n,a,Ki(a),s)}function Q0(n){return bd(n)&&n!=+n}function eE(n){if(Kh(n))throw new ge(u);return yo(n)}function nE(n){return n===null}function aE(n){return n==null}function bd(n){return typeof n=="number"||Ye(n)&&En(n)==tn}function lt(n){if(!Ye(n)||En(n)!=Qe)return!1;var a=Ut(n);if(a===null)return!0;var s=we.call(a,"constructor")&&a.constructor;return typeof s=="function"&&s instanceof s&&Bt.call(s)==Xf}var $i=Gu?wn(Gu):nh;function rE(n){return Nd(n)&&n>=-pe&&n<=pe}var Id=Cu?wn(Cu):ah;function cl(n){return typeof n=="string"||!Ee(n)&&Ye(n)&&En(n)==K}function Fn(n){return typeof n=="symbol"||Ye(n)&&En(n)==ee}var br=ju?wn(ju):rh;function tE(n){return n===r}function lE(n){return Ye(n)&&gn(n)==W}function iE(n){return Ye(n)&&En(n)==ue}var sE=rl(Ri),uE=rl(function(n,a){return n<=a});function Ld(n){if(!n)return[];if(Nn(n))return cl(n)?la(n):On(n);if(Yr&&n[Yr])return xf(n[Yr]());var a=gn(n),s=a==Ge?oi:a==P?Pt:Ir;return s(n)}function Pa(n){if(!n)return n===0?n:0;if(n=Xn(n),n===he||n===-he){var a=n<0?-1:1;return a*Be}return n===n?n:0}function ye(n){var a=Pa(n),s=a%1;return a===a?s?a-s:a:0}function Md(n){return n?rr(ye(n),0,Re):0}function Xn(n){if(typeof n=="number")return n;if(Fn(n))return Xe;if(He(n)){var a=typeof n.valueOf=="function"?n.valueOf():n;n=He(a)?a+"":a}if(typeof n!="string")return n===0?n:+n;n=Wu(n);var s=Cc.test(n);return s||Hc.test(n)?Tf(n.slice(2),s?2:8):Gc.test(n)?Xe:+n}function Pd(n){return pa(n,kn(n))}function oE(n){return n?rr(ye(n),-pe,pe):n===0?n:0}function Pe(n){return n==null?"":Bn(n)}var dE=Or(function(n,a){if(rt(a)||Nn(a)){pa(a,ln(a),n);return}for(var s in a)we.call(a,s)&&zr(n,s,a[s])}),Dd=Or(function(n,a){pa(a,kn(a),n)}),fl=Or(function(n,a,s,o){pa(a,kn(a),n,o)}),mE=Or(function(n,a,s,o){pa(a,ln(a),n,o)}),vE=Ia(gi);function cE(n,a){var s=Sr(n);return a==null?s:mo(s,a)}var fE=Te(function(n,a){n=Fe(n);var s=-1,o=a.length,v=o>2?a[2]:r;for(v&&yn(a[0],a[1],v)&&(o=1);++s<o;)for(var g=a[s],E=kn(g),O=-1,I=E.length;++O<I;){var C=E[O],j=n[C];(j===r||sa(j,Ar[C])&&!we.call(n,C))&&(n[C]=g[C])}return n}),gE=Te(function(n){return n.push(r,Zo),Dn(wd,r,n)});function hE(n,a){return qu(n,de(a,3),ha)}function pE(n,a){return qu(n,de(a,3),pi)}function EE(n,a){return n==null?n:hi(n,de(a,3),kn)}function yE(n,a){return n==null?n:ho(n,de(a,3),kn)}function _E(n,a){return n&&ha(n,de(a,3))}function AE(n,a){return n&&pi(n,de(a,3))}function RE(n){return n==null?[]:Wt(n,ln(n))}function TE(n){return n==null?[]:Wt(n,kn(n))}function Wi(n,a,s){var o=n==null?r:tr(n,a);return o===r?s:o}function SE(n,a){return n!=null&&Qo(n,a,Jg)}function Zi(n,a){return n!=null&&Qo(n,a,$g)}var OE=qo(function(n,a,s){a!=null&&typeof a.toString!="function"&&(a=Ft.call(a)),n[a]=s},Xi(bn)),NE=qo(function(n,a,s){a!=null&&typeof a.toString!="function"&&(a=Ft.call(a)),we.call(n,a)?n[a].push(s):n[a]=[s]},de),kE=Te(Qr);function ln(n){return Nn(n)?uo(n):Ai(n)}function kn(n){return Nn(n)?uo(n,!0):th(n)}function bE(n,a){var s={};return a=de(a,3),ha(n,function(o,v,g){ka(s,a(o,v,g),o)}),s}function IE(n,a){var s={};return a=de(a,3),ha(n,function(o,v,g){ka(s,v,a(o,v,g))}),s}var LE=Or(function(n,a,s){Zt(n,a,s)}),wd=Or(function(n,a,s,o){Zt(n,a,s,o)}),ME=Ia(function(n,a){var s={};if(n==null)return s;var o=!1;a=Ce(a,function(g){return g=Ha(g,n),o||(o=g.length>1),g}),pa(n,Bi(n),s),o&&(s=Wn(s,R|A|L,Oh));for(var v=a.length;v--;)ki(s,a[v]);return s});function PE(n,a){return Bd(n,ml(de(a)))}var DE=Ia(function(n,a){return n==null?{}:ih(n,a)});function Bd(n,a){if(n==null)return{};var s=Ce(Bi(n),function(o){return[o]});return a=de(a),No(n,s,function(o,v){return a(o,v[0])})}function wE(n,a,s){a=Ha(a,n);var o=-1,v=a.length;for(v||(v=1,n=r);++o<v;){var g=n==null?r:n[Ea(a[o])];g===r&&(o=v,g=s),n=Ma(g)?g.call(n):g}return n}function BE(n,a,s){return n==null?n:nt(n,a,s)}function FE(n,a,s,o){return o=typeof o=="function"?o:r,n==null?n:nt(n,a,s,o)}var Fd=$o(ln),Kd=$o(kn);function KE(n,a,s){var o=Ee(n),v=o||Ya(n)||br(n);if(a=de(a,4),s==null){var g=n&&n.constructor;v?s=o?new g:[]:He(n)?s=Ma(g)?Sr(Ut(n)):{}:s={}}return(v?Yn:ha)(n,function(E,O,I){return a(s,E,O,I)}),s}function VE(n,a){return n==null?!0:ki(n,a)}function UE(n,a,s){return n==null?n:Mo(n,a,Li(s))}function xE(n,a,s,o){return o=typeof o=="function"?o:r,n==null?n:Mo(n,a,Li(s),o)}function Ir(n){return n==null?[]:ui(n,ln(n))}function GE(n){return n==null?[]:ui(n,kn(n))}function CE(n,a,s){return s===r&&(s=a,a=r),s!==r&&(s=Xn(s),s=s===s?s:0),a!==r&&(a=Xn(a),a=a===a?a:0),rr(Xn(n),a,s)}function jE(n,a,s){return a=Pa(a),s===r?(s=a,a=0):s=Pa(s),n=Xn(n),Wg(n,a,s)}function HE(n,a,s){if(s&&typeof s!="boolean"&&yn(n,a,s)&&(a=s=r),s===r&&(typeof a=="boolean"?(s=a,a=r):typeof n=="boolean"&&(s=n,n=r)),n===r&&a===r?(n=0,a=1):(n=Pa(n),a===r?(a=n,n=0):a=Pa(a)),n>a){var o=n;n=a,a=o}if(s||n%1||a%1){var v=io();return fn(n+v*(a-n+Rf("1e-"+((v+"").length-1))),a)}return Si(n,a)}var qE=Nr(function(n,a,s){return a=a.toLowerCase(),n+(s?Vd(a):a)});function Vd(n){return zi(Pe(n).toLowerCase())}function Ud(n){return n=Pe(n),n&&n.replace(Yc,Bf).replace(vf,"")}function YE(n,a,s){n=Pe(n),a=Bn(a);var o=n.length;s=s===r?o:rr(ye(s),0,o);var v=s;return s-=a.length,s>=0&&n.slice(s,v)==a}function JE(n){return n=Pe(n),n&&Nc.test(n)?n.replace(gu,Ff):n}function $E(n){return n=Pe(n),n&&Pc.test(n)?n.replace(Yl,"\\$&"):n}var WE=Nr(function(n,a,s){return n+(s?"-":"")+a.toLowerCase()}),ZE=Nr(function(n,a,s){return n+(s?" ":"")+a.toLowerCase()}),zE=Co("toLowerCase");function XE(n,a,s){n=Pe(n),a=ye(a);var o=a?yr(n):0;if(!a||o>=a)return n;var v=(a-o)/2;return al(jt(v),s)+n+al(Ct(v),s)}function QE(n,a,s){n=Pe(n),a=ye(a);var o=a?yr(n):0;return a&&o<a?n+al(a-o,s):n}function ey(n,a,s){n=Pe(n),a=ye(a);var o=a?yr(n):0;return a&&o<a?al(a-o,s)+n:n}function ny(n,a,s){return s||a==null?a=0:a&&(a=+a),ug(Pe(n).replace(Jl,""),a||0)}function ay(n,a,s){return(s?yn(n,a,s):a===r)?a=1:a=ye(a),Oi(Pe(n),a)}function ry(){var n=arguments,a=Pe(n[0]);return n.length<3?a:a.replace(n[1],n[2])}var ty=Nr(function(n,a,s){return n+(s?"_":"")+a.toLowerCase()});function ly(n,a,s){return s&&typeof s!="number"&&yn(n,a,s)&&(a=s=r),s=s===r?Re:s>>>0,s?(n=Pe(n),n&&(typeof a=="string"||a!=null&&!$i(a))&&(a=Bn(a),!a&&Er(n))?qa(la(n),0,s):n.split(a,s)):[]}var iy=Nr(function(n,a,s){return n+(s?" ":"")+zi(a)});function sy(n,a,s){return n=Pe(n),s=s==null?0:rr(ye(s),0,n.length),a=Bn(a),n.slice(s,s+a.length)==a}function uy(n,a,s){var o=c.templateSettings;s&&yn(n,a,s)&&(a=r),n=Pe(n),a=fl({},a,o,Wo);var v=fl({},a.imports,o.imports,Wo),g=ln(v),E=ui(v,g),O,I,C=0,j=a.interpolate||kt,q="__p += '",Q=di((a.escape||kt).source+"|"+j.source+"|"+(j===hu?xc:kt).source+"|"+(a.evaluate||kt).source+"|$","g"),se="//# sourceURL="+(we.call(a,"sourceURL")?(a.sourceURL+"").replace(/\s/g," "):"lodash.templateSources["+ ++pf+"]")+`
+`;n.replace(Q,function(ve,Se,ke,Kn,_n,Vn){return ke||(ke=Kn),q+=n.slice(C,Vn).replace(Jc,Kf),Se&&(O=!0,q+=`' +
+__e(`+Se+`) +
+'`),_n&&(I=!0,q+=`';
+`+_n+`;
+__p += '`),ke&&(q+=`' +
+((__t = (`+ke+`)) == null ? '' : __t) +
+'`),C=Vn+ve.length,ve}),q+=`';
+`;var me=we.call(a,"variable")&&a.variable;if(!me)q=`with (obj) {
+`+q+`
+}
+`;else if(Vc.test(me))throw new ge(m);q=(I?q.replace(Nt,""):q).replace(Tc,"$1").replace(Sc,"$1;"),q="function("+(me||"obj")+`) {
+`+(me?"":`obj || (obj = {});
+`)+"var __t, __p = ''"+(O?", __e = _.escape":"")+(I?`, __j = Array.prototype.join;
+function print() { __p += __j.call(arguments, '') }
+`:`;
+`)+q+`return __p
+}`;var Ae=Gd(function(){return Me(g,se+"return "+q).apply(r,E)});if(Ae.source=q,Ji(Ae))throw Ae;return Ae}function oy(n){return Pe(n).toLowerCase()}function dy(n){return Pe(n).toUpperCase()}function my(n,a,s){if(n=Pe(n),n&&(s||a===r))return Wu(n);if(!n||!(a=Bn(a)))return n;var o=la(n),v=la(a),g=Zu(o,v),E=zu(o,v)+1;return qa(o,g,E).join("")}function vy(n,a,s){if(n=Pe(n),n&&(s||a===r))return n.slice(0,Qu(n)+1);if(!n||!(a=Bn(a)))return n;var o=la(n),v=zu(o,la(a))+1;return qa(o,0,v).join("")}function cy(n,a,s){if(n=Pe(n),n&&(s||a===r))return n.replace(Jl,"");if(!n||!(a=Bn(a)))return n;var o=la(n),v=Zu(o,la(a));return qa(o,v).join("")}function fy(n,a){var s=le,o=X;if(He(a)){var v="separator"in a?a.separator:v;s="length"in a?ye(a.length):s,o="omission"in a?Bn(a.omission):o}n=Pe(n);var g=n.length;if(Er(n)){var E=la(n);g=E.length}if(s>=g)return n;var O=s-yr(o);if(O<1)return o;var I=E?qa(E,0,O).join(""):n.slice(0,O);if(v===r)return I+o;if(E&&(O+=I.length-O),$i(v)){if(n.slice(O).search(v)){var C,j=I;for(v.global||(v=di(v.source,Pe(pu.exec(v))+"g")),v.lastIndex=0;C=v.exec(j);)var q=C.index;I=I.slice(0,q===r?O:q)}}else if(n.indexOf(Bn(v),O)!=O){var Q=I.lastIndexOf(v);Q>-1&&(I=I.slice(0,Q))}return I+o}function gy(n){return n=Pe(n),n&&Oc.test(n)?n.replace(fu,Hf):n}var hy=Nr(function(n,a,s){return n+(s?" ":"")+a.toUpperCase()}),zi=Co("toUpperCase");function xd(n,a,s){return n=Pe(n),a=s?r:a,a===r?Uf(n)?Jf(n):Lf(n):n.match(a)||[]}var Gd=Te(function(n,a){try{return Dn(n,r,a)}catch(s){return Ji(s)?s:new ge(s)}}),py=Ia(function(n,a){return Yn(a,function(s){s=Ea(s),ka(n,s,qi(n[s],n))}),n});function Ey(n){var a=n==null?0:n.length,s=de();return n=a?Ce(n,function(o){if(typeof o[1]!="function")throw new Jn(d);return[s(o[0]),o[1]]}):[],Te(function(o){for(var v=-1;++v<a;){var g=n[v];if(Dn(g[0],this,o))return Dn(g[1],this,o)}})}function yy(n){return Hg(Wn(n,R))}function Xi(n){return function(){return n}}function _y(n,a){return n==null||n!==n?a:n}var Ay=Ho(),Ry=Ho(!0);function bn(n){return n}function Qi(n){return _o(typeof n=="function"?n:Wn(n,R))}function Ty(n){return Ro(Wn(n,R))}function Sy(n,a){return To(n,Wn(a,R))}var Oy=Te(function(n,a){return function(s){return Qr(s,n,a)}}),Ny=Te(function(n,a){return function(s){return Qr(n,s,a)}});function es(n,a,s){var o=ln(a),v=Wt(a,o);s==null&&!(He(a)&&(v.length||!o.length))&&(s=a,a=n,n=this,v=Wt(a,ln(a)));var g=!(He(s)&&"chain"in s)||!!s.chain,E=Ma(n);return Yn(v,function(O){var I=a[O];n[O]=I,E&&(n.prototype[O]=function(){var C=this.__chain__;if(g||C){var j=n(this.__wrapped__),q=j.__actions__=On(this.__actions__);return q.push({func:I,args:arguments,thisArg:n}),j.__chain__=C,j}return I.apply(n,Ua([this.value()],arguments))})}),n}function ky(){return dn._===this&&(dn._=Qf),this}function ns(){}function by(n){return n=ye(n),Te(function(a){return So(a,n)})}var Iy=Pi(Ce),Ly=Pi(Hu),My=Pi(ri);function Cd(n){return Ui(n)?ti(Ea(n)):sh(n)}function Py(n){return function(a){return n==null?r:tr(n,a)}}var Dy=Yo(),wy=Yo(!0);function as(){return[]}function rs(){return!1}function By(){return{}}function Fy(){return""}function Ky(){return!0}function Vy(n,a){if(n=ye(n),n<1||n>pe)return[];var s=Re,o=fn(n,Re);a=de(a),n-=Re;for(var v=si(o,a);++s<n;)a(s);return v}function Uy(n){return Ee(n)?Ce(n,Ea):Fn(n)?[n]:On(ud(Pe(n)))}function xy(n){var a=++zf;return Pe(n)+a}var Gy=nl(function(n,a){return n+a},0),Cy=Di("ceil"),jy=nl(function(n,a){return n/a},1),Hy=Di("floor");function qy(n){return n&&n.length?$t(n,bn,Ei):r}function Yy(n,a){return n&&n.length?$t(n,de(a,2),Ei):r}function Jy(n){return Ju(n,bn)}function $y(n,a){return Ju(n,de(a,2))}function Wy(n){return n&&n.length?$t(n,bn,Ri):r}function Zy(n,a){return n&&n.length?$t(n,de(a,2),Ri):r}var zy=nl(function(n,a){return n*a},1),Xy=Di("round"),Qy=nl(function(n,a){return n-a},0);function e_(n){return n&&n.length?ii(n,bn):0}function n_(n,a){return n&&n.length?ii(n,de(a,2)):0}return c.after=T0,c.ary=yd,c.assign=dE,c.assignIn=Dd,c.assignInWith=fl,c.assignWith=mE,c.at=vE,c.before=_d,c.bind=qi,c.bindAll=py,c.bindKey=Ad,c.castArray=B0,c.chain=hd,c.chunk=Hh,c.compact=qh,c.concat=Yh,c.cond=Ey,c.conforms=yy,c.constant=Xi,c.countBy=e0,c.create=cE,c.curry=Rd,c.curryRight=Td,c.debounce=Sd,c.defaults=fE,c.defaultsDeep=gE,c.defer=S0,c.delay=O0,c.difference=Jh,c.differenceBy=$h,c.differenceWith=Wh,c.drop=Zh,c.dropRight=zh,c.dropRightWhile=Xh,c.dropWhile=Qh,c.fill=ep,c.filter=a0,c.flatMap=l0,c.flatMapDeep=i0,c.flatMapDepth=s0,c.flatten=vd,c.flattenDeep=np,c.flattenDepth=ap,c.flip=N0,c.flow=Ay,c.flowRight=Ry,c.fromPairs=rp,c.functions=RE,c.functionsIn=TE,c.groupBy=u0,c.initial=lp,c.intersection=ip,c.intersectionBy=sp,c.intersectionWith=up,c.invert=OE,c.invertBy=NE,c.invokeMap=d0,c.iteratee=Qi,c.keyBy=m0,c.keys=ln,c.keysIn=kn,c.map=ul,c.mapKeys=bE,c.mapValues=IE,c.matches=Ty,c.matchesProperty=Sy,c.memoize=dl,c.merge=LE,c.mergeWith=wd,c.method=Oy,c.methodOf=Ny,c.mixin=es,c.negate=ml,c.nthArg=by,c.omit=ME,c.omitBy=PE,c.once=k0,c.orderBy=v0,c.over=Iy,c.overArgs=b0,c.overEvery=Ly,c.overSome=My,c.partial=Yi,c.partialRight=Od,c.partition=c0,c.pick=DE,c.pickBy=Bd,c.property=Cd,c.propertyOf=Py,c.pull=vp,c.pullAll=fd,c.pullAllBy=cp,c.pullAllWith=fp,c.pullAt=gp,c.range=Dy,c.rangeRight=wy,c.rearg=I0,c.reject=h0,c.remove=hp,c.rest=L0,c.reverse=ji,c.sampleSize=E0,c.set=BE,c.setWith=FE,c.shuffle=y0,c.slice=pp,c.sortBy=R0,c.sortedUniq=Sp,c.sortedUniqBy=Op,c.split=ly,c.spread=M0,c.tail=Np,c.take=kp,c.takeRight=bp,c.takeRightWhile=Ip,c.takeWhile=Lp,c.tap=qp,c.throttle=P0,c.thru=sl,c.toArray=Ld,c.toPairs=Fd,c.toPairsIn=Kd,c.toPath=Uy,c.toPlainObject=Pd,c.transform=KE,c.unary=D0,c.union=Mp,c.unionBy=Pp,c.unionWith=Dp,c.uniq=wp,c.uniqBy=Bp,c.uniqWith=Fp,c.unset=VE,c.unzip=Hi,c.unzipWith=gd,c.update=UE,c.updateWith=xE,c.values=Ir,c.valuesIn=GE,c.without=Kp,c.words=xd,c.wrap=w0,c.xor=Vp,c.xorBy=Up,c.xorWith=xp,c.zip=Gp,c.zipObject=Cp,c.zipObjectDeep=jp,c.zipWith=Hp,c.entries=Fd,c.entriesIn=Kd,c.extend=Dd,c.extendWith=fl,es(c,c),c.add=Gy,c.attempt=Gd,c.camelCase=qE,c.capitalize=Vd,c.ceil=Cy,c.clamp=CE,c.clone=F0,c.cloneDeep=V0,c.cloneDeepWith=U0,c.cloneWith=K0,c.conformsTo=x0,c.deburr=Ud,c.defaultTo=_y,c.divide=jy,c.endsWith=YE,c.eq=sa,c.escape=JE,c.escapeRegExp=$E,c.every=n0,c.find=r0,c.findIndex=dd,c.findKey=hE,c.findLast=t0,c.findLastIndex=md,c.findLastKey=pE,c.floor=Hy,c.forEach=pd,c.forEachRight=Ed,c.forIn=EE,c.forInRight=yE,c.forOwn=_E,c.forOwnRight=AE,c.get=Wi,c.gt=G0,c.gte=C0,c.has=SE,c.hasIn=Zi,c.head=cd,c.identity=bn,c.includes=o0,c.indexOf=tp,c.inRange=jE,c.invoke=kE,c.isArguments=sr,c.isArray=Ee,c.isArrayBuffer=j0,c.isArrayLike=Nn,c.isArrayLikeObject=Je,c.isBoolean=H0,c.isBuffer=Ya,c.isDate=q0,c.isElement=Y0,c.isEmpty=J0,c.isEqual=$0,c.isEqualWith=W0,c.isError=Ji,c.isFinite=Z0,c.isFunction=Ma,c.isInteger=Nd,c.isLength=vl,c.isMap=kd,c.isMatch=z0,c.isMatchWith=X0,c.isNaN=Q0,c.isNative=eE,c.isNil=aE,c.isNull=nE,c.isNumber=bd,c.isObject=He,c.isObjectLike=Ye,c.isPlainObject=lt,c.isRegExp=$i,c.isSafeInteger=rE,c.isSet=Id,c.isString=cl,c.isSymbol=Fn,c.isTypedArray=br,c.isUndefined=tE,c.isWeakMap=lE,c.isWeakSet=iE,c.join=op,c.kebabCase=WE,c.last=zn,c.lastIndexOf=dp,c.lowerCase=ZE,c.lowerFirst=zE,c.lt=sE,c.lte=uE,c.max=qy,c.maxBy=Yy,c.mean=Jy,c.meanBy=$y,c.min=Wy,c.minBy=Zy,c.stubArray=as,c.stubFalse=rs,c.stubObject=By,c.stubString=Fy,c.stubTrue=Ky,c.multiply=zy,c.nth=mp,c.noConflict=ky,c.noop=ns,c.now=ol,c.pad=XE,c.padEnd=QE,c.padStart=ey,c.parseInt=ny,c.random=HE,c.reduce=f0,c.reduceRight=g0,c.repeat=ay,c.replace=ry,c.result=wE,c.round=Xy,c.runInContext=b,c.sample=p0,c.size=_0,c.snakeCase=ty,c.some=A0,c.sortedIndex=Ep,c.sortedIndexBy=yp,c.sortedIndexOf=_p,c.sortedLastIndex=Ap,c.sortedLastIndexBy=Rp,c.sortedLastIndexOf=Tp,c.startCase=iy,c.startsWith=sy,c.subtract=Qy,c.sum=e_,c.sumBy=n_,c.template=uy,c.times=Vy,c.toFinite=Pa,c.toInteger=ye,c.toLength=Md,c.toLower=oy,c.toNumber=Xn,c.toSafeInteger=oE,c.toString=Pe,c.toUpper=dy,c.trim=my,c.trimEnd=vy,c.trimStart=cy,c.truncate=fy,c.unescape=gy,c.uniqueId=xy,c.upperCase=hy,c.upperFirst=zi,c.each=pd,c.eachRight=Ed,c.first=cd,es(c,(function(){var n={};return ha(c,function(a,s){we.call(c.prototype,s)||(n[s]=a)}),n})(),{chain:!1}),c.VERSION=t,Yn(["bind","bindKey","curry","curryRight","partial","partialRight"],function(n){c[n].placeholder=c}),Yn(["drop","take"],function(n,a){Oe.prototype[n]=function(s){s=s===r?1:nn(ye(s),0);var o=this.__filtered__&&!a?new Oe(this):this.clone();return o.__filtered__?o.__takeCount__=fn(s,o.__takeCount__):o.__views__.push({size:fn(s,Re),type:n+(o.__dir__<0?"Right":"")}),o},Oe.prototype[n+"Right"]=function(s){return this.reverse()[n](s).reverse()}}),Yn(["filter","map","takeWhile"],function(n,a){var s=a+1,o=s==ae||s==fe;Oe.prototype[n]=function(v){var g=this.clone();return g.__iteratees__.push({iteratee:de(v,3),type:s}),g.__filtered__=g.__filtered__||o,g}}),Yn(["head","last"],function(n,a){var s="take"+(a?"Right":"");Oe.prototype[n]=function(){return this[s](1).value()[0]}}),Yn(["initial","tail"],function(n,a){var s="drop"+(a?"":"Right");Oe.prototype[n]=function(){return this.__filtered__?new Oe(this):this[s](1)}}),Oe.prototype.compact=function(){return this.filter(bn)},Oe.prototype.find=function(n){return this.filter(n).head()},Oe.prototype.findLast=function(n){return this.reverse().find(n)},Oe.prototype.invokeMap=Te(function(n,a){return typeof n=="function"?new Oe(this):this.map(function(s){return Qr(s,n,a)})}),Oe.prototype.reject=function(n){return this.filter(ml(de(n)))},Oe.prototype.slice=function(n,a){n=ye(n);var s=this;return s.__filtered__&&(n>0||a<0)?new Oe(s):(n<0?s=s.takeRight(-n):n&&(s=s.drop(n)),a!==r&&(a=ye(a),s=a<0?s.dropRight(-a):s.take(a-n)),s)},Oe.prototype.takeRightWhile=function(n){return this.reverse().takeWhile(n).reverse()},Oe.prototype.toArray=function(){return this.take(Re)},ha(Oe.prototype,function(n,a){var s=/^(?:filter|find|map|reject)|While$/.test(a),o=/^(?:head|last)$/.test(a),v=c[o?"take"+(a=="last"?"Right":""):a],g=o||/^find/.test(a);v&&(c.prototype[a]=function(){var E=this.__wrapped__,O=o?[1]:arguments,I=E instanceof Oe,C=O[0],j=I||Ee(E),q=function(Se){var ke=v.apply(c,Ua([Se],O));return o&&Q?ke[0]:ke};j&&s&&typeof C=="function"&&C.length!=1&&(I=j=!1);var Q=this.__chain__,se=!!this.__actions__.length,me=g&&!Q,Ae=I&&!se;if(!g&&j){E=Ae?E:new Oe(this);var ve=n.apply(E,O);return ve.__actions__.push({func:sl,args:[q],thisArg:r}),new $n(ve,Q)}return me&&Ae?n.apply(this,O):(ve=this.thru(q),me?o?ve.value()[0]:ve.value():ve)})}),Yn(["pop","push","shift","sort","splice","unshift"],function(n){var a=Dt[n],s=/^(?:push|sort|unshift)$/.test(n)?"tap":"thru",o=/^(?:pop|shift)$/.test(n);c.prototype[n]=function(){var v=arguments;if(o&&!this.__chain__){var g=this.value();return a.apply(Ee(g)?g:[],v)}return this[s](function(E){return a.apply(Ee(E)?E:[],v)})}}),ha(Oe.prototype,function(n,a){var s=c[a];if(s){var o=s.name+"";we.call(Tr,o)||(Tr[o]=[]),Tr[o].push({name:a,func:s})}}),Tr[el(r,D).name]=[{name:"wrapper",func:r}],Oe.prototype.clone=gg,Oe.prototype.reverse=hg,Oe.prototype.value=pg,c.prototype.at=Yp,c.prototype.chain=Jp,c.prototype.commit=$p,c.prototype.next=Wp,c.prototype.plant=zp,c.prototype.reverse=Xp,c.prototype.toJSON=c.prototype.valueOf=c.prototype.value=Qp,c.prototype.first=c.prototype.head,Yr&&(c.prototype[Yr]=Zp),c}),_r=$f();Qa?((Qa.exports=_r)._=_r,Ql._=_r):dn._=_r}).call(yS)})(ft,ft.exports)),ft.exports}_S();const AS="NORGE",Bm=e=>e??"",RS=e=>{const{adresselinje1:l,adresselinje2:r,adresselinje3:t,postNummer:i,poststed:u,land:d}=e,m=[l,r,t].filter(h=>!!h).join(", "),f=`${Bm(i)} ${Bm(u)}`,p=d?.toUpperCase()===AS?void 0:d;return[m,f,p].map(h=>h?.trim()).filter(h=>!!h).join(", ").trim()},pl=va(Rt),TS=e=>{switch(e){case"SØKNAD":return pl.formatMessage({id:"FaktaKilde.Soknad"});case"FOLKEREGISTER":return pl.formatMessage({id:"FaktaKilde.FREG"});case"MEDL":return pl.formatMessage({id:"FaktaKilde.MEDL"});case"SAKSBEHANDLER":return pl.formatMessage({id:"FaktaKilde.SBH"});default:return s_(e)}},jv=V.forwardRef((e,l)=>y.jsx(vr,{gap:"space-8",style:{display:"flex"},...e,ref:l}));jv.displayName="FaktaGruppe";jv.__docgenInfo={description:"",methods:[],displayName:"FaktaGruppe"};var os={exports:{}};/*!
+	Copyright (c) 2018 Jed Watson.
+	Licensed under the MIT License (MIT), see
+	http://jedwatson.github.io/classnames
+*/var Fm;function SS(){return Fm||(Fm=1,(function(e){(function(){var l={}.hasOwnProperty;function r(){for(var u="",d=0;d<arguments.length;d++){var m=arguments[d];m&&(u=i(u,t.call(this,m)))}return u}function t(u){if(typeof u=="string"||typeof u=="number")return this&&this[u]||u;if(typeof u!="object")return"";if(Array.isArray(u))return r.apply(this,u);if(u.toString!==Object.prototype.toString&&!u.toString.toString().includes("[native code]"))return u.toString();var d="";for(var m in u)l.call(u,m)&&u[m]&&(d=i(d,this&&this[m]||m));return d}function i(u,d){return d?u?u+" "+d:u+d:u}e.exports?(r.default=r,e.exports=r):window.classNames=r})()})(os)),os.exports}var OS=SS();const NS=Gs(OS),kS="_boks_nm7fe_1",bS="_harBorderLeft_nm7fe_8",IS="_harBorderTop_nm7fe_12",LS={boks:kS,harBorderLeft:bS,harBorderTop:IS};NS.bind(LS);function MS(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var Km={exports:{}},mt={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var Vm;function PS(){if(Vm)return mt;Vm=1;var e=Symbol.for("react.transitional.element"),l=Symbol.for("react.fragment");function r(t,i,u){var d=null;if(u!==void 0&&(d=""+u),i.key!==void 0&&(d=""+i.key),"key"in i){u={};for(var m in i)m!=="key"&&(u[m]=i[m])}else u=i;return i=u.ref,{$$typeof:e,type:t,key:d,ref:i!==void 0?i:null,props:u}}return mt.Fragment=l,mt.jsx=r,mt.jsxs=r,mt}var Um;function DS(){return Um||(Um=1,Km.exports=PS()),Km.exports}var Ra=DS();const wS="_autocompleteSuggestion__substring_1s9ip_1",BS="_autocompleteSuggestion__inner_1s9ip_4",vt={autocompleteSuggestion__substring:wS,autocompleteSuggestion__inner:BS,"autocompleteSuggestion--active":"_autocompleteSuggestion--active_1s9ip_12"};class FS extends _.Component{constructor(l){super(l),this.state={value:l.value},this.onClick=this.onClick.bind(this),this.onMouseMove=this.onMouseMove.bind(this)}onClick(){const{onClick:l}=this.props,{value:r}=this.state;l(r)}onMouseMove(){const{setSuggestionIndex:l,index:r}=this.props;l(r)}render(){const{match:l,active:r,avoidBlur:t,id:i}=this.props,{value:u}=this.state.value,d=u.toLowerCase().startsWith(l.toLowerCase());return Ra.jsx("li",{id:i,role:"option","aria-selected":r,onClick:this.onClick,onMouseMove:this.onMouseMove,onFocus:t,onMouseDown:t,onKeyDown:t,className:"autocompleteSuggestion typo-normal",children:d?Ra.jsxs("span",{className:`${vt.autocompleteSuggestion__inner} ${r?vt["autocompleteSuggestion--active"]:""}`,children:[u.substring(0,l.length),Ra.jsx("span",{className:vt.autocompleteSuggestion__substring,children:u.substring(l.length)})]}):Ra.jsx("span",{className:`${vt.autocompleteSuggestion__inner} ${r?vt["autocompleteSuggestion--active"]:""}`,children:u})})}}const KS="_autocomplete_cj8jr_1",VS="_autocomplete__suggestions_cj8jr_27",ds={autocomplete:KS,autocomplete__suggestions:VS,"autocomplete__suggestions--hidden":"_autocomplete__suggestions--hidden_cj8jr_31"};class WN extends _.Component{input;inputRef;constructor(l){super(l),this.state={activeSuggestionIndex:-1,hasFocus:!1,shouldShowSuggestions:!0,setAriaActiveDescendant:!1,shouldBlur:!0,blurDelay:null},this.inputRef=r=>{this.input=r},this.onChange=this.onChange.bind(this),this.onBlur=this.onBlur.bind(this),this.onKeyDown=this.onKeyDown.bind(this),this.onFocus=this.onFocus.bind(this),this.setValue=this.setValue.bind(this),this.setSuggestionIndex=this.setSuggestionIndex.bind(this),this.avoidBlur=this.avoidBlur.bind(this),this.clearBlurDelay=this.clearBlurDelay.bind(this),this.onSearchButtonClick=this.onSearchButtonClick.bind(this)}componentWillUnmount(){const{blurDelay:l}=this.state;l&&(clearTimeout(l),this.setState({blurDelay:null}))}onChange(l){const{onChange:r}=this.props;this.setState({activeSuggestionIndex:-1,shouldShowSuggestions:!0}),r(l)}onSearchButtonClick(l){const{onSearchButtonClick:r}=this.props;l.preventDefault(),r&&r()}onKeyDown(l){const{shouldShowSuggestions:r}=this.state;let{activeSuggestionIndex:t}=this.state;const{suggestions:i}=this.props,u=t>-1;switch(this.setState({setAriaActiveDescendant:l.keyCode===38||l.keyCode===40}),l.keyCode){case 9:u&&r&&this.setValue(i[t]);break;case 13:u&&r?(l.preventDefault(),this.setValue(i[t])):r&&i.length===1?this.setValue(i[0]):this.setState({shouldShowSuggestions:!1});break;case 27:r&&i.length>0&&(l.preventDefault(),this.setState({shouldShowSuggestions:!1}));break;case 38:r&&(l.preventDefault(),t=t-1===-2?-1:t-1,this.setState({activeSuggestionIndex:t}));break;case 40:r&&(l.preventDefault(),t=t+1===i.length?i.length-1:t+1,this.setState({activeSuggestionIndex:t}));break}}onFocus(){this.setState({hasFocus:!0,activeSuggestionIndex:-1})}onBlur(){const l=setTimeout(()=>{const{shouldBlur:t}=this.state;t&&this.setState({hasFocus:!1})},10);this.setState({blurDelay:l});const{onBlur:r}=this.props;r&&r()}setSuggestionIndex(l){this.setState({activeSuggestionIndex:l}),this.clearBlurDelay()}setValue(l){this.setState({shouldShowSuggestions:!1,activeSuggestionIndex:-1},()=>{this.inputRef.focus()}),this.clearBlurDelay();const{onSelect:r}=this.props;r(l)}avoidBlur(){this.setState({shouldBlur:!1})}clearBlurDelay(){const{blurDelay:l}=this.state;l&&(clearTimeout(l),this.setState({blurDelay:null})),this.setState({shouldBlur:!0})}render(){const{suggestions:l,id:r,ariaLabel:t,placeholder:i,value:u,name:d,shouldFocusOnMount:m,isLoading:f}=this.props,{activeSuggestionIndex:p,setAriaActiveDescendant:h,hasFocus:R,shouldShowSuggestions:A}=this.state,L=R&&A&&l.length>0,w=h&&p>-1?`${r}-item-${p}`:void 0;return Ra.jsxs("div",{className:`${ds.autocomplete} autocomplete`,"aria-expanded":L,"aria-owns":`${r}-suggestions`,"aria-haspopup":"listbox",children:[Ra.jsx(ps,{variant:"primary",id:r,name:d,"aria-label":t,"aria-autocomplete":"list","aria-controls":`${r}-suggestions`,"aria-activedescendant":w,placeholder:i,value:u,autoComplete:"off",onChange:this.onChange,onBlur:this.onBlur,onKeyDown:this.onKeyDown,onFocus:this.onFocus,ref:k=>{this.inputRef=k},className:"typo-normal",autoFocus:m,label:t,hideLabel:!0,children:Ra.jsx(ps.Button,{loading:f,onClick:this.onSearchButtonClick})}),Ra.jsx("ul",{id:`${r}-suggestions`,role:"listbox",className:L?ds.autocomplete__suggestions:ds["autocomplete__suggestions--hidden"],children:L&&l.map((k,S)=>Ra.jsx(FS,{id:`${r}-item-${S}`,index:S,value:k,match:u,active:S===p,onClick:this.setValue,setSuggestionIndex:this.setSuggestionIndex,avoidBlur:this.avoidBlur},k.key))})]})}}var Rs=function(e,l){return Rs=Object.setPrototypeOf||{__proto__:[]}instanceof Array&&function(r,t){r.__proto__=t}||function(r,t){for(var i in t)Object.prototype.hasOwnProperty.call(t,i)&&(r[i]=t[i])},Rs(e,l)};function fa(e,l){if(typeof l!="function"&&l!==null)throw new TypeError("Class extends value "+String(l)+" is not a constructor or null");Rs(e,l);function r(){this.constructor=e}e.prototype=l===null?Object.create(l):(r.prototype=l.prototype,new r)}var ie=function(){return ie=Object.assign||function(e){for(var l,r=1,t=arguments.length;r<t;r++){l=arguments[r];for(var i in l)Object.prototype.hasOwnProperty.call(l,i)&&(e[i]=l[i])}return e},ie.apply(this,arguments)};function jl(e,l){var r={};for(var t in e)Object.prototype.hasOwnProperty.call(e,t)&&l.indexOf(t)<0&&(r[t]=e[t]);if(e!=null&&typeof Object.getOwnPropertySymbols=="function")for(var i=0,t=Object.getOwnPropertySymbols(e);i<t.length;i++)l.indexOf(t[i])<0&&Object.prototype.propertyIsEnumerable.call(e,t[i])&&(r[t[i]]=e[t[i]]);return r}function Aa(e,l,r){if(arguments.length===2)for(var t=0,i=l.length,u;t<i;t++)(u||!(t in l))&&(u||(u=Array.prototype.slice.call(l,0,t)),u[t]=l[t]);return e.concat(u||Array.prototype.slice.call(l))}function ya(e,l){var r=l&&l.cache?l.cache:qS,t=l&&l.serializer?l.serializer:jS,i=l&&l.strategy?l.strategy:GS;return i(e,{cache:r,serializer:t})}function US(e){return e==null||typeof e=="number"||typeof e=="boolean"}function xS(e,l,r,t){var i=US(t)?t:r(t),u=l.get(i);return typeof u>"u"&&(u=e.call(this,t),l.set(i,u)),u}function Hv(e,l,r){var t=Array.prototype.slice.call(arguments,3),i=r(t),u=l.get(i);return typeof u>"u"&&(u=e.apply(this,t),l.set(i,u)),u}function qv(e,l,r,t,i){return r.bind(l,e,t,i)}function GS(e,l){var r=e.length===1?xS:Hv;return qv(e,this,r,l.cache.create(),l.serializer)}function CS(e,l){return qv(e,this,Hv,l.cache.create(),l.serializer)}var jS=function(){return JSON.stringify(arguments)},HS=(function(){function e(){this.cache=Object.create(null)}return e.prototype.get=function(l){return this.cache[l]},e.prototype.set=function(l,r){this.cache[l]=r},e})(),qS={create:function(){return new HS}},_a={variadic:CS},be;(function(e){e[e.EXPECT_ARGUMENT_CLOSING_BRACE=1]="EXPECT_ARGUMENT_CLOSING_BRACE",e[e.EMPTY_ARGUMENT=2]="EMPTY_ARGUMENT",e[e.MALFORMED_ARGUMENT=3]="MALFORMED_ARGUMENT",e[e.EXPECT_ARGUMENT_TYPE=4]="EXPECT_ARGUMENT_TYPE",e[e.INVALID_ARGUMENT_TYPE=5]="INVALID_ARGUMENT_TYPE",e[e.EXPECT_ARGUMENT_STYLE=6]="EXPECT_ARGUMENT_STYLE",e[e.INVALID_NUMBER_SKELETON=7]="INVALID_NUMBER_SKELETON",e[e.INVALID_DATE_TIME_SKELETON=8]="INVALID_DATE_TIME_SKELETON",e[e.EXPECT_NUMBER_SKELETON=9]="EXPECT_NUMBER_SKELETON",e[e.EXPECT_DATE_TIME_SKELETON=10]="EXPECT_DATE_TIME_SKELETON",e[e.UNCLOSED_QUOTE_IN_ARGUMENT_STYLE=11]="UNCLOSED_QUOTE_IN_ARGUMENT_STYLE",e[e.EXPECT_SELECT_ARGUMENT_OPTIONS=12]="EXPECT_SELECT_ARGUMENT_OPTIONS",e[e.EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE=13]="EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE",e[e.INVALID_PLURAL_ARGUMENT_OFFSET_VALUE=14]="INVALID_PLURAL_ARGUMENT_OFFSET_VALUE",e[e.EXPECT_SELECT_ARGUMENT_SELECTOR=15]="EXPECT_SELECT_ARGUMENT_SELECTOR",e[e.EXPECT_PLURAL_ARGUMENT_SELECTOR=16]="EXPECT_PLURAL_ARGUMENT_SELECTOR",e[e.EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT=17]="EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT",e[e.EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT=18]="EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT",e[e.INVALID_PLURAL_ARGUMENT_SELECTOR=19]="INVALID_PLURAL_ARGUMENT_SELECTOR",e[e.DUPLICATE_PLURAL_ARGUMENT_SELECTOR=20]="DUPLICATE_PLURAL_ARGUMENT_SELECTOR",e[e.DUPLICATE_SELECT_ARGUMENT_SELECTOR=21]="DUPLICATE_SELECT_ARGUMENT_SELECTOR",e[e.MISSING_OTHER_CLAUSE=22]="MISSING_OTHER_CLAUSE",e[e.INVALID_TAG=23]="INVALID_TAG",e[e.INVALID_TAG_NAME=25]="INVALID_TAG_NAME",e[e.UNMATCHED_CLOSING_TAG=26]="UNMATCHED_CLOSING_TAG",e[e.UNCLOSED_TAG=27]="UNCLOSED_TAG"})(be||(be={}));var xe;(function(e){e[e.literal=0]="literal",e[e.argument=1]="argument",e[e.number=2]="number",e[e.date=3]="date",e[e.time=4]="time",e[e.select=5]="select",e[e.plural=6]="plural",e[e.pound=7]="pound",e[e.tag=8]="tag"})(xe||(xe={}));var Br;(function(e){e[e.number=0]="number",e[e.dateTime=1]="dateTime"})(Br||(Br={}));function xm(e){return e.type===xe.literal}function YS(e){return e.type===xe.argument}function Yv(e){return e.type===xe.number}function Jv(e){return e.type===xe.date}function $v(e){return e.type===xe.time}function Wv(e){return e.type===xe.select}function Zv(e){return e.type===xe.plural}function JS(e){return e.type===xe.pound}function zv(e){return e.type===xe.tag}function Xv(e){return!!(e&&typeof e=="object"&&e.type===Br.number)}function Ts(e){return!!(e&&typeof e=="object"&&e.type===Br.dateTime)}var Qv=/[ \xA0\u1680\u2000-\u200A\u202F\u205F\u3000]/,$S=/(?:[Eec]{1,6}|G{1,5}|[Qq]{1,5}|(?:[yYur]+|U{1,5})|[ML]{1,5}|d{1,2}|D{1,3}|F{1}|[abB]{1,5}|[hkHK]{1,2}|w{1,2}|W{1}|m{1,2}|s{1,2}|[zZOvVxX]{1,4})(?=([^']*'[^']*')*[^']*$)/g;function WS(e){var l={};return e.replace($S,function(r){var t=r.length;switch(r[0]){case"G":l.era=t===4?"long":t===5?"narrow":"short";break;case"y":l.year=t===2?"2-digit":"numeric";break;case"Y":case"u":case"U":case"r":throw new RangeError("`Y/u/U/r` (year) patterns are not supported, use `y` instead");case"q":case"Q":throw new RangeError("`q/Q` (quarter) patterns are not supported");case"M":case"L":l.month=["numeric","2-digit","short","long","narrow"][t-1];break;case"w":case"W":throw new RangeError("`w/W` (week) patterns are not supported");case"d":l.day=["numeric","2-digit"][t-1];break;case"D":case"F":case"g":throw new RangeError("`D/F/g` (day) patterns are not supported, use `d` instead");case"E":l.weekday=t===4?"long":t===5?"narrow":"short";break;case"e":if(t<4)throw new RangeError("`e..eee` (weekday) patterns are not supported");l.weekday=["short","long","narrow","short"][t-4];break;case"c":if(t<4)throw new RangeError("`c..ccc` (weekday) patterns are not supported");l.weekday=["short","long","narrow","short"][t-4];break;case"a":l.hour12=!0;break;case"b":case"B":throw new RangeError("`b/B` (period) patterns are not supported, use `a` instead");case"h":l.hourCycle="h12",l.hour=["numeric","2-digit"][t-1];break;case"H":l.hourCycle="h23",l.hour=["numeric","2-digit"][t-1];break;case"K":l.hourCycle="h11",l.hour=["numeric","2-digit"][t-1];break;case"k":l.hourCycle="h24",l.hour=["numeric","2-digit"][t-1];break;case"j":case"J":case"C":throw new RangeError("`j/J/C` (hour) patterns are not supported, use `h/H/K/k` instead");case"m":l.minute=["numeric","2-digit"][t-1];break;case"s":l.second=["numeric","2-digit"][t-1];break;case"S":case"A":throw new RangeError("`S/A` (second) patterns are not supported, use `s` instead");case"z":l.timeZoneName=t<4?"short":"long";break;case"Z":case"O":case"v":case"V":case"X":case"x":throw new RangeError("`Z/O/v/V/X/x` (timeZone) patterns are not supported, use `z` instead")}return""}),l}var ZS=/[\t-\r \x85\u200E\u200F\u2028\u2029]/i;function zS(e){if(e.length===0)throw new Error("Number skeleton cannot be empty");for(var l=e.split(ZS).filter(function(A){return A.length>0}),r=[],t=0,i=l;t<i.length;t++){var u=i[t],d=u.split("/");if(d.length===0)throw new Error("Invalid number skeleton");for(var m=d[0],f=d.slice(1),p=0,h=f;p<h.length;p++){var R=h[p];if(R.length===0)throw new Error("Invalid number skeleton")}r.push({stem:m,options:f})}return r}function XS(e){return e.replace(/^(.*?)-/,"")}var Gm=/^\.(?:(0+)(\*)?|(#+)|(0+)(#+))$/g,ec=/^(@+)?(\+|#+)?[rs]?$/g,QS=/(\*)(0+)|(#+)(0+)|(0+)/g,nc=/^(0+)$/;function Cm(e){var l={};return e[e.length-1]==="r"?l.roundingPriority="morePrecision":e[e.length-1]==="s"&&(l.roundingPriority="lessPrecision"),e.replace(ec,function(r,t,i){return typeof i!="string"?(l.minimumSignificantDigits=t.length,l.maximumSignificantDigits=t.length):i==="+"?l.minimumSignificantDigits=t.length:t[0]==="#"?l.maximumSignificantDigits=t.length:(l.minimumSignificantDigits=t.length,l.maximumSignificantDigits=t.length+(typeof i=="string"?i.length:0)),""}),l}function ac(e){switch(e){case"sign-auto":return{signDisplay:"auto"};case"sign-accounting":case"()":return{currencySign:"accounting"};case"sign-always":case"+!":return{signDisplay:"always"};case"sign-accounting-always":case"()!":return{signDisplay:"always",currencySign:"accounting"};case"sign-except-zero":case"+?":return{signDisplay:"exceptZero"};case"sign-accounting-except-zero":case"()?":return{signDisplay:"exceptZero",currencySign:"accounting"};case"sign-never":case"+_":return{signDisplay:"never"}}}function eO(e){var l;if(e[0]==="E"&&e[1]==="E"?(l={notation:"engineering"},e=e.slice(2)):e[0]==="E"&&(l={notation:"scientific"},e=e.slice(1)),l){var r=e.slice(0,2);if(r==="+!"?(l.signDisplay="always",e=e.slice(2)):r==="+?"&&(l.signDisplay="exceptZero",e=e.slice(2)),!nc.test(e))throw new Error("Malformed concise eng/scientific notation");l.minimumIntegerDigits=e.length}return l}function jm(e){var l={},r=ac(e);return r||l}function nO(e){for(var l={},r=0,t=e;r<t.length;r++){var i=t[r];switch(i.stem){case"percent":case"%":l.style="percent";continue;case"%x100":l.style="percent",l.scale=100;continue;case"currency":l.style="currency",l.currency=i.options[0];continue;case"group-off":case",_":l.useGrouping=!1;continue;case"precision-integer":case".":l.maximumFractionDigits=0;continue;case"measure-unit":case"unit":l.style="unit",l.unit=XS(i.options[0]);continue;case"compact-short":case"K":l.notation="compact",l.compactDisplay="short";continue;case"compact-long":case"KK":l.notation="compact",l.compactDisplay="long";continue;case"scientific":l=ie(ie(ie({},l),{notation:"scientific"}),i.options.reduce(function(f,p){return ie(ie({},f),jm(p))},{}));continue;case"engineering":l=ie(ie(ie({},l),{notation:"engineering"}),i.options.reduce(function(f,p){return ie(ie({},f),jm(p))},{}));continue;case"notation-simple":l.notation="standard";continue;case"unit-width-narrow":l.currencyDisplay="narrowSymbol",l.unitDisplay="narrow";continue;case"unit-width-short":l.currencyDisplay="code",l.unitDisplay="short";continue;case"unit-width-full-name":l.currencyDisplay="name",l.unitDisplay="long";continue;case"unit-width-iso-code":l.currencyDisplay="symbol";continue;case"scale":l.scale=parseFloat(i.options[0]);continue;case"rounding-mode-floor":l.roundingMode="floor";continue;case"rounding-mode-ceiling":l.roundingMode="ceil";continue;case"rounding-mode-down":l.roundingMode="trunc";continue;case"rounding-mode-up":l.roundingMode="expand";continue;case"rounding-mode-half-even":l.roundingMode="halfEven";continue;case"rounding-mode-half-down":l.roundingMode="halfTrunc";continue;case"rounding-mode-half-up":l.roundingMode="halfExpand";continue;case"integer-width":if(i.options.length>1)throw new RangeError("integer-width stems only accept a single optional option");i.options[0].replace(QS,function(f,p,h,R,A,L){if(p)l.minimumIntegerDigits=h.length;else{if(R&&A)throw new Error("We currently do not support maximum integer digits");if(L)throw new Error("We currently do not support exact integer digits")}return""});continue}if(nc.test(i.stem)){l.minimumIntegerDigits=i.stem.length;continue}if(Gm.test(i.stem)){if(i.options.length>1)throw new RangeError("Fraction-precision stems only accept a single optional option");i.stem.replace(Gm,function(f,p,h,R,A,L){return h==="*"?l.minimumFractionDigits=p.length:R&&R[0]==="#"?l.maximumFractionDigits=R.length:A&&L?(l.minimumFractionDigits=A.length,l.maximumFractionDigits=A.length+L.length):(l.minimumFractionDigits=p.length,l.maximumFractionDigits=p.length),""});var u=i.options[0];u==="w"?l=ie(ie({},l),{trailingZeroDisplay:"stripIfInteger"}):u&&(l=ie(ie({},l),Cm(u)));continue}if(ec.test(i.stem)){l=ie(ie({},l),Cm(i.stem));continue}var d=ac(i.stem);d&&(l=ie(ie({},l),d));var m=eO(i.stem);m&&(l=ie(ie({},l),m))}return l}var El={"001":["H","h"],419:["h","H","hB","hb"],AC:["H","h","hb","hB"],AD:["H","hB"],AE:["h","hB","hb","H"],AF:["H","hb","hB","h"],AG:["h","hb","H","hB"],AI:["H","h","hb","hB"],AL:["h","H","hB"],AM:["H","hB"],AO:["H","hB"],AR:["h","H","hB","hb"],AS:["h","H"],AT:["H","hB"],AU:["h","hb","H","hB"],AW:["H","hB"],AX:["H"],AZ:["H","hB","h"],BA:["H","hB","h"],BB:["h","hb","H","hB"],BD:["h","hB","H"],BE:["H","hB"],BF:["H","hB"],BG:["H","hB","h"],BH:["h","hB","hb","H"],BI:["H","h"],BJ:["H","hB"],BL:["H","hB"],BM:["h","hb","H","hB"],BN:["hb","hB","h","H"],BO:["h","H","hB","hb"],BQ:["H"],BR:["H","hB"],BS:["h","hb","H","hB"],BT:["h","H"],BW:["H","h","hb","hB"],BY:["H","h"],BZ:["H","h","hb","hB"],CA:["h","hb","H","hB"],CC:["H","h","hb","hB"],CD:["hB","H"],CF:["H","h","hB"],CG:["H","hB"],CH:["H","hB","h"],CI:["H","hB"],CK:["H","h","hb","hB"],CL:["h","H","hB","hb"],CM:["H","h","hB"],CN:["H","hB","hb","h"],CO:["h","H","hB","hb"],CP:["H"],CR:["h","H","hB","hb"],CU:["h","H","hB","hb"],CV:["H","hB"],CW:["H","hB"],CX:["H","h","hb","hB"],CY:["h","H","hb","hB"],CZ:["H"],DE:["H","hB"],DG:["H","h","hb","hB"],DJ:["h","H"],DK:["H"],DM:["h","hb","H","hB"],DO:["h","H","hB","hb"],DZ:["h","hB","hb","H"],EA:["H","h","hB","hb"],EC:["h","H","hB","hb"],EE:["H","hB"],EG:["h","hB","hb","H"],EH:["h","hB","hb","H"],ER:["h","H"],ES:["H","hB","h","hb"],ET:["hB","hb","h","H"],FI:["H"],FJ:["h","hb","H","hB"],FK:["H","h","hb","hB"],FM:["h","hb","H","hB"],FO:["H","h"],FR:["H","hB"],GA:["H","hB"],GB:["H","h","hb","hB"],GD:["h","hb","H","hB"],GE:["H","hB","h"],GF:["H","hB"],GG:["H","h","hb","hB"],GH:["h","H"],GI:["H","h","hb","hB"],GL:["H","h"],GM:["h","hb","H","hB"],GN:["H","hB"],GP:["H","hB"],GQ:["H","hB","h","hb"],GR:["h","H","hb","hB"],GT:["h","H","hB","hb"],GU:["h","hb","H","hB"],GW:["H","hB"],GY:["h","hb","H","hB"],HK:["h","hB","hb","H"],HN:["h","H","hB","hb"],HR:["H","hB"],HU:["H","h"],IC:["H","h","hB","hb"],ID:["H"],IE:["H","h","hb","hB"],IL:["H","hB"],IM:["H","h","hb","hB"],IN:["h","H"],IO:["H","h","hb","hB"],IQ:["h","hB","hb","H"],IR:["hB","H"],IS:["H"],IT:["H","hB"],JE:["H","h","hb","hB"],JM:["h","hb","H","hB"],JO:["h","hB","hb","H"],JP:["H","K","h"],KE:["hB","hb","H","h"],KG:["H","h","hB","hb"],KH:["hB","h","H","hb"],KI:["h","hb","H","hB"],KM:["H","h","hB","hb"],KN:["h","hb","H","hB"],KP:["h","H","hB","hb"],KR:["h","H","hB","hb"],KW:["h","hB","hb","H"],KY:["h","hb","H","hB"],KZ:["H","hB"],LA:["H","hb","hB","h"],LB:["h","hB","hb","H"],LC:["h","hb","H","hB"],LI:["H","hB","h"],LK:["H","h","hB","hb"],LR:["h","hb","H","hB"],LS:["h","H"],LT:["H","h","hb","hB"],LU:["H","h","hB"],LV:["H","hB","hb","h"],LY:["h","hB","hb","H"],MA:["H","h","hB","hb"],MC:["H","hB"],MD:["H","hB"],ME:["H","hB","h"],MF:["H","hB"],MG:["H","h"],MH:["h","hb","H","hB"],MK:["H","h","hb","hB"],ML:["H"],MM:["hB","hb","H","h"],MN:["H","h","hb","hB"],MO:["h","hB","hb","H"],MP:["h","hb","H","hB"],MQ:["H","hB"],MR:["h","hB","hb","H"],MS:["H","h","hb","hB"],MT:["H","h"],MU:["H","h"],MV:["H","h"],MW:["h","hb","H","hB"],MX:["h","H","hB","hb"],MY:["hb","hB","h","H"],MZ:["H","hB"],NA:["h","H","hB","hb"],NC:["H","hB"],NE:["H"],NF:["H","h","hb","hB"],NG:["H","h","hb","hB"],NI:["h","H","hB","hb"],NL:["H","hB"],NO:["H","h"],NP:["H","h","hB"],NR:["H","h","hb","hB"],NU:["H","h","hb","hB"],NZ:["h","hb","H","hB"],OM:["h","hB","hb","H"],PA:["h","H","hB","hb"],PE:["h","H","hB","hb"],PF:["H","h","hB"],PG:["h","H"],PH:["h","hB","hb","H"],PK:["h","hB","H"],PL:["H","h"],PM:["H","hB"],PN:["H","h","hb","hB"],PR:["h","H","hB","hb"],PS:["h","hB","hb","H"],PT:["H","hB"],PW:["h","H"],PY:["h","H","hB","hb"],QA:["h","hB","hb","H"],RE:["H","hB"],RO:["H","hB"],RS:["H","hB","h"],RU:["H"],RW:["H","h"],SA:["h","hB","hb","H"],SB:["h","hb","H","hB"],SC:["H","h","hB"],SD:["h","hB","hb","H"],SE:["H"],SG:["h","hb","H","hB"],SH:["H","h","hb","hB"],SI:["H","hB"],SJ:["H"],SK:["H"],SL:["h","hb","H","hB"],SM:["H","h","hB"],SN:["H","h","hB"],SO:["h","H"],SR:["H","hB"],SS:["h","hb","H","hB"],ST:["H","hB"],SV:["h","H","hB","hb"],SX:["H","h","hb","hB"],SY:["h","hB","hb","H"],SZ:["h","hb","H","hB"],TA:["H","h","hb","hB"],TC:["h","hb","H","hB"],TD:["h","H","hB"],TF:["H","h","hB"],TG:["H","hB"],TH:["H","h"],TJ:["H","h"],TL:["H","hB","hb","h"],TM:["H","h"],TN:["h","hB","hb","H"],TO:["h","H"],TR:["H","hB"],TT:["h","hb","H","hB"],TW:["hB","hb","h","H"],TZ:["hB","hb","H","h"],UA:["H","hB","h"],UG:["hB","hb","H","h"],UM:["h","hb","H","hB"],US:["h","hb","H","hB"],UY:["h","H","hB","hb"],UZ:["H","hB","h"],VA:["H","h","hB"],VC:["h","hb","H","hB"],VE:["h","H","hB","hb"],VG:["h","hb","H","hB"],VI:["h","hb","H","hB"],VN:["H","h"],VU:["h","H"],WF:["H","hB"],WS:["h","H"],XK:["H","hB","h"],YE:["h","hB","hb","H"],YT:["H","hB"],ZA:["H","h","hb","hB"],ZM:["h","hb","H","hB"],ZW:["H","h"],"af-ZA":["H","h","hB","hb"],"ar-001":["h","hB","hb","H"],"ca-ES":["H","h","hB"],"en-001":["h","hb","H","hB"],"en-HK":["h","hb","H","hB"],"en-IL":["H","h","hb","hB"],"en-MY":["h","hb","H","hB"],"es-BR":["H","h","hB","hb"],"es-ES":["H","h","hB","hb"],"es-GQ":["H","h","hB","hb"],"fr-CA":["H","h","hB"],"gl-ES":["H","h","hB"],"gu-IN":["hB","hb","h","H"],"hi-IN":["hB","h","H"],"it-CH":["H","h","hB"],"it-IT":["H","h","hB"],"kn-IN":["hB","h","H"],"ml-IN":["hB","h","H"],"mr-IN":["hB","hb","h","H"],"pa-IN":["hB","hb","h","H"],"ta-IN":["hB","h","hb","H"],"te-IN":["hB","h","H"],"zu-ZA":["H","hB","hb","h"]};function aO(e,l){for(var r="",t=0;t<e.length;t++){var i=e.charAt(t);if(i==="j"){for(var u=0;t+1<e.length&&e.charAt(t+1)===i;)u++,t++;var d=1+(u&1),m=u<2?1:3+(u>>1),f="a",p=rO(l);for((p=="H"||p=="k")&&(m=0);m-- >0;)r+=f;for(;d-- >0;)r=p+r}else i==="J"?r+="H":r+=i}return r}function rO(e){var l=e.hourCycle;if(l===void 0&&e.hourCycles&&e.hourCycles.length&&(l=e.hourCycles[0]),l)switch(l){case"h24":return"k";case"h23":return"H";case"h12":return"h";case"h11":return"K";default:throw new Error("Invalid hourCycle")}var r=e.language,t;r!=="root"&&(t=e.maximize().region);var i=El[t||""]||El[r||""]||El["".concat(r,"-001")]||El["001"];return i[0]}var ms,tO=new RegExp("^".concat(Qv.source,"*")),lO=new RegExp("".concat(Qv.source,"*$"));function Ie(e,l){return{start:e,end:l}}var iO=!!String.prototype.startsWith&&"_a".startsWith("a",1),sO=!!String.fromCodePoint,uO=!!Object.fromEntries,oO=!!String.prototype.codePointAt,dO=!!String.prototype.trimStart,mO=!!String.prototype.trimEnd,vO=!!Number.isSafeInteger,cO=vO?Number.isSafeInteger:function(e){return typeof e=="number"&&isFinite(e)&&Math.floor(e)===e&&Math.abs(e)<=9007199254740991},Ss=!0;try{var fO=tc("([^\\p{White_Space}\\p{Pattern_Syntax}]*)","yu");Ss=((ms=fO.exec("a"))===null||ms===void 0?void 0:ms[0])==="a"}catch{Ss=!1}var Hm=iO?(function(e,l,r){return e.startsWith(l,r)}):(function(e,l,r){return e.slice(r,r+l.length)===l}),Os=sO?String.fromCodePoint:(function(){for(var e=[],l=0;l<arguments.length;l++)e[l]=arguments[l];for(var r="",t=e.length,i=0,u;t>i;){if(u=e[i++],u>1114111)throw RangeError(u+" is not a valid code point");r+=u<65536?String.fromCharCode(u):String.fromCharCode(((u-=65536)>>10)+55296,u%1024+56320)}return r}),qm=uO?Object.fromEntries:(function(e){for(var l={},r=0,t=e;r<t.length;r++){var i=t[r],u=i[0],d=i[1];l[u]=d}return l}),rc=oO?(function(e,l){return e.codePointAt(l)}):(function(e,l){var r=e.length;if(!(l<0||l>=r)){var t=e.charCodeAt(l),i;return t<55296||t>56319||l+1===r||(i=e.charCodeAt(l+1))<56320||i>57343?t:(t-55296<<10)+(i-56320)+65536}}),gO=dO?(function(e){return e.trimStart()}):(function(e){return e.replace(tO,"")}),hO=mO?(function(e){return e.trimEnd()}):(function(e){return e.replace(lO,"")});function tc(e,l){return new RegExp(e,l)}var Ns;if(Ss){var Ym=tc("([^\\p{White_Space}\\p{Pattern_Syntax}]*)","yu");Ns=function(e,l){var r;Ym.lastIndex=l;var t=Ym.exec(e);return(r=t[1])!==null&&r!==void 0?r:""}}else Ns=function(e,l){for(var r=[];;){var t=rc(e,l);if(t===void 0||lc(t)||_O(t))break;r.push(t),l+=t>=65536?2:1}return Os.apply(void 0,r)};var pO=(function(){function e(l,r){r===void 0&&(r={}),this.message=l,this.position={offset:0,line:1,column:1},this.ignoreTag=!!r.ignoreTag,this.locale=r.locale,this.requiresOtherClause=!!r.requiresOtherClause,this.shouldParseSkeletons=!!r.shouldParseSkeletons}return e.prototype.parse=function(){if(this.offset()!==0)throw Error("parser can only be used once");return this.parseMessage(0,"",!1)},e.prototype.parseMessage=function(l,r,t){for(var i=[];!this.isEOF();){var u=this.char();if(u===123){var d=this.parseArgument(l,t);if(d.err)return d;i.push(d.val)}else{if(u===125&&l>0)break;if(u===35&&(r==="plural"||r==="selectordinal")){var m=this.clonePosition();this.bump(),i.push({type:xe.pound,location:Ie(m,this.clonePosition())})}else if(u===60&&!this.ignoreTag&&this.peek()===47){if(t)break;return this.error(be.UNMATCHED_CLOSING_TAG,Ie(this.clonePosition(),this.clonePosition()))}else if(u===60&&!this.ignoreTag&&ks(this.peek()||0)){var d=this.parseTag(l,r);if(d.err)return d;i.push(d.val)}else{var d=this.parseLiteral(l,r);if(d.err)return d;i.push(d.val)}}}return{val:i,err:null}},e.prototype.parseTag=function(l,r){var t=this.clonePosition();this.bump();var i=this.parseTagName();if(this.bumpSpace(),this.bumpIf("/>"))return{val:{type:xe.literal,value:"<".concat(i,"/>"),location:Ie(t,this.clonePosition())},err:null};if(this.bumpIf(">")){var u=this.parseMessage(l+1,r,!0);if(u.err)return u;var d=u.val,m=this.clonePosition();if(this.bumpIf("</")){if(this.isEOF()||!ks(this.char()))return this.error(be.INVALID_TAG,Ie(m,this.clonePosition()));var f=this.clonePosition(),p=this.parseTagName();return i!==p?this.error(be.UNMATCHED_CLOSING_TAG,Ie(f,this.clonePosition())):(this.bumpSpace(),this.bumpIf(">")?{val:{type:xe.tag,value:i,children:d,location:Ie(t,this.clonePosition())},err:null}:this.error(be.INVALID_TAG,Ie(m,this.clonePosition())))}else return this.error(be.UNCLOSED_TAG,Ie(t,this.clonePosition()))}else return this.error(be.INVALID_TAG,Ie(t,this.clonePosition()))},e.prototype.parseTagName=function(){var l=this.offset();for(this.bump();!this.isEOF()&&yO(this.char());)this.bump();return this.message.slice(l,this.offset())},e.prototype.parseLiteral=function(l,r){for(var t=this.clonePosition(),i="";;){var u=this.tryParseQuote(r);if(u){i+=u;continue}var d=this.tryParseUnquoted(l,r);if(d){i+=d;continue}var m=this.tryParseLeftAngleBracket();if(m){i+=m;continue}break}var f=Ie(t,this.clonePosition());return{val:{type:xe.literal,value:i,location:f},err:null}},e.prototype.tryParseLeftAngleBracket=function(){return!this.isEOF()&&this.char()===60&&(this.ignoreTag||!EO(this.peek()||0))?(this.bump(),"<"):null},e.prototype.tryParseQuote=function(l){if(this.isEOF()||this.char()!==39)return null;switch(this.peek()){case 39:return this.bump(),this.bump(),"'";case 123:case 60:case 62:case 125:break;case 35:if(l==="plural"||l==="selectordinal")break;return null;default:return null}this.bump();var r=[this.char()];for(this.bump();!this.isEOF();){var t=this.char();if(t===39)if(this.peek()===39)r.push(39),this.bump();else{this.bump();break}else r.push(t);this.bump()}return Os.apply(void 0,r)},e.prototype.tryParseUnquoted=function(l,r){if(this.isEOF())return null;var t=this.char();return t===60||t===123||t===35&&(r==="plural"||r==="selectordinal")||t===125&&l>0?null:(this.bump(),Os(t))},e.prototype.parseArgument=function(l,r){var t=this.clonePosition();if(this.bump(),this.bumpSpace(),this.isEOF())return this.error(be.EXPECT_ARGUMENT_CLOSING_BRACE,Ie(t,this.clonePosition()));if(this.char()===125)return this.bump(),this.error(be.EMPTY_ARGUMENT,Ie(t,this.clonePosition()));var i=this.parseIdentifierIfPossible().value;if(!i)return this.error(be.MALFORMED_ARGUMENT,Ie(t,this.clonePosition()));if(this.bumpSpace(),this.isEOF())return this.error(be.EXPECT_ARGUMENT_CLOSING_BRACE,Ie(t,this.clonePosition()));switch(this.char()){case 125:return this.bump(),{val:{type:xe.argument,value:i,location:Ie(t,this.clonePosition())},err:null};case 44:return this.bump(),this.bumpSpace(),this.isEOF()?this.error(be.EXPECT_ARGUMENT_CLOSING_BRACE,Ie(t,this.clonePosition())):this.parseArgumentOptions(l,r,i,t);default:return this.error(be.MALFORMED_ARGUMENT,Ie(t,this.clonePosition()))}},e.prototype.parseIdentifierIfPossible=function(){var l=this.clonePosition(),r=this.offset(),t=Ns(this.message,r),i=r+t.length;this.bumpTo(i);var u=this.clonePosition(),d=Ie(l,u);return{value:t,location:d}},e.prototype.parseArgumentOptions=function(l,r,t,i){var u,d=this.clonePosition(),m=this.parseIdentifierIfPossible().value,f=this.clonePosition();switch(m){case"":return this.error(be.EXPECT_ARGUMENT_TYPE,Ie(d,f));case"number":case"date":case"time":{this.bumpSpace();var p=null;if(this.bumpIf(",")){this.bumpSpace();var h=this.clonePosition(),R=this.parseSimpleArgStyleIfPossible();if(R.err)return R;var A=hO(R.val);if(A.length===0)return this.error(be.EXPECT_ARGUMENT_STYLE,Ie(this.clonePosition(),this.clonePosition()));var L=Ie(h,this.clonePosition());p={style:A,styleLocation:L}}var w=this.tryParseArgumentClose(i);if(w.err)return w;var k=Ie(i,this.clonePosition());if(p&&Hm(p?.style,"::",0)){var S=gO(p.style.slice(2));if(m==="number"){var R=this.parseNumberSkeletonFromString(S,p.styleLocation);return R.err?R:{val:{type:xe.number,value:t,location:k,style:R.val},err:null}}else{if(S.length===0)return this.error(be.EXPECT_DATE_TIME_SKELETON,k);var D=S;this.locale&&(D=aO(S,this.locale));var A={type:Br.dateTime,pattern:D,location:p.styleLocation,parsedOptions:this.shouldParseSkeletons?WS(D):{}},B=m==="date"?xe.date:xe.time;return{val:{type:B,value:t,location:k,style:A},err:null}}}return{val:{type:m==="number"?xe.number:m==="date"?xe.date:xe.time,value:t,location:k,style:(u=p?.style)!==null&&u!==void 0?u:null},err:null}}case"plural":case"selectordinal":case"select":{var N=this.clonePosition();if(this.bumpSpace(),!this.bumpIf(","))return this.error(be.EXPECT_SELECT_ARGUMENT_OPTIONS,Ie(N,ie({},N)));this.bumpSpace();var J=this.parseIdentifierIfPossible(),M=0;if(m!=="select"&&J.value==="offset"){if(!this.bumpIf(":"))return this.error(be.EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE,Ie(this.clonePosition(),this.clonePosition()));this.bumpSpace();var R=this.tryParseDecimalInteger(be.EXPECT_PLURAL_ARGUMENT_OFFSET_VALUE,be.INVALID_PLURAL_ARGUMENT_OFFSET_VALUE);if(R.err)return R;this.bumpSpace(),J=this.parseIdentifierIfPossible(),M=R.val}var $=this.tryParsePluralOrSelectOptions(l,m,r,J);if($.err)return $;var w=this.tryParseArgumentClose(i);if(w.err)return w;var G=Ie(i,this.clonePosition());return m==="select"?{val:{type:xe.select,value:t,options:qm($.val),location:G},err:null}:{val:{type:xe.plural,value:t,options:qm($.val),offset:M,pluralType:m==="plural"?"cardinal":"ordinal",location:G},err:null}}default:return this.error(be.INVALID_ARGUMENT_TYPE,Ie(d,f))}},e.prototype.tryParseArgumentClose=function(l){return this.isEOF()||this.char()!==125?this.error(be.EXPECT_ARGUMENT_CLOSING_BRACE,Ie(l,this.clonePosition())):(this.bump(),{val:!0,err:null})},e.prototype.parseSimpleArgStyleIfPossible=function(){for(var l=0,r=this.clonePosition();!this.isEOF();){var t=this.char();switch(t){case 39:{this.bump();var i=this.clonePosition();if(!this.bumpUntil("'"))return this.error(be.UNCLOSED_QUOTE_IN_ARGUMENT_STYLE,Ie(i,this.clonePosition()));this.bump();break}case 123:{l+=1,this.bump();break}case 125:{if(l>0)l-=1;else return{val:this.message.slice(r.offset,this.offset()),err:null};break}default:this.bump();break}}return{val:this.message.slice(r.offset,this.offset()),err:null}},e.prototype.parseNumberSkeletonFromString=function(l,r){var t=[];try{t=zS(l)}catch{return this.error(be.INVALID_NUMBER_SKELETON,r)}return{val:{type:Br.number,tokens:t,location:r,parsedOptions:this.shouldParseSkeletons?nO(t):{}},err:null}},e.prototype.tryParsePluralOrSelectOptions=function(l,r,t,i){for(var u,d=!1,m=[],f=new Set,p=i.value,h=i.location;;){if(p.length===0){var R=this.clonePosition();if(r!=="select"&&this.bumpIf("=")){var A=this.tryParseDecimalInteger(be.EXPECT_PLURAL_ARGUMENT_SELECTOR,be.INVALID_PLURAL_ARGUMENT_SELECTOR);if(A.err)return A;h=Ie(R,this.clonePosition()),p=this.message.slice(R.offset,this.offset())}else break}if(f.has(p))return this.error(r==="select"?be.DUPLICATE_SELECT_ARGUMENT_SELECTOR:be.DUPLICATE_PLURAL_ARGUMENT_SELECTOR,h);p==="other"&&(d=!0),this.bumpSpace();var L=this.clonePosition();if(!this.bumpIf("{"))return this.error(r==="select"?be.EXPECT_SELECT_ARGUMENT_SELECTOR_FRAGMENT:be.EXPECT_PLURAL_ARGUMENT_SELECTOR_FRAGMENT,Ie(this.clonePosition(),this.clonePosition()));var w=this.parseMessage(l+1,r,t);if(w.err)return w;var k=this.tryParseArgumentClose(L);if(k.err)return k;m.push([p,{value:w.val,location:Ie(L,this.clonePosition())}]),f.add(p),this.bumpSpace(),u=this.parseIdentifierIfPossible(),p=u.value,h=u.location}return m.length===0?this.error(r==="select"?be.EXPECT_SELECT_ARGUMENT_SELECTOR:be.EXPECT_PLURAL_ARGUMENT_SELECTOR,Ie(this.clonePosition(),this.clonePosition())):this.requiresOtherClause&&!d?this.error(be.MISSING_OTHER_CLAUSE,Ie(this.clonePosition(),this.clonePosition())):{val:m,err:null}},e.prototype.tryParseDecimalInteger=function(l,r){var t=1,i=this.clonePosition();this.bumpIf("+")||this.bumpIf("-")&&(t=-1);for(var u=!1,d=0;!this.isEOF();){var m=this.char();if(m>=48&&m<=57)u=!0,d=d*10+(m-48),this.bump();else break}var f=Ie(i,this.clonePosition());return u?(d*=t,cO(d)?{val:d,err:null}:this.error(r,f)):this.error(l,f)},e.prototype.offset=function(){return this.position.offset},e.prototype.isEOF=function(){return this.offset()===this.message.length},e.prototype.clonePosition=function(){return{offset:this.position.offset,line:this.position.line,column:this.position.column}},e.prototype.char=function(){var l=this.position.offset;if(l>=this.message.length)throw Error("out of bound");var r=rc(this.message,l);if(r===void 0)throw Error("Offset ".concat(l," is at invalid UTF-16 code unit boundary"));return r},e.prototype.error=function(l,r){return{val:null,err:{kind:l,message:this.message,location:r}}},e.prototype.bump=function(){if(!this.isEOF()){var l=this.char();l===10?(this.position.line+=1,this.position.column=1,this.position.offset+=1):(this.position.column+=1,this.position.offset+=l<65536?1:2)}},e.prototype.bumpIf=function(l){if(Hm(this.message,l,this.offset())){for(var r=0;r<l.length;r++)this.bump();return!0}return!1},e.prototype.bumpUntil=function(l){var r=this.offset(),t=this.message.indexOf(l,r);return t>=0?(this.bumpTo(t),!0):(this.bumpTo(this.message.length),!1)},e.prototype.bumpTo=function(l){if(this.offset()>l)throw Error("targetOffset ".concat(l," must be greater than or equal to the current offset ").concat(this.offset()));for(l=Math.min(l,this.message.length);;){var r=this.offset();if(r===l)break;if(r>l)throw Error("targetOffset ".concat(l," is at invalid UTF-16 code unit boundary"));if(this.bump(),this.isEOF())break}},e.prototype.bumpSpace=function(){for(;!this.isEOF()&&lc(this.char());)this.bump()},e.prototype.peek=function(){if(this.isEOF())return null;var l=this.char(),r=this.offset(),t=this.message.charCodeAt(r+(l>=65536?2:1));return t??null},e})();function ks(e){return e>=97&&e<=122||e>=65&&e<=90}function EO(e){return ks(e)||e===47}function yO(e){return e===45||e===46||e>=48&&e<=57||e===95||e>=97&&e<=122||e>=65&&e<=90||e==183||e>=192&&e<=214||e>=216&&e<=246||e>=248&&e<=893||e>=895&&e<=8191||e>=8204&&e<=8205||e>=8255&&e<=8256||e>=8304&&e<=8591||e>=11264&&e<=12271||e>=12289&&e<=55295||e>=63744&&e<=64975||e>=65008&&e<=65533||e>=65536&&e<=983039}function lc(e){return e>=9&&e<=13||e===32||e===133||e>=8206&&e<=8207||e===8232||e===8233}function _O(e){return e>=33&&e<=35||e===36||e>=37&&e<=39||e===40||e===41||e===42||e===43||e===44||e===45||e>=46&&e<=47||e>=58&&e<=59||e>=60&&e<=62||e>=63&&e<=64||e===91||e===92||e===93||e===94||e===96||e===123||e===124||e===125||e===126||e===161||e>=162&&e<=165||e===166||e===167||e===169||e===171||e===172||e===174||e===176||e===177||e===182||e===187||e===191||e===215||e===247||e>=8208&&e<=8213||e>=8214&&e<=8215||e===8216||e===8217||e===8218||e>=8219&&e<=8220||e===8221||e===8222||e===8223||e>=8224&&e<=8231||e>=8240&&e<=8248||e===8249||e===8250||e>=8251&&e<=8254||e>=8257&&e<=8259||e===8260||e===8261||e===8262||e>=8263&&e<=8273||e===8274||e===8275||e>=8277&&e<=8286||e>=8592&&e<=8596||e>=8597&&e<=8601||e>=8602&&e<=8603||e>=8604&&e<=8607||e===8608||e>=8609&&e<=8610||e===8611||e>=8612&&e<=8613||e===8614||e>=8615&&e<=8621||e===8622||e>=8623&&e<=8653||e>=8654&&e<=8655||e>=8656&&e<=8657||e===8658||e===8659||e===8660||e>=8661&&e<=8691||e>=8692&&e<=8959||e>=8960&&e<=8967||e===8968||e===8969||e===8970||e===8971||e>=8972&&e<=8991||e>=8992&&e<=8993||e>=8994&&e<=9e3||e===9001||e===9002||e>=9003&&e<=9083||e===9084||e>=9085&&e<=9114||e>=9115&&e<=9139||e>=9140&&e<=9179||e>=9180&&e<=9185||e>=9186&&e<=9254||e>=9255&&e<=9279||e>=9280&&e<=9290||e>=9291&&e<=9311||e>=9472&&e<=9654||e===9655||e>=9656&&e<=9664||e===9665||e>=9666&&e<=9719||e>=9720&&e<=9727||e>=9728&&e<=9838||e===9839||e>=9840&&e<=10087||e===10088||e===10089||e===10090||e===10091||e===10092||e===10093||e===10094||e===10095||e===10096||e===10097||e===10098||e===10099||e===10100||e===10101||e>=10132&&e<=10175||e>=10176&&e<=10180||e===10181||e===10182||e>=10183&&e<=10213||e===10214||e===10215||e===10216||e===10217||e===10218||e===10219||e===10220||e===10221||e===10222||e===10223||e>=10224&&e<=10239||e>=10240&&e<=10495||e>=10496&&e<=10626||e===10627||e===10628||e===10629||e===10630||e===10631||e===10632||e===10633||e===10634||e===10635||e===10636||e===10637||e===10638||e===10639||e===10640||e===10641||e===10642||e===10643||e===10644||e===10645||e===10646||e===10647||e===10648||e>=10649&&e<=10711||e===10712||e===10713||e===10714||e===10715||e>=10716&&e<=10747||e===10748||e===10749||e>=10750&&e<=11007||e>=11008&&e<=11055||e>=11056&&e<=11076||e>=11077&&e<=11078||e>=11079&&e<=11084||e>=11085&&e<=11123||e>=11124&&e<=11125||e>=11126&&e<=11157||e===11158||e>=11159&&e<=11263||e>=11776&&e<=11777||e===11778||e===11779||e===11780||e===11781||e>=11782&&e<=11784||e===11785||e===11786||e===11787||e===11788||e===11789||e>=11790&&e<=11798||e===11799||e>=11800&&e<=11801||e===11802||e===11803||e===11804||e===11805||e>=11806&&e<=11807||e===11808||e===11809||e===11810||e===11811||e===11812||e===11813||e===11814||e===11815||e===11816||e===11817||e>=11818&&e<=11822||e===11823||e>=11824&&e<=11833||e>=11834&&e<=11835||e>=11836&&e<=11839||e===11840||e===11841||e===11842||e>=11843&&e<=11855||e>=11856&&e<=11857||e===11858||e>=11859&&e<=11903||e>=12289&&e<=12291||e===12296||e===12297||e===12298||e===12299||e===12300||e===12301||e===12302||e===12303||e===12304||e===12305||e>=12306&&e<=12307||e===12308||e===12309||e===12310||e===12311||e===12312||e===12313||e===12314||e===12315||e===12316||e===12317||e>=12318&&e<=12319||e===12320||e===12336||e===64830||e===64831||e>=65093&&e<=65094}function bs(e){e.forEach(function(l){if(delete l.location,Wv(l)||Zv(l))for(var r in l.options)delete l.options[r].location,bs(l.options[r].value);else Yv(l)&&Xv(l.style)||(Jv(l)||$v(l))&&Ts(l.style)?delete l.style.location:zv(l)&&bs(l.children)})}function AO(e,l){l===void 0&&(l={}),l=ie({shouldParseSkeletons:!0,requiresOtherClause:!0},l);var r=new pO(e,l).parse();if(r.err){var t=SyntaxError(be[r.err.kind]);throw t.location=r.err.location,t.originalMessage=r.err.message,t}return l?.captureLocation||bs(r.val),r.val}var Ta;(function(e){e.MISSING_VALUE="MISSING_VALUE",e.INVALID_VALUE="INVALID_VALUE",e.MISSING_INTL_API="MISSING_INTL_API"})(Ta||(Ta={}));var Wa=(function(e){fa(l,e);function l(r,t,i){var u=e.call(this,r)||this;return u.code=t,u.originalMessage=i,u}return l.prototype.toString=function(){return"[formatjs Error: ".concat(this.code,"] ").concat(this.message)},l})(Error),Jm=(function(e){fa(l,e);function l(r,t,i,u){return e.call(this,'Invalid values for "'.concat(r,'": "').concat(t,'". Options are "').concat(Object.keys(i).join('", "'),'"'),Ta.INVALID_VALUE,u)||this}return l})(Wa),RO=(function(e){fa(l,e);function l(r,t,i){return e.call(this,'Value for "'.concat(r,'" must be of type ').concat(t),Ta.INVALID_VALUE,i)||this}return l})(Wa),TO=(function(e){fa(l,e);function l(r,t){return e.call(this,'The intl string context variable "'.concat(r,'" was not provided to the string "').concat(t,'"'),Ta.MISSING_VALUE,t)||this}return l})(Wa),An;(function(e){e[e.literal=0]="literal",e[e.object=1]="object"})(An||(An={}));function SO(e){return e.length<2?e:e.reduce(function(l,r){var t=l[l.length-1];return!t||t.type!==An.literal||r.type!==An.literal?l.push(r):t.value+=r.value,l},[])}function ic(e){return typeof e=="function"}function kl(e,l,r,t,i,u,d){if(e.length===1&&xm(e[0]))return[{type:An.literal,value:e[0].value}];for(var m=[],f=0,p=e;f<p.length;f++){var h=p[f];if(xm(h)){m.push({type:An.literal,value:h.value});continue}if(JS(h)){typeof u=="number"&&m.push({type:An.literal,value:r.getNumberFormat(l).format(u)});continue}var R=h.value;if(!(i&&R in i))throw new TO(R,d);var A=i[R];if(YS(h)){(!A||typeof A=="string"||typeof A=="number")&&(A=typeof A=="string"||typeof A=="number"?String(A):""),m.push({type:typeof A=="string"?An.literal:An.object,value:A});continue}if(Jv(h)){var L=typeof h.style=="string"?t.date[h.style]:Ts(h.style)?h.style.parsedOptions:void 0;m.push({type:An.literal,value:r.getDateTimeFormat(l,L).format(A)});continue}if($v(h)){var L=typeof h.style=="string"?t.time[h.style]:Ts(h.style)?h.style.parsedOptions:t.time.medium;m.push({type:An.literal,value:r.getDateTimeFormat(l,L).format(A)});continue}if(Yv(h)){var L=typeof h.style=="string"?t.number[h.style]:Xv(h.style)?h.style.parsedOptions:void 0;L&&L.scale&&(A=A*(L.scale||1)),m.push({type:An.literal,value:r.getNumberFormat(l,L).format(A)});continue}if(zv(h)){var w=h.children,k=h.value,S=i[k];if(!ic(S))throw new RO(k,"function",d);var D=kl(w,l,r,t,i,u),B=S(D.map(function(M){return M.value}));Array.isArray(B)||(B=[B]),m.push.apply(m,B.map(function(M){return{type:typeof M=="string"?An.literal:An.object,value:M}}))}if(Wv(h)){var N=h.options[A]||h.options.other;if(!N)throw new Jm(h.value,A,Object.keys(h.options),d);m.push.apply(m,kl(N.value,l,r,t,i));continue}if(Zv(h)){var N=h.options["=".concat(A)];if(!N){if(!Intl.PluralRules)throw new Wa(`Intl.PluralRules is not available in this environment.
+Try polyfilling it using "@formatjs/intl-pluralrules"
+`,Ta.MISSING_INTL_API,d);var J=r.getPluralRules(l,{type:h.pluralType}).select(A-(h.offset||0));N=h.options[J]||h.options.other}if(!N)throw new Jm(h.value,A,Object.keys(h.options),d);m.push.apply(m,kl(N.value,l,r,t,i,A-(h.offset||0)));continue}}return SO(m)}function OO(e,l){return l?ie(ie(ie({},e||{}),l||{}),Object.keys(e).reduce(function(r,t){return r[t]=ie(ie({},e[t]),l[t]||{}),r},{})):e}function NO(e,l){return l?Object.keys(e).reduce(function(r,t){return r[t]=OO(e[t],l[t]),r},ie({},e)):e}function vs(e){return{create:function(){return{get:function(l){return e[l]},set:function(l,r){e[l]=r}}}}}function kO(e){return e===void 0&&(e={number:{},dateTime:{},pluralRules:{}}),{getNumberFormat:ya(function(){for(var l,r=[],t=0;t<arguments.length;t++)r[t]=arguments[t];return new((l=Intl.NumberFormat).bind.apply(l,Aa([void 0],r,!1)))},{cache:vs(e.number),strategy:_a.variadic}),getDateTimeFormat:ya(function(){for(var l,r=[],t=0;t<arguments.length;t++)r[t]=arguments[t];return new((l=Intl.DateTimeFormat).bind.apply(l,Aa([void 0],r,!1)))},{cache:vs(e.dateTime),strategy:_a.variadic}),getPluralRules:ya(function(){for(var l,r=[],t=0;t<arguments.length;t++)r[t]=arguments[t];return new((l=Intl.PluralRules).bind.apply(l,Aa([void 0],r,!1)))},{cache:vs(e.pluralRules),strategy:_a.variadic})}}var sc=(function(){function e(l,r,t,i){r===void 0&&(r=e.defaultLocale);var u=this;if(this.formatterCache={number:{},dateTime:{},pluralRules:{}},this.format=function(f){var p=u.formatToParts(f);if(p.length===1)return p[0].value;var h=p.reduce(function(R,A){return!R.length||A.type!==An.literal||typeof R[R.length-1]!="string"?R.push(A.value):R[R.length-1]+=A.value,R},[]);return h.length<=1?h[0]||"":h},this.formatToParts=function(f){return kl(u.ast,u.locales,u.formatters,u.formats,f,void 0,u.message)},this.resolvedOptions=function(){var f;return{locale:((f=u.resolvedLocale)===null||f===void 0?void 0:f.toString())||Intl.NumberFormat.supportedLocalesOf(u.locales)[0]}},this.getAst=function(){return u.ast},this.locales=r,this.resolvedLocale=e.resolveLocale(r),typeof l=="string"){if(this.message=l,!e.__parse)throw new TypeError("IntlMessageFormat.__parse must be set to process `message` of type `string`");var d=i||{};d.formatters;var m=jl(d,["formatters"]);this.ast=e.__parse(l,ie(ie({},m),{locale:this.resolvedLocale}))}else this.ast=l;if(!Array.isArray(this.ast))throw new TypeError("A message must be provided as a String or AST.");this.formats=NO(e.formats,t),this.formatters=i&&i.formatters||kO(this.formatterCache)}return Object.defineProperty(e,"defaultLocale",{get:function(){return e.memoizedDefaultLocale||(e.memoizedDefaultLocale=new Intl.NumberFormat().resolvedOptions().locale),e.memoizedDefaultLocale},enumerable:!1,configurable:!0}),e.memoizedDefaultLocale=null,e.resolveLocale=function(l){if(!(typeof Intl.Locale>"u")){var r=Intl.NumberFormat.supportedLocalesOf(l);return r.length>0?new Intl.Locale(r[0]):new Intl.Locale(typeof l=="string"?l:l[0])}},e.__parse=AO,e.formats={number:{integer:{maximumFractionDigits:0},currency:{style:"currency"},percent:{style:"percent"}},date:{short:{month:"numeric",day:"numeric",year:"2-digit"},medium:{month:"short",day:"numeric",year:"numeric"},long:{month:"long",day:"numeric",year:"numeric"},full:{weekday:"long",month:"long",day:"numeric",year:"numeric"}},time:{short:{hour:"numeric",minute:"numeric"},medium:{hour:"numeric",minute:"numeric",second:"numeric"},long:{hour:"numeric",minute:"numeric",second:"numeric",timeZoneName:"short"},full:{hour:"numeric",minute:"numeric",second:"numeric",timeZoneName:"short"}}},e})(),cr;(function(e){e.FORMAT_ERROR="FORMAT_ERROR",e.UNSUPPORTED_FORMATTER="UNSUPPORTED_FORMATTER",e.INVALID_CONFIG="INVALID_CONFIG",e.MISSING_DATA="MISSING_DATA",e.MISSING_TRANSLATION="MISSING_TRANSLATION"})(cr||(cr={}));var Tt=(function(e){fa(l,e);function l(r,t,i){var u=this,d=i?i instanceof Error?i:new Error(String(i)):void 0;return u=e.call(this,"[@formatjs/intl Error ".concat(r,"] ").concat(t,`
+`).concat(d?`
+`.concat(d.message,`
+`).concat(d.stack):""))||this,u.code=r,typeof Error.captureStackTrace=="function"&&Error.captureStackTrace(u,l),u}return l})(Error),bO=(function(e){fa(l,e);function l(r,t){return e.call(this,cr.UNSUPPORTED_FORMATTER,r,t)||this}return l})(Tt),IO=(function(e){fa(l,e);function l(r,t){return e.call(this,cr.INVALID_CONFIG,r,t)||this}return l})(Tt),$m=(function(e){fa(l,e);function l(r,t){return e.call(this,cr.MISSING_DATA,r,t)||this}return l})(Tt),ea=(function(e){fa(l,e);function l(r,t,i){var u=e.call(this,cr.FORMAT_ERROR,"".concat(r,`
+Locale: `).concat(t,`
+`),i)||this;return u.locale=t,u}return l})(Tt),cs=(function(e){fa(l,e);function l(r,t,i,u){var d=e.call(this,"".concat(r,`
+MessageID: `).concat(i?.id,`
+Default Message: `).concat(i?.defaultMessage,`
+Description: `).concat(i?.description,`
+`),t,u)||this;return d.descriptor=i,d.locale=t,d}return l})(ea),LO=(function(e){fa(l,e);function l(r,t){var i=e.call(this,cr.MISSING_TRANSLATION,'Missing message: "'.concat(r.id,'" for locale "').concat(t,'", using ').concat(r.defaultMessage?"default message (".concat(typeof r.defaultMessage=="string"?r.defaultMessage:r.defaultMessage.map(function(u){var d;return(d=u.value)!==null&&d!==void 0?d:JSON.stringify(u)}).join(),")"):"id"," as fallback."))||this;return i.descriptor=r,i}return l})(Tt);function MO(e,l,r){if(r===void 0&&(r=Error),!e)throw new r(l)}function Gr(e,l,r){return r===void 0&&(r={}),l.reduce(function(t,i){return i in e?t[i]=e[i]:i in r&&(t[i]=r[i]),t},{})}var PO=function(e){},DO=function(e){},uc={formats:{},messages:{},timeZone:void 0,defaultLocale:"en",defaultFormats:{},fallbackOnEmptyString:!0,onError:PO,onWarn:DO};function oc(){return{dateTime:{},number:{},message:{},relativeTime:{},pluralRules:{},list:{},displayNames:{}}}function ur(e){return{create:function(){return{get:function(l){return e[l]},set:function(l,r){e[l]=r}}}}}function wO(e){e===void 0&&(e=oc());var l=Intl.RelativeTimeFormat,r=Intl.ListFormat,t=Intl.DisplayNames,i=ya(function(){for(var m,f=[],p=0;p<arguments.length;p++)f[p]=arguments[p];return new((m=Intl.DateTimeFormat).bind.apply(m,Aa([void 0],f,!1)))},{cache:ur(e.dateTime),strategy:_a.variadic}),u=ya(function(){for(var m,f=[],p=0;p<arguments.length;p++)f[p]=arguments[p];return new((m=Intl.NumberFormat).bind.apply(m,Aa([void 0],f,!1)))},{cache:ur(e.number),strategy:_a.variadic}),d=ya(function(){for(var m,f=[],p=0;p<arguments.length;p++)f[p]=arguments[p];return new((m=Intl.PluralRules).bind.apply(m,Aa([void 0],f,!1)))},{cache:ur(e.pluralRules),strategy:_a.variadic});return{getDateTimeFormat:i,getNumberFormat:u,getMessageFormat:ya(function(m,f,p,h){return new sc(m,f,p,ie({formatters:{getNumberFormat:u,getDateTimeFormat:i,getPluralRules:d}},h||{}))},{cache:ur(e.message),strategy:_a.variadic}),getRelativeTimeFormat:ya(function(){for(var m=[],f=0;f<arguments.length;f++)m[f]=arguments[f];return new(l.bind.apply(l,Aa([void 0],m,!1)))},{cache:ur(e.relativeTime),strategy:_a.variadic}),getPluralRules:d,getListFormat:ya(function(){for(var m=[],f=0;f<arguments.length;f++)m[f]=arguments[f];return new(r.bind.apply(r,Aa([void 0],m,!1)))},{cache:ur(e.list),strategy:_a.variadic}),getDisplayNames:ya(function(){for(var m=[],f=0;f<arguments.length;f++)m[f]=arguments[f];return new(t.bind.apply(t,Aa([void 0],m,!1)))},{cache:ur(e.displayNames),strategy:_a.variadic})}}function uu(e,l,r,t){var i=e&&e[l],u;if(i&&(u=i[r]),u)return u;t(new bO("No ".concat(l," format named: ").concat(r)))}function yl(e,l){return Object.keys(e).reduce(function(r,t){return r[t]=ie({timeZone:l},e[t]),r},{})}function Wm(e,l){var r=Object.keys(ie(ie({},e),l));return r.reduce(function(t,i){return t[i]=ie(ie({},e[i]||{}),l[i]||{}),t},{})}function Zm(e,l){if(!l)return e;var r=sc.formats;return ie(ie(ie({},r),e),{date:Wm(yl(r.date,l),yl(e.date||{},l)),time:Wm(yl(r.time,l),yl(e.time||{},l))})}var Is=function(e,l,r,t,i){var u=e.locale,d=e.formats,m=e.messages,f=e.defaultLocale,p=e.defaultFormats,h=e.fallbackOnEmptyString,R=e.onError,A=e.timeZone,L=e.defaultRichTextElements;r===void 0&&(r={id:""});var w=r.id,k=r.defaultMessage;MO(!!w,"[@formatjs/intl] An `id` must be provided to format a message. You can either:\n1. Configure your build toolchain with [babel-plugin-formatjs](https://formatjs.github.io/docs/tooling/babel-plugin)\nor [@formatjs/ts-transformer](https://formatjs.github.io/docs/tooling/ts-transformer) OR\n2. Configure your `eslint` config to include [eslint-plugin-formatjs](https://formatjs.github.io/docs/tooling/linter#enforce-id)\nto autofix this issue");var S=String(w),D=m&&Object.prototype.hasOwnProperty.call(m,S)&&m[S];if(Array.isArray(D)&&D.length===1&&D[0].type===xe.literal)return D[0].value;if(!t&&D&&typeof D=="string"&&!L)return D.replace(/'\{(.*?)\}'/gi,"{$1}");if(t=ie(ie({},L),t||{}),d=Zm(d,A),p=Zm(p,A),!D){if(h===!1&&D==="")return D;if((!k||u&&u.toLowerCase()!==f.toLowerCase())&&R(new LO(r,u)),k)try{var B=l.getMessageFormat(k,f,p,i);return B.format(t)}catch(N){return R(new cs('Error formatting default message for: "'.concat(S,'", rendering default message verbatim'),u,r,N)),typeof k=="string"?k:S}return S}try{var B=l.getMessageFormat(D,u,d,ie({formatters:l},i||{}));return B.format(t)}catch(N){R(new cs('Error formatting message: "'.concat(S,'", using ').concat(k?"default message":"id"," as fallback."),u,r,N))}if(k)try{var B=l.getMessageFormat(k,f,p,i);return B.format(t)}catch(N){R(new cs('Error formatting the default message for: "'.concat(S,'", rendering message verbatim'),u,r,N))}return typeof D=="string"?D:typeof k=="string"?k:S},BO=["formatMatcher","timeZone","hour12","weekday","era","year","month","day","hour","minute","second","timeZoneName","hourCycle","dateStyle","timeStyle","calendar","numberingSystem","fractionalSecondDigits"];function St(e,l,r,t){var i=e.locale,u=e.formats,d=e.onError,m=e.timeZone;t===void 0&&(t={});var f=t.format,p=ie(ie({},m&&{timeZone:m}),f&&uu(u,l,f,d)),h=Gr(t,BO,p);return l==="time"&&!h.hour&&!h.minute&&!h.second&&!h.timeStyle&&!h.dateStyle&&(h=ie(ie({},h),{hour:"numeric",minute:"numeric"})),r(i,h)}function FO(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],d=u===void 0?{}:u,m=typeof i=="string"?new Date(i||0):i;try{return St(e,"date",l,d).format(m)}catch(f){e.onError(new ea("Error formatting date.",e.locale,f))}return String(m)}function KO(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],d=u===void 0?{}:u,m=typeof i=="string"?new Date(i||0):i;try{return St(e,"time",l,d).format(m)}catch(f){e.onError(new ea("Error formatting time.",e.locale,f))}return String(m)}function VO(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],d=r[2],m=d===void 0?{}:d,f=typeof i=="string"?new Date(i||0):i,p=typeof u=="string"?new Date(u||0):u;try{return St(e,"dateTimeRange",l,m).formatRange(f,p)}catch(h){e.onError(new ea("Error formatting date time range.",e.locale,h))}return String(f)}function UO(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],d=u===void 0?{}:u,m=typeof i=="string"?new Date(i||0):i;try{return St(e,"date",l,d).formatToParts(m)}catch(f){e.onError(new ea("Error formatting date.",e.locale,f))}return[]}function xO(e,l){for(var r=[],t=2;t<arguments.length;t++)r[t-2]=arguments[t];var i=r[0],u=r[1],d=u===void 0?{}:u,m=typeof i=="string"?new Date(i||0):i;try{return St(e,"time",l,d).formatToParts(m)}catch(f){e.onError(new ea("Error formatting time.",e.locale,f))}return[]}var GO=["style","type","fallback","languageDisplay"];function CO(e,l,r,t){var i=e.locale,u=e.onError,d=Intl.DisplayNames;d||u(new Wa(`Intl.DisplayNames is not available in this environment.
+Try polyfilling it using "@formatjs/intl-displaynames"
+`,Ta.MISSING_INTL_API));var m=Gr(t,GO);try{return l(i,m).of(r)}catch(f){u(new ea("Error formatting display name.",i,f))}}var jO=["type","style"],zm=Date.now();function HO(e){return"".concat(zm,"_").concat(e,"_").concat(zm)}function qO(e,l,r,t){t===void 0&&(t={});var i=dc(e,l,r,t).reduce(function(u,d){var m=d.value;return typeof m!="string"?u.push(m):typeof u[u.length-1]=="string"?u[u.length-1]+=m:u.push(m),u},[]);return i.length===1?i[0]:i.length===0?"":i}function dc(e,l,r,t){var i=e.locale,u=e.onError;t===void 0&&(t={});var d=Intl.ListFormat;d||u(new Wa(`Intl.ListFormat is not available in this environment.
+Try polyfilling it using "@formatjs/intl-listformat"
+`,Ta.MISSING_INTL_API));var m=Gr(t,jO);try{var f={},p=r.map(function(h,R){if(typeof h=="object"){var A=HO(R);return f[A]=h,A}return String(h)});return l(i,m).formatToParts(p).map(function(h){return h.type==="literal"?h:ie(ie({},h),{value:f[h.value]||h.value})})}catch(h){u(new ea("Error formatting list.",i,h))}return r}var YO=["type"];function JO(e,l,r,t){var i=e.locale,u=e.onError;t===void 0&&(t={}),Intl.PluralRules||u(new Wa(`Intl.PluralRules is not available in this environment.
+Try polyfilling it using "@formatjs/intl-pluralrules"
+`,Ta.MISSING_INTL_API));var d=Gr(t,YO);try{return l(i,d).select(r)}catch(m){u(new ea("Error formatting plural.",i,m))}return"other"}var $O=["numeric","style"];function WO(e,l,r){var t=e.locale,i=e.formats,u=e.onError;r===void 0&&(r={});var d=r.format,m=!!d&&uu(i,"relative",d,u)||{},f=Gr(r,$O,m);return l(t,f)}function ZO(e,l,r,t,i){i===void 0&&(i={}),t||(t="second");var u=Intl.RelativeTimeFormat;u||e.onError(new Wa(`Intl.RelativeTimeFormat is not available in this environment.
+Try polyfilling it using "@formatjs/intl-relativetimeformat"
+`,Ta.MISSING_INTL_API));try{return WO(e,l,i).format(r,t)}catch(d){e.onError(new ea("Error formatting relative time.",e.locale,d))}return String(r)}var zO=["style","currency","unit","unitDisplay","useGrouping","minimumIntegerDigits","minimumFractionDigits","maximumFractionDigits","minimumSignificantDigits","maximumSignificantDigits","compactDisplay","currencyDisplay","currencySign","notation","signDisplay","unit","unitDisplay","numberingSystem","trailingZeroDisplay","roundingPriority","roundingIncrement","roundingMode"];function mc(e,l,r){var t=e.locale,i=e.formats,u=e.onError;r===void 0&&(r={});var d=r.format,m=d&&uu(i,"number",d,u)||{},f=Gr(r,zO,m);return l(t,f)}function XO(e,l,r,t){t===void 0&&(t={});try{return mc(e,l,t).format(r)}catch(i){e.onError(new ea("Error formatting number.",e.locale,i))}return String(r)}function QO(e,l,r,t){t===void 0&&(t={});try{return mc(e,l,t).formatToParts(r)}catch(i){e.onError(new ea("Error formatting number.",e.locale,i))}return[]}function eN(e){var l=e?e[Object.keys(e)[0]]:void 0;return typeof l=="string"}function nN(e){e.onWarn&&e.defaultRichTextElements&&eN(e.messages||{})&&e.onWarn(`[@formatjs/intl] "defaultRichTextElements" was specified but "message" was not pre-compiled. 
+Please consider using "@formatjs/cli" to pre-compile your messages for performance.
+For more details see https://formatjs.github.io/docs/getting-started/message-distribution`)}function aN(e,l){var r=wO(l),t=ie(ie({},uc),e),i=t.locale,u=t.defaultLocale,d=t.onError;return i?!Intl.NumberFormat.supportedLocalesOf(i).length&&d?d(new $m('Missing locale data for locale: "'.concat(i,'" in Intl.NumberFormat. Using default locale: "').concat(u,'" as fallback. See https://formatjs.github.io/docs/react-intl#runtime-requirements for more details'))):!Intl.DateTimeFormat.supportedLocalesOf(i).length&&d&&d(new $m('Missing locale data for locale: "'.concat(i,'" in Intl.DateTimeFormat. Using default locale: "').concat(u,'" as fallback. See https://formatjs.github.io/docs/react-intl#runtime-requirements for more details'))):(d&&d(new IO('"locale" was not configured, using "'.concat(u,'" as fallback. See https://formatjs.github.io/docs/react-intl/api#intlshape for more details'))),t.locale=t.defaultLocale||"en"),nN(t),ie(ie({},t),{formatters:r,formatNumber:XO.bind(null,t,r.getNumberFormat),formatNumberToParts:QO.bind(null,t,r.getNumberFormat),formatRelativeTime:ZO.bind(null,t,r.getRelativeTimeFormat),formatDate:FO.bind(null,t,r.getDateTimeFormat),formatDateToParts:UO.bind(null,t,r.getDateTimeFormat),formatTime:KO.bind(null,t,r.getDateTimeFormat),formatDateTimeRange:VO.bind(null,t,r.getDateTimeFormat),formatTimeToParts:xO.bind(null,t,r.getDateTimeFormat),formatPlural:JO.bind(null,t,r.getPluralRules),formatMessage:Is.bind(null,t,r),$t:Is.bind(null,t,r),formatList:qO.bind(null,t,r.getListFormat),formatListToParts:dc.bind(null,t,r.getListFormat),formatDisplayName:CO.bind(null,t,r.getDisplayNames)})}function rN(e,l,r){if(r===void 0&&(r=Error),!e)throw new r(l)}function tN(e){rN(e,"[React Intl] Could not find required `intl` object. <IntlProvider> needs to exist in the component ancestry.")}var lN=ie(ie({},uc),{textComponent:V.Fragment}),iN={key:42},sN=function(e){return V.isValidElement(e)?V.createElement(V.Fragment,iN,e):e},uN=function(e){var l;return(l=V.Children.map(e,sN))!==null&&l!==void 0?l:[]};function oN(e){return function(l){return e(V.Children.toArray(l))}}var Xm={exports:{}},De={};/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var Qm;function dN(){if(Qm)return De;Qm=1;var e=typeof Symbol=="function"&&Symbol.for,l=e?Symbol.for("react.element"):60103,r=e?Symbol.for("react.portal"):60106,t=e?Symbol.for("react.fragment"):60107,i=e?Symbol.for("react.strict_mode"):60108,u=e?Symbol.for("react.profiler"):60114,d=e?Symbol.for("react.provider"):60109,m=e?Symbol.for("react.context"):60110,f=e?Symbol.for("react.async_mode"):60111,p=e?Symbol.for("react.concurrent_mode"):60111,h=e?Symbol.for("react.forward_ref"):60112,R=e?Symbol.for("react.suspense"):60113,A=e?Symbol.for("react.suspense_list"):60120,L=e?Symbol.for("react.memo"):60115,w=e?Symbol.for("react.lazy"):60116,k=e?Symbol.for("react.block"):60121,S=e?Symbol.for("react.fundamental"):60117,D=e?Symbol.for("react.responder"):60118,B=e?Symbol.for("react.scope"):60119;function N(M){if(typeof M=="object"&&M!==null){var $=M.$$typeof;switch($){case l:switch(M=M.type,M){case f:case p:case t:case u:case i:case R:return M;default:switch(M=M&&M.$$typeof,M){case m:case h:case w:case L:case d:return M;default:return $}}case r:return $}}}function J(M){return N(M)===p}return De.AsyncMode=f,De.ConcurrentMode=p,De.ContextConsumer=m,De.ContextProvider=d,De.Element=l,De.ForwardRef=h,De.Fragment=t,De.Lazy=w,De.Memo=L,De.Portal=r,De.Profiler=u,De.StrictMode=i,De.Suspense=R,De.isAsyncMode=function(M){return J(M)||N(M)===f},De.isConcurrentMode=J,De.isContextConsumer=function(M){return N(M)===m},De.isContextProvider=function(M){return N(M)===d},De.isElement=function(M){return typeof M=="object"&&M!==null&&M.$$typeof===l},De.isForwardRef=function(M){return N(M)===h},De.isFragment=function(M){return N(M)===t},De.isLazy=function(M){return N(M)===w},De.isMemo=function(M){return N(M)===L},De.isPortal=function(M){return N(M)===r},De.isProfiler=function(M){return N(M)===u},De.isStrictMode=function(M){return N(M)===i},De.isSuspense=function(M){return N(M)===R},De.isValidElementType=function(M){return typeof M=="string"||typeof M=="function"||M===t||M===p||M===u||M===i||M===R||M===A||typeof M=="object"&&M!==null&&(M.$$typeof===w||M.$$typeof===L||M.$$typeof===d||M.$$typeof===m||M.$$typeof===h||M.$$typeof===S||M.$$typeof===D||M.$$typeof===B||M.$$typeof===k)},De.typeOf=N,De}var ev;function mN(){return ev||(ev=1,Xm.exports=dN()),Xm.exports}var fs,nv;function vN(){if(nv)return fs;nv=1;var e=mN(),l={childContextTypes:!0,contextType:!0,contextTypes:!0,defaultProps:!0,displayName:!0,getDefaultProps:!0,getDerivedStateFromError:!0,getDerivedStateFromProps:!0,mixins:!0,propTypes:!0,type:!0},r={name:!0,length:!0,prototype:!0,caller:!0,callee:!0,arguments:!0,arity:!0},t={$$typeof:!0,render:!0,defaultProps:!0,displayName:!0,propTypes:!0},i={$$typeof:!0,compare:!0,defaultProps:!0,displayName:!0,propTypes:!0,type:!0},u={};u[e.ForwardRef]=t,u[e.Memo]=i;function d(w){return e.isMemo(w)?i:u[w.$$typeof]||l}var m=Object.defineProperty,f=Object.getOwnPropertyNames,p=Object.getOwnPropertySymbols,h=Object.getOwnPropertyDescriptor,R=Object.getPrototypeOf,A=Object.prototype;function L(w,k,S){if(typeof k!="string"){if(A){var D=R(k);D&&D!==A&&L(w,D,S)}var B=f(k);p&&(B=B.concat(p(k)));for(var N=d(w),J=d(k),M=0;M<B.length;++M){var $=B[M];if(!r[$]&&!(S&&S[$])&&!(J&&J[$])&&!(N&&N[$])){var G=h(k,$);try{m(w,$,G)}catch{}}}}return w}return fs=L,fs}vN();var ou=typeof window<"u"&&!window.__REACT_INTL_BYPASS_GLOBAL_CONTEXT__?window.__REACT_INTL_CONTEXT__||(window.__REACT_INTL_CONTEXT__=V.createContext(null)):V.createContext(null);ou.Consumer;ou.Provider;var cN=ou;function vc(){var e=V.useContext(cN);return tN(e),e}var Ls;(function(e){e.formatDate="FormattedDate",e.formatTime="FormattedTime",e.formatNumber="FormattedNumber",e.formatList="FormattedList",e.formatDisplayName="FormattedDisplayName"})(Ls||(Ls={}));var Ms;(function(e){e.formatDate="FormattedDateParts",e.formatTime="FormattedTimeParts",e.formatNumber="FormattedNumberParts",e.formatList="FormattedListParts"})(Ms||(Ms={}));function cc(e){var l=function(r){var t=vc(),i=r.value,u=r.children,d=jl(r,["value","children"]),m=typeof i=="string"?new Date(i||0):i,f=e==="formatDate"?t.formatDateToParts(m,d):t.formatTimeToParts(m,d);return u(f)};return l.displayName=Ms[e],l}function Ot(e){var l=function(r){var t=vc(),i=r.value,u=r.children,d=jl(r,["value","children"]),m=t[e](i,d);if(typeof u=="function")return u(m);var f=t.textComponent||V.Fragment;return V.createElement(f,null,m)};return l.displayName=Ls[e],l}function fc(e){return e&&Object.keys(e).reduce(function(l,r){var t=e[r];return l[r]=ic(t)?oN(t):t,l},{})}var av=function(e,l,r,t){for(var i=[],u=4;u<arguments.length;u++)i[u-4]=arguments[u];var d=fc(t),m=Is.apply(void 0,Aa([e,l,r,d],i,!1));return Array.isArray(m)?uN(m):m},fN=function(e,l){var r=e.defaultRichTextElements,t=jl(e,["defaultRichTextElements"]),i=fc(r),u=aN(ie(ie(ie({},lN),t),{defaultRichTextElements:i}),l),d={locale:u.locale,timeZone:u.timeZone,fallbackOnEmptyString:u.fallbackOnEmptyString,formats:u.formats,defaultLocale:u.defaultLocale,defaultFormats:u.defaultFormats,messages:u.messages,onError:u.onError,defaultRichTextElements:i};return ie(ie({},u),{formatMessage:av.bind(null,d,u.formatters),$t:av.bind(null,d,u.formatters)})};Ot("formatDate");Ot("formatTime");Ot("formatNumber");Ot("formatList");Ot("formatDisplayName");cc("formatDate");cc("formatTime");function du(e){return e&&e.__esModule&&Object.prototype.hasOwnProperty.call(e,"default")?e.default:e}var Ps={exports:{}},gN=Ps.exports,rv;function hN(){return rv||(rv=1,(function(e,l){(function(r,t){e.exports=t()})(gN,function(){var r,t,i=1e3,u=6e4,d=36e5,m=864e5,f=/\[([^\]]+)]|Y{1,4}|M{1,4}|D{1,2}|d{1,4}|H{1,2}|h{1,2}|a|A|m{1,2}|s{1,2}|Z{1,2}|SSS/g,p=31536e6,h=2628e6,R=/^(-|\+)?P(?:([-+]?[0-9,.]*)Y)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)W)?(?:([-+]?[0-9,.]*)D)?(?:T(?:([-+]?[0-9,.]*)H)?(?:([-+]?[0-9,.]*)M)?(?:([-+]?[0-9,.]*)S)?)?$/,A={years:p,months:h,days:m,hours:d,minutes:u,seconds:i,milliseconds:1,weeks:6048e5},L=function($){return $ instanceof J},w=function($,G,x){return new J($,x,G.$l)},k=function($){return t.p($)+"s"},S=function($){return $<0},D=function($){return S($)?Math.ceil($):Math.floor($)},B=function($){return Math.abs($)},N=function($,G){return $?S($)?{negative:!0,format:""+B($)+G}:{negative:!1,format:""+$+G}:{negative:!1,format:""}},J=(function(){function $(x,Z,le){var X=this;if(this.$d={},this.$l=le,x===void 0&&(this.$ms=0,this.parseFromMilliseconds()),Z)return w(x*A[k(Z)],this);if(typeof x=="number")return this.$ms=x,this.parseFromMilliseconds(),this;if(typeof x=="object")return Object.keys(x).forEach(function(ae){X.$d[k(ae)]=x[ae]}),this.calMilliseconds(),this;if(typeof x=="string"){var Y=x.match(R);if(Y){var H=Y.slice(2).map(function(ae){return ae!=null?Number(ae):0});return this.$d.years=H[0],this.$d.months=H[1],this.$d.weeks=H[2],this.$d.days=H[3],this.$d.hours=H[4],this.$d.minutes=H[5],this.$d.seconds=H[6],this.calMilliseconds(),this}}return this}var G=$.prototype;return G.calMilliseconds=function(){var x=this;this.$ms=Object.keys(this.$d).reduce(function(Z,le){return Z+(x.$d[le]||0)*A[le]},0)},G.parseFromMilliseconds=function(){var x=this.$ms;this.$d.years=D(x/p),x%=p,this.$d.months=D(x/h),x%=h,this.$d.days=D(x/m),x%=m,this.$d.hours=D(x/d),x%=d,this.$d.minutes=D(x/u),x%=u,this.$d.seconds=D(x/i),x%=i,this.$d.milliseconds=x},G.toISOString=function(){var x=N(this.$d.years,"Y"),Z=N(this.$d.months,"M"),le=+this.$d.days||0;this.$d.weeks&&(le+=7*this.$d.weeks);var X=N(le,"D"),Y=N(this.$d.hours,"H"),H=N(this.$d.minutes,"M"),ae=this.$d.seconds||0;this.$d.milliseconds&&(ae+=this.$d.milliseconds/1e3,ae=Math.round(1e3*ae)/1e3);var oe=N(ae,"S"),fe=x.negative||Z.negative||X.negative||Y.negative||H.negative||oe.negative,he=Y.format||H.format||oe.format?"T":"",pe=(fe?"-":"")+"P"+x.format+Z.format+X.format+he+Y.format+H.format+oe.format;return pe==="P"||pe==="-P"?"P0D":pe},G.toJSON=function(){return this.toISOString()},G.format=function(x){var Z=x||"YYYY-MM-DDTHH:mm:ss",le={Y:this.$d.years,YY:t.s(this.$d.years,2,"0"),YYYY:t.s(this.$d.years,4,"0"),M:this.$d.months,MM:t.s(this.$d.months,2,"0"),D:this.$d.days,DD:t.s(this.$d.days,2,"0"),H:this.$d.hours,HH:t.s(this.$d.hours,2,"0"),m:this.$d.minutes,mm:t.s(this.$d.minutes,2,"0"),s:this.$d.seconds,ss:t.s(this.$d.seconds,2,"0"),SSS:t.s(this.$d.milliseconds,3,"0")};return Z.replace(f,function(X,Y){return Y||String(le[X])})},G.as=function(x){return this.$ms/A[k(x)]},G.get=function(x){var Z=this.$ms,le=k(x);return le==="milliseconds"?Z%=1e3:Z=le==="weeks"?D(Z/A[le]):this.$d[le],Z||0},G.add=function(x,Z,le){var X;return X=Z?x*A[k(Z)]:L(x)?x.$ms:w(x,this).$ms,w(this.$ms+X*(le?-1:1),this)},G.subtract=function(x,Z){return this.add(x,Z,!0)},G.locale=function(x){var Z=this.clone();return Z.$l=x,Z},G.clone=function(){return w(this.$ms,this)},G.humanize=function(x){return r().add(this.$ms,"ms").locale(this.$l).fromNow(!x)},G.valueOf=function(){return this.asMilliseconds()},G.milliseconds=function(){return this.get("milliseconds")},G.asMilliseconds=function(){return this.as("milliseconds")},G.seconds=function(){return this.get("seconds")},G.asSeconds=function(){return this.as("seconds")},G.minutes=function(){return this.get("minutes")},G.asMinutes=function(){return this.as("minutes")},G.hours=function(){return this.get("hours")},G.asHours=function(){return this.as("hours")},G.days=function(){return this.get("days")},G.asDays=function(){return this.as("days")},G.weeks=function(){return this.get("weeks")},G.asWeeks=function(){return this.as("weeks")},G.months=function(){return this.get("months")},G.asMonths=function(){return this.as("months")},G.years=function(){return this.get("years")},G.asYears=function(){return this.as("years")},$})(),M=function($,G,x){return $.add(G.years()*x,"y").add(G.months()*x,"M").add(G.days()*x,"d").add(G.hours()*x,"h").add(G.minutes()*x,"m").add(G.seconds()*x,"s").add(G.milliseconds()*x,"ms")};return function($,G,x){r=x,t=x().$utils(),x.duration=function(X,Y){var H=x.locale();return w(X,{$l:H},Y)},x.isDuration=L;var Z=G.prototype.add,le=G.prototype.subtract;G.prototype.add=function(X,Y){return L(X)?M(this,X,1):Z.bind(this)(X,Y)},G.prototype.subtract=function(X,Y){return L(X)?M(this,X,-1):le.bind(this)(X,Y)}}})})(Ps)),Ps.exports}var pN=hN();const EN=du(pN);var Ds={exports:{}},yN=Ds.exports,tv;function _N(){return tv||(tv=1,(function(e,l){(function(r,t){e.exports=t()})(yN,function(){var r="day";return function(t,i,u){var d=function(p){return p.add(4-p.isoWeekday(),r)},m=i.prototype;m.isoWeekYear=function(){return d(this).year()},m.isoWeek=function(p){if(!this.$utils().u(p))return this.add(7*(p-this.isoWeek()),r);var h,R,A,L,w=d(this),k=(h=this.isoWeekYear(),R=this.$u,A=(R?u.utc:u)().year(h).startOf("year"),L=4-A.isoWeekday(),A.isoWeekday()>4&&(L+=7),A.add(L,r));return w.diff(k,"week")+1},m.isoWeekday=function(p){return this.$utils().u(p)?this.day()||7:this.day(this.day()%7?p:p-7)};var f=m.startOf;m.startOf=function(p,h){var R=this.$utils(),A=!!R.u(h)||h;return R.p(p)==="isoweek"?A?this.date(this.date()-(this.isoWeekday()-1)).startOf("day"):this.date(this.date()-1-(this.isoWeekday()-1)+7).endOf("day"):f.bind(this)(p,h)}}})})(Ds)),Ds.exports}var AN=_N();const RN=du(AN);var ws={exports:{}},TN=ws.exports,lv;function SN(){return lv||(lv=1,(function(e,l){(function(r,t){e.exports=t()})(TN,function(){var r="minute",t=/[+-]\d\d(?::?\d\d)?/g,i=/([+-]|\d\d)/g;return function(u,d,m){var f=d.prototype;m.utc=function(k){var S={date:k,utc:!0,args:arguments};return new d(S)},f.utc=function(k){var S=m(this.toDate(),{locale:this.$L,utc:!0});return k?S.add(this.utcOffset(),r):S},f.local=function(){return m(this.toDate(),{locale:this.$L,utc:!1})};var p=f.parse;f.parse=function(k){k.utc&&(this.$u=!0),this.$utils().u(k.$offset)||(this.$offset=k.$offset),p.call(this,k)};var h=f.init;f.init=function(){if(this.$u){var k=this.$d;this.$y=k.getUTCFullYear(),this.$M=k.getUTCMonth(),this.$D=k.getUTCDate(),this.$W=k.getUTCDay(),this.$H=k.getUTCHours(),this.$m=k.getUTCMinutes(),this.$s=k.getUTCSeconds(),this.$ms=k.getUTCMilliseconds()}else h.call(this)};var R=f.utcOffset;f.utcOffset=function(k,S){var D=this.$utils().u;if(D(k))return this.$u?0:D(this.$offset)?R.call(this):this.$offset;if(typeof k=="string"&&(k=(function(M){M===void 0&&(M="");var $=M.match(t);if(!$)return null;var G=(""+$[0]).match(i)||["-",0,0],x=G[0],Z=60*+G[1]+ +G[2];return Z===0?0:x==="+"?Z:-Z})(k),k===null))return this;var B=Math.abs(k)<=16?60*k:k;if(B===0)return this.utc(S);var N=this.clone();if(S)return N.$offset=B,N.$u=!1,N;var J=this.$u?this.toDate().getTimezoneOffset():-1*this.utcOffset();return(N=this.local().add(B+J,r)).$offset=B,N.$x.$localOffset=J,N};var A=f.format;f.format=function(k){var S=k||(this.$u?"YYYY-MM-DDTHH:mm:ss[Z]":"");return A.call(this,S)},f.valueOf=function(){var k=this.$utils().u(this.$offset)?0:this.$offset+(this.$x.$localOffset||this.$d.getTimezoneOffset());return this.$d.valueOf()-6e4*k},f.isUTC=function(){return!!this.$u},f.toISOString=function(){return this.toDate().toISOString()},f.toString=function(){return this.toDate().toUTCString()};var L=f.toDate;f.toDate=function(k){return k==="s"&&this.$offset?m(this.format("YYYY-MM-DD HH:mm:ss:SSS")).toDate():L.call(this)};var w=f.diff;f.diff=function(k,S,D){if(k&&this.$u===k.$u)return w.call(this,k,S,D);var B=this.local(),N=m(k).local();return w.call(B,N,S,D)}}})})(ws)),ws.exports}var ON=SN();const NN=du(ON),kN=oc(),Hl=e=>fN({locale:"nb-NO",messages:e},kN),ql={"Malform.Bokmal":"Bokmål","Malform.Nynorsk":"Nynorsk","Malform.Engelsk":"Engelsk","DateTimeLabel.Kl":" kl. ","PeriodLabel.DateToday":"d.d.","Dato.AntallDagerOgUker":"{weeks, plural, =0 {} one {# uke}  other {# uker}}{seperator}{days, plural,=0 {} one {# dag} other {# dager}}","Dato.NullDager":"0 dager","Dato.TidenesEnde":"Antall uker og dager -"};Hl(ql);var Bs={exports:{}},bN=Bs.exports,iv;function IN(){return iv||(iv=1,(function(e,l){(function(r,t){e.exports=t(Vr)})(bN,function(r){function t(d){return d&&typeof d=="object"&&"default"in d?d:{default:d}}var i=t(r),u={name:"nb",weekdays:"søndag_mandag_tirsdag_onsdag_torsdag_fredag_lørdag".split("_"),weekdaysShort:"sø._ma._ti._on._to._fr._lø.".split("_"),weekdaysMin:"sø_ma_ti_on_to_fr_lø".split("_"),months:"januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember".split("_"),monthsShort:"jan._feb._mars_april_mai_juni_juli_aug._sep._okt._nov._des.".split("_"),ordinal:function(d){return d+"."},weekStart:1,yearStart:4,formats:{LT:"HH:mm",LTS:"HH:mm:ss",L:"DD.MM.YYYY",LL:"D. MMMM YYYY",LLL:"D. MMMM YYYY [kl.] HH:mm",LLLL:"dddd D. MMMM YYYY [kl.] HH:mm"},relativeTime:{future:"om %s",past:"%s siden",s:"noen sekunder",m:"ett minutt",mm:"%d minutter",h:"en time",hh:"%d timer",d:"en dag",dd:"%d dager",M:"en måned",MM:"%d måneder",y:"ett år",yy:"%d år"}};return i.default.locale(u,null,!0),u})})(Bs)),Bs.exports}IN();Vr.extend(NN);Vr.extend(RN);Vr.extend(EN);Hl(ql);Hl(ql);var sv={exports:{}},ct={};/**
+ * @license React
+ * react-jsx-runtime.production.js
+ *
+ * Copyright (c) Meta Platforms, Inc. and affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */var uv;function LN(){if(uv)return ct;uv=1;var e=Symbol.for("react.transitional.element"),l=Symbol.for("react.fragment");function r(t,i,u){var d=null;if(u!==void 0&&(d=""+u),i.key!==void 0&&(d=""+i.key),"key"in i){u={};for(var m in i)m!=="key"&&(u[m]=i[m])}else u=i;return i=u.ref,{$$typeof:e,type:t,key:d,ref:i!==void 0?i:null,props:u}}return ct.Fragment=l,ct.jsx=r,ct.jsxs=r,ct}var ov;function MN(){return ov||(ov=1,sv.exports=LN()),sv.exports}MN();Hl(ql);V.createContext({});var Pr=(e=>(e.male="male",e.female="female",e.unknown="unknown",e))(Pr||{});const PN=({gender:e,isChild:l=!1,size:r=30})=>{let t=B_,i="var(--ax-neutral-500)";return l?t=D_:e===Pr.male?(t=W_,i="var(--ax-accent-500)"):e===Pr.female&&(t=K_,i="var(--ax-danger-500)"),Ra.jsx(t,{height:r,width:r,color:"white",style:{backgroundColor:i,borderRadius:"50%"}})};var Fs={exports:{}},DN=Fs.exports,dv;function wN(){return dv||(dv=1,(function(e,l){(function(r,t){e.exports=t()})(DN,function(){var r={LTS:"h:mm:ss A",LT:"h:mm A",L:"MM/DD/YYYY",LL:"MMMM D, YYYY",LLL:"MMMM D, YYYY h:mm A",LLLL:"dddd, MMMM D, YYYY h:mm A"},t=/(\[[^[]*\])|([-_:/.,()\s]+)|(A|a|Q|YYYY|YY?|ww?|MM?M?M?|Do|DD?|hh?|HH?|mm?|ss?|S{1,3}|z|ZZ?)/g,i=/\d/,u=/\d\d/,d=/\d\d?/,m=/\d*[^-_:/,()\s\d]+/,f={},p=function(S){return(S=+S)+(S>68?1900:2e3)},h=function(S){return function(D){this[S]=+D}},R=[/[+-]\d\d:?(\d\d)?|Z/,function(S){(this.zone||(this.zone={})).offset=(function(D){if(!D||D==="Z")return 0;var B=D.match(/([+-]|\d\d)/g),N=60*B[1]+(+B[2]||0);return N===0?0:B[0]==="+"?-N:N})(S)}],A=function(S){var D=f[S];return D&&(D.indexOf?D:D.s.concat(D.f))},L=function(S,D){var B,N=f.meridiem;if(N){for(var J=1;J<=24;J+=1)if(S.indexOf(N(J,0,D))>-1){B=J>12;break}}else B=S===(D?"pm":"PM");return B},w={A:[m,function(S){this.afternoon=L(S,!1)}],a:[m,function(S){this.afternoon=L(S,!0)}],Q:[i,function(S){this.month=3*(S-1)+1}],S:[i,function(S){this.milliseconds=100*+S}],SS:[u,function(S){this.milliseconds=10*+S}],SSS:[/\d{3}/,function(S){this.milliseconds=+S}],s:[d,h("seconds")],ss:[d,h("seconds")],m:[d,h("minutes")],mm:[d,h("minutes")],H:[d,h("hours")],h:[d,h("hours")],HH:[d,h("hours")],hh:[d,h("hours")],D:[d,h("day")],DD:[u,h("day")],Do:[m,function(S){var D=f.ordinal,B=S.match(/\d+/);if(this.day=B[0],D)for(var N=1;N<=31;N+=1)D(N).replace(/\[|\]/g,"")===S&&(this.day=N)}],w:[d,h("week")],ww:[u,h("week")],M:[d,h("month")],MM:[u,h("month")],MMM:[m,function(S){var D=A("months"),B=(A("monthsShort")||D.map(function(N){return N.slice(0,3)})).indexOf(S)+1;if(B<1)throw new Error;this.month=B%12||B}],MMMM:[m,function(S){var D=A("months").indexOf(S)+1;if(D<1)throw new Error;this.month=D%12||D}],Y:[/[+-]?\d+/,h("year")],YY:[u,function(S){this.year=p(S)}],YYYY:[/\d{4}/,h("year")],Z:R,ZZ:R};function k(S){var D,B;D=S,B=f&&f.formats;for(var N=(S=D.replace(/(\[[^\]]+])|(LTS?|l{1,4}|L{1,4})/g,function(le,X,Y){var H=Y&&Y.toUpperCase();return X||B[Y]||r[Y]||B[H].replace(/(\[[^\]]+])|(MMMM|MM|DD|dddd)/g,function(ae,oe,fe){return oe||fe.slice(1)})})).match(t),J=N.length,M=0;M<J;M+=1){var $=N[M],G=w[$],x=G&&G[0],Z=G&&G[1];N[M]=Z?{regex:x,parser:Z}:$.replace(/^\[|\]$/g,"")}return function(le){for(var X={},Y=0,H=0;Y<J;Y+=1){var ae=N[Y];if(typeof ae=="string")H+=ae.length;else{var oe=ae.regex,fe=ae.parser,he=le.slice(H),pe=oe.exec(he)[0];fe.call(X,pe),le=le.replace(pe,"")}}return(function(Be){var Xe=Be.afternoon;if(Xe!==void 0){var Re=Be.hours;Xe?Re<12&&(Be.hours+=12):Re===12&&(Be.hours=0),delete Be.afternoon}})(X),X}}return function(S,D,B){B.p.customParseFormat=!0,S&&S.parseTwoDigitYear&&(p=S.parseTwoDigitYear);var N=D.prototype,J=N.parse;N.parse=function(M){var $=M.date,G=M.utc,x=M.args;this.$u=G;var Z=x[1];if(typeof Z=="string"){var le=x[2]===!0,X=x[3]===!0,Y=le||X,H=x[2];X&&(H=x[2]),f=this.$locale(),!le&&H&&(f=B.Ls[H]),this.$d=(function(he,pe,Be,Xe){try{if(["x","X"].indexOf(pe)>-1)return new Date((pe==="X"?1e3:1)*he);var Re=k(pe)(he),na=Re.year,Tn=Re.month,Za=Re.day,Pn=Re.hours,ga=Re.minutes,Sa=Re.seconds,Gn=Re.milliseconds,hn=Re.zone,aa=Re.week,Sn=new Date,pn=Za||(na||Tn?1:Sn.getDate()),Cn=na||Sn.getFullYear(),Ge=0;na&&!Tn||(Ge=Tn>0?Tn-1:Sn.getMonth());var tn,ra=Pn||0,Qe=ga||0,ta=Sa||0,jn=Gn||0;return hn?new Date(Date.UTC(Cn,Ge,pn,ra,Qe,ta,jn+60*hn.offset*1e3)):Be?new Date(Date.UTC(Cn,Ge,pn,ra,Qe,ta,jn)):(tn=new Date(Cn,Ge,pn,ra,Qe,ta,jn),aa&&(tn=Xe(tn).week(aa).toDate()),tn)}catch{return new Date("")}})($,Z,G,B),this.init(),H&&H!==!0&&(this.$L=this.locale(H).$L),Y&&$!=this.format(Z)&&(this.$d=new Date("")),f={}}else if(Z instanceof Array)for(var ae=Z.length,oe=1;oe<=ae;oe+=1){x[1]=Z[oe-1];var fe=B.apply(this,x);if(fe.isValid()){this.$d=fe.$d,this.$L=fe.$L,this.init();break}oe===ae&&(this.$d=new Date(""))}else J.call(this,M)}}})})(Fs)),Fs.exports}var BN=wN();const FN=MS(BN);Vr.extend(FN);const gc=({adresser:e,erAnnenpart:l=!1,harSammeAdresser:r=!1,adresseKodeverk:t})=>{if(r)return y.jsx(mr.New,{padding:"4",children:y.jsx(dr,{textColor:"subtle",children:y.jsx(ce,{id:"AdresseTabell.SammeAdresse"})})});const i=u=>u+1===e.length?{border:"0px"}:{};return y.jsxs(y.Fragment,{children:[e.length===0&&y.jsx(mr.New,{padding:"4",children:y.jsx(dr,{textColor:"subtle",children:y.jsx(ce,{id:"AdresseTabell.IngenAdresse",values:{erAnnenpart:l}})})}),e.length>0&&y.jsxs(re,{style:{tableLayout:"fixed"},children:[y.jsx(re.Header,{children:y.jsxs(re.Row,{children:[y.jsx(re.HeaderCell,{children:y.jsx(ce,{id:"AdresseTabell.PeriodeLabel"})}),y.jsx(re.HeaderCell,{children:y.jsx(ce,{id:"AdresseTabell.AdresseLabel"})}),y.jsx(re.HeaderCell,{children:y.jsx(ce,{id:"AdresseTabell.TypeLabel"})})]})}),y.jsx(re.Body,{children:e.toSorted(ES).map((u,d)=>y.jsxs(re.Row,{children:[y.jsx(re.DataCell,{style:i(d),children:y.jsx(_T,{dateStringFom:u.fom,dateStringTom:u.tom})}),y.jsx(re.DataCell,{style:i(d),children:RS(u)}),y.jsx(re.DataCell,{style:i(d),children:t.find(m=>m.kode===u.adresseType)?.navn})]},u.adresseType+u.fom+u.tom))})]})]})};gc.__docgenInfo={description:"",methods:[],displayName:"AdresseTabell",props:{adresser:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Personadresse[]"},description:""},erAnnenpart:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},harSammeAdresser:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"false",computed:!1}},adresseKodeverk:{required:!0,tsType:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn<'AdresseType'>[]"},description:""}}};const KN=va(Rt),VN=e=>{switch(e){case wr.KVINNE:return Pr.female;case wr.MANN:return Pr.male;default:return Pr.unknown}},bl=({rolle:e="BRUKER",alleKodeverk:l,harSammeAdresser:r,navn:t,kjønn:i,sivilstand:u,fødselsdato:d,dødsdato:m,adresser:f,showIcon:p=!0})=>{const h=e==="BARN";return y.jsx(Bl,{value:KN,children:y.jsx(mr.New,{background:"neutral-moderate",padding:"4",borderRadius:"large","aria-label":t,children:y.jsxs(ma,{gap:"space-4",children:[y.jsxs(vr,{gap:"space-20",children:[p&&y.jsx("div",{children:y.jsx(PN,{gender:VN(i),isChild:h})}),y.jsxs("div",{children:[y.jsxs(vr,{gap:"space-16",children:[y.jsx(sn,{children:y.jsx(ce,{id:"PersonPanel.RolleOgNavn",values:{rolle:e,navn:t}})}),h&&d&&!m&&y.jsx(je,{children:y.jsx(ce,{id:"PersonPanel.Fodt",values:{dato:Yd(d)}})}),m&&y.jsx(je,{children:y.jsx(ce,{id:"PersonPanel.Dod",values:{dato:Yd(m)}})})]}),!h&&u&&y.jsx(Jd,{"aria-label":"Sivilstand",children:l.SivilstandType.find(R=>R.kode===u)?.navn})]})]}),y.jsxs(Jd,{children:[e==="BARN"&&y.jsx(ce,{id:"PersonPanel.Beskrivelse.Barn",values:{rolle:e}}),e==="BRUKER"&&y.jsx(ce,{id:"PersonPanel.Beskrivelse.Bruker",values:{rolle:e}}),e==="ANNEN_PART"&&y.jsx(ce,{id:"PersonPanel.Beskrivelse.Annenpart",values:{rolle:e}})]}),y.jsx(gc,{harSammeAdresser:r,adresser:f,adresseKodeverk:l.AdresseType,erAnnenpart:e==="ANNEN_PART"})]})})})};bl.__docgenInfo={description:"",methods:[],displayName:"Personopplysninger",props:{rolle:{required:!1,tsType:{name:"union",raw:"'BARN' | 'BRUKER' | 'ANNEN_PART'",elements:[{name:"literal",value:"'BARN'"},{name:"literal",value:"'BRUKER'"},{name:"literal",value:"'ANNEN_PART'"}]},description:"",defaultValue:{value:"'BRUKER'",computed:!1}},alleKodeverk:{required:!0,tsType:{name:"intersection",raw:`KodeverkMedSammeVerditype & {
+  Avslagsårsak: AvslagsårsakKodeverk;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
+  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+}`,elements:[{name:"signature",type:"object",raw:`{
+  [K in Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>]: KodeverkMedNavn<
+    K extends KodeverkType ? K : unknown
+  >[];
+}`,signature:{properties:[{key:{name:"Exclude",elements:[{name:"signature",type:"object",raw:`{
+  AdresseType: AdresseType;
+  AktivitetskravPermisjonType: AktivitetskravPermisjonType;
+  AktivitetStatus: AktivitetStatus;
+  AnkeOmgjørÅrsak: AnkeOmgjorArsak;
+  Arbeidskategori: Arbeidskategori;
+  ArbeidType: ArbeidType;
+  Avslagsårsak: Avslagsarsak;
+  BehandlingResultatType: BehandlingResultatType;
+  BehandlingStatus: BehandlingStatusEnum;
+  BehandlingType: BehandlingTypeEnum;
+  BehandlingÅrsakType: BehandlingArsakTypeEnum;
+  FamilieHendelseType: FamilieHendelseType;
+  FaresignalVurdering: FaresignalVurdering;
+  FagsakStatus: FagsakStatusEnum;
+  FagsakYtelseType: FagsakYtelseTypeEnum;
+  FagsakMarkering: FagsakMarkeringKode;
+  FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
+  FarSøkerType: FarSøkerType;
+  FordelingPeriodeKilde: FordelingPeriodeKilde;
+  ForeldreType: ForeldreType;
+  HistorikkAktør: HistorikkAktorEnum;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsak;
+  KlageHjemmel: KlageHjemmel;
+  KlageAvvistÅrsak: KlageAvvistÅrsak;
+  KlageMedholdÅrsak: KlageMedholdÅrsak;
+  KonsekvensForYtelsen: KonsekvensForYtelsenEnum;
+  Landkoder: Landkode;
+  ManuellBehandlingÅrsak: ManuellBehandlingÅrsak;
+  MedlemskapDekningType: MedlemskapDekningType;
+  MedlemskapManuellVurderingType: MedlemskapManuellVurderingType;
+  MedlemskapType: MedlemskapType;
+  MorsAktivitet: MorsAktivitet;
+  NaturalYtelseType: NaturalYtelseType;
+  InnsynResultatType: InnsynResultatType;
+  OmsorgsovertakelseVilkårType: OmsorgsovertakelseVilkårType;
+  OppholdÅrsak: OppholdArsakType;
+  OppgaveType: OppgaveType;
+  OppholdstillatelseType: OppholdstillatelseType;
+  OpptjeningAktivitetType: OpptjeningAktivitetType;
+  OverføringÅrsak: OverforingArsak;
+  PermisjonsbeskrivelseType: PermisjonsbeskrivelseType;
+  PeriodeResultatÅrsak: PeriodeResultatÅrsak;
+  PersonstatusType: PersonstatusType;
+  Region: Region;
+  RelasjonsRolleType: RelasjonsRolleType;
+  RevurderingVarslingÅrsak: RevurderingVarslingÅrsak;
+  SivilstandType: SivilstandType;
+  SkjermlenkeType: SkjermlenkeType;
+  StønadskontoType: StonadskontoType;
+  UtsettelseÅrsak: UtsettelseÅrsak;
+  UttakArbeidType: UttakArbeidType;
+  UttakPeriodeType: UttakPeriodeType;
+  UttakUtsettelseType: UttakUtsettelseType;
+  Venteårsak: VenteArsakType;
+  VergeType: VergeType;
+  VilkårType: VilkarType;
+  VirksomhetType: NaringsvirksomhetType;
+  VurderÅrsak: VurderÅrsak;
+  Inntektskategori: Inntektskategori;
+}`,signature:{properties:[{key:"AdresseType",value:{name:"AdresseType",required:!0}},{key:"AktivitetskravPermisjonType",value:{name:"AktivitetskravPermisjonType",required:!0}},{key:"AktivitetStatus",value:{name:"AktivitetStatus",required:!0}},{key:"AnkeOmgjørÅrsak",value:{name:"AnkeOmgjorArsak",required:!0}},{key:"Arbeidskategori",value:{name:"Arbeidskategori",required:!0}},{key:"ArbeidType",value:{name:"ArbeidType",required:!0}},{key:"Avslagsårsak",value:{name:"Avslagsarsak",required:!0}},{key:"BehandlingResultatType",value:{name:"BehandlingResultatType",required:!0}},{key:"BehandlingStatus",value:{name:"BehandlingStatusEnum",required:!0}},{key:"BehandlingType",value:{name:"BehandlingTypeEnum",required:!0}},{key:"BehandlingÅrsakType",value:{name:"BehandlingArsakTypeEnum",required:!0}},{key:"FamilieHendelseType",value:{name:"FamilieHendelseType",required:!0}},{key:"FaresignalVurdering",value:{name:"FaresignalVurdering",required:!0}},{key:"FagsakStatus",value:{name:"FagsakStatusEnum",required:!0}},{key:"FagsakYtelseType",value:{name:"FagsakYtelseTypeEnum",required:!0}},{key:"FagsakMarkering",value:{name:"FagsakMarkeringKode",required:!0}},{key:"FaktaOmBeregningTilfelle",value:{name:"FaktaOmBeregningTilfelle",required:!0}},{key:"FarSøkerType",value:{name:"FarSøkerType",required:!0}},{key:"FordelingPeriodeKilde",value:{name:"FordelingPeriodeKilde",required:!0}},{key:"ForeldreType",value:{name:"ForeldreType",required:!0}},{key:"HistorikkAktør",value:{name:"HistorikkAktorEnum",required:!0}},{key:"GraderingAvslagÅrsak",value:{name:"GraderingAvslagÅrsak",required:!0}},{key:"KlageHjemmel",value:{name:"KlageHjemmel",required:!0}},{key:"KlageAvvistÅrsak",value:{name:"KlageAvvistÅrsak",required:!0}},{key:"KlageMedholdÅrsak",value:{name:"KlageMedholdÅrsak",required:!0}},{key:"KonsekvensForYtelsen",value:{name:"KonsekvensForYtelsenEnum",required:!0}},{key:"Landkoder",value:{name:"Landkode",required:!0}},{key:"ManuellBehandlingÅrsak",value:{name:"ManuellBehandlingÅrsak",required:!0}},{key:"MedlemskapDekningType",value:{name:"MedlemskapDekningType",required:!0}},{key:"MedlemskapManuellVurderingType",value:{name:"MedlemskapManuellVurderingType",required:!0}},{key:"MedlemskapType",value:{name:"MedlemskapType",required:!0}},{key:"MorsAktivitet",value:{name:"MorsAktivitet",required:!0}},{key:"NaturalYtelseType",value:{name:"NaturalYtelseType",required:!0}},{key:"InnsynResultatType",value:{name:"InnsynResultatType",required:!0}},{key:"OmsorgsovertakelseVilkårType",value:{name:"OmsorgsovertakelseVilkårType",required:!0}},{key:"OppholdÅrsak",value:{name:"OppholdArsakType",required:!0}},{key:"OppgaveType",value:{name:"OppgaveType",required:!0}},{key:"OppholdstillatelseType",value:{name:"OppholdstillatelseType",required:!0}},{key:"OpptjeningAktivitetType",value:{name:"OpptjeningAktivitetType",required:!0}},{key:"OverføringÅrsak",value:{name:"OverforingArsak",required:!0}},{key:"PermisjonsbeskrivelseType",value:{name:"PermisjonsbeskrivelseType",required:!0}},{key:"PeriodeResultatÅrsak",value:{name:"PeriodeResultatÅrsak",required:!0}},{key:"PersonstatusType",value:{name:"PersonstatusType",required:!0}},{key:"Region",value:{name:"Region",required:!0}},{key:"RelasjonsRolleType",value:{name:"RelasjonsRolleType",required:!0}},{key:"RevurderingVarslingÅrsak",value:{name:"RevurderingVarslingÅrsak",required:!0}},{key:"SivilstandType",value:{name:"SivilstandType",required:!0}},{key:"SkjermlenkeType",value:{name:"SkjermlenkeType",required:!0}},{key:"StønadskontoType",value:{name:"StonadskontoType",required:!0}},{key:"UtsettelseÅrsak",value:{name:"UtsettelseÅrsak",required:!0}},{key:"UttakArbeidType",value:{name:"UttakArbeidType",required:!0}},{key:"UttakPeriodeType",value:{name:"UttakPeriodeType",required:!0}},{key:"UttakUtsettelseType",value:{name:"UttakUtsettelseType",required:!0}},{key:"Venteårsak",value:{name:"VenteArsakType",required:!0}},{key:"VergeType",value:{name:"union",raw:`| 'BARN'
+| 'FBARN'
+| 'VOKSEN'
+| 'ADVOKAT'
+| 'ANNEN_F'`,elements:[{name:"literal",value:"'BARN'"},{name:"literal",value:"'FBARN'"},{name:"literal",value:"'VOKSEN'"},{name:"literal",value:"'ADVOKAT'"},{name:"literal",value:"'ANNEN_F'"}],required:!0}},{key:"VilkårType",value:{name:"VilkarType",required:!0}},{key:"VirksomhetType",value:{name:"NaringsvirksomhetType",required:!0}},{key:"VurderÅrsak",value:{name:"VurderÅrsak",required:!0}},{key:"Inntektskategori",value:{name:"Inntektskategori",required:!0}}]}},{name:"union",raw:"'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'",elements:[{name:"literal",value:"'Avslagsårsak'"},{name:"literal",value:"'PeriodeResultatÅrsak'"},{name:"literal",value:"'GraderingAvslagÅrsak'"}]}],raw:"Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>",required:!0},value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:`KodeverkMedNavn<
+  K extends KodeverkType ? K : unknown
+>[]`}}]}},{name:"signature",type:"object",raw:`{
+  Avslagsårsak: AvslagsårsakKodeverk;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
+  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+}`,signature:{properties:[{key:"Avslagsårsak",value:{name:"Record",elements:[{name:"union",raw:"VilkarType | '-'",elements:[{name:"VilkarType"},{name:"literal",value:"'-'"}]},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn<'Avslagsårsak'>[]"}],raw:"Record<VilkarType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>",required:!0}},{key:"GraderingAvslagÅrsak",value:{name:"Array",elements:[{name:"intersection",raw:`KodeverkMedNavn<'GraderingAvslagÅrsak'> & {
+  lovHjemmel: string;
+}`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`},{name:"signature",type:"object",raw:`{
+  lovHjemmel: string;
+}`,signature:{properties:[{key:"lovHjemmel",value:{name:"string",required:!0}}]}}]}],raw:"GraderingAvslagÅrsakKodeverk[]",required:!0}},{key:"PeriodeResultatÅrsak",value:{name:"Array",elements:[{name:"intersection",raw:`KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
+  lovHjemmel: string;
+  sortering: string;
+  utfallType: string;
+  gyldigForLovendringer: string[];
+  uttakTyper: string[];
+  valgbarForKonto: string[];
+  synligForRolle: string[];
+}`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`},{name:"signature",type:"object",raw:`{
+  lovHjemmel: string;
+  sortering: string;
+  utfallType: string;
+  gyldigForLovendringer: string[];
+  uttakTyper: string[];
+  valgbarForKonto: string[];
+  synligForRolle: string[];
+}`,signature:{properties:[{key:"lovHjemmel",value:{name:"string",required:!0}},{key:"sortering",value:{name:"string",required:!0}},{key:"utfallType",value:{name:"string",required:!0}},{key:"gyldigForLovendringer",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"uttakTyper",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"valgbarForKonto",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"synligForRolle",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]}}]}],raw:"PeriodeResultatÅrsakKodeverk[]",required:!0}}]}}]},description:""},harSammeAdresser:{required:!1,tsType:{name:"boolean"},description:""},navn:{required:!1,tsType:{name:"string"},description:""},sivilstand:{required:!1,tsType:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}]},description:""},dødsdato:{required:!1,tsType:{name:"union",raw:"string | null",elements:[{name:"string"},{name:"null"}]},description:""},fødselsdato:{required:!1,tsType:{name:"string"},description:""},adresser:{required:!0,tsType:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Personadresse[]"},description:""},kjønn:{required:!1,tsType:{name:"string"},description:""},showIcon:{required:!1,tsType:{name:"boolean"},description:"",defaultValue:{value:"true",computed:!1}}}};const mu=({tittel:e,kilde:l,defaultOpen:r,children:t})=>y.jsxs(Ba,{"aria-label":e,size:"small",defaultOpen:r,children:[y.jsx(Ba.Header,{children:y.jsx(vr,{gap:"space-16",wrap:!1,children:y.jsxs("div",{children:[y.jsx(Ba.Title,{size:"small",children:e}),y.jsx(Ba.Description,{children:TS(l)})]})})}),y.jsx(Ba.Content,{children:y.jsx(mr.New,{padding:"4",background:"neutral-soft",borderRadius:"medium",children:y.jsx(ma,{gap:"space-16",children:t})})})]});mu.__docgenInfo={description:"",methods:[],displayName:"EkspansjonsKort",props:{kilde:{required:!0,tsType:{name:"union",raw:"'SØKNAD' | 'FOLKEREGISTER' | 'MEDL' | 'SAKSBEHANDLER'",elements:[{name:"literal",value:"'SØKNAD'"},{name:"literal",value:"'FOLKEREGISTER'"},{name:"literal",value:"'MEDL'"},{name:"literal",value:"'SAKSBEHANDLER'"}]},description:""},tittel:{required:!0,tsType:{name:"string"},description:""},defaultOpen:{required:!1,tsType:{name:"boolean"},description:""}}};const hc=({omsorgOgRett:e,alleKodeverk:l})=>{const r=Cs(),t=e.søknad.annenpartRettighet,i=t?.harRettNorge??"IKKE_RELEVANT",u=t?.harUføretrygd??"IKKE_RELEVANT",d=t?.harOppholdEØS??"IKKE_RELEVANT",m=t?.harRettEØS??"IKKE_RELEVANT",f=e.søknad.søkerHarAleneomsorg,{annenpartIdent:p,annenpartBostedsland:h}=e.søknad,R=l.Landkoder.find(L=>L.kode===h)?.navn,A=R?R.charAt(0).toUpperCase()+R.slice(1).toLowerCase():null;return y.jsx(mu,{tittel:r.formatMessage({id:"OpplysningsKort.OpplysningerFraSøknadTittel"}),kilde:"SØKNAD",defaultOpen:!0,children:y.jsxs(re,{children:[y.jsx(re.Header,{children:y.jsxs(re.Row,{children:[y.jsx(re.HeaderCell,{scope:"col",children:y.jsx(ce,{id:"OpplysningerFraSøknad.Spørsmål"})}),y.jsx(re.HeaderCell,{}),y.jsx(re.HeaderCell,{scope:"col",children:y.jsx(ce,{id:"OpplysningerFraSøknad.Svar"})})]})}),y.jsxs(re.Body,{children:[p!==void 0&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.Fødselsnummer"})})}),y.jsx(re.DataCell,{}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.Fødselsnummer.Svar",values:{fnr:p}})})})]})}),h!==void 0&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.Bostedsland"})})}),y.jsx(re.DataCell,{}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.Bostedsland.Svar",values:{bostedsland:A}})})})]})}),f!=="IKKE_RELEVANT"&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarSøkerAleneOmsorg"})})}),y.jsx(re.DataCell,{}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarSøkerAleneOmsorg.Svar",values:{aleneOmsorg:f}})})})]})}),i!=="IKKE_RELEVANT"&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"HarAnnenForelderRettFelter.HarAnnenForelderRett"})})}),y.jsx(re.DataCell,{}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarAnnenForelderRett.Svar",values:{iNorge:i}})})})]})}),d!=="IKKE_RELEVANT"&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{textSize:"small",children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarOppholdIEØS"})})}),y.jsx(re.DataCell,{}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarOppholdIEØS.Svar",values:{oppholdEØS:d}})})})]})}),m!=="IKKE_RELEVANT"&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarRettEØS"})})}),y.jsx(re.DataCell,{}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarRettEØS.Svar",values:{rettEØS:m}})})})]})}),u!=="IKKE_RELEVANT"&&y.jsx(re.Row,{children:y.jsxs(y.Fragment,{children:[y.jsx(re.DataCell,{children:y.jsx(sn,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarUføretrygd"})})}),y.jsx(re.DataCell,{}),y.jsx(re.DataCell,{children:y.jsx(je,{size:"small",children:y.jsx(ce,{id:"OpplysningerFraSøknad.HarUføretrygd.Svar",values:{uføretrygd:u}})})})]})})]})]})})};hc.__docgenInfo={description:"",methods:[],displayName:"OpplysningerFraSoknad",props:{omsorgOgRett:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
+  registerdata?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData;
+  relasjonsRolleType: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
+  rettighetstype?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  søknad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
+}`,signature:{properties:[{key:"manuellBehandlingResultat",value:{name:"signature",type:"object",raw:`{
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"registerdata",value:{name:"signature",type:"object",raw:`{
+  harAnnenpartEngangsstønad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartForeldrepenger: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harAnnenpartEngangsstønad",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartForeldrepenger",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"relasjonsRolleType",value:{name:"union",raw:`| 'EKTE'
+| 'BARN'
+| 'FARA'
+| 'MORA'
+| 'REPA'
+| 'MMOR'
+| 'ANPA'
+| '-'`,elements:[{name:"literal",value:"'EKTE'"},{name:"literal",value:"'BARN'"},{name:"literal",value:"'FARA'"},{name:"literal",value:"'MORA'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'MMOR'"},{name:"literal",value:"'ANPA'"},{name:"literal",value:"'-'"}],required:!0}},{key:"rettighetstype",value:{name:"union",raw:`| 'ALENEOMSORG'
+| 'BEGGE_RETT'
+| 'BEGGE_RETT_EØS'
+| 'BARE_MOR_RETT'
+| 'BARE_FAR_RETT'
+| 'BARE_FAR_RETT_MOR_UFØR'`,elements:[{name:"literal",value:"'ALENEOMSORG'"},{name:"literal",value:"'BEGGE_RETT'"},{name:"literal",value:"'BEGGE_RETT_EØS'"},{name:"literal",value:"'BARE_MOR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT_MOR_UFØR'"}],required:!1}},{key:"søknad",value:{name:"signature",type:"object",raw:`{
+  annenpartBostedsland?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  annenpartIdent?: string;
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartBostedsland",value:{name:"union",raw:`| '???'
+| 'ABW'
+| 'AFG'
+| 'AGO'
+| 'AIA'
+| 'ALA'
+| 'ALB'
+| 'AND'
+| 'ANT'
+| 'ARE'
+| 'ARG'
+| 'ARM'
+| 'ASM'
+| 'ATG'
+| 'AUS'
+| 'AUT'
+| 'AZE'
+| 'BDI'
+| 'BEL'
+| 'BEN'
+| 'BES'
+| 'BFA'
+| 'BGD'
+| 'BGR'
+| 'BHR'
+| 'BHS'
+| 'BIH'
+| 'BLM'
+| 'BLR'
+| 'BLZ'
+| 'BMU'
+| 'BOL'
+| 'BRA'
+| 'BRB'
+| 'BRN'
+| 'BTN'
+| 'BVT'
+| 'BWA'
+| 'CAF'
+| 'CAN'
+| 'CCK'
+| 'CHE'
+| 'CHL'
+| 'CHN'
+| 'CIV'
+| 'CMR'
+| 'COD'
+| 'COG'
+| 'COK'
+| 'COL'
+| 'COM'
+| 'CPV'
+| 'CRI'
+| 'CSK'
+| 'CUB'
+| 'CUW'
+| 'CXR'
+| 'CYM'
+| 'CYP'
+| 'CZE'
+| 'DDR'
+| 'DEU'
+| 'DJI'
+| 'DMA'
+| 'DNK'
+| 'DOM'
+| 'DZA'
+| 'ECU'
+| 'EGY'
+| 'ERI'
+| 'ESH'
+| 'ESP'
+| 'EST'
+| 'ETH'
+| 'FIN'
+| 'FJI'
+| 'FLK'
+| 'FRA'
+| 'FRO'
+| 'FSM'
+| 'GAB'
+| 'GBR'
+| 'GEO'
+| 'GGY'
+| 'GHA'
+| 'GIB'
+| 'GIN'
+| 'GLP'
+| 'GMB'
+| 'GNB'
+| 'GNQ'
+| 'GRC'
+| 'GRD'
+| 'GRL'
+| 'GTM'
+| 'GUF'
+| 'GUM'
+| 'GUY'
+| 'HKG'
+| 'HMD'
+| 'HND'
+| 'HRV'
+| 'HTI'
+| 'HUN'
+| 'IDN'
+| 'IMN'
+| 'IND'
+| 'IOT'
+| 'IRL'
+| 'IRN'
+| 'IRQ'
+| 'ISL'
+| 'ISR'
+| 'ITA'
+| 'JAM'
+| 'JEY'
+| 'JOR'
+| 'JPN'
+| 'KAZ'
+| 'KEN'
+| 'KGZ'
+| 'KHM'
+| 'KIR'
+| 'KNA'
+| 'KOR'
+| 'KWT'
+| 'LAO'
+| 'LBN'
+| 'LBR'
+| 'LBY'
+| 'LCA'
+| 'LIE'
+| 'LKA'
+| 'LSO'
+| 'LTU'
+| 'LUX'
+| 'LVA'
+| 'MAC'
+| 'MAF'
+| 'MAR'
+| 'MCO'
+| 'MDA'
+| 'MDG'
+| 'MDV'
+| 'MEX'
+| 'MHL'
+| 'MKD'
+| 'MLI'
+| 'MLT'
+| 'MMR'
+| 'MNE'
+| 'MNG'
+| 'MNP'
+| 'MOZ'
+| 'MRT'
+| 'MSR'
+| 'MTQ'
+| 'MUS'
+| 'MWI'
+| 'MYS'
+| 'MYT'
+| 'NAM'
+| 'NCL'
+| 'NER'
+| 'NFK'
+| 'NGA'
+| 'NIC'
+| 'NIU'
+| 'NLD'
+| 'NOR'
+| 'NPL'
+| 'NRU'
+| 'NZL'
+| 'OMN'
+| 'PAK'
+| 'PAN'
+| 'PCN'
+| 'PER'
+| 'PHL'
+| 'PLW'
+| 'PNG'
+| 'POL'
+| 'PRI'
+| 'PRK'
+| 'PRT'
+| 'PRY'
+| 'PSE'
+| 'PYF'
+| 'QAT'
+| 'REU'
+| 'ROU'
+| 'RUS'
+| 'RWA'
+| 'SAU'
+| 'SCG'
+| 'SDN'
+| 'SEN'
+| 'SGP'
+| 'SGS'
+| 'SHN'
+| 'SJM'
+| 'SLB'
+| 'SLE'
+| 'SLV'
+| 'SMR'
+| 'SOM'
+| 'SPM'
+| 'SRB'
+| 'SSD'
+| 'STP'
+| 'SUN'
+| 'SUR'
+| 'SVK'
+| 'SVN'
+| 'SWE'
+| 'SWZ'
+| 'SXM'
+| 'SYC'
+| 'SYR'
+| 'TCA'
+| 'TCD'
+| 'TGO'
+| 'THA'
+| 'TJK'
+| 'TKL'
+| 'TKM'
+| 'TLS'
+| 'TON'
+| 'TTO'
+| 'TUN'
+| 'TUR'
+| 'TUV'
+| 'TWN'
+| 'TZA'
+| 'UGA'
+| 'UKR'
+| 'UMI'
+| 'URY'
+| 'USA'
+| 'UZB'
+| 'VAT'
+| 'VCT'
+| 'VEN'
+| 'VGB'
+| 'VIR'
+| 'VNM'
+| 'VUT'
+| 'WLF'
+| 'WSM'
+| 'XUK'
+| 'XXK'
+| 'XXX'
+| 'YEM'
+| 'YUG'
+| 'ZAF'
+| 'ZMB'
+| 'ZWE'
+| '-'`,elements:[{name:"literal",value:"'???'"},{name:"literal",value:"'ABW'"},{name:"literal",value:"'AFG'"},{name:"literal",value:"'AGO'"},{name:"literal",value:"'AIA'"},{name:"literal",value:"'ALA'"},{name:"literal",value:"'ALB'"},{name:"literal",value:"'AND'"},{name:"literal",value:"'ANT'"},{name:"literal",value:"'ARE'"},{name:"literal",value:"'ARG'"},{name:"literal",value:"'ARM'"},{name:"literal",value:"'ASM'"},{name:"literal",value:"'ATG'"},{name:"literal",value:"'AUS'"},{name:"literal",value:"'AUT'"},{name:"literal",value:"'AZE'"},{name:"literal",value:"'BDI'"},{name:"literal",value:"'BEL'"},{name:"literal",value:"'BEN'"},{name:"literal",value:"'BES'"},{name:"literal",value:"'BFA'"},{name:"literal",value:"'BGD'"},{name:"literal",value:"'BGR'"},{name:"literal",value:"'BHR'"},{name:"literal",value:"'BHS'"},{name:"literal",value:"'BIH'"},{name:"literal",value:"'BLM'"},{name:"literal",value:"'BLR'"},{name:"literal",value:"'BLZ'"},{name:"literal",value:"'BMU'"},{name:"literal",value:"'BOL'"},{name:"literal",value:"'BRA'"},{name:"literal",value:"'BRB'"},{name:"literal",value:"'BRN'"},{name:"literal",value:"'BTN'"},{name:"literal",value:"'BVT'"},{name:"literal",value:"'BWA'"},{name:"literal",value:"'CAF'"},{name:"literal",value:"'CAN'"},{name:"literal",value:"'CCK'"},{name:"literal",value:"'CHE'"},{name:"literal",value:"'CHL'"},{name:"literal",value:"'CHN'"},{name:"literal",value:"'CIV'"},{name:"literal",value:"'CMR'"},{name:"literal",value:"'COD'"},{name:"literal",value:"'COG'"},{name:"literal",value:"'COK'"},{name:"literal",value:"'COL'"},{name:"literal",value:"'COM'"},{name:"literal",value:"'CPV'"},{name:"literal",value:"'CRI'"},{name:"literal",value:"'CSK'"},{name:"literal",value:"'CUB'"},{name:"literal",value:"'CUW'"},{name:"literal",value:"'CXR'"},{name:"literal",value:"'CYM'"},{name:"literal",value:"'CYP'"},{name:"literal",value:"'CZE'"},{name:"literal",value:"'DDR'"},{name:"literal",value:"'DEU'"},{name:"literal",value:"'DJI'"},{name:"literal",value:"'DMA'"},{name:"literal",value:"'DNK'"},{name:"literal",value:"'DOM'"},{name:"literal",value:"'DZA'"},{name:"literal",value:"'ECU'"},{name:"literal",value:"'EGY'"},{name:"literal",value:"'ERI'"},{name:"literal",value:"'ESH'"},{name:"literal",value:"'ESP'"},{name:"literal",value:"'EST'"},{name:"literal",value:"'ETH'"},{name:"literal",value:"'FIN'"},{name:"literal",value:"'FJI'"},{name:"literal",value:"'FLK'"},{name:"literal",value:"'FRA'"},{name:"literal",value:"'FRO'"},{name:"literal",value:"'FSM'"},{name:"literal",value:"'GAB'"},{name:"literal",value:"'GBR'"},{name:"literal",value:"'GEO'"},{name:"literal",value:"'GGY'"},{name:"literal",value:"'GHA'"},{name:"literal",value:"'GIB'"},{name:"literal",value:"'GIN'"},{name:"literal",value:"'GLP'"},{name:"literal",value:"'GMB'"},{name:"literal",value:"'GNB'"},{name:"literal",value:"'GNQ'"},{name:"literal",value:"'GRC'"},{name:"literal",value:"'GRD'"},{name:"literal",value:"'GRL'"},{name:"literal",value:"'GTM'"},{name:"literal",value:"'GUF'"},{name:"literal",value:"'GUM'"},{name:"literal",value:"'GUY'"},{name:"literal",value:"'HKG'"},{name:"literal",value:"'HMD'"},{name:"literal",value:"'HND'"},{name:"literal",value:"'HRV'"},{name:"literal",value:"'HTI'"},{name:"literal",value:"'HUN'"},{name:"literal",value:"'IDN'"},{name:"literal",value:"'IMN'"},{name:"literal",value:"'IND'"},{name:"literal",value:"'IOT'"},{name:"literal",value:"'IRL'"},{name:"literal",value:"'IRN'"},{name:"literal",value:"'IRQ'"},{name:"literal",value:"'ISL'"},{name:"literal",value:"'ISR'"},{name:"literal",value:"'ITA'"},{name:"literal",value:"'JAM'"},{name:"literal",value:"'JEY'"},{name:"literal",value:"'JOR'"},{name:"literal",value:"'JPN'"},{name:"literal",value:"'KAZ'"},{name:"literal",value:"'KEN'"},{name:"literal",value:"'KGZ'"},{name:"literal",value:"'KHM'"},{name:"literal",value:"'KIR'"},{name:"literal",value:"'KNA'"},{name:"literal",value:"'KOR'"},{name:"literal",value:"'KWT'"},{name:"literal",value:"'LAO'"},{name:"literal",value:"'LBN'"},{name:"literal",value:"'LBR'"},{name:"literal",value:"'LBY'"},{name:"literal",value:"'LCA'"},{name:"literal",value:"'LIE'"},{name:"literal",value:"'LKA'"},{name:"literal",value:"'LSO'"},{name:"literal",value:"'LTU'"},{name:"literal",value:"'LUX'"},{name:"literal",value:"'LVA'"},{name:"literal",value:"'MAC'"},{name:"literal",value:"'MAF'"},{name:"literal",value:"'MAR'"},{name:"literal",value:"'MCO'"},{name:"literal",value:"'MDA'"},{name:"literal",value:"'MDG'"},{name:"literal",value:"'MDV'"},{name:"literal",value:"'MEX'"},{name:"literal",value:"'MHL'"},{name:"literal",value:"'MKD'"},{name:"literal",value:"'MLI'"},{name:"literal",value:"'MLT'"},{name:"literal",value:"'MMR'"},{name:"literal",value:"'MNE'"},{name:"literal",value:"'MNG'"},{name:"literal",value:"'MNP'"},{name:"literal",value:"'MOZ'"},{name:"literal",value:"'MRT'"},{name:"literal",value:"'MSR'"},{name:"literal",value:"'MTQ'"},{name:"literal",value:"'MUS'"},{name:"literal",value:"'MWI'"},{name:"literal",value:"'MYS'"},{name:"literal",value:"'MYT'"},{name:"literal",value:"'NAM'"},{name:"literal",value:"'NCL'"},{name:"literal",value:"'NER'"},{name:"literal",value:"'NFK'"},{name:"literal",value:"'NGA'"},{name:"literal",value:"'NIC'"},{name:"literal",value:"'NIU'"},{name:"literal",value:"'NLD'"},{name:"literal",value:"'NOR'"},{name:"literal",value:"'NPL'"},{name:"literal",value:"'NRU'"},{name:"literal",value:"'NZL'"},{name:"literal",value:"'OMN'"},{name:"literal",value:"'PAK'"},{name:"literal",value:"'PAN'"},{name:"literal",value:"'PCN'"},{name:"literal",value:"'PER'"},{name:"literal",value:"'PHL'"},{name:"literal",value:"'PLW'"},{name:"literal",value:"'PNG'"},{name:"literal",value:"'POL'"},{name:"literal",value:"'PRI'"},{name:"literal",value:"'PRK'"},{name:"literal",value:"'PRT'"},{name:"literal",value:"'PRY'"},{name:"literal",value:"'PSE'"},{name:"literal",value:"'PYF'"},{name:"literal",value:"'QAT'"},{name:"literal",value:"'REU'"},{name:"literal",value:"'ROU'"},{name:"literal",value:"'RUS'"},{name:"literal",value:"'RWA'"},{name:"literal",value:"'SAU'"},{name:"literal",value:"'SCG'"},{name:"literal",value:"'SDN'"},{name:"literal",value:"'SEN'"},{name:"literal",value:"'SGP'"},{name:"literal",value:"'SGS'"},{name:"literal",value:"'SHN'"},{name:"literal",value:"'SJM'"},{name:"literal",value:"'SLB'"},{name:"literal",value:"'SLE'"},{name:"literal",value:"'SLV'"},{name:"literal",value:"'SMR'"},{name:"literal",value:"'SOM'"},{name:"literal",value:"'SPM'"},{name:"literal",value:"'SRB'"},{name:"literal",value:"'SSD'"},{name:"literal",value:"'STP'"},{name:"literal",value:"'SUN'"},{name:"literal",value:"'SUR'"},{name:"literal",value:"'SVK'"},{name:"literal",value:"'SVN'"},{name:"literal",value:"'SWE'"},{name:"literal",value:"'SWZ'"},{name:"literal",value:"'SXM'"},{name:"literal",value:"'SYC'"},{name:"literal",value:"'SYR'"},{name:"literal",value:"'TCA'"},{name:"literal",value:"'TCD'"},{name:"literal",value:"'TGO'"},{name:"literal",value:"'THA'"},{name:"literal",value:"'TJK'"},{name:"literal",value:"'TKL'"},{name:"literal",value:"'TKM'"},{name:"literal",value:"'TLS'"},{name:"literal",value:"'TON'"},{name:"literal",value:"'TTO'"},{name:"literal",value:"'TUN'"},{name:"literal",value:"'TUR'"},{name:"literal",value:"'TUV'"},{name:"literal",value:"'TWN'"},{name:"literal",value:"'TZA'"},{name:"literal",value:"'UGA'"},{name:"literal",value:"'UKR'"},{name:"literal",value:"'UMI'"},{name:"literal",value:"'URY'"},{name:"literal",value:"'USA'"},{name:"literal",value:"'UZB'"},{name:"literal",value:"'VAT'"},{name:"literal",value:"'VCT'"},{name:"literal",value:"'VEN'"},{name:"literal",value:"'VGB'"},{name:"literal",value:"'VIR'"},{name:"literal",value:"'VNM'"},{name:"literal",value:"'VUT'"},{name:"literal",value:"'WLF'"},{name:"literal",value:"'WSM'"},{name:"literal",value:"'XUK'"},{name:"literal",value:"'XXK'"},{name:"literal",value:"'XXX'"},{name:"literal",value:"'YEM'"},{name:"literal",value:"'YUG'"},{name:"literal",value:"'ZAF'"},{name:"literal",value:"'ZMB'"},{name:"literal",value:"'ZWE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"annenpartIdent",value:{name:"string",required:!1}},{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!0}}]}},description:""},alleKodeverk:{required:!0,tsType:{name:"intersection",raw:`KodeverkMedSammeVerditype & {
+  Avslagsårsak: AvslagsårsakKodeverk;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
+  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+}`,elements:[{name:"signature",type:"object",raw:`{
+  [K in Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>]: KodeverkMedNavn<
+    K extends KodeverkType ? K : unknown
+  >[];
+}`,signature:{properties:[{key:{name:"Exclude",elements:[{name:"signature",type:"object",raw:`{
+  AdresseType: AdresseType;
+  AktivitetskravPermisjonType: AktivitetskravPermisjonType;
+  AktivitetStatus: AktivitetStatus;
+  AnkeOmgjørÅrsak: AnkeOmgjorArsak;
+  Arbeidskategori: Arbeidskategori;
+  ArbeidType: ArbeidType;
+  Avslagsårsak: Avslagsarsak;
+  BehandlingResultatType: BehandlingResultatType;
+  BehandlingStatus: BehandlingStatusEnum;
+  BehandlingType: BehandlingTypeEnum;
+  BehandlingÅrsakType: BehandlingArsakTypeEnum;
+  FamilieHendelseType: FamilieHendelseType;
+  FaresignalVurdering: FaresignalVurdering;
+  FagsakStatus: FagsakStatusEnum;
+  FagsakYtelseType: FagsakYtelseTypeEnum;
+  FagsakMarkering: FagsakMarkeringKode;
+  FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
+  FarSøkerType: FarSøkerType;
+  FordelingPeriodeKilde: FordelingPeriodeKilde;
+  ForeldreType: ForeldreType;
+  HistorikkAktør: HistorikkAktorEnum;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsak;
+  KlageHjemmel: KlageHjemmel;
+  KlageAvvistÅrsak: KlageAvvistÅrsak;
+  KlageMedholdÅrsak: KlageMedholdÅrsak;
+  KonsekvensForYtelsen: KonsekvensForYtelsenEnum;
+  Landkoder: Landkode;
+  ManuellBehandlingÅrsak: ManuellBehandlingÅrsak;
+  MedlemskapDekningType: MedlemskapDekningType;
+  MedlemskapManuellVurderingType: MedlemskapManuellVurderingType;
+  MedlemskapType: MedlemskapType;
+  MorsAktivitet: MorsAktivitet;
+  NaturalYtelseType: NaturalYtelseType;
+  InnsynResultatType: InnsynResultatType;
+  OmsorgsovertakelseVilkårType: OmsorgsovertakelseVilkårType;
+  OppholdÅrsak: OppholdArsakType;
+  OppgaveType: OppgaveType;
+  OppholdstillatelseType: OppholdstillatelseType;
+  OpptjeningAktivitetType: OpptjeningAktivitetType;
+  OverføringÅrsak: OverforingArsak;
+  PermisjonsbeskrivelseType: PermisjonsbeskrivelseType;
+  PeriodeResultatÅrsak: PeriodeResultatÅrsak;
+  PersonstatusType: PersonstatusType;
+  Region: Region;
+  RelasjonsRolleType: RelasjonsRolleType;
+  RevurderingVarslingÅrsak: RevurderingVarslingÅrsak;
+  SivilstandType: SivilstandType;
+  SkjermlenkeType: SkjermlenkeType;
+  StønadskontoType: StonadskontoType;
+  UtsettelseÅrsak: UtsettelseÅrsak;
+  UttakArbeidType: UttakArbeidType;
+  UttakPeriodeType: UttakPeriodeType;
+  UttakUtsettelseType: UttakUtsettelseType;
+  Venteårsak: VenteArsakType;
+  VergeType: VergeType;
+  VilkårType: VilkarType;
+  VirksomhetType: NaringsvirksomhetType;
+  VurderÅrsak: VurderÅrsak;
+  Inntektskategori: Inntektskategori;
+}`,signature:{properties:[{key:"AdresseType",value:{name:"AdresseType",required:!0}},{key:"AktivitetskravPermisjonType",value:{name:"AktivitetskravPermisjonType",required:!0}},{key:"AktivitetStatus",value:{name:"AktivitetStatus",required:!0}},{key:"AnkeOmgjørÅrsak",value:{name:"AnkeOmgjorArsak",required:!0}},{key:"Arbeidskategori",value:{name:"Arbeidskategori",required:!0}},{key:"ArbeidType",value:{name:"ArbeidType",required:!0}},{key:"Avslagsårsak",value:{name:"Avslagsarsak",required:!0}},{key:"BehandlingResultatType",value:{name:"BehandlingResultatType",required:!0}},{key:"BehandlingStatus",value:{name:"BehandlingStatusEnum",required:!0}},{key:"BehandlingType",value:{name:"BehandlingTypeEnum",required:!0}},{key:"BehandlingÅrsakType",value:{name:"BehandlingArsakTypeEnum",required:!0}},{key:"FamilieHendelseType",value:{name:"FamilieHendelseType",required:!0}},{key:"FaresignalVurdering",value:{name:"FaresignalVurdering",required:!0}},{key:"FagsakStatus",value:{name:"FagsakStatusEnum",required:!0}},{key:"FagsakYtelseType",value:{name:"FagsakYtelseTypeEnum",required:!0}},{key:"FagsakMarkering",value:{name:"FagsakMarkeringKode",required:!0}},{key:"FaktaOmBeregningTilfelle",value:{name:"FaktaOmBeregningTilfelle",required:!0}},{key:"FarSøkerType",value:{name:"FarSøkerType",required:!0}},{key:"FordelingPeriodeKilde",value:{name:"FordelingPeriodeKilde",required:!0}},{key:"ForeldreType",value:{name:"ForeldreType",required:!0}},{key:"HistorikkAktør",value:{name:"HistorikkAktorEnum",required:!0}},{key:"GraderingAvslagÅrsak",value:{name:"GraderingAvslagÅrsak",required:!0}},{key:"KlageHjemmel",value:{name:"KlageHjemmel",required:!0}},{key:"KlageAvvistÅrsak",value:{name:"KlageAvvistÅrsak",required:!0}},{key:"KlageMedholdÅrsak",value:{name:"KlageMedholdÅrsak",required:!0}},{key:"KonsekvensForYtelsen",value:{name:"KonsekvensForYtelsenEnum",required:!0}},{key:"Landkoder",value:{name:"Landkode",required:!0}},{key:"ManuellBehandlingÅrsak",value:{name:"ManuellBehandlingÅrsak",required:!0}},{key:"MedlemskapDekningType",value:{name:"MedlemskapDekningType",required:!0}},{key:"MedlemskapManuellVurderingType",value:{name:"MedlemskapManuellVurderingType",required:!0}},{key:"MedlemskapType",value:{name:"MedlemskapType",required:!0}},{key:"MorsAktivitet",value:{name:"MorsAktivitet",required:!0}},{key:"NaturalYtelseType",value:{name:"NaturalYtelseType",required:!0}},{key:"InnsynResultatType",value:{name:"InnsynResultatType",required:!0}},{key:"OmsorgsovertakelseVilkårType",value:{name:"OmsorgsovertakelseVilkårType",required:!0}},{key:"OppholdÅrsak",value:{name:"OppholdArsakType",required:!0}},{key:"OppgaveType",value:{name:"OppgaveType",required:!0}},{key:"OppholdstillatelseType",value:{name:"OppholdstillatelseType",required:!0}},{key:"OpptjeningAktivitetType",value:{name:"OpptjeningAktivitetType",required:!0}},{key:"OverføringÅrsak",value:{name:"OverforingArsak",required:!0}},{key:"PermisjonsbeskrivelseType",value:{name:"PermisjonsbeskrivelseType",required:!0}},{key:"PeriodeResultatÅrsak",value:{name:"PeriodeResultatÅrsak",required:!0}},{key:"PersonstatusType",value:{name:"PersonstatusType",required:!0}},{key:"Region",value:{name:"Region",required:!0}},{key:"RelasjonsRolleType",value:{name:"RelasjonsRolleType",required:!0}},{key:"RevurderingVarslingÅrsak",value:{name:"RevurderingVarslingÅrsak",required:!0}},{key:"SivilstandType",value:{name:"SivilstandType",required:!0}},{key:"SkjermlenkeType",value:{name:"SkjermlenkeType",required:!0}},{key:"StønadskontoType",value:{name:"StonadskontoType",required:!0}},{key:"UtsettelseÅrsak",value:{name:"UtsettelseÅrsak",required:!0}},{key:"UttakArbeidType",value:{name:"UttakArbeidType",required:!0}},{key:"UttakPeriodeType",value:{name:"UttakPeriodeType",required:!0}},{key:"UttakUtsettelseType",value:{name:"UttakUtsettelseType",required:!0}},{key:"Venteårsak",value:{name:"VenteArsakType",required:!0}},{key:"VergeType",value:{name:"union",raw:`| 'BARN'
+| 'FBARN'
+| 'VOKSEN'
+| 'ADVOKAT'
+| 'ANNEN_F'`,elements:[{name:"literal",value:"'BARN'"},{name:"literal",value:"'FBARN'"},{name:"literal",value:"'VOKSEN'"},{name:"literal",value:"'ADVOKAT'"},{name:"literal",value:"'ANNEN_F'"}],required:!0}},{key:"VilkårType",value:{name:"VilkarType",required:!0}},{key:"VirksomhetType",value:{name:"NaringsvirksomhetType",required:!0}},{key:"VurderÅrsak",value:{name:"VurderÅrsak",required:!0}},{key:"Inntektskategori",value:{name:"Inntektskategori",required:!0}}]}},{name:"union",raw:"'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'",elements:[{name:"literal",value:"'Avslagsårsak'"},{name:"literal",value:"'PeriodeResultatÅrsak'"},{name:"literal",value:"'GraderingAvslagÅrsak'"}]}],raw:"Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>",required:!0},value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:`KodeverkMedNavn<
+  K extends KodeverkType ? K : unknown
+>[]`}}]}},{name:"signature",type:"object",raw:`{
+  Avslagsårsak: AvslagsårsakKodeverk;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
+  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+}`,signature:{properties:[{key:"Avslagsårsak",value:{name:"Record",elements:[{name:"union",raw:"VilkarType | '-'",elements:[{name:"VilkarType"},{name:"literal",value:"'-'"}]},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn<'Avslagsårsak'>[]"}],raw:"Record<VilkarType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>",required:!0}},{key:"GraderingAvslagÅrsak",value:{name:"Array",elements:[{name:"intersection",raw:`KodeverkMedNavn<'GraderingAvslagÅrsak'> & {
+  lovHjemmel: string;
+}`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`},{name:"signature",type:"object",raw:`{
+  lovHjemmel: string;
+}`,signature:{properties:[{key:"lovHjemmel",value:{name:"string",required:!0}}]}}]}],raw:"GraderingAvslagÅrsakKodeverk[]",required:!0}},{key:"PeriodeResultatÅrsak",value:{name:"Array",elements:[{name:"intersection",raw:`KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
+  lovHjemmel: string;
+  sortering: string;
+  utfallType: string;
+  gyldigForLovendringer: string[];
+  uttakTyper: string[];
+  valgbarForKonto: string[];
+  synligForRolle: string[];
+}`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`},{name:"signature",type:"object",raw:`{
+  lovHjemmel: string;
+  sortering: string;
+  utfallType: string;
+  gyldigForLovendringer: string[];
+  uttakTyper: string[];
+  valgbarForKonto: string[];
+  synligForRolle: string[];
+}`,signature:{properties:[{key:"lovHjemmel",value:{name:"string",required:!0}},{key:"sortering",value:{name:"string",required:!0}},{key:"utfallType",value:{name:"string",required:!0}},{key:"gyldigForLovendringer",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"uttakTyper",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"valgbarForKonto",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"synligForRolle",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]}}]}],raw:"PeriodeResultatÅrsakKodeverk[]",required:!0}}]}}]},description:""}}};const pc=({personoversikt:{bruker:e,annenPart:l,barn:r},alleKodeverk:t})=>{const i=Cs(),u=l?.adresser??[],d=r.flatMap(m=>m.adresser);return y.jsxs(mu,{tittel:i.formatMessage({id:"OpplysningsKort.AdresseTittel"},{adresseCountSoker:e.adresser.length,adresseCountAnnenpart:u.length>0?u.length:"none",adresseCountBarn:d.length>0?d.length:"none"}),kilde:"FOLKEREGISTER",children:[y.jsx(bl,{showIcon:!1,alleKodeverk:t,rolle:"BRUKER",navn:e.navn,adresser:e.adresser,sivilstand:e.sivilstand}),l&&l.adresser.length>0&&y.jsxs(y.Fragment,{children:[y.jsx(fm,{dividerParagraf:!0}),y.jsx(bl,{showIcon:!1,navn:l.navn,alleKodeverk:t,adresser:l.adresser,sivilstand:l.sivilstand,rolle:"ANNEN_PART"})]}),y.jsx(fm,{dividerParagraf:!0}),r.map(m=>y.jsx(bl,{showIcon:!1,navn:m.navn,alleKodeverk:t,adresser:m.adresser,rolle:"BARN"},m.aktoerId))]})};pc.__docgenInfo={description:"",methods:[],displayName:"OpplysningerOmAdresser",props:{personoversikt:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  annenPart?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+  barn: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
+  bruker: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+}`,signature:{properties:[{key:"annenPart",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}},{key:"barn",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}],raw:"Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>",required:!0}},{key:"bruker",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}}]}},description:""},alleKodeverk:{required:!0,tsType:{name:"intersection",raw:`KodeverkMedSammeVerditype & {
+  Avslagsårsak: AvslagsårsakKodeverk;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
+  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+}`,elements:[{name:"signature",type:"object",raw:`{
+  [K in Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>]: KodeverkMedNavn<
+    K extends KodeverkType ? K : unknown
+  >[];
+}`,signature:{properties:[{key:{name:"Exclude",elements:[{name:"signature",type:"object",raw:`{
+  AdresseType: AdresseType;
+  AktivitetskravPermisjonType: AktivitetskravPermisjonType;
+  AktivitetStatus: AktivitetStatus;
+  AnkeOmgjørÅrsak: AnkeOmgjorArsak;
+  Arbeidskategori: Arbeidskategori;
+  ArbeidType: ArbeidType;
+  Avslagsårsak: Avslagsarsak;
+  BehandlingResultatType: BehandlingResultatType;
+  BehandlingStatus: BehandlingStatusEnum;
+  BehandlingType: BehandlingTypeEnum;
+  BehandlingÅrsakType: BehandlingArsakTypeEnum;
+  FamilieHendelseType: FamilieHendelseType;
+  FaresignalVurdering: FaresignalVurdering;
+  FagsakStatus: FagsakStatusEnum;
+  FagsakYtelseType: FagsakYtelseTypeEnum;
+  FagsakMarkering: FagsakMarkeringKode;
+  FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
+  FarSøkerType: FarSøkerType;
+  FordelingPeriodeKilde: FordelingPeriodeKilde;
+  ForeldreType: ForeldreType;
+  HistorikkAktør: HistorikkAktorEnum;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsak;
+  KlageHjemmel: KlageHjemmel;
+  KlageAvvistÅrsak: KlageAvvistÅrsak;
+  KlageMedholdÅrsak: KlageMedholdÅrsak;
+  KonsekvensForYtelsen: KonsekvensForYtelsenEnum;
+  Landkoder: Landkode;
+  ManuellBehandlingÅrsak: ManuellBehandlingÅrsak;
+  MedlemskapDekningType: MedlemskapDekningType;
+  MedlemskapManuellVurderingType: MedlemskapManuellVurderingType;
+  MedlemskapType: MedlemskapType;
+  MorsAktivitet: MorsAktivitet;
+  NaturalYtelseType: NaturalYtelseType;
+  InnsynResultatType: InnsynResultatType;
+  OmsorgsovertakelseVilkårType: OmsorgsovertakelseVilkårType;
+  OppholdÅrsak: OppholdArsakType;
+  OppgaveType: OppgaveType;
+  OppholdstillatelseType: OppholdstillatelseType;
+  OpptjeningAktivitetType: OpptjeningAktivitetType;
+  OverføringÅrsak: OverforingArsak;
+  PermisjonsbeskrivelseType: PermisjonsbeskrivelseType;
+  PeriodeResultatÅrsak: PeriodeResultatÅrsak;
+  PersonstatusType: PersonstatusType;
+  Region: Region;
+  RelasjonsRolleType: RelasjonsRolleType;
+  RevurderingVarslingÅrsak: RevurderingVarslingÅrsak;
+  SivilstandType: SivilstandType;
+  SkjermlenkeType: SkjermlenkeType;
+  StønadskontoType: StonadskontoType;
+  UtsettelseÅrsak: UtsettelseÅrsak;
+  UttakArbeidType: UttakArbeidType;
+  UttakPeriodeType: UttakPeriodeType;
+  UttakUtsettelseType: UttakUtsettelseType;
+  Venteårsak: VenteArsakType;
+  VergeType: VergeType;
+  VilkårType: VilkarType;
+  VirksomhetType: NaringsvirksomhetType;
+  VurderÅrsak: VurderÅrsak;
+  Inntektskategori: Inntektskategori;
+}`,signature:{properties:[{key:"AdresseType",value:{name:"AdresseType",required:!0}},{key:"AktivitetskravPermisjonType",value:{name:"AktivitetskravPermisjonType",required:!0}},{key:"AktivitetStatus",value:{name:"AktivitetStatus",required:!0}},{key:"AnkeOmgjørÅrsak",value:{name:"AnkeOmgjorArsak",required:!0}},{key:"Arbeidskategori",value:{name:"Arbeidskategori",required:!0}},{key:"ArbeidType",value:{name:"ArbeidType",required:!0}},{key:"Avslagsårsak",value:{name:"Avslagsarsak",required:!0}},{key:"BehandlingResultatType",value:{name:"BehandlingResultatType",required:!0}},{key:"BehandlingStatus",value:{name:"BehandlingStatusEnum",required:!0}},{key:"BehandlingType",value:{name:"BehandlingTypeEnum",required:!0}},{key:"BehandlingÅrsakType",value:{name:"BehandlingArsakTypeEnum",required:!0}},{key:"FamilieHendelseType",value:{name:"FamilieHendelseType",required:!0}},{key:"FaresignalVurdering",value:{name:"FaresignalVurdering",required:!0}},{key:"FagsakStatus",value:{name:"FagsakStatusEnum",required:!0}},{key:"FagsakYtelseType",value:{name:"FagsakYtelseTypeEnum",required:!0}},{key:"FagsakMarkering",value:{name:"FagsakMarkeringKode",required:!0}},{key:"FaktaOmBeregningTilfelle",value:{name:"FaktaOmBeregningTilfelle",required:!0}},{key:"FarSøkerType",value:{name:"FarSøkerType",required:!0}},{key:"FordelingPeriodeKilde",value:{name:"FordelingPeriodeKilde",required:!0}},{key:"ForeldreType",value:{name:"ForeldreType",required:!0}},{key:"HistorikkAktør",value:{name:"HistorikkAktorEnum",required:!0}},{key:"GraderingAvslagÅrsak",value:{name:"GraderingAvslagÅrsak",required:!0}},{key:"KlageHjemmel",value:{name:"KlageHjemmel",required:!0}},{key:"KlageAvvistÅrsak",value:{name:"KlageAvvistÅrsak",required:!0}},{key:"KlageMedholdÅrsak",value:{name:"KlageMedholdÅrsak",required:!0}},{key:"KonsekvensForYtelsen",value:{name:"KonsekvensForYtelsenEnum",required:!0}},{key:"Landkoder",value:{name:"Landkode",required:!0}},{key:"ManuellBehandlingÅrsak",value:{name:"ManuellBehandlingÅrsak",required:!0}},{key:"MedlemskapDekningType",value:{name:"MedlemskapDekningType",required:!0}},{key:"MedlemskapManuellVurderingType",value:{name:"MedlemskapManuellVurderingType",required:!0}},{key:"MedlemskapType",value:{name:"MedlemskapType",required:!0}},{key:"MorsAktivitet",value:{name:"MorsAktivitet",required:!0}},{key:"NaturalYtelseType",value:{name:"NaturalYtelseType",required:!0}},{key:"InnsynResultatType",value:{name:"InnsynResultatType",required:!0}},{key:"OmsorgsovertakelseVilkårType",value:{name:"OmsorgsovertakelseVilkårType",required:!0}},{key:"OppholdÅrsak",value:{name:"OppholdArsakType",required:!0}},{key:"OppgaveType",value:{name:"OppgaveType",required:!0}},{key:"OppholdstillatelseType",value:{name:"OppholdstillatelseType",required:!0}},{key:"OpptjeningAktivitetType",value:{name:"OpptjeningAktivitetType",required:!0}},{key:"OverføringÅrsak",value:{name:"OverforingArsak",required:!0}},{key:"PermisjonsbeskrivelseType",value:{name:"PermisjonsbeskrivelseType",required:!0}},{key:"PeriodeResultatÅrsak",value:{name:"PeriodeResultatÅrsak",required:!0}},{key:"PersonstatusType",value:{name:"PersonstatusType",required:!0}},{key:"Region",value:{name:"Region",required:!0}},{key:"RelasjonsRolleType",value:{name:"RelasjonsRolleType",required:!0}},{key:"RevurderingVarslingÅrsak",value:{name:"RevurderingVarslingÅrsak",required:!0}},{key:"SivilstandType",value:{name:"SivilstandType",required:!0}},{key:"SkjermlenkeType",value:{name:"SkjermlenkeType",required:!0}},{key:"StønadskontoType",value:{name:"StonadskontoType",required:!0}},{key:"UtsettelseÅrsak",value:{name:"UtsettelseÅrsak",required:!0}},{key:"UttakArbeidType",value:{name:"UttakArbeidType",required:!0}},{key:"UttakPeriodeType",value:{name:"UttakPeriodeType",required:!0}},{key:"UttakUtsettelseType",value:{name:"UttakUtsettelseType",required:!0}},{key:"Venteårsak",value:{name:"VenteArsakType",required:!0}},{key:"VergeType",value:{name:"union",raw:`| 'BARN'
+| 'FBARN'
+| 'VOKSEN'
+| 'ADVOKAT'
+| 'ANNEN_F'`,elements:[{name:"literal",value:"'BARN'"},{name:"literal",value:"'FBARN'"},{name:"literal",value:"'VOKSEN'"},{name:"literal",value:"'ADVOKAT'"},{name:"literal",value:"'ANNEN_F'"}],required:!0}},{key:"VilkårType",value:{name:"VilkarType",required:!0}},{key:"VirksomhetType",value:{name:"NaringsvirksomhetType",required:!0}},{key:"VurderÅrsak",value:{name:"VurderÅrsak",required:!0}},{key:"Inntektskategori",value:{name:"Inntektskategori",required:!0}}]}},{name:"union",raw:"'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'",elements:[{name:"literal",value:"'Avslagsårsak'"},{name:"literal",value:"'PeriodeResultatÅrsak'"},{name:"literal",value:"'GraderingAvslagÅrsak'"}]}],raw:"Exclude<KodeverkType, 'Avslagsårsak' | 'PeriodeResultatÅrsak' | 'GraderingAvslagÅrsak'>",required:!0},value:{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:`KodeverkMedNavn<
+  K extends KodeverkType ? K : unknown
+>[]`}}]}},{name:"signature",type:"object",raw:`{
+  Avslagsårsak: AvslagsårsakKodeverk;
+  GraderingAvslagÅrsak: GraderingAvslagÅrsakKodeverk[];
+  PeriodeResultatÅrsak: PeriodeResultatÅrsakKodeverk[];
+}`,signature:{properties:[{key:"Avslagsårsak",value:{name:"Record",elements:[{name:"union",raw:"VilkarType | '-'",elements:[{name:"VilkarType"},{name:"literal",value:"'-'"}]},{name:"Array",elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`}],raw:"KodeverkMedNavn<'Avslagsårsak'>[]"}],raw:"Record<VilkarType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>",required:!0}},{key:"GraderingAvslagÅrsak",value:{name:"Array",elements:[{name:"intersection",raw:`KodeverkMedNavn<'GraderingAvslagÅrsak'> & {
+  lovHjemmel: string;
+}`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`},{name:"signature",type:"object",raw:`{
+  lovHjemmel: string;
+}`,signature:{properties:[{key:"lovHjemmel",value:{name:"string",required:!0}}]}}]}],raw:"GraderingAvslagÅrsakKodeverk[]",required:!0}},{key:"PeriodeResultatÅrsak",value:{name:"Array",elements:[{name:"intersection",raw:`KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
+  lovHjemmel: string;
+  sortering: string;
+  utfallType: string;
+  gyldigForLovendringer: string[];
+  uttakTyper: string[];
+  valgbarForKonto: string[];
+  synligForRolle: string[];
+}`,elements:[{name:"Readonly",elements:[{name:"signature",type:"object",raw:`{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}`,signature:{properties:[{key:"kode",value:{name:"unknown",required:!0}},{key:"navn",value:{name:"string",required:!0}},{key:"kodeverk",value:{name:"string",required:!0}}]}}],raw:`Readonly<{
+  kode: EnumOrUnknown<T>;
+  navn: string;
+  kodeverk: string;
+}>`},{name:"signature",type:"object",raw:`{
+  lovHjemmel: string;
+  sortering: string;
+  utfallType: string;
+  gyldigForLovendringer: string[];
+  uttakTyper: string[];
+  valgbarForKonto: string[];
+  synligForRolle: string[];
+}`,signature:{properties:[{key:"lovHjemmel",value:{name:"string",required:!0}},{key:"sortering",value:{name:"string",required:!0}},{key:"utfallType",value:{name:"string",required:!0}},{key:"gyldigForLovendringer",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"uttakTyper",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"valgbarForKonto",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}},{key:"synligForRolle",value:{name:"Array",elements:[{name:"string"}],raw:"string[]",required:!0}}]}}]}],raw:"PeriodeResultatÅrsakKodeverk[]",required:!0}}]}}]},description:""}}};const vu=({readOnly:e,avklareUforetrygd:l})=>{const{watch:r,control:t}=$a(),i=r("harAnnenForelderRettEØS");return y.jsx(pt,{name:"harAnnenForelderRett",control:t,label:y.jsx(ce,{id:"HarAnnenForelderRettFelter.HarAnnenForelderRett"}),readOnly:e,falseContent:y.jsxs(y.Fragment,{children:[y.jsx(pt,{name:"harAnnenForelderRettEØS",control:t,label:y.jsx(ce,{id:"HarAnnenForelderRettFelter.AnnenForelderRettEØS"}),readOnly:e}),i===!1&&l&&y.jsx(pt,{name:"mottarAnnenForelderUforetrygd",control:t,label:y.jsx(ce,{id:"HarAnnenForelderRettFelter.MottarUforetrygd"}),readOnly:e})]})})};vu.__docgenInfo={description:"",methods:[],displayName:"HarAnnenForelderRettFelter",props:{readOnly:{required:!0,tsType:{name:"boolean"},description:""},avklareUforetrygd:{required:!0,tsType:{name:"boolean"},description:""}}};const Ks=({omsorgOgRett:e,aksjonspunkt:l,isSubmittable:r})=>{const{submitCallback:t,isReadOnly:i,alleMerknaderFraBeslutter:u}=Fl(),d=e.manuellBehandlingResultat?.søkerHarAleneomsorg??void 0,m=e.manuellBehandlingResultat?.annenpartRettighet?.harRettNorge??void 0,f=e.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS??void 0,p=e.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd??void 0,{mellomlagretFormData:h,setMellomlagretFormData:R}=vv(),A=i||l===void 0,L=tu({defaultValues:h??{harAleneomsorg:d===void 0?void 0:d==="JA",harAnnenForelderRett:m===void 0?void 0:m==="JA",harAnnenForelderRettEØS:f===void 0?void 0:f==="JA",mottarAnnenForelderUforetrygd:p===void 0?void 0:p==="JA",...Qn.initialValues(l)}}),w=S=>t({kode:rn.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,aleneomsorg:S.harAleneomsorg,annenforelderHarRett:S.harAnnenForelderRett,annenforelderMottarUføretrygd:S.mottarAnnenForelderUforetrygd,annenForelderHarRettEØS:S.harAnnenForelderRettEØS,...Qn.transformValues(S)}),k=e.relasjonsRolleType!==ca.MOR||p==="JA";return y.jsx(su,{formMethods:L,onSubmit:w,setDataOnUnmount:R,children:y.jsx(Ws,{withoutBorder:!0,merknaderFraBeslutter:u[rn.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG],children:y.jsxs(ma,{gap:"space-24",children:[y.jsx(pt,{name:"harAleneomsorg",control:L.control,label:y.jsx(ce,{id:"AleneomsorgForm.Aleneomsorg"}),readOnly:A,trueLabel:y.jsx(ce,{id:"AleneomsorgForm.HarAleneomsorg"}),falseLabel:y.jsx(ce,{id:"AleneomsorgForm.HarIkkeAleneomsorg",values:{b:u_}}),falseContent:y.jsx(vu,{readOnly:A,avklareUforetrygd:k})}),y.jsx(Qn,{control:L.control,isSubmittable:r,isReadOnly:A,hasBegrunnelse:!0,hasVurderingText:!0}),y.jsx(Cl,{isSubmittable:r,isReadOnly:A,isSubmitting:L.formState.isSubmitting,isDirty:L.formState.isDirty})]})})})};Ks.__docgenInfo={description:"",methods:[],displayName:"AleneomsorgForm",props:{omsorgOgRett:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
+  registerdata?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData;
+  relasjonsRolleType: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
+  rettighetstype?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  søknad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
+}`,signature:{properties:[{key:"manuellBehandlingResultat",value:{name:"signature",type:"object",raw:`{
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"registerdata",value:{name:"signature",type:"object",raw:`{
+  harAnnenpartEngangsstønad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartForeldrepenger: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harAnnenpartEngangsstønad",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartForeldrepenger",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"relasjonsRolleType",value:{name:"union",raw:`| 'EKTE'
+| 'BARN'
+| 'FARA'
+| 'MORA'
+| 'REPA'
+| 'MMOR'
+| 'ANPA'
+| '-'`,elements:[{name:"literal",value:"'EKTE'"},{name:"literal",value:"'BARN'"},{name:"literal",value:"'FARA'"},{name:"literal",value:"'MORA'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'MMOR'"},{name:"literal",value:"'ANPA'"},{name:"literal",value:"'-'"}],required:!0}},{key:"rettighetstype",value:{name:"union",raw:`| 'ALENEOMSORG'
+| 'BEGGE_RETT'
+| 'BEGGE_RETT_EØS'
+| 'BARE_MOR_RETT'
+| 'BARE_FAR_RETT'
+| 'BARE_FAR_RETT_MOR_UFØR'`,elements:[{name:"literal",value:"'ALENEOMSORG'"},{name:"literal",value:"'BEGGE_RETT'"},{name:"literal",value:"'BEGGE_RETT_EØS'"},{name:"literal",value:"'BARE_MOR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT_MOR_UFØR'"}],required:!1}},{key:"søknad",value:{name:"signature",type:"object",raw:`{
+  annenpartBostedsland?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  annenpartIdent?: string;
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartBostedsland",value:{name:"union",raw:`| '???'
+| 'ABW'
+| 'AFG'
+| 'AGO'
+| 'AIA'
+| 'ALA'
+| 'ALB'
+| 'AND'
+| 'ANT'
+| 'ARE'
+| 'ARG'
+| 'ARM'
+| 'ASM'
+| 'ATG'
+| 'AUS'
+| 'AUT'
+| 'AZE'
+| 'BDI'
+| 'BEL'
+| 'BEN'
+| 'BES'
+| 'BFA'
+| 'BGD'
+| 'BGR'
+| 'BHR'
+| 'BHS'
+| 'BIH'
+| 'BLM'
+| 'BLR'
+| 'BLZ'
+| 'BMU'
+| 'BOL'
+| 'BRA'
+| 'BRB'
+| 'BRN'
+| 'BTN'
+| 'BVT'
+| 'BWA'
+| 'CAF'
+| 'CAN'
+| 'CCK'
+| 'CHE'
+| 'CHL'
+| 'CHN'
+| 'CIV'
+| 'CMR'
+| 'COD'
+| 'COG'
+| 'COK'
+| 'COL'
+| 'COM'
+| 'CPV'
+| 'CRI'
+| 'CSK'
+| 'CUB'
+| 'CUW'
+| 'CXR'
+| 'CYM'
+| 'CYP'
+| 'CZE'
+| 'DDR'
+| 'DEU'
+| 'DJI'
+| 'DMA'
+| 'DNK'
+| 'DOM'
+| 'DZA'
+| 'ECU'
+| 'EGY'
+| 'ERI'
+| 'ESH'
+| 'ESP'
+| 'EST'
+| 'ETH'
+| 'FIN'
+| 'FJI'
+| 'FLK'
+| 'FRA'
+| 'FRO'
+| 'FSM'
+| 'GAB'
+| 'GBR'
+| 'GEO'
+| 'GGY'
+| 'GHA'
+| 'GIB'
+| 'GIN'
+| 'GLP'
+| 'GMB'
+| 'GNB'
+| 'GNQ'
+| 'GRC'
+| 'GRD'
+| 'GRL'
+| 'GTM'
+| 'GUF'
+| 'GUM'
+| 'GUY'
+| 'HKG'
+| 'HMD'
+| 'HND'
+| 'HRV'
+| 'HTI'
+| 'HUN'
+| 'IDN'
+| 'IMN'
+| 'IND'
+| 'IOT'
+| 'IRL'
+| 'IRN'
+| 'IRQ'
+| 'ISL'
+| 'ISR'
+| 'ITA'
+| 'JAM'
+| 'JEY'
+| 'JOR'
+| 'JPN'
+| 'KAZ'
+| 'KEN'
+| 'KGZ'
+| 'KHM'
+| 'KIR'
+| 'KNA'
+| 'KOR'
+| 'KWT'
+| 'LAO'
+| 'LBN'
+| 'LBR'
+| 'LBY'
+| 'LCA'
+| 'LIE'
+| 'LKA'
+| 'LSO'
+| 'LTU'
+| 'LUX'
+| 'LVA'
+| 'MAC'
+| 'MAF'
+| 'MAR'
+| 'MCO'
+| 'MDA'
+| 'MDG'
+| 'MDV'
+| 'MEX'
+| 'MHL'
+| 'MKD'
+| 'MLI'
+| 'MLT'
+| 'MMR'
+| 'MNE'
+| 'MNG'
+| 'MNP'
+| 'MOZ'
+| 'MRT'
+| 'MSR'
+| 'MTQ'
+| 'MUS'
+| 'MWI'
+| 'MYS'
+| 'MYT'
+| 'NAM'
+| 'NCL'
+| 'NER'
+| 'NFK'
+| 'NGA'
+| 'NIC'
+| 'NIU'
+| 'NLD'
+| 'NOR'
+| 'NPL'
+| 'NRU'
+| 'NZL'
+| 'OMN'
+| 'PAK'
+| 'PAN'
+| 'PCN'
+| 'PER'
+| 'PHL'
+| 'PLW'
+| 'PNG'
+| 'POL'
+| 'PRI'
+| 'PRK'
+| 'PRT'
+| 'PRY'
+| 'PSE'
+| 'PYF'
+| 'QAT'
+| 'REU'
+| 'ROU'
+| 'RUS'
+| 'RWA'
+| 'SAU'
+| 'SCG'
+| 'SDN'
+| 'SEN'
+| 'SGP'
+| 'SGS'
+| 'SHN'
+| 'SJM'
+| 'SLB'
+| 'SLE'
+| 'SLV'
+| 'SMR'
+| 'SOM'
+| 'SPM'
+| 'SRB'
+| 'SSD'
+| 'STP'
+| 'SUN'
+| 'SUR'
+| 'SVK'
+| 'SVN'
+| 'SWE'
+| 'SWZ'
+| 'SXM'
+| 'SYC'
+| 'SYR'
+| 'TCA'
+| 'TCD'
+| 'TGO'
+| 'THA'
+| 'TJK'
+| 'TKL'
+| 'TKM'
+| 'TLS'
+| 'TON'
+| 'TTO'
+| 'TUN'
+| 'TUR'
+| 'TUV'
+| 'TWN'
+| 'TZA'
+| 'UGA'
+| 'UKR'
+| 'UMI'
+| 'URY'
+| 'USA'
+| 'UZB'
+| 'VAT'
+| 'VCT'
+| 'VEN'
+| 'VGB'
+| 'VIR'
+| 'VNM'
+| 'VUT'
+| 'WLF'
+| 'WSM'
+| 'XUK'
+| 'XXK'
+| 'XXX'
+| 'YEM'
+| 'YUG'
+| 'ZAF'
+| 'ZMB'
+| 'ZWE'
+| '-'`,elements:[{name:"literal",value:"'???'"},{name:"literal",value:"'ABW'"},{name:"literal",value:"'AFG'"},{name:"literal",value:"'AGO'"},{name:"literal",value:"'AIA'"},{name:"literal",value:"'ALA'"},{name:"literal",value:"'ALB'"},{name:"literal",value:"'AND'"},{name:"literal",value:"'ANT'"},{name:"literal",value:"'ARE'"},{name:"literal",value:"'ARG'"},{name:"literal",value:"'ARM'"},{name:"literal",value:"'ASM'"},{name:"literal",value:"'ATG'"},{name:"literal",value:"'AUS'"},{name:"literal",value:"'AUT'"},{name:"literal",value:"'AZE'"},{name:"literal",value:"'BDI'"},{name:"literal",value:"'BEL'"},{name:"literal",value:"'BEN'"},{name:"literal",value:"'BES'"},{name:"literal",value:"'BFA'"},{name:"literal",value:"'BGD'"},{name:"literal",value:"'BGR'"},{name:"literal",value:"'BHR'"},{name:"literal",value:"'BHS'"},{name:"literal",value:"'BIH'"},{name:"literal",value:"'BLM'"},{name:"literal",value:"'BLR'"},{name:"literal",value:"'BLZ'"},{name:"literal",value:"'BMU'"},{name:"literal",value:"'BOL'"},{name:"literal",value:"'BRA'"},{name:"literal",value:"'BRB'"},{name:"literal",value:"'BRN'"},{name:"literal",value:"'BTN'"},{name:"literal",value:"'BVT'"},{name:"literal",value:"'BWA'"},{name:"literal",value:"'CAF'"},{name:"literal",value:"'CAN'"},{name:"literal",value:"'CCK'"},{name:"literal",value:"'CHE'"},{name:"literal",value:"'CHL'"},{name:"literal",value:"'CHN'"},{name:"literal",value:"'CIV'"},{name:"literal",value:"'CMR'"},{name:"literal",value:"'COD'"},{name:"literal",value:"'COG'"},{name:"literal",value:"'COK'"},{name:"literal",value:"'COL'"},{name:"literal",value:"'COM'"},{name:"literal",value:"'CPV'"},{name:"literal",value:"'CRI'"},{name:"literal",value:"'CSK'"},{name:"literal",value:"'CUB'"},{name:"literal",value:"'CUW'"},{name:"literal",value:"'CXR'"},{name:"literal",value:"'CYM'"},{name:"literal",value:"'CYP'"},{name:"literal",value:"'CZE'"},{name:"literal",value:"'DDR'"},{name:"literal",value:"'DEU'"},{name:"literal",value:"'DJI'"},{name:"literal",value:"'DMA'"},{name:"literal",value:"'DNK'"},{name:"literal",value:"'DOM'"},{name:"literal",value:"'DZA'"},{name:"literal",value:"'ECU'"},{name:"literal",value:"'EGY'"},{name:"literal",value:"'ERI'"},{name:"literal",value:"'ESH'"},{name:"literal",value:"'ESP'"},{name:"literal",value:"'EST'"},{name:"literal",value:"'ETH'"},{name:"literal",value:"'FIN'"},{name:"literal",value:"'FJI'"},{name:"literal",value:"'FLK'"},{name:"literal",value:"'FRA'"},{name:"literal",value:"'FRO'"},{name:"literal",value:"'FSM'"},{name:"literal",value:"'GAB'"},{name:"literal",value:"'GBR'"},{name:"literal",value:"'GEO'"},{name:"literal",value:"'GGY'"},{name:"literal",value:"'GHA'"},{name:"literal",value:"'GIB'"},{name:"literal",value:"'GIN'"},{name:"literal",value:"'GLP'"},{name:"literal",value:"'GMB'"},{name:"literal",value:"'GNB'"},{name:"literal",value:"'GNQ'"},{name:"literal",value:"'GRC'"},{name:"literal",value:"'GRD'"},{name:"literal",value:"'GRL'"},{name:"literal",value:"'GTM'"},{name:"literal",value:"'GUF'"},{name:"literal",value:"'GUM'"},{name:"literal",value:"'GUY'"},{name:"literal",value:"'HKG'"},{name:"literal",value:"'HMD'"},{name:"literal",value:"'HND'"},{name:"literal",value:"'HRV'"},{name:"literal",value:"'HTI'"},{name:"literal",value:"'HUN'"},{name:"literal",value:"'IDN'"},{name:"literal",value:"'IMN'"},{name:"literal",value:"'IND'"},{name:"literal",value:"'IOT'"},{name:"literal",value:"'IRL'"},{name:"literal",value:"'IRN'"},{name:"literal",value:"'IRQ'"},{name:"literal",value:"'ISL'"},{name:"literal",value:"'ISR'"},{name:"literal",value:"'ITA'"},{name:"literal",value:"'JAM'"},{name:"literal",value:"'JEY'"},{name:"literal",value:"'JOR'"},{name:"literal",value:"'JPN'"},{name:"literal",value:"'KAZ'"},{name:"literal",value:"'KEN'"},{name:"literal",value:"'KGZ'"},{name:"literal",value:"'KHM'"},{name:"literal",value:"'KIR'"},{name:"literal",value:"'KNA'"},{name:"literal",value:"'KOR'"},{name:"literal",value:"'KWT'"},{name:"literal",value:"'LAO'"},{name:"literal",value:"'LBN'"},{name:"literal",value:"'LBR'"},{name:"literal",value:"'LBY'"},{name:"literal",value:"'LCA'"},{name:"literal",value:"'LIE'"},{name:"literal",value:"'LKA'"},{name:"literal",value:"'LSO'"},{name:"literal",value:"'LTU'"},{name:"literal",value:"'LUX'"},{name:"literal",value:"'LVA'"},{name:"literal",value:"'MAC'"},{name:"literal",value:"'MAF'"},{name:"literal",value:"'MAR'"},{name:"literal",value:"'MCO'"},{name:"literal",value:"'MDA'"},{name:"literal",value:"'MDG'"},{name:"literal",value:"'MDV'"},{name:"literal",value:"'MEX'"},{name:"literal",value:"'MHL'"},{name:"literal",value:"'MKD'"},{name:"literal",value:"'MLI'"},{name:"literal",value:"'MLT'"},{name:"literal",value:"'MMR'"},{name:"literal",value:"'MNE'"},{name:"literal",value:"'MNG'"},{name:"literal",value:"'MNP'"},{name:"literal",value:"'MOZ'"},{name:"literal",value:"'MRT'"},{name:"literal",value:"'MSR'"},{name:"literal",value:"'MTQ'"},{name:"literal",value:"'MUS'"},{name:"literal",value:"'MWI'"},{name:"literal",value:"'MYS'"},{name:"literal",value:"'MYT'"},{name:"literal",value:"'NAM'"},{name:"literal",value:"'NCL'"},{name:"literal",value:"'NER'"},{name:"literal",value:"'NFK'"},{name:"literal",value:"'NGA'"},{name:"literal",value:"'NIC'"},{name:"literal",value:"'NIU'"},{name:"literal",value:"'NLD'"},{name:"literal",value:"'NOR'"},{name:"literal",value:"'NPL'"},{name:"literal",value:"'NRU'"},{name:"literal",value:"'NZL'"},{name:"literal",value:"'OMN'"},{name:"literal",value:"'PAK'"},{name:"literal",value:"'PAN'"},{name:"literal",value:"'PCN'"},{name:"literal",value:"'PER'"},{name:"literal",value:"'PHL'"},{name:"literal",value:"'PLW'"},{name:"literal",value:"'PNG'"},{name:"literal",value:"'POL'"},{name:"literal",value:"'PRI'"},{name:"literal",value:"'PRK'"},{name:"literal",value:"'PRT'"},{name:"literal",value:"'PRY'"},{name:"literal",value:"'PSE'"},{name:"literal",value:"'PYF'"},{name:"literal",value:"'QAT'"},{name:"literal",value:"'REU'"},{name:"literal",value:"'ROU'"},{name:"literal",value:"'RUS'"},{name:"literal",value:"'RWA'"},{name:"literal",value:"'SAU'"},{name:"literal",value:"'SCG'"},{name:"literal",value:"'SDN'"},{name:"literal",value:"'SEN'"},{name:"literal",value:"'SGP'"},{name:"literal",value:"'SGS'"},{name:"literal",value:"'SHN'"},{name:"literal",value:"'SJM'"},{name:"literal",value:"'SLB'"},{name:"literal",value:"'SLE'"},{name:"literal",value:"'SLV'"},{name:"literal",value:"'SMR'"},{name:"literal",value:"'SOM'"},{name:"literal",value:"'SPM'"},{name:"literal",value:"'SRB'"},{name:"literal",value:"'SSD'"},{name:"literal",value:"'STP'"},{name:"literal",value:"'SUN'"},{name:"literal",value:"'SUR'"},{name:"literal",value:"'SVK'"},{name:"literal",value:"'SVN'"},{name:"literal",value:"'SWE'"},{name:"literal",value:"'SWZ'"},{name:"literal",value:"'SXM'"},{name:"literal",value:"'SYC'"},{name:"literal",value:"'SYR'"},{name:"literal",value:"'TCA'"},{name:"literal",value:"'TCD'"},{name:"literal",value:"'TGO'"},{name:"literal",value:"'THA'"},{name:"literal",value:"'TJK'"},{name:"literal",value:"'TKL'"},{name:"literal",value:"'TKM'"},{name:"literal",value:"'TLS'"},{name:"literal",value:"'TON'"},{name:"literal",value:"'TTO'"},{name:"literal",value:"'TUN'"},{name:"literal",value:"'TUR'"},{name:"literal",value:"'TUV'"},{name:"literal",value:"'TWN'"},{name:"literal",value:"'TZA'"},{name:"literal",value:"'UGA'"},{name:"literal",value:"'UKR'"},{name:"literal",value:"'UMI'"},{name:"literal",value:"'URY'"},{name:"literal",value:"'USA'"},{name:"literal",value:"'UZB'"},{name:"literal",value:"'VAT'"},{name:"literal",value:"'VCT'"},{name:"literal",value:"'VEN'"},{name:"literal",value:"'VGB'"},{name:"literal",value:"'VIR'"},{name:"literal",value:"'VNM'"},{name:"literal",value:"'VUT'"},{name:"literal",value:"'WLF'"},{name:"literal",value:"'WSM'"},{name:"literal",value:"'XUK'"},{name:"literal",value:"'XXK'"},{name:"literal",value:"'XXX'"},{name:"literal",value:"'YEM'"},{name:"literal",value:"'YUG'"},{name:"literal",value:"'ZAF'"},{name:"literal",value:"'ZMB'"},{name:"literal",value:"'ZWE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"annenpartIdent",value:{name:"string",required:!1}},{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!0}}]}},description:""},aksjonspunkt:{required:!1,tsType:{name:"signature",type:"object",raw:`{
+  aksjonspunktType: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType;
+  begrunnelse?: string;
+  besluttersBegrunnelse?: string;
+  definisjon: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;
+  endretAv?: string;
+  endretTidspunkt?: string;
+  erAktivt: boolean;
+  fristTid?: string;
+  kanLoses: boolean;
+  status: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus;
+  toTrinnsBehandling: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vilkarType?: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
+  vurderPaNyttArsaker?: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
+}`,signature:{properties:[{key:"aksjonspunktType",value:{name:"union",raw:`| 'AUTO'
+| 'MANU'
+| 'OVST'
+| 'SAOV'
+| '-'`,elements:[{name:"literal",value:"'AUTO'"},{name:"literal",value:"'MANU'"},{name:"literal",value:"'OVST'"},{name:"literal",value:"'SAOV'"},{name:"literal",value:"'-'"}],required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"definisjon",value:{name:"union",raw:`| '5001'
+| '5027'
+| '5004'
+| '5005'
+| '5006'
+| '5007'
+| '5008'
+| '5011'
+| '5012'
+| '5013'
+| '5014'
+| '5015'
+| '5016'
+| '5017'
+| '5002'
+| '5026'
+| '5028'
+| '5030'
+| '5031'
+| '5033'
+| '5034'
+| '5003'
+| '5035'
+| '5037'
+| '5038'
+| '5039'
+| '5040'
+| '5043'
+| '5046'
+| '5047'
+| '5049'
+| '5051'
+| '5052'
+| '5054'
+| '5055'
+| '5057'
+| '5058'
+| '5059'
+| '5060'
+| '5061'
+| '5068'
+| '5064'
+| '5065'
+| '5063'
+| '5066'
+| '5071'
+| '5072'
+| '5073'
+| '5076'
+| '5077'
+| '5085'
+| '5082'
+| '5084'
+| '5029'
+| '5086'
+| '5089'
+| '5041'
+| '5062'
+| '5091'
+| '5092'
+| '5095'
+| '5096'
+| '5074'
+| '5101'
+| '5102'
+| '5103'
+| '6002'
+| '6003'
+| '6004'
+| '6005'
+| '6006'
+| '6008'
+| '6009'
+| '6010'
+| '6011'
+| '6065'
+| '6014'
+| '6015'
+| '6045'
+| '6016'
+| '6018'
+| '6019'
+| '6017'
+| '6103'
+| '7001'
+| '7002'
+| '7003'
+| '7005'
+| '7007'
+| '7008'
+| '7011'
+| '7013'
+| '7014'
+| '7020'
+| '7030'
+| '7033'
+| '7037'
+| '7039'
+| '7040'
+| 'UNDEFINED'
+| '5009'
+| '5019'
+| '5020'
+| '5021'
+| '5022'
+| '5023'
+| '5024'
+| '5025'
+| '5032'
+| '5036'
+| '5042'
+| '5044'
+| '5045'
+| '5048'
+| '5050'
+| '5053'
+| '5056'
+| '5067'
+| '5069'
+| '5070'
+| '5075'
+| '5078'
+| '5079'
+| '5080'
+| '5081'
+| '5083'
+| '5087'
+| '5088'
+| '5090'
+| '5093'
+| '5094'
+| '5097'
+| '5098'
+| '5099'
+| '6007'
+| '6012'
+| '6013'
+| '6068'
+| '6070'
+| '7004'
+| '7006'
+| '7009'
+| '7015'
+| '7016'
+| '7017'
+| '7018'
+| '7019'
+| '7021'
+| '7022'
+| '7023'
+| '7024'
+| '7025'
+| '7026'
+| '7027'
+| '7028'
+| '7029'
+| '7032'
+| '7034'
+| '7035'
+| '7036'
+| '7038'
+| '7041'`,elements:[{name:"literal",value:"'5001'"},{name:"literal",value:"'5027'"},{name:"literal",value:"'5004'"},{name:"literal",value:"'5005'"},{name:"literal",value:"'5006'"},{name:"literal",value:"'5007'"},{name:"literal",value:"'5008'"},{name:"literal",value:"'5011'"},{name:"literal",value:"'5012'"},{name:"literal",value:"'5013'"},{name:"literal",value:"'5014'"},{name:"literal",value:"'5015'"},{name:"literal",value:"'5016'"},{name:"literal",value:"'5017'"},{name:"literal",value:"'5002'"},{name:"literal",value:"'5026'"},{name:"literal",value:"'5028'"},{name:"literal",value:"'5030'"},{name:"literal",value:"'5031'"},{name:"literal",value:"'5033'"},{name:"literal",value:"'5034'"},{name:"literal",value:"'5003'"},{name:"literal",value:"'5035'"},{name:"literal",value:"'5037'"},{name:"literal",value:"'5038'"},{name:"literal",value:"'5039'"},{name:"literal",value:"'5040'"},{name:"literal",value:"'5043'"},{name:"literal",value:"'5046'"},{name:"literal",value:"'5047'"},{name:"literal",value:"'5049'"},{name:"literal",value:"'5051'"},{name:"literal",value:"'5052'"},{name:"literal",value:"'5054'"},{name:"literal",value:"'5055'"},{name:"literal",value:"'5057'"},{name:"literal",value:"'5058'"},{name:"literal",value:"'5059'"},{name:"literal",value:"'5060'"},{name:"literal",value:"'5061'"},{name:"literal",value:"'5068'"},{name:"literal",value:"'5064'"},{name:"literal",value:"'5065'"},{name:"literal",value:"'5063'"},{name:"literal",value:"'5066'"},{name:"literal",value:"'5071'"},{name:"literal",value:"'5072'"},{name:"literal",value:"'5073'"},{name:"literal",value:"'5076'"},{name:"literal",value:"'5077'"},{name:"literal",value:"'5085'"},{name:"literal",value:"'5082'"},{name:"literal",value:"'5084'"},{name:"literal",value:"'5029'"},{name:"literal",value:"'5086'"},{name:"literal",value:"'5089'"},{name:"literal",value:"'5041'"},{name:"literal",value:"'5062'"},{name:"literal",value:"'5091'"},{name:"literal",value:"'5092'"},{name:"literal",value:"'5095'"},{name:"literal",value:"'5096'"},{name:"literal",value:"'5074'"},{name:"literal",value:"'5101'"},{name:"literal",value:"'5102'"},{name:"literal",value:"'5103'"},{name:"literal",value:"'6002'"},{name:"literal",value:"'6003'"},{name:"literal",value:"'6004'"},{name:"literal",value:"'6005'"},{name:"literal",value:"'6006'"},{name:"literal",value:"'6008'"},{name:"literal",value:"'6009'"},{name:"literal",value:"'6010'"},{name:"literal",value:"'6011'"},{name:"literal",value:"'6065'"},{name:"literal",value:"'6014'"},{name:"literal",value:"'6015'"},{name:"literal",value:"'6045'"},{name:"literal",value:"'6016'"},{name:"literal",value:"'6018'"},{name:"literal",value:"'6019'"},{name:"literal",value:"'6017'"},{name:"literal",value:"'6103'"},{name:"literal",value:"'7001'"},{name:"literal",value:"'7002'"},{name:"literal",value:"'7003'"},{name:"literal",value:"'7005'"},{name:"literal",value:"'7007'"},{name:"literal",value:"'7008'"},{name:"literal",value:"'7011'"},{name:"literal",value:"'7013'"},{name:"literal",value:"'7014'"},{name:"literal",value:"'7020'"},{name:"literal",value:"'7030'"},{name:"literal",value:"'7033'"},{name:"literal",value:"'7037'"},{name:"literal",value:"'7039'"},{name:"literal",value:"'7040'"},{name:"literal",value:"'UNDEFINED'"},{name:"literal",value:"'5009'"},{name:"literal",value:"'5019'"},{name:"literal",value:"'5020'"},{name:"literal",value:"'5021'"},{name:"literal",value:"'5022'"},{name:"literal",value:"'5023'"},{name:"literal",value:"'5024'"},{name:"literal",value:"'5025'"},{name:"literal",value:"'5032'"},{name:"literal",value:"'5036'"},{name:"literal",value:"'5042'"},{name:"literal",value:"'5044'"},{name:"literal",value:"'5045'"},{name:"literal",value:"'5048'"},{name:"literal",value:"'5050'"},{name:"literal",value:"'5053'"},{name:"literal",value:"'5056'"},{name:"literal",value:"'5067'"},{name:"literal",value:"'5069'"},{name:"literal",value:"'5070'"},{name:"literal",value:"'5075'"},{name:"literal",value:"'5078'"},{name:"literal",value:"'5079'"},{name:"literal",value:"'5080'"},{name:"literal",value:"'5081'"},{name:"literal",value:"'5083'"},{name:"literal",value:"'5087'"},{name:"literal",value:"'5088'"},{name:"literal",value:"'5090'"},{name:"literal",value:"'5093'"},{name:"literal",value:"'5094'"},{name:"literal",value:"'5097'"},{name:"literal",value:"'5098'"},{name:"literal",value:"'5099'"},{name:"literal",value:"'6007'"},{name:"literal",value:"'6012'"},{name:"literal",value:"'6013'"},{name:"literal",value:"'6068'"},{name:"literal",value:"'6070'"},{name:"literal",value:"'7004'"},{name:"literal",value:"'7006'"},{name:"literal",value:"'7009'"},{name:"literal",value:"'7015'"},{name:"literal",value:"'7016'"},{name:"literal",value:"'7017'"},{name:"literal",value:"'7018'"},{name:"literal",value:"'7019'"},{name:"literal",value:"'7021'"},{name:"literal",value:"'7022'"},{name:"literal",value:"'7023'"},{name:"literal",value:"'7024'"},{name:"literal",value:"'7025'"},{name:"literal",value:"'7026'"},{name:"literal",value:"'7027'"},{name:"literal",value:"'7028'"},{name:"literal",value:"'7029'"},{name:"literal",value:"'7032'"},{name:"literal",value:"'7034'"},{name:"literal",value:"'7035'"},{name:"literal",value:"'7036'"},{name:"literal",value:"'7038'"},{name:"literal",value:"'7041'"}],required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}},{key:"erAktivt",value:{name:"boolean",required:!0}},{key:"fristTid",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"status",value:{name:"union",raw:"'AVBR' | 'OPPR' | 'UTFO'",elements:[{name:"literal",value:"'AVBR'"},{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"}],required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"union",raw:`| 'FP_VK_1'
+| 'FP_VK_11'
+| 'FP_VK_16'
+| 'FP_VK_2'
+| 'FP_VK_2_F'
+| 'FP_VK_2_L'
+| 'FP_VK_3'
+| 'FP_VK_4'
+| 'FP_VK_5'
+| 'FP_VK_8'
+| 'FP_VK_33'
+| 'FP_VK_34'
+| 'FP_VK_21'
+| 'FP_VK_23'
+| 'FP_VK_41'
+| 'SVP_VK_1'
+| '-'`,elements:[{name:"literal",value:"'FP_VK_1'"},{name:"literal",value:"'FP_VK_11'"},{name:"literal",value:"'FP_VK_16'"},{name:"literal",value:"'FP_VK_2'"},{name:"literal",value:"'FP_VK_2_F'"},{name:"literal",value:"'FP_VK_2_L'"},{name:"literal",value:"'FP_VK_3'"},{name:"literal",value:"'FP_VK_4'"},{name:"literal",value:"'FP_VK_5'"},{name:"literal",value:"'FP_VK_8'"},{name:"literal",value:"'FP_VK_33'"},{name:"literal",value:"'FP_VK_34'"},{name:"literal",value:"'FP_VK_21'"},{name:"literal",value:"'FP_VK_23'"},{name:"literal",value:"'FP_VK_41'"},{name:"literal",value:"'SVP_VK_1'"},{name:"literal",value:"'-'"}],required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'FEIL_FAKTA'
+| 'FEIL_LOV'
+| 'SKJØNN'
+| 'UTREDNING'
+| 'SAKSFLYT'
+| 'BEGRUNNELSE'
+| '-'
+| 'ANNET'
+| 'FEIL_REGEL'`,elements:[{name:"literal",value:"'FEIL_FAKTA'"},{name:"literal",value:"'FEIL_LOV'"},{name:"literal",value:"'SKJØNN'"},{name:"literal",value:"'UTREDNING'"},{name:"literal",value:"'SAKSFLYT'"},{name:"literal",value:"'BEGRUNNELSE'"},{name:"literal",value:"'-'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'FEIL_REGEL'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>",required:!1}}]}},description:""},isSubmittable:{required:!0,tsType:{name:"boolean"},description:""}}};const Vs=({omsorgOgRett:e,aksjonspunkt:l,isSubmittable:r})=>{const{submitCallback:t,isReadOnly:i,alleMerknaderFraBeslutter:u}=Fl(),d=e.manuellBehandlingResultat?.annenpartRettighet?.harRettNorge??void 0,m=e.manuellBehandlingResultat?.annenpartRettighet?.harRettEØS??void 0,f=e.manuellBehandlingResultat?.annenpartRettighet?.harUføretrygd??void 0,{mellomlagretFormData:p,setMellomlagretFormData:h}=vv(),R=i||l===void 0,A=tu({defaultValues:p??{harAnnenForelderRett:d===void 0?void 0:d==="JA",mottarAnnenForelderUforetrygd:f===void 0?void 0:f==="JA",harAnnenForelderRettEØS:m===void 0?void 0:m==="JA",...Qn.initialValues(l)}}),L=e.relasjonsRolleType!==ca.MOR||f==="JA",w=k=>t({kode:rn.AVKLAR_ANNEN_FORELDER_RETT,annenforelderHarRett:k.harAnnenForelderRett,annenforelderMottarUføretrygd:k.mottarAnnenForelderUforetrygd,annenForelderHarRettEØS:k.harAnnenForelderRettEØS,...Qn.transformValues(k)});return y.jsx(su,{formMethods:A,onSubmit:w,setDataOnUnmount:h,children:y.jsx(Ws,{withoutBorder:!0,merknaderFraBeslutter:u[rn.AVKLAR_ANNEN_FORELDER_RETT],children:y.jsxs(ma,{gap:"space-24",children:[y.jsx(vu,{readOnly:R,avklareUforetrygd:L}),y.jsx(Qn,{control:A.control,isSubmittable:r,isReadOnly:R,hasBegrunnelse:!0,hasVurderingText:!0}),y.jsx(Cl,{isSubmittable:r,isReadOnly:R,isSubmitting:A.formState.isSubmitting,isDirty:A.formState.isDirty})]})})})};Vs.__docgenInfo={description:"",methods:[],displayName:"HarAnnenForelderRettForm",props:{omsorgOgRett:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
+  registerdata?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData;
+  relasjonsRolleType: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
+  rettighetstype?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  søknad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
+}`,signature:{properties:[{key:"manuellBehandlingResultat",value:{name:"signature",type:"object",raw:`{
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"registerdata",value:{name:"signature",type:"object",raw:`{
+  harAnnenpartEngangsstønad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartForeldrepenger: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harAnnenpartEngangsstønad",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartForeldrepenger",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"relasjonsRolleType",value:{name:"union",raw:`| 'EKTE'
+| 'BARN'
+| 'FARA'
+| 'MORA'
+| 'REPA'
+| 'MMOR'
+| 'ANPA'
+| '-'`,elements:[{name:"literal",value:"'EKTE'"},{name:"literal",value:"'BARN'"},{name:"literal",value:"'FARA'"},{name:"literal",value:"'MORA'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'MMOR'"},{name:"literal",value:"'ANPA'"},{name:"literal",value:"'-'"}],required:!0}},{key:"rettighetstype",value:{name:"union",raw:`| 'ALENEOMSORG'
+| 'BEGGE_RETT'
+| 'BEGGE_RETT_EØS'
+| 'BARE_MOR_RETT'
+| 'BARE_FAR_RETT'
+| 'BARE_FAR_RETT_MOR_UFØR'`,elements:[{name:"literal",value:"'ALENEOMSORG'"},{name:"literal",value:"'BEGGE_RETT'"},{name:"literal",value:"'BEGGE_RETT_EØS'"},{name:"literal",value:"'BARE_MOR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT_MOR_UFØR'"}],required:!1}},{key:"søknad",value:{name:"signature",type:"object",raw:`{
+  annenpartBostedsland?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  annenpartIdent?: string;
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartBostedsland",value:{name:"union",raw:`| '???'
+| 'ABW'
+| 'AFG'
+| 'AGO'
+| 'AIA'
+| 'ALA'
+| 'ALB'
+| 'AND'
+| 'ANT'
+| 'ARE'
+| 'ARG'
+| 'ARM'
+| 'ASM'
+| 'ATG'
+| 'AUS'
+| 'AUT'
+| 'AZE'
+| 'BDI'
+| 'BEL'
+| 'BEN'
+| 'BES'
+| 'BFA'
+| 'BGD'
+| 'BGR'
+| 'BHR'
+| 'BHS'
+| 'BIH'
+| 'BLM'
+| 'BLR'
+| 'BLZ'
+| 'BMU'
+| 'BOL'
+| 'BRA'
+| 'BRB'
+| 'BRN'
+| 'BTN'
+| 'BVT'
+| 'BWA'
+| 'CAF'
+| 'CAN'
+| 'CCK'
+| 'CHE'
+| 'CHL'
+| 'CHN'
+| 'CIV'
+| 'CMR'
+| 'COD'
+| 'COG'
+| 'COK'
+| 'COL'
+| 'COM'
+| 'CPV'
+| 'CRI'
+| 'CSK'
+| 'CUB'
+| 'CUW'
+| 'CXR'
+| 'CYM'
+| 'CYP'
+| 'CZE'
+| 'DDR'
+| 'DEU'
+| 'DJI'
+| 'DMA'
+| 'DNK'
+| 'DOM'
+| 'DZA'
+| 'ECU'
+| 'EGY'
+| 'ERI'
+| 'ESH'
+| 'ESP'
+| 'EST'
+| 'ETH'
+| 'FIN'
+| 'FJI'
+| 'FLK'
+| 'FRA'
+| 'FRO'
+| 'FSM'
+| 'GAB'
+| 'GBR'
+| 'GEO'
+| 'GGY'
+| 'GHA'
+| 'GIB'
+| 'GIN'
+| 'GLP'
+| 'GMB'
+| 'GNB'
+| 'GNQ'
+| 'GRC'
+| 'GRD'
+| 'GRL'
+| 'GTM'
+| 'GUF'
+| 'GUM'
+| 'GUY'
+| 'HKG'
+| 'HMD'
+| 'HND'
+| 'HRV'
+| 'HTI'
+| 'HUN'
+| 'IDN'
+| 'IMN'
+| 'IND'
+| 'IOT'
+| 'IRL'
+| 'IRN'
+| 'IRQ'
+| 'ISL'
+| 'ISR'
+| 'ITA'
+| 'JAM'
+| 'JEY'
+| 'JOR'
+| 'JPN'
+| 'KAZ'
+| 'KEN'
+| 'KGZ'
+| 'KHM'
+| 'KIR'
+| 'KNA'
+| 'KOR'
+| 'KWT'
+| 'LAO'
+| 'LBN'
+| 'LBR'
+| 'LBY'
+| 'LCA'
+| 'LIE'
+| 'LKA'
+| 'LSO'
+| 'LTU'
+| 'LUX'
+| 'LVA'
+| 'MAC'
+| 'MAF'
+| 'MAR'
+| 'MCO'
+| 'MDA'
+| 'MDG'
+| 'MDV'
+| 'MEX'
+| 'MHL'
+| 'MKD'
+| 'MLI'
+| 'MLT'
+| 'MMR'
+| 'MNE'
+| 'MNG'
+| 'MNP'
+| 'MOZ'
+| 'MRT'
+| 'MSR'
+| 'MTQ'
+| 'MUS'
+| 'MWI'
+| 'MYS'
+| 'MYT'
+| 'NAM'
+| 'NCL'
+| 'NER'
+| 'NFK'
+| 'NGA'
+| 'NIC'
+| 'NIU'
+| 'NLD'
+| 'NOR'
+| 'NPL'
+| 'NRU'
+| 'NZL'
+| 'OMN'
+| 'PAK'
+| 'PAN'
+| 'PCN'
+| 'PER'
+| 'PHL'
+| 'PLW'
+| 'PNG'
+| 'POL'
+| 'PRI'
+| 'PRK'
+| 'PRT'
+| 'PRY'
+| 'PSE'
+| 'PYF'
+| 'QAT'
+| 'REU'
+| 'ROU'
+| 'RUS'
+| 'RWA'
+| 'SAU'
+| 'SCG'
+| 'SDN'
+| 'SEN'
+| 'SGP'
+| 'SGS'
+| 'SHN'
+| 'SJM'
+| 'SLB'
+| 'SLE'
+| 'SLV'
+| 'SMR'
+| 'SOM'
+| 'SPM'
+| 'SRB'
+| 'SSD'
+| 'STP'
+| 'SUN'
+| 'SUR'
+| 'SVK'
+| 'SVN'
+| 'SWE'
+| 'SWZ'
+| 'SXM'
+| 'SYC'
+| 'SYR'
+| 'TCA'
+| 'TCD'
+| 'TGO'
+| 'THA'
+| 'TJK'
+| 'TKL'
+| 'TKM'
+| 'TLS'
+| 'TON'
+| 'TTO'
+| 'TUN'
+| 'TUR'
+| 'TUV'
+| 'TWN'
+| 'TZA'
+| 'UGA'
+| 'UKR'
+| 'UMI'
+| 'URY'
+| 'USA'
+| 'UZB'
+| 'VAT'
+| 'VCT'
+| 'VEN'
+| 'VGB'
+| 'VIR'
+| 'VNM'
+| 'VUT'
+| 'WLF'
+| 'WSM'
+| 'XUK'
+| 'XXK'
+| 'XXX'
+| 'YEM'
+| 'YUG'
+| 'ZAF'
+| 'ZMB'
+| 'ZWE'
+| '-'`,elements:[{name:"literal",value:"'???'"},{name:"literal",value:"'ABW'"},{name:"literal",value:"'AFG'"},{name:"literal",value:"'AGO'"},{name:"literal",value:"'AIA'"},{name:"literal",value:"'ALA'"},{name:"literal",value:"'ALB'"},{name:"literal",value:"'AND'"},{name:"literal",value:"'ANT'"},{name:"literal",value:"'ARE'"},{name:"literal",value:"'ARG'"},{name:"literal",value:"'ARM'"},{name:"literal",value:"'ASM'"},{name:"literal",value:"'ATG'"},{name:"literal",value:"'AUS'"},{name:"literal",value:"'AUT'"},{name:"literal",value:"'AZE'"},{name:"literal",value:"'BDI'"},{name:"literal",value:"'BEL'"},{name:"literal",value:"'BEN'"},{name:"literal",value:"'BES'"},{name:"literal",value:"'BFA'"},{name:"literal",value:"'BGD'"},{name:"literal",value:"'BGR'"},{name:"literal",value:"'BHR'"},{name:"literal",value:"'BHS'"},{name:"literal",value:"'BIH'"},{name:"literal",value:"'BLM'"},{name:"literal",value:"'BLR'"},{name:"literal",value:"'BLZ'"},{name:"literal",value:"'BMU'"},{name:"literal",value:"'BOL'"},{name:"literal",value:"'BRA'"},{name:"literal",value:"'BRB'"},{name:"literal",value:"'BRN'"},{name:"literal",value:"'BTN'"},{name:"literal",value:"'BVT'"},{name:"literal",value:"'BWA'"},{name:"literal",value:"'CAF'"},{name:"literal",value:"'CAN'"},{name:"literal",value:"'CCK'"},{name:"literal",value:"'CHE'"},{name:"literal",value:"'CHL'"},{name:"literal",value:"'CHN'"},{name:"literal",value:"'CIV'"},{name:"literal",value:"'CMR'"},{name:"literal",value:"'COD'"},{name:"literal",value:"'COG'"},{name:"literal",value:"'COK'"},{name:"literal",value:"'COL'"},{name:"literal",value:"'COM'"},{name:"literal",value:"'CPV'"},{name:"literal",value:"'CRI'"},{name:"literal",value:"'CSK'"},{name:"literal",value:"'CUB'"},{name:"literal",value:"'CUW'"},{name:"literal",value:"'CXR'"},{name:"literal",value:"'CYM'"},{name:"literal",value:"'CYP'"},{name:"literal",value:"'CZE'"},{name:"literal",value:"'DDR'"},{name:"literal",value:"'DEU'"},{name:"literal",value:"'DJI'"},{name:"literal",value:"'DMA'"},{name:"literal",value:"'DNK'"},{name:"literal",value:"'DOM'"},{name:"literal",value:"'DZA'"},{name:"literal",value:"'ECU'"},{name:"literal",value:"'EGY'"},{name:"literal",value:"'ERI'"},{name:"literal",value:"'ESH'"},{name:"literal",value:"'ESP'"},{name:"literal",value:"'EST'"},{name:"literal",value:"'ETH'"},{name:"literal",value:"'FIN'"},{name:"literal",value:"'FJI'"},{name:"literal",value:"'FLK'"},{name:"literal",value:"'FRA'"},{name:"literal",value:"'FRO'"},{name:"literal",value:"'FSM'"},{name:"literal",value:"'GAB'"},{name:"literal",value:"'GBR'"},{name:"literal",value:"'GEO'"},{name:"literal",value:"'GGY'"},{name:"literal",value:"'GHA'"},{name:"literal",value:"'GIB'"},{name:"literal",value:"'GIN'"},{name:"literal",value:"'GLP'"},{name:"literal",value:"'GMB'"},{name:"literal",value:"'GNB'"},{name:"literal",value:"'GNQ'"},{name:"literal",value:"'GRC'"},{name:"literal",value:"'GRD'"},{name:"literal",value:"'GRL'"},{name:"literal",value:"'GTM'"},{name:"literal",value:"'GUF'"},{name:"literal",value:"'GUM'"},{name:"literal",value:"'GUY'"},{name:"literal",value:"'HKG'"},{name:"literal",value:"'HMD'"},{name:"literal",value:"'HND'"},{name:"literal",value:"'HRV'"},{name:"literal",value:"'HTI'"},{name:"literal",value:"'HUN'"},{name:"literal",value:"'IDN'"},{name:"literal",value:"'IMN'"},{name:"literal",value:"'IND'"},{name:"literal",value:"'IOT'"},{name:"literal",value:"'IRL'"},{name:"literal",value:"'IRN'"},{name:"literal",value:"'IRQ'"},{name:"literal",value:"'ISL'"},{name:"literal",value:"'ISR'"},{name:"literal",value:"'ITA'"},{name:"literal",value:"'JAM'"},{name:"literal",value:"'JEY'"},{name:"literal",value:"'JOR'"},{name:"literal",value:"'JPN'"},{name:"literal",value:"'KAZ'"},{name:"literal",value:"'KEN'"},{name:"literal",value:"'KGZ'"},{name:"literal",value:"'KHM'"},{name:"literal",value:"'KIR'"},{name:"literal",value:"'KNA'"},{name:"literal",value:"'KOR'"},{name:"literal",value:"'KWT'"},{name:"literal",value:"'LAO'"},{name:"literal",value:"'LBN'"},{name:"literal",value:"'LBR'"},{name:"literal",value:"'LBY'"},{name:"literal",value:"'LCA'"},{name:"literal",value:"'LIE'"},{name:"literal",value:"'LKA'"},{name:"literal",value:"'LSO'"},{name:"literal",value:"'LTU'"},{name:"literal",value:"'LUX'"},{name:"literal",value:"'LVA'"},{name:"literal",value:"'MAC'"},{name:"literal",value:"'MAF'"},{name:"literal",value:"'MAR'"},{name:"literal",value:"'MCO'"},{name:"literal",value:"'MDA'"},{name:"literal",value:"'MDG'"},{name:"literal",value:"'MDV'"},{name:"literal",value:"'MEX'"},{name:"literal",value:"'MHL'"},{name:"literal",value:"'MKD'"},{name:"literal",value:"'MLI'"},{name:"literal",value:"'MLT'"},{name:"literal",value:"'MMR'"},{name:"literal",value:"'MNE'"},{name:"literal",value:"'MNG'"},{name:"literal",value:"'MNP'"},{name:"literal",value:"'MOZ'"},{name:"literal",value:"'MRT'"},{name:"literal",value:"'MSR'"},{name:"literal",value:"'MTQ'"},{name:"literal",value:"'MUS'"},{name:"literal",value:"'MWI'"},{name:"literal",value:"'MYS'"},{name:"literal",value:"'MYT'"},{name:"literal",value:"'NAM'"},{name:"literal",value:"'NCL'"},{name:"literal",value:"'NER'"},{name:"literal",value:"'NFK'"},{name:"literal",value:"'NGA'"},{name:"literal",value:"'NIC'"},{name:"literal",value:"'NIU'"},{name:"literal",value:"'NLD'"},{name:"literal",value:"'NOR'"},{name:"literal",value:"'NPL'"},{name:"literal",value:"'NRU'"},{name:"literal",value:"'NZL'"},{name:"literal",value:"'OMN'"},{name:"literal",value:"'PAK'"},{name:"literal",value:"'PAN'"},{name:"literal",value:"'PCN'"},{name:"literal",value:"'PER'"},{name:"literal",value:"'PHL'"},{name:"literal",value:"'PLW'"},{name:"literal",value:"'PNG'"},{name:"literal",value:"'POL'"},{name:"literal",value:"'PRI'"},{name:"literal",value:"'PRK'"},{name:"literal",value:"'PRT'"},{name:"literal",value:"'PRY'"},{name:"literal",value:"'PSE'"},{name:"literal",value:"'PYF'"},{name:"literal",value:"'QAT'"},{name:"literal",value:"'REU'"},{name:"literal",value:"'ROU'"},{name:"literal",value:"'RUS'"},{name:"literal",value:"'RWA'"},{name:"literal",value:"'SAU'"},{name:"literal",value:"'SCG'"},{name:"literal",value:"'SDN'"},{name:"literal",value:"'SEN'"},{name:"literal",value:"'SGP'"},{name:"literal",value:"'SGS'"},{name:"literal",value:"'SHN'"},{name:"literal",value:"'SJM'"},{name:"literal",value:"'SLB'"},{name:"literal",value:"'SLE'"},{name:"literal",value:"'SLV'"},{name:"literal",value:"'SMR'"},{name:"literal",value:"'SOM'"},{name:"literal",value:"'SPM'"},{name:"literal",value:"'SRB'"},{name:"literal",value:"'SSD'"},{name:"literal",value:"'STP'"},{name:"literal",value:"'SUN'"},{name:"literal",value:"'SUR'"},{name:"literal",value:"'SVK'"},{name:"literal",value:"'SVN'"},{name:"literal",value:"'SWE'"},{name:"literal",value:"'SWZ'"},{name:"literal",value:"'SXM'"},{name:"literal",value:"'SYC'"},{name:"literal",value:"'SYR'"},{name:"literal",value:"'TCA'"},{name:"literal",value:"'TCD'"},{name:"literal",value:"'TGO'"},{name:"literal",value:"'THA'"},{name:"literal",value:"'TJK'"},{name:"literal",value:"'TKL'"},{name:"literal",value:"'TKM'"},{name:"literal",value:"'TLS'"},{name:"literal",value:"'TON'"},{name:"literal",value:"'TTO'"},{name:"literal",value:"'TUN'"},{name:"literal",value:"'TUR'"},{name:"literal",value:"'TUV'"},{name:"literal",value:"'TWN'"},{name:"literal",value:"'TZA'"},{name:"literal",value:"'UGA'"},{name:"literal",value:"'UKR'"},{name:"literal",value:"'UMI'"},{name:"literal",value:"'URY'"},{name:"literal",value:"'USA'"},{name:"literal",value:"'UZB'"},{name:"literal",value:"'VAT'"},{name:"literal",value:"'VCT'"},{name:"literal",value:"'VEN'"},{name:"literal",value:"'VGB'"},{name:"literal",value:"'VIR'"},{name:"literal",value:"'VNM'"},{name:"literal",value:"'VUT'"},{name:"literal",value:"'WLF'"},{name:"literal",value:"'WSM'"},{name:"literal",value:"'XUK'"},{name:"literal",value:"'XXK'"},{name:"literal",value:"'XXX'"},{name:"literal",value:"'YEM'"},{name:"literal",value:"'YUG'"},{name:"literal",value:"'ZAF'"},{name:"literal",value:"'ZMB'"},{name:"literal",value:"'ZWE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"annenpartIdent",value:{name:"string",required:!1}},{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!0}}]}},description:""},aksjonspunkt:{required:!1,tsType:{name:"signature",type:"object",raw:`{
+  aksjonspunktType: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType;
+  begrunnelse?: string;
+  besluttersBegrunnelse?: string;
+  definisjon: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;
+  endretAv?: string;
+  endretTidspunkt?: string;
+  erAktivt: boolean;
+  fristTid?: string;
+  kanLoses: boolean;
+  status: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus;
+  toTrinnsBehandling: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vilkarType?: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
+  vurderPaNyttArsaker?: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
+}`,signature:{properties:[{key:"aksjonspunktType",value:{name:"union",raw:`| 'AUTO'
+| 'MANU'
+| 'OVST'
+| 'SAOV'
+| '-'`,elements:[{name:"literal",value:"'AUTO'"},{name:"literal",value:"'MANU'"},{name:"literal",value:"'OVST'"},{name:"literal",value:"'SAOV'"},{name:"literal",value:"'-'"}],required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"definisjon",value:{name:"union",raw:`| '5001'
+| '5027'
+| '5004'
+| '5005'
+| '5006'
+| '5007'
+| '5008'
+| '5011'
+| '5012'
+| '5013'
+| '5014'
+| '5015'
+| '5016'
+| '5017'
+| '5002'
+| '5026'
+| '5028'
+| '5030'
+| '5031'
+| '5033'
+| '5034'
+| '5003'
+| '5035'
+| '5037'
+| '5038'
+| '5039'
+| '5040'
+| '5043'
+| '5046'
+| '5047'
+| '5049'
+| '5051'
+| '5052'
+| '5054'
+| '5055'
+| '5057'
+| '5058'
+| '5059'
+| '5060'
+| '5061'
+| '5068'
+| '5064'
+| '5065'
+| '5063'
+| '5066'
+| '5071'
+| '5072'
+| '5073'
+| '5076'
+| '5077'
+| '5085'
+| '5082'
+| '5084'
+| '5029'
+| '5086'
+| '5089'
+| '5041'
+| '5062'
+| '5091'
+| '5092'
+| '5095'
+| '5096'
+| '5074'
+| '5101'
+| '5102'
+| '5103'
+| '6002'
+| '6003'
+| '6004'
+| '6005'
+| '6006'
+| '6008'
+| '6009'
+| '6010'
+| '6011'
+| '6065'
+| '6014'
+| '6015'
+| '6045'
+| '6016'
+| '6018'
+| '6019'
+| '6017'
+| '6103'
+| '7001'
+| '7002'
+| '7003'
+| '7005'
+| '7007'
+| '7008'
+| '7011'
+| '7013'
+| '7014'
+| '7020'
+| '7030'
+| '7033'
+| '7037'
+| '7039'
+| '7040'
+| 'UNDEFINED'
+| '5009'
+| '5019'
+| '5020'
+| '5021'
+| '5022'
+| '5023'
+| '5024'
+| '5025'
+| '5032'
+| '5036'
+| '5042'
+| '5044'
+| '5045'
+| '5048'
+| '5050'
+| '5053'
+| '5056'
+| '5067'
+| '5069'
+| '5070'
+| '5075'
+| '5078'
+| '5079'
+| '5080'
+| '5081'
+| '5083'
+| '5087'
+| '5088'
+| '5090'
+| '5093'
+| '5094'
+| '5097'
+| '5098'
+| '5099'
+| '6007'
+| '6012'
+| '6013'
+| '6068'
+| '6070'
+| '7004'
+| '7006'
+| '7009'
+| '7015'
+| '7016'
+| '7017'
+| '7018'
+| '7019'
+| '7021'
+| '7022'
+| '7023'
+| '7024'
+| '7025'
+| '7026'
+| '7027'
+| '7028'
+| '7029'
+| '7032'
+| '7034'
+| '7035'
+| '7036'
+| '7038'
+| '7041'`,elements:[{name:"literal",value:"'5001'"},{name:"literal",value:"'5027'"},{name:"literal",value:"'5004'"},{name:"literal",value:"'5005'"},{name:"literal",value:"'5006'"},{name:"literal",value:"'5007'"},{name:"literal",value:"'5008'"},{name:"literal",value:"'5011'"},{name:"literal",value:"'5012'"},{name:"literal",value:"'5013'"},{name:"literal",value:"'5014'"},{name:"literal",value:"'5015'"},{name:"literal",value:"'5016'"},{name:"literal",value:"'5017'"},{name:"literal",value:"'5002'"},{name:"literal",value:"'5026'"},{name:"literal",value:"'5028'"},{name:"literal",value:"'5030'"},{name:"literal",value:"'5031'"},{name:"literal",value:"'5033'"},{name:"literal",value:"'5034'"},{name:"literal",value:"'5003'"},{name:"literal",value:"'5035'"},{name:"literal",value:"'5037'"},{name:"literal",value:"'5038'"},{name:"literal",value:"'5039'"},{name:"literal",value:"'5040'"},{name:"literal",value:"'5043'"},{name:"literal",value:"'5046'"},{name:"literal",value:"'5047'"},{name:"literal",value:"'5049'"},{name:"literal",value:"'5051'"},{name:"literal",value:"'5052'"},{name:"literal",value:"'5054'"},{name:"literal",value:"'5055'"},{name:"literal",value:"'5057'"},{name:"literal",value:"'5058'"},{name:"literal",value:"'5059'"},{name:"literal",value:"'5060'"},{name:"literal",value:"'5061'"},{name:"literal",value:"'5068'"},{name:"literal",value:"'5064'"},{name:"literal",value:"'5065'"},{name:"literal",value:"'5063'"},{name:"literal",value:"'5066'"},{name:"literal",value:"'5071'"},{name:"literal",value:"'5072'"},{name:"literal",value:"'5073'"},{name:"literal",value:"'5076'"},{name:"literal",value:"'5077'"},{name:"literal",value:"'5085'"},{name:"literal",value:"'5082'"},{name:"literal",value:"'5084'"},{name:"literal",value:"'5029'"},{name:"literal",value:"'5086'"},{name:"literal",value:"'5089'"},{name:"literal",value:"'5041'"},{name:"literal",value:"'5062'"},{name:"literal",value:"'5091'"},{name:"literal",value:"'5092'"},{name:"literal",value:"'5095'"},{name:"literal",value:"'5096'"},{name:"literal",value:"'5074'"},{name:"literal",value:"'5101'"},{name:"literal",value:"'5102'"},{name:"literal",value:"'5103'"},{name:"literal",value:"'6002'"},{name:"literal",value:"'6003'"},{name:"literal",value:"'6004'"},{name:"literal",value:"'6005'"},{name:"literal",value:"'6006'"},{name:"literal",value:"'6008'"},{name:"literal",value:"'6009'"},{name:"literal",value:"'6010'"},{name:"literal",value:"'6011'"},{name:"literal",value:"'6065'"},{name:"literal",value:"'6014'"},{name:"literal",value:"'6015'"},{name:"literal",value:"'6045'"},{name:"literal",value:"'6016'"},{name:"literal",value:"'6018'"},{name:"literal",value:"'6019'"},{name:"literal",value:"'6017'"},{name:"literal",value:"'6103'"},{name:"literal",value:"'7001'"},{name:"literal",value:"'7002'"},{name:"literal",value:"'7003'"},{name:"literal",value:"'7005'"},{name:"literal",value:"'7007'"},{name:"literal",value:"'7008'"},{name:"literal",value:"'7011'"},{name:"literal",value:"'7013'"},{name:"literal",value:"'7014'"},{name:"literal",value:"'7020'"},{name:"literal",value:"'7030'"},{name:"literal",value:"'7033'"},{name:"literal",value:"'7037'"},{name:"literal",value:"'7039'"},{name:"literal",value:"'7040'"},{name:"literal",value:"'UNDEFINED'"},{name:"literal",value:"'5009'"},{name:"literal",value:"'5019'"},{name:"literal",value:"'5020'"},{name:"literal",value:"'5021'"},{name:"literal",value:"'5022'"},{name:"literal",value:"'5023'"},{name:"literal",value:"'5024'"},{name:"literal",value:"'5025'"},{name:"literal",value:"'5032'"},{name:"literal",value:"'5036'"},{name:"literal",value:"'5042'"},{name:"literal",value:"'5044'"},{name:"literal",value:"'5045'"},{name:"literal",value:"'5048'"},{name:"literal",value:"'5050'"},{name:"literal",value:"'5053'"},{name:"literal",value:"'5056'"},{name:"literal",value:"'5067'"},{name:"literal",value:"'5069'"},{name:"literal",value:"'5070'"},{name:"literal",value:"'5075'"},{name:"literal",value:"'5078'"},{name:"literal",value:"'5079'"},{name:"literal",value:"'5080'"},{name:"literal",value:"'5081'"},{name:"literal",value:"'5083'"},{name:"literal",value:"'5087'"},{name:"literal",value:"'5088'"},{name:"literal",value:"'5090'"},{name:"literal",value:"'5093'"},{name:"literal",value:"'5094'"},{name:"literal",value:"'5097'"},{name:"literal",value:"'5098'"},{name:"literal",value:"'5099'"},{name:"literal",value:"'6007'"},{name:"literal",value:"'6012'"},{name:"literal",value:"'6013'"},{name:"literal",value:"'6068'"},{name:"literal",value:"'6070'"},{name:"literal",value:"'7004'"},{name:"literal",value:"'7006'"},{name:"literal",value:"'7009'"},{name:"literal",value:"'7015'"},{name:"literal",value:"'7016'"},{name:"literal",value:"'7017'"},{name:"literal",value:"'7018'"},{name:"literal",value:"'7019'"},{name:"literal",value:"'7021'"},{name:"literal",value:"'7022'"},{name:"literal",value:"'7023'"},{name:"literal",value:"'7024'"},{name:"literal",value:"'7025'"},{name:"literal",value:"'7026'"},{name:"literal",value:"'7027'"},{name:"literal",value:"'7028'"},{name:"literal",value:"'7029'"},{name:"literal",value:"'7032'"},{name:"literal",value:"'7034'"},{name:"literal",value:"'7035'"},{name:"literal",value:"'7036'"},{name:"literal",value:"'7038'"},{name:"literal",value:"'7041'"}],required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}},{key:"erAktivt",value:{name:"boolean",required:!0}},{key:"fristTid",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"status",value:{name:"union",raw:"'AVBR' | 'OPPR' | 'UTFO'",elements:[{name:"literal",value:"'AVBR'"},{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"}],required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"union",raw:`| 'FP_VK_1'
+| 'FP_VK_11'
+| 'FP_VK_16'
+| 'FP_VK_2'
+| 'FP_VK_2_F'
+| 'FP_VK_2_L'
+| 'FP_VK_3'
+| 'FP_VK_4'
+| 'FP_VK_5'
+| 'FP_VK_8'
+| 'FP_VK_33'
+| 'FP_VK_34'
+| 'FP_VK_21'
+| 'FP_VK_23'
+| 'FP_VK_41'
+| 'SVP_VK_1'
+| '-'`,elements:[{name:"literal",value:"'FP_VK_1'"},{name:"literal",value:"'FP_VK_11'"},{name:"literal",value:"'FP_VK_16'"},{name:"literal",value:"'FP_VK_2'"},{name:"literal",value:"'FP_VK_2_F'"},{name:"literal",value:"'FP_VK_2_L'"},{name:"literal",value:"'FP_VK_3'"},{name:"literal",value:"'FP_VK_4'"},{name:"literal",value:"'FP_VK_5'"},{name:"literal",value:"'FP_VK_8'"},{name:"literal",value:"'FP_VK_33'"},{name:"literal",value:"'FP_VK_34'"},{name:"literal",value:"'FP_VK_21'"},{name:"literal",value:"'FP_VK_23'"},{name:"literal",value:"'FP_VK_41'"},{name:"literal",value:"'SVP_VK_1'"},{name:"literal",value:"'-'"}],required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'FEIL_FAKTA'
+| 'FEIL_LOV'
+| 'SKJØNN'
+| 'UTREDNING'
+| 'SAKSFLYT'
+| 'BEGRUNNELSE'
+| '-'
+| 'ANNET'
+| 'FEIL_REGEL'`,elements:[{name:"literal",value:"'FEIL_FAKTA'"},{name:"literal",value:"'FEIL_LOV'"},{name:"literal",value:"'SKJØNN'"},{name:"literal",value:"'UTREDNING'"},{name:"literal",value:"'SAKSFLYT'"},{name:"literal",value:"'BEGRUNNELSE'"},{name:"literal",value:"'-'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'FEIL_REGEL'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>",required:!1}}]}},description:""},isSubmittable:{required:!0,tsType:{name:"boolean"},description:""}}};const UN="_selectType_1omkh_1",xN={selectType:UN},GN={ALENEOMSORG:"Rettighetstype.Aleneomsorg",BEGGE_RETT:"Rettighetstype.BeggeRett",BEGGE_RETT_EØS:"Rettighetstype.BeggeRettEØS",BARE_MOR_RETT:"Rettighetstype.BareMorRett",BARE_FAR_RETT:"Rettighetstype.BareFarRett",BARE_FAR_RETT_MOR_UFØR:"Rettighetstype.BareFarRettMorUfør"},Ec=({omsorgOgRett:e,aksjonspunkt:l,kanOverstyre:r})=>{const{submitCallback:t,alleMerknaderFraBeslutter:i,isReadOnly:u,isSubmittable:d}=Fl(),m=e.rettighetstype??void 0,f=tu({defaultValues:{rettighetstype:m,...Qn.initialValues(l)}}),p=w=>t({kode:rn.OVERSTYRING_AV_RETT_OG_OMSORG,rettighetstype:w.rettighetstype,...Qn.transformValues(w)}),h=e.relasjonsRolleType===ca.MOR?["ALENEOMSORG","BEGGE_RETT","BEGGE_RETT_EØS","BARE_MOR_RETT"]:["ALENEOMSORG","BEGGE_RETT","BEGGE_RETT_EØS","BARE_FAR_RETT","BARE_FAR_RETT_MOR_UFØR"],[R,A]=V.useState(!!l?.begrunnelse),L=!R||u||!r;return y.jsx(su,{formMethods:f,onSubmit:p,children:y.jsx(Ws,{withoutBorder:!0,merknaderFraBeslutter:i[rn.OVERSTYRING_AV_RETT_OG_OMSORG],children:y.jsxs(ma,{gap:"space-24",children:[y.jsxs(vr,{gap:"space-8",align:"start",children:[y.jsx(oS,{name:"rettighetstype",control:f.control,label:y.jsx(ce,{id:"Rettighetstype.SelectLabel"}),validate:[js],className:xN.selectType,selectValues:h.map(w=>y.jsx("option",{value:w,children:y.jsx(ce,{id:GN[w]})},w)),readOnly:L}),r&&!u&&y.jsx(sT,{onClick:()=>A(!0),erOverstyrt:R})]}),y.jsx(Qn,{control:f.control,isSubmittable:d,isReadOnly:L,hasBegrunnelse:!0,hasVurderingText:!0}),y.jsx(Cl,{isSubmittable:d,isReadOnly:L,isSubmitting:f.formState.isSubmitting,isDirty:f.formState.isDirty})]})})})};Ec.__docgenInfo={description:"",methods:[],displayName:"RettighetstypeForm",props:{omsorgOgRett:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
+  registerdata?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData;
+  relasjonsRolleType: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
+  rettighetstype?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  søknad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
+}`,signature:{properties:[{key:"manuellBehandlingResultat",value:{name:"signature",type:"object",raw:`{
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"registerdata",value:{name:"signature",type:"object",raw:`{
+  harAnnenpartEngangsstønad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartForeldrepenger: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harAnnenpartEngangsstønad",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartForeldrepenger",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"relasjonsRolleType",value:{name:"union",raw:`| 'EKTE'
+| 'BARN'
+| 'FARA'
+| 'MORA'
+| 'REPA'
+| 'MMOR'
+| 'ANPA'
+| '-'`,elements:[{name:"literal",value:"'EKTE'"},{name:"literal",value:"'BARN'"},{name:"literal",value:"'FARA'"},{name:"literal",value:"'MORA'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'MMOR'"},{name:"literal",value:"'ANPA'"},{name:"literal",value:"'-'"}],required:!0}},{key:"rettighetstype",value:{name:"union",raw:`| 'ALENEOMSORG'
+| 'BEGGE_RETT'
+| 'BEGGE_RETT_EØS'
+| 'BARE_MOR_RETT'
+| 'BARE_FAR_RETT'
+| 'BARE_FAR_RETT_MOR_UFØR'`,elements:[{name:"literal",value:"'ALENEOMSORG'"},{name:"literal",value:"'BEGGE_RETT'"},{name:"literal",value:"'BEGGE_RETT_EØS'"},{name:"literal",value:"'BARE_MOR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT_MOR_UFØR'"}],required:!1}},{key:"søknad",value:{name:"signature",type:"object",raw:`{
+  annenpartBostedsland?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  annenpartIdent?: string;
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartBostedsland",value:{name:"union",raw:`| '???'
+| 'ABW'
+| 'AFG'
+| 'AGO'
+| 'AIA'
+| 'ALA'
+| 'ALB'
+| 'AND'
+| 'ANT'
+| 'ARE'
+| 'ARG'
+| 'ARM'
+| 'ASM'
+| 'ATG'
+| 'AUS'
+| 'AUT'
+| 'AZE'
+| 'BDI'
+| 'BEL'
+| 'BEN'
+| 'BES'
+| 'BFA'
+| 'BGD'
+| 'BGR'
+| 'BHR'
+| 'BHS'
+| 'BIH'
+| 'BLM'
+| 'BLR'
+| 'BLZ'
+| 'BMU'
+| 'BOL'
+| 'BRA'
+| 'BRB'
+| 'BRN'
+| 'BTN'
+| 'BVT'
+| 'BWA'
+| 'CAF'
+| 'CAN'
+| 'CCK'
+| 'CHE'
+| 'CHL'
+| 'CHN'
+| 'CIV'
+| 'CMR'
+| 'COD'
+| 'COG'
+| 'COK'
+| 'COL'
+| 'COM'
+| 'CPV'
+| 'CRI'
+| 'CSK'
+| 'CUB'
+| 'CUW'
+| 'CXR'
+| 'CYM'
+| 'CYP'
+| 'CZE'
+| 'DDR'
+| 'DEU'
+| 'DJI'
+| 'DMA'
+| 'DNK'
+| 'DOM'
+| 'DZA'
+| 'ECU'
+| 'EGY'
+| 'ERI'
+| 'ESH'
+| 'ESP'
+| 'EST'
+| 'ETH'
+| 'FIN'
+| 'FJI'
+| 'FLK'
+| 'FRA'
+| 'FRO'
+| 'FSM'
+| 'GAB'
+| 'GBR'
+| 'GEO'
+| 'GGY'
+| 'GHA'
+| 'GIB'
+| 'GIN'
+| 'GLP'
+| 'GMB'
+| 'GNB'
+| 'GNQ'
+| 'GRC'
+| 'GRD'
+| 'GRL'
+| 'GTM'
+| 'GUF'
+| 'GUM'
+| 'GUY'
+| 'HKG'
+| 'HMD'
+| 'HND'
+| 'HRV'
+| 'HTI'
+| 'HUN'
+| 'IDN'
+| 'IMN'
+| 'IND'
+| 'IOT'
+| 'IRL'
+| 'IRN'
+| 'IRQ'
+| 'ISL'
+| 'ISR'
+| 'ITA'
+| 'JAM'
+| 'JEY'
+| 'JOR'
+| 'JPN'
+| 'KAZ'
+| 'KEN'
+| 'KGZ'
+| 'KHM'
+| 'KIR'
+| 'KNA'
+| 'KOR'
+| 'KWT'
+| 'LAO'
+| 'LBN'
+| 'LBR'
+| 'LBY'
+| 'LCA'
+| 'LIE'
+| 'LKA'
+| 'LSO'
+| 'LTU'
+| 'LUX'
+| 'LVA'
+| 'MAC'
+| 'MAF'
+| 'MAR'
+| 'MCO'
+| 'MDA'
+| 'MDG'
+| 'MDV'
+| 'MEX'
+| 'MHL'
+| 'MKD'
+| 'MLI'
+| 'MLT'
+| 'MMR'
+| 'MNE'
+| 'MNG'
+| 'MNP'
+| 'MOZ'
+| 'MRT'
+| 'MSR'
+| 'MTQ'
+| 'MUS'
+| 'MWI'
+| 'MYS'
+| 'MYT'
+| 'NAM'
+| 'NCL'
+| 'NER'
+| 'NFK'
+| 'NGA'
+| 'NIC'
+| 'NIU'
+| 'NLD'
+| 'NOR'
+| 'NPL'
+| 'NRU'
+| 'NZL'
+| 'OMN'
+| 'PAK'
+| 'PAN'
+| 'PCN'
+| 'PER'
+| 'PHL'
+| 'PLW'
+| 'PNG'
+| 'POL'
+| 'PRI'
+| 'PRK'
+| 'PRT'
+| 'PRY'
+| 'PSE'
+| 'PYF'
+| 'QAT'
+| 'REU'
+| 'ROU'
+| 'RUS'
+| 'RWA'
+| 'SAU'
+| 'SCG'
+| 'SDN'
+| 'SEN'
+| 'SGP'
+| 'SGS'
+| 'SHN'
+| 'SJM'
+| 'SLB'
+| 'SLE'
+| 'SLV'
+| 'SMR'
+| 'SOM'
+| 'SPM'
+| 'SRB'
+| 'SSD'
+| 'STP'
+| 'SUN'
+| 'SUR'
+| 'SVK'
+| 'SVN'
+| 'SWE'
+| 'SWZ'
+| 'SXM'
+| 'SYC'
+| 'SYR'
+| 'TCA'
+| 'TCD'
+| 'TGO'
+| 'THA'
+| 'TJK'
+| 'TKL'
+| 'TKM'
+| 'TLS'
+| 'TON'
+| 'TTO'
+| 'TUN'
+| 'TUR'
+| 'TUV'
+| 'TWN'
+| 'TZA'
+| 'UGA'
+| 'UKR'
+| 'UMI'
+| 'URY'
+| 'USA'
+| 'UZB'
+| 'VAT'
+| 'VCT'
+| 'VEN'
+| 'VGB'
+| 'VIR'
+| 'VNM'
+| 'VUT'
+| 'WLF'
+| 'WSM'
+| 'XUK'
+| 'XXK'
+| 'XXX'
+| 'YEM'
+| 'YUG'
+| 'ZAF'
+| 'ZMB'
+| 'ZWE'
+| '-'`,elements:[{name:"literal",value:"'???'"},{name:"literal",value:"'ABW'"},{name:"literal",value:"'AFG'"},{name:"literal",value:"'AGO'"},{name:"literal",value:"'AIA'"},{name:"literal",value:"'ALA'"},{name:"literal",value:"'ALB'"},{name:"literal",value:"'AND'"},{name:"literal",value:"'ANT'"},{name:"literal",value:"'ARE'"},{name:"literal",value:"'ARG'"},{name:"literal",value:"'ARM'"},{name:"literal",value:"'ASM'"},{name:"literal",value:"'ATG'"},{name:"literal",value:"'AUS'"},{name:"literal",value:"'AUT'"},{name:"literal",value:"'AZE'"},{name:"literal",value:"'BDI'"},{name:"literal",value:"'BEL'"},{name:"literal",value:"'BEN'"},{name:"literal",value:"'BES'"},{name:"literal",value:"'BFA'"},{name:"literal",value:"'BGD'"},{name:"literal",value:"'BGR'"},{name:"literal",value:"'BHR'"},{name:"literal",value:"'BHS'"},{name:"literal",value:"'BIH'"},{name:"literal",value:"'BLM'"},{name:"literal",value:"'BLR'"},{name:"literal",value:"'BLZ'"},{name:"literal",value:"'BMU'"},{name:"literal",value:"'BOL'"},{name:"literal",value:"'BRA'"},{name:"literal",value:"'BRB'"},{name:"literal",value:"'BRN'"},{name:"literal",value:"'BTN'"},{name:"literal",value:"'BVT'"},{name:"literal",value:"'BWA'"},{name:"literal",value:"'CAF'"},{name:"literal",value:"'CAN'"},{name:"literal",value:"'CCK'"},{name:"literal",value:"'CHE'"},{name:"literal",value:"'CHL'"},{name:"literal",value:"'CHN'"},{name:"literal",value:"'CIV'"},{name:"literal",value:"'CMR'"},{name:"literal",value:"'COD'"},{name:"literal",value:"'COG'"},{name:"literal",value:"'COK'"},{name:"literal",value:"'COL'"},{name:"literal",value:"'COM'"},{name:"literal",value:"'CPV'"},{name:"literal",value:"'CRI'"},{name:"literal",value:"'CSK'"},{name:"literal",value:"'CUB'"},{name:"literal",value:"'CUW'"},{name:"literal",value:"'CXR'"},{name:"literal",value:"'CYM'"},{name:"literal",value:"'CYP'"},{name:"literal",value:"'CZE'"},{name:"literal",value:"'DDR'"},{name:"literal",value:"'DEU'"},{name:"literal",value:"'DJI'"},{name:"literal",value:"'DMA'"},{name:"literal",value:"'DNK'"},{name:"literal",value:"'DOM'"},{name:"literal",value:"'DZA'"},{name:"literal",value:"'ECU'"},{name:"literal",value:"'EGY'"},{name:"literal",value:"'ERI'"},{name:"literal",value:"'ESH'"},{name:"literal",value:"'ESP'"},{name:"literal",value:"'EST'"},{name:"literal",value:"'ETH'"},{name:"literal",value:"'FIN'"},{name:"literal",value:"'FJI'"},{name:"literal",value:"'FLK'"},{name:"literal",value:"'FRA'"},{name:"literal",value:"'FRO'"},{name:"literal",value:"'FSM'"},{name:"literal",value:"'GAB'"},{name:"literal",value:"'GBR'"},{name:"literal",value:"'GEO'"},{name:"literal",value:"'GGY'"},{name:"literal",value:"'GHA'"},{name:"literal",value:"'GIB'"},{name:"literal",value:"'GIN'"},{name:"literal",value:"'GLP'"},{name:"literal",value:"'GMB'"},{name:"literal",value:"'GNB'"},{name:"literal",value:"'GNQ'"},{name:"literal",value:"'GRC'"},{name:"literal",value:"'GRD'"},{name:"literal",value:"'GRL'"},{name:"literal",value:"'GTM'"},{name:"literal",value:"'GUF'"},{name:"literal",value:"'GUM'"},{name:"literal",value:"'GUY'"},{name:"literal",value:"'HKG'"},{name:"literal",value:"'HMD'"},{name:"literal",value:"'HND'"},{name:"literal",value:"'HRV'"},{name:"literal",value:"'HTI'"},{name:"literal",value:"'HUN'"},{name:"literal",value:"'IDN'"},{name:"literal",value:"'IMN'"},{name:"literal",value:"'IND'"},{name:"literal",value:"'IOT'"},{name:"literal",value:"'IRL'"},{name:"literal",value:"'IRN'"},{name:"literal",value:"'IRQ'"},{name:"literal",value:"'ISL'"},{name:"literal",value:"'ISR'"},{name:"literal",value:"'ITA'"},{name:"literal",value:"'JAM'"},{name:"literal",value:"'JEY'"},{name:"literal",value:"'JOR'"},{name:"literal",value:"'JPN'"},{name:"literal",value:"'KAZ'"},{name:"literal",value:"'KEN'"},{name:"literal",value:"'KGZ'"},{name:"literal",value:"'KHM'"},{name:"literal",value:"'KIR'"},{name:"literal",value:"'KNA'"},{name:"literal",value:"'KOR'"},{name:"literal",value:"'KWT'"},{name:"literal",value:"'LAO'"},{name:"literal",value:"'LBN'"},{name:"literal",value:"'LBR'"},{name:"literal",value:"'LBY'"},{name:"literal",value:"'LCA'"},{name:"literal",value:"'LIE'"},{name:"literal",value:"'LKA'"},{name:"literal",value:"'LSO'"},{name:"literal",value:"'LTU'"},{name:"literal",value:"'LUX'"},{name:"literal",value:"'LVA'"},{name:"literal",value:"'MAC'"},{name:"literal",value:"'MAF'"},{name:"literal",value:"'MAR'"},{name:"literal",value:"'MCO'"},{name:"literal",value:"'MDA'"},{name:"literal",value:"'MDG'"},{name:"literal",value:"'MDV'"},{name:"literal",value:"'MEX'"},{name:"literal",value:"'MHL'"},{name:"literal",value:"'MKD'"},{name:"literal",value:"'MLI'"},{name:"literal",value:"'MLT'"},{name:"literal",value:"'MMR'"},{name:"literal",value:"'MNE'"},{name:"literal",value:"'MNG'"},{name:"literal",value:"'MNP'"},{name:"literal",value:"'MOZ'"},{name:"literal",value:"'MRT'"},{name:"literal",value:"'MSR'"},{name:"literal",value:"'MTQ'"},{name:"literal",value:"'MUS'"},{name:"literal",value:"'MWI'"},{name:"literal",value:"'MYS'"},{name:"literal",value:"'MYT'"},{name:"literal",value:"'NAM'"},{name:"literal",value:"'NCL'"},{name:"literal",value:"'NER'"},{name:"literal",value:"'NFK'"},{name:"literal",value:"'NGA'"},{name:"literal",value:"'NIC'"},{name:"literal",value:"'NIU'"},{name:"literal",value:"'NLD'"},{name:"literal",value:"'NOR'"},{name:"literal",value:"'NPL'"},{name:"literal",value:"'NRU'"},{name:"literal",value:"'NZL'"},{name:"literal",value:"'OMN'"},{name:"literal",value:"'PAK'"},{name:"literal",value:"'PAN'"},{name:"literal",value:"'PCN'"},{name:"literal",value:"'PER'"},{name:"literal",value:"'PHL'"},{name:"literal",value:"'PLW'"},{name:"literal",value:"'PNG'"},{name:"literal",value:"'POL'"},{name:"literal",value:"'PRI'"},{name:"literal",value:"'PRK'"},{name:"literal",value:"'PRT'"},{name:"literal",value:"'PRY'"},{name:"literal",value:"'PSE'"},{name:"literal",value:"'PYF'"},{name:"literal",value:"'QAT'"},{name:"literal",value:"'REU'"},{name:"literal",value:"'ROU'"},{name:"literal",value:"'RUS'"},{name:"literal",value:"'RWA'"},{name:"literal",value:"'SAU'"},{name:"literal",value:"'SCG'"},{name:"literal",value:"'SDN'"},{name:"literal",value:"'SEN'"},{name:"literal",value:"'SGP'"},{name:"literal",value:"'SGS'"},{name:"literal",value:"'SHN'"},{name:"literal",value:"'SJM'"},{name:"literal",value:"'SLB'"},{name:"literal",value:"'SLE'"},{name:"literal",value:"'SLV'"},{name:"literal",value:"'SMR'"},{name:"literal",value:"'SOM'"},{name:"literal",value:"'SPM'"},{name:"literal",value:"'SRB'"},{name:"literal",value:"'SSD'"},{name:"literal",value:"'STP'"},{name:"literal",value:"'SUN'"},{name:"literal",value:"'SUR'"},{name:"literal",value:"'SVK'"},{name:"literal",value:"'SVN'"},{name:"literal",value:"'SWE'"},{name:"literal",value:"'SWZ'"},{name:"literal",value:"'SXM'"},{name:"literal",value:"'SYC'"},{name:"literal",value:"'SYR'"},{name:"literal",value:"'TCA'"},{name:"literal",value:"'TCD'"},{name:"literal",value:"'TGO'"},{name:"literal",value:"'THA'"},{name:"literal",value:"'TJK'"},{name:"literal",value:"'TKL'"},{name:"literal",value:"'TKM'"},{name:"literal",value:"'TLS'"},{name:"literal",value:"'TON'"},{name:"literal",value:"'TTO'"},{name:"literal",value:"'TUN'"},{name:"literal",value:"'TUR'"},{name:"literal",value:"'TUV'"},{name:"literal",value:"'TWN'"},{name:"literal",value:"'TZA'"},{name:"literal",value:"'UGA'"},{name:"literal",value:"'UKR'"},{name:"literal",value:"'UMI'"},{name:"literal",value:"'URY'"},{name:"literal",value:"'USA'"},{name:"literal",value:"'UZB'"},{name:"literal",value:"'VAT'"},{name:"literal",value:"'VCT'"},{name:"literal",value:"'VEN'"},{name:"literal",value:"'VGB'"},{name:"literal",value:"'VIR'"},{name:"literal",value:"'VNM'"},{name:"literal",value:"'VUT'"},{name:"literal",value:"'WLF'"},{name:"literal",value:"'WSM'"},{name:"literal",value:"'XUK'"},{name:"literal",value:"'XXK'"},{name:"literal",value:"'XXX'"},{name:"literal",value:"'YEM'"},{name:"literal",value:"'YUG'"},{name:"literal",value:"'ZAF'"},{name:"literal",value:"'ZMB'"},{name:"literal",value:"'ZWE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"annenpartIdent",value:{name:"string",required:!1}},{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!0}}]}},description:""},aksjonspunkt:{required:!1,tsType:{name:"signature",type:"object",raw:`{
+  aksjonspunktType: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType;
+  begrunnelse?: string;
+  besluttersBegrunnelse?: string;
+  definisjon: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;
+  endretAv?: string;
+  endretTidspunkt?: string;
+  erAktivt: boolean;
+  fristTid?: string;
+  kanLoses: boolean;
+  status: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus;
+  toTrinnsBehandling: boolean;
+  toTrinnsBehandlingGodkjent?: boolean;
+  vilkarType?: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
+  vurderPaNyttArsaker?: Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>;
+}`,signature:{properties:[{key:"aksjonspunktType",value:{name:"union",raw:`| 'AUTO'
+| 'MANU'
+| 'OVST'
+| 'SAOV'
+| '-'`,elements:[{name:"literal",value:"'AUTO'"},{name:"literal",value:"'MANU'"},{name:"literal",value:"'OVST'"},{name:"literal",value:"'SAOV'"},{name:"literal",value:"'-'"}],required:!0}},{key:"begrunnelse",value:{name:"string",required:!1}},{key:"besluttersBegrunnelse",value:{name:"string",required:!1}},{key:"definisjon",value:{name:"union",raw:`| '5001'
+| '5027'
+| '5004'
+| '5005'
+| '5006'
+| '5007'
+| '5008'
+| '5011'
+| '5012'
+| '5013'
+| '5014'
+| '5015'
+| '5016'
+| '5017'
+| '5002'
+| '5026'
+| '5028'
+| '5030'
+| '5031'
+| '5033'
+| '5034'
+| '5003'
+| '5035'
+| '5037'
+| '5038'
+| '5039'
+| '5040'
+| '5043'
+| '5046'
+| '5047'
+| '5049'
+| '5051'
+| '5052'
+| '5054'
+| '5055'
+| '5057'
+| '5058'
+| '5059'
+| '5060'
+| '5061'
+| '5068'
+| '5064'
+| '5065'
+| '5063'
+| '5066'
+| '5071'
+| '5072'
+| '5073'
+| '5076'
+| '5077'
+| '5085'
+| '5082'
+| '5084'
+| '5029'
+| '5086'
+| '5089'
+| '5041'
+| '5062'
+| '5091'
+| '5092'
+| '5095'
+| '5096'
+| '5074'
+| '5101'
+| '5102'
+| '5103'
+| '6002'
+| '6003'
+| '6004'
+| '6005'
+| '6006'
+| '6008'
+| '6009'
+| '6010'
+| '6011'
+| '6065'
+| '6014'
+| '6015'
+| '6045'
+| '6016'
+| '6018'
+| '6019'
+| '6017'
+| '6103'
+| '7001'
+| '7002'
+| '7003'
+| '7005'
+| '7007'
+| '7008'
+| '7011'
+| '7013'
+| '7014'
+| '7020'
+| '7030'
+| '7033'
+| '7037'
+| '7039'
+| '7040'
+| 'UNDEFINED'
+| '5009'
+| '5019'
+| '5020'
+| '5021'
+| '5022'
+| '5023'
+| '5024'
+| '5025'
+| '5032'
+| '5036'
+| '5042'
+| '5044'
+| '5045'
+| '5048'
+| '5050'
+| '5053'
+| '5056'
+| '5067'
+| '5069'
+| '5070'
+| '5075'
+| '5078'
+| '5079'
+| '5080'
+| '5081'
+| '5083'
+| '5087'
+| '5088'
+| '5090'
+| '5093'
+| '5094'
+| '5097'
+| '5098'
+| '5099'
+| '6007'
+| '6012'
+| '6013'
+| '6068'
+| '6070'
+| '7004'
+| '7006'
+| '7009'
+| '7015'
+| '7016'
+| '7017'
+| '7018'
+| '7019'
+| '7021'
+| '7022'
+| '7023'
+| '7024'
+| '7025'
+| '7026'
+| '7027'
+| '7028'
+| '7029'
+| '7032'
+| '7034'
+| '7035'
+| '7036'
+| '7038'
+| '7041'`,elements:[{name:"literal",value:"'5001'"},{name:"literal",value:"'5027'"},{name:"literal",value:"'5004'"},{name:"literal",value:"'5005'"},{name:"literal",value:"'5006'"},{name:"literal",value:"'5007'"},{name:"literal",value:"'5008'"},{name:"literal",value:"'5011'"},{name:"literal",value:"'5012'"},{name:"literal",value:"'5013'"},{name:"literal",value:"'5014'"},{name:"literal",value:"'5015'"},{name:"literal",value:"'5016'"},{name:"literal",value:"'5017'"},{name:"literal",value:"'5002'"},{name:"literal",value:"'5026'"},{name:"literal",value:"'5028'"},{name:"literal",value:"'5030'"},{name:"literal",value:"'5031'"},{name:"literal",value:"'5033'"},{name:"literal",value:"'5034'"},{name:"literal",value:"'5003'"},{name:"literal",value:"'5035'"},{name:"literal",value:"'5037'"},{name:"literal",value:"'5038'"},{name:"literal",value:"'5039'"},{name:"literal",value:"'5040'"},{name:"literal",value:"'5043'"},{name:"literal",value:"'5046'"},{name:"literal",value:"'5047'"},{name:"literal",value:"'5049'"},{name:"literal",value:"'5051'"},{name:"literal",value:"'5052'"},{name:"literal",value:"'5054'"},{name:"literal",value:"'5055'"},{name:"literal",value:"'5057'"},{name:"literal",value:"'5058'"},{name:"literal",value:"'5059'"},{name:"literal",value:"'5060'"},{name:"literal",value:"'5061'"},{name:"literal",value:"'5068'"},{name:"literal",value:"'5064'"},{name:"literal",value:"'5065'"},{name:"literal",value:"'5063'"},{name:"literal",value:"'5066'"},{name:"literal",value:"'5071'"},{name:"literal",value:"'5072'"},{name:"literal",value:"'5073'"},{name:"literal",value:"'5076'"},{name:"literal",value:"'5077'"},{name:"literal",value:"'5085'"},{name:"literal",value:"'5082'"},{name:"literal",value:"'5084'"},{name:"literal",value:"'5029'"},{name:"literal",value:"'5086'"},{name:"literal",value:"'5089'"},{name:"literal",value:"'5041'"},{name:"literal",value:"'5062'"},{name:"literal",value:"'5091'"},{name:"literal",value:"'5092'"},{name:"literal",value:"'5095'"},{name:"literal",value:"'5096'"},{name:"literal",value:"'5074'"},{name:"literal",value:"'5101'"},{name:"literal",value:"'5102'"},{name:"literal",value:"'5103'"},{name:"literal",value:"'6002'"},{name:"literal",value:"'6003'"},{name:"literal",value:"'6004'"},{name:"literal",value:"'6005'"},{name:"literal",value:"'6006'"},{name:"literal",value:"'6008'"},{name:"literal",value:"'6009'"},{name:"literal",value:"'6010'"},{name:"literal",value:"'6011'"},{name:"literal",value:"'6065'"},{name:"literal",value:"'6014'"},{name:"literal",value:"'6015'"},{name:"literal",value:"'6045'"},{name:"literal",value:"'6016'"},{name:"literal",value:"'6018'"},{name:"literal",value:"'6019'"},{name:"literal",value:"'6017'"},{name:"literal",value:"'6103'"},{name:"literal",value:"'7001'"},{name:"literal",value:"'7002'"},{name:"literal",value:"'7003'"},{name:"literal",value:"'7005'"},{name:"literal",value:"'7007'"},{name:"literal",value:"'7008'"},{name:"literal",value:"'7011'"},{name:"literal",value:"'7013'"},{name:"literal",value:"'7014'"},{name:"literal",value:"'7020'"},{name:"literal",value:"'7030'"},{name:"literal",value:"'7033'"},{name:"literal",value:"'7037'"},{name:"literal",value:"'7039'"},{name:"literal",value:"'7040'"},{name:"literal",value:"'UNDEFINED'"},{name:"literal",value:"'5009'"},{name:"literal",value:"'5019'"},{name:"literal",value:"'5020'"},{name:"literal",value:"'5021'"},{name:"literal",value:"'5022'"},{name:"literal",value:"'5023'"},{name:"literal",value:"'5024'"},{name:"literal",value:"'5025'"},{name:"literal",value:"'5032'"},{name:"literal",value:"'5036'"},{name:"literal",value:"'5042'"},{name:"literal",value:"'5044'"},{name:"literal",value:"'5045'"},{name:"literal",value:"'5048'"},{name:"literal",value:"'5050'"},{name:"literal",value:"'5053'"},{name:"literal",value:"'5056'"},{name:"literal",value:"'5067'"},{name:"literal",value:"'5069'"},{name:"literal",value:"'5070'"},{name:"literal",value:"'5075'"},{name:"literal",value:"'5078'"},{name:"literal",value:"'5079'"},{name:"literal",value:"'5080'"},{name:"literal",value:"'5081'"},{name:"literal",value:"'5083'"},{name:"literal",value:"'5087'"},{name:"literal",value:"'5088'"},{name:"literal",value:"'5090'"},{name:"literal",value:"'5093'"},{name:"literal",value:"'5094'"},{name:"literal",value:"'5097'"},{name:"literal",value:"'5098'"},{name:"literal",value:"'5099'"},{name:"literal",value:"'6007'"},{name:"literal",value:"'6012'"},{name:"literal",value:"'6013'"},{name:"literal",value:"'6068'"},{name:"literal",value:"'6070'"},{name:"literal",value:"'7004'"},{name:"literal",value:"'7006'"},{name:"literal",value:"'7009'"},{name:"literal",value:"'7015'"},{name:"literal",value:"'7016'"},{name:"literal",value:"'7017'"},{name:"literal",value:"'7018'"},{name:"literal",value:"'7019'"},{name:"literal",value:"'7021'"},{name:"literal",value:"'7022'"},{name:"literal",value:"'7023'"},{name:"literal",value:"'7024'"},{name:"literal",value:"'7025'"},{name:"literal",value:"'7026'"},{name:"literal",value:"'7027'"},{name:"literal",value:"'7028'"},{name:"literal",value:"'7029'"},{name:"literal",value:"'7032'"},{name:"literal",value:"'7034'"},{name:"literal",value:"'7035'"},{name:"literal",value:"'7036'"},{name:"literal",value:"'7038'"},{name:"literal",value:"'7041'"}],required:!0}},{key:"endretAv",value:{name:"string",required:!1}},{key:"endretTidspunkt",value:{name:"string",required:!1}},{key:"erAktivt",value:{name:"boolean",required:!0}},{key:"fristTid",value:{name:"string",required:!1}},{key:"kanLoses",value:{name:"boolean",required:!0}},{key:"status",value:{name:"union",raw:"'AVBR' | 'OPPR' | 'UTFO'",elements:[{name:"literal",value:"'AVBR'"},{name:"literal",value:"'OPPR'"},{name:"literal",value:"'UTFO'"}],required:!0}},{key:"toTrinnsBehandling",value:{name:"boolean",required:!0}},{key:"toTrinnsBehandlingGodkjent",value:{name:"boolean",required:!1}},{key:"vilkarType",value:{name:"union",raw:`| 'FP_VK_1'
+| 'FP_VK_11'
+| 'FP_VK_16'
+| 'FP_VK_2'
+| 'FP_VK_2_F'
+| 'FP_VK_2_L'
+| 'FP_VK_3'
+| 'FP_VK_4'
+| 'FP_VK_5'
+| 'FP_VK_8'
+| 'FP_VK_33'
+| 'FP_VK_34'
+| 'FP_VK_21'
+| 'FP_VK_23'
+| 'FP_VK_41'
+| 'SVP_VK_1'
+| '-'`,elements:[{name:"literal",value:"'FP_VK_1'"},{name:"literal",value:"'FP_VK_11'"},{name:"literal",value:"'FP_VK_16'"},{name:"literal",value:"'FP_VK_2'"},{name:"literal",value:"'FP_VK_2_F'"},{name:"literal",value:"'FP_VK_2_L'"},{name:"literal",value:"'FP_VK_3'"},{name:"literal",value:"'FP_VK_4'"},{name:"literal",value:"'FP_VK_5'"},{name:"literal",value:"'FP_VK_8'"},{name:"literal",value:"'FP_VK_33'"},{name:"literal",value:"'FP_VK_34'"},{name:"literal",value:"'FP_VK_21'"},{name:"literal",value:"'FP_VK_23'"},{name:"literal",value:"'FP_VK_41'"},{name:"literal",value:"'SVP_VK_1'"},{name:"literal",value:"'-'"}],required:!1}},{key:"vurderPaNyttArsaker",value:{name:"Array",elements:[{name:"union",raw:`| 'FEIL_FAKTA'
+| 'FEIL_LOV'
+| 'SKJØNN'
+| 'UTREDNING'
+| 'SAKSFLYT'
+| 'BEGRUNNELSE'
+| '-'
+| 'ANNET'
+| 'FEIL_REGEL'`,elements:[{name:"literal",value:"'FEIL_FAKTA'"},{name:"literal",value:"'FEIL_LOV'"},{name:"literal",value:"'SKJØNN'"},{name:"literal",value:"'UTREDNING'"},{name:"literal",value:"'SAKSFLYT'"},{name:"literal",value:"'BEGRUNNELSE'"},{name:"literal",value:"'-'"},{name:"literal",value:"'ANNET'"},{name:"literal",value:"'FEIL_REGEL'"}]}],raw:"Array<foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak>",required:!1}}]}},description:""},kanOverstyre:{required:!0,tsType:{name:"boolean"},description:""}}};const yc=({personoversikt:e,omsorgOgRett:l,kanOverstyre:r})=>{const{alleKodeverk:t,isSubmittable:i,aksjonspunkterForPanel:u,isReadOnly:d,harÅpentAksjonspunkt:m}=Fl(),f=u.filter(N=>N.definisjon!==rn.OVERSTYRING_AV_RETT_OG_OMSORG),p=f.some(N=>N.definisjon===rn.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG&&N.status===Dr.OPPRETTET&&!l.manuellBehandlingResultat),h=f.some(N=>N.definisjon===rn.AVKLAR_ANNEN_FORELDER_RETT&&N.status===Dr.OPPRETTET&&!l.manuellBehandlingResultat),R=f.some(N=>N.definisjon===rn.AVKLAR_ANNEN_FORELDER_RETT&&l.manuellBehandlingResultat),A=f.some(N=>N.definisjon===rn.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG&&l.manuellBehandlingResultat),L=f.some(N=>N.definisjon===rn.AVKLAR_ANNEN_FORELDER_RETT),w=f.some(N=>N.definisjon===rn.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG),k=l.manuellBehandlingResultat&&!L&&!w,S=l.manuellBehandlingResultat?.søkerHarAleneomsorg??"IKKE_RELEVANT",D=u.filter(N=>N.definisjon===rn.OVERSTYRING_AV_RETT_OG_OMSORG),B=h||p;return y.jsxs(ma,{gap:"space-24",children:[!d&&m&&y.jsxs(lT,{children:[w&&y.jsx(ce,{id:"OmsorgOgRettInfoPanel.VurderOmAleneomsorg"}),L&&y.jsx(ce,{id:"OmsorgOgRettInfoPanel.VurderAndreForelderRett"}),D.length>0&&y.jsx(ce,{id:"OmsorgOgRettInfoPanel.Overstyring"})]}),!B&&l.rettighetstype&&y.jsx(mr.New,{background:"neutral-moderate",padding:"5",children:y.jsx(Ec,{omsorgOgRett:l,aksjonspunkt:D[0],kanOverstyre:r})}),y.jsx(hc,{omsorgOgRett:l,alleKodeverk:t}),y.jsx(pc,{alleKodeverk:t,personoversikt:e}),l.registerdata&&y.jsx(Lv,{omsorgOgRett:l}),(p||A)&&y.jsx(Ks,{omsorgOgRett:l,aksjonspunkt:f[0],isSubmittable:i}),(h||R)&&y.jsx(Vs,{omsorgOgRett:l,isSubmittable:i,aksjonspunkt:f[0]}),k&&S!=="IKKE_RELEVANT"&&y.jsx(Ks,{omsorgOgRett:l,isSubmittable:!1}),k&&S==="IKKE_RELEVANT"&&y.jsx(Vs,{omsorgOgRett:l,isSubmittable:!1})]})};yc.__docgenInfo={description:"",methods:[],displayName:"OmsorgOgRettInfoPanel",props:{personoversikt:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  annenPart?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+  barn: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
+  bruker: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+}`,signature:{properties:[{key:"annenPart",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}},{key:"barn",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}],raw:"Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>",required:!0}},{key:"bruker",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}}]}},description:""},omsorgOgRett:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
+  registerdata?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData;
+  relasjonsRolleType: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
+  rettighetstype?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  søknad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
+}`,signature:{properties:[{key:"manuellBehandlingResultat",value:{name:"signature",type:"object",raw:`{
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"registerdata",value:{name:"signature",type:"object",raw:`{
+  harAnnenpartEngangsstønad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartForeldrepenger: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harAnnenpartEngangsstønad",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartForeldrepenger",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"relasjonsRolleType",value:{name:"union",raw:`| 'EKTE'
+| 'BARN'
+| 'FARA'
+| 'MORA'
+| 'REPA'
+| 'MMOR'
+| 'ANPA'
+| '-'`,elements:[{name:"literal",value:"'EKTE'"},{name:"literal",value:"'BARN'"},{name:"literal",value:"'FARA'"},{name:"literal",value:"'MORA'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'MMOR'"},{name:"literal",value:"'ANPA'"},{name:"literal",value:"'-'"}],required:!0}},{key:"rettighetstype",value:{name:"union",raw:`| 'ALENEOMSORG'
+| 'BEGGE_RETT'
+| 'BEGGE_RETT_EØS'
+| 'BARE_MOR_RETT'
+| 'BARE_FAR_RETT'
+| 'BARE_FAR_RETT_MOR_UFØR'`,elements:[{name:"literal",value:"'ALENEOMSORG'"},{name:"literal",value:"'BEGGE_RETT'"},{name:"literal",value:"'BEGGE_RETT_EØS'"},{name:"literal",value:"'BARE_MOR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT_MOR_UFØR'"}],required:!1}},{key:"søknad",value:{name:"signature",type:"object",raw:`{
+  annenpartBostedsland?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  annenpartIdent?: string;
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartBostedsland",value:{name:"union",raw:`| '???'
+| 'ABW'
+| 'AFG'
+| 'AGO'
+| 'AIA'
+| 'ALA'
+| 'ALB'
+| 'AND'
+| 'ANT'
+| 'ARE'
+| 'ARG'
+| 'ARM'
+| 'ASM'
+| 'ATG'
+| 'AUS'
+| 'AUT'
+| 'AZE'
+| 'BDI'
+| 'BEL'
+| 'BEN'
+| 'BES'
+| 'BFA'
+| 'BGD'
+| 'BGR'
+| 'BHR'
+| 'BHS'
+| 'BIH'
+| 'BLM'
+| 'BLR'
+| 'BLZ'
+| 'BMU'
+| 'BOL'
+| 'BRA'
+| 'BRB'
+| 'BRN'
+| 'BTN'
+| 'BVT'
+| 'BWA'
+| 'CAF'
+| 'CAN'
+| 'CCK'
+| 'CHE'
+| 'CHL'
+| 'CHN'
+| 'CIV'
+| 'CMR'
+| 'COD'
+| 'COG'
+| 'COK'
+| 'COL'
+| 'COM'
+| 'CPV'
+| 'CRI'
+| 'CSK'
+| 'CUB'
+| 'CUW'
+| 'CXR'
+| 'CYM'
+| 'CYP'
+| 'CZE'
+| 'DDR'
+| 'DEU'
+| 'DJI'
+| 'DMA'
+| 'DNK'
+| 'DOM'
+| 'DZA'
+| 'ECU'
+| 'EGY'
+| 'ERI'
+| 'ESH'
+| 'ESP'
+| 'EST'
+| 'ETH'
+| 'FIN'
+| 'FJI'
+| 'FLK'
+| 'FRA'
+| 'FRO'
+| 'FSM'
+| 'GAB'
+| 'GBR'
+| 'GEO'
+| 'GGY'
+| 'GHA'
+| 'GIB'
+| 'GIN'
+| 'GLP'
+| 'GMB'
+| 'GNB'
+| 'GNQ'
+| 'GRC'
+| 'GRD'
+| 'GRL'
+| 'GTM'
+| 'GUF'
+| 'GUM'
+| 'GUY'
+| 'HKG'
+| 'HMD'
+| 'HND'
+| 'HRV'
+| 'HTI'
+| 'HUN'
+| 'IDN'
+| 'IMN'
+| 'IND'
+| 'IOT'
+| 'IRL'
+| 'IRN'
+| 'IRQ'
+| 'ISL'
+| 'ISR'
+| 'ITA'
+| 'JAM'
+| 'JEY'
+| 'JOR'
+| 'JPN'
+| 'KAZ'
+| 'KEN'
+| 'KGZ'
+| 'KHM'
+| 'KIR'
+| 'KNA'
+| 'KOR'
+| 'KWT'
+| 'LAO'
+| 'LBN'
+| 'LBR'
+| 'LBY'
+| 'LCA'
+| 'LIE'
+| 'LKA'
+| 'LSO'
+| 'LTU'
+| 'LUX'
+| 'LVA'
+| 'MAC'
+| 'MAF'
+| 'MAR'
+| 'MCO'
+| 'MDA'
+| 'MDG'
+| 'MDV'
+| 'MEX'
+| 'MHL'
+| 'MKD'
+| 'MLI'
+| 'MLT'
+| 'MMR'
+| 'MNE'
+| 'MNG'
+| 'MNP'
+| 'MOZ'
+| 'MRT'
+| 'MSR'
+| 'MTQ'
+| 'MUS'
+| 'MWI'
+| 'MYS'
+| 'MYT'
+| 'NAM'
+| 'NCL'
+| 'NER'
+| 'NFK'
+| 'NGA'
+| 'NIC'
+| 'NIU'
+| 'NLD'
+| 'NOR'
+| 'NPL'
+| 'NRU'
+| 'NZL'
+| 'OMN'
+| 'PAK'
+| 'PAN'
+| 'PCN'
+| 'PER'
+| 'PHL'
+| 'PLW'
+| 'PNG'
+| 'POL'
+| 'PRI'
+| 'PRK'
+| 'PRT'
+| 'PRY'
+| 'PSE'
+| 'PYF'
+| 'QAT'
+| 'REU'
+| 'ROU'
+| 'RUS'
+| 'RWA'
+| 'SAU'
+| 'SCG'
+| 'SDN'
+| 'SEN'
+| 'SGP'
+| 'SGS'
+| 'SHN'
+| 'SJM'
+| 'SLB'
+| 'SLE'
+| 'SLV'
+| 'SMR'
+| 'SOM'
+| 'SPM'
+| 'SRB'
+| 'SSD'
+| 'STP'
+| 'SUN'
+| 'SUR'
+| 'SVK'
+| 'SVN'
+| 'SWE'
+| 'SWZ'
+| 'SXM'
+| 'SYC'
+| 'SYR'
+| 'TCA'
+| 'TCD'
+| 'TGO'
+| 'THA'
+| 'TJK'
+| 'TKL'
+| 'TKM'
+| 'TLS'
+| 'TON'
+| 'TTO'
+| 'TUN'
+| 'TUR'
+| 'TUV'
+| 'TWN'
+| 'TZA'
+| 'UGA'
+| 'UKR'
+| 'UMI'
+| 'URY'
+| 'USA'
+| 'UZB'
+| 'VAT'
+| 'VCT'
+| 'VEN'
+| 'VGB'
+| 'VIR'
+| 'VNM'
+| 'VUT'
+| 'WLF'
+| 'WSM'
+| 'XUK'
+| 'XXK'
+| 'XXX'
+| 'YEM'
+| 'YUG'
+| 'ZAF'
+| 'ZMB'
+| 'ZWE'
+| '-'`,elements:[{name:"literal",value:"'???'"},{name:"literal",value:"'ABW'"},{name:"literal",value:"'AFG'"},{name:"literal",value:"'AGO'"},{name:"literal",value:"'AIA'"},{name:"literal",value:"'ALA'"},{name:"literal",value:"'ALB'"},{name:"literal",value:"'AND'"},{name:"literal",value:"'ANT'"},{name:"literal",value:"'ARE'"},{name:"literal",value:"'ARG'"},{name:"literal",value:"'ARM'"},{name:"literal",value:"'ASM'"},{name:"literal",value:"'ATG'"},{name:"literal",value:"'AUS'"},{name:"literal",value:"'AUT'"},{name:"literal",value:"'AZE'"},{name:"literal",value:"'BDI'"},{name:"literal",value:"'BEL'"},{name:"literal",value:"'BEN'"},{name:"literal",value:"'BES'"},{name:"literal",value:"'BFA'"},{name:"literal",value:"'BGD'"},{name:"literal",value:"'BGR'"},{name:"literal",value:"'BHR'"},{name:"literal",value:"'BHS'"},{name:"literal",value:"'BIH'"},{name:"literal",value:"'BLM'"},{name:"literal",value:"'BLR'"},{name:"literal",value:"'BLZ'"},{name:"literal",value:"'BMU'"},{name:"literal",value:"'BOL'"},{name:"literal",value:"'BRA'"},{name:"literal",value:"'BRB'"},{name:"literal",value:"'BRN'"},{name:"literal",value:"'BTN'"},{name:"literal",value:"'BVT'"},{name:"literal",value:"'BWA'"},{name:"literal",value:"'CAF'"},{name:"literal",value:"'CAN'"},{name:"literal",value:"'CCK'"},{name:"literal",value:"'CHE'"},{name:"literal",value:"'CHL'"},{name:"literal",value:"'CHN'"},{name:"literal",value:"'CIV'"},{name:"literal",value:"'CMR'"},{name:"literal",value:"'COD'"},{name:"literal",value:"'COG'"},{name:"literal",value:"'COK'"},{name:"literal",value:"'COL'"},{name:"literal",value:"'COM'"},{name:"literal",value:"'CPV'"},{name:"literal",value:"'CRI'"},{name:"literal",value:"'CSK'"},{name:"literal",value:"'CUB'"},{name:"literal",value:"'CUW'"},{name:"literal",value:"'CXR'"},{name:"literal",value:"'CYM'"},{name:"literal",value:"'CYP'"},{name:"literal",value:"'CZE'"},{name:"literal",value:"'DDR'"},{name:"literal",value:"'DEU'"},{name:"literal",value:"'DJI'"},{name:"literal",value:"'DMA'"},{name:"literal",value:"'DNK'"},{name:"literal",value:"'DOM'"},{name:"literal",value:"'DZA'"},{name:"literal",value:"'ECU'"},{name:"literal",value:"'EGY'"},{name:"literal",value:"'ERI'"},{name:"literal",value:"'ESH'"},{name:"literal",value:"'ESP'"},{name:"literal",value:"'EST'"},{name:"literal",value:"'ETH'"},{name:"literal",value:"'FIN'"},{name:"literal",value:"'FJI'"},{name:"literal",value:"'FLK'"},{name:"literal",value:"'FRA'"},{name:"literal",value:"'FRO'"},{name:"literal",value:"'FSM'"},{name:"literal",value:"'GAB'"},{name:"literal",value:"'GBR'"},{name:"literal",value:"'GEO'"},{name:"literal",value:"'GGY'"},{name:"literal",value:"'GHA'"},{name:"literal",value:"'GIB'"},{name:"literal",value:"'GIN'"},{name:"literal",value:"'GLP'"},{name:"literal",value:"'GMB'"},{name:"literal",value:"'GNB'"},{name:"literal",value:"'GNQ'"},{name:"literal",value:"'GRC'"},{name:"literal",value:"'GRD'"},{name:"literal",value:"'GRL'"},{name:"literal",value:"'GTM'"},{name:"literal",value:"'GUF'"},{name:"literal",value:"'GUM'"},{name:"literal",value:"'GUY'"},{name:"literal",value:"'HKG'"},{name:"literal",value:"'HMD'"},{name:"literal",value:"'HND'"},{name:"literal",value:"'HRV'"},{name:"literal",value:"'HTI'"},{name:"literal",value:"'HUN'"},{name:"literal",value:"'IDN'"},{name:"literal",value:"'IMN'"},{name:"literal",value:"'IND'"},{name:"literal",value:"'IOT'"},{name:"literal",value:"'IRL'"},{name:"literal",value:"'IRN'"},{name:"literal",value:"'IRQ'"},{name:"literal",value:"'ISL'"},{name:"literal",value:"'ISR'"},{name:"literal",value:"'ITA'"},{name:"literal",value:"'JAM'"},{name:"literal",value:"'JEY'"},{name:"literal",value:"'JOR'"},{name:"literal",value:"'JPN'"},{name:"literal",value:"'KAZ'"},{name:"literal",value:"'KEN'"},{name:"literal",value:"'KGZ'"},{name:"literal",value:"'KHM'"},{name:"literal",value:"'KIR'"},{name:"literal",value:"'KNA'"},{name:"literal",value:"'KOR'"},{name:"literal",value:"'KWT'"},{name:"literal",value:"'LAO'"},{name:"literal",value:"'LBN'"},{name:"literal",value:"'LBR'"},{name:"literal",value:"'LBY'"},{name:"literal",value:"'LCA'"},{name:"literal",value:"'LIE'"},{name:"literal",value:"'LKA'"},{name:"literal",value:"'LSO'"},{name:"literal",value:"'LTU'"},{name:"literal",value:"'LUX'"},{name:"literal",value:"'LVA'"},{name:"literal",value:"'MAC'"},{name:"literal",value:"'MAF'"},{name:"literal",value:"'MAR'"},{name:"literal",value:"'MCO'"},{name:"literal",value:"'MDA'"},{name:"literal",value:"'MDG'"},{name:"literal",value:"'MDV'"},{name:"literal",value:"'MEX'"},{name:"literal",value:"'MHL'"},{name:"literal",value:"'MKD'"},{name:"literal",value:"'MLI'"},{name:"literal",value:"'MLT'"},{name:"literal",value:"'MMR'"},{name:"literal",value:"'MNE'"},{name:"literal",value:"'MNG'"},{name:"literal",value:"'MNP'"},{name:"literal",value:"'MOZ'"},{name:"literal",value:"'MRT'"},{name:"literal",value:"'MSR'"},{name:"literal",value:"'MTQ'"},{name:"literal",value:"'MUS'"},{name:"literal",value:"'MWI'"},{name:"literal",value:"'MYS'"},{name:"literal",value:"'MYT'"},{name:"literal",value:"'NAM'"},{name:"literal",value:"'NCL'"},{name:"literal",value:"'NER'"},{name:"literal",value:"'NFK'"},{name:"literal",value:"'NGA'"},{name:"literal",value:"'NIC'"},{name:"literal",value:"'NIU'"},{name:"literal",value:"'NLD'"},{name:"literal",value:"'NOR'"},{name:"literal",value:"'NPL'"},{name:"literal",value:"'NRU'"},{name:"literal",value:"'NZL'"},{name:"literal",value:"'OMN'"},{name:"literal",value:"'PAK'"},{name:"literal",value:"'PAN'"},{name:"literal",value:"'PCN'"},{name:"literal",value:"'PER'"},{name:"literal",value:"'PHL'"},{name:"literal",value:"'PLW'"},{name:"literal",value:"'PNG'"},{name:"literal",value:"'POL'"},{name:"literal",value:"'PRI'"},{name:"literal",value:"'PRK'"},{name:"literal",value:"'PRT'"},{name:"literal",value:"'PRY'"},{name:"literal",value:"'PSE'"},{name:"literal",value:"'PYF'"},{name:"literal",value:"'QAT'"},{name:"literal",value:"'REU'"},{name:"literal",value:"'ROU'"},{name:"literal",value:"'RUS'"},{name:"literal",value:"'RWA'"},{name:"literal",value:"'SAU'"},{name:"literal",value:"'SCG'"},{name:"literal",value:"'SDN'"},{name:"literal",value:"'SEN'"},{name:"literal",value:"'SGP'"},{name:"literal",value:"'SGS'"},{name:"literal",value:"'SHN'"},{name:"literal",value:"'SJM'"},{name:"literal",value:"'SLB'"},{name:"literal",value:"'SLE'"},{name:"literal",value:"'SLV'"},{name:"literal",value:"'SMR'"},{name:"literal",value:"'SOM'"},{name:"literal",value:"'SPM'"},{name:"literal",value:"'SRB'"},{name:"literal",value:"'SSD'"},{name:"literal",value:"'STP'"},{name:"literal",value:"'SUN'"},{name:"literal",value:"'SUR'"},{name:"literal",value:"'SVK'"},{name:"literal",value:"'SVN'"},{name:"literal",value:"'SWE'"},{name:"literal",value:"'SWZ'"},{name:"literal",value:"'SXM'"},{name:"literal",value:"'SYC'"},{name:"literal",value:"'SYR'"},{name:"literal",value:"'TCA'"},{name:"literal",value:"'TCD'"},{name:"literal",value:"'TGO'"},{name:"literal",value:"'THA'"},{name:"literal",value:"'TJK'"},{name:"literal",value:"'TKL'"},{name:"literal",value:"'TKM'"},{name:"literal",value:"'TLS'"},{name:"literal",value:"'TON'"},{name:"literal",value:"'TTO'"},{name:"literal",value:"'TUN'"},{name:"literal",value:"'TUR'"},{name:"literal",value:"'TUV'"},{name:"literal",value:"'TWN'"},{name:"literal",value:"'TZA'"},{name:"literal",value:"'UGA'"},{name:"literal",value:"'UKR'"},{name:"literal",value:"'UMI'"},{name:"literal",value:"'URY'"},{name:"literal",value:"'USA'"},{name:"literal",value:"'UZB'"},{name:"literal",value:"'VAT'"},{name:"literal",value:"'VCT'"},{name:"literal",value:"'VEN'"},{name:"literal",value:"'VGB'"},{name:"literal",value:"'VIR'"},{name:"literal",value:"'VNM'"},{name:"literal",value:"'VUT'"},{name:"literal",value:"'WLF'"},{name:"literal",value:"'WSM'"},{name:"literal",value:"'XUK'"},{name:"literal",value:"'XXK'"},{name:"literal",value:"'XXX'"},{name:"literal",value:"'YEM'"},{name:"literal",value:"'YUG'"},{name:"literal",value:"'ZAF'"},{name:"literal",value:"'ZMB'"},{name:"literal",value:"'ZWE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"annenpartIdent",value:{name:"string",required:!1}},{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!0}}]}},description:""},kanOverstyre:{required:!0,tsType:{name:"boolean"},description:""}}};const CN={"OmsorgOgRettInfoPanel.VurderOmAleneomsorg":"Vurder om søker har aleneomsorg for barnet.","OmsorgOgRettInfoPanel.VurderAndreForelderRett":"Vurder om den andre forelderen har rett til foreldrepenger.","OmsorgOgRettInfoPanel.Overstyring":"Vurder overstyrt rettigshetstype.","AleneomsorgForm.Aleneomsorg":"Søker har oppgitt å ha aleneomsorg for barnet","AleneomsorgForm.HarAleneomsorg":"Søker har aleneomsorg for barnet","AleneomsorgForm.HarIkkeAleneomsorg":"Søker har <b>ikke</b> aleneomsorg for barnet","HarAnnenForelderRettFelter.HarAnnenForelderRett":"Har annen forelder rett til foreldrepenger i Norge?","HarAnnenForelderRettFelter.MottarUforetrygd":"Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?","HarAnnenForelderRettFelter.AnnenForelderRettEØS":"Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?","OpplysningsKort.OpplysningerFraSøknadTittel":"Opplysninger fra søknad","OpplysningsKort.AdresseTittel":"Adresser til søker({adresseCountSoker}){adresseCountAnnenpart, select, none {} other {, annen part({adresseCountAnnenpart})}}{adresseCountBarn, select, none {} other {, barn({adresseCountBarn})}}","OpplysningsKort.AnnenPartTittel":"Annen parts ytelser","OpplysningerFraSøknad.Spørsmål":"Spørsmål","OpplysningerFraSøknad.Svar":"Svar","OpplysningerFraSøknad.Fødselsnummer":"Den andre forelderens fødselsnummer","OpplysningerFraSøknad.Fødselsnummer.Svar":"{fnr}","OpplysningerFraSøknad.Bostedsland":"Den andre forelderens bostedsland","OpplysningerFraSøknad.Bostedsland.Svar":"{bostedsland}","OpplysningerFraSøknad.HarSøkerAleneOmsorg":"Har søker aleneomsorg for barnet?","OpplysningerFraSøknad.HarSøkerAleneOmsorg.Svar":"{aleneOmsorg, select, JA {Ja} other {Nei}}","OpplysningerFraSøknad.HarAnnenForelderRett.Svar":"{iNorge, select, JA {Ja} other {Nei}}","OpplysningerFraSøknad.HarOppholdIEØS":"Har den andre forelderen oppholdt seg fast i et annet EØS-land enn Norge ett år før barnet ble født?","OpplysningerFraSøknad.HarOppholdIEØS.Svar":"{oppholdEØS, select, JA {Ja} other {Nei}}","OpplysningerFraSøknad.HarRettEØS":"Har den andre forelderen rett til pengestøtte i et annet EØS-land som tilsvarer foreldrepenger i Norge?","OpplysningerFraSøknad.HarRettEØS.Svar":"{rettEØS, select, JA {Ja} other {Nei}}","OpplysningerFraSøknad.HarUføretrygd":"Har den andre forelderen uføretrygd?","OpplysningerFraSøknad.HarUføretrygd.Svar":"{uføretrygd, select, JA {Ja} other {Nei}}","AnnenPartsYtelser.HarAnnenPartUføretrygd":"Har annen part uføretrygd? (hentet fra pesys)","AnnenPartsYtelser.HarAnnenPartUføretrygd.Svar":"{uføretrygd, select, JA {Ja} other {Nei}}","AnnenPartsYtelser.Foreldrepenger":"Er annen part innvilget foreldrepenger?","AnnenPartsYtelser.Foreldrepenger.Svar":"{foreldrepenger, select, JA {Ja} other {Nei}}","AnnenPartsYtelser.Engangsstønad":"Er annen part innvilget engangsstønad?","AnnenPartsYtelser.Engangsstønad.Svar":"{engangsstønad, select, JA {Ja} other {Nei}}","Rettighetstype.Tittel":"Overstyr rettighetstype","Rettighetstype.Aleneomsorg":"Aleneomsorg","Rettighetstype.BeggeRett":"Begge rett","Rettighetstype.BeggeRettEØS":"Begge rett EØS","Rettighetstype.BareMorRett":"Bare mor rett","Rettighetstype.BareFarRett":"Bare far/medmor rett","Rettighetstype.BareFarRettMorUfør":"Bare far/medmor rett, mor er ufør","Rettighetstype.SelectLabel":"Rettighetstype"},jN=va(CN),Us=e=>y.jsx(Bl,{value:jN,children:y.jsx(yc,{...e})});Us.__docgenInfo={description:"",methods:[],displayName:"OmsorgOgRettFaktaIndex",props:{personoversikt:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  annenPart?: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+  barn: Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>;
+  bruker: tjenester_behandling_personopplysning_PersonopplysningBasisDto;
+}`,signature:{properties:[{key:"annenPart",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}},{key:"barn",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}],raw:"Array<tjenester_behandling_personopplysning_PersonopplysningBasisDto>",required:!0}},{key:"bruker",value:{name:"signature",type:"object",raw:`{
+  adresser: Array<tjenester_behandling_personopplysning_PersonadresseDto>;
+  aktoerId?: string;
+  diskresjonskode?: foreldrepenger_behandlingslager_behandling_personopplysning_Diskresjonskode;
+  dødsdato?: string;
+  fnr?: string;
+  fødselsdato: string;
+  kjønn: foreldrepenger_behandlingslager_aktør_NavBrukerKjønn;
+  navn?: string;
+  sivilstand: foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;
+}`,signature:{properties:[{key:"adresser",value:{name:"Array",elements:[{name:"signature",type:"object",raw:`{
+  adresseType?: foreldrepenger_behandlingslager_aktør_AdresseType;
+  adresselinje1?: string;
+  adresselinje2?: string;
+  adresselinje3?: string;
+  fom: string;
+  land?: string;
+  postNummer?: string;
+  poststed?: string;
+  tom: string;
+}`,signature:{properties:[{key:"adresseType",value:{name:"union",raw:`| 'BOSTEDSADRESSE'
+| 'BOSTEDSADRESSE_UTLAND'
+| 'POSTADRESSE'
+| 'POSTADRESSE_UTLAND'
+| 'MIDLERTIDIG_POSTADRESSE_NORGE'
+| 'MIDLERTIDIG_POSTADRESSE_UTLAND'
+| 'UKJENT_ADRESSE'`,elements:[{name:"literal",value:"'BOSTEDSADRESSE'"},{name:"literal",value:"'BOSTEDSADRESSE_UTLAND'"},{name:"literal",value:"'POSTADRESSE'"},{name:"literal",value:"'POSTADRESSE_UTLAND'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_NORGE'"},{name:"literal",value:"'MIDLERTIDIG_POSTADRESSE_UTLAND'"},{name:"literal",value:"'UKJENT_ADRESSE'"}],required:!1}},{key:"adresselinje1",value:{name:"string",required:!1}},{key:"adresselinje2",value:{name:"string",required:!1}},{key:"adresselinje3",value:{name:"string",required:!1}},{key:"fom",value:{name:"string",required:!0}},{key:"land",value:{name:"string",required:!1}},{key:"postNummer",value:{name:"string",required:!1}},{key:"poststed",value:{name:"string",required:!1}},{key:"tom",value:{name:"string",required:!0}}]}}],raw:"Array<tjenester_behandling_personopplysning_PersonadresseDto>",required:!0}},{key:"aktoerId",value:{name:"string",required:!1}},{key:"diskresjonskode",value:{name:"union",raw:"'UDEF' | 'SPSF' | 'SPFO'",elements:[{name:"literal",value:"'UDEF'"},{name:"literal",value:"'SPSF'"},{name:"literal",value:"'SPFO'"}],required:!1}},{key:"dødsdato",value:{name:"string",required:!1}},{key:"fnr",value:{name:"string",required:!1}},{key:"fødselsdato",value:{name:"string",required:!0}},{key:"kjønn",value:{name:"union",raw:"'K' | 'M' | '-'",elements:[{name:"literal",value:"'K'"},{name:"literal",value:"'M'"},{name:"literal",value:"'-'"}],required:!0}},{key:"navn",value:{name:"string",required:!1}},{key:"sivilstand",value:{name:"union",raw:`| 'ENKE'
+| 'GIFT'
+| 'GJPA'
+| 'GLAD'
+| 'NULL'
+| 'REPA'
+| 'SAMB'
+| 'SEPA'
+| 'SEPR'
+| 'SKIL'
+| 'SKPA'
+| 'UGIF'`,elements:[{name:"literal",value:"'ENKE'"},{name:"literal",value:"'GIFT'"},{name:"literal",value:"'GJPA'"},{name:"literal",value:"'GLAD'"},{name:"literal",value:"'NULL'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'SAMB'"},{name:"literal",value:"'SEPA'"},{name:"literal",value:"'SEPR'"},{name:"literal",value:"'SKIL'"},{name:"literal",value:"'SKPA'"},{name:"literal",value:"'UGIF'"}],required:!0}}]},required:!0}}]}},description:""},omsorgOgRett:{required:!0,tsType:{name:"signature",type:"object",raw:`{
+  manuellBehandlingResultat?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_ManuellBehandlingResultat;
+  registerdata?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_RegisterData;
+  relasjonsRolleType: foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;
+  rettighetstype?: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  søknad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Søknad;
+}`,signature:{properties:[{key:"manuellBehandlingResultat",value:{name:"signature",type:"object",raw:`{
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"registerdata",value:{name:"signature",type:"object",raw:`{
+  harAnnenpartEngangsstønad: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartForeldrepenger: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harAnnenpartUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harAnnenpartEngangsstønad",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartForeldrepenger",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harAnnenpartUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"relasjonsRolleType",value:{name:"union",raw:`| 'EKTE'
+| 'BARN'
+| 'FARA'
+| 'MORA'
+| 'REPA'
+| 'MMOR'
+| 'ANPA'
+| '-'`,elements:[{name:"literal",value:"'EKTE'"},{name:"literal",value:"'BARN'"},{name:"literal",value:"'FARA'"},{name:"literal",value:"'MORA'"},{name:"literal",value:"'REPA'"},{name:"literal",value:"'MMOR'"},{name:"literal",value:"'ANPA'"},{name:"literal",value:"'-'"}],required:!0}},{key:"rettighetstype",value:{name:"union",raw:`| 'ALENEOMSORG'
+| 'BEGGE_RETT'
+| 'BEGGE_RETT_EØS'
+| 'BARE_MOR_RETT'
+| 'BARE_FAR_RETT'
+| 'BARE_FAR_RETT_MOR_UFØR'`,elements:[{name:"literal",value:"'ALENEOMSORG'"},{name:"literal",value:"'BEGGE_RETT'"},{name:"literal",value:"'BEGGE_RETT_EØS'"},{name:"literal",value:"'BARE_MOR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT'"},{name:"literal",value:"'BARE_FAR_RETT_MOR_UFØR'"}],required:!1}},{key:"søknad",value:{name:"signature",type:"object",raw:`{
+  annenpartBostedsland?: foreldrepenger_behandlingslager_geografisk_Landkoder;
+  annenpartIdent?: string;
+  annenpartRettighet?: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Rettighet;
+  søkerHarAleneomsorg: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"annenpartBostedsland",value:{name:"union",raw:`| '???'
+| 'ABW'
+| 'AFG'
+| 'AGO'
+| 'AIA'
+| 'ALA'
+| 'ALB'
+| 'AND'
+| 'ANT'
+| 'ARE'
+| 'ARG'
+| 'ARM'
+| 'ASM'
+| 'ATG'
+| 'AUS'
+| 'AUT'
+| 'AZE'
+| 'BDI'
+| 'BEL'
+| 'BEN'
+| 'BES'
+| 'BFA'
+| 'BGD'
+| 'BGR'
+| 'BHR'
+| 'BHS'
+| 'BIH'
+| 'BLM'
+| 'BLR'
+| 'BLZ'
+| 'BMU'
+| 'BOL'
+| 'BRA'
+| 'BRB'
+| 'BRN'
+| 'BTN'
+| 'BVT'
+| 'BWA'
+| 'CAF'
+| 'CAN'
+| 'CCK'
+| 'CHE'
+| 'CHL'
+| 'CHN'
+| 'CIV'
+| 'CMR'
+| 'COD'
+| 'COG'
+| 'COK'
+| 'COL'
+| 'COM'
+| 'CPV'
+| 'CRI'
+| 'CSK'
+| 'CUB'
+| 'CUW'
+| 'CXR'
+| 'CYM'
+| 'CYP'
+| 'CZE'
+| 'DDR'
+| 'DEU'
+| 'DJI'
+| 'DMA'
+| 'DNK'
+| 'DOM'
+| 'DZA'
+| 'ECU'
+| 'EGY'
+| 'ERI'
+| 'ESH'
+| 'ESP'
+| 'EST'
+| 'ETH'
+| 'FIN'
+| 'FJI'
+| 'FLK'
+| 'FRA'
+| 'FRO'
+| 'FSM'
+| 'GAB'
+| 'GBR'
+| 'GEO'
+| 'GGY'
+| 'GHA'
+| 'GIB'
+| 'GIN'
+| 'GLP'
+| 'GMB'
+| 'GNB'
+| 'GNQ'
+| 'GRC'
+| 'GRD'
+| 'GRL'
+| 'GTM'
+| 'GUF'
+| 'GUM'
+| 'GUY'
+| 'HKG'
+| 'HMD'
+| 'HND'
+| 'HRV'
+| 'HTI'
+| 'HUN'
+| 'IDN'
+| 'IMN'
+| 'IND'
+| 'IOT'
+| 'IRL'
+| 'IRN'
+| 'IRQ'
+| 'ISL'
+| 'ISR'
+| 'ITA'
+| 'JAM'
+| 'JEY'
+| 'JOR'
+| 'JPN'
+| 'KAZ'
+| 'KEN'
+| 'KGZ'
+| 'KHM'
+| 'KIR'
+| 'KNA'
+| 'KOR'
+| 'KWT'
+| 'LAO'
+| 'LBN'
+| 'LBR'
+| 'LBY'
+| 'LCA'
+| 'LIE'
+| 'LKA'
+| 'LSO'
+| 'LTU'
+| 'LUX'
+| 'LVA'
+| 'MAC'
+| 'MAF'
+| 'MAR'
+| 'MCO'
+| 'MDA'
+| 'MDG'
+| 'MDV'
+| 'MEX'
+| 'MHL'
+| 'MKD'
+| 'MLI'
+| 'MLT'
+| 'MMR'
+| 'MNE'
+| 'MNG'
+| 'MNP'
+| 'MOZ'
+| 'MRT'
+| 'MSR'
+| 'MTQ'
+| 'MUS'
+| 'MWI'
+| 'MYS'
+| 'MYT'
+| 'NAM'
+| 'NCL'
+| 'NER'
+| 'NFK'
+| 'NGA'
+| 'NIC'
+| 'NIU'
+| 'NLD'
+| 'NOR'
+| 'NPL'
+| 'NRU'
+| 'NZL'
+| 'OMN'
+| 'PAK'
+| 'PAN'
+| 'PCN'
+| 'PER'
+| 'PHL'
+| 'PLW'
+| 'PNG'
+| 'POL'
+| 'PRI'
+| 'PRK'
+| 'PRT'
+| 'PRY'
+| 'PSE'
+| 'PYF'
+| 'QAT'
+| 'REU'
+| 'ROU'
+| 'RUS'
+| 'RWA'
+| 'SAU'
+| 'SCG'
+| 'SDN'
+| 'SEN'
+| 'SGP'
+| 'SGS'
+| 'SHN'
+| 'SJM'
+| 'SLB'
+| 'SLE'
+| 'SLV'
+| 'SMR'
+| 'SOM'
+| 'SPM'
+| 'SRB'
+| 'SSD'
+| 'STP'
+| 'SUN'
+| 'SUR'
+| 'SVK'
+| 'SVN'
+| 'SWE'
+| 'SWZ'
+| 'SXM'
+| 'SYC'
+| 'SYR'
+| 'TCA'
+| 'TCD'
+| 'TGO'
+| 'THA'
+| 'TJK'
+| 'TKL'
+| 'TKM'
+| 'TLS'
+| 'TON'
+| 'TTO'
+| 'TUN'
+| 'TUR'
+| 'TUV'
+| 'TWN'
+| 'TZA'
+| 'UGA'
+| 'UKR'
+| 'UMI'
+| 'URY'
+| 'USA'
+| 'UZB'
+| 'VAT'
+| 'VCT'
+| 'VEN'
+| 'VGB'
+| 'VIR'
+| 'VNM'
+| 'VUT'
+| 'WLF'
+| 'WSM'
+| 'XUK'
+| 'XXK'
+| 'XXX'
+| 'YEM'
+| 'YUG'
+| 'ZAF'
+| 'ZMB'
+| 'ZWE'
+| '-'`,elements:[{name:"literal",value:"'???'"},{name:"literal",value:"'ABW'"},{name:"literal",value:"'AFG'"},{name:"literal",value:"'AGO'"},{name:"literal",value:"'AIA'"},{name:"literal",value:"'ALA'"},{name:"literal",value:"'ALB'"},{name:"literal",value:"'AND'"},{name:"literal",value:"'ANT'"},{name:"literal",value:"'ARE'"},{name:"literal",value:"'ARG'"},{name:"literal",value:"'ARM'"},{name:"literal",value:"'ASM'"},{name:"literal",value:"'ATG'"},{name:"literal",value:"'AUS'"},{name:"literal",value:"'AUT'"},{name:"literal",value:"'AZE'"},{name:"literal",value:"'BDI'"},{name:"literal",value:"'BEL'"},{name:"literal",value:"'BEN'"},{name:"literal",value:"'BES'"},{name:"literal",value:"'BFA'"},{name:"literal",value:"'BGD'"},{name:"literal",value:"'BGR'"},{name:"literal",value:"'BHR'"},{name:"literal",value:"'BHS'"},{name:"literal",value:"'BIH'"},{name:"literal",value:"'BLM'"},{name:"literal",value:"'BLR'"},{name:"literal",value:"'BLZ'"},{name:"literal",value:"'BMU'"},{name:"literal",value:"'BOL'"},{name:"literal",value:"'BRA'"},{name:"literal",value:"'BRB'"},{name:"literal",value:"'BRN'"},{name:"literal",value:"'BTN'"},{name:"literal",value:"'BVT'"},{name:"literal",value:"'BWA'"},{name:"literal",value:"'CAF'"},{name:"literal",value:"'CAN'"},{name:"literal",value:"'CCK'"},{name:"literal",value:"'CHE'"},{name:"literal",value:"'CHL'"},{name:"literal",value:"'CHN'"},{name:"literal",value:"'CIV'"},{name:"literal",value:"'CMR'"},{name:"literal",value:"'COD'"},{name:"literal",value:"'COG'"},{name:"literal",value:"'COK'"},{name:"literal",value:"'COL'"},{name:"literal",value:"'COM'"},{name:"literal",value:"'CPV'"},{name:"literal",value:"'CRI'"},{name:"literal",value:"'CSK'"},{name:"literal",value:"'CUB'"},{name:"literal",value:"'CUW'"},{name:"literal",value:"'CXR'"},{name:"literal",value:"'CYM'"},{name:"literal",value:"'CYP'"},{name:"literal",value:"'CZE'"},{name:"literal",value:"'DDR'"},{name:"literal",value:"'DEU'"},{name:"literal",value:"'DJI'"},{name:"literal",value:"'DMA'"},{name:"literal",value:"'DNK'"},{name:"literal",value:"'DOM'"},{name:"literal",value:"'DZA'"},{name:"literal",value:"'ECU'"},{name:"literal",value:"'EGY'"},{name:"literal",value:"'ERI'"},{name:"literal",value:"'ESH'"},{name:"literal",value:"'ESP'"},{name:"literal",value:"'EST'"},{name:"literal",value:"'ETH'"},{name:"literal",value:"'FIN'"},{name:"literal",value:"'FJI'"},{name:"literal",value:"'FLK'"},{name:"literal",value:"'FRA'"},{name:"literal",value:"'FRO'"},{name:"literal",value:"'FSM'"},{name:"literal",value:"'GAB'"},{name:"literal",value:"'GBR'"},{name:"literal",value:"'GEO'"},{name:"literal",value:"'GGY'"},{name:"literal",value:"'GHA'"},{name:"literal",value:"'GIB'"},{name:"literal",value:"'GIN'"},{name:"literal",value:"'GLP'"},{name:"literal",value:"'GMB'"},{name:"literal",value:"'GNB'"},{name:"literal",value:"'GNQ'"},{name:"literal",value:"'GRC'"},{name:"literal",value:"'GRD'"},{name:"literal",value:"'GRL'"},{name:"literal",value:"'GTM'"},{name:"literal",value:"'GUF'"},{name:"literal",value:"'GUM'"},{name:"literal",value:"'GUY'"},{name:"literal",value:"'HKG'"},{name:"literal",value:"'HMD'"},{name:"literal",value:"'HND'"},{name:"literal",value:"'HRV'"},{name:"literal",value:"'HTI'"},{name:"literal",value:"'HUN'"},{name:"literal",value:"'IDN'"},{name:"literal",value:"'IMN'"},{name:"literal",value:"'IND'"},{name:"literal",value:"'IOT'"},{name:"literal",value:"'IRL'"},{name:"literal",value:"'IRN'"},{name:"literal",value:"'IRQ'"},{name:"literal",value:"'ISL'"},{name:"literal",value:"'ISR'"},{name:"literal",value:"'ITA'"},{name:"literal",value:"'JAM'"},{name:"literal",value:"'JEY'"},{name:"literal",value:"'JOR'"},{name:"literal",value:"'JPN'"},{name:"literal",value:"'KAZ'"},{name:"literal",value:"'KEN'"},{name:"literal",value:"'KGZ'"},{name:"literal",value:"'KHM'"},{name:"literal",value:"'KIR'"},{name:"literal",value:"'KNA'"},{name:"literal",value:"'KOR'"},{name:"literal",value:"'KWT'"},{name:"literal",value:"'LAO'"},{name:"literal",value:"'LBN'"},{name:"literal",value:"'LBR'"},{name:"literal",value:"'LBY'"},{name:"literal",value:"'LCA'"},{name:"literal",value:"'LIE'"},{name:"literal",value:"'LKA'"},{name:"literal",value:"'LSO'"},{name:"literal",value:"'LTU'"},{name:"literal",value:"'LUX'"},{name:"literal",value:"'LVA'"},{name:"literal",value:"'MAC'"},{name:"literal",value:"'MAF'"},{name:"literal",value:"'MAR'"},{name:"literal",value:"'MCO'"},{name:"literal",value:"'MDA'"},{name:"literal",value:"'MDG'"},{name:"literal",value:"'MDV'"},{name:"literal",value:"'MEX'"},{name:"literal",value:"'MHL'"},{name:"literal",value:"'MKD'"},{name:"literal",value:"'MLI'"},{name:"literal",value:"'MLT'"},{name:"literal",value:"'MMR'"},{name:"literal",value:"'MNE'"},{name:"literal",value:"'MNG'"},{name:"literal",value:"'MNP'"},{name:"literal",value:"'MOZ'"},{name:"literal",value:"'MRT'"},{name:"literal",value:"'MSR'"},{name:"literal",value:"'MTQ'"},{name:"literal",value:"'MUS'"},{name:"literal",value:"'MWI'"},{name:"literal",value:"'MYS'"},{name:"literal",value:"'MYT'"},{name:"literal",value:"'NAM'"},{name:"literal",value:"'NCL'"},{name:"literal",value:"'NER'"},{name:"literal",value:"'NFK'"},{name:"literal",value:"'NGA'"},{name:"literal",value:"'NIC'"},{name:"literal",value:"'NIU'"},{name:"literal",value:"'NLD'"},{name:"literal",value:"'NOR'"},{name:"literal",value:"'NPL'"},{name:"literal",value:"'NRU'"},{name:"literal",value:"'NZL'"},{name:"literal",value:"'OMN'"},{name:"literal",value:"'PAK'"},{name:"literal",value:"'PAN'"},{name:"literal",value:"'PCN'"},{name:"literal",value:"'PER'"},{name:"literal",value:"'PHL'"},{name:"literal",value:"'PLW'"},{name:"literal",value:"'PNG'"},{name:"literal",value:"'POL'"},{name:"literal",value:"'PRI'"},{name:"literal",value:"'PRK'"},{name:"literal",value:"'PRT'"},{name:"literal",value:"'PRY'"},{name:"literal",value:"'PSE'"},{name:"literal",value:"'PYF'"},{name:"literal",value:"'QAT'"},{name:"literal",value:"'REU'"},{name:"literal",value:"'ROU'"},{name:"literal",value:"'RUS'"},{name:"literal",value:"'RWA'"},{name:"literal",value:"'SAU'"},{name:"literal",value:"'SCG'"},{name:"literal",value:"'SDN'"},{name:"literal",value:"'SEN'"},{name:"literal",value:"'SGP'"},{name:"literal",value:"'SGS'"},{name:"literal",value:"'SHN'"},{name:"literal",value:"'SJM'"},{name:"literal",value:"'SLB'"},{name:"literal",value:"'SLE'"},{name:"literal",value:"'SLV'"},{name:"literal",value:"'SMR'"},{name:"literal",value:"'SOM'"},{name:"literal",value:"'SPM'"},{name:"literal",value:"'SRB'"},{name:"literal",value:"'SSD'"},{name:"literal",value:"'STP'"},{name:"literal",value:"'SUN'"},{name:"literal",value:"'SUR'"},{name:"literal",value:"'SVK'"},{name:"literal",value:"'SVN'"},{name:"literal",value:"'SWE'"},{name:"literal",value:"'SWZ'"},{name:"literal",value:"'SXM'"},{name:"literal",value:"'SYC'"},{name:"literal",value:"'SYR'"},{name:"literal",value:"'TCA'"},{name:"literal",value:"'TCD'"},{name:"literal",value:"'TGO'"},{name:"literal",value:"'THA'"},{name:"literal",value:"'TJK'"},{name:"literal",value:"'TKL'"},{name:"literal",value:"'TKM'"},{name:"literal",value:"'TLS'"},{name:"literal",value:"'TON'"},{name:"literal",value:"'TTO'"},{name:"literal",value:"'TUN'"},{name:"literal",value:"'TUR'"},{name:"literal",value:"'TUV'"},{name:"literal",value:"'TWN'"},{name:"literal",value:"'TZA'"},{name:"literal",value:"'UGA'"},{name:"literal",value:"'UKR'"},{name:"literal",value:"'UMI'"},{name:"literal",value:"'URY'"},{name:"literal",value:"'USA'"},{name:"literal",value:"'UZB'"},{name:"literal",value:"'VAT'"},{name:"literal",value:"'VCT'"},{name:"literal",value:"'VEN'"},{name:"literal",value:"'VGB'"},{name:"literal",value:"'VIR'"},{name:"literal",value:"'VNM'"},{name:"literal",value:"'VUT'"},{name:"literal",value:"'WLF'"},{name:"literal",value:"'WSM'"},{name:"literal",value:"'XUK'"},{name:"literal",value:"'XXK'"},{name:"literal",value:"'XXX'"},{name:"literal",value:"'YEM'"},{name:"literal",value:"'YUG'"},{name:"literal",value:"'ZAF'"},{name:"literal",value:"'ZMB'"},{name:"literal",value:"'ZWE'"},{name:"literal",value:"'-'"}],required:!1}},{key:"annenpartIdent",value:{name:"string",required:!1}},{key:"annenpartRettighet",value:{name:"signature",type:"object",raw:`{
+  harOppholdEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettEØS: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harRettNorge: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+  harUføretrygd: tjenester_behandling_ytelsefordeling_OmsorgOgRettDto_Verdi;
+}`,signature:{properties:[{key:"harOppholdEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettEØS",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harRettNorge",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}},{key:"harUføretrygd",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!1}},{key:"søkerHarAleneomsorg",value:{name:"union",raw:"'JA' | 'NEI' | 'IKKE_RELEVANT'",elements:[{name:"literal",value:"'JA'"},{name:"literal",value:"'NEI'"},{name:"literal",value:"'IKKE_RELEVANT'"}],required:!0}}]},required:!0}}]}},description:""},kanOverstyre:{required:!0,tsType:{name:"boolean"},description:""}}};const _c={fom:"2023-01-01",tom:gs,adresseType:Hs.BOSTEDSADRESSE,adresselinje1:"Industrigata 2B",postNummer:"4123",poststed:"Bobygda",land:"Norge"},cu={fom:"2019-01-01",tom:"2023-01-01",adresseType:Hs.BOSTEDSADRESSE,adresselinje1:"Veigata 1",postNummer:"0203",poststed:"Bobygda",land:"Norge"},Ac={navn:"Espen Utvikler",aktoerId:"1",kjønn:wr.MANN,sivilstand:Kl.SAMBOER,fødselsdato:"1989-01-01",adresser:[_c,cu]},Rc={navn:"Petra Utvikler",aktoerId:"2",kjønn:wr.KVINNE,sivilstand:Kl.SAMBOER,fødselsdato:"1989-01-01",adresser:[_c,cu]},xs={navn:"Tutta Utvikler",fødselsdato:"2018-01-01",adresser:[cu],aktoerId:"3",kjønn:wr.KVINNE,sivilstand:Kl.UGIFT},HN={søknad:{søkerHarAleneomsorg:"NEI",annenpartIdent:"ArubaFnr123",annenpartBostedsland:fv.ARUBA,annenpartRettighet:{harRettNorge:"JA",harOppholdEØS:"IKKE_RELEVANT",harRettEØS:"IKKE_RELEVANT",harUføretrygd:"IKKE_RELEVANT"}},registerdata:{harAnnenpartUføretrygd:"IKKE_RELEVANT",harAnnenpartForeldrepenger:"NEI",harAnnenpartEngangsstønad:"NEI"},relasjonsRolleType:ca.FAR,rettighetstype:"BEGGE_RETT"},qN={søknad:{søkerHarAleneomsorg:"JA"},relasjonsRolleType:ca.MOR,rettighetstype:"ALENEOMSORG"},ZN={title:"fakta/fakta-omsorg-og-rett",component:Us,decorators:[o_,d_],args:{personoversikt:{barn:[xs],annenPart:Rc,bruker:Ac},omsorgOgRett:{...HN,relasjonsRolleType:ca.FAR}},render:e=>y.jsx(Us,{...e})},_l={args:{aksjonspunkterForPanel:[{definisjon:rn.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,status:Dr.OPPRETTET,kanLoses:!0}],omsorgOgRett:qN,kanOverstyre:!1}},Al={args:{aksjonspunkterForPanel:[{definisjon:rn.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,status:Dr.OPPRETTET,kanLoses:!0}],personoversikt:{barn:[xs,{...xs,navn:"Petter Tester",fødselsdato:"2018-01-01",aktoerId:"4",kjønn:wr.MANN}],annenPart:Rc,bruker:Ac},kanOverstyre:!1}},Rl={args:{aksjonspunkterForPanel:[{definisjon:rn.AVKLAR_ANNEN_FORELDER_RETT,status:Dr.OPPRETTET,kanLoses:!0}],omsorgOgRett:{søknad:{søkerHarAleneomsorg:"NEI",annenpartRettighet:{harRettNorge:"JA",harOppholdEØS:"IKKE_RELEVANT",harRettEØS:"IKKE_RELEVANT",harUføretrygd:"IKKE_RELEVANT"}},registerdata:{harAnnenpartUføretrygd:"IKKE_RELEVANT",harAnnenpartForeldrepenger:"NEI",harAnnenpartEngangsstønad:"NEI"},relasjonsRolleType:ca.FAR,rettighetstype:"BEGGE_RETT"},kanOverstyre:!1}},Tl={args:{aksjonspunkterForPanel:[{definisjon:rn.AVKLAR_ANNEN_FORELDER_RETT,status:Dr.UTFORT,begrunnelse:"Mor har ikke rett og er uføretrygded i pesys.",kanLoses:!1}],isReadOnly:!0,omsorgOgRett:{søknad:{søkerHarAleneomsorg:"NEI",annenpartRettighet:{harRettNorge:"NEI",harOppholdEØS:"IKKE_RELEVANT",harRettEØS:"IKKE_RELEVANT",harUføretrygd:"JA"}},registerdata:{harAnnenpartUføretrygd:"JA",harAnnenpartForeldrepenger:"NEI",harAnnenpartEngangsstønad:"NEI"},manuellBehandlingResultat:{søkerHarAleneomsorg:"IKKE_RELEVANT",annenpartRettighet:{harRettNorge:"NEI",harOppholdEØS:"IKKE_RELEVANT",harRettEØS:"IKKE_RELEVANT",harUføretrygd:"IKKE_RELEVANT"}},relasjonsRolleType:ca.FAR,rettighetstype:"BARE_FAR_RETT_MOR_UFØR"},kanOverstyre:!1}},Sl={args:{isReadOnly:!1,omsorgOgRett:{søknad:{søkerHarAleneomsorg:"NEI",annenpartRettighet:{harRettNorge:"NEI",harOppholdEØS:"JA",harRettEØS:"NEI",harUføretrygd:"IKKE_RELEVANT"}},registerdata:{harAnnenpartUføretrygd:"NEI",harAnnenpartForeldrepenger:"NEI",harAnnenpartEngangsstønad:"NEI"},manuellBehandlingResultat:{søkerHarAleneomsorg:"IKKE_RELEVANT",annenpartRettighet:{harRettNorge:"NEI",harOppholdEØS:"IKKE_RELEVANT",harRettEØS:"NEI",harUføretrygd:"JA"}},relasjonsRolleType:ca.MEDMOR,rettighetstype:"BARE_FAR_RETT_MOR_UFØR"},kanOverstyre:!1}},Ol={args:{aksjonspunkterForPanel:[],isReadOnly:!1,omsorgOgRett:{søknad:{søkerHarAleneomsorg:"NEI",annenpartRettighet:{harRettNorge:"JA",harOppholdEØS:"IKKE_RELEVANT",harRettEØS:"IKKE_RELEVANT",harUføretrygd:"IKKE_RELEVANT"}},registerdata:{harAnnenpartUføretrygd:"NEI",harAnnenpartForeldrepenger:"NEI",harAnnenpartEngangsstønad:"NEI"},relasjonsRolleType:ca.MOR,rettighetstype:"BEGGE_RETT"},kanOverstyre:!0}},Nl={args:{aksjonspunkterForPanel:[],isReadOnly:!1,omsorgOgRett:{søknad:{søkerHarAleneomsorg:"NEI",annenpartRettighet:{harRettNorge:"JA",harOppholdEØS:"IKKE_RELEVANT",harRettEØS:"IKKE_RELEVANT",harUføretrygd:"IKKE_RELEVANT"}},registerdata:{harAnnenpartUføretrygd:"NEI",harAnnenpartForeldrepenger:"NEI",harAnnenpartEngangsstønad:"NEI"},manuellBehandlingResultat:{søkerHarAleneomsorg:"IKKE_RELEVANT",annenpartRettighet:{harRettNorge:"NEI",harOppholdEØS:"NEI",harRettEØS:"NEI",harUføretrygd:"NEI"}},relasjonsRolleType:ca.FAR,rettighetstype:"BARE_FAR_RETT"},kanOverstyre:!0}};_l.parameters={..._l.parameters,docs:{..._l.parameters?.docs,source:{originalSource:`{
+  args: {
+    aksjonspunkterForPanel: [{
+      definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      status: AksjonspunktStatus.OPPRETTET,
+      kanLoses: true
+    }] as Aksjonspunkt[],
+    omsorgOgRett: aleneOmsorgForOmsorgOgRett,
+    kanOverstyre: false
+  }
+}`,..._l.parameters?.docs?.source}}};Al.parameters={...Al.parameters,docs:{...Al.parameters?.docs,source:{originalSource:`{
+  args: {
+    aksjonspunkterForPanel: [{
+      definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      status: AksjonspunktStatus.OPPRETTET,
+      kanLoses: true
+    }] as Aksjonspunkt[],
+    personoversikt: {
+      barn: [defaultBarn, {
+        ...defaultBarn,
+        navn: 'Petter Tester',
+        fødselsdato: '2018-01-01',
+        aktoerId: '4',
+        kjønn: KjønnkodeEnum.MANN
+      }],
+      annenPart: defaultAnnenPart,
+      bruker: defaultBruker
+    },
+    kanOverstyre: false
+  }
+}`,...Al.parameters?.docs?.source}}};Rl.parameters={...Rl.parameters,docs:{...Rl.parameters?.docs,source:{originalSource:`{
+  args: {
+    aksjonspunkterForPanel: [{
+      definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+      status: AksjonspunktStatus.OPPRETTET,
+      kanLoses: true
+    }] as Aksjonspunkt[],
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: 'NEI',
+        annenpartRettighet: {
+          harRettNorge: 'JA',
+          harOppholdEØS: 'IKKE_RELEVANT',
+          harRettEØS: 'IKKE_RELEVANT',
+          harUføretrygd: 'IKKE_RELEVANT'
+        }
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: 'IKKE_RELEVANT',
+        harAnnenpartForeldrepenger: 'NEI',
+        harAnnenpartEngangsstønad: 'NEI'
+      },
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+      rettighetstype: 'BEGGE_RETT'
+    },
+    kanOverstyre: false
+  }
+}`,...Rl.parameters?.docs?.source}}};Tl.parameters={...Tl.parameters,docs:{...Tl.parameters?.docs,source:{originalSource:`{
+  args: {
+    aksjonspunkterForPanel: [{
+      definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+      status: AksjonspunktStatus.UTFORT,
+      begrunnelse: 'Mor har ikke rett og er uføretrygded i pesys.',
+      kanLoses: false
+    }] as Aksjonspunkt[],
+    isReadOnly: true,
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: 'NEI',
+        annenpartRettighet: {
+          harRettNorge: 'NEI',
+          harOppholdEØS: 'IKKE_RELEVANT',
+          harRettEØS: 'IKKE_RELEVANT',
+          harUføretrygd: 'JA'
+        }
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: 'JA',
+        harAnnenpartForeldrepenger: 'NEI',
+        harAnnenpartEngangsstønad: 'NEI'
+      },
+      manuellBehandlingResultat: {
+        søkerHarAleneomsorg: 'IKKE_RELEVANT',
+        annenpartRettighet: {
+          harRettNorge: 'NEI',
+          harOppholdEØS: 'IKKE_RELEVANT',
+          harRettEØS: 'IKKE_RELEVANT',
+          harUføretrygd: 'IKKE_RELEVANT'
+        }
+      },
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+      rettighetstype: 'BARE_FAR_RETT_MOR_UFØR'
+    },
+    kanOverstyre: false
+  }
+}`,...Tl.parameters?.docs?.source}}};Sl.parameters={...Sl.parameters,docs:{...Sl.parameters?.docs,source:{originalSource:`{
+  args: {
+    isReadOnly: false,
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: 'NEI',
+        annenpartRettighet: {
+          harRettNorge: 'NEI',
+          harOppholdEØS: 'JA',
+          harRettEØS: 'NEI',
+          harUføretrygd: 'IKKE_RELEVANT'
+        }
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: 'NEI',
+        harAnnenpartForeldrepenger: 'NEI',
+        harAnnenpartEngangsstønad: 'NEI'
+      },
+      manuellBehandlingResultat: {
+        søkerHarAleneomsorg: 'IKKE_RELEVANT',
+        annenpartRettighet: {
+          harRettNorge: 'NEI',
+          harOppholdEØS: 'IKKE_RELEVANT',
+          harRettEØS: 'NEI',
+          harUføretrygd: 'JA'
+        }
+      },
+      relasjonsRolleType: RelasjonsRolleType.MEDMOR,
+      rettighetstype: 'BARE_FAR_RETT_MOR_UFØR'
+    },
+    kanOverstyre: false
+  }
+}`,...Sl.parameters?.docs?.source}}};Ol.parameters={...Ol.parameters,docs:{...Ol.parameters?.docs,source:{originalSource:`{
+  args: {
+    aksjonspunkterForPanel: [] as Aksjonspunkt[],
+    isReadOnly: false,
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: 'NEI',
+        annenpartRettighet: {
+          harRettNorge: 'JA',
+          harOppholdEØS: 'IKKE_RELEVANT',
+          harRettEØS: 'IKKE_RELEVANT',
+          harUføretrygd: 'IKKE_RELEVANT'
+        }
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: 'NEI',
+        harAnnenpartForeldrepenger: 'NEI',
+        harAnnenpartEngangsstønad: 'NEI'
+      },
+      relasjonsRolleType: RelasjonsRolleType.MOR,
+      rettighetstype: 'BEGGE_RETT'
+    },
+    kanOverstyre: true
+  }
+}`,...Ol.parameters?.docs?.source}}};Nl.parameters={...Nl.parameters,docs:{...Nl.parameters?.docs,source:{originalSource:`{
+  args: {
+    aksjonspunkterForPanel: [] as Aksjonspunkt[],
+    isReadOnly: false,
+    omsorgOgRett: {
+      søknad: {
+        søkerHarAleneomsorg: 'NEI',
+        annenpartRettighet: {
+          harRettNorge: 'JA',
+          harOppholdEØS: 'IKKE_RELEVANT',
+          harRettEØS: 'IKKE_RELEVANT',
+          harUføretrygd: 'IKKE_RELEVANT'
+        }
+      },
+      registerdata: {
+        harAnnenpartUføretrygd: 'NEI',
+        harAnnenpartForeldrepenger: 'NEI',
+        harAnnenpartEngangsstønad: 'NEI'
+      },
+      manuellBehandlingResultat: {
+        søkerHarAleneomsorg: 'IKKE_RELEVANT',
+        annenpartRettighet: {
+          harRettNorge: 'NEI',
+          harOppholdEØS: 'NEI',
+          harRettEØS: 'NEI',
+          harUføretrygd: 'NEI'
+        }
+      },
+      relasjonsRolleType: RelasjonsRolleType.FAR,
+      rettighetstype: 'BARE_FAR_RETT'
+    },
+    kanOverstyre: true
+  }
+}`,...Nl.parameters?.docs?.source}}};const zN=["HarAksjonspunktForAvklarAleneomsorg","HarAksjonspunktForAvklarAleneomsorgMedFlereBarn","HarAksjonspunktForAvklarAnnenForelderRett","AvklarAnnenForelderRettBareFarRett","RevurderingManuell","KanOverstyreMor","KanOverstyreFarOgAlleredeLøstAP"];export{Tl as AvklarAnnenForelderRettBareFarRett,_l as HarAksjonspunktForAvklarAleneomsorg,Al as HarAksjonspunktForAvklarAleneomsorgMedFlereBarn,Rl as HarAksjonspunktForAvklarAnnenForelderRett,Nl as KanOverstyreFarOgAlleredeLøstAP,Ol as KanOverstyreMor,Sl as RevurderingManuell,zN as __namedExportsOrder,ZN as default};
