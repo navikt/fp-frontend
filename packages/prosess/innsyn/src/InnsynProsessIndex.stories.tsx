@@ -6,7 +6,6 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   AksjonspunktType,
-  BehandlingTypeEnum,
   InnsynResultatType,
   Kommunikasjonsretning,
   VilkarType,
@@ -64,7 +63,7 @@ export const PanelForVurderingAvInnsyn: Story = {
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-          tittel: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+          tittel: 'BT-002',
           opprettetDato: '2019-01-01',
         },
       ],
@@ -93,7 +92,7 @@ export const InnsynSattPaVent: Story = {
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-          tittel: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+          tittel: 'BT-002',
           opprettetDato: '2019-01-01',
         },
       ],

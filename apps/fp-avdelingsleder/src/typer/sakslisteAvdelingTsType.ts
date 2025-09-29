@@ -1,3 +1,5 @@
+import type { BehandlingType } from '@navikt/fp-kodeverk';
+
 type AnnetKriterie = Readonly<{
   andreKriterierType: string;
   inkluder: boolean;
@@ -6,7 +8,7 @@ type AnnetKriterie = Readonly<{
 export type SakslisteAvdeling = Readonly<{
   sakslisteId: number;
   navn?: string;
-  behandlingTyper?: string[];
+  behandlingTyper?: BehandlingType[];
   fagsakYtelseTyper?: string[];
   sortering?: {
     sorteringType: string;

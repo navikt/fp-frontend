@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingTypeEnum, KøSortering, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, KøSortering, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -23,7 +23,7 @@ const SAKSLISTER = [
       til: 4,
       erDynamiskPeriode: true,
     },
-    behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD],
+    behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
     andreKriterier: [
       {
@@ -48,7 +48,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     personnummer: '3433434434',
     navn: 'Sara Sahara',
     system: 'SAK',
-    behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingstype: 'BT-002',
     opprettetTidspunkt: '2024-11-01',
     behandlingsfrist: '2024-11-01',
     fagsakYtelseType: 'FP',
@@ -66,7 +66,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     personnummer: '53343423232',
     navn: 'Petter Utvikler',
     system: 'SAK',
-    behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingstype: 'BT-002',
     opprettetTidspunkt: '2024-01-01',
     behandlingsfrist: '2024-01-01',
     fagsakYtelseType: 'FP',
@@ -84,7 +84,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     personnummer: '34343535423',
     navn: 'Helga Tester',
     system: 'SAK',
-    behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingstype: 'BT-002',
     opprettetTidspunkt: '2023-04-01',
     behandlingsfrist: '2023-04-05',
     fagsakYtelseType: 'FP',
@@ -112,7 +112,7 @@ const RESERVERTE_OPPGAVER = [
     personnummer: '5434231232',
     navn: 'Espen Utvikler',
     system: 'SAK',
-    behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingstype: 'BT-002',
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
     fagsakYtelseType: 'FP',

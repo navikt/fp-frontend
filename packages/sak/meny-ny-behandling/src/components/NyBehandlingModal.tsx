@@ -6,7 +6,7 @@ import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { BehandlingArsakTypeEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { BehandlingArsakTypeEnum } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
@@ -66,14 +66,14 @@ const getBehandlingAarsaker = (
   alleRevurderingArsaker?: KodeverkMedNavn<'BehandlingÅrsakType'>[],
   alleTilbakekrevingRevurderingArsaker?: KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[],
 ): KodeverkMedNavn<'BehandlingÅrsakType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[] => {
-  if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
+  if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === 'BT-009') {
     return TilbakekrevingRevurderingArsaker.flatMap(ar => {
       const arsak = alleTilbakekrevingRevurderingArsaker.find(el => el.kode === ar);
       return arsak ? [arsak] : [];
     });
   }
 
-  if (alleRevurderingArsaker && valgtBehandlingType === BehandlingTypeEnum.REVURDERING) {
+  if (alleRevurderingArsaker && valgtBehandlingType === 'BT-004') {
     const isForeldrepenger = ytelseType === 'FP';
     const isSvangerskap = ytelseType === 'SVP';
     let manuelleRevurderingsArsaker = isForeldrepenger ? manuelleRevurderingsArsakerFP : manuelleRevurderingsArsakerES;
@@ -101,10 +101,10 @@ const getEnabledBehandlingstyper = (
   },
 ) =>
   behandlingstyper.filter(bt => {
-    if (bt.kode === BehandlingTypeEnum.TILBAKEKREVING) {
+    if (bt.kode === 'BT-007') {
       return kanTilbakekrevingOpprettes.kanBehandlingOpprettes;
     }
-    if (bt.kode === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
+    if (bt.kode === 'BT-009') {
       return kanTilbakekrevingOpprettes.kanRevurderingOpprettes;
     }
     return behandlingOppretting.some(bo => bo.behandlingType === bt.kode && bo.kanOppretteBehandling);
@@ -207,7 +207,7 @@ export const NyBehandlingModal = ({
               selectValues={behandlingTyper.map(bt => createOptions(bt, enabledBehandlingstyper))}
               className={styles['typeBredde']}
             />
-            {valgtBehandlingTypeKode === BehandlingTypeEnum.FORSTEGANGSSOKNAD && (
+            {valgtBehandlingTypeKode === 'BT-002' && (
               <RhfCheckbox
                 name="nyBehandlingEtterKlage"
                 control={formMethods.control}

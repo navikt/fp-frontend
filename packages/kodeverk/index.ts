@@ -28,7 +28,7 @@ export {
 } from './src/behandlingResultatType';
 export { BehandlingResultatTypeTilbakekreving } from './src/behandlingResultatTypeTilbakekreving';
 export { type BehandlingStatus, BehandlingStatusEnum } from './src/behandlingStatus';
-export { type BehandlingType, BehandlingTypeEnum } from './src/behandlingType';
+export { type BehandlingType } from './src/behandlingType';
 export { BeregningsgrunnlagAndeltype } from './src/beregningsgrunnlagAndeltyper';
 export { Dekningsgrad } from './src/dekningsgrad';
 export { DiskresjonskodeType } from './src/diskresjonskodeType';

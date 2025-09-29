@@ -1,32 +1,25 @@
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { type BehandlingType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { type BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
-const behandlingstypeOrder = [
-  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
-  BehandlingTypeEnum.TILBAKEKREVING,
-  BehandlingTypeEnum.DOKUMENTINNSYN,
-  BehandlingTypeEnum.KLAGE,
-  BehandlingTypeEnum.REVURDERING,
-  BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-];
+const behandlingstypeOrder = ['BT-009', 'BT-007', 'BT-006', 'BT-003', 'BT-004', 'BT-002'] satisfies BehandlingType[];
 
 const behandlingstypeFarger = {
-  [BehandlingTypeEnum.TILBAKEKREVING_REVURDERING]: '#ef5d28',
-  [BehandlingTypeEnum.TILBAKEKREVING]: '#ff842f',
-  [BehandlingTypeEnum.DOKUMENTINNSYN]: '#ffd23b',
-  [BehandlingTypeEnum.KLAGE]: '#826ba1',
-  [BehandlingTypeEnum.REVURDERING]: '#3385d1',
-  [BehandlingTypeEnum.FORSTEGANGSSOKNAD]: '#85d5f0',
-  [BehandlingTypeEnum.ANKE]: '#85d5f0',
+  ['BT-009']: '#ef5d28',
+  ['BT-007']: '#ff842f',
+  ['BT-006']: '#ffd23b',
+  ['BT-003']: '#826ba1',
+  ['BT-004']: '#3385d1',
+  ['BT-002']: '#85d5f0',
+  ['BT-008']: '#85d5f0',
   '-': '#85d5f0', // Eksisterer for TS: burde ikke inntreffe
 };
 
 export interface OppgaveForDatoGraf {
-  behandlingType: string;
+  behandlingType: BehandlingType;
   opprettetDato: string;
   antall: number;
 }
@@ -146,22 +139,18 @@ const finnBehandlingTypeNavn = (
 const konverterTilKoordinaterGruppertPaBehandlingstype = (
   oppgaverForAvdeling: OppgaveForDatoGraf[],
 ): Record<string, Koordinat[]> =>
-  oppgaverForAvdeling.reduce(
-    (acc, o) => {
-      const nyKoordinat = {
-        x: dayjs(o.opprettetDato).startOf('day').toDate(),
-        y: o.antall,
-      };
+  oppgaverForAvdeling.reduce<Partial<Record<BehandlingType, Koordinat[]>>>((acc, o) => {
+    const nyKoordinat = {
+      x: dayjs(o.opprettetDato).startOf('day').toDate(),
+      y: o.antall,
+    };
 
-      const eksisterendeKoordinater = acc[o.behandlingType];
-      return {
-        ...acc,
-
-        [o.behandlingType]: eksisterendeKoordinater ? eksisterendeKoordinater.concat(nyKoordinat) : [nyKoordinat],
-      };
-    },
-    {} as Record<string, Koordinat[]>,
-  );
+    const eksisterendeKoordinater = acc[o.behandlingType];
+    return {
+      ...acc,
+      [o.behandlingType]: eksisterendeKoordinater ? eksisterendeKoordinater.concat(nyKoordinat) : [nyKoordinat],
+    };
+  }, {});
 
 const fyllInnManglendeDatoerOgSorterEtterDato = (
   data: Record<BehandlingType, Koordinat[]>,

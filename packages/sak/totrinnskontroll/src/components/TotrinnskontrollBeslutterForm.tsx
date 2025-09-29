@@ -7,7 +7,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { BehandlingTypeEnum, KonsekvensForYtelsenEnum, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
+import { KonsekvensForYtelsenEnum, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
@@ -113,8 +113,8 @@ export const TotrinnskontrollBeslutterForm = ({
   beslutterFormData,
   setBeslutterFormData,
 }: Props) => {
-  const erKlage = behandling.type === BehandlingTypeEnum.KLAGE;
-  const erAnke = behandling.type === BehandlingTypeEnum.ANKE;
+  const erKlage = behandling.type === 'BT-003';
+  const erAnke = behandling.type === 'BT-008';
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
     [KonsekvensForYtelsenEnum.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsenEnum.INGEN_ENDRING],
     behandling.behandlingsresultat,

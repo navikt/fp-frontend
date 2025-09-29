@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, KodeverkType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -14,9 +13,7 @@ export const useKodeverk = (behandlingType?: string): AlleKodeverk | AlleKodever
   const { data: alleKodeverkFpSak } = useQuery(api.kodeverkOptions());
   const { data: alleKodeverkFpTilbake } = useQuery(api.fptilbake.kodeverkOptions());
 
-  const erTilbakekreving =
-    BehandlingTypeEnum.TILBAKEKREVING === behandlingType ||
-    BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandlingType;
+  const erTilbakekreving = 'BT-007' === behandlingType || 'BT-009' === behandlingType;
   return notEmpty(erTilbakekreving ? alleKodeverkFpTilbake : alleKodeverkFpSak);
 };
 

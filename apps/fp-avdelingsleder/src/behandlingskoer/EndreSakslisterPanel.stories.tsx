@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { AndreKriterierType, BehandlingTypeEnum, KøSortering } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../data/fplosAvdelingslederApi';
@@ -25,7 +25,7 @@ const SAKSLISTER = [
       til: 4,
       erDynamiskPeriode: true,
     },
-    behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD],
+    behandlingTyper: ['BT-002'],
     fagsakYtelseTyper: ['FP'],
     andreKriterier: [
       {

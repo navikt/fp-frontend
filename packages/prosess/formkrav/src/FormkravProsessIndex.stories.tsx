@@ -3,24 +3,20 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  BehandlingTypeEnum,
-  KlageVurdering as klageVurderingCodes,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, KlageVurdering as klageVurderingCodes } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
 import { FormkravProsessIndex } from './FormkravProsessIndex';
+import type { AvsluttetBehandling } from './types/avsluttetBehandlingTsType';
 import type { FormkravMellomlagretDataType } from './types/FormkravMellomlagretDataType';
 
 const avsluttedeBehandlinger = [
   {
     uuid: '1',
-    type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    type: 'BT-002',
     avsluttet: '2017-08-02T00:54:25.455',
-  },
+  } satisfies AvsluttetBehandling,
 ];
 
 const meta = {

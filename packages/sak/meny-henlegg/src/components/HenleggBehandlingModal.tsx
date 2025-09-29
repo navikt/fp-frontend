@@ -11,7 +11,6 @@ import {
   BehandlingResultatType,
   BehandlingResultatTypeTilbakekreving,
   type BehandlingType,
-  BehandlingTypeEnum,
   DokumentMalType,
   type FagsakYtelseType,
 } from '@navikt/fp-kodeverk';
@@ -32,29 +31,20 @@ export type ForhåndsvisHenleggParams = {
 };
 
 const henleggArsakerPerBehandlingType = {
-  [BehandlingTypeEnum.KLAGE]: [
-    BehandlingResultatType.HENLAGT_KLAGE_TRUKKET,
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET,
-  ],
-  [BehandlingTypeEnum.ANKE]: [
-    BehandlingResultatType.HENLAGT_ANKE_TRUKKET,
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET,
-  ],
-  [BehandlingTypeEnum.DOKUMENTINNSYN]: [
-    BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET,
-  ],
-  [BehandlingTypeEnum.TILBAKEKREVING]: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
-  [BehandlingTypeEnum.TILBAKEKREVING_REVURDERING]: [
+  ['BT-003']: [BehandlingResultatType.HENLAGT_KLAGE_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
+  ['BT-008']: [BehandlingResultatType.HENLAGT_ANKE_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
+  ['BT-006']: [BehandlingResultatType.HENLAGT_INNSYN_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
+  ['BT-007']: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
+  ['BT-009']: [
     BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_MED_BREV,
     BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_UTEN_BREV,
   ],
-  [BehandlingTypeEnum.REVURDERING]: [
+  ['BT-004']: [
     BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
     BehandlingResultatType.HENLAGT_FEILOPPRETTET,
     BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
   ],
-  [BehandlingTypeEnum.FORSTEGANGSSOKNAD]: [
+  ['BT-002']: [
     BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
     BehandlingResultatType.HENLAGT_FEILOPPRETTET,
     BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
@@ -197,8 +187,7 @@ const forhåndsvisHenleggBehandlingDoc =
   };
 
 const showHenleggelseFritekst = (behandlingTypeKode: string, årsakKode?: string): boolean =>
-  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandlingTypeKode &&
-  BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === årsakKode;
+  'BT-009' === behandlingTypeKode && BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === årsakKode;
 
 const disableHovedKnapp = (
   behandlingTypeKode: BehandlingType,
@@ -213,10 +202,10 @@ const disableHovedKnapp = (
 };
 
 const getShowLink = (behandlingType: BehandlingType, arsakKode?: string, fritekst?: string): boolean => {
-  if (behandlingType === BehandlingTypeEnum.TILBAKEKREVING) {
+  if (behandlingType === 'BT-007') {
     return BehandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
   }
-  if (behandlingType === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
+  if (behandlingType === 'BT-009') {
     return BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
   }
 

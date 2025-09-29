@@ -3,8 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { Button } from '@navikt/ds-react';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
-
 import type { AvsluttetBehandling } from '../types/avsluttetBehandlingTsType';
 import type { FormkravMellomlagretDataType } from '../types/FormkravMellomlagretDataType';
 
@@ -41,11 +39,7 @@ const getPåklagdBehandling = (
 
 export const erTilbakekreving = (avsluttedeBehandlinger: AvsluttetBehandling[], påklagdVedtak?: string): boolean => {
   const behandling = getPåklagdBehandling(avsluttedeBehandlinger, påklagdVedtak);
-  return (
-    !!behandling &&
-    (behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
-      behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING)
-  );
+  return !!behandling && (behandling.type === 'BT-007' || behandling.type === 'BT-009');
 };
 
 export const påklagdTilbakekrevingInfo = (

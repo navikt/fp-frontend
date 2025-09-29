@@ -5,7 +5,6 @@ import {
   BehandlingArsakTypeEnum,
   BehandlingResultatType,
   BehandlingStatusEnum,
-  BehandlingTypeEnum,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -14,7 +13,7 @@ import type { Behandling } from '@navikt/fp-types';
 export const behandling: Behandling = {
   uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
   versjon: 26,
-  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  type: 'BT-002',
   status: BehandlingStatusEnum.BEHANDLING_UTREDES,
   opprettet: '2025-03-05T16:42:58',
 

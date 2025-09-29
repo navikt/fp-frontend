@@ -6,7 +6,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingTypeEnum, KøSortering } from '@navikt/fp-kodeverk';
+import { KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
@@ -64,21 +64,21 @@ type Story = StoryObj<typeof meta>;
 
 export const SorteringsvelgerNårMangeBehandlingstyperErValgt: Story = {
   args: {
-    valgteBehandlingtyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.DOKUMENTINNSYN],
+    valgteBehandlingtyper: ['BT-002', 'BT-006'],
     erDynamiskPeriode: false,
   },
 };
 
 export const SorteringsvelgerNårDynamiskPeriodeErValgt: Story = {
   args: {
-    valgteBehandlingtyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.DOKUMENTINNSYN],
+    valgteBehandlingtyper: ['BT-002', 'BT-006'],
     erDynamiskPeriode: true,
   },
 };
 
 export const SorteringsvelgerNårKunTilbakekrevingErValgt: Story = {
   args: {
-    valgteBehandlingtyper: [BehandlingTypeEnum.TILBAKEKREVING],
+    valgteBehandlingtyper: ['BT-007'],
     erDynamiskPeriode: false,
   },
 };

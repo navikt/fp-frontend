@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
@@ -16,31 +15,31 @@ const withIntl = getIntlDecorator(messages);
 const OPPGAVER_FOR_AVDELING = [
   {
     fagsakYtelseType: 'FP',
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingType: 'BT-002',
     tilBehandling: true,
     antall: 10,
   },
   {
     fagsakYtelseType: 'ES',
-    behandlingType: BehandlingTypeEnum.KLAGE,
+    behandlingType: 'BT-003',
     tilBehandling: true,
     antall: 4,
   },
   {
     fagsakYtelseType: 'ES',
-    behandlingType: BehandlingTypeEnum.REVURDERING,
+    behandlingType: 'BT-004',
     tilBehandling: true,
     antall: 14,
   },
   {
     fagsakYtelseType: 'ES',
-    behandlingType: BehandlingTypeEnum.REVURDERING,
+    behandlingType: 'BT-004',
     tilBehandling: false,
     antall: 4,
   },
   {
     fagsakYtelseType: 'FP',
-    behandlingType: BehandlingTypeEnum.TILBAKEKREVING,
+    behandlingType: 'BT-007',
     tilBehandling: false,
     antall: 6,
   },

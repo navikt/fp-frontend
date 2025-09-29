@@ -11,7 +11,6 @@ import {
   BehandlingArsakTypeEnum,
   BehandlingResultatType,
   BehandlingStatusEnum,
-  BehandlingTypeEnum,
   FagsakMarkeringKode,
   KonsekvensForYtelsenEnum,
   OppgaveType,
@@ -53,7 +52,7 @@ const defaultAksjonspunkter = [defaultAksjonspunkt];
 const defaultBehandling = {
   uuid: '1',
   versjon: 1,
-  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  type: 'BT-002',
   status: BehandlingStatusEnum.BEHANDLING_UTREDES,
   språkkode: 'NB',
   behandlingsresultat: {
@@ -622,7 +621,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
@@ -645,7 +644,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
@@ -669,7 +668,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [
@@ -692,7 +691,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
@@ -716,7 +715,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
@@ -738,7 +737,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         avslagsarsakFritekst: 'Dette er ein fritekst',
@@ -758,7 +757,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       status: BehandlingStatusEnum.AVSLUTTET,
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
@@ -778,7 +777,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
         opphørsdato: '2024-11-01',
@@ -798,7 +797,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
         konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING],
@@ -829,7 +828,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING],
@@ -869,7 +868,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
         opphørsdato: '2024-11-01',

@@ -4,7 +4,7 @@ import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icon
 import { BodyShort, Box, HStack, Label, Spacer, Tooltip, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import { BehandlingArsakTypeEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { BehandlingArsakTypeEnum } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import styles from './behandlingInformasjon.module.css';
@@ -36,9 +36,7 @@ export const BehandlingInformasjon = ({
 }: Props) => {
   const intl = useIntl();
 
-  const erTilbakekreving =
-    behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
-    behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;
+  const erTilbakekreving = behandling.type === 'BT-007' || behandling.type === 'BT-009';
 
   const behandlingType = erTilbakekreving
     ? alleKodeverkTilbakekreving['BehandlingType']
@@ -55,7 +53,7 @@ export const BehandlingInformasjon = ({
           <div className={styles['arsakPadding']}>
             <Label size="small">{behandlingType.find(bt => bt.kode === behandling.type)?.navn ?? ''}</Label>
           </div>
-          {(behandling.type === BehandlingTypeEnum.REVURDERING || behandling.type === BehandlingTypeEnum.KLAGE) &&
+          {(behandling.type === 'BT-004' || behandling.type === 'BT-003') &&
             behandling.førsteÅrsak?.behandlingArsakType && (
               <>
                 -
@@ -66,15 +64,14 @@ export const BehandlingInformasjon = ({
                 </BodyShort>
               </>
             )}
-          {behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING &&
-            erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak?.behandlingArsakType) && (
-              <>
-                -
-                <BodyShort size="small">
-                  <FormattedMessage id="Behandlingspunkt.Årsak.Klage" />
-                </BodyShort>
-              </>
-            )}
+          {behandling.type === 'BT-009' && erTilbakekrevingÅrsakKlage(behandling.førsteÅrsak?.behandlingArsakType) && (
+            <>
+              -
+              <BodyShort size="small">
+                <FormattedMessage id="Behandlingspunkt.Årsak.Klage" />
+              </BodyShort>
+            </>
+          )}
           <Spacer />
           {behandling.gjeldendeVedtak && (
             <StarFillIcon

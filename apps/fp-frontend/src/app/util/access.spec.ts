@@ -1,10 +1,4 @@
-import {
-  type BehandlingStatus,
-  BehandlingStatusEnum,
-  BehandlingTypeEnum,
-  type FagsakStatus,
-  FagsakStatusEnum,
-} from '@navikt/fp-kodeverk';
+import { type BehandlingStatus, BehandlingStatusEnum, type FagsakStatus, FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { kanOverstyreAccess, writeAccess } from './access';
@@ -33,8 +27,8 @@ describe('access', () => {
     const validFagsakStatus = validFagsakStatuser[0]!;
 
     const validBehandlingStatuser = [BehandlingStatusEnum.OPPRETTET, BehandlingStatusEnum.BEHANDLING_UTREDES];
-    const validBehandlingStatus = validBehandlingStatuser[0]!;
-    const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
+    const validBehandlingStatus = validBehandlingStatuser[0];
+    const validBehandlingTyper = 'BT-002';
 
     it('saksbehandler skal ha skrivetilgang', () => {
       const accessForSaksbehandler = writeAccess(
@@ -77,8 +71,8 @@ describe('access', () => {
     const validFagsakStatus = validFagsakStatuser[0]!;
 
     const validBehandlingStatuser = [BehandlingStatusEnum.BEHANDLING_UTREDES];
-    const validBehandlingStatus = validBehandlingStatuser[0]!;
-    const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
+    const validBehandlingStatus = validBehandlingStatuser[0];
+    const validBehandlingTyper = 'BT-002';
 
     const saksbehandlerOgOverstyrerAnsatt = { ...saksbehandlerAnsatt, kanOverstyre: true };
     const veilederOgOverstyrerAnsatt = { ...veilederAnsatt, kanOverstyre: false };

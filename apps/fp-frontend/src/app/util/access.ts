@@ -2,7 +2,6 @@ import {
   type BehandlingStatus,
   BehandlingStatusEnum,
   type BehandlingType,
-  BehandlingTypeEnum,
   type FagsakStatus,
   FagsakStatusEnum,
 } from '@navikt/fp-kodeverk';
@@ -12,7 +11,7 @@ const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt.kanVeilede;
 const kanSaksbehandle = (navAnsatt: NavAnsatt): boolean => navAnsatt.kanSaksbehandle;
 const kanOverstyre = (navAnsatt: NavAnsatt): boolean => kanSaksbehandle(navAnsatt) && navAnsatt.kanOverstyre;
 const isBehandlingAvTilbakekreving = (type?: BehandlingType): boolean =>
-  type ? type === BehandlingTypeEnum.TILBAKEKREVING || type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING : false;
+  type ? type === 'BT-007' || type === 'BT-009' : false;
 
 const accessibleFor =
   (validNavAnsattPredicates: ((navAnsatt: NavAnsatt) => boolean)[]) =>

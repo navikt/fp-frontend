@@ -2,7 +2,7 @@ import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack, Tag } from '@navikt/ds-react';
 
-import { AndreKriterierType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { AndreKriterierType } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
@@ -87,13 +87,13 @@ const sorterAndreKriterier = (a: AndreKriterierType, b: AndreKriterierType) => {
 };
 
 const hentAlleBehandlingstypeKortnavn = (intl: IntlShape) => ({
-  [BehandlingTypeEnum.ANKE]: intl.formatMessage({ id: 'OppgaveLabels.Anke' }),
-  [BehandlingTypeEnum.DOKUMENTINNSYN]: intl.formatMessage({ id: 'OppgaveLabels.Innsyn' }),
-  [BehandlingTypeEnum.FORSTEGANGSSOKNAD]: intl.formatMessage({ id: 'OppgaveLabels.Forstegang' }),
-  [BehandlingTypeEnum.KLAGE]: intl.formatMessage({ id: 'OppgaveLabels.Klage' }),
-  [BehandlingTypeEnum.REVURDERING]: intl.formatMessage({ id: 'OppgaveLabels.Revurdering' }),
-  [BehandlingTypeEnum.TILBAKEKREVING]: intl.formatMessage({ id: 'OppgaveLabels.Tilbake' }),
-  [BehandlingTypeEnum.TILBAKEKREVING_REVURDERING]: intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }),
+  ['BT-008']: intl.formatMessage({ id: 'OppgaveLabels.Anke' }),
+  ['BT-006']: intl.formatMessage({ id: 'OppgaveLabels.Innsyn' }),
+  ['BT-002']: intl.formatMessage({ id: 'OppgaveLabels.Forstegang' }),
+  ['BT-003']: intl.formatMessage({ id: 'OppgaveLabels.Klage' }),
+  ['BT-004']: intl.formatMessage({ id: 'OppgaveLabels.Revurdering' }),
+  ['BT-007']: intl.formatMessage({ id: 'OppgaveLabels.Tilbake' }),
+  ['BT-009']: intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }),
   '-': intl.formatMessage({ id: 'OppgaveLabels.TilbakeRev' }), // TODO: finnes bare for TS, fjernes?
 });
 

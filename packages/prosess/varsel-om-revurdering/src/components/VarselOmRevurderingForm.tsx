@@ -9,13 +9,7 @@ import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  BehandlingTypeEnum,
-  DokumentMalType,
-  RevurderingVarslingÅrsak,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
@@ -186,10 +180,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
         visBrevErBestilt
         hasManualPaVent
         ventearsak={null}
-        erTilbakekreving={
-          behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
-          behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING
-        }
+        erTilbakekreving={behandling.type === 'BT-007' || behandling.type === 'BT-009'}
       />
     </>
   );

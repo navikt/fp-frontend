@@ -7,7 +7,6 @@ import {
   AksjonspunktStatus,
   Avslagsarsak,
   BehandlingResultatType,
-  BehandlingTypeEnum,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -26,7 +25,7 @@ import { VilkarresultatMedOverstyringProsessIndex } from './VilkarresultatMedOve
 const defaultBehandling = {
   uuid: '1',
   versjon: 1,
-  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  type: 'BT-002',
   aksjonspunkt: [] as Aksjonspunkt[],
 } as Behandling;
 
@@ -78,7 +77,7 @@ export const OverstyringspanelForMedlemskap: Story = {
     avslagsårsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET],
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
     } as Behandling,
   },
 };

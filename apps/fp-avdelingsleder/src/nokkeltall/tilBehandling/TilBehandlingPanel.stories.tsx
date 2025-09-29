@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
@@ -18,37 +17,37 @@ const withIntl = getIntlDecorator(messages);
 const OPPGAVER_PER_DATO = [
   {
     fagsakYtelseType: 'FP',
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingType: 'BT-002',
     opprettetDato: dayjs().format(ISO_DATE_FORMAT),
     antall: 1,
   },
   {
     fagsakYtelseType: 'FP',
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingType: 'BT-002',
     opprettetDato: dayjs().subtract(3, 'd').format(ISO_DATE_FORMAT),
     antall: 2,
   },
   {
     fagsakYtelseType: 'FP',
-    behandlingType: BehandlingTypeEnum.KLAGE,
+    behandlingType: 'BT-003',
     opprettetDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
     antall: 2,
   },
   {
     fagsakYtelseType: 'FP',
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingType: 'BT-002',
     opprettetDato: dayjs().subtract(4, 'd').format(ISO_DATE_FORMAT),
     antall: 6,
   },
   {
     fagsakYtelseType: 'FP',
-    behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
+    behandlingType: 'BT-006',
     opprettetDato: dayjs().subtract(10, 'd').format(ISO_DATE_FORMAT),
     antall: 3,
   },
   {
     fagsakYtelseType: 'FP',
-    behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
+    behandlingType: 'BT-006',
     opprettetDato: dayjs().subtract(16, 'd').format(ISO_DATE_FORMAT),
     antall: 3,
   },

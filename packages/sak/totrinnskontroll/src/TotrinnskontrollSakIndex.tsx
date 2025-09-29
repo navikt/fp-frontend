@@ -8,7 +8,6 @@ import {
   AksjonspunktKodeTilbakekreving,
   BehandlingArsakTypeEnum,
   BehandlingStatusEnum,
-  BehandlingTypeEnum,
   type FagsakYtelseType,
   SkjermlenkeType,
   VurderÅrsak,
@@ -92,9 +91,7 @@ export const TotrinnskontrollSakIndex = ({
   beslutterFormData,
   setBeslutterFormData,
 }: Props) => {
-  const erTilbakekreving =
-    BehandlingTypeEnum.TILBAKEKREVING === behandling.type ||
-    BehandlingTypeEnum.TILBAKEKREVING_REVURDERING === behandling.type;
+  const erTilbakekreving = 'BT-007' === behandling.type || 'BT-009' === behandling.type;
 
   const submitHandler = (values: FormValues) => {
     const aksjonspunktGodkjenningDtos = values.aksjonspunktGodkjenning.map(apData => ({

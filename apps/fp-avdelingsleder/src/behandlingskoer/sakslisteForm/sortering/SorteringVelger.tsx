@@ -5,8 +5,6 @@ import { Radio, VStack } from '@navikt/ds-react';
 import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
-
 import { lagreSakslisteSortering, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 import { BelopSorteringValg, type FormValues as BelopSorteringValgFormValues } from './BelopSorteringValg';
@@ -18,12 +16,8 @@ export type FormValues = {
 
 const bareTilbakekrevingValgt = (valgteBehandlingtyper?: string[]) =>
   valgteBehandlingtyper &&
-  valgteBehandlingtyper.some(
-    type => type === BehandlingTypeEnum.TILBAKEKREVING || type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
-  ) &&
-  !valgteBehandlingtyper.some(
-    type => type !== BehandlingTypeEnum.TILBAKEKREVING && type !== BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
-  );
+  valgteBehandlingtyper.some(type => type === 'BT-007' || type === 'BT-009') &&
+  !valgteBehandlingtyper.some(type => type !== 'BT-007' && type !== 'BT-009');
 
 interface Props {
   valgtSakslisteId: number;

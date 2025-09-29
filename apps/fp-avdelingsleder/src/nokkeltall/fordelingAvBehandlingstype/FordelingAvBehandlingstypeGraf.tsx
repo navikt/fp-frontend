@@ -1,19 +1,12 @@
 import { useIntl } from 'react-intl';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import type { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
 import type { LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import type { OppgaverForAvdeling } from '../../typer/oppgaverForAvdelingTsType';
 
-const behandlingstypeOrder = [
-  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
-  BehandlingTypeEnum.TILBAKEKREVING,
-  BehandlingTypeEnum.DOKUMENTINNSYN,
-  BehandlingTypeEnum.KLAGE,
-  BehandlingTypeEnum.REVURDERING,
-  BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-];
+const behandlingstypeOrder = ['BT-009', 'BT-007', 'BT-006', 'BT-003', 'BT-004', 'BT-002'] satisfies BehandlingType[];
 
 interface Props {
   height: number;
@@ -102,10 +95,10 @@ export const FordelingAvBehandlingstypeGraf = ({ height, oppgaverForAvdeling, be
 };
 
 const slåSammen = (oppgaverForAvdeling: OppgaverForAvdeling[]): number[] => {
-  const test = oppgaverForAvdeling.reduce(
+  const sammenslått = oppgaverForAvdeling.reduce(
     (acc, o) => {
       const index = behandlingstypeOrder.findIndex(bo => bo === o.behandlingType) + 1;
-      const antall = acc[index] ?? 0;
+      const antall = acc[index] || 0;
       return {
         ...acc,
         [index]: antall + o.antall,
@@ -114,5 +107,5 @@ const slåSammen = (oppgaverForAvdeling: OppgaverForAvdeling[]): number[] => {
     {} as Record<string, number>,
   );
 
-  return behandlingstypeOrder.map((_b, index) => test[index + 1]!);
+  return behandlingstypeOrder.map((_b, index) => sammenslått[index + 1] || 0);
 };

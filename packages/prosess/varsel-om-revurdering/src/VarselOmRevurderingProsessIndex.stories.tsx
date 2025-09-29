@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -13,7 +13,7 @@ const defaultBehandling = {
   uuid: '1',
   versjon: 1,
   språkkode: 'NN',
-  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  type: 'BT-002',
 } as Behandling;
 
 const aksjonspunkterForPanel = [
@@ -46,7 +46,7 @@ export const ForRevurdering: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
     },
   },
 };

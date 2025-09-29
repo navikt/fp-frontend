@@ -10,7 +10,6 @@ import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
 import {
   AksjonspunktKode,
-  BehandlingTypeEnum,
   erAksjonspunktÅpent,
   type VilkårOverstyringAksjonspunkter,
   VilkarUtfallType,
@@ -231,7 +230,7 @@ export const VilkarresultatMedOverstyringForm = ({
                 avslagsårsaker={avslagsårsaker}
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={fagsak.fagsakYtelseType}
-                erRevurdering={behandling.type === BehandlingTypeEnum.REVURDERING}
+                erRevurdering={behandling.type === 'BT-004'}
                 erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
               />
             ) : (

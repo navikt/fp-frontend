@@ -16,7 +16,6 @@ import {
   BehandlingArsakTypeEnum,
   BehandlingResultatTypeTilbakekreving,
   BehandlingStatusEnum,
-  BehandlingTypeEnum,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
@@ -48,7 +47,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   const fagsakBehandlingerInfo = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
   const harÅpenRevurdering = fagsakBehandlingerInfo.some(
-    b => b.type === BehandlingTypeEnum.REVURDERING && b.status !== BehandlingStatusEnum.AVSLUTTET,
+    b => b.type === 'BT-004' && b.status !== BehandlingStatusEnum.AVSLUTTET,
   );
 
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);

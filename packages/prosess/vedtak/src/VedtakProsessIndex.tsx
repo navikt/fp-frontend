@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   Beregningsgrunnlag,
@@ -61,7 +61,7 @@ export const VedtakProsessIndex = ({
 
   return (
     <RawIntlProvider value={intl}>
-      {behandling.type === BehandlingTypeEnum.REVURDERING ? (
+      {behandling.type === 'BT-004' ? (
         <VedtakRevurderingForm
           previewCallback={previewCallback}
           tilbakekrevingvalg={tilbakekrevingvalg}

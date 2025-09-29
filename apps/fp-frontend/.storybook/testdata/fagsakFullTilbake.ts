@@ -1,14 +1,13 @@
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import type { FagsakDataFpTilbake } from '@navikt/fp-types';
 
 export const fagsakFullTilbake: FagsakDataFpTilbake = {
   behandlingTypeKanOpprettes: [
     {
-      behandlingType: BehandlingTypeEnum.TILBAKEKREVING,
+      behandlingType: 'BT-007',
       kanOppretteBehandling: true,
     },
     {
-      behandlingType: BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
+      behandlingType: 'BT-009',
       kanOppretteBehandling: false,
     },
   ],

@@ -1,6 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { MenySettPaVentIndex } from '@navikt/fp-sak-meny-sett-pa-vent';
 import type { Behandling } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -33,8 +32,7 @@ export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModa
   });
 
   const venteårsaker =
-    behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
-    behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING
+    behandling.type === 'BT-007' || behandling.type === 'BT-009'
       ? notEmpty(alleFpTilbakeKodeverk)['Venteårsak']
       : notEmpty(alleFpSakKodeverk)['Venteårsak'];
 
@@ -43,10 +41,7 @@ export const SettPaVentMenyModal = ({ behandling, hentOgSettBehandling, lukkModa
       settBehandlingPaVent={settBehandlingPåVent}
       ventearsaker={venteårsaker}
       lukkModal={lukkModal}
-      erTilbakekreving={
-        behandling.type === BehandlingTypeEnum.TILBAKEKREVING ||
-        behandling.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING
-      }
+      erTilbakekreving={behandling.type === 'BT-007' || behandling.type === 'BT-009'}
     />
   );
 };

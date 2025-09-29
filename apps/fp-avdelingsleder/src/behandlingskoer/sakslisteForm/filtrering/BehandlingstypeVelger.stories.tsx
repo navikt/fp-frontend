@@ -6,7 +6,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
@@ -35,7 +34,7 @@ const meta = {
   render: args => {
     const formMethods = useForm({
       defaultValues: {
-        [BehandlingTypeEnum.FORSTEGANGSSOKNAD]: true,
+        ['BT-002']: true,
       },
     });
 

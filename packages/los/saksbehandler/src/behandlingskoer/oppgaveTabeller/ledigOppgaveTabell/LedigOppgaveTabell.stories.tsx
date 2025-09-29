@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingTypeEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -34,7 +34,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     personnummer: '1212',
     navn: 'Espen Utvikler',
     system: 'SAK',
-    behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingstype: 'BT-002',
     opprettetTidspunkt: '2019-01-01',
     behandlingsfrist: '2019-01-01',
     fagsakYtelseType: 'FP',
