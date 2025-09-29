@@ -40,7 +40,7 @@ const getDefaultValues = (
   mottattDato: innsyn?.innsynMottattDato,
   innsynResultatType: innsyn?.innsynResultatType,
   fristDato: fristBehandlingPåVent ?? dayjs().add(3, 'days').format(ISO_DATE_FORMAT),
-  sattPaVent: aksjonspunkter[0].status === AksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
+  sattPaVent: aksjonspunkter[0]?.status === AksjonspunktStatus.OPPRETTET ? undefined : !!fristBehandlingPåVent,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   ...hentDokumenterMedNavnOgFikkInnsyn(innsyn?.dokumenter ?? []),
 });
@@ -114,7 +114,7 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
     .sort((t1, t2) => t1.navn.localeCompare(t2.navn))
     .reverse();
 
-  const isApOpen = aksjonspunkterForPanel[0].status === AksjonspunktStatus.OPPRETTET;
+  const isApOpen = aksjonspunkterForPanel[0]?.status === AksjonspunktStatus.OPPRETTET;
 
   const innsynResultatTypeKode = formMethods.watch('innsynResultatType');
   const sattPaVent = formMethods.watch('sattPaVent');

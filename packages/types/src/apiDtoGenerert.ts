@@ -11,6 +11,91 @@ export type abakus_callback_registerdata_ReferanseDto = {
   referanse: string;
 };
 
+export type tjenester_behandling_dto_ReåpneBehandlingDto = {
+  behandlingUuid: string;
+  behandlingVersjon: number;
+};
+
+export type tjenester_behandling_dto_ByttBehandlendeEnhetDto = {
+  behandlingUuid: string;
+  enhetNavn?: string;
+  enhetId?: string;
+  begrunnelse?: string;
+  behandlingVersjon?: number;
+};
+
+export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Venteårsak =
+  | '-'
+  | 'AVV_DOK'
+  | 'AVV_FODSEL'
+  | 'FOR_TIDLIG_SOKNAD'
+  | 'SCANN'
+  | 'UTV_FRIST'
+  | 'VENT_PÅ_BRUKERTILBAKEMELDING'
+  | 'VENT_UTLAND_TRYGD'
+  | 'VENT_INNTEKT_RAPPORTERINGSFRIST'
+  | 'VENT_MANGLENDE_SYKEMELDING'
+  | 'VENT_OPDT_INNTEKTSMELDING'
+  | 'VENT_OPPTJENING_OPPLYSNINGER'
+  | 'VENT_PÅ_SISTE_AAP_MELDEKORT'
+  | 'VENT_SØKNAD_SENDT_INFORMASJONSBREV'
+  | 'VENT_ÅPEN_BEHANDLING'
+  | 'VENT_KABAL'
+  | 'ANKE_OVERSENDT_TIL_TRYGDERETTEN'
+  | 'ANKE_VENTER_PAA_MERKNADER_FRA_BRUKER'
+  | 'AVV_RESPONS_REVURDERING'
+  | 'VENT_TIDLIGERE_BEHANDLING'
+  | 'AAP_DP_SISTE_10_MND_SVP'
+  | 'AAP_DP_ENESTE_AKTIVITET_SVP'
+  | 'DELVIS_TILRETTELEGGING_OG_REFUSJON_SVP'
+  | 'FLERE_ARBEIDSFORHOLD_SAMME_ORG_SVP'
+  | 'FL_SN_IKKE_STOTTET_FOR_SVP'
+  | 'GRADERING_FLERE_ARBEIDSFORHOLD'
+  | 'OPPD_ÅPEN_BEH'
+  | 'REFUSJON_3_MÅNEDER'
+  | 'VENTELØNN_ELLER_MILITÆR_MED_FLERE_AKTIVITETER'
+  | 'VENT_BEREGNING_TILBAKE_I_TID'
+  | 'VENT_DEKGRAD_REGEL'
+  | 'VENT_DØDFØDSEL_80P_DEKNINGSGRAD'
+  | 'VENT_FEIL_ENDRINGSSØKNAD'
+  | 'VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG'
+  | 'VENT_INFOTRYGD'
+  | 'VENT_MANGLENDE_ARBEIDSFORHOLD'
+  | 'VENT_MILITÆR_OG_BG_UNDER_3G'
+  | 'ULIKE_STARTDATOER_SVP'
+  | 'VENT_LOVENDRING_8_41'
+  | 'VENT_PÅ_KORRIGERT_BESTEBEREGNING'
+  | 'VENT_PÅ_NY_INNTEKTSMELDING_MED_GYLDIG_ARB_ID'
+  | 'VENT_REGISTERINNHENTING'
+  | 'VENT_ØKONOMI';
+
+export type tjenester_behandling_dto_SettBehandlingPaVentDto = {
+  behandlingUuid: string;
+  behandlingVersjon: number;
+  frist?: string;
+  ventearsak?: foreldrepenger_behandlingslager_behandling_aksjonspunkt_Venteårsak;
+};
+
+export type tjenester_behandling_dto_GjenopptaBehandlingDto = {
+  behandlingUuid: string;
+  behandlingVersjon: number;
+};
+
+export type tjenester_behandling_dto_HenleggBehandlingDto = {
+  behandlingUuid: string;
+  årsakKode: string;
+  begrunnelse?: string;
+  behandlingVersjon?: number;
+};
+
+export type tjenester_fagsak_dto_SaksnummerDto = {
+  saksnummer: string;
+};
+
+export type tjenester_behandling_dto_BehandlingIdDto = {
+  behandlingUuid: string;
+};
+
 export type foreldrepenger_behandlingslager_behandling_BehandlingResultatType =
   | 'IKKE_FASTSATT'
   | 'INNVILGET'
@@ -118,6 +203,190 @@ export type foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen =
 
 export type foreldrepenger_behandlingslager_behandling_RettenTil = 'HAR_RETT_TIL_FP' | 'HAR_IKKE_RETT_TIL_FP' | '-';
 
+export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon =
+  | '5001'
+  | '5027'
+  | '5004'
+  | '5005'
+  | '5006'
+  | '5007'
+  | '5008'
+  | '5011'
+  | '5012'
+  | '5013'
+  | '5014'
+  | '5015'
+  | '5016'
+  | '5017'
+  | '5002'
+  | '5026'
+  | '5028'
+  | '5030'
+  | '5031'
+  | '5033'
+  | '5034'
+  | '5003'
+  | '5035'
+  | '5037'
+  | '5038'
+  | '5039'
+  | '5040'
+  | '5043'
+  | '5046'
+  | '5047'
+  | '5049'
+  | '5051'
+  | '5052'
+  | '5054'
+  | '5055'
+  | '5057'
+  | '5058'
+  | '5059'
+  | '5060'
+  | '5061'
+  | '5068'
+  | '5064'
+  | '5065'
+  | '5063'
+  | '5066'
+  | '5071'
+  | '5072'
+  | '5073'
+  | '5076'
+  | '5077'
+  | '5085'
+  | '5082'
+  | '5084'
+  | '5029'
+  | '5086'
+  | '5089'
+  | '5041'
+  | '5062'
+  | '5091'
+  | '5092'
+  | '5095'
+  | '5096'
+  | '5074'
+  | '5101'
+  | '5102'
+  | '5103'
+  | '6002'
+  | '6003'
+  | '6004'
+  | '6005'
+  | '6006'
+  | '6008'
+  | '6009'
+  | '6010'
+  | '6011'
+  | '6065'
+  | '6014'
+  | '6015'
+  | '6045'
+  | '6016'
+  | '6018'
+  | '6019'
+  | '6017'
+  | '6103'
+  | '7001'
+  | '7002'
+  | '7003'
+  | '7005'
+  | '7007'
+  | '7008'
+  | '7011'
+  | '7013'
+  | '7014'
+  | '7020'
+  | '7030'
+  | '7033'
+  | '7037'
+  | '7039'
+  | '7040'
+  | "UNDEFINED('null')"
+  | '5009'
+  | '5019'
+  | '5020'
+  | '5021'
+  | '5022'
+  | '5023'
+  | '5024'
+  | '5025'
+  | '5032'
+  | '5036'
+  | '5042'
+  | '5044'
+  | '5045'
+  | '5048'
+  | '5050'
+  | '5053'
+  | '5056'
+  | '5067'
+  | '5069'
+  | '5070'
+  | '5075'
+  | '5078'
+  | '5079'
+  | '5080'
+  | '5081'
+  | '5083'
+  | '5087'
+  | '5088'
+  | '5090'
+  | '5093'
+  | '5094'
+  | '5097'
+  | '5098'
+  | '5099'
+  | '6007'
+  | '6012'
+  | '6013'
+  | '6068'
+  | '6070'
+  | '7004'
+  | '7006'
+  | '7009'
+  | '7015'
+  | '7016'
+  | '7017'
+  | '7018'
+  | '7019'
+  | '7021'
+  | '7022'
+  | '7023'
+  | '7024'
+  | '7025'
+  | '7026'
+  | '7027'
+  | '7028'
+  | '7029'
+  | '7032'
+  | '7034'
+  | '7035'
+  | '7036'
+  | '7038'
+  | '7041';
+
+export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus = 'AVBR' | 'OPPR' | 'UTFO';
+
+export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType =
+  | 'AUTO'
+  | 'MANU'
+  | 'OVST'
+  | 'SAOV'
+  | '-';
+
+export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak =
+  | 'FEIL_FAKTA'
+  | 'FEIL_LOV'
+  | 'SKJØNN'
+  | 'UTREDNING'
+  | 'SAKSFLYT'
+  | 'BEGRUNNELSE'
+  | '-'
+  | 'ANNET'
+  | 'FEIL_REGEL';
+
 export type foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev = 'AUTOMATISK' | 'FRITEKST' | 'INGEN' | '-';
 
 export type foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak =
@@ -214,356 +483,6 @@ export type rest_ResourceLink = {
 
 export type rest_ResourceLink_HttpMethod = 'DELETE' | 'GET' | 'PATCH' | 'POST' | 'PUT';
 
-export type tjenester_behandling_dto_behandling_BehandlingDto = {
-  id?: number;
-  uuid: string;
-  versjon: number;
-  type: foreldrepenger_behandlingslager_behandling_BehandlingType;
-  status: foreldrepenger_behandlingslager_behandling_BehandlingStatus;
-  fagsakId?: number;
-  opprettet: string;
-  avsluttet?: string;
-  endret?: string;
-  endretAvBrukernavn?: string;
-  behandlendeEnhetId: string;
-  behandlendeEnhetNavn: string;
-  erAktivPapirsoknad: boolean;
-  førsteÅrsak?: tjenester_behandling_dto_behandling_BehandlingÅrsakDto;
-  behandlingsfristTid?: string;
-  gjeldendeVedtak: boolean;
-  erPaaVent?: boolean;
-  originalVedtaksDato?: string;
-  behandlingHenlagt: boolean;
-  behandlingPaaVent?: boolean;
-  behandlingPåVent: boolean;
-  fristBehandlingPåVent?: string;
-  fristBehandlingPaaVent?: string;
-  venteArsakKode?: string;
-  venteÅrsakKode?: string;
-  sprakkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
-  språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode;
-  behandlingKøet: boolean;
-  ansvarligSaksbehandler?: string;
-  toTrinnsBehandling: boolean;
-  behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
-  behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
-  vilkår: Array<tjenester_behandling_vilkår_VilkårDto>;
-  links: Array<rest_ResourceLink>;
-  behandlingKoet?: boolean;
-};
-
-export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
-  id: number;
-  type: foreldrepenger_behandlingslager_behandling_BehandlingResultatType;
-  avslagsarsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
-  avslagsarsakFritekst?: string;
-  rettenTil?: foreldrepenger_behandlingslager_behandling_RettenTil;
-  konsekvenserForYtelsen?: Array<foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen>;
-  vedtaksbrev?: foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev;
-  vedtaksbrevStatus: foreldrepenger_domene_vedtak_intern_VedtaksbrevStatus;
-  overskrift?: string;
-  fritekstbrev?: string;
-  harRedigertVedtaksbrev: boolean;
-  erRevurderingMedUendretUtfall?: boolean;
-  skjæringstidspunkt?: tjenester_behandling_dto_behandling_SkjæringstidspunktDto;
-  endretDekningsgrad?: boolean;
-  opphørsdato?: string;
-};
-
-export type tjenester_behandling_dto_behandling_BehandlingÅrsakDto = {
-  erAutomatiskRevurdering: boolean;
-  behandlingArsakType: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType;
-  manueltOpprettet: boolean;
-};
-
-export type tjenester_behandling_dto_behandling_SkjæringstidspunktDto = {
-  dato?: string;
-  utenMinsterett?: boolean;
-};
-
-export type tjenester_behandling_vilkår_VilkårDto = {
-  vilkarType: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
-  vilkarStatus: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType;
-  avslagKode?: string;
-  lovReferanse?: string;
-  overstyrbar: boolean;
-  evaluering?: string;
-  input?: string;
-};
-
-export type tjenester_behandling_dto_UuidDto = {
-  uuid?: string;
-};
-
-export type tjenester_behandling_dto_ReåpneBehandlingDto = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
-};
-
-export type tjenester_behandling_dto_ByttBehandlendeEnhetDto = {
-  behandlingUuid: string;
-  enhetNavn?: string;
-  enhetId?: string;
-  begrunnelse?: string;
-  behandlingVersjon?: number;
-};
-
-export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_Venteårsak =
-  | '-'
-  | 'AVV_DOK'
-  | 'AVV_FODSEL'
-  | 'FOR_TIDLIG_SOKNAD'
-  | 'SCANN'
-  | 'UTV_FRIST'
-  | 'VENT_PÅ_BRUKERTILBAKEMELDING'
-  | 'VENT_UTLAND_TRYGD'
-  | 'VENT_INNTEKT_RAPPORTERINGSFRIST'
-  | 'VENT_MANGLENDE_SYKEMELDING'
-  | 'VENT_OPDT_INNTEKTSMELDING'
-  | 'VENT_OPPTJENING_OPPLYSNINGER'
-  | 'VENT_PÅ_SISTE_AAP_MELDEKORT'
-  | 'VENT_SØKNAD_SENDT_INFORMASJONSBREV'
-  | 'VENT_ÅPEN_BEHANDLING'
-  | 'VENT_KABAL'
-  | 'ANKE_OVERSENDT_TIL_TRYGDERETTEN'
-  | 'ANKE_VENTER_PAA_MERKNADER_FRA_BRUKER'
-  | 'AVV_RESPONS_REVURDERING'
-  | 'VENT_TIDLIGERE_BEHANDLING'
-  | 'AAP_DP_SISTE_10_MND_SVP'
-  | 'AAP_DP_ENESTE_AKTIVITET_SVP'
-  | 'DELVIS_TILRETTELEGGING_OG_REFUSJON_SVP'
-  | 'FLERE_ARBEIDSFORHOLD_SAMME_ORG_SVP'
-  | 'FL_SN_IKKE_STOTTET_FOR_SVP'
-  | 'GRADERING_FLERE_ARBEIDSFORHOLD'
-  | 'OPPD_ÅPEN_BEH'
-  | 'REFUSJON_3_MÅNEDER'
-  | 'VENTELØNN_ELLER_MILITÆR_MED_FLERE_AKTIVITETER'
-  | 'VENT_BEREGNING_TILBAKE_I_TID'
-  | 'VENT_DEKGRAD_REGEL'
-  | 'VENT_DØDFØDSEL_80P_DEKNINGSGRAD'
-  | 'VENT_FEIL_ENDRINGSSØKNAD'
-  | 'VENT_GRADERING_UTEN_BEREGNINGSGRUNNLAG'
-  | 'VENT_INFOTRYGD'
-  | 'VENT_MANGLENDE_ARBEIDSFORHOLD'
-  | 'VENT_MILITÆR_OG_BG_UNDER_3G'
-  | 'ULIKE_STARTDATOER_SVP'
-  | 'VENT_LOVENDRING_8_41'
-  | 'VENT_PÅ_KORRIGERT_BESTEBEREGNING'
-  | 'VENT_PÅ_NY_INNTEKTSMELDING_MED_GYLDIG_ARB_ID'
-  | 'VENT_REGISTERINNHENTING'
-  | 'VENT_ØKONOMI';
-
-export type tjenester_behandling_dto_SettBehandlingPaVentDto = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
-  frist?: string;
-  ventearsak?: foreldrepenger_behandlingslager_behandling_aksjonspunkt_Venteårsak;
-};
-
-export type tjenester_behandling_dto_GjenopptaBehandlingDto = {
-  behandlingUuid: string;
-  behandlingVersjon: number;
-};
-
-export type tjenester_behandling_dto_HenleggBehandlingDto = {
-  behandlingUuid: string;
-  årsakKode: string;
-  begrunnelse?: string;
-  behandlingVersjon?: number;
-};
-
-export type tjenester_fagsak_dto_SaksnummerDto = {
-  saksnummer: string;
-};
-
-export type tjenester_behandling_dto_BehandlingIdDto = {
-  behandlingUuid: string;
-};
-
-export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon =
-  | '5001'
-  | '5027'
-  | '5004'
-  | '5005'
-  | '5006'
-  | '5007'
-  | '5008'
-  | '5011'
-  | '5012'
-  | '5013'
-  | '5014'
-  | '5015'
-  | '5016'
-  | '5017'
-  | '5002'
-  | '5026'
-  | '5028'
-  | '5030'
-  | '5031'
-  | '5033'
-  | '5034'
-  | '5003'
-  | '5035'
-  | '5037'
-  | '5038'
-  | '5039'
-  | '5040'
-  | '5043'
-  | '5046'
-  | '5047'
-  | '5049'
-  | '5051'
-  | '5052'
-  | '5054'
-  | '5055'
-  | '5057'
-  | '5058'
-  | '5059'
-  | '5060'
-  | '5061'
-  | '5068'
-  | '5064'
-  | '5065'
-  | '5063'
-  | '5066'
-  | '5071'
-  | '5072'
-  | '5069'
-  | '5073'
-  | '5076'
-  | '5077'
-  | '5085'
-  | '5082'
-  | '5084'
-  | '5029'
-  | '5086'
-  | '5089'
-  | '5041'
-  | '5062'
-  | '5091'
-  | '5092'
-  | '5095'
-  | '5096'
-  | '5074'
-  | '5101'
-  | '5102'
-  | '5103'
-  | '6002'
-  | '6003'
-  | '6004'
-  | '6005'
-  | '6006'
-  | '6008'
-  | '6009'
-  | '6010'
-  | '6011'
-  | '6065'
-  | '6014'
-  | '6015'
-  | '6045'
-  | '6016'
-  | '6018'
-  | '6019'
-  | '6017'
-  | '6103'
-  | '7001'
-  | '7002'
-  | '7003'
-  | '7005'
-  | '7007'
-  | '7008'
-  | '7011'
-  | '7013'
-  | '7014'
-  | '7020'
-  | '7030'
-  | '7033'
-  | '7037'
-  | '7039'
-  | '7040'
-  | "UNDEFINED('null')"
-  | '5009'
-  | '5019'
-  | '5020'
-  | '5021'
-  | '5022'
-  | '5023'
-  | '5024'
-  | '5025'
-  | '5032'
-  | '5036'
-  | '5042'
-  | '5044'
-  | '5045'
-  | '5048'
-  | '5050'
-  | '5053'
-  | '5056'
-  | '5067'
-  | '5070'
-  | '5075'
-  | '5078'
-  | '5079'
-  | '5080'
-  | '5081'
-  | '5083'
-  | '5087'
-  | '5088'
-  | '5090'
-  | '5093'
-  | '5094'
-  | '5097'
-  | '5098'
-  | '5099'
-  | '6007'
-  | '6012'
-  | '6013'
-  | '6068'
-  | '6070'
-  | '7004'
-  | '7006'
-  | '7009'
-  | '7015'
-  | '7016'
-  | '7017'
-  | '7018'
-  | '7019'
-  | '7021'
-  | '7022'
-  | '7023'
-  | '7024'
-  | '7025'
-  | '7026'
-  | '7027'
-  | '7028'
-  | '7029'
-  | '7032'
-  | '7034'
-  | '7035'
-  | '7036'
-  | '7038'
-  | '7041';
-
-export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus = 'AVBR' | 'OPPR' | 'UTFO';
-
-export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktType =
-  | 'AUTO'
-  | 'MANU'
-  | 'OVST'
-  | 'SAOV'
-  | '-';
-
-export type foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak =
-  | 'FEIL_FAKTA'
-  | 'FEIL_LOV'
-  | 'SKJØNN'
-  | 'UTREDNING'
-  | 'SAKSFLYT'
-  | 'BEGRUNNELSE'
-  | '-'
-  | 'ANNET'
-  | 'FEIL_REGEL';
-
 export type tjenester_behandling_aksjonspunkt_AksjonspunktDto = {
   definisjon: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;
   status: foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktStatus;
@@ -598,6 +517,35 @@ export type tjenester_behandling_dto_AsyncPollingStatus_Status =
   | 'DELAYED'
   | 'CANCELLED'
   | 'HALTED';
+
+export type tjenester_behandling_dto_behandling_BehandlingsresultatDto = {
+  id: number;
+  type: foreldrepenger_behandlingslager_behandling_BehandlingResultatType;
+  avslagsarsak?: foreldrepenger_behandlingslager_behandling_vilkår_Avslagsårsak;
+  avslagsarsakFritekst?: string;
+  rettenTil?: foreldrepenger_behandlingslager_behandling_RettenTil;
+  konsekvenserForYtelsen?: Array<foreldrepenger_behandlingslager_behandling_KonsekvensForYtelsen>;
+  vedtaksbrev?: foreldrepenger_behandlingslager_behandling_vedtak_Vedtaksbrev;
+  vedtaksbrevStatus: foreldrepenger_domene_vedtak_intern_VedtaksbrevStatus;
+  overskrift?: string;
+  fritekstbrev?: string;
+  harRedigertVedtaksbrev: boolean;
+  erRevurderingMedUendretUtfall?: boolean;
+  skjæringstidspunkt?: tjenester_behandling_dto_behandling_SkjæringstidspunktDto;
+  endretDekningsgrad?: boolean;
+  opphørsdato?: string;
+};
+
+export type tjenester_behandling_dto_behandling_BehandlingÅrsakDto = {
+  erAutomatiskRevurdering: boolean;
+  behandlingArsakType: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType;
+  manueltOpprettet: boolean;
+};
+
+export type tjenester_behandling_dto_behandling_SkjæringstidspunktDto = {
+  dato?: string;
+  utenMinsterett?: boolean;
+};
 
 export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   id?: number;
@@ -645,11 +593,63 @@ export type tjenester_behandling_dto_behandling_UtvidetBehandlingDto = {
   behandlingKoet?: boolean;
 };
 
+export type tjenester_behandling_vilkår_VilkårDto = {
+  vilkarType: foreldrepenger_behandlingslager_behandling_vilkår_VilkårType;
+  vilkarStatus: foreldrepenger_behandlingslager_behandling_vilkår_VilkårUtfallType;
+  avslagKode?: string;
+  lovReferanse?: string;
+  overstyrbar: boolean;
+  evaluering?: string;
+  input?: string;
+};
+
+export type tjenester_behandling_dto_behandling_BehandlingDto = {
+  id?: number;
+  uuid: string;
+  versjon: number;
+  type: foreldrepenger_behandlingslager_behandling_BehandlingType;
+  status: foreldrepenger_behandlingslager_behandling_BehandlingStatus;
+  fagsakId?: number;
+  opprettet: string;
+  avsluttet?: string;
+  endret?: string;
+  endretAvBrukernavn?: string;
+  behandlendeEnhetId: string;
+  behandlendeEnhetNavn: string;
+  erAktivPapirsoknad: boolean;
+  førsteÅrsak?: tjenester_behandling_dto_behandling_BehandlingÅrsakDto;
+  behandlingsfristTid?: string;
+  gjeldendeVedtak: boolean;
+  erPaaVent?: boolean;
+  originalVedtaksDato?: string;
+  behandlingHenlagt: boolean;
+  behandlingPaaVent?: boolean;
+  behandlingPåVent: boolean;
+  fristBehandlingPåVent?: string;
+  fristBehandlingPaaVent?: string;
+  venteArsakKode?: string;
+  venteÅrsakKode?: string;
+  sprakkode?: foreldrepenger_behandlingslager_geografisk_Språkkode;
+  språkkode: foreldrepenger_behandlingslager_geografisk_Språkkode;
+  behandlingKøet: boolean;
+  ansvarligSaksbehandler?: string;
+  toTrinnsBehandling: boolean;
+  behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto;
+  behandlingÅrsaker: Array<tjenester_behandling_dto_behandling_BehandlingÅrsakDto>;
+  vilkår: Array<tjenester_behandling_vilkår_VilkårDto>;
+  links: Array<rest_ResourceLink>;
+  behandlingKoet?: boolean;
+};
+
 export type tjenester_behandling_dto_NyBehandlingDto = {
   saksnummer: string;
   behandlingType: foreldrepenger_behandlingslager_behandling_BehandlingType;
   behandlingArsakType?: foreldrepenger_behandlingslager_behandling_BehandlingÅrsakType;
   nyBehandlingEtterKlage?: boolean;
+};
+
+export type tjenester_behandling_dto_UuidDto = {
+  uuid?: string;
 };
 
 export type tjenester_behandling_dto_behandling_ProsessTaskGruppeIdDto = {
@@ -717,9 +717,6 @@ export type foreldrepenger_behandling_aksjonspunkt_BekreftetAksjonspunktDto = (
   | ({
       '@type': '5086';
     } & tjenester_behandling_uttak_dto_AvklarAnnenforelderHarRettDto)
-  | ({
-      '@type': '5069';
-    } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerAnnenpartEØSDto)
   | ({
       '@type': '5076';
     } & tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerOpplysningerOmDødDto)
@@ -1093,8 +1090,8 @@ export type foreldrepenger_behandlingslager_virksomhet_ArbeidType =
   | '-';
 
 export type foreldrepenger_behandlingslager_virksomhet_Arbeidsgiver = {
-  orgnr?: string;
   indexKey?: string;
+  orgnr?: string;
   aktørId?: string;
   erVirksomhet?: boolean;
   identifikator?: string;
@@ -1375,11 +1372,6 @@ export type tjenester_behandling_uttak_dto_AvklarAnnenforelderHarRettDto = {
   annenforelderHarRett: boolean;
   annenForelderHarRettEØS?: boolean;
   annenforelderMottarUføretrygd?: boolean;
-  begrunnelse?: string;
-};
-
-export type tjenester_behandling_uttak_dto_FastsetteUttakDto_FastsetteUttakKontrollerAnnenpartEØSDto = {
-  perioder: Array<tjenester_behandling_uttak_dto_UttakResultatPeriodeLagreDto>;
   begrunnelse?: string;
 };
 
@@ -3394,10 +3386,6 @@ export type tjenester_behandling_klage_aksjonspunkt_KlageVurderingResultatAksjon
   klageHjemmel?: foreldrepenger_behandlingslager_behandling_klage_KlageHjemmel;
 };
 
-export type tjenester_behandling_oppdrag_OppdragDto = {
-  saksnummer?: string;
-};
-
 export type foreldrepenger_behandlingslager_fagsak_egenskaper_UtlandDokumentasjonStatus =
   | 'DOKUMENTASJON_ER_INNHENTET'
   | 'DOKUMENTASJON_VIL_BLI_INNHENTET'
@@ -3458,11 +3446,6 @@ export type foreldrepenger_domene_opptjening_dto_OpptjeningDto = {
   fastsattOpptjening: foreldrepenger_domene_opptjening_dto_FastsattOpptjeningDto;
   opptjeningAktivitetList: Array<foreldrepenger_domene_opptjening_dto_OpptjeningAktivitetDto>;
   ferdiglignetNæring?: Array<foreldrepenger_domene_opptjening_dto_FerdiglignetNæringDto>;
-};
-
-export type tjenester_behandling_personopplysning_PersonopplysningTilbakeDto = {
-  aktoerId?: string;
-  antallBarn?: number;
 };
 
 export type foreldrepenger_behandlingslager_aktør_AdresseType =
@@ -6479,28 +6462,6 @@ export type AutoRunBatchResponses = {
   200: unknown;
 };
 
-export type HentBehandlingResultatForBackendData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/behandling/backend-root';
-};
-
-export type HentBehandlingResultatForBackendResponses = {
-  /**
-   * Returnerer behandling
-   */
-  200: tjenester_behandling_dto_behandling_BehandlingDto;
-};
-
-export type HentBehandlingResultatForBackendResponse =
-  HentBehandlingResultatForBackendResponses[keyof HentBehandlingResultatForBackendResponses];
-
 export type BehandlingErHasteSakData = {
   /**
    * BehandlingId for behandling som merkes som Haster
@@ -7233,27 +7194,6 @@ export type MellomlagreKlageResponses = {
   default: unknown;
 };
 
-export type HentOppdragData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/behandling/oppdrag/oppdraginfo';
-};
-
-export type HentOppdragResponses = {
-  /**
-   * default response
-   */
-  default: tjenester_behandling_oppdrag_OppdragDto;
-};
-
-export type HentOppdragResponse = HentOppdragResponses[keyof HentOppdragResponses];
-
 export type GetDokStatusData = {
   body?: never;
   path?: never;
@@ -7295,28 +7235,6 @@ export type GetOpptjeningResponses = {
 };
 
 export type GetOpptjeningResponse = GetOpptjeningResponses[keyof GetOpptjeningResponses];
-
-export type GetPersonopplysningerTilbakeData = {
-  body?: never;
-  path?: never;
-  query: {
-    /**
-     * behandlingUUID
-     */
-    uuid: tjenester_behandling_dto_UuidDto;
-  };
-  url: '/api/behandling/person/personopplysninger-tilbake';
-};
-
-export type GetPersonopplysningerTilbakeResponses = {
-  /**
-   * Returnerer Personopplysninger, null hvis ikke finnes (GUI støtter ikke NOT_FOUND p.t.)
-   */
-  200: tjenester_behandling_personopplysning_PersonopplysningTilbakeDto;
-};
-
-export type GetPersonopplysningerTilbakeResponse =
-  GetPersonopplysningerTilbakeResponses[keyof GetPersonopplysningerTilbakeResponses];
 
 export type GetPersonoversiktData = {
   body?: never;
@@ -10121,7 +10039,7 @@ export type HentGruppertKodelisteResponses = {
   default: unknown;
 };
 
-export type HentBehandlingResultatForBackend1Data = {
+export type HentBehandlingResultatForBackendData = {
   body?: never;
   path?: never;
   query: {
@@ -10133,15 +10051,15 @@ export type HentBehandlingResultatForBackend1Data = {
   url: '/api/los/los-behandling';
 };
 
-export type HentBehandlingResultatForBackend1Responses = {
+export type HentBehandlingResultatForBackendResponses = {
   /**
    * Returnerer behandling
    */
   200: vedtak_hendelser_behandling_los_LosBehandlingDto;
 };
 
-export type HentBehandlingResultatForBackend1Response =
-  HentBehandlingResultatForBackend1Responses[keyof HentBehandlingResultatForBackend1Responses];
+export type HentBehandlingResultatForBackendResponse =
+  HentBehandlingResultatForBackendResponses[keyof HentBehandlingResultatForBackendResponses];
 
 export type HentFagsakEgenskaperData = {
   body?: never;

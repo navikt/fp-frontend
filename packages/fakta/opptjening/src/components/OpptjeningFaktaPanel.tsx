@@ -145,8 +145,8 @@ export const OpptjeningFaktaPanel = ({
         opptjeningFom: a.opptjeningFom,
         opptjeningTom: a.opptjeningTom,
         aktivitetType: a.aktivitetType,
-        erGodkjent: formVerdierForAlleAktiviteter[index].erGodkjent!,
-        begrunnelse: formVerdierForAlleAktiviteter[index].begrunnelse,
+        erGodkjent: !!formVerdierForAlleAktiviteter[index]!.erGodkjent,
+        begrunnelse: formVerdierForAlleAktiviteter[index]!.begrunnelse,
       }))
       .filter(b => b.begrunnelse);
 
@@ -211,8 +211,8 @@ export const OpptjeningFaktaPanel = ({
       {valgtAktivitetIndex !== undefined && (
         <ValgtAktivitetForm
           key={valgtAktivitetIndex}
-          valgtOpptjeningAktivitet={filtrerteOgSorterteOpptjeningsaktiviteter[valgtAktivitetIndex]}
-          valgteFormValues={formVerdierForAlleAktiviteter[valgtAktivitetIndex]}
+          valgtOpptjeningAktivitet={filtrerteOgSorterteOpptjeningsaktiviteter[valgtAktivitetIndex]!}
+          valgteFormValues={formVerdierForAlleAktiviteter[valgtAktivitetIndex]!}
           readOnly={isReadOnly}
           opptjeningAktivitetTyper={opptjeningAktivitetTypes}
           avbrytAktivitet={avbrytAktivitet}

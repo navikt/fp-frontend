@@ -36,14 +36,14 @@ const getCorrectEmptyArbeidsForhold = (
   let arbeidsforholdMedPositivSaldoFinnes = false;
 
   const konto = stonadskonto.stonadskontoer[periodeTypeKode as StonadskontoType];
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
   if (konto?.aktivitetSaldoDtoList) {
     for (const item of konto.aktivitetSaldoDtoList) {
       if (item.saldo === 0) {
         if (item.aktivitetIdentifikator.arbeidsgiverReferanse) {
           const arbeidsgiverOpplysninger =
             arbeidsgiverOpplysningerPerId[item.aktivitetIdentifikator.arbeidsgiverReferanse];
-          arbeidsForholdMedNullDagerIgjenArray.push(arbeidsgiverOpplysninger.navn);
+          arbeidsForholdMedNullDagerIgjenArray.push(arbeidsgiverOpplysninger?.navn ?? 'Fant ikke navn');
         } else {
           const navn = alleKodeverk['UttakArbeidType'].find(
             k => k.kode === item.aktivitetIdentifikator.uttakArbeidType,
@@ -193,6 +193,10 @@ export const UttakPeriodePanel = ({
 
   const allePerioder = perioderAnnenpart.concat(perioderSøker);
   const valgtPeriode = allePerioder[valgtPeriodeIndex];
+
+  if (!valgtPeriode) {
+    throw new Error(`Valgtperiode finnes ikke for index ${valgtPeriodeIndex}`);
+  }
 
   const erHovedsøkersPeriode = valgtPeriodeIndex + 1 > perioderAnnenpart.length;
   const erValgtPeriodeEøsPeriode = erEøsPeriode(valgtPeriode);

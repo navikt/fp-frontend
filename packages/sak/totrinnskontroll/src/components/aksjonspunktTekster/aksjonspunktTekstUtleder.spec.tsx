@@ -39,7 +39,7 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunkt,
     );
 
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.KontrollerOpplysninger');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Adopsjon.KontrollerOpplysninger');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5005', () => {
     const aksjonspunkt = {
@@ -53,7 +53,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VurderEktefellesBarn');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Adopsjon.VurderEktefellesBarn');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5006', () => {
     const aksjonspunkt = {
@@ -67,7 +67,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6004', () => {
     const aksjonspunkt = {
@@ -81,7 +81,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Adopsjon.VilkarOverstyrt');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Adopsjon.VilkarOverstyrt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5008', () => {
@@ -96,7 +96,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5011', () => {
     const aksjonspunkt = {
@@ -110,7 +110,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 7002', () => {
@@ -125,7 +125,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.VurderSokersRelasjon');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.VurderSokersRelasjon');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5001', () => {
     const aksjonspunkt = {
@@ -139,7 +139,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.SjekkTerminbekreftelse');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.SjekkTerminbekreftelse');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5027', () => {
     const aksjonspunkt = {
@@ -153,7 +153,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.SjekkManglendeFødsel');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.SjekkManglendeFødsel');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6003', () => {
     const aksjonspunkt = {
@@ -167,7 +167,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Fødsel.VilkarOverstyrt');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Fødsel.VilkarOverstyrt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5014', () => {
@@ -182,7 +182,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5013 engangsstønad', () => {
@@ -197,7 +197,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddES');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5013 foreldrepenger', () => {
     const aksjonspunkt = {
@@ -211,7 +211,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarAndreLeddFP');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5031', () => {
     const aksjonspunkt = {
@@ -225,7 +225,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5038', () => {
@@ -240,7 +240,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5047', () => {
     const aksjonspunkt = {
@@ -254,7 +254,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Beregning.InntektFastsatt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5007', () => {
@@ -269,7 +269,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5043', () => {
     const aksjonspunkt = {
@@ -283,7 +283,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Soknadsfrist.ManueltVurdert');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6006', () => {
     const aksjonspunkt = {
@@ -297,7 +297,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Soknadsfrist.VilkarOverstyrt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5021', () => {
@@ -312,7 +312,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5019', () => {
     const aksjonspunkt = {
@@ -326,7 +326,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarLovligOpphold');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarLovligOpphold');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5020', () => {
     const aksjonspunkt = {
@@ -340,7 +340,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VurderSokerBosatt');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.VurderSokerBosatt');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5023', () => {
     const aksjonspunkt = {
@@ -354,7 +354,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarOppholdsrett');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.AvklarOppholdsrett');
   });
   it('skal vise korrekt tekst for aksjonspunkt 6005', () => {
     const aksjonspunkt = {
@@ -368,7 +368,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Medlemskap.VilkarOverstyrt');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5039 varig endring', () => {
@@ -386,7 +386,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.VarigEndring');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Beregning.VarigEndring');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5039 ikkje varig endring', () => {
     const aksjonspunkt = {
@@ -404,7 +404,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Beregning.IkkeVarigEndring');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Beregning.IkkeVarigEndring');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 6008 slettet', () => {
@@ -430,7 +430,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 slettet', () => {
     const uttakPeriode = {
@@ -454,7 +454,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeSlettet');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 6008 lagt til', () => {
@@ -483,7 +483,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 lagt til', () => {
     const uttakPeriode = {
@@ -511,7 +511,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeLagtTil');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 6008 endret', () => {
@@ -540,7 +540,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.OverstyrUttak.PeriodeEndret');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.OverstyrUttak.PeriodeEndret');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 endret', () => {
     const uttakPeriode = {
@@ -568,7 +568,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 6008 avklart', () => {
@@ -596,7 +596,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5071 avklart', () => {
     const uttakPeriode = {
@@ -623,7 +623,7 @@ describe('aksjonspunktTekstUtleder', () => {
       erTilbakekreving,
       aksjonspunkt,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.AvklarUttak.PeriodeAvklart');
   });
 
   // Klage
@@ -637,7 +637,7 @@ describe('aksjonspunktTekstUtleder', () => {
       type: BehandlingResultatType.KLAGE_MEDHOLD,
     } as Behandlingsresultat;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
   });
   // Klage avslag
   // Ytelsesvedtak opphevet
@@ -657,7 +657,7 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunkt,
       behandlingsresultat,
     );
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.OppheveYtelsesVedtak');
   });
   // Klage avvist
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag klage avvist', () => {
@@ -669,7 +669,7 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.Avvist');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.Avvist');
   });
   // Ikke fastsatt Engangsstønad
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ikke fastsatt', () => {
@@ -681,7 +681,7 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak stadfestet', () => {
     const behandlingsresultat = {
@@ -692,7 +692,7 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
-    expect(message[0].props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
+    expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
   });
 
   it('skal vise korrekt tekst for aksjonspunkt 5058 vurder tidsbegrenset', () => {
@@ -711,7 +711,7 @@ describe('aksjonspunktTekstUtleder', () => {
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual(
+    expect(message[0]!).toEqual(
       <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,
     );
   });
@@ -731,7 +731,7 @@ describe('aksjonspunktTekstUtleder', () => {
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual(<div key="Vurder at og fl">Vurder at og fl</div>);
+    expect(message[0]!).toEqual(<div key="Vurder at og fl">Vurder at og fl</div>);
   });
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
     const beregningTilfeller = [
@@ -758,8 +758,8 @@ describe('aksjonspunktTekstUtleder', () => {
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
-    expect(message[0]).toEqual(<div key="Vurder besteberegning">Vurder besteberegning</div>);
-    expect(message[1]).toEqual(
+    expect(message[0]!).toEqual(<div key="Vurder besteberegning">Vurder besteberegning</div>);
+    expect(message[1]!).toEqual(
       <div key="Vurder tidsbegrenset arbeidsforhold">Vurder tidsbegrenset arbeidsforhold</div>,
     );
   });

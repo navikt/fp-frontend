@@ -65,7 +65,7 @@ export const AksjonspunktGodkjenningFieldArray = ({
   return (
     <VStack gap="space-24">
       {fields.map((field, index) => {
-        const { aksjonspunktKode } = aksjonspunktGodkjenning[index];
+        const { aksjonspunktKode } = aksjonspunktGodkjenning[index]!;
         const context = totrinnskontrollSkjermlenkeContext.find(c =>
           c.totrinnskontrollAksjonspunkter.some(ta => ta.aksjonspunktKode === aksjonspunktKode),
         );

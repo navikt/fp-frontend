@@ -117,7 +117,7 @@ const uker = [
 ];
 
 const erDatoInnenforPeriode = (oppgaveForAvdeling: OppgaveForDato, ukevalg: string): boolean => {
-  if (ukevalg === uker[1].kode) {
+  if (ukevalg === uker[1]?.kode) {
     return true;
   }
   const toUkerSiden = dayjs().subtract(2, 'w');
@@ -143,9 +143,9 @@ const slaSammenLikeBehandlingstyperOgDatoer = (oppgaverForAvdeling: OppgaveForDa
       sammenslatte.push(o);
     } else {
       sammenslatte[index] = {
-        behandlingType: sammenslatte[index].behandlingType,
-        opprettetDato: sammenslatte[index].opprettetDato,
-        antall: sammenslatte[index].antall + o.antall,
+        behandlingType: sammenslatte[index]!.behandlingType,
+        opprettetDato: sammenslatte[index]!.opprettetDato,
+        antall: sammenslatte[index]!.antall + o.antall,
       };
     }
   }

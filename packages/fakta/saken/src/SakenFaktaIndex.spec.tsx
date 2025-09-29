@@ -26,7 +26,7 @@ describe('SakenFaktaIndex', () => {
     ).toBeInTheDocument();
     expect(screen.getByText('Innhentelse av dokumentasjon')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByText('Dokumentasjon vil bli innhentet')[0]);
+    await userEvent.click(screen.getAllByText('Dokumentasjon vil bli innhentet')[0]!);
 
     const begrunnelseInput = utils.getByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -57,7 +57,7 @@ describe('SakenFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
-    await waitFor(() => expect(screen.getAllByText('Feltet må fylles ut')[0]).toBeInTheDocument());
+    await waitFor(() => expect(screen.getAllByText('Feltet må fylles ut')[0]!).toBeInTheDocument());
 
     expect(lagre).toHaveBeenCalledTimes(0);
   });

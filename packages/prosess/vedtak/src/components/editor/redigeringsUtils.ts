@@ -114,7 +114,7 @@ export const konverterHtmlToEditorJsFormat = (html: string): OutputData => {
         case 'h2':
           blocks.push({
             type: 'header',
-            data: { text: element.innerHTML, level: Number.parseInt(element.tagName[1]) },
+            data: { text: element.innerHTML, level: Number.parseInt(element.tagName[1]!) },
           });
           break;
         case 'p':

@@ -58,9 +58,9 @@ describe('FrilansPapirsoknadIndex', () => {
     await userEvent.type(tomInput, '15.06.2022');
     fireEvent.blur(tomInput);
 
-    await userEvent.click(screen.getAllByText('Nei')[1]);
-    await userEvent.click(screen.getAllByText('Ja')[2]);
-    await userEvent.click(screen.getAllByText('Nei')[3]);
+    await userEvent.click(screen.getAllByText('Nei')[1]!);
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
+    await userEvent.click(screen.getAllByText('Nei')[3]!);
 
     await userEvent.click(screen.getByText('Lagreknapp (Kun for test)'));
 
@@ -103,17 +103,17 @@ describe('FrilansPapirsoknadIndex', () => {
     await userEvent.type(tomInput, '15.06.2022');
     fireEvent.blur(tomInput);
 
-    await userEvent.click(screen.getAllByText('Nei')[1]);
-    await userEvent.click(screen.getAllByText('Ja')[2]);
-    await userEvent.click(screen.getAllByText('Ja')[3]);
+    await userEvent.click(screen.getAllByText('Nei')[1]!);
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
+    await userEvent.click(screen.getAllByText('Ja')[3]!);
 
     expect(await screen.findByText('Oppgi periode')).toBeInTheDocument();
 
-    const oppdragFomInput = screen.getAllByLabelText('F.o.m.')[1];
+    const oppdragFomInput = screen.getAllByLabelText('F.o.m.')[1]!;
     await userEvent.type(oppdragFomInput, '26.05.2022');
     fireEvent.blur(oppdragFomInput);
 
-    const oppdragTomInput = screen.getAllByLabelText('T.o.m.')[1];
+    const oppdragTomInput = screen.getAllByLabelText('T.o.m.')[1]!;
     await userEvent.type(oppdragTomInput, '15.06.2022');
     fireEvent.blur(oppdragTomInput);
 

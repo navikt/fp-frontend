@@ -31,7 +31,7 @@ function mapVurderingsAlternativTilUttakVurdering(vurdering: VurderingsAlternati
 function mapUttakVurderingTilVurderingsAlternativ(
   dokumentasjonVurderingBehov: DokumentasjonVurderingBehov,
 ): VurderingsAlternativ {
-  const vurdering = dokumentasjonVurderingBehov.vurdering!;
+  const vurdering = dokumentasjonVurderingBehov.vurdering;
   switch (vurdering) {
     case 'GODKJENT_AUTOMATISK':
     case 'GODKJENT': {
@@ -47,7 +47,7 @@ function mapUttakVurderingTilVurderingsAlternativ(
     case 'IKKE_DOKUMENTERT':
       return VurderingsAlternativ.IKKE_DOKUMENTERT;
     default:
-      return assertUnreachable(vurdering);
+      return assertUnreachable(vurdering as never);
   }
 }
 

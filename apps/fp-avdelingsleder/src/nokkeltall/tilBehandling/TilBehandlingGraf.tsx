@@ -156,7 +156,7 @@ const konverterTilKoordinaterGruppertPaBehandlingstype = (
       const eksisterendeKoordinater = acc[o.behandlingType];
       return {
         ...acc,
-        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access
+
         [o.behandlingType]: eksisterendeKoordinater ? eksisterendeKoordinater.concat(nyKoordinat) : [nyKoordinat],
       };
     },

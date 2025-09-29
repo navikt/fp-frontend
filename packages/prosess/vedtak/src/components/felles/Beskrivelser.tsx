@@ -27,7 +27,6 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
 
   return (
     <VStack gap="space-4">
-      {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
       {beskrivelseForVisning && <BeskrivelseVisning beskrivelse={beskrivelseForVisning} />}
       {skalSkjuleResterendeBeskrivelser && (
         <Button
@@ -47,7 +46,10 @@ export const Beskrivelser = ({ beskrivelser }: Props) => {
       {!erResterendeBeskrivelserSkjult && (
         <VStack gap="space-12" className={styles['eldreBeskrivelser']}>
           {beskrivelserSomSkjules.map(beskrivelse => (
-            <BeskrivelseVisning key={beskrivelse.header + beskrivelse.kommentarer[0]} beskrivelse={beskrivelse} />
+            <BeskrivelseVisning
+              key={(beskrivelse.header ?? '') + (beskrivelse.kommentarer.at(0) ?? '')}
+              beskrivelse={beskrivelse}
+            />
           ))}
         </VStack>
       )}

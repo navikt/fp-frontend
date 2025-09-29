@@ -171,7 +171,7 @@ const setAvdeling = (
   if (avdelinger.length > 0 && !valgtAvdelingEnhet) {
     let valgtEnhet = avdelinger.some(a => a.avdelingEnhet === nasjonalEnhet)
       ? nasjonalEnhet
-      : avdelinger[0].avdelingEnhet;
+      : avdelinger[0]!.avdelingEnhet;
     const lagretAvdelingEnhet = getValueFromLocalStorage('avdelingEnhet');
     if (lagretAvdelingEnhet) {
       if (avdelinger.some(a => a.avdelingEnhet === lagretAvdelingEnhet)) {

@@ -95,6 +95,17 @@ export default [
       // TODO (TOR) Ignorert inntil videre grunnet kost/nytte
       'import/no-unresolved': OFF,
 
+      'no-restricted-syntax': [
+        'error',
+        {
+          // Denne selectoren er chatGPT-generert. Men den funker til å differensiere "!"-bruk på index-access kontra annen bruk
+          selector:
+            "TSNonNullExpression[expression.type='Identifier'], TSNonNullExpression[expression.type='MemberExpression'][expression.computed=false]",
+          message:
+            'Ikke bruk non-null assertions på variabler eller properties. Bruk de kun på index access på arrays eller objecter hvis nødvendig',
+        },
+      ],
+
       'simple-import-sort/imports': [
         'error',
         {

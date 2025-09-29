@@ -34,7 +34,7 @@ describe('SaksbehandlereTabell', () => {
 
     expect(await screen.findByText('Navn')).toBeInTheDocument();
 
-    await userEvent.click(screen.getAllByRole('img')[1]);
+    await userEvent.click(screen.getAllByRole('img')[1]!);
 
     expect(await screen.findByText('Ønsker du å slette Espen Utvikler?')).toBeInTheDocument();
   });
@@ -48,7 +48,7 @@ describe('SaksbehandlereTabell', () => {
     const rows = await screen.findAllByRole('row');
 
     for (const [index, row] of rows.slice(1).entries()) {
-      expect(row).toHaveTextContent(sortedNames[index]);
+      expect(row).toHaveTextContent(sortedNames[index]!);
     }
   });
 
@@ -60,7 +60,7 @@ describe('SaksbehandlereTabell', () => {
     const rows = await screen.findAllByRole('row');
 
     for (const [index, row] of rows.slice(1).entries()) {
-      expect(row).toHaveTextContent(sortedNames[index]);
+      expect(row).toHaveTextContent(sortedNames[index]!);
     }
   });
 });

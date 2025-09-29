@@ -15,22 +15,23 @@ interface Props {
 export const Situasjon = ({ gjeldende: { barn, termin, utstedtdato, antallBarn } }: Props) => {
   const intl = useIntl();
   const barnErLike = erGjeldendeBarnLike(barn);
+  const barnet = barn[0];
 
   return (
     <HStack gap="space-16" aria-label={intl.formatMessage({ id: 'Situasjon.OpplysningerGjeldende' })}>
-      {barnErLike && (
+      {barnErLike && barnet && (
         <>
           <FaktaBox
-            key={barn[0].barn.fødselsdato}
-            kilde={barn[0].kilde}
-            value={<DateLabel dateString={barn[0].barn.fødselsdato} />}
+            key={barnet.barn.fødselsdato}
+            kilde={barnet.kilde}
+            value={<DateLabel dateString={barnet.barn.fødselsdato} />}
             label={intl.formatMessage({ id: 'Label.Fødselsdato' })}
           />
-          {barn[0].barn.dødsdato && (
+          {barnet.barn.dødsdato && (
             <FaktaBox
-              key={barn[0].barn.fødselsdato + barn[0].barn.dødsdato}
-              kilde={barn[0].kilde}
-              value={<DateLabel dateString={barn[0].barn.dødsdato} />}
+              key={barnet.barn.fødselsdato + barnet.barn.dødsdato}
+              kilde={barnet.kilde}
+              value={<DateLabel dateString={barnet.barn.dødsdato} />}
               label={intl.formatMessage({ id: 'Label.Dødsdato' })}
             />
           )}
