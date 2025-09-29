@@ -32,7 +32,7 @@
     "@navikt/ft-utils": "3.8.9",
     "@tanstack/react-query": "5.90.2",
     "dayjs": "1.11.18",
-    "ky": "1.10.0",
+    "ky": "1.11.0",
     "react": "19.1.1",
     "react-hook-form": "7.63.0",
     "react-intl": "7.1.11"
