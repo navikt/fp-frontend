@@ -7,12 +7,11 @@ import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
 import type { Behandling } from '@navikt/fp-types';
-import { notEmpty, useTrackRouteParam } from '@navikt/fp-utils';
+import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
+import { notEmpty, useRestApiErrorDispatcher, useTrackRouteParam } from '@navikt/fp-utils';
 
-import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getFaktaLocation, getLocationWithDefaultProsessStegAndFakta, getProsessStegLocation } from '../app/paths';
 import { getAccessRights } from '../app/util/access';
-import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
 import { useBehandlingPollingOperasjoner } from '../data/polling/useBehandlingPollingOperasjoner';
 import { FagsakData } from '../fagsak/FagsakData';

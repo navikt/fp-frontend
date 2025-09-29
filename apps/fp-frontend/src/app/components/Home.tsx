@@ -9,11 +9,9 @@ import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import type { NavAnsatt } from '@navikt/fp-types';
 import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
-import { notEmpty } from '@navikt/fp-utils';
+import { ErrorType, notEmpty, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
 import { AktørIndex } from '../../aktoer/AktørIndex';
-import { ErrorType } from '../../data/error/errorType';
-import { useRestApiErrorDispatcher } from '../../data/error/RestApiErrorContext';
 import { useFagsakApi } from '../../data/fagsakApi';
 import { RequestPendingProvider } from '../../data/polling/RequestPendingContext';
 import { FagsakIndex } from '../../fagsak/FagsakIndex';

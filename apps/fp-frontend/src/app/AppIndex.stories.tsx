@@ -6,6 +6,7 @@ import { http, HttpResponse } from 'msw';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
+import { RestApiErrorProvider } from '@navikt/fp-utils';
 
 import {
   alleInntektsmeldinger,
@@ -33,7 +34,6 @@ import {
   ytelseFordeling,
 } from '../../.storybook/testdata';
 import { BehandlingRel, BehandlingUrl } from '../data/behandlingApi';
-import { RestApiErrorProvider } from '../data/error/RestApiErrorContext';
 import { FagsakRel, FagsakUrl, wrapUrl } from '../data/fagsakApi';
 import { AppIndexWrapper } from './AppIndex';
 

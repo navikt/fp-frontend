@@ -5,7 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import { breadcrumbsIntegration, init } from '@sentry/browser';
 import dayjs from 'dayjs';
 
-import { RestApiErrorProvider } from './data/error/RestApiErrorContext';
+import { RestApiErrorProvider } from '@navikt/fp-utils';
+
 import { LosAppIndexWrapper } from './LosAppIndex';
 
 import 'dayjs/locale/nb.js';
