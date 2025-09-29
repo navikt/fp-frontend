@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 
-import { execFileSync, spawnSync } from 'child_process';
-import fs from 'fs';
-import path from 'path';
-import { fileURLToPath } from 'url';
+import { execFileSync, spawnSync } from 'node:child_process';
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -106,9 +106,13 @@ async function generateTypes() {
 
     const isWindows = process.platform === 'win32';
     if (isWindows) {
-      spawnSync('cmd', ['/c', 'copy', 'temp-types\\types.gen.ts', 'packages\\types\\src\\apiDtoGenerert.ts'], {
-        stdio: 'inherit',
-      });
+      spawnSync(
+        'cmd',
+        ['/c', 'copy', String.raw`temp-types\types.gen.ts`, String.raw`packages\types\src\apiDtoGenerert.ts`],
+        {
+          stdio: 'inherit',
+        },
+      );
       spawnSync('cmd', ['/c', 'rmdir', '/s', '/q', 'temp-types'], { stdio: 'inherit' });
     } else {
       spawnSync('cp', ['temp-types/types.gen.ts', 'packages/types/src/apiDtoGenerert.ts'], { stdio: 'inherit' });
@@ -125,4 +129,9 @@ async function generateTypes() {
   }
 }
 
-generateTypes();
+try {
+  await generateTypes();
+} catch (error) {
+  console.error(error);
+  process.exit(1);
+}
