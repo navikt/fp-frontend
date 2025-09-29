@@ -10,10 +10,9 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
-import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
+import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
+import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
-import { ErrorBoundary } from '../../../packages/ui-komponenter/src/ErrorBoundary';
-import { ErrorType, type FpError } from '../../../packages/utils/src/context/error/errorType';
 import { Dekorator } from './app/Dekorator';
 import { Home } from './app/Home';
 import { initFetchOptions } from './data/fplosAvdelingslederApi';

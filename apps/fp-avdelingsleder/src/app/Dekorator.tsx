@@ -13,9 +13,8 @@ import {
   SYSTEMRUTINE_URL,
 } from '@navikt/fp-konstanter';
 import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
-import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
+import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
-import { ErrorType, type FpError } from '../../../../packages/utils/src/context/error/errorType';
 import type { InnloggetBruker } from '../typer/innloggetBruker';
 
 type QueryStrings = {
