@@ -3872,7 +3872,7 @@ export type tjenester_behandling_medlem_MedlemskapDto_MedlemskapPeriode = {
 };
 
 export type tjenester_behandling_medlem_MedlemskapDto_Oppholdstillatelse = {
-  fom?: string;
+  fom: string;
   tom?: string;
   type: foreldrepenger_behandlingslager_aktør_OppholdstillatelseType;
 };
