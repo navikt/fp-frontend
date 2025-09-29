@@ -57,7 +57,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
     const navnPåForetaketInput = screen.getByLabelText('Navn på foretaket');
     await userEvent.type(navnPåForetaketInput, 'Bedriften AS');
 
-    await userEvent.click(screen.getAllByText('Nei')[0]);
+    await userEvent.click(screen.getAllByText('Nei')[0]!);
 
     await userEvent.selectOptions(screen.getByLabelText('Hvilket land er virksomheten registrert i?'), 'AND');
 
@@ -69,7 +69,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
     expect(
       screen.getByText('Er virksomheten blitt varig endret, nyoppstartet eller er søker ny i arbeidslivet?'),
     ).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[1]);
+    await userEvent.click(screen.getAllByText('Ja')[1]!);
 
     expect(screen.getByText('Årsak')).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText('Varig endring i næring'));
@@ -80,7 +80,7 @@ describe('VirksomhetPapirsoknadIndex', () => {
 
     await userEvent.type(screen.getByLabelText('Årsinntekt'), '500000');
 
-    await userEvent.click(screen.getAllByText('Ja')[2]);
+    await userEvent.click(screen.getAllByText('Ja')[2]!);
 
     await userEvent.type(screen.getByLabelText('Navn på regnskapsfører/revisor?'), 'Espen Utvikler');
 

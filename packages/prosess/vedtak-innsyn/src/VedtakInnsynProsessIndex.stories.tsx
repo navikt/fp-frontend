@@ -100,9 +100,9 @@ export const PanelForAvvistVedtakReadonly: Story = {
   args: {
     isReadOnly: true,
     aksjonspunkterForPanel: [
-      defaultAksjonspunkter[0],
+      defaultAksjonspunkter[0]!,
       {
-        ...defaultAksjonspunkter[1],
+        ...defaultAksjonspunkter[1]!,
         status: AksjonspunktStatus.UTFORT,
         begrunnelse: 'Dette er en vurdering',
       },

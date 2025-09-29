@@ -30,10 +30,10 @@ describe('access', () => {
 
   describe('writeAccess', () => {
     const validFagsakStatuser = [FagsakStatusEnum.OPPRETTET, FagsakStatusEnum.UNDER_BEHANDLING];
-    const validFagsakStatus = validFagsakStatuser[0];
+    const validFagsakStatus = validFagsakStatuser[0]!;
 
     const validBehandlingStatuser = [BehandlingStatusEnum.OPPRETTET, BehandlingStatusEnum.BEHANDLING_UTREDES];
-    const validBehandlingStatus = validBehandlingStatuser[0];
+    const validBehandlingStatus = validBehandlingStatuser[0]!;
     const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
 
     it('saksbehandler skal ha skrivetilgang', () => {
@@ -74,10 +74,10 @@ describe('access', () => {
 
   describe('kanOverstyreAccess', () => {
     const validFagsakStatuser = [FagsakStatusEnum.UNDER_BEHANDLING];
-    const validFagsakStatus = validFagsakStatuser[0];
+    const validFagsakStatus = validFagsakStatuser[0]!;
 
     const validBehandlingStatuser = [BehandlingStatusEnum.BEHANDLING_UTREDES];
-    const validBehandlingStatus = validBehandlingStatuser[0];
+    const validBehandlingStatus = validBehandlingStatuser[0]!;
     const validBehandlingTyper = BehandlingTypeEnum.FORSTEGANGSSOKNAD;
 
     const saksbehandlerOgOverstyrerAnsatt = { ...saksbehandlerAnsatt, kanOverstyre: true };

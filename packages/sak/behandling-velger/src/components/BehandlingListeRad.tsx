@@ -40,7 +40,7 @@ export const BehandlingListeRad = ({
   }
   if (erKunEnBehandling || skalViseAlleBehandlinger) {
     return renderRadSomLenke(
-      styles['linkToBehandling'],
+      styles['linkToBehandling']!,
       <BehandlingInformasjon
         behandling={behandling}
         withChevronDown={false}

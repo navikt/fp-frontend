@@ -124,15 +124,15 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
 
     expect(screen.getAllByText('Har annen forelder rett til foreldrepenger i Norge?')).toHaveLength(2);
-    await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
+    await userEvent.click(screen.getAllByText('Nei').at(-1)!);
 
     expect(
       screen.getByText('Har annen forelder mottatt pengestøtte tilsvarende foreldrepenger fra land i EØS?'),
     ).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Nei')[screen.getAllByText('Nei').length - 1]);
+    await userEvent.click(screen.getAllByText('Nei').at(-1)!);
 
     expect(await screen.findByText('Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?')).toBeInTheDocument();
-    await userEvent.click(screen.getAllByText('Ja')[screen.getAllByText('Ja').length - 1]);
+    await userEvent.click(screen.getAllByText('Ja').at(-1)!);
 
     await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
@@ -173,12 +173,12 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(jaRadios).toHaveLength(3);
     expect(neiRadios).toHaveLength(3);
 
-    expect(jaRadios[0]).not.toBeChecked();
-    expect(neiRadios[0]).toBeChecked();
-    expect(jaRadios[1]).not.toBeChecked();
-    expect(neiRadios[1]).toBeChecked();
-    expect(jaRadios[2]).not.toBeChecked();
-    expect(neiRadios[2]).toBeChecked();
+    expect(jaRadios[0]!).not.toBeChecked();
+    expect(neiRadios[0]!).toBeChecked();
+    expect(jaRadios[1]!).not.toBeChecked();
+    expect(neiRadios[1]!).toBeChecked();
+    expect(jaRadios[2]!).not.toBeChecked();
+    expect(neiRadios[2]!).toBeChecked();
   });
 
   it('skal vise i readonly modus for historisk valgte options når revurdering åpnes', async () => {
@@ -205,12 +205,12 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(jaRadios).toHaveLength(3);
     expect(neiRadios).toHaveLength(3);
 
-    expect(jaRadios[0]).not.toBeChecked();
-    expect(neiRadios[0]).toBeChecked();
-    expect(jaRadios[1]).not.toBeChecked();
-    expect(neiRadios[1]).toBeChecked();
-    expect(jaRadios[2]).toBeChecked();
-    expect(neiRadios[2]).not.toBeChecked();
+    expect(jaRadios[0]!).not.toBeChecked();
+    expect(neiRadios[0]!).toBeChecked();
+    expect(jaRadios[1]!).not.toBeChecked();
+    expect(neiRadios[1]!).toBeChecked();
+    expect(jaRadios[2]!).toBeChecked();
+    expect(neiRadios[2]!).not.toBeChecked();
 
     const bekreftOgFortsettKnapp = screen.queryByText('Bekreft og fortsett');
     expect(bekreftOgFortsettKnapp).not.toBeInTheDocument();

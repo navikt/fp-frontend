@@ -76,13 +76,18 @@ export const ArbeidsforholdFieldArray = ({
     <>
       {fields.map((field, index: number) => {
         const arbeidsforhold = sorterteArbeidsforhold[index];
+
+        if (!arbeidsforhold) {
+          return null;
+        }
+
         const arbeidsgiverOpplysning = arbeidsgiverOpplysningerPerId[arbeidsforhold.arbeidsgiverReferanse ?? ''];
 
         const alleIafAf = aoiArbeidsforhold.filter(
           iaya => iaya.arbeidsgiverIdent === arbeidsforhold.arbeidsgiverReferanse,
         );
 
-        const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse ?? undefined);
+        const af = finnArbeidsforhold(alleIafAf, arbeidsforhold.internArbeidsforholdReferanse);
 
         const visInfoAlert = af
           ? !erInnenforIntervall(arbeidsforhold.tilretteleggingBehovFom, af.fom, af.tom)
@@ -104,10 +109,8 @@ export const ArbeidsforholdFieldArray = ({
                     <HStack gap="space-16" align="center">
                       <Buildings3Icon color="var(--ax-accent-700)" className={styles['image']} />
                       <Heading size="small" level="3">
-                        {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                         {arbeidsgiverOpplysning?.navn ?? arbeidType?.navn}
                       </Heading>
-                      {/*eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- [JOHANNES] vent til vi har bestemt strict index access*/}
                       {arbeidsgiverOpplysning?.identifikator && (
                         <BodyShort size="small">{arbeidsgiverOpplysning.identifikator}</BodyShort>
                       )}

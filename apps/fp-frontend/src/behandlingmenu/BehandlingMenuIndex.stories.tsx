@@ -142,7 +142,7 @@ export const ValgNårVeileder: Story = {
       ...FAGSAK,
       behandlinger: [
         {
-          ...ALLE_BEHANDLINGER[0],
+          ...ALLE_BEHANDLINGER[0]!,
           behandlingTillatteOperasjoner: {
             uuid: '1',
             behandlingFraBeslutter: false,

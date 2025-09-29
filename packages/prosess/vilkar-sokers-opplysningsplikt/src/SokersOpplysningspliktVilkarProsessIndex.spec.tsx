@@ -20,7 +20,7 @@ describe('SokersOpplysningspliktVilkarProsessIndex', () => {
     const vurderingInput = utils.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    await userEvent.click(screen.getAllByText(/Vilkåret er oppfylt/)[0]);
+    await userEvent.click(screen.getAllByText(/Vilkåret er oppfylt/)[0]!);
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

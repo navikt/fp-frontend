@@ -48,11 +48,11 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
   );
 };
 
-const AKSJONSPUNKT_TEKST_PER_KODE = {
+const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
-} as Record<string, string>;
+};
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>
   aksjonspunkter.length > 0
-    ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0].definisjon] })
+    ? intl.formatMessage({ id: AKSJONSPUNKT_TEKST_PER_KODE[aksjonspunkter[0]!.definisjon] })
     : '';

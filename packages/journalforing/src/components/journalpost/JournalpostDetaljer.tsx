@@ -47,7 +47,7 @@ const buildInitialValues = (journalpost: Journalpost): JournalføringFormValues 
     ytelsetypeValg: undefined,
     journalpostTittel: journalpost.tittel,
     journalpostDokumenter: dokumentTittelSkalStyresAvJournalpost(journalpost)
-      ? [{ dokumentId: docs[0].dokumentId, tittel: journalpost.tittel }]
+      ? [{ dokumentId: docs[0]?.dokumentId ?? 'Mangler dokumentId', tittel: journalpost.tittel }]
       : buildInitialValuesFlereDokumenter(docs),
   };
 };

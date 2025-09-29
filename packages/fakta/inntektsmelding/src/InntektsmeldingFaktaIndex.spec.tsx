@@ -33,7 +33,7 @@ const verifiserKolonneSortering = async (headerNavn: string, kolonneIndex: numbe
 
 const assertSortedColumn = (columnIndex: number, forventetSortering: string[]) => {
   const rows = screen.getAllByRole<HTMLTableRowElement>('row').slice(1);
-  const columnValues = rows.map(row => row.cells[columnIndex].textContent);
+  const columnValues = rows.map(row => row.cells[columnIndex]!.textContent);
 
   expect(columnValues).toEqual(forventetSortering);
 };

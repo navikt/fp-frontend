@@ -52,7 +52,7 @@ export const OpptjeningInngangsvilkarFpInitPanel = () => {
       <>
         {opptjening && (
           <OpptjeningVilkarProsessIndex
-            lovReferanse={standardPanelProps.vilkårForPanel[0].lovReferanse ?? undefined}
+            lovReferanse={standardPanelProps.vilkårForPanel[0]!.lovReferanse ?? undefined}
             status={standardPanelProps.status}
             opptjening={opptjening}
           />
