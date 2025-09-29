@@ -7,11 +7,10 @@ import { useQuery } from '@tanstack/react-query';
 
 import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
-import { notEmpty } from '@navikt/fp-utils';
+import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
+import { notEmpty, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
-import { ErrorBoundary } from '../app/ErrorBoundary';
 import { useBehandlingApi } from '../data/behandlingApi';
-import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { BehandlingDataContext } from './felles/context/BehandlingDataContext';
 import { BehandlingPaVent } from './felles/modaler/paVent/BehandlingPaVent';
 import { lazyWithRetry } from './lazyUtils';

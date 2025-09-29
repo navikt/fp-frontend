@@ -9,15 +9,14 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
+import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
+import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
-import { ErrorType, type FpError } from '../data/error/errorType';
-import { useRestApiError, useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../data/fagsakApi';
 import { PollingTimeoutError } from '../data/polling/pollingUtils';
 import { AppConfigResolver } from './AppConfigResolver';
 import { Dekorator } from './components/Dekorator';
 import { Home } from './components/Home';
-import { ErrorBoundary } from './ErrorBoundary';
 
 import messages from '../../i18n/nb_NO.json';
 

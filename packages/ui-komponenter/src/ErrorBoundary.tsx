@@ -4,8 +4,7 @@ import { ErrorMessage } from '@navikt/ds-react';
 import { captureException, withScope } from '@sentry/browser';
 
 import { ErrorPage } from '@navikt/fp-sak-infosider';
-
-import { ErrorType, type FpError } from '../data/error/errorType';
+import { ErrorType, type FpError } from '@navikt/fp-utils';
 
 const isDevelopment = import.meta.env.MODE === 'development';
 

@@ -2,9 +2,8 @@ import { HTTPError, type KyResponse } from 'ky';
 
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import type { Behandling } from '@navikt/fp-types';
+import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
-import { ErrorType } from '../error/errorType';
-import { useRestApiErrorDispatcher } from '../error/RestApiErrorContext';
 import { doGetRequest } from '../fagsakApi';
 
 //TODO (TOR) Vurder å bruke Websocket i staden for denne pollemekanismen.
