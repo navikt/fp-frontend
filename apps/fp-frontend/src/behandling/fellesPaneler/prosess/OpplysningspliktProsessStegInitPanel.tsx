@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, BehandlingTypeEnum, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
@@ -42,7 +42,7 @@ export const OpplysningspliktProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
       prosessPanelKode={ProsessStegCode.OPPLYSNINGSPLIKT}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Opplysningsplikt' })}
       skalPanelVisesIMeny={
-        standardPanelProps.behandling.type === BehandlingTypeEnum.REVURDERING
+        standardPanelProps.behandling.type === 'BT-004'
           ? false
           : skalViseProsessPanel(
               standardPanelProps.aksjonspunkterForPanel,

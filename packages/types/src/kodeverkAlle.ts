@@ -9,7 +9,7 @@ import {
   BehandlingArsakTypeEnum,
   BehandlingResultatType,
   BehandlingStatusEnum,
-  BehandlingTypeEnum,
+  type BehandlingType,
   FagsakMarkeringKode,
   FagsakStatusEnum,
   FagsakYtelseTypeEnum,
@@ -72,7 +72,7 @@ type KodeverkEnumMap = {
   Avslagsårsak: Avslagsarsak;
   BehandlingResultatType: BehandlingResultatType;
   BehandlingStatus: BehandlingStatusEnum;
-  BehandlingType: BehandlingTypeEnum;
+  BehandlingType: BehandlingType;
   BehandlingÅrsakType: BehandlingArsakTypeEnum;
   FamilieHendelseType: FamilieHendelseType;
   FaresignalVurdering: FaresignalVurdering;

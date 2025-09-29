@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingResultatType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 import { MenyHenleggIndex } from './MenyHenleggIndex';
@@ -68,7 +68,7 @@ export const ForFørstegangssøknad: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+      type: 'BT-002',
     } as Behandling,
   },
 };
@@ -78,7 +78,7 @@ export const ForKlage: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingTypeEnum.KLAGE,
+      type: 'BT-003',
     } as Behandling,
   },
 };
@@ -88,7 +88,7 @@ export const ForInnsyn: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingTypeEnum.DOKUMENTINNSYN,
+      type: 'BT-006',
     } as Behandling,
   },
 };
@@ -98,7 +98,7 @@ export const ForTilbakekreving: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingTypeEnum.TILBAKEKREVING,
+      type: 'BT-007',
     } as Behandling,
   },
 };
@@ -108,7 +108,7 @@ export const ForTilbakekrevingRevurdering: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
+      type: 'BT-009',
     } as Behandling,
   },
 };
@@ -118,7 +118,7 @@ export const ForRevurdering: Story = {
     valgtBehandling: {
       versjon: 2,
       uuid: '23r2323',
-      type: BehandlingTypeEnum.REVURDERING,
+      type: 'BT-004',
     } as Behandling,
   },
 };

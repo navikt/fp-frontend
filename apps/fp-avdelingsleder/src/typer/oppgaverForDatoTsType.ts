@@ -1,6 +1,8 @@
+import type { BehandlingType } from '@navikt/fp-kodeverk';
+
 export type OppgaveForDato = Readonly<{
   fagsakYtelseType: string;
-  behandlingType: string;
+  behandlingType: BehandlingType;
   opprettetDato: string;
   antall: number;
 }>;

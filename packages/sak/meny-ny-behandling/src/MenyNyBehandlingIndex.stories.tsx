@@ -1,54 +1,22 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingArsakTypeEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { BehandlingArsakTypeEnum } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { MenyNyBehandlingIndex } from './MenyNyBehandlingIndex';
 
-const BEHANDLINGSTYPER = [
-  {
-    kode: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-    kodeverk: 'BEHANDLING_TYPE',
-    navn: 'Førstegangssøknad',
-  },
-  {
-    kode: BehandlingTypeEnum.REVURDERING,
-    kodeverk: 'BEHANDLING_TYPE',
-    navn: 'Revurdering',
-  },
-  {
-    kode: BehandlingTypeEnum.KLAGE,
-    kodeverk: 'BEHANDLING_TYPE',
-    navn: 'Klage',
-  },
-  {
-    kode: BehandlingTypeEnum.DOKUMENTINNSYN,
-    kodeverk: 'BEHANDLING_TYPE',
-    navn: 'Dokumentinnsyn',
-  },
-  {
-    kode: BehandlingTypeEnum.TILBAKEKREVING,
-    kodeverk: 'BEHANDLING_TYPE',
-    navn: 'Tilbakekreving',
-  },
-  {
-    kode: BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
-    kodeverk: 'BEHANDLING_TYPE',
-    navn: 'Tilbakekreving revurdering',
-  },
-];
-
 const BEHANDLING_OPPRETTING = [
   {
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingType: 'BT-002',
     kanOppretteBehandling: true,
   },
   {
-    behandlingType: BehandlingTypeEnum.REVURDERING,
+    behandlingType: 'BT-004',
     kanOppretteBehandling: true,
   },
   {
-    behandlingType: BehandlingTypeEnum.KLAGE,
+    behandlingType: 'BT-003',
     kanOppretteBehandling: true,
   },
 ];
@@ -75,7 +43,7 @@ const meta = {
     ytelseType: 'FP',
     saksnummer: '123',
     behandlingUuid: '1',
-    behandlingstyper: BEHANDLINGSTYPER,
+    behandlingstyper: alleKodeverk.BehandlingType,
     behandlingOppretting: BEHANDLING_OPPRETTING,
     revurderingArsaker: REVURDERINGARSAKER,
   },

@@ -5,7 +5,6 @@ import { useQuery } from '@tanstack/react-query';
 import dayjs from 'dayjs';
 import { http, HttpResponse } from 'msw';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
@@ -19,47 +18,47 @@ const withIntl = getIntlDecorator(messages);
 const OPPGAVER_ÅPNE_ELLER_PÅ_VENT = [
   {
     behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingType: 'BT-002',
     førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
     antall: 2,
   },
   {
     behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
-    behandlingType: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+    behandlingType: 'BT-002',
     førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
     antall: 5,
   },
   {
     behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
-    behandlingType: BehandlingTypeEnum.REVURDERING,
+    behandlingType: 'BT-004',
     førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),
     antall: 2,
   },
   {
     behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
-    behandlingType: BehandlingTypeEnum.KLAGE,
+    behandlingType: 'BT-003',
     antall: 2,
   },
   {
     behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
-    behandlingType: BehandlingTypeEnum.KLAGE,
+    behandlingType: 'BT-003',
     antall: 6,
   },
   {
     behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
-    behandlingType: BehandlingTypeEnum.REVURDERING,
+    behandlingType: 'BT-004',
     førsteUttakMåned: dayjs().startOf('month').subtract(4, 'M').format(ISO_DATE_FORMAT),
     antall: 6,
   },
   {
     behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
-    behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
+    behandlingType: 'BT-006',
     førsteUttakMåned: dayjs().startOf('month').subtract(10, 'M').format(ISO_DATE_FORMAT),
     antall: 3,
   },
   {
     behandlingVenteStatus: BehandlingVenteStatus.IKKE_PA_VENT,
-    behandlingType: BehandlingTypeEnum.DOKUMENTINNSYN,
+    behandlingType: 'BT-006',
     førsteUttakMåned: dayjs().startOf('month').subtract(10, 'M').format(ISO_DATE_FORMAT),
     antall: 5,
   },

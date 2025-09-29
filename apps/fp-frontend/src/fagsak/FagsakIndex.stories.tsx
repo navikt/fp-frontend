@@ -6,7 +6,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { BehandlingStatusEnum, BehandlingTypeEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -66,7 +66,7 @@ const ALLE_BEHANDLINGER = [
     uuid: '1',
     behandlingKøet: false,
     behandlingPåVent: false,
-    type: BehandlingTypeEnum.REVURDERING,
+    type: 'BT-004',
     status: BehandlingStatusEnum.BEHANDLING_UTREDES,
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',

@@ -3,7 +3,7 @@ import React from 'react';
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { BehandlingTypeEnum, OppholdArsakType } from '@navikt/fp-kodeverk';
+import { OppholdArsakType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
@@ -58,7 +58,7 @@ const finnTidslinjeTider = (
 ): TidslinjeTimes => {
   const familiehendelseDato = utledFamiliehendelseDato(familiehendelse);
 
-  const isRevurdering = behandling.type === BehandlingTypeEnum.REVURDERING;
+  const isRevurdering = behandling.type === 'BT-004';
 
   return {
     soknad: finnSøknadsdato(søknad),

@@ -5,7 +5,6 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingTypeEnum } from '@navikt/fp-kodeverk';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
 import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
 import { notEmpty, useRestApiErrorDispatcher } from '@navikt/fp-utils';
@@ -31,8 +30,7 @@ export const BehandlingPanelerIndex = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const erFørstegangssøknadEllerRevurdering =
-    behandling.type === BehandlingTypeEnum.FORSTEGANGSSOKNAD || behandling.type === BehandlingTypeEnum.REVURDERING;
+  const erFørstegangssøknadEllerRevurdering = behandling.type === 'BT-002' || behandling.type === 'BT-004';
 
   const behandlingApi = useBehandlingApi(behandling);
 
@@ -105,21 +103,21 @@ export const BehandlingPanelerIndex = () => {
           </ErrorBoundary>
         </Suspense>
       )}
-      {behandling.type === BehandlingTypeEnum.DOKUMENTINNSYN && (
+      {behandling.type === 'BT-006' && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <InnsynPaneler valgtProsessSteg={query['punkt']} />
           </ErrorBoundary>
         </Suspense>
       )}
-      {behandling.type === BehandlingTypeEnum.ANKE && (
+      {behandling.type === 'BT-008' && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <AnkePaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
           </ErrorBoundary>
         </Suspense>
       )}
-      {behandling.type === BehandlingTypeEnum.KLAGE && (
+      {behandling.type === 'BT-003' && (
         <Suspense fallback={<LoadingPanel />}>
           <ErrorBoundary errorMessageCallback={addErrorMessage}>
             <KlagePaneler valgtProsessSteg={query['punkt']} valgtFaktaSteg={query['fakta']} />
@@ -138,5 +136,4 @@ export const BehandlingPanelerIndex = () => {
 };
 
 const erTilbakekreving = (behandlingTypeKode?: string): boolean =>
-  behandlingTypeKode === BehandlingTypeEnum.TILBAKEKREVING ||
-  behandlingTypeKode === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;
+  behandlingTypeKode === 'BT-007' || behandlingTypeKode === 'BT-009';

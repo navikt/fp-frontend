@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingTypeEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { OppgaveReservasjonForlengetModal } from './OppgaveReservasjonForlengetModal';
@@ -37,7 +37,7 @@ export const Default: Story = {
       personnummer: '1212',
       navn: 'Espen Utvikler',
       system: 'SAK',
-      behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+      behandlingstype: 'BT-002',
       opprettetTidspunkt: '2019-01-01',
       behandlingsfrist: '2019-01-01',
       fagsakYtelseType: 'FP',

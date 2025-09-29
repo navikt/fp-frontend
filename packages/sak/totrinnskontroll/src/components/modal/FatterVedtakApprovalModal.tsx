@@ -8,7 +8,6 @@ import {
   type BehandlingStatus,
   BehandlingStatusEnum,
   type BehandlingType,
-  BehandlingTypeEnum,
 } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
@@ -20,16 +19,16 @@ const getInfoTextCode = (
   isOpphor: boolean,
   harSammeResultatSomOriginalBehandling?: boolean,
 ) => {
-  if (behandlingtypeKode === BehandlingTypeEnum.TILBAKEKREVING) {
+  if (behandlingtypeKode === 'BT-007') {
     return 'FatterVedtakApprovalModal.Tilbakekreving';
   }
-  if (behandlingtypeKode === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING) {
+  if (behandlingtypeKode === 'BT-009') {
     return 'FatterVedtakApprovalModal.TilbakekrevingRevurdering';
   }
-  if (behandlingtypeKode === BehandlingTypeEnum.KLAGE) {
+  if (behandlingtypeKode === 'BT-003') {
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
-  if (behandlingtypeKode === BehandlingTypeEnum.ANKE) {
+  if (behandlingtypeKode === 'BT-008') {
     return 'FatterVedtakApprovalModal.ModalDescriptionAnke';
   }
   if (harSammeResultatSomOriginalBehandling) {
@@ -45,10 +44,10 @@ const getInfoTextCode = (
 };
 
 const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: BehandlingType) => {
-  if (behandlingTypeKode === BehandlingTypeEnum.KLAGE) {
+  if (behandlingTypeKode === 'BT-003') {
     return 'FatterVedtakApprovalModal.ModalDescriptionKlage';
   }
-  if (behandlingTypeKode === BehandlingTypeEnum.ANKE) {
+  if (behandlingTypeKode === 'BT-008') {
     return 'FatterVedtakApprovalModal.ModalDescriptionAnke';
   }
   if (isOpphor) {

@@ -3,7 +3,7 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
 import type { BehandlingAppKontekst, Behandlingsresultat } from '@navikt/fp-types';
 
@@ -55,7 +55,7 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '1',
-        type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+        type: 'BT-002',
         status: BehandlingStatusEnum.AVSLUTTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
@@ -75,7 +75,7 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '2',
-        type: BehandlingTypeEnum.DOKUMENTINNSYN,
+        type: 'BT-006',
         status: BehandlingStatusEnum.OPPRETTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
@@ -95,7 +95,7 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '3',
-        type: BehandlingTypeEnum.REVURDERING,
+        type: 'BT-004',
         status: BehandlingStatusEnum.OPPRETTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,
@@ -111,7 +111,7 @@ export const Default: Story = {
       {
         versjon: 2,
         uuid: '4',
-        type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+        type: 'BT-002',
         status: BehandlingStatusEnum.AVSLUTTET,
         språkkode: 'NB',
         erAktivPapirsoknad: false,

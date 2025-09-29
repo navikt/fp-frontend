@@ -5,14 +5,22 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { type BehandlingType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { type BehandlingType } from '@navikt/fp-kodeverk';
 
 import { lagreSakslisteBehandlingstype, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';
 
 export type FormValues = { [key in BehandlingType]?: boolean };
 
-const behandlingstypeOrder = Object.values(BehandlingTypeEnum);
+const behandlingstypeOrder = [
+  'BT-002',
+  'BT-003',
+  'BT-004',
+  'BT-006',
+  'BT-007',
+  'BT-008',
+  'BT-009',
+] satisfies BehandlingType[];
 
 interface Props {
   valgtSakslisteId: number;

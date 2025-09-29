@@ -3,13 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  BehandlingTypeEnum,
-  InnsynResultatType,
-  Kommunikasjonsretning,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
@@ -63,7 +57,7 @@ export const PanelForInnvilgetVedtak: Story = {
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-          tittel: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+          tittel: 'BT-002',
           opprettetDato: '2019-01-01',
         },
       ],
@@ -86,7 +80,7 @@ export const PanelForAvvistVedtak: Story = {
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-          tittel: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+          tittel: 'BT-002',
           opprettetDato: '2019-01-01',
         },
       ],
@@ -118,7 +112,7 @@ export const PanelForAvvistVedtakReadonly: Story = {
       vedtaksdokumentasjon: [
         {
           behandlingUuid: '48528d21-89bb-4453-b1eb-c8649273a37c',
-          tittel: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+          tittel: 'BT-002',
           opprettetDato: '2019-01-01',
         },
       ],

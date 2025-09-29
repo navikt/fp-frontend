@@ -5,7 +5,7 @@ import { HStack, Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { useQuery } from '@tanstack/react-query';
 
-import { type BehandlingType, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { type BehandlingType } from '@navikt/fp-kodeverk';
 
 import { oppgaverÅpneEllerPåVentOptions } from '../../data/fplosAvdelingslederApi';
 import { StoreValuesInLocalStorage } from '../../data/StoreValuesInLocalStorage';
@@ -31,10 +31,7 @@ export const OppgaverSomErApneEllerPaVentPanel = ({ height, valgtAvdelingEnhet, 
   const stringFromStorage = getValueFromLocalStorage(formName);
   const lagredeVerdier = stringFromStorage ? (JSON.parse(stringFromStorage) as ValgteVerdier) : undefined;
 
-  const filtrerteBehandlingstyper = behandlingTyper.filter(
-    type =>
-      type.kode !== BehandlingTypeEnum.TILBAKEKREVING && type.kode !== BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
-  );
+  const filtrerteBehandlingstyper = behandlingTyper.filter(type => type.kode !== 'BT-007' && type.kode !== 'BT-009');
 
   const formDefaultValues = filtrerteBehandlingstyper.reduce<ValgteVerdier>(
     (app, type) => ({

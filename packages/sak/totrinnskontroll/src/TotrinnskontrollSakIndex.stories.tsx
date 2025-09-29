@@ -2,7 +2,7 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { BehandlingResultatType, BehandlingStatusEnum, BehandlingTypeEnum, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingStatusEnum, SkjermlenkeType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 import type { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
@@ -20,7 +20,7 @@ const DEFAULT_BEHANDLING = {
   uuid: '1',
   versjon: 2,
   status: BehandlingStatusEnum.FATTER_VEDTAK,
-  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  type: 'BT-002',
   behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
   behandlingsresultat: {

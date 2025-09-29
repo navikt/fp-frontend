@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, BehandlingTypeEnum, KøSortering } from '@navikt/fp-kodeverk';
+import { AndreKriterierType, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
@@ -67,7 +67,7 @@ export const Default: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        behandlingTyper: ['BT-002', 'BT-004'],
         fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
@@ -92,7 +92,7 @@ export const MedToSakslister: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        behandlingTyper: ['BT-002', 'BT-004'],
         fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
@@ -110,7 +110,7 @@ export const MedToSakslister: Story = {
       {
         sakslisteId: 2,
         navn: 'Saksliste 2',
-        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.KLAGE],
+        behandlingTyper: ['BT-003', 'BT-003'],
         fagsakYtelseTyper: ['SVP'],
         andreKriterier: [
           {
@@ -187,7 +187,7 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
       {
         sakslisteId: 1,
         navn: 'Saksliste 1',
-        behandlingTyper: [BehandlingTypeEnum.FORSTEGANGSSOKNAD, BehandlingTypeEnum.REVURDERING],
+        behandlingTyper: ['BT-002', 'BT-004'],
         fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {

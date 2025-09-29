@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { BehandlingTypeEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../../../data/fplosSaksbehandlerApi';
@@ -57,7 +57,7 @@ export const Default: Story = {
       personnummer: '1212',
       navn: 'Espen Utvikler',
       system: 'SAK',
-      behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+      behandlingstype: 'BT-002',
       opprettetTidspunkt: '2019-01-01',
       behandlingsfrist: '2019-01-01',
       fagsakYtelseType: 'FP',

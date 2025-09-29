@@ -4,13 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import {
-  AksjonspunktKode,
-  BehandlingArsakTypeEnum,
-  BehandlingStatusEnum,
-  BehandlingTypeEnum,
-  FagsakStatusEnum,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingArsakTypeEnum, BehandlingStatusEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -104,7 +98,7 @@ const BEHANDLING = {
   uuid: '1',
   behandlingKøet: false,
   behandlingPåVent: false,
-  type: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+  type: 'BT-002',
   status: BehandlingStatusEnum.FATTER_VEDTAK,
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',

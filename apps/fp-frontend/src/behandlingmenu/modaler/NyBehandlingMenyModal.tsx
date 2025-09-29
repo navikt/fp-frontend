@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingStatusEnum, BehandlingTypeEnum } from '@navikt/fp-kodeverk';
+import { BehandlingStatusEnum, type BehandlingType } from '@navikt/fp-kodeverk';
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -15,20 +15,18 @@ import { useLagNyBehandling } from '../../data/polling/useLagNyBehandling';
 import { FagsakData } from '../../fagsak/FagsakData';
 
 const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
-  BehandlingTypeEnum.FORSTEGANGSSOKNAD,
-  BehandlingTypeEnum.KLAGE,
-  BehandlingTypeEnum.REVURDERING,
-  BehandlingTypeEnum.DOKUMENTINNSYN,
-  BehandlingTypeEnum.TILBAKEKREVING,
-  BehandlingTypeEnum.TILBAKEKREVING_REVURDERING,
-];
+  'BT-002',
+  'BT-003',
+  'BT-004',
+  'BT-006',
+  'BT-007',
+  'BT-009',
+] satisfies BehandlingType[];
 
 const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
   const behandling = behandlinger.find(
     b =>
-      b.gjeldendeVedtak &&
-      b.status === BehandlingStatusEnum.AVSLUTTET &&
-      (b.type === BehandlingTypeEnum.FORSTEGANGSSOKNAD || b.type === BehandlingTypeEnum.REVURDERING),
+      b.gjeldendeVedtak && b.status === BehandlingStatusEnum.AVSLUTTET && (b.type === 'BT-002' || b.type === 'BT-004'),
   );
   return behandling ? behandling.uuid : undefined;
 };
@@ -61,9 +59,7 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
     api.fptilbake.kanTilbakekrevingOpprettesOptions(isEnabled, fagsak.saksnummer, uuidForSistLukkede),
   );
 
-  const erTilbakekreving =
-    behandling?.type === BehandlingTypeEnum.TILBAKEKREVING ||
-    behandling?.type === BehandlingTypeEnum.TILBAKEKREVING_REVURDERING;
+  const erTilbakekreving = behandling?.type === 'BT-007' || behandling?.type === 'BT-009';
   const isRevurderingOpprettedAktivert =
     erTilbakekrevingAktivert && !navAnsatt.kanVeilede && erTilbakekreving && !!behandlingUuid;
   const { data: kanRevurderingOpprettes = false } = useQuery(
@@ -77,7 +73,7 @@ export const NyBehandlingMenyModal = ({ fagsakData, behandlingUuid, lukkModal }:
   const revurderingsårsaker = alleFpSakKodeverk ? alleFpSakKodeverk['BehandlingÅrsakType'] : undefined;
 
   const behandlingstyper = notEmpty(alleFpSakKodeverk)['BehandlingType'].filter(bt =>
-    BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES.includes(bt.kode),
+    BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES.some(type => type === bt.kode),
   );
 
   const navigate = useNavigate();

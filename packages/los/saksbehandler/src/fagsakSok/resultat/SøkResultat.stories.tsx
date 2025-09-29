@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { BehandlingTypeEnum, FagsakStatusEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { FagsakStatusEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
@@ -71,7 +71,7 @@ export const Default: Story = {
         personnummer: '1010',
         navn: 'Espen Utvikler',
         system: 'SAK',
-        behandlingstype: BehandlingTypeEnum.FORSTEGANGSSOKNAD,
+        behandlingstype: 'BT-002',
         opprettetTidspunkt: '2020-01-01',
         behandlingsfrist: '2020-01-01',
         fagsakYtelseType: 'FP',
