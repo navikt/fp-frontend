@@ -1,4 +1,9 @@
 {
   "extends": "@navikt/fp-config-typescript",
-  "include": ["./src/", "../../@types/externals.d.ts"]
+  "include": [
+    "./src/",
+    "../../@types/externals.d.ts",
+    "../../packages/ui-komponenter/src/ErrorBoundary.tsx",
+    "../../packages/utils/src/context/error"
+  ]
 }

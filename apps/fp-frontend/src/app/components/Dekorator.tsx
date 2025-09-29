@@ -14,10 +14,8 @@ import {
   SYSTEMRUTINE_URL,
 } from '@navikt/fp-konstanter';
 import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
-import { notEmpty } from '@navikt/fp-utils';
+import { ErrorType, type FpError, notEmpty, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
-import { ErrorType, type FpError } from '../../data/error/errorType';
-import { useRestApiError, useRestApiErrorDispatcher } from '../../data/error/RestApiErrorContext';
 import { initFetchOptions } from '../../data/fagsakApi';
 import { JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
 

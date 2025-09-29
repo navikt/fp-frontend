@@ -10,12 +10,12 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
+import { useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
+import { ErrorBoundary } from '../../../packages/ui-komponenter/src/ErrorBoundary';
+import { ErrorType, type FpError } from '../../../packages/utils/src/context/error/errorType';
 import { Dekorator } from './app/Dekorator';
-import { ErrorBoundary } from './app/ErrorBoundary';
 import { Home } from './app/Home';
-import { ErrorType, type FpError } from './data/error/errorType';
-import { useRestApiError, useRestApiErrorDispatcher } from './data/error/RestApiErrorContext';
 import { initFetchOptions } from './data/fplosAvdelingslederApi';
 
 import './globalCss/global.module.css';

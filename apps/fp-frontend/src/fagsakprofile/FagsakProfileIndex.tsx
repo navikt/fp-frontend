@@ -11,12 +11,11 @@ import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
-import { notEmpty } from '@navikt/fp-utils';
+import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
+import { notEmpty, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
-import { ErrorBoundary } from '../app/ErrorBoundary';
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';
-import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { initFetchOptions, useFagsakApi } from '../data/fagsakApi';
 import { useFpSakKodeverk } from '../data/useKodeverk';
 import { FagsakData } from '../fagsak/FagsakData';

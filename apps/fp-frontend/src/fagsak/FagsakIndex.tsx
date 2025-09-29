@@ -8,9 +8,9 @@ import type { Location } from 'history';
 import { BehandlingTypeEnum, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
-import { useTrackRouteParam } from '@navikt/fp-utils';
+import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
+import { useRestApiErrorDispatcher, useTrackRouteParam } from '@navikt/fp-utils';
 
-import { ErrorBoundary } from '../app/ErrorBoundary';
 import {
   behandlingerRoutePath,
   erBehandlingValgt,
@@ -20,7 +20,6 @@ import {
 } from '../app/paths';
 import { BehandlingerIndex } from '../behandling/BehandlingerIndex';
 import { BehandlingSupportIndex } from '../behandlingsupport/BehandlingSupportIndex';
-import { useRestApiErrorDispatcher } from '../data/error/RestApiErrorContext';
 import { useRequestPendingContext } from '../data/polling/RequestPendingContext';
 import { useHentBehandling } from '../data/polling/useHentBehandling';
 import { FagsakProfileIndex } from '../fagsakprofile/FagsakProfileIndex';
