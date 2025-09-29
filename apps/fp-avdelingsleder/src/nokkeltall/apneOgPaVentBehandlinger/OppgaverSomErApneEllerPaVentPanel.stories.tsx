@@ -18,7 +18,7 @@ const withIntl = getIntlDecorator(messages);
 const OPPGAVER_ÅPNE_ELLER_PÅ_VENT = [
   {
     behandlingVenteStatus: BehandlingVenteStatus.PA_VENT,
-    behandlingType: 'BT-007',
+    behandlingType: 'BT-002',
     førsteUttakMåned: dayjs().startOf('month').format(ISO_DATE_FORMAT),
     antall: 2,
   },
