@@ -1,18 +1,11 @@
-import {
-  BehandlingArsakTypeEnum,
-  BehandlingResultatType,
-  BehandlingStatusEnum,
-  FagsakStatusEnum,
-  HistorikkAktorEnum,
-  RelasjonsRolleType,
-} from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 export const fagsakFullFpsak: Fagsak = {
   saksnummer: '1',
   fagsakYtelseType: 'FP',
   relasjonsRolleType: RelasjonsRolleType.MOR,
-  status: FagsakStatusEnum.UNDER_BEHANDLING,
+  status: 'UBEH',
   aktørId: '9921487132273',
   sakSkalTilInfotrygd: false,
   dekningsgrad: 100,
@@ -72,7 +65,7 @@ export const fagsakFullFpsak: Fagsak = {
       uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       versjon: 26,
       type: 'BT-002',
-      status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+      status: 'UTRED',
       opprettet: '2025-03-05T16:42:58',
 
       behandlendeEnhetId: '4867',
@@ -80,7 +73,7 @@ export const fagsakFullFpsak: Fagsak = {
       erAktivPapirsoknad: false,
       førsteÅrsak: {
         erAutomatiskRevurdering: false,
-        behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
+        behandlingArsakType: 'RE-END-INNTEKTSMELD',
         manueltOpprettet: false,
       },
       gjeldendeVedtak: false,
@@ -110,7 +103,7 @@ export const fagsakFullFpsak: Fagsak = {
       behandlingÅrsaker: [
         {
           erAutomatiskRevurdering: false,
-          behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
+          behandlingArsakType: 'RE-END-INNTEKTSMELD',
           manueltOpprettet: false,
         },
       ],
@@ -175,7 +168,7 @@ export const fagsakFullFpsak: Fagsak = {
     {
       behandlingUuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
       aktør: {
-        type: HistorikkAktorEnum.SOKER,
+        type: 'SOKER',
       },
 
       opprettetTidspunkt: '2025-03-05T16:43:01.957',
@@ -192,7 +185,7 @@ export const fagsakFullFpsak: Fagsak = {
     },
     {
       aktør: {
-        type: HistorikkAktorEnum.ARBEIDSGIVER,
+        type: 'ARBEIDSGIVER',
       },
 
       opprettetTidspunkt: '2025-03-05T16:43:05.499',

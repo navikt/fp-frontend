@@ -2,9 +2,7 @@ import {
   AksjonspunktKode,
   AksjonspunktStatus,
   AksjonspunktType,
-  BehandlingArsakTypeEnum,
   BehandlingResultatType,
-  BehandlingStatusEnum,
   VilkarType,
   VilkarUtfallType,
 } from '@navikt/fp-kodeverk';
@@ -14,7 +12,7 @@ export const behandling: Behandling = {
   uuid: 'a47091ce-638c-403a-8ef9-b4419b4d4313',
   versjon: 26,
   type: 'BT-002',
-  status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+  status: 'UTRED',
   opprettet: '2025-03-05T16:42:58',
 
   behandlendeEnhetId: '4867',
@@ -22,7 +20,7 @@ export const behandling: Behandling = {
   erAktivPapirsoknad: false,
   førsteÅrsak: {
     erAutomatiskRevurdering: false,
-    behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
+    behandlingArsakType: 'RE-END-INNTEKTSMELD',
     manueltOpprettet: false,
   },
   gjeldendeVedtak: false,
@@ -52,7 +50,7 @@ export const behandling: Behandling = {
   behandlingÅrsaker: [
     {
       erAutomatiskRevurdering: false,
-      behandlingArsakType: BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
+      behandlingArsakType: 'RE-END-INNTEKTSMELD',
       manueltOpprettet: false,
     },
   ],

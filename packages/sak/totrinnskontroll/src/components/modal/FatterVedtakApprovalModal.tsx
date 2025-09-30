@@ -3,12 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
-import {
-  BehandlingResultatType,
-  type BehandlingStatus,
-  BehandlingStatusEnum,
-  type BehandlingType,
-} from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, type BehandlingStatus, type BehandlingType } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 import styles from './fatterVedtakApprovalModal.module.css';
@@ -56,8 +51,7 @@ const getModalDescriptionTextCode = (isOpphor: boolean, behandlingTypeKode: Beha
   return 'FatterVedtakApprovalModal.ModalDescriptionApproval';
 };
 
-const isStatusFatterVedtak = (behandlingStatusKode: BehandlingStatus) =>
-  behandlingStatusKode === BehandlingStatusEnum.FATTER_VEDTAK;
+const isStatusFatterVedtak = (behandlingStatusKode: BehandlingStatus) => behandlingStatusKode === 'FVED';
 
 const utledInfoTextCode = (
   allAksjonspunktApproved: boolean,

@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { BehandlingStatusEnum, DokumentMalType, FagsakStatusEnum } from '@navikt/fp-kodeverk';
+import { DokumentMalType } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -62,7 +62,7 @@ const ALLE_BEHANDLINGER = [
     behandlingKøet: false,
     behandlingPåVent: false,
     type: 'BT-004',
-    status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+    status: 'UTRED',
     behandlendeEnhetId: '2323',
     behandlendeEnhetNavn: 'Nav Vikafossen',
     erAktivPapirsoknad: false,
@@ -81,7 +81,7 @@ const ALLE_BEHANDLINGER = [
 const FAGSAK = {
   saksnummer: '123',
   fagsakYtelseType: 'FP',
-  status: FagsakStatusEnum.UNDER_BEHANDLING,
+  status: 'UBEH',
   behandlinger: ALLE_BEHANDLINGER,
   sakSkalTilInfotrygd: false,
   behandlingTypeKanOpprettes: [] as BehandlingOppretting[],

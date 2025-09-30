@@ -5,7 +5,7 @@ import { BodyLong, BodyShort, Box, type BoxNewProps, Button, Detail, HStack, VSt
 import { dateTimeFormat } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { type HistorikkAktor, HistorikkAktorEnum, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import { type HistorikkAktor, SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
@@ -25,11 +25,11 @@ interface Props {
 }
 
 const backgrounds: Record<HistorikkAktor, BoxNewProps['background']> = {
-  [HistorikkAktorEnum.ARBEIDSGIVER]: 'info-moderate',
-  [HistorikkAktorEnum.BESLUTTER]: 'success-moderate',
-  [HistorikkAktorEnum.VEDTAKSLOSNINGEN]: 'neutral-moderate',
-  [HistorikkAktorEnum.SAKSBEHANDLER]: 'meta-purple-moderate',
-  [HistorikkAktorEnum.SOKER]: 'warning-moderate',
+  ['ARBEIDSGIVER']: 'info-moderate',
+  ['BESL']: 'success-moderate',
+  ['VL']: 'neutral-moderate',
+  ['SBH']: 'meta-purple-moderate',
+  ['SOKER']: 'warning-moderate',
   '-': 'info-moderate',
 };
 

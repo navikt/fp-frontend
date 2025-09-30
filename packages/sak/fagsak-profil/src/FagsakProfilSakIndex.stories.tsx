@@ -2,7 +2,7 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { FagsakStatusEnum, FagsakYtelseTypeEnum } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { FagsakProfilSakIndex } from './FagsakProfilSakIndex';
 
@@ -26,13 +26,9 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     saksnummer: '232341251',
-    fagsakYtelseType: {
-      kode: FagsakYtelseTypeEnum.FORELDREPENGER,
-      kodeverk: 'FAGSAK_YTELSE_TYPE',
-      navn: 'Foreldrepenger',
-    },
+    fagsakYtelseType: alleKodeverk.FagsakYtelseType.find(ytelse => ytelse.kode === 'FP')!,
     fagsakMarkeringTekster: ['Næring', 'Utland'],
-    fagsakStatus: { kode: FagsakStatusEnum.OPPRETTET, kodeverk: 'FAGSAK_STATUS', navn: 'Opprettet' },
+    fagsakStatus: alleKodeverk.FagsakStatus.find(status => status.kode === 'OPPR')!,
     dekningsgrad: 100,
     toggleSideMeny: action('button-click'),
     visSideMeny: true,

@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, BehandlingStatusEnum, isKlageAvvist } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, isKlageAvvist } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type FormkravMellomlagretDataType, FormkravProsessIndex } from '@navikt/fp-prosess-formkrav';
 
@@ -24,7 +24,7 @@ export const FormKravKlageInstansProsessStegInitPanel = () => {
   const alleIkkeHenlagteBehandlinger = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
   const avsluttedeBehandlinger = alleIkkeHenlagteBehandlinger
-    .filter(b => b.status === BehandlingStatusEnum.AVSLUTTET)
+    .filter(b => b.status === 'AVSLU')
     .filter(b => (b.type !== 'BT-003' || isKlageAvvist(b.behandlingsresultat?.type)) && b.type !== 'BT-008')
     .map(b => ({
       uuid: b.uuid,

@@ -1,10 +1,4 @@
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  BehandlingStatusEnum,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
@@ -26,7 +20,7 @@ describe('getAlleMerknaderFraBeslutter', () => {
   ];
 
   it('skal hente alle merknader fra beslutter når behandlingstatus er BEHANDLING_UTREDER', () => {
-    const merknader = getAlleMerknaderFraBeslutter(BehandlingStatusEnum.BEHANDLING_UTREDES, aksjonspunkter);
+    const merknader = getAlleMerknaderFraBeslutter('UTRED', aksjonspunkter);
 
     expect(merknader).toEqual({
       [aksjonspunkter[0]!.definisjon]: {
@@ -36,7 +30,7 @@ describe('getAlleMerknaderFraBeslutter', () => {
   });
 
   it('skal ikke hente merknader  behandlingstatus er ulik BEHANDLING_UTREDER', () => {
-    const merknader = getAlleMerknaderFraBeslutter(BehandlingStatusEnum.AVSLUTTET, aksjonspunkter);
+    const merknader = getAlleMerknaderFraBeslutter('AVSLU', aksjonspunkter);
 
     expect(merknader).toEqual({});
   });

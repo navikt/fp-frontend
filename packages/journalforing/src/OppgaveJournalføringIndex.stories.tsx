@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { FagsakStatusEnum, FamilieHendelseType } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -76,7 +76,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-05-02',
-          status: FagsakStatusEnum.LOPENDE,
+          status: 'LOP',
           familieHendelseJf: {
             familiehHendelseDato: '2022-04-15',
             familihendelseType: FamilieHendelseType.FODSEL,
@@ -87,7 +87,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-05-02',
-          status: FagsakStatusEnum.UNDER_BEHANDLING,
+          status: 'UBEH',
           familieHendelseJf: {
             familiehHendelseDato: '2022-04-15',
             familihendelseType: FamilieHendelseType.ADOPSJON,
@@ -97,7 +97,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           saksnummer: '155462542',
           ytelseType: 'SVP',
           opprettetDato: '2022-03-02',
-          status: FagsakStatusEnum.AVSLUTTET,
+          status: 'AVSLU',
           familieHendelseJf: {
             familiehHendelseDato: '2022-02-01',
             familihendelseType: FamilieHendelseType.TERMIN,
@@ -108,7 +108,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           ytelseType: 'FP',
           opprettetDato: '2022-01-02',
           førsteUttaksdato: '2022-02-02',
-          status: FagsakStatusEnum.OPPRETTET,
+          status: 'OPPR',
           familieHendelseJf: {
             familiehHendelseDato: '2022-03-01',
             familihendelseType: FamilieHendelseType.OMSORG,

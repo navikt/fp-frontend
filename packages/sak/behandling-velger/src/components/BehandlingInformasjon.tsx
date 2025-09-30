@@ -4,12 +4,13 @@ import { ChevronDownIcon, ChevronUpIcon, StarFillIcon } from '@navikt/aksel-icon
 import { BodyShort, Box, HStack, Label, Spacer, Tooltip, VStack } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import { BehandlingArsakTypeEnum } from '@navikt/fp-kodeverk';
+import type { BehandlingArsakType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
 
 import styles from './behandlingInformasjon.module.css';
 
-const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakTypeEnum.RE_KLAGE_KA, BehandlingArsakTypeEnum.RE_KLAGE_NFP];
+// @ts-expect-error - typer finnes ikke
+const tilbakekrevingÅrsakTyperKlage = ['RE_KLAGE_KA', 'RE_KLAGE_NFP'] satisfies BehandlingArsakType[];
 
 const erTilbakekrevingÅrsakKlage = (årsak?: string): boolean =>
   !!årsak && tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);

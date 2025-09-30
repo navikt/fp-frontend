@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatusEnum } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -37,7 +37,7 @@ export const BehandlingSattPåVent: Story = {
       uuid: '121212',
       versjon: 1,
       behandlingPåVent: true,
-      status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+      status: 'UTRED',
       type: 'BT-002',
       behandlingHenlagt: false,
       fristBehandlingPåVent: '2030-10-10',
@@ -59,7 +59,7 @@ export const BehandlingSattManueltPåVent: Story = {
       uuid: '121212',
       versjon: 1,
       behandlingPåVent: true,
-      status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+      status: 'UTRED',
       type: 'BT-002',
       behandlingHenlagt: false,
       fristBehandlingPåVent: '2030-10-10',

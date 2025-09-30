@@ -6,7 +6,7 @@ import { Button, Heading, Modal, VStack } from '@navikt/ds-react';
 import { RhfCheckbox, RhfForm, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { BehandlingArsakTypeEnum } from '@navikt/fp-kodeverk';
+import type { BehandlingArsakType } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import styles from './nyBehandlingModal.module.css';
@@ -21,44 +21,48 @@ const createOptions = (
 
 // TODO Denne inndelinga burde vel flyttast til DB (KODELISTE.EKSTRA_DATA)?
 const manuelleRevurderingsArsakerES = [
-  BehandlingArsakTypeEnum.ANNET,
-  BehandlingArsakTypeEnum.FEIL_I_LOVANDVENDELSE,
-  BehandlingArsakTypeEnum.FEIL_ELLER_ENDRET_FAKTA,
-  BehandlingArsakTypeEnum.FEIL_REGELVERKSFORSTAELSE,
-  BehandlingArsakTypeEnum.FEIL_PROSESSUELL,
-];
+  'RE-ANNET',
+  'RE-LOV',
+  'RE-FEFAKTA',
+  'RE-RGLF',
+  'RE-PRSSL',
+] satisfies BehandlingArsakType[];
 
 const manuelleRevurderingsArsakerFP = [
-  BehandlingArsakTypeEnum.BEREEGNINGSGRUNNLAG,
-  BehandlingArsakTypeEnum.MEDLEMSKAP,
-  BehandlingArsakTypeEnum.OPPTJENING,
-  BehandlingArsakTypeEnum.FORDELING,
-  BehandlingArsakTypeEnum.INNTEKT,
-  BehandlingArsakTypeEnum.DØD,
-  BehandlingArsakTypeEnum.SØKERS_RELASJON,
-  BehandlingArsakTypeEnum.SØKNADSFRIST,
-  BehandlingArsakTypeEnum.KLAGE_U_INNTK,
-  BehandlingArsakTypeEnum.KLAGE_M_INNTK,
-];
+  'RE-BER-GRUN',
+  'RE-MDL',
+  'RE-OPTJ',
+  'RE-FRDLING',
+  'RE-INNTK',
+  'RE-DØD',
+  'RE-SRTB',
+  'RE-FRIST',
+  'RE-KLAG-U-INNTK',
+  'RE-KLAG-M-INNTK',
+] satisfies BehandlingArsakType[];
 
 const manuelleRevurderingsArsakerSVP = [
-  BehandlingArsakTypeEnum.KLAGE_U_INNTK,
-  BehandlingArsakTypeEnum.KLAGE_M_INNTK,
-  BehandlingArsakTypeEnum.RE_ENDRET_INNTEKTSMELDING,
-  BehandlingArsakTypeEnum.RE_ENDRING_FRA_BRUKER,
-  BehandlingArsakTypeEnum.FØDSEL,
-  BehandlingArsakTypeEnum.DØD,
-  BehandlingArsakTypeEnum.ANNET,
-  BehandlingArsakTypeEnum.INNTEKT,
-];
+  'RE-KLAG-U-INNTK',
+  'RE-KLAG-M-INNTK',
+  'RE-END-INNTEKTSMELD',
+  'RE-END-FRA-BRUKER',
+  'RE-FØDSEL',
+  'RE-DØD',
+  'RE-ANNET',
+  'RE-INNTK',
+] satisfies BehandlingArsakType[];
 
 const TilbakekrevingRevurderingArsaker = [
-  BehandlingArsakTypeEnum.RE_FORELDELSE,
-  BehandlingArsakTypeEnum.RE_VILKÅR,
-  BehandlingArsakTypeEnum.RE_KLAGE_KA,
-  BehandlingArsakTypeEnum.RE_KLAGE_NFP,
-  BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT,
-];
+  //@ts-expect-error - typer finnes ikke
+  'RE_FORELDELSE',
+  'RE-ANNET',
+  //@ts-expect-error - typer finnes ikke
+  'RE_KLAGE_KA',
+  //@ts-expect-error - typer finnes ikke
+  'RE_KLAGE_NFP',
+  //@ts-expect-error - typer finnes ikke
+  'RE_FEILUTBETALT_BELØP_REDUSERT',
+] satisfies BehandlingArsakType[];
 
 const getBehandlingAarsaker = (
   ytelseType: string,
@@ -76,13 +80,21 @@ const getBehandlingAarsaker = (
   if (alleRevurderingArsaker && valgtBehandlingType === 'BT-004') {
     const isForeldrepenger = ytelseType === 'FP';
     const isSvangerskap = ytelseType === 'SVP';
-    let manuelleRevurderingsArsaker = isForeldrepenger ? manuelleRevurderingsArsakerFP : manuelleRevurderingsArsakerES;
-    if (isSvangerskap) {
-      manuelleRevurderingsArsaker = manuelleRevurderingsArsakerSVP;
+    const manuelleRevurderingsArsaker = new Array<BehandlingArsakType>();
+    if (isForeldrepenger) {
+      manuelleRevurderingsArsaker.push(...manuelleRevurderingsArsakerFP);
+    } else if (isSvangerskap) {
+      manuelleRevurderingsArsaker.push(...manuelleRevurderingsArsakerSVP);
+    } else {
+      manuelleRevurderingsArsaker.push(...manuelleRevurderingsArsakerES);
     }
-    return alleRevurderingArsaker
-      .filter(bat => manuelleRevurderingsArsaker.includes(bat.kode))
-      .sort((bat1, bat2) => bat1.navn.localeCompare(bat2.navn));
+
+    return (
+      alleRevurderingArsaker
+        //@ts-expect-error - typer finnes ikke
+        .filter(bat => manuelleRevurderingsArsaker.some(mra => mra.kode === bat.kode))
+        .sort((bat1, bat2) => bat1.navn.localeCompare(bat2.navn))
+    );
   }
 
   return [];

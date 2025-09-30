@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, BehandlingArsakTypeEnum, BehandlingStatusEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -99,7 +99,7 @@ const BEHANDLING = {
   behandlingKøet: false,
   behandlingPåVent: false,
   type: 'BT-002',
-  status: BehandlingStatusEnum.FATTER_VEDTAK,
+  status: 'FVED',
   behandlendeEnhetId: '2323',
   behandlendeEnhetNavn: 'Nav Vikafossen',
   erAktivPapirsoknad: false,
@@ -108,7 +108,7 @@ const BEHANDLING = {
   totrinnskontrollÅrsaker: TOTRINNSKONTROLL_AKSJONSPUNKTER,
   behandlingÅrsaker: [
     {
-      behandlingArsakType: BehandlingArsakTypeEnum.ANNET,
+      behandlingArsakType: 'RE-ANNET',
       manueltOpprettet: false,
       erAutomatiskRevurdering: false,
     },
@@ -130,7 +130,7 @@ const BEHANDLING = {
 const FAGSAK = {
   saksnummer: '123',
   fagsakYtelseType: 'FP',
-  status: FagsakStatusEnum.UNDER_BEHANDLING,
+  status: 'UBEH',
   behandlinger: [BEHANDLING],
   sakSkalTilInfotrygd: false,
   behandlingTypeKanOpprettes: [] as BehandlingOppretting[],

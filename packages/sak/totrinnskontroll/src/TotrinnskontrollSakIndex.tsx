@@ -6,8 +6,6 @@ import { type Location } from 'history';
 import {
   AksjonspunktKode,
   AksjonspunktKodeTilbakekreving,
-  BehandlingArsakTypeEnum,
-  BehandlingStatusEnum,
   type FagsakYtelseType,
   SkjermlenkeType,
   VurderÅrsak,
@@ -119,12 +117,7 @@ export const TotrinnskontrollSakIndex = ({
 
   const erBehandlingEtterKlage = behandling.behandlingÅrsaker
     .map(({ behandlingArsakType }) => behandlingArsakType)
-    .some(
-      bt =>
-        bt === BehandlingArsakTypeEnum.ETTER_KLAGE ||
-        bt === BehandlingArsakTypeEnum.KLAGE_U_INNTK ||
-        bt === BehandlingArsakTypeEnum.KLAGE_M_INNTK,
-    );
+    .some(bt => bt === 'ETTER_KLAGE' || bt === 'RE-KLAG-U-INNTK' || bt === 'RE-KLAG-M-INNTK');
 
   const sorterteTotrinnskontrollSkjermlenkeContext = erTilbakekreving
     ? sorterteSkjermlenkeCodesForTilbakekreving.flatMap(s => {
@@ -136,7 +129,7 @@ export const TotrinnskontrollSakIndex = ({
   const lagLenke = (skjermlenkeCode: SkjermlenkeType): Location | undefined =>
     createLocationForSkjermlenke(location, skjermlenkeCode);
 
-  const erStatusFatterVedtak = behandling.status === BehandlingStatusEnum.FATTER_VEDTAK;
+  const erStatusFatterVedtak = behandling.status === 'FVED';
   const skjemalenkeTyper = alleKodeverk['SkjermlenkeType'];
   const vurderArsaker = alleKodeverk['VurderÅrsak'];
   const faktaOmBeregningTilfeller = finnFaktaOmBeregningTilfeller(alleKodeverk);

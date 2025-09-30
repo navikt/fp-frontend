@@ -8,11 +8,8 @@ import {
   AksjonspunktStatus,
   AksjonspunktType,
   Avslagsarsak,
-  BehandlingArsakTypeEnum,
   BehandlingResultatType,
-  BehandlingStatusEnum,
   FagsakMarkeringKode,
-  KonsekvensForYtelsenEnum,
   OppgaveType,
   RelasjonsRolleType,
   VedtakbrevType,
@@ -53,7 +50,7 @@ const defaultBehandling = {
   uuid: '1',
   versjon: 1,
   type: 'BT-002',
-  status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+  status: 'UTRED',
   språkkode: 'NB',
   behandlingsresultat: {
     type: BehandlingResultatType.INNVILGET,
@@ -66,7 +63,7 @@ const defaultBehandling = {
   aksjonspunkt: defaultAksjonspunkter,
   behandlingÅrsaker: [
     {
-      behandlingArsakType: BehandlingArsakTypeEnum.ANNET,
+      behandlingArsakType: 'RE-ANNET',
       erAutomatiskRevurdering: false,
       manueltOpprettet: false,
     },
@@ -189,7 +186,7 @@ export const GodkjentForeldrepengerForSaksbehandler: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
     } satisfies Behandling,
     beregningsresultat: defaultberegningresultatDagytelse,
     fagsak: defaultSak,
@@ -202,7 +199,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
@@ -240,7 +237,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -514,7 +511,7 @@ export const GodkjentEngangsstønadForSaksbehandlerUtenOverstyring: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
     },
     beregningsresultat: {
       antallBarn: 2,
@@ -624,10 +621,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
       type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [
-          KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING,
-          KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
-        ],
+        konsekvenserForYtelsen: ['ENDRING_I_BEREGNING', 'FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -645,13 +639,10 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
     behandling: {
       ...defaultBehandling,
       type: 'BT-004',
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [
-          KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING,
-          KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
-        ],
+        konsekvenserForYtelsen: ['ENDRING_I_BEREGNING', 'FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -671,10 +662,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
       type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [
-          KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING,
-          KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
-        ],
+        konsekvenserForYtelsen: ['ENDRING_I_BEREGNING', 'FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -692,13 +680,10 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
     behandling: {
       ...defaultBehandling,
       type: 'BT-004',
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [
-          KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING,
-          KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER,
-        ],
+        konsekvenserForYtelsen: ['ENDRING_I_BEREGNING', 'FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -716,11 +701,11 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
     behandling: {
       ...defaultBehandling,
       type: 'BT-004',
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.FORELDREPENGER_OPPHØRER],
+        konsekvenserForYtelsen: ['FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -758,7 +743,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
     behandling: {
       ...defaultBehandling,
       type: 'BT-004',
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -800,7 +785,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.INNVILGET,
-        konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING],
+        konsekvenserForYtelsen: ['ENDRING_I_BEREGNING'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -831,7 +816,7 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       type: 'BT-004',
       behandlingsresultat: {
         type: BehandlingResultatType.AVSLATT,
-        konsekvenserForYtelsen: [KonsekvensForYtelsenEnum.ENDRING_I_BEREGNING],
+        konsekvenserForYtelsen: ['ENDRING_I_BEREGNING'],
         avslagsarsak: Avslagsarsak.MANN_ADOPTERER_IKKE_ALENE,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -899,7 +884,7 @@ export const LegacyOverstyring: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatusEnum.AVSLUTTET,
+      status: 'AVSLU',
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,
@@ -921,7 +906,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
   args: {
     behandling: {
       ...defaultBehandling,
-      status: BehandlingStatusEnum.OPPRETTET,
+      status: 'OPPRE',
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
         type: BehandlingResultatType.INNVILGET,

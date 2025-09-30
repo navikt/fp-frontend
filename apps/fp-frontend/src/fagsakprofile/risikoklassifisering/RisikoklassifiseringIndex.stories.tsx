@@ -5,7 +5,7 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { AksjonspunktKode, AksjonspunktStatus, BehandlingStatusEnum, FagsakStatusEnum } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -50,7 +50,7 @@ const getHref = (rel: string) =>
 const FAGSAK = {
   saksnummer: '123',
   fagsakYtelseType: 'FP',
-  status: FagsakStatusEnum.UNDER_BEHANDLING,
+  status: 'UBEH',
   behandlinger: [
     {
       versjon: 2,
@@ -58,7 +58,7 @@ const FAGSAK = {
       behandlingKøet: false,
       behandlingPåVent: false,
       type: 'BT-004',
-      status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+      status: 'UTRED',
       behandlendeEnhetId: '2323',
       behandlendeEnhetNavn: 'Nav Vikafossen',
       erAktivPapirsoknad: false,

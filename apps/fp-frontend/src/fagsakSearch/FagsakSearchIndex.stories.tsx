@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 
-import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 import { KjønnkodeEnum } from '@navikt/fp-types';
@@ -18,7 +17,7 @@ const getHref = (rel: string) => cleanUrl(wrapUrl(notEmpty(initFetchFpsak.links.
 const FAGSAK_1 = {
   saksnummer: '12345',
   fagsakYtelseType: 'ES',
-  status: FagsakStatusEnum.OPPRETTET,
+  status: 'OPPR',
   aktørId: '1',
   barnFødt: '2019-10-10',
   opprettet: '',

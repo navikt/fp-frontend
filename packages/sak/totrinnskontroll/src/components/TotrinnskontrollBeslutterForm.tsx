@@ -7,7 +7,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { KonsekvensForYtelsenEnum, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
+import { type KonsekvensForYtelsen, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
@@ -27,7 +27,7 @@ const erAlleGodkjentEllerAvvist = (formState: AksjonspunktGodkjenningData[] = []
   formState.every(ap => ap.totrinnskontrollGodkjent !== undefined);
 
 const harIkkeKonsekvenserForYtelsen = (
-  konsekvenserForYtelsenKoder: string[],
+  konsekvenserForYtelsenKoder: KonsekvensForYtelsen[],
   behandlingResultat?: BehandlingAppKontekst['behandlingsresultat'],
 ) => {
   if (!behandlingResultat) {
@@ -116,7 +116,7 @@ export const TotrinnskontrollBeslutterForm = ({
   const erKlage = behandling.type === 'BT-003';
   const erAnke = behandling.type === 'BT-008';
   const harIkkeKonsekvensForYtelse = harIkkeKonsekvenserForYtelsen(
-    [KonsekvensForYtelsenEnum.ENDRING_I_FORDELING_AV_YTELSEN, KonsekvensForYtelsenEnum.INGEN_ENDRING],
+    ['ENDRING_I_FORDELING_AV_YTELSEN', 'INGEN_ENDRING'],
     behandling.behandlingsresultat,
   );
 

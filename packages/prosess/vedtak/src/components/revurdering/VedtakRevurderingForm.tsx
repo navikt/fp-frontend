@@ -8,7 +8,6 @@ import { dateFormat } from '@navikt/ft-utils';
 import {
   AksjonspunktKode,
   type BehandlingArsakType,
-  BehandlingArsakTypeEnum,
   isAvslag,
   isInnvilget,
   isOpphor,
@@ -76,23 +75,16 @@ const hentForhåndsvisManueltBrevCallback =
 const erÅrsakTypeBehandlingEtterKlage = (behandlingArsakTyper: Behandling['behandlingÅrsaker'] = []): boolean =>
   behandlingArsakTyper
     .map(({ behandlingArsakType }) => behandlingArsakType)
-    .some(
-      bt =>
-        bt === BehandlingArsakTypeEnum.ETTER_KLAGE ||
-        bt === BehandlingArsakTypeEnum.KLAGE_U_INNTK ||
-        bt === BehandlingArsakTypeEnum.KLAGE_M_INNTK,
-    );
+    .some(bt => bt === 'ETTER_KLAGE' || bt === 'RE-KLAG-U-INNTK' || bt === 'RE-KLAG-M-INNTK');
 
 const lagÅrsakString = (revurderingAarsaker: BehandlingArsakType[], alleKodeverk: AlleKodeverk): string | undefined => {
   if (revurderingAarsaker.length < 1) {
     return undefined;
   }
   const aarsakTekstList = [];
-  const endringFraBrukerAarsak = revurderingAarsaker.find(
-    aarsak => aarsak === BehandlingArsakTypeEnum.RE_ENDRING_FRA_BRUKER,
-  );
+  const endringFraBrukerAarsak = revurderingAarsaker.find(aarsak => aarsak === 'RE-END-FRA-BRUKER');
   const alleAndreAarsakerNavn = revurderingAarsaker
-    .filter(aarsak => aarsak !== BehandlingArsakTypeEnum.RE_ENDRING_FRA_BRUKER)
+    .filter(aarsak => aarsak !== 'RE-END-FRA-BRUKER')
     .map(aarsak => alleKodeverk['BehandlingÅrsakType'].find(({ kode }) => kode === aarsak)?.navn ?? '');
   // Dersom en av årsakene er "RE_ENDRING_FRA_BRUKER" skal alltid denne vises først
   if (endringFraBrukerAarsak !== undefined) {

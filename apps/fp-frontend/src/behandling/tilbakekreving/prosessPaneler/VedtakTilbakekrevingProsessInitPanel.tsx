@@ -11,13 +11,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import {
-  type BehandlingArsakType,
-  BehandlingArsakTypeEnum,
-  BehandlingResultatTypeTilbakekreving,
-  BehandlingStatusEnum,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { type BehandlingArsakType, BehandlingResultatTypeTilbakekreving, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
@@ -33,8 +27,8 @@ import '@navikt/ft-prosess-tilbakekreving-vedtak/dist/style.css';
 
 const AKSJONSPUNKT_KODER = [VedtakAksjonspunktCode.FORESLA_VEDTAK];
 
-const tilbakekrevingÅrsakTyperKlage = [BehandlingArsakTypeEnum.RE_KLAGE_KA, BehandlingArsakTypeEnum.RE_KLAGE_NFP];
-
+// @ts-expect-error -- feil i typene
+const tilbakekrevingÅrsakTyperKlage = ['RE-KLAGE-KA', 'RE-KLAGE-NFP'] satisfies BehandlingArsakType[];
 interface Props {
   tilbakekrevingKodeverk: AlleKodeverkTilbakekreving;
 }
@@ -46,9 +40,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
 
   const fagsakBehandlingerInfo = alleBehandlinger.filter(b => !b.behandlingHenlagt);
 
-  const harÅpenRevurdering = fagsakBehandlingerInfo.some(
-    b => b.type === 'BT-004' && b.status !== BehandlingStatusEnum.AVSLUTTET,
-  );
+  const harÅpenRevurdering = fagsakBehandlingerInfo.some(b => b.type === 'BT-004' && b.status !== 'AVSLU');
 
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
@@ -60,7 +52,7 @@ export const VedtakTilbakekrevingProsessInitPanel = ({ tilbakekrevingKodeverk }:
   const erRevurderingTilbakekrevingFeilBeløpBortfalt =
     behandling.førsteÅrsak &&
     // @ts-expect-error -- feil i typene
-    BehandlingArsakTypeEnum.RE_FEILUTBETALT_BELØP_REDUSERT === behandling.førsteÅrsak.behandlingArsakType;
+    'RE_FEILUTBETALT_BELØP_REDUSERT' === behandling.førsteÅrsak.behandlingArsakType;
 
   const api = useBehandlingApi(behandling);
 
@@ -128,6 +120,7 @@ const Wrapper = (props: Omit<ComponentProps<typeof VedtakTilbakekrevingProsessIn
 };
 
 const erTilbakekrevingÅrsakKlage = (årsak: BehandlingArsakType): boolean =>
+  // @ts-expect-error -- feil i typene
   tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
 
 const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {

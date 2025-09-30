@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingArsakTypeEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { MenyNyBehandlingIndex } from './MenyNyBehandlingIndex';
@@ -21,19 +20,6 @@ const BEHANDLING_OPPRETTING = [
   },
 ];
 
-const REVURDERINGARSAKER = [
-  {
-    kode: BehandlingArsakTypeEnum.KLAGE_U_INNTK,
-    kodeverk: 'BEHANDLING_ARSAK_TYPE',
-    navn: 'Klage uten inntekt',
-  },
-  {
-    kode: BehandlingArsakTypeEnum.FØDSEL,
-    kodeverk: 'BEHANDLING_ARSAK_TYPE',
-    navn: 'Fødsel',
-  },
-];
-
 const meta = {
   title: 'sak/sak-meny-ny-behandling',
   component: MenyNyBehandlingIndex,
@@ -45,7 +31,7 @@ const meta = {
     behandlingUuid: '1',
     behandlingstyper: alleKodeverk.BehandlingType,
     behandlingOppretting: BEHANDLING_OPPRETTING,
-    revurderingArsaker: REVURDERINGARSAKER,
+    revurderingArsaker: alleKodeverk.BehandlingÅrsakType,
   },
 } satisfies Meta<typeof MenyNyBehandlingIndex>;
 export default meta;
@@ -66,12 +52,14 @@ export const ForTilbakekreving: Story = {
   args: {
     tilbakekrevingRevurderingArsaker: [
       {
-        kode: BehandlingArsakTypeEnum.RE_KLAGE_KA,
+        //@ts-expect-error feil type
+        kode: 'RE_KLAGE_KA',
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage KA',
       },
       {
-        kode: BehandlingArsakTypeEnum.RE_KLAGE_NFP,
+        //@ts-expect-error feil type
+        kode: 'RE_KLAGE_NFP',
         kodeverk: 'BEHANDLING_ARSAK_TYPE',
         navn: 'Klage NFP',
       },

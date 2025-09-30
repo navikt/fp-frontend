@@ -6,13 +6,13 @@ import {
   Arbeidskategori,
   ArbeidType,
   Avslagsarsak,
-  BehandlingArsakTypeEnum,
+  type BehandlingArsakType,
   BehandlingResultatType,
-  BehandlingStatusEnum,
+  type BehandlingStatus,
   type BehandlingType,
   FagsakMarkeringKode,
-  FagsakStatusEnum,
-  FagsakYtelseTypeEnum,
+  type FagsakStatus,
+  type FagsakYtelseType,
   FaktaOmBeregningTilfelle,
   FamilieHendelseType,
   FaresignalVurdering,
@@ -20,13 +20,13 @@ import {
   FordelingPeriodeKilde,
   ForeldreType,
   GraderingAvslagÅrsak,
-  HistorikkAktorEnum,
+  type HistorikkAktor,
   InnsynResultatType,
   Inntektskategori,
   KlageAvvistÅrsak,
   KlageHjemmel,
   KlageMedholdÅrsak,
-  KonsekvensForYtelsenEnum,
+  type KonsekvensForYtelsen,
   Landkode,
   ManuellBehandlingÅrsak,
   MedlemskapDekningType,
@@ -71,24 +71,24 @@ type KodeverkEnumMap = {
   ArbeidType: ArbeidType;
   Avslagsårsak: Avslagsarsak;
   BehandlingResultatType: BehandlingResultatType;
-  BehandlingStatus: BehandlingStatusEnum;
+  BehandlingStatus: BehandlingStatus;
   BehandlingType: BehandlingType;
-  BehandlingÅrsakType: BehandlingArsakTypeEnum;
+  BehandlingÅrsakType: BehandlingArsakType;
   FamilieHendelseType: FamilieHendelseType;
   FaresignalVurdering: FaresignalVurdering;
-  FagsakStatus: FagsakStatusEnum;
-  FagsakYtelseType: FagsakYtelseTypeEnum;
+  FagsakStatus: FagsakStatus;
+  FagsakYtelseType: FagsakYtelseType;
   FagsakMarkering: FagsakMarkeringKode;
   FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
   FarSøkerType: FarSøkerType;
   FordelingPeriodeKilde: FordelingPeriodeKilde;
   ForeldreType: ForeldreType;
-  HistorikkAktør: HistorikkAktorEnum;
+  HistorikkAktør: HistorikkAktor;
   GraderingAvslagÅrsak: GraderingAvslagÅrsak;
   KlageHjemmel: KlageHjemmel;
   KlageAvvistÅrsak: KlageAvvistÅrsak;
   KlageMedholdÅrsak: KlageMedholdÅrsak;
-  KonsekvensForYtelsen: KonsekvensForYtelsenEnum;
+  KonsekvensForYtelsen: KonsekvensForYtelsen;
   Landkoder: Landkode;
   ManuellBehandlingÅrsak: ManuellBehandlingÅrsak;
   MedlemskapDekningType: MedlemskapDekningType;

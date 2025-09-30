@@ -1,4 +1,4 @@
-import { BehandlingStatusEnum, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Behandling, Vilkar } from '@navikt/fp-types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
@@ -7,7 +7,7 @@ describe('readOnlyUtils', () => {
   const behandling = {
     uuid: '1',
     versjon: 1,
-    status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+    status: 'UTRED',
     type: 'BT-002',
     behandlingPåVent: false,
     behandlingHenlagt: false,

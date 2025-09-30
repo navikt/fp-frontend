@@ -5,7 +5,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingStatusEnum } from '@navikt/fp-kodeverk';
 import { type TotrinnskontrollFormValues, TotrinnskontrollSakIndex } from '@navikt/fp-sak-totrinnskontroll';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty } from '@navikt/fp-utils';
@@ -86,7 +85,7 @@ export const TotrinnskontrollIndex = ({
     godkjennTotrinnsaksjonspunkter(params);
   };
 
-  const erStatusFatterVedtak = valgtBehandling.status === BehandlingStatusEnum.FATTER_VEDTAK;
+  const erStatusFatterVedtak = valgtBehandling.status === 'FVED';
 
   return (
     <>

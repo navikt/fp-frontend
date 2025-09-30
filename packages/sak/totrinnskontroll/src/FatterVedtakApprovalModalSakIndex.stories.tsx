@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingResultatType, BehandlingStatusEnum } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FatterVedtakTotrinnskontrollModalSakIndex } from './FatterVedtakTotrinnskontrollModalSakIndex';
@@ -21,7 +21,7 @@ export const EtterFatterVedtakOgGodkjent: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatusEnum.FATTER_VEDTAK,
+      status: 'FVED',
       type: 'BT-002',
     } as BehandlingAppKontekst,
     allAksjonspunktApproved: true,
@@ -32,7 +32,7 @@ export const EtterGodkjenning: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatusEnum.FATTER_VEDTAK,
+      status: 'FVED',
       type: 'BT-002',
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
@@ -46,7 +46,7 @@ export const EtterGodkjenningAvKlage: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatusEnum.FATTER_VEDTAK,
+      status: 'FVED',
       type: 'BT-003',
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
@@ -60,7 +60,7 @@ export const EtterTilbakesendingTilSaksbehandler: Story = {
   args: {
     behandling: {
       uuid: '1',
-      status: BehandlingStatusEnum.FATTER_VEDTAK,
+      status: 'FVED',
       type: 'BT-002',
       behandlingsresultat: {
         type: BehandlingResultatType.OPPHOR,
