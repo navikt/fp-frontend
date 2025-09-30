@@ -1,4 +1,5 @@
-import type { AndreKriterierType, BehandlingType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import type { AndreKriterierType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import type { BehandlingType } from '@navikt/fp-types';
 
 export type ReservasjonStatus = Readonly<{
   erReservert: boolean;

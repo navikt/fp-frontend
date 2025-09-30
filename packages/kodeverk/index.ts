@@ -1,9 +1,4 @@
-export {
-  AksjonspunktKode,
-  hasAksjonspunkt,
-  isUttakAksjonspunkt,
-  isFaktaUttakAksjonspunkt,
-} from './src/aksjonspunktCodes';
+export { AksjonspunktKode, isUttakAksjonspunkt, isFaktaUttakAksjonspunkt } from './src/aksjonspunktCodes';
 export type { OverstyringAksjonspunkter, VilkårOverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
 export { AksjonspunktStatus, erAksjonspunktÅpent } from './src/aksjonspunktStatus';
@@ -17,7 +12,7 @@ export { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplet
 export { Arbeidskategori } from './src/arbeidskategori';
 export { ArbeidType } from './src/arbeidType';
 export { Avslagsarsak } from './src/avslagsarsakCodes';
-export { type BehandlingArsakType } from './src/behandlingArsakType';
+
 export {
   BehandlingResultatType,
   isAvslag,
@@ -27,19 +22,15 @@ export {
   isKlageAvvist,
 } from './src/behandlingResultatType';
 export { BehandlingResultatTypeTilbakekreving } from './src/behandlingResultatTypeTilbakekreving';
-export { type BehandlingStatus } from './src/behandlingStatus';
-export { type BehandlingType } from './src/behandlingType';
+
 export { BeregningsgrunnlagAndeltype } from './src/beregningsgrunnlagAndeltyper';
 export { Dekningsgrad } from './src/dekningsgrad';
 export { DiskresjonskodeType } from './src/diskresjonskodeType';
 export { DokumentMalType } from './src/dokumentMalType';
-export { type FagsakStatus } from './src/fagsakStatus';
-export { type FagsakYtelseType } from './src/fagsakYtelseType';
 export { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
 export { FamilieHendelseType } from './src/familieHendelseType';
 export { ForeldelseVurderingType } from './src/foreldelseVurderingType';
 export { ForeldreType } from './src/foreldreType';
-export { type HistorikkAktor } from './src/historikkAktor';
 export { InnsynResultatType } from './src/innsynResultatType';
 export { InntektAktivitetType } from './src/inntektAktivitetType';
 export { Inntektskategori } from './src/inntektskategorier';
@@ -47,7 +38,6 @@ export { KanIkkeOppgiAnnenForelderArsak } from './src/kanIkkeOppgiAnnenForelderA
 export { KlageVurdering } from './src/klageVurdering';
 export { KlageVurderingOmgjoer } from './src/klageVurderingOmgjoer';
 export { Kommunikasjonsretning } from './src/kommunikasjonsretning';
-export { type KonsekvensForYtelsen } from './src/konsekvensForYtelsen';
 export { Landkode } from './src/landkoder';
 export { MottakerType } from './src/mottakerTyper';
 export { NaringsvirksomhetType } from './src/naringsvirksomhetType';

@@ -2,9 +2,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { type BehandlingType } from '@navikt/fp-kodeverk';
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
-import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
+import type { Behandling, BehandlingAppKontekst, BehandlingType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { ApplicationContextPath } from '../../app/ApplicationContextPath';

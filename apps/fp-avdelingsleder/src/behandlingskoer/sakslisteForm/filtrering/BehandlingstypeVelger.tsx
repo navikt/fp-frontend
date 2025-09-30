@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { type BehandlingType } from '@navikt/fp-kodeverk';
+import type { BehandlingType } from '@navikt/fp-types';
 
 import { lagreSakslisteBehandlingstype, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { useLosKodeverk } from '../../../data/useLosKodeverk';

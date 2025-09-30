@@ -1,4 +1,4 @@
-import type { BehandlingType } from '@navikt/fp-kodeverk';
+import type { BehandlingType } from '@navikt/fp-types';
 
 type AnnetKriterie = Readonly<{
   andreKriterierType: string;

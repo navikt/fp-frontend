@@ -5,16 +5,9 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
 
-import {
-  AksjonspunktKode,
-  Avslagsarsak,
-  type BehandlingStatus,
-  isAvslag,
-  isInnvilget,
-  isOpphor,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, Avslagsarsak, isAvslag, isInnvilget, isOpphor } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, Behandling, Behandlingsresultat, Oppgave } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, Behandlingsresultat, BehandlingStatus, Oppgave } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData.ts';

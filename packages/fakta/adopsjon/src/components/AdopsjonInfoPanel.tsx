@@ -6,7 +6,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, AksjonspunktStatus, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type {
   AdopsjonFamilieHendelse,
   Aksjonspunkt,
@@ -17,7 +17,7 @@ import type {
   BekreftEktefelleAksjonspunktAp,
   BekreftMannAdoptererAksjonspunktAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { harAksjonspunkt, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { DokumentasjonFaktaForm, type FormValues as DokFormValues } from './DokumentasjonFaktaForm';
 import { EktefelleFaktaForm, type FormValues as EktefelleFormValues } from './EktefelleFaktaForm';
@@ -89,7 +89,7 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
             adopsjon={adopsjon}
             erForeldrepengerFagsak={isForeldrepengerFagsak}
             alleMerknaderFraBeslutter={alleMerknaderFraBeslutter}
-            hasEktefellesBarnAksjonspunkt={hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel)}
+            hasEktefellesBarnAksjonspunkt={harAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel)}
           />
 
           {ektefellesBarnAP && (
@@ -131,8 +131,8 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
 };
 
 const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterForPanel: Aksjonspunkt[]): FormValues => {
-  const ektefellesBarnAP = hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
-  const mannAdoptererAleneAP = hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
+  const ektefellesBarnAP = harAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
+  const mannAdoptererAleneAP = harAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
 
   return {
     ...DokumentasjonFaktaForm.initialValues(adopsjon),
@@ -143,8 +143,8 @@ const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterFor
 };
 
 const transformValues = (values: FormValues, aksjonspunkterForPanel: Aksjonspunkt[]): AksjonspunktData[] => {
-  const ektefellesBarnAP = hasAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
-  const mannAdoptererAleneAP = hasAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
+  const ektefellesBarnAP = harAksjonspunkt(OM_ADOPSJON_GJELDER_EKTEFELLES_BARN, aksjonspunkterForPanel);
+  const mannAdoptererAleneAP = harAksjonspunkt(OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE, aksjonspunkterForPanel);
 
   const aksjonspunkterArray: AksjonspunktData[] = [
     DokumentasjonFaktaForm.transformValues(values),

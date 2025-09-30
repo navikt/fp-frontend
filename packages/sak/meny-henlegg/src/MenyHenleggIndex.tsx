@@ -3,8 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
-import type { Behandling, KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
+import type { Behandling, FagsakYtelseType, KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
 
 import { HenlagtBehandlingModal } from './components/HenlagtBehandlingModal';
 import {

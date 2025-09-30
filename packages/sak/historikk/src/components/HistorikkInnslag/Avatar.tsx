@@ -8,7 +8,7 @@ import {
   RobotSmileIcon,
 } from '@navikt/aksel-icons';
 
-import { type HistorikkAktor } from '@navikt/fp-kodeverk';
+import type { HistorikkAktor } from '@navikt/fp-types';
 
 interface Props {
   aktørType: HistorikkAktor;

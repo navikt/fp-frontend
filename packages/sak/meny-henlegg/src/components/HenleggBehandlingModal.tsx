@@ -7,14 +7,10 @@ import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
-import {
-  BehandlingResultatType,
-  BehandlingResultatTypeTilbakekreving,
-  type BehandlingType,
-  DokumentMalType,
-  type FagsakYtelseType,
-} from '@navikt/fp-kodeverk';
+import { BehandlingResultatType, BehandlingResultatTypeTilbakekreving, DokumentMalType } from '@navikt/fp-kodeverk';
 import type {
+  BehandlingType,
+  FagsakYtelseType,
   foreldrepenger_dokumentbestiller_DokumentMalType,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,

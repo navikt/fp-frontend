@@ -1,10 +1,10 @@
-import {
-  AksjonspunktKode,
-  BehandlingResultatType,
-  type BehandlingStatus,
-  FaktaOmBeregningTilfelle,
-} from '@navikt/fp-kodeverk';
-import type { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
+import { AksjonspunktKode, BehandlingResultatType, FaktaOmBeregningTilfelle } from '@navikt/fp-kodeverk';
+import type {
+  Behandlingsresultat,
+  BehandlingStatus,
+  KodeverkMedNavn,
+  TotrinnskontrollAksjonspunkt,
+} from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekstUtleder';
 
