@@ -121,16 +121,6 @@ export const OmsorgOgAdopsjonPanel = ({
           validate={familieHendelseType === FamilieHendelseType.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
         />
         <HStack gap="space-16">
-          {familieHendelseType === FamilieHendelseType.ADOPSJON && (
-            <RhfDatepicker
-              //@ts-expect-error Her er det noko rart med typane
-              name={`${OMSORG_NAME_PREFIX}.ankomstdato`}
-              control={control}
-              label={formatMessage({ id: 'Registrering.Adopsjon.Ankomstdato' })}
-              isReadOnly={readOnly}
-              validate={[hasValidDate]}
-            />
-          )}
           <RhfTextField
             name={`${OMSORG_NAME_PREFIX}.antallBarn`}
             control={control}

@@ -106,10 +106,6 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     await userEvent.type(datoInput, '30.05.2022');
     fireEvent.blur(datoInput);
 
-    const ankomstdatoInput = screen.getByLabelText('Ankomstdato');
-    await userEvent.type(ankomstdatoInput, '22.05.2022');
-    fireEvent.blur(ankomstdatoInput);
-
     const antallBarnInput = screen.getByLabelText('Antall barn');
     await userEvent.type(antallBarnInput, '2');
 
@@ -130,7 +126,6 @@ describe('OmsorgOgAdopsjonPapirsoknadIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledOnce());
     expect(lagre).toHaveBeenCalledWith({
       omsorg: {
-        ankomstdato: '2022-05-22',
         antallBarn: 2,
         foedselsDato: ['2022-05-27', '2022-05-26'],
         omsorgsovertakelsesdato: '2022-05-30',
