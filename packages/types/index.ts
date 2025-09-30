@@ -192,3 +192,10 @@ export type {
 } from './src/fødsel';
 export type { AnnenforelderUttakEøsPeriode } from './src/faktaUttakEøsPeriode';
 export * from './src/apiDtoGenerert';
+export type { BehandlingArsakType } from './src/behandlingArsakType';
+export type { BehandlingStatus } from './src/behandlingStatus';
+export type { BehandlingType } from './src/behandlingType';
+export type { FagsakStatus } from './src/fagsakStatus';
+export type { FagsakYtelseType } from './src/fagsakYtelseType';
+export type { HistorikkAktor } from './src/historikkAktor';
+export type { KonsekvensForYtelsen } from './src/konsekvensForYtelsen';

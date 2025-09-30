@@ -11,9 +11,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { type BehandlingArsakType, BehandlingResultatTypeTilbakekreving, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatTypeTilbakekreving, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { AlleKodeverkTilbakekreving, Behandlingsresultat } from '@navikt/fp-types';
+import type { AlleKodeverkTilbakekreving, BehandlingArsakType, Behandlingsresultat } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandlingApi';

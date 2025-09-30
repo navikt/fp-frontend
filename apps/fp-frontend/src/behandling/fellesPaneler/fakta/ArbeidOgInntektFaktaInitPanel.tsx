@@ -5,13 +5,14 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
-import { AksjonspunktKode, hasAksjonspunkt } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type {
   ArbeidsgiverOpplysningerPerId,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
 } from '@navikt/fp-types';
+import { harAksjonspunkt } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -70,7 +71,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}
       skalPanelVisesIMeny={
         harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
-        !hasAksjonspunkt(AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD, behandling.aksjonspunkt)
+        !harAksjonspunkt(AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD, behandling.aksjonspunkt)
       }
     >
       {arbeidOgInntekt ? (

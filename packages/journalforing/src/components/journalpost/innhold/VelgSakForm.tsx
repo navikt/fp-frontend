@@ -6,7 +6,7 @@ import { Alert, BodyShort, Button, HStack, Radio, Spacer, VStack } from '@navikt
 import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import type { FagsakYtelseType } from '@navikt/fp-kodeverk';
+import type { FagsakYtelseType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import type { JournalførSakSubmitValue } from '../../../typer/ferdigstillJournalføringSubmit';

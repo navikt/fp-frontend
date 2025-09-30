@@ -1,12 +1,9 @@
 import {
   type Aktsomhet,
-  type BehandlingArsakType,
   type BehandlingResultatTypeTilbakekreving,
-  type BehandlingType,
   ForeldelseVurderingType,
   type HendelseType,
   type HendelseUnderType,
-  type HistorikkAktor,
   type SærligGrunn,
   type SkjermlenkeTypeTilbakekreving,
   TilbakekrevingVidereBehandling,
@@ -16,6 +13,9 @@ import {
   type VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
+import type { BehandlingArsakType } from './behandlingArsakType';
+import type { BehandlingType } from './behandlingType';
+import type { HistorikkAktor } from './historikkAktor';
 import type { VergeType } from './vergeTsType';
 
 //TODO Ein del av desse kodeverk-filene er delt mellom fpsak og tilbake. Mange av dei har ulike verdiar og bør delast opp i fleire filer

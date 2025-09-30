@@ -1,8 +1,7 @@
 import { useIntl } from 'react-intl';
 
-import type { BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
-import type { LosKodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import type { OppgaverForAvdeling } from '../../typer/oppgaverForAvdelingTsType';
 

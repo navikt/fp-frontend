@@ -3,8 +3,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
-import { BehandlingResultatType, type BehandlingStatus, type BehandlingType } from '@navikt/fp-kodeverk';
-import type { Behandling } from '@navikt/fp-types';
+import { BehandlingResultatType } from '@navikt/fp-kodeverk';
+import type { Behandling, BehandlingStatus, BehandlingType } from '@navikt/fp-types';
 
 import styles from './fatterVedtakApprovalModal.module.css';
 

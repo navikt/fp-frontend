@@ -3,15 +3,14 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktKodeTilbakekreving,
-  type FagsakYtelseType,
-  SkjermlenkeType,
-  VurderÅrsak,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktKodeTilbakekreving, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, BehandlingAppKontekst } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  AlleKodeverkTilbakekreving,
+  BehandlingAppKontekst,
+  FagsakYtelseType,
+} from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { type AksjonspunktGodkjenningData } from './components/AksjonspunktGodkjenningFieldArray';

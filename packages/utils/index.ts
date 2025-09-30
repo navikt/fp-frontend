@@ -25,3 +25,4 @@ export {
   RestApiErrorProvider,
 } from './src/context/error/RestApiErrorContext';
 export { ErrorType, type FpError } from './src/context/error/errorType';
+export { harAksjonspunkt } from './src/aksjonspunktUtils';

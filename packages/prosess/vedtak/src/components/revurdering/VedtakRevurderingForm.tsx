@@ -5,22 +5,16 @@ import { type IntlShape, useIntl } from 'react-intl';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { dateFormat } from '@navikt/ft-utils';
 
-import {
-  AksjonspunktKode,
-  type BehandlingArsakType,
-  isAvslag,
-  isInnvilget,
-  isOpphor,
-  type KonsekvensForYtelsen,
-  VedtakbrevType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, isAvslag, isInnvilget, isOpphor, VedtakbrevType } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
   AlleKodeverk,
   Behandling,
+  BehandlingArsakType,
   BeregningsresultatDagytelse,
   BeregningsresultatEs,
+  KonsekvensForYtelsen,
   Oppgave,
   SimuleringResultat,
   TilbakekrevingValg,

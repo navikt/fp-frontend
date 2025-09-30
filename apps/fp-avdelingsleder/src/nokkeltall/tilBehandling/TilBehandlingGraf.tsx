@@ -1,9 +1,8 @@
 import { DDMMYYYY_DATE_FORMAT, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { type BehandlingType } from '@navikt/fp-kodeverk';
 import { ReactECharts } from '@navikt/fp-los-felles';
-import type { LosKodeverkMedNavn } from '@navikt/fp-types';
+import type { BehandlingType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
 const behandlingstypeOrder = ['BT-009', 'BT-007', 'BT-006', 'BT-003', 'BT-004', 'BT-002'] satisfies BehandlingType[];
 

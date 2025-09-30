@@ -6,13 +6,8 @@ import {
   Arbeidskategori,
   ArbeidType,
   Avslagsarsak,
-  type BehandlingArsakType,
   BehandlingResultatType,
-  type BehandlingStatus,
-  type BehandlingType,
   FagsakMarkeringKode,
-  type FagsakStatus,
-  type FagsakYtelseType,
   FaktaOmBeregningTilfelle,
   FamilieHendelseType,
   FaresignalVurdering,
@@ -20,13 +15,11 @@ import {
   FordelingPeriodeKilde,
   ForeldreType,
   GraderingAvslagÅrsak,
-  type HistorikkAktor,
   InnsynResultatType,
   Inntektskategori,
   KlageAvvistÅrsak,
   KlageHjemmel,
   KlageMedholdÅrsak,
-  type KonsekvensForYtelsen,
   Landkode,
   ManuellBehandlingÅrsak,
   MedlemskapDekningType,
@@ -59,6 +52,13 @@ import {
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
+import type { BehandlingArsakType } from './behandlingArsakType';
+import type { BehandlingStatus } from './behandlingStatus';
+import type { BehandlingType } from './behandlingType';
+import type { FagsakStatus } from './fagsakStatus';
+import type { FagsakYtelseType } from './fagsakYtelseType';
+import type { HistorikkAktor } from './historikkAktor';
+import type { KonsekvensForYtelsen } from './konsekvensForYtelsen';
 import type { VergeType } from './vergeTsType';
 
 //Mapping mellom KodeverkType og enums/union-types med verdier

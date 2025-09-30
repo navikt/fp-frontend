@@ -7,11 +7,12 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { type KonsekvensForYtelsen, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
+import { SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
+  KonsekvensForYtelsen,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 
