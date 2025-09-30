@@ -5,7 +5,6 @@ import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   AksjonspunktType,
   BehandlingResultatType,
   KlageAvvistÅrsak,
@@ -30,7 +29,7 @@ const behandling = {
 const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
-    status: AksjonspunktStatus.OPPRETTET,
+    status: 'OPPR',
 
     kanLoses: true,
     toTrinnsBehandling: false,

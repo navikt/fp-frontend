@@ -2,14 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  Avslagsarsak,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktType, Avslagsarsak, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -27,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -43,7 +36,7 @@ export const ÅpentAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ],
     status: VilkarUtfallType.IKKE_VURDERT,
@@ -55,7 +48,7 @@ export const OppfyltVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
         kanLoses: false,
       },
@@ -79,7 +72,7 @@ export const AvslåttVilkår: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
         kanLoses: false,
       },

@@ -4,8 +4,8 @@ import { ExclamationmarkIcon, XMarkOctagonIcon } from '@navikt/aksel-icons';
 import { Alert, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktStatus, erAksjonspunktÅpent } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat, Medlemskap, MedlemskapAvvik } from '@navikt/fp-types';
+import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { MedlemskapVurdering } from '../types/vurderingMedlemskapForm';
 import { InfoBox } from './InfoBox';
@@ -50,7 +50,7 @@ export const AksjonspunktHelpText = ({ aksjonspunkter, medlemskap }: Props) => {
   const { avvik, manuellBehandlingResultat: resultat } = medlemskap;
 
   const åpneAksjonspunkt = aksjonspunkter.filter(erAksjonspunktÅpent);
-  const utførteAksjonspunkt = aksjonspunkter.filter(ap => ap.status === AksjonspunktStatus.UTFORT);
+  const utførteAksjonspunkt = aksjonspunkter.filter(ap => ap.status === 'UTFO');
 
   if (åpneAksjonspunkt.length > 0) {
     return (

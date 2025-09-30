@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -17,11 +17,9 @@ import { VergeFaktaIndex } from './VergeFaktaIndex';
 const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.AVKLAR_VERGE,
-    status: AksjonspunktStatus.OPPRETTET,
-
+    status: 'OPPR',
     kanLoses: true,
     toTrinnsBehandling: false,
-
     aksjonspunktType: AksjonspunktType.AUTOPUNKT,
     vilkarType: VilkarType.OMSORGSVILKARET,
     erAktivt: true,

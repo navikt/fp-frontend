@@ -3,12 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button, Table, VStack } from '@navikt/ds-react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  ArbeidsforholdKomplettVurderingType,
-  VenteArsakType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, ArbeidsforholdKomplettVurderingType, VenteArsakType } from '@navikt/fp-kodeverk';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import type {
   ArbeidOgInntektsmelding,
@@ -119,8 +114,8 @@ export const ArbeidOgInntektFaktaPanel = ({
   const harBehandletAllePerioder = tabellRader.every(d => !d.årsak || (d.årsak && d.avklaring));
 
   const harIngenAksjonspunkt = aksjonspunkt === undefined;
-  const erAksjonspunktAvsluttet = aksjonspunkt?.status === AksjonspunktStatus.UTFORT;
-  const erAksjonspunktApent = aksjonspunkt?.status === AksjonspunktStatus.OPPRETTET;
+  const erAksjonspunktAvsluttet = aksjonspunkt?.status === 'UTFO';
+  const erAksjonspunktApent = aksjonspunkt?.status === 'OPPR';
   const erOverstyrerOgHarIngenAksjonspunkt = erOverstyrer && harIngenAksjonspunkt;
 
   const skalViseÅpneForNyVurderingKnapp =

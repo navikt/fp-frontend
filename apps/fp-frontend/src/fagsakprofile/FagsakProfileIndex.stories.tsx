@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -102,7 +102,7 @@ const ALLE_BEHANDLINGER = [
     },
     risikoAksjonspunkt: {
       definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
-      status: AksjonspunktStatus.OPPRETTET,
+      status: 'OPPR',
 
       toTrinnsBehandling: false,
 

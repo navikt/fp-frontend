@@ -3,12 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  MottakerType,
-  TilbakekrevingVidereBehandling,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, MottakerType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -142,8 +137,7 @@ export const AksjonspunktVurderFeilutbetaling: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
   },
@@ -154,8 +148,7 @@ export const AksjonspunktKontrollerEtterbetaling: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
   },
@@ -166,8 +159,7 @@ export const AksjonspunktVurderFeilutbetalingOgEtterbetaling: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_FEILUTBETALING,
-
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
       {
         definisjon: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,

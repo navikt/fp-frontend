@@ -3,14 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AdresseType,
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  Landkode,
-  RelasjonsRolleType,
-  SivilstandType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, Landkode, RelasjonsRolleType, SivilstandType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -25,7 +18,7 @@ import { OmsorgOgRettFaktaIndex } from './OmsorgOgRettFaktaIndex';
 const adresse1 = {
   fom: '2023-01-01',
   tom: TIDENES_ENDE,
-  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresseType: 'BOSTEDSADRESSE',
   adresselinje1: 'Industrigata 2B',
   postNummer: '4123',
   poststed: 'Bobygda',
@@ -35,7 +28,7 @@ const adresse1 = {
 const adresse2 = {
   fom: '2019-01-01',
   tom: '2023-01-01',
-  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresseType: 'BOSTEDSADRESSE',
   adresselinje1: 'Veigata 1',
   postNummer: '0203',
   poststed: 'Bobygda',
@@ -125,7 +118,7 @@ export const HarAksjonspunktForAvklarAleneomsorg: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
         kanLoses: true,
       },
     ] as Aksjonspunkt[],
@@ -139,7 +132,7 @@ export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
         kanLoses: true,
       },
     ] as Aksjonspunkt[],
@@ -166,7 +159,7 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
         kanLoses: true,
       },
     ] as Aksjonspunkt[],
@@ -199,7 +192,7 @@ export const AvklarAnnenForelderRettBareFarRett: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Mor har ikke rett og er uføretrygded i pesys.',
         kanLoses: false,
       },

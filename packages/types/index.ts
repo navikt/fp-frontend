@@ -199,3 +199,5 @@ export type { FagsakStatus } from './src/fagsakStatus';
 export type { FagsakYtelseType } from './src/fagsakYtelseType';
 export type { HistorikkAktor } from './src/historikkAktor';
 export type { KonsekvensForYtelsen } from './src/konsekvensForYtelsen';
+export type { AdresseType } from './src/adresseType';
+export type { AksjonspunktStatus } from './src/aksjonspunktStatus';

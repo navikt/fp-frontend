@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   AksjonspunktType,
   InnsynResultatType,
   Kommunikasjonsretning,
@@ -23,8 +22,7 @@ const defaultBehandling = {
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
-  status: AksjonspunktStatus.OPPRETTET,
-
+  status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,
 
@@ -80,7 +78,7 @@ export const InnsynSattPaVent: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
       },
     ],

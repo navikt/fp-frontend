@@ -2,13 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  AktivitetskravPermisjonType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktType, AktivitetskravPermisjonType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -39,7 +33,7 @@ const aktivitetskravGrunnlagListe = [
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -116,7 +110,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -174,7 +168,7 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
       },
@@ -190,7 +184,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
 
         kanLoses: true,
       },

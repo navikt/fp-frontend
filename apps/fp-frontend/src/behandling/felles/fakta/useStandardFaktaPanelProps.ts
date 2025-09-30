@@ -1,8 +1,8 @@
 import { use } from 'react';
 
-import { erAksjonspunktÅpent } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { type AksjonspunktArgs, type OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../context/BehandlingDataContext';

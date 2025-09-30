@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -34,7 +34,7 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
         toTrinnsBehandling: false,
         aksjonspunktType: '-',
         kanLoses: false,
@@ -51,7 +51,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     status: VilkarUtfallType.IKKE_VURDERT,
@@ -74,7 +74,7 @@ export const OppfyltVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
     ] as Aksjonspunkt[],
@@ -96,7 +96,7 @@ export const AvslåttVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },
     ] as Aksjonspunkt[],

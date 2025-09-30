@@ -2,13 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  NavBrukerKjonn,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktType, NavBrukerKjonn, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 
@@ -28,7 +22,7 @@ const defaultSøknad = {
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -95,7 +89,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -109,7 +103,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -126,7 +120,7 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -145,7 +139,7 @@ export const DekningsgradErEndret: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         kanLoses: true,
         begrunnelse: 'Er endret til 80 fordi...',
       },
@@ -171,7 +165,7 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -211,7 +205,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -251,7 +245,7 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
         kanLoses: true,
         begrunnelse: 'Dette er en begrunnelse',
       },

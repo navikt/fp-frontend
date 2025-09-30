@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 
@@ -28,7 +28,7 @@ const meta = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
   },

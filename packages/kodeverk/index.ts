@@ -1,7 +1,6 @@
 export { AksjonspunktKode, isUttakAksjonspunkt, isFaktaUttakAksjonspunkt } from './src/aksjonspunktCodes';
 export type { OverstyringAksjonspunkter, VilkårOverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
-export { AksjonspunktStatus, erAksjonspunktÅpent } from './src/aksjonspunktStatus';
 export { AksjonspunktType } from './src/aksjonspunktType';
 export { AktivitetStatus } from './src/aktivitetStatus';
 export { AnkeOmgjorArsak } from './src/ankeOmgjorArsak';
@@ -43,7 +42,6 @@ export { MottakerType } from './src/mottakerTyper';
 export { NaringsvirksomhetType } from './src/naringsvirksomhetType';
 export { NavBrukerKjonn } from './src/navBrukerKjonn';
 export { OppholdArsakType } from './src/oppholdArsakType';
-export { AdresseType } from './src/adresseType';
 export { OppgaveType } from './src/oppgaveType';
 export { OpplysningsKilde } from './src/opplysningsKilde';
 export { OpptjeningAktivitetType } from './src/opptjeningAktivitetType';

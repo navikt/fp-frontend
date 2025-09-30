@@ -7,7 +7,7 @@ import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { BesteberegningAP, ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -40,7 +40,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
   const begrunnelse = formMethods.watch('begrunnelse');
   return (
     <VStack gap="space-16">
-      {aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
+      {aksjonspunkt.status === 'OPPR' && (
         <AksjonspunktHelpTextHTML>
           <FormattedMessage id="BesteberegningProsessPanel.Aksjonspunkt.HelpTextKontroll" />
         </AksjonspunktHelpTextHTML>
@@ -78,7 +78,7 @@ export const KontrollerBesteberegningPanel = ({ aksjonspunkt }: Props) => {
 };
 
 const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
-  const apErLøst = aksjonspunkt.status === AksjonspunktStatus.UTFORT;
+  const apErLøst = aksjonspunkt.status === 'UTFO';
   return {
     ...FaktaBegrunnelseTextField.initialValues(aksjonspunkt),
     besteberegningErKorrektValg: apErLøst ? true : undefined,

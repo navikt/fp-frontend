@@ -6,7 +6,7 @@ import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -72,7 +72,7 @@ const buildInitialValues = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
-  const isOpenAksjonspunkt = aksjonspunkt && aksjonspunkt.status === AksjonspunktStatus.OPPRETTET;
+  const isOpenAksjonspunkt = aksjonspunkt && aksjonspunkt.status === 'OPPR';
   const isVilkarGodkjent = soknadExists && VilkarUtfallType.OPPFYLT === status;
 
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig

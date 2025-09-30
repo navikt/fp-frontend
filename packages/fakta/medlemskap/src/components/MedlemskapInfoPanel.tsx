@@ -1,6 +1,5 @@
 import { VStack } from '@navikt/ds-react';
 
-import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { Medlemskap, Soknad } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -27,9 +26,7 @@ interface Props {
 export const MedlemskapInfoPanel = ({ medlemskap, soknad }: Props) => {
   const { aksjonspunkterForPanel, alleKodeverk, fagsak, isReadOnly } = usePanelDataContext();
 
-  const aksjonspunkt = aksjonspunkterForPanel.find(
-    ap => ap.status === AksjonspunktStatus.OPPRETTET || ap.status === AksjonspunktStatus.UTFORT,
-  );
+  const aksjonspunkt = aksjonspunkterForPanel.find(ap => ap.status === 'OPPR' || ap.status === 'UTFO');
   const harAksjonspunkt = !!aksjonspunkt;
 
   return (

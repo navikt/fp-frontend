@@ -4,9 +4,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import {
-  AdresseType,
   AksjonspunktKode,
-  AksjonspunktStatus,
   AksjonspunktType,
   FarSøkerType,
   NavBrukerKjonn,
@@ -69,7 +67,7 @@ const personoversikt: Personoversikt = {
       {
         fom: '2019-01-01',
         tom: TIDENES_ENDE,
-        adresseType: AdresseType.POSTADRESSE,
+        adresseType: 'POSTADRESSE',
         adresselinje1: 'Gateadresse 1',
         postNummer: '1000',
         poststed: 'Oslo',
@@ -143,7 +141,7 @@ type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -159,7 +157,7 @@ export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -183,7 +181,7 @@ export const UtførtAksjonspunktForOmsorgovertakelse: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'dette er en begrunnelse',
         kanLoses: false,
       },
@@ -201,7 +199,7 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -219,7 +217,7 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'dette er en begrunnelse',
         kanLoses: false,
       },

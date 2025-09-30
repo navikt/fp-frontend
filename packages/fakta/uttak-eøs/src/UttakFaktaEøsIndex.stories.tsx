@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   AksjonspunktType,
   RelasjonsRolleType,
   UttakPeriodeType,
@@ -17,7 +16,7 @@ import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -86,7 +85,7 @@ export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
       {
         ...aksjonspunktDefault,
         begrunnelse: 'Dette er en begrunnelse',
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       },
     ],
@@ -101,7 +100,7 @@ export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSom
       {
         ...aksjonspunktDefault,
 
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       },
     ],

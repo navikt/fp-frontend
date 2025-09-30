@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, AksjonspunktStatus, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
@@ -12,12 +12,12 @@ import { VedtakInnsynProsessIndex } from './VedtakInnsynProsessIndex';
 const defaultAksjonspunkter = [
   {
     definisjon: AksjonspunktKode.VURDER_INNSYN,
-    status: AksjonspunktStatus.UTFORT,
+    status: 'UTFO',
     begrunnelse: 'Dette er utført',
   },
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
-    status: AksjonspunktStatus.OPPRETTET,
+    status: 'OPPR',
   },
 ] as Aksjonspunkt[];
 
@@ -97,7 +97,7 @@ export const PanelForAvvistVedtakReadonly: Story = {
       defaultAksjonspunkter[0]!,
       {
         ...defaultAksjonspunkter[1]!,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette er en vurdering',
       },
     ],

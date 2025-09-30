@@ -5,7 +5,7 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
 import { TrueFalseInput } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Ytelsefordeling } from '@navikt/fp-types';
 import type { BekreftOmsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -41,9 +41,7 @@ export const OmsorgFaktaFields = ({ readOnly, alleMerknaderFraBeslutter }: Props
 
 OmsorgFaktaFields.initialValues = (ytelsefordeling: Ytelsefordeling, omsorgAp: Aksjonspunkt[]): FormValues => ({
   omsorg:
-    omsorgAp.length > 0 &&
-    omsorgAp[0]?.status !== AksjonspunktStatus.OPPRETTET &&
-    ytelsefordeling.overstyrtOmsorg !== undefined
+    omsorgAp.length > 0 && omsorgAp[0]?.status !== 'OPPR' && ytelsefordeling.overstyrtOmsorg !== undefined
       ? ytelsefordeling.overstyrtOmsorg
       : undefined,
 });

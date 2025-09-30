@@ -6,7 +6,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   AdopsjonFamilieHendelse,
   Aksjonspunkt,
@@ -73,10 +73,8 @@ export const AdopsjonInfoPanel = ({ isForeldrepengerFagsak, soknad, adopsjon }: 
     <VStack gap="space-16">
       <AksjonspunktHelpTextHTML>
         {harÅpentAksjonspunkt && <FormattedMessage key="KontrollerMotDok" id="AdopsjonInfoPanel.KontrollerMotDok" />}
-        {ektefellesBarnAP?.status === AksjonspunktStatus.OPPRETTET && (
-          <FormattedMessage id="AdopsjonInfoPanel.VurderOmEktefellesBarn" />
-        )}
-        {mannAdoptererAleneAP?.status === AksjonspunktStatus.OPPRETTET && (
+        {ektefellesBarnAP?.status === 'OPPR' && <FormattedMessage id="AdopsjonInfoPanel.VurderOmEktefellesBarn" />}
+        {mannAdoptererAleneAP?.status === 'OPPR' && (
           <FormattedMessage id="AdopsjonInfoPanel.VurderOmMannAdoptererAlene" />
         )}
       </AksjonspunktHelpTextHTML>

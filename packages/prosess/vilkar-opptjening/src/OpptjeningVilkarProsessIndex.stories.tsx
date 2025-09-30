@@ -2,13 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 
@@ -40,7 +34,7 @@ const defaultOpptjening = {
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -72,7 +66,7 @@ export const ÅpentAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] satisfies Aksjonspunkt[],
   },
@@ -86,7 +80,7 @@ export const ÅpentAksjonspunktSvangerskapspenger: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ],
   },
@@ -123,7 +117,7 @@ export const ÅpentAksjonspunktMedOppholdsperiode: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
   },
@@ -141,7 +135,7 @@ export const ÅpentAksjonspunktMenUtenAktiviteter: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SVANGERSKAPSVILKARET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
   },

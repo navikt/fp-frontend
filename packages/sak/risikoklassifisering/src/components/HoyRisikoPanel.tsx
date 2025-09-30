@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktStatus } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, KodeverkMedNavn, Risikoklassifisering } from '@navikt/fp-types';
 
 import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
@@ -31,7 +30,7 @@ export const HoyRisikoPanel = ({
   faresignalVurderinger,
 }: Props) => (
   <VStack gap="space-16">
-    {aksjonspunkt && aksjonspunkt.status === AksjonspunktStatus.OPPRETTET && (
+    {aksjonspunkt && aksjonspunkt.status === 'OPPR' && (
       <AksjonspunktHelpTextHTML>
         <FormattedMessage id="Risikopanel.Panel.Tittel" />
       </AksjonspunktHelpTextHTML>

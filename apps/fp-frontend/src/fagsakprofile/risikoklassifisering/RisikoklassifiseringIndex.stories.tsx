@@ -5,7 +5,7 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -80,7 +80,7 @@ const FAGSAK = {
       },
       risikoAksjonspunkt: {
         definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         toTrinnsBehandling: false,
 

@@ -3,12 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  ArbeidsforholdKomplettVurderingType,
-  PermisjonsbeskrivelseType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, ArbeidsforholdKomplettVurderingType, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak, type AoIArbeidsforhold } from '@navikt/fp-types';
 
@@ -58,7 +53,7 @@ export const InnhentInntektsmelding: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       } as Aksjonspunkt,
     ],
     arbeidsgiverOpplysningerPerId: {
@@ -135,7 +130,7 @@ export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story =
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       } as Aksjonspunkt,
     ],
     arbeidsgiverOpplysningerPerId: {
@@ -171,7 +166,7 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
       } as Aksjonspunkt,
     ],
     arbeidsgiverOpplysningerPerId: {
@@ -211,7 +206,7 @@ export const AvklarManglendeArbeidsforhold: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       } as Aksjonspunkt,
     ],
     arbeidsgiverOpplysningerPerId: {
@@ -251,7 +246,7 @@ export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
       } as Aksjonspunkt,
     ],
     arbeidsgiverOpplysningerPerId: {
@@ -304,7 +299,7 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
       } as Aksjonspunkt,
     ],
     arbeidsgiverOpplysningerPerId: {
@@ -406,7 +401,7 @@ export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInnt
       aksjonspunkterForPanel: [
         {
           definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
         } as Aksjonspunkt,
       ],
       arbeidsgiverOpplysningerPerId: {},
@@ -437,7 +432,7 @@ export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       } as Aksjonspunkt,
     ],
     arbeidsgiverOpplysningerPerId: {
@@ -690,7 +685,7 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {
@@ -847,7 +842,7 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {
@@ -966,7 +961,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {
@@ -1145,7 +1140,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     arbeidsgiverOpplysningerPerId: {

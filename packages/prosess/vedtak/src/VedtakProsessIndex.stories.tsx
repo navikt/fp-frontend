@@ -5,7 +5,6 @@ import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   AksjonspunktType,
   Avslagsarsak,
   BehandlingResultatType,
@@ -35,7 +34,7 @@ import { VedtakProsessIndex } from './VedtakProsessIndex';
 
 const defaultAksjonspunkt = {
   definisjon: AksjonspunktKode.FORESLA_VEDTAK,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -312,7 +311,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
 
           kanLoses: false,
           toTrinnsBehandling: true,
@@ -320,21 +319,21 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
 
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
 
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
 
           kanLoses: false,
           toTrinnsBehandling: true,
@@ -368,7 +367,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
           begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,
           toTrinnsBehandling: true,
@@ -376,7 +375,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
           begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,
         },

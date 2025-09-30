@@ -4,9 +4,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import {
-  AdresseType,
   AksjonspunktKode,
-  AksjonspunktStatus,
   AksjonspunktType,
   MedlemskapDekningType,
   MedlemskapManuellVurderingType,
@@ -45,7 +43,7 @@ const defaultSoknad = {
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -119,7 +117,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
     {
       fom: '2019-01-01',
       tom: TIDENES_ENDE,
-      adresseType: AdresseType.BOSTEDSADRESSE,
+      adresseType: 'BOSTEDSADRESSE',
       adresselinje1: 'Oslogata 1',
 
       poststed: 'Oslo',
@@ -129,7 +127,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
     {
       fom: '2020-01-01',
       tom: '2021-01-01',
-      adresseType: AdresseType.POSTADRESSE_UTLAND,
+      adresseType: 'POSTADRESSE_UTLAND',
       adresselinje1: 'Mäkelänkatu 1B',
 
       poststed: 'Helsinki',
@@ -161,7 +159,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       {
         fom: '2019-01-01',
         tom: TIDENES_ENDE,
-        adresseType: AdresseType.BOSTEDSADRESSE,
+        adresseType: 'BOSTEDSADRESSE',
         adresselinje1: 'Oslogata 1',
 
         poststed: 'Oslo',
@@ -171,7 +169,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       {
         fom: '2020-01-01',
         tom: '2021-01-01',
-        adresseType: AdresseType.POSTADRESSE_UTLAND,
+        adresseType: 'POSTADRESSE_UTLAND',
         adresselinje1: 'Mäkelänkatu 1B',
 
         poststed: 'Helsinki',
@@ -204,7 +202,7 @@ export const Default: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -221,7 +219,7 @@ export const ForutgåendeMedlemskap: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -237,7 +235,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
         {
           fom: '2024-09-10',
           tom: TIDENES_ENDE,
-          adresseType: AdresseType.POSTADRESSE_UTLAND,
+          adresseType: 'POSTADRESSE_UTLAND',
           adresselinje1: 'Kirkeveien 1',
 
           land: 'Guatemala',
@@ -245,7 +243,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
         {
           fom: '2022-09-01',
           tom: TIDENES_ENDE,
-          adresseType: AdresseType.BOSTEDSADRESSE,
+          adresseType: 'BOSTEDSADRESSE',
           adresselinje1: 'Krattstien 4',
 
           postNummer: '9515',
@@ -272,7 +270,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -294,7 +292,7 @@ export const TidligereVurderingAvMedlemskapMedEtAvvik: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Søker har bodd i Gautemala siden 10.09.2024 ',
         kanLoses: false,
       },
@@ -344,7 +342,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
 
         kanLoses: false,
       },
@@ -372,7 +370,7 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
 
         kanLoses: false,
       },

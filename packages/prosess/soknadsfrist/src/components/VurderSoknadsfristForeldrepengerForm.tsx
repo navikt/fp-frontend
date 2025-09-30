@@ -7,7 +7,7 @@ import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-for
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat, periodFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import type { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -31,8 +31,7 @@ const buildInitialValues = (
 ): FormValues => {
   const upgMottattDato = søknadsfrist?.mottattDato ?? undefined;
   return {
-    gyldigSenFremsetting:
-      aksjonspunkter.at(0)?.status === AksjonspunktStatus.OPPRETTET ? undefined : upgMottattDato !== mottattDato,
+    gyldigSenFremsetting: aksjonspunkter.at(0)?.status === 'OPPR' ? undefined : upgMottattDato !== mottattDato,
     ansesMottatt: upgMottattDato,
     ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
   };

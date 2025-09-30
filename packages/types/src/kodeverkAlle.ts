@@ -1,5 +1,4 @@
 import {
-  AdresseType,
   AktivitetskravPermisjonType,
   AktivitetStatus,
   AnkeOmgjorArsak,
@@ -52,6 +51,7 @@ import {
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
+import type { AdresseType } from './adresseType';
 import type { BehandlingArsakType } from './behandlingArsakType';
 import type { BehandlingStatus } from './behandlingStatus';
 import type { BehandlingType } from './behandlingType';

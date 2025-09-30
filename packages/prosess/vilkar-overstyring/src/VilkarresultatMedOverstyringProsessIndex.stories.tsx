@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   Avslagsarsak,
   BehandlingResultatType,
   VilkarType,
@@ -92,7 +91,7 @@ export const OverstyringErUtførtForMedlemskap: Story = {
       aksjonspunkt: [
         {
           definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
-          status: AksjonspunktStatus.UTFORT,
+          status: 'UTFO',
           kanLoses: false,
           begrunnelse: 'Dette er en begrunnelse',
         },
@@ -132,7 +131,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
       aksjonspunkt: [
         {
           definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
-          status: AksjonspunktStatus.UTFORT,
+          status: 'UTFO',
           kanLoses: false,
           begrunnelse: 'Dette er en begrunnelse',
         },
@@ -166,7 +165,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
       aksjonspunkt: [
         {
           definisjon: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
-          status: AksjonspunktStatus.UTFORT,
+          status: 'UTFO',
           kanLoses: false,
           begrunnelse: 'Dette er en begrunnelse',
         } as Aksjonspunkt,
@@ -203,7 +202,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
       aksjonspunkt: [
         {
           definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-          status: AksjonspunktStatus.UTFORT,
+          status: 'UTFO',
           kanLoses: false,
           begrunnelse: 'Dette er en begrunnelse',
         },

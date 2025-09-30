@@ -6,10 +6,11 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, BehandlingResultatType, erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, BehandlingResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
 import type { Behandling } from '@navikt/fp-types';
+import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';

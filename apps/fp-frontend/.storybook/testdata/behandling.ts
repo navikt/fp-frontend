@@ -1,6 +1,5 @@
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   AksjonspunktType,
   BehandlingResultatType,
   VilkarType,
@@ -273,7 +272,7 @@ export const behandling: Behandling = {
   aksjonspunkt: [
     {
       definisjon: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-      status: AksjonspunktStatus.OPPRETTET,
+      status: 'OPPR',
 
       vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
       toTrinnsBehandling: true,

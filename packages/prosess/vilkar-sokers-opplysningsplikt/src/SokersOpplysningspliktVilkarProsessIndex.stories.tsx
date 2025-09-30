@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Behandling, Soknad } from '@navikt/fp-types';
 
@@ -47,7 +47,7 @@ export const ÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     status: VilkarUtfallType.IKKE_VURDERT,
@@ -59,7 +59,7 @@ export const OppfyltVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
     ] as Aksjonspunkt[],
@@ -81,7 +81,7 @@ export const AvslåttVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },
     ] as Aksjonspunkt[],

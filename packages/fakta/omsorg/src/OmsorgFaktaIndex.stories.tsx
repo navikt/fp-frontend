@@ -3,14 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AdresseType,
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  SivilstandType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktType, SivilstandType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   KjønnkodeEnum,
@@ -24,7 +17,7 @@ import { OmsorgFaktaIndex } from './OmsorgFaktaIndex';
 const adresse1 = {
   fom: '2023-01-01',
   tom: TIDENES_ENDE,
-  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresseType: 'BOSTEDSADRESSE',
   adresselinje1: 'Industrigata 2B',
   postNummer: '4123',
   poststed: 'Bobygda',
@@ -33,7 +26,7 @@ const adresse1 = {
 const adresse2 = {
   fom: '2019-01-01',
   tom: '2023-01-01',
-  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresseType: 'BOSTEDSADRESSE',
   adresselinje1: 'Veigata 1',
   postNummer: '0203',
   poststed: 'Bobygda',
@@ -93,7 +86,7 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
         vilkarType: VilkarType.FODSELSVILKARET_MOR,

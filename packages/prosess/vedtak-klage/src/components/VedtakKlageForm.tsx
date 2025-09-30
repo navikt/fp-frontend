@@ -6,14 +6,13 @@ import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import {
   AksjonspunktKode,
   BehandlingResultatType,
-  erAksjonspunktÅpent,
   isKlageOmgjort,
   KlageVurdering as klageVurderingCodes,
 } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type { AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
 import type { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';
 

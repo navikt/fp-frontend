@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -19,7 +19,7 @@ const defaultBehandling = {
 const aksjonspunkterForPanel = [
   {
     definisjon: AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
-    status: AksjonspunktStatus.OPPRETTET,
+    status: 'OPPR',
   },
 ] as Aksjonspunkt[];
 

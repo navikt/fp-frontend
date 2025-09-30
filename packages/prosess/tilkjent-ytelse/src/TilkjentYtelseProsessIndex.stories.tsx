@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   AktivitetStatus,
   NavBrukerKjonn,
   OpptjeningAktivitetType,
@@ -153,7 +152,7 @@ export const UtførtAksjonspunkt: Story = {
       {
         begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
         definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
       },
     ] as Aksjonspunkt[],
   },
@@ -164,7 +163,7 @@ export const MedFeriepengegrunnlag: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     feriepengegrunnlag: {

@@ -2,7 +2,8 @@ import { use } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, AksjonspunktStatus, erAksjonspunktÅpent, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../../felles/context/BehandlingDataContext';
@@ -27,9 +28,7 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
   const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(behandling));
 
   const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
-    ap =>
-      ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR &&
-      ap.status !== AksjonspunktStatus.AVBRUTT,
+    ap => ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && ap.status !== 'AVBR',
   );
   const harÅpentMedlemskapAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && erAksjonspunktÅpent(ap),

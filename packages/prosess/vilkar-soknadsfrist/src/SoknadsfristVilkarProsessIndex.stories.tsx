@@ -2,14 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  Avslagsarsak,
-  SoknadType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, Avslagsarsak, SoknadType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
@@ -51,8 +44,7 @@ export const ÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
-        status: AksjonspunktStatus.OPPRETTET,
-
+        status: 'OPPR',
         vilkarType: VilkarType.SOKNADFRISTVILKARET,
       },
     ] as Aksjonspunkt[],
@@ -66,7 +58,7 @@ export const OppfyltVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
         vilkarType: VilkarType.SOKNADFRISTVILKARET,
       },
@@ -89,7 +81,7 @@ export const AvslåttVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
         vilkarType: VilkarType.SOKNADFRISTVILKARET,
       },

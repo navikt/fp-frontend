@@ -10,13 +10,7 @@ import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  erAksjonspunktÅpent,
-  FamilieHendelseType,
-  RelasjonsRolleType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, FamilieHendelseType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -26,7 +20,7 @@ import type {
   Ytelsefordeling,
 } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
 import { UttakFaktaTable } from './UttakFaktaTable';
@@ -58,7 +52,7 @@ const leggTilAksjonspunktMarkering = (
         ap =>
           (ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE ||
             ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE) &&
-          ap.status === AksjonspunktStatus.OPPRETTET,
+          ap.status === 'OPPR',
       ) &&
       periode.arbeidsforhold?.arbeidsgiverReferanse &&
       !arbeidsgiverOpplysningerPerId[periode.arbeidsforhold.arbeidsgiverReferanse]

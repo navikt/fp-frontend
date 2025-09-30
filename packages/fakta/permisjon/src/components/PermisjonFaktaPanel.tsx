@@ -8,7 +8,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -72,7 +72,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
     [],
   );
 
-  const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(a => a.status === AksjonspunktStatus.OPPRETTET);
+  const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(a => a.status === 'OPPR');
 
   return (
     <VStack gap="space-32">

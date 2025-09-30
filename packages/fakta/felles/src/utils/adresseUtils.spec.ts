@@ -1,6 +1,5 @@
 import { expect } from 'vitest';
 
-import { AdresseType } from '@navikt/fp-kodeverk';
 import type { Personadresse } from '@navikt/fp-types';
 
 import { erPersonAdresserLike, formaterAdresse, getNyesteAdresse } from './adresseUtils';
@@ -89,26 +88,26 @@ describe('formaterAdresse', () => {
         {
           fom: '2021-01-01',
           tom: '2022-01-31',
-          adresseType: AdresseType.BOSTEDSADRESSE,
+          adresseType: 'BOSTEDSADRESSE',
         },
         {
           fom: '2019-01-01',
           tom: '2021-01-31',
-          adresseType: AdresseType.POSTADRESSE,
+          adresseType: 'POSTADRESSE',
         },
         {
           fom: '2020-01-01',
           tom: '2022-01-31',
-          adresseType: AdresseType.POSTADRESSE_UTLAND,
+          adresseType: 'POSTADRESSE_UTLAND',
         },
         {
           fom: '2022-01-01',
           tom: '2022-01-31',
-          adresseType: AdresseType.POSTADRESSE,
+          adresseType: 'POSTADRESSE',
         },
       ] satisfies Personadresse[];
 
-      const nyesteAdresse = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);
+      const nyesteAdresse = getNyesteAdresse(adresser, 'POSTADRESSE');
       expect(nyesteAdresse).toEqual(adresser[3]!);
     });
   });

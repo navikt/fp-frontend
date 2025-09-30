@@ -7,8 +7,9 @@ import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import { erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
+import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import styles from './vilkarResultPicker.module.css';
 

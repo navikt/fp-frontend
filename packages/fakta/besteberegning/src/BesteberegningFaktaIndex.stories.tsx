@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
@@ -27,7 +27,7 @@ const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -64,7 +64,7 @@ export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ],
   },
@@ -77,7 +77,7 @@ export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent: Story 
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Min begrunnelse for at besteberegningen er feil',
       },
     ],
@@ -91,7 +91,7 @@ export const BesteberegningMedAvvik: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ],
   },

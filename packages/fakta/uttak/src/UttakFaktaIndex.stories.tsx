@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
   AksjonspunktType,
   FordelingPeriodeKilde,
   RelasjonsRolleType,
@@ -30,7 +29,7 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -110,7 +109,7 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -167,7 +166,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -193,7 +192,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -220,7 +219,7 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -239,7 +238,7 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -271,7 +270,7 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -303,7 +302,7 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
       },
@@ -338,7 +337,7 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
       },
@@ -374,8 +373,7 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-        status: AksjonspunktStatus.OPPRETTET,
-
+        status: 'OPPR',
         kanLoses: true,
       },
     ],
