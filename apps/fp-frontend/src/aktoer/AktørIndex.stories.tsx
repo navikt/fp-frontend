@@ -32,7 +32,7 @@ const AKTØR_INFO = {
     {
       saksnummer: '123',
       fagsakYtelseType: 'FP',
-      status: 'LOP',
+      status: 'OPPR',
       aktørId: '1345345',
       barnFødt: '2024-01-03',
       opprettet: '2024-01-03',
