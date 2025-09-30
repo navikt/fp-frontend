@@ -55,7 +55,8 @@ const manuelleRevurderingsArsakerSVP = [
 const TilbakekrevingRevurderingArsaker = [
   //@ts-expect-error - typer finnes ikke
   'RE_FORELDELSE',
-  'RE-ANNET',
+  //@ts-expect-error - typer finnes ikke
+  'RE_VILKÅR',
   //@ts-expect-error - typer finnes ikke
   'RE_KLAGE_KA',
   //@ts-expect-error - typer finnes ikke
@@ -72,6 +73,7 @@ const getBehandlingAarsaker = (
 ): KodeverkMedNavn<'BehandlingÅrsakType'>[] | KodeverkMedNavnTilbakekreving<'BehandlingÅrsakType'>[] => {
   if (alleTilbakekrevingRevurderingArsaker && valgtBehandlingType === 'BT-009') {
     return TilbakekrevingRevurderingArsaker.flatMap(ar => {
+      //@ts-expect-error - typer finnes ikke
       const arsak = alleTilbakekrevingRevurderingArsaker.find(el => el.kode === ar);
       return arsak ? [arsak] : [];
     });
@@ -89,12 +91,9 @@ const getBehandlingAarsaker = (
       manuelleRevurderingsArsaker.push(...manuelleRevurderingsArsakerES);
     }
 
-    return (
-      alleRevurderingArsaker
-        //@ts-expect-error - typer finnes ikke
-        .filter(bat => manuelleRevurderingsArsaker.some(mra => mra.kode === bat.kode))
-        .sort((bat1, bat2) => bat1.navn.localeCompare(bat2.navn))
-    );
+    return alleRevurderingArsaker
+      .filter(bat => manuelleRevurderingsArsaker.includes(bat.kode))
+      .sort((bat1, bat2) => bat1.navn.localeCompare(bat2.navn));
   }
 
   return [];
