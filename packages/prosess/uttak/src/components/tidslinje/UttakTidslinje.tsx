@@ -22,13 +22,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, createWeekAndDay, ISO_DATE_FORMAT, periodFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import {
-  BehandlingStatusEnum,
-  OppholdArsakType,
-  PeriodeResultatType,
-  RelasjonsRolleType,
-  UttakPeriodeType,
-} from '@navikt/fp-kodeverk';
+import { OppholdArsakType, PeriodeResultatType, RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import {
   type AlleKodeverk,
   type AnnenforelderUttakEøsPeriode,
@@ -283,7 +277,7 @@ const finnLabelForPeriode = (
 
   const dager = calcDaysAndWeeks(periode.start, periode.end).formattedString;
   const manueltEndret =
-    periode.begrunnelse && behandlingStatusKode === BehandlingStatusEnum.FATTER_VEDTAK
+    periode.begrunnelse && behandlingStatusKode === 'FVED'
       ? intl.formatMessage({ id: 'UttakTidslinje.ManueltEditert' })
       : '';
 
@@ -313,7 +307,7 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
   if (periode.erGradert) {
     return <PercentIcon />;
   }
-  if (periode.begrunnelse && behandlingStatusKode === BehandlingStatusEnum.FATTER_VEDTAK) {
+  if (periode.begrunnelse && behandlingStatusKode === 'FVED') {
     return <PersonPencilIcon />;
   }
   if (periode.harUtsettelse) {

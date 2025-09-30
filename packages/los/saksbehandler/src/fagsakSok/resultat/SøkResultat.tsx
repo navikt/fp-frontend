@@ -7,17 +7,16 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-los-felles';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 
 const sorterFagsaker = (fagsak1: FagsakEnkel, fagsak2: FagsakEnkel) => {
-  if (fagsak1.status === FagsakStatusEnum.AVSLUTTET && fagsak2.status !== FagsakStatusEnum.AVSLUTTET) {
+  if (fagsak1.status === 'AVSLU' && fagsak2.status !== 'AVSLU') {
     return 1;
   }
-  if (fagsak1.status !== FagsakStatusEnum.AVSLUTTET && fagsak2.status === FagsakStatusEnum.AVSLUTTET) {
+  if (fagsak1.status !== 'AVSLU' && fagsak2.status === 'AVSLU') {
     return -1;
   }
   const changeTimeFagsak1 = fagsak1.endret ?? fagsak1.opprettet;

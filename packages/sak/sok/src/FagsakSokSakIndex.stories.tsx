@@ -3,7 +3,6 @@ import { useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
@@ -13,7 +12,7 @@ const defaultSak = {
   saksnummer: '1',
   fagsakYtelseType: 'FP',
   relasjonsRolleType: '-',
-  status: FagsakStatusEnum.OPPRETTET,
+  status: 'OPPR',
   aktørId: '',
   person: {
     navn: '',
@@ -27,7 +26,7 @@ const defaultSak = {
   },
   barnFødt: '',
   opprettet: '',
-} as const;
+} satisfies FagsakEnkel;
 
 const meta = {
   title: 'sak/sak-sok',

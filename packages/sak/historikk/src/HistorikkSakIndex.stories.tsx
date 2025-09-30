@@ -2,7 +2,7 @@ import { ExpandVerticalIcon } from '@navikt/aksel-icons';
 import { Button, Tooltip } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { HistorikkAktorEnum, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
 import type { Historikkinnslag } from '@navikt/fp-types';
 
@@ -25,7 +25,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'b88a9745-6e08-4f72-831b-20fb0dd53b34',
     aktør: {
-      type: HistorikkAktorEnum.SAKSBEHANDLER,
+      type: 'SBH',
       ident: 'Z994283',
     },
     skjermlenke: SkjermlenkeType.FAKTA_UTTAK,
@@ -58,7 +58,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'bf4b6b71-f3a3-4fbf-8cde-0d1cbc182f4f',
     aktør: {
-      type: HistorikkAktorEnum.SAKSBEHANDLER,
+      type: 'SBH',
       ident: 'Z991198',
     },
 
@@ -74,7 +74,7 @@ const historikkInnslag: Historikkinnslag[] = [
   },
   {
     behandlingUuid: '999951',
-    aktør: { type: HistorikkAktorEnum.VEDTAKSLOSNINGEN },
+    aktør: { type: 'VL' },
     opprettetTidspunkt: '2024-09-19T12:16:14.499',
     tittel: 'Dette er en tittel',
 
@@ -87,7 +87,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'b1f9bd3b-d6b9-4de8-b214-0f0c53cbbe1f',
     aktør: {
-      type: HistorikkAktorEnum.SAKSBEHANDLER,
+      type: 'SBH',
       ident: 'Z991198',
     },
     skjermlenke: SkjermlenkeType.PUNKT_FOR_MEDLEMSKAP_LØPENDE,
@@ -107,7 +107,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'd63aa31e-f3bb-4f50-a1c1-d4395c052c54',
     aktør: {
-      type: HistorikkAktorEnum.BESLUTTER,
+      type: 'BESL',
       ident: 'Z993179',
     },
     skjermlenke: SkjermlenkeType.VEDTAK,
@@ -123,7 +123,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: '6488585a-8320-4b48-bc20-bc67fb714643',
     aktør: {
-      type: HistorikkAktorEnum.VEDTAKSLOSNINGEN,
+      type: 'VL',
     },
 
     opprettetTidspunkt: '2024-08-04T20:26:04.122',
@@ -144,7 +144,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: 'd63aa31e-f3bb-4f50-a1c1-d4395c052c54',
     aktør: {
-      type: HistorikkAktorEnum.SAKSBEHANDLER,
+      type: 'SBH',
       ident: 'Z991753',
     },
     skjermlenke: SkjermlenkeType.FAKTA_OM_MEDLEMSKAP,
@@ -165,7 +165,7 @@ const historikkInnslag: Historikkinnslag[] = [
   {
     behandlingUuid: '1b1b6855-5069-42ba-855d-e3d201999db4',
     aktør: {
-      type: HistorikkAktorEnum.VEDTAKSLOSNINGEN,
+      type: 'VL',
     },
 
     opprettetTidspunkt: '2024-07-10T15:15:43.274',
@@ -180,7 +180,7 @@ const historikkInnslag: Historikkinnslag[] = [
   },
   {
     aktør: {
-      type: HistorikkAktorEnum.ARBEIDSGIVER,
+      type: 'ARBEIDSGIVER',
     },
 
     opprettetTidspunkt: '2024-07-11T15:28:06.352',
@@ -197,7 +197,7 @@ const historikkInnslag: Historikkinnslag[] = [
   },
   {
     behandlingUuid: '1b1b6855-5069-42ba-855d-e3d201999db4',
-    aktør: { type: HistorikkAktorEnum.SOKER },
+    aktør: { type: 'SOKER' },
 
     opprettetTidspunkt: '2024-07-10T15:15:41.879',
     dokumenter: [

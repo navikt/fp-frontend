@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { BehandlingResultatType, BehandlingStatusEnum } from '@navikt/fp-kodeverk';
+import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { BeslutterModalIndex } from './BeslutterModalIndex';
@@ -10,7 +10,7 @@ describe('BeslutterModalIndex', () => {
     uuid: '1',
     versjon: 2,
     type: 'BT-002',
-    status: BehandlingStatusEnum.FATTER_VEDTAK,
+    status: 'FVED',
     behandlingsresultat: {
       type: BehandlingResultatType.OPPHOR,
       erRevurderingMedUendretUtfall: true,

@@ -1,6 +1,6 @@
 import {
   type Aktsomhet,
-  BehandlingArsakTypeEnum,
+  type BehandlingArsakType,
   type BehandlingResultatTypeTilbakekreving,
   type BehandlingType,
   ForeldelseVurderingType,
@@ -23,7 +23,7 @@ import type { VergeType } from './vergeTsType';
 //Mapping mellom KodeverkTypeTilbakekreving og enums/union-types med verdier
 type KodeverkEnumMap = {
   BehandlingType: BehandlingType;
-  BehandlingÅrsakType: BehandlingArsakTypeEnum;
+  BehandlingÅrsakType: BehandlingArsakType;
   BehandlingResultatType: BehandlingResultatTypeTilbakekreving;
   HistorikkAktør: HistorikkAktor;
   SkjermlenkeType: SkjermlenkeTypeTilbakekreving;

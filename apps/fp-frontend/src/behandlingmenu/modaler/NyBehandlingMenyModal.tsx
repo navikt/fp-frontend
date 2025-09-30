@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { BehandlingStatusEnum, type BehandlingType } from '@navikt/fp-kodeverk';
+import { type BehandlingType } from '@navikt/fp-kodeverk';
 import { MenyNyBehandlingIndex } from '@navikt/fp-sak-meny-ny-behandling';
 import type { Behandling, BehandlingAppKontekst } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -25,8 +25,7 @@ const BEHANDLINGSTYPER_SOM_SKAL_KUNNE_OPPRETTES = [
 
 const getUuidForSisteLukkedeForsteEllerRevurd = (behandlinger: BehandlingAppKontekst[] = []): string | undefined => {
   const behandling = behandlinger.find(
-    b =>
-      b.gjeldendeVedtak && b.status === BehandlingStatusEnum.AVSLUTTET && (b.type === 'BT-002' || b.type === 'BT-004'),
+    b => b.gjeldendeVedtak && b.status === 'AVSLU' && (b.type === 'BT-002' || b.type === 'BT-004'),
   );
   return behandling ? behandling.uuid : undefined;
 };

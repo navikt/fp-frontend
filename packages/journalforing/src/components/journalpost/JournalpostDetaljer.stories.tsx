@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FagsakStatusEnum } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -73,19 +72,19 @@ const detaljertJournalpostMal = {
       saksnummer: '125416597',
       ytelseType: 'FP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatusEnum.LOPENDE,
+      status: 'LOP',
     },
     {
       saksnummer: '155462542',
       ytelseType: 'SVP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatusEnum.AVSLUTTET,
+      status: 'AVSL',
     },
     {
       saksnummer: '175419131',
       ytelseType: 'FP',
       opprettetDato: '2022-01-03',
-      status: FagsakStatusEnum.AVSLUTTET,
+      status: 'AVSL',
     },
   ],
 } as Journalpost;
@@ -118,7 +117,7 @@ const journalpostKlage = {
       saksnummer: '125416597',
       ytelseType: 'FP',
       opprettetDato: '2022-01-02',
-      status: FagsakStatusEnum.LOPENDE,
+      status: 'LOP',
     },
   ],
 } as Journalpost;

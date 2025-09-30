@@ -2,7 +2,7 @@ import { type ReactRenderer } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { BehandlingStatusEnum, erAksjonspunktÅpent, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { erAksjonspunktÅpent, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { PanelDataProvider } from '@navikt/fp-utils';
@@ -34,7 +34,7 @@ const DEFAULT_BEHANDLING = {
   versjon: 1,
   språkkode: 'NB',
   type: 'BT-002',
-  status: BehandlingStatusEnum.BEHANDLING_UTREDES,
+  status: 'UTRED',
   behandlingPåVent: false,
   behandlingHenlagt: false,
   opprettet: '',

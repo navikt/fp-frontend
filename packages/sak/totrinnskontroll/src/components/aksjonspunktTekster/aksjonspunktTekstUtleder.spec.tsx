@@ -1,18 +1,18 @@
 import {
   AksjonspunktKode,
   BehandlingResultatType,
-  BehandlingStatusEnum,
+  type BehandlingStatus,
   FaktaOmBeregningTilfelle,
 } from '@navikt/fp-kodeverk';
 import type { Behandlingsresultat, KodeverkMedNavn, TotrinnskontrollAksjonspunkt } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekstUtleder';
 
-const behandlingStatusFVED = BehandlingStatusEnum.FATTER_VEDTAK;
+const behandlingStatusFVED = 'FVED' satisfies BehandlingStatus;
 
 const erTilbakekreving = false;
 
-const behandlingStatus = BehandlingStatusEnum.OPPRETTET;
+const behandlingStatus = 'OPPRE' satisfies BehandlingStatus;
 const faktaOmBeregningTilfeller = {} as KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 
 const defaultAksjonspunkt = {

@@ -6,7 +6,6 @@ import { dateFormat } from '@navikt/ft-utils';
 import {
   AksjonspunktKode,
   BehandlingResultatType,
-  BehandlingStatusEnum,
   isFaktaUttakAksjonspunkt,
   isUttakAksjonspunkt,
 } from '@navikt/fp-kodeverk';
@@ -155,7 +154,7 @@ const getTextForKlage = (
   behandlingStaus: foreldrepenger_behandlingslager_behandling_BehandlingStatus,
   behandlingsresultat?: Behandlingsresultat,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  if (behandlingStaus === BehandlingStatusEnum.FATTER_VEDTAK) {
+  if (behandlingStaus === 'FVED') {
     return [getTextForKlageHelper(behandlingsresultat)];
   }
   return [];

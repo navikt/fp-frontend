@@ -1,10 +1,4 @@
-import {
-  type BehandlingStatus,
-  BehandlingStatusEnum,
-  type BehandlingType,
-  type FagsakStatus,
-  FagsakStatusEnum,
-} from '@navikt/fp-kodeverk';
+import { type BehandlingStatus, type BehandlingType, type FagsakStatus } from '@navikt/fp-kodeverk';
 import type { Aksess, AksessRettigheter, NavAnsatt } from '@navikt/fp-types';
 
 const kanVeilede = (navAnsatt: NavAnsatt): boolean => navAnsatt.kanVeilede;
@@ -54,17 +48,9 @@ const accessSelector =
     return { employeeHasAccess, isEnabled };
   };
 
-export const writeAccess = accessSelector(
-  [kanSaksbehandle],
-  [FagsakStatusEnum.OPPRETTET, FagsakStatusEnum.UNDER_BEHANDLING],
-  [BehandlingStatusEnum.OPPRETTET, BehandlingStatusEnum.BEHANDLING_UTREDES],
-);
+export const writeAccess = accessSelector([kanSaksbehandle], ['OPPR', 'UBEH'], ['OPPRE', 'UTRED']);
 
-export const kanOverstyreAccess = accessSelector(
-  [kanOverstyre],
-  [FagsakStatusEnum.UNDER_BEHANDLING],
-  [BehandlingStatusEnum.BEHANDLING_UTREDES],
-);
+export const kanOverstyreAccess = accessSelector([kanOverstyre], ['UBEH'], ['UTRED']);
 
 export const getAccessRights = (
   navAnsatt: NavAnsatt,

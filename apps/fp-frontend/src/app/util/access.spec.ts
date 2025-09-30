@@ -1,19 +1,28 @@
-import { type BehandlingStatus, BehandlingStatusEnum, type FagsakStatus, FagsakStatusEnum } from '@navikt/fp-kodeverk';
+import { type BehandlingStatus, type FagsakStatus } from '@navikt/fp-kodeverk';
 import type { NavAnsatt } from '@navikt/fp-types';
 
 import { kanOverstyreAccess, writeAccess } from './access';
 
+const FagsakStatusValues = new Set<FagsakStatus>(['OPPR', 'UBEH', 'LOP', 'AVSLU']);
+
+const BehandlingStatusValues = new Set<BehandlingStatus>(['AVSLU', 'IVED', 'FVED', 'OPPRE', 'UTRED']);
+
 const forEachFagsakAndBehandlingStatus = (
   callback: (fagsakStatus: FagsakStatus, behandlingStatus: BehandlingStatus) => void,
 ) => {
-  for (const fagsakStatus of Object.values(FagsakStatusEnum)) {
-    for (const behandlingStatus of Object.values(BehandlingStatusEnum)) {
+  for (const fagsakStatus of FagsakStatusValues) {
+    for (const behandlingStatus of BehandlingStatusValues) {
       callback(fagsakStatus, behandlingStatus);
     }
   }
 };
 
-const getTestName = (accessName: string, expected: boolean, fagsakStatus: string, behandlingStatus: string): string =>
+const getTestName = (
+  accessName: string,
+  expected: boolean,
+  fagsakStatus: FagsakStatus,
+  behandlingStatus: BehandlingStatus,
+): string =>
   `skal${
     expected ? '' : ' ikke'
   } ha ${accessName} når fagsakStatus er '${fagsakStatus}' og behandlingStatus er '${behandlingStatus}'`;
@@ -23,10 +32,10 @@ describe('access', () => {
   const veilederAnsatt = { kanVeilede: true } as NavAnsatt;
 
   describe('writeAccess', () => {
-    const validFagsakStatuser = [FagsakStatusEnum.OPPRETTET, FagsakStatusEnum.UNDER_BEHANDLING];
+    const validFagsakStatuser = ['OPPR', 'UBEH'] satisfies FagsakStatus[];
     const validFagsakStatus = validFagsakStatuser[0]!;
 
-    const validBehandlingStatuser = [BehandlingStatusEnum.OPPRETTET, BehandlingStatusEnum.BEHANDLING_UTREDES];
+    const validBehandlingStatuser = ['OPPRE', 'UTRED'] satisfies BehandlingStatus[];
     const validBehandlingStatus = validBehandlingStatuser[0];
     const validBehandlingTyper = 'BT-002';
 
@@ -67,10 +76,10 @@ describe('access', () => {
   });
 
   describe('kanOverstyreAccess', () => {
-    const validFagsakStatuser = [FagsakStatusEnum.UNDER_BEHANDLING];
+    const validFagsakStatuser = ['UBEH'] satisfies FagsakStatus[];
     const validFagsakStatus = validFagsakStatuser[0]!;
 
-    const validBehandlingStatuser = [BehandlingStatusEnum.BEHANDLING_UTREDES];
+    const validBehandlingStatuser = ['UTRED'] satisfies BehandlingStatus[];
     const validBehandlingStatus = validBehandlingStatuser[0];
     const validBehandlingTyper = 'BT-002';
 

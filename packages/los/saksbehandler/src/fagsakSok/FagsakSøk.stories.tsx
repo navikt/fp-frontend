@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { FagsakStatusEnum, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
+import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum } from '@navikt/fp-types';
 
@@ -49,7 +49,7 @@ export const Default: Story = {
       {
         saksnummer: '12213234',
         fagsakYtelseType: 'FP',
-        status: FagsakStatusEnum.UNDER_BEHANDLING,
+        status: 'UBEH',
         person: {
           navn: 'Espen Utvikler',
           fødselsdato: '1980-10-10',
