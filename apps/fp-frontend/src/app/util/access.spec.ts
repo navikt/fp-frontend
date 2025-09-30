@@ -3,9 +3,9 @@ import type { NavAnsatt } from '@navikt/fp-types';
 
 import { kanOverstyreAccess, writeAccess } from './access';
 
-const FagsakStatusValues = new Set(['OPPR', 'UBEH', 'LOP', 'AVSL'] as FagsakStatus[]);
+const FagsakStatusValues = new Set<FagsakStatus>(['OPPR', 'UBEH', 'LOP', 'AVSLU']);
 
-const BehandlingStatusValues = new Set(['AVSLU', 'IVED', 'FVED', 'OPPRE', 'UTRED'] as BehandlingStatus[]);
+const BehandlingStatusValues = new Set<BehandlingStatus>(['AVSLU', 'IVED', 'FVED', 'OPPRE', 'UTRED']);
 
 const forEachFagsakAndBehandlingStatus = (
   callback: (fagsakStatus: FagsakStatus, behandlingStatus: BehandlingStatus) => void,
