@@ -59,7 +59,7 @@ const henleggArsakerPerBehandlingType = {
 };
 
 export type FormValues = {
-  årsakKode?: string;
+  årsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving;
   begrunnelse?: string;
   fritekst?: string;
 };
@@ -95,7 +95,7 @@ export const HenleggBehandlingModal = ({
 
   const formMethods = useForm<FormValues>();
 
-  const årsakKode = formMethods.watch('årsakKode') as BehandlingResultatType | BehandlingResultatTypeTilbakekreving;
+  const årsakKode = formMethods.watch('årsakKode');
   const begrunnelse = formMethods.watch('begrunnelse');
   const fritekst = formMethods.watch('fritekst');
 

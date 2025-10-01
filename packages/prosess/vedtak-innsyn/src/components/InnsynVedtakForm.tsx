@@ -34,7 +34,7 @@ const getPreviewCallback =
     const data = {
       fritekst: begrunnelse ?? ' ',
       mottaker: '',
-      dokumentMal: 'INNSYN' as DokumentMalType,
+      dokumentMal: 'INNSYN' as const,
     };
     previewCallback(data);
   };

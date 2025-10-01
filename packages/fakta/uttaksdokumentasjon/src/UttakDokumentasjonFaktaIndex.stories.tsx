@@ -26,10 +26,10 @@ const aktivitetskravGrunnlagListe = [
     stillingsprosent: 50,
     permisjon: {
       prosent: 0,
-      type: 'UDEFINERT',
+      type: '-',
     },
   },
-] as AktivitetskravGrunnlagArbeid[];
+] satisfies AktivitetskravGrunnlagArbeid[];
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
@@ -70,7 +70,7 @@ const opprettetDokumentasjonVurderingBehovListe = [
     årsak: 'TIDLIG_OPPSTART_FAR',
     aktivitetskravGrunnlag: [],
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 const automatiskAvklartBehovListe = [
   {
@@ -158,7 +158,7 @@ const utfortDokumentasjonVurderingBehovListe = [
     vurdering: 'IKKE_DOKUMENTERT',
     aktivitetskravGrunnlag: [],
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
   args: {
