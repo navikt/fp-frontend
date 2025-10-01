@@ -5,7 +5,6 @@ import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
-  FagsakMarkeringKode,
   OppgaveType,
   RelasjonsRolleType,
   VedtakbrevType,
@@ -950,7 +949,7 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
       },
       fagsakMarkeringer: [
         {
-          fagsakMarkering: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+          fagsakMarkering: 'PRAKSIS_UTSETTELSE',
           kortNavn: 'Utsettelse',
         },
       ],

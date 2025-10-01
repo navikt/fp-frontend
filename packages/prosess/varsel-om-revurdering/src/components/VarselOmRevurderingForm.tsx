@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
@@ -90,7 +90,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
   const forhåndsvisMelding = (e: MouseEvent) => {
     e.preventDefault();
     previewCallback({
-      dokumentMal: DokumentMalType.VARSEL_OM_REVURDERING,
+      dokumentMal: 'VARREV',
       arsakskode: RevurderingVarslingÅrsak.ANNET,
       fritekst: formVerdier.fritekst ?? ' ',
     });

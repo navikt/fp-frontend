@@ -5,8 +5,6 @@ import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
-import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
-
 import { SoknadData } from '../felles/SoknadData';
 
 import messages from '../../i18n/nb_NO.json';
@@ -50,8 +48,7 @@ const baseOptions = [
 
 export const RettigheterPapirsoknadIndex = ({ readOnly, soknadData }: Props) => {
   const visMannAdoptererAlene =
-    soknadData.getFamilieHendelseType() !== FamilieHendelseType.FODSEL &&
-    soknadData.getForeldreType() === ForeldreType.FAR;
+    soknadData.getFamilieHendelseType() !== 'FODSL' && soknadData.getForeldreType() === 'FAR';
 
   const options = visMannAdoptererAlene
     ? baseOptions

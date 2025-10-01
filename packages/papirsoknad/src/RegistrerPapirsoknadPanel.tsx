@@ -6,7 +6,14 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { createIntl } from '@navikt/ft-utils';
 
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import type { AlleKodeverk, Behandling, Fagsak } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  Behandling,
+  Fagsak,
+  FagsakYtelseType,
+  FamilieHendelseType,
+  ForeldreType,
+} from '@navikt/fp-types';
 
 import type { EngangsstønadValues } from './engangsstonad/components/EngangsstonadForm';
 import { EngangsstonadPapirsoknadIndex } from './engangsstonad/EngangsstonadPapirsoknadIndex';
@@ -26,9 +33,9 @@ interface Props {
   kodeverk: AlleKodeverk;
   readOnly: boolean;
   lagrePapirsøknad: (
-    fagsakYtelseType: string,
-    familieHendelseType: string,
-    foreldreType: string,
+    fagsakYtelseType: FagsakYtelseType,
+    familieHendelseType: FamilieHendelseType,
+    foreldreType: ForeldreType,
     formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => Promise<Behandling>;
   erEndringssøknad: boolean;

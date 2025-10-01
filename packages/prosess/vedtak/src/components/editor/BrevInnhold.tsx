@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { ArrowUndoIcon, FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Button, HStack, VStack } from '@navikt/ds-react';
 
-import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -31,7 +30,7 @@ export const BrevInnhold = ({
   const { isReadOnly, fagsak } = usePanelDataContext();
 
   const harPraksisUtsettelse = fagsak.fagsakMarkeringer.some(
-    markering => markering.fagsakMarkering === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+    markering => markering.fagsakMarkering === 'PRAKSIS_UTSETTELSE',
   );
 
   const brevStiler = utledStiler(brevOverstyring.opprinneligHtml);

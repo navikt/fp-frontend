@@ -2,8 +2,6 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { DokumentMalType } from '@navikt/fp-kodeverk';
-
 import * as stories from './MenyHenleggIndex.stories';
 
 const { ForFørstegangssøknad, ForKlage, ForInnsyn, ForTilbakekreving, ForTilbakekrevingRevurdering, ForRevurdering } =
@@ -128,7 +126,7 @@ describe('MenyHenleggIndex', () => {
     await waitFor(() => expect(forhandsvisHenleggBehandling).toHaveBeenCalledTimes(1));
     expect(forhandsvisHenleggBehandling).toHaveBeenNthCalledWith(1, {
       behandlingUuid: '23r2323',
-      dokumentMal: DokumentMalType.INFO_OM_HENLEGGELSE,
+      dokumentMal: 'IOHENL',
       fritekst: undefined,
     });
   });

@@ -4,15 +4,14 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import { ForeldreType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, ForeldreType } from '@navikt/fp-types';
 
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FromValuesFulltUttak, PermisjonFormValues } from '../../types';
 import { RenderPermisjonPeriodeFieldArray } from './RenderPermisjonPeriodeFieldArray';
 
 interface Props {
-  foreldreType: string;
+  foreldreType: ForeldreType;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
 }
@@ -34,7 +33,7 @@ export const PermisjonFulltUttak = ({ foreldreType, readOnly, alleKodeverk }: Pr
       />
       {fulltUttak && (
         <RenderPermisjonPeriodeFieldArray
-          sokerErMor={foreldreType === ForeldreType.MOR}
+          sokerErMor={foreldreType === 'MOR'}
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
         />

@@ -5,21 +5,20 @@ import { Box, Button, Heading, HStack, Radio, VStack } from '@navikt/ds-react';
 import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, FagsakYtelseType, FamilieHendelseType, ForeldreType } from '@navikt/fp-types';
 
-const SØKNAD_TYPER = new Set([FamilieHendelseType.ADOPSJON, FamilieHendelseType.FODSEL]);
+const SØKNAD_TYPER = new Set<FamilieHendelseType>(['ADPSJN', 'FODSL']);
 
 type FormValues = {
-  fagsakYtelseType: string;
-  familieHendelseType: string;
-  foreldreType: string;
+  fagsakYtelseType: FagsakYtelseType;
+  familieHendelseType: FamilieHendelseType;
+  foreldreType: ForeldreType;
 };
 
 interface Props {
   setSoknadData: (soknadData: SoknadData) => void;
-  fagsakYtelseType: string;
+  fagsakYtelseType: FagsakYtelseType;
   alleKodeverk: AlleKodeverk;
 }
 

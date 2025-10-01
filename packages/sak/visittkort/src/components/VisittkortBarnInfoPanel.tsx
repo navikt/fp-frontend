@@ -3,7 +3,6 @@ import { useIntl } from 'react-intl';
 import { StrollerIcon } from '@navikt/aksel-icons';
 import { VisittKort } from '@navikt/ft-plattform-komponenter';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import type { FagsakHendelse } from '@navikt/fp-types';
 
 import { VisittkortBarnInfoFodselPanel } from './VisittkortBarnInfoFodselPanel';
@@ -24,9 +23,7 @@ export const VisittkortBarnInfoPanel = ({ familiehendelse }: Props) => {
     />
   );
 
-  const erFodselEllerTerminSoknad =
-    familiehendelse.hendelseType === FamilieHendelseType.FODSEL ||
-    familiehendelse.hendelseType === FamilieHendelseType.TERMIN;
+  const erFodselEllerTerminSoknad = familiehendelse.hendelseType === 'FODSL' || familiehendelse.hendelseType === 'TERM';
 
   return (
     <VisittKort icon={ikon}>

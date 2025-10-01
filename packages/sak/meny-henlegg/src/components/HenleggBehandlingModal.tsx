@@ -7,7 +7,7 @@ import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
-import { BehandlingResultatTypeTilbakekreving, DokumentMalType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatTypeTilbakekreving } from '@navikt/fp-kodeverk';
 import type {
   BehandlingResultatType,
   BehandlingType,
@@ -169,7 +169,7 @@ const forhåndsvisHenleggBehandlingDoc =
   (e: React.MouseEvent | React.KeyboardEvent): void => {
     forhåndsvisHenleggingsbrev({
       behandlingUuid,
-      dokumentMal: DokumentMalType.INFO_OM_HENLEGGELSE,
+      dokumentMal: 'IOHENL',
       fritekst,
     });
     e.preventDefault();

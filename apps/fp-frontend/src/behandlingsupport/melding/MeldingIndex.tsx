@@ -6,7 +6,7 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { DokumentMalType, VenteArsakType } from '@navikt/fp-kodeverk';
+import { VenteArsakType } from '@navikt/fp-kodeverk';
 import {
   type ForhåndsvisBrevParams,
   MeldingerSakIndex,
@@ -159,9 +159,7 @@ const getSubmitCallback =
   ) =>
   (values: MessagesFormValues) => {
     const skalSettePåVent =
-      values.brevmalkode === DokumentMalType.INNHENTE_OPPLYSNINGER ||
-      values.brevmalkode === DokumentMalType.VARSEL_OM_REVURDERING ||
-      values.brevmalkode === DokumentMalType.ETTERLYS_INNTEKTSMELDING;
+      values.brevmalkode === 'INNOPP' || values.brevmalkode === 'VARREV' || values.brevmalkode === 'ELYSIM';
     const erTilbakekreving = 'BT-007' === behandling.type || 'BT-009' === behandling.type;
 
     setShowMessageModal(!skalSettePåVent);
@@ -205,7 +203,6 @@ const useVisForhandsvisningAvMelding = (behandling: BehandlingAppKontekst) => {
     mutationFn: (params: ForhåndsvisBrevParams) =>
       api.forhåndsvisMelding({
         behandlingUuid: behandling.uuid,
-        // @ts-expect-error -- brevmalkode må kodes som string union ikke string
         dokumentMal: params.brevmalkode,
         fritekst: params.fritekst || ' ',
         // @ts-expect-error -- arsakskode må kodes som string union ikke string

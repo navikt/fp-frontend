@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
   AndreYtelserPapirsoknadIndex,
   BehovForTilretteleggingPanel,
@@ -82,7 +81,7 @@ export const SvangerskapspengerForm = ({
         <OppholdINorgePapirsoknadIndex
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
-          erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
+          erAdopsjon={soknadData.getFamilieHendelseType() !== 'ADPSJN'}
           mottattDato={mottattDato}
         />
         <InntektsgivendeArbeidPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />

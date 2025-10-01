@@ -10,7 +10,7 @@ import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, FamilieHendelseType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -111,9 +111,7 @@ const validerPerioder = (
   }
 
   const fødselsdato =
-    fagsak.familiehendelse?.hendelseType === FamilieHendelseType.FODSEL
-      ? fagsak.familiehendelse.hendelseDato
-      : undefined;
+    fagsak.familiehendelse?.hendelseType === 'FODSL' ? fagsak.familiehendelse.hendelseDato : undefined;
   const brukFødselsdato = erMor && !!fødselsdato && dayjs(fødselsdato).isBefore(førsteUttaksdato);
   const tidligsteDato = brukFødselsdato ? fødselsdato : førsteUttaksdato;
 

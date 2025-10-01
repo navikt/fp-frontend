@@ -3,13 +3,12 @@ import { useForm } from 'react-hook-form';
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
   LagreSoknadPapirsoknadIndex,
   MottattDatoPapirsoknadIndex,
   SoknadData,
 } from '@navikt/fp-papirsoknad-ui-komponenter';
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, FamilieHendelseType } from '@navikt/fp-types';
 
 import { RegistreringAdopsjonOgOmsorgGrid } from './RegistreringAdopsjonOgOmsorgGrid';
 import { RegistreringFodselGrid } from './RegistreringFodselGrid';
@@ -77,11 +76,11 @@ const transformValues = (soknadData: SoknadData, values: ReturnType<typeof initi
   };
 };
 
-const getComponentForFamiliehendelse = (familieHendelse: string) => {
-  if (familieHendelse === FamilieHendelseType.FODSEL) {
+const getComponentForFamiliehendelse = (familieHendelse: FamilieHendelseType) => {
+  if (familieHendelse === 'FODSL') {
     return RegistreringFodselGrid;
   }
-  if (familieHendelse === FamilieHendelseType.ADOPSJON) {
+  if (familieHendelse === 'ADPSJN') {
     return RegistreringAdopsjonOgOmsorgGrid;
   }
   throw new Error(`Unsupported FamilieHendelseType i papirsoknad for engangsstønad: ${familieHendelse}`);

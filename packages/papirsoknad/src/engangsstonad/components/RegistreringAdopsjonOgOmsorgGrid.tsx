@@ -1,4 +1,3 @@
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import {
   OmsorgOgAdopsjonPapirsoknadIndex,
   OppholdINorgePapirsoknadIndex,
@@ -38,7 +37,7 @@ export const RegistreringAdopsjonOgOmsorgGrid = ({
     <OppholdINorgePapirsoknadIndex
       readOnly={readOnly}
       alleKodeverk={alleKodeverk}
-      erAdopsjon={soknadData.getFamilieHendelseType() !== FamilieHendelseType.ADOPSJON}
+      erAdopsjon={soknadData.getFamilieHendelseType() !== 'ADPSJN'}
       mottattDato={mottattDato}
     />
     <SprakPapirsoknadIndex readOnly={readOnly} />

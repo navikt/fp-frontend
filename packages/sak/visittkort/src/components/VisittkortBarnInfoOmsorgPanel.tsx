@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import type { FagsakHendelse } from '@navikt/fp-types';
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
 export const VisittkortBarnInfoOmsorgPanel = ({ familiehendelse }: Props) => {
   const { hendelseType, hendelseDato, antallBarn } = familiehendelse;
 
-  const erAdopsjon = hendelseType === FamilieHendelseType.ADOPSJON;
+  const erAdopsjon = hendelseType === 'ADPSJN';
 
   const foreldreansvarTekstkode =
     antallBarn === 1

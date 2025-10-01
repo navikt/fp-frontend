@@ -5,11 +5,7 @@ export { Arbeidskategori } from './src/arbeidskategori';
 
 export { BehandlingResultatTypeTilbakekreving } from './src/behandlingResultatTypeTilbakekreving';
 
-export { DokumentMalType } from './src/dokumentMalType';
-export { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
-export { FamilieHendelseType } from './src/familieHendelseType';
 export { ForeldelseVurderingType } from './src/foreldelseVurderingType';
-export { ForeldreType } from './src/foreldreType';
 export { InnsynResultatType } from './src/innsynResultatType';
 export { InntektAktivitetType } from './src/inntektAktivitetType';
 export { Inntektskategori } from './src/inntektskategorier';
@@ -36,7 +32,6 @@ export { SammenligningType } from './src/sammenligningType';
 export { SivilstandType } from './src/sivilstandType';
 export { SoknadType } from './src/soknadType';
 export { StonadskontoType } from './src/stonadskontoType';
-export { FagsakMarkeringKode } from './src/fagsakMarkeringKode';
 export { UtsettelseArsakCode } from './src/utsettelseArsakCodes';
 export { UttakArbeidType } from './src/uttakArbeidType';
 export { UttakPeriodeType } from './src/uttakPeriodeType';

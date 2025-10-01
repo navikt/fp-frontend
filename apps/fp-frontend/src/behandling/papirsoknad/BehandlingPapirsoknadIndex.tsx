@@ -9,7 +9,7 @@ import {
   SoknadRegistrertModal,
   type SvangerskapsValues,
 } from '@navikt/fp-papirsoknad';
-import type { Aksjonspunkt } from '@navikt/fp-types';
+import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
 import { BehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
@@ -55,8 +55,8 @@ const useLagrePapirsøknad = (
   const { behandling, fagsak, lagreAksjonspunkter } = use(BehandlingDataContext);
 
   return async (
-    fagsakYtelseType: string,
-    familieHendelseType: string,
+    fagsakYtelseType: FagsakYtelseType,
+    familieHendelseType: FamilieHendelseType,
     foreldreType: string,
     formValues?: EngangsstønadValues | ForeldrepengerValues | ForeldrepengerEndringssøknadValues | SvangerskapsValues,
   ) => {

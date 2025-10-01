@@ -211,6 +211,11 @@ export type { AnkeVurderingOmgjoer } from './src/ankeVurderingOmgjoer';
 export type { Avslagsarsak } from './src/avslagsarsakCodes';
 export type { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplettVurderingType';
 export type { DiskresjonskodeType } from './src/diskresjonskodeType';
+export type { DokumentMalType } from './src/dokumentMalType';
+export type { FagsakMarkeringType } from './src/fagsakMarkeringType';
+export type { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
+export type { FamilieHendelseType } from './src/familieHendelseType';
+export type { ForeldreType } from './src/foreldreType';
 export {
   type BehandlingResultatType,
   isAvslag,

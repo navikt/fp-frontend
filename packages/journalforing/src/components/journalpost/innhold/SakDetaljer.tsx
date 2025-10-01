@@ -5,8 +5,7 @@ import { ExternalLinkIcon } from '@navikt/aksel-icons';
 import { Button, CopyButton, Detail, HStack, Label, Spacer, Tag, type TagProps, VStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
-import type { FagsakStatus } from '@navikt/fp-types';
+import type { FagsakStatus, FamilieHendelseType } from '@navikt/fp-types';
 
 import type { FamilieHendelse, JournalFagsak } from '../../../typer/journalFagsakTsType';
 
@@ -92,15 +91,15 @@ const finnTagProps = (statusKode: FagsakStatus): TagProps | null => {
   }
 };
 
-const finnFamilieHendelseTekstKode = (hendelseType: string): string => {
+const finnFamilieHendelseTekstKode = (hendelseType: FamilieHendelseType): string => {
   switch (hendelseType) {
-    case FamilieHendelseType.ADOPSJON:
+    case 'ADPSJN':
       return 'Journal.Sak.FamAdopsjon';
-    case FamilieHendelseType.FODSEL:
+    case 'FODSL':
       return 'Journal.Sak.FamFødsel';
-    case FamilieHendelseType.TERMIN:
+    case 'TERM':
       return 'Journal.Sak.FamTermin';
-    case FamilieHendelseType.OMSORG:
+    case 'OMSRGO':
       return 'Journal.Sak.FamOmsorg';
     default:
       throw new Error(`Ukjent familiehendelse ${hendelseType}`);

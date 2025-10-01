@@ -2,7 +2,8 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
+import { RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
+import type { DokumentMalType } from '@navikt/fp-types';
 
 import * as stories from './MeldingerSakIndex.stories';
 
@@ -24,7 +25,7 @@ describe('MeldingerSakIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      brevmalkode: DokumentMalType.INNHENTE_OPPLYSNINGER,
+      brevmalkode: 'INNOPP',
       fritekst: 'Dette er en begrunnelse',
     });
   });
@@ -45,7 +46,7 @@ describe('MeldingerSakIndex', () => {
     const utils = render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.VARSEL_OM_REVURDERING);
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
     await userEvent.selectOptions(
       utils.getByLabelText('Årsak'),
       RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
@@ -56,7 +57,7 @@ describe('MeldingerSakIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       arsakskode: RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
-      brevmalkode: DokumentMalType.VARSEL_OM_REVURDERING,
+      brevmalkode: 'VARREV',
       fritekst: ' ',
     });
   });
@@ -66,7 +67,7 @@ describe('MeldingerSakIndex', () => {
     const utils = render(<Default submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.VARSEL_OM_REVURDERING);
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
     await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ANNET');
 
     const begrunnelseInput = utils.getByLabelText('Fritekst');
@@ -77,7 +78,7 @@ describe('MeldingerSakIndex', () => {
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
       arsakskode: 'ANNET',
-      brevmalkode: DokumentMalType.VARSEL_OM_REVURDERING,
+      brevmalkode: 'VARREV',
       fritekst: 'Dette er en begrunnelse',
     });
     expect(screen.queryByText(brukerenHarIkkeAdresseText)).not.toBeInTheDocument();
@@ -88,7 +89,7 @@ describe('MeldingerSakIndex', () => {
     const utils = render(<ForSvangerskapspenger submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.VARSEL_OM_REVURDERING);
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
 
     expect(await screen.findByText('Annet')).toBeInTheDocument();
     expect(screen.queryByText('Barn ikke registrert i folkeregisteret')).not.toBeInTheDocument();
@@ -100,7 +101,7 @@ describe('MeldingerSakIndex', () => {
     const utils = render(<BrukerManglerAdresse submitCallback={lagre} />);
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Mal'), DokumentMalType.VARSEL_OM_REVURDERING);
+    await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
 
     expect(await screen.findByText(brukerenHarIkkeAdresseText)).toBeInTheDocument();
   });

@@ -2,7 +2,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { FamilieHendelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import type { Person } from '@navikt/fp-types';
 
 import { VisittkortSakIndex } from './VisittkortSakIndex';
@@ -95,7 +95,7 @@ export const FamilieMedFødtBarn: Story = {
     erMor: true,
     bruker: fagsakPersonMor,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.FODSEL,
+      hendelseType: 'FODSL',
       hendelseDato: '2020-01-21',
       dødfødsel: false,
       antallBarn: 1,
@@ -108,7 +108,7 @@ export const FamilieMedDødfødtBarn: Story = {
     erMor: true,
     bruker: fagsakPersonMor,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.FODSEL,
+      hendelseType: 'FODSL',
       hendelseDato: '2020-01-21',
       dødfødsel: true,
       antallBarn: 1,
@@ -121,7 +121,7 @@ export const FamilieMedTermin: Story = {
     erMor: true,
     bruker: fagsakPersonMor,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.TERMIN,
+      hendelseType: 'TERM',
       hendelseDato: '2020-01-21',
       dødfødsel: false,
       antallBarn: 1,
@@ -134,7 +134,7 @@ export const FamilieMedOmsorgovertakelse: Story = {
     erMor: true,
     bruker: fagsakPersonMor,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.OMSORG,
+      hendelseType: 'OMSRGO',
       hendelseDato: '2020-01-21',
       dødfødsel: false,
       antallBarn: 1,
@@ -147,7 +147,7 @@ export const FamilieMedAdopsjon: Story = {
     erMor: true,
     bruker: fagsakPersonMor,
     familiehendelse: {
-      hendelseType: FamilieHendelseType.ADOPSJON,
+      hendelseType: 'ADPSJN',
       hendelseDato: '2020-01-21',
       dødfødsel: false,
       antallBarn: 1,
