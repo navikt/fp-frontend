@@ -6,7 +6,7 @@
   "license": "MIT",
   "type": "module",
   "dependencies": {
-    "@testing-library/jest-dom": "6.8.0",
+    "@testing-library/jest-dom": "6.9.0",
     "vite": "7.1.7",
     "vitest": "3.2.4"
   }
