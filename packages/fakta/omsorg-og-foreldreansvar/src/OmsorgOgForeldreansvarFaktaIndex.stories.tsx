@@ -3,14 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  FarSøkerType,
-  NavBrukerKjonn,
-  SivilstandType,
-  SoknadType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, NavBrukerKjonn, SivilstandType, SoknadType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   AdopsjonFamilieHendelse,
@@ -26,7 +19,7 @@ const søknad = {
   adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' },
   antallBarn: 2,
   soknadType: SoknadType.ADOPSJON,
-  farSokerType: FarSøkerType.ADOPTERER_ALENE,
+  farSokerType: 'ADOPTERER_ALENE',
 
   barnetsAnkomstTilNorgeDato: '2022-09-13',
   mottattDato: '',

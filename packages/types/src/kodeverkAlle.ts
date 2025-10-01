@@ -1,8 +1,5 @@
 import {
   Arbeidskategori,
-  FaresignalVurdering,
-  FarSøkerType,
-  FordelingPeriodeKilde,
   GraderingAvslagÅrsak,
   InnsynResultatType,
   Inntektskategori,
@@ -56,6 +53,9 @@ import type { FagsakStatus } from './fagsakStatus';
 import type { FagsakYtelseType } from './fagsakYtelseType';
 import type { FaktaOmBeregningTilfelle } from './faktaOmBeregningTilfelle';
 import type { FamilieHendelseType } from './familieHendelseType';
+import type { FaresignalVurdering } from './faresignalVurdering';
+import type { FarSøkerType } from './farSøkerType';
+import type { FordelingPeriodeKilde } from './fordelingPeriodeKilde';
 import type { ForeldreType } from './foreldreType';
 import type { HistorikkAktor } from './historikkAktor';
 import type { KonsekvensForYtelsen } from './konsekvensForYtelsen';

@@ -216,6 +216,9 @@ export type { FagsakMarkeringType } from './src/fagsakMarkeringType';
 export type { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
 export type { FamilieHendelseType } from './src/familieHendelseType';
 export type { ForeldreType } from './src/foreldreType';
+export type { FaresignalVurdering } from './src/faresignalVurdering';
+export type { FarSøkerType } from './src/farSøkerType';
+export type { FordelingPeriodeKilde } from './src/fordelingPeriodeKilde';
 export {
   type BehandlingResultatType,
   isAvslag,

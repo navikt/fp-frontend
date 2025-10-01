@@ -4,16 +4,13 @@ import { Label, Link, List, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { periodFormat } from '@navikt/ft-utils';
 
-import type {
-  foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType,
-  RelatertTilgrensedYtelse,
-} from '@navikt/fp-types';
+import type { FarSøkerType, RelatertTilgrensedYtelse } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 interface Props {
   innvilgetRelatertTilgrensendeYtelserForAnnenForelder: RelatertTilgrensedYtelse[];
-  farSøkerType: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType | undefined;
+  farSøkerType: FarSøkerType | undefined;
 }
 
 export const RettighetFaktaPanel = ({ farSøkerType, innvilgetRelatertTilgrensendeYtelserForAnnenForelder }: Props) => {
