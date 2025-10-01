@@ -28,16 +28,33 @@ export type ForhåndsvisHenleggParams = {
 };
 
 const henleggArsakerPerBehandlingType = {
-  ['BT-003']: ['HENLAGT_KLAGE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
-  ['BT-008']: ['HENLAGT_ANKE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
-  ['BT-006']: ['HENLAGT_INNSYN_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
+  ['BT-003']: [
+    'HENLAGT_KLAGE_TRUKKET' satisfies BehandlingResultatType,
+    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
+  ],
+  ['BT-008']: [
+    'HENLAGT_ANKE_TRUKKET' satisfies BehandlingResultatType,
+    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
+  ],
+  ['BT-006']: [
+    'HENLAGT_INNSYN_TRUKKET' satisfies BehandlingResultatType,
+    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
+  ],
   ['BT-007']: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
   ['BT-009']: [
     BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_MED_BREV,
     BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_UTEN_BREV,
   ],
-  ['BT-004']: ['HENLAGT_SOKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SOKNAD_MANGLER'],
-  ['BT-002']: ['HENLAGT_SOKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SOKNAD_MANGLER'],
+  ['BT-004']: [
+    'HENLAGT_SØKNAD_TRUKKET' satisfies BehandlingResultatType,
+    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
+    'HENLAGT_SØKNAD_MANGLER' satisfies BehandlingResultatType,
+  ],
+  ['BT-002']: [
+    'HENLAGT_SØKNAD_TRUKKET' satisfies BehandlingResultatType,
+    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
+    'HENLAGT_SØKNAD_MANGLER' satisfies BehandlingResultatType,
+  ],
   '-': [],
 };
 
@@ -192,6 +209,11 @@ const disableHovedKnapp = (
   return !(årsakKode && begrunnelse);
 };
 
+const t = new Set<BehandlingResultatType | BehandlingResultatTypeTilbakekreving>([
+  'HENLAGT_SØKNAD_TRUKKET',
+  'HENLAGT_KLAGE_TRUKKET',
+  'HENLAGT_INNSYN_TRUKKET',
+]);
 const getShowLink = (
   behandlingType: BehandlingType,
   arsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving,
@@ -204,7 +226,7 @@ const getShowLink = (
     return 'HENLAGT_FEILOPPRETTET_MED_BREV' === arsakKode && !!fritekst;
   }
 
-  return ['HENLAGT_SOKNAD_TRUKKET', 'HENLAGT_KLAGE_TRUKKET', 'HENLAGT_INNSYN_TRUKKET'].some(brt => brt === arsakKode);
+  return !!arsakKode && t.has(arsakKode);
 };
 
 const getHenleggÅrsaker = (

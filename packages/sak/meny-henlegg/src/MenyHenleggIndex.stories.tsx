@@ -6,11 +6,25 @@ import type { Behandling } from '@navikt/fp-types';
 
 import { MenyHenleggIndex } from './MenyHenleggIndex';
 
+const BEHANDLINGRESULTAT_TYPER_TILBAKEKREVING = [
+  {
+    kode: 'HENLAGT_FEILOPPRETTET_UTEN_BREV',
+    kodeverk: 'BEHANDLING_RESULT_TYPE',
+    navn: 'Henlagt feilopprettet uten brev',
+  },
+  {
+    kode: 'HENLAGT_FEILOPPRETTET_MED_BREV',
+    kodeverk: 'BEHANDLING_RESULT_TYPE',
+    navn: 'Henlagt feilopprettet med brev',
+  },
+];
+
 const meta = {
   title: 'sak/sak-meny-henlegg',
   component: MenyHenleggIndex,
   args: {
-    behandlingResultatTyper: alleKodeverk.BehandlingResultatType,
+    //@ts-expect-error tilbakekreving-type
+    behandlingResultatTyper: alleKodeverk.BehandlingResultatType.concat(BEHANDLINGRESULTAT_TYPER_TILBAKEKREVING),
     ytelseType: 'FP',
     gaaTilSokeside: action('button-click'),
     henleggBehandling: () => {
