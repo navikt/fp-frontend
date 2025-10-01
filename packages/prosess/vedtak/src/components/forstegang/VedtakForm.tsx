@@ -5,25 +5,22 @@ import { type IntlShape, useIntl } from 'react-intl';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
+import { AksjonspunktKode, VedtakbrevType } from '@navikt/fp-kodeverk';
+import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
-  AksjonspunktKode,
-  BehandlingResultatType,
+  type Aksjonspunkt,
+  type Behandling,
+  type BehandlingResultatType,
+  type Behandlingsresultat,
+  type BeregningsresultatDagytelse,
+  type BeregningsresultatEs,
   isAvslag,
   isInnvilget,
   isKlageOmgjort,
-  VedtakbrevType,
-} from '@navikt/fp-kodeverk';
-import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type {
-  Aksjonspunkt,
-  Behandling,
-  Behandlingsresultat,
-  BeregningsresultatDagytelse,
-  BeregningsresultatEs,
-  Oppgave,
-  SimuleringResultat,
-  TilbakekrevingValg,
-  Vilkar,
+  type Oppgave,
+  type SimuleringResultat,
+  type TilbakekrevingValg,
+  type Vilkar,
 } from '@navikt/fp-types';
 import type {
   ForeslaVedtakAp,
@@ -41,11 +38,11 @@ import { getTilbakekrevingText } from '../felles/VedtakHelper';
 import { VedtakAvslagPanel } from './VedtakAvslagPanel';
 import { VedtakInnvilgetPanel } from './VedtakInnvilgetPanel';
 
-const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
-  if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET) {
+const finnAvslagResultatText = (behandlingResultatTypeKode: BehandlingResultatType, ytelseType: string): string => {
+  if (behandlingResultatTypeKode === 'KLAGE_YTELSESVEDTAK_OPPHEVET') {
     return 'VedtakForm.ResultatKlageYtelsesvedtakOpphevet';
   }
-  if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_AVVIST) {
+  if (behandlingResultatTypeKode === 'KLAGE_AVVIST') {
     return 'VedtakForm.ResultatKlageAvvist';
   }
 
@@ -60,8 +57,8 @@ const finnAvslagResultatText = (behandlingResultatTypeKode: string, ytelseType: 
   return 'VedtakForm.ForeldrepengerIkkeInnvilget';
 };
 
-const finnInnvilgetResultatText = (behandlingResultatTypeKode: string, ytelseType: string): string => {
-  if (behandlingResultatTypeKode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET) {
+const finnInnvilgetResultatText = (behandlingResultatTypeKode: BehandlingResultatType, ytelseType: string): string => {
+  if (behandlingResultatTypeKode === 'KLAGE_YTELSESVEDTAK_STADFESTET') {
     return 'VedtakForm.ResultatOpprettholdVedtak';
   }
   if (isKlageOmgjort(behandlingResultatTypeKode)) {

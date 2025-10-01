@@ -1,3 +1,5 @@
+import type { Aktsomhet } from './aktsomhet';
+
 // TODO [JOHANNES] -- tilbakekreving
 export type AktsomhetInfo = {
   sarligGrunner: string[];
@@ -12,7 +14,7 @@ export type AktsomhetInfo = {
 
 type VilkarResultatInfo = {
   begrunnelse: string;
-  aktsomhet?: string;
+  aktsomhet?: Aktsomhet;
   aktsomhetInfo?: AktsomhetInfo;
   erBelopetIBehold?: boolean;
   tilbakekrevesBelop?: number;

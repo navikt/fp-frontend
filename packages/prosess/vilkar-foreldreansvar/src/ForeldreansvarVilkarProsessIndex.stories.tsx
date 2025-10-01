@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -56,7 +56,7 @@ export const AvslåttVilkår2Ledd: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+        avslagsarsak: '1099',
       },
     } as Behandling,
     aksjonspunkterForPanel: [
@@ -109,7 +109,7 @@ export const AvslåttVilkår4Ledd: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+        avslagsarsak: '1099',
       },
     } as Behandling,
     aksjonspunkterForPanel: [

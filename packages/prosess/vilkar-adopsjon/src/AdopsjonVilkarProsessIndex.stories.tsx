@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktType, Avslagsarsak, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
@@ -11,11 +11,9 @@ import { AdopsjonVilkarProsessIndex } from './AdopsjonVilkarProsessIndex';
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -73,7 +71,7 @@ export const AvslåttVilkår: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+        avslagsarsak: '1099',
       },
     } as Behandling,
     aksjonspunkterForPanel: [

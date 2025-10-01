@@ -6,7 +6,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, BehandlingResultatType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
 import type { Behandling } from '@navikt/fp-types';
@@ -80,8 +80,7 @@ const getVedtakStatus = (behandling: Behandling): string => {
   if (aksjonspunkt.length === 0 || harÅpentAksjonspunkt) {
     return VilkarUtfallType.IKKE_VURDERT;
   }
-  return behandlingsresultat?.type === BehandlingResultatType.INNSYN_INNVILGET ||
-    behandlingsresultat?.type === BehandlingResultatType.INNSYN_DELVIS_INNVILGET
+  return behandlingsresultat?.type === 'INNSYN_INNVILGET' || behandlingsresultat?.type === 'INNSYN_DELVIS_INNVILGET'
     ? VilkarUtfallType.OPPFYLT
     : VilkarUtfallType.IKKE_OPPFYLT;
 };

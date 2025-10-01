@@ -5,7 +5,6 @@ import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
-  AksjonspunktType,
   GraderingAvslagÅrsak,
   ManuellBehandlingÅrsak,
   NavBrukerKjonn,
@@ -34,11 +33,9 @@ const åpentAksjonspunkt: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
     status: 'OPPR',
-
     kanLoses: true,
     toTrinnsBehandling: true,
-
-    aksjonspunktType: AksjonspunktType.MANUELL,
+    aksjonspunktType: 'MANU',
     vilkarType: VilkarType.OMSORGSVILKARET,
     erAktivt: true,
   },

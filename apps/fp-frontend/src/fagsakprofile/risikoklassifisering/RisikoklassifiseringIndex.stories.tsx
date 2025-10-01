@@ -81,9 +81,7 @@ const FAGSAK = {
       risikoAksjonspunkt: {
         definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
         status: 'OPPR',
-
         toTrinnsBehandling: false,
-
         aksjonspunktType: '-',
         kanLoses: false,
         erAktivt: false,

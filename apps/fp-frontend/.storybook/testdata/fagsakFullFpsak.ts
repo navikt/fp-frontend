@@ -1,4 +1,4 @@
-import { BehandlingResultatType, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 export const fagsakFullFpsak: Fagsak = {
@@ -86,7 +86,7 @@ export const fagsakFullFpsak: Fagsak = {
       toTrinnsBehandling: false,
       behandlingsresultat: {
         id: 999951,
-        type: BehandlingResultatType.IKKE_FASTSATT,
+        type: 'IKKE_FASTSATT',
 
         rettenTil: '-',
         konsekvenserForYtelsen: [],

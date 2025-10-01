@@ -5,7 +5,6 @@ import { Table } from '@navikt/ds-react';
 import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold, ArbeidsgiverOpplysningerPerId, Inntektsmelding } from '@navikt/fp-types';
 
 import { ArbeidsforholdDetail } from './ArbeidsforholdDetail';
@@ -70,9 +69,8 @@ export const PersonArbeidsforholdTable = ({
               <Table.DataCell textSize="small">{stillingsprosent}</Table.DataCell>
               <Table.DataCell textSize="small">{mottattDato && <DateLabel dateString={mottattDato} />}</Table.DataCell>
               <Table.DataCell textSize="small">
-                {(arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.BRUK ||
-                  arbeidsforhold.saksbehandlersVurdering ===
-                    ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING) && (
+                {(arbeidsforhold.saksbehandlersVurdering === 'BRUK' ||
+                  arbeidsforhold.saksbehandlersVurdering === 'FORTSETT_UTEN_INNTEKTSMELDING') && (
                   <StarFillIcon
                     color="var(--ax-warning-700)"
                     height="20px"
@@ -92,10 +90,10 @@ export const PersonArbeidsforholdTable = ({
 const Br = <br key="break-line" />;
 
 const finnKilde = (arbeidsforhold: AoIArbeidsforhold, intl: IntlShape) => {
-  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING)
+  if (arbeidsforhold.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING')
     return intl.formatMessage({ id: 'PersonArbeidsforholdTable.Inntektsmelding' });
 
-  if (arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER)
+  if (arbeidsforhold.saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER')
     return intl.formatMessage({ id: 'PersonArbeidsforholdTable.Saksbehandler' });
 
   return intl.formatMessage({ id: 'PersonArbeidsforholdTable.AaRegisteret' });
@@ -117,7 +115,7 @@ const utledNavn = (
     return 'Fant ikke arbeidsgivernavn';
   }
 
-  if (saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER) {
+  if (saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER') {
     return arbeidsgiverOpplysninger.navn;
   }
 

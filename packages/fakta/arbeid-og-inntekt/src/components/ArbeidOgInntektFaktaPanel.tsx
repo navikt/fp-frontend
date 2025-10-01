@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button, Table, VStack } from '@navikt/ds-react';
 
-import { AksjonspunktKode, ArbeidsforholdKomplettVurderingType, VenteArsakType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VenteArsakType } from '@navikt/fp-kodeverk';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import type {
   ArbeidOgInntektsmelding,
@@ -105,11 +105,9 @@ export const ArbeidOgInntektFaktaPanel = ({
 
   const kanSettePåVent = tabellRader.some(
     d =>
-      d.avklaring?.saksbehandlersVurdering ===
-        ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING ||
-      d.avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO ||
-      d.avklaring?.saksbehandlersVurdering ===
-        ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
+      d.avklaring?.saksbehandlersVurdering === 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING' ||
+      d.avklaring?.saksbehandlersVurdering === 'MELDING_TIL_ARBEIDSGIVER_NAV_NO' ||
+      d.avklaring?.saksbehandlersVurdering === 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
   );
   const harBehandletAllePerioder = tabellRader.every(d => !d.årsak || (d.årsak && d.avklaring));
 

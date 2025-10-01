@@ -3,7 +3,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { render, screen } from '@testing-library/react';
 
-import { DiskresjonskodeType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import type { Person } from '@navikt/fp-types';
 
 import { VisittkortLabels } from './VisittkortLabels';
@@ -47,7 +47,7 @@ describe('VisittkortSakIndex', () => {
         <VisittkortLabels
           fagsakPerson={{
             ...fagsakPerson,
-            diskresjonskode: DiskresjonskodeType.KODE6,
+            diskresjonskode: 'SPSF',
           }}
           harVergeIÅpenBehandling={false}
         />
@@ -64,7 +64,7 @@ describe('VisittkortSakIndex', () => {
         <VisittkortLabels
           fagsakPerson={{
             ...fagsakPerson,
-            diskresjonskode: DiskresjonskodeType.KODE7,
+            diskresjonskode: 'SPFO',
           }}
           harVergeIÅpenBehandling={false}
         />

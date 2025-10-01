@@ -1,11 +1,5 @@
 import {
-  AktivitetskravPermisjonType,
-  AktivitetStatus,
-  AnkeOmgjorArsak,
   Arbeidskategori,
-  ArbeidType,
-  Avslagsarsak,
-  BehandlingResultatType,
   FagsakMarkeringKode,
   FaktaOmBeregningTilfelle,
   FamilieHendelseType,
@@ -52,7 +46,13 @@ import {
 } from '@navikt/fp-kodeverk';
 
 import type { AdresseType } from './adresseType';
+import type { AktivitetskravPermisjonType } from './aktivitetskravPermisjonType';
+import type { AktivitetStatus } from './aktivitetStatus';
+import type { AnkeOmgjorArsak } from './ankeOmgjorArsak';
+import type { ArbeidType } from './arbeidType';
+import type { Avslagsarsak } from './avslagsarsakCodes';
 import type { BehandlingArsakType } from './behandlingArsakType';
+import type { BehandlingResultatType } from './behandlingResultatType';
 import type { BehandlingStatus } from './behandlingStatus';
 import type { BehandlingType } from './behandlingType';
 import type { FagsakStatus } from './fagsakStatus';

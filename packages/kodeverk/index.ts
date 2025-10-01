@@ -1,30 +1,10 @@
 export { AksjonspunktKode, isUttakAksjonspunkt, isFaktaUttakAksjonspunkt } from './src/aksjonspunktCodes';
 export type { OverstyringAksjonspunkter, VilkårOverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
-export { AksjonspunktType } from './src/aksjonspunktType';
-export { AktivitetStatus } from './src/aktivitetStatus';
-export { AnkeOmgjorArsak } from './src/ankeOmgjorArsak';
-export { AnkeVurdering } from './src/ankeVurdering';
-export { AnkeVurderingOmgjoer } from './src/ankeVurderingOmgjoer';
-export { ArbeidsforholdHandlingType } from './src/arbeidsforholdHandlingType';
-export { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplettVurderingType';
 export { Arbeidskategori } from './src/arbeidskategori';
-export { ArbeidType } from './src/arbeidType';
-export { Avslagsarsak } from './src/avslagsarsakCodes';
 
-export {
-  BehandlingResultatType,
-  isAvslag,
-  isInnvilget,
-  isOpphor,
-  isKlageOmgjort,
-  isKlageAvvist,
-} from './src/behandlingResultatType';
 export { BehandlingResultatTypeTilbakekreving } from './src/behandlingResultatTypeTilbakekreving';
 
-export { BeregningsgrunnlagAndeltype } from './src/beregningsgrunnlagAndeltyper';
-export { Dekningsgrad } from './src/dekningsgrad';
-export { DiskresjonskodeType } from './src/diskresjonskodeType';
 export { DokumentMalType } from './src/dokumentMalType';
 export { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
 export { FamilieHendelseType } from './src/familieHendelseType';
@@ -85,7 +65,6 @@ export { UttakUtsettelseType } from './src/uttakUtsettelseType';
 export { NaturalYtelseType } from './src/naturalYtelseType';
 export { FordelingPeriodeKilde } from './src/fordelingPeriodeKilde';
 export { KlageAvvistÅrsak } from './src/klageAvvistÅrsak';
-export { AktivitetskravPermisjonType } from './src/aktivitetskravPermisjonType';
 export { OppholdstillatelseType } from './src/oppholdstillatelseType';
 export { PeriodeResultatÅrsak } from './src/periodeResultatÅrsak';
 export { GraderingAvslagÅrsak } from './src/graderingAvslagÅrsak';
@@ -93,7 +72,6 @@ export { MedlemskapDekningType } from './src/medlemskapDekningType';
 export { MedlemskapType } from './src/medlemskapType';
 export { VedtakbrevType } from './src/vedtakbrevType';
 export { OppgaveBehandlingStatus } from './src/oppgaveBehandlingStatus';
-export type { Aktsomhet } from './src/aktsomhet';
 export type { HendelseType } from './src/hendelseType';
 export type { HendelseUnderType } from './src/hendelseUnderType';
 export type { SærligGrunn } from './src/særligGrunn';

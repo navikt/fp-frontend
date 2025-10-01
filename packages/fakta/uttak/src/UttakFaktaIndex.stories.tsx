@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  AksjonspunktType,
   FordelingPeriodeKilde,
   RelasjonsRolleType,
   UtsettelseÅrsak,
@@ -34,7 +33,7 @@ const aksjonspunktDefault = {
   kanLoses: true,
   toTrinnsBehandling: false,
 
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;

@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktType, SivilstandType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, SivilstandType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   KjønnkodeEnum,
@@ -92,7 +92,7 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
         vilkarType: VilkarType.FODSELSVILKARET_MOR,
         toTrinnsBehandling: false,
 
-        aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+        aksjonspunktType: 'AUTO',
         erAktivt: true,
       },
     ],

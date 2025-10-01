@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, Avslagsarsak, SoknadType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, SoknadType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
@@ -75,7 +75,7 @@ export const AvslåttVilkår: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+        avslagsarsak: '1099',
       },
     } as Behandling,
     aksjonspunkterForPanel: [

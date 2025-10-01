@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -20,7 +20,7 @@ const aksjonspunkterForPanel: Aksjonspunkt[] = [
     status: 'OPPR',
     kanLoses: true,
     toTrinnsBehandling: false,
-    aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+    aksjonspunktType: 'AUTO',
     vilkarType: VilkarType.OMSORGSVILKARET,
     erAktivt: true,
   },

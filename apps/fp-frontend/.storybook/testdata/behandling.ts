@@ -1,10 +1,4 @@
-import {
-  AksjonspunktKode,
-  AksjonspunktType,
-  BehandlingResultatType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 export const behandling: Behandling = {
@@ -32,7 +26,7 @@ export const behandling: Behandling = {
   toTrinnsBehandling: false,
   behandlingsresultat: {
     id: 999951,
-    type: BehandlingResultatType.IKKE_FASTSATT,
+    type: 'IKKE_FASTSATT',
 
     rettenTil: '-',
     konsekvenserForYtelsen: [],
@@ -273,11 +267,9 @@ export const behandling: Behandling = {
     {
       definisjon: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
       status: 'OPPR',
-
       vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
       toTrinnsBehandling: true,
-
-      aksjonspunktType: AksjonspunktType.MANUELL,
+      aksjonspunktType: 'MANU',
       kanLoses: true,
       erAktivt: true,
     },

@@ -2,7 +2,7 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { DiskresjonskodeType, FamilieHendelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { FamilieHendelseType, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import type { Person } from '@navikt/fp-types';
 
 import { VisittkortSakIndex } from './VisittkortSakIndex';
@@ -68,7 +68,7 @@ export const PersonopplysningerForBeggeParterMedLangtNavn: Story = {
 export const MedDiskresjonskodeOgDødAnnenpart: Story = {
   args: {
     erMor: false,
-    bruker: { ...fagsakPersonFar, diskresjonskode: DiskresjonskodeType.KODE6 },
+    bruker: { ...fagsakPersonFar, diskresjonskode: 'SPSF' },
     annenPart: { ...fagsakPersonMor, dødsdato: '2024-02-01' },
     lenkeTilAnnenPart: 'testlenke til annen part',
   },

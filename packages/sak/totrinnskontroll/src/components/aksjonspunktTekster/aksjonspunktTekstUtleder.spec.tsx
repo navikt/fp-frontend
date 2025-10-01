@@ -1,4 +1,4 @@
-import { AksjonspunktKode, BehandlingResultatType, FaktaOmBeregningTilfelle } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, FaktaOmBeregningTilfelle } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
   BehandlingStatus,
@@ -634,7 +634,7 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_MEDHOLD,
+      type: 'KLAGE_MEDHOLD',
     } as Behandlingsresultat;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
@@ -643,7 +643,7 @@ describe('aksjonspunktTekstUtleder', () => {
   // Ytelsesvedtak opphevet
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak opphevet', () => {
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
+      type: 'KLAGE_YTELSESVEDTAK_OPPHEVET',
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -662,7 +662,7 @@ describe('aksjonspunktTekstUtleder', () => {
   // Klage avvist
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag klage avvist', () => {
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_AVVIST,
+      type: 'KLAGE_AVVIST',
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -674,7 +674,7 @@ describe('aksjonspunktTekstUtleder', () => {
   // Ikke fastsatt Engangsstønad
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ikke fastsatt', () => {
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+      type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -685,7 +685,7 @@ describe('aksjonspunktTekstUtleder', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak stadfestet', () => {
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+      type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,

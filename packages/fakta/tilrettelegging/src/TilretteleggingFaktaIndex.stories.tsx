@@ -2,13 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktType,
-  PermisjonsbeskrivelseType,
-  UttakArbeidType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, PermisjonsbeskrivelseType, UttakArbeidType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -289,7 +283,7 @@ const aksjonspunktDefault = {
   kanLoses: true,
   toTrinnsBehandling: false,
 
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;

@@ -1,6 +1,6 @@
 import { use } from 'react';
 
-import { AksjonspunktType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
@@ -121,9 +121,7 @@ const getBekreftAksjonspunktProsessCallback =
       apListe.some(apModel => apModel.kode === ap.definisjon),
     );
     const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring.some(
-      ap =>
-        ap.aksjonspunktType === AksjonspunktType.OVERSTYRING ||
-        ap.aksjonspunktType === AksjonspunktType.SAKSBEHANDLEROVERSTYRING,
+      ap => ap.aksjonspunktType === 'OVST' || ap.aksjonspunktType === 'SAOV',
     );
 
     if (apListe.length === 0) {

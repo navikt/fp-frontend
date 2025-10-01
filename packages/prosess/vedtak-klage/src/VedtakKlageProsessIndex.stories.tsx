@@ -5,8 +5,6 @@ import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
-  AksjonspunktType,
-  BehandlingResultatType,
   KlageAvvistÅrsak,
   KlageMedholdÅrsak,
   KlageVurdering as klageVurderingCodes,
@@ -21,7 +19,7 @@ const behandling = {
   uuid: '1',
   versjon: 1,
   behandlingsresultat: {
-    type: BehandlingResultatType.KLAGE_AVVIST,
+    type: 'KLAGE_AVVIST',
   },
   behandlingPåVent: false,
 } as Behandling;
@@ -30,11 +28,9 @@ const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
     definisjon: AksjonspunktKode.FORESLA_VEDTAK,
     status: 'OPPR',
-
     kanLoses: true,
     toTrinnsBehandling: false,
-
-    aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+    aksjonspunktType: 'AUTO',
     vilkarType: VilkarType.OMSORGSVILKARET,
     erAktivt: true,
   },

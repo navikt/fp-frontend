@@ -17,7 +17,6 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type {
   foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType,
   Inntektsmelding,
@@ -91,14 +90,14 @@ export const ManglendeArbeidsforholdForm = ({
 
   const lagre = (formValues: FormValues) => {
     const oppdater = getOppdaterTabell(oppdaterTabell, radData, inntektsmelding, formValues);
-    if (formValues.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING) {
+    if (formValues.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING') {
       return registrerArbeidsforhold({
         behandlingUuid,
         behandlingVersjon,
         internArbeidsforholdRef: inntektsmelding.internArbeidsforholdId ?? undefined,
         arbeidsgiverNavn: radData.arbeidsgiverNavn,
         arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,
-        vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+        vurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
         begrunnelse: formValues.begrunnelse ?? '',
         fom: formValues.fom ?? '',
         tom: formValues.tom,
@@ -161,20 +160,17 @@ export const ManglendeArbeidsforholdForm = ({
             validate={[required]}
             isReadOnly={isReadOnly}
           >
-            <Radio
-              value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD}
-              size="small"
-            >
+            <Radio value="KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD" size="small">
               <FormattedMessage id="ManglendeOpplysningerForm.TarKontakt" />
             </Radio>
-            <Radio value={ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING} size="small">
+            <Radio value="IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING" size="small">
               <FormattedMessage id="ManglendeOpplysningerForm.GåVidere" />
             </Radio>
-            <Radio value={ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING} size="small">
+            <Radio value="OPPRETT_BASERT_PÅ_INNTEKTSMELDING" size="small">
               <FormattedMessage id="ManglendeOpplysningerForm.OpprettArbeidsforhold" />
             </Radio>
           </RhfRadioGroup>
-          {saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING && (
+          {saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING' && (
             <HStack gap="space-16">
               <RhfDatepicker
                 name="fom"
@@ -256,9 +252,7 @@ const getOppdaterTabell =
     oppdaterTabell(oldData =>
       oldData.map(data => {
         if (inntektsmelding.arbeidsgiverIdent === data.arbeidsgiverIdent) {
-          const opprettArbeidsforhold =
-            formValues.saksbehandlersVurdering ===
-            ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING;
+          const opprettArbeidsforhold = formValues.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING';
           const avklaring = opprettArbeidsforhold
             ? {
                 arbeidsgiverIdent: inntektsmelding.arbeidsgiverIdent,

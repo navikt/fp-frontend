@@ -2,13 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  Avslagsarsak,
-  BehandlingResultatType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   type PanelDataArgs,
@@ -30,12 +24,12 @@ const defaultBehandling = {
 
 const defaultAvslagsårsaker = [
   {
-    kode: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+    kode: '1099',
     navn: 'Dette er en avslagsårsak',
     kodeverk: '',
   },
   {
-    kode: Avslagsarsak.MANN_ADOPTERER_IKKE_ALENE,
+    kode: '1006',
     navn: 'Dette er en annen avslagsårsak',
     kodeverk: '',
   },
@@ -160,7 +154,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+        avslagsarsak: '1099',
       },
       aksjonspunkt: [
         {
@@ -182,8 +176,8 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        avslagsarsak: Avslagsarsak.ÅRSAK_1020,
-        type: BehandlingResultatType.OPPHOR,
+        avslagsarsak: '1020',
+        type: 'OPPHØR',
       },
     } as Behandling,
     status: VilkarUtfallType.IKKE_VURDERT,

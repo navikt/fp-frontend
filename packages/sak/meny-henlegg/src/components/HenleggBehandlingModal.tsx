@@ -7,8 +7,9 @@ import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
-import { BehandlingResultatType, BehandlingResultatTypeTilbakekreving, DokumentMalType } from '@navikt/fp-kodeverk';
+import { BehandlingResultatTypeTilbakekreving, DokumentMalType } from '@navikt/fp-kodeverk';
 import type {
+  BehandlingResultatType,
   BehandlingType,
   FagsakYtelseType,
   foreldrepenger_dokumentbestiller_DokumentMalType,
@@ -27,24 +28,16 @@ export type ForhåndsvisHenleggParams = {
 };
 
 const henleggArsakerPerBehandlingType = {
-  ['BT-003']: [BehandlingResultatType.HENLAGT_KLAGE_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
-  ['BT-008']: [BehandlingResultatType.HENLAGT_ANKE_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
-  ['BT-006']: [BehandlingResultatType.HENLAGT_INNSYN_TRUKKET, BehandlingResultatType.HENLAGT_FEILOPPRETTET],
+  ['BT-003']: ['HENLAGT_KLAGE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
+  ['BT-008']: ['HENLAGT_ANKE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
+  ['BT-006']: ['HENLAGT_INNSYN_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
   ['BT-007']: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
   ['BT-009']: [
     BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_MED_BREV,
     BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_UTEN_BREV,
   ],
-  ['BT-004']: [
-    BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET,
-    BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
-  ],
-  ['BT-002']: [
-    BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
-    BehandlingResultatType.HENLAGT_FEILOPPRETTET,
-    BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
-  ],
+  ['BT-004']: ['HENLAGT_SOKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SOKNAD_MANGLER'],
+  ['BT-002']: ['HENLAGT_SOKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SOKNAD_MANGLER'],
   '-': [],
 };
 
@@ -85,7 +78,7 @@ export const HenleggBehandlingModal = ({
 
   const formMethods = useForm<FormValues>();
 
-  const årsakKode = formMethods.watch('årsakKode');
+  const årsakKode = formMethods.watch('årsakKode') as BehandlingResultatType | BehandlingResultatTypeTilbakekreving;
   const begrunnelse = formMethods.watch('begrunnelse');
   const fritekst = formMethods.watch('fritekst');
 
@@ -182,12 +175,14 @@ const forhåndsvisHenleggBehandlingDoc =
     e.preventDefault();
   };
 
-const showHenleggelseFritekst = (behandlingTypeKode: string, årsakKode?: string): boolean =>
-  'BT-009' === behandlingTypeKode && BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === årsakKode;
+const showHenleggelseFritekst = (
+  behandlingTypeKode: BehandlingType,
+  årsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving,
+): boolean => 'BT-009' === behandlingTypeKode && 'HENLAGT_FEILOPPRETTET_MED_BREV' === årsakKode;
 
 const disableHovedKnapp = (
   behandlingTypeKode: BehandlingType,
-  årsakKode?: string,
+  årsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving,
   begrunnelse?: string,
   fritekst?: string,
 ): boolean => {
@@ -197,19 +192,19 @@ const disableHovedKnapp = (
   return !(årsakKode && begrunnelse);
 };
 
-const getShowLink = (behandlingType: BehandlingType, arsakKode?: string, fritekst?: string): boolean => {
+const getShowLink = (
+  behandlingType: BehandlingType,
+  arsakKode?: BehandlingResultatType | BehandlingResultatTypeTilbakekreving,
+  fritekst?: string,
+): boolean => {
   if (behandlingType === 'BT-007') {
-    return BehandlingResultatType.HENLAGT_FEILOPPRETTET === arsakKode;
+    return 'HENLAGT_FEILOPPRETTET' === arsakKode;
   }
   if (behandlingType === 'BT-009') {
-    return BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV === arsakKode && !!fritekst;
+    return 'HENLAGT_FEILOPPRETTET_MED_BREV' === arsakKode && !!fritekst;
   }
 
-  return [
-    BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
-    BehandlingResultatType.HENLAGT_KLAGE_TRUKKET,
-    BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-  ].some(brt => brt === arsakKode);
+  return ['HENLAGT_SOKNAD_TRUKKET', 'HENLAGT_KLAGE_TRUKKET', 'HENLAGT_INNSYN_TRUKKET'].some(brt => brt === arsakKode);
 };
 
 const getHenleggÅrsaker = (
@@ -221,7 +216,7 @@ const getHenleggÅrsaker = (
 ): (KodeverkMedNavn<'BehandlingResultatType'> | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>)[] => {
   const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
   return typerForBehandlingType
-    .filter(type => ytelseType !== 'ES' || type !== BehandlingResultatType.HENLAGT_SOKNAD_MANGLER)
+    .filter(type => ytelseType !== 'ES' || type !== 'HENLAGT_SOKNAD_MANGLER')
     .flatMap(type => {
       const typer = behandlingResultatTyper.find(brt => brt.kode === type);
       return typer ? [typer] : [];

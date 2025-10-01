@@ -4,7 +4,6 @@ import { Tag, Tooltip } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { DiskresjonskodeType } from '@navikt/fp-kodeverk';
 import type { Person } from '@navikt/fp-types';
 
 interface Props {
@@ -24,20 +23,22 @@ export const VisittkortLabels = ({ fagsakPerson, harVergeIÅpenBehandling = fals
           </Tag>
         </Tooltip>
       )}
-      {fagsakPerson.diskresjonskode === DiskresjonskodeType.KODE6 && !fagsakPerson.dødsdato && (
-        <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon6Tittel' })} placement="bottom">
-          <Tag variant="error" size="small">
-            <FormattedMessage id="VisittkortLabels.Diskresjon6" />
-          </Tag>
-        </Tooltip>
-      )}
-      {fagsakPerson.diskresjonskode === DiskresjonskodeType.KODE7 && !fagsakPerson.dødsdato && (
-        <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon7Tittel' })} placement="bottom">
-          <Tag variant="warning" size="small">
-            <FormattedMessage id="VisittkortLabels.Diskresjon7" />
-          </Tag>
-        </Tooltip>
-      )}
+      {fagsakPerson.diskresjonskode === 'SPSF' && //KODE6
+        !fagsakPerson.dødsdato && (
+          <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon6Tittel' })} placement="bottom">
+            <Tag variant="error" size="small">
+              <FormattedMessage id="VisittkortLabels.Diskresjon6" />
+            </Tag>
+          </Tooltip>
+        )}
+      {fagsakPerson.diskresjonskode === 'SPFO' && //KODE7
+        !fagsakPerson.dødsdato && (
+          <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.Diskresjon7Tittel' })} placement="bottom">
+            <Tag variant="warning" size="small">
+              <FormattedMessage id="VisittkortLabels.Diskresjon7" />
+            </Tag>
+          </Tooltip>
+        )}
       {harVergeIÅpenBehandling && !fagsakPerson.dødsdato && (
         <Tooltip content={intl.formatMessage({ id: 'VisittkortLabels.VergeTittel' })} placement="bottom">
           <Tag variant="info" size="small">

@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, ArbeidsforholdKomplettVurderingType, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak, type AoIArbeidsforhold } from '@navikt/fp-types';
 
@@ -188,8 +188,7 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
           stillingsprosent: 100,
           tom: '9999-12-31',
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
-          saksbehandlersVurdering:
-            ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
           begrunnelse: 'Vil innehente inntektsmelding fordi...',
         },
       ],
@@ -267,7 +266,7 @@ export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
           fom: '2021-10-06',
           tom: '2021-12-12',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
           begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
         },
       ],
@@ -320,7 +319,7 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
           fom: '2021-10-06',
           tom: '2021-12-12',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
           begrunnelse: 'Jeg opprettet arbeidsforhold fordi...',
         },
       ],
@@ -452,7 +451,7 @@ export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet: Story = {
           stillingsprosent: 100,
           tom: '2022-12-31',
           begrunnelse: 'Dette er en begrunnelse',
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+          saksbehandlersVurdering: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
         },
       ],
       inntektsmeldinger: [],
@@ -483,7 +482,7 @@ export const ArbeidsforholdErManueltLagtTilOgBehandlingErAvsluttet: Story = {
           stillingsprosent: 100,
           tom: '2022-12-31',
           begrunnelse: 'Dette er en begrunnelse',
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+          saksbehandlersVurdering: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
         },
       ],
       inntektsmeldinger: [],
@@ -1178,8 +1177,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           motattDato: '2022-02-16',
 
           begrunnelse: 'her vil jeg mase på AG',
-          saksbehandlersVurdering:
-            ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
         },
       ],
       arbeidsforhold: [
@@ -1192,7 +1190,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
           tom: '9999-12-31',
           stillingsprosent: 50.0,
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
           begrunnelse: 'her trenger jeg ikke IM. ja ja',
         },
         {

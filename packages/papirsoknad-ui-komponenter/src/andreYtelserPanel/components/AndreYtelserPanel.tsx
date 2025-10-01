@@ -6,7 +6,6 @@ import { Checkbox, Heading, VStack } from '@navikt/ds-react';
 import { RhfCheckboxGroup } from '@navikt/ft-form-hooks';
 import { ArrowBox, BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { ArbeidType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { ANDRE_YTELSER_NAME_PREFIX, ANDRE_YTELSER_PERIODER_NAME, ANDRE_YTELSER_TYPER_NAME } from '../constants';
@@ -105,12 +104,9 @@ const filtrerArbeidstyper = (
   kunMiliterEllerSiviltjeneste?: boolean,
 ): KodeverkMedNavn<'ArbeidType'>[] => {
   if (kunMiliterEllerSiviltjeneste) {
-    return andreYtelser.filter(ay => ay.kode === ArbeidType.MILITÆR_ELLER_SIVILTJENESTE);
+    return andreYtelser.filter(ay => ay.kode === 'MILITÆR_ELLER_SIVILTJENESTE');
   }
   return andreYtelser.filter(
-    ay =>
-      ay.kode !== ArbeidType.UTENLANDSK_ARBEIDSFORHOLD &&
-      ay.kode !== ArbeidType.FRILANSER &&
-      ay.kode !== ArbeidType.LONN_UNDER_UTDANNING,
+    ay => ay.kode !== 'UTENLANDSK_ARBEIDSFORHOLD' && ay.kode !== 'FRILANSER' && ay.kode !== 'LØNN_UNDER_UTDANNING',
   );
 };

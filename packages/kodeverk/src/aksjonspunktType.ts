@@ -1,6 +1,0 @@
-export enum AksjonspunktType {
-  MANUELL = 'MANU',
-  AUTOPUNKT = 'AUTO',
-  OVERSTYRING = 'OVST',
-  SAKSBEHANDLEROVERSTYRING = 'SAOV',
-}

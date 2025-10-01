@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktType, AktivitetskravPermisjonType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -18,7 +18,7 @@ const aktivitetskravGrunnlagListe = [
     stillingsprosent: 60,
     permisjon: {
       prosent: 40,
-      type: AktivitetskravPermisjonType.UTDANNING,
+      type: 'UTDANNING',
     },
   },
   {
@@ -26,7 +26,7 @@ const aktivitetskravGrunnlagListe = [
     stillingsprosent: 50,
     permisjon: {
       prosent: 0,
-      type: AktivitetskravPermisjonType.UDEFINERT,
+      type: 'UDEFINERT',
     },
   },
 ] as AktivitetskravGrunnlagArbeid[];
@@ -34,11 +34,9 @@ const aktivitetskravGrunnlagListe = [
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -87,12 +85,12 @@ const automatiskAvklartBehovListe = [
         stillingsprosent: 100,
         permisjon: {
           prosent: 0,
-          type: AktivitetskravPermisjonType.UDEFINERT,
+          type: '-',
         },
       },
     ],
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon',

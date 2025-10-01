@@ -6,7 +6,6 @@ import { DateLabel, PeriodLabel } from '@navikt/ft-ui-komponenter';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AoIArbeidsforhold,
@@ -62,8 +61,7 @@ export const ArbeidsforholdRad = ({
 
   const { inntektsmeldingerForRad, arbeidsforholdForRad, arbeidsgiverNavn, avklaring, årsak } = radData;
 
-  const erManueltOpprettet =
-    avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER;
+  const erManueltOpprettet = avklaring?.saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER';
   const harArbeidsforholdOgInntektsmelding =
     arbeidsforholdForRad.length > 0 && inntektsmeldingerForRad.length > 0 && !årsak;
   const manglerInntektsmelding = årsak === AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING;
@@ -224,8 +222,8 @@ const finnPeriode = (
   avklaring?: Avklaring,
 ): { fom?: string; tom?: string } | undefined => {
   if (
-    avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER ||
-    avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
+    avklaring?.saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER' ||
+    avklaring?.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
   ) {
     return {
       fom: avklaring.fom,

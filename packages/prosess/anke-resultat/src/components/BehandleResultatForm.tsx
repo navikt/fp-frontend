@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { Detail, Heading, Label, VStack } from '@navikt/ds-react';
 
-import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AnkeVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -123,11 +122,11 @@ const ResultatAvvise = ({ ankeVurderingResultat }: Props): ReactElement => (
 
 const hentSpråkkode = (ankeOmgjoerArsak: string | null | undefined): string => {
   switch (ankeOmgjoerArsak) {
-    case AnkeVurderingOmgjoer.ANKE_TIL_UGUNST:
+    case 'ANKE_TIL_UGUNST':
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilUgunst';
-    case AnkeVurderingOmgjoer.ANKE_TIL_GUNST:
+    case 'ANKE_TIL_GUNST':
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.TilGunst';
-    case AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST:
+    case 'ANKE_DELVIS_OMGJOERING_TIL_GUNST':
       return 'Ankebehandling.Resultat.Innstilling.Omgjores.Delvis';
     default:
       return '';
@@ -170,15 +169,15 @@ const AnkeResultat = ({ ankeVurderingResultat }: Props): ReactElement | null => 
   }
 
   switch (ankeVurderingResultat.ankeVurdering) {
-    case AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK:
+    case 'ANKE_STADFESTE_YTELSESVEDTAK':
       return <ResultatEnkel ankeVurderingResultat={ankeVurderingResultat} />;
-    case AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE:
+    case 'ANKE_OPPHEVE_OG_HJEMSENDE':
       return <ResultatOpphev ankeVurderingResultat={ankeVurderingResultat} />;
-    case AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV:
+    case 'ANKE_HJEMSENDE_UTEN_OPPHEV':
       return <ResultatHjemsend ankeVurderingResultat={ankeVurderingResultat} />;
-    case AnkeVurderingKodeverk.ANKE_OMGJOER:
+    case 'ANKE_OMGJOER':
       return <ResultatOmgjores ankeVurderingResultat={ankeVurderingResultat} alleKodeverk={alleKodeverk} />;
-    case AnkeVurderingKodeverk.ANKE_AVVIS:
+    case 'ANKE_AVVIS':
       return <ResultatAvvise ankeVurderingResultat={ankeVurderingResultat} />;
     default:
       return <div>???</div>;

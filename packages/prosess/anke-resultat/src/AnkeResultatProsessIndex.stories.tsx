@@ -2,13 +2,12 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 
 import { AnkeResultatProsessIndex } from './AnkeResultatProsessIndex';
 
 const ankeVurderingResultat = {
-  ankeVurdering: AnkeVurderingKodeverk.ANKE_AVVIS,
+  ankeVurdering: 'ANKE_AVVIS',
   ankeVurderingOmgjoer: '-',
   påAnketKlageBehandlingUuid: '1',
   erAnkerIkkePart: true,
@@ -45,7 +44,7 @@ export const ResultatVedStadfestYtelsesvedtak: Story = {
       ...ankeVurderingDefault,
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
+        ankeVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
       },
     },
   },
@@ -57,7 +56,7 @@ export const ResultatVedOppheveOgHjemsende: Story = {
       ...ankeVurderingDefault,
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE,
+        ankeVurdering: 'ANKE_OPPHEVE_OG_HJEMSENDE',
       },
     },
   },
@@ -69,8 +68,8 @@ export const ResultatVedOmgjør: Story = {
       ...ankeVurderingDefault,
       ankeVurderingResultat: {
         ...ankeVurderingResultat,
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
-        ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
+        ankeVurdering: 'ANKE_OMGJOER',
+        ankeVurderingOmgjoer: 'ANKE_TIL_UGUNST',
       },
     },
   },

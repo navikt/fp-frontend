@@ -7,7 +7,6 @@ import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navik
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type {
   foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType,
   ManglendeInntektsmeldingVurdering,
@@ -133,18 +132,15 @@ export const ManglendeInntektsmeldingForm = ({
           isReadOnly={isReadOnly}
         >
           <VStack gap="space-2">
-            <Radio
-              value={ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING}
-              size="small"
-            >
+            <Radio value="KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING" size="small">
               <FormattedMessage id="InntektsmeldingInnhentesForm.TarKontakt" />
             </Radio>
             {!radData.erPrivatPerson && (
-              <Radio value={ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO} size="small">
+              <Radio value="MELDING_TIL_ARBEIDSGIVER_NAV_NO" size="small">
                 <FormattedMessage id="InntektsmeldingInnhentesForm.MeldingArbeidsgiverNavNo" />
               </Radio>
             )}
-            <Radio value={ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING} size="small">
+            <Radio value="FORTSETT_UTEN_INNTEKTSMELDING" size="small">
               <FormattedMessage id="InntektsmeldingInnhentesForm.GåVidere" />
             </Radio>
           </VStack>

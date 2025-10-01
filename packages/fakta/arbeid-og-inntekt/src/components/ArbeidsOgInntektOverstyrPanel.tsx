@@ -6,7 +6,6 @@ import { Alert, BodyShort, Button, Heading, HStack, Spacer, VStack } from '@navi
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ArbeidOgInntektsmelding, Behandling, ManueltArbeidsforhold } from '@navikt/fp-types';
 import { AksjonspunktÅrsak } from '@navikt/fp-types';
 
@@ -51,8 +50,7 @@ export const ArbeidsOgInntektOverstyrPanel = ({
     setErLokaltOverstyrt(true);
 
     const indexForManueltLagtTil = tabellData.findIndex(
-      t =>
-        t.avklaring?.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+      t => t.avklaring?.saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
     );
     if (indexForManueltLagtTil !== -1) {
       settÅpneRadIndexer([indexForManueltLagtTil]);

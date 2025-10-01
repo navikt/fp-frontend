@@ -4,7 +4,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  AktivitetStatus,
   NavBrukerKjonn,
   OpptjeningAktivitetType,
   SoknadType,
@@ -44,7 +43,7 @@ const beregningresultat: BeregningsresultatDagytelse = {
             stonadskontoType: StonadskontoType.FELLESPERIODE,
             gradering: false,
           },
-          aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
+          aktivitetStatus: 'AT',
           arbeidsforholdType: OpptjeningAktivitetType.ARBEID,
           arbeidsgiverReferanse: '',
           refusjon: 0,
@@ -65,7 +64,7 @@ const beregningresultat: BeregningsresultatDagytelse = {
             stonadskontoType: StonadskontoType.FORELDREPENGER,
             gradering: false,
           },
-          aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
+          aktivitetStatus: 'AT',
           arbeidsforholdType: 'ARBEID',
           arbeidsgiverReferanse: '',
           refusjon: 0,
@@ -169,7 +168,7 @@ export const MedFeriepengegrunnlag: Story = {
     feriepengegrunnlag: {
       andeler: [
         {
-          aktivitetStatus: AktivitetStatus.ARBEIDSTAKER,
+          aktivitetStatus: 'AT',
           opptjeningsår: 2,
           årsbeløp: 500000,
           erBrukerMottaker: true,

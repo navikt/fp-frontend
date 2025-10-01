@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
-import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import type { Behandlingsresultat } from '@navikt/fp-types';
 
 import styles from './iverksetterVedtakStatusModal.module.css';
@@ -22,7 +21,7 @@ interface Props {
  */
 export const IverksetterVedtakStatusModal = ({ lukkModal, visModal, behandlingsresultat }: Props) => {
   const intl = useIntl();
-  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.AVSLATT;
+  const erVedtakAvslatt = behandlingsresultat && behandlingsresultat.type === 'AVSLÅTT';
   const imageAltText = intl.formatMessage({
     id: erVedtakAvslatt ? 'IverksetterVedtakStatusModal.Avslatt' : 'IverksetterVedtakStatusModal.Innvilget',
   });

@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { ArbeidsforholdKomplettVurderingType, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { AksjonspunktÅrsak, type AoIArbeidsforhold, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
@@ -75,7 +75,7 @@ export const ArbeidsforholdetSkalBenyttesUtenInntektsmelding: Story = {
           eksternArbeidsforholdId: 'ARB001-001',
           fom: '2000-04-19',
           tom: '9999-12-31',
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
           begrunnelse: 'Dette er en begrunnelse 3',
         },
       ],
@@ -96,7 +96,7 @@ export const ManueltOpprettetArbeidsforhold: Story = {
           fom: '2022-01-31',
           tom: '9999-12-31',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+          saksbehandlersVurdering: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
           begrunnelse: 'Dette er en begrunnelse 4',
         },
       ],
@@ -130,7 +130,7 @@ export const ArbeidsforholdetErIkkeAktivt: Story = {
           fom: '2019-12-06',
           tom: '9999-12-31',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.BRUK_MED_OVERSTYRT_PERIODE,
+          saksbehandlersVurdering: 'BRUK_MED_OVERSTYRT_PERIODE',
           begrunnelse: 'Dette er en begrunnelse 5',
         },
       ],
@@ -153,7 +153,7 @@ export const SokerErIPermisjon: Story = {
           fom: '2019-12-06',
           tom: '9999-12-31',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.BRUK,
+          saksbehandlersVurdering: 'BRUK',
           begrunnelse: 'Dette er en begrunnelse 6',
           permisjonOgMangel: {
             permisjonFom: '2020-01-01',
@@ -183,7 +183,7 @@ export const SokerErIkkeIPermisjon: Story = {
           tom: '9999-12-31',
           stillingsprosent: 100,
           begrunnelse: 'Dette er en begrunnelse 7',
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
           permisjonOgMangel: {
             permisjonFom: '2020-01-01',
             permisjonTom: '2021-01-01',
@@ -211,7 +211,7 @@ export const OppdaterArbeidsforholdOgAvslaGrunnetManglendeOpplysninger: Story = 
           fom: '2019-12-06',
           tom: '9999-12-31',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.BRUK,
+          saksbehandlersVurdering: 'BRUK',
           begrunnelse: 'Dette er en begrunnelse 8',
         },
       ],
@@ -234,7 +234,7 @@ export const FjernArbeidsforholdet: Story = {
           fom: '2019-12-06',
           tom: '9999-12-31',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
           begrunnelse: 'Dette er en begrunnelse 9',
         },
       ],
@@ -267,7 +267,7 @@ export const ArbeidsforholdetErOpprettetBasertPåIM: Story = {
           fom: '2022-01-19',
           tom: '9999-12-31',
           stillingsprosent: 100.0,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
           begrunnelse: 'Mottatt IM',
         },
       ],
@@ -314,7 +314,7 @@ export const FlereArbeidsforholdITabell: Story = {
           fom: '2019-05-12',
           tom: '2019-06-12',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.BRUK,
+          saksbehandlersVurdering: 'BRUK',
           begrunnelse: 'Dette er en begrunnelse 1',
         },
         {
@@ -325,7 +325,7 @@ export const FlereArbeidsforholdITabell: Story = {
           fom: '2020-12-06',
           tom: '2021-12-31',
           stillingsprosent: 100,
-          saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+          saksbehandlersVurdering: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
           begrunnelse: 'Dette er en begrunnelse 2',
         },
       ],
