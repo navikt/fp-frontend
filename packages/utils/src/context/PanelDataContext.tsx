@@ -32,10 +32,9 @@ export const PanelDataProvider = (
 };
 
 export const usePanelDataContext = <AP_TYPE extends AksjonspunktType>() => {
-  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
-  const context = useContext<Props<AP_TYPE> | null>(PanelDataContext);
+  const context = useContext(PanelDataContext);
   if (!context) {
     throw new Error('PanelContext.Provider er ikke satt opp');
   }
-  return context;
+  return context as Props<AP_TYPE>;
 };

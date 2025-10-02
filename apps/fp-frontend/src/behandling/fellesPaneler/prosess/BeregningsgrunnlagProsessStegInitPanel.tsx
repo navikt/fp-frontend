@@ -51,7 +51,6 @@ const lagModifisertCallback =
       kode: mapBGKodeTilFpsakKode(apData.kode),
       ...apData.grunnlag[0],
     }));
-    // @ts-expect-error Her er det noko rart med typinga
     return submitCallback(transformerteData);
   };
 

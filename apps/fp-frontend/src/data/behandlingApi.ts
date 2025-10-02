@@ -79,7 +79,7 @@ export type AksjonspunktArgs = {
   behandlingVersjon: number;
   saksnummer: string;
   bekreftedeAksjonspunktDtoer: ({
-    '@type': string;
+    '@type': string | undefined; // TODO
   } & AksjonspunktType)[];
 };
 
@@ -88,7 +88,7 @@ export type OverstyrteAksjonspunktArgs = {
   behandlingVersjon: number;
   saksnummer: string;
   overstyrteAksjonspunktDtoer: ({
-    '@type': string;
+    '@type': string | undefined; // TODO
   } & AksjonspunktType)[];
 };
 

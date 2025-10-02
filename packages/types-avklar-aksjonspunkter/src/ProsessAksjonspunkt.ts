@@ -52,6 +52,6 @@ export type ProsessAksjonspunkt =
   | OverstyringMedlemskapsvilkaretLopendeAp
   | VurdereAnnenYtelseForVedtakAp
   | UttakAp
-  | BeregningAksjonspunktSubmitType
+  | Partial<BeregningAksjonspunktSubmitType>
   | VurdereDokumentForVedtakAp
   | VurdereInntektsmeldingKlageForVedtakAp;
