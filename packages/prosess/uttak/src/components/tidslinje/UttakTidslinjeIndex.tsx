@@ -3,7 +3,6 @@ import React from 'react';
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { OppholdArsakType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
@@ -88,7 +87,7 @@ const lagUttakMedOpphold = (perioderSøker: PeriodeSoker[]): PeriodeSoker[] =>
   perioderSøker.map(uttak => {
     const { ...uttakPerioder } = uttak;
 
-    if (uttak.oppholdÅrsak !== OppholdArsakType['-']) {
+    if (uttak.oppholdÅrsak !== '-') {
       const stonadskonto = OppholdArsakMapper[uttak.oppholdÅrsak];
       const oppholdInfo = {
         stønadskontoType: stonadskonto,

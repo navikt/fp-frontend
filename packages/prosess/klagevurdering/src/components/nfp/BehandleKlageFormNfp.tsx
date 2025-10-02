@@ -6,9 +6,16 @@ import { Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import type { KlageVurdering, KlageVurderingResultat, KodeverkMedNavn } from '@navikt/fp-types';
+import type {
+  KlageHjemmel,
+  KlageVurdering,
+  KlageVurderingOmgjørType,
+  KlageVurderingResultat,
+  KlageVurderingType,
+  KodeverkMedNavn,
+} from '@navikt/fp-types';
 import type { KlageVurderingResultatAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -21,18 +28,16 @@ import { type KlagevurderingForhåndsvisData, PreviewKlageLink } from './Preview
 export type TransformedValues = {
   kode: string;
   klageMedholdArsak?: string;
-  klageVurderingOmgjoer?: string;
-  klageHjemmel?: string;
+  klageVurderingOmgjoer?: KlageVurderingOmgjørType;
+  klageHjemmel?: KlageHjemmel;
   fritekstTilBrev: string;
   begrunnelse: string;
-  klageVurdering: string;
+  klageVurdering: KlageVurderingType;
 };
 
 const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
-  klageMedholdArsak:
-    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageMedholdArsak : undefined,
-  klageVurderingOmgjoer:
-    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : undefined,
+  klageMedholdArsak: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageMedholdArsak : undefined,
+  klageVurderingOmgjoer: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjoer : undefined,
   klageHjemmel: values.klageHjemmel,
   klageVurdering: notEmpty(values.klageVurdering),
   fritekstTilBrev: values.fritekstTilBrev,
@@ -40,7 +45,7 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   kode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
 });
 
-const definertKodeverdiEllerUndefined = (kode: string | undefined): string | undefined => {
+const definertKodeverdiEllerUndefined = <T,>(kode: T | undefined): T | undefined => {
   if (kode && kode !== '-') {
     return kode;
   }
@@ -128,7 +133,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
         <FritekstBrevTextField språkkode={behandling.språkkode} readOnly={isReadOnly} />
         <HStack justify="space-between">
           <HStack gap="space-16">
-            {formValues.klageVurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
+            {formValues.klageVurdering === 'STADFESTE_YTELSESVEDTAK' && (
               <>
                 <Button variant="primary" type="button" size="small" onClick={() => åpneModal()} disabled={isReadOnly}>
                   <FormattedMessage id="Klage.Behandle.Bekreft" />
@@ -144,7 +149,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
                 />
               </>
             )}
-            {formValues.klageVurdering !== klageVurderingType.STADFESTE_YTELSESVEDTAK && (
+            {formValues.klageVurdering !== 'STADFESTE_YTELSESVEDTAK' && (
               <ProsessStegSubmitButtonNew
                 isReadOnly={isReadOnly}
                 isSubmittable={isSubmittable}
@@ -184,12 +189,10 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
 const transformValuesTempSave = (values: KlageFormType, aksjonspunktCode: string): TransformedValues => ({
   kode: aksjonspunktCode,
   klageMedholdArsak:
-    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ||
-    values.klageVurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK
+    values.klageVurdering === 'MEDHOLD_I_KLAGE' || values.klageVurdering === 'OPPHEVE_YTELSESVEDTAK'
       ? values.klageMedholdArsak
       : undefined,
-  klageVurderingOmgjoer:
-    values.klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE ? values.klageVurderingOmgjoer : undefined,
+  klageVurderingOmgjoer: values.klageVurdering === 'MEDHOLD_I_KLAGE' ? values.klageVurderingOmgjoer : undefined,
   klageHjemmel: values.klageHjemmel,
   fritekstTilBrev: notEmpty(values.fritekstTilBrev),
   begrunnelse: notEmpty(values.begrunnelse),

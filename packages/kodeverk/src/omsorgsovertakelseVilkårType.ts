@@ -1,5 +1,0 @@
-export enum OmsorgsovertakelseVilkårType {
-  OMSORGSVILKARET = 'FP_VK_5',
-  FORELDREANSVARSVILKARET_2_LEDD = 'FP_VK_8',
-  FORELDREANSVARSVILKARET_4_LEDD = 'FP_VK_33',
-}

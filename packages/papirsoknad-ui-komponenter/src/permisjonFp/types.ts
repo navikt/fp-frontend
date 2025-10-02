@@ -1,3 +1,5 @@
+import type { MorsAktivitet, OverføringÅrsak } from '@navikt/fp-types';
+
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
   OPPHOLD_PERIODE_FIELD_ARRAY_NAME,
@@ -29,7 +31,7 @@ export type PermisjonPeriode = {
   periodeFom: string;
   periodeTom: string;
   flerbarnsdager?: boolean;
-  morsAktivitet?: string;
+  morsAktivitet?: MorsAktivitet;
   harSamtidigUttak?: boolean;
   samtidigUttaksprosent?: number;
 };
@@ -45,7 +47,7 @@ export type UtsettelsPeriode = {
 export type OverforingPeriode = {
   periodeFom: string;
   periodeTom: string;
-  overforingArsak: string;
+  overforingArsak: OverføringÅrsak;
 };
 
 export type OppholdPeriode = {

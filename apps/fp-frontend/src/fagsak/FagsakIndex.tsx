@@ -5,7 +5,6 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Location } from 'history';
 
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
 import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
@@ -143,7 +142,7 @@ export const FagsakIndex = () => {
               errorMessage={intl.formatMessage({ id: 'ErrorBoundary.Error' }, { name: 'Visittkort' })}
             >
               <VisittkortSakIndex
-                erMor={fagsak.relasjonsRolleType === RelasjonsRolleType.MOR}
+                erMor={fagsak.relasjonsRolleType === 'MORA'}
                 bruker={fagsak.bruker}
                 annenPart={fagsak.annenPart}
                 familiehendelse={fagsak.familiehendelse}

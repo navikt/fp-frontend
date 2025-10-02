@@ -16,8 +16,7 @@ import { BodyShort, Label, Timeline } from '@navikt/ds-react';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn, Opptjening, OpptjeningAktivitet } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Opptjening, OpptjeningAktivitet, OpptjeningAktivitetType } from '@navikt/fp-types';
 
 import { finnOpptjeningFom, finnOpptjeningTom } from '../../utils/opptjeningDatoUtil';
 import { type FormValues } from '../aktivitet/ValgtAktivitetForm';
@@ -33,21 +32,21 @@ const finnStatus = (erGodkjent: boolean | undefined): 'success' | 'warning' | 'd
 };
 
 const AKTIVITET_TYPE_IKON_MAP = {
-  [OpptjeningAktivitetType.ARBEID]: <WalletIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.AAP]: <HandHeartIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.DAGPENGER]: <HandHeartIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.FORELDREPENGER]: <StrollerIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.FRILANS]: <WalletIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.MILITAR_ELLER_SIVILTJENESTE]: <WalletIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.NARING]: <WalletIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.OMSORGSPENGER]: <HandHeartIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.OPPLARINGSPENGER]: <HandHeartIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.PLEIEPENGER]: <HandHeartIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.SVANGERSKAPSPENGER]: <PersonPregnantIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.SYKEPENGER]: <StethoscopeIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.UTENLANDSK_ARBEIDSFORHOLD]: <EarthIcon width={20} height={20} />,
-  [OpptjeningAktivitetType.ETTERLONN_SLUTTPAKKE]: <WalletIcon width={20} height={20} />,
-} as Record<string, ReactNode>;
+  ARBEID: <WalletIcon width={20} height={20} />,
+  AAP: <HandHeartIcon width={20} height={20} />,
+  DAGPENGER: <HandHeartIcon width={20} height={20} />,
+  FORELDREPENGER: <StrollerIcon width={20} height={20} />,
+  FRILANS: <WalletIcon width={20} height={20} />,
+  MILITAR_ELLER_SIVILTJENESTE: <WalletIcon width={20} height={20} />,
+  NARING: <WalletIcon width={20} height={20} />,
+  OMSORGSPENGER: <HandHeartIcon width={20} height={20} />,
+  OPPLARINGSPENGER: <HandHeartIcon width={20} height={20} />,
+  PLEIEPENGER: <HandHeartIcon width={20} height={20} />,
+  SVANGERSKAPSPENGER: <PersonPregnantIcon width={20} height={20} />,
+  SYKEPENGER: <StethoscopeIcon width={20} height={20} />,
+  UTENLANDSK_ARBEIDSFORHOLD: <EarthIcon width={20} height={20} />,
+  ETTERLONN_SLUTTPAKKE: <WalletIcon width={20} height={20} />,
+} as Partial<Record<OpptjeningAktivitetType, ReactNode>>;
 
 const PERIODE_STATUS_IKON_MAP = {
   danger: <XMarkOctagonIcon />,
@@ -58,7 +57,7 @@ const PERIODE_STATUS_IKON_MAP = {
 interface Rad {
   id: number;
   label: string;
-  aktivitetTypeKode: string;
+  aktivitetTypeKode: OpptjeningAktivitetType;
   arbeidsforholdRef?: string;
   arbeidsgiverReferanse?: string;
 }
@@ -100,8 +99,7 @@ const lagRader = (
   }, []);
   return duplicatesRemoved.map<Rad>((activity: OpptjeningAktivitet, index: number) => {
     const type = opptjeningAktivitetTypes.find(oat => oat.kode === activity.aktivitetType);
-    const label =
-      type?.kode === OpptjeningAktivitetType.AAP ? intl.formatMessage({ id: 'OpptjeningTidslinje.Aap' }) : type?.navn;
+    const label = type?.kode === 'AAP' ? intl.formatMessage({ id: 'OpptjeningTidslinje.Aap' }) : type?.navn;
     return {
       id: index + 1,
       label: label ?? '',

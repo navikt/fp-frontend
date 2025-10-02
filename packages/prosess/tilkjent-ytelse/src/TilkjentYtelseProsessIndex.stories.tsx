@@ -2,13 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  NavBrukerKjonn,
-  OpptjeningAktivitetType,
-  SoknadType,
-  StonadskontoType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, SoknadType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -30,7 +24,7 @@ const defaultFamiliehendelse = {
 
 const personoversikt = {
   bruker: {
-    kjønn: NavBrukerKjonn.KVINNE,
+    kjønn: 'K',
   },
 } as Personoversikt;
 
@@ -44,7 +38,7 @@ const beregningresultat: BeregningsresultatDagytelse = {
             gradering: false,
           },
           aktivitetStatus: 'AT',
-          arbeidsforholdType: OpptjeningAktivitetType.ARBEID,
+          arbeidsforholdType: 'ARBEID',
           arbeidsgiverReferanse: '',
           refusjon: 0,
           tilSoker: 0,

@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, SivilstandType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   KjønnkodeEnum,
@@ -37,7 +37,7 @@ const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',
   aktoerId: '1',
   kjønn: KjønnkodeEnum.MANN,
-  sivilstand: SivilstandType.SAMBOER,
+  sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
 
   adresser: [adresse1, adresse2],
@@ -46,7 +46,7 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
   aktoerId: '2',
   kjønn: KjønnkodeEnum.KVINNE,
-  sivilstand: SivilstandType.SAMBOER,
+  sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
 
   adresser: [adresse1, adresse2],
@@ -58,7 +58,7 @@ const defaultBarn: PersonopplysningerBasis = {
   adresser: [adresse2],
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
-  sivilstand: SivilstandType.UGIFT,
+  sivilstand: 'UGIF',
 };
 
 const ytelsefordeling = {} as Ytelsefordeling;

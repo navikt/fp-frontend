@@ -3,14 +3,7 @@ import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import {
-  AksjonspunktKode,
-  OppgaveType,
-  RelasjonsRolleType,
-  VedtakbrevType,
-  VilkarType,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VedtakbrevType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -380,7 +373,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
     oppgaver: [
       {
         oppgaveId: '1',
-        oppgavetype: OppgaveType.VUR_KONSEKVENS,
+        oppgavetype: 'VUR_KONSEKVENS',
         beskrivelser: [
           {
             kommentarer: ['VL: Se sto mottatt 24.02.25'],
@@ -390,7 +383,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       },
       {
         oppgaveId: '2',
-        oppgavetype: OppgaveType.VUR_KONSEKVENS,
+        oppgavetype: 'VUR_KONSEKVENS',
         beskrivelser: [
           {
             header: '--- 19.03.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
@@ -408,7 +401,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       },
       {
         oppgaveId: '3',
-        oppgavetype: OppgaveType.VUR_DOKUMENT,
+        oppgavetype: 'VUR_DOKUMENT',
         beskrivelser: [{ kommentarer: ['VL: Bekreftelse fra arbeidsgiver'] }],
         dokumenter: [
           {
@@ -430,7 +423,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       },
       {
         oppgaveId: '4',
-        oppgavetype: OppgaveType.VUR_DOKUMENT,
+        oppgavetype: 'VUR_DOKUMENT',
         beskrivelser: [{ kommentarer: ['VL: Bekreftelse fra studiested/skole'] }],
         dokumenter: [
           {
@@ -442,7 +435,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
       },
       {
         oppgaveId: '5',
-        oppgavetype: OppgaveType.VUR_DOKUMENT,
+        oppgavetype: 'VUR_DOKUMENT',
         beskrivelser: [
           {
             header: '--- 19.01.2025 11:24 F_Z990245 E_Z990245 (Z990245, 0219) ---',
@@ -941,9 +934,9 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
         fødselsdato: '',
         språkkode: '-',
       },
-      relasjonsRolleType: RelasjonsRolleType.MOR,
+      relasjonsRolleType: 'MORA',
       annenpartBehandling: {
-        relasjonsRolleType: RelasjonsRolleType.FAR,
+        relasjonsRolleType: 'FARA',
         saksnummer: '',
         behandlingUuid: '',
       },

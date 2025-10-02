@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, NavBrukerKjonn, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 
@@ -174,11 +174,11 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
       fagsakYtelseType: 'FP',
       bruker: {
         navn: 'Helga Utvikler',
-        kjønn: NavBrukerKjonn.KVINNE,
+        kjønn: 'K',
       },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: NavBrukerKjonn.MANN,
+        kjønn: 'M',
       },
     } as Fagsak,
     soknad: {
@@ -214,11 +214,11 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
       fagsakYtelseType: 'FP',
       bruker: {
         navn: 'Helga Utvikler',
-        kjønn: NavBrukerKjonn.KVINNE,
+        kjønn: 'K',
       },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: NavBrukerKjonn.UDEFINERT,
+        kjønn: '-',
       },
     } as Fagsak,
     soknad: {
@@ -254,11 +254,11 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
       fagsakYtelseType: 'FP',
       bruker: {
         navn: 'Helga Utvikler',
-        kjønn: NavBrukerKjonn.KVINNE,
+        kjønn: 'K',
       },
       annenPart: {
         navn: 'Espen Utvikler',
-        kjønn: NavBrukerKjonn.MANN,
+        kjønn: 'M',
       },
     } as Fagsak,
     alleMerknaderFraBeslutter: {

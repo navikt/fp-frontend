@@ -219,6 +219,35 @@ export type { ForeldreType } from './src/foreldreType';
 export type { FaresignalVurdering } from './src/faresignalVurdering';
 export type { FarSøkerType } from './src/farSøkerType';
 export type { FordelingPeriodeKilde } from './src/fordelingPeriodeKilde';
+export type { InnsynResultatType } from './src/innsynResultatType';
+export type { KlageAvvistÅrsak } from './src/klageAvvistÅrsak';
+export type { KlageHjemmel } from './src/klageHjemmel';
+export type { KlageVurderingType } from './src/klageVurdering';
+export type { Landkode } from './src/landkode';
+export type { ManuellBehandlingÅrsak } from './src/manuellBehandlingÅrsak';
+export type { KlageMedholdÅrsak } from './src/klageMedholdÅrsak';
+export type { Inntektskategori } from './src/inntektskategorier';
+export type { Kommunikasjonsretning } from './src/kommunikasjonsretning';
+export type { MedlemskapDekningType } from './src/medlemskapDekningType';
+export type { MedlemskapType } from './src/medlemskapType';
+export type { MorsAktivitet } from './src/morsAktivitet';
+export type { MottakerType } from './src/mottakerTyper';
+export type { NaturalYtelseType } from './src/naturalYtelseType';
+export type { VirksomhetType } from './src/virksomhetType';
+export type { OmsorgsovertakelseVilkårType } from './src/omsorgsovertakelseVilkårType';
+export type { NavBrukerKjønn } from './src/navBrukerKjonn';
+export type { KlageVurderingOmgjørType } from './src/klageVurderingOmgjørType';
+export type { OverføringÅrsak } from './src/overføringÅrsak';
+export type { OpptjeningAktivitetType } from './src/opptjeningAktivitetType';
+export type { OppgaveType } from './src/oppgaveType';
+export type { OppholdÅrsakType } from './src/oppholdÅrsakType';
+export type { Organisasjonstype } from './src/organisasjonstype';
+export type { PeriodeResultatÅrsak } from './src/periodeResultatÅrsak';
+export type { OppholdstillatelseType } from './src/oppholdstillatelseType';
+export type { PeriodeÅrsak } from './src/periodeÅrsak';
+export type { SivilstandType } from './src/sivilstandType';
+export type { PermisjonsbeskrivelseType } from './src/permisjonsbeskrivelseType';
+export type { RelasjonsRolleType } from './src/relasjonsRolleType';
 export {
   type BehandlingResultatType,
   isAvslag,

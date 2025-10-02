@@ -7,8 +7,14 @@ import { RhfCheckbox, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, dateFormat, periodFormat } from '@navikt/ft-utils';
 
-import { OppholdArsakType, PeriodeResultatType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, KodeverkMedNavn, PeriodeSoker } from '@navikt/fp-types';
+import { PeriodeResultatType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
+import type {
+  AlleKodeverk,
+  ArbeidsgiverOpplysningerPerId,
+  KodeverkMedNavn,
+  OppholdÅrsakType,
+  PeriodeSoker,
+} from '@navikt/fp-types';
 
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
 import type { UttakAktivitetType } from './UttakAktivitetType';
@@ -119,11 +125,11 @@ const stonadskonto = (valgtPeriode: PeriodeSoker, alleKodeverk: AlleKodeverk, ko
   return returnText;
 };
 
-const gyldigeÅrsaker = new Set([
-  OppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
-  OppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
-  OppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
-  OppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
+const gyldigeÅrsaker = new Set<OppholdÅrsakType>([
+  'UTTAK_MØDREKVOTE_ANNEN_FORELDER',
+  'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
+  'UTTAK_FELLESP_ANNEN_FORELDER',
+  'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
 ]);
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>

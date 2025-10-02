@@ -1,4 +1,3 @@
-import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
 import type { Beregningsgrunnlag, Besteberegninggrunnlag } from '@navikt/fp-types';
 
 const besteberegninggrunnlag: Besteberegninggrunnlag = {
@@ -8,11 +7,11 @@ const besteberegninggrunnlag: Besteberegninggrunnlag = {
       tom: '2020-01-31',
       inntekter: [
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 5531,
         },
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.ARBEID,
+          opptjeningAktivitetType: 'ARBEID',
           arbeidsgiverId: '974652269',
           inntekt: 20000,
         },
@@ -23,7 +22,7 @@ const besteberegninggrunnlag: Besteberegninggrunnlag = {
       tom: '2020-02-29',
       inntekter: [
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 5531,
         },
       ],
@@ -33,20 +32,20 @@ const besteberegninggrunnlag: Besteberegninggrunnlag = {
       tom: '2020-03-31',
       inntekter: [
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 5531,
         },
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.ARBEID,
+          opptjeningAktivitetType: 'ARBEID',
           arbeidsgiverId: '974652269',
           inntekt: 4321,
         },
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 354,
         },
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.ARBEID,
+          opptjeningAktivitetType: 'ARBEID',
           arbeidsgiverId: '6823424234232',
           inntekt: 32894,
         },
@@ -57,11 +56,11 @@ const besteberegninggrunnlag: Besteberegninggrunnlag = {
       tom: '2020-04-30',
       inntekter: [
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 5531,
         },
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.ARBEID,
+          opptjeningAktivitetType: 'ARBEID',
           arbeidsgiverId: '974652269',
           inntekt: 25322,
         },
@@ -72,11 +71,11 @@ const besteberegninggrunnlag: Besteberegninggrunnlag = {
       tom: '2020-05-31',
       inntekter: [
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 354,
         },
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 5531,
         },
       ],
@@ -86,11 +85,11 @@ const besteberegninggrunnlag: Besteberegninggrunnlag = {
       tom: '2020-06-30',
       inntekter: [
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 5531,
         },
         {
-          opptjeningAktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          opptjeningAktivitetType: 'DAGPENGER',
           inntekt: 354,
         },
       ],

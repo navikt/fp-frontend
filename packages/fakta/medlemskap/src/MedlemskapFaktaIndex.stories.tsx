@@ -5,10 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 
 import {
   AksjonspunktKode,
-  MedlemskapDekningType,
   MedlemskapManuellVurderingType,
-  MedlemskapType,
-  OppholdstillatelseType,
   PersonstatusType,
   Region,
   VilkarType,
@@ -79,7 +76,7 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
     {
       fom: '2021-10-13',
       tom: '2024-01-13',
-      type: OppholdstillatelseType.PERMANENT,
+      type: 'PERMANENT',
     },
   ],
   medlemskapsperioder: [
@@ -88,9 +85,8 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       tom: '2022-01-01',
       erMedlem: false,
       lovvalgsland: 'Finland',
-
-      medlemskapType: MedlemskapType.AVKLARES,
-      dekningType: MedlemskapDekningType.OPPHOR,
+      medlemskapType: 'AVKLARES',
+      dekningType: 'OPPHOR',
       beslutningsdato: '2020-02-01',
     },
 
@@ -100,8 +96,8 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       erMedlem: true,
       lovvalgsland: 'Norge',
       studieland: 'Sverige',
-      medlemskapType: MedlemskapType.ENDELIG,
-      dekningType: MedlemskapDekningType.FULL,
+      medlemskapType: 'ENDELIG',
+      dekningType: 'FULL',
       beslutningsdato: '2024-09-24',
     },
   ],

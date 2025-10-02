@@ -29,7 +29,7 @@ const getOverlappingValidator = (getValues: UseFormGetValues<PermisjonFormValues
 const defaultOverforingPeriode: OverforingPeriode = {
   periodeFom: '',
   periodeTom: '',
-  overforingArsak: '',
+  overforingArsak: '-',
 };
 
 interface Props {

@@ -10,8 +10,7 @@ import {
 import { BodyShort, Button, Checkbox, type SortState, Table } from '@navikt/ds-react';
 import { DateTimeLabel } from '@navikt/ft-ui-komponenter';
 
-import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
-import type { Dokument } from '@navikt/fp-types';
+import type { Dokument, Kommunikasjonsretning } from '@navikt/fp-types';
 import { åpneDokument } from '@navikt/fp-utils';
 
 import { DokumentLink } from '../../../../ui-komponenter';
@@ -26,9 +25,9 @@ interface Props {
 
 type TableHeaders = 'kommunikasjonsretning' | 'tittel' | 'gjelderFor' | 'tidspunkt';
 
-const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsretning: string }) => {
+const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsretning: Kommunikasjonsretning }) => {
   const intl = useIntl();
-  if (kommunikasjonsretning === Kommunikasjonsretning.INN) {
+  if (kommunikasjonsretning === 'INN') {
     return (
       <span className={styles['kommunikasjonsretning']}>
         <ChevronRightCircleFillIcon
@@ -41,7 +40,7 @@ const KommunikasjonsretningIkon = ({ kommunikasjonsretning }: { kommunikasjonsre
       </span>
     );
   }
-  if (kommunikasjonsretning === Kommunikasjonsretning.UT) {
+  if (kommunikasjonsretning === 'UT') {
     return (
       <span className={styles['kommunikasjonsretning']}>
         <ChevronLeftCircleFillIcon

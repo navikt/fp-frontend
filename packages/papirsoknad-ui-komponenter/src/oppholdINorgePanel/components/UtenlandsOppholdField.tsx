@@ -14,7 +14,6 @@ import {
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { Landkode } from '@navikt/fp-kodeverk';
 import type { KodeverkMedNavn } from '@navikt/fp-types';
 
 const defaultUtenlandsOpphold = {
@@ -48,7 +47,7 @@ const getOverlappingValidator = (getValues: UseFormGetValues<{ [K in Keys]: Form
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
-    .filter(({ kode }) => kode !== Landkode.NORGE)
+    .filter(({ kode }) => kode !== 'NOR')
     .map(
       ({ kode, navn }): ReactElement => (
         <option value={kode} key={kode}>

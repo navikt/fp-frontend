@@ -1,7 +1,6 @@
 import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import type { Dokument } from '@navikt/fp-types';
 
 import { DokumenterSakIndex } from './DokumenterSakIndex';
@@ -43,7 +42,7 @@ export const Default: Story = {
         behandlingUuidList: ['1'],
         tittel: 'Dette er et dokument',
         tidspunkt: '2017-08-01T02:04:25.455',
-        kommunikasjonsretning: Kommunikasjonsretning.INN,
+        kommunikasjonsretning: 'INN',
         gjelderFor: 'test1',
       },
       {
@@ -52,7 +51,7 @@ export const Default: Story = {
         behandlingUuidList: [],
         tittel: 'Dette er et nytt dokument',
         tidspunkt: '2017-02-04T02:54:25.455',
-        kommunikasjonsretning: Kommunikasjonsretning.UT,
+        kommunikasjonsretning: 'UT',
         gjelderFor: 'test2',
       },
       {
@@ -61,7 +60,7 @@ export const Default: Story = {
         behandlingUuidList: [],
         tittel: 'Dette er et tredje dokument',
         tidspunkt: '2017-01-03T10:54:25.455',
-        kommunikasjonsretning: Kommunikasjonsretning.NOTAT,
+        kommunikasjonsretning: 'NOTAT',
         gjelderFor: 'Dette er en lang tekst som ikke skal kuttes',
       },
       {
@@ -70,7 +69,7 @@ export const Default: Story = {
         behandlingUuidList: [],
         tittel: 'Dette er et fjerde dokument',
         tidspunkt: '2017-03-02T02:54:25.455',
-        kommunikasjonsretning: Kommunikasjonsretning.UT,
+        kommunikasjonsretning: 'UT',
         gjelderFor: 'test4',
       },
       {
@@ -79,7 +78,7 @@ export const Default: Story = {
         behandlingUuidList: [],
         tittel: 'Dette er et femte dokument',
         tidspunkt: '2017-04-01T02:54:25.455',
-        kommunikasjonsretning: Kommunikasjonsretning.INN,
+        kommunikasjonsretning: 'INN',
         gjelderFor: 'test5',
       },
     ] as Dokument[],

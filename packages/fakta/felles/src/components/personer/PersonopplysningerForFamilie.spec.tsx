@@ -2,7 +2,6 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { render, screen, within } from '@testing-library/react';
 import { expect } from 'vitest';
 
-import { SivilstandType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum, type Personadresse, type Personoversikt } from '@navikt/fp-types';
 
@@ -33,7 +32,7 @@ const personoversikt: Personoversikt = {
     navn: 'Espen Utvikler',
     aktoerId: '1',
     kjønn: KjønnkodeEnum.MANN,
-    sivilstand: SivilstandType.SAMBOER,
+    sivilstand: 'SAMB',
     fødselsdato: '1989-01-01',
 
     adresser: [adresse1, adresse2],
@@ -42,7 +41,7 @@ const personoversikt: Personoversikt = {
     navn: 'Petra Utvikler',
     aktoerId: '2',
     kjønn: KjønnkodeEnum.KVINNE,
-    sivilstand: SivilstandType.SAMBOER,
+    sivilstand: 'SAMB',
     fødselsdato: '1989-01-01',
 
     adresser: [adresse1, adresse2],
@@ -55,7 +54,7 @@ const personoversikt: Personoversikt = {
       adresser: [adresse1],
       aktoerId: '3',
       kjønn: KjønnkodeEnum.KVINNE,
-      sivilstand: SivilstandType.UGIFT,
+      sivilstand: 'UGIF',
     },
     {
       navn: 'Snuppa Utvikler',
@@ -64,7 +63,7 @@ const personoversikt: Personoversikt = {
       adresser: [adresse1],
       aktoerId: '4',
       kjønn: KjønnkodeEnum.KVINNE,
-      sivilstand: SivilstandType.UGIFT,
+      sivilstand: 'UGIF',
     },
   ],
 };

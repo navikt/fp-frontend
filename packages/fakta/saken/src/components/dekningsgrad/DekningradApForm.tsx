@@ -7,7 +7,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -22,10 +22,10 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 const finnIkonForKjønn = (kjonn: string) => {
-  if (kjonn === NavBrukerKjonn.KVINNE) {
+  if (kjonn === 'K') {
     return <WomanIcon />;
   }
-  return kjonn === NavBrukerKjonn.MANN ? <ManIcon /> : <UnknownIcon />;
+  return kjonn === 'M' ? <ManIcon /> : <UnknownIcon />;
 };
 
 type FormValues = {

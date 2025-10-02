@@ -1,32 +1,9 @@
 import {
   Arbeidskategori,
-  GraderingAvslagÅrsak,
-  InnsynResultatType,
-  Inntektskategori,
-  KlageAvvistÅrsak,
-  KlageHjemmel,
-  KlageMedholdÅrsak,
-  Landkode,
-  ManuellBehandlingÅrsak,
-  MedlemskapDekningType,
   MedlemskapManuellVurderingType,
-  MedlemskapType,
-  MorsAktivitet,
-  NaringsvirksomhetType,
-  NaturalYtelseType,
-  OmsorgsovertakelseVilkårType,
-  OppgaveType,
-  OppholdArsakType,
-  OppholdstillatelseType,
-  OpptjeningAktivitetType,
-  OverforingArsak,
-  PeriodeResultatÅrsak,
-  PermisjonsbeskrivelseType,
   PersonstatusType,
   Region,
-  RelasjonsRolleType,
   RevurderingVarslingÅrsak,
-  SivilstandType,
   SkjermlenkeType,
   StonadskontoType,
   UtsettelseÅrsak,
@@ -57,9 +34,32 @@ import type { FaresignalVurdering } from './faresignalVurdering';
 import type { FarSøkerType } from './farSøkerType';
 import type { FordelingPeriodeKilde } from './fordelingPeriodeKilde';
 import type { ForeldreType } from './foreldreType';
+import type { GraderingAvslagÅrsak } from './graderingAvslagÅrsak';
 import type { HistorikkAktor } from './historikkAktor';
+import type { InnsynResultatType } from './innsynResultatType';
+import type { Inntektskategori } from './inntektskategorier';
+import type { KlageAvvistÅrsak } from './klageAvvistÅrsak';
+import type { KlageHjemmel } from './klageHjemmel';
+import type { KlageMedholdÅrsak } from './klageMedholdÅrsak';
 import type { KonsekvensForYtelsen } from './konsekvensForYtelsen';
+import type { Landkode } from './landkode';
+import type { ManuellBehandlingÅrsak } from './manuellBehandlingÅrsak';
+import type { MedlemskapDekningType } from './medlemskapDekningType';
+import type { MedlemskapType } from './medlemskapType';
+import type { MorsAktivitet } from './morsAktivitet';
+import type { NaturalYtelseType } from './naturalYtelseType';
+import type { OmsorgsovertakelseVilkårType } from './omsorgsovertakelseVilkårType';
+import type { OppgaveType } from './oppgaveType';
+import type { OppholdÅrsakType } from './oppholdÅrsakType';
+import type { OppholdstillatelseType } from './oppholdstillatelseType';
+import type { OpptjeningAktivitetType } from './opptjeningAktivitetType';
+import type { OverføringÅrsak } from './overføringÅrsak';
+import type { PeriodeResultatÅrsak } from './periodeResultatÅrsak';
+import type { PermisjonsbeskrivelseType } from './permisjonsbeskrivelseType';
+import type { RelasjonsRolleType } from './relasjonsRolleType';
+import type { SivilstandType } from './sivilstandType';
 import type { VergeType } from './vergeTsType';
+import type { VirksomhetType } from './virksomhetType';
 
 //Mapping mellom KodeverkType og enums/union-types med verdier
 type KodeverkEnumMap = {
@@ -98,11 +98,11 @@ type KodeverkEnumMap = {
   NaturalYtelseType: NaturalYtelseType;
   InnsynResultatType: InnsynResultatType;
   OmsorgsovertakelseVilkårType: OmsorgsovertakelseVilkårType;
-  OppholdÅrsak: OppholdArsakType;
+  OppholdÅrsak: OppholdÅrsakType;
   OppgaveType: OppgaveType;
   OppholdstillatelseType: OppholdstillatelseType;
   OpptjeningAktivitetType: OpptjeningAktivitetType;
-  OverføringÅrsak: OverforingArsak;
+  OverføringÅrsak: OverføringÅrsak;
   PermisjonsbeskrivelseType: PermisjonsbeskrivelseType;
   PeriodeResultatÅrsak: PeriodeResultatÅrsak;
   PersonstatusType: PersonstatusType;
@@ -119,7 +119,7 @@ type KodeverkEnumMap = {
   Venteårsak: VenteArsakType;
   VergeType: VergeType;
   VilkårType: VilkarType;
-  VirksomhetType: NaringsvirksomhetType;
+  VirksomhetType: VirksomhetType;
   VurderÅrsak: VurderÅrsak;
   Inntektskategori: Inntektskategori;
 };

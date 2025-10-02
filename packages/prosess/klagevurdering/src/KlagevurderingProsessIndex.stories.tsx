@@ -3,11 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import {
-  AksjonspunktKode,
-  KlageVurdering as klageVurderingCodes,
-  KlageVurderingOmgjoer as klageVurderingOmgjoerType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
@@ -37,9 +33,9 @@ export const MedholdIKlageNk: Story = {
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: klageVurderingCodes.MEDHOLD_I_KLAGE,
+        klageVurdering: 'MEDHOLD_I_KLAGE',
         klageMedholdArsak: 'ULIK_VURDERING',
-        klageVurderingOmgjoer: klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE,
+        klageVurderingOmgjoer: 'GUNST_MEDHOLD_I_KLAGE',
         fritekstTilBrev: 'test',
         begrunnelse: 'Dette er en begrunnelse',
       },
@@ -57,7 +53,7 @@ export const StadfestKlageNk: Story = {
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: klageVurderingCodes.STADFESTE_YTELSESVEDTAK,
+        klageVurdering: 'STADFESTE_YTELSESVEDTAK',
         fritekstTilBrev: 'test',
         begrunnelse: 'Dette er en begrunnelse',
       },
@@ -75,7 +71,7 @@ export const HjemsendtIKlageNk: Story = {
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE,
+        klageVurdering: 'HJEMSENDE_UTEN_Å_OPPHEVE',
         klageMedholdArsak: 'ULIK_VURDERING',
         fritekstTilBrev: 'test',
         begrunnelse: 'Dette er en begrunnelse',
@@ -94,7 +90,7 @@ export const OpphevIKlageNk: Story = {
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: klageVurderingCodes.OPPHEVE_YTELSESVEDTAK,
+        klageVurdering: 'OPPHEVE_YTELSESVEDTAK',
         klageMedholdArsak: 'ULIK_VURDERING',
         fritekstTilBrev: 'test',
         begrunnelse: 'Dette er en begrunnelse',

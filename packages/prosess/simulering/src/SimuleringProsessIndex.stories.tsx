@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, MottakerType, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -35,7 +35,7 @@ const simuleringResultat = {
     ingenPerioderMedAvvik: false,
     perioderPerMottaker: [
       {
-        mottakerType: MottakerType.ARBG,
+        mottakerType: 'ARBG_ORG',
         mottakerIdentifikator: '123',
         mottakerNummer: 'test',
         resultatPerFagområde: [

@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, KlageVurdering as klageVurderingCodes } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
@@ -38,7 +38,7 @@ export const FormkravPanelForAksjonspunktNfp: Story = {
     klageVurdering: {
       klageVurderingResultatNK: {
         klageVurdertAv: 'NK',
-        klageVurdering: klageVurderingCodes.AVVIS_KLAGE,
+        klageVurdering: 'AVVIS_KLAGE',
         fritekstTilBrev: 'test',
       },
       mottattDato: '2025-08-26',

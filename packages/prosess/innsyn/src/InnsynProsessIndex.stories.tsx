@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, InnsynResultatType, Kommunikasjonsretning, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Innsyn, InnsynDokument } from '@navikt/fp-types';
 
@@ -35,7 +35,7 @@ const meta = {
         dokumentId: '3',
         tittel: 'Dette er et dokument',
         tidspunkt: '2017-08-02T00:54:25.455',
-        kommunikasjonsretning: Kommunikasjonsretning.INN,
+        kommunikasjonsretning: 'INN',
       },
     ],
   },
@@ -78,7 +78,7 @@ export const InnsynSattPaVent: Story = {
     isReadOnly: true,
     innsyn: {
       dokumenter: [] as InnsynDokument[],
-      innsynResultatType: InnsynResultatType.INNVILGET,
+      innsynResultatType: 'INNV',
       innsynMottattDato: '2021-12-12',
       vedtaksdokumentasjon: [
         {

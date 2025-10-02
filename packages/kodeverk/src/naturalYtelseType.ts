@@ -1,4 +1,0 @@
-export enum NaturalYtelseType {
-  ELEKTRISK_KOMMUNIKASJON = 'ELEKTRISK_KOMMUNIKASJON',
-  LOSJI = 'LOSJI',
-}

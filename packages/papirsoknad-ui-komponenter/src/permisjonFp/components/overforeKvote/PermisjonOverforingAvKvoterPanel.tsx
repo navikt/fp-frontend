@@ -5,18 +5,17 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import { OverforingArsak } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, ForeldreType, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, ForeldreType, KodeverkMedNavn, OverføringÅrsak } from '@navikt/fp-types';
 
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesOverforing, PermisjonFormValues } from '../../types';
 import { RenderOverforingAvKvoterFieldArray } from './RenderOverforingAvKvoterFieldArray';
 
-const getText = (intl: IntlShape, kode: string, navn: string): string => {
-  if (kode === OverforingArsak.INSTITUSJONSOPPHOLD_ANNEN_FORELDER) {
+const getText = (intl: IntlShape, kode: OverføringÅrsak, navn: string): string => {
+  if (kode === 'INSTITUSJONSOPPHOLD_ANNEN_FORELDER') {
     return intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.MorErInnlagt' });
   }
-  if (kode === OverforingArsak.SYKDOM_ANNEN_FORELDER) {
+  if (kode === 'SYKDOM_ANNEN_FORELDER') {
     return intl.formatMessage({ id: 'Registrering.Permisjon.OverforingAvKvote.Arsak.MorErSyk' });
   }
   return navn;
@@ -29,10 +28,7 @@ const mapArsaker = (
   intl: IntlShape,
 ): ReactElement[] =>
   arsaker
-    .filter(
-      ({ kode }) =>
-        erEndringssøknad || (kode !== OverforingArsak.ALENEOMSORG && kode !== OverforingArsak.IKKE_RETT_ANNEN_FORELDER),
-    )
+    .filter(({ kode }) => erEndringssøknad || (kode !== 'ALENEOMSORG' && kode !== 'IKKE_RETT_ANNEN_FORELDER'))
     .map(({ kode, navn }) =>
       !sokerErMor ? (
         <option value={kode} key={kode}>

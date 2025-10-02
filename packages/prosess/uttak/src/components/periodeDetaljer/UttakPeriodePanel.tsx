@@ -7,14 +7,14 @@ import { AksjonspunktHelpTextHTML, EditedIcon } from '@navikt/ft-ui-komponenter'
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { ManuellBehandlingÅrsak, StonadskontoType } from '@navikt/fp-kodeverk';
+import { StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
   foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
-  foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak,
+  ManuellBehandlingÅrsak,
   PeriodeSoker,
   PeriodeSokerAktivitet,
   Uttaksresultat,
@@ -69,7 +69,7 @@ const erEøsPeriode = (
 };
 
 const hentApTekst = (
-  manuellBehandlingÅrsak: foreldrepenger_behandlingslager_uttak_fp_ManuellBehandlingÅrsak,
+  manuellBehandlingÅrsak: ManuellBehandlingÅrsak,
   alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto: UttakStonadskontoer,
@@ -77,7 +77,7 @@ const hentApTekst = (
 ): ReactElement[] => {
   const aksjonspunktTekster = [];
 
-  if (manuellBehandlingÅrsak === ManuellBehandlingÅrsak.STØNADSKONTO_TOM_FOR_STØNADSDAGER) {
+  if (manuellBehandlingÅrsak === '5001') {
     const arbeidsForhold = getCorrectEmptyArbeidsForhold(
       alleKodeverk,
       arbeidsgiverOpplysningerPerId,

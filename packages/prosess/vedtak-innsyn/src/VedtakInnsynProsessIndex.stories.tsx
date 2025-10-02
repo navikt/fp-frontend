@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
@@ -34,7 +34,7 @@ const meta = {
         dokumentId: '3',
         tittel: 'Dette er et dokument',
         tidspunkt: '2017-08-02T00:54:25.455',
-        kommunikasjonsretning: Kommunikasjonsretning.INN,
+        kommunikasjonsretning: 'INN',
       },
     ],
   },
@@ -61,7 +61,7 @@ export const PanelForInnvilgetVedtak: Story = {
           opprettetDato: '2019-01-01',
         },
       ],
-      innsynResultatType: InnsynResultatType.INNVILGET,
+      innsynResultatType: 'INNV',
       innsynMottattDato: '2019-01-01',
     },
   },
@@ -84,7 +84,7 @@ export const PanelForAvvistVedtak: Story = {
           opprettetDato: '2019-01-01',
         },
       ],
-      innsynResultatType: InnsynResultatType.AVVIST,
+      innsynResultatType: 'AVVIST',
       innsynMottattDato: '2019-01-01',
     },
   },
@@ -116,7 +116,7 @@ export const PanelForAvvistVedtakReadonly: Story = {
           opprettetDato: '2019-01-01',
         },
       ],
-      innsynResultatType: InnsynResultatType.AVVIST,
+      innsynResultatType: 'AVVIST',
       innsynMottattDato: '2019-01-01',
     },
   },

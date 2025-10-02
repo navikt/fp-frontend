@@ -2,7 +2,6 @@ import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 import dayjs from 'dayjs';
 
-import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import type { Person } from '@navikt/fp-types';
 
 import { VisittkortSakIndex } from './VisittkortSakIndex';
@@ -12,7 +11,7 @@ const fagsakPersonFar: Person = {
   fødselsdato: '1979-01-01',
 
   fødselsnummer: '12345678910',
-  kjønn: NavBrukerKjonn.MANN,
+  kjønn: 'M',
   aktørId: '234',
 
   språkkode: 'NB',
@@ -23,7 +22,7 @@ const fagsakPersonMor: Person = {
   fødselsdato: '1980-01-01',
 
   fødselsnummer: '65656578787',
-  kjønn: NavBrukerKjonn.KVINNE,
+  kjønn: 'K',
   aktørId: 'test',
 
   språkkode: 'NB',

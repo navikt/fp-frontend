@@ -1,4 +1,3 @@
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { type OmsorgOgRett } from '@navikt/fp-types';
 
 export const omsorgOgRett: OmsorgOgRett = {
@@ -18,6 +17,6 @@ export const omsorgOgRett: OmsorgOgRett = {
     harAnnenpartEngangsstønad: 'NEI',
   },
 
-  relasjonsRolleType: RelasjonsRolleType.MOR,
+  relasjonsRolleType: 'MORA',
   rettighetstype: 'BEGGE_RETT',
 };

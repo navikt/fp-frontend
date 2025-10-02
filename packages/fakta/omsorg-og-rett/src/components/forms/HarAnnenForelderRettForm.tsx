@@ -5,7 +5,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -44,7 +44,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
     },
   });
 
-  const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === 'JA';
+  const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== 'MORA' || harUføretrygd === 'JA';
 
   const transformerFeltverdier = (feltVerdier: FormValues) =>
     submitCallback({

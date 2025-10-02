@@ -6,11 +6,7 @@ import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import {
-  KlageVurdering as klageVurderingType,
-  KlageVurderingOmgjoer as klageVurderingOmgjoerType,
-} from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KlageVurderingOmgjørType, KlageVurderingType, KodeverkMedNavn } from '@navikt/fp-types';
 
 import type { KlageFormType } from '../../types/klageFormType';
 
@@ -20,7 +16,7 @@ interface Props {
   readOnly: boolean;
   medholdReasons: KodeverkMedNavn<'KlageMedholdÅrsak'>[];
   alleHjemmlerMedNavn: KodeverkMedNavn<'KlageHjemmel'>[];
-  klageVurdering?: string;
+  klageVurdering?: KlageVurderingType;
 }
 
 export const KlageVurderingRadioOptionsNfp = ({
@@ -47,15 +43,15 @@ export const KlageVurderingRadioOptionsNfp = ({
     <VStack gap="space-12">
       <RhfRadioGroup name="klageVurdering" control={control} validate={[required]} isReadOnly={readOnly}>
         <HStack gap="space-16">
-          <Radio value={klageVurderingType.MEDHOLD_I_KLAGE} size="small">
+          <Radio value={'MEDHOLD_I_KLAGE' satisfies KlageVurderingType} size="small">
             <FormattedMessage id="Klage.ResolveKlage.ChangeVedtak" />
           </Radio>
-          <Radio value={klageVurderingType.STADFESTE_YTELSESVEDTAK} size="small">
+          <Radio value={'STADFESTE_YTELSESVEDTAK' satisfies KlageVurderingType} size="small">
             <FormattedMessage id="Klage.ResolveKlage.KeepVedtakNfp" />
           </Radio>
         </HStack>
       </RhfRadioGroup>
-      {klageVurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
+      {klageVurdering === 'MEDHOLD_I_KLAGE' && (
         <ArrowBox>
           <VStack gap="space-16">
             <RhfSelect
@@ -68,13 +64,13 @@ export const KlageVurderingRadioOptionsNfp = ({
               validate={[required]}
             />
             <RhfRadioGroup name="klageVurderingOmgjoer" control={control} validate={[required]} isReadOnly={readOnly}>
-              <Radio value={klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE} size="small">
+              <Radio value={'GUNST_MEDHOLD_I_KLAGE' satisfies KlageVurderingOmgjørType} size="small">
                 <FormattedMessage id="Klage.Behandle.Omgjort" />
               </Radio>
-              <Radio value={klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE} size="small">
+              <Radio value={'UGUNST_MEDHOLD_I_KLAGE' satisfies KlageVurderingOmgjørType} size="small">
                 <FormattedMessage id="Klage.Behandle.Ugunst" />
               </Radio>
-              <Radio value={klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE} size="small">
+              <Radio value={'DELVIS_MEDHOLD_I_KLAGE' satisfies KlageVurderingOmgjørType} size="small">
                 <FormattedMessage id="Klage.Behandle.DelvisOmgjort" />
               </Radio>
             </RhfRadioGroup>

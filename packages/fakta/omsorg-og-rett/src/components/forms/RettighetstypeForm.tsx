@@ -8,7 +8,7 @@ import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   type Aksjonspunkt,
   type foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype,
@@ -59,7 +59,7 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }:
       ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
     });
   const rettighetstyper =
-    omsorgOgRett.relasjonsRolleType === RelasjonsRolleType.MOR
+    omsorgOgRett.relasjonsRolleType === 'MORA'
       ? (['ALENEOMSORG', 'BEGGE_RETT', 'BEGGE_RETT_EØS', 'BARE_MOR_RETT'] as const)
       : (['ALENEOMSORG', 'BEGGE_RETT', 'BEGGE_RETT_EØS', 'BARE_FAR_RETT', 'BARE_FAR_RETT_MOR_UFØR'] as const);
 

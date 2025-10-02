@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { AksjonspunktÅrsak, type AoIArbeidsforhold, type ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
@@ -157,7 +156,7 @@ export const SokerErIPermisjon: Story = {
           begrunnelse: 'Dette er en begrunnelse 6',
           permisjonOgMangel: {
             permisjonFom: '2020-01-01',
-            type: PermisjonsbeskrivelseType.PERMISJON,
+            type: 'PERMISJON',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
             permisjonStatus: BekreftetPermisjonStatus.BRUK_PERMISJON,
           },
@@ -187,7 +186,7 @@ export const SokerErIkkeIPermisjon: Story = {
           permisjonOgMangel: {
             permisjonFom: '2020-01-01',
             permisjonTom: '2021-01-01',
-            type: PermisjonsbeskrivelseType.PERMISJON,
+            type: 'PERMISJON',
             permisjonStatus: BekreftetPermisjonStatus.IKKE_BRUK_PERMISJON,
           },
         },
