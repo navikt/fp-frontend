@@ -53,7 +53,6 @@ const ConditionalWrapper = ({ isReadOnly, children }: PropsWithChildren<{ isRead
  */
 export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandlingResultat }: Props) => {
   const { fagsak, behandling, submitCallback, isReadOnly, isSubmittable, alleKodeverk } = usePanelDataContext<
-    // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
     VurderMedlemskapAp | VurderForutgaendeMedlemskapAp
   >();
 

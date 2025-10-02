@@ -1,9 +1,11 @@
+type Aktsomhet = 'FORSETT' | 'GROVT_UAKTSOM' | 'SIMPEL_UAKTSOM';
+
 export type BeregningResultatPeriode = {
   periode: {
     fom: string;
     tom: string;
   };
-  vurdering: string;
+  vurdering: Aktsomhet;
   feilutbetaltBeløp: number;
   andelAvBeløp: number;
   renterProsent: number;
@@ -17,7 +19,9 @@ export type BeregningResultatPeriode = {
   riktigYtelseBeløp: number;
 };
 
+type VedtakResultatType = 'INGEN_TILBAKEBETALING' | 'DELVIS_TILBAKEBETALING';
+
 export type BeregningsresultatTilbakekreving = {
   beregningResultatPerioder: BeregningResultatPeriode[];
-  vedtakResultatType: string;
+  vedtakResultatType: VedtakResultatType;
 };
