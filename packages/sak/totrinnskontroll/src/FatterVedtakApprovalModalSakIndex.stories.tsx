@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import type { BehandlingAppKontekst } from '@navikt/fp-types';
 
 import { FatterVedtakTotrinnskontrollModalSakIndex } from './FatterVedtakTotrinnskontrollModalSakIndex';
@@ -35,7 +34,7 @@ export const EtterGodkjenning: Story = {
       status: 'FVED',
       type: 'BT-002',
       behandlingsresultat: {
-        type: BehandlingResultatType.OPPHOR,
+        type: 'OPPHØR',
       },
     } as BehandlingAppKontekst,
     allAksjonspunktApproved: true,
@@ -49,7 +48,7 @@ export const EtterGodkjenningAvKlage: Story = {
       status: 'FVED',
       type: 'BT-003',
       behandlingsresultat: {
-        type: BehandlingResultatType.OPPHOR,
+        type: 'OPPHØR',
       },
     } as BehandlingAppKontekst,
     allAksjonspunktApproved: true,
@@ -63,7 +62,7 @@ export const EtterTilbakesendingTilSaksbehandler: Story = {
       status: 'FVED',
       type: 'BT-002',
       behandlingsresultat: {
-        type: BehandlingResultatType.OPPHOR,
+        type: 'OPPHØR',
       },
     } as BehandlingAppKontekst,
     allAksjonspunktApproved: false,

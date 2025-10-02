@@ -1,46 +1,21 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingResultatType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { Behandling } from '@navikt/fp-types';
 
 import { MenyHenleggIndex } from './MenyHenleggIndex';
 
-const BEHANDLINGRESULTAT_TYPER = [
+const BEHANDLINGRESULTAT_TYPER_TILBAKEKREVING = [
   {
-    kode: BehandlingResultatType.HENLAGT_KLAGE_TRUKKET,
-    kodeverk: 'BEHANDLING_RESULT_TYPE',
-    navn: 'Henlagt klage',
-  },
-  {
-    kode: BehandlingResultatType.HENLAGT_SOKNAD_TRUKKET,
-    kodeverk: 'RESULTAT_TYPE',
-    navn: 'Henlagt soknad trukket',
-  },
-  {
-    kode: BehandlingResultatType.HENLAGT_FEILOPPRETTET_UTEN_BREV,
+    kode: 'HENLAGT_FEILOPPRETTET_UTEN_BREV',
     kodeverk: 'BEHANDLING_RESULT_TYPE',
     navn: 'Henlagt feilopprettet uten brev',
   },
   {
-    kode: BehandlingResultatType.HENLAGT_FEILOPPRETTET_MED_BREV,
+    kode: 'HENLAGT_FEILOPPRETTET_MED_BREV',
     kodeverk: 'BEHANDLING_RESULT_TYPE',
     navn: 'Henlagt feilopprettet med brev',
-  },
-  {
-    kode: BehandlingResultatType.HENLAGT_INNSYN_TRUKKET,
-    kodeverk: 'BEHANDLING_RESULT_TYPE',
-    navn: 'Henlagt innsyn',
-  },
-  {
-    kode: BehandlingResultatType.HENLAGT_FEILOPPRETTET,
-    kodeverk: 'RESULTAT_TYPE',
-    navn: 'Henlagt feilopprettet',
-  },
-  {
-    kode: BehandlingResultatType.HENLAGT_SOKNAD_MANGLER,
-    kodeverk: 'RESULTAT_TYPE',
-    navn: 'Henlagt soknad mangler',
   },
 ];
 
@@ -48,7 +23,8 @@ const meta = {
   title: 'sak/sak-meny-henlegg',
   component: MenyHenleggIndex,
   args: {
-    behandlingResultatTyper: BEHANDLINGRESULTAT_TYPER,
+    //@ts-expect-error tilbakekreving-type
+    behandlingResultatTyper: alleKodeverk.BehandlingResultatType.concat(BEHANDLINGRESULTAT_TYPER_TILBAKEKREVING),
     ytelseType: 'FP',
     gaaTilSokeside: action('button-click'),
     henleggBehandling: () => {

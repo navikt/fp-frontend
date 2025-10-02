@@ -1,36 +1,11 @@
 export { AksjonspunktKode, isUttakAksjonspunkt, isFaktaUttakAksjonspunkt } from './src/aksjonspunktCodes';
 export type { OverstyringAksjonspunkter, VilkårOverstyringAksjonspunkter } from './src/aksjonspunktCodes';
 export { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
-export { AksjonspunktStatus, erAksjonspunktÅpent } from './src/aksjonspunktStatus';
-export { AksjonspunktType } from './src/aksjonspunktType';
-export { AktivitetStatus } from './src/aktivitetStatus';
-export { AnkeOmgjorArsak } from './src/ankeOmgjorArsak';
-export { AnkeVurdering } from './src/ankeVurdering';
-export { AnkeVurderingOmgjoer } from './src/ankeVurderingOmgjoer';
-export { ArbeidsforholdHandlingType } from './src/arbeidsforholdHandlingType';
-export { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplettVurderingType';
 export { Arbeidskategori } from './src/arbeidskategori';
-export { ArbeidType } from './src/arbeidType';
-export { Avslagsarsak } from './src/avslagsarsakCodes';
 
-export {
-  BehandlingResultatType,
-  isAvslag,
-  isInnvilget,
-  isOpphor,
-  isKlageOmgjort,
-  isKlageAvvist,
-} from './src/behandlingResultatType';
 export { BehandlingResultatTypeTilbakekreving } from './src/behandlingResultatTypeTilbakekreving';
 
-export { BeregningsgrunnlagAndeltype } from './src/beregningsgrunnlagAndeltyper';
-export { Dekningsgrad } from './src/dekningsgrad';
-export { DiskresjonskodeType } from './src/diskresjonskodeType';
-export { DokumentMalType } from './src/dokumentMalType';
-export { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
-export { FamilieHendelseType } from './src/familieHendelseType';
 export { ForeldelseVurderingType } from './src/foreldelseVurderingType';
-export { ForeldreType } from './src/foreldreType';
 export { InnsynResultatType } from './src/innsynResultatType';
 export { InntektAktivitetType } from './src/inntektAktivitetType';
 export { Inntektskategori } from './src/inntektskategorier';
@@ -43,7 +18,6 @@ export { MottakerType } from './src/mottakerTyper';
 export { NaringsvirksomhetType } from './src/naringsvirksomhetType';
 export { NavBrukerKjonn } from './src/navBrukerKjonn';
 export { OppholdArsakType } from './src/oppholdArsakType';
-export { AdresseType } from './src/adresseType';
 export { OppgaveType } from './src/oppgaveType';
 export { OpplysningsKilde } from './src/opplysningsKilde';
 export { OpptjeningAktivitetType } from './src/opptjeningAktivitetType';
@@ -58,7 +32,6 @@ export { SammenligningType } from './src/sammenligningType';
 export { SivilstandType } from './src/sivilstandType';
 export { SoknadType } from './src/soknadType';
 export { StonadskontoType } from './src/stonadskontoType';
-export { FagsakMarkeringKode } from './src/fagsakMarkeringKode';
 export { UtsettelseArsakCode } from './src/utsettelseArsakCodes';
 export { UttakArbeidType } from './src/uttakArbeidType';
 export { UttakPeriodeType } from './src/uttakPeriodeType';
@@ -70,10 +43,8 @@ export { VurderÅrsak } from './src/vurderÅrsak';
 export { TilbakekrevingVidereBehandling } from './src/tilbakekrevingVidereBehandling';
 export { RevurderingVarslingÅrsak } from './src/RevurderingVarslingÅrsak';
 export { KøSortering } from './src/køSortering';
-export { FarSøkerType } from './src/farSøkerType';
 export { SkjermlenkeType } from './src/skjermlenkeType';
 export { SkjermlenkeTypeTilbakekreving } from './src/skjermlenkeTypeTilbakekreving';
-export { FaresignalVurdering } from './src/faresignalVurdering';
 export { PermisjonsbeskrivelseType } from './src/permisjonsbeskrivelseType';
 export { AndreKriterierType } from './src/andreKriterierType';
 export { MedlemskapManuellVurderingType } from './src/medlemskapManuellVurderingType';
@@ -85,9 +56,7 @@ export { MorsAktivitet } from './src/morsAktivitet';
 export { UtsettelseÅrsak } from './src/utsettelseÅrsak';
 export { UttakUtsettelseType } from './src/uttakUtsettelseType';
 export { NaturalYtelseType } from './src/naturalYtelseType';
-export { FordelingPeriodeKilde } from './src/fordelingPeriodeKilde';
 export { KlageAvvistÅrsak } from './src/klageAvvistÅrsak';
-export { AktivitetskravPermisjonType } from './src/aktivitetskravPermisjonType';
 export { OppholdstillatelseType } from './src/oppholdstillatelseType';
 export { PeriodeResultatÅrsak } from './src/periodeResultatÅrsak';
 export { GraderingAvslagÅrsak } from './src/graderingAvslagÅrsak';
@@ -95,7 +64,6 @@ export { MedlemskapDekningType } from './src/medlemskapDekningType';
 export { MedlemskapType } from './src/medlemskapType';
 export { VedtakbrevType } from './src/vedtakbrevType';
 export { OppgaveBehandlingStatus } from './src/oppgaveBehandlingStatus';
-export type { Aktsomhet } from './src/aktsomhet';
 export type { HendelseType } from './src/hendelseType';
 export type { HendelseUnderType } from './src/hendelseUnderType';
 export type { SærligGrunn } from './src/særligGrunn';

@@ -10,7 +10,6 @@ import edjsHTML from 'editorjs-html';
 import Undo from 'editorjs-undo';
 import debounce from 'lodash.debounce';
 
-import { DokumentMalType, FagsakMarkeringKode } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { notEmpty, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -36,7 +35,7 @@ export const useEditorJs = (
 
   const { fagsak } = usePanelDataContext();
   const harPraksisUtsettelse = fagsak.fagsakMarkeringer.some(
-    markering => markering.fagsakMarkering === FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+    markering => markering.fagsakMarkering === 'PRAKSIS_UTSETTELSE',
   );
 
   //Denne blir kun brukt for å hindre tullball grunna to renders i DEV => React.StrictMode
@@ -136,7 +135,7 @@ export const useEditorJs = (
 
     forhåndsvisBrev({
       automatiskVedtaksbrev: false,
-      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      dokumentMal: 'FRIHTM',
       fritekst: harPraksisUtsettelse ? leggTilPTagsILiTags(html) : lagRedigerbartInnholdWrapper(html, footer),
     });
   };

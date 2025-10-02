@@ -4,7 +4,6 @@ import { BodyShort, Tag } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import type { FagsakHendelse } from '@navikt/fp-types';
 
 const finnFodselsdatoTekstkode = (antallBarn: number): string => {
@@ -53,7 +52,7 @@ export const VisittkortBarnInfoFodselPanel = ({ familiehendelse }: Props) => {
   const intl = useIntl();
   const { hendelseType, hendelseDato, antallBarn, dødfødsel } = familiehendelse;
 
-  const visFødselsdato = hendelseType === FamilieHendelseType.FODSEL;
+  const visFødselsdato = hendelseType === 'FODSL';
 
   return (
     <>

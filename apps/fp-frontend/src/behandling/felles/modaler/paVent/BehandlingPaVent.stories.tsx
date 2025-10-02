@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withQueryClient } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -44,7 +44,7 @@ export const BehandlingSattPåVent: Story = {
       venteÅrsakKode: 'AVV_FODSEL',
       aksjonspunkt: [
         {
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
           definisjon: AksjonspunktKode.ANNENPART_EØS,
         } as Aksjonspunkt,
       ],
@@ -66,7 +66,7 @@ export const BehandlingSattManueltPåVent: Story = {
       venteÅrsakKode: 'AVV_FODSEL',
       aksjonspunkt: [
         {
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
           definisjon: AksjonspunktKode.AUTO_MANUELT_SATT_PÅ_VENT,
         } as Aksjonspunkt,
       ],

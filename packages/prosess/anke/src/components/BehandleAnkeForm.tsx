@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, AnkeVurdering, BehandlingAppKontekst } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -83,24 +82,20 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
               <FormattedMessage id="Ankebehandling.Resultat" />
             </Label>
             <BodyShort size="small">
-              {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_OMGJOER && (
-                <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />
-              )}
-              {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE && (
+              {avr?.ankeVurdering === 'ANKE_OMGJOER' && <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />}
+              {avr?.ankeVurdering === 'ANKE_OPPHEVE_OG_HJEMSENDE' && (
                 <FormattedMessage id="Ankebehandling.Resultat.OpphevHjemsend" />
               )}
-              {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV && (
+              {avr?.ankeVurdering === 'ANKE_HJEMSENDE_UTEN_OPPHEV' && (
                 <FormattedMessage id="Ankebehandling.Resultat.Hjemsend" />
               )}
-              {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_AVVIS && (
-                <FormattedMessage id="Ankebehandling.Resultat.Avvis" />
-              )}
-              {avr?.ankeVurdering === AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK && (
+              {avr?.ankeVurdering === 'ANKE_AVVIS' && <FormattedMessage id="Ankebehandling.Resultat.Avvis" />}
+              {avr?.ankeVurdering === 'ANKE_STADFESTE_YTELSESVEDTAK' && (
                 <FormattedMessage id="Ankebehandling.Resultat.Stadfest" />
               )}
             </BodyShort>
           </VStack>
-          {AnkeVurderingKodeverk.ANKE_AVVIS === avr?.ankeVurdering && !behandletKabal && (
+          {'ANKE_AVVIS' === avr?.ankeVurdering && !behandletKabal && (
             <>
               <VStack gap="space-4">
                 <Label size="small">
@@ -141,7 +136,7 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
               </VStack>
             </>
           )}
-          {AnkeVurderingKodeverk.ANKE_OMGJOER === avr?.ankeVurdering && (
+          {'ANKE_OMGJOER' === avr?.ankeVurdering && (
             <>
               <VStack gap="space-4">
                 <Label size="small">
@@ -153,21 +148,21 @@ export const BehandleAnkeForm = ({ ankeVurdering, behandlinger }: Props) => {
               </VStack>
               <VStack gap="space-4">
                 <BodyShort size="small">
-                  {avr.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
+                  {avr.ankeVurderingOmgjoer === 'ANKE_TIL_GUNST' && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
                   )}
-                  {avr.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_UGUNST && (
+                  {avr.ankeVurderingOmgjoer === 'ANKE_TIL_UGUNST' && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
                   )}
-                  {avr.ankeVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
+                  {avr.ankeVurderingOmgjoer === 'ANKE_DELVIS_OMGJOERING_TIL_GUNST' && (
                     <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
                   )}
                 </BodyShort>
               </VStack>
             </>
           )}
-          {(AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.ankeVurdering ||
-            AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.ankeVurdering) &&
+          {('ANKE_OPPHEVE_OG_HJEMSENDE' === avr?.ankeVurdering ||
+            'ANKE_HJEMSENDE_UTEN_OPPHEV' === avr?.ankeVurdering) &&
             !behandletKabal && (
               <VStack gap="space-4">
                 <Label size="small">

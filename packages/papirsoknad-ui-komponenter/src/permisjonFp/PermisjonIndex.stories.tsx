@@ -5,7 +5,6 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { ForeldreType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { PermisjonIndex } from './PermisjonIndex';
@@ -48,21 +47,21 @@ type Story = StoryObj<typeof meta>;
 
 export const SokerErMor: Story = {
   args: {
-    foreldreType: ForeldreType.MOR,
+    foreldreType: 'MOR',
     erEndringssøknad: false,
   },
 };
 
 export const SokerErFar: Story = {
   args: {
-    foreldreType: ForeldreType.FAR,
+    foreldreType: 'FAR',
     erEndringssøknad: false,
   },
 };
 
 export const ErEndringssøknad: Story = {
   args: {
-    foreldreType: ForeldreType.MOR,
+    foreldreType: 'MOR',
     erEndringssøknad: true,
   },
 };

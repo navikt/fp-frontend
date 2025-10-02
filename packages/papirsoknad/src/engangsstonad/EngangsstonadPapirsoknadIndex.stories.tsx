@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import { SoknadData } from '@navikt/fp-papirsoknad-ui-komponenter';
 import { alleKodeverk, getIntlDecorator, withRouter } from '@navikt/fp-storybook-utils';
 
@@ -32,23 +31,23 @@ type Story = StoryObj<typeof meta>;
 
 export const ForMorVedFødsel: Story = {
   args: {
-    soknadData: new SoknadData('ES', FamilieHendelseType.FODSEL, ForeldreType.MOR),
+    soknadData: new SoknadData('ES', 'FODSL', 'MOR'),
   },
 };
 
 export const ForFarVedFødsel: Story = {
   args: {
-    soknadData: new SoknadData('ES', FamilieHendelseType.FODSEL, ForeldreType.FAR),
+    soknadData: new SoknadData('ES', 'FODSL', 'FAR'),
   },
 };
 
 export const ForMorVedAdopsjon: Story = {
   args: {
-    soknadData: new SoknadData('ES', FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
+    soknadData: new SoknadData('ES', 'ADPSJN', 'MOR'),
   },
 };
 export const ForFarVedAdopsjon: Story = {
   args: {
-    soknadData: new SoknadData('ES', FamilieHendelseType.ADOPSJON, ForeldreType.FAR),
+    soknadData: new SoknadData('ES', 'ADPSJN', 'FAR'),
   },
 };

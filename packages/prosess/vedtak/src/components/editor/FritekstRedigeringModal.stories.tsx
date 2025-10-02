@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FagsakMarkeringKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, type PanelDataArgs, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type { Fagsak } from '@navikt/fp-types';
 
@@ -38,7 +38,7 @@ const FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE = {
   },
   fagsakMarkeringer: [
     {
-      fagsakMarkering: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+      fagsakMarkering: 'PRAKSIS_UTSETTELSE',
       kortNavn: 'Utsettelse',
     },
   ],

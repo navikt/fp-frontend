@@ -1,0 +1,4 @@
+import type { foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType } from './apiDtoGenerert';
+
+export type AktivitetskravPermisjonType =
+  foreldrepenger_behandlingslager_behandling_aktivitetskrav_AktivitetskravPermisjonType;

@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   Beregningsgrunnlag,
@@ -97,9 +97,7 @@ const skalSkriveFritekstGrunnetFastsettingAvBeregning = (
     return false;
   }
   const behandlingHarLøstBGAP = aksjonspunkter.find(
-    ap =>
-      BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) &&
-      ap.status === AksjonspunktStatus.UTFORT,
+    ap => BEREGNINGSGRUNNLAG_FRITEKSTFELT_I_VEDTAK_AKSJONSPUNKT.some(k => k === ap.definisjon) && ap.status === 'UTFO',
   );
   const førstePeriode = beregningsgrunnlag.beregningsgrunnlagPeriode.at(0);
   const andelSomErManueltFastsatt = førstePeriode?.beregningsgrunnlagPrStatusOgAndel?.find(

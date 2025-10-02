@@ -2,8 +2,6 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { Avslagsarsak } from '@navikt/fp-kodeverk';
-
 import * as stories from './VilkarresultatMedOverstyringProsessIndex.stories';
 
 const { OverstyringspanelForFødsel, OverstyringspanelForMedlemskap, OverstyrtAksjonspunktSomErBekreftet } =
@@ -37,7 +35,7 @@ describe('VilkarresultatMedOverstyringProsessIndex', () => {
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      avslagskode: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+      avslagskode: '1099',
       begrunnelse: 'Dette er en begrunnelse',
       erVilkarOk: false,
       kode: '6003',

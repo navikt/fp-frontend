@@ -4,8 +4,6 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import dayjs from 'dayjs';
 
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-
 import * as stories from './ArbeidOgInntektFaktaIndex.stories';
 
 const {
@@ -71,7 +69,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       behandlingVersjon: 1,
       behandlingUuid: '1223-2323-2323-22332',
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
+      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
     });
 
     await userEvent.click(await screen.findByText('Sett på vent'));
@@ -107,7 +105,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      vurdering: ArbeidsforholdKomplettVurderingType.FORTSETT_UTEN_INNTEKTSMELDING,
+      vurdering: 'FORTSETT_UTEN_INNTEKTSMELDING',
     });
 
     await userEvent.click(await screen.findByText('Bekreft og fortsett'));
@@ -181,7 +179,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
+      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
     });
 
     await userEvent.click(await screen.findByText('Sett på vent'));
@@ -222,7 +220,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75c',
-      vurdering: ArbeidsforholdKomplettVurderingType.MELDING_TIL_ARBEIDSGIVER_NAV_NO,
+      vurdering: 'MELDING_TIL_ARBEIDSGIVER_NAV_NO',
     });
   });
 
@@ -249,7 +247,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: '8ff2c608-6bab-4f83-9732-d26f8c89aa84',
-      vurdering: ArbeidsforholdKomplettVurderingType.IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+      vurdering: 'IKKE_OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
     });
 
     await userEvent.click(await screen.findByText('Bekreft og fortsett'));
@@ -299,7 +297,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       fom: '2020-02-01',
       stillingsprosent: 100,
       tom: '2022-02-01',
-      vurdering: ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING,
+      vurdering: 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING',
     });
 
     await userEvent.click(await screen.findByText('Bekreft og fortsett'));
@@ -418,7 +416,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       fom: '2020-02-01',
       stillingsprosent: 100,
       tom: '2022-02-01',
-      vurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+      vurdering: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
     });
 
     await userEvent.click(await screen.findByText('Bekreft og fortsett'));
@@ -487,7 +485,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       fom: '2019-12-06',
       stillingsprosent: 100,
       tom: '2022-12-31',
-      vurdering: ArbeidsforholdKomplettVurderingType.FJERN_FRA_BEHANDLINGEN,
+      vurdering: 'FJERN_FRA_BEHANDLINGEN',
     });
 
     expect(screen.getByText('Legg til arbeidsforhold')).toBeInTheDocument();
@@ -595,7 +593,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: 'bc9a409c-a15f-4416-856b-5b1ee42eb75d',
-      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
+      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
     });
 
     await userEvent.click(screen.getByText('Jeg kontakter arbeidsgiver'));
@@ -611,7 +609,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: undefined,
-      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD,
+      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_ARBEIDSFORHOLD',
     });
 
     await userEvent.click(await screen.findByText('Sett på vent'));
@@ -671,7 +669,7 @@ describe('ArbeidOgInntektFaktaIndex', () => {
       behandlingUuid: '1223-2323-2323-22332',
       behandlingVersjon: 1,
       internArbeidsforholdRef: undefined,
-      vurdering: ArbeidsforholdKomplettVurderingType.KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING,
+      vurdering: 'KONTAKT_ARBEIDSGIVER_VED_MANGLENDE_INNTEKTSMELDING',
     });
 
     await userEvent.click(await screen.findByText('Sett på vent'));

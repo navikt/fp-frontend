@@ -2,7 +2,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
-import { AnkeVurdering as ankeVurderingType, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import type { AnkeVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -60,26 +59,22 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
               <FormattedMessage id="Ankebehandling.Resultat" />
             </Label>
             <BodyShort size="small">
-              {avr?.trygderettVurdering === ankeVurderingType.ANKE_OMGJOER && (
-                <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />
-              )}
-              {avr?.trygderettVurdering === ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE && (
+              {avr?.trygderettVurdering === 'ANKE_OMGJOER' && <FormattedMessage id="Ankebehandling.Resultat.Omgjør" />}
+              {avr?.trygderettVurdering === 'ANKE_OPPHEVE_OG_HJEMSENDE' && (
                 <FormattedMessage id="Ankebehandling.Resultat.Opphev" />
               )}
-              {avr?.trygderettVurdering === ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV && (
+              {avr?.trygderettVurdering === 'ANKE_HJEMSENDE_UTEN_OPPHEV' && (
                 <FormattedMessage id="Ankebehandling.Resultat.Hjemsend" />
               )}
-              {avr?.trygderettVurdering === ankeVurderingType.ANKE_AVVIS && (
-                <FormattedMessage id="Ankebehandling.Resultat.Avvis" />
-              )}
-              {avr?.trygderettVurdering === ankeVurderingType.ANKE_STADFESTE_YTELSESVEDTAK && (
+              {avr?.trygderettVurdering === 'ANKE_AVVIS' && <FormattedMessage id="Ankebehandling.Resultat.Avvis" />}
+              {avr?.trygderettVurdering === 'ANKE_STADFESTE_YTELSESVEDTAK' && (
                 <FormattedMessage id="Ankebehandling.Resultat.Stadfest" />
               )}
             </BodyShort>
           </VStack>
         </>
       )}
-      {ankeVurderingType.ANKE_OMGJOER === avr?.trygderettVurdering && (
+      {'ANKE_OMGJOER' === avr?.trygderettVurdering && (
         <>
           <VStack gap="space-4">
             <Label size="small">
@@ -91,21 +86,21 @@ export const TrygderettsbehandlingForm = ({ ankeVurdering }: Props) => {
           </VStack>
           <VStack gap="space-4">
             <BodyShort size="small">
-              {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_GUNST && (
+              {avr.trygderettVurderingOmgjoer === 'ANKE_TIL_GUNST' && (
                 <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Gunst" />
               )}
-              {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_TIL_UGUNST && (
+              {avr.trygderettVurderingOmgjoer === 'ANKE_TIL_UGUNST' && (
                 <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Ugunst" />
               )}
-              {avr.trygderettVurderingOmgjoer === AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST && (
+              {avr.trygderettVurderingOmgjoer === 'ANKE_DELVIS_OMGJOERING_TIL_GUNST' && (
                 <FormattedMessage id="Ankebehandling.VurderingOmgjoer.Delvis" />
               )}
             </BodyShort>
           </VStack>
         </>
       )}
-      {(ankeVurderingType.ANKE_OPPHEVE_OG_HJEMSENDE === avr?.trygderettVurdering ||
-        ankeVurderingType.ANKE_HJEMSENDE_UTEN_OPPHEV === avr?.trygderettVurdering) &&
+      {('ANKE_OPPHEVE_OG_HJEMSENDE' === avr?.trygderettVurdering ||
+        'ANKE_HJEMSENDE_UTEN_OPPHEV' === avr?.trygderettVurdering) &&
         !behandletKabal && (
           <VStack gap="space-4">
             <Label size="small">

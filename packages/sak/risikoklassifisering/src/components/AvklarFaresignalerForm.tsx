@@ -6,8 +6,13 @@ import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, FaresignalVurdering } from '@navikt/fp-kodeverk';
-import { type Aksjonspunkt, type KodeverkMedNavn, type Risikoklassifisering } from '@navikt/fp-types';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import {
+  type Aksjonspunkt,
+  type FaresignalVurdering,
+  type KodeverkMedNavn,
+  type Risikoklassifisering,
+} from '@navikt/fp-types';
 
 import type { AvklartRisikoklassifiseringAp } from '../types/AvklartRisikoklassifiseringAp';
 
@@ -20,8 +25,8 @@ const IKKE_REELLE_VURDERINGER_UNDERKATEGORI = 'ikkeReelleVurderingerUnderkategor
 
 type Values = {
   [begrunnelseFieldName]?: string;
-  [VURDERING_HOVEDKATEGORI]: string;
-  [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]?: string;
+  [VURDERING_HOVEDKATEGORI]: FaresignalVurdering;
+  [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]?: FaresignalVurdering;
 };
 
 interface Props {
@@ -45,15 +50,14 @@ export const AvklarFaresignalerForm = ({
   submitCallback,
 }: Props) => {
   const underkategoriFaresignalVurderinger = faresignalVurderinger.filter(
-    vurdering =>
-      vurdering.kode !== FaresignalVurdering.INNVIRKNING && vurdering.kode !== FaresignalVurdering.INGEN_INNVIRKNING,
+    vurdering => vurdering.kode !== 'INNVIRKNING' && vurdering.kode !== 'INGEN_INNVIRKNING',
   );
 
   const formMethods = useForm<Values>({
     defaultValues: buildInitialValues(aksjonspunkt, risikoklassifisering),
   });
 
-  const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === FaresignalVurdering.INNVIRKNING;
+  const harValgtReelle = formMethods.watch(VURDERING_HOVEDKATEGORI) === 'INNVIRKNING';
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: Values) => submitCallback?.(transformValues(values))}>
@@ -74,8 +78,8 @@ export const AvklarFaresignalerForm = ({
           isReadOnly={readOnly}
         >
           <VStack gap="space-12">
-            <Radio value={FaresignalVurdering.INNVIRKNING} size="small">
-              {faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INNVIRKNING)?.navn ?? ''}
+            <Radio value="INNVIRKNING" size="small">
+              {faresignalVurderinger.find(vurdering => vurdering.kode === 'INNVIRKNING')?.navn ?? ''}
             </Radio>
             {harValgtReelle && (
               <ArrowBox alignOffset={20}>
@@ -94,9 +98,8 @@ export const AvklarFaresignalerForm = ({
               </ArrowBox>
             )}
           </VStack>
-          <Radio value={FaresignalVurdering.INGEN_INNVIRKNING} size="small">
-            {faresignalVurderinger.find(vurdering => vurdering.kode === FaresignalVurdering.INGEN_INNVIRKNING)?.navn ??
-              ''}
+          <Radio value="INGEN_INNVIRKNING" size="small">
+            {faresignalVurderinger.find(vurdering => vurdering.kode === 'INGEN_INNVIRKNING')?.navn ?? ''}
           </Radio>
         </RhfRadioGroup>
         <div>
@@ -123,11 +126,8 @@ const buildInitialValues = (
     const kode = risikoklassifisering.faresignalVurdering;
     return {
       [begrunnelseFieldName]: aksjonspunkt.begrunnelse,
-      [VURDERING_HOVEDKATEGORI]:
-        kode === FaresignalVurdering.INGEN_INNVIRKNING
-          ? FaresignalVurdering.INGEN_INNVIRKNING
-          : FaresignalVurdering.INNVIRKNING,
-      [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]: kode === FaresignalVurdering.INGEN_INNVIRKNING ? undefined : kode,
+      [VURDERING_HOVEDKATEGORI]: kode === 'INGEN_INNVIRKNING' ? 'INGEN_INNVIRKNING' : 'INNVIRKNING',
+      [IKKE_REELLE_VURDERINGER_UNDERKATEGORI]: kode === 'INGEN_INNVIRKNING' ? undefined : kode,
     };
   }
   return undefined;
@@ -143,9 +143,7 @@ const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
 });
 
 const utledFaresignalVurderingVerdi = (
-  vurderingHovedkategori: string,
-  vurderingUnderkategori?: string,
-): string | undefined =>
-  vurderingHovedkategori === FaresignalVurdering.INGEN_INNVIRKNING
-    ? FaresignalVurdering.INGEN_INNVIRKNING
-    : vurderingUnderkategori;
+  vurderingHovedkategori: FaresignalVurdering,
+  vurderingUnderkategori?: FaresignalVurdering,
+): FaresignalVurdering | undefined =>
+  vurderingHovedkategori === 'INGEN_INNVIRKNING' ? 'INGEN_INNVIRKNING' : vurderingUnderkategori;

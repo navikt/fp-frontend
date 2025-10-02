@@ -1,0 +1,3 @@
+import type { foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType } from '@navikt/fp-types';
+
+export type FamilieHendelseType = foreldrepenger_behandlingslager_behandling_familiehendelse_FamilieHendelseType;

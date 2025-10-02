@@ -2,8 +2,6 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { FagsakMarkeringKode } from '@navikt/fp-kodeverk';
-
 import * as stories from './MenyEndreUtlandIndex.stories';
 
 const { Default } = composeStories(stories);
@@ -22,7 +20,7 @@ describe('MenyEndreUtlandIndex', () => {
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreFagsakMarkering).toHaveBeenCalledTimes(1));
     expect(endreFagsakMarkering).toHaveBeenNthCalledWith(1, {
-      fagsakMarkeringer: [FagsakMarkeringKode.EØS_BOSATT_NORGE],
+      fagsakMarkeringer: ['EØS_BOSATT_NORGE'],
       saksnummer: '123',
     });
   });
@@ -40,7 +38,7 @@ describe('MenyEndreUtlandIndex', () => {
     await waitFor(() => expect(lukkModal).toHaveBeenCalledTimes(1));
     await waitFor(() => expect(endreFagsakMarkering).toHaveBeenCalledTimes(1));
     expect(endreFagsakMarkering).toHaveBeenNthCalledWith(1, {
-      fagsakMarkeringer: [FagsakMarkeringKode.BOSATT_UTLAND],
+      fagsakMarkeringer: ['BOSATT_UTLAND'],
       saksnummer: '123',
     });
   });

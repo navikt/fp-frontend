@@ -10,7 +10,7 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { FordelingPeriodeKilde, RelasjonsRolleType, UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { RelasjonsRolleType, UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
@@ -88,7 +88,7 @@ const transformValues = (values: FormValues): KontrollerFaktaPeriodeMedApMarkeri
         arbeidType: values.arbeidsgiverId.split('-')[1] as UttakArbeidType,
       }
     : undefined,
-  periodeKilde: FordelingPeriodeKilde.SAKSBEHANDLER,
+  periodeKilde: 'SAKSBEHANDLER',
   aksjonspunktType: undefined,
   arbeidstidsprosent: values.arbeidstidsprosent,
   samtidigUttaksprosent: values.samtidigUttaksprosent,

@@ -3,8 +3,6 @@ import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { expect } from 'vitest';
 
-import { DokumentMalType } from '@navikt/fp-kodeverk';
-
 import * as stories from './FritekstRedigeringModal.stories';
 
 const { MedOpprinneligHtml } = composeStories(stories);
@@ -40,7 +38,7 @@ describe('FritekstRedigeringModal', () => {
     await waitFor(() => expect(forhåndsvisBrev).toHaveBeenCalledTimes(1));
     expect(forhåndsvisBrev).toHaveBeenNthCalledWith(1, {
       automatiskVedtaksbrev: false,
-      dokumentMal: DokumentMalType.FRITEKST_HTML,
+      dokumentMal: 'FRIHTM',
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       fritekst: expect.stringContaining('Nav har innvilget søknaden din om 100 prosent foreldrepenger'),
     });

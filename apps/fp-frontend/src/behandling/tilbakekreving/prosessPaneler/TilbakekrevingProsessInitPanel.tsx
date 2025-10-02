@@ -9,10 +9,10 @@ import {
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
-import { useMellomlagretFormData } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';

@@ -8,7 +8,7 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, AksjonspunktStatus, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -48,8 +48,7 @@ const findDate = (familiehendelse: FamilieHendelse): string | undefined => {
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
-  erVilkarOk:
-    aksjonspunkter[0]?.status === AksjonspunktStatus.OPPRETTET ? undefined : VilkarUtfallType.OPPFYLT === status,
+  erVilkarOk: aksjonspunkter[0]?.status === 'OPPR' ? undefined : VilkarUtfallType.OPPFYLT === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 

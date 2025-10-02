@@ -1,8 +1,9 @@
 import { use } from 'react';
 
-import { AksjonspunktStatus, AksjonspunktType, erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
+import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import type { AksjonspunktArgs, OverstyrteAksjonspunktArgs } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../context/BehandlingDataContext';
@@ -54,9 +55,7 @@ export const useStandardProsessPanelProps = (
 
   const alleMerknaderFraBeslutter = getAlleMerknaderFraBeslutter(behandling.status, aksjonspunkterForPanel);
 
-  const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(
-    ap => ap.status === AksjonspunktStatus.OPPRETTET && ap.kanLoses,
-  );
+  const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(ap => ap.status === 'OPPR' && ap.kanLoses);
 
   const status = finnStatus(vilkårForPanel, aksjonspunkterForPanel);
 
@@ -122,9 +121,7 @@ const getBekreftAksjonspunktProsessCallback =
       apListe.some(apModel => apModel.kode === ap.definisjon),
     );
     const erOverstyringsaksjonspunkter = aksjonspunkterTilLagring.some(
-      ap =>
-        ap.aksjonspunktType === AksjonspunktType.OVERSTYRING ||
-        ap.aksjonspunktType === AksjonspunktType.SAKSBEHANDLEROVERSTYRING,
+      ap => ap.aksjonspunktType === 'OVST' || ap.aksjonspunktType === 'SAOV',
     );
 
     if (apListe.length === 0) {

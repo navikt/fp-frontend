@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { CheckmarkCircleFillIcon } from '@navikt/aksel-icons';
 import { BodyShort, Button, HStack, Label, Modal, VStack } from '@navikt/ds-react';
 
-import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import type { Behandling, BehandlingStatus, BehandlingType } from '@navikt/fp-types';
 
 import styles from './fatterVedtakApprovalModal.module.css';
@@ -29,7 +28,7 @@ const getInfoTextCode = (
   if (harSammeResultatSomOriginalBehandling) {
     return 'FatterVedtakApprovalModal.UendretUtfall';
   }
-  if (behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.AVSLATT) {
+  if (behandlingsresultat && behandlingsresultat.type === 'AVSLÅTT') {
     return 'FatterVedtakApprovalModal.IkkeInnvilget';
   }
   if (isOpphor) {
@@ -110,8 +109,7 @@ export const FatterVedtakApprovalModal = ({
   harSammeResultatSomOriginalBehandling,
 }: Props) => {
   const intl = useIntl();
-  const isBehandlingsresultatOpphor =
-    !!behandlingsresultat && behandlingsresultat.type === BehandlingResultatType.OPPHOR;
+  const isBehandlingsresultatOpphor = !!behandlingsresultat && behandlingsresultat.type === 'OPPHØR';
   const infoTextCode = utledInfoTextCode(
     allAksjonspunktApproved,
     behandlingStatusKode,

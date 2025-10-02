@@ -2,7 +2,7 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { BehandlingResultatType, SkjermlenkeType } from '@navikt/fp-kodeverk';
+import { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, withRouter } from '@navikt/fp-storybook-utils';
 import type { BehandlingAppKontekst, BehandlingÅrsak, TotrinnskontrollSkjermlenkeContext } from '@navikt/fp-types';
 
@@ -24,7 +24,7 @@ const DEFAULT_BEHANDLING = {
   behandlingÅrsaker: [] as BehandlingÅrsak[],
   toTrinnsBehandling: true,
   behandlingsresultat: {
-    type: BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+    type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
   },
 } as BehandlingAppKontekst;
 

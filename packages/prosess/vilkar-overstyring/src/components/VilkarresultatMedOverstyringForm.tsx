@@ -8,12 +8,7 @@ import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
-import {
-  AksjonspunktKode,
-  erAksjonspunktÅpent,
-  type VilkårOverstyringAksjonspunkter,
-  VilkarUtfallType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type {
@@ -22,7 +17,12 @@ import type {
   OverstyringMedlemskapsvilkaretLopendeAp,
   OverstyringMedlemskapvilkaretForutgaendeAp,
 } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
+import {
+  erAksjonspunktÅpent,
+  useMellomlagretFormData,
+  usePanelDataContext,
+  usePanelOverstyring,
+} from '@navikt/fp-utils';
 
 import styles from './vilkarresultatMedOverstyringForm.module.css';
 

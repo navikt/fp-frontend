@@ -3,22 +3,19 @@ import { FormattedMessage } from 'react-intl';
 
 import { Link } from '@navikt/ds-react';
 
-import { DokumentMalType, KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
-import type { foreldrepenger_dokumentbestiller_DokumentMalType } from '@navikt/fp-types';
+import { KlageVurdering as klageVurderingType } from '@navikt/fp-kodeverk';
+import type { DokumentMalType } from '@navikt/fp-types';
 
-const getBrevKode = (
-  klageVurdertAvKa: boolean,
-  klageVurdering?: string,
-): foreldrepenger_dokumentbestiller_DokumentMalType | undefined => {
+const getBrevKode = (klageVurdertAvKa: boolean, klageVurdering?: string): DokumentMalType | undefined => {
   switch (klageVurdering) {
     case klageVurderingType.STADFESTE_YTELSESVEDTAK:
-      return klageVurdertAvKa ? DokumentMalType.KLAGE_STADFESTET : DokumentMalType.KLAGE_OVERSENDT;
+      return klageVurdertAvKa ? 'KGESTA' : 'KGEOVE';
     case klageVurderingType.OPPHEVE_YTELSESVEDTAK:
-      return DokumentMalType.KLAGE_HJEMSENDT;
+      return 'KGEHJE';
     case klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE:
-      return DokumentMalType.KLAGE_HJEMSENDT;
+      return 'KGEHJE';
     case klageVurderingType.MEDHOLD_I_KLAGE:
-      return DokumentMalType.KLAGE_OMGJORING;
+      return 'KGEOMG';
     default:
       return undefined;
   }
@@ -26,7 +23,7 @@ const getBrevKode = (
 
 export type KlagevurderingForhåndsvisData = {
   fritekst: string;
-  dokumentMal?: foreldrepenger_dokumentbestiller_DokumentMalType;
+  dokumentMal?: DokumentMalType;
   erOpphevetKlage: boolean;
 };
 

@@ -1,5 +1,4 @@
 import {
-  type Aktsomhet,
   type BehandlingResultatTypeTilbakekreving,
   ForeldelseVurderingType,
   type HendelseType,
@@ -13,6 +12,7 @@ import {
   type VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
+import type { Aktsomhet } from './aktsomhet';
 import type { BehandlingArsakType } from './behandlingArsakType';
 import type { BehandlingType } from './behandlingType';
 import type { HistorikkAktor } from './historikkAktor';

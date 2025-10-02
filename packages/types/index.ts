@@ -199,3 +199,31 @@ export type { FagsakStatus } from './src/fagsakStatus';
 export type { FagsakYtelseType } from './src/fagsakYtelseType';
 export type { HistorikkAktor } from './src/historikkAktor';
 export type { KonsekvensForYtelsen } from './src/konsekvensForYtelsen';
+export type { AdresseType } from './src/adresseType';
+export type { AksjonspunktStatus } from './src/aksjonspunktStatus';
+export type { AksjonspunktType } from './src/aksjonspunktType';
+export type { AktivitetStatus } from './src/aktivitetStatus';
+export type { AktivitetskravPermisjonType } from './src/aktivitetskravPermisjonType';
+export type { ArbeidType } from './src/arbeidType';
+export type { AnkeVurderingType } from './src/ankeVurdering';
+export type { AnkeOmgjorArsak } from './src/ankeOmgjorArsak';
+export type { AnkeVurderingOmgjoer } from './src/ankeVurderingOmgjoer';
+export type { Avslagsarsak } from './src/avslagsarsakCodes';
+export type { ArbeidsforholdKomplettVurderingType } from './src/arbeidsforholdKomplettVurderingType';
+export type { DiskresjonskodeType } from './src/diskresjonskodeType';
+export type { DokumentMalType } from './src/dokumentMalType';
+export type { FagsakMarkeringType } from './src/fagsakMarkeringType';
+export type { FaktaOmBeregningTilfelle } from './src/faktaOmBeregningTilfelle';
+export type { FamilieHendelseType } from './src/familieHendelseType';
+export type { ForeldreType } from './src/foreldreType';
+export type { FaresignalVurdering } from './src/faresignalVurdering';
+export type { FarSøkerType } from './src/farSøkerType';
+export type { FordelingPeriodeKilde } from './src/fordelingPeriodeKilde';
+export {
+  type BehandlingResultatType,
+  isAvslag,
+  isInnvilget,
+  isOpphor,
+  isKlageOmgjort,
+  isKlageAvvist,
+} from './src/behandlingResultatType';

@@ -4,8 +4,6 @@ import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
-
 import { SoknadData } from '../felles/SoknadData';
 import { RettigheterPapirsoknadIndex } from './RettigheterPapirsoknadIndex';
 
@@ -40,23 +38,23 @@ type Story = StoryObj<typeof meta>;
 
 export const MorFødsel: Story = {
   args: {
-    soknadData: new SoknadData('FP', FamilieHendelseType.FODSEL, ForeldreType.MOR),
+    soknadData: new SoknadData('FP', 'FODSL', 'MOR'),
   },
 };
 
 export const FarFodsel: Story = {
   args: {
-    soknadData: new SoknadData('FP', FamilieHendelseType.FODSEL, ForeldreType.FAR),
+    soknadData: new SoknadData('FP', 'FODSL', 'FAR'),
   },
 };
 
 export const MorAdopterer: Story = {
   args: {
-    soknadData: new SoknadData('FP', FamilieHendelseType.ADOPSJON, ForeldreType.MOR),
+    soknadData: new SoknadData('FP', 'ADPSJN', 'MOR'),
   },
 };
 export const FarAdopterer: Story = {
   args: {
-    soknadData: new SoknadData('FP', FamilieHendelseType.ADOPSJON, ForeldreType.FAR),
+    soknadData: new SoknadData('FP', 'ADPSJN', 'FAR'),
   },
 };

@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, ForeldreType } from '@navikt/fp-types';
 
 import { PermisjonPanel } from './components/PermisjonPanel';
 
@@ -11,7 +11,7 @@ import messages from '../../i18n/nb_NO.json';
 const intl = createIntl(messages);
 
 interface Props {
-  foreldreType: string;
+  foreldreType: ForeldreType;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;

@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, Avslagsarsak, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -26,7 +26,7 @@ export const ÅpentAksjonspunkt2Ledd: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     status: VilkarUtfallType.IKKE_VURDERT,
@@ -39,7 +39,7 @@ export const OppfyltVilkår2Ledd: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
     ] as Aksjonspunkt[],
@@ -56,13 +56,13 @@ export const AvslåttVilkår2Ledd: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+        avslagsarsak: '1099',
       },
     } as Behandling,
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },
     ] as Aksjonspunkt[],
@@ -78,7 +78,7 @@ export const ÅpentAksjonspunkt4Ledd: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
       },
     ] as Aksjonspunkt[],
     isReadOnly: false,
@@ -92,7 +92,7 @@ export const OppfyltVilkår4Ledd: Story = {
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
     ] as Aksjonspunkt[],
@@ -109,13 +109,13 @@ export const AvslåttVilkår4Ledd: Story = {
       uuid: '1',
       versjon: 1,
       behandlingsresultat: {
-        avslagsarsak: Avslagsarsak.INGEN_BEREGNINGSREGLER,
+        avslagsarsak: '1099',
       },
     } as Behandling,
     aksjonspunkterForPanel: [
       {
         definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },
     ] as Aksjonspunkt[],

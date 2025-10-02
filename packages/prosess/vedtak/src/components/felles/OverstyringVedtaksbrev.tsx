@@ -5,7 +5,6 @@ import { FileSearchIcon } from '@navikt/aksel-icons';
 import { Alert, Box, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
-import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { BrevOverstyring } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -69,7 +68,7 @@ export const OverstyringVedtaksbrev = ({ forhåndsvisBrev, setHarValgtÅRedigere
     if (brevOverstyring?.redigertHtml) {
       forhåndsvisBrev({
         automatiskVedtaksbrev: false,
-        dokumentMal: DokumentMalType.FRITEKST_HTML,
+        dokumentMal: 'FRIHTM',
         fritekst: brevOverstyring.redigertHtml,
       });
     }

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { Box, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import { type OmsorgOgRettProps } from '../OmsorgOgRettFaktaIndex';
@@ -25,13 +25,13 @@ export const OmsorgOgRettInfoPanel = ({ personoversikt, omsorgOgRett, kanOversty
   const opprettetAleneomsorgAPUtenResultat = aksjonspunkter.some(
     a =>
       a.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG &&
-      a.status === AksjonspunktStatus.OPPRETTET &&
+      a.status === 'OPPR' &&
       !omsorgOgRett.manuellBehandlingResultat,
   );
   const opprettetRettAPUtenResultat = aksjonspunkter.some(
     a =>
       a.definisjon === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT &&
-      a.status === AksjonspunktStatus.OPPRETTET &&
+      a.status === 'OPPR' &&
       !omsorgOgRett.manuellBehandlingResultat,
   );
   const rettAPMedResultat = aksjonspunkter.some(

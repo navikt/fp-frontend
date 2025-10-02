@@ -2,14 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  PermisjonsbeskrivelseType,
-  UttakArbeidType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, PermisjonsbeskrivelseType, UttakArbeidType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -285,12 +278,12 @@ type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
 
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -301,7 +294,7 @@ export const TilretteleggingMedVelferdspermisjon: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -317,7 +310,7 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -333,7 +326,7 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -349,7 +342,7 @@ export const HarOpphold: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -413,7 +406,7 @@ export const ErReadonly: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -472,7 +465,7 @@ export const ErRevurdering: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: true,
       },

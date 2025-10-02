@@ -2,13 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  AktivitetskravPermisjonType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -24,7 +18,7 @@ const aktivitetskravGrunnlagListe = [
     stillingsprosent: 60,
     permisjon: {
       prosent: 40,
-      type: AktivitetskravPermisjonType.UTDANNING,
+      type: 'UTDANNING',
     },
   },
   {
@@ -32,19 +26,17 @@ const aktivitetskravGrunnlagListe = [
     stillingsprosent: 50,
     permisjon: {
       prosent: 0,
-      type: AktivitetskravPermisjonType.UDEFINERT,
+      type: '-',
     },
   },
-] as AktivitetskravGrunnlagArbeid[];
+] satisfies AktivitetskravGrunnlagArbeid[];
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
-
+  status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,
-
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -78,7 +70,7 @@ const opprettetDokumentasjonVurderingBehovListe = [
     årsak: 'TIDLIG_OPPSTART_FAR',
     aktivitetskravGrunnlag: [],
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 const automatiskAvklartBehovListe = [
   {
@@ -93,12 +85,12 @@ const automatiskAvklartBehovListe = [
         stillingsprosent: 100,
         permisjon: {
           prosent: 0,
-          type: AktivitetskravPermisjonType.UDEFINERT,
+          type: '-',
         },
       },
     ],
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 const meta = {
   title: 'fakta/fakta-uttaksdokumentasjon',
@@ -116,7 +108,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -166,7 +158,7 @@ const utfortDokumentasjonVurderingBehovListe = [
     vurdering: 'IKKE_DOKUMENTERT',
     aktivitetskravGrunnlag: [],
   },
-] as DokumentasjonVurderingBehov[];
+] satisfies DokumentasjonVurderingBehov[];
 
 export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
   args: {
@@ -174,7 +166,7 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
       },
@@ -190,7 +182,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
 
         kanLoses: true,
       },

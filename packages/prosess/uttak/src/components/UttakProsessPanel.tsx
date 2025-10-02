@@ -4,13 +4,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  erAksjonspunktÅpent,
-  PeriodeResultatType,
-  StonadskontoType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, PeriodeResultatType, StonadskontoType } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -25,7 +19,7 @@ import type {
   UttakStonadskontoer,
 } from '@navikt/fp-types';
 import type { UttakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
 import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
@@ -308,9 +302,7 @@ export const UttakProsessPanel = ({
 
   const harIngenEllerLukkedeAksjonspunkt =
     aksjonspunkterForPanel.filter(ap => ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER).length === 0 ||
-    aksjonspunkterForPanel.some(
-      ap => ap.toTrinnsBehandlingGodkjent === true && ap.status === AksjonspunktStatus.UTFORT,
-    );
+    aksjonspunkterForPanel.some(ap => ap.toTrinnsBehandlingGodkjent === true && ap.status === 'UTFO');
 
   const harOverstyrAp = aksjonspunkterForPanel.some(
     ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,

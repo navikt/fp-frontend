@@ -1,19 +1,5 @@
 import {
-  AdresseType,
-  AktivitetskravPermisjonType,
-  AktivitetStatus,
-  AnkeOmgjorArsak,
   Arbeidskategori,
-  ArbeidType,
-  Avslagsarsak,
-  BehandlingResultatType,
-  FagsakMarkeringKode,
-  FaktaOmBeregningTilfelle,
-  FamilieHendelseType,
-  FaresignalVurdering,
-  FarSøkerType,
-  FordelingPeriodeKilde,
-  ForeldreType,
   GraderingAvslagÅrsak,
   InnsynResultatType,
   Inntektskategori,
@@ -52,11 +38,25 @@ import {
   VurderÅrsak,
 } from '@navikt/fp-kodeverk';
 
+import type { AdresseType } from './adresseType';
+import type { AktivitetskravPermisjonType } from './aktivitetskravPermisjonType';
+import type { AktivitetStatus } from './aktivitetStatus';
+import type { AnkeOmgjorArsak } from './ankeOmgjorArsak';
+import type { ArbeidType } from './arbeidType';
+import type { Avslagsarsak } from './avslagsarsakCodes';
 import type { BehandlingArsakType } from './behandlingArsakType';
+import type { BehandlingResultatType } from './behandlingResultatType';
 import type { BehandlingStatus } from './behandlingStatus';
 import type { BehandlingType } from './behandlingType';
+import type { FagsakMarkeringType } from './fagsakMarkeringType';
 import type { FagsakStatus } from './fagsakStatus';
 import type { FagsakYtelseType } from './fagsakYtelseType';
+import type { FaktaOmBeregningTilfelle } from './faktaOmBeregningTilfelle';
+import type { FamilieHendelseType } from './familieHendelseType';
+import type { FaresignalVurdering } from './faresignalVurdering';
+import type { FarSøkerType } from './farSøkerType';
+import type { FordelingPeriodeKilde } from './fordelingPeriodeKilde';
+import type { ForeldreType } from './foreldreType';
 import type { HistorikkAktor } from './historikkAktor';
 import type { KonsekvensForYtelsen } from './konsekvensForYtelsen';
 import type { VergeType } from './vergeTsType';
@@ -78,7 +78,7 @@ type KodeverkEnumMap = {
   FaresignalVurdering: FaresignalVurdering;
   FagsakStatus: FagsakStatus;
   FagsakYtelseType: FagsakYtelseType;
-  FagsakMarkering: FagsakMarkeringKode;
+  FagsakMarkering: FagsakMarkeringType;
   FaktaOmBeregningTilfelle: FaktaOmBeregningTilfelle;
   FarSøkerType: FarSøkerType;
   FordelingPeriodeKilde: FordelingPeriodeKilde;

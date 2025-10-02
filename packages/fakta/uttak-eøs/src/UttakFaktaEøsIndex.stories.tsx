@@ -2,14 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  RelasjonsRolleType,
-  UttakPeriodeType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, RelasjonsRolleType, UttakPeriodeType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 
@@ -17,12 +10,12 @@ import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
 
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -86,7 +79,7 @@ export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
       {
         ...aksjonspunktDefault,
         begrunnelse: 'Dette er en begrunnelse',
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       },
     ],
@@ -101,7 +94,7 @@ export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSom
       {
         ...aksjonspunktDefault,
 
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
       },
     ],

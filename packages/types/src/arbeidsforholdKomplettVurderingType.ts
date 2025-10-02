@@ -1,0 +1,4 @@
+import type { foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType } from './apiDtoGenerert';
+
+export type ArbeidsforholdKomplettVurderingType =
+  foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;

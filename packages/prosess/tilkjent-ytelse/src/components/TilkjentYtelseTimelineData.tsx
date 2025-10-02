@@ -5,7 +5,6 @@ import { ArrowLeftIcon, ArrowRightIcon, XMarkIcon } from '@navikt/aksel-icons';
 import { BodyShort, Box, Button, HStack, Label, Table, VStack } from '@navikt/ds-react';
 import { calcDaysAndWeeks, dateFormat, formaterArbeidsgiver } from '@navikt/ft-utils';
 
-import { AktivitetStatus } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -165,7 +164,7 @@ export const TilkjentYtelseTimelineData = ({
                   </Table.DataCell>
                   <Table.DataCell>
                     <BodyShort size="small">
-                      {andel.aktivitetStatus === AktivitetStatus.ARBEIDSTAKER && andel.refusjon ? andel.refusjon : ''}
+                      {andel.aktivitetStatus === 'AT' && andel.refusjon ? andel.refusjon : ''}
                     </BodyShort>
                   </Table.DataCell>
                   <Table.DataCell>
@@ -205,19 +204,19 @@ const findAndelsnavn = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | string => {
   switch (andel.aktivitetStatus) {
-    case AktivitetStatus.ARBEIDSTAKER:
+    case 'AT':
       return createVisningNavnForUttakArbeidstaker(andel, alleKodeverk, arbeidsgiverOpplysningerPerId);
-    case AktivitetStatus.FRILANSER:
+    case 'FL':
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Frilans" />;
-    case AktivitetStatus.SELVSTENDIG_NAERINGSDRIVENDE:
+    case 'SN':
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.SelvstendigNaeringsdrivende" />;
-    case AktivitetStatus.DAGPENGER:
+    case 'DP':
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Dagpenger" />;
-    case AktivitetStatus.ARBEIDSAVKLARINGSPENGER:
+    case 'AAP':
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.AAP" />;
-    case AktivitetStatus.MILITAER_ELLER_SIVIL:
+    case 'MS':
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.Militaer" />;
-    case AktivitetStatus.BRUKERS_ANDEL:
+    case 'BA':
       return <FormattedMessage id="TilkjentYtelse.PeriodeData.BrukersAndel" />;
 
     default:

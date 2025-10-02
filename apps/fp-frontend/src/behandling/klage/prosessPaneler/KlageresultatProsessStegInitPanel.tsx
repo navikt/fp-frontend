@@ -6,10 +6,11 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, BehandlingResultatType, erAksjonspunktÅpent, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakKlageForhandsvisData, VedtakKlageProsessIndex } from '@navikt/fp-prosess-vedtak-klage';
 import type { Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
+import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -87,16 +88,10 @@ const getVedtakStatus = (behandlingsresultat?: Behandlingsresultat, aksjonspunkt
   }
 
   const resultatTypeCode = behandlingsresultat?.type;
-  if (
-    resultatTypeCode === BehandlingResultatType.HENLAGT_KLAGE_TRUKKET ||
-    resultatTypeCode === BehandlingResultatType.HENLAGT_FEILOPPRETTET
-  ) {
+  if (resultatTypeCode === 'HENLAGT_KLAGE_TRUKKET' || resultatTypeCode === 'HENLAGT_FEILOPPRETTET') {
     return VilkarUtfallType.IKKE_VURDERT;
   }
-  if (
-    resultatTypeCode === BehandlingResultatType.KLAGE_AVVIST ||
-    resultatTypeCode === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET
-  ) {
+  if (resultatTypeCode === 'KLAGE_AVVIST' || resultatTypeCode === 'KLAGE_YTELSESVEDTAK_OPPHEVET') {
     return VilkarUtfallType.IKKE_OPPFYLT;
   }
   return VilkarUtfallType.OPPFYLT;

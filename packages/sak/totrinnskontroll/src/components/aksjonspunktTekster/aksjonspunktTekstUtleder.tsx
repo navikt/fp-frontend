@@ -3,12 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { dateFormat } from '@navikt/ft-utils';
 
-import {
-  AksjonspunktKode,
-  BehandlingResultatType,
-  isFaktaUttakAksjonspunkt,
-  isUttakAksjonspunkt,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, isFaktaUttakAksjonspunkt, isUttakAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
   foreldrepenger_behandlingslager_behandling_BehandlingStatus,
@@ -123,25 +118,25 @@ const getTextForKlageHelper = (
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage> => {
   let aksjonspunktTextId = '';
   switch (behandlingsresultat?.type) {
-    case BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET:
+    case 'KLAGE_YTELSESVEDTAK_STADFESTET':
       aksjonspunktTextId = 'ToTrinnsForm.Klage.StadfesteYtelsesVedtak';
       break;
-    case BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET:
+    case 'KLAGE_YTELSESVEDTAK_OPPHEVET':
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OppheveYtelsesVedtak';
       break;
-    case BehandlingResultatType.KLAGE_AVVIST:
+    case 'KLAGE_AVVIST':
       aksjonspunktTextId = 'ToTrinnsForm.Klage.Avvist';
       break;
-    case BehandlingResultatType.HJEMSENDE_UTEN_OPPHEVE:
+    case 'HJEMSENDE_UTEN_OPPHEVE':
       aksjonspunktTextId = 'ToTrinnsForm.Klage.HjemsendUtenOpphev';
       break;
-    case BehandlingResultatType.KLAGE_DELVIS_MEDHOLD:
+    case 'KLAGE_DELVIS_MEDHOLD':
       aksjonspunktTextId = 'ToTrinnsForm.Klage.DelvisOmgjortTilGunst';
       break;
-    case BehandlingResultatType.KLAGE_OMGJORT_UGUNST:
+    case 'KLAGE_OMGJORT_UGUNST':
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OmgjortTilUgunst';
       break;
-    case BehandlingResultatType.KLAGE_MEDHOLD:
+    case 'KLAGE_MEDHOLD':
       aksjonspunktTextId = 'ToTrinnsForm.Klage.OmgjortTilGunst';
       break;
     default:

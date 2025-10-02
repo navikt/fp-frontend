@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { DokumentMalType } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -12,7 +11,7 @@ import {
   withQueryClient,
   withRouter,
 } from '@navikt/fp-storybook-utils';
-import type { BehandlingAppKontekst, BehandlingOppretting, Fagsak } from '@navikt/fp-types';
+import type { BehandlingAppKontekst, BehandlingOppretting, DokumentMalType, Fagsak } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
@@ -39,8 +38,8 @@ const MALER = [
   { kode: 'Mal1', navn: 'Mal 1', tilgjengelig: true },
   { kode: 'Mal2', navn: 'Mal 2', tilgjengelig: true },
   { kode: 'Mal3', navn: 'Mal 3', tilgjengelig: true },
-  { kode: DokumentMalType.VARSEL_OM_REVURDERING, navn: 'Varsel om revurdering', tilgjengelig: true },
-  { kode: DokumentMalType.INNHENTE_OPPLYSNINGER, navn: 'Innhent', tilgjengelig: true },
+  { kode: 'VARREV' satisfies DokumentMalType, navn: 'Varsel om revurdering', tilgjengelig: true },
+  { kode: 'INNOPP' satisfies DokumentMalType, navn: 'Innhent', tilgjengelig: true },
 ];
 
 const BEHANDLING_TILLATTE_OPERASJONER = {

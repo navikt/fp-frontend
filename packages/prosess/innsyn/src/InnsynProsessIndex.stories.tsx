@@ -2,14 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  InnsynResultatType,
-  Kommunikasjonsretning,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, InnsynResultatType, Kommunikasjonsretning, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Innsyn, InnsynDokument } from '@navikt/fp-types';
 
@@ -23,12 +16,10 @@ const defaultBehandling = {
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.VURDER_INNSYN,
-  status: AksjonspunktStatus.OPPRETTET,
-
+  status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,
-
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -80,7 +71,7 @@ export const InnsynSattPaVent: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
       },
     ],

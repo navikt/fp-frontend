@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
 import { withQueryClient, withRouter } from '@navikt/fp-storybook-utils';
 import type { NavAnsatt } from '@navikt/fp-types';
 
@@ -79,7 +78,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           status: 'LOP',
           familieHendelseJf: {
             familiehHendelseDato: '2022-04-15',
-            familihendelseType: FamilieHendelseType.FODSEL,
+            familihendelseType: 'FODSL',
           },
         },
         {
@@ -90,7 +89,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           status: 'UBEH',
           familieHendelseJf: {
             familiehHendelseDato: '2022-04-15',
-            familihendelseType: FamilieHendelseType.ADOPSJON,
+            familihendelseType: 'ADPSJN',
           },
         },
         {
@@ -100,7 +99,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           status: 'AVSLU',
           familieHendelseJf: {
             familiehHendelseDato: '2022-02-01',
-            familihendelseType: FamilieHendelseType.TERMIN,
+            familihendelseType: 'TERM',
           },
         },
         {
@@ -111,7 +110,7 @@ const getDetaljertJournalpostMal = (medBruker: boolean, tilstand: JournalpostTil
           status: 'OPPR',
           familieHendelseJf: {
             familiehHendelseDato: '2022-03-01',
-            familihendelseType: FamilieHendelseType.OMSORG,
+            familihendelseType: 'OMSRGO',
           },
         },
       ]

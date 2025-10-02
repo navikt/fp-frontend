@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { applyRequestHandlers, type MswParameters } from 'msw-storybook-addon';
 
-import { DokumentMalType } from '@navikt/fp-kodeverk';
+import type { DokumentMalType } from '@navikt/fp-types';
 
 import * as stories from './MeldingIndex.stories';
 
@@ -42,7 +42,7 @@ describe('MeldingIndex', () => {
     expect(await screen.findByText('Meldinger')).toBeInTheDocument();
     expect(screen.getByLabelText('Utvid behandling detaljer panel')).toBeInTheDocument();
 
-    await userEvent.selectOptions(screen.getByLabelText('Mal'), DokumentMalType.INNHENTE_OPPLYSNINGER);
+    await userEvent.selectOptions(screen.getByLabelText('Mal'), 'INNOPP' satisfies DokumentMalType);
 
     const begrunnelseInput = screen.getByLabelText('Liste over dokumenter (skriv ett dokument pr. linje)');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');

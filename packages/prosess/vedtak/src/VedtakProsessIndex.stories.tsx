@@ -5,11 +5,6 @@ import { action } from 'storybook/actions';
 
 import {
   AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  Avslagsarsak,
-  BehandlingResultatType,
-  FagsakMarkeringKode,
   OppgaveType,
   RelasjonsRolleType,
   VedtakbrevType,
@@ -35,12 +30,12 @@ import { VedtakProsessIndex } from './VedtakProsessIndex';
 
 const defaultAksjonspunkt = {
   definisjon: AksjonspunktKode.FORESLA_VEDTAK,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
 
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -53,7 +48,7 @@ const defaultBehandling = {
   status: 'UTRED',
   språkkode: 'NB',
   behandlingsresultat: {
-    type: BehandlingResultatType.INNVILGET,
+    type: 'INNVILGET',
     vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
     id: 0,
     harRedigertVedtaksbrev: false,
@@ -202,7 +197,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       status: 'AVSLU',
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         harRedigertVedtaksbrev: true,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -220,7 +215,7 @@ export const AvslåttForeldrepengerTilGodkjenningForSaksbehandlerMedOverstyring:
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        type: BehandlingResultatType.AVSLATT,
+        type: 'AVSLÅTT',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -239,7 +234,7 @@ export const GodkjentAvslagForForeldrepengerForSaksbehandlerMedOverstyring: Stor
       ...defaultBehandling,
       status: 'AVSLU',
       behandlingsresultat: {
-        type: BehandlingResultatType.AVSLATT,
+        type: 'AVSLÅTT',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -278,7 +273,7 @@ export const AvslåttForeldrepengerDerBeregningErManueltFastsatt: Story = {
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        type: BehandlingResultatType.AVSLATT,
+        type: 'AVSLÅTT',
         avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -312,7 +307,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
 
           kanLoses: false,
           toTrinnsBehandling: true,
@@ -320,21 +315,21 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
 
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
 
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
 
           kanLoses: false,
           toTrinnsBehandling: true,
@@ -368,7 +363,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
           begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,
           toTrinnsBehandling: true,
@@ -376,7 +371,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         {
           ...defaultAksjonspunkt,
           definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
-          status: AksjonspunktStatus.OPPRETTET,
+          status: 'OPPR',
           begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,
         },
@@ -574,7 +569,7 @@ export const AvslåttEngangsstønadDerBeregningErManueltFastsatt: Story = {
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        type: BehandlingResultatType.AVSLATT,
+        type: 'AVSLÅTT',
         avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -620,7 +615,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerUte
       ...defaultBehandling,
       type: 'BT-004',
       behandlingsresultat: {
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         konsekvenserForYtelsen: ['ENDRING_I_BEREGNING', 'FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -641,7 +636,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerUtenOverstyring: S
       type: 'BT-004',
       status: 'AVSLU',
       behandlingsresultat: {
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         konsekvenserForYtelsen: ['ENDRING_I_BEREGNING', 'FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -661,7 +656,7 @@ export const InnvilgetRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMed
       ...defaultBehandling,
       type: 'BT-004',
       behandlingsresultat: {
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         konsekvenserForYtelsen: ['ENDRING_I_BEREGNING', 'FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -682,7 +677,7 @@ export const GodkjentRevurderingForeldrepengerForSaksbehandlerMedOverstyring: St
       type: 'BT-004',
       status: 'AVSLU',
       behandlingsresultat: {
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         konsekvenserForYtelsen: ['ENDRING_I_BEREGNING', 'FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -704,7 +699,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       status: 'AVSLU',
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         konsekvenserForYtelsen: ['FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -724,7 +719,7 @@ export const AvslåttRevurderingForeldrepengerTilGodkjenningForSaksbehandlerMedO
       ...defaultBehandling,
       type: 'BT-004',
       behandlingsresultat: {
-        type: BehandlingResultatType.AVSLATT,
+        type: 'AVSLÅTT',
         avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -745,7 +740,7 @@ export const GodkjentRevurderingAvslagForForeldrepengerForSaksbehandlerMedOverst
       type: 'BT-004',
       status: 'AVSLU',
       behandlingsresultat: {
-        type: BehandlingResultatType.AVSLATT,
+        type: 'AVSLÅTT',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -764,7 +759,7 @@ export const OpphørForRevurderingForeldrepengerForSaksbehandlerMedOverstyring: 
       ...defaultBehandling,
       type: 'BT-004',
       behandlingsresultat: {
-        type: BehandlingResultatType.OPPHOR,
+        type: 'OPPHØR',
         opphørsdato: '2024-11-01',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -784,7 +779,7 @@ export const InnvilgetForRevurderingForeldrepengerDerBeregningErManueltFastsatt:
       ...defaultBehandling,
       type: 'BT-004',
       behandlingsresultat: {
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         konsekvenserForYtelsen: ['ENDRING_I_BEREGNING'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -815,9 +810,9 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
       ...defaultBehandling,
       type: 'BT-004',
       behandlingsresultat: {
-        type: BehandlingResultatType.AVSLATT,
+        type: 'AVSLÅTT',
         konsekvenserForYtelsen: ['ENDRING_I_BEREGNING'],
-        avslagsarsak: Avslagsarsak.MANN_ADOPTERER_IKKE_ALENE,
+        avslagsarsak: '1006',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
         harRedigertVedtaksbrev: false,
@@ -855,7 +850,7 @@ export const OpphørForRevurderingForeldrepengerDerBeregningErManueltFastsatt: S
       ...defaultBehandling,
       type: 'BT-004',
       behandlingsresultat: {
-        type: BehandlingResultatType.OPPHOR,
+        type: 'OPPHØR',
         opphørsdato: '2024-11-01',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
         id: 0,
@@ -887,7 +882,7 @@ export const LegacyOverstyring: Story = {
       status: 'AVSLU',
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -909,7 +904,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
       status: 'OPPRE',
       behandlingsresultat: {
         vedtaksbrev: VedtakbrevType.FRITEKST,
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -954,7 +949,7 @@ export const SkalKunneRedigereFooterNårEnHarFagsakmarkeringPraksisUtsettelse: S
       },
       fagsakMarkeringer: [
         {
-          fagsakMarkering: FagsakMarkeringKode.PRAKSIS_UTSETTELSE,
+          fagsakMarkering: 'PRAKSIS_UTSETTELSE',
           kortNavn: 'Utsettelse',
         },
       ],
@@ -969,7 +964,7 @@ export const SkalIkkeProduseresBrev: Story = {
     behandling: {
       ...defaultBehandling,
       behandlingsresultat: {
-        type: BehandlingResultatType.INNVILGET,
+        type: 'INNVILGET',
         avslagsarsakFritekst: 'Dette er ein fritekst',
         vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',
         id: 0,

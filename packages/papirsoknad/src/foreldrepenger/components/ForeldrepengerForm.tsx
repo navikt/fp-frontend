@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 import { HGrid } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
-import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import {
   AndreYtelserPapirsoknadIndex,
   AnnenForelderPapirsoknadIndex,
@@ -107,7 +106,7 @@ export const ForeldrepengerForm = ({
         <MottattDatoPapirsoknadIndex readOnly={readOnly} />
         <OppholdINorgePapirsoknadIndex
           readOnly={readOnly}
-          erAdopsjon={soknadData.getFamilieHendelseType() === FamilieHendelseType.ADOPSJON}
+          erAdopsjon={soknadData.getFamilieHendelseType() === 'ADPSJN'}
           alleKodeverk={alleKodeverk}
           mottattDato={mottattDato}
         />
@@ -116,7 +115,7 @@ export const ForeldrepengerForm = ({
         <FrilansPapirsoknadIndex readOnly={readOnly} />
         <AndreYtelserPapirsoknadIndex readOnly={readOnly} alleKodeverk={alleKodeverk} />
         <DekningsgradIndex readOnly={readOnly} />
-        {soknadData.getFamilieHendelseType() === FamilieHendelseType.FODSEL && (
+        {soknadData.getFamilieHendelseType() === 'FODSL' && (
           <TerminOgFodselPanel readOnly={readOnly} erForeldrepenger />
         )}
         <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
@@ -130,7 +129,7 @@ export const ForeldrepengerForm = ({
           readOnly={readOnly}
           alleKodeverk={alleKodeverk}
           fagsakPersonnummer={fagsakPersonnummer}
-          sokerErMor={soknadData.getForeldreType() === ForeldreType.MOR}
+          sokerErMor={soknadData.getForeldreType() === 'MOR'}
         />
         <PermisjonIndex
           foreldreType={soknadData.getForeldreType()}

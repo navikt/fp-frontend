@@ -5,8 +5,8 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import { ForeldreType, OverforingArsak } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import { OverforingArsak } from '@navikt/fp-kodeverk';
+import type { AlleKodeverk, ForeldreType, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
 import type { FormValuesOverforing, PermisjonFormValues } from '../../types';
@@ -46,7 +46,7 @@ const mapArsaker = (
     );
 
 interface Props {
-  foreldreType: string;
+  foreldreType: ForeldreType;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;
@@ -62,7 +62,7 @@ export const PermisjonOverforingAvKvoterPanel = ({ foreldreType, alleKodeverk, r
   const intl = useIntl();
 
   const overtaKvoteReasons = alleKodeverk['OverføringÅrsak'];
-  const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === ForeldreType.MOR, erEndringssøknad, intl);
+  const selectValues = mapArsaker(overtaKvoteReasons, foreldreType === 'MOR', erEndringssøknad, intl);
 
   const { watch, control } = useFormContext<PermisjonFormValues>();
   const skalOvertaKvote = watch(`${TIDSROM_PERMISJON_FORM_NAME_PREFIX}.skalOvertaKvote`) || false;

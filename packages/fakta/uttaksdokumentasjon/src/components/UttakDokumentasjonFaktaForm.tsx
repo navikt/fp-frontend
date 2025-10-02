@@ -6,7 +6,7 @@ import { Alert, Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -70,7 +70,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
 
   return (
     <VStack gap="space-24">
-      {aksjonspunkterForPanel.some(a => a.status === AksjonspunktStatus.OPPRETTET) && (
+      {aksjonspunkterForPanel.some(a => a.status === 'OPPR') && (
         <Alert variant="warning">
           <FormattedMessage id="UttakDokumentasjonFaktaForm.AksjonspunktHjelpetekst" />
         </Alert>

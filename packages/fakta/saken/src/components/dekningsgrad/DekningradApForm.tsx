@@ -7,7 +7,7 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, AksjonspunktStatus, NavBrukerKjonn } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -49,7 +49,7 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
   });
   const { annenPart: dgAnnenpart, søker: dgSøker } = søknad.oppgittFordeling?.dekningsgrader ?? {};
 
-  const erAksjonspunktApent = aksjonspunkt.status === AksjonspunktStatus.OPPRETTET;
+  const erAksjonspunktApent = aksjonspunkt.status === 'OPPR';
 
   const erIkkeGodkjentAvBeslutter = !!alleMerknaderFraBeslutter[aksjonspunkt.definisjon]?.notAccepted;
 

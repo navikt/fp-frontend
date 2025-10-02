@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ErrorMessage, Heading, VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, ForeldreType } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import {
@@ -25,7 +25,7 @@ import { PermisjonOverforingAvKvoterPanel } from './overforeKvote/PermisjonOverf
 import { PermisjonUtsettelsePanel } from './utsettelse/PermisjonUtsettelsePanel';
 
 interface Props {
-  foreldreType: string;
+  foreldreType: ForeldreType;
   readOnly: boolean;
   alleKodeverk: AlleKodeverk;
   erEndringssøknad: boolean;

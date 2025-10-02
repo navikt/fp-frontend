@@ -5,8 +5,6 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
-
 import { OmsorgOgAdopsjonPapirsoknadIndex } from './OmsorgOgAdopsjonPapirsoknadIndex';
 
 const meta = {
@@ -45,12 +43,12 @@ type Story = StoryObj<typeof meta>;
 
 export const ForFodsel: Story = {
   args: {
-    familieHendelseType: FamilieHendelseType.FODSEL,
+    familieHendelseType: 'FODSL',
   },
 };
 
 export const ForAdopsjon: Story = {
   args: {
-    familieHendelseType: FamilieHendelseType.ADOPSJON,
+    familieHendelseType: 'ADPSJN',
   },
 };

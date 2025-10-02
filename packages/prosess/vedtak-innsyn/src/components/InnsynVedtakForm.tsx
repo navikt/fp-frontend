@@ -7,14 +7,9 @@ import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, DokumentMalType, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import type {
-  Aksjonspunkt,
-  Dokument,
-  foreldrepenger_dokumentbestiller_DokumentMalType,
-  InnsynDokument,
-} from '@navikt/fp-types';
+import type { Aksjonspunkt, Dokument, DokumentMalType, InnsynDokument } from '@navikt/fp-types';
 import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -28,7 +23,7 @@ const minLength3 = minLength(3);
 export type VedtakInnsynForhandsvisData = {
   fritekst: string;
   mottaker: string;
-  dokumentMal: foreldrepenger_dokumentbestiller_DokumentMalType;
+  dokumentMal: DokumentMalType;
 };
 
 const getPreviewCallback =
@@ -39,7 +34,7 @@ const getPreviewCallback =
     const data = {
       fritekst: begrunnelse ?? ' ',
       mottaker: '',
-      dokumentMal: DokumentMalType.INNSYN_SVAR as const,
+      dokumentMal: 'INNSYN' as const,
     };
     previewCallback(data);
   };

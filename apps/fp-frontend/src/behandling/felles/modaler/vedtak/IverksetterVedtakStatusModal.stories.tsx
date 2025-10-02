@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { BehandlingResultatType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { IverksetterVedtakStatusModal } from './IverksetterVedtakStatusModal';
@@ -28,7 +27,7 @@ export const VisIverksetterVedtakInnvilget: Story = {};
 export const VisIverksetterVedtakAvslatt: Story = {
   args: {
     behandlingsresultat: {
-      type: BehandlingResultatType.AVSLATT,
+      type: 'AVSLÅTT',
       id: 1,
 
       vedtaksbrevStatus: 'INGEN_VEDTAKSBREV',

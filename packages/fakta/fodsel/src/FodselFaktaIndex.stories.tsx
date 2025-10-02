@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import {
   type PanelDataArgs,
   type PanelOverstyringContextArgs,
@@ -16,12 +16,12 @@ import { FodselFaktaIndex } from './FodselFaktaIndex';
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
 
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -314,9 +314,7 @@ export const APSjekkManglendeFødselUtenTermindatoFraSøknad = {
 export const APSjekkManglendeFødselUtførtOgUtført: Story = {
   args: {
     isReadOnly: true,
-    aksjonspunkterForPanel: [
-      { ...apSjekkManglendeFødsel, status: AksjonspunktStatus.UTFORT, begrunnelse: 'Dette er en begrunnelse' },
-    ],
+    aksjonspunkterForPanel: [{ ...apSjekkManglendeFødsel, status: 'UTFO', begrunnelse: 'Dette er en begrunnelse' }],
     alleMerknaderFraBeslutter: {
       [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
     },
@@ -396,7 +394,7 @@ export const OverstyrtSettSomOverstyrer: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Denne saken har blitt overstyrt',
         kanLoses: false,
       },
@@ -413,7 +411,7 @@ export const OverstyrtSettSomSBH: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-        status: AksjonspunktStatus.UTFORT,
+        status: 'UTFO',
         begrunnelse: 'Denne saken har blitt overstyrt',
         kanLoses: false,
       },

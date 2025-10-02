@@ -4,7 +4,6 @@ import { ArrowForwardIcon } from '@navikt/aksel-icons';
 import { BodyShort, Label, Link, VStack } from '@navikt/ds-react';
 import { AvsnittSkiller } from '@navikt/ft-ui-komponenter';
 
-import { DokumentMalType } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData';
@@ -27,7 +26,7 @@ export const LegacyOverstyrtVedtaksbrev = ({ forhåndsvisOverstyrtBrev, behandli
         onClick={() => {
           forhåndsvisOverstyrtBrev({
             automatiskVedtaksbrev: false,
-            dokumentMal: DokumentMalType.FRITEKST,
+            dokumentMal: 'FRITEK',
             tittel: overskrift ?? undefined,
             fritekst: fritekstbrev ?? undefined,
           });

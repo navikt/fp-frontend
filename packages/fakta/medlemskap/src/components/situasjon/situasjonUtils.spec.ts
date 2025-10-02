@@ -1,7 +1,7 @@
 import { createIntl } from '@navikt/ft-utils';
 import { expect } from 'vitest';
 
-import { AdresseType, PersonstatusType, Region } from '@navikt/fp-kodeverk';
+import { PersonstatusType, Region } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { Medlemskap, Personadresse } from '@navikt/fp-types';
 
@@ -57,19 +57,19 @@ describe('situasjonUtils', () => {
           {
             fom: '2022-06-02',
             tom: '2025-02-01',
-            adresseType: AdresseType.BOSTEDSADRESSE,
+            adresseType: 'BOSTEDSADRESSE',
             land: 'Norge',
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
-            adresseType: AdresseType.BOSTEDSADRESSE,
+            adresseType: 'BOSTEDSADRESSE',
             land: 'Finland',
           },
           {
             fom: '2022-07-01',
             tom: '2025-02-01',
-            adresseType: AdresseType.POSTADRESSE,
+            adresseType: 'POSTADRESSE',
             land: 'USA',
           },
         ] satisfies Personadresse[],

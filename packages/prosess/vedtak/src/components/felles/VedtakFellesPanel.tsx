@@ -5,9 +5,18 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
 
-import { AksjonspunktKode, Avslagsarsak, isAvslag, isInnvilget, isOpphor } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, Behandling, Behandlingsresultat, BehandlingStatus, Oppgave } from '@navikt/fp-types';
+import {
+  type Aksjonspunkt,
+  type Behandling,
+  type Behandlingsresultat,
+  type BehandlingStatus,
+  isAvslag,
+  isInnvilget,
+  isOpphor,
+  type Oppgave,
+} from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import type { VedtakForhåndsvisData } from '../../types/VedtakForhåndsvisData.ts';
@@ -31,7 +40,7 @@ const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBre
     : 'VedtakForm.FattVedtak';
 
 const finnSkalViseLink = (behandlingsresultat: Behandlingsresultat): boolean =>
-  behandlingsresultat.avslagsarsak ? behandlingsresultat.avslagsarsak !== Avslagsarsak.INGEN_BEREGNINGSREGLER : true;
+  behandlingsresultat.avslagsarsak ? behandlingsresultat.avslagsarsak !== '1099' : true;
 
 const harIkkeKonsekvenserForYtelsen = (
   konsekvenserForYtelsenKoder: string[],

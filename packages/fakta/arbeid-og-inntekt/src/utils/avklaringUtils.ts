@@ -1,4 +1,3 @@
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold, Inntektsmelding } from '@navikt/fp-types';
 
 import type { Avklaring } from '../types/arbeidsforholdOgInntekt';
@@ -12,8 +11,8 @@ export const lagAvklaringFraArbeidsforhold = (
     return undefined;
   }
   if (
-    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER ||
-    arbeidsforhold.saksbehandlersVurdering === ArbeidsforholdKomplettVurderingType.OPPRETT_BASERT_PÅ_INNTEKTSMELDING
+    arbeidsforhold.saksbehandlersVurdering === 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER' ||
+    arbeidsforhold.saksbehandlersVurdering === 'OPPRETT_BASERT_PÅ_INNTEKTSMELDING'
   ) {
     return {
       arbeidsgiverNavn,

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 import { HGrid, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, AksjonspunktStatus } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Fødsel } from '@navikt/fp-types';
 import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -41,12 +41,8 @@ export const FodselInfoPanel = ({ fødsel, terminbekreftelseDokument }: Props) =
       )}
 
       <AksjonspunktHelpTextHTML>
-        {terminbekreftelseAp?.status === AksjonspunktStatus.OPPRETTET && (
-          <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />
-        )}
-        {manglendeFødselAp?.status === AksjonspunktStatus.OPPRETTET && (
-          <FormattedMessage id="FodselInfoPanel.SjekkManglendeFødsel" />
-        )}
+        {terminbekreftelseAp?.status === 'OPPR' && <FormattedMessage id="FodselInfoPanel.SjekkTerminbekreftelse" />}
+        {manglendeFødselAp?.status === 'OPPR' && <FormattedMessage id="FodselInfoPanel.SjekkManglendeFødsel" />}
       </AksjonspunktHelpTextHTML>
 
       <Situasjon gjeldende={fødsel.gjeldende} />

@@ -1,4 +1,3 @@
-import { FamilieHendelseType, ForeldreType } from '@navikt/fp-kodeverk';
 import {
   OmsorgOgAdopsjonPapirsoknadIndex,
   OppholdINorgePapirsoknadIndex,
@@ -19,10 +18,10 @@ interface Props {
 
 export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fodselsdato, mottattDato }: Props) => (
   <>
-    {soknadData.getForeldreType() !== ForeldreType.MOR && (
+    {soknadData.getForeldreType() !== 'MOR' && (
       <RettigheterPapirsoknadIndex readOnly={readOnly} soknadData={soknadData} />
     )}
-    {soknadData.getForeldreType() !== ForeldreType.MOR && (
+    {soknadData.getForeldreType() !== 'MOR' && (
       <OmsorgOgAdopsjonPapirsoknadIndex
         readOnly={readOnly}
         familieHendelseType={soknadData.getFamilieHendelseType()}
@@ -31,7 +30,7 @@ export const RegistreringFodselGrid = ({ readOnly, soknadData, alleKodeverk, fod
     )}
     <OppholdINorgePapirsoknadIndex
       readOnly={readOnly}
-      erAdopsjon={soknadData.getFamilieHendelseType() === FamilieHendelseType.ADOPSJON}
+      erAdopsjon={soknadData.getFamilieHendelseType() === 'ADPSJN'}
       alleKodeverk={alleKodeverk}
       mottattDato={mottattDato}
     />

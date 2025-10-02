@@ -2,8 +2,8 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
-import type { BehandlingAppKontekst } from '@navikt/fp-types';
+import { RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
+import type { BehandlingAppKontekst, DokumentMalType } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
 
@@ -22,12 +22,12 @@ const withStyleProvider: DecoratorFunction<ReactRenderer> = Story => (
 
 const TEMPLATES = [
   {
-    kode: DokumentMalType.INNHENTE_OPPLYSNINGER,
+    kode: 'INNOPP' satisfies DokumentMalType,
     navn: 'Innhent dokumentasjon',
     tilgjengelig: true,
   },
   {
-    kode: DokumentMalType.VARSEL_OM_REVURDERING,
+    kode: 'VARREV' satisfies DokumentMalType,
     navn: 'Revurderingsdokumentasjon',
     tilgjengelig: true,
   },

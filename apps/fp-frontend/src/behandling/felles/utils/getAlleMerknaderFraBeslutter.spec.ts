@@ -1,4 +1,4 @@
-import { AksjonspunktKode, AksjonspunktStatus, AksjonspunktType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
@@ -6,7 +6,7 @@ import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
 describe('getAlleMerknaderFraBeslutter', () => {
   const aksjonspunkter: Aksjonspunkt[] = [
     {
-      status: AksjonspunktStatus.OPPRETTET,
+      status: 'OPPR',
       definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
 
       kanLoses: true,
@@ -14,7 +14,7 @@ describe('getAlleMerknaderFraBeslutter', () => {
       toTrinnsBehandlingGodkjent: false,
       vilkarType: VilkarType.FODSELSVILKARET_MOR,
 
-      aksjonspunktType: AksjonspunktType.MANUELL,
+      aksjonspunktType: 'MANU',
       erAktivt: true,
     },
   ];

@@ -2,7 +2,7 @@ import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { render, screen, within } from '@testing-library/react';
 import { expect } from 'vitest';
 
-import { AdresseType, SivilstandType } from '@navikt/fp-kodeverk';
+import { SivilstandType } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import { KjønnkodeEnum, type Personadresse, type Personoversikt } from '@navikt/fp-types';
 
@@ -11,7 +11,7 @@ import { PersonopplysningerForFamilie } from './PersonopplysningerForFamilie';
 const adresse1 = {
   fom: '2023-01-01',
   tom: TIDENES_ENDE,
-  adresseType: AdresseType.BOSTEDSADRESSE,
+  adresseType: 'BOSTEDSADRESSE',
   adresselinje1: 'Industrigata 2B',
   postNummer: '4123',
   poststed: 'Bobygda',
@@ -21,7 +21,7 @@ const adresse1 = {
 const adresse2 = {
   fom: '2019-01-01',
   tom: '2022-12-31',
-  adresseType: AdresseType.BOSTEDSADRESSE_UTLAND,
+  adresseType: 'BOSTEDSADRESSE_UTLAND',
   adresselinje1: 'Veigata 1',
   postNummer: '0203',
   poststed: 'Bobygda',

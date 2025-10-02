@@ -18,8 +18,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 
-import { ArbeidsforholdKomplettVurderingType } from '@navikt/fp-kodeverk';
-import type { ManueltArbeidsforhold } from '@navikt/fp-types';
+import type { ArbeidsforholdKomplettVurderingType, ManueltArbeidsforhold } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -86,7 +85,7 @@ export const ManueltLagtTilArbeidsforholdForm = ({
 
   const lagreArbeidsforhold = (formValues: FormValues) => {
     const params: ManueltArbeidsforhold = lagManueltArbeidsforhold(
-      ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+      'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
       behandlingUuid,
       behandlingVersjon,
       formValues,
@@ -104,12 +103,7 @@ export const ManueltLagtTilArbeidsforholdForm = ({
 
   const slettArbeidsforhold = () => {
     const formValues = formMethods.getValues();
-    const params = lagManueltArbeidsforhold(
-      ArbeidsforholdKomplettVurderingType.FJERN_FRA_BEHANDLINGEN,
-      behandlingUuid,
-      behandlingVersjon,
-      formValues,
-    );
+    const params = lagManueltArbeidsforhold('FJERN_FRA_BEHANDLINGEN', behandlingUuid, behandlingVersjon, formValues);
 
     void registrerArbeidsforhold(params).then(
       getOppdaterTabellOgLukkRad(oppdaterTabell, lukkArbeidsforholdRad, erNyttArbeidsforhold),
@@ -262,7 +256,7 @@ const getOppdaterTabell =
         stillingsprosent: formValues.stillingsprosent,
         arbeidsgiverNavn: formValues.arbeidsgiverNavn,
         begrunnelse: formValues.begrunnelse,
-        saksbehandlersVurdering: ArbeidsforholdKomplettVurderingType.MANUELT_OPPRETTET_AV_SAKSBEHANDLER,
+        saksbehandlersVurdering: 'MANUELT_OPPRETTET_AV_SAKSBEHANDLER',
       },
       inntektsmeldingerForRad: [],
       inntektsposter: [],

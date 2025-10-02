@@ -1,33 +1,36 @@
-import { notNull } from '@navikt/ft-utils';
-
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
+import type { FagsakYtelseType, FamilieHendelseType, ForeldreType } from '@navikt/fp-types';
+import { notEmpty } from '@navikt/fp-utils';
 
 export class SoknadData {
-  fagsakYtelseType: string;
+  fagsakYtelseType: FagsakYtelseType;
 
-  familieHendelseType: string;
+  familieHendelseType: FamilieHendelseType;
 
-  foreldreType: string;
+  foreldreType: ForeldreType;
 
-  constructor(selectedFagsakYtelseType: string, selectedFamilieHendelseType: string, selectedForeldreType: string) {
-    this.fagsakYtelseType = notNull(selectedFagsakYtelseType);
+  constructor(
+    selectedFagsakYtelseType: FagsakYtelseType,
+    selectedFamilieHendelseType: FamilieHendelseType,
+    selectedForeldreType: ForeldreType,
+  ) {
+    this.fagsakYtelseType = notEmpty(selectedFagsakYtelseType);
     if (selectedFagsakYtelseType === 'SVP') {
-      this.familieHendelseType = FamilieHendelseType.FODSEL;
+      this.familieHendelseType = 'FODSL';
     } else {
-      this.familieHendelseType = notNull(selectedFamilieHendelseType);
+      this.familieHendelseType = notEmpty(selectedFamilieHendelseType);
     }
-    this.foreldreType = notNull(selectedForeldreType);
+    this.foreldreType = notEmpty(selectedForeldreType);
   }
 
-  getFagsakYtelseType(): string {
+  getFagsakYtelseType(): FagsakYtelseType {
     return this.fagsakYtelseType;
   }
 
-  getFamilieHendelseType(): string {
+  getFamilieHendelseType(): FamilieHendelseType {
     return this.familieHendelseType;
   }
 
-  getForeldreType(): string {
+  getForeldreType(): ForeldreType {
     return this.foreldreType;
   }
 }

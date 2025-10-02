@@ -2,6 +2,8 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
+import type { FamilieHendelseType } from '@navikt/fp-types';
+
 import { OmsorgOgAdopsjonPanel } from './components/OmsorgOgAdopsjonPanel';
 
 import messages from '../../i18n/nb_NO.json';
@@ -10,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   readOnly: boolean;
-  familieHendelseType: string;
+  familieHendelseType: FamilieHendelseType;
   isForeldrepengerFagsak?: boolean;
   fodselsdato?: string | string[];
 }

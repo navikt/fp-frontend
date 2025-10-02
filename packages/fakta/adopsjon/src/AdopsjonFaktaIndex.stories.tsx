@@ -2,14 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  FarSøkerType,
-  SoknadType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, SoknadType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { AdopsjonFamilieHendelse, Aksjonspunkt, Soknad } from '@navikt/fp-types';
 
@@ -30,7 +23,7 @@ const soknad = {
   antallBarn: 1,
   adopsjonFodelsedatoer: { 1: '2019-01-10' },
   soknadType: SoknadType.ADOPSJON,
-  farSokerType: FarSøkerType.ADOPTERER_ALENE,
+  farSokerType: 'ADOPTERER_ALENE',
   mottattDato: '',
 
   omsorgsovertakelseDato: '2022-09-14',
@@ -80,12 +73,12 @@ type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
 
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -96,7 +89,7 @@ export const AksjonspunktForAdopsjonsvilkåret: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -113,7 +106,7 @@ export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -130,7 +123,7 @@ export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -147,7 +140,7 @@ export const IkkeVisBarnetsAnkomstDatoForEngangsstønad: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },

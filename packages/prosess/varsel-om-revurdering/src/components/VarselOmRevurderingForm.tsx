@@ -9,7 +9,7 @@ import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, AksjonspunktStatus, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
@@ -90,7 +90,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
   const forhåndsvisMelding = (e: MouseEvent) => {
     e.preventDefault();
     previewCallback({
-      dokumentMal: DokumentMalType.VARSEL_OM_REVURDERING,
+      dokumentMal: 'VARREV',
       arsakskode: RevurderingVarslingÅrsak.ANNET,
       fritekst: formVerdier.fritekst ?? ' ',
     });
@@ -104,7 +104,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
           <Heading size="small" level="2">
             <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurdering" />
           </Heading>
-          {!isReadOnly && aksjonspunkterForPanel[0]?.status === AksjonspunktStatus.OPPRETTET && (
+          {!isReadOnly && aksjonspunkterForPanel[0]?.status === 'OPPR' && (
             <>
               <AksjonspunktHelpTextHTML>
                 <FormattedMessage id="VarselOmRevurderingForm.VarselOmRevurderingVurder" />
@@ -161,7 +161,7 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
               </div>
             </>
           )}
-          {(isReadOnly || aksjonspunkterForPanel[0]?.status !== AksjonspunktStatus.OPPRETTET) && (
+          {(isReadOnly || aksjonspunkterForPanel[0]?.status !== 'OPPR') && (
             <ReadOnlyField
               size="small"
               label={<FormattedMessage id="VarselOmRevurderingForm.Begrunnelse" />}

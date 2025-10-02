@@ -2,7 +2,6 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AnkeOmgjorArsak, AnkeVurdering as AnkeVurderingKodeverk, AnkeVurderingOmgjoer } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type { AnkeVurdering } from '@navikt/fp-types';
 
@@ -25,10 +24,10 @@ export const OmjørResultatTilUgunst: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
+        ankeVurdering: 'ANKE_OMGJOER',
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: AnkeOmgjorArsak.ULIK_VURDERING,
-        ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_TIL_UGUNST,
+        ankeOmgjoerArsak: 'ULIK_VURDERING',
+        ankeVurderingOmgjoer: 'ANKE_TIL_UGUNST',
         fritekstTilBrev: 'Dette er en fritekst',
       },
     } as AnkeVurdering,
@@ -39,9 +38,9 @@ export const OpphevResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_OPPHEVE_OG_HJEMSENDE,
+        ankeVurdering: 'ANKE_OPPHEVE_OG_HJEMSENDE',
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: AnkeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+        ankeOmgjoerArsak: 'ULIK_REGELVERKSTOLKNING',
         fritekstTilBrev: 'Dette er en fritekst',
       },
     } as AnkeVurdering,
@@ -52,9 +51,9 @@ export const HjemsendResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_HJEMSENDE_UTEN_OPPHEV,
+        ankeVurdering: 'ANKE_HJEMSENDE_UTEN_OPPHEV',
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: AnkeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+        ankeOmgjoerArsak: 'ULIK_REGELVERKSTOLKNING',
         fritekstTilBrev: 'Dette er en fritekst',
       },
     } as AnkeVurdering,
@@ -65,9 +64,9 @@ export const AvvisResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_AVVIS,
+        ankeVurdering: 'ANKE_AVVIS',
         begrunnelse: 'Dette er en begrunnelse',
-        ankeOmgjoerArsak: AnkeOmgjorArsak.ULIK_REGELVERKSTOLKNING,
+        ankeOmgjoerArsak: 'ULIK_REGELVERKSTOLKNING',
         erSubsidiartRealitetsbehandles: true,
         erAnkerIkkePart: true,
         erIkkeKonkret: true,
@@ -81,7 +80,7 @@ export const StadfestResultat: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_STADFESTE_YTELSESVEDTAK,
+        ankeVurdering: 'ANKE_STADFESTE_YTELSESVEDTAK',
         begrunnelse: 'Dette er en begrunnelse',
         fritekstTilBrev: 'Dette er en fritekst',
       },
@@ -102,8 +101,8 @@ export const ErBehandletIKabal: Story = {
   args: {
     ankeVurdering: {
       ankeVurderingResultat: {
-        ankeVurdering: AnkeVurderingKodeverk.ANKE_OMGJOER,
-        ankeVurderingOmgjoer: AnkeVurderingOmgjoer.ANKE_DELVIS_OMGJOERING_TIL_GUNST,
+        ankeVurdering: 'ANKE_OMGJOER',
+        ankeVurderingOmgjoer: 'ANKE_DELVIS_OMGJOERING_TIL_GUNST',
       },
       underBehandlingKabal: false,
       behandletAvKabal: true,

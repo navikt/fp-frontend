@@ -2,13 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  AksjonspunktStatus,
-  AksjonspunktType,
-  OpptjeningAktivitetType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, OpptjeningAktivitetType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
@@ -45,12 +39,12 @@ type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
-  status: AksjonspunktStatus.OPPRETTET,
+  status: 'OPPR',
 
   kanLoses: true,
   toTrinnsBehandling: false,
 
-  aksjonspunktType: AksjonspunktType.AUTOPUNKT,
+  aksjonspunktType: 'AUTO',
   vilkarType: VilkarType.OMSORGSVILKARET,
   erAktivt: true,
 } satisfies Aksjonspunkt;
@@ -61,7 +55,7 @@ export const MedAksjonspunkt: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -203,7 +197,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
       {
         ...aksjonspunktDefault,
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },
@@ -266,7 +260,7 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
         ...aksjonspunktDefault,
 
         definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
-        status: AksjonspunktStatus.OPPRETTET,
+        status: 'OPPR',
 
         kanLoses: true,
       },

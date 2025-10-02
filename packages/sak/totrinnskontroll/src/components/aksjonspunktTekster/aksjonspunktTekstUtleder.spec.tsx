@@ -1,7 +1,8 @@
-import { AksjonspunktKode, BehandlingResultatType, FaktaOmBeregningTilfelle } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
   BehandlingStatus,
+  FaktaOmBeregningTilfelle,
   KodeverkMedNavn,
   TotrinnskontrollAksjonspunkt,
 } from '@navikt/fp-types';
@@ -634,7 +635,7 @@ describe('aksjonspunktTekstUtleder', () => {
       aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
     } satisfies TotrinnskontrollAksjonspunkt;
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_MEDHOLD,
+      type: 'KLAGE_MEDHOLD',
     } as Behandlingsresultat;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.OmgjortTilGunst');
@@ -643,7 +644,7 @@ describe('aksjonspunktTekstUtleder', () => {
   // Ytelsesvedtak opphevet
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak opphevet', () => {
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET,
+      type: 'KLAGE_YTELSESVEDTAK_OPPHEVET',
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -662,7 +663,7 @@ describe('aksjonspunktTekstUtleder', () => {
   // Klage avvist
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag klage avvist', () => {
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_AVVIST,
+      type: 'KLAGE_AVVIST',
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -674,7 +675,7 @@ describe('aksjonspunktTekstUtleder', () => {
   // Ikke fastsatt Engangsstønad
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ikke fastsatt', () => {
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+      type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -685,7 +686,7 @@ describe('aksjonspunktTekstUtleder', () => {
   });
   it('skal vise korrekt tekst for aksjonspunkt 5035 avslag ytelsesvedtak stadfestet', () => {
     const behandlingsresultat = {
-      type: BehandlingResultatType.KLAGE_YTELSESVEDTAK_STADFESTET,
+      type: 'KLAGE_YTELSESVEDTAK_STADFESTET',
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
@@ -698,16 +699,16 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5058 vurder tidsbegrenset', () => {
     const beregningTilfeller = [
       {
-        kode: FaktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD,
+        kode: 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD',
         navn: 'Vurder tidsbegrenset arbeidsforhold',
         kodeverk: '',
       },
-    ];
+    ] satisfies KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
       beregningDto: {
-        faktaOmBeregningTilfeller: [FaktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD],
+        faktaOmBeregningTilfeller: ['VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'],
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -718,16 +719,16 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5058 ATFL i samme org', () => {
     const beregningTilfeller = [
       {
-        kode: FaktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON,
+        kode: 'VURDER_AT_OG_FL_I_SAMME_ORGANISASJON',
         navn: 'Vurder at og fl',
         kodeverk: '',
       },
-    ];
+    ] satisfies KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
       beregningDto: {
-        faktaOmBeregningTilfeller: [FaktaOmBeregningTilfelle.VURDER_AT_OG_FL_I_SAMME_ORGANISASJON],
+        faktaOmBeregningTilfeller: ['VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'],
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);
@@ -736,25 +737,22 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekte tekster for kombinasjon av aksjonspunkt 5058', () => {
     const beregningTilfeller = [
       {
-        kode: FaktaOmBeregningTilfelle.VURDER_BESTEBEREGNING,
+        kode: 'VURDER_BESTEBEREGNING' satisfies FaktaOmBeregningTilfelle,
         navn: 'Vurder besteberegning',
         kodeverk: '',
       },
       {
-        kode: FaktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD,
+        kode: 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD' satisfies FaktaOmBeregningTilfelle,
         navn: 'Vurder tidsbegrenset arbeidsforhold',
         kodeverk: '',
       },
-    ];
+    ] satisfies KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
       aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
       beregningDto: {
-        faktaOmBeregningTilfeller: [
-          FaktaOmBeregningTilfelle.VURDER_BESTEBEREGNING,
-          FaktaOmBeregningTilfelle.VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD,
-        ],
+        faktaOmBeregningTilfeller: ['VURDER_BESTEBEREGNING', 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'],
       },
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatus, beregningTilfeller, erTilbakekreving, aksjonspunkt);

@@ -5,7 +5,6 @@ import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
 import { formaterAdresse, getNyesteAdresse } from '@navikt/fp-fakta-felles';
-import { AdresseType } from '@navikt/fp-kodeverk';
 import type { PersonopplysningerBasis, Personoversikt } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
@@ -50,8 +49,8 @@ export const ForeldrePanel = ({ personoversikt }: Props) => {
 };
 
 const lagSøkerdata = ({ aktoerId, navn, adresser, dødsdato }: PersonopplysningerBasis) => {
-  const postadr = getNyesteAdresse(adresser, AdresseType.POSTADRESSE);
-  const bostedsadr = getNyesteAdresse(adresser, AdresseType.BOSTEDSADRESSE);
+  const postadr = getNyesteAdresse(adresser, 'POSTADRESSE');
+  const bostedsadr = getNyesteAdresse(adresser, 'BOSTEDSADRESSE');
 
   return {
     aktoerId,

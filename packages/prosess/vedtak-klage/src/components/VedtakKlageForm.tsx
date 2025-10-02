@@ -3,17 +3,11 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
-import {
-  AksjonspunktKode,
-  BehandlingResultatType,
-  erAksjonspunktÅpent,
-  isKlageOmgjort,
-  KlageVurdering as klageVurderingCodes,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, KlageVurdering as klageVurderingCodes } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type { AlleKodeverk, Behandlingsresultat, KlageVurdering } from '@navikt/fp-types';
+import { type AlleKodeverk, type Behandlingsresultat, isKlageOmgjort, type KlageVurdering } from '@navikt/fp-types';
 import type { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
-import { usePanelDataContext } from '@navikt/fp-utils';
+import { erAksjonspunktÅpent, usePanelDataContext } from '@navikt/fp-utils';
 
 import { VedtakKlageSubmitPanel } from './VedtakKlageSubmitPanel';
 
@@ -74,7 +68,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
           </BodyShort>
         )}
       </VStack>
-      {behandlingsresultat.type === BehandlingResultatType.KLAGE_AVVIST && (
+      {behandlingsresultat.type === 'KLAGE_AVVIST' && (
         <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilAvvisning" />
@@ -94,7 +88,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
           {omgjortAarsak}
         </VStack>
       )}
-      {behandlingsresultat.type === BehandlingResultatType.KLAGE_YTELSESVEDTAK_OPPHEVET && (
+      {behandlingsresultat.type === 'KLAGE_YTELSESVEDTAK_OPPHEVET' && (
         <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="VedtakKlageForm.ArsakTilOppheving" />

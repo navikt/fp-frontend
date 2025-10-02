@@ -15,7 +15,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { FamilieHendelseType } from '@navikt/fp-kodeverk';
+import type { FamilieHendelseType } from '@navikt/fp-types';
 
 import { OMSORG_NAME_PREFIX } from '../constant';
 import type { OmsorgOgAdopsjonFormValues, TransformedFormValue } from './types';
@@ -37,7 +37,7 @@ const getValideringMotAnnenFødselsdato = (index: number, fødselsdato?: string 
 };
 
 interface Props {
-  familieHendelseType: string;
+  familieHendelseType: FamilieHendelseType;
   readOnly?: boolean;
   isForeldrepengerFagsak: boolean;
   fodselsdatoer?: string | string[];
@@ -82,14 +82,10 @@ export const OmsorgOgAdopsjonPanel = ({
       <VStack gap="space-16">
         <Heading size="small" level="3">
           <FormattedMessage
-            id={
-              familieHendelseType === FamilieHendelseType.ADOPSJON
-                ? 'Registrering.Adopsjon.Title'
-                : 'Registrering.Adopsjon.OmsorgTitle'
-            }
+            id={familieHendelseType === 'ADPSJN' ? 'Registrering.Adopsjon.Title' : 'Registrering.Adopsjon.OmsorgTitle'}
           />
         </Heading>
-        {isForeldrepengerFagsak && familieHendelseType === FamilieHendelseType.ADOPSJON && (
+        {isForeldrepengerFagsak && familieHendelseType === 'ADPSJN' && (
           <RhfRadioGroup
             //@ts-expect-error Her er det noko rart med typane
             name={`${OMSORG_NAME_PREFIX}.erEktefellesBarn`}
@@ -113,12 +109,12 @@ export const OmsorgOgAdopsjonPanel = ({
           control={control}
           label={formatMessage({
             id:
-              familieHendelseType === FamilieHendelseType.ADOPSJON
+              familieHendelseType === 'ADPSJN'
                 ? 'Registrering.Adopsjon.DatoForOvertakelsenStebarn'
                 : 'Registrering.Adopsjon.DatoForOvertakelsen',
           })}
           isReadOnly={readOnly}
-          validate={familieHendelseType === FamilieHendelseType.ADOPSJON ? [required, hasValidDate] : [hasValidDate]}
+          validate={familieHendelseType === 'ADPSJN' ? [required, hasValidDate] : [hasValidDate]}
         />
         <HStack gap="space-16">
           <RhfTextField
@@ -132,7 +128,7 @@ export const OmsorgOgAdopsjonPanel = ({
               return Number.isNaN(parsedValue) ? value : parsedValue;
             }}
             validate={[
-              ...(familieHendelseType === FamilieHendelseType.ADOPSJON ? [required] : []),
+              ...(familieHendelseType === 'ADPSJN' ? [required] : []),
               hasValidInteger,
               validateMinAntall,
               validateMaxAntall,
@@ -146,7 +142,7 @@ export const OmsorgOgAdopsjonPanel = ({
               control={control}
               isReadOnly={readOnly}
               validate={
-                familieHendelseType === FamilieHendelseType.ADOPSJON
+                familieHendelseType === 'ADPSJN'
                   ? [
                       required,
                       hasValidDate,
