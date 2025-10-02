@@ -4,8 +4,8 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { Kommunikasjonsretning } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { Kommunikasjonsretning } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchFpsak } from '../../../.storybook/testdata/index.ts';
@@ -56,21 +56,21 @@ export const DetFinnesDokumenterPåSak: Story = {
               dokumentId: '1',
               tittel: 'dok',
               tidspunkt: '10.10.2017 10:23',
-              kommunikasjonsretning: Kommunikasjonsretning.INN,
+              kommunikasjonsretning: 'INN' as Kommunikasjonsretning,
             },
             {
               journalpostId: '2',
               dokumentId: '2',
               tittel: 'dok1',
               tidspunkt: '10.10.2019 10:23',
-              kommunikasjonsretning: Kommunikasjonsretning.INN,
+              kommunikasjonsretning: 'INN' as Kommunikasjonsretning,
             },
             {
               journalpostId: '3',
               dokumentId: '3',
               tittel: 'dok2',
               tidspunkt: '10.10.2018 10:23',
-              kommunikasjonsretning: Kommunikasjonsretning.INN,
+              kommunikasjonsretning: 'INN' as Kommunikasjonsretning,
             },
           ]),
         ),

@@ -1,4 +1,3 @@
-import { SivilstandType } from '@navikt/fp-kodeverk';
 import type { Personoversikt } from '@navikt/fp-types';
 
 export const personoversikt: Personoversikt = {
@@ -6,7 +5,7 @@ export const personoversikt: Personoversikt = {
     aktoerId: '9921487132273',
     navn: 'Kristine Kalv',
     kjønn: 'K',
-    sivilstand: SivilstandType.UGIFT,
+    sivilstand: 'UGIF',
 
     fødselsdato: '1993-03-05',
     adresser: [
@@ -26,8 +25,7 @@ export const personoversikt: Personoversikt = {
     aktoerId: '9921528317364',
     navn: 'Asbjørn Lemur',
     kjønn: 'M',
-    sivilstand: SivilstandType.UGIFT,
-
+    sivilstand: 'UGIF',
     fødselsdato: '1991-03-05',
     adresser: [
       {
@@ -47,8 +45,7 @@ export const personoversikt: Personoversikt = {
       aktoerId: '9902442362885',
       navn: 'Ole Duck',
       kjønn: 'K',
-      sivilstand: SivilstandType.UGIFT,
-
+      sivilstand: 'UGIF',
       fødselsdato: '2025-03-05',
       adresser: [
         {

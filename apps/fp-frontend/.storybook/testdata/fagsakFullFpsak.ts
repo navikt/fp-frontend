@@ -1,10 +1,9 @@
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { type Fagsak, VergeBehandlingmenyValg } from '@navikt/fp-types';
 
 export const fagsakFullFpsak: Fagsak = {
   saksnummer: '1',
   fagsakYtelseType: 'FP',
-  relasjonsRolleType: RelasjonsRolleType.MOR,
+  relasjonsRolleType: 'MORA',
   status: 'UBEH',
   aktørId: '9921487132273',
   sakSkalTilInfotrygd: false,
