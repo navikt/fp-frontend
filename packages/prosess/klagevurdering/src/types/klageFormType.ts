@@ -1,8 +1,10 @@
+import type { KlageHjemmel, KlageVurderingOmgjørType, KlageVurderingType } from '@navikt/fp-types';
+
 export type KlageFormType = {
   begrunnelse?: string;
   fritekstTilBrev?: string;
-  klageVurdering?: string;
-  klageVurderingOmgjoer?: string;
+  klageVurdering?: KlageVurderingType;
+  klageVurderingOmgjoer?: KlageVurderingOmgjørType;
   klageMedholdArsak?: string;
-  klageHjemmel?: string;
+  klageHjemmel?: KlageHjemmel;
 };

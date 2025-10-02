@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, NavBrukerKjonn, SivilstandType, SoknadType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, SoknadType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   AdopsjonFamilieHendelse,
@@ -51,8 +51,8 @@ const personoversikt: Personoversikt = {
   bruker: {
     navn: 'Olga Utvikler',
     aktoerId: '2',
-    kjønn: NavBrukerKjonn.KVINNE,
-    sivilstand: SivilstandType.GIFT,
+    kjønn: 'K',
+    sivilstand: 'GIFT',
     fødselsdato: '1979-01-01',
 
     adresser: [
@@ -70,8 +70,8 @@ const personoversikt: Personoversikt = {
   annenPart: {
     navn: 'Espen Utvikler',
     aktoerId: '1',
-    kjønn: NavBrukerKjonn.MANN,
-    sivilstand: SivilstandType.GIFT,
+    kjønn: 'M',
+    sivilstand: 'GIFT',
     fødselsdato: '1989-01-01',
     dødsdato: '2021-01-01',
     adresser: [],

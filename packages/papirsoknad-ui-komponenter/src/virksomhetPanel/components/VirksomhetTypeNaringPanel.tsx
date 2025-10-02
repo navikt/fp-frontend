@@ -5,18 +5,18 @@ import { Checkbox } from '@navikt/ds-react';
 import { RhfCheckboxGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
-import { NaringsvirksomhetType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk } from '@navikt/fp-types';
+import type { AlleKodeverk, VirksomhetType } from '@navikt/fp-types';
 
 import { VIRKSOMHET_FORM_NAME_PREFIX } from '../constants';
 import type { RegistrerVirksomhetFormValues, VirksomhetFormValues } from '../types';
 
-const naringsvirksomhetTypeOrder = {
-  [NaringsvirksomhetType.FRILANSER]: -1,
-  [NaringsvirksomhetType.DAGMAMMA]: 1,
-  [NaringsvirksomhetType.FISKE]: 2,
-  [NaringsvirksomhetType.JORDBRUK_ELLER_SKOGBRUK]: 3,
-  [NaringsvirksomhetType.ANNEN]: 4,
+const naringsvirksomhetTypeOrder: Record<VirksomhetType, number> = {
+  FRILANSER: -1,
+  DAGMAMMA: 1,
+  FISKE: 2,
+  JORDBRUK_SKOGBRUK: 3,
+  ANNEN: 4,
+  '-': 5,
 };
 
 interface Props {
@@ -52,16 +52,16 @@ export const VirksomhetTypeNaringPanel = ({ readOnly, alleKodeverk, index }: Pro
 
 VirksomhetTypeNaringPanel.transformValues = ({ typeVirksomhet }: RegistrerVirksomhetFormValues) => ({
   typeVirksomhet: {
-    ANNEN: typeVirksomhet.includes(NaringsvirksomhetType.ANNEN),
-    FISKE: typeVirksomhet.includes(NaringsvirksomhetType.FISKE),
-    DAGMAMMA: typeVirksomhet.includes(NaringsvirksomhetType.DAGMAMMA),
-    JORDBRUK_SKOGBRUK: typeVirksomhet.includes(NaringsvirksomhetType.JORDBRUK_ELLER_SKOGBRUK),
+    ANNEN: typeVirksomhet.includes('ANNEN'),
+    FISKE: typeVirksomhet.includes('FISKE'),
+    DAGMAMMA: typeVirksomhet.includes('DAGMAMMA'),
+    JORDBRUK_SKOGBRUK: typeVirksomhet.includes('JORDBRUK_SKOGBRUK'),
   },
 });
 
 const getNæringvirksomhetTyper = (alleKodeverk: AlleKodeverk) =>
   alleKodeverk['VirksomhetType']
-    .filter(t => t.kode !== NaringsvirksomhetType.FRILANSER)
+    .filter(t => t.kode !== 'FRILANSER')
     .sort((a, b) => compare(naringsvirksomhetTypeOrder[a.kode], naringsvirksomhetTypeOrder[b.kode]));
 
 const compare = (arg1: number, arg2: number): number => {

@@ -22,13 +22,14 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, createWeekAndDay, ISO_DATE_FORMAT, periodFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { OppholdArsakType, PeriodeResultatType, RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { PeriodeResultatType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import {
   type AlleKodeverk,
   type AnnenforelderUttakEøsPeriode,
   type Fagsak,
   KjønnkodeEnum,
   type PeriodeSoker,
+  type RelasjonsRolleType,
 } from '@navikt/fp-types';
 
 export type PeriodeSøkerMedTidslinjedata = {
@@ -140,7 +141,7 @@ const formatPaneler = (
     erGradert: erEøsPeriode(periode.periode)
       ? false
       : !!periode.periode.gradertAktivitet && !!periode.periode.graderingInnvilget,
-    erOpphold: erEøsPeriode(periode.periode) ? false : periode.periode.oppholdÅrsak !== OppholdArsakType['-'],
+    erOpphold: erEøsPeriode(periode.periode) ? false : periode.periode.oppholdÅrsak !== '-',
     harUtsettelse: erEøsPeriode(periode.periode) ? false : periode.periode.utsettelseType !== '-',
     begrunnelse: erEøsPeriode(periode.periode) ? '' : periode.periode.begrunnelse,
   }));
@@ -161,10 +162,10 @@ const lagGruppeIder = (perioder: PeriodeSøkerMedTidslinjedata[] = []) => {
 
 const finnIkon = (fagsak: Fagsak, erHovedsøker: boolean) => {
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : rolleAnnenpart(fagsak);
-  if (rrType === RelasjonsRolleType.MOR || rrType === RelasjonsRolleType.MEDMOR) {
+  if (rrType === 'MORA' || rrType === 'MMOR') {
     return <FigureOutwardFillIcon width={20} height={20} color="var(--ax-bg-danger-strong)" />;
   }
-  if (rrType === RelasjonsRolleType.FAR) {
+  if (rrType === 'FARA') {
     return <SilhouetteFillIcon width={20} height={20} color="var(--ax-accent-700)" />;
   }
   return <FigureCombinationIcon width={20} height={20} />;
@@ -319,20 +320,19 @@ const finnIkonForPeriode = (periode: PeriodeMedStartOgSlutt, behandlingStatusKod
 const finnRolle = (fagsak: Fagsak, alleKodeverk: AlleKodeverk, erHovedsøker: boolean): string => {
   const kodeverk = alleKodeverk['RelasjonsRolleType'];
   if (!erHovedsøker && !fagsak.annenpartBehandling?.relasjonsRolleType) {
-    const rrType =
-      fagsak.relasjonsRolleType === RelasjonsRolleType.FAR ? RelasjonsRolleType.MOR : RelasjonsRolleType.FAR;
+    const rrType: RelasjonsRolleType = fagsak.relasjonsRolleType === 'FARA' ? 'MORA' : 'FARA';
     return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
   }
   const rrType = erHovedsøker ? fagsak.relasjonsRolleType : rolleAnnenpart(fagsak);
   return kodeverk.find(k => k.kode === rrType)?.navn ?? '-';
 };
 
-const rolleAnnenpart = (fagsak: Fagsak) => {
-  if (fagsak.relasjonsRolleType === RelasjonsRolleType.MOR) {
+const rolleAnnenpart = (fagsak: Fagsak): RelasjonsRolleType => {
+  if (fagsak.relasjonsRolleType === 'MORA') {
     const kjønnAnnenpart = fagsak.annenPart?.kjønn;
-    return kjønnAnnenpart === KjønnkodeEnum.KVINNE ? RelasjonsRolleType.MEDMOR : RelasjonsRolleType.FAR;
+    return kjønnAnnenpart === KjønnkodeEnum.KVINNE ? 'MMOR' : 'FARA';
   }
-  return RelasjonsRolleType.MOR;
+  return 'MORA';
 };
 
 interface TidslinjeProps {

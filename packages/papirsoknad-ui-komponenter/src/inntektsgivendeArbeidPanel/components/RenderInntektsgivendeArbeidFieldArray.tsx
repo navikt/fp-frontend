@@ -5,7 +5,6 @@ import { useIntl } from 'react-intl';
 import { RhfDatepicker, RhfFieldArray, RhfSelect, RhfTextField } from '@navikt/ft-form-hooks';
 import { hasValidDate, maxLength } from '@navikt/ft-form-validators';
 
-import { Landkode } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../felles/FieldArrayRow';
@@ -16,7 +15,7 @@ const maxLength50 = maxLength(50);
 
 const countrySelectValues = (countryCodes: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   countryCodes
-    .filter(({ kode }) => kode !== Landkode.NORGE)
+    .filter(({ kode }) => kode !== 'NOR')
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

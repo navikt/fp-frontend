@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak } from '@navikt/fp-types';
 
@@ -56,7 +56,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
           stillingsprosent: 100,
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
-            type: PermisjonsbeskrivelseType.PERMITTERING,
+            type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
 
@@ -73,7 +73,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: PermisjonsbeskrivelseType.PERMITTERING,
+            type: 'PERMITTERING',
           },
 
           årsak: 'PERMISJON',
@@ -162,7 +162,7 @@ export const FlereArbeidsforhold: Story = {
           tom: '9999-12-31',
           permisjonOgMangel: {
             permisjonFom: '2022-10-02',
-            type: PermisjonsbeskrivelseType.PERMITTERING,
+            type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
 
@@ -179,7 +179,7 @@ export const FlereArbeidsforhold: Story = {
           årsak: AksjonspunktÅrsak.MANGLENDE_INNTEKTSMELDING,
           permisjonOgMangel: {
             permisjonFom: '2021-11-07',
-            type: PermisjonsbeskrivelseType.PERMITTERING,
+            type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
           saksbehandlersVurdering: '-',
@@ -304,7 +304,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           tom: '9999-12-31',
           permisjonOgMangel: {
             permisjonFom: '2022-10-02',
-            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+            type: 'VELFERDSPERMISJON',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
 
@@ -319,7 +319,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
           tom: '2021-12-31',
           permisjonOgMangel: {
             permisjonFom: '2021-11-07',
-            type: PermisjonsbeskrivelseType.PERMITTERING,
+            type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
 
@@ -411,7 +411,7 @@ export const VisFødselsdatoNårPrivatperson: Story = {
           stillingsprosent: 100,
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
-            type: PermisjonsbeskrivelseType.PERMITTERING,
+            type: 'PERMITTERING',
             årsak: AksjonspunktÅrsak.PERMISJON_UTEN_SLUTTDATO,
           },
 

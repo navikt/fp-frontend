@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { FagsakEnkel } from '@navikt/fp-types';
 
@@ -47,7 +46,7 @@ export const Default: Story = {
       ],
       person: {
         navn: 'Espen Utvikler',
-        kjønn: NavBrukerKjonn.MANN,
+        kjønn: 'M',
         fødselsdato: '1979-01-01',
 
         fødselsnummer: '123456233',

@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, OpptjeningAktivitetType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
@@ -72,7 +72,7 @@ export const MedAksjonspunkt: Story = {
       },
       opptjeningAktivitetList: [
         {
-          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          aktivitetType: 'ARBEID',
           opptjeningFom: '2019-02-11',
           opptjeningTom: '2019-03-24',
           arbeidsgiverReferanse: '3',
@@ -83,7 +83,7 @@ export const MedAksjonspunkt: Story = {
           erEndret: false,
         },
         {
-          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          aktivitetType: 'ARBEID',
           opptjeningFom: '2019-05-11',
           opptjeningTom: '2019-07-24',
           arbeidsgiverReferanse: '3',
@@ -94,7 +94,7 @@ export const MedAksjonspunkt: Story = {
           erEndret: false,
         },
         {
-          aktivitetType: OpptjeningAktivitetType.NARING,
+          aktivitetType: 'NÆRING',
           opptjeningFom: '2019-02-11',
           opptjeningTom: '2019-10-24',
           arbeidsgiverReferanse: '1',
@@ -103,7 +103,7 @@ export const MedAksjonspunkt: Story = {
           erEndret: false,
         },
         {
-          aktivitetType: OpptjeningAktivitetType.AAP,
+          aktivitetType: 'AAP',
           opptjeningFom: '2019-02-11',
           opptjeningTom: '2019-06-24',
           arbeidsgiverReferanse: '1',
@@ -113,7 +113,7 @@ export const MedAksjonspunkt: Story = {
           erGodkjent: false,
         },
         {
-          aktivitetType: OpptjeningAktivitetType.SYKEPENGER,
+          aktivitetType: 'SYKEPENGER',
           opptjeningFom: '2018-12-11',
           opptjeningTom: '2019-04-24',
           arbeidsgiverReferanse: '1',
@@ -122,7 +122,7 @@ export const MedAksjonspunkt: Story = {
           erEndret: false,
         },
         {
-          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          aktivitetType: 'ARBEID',
           opptjeningFom: '2018-01-01',
           opptjeningTom: '2018-11-01',
           arbeidsgiverReferanse: '1',
@@ -167,7 +167,7 @@ export const UtenAksjonspunkt: Story = {
         {
           opptjeningFom: '2017-01-01',
           opptjeningTom: '9999-12-31',
-          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          aktivitetType: 'ARBEID',
           arbeidsgiverReferanse: '1',
           arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
           erEndret: false,
@@ -178,7 +178,7 @@ export const UtenAksjonspunkt: Story = {
         {
           opptjeningFom: '2017-01-01',
           opptjeningTom: '9999-12-31',
-          aktivitetType: OpptjeningAktivitetType.DAGPENGER,
+          aktivitetType: 'DAGPENGER',
           arbeidsgiverReferanse: '1',
           arbeidsforholdRef: 'bf623ff9-6ffb-4a81-b9f1-2648e5530a47',
           erEndret: false,
@@ -214,7 +214,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
       },
       opptjeningAktivitetList: [
         {
-          aktivitetType: OpptjeningAktivitetType.NARING,
+          aktivitetType: 'NÆRING',
           opptjeningFom: '1995-09-14',
           opptjeningTom: '9999-12-31',
           arbeidsgiverReferanse: '1',
@@ -224,7 +224,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
           erEndret: false,
         },
         {
-          aktivitetType: OpptjeningAktivitetType.NARING,
+          aktivitetType: 'NÆRING',
           opptjeningFom: '1995-09-14',
           opptjeningTom: '9999-12-31',
           arbeidsgiverReferanse: '2',
@@ -277,7 +277,7 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
       },
       opptjeningAktivitetList: [
         {
-          aktivitetType: OpptjeningAktivitetType.ARBEID,
+          aktivitetType: 'ARBEID',
           opptjeningFom: '2020-12-25',
           opptjeningTom: '2021-10-24',
           arbeidsgiverReferanse: '3',

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
-import { AksjonspunktKode, KlageVurdering as klageVurderingCodes } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import { type AlleKodeverk, type Behandlingsresultat, isKlageOmgjort, type KlageVurdering } from '@navikt/fp-types';
 import type { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -140,15 +140,15 @@ const getResultatText = (behandlingKlageVurdering: KlageVurdering) => {
   const klageResultat =
     behandlingKlageVurdering.klageVurderingResultatNK ?? behandlingKlageVurdering.klageVurderingResultatNFP;
   switch (klageResultat?.klageVurdering) {
-    case klageVurderingCodes.AVVIS_KLAGE:
+    case 'AVVIS_KLAGE':
       return 'VedtakKlageForm.KlageAvvist';
-    case klageVurderingCodes.STADFESTE_YTELSESVEDTAK:
+    case 'STADFESTE_YTELSESVEDTAK':
       return 'VedtakKlageForm.KlageStadfestet';
-    case klageVurderingCodes.OPPHEVE_YTELSESVEDTAK:
+    case 'OPPHEVE_YTELSESVEDTAK':
       return 'VedtakKlageForm.YtelsesvedtakOpphevet';
-    case klageVurderingCodes.HJEMSENDE_UTEN_Å_OPPHEVE:
+    case 'HJEMSENDE_UTEN_Å_OPPHEVE':
       return 'VedtakKlageForm.HjemmsendUtenOpphev';
-    case klageVurderingCodes.MEDHOLD_I_KLAGE:
+    case 'MEDHOLD_I_KLAGE':
       return klageResultat.klageVurderingOmgjoer ? OMGJOER_TEKST_MAP[klageResultat.klageVurderingOmgjoer] : undefined;
     default:
       return 'VedtakKlageForm.IkkeFastsatt';

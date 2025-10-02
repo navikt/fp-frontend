@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, PermisjonsbeskrivelseType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak, type AoIArbeidsforhold } from '@navikt/fp-types';
 
@@ -78,7 +78,7 @@ export const InnhentInntektsmelding: Story = {
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+            type: 'VELFERDSPERMISJON',
           },
         },
       ],
@@ -517,7 +517,7 @@ export const ArbeidsforholdErOK: Story = {
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+            type: 'VELFERDSPERMISJON',
           },
         },
       ],
@@ -990,7 +990,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
 
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
-            type: PermisjonsbeskrivelseType.PERMITTERING,
+            type: 'PERMITTERING',
           },
         },
         {
@@ -1005,7 +1005,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+            type: 'VELFERDSPERMISJON',
           },
           saksbehandlersVurdering: '-',
         },
@@ -1255,7 +1255,7 @@ export const SkalViseFødselsnummerForPrivatperson: Story = {
           permisjonOgMangel: {
             permisjonFom: '2022-10-01',
             permisjonTom: '2022-12-01',
-            type: PermisjonsbeskrivelseType.VELFERDSPERMISJON,
+            type: 'VELFERDSPERMISJON',
           },
         },
       ],

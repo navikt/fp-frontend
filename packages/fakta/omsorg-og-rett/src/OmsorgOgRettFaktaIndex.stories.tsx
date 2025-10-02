@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, Landkode, RelasjonsRolleType, SivilstandType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -39,7 +39,7 @@ const defaultBruker: PersonopplysningerBasis = {
   navn: 'Espen Utvikler',
   aktoerId: '1',
   kjønn: KjønnkodeEnum.MANN,
-  sivilstand: SivilstandType.SAMBOER,
+  sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
 
   adresser: [adresse1, adresse2],
@@ -49,7 +49,7 @@ const defaultAnnenPart: PersonopplysningerBasis = {
   navn: 'Petra Utvikler',
   aktoerId: '2',
   kjønn: KjønnkodeEnum.KVINNE,
-  sivilstand: SivilstandType.SAMBOER,
+  sivilstand: 'SAMB',
   fødselsdato: '1989-01-01',
 
   adresser: [adresse1, adresse2],
@@ -62,14 +62,14 @@ const defaultBarn: PersonopplysningerBasis = {
   adresser: [adresse2],
   aktoerId: '3',
   kjønn: KjønnkodeEnum.KVINNE,
-  sivilstand: SivilstandType.UGIFT,
+  sivilstand: 'UGIF',
 };
 
 const defaultOmsorgOgRett: OmsorgOgRett = {
   søknad: {
     søkerHarAleneomsorg: 'NEI',
     annenpartIdent: 'ArubaFnr123',
-    annenpartBostedsland: Landkode.ARUBA,
+    annenpartBostedsland: 'ABW',
     annenpartRettighet: {
       harRettNorge: 'JA',
       harOppholdEØS: 'IKKE_RELEVANT',
@@ -83,7 +83,7 @@ const defaultOmsorgOgRett: OmsorgOgRett = {
     harAnnenpartEngangsstønad: 'NEI',
   },
 
-  relasjonsRolleType: RelasjonsRolleType.FAR,
+  relasjonsRolleType: 'FARA',
   rettighetstype: 'BEGGE_RETT',
 };
 
@@ -92,7 +92,7 @@ const aleneOmsorgForOmsorgOgRett: OmsorgOgRett = {
     søkerHarAleneomsorg: 'JA',
   },
 
-  relasjonsRolleType: RelasjonsRolleType.MOR,
+  relasjonsRolleType: 'MORA',
   rettighetstype: 'ALENEOMSORG',
 };
 
@@ -104,7 +104,7 @@ const meta = {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
     omsorgOgRett: {
       ...defaultOmsorgOgRett,
-      relasjonsRolleType: RelasjonsRolleType.FAR,
+      relasjonsRolleType: 'FARA',
     },
   },
   render: args => <OmsorgOgRettFaktaIndex {...args} />,
@@ -180,7 +180,7 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
         harAnnenpartEngangsstønad: 'NEI',
       },
 
-      relasjonsRolleType: RelasjonsRolleType.FAR,
+      relasjonsRolleType: 'FARA',
       rettighetstype: 'BEGGE_RETT',
     },
     kanOverstyre: false,
@@ -223,7 +223,7 @@ export const AvklarAnnenForelderRettBareFarRett: Story = {
           harUføretrygd: 'IKKE_RELEVANT',
         },
       },
-      relasjonsRolleType: RelasjonsRolleType.FAR,
+      relasjonsRolleType: 'FARA',
       rettighetstype: 'BARE_FAR_RETT_MOR_UFØR',
     },
     kanOverstyre: false,
@@ -258,7 +258,7 @@ export const RevurderingManuell: Story = {
           harUføretrygd: 'JA',
         },
       },
-      relasjonsRolleType: RelasjonsRolleType.MEDMOR,
+      relasjonsRolleType: 'MMOR',
       rettighetstype: 'BARE_FAR_RETT_MOR_UFØR',
     },
     kanOverstyre: false,
@@ -285,7 +285,7 @@ export const KanOverstyreMor: Story = {
         harAnnenpartEngangsstønad: 'NEI',
       },
 
-      relasjonsRolleType: RelasjonsRolleType.MOR,
+      relasjonsRolleType: 'MORA',
       rettighetstype: 'BEGGE_RETT',
     },
     kanOverstyre: true,
@@ -320,7 +320,7 @@ export const KanOverstyreFarOgAlleredeLøstAP: Story = {
           harUføretrygd: 'NEI',
         },
       },
-      relasjonsRolleType: RelasjonsRolleType.FAR,
+      relasjonsRolleType: 'FARA',
       rettighetstype: 'BARE_FAR_RETT',
     },
     kanOverstyre: true,

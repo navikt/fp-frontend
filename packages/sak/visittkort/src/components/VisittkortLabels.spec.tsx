@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { render, screen } from '@testing-library/react';
 
-import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
 import type { Person } from '@navikt/fp-types';
 
 import { VisittkortLabels } from './VisittkortLabels';
@@ -15,7 +14,7 @@ const intl = createIntl(messages);
 describe('VisittkortSakIndex', () => {
   const fagsakPerson: Person = {
     navn: 'Olga Utvikler',
-    kjønn: NavBrukerKjonn.KVINNE,
+    kjønn: 'K',
     fødselsdato: '1979-01-01',
 
     fødselsnummer: '12345678910',

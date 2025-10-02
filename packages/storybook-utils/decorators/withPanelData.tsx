@@ -2,7 +2,6 @@ import { type ReactRenderer } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Behandling, Fagsak } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt, ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent, PanelDataProvider } from '@navikt/fp-utils';
@@ -69,9 +68,9 @@ const DEFAULT_FAGSAK = {
     fødselsdato: '',
     språkkode: 'NB',
   },
-  relasjonsRolleType: RelasjonsRolleType.MOR,
+  relasjonsRolleType: 'MORA',
   annenpartBehandling: {
-    relasjonsRolleType: RelasjonsRolleType.FAR,
+    relasjonsRolleType: 'FARA',
     saksnummer: '',
     behandlingUuid: '',
   },

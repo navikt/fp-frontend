@@ -1,3 +1,5 @@
+import type { MottakerType } from './mottakerTyper';
+
 // TODO: Kommer fra kontrakter.simulering
 export type SimuleringPeriode = Readonly<{
   fom: string;
@@ -18,7 +20,7 @@ export type SimuleringResultatPerFagområde = Readonly<{
 }>;
 
 export type Mottaker = Readonly<{
-  mottakerType: string;
+  mottakerType: MottakerType;
   mottakerNummer: string;
   mottakerIdentifikator: string;
   nesteUtbPeriode: SimuleringPeriode;

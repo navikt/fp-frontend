@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, RelasjonsRolleType, UttakPeriodeType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, UttakPeriodeType, VilkarType } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 
@@ -26,7 +26,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
     fagsak: {
-      relasjonsRolleType: RelasjonsRolleType.FAR,
+      relasjonsRolleType: 'FARA',
     } as Fagsak,
     kanOverstyre: false,
     aksjonspunkterForPanel: [

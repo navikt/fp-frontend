@@ -1,3 +1,5 @@
+import type { VirksomhetType } from '@navikt/fp-types';
+
 import { EGEN_VIRKSOMHET_NAME_PREFIX } from './constants';
 
 type IdFormValues = {
@@ -30,7 +32,7 @@ export type StartedEndretFormValues = {
 };
 
 type TypeNaringFormValues = {
-  typeVirksomhet: string[];
+  typeVirksomhet: VirksomhetType[];
 };
 
 export type RegistrerVirksomhetFormValues = IdFormValues &

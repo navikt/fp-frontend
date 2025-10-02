@@ -8,7 +8,7 @@ import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/f
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { OppholdArsakType, PeriodeResultatType, StonadskontoType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
+import { PeriodeResultatType, StonadskontoType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
 import type {
   AarsakFilter,
   AlleKodeverk,
@@ -45,10 +45,7 @@ const erPeriodeOppfylt = (
   if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING) {
     // Litt flaky. Bør sende med kodeverket og slå opp utfallType
     const kodeverkKode = utfallKoder.find(kodeItem => kodeItem.kode === valgtPeriode.periodeResultatÅrsak);
-    if (
-      (kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') ||
-      valgtPeriode.oppholdÅrsak !== OppholdArsakType['-']
-    ) {
+    if ((kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') || valgtPeriode.oppholdÅrsak !== '-') {
       return true;
     }
     if (kodeverkKode && kodeverkKode.utfallType === 'AVSLÅTT') {
@@ -246,9 +243,7 @@ const transformValues = (
   graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
   oppholdÅrsak: values.oppholdArsak,
   periodeResultatType:
-    values.erOppfylt || values.oppholdArsak !== OppholdArsakType['-']
-      ? PeriodeResultatType.INNVILGET
-      : PeriodeResultatType.AVSLATT,
+    values.erOppfylt || values.oppholdArsak !== '-' ? PeriodeResultatType.INNVILGET : PeriodeResultatType.AVSLATT,
   graderingAvslagÅrsak: values.graderingAvslagAarsak,
   periodeResultatÅrsak: values.periodeAarsak,
   samtidigUttaksprosent: values.samtidigUttaksprosent ? Number.parseFloat(values.samtidigUttaksprosent) : undefined,
@@ -365,7 +360,7 @@ export const UttakPeriodeForm = ({
           erOppfylt={erOppfylt}
           valgtInnvilgelsesÅrsak={valgtInnvilgelsesÅrsak}
         />
-        {valgtPeriode.oppholdÅrsak === OppholdArsakType['-'] && (
+        {valgtPeriode.oppholdÅrsak === '-' && (
           <UttakAktiviteterTabell
             isReadOnly={isReadOnly}
             periodeTyper={alleKodeverk['UttakPeriodeType']}

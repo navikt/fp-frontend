@@ -1,0 +1,4 @@
+import type { foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType } from '@navikt/fp-types';
+
+export type OmsorgsovertakelseVilkårType =
+  foreldrepenger_behandlingslager_behandling_familiehendelse_OmsorgsovertakelseVilkårType;

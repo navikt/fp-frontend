@@ -7,9 +7,9 @@ import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, InnsynResultatType, Kommunikasjonsretning } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Dokument, DokumentMalType, InnsynDokument } from '@navikt/fp-types';
+import type { Aksjonspunkt, Dokument, DokumentMalType, InnsynDokument, InnsynResultatType } from '@navikt/fp-types';
 import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -41,7 +41,7 @@ const getPreviewCallback =
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
-  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === Kommunikasjonsretning.INN);
+  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === 'INN');
   for (const doc of allDocuments) {
     if (!filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId)) {
       filteredDocuments.push(doc);
@@ -61,11 +61,11 @@ const getDocumenterMedFikkInnsynVerdi = (
       fikkInnsyn: valgteDokumenter.find(dokValgte => dokValgte.dokumentId === dokAlle.dokumentId)?.fikkInnsyn || false,
     }));
 
-const findResultTypeMessage = (resultat: string): string => {
-  if (resultat === InnsynResultatType.AVVIST) {
+const findResultTypeMessage = (resultat: InnsynResultatType): string => {
+  if (resultat === 'AVVIST') {
     return 'InnsynVedtakForm.Avslatt';
   }
-  if (resultat === InnsynResultatType.DELVISTINNVILGET) {
+  if (resultat === 'DELV') {
     return 'InnsynVedtakForm.Delvis';
   }
   return 'InnsynVedtakForm.Innvilget';
@@ -94,7 +94,7 @@ const transformValues = (values: FormValues): ForeslaVedtakAp => ({
 interface Props {
   innsynDokumenter: InnsynDokument[];
   innsynMottattDato: string;
-  innsynResultatType: string;
+  innsynResultatType: InnsynResultatType;
   alleDokumenter: Dokument[];
   previewCallback: (data: VedtakInnsynForhandsvisData) => void;
 }
@@ -159,7 +159,7 @@ export const InnsynVedtakForm = ({
             {decodeHtmlEntity(apVurderInnsynBegrunnelse)}
           </BodyShort>
         </VStack>
-        {innsynResultatType !== InnsynResultatType.INNVILGET && (
+        {innsynResultatType !== 'INNV' && (
           <RhfTextarea
             name="begrunnelse"
             control={formMethods.control}
@@ -176,7 +176,7 @@ export const InnsynVedtakForm = ({
             ]}
           />
         )}
-        {innsynResultatType !== InnsynResultatType.AVVIST && (
+        {innsynResultatType !== 'AVVIST' && (
           <DocumentListVedtakInnsyn
             saksNr={fagsak.saksnummer}
             documents={documents.filter(document => document.fikkInnsyn === true)}

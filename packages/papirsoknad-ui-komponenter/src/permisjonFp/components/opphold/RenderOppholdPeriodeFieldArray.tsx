@@ -11,8 +11,7 @@ import {
   required,
 } from '@navikt/ft-form-validators';
 
-import { OppholdArsakType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { KodeverkMedNavn, OppholdÅrsakType } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { OPPHOLD_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -35,11 +34,11 @@ const defaultOppholdPeriode: OppholdPeriode = {
   årsak: '',
 };
 
-const gyldigeÅrsaker = new Set([
-  OppholdArsakType.UTTAK_MØDREKVOTE_ANNEN_FORELDER,
-  OppholdArsakType.UTTAK_FEDREKVOTE_ANNEN_FORELDER,
-  OppholdArsakType.UTTAK_FELLESP_ANNEN_FORELDER,
-  OppholdArsakType.UTTAK_FORELDREPENGER_ANNEN_FORELDER,
+const gyldigeÅrsaker = new Set<OppholdÅrsakType>([
+  'UTTAK_MØDREKVOTE_ANNEN_FORELDER',
+  'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
+  'UTTAK_FELLESP_ANNEN_FORELDER',
+  'UTTAK_FORELDREPENGER_ANNEN_FORELDER',
 ]);
 
 const mapTyper = (typer: KodeverkMedNavn<'OppholdÅrsak'>[]): ReactElement[] =>

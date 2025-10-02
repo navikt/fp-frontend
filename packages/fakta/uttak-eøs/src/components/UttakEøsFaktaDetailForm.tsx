@@ -10,7 +10,7 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { RelasjonsRolleType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { UttakPeriodeType } from '@navikt/fp-kodeverk';
 import { type AnnenforelderUttakEøsPeriode, type Fagsak } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { finnDager, finnUker, usePanelDataContext } from '@navikt/fp-utils';
@@ -177,7 +177,7 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
 };
 
 const lagGyldigeKontotyperOption = (fagsak: Fagsak): ReactElement[] => {
-  if (fagsak.relasjonsRolleType === RelasjonsRolleType.MOR) {
+  if (fagsak.relasjonsRolleType === 'MORA') {
     return [
       <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
         {toTitleCapitalization(UttakPeriodeType.FELLESPERIODE)}

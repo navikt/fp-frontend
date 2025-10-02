@@ -10,7 +10,7 @@ import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -231,7 +231,7 @@ export const UttakFaktaForm = ({
 
   let feilmelding = null;
   if (isDirty || formMethods.formState.isDirty) {
-    const erMor = fagsak.relasjonsRolleType === RelasjonsRolleType.MOR;
+    const erMor = fagsak.relasjonsRolleType === 'MORA';
     feilmelding = validerPerioder(
       fagsak,
       uttakPerioder,

@@ -3,19 +3,18 @@ import { useIntl } from 'react-intl';
 import { HStack, Spacer } from '@navikt/ds-react';
 import { EmptyPersonCard, Gender, PersonCard } from '@navikt/ft-plattform-komponenter';
 
-import { NavBrukerKjonn } from '@navikt/fp-kodeverk';
-import type { FagsakHendelse, Person } from '@navikt/fp-types';
+import type { FagsakHendelse, NavBrukerKjønn, Person } from '@navikt/fp-types';
 
 import { VisittkortBarnInfoPanel } from './VisittkortBarnInfoPanel';
 import { VisittkortLabels } from './VisittkortLabels';
 
 import styles from './visittkortPanel.module.css';
 
-const utledKjonn = (kjonn: string): Gender => {
-  if (kjonn === NavBrukerKjonn.KVINNE) {
+const utledKjonn = (kjonn: NavBrukerKjønn): Gender => {
+  if (kjonn === 'K') {
     return Gender.female;
   }
-  return kjonn === NavBrukerKjonn.MANN ? Gender.male : Gender.unknown;
+  return kjonn === 'M' ? Gender.male : Gender.unknown;
 };
 
 interface Props {

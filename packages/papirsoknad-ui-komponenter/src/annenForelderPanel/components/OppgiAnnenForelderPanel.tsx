@@ -12,7 +12,7 @@ import {
 } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { KanIkkeOppgiAnnenForelderArsak, Landkode } from '@navikt/fp-kodeverk';
+import { KanIkkeOppgiAnnenForelderArsak } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
@@ -22,7 +22,7 @@ import styles from './annenForelderPanel.module.css';
 
 const filtrerLandOgLagOptions = (landkoder: KodeverkMedNavn<'Landkoder'>[]): ReactElement[] =>
   landkoder
-    .filter(({ kode }) => kode !== Landkode.NORGE)
+    .filter(({ kode }) => kode !== 'NOR')
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

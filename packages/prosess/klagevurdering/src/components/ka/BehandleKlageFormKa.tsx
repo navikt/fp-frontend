@@ -2,10 +2,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
-import {
-  KlageVurdering as klageVurderingType,
-  KlageVurderingOmgjoer as klageVurderingOmgjoerType,
-} from '@navikt/fp-kodeverk';
 import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -43,41 +39,28 @@ export const BehandleKlageFormKa = ({ klageVurdering }: Props) => {
           <FormattedMessage id="KlageVurderingRadioOptionsKa.VurderingForKlage" />
         </Label>
         <BodyShort size="small">
-          {vurdering === klageVurderingType.STADFESTE_YTELSESVEDTAK && (
-            <FormattedMessage id="Klage.ResolveKlage.KeepVedtakNk" />
-          )}
-          {vurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
-            <FormattedMessage id="Klage.ResolveKlage.ChangeVedtak" />
-          )}
-          {vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE && (
-            <FormattedMessage id="Klage.Behandle.Hjemsendt" />
-          )}
-          {vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK && (
-            <FormattedMessage id="Klage.ResolveKlage.NullifyVedtak" />
-          )}
+          {vurdering === 'STADFESTE_YTELSESVEDTAK' && <FormattedMessage id="Klage.ResolveKlage.KeepVedtakNk" />}
+          {vurdering === 'MEDHOLD_I_KLAGE' && <FormattedMessage id="Klage.ResolveKlage.ChangeVedtak" />}
+          {vurdering === 'HJEMSENDE_UTEN_Å_OPPHEVE' && <FormattedMessage id="Klage.Behandle.Hjemsendt" />}
+          {vurdering === 'OPPHEVE_YTELSESVEDTAK' && <FormattedMessage id="Klage.ResolveKlage.NullifyVedtak" />}
         </BodyShort>
       </VStack>
-      {vurdering === klageVurderingType.MEDHOLD_I_KLAGE && (
+      {vurdering === 'MEDHOLD_I_KLAGE' && (
         <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="Klage.ResolveKlage.Cause" />
           </Label>
           <BodyShort size="small">{medholdReasons.find(mo => mo.kode === klageMedholdArsak)?.navn}</BodyShort>
           <BodyShort size="small">
-            {klageVurderingOmgjoer === klageVurderingOmgjoerType.GUNST_MEDHOLD_I_KLAGE && (
-              <FormattedMessage id="Klage.Behandle.Omgjort" />
-            )}
-            {klageVurderingOmgjoer === klageVurderingOmgjoerType.UGUNST_MEDHOLD_I_KLAGE && (
-              <FormattedMessage id="Klage.Behandle.Ugunst" />
-            )}
-            {klageVurderingOmgjoer === klageVurderingOmgjoerType.DELVIS_MEDHOLD_I_KLAGE && (
+            {klageVurderingOmgjoer === 'GUNST_MEDHOLD_I_KLAGE' && <FormattedMessage id="Klage.Behandle.Omgjort" />}
+            {klageVurderingOmgjoer === 'UGUNST_MEDHOLD_I_KLAGE' && <FormattedMessage id="Klage.Behandle.Ugunst" />}
+            {klageVurderingOmgjoer === 'DELVIS_MEDHOLD_I_KLAGE' && (
               <FormattedMessage id="Klage.Behandle.DelvisOmgjort" />
             )}
           </BodyShort>
         </VStack>
       )}
-      {(vurdering === klageVurderingType.OPPHEVE_YTELSESVEDTAK ||
-        vurdering === klageVurderingType.HJEMSENDE_UTEN_Å_OPPHEVE) && (
+      {(vurdering === 'OPPHEVE_YTELSESVEDTAK' || vurdering === 'HJEMSENDE_UTEN_Å_OPPHEVE') && (
         <VStack gap="space-4">
           <Label size="small">
             <FormattedMessage id="Klage.ResolveKlage.Cause" />

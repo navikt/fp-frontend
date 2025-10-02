@@ -8,11 +8,7 @@ import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import {
-  AksjonspunktKode,
-  InnsynResultatType as innsynResultatTyperKV,
-  Kommunikasjonsretning,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -74,7 +70,7 @@ const transformValues = (values: InnsynFormValues, documents: Dokument[]): Vurde
 
 // Samme dokument kan ligge på flere behandlinger under samme fagsak.
 const getFilteredReceivedDocuments = (allDocuments: Dokument[]): Dokument[] => {
-  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === Kommunikasjonsretning.INN);
+  const filteredDocuments = allDocuments.filter(doc => doc.kommunikasjonsretning === 'INN');
   for (const doc of allDocuments) {
     if (!filteredDocuments.some(fd => fd.dokumentId === doc.dokumentId)) {
       filteredDocuments.push(doc);
@@ -164,9 +160,8 @@ export const InnsynForm = ({ innsyn, alleDokumenter = [] }: Props) => {
               ))}
             </HStack>
           </RhfRadioGroup>
-          {(innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ||
-            innsynResultatTypeKode === innsynResultatTyperKV.DELVISTINNVILGET) && (
-            <ArrowBox alignOffset={innsynResultatTypeKode === innsynResultatTyperKV.INNVILGET ? 28 : 176}>
+          {(innsynResultatTypeKode === 'INNV' || innsynResultatTypeKode === 'DELV') && (
+            <ArrowBox alignOffset={innsynResultatTypeKode === 'INNV' ? 28 : 176}>
               <VStack gap="space-16">
                 <RhfRadioGroup
                   name="sattPaVent"

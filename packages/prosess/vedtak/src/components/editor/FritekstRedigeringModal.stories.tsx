@@ -3,7 +3,6 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { RelasjonsRolleType } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, type PanelDataArgs, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type { Fagsak } from '@navikt/fp-types';
 
@@ -30,9 +29,9 @@ const FAGSAK_MED_MARKERING_PRAKSIS_UTSETTELSE = {
     fødselsdato: '',
     språkkode: '-',
   },
-  relasjonsRolleType: RelasjonsRolleType.MOR,
+  relasjonsRolleType: 'MORA',
   annenpartBehandling: {
-    relasjonsRolleType: RelasjonsRolleType.FAR,
+    relasjonsRolleType: 'FARA',
     saksnummer: '',
     behandlingUuid: '',
   },

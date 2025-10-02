@@ -7,7 +7,7 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, RelasjonsRolleType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -59,7 +59,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: P
       ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
     });
 
-  const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== RelasjonsRolleType.MOR || harUføretrygd === 'JA';
+  const skalAvklareUforetrygd = omsorgOgRett.relasjonsRolleType !== 'MORA' || harUføretrygd === 'JA';
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>

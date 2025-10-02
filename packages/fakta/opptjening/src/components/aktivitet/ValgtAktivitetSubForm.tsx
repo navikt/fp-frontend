@@ -4,24 +4,23 @@ import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { BeløpLabel, DateLabel } from '@navikt/ft-ui-komponenter';
 import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
-import { OpptjeningAktivitetType } from '@navikt/fp-kodeverk';
-import type { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, FerdiglignetNæring, OpptjeningAktivitetType } from '@navikt/fp-types';
 
-const YTELSE_TYPER = [
-  OpptjeningAktivitetType.SYKEPENGER,
-  OpptjeningAktivitetType.FORELDREPENGER,
-  OpptjeningAktivitetType.PLEIEPENGER,
-  OpptjeningAktivitetType.SVANGERSKAPSPENGER,
-  OpptjeningAktivitetType.UTENLANDSK_ARBEIDSFORHOLD,
-];
+const YTELSE_TYPER = new Set<OpptjeningAktivitetType>([
+  'SYKEPENGER',
+  'FORELDREPENGER',
+  'PLEIEPENGER',
+  'SVANGERSKAPSPENGER',
+  'UTENLANDSK_ARBEIDSFORHOLD',
+]);
 
-const erAvType = (valgtAktivitetstype?: string, ...opptjeningAktivitetType: string[]): boolean =>
-  !!valgtAktivitetstype && opptjeningAktivitetType.includes(valgtAktivitetstype);
+const erAvType = (
+  valgtAktivitetstype?: OpptjeningAktivitetType,
+  ...opptjeningAktivitetType: OpptjeningAktivitetType[]
+): boolean => !!valgtAktivitetstype && opptjeningAktivitetType.includes(valgtAktivitetstype);
 
-const getOppdragsgiverIntlId = (valgtAktivitetstype?: string): string =>
-  erAvType(valgtAktivitetstype, OpptjeningAktivitetType.FRILANS)
-    ? 'ActivityPanel.Oppdragsgiver'
-    : 'ActivityPanel.Arbeidsgiver';
+const getOppdragsgiverIntlId = (valgtAktivitetstype?: OpptjeningAktivitetType): string =>
+  erAvType(valgtAktivitetstype, 'FRILANS') ? 'ActivityPanel.Oppdragsgiver' : 'ActivityPanel.Arbeidsgiver';
 
 const finnArbeidsgivertekst = (
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
@@ -42,7 +41,7 @@ const finnNæringLabel = (ferdiglignetNæring: FerdiglignetNæring[]): string =>
   ferdiglignetNæring.length > 0 ? 'ActivityPanel.FerdiglignetNæring' : 'ActivityPanel.IngenFerdiglignetNæring';
 
 interface Props {
-  valgtAktivitetstype?: string;
+  valgtAktivitetstype?: OpptjeningAktivitetType;
   arbeidsgiverReferanse?: string;
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
   stillingsandel: number;
@@ -64,7 +63,7 @@ export const ValgtAktivitetSubForm = ({
   ferdiglignetNæring,
 }: Props) => (
   <VStack gap="space-16">
-    {erAvType(valgtAktivitetstype, OpptjeningAktivitetType.ARBEID, OpptjeningAktivitetType.NARING, ...YTELSE_TYPER) && (
+    {erAvType(valgtAktivitetstype, 'ARBEID', 'NÆRING', ...YTELSE_TYPER) && (
       <HStack gap="space-16">
         <div>
           <Label size="small">
@@ -74,7 +73,7 @@ export const ValgtAktivitetSubForm = ({
             {finnArbeidsgivertekst(arbeidsgiverOpplysningerPerId, arbeidsgiverReferanse)}
           </BodyShort>
         </div>
-        {erAvType(valgtAktivitetstype, OpptjeningAktivitetType.ARBEID) && (
+        {erAvType(valgtAktivitetstype, 'ARBEID') && (
           <div>
             <Label size="small">
               <FormattedMessage id="ActivityPanel.Stillingsandel" />
@@ -84,7 +83,7 @@ export const ValgtAktivitetSubForm = ({
         )}
       </HStack>
     )}
-    {erAvType(valgtAktivitetstype, OpptjeningAktivitetType.NARING) && (
+    {erAvType(valgtAktivitetstype, 'NÆRING') && (
       <>
         <div>
           <Label size="small">

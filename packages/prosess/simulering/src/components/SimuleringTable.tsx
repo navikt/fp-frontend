@@ -6,11 +6,11 @@ import { formatCurrencyNoKr, getRangeOfMonths } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 import dayjs from 'dayjs';
 
-import { MottakerType } from '@navikt/fp-kodeverk';
 import type {
   ArbeidsgiverOpplysningerPerId,
   DetaljertSimuleringResultat,
   Mottaker,
+  MottakerType,
   SimuleringResultatPerFagområde,
   SimuleringResultatRad,
 } from '@navikt/fp-types';
@@ -199,7 +199,7 @@ const tableTitle = (
   mottaker: Mottaker,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
 ): ReactElement | null =>
-  mottaker.mottakerType === MottakerType.ARBG || mottaker.mottakerType === MottakerType.ARBGP ? (
+  mottaker.mottakerType === 'ARBG_ORG' || mottaker.mottakerType === 'ARBG_PRIV' ? (
     <Heading size="xsmall" level="3">
       {lagVisningsNavn(mottaker, arbeidsgiverOpplysningerPerId)}
     </Heading>
@@ -218,8 +218,8 @@ const getResultatRadene = (
     : [];
 };
 
-const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: string): boolean =>
-  !!(ingenPerioderMedAvvik && mottakerTypeKode === MottakerType.BRUKER);
+const avvikBruker = (ingenPerioderMedAvvik: boolean, mottakerTypeKode: MottakerType): boolean =>
+  !!(ingenPerioderMedAvvik && mottakerTypeKode === 'BRUKER');
 
 const getPeriodeFom = (periodeFom: string, nesteUtbPeriodeFom: string): string => periodeFom || nesteUtbPeriodeFom;
 

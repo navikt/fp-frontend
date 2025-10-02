@@ -10,7 +10,7 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { omitMany } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { RelasjonsRolleType, UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
+import { UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, Fagsak, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import { type KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
@@ -176,7 +176,7 @@ export const UttakFaktaDetailForm = ({
     årsakstype === Årsakstype.UTTAK &&
     (stønadskonto === UttakPeriodeType.FELLESPERIODE || stønadskonto === UttakPeriodeType.FORELDREPENGER);
   const visMorsAktivitet =
-    fagsak.relasjonsRolleType !== RelasjonsRolleType.MOR &&
+    fagsak.relasjonsRolleType !== 'MORA' &&
     (erUttakOgFellesperiodeEllerForeldrepenger || årsakstype === Årsakstype.UTSETTELSE);
 
   return (
