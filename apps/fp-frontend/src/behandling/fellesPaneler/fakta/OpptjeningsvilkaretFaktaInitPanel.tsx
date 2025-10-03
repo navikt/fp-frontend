@@ -29,7 +29,7 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
 
   const skalPanelVisesIMeny =
     behandling.vilkår.some(v => v.vilkarType === 'FP_VK_23') &&
-    behandling.vilkår.some(v => v.vilkarType === 'FP_VK_23' && v.vilkarStatus === 'OPPFYLT');
+    behandling.vilkår.some(v => v.vilkarType === 'FP_VK_2' && v.vilkarStatus === 'OPPFYLT');
 
   const api = useBehandlingApi(behandling);
 
