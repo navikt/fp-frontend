@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type FormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling, VenteArsakType } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, Behandling } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
