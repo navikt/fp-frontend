@@ -1,11 +1,13 @@
 import { useState } from 'react';
 
+import type { VilkarUtfallType } from '@navikt/fp-types';
+
 export type ProsessPanelMenyData = {
   id: string;
   tekst: string;
   erAktiv: boolean;
   harÅpentAksjonspunkt: boolean;
-  status: string;
+  status: VilkarUtfallType;
   skalVisesIMeny: boolean;
 };
 

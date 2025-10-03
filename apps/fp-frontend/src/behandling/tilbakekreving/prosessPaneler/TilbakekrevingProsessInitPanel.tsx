@@ -9,9 +9,8 @@ import {
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { Aksjonspunkt, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverkTilbakekreving, VilkarUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent, useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -82,9 +81,9 @@ const Wrapper = (props: Omit<ComponentProps<typeof TilbakekrevingProsessIndex>, 
   );
 };
 
-const finnTilbakekrevingStatus = (aksjonspunkt: Aksjonspunkt[]): string => {
+const finnTilbakekrevingStatus = (aksjonspunkt: Aksjonspunkt[]): VilkarUtfallType => {
   if (aksjonspunkt.length > 0) {
-    return aksjonspunkt.some(erAksjonspunktÅpent) ? VilkarUtfallType.IKKE_VURDERT : VilkarUtfallType.OPPFYLT;
+    return aksjonspunkt.some(erAksjonspunktÅpent) ? 'IKKE_VURDERT' : 'OPPFYLT';
   }
-  return VilkarUtfallType.IKKE_VURDERT;
+  return 'IKKE_VURDERT';
 };

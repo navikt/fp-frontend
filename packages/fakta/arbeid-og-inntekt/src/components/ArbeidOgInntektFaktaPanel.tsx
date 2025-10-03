@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button, Table, VStack } from '@navikt/ds-react';
 
-import { AksjonspunktKode, VenteArsakType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import type {
   ArbeidOgInntektsmelding,
@@ -191,12 +191,11 @@ export const ArbeidOgInntektFaktaPanel = ({
           <SettPaVentModalIndex
             submitCallback={settPaVent}
             cancelEvent={() => setVisSettPåVentModal(false)}
-            defaultVenteårsak={VenteArsakType.VENT_OPDT_INNTEKTSMELDING}
+            defaultVenteårsak="VENT_OPDT_INNTEKTSMELDING"
             hasManualPaVent
             ventearsaker={alleKodeverk['Venteårsak']}
             erTilbakekreving={false}
             showModal={visSettPåVentModal}
-            frist={null}
           />
         </div>
       )}

@@ -12,11 +12,11 @@ import {
 } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { KanIkkeOppgiAnnenForelderArsak } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { ANNEN_FORELDER_NAME_PREFIX, KAN_IKKE_OPPGI_NAME_PREFIX } from '../constant';
 import type { AnnenForelderFormValues, AnnenForelderSubFormValues } from '../types';
+import type { KanIkkeOppgiAnnenForelderArsak } from './kanIkkeOppgiAnnenForelderArsak';
 
 import styles from './annenForelderPanel.module.css';
 
@@ -93,14 +93,14 @@ export const OppgiAnnenForelderPanel = ({ readOnly = true, alleKodeverk, fagsakP
                 validate={[required]}
                 isReadOnly={readOnly}
               >
-                <Radio value={KanIkkeOppgiAnnenForelderArsak.UKJENT_FORELDER} size="small">
+                <Radio value={'UKJENT_FORELDER' satisfies KanIkkeOppgiAnnenForelderArsak} size="small">
                   <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.1" />
                 </Radio>
-                <Radio value={KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR} size="small">
+                <Radio value={'IKKE_NORSK_FNR' satisfies KanIkkeOppgiAnnenForelderArsak} size="small">
                   <FormattedMessage id="Registrering.TheOtherParent.CannotSpecifyOtherParent.Reason.2" />
                 </Radio>
               </RhfRadioGroup>
-              {kanIkkeOppgiBegrunnelse?.arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR && (
+              {kanIkkeOppgiBegrunnelse?.arsak === 'IKKE_NORSK_FNR' && (
                 <>
                   <RhfSelect
                     name={`${ANNEN_FORELDER_NAME_PREFIX}.${KAN_IKKE_OPPGI_NAME_PREFIX}.land`}
@@ -138,7 +138,7 @@ OppgiAnnenForelderPanel.transformValues = ({
   kanIkkeOppgiBegrunnelse: { arsak, land, utenlandskFoedselsnummer } = {},
 }: AnnenForelderSubFormValues): AnnenForelderSubFormValues => {
   if (kanIkkeOppgiAnnenForelder) {
-    const erUkjentFar = arsak === KanIkkeOppgiAnnenForelderArsak.IKKE_NORSK_FNR;
+    const erUkjentFar = arsak === 'IKKE_NORSK_FNR';
     return {
       foedselsnummer: undefined,
       kanIkkeOppgiAnnenForelder: true,

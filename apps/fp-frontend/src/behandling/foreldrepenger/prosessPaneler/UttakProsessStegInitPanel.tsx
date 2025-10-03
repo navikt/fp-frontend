@@ -4,21 +4,21 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
-import type { ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt, VilkarUtfallType } from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const getStatusFromUttakresultat = (behandling: Behandling): string => {
+const getStatusFromUttakresultat = (behandling: Behandling): VilkarUtfallType => {
   if (!harLenke(behandling, 'UTTAKSRESULTAT')) {
-    return VilkarUtfallType.IKKE_VURDERT;
+    return 'IKKE_VURDERT';
   }
-  return behandling.alleUttaksperioderAvslått ? VilkarUtfallType.IKKE_OPPFYLT : VilkarUtfallType.OPPFYLT;
+  return behandling.alleUttaksperioderAvslått ? 'IKKE_OPPFYLT' : 'OPPFYLT';
 };
 
 const AKSJONSPUNKT_KODER = [
@@ -49,7 +49,7 @@ export const UttakProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId, perso
 
   const overstyrtStatus = getStatusFromUttakresultat(behandling);
 
-  const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
+  const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
 
   const api = useBehandlingApi(behandling);
 

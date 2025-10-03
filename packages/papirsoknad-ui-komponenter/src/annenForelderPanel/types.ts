@@ -1,10 +1,11 @@
+import type { KanIkkeOppgiAnnenForelderArsak } from './components/kanIkkeOppgiAnnenForelderArsak';
 import { ANNEN_FORELDER_NAME_PREFIX } from './constant';
 
 export type AnnenForelderSubFormValues = {
   foedselsnummer?: string;
   kanIkkeOppgiAnnenForelder?: boolean;
   kanIkkeOppgiBegrunnelse?: {
-    arsak?: string;
+    arsak?: KanIkkeOppgiAnnenForelderArsak;
     land?: string;
     utenlandskFoedselsnummer?: string;
   };

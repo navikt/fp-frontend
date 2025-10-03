@@ -6,7 +6,7 @@ import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -73,7 +73,7 @@ const buildInitialValues = (
 ): FormValues => {
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
   const isOpenAksjonspunkt = aksjonspunkt && aksjonspunkt.status === 'OPPR';
-  const isVilkarGodkjent = soknadExists && VilkarUtfallType.OPPFYLT === status;
+  const isVilkarGodkjent = soknadExists && 'OPPFYLT' === status;
 
   // TODO Mogleg inntektsmeldingerSomIkkeKommer kan fjernast, men trur fjerning av bruken av denne i render er ein midlertidig
   // fiks og at dette derfor skal brukast etterkvart. Sjå TFP-3076
@@ -194,7 +194,7 @@ export const SokersOpplysningspliktForm = ({ soknad, status, arbeidsgiverOpplysn
   const hasAksjonspunkt = formMethods.watch('hasAksjonspunkt');
   const erVilkårOk = formMethods.watch('erVilkarOk');
 
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
     <RhfForm
@@ -267,7 +267,7 @@ export const SokersOpplysningspliktForm = ({ soknad, status, arbeidsgiverOpplysn
             <div>
               {originalErVilkårOk === false && behandling.behandlingsresultat?.avslagsarsak && (
                 <BodyShort size="small">
-                  {alleKodeverk['Avslagsårsak'][VilkarType.SOKERSOPPLYSNINGSPLIKT].find(
+                  {alleKodeverk['Avslagsårsak']['FP_VK_34'].find(
                     type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
                   )?.navn ?? ''}
                 </BodyShort>

@@ -3,8 +3,9 @@ import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
+import type { VilkårType } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../../felles/context/BehandlingDataContext';
@@ -17,8 +18,7 @@ import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandar
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_OPPTJENINGSVILKARET];
 
-const VILKAR_KODER = [VilkarType.OPPTJENINGSPERIODE, VilkarType.OPPTJENINGSVILKARET];
-
+const VILKAR_KODER = ['FP_VK_21', 'FP_VK_23'] satisfies VilkårType[];
 export const OpptjeningInngangsvilkarInitPanel = () => {
   const intl = useIntl();
 

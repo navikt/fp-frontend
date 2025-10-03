@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, SoknadType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -11,6 +11,7 @@ import type {
   FamilieHendelse,
   Personoversikt,
   Soknad,
+  StønadskontoType,
 } from '@navikt/fp-types';
 
 import { TilkjentYtelseProsessIndex } from './TilkjentYtelseProsessIndex';
@@ -34,7 +35,7 @@ const beregningresultat: BeregningsresultatDagytelse = {
       andeler: [
         {
           uttak: {
-            stonadskontoType: StonadskontoType.FELLESPERIODE,
+            stonadskontoType: 'FELLESPERIODE' satisfies StønadskontoType,
             gradering: false,
           },
           aktivitetStatus: 'AT',
@@ -55,7 +56,7 @@ const beregningresultat: BeregningsresultatDagytelse = {
       andeler: [
         {
           uttak: {
-            stonadskontoType: StonadskontoType.FORELDREPENGER,
+            stonadskontoType: 'FORELDREPENGER' satisfies StønadskontoType,
             gradering: false,
           },
           aktivitetStatus: 'AT',
@@ -77,7 +78,7 @@ const beregningresultat: BeregningsresultatDagytelse = {
 
 const søknad = {
   mottattDato: '2019-01-10',
-  soknadType: SoknadType.FODSEL,
+  soknadType: 'ST-001',
   fodselsdatoer: {
     1: '2019-01-01',
   },

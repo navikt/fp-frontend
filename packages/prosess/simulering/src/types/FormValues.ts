@@ -1,5 +1,7 @@
+import type { TilbakekrevingVidereBehandling } from '@navikt/fp-types';
+
 export type FeilutbetalingFormValues = {
-  videreBehandling: string;
+  videreBehandling: TilbakekrevingVidereBehandling;
   varseltekst?: string;
   begrunnelse?: string;
 };

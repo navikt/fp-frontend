@@ -8,9 +8,9 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, FamilieHendelse, Soknad } from '@navikt/fp-types';
+import type { Aksjonspunkt, FamilieHendelse, Soknad, VilkarUtfallType } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -47,8 +47,8 @@ const findDate = (familiehendelse: FamilieHendelse): string | undefined => {
   );
 };
 
-const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: string): FormValues => ({
-  erVilkarOk: aksjonspunkter[0]?.status === 'OPPR' ? undefined : VilkarUtfallType.OPPFYLT === status,
+const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: VilkarUtfallType): FormValues => ({
+  erVilkarOk: aksjonspunkter[0]?.status === 'OPPR' ? undefined : 'OPPFYLT' === status,
   ...ProsessStegBegrunnelseTextFieldNew.buildInitialValues(aksjonspunkter),
 });
 
@@ -61,7 +61,7 @@ const transformValues = (values: FormValues): SoknadsfristAp => ({
 interface Props {
   soknad: Soknad;
   gjeldendeFamiliehendelse: FamilieHendelse;
-  status: string;
+  status: VilkarUtfallType;
 }
 
 /**
@@ -160,7 +160,7 @@ export const ErSoknadsfristVilkaretOppfyltForm = ({ soknad, gjeldendeFamiliehend
         </RhfRadioGroup>
         {isReadOnly && erVilkarOk === false && !!behandling.behandlingsresultat?.avslagsarsak && (
           <BodyShort size="small">
-            {alleKodeverk['Avslagsårsak'][VilkarType.SOKNADFRISTVILKARET].find(
+            {alleKodeverk['Avslagsårsak']['FP_VK_3'].find(
               type => type.kode === behandling.behandlingsresultat?.avslagsarsak,
             )?.navn ?? ''}
           </BodyShort>

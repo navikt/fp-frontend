@@ -1,5 +1,7 @@
 import { use, useEffect } from 'react';
 
+import type { VilkarUtfallType } from '@navikt/fp-types';
+
 import { InngangsvilkårPanelDataContext } from './InngangsvilkarDefaultInitWrapper';
 
 export const useInngangsvilkarRegistrerer = (
@@ -7,7 +9,7 @@ export const useInngangsvilkarRegistrerer = (
   aksjonspunktTekst: string,
   skalVises: boolean,
   erAksjonspunktApent: boolean,
-  status: string,
+  status: VilkarUtfallType,
   erOverstyrt: boolean,
 ) => {
   const { settIngangsvilkårPanelData } = use(InngangsvilkårPanelDataContext);

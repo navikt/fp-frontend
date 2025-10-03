@@ -4,9 +4,8 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { HStack, Link, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { Behandling } from '@navikt/fp-types';
+import type { Behandling, VilkarUtfallType } from '@navikt/fp-types';
 
 import { BehandlingDataContext } from '../context/BehandlingDataContext';
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
@@ -25,7 +24,7 @@ export const InngangsvilkarDefaultInitWrapper = ({ faktaPanelMedÅpentApInfo, ch
 
   const { inngangsvilkårPanelData, settIngangsvilkårPanelData } = useInngangsvilkårPanelData();
 
-  const erIkkeFerdigbehandlet = inngangsvilkårPanelData.some(p => p.status === VilkarUtfallType.IKKE_VURDERT);
+  const erIkkeFerdigbehandlet = inngangsvilkårPanelData.some(p => p.status === 'IKKE_VURDERT');
 
   const harÅpentInngangsvilkårAksjonspunkt = getErAksjonspunktOpen(inngangsvilkårPanelData, behandling);
   const status = getStatus(inngangsvilkårPanelData);
@@ -105,15 +104,14 @@ const InngangsvilkårPanelDataProvider = (props: PropsContext): JSX.Element => {
   return <InngangsvilkårPanelDataContext.Provider value={values}>{children}</InngangsvilkårPanelDataContext.Provider>;
 };
 
-const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: string): boolean =>
+const harMinstEttDelPanelStatus = (paneler: InngangsvilkarPanelData[], vuType: VilkarUtfallType): boolean =>
   paneler.some(p => p.status === vuType);
 
-const getStatus = (paneler: InngangsvilkarPanelData[]): string => {
-  const harStatusIkkeVurdert = harMinstEttDelPanelStatus(paneler, VilkarUtfallType.IKKE_VURDERT);
-  const harStatusOppfylt = harMinstEttDelPanelStatus(paneler, VilkarUtfallType.OPPFYLT);
-  const tempStatus =
-    harStatusOppfylt && !harStatusIkkeVurdert ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT;
-  return harMinstEttDelPanelStatus(paneler, VilkarUtfallType.IKKE_OPPFYLT) ? VilkarUtfallType.IKKE_OPPFYLT : tempStatus;
+const getStatus = (paneler: InngangsvilkarPanelData[]): VilkarUtfallType => {
+  const harStatusIkkeVurdert = harMinstEttDelPanelStatus(paneler, 'IKKE_VURDERT');
+  const harStatusOppfylt = harMinstEttDelPanelStatus(paneler, 'OPPFYLT');
+  const tempStatus = harStatusOppfylt && !harStatusIkkeVurdert ? 'OPPFYLT' : 'IKKE_VURDERT';
+  return harMinstEttDelPanelStatus(paneler, 'IKKE_OPPFYLT') ? 'IKKE_OPPFYLT' : tempStatus;
 };
 
 const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: Behandling): boolean => {
@@ -123,12 +121,9 @@ const getErAksjonspunktOpen = (paneler: InngangsvilkarPanelData[], behandling: B
   if (paneler.some(p => p.harÅpentAksjonspunkt)) {
     return true;
   }
-  if (paneler.some(p => p.status === VilkarUtfallType.IKKE_OPPFYLT)) {
+  if (paneler.some(p => p.status === 'IKKE_OPPFYLT')) {
     return false;
   }
 
-  return !(
-    paneler.every(p => p.status === VilkarUtfallType.IKKE_VURDERT) ||
-    paneler.every(p => p.status === VilkarUtfallType.OPPFYLT)
-  );
+  return !(paneler.every(p => p.status === 'IKKE_VURDERT') || paneler.every(p => p.status === 'OPPFYLT'));
 };

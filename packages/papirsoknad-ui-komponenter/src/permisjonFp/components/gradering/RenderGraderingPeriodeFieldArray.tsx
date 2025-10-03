@@ -19,8 +19,7 @@ import {
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { Arbeidskategori } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn } from '@navikt/fp-types';
+import type { Arbeidskategori, KodeverkMedNavn } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -39,11 +38,7 @@ const defaultGraderingPeriode: GraderingPeriode = {
   skalGraderes: false,
 };
 
-const gyldigArbeidskategori = new Set([
-  Arbeidskategori.ARBEIDSTAKER,
-  Arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE,
-  Arbeidskategori.FRILANSER,
-]);
+const gyldigArbeidskategori = new Set<Arbeidskategori>(['ARBEIDSTAKER', 'SELVSTENDIG_NÆRINGSDRIVENDE', 'FRILANSER']);
 
 const maxValue100 = maxValue(100);
 interface Props {
@@ -222,8 +217,7 @@ const getValiderFørEllerEtter =
 
 const getValiderArbeidsgiverIdNårRequired =
   (getValues: UseFormGetValues<PermisjonFormValues>, index: number) => (arbeidsgiverIdentifikator: string) => {
-    const arbeidsgiverIdentifikatorRequired =
-      getValues(`${getPrefix(index)}.arbeidskategoriType`) === Arbeidskategori.ARBEIDSTAKER;
+    const arbeidsgiverIdentifikatorRequired = getValues(`${getPrefix(index)}.arbeidskategoriType`) === 'ARBEIDSTAKER';
     return arbeidsgiverIdentifikatorRequired ? required(arbeidsgiverIdentifikator) : undefined;
   };
 
@@ -238,7 +232,7 @@ const validerAtArbeidsgiverIdErGyldig = (arbeidsgiverIdentifikator: string) => {
 
 const mapKvoter = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .filter(({ kode }) => gyldigeUttakperioder.has(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

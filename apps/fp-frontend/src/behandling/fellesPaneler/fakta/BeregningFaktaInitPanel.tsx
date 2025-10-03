@@ -12,7 +12,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -115,7 +115,7 @@ const lagModifisertCallback =
   };
 
 const lagBGVilkår = (vilkår: Vilkar[], beregningsgrunnlag?: Beregningsgrunnlag): FtVilkar | null => {
-  const bgVilkar = vilkår.find(v => v.vilkarType === VilkarType.BEREGNINGSGRUNNLAGVILKARET);
+  const bgVilkar = vilkår.find(v => v.vilkarType === 'FP_VK_41');
   if (!bgVilkar || !beregningsgrunnlag) {
     return null;
   }

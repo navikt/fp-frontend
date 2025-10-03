@@ -1,24 +1,8 @@
-import {
-  Arbeidskategori,
-  MedlemskapManuellVurderingType,
-  PersonstatusType,
-  Region,
-  RevurderingVarslingÅrsak,
-  SkjermlenkeType,
-  StonadskontoType,
-  UtsettelseÅrsak,
-  UttakArbeidType,
-  UttakPeriodeType,
-  UttakUtsettelseType,
-  VenteArsakType,
-  VilkarType,
-  VurderÅrsak,
-} from '@navikt/fp-kodeverk';
-
 import type { AdresseType } from './adresseType';
 import type { AktivitetskravPermisjonType } from './aktivitetskravPermisjonType';
 import type { AktivitetStatus } from './aktivitetStatus';
 import type { AnkeOmgjorArsak } from './ankeOmgjorArsak';
+import type { Arbeidskategori } from './arbeidskategori';
 import type { ArbeidType } from './arbeidType';
 import type { Avslagsarsak } from './avslagsarsakCodes';
 import type { BehandlingArsakType } from './behandlingArsakType';
@@ -45,6 +29,7 @@ import type { KonsekvensForYtelsen } from './konsekvensForYtelsen';
 import type { Landkode } from './landkode';
 import type { ManuellBehandlingÅrsak } from './manuellBehandlingÅrsak';
 import type { MedlemskapDekningType } from './medlemskapDekningType';
+import type { MedlemskapManuellVurderingType } from './medlemskapManuellVurderingType';
 import type { MedlemskapType } from './medlemskapType';
 import type { MorsAktivitet } from './morsAktivitet';
 import type { NaturalYtelseType } from './naturalYtelseType';
@@ -56,12 +41,24 @@ import type { OpptjeningAktivitetType } from './opptjeningAktivitetType';
 import type { OverføringÅrsak } from './overføringÅrsak';
 import type { PeriodeResultatÅrsak } from './periodeResultatÅrsak';
 import type { PermisjonsbeskrivelseType } from './permisjonsbeskrivelseType';
+import type { PersonstatusType } from './personstatusType';
+import type { Region } from './region';
 import type { RelasjonsRolleType } from './relasjonsRolleType';
+import type { RevurderingVarslingÅrsak } from './revurderingVarslingÅrsak';
 import type { SivilstandType } from './sivilstandType';
+import type { SkjermlenkeType } from './skjermlenkeType';
+import type { StønadskontoType } from './stønadskontoType';
+import type { UtsettelseÅrsak } from './utsettelseÅrsak';
+import type { UttakArbeidType } from './uttakArbeidType';
+import type { UttakPeriodeType } from './uttakPeriodeType';
+import type { UttakUtsettelseType } from './uttakUtsettelseType';
+import type { VenteArsakType } from './venteArsakType';
 import type { VergeType } from './vergeTsType';
+import type { VilkårType } from './vilkårType';
 import type { VirksomhetType } from './virksomhetType';
+import type { VurderÅrsak } from './vurderÅrsak';
 
-//Mapping mellom KodeverkType og enums/union-types med verdier
+//Mapping mellom KodeverkType og union-types med verdier
 type KodeverkEnumMap = {
   AdresseType: AdresseType;
   AktivitetskravPermisjonType: AktivitetskravPermisjonType;
@@ -111,14 +108,14 @@ type KodeverkEnumMap = {
   RevurderingVarslingÅrsak: RevurderingVarslingÅrsak;
   SivilstandType: SivilstandType;
   SkjermlenkeType: SkjermlenkeType;
-  StønadskontoType: StonadskontoType;
+  StønadskontoType: StønadskontoType;
   UtsettelseÅrsak: UtsettelseÅrsak;
   UttakArbeidType: UttakArbeidType;
   UttakPeriodeType: UttakPeriodeType;
   UttakUtsettelseType: UttakUtsettelseType;
   Venteårsak: VenteArsakType;
   VergeType: VergeType;
-  VilkårType: VilkarType;
+  VilkårType: VilkårType;
   VirksomhetType: VirksomhetType;
   VurderÅrsak: VurderÅrsak;
   Inntektskategori: Inntektskategori;
@@ -126,7 +123,7 @@ type KodeverkEnumMap = {
 
 export type KodeverkType = keyof KodeverkEnumMap;
 
-type AvslagsårsakKodeverk = Record<VilkarType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>; // TODO [JOHANNES] -- mildertidig (?) hack
+type AvslagsårsakKodeverk = Record<VilkårType | '-', KodeverkMedNavn<'Avslagsårsak'>[]>; // TODO [JOHANNES] -- mildertidig (?) hack
 export type PeriodeResultatÅrsakKodeverk = KodeverkMedNavn<'PeriodeResultatÅrsak'> & {
   lovHjemmel: string;
   sortering: string;

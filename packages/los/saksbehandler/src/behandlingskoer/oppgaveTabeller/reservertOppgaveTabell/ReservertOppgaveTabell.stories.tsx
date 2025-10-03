@@ -6,7 +6,6 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
@@ -41,7 +40,7 @@ const RESERVERTE_OPPGAVER = [
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: [],
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
   {
     id: 3,
@@ -60,7 +59,7 @@ const RESERVERTE_OPPGAVER = [
     erTilSaksbehandling: true,
     behandlingId: '2',
     andreKriterier: [],
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
   {
     id: 4,
@@ -78,8 +77,8 @@ const RESERVERTE_OPPGAVER = [
     fagsakYtelseType: 'FP',
     erTilSaksbehandling: true,
     behandlingId: '2',
-    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
 ] satisfies Oppgave[];
 

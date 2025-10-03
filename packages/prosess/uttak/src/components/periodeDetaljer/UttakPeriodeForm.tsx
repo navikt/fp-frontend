@@ -8,17 +8,17 @@ import { hasValidText, maxLength, minLength, notDash, required } from '@navikt/f
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { PeriodeResultatType, StonadskontoType, UtsettelseArsakCode } from '@navikt/fp-kodeverk';
 import type {
   AarsakFilter,
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
-  foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType,
   GraderingAvslagÅrsakKodeverk,
   KodeverkMedNavn,
   PeriodeResultatÅrsakKodeverk,
   PeriodeSoker,
   PeriodeSokerAktivitet,
+  UtsettelseArsakCode,
+  UttakPeriodeType,
 } from '@navikt/fp-types';
 
 import { finnArbeidsforholdNavnOgProsentArbeid, UttakAktiviteterTabell } from './UttakAktiviteterTabell';
@@ -34,7 +34,7 @@ const erPeriodeOppfylt = (
   valgtPeriode: PeriodeSoker,
   utfallKoder: PeriodeResultatÅrsakKodeverk[],
 ): boolean | undefined => {
-  if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET) {
+  if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === 'INNVILGET') {
     return true;
   }
 
@@ -42,7 +42,7 @@ const erPeriodeOppfylt = (
   if (kontoIkkeSatt) {
     return false;
   }
-  if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING) {
+  if (valgtPeriode.periodeResultatType && valgtPeriode.periodeResultatType === 'MANUELL_BEHANDLING') {
     // Litt flaky. Bør sende med kodeverket og slå opp utfallType
     const kodeverkKode = utfallKoder.find(kodeItem => kodeItem.kode === valgtPeriode.periodeResultatÅrsak);
     if ((kodeverkKode && kodeverkKode.utfallType === 'INNVILGET') || valgtPeriode.oppholdÅrsak !== '-') {
@@ -77,7 +77,7 @@ const lagOptionsTilPeriodeÅrsakSelect = (
   periodeFom: string,
   utfallType: string,
   aarsakFilter: AarsakFilter,
-  periodeType: string,
+  periodeType: UttakPeriodeType,
   utsettelseType?: string,
 ): ReactElement[] => {
   årsakKoder.sort(sorterÅrsakKodeverk);
@@ -126,7 +126,7 @@ const finnUker = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker):
   if (
     valgtPeriode.periodeResultatType &&
     !aktivitet.trekkdagerDesimaler &&
-    valgtPeriode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING
+    valgtPeriode.periodeResultatType === 'MANUELL_BEHANDLING'
   ) {
     return '0';
   }
@@ -140,7 +140,7 @@ const finnDager = (aktivitet: PeriodeSokerAktivitet, valgtPeriode: PeriodeSoker)
   if (
     valgtPeriode.periodeResultatType &&
     !aktivitet.trekkdagerDesimaler &&
-    valgtPeriode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING
+    valgtPeriode.periodeResultatType === 'MANUELL_BEHANDLING'
   ) {
     return '0';
   }
@@ -172,12 +172,12 @@ const lagOptionsTilGraderingAvslagsårsakerSelect = (alleKodeverk: AlleKodeverk)
 };
 
 const hentTekstForÅVurdereUtsettelseVedMindreEnn100ProsentStilling = (
-  utsettelseType: foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType,
+  utsettelseType: UtsettelseArsakCode,
   aktiviteter: PeriodeSokerAktivitet[],
   intl: IntlShape,
   erOppfylt?: boolean,
 ): string | undefined => {
-  if (utsettelseType === UtsettelseArsakCode.ARBEID && erOppfylt) {
+  if (utsettelseType === 'ARBEID' && erOppfylt) {
     const prosentIArbeid = aktiviteter.reduce((total, aktivitet): number => total + (aktivitet.prosentArbeid ?? 0), 0);
     if (prosentIArbeid < 100) {
       return intl.formatMessage({ id: 'UttakActivity.MerEn100ProsentOgOgyldigUtsettlse' });
@@ -242,8 +242,7 @@ const transformValues = (
   begrunnelse: values.begrunnelse,
   graderingInnvilget: values.erOppfylt ? values.graderingInnvilget : false,
   oppholdÅrsak: values.oppholdArsak,
-  periodeResultatType:
-    values.erOppfylt || values.oppholdArsak !== '-' ? PeriodeResultatType.INNVILGET : PeriodeResultatType.AVSLATT,
+  periodeResultatType: values.erOppfylt || values.oppholdArsak !== '-' ? 'INNVILGET' : 'AVSLÅTT',
   graderingAvslagÅrsak: values.graderingAvslagAarsak,
   periodeResultatÅrsak: values.periodeAarsak,
   samtidigUttaksprosent: values.samtidigUttaksprosent ? Number.parseFloat(values.samtidigUttaksprosent) : undefined,
@@ -318,7 +317,7 @@ export const UttakPeriodeForm = ({
   const valgtInnvilgelsesÅrsak = formMethods.watch('periodeAarsak');
   const aktiviteter = formMethods.watch('aktiviteter');
 
-  const stønadskontoType = aktiviteter[0]?.stønadskontoType ?? StonadskontoType.UDEFINERT;
+  const stønadskontoType: UttakPeriodeType = aktiviteter[0]?.stønadskontoType ?? '-';
 
   const periodeÅrsakOptions = lagOptionsTilPeriodeÅrsakSelect(
     periodeResultatårsakKoder,

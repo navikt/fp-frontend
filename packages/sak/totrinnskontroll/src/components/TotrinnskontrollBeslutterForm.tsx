@@ -7,13 +7,14 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
   KonsekvensForYtelsen,
+  SkjermlenkeType,
   TotrinnskontrollSkjermlenkeContext,
+  VurderÅrsak,
 } from '@navikt/fp-types';
 
 import {
@@ -41,27 +42,27 @@ const harIkkeKonsekvenserForYtelsen = (
   return !konsekvenserForYtelsenKoder.some(kode => kode === konsekvenserForYtelsen[0]);
 };
 
-const finnArsaker = (vurderPaNyttArsaker: string[]) =>
+const finnArsaker = (vurderPaNyttArsaker: VurderÅrsak[]) =>
   vurderPaNyttArsaker.reduce((acc, arsak) => {
-    if (arsak === VurderÅrsak.FEIL_FAKTA) {
+    if (arsak === 'FEIL_FAKTA') {
       return { ...acc, feilFakta: true };
     }
-    if (arsak === VurderÅrsak.FEIL_LOV) {
+    if (arsak === 'FEIL_LOV') {
       return { ...acc, feilLov: true };
     }
-    if (arsak === VurderÅrsak.FEIL_REGEL) {
+    if (arsak === 'FEIL_REGEL') {
       return { ...acc, feilSkjønn: true };
     }
-    if (arsak === VurderÅrsak.SKJØNN) {
+    if (arsak === 'SKJØNN') {
       return { ...acc, feilSkjønn: true };
     }
-    if (arsak === VurderÅrsak.UTREDNING) {
+    if (arsak === 'UTREDNING') {
       return { ...acc, feilUtredning: true };
     }
-    if (arsak === VurderÅrsak.SAKSFLYT || arsak === VurderÅrsak.ANNET) {
+    if (arsak === 'SAKSFLYT' || arsak === 'ANNET') {
       return { ...acc, feilSaksflyt: true };
     }
-    if (arsak === VurderÅrsak.BEGRUNNELSE) {
+    if (arsak === 'BEGRUNNELSE') {
       return { ...acc, feilBegrunnelse: true };
     }
     return {};

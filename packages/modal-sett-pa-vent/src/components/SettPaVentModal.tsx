@@ -7,12 +7,11 @@ import { dateAfterOrEqualToToday, dateBeforeToday, hasValidDate, required } from
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { VenteArsakType } from '@navikt/fp-kodeverk';
-import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving } from '@navikt/fp-types';
+import type { KodeverkMedNavn, KodeverkMedNavnTilbakekreving, VenteArsakType } from '@navikt/fp-types';
 
 export type FormValues = {
   frist?: string;
-  ventearsak?: string;
+  ventearsak?: VenteArsakType;
 };
 
 interface Props {
@@ -23,9 +22,9 @@ interface Props {
   erTilbakekreving: boolean;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
-  frist: string | null;
-  ventearsak: string | null;
-  defaultVenteårsak?: string | null;
+  frist?: string;
+  ventearsak?: VenteArsakType;
+  defaultVenteårsak?: VenteArsakType;
 }
 
 export const SettPaVentModal = ({
@@ -38,7 +37,7 @@ export const SettPaVentModal = ({
   ventearsak,
   visBrevErBestilt = false,
   hasManualPaVent,
-  defaultVenteårsak = null,
+  defaultVenteårsak,
 }: Props) => {
   const intl = useIntl();
 
@@ -150,50 +149,53 @@ const initFrist = (): string => {
   return dayjs(date).format(ISO_DATE_FORMAT);
 };
 
-const buildInitialValues = (hasManualPaVent: boolean, frist: string | null, ventearsak: string | null): FormValues => ({
+const buildInitialValues = (hasManualPaVent: boolean, frist?: string, ventearsak?: VenteArsakType): FormValues => ({
   ventearsak: ventearsak ?? undefined,
   frist: frist || hasManualPaVent === false ? (frist ?? undefined) : initFrist(),
 });
 
-const manuelleVenteArsaker = new Set([
-  VenteArsakType.AVV_DOK,
-  VenteArsakType.AVV_FODSEL,
-  VenteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
-  VenteArsakType.UTV_FRIST,
-  VenteArsakType.FOR_TIDLIG_SOKNAD,
-  VenteArsakType.VENT_OPDT_INNTEKTSMELDING,
-  VenteArsakType.VENT_UTLAND_TRYGD,
-  VenteArsakType.UTVIDET_TILSVAR_FRIST,
-  VenteArsakType.ENDRE_TILKJENT_YTELSE,
-  VenteArsakType.VENT_PÅ_MULIG_MOTREGNING,
+// @ts-expect-error tilbakekreving eller fjerna typar?
+const manuelleVenteArsaker = new Set<VenteArsakType>([
+  'AVV_DOK',
+  'AVV_FODSEL',
+  'VENT_PÅ_BRUKERTILBAKEMELDING',
+  'UTV_FRIST',
+  'FOR_TIDLIG_SOKNAD',
+  'VENT_OPDT_INNTEKTSMELDING',
+  'VENT_UTLAND_TRYGD',
+  'UTV_TIL_FRIST',
+  'ENDRE_TILKJENT_YTELSE',
+  'VENT_PÅ_MULIG_MOTREGNING',
 ]);
 
-const automatiskeVentearsakerForTilbakekreving = new Set([
-  VenteArsakType.VENT_PÅ_BRUKERTILBAKEMELDING,
-  VenteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG,
+// @ts-expect-error tilbakekreving
+const automatiskeVentearsakerForTilbakekreving = new Set<VenteArsakType>([
+  'VENT_PÅ_BRUKERTILBAKEMELDING',
+  'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
 ]);
 
 const inkluderVentearsak = (
   ventearsak: KodeverkMedNavn<'Venteårsak'> | KodeverkMedNavnTilbakekreving<'Venteårsak'>,
-  valgtVentearsak?: string,
+  valgtVentearsak?: VenteArsakType,
 ): boolean =>
   automatiskeVentearsakerForTilbakekreving.has(ventearsak.kode) ? ventearsak.kode === valgtVentearsak : true;
 
 const skalViseFristenTekst = (
   erTilbakekreving: boolean,
-  originalFrist: string | null,
-  frist: string | undefined,
-  ventearsak: string | undefined,
+  originalFrist?: string,
+  frist?: string,
+  ventearsak?: VenteArsakType,
 ): boolean => {
   const erFristenUtløpt =
     erTilbakekreving &&
     ((!!frist && dateBeforeToday(frist) === null) || (!!originalFrist && dateBeforeToday(originalFrist) === null));
-  const erVenterPaKravgrunnlag = ventearsak === VenteArsakType.VENT_PÅ_TILBAKEKREVINGSGRUNNLAG;
+  // @ts-expect-error tilbakekreving
+  const erVenterPaKravgrunnlag = ventearsak === 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG';
   return erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 };
 
-const harEndretVenteårsak = (originalVentearsak: string | null, ventearsak: string | undefined) =>
+const harEndretVenteårsak = (originalVentearsak?: VenteArsakType, ventearsak?: VenteArsakType) =>
   !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
 
-const harEndretFrist = (originalFrist: string | null, frist: string | undefined) =>
+const harEndretFrist = (originalFrist?: string, frist?: string) =>
   !(originalFrist === frist || (!frist && !originalFrist));

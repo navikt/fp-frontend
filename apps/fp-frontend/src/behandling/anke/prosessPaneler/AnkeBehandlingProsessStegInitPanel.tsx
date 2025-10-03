@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { AnkeProsessIndex } from '@navikt/fp-prosess-anke';
 
@@ -28,8 +27,8 @@ export const AnkeBehandlingProsessStegInitPanel = () => {
       standardPanelProps={standardPanelProps}
       prosessPanelKode={ProsessStegCode.ANKEBEHANDLING}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Ankebehandling' })}
-      skalPanelVisesIMeny
-      overstyrtStatus={behandling.behandlingsresultat?.type ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT}
+      skalPanelVisesIMeny={true}
+      overstyrtStatus={behandling.behandlingsresultat?.type ? 'OPPFYLT' : 'IKKE_VURDERT'}
     >
       {ankeVurdering ? (
         <AnkeProsessIndex

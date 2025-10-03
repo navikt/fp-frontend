@@ -1,10 +1,11 @@
-import type { AndreKriterierType, KøSortering, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
-
+import type { AndreKriterierType } from './andreKriterierType';
 import type { BehandlingType } from './behandlingType';
 import type { FagsakStatus } from './fagsakStatus';
 import type { FagsakYtelseType } from './fagsakYtelseType';
+import type { KøSortering } from './køSortering';
+import type { OppgaveBehandlingStatus } from './oppgaveBehandlingStatus';
 
-//Mapping mellom LosKodeverkType og enums/union-types med verdier
+//Mapping mellom LosKodeverkType og union-types med verdier
 type KodeverkEnumMap = {
   BehandlingType: BehandlingType;
   AndreKriterierType: AndreKriterierType;

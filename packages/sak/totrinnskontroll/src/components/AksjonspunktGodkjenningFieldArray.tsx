@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom';
 import { BodyShort, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
-import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
+  SkjermlenkeType,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 

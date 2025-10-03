@@ -1,5 +1,4 @@
-import type { AndreKriterierType, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
-import type { BehandlingType } from '@navikt/fp-types';
+import type { AndreKriterierType, BehandlingType, FagsakYtelseType, OppgaveBehandlingStatus } from '@navikt/fp-types';
 
 export type ReservasjonStatus = Readonly<{
   erReservert: boolean;
@@ -25,7 +24,7 @@ export type Oppgave = Readonly<{
   behandlingstype: BehandlingType;
   opprettetTidspunkt: string;
   behandlingsfrist: string;
-  fagsakYtelseType: string;
+  fagsakYtelseType: FagsakYtelseType;
   erTilSaksbehandling: boolean;
   behandlingId: string;
   andreKriterier: AndreKriterierType[];

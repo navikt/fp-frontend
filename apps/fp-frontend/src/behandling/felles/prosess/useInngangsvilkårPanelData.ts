@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
+import type { VilkarUtfallType } from '@navikt/fp-types';
+
 export type InngangsvilkarPanelData = {
   id: string;
   aksjonspunktTekst?: string;
   harÅpentAksjonspunkt: boolean;
-  status: string;
+  status: VilkarUtfallType;
 };
 
 export const useInngangsvilkårPanelData = () => {

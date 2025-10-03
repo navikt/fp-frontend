@@ -1,7 +1,7 @@
 import { type ReactElement, use } from 'react';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import type { VilkarUtfallType } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider, PanelDataProvider, usePanelOverstyring } from '@navikt/fp-utils';
 
 import { BehandlingDataContext } from '../context/BehandlingDataContext';
@@ -11,7 +11,7 @@ import type { StandardProsessPanelProps } from './useStandardProsessPanelProps';
 
 interface Props {
   skalPanelVisesIMeny: boolean;
-  overstyrtStatus?: string;
+  overstyrtStatus?: VilkarUtfallType;
   prosessPanelKode: ProsessStegCode;
   prosessPanelMenyTekst: string;
   skalMarkeresSomAktiv?: boolean;
@@ -60,7 +60,7 @@ const ProsessPanel = ({
     markertSomAktiv || harÅpentAksjonspunkt,
   );
 
-  const skalVisePanel = erPanelValgt && (harÅpentAksjonspunkt || status !== VilkarUtfallType.IKKE_VURDERT);
+  const skalVisePanel = erPanelValgt && (harÅpentAksjonspunkt || status !== 'IKKE_VURDERT');
 
   return (
     <MellomlagretFormDataProvider behandling={behandling}>

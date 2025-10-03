@@ -2,7 +2,7 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import type { FodselOgTilrettelegging } from '@navikt/fp-types';
+import type { FodselOgTilrettelegging, VilkarUtfallType } from '@navikt/fp-types';
 
 import { SvangerskapVilkarForm } from './components/SvangerskapVilkarForm';
 
@@ -12,7 +12,7 @@ const intl = createIntl(messages);
 
 interface Props {
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
-  status: string;
+  status: VilkarUtfallType;
 }
 
 export const SvangerskapVilkarProsessIndex = (props: Props) => (

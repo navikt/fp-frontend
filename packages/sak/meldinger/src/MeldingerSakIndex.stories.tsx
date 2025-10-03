@@ -2,7 +2,7 @@ import type { Meta, ReactRenderer, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { BehandlingAppKontekst, DokumentMalType } from '@navikt/fp-types';
 
 import { MeldingerSakIndex } from './MeldingerSakIndex';
@@ -33,26 +33,13 @@ const TEMPLATES = [
   },
 ];
 
-const REVURDERING_VARSLING_ARSAK = [
-  {
-    kode: RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
-    navn: 'Barn ikke registrert i folkeregisteret',
-    kodeverk: 'UGUNST',
-  },
-  {
-    kode: RevurderingVarslingÅrsak.ANNET,
-    navn: 'Annet',
-    kodeverk: 'UGUNST',
-  },
-];
-
 const meta = {
   title: 'sak/sak-meldinger',
   component: MeldingerSakIndex,
   decorators: [withStyleProvider],
   args: {
     kanVeilede: false,
-    revurderingVarslingArsak: REVURDERING_VARSLING_ARSAK,
+    revurderingVarslingArsak: alleKodeverk.RevurderingVarslingÅrsak,
     behandling: {
       brevmaler: TEMPLATES,
       språkkode: 'NB',

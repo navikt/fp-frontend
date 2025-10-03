@@ -7,7 +7,6 @@ import { RhfRadioGroup, RhfSelect } from '@navikt/ft-form-hooks';
 import { required, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { createIntl } from '@navikt/ft-utils';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Behandlingsresultat, KodeverkMedNavn } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
@@ -104,7 +103,7 @@ VilkarResultPicker.buildInitialValues = (
   status: string,
   behandlingsresultat?: Behandlingsresultat,
 ): FormValues => {
-  const erVilkårOk = aksjonspunkter.some(erAksjonspunktÅpent) ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const erVilkårOk = aksjonspunkter.some(erAksjonspunktÅpent) ? undefined : 'OPPFYLT' === status;
   return {
     erVilkarOk: erVilkårOk,
     avslagskode:

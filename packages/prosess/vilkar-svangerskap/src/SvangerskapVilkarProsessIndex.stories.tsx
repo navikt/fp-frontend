@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -42,7 +42,7 @@ export const ÅpentAksjonspunktSkalIkkeKunneInnvilge: Story = {
       },
     ],
     isReadOnly: false,
-    status: VilkarUtfallType.IKKE_VURDERT,
+    status: 'IKKE_VURDERT',
   },
 };
 
@@ -54,7 +54,7 @@ export const ÅpentAksjonspunktSkalKunneInnvilge: Story = {
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
-    status: VilkarUtfallType.IKKE_VURDERT,
+    status: 'IKKE_VURDERT',
     svangerskapspengerTilrettelegging: {
       arbeidsforholdListe: [
         {
@@ -80,7 +80,7 @@ export const OppfyltVilkår: Story = {
     ] as Aksjonspunkt[],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.OPPFYLT,
+    status: 'OPPFYLT',
   },
 };
 
@@ -102,6 +102,6 @@ export const AvslåttVilkår: Story = {
     ] as Aksjonspunkt[],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    status: 'IKKE_OPPFYLT',
   },
 };

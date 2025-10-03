@@ -11,9 +11,13 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { BehandlingResultatTypeTilbakekreving, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { AlleKodeverkTilbakekreving, BehandlingArsakType, Behandlingsresultat } from '@navikt/fp-types';
+import type {
+  AlleKodeverkTilbakekreving,
+  BehandlingArsakType,
+  Behandlingsresultat,
+  VilkarUtfallType,
+} from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
 import { forhåndsvisVedtaksbrev, useBehandlingApi } from '../../../data/behandlingApi';
@@ -123,23 +127,23 @@ const erTilbakekrevingÅrsakKlage = (årsak: BehandlingArsakType): boolean =>
   // @ts-expect-error -- feil i typene
   tilbakekrevingÅrsakTyperKlage.some(å => å === årsak);
 
-const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): string => {
+const getVedtakStatus = (beregningsresultat?: Behandlingsresultat): VilkarUtfallType => {
   if (!beregningsresultat) {
-    return VilkarUtfallType.IKKE_VURDERT;
+    return 'IKKE_VURDERT';
   }
   const { type } = beregningsresultat;
 
   // @ts-expect-error -- feil i typene
-  if (type === BehandlingResultatTypeTilbakekreving.INGEN_TILBAKEBETALING) {
-    return VilkarUtfallType.IKKE_OPPFYLT;
+  if (type === 'INGEN_TILBAKEBETALING') {
+    return 'IKKE_OPPFYLT';
   }
 
   // @ts-expect-error -- feil i typene
-  return type === BehandlingResultatTypeTilbakekreving.DELVIS_TILBAKEBETALING ||
+  return type === 'DELVIS_TILBAKEBETALING' ||
     // @ts-expect-error -- feil i typene
-    type === BehandlingResultatTypeTilbakekreving.FULL_TILBAKEBETALING
-    ? VilkarUtfallType.OPPFYLT
-    : VilkarUtfallType.IKKE_VURDERT;
+    type === 'FULL_TILBAKEBETALING'
+    ? 'OPPFYLT'
+    : 'IKKE_VURDERT';
 };
 
 const getLagringSideeffekter =

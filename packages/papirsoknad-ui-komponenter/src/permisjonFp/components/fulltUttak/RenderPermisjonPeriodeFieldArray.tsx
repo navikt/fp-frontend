@@ -16,8 +16,7 @@ import {
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { UttakPeriodeType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, KodeverkMedNavn } from '@navikt/fp-types';
+import type { AlleKodeverk, KodeverkMedNavn, UttakPeriodeType } from '@navikt/fp-types';
 
 import { FieldArrayRow } from '../../../felles/FieldArrayRow';
 import { PERMISJON_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -28,19 +27,19 @@ const getPrefix = (index: number) => `${FA_PREFIX}.${index}` as const;
 
 const maxValue100 = maxValue(100);
 
-export const gyldigeUttakperioder = [
-  UttakPeriodeType.FELLESPERIODE,
-  UttakPeriodeType.FEDREKVOTE,
-  UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  UttakPeriodeType.FORELDREPENGER,
-  UttakPeriodeType.MODREKVOTE,
-];
+export const gyldigeUttakperioder = new Set<UttakPeriodeType>([
+  'FELLESPERIODE',
+  'FEDREKVOTE',
+  'FORELDREPENGER_FØR_FØDSEL',
+  'FORELDREPENGER',
+  'MØDREKVOTE',
+]);
 
-const PERIODS_WITH_NO_MORS_AKTIVITET = [
-  UttakPeriodeType.FEDREKVOTE,
-  UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  UttakPeriodeType.MODREKVOTE,
-];
+const PERIODS_WITH_NO_MORS_AKTIVITET = new Set<UttakPeriodeType>([
+  'FEDREKVOTE',
+  'FORELDREPENGER_FØR_FØDSEL',
+  'MØDREKVOTE',
+]);
 
 interface Props {
   readOnly: boolean;
@@ -89,7 +88,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
       fields={fields}
       addButtonText={intl.formatMessage({ id: 'Registrering.Permisjon.nyPeriode' })}
       emptyTemplate={{
-        periodeType: '',
+        periodeType: '-',
         periodeFom: '',
         periodeTom: '',
       }}
@@ -103,7 +102,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
         const periodeFomForTidlig = erPeriodeFormFør01012019(periode.periodeFom);
 
         const skalDisableMorsAktivitet =
-          PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === periode.periodeType) || periode.periodeType === '';
+          PERIODS_WITH_NO_MORS_AKTIVITET.has(periode.periodeType) || periode.periodeType === '-';
 
         return (
           <FieldArrayRow key={field.id} readOnly={readOnly} remove={remove} index={index}>
@@ -201,7 +200,7 @@ export const RenderPermisjonPeriodeFieldArray = ({ sokerErMor, readOnly, alleKod
 
 RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) =>
   values.map(value => {
-    if (PERIODS_WITH_NO_MORS_AKTIVITET.some(pma => pma === value.periodeType)) {
+    if (PERIODS_WITH_NO_MORS_AKTIVITET.has(value.periodeType)) {
       return {
         periodeType: value.periodeType,
         periodeFom: value.periodeFom,
@@ -224,7 +223,7 @@ RenderPermisjonPeriodeFieldArray.transformValues = (values: PermisjonPeriode[]) 
 
 const mapPeriodeTyper = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>
   typer
-    .filter(({ kode }) => gyldigeUttakperioder.includes(kode))
+    .filter(({ kode }) => gyldigeUttakperioder.has(kode))
     .map(({ kode, navn }) => (
       <option value={kode} key={kode}>
         {navn}

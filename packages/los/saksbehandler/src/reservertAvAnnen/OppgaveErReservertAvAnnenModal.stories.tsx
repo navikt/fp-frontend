@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import type { Oppgave } from '@navikt/fp-los-felles';
 import { getIntlDecorator } from '@navikt/fp-storybook-utils';
 
@@ -33,7 +32,7 @@ const oppgaveForResevertAvAnnenModal = {
   erTilSaksbehandling: true,
   behandlingId: '1',
   andreKriterier: [],
-  oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+  oppgaveBehandlingStatus: 'UNDER_ARBEID',
 } satisfies Oppgave;
 
 const meta = {

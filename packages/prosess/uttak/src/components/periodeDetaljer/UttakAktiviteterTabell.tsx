@@ -15,13 +15,13 @@ import {
 } from '@navikt/ft-form-validators';
 import { formaterArbeidsgiver } from '@navikt/ft-utils';
 
-import { UttakArbeidType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type {
   ArbeidsgiverOpplysningerPerId,
   foreldrepenger_behandlingslager_uttak_fp_UttakUtsettelseType,
   KodeverkMedNavn,
   PeriodeSoker,
   PeriodeSokerAktivitet,
+  UttakPeriodeType,
 } from '@navikt/fp-types';
 
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
@@ -42,7 +42,7 @@ export const finnArbeidsforholdNavnOgProsentArbeid = (
 
   const prosentArbeidText = typeof prosentArbeid !== 'undefined' ? `${prosentArbeid}%` : '';
   let arbeidsforhold;
-  if (uttakArbeidType && uttakArbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
+  if (uttakArbeidType && uttakArbeidType !== 'ORDINÆRT_ARBEID') {
     arbeidsforhold = intl.formatMessage({ id: uttakArbeidTypeTekstCodes[uttakArbeidType] });
   }
   if (arbeidsgiverReferanse) {
@@ -117,13 +117,13 @@ const sjekkOmDetErTrektMinstEnDagNårUtbetalingsgradErMerEnn0 =
     return null;
   };
 
-const GYLDIGE_UTTAK_PERIODER = new Set([
-  UttakPeriodeType.FELLESPERIODE,
-  UttakPeriodeType.FEDREKVOTE,
-  UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
-  UttakPeriodeType.FORELDREPENGER,
-  UttakPeriodeType.MODREKVOTE,
-  UttakPeriodeType.UDEFINERT,
+const GYLDIGE_UTTAK_PERIODER = new Set<UttakPeriodeType>([
+  'FELLESPERIODE',
+  'FEDREKVOTE',
+  'FORELDREPENGER_FØR_FØDSEL',
+  'FORELDREPENGER',
+  'MØDREKVOTE',
+  '-',
 ]);
 
 const lagPeriodeTypeOptions = (typer: KodeverkMedNavn<'UttakPeriodeType'>[]): ReactElement[] =>

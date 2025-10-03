@@ -42,8 +42,6 @@ export const MenySettPaVentIndex = ({ settBehandlingPaVent, ventearsaker, lukkMo
         ventearsaker={ventearsaker}
         erTilbakekreving={erTilbakekreving}
         hasManualPaVent
-        frist={null}
-        ventearsak={null}
       />
     </RawIntlProvider>
   );

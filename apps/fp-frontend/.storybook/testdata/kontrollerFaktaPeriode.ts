@@ -1,25 +1,24 @@
-import { UttakPeriodeType } from '@navikt/fp-kodeverk';
 import type { KontrollerFaktaPeriode } from '@navikt/fp-types';
 
 export const kontrollerFaktaPeriode: KontrollerFaktaPeriode[] = [
   {
     fom: '2025-02-12',
     tom: '2025-03-04',
-    uttakPeriodeType: UttakPeriodeType.FORELDREPENGER_FOR_FODSEL,
+    uttakPeriodeType: 'FORELDREPENGER_FØR_FØDSEL',
     flerbarnsdager: false,
     periodeKilde: 'SØKNAD',
   },
   {
     fom: '2025-03-05',
     tom: '2025-06-17',
-    uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+    uttakPeriodeType: 'MØDREKVOTE',
     flerbarnsdager: false,
     periodeKilde: 'SØKNAD',
   },
   {
     fom: '2025-06-18',
     tom: '2025-10-07',
-    uttakPeriodeType: UttakPeriodeType.FELLESPERIODE,
+    uttakPeriodeType: 'FELLESPERIODE',
     flerbarnsdager: false,
     periodeKilde: 'SØKNAD',
   },

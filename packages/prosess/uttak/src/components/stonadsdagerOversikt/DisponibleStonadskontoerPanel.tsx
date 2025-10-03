@@ -4,12 +4,12 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { BodyShort, HStack, Label, Table, VStack } from '@navikt/ds-react';
 import { BTag, createWeekAndDay, formaterArbeidsgiver } from '@navikt/ft-utils';
 
-import { StonadskontoType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import type {
   AktivitetIdentifikator,
   AktivitetSaldo,
   ArbeidsgiverOpplysningerPerId,
   Stonadskonto,
+  StønadskontoType,
 } from '@navikt/fp-types';
 
 import { uttakArbeidTypeTekstCodes } from '../../utils/uttakArbeidTypeCodes';
@@ -17,16 +17,16 @@ import { finnAntallUkerOgDager, StonadsdagerTab } from './StonadsdagerTab';
 
 import styles from './disponibleStonadskontoerPanel.module.css';
 
-const STØNADSKONTOER_SORTERINGSREKKEFØLGE = {
-  [StonadskontoType.FORELDREPENGER_FØR_FØDSEL]: 0,
-  [StonadskontoType.FELLESPERIODE]: 1,
-  [StonadskontoType.MØDREKVOTE]: 2,
-  [StonadskontoType.FEDREKVOTE]: 3,
-  [StonadskontoType.FORELDREPENGER]: 4,
-  [StonadskontoType.UTEN_AKTIVITETSKRAV]: 5,
-  [StonadskontoType.MINSTERETT]: 6,
-  [StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE]: 7,
-  [StonadskontoType.FLERBARNSDAGER]: 8,
+const STØNADSKONTOER_SORTERINGSREKKEFØLGE: Record<StønadskontoType, number> = {
+  FORELDREPENGER_FØR_FØDSEL: 0,
+  FELLESPERIODE: 1,
+  MØDREKVOTE: 2,
+  FEDREKVOTE: 3,
+  FORELDREPENGER: 4,
+  UTEN_AKTIVITETSKRAV: 5,
+  MINSTERETT: 6,
+  MINSTERETT_NESTE_STØNADSPERIODE: 7,
+  FLERBARNSDAGER: 8,
 };
 
 const sorterKontoer = (s1: Stonadskonto, s2: Stonadskonto): number =>
@@ -57,10 +57,10 @@ const finnTilgjengeligeUker = (stønadskontoer?: Stonadskonto[]): { uker: number
   const sumDager = stønadskontoer.reduce((sum, konto) => {
     const type = konto.stonadskontotype;
     if (
-      type !== StonadskontoType.FLERBARNSDAGER &&
-      type !== StonadskontoType.UTEN_AKTIVITETSKRAV &&
-      type !== StonadskontoType.MINSTERETT &&
-      type !== StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE
+      type !== 'FLERBARNSDAGER' &&
+      type !== 'UTEN_AKTIVITETSKRAV' &&
+      type !== 'MINSTERETT' &&
+      type !== 'MINSTERETT_NESTE_STØNADSPERIODE'
     ) {
       return sum + konto.maxDager;
     }
@@ -81,7 +81,7 @@ const utledNavn = (
 ): string => {
   const { arbeidsgiverReferanse, uttakArbeidType } = arbforhold;
 
-  if (uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
+  if (uttakArbeidType !== 'ORDINÆRT_ARBEID') {
     return intl.formatMessage({ id: uttakArbeidTypeTekstCodes[uttakArbeidType] });
   }
   if (arbeidsgiverReferanse) {

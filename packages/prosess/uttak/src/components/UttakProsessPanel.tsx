@@ -4,7 +4,7 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, PeriodeResultatType, StonadskontoType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -15,6 +15,7 @@ import type {
   PeriodeSoker,
   Personoversikt,
   Soknad,
+  StønadskontoType,
   Uttaksresultat,
   UttakStonadskontoer,
 } from '@navikt/fp-types';
@@ -71,7 +72,7 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
     }
   }
 
-  if (uttaksresultat.perioderSøker.some(p => p.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING)) {
+  if (uttaksresultat.perioderSøker.some(p => p.periodeResultatType === 'MANUELL_BEHANDLING')) {
     aksjonspunktTekster.push(<FormattedMessage key="generellTekst" id="UttakPanel.Aksjonspunkt.Generell" />);
   }
 
@@ -92,13 +93,13 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   for (const p of perioder) {
     const ikkeGyldigeAktiviteter = p.aktiviteter.filter(
       a =>
-        stønadskonto.stonadskontoer[a.stønadskontoType as StonadskontoType] === undefined &&
+        stønadskonto.stonadskontoer[a.stønadskontoType ?? ''] === undefined &&
         !!a.trekkdagerDesimaler &&
         a.trekkdagerDesimaler > 0,
     );
 
     const ugyldigKontoType = ikkeGyldigeAktiviteter.at(0)?.stønadskontoType;
-    if (p.periodeResultatType === PeriodeResultatType.INNVILGET && ugyldigKontoType) {
+    if (p.periodeResultatType === 'INNVILGET' && ugyldigKontoType) {
       const feilmelding = intl.formatMessage(
         { id: 'UttakPanel.InvalidStonadskonto' },
         { konto: UttakPeriodeNavn[ugyldigKontoType] },
@@ -125,7 +126,7 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
   // TODO Dette ser feil ut. Burde det vera const konto = stønadskonto.stonadskontoer[StonadskontoType.FLERBARNSDAGER];
   // @ts-expect-error Fiks
   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-  const konto = stønadskonto[StonadskontoType.FLERBARNSDAGER];
+  const konto = stønadskonto['FLERBARNSDAGER' satisfies StønadskontoType];
   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
   if (feil.length === 0 && konto && !konto.gyldigForbruk) {
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-member-access
@@ -242,7 +243,7 @@ export const UttakProsessPanel = ({
 
   const visPeriode = (per: (PeriodeSoker | AnnenforelderUttakEøsPeriode)[]) => {
     const index = per.findIndex(
-      period => erOrdinærPeriode(period) && period.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING,
+      period => erOrdinærPeriode(period) && period.periodeResultatType === 'MANUELL_BEHANDLING',
     );
     if (index !== -1) {
       setValgtPeriodeIndex(index);
@@ -291,7 +292,7 @@ export const UttakProsessPanel = ({
       return false;
     }
 
-    if (perioder.some(p => p.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING)) {
+    if (perioder.some(p => p.periodeResultatType === 'MANUELL_BEHANDLING')) {
       return true;
     }
     return valgtPeriodeIndex !== undefined || !isDirty;

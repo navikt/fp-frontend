@@ -6,7 +6,6 @@ export const personoversikt: Personoversikt = {
     navn: 'Kristine Kalv',
     kjønn: 'K',
     sivilstand: 'UGIF',
-
     fødselsdato: '1993-03-05',
     adresser: [
       {

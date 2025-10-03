@@ -6,8 +6,7 @@ import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
-import { VilkarType } from '@navikt/fp-kodeverk';
-import type { AdopsjonFamilieHendelse } from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, VilkårType } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 }
 
 export type OmsorgsovertakelseVilkårFormValues = {
-  vilkarType?: string;
+  vilkarType?: VilkårType;
 };
 
 export const OmsorgsovertakelseVilkårForm = ({ adopsjon }: Props) => {
@@ -33,23 +32,24 @@ export const OmsorgsovertakelseVilkårForm = ({ adopsjon }: Props) => {
       size="medium"
       isEdited={hasValue(adopsjon.omsorgsovertakelseVilkårType)}
     >
-      {alleKodeverk['OmsorgsovertakelseVilkårType'].filter(d => !!getDescriptionText(d.kode, intl))
+      {alleKodeverk['OmsorgsovertakelseVilkårType']
+        .filter(d => !!getDescriptionText(d.kode, intl))
         .map(d => (
-        <Radio size="medium" key={d.kode} value={d.kode} description={getDescriptionText(d.kode, intl)}>
-          {d.navn}
-        </Radio>
-      ))}
+          <Radio size="medium" key={d.kode} value={d.kode} description={getDescriptionText(d.kode, intl)}>
+            {d.navn}
+          </Radio>
+        ))}
     </RhfRadioGroup>
   );
 };
 
-const getDescriptionText = (vilkårType: string, intl: IntlShape) => {
+const getDescriptionText = (vilkårType: VilkårType, intl: IntlShape) => {
   switch (vilkårType) {
-    case VilkarType.OMSORGSVILKARET:
+    case 'FP_VK_5':
       return intl.formatMessage({ id: 'OmsorgsovertakelseVilkårForm.Description.OmsorgTredjeLedd' });
-    case VilkarType.FORELDREANSVARSVILKARET_2_LEDD:
+    case 'FP_VK_8':
       return intl.formatMessage({ id: 'OmsorgsovertakelseVilkårForm.Description.ForeldreAndreLedd' });
-    case VilkarType.FORELDREANSVARSVILKARET_4_LEDD:
+    case 'FP_VK_33':
       return intl.formatMessage({ id: 'OmsorgsovertakelseVilkårForm.Description.ForeldreFjerdeLedd' });
     default:
       return undefined;

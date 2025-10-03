@@ -1,5 +1,7 @@
 import { use, useEffect } from 'react';
 
+import type { VilkarUtfallType } from '@navikt/fp-types';
+
 import { ProsessMenyContext } from './ProsessMeny';
 
 const DEFAULT_PANEL_VALGT = 'default';
@@ -9,7 +11,7 @@ export const useProsessMenyRegistrerer = (
   tekst: string,
   skalVisesIMeny: boolean,
   harÅpentAksjonspunkt: boolean,
-  status: string,
+  status: VilkarUtfallType,
   skalMarkeresSomAktiv: boolean,
 ) => {
   const { valgtProsessSteg, settProsessPanelMenyData } = use(ProsessMenyContext);

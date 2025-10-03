@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Opptjening } from '@navikt/fp-types';
 
@@ -40,7 +40,7 @@ const aksjonspunktDefault = {
   toTrinnsBehandling: false,
 
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -49,7 +49,7 @@ const meta = {
   component: OpptjeningVilkarProsessIndex,
   decorators: [withMellomlagretFormData, withPanelData],
   args: {
-    status: VilkarUtfallType.IKKE_VURDERT,
+    status: 'IKKE_VURDERT',
     lovReferanse: '§§Dette er en lovreferanse',
     erSvpFagsak: false,
   },

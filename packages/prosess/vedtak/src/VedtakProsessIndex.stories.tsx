@@ -3,7 +3,7 @@ import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, VedtakbrevType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -29,7 +29,7 @@ const defaultAksjonspunkt = {
   toTrinnsBehandling: false,
 
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 const defaultAksjonspunkter = [defaultAksjonspunkt];
@@ -72,8 +72,8 @@ const defaultBehandling = {
 const defaultVilkar = [
   {
     lovReferanse: '§§Dette er en lovreferanse',
-    vilkarType: VilkarType.FODSELSVILKARET_MOR,
-    vilkarStatus: VilkarUtfallType.OPPFYLT,
+    vilkarType: 'FP_VK_1',
+    vilkarStatus: 'OPPFYLT',
     overstyrbar: true,
   },
 ] satisfies Vilkar[];
@@ -189,7 +189,7 @@ export const GodkjentForeldrepengerMedManueltBrevForSaksbehandlerMedOverstyring:
       ...defaultBehandling,
       status: 'AVSLU',
       behandlingsresultat: {
-        vedtaksbrev: VedtakbrevType.FRITEKST,
+        vedtaksbrev: 'FRITEKST',
         type: 'INNVILGET',
         harRedigertVedtaksbrev: true,
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -691,7 +691,7 @@ export const GodkjentRevurderingForeldrepengerMedManueltBrevForSaksbehandlerMedO
       type: 'BT-004',
       status: 'AVSLU',
       behandlingsresultat: {
-        vedtaksbrev: VedtakbrevType.FRITEKST,
+        vedtaksbrev: 'FRITEKST',
         type: 'INNVILGET',
         konsekvenserForYtelsen: ['FORELDREPENGER_OPPHØRER'],
         vedtaksbrevStatus: 'VEDTAKSBREV_PRODUSERES',
@@ -827,8 +827,8 @@ export const AvslåttForRevurderingForeldrepengerDerSøknadsfristvilkåretIkkeEr
     vilkår: [
       {
         lovReferanse: '§§Dette er en lovreferanse',
-        vilkarType: VilkarType.SOKNADFRISTVILKARET,
-        vilkarStatus: VilkarUtfallType.IKKE_OPPFYLT,
+        vilkarType: 'FP_VK_3',
+        vilkarStatus: 'IKKE_OPPFYLT',
         overstyrbar: true,
       },
     ],
@@ -874,7 +874,7 @@ export const LegacyOverstyring: Story = {
       ...defaultBehandling,
       status: 'AVSLU',
       behandlingsresultat: {
-        vedtaksbrev: VedtakbrevType.FRITEKST,
+        vedtaksbrev: 'FRITEKST',
         type: 'INNVILGET',
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',
@@ -896,7 +896,7 @@ export const LegacyOverstyringHarSendtTilbakeFraBeslutter: Story = {
       ...defaultBehandling,
       status: 'OPPRE',
       behandlingsresultat: {
-        vedtaksbrev: VedtakbrevType.FRITEKST,
+        vedtaksbrev: 'FRITEKST',
         type: 'INNVILGET',
         overskrift: 'Dette er en overskrift',
         fritekstbrev: 'Dette er en fritekst',

@@ -17,6 +17,7 @@ import type {
   BehandlingOppretting,
   BehandlingTillatteOperasjoner,
   Fagsak,
+  SkjermlenkeType,
   TotrinnskontrollAksjonspunkt,
 } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
@@ -56,7 +57,7 @@ const createAksjonspunkt = (aksjonspunktKode: string) =>
 
 const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
   {
-    skjermlenkeType: 'FAKTA_OM_FOEDSEL',
+    skjermlenkeType: 'FAKTA_OM_FOEDSEL' satisfies SkjermlenkeType,
     totrinnskontrollAksjonspunkter: [
       createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL),
       createAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE),
@@ -64,14 +65,14 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
     ],
   },
   {
-    skjermlenkeType: 'FAKTA_FOR_OMSORG',
+    skjermlenkeType: 'FAKTA_FOR_OMSORG' satisfies SkjermlenkeType,
     totrinnskontrollAksjonspunkter: [
       createAksjonspunkt(AksjonspunktKode.OMSORGSOVERTAKELSE),
       createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET),
     ],
   },
   {
-    skjermlenkeType: 'PUNKT_FOR_FORELDREANSVAR',
+    skjermlenkeType: 'PUNKT_FOR_FORELDREANSVAR' satisfies SkjermlenkeType,
     totrinnskontrollAksjonspunkter: [
       createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD),
       createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD),

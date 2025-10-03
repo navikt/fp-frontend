@@ -3,13 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import {
-  AksjonspunktKode,
-  StonadskontoType,
-  UttakArbeidType,
-  UttakUtsettelseType,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -19,6 +13,7 @@ import type {
   FamilieHendelse,
   Personoversikt,
   Soknad,
+  StønadskontoType,
   UttakStonadskontoer,
 } from '@navikt/fp-types';
 
@@ -31,7 +26,7 @@ const åpentAksjonspunkt: Aksjonspunkt[] = [
     kanLoses: true,
     toTrinnsBehandling: true,
     aksjonspunktType: 'MANU',
-    vilkarType: VilkarType.OMSORGSVILKARET,
+    vilkarType: 'FP_VK_5',
     erAktivt: true,
   },
 ];
@@ -192,7 +187,7 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
           tom: '2022-11-09',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FORELDREPENGER,
+              stønadskontoType: 'FORELDREPENGER' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -203,7 +198,7 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
               trekkdagerDesimaler: 15.0,
             },
             {
-              stønadskontoType: StonadskontoType.FORELDREPENGER,
+              stønadskontoType: 'FORELDREPENGER' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c1',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -224,7 +219,7 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,
@@ -234,7 +229,7 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
           tom: '2022-12-21',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -255,7 +250,7 @@ export const AksjonspunktDerValgtStønadskontoIkkeFinnes: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: undefined,
           gradertAktivitet: undefined,
@@ -278,7 +273,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           tom: '2019-10-31',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FORELDREPENGER_FØR_FØDSEL,
+              stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -299,7 +294,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER_FØR_FØDSEL',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2019-11-01',
           gradertAktivitet: undefined,
@@ -309,7 +304,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           tom: '2019-12-12',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -330,7 +325,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'MØDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2019-11-01',
           gradertAktivitet: undefined,
@@ -340,7 +335,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           tom: '2020-01-23',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 50,
               arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -361,11 +356,11 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: true,
           periodeType: 'MØDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2019-11-01',
           gradertAktivitet: {
-            stønadskontoType: StonadskontoType.MØDREKVOTE,
+            stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
             prosentArbeid: 50,
             arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
             eksternArbeidsforholdId: 'ARB001-001',
@@ -381,7 +376,6 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           tom: '2020-02-13',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.UDEFINERT,
               prosentArbeid: 100,
               arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -402,7 +396,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: '-',
-          utsettelseType: UttakUtsettelseType.ARBEID,
+          utsettelseType: 'ARBEID',
           oppholdÅrsak: '-',
           mottattDato: '2019-11-01',
           gradertAktivitet: undefined,
@@ -412,7 +406,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           tom: '2020-02-20',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FELLESPERIODE,
+              stønadskontoType: 'FELLESPERIODE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'efaf22ef-76aa-4576-8c96-92bd31af8815',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -433,7 +427,7 @@ export const PeriodeMedGraderingUtenAksjonspunkt: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FELLESPERIODE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2020-01-24',
           gradertAktivitet: undefined,
@@ -456,7 +450,7 @@ export const AksjonspunktIRevurdering: Story = {
           tom: '2019-10-31',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FORELDREPENGER_FØR_FØDSEL,
+              stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: '0716ce9f-d93d-40cd-a52c-c7c569995948',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -467,7 +461,7 @@ export const AksjonspunktIRevurdering: Story = {
               trekkdagerDesimaler: 15.0,
             },
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 51,
               arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -488,7 +482,7 @@ export const AksjonspunktIRevurdering: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER_FØR_FØDSEL',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2019-09-20',
           gradertAktivitet: undefined,
@@ -498,7 +492,7 @@ export const AksjonspunktIRevurdering: Story = {
           tom: '2019-12-12',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: '0716ce9f-d93d-40cd-a52c-c7c569995948',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -519,7 +513,7 @@ export const AksjonspunktIRevurdering: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'MØDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2019-09-20',
           gradertAktivitet: undefined,
@@ -529,7 +523,7 @@ export const AksjonspunktIRevurdering: Story = {
           tom: '2019-12-26',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 100,
               arbeidsforholdId: '0716ce9f-d93d-40cd-a52c-c7c569995948',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -550,7 +544,7 @@ export const AksjonspunktIRevurdering: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: '-',
-          utsettelseType: UttakUtsettelseType.ARBEID,
+          utsettelseType: 'ARBEID',
           oppholdÅrsak: '-',
           mottattDato: '2019-12-27',
           gradertAktivitet: undefined,
@@ -560,7 +554,6 @@ export const AksjonspunktIRevurdering: Story = {
           tom: '2020-01-09',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.UDEFINERT,
               prosentArbeid: 100,
               arbeidsforholdId: '0716ce9f-d93d-40cd-a52c-c7c569995948',
               eksternArbeidsforholdId: 'ARB001-001',
@@ -581,7 +574,7 @@ export const AksjonspunktIRevurdering: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: '-',
-          utsettelseType: UttakUtsettelseType.ARBEID,
+          utsettelseType: 'ARBEID',
           oppholdÅrsak: '-',
           mottattDato: '2019-12-27',
           gradertAktivitet: undefined,
@@ -603,7 +596,7 @@ export const ProsessUttakToParter: Story = {
           tom: '2022-11-09',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FORELDREPENGER_FØR_FØDSEL,
+              stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: '7272d1a7-8dbb-4953-bb39-e0742635b2a5',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -624,7 +617,7 @@ export const ProsessUttakToParter: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER_FØR_FØDSEL',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-11-10',
           gradertAktivitet: undefined,
@@ -634,7 +627,7 @@ export const ProsessUttakToParter: Story = {
           tom: '2022-12-21',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: '7272d1a7-8dbb-4953-bb39-e0742635b2a5',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -655,7 +648,7 @@ export const ProsessUttakToParter: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'MØDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-11-10',
           gradertAktivitet: undefined,
@@ -665,7 +658,7 @@ export const ProsessUttakToParter: Story = {
           tom: '2022-12-28',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FELLESPERIODE,
+              stønadskontoType: 'FELLESPERIODE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: '7272d1a7-8dbb-4953-bb39-e0742635b2a5',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -686,7 +679,7 @@ export const ProsessUttakToParter: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FELLESPERIODE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-12-01',
           gradertAktivitet: undefined,
@@ -696,7 +689,7 @@ export const ProsessUttakToParter: Story = {
           tom: '2023-01-04',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FELLESPERIODE,
+              stønadskontoType: 'FELLESPERIODE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: '7272d1a7-8dbb-4953-bb39-e0742635b2a5',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -717,7 +710,7 @@ export const ProsessUttakToParter: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FELLESPERIODE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-12-01',
           gradertAktivitet: undefined,
@@ -729,7 +722,7 @@ export const ProsessUttakToParter: Story = {
           tom: '2022-11-09',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'b97a7bc5-26ef-4fd8-874e-b475a732c7a8',
               eksternArbeidsforholdId: 'ARB001-003',
@@ -750,7 +743,7 @@ export const ProsessUttakToParter: Story = {
           samtidigUttaksprosent: 100,
           graderingInnvilget: false,
           periodeType: 'FEDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-11-17',
           gradertAktivitet: undefined,
@@ -760,7 +753,7 @@ export const ProsessUttakToParter: Story = {
           tom: '2022-12-28',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'b97a7bc5-26ef-4fd8-874e-b475a732c7a8',
               eksternArbeidsforholdId: 'ARB001-003',
@@ -781,7 +774,7 @@ export const ProsessUttakToParter: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FEDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-11-17',
           gradertAktivitet: undefined,
@@ -791,7 +784,7 @@ export const ProsessUttakToParter: Story = {
           tom: '2023-02-01',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'b97a7bc5-26ef-4fd8-874e-b475a732c7a8',
               eksternArbeidsforholdId: 'ARB001-003',
@@ -812,7 +805,7 @@ export const ProsessUttakToParter: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FEDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-11-17',
           gradertAktivitet: undefined,
@@ -839,7 +832,7 @@ export const AksjonspunktForFar: Story = {
           tom: '2022-11-11',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FELLESPERIODE,
+              stønadskontoType: 'FELLESPERIODE' satisfies StønadskontoType,
               prosentArbeid: 34,
               arbeidsforholdId: 'f41fad23-a318-4ecb-8949-8a8492b65c56',
               eksternArbeidsforholdId: 'ARB001-003',
@@ -860,11 +853,11 @@ export const AksjonspunktForFar: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FELLESPERIODE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: {
-            stønadskontoType: StonadskontoType.FELLESPERIODE,
+            stønadskontoType: 'FELLESPERIODE' satisfies StønadskontoType,
             prosentArbeid: 34,
             arbeidsforholdId: 'f41fad23-a318-4ecb-8949-8a8492b65c56',
             eksternArbeidsforholdId: 'ARB001-003',
@@ -880,7 +873,7 @@ export const AksjonspunktForFar: Story = {
           tom: '2022-11-23',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'f41fad23-a318-4ecb-8949-8a8492b65c56',
               eksternArbeidsforholdId: 'ARB001-003',
@@ -901,7 +894,7 @@ export const AksjonspunktForFar: Story = {
           samtidigUttaksprosent: 100,
           graderingInnvilget: false,
           periodeType: 'FEDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,
@@ -911,7 +904,7 @@ export const AksjonspunktForFar: Story = {
           tom: '2023-01-04',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'f41fad23-a318-4ecb-8949-8a8492b65c56',
               eksternArbeidsforholdId: 'ARB001-003',
@@ -932,7 +925,7 @@ export const AksjonspunktForFar: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'MØDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,
@@ -944,7 +937,7 @@ export const AksjonspunktForFar: Story = {
           tom: '2022-11-09',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FORELDREPENGER_FØR_FØDSEL,
+              stønadskontoType: 'FORELDREPENGER_FØR_FØDSEL' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'a94992b7-e454-458c-800c-a74b4f072c00',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -965,7 +958,7 @@ export const AksjonspunktForFar: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER_FØR_FØDSEL',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,
@@ -975,7 +968,6 @@ export const AksjonspunktForFar: Story = {
           tom: '2022-12-21',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.UDEFINERT,
               prosentArbeid: 0,
               arbeidsforholdId: 'a94992b7-e454-458c-800c-a74b4f072c00',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -996,7 +988,7 @@ export const AksjonspunktForFar: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: '-',
-          utsettelseType: UttakUtsettelseType.SYKDOM_SKADE,
+          utsettelseType: 'SYKDOM_SKADE',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,
@@ -1035,7 +1027,7 @@ export const StønadskontoMedUgyldigForbruk: Story = {
           tom: '2022-11-09',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -1056,7 +1048,7 @@ export const StønadskontoMedUgyldigForbruk: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,
@@ -1079,7 +1071,7 @@ export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent: Story = {
           tom: '2022-11-09',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -1100,7 +1092,7 @@ export const VisAdvarselNårProsentIArbeidTotaltErMindreEnn100Prosent: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER',
-          utsettelseType: UttakUtsettelseType.ARBEID,
+          utsettelseType: 'ARBEID',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,
@@ -1123,7 +1115,7 @@ export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent: 
           tom: '2022-11-09',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.MØDREKVOTE,
+              stønadskontoType: 'MØDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 51,
               arbeidsforholdId: 'de6cb16e-9520-418c-a438-aa781b0833c2',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -1144,7 +1136,7 @@ export const VisAdvarselNårUtbetalingsgradOgProsentArbeidOverstiger100Prosent: 
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FORELDREPENGER',
-          utsettelseType: UttakUtsettelseType.ARBEID,
+          utsettelseType: 'ARBEID',
           oppholdÅrsak: '-',
           mottattDato: '2023-01-05',
           gradertAktivitet: undefined,
@@ -1176,7 +1168,7 @@ export const VisOppholdsperiode: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: '-',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: 'UTTAK_FEDREKVOTE_ANNEN_FORELDER',
           mottattDato: '2023-01-18',
           gradertAktivitet: undefined,
@@ -1188,7 +1180,7 @@ export const VisOppholdsperiode: Story = {
           tom: '2023-02-14',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: undefined,
               eksternArbeidsforholdId: undefined,
@@ -1199,7 +1191,7 @@ export const VisOppholdsperiode: Story = {
               trekkdagerDesimaler: 8.0,
             },
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: undefined,
               eksternArbeidsforholdId: undefined,
@@ -1210,7 +1202,7 @@ export const VisOppholdsperiode: Story = {
               trekkdagerDesimaler: 8.0,
             },
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: undefined,
               eksternArbeidsforholdId: undefined,
@@ -1231,7 +1223,7 @@ export const VisOppholdsperiode: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FEDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-11-28',
           gradertAktivitet: undefined,
@@ -1241,7 +1233,7 @@ export const VisOppholdsperiode: Story = {
           tom: '2023-05-17',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: undefined,
               eksternArbeidsforholdId: undefined,
@@ -1252,7 +1244,7 @@ export const VisOppholdsperiode: Story = {
               trekkdagerDesimaler: 0.0,
             },
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: undefined,
               eksternArbeidsforholdId: undefined,
@@ -1263,7 +1255,7 @@ export const VisOppholdsperiode: Story = {
               trekkdagerDesimaler: 0.0,
             },
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: undefined,
               eksternArbeidsforholdId: undefined,
@@ -1284,7 +1276,7 @@ export const VisOppholdsperiode: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FEDREKVOTE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-11-28',
           gradertAktivitet: undefined,
@@ -1320,7 +1312,7 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
           aktivitetSaldoDtoList: [
             {
               aktivitetIdentifikator: {
-                uttakArbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+                uttakArbeidType: 'ORDINÆRT_ARBEID',
                 arbeidsgiverReferanse: '910909088',
               },
               saldo: 80,
@@ -1337,7 +1329,7 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
           tom: '2025-02-04',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FEDREKVOTE,
+              stønadskontoType: 'FEDREKVOTE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: '7272d1a7-8dbb-4953-bb39-e0742635b2a5',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -1358,7 +1350,7 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FELLESPERIODE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-12-01',
           gradertAktivitet: undefined,
@@ -1368,7 +1360,7 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
           tom: '2025-06-25',
           aktiviteter: [
             {
-              stønadskontoType: StonadskontoType.FELLESPERIODE,
+              stønadskontoType: 'FELLESPERIODE' satisfies StønadskontoType,
               prosentArbeid: 0,
               arbeidsforholdId: '7272d1a7-8dbb-4953-bb39-e0742635b2a5',
               eksternArbeidsforholdId: 'ARB001-002',
@@ -1389,7 +1381,7 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
           samtidigUttaksprosent: undefined,
           graderingInnvilget: false,
           periodeType: 'FELLESPERIODE',
-          utsettelseType: UttakUtsettelseType.UDEFINERT,
+          utsettelseType: '-',
           oppholdÅrsak: '-',
           mottattDato: '2022-12-01',
           gradertAktivitet: undefined,
@@ -1403,13 +1395,13 @@ export const MorPerioderI_EØSFarSamtidigUttak: Story = {
       {
         fom: '2024-05-01',
         tom: '2024-12-12',
-        trekkonto: StonadskontoType.MØDREKVOTE,
+        trekkonto: 'MØDREKVOTE' satisfies StønadskontoType,
         trekkdager: 90,
       },
       {
         fom: '2025-01-15',
         tom: '2025-02-04',
-        trekkonto: StonadskontoType.FELLESPERIODE,
+        trekkonto: 'FELLESPERIODE' satisfies StønadskontoType,
         trekkdager: 20,
       },
     ],

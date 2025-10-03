@@ -7,7 +7,6 @@ import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, requiredIfCustomFunctionIsTrueNew } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, Behandlingsresultat, Vilkar } from '@navikt/fp-types';
 
 import type { VedtakFormValues } from '../../types/VedtakFormValues';
@@ -22,7 +21,7 @@ const getAvslagArsak = (
   vilkar: Vilkar[],
   behandlingsresultat?: Behandlingsresultat,
 ): string | ReactElement => {
-  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === VilkarUtfallType.IKKE_OPPFYLT);
+  const avslatteVilkar = vilkar.filter(v => v.vilkarStatus === 'IKKE_OPPFYLT');
   if (avslatteVilkar.length === 0) {
     return <FormattedMessage id="VedtakForm.UttaksperioderIkkeGyldig" />;
   }
@@ -34,7 +33,7 @@ const getAvslagArsak = (
   const vilkarType = alleKodeverk['VilkårType'].find(({ kode }) => kode === avslatteVilkar[0]?.vilkarType)?.navn ?? '';
 
   const årsak =
-    alleKodeverk['Avslagsårsak'][avslatteVilkar[0]?.vilkarType as VilkarType].find(
+    alleKodeverk['Avslagsårsak'][avslatteVilkar[0]?.vilkarType ?? '-'].find(
       ({ kode }) => kode === behandlingsresultat.avslagsarsak,
     )?.navn ?? '';
 

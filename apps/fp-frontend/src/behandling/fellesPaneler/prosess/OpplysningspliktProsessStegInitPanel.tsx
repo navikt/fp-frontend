@@ -4,10 +4,10 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SokersOpplysningspliktVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-sokers-opplysningsplikt';
-import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, VilkårType } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -20,7 +20,7 @@ const AKSJONSPUNKT_KODER = [
   AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU,
 ];
 
-const VILKAR_KODER = [VilkarType.SOKERSOPPLYSNINGSPLIKT];
+const VILKAR_KODER = ['FP_VK_34'] satisfies VilkårType[];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

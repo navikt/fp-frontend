@@ -4,10 +4,10 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
-import type { ArbeidsgiverOpplysningerPerId, Personoversikt } from '@navikt/fp-types';
+import type { ArbeidsgiverOpplysningerPerId, Personoversikt, VilkarUtfallType } from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -26,11 +26,13 @@ export const TilkjentYtelseFpProsessStegInitPanel = ({ arbeidsgiverOpplysningerP
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);
   const { behandling } = use(BehandlingDataContext);
 
-  const overstyrtStatus = behandling.links.some(link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE)
-    ? VilkarUtfallType.OPPFYLT
-    : VilkarUtfallType.IKKE_VURDERT;
+  const overstyrtStatus: VilkarUtfallType = behandling.links.some(
+    link => link.rel === BehandlingRel.BEREGNINGRESULTAT_DAGYTELSE,
+  )
+    ? 'OPPFYLT'
+    : 'IKKE_VURDERT';
 
-  const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== VilkarUtfallType.IKKE_VURDERT;
+  const skalHenteData = standardPanelProps.harÅpentAksjonspunkt || overstyrtStatus !== 'IKKE_VURDERT';
 
   const api = useBehandlingApi(behandling);
 

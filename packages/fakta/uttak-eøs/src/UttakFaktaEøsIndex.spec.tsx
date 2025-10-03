@@ -2,8 +2,6 @@ import { composeStories } from '@storybook/react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { UttakPeriodeType } from '@navikt/fp-kodeverk';
-
 import * as stories from './UttakFaktaEøsIndex.stories';
 
 const {
@@ -43,7 +41,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByText('Legg til periode'));
     await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
-    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
+    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), 'FELLESPERIODE');
 
     await userEvent.clear(screen.getAllByRole('textbox')[2]!);
     await userEvent.clear(screen.getAllByRole('textbox')[3]!);
@@ -92,13 +90,13 @@ describe('UttakFaktaEøsIndex', () => {
         {
           fom: '2023-01-01',
           tom: '2023-01-31',
-          trekkonto: UttakPeriodeType.MODREKVOTE,
+          trekkonto: 'MØDREKVOTE',
           trekkdager: 10,
         },
         {
           fom: '2023-02-01',
           tom: '2023-02-15',
-          trekkonto: UttakPeriodeType.MODREKVOTE,
+          trekkonto: 'MØDREKVOTE',
           trekkdager: 10,
         },
       ],
@@ -118,7 +116,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByText('Legg til periode'));
     await userEvent.type(screen.getByLabelText('Fra og med'), '31.01.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '15.02.2022');
-    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.FELLESPERIODE);
+    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), 'FELLESPERIODE');
     await userEvent.clear(screen.getAllByRole('textbox')[2]!);
     await userEvent.clear(screen.getAllByRole('textbox')[3]!);
     await userEvent.type(screen.getAllByRole('textbox')[2]!, '8');
@@ -129,7 +127,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByText('Legg til periode'));
     await userEvent.type(screen.getByLabelText('Fra og med'), '12.02.2022');
     await userEvent.type(screen.getByLabelText('Til og med'), '25.02.2022');
-    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), UttakPeriodeType.MODREKVOTE);
+    await userEvent.selectOptions(screen.getByLabelText('Stønadskonto'), 'MØDREKVOTE');
     await userEvent.clear(screen.getAllByRole('textbox')[2]!);
     await userEvent.clear(screen.getAllByRole('textbox')[3]!);
     await userEvent.type(screen.getAllByRole('textbox')[2]!, '1');

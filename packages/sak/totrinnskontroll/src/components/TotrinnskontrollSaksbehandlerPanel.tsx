@@ -7,12 +7,12 @@ import { BodyShort, HStack } from '@navikt/ds-react';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import type {
   BehandlingAppKontekst,
   foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
+  SkjermlenkeType,
   TotrinnskontrollSkjermlenkeContext,
 } from '@navikt/fp-types';
 

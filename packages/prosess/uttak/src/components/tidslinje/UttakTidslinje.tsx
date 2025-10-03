@@ -22,7 +22,6 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, createWeekAndDay, ISO_DATE_FORMAT, periodFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { PeriodeResultatType, UttakPeriodeType } from '@navikt/fp-kodeverk';
 import {
   type AlleKodeverk,
   type AnnenforelderUttakEøsPeriode,
@@ -30,6 +29,7 @@ import {
   KjønnkodeEnum,
   type PeriodeSoker,
   type RelasjonsRolleType,
+  type UttakPeriodeType,
 } from '@navikt/fp-types';
 
 export type PeriodeSøkerMedTidslinjedata = {
@@ -46,20 +46,20 @@ export type TidslinjeTimes = {
   dodSoker?: string;
 };
 
-const PERIODE_TYPE_IKON_MAP = {
-  [UttakPeriodeType.MODREKVOTE]: <StrollerIcon />,
-  [UttakPeriodeType.FEDREKVOTE]: <StrollerIcon />,
-  [UttakPeriodeType.FELLESPERIODE]: <StrollerIcon />,
-  [UttakPeriodeType.FORELDREPENGER]: <StrollerIcon />,
-  [UttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: <PersonPregnantIcon />,
-} as Record<string, ReactNode>;
+const PERIODE_TYPE_IKON_MAP: Partial<Record<UttakPeriodeType, ReactNode>> = {
+  MØDREKVOTE: <StrollerIcon />,
+  FEDREKVOTE: <StrollerIcon />,
+  FELLESPERIODE: <StrollerIcon />,
+  FORELDREPENGER: <StrollerIcon />,
+  FORELDREPENGER_FØR_FØDSEL: <PersonPregnantIcon />,
+};
 
-const PERIODE_TYPE_LABEL_MAP: Record<string, string> = {
-  [UttakPeriodeType.MODREKVOTE]: 'UttakTidslinje.Modrekvote',
-  [UttakPeriodeType.FEDREKVOTE]: 'UttakTidslinje.Fedrekvote',
-  [UttakPeriodeType.FELLESPERIODE]: 'UttakTidslinje.Fellesperiode',
-  [UttakPeriodeType.FORELDREPENGER]: 'UttakTidslinje.Foreldrepenger',
-  [UttakPeriodeType.FORELDREPENGER_FOR_FODSEL]: 'UttakTidslinje.ForeldrepengerForFodsel',
+const PERIODE_TYPE_LABEL_MAP: Partial<Record<UttakPeriodeType, string>> = {
+  MØDREKVOTE: 'UttakTidslinje.Modrekvote',
+  FEDREKVOTE: 'UttakTidslinje.Fedrekvote',
+  FELLESPERIODE: 'UttakTidslinje.Fellesperiode',
+  FORELDREPENGER: 'UttakTidslinje.Foreldrepenger',
+  FORELDREPENGER_FØR_FØDSEL: 'UttakTidslinje.ForeldrepengerForFodsel',
 };
 
 const sortByDate = (a: PeriodeSøkerMedTidslinjedata, b: PeriodeSøkerMedTidslinjedata): number => {
@@ -76,7 +76,7 @@ type PeriodeMedStartOgSlutt = {
   start: string;
   end: string;
   status: 'success' | 'warning' | 'danger' | 'info';
-  periodeType: string;
+  periodeType: UttakPeriodeType;
   erGradert: boolean;
   erOpphold: boolean;
   harUtsettelse: boolean;
@@ -93,30 +93,23 @@ const getStatus = (
     return 'info';
   }
 
-  if (periode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING || tilknyttetStortinget) {
+  if (periode.periodeResultatType === 'MANUELL_BEHANDLING' || tilknyttetStortinget) {
     return 'warning';
   }
-  if (
-    periode.gradertAktivitet &&
-    periode.graderingInnvilget &&
-    periode.periodeResultatType === PeriodeResultatType.INNVILGET
-  ) {
+  if (periode.gradertAktivitet && periode.graderingInnvilget && periode.periodeResultatType === 'INNVILGET') {
     return 'success';
   }
   if ('erOppfylt' in periode && periode.erOppfylt === false) {
     return 'danger';
   }
-  if (
-    ('erOppfylt' in periode && periode.erOppfylt === true) ||
-    periode.periodeResultatType === PeriodeResultatType.INNVILGET
-  ) {
+  if (('erOppfylt' in periode && periode.erOppfylt === true) || periode.periodeResultatType === 'INNVILGET') {
     return 'success';
   }
 
   return 'danger';
 };
 
-const finnPeriodeType = (valgtPeriode: PeriodeSoker | AnnenforelderUttakEøsPeriode): string => {
+const finnPeriodeType = (valgtPeriode: PeriodeSoker | AnnenforelderUttakEøsPeriode): UttakPeriodeType => {
   if (erEøsPeriode(valgtPeriode)) {
     return valgtPeriode.trekkonto;
   }
@@ -125,7 +118,7 @@ const finnPeriodeType = (valgtPeriode: PeriodeSoker | AnnenforelderUttakEøsPeri
     (!valgtPeriode.periodeType && valgtPeriode.aktiviteter[0]?.stønadskontoType === '-');
   return !kontoIkkeSatt && valgtPeriode.aktiviteter[0]?.stønadskontoType
     ? valgtPeriode.aktiviteter[0].stønadskontoType
-    : '';
+    : '-';
 };
 
 const formatPaneler = (
@@ -240,7 +233,7 @@ const finnLabelForPeriode = (
   const periodeString = periodFormat(periode.start, periode.end);
 
   let periodeType = '';
-  if (periode.periodeType !== '-' && periode.periodeType !== '') {
+  if (periode.periodeType !== '-') {
     periodeType = intl.formatMessage({ id: PERIODE_TYPE_LABEL_MAP[periode.periodeType] });
   }
   if (erEøsPeriode(periode.periode)) {

@@ -8,7 +8,7 @@ import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
-import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type {
@@ -167,7 +167,7 @@ export const VilkarresultatMedOverstyringForm = ({
   const isSolvable =
     aksjonspunkt === undefined ? false : !(erAksjonspunktÅpent(aksjonspunkt) && !aksjonspunkt.kanLoses);
 
-  const originalErVilkårOk = VilkarUtfallType.IKKE_VURDERT === status ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = 'IKKE_VURDERT' === status ? undefined : 'OPPFYLT' === status;
 
   return (
     <RhfForm

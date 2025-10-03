@@ -5,14 +5,14 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
   validerApKodeOgHentApEnum,
   VilkarResultPicker,
 } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandling, VilkårType } from '@navikt/fp-types';
 import type {
   Foreldreansvarsvilkar1Ap,
   Foreldreansvarsvilkar2Ap,
@@ -64,12 +64,10 @@ export const ErForeldreansvarVilkaarOppfyltForm = ({ isEngangsstonad, isForeldre
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const vilkarTypeKode = isForeldreansvar2Ledd
-    ? VilkarType.FORELDREANSVARSVILKARET_2_LEDD
-    : VilkarType.FORELDREANSVARSVILKARET_4_LEDD;
+  const vilkarTypeKode: VilkårType = isForeldreansvar2Ledd ? 'FP_VK_8' : 'FP_VK_33';
   const avslagsårsaker = alleKodeverk['Avslagsårsak'][vilkarTypeKode];
 
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
     <RhfForm

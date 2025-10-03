@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, UttakPeriodeType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 
@@ -16,7 +16,7 @@ const aksjonspunktDefault = {
   toTrinnsBehandling: false,
 
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -48,19 +48,19 @@ export const ÅpentAksjonspunktMedPerioder: Story = {
       {
         fom: '2023-02-01',
         tom: '2023-02-15',
-        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkonto: 'MØDREKVOTE',
         trekkdager: 10,
       },
       {
         fom: '2023-01-01',
         tom: '2023-01-31',
-        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkonto: 'MØDREKVOTE',
         trekkdager: 10,
       },
       {
         fom: '2021-01-01',
         tom: '2021-01-31',
-        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkonto: 'MØDREKVOTE',
         trekkdager: 10,
       },
     ],
@@ -102,7 +102,7 @@ export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSom
       {
         fom: '2023-02-01',
         tom: '2023-02-15',
-        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkonto: 'MØDREKVOTE',
         trekkdager: 10,
       },
     ],
@@ -117,7 +117,7 @@ export const OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRe
       {
         fom: '2023-02-01',
         tom: '2023-02-15',
-        trekkonto: UttakPeriodeType.MODREKVOTE,
+        trekkonto: 'MØDREKVOTE',
         trekkdager: 10,
       },
     ],

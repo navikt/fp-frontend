@@ -1,5 +1,3 @@
-import { SoknadType } from '@navikt/fp-kodeverk';
-
 import type {
   tjenester_behandling_søknad_ManglendeVedleggDto,
   tjenester_behandling_søknad_SoknadAdopsjonDto,
@@ -25,4 +23,4 @@ export type SøknadAdopsjon = {
 // TODO: burde løses med tydeligere json subtypes i backend
 export type Soknad = SøknadAdopsjon | SøknadFødsel;
 
-export const søknadErAdopsjon = (soknad: Soknad): soknad is SøknadAdopsjon => soknad.soknadType === SoknadType.ADOPSJON;
+export const søknadErAdopsjon = (soknad: Soknad): soknad is SøknadAdopsjon => soknad.soknadType === 'ST-002';

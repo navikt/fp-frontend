@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { VenteArsakType } from '@navikt/fp-kodeverk';
+import { alleKodeverk } from '@navikt/fp-storybook-utils';
 
 import { MenySettPaVentIndex } from './MenySettPaVentIndex';
 
@@ -20,17 +20,6 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    ventearsaker: [
-      {
-        kode: VenteArsakType.AVV_DOK,
-        kodeverk: 'VENT_ARSAK_TYPE',
-        navn: 'Avvent dokumentasjon',
-      },
-      {
-        kode: VenteArsakType.AVV_FODSEL,
-        kodeverk: 'VENT_ARSAK_TYPE',
-        navn: 'Avvent fødsel',
-      },
-    ],
+    ventearsaker: alleKodeverk.Venteårsak,
   },
 };

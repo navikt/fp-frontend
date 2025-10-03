@@ -1,7 +1,6 @@
 import { use } from 'react';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, Vilkar } from '@navikt/fp-types';
+import type { Aksjonspunkt, AlleKodeverk, Behandling, Fagsak, Vilkar, VilkarUtfallType } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
@@ -21,7 +20,7 @@ export interface StandardProsessPanelProps {
   aksjonspunkterForPanel: Aksjonspunkt[];
   aksjonspunkter: Aksjonspunkt[];
   submitCallback: (aksjonspunkterSomSkalLagres: ProsessAksjonspunkt | ProsessAksjonspunkt[]) => Promise<void>;
-  status: string;
+  status: VilkarUtfallType;
   isReadOnly: boolean;
   readOnlySubmitButton: boolean;
   vilkårForPanel: Vilkar[];
@@ -59,7 +58,7 @@ export const useStandardProsessPanelProps = (
 
   const status = finnStatus(vilkårForPanel, aksjonspunkterForPanel);
 
-  const readOnlySubmitButton = !aksjonspunkterForPanel.some(ap => ap.kanLoses) || VilkarUtfallType.OPPFYLT === status;
+  const readOnlySubmitButton = !aksjonspunkterForPanel.some(ap => ap.kanLoses) || 'OPPFYLT' === status;
 
   const standardlagringSideEffekter = () => () => {
     oppdaterProsessStegOgFaktaPanelIUrl(DEFAULT_PROSESS_STEG_KODE, DEFAULT_FAKTA_KODE);
@@ -141,19 +140,17 @@ const getBekreftAksjonspunktProsessCallback =
     }).then(etterLagringCallback);
   };
 
-const finnStatus = (vilkår: Vilkar[], aksjonspunkter: Aksjonspunkt[]) => {
+const finnStatus = (vilkår: Vilkar[], aksjonspunkter: Aksjonspunkt[]): VilkarUtfallType => {
   if (vilkår.length > 0) {
     const vilkårStatusCodes = vilkår.map(v => v.vilkarStatus);
-    if (vilkårStatusCodes.includes(VilkarUtfallType.IKKE_VURDERT)) {
-      return VilkarUtfallType.IKKE_VURDERT;
+    if (vilkårStatusCodes.includes('IKKE_VURDERT')) {
+      return 'IKKE_VURDERT';
     }
-    return vilkårStatusCodes.every(vsc => vsc === VilkarUtfallType.OPPFYLT)
-      ? VilkarUtfallType.OPPFYLT
-      : VilkarUtfallType.IKKE_OPPFYLT;
+    return vilkårStatusCodes.every(vsc => vsc === 'OPPFYLT') ? 'OPPFYLT' : 'IKKE_OPPFYLT';
   }
 
   if (aksjonspunkter.length > 0) {
-    return aksjonspunkter.some(erAksjonspunktÅpent) ? VilkarUtfallType.IKKE_VURDERT : VilkarUtfallType.OPPFYLT;
+    return aksjonspunkter.some(erAksjonspunktÅpent) ? 'IKKE_VURDERT' : 'OPPFYLT';
   }
-  return VilkarUtfallType.IKKE_VURDERT;
+  return 'IKKE_VURDERT';
 };

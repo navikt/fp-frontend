@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosSaksbehandlerApi';
@@ -71,12 +70,12 @@ export const Default: Story = {
         fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
-            andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
+            andreKriterierType: 'TIL_BESLUTTER',
             inkluder: true,
           },
         ],
         sortering: {
-          sorteringType: KøSortering.BEHANDLINGSFRIST,
+          sorteringType: 'BEHFRIST',
           fra: 2,
           til: 4,
           erDynamiskPeriode: true,
@@ -96,12 +95,12 @@ export const MedToSakslister: Story = {
         fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
-            andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
+            andreKriterierType: 'TIL_BESLUTTER',
             inkluder: true,
           },
         ],
         sortering: {
-          sorteringType: KøSortering.BEHANDLINGSFRIST,
+          sorteringType: 'BEHFRIST',
           fra: 2,
           til: 4,
           erDynamiskPeriode: true,
@@ -114,12 +113,12 @@ export const MedToSakslister: Story = {
         fagsakYtelseTyper: ['SVP'],
         andreKriterier: [
           {
-            andreKriterierType: AndreKriterierType.UTBETALING_TIL_BRUKER,
+            andreKriterierType: 'UTBETALING_TIL_BRUKER',
             inkluder: true,
           },
         ],
         sortering: {
-          sorteringType: KøSortering.BEHANDLINGSFRIST,
+          sorteringType: 'BEHFRIST',
           fra: 2,
           til: 4,
           erDynamiskPeriode: true,
@@ -191,12 +190,12 @@ export const MedFlereEnnTreSaksbehandlere: Story = {
         fagsakYtelseTyper: ['FP'],
         andreKriterier: [
           {
-            andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
+            andreKriterierType: 'TIL_BESLUTTER',
             inkluder: true,
           },
         ],
         sortering: {
-          sorteringType: KøSortering.BEHANDLINGSFRIST,
+          sorteringType: 'BEHFRIST',
           fra: 2,
           til: 4,
           erDynamiskPeriode: true,

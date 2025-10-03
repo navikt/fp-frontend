@@ -3,7 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, SoknadType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   AdopsjonFamilieHendelse,
@@ -18,7 +18,7 @@ import { OmsorgOgForeldreansvarFaktaIndex } from './OmsorgOgForeldreansvarFaktaI
 const søknad = {
   adopsjonFodelsedatoer: { 1: '2019-01-10', 2: '2019-01-11' },
   antallBarn: 2,
-  soknadType: SoknadType.ADOPSJON,
+  soknadType: 'ST-002',
   farSokerType: 'ADOPTERER_ALENE',
 
   barnetsAnkomstTilNorgeDato: '2022-09-13',
@@ -139,7 +139,7 @@ const aksjonspunktDefault = {
   toTrinnsBehandling: false,
 
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 

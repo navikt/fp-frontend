@@ -1,5 +1,7 @@
+import type { AndreKriterierType } from '@navikt/fp-types';
+
 type AnnetKriterie = Readonly<{
-  andreKriterierType: string;
+  andreKriterierType: AndreKriterierType;
   inkluder: boolean;
 }>;
 

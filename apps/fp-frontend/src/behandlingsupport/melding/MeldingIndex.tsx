@@ -6,7 +6,6 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { VenteArsakType } from '@navikt/fp-kodeverk';
 import {
   type ForhåndsvisBrevParams,
   MeldingerSakIndex,
@@ -139,7 +138,7 @@ export const MeldingIndex = ({
       {submitFinished && showSettPaVentModal && (
         <SettPaVentReadOnlyModal
           lukkCallback={handleSubmitFromModal}
-          ventearsak={VenteArsakType.AVV_DOK}
+          ventearsak="AVV_DOK"
           ventearsaker={ventearsaker}
           frist={finnFristFraBehandling(valgtBehandling)}
         />

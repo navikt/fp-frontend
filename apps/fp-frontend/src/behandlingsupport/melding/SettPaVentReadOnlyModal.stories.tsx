@@ -1,22 +1,13 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { VenteArsakType } from '@navikt/fp-kodeverk';
-import { getIntlDecorator } from '@navikt/fp-storybook-utils';
+import { alleKodeverk, getIntlDecorator } from '@navikt/fp-storybook-utils';
 
 import { SettPaVentReadOnlyModal } from './SettPaVentReadOnlyModal';
 
 import messages from '../../../i18n/nb_NO.json';
 
 const withIntl = getIntlDecorator(messages);
-
-const VENTEARSAKER = [
-  {
-    kode: VenteArsakType.AVV_FODSEL,
-    navn: 'Dette er en venteårsak',
-    kodeverk: 'VENTEARSAK',
-  },
-];
 
 const meta = {
   title: 'fagsak/SettPaVentReadOnlyModal',
@@ -29,8 +20,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    ventearsaker: VENTEARSAKER,
-    ventearsak: VenteArsakType.ENDRE_TILKJENT_YTELSE,
+    ventearsaker: alleKodeverk.Venteårsak,
+    ventearsak: 'AAP_DP_ENESTE_AKTIVITET_SVP',
     lukkCallback: action('button-click'),
   },
 };

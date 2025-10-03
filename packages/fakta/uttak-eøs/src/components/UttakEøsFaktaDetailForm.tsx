@@ -10,8 +10,7 @@ import { OkAvbrytModal } from '@navikt/ft-ui-komponenter';
 import { calcDaysAndWeeks, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { UttakPeriodeType } from '@navikt/fp-kodeverk';
-import { type AnnenforelderUttakEøsPeriode, type Fagsak } from '@navikt/fp-types';
+import { type AnnenforelderUttakEøsPeriode, type Fagsak, type UttakPeriodeType } from '@navikt/fp-types';
 import type { BekreftUttaksperioderAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { finnDager, finnUker, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -179,20 +178,20 @@ export const UttakEøsFaktaDetailForm = ({ annenForelderUttakEøsPeriode, oppdat
 const lagGyldigeKontotyperOption = (fagsak: Fagsak): ReactElement[] => {
   if (fagsak.relasjonsRolleType === 'MORA') {
     return [
-      <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
-        {toTitleCapitalization(UttakPeriodeType.FELLESPERIODE)}
+      <option key={0} value={'FELLESPERIODE' satisfies UttakPeriodeType}>
+        {toTitleCapitalization('FELLESPERIODE')}
       </option>,
-      <option key={1} value={UttakPeriodeType.FEDREKVOTE}>
-        {toTitleCapitalization(UttakPeriodeType.FEDREKVOTE)}
+      <option key={1} value={'FEDREKVOTE' satisfies UttakPeriodeType}>
+        {toTitleCapitalization('FEDREKVOTE')}
       </option>,
     ];
   } else {
     return [
-      <option key={0} value={UttakPeriodeType.FELLESPERIODE}>
-        {toTitleCapitalization(UttakPeriodeType.FELLESPERIODE)}
+      <option key={0} value={'FELLESPERIODE' satisfies UttakPeriodeType}>
+        {toTitleCapitalization('FELLESPERIODE')}
       </option>,
-      <option key={1} value={UttakPeriodeType.MODREKVOTE}>
-        {toTitleCapitalization(UttakPeriodeType.MODREKVOTE)}
+      <option key={1} value={'MØDREKVOTE' satisfies UttakPeriodeType}>
+        {toTitleCapitalization('MØDREKVOTE')}
       </option>,
     ];
   }
@@ -208,7 +207,7 @@ const transformValues = ({ trekkdager, trekkuker, ...rest }: FormValues): Annenf
   };
 };
 
-export const toTitleCapitalization = (sentence: string): string => {
+export const toTitleCapitalization = (sentence: UttakPeriodeType): string => {
   return sentence
     .toLowerCase()
     .split(' ')
