@@ -5,7 +5,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { OpptjeningFaktaIndex } from '@navikt/fp-fakta-opptjening';
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
@@ -28,10 +28,8 @@ export const OpptjeningsvilkaretFaktaInitPanel = ({ arbeidsgiverOpplysningerPerI
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);
 
   const skalPanelVisesIMeny =
-    behandling.vilkår.some(v => v.vilkarType === VilkarType.OPPTJENINGSVILKARET) &&
-    behandling.vilkår.some(
-      v => v.vilkarType === VilkarType.MEDLEMSKAPSVILKARET && v.vilkarStatus === VilkarUtfallType.OPPFYLT,
-    );
+    behandling.vilkår.some(v => v.vilkarType === 'FP_VK_23') &&
+    behandling.vilkår.some(v => v.vilkarType === 'FP_VK_23' && v.vilkarStatus === 'OPPFYLT');
 
   const api = useBehandlingApi(behandling);
 

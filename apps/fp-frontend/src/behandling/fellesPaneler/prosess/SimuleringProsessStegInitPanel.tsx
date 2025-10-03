@@ -5,7 +5,7 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
 import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
@@ -46,7 +46,7 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
   });
 
   const harVedtakspanel = prosessPanelMenyData.some(
-    d => d.id === ProsessStegCode.VEDTAK && (d.status !== VilkarUtfallType.IKKE_VURDERT || d.harÅpentAksjonspunkt),
+    d => d.id === ProsessStegCode.VEDTAK && (d.status !== 'IKKE_VURDERT' || d.harÅpentAksjonspunkt),
   );
 
   return (
@@ -55,9 +55,7 @@ export const SimuleringProsessStegInitPanel = ({ arbeidsgiverOpplysningerPerId }
       prosessPanelKode={ProsessStegCode.SIMULERING}
       prosessPanelMenyTekst={useIntl().formatMessage({ id: 'Behandlingspunkt.Avregning' })}
       skalPanelVisesIMeny={harLenke(behandling, 'SIMULERING_RESULTAT') || !harVedtakspanel}
-      overstyrtStatus={
-        harLenke(behandling, 'SIMULERING_RESULTAT') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
-      }
+      overstyrtStatus={harLenke(behandling, 'SIMULERING_RESULTAT') ? 'OPPFYLT' : 'IKKE_VURDERT'}
     >
       {isFetching ? (
         <LoadingPanel />

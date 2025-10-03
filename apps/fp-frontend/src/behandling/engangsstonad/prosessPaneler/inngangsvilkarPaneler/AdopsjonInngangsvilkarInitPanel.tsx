@@ -1,8 +1,8 @@
 import { type IntlShape, useIntl } from 'react-intl';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
-import type { Aksjonspunkt } from '@navikt/fp-types';
+import type { Aksjonspunkt, VilkårType } from '@navikt/fp-types';
 
 import {
   InngangsvilkarDefaultInitPanel,
@@ -13,7 +13,7 @@ import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandar
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN];
 
-const VILKAR_KODER = [VilkarType.ADOPSJONSVILKARET];
+const VILKAR_KODER = ['FP_VK_4'] satisfies VilkårType[];
 
 export const AdopsjonInngangsvilkarInitPanel = () => {
   const intl = useIntl();

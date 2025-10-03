@@ -4,8 +4,7 @@ import { useIntl } from 'react-intl';
 import { Box, Checkbox, Heading, HStack, VStack } from '@navikt/ds-react';
 import { type Location } from 'history';
 
-import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag, SkjermlenkeType } from '@navikt/fp-types';
 
 import { sortAndTagTilbakekreving } from '../utils/historikkUtils';
 import { HistorikkInnslag } from './HistorikkInnslag/HistorikkInnslag';

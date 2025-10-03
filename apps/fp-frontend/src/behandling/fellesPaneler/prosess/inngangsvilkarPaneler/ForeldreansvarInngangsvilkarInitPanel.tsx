@@ -1,7 +1,8 @@
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ForeldreansvarVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-foreldreansvar';
+import type { VilkårType } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
@@ -20,7 +21,7 @@ const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
   [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
 };
 
-const VILKAR_KODER = [VilkarType.FORELDREANSVARSVILKARET_2_LEDD, VilkarType.FORELDREANSVARSVILKARET_4_LEDD];
+const VILKAR_KODER = ['FP_VK_8', 'FP_VK_33'] satisfies VilkårType[];
 
 export const ForeldreansvarInngangsvilkarInitPanel = () => {
   const intl = useIntl();
@@ -42,9 +43,7 @@ export const ForeldreansvarInngangsvilkarInitPanel = () => {
     >
       <ForeldreansvarVilkarProsessIndex
         isEngangsstonad
-        isForeldreansvar2Ledd={standardPanelProps.vilkårForPanel.some(
-          v => v.vilkarType === VilkarType.FORELDREANSVARSVILKARET_2_LEDD,
-        )}
+        isForeldreansvar2Ledd={standardPanelProps.vilkårForPanel.some(v => v.vilkarType === 'FP_VK_8')}
         status={standardPanelProps.status}
       />
     </InngangsvilkarDefaultInitPanel>

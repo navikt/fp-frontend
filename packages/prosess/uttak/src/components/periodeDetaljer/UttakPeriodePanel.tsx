@@ -7,7 +7,6 @@ import { AksjonspunktHelpTextHTML, EditedIcon } from '@navikt/ft-ui-komponenter'
 import { calcDays } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { StonadskontoType } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   AnnenforelderUttakEøsPeriode,
@@ -17,6 +16,7 @@ import type {
   ManuellBehandlingÅrsak,
   PeriodeSoker,
   PeriodeSokerAktivitet,
+  StønadskontoType,
   Uttaksresultat,
   UttakStonadskontoer,
 } from '@navikt/fp-types';
@@ -35,7 +35,7 @@ const getCorrectEmptyArbeidsForhold = (
 
   let arbeidsforholdMedPositivSaldoFinnes = false;
 
-  const konto = stonadskonto.stonadskontoer[periodeTypeKode as StonadskontoType];
+  const konto = stonadskonto.stonadskontoer[periodeTypeKode as StønadskontoType];
 
   if (konto?.aktivitetSaldoDtoList) {
     for (const item of konto.aktivitetSaldoDtoList) {

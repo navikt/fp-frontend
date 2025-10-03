@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, SoknadType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { AdopsjonFamilieHendelse, Aksjonspunkt, Soknad } from '@navikt/fp-types';
 
@@ -22,7 +22,7 @@ const adopsjon = {
 const soknad = {
   antallBarn: 1,
   adopsjonFodelsedatoer: { 1: '2019-01-10' },
-  soknadType: SoknadType.ADOPSJON,
+  soknadType: 'ST-002',
   farSokerType: 'ADOPTERER_ALENE',
   mottattDato: '',
 
@@ -79,7 +79,7 @@ const aksjonspunktDefault = {
   toTrinnsBehandling: false,
 
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 

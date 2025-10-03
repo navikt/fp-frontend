@@ -1,0 +1,1 @@
+export type KøSortering = 'OPPRBEH' | 'BEHFRIST' | 'BELOP' | 'FEILUTBETALINGSTART' | 'FORSTONAD';

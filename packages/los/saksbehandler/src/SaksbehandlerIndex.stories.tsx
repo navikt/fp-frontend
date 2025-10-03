@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AndreKriterierType, KøSortering, OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, withQueryClient } from '@navikt/fp-storybook-utils';
@@ -18,7 +17,7 @@ const SAKSLISTER = [
     sakslisteId: 1,
     navn: 'Saksliste 1',
     sortering: {
-      sorteringType: KøSortering.BEHANDLINGSFRIST,
+      sorteringType: 'BEHFRIST',
       fra: 1,
       til: 4,
       erDynamiskPeriode: true,
@@ -27,11 +26,11 @@ const SAKSLISTER = [
     fagsakYtelseTyper: ['FP'],
     andreKriterier: [
       {
-        andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
+        andreKriterierType: 'TIL_BESLUTTER',
         inkluder: true,
       },
       {
-        andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
+        andreKriterierType: 'PAPIRSOKNAD',
         inkluder: false,
       },
     ],
@@ -54,8 +53,8 @@ const OPPGAVER_TIL_BEHANDLING = [
     fagsakYtelseType: 'FP',
     erTilSaksbehandling: true,
     behandlingId: '12',
-    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
   {
     id: 4,
@@ -73,7 +72,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '12',
     andreKriterier: [],
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
   {
     id: 3,
@@ -91,7 +90,7 @@ const OPPGAVER_TIL_BEHANDLING = [
     erTilSaksbehandling: true,
     behandlingId: '34',
     andreKriterier: [],
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
 ] satisfies Oppgave[];
 
@@ -118,8 +117,8 @@ const RESERVERTE_OPPGAVER = [
     fagsakYtelseType: 'FP',
     erTilSaksbehandling: true,
     behandlingId: '2',
-    andreKriterier: [AndreKriterierType.REVURDERING_INNTEKTSMELDING],
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    andreKriterier: ['REVURDERING_INNTEKTSMELDING'],
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   },
 ] satisfies Oppgave[];
 
@@ -149,7 +148,7 @@ const BEHANDLEDE_OPPGAVER = [
     reservasjonStatus: {
       erReservert: false,
     },
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   } as Oppgave,
   {
     id: 2,
@@ -159,7 +158,7 @@ const BEHANDLEDE_OPPGAVER = [
     reservasjonStatus: {
       erReservert: false,
     },
-    oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+    oppgaveBehandlingStatus: 'UNDER_ARBEID',
   } as Oppgave,
 ];
 

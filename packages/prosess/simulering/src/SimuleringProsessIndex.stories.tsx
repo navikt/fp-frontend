@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -172,7 +172,7 @@ export const SimuleringspanelUtenAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [],
     tilbakekrevingvalg: {
-      videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER,
+      videreBehandling: 'TILBAKEKR_OPPDATER',
       varseltekst: 'varsel-eksempel',
     } as TilbakekrevingValg,
   },

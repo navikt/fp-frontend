@@ -6,8 +6,8 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { AndreKriterierType } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
+import type { AndreKriterierType } from '@navikt/fp-types';
 
 import { losKodeverkOptions, LosUrl } from '../../../data/fplosAvdelingslederApi';
 import { AndreKriterierVelger } from './AndreKriterierVelger';
@@ -35,8 +35,8 @@ const meta = {
   render: args => {
     const formMethods = useForm({
       defaultValues: {
-        [AndreKriterierType.TIL_BESLUTTER]: true,
-        [`${AndreKriterierType.TIL_BESLUTTER}_inkluder`]: true,
+        ['TIL_BESLUTTER' satisfies AndreKriterierType]: true,
+        [`${'TIL_BESLUTTER' satisfies AndreKriterierType}_inkluder`]: true,
       },
     });
 

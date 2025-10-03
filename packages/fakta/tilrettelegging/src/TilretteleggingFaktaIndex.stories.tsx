@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, UttakArbeidType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -37,7 +37,7 @@ const TILRETTELEGGING_PERMISJON = {
       ],
       eksternArbeidsforholdReferanse: '23422323',
       arbeidsgiverReferanse: '999999999',
-      uttakArbeidType: UttakArbeidType.FRILANS,
+      uttakArbeidType: 'FRILANS',
       skalBrukes: true,
       kanTilrettelegges: true,
       velferdspermisjoner: [
@@ -84,7 +84,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
       ],
       eksternArbeidsforholdReferanse: '23422323',
       arbeidsgiverReferanse: '999999999',
-      uttakArbeidType: UttakArbeidType.FRILANS,
+      uttakArbeidType: 'FRILANS',
       skalBrukes: true,
       kanTilrettelegges: true,
       velferdspermisjoner: [
@@ -111,7 +111,7 @@ const TILRETTELEGGING_MED_100_PROSENT_PERMISJON = {
         },
       ],
       arbeidsgiverReferanse: '2',
-      uttakArbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+      uttakArbeidType: 'ORDINÆRT_ARBEID',
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
@@ -139,7 +139,7 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
         },
       ],
       arbeidsgiverReferanse: '1',
-      uttakArbeidType: UttakArbeidType.ANNET,
+      uttakArbeidType: 'ANNET',
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
@@ -159,7 +159,7 @@ const SVANGERSKAPSPENGER_TIL_RETTELEGGING_FOR_FRILANSER = {
         },
       ],
       arbeidsgiverReferanse: '2',
-      uttakArbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+      uttakArbeidType: 'ORDINÆRT_ARBEID',
       skalBrukes: true,
       velferdspermisjoner: [],
       avklarteOppholdPerioder: [],
@@ -279,12 +279,10 @@ type Story = StoryObj<typeof meta>;
 const aksjonspunktDefault = {
   definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -368,7 +366,7 @@ export const HarOpphold: Story = {
             },
           ],
           arbeidsgiverReferanse: '999999999',
-          uttakArbeidType: UttakArbeidType.FRILANS,
+          uttakArbeidType: 'FRILANS',
           skalBrukes: true,
           kanTilrettelegges: true,
           velferdspermisjoner: [],
@@ -432,7 +430,7 @@ export const ErReadonly: Story = {
             },
           ],
           arbeidsgiverReferanse: '999999999',
-          uttakArbeidType: UttakArbeidType.FRILANS,
+          uttakArbeidType: 'FRILANS',
           skalBrukes: true,
           kanTilrettelegges: true,
           velferdspermisjoner: [],
@@ -491,7 +489,7 @@ export const ErRevurdering: Story = {
             },
           ],
           arbeidsgiverReferanse: '999999999',
-          uttakArbeidType: UttakArbeidType.FRILANS,
+          uttakArbeidType: 'FRILANS',
           skalBrukes: true,
           kanTilrettelegges: true,
           velferdspermisjoner: [],

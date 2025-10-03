@@ -7,7 +7,7 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -19,6 +19,7 @@ import type {
   ArbeidsforholdTilretteleggingDato,
   Behandling,
   FodselOgTilrettelegging,
+  VilkarUtfallType,
 } from '@navikt/fp-types';
 import type { BekreftSvangerskapspengervilkarAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -59,7 +60,7 @@ const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp 
 });
 
 interface Props {
-  status: string;
+  status: VilkarUtfallType;
   svangerskapspengerTilrettelegging: FodselOgTilrettelegging;
 }
 
@@ -98,9 +99,9 @@ export const SvangerskapVilkarForm = ({ svangerskapspengerTilrettelegging, statu
     }
   }, [erVilkarOk]);
 
-  const avslagsårsaker = alleKodeverk['Avslagsårsak'][VilkarType.SVANGERSKAPVILKARET];
+  const avslagsårsaker = alleKodeverk['Avslagsårsak']['SVP_VK_1'];
 
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
     <RhfForm

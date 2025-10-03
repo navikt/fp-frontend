@@ -10,7 +10,6 @@ import {
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import type { AlleKodeverkTilbakekreving } from '@navikt/fp-types';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
@@ -49,9 +48,7 @@ export const ForeldelseProsessInitPanel = ({ tilbakekrevingKodeverk }: Props) =>
       prosessPanelKode={ProsessStegCode.FORELDELSE}
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Foreldelse' })}
       skalPanelVisesIMeny
-      overstyrtStatus={
-        harLenke(behandling, 'PERIODER_FORELDELSE') ? VilkarUtfallType.OPPFYLT : VilkarUtfallType.IKKE_VURDERT
-      }
+      overstyrtStatus={harLenke(behandling, 'PERIODER_FORELDELSE') ? 'OPPFYLT' : 'IKKE_VURDERT'}
     >
       {perioderForeldelse ? (
         <Wrapper

@@ -1,0 +1,4 @@
+import type { foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapManuellVurderingType } from './apiDtoGenerert.ts';
+
+export type MedlemskapManuellVurderingType =
+  foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapManuellVurderingType;

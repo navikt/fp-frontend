@@ -3,7 +3,7 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
 
@@ -25,7 +25,7 @@ const aksjonspunkterForPanel: Aksjonspunkt[] = [
     kanLoses: true,
     toTrinnsBehandling: false,
     aksjonspunktType: 'AUTO',
-    vilkarType: VilkarType.OMSORGSVILKARET,
+    vilkarType: 'FP_VK_5',
     erAktivt: true,
   },
 ];

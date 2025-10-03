@@ -1,7 +1,6 @@
 import { createIntl } from '@navikt/ft-utils';
 import { expect } from 'vitest';
 
-import { PersonstatusType, Region } from '@navikt/fp-kodeverk';
 import { alleKodeverk } from '@navikt/fp-storybook-utils';
 import type { Medlemskap, Personadresse } from '@navikt/fp-types';
 
@@ -28,8 +27,8 @@ describe('situasjonUtils', () => {
       const medlemskap: Medlemskap = {
         ...defaultMedlemskapProps,
         regioner: [
-          { fom: '2022-06-02', tom: '2025-02-01', type: Region.ANNET },
-          { fom: '2022-07-01', tom: '2025-02-01', type: Region.EOS },
+          { fom: '2022-06-02', tom: '2025-02-01', type: 'ANNET' },
+          { fom: '2022-07-01', tom: '2025-02-01', type: 'EOS' },
         ],
       };
       expect(getSisteRegion(medlemskap, kodeverk, intl)).toBe('EU/EØS');
@@ -41,8 +40,8 @@ describe('situasjonUtils', () => {
       const medlemskap: Medlemskap = {
         ...defaultMedlemskapProps,
         personstatuser: [
-          { fom: '2022-06-02', tom: '2025-02-01', type: PersonstatusType.DOD },
-          { fom: '2022-07-01', tom: '2025-02-01', type: PersonstatusType.UTVANDRET },
+          { fom: '2022-06-02', tom: '2025-02-01', type: 'DØD' },
+          { fom: '2022-07-01', tom: '2025-02-01', type: 'UTVA' },
         ],
       };
       expect(getSistePersonstatus(medlemskap, kodeverk, intl)).toBe('Utflyttet');

@@ -5,7 +5,7 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -57,9 +57,9 @@ export const AdopsjonVilkarForm = ({ vilkår, status }: Props) => {
     defaultValues: mellomlagretFormData ?? initialValues,
   });
 
-  const avslagsårsaker = alleKodeverk['Avslagsårsak'][VilkarType.ADOPSJONSVILKARET];
+  const avslagsårsaker = alleKodeverk['Avslagsårsak']['FP_VK_4'];
 
-  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : VilkarUtfallType.OPPFYLT === status;
+  const originalErVilkårOk = harÅpentAksjonspunkt ? undefined : 'OPPFYLT' === status;
 
   return (
     <RhfForm

@@ -4,7 +4,6 @@ import { FormattedMessage } from 'react-intl';
 import { Label, VStack } from '@navikt/ds-react';
 import { RhfCheckbox } from '@navikt/ft-form-hooks';
 
-import { Arbeidskategori } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk } from '@navikt/fp-types';
 
 import { GRADERING_PERIODE_FIELD_ARRAY_NAME, TIDSROM_PERMISJON_FORM_NAME_PREFIX } from '../../constants';
@@ -60,9 +59,9 @@ PermisjonGraderingPanel.transformValues = (formValues: FormValuesGradering) => {
     if (periode.arbeidskategoriType) {
       return {
         ...periode,
-        erArbeidstaker: periode.arbeidskategoriType === Arbeidskategori.ARBEIDSTAKER,
-        erFrilanser: periode.arbeidskategoriType === Arbeidskategori.FRILANSER,
-        erSelvstNæringsdrivende: periode.arbeidskategoriType === Arbeidskategori.SELVSTENDIG_NAERINGSDRIVENDE,
+        erArbeidstaker: periode.arbeidskategoriType === 'ARBEIDSTAKER',
+        erFrilanser: periode.arbeidskategoriType === 'FRILANSER',
+        erSelvstNæringsdrivende: periode.arbeidskategoriType === 'SELVSTENDIG_NÆRINGSDRIVENDE',
       };
     }
     return periode;

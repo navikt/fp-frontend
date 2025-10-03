@@ -2,7 +2,6 @@ import { ExpandVerticalIcon } from '@navikt/aksel-icons';
 import { Button, Tooltip } from '@navikt/ds-react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { SkjermlenkeType } from '@navikt/fp-kodeverk';
 import { alleKodeverk, alleKodeverkTilbakekreving, withRouter } from '@navikt/fp-storybook-utils';
 import type { Historikkinnslag } from '@navikt/fp-types';
 
@@ -28,7 +27,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: 'SBH',
       ident: 'Z994283',
     },
-    skjermlenke: SkjermlenkeType.FAKTA_UTTAK,
+    skjermlenke: 'FAKTA_UTTAK',
     opprettetTidspunkt: '2024-12-06T11:59:56.891',
     dokumenter: [],
 
@@ -90,7 +89,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: 'SBH',
       ident: 'Z991198',
     },
-    skjermlenke: SkjermlenkeType.PUNKT_FOR_MEDLEMSKAP_LØPENDE,
+    skjermlenke: 'PUNKT_FOR_MEDLEMSKAP_LØPENDE',
     opprettetTidspunkt: '2024-08-04T20:07:08.962',
 
     linjer: [
@@ -110,7 +109,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: 'BESL',
       ident: 'Z993179',
     },
-    skjermlenke: SkjermlenkeType.VEDTAK,
+    skjermlenke: 'VEDTAK',
     opprettetTidspunkt: '2024-09-27T16:02:59.251',
 
     linjer: [
@@ -147,7 +146,7 @@ const historikkInnslag: Historikkinnslag[] = [
       type: 'SBH',
       ident: 'Z991753',
     },
-    skjermlenke: SkjermlenkeType.FAKTA_OM_MEDLEMSKAP,
+    skjermlenke: 'FAKTA_OM_MEDLEMSKAP',
     opprettetTidspunkt: '2024-09-19T16:33:54.789',
     dokumenter: [],
 

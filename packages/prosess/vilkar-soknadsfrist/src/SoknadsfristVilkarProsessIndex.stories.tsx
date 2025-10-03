@@ -2,14 +2,14 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, SoknadType, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, FamilieHendelse, Soknad } from '@navikt/fp-types';
 
 import { SoknadsfristVilkarProsessIndex } from './SoknadsfristVilkarProsessIndex';
 
 const soknad = {
-  soknadType: SoknadType.FODSEL,
+  soknadType: 'ST-001',
   mottattDato: '2019-01-01',
   begrunnelseForSenInnsending: 'Dette er en begrunnelse',
   søknadsfrist: {
@@ -45,11 +45,11 @@ export const ÅpentAksjonspunkt: Story = {
       {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
         status: 'OPPR',
-        vilkarType: VilkarType.SOKNADFRISTVILKARET,
+        vilkarType: 'FP_VK_3',
       },
     ] as Aksjonspunkt[],
     isReadOnly: false,
-    status: VilkarUtfallType.IKKE_VURDERT,
+    status: 'IKKE_VURDERT',
   },
 };
 
@@ -60,12 +60,12 @@ export const OppfyltVilkår: Story = {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
-        vilkarType: VilkarType.SOKNADFRISTVILKARET,
+        vilkarType: 'FP_VK_3',
       },
     ] as Aksjonspunkt[],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.OPPFYLT,
+    status: 'OPPFYLT',
   },
 };
 
@@ -83,11 +83,11 @@ export const AvslåttVilkår: Story = {
         definisjon: AksjonspunktKode.SOKNADSFRISTVILKARET,
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
-        vilkarType: VilkarType.SOKNADFRISTVILKARET,
+        vilkarType: 'FP_VK_3',
       },
     ] as Aksjonspunkt[],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    status: 'IKKE_OPPFYLT',
   },
 };

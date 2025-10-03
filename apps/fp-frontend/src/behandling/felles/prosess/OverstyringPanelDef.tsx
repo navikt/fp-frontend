@@ -1,6 +1,5 @@
-import { VilkarType } from '@navikt/fp-kodeverk';
 import { VilkarresultatMedOverstyringProsessIndex } from '@navikt/fp-prosess-vilkar-overstyring';
-import type { KodeverkMedNavn, Medlemskap, Vilkar } from '@navikt/fp-types';
+import type { KodeverkMedNavn, Medlemskap, Vilkar, VilkårType } from '@navikt/fp-types';
 import { usePanelOverstyring } from '@navikt/fp-utils';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';
@@ -10,15 +9,15 @@ import { useStandardProsessPanelProps } from './useStandardProsessPanelProps';
 const avslagsårsakerES = new Set(['1002', '1003', '1032']);
 const filtrerAvslagsårsaker = (
   avslagsårsaker: { [key: string]: KodeverkMedNavn<'Avslagsårsak'>[] },
-  vilkarTypeKode: string,
+  vilkarTypeKode: VilkårType,
 ): KodeverkMedNavn<'Avslagsårsak'>[] =>
-  vilkarTypeKode === VilkarType.FODSELSVILKARET_MOR
+  vilkarTypeKode === 'FP_VK_1'
     ? avslagsårsaker[vilkarTypeKode]!.filter(årsak => !avslagsårsakerES.has(årsak.kode))
     : avslagsårsaker[vilkarTypeKode]!;
 
 interface Props {
   vilkår: Vilkar[];
-  vilkårKoder: VilkarType[];
+  vilkårKoder: VilkårType[];
   medlemskap?: Medlemskap;
   panelTekstKode: string;
 }
