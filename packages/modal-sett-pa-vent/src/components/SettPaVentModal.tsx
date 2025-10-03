@@ -22,9 +22,9 @@ interface Props {
   erTilbakekreving: boolean;
   visBrevErBestilt?: boolean;
   hasManualPaVent: boolean;
-  frist: string | null;
-  ventearsak: VenteArsakType | null;
-  defaultVenteårsak?: VenteArsakType | null;
+  frist?: string;
+  ventearsak?: VenteArsakType;
+  defaultVenteårsak?: VenteArsakType;
 }
 
 export const SettPaVentModal = ({
@@ -37,7 +37,7 @@ export const SettPaVentModal = ({
   ventearsak,
   visBrevErBestilt = false,
   hasManualPaVent,
-  defaultVenteårsak = null,
+  defaultVenteårsak,
 }: Props) => {
   const intl = useIntl();
 
@@ -149,11 +149,7 @@ const initFrist = (): string => {
   return dayjs(date).format(ISO_DATE_FORMAT);
 };
 
-const buildInitialValues = (
-  hasManualPaVent: boolean,
-  frist: string | null,
-  ventearsak: VenteArsakType | null,
-): FormValues => ({
+const buildInitialValues = (hasManualPaVent: boolean, frist?: string, ventearsak?: VenteArsakType): FormValues => ({
   ventearsak: ventearsak ?? undefined,
   frist: frist || hasManualPaVent === false ? (frist ?? undefined) : initFrist(),
 });
@@ -186,9 +182,9 @@ const inkluderVentearsak = (
 
 const skalViseFristenTekst = (
   erTilbakekreving: boolean,
-  originalFrist: string | null,
-  frist: string | undefined,
-  ventearsak: VenteArsakType | undefined,
+  originalFrist?: string,
+  frist?: string,
+  ventearsak?: VenteArsakType,
 ): boolean => {
   const erFristenUtløpt =
     erTilbakekreving &&
@@ -198,8 +194,8 @@ const skalViseFristenTekst = (
   return erTilbakekreving && erFristenUtløpt && erVenterPaKravgrunnlag;
 };
 
-const harEndretVenteårsak = (originalVentearsak: VenteArsakType | null, ventearsak: VenteArsakType | undefined) =>
+const harEndretVenteårsak = (originalVentearsak?: VenteArsakType, ventearsak?: VenteArsakType) =>
   !(originalVentearsak === ventearsak || (!ventearsak && !originalVentearsak));
 
-const harEndretFrist = (originalFrist: string | null, frist: string | undefined) =>
+const harEndretFrist = (originalFrist?: string, frist?: string) =>
   !(originalFrist === frist || (!frist && !originalFrist));

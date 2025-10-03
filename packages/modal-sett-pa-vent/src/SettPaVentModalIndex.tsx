@@ -15,15 +15,15 @@ interface Props {
   submitCallback: (formData: FormValues) => void;
   showModal: boolean;
   ventearsaker: KodeverkMedNavn<'Venteårsak'>[] | KodeverkMedNavnTilbakekreving<'Venteårsak'>[];
-  frist?: string | null;
-  ventearsak?: VenteArsakType | null;
+  frist?: string;
+  ventearsak?: VenteArsakType;
   visBrevErBestilt?: boolean;
   hasManualPaVent?: boolean;
   erTilbakekreving: boolean;
   defaultVenteårsak?: VenteArsakType;
 }
 
-export const SettPaVentModalIndex = ({ frist = null, ventearsak = null, hasManualPaVent = false, ...rest }: Props) => (
+export const SettPaVentModalIndex = ({ frist, ventearsak, hasManualPaVent = false, ...rest }: Props) => (
   <RawIntlProvider value={intl}>
     <SettPaVentModal frist={frist} ventearsak={ventearsak} hasManualPaVent={hasManualPaVent} {...rest} />
   </RawIntlProvider>

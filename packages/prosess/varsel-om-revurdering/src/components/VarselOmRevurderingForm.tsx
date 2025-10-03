@@ -179,7 +179,6 @@ export const VarselOmRevurderingForm = ({ previewCallback }: Props) => {
         ventearsaker={ventearsaker}
         visBrevErBestilt
         hasManualPaVent
-        ventearsak={null}
         erTilbakekreving={behandling.type === 'BT-007' || behandling.type === 'BT-009'}
       />
     </>

@@ -12,11 +12,10 @@ import type {
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   Behandling,
-  foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
   ManuellBehandlingÅrsak,
   PeriodeSoker,
   PeriodeSokerAktivitet,
-  StønadskontoType,
+  UttakPeriodeType,
   Uttaksresultat,
   UttakStonadskontoer,
 } from '@navikt/fp-types';
@@ -28,14 +27,14 @@ import { UttakPeriodeInfoEØS } from './UttakPeriodeinfoEøs.tsx';
 const getCorrectEmptyArbeidsForhold = (
   alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
-  periodeTypeKode: string,
+  periodeTypeKode: UttakPeriodeType,
   stonadskonto: UttakStonadskontoer,
 ): string[] => {
   const arbeidsForholdMedNullDagerIgjenArray: string[] = [];
 
   let arbeidsforholdMedPositivSaldoFinnes = false;
 
-  const konto = stonadskonto.stonadskontoer[periodeTypeKode as StønadskontoType];
+  const konto = stonadskonto.stonadskontoer[periodeTypeKode];
 
   if (konto?.aktivitetSaldoDtoList) {
     for (const item of konto.aktivitetSaldoDtoList) {
@@ -73,7 +72,7 @@ const hentApTekst = (
   alleKodeverk: AlleKodeverk,
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId,
   stonadskonto: UttakStonadskontoer,
-  periodeTypeKode: foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
+  periodeTypeKode: UttakPeriodeType,
 ): ReactElement[] => {
   const aksjonspunktTekster = [];
 

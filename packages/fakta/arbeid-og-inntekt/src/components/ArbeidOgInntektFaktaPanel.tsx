@@ -196,7 +196,6 @@ export const ArbeidOgInntektFaktaPanel = ({
             ventearsaker={alleKodeverk['Venteårsak']}
             erTilbakekreving={false}
             showModal={visSettPåVentModal}
-            frist={null}
           />
         </div>
       )}
