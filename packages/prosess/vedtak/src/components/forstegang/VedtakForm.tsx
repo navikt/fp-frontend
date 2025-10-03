@@ -5,7 +5,7 @@ import { type IntlShape, useIntl } from 'react-intl';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, VedtakbrevType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   type Aksjonspunkt,
@@ -184,7 +184,7 @@ export const VedtakForm = ({
   const { harRedigertBrev } = useVedtakEditeringContext();
 
   const [harValgtÅRedigereVedtaksbrev, setHarValgtÅRedigereVedtaksbrev] = useState(
-    harRedigertBrev || behandlingsresultat?.vedtaksbrev === VedtakbrevType.FRITEKST,
+    harRedigertBrev || behandlingsresultat?.vedtaksbrev === 'FRITEKST',
   );
 
   const erBehandlingEtterKlage = erÅrsakTypeBehandlingEtterKlage(behandling.behandlingÅrsaker);

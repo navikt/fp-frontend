@@ -3,13 +3,7 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import {
-  AksjonspunktKode,
-  MedlemskapManuellVurderingType,
-  PersonstatusType,
-  Region,
-  VilkarType,
-} from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, type Medlemskap, type Soknad } from '@navikt/fp-types';
 
@@ -45,7 +39,7 @@ const aksjonspunktDefault = {
   toTrinnsBehandling: false,
 
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -134,19 +128,19 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
     {
       fom: '2019-01-01',
       tom: '2021-01-01',
-      type: Region.NORDEN,
+      type: 'NORDEN',
     },
   ],
   personstatuser: [
     {
       fom: '2019-01-01',
       tom: '2022-01-01',
-      type: PersonstatusType.BOSATT,
+      type: 'BOSA',
     },
     {
       fom: '2024-01-01',
       tom: TIDENES_ENDE,
-      type: PersonstatusType.UTVANDRET,
+      type: 'UTVA',
     },
   ],
   annenpart: {
@@ -176,14 +170,14 @@ const lagMedlemskap = (override: Partial<Medlemskap>): Medlemskap => ({
       {
         fom: '2019-01-01',
         tom: '2021-01-01',
-        type: Region.ANNET,
+        type: 'ANNET',
       },
     ],
     personstatuser: [
       {
         fom: '2019-01-01',
         tom: '2020-01-01',
-        type: PersonstatusType.BOSATT,
+        type: 'BOSA',
       },
     ],
   },
@@ -249,8 +243,8 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
       medlemskapsperioder: [],
       oppholdstillatelser: [],
       utenlandsopphold: [],
-      personstatuser: [{ fom: '2022-09-01', tom: TIDENES_ENDE, type: PersonstatusType.BOSATT }],
-      regioner: [{ fom: '1971-09-17', tom: TIDENES_ENDE, type: Region.NORDEN }],
+      personstatuser: [{ fom: '2022-09-01', tom: TIDENES_ENDE, type: 'BOSA' }],
+      regioner: [{ fom: '1971-09-17', tom: TIDENES_ENDE, type: 'NORDEN' }],
     }),
     soknad: {
       oppgittTilknytning: {
@@ -327,7 +321,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
           },
           {
             vurderingsdato: '2019-05-23',
-            medlemskapManuellVurderingType: MedlemskapManuellVurderingType.MEDLEM,
+            medlemskapManuellVurderingType: 'MEDLEM',
             begrunnelse: 'Søker er medlem jaja',
           },
         ],

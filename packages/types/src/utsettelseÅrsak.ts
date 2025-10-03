@@ -1,0 +1,3 @@
+import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_UtsettelseÅrsak } from './apiDtoGenerert';
+
+export type UtsettelseÅrsak = foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_UtsettelseÅrsak;

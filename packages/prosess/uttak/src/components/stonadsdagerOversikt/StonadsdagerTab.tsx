@@ -4,32 +4,31 @@ import { BodyShort, Detail, VStack } from '@navikt/ds-react';
 import { BTag } from '@navikt/ft-utils';
 import classnames from 'classnames/bind';
 
-import { StonadskontoType } from '@navikt/fp-kodeverk';
-import type { Stonadskonto } from '@navikt/fp-types';
+import type { Stonadskonto, StønadskontoType } from '@navikt/fp-types';
 
 import styles from './stonadsdagerTab.module.css';
 
 const classNames = classnames.bind(styles);
 
-const finnKorrektLabelForKvote = (stonadtype: string): string => {
+const finnKorrektLabelForKvote = (stonadtype: StønadskontoType): string => {
   switch (stonadtype) {
-    case StonadskontoType.FEDREKVOTE:
+    case 'FEDREKVOTE':
       return 'TimeLineTab.Stonadinfo.Fedrekvote';
-    case StonadskontoType.MØDREKVOTE:
+    case 'MØDREKVOTE':
       return 'TimeLineTab.Stonadinfo.Modrekvote';
-    case StonadskontoType.FELLESPERIODE:
+    case 'FELLESPERIODE':
       return 'TimeLineTab.Stonadinfo.Fellesperiode';
-    case StonadskontoType.FORELDREPENGER_FØR_FØDSEL:
+    case 'FORELDREPENGER_FØR_FØDSEL':
       return 'TimeLineTab.Stonadinfo.ForeldrepengerFF';
-    case StonadskontoType.FLERBARNSDAGER:
+    case 'FLERBARNSDAGER':
       return 'TimeLineTab.Stonadinfo.Flerbarnsdager';
-    case StonadskontoType.FORELDREPENGER:
+    case 'FORELDREPENGER':
       return 'TimeLineTab.Stonadinfo.ForeldrePenger';
-    case StonadskontoType.UTEN_AKTIVITETSKRAV:
+    case 'UTEN_AKTIVITETSKRAV':
       return 'TimeLineTab.Stonadinfo.UtenAktivitetskrav';
-    case StonadskontoType.MINSTERETT:
+    case 'MINSTERETT':
       return 'TimeLineTab.Stonadinfo.Minsterett';
-    case StonadskontoType.MINSTERETT_NESTE_STØNADSPERIODE:
+    case 'MINSTERETT_NESTE_STØNADSPERIODE':
       return 'TimeLineTab.Stonadinfo.MinsterettNesteStønadsperiode';
     default:
       return 'TimeLineTab.Stonadinfo.Empty';

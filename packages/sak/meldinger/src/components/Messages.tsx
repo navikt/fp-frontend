@@ -7,9 +7,13 @@ import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
-import type { BehandlingAppKontekst, DokumentMalType, KodeverkMedNavn } from '@navikt/fp-types';
+import type {
+  BehandlingAppKontekst,
+  DokumentMalType,
+  KodeverkMedNavn,
+  RevurderingVarslingÅrsak,
+} from '@navikt/fp-types';
 
 import styles from './messages.module.css';
 
@@ -20,7 +24,7 @@ const minLength3 = minLength(3);
 export type FormValues = {
   brevmalkode?: DokumentMalType;
   fritekst?: string;
-  arsakskode?: string;
+  arsakskode?: RevurderingVarslingÅrsak;
 };
 
 export type ForhåndsvisBrevParams = {
@@ -156,7 +160,7 @@ const getFritekstMessage = (brevmalkode?: DokumentMalType): string =>
   brevmalkode === 'INNOPP' || brevmalkode === 'INNHEN' ? 'Messages.DocumentList' : 'Messages.Fritekst';
 
 // TODO (TOR) Bør erstattast av ein markør fra backend
-const showFritekst = (brevmalkode?: DokumentMalType, arsakskode?: string): boolean =>
+const showFritekst = (brevmalkode?: DokumentMalType, arsakskode?: RevurderingVarslingÅrsak): boolean =>
   brevmalkode === 'INNOPP' ||
   //@ts-expect-error tilbakekreving
   brevmalkode === 'KORRIGVARS' ||
@@ -164,25 +168,17 @@ const showFritekst = (brevmalkode?: DokumentMalType, arsakskode?: string): boole
   brevmalkode === 'VARS' ||
   //@ts-expect-error tilbakekreving
   brevmalkode === 'INNHEN' ||
-  (brevmalkode === 'VARREV' && arsakskode === RevurderingVarslingÅrsak.ANNET);
+  (brevmalkode === 'VARREV' && arsakskode === 'ANNET');
 
 const getfiltrerteRevurderingVarslingArsaker = (
   revurderingVarslingArsaker: KodeverkMedNavn<'RevurderingVarslingÅrsak'>[],
   fagsakYtelseType: string,
 ): KodeverkMedNavn<'RevurderingVarslingÅrsak'>[] => {
   if (fagsakYtelseType === 'ES') {
-    return revurderingVarslingArsaker.filter(
-      arsak =>
-        arsak.kode === RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER ||
-        arsak.kode === RevurderingVarslingÅrsak.ANNET,
-    );
+    return revurderingVarslingArsaker.filter(arsak => arsak.kode === 'BARNIKKEREG' || arsak.kode === 'ANNET');
   }
   if (fagsakYtelseType === 'SVP') {
-    return revurderingVarslingArsaker.filter(
-      arsak =>
-        arsak.kode !== RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER &&
-        arsak.kode !== RevurderingVarslingÅrsak.MORS_AKTIVITETSKRAV_ER_IKKE_OPPFYLT,
-    );
+    return revurderingVarslingArsaker.filter(arsak => arsak.kode !== 'BARNIKKEREG' && arsak.kode !== 'AKTIVITET');
   }
   return revurderingVarslingArsaker;
 };
@@ -202,7 +198,7 @@ const buildInitialValues = (behandling: BehandlingAppKontekst): FormValues => {
 
 const transformValues = (values: FormValues) => {
   const newValues = values;
-  if (values.brevmalkode === 'VARREV' && newValues.arsakskode !== RevurderingVarslingÅrsak.ANNET) {
+  if (values.brevmalkode === 'VARREV' && newValues.arsakskode !== 'ANNET') {
     newValues.fritekst = ' ';
   }
   return newValues;

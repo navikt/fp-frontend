@@ -5,8 +5,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
-import { adopsjonsvilkarene, AksjonspunktKode, SoknadType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import { adopsjonsvilkårene } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -24,7 +25,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
 
   const { behandling, fagsak } = use(BehandlingDataContext);
 
-  const skalPanelVisesIMeny = behandling.vilkår.some(v => adopsjonsvilkarene.some(av => av === v.vilkarType));
+  const skalPanelVisesIMeny = behandling.vilkår.some(v => adopsjonsvilkårene.has(v.vilkarType));
 
   const api = useBehandlingApi(behandling);
 
@@ -38,7 +39,7 @@ export const AdopsjonsvilkaretFaktaInitPanel = () => {
       faktaPanelMenyTekst={useIntl().formatMessage({ id: 'FaktaInitPanel.Title.Adopsjon' })}
       skalPanelVisesIMeny={skalPanelVisesIMeny}
     >
-      {familiehendelse?.adopsjon && søknad && søknad.soknadType === SoknadType.ADOPSJON ? (
+      {familiehendelse?.adopsjon && søknad && søknad.soknadType === 'ST-002' ? (
         <AdopsjonFaktaIndex
           adopsjon={familiehendelse.adopsjon}
           soknad={søknad}

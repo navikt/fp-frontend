@@ -1,4 +1,3 @@
-import { VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
 import type { Behandling, Vilkar } from '@navikt/fp-types';
 
 import { erReadOnly, harBehandlingReadOnlyStatus } from './readOnlyPanelUtils';
@@ -15,8 +14,8 @@ describe('readOnlyUtils', () => {
 
   const vilkår: Vilkar[] = [
     {
-      vilkarType: VilkarType.FODSELSVILKARET_MOR,
-      vilkarStatus: VilkarUtfallType.OPPFYLT,
+      vilkarType: 'FP_VK_1',
+      vilkarStatus: 'OPPFYLT',
       overstyrbar: true,
     },
   ];

@@ -5,7 +5,7 @@ import { BodyShort } from '@navikt/ds-react';
 import { FadingPanel } from '@navikt/ft-ui-komponenter';
 import classnames from 'classnames/bind';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
+import type { VilkarUtfallType } from '@navikt/fp-types';
 
 import styles from './prosessPanelWrapper.module.css';
 
@@ -25,7 +25,7 @@ const PanelContainer = ({ skalSkjulePanel = false, children }: PanelContainerOwn
 interface Props {
   erPanelValgt: boolean;
   harÅpentAksjonspunkt: boolean;
-  status: string;
+  status: VilkarUtfallType;
   skalSkjulePanel?: boolean;
   children: ReactElement | ReactElement[] | null;
 }
@@ -41,7 +41,7 @@ export const ProsessPanelWrapper = ({
     return null;
   }
 
-  if (erPanelValgt && status === VilkarUtfallType.IKKE_VURDERT && !harÅpentAksjonspunkt) {
+  if (erPanelValgt && status === 'IKKE_VURDERT' && !harÅpentAksjonspunkt) {
     return (
       <PanelContainer>
         <BodyShort size="small">

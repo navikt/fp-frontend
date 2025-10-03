@@ -6,10 +6,10 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
-import type { Behandling } from '@navikt/fp-types';
+import type { Behandling, VilkarUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -53,7 +53,7 @@ export const InnsynVedtakProsessStegInitPanel = () => {
       prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
       skalPanelVisesIMeny
       overstyrtStatus={getVedtakStatus(behandling)}
-      skalMarkeresSomAktiv={getVedtakStatus(behandling) !== VilkarUtfallType.IKKE_VURDERT}
+      skalMarkeresSomAktiv={getVedtakStatus(behandling) !== 'IKKE_VURDERT'}
     >
       <>
         <IverksetterVedtakStatusModal
@@ -74,15 +74,15 @@ export const InnsynVedtakProsessStegInitPanel = () => {
   );
 };
 
-const getVedtakStatus = (behandling: Behandling): string => {
+const getVedtakStatus = (behandling: Behandling): VilkarUtfallType => {
   const { aksjonspunkt, behandlingsresultat } = behandling;
   const harÅpentAksjonspunkt = aksjonspunkt.some(erAksjonspunktÅpent);
   if (aksjonspunkt.length === 0 || harÅpentAksjonspunkt) {
-    return VilkarUtfallType.IKKE_VURDERT;
+    return 'IKKE_VURDERT';
   }
   return behandlingsresultat?.type === 'INNSYN_INNVILGET' || behandlingsresultat?.type === 'INNSYN_DELVIS_INNVILGET'
-    ? VilkarUtfallType.OPPFYLT
-    : VilkarUtfallType.IKKE_OPPFYLT;
+    ? 'OPPFYLT'
+    : 'IKKE_OPPFYLT';
 };
 
 const getLagringSideeffekter =

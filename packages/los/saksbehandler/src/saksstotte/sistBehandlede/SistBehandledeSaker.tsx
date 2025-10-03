@@ -15,7 +15,6 @@ import { BodyShort, Heading, HStack, Spacer, Switch, Table, VStack } from '@navi
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
 
 import { behandlendeOppgaverOptions } from '../../data/fplosSaksbehandlerApi';
@@ -123,15 +122,15 @@ const StatusIcon = ({ oppgave }: { oppgave: Oppgave }) => {
   const statusNavn = oppgaveBehandlingStatuser.find(obs => obs.kode === oppgave.oppgaveBehandlingStatus)?.navn ?? '-';
 
   switch (oppgave.oppgaveBehandlingStatus) {
-    case OppgaveBehandlingStatus.UNDER_ARBEID:
+    case 'UNDER_ARBEID':
       return <PencilIcon title={statusNavn} fontSize="1.5rem" />;
-    case OppgaveBehandlingStatus.FERDIG:
+    case 'FERDIG':
       return <CheckmarkCircleIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-success-500)" />;
-    case OppgaveBehandlingStatus.PÅ_VENT:
+    case 'PÅ_VENT':
       return <HourglassTopFilledIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-success-500)" />;
-    case OppgaveBehandlingStatus.RETURNERT_FRA_BESLUTTER:
+    case 'RETURNERT_FRA_BESLUTTER':
       return <ArrowCirclepathIcon title={statusNavn} fontSize="1.5rem" color="var(--ax-warning-500)" />;
-    case OppgaveBehandlingStatus.TIL_BESLUTTER:
+    case 'TIL_BESLUTTER':
       return <PersonEnvelopeIcon title={statusNavn} fontSize="1.5rem" />;
     default:
       throw new Error('Ukjent status i statusfeltet til "Dine siste reserverte behandlinger');

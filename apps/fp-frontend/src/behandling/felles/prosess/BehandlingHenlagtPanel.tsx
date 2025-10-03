@@ -3,8 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 
 import { BodyShort } from '@navikt/ds-react';
 
-import { VilkarUtfallType } from '@navikt/fp-kodeverk';
-
 import { ProsessPanelWrapper } from './ProsessPanelWrapper';
 import type { ProsessPanelMenyData } from './useProsessPanelMenyData';
 
@@ -27,14 +25,14 @@ export const BehandlingHenlagtPanel = ({ valgtProsessSteg, settProsessPanelMenyD
       tekst: intl.formatMessage({ id: 'BehandlingHenlagtPanel.Header' }),
       erAktiv: erValgt,
       harÅpentAksjonspunkt: false,
-      status: VilkarUtfallType.IKKE_VURDERT,
+      status: 'IKKE_VURDERT',
       skalVisesIMeny: true,
     });
     setPanelValgt(erValgt);
   }, [valgtProsessSteg]);
 
   return (
-    <ProsessPanelWrapper erPanelValgt={erPanelValgt} harÅpentAksjonspunkt={false} status={VilkarUtfallType.OPPFYLT}>
+    <ProsessPanelWrapper erPanelValgt={erPanelValgt} harÅpentAksjonspunkt={false} status="OPPFYLT">
       <BodyShort size="small">
         <FormattedMessage id="BehandlingHenlagtPanel.Henlagt" />
       </BodyShort>

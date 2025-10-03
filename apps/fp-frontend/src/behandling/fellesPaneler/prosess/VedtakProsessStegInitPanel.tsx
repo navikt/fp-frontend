@@ -6,10 +6,10 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, type VedtakForhåndsvisData, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import { type Aksjonspunkt, isAvslag, type Vilkar } from '@navikt/fp-types';
+import { type Aksjonspunkt, isAvslag, type Vilkar, type VilkarUtfallType } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
@@ -139,7 +139,7 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.Vedtak' })}
         skalPanelVisesIMeny
         overstyrtStatus={statusForVedtak}
-        skalMarkeresSomAktiv={!behandling.behandlingHenlagt && statusForVedtak !== VilkarUtfallType.IKKE_VURDERT}
+        skalMarkeresSomAktiv={!behandling.behandlingHenlagt && statusForVedtak !== 'IKKE_VURDERT'}
       >
         <>
           <IverksetterVedtakStatusModal
@@ -199,31 +199,31 @@ const harVilkarMedStatus = (vilkår: Vilkar[], status: VilkarUtfallType): boolea
   return vilkår.some(v => v.vilkarStatus === status);
 };
 
-const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): string => {
+const finnStatusForVedtak = (standardPanelProps: StandardProsessPanelProps): VilkarUtfallType => {
   const { vilkår, aksjonspunkt, behandlingsresultat } = standardPanelProps.behandling;
   if (vilkår.length === 0) {
-    return VilkarUtfallType.IKKE_VURDERT;
+    return 'IKKE_VURDERT';
   }
 
   const kunLukkedeAksjonspunkt = harKunLukkedeAksjonspunkt(aksjonspunkt, standardPanelProps.aksjonspunkterForPanel);
 
-  if (kunLukkedeAksjonspunkt && harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_OPPFYLT)) {
-    return VilkarUtfallType.IKKE_OPPFYLT;
+  if (kunLukkedeAksjonspunkt && harVilkarMedStatus(vilkår, 'IKKE_OPPFYLT')) {
+    return 'IKKE_OPPFYLT';
   }
 
-  if (harVilkarMedStatus(vilkår, VilkarUtfallType.IKKE_VURDERT) || harRelevantOgÅpentAksjonspunkt(aksjonspunkt)) {
-    return VilkarUtfallType.IKKE_VURDERT;
+  if (harVilkarMedStatus(vilkår, 'IKKE_VURDERT') || harRelevantOgÅpentAksjonspunkt(aksjonspunkt)) {
+    return 'IKKE_VURDERT';
   }
 
   if (!kunLukkedeAksjonspunkt) {
-    return VilkarUtfallType.IKKE_VURDERT;
+    return 'IKKE_VURDERT';
   }
 
   if (behandlingsresultat && isAvslag(behandlingsresultat.type)) {
-    return VilkarUtfallType.IKKE_OPPFYLT;
+    return 'IKKE_OPPFYLT';
   }
 
-  return VilkarUtfallType.OPPFYLT;
+  return 'OPPFYLT';
 };
 
 const getLagringSideeffekter =

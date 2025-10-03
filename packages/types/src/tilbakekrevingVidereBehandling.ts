@@ -1,0 +1,4 @@
+import type { foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling } from './apiDtoGenerert';
+
+export type TilbakekrevingVidereBehandling =
+  foreldrepenger_behandlingslager_behandling_tilbakekreving_TilbakekrevingVidereBehandling;

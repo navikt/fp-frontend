@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { VilkårType } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarOverstyringDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
@@ -9,7 +10,7 @@ import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandar
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET, AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR];
 
-const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKARET];
+const VILKAR_KODER = ['FP_VK_2'] satisfies VilkårType[];
 
 export const MedlemskapInngangsvilkarInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);

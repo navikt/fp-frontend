@@ -7,7 +7,6 @@ import { RhfCheckbox, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { formaterArbeidsgiver, guid } from '@navikt/ft-utils';
 
-import { UttakArbeidType } from '@navikt/fp-kodeverk';
 import type { AlleKodeverk, ArbeidsgiverOpplysningerPerId, FaktaArbeidsforhold } from '@navikt/fp-types';
 
 import type { KontrollerFaktaPeriodeMedApMarkering } from '../typer/kontrollerFaktaPeriodeMedApMarkering';
@@ -33,7 +32,7 @@ const mapArbeidsforhold = (
       : undefined;
 
     let periodeArbeidsforhold = '';
-    if (arbeidType && arbeidType !== UttakArbeidType.ORDINÆRT_ARBEID) {
+    if (arbeidType && arbeidType !== 'ORDINÆRT_ARBEID') {
       periodeArbeidsforhold = alleKodeverk['UttakArbeidType'].find(k => k.kode === arbeidType)?.navn ?? '';
     } else if (arbeidsgiverOpplysninger) {
       periodeArbeidsforhold = formaterArbeidsgiver(arbeidsgiverOpplysninger);

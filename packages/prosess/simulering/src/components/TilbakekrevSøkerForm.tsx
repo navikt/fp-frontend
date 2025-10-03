@@ -9,8 +9,8 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
-import type { Aksjonspunkt, Fagsak, TilbakekrevingValg } from '@navikt/fp-types';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { Aksjonspunkt, Fagsak, TilbakekrevingValg, TilbakekrevingVidereBehandling } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import type { FeilutbetalingFormValues } from '../types/FormValues';
@@ -66,10 +66,10 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
         isReadOnly={readOnly}
       >
         <VStack gap="space-2">
-          <Radio value={TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT} size="small">
+          <Radio value={'TILBAKEKR_OPPRETT' satisfies TilbakekrevingVidereBehandling} size="small">
             <FormattedMessage id="Simulering.gjennomfør" />
           </Radio>
-          {videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT && (
+          {videreBehandling === 'TILBAKEKR_OPPRETT' && (
             <div className={styles['varsel']}>
               <ArrowBox alignOffset={20}>
                 <VStack gap="space-16">
@@ -111,10 +111,10 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
               </ArrowBox>
             </div>
           )}
-          <Radio value={`${TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT}${IKKE_SEND}`} size="small">
+          <Radio value={`${'TILBAKEKR_OPPRETT' satisfies TilbakekrevingVidereBehandling}${IKKE_SEND}`} size="small">
             <FormattedMessage id="Simulering.OpprettMenIkkeSendVarsel" />
           </Radio>
-          <Radio value={TilbakekrevingVidereBehandling.TILBAKEKR_IGNORER} size="small">
+          <Radio value={`${'TILBAKEKR_IGNORER' satisfies TilbakekrevingVidereBehandling}`} size="small">
             <FormattedMessage id="Simulering.avvent" />
           </Radio>
         </VStack>
@@ -132,10 +132,10 @@ TilbakekrevSøkerForm.initialValues = (
   }
 
   const harTypeIkkeSendt =
-    !tilbakekrevingvalg.varseltekst &&
-    tilbakekrevingvalg.videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT;
+    !tilbakekrevingvalg.varseltekst && tilbakekrevingvalg.videreBehandling === 'TILBAKEKR_OPPRETT';
 
   return {
+    // @ts-expect-error kva er dette?
     videreBehandling: harTypeIkkeSendt
       ? tilbakekrevingvalg.videreBehandling + IKKE_SEND
       : tilbakekrevingvalg.videreBehandling,
@@ -150,7 +150,7 @@ TilbakekrevSøkerForm.transformValues = (values: FeilutbetalingFormValues): Vurd
     return {
       kode: AksjonspunktKode.VURDER_FEILUTBETALING,
       begrunnelse,
-      videreBehandling: TilbakekrevingVidereBehandling.TILBAKEKR_OPPRETT,
+      videreBehandling: 'TILBAKEKR_OPPRETT',
     };
   }
 

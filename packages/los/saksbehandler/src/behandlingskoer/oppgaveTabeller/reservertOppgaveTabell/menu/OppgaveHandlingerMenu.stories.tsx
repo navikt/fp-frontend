@@ -2,7 +2,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { LosUrl } from '../../../../data/fplosSaksbehandlerApi';
@@ -64,7 +63,7 @@ export const Default: Story = {
       erTilSaksbehandling: true,
       behandlingId: '1',
       andreKriterier: [],
-      oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+      oppgaveBehandlingStatus: 'UNDER_ARBEID',
     },
   },
 };

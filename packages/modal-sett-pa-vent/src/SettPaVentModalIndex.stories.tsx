@@ -30,13 +30,14 @@ export const BehandlingMedFrist: Story = {
 export const BehandlingSomErAutomatiskPåVentUtenFrist: Story = {
   args: {
     hasManualPaVent: false,
-    ventearsak: 'ventearsak',
+    ventearsak: 'AAP_DP_ENESTE_AKTIVITET_SVP',
   },
 };
 
 export const VenterPåTilbakekrevinggrunnlagMedUtløptFrist: Story = {
   args: {
     frist: '2015-10-10',
+    //@ts-expect-error tilbakekreving
     ventearsak: 'VENT_PÅ_TILBAKEKREVINGSGRUNNLAG',
     hasManualPaVent: false,
     erTilbakekreving: true,

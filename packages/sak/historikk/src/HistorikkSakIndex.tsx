@@ -4,8 +4,7 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import type { Location } from 'history';
 
-import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, Historikkinnslag, SkjermlenkeType } from '@navikt/fp-types';
 
 import { Historikk } from './components/Historikk';
 

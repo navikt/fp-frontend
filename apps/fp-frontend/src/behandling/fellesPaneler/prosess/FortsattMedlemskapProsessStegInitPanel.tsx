@@ -1,7 +1,8 @@
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import type { VilkårType } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
@@ -11,7 +12,7 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 
 const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
 
-const VILKAR_KODER = [VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE];
+const VILKAR_KODER = ['FP_VK_2_L'] satisfies VilkårType[];
 
 export const FortsattMedlemskapProsessStegInitPanel = () => {
   const intl = useIntl();

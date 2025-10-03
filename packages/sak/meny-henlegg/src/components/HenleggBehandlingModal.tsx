@@ -7,9 +7,9 @@ import { RhfForm, RhfSelect, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, required } from '@navikt/ft-form-validators';
 import { formaterFritekst } from '@navikt/ft-utils';
 
-import { BehandlingResultatTypeTilbakekreving } from '@navikt/fp-kodeverk';
 import type {
   BehandlingResultatType,
+  BehandlingResultatTypeTilbakekreving,
   BehandlingType,
   FagsakYtelseType,
   foreldrepenger_dokumentbestiller_DokumentMalType,
@@ -27,34 +27,15 @@ export type ForhåndsvisHenleggParams = {
   fritekst?: string;
 };
 
-const henleggArsakerPerBehandlingType = {
-  ['BT-003']: [
-    'HENLAGT_KLAGE_TRUKKET' satisfies BehandlingResultatType,
-    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
-  ],
-  ['BT-008']: [
-    'HENLAGT_ANKE_TRUKKET' satisfies BehandlingResultatType,
-    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
-  ],
-  ['BT-006']: [
-    'HENLAGT_INNSYN_TRUKKET' satisfies BehandlingResultatType,
-    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
-  ],
-  ['BT-007']: [BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET],
-  ['BT-009']: [
-    BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_MED_BREV,
-    BehandlingResultatTypeTilbakekreving.HENLAGT_FEILOPPRETTET_UTEN_BREV,
-  ],
-  ['BT-004']: [
-    'HENLAGT_SØKNAD_TRUKKET' satisfies BehandlingResultatType,
-    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
-    'HENLAGT_SØKNAD_MANGLER' satisfies BehandlingResultatType,
-  ],
-  ['BT-002']: [
-    'HENLAGT_SØKNAD_TRUKKET' satisfies BehandlingResultatType,
-    'HENLAGT_FEILOPPRETTET' satisfies BehandlingResultatType,
-    'HENLAGT_SØKNAD_MANGLER' satisfies BehandlingResultatType,
-  ],
+const henleggArsakerPerBehandlingType: Record<string, BehandlingResultatType[]> = {
+  ['BT-003']: ['HENLAGT_KLAGE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
+  ['BT-008']: ['HENLAGT_ANKE_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
+  ['BT-006']: ['HENLAGT_INNSYN_TRUKKET', 'HENLAGT_FEILOPPRETTET'],
+  ['BT-007']: ['HENLAGT_FEILOPPRETTET'],
+  // @ts-expect-error -- tilbakekreving
+  ['BT-009']: ['HENLAGT_FEILOPPRETTET_MED_BREV', 'HENLAGT_FEILOPPRETTET_UTEN_BREV'],
+  ['BT-004']: ['HENLAGT_SØKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SØKNAD_MANGLER'],
+  ['BT-002']: ['HENLAGT_SØKNAD_TRUKKET', 'HENLAGT_FEILOPPRETTET', 'HENLAGT_SØKNAD_MANGLER'],
   '-': [],
 };
 
@@ -237,10 +218,13 @@ const getHenleggÅrsaker = (
   ytelseType: FagsakYtelseType,
 ): (KodeverkMedNavn<'BehandlingResultatType'> | KodeverkMedNavnTilbakekreving<'BehandlingResultatType'>)[] => {
   const typerForBehandlingType = henleggArsakerPerBehandlingType[behandlingType];
-  return typerForBehandlingType
-    .filter(type => ytelseType !== 'ES' || type !== 'HENLAGT_SOKNAD_MANGLER')
-    .flatMap(type => {
-      const typer = behandlingResultatTyper.find(brt => brt.kode === type);
-      return typer ? [typer] : [];
-    });
+
+  return (
+    typerForBehandlingType
+      ?.filter(type => ytelseType !== 'ES' || type !== 'HENLAGT_SØKNAD_MANGLER')
+      .flatMap(type => {
+        const typer = behandlingResultatTyper.find(brt => brt.kode === type);
+        return typer ? [typer] : [];
+      }) || []
+  );
 };

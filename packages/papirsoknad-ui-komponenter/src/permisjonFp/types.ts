@@ -1,4 +1,4 @@
-import type { MorsAktivitet, OverføringÅrsak } from '@navikt/fp-types';
+import type { Arbeidskategori, MorsAktivitet, OverføringÅrsak, UttakPeriodeType } from '@navikt/fp-types';
 
 import {
   GRADERING_PERIODE_FIELD_ARRAY_NAME,
@@ -20,14 +20,14 @@ export type GraderingPeriode = {
   prosentandelArbeid: string;
   skalGraderes: boolean;
   arbeidsgiverIdentifikator?: string;
-  arbeidskategoriType?: string;
+  arbeidskategoriType?: Arbeidskategori;
   flerbarnsdager?: boolean;
   harSamtidigUttak?: boolean;
   samtidigUttaksprosent?: string;
 };
 
 export type PermisjonPeriode = {
-  periodeType: string;
+  periodeType: UttakPeriodeType;
   periodeFom: string;
   periodeTom: string;
   flerbarnsdager?: boolean;

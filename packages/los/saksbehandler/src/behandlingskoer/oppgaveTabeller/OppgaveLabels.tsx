@@ -2,9 +2,8 @@ import { type IntlShape, useIntl } from 'react-intl';
 
 import { HStack, Tag } from '@navikt/ds-react';
 
-import { AndreKriterierType } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
-import type { LosKodeverkMedNavn } from '@navikt/fp-types';
+import type { AndreKriterierType, LosKodeverkMedNavn } from '@navikt/fp-types';
 
 import { useLosKodeverk } from '../../data/useLosKodeverk';
 
@@ -51,38 +50,38 @@ export const OppgaveLabels = ({ oppgave }: Props) => {
 
 // Rekkefølgen her styrer rekkefølgen på labels i tabellrad
 const MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE_SORTERT = {
-  [AndreKriterierType.ENDRINGSSOKNAD]: 'alt1',
-  [AndreKriterierType.REVURDERING_INNTEKTSMELDING]: 'alt1',
-  [AndreKriterierType.KLAGE_PÅ_TILBAKEBETALING]: 'alt1',
-  [AndreKriterierType.BERØRT_BEHANDLING]: 'alt1',
-  [AndreKriterierType.PLEIEPENGER]: 'alt1',
-  [AndreKriterierType.UTSATT_START]: 'alt1',
-  [AndreKriterierType.TIL_BESLUTTER]: 'alt3',
-  [AndreKriterierType.PAPIRSOKNAD]: 'alt3',
-  [AndreKriterierType.VURDER_EØS_OPPTJENING]: 'alt3',
-  [AndreKriterierType.ARBEID_INNTEKT]: 'alt3',
-  [AndreKriterierType.TERMINBEKREFTELSE]: 'alt3',
-  [AndreKriterierType.VURDER_FORMKRAV]: 'alt3',
-  [AndreKriterierType.VURDER_FARESIGNALER]: 'alt3',
-  [AndreKriterierType.VURDER_SYKDOM]: 'alt3',
-  [AndreKriterierType.IKKE_VARSLET]: 'alt3',
-  [AndreKriterierType.OVER_FIRE_RETTSGEBYR]: 'alt3',
-  [AndreKriterierType.BARE_FAR_RETT]: 'alt2',
-  [AndreKriterierType.UTLANDSSAK]: 'alt2',
-  [AndreKriterierType.DØD]: 'alt2',
-  [AndreKriterierType.EØS_SAK]: 'alt2',
-  [AndreKriterierType.MOR_UKJENT_UTLAND]: 'alt2',
-  [AndreKriterierType.KODE7_SAK]: 'alt2',
-  [AndreKriterierType.NYTT_VEDTAK]: 'alt2',
-  [AndreKriterierType.PRAKSIS_UTSETTELSE]: 'alt2',
-  [AndreKriterierType.RETURNERT_FRA_BESLUTTER]: 'alt2',
-  [AndreKriterierType.SAMMENSATT_KONTROLL]: 'alt2',
-  [AndreKriterierType.NÆRING]: 'alt2',
-  [AndreKriterierType.UTBETALING_TIL_BRUKER]: 'alt2',
+  ['ENDRINGSSOKNAD']: 'alt1',
+  ['REVURDERING_INNTEKTSMELDING']: 'alt1',
+  ['KLAGE_PÅ_TILBAKEBETALING']: 'alt1',
+  ['BERØRT_BEHANDLING']: 'alt1',
+  ['PLEIEPENGER']: 'alt1',
+  ['UTSATT_START']: 'alt1',
+  ['TIL_BESLUTTER']: 'alt3',
+  ['PAPIRSOKNAD']: 'alt3',
+  ['VURDER_EØS_OPPTJENING']: 'alt3',
+  ['ARBEID_INNTEKT']: 'alt3',
+  ['TERMINBEKREFTELSE']: 'alt3',
+  ['VURDER_FORMKRAV']: 'alt3',
+  ['VURDER_FARESIGNALER']: 'alt3',
+  ['VURDER_SYKDOM']: 'alt3',
+  ['IKKE_VARSLET']: 'alt3',
+  ['OVER_FIRE_RETTSGEBYR']: 'alt3',
+  ['BARE_FAR_RETT']: 'alt2',
+  ['UTLANDSSAK']: 'alt2',
+  ['DØD']: 'alt2',
+  ['EØS_SAK']: 'alt2',
+  ['MOR_UKJENT_UTLAND']: 'alt2',
+  ['KODE7_SAK']: 'alt2',
+  ['NYTT_VEDTAK']: 'alt2',
+  ['PRAKSIS_UTSETTELSE']: 'alt2',
+  ['RETURNERT_FRA_BESLUTTER']: 'alt2',
+  ['SAMMENSATT_KONTROLL']: 'alt2',
+  ['NÆRING']: 'alt2',
+  ['UTBETALING_TIL_BRUKER']: 'alt2',
 } satisfies Record<AndreKriterierType, React.ComponentProps<typeof Tag>['variant']>;
 
+const kriterier = Object.keys(MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE_SORTERT);
 const sorterAndreKriterier = (a: AndreKriterierType, b: AndreKriterierType) => {
-  const kriterier = Object.keys(MAP_ANDRE_KRITERIER_TIL_LABEL_FARGE_SORTERT);
   return kriterier.indexOf(a) - kriterier.indexOf(b);
 };
 
@@ -102,31 +101,31 @@ const hentAndreKriterierNavn = (
   kode: AndreKriterierType,
   andreKriterier: LosKodeverkMedNavn<'AndreKriterierType'>[],
 ) => {
-  if (AndreKriterierType.REVURDERING_INNTEKTSMELDING === kode) {
+  if ('REVURDERING_INNTEKTSMELDING' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.RevurderingInntekstmelding' });
   }
-  if (AndreKriterierType.BERØRT_BEHANDLING === kode) {
+  if ('BERØRT_BEHANDLING' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.BerortBehandling' });
   }
-  if (AndreKriterierType.KLAGE_PÅ_TILBAKEBETALING === kode) {
+  if ('KLAGE_PÅ_TILBAKEBETALING' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.KlageTilbakebetaling' });
   }
-  if (AndreKriterierType.DØD === kode) {
+  if ('DØD' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.Dod' });
   }
-  if (AndreKriterierType.PAPIRSOKNAD === kode) {
+  if ('PAPIRSOKNAD' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.Papirsoknad' });
   }
-  if (AndreKriterierType.RETURNERT_FRA_BESLUTTER === kode) {
+  if ('RETURNERT_FRA_BESLUTTER' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.FraBeslutter' });
   }
-  if (AndreKriterierType.NÆRING === kode) {
+  if ('NÆRING' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.Naring' });
   }
-  if (AndreKriterierType.UTBETALING_TIL_BRUKER === kode) {
+  if ('UTBETALING_TIL_BRUKER' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.Utbetaling' });
   }
-  if (AndreKriterierType.VURDER_EØS_OPPTJENING === kode) {
+  if ('VURDER_EØS_OPPTJENING' === kode) {
     return intl.formatMessage({ id: 'OppgaveLabels.VurderSed' });
   }
 

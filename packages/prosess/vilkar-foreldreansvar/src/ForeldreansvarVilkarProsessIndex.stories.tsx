@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -29,7 +29,7 @@ export const ÅpentAksjonspunkt2Ledd: Story = {
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
-    status: VilkarUtfallType.IKKE_VURDERT,
+    status: 'IKKE_VURDERT',
     isForeldreansvar2Ledd: true,
   },
 };
@@ -45,7 +45,7 @@ export const OppfyltVilkår2Ledd: Story = {
     ] as Aksjonspunkt[],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.OPPFYLT,
+    status: 'OPPFYLT',
     isForeldreansvar2Ledd: true,
   },
 };
@@ -68,7 +68,7 @@ export const AvslåttVilkår2Ledd: Story = {
     ] as Aksjonspunkt[],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    status: 'IKKE_OPPFYLT',
     isForeldreansvar2Ledd: true,
   },
 };
@@ -82,7 +82,7 @@ export const ÅpentAksjonspunkt4Ledd: Story = {
       },
     ] as Aksjonspunkt[],
     isReadOnly: false,
-    status: VilkarUtfallType.IKKE_VURDERT,
+    status: 'IKKE_VURDERT',
     isForeldreansvar2Ledd: false,
   },
 };
@@ -98,7 +98,7 @@ export const OppfyltVilkår4Ledd: Story = {
     ] as Aksjonspunkt[],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.OPPFYLT,
+    status: 'OPPFYLT',
     isForeldreansvar2Ledd: false,
   },
 };
@@ -121,7 +121,7 @@ export const AvslåttVilkår4Ledd: Story = {
     ] as Aksjonspunkt[],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    status: 'IKKE_OPPFYLT',
     isForeldreansvar2Ledd: false,
   },
 };

@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
@@ -14,7 +14,7 @@ const aksjonspunktDefault = {
   kanLoses: true,
   toTrinnsBehandling: false,
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -44,7 +44,7 @@ export const ÅpentAksjonspunkt: Story = {
         status: 'OPPR',
       },
     ],
-    status: VilkarUtfallType.IKKE_VURDERT,
+    status: 'IKKE_VURDERT',
   },
 };
 
@@ -61,7 +61,7 @@ export const OppfyltVilkår: Story = {
     ],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.OPPFYLT,
+    status: 'OPPFYLT',
   },
 };
 
@@ -85,6 +85,6 @@ export const AvslåttVilkår: Story = {
     ],
     isReadOnly: true,
     isSubmittable: false,
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    status: 'IKKE_OPPFYLT',
   },
 };

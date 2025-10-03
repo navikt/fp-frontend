@@ -3,8 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { BodyShort } from '@navikt/ds-react';
 import { type Location } from 'history';
 
-import type { SkjermlenkeType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving } from '@navikt/fp-types';
+import type { AlleKodeverk, AlleKodeverkTilbakekreving, SkjermlenkeType } from '@navikt/fp-types';
 
 interface Props {
   skjermlenke?: SkjermlenkeType;
