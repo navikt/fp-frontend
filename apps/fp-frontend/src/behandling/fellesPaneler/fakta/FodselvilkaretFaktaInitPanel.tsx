@@ -5,9 +5,8 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { FodselFaktaIndex } from '@navikt/fp-fakta-fodsel';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { Dokument } from '@navikt/fp-types';
+import type { AksjonspunktKode, Dokument } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
@@ -16,12 +15,8 @@ import { BehandlingDataContext } from '../../felles/context/BehandlingDataContex
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const OVERSTYRING_KODER = [AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL];
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
-  AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
-  AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-];
+const OVERSTYRING_KODER: AksjonspunktKode[] = ['6019'];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5001', '5027', '6019'];
 
 export const FodselvilkaretFaktaInitPanel = () => {
   const intl = useIntl();
@@ -33,9 +28,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
   const api = useBehandlingApi(behandling);
   const fagsakApi = useFagsakApi();
 
-  const harOverstyrigAP = standardPanelProps.aksjonspunkterForPanel.some(
-    a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-  );
+  const harOverstyrigAP = standardPanelProps.aksjonspunkterForPanel.some(a => a.definisjon === '6019');
   const { data: faktafødsel } = useQuery(api.faktaFødselOptions(behandling));
   const { data: alleDokumenter = [] } = useQuery(
     fagsakApi.hentDokumenter(fagsak.saksnummer, behandling.uuid, behandling.versjon),
@@ -44,7 +37,7 @@ export const FodselvilkaretFaktaInitPanel = () => {
   const terminbekreftelseDokument = finnTerminBekreftelse(alleDokumenter, fagsak.saksnummer);
   return (
     <PanelOverstyringProvider
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL}
+      overstyringApKode="6019"
       kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       overrideReadOnly={standardPanelProps.isReadOnly}
       initialToggleState={harOverstyrigAP}

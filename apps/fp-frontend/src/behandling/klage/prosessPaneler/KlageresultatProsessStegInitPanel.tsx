@@ -6,10 +6,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakKlageForhandsvisData, VedtakKlageProsessIndex } from '@navikt/fp-prosess-vedtak-klage';
-import type { Aksjonspunkt, Behandlingsresultat, VilkarUtfallType } from '@navikt/fp-types';
+import type { Aksjonspunkt, AksjonspunktKode, Behandlingsresultat, VilkarUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -18,11 +17,7 @@ import { FatterVedtakStatusModal } from '../../felles/modaler/vedtak/FatterVedta
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.FORESLA_VEDTAK,
-  AksjonspunktKode.FATTER_VEDTAK,
-  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5015', '5016', '5028'];
 
 export const KlageresultatProsessStegInitPanel = () => {
   const intl = useIntl();

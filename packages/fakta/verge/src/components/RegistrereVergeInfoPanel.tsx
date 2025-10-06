@@ -6,7 +6,6 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, AlleKodeverk, AlleKodeverkTilbakekreving, Verge } from '@navikt/fp-types';
 import type { AvklarVergeAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
@@ -25,7 +24,7 @@ const buildInitialValues = (verge: Verge | undefined, aksjonspunkter: Aksjonspun
     : undefined;
 
 const transformValues = (values: FormValues): AvklarVergeAp => ({
-  kode: AksjonspunktKode.AVKLAR_VERGE,
+  kode: '5030',
   ...RegistrereVergeForm.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),
 });
@@ -77,7 +76,7 @@ export const RegistrereVergeInfoPanel = ({ verge, alleKodeverk }: Props) => {
         <VStack gap="space-24">
           <FaktaKort
             label={intl.formatMessage({ id: 'Verge.VergeFullmektig' })}
-            merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_VERGE]}
+            merknaderFraBeslutter={alleMerknaderFraBeslutter['5030']}
           >
             <RegistrereVergeForm
               readOnly={isReadOnly || aksjonspunkterForPanel.length === 0}

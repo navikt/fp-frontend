@@ -1,8 +1,8 @@
-import type { foreldrepenger_dokumentbestiller_DokumentMalType } from '@navikt/fp-types';
+import type { DokumentMalType } from '@navikt/fp-types';
 
 export type VedtakForhåndsvisData = {
   fritekst?: string;
-  dokumentMal?: foreldrepenger_dokumentbestiller_DokumentMalType;
+  dokumentMal?: DokumentMalType;
   tittel?: string;
   automatiskVedtaksbrev?: boolean;
 };

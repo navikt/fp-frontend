@@ -5,9 +5,8 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { TilretteleggingFaktaIndex } from '@navikt/fp-fakta-tilrettelegging';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { AksjonspunktKode, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { harAksjonspunkt } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -15,9 +14,9 @@ import { BehandlingDataContext } from '../../felles/context/BehandlingDataContex
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.FODSELTILRETTELEGGING];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5091'];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO];
+const OVERSTYRING_AP_CODES: AksjonspunktKode[] = ['6045'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

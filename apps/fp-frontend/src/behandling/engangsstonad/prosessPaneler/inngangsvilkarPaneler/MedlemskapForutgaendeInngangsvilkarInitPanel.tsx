@@ -2,8 +2,7 @@ import { use } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { VilkårType } from '@navikt/fp-types';
+import type { AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
@@ -12,12 +11,9 @@ import { InngangsvilkarOverstyringDefaultInitPanel } from '../../../felles/prose
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-  AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5102', '6017'];
 
-const VILKAR_KODER = ['FP_VK_2_F'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['FP_VK_2_F'];
 
 export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER, VILKAR_KODER);
@@ -29,10 +25,10 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
   const { data: medlemskap, isFetching } = useQuery(api.medlemskapOptions(behandling));
 
   const harMedlemskapsAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && ap.status !== 'AVBR',
+    ap => ap.definisjon === '5102' && ap.status !== 'AVBR',
   );
   const harÅpentMedlemskapAksjonspunkt = standardPanelProps.aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR && erAksjonspunktÅpent(ap),
+    ap => ap.definisjon === '5102' && erAksjonspunktÅpent(ap),
   );
 
   return (
@@ -41,7 +37,7 @@ export const MedlemskapForutgaendeInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="MEDLEMSKAP"
       hentInngangsvilkårPanelTekst=""
-      overstyringApKode={AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
+      overstyringApKode="6017"
       overrideReadOnly={harMedlemskapsAksjonspunkt}
     >
       <>

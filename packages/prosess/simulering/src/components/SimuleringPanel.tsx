@@ -6,7 +6,6 @@ import { Button, Heading, Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -64,9 +63,7 @@ export const SimuleringPanel = ({
   const toggleDetaljer = hentToggleDetaljer(showDetails, setShowDetails);
 
   const simuleringResultatOption = simuleringResultat?.simuleringResultat;
-  const skalHaForm =
-    harAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkterForPanel) ||
-    harAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkterForPanel);
+  const skalHaForm = harAksjonspunkt('5084', aksjonspunkterForPanel) || harAksjonspunkt('5029', aksjonspunkterForPanel);
   const aksjonspunktTittler = harÅpentAksjonspunkt ? lagAksjonspunktTitler(aksjonspunkterForPanel) : [];
   return (
     <VStack gap="space-32">
@@ -112,7 +109,7 @@ export const SimuleringPanel = ({
         >
           <VStack gap="space-16">
             <TilbakekrevSøkerForm
-              aksjonspunkt={finnAksjonspunkt(aksjonspunkterForPanel, AksjonspunktKode.VURDER_FEILUTBETALING)}
+              aksjonspunkt={finnAksjonspunkt(aksjonspunkterForPanel, '5084')}
               fagsak={fagsak}
               previewCallback={previewFptilbakeCallback}
               readOnly={isReadOnly}
@@ -120,10 +117,7 @@ export const SimuleringPanel = ({
             />
             <EtterbetalingSøkerForm
               readOnly={isReadOnly}
-              aksjonspunkt={finnAksjonspunkt(
-                aksjonspunkterForPanel,
-                AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-              )}
+              aksjonspunkt={finnAksjonspunkt(aksjonspunkterForPanel, '5029')}
             />
             <div>
               <Button
@@ -173,13 +167,10 @@ const hentToggleDetaljer =
 
 const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): SimuleringAksjonspunkt[] => {
   const aksjonspunkterTilSubmit: SimuleringAksjonspunkt[] = [];
-  if (harAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkter) && 'videreBehandling' in values) {
+  if (harAksjonspunkt('5084', aksjonspunkter) && 'videreBehandling' in values) {
     aksjonspunkterTilSubmit.push(TilbakekrevSøkerForm.transformValues(values));
   }
-  if (
-    harAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkter) &&
-    'begrunnelseEtterbetaling' in values
-  ) {
+  if (harAksjonspunkt('5029', aksjonspunkter) && 'begrunnelseEtterbetaling' in values) {
     aksjonspunkterTilSubmit.push(EtterbetalingSøkerForm.transformValues(values));
   }
   return aksjonspunkterTilSubmit;
@@ -193,22 +184,17 @@ const buildInitialValues = (
     return undefined;
   }
   return {
-    ...TilbakekrevSøkerForm.initialValues(
-      finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.VURDER_FEILUTBETALING),
-      tilbakekrevingvalg,
-    ),
-    ...EtterbetalingSøkerForm.initialValues(
-      finnAksjonspunkt(aksjonspunkter, AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER),
-    ),
+    ...TilbakekrevSøkerForm.initialValues(finnAksjonspunkt(aksjonspunkter, '5084'), tilbakekrevingvalg),
+    ...EtterbetalingSøkerForm.initialValues(finnAksjonspunkt(aksjonspunkter, '5029')),
   };
 };
 
 const lagAksjonspunktTitler = (aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
   const elementer: ReactElement[] = [];
-  if (harAksjonspunkt(AksjonspunktKode.VURDER_FEILUTBETALING, aksjonspunkter)) {
+  if (harAksjonspunkt('5084', aksjonspunkter)) {
     elementer.push(<FormattedMessage id="Simulering.AksjonspunktHelpText.5084" key="vurderFeilutbetaling" />);
   }
-  if (harAksjonspunkt(AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER, aksjonspunkter)) {
+  if (harAksjonspunkt('5029', aksjonspunkter)) {
     elementer.push(<FormattedMessage id="Simulering.Etterbetaling.Tittel" key="kontrollerFeilutbetaling" />);
   }
   return elementer;

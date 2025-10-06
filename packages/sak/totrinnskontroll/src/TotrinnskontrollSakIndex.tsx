@@ -3,7 +3,6 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
 import type {
   AlleKodeverk,
@@ -57,7 +56,7 @@ const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverk
 
 export type ApData = {
   fatterVedtakAksjonspunktDto: {
-    '@type': AksjonspunktKode.FATTER_VEDTAK | '5005';
+    '@type': '5016' | '5005';
   } & FatterVedtakAp;
   erAlleAksjonspunktGodkjent: boolean;
 };
@@ -100,7 +99,7 @@ export const TotrinnskontrollSakIndex = ({
       arsaker: getArsaker(apData),
     }));
 
-    const kode = erTilbakekreving ? ('5005' as const) : (AksjonspunktKode.FATTER_VEDTAK as const);
+    const kode = erTilbakekreving ? ('5005' as const) : ('5016' as const);
     const fatterVedtakAksjonspunktDto = {
       '@type': kode,
       kode,

@@ -6,10 +6,15 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VedtakEditeringProvider, type VedtakForhåndsvisData, VedtakProsessIndex } from '@navikt/fp-prosess-vedtak';
-import { type Aksjonspunkt, isAvslag, type Vilkar, type VilkarUtfallType } from '@navikt/fp-types';
+import {
+  type Aksjonspunkt,
+  type AksjonspunktKode,
+  isAvslag,
+  type Vilkar,
+  type VilkarUtfallType,
+} from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
@@ -23,14 +28,14 @@ import {
   useStandardProsessPanelProps,
 } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.FATTER_VEDTAK,
-  AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
-  AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-  AksjonspunktKode.VURDERE_DOKUMENT,
-  AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
-  AksjonspunktKode.KONTROLL_AV_MAUNELT_OPPRETTET_REVURDERINGSBEHANDLING,
-  AksjonspunktKode.FORESLA_VEDTAK,
+const IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
+  '5016',
+  '5028',
+  '5033',
+  '5034',
+  '5055',
+  '5056',
+  '5015',
 ];
 
 interface Props {
@@ -44,9 +49,9 @@ export const VedtakProsessStegInitPanel = ({ erEngangsstønad = false }: Props) 
   const [visIverksetterVedtakModal, setVisIverksetterVedtakModal] = useState(false);
   const [visFatterVedtakModal, setVisFatterVedtakModal] = useState(false);
 
-  const aksjonspunktKoder = [
+  const aksjonspunktKoder: AksjonspunktKode[] = [
     ...IVERKSETTER_VEDTAK_AKSJONSPUNKT_KODER,
-    ...(erEngangsstønad ? [] : [AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE]),
+    ...(erEngangsstønad ? [] : (['5003'] satisfies AksjonspunktKode[])),
   ];
 
   const { setSkalOppdatereEtterBekreftelseAvAp } = use(BehandlingDataContext);
@@ -184,11 +189,7 @@ const harKunLukkedeAksjonspunkt = (aksjonspunkter: Aksjonspunkt[], vedtakAksjons
 };
 
 const harRelevantAksjonspunktDefinisjon = (ap: Aksjonspunkt): boolean => {
-  return (
-    ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG ||
-    ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG ||
-    ap.definisjon === AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER
-  );
+  return ap.definisjon === '5060' || ap.definisjon === '5061' || ap.definisjon === '5043';
 };
 
 const harRelevantOgÅpentAksjonspunkt = (aksjonspunkter: Aksjonspunkt[]): boolean => {
@@ -238,9 +239,7 @@ const getLagringSideeffekter =
     // Returner funksjon som blir kjørt etter lagring av aksjonspunkt(er)
     return () => {
       const skalTilTotrinnskontroll = aksjonspunkter.some(
-        ap =>
-          ap.kode === AksjonspunktKode.FORESLA_VEDTAK ||
-          ('skalBrukeOverstyrendeFritekstBrev' in ap && ap.skalBrukeOverstyrendeFritekstBrev),
+        ap => ap.kode === '5015' || ('skalBrukeOverstyrendeFritekstBrev' in ap && ap.skalBrukeOverstyrendeFritekstBrev),
       );
       if (skalTilTotrinnskontroll) {
         setVisFatterVedtakModal(true);

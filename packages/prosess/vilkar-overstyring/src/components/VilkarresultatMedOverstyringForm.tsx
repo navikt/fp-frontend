@@ -8,9 +8,15 @@ import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 import { BTag, decodeHtmlEntity } from '@navikt/ft-utils';
 
 import { createMedlemskapInitialValues, MedlemskapVurdering, MedlemskapVurderinger } from '@navikt/fp-fakta-medlemskap';
-import { AksjonspunktKode, type VilkårOverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
 import { OverstyringPanel, VilkarResultPicker } from '@navikt/fp-prosess-felles';
-import type { Aksjonspunkt, Behandling, KodeverkMedNavn, ManuellBehandlingResultat } from '@navikt/fp-types';
+import type {
+  Aksjonspunkt,
+  AksjonspunktKode,
+  Behandling,
+  KodeverkMedNavn,
+  ManuellBehandlingResultat,
+  VilkårOverstyringAksjonspunkter,
+} from '@navikt/fp-types';
 import type {
   OverstyringAp,
   OverstyringMedlemskapsvilkaretAp,
@@ -43,10 +49,7 @@ type FormValues = {
 };
 
 function erOverstyringAvMedlemskap(overstyringApKode: AksjonspunktKode) {
-  return [
-    AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
-    AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
-  ].includes(overstyringApKode);
+  return new Set<AksjonspunktKode>(['6005', '6017']).has(overstyringApKode);
 }
 
 const createInitialValues = (
@@ -93,13 +96,13 @@ const transformValues = (values: FormValues, overstyringApKode: VilkårOverstyri
   };
 
   switch (overstyringApKode) {
-    case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR:
+    case '6005':
       return {
         ...felles,
         avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
         opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,
       };
-    case AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE:
+    case '6017':
       return {
         ...felles,
         avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
@@ -231,7 +234,7 @@ export const VilkarresultatMedOverstyringForm = ({
                 readOnly={overrideReadOnly || !erOverstyrt}
                 ytelse={fagsak.fagsakYtelseType}
                 erRevurdering={behandling.type === 'BT-004'}
-                erForutgående={overstyringApKode === AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE}
+                erForutgående={overstyringApKode === '6017'}
               />
             ) : (
               <VilkarResultPicker

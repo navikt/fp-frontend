@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -13,6 +12,7 @@ import {
   withRouter,
 } from '@navikt/fp-storybook-utils';
 import type {
+  AksjonspunktKode,
   BehandlingAppKontekst,
   BehandlingOppretting,
   BehandlingTillatteOperasjoner,
@@ -44,7 +44,7 @@ const getHref = (rel: string) =>
     ),
   );
 
-const createAksjonspunkt = (aksjonspunktKode: string) =>
+const createAksjonspunkt = (aksjonspunktKode: AksjonspunktKode) =>
   ({
     aksjonspunktKode,
     opptjeningAktiviteter: [],
@@ -59,24 +59,18 @@ const TOTRINNSKONTROLL_AKSJONSPUNKTER = [
   {
     skjermlenkeType: 'FAKTA_OM_FOEDSEL' satisfies SkjermlenkeType,
     totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL),
-      createAksjonspunkt(AksjonspunktKode.SJEKK_TERMINBEKREFTELSE),
-      createAksjonspunkt(AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING),
+      createAksjonspunkt('5027'),
+      createAksjonspunkt('5001'),
+      createAksjonspunkt('7002'),
     ],
   },
   {
     skjermlenkeType: 'FAKTA_FOR_OMSORG' satisfies SkjermlenkeType,
-    totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktKode.OMSORGSOVERTAKELSE),
-      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET),
-    ],
+    totrinnskontrollAksjonspunkter: [createAksjonspunkt('5008'), createAksjonspunkt('5011')],
   },
   {
     skjermlenkeType: 'PUNKT_FOR_FORELDREANSVAR' satisfies SkjermlenkeType,
-    totrinnskontrollAksjonspunkter: [
-      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD),
-      createAksjonspunkt(AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD),
-    ],
+    totrinnskontrollAksjonspunkter: [createAksjonspunkt('5014'), createAksjonspunkt('5013')],
   },
 ];
 

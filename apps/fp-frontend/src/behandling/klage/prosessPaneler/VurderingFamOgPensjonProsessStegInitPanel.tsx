@@ -1,11 +1,11 @@
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
 import { VurderingFellesProsessStegInitPanel } from './VurderingFellesProsessStegInitPanel';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.BEHANDLE_KLAGE_NFP];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5035'];
 
 export const VurderingFamOgPensjonProsessStegInitPanel = () => (
   <VurderingFellesProsessStegInitPanel

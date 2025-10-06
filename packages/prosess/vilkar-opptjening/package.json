@@ -22,7 +22,6 @@
     "@navikt/aksel-icons": "7.31.0",
     "@navikt/ds-css": "7.31.0",
     "@navikt/ds-react": "7.31.0",
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-prosess-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",

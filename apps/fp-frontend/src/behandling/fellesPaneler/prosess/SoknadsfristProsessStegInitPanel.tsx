@@ -4,9 +4,9 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { VurderSoknadsfristForeldrepengerIndex } from '@navikt/fp-prosess-soknadsfrist';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -14,7 +14,7 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5043'];
 
 export const SoknadsfristProsessStegInitPanel = () => {
   const intl = useIntl();

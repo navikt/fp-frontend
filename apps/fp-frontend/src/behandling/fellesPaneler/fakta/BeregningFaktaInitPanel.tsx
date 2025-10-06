@@ -12,9 +12,8 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
+import type { AksjonspunktKode, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
@@ -25,17 +24,9 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 import '@navikt/ft-fakta-beregning/dist/style.css';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
-  AksjonspunktKode.AVKLAR_AKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5058', '5052', '6014', '6015'];
 
-const OVERSTYRING_AP_CODES = [
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER,
-  AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG,
-];
+const OVERSTYRING_AP_CODES: AksjonspunktKode[] = ['6014', '6015'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -84,16 +75,16 @@ const Wrapper = (props: Omit<ComponentProps<typeof BeregningFaktaIndex>, 'formDa
   return <BeregningFaktaIndex {...props} formData={mellomlagretFormData} setFormData={setMellomlagretFormData} />;
 };
 
-const mapBGKodeTilFpsakKode = (bgKode: string): string => {
+const mapBGKodeTilFpsakKode = (bgKode: string): AksjonspunktKode => {
   switch (bgKode) {
     case FaktaBeregningAvklaringsbehovCode.AVKLAR_AKTIVITETER:
-      return AksjonspunktKode.AVKLAR_AKTIVITETER;
+      return '5052';
     case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER:
-      return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER;
+      return '6014';
     case FaktaBeregningAvklaringsbehovCode.VURDER_FAKTA_FOR_ATFL_SN:
-      return AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN;
+      return '5058';
     case FaktaBeregningAvklaringsbehovCode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG:
-      return AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG;
+      return '6015';
     default:
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
   }

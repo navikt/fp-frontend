@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Fagsak, Soknad } from '@navikt/fp-types';
 
@@ -21,7 +20,7 @@ const defaultSøknad = {
 } as Soknad;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: '5008',
   status: 'OPPR',
 
   kanLoses: true,
@@ -88,7 +87,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjon: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+        definisjon: '5068',
         status: 'OPPR',
 
         kanLoses: true,
@@ -102,7 +101,7 @@ export const ApentAksjonspunktForInnhentingAvDokumentasjonVedSvp: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+        definisjon: '5068',
         status: 'OPPR',
 
         kanLoses: true,
@@ -119,14 +118,14 @@ export const AksjonspunktErIkkeGodkjentAvBeslutter: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+        definisjon: '5068',
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK]: {
+      ['5068']: {
         notAccepted: true,
       },
     },
@@ -138,7 +137,7 @@ export const DekningsgradErEndret: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
+        definisjon: '6016',
         status: 'UTFO',
         kanLoses: true,
         begrunnelse: 'Er endret til 80 fordi...',
@@ -164,9 +163,8 @@ export const HarFåttDekningsgradAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+        definisjon: '5002',
         status: 'OPPR',
-
         kanLoses: true,
       },
     ],
@@ -204,7 +202,7 @@ export const HarFåttDekningsgradAksjonspunktMedUkjentAndrePart: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+        definisjon: '5002',
         status: 'OPPR',
 
         kanLoses: true,
@@ -244,7 +242,7 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+        definisjon: '5002',
         status: 'OPPR',
         kanLoses: true,
         begrunnelse: 'Dette er en begrunnelse',
@@ -262,7 +260,7 @@ export const DekningsgradAksjonspunktErSendtTIlbakeFraBeslutter: Story = {
       },
     } as Fagsak,
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.AVKLAR_DEKNINGSGRAD]: {
+      ['5002']: {
         notAccepted: true,
       },
     },

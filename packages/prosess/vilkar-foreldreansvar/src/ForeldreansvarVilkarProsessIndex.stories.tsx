@@ -2,7 +2,6 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -25,7 +24,7 @@ export const ÅpentAksjonspunkt2Ledd: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+        definisjon: '5013',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -38,7 +37,7 @@ export const OppfyltVilkår2Ledd: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+        definisjon: '5013',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
@@ -61,7 +60,7 @@ export const AvslåttVilkår2Ledd: Story = {
     } as Behandling,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+        definisjon: '5013',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },
@@ -77,7 +76,7 @@ export const ÅpentAksjonspunkt4Ledd: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+        definisjon: '5014',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -91,7 +90,7 @@ export const OppfyltVilkår4Ledd: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+        definisjon: '5014',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
@@ -114,7 +113,7 @@ export const AvslåttVilkår4Ledd: Story = {
     } as Behandling,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+        definisjon: '5014',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },

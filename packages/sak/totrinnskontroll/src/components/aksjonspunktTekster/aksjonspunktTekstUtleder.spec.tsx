@@ -1,4 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
   BehandlingStatus,
@@ -17,7 +16,7 @@ const behandlingStatus = 'OPPRE' satisfies BehandlingStatus;
 const faktaOmBeregningTilfeller = {} as KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
 
 const defaultAksjonspunkt = {
-  aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+  aksjonspunktKode: '6008',
   opptjeningAktiviteter: [],
   besluttersBegrunnelse: 'begrunnelse',
   totrinnskontrollGodkjent: false,
@@ -30,7 +29,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5004', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+      aksjonspunktKode: '5004',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -45,7 +44,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5005', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+      aksjonspunktKode: '5005',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -59,7 +58,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5006', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+      aksjonspunktKode: '5006',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -73,7 +72,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6004', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR,
+      aksjonspunktKode: '6004',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -88,7 +87,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5008', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OMSORGSOVERTAKELSE,
+      aksjonspunktKode: '5008',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -102,7 +101,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5011', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+      aksjonspunktKode: '5011',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -117,7 +116,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 7002', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING,
+      aksjonspunktKode: '7002',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -131,7 +130,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5001', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+      aksjonspunktKode: '5001',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -145,7 +144,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5027', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
+      aksjonspunktKode: '5027',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -159,7 +158,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6003', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
+      aksjonspunktKode: '6003',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -174,7 +173,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5014', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
+      aksjonspunktKode: '5014',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -189,7 +188,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5013 engangsstønad', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      aksjonspunktKode: '5013',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       false,
@@ -203,7 +202,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5013 foreldrepenger', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
+      aksjonspunktKode: '5013',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -217,7 +216,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5031', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      aksjonspunktKode: '5031',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -232,7 +231,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5038', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+      aksjonspunktKode: '5038',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -246,7 +245,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5047', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
+      aksjonspunktKode: '5047',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -261,7 +260,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5007', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.SOKNADSFRISTVILKARET,
+      aksjonspunktKode: '5007',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -275,7 +274,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5043', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+      aksjonspunktKode: '5043',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -289,7 +288,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6006', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR,
+      aksjonspunktKode: '6006',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -304,7 +303,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5021', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE,
+      aksjonspunktKode: '5021',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -318,7 +317,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5019', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_LOVLIG_OPPHOLD,
+      aksjonspunktKode: '5019',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -332,7 +331,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5020', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OM_BRUKER_ER_BOSATT,
+      aksjonspunktKode: '5020',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -346,7 +345,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5023', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
+      aksjonspunktKode: '5023',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -360,7 +359,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 6005', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
+      aksjonspunktKode: '6005',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -375,7 +374,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5039 varig endring', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: '5039',
       beregningDto: {
         fastsattVarigEndringNaering: true,
       },
@@ -392,7 +391,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5039 ikkje varig endring', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
+      aksjonspunktKode: '5039',
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
@@ -419,7 +418,7 @@ describe('aksjonspunktTekstUtleder', () => {
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+      aksjonspunktKode: '6008',
       beregningDto: { fastsattVarigEndringNaering: false, faktaOmBeregningTilfeller: [] },
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
@@ -444,7 +443,7 @@ describe('aksjonspunktTekstUtleder', () => {
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
+      aksjonspunktKode: '5071',
       uttakPerioder: [uttakPeriode],
     } satisfies TotrinnskontrollAksjonspunkt;
 
@@ -469,7 +468,7 @@ describe('aksjonspunktTekstUtleder', () => {
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+      aksjonspunktKode: '6008',
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
@@ -497,7 +496,7 @@ describe('aksjonspunktTekstUtleder', () => {
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
+      aksjonspunktKode: '5071',
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
@@ -526,7 +525,7 @@ describe('aksjonspunktTekstUtleder', () => {
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+      aksjonspunktKode: '6008',
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
@@ -554,7 +553,7 @@ describe('aksjonspunktTekstUtleder', () => {
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
+      aksjonspunktKode: '5071',
 
       beregningDto: {
         fastsattVarigEndringNaering: false,
@@ -583,7 +582,7 @@ describe('aksjonspunktTekstUtleder', () => {
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
+      aksjonspunktKode: '6008',
       beregningDto: {
         fastsattVarigEndringNaering: false,
       },
@@ -610,7 +609,7 @@ describe('aksjonspunktTekstUtleder', () => {
     };
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
+      aksjonspunktKode: '5071',
       beregningDto: {
         fastsattVarigEndringNaering: false,
       },
@@ -632,7 +631,7 @@ describe('aksjonspunktTekstUtleder', () => {
   it('skal vise korrekt tekst for aksjonspunkt 5035 medhold', () => {
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: '5035',
     } satisfies TotrinnskontrollAksjonspunkt;
     const behandlingsresultat = {
       type: 'KLAGE_MEDHOLD',
@@ -648,7 +647,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: '5035',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(
       true,
@@ -667,7 +666,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: '5035',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.Avvist');
@@ -679,7 +678,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: '5035',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
@@ -690,7 +689,7 @@ describe('aksjonspunktTekstUtleder', () => {
     } as Behandlingsresultat;
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+      aksjonspunktKode: '5035',
     } satisfies TotrinnskontrollAksjonspunkt;
     const message = getAksjonspunkttekst(true, behandlingStatusFVED, [], false, aksjonspunkt, behandlingsresultat);
     expect(message[0]!.props.id).toEqual('ToTrinnsForm.Klage.StadfesteYtelsesVedtak');
@@ -706,7 +705,7 @@ describe('aksjonspunktTekstUtleder', () => {
     ] satisfies KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: '5058',
       beregningDto: {
         faktaOmBeregningTilfeller: ['VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'],
       },
@@ -726,7 +725,7 @@ describe('aksjonspunktTekstUtleder', () => {
     ] satisfies KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[];
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: '5058',
       beregningDto: {
         faktaOmBeregningTilfeller: ['VURDER_AT_OG_FL_I_SAMME_ORGANISASJON'],
       },
@@ -750,7 +749,7 @@ describe('aksjonspunktTekstUtleder', () => {
 
     const aksjonspunkt = {
       ...defaultAksjonspunkt,
-      aksjonspunktKode: AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN,
+      aksjonspunktKode: '5058',
       beregningDto: {
         faktaOmBeregningTilfeller: ['VURDER_BESTEBEREGNING', 'VURDER_TIDSBEGRENSET_ARBEIDSFORHOLD'],
       },

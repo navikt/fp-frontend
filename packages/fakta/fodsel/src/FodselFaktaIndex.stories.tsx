@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   type PanelDataArgs,
   type PanelOverstyringContextArgs,
@@ -15,7 +14,7 @@ import type { Aksjonspunkt } from '@navikt/fp-types';
 import { FodselFaktaIndex } from './FodselFaktaIndex';
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+  definisjon: '5001',
   status: 'OPPR',
 
   kanLoses: true,
@@ -28,11 +27,11 @@ const aksjonspunktDefault = {
 
 const apTerminbekreftelse: Aksjonspunkt = {
   ...aksjonspunktDefault,
-  definisjon: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+  definisjon: '5001',
 };
 const apSjekkManglendeFødsel: Aksjonspunkt = {
   ...aksjonspunktDefault,
-  definisjon: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
+  definisjon: '5027',
 };
 
 const merknaderFraBeslutter = {
@@ -45,7 +44,7 @@ const meta = {
   decorators: [withMellomlagretFormData, withPanelData, withPanelOverstyring],
   args: {
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+    overstyringApKode: '6019',
     isReadOnly: false,
     aksjonspunkterForPanel: [],
     alleMerknaderFraBeslutter: {},
@@ -107,7 +106,7 @@ export const APTerminbekreftelse: Story = {
   args: {
     aksjonspunkterForPanel: [apTerminbekreftelse],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: merknaderFraBeslutter,
+      ['5001']: merknaderFraBeslutter,
     },
     fødsel: {
       søknad: {
@@ -171,7 +170,7 @@ export const APSjekkManglendeFødselPåEngangstønad: Story = {
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
+      ['5027']: merknaderFraBeslutter,
     },
   },
 };
@@ -214,7 +213,7 @@ export const APSjekkManglendeFødselPåForeldrepenger: Story = {
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
+      ['5027']: merknaderFraBeslutter,
     },
   },
 };
@@ -263,7 +262,7 @@ export const APSjekkManglendeFødselDifferanseIAntallBarn: Story = {
     },
     aksjonspunkterForPanel: [apSjekkManglendeFødsel],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
+      ['5027']: merknaderFraBeslutter,
     },
   },
 };
@@ -316,7 +315,7 @@ export const APSjekkManglendeFødselUtførtOgUtført: Story = {
     isReadOnly: true,
     aksjonspunkterForPanel: [{ ...apSjekkManglendeFødsel, status: 'UTFO', begrunnelse: 'Dette er en begrunnelse' }],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: merknaderFraBeslutter,
+      ['5027']: merknaderFraBeslutter,
     },
     terminbekreftelseDokument: undefined,
   },
@@ -393,7 +392,7 @@ export const OverstyrtSettSomOverstyrer: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+        definisjon: '6019',
         status: 'UTFO',
         begrunnelse: 'Denne saken har blitt overstyrt',
         kanLoses: false,
@@ -410,7 +409,7 @@ export const OverstyrtSettSomSBH: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+        definisjon: '6019',
         status: 'UTFO',
         begrunnelse: 'Denne saken har blitt overstyrt',
         kanLoses: false,

@@ -12,9 +12,14 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar, VilkårType } from '@navikt/fp-types';
+import type {
+  AksjonspunktKode,
+  ArbeidsgiverOpplysningerPerId,
+  Beregningsgrunnlag,
+  Vilkar,
+  VilkårType,
+} from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData } from '@navikt/fp-utils';
 
@@ -25,16 +30,16 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 
 import '@navikt/ft-prosess-beregningsgrunnlag/dist/style.css';
 
-const mapBGKodeTilFpsakKode = (bgKode: string): string => {
+const mapBGKodeTilFpsakKode = (bgKode: string): AksjonspunktKode => {
   switch (bgKode) {
     case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS:
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS;
+      return '5038';
     case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD:
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD;
+      return '5047';
     case ProsessBeregningsgrunnlagAvklaringsbehovCode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET:
-      return AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET;
+      return '5049';
     case ProsessBeregningsgrunnlagAvklaringsbehovCode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE:
-      return AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE;
+      return '5039';
     default:
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
   }
@@ -89,14 +94,9 @@ const lagFormatertBG = (beregningsgrunnlag?: Beregningsgrunnlag): FtBeregningsgr
   return [nyttBG];
 };
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
-  AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE,
-  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD,
-  AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5038', '5039', '5047', '5049'];
 
-const VILKAR_KODER = ['FP_VK_41'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['FP_VK_41'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

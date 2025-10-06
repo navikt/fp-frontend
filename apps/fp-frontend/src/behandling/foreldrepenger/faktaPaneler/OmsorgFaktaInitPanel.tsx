@@ -5,9 +5,8 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { OmsorgFaktaIndex } from '@navikt/fp-fakta-omsorg';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { Personoversikt } from '@navikt/fp-types';
+import type { AksjonspunktKode, Personoversikt } from '@navikt/fp-types';
 import { harAksjonspunkt } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -15,7 +14,7 @@ import { BehandlingDataContext } from '../../felles/context/BehandlingDataContex
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5061'];
 
 interface Props {
   personoversikt: Personoversikt;

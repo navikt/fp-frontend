@@ -1,6 +1,6 @@
 import { createContext, type ReactElement, useContext, useMemo, useState } from 'react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
 interface ContextProps {
   overrideReadOnly: boolean;

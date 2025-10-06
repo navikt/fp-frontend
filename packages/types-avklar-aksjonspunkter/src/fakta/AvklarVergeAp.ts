@@ -1,5 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type AvklarVergeAp = {
@@ -9,4 +7,4 @@ export type AvklarVergeAp = {
   vergeType: string;
   organisasjonsnummer?: string;
   fnr?: string;
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.AVKLAR_VERGE>;
+} & AksjonspunktTilBekreftelse<'5030'>;

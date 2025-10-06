@@ -8,7 +8,6 @@ import { DateLabel } from '@navikt/ft-ui-komponenter';
 import { BTag, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, FamilieHendelse, Soknad, VilkarUtfallType } from '@navikt/fp-types';
 import type { SoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -54,7 +53,7 @@ const buildInitialValues = (aksjonspunkter: Aksjonspunkt[], status: VilkarUtfall
 
 const transformValues = (values: FormValues): SoknadsfristAp => ({
   erVilkarOk: values.erVilkarOk || false,
-  kode: AksjonspunktKode.SOKNADSFRISTVILKARET,
+  kode: '5007',
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 

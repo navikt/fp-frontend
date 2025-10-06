@@ -15,7 +15,6 @@
   },
   "dependencies": {
     "@navikt/ds-react": "7.31.0",
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@storybook/react": "9.1.8",

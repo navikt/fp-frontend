@@ -7,7 +7,6 @@ import { hasValidDate, hasValidInteger, required } from '@navikt/ft-form-validat
 import dayjs from 'dayjs';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
 import type { SjekkTerminbekreftelseAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
@@ -58,7 +57,7 @@ export const SjekkTerminbekreftelseForm = ({ fødsel: { gjeldende }, aksjonspunk
   return (
     <FaktaKort
       label={intl.formatMessage({ id: 'SjekkTerminbekreftelseForm.Tittel' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter['5001']}
     >
       <RhfForm
         formMethods={formMethods}
@@ -134,7 +133,7 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
 });
 
 const transformValues = (values: FormValues): SjekkTerminbekreftelseAp => ({
-  kode: AksjonspunktKode.SJEKK_TERMINBEKREFTELSE,
+  kode: '5001',
   utstedtdato: notEmpty(values.utstedtdato, 'utstedtdato må være satt ved submit'),
   antallBarn: notEmpty(values.antallBarn, 'antallBarn må være satt ved submit'),
   ...Termindato.transformValues(values),

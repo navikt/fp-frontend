@@ -5,20 +5,15 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { AdopsjonFaktaIndex } from '@navikt/fp-fakta-adopsjon';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import { adopsjonsvilkårene } from '@navikt/fp-types';
+import { adopsjonsvilkårene, type AksjonspunktKode } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
-  AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
-  AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5006', '5004', '5005'];
 
 export const AdopsjonsvilkaretFaktaInitPanel = () => {
   const standardPanelProps = useStandardFaktaPanelProps(AKSJONSPUNKT_KODER);

@@ -6,7 +6,6 @@ import { Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type {
   KlageHjemmel,
@@ -42,7 +41,7 @@ const transformValues = (values: KlageFormType): KlageVurderingResultatAp => ({
   klageVurdering: notEmpty(values.klageVurdering),
   fritekstTilBrev: values.fritekstTilBrev,
   begrunnelse: values.begrunnelse,
-  kode: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+  kode: '5035',
 });
 
 const definertKodeverdiEllerUndefined = <T,>(kode: T | undefined): T | undefined => {
@@ -173,7 +172,7 @@ export const BehandleKlageFormNfp = ({ klageVurdering, previewCallback, saveKlag
               size="small"
               variant="primary"
               onClick={formMethods.handleSubmit((values: KlageFormType) =>
-                saveKlage(transformValuesTempSave(values, AksjonspunktKode.BEHANDLE_KLAGE_NFP)),
+                saveKlage(transformValuesTempSave(values, '5035')),
               )}
               type="button"
             >

@@ -1,4 +1,4 @@
-import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde } from '@navikt/fp-types';
+import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde } from './apiDtoGenerert';
 
 export type FordelingPeriodeKilde =
   foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_FordelingPeriodeKilde;

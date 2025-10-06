@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -21,16 +20,14 @@ interface Props {
 }
 
 const erMarkertUtenlandssak = (aksjonspunkter: Aksjonspunkt[]): boolean =>
-  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK);
+  aksjonspunkter.some(ap => ap.definisjon === '5068');
 
 export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }: Props) => {
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, fagsak } = usePanelDataContext();
 
-  const automatiskMarkeringAvUtenlandssakAp = aksjonspunkterForPanel.find(
-    ap => ap.definisjon === AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  );
-  const automatiskAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD);
-  const overstyringsAp = aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.OVERSTYR_DEKNINGSGRAD);
+  const automatiskMarkeringAvUtenlandssakAp = aksjonspunkterForPanel.find(ap => ap.definisjon === '5068');
+  const automatiskAp = aksjonspunkterForPanel.find(ap => ap.definisjon === '5002');
+  const overstyringsAp = aksjonspunkterForPanel.find(ap => ap.definisjon === '6016');
 
   return (
     <VStack gap="space-32">
@@ -39,12 +36,11 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }:
           <FormattedMessage id="SakenFaktaPanel.OpptjeningUtland" />
         </AksjonspunktHelpTextHTML>
       )}
-      {harÅpentAksjonspunkt &&
-        aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.AVKLAR_DEKNINGSGRAD) && (
-          <AksjonspunktHelpTextHTML>
-            <FormattedMessage id="SakenFaktaPanel.AvklarDekningsgrad" />
-          </AksjonspunktHelpTextHTML>
-        )}
+      {harÅpentAksjonspunkt && aksjonspunkterForPanel.some(ap => ap.definisjon === '5002') && (
+        <AksjonspunktHelpTextHTML>
+          <FormattedMessage id="SakenFaktaPanel.AvklarDekningsgrad" />
+        </AksjonspunktHelpTextHTML>
+      )}
       <VStack gap="space-40">
         {soknad && automatiskAp && <DekningradApForm søknad={soknad} aksjonspunkt={automatiskAp} />}
         <HStack gap="space-40">
@@ -56,9 +52,7 @@ export const SakenFaktaPanel = ({ soknad, utlandDokStatus, kanOverstyreAccess }:
           )}
           {fagsak.fagsakYtelseType !== 'SVP' && !!soknad && (
             <StartdatoForForeldrepengerperiodenForm
-              aksjonspunkt={aksjonspunkterForPanel.find(
-                ap => ap.definisjon === AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
-              )}
+              aksjonspunkt={aksjonspunkterForPanel.find(ap => ap.definisjon === '6045')}
               soknad={soknad}
             />
           )}

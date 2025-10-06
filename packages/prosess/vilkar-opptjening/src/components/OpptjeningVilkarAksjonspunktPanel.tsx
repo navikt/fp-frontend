@@ -5,7 +5,6 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -145,5 +144,5 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): AvklarOpptjeningsvilkaretAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: AksjonspunktKode.VURDER_OPPTJENINGSVILKARET,
+  kode: '5089',
 });

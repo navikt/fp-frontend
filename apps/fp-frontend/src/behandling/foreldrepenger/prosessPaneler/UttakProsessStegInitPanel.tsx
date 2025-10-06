@@ -4,10 +4,15 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { UttakProsessIndex } from '@navikt/fp-prosess-uttak';
-import type { ArbeidsgiverOpplysningerPerId, Behandling, Personoversikt, VilkarUtfallType } from '@navikt/fp-types';
+import type {
+  AksjonspunktKode,
+  ArbeidsgiverOpplysningerPerId,
+  Behandling,
+  Personoversikt,
+  VilkarUtfallType,
+} from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -21,18 +26,18 @@ const getStatusFromUttakresultat = (behandling: Behandling): VilkarUtfallType =>
   return behandling.alleUttaksperioderAvslått ? 'IKKE_OPPFYLT' : 'OPPFYLT';
 };
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.FASTSETT_UTTAKPERIODER,
-  AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-  AksjonspunktKode.TILKNYTTET_STORTINGET,
-  AksjonspunktKode.ANNENPART_EØS,
-  AksjonspunktKode.TETTE_SAKER,
-  AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
-  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
-  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
-  AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
-  AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
-  AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
+  '5071',
+  '6008',
+  '5072',
+  '5069',
+  '5067',
+  '5073',
+  '5075',
+  '5076',
+  '5077',
+  '5078',
+  '5079',
 ];
 
 interface Props {

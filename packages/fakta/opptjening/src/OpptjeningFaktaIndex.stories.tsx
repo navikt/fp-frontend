@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Opptjening } from '@navikt/fp-types';
 
@@ -28,7 +27,7 @@ const meta = {
   args: {
     arbeidsgiverOpplysningerPerId,
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]: merknaderFraBeslutter,
+      ['5051']: merknaderFraBeslutter,
     },
   },
   render: args => <OpptjeningFaktaIndex {...args} />,
@@ -38,7 +37,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: '5008',
   status: 'OPPR',
 
   kanLoses: true,
@@ -54,7 +53,7 @@ export const MedAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+        definisjon: '5051',
         status: 'OPPR',
 
         kanLoses: true,
@@ -196,7 +195,7 @@ export const MedToLikePerioderForSammeAktivitetstype: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+        definisjon: '5051',
         status: 'OPPR',
 
         kanLoses: true,
@@ -259,7 +258,7 @@ export const MedAlleOpptjeningsaktiviteterFiltrertBort: Story = {
       {
         ...aksjonspunktDefault,
 
-        definisjon: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+        definisjon: '5051',
         status: 'OPPR',
 
         kanLoses: true,

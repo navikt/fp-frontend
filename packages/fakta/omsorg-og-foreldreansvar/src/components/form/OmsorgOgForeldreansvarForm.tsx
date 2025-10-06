@@ -11,7 +11,6 @@ import {
   FaktaSubmitButton,
   isNotEqual,
 } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type AdopsjonFamilieHendelse, type Aksjonspunkt, type Soknad, søknadErAdopsjon } from '@navikt/fp-types';
 import type {
   AvklarFaktaForForeldreansvarAksjonspunktAp,
@@ -57,7 +56,7 @@ export const OmsorgOgForeldreansvarForm = ({ søknad, adopsjon, harForeldreansva
           ? 'AksjonspunktForm.Tittel.Foreldreansvar'
           : 'AksjonspunktForm.Tittel.Omsorgsovertakelse',
       })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OMSORGSOVERTAKELSE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter['5008']}
     >
       <RhfForm
         formMethods={formMethods}
@@ -115,17 +114,17 @@ const buildInitialValues = (adopsjon: AdopsjonFamilieHendelse, aksjonspunkterFor
 });
 
 const transformValues = (values: FormValues, aksjonspunkt: Aksjonspunkt): AksjonpunktSubmitType =>
-  aksjonspunkt.definisjon === AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR
+  aksjonspunkt.definisjon === '5054'
     ? {
         omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
         foreldreansvarDato: notEmpty(values.foreldreansvarDato),
-        kode: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        kode: '5054',
         ...FaktaBegrunnelseTextField.transformValues(values),
       }
     : {
         omsorgsovertakelseDato: notEmpty(values.omsorgsovertakelseDato),
         vilkarType: notEmpty(values.vilkarType),
-        kode: AksjonspunktKode.OMSORGSOVERTAKELSE,
+        kode: '5008',
         ...FaktaBegrunnelseTextField.transformValues(values),
       };
 

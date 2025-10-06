@@ -3,7 +3,6 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
@@ -11,12 +10,12 @@ import { VedtakInnsynProsessIndex } from './VedtakInnsynProsessIndex';
 
 const defaultAksjonspunkter = [
   {
-    definisjon: AksjonspunktKode.VURDER_INNSYN,
+    definisjon: '5037',
     status: 'UTFO',
     begrunnelse: 'Dette er utført',
   },
   {
-    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    definisjon: '5015',
     status: 'OPPR',
   },
 ] as Aksjonspunkt[];

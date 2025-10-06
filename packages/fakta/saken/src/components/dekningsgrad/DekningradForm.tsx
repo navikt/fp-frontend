@@ -7,7 +7,6 @@ import { BodyShort, Box, Button, Heading, HStack, Label, Radio, VStack } from '@
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { OverstyringDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -101,7 +100,7 @@ export const DekningradForm = ({ aksjonspunkt, søknad, kanOverstyreAccess }: Pr
       formMethods={formMethods}
       onSubmit={(values: FormValues) =>
         submitCallback({
-          kode: AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
+          kode: '6016',
           dekningsgrad: values.dekningsgrad,
           begrunnelse: values.begrunnelse,
         }).then(slåAvEditeringAvStartdato)

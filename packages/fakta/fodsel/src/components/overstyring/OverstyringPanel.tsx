@@ -3,7 +3,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { Heading, HStack } from '@navikt/ds-react';
 import { OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { FødselGjeldende } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext, usePanelOverstyring } from '@navikt/fp-utils';
@@ -36,7 +35,7 @@ export const OverstyringPanel = ({ gjeldende }: Props) => {
       {erOverstyrt && (
         <FaktaKort
           label={intl.formatMessage({ id: 'OverstyringForm.Tittel' })}
-          merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]}
+          merknaderFraBeslutter={alleMerknaderFraBeslutter['6019']}
         >
           <OverstyringForm isReadOnly={readOnly} gjeldende={gjeldende} avbrytOverstyring={toggleOverstyring} />
         </FaktaKort>

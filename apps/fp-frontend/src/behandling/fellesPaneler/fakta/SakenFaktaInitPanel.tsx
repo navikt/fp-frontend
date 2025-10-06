@@ -4,22 +4,17 @@ import { useIntl } from 'react-intl';
 import { useQuery } from '@tanstack/react-query';
 
 import { SakenFaktaIndex } from '@navikt/fp-fakta-saken';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
-  AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
-  AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
-  AksjonspunktKode.OVERSTYR_DEKNINGSGRAD,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5068', '6045', '5002', '6016'];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO, AksjonspunktKode.OVERSTYR_DEKNINGSGRAD];
+const OVERSTYRING_AP_CODES: AksjonspunktKode[] = ['6045', '6016'];
 
 /**
  * SakenFaktaInitPanel

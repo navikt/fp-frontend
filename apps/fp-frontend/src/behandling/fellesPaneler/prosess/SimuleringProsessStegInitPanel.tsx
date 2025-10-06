@@ -5,10 +5,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SimuleringProsessIndex } from '@navikt/fp-prosess-simulering';
-import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { AksjonspunktKode, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { forhåndsvisTilbakekrevingMelding, harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
@@ -16,10 +15,7 @@ import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInit
 import { ProsessMenyContext } from '../../felles/prosess/ProsessMeny';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.VURDER_FEILUTBETALING,
-  AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5084', '5029'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

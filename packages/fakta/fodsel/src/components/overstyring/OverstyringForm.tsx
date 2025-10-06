@@ -5,7 +5,6 @@ import { Button, HStack, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, FødselGjeldende } from '@navikt/fp-types';
 import type { OverstyringFaktaFødselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -27,9 +26,7 @@ export const OverstyringForm = ({ gjeldende, isReadOnly, avbrytOverstyring }: Pr
   const intl = useIntl();
   const { aksjonspunkterForPanel, submitCallback, isSubmittable } = usePanelDataContext<OverstyringFaktaFødselAp>();
 
-  const overstyringsAP = aksjonspunkterForPanel.find(
-    a => a.definisjon === AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
-  );
+  const overstyringsAP = aksjonspunkterForPanel.find(a => a.definisjon === '6019');
   const formMethods = useForm<FormValues>({
     defaultValues: initialValues(gjeldende, overstyringsAP),
   });
@@ -79,7 +76,7 @@ const initialValues = (gjeldende: FødselGjeldende, overstyringsAP?: Aksjonspunk
 });
 
 const transformValues = (values: FormValues): OverstyringFaktaFødselAp => ({
-  kode: AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL,
+  kode: '6019',
   ...Termindato.transformValues(values),
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),

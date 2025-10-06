@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -16,7 +15,7 @@ import { VergeFaktaIndex } from './VergeFaktaIndex';
 
 const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
-    definisjon: AksjonspunktKode.AVKLAR_VERGE,
+    definisjon: '5030',
     status: 'OPPR',
     kanLoses: true,
     toTrinnsBehandling: false,
@@ -38,7 +37,7 @@ const meta = {
     aksjonspunkterForPanel,
     alleKodeverk: { ...alleKodeverk, ...alleKodeverkTilbakekreving },
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.AVKLAR_VERGE]: merknaderFraBeslutter,
+      ['5030']: merknaderFraBeslutter,
     },
   },
   render: args => <VergeFaktaIndex {...args} />,

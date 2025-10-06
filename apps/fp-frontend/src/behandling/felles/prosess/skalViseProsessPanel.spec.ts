@@ -1,4 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Vilkar } from '@navikt/fp-types';
 
 import { skalViseProsessPanel } from './skalViseProsessPanel';
@@ -7,7 +6,7 @@ describe('skalViseProsessPanel', () => {
   it('skal vise prosesspanel når en har aksjonspunkt men ikke har tilknyttet noen vilkår', () => {
     const aksjonspunkter = [
       {
-        definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+        definisjon: '6012',
       },
     ] as Aksjonspunkt[];
 
@@ -35,7 +34,7 @@ describe('skalViseProsessPanel', () => {
   it('skal vise prosesspanel når en har både vilkar og aksjonspunkt', () => {
     const aksjonspunkter = [
       {
-        definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+        definisjon: '6012',
       },
     ] as Aksjonspunkt[];
     const vilkar = [
@@ -52,7 +51,7 @@ describe('skalViseProsessPanel', () => {
   it('skal ikke vise prosesspanel når en har tilknyttet et vilkår men ingen aktive vilkår', () => {
     const aksjonspunkter = [
       {
-        definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+        definisjon: '6012',
       },
     ] as Aksjonspunkt[];
 

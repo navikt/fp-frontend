@@ -6,10 +6,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakInnsynForhandsvisData, VedtakInnsynProsessIndex } from '@navikt/fp-prosess-vedtak-innsyn';
-import type { Behandling, VilkarUtfallType } from '@navikt/fp-types';
+import type { AksjonspunktKode, Behandling, VilkarUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -99,4 +98,4 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORESLA_VEDTAK];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5015'];

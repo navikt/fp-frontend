@@ -1,76 +1,72 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
-export const totrinnskontrollaksjonspunktTextCodes = {
-  [AksjonspunktKode.ADOPSJONSDOKUMENTAJON]: 'ToTrinnsForm.Adopsjon.KontrollerOpplysninger',
-  [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: 'ToTrinnsForm.Adopsjon.VurderEktefellesBarn',
-  [AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: 'ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene',
-  [AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR]: 'ToTrinnsForm.Adopsjon.VilkarOverstyrt',
-  [AksjonspunktKode.OVERSTYRING_AV_ADOPSJONSVILKÅRET_FP]: 'ToTrinnsForm.Adopsjon.VilkarOverstyrt',
+export const totrinnskontrollaksjonspunktTextCodes: Partial<Record<AksjonspunktKode, string>> = {
+  ['5004']: 'ToTrinnsForm.Adopsjon.KontrollerOpplysninger',
+  ['5005']: 'ToTrinnsForm.Adopsjon.VurderEktefellesBarn',
+  ['5006']: 'ToTrinnsForm.Adopsjon.VurderMannAdoptererAlene',
+  ['6004']: 'ToTrinnsForm.Adopsjon.VilkarOverstyrt',
+  ['6010']: 'ToTrinnsForm.Adopsjon.VilkarOverstyrt',
 
-  [AksjonspunktKode.OMSORGSOVERTAKELSE]: 'ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger',
-  [AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET]:
-    'ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd',
+  ['5008']: 'ToTrinnsForm.Omsorgovertagelse.KontrollerOpplysninger',
+  ['5011']: 'ToTrinnsForm.Omsorgovertagelse.VurderVilkarForeldreansvarTredjeLedd',
 
-  [AksjonspunktKode.AUTO_VENT_PÅ_FODSELREGISTRERING]: 'ToTrinnsForm.Fødsel.VurderSokersRelasjon',
-  [AksjonspunktKode.SJEKK_TERMINBEKREFTELSE]: 'ToTrinnsForm.Fødsel.SjekkTerminbekreftelse',
-  [AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]: 'ToTrinnsForm.Fødsel.SjekkManglendeFødsel',
-  [AksjonspunktKode.OVERSTYRING_AV_FAKTA_OM_FØDSEL]: 'ToTrinnsForm.Fødsel.OverstyrFaktaFødsel',
-  [AksjonspunktKode.OVERSTYR_FODSELSVILKAR]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
-  [AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR]: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
+  ['7002']: 'ToTrinnsForm.Fødsel.VurderSokersRelasjon',
+  ['5001']: 'ToTrinnsForm.Fødsel.SjekkTerminbekreftelse',
+  ['5027']: 'ToTrinnsForm.Fødsel.SjekkManglendeFødsel',
+  ['6019']: 'ToTrinnsForm.Fødsel.OverstyrFaktaFødsel',
+  ['6003']: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
+  ['6009']: 'ToTrinnsForm.Fødsel.VilkarOverstyrt',
 
-  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
-    'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd',
-  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling',
+  ['5014']: 'ToTrinnsForm.Foreldreansvar.VurderVilkarForeldreansvarFjerdeLedd',
+  ['5031']: 'ToTrinnsForm.Foreldreansvar.VurderTidligereUtbetaling',
 
-  [AksjonspunktKode.AVKLAR_AKTIVITETER]: 'ToTrinnsForm.Beregning.AvklarAktiviteter',
-  [AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSAKTIVITETER]: 'ToTrinnsForm.Beregning.OverstyrtBeregningsaktiviteter',
-  [AksjonspunktKode.OVERSTYRING_AV_BEREGNINGSGRUNNLAG]: 'ToTrinnsForm.Beregning.OverstyrtBeregningsgrunnlag',
-  [AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS]: 'ToTrinnsForm.Beregning.InntektFastsatt',
-  [AksjonspunktKode.FASTSETT_BRUTTO_BEREGNINGSGRUNNLAG_SELVSTENDIG_NAERINGSDRIVENDE]:
-    'ToTrinnsForm.Beregning.InntektFastsatt',
-  [AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_TIDSBEGRENSET_ARBEIDSFORHOLD]: 'ToTrinnsForm.Beregning.InntektFastsatt',
-  [AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_SN_NY_I_ARBEIDSLIVET]: 'ToTrinnsForm.Beregning.InntektFastsatt',
-  [AksjonspunktKode.VURDER_GRADERING_UTEN_BEREGNINGSGRUNNLAG]: 'ToTrinnsForm.Beregning.GraderingUtenBG',
-  [AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG]: 'ToTrinnsForm.Beregning.FastsettFordeltBeregningsgrunnlag',
+  ['5052']: 'ToTrinnsForm.Beregning.AvklarAktiviteter',
+  ['6014']: 'ToTrinnsForm.Beregning.OverstyrtBeregningsaktiviteter',
+  ['6015']: 'ToTrinnsForm.Beregning.OverstyrtBeregningsgrunnlag',
+  ['5038']: 'ToTrinnsForm.Beregning.InntektFastsatt',
+  ['5042']: 'ToTrinnsForm.Beregning.InntektFastsatt',
+  ['5047']: 'ToTrinnsForm.Beregning.InntektFastsatt',
+  ['5049']: 'ToTrinnsForm.Beregning.InntektFastsatt',
+  ['5050']: 'ToTrinnsForm.Beregning.GraderingUtenBG',
+  ['5046']: 'ToTrinnsForm.Beregning.FastsettFordeltBeregningsgrunnlag',
 
-  [AksjonspunktKode.SOKNADSFRISTVILKARET]: 'ToTrinnsForm.Soknadsfrist.ManueltVurdert',
-  [AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER]: 'ToTrinnsForm.Soknadsfrist.ManueltVurdert',
-  [AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR]: 'ToTrinnsForm.Soknadsfrist.VilkarOverstyrt',
+  ['5007']: 'ToTrinnsForm.Soknadsfrist.ManueltVurdert',
+  ['5043']: 'ToTrinnsForm.Soknadsfrist.ManueltVurdert',
+  ['6006']: 'ToTrinnsForm.Soknadsfrist.VilkarOverstyrt',
 
-  [AksjonspunktKode.AVKLAR_OM_BRUKER_HAR_GYLDIG_PERIODE]: 'ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap',
-  [AksjonspunktKode.AVKLAR_LOVLIG_OPPHOLD]: 'ToTrinnsForm.Medlemskap.AvklarLovligOpphold',
-  [AksjonspunktKode.AVKLAR_OM_BRUKER_ER_BOSATT]: 'ToTrinnsForm.Medlemskap.VurderSokerBosatt',
-  [AksjonspunktKode.AVKLAR_OPPHOLDSRETT]: 'ToTrinnsForm.Medlemskap.AvklarOppholdsrett',
-  [AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR]: 'ToTrinnsForm.Medlemskap.VilkarOverstyrt',
-  [AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]: 'ToTrinnsForm.Medlemskap.OverstyrtStartdato',
-  [AksjonspunktKode.AVKLAR_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.AvklartDekningsgrad',
-  [AksjonspunktKode.OVERSTYR_DEKNINGSGRAD]: 'ToTrinnsForm.Medlemskap.OverstyrtDekningsgrad',
+  ['5021']: 'ToTrinnsForm.Medlemskap.VurderGyldigMedlemskap',
+  ['5019']: 'ToTrinnsForm.Medlemskap.AvklarLovligOpphold',
+  ['5020']: 'ToTrinnsForm.Medlemskap.VurderSokerBosatt',
+  ['5023']: 'ToTrinnsForm.Medlemskap.AvklarOppholdsrett',
+  ['6005']: 'ToTrinnsForm.Medlemskap.VilkarOverstyrt',
+  ['6045']: 'ToTrinnsForm.Medlemskap.OverstyrtStartdato',
+  ['5002']: 'ToTrinnsForm.Medlemskap.AvklartDekningsgrad',
+  ['6016']: 'ToTrinnsForm.Medlemskap.OverstyrtDekningsgrad',
 
-  [AksjonspunktKode.FORESLA_VEDTAK]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
-  [AksjonspunktKode.FORESLA_VEDTAK_MANUELT]: 'ToTrinnsForm.Vedtak.Fritekstbrev',
+  ['5015']: 'ToTrinnsForm.Vedtak.Fritekstbrev',
+  ['5028']: 'ToTrinnsForm.Vedtak.Fritekstbrev',
 
-  [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: 'ToTrinnsForm.Omsorg.VurderOmsorg',
-  [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]: 'ToTrinnsForm.Aleneomsorg.VurderAleneomsorg',
+  ['5061']: 'ToTrinnsForm.Omsorg.VurderOmsorg',
+  ['5060']: 'ToTrinnsForm.Aleneomsorg.VurderAleneomsorg',
 
-  [AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD]: 'ToTrinnsForm.Uttak.Dod',
-  [AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST]: 'ToTrinnsForm.Uttak.Soknadsfrist',
-  [AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE]: 'ToTrinnsForm.Uttak.Klage',
-  [AksjonspunktKode.ANNENPART_EØS]: 'ToTrinnsForm.Uttak.AnnenpartEØS',
-  [AksjonspunktKode.TETTE_SAKER]: 'ToTrinnsForm.Uttak.TetteStønadsperioder',
-  [AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN]:
-    'ToTrinnsForm.Uttak.FordelingStonadsperioder',
-  [AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET]: 'ToTrinnsForm.Uttak.TilstotendeYtelser.Innvilget',
-  [AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT]: 'ToTrinnsForm.Uttak.TilstotendeYtelser.Opphort',
-  [AksjonspunktKode.TILKNYTTET_STORTINGET]: 'ToTrinnsForm.Uttak.Stortinget',
+  ['5076']: 'ToTrinnsForm.Uttak.Dod',
+  ['5077']: 'ToTrinnsForm.Uttak.Soknadsfrist',
+  ['5073']: 'ToTrinnsForm.Uttak.Klage',
+  ['5069']: 'ToTrinnsForm.Uttak.AnnenpartEØS',
+  ['5067']: 'ToTrinnsForm.Uttak.TetteStønadsperioder',
+  ['5075']: 'ToTrinnsForm.Uttak.FordelingStonadsperioder',
+  ['5078']: 'ToTrinnsForm.Uttak.TilstotendeYtelser.Innvilget',
+  ['5079']: 'ToTrinnsForm.Uttak.TilstotendeYtelser.Opphort',
+  ['5072']: 'ToTrinnsForm.Uttak.Stortinget',
 
-  [AksjonspunktKode.VURDER_TILBAKETREKK]: 'ToTrinnsForm.TilkjentYtelse.Tilbaketrekk',
+  ['5090']: 'ToTrinnsForm.TilkjentYtelse.Tilbaketrekk',
 
-  [AksjonspunktKode.VURDER_FARESIGNALER]: 'ToTrinnsForm.Faresignaler.Vurder',
+  ['5095']: 'ToTrinnsForm.Faresignaler.Vurder',
 
-  [AksjonspunktKode.VURDER_OPPTJENINGSVILKARET]: 'ToTrinnsForm.Opptjening.VurderOpptjeningsvilkåret',
+  ['5089']: 'ToTrinnsForm.Opptjening.VurderOpptjeningsvilkåret',
 
-  [AksjonspunktKode.VURDER_REFUSJON_BERGRUNN]: 'ToTrinnsForm.Beregningsgrunnlag.Refusjonsstart',
-  [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING]: 'ToTrinnsForm.ArbeidOgInntekt.ManueltOpprettet',
+  ['5059']: 'ToTrinnsForm.Beregningsgrunnlag.Refusjonsstart',
+  ['5085']: 'ToTrinnsForm.ArbeidOgInntekt.ManueltOpprettet',
 };
 
 export const totrinnsTilbakekrevingkontrollaksjonspunktTextCodes = {} as Record<string, string>;

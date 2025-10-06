@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { BodyShort, Heading, HStack, Label, VStack } from '@navikt/ds-react';
 import { EditedIcon } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -79,4 +78,4 @@ export const TilkjentYtelsePanel = ({
 };
 
 const finnTilbaketrekkAksjonspunktBegrunnelse = (alleAksjonspunkter: Aksjonspunkt[]): string | undefined =>
-  alleAksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.VURDER_TILBAKETREKK)?.begrunnelse ?? undefined;
+  alleAksjonspunkter.find(ap => ap.definisjon === '5090')?.begrunnelse ?? undefined;

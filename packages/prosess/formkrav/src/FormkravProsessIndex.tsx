@@ -2,7 +2,6 @@ import { RawIntlProvider } from 'react-intl';
 
 import { createIntl } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { KlageVurdering } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -32,7 +31,7 @@ export const FormkravProsessIndex = ({
 
   return (
     <RawIntlProvider value={intl}>
-      {aksjonspunkterForPanel.some(a => a.definisjon === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) && (
+      {aksjonspunkterForPanel.some(a => a.definisjon === '5082') && (
         <FormkravKlageFormNfp
           klageVurdering={klageVurdering}
           avsluttedeBehandlinger={avsluttedeBehandlinger}

@@ -3,10 +3,9 @@ import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknadsfrist';
-import type { VilkårType } from '@navikt/fp-types';
+import type { AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -16,9 +15,9 @@ import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/Prosess
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.SOKNADSFRISTVILKARET, AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5007', '6006'];
 
-const VILKAR_KODER = ['FP_VK_3'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['FP_VK_3'];
 
 export const SoknadsfristEsProsessStegInitPanel = () => {
   const intl = useIntl();
@@ -29,16 +28,14 @@ export const SoknadsfristEsProsessStegInitPanel = () => {
 
   const api = useBehandlingApi(behandling);
 
-  const harSoknadsfristAp = standardPanelProps.aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.SOKNADSFRISTVILKARET,
-  );
+  const harSoknadsfristAp = standardPanelProps.aksjonspunkterForPanel.some(ap => ap.definisjon === '5007');
 
   const { data: søknad } = useQuery(api.søknadOptions(behandling));
   const { data: familiehendelse } = useQuery(api.familiehendelseOptions(behandling, harSoknadsfristAp));
 
   return (
     <PanelOverstyringProvider
-      overstyringApKode={AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR}
+      overstyringApKode="6006"
       kanOverstyreAccess={rettigheter.kanOverstyreAccess}
       overrideReadOnly={standardPanelProps.isReadOnly}
     >

@@ -2,14 +2,13 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
 import { AdopsjonVilkarProsessIndex } from './AdopsjonVilkarProsessIndex';
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  definisjon: '5037',
   status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -40,7 +39,7 @@ export const ÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: '5031',
         status: 'OPPR',
       },
     ],
@@ -53,7 +52,7 @@ export const OppfyltVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: '5031',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
         kanLoses: false,
@@ -77,7 +76,7 @@ export const AvslåttVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: '5031',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
         kanLoses: true,

@@ -9,7 +9,6 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fagsak, TilbakekrevingValg, TilbakekrevingVidereBehandling } from '@navikt/fp-types';
 import type { VurderFeilutbetalingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -44,7 +43,7 @@ export const TilbakekrevSøkerForm = ({ readOnly, språkkode, previewCallback, a
     e.preventDefault();
   };
 
-  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.VURDER_FEILUTBETALING) {
+  if (!aksjonspunkt || aksjonspunkt.definisjon !== '5084') {
     return null;
   }
 
@@ -148,14 +147,14 @@ TilbakekrevSøkerForm.transformValues = (values: FeilutbetalingFormValues): Vurd
   const { videreBehandling, varseltekst, begrunnelse } = values;
   if (videreBehandling.endsWith(IKKE_SEND)) {
     return {
-      kode: AksjonspunktKode.VURDER_FEILUTBETALING,
+      kode: '5084',
       begrunnelse,
       videreBehandling: 'TILBAKEKR_OPPRETT',
     };
   }
 
   return {
-    kode: AksjonspunktKode.VURDER_FEILUTBETALING,
+    kode: '5084',
     begrunnelse,
     videreBehandling,
     varseltekst,

@@ -6,7 +6,6 @@ import { AksjonspunktHelpTextHTML, DateLabel } from '@navikt/ft-ui-komponenter';
 import { addDaysToDate, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
@@ -152,7 +151,7 @@ export const OpptjeningFaktaPanel = ({
 
     void submitCallback({
       opptjeningsaktiviteter: opptjeningsaktiviteterSomSkallagres,
-      kode: AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING,
+      kode: '5051',
     }).then(() => setIsSubmitting(false));
   };
 

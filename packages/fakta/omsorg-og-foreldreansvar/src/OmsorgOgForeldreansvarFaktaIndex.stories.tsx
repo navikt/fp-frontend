@@ -3,7 +3,6 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   AdopsjonFamilieHendelse,
@@ -132,12 +131,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: '5008',
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
   aksjonspunktType: 'AUTO',
   vilkarType: 'FP_VK_5',
   erAktivt: true,
@@ -148,14 +145,14 @@ export const ÅpentAksjonspunktForOmsorgovertakelse: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+        definisjon: '5008',
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+      ['5008']: merknaderFraBeslutter,
     },
     isReadOnly: false,
   },
@@ -172,14 +169,14 @@ export const UtførtAksjonspunktForOmsorgovertakelse: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+        definisjon: '5008',
         status: 'UTFO',
         begrunnelse: 'dette er en begrunnelse',
         kanLoses: false,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OMSORGSOVERTAKELSE]: merknaderFraBeslutter,
+      ['5008']: merknaderFraBeslutter,
     },
     isReadOnly: true,
   },
@@ -190,14 +187,14 @@ export const ÅpentAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        definisjon: '5054',
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+      ['5054']: merknaderFraBeslutter,
     },
     isReadOnly: false,
   },
@@ -208,7 +205,7 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
+        definisjon: '5054',
         status: 'UTFO',
         begrunnelse: 'dette er en begrunnelse',
         kanLoses: false,
@@ -220,7 +217,7 @@ export const UtførtAksjonspunktForAvklareVilkårForForeldreansvar: Story = {
       foreldreansvarDato: '2021-02-02',
     },
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR]: merknaderFraBeslutter,
+      ['5054']: merknaderFraBeslutter,
     },
     isReadOnly: true,
   },

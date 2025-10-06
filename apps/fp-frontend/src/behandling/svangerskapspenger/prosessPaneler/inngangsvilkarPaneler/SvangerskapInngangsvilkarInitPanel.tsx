@@ -3,17 +3,16 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SvangerskapVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-svangerskap';
-import type { VilkårType } from '@navikt/fp-types';
+import type { AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.SVANGERSKAPSVILKARET];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5092'];
 
-const VILKAR_KODER = ['SVP_VK_1'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['SVP_VK_1'];
 
 export const SvangerskapInngangsvilkarInitPanel = () => {
   const intl = useIntl();

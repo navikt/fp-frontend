@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak } from '@navikt/fp-types';
 
@@ -33,7 +32,7 @@ export const EttArbeidsforholdUtenSluttdatoForPermisjon: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+        definisjon: '5041',
         status: 'OPPR',
       } as Aksjonspunkt,
     ],
@@ -127,7 +126,7 @@ export const FlereArbeidsforhold: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -281,7 +280,7 @@ export const FlereArbeidsforholdFraSammeArbeidsgiver: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -387,7 +386,7 @@ export const VisFødselsdatoNårPrivatperson: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+        definisjon: '5041',
         status: 'OPPR',
       } as Aksjonspunkt,
     ],

@@ -8,7 +8,6 @@ import { hasValidDate, hasValidText, maxLength, required } from '@navikt/ft-form
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   AoIArbeidsforhold,
@@ -39,7 +38,7 @@ const sorterArbeidsforhold = (
   });
 
 const getAksjonspunktBegrunnelse = (aksjonspunkter: Aksjonspunkt[]): string | undefined => {
-  const aksjonpunkt = aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FODSELTILRETTELEGGING);
+  const aksjonpunkt = aksjonspunkter.find(ap => ap.definisjon === '5091');
   return aksjonpunkt?.begrunnelse ?? undefined;
 };
 
@@ -130,7 +129,7 @@ export const TilretteleggingFaktaForm = ({
       return Promise.resolve();
     }
     return submitCallback({
-      kode: AksjonspunktKode.FODSELTILRETTELEGGING,
+      kode: '5091',
       termindato: values.termindato,
       fødselsdato: values.fødselsdato,
       begrunnelse: values.begrunnelse,

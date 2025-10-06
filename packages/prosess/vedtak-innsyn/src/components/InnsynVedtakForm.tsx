@@ -7,7 +7,6 @@ import { RhfForm, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength } from '@navikt/ft-form-validators';
 import { decodeHtmlEntity, formaterFritekst, getLanguageFromSprakkode } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, DokumentMalType, InnsynDokument, InnsynResultatType } from '@navikt/fp-types';
 import type { ForeslaVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -82,11 +81,11 @@ type FormValues = {
 
 const buildInitialValues = (innsynMottattDato: string, aksjonspunkter: Aksjonspunkt[]): FormValues => ({
   mottattDato: innsynMottattDato,
-  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK)?.begrunnelse ?? undefined,
+  begrunnelse: aksjonspunkter.find(ap => ap.definisjon === '5015')?.begrunnelse ?? undefined,
 });
 
 const transformValues = (values: FormValues): ForeslaVedtakAp => ({
-  kode: AksjonspunktKode.FORESLA_VEDTAK,
+  kode: '5015',
   ...values,
   begrunnelse: values.begrunnelse === '' ? undefined : values.begrunnelse,
 });
@@ -127,7 +126,7 @@ export const InnsynVedtakForm = ({
   const documents = getDocumenterMedFikkInnsynVerdi(getFilteredReceivedDocuments(alleDokumenter), innsynDokumenter);
 
   const apVurderInnsynBegrunnelse =
-    aksjonspunkterForPanel.find(ap => ap.definisjon === AksjonspunktKode.VURDER_INNSYN)?.begrunnelse ?? undefined;
+    aksjonspunkterForPanel.find(ap => ap.definisjon === '5037')?.begrunnelse ?? undefined;
 
   const begrunnelse = formMethods.watch('begrunnelse');
 

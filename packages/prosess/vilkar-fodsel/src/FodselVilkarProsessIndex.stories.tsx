@@ -2,7 +2,6 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Vilkar } from '@navikt/fp-types';
 
@@ -30,7 +29,7 @@ export const ÅpentAksjonspunkt: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: '5031',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -42,7 +41,7 @@ export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: '5031',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
       },
@@ -64,7 +63,7 @@ export const AvslåttVilkår: Story = {
     } as Behandling,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+        definisjon: '5031',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
       },

@@ -2,7 +2,6 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling } from '@navikt/fp-types';
 
@@ -19,7 +18,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  definisjon: '5037',
   status: 'OPPR',
 
   kanLoses: true,
@@ -35,7 +34,7 @@ export const ÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+        definisjon: '5011',
         status: 'OPPR',
       },
     ],
@@ -47,7 +46,7 @@ export const OppfyltVilkår: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+        definisjon: '5011',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er godkjent',
         kanLoses: false,
@@ -71,7 +70,7 @@ export const AvslåttVilkår: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
+        definisjon: '5011',
         status: 'UTFO',
         begrunnelse: 'Dette vilkåret er avslått',
         kanLoses: false,

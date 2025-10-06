@@ -5,7 +5,6 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   type AksjonspunktVerdier,
@@ -111,9 +110,7 @@ const getLagringSideeffekter =
   (aksjonspunkter: ProsessAksjonspunkt[]) => {
     const skalByttTilKlageinstans = aksjonspunkter.some(
       apValue =>
-        apValue.kode === AksjonspunktKode.BEHANDLE_KLAGE_NFP &&
-        'klageVurdering' in apValue &&
-        apValue.klageVurdering === 'STADFESTE_YTELSESVEDTAK',
+        apValue.kode === '5035' && 'klageVurdering' in apValue && apValue.klageVurdering === 'STADFESTE_YTELSESVEDTAK',
     );
 
     if (skalByttTilKlageinstans) {

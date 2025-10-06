@@ -1,7 +1,6 @@
 import { VStack } from '@navikt/ds-react';
 import { BorderBox } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag } from '@navikt/fp-types';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
@@ -32,11 +31,7 @@ export const BesteberegningPanel = ({ beregningsgrunnlag, arbeidsgiverOpplysning
   }
 
   const førstePeriode = beregningsgrunnlagPeriode[0]!;
-  const besteberegningAP = aksjonspunkterForPanel.find(
-    ap =>
-      ap.definisjon === AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING ||
-      ap.definisjon === AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
-  );
+  const besteberegningAP = aksjonspunkterForPanel.find(ap => ap.definisjon === '5048' || ap.definisjon === '5062');
   return (
     <VStack gap="space-16">
       {!!besteberegningAP && <KontrollerBesteberegningPanel aksjonspunkt={besteberegningAP} />}

@@ -2,7 +2,6 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { AdopsjonFamilieHendelse, Aksjonspunkt, Soknad } from '@navikt/fp-types';
 
@@ -72,12 +71,10 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: '5008',
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
   aksjonspunktType: 'AUTO',
   vilkarType: 'FP_VK_5',
   erAktivt: true,
@@ -88,14 +85,14 @@ export const AksjonspunktForAdopsjonsvilkåret: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+        definisjon: '5004',
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.ADOPSJONSDOKUMENTAJON]: merknaderFraBeslutter,
+      ['5004']: merknaderFraBeslutter,
     },
   },
 };
@@ -105,14 +102,14 @@ export const AksjonspunktForOmSøkerErMannSomAdoptererAlene: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+        definisjon: '5006',
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]: merknaderFraBeslutter,
+      ['5006']: merknaderFraBeslutter,
     },
   },
 };
@@ -122,14 +119,14 @@ export const AksjonspunktForOmAdopsjonGjelderEktefellesBarn: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+        definisjon: '5005',
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
+      ['5005']: merknaderFraBeslutter,
     },
   },
 };
@@ -139,14 +136,14 @@ export const IkkeVisBarnetsAnkomstDatoForEngangsstønad: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+        definisjon: '5005',
         status: 'OPPR',
 
         kanLoses: true,
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]: merknaderFraBeslutter,
+      ['5005']: merknaderFraBeslutter,
     },
     isForeldrepengerFagsak: false,
   },

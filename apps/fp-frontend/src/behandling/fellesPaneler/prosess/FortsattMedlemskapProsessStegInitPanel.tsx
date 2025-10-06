@@ -1,8 +1,7 @@
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
-import type { VilkårType } from '@navikt/fp-types';
+import type { AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { OverstyringPanelDef } from '../../felles/prosess/OverstyringPanelDef';
@@ -10,7 +9,7 @@ import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/Prosess
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODE = AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR;
+const AKSJONSPUNKT_KODE = '6012' satisfies AksjonspunktKode;
 
 const VILKAR_KODER = ['FP_VK_2_L'] satisfies VilkårType[];
 

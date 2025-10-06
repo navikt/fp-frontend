@@ -7,7 +7,6 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -56,7 +55,7 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): BekreftSvangerskapspengervilkarAp => ({
   ...VilkarResultPicker.transformValues(values),
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-  kode: AksjonspunktKode.SVANGERSKAPSVILKARET,
+  kode: '5092',
 });
 
 interface Props {

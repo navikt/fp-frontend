@@ -9,7 +9,6 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag, findDifferenceInMonthsAndDays, periodFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   ArbeidsgiverOpplysningerPerId,
   FerdiglignetNæring,
@@ -124,10 +123,7 @@ export const ValgtAktivitetForm = ({
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={(values: FormValues) => oppdaterAktivitet(values)}>
-      <FaktaGruppe
-        className={styles['panel']}
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING]}
-      >
+      <FaktaGruppe className={styles['panel']} merknaderFraBeslutter={alleMerknaderFraBeslutter['5051']}>
         <VStack gap="space-24">
           <VStack gap="space-8">
             <HStack justify="space-between">

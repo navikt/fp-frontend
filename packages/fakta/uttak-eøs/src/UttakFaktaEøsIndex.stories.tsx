@@ -2,14 +2,13 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Fagsak } from '@navikt/fp-types';
 
 import { UttakFaktaEøsIndex } from './UttakFaktaEøsIndex';
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  definisjon: '5037',
   status: 'OPPR',
 
   kanLoses: true,
@@ -32,7 +31,7 @@ const meta = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+        definisjon: '5103',
       },
     ],
   },
@@ -80,7 +79,7 @@ export const AksjonspunktErUtførtHvorIngenPerioderErRegistrert: Story = {
         ...aksjonspunktDefault,
         begrunnelse: 'Dette er en begrunnelse',
         status: 'UTFO',
-        definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+        definisjon: '5103',
       },
     ],
     annenForelderUttakEøs: [],
@@ -95,7 +94,7 @@ export const OverstyringSkalIkkeVæreTilgjengligHvisDetForeliggerAksjonspunktSom
         ...aksjonspunktDefault,
 
         status: 'UTFO',
-        definisjon: AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+        definisjon: '5103',
       },
     ],
     annenForelderUttakEøs: [

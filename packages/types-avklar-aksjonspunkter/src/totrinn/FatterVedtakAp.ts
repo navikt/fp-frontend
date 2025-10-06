@@ -1,5 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type FatterVedtakAp = {
@@ -9,4 +7,4 @@ export type FatterVedtakAp = {
     aksjonspunktKode?: string;
     arsaker: string[];
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.FATTER_VEDTAK | '5005'>;
+} & AksjonspunktTilBekreftelse<'5016' | '5005'>;

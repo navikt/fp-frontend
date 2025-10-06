@@ -2,9 +2,8 @@ import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OpptjeningVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-opptjening';
-import type { VilkårType } from '@navikt/fp-types';
+import type { AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../../data/behandlingApi';
 import {
@@ -14,9 +13,9 @@ import {
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_OPPTJENINGSVILKARET];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5089'];
 
-const VILKAR_KODER = ['FP_VK_21', 'FP_VK_23'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['FP_VK_21', 'FP_VK_23'];
 
 export const OpptjeningInngangsvilkarFpInitPanel = () => {
   const intl = useIntl();
@@ -35,7 +34,7 @@ export const OpptjeningInngangsvilkarFpInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="OPPTJENINGSVILKARET"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'OpptjeningVilkarView.VurderOmSøkerHarRett' })}
-      overstyringApKode={AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET}
+      overstyringApKode="6011"
     >
       <OverstyringPanelDef
         vilkår={standardPanelProps.vilkårForPanel}

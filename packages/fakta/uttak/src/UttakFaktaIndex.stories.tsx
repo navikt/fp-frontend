@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
@@ -19,7 +18,7 @@ const arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId = {
 };
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: '5008',
   status: 'OPPR',
 
   kanLoses: true,
@@ -97,7 +96,7 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+        definisjon: '5065',
         status: 'OPPR',
 
         kanLoses: true,
@@ -154,7 +153,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+        definisjon: '5065',
         status: 'OPPR',
 
         kanLoses: true,
@@ -180,7 +179,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+        definisjon: '5065',
         status: 'OPPR',
 
         kanLoses: true,
@@ -207,7 +206,7 @@ export const VisAksjonspunktDerIngenPerioderFinnes: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
+        definisjon: '5064',
         status: 'OPPR',
 
         kanLoses: true,
@@ -226,7 +225,7 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
+        definisjon: '5063',
         status: 'OPPR',
 
         kanLoses: true,
@@ -258,7 +257,7 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+        definisjon: '5066',
         status: 'OPPR',
 
         kanLoses: true,
@@ -290,7 +289,7 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+        definisjon: '5066',
         status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
@@ -325,7 +324,7 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
+        definisjon: '5066',
         status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
@@ -361,7 +360,7 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
+        definisjon: '5065',
         status: 'OPPR',
         kanLoses: true,
       },

@@ -13,9 +13,6 @@
     "prettier": "prettier --write src",
     "clean": "rm -rf ./dist ./node_modules"
   },
-  "dependencies": {
-    "@navikt/fp-kodeverk": "workspace:*"
-  },
   "devDependencies": {
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",

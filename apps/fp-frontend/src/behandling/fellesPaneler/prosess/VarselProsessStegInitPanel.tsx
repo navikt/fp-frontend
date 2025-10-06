@@ -5,12 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import {
   type VarselOmRevurderingForhåndsvisData,
   VarselOmRevurderingProsessIndex,
 } from '@navikt/fp-prosess-varsel-om-revurdering';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 import type { ProsessAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 
 import { forhåndsvisMelding } from '../../../data/behandlingApi';
@@ -35,10 +35,7 @@ const getLagringSideeffekter =
     };
   };
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
-  AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5026', '5025'];
 
 export const VarselProsessStegInitPanel = () => {
   const intl = useIntl();

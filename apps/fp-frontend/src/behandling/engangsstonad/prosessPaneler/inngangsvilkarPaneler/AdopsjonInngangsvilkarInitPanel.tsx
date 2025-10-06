@@ -1,8 +1,7 @@
 import { type IntlShape, useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { AdopsjonVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-adopsjon';
-import type { Aksjonspunkt, VilkårType } from '@navikt/fp-types';
+import type { Aksjonspunkt, AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 
 import {
   InngangsvilkarDefaultInitPanel,
@@ -11,9 +10,9 @@ import {
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5031'];
 
-const VILKAR_KODER = ['FP_VK_4'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['FP_VK_4'];
 
 export const AdopsjonInngangsvilkarInitPanel = () => {
   const intl = useIntl();
@@ -28,7 +27,7 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="ADOPSJON"
       hentInngangsvilkårPanelTekst={paneltekst}
-      overstyringApKode={AksjonspunktKode.OVERSTYR_ADOPSJONSVILKAR}
+      overstyringApKode="6004"
     >
       <OverstyringPanelDef
         vilkår={standardPanelProps.vilkårForPanel}
@@ -48,8 +47,8 @@ export const AdopsjonInngangsvilkarInitPanel = () => {
   );
 };
 
-const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
-  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
+const AKSJONSPUNKT_TEKST_PER_KODE: Partial<Record<AksjonspunktKode, string>> = {
+  ['5031']: 'SRBVilkarForm.VurderSammeBarn',
 };
 
 const hentAksjonspunktTekst = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[] = []): string =>

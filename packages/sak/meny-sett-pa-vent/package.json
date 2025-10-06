@@ -19,7 +19,6 @@
     "storybook": "storybook dev --quiet -p 7065"
   },
   "dependencies": {
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-utils": "3.8.9",

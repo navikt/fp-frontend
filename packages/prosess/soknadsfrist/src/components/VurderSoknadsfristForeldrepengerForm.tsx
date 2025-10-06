@@ -7,7 +7,6 @@ import { dateBeforeOrEqualToToday, hasValidDate, required } from '@navikt/ft-for
 import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat, periodFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Søknadsfrist } from '@navikt/fp-types';
 import type { VurderSoknadsfristAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -40,7 +39,7 @@ const buildInitialValues = (
 const transformValues = (values: FormValues): VurderSoknadsfristAp => ({
   harGyldigGrunn: values.gyldigSenFremsetting,
   ansesMottattDato: values.ansesMottatt,
-  kode: AksjonspunktKode.VURDER_SOKNADSFRIST_FORELDREPENGER,
+  kode: '5043',
   ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
 });
 

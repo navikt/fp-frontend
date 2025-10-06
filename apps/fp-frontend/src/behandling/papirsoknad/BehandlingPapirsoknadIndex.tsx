@@ -1,6 +1,5 @@
 import { use, useState } from 'react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   type EngangsstønadValues,
   type ForeldrepengerEndringssøknadValues,
@@ -9,7 +8,7 @@ import {
   SoknadRegistrertModal,
   type SvangerskapsValues,
 } from '@navikt/fp-papirsoknad';
-import type { Aksjonspunkt, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
+import type { Aksjonspunkt, AksjonspunktKode, FagsakYtelseType, FamilieHendelseType } from '@navikt/fp-types';
 
 import { BehandlingDataContext } from '../felles/context/BehandlingDataContext';
 
@@ -30,9 +29,7 @@ const BehandlingPapirsoknadIndex = () => {
 
   const lagrePapirsøknad = useLagrePapirsøknad(setErAksjonspunktLagret, setSkalOppdatereEtterBekreftelseAvAp);
 
-  const erEndringssøknad = behandling.aksjonspunkt.some(
-    ap => ap.definisjon === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER,
-  );
+  const erEndringssøknad = behandling.aksjonspunkt.some(ap => ap.definisjon === '5057');
 
   return (
     <>
@@ -92,16 +89,10 @@ const useLagrePapirsøknad = (
   };
 };
 
-const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): string => {
+const getAktivPapirsøknadApKode = (aksjonspunkter: Aksjonspunkt[]): AksjonspunktKode => {
   const ap = aksjonspunkter
     .map(a => a.definisjon)
-    .find(
-      kode =>
-        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_ENGANGSSTONAD ||
-        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_FORELDREPENGER ||
-        kode === AksjonspunktKode.REGISTRER_PAPIR_ENDRINGSØKNAD_FORELDREPENGER ||
-        kode === AksjonspunktKode.REGISTRER_PAPIRSOKNAD_SVANGERSKAPSPENGER,
-    );
+    .find(kode => kode === '5012' || kode === '5040' || kode === '5057' || kode === '5096');
 
   if (!ap) {
     throw new Error('Fant ikke aktivt aksjonspunkt for papirsøknad');

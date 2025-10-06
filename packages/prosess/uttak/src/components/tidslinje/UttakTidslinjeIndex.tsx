@@ -9,11 +9,11 @@ import type {
   Behandling,
   Fagsak,
   FamilieHendelse,
-  foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak,
-  foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType,
+  OppholdÅrsakType,
   PeriodeSoker,
   Personoversikt,
   Soknad,
+  UttakPeriodeType,
 } from '@navikt/fp-types';
 
 import { type PeriodeSøkerMedTidslinjedata, type TidslinjeTimes, UttakTidslinje } from './UttakTidslinje';
@@ -25,10 +25,7 @@ const OppholdArsakMapper = {
   UTTAK_FEDREKVOTE_ANNEN_FORELDER: 'FEDREKVOTE',
   UTTAK_FELLESP_ANNEN_FORELDER: 'FELLESPERIODE',
   UTTAK_FORELDREPENGER_ANNEN_FORELDER: 'FORELDREPENGER',
-} as Record<
-  foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak,
-  foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType
->;
+} as Record<OppholdÅrsakType, UttakPeriodeType>;
 
 const finnSøknadsdato = (søknad: Soknad): string => {
   const { mottattDato } = søknad;

@@ -2,7 +2,6 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, Innsyn, InnsynDokument } from '@navikt/fp-types';
 
@@ -15,7 +14,7 @@ const defaultBehandling = {
 } as Behandling;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  definisjon: '5037',
   status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,

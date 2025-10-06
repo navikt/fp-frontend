@@ -5,7 +5,6 @@ import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -79,24 +78,18 @@ const FAGSAK = {
         kontrollresultat: 'HOY',
       },
       risikoAksjonspunkt: {
-        definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
+        definisjon: '5095',
         status: 'OPPR',
         toTrinnsBehandling: false,
         aksjonspunktType: '-',
         kanLoses: false,
         erAktivt: false,
       },
-
       opprettet: '',
-
       gjeldendeVedtak: false,
-
       behandlingHenlagt: false,
-
       språkkode: '-',
-
       toTrinnsBehandling: false,
-
       behandlingÅrsaker: [],
       vilkår: [],
       links: [],

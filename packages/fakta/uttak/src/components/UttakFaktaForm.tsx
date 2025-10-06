@@ -10,7 +10,6 @@ import { dateFormat } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, validerApKodeOgHentApEnum } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -48,12 +47,7 @@ const leggTilAksjonspunktMarkering = (
 ): KontrollerFaktaPeriodeMedApMarkering[] =>
   perioder.map(periode => {
     if (
-      aksjonspunkter.some(
-        ap =>
-          (ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE ||
-            ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE) &&
-          ap.status === 'OPPR',
-      ) &&
+      aksjonspunkter.some(ap => (ap.definisjon === '5063' || ap.definisjon === '5066') && ap.status === 'OPPR') &&
       periode.arbeidsforhold?.arbeidsgiverReferanse &&
       !arbeidsgiverOpplysningerPerId[periode.arbeidsforhold.arbeidsgiverReferanse]
     ) {
@@ -129,9 +123,7 @@ const validerPerioder = (
     return feilmelding;
   }
 
-  const harApIngenPerioder = aksjonspunkter.some(
-    ap => ap.definisjon === AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-  );
+  const harApIngenPerioder = aksjonspunkter.some(ap => ap.definisjon === '5064');
 
   return uttakPerioder.every(a => a.aksjonspunktType === undefined) && (!harApIngenPerioder || uttakPerioder.length > 0)
     ? null
@@ -197,27 +189,19 @@ export const UttakFaktaForm = ({
     [uttakPerioder],
   );
 
-  const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
-    a => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK,
-  );
+  const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(a => a.definisjon !== '6065');
   const bekreft = (begrunnelse: string) => {
     const overstyrAp = [
       {
         // TODO Fiks hack
-        kode: validerApKodeOgHentApEnum(AksjonspunktKode.OVERSTYR_FAKTA_UTTAK, AksjonspunktKode.OVERSTYR_FAKTA_UTTAK),
+        kode: validerApKodeOgHentApEnum('6065', '6065'),
         perioder: uttakPerioder,
         begrunnelse,
       },
     ];
 
     const aksjonspunkterSomSkalBekreftes = automatiskeAksjonspunkter.map(ap => ({
-      kode: validerApKodeOgHentApEnum(
-        ap.definisjon,
-        AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-        AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-      ),
+      kode: validerApKodeOgHentApEnum(ap.definisjon, '5065', '5064', '5063', '5066'),
       perioder: uttakPerioder,
       begrunnelse,
     }));

@@ -2,8 +2,6 @@ import { composeStories } from '@storybook/react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-
 import * as stories from './VergeFaktaIndex.stories';
 
 const { Default } = composeStories(stories);
@@ -43,7 +41,7 @@ describe('VergeFaktaIndex', () => {
       fnr: undefined,
       gyldigFom: '2022-09-14',
       gyldigTom: '2022-09-24',
-      kode: AksjonspunktKode.AVKLAR_VERGE,
+      kode: '5030',
       navn: 'Espen Utvikler',
       organisasjonsnummer: '232232323',
       vergeType: 'ADVOKAT',

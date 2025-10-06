@@ -3,7 +3,6 @@ import { type ComponentProps, useState } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData, withRouter } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -22,7 +21,7 @@ import { VedtakEditeringProvider } from './VedtakEditeringContext';
 import { VedtakProsessIndex } from './VedtakProsessIndex';
 
 const defaultAksjonspunkt = {
-  definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+  definisjon: '5015',
   status: 'OPPR',
 
   kanLoses: true,
@@ -299,7 +298,7 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         ...defaultAksjonspunkter,
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+          definisjon: '5033',
           status: 'OPPR',
 
           kanLoses: false,
@@ -307,21 +306,21 @@ export const TeksterForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = {
         },
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+          definisjon: '5034',
           status: 'OPPR',
 
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE,
+          definisjon: '5003',
           status: 'OPPR',
 
           kanLoses: false,
         },
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST,
+          definisjon: '5055',
           status: 'OPPR',
 
           kanLoses: false,
@@ -355,7 +354,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         ...defaultAksjonspunkter,
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_ANNEN_YTELSE,
+          definisjon: '5033',
           status: 'OPPR',
           begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,
@@ -363,7 +362,7 @@ export const OppgaverForAksjonspunkterSomSaksbehandlerMåTaStillingTil: Story = 
         },
         {
           ...defaultAksjonspunkt,
-          definisjon: AksjonspunktKode.VURDERE_DOKUMENT,
+          definisjon: '5034',
           status: 'OPPR',
           begrunnelse: 'Dette er en begrunnelse',
           kanLoses: false,

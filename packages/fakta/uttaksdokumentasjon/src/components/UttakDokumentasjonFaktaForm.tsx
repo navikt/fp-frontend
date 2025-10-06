@@ -6,7 +6,6 @@ import { Alert, Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { DokumentasjonVurderingBehov } from '@navikt/fp-types';
 import type { VurderDokumentasjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -42,7 +41,7 @@ export const UttakDokumentasjonFaktaForm = ({ dokumentasjonVurderingBehov }: Pro
   const bekreft = (begrunnelse: string) => {
     setErBekreftKnappTrykket(true);
     void submitCallback({
-      kode: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+      kode: '5074',
       vurderingBehov: dokBehov,
       begrunnelse,
     });

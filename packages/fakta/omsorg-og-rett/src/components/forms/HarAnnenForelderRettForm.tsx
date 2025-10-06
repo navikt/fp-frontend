@@ -5,7 +5,6 @@ import { RhfForm } from '@navikt/ft-form-hooks';
 import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { AvklarAnnenforelderHarRettAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -48,7 +47,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
 
   const transformerFeltverdier = (feltVerdier: FormValues) =>
     submitCallback({
-      kode: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+      kode: '5086',
       annenforelderHarRett: feltVerdier.harAnnenForelderRett,
       annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
       annenForelderHarRettEØS: feltVerdier.harAnnenForelderRettEØS,
@@ -57,10 +56,7 @@ export const HarAnnenForelderRettForm = ({ omsorgOgRett, aksjonspunkt, isSubmitt
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
-      <FaktaGruppe
-        withoutBorder
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT]}
-      >
+      <FaktaGruppe withoutBorder merknaderFraBeslutter={alleMerknaderFraBeslutter['5086']}>
         <VStack gap="space-24">
           <HarAnnenForelderRettFelter readOnly={readOnly} avklareUforetrygd={skalAvklareUforetrygd} />
 

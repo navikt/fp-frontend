@@ -6,7 +6,6 @@ import { RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AdopsjonFamilieHendelse } from '@navikt/fp-types';
 import type { BekreftEktefelleAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
@@ -33,7 +32,7 @@ export const EktefelleFaktaForm = ({ readOnly, adopsjon, alleMerknaderFraBeslutt
   return (
     <FaktaKort
       label={intl.formatMessage({ id: 'EktefelleFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter['5005']}
     >
       <RhfRadioGroup
         name="ektefellesBarn"
@@ -59,6 +58,6 @@ EktefelleFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHendelse): For
 });
 
 EktefelleFaktaForm.transformValues = (ektefellesBarn: boolean): BekreftEktefelleAksjonspunktAp => ({
-  kode: AksjonspunktKode.OM_ADOPSJON_GJELDER_EKTEFELLES_BARN,
+  kode: '5005',
   ektefellesBarn,
 });

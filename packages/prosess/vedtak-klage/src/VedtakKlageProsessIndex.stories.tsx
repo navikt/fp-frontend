@@ -3,7 +3,6 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, Behandling, KlageVurdering } from '@navikt/fp-types';
 
@@ -20,7 +19,7 @@ const behandling = {
 
 const aksjonspunkterForPanel: Aksjonspunkt[] = [
   {
-    definisjon: AksjonspunktKode.FORESLA_VEDTAK,
+    definisjon: '5015',
     status: 'OPPR',
     kanLoses: true,
     toTrinnsBehandling: false,

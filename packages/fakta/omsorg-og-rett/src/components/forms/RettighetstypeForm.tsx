@@ -8,19 +8,14 @@ import { required } from '@navikt/ft-form-validators';
 import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import {
-  type Aksjonspunkt,
-  type foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype,
-  type OmsorgOgRett,
-} from '@navikt/fp-types';
+import { type Aksjonspunkt, type OmsorgOgRett, type Rettighetstype } from '@navikt/fp-types';
 import type { OverstyringRettigheterAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
 
 type FormValues = {
-  rettighetstype: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  rettighetstype: Rettighetstype;
   begrunnelse: string;
 };
 
@@ -37,7 +32,7 @@ const RETTIGHETSTYPER = {
   BARE_MOR_RETT: 'Rettighetstype.BareMorRett',
   BARE_FAR_RETT: 'Rettighetstype.BareFarRett',
   BARE_FAR_RETT_MOR_UFØR: 'Rettighetstype.BareFarRettMorUfør',
-} satisfies Record<foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype, string>;
+} satisfies Record<Rettighetstype, string>;
 
 export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }: Props) => {
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =
@@ -54,7 +49,7 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }:
 
   const transformerFeltverdier = (feltVerdier: FormValues) =>
     submitCallback({
-      kode: AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG,
+      kode: '6018',
       rettighetstype: feltVerdier.rettighetstype,
       ...FaktaBegrunnelseTextField.transformValues(feltVerdier),
     });
@@ -67,10 +62,7 @@ export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }:
   const readOnly = !erOverstyrt || isReadOnly || !kanOverstyre;
   return (
     <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier}>
-      <FaktaGruppe
-        withoutBorder
-        merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG]}
-      >
+      <FaktaGruppe withoutBorder merknaderFraBeslutter={alleMerknaderFraBeslutter['6018']}>
         <VStack gap="space-24">
           <HStack gap="space-8" align="start">
             <RhfSelect

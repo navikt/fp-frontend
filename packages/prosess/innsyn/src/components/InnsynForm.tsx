@@ -8,7 +8,6 @@ import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { Aksjonspunkt, Dokument, Innsyn, InnsynDokument } from '@navikt/fp-types';
 import type { VurderInnsynAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -63,7 +62,7 @@ const getFilteredValues = (values: InnsynFormValues) =>
 
 // @ts-expect-error Fiks
 const transformValues = (values: InnsynFormValues, documents: Dokument[]): VurderInnsynAp => ({
-  kode: AksjonspunktKode.VURDER_INNSYN,
+  kode: '5037',
   innsynDokumenter: getDocumentsStatus(values, documents),
   ...(getFilteredValues(values) as InnsynFormValues),
 });

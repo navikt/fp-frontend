@@ -1,3 +1,3 @@
-import type { foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType } from '@navikt/fp-types';
+import type { foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType } from './apiDtoGenerert';
 
 export type OpptjeningAktivitetType = foreldrepenger_behandlingslager_behandling_opptjening_OpptjeningAktivitetType;

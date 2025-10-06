@@ -5,7 +5,6 @@ import { Alert, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Fødsel, FødselGjeldende } from '@navikt/fp-types';
 import type { SjekkManglendeFødselAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
@@ -40,7 +39,7 @@ export const SjekkManglendeFødselForm = ({ aksjonspunkt, fødsel: { gjeldende, 
 
   return (
     <FaktaKort
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter['5027']}
       label={intl.formatMessage({ id: 'SjekkManglendeFødselForm.Tittel' })}
     >
       <RhfForm
@@ -97,7 +96,7 @@ const initialValues = (gjeldende: FødselGjeldende, aksjonspunkt: Aksjonspunkt):
 });
 
 const transformValues = (values: FormValues): SjekkManglendeFødselAp => ({
-  kode: AksjonspunktKode.SJEKK_MANGLENDE_FØDSEL,
+  kode: '5027',
   ...Termindato.transformValues(values),
   ...ErBarnFødt.transformValues(values),
   ...FaktaBegrunnelseTextField.transformValues(values),

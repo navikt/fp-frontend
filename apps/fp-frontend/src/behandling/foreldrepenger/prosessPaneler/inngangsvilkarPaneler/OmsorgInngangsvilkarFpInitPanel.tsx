@@ -1,15 +1,14 @@
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { OmsorgVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-omsorg';
-import type { VilkårType } from '@navikt/fp-types';
+import type { AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5031'];
 
-const VILKAR_KODER = ['FP_VK_5'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['FP_VK_5'];
 
 export const OmsorgInngangsvilkarFpInitPanel = () => {
   const intl = useIntl();

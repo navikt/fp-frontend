@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -32,7 +31,7 @@ const aktivitetskravGrunnlagListe = [
 ] satisfies AktivitetskravGrunnlagArbeid[];
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: '5008',
   status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -107,7 +106,7 @@ export const AksjonspunktMedUavklartePerioder: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+        definisjon: '5074',
         status: 'OPPR',
 
         kanLoses: true,
@@ -165,7 +164,7 @@ export const AksjonspunktSomErBekreftetOgBehandlingAvsluttet: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+        definisjon: '5074',
         status: 'UTFO',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: false,
@@ -181,7 +180,7 @@ export const AksjonspunktErBekreftetMenBehandlingErÅpen: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_UTTAK_DOKUMENTASJON,
+        definisjon: '5074',
         status: 'UTFO',
 
         kanLoses: true,

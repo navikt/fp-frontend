@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -277,7 +276,7 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: '5008',
   status: 'OPPR',
   kanLoses: true,
   toTrinnsBehandling: false,
@@ -291,7 +290,7 @@ export const TilretteleggingMedVelferdspermisjon: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: '5091',
         status: 'OPPR',
 
         kanLoses: true,
@@ -307,7 +306,7 @@ export const TilretteleggingMed100ProsentVelferdspermisjon: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: '5091',
         status: 'OPPR',
 
         kanLoses: true,
@@ -323,7 +322,7 @@ export const SokerVarIkkeAnsattDaBehovetForTilretteleggingOppstod: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: '5091',
         status: 'OPPR',
 
         kanLoses: true,
@@ -339,7 +338,7 @@ export const HarOpphold: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: '5091',
         status: 'OPPR',
 
         kanLoses: true,
@@ -403,7 +402,7 @@ export const ErReadonly: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: '5091',
         status: 'OPPR',
 
         kanLoses: true,
@@ -462,7 +461,7 @@ export const ErRevurdering: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.FODSELTILRETTELEGGING,
+        definisjon: '5091',
         status: 'OPPR',
         begrunnelse: 'Dette er en begrunnelse',
         kanLoses: true,

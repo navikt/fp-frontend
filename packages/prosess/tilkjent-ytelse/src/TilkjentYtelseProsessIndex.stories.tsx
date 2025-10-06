@@ -2,7 +2,6 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -145,7 +144,7 @@ export const UtførtAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         begrunnelse: 'Dette er en begrunnelse saksbehandler tidligere har gjort.',
-        definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
+        definisjon: '5090',
         status: 'UTFO',
       },
     ] as Aksjonspunkt[],
@@ -156,7 +155,7 @@ export const MedFeriepengegrunnlag: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_TILBAKETREKK,
+        definisjon: '5090',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],

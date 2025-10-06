@@ -5,7 +5,6 @@ import { Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { BTag } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   ProsessPanelTemplate,
   ProsessStegBegrunnelseTextFieldNew,
@@ -110,9 +109,5 @@ const transformValues = (values: FormValues, aksjonspunkter: Aksjonspunkt[]): Ak
   aksjonspunkter.map(ap => ({
     ...VilkarResultPicker.transformValues(values),
     ...ProsessStegBegrunnelseTextFieldNew.transformValues(values),
-    kode: validerApKodeOgHentApEnum(
-      ap.definisjon,
-      AksjonspunktKode.MANUELL_VURDERING_AV_OMSORGSVILKARET,
-      AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-    ),
+    kode: validerApKodeOgHentApEnum(ap.definisjon, '5011', '5031'),
   }));

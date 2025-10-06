@@ -1,5 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
 export type BekreftSokersOpplysningspliktManuAp = {
@@ -9,4 +7,4 @@ export type BekreftSokersOpplysningspliktManuAp = {
     aktørId?: string;
     brukerHarSagtAtIkkeKommer: boolean;
   }[];
-} & AksjonspunktTilBekreftelse<AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU>;
+} & AksjonspunktTilBekreftelse<'5017'>;

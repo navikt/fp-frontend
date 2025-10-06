@@ -5,7 +5,6 @@ import { ReadMore, VStack } from '@navikt/ds-react';
 import { RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { KontrollerEtterbetalingTilSøkerAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -26,7 +25,7 @@ export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
 
   const { control } = useFormContext<EtterbetalingSøkerFormValues>();
 
-  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
+  if (!aksjonspunkt || aksjonspunkt.definisjon !== '5029') {
     return null;
   }
 
@@ -52,7 +51,7 @@ export const EtterbetalingSøkerForm = ({ readOnly, aksjonspunkt }: Props) => {
 };
 
 EtterbetalingSøkerForm.initialValues = (aksjonspunkt?: Aksjonspunkt): EtterbetalingSøkerFormValues | undefined => {
-  if (!aksjonspunkt || aksjonspunkt.definisjon !== AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER) {
+  if (!aksjonspunkt || aksjonspunkt.definisjon !== '5029') {
     return undefined;
   }
   return {
@@ -61,6 +60,6 @@ EtterbetalingSøkerForm.initialValues = (aksjonspunkt?: Aksjonspunkt): Etterbeta
 };
 
 EtterbetalingSøkerForm.transformValues = (values: EtterbetalingSøkerFormValues): KontrollerEtterbetalingTilSøkerAP => ({
-  kode: AksjonspunktKode.KONTROLLER_STOR_ETTERBETALING_SØKER,
+  kode: '5029',
   begrunnelse: values.begrunnelseEtterbetaling,
 });

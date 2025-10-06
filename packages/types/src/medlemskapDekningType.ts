@@ -1,3 +1,3 @@
-import type { foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekningType } from '@navikt/fp-types';
+import type { foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekningType } from './apiDtoGenerert';
 
 export type MedlemskapDekningType = foreldrepenger_behandlingslager_behandling_medlemskap_MedlemskapDekningType;

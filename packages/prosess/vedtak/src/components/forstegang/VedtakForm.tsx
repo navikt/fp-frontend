@@ -5,7 +5,6 @@ import { type IntlShape, useIntl } from 'react-intl';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { decodeHtmlEntity } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import {
   type Aksjonspunkt,
@@ -118,13 +117,7 @@ const transformValues = (
   aksjonspunkter
     .filter(ap => ap.kanLoses)
     .map(ap => ({
-      kode: validerApKodeOgHentApEnum(
-        ap.definisjon,
-        AksjonspunktKode.FORESLA_VEDTAK,
-        AksjonspunktKode.FORESLA_VEDTAK_MANUELT,
-        AksjonspunktKode.VURDERE_ANNEN_YTELSE,
-        AksjonspunktKode.VURDERE_DOKUMENT,
-      ),
+      kode: validerApKodeOgHentApEnum(ap.definisjon, '5015', '5028', '5033', '5034'),
       begrunnelse: values.begrunnelse,
       skalBrukeOverstyrendeFritekstBrev: harOverstyrtVedtaksbrev,
     }));

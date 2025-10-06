@@ -1,4 +1,4 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
 export const validerApKodeOgHentApEnum = <T extends AksjonspunktKode>(
   kode: string | undefined,

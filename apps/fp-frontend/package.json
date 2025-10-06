@@ -48,7 +48,6 @@
     "@navikt/fp-fakta-verge": "workspace:*",
     "@navikt/fp-fakta-ytelser": "workspace:*",
     "@navikt/fp-journalforing": "workspace:*",
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-los-saksbehandler": "workspace:*",
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",

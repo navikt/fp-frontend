@@ -3,20 +3,40 @@ import { FormattedMessage } from 'react-intl';
 
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode, isFaktaUttakAksjonspunkt, isUttakAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
+  AksjonspunktKode,
   Behandlingsresultat,
-  foreldrepenger_behandlingslager_behandling_BehandlingStatus,
+  BehandlingStatus,
   KodeverkMedNavn,
-  tjenester_behandling_dto_behandling_BehandlingsresultatDto,
   TotrinnskontrollAksjonspunkt,
 } from '@navikt/fp-types';
+import { aksjonspunktIsOfType } from '@navikt/fp-utils';
 
 import {
   totrinnskontrollaksjonspunktTextCodes,
   totrinnsTilbakekrevingkontrollaksjonspunktTextCodes,
 } from '../../totrinnskontrollaksjonspunktTextCodes';
 import { OpptjeningTotrinnText } from './OpptjeningTotrinnText';
+
+const faktaUttakAksjonspunkter: AksjonspunktKode[] = ['6065', '5063', '5064', '5065', '5066'];
+
+const uttakAksjonspunkter: AksjonspunktKode[] = [
+  '6008',
+  '5071',
+  '5072',
+  '5067',
+  '5069',
+  '5073',
+  '5075',
+  '5076',
+  '5077',
+  '5078',
+  '5079',
+];
+
+const isUttakAksjonspunkt = aksjonspunktIsOfType(uttakAksjonspunkter);
+
+const isFaktaUttakAksjonspunkt = aksjonspunktIsOfType(faktaUttakAksjonspunkter);
 
 const buildVarigEndringBeregningText = (
   beregningDto?: TotrinnskontrollAksjonspunkt['beregningDto'],
@@ -42,16 +62,12 @@ const buildUttakText = (
         id = 'ToTrinnsForm.AvklarUttak.PeriodeLagtTil';
       } else if (
         uttakperiode.erEndret &&
-        (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.FASTSETT_UTTAKPERIODER ||
-          aksjonspunkt.aksjonspunktKode === AksjonspunktKode.TILKNYTTET_STORTINGET)
+        (aksjonspunkt.aksjonspunktKode === '5071' || aksjonspunkt.aksjonspunktKode === '5072')
       ) {
         id = 'ToTrinnsForm.ManueltFastsattUttak.PeriodeEndret';
-      } else if (
-        uttakperiode.erEndret &&
-        aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER
-      ) {
+      } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === '6008') {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
-      } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYR_FAKTA_UTTAK) {
+      } else if (uttakperiode.erEndret && aksjonspunkt.aksjonspunktKode === '6065') {
         id = 'ToTrinnsForm.OverstyrUttak.PeriodeEndret';
       } else if (uttakperiode.erEndret) {
         id = 'ToTrinnsForm.AvklarUttak.PeriodeEndret';
@@ -146,7 +162,7 @@ const getTextForKlageHelper = (
 };
 
 const getTextForKlage = (
-  behandlingStaus: foreldrepenger_behandlingslager_behandling_BehandlingStatus,
+  behandlingStaus: BehandlingStatus,
   behandlingsresultat?: Behandlingsresultat,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (behandlingStaus === 'FVED') {
@@ -166,27 +182,23 @@ const buildOverstyrtRettOgOmsorgText = (): ReactElement<
 > => <FormattedMessage id="ToTrinnsForm.AvklarUttak.OverstyrtRettOgOmsorg" />;
 
 const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolean =>
-  aksjonspunkt.aksjonspunktKode === AksjonspunktKode.BEHANDLE_KLAGE_NFP ||
-  aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP;
+  aksjonspunkt.aksjonspunktKode === '5035' || aksjonspunkt.aksjonspunktKode === '5082';
 
 export const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
-  behandlingStatus: foreldrepenger_behandlingslager_behandling_BehandlingStatus,
+  behandlingStatus: BehandlingStatus,
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
-  behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto,
+  behandlingsresultat?: Behandlingsresultat,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING) {
+  if (aksjonspunkt.aksjonspunktKode === ('5051' satisfies AksjonspunktKode)) {
     return buildOpptjeningText(aksjonspunkt);
   }
-  if (
-    aksjonspunkt.aksjonspunktKode ===
-    AksjonspunktKode.VURDER_VARIG_ENDRET_ELLER_NYOPPSTARTET_NAERING_SELVSTENDIG_NAERINGSDRIVENDE
-  ) {
+  if (aksjonspunkt.aksjonspunktKode === ('5039' satisfies AksjonspunktKode)) {
     return [buildVarigEndringBeregningText(aksjonspunkt.beregningDto)];
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_FAKTA_FOR_ATFL_SN) {
+  if (aksjonspunkt.aksjonspunktKode === ('5058' satisfies AksjonspunktKode)) {
     return getFaktaOmBeregningText(faktaOmBeregningTilfeller, aksjonspunkt.beregningDto);
   }
   if (isUttakAksjonspunkt(aksjonspunkt.aksjonspunktKode) && aksjonspunkt.uttakPerioder.length > 0) {
@@ -196,13 +208,13 @@ export const getAksjonspunkttekst = (
     return buildUttakText(aksjonspunkt);
   }
 
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT) {
+  if (aksjonspunkt.aksjonspunktKode === '5086') {
     return [buildAvklarAnnenForelderText()];
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD) {
+  if (aksjonspunkt.aksjonspunktKode === ('5013' satisfies AksjonspunktKode)) {
     return getTextForForeldreansvarsvilkåretAndreLedd(isForeldrepenger);
   }
-  if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.OVERSTYRING_AV_RETT_OG_OMSORG) {
+  if (aksjonspunkt.aksjonspunktKode === '6018') {
     return [buildOverstyrtRettOgOmsorgText()];
   }
   if (erKlageAksjonspunkt(aksjonspunkt)) {

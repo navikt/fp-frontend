@@ -18,7 +18,7 @@ import {
 } from '@navikt/ft-form-validators';
 
 import type {
-  foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType,
+  ArbeidsforholdKomplettVurderingType,
   Inntektsmelding,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
@@ -35,7 +35,7 @@ const minValue1 = minValue(1);
 const maxValue100 = maxValue(100);
 
 type FormValues = {
-  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
+  saksbehandlersVurdering?: ArbeidsforholdKomplettVurderingType;
   fom?: string;
   tom?: string;
   stillingsprosent?: number;

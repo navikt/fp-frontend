@@ -9,7 +9,6 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateTimeFormat, formaterFritekst } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegBegrunnelseTextFieldNew, ProsessStegSubmitButtonNew } from '@navikt/fp-prosess-felles';
 import type { AlleKodeverk, KlageVurdering } from '@navikt/fp-types';
 import type { KlageFormkravAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -53,7 +52,7 @@ const getKlagBareVedtak = (
 };
 
 const getLovHjemmeler = (aksjonspunktCode: string): string =>
-  aksjonspunktCode === AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA';
+  aksjonspunktCode === '5082' ? 'Klage.LovhjemmelNFP' : 'Klage.LovhjemmelKA';
 
 const buildInitialValues = (klageVurdering: KlageVurdering): FormValues | undefined => {
   const klageFormkavResultatNfp = klageVurdering.klageFormkravResultatNFP;
@@ -83,7 +82,7 @@ const transformValues = (values: FormValues, avsluttedeBehandlinger: AvsluttetBe
   erKonkret: !!values.erKonkret,
   erSignert: !!values.erSignert,
   begrunnelse: values.begrunnelse,
-  kode: AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP,
+  kode: '5082',
   vedtakBehandlingUuid: values.vedtak === IKKE_PA_KLAGD_VEDTAK ? undefined : values.vedtak,
   mottattDato: values.mottattDato,
   erTilbakekreving: erTilbakekreving(avsluttedeBehandlinger, values.vedtak),
@@ -130,9 +129,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
           <Heading size="small" level="3">
             {intl.formatMessage({ id: 'Klage.Formkrav.Title' })}
           </Heading>
-          <Detail>
-            {intl.formatMessage({ id: getLovHjemmeler(AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP) })}
-          </Detail>
+          <Detail>{intl.formatMessage({ id: getLovHjemmeler('5082') })}</Detail>
         </VStack>
         <VStack gap="space-24">
           {isSubmittable && (
@@ -257,7 +254,7 @@ export const FormkravKlageFormNfp = ({ klageVurdering, avsluttedeBehandlinger, l
               avsluttedeBehandlinger={avsluttedeBehandlinger}
               handleSubmit={formMethods.handleSubmit}
               readOnly={isReadOnly}
-              aksjonspunktCode={AksjonspunktKode.VURDERING_AV_FORMKRAV_KLAGE_NFP}
+              aksjonspunktCode="5082"
             />
           </HStack>
         </VStack>

@@ -2,7 +2,6 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   type PanelDataArgs,
@@ -59,14 +58,14 @@ type Story = StoryObj<typeof meta>;
 export const OverstyringspanelForFødsel: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Fodselsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
+    overstyringApKode: '6003',
   },
 };
 
 export const OverstyringspanelForMedlemskap: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
+    overstyringApKode: '6005',
     avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2'],
     behandling: {
       ...defaultBehandling,
@@ -78,13 +77,13 @@ export const OverstyringspanelForMedlemskap: Story = {
 export const OverstyringErUtførtForMedlemskap: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
+    overstyringApKode: '6005',
     avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2'],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
         {
-          definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
+          definisjon: '6005',
           status: 'UTFO',
           kanLoses: false,
           begrunnelse: 'Dette er en begrunnelse',
@@ -108,7 +107,7 @@ export const OverstyringForForutgåendeMedlemskap: Story = {
     } as Fagsak,
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2_F'],
-    overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
+    overstyringApKode: '6017',
   },
 };
 
@@ -118,13 +117,13 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
       fagsakYtelseType: 'ES',
     } as Fagsak,
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
+    overstyringApKode: '6017',
     avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2_F'],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
         {
-          definisjon: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
+          definisjon: '6017',
           status: 'UTFO',
           kanLoses: false,
           begrunnelse: 'Dette er en begrunnelse',
@@ -144,7 +143,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
 export const OverstyringspanelForOpptjening: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET,
+    overstyringApKode: '6011',
     avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_23'],
   },
 };
@@ -158,7 +157,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
       },
       aksjonspunkt: [
         {
-          definisjon: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
+          definisjon: '6003',
           status: 'UTFO',
           kanLoses: false,
           begrunnelse: 'Dette er en begrunnelse',
@@ -167,7 +166,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
     } as Behandling,
     status: 'IKKE_OPPFYLT',
     panelTekstKode: 'Inngangsvilkar.Fodselsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
+    overstyringApKode: '6003',
   },
 };
 
@@ -182,20 +181,20 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
     } as Behandling,
     status: 'IKKE_VURDERT',
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
-    overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET,
+    overstyringApKode: '6011',
   },
 };
 
 export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
   args: {
     panelTekstKode: 'Behandlingspunkt.FortsattMedlemskap',
-    overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+    overstyringApKode: '6012',
     avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2_L'],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
         {
-          definisjon: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+          definisjon: '6012',
           status: 'UTFO',
           kanLoses: false,
           begrunnelse: 'Dette er en begrunnelse',
@@ -211,7 +210,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
 export const LøpendeMedlemskapVisningSomIkkeErOverstyrt: Story = {
   args: {
     panelTekstKode: 'Behandlingspunkt.FortsattMedlemskap',
-    overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
+    overstyringApKode: '6012',
     avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2_L'],
     status: 'IKKE_OPPFYLT',
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },

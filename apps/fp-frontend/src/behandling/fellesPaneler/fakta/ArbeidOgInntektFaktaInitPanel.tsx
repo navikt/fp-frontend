@@ -5,9 +5,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 import { ArbeidOgInntektFaktaIndex } from '@navikt/fp-fakta-arbeid-og-inntekt';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
 import type {
+  AksjonspunktKode,
   ArbeidsgiverOpplysningerPerId,
   ManglendeInntektsmeldingVurdering,
   ManueltArbeidsforhold,
@@ -19,7 +19,7 @@ import { BehandlingDataContext } from '../../felles/context/BehandlingDataContex
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5085'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -70,8 +70,7 @@ export const ArbeidOgInntektFaktaInitPanel = ({ arbeidsgiverOpplysningerPerId }:
       faktaPanelKode={FaktaPanelCode.ARBEID_OG_INNTEKT}
       faktaPanelMenyTekst={intl.formatMessage({ id: 'FaktaInitPanel.Title.ArbeidOgInntekt' })}
       skalPanelVisesIMeny={
-        harLenke(behandling, 'ARBEID_OG_INNTEKT') &&
-        !harAksjonspunkt(AksjonspunktKode.AVKLAR_ARBEIDSFORHOLD, behandling.aksjonspunkt)
+        harLenke(behandling, 'ARBEID_OG_INNTEKT') && !harAksjonspunkt('5080', behandling.aksjonspunkt)
       }
     >
       {arbeidOgInntekt ? (

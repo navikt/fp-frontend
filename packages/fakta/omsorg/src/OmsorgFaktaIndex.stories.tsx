@@ -3,7 +3,6 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   KjønnkodeEnum,
@@ -85,7 +84,7 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
     personoversikt: { barn: [defaultBarn], annenPart: defaultAnnenPart, bruker: defaultBruker },
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG,
+        definisjon: '5061',
         status: 'OPPR',
 
         kanLoses: true,
@@ -96,7 +95,7 @@ export const ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg: Story = {
       },
     ],
     alleMerknaderFraBeslutter: {
-      [AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_OMSORG]: merknaderFraBeslutter,
+      ['5061']: merknaderFraBeslutter,
     },
   },
 };

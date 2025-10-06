@@ -4,7 +4,6 @@ import { BodyShort, HStack, Label, VStack } from '@navikt/ds-react';
 import { ReadOnlyField } from '@navikt/ft-form-hooks';
 import { DateLabel } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type AdopsjonFamilieHendelse, type Soknad, søknadErAdopsjon } from '@navikt/fp-types';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
@@ -36,7 +35,7 @@ export const BarnPanel = ({ søknad, adopsjon }: Props) => {
         </Label>
 
         {fødselsdatoer.map(([childNumber, fødselsdato]) => (
-          <HStack gap="space-16" key={`${AksjonspunktKode.OMSORGSOVERTAKELSE}-${childNumber}`}>
+          <HStack gap="space-16" key={`${'5008'}-${childNumber}`}>
             {fødselsdatoer.length > 1 && (
               <Label size="small">
                 <FormattedMessage id="BarnPanel.BarnNr" values={{ nummer: childNumber }} />

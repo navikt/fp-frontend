@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { Alert, Button, Table, VStack } from '@navikt/ds-react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import type {
   ArbeidOgInntektsmelding,
@@ -84,7 +83,7 @@ export const ArbeidOgInntektFaktaPanel = ({
   const lagreOgFortsett = () => {
     setErKnappTrykket(true);
     void submitCallback({
-      kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+      kode: '5085',
     });
   };
 

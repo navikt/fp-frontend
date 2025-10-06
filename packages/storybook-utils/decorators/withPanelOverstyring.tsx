@@ -2,7 +2,7 @@ import { type ReactRenderer } from '@storybook/react';
 import { action } from 'storybook/actions';
 import type { DecoratorFunction } from 'storybook/internal/types';
 
-import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
+import type { OverstyringAksjonspunkter } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 export type PanelOverstyringContextArgs = {

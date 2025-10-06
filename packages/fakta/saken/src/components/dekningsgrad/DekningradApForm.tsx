@@ -7,7 +7,6 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { AvklarDekningsgradAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -60,7 +59,7 @@ export const DekningradApForm = ({ søknad, aksjonspunkt }: Props) => {
           formMethods={formMethods}
           onSubmit={(values: FormValues) =>
             submitCallback({
-              kode: AksjonspunktKode.AVKLAR_DEKNINGSGRAD,
+              kode: '5002',
               begrunnelse: values.begrunnelse,
               dekningsgrad: values.dekningsgrad,
             })

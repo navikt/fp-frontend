@@ -17,7 +17,6 @@
   },
   "dependencies": {
     "@navikt/ds-react": "7.31.0",
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*",
     "@navikt/fp-storybook-utils": "workspace:*",
     "@navikt/fp-types": "workspace:*",

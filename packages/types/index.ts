@@ -191,7 +191,6 @@ export type {
   BarnHendelseData,
 } from './src/fødsel';
 export type { AnnenforelderUttakEøsPeriode } from './src/faktaUttakEøsPeriode';
-export * from './src/apiDtoGenerert';
 export type { BehandlingArsakType } from './src/behandlingArsakType';
 export type { BehandlingStatus } from './src/behandlingStatus';
 export type { BehandlingType } from './src/behandlingType';
@@ -281,6 +280,13 @@ export type { Arbeidskategori } from './src/arbeidskategori';
 export type { AndreKriterierType } from './src/andreKriterierType';
 export type { AksjonspunktKodeTilbakekreving } from './src/aksjonspunktCodesTilbakekreving';
 export type { ForeldelseVurderingType } from './src/foreldelseVurderingType';
+export type {
+  AksjonspunktKode,
+  VilkårOverstyringAksjonspunkter,
+  OverstyringAksjonspunkter,
+} from './src/aksjonspunktCodes';
+export type { Rettighetstype } from './src/rettighetstype';
+export type { GraderingAvslagÅrsak } from './src/graderingAvslagÅrsak';
 export {
   type BehandlingResultatType,
   isAvslag,

@@ -14,9 +14,8 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
+import type { AksjonspunktKode, ArbeidsgiverOpplysningerPerId, Beregningsgrunnlag, Vilkar } from '@navikt/fp-types';
 import type { FaktaAksjonspunkt } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { harAksjonspunkt, useMellomlagretFormData } from '@navikt/fp-utils';
 
@@ -27,7 +26,7 @@ import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaP
 
 import '@navikt/ft-fakta-fordel-beregningsgrunnlag/dist/style.css';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG, AksjonspunktKode.VURDER_REFUSJON_BERGRUNN];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5046', '5059'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;
@@ -80,12 +79,12 @@ const Wrapper = (
   );
 };
 
-const mapBGKodeTilFpsakKode = (bgKode: string): string => {
+const mapBGKodeTilFpsakKode = (bgKode: string): AksjonspunktKode => {
   switch (bgKode) {
     case FaktaFordelBeregningAvklaringsbehovCode.FORDEL_BEREGNINGSGRUNNLAG:
-      return AksjonspunktKode.FORDEL_BEREGNINGSGRUNNLAG;
+      return '5046';
     case FaktaFordelBeregningAvklaringsbehovCode.VURDER_REFUSJON_BERGRUNN:
-      return AksjonspunktKode.VURDER_REFUSJON_BERGRUNN;
+      return '5059';
     default:
       throw new Error(`Ukjent avklaringspunkt ${bgKode}`);
   }

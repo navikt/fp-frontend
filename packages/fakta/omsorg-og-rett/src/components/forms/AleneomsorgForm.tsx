@@ -7,7 +7,6 @@ import { FaktaGruppe } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton, TrueFalseInput } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type Aksjonspunkt, type OmsorgOgRett } from '@navikt/fp-types';
 import type { BekreftAleneomsorgVurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -51,7 +50,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: P
 
   const transformerFeltverdier = (feltVerdier: FormValues) =>
     submitCallback({
-      kode: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+      kode: '5060',
       aleneomsorg: feltVerdier.harAleneomsorg,
       annenforelderHarRett: feltVerdier.harAnnenForelderRett,
       annenforelderMottarUføretrygd: feltVerdier.mottarAnnenForelderUforetrygd,
@@ -63,12 +62,7 @@ export const AleneomsorgForm = ({ omsorgOgRett, aksjonspunkt, isSubmittable }: P
 
   return (
     <RhfForm formMethods={formMethods} onSubmit={transformerFeltverdier} setDataOnUnmount={setMellomlagretFormData}>
-      <FaktaGruppe
-        withoutBorder
-        merknaderFraBeslutter={
-          alleMerknaderFraBeslutter[AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG]
-        }
-      >
+      <FaktaGruppe withoutBorder merknaderFraBeslutter={alleMerknaderFraBeslutter['5060']}>
         <VStack gap="space-24">
           <TrueFalseInput
             name="harAleneomsorg"

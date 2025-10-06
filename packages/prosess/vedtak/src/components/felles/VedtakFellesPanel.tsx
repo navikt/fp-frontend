@@ -5,7 +5,6 @@ import { FormattedMessage, useIntl } from 'react-intl';
 import { ArrowForwardIcon, CheckmarkCircleFillIcon, PencilIcon, XMarkOctagonFillIcon } from '@navikt/aksel-icons';
 import { Alert, BodyShort, Button, Heading, HStack, Label, Link, VStack } from '@navikt/ds-react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import {
   type Aksjonspunkt,
@@ -35,7 +34,7 @@ const finnTekstkodeFraBehandlingstatus = (behandlingStatus: BehandlingStatus): s
 const kanSendesTilGodkjenning = (behandlingStatusKode: BehandlingStatus): boolean => behandlingStatusKode === 'UTRED';
 
 const finnKnappetekstkode = (aksjonspunkter: Aksjonspunkt[], skalBrukeManueltBrev: boolean): string =>
-  aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.FORESLA_VEDTAK) || skalBrukeManueltBrev
+  aksjonspunkter.some(ap => ap.definisjon === '5015') || skalBrukeManueltBrev
     ? 'VedtakForm.TilGodkjenning'
     : 'VedtakForm.FattVedtak';
 

@@ -5,20 +5,17 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { UttakFaktaEøsIndex } from '@navikt/fp-fakta-uttak-eos';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
-  AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5103', '6103'];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS];
+const OVERSTYRING_AP_CODES: AksjonspunktKode[] = ['6103'];
 
 export const UttakEøsFaktaInitPanel = () => {
   const intl = useIntl();

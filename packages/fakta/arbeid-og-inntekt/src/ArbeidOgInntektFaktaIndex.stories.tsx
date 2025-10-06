@@ -3,7 +3,6 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, AksjonspunktÅrsak, type AoIArbeidsforhold } from '@navikt/fp-types';
 
@@ -52,7 +51,7 @@ export const InnhentInntektsmelding: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       } as Aksjonspunkt,
     ],
@@ -129,7 +128,7 @@ export const InnhentInntektsmeldingDerEnIkkeHarInntekterFraAAregisteret: Story =
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       } as Aksjonspunkt,
     ],
@@ -165,7 +164,7 @@ export const InnhentInntektsmeldingDerBehandlingErAvsluttet: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'UTFO',
       } as Aksjonspunkt,
     ],
@@ -204,7 +203,7 @@ export const AvklarManglendeArbeidsforhold: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       } as Aksjonspunkt,
     ],
@@ -244,7 +243,7 @@ export const AvklarManglendeArbeidsforholdDerBehandlingErAvsluttet: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'UTFO',
       } as Aksjonspunkt,
     ],
@@ -297,7 +296,7 @@ export const AvklarManglendeOpplysningerDerAksjonspunktErBekreftetOgTilbakehoppM
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'UTFO',
       } as Aksjonspunkt,
     ],
@@ -399,7 +398,7 @@ export const SkalKunneLeggeTilNyttArbeidsforholdNårIngenArbeidsforholdEllerInnt
     args: {
       aksjonspunkterForPanel: [
         {
-          definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+          definisjon: '5085',
           status: 'OPPR',
         } as Aksjonspunkt,
       ],
@@ -430,7 +429,7 @@ export const ArbeidsforholdErManueltLagtTilOgLagretOgReåpnet: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       } as Aksjonspunkt,
     ],
@@ -683,7 +682,7 @@ export const FlereArbeidsforholdOgInntekstemeldinger: Story = {
     erOverstyrer: true,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -840,7 +839,7 @@ export const ArbeidsforholdMedSammeOrgNr: Story = {
     erOverstyrer: true,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -959,7 +958,7 @@ export const ArbeidsforholdMedSammeOrgNrDerEnManglerInntektsmeldingMenIkkeDetAnd
     erOverstyrer: true,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],
@@ -1138,7 +1137,7 @@ export const EtterAtEtterspurtInntektsmeldingErKommet: Story = {
     erOverstyrer: false,
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING,
+        definisjon: '5085',
         status: 'OPPR',
       },
     ] as Aksjonspunkt[],

@@ -1,24 +1,17 @@
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ForeldreansvarVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-foreldreansvar';
-import type { VilkårType } from '@navikt/fp-types';
+import type { AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 
 import { InngangsvilkarDefaultInitPanel } from '../../../felles/prosess/InngangsvilkarDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD,
-  AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD,
-  AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5013', '5014', '5031'];
 
 const AKSJONSPUNKT_TEKST_PER_KODE: Record<string, string> = {
-  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_2_LEDD]:
-    'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
-  [AksjonspunktKode.MANUELL_VURDERING_AV_FORELDREANSVARSVILKARET_4_LEDD]:
-    'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
-  [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN]: 'SRBVilkarForm.VurderSammeBarn',
+  ['5013']: 'ErForeldreansvarVilkaarOppfyltForm.2LeddParagrafEngangsStonad',
+  ['5014']: 'ErForeldreansvarVilkaarOppfyltForm.4LeddParagraf',
+  ['5031']: 'SRBVilkarForm.VurderSammeBarn',
 };
 
 const VILKAR_KODER = ['FP_VK_8', 'FP_VK_33'] satisfies VilkårType[];

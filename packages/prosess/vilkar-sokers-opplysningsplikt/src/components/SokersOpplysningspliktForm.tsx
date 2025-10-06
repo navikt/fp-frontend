@@ -6,7 +6,6 @@ import { RhfForm, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 import { BTag, dateFormat, isObject } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessPanelTemplate, ProsessStegBegrunnelseTextFieldNew } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
@@ -109,10 +108,7 @@ const transformValues = (
     .map(mv => mv.arbeidsgiverReferanse);
 
   const aksjonspunkt = aksjonspunkter.length > 0 ? aksjonspunkter[0] : undefined;
-  const kode =
-    aksjonspunkt && aksjonspunkt.definisjon === AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU
-      ? AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_MANU
-      : AksjonspunktKode.SOKERS_OPPLYSNINGSPLIKT_OVST;
+  const kode = aksjonspunkt && aksjonspunkt.definisjon === '5017' ? '5017' : '6002';
 
   return {
     kode,

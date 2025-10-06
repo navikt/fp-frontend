@@ -2,7 +2,6 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
@@ -26,7 +25,7 @@ const arbeidsgiverOpplysninger: ArbeidsgiverOpplysningerPerId = {
 };
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.VURDER_INNSYN,
+  definisjon: '5037',
   status: 'OPPR',
 
   kanLoses: true,
@@ -63,7 +62,7 @@ export const BesteberegningMedDagpengerOgArbeidÅpentAksjonspunkt: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        definisjon: '5048',
         status: 'OPPR',
       },
     ],
@@ -76,7 +75,7 @@ export const BesteberegningMedDagpengerOgArbeidLukketAksjonspunktPåVent: Story 
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        definisjon: '5048',
         status: 'UTFO',
         begrunnelse: 'Min begrunnelse for at besteberegningen er feil',
       },
@@ -90,7 +89,7 @@ export const BesteberegningMedAvvik: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
+        definisjon: '5048',
         status: 'OPPR',
       },
     ],

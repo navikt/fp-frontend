@@ -7,10 +7,7 @@ import { Alert, BodyShort, Button, HStack, Popover, Radio, VStack } from '@navik
 import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 
-import type {
-  foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType,
-  ManglendeInntektsmeldingVurdering,
-} from '@navikt/fp-types';
+import type { ArbeidsforholdKomplettVurderingType, ManglendeInntektsmeldingVurdering } from '@navikt/fp-types';
 
 import { useSetDirtyForm } from '../../DirtyFormProvider';
 import type { ArbeidsforholdOgInntektRadData } from '../../types/arbeidsforholdOgInntekt';
@@ -21,7 +18,7 @@ const minLength3 = minLength(3);
 const maxLength1500 = maxLength(1500);
 
 type FormValues = {
-  saksbehandlersVurdering?: foreldrepenger_behandlingslager_behandling_arbeidsforhold_ArbeidsforholdKomplettVurderingType;
+  saksbehandlersVurdering?: ArbeidsforholdKomplettVurderingType;
   begrunnelse?: string;
 };
 

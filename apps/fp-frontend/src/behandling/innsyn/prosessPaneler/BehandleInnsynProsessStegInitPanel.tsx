@@ -4,16 +4,16 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { InnsynProsessIndex } from '@navikt/fp-prosess-innsyn';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_INNSYN];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5037'];
 
 export const BehandleInnsynProsessStegInitPanel = () => {
   const standardPanelProps = useStandardProsessPanelProps(AKSJONSPUNKT_KODER);

@@ -9,14 +9,9 @@ import { AksjonspunktHelpTextHTML, ArrowBox } from '@navikt/ft-ui-komponenter';
 import { formaterFritekst, getLanguageFromSprakkode, ISO_DATE_FORMAT } from '@navikt/ft-utils';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type FormValues as ModalFormValues, SettPaVentModalIndex } from '@navikt/fp-modal-sett-pa-vent';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
-import type {
-  Aksjonspunkt,
-  foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak,
-  foreldrepenger_dokumentbestiller_DokumentMalType,
-} from '@navikt/fp-types';
+import type { Aksjonspunkt, DokumentMalType, RevurderingVarslingÅrsak } from '@navikt/fp-types';
 import type { VarselRevurderingAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -24,24 +19,20 @@ const minLength3 = minLength(3);
 const maxLength10000 = maxLength(10000);
 
 export type ForhandsvisData = {
-  arsakskode: foreldrepenger_behandlingslager_behandling_RevurderingVarslingÅrsak;
-  dokumentMal: foreldrepenger_dokumentbestiller_DokumentMalType;
+  arsakskode: RevurderingVarslingÅrsak;
+  dokumentMal: DokumentMalType;
   fritekst: string;
 };
 
 type FormValues = {
-  kode: AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL | AksjonspunktKode.VARSEL_REVURDERING_MANUELL;
+  kode: '5025' | '5026';
   begrunnelse?: string;
   sendVarsel?: boolean;
   fritekst?: string;
 };
 
 const buildInitialValues = (aksjonspunkter: Aksjonspunkt[]): FormValues => ({
-  kode: validerApKodeOgHentApEnum(
-    aksjonspunkter[0]?.definisjon,
-    AksjonspunktKode.VARSEL_REVURDERING_ETTERKONTROLL,
-    AksjonspunktKode.VARSEL_REVURDERING_MANUELL,
-  ),
+  kode: validerApKodeOgHentApEnum(aksjonspunkter[0]?.definisjon, '5025', '5026'),
   begrunnelse: aksjonspunkter[0]?.begrunnelse ?? '',
   sendVarsel: undefined,
 });

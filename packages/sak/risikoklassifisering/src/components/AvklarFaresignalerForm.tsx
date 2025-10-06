@@ -6,7 +6,6 @@ import { RhfForm, RhfRadioGroup, RhfTextarea } from '@navikt/ft-form-hooks';
 import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-validators';
 import { ArrowBox } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   type Aksjonspunkt,
   type FaresignalVurdering,
@@ -134,7 +133,7 @@ const buildInitialValues = (
 };
 
 const transformValues = (values: Values): AvklartRisikoklassifiseringAp => ({
-  kode: AksjonspunktKode.VURDER_FARESIGNALER,
+  kode: '5095',
   faresignalVurdering: utledFaresignalVurderingVerdi(
     values[VURDERING_HOVEDKATEGORI],
     values[IKKE_REELLE_VURDERINGER_UNDERKATEGORI],

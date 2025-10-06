@@ -5,24 +5,17 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { UttakFaktaIndex } from '@navikt/fp-fakta-uttak';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { AksjonspunktKode, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { harLenke, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.FAKTA_UTTAK_MANUELT_SATT_STARTDATO_ULIK_SØKNAD_STARTDATO_KODE,
-  AksjonspunktKode.FAKTA_UTTAK_INGEN_PERIODER_KODE,
-  AksjonspunktKode.FAKTA_UTTAK_GRADERING_UKJENT_AKTIVITET_KODE,
-  AksjonspunktKode.FAKTA_UTTAK_GRADERING_AKTIVITET_UTEN_BEREGNINGSGRUNNLAG_KODE,
-  AksjonspunktKode.OVERSTYR_FAKTA_UTTAK,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5065', '5064', '5063', '5066', '6065'];
 
-const OVERSTYRING_AP_CODES = [AksjonspunktKode.OVERSTYR_FAKTA_UTTAK];
+const OVERSTYRING_AP_CODES: AksjonspunktKode[] = ['6065'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

@@ -3,7 +3,6 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, KlageVurdering } from '@navikt/fp-types';
 
@@ -107,7 +106,7 @@ export const KlagevurderingMedAksjonspunktNfp: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.BEHANDLE_KLAGE_NFP,
+        definisjon: '5035',
       },
     ] as Aksjonspunkt[],
     klageVurdering: {

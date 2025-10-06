@@ -3,7 +3,6 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import { type Aksjonspunkt, type Medlemskap, type Soknad } from '@navikt/fp-types';
 
@@ -32,12 +31,10 @@ const defaultSoknad = {
 } as Soknad;
 
 const aksjonspunktDefault = {
-  definisjon: AksjonspunktKode.OMSORGSOVERTAKELSE,
+  definisjon: '5008',
   status: 'OPPR',
-
   kanLoses: true,
   toTrinnsBehandling: false,
-
   aksjonspunktType: 'AUTO',
   vilkarType: 'FP_VK_5',
   erAktivt: true,
@@ -190,7 +187,7 @@ export const Default: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+        definisjon: '5101',
         status: 'OPPR',
 
         kanLoses: true,
@@ -207,7 +204,7 @@ export const ForutgåendeMedlemskap: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
+        definisjon: '5102',
         status: 'OPPR',
 
         kanLoses: true,
@@ -258,7 +255,7 @@ export const VurderingAvMedlemskapMedlemskapMedEtAvvik: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+        definisjon: '5101',
         status: 'OPPR',
 
         kanLoses: true,
@@ -280,7 +277,7 @@ export const TidligereVurderingAvMedlemskapMedEtAvvik: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+        definisjon: '5101',
         status: 'UTFO',
         begrunnelse: 'Søker har bodd i Gautemala siden 10.09.2024 ',
         kanLoses: false,
@@ -330,7 +327,7 @@ export const LegacyVurderingAvLøpendeMedlemskap: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_FORTSATT_MEDLEMSKAP,
+        definisjon: '5053',
         status: 'UTFO',
 
         kanLoses: false,
@@ -358,7 +355,7 @@ export const LegacyVurdertInngangsvilkårMedlemskap: Story = {
     aksjonspunkterForPanel: [
       {
         ...aksjonspunktDefault,
-        definisjon: AksjonspunktKode.AVKLAR_OPPHOLDSRETT,
+        definisjon: '5023',
         status: 'UTFO',
 
         kanLoses: false,

@@ -9,7 +9,6 @@ import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-kompon
 import dayjs from 'dayjs';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AnnenforelderUttakEøsPeriode } from '@navikt/fp-types';
 import type { BekreftAnnenpartsUttakEøsAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -48,15 +47,13 @@ export const UttakEøsFaktaForm = ({ annenForelderUttakEøs, kanOverstyre }: Pro
       : FaktaBegrunnelseTextField.initialValues(aksjonspunkterForPanel[0]),
   });
 
-  const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(
-    a => a.definisjon !== AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS,
-  );
+  const automatiskeAksjonspunkter = aksjonspunkterForPanel.filter(a => a.definisjon !== '6103');
 
   const erRedigerbart = !isReadOnly && (automatiskeAksjonspunkter.length > 0 || erOverstyrt);
 
   const bekreft = (begrunnelse: string) => {
     return submitCallback({
-      kode: erOverstyrt ? AksjonspunktKode.OVERSTYR_FAKTA_UTTAK_EØS : AksjonspunktKode.AVKLAR_UTTAK_I_EØS_FOR_ANNENPART,
+      kode: erOverstyrt ? '6103' : '5103',
       begrunnelse,
       perioder: perioder,
     });

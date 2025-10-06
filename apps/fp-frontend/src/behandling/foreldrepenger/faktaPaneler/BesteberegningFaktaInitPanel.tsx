@@ -5,19 +5,15 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { BesteberegningFaktaIndex } from '@navikt/fp-fakta-besteberegning';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { AksjonspunktKode, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [
-  AksjonspunktKode.KONTROLLER_AUTOMATISK_BESTEBEREGNING,
-  AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5048', '5062'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

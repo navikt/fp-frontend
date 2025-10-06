@@ -4,14 +4,13 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 import { Alert, Button, Heading, HStack, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
+  AksjonspunktKode,
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   FamilieHendelse,
-  foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon,
   PeriodeSoker,
   Personoversikt,
   Soknad,
@@ -26,9 +25,7 @@ import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import { UttakTidslinjeIndex } from './tidslinje/UttakTidslinjeIndex';
 
-const UTTAK_PANEL_AKSJONSPUNKT_KODER: Partial<
-  Record<foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon, string>
-> = {
+const UTTAK_PANEL_AKSJONSPUNKT_KODER: Partial<Record<AksjonspunktKode, string>> = {
   5067: 'UttakPanel.Aksjonspunkt.5067',
   5069: 'UttakPanel.Aksjonspunkt.5069',
   5072: 'UttakPanel.Aksjonspunkt.5072',
@@ -57,11 +54,7 @@ const UttakPeriodeNavn = {
 };
 
 const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspunkt[]): ReactElement[] => {
-  const filtrerteAksjonspunkter = aksjonspunkter.filter(
-    ap =>
-      ap.definisjon !== AksjonspunktKode.FASTSETT_UTTAKPERIODER &&
-      ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-  );
+  const filtrerteAksjonspunkter = aksjonspunkter.filter(ap => ap.definisjon !== '5071' && ap.definisjon !== '6008');
 
   const aksjonspunktTekster = [];
 
@@ -76,7 +69,7 @@ const hentApTekster = (uttaksresultat: Uttaksresultat, aksjonspunkter: Aksjonspu
     aksjonspunktTekster.push(<FormattedMessage key="generellTekst" id="UttakPanel.Aksjonspunkt.Generell" />);
   }
 
-  if (aksjonspunkter.length === 1 && aksjonspunkter[0]?.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER) {
+  if (aksjonspunkter.length === 1 && aksjonspunkter[0]?.definisjon === '6008') {
     if (aksjonspunkter[0].status !== 'UTFO') {
       aksjonspunktTekster.push(<FormattedMessage key="aksjonspunktTekst" id="UttakPanel.Overstyrt.KontrollerPaNytt" />);
     } else {
@@ -137,29 +130,27 @@ const validerPerioder = (perioder: PeriodeSoker[], stønadskonto: UttakStonadsko
 };
 
 const transformValues = (perioder: PeriodeSoker[], aksjonspunkter: Aksjonspunkt[]): UttakAp[] => {
-  const harOverstyringAp = aksjonspunkter.some(ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER);
+  const harOverstyringAp = aksjonspunkter.some(ap => ap.definisjon === '6008');
   const skalSendeInnOverstyringAp = aksjonspunkter.length === 0 || (aksjonspunkter.length === 1 && harOverstyringAp);
 
   const apKoder = skalSendeInnOverstyringAp
-    ? [AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER]
-    : aksjonspunkter
-        .filter(a => a.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER)
-        .map(ap => ap.definisjon);
+    ? ['6008']
+    : aksjonspunkter.filter(a => a.definisjon !== '6008').map(ap => ap.definisjon);
 
   return apKoder.map(ap => ({
     kode: validerApKodeOgHentApEnum(
       ap,
-      AksjonspunktKode.FASTSETT_UTTAKPERIODER,
-      AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-      AksjonspunktKode.TILKNYTTET_STORTINGET,
-      AksjonspunktKode.ANNENPART_EØS,
-      AksjonspunktKode.TETTE_SAKER,
-      AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE,
-      AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_FORDELING_AV_STØNADSPERIODEN,
-      AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_DØD,
-      AksjonspunktKode.KONTROLLER_OPPLYSNINGER_OM_SØKNADSFRIST,
-      AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_INNVILGET,
-      AksjonspunktKode.KONTROLLER_TILSTØTENDE_YTELSER_OPPHØRT,
+      '5071',
+      '6008',
+      '5072',
+      '5069',
+      '5067',
+      '5073',
+      '5075',
+      '5076',
+      '5077',
+      '5078',
+      '5079',
     ),
     perioder,
   }));
@@ -281,14 +272,10 @@ export const UttakProsessPanel = ({
   };
 
   const harÅpentAksjonspunkt = aksjonspunkterForPanel.some(erAksjonspunktÅpent);
-  const erTilknyttetStortinget = aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.TILKNYTTET_STORTINGET && harÅpentAksjonspunkt,
-  );
+  const erTilknyttetStortinget = aksjonspunkterForPanel.some(ap => ap.definisjon === '5072' && harÅpentAksjonspunkt);
 
   const erBekreftKnappDisablet = useMemo(() => {
-    if (
-      aksjonspunkterForPanel.some(ap => ap.definisjon === AksjonspunktKode.KONTROLLER_REALITETSBEHANDLING_ELLER_KLAGE)
-    ) {
+    if (aksjonspunkterForPanel.some(ap => ap.definisjon === '5073')) {
       return false;
     }
 
@@ -302,12 +289,10 @@ export const UttakProsessPanel = ({
     !isDirty || valgtPeriodeIndex !== undefined ? [] : validerPerioder(perioder, stønadskonto, intl);
 
   const harIngenEllerLukkedeAksjonspunkt =
-    aksjonspunkterForPanel.filter(ap => ap.definisjon !== AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER).length === 0 ||
+    aksjonspunkterForPanel.filter(ap => ap.definisjon !== '6008').length === 0 ||
     aksjonspunkterForPanel.some(ap => ap.toTrinnsBehandlingGodkjent === true && ap.status === 'UTFO');
 
-  const harOverstyrAp = aksjonspunkterForPanel.some(
-    ap => ap.definisjon === AksjonspunktKode.OVERSTYRING_AV_UTTAKPERIODER,
-  );
+  const harOverstyrAp = aksjonspunkterForPanel.some(ap => ap.definisjon === '6008');
 
   return (
     <VStack gap="space-24">

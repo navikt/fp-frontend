@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { cleanUrl, http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   alleKodeverkTilbakekreving,
@@ -16,8 +15,8 @@ import type {
   Behandling,
   BehandlingAppKontekst,
   BehandlingOppretting,
+  BehandlingTillatteOperasjoner,
   Fagsak,
-  tjenester_behandling_dto_BehandlingOperasjonerDto,
 } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -55,7 +54,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
   uuid: '',
   behandlingKanMerkesHaster: false,
-} satisfies tjenester_behandling_dto_BehandlingOperasjonerDto;
+} satisfies BehandlingTillatteOperasjoner;
 
 const ALLE_BEHANDLINGER = [
   {
@@ -101,24 +100,17 @@ const ALLE_BEHANDLINGER = [
       kontrollresultat: 'HOY',
     },
     risikoAksjonspunkt: {
-      definisjon: AksjonspunktKode.VURDER_FARESIGNALER,
+      definisjon: '5095',
       status: 'OPPR',
-
       toTrinnsBehandling: false,
-
       aksjonspunktType: '-',
       kanLoses: false,
       erAktivt: false,
     },
-
     gjeldendeVedtak: false,
-
     behandlingHenlagt: false,
-
     språkkode: '-',
-
     toTrinnsBehandling: false,
-
     behandlingÅrsaker: [],
     vilkår: [],
     links: [],

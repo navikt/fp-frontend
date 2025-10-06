@@ -1,3 +1,3 @@
-import type { foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType } from '@navikt/fp-types';
+import type { foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType } from './apiDtoGenerert';
 
 export type SivilstandType = foreldrepenger_behandlingslager_behandling_personopplysning_SivilstandType;

@@ -8,7 +8,6 @@ import { hasValidText, maxLength, minLength, required } from '@navikt/ft-form-va
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 import { dateFormat } from '@navikt/ft-utils';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AoIArbeidsforhold, ArbeidOgInntektsmelding, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import type { VurderArbeidsforholdPermisjonAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -96,7 +95,7 @@ export const PermisjonFaktaPanel = ({ arbeidOgInntekt, arbeidsgiverOpplysningerP
         formMethods={formMethods}
         onSubmit={values =>
           submitCallback({
-            kode: AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON,
+            kode: '5041',
             arbeidsforhold: values.arbeidsforhold.map((a, index) => ({
               internArbeidsforholdId: sorterteArbeidsforhold[index]?.internArbeidsforholdId,
               arbeidsgiverIdent: sorterteArbeidsforhold[index]?.arbeidsgiverIdent ?? '',

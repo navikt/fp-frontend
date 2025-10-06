@@ -18,7 +18,6 @@
   },
   "dependencies": {
     "@navikt/ds-react": "7.31.0",
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-utils": "workspace:*",
     "@navikt/ft-form-hooks": "9.2.1",

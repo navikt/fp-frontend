@@ -1,8 +1,7 @@
 import { useIntl } from 'react-intl';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FodselVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-fodsel';
-import type { VilkårType } from '@navikt/fp-types';
+import type { AksjonspunktKode, VilkårType } from '@navikt/fp-types';
 
 import {
   InngangsvilkarDefaultInitPanel,
@@ -11,9 +10,9 @@ import {
 import { OverstyringPanelDef } from '../../../felles/prosess/OverstyringPanelDef';
 import { useStandardProsessPanelProps } from '../../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5031'];
 
-const VILKAR_KODER = ['FP_VK_1', 'FP_VK_11'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['FP_VK_1', 'FP_VK_11'];
 
 export const FodselInngangsvilkarFpInitPanel = () => {
   const intl = useIntl();
@@ -26,11 +25,7 @@ export const FodselInngangsvilkarFpInitPanel = () => {
       vilkårKoder={VILKAR_KODER}
       inngangsvilkårPanelKode="FODSEL"
       hentInngangsvilkårPanelTekst={intl.formatMessage({ id: 'SRBVilkarForm.VurderSammeBarn' })}
-      overstyringApKode={
-        standardPanelProps.vilkårForPanel.some(v => v.vilkarType === 'FP_VK_1')
-          ? AksjonspunktKode.OVERSTYR_FODSELSVILKAR
-          : AksjonspunktKode.OVERSTYR_FODSELSVILKAR_FAR_MEDMOR
-      }
+      overstyringApKode={standardPanelProps.vilkårForPanel.some(v => v.vilkarType === 'FP_VK_1') ? '6003' : '6009'}
     >
       <OverstyringPanelDef
         vilkår={standardPanelProps.vilkårForPanel}

@@ -6,18 +6,13 @@ import { ReadOnlyField, RhfRadioGroup } from '@navikt/ft-form-hooks';
 import { required } from '@navikt/ft-form-validators';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type {
-  AdopsjonFamilieHendelse,
-  AlleKodeverk,
-  foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType,
-} from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, AlleKodeverk, FarSøkerType } from '@navikt/fp-types';
 import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
   readOnly: boolean;
-  farSokerType: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType | undefined;
+  farSokerType: FarSøkerType | undefined;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   adopsjon: AdopsjonFamilieHendelse;
@@ -44,7 +39,7 @@ export const MannAdoptererAleneFaktaForm = ({
   return (
     <FaktaKort
       label={intl.formatMessage({ id: 'MannAdoptererAleneFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter['5006']}
     >
       <VStack gap="space-16">
         <ReadOnlyField
@@ -78,6 +73,6 @@ MannAdoptererAleneFaktaForm.buildInitialValues = (adopsjon: AdopsjonFamilieHende
 });
 
 MannAdoptererAleneFaktaForm.transformValues = (mannAdoptererAlene: boolean): BekreftMannAdoptererAksjonspunktAp => ({
-  kode: AksjonspunktKode.OM_SOKER_ER_MANN_SOM_ADOPTERER_ALENE,
+  kode: '5006',
   mannAdoptererAlene,
 });

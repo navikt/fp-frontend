@@ -6,7 +6,6 @@ import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -65,14 +64,12 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
   });
 
   const begrunnelseVerdi = formMethods.watch('begrunnelse');
-  const erForutgåendeAksjonspunkt = aksjonspunkt.definisjon === AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR;
+  const erForutgåendeAksjonspunkt = aksjonspunkt.definisjon === '5102';
 
   const bekreft = ({ vurdering, avslagskode, medlemFom, opphørFom, begrunnelse }: VurderMedlemskapFormValues) => {
     setSubmitting(true);
     return submitCallback({
-      kode: erForutgåendeAksjonspunkt
-        ? AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR
-        : AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
+      kode: erForutgåendeAksjonspunkt ? '5102' : '5101',
       begrunnelse,
       avslagskode: vurdering === MedlemskapVurdering.OPPFYLT ? undefined : avslagskode,
       opphørFom: vurdering === MedlemskapVurdering.DELVIS_OPPFYLT ? opphørFom : undefined,

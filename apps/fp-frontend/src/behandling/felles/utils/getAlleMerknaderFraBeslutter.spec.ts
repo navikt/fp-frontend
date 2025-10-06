@@ -1,4 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 import { getAlleMerknaderFraBeslutter } from './getAlleMerknaderFraBeslutter';
@@ -7,7 +6,7 @@ describe('getAlleMerknaderFraBeslutter', () => {
   const aksjonspunkter: Aksjonspunkt[] = [
     {
       status: 'OPPR',
-      definisjon: AksjonspunktKode.AVKLAR_OM_STONAD_GJELDER_SAMME_BARN,
+      definisjon: '5031',
       kanLoses: true,
       toTrinnsBehandling: true,
       toTrinnsBehandlingGodkjent: false,

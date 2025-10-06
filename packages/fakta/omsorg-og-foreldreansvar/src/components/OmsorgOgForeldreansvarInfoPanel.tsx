@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { HGrid, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { AdopsjonFamilieHendelse, Personoversikt, RelatertTilgrensedYtelse, Soknad } from '@navikt/fp-types';
 import { harAksjonspunkt, usePanelDataContext } from '@navikt/fp-utils';
 
@@ -27,10 +26,7 @@ export const OmsorgOgForeldreansvarInfoPanel = ({
 }: Props) => {
   const { aksjonspunkterForPanel, harÅpentAksjonspunkt, isReadOnly } = usePanelDataContext();
 
-  const harForeldreansvarAP = harAksjonspunkt(
-    AksjonspunktKode.AVKLAR_VILKAR_FOR_FORELDREANSVAR,
-    aksjonspunkterForPanel,
-  );
+  const harForeldreansvarAP = harAksjonspunkt('5054', aksjonspunkterForPanel);
 
   return (
     <VStack gap="space-16">

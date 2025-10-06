@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 import { HGrid, VStack } from '@navikt/ds-react';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Fødsel } from '@navikt/fp-types';
 import type { DokumentLinkReferanse } from '@navikt/fp-ui-komponenter';
 import { usePanelDataContext } from '@navikt/fp-utils';
@@ -14,8 +13,6 @@ import { FaktaFraFReg } from './fakta/FaktaFraFReg';
 import { FaktaFraSøknad } from './fakta/FaktaFraSøknad';
 import { Situasjon } from './fakta/Situasjon';
 import { OverstyringPanel } from './overstyring/OverstyringPanel';
-
-const { SJEKK_TERMINBEKREFTELSE, SJEKK_MANGLENDE_FØDSEL, OVERSTYRING_AV_FAKTA_OM_FØDSEL } = AksjonspunktKode;
 
 interface Props {
   fødsel: Fødsel;
@@ -30,9 +27,9 @@ interface Props {
 export const FodselInfoPanel = ({ fødsel, terminbekreftelseDokument }: Props) => {
   const { aksjonspunkterForPanel } = usePanelDataContext();
 
-  const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_TERMINBEKREFTELSE);
-  const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === SJEKK_MANGLENDE_FØDSEL);
-  const overstyringAP = aksjonspunkterForPanel.find(ap => ap.definisjon === OVERSTYRING_AV_FAKTA_OM_FØDSEL);
+  const terminbekreftelseAp = aksjonspunkterForPanel.find(ap => ap.definisjon === '5001');
+  const manglendeFødselAp = aksjonspunkterForPanel.find(ap => ap.definisjon === '5027');
+  const overstyringAP = aksjonspunkterForPanel.find(ap => ap.definisjon === '6019');
 
   return (
     <VStack gap="space-16">

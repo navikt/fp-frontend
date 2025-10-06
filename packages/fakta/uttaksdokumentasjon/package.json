@@ -21,8 +21,6 @@
   "dependencies": {
     "@navikt/aksel-icons": "7.31.0",
     "@navikt/ds-react": "7.31.0",
-    "@navikt/fp-fakta-felles": "workspace:*",
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-konstanter": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*",

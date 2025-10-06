@@ -4,17 +4,21 @@ import { useIntl } from 'react-intl';
 import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { TilkjentYtelseProsessIndex } from '@navikt/fp-prosess-tilkjent-ytelse';
-import type { ArbeidsgiverOpplysningerPerId, Personoversikt, VilkarUtfallType } from '@navikt/fp-types';
+import type {
+  AksjonspunktKode,
+  ArbeidsgiverOpplysningerPerId,
+  Personoversikt,
+  VilkarUtfallType,
+} from '@navikt/fp-types';
 
 import { BehandlingRel, useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { ProsessDefaultInitPanel } from '../../felles/prosess/ProsessDefaultInitPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_TILBAKETREKK];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5090'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

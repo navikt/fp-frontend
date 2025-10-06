@@ -5,9 +5,8 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { PermisjonFaktaIndex } from '@navikt/fp-fakta-permisjon';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
-import type { ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
+import type { AksjonspunktKode, ArbeidsgiverOpplysningerPerId } from '@navikt/fp-types';
 import { harAksjonspunkt } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -15,7 +14,7 @@ import { BehandlingDataContext } from '../../felles/context/BehandlingDataContex
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER = [AksjonspunktKode.VURDER_ARBEIDSFORHOLD_PERMISJON];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5041'];
 
 interface Props {
   arbeidsgiverOpplysningerPerId: ArbeidsgiverOpplysningerPerId;

@@ -1,6 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-
 import type { AksjonspunktTilBekreftelse } from '../AksjonspunktTilBekreftelse';
 
-export type VurderArbeidsforholdInntektsmeldingAp =
-  AksjonspunktTilBekreftelse<AksjonspunktKode.VURDER_ARBEIDSFORHOLD_INNTEKTSMELDING>;
+export type VurderArbeidsforholdInntektsmeldingAp = AksjonspunktTilBekreftelse<'5085'>;

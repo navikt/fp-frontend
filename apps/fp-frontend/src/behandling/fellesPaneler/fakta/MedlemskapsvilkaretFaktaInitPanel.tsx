@@ -5,18 +5,15 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { useQuery } from '@tanstack/react-query';
 
 import { MedlemskapFaktaIndex } from '@navikt/fp-fakta-medlemskap';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { FaktaPanelCode } from '@navikt/fp-konstanter';
+import type { AksjonspunktKode } from '@navikt/fp-types';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
 import { BehandlingDataContext } from '../../felles/context/BehandlingDataContext';
 import { FaktaDefaultInitPanel } from '../../felles/fakta/FaktaDefaultInitPanel';
 import { useStandardFaktaPanelProps } from '../../felles/fakta/useStandardFaktaPanelProps';
 
-const AKSJONSPUNKT_KODER: AksjonspunktKode[] = [
-  AksjonspunktKode.VURDER_MEDLEMSKAPSVILKÅRET,
-  AksjonspunktKode.VURDER_FORUTGÅENDE_MEDLEMSKAPSVILKÅR,
-];
+const AKSJONSPUNKT_KODER: AksjonspunktKode[] = ['5101', '5102'];
 
 export const MedlemskapsvilkaretFaktaInitPanel = () => {
   const intl = useIntl();

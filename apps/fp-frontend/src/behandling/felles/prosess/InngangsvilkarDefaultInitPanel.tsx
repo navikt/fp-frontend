@@ -1,7 +1,6 @@
 import { type ReactElement, use, useEffect, useState } from 'react';
 
-import { type OverstyringAksjonspunkter } from '@navikt/fp-kodeverk';
-import type { VilkårType } from '@navikt/fp-types';
+import type { OverstyringAksjonspunkter, VilkårType } from '@navikt/fp-types';
 import { MellomlagretFormDataProvider, PanelDataProvider, PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { BehandlingDataContext } from '../context/BehandlingDataContext';

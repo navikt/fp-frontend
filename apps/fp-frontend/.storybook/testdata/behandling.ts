@@ -1,4 +1,3 @@
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 export const behandling: Behandling = {
@@ -265,7 +264,7 @@ export const behandling: Behandling = {
   ],
   aksjonspunkt: [
     {
-      definisjon: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
+      definisjon: '5038',
       status: 'OPPR',
       vilkarType: 'FP_VK_41',
       toTrinnsBehandling: true,

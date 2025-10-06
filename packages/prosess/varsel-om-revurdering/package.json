@@ -19,7 +19,6 @@
   },
   "dependencies": {
     "@navikt/ds-react": "7.31.0",
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",
     "@navikt/fp-prosess-felles": "workspace:*",
     "@navikt/fp-types": "workspace:*",

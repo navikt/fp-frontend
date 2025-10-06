@@ -3,7 +3,6 @@ import { FormattedMessage } from 'react-intl';
 
 import { BodyShort, Heading, Label, VStack } from '@navikt/ds-react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import { type AlleKodeverk, type Behandlingsresultat, isKlageOmgjort, type KlageVurdering } from '@navikt/fp-types';
 import type { ForeslaVedtakAp, ForeslaVedtakManueltAp } from '@navikt/fp-types-avklar-aksjonspunkter';
@@ -47,7 +46,7 @@ export const VedtakKlageForm = ({ klageVurdering, previewVedtakCallback, behandl
 
     const behandlingAksjonspunktKodes = aksjonspunkterForPanel.filter(erAksjonspunktÅpent).map(ap => ap.definisjon);
     const input = behandlingAksjonspunktKodes.map(apCode => ({
-      kode: validerApKodeOgHentApEnum(apCode, AksjonspunktKode.FORESLA_VEDTAK, AksjonspunktKode.FORESLA_VEDTAK_MANUELT),
+      kode: validerApKodeOgHentApEnum(apCode, '5015', '5028'),
     }));
 
     void submitCallback(input).then(() => setIsSubmitting(false));

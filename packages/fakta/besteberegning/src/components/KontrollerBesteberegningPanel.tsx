@@ -7,7 +7,6 @@ import { RhfCheckbox, RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { BesteberegningAP, ManuellKontrollBesteberegningAP } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -86,7 +85,7 @@ const buildInitialValues = (aksjonspunkt: Aksjonspunkt): FormValues => {
 };
 
 const transformValues = (values: FormValues): ManuellKontrollBesteberegningAP => ({
-  kode: AksjonspunktKode.MANUELL_KONTROLL_AV_BESTEBEREGNING,
+  kode: '5062',
   begrunnelse: values.begrunnelse,
   besteberegningErKorrekt: !!values.besteberegningErKorrektValg,
 });

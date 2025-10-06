@@ -10,8 +10,7 @@ import dayjs from 'dayjs';
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { AdopsjonFamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, SøknadAdopsjon } from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
@@ -30,7 +29,7 @@ interface Props {
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
   adopsjon: AdopsjonFamilieHendelse;
-  soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
+  soknad: SøknadAdopsjon;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -55,7 +54,7 @@ export const DokumentasjonFaktaForm = ({
   return (
     <FaktaKort
       label={intl.formatMessage({ id: 'DokumentasjonFaktaForm.ApplicationInformation' })}
-      merknaderFraBeslutter={alleMerknaderFraBeslutter[AksjonspunktKode.ADOPSJONSDOKUMENTAJON]}
+      merknaderFraBeslutter={alleMerknaderFraBeslutter['5004']}
     >
       <VStack gap="space-16">
         <RhfDatepicker
@@ -86,7 +85,7 @@ export const DokumentasjonFaktaForm = ({
           />
         )}
         {fødselsdatoer.map((id, i) => (
-          <HStack gap="space-16" key={`div-${AksjonspunktKode.ADOPSJONSDOKUMENTAJON}-${id}`}>
+          <HStack gap="space-16" key={`div-${'5004'}-${id}`}>
             {fødselsdatoer.length > 1 && (
               <Label size="small" className={i === 0 ? styles['topMarginFirstRow'] : styles['topMargin']}>
                 <FormattedMessage id="DokumentasjonFaktaForm.BarnNr" values={{ nummer: i + 1 }} />
@@ -151,14 +150,14 @@ DokumentasjonFaktaForm.initialValues = (adopsjon: AdopsjonFamilieHendelse): Form
 });
 
 DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumentertDatoAksjonspunktAp => ({
-  kode: AksjonspunktKode.ADOPSJONSDOKUMENTAJON,
+  kode: '5004',
   // Desse to variablane skal alltid ha verdi - fix i typescript og fjern ''
   omsorgsovertakelseDato: values.omsorgsovertakelseDato ?? '',
   fodselsdatoer: values.fodselsdatoer ?? '',
 });
 
 const isAdopsjonFodelsedatoerEdited =
-  (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, adopsjon: AdopsjonFamilieHendelse) =>
+  (soknad: SøknadAdopsjon, adopsjon: AdopsjonFamilieHendelse) =>
   (id: string): boolean => {
     const editedStatus = diff(soknad.adopsjonFodelsedatoer, adopsjon.fødselsdatoer);
     // @ts-expect-error -- usikker hva denne går ut på

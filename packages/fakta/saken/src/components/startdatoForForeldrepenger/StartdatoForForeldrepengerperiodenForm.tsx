@@ -9,7 +9,6 @@ import { hasValidDate, hasValidText, maxLength, minLength, required } from '@nav
 import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import dayjs from 'dayjs';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, Soknad } from '@navikt/fp-types';
 import type { OverstyringAvklarStartdatoForPeriodenAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { notEmpty, useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -35,7 +34,7 @@ const buildInitialValues = (soknad: Soknad, aksjonspunkt?: Aksjonspunkt): FormVa
 });
 
 const transformValues = (soknad: Soknad, values: FormValues): OverstyringAvklarStartdatoForPeriodenAp => ({
-  kode: AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO,
+  kode: '6045',
   opprinneligDato: soknad.oppgittFordeling?.startDatoForPermisjon ?? undefined,
   startdatoFraSoknad: notEmpty(values.startdatoFraSoknad),
   begrunnelse: values.begrunnelse,
@@ -103,9 +102,7 @@ export const StartdatoForForeldrepengerperiodenForm = ({ aksjonspunkt, soknad }:
           <AksjonspunktBox
             className={styles['aksjonspunktMargin']}
             erAksjonspunktApent={false}
-            erIkkeGodkjentAvBeslutter={
-              !!alleMerknaderFraBeslutter[AksjonspunktKode.OVERSTYR_AVKLAR_STARTDATO]?.notAccepted
-            }
+            erIkkeGodkjentAvBeslutter={!!alleMerknaderFraBeslutter['6045']?.notAccepted}
           >
             <VStack gap="space-16">
               <RhfDatepicker

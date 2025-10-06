@@ -3,7 +3,6 @@ import type { ComponentProps } from 'react';
 import { TIDENES_ENDE } from '@navikt/ft-utils';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import {
   type Aksjonspunkt,
@@ -117,7 +116,7 @@ export const HarAksjonspunktForAvklarAleneomsorg: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+        definisjon: '5060',
         status: 'OPPR',
         kanLoses: true,
       },
@@ -131,7 +130,7 @@ export const HarAksjonspunktForAvklarAleneomsorgMedFlereBarn: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.MANUELL_KONTROLL_AV_OM_BRUKER_HAR_ALENEOMSORG,
+        definisjon: '5060',
         status: 'OPPR',
         kanLoses: true,
       },
@@ -158,7 +157,7 @@ export const HarAksjonspunktForAvklarAnnenForelderRett: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+        definisjon: '5086',
         status: 'OPPR',
         kanLoses: true,
       },
@@ -191,7 +190,7 @@ export const AvklarAnnenForelderRettBareFarRett: Story = {
   args: {
     aksjonspunkterForPanel: [
       {
-        definisjon: AksjonspunktKode.AVKLAR_ANNEN_FORELDER_RETT,
+        definisjon: '5086',
         status: 'UTFO',
         begrunnelse: 'Mor har ikke rett og er uføretrygded i pesys.',
         kanLoses: false,

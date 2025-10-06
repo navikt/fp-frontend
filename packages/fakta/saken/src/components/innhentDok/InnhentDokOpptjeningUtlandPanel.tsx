@@ -8,7 +8,6 @@ import { AksjonspunktBox } from '@navikt/ft-ui-komponenter';
 import { BTag } from '@navikt/ft-utils';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 import type { MerkOpptjeningUtlandAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -98,6 +97,6 @@ export const InnhentDokOpptjeningUtlandPanel = ({ aksjonspunkt, dokStatus }: Pro
 };
 
 const transformValues = (values: FormValues): MerkOpptjeningUtlandAp => ({
-  kode: AksjonspunktKode.AUTOMATISK_MARKERING_AV_UTENLANDSSAK,
+  kode: '5068',
   ...values,
 });

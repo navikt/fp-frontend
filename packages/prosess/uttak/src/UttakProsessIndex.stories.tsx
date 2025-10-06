@@ -3,7 +3,6 @@ import { type ComponentProps } from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 import { action } from 'storybook/actions';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type {
   Aksjonspunkt,
@@ -21,7 +20,7 @@ import { UttakProsessIndex } from './UttakProsessIndex';
 
 const åpentAksjonspunkt: Aksjonspunkt[] = [
   {
-    definisjon: AksjonspunktKode.FASTSETT_UTTAKPERIODER,
+    definisjon: '5071',
     status: 'OPPR',
     kanLoses: true,
     toTrinnsBehandling: true,

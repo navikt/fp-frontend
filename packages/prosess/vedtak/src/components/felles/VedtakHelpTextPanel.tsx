@@ -2,21 +2,20 @@ import { FormattedMessage, type IntlShape, useIntl } from 'react-intl';
 
 import { Alert, BodyShort } from '@navikt/ds-react';
 
-import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt } from '@navikt/fp-types';
 
 const findHelpTexts = (intl: IntlShape, aksjonspunkter: Aksjonspunkt[]): string[] => {
   const helpTexts = [];
-  if (aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERE_ANNEN_YTELSE)) {
+  if (aksjonspunkter.some(a => a.definisjon === '5033')) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderAnnenYtelse' }));
   }
-  if (aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERE_DOKUMENT)) {
+  if (aksjonspunkter.some(a => a.definisjon === '5034')) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderDokument' }));
   }
-  if (aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.VURDERE_INNTEKTSMELDING_KLAGE)) {
+  if (aksjonspunkter.some(a => a.definisjon === '5003')) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.VurderInntektsmeldingKlage' }));
   }
-  if (aksjonspunkter.some(a => a.definisjon === AksjonspunktKode.KONTROLLER_REVURDERINGSBEHANDLING_VARSEL_VED_UGUNST)) {
+  if (aksjonspunkter.some(a => a.definisjon === '5055')) {
     helpTexts.push(intl.formatMessage({ id: 'VedtakForm.KontrollerRevurderingsbehandling' }));
   }
 
