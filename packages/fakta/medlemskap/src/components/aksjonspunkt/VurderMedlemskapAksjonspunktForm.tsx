@@ -6,7 +6,7 @@ import { Button, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 
 import { FaktaBegrunnelseTextField } from '@navikt/fp-fakta-felles';
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Aksjonspunkt, ManuellBehandlingResultat } from '@navikt/fp-types';
 import type { VurderForutgaendeMedlemskapAp, VurderMedlemskapAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { useMellomlagretFormData, usePanelDataContext } from '@navikt/fp-utils';
@@ -79,9 +79,9 @@ export const VurderMedlemskapAksjonspunktForm = ({ aksjonspunkt, manuellBehandli
       medlemFom: avslagskode === SØKER_INNFLYTTET_FOR_SENT_KODE ? medlemFom : undefined,
     });
   };
-  const avslagsårsaker = alleKodeverk['Avslagsårsak'][
-    erForutgåendeAksjonspunkt ? VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE : VilkarType.MEDLEMSKAPSVILKARET
-  ].sort((k1, k2) => k1.navn.localeCompare(k2.navn));
+  const avslagsårsaker = alleKodeverk['Avslagsårsak'][erForutgåendeAksjonspunkt ? 'FP_VK_2_F' : 'FP_VK_2'].sort(
+    (k1, k2) => k1.navn.localeCompare(k2.navn),
+  );
 
   return (
     <ConditionalWrapper isReadOnly={isReadOnly}>

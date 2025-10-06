@@ -1,26 +1,23 @@
-import {
-  type BehandlingResultatTypeTilbakekreving,
-  ForeldelseVurderingType,
-  type HendelseType,
-  type HendelseUnderType,
-  type SærligGrunn,
-  type SkjermlenkeTypeTilbakekreving,
-  TilbakekrevingVidereBehandling,
-  VedtakResultatType,
-  type VenteArsakType,
-  type VilkårResultat,
-  type VurderÅrsak,
-} from '@navikt/fp-kodeverk';
-
 import type { Aktsomhet } from './aktsomhet';
 import type { BehandlingArsakType } from './behandlingArsakType';
+import type { BehandlingResultatTypeTilbakekreving } from './behandlingResultatTypeTilbakekreving';
 import type { BehandlingType } from './behandlingType';
+import type { ForeldelseVurderingType } from './foreldelseVurderingType';
+import type { HendelseType } from './hendelseType';
+import type { HendelseUnderType } from './hendelseUnderType';
 import type { HistorikkAktor } from './historikkAktor';
+import type { SærligGrunn } from './særligGrunn';
+import type { SkjermlenkeTypeTilbakekreving } from './skjermlenkeTypeTilbakekreving';
+import type { TilbakekrevingVidereBehandling } from './tilbakekrevingVidereBehandling';
+import type { VedtakResultatType } from './vedtakResultatType';
+import type { VenteArsakType } from './venteArsakType';
 import type { VergeType } from './vergeTsType';
+import type { VilkårResultat } from './vilkårResultat';
+import type { VurderÅrsak } from './vurderÅrsak';
 
 //TODO Ein del av desse kodeverk-filene er delt mellom fpsak og tilbake. Mange av dei har ulike verdiar og bør delast opp i fleire filer
 
-//Mapping mellom KodeverkTypeTilbakekreving og enums/union-types med verdier
+//Mapping mellom KodeverkTypeTilbakekreving og union-types med verdier
 type KodeverkEnumMap = {
   BehandlingType: BehandlingType;
   BehandlingÅrsakType: BehandlingArsakType;
@@ -34,10 +31,10 @@ type KodeverkEnumMap = {
   VedtakResultatType: VedtakResultatType;
   HendelseType: HendelseType;
   SærligGrunn: SærligGrunn;
-  ForeldelseVurderingType: ForeldelseVurderingType;
   VilkårResultat: VilkårResultat;
   HendelseUnderType: HendelseUnderType;
   VidereBehandling: TilbakekrevingVidereBehandling;
+  ForeldelseVurderingType: ForeldelseVurderingType;
 };
 
 export type TilbakekrevingKodeverkType = keyof KodeverkEnumMap;

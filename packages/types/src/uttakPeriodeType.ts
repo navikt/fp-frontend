@@ -1,0 +1,3 @@
+import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType } from './apiDtoGenerert';
+
+export type UttakPeriodeType = foreldrepenger_behandlingslager_behandling_ytelsefordeling_periode_UttakPeriodeType;

@@ -1,4 +1,4 @@
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type { Behandling } from '@navikt/fp-types';
 
 export const behandling: Behandling = {
@@ -49,43 +49,43 @@ export const behandling: Behandling = {
   ],
   vilkår: [
     {
-      vilkarType: VilkarType.SOKERSOPPLYSNINGSPLIKT,
-      vilkarStatus: VilkarUtfallType.OPPFYLT,
+      vilkarType: 'FP_VK_34',
+      vilkarStatus: 'OPPFYLT',
 
       lovReferanse: '§§ 21-3',
       overstyrbar: true,
     },
     {
-      vilkarType: VilkarType.MEDLEMSKAPSVILKARET,
-      vilkarStatus: VilkarUtfallType.OPPFYLT,
+      vilkarType: 'FP_VK_2',
+      vilkarStatus: 'OPPFYLT',
 
       lovReferanse: '§ 14-2',
       overstyrbar: true,
     },
     {
-      vilkarType: VilkarType.FODSELSVILKARET_MOR,
-      vilkarStatus: VilkarUtfallType.OPPFYLT,
+      vilkarType: 'FP_VK_1',
+      vilkarStatus: 'OPPFYLT',
 
       lovReferanse: '§ 14-5, 1. ledd',
       overstyrbar: true,
     },
     {
-      vilkarType: VilkarType.OPPTJENINGSVILKARET,
-      vilkarStatus: VilkarUtfallType.OPPFYLT,
+      vilkarType: 'FP_VK_23',
+      vilkarStatus: 'OPPFYLT',
 
       lovReferanse: '§ 14-6',
       overstyrbar: true,
     },
     {
-      vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
-      vilkarStatus: VilkarUtfallType.IKKE_VURDERT,
+      vilkarType: 'FP_VK_41',
+      vilkarStatus: 'IKKE_VURDERT',
 
       lovReferanse: '§ 14-7',
       overstyrbar: true,
     },
     {
-      vilkarType: VilkarType.OPPTJENINGSPERIODE,
-      vilkarStatus: VilkarUtfallType.OPPFYLT,
+      vilkarType: 'FP_VK_21',
+      vilkarStatus: 'OPPFYLT',
 
       lovReferanse: '§ 14-6 og 14-10',
       overstyrbar: true,
@@ -267,7 +267,7 @@ export const behandling: Behandling = {
     {
       definisjon: AksjonspunktKode.FASTSETT_BEREGNINGSGRUNNLAG_ARBEIDSTAKER_FRILANS,
       status: 'OPPR',
-      vilkarType: VilkarType.BEREGNINGSGRUNNLAGVILKARET,
+      vilkarType: 'FP_VK_41',
       toTrinnsBehandling: true,
       aksjonspunktType: 'MANU',
       kanLoses: true,

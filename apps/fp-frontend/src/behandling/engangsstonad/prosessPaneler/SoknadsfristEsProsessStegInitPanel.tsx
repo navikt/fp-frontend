@@ -3,9 +3,10 @@ import { useIntl } from 'react-intl';
 
 import { useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { SoknadsfristVilkarProsessIndex } from '@navikt/fp-prosess-vilkar-soknadsfrist';
+import type { VilkårType } from '@navikt/fp-types';
 import { PanelOverstyringProvider } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../../../data/behandlingApi';
@@ -17,7 +18,7 @@ import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardPr
 
 const AKSJONSPUNKT_KODER = [AksjonspunktKode.SOKNADSFRISTVILKARET, AksjonspunktKode.OVERSTYR_SOKNADSFRISTVILKAR];
 
-const VILKAR_KODER = [VilkarType.SOKNADFRISTVILKARET];
+const VILKAR_KODER = ['FP_VK_3'] satisfies VilkårType[];
 
 export const SoknadsfristEsProsessStegInitPanel = () => {
   const intl = useIntl();

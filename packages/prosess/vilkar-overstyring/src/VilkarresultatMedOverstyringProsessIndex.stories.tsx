@@ -2,7 +2,7 @@ import { type ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, VilkarType, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import {
   alleKodeverk,
   type PanelDataArgs,
@@ -43,7 +43,7 @@ const meta = {
     behandling: defaultBehandling,
     kanOverstyreAccess: { isEnabled: true, employeeHasAccess: true },
     avslagsårsaker: defaultAvslagsårsaker,
-    status: VilkarUtfallType.OPPFYLT,
+    status: 'OPPFYLT',
     lovReferanse: '§ 1-2 3. ledd',
   },
   render: props => {
@@ -67,7 +67,7 @@ export const OverstyringspanelForMedlemskap: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
-    avslagsårsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET],
+    avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2'],
     behandling: {
       ...defaultBehandling,
       type: 'BT-004',
@@ -79,7 +79,7 @@ export const OverstyringErUtførtForMedlemskap: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR,
-    avslagsårsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET],
+    avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2'],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -91,7 +91,7 @@ export const OverstyringErUtførtForMedlemskap: Story = {
         },
       ],
     } as Behandling,
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    status: 'IKKE_OPPFYLT',
     medlemskap: {
       manuellBehandlingResultat: {
         avslagskode: '1025',
@@ -107,7 +107,7 @@ export const OverstyringForForutgåendeMedlemskap: Story = {
       fagsakYtelseType: 'ES',
     } as Fagsak,
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
-    avslagsårsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
+    avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2_F'],
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
   },
 };
@@ -119,7 +119,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
     } as Fagsak,
     panelTekstKode: 'Inngangsvilkar.Medlemskapsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_MEDLEMSKAPSVILKAR_FORUTGAENDE,
-    avslagsårsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKARET_FORUTGAENDE],
+    avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2_F'],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -131,7 +131,7 @@ export const OverstyringErUtførtForForutgåendeMedlemskap: Story = {
         },
       ],
     } as Behandling,
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    status: 'IKKE_OPPFYLT',
     medlemskap: {
       manuellBehandlingResultat: {
         avslagskode: '1052',
@@ -145,7 +145,7 @@ export const OverstyringspanelForOpptjening: Story = {
   args: {
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET,
-    avslagsårsaker: alleKodeverk['Avslagsårsak'][VilkarType.OPPTJENINGSVILKARET],
+    avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_23'],
   },
 };
 
@@ -165,7 +165,7 @@ export const OverstyrtAksjonspunktSomErBekreftet: Story = {
         } as Aksjonspunkt,
       ],
     } as Behandling,
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    status: 'IKKE_OPPFYLT',
     panelTekstKode: 'Inngangsvilkar.Fodselsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYR_FODSELSVILKAR,
   },
@@ -180,7 +180,7 @@ export const OverstyringAvOpptjeningsvilkåretSomIkkeErVurdert: Story = {
         type: 'OPPHØR',
       },
     } as Behandling,
-    status: VilkarUtfallType.IKKE_VURDERT,
+    status: 'IKKE_VURDERT',
     panelTekstKode: 'Inngangsvilkar.Opptjeningsvilkaret',
     overstyringApKode: AksjonspunktKode.OVERSTYRING_AV_OPPTJENINGSVILKARET,
   },
@@ -190,7 +190,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
   args: {
     panelTekstKode: 'Behandlingspunkt.FortsattMedlemskap',
     overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-    avslagsårsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
+    avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2_L'],
     behandling: {
       ...defaultBehandling,
       aksjonspunkt: [
@@ -202,7 +202,7 @@ export const LøpendeMedlemskapSomErOverstyrtVisesBareIReadOnlyMode: Story = {
         },
       ],
     } as Behandling,
-    status: VilkarUtfallType.OPPFYLT,
+    status: 'OPPFYLT',
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     isReadOnly: true,
   },
@@ -212,8 +212,8 @@ export const LøpendeMedlemskapVisningSomIkkeErOverstyrt: Story = {
   args: {
     panelTekstKode: 'Behandlingspunkt.FortsattMedlemskap',
     overstyringApKode: AksjonspunktKode.OVERSTYR_LØPENDE_MEDLEMSKAPSVILKAR,
-    avslagsårsaker: alleKodeverk['Avslagsårsak'][VilkarType.MEDLEMSKAPSVILKÅRET_LØPENDE],
-    status: VilkarUtfallType.IKKE_OPPFYLT,
+    avslagsårsaker: alleKodeverk['Avslagsårsak']['FP_VK_2_L'],
+    status: 'IKKE_OPPFYLT',
     kanOverstyreAccess: { isEnabled: false, employeeHasAccess: false },
     isReadOnly: true,
   },

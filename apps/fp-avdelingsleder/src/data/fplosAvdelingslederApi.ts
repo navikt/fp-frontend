@@ -3,7 +3,7 @@ import ky from 'ky';
 import pLimit from 'p-limit';
 
 import type { Oppgave, SaksbehandlerProfil } from '@navikt/fp-los-felles';
-import type { AlleKodeverkLos } from '@navikt/fp-types';
+import type { AlleKodeverkLos, AndreKriterierType } from '@navikt/fp-types';
 
 import type { Avdeling } from '../typer/avdelingTsType';
 import type { BehandlingVentefrist } from '../typer/behandlingVentefristTsType';
@@ -273,7 +273,7 @@ export const lagreSakslisteBehandlingstype = (
 export const lagreSakslisteAndreKriterier = (
   sakslisteId: number,
   avdelingEnhet: string,
-  andreKriterierType: string,
+  andreKriterierType: AndreKriterierType,
   checked: boolean,
   inkluder: boolean,
 ) =>

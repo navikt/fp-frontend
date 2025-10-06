@@ -4,7 +4,6 @@ import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 import { action } from 'storybook/actions';
 
-import { OppgaveBehandlingStatus } from '@navikt/fp-kodeverk';
 import { type Oppgave } from '@navikt/fp-los-felles';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
@@ -44,7 +43,7 @@ export const Default: Story = {
               personnummer: '334342323',
               navn: 'Espen Utvikler',
               saksnummer: '13232323',
-              oppgaveBehandlingStatus: OppgaveBehandlingStatus.UNDER_ARBEID,
+              oppgaveBehandlingStatus: 'UNDER_ARBEID',
               reservasjonStatus: {
                 erReservert: true,
                 reservertAvNavn: 'Ola Nordmann',

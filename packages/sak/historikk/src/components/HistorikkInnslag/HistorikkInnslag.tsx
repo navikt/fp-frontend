@@ -5,8 +5,13 @@ import { BodyLong, BodyShort, Box, type BoxNewProps, Button, Detail, HStack, VSt
 import { dateTimeFormat } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { SkjermlenkeType } from '@navikt/fp-kodeverk';
-import type { AlleKodeverk, AlleKodeverkTilbakekreving, HistorikkAktor, Historikkinnslag } from '@navikt/fp-types';
+import type {
+  AlleKodeverk,
+  AlleKodeverkTilbakekreving,
+  HistorikkAktor,
+  Historikkinnslag,
+  SkjermlenkeType,
+} from '@navikt/fp-types';
 
 import { Avatar } from './Avatar';
 import { HistorikkDokumentLenke } from './HistorikkDokumentLenke';
@@ -63,7 +68,7 @@ export const HistorikkInnslag = ({
 
           {skjermlenke && (
             <Skjermlenke
-              skjermlenke={skjermlenke as SkjermlenkeType}
+              skjermlenke={skjermlenke}
               behandlingLocation={behandlingLocation}
               alleKodeverk={alleKodeverk}
               createLocationForSkjermlenke={createLocationForSkjermlenke}

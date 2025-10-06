@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react';
 
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { AksjonspunktKode, UtsettelseÅrsak, UttakArbeidType, UttakPeriodeType, VilkarType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { type PanelDataArgs, withMellomlagretFormData, withPanelData } from '@navikt/fp-storybook-utils';
 import type { Aksjonspunkt, ArbeidsgiverOpplysningerPerId, Fagsak } from '@navikt/fp-types';
 
@@ -26,7 +26,7 @@ const aksjonspunktDefault = {
   toTrinnsBehandling: false,
 
   aksjonspunktType: 'AUTO',
-  vilkarType: VilkarType.OMSORGSVILKARET,
+  vilkarType: 'FP_VK_5',
   erAktivt: true,
 } satisfies Aksjonspunkt;
 
@@ -40,10 +40,10 @@ const meta = {
     faktaArbeidsforhold: [
       {
         arbeidsgiverReferanse: '910909088',
-        arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+        arbeidType: 'ORDINÆRT_ARBEID',
       },
       {
-        arbeidType: UttakArbeidType.SELVSTENDIG_NÆRINGSDRIVENDE,
+        arbeidType: 'SELVSTENDIG_NÆRINGSDRIVENDE',
         arbeidsgiverReferanse: 'null',
       },
     ],
@@ -64,7 +64,7 @@ export const VisUttaksperiodeUtenAksjonspunkt: Story = {
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         flerbarnsdager: false,
         periodeKilde: 'SØKNAD',
       },
@@ -83,7 +83,7 @@ export const VisUttaksperiodeUtenAksjonspunktKanOverstyre: Story = {
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         flerbarnsdager: false,
         periodeKilde: 'SØKNAD',
       },
@@ -110,11 +110,11 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 10,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         samtidigUttaksprosent: 80,
         flerbarnsdager: true,
@@ -123,11 +123,11 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
       {
         fom: '2022-12-02',
         tom: '2022-12-10',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         flerbarnsdager: false,
         periodeKilde: 'SØKNAD',
@@ -135,11 +135,11 @@ export const VisUttaksperiodeMedAksjonspunkt: Story = {
       {
         fom: '2022-12-11',
         tom: '2022-12-20',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         flerbarnsdager: false,
         periodeKilde: 'SØKNAD',
@@ -167,7 +167,7 @@ export const VisUtsettelseperiodeMedAksjonspunkt: Story = {
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        utsettelseÅrsak: UtsettelseÅrsak.ARBEID,
+        utsettelseÅrsak: 'ARBEID',
         periodeKilde: 'SØKNAD',
       },
     ],
@@ -194,7 +194,7 @@ export const VisOverføringsperiodeMedAksjonspunkt: Story = {
         fom: '2022-11-12',
         tom: '2022-12-01',
         overføringÅrsak: OverføringÅrsak.IKKE_RETT_ANNEN_FORELDER,
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         periodeKilde: 'SØKNAD',
       },
     ],
@@ -239,11 +239,11 @@ export const VisAksjonspunktDerArbeidsfoholdErUkjentVedGradering: Story = {
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '91090823',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         flerbarnsdager: false,
         periodeKilde: 'SØKNAD',
@@ -271,11 +271,11 @@ export const VisAksjonspunktDerEnIkkeHarBeregningsgrunnlagVedGradering: Story = 
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910923',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         flerbarnsdager: false,
         periodeKilde: 'SØKNAD',
@@ -303,11 +303,11 @@ export const VisPanelDerAksjonspunktErLøstOgBehandlingAvsluttet: Story = {
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         samtidigUttaksprosent: 50,
         morsAktivitet: 'ARBEID',
@@ -338,11 +338,11 @@ export const VisBegrunnelseFraTidligereUtgaveAvPanel: Story = {
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         samtidigUttaksprosent: 50,
         morsAktivitet: 'ARBEID',
@@ -373,11 +373,11 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       {
         fom: '2022-11-12',
         tom: '2022-12-01',
-        uttakPeriodeType: UttakPeriodeType.FELLESPERIODE,
+        uttakPeriodeType: 'FELLESPERIODE',
         arbeidstidsprosent: 10,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         samtidigUttaksprosent: 80,
         flerbarnsdager: true,
@@ -386,11 +386,11 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       {
         fom: '2022-12-02',
         tom: '2022-12-10',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         flerbarnsdager: false,
         periodeKilde: 'SØKNAD',
@@ -398,11 +398,11 @@ export const VisUttaksperiodeMedAksjonspunktForFar: Story = {
       {
         fom: '2022-12-11',
         tom: '2022-12-20',
-        uttakPeriodeType: UttakPeriodeType.MODREKVOTE,
+        uttakPeriodeType: 'MØDREKVOTE',
         arbeidstidsprosent: 50,
         arbeidsforhold: {
           arbeidsgiverReferanse: '910909088',
-          arbeidType: UttakArbeidType.ORDINÆRT_ARBEID,
+          arbeidType: 'ORDINÆRT_ARBEID',
         },
         flerbarnsdager: false,
         periodeKilde: 'SØKNAD',

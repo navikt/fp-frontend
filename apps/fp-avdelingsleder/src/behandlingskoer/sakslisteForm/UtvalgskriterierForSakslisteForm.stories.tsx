@@ -3,7 +3,6 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useQuery } from '@tanstack/react-query';
 import { http, HttpResponse } from 'msw';
 
-import { AndreKriterierType, KøSortering } from '@navikt/fp-kodeverk';
 import { alleKodeverkLos, getIntlDecorator, withQueryClient } from '@navikt/fp-storybook-utils';
 
 import { losKodeverkOptions, LosUrl } from '../../data/fplosAvdelingslederApi';
@@ -53,7 +52,7 @@ export const MedGittNavn: Story = {
       navn: 'liste',
       saksbehandlerIdenter: [],
       sortering: {
-        sorteringType: KøSortering.BEHANDLINGSFRIST,
+        sorteringType: 'BEHFRIST',
         fra: 1,
         til: 4,
         erDynamiskPeriode: true,
@@ -62,11 +61,11 @@ export const MedGittNavn: Story = {
       fagsakYtelseTyper: ['FP'],
       andreKriterier: [
         {
-          andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
+          andreKriterierType: 'TIL_BESLUTTER',
           inkluder: true,
         },
         {
-          andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
+          andreKriterierType: 'PAPIRSOKNAD',
           inkluder: false,
         },
       ],
@@ -81,7 +80,7 @@ export const MedDefaultNavn: Story = {
       navn: undefined,
       saksbehandlerIdenter: [],
       sortering: {
-        sorteringType: KøSortering.BEHANDLINGSFRIST,
+        sorteringType: 'BEHFRIST',
         fra: 1,
         til: 4,
         erDynamiskPeriode: true,
@@ -90,11 +89,11 @@ export const MedDefaultNavn: Story = {
       fagsakYtelseTyper: ['FP'],
       andreKriterier: [
         {
-          andreKriterierType: AndreKriterierType.TIL_BESLUTTER,
+          andreKriterierType: 'TIL_BESLUTTER',
           inkluder: true,
         },
         {
-          andreKriterierType: AndreKriterierType.PAPIRSOKNAD,
+          andreKriterierType: 'PAPIRSOKNAD',
           inkluder: false,
         },
       ],

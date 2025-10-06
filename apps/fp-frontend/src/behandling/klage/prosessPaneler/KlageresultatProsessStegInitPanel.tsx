@@ -6,10 +6,10 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { forhandsvisDokument } from '@navikt/ft-utils';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
-import { AksjonspunktKode, VilkarUtfallType } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { ProsessStegCode } from '@navikt/fp-konstanter';
 import { type VedtakKlageForhandsvisData, VedtakKlageProsessIndex } from '@navikt/fp-prosess-vedtak-klage';
-import type { Aksjonspunkt, Behandlingsresultat } from '@navikt/fp-types';
+import type { Aksjonspunkt, Behandlingsresultat, VilkarUtfallType } from '@navikt/fp-types';
 import { erAksjonspunktÅpent } from '@navikt/fp-utils';
 
 import { forhåndsvisMelding, useBehandlingApi } from '../../../data/behandlingApi';
@@ -69,7 +69,7 @@ export const KlageresultatProsessStegInitPanel = () => {
         prosessPanelMenyTekst={intl.formatMessage({ id: 'Behandlingspunkt.ResultatKlage' })}
         standardPanelProps={standardPanelProps}
         overstyrtStatus={vedtakStatus}
-        skalMarkeresSomAktiv={vedtakStatus !== VilkarUtfallType.IKKE_VURDERT}
+        skalMarkeresSomAktiv={vedtakStatus !== 'IKKE_VURDERT'}
       >
         {klageVurdering ? (
           <VedtakKlageProsessIndex klageVurdering={klageVurdering} previewVedtakCallback={forhåndsvis} />
@@ -81,20 +81,23 @@ export const KlageresultatProsessStegInitPanel = () => {
   );
 };
 
-const getVedtakStatus = (behandlingsresultat?: Behandlingsresultat, aksjonspunkter: Aksjonspunkt[] = []) => {
+const getVedtakStatus = (
+  behandlingsresultat?: Behandlingsresultat,
+  aksjonspunkter: Aksjonspunkt[] = [],
+): VilkarUtfallType => {
   const harÅpentAksjonspunkt = aksjonspunkter.some(erAksjonspunktÅpent);
   if (aksjonspunkter.length === 0 || harÅpentAksjonspunkt) {
-    return VilkarUtfallType.IKKE_VURDERT;
+    return 'IKKE_VURDERT';
   }
 
   const resultatTypeCode = behandlingsresultat?.type;
   if (resultatTypeCode === 'HENLAGT_KLAGE_TRUKKET' || resultatTypeCode === 'HENLAGT_FEILOPPRETTET') {
-    return VilkarUtfallType.IKKE_VURDERT;
+    return 'IKKE_VURDERT';
   }
   if (resultatTypeCode === 'KLAGE_AVVIST' || resultatTypeCode === 'KLAGE_YTELSESVEDTAK_OPPHEVET') {
-    return VilkarUtfallType.IKKE_OPPFYLT;
+    return 'IKKE_OPPFYLT';
   }
-  return VilkarUtfallType.OPPFYLT;
+  return 'OPPFYLT';
 };
 
 const getLagringSideeffekter =

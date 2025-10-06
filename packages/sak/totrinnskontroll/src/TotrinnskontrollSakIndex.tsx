@@ -3,13 +3,15 @@ import { RawIntlProvider } from 'react-intl';
 import { createIntl } from '@navikt/ft-utils';
 import { type Location } from 'history';
 
-import { AksjonspunktKode, AksjonspunktKodeTilbakekreving, SkjermlenkeType, VurderÅrsak } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { skjermlenkeCodesFpTilbake as skjermlenkeCodes } from '@navikt/fp-konstanter';
 import type {
   AlleKodeverk,
   AlleKodeverkTilbakekreving,
   BehandlingAppKontekst,
   FagsakYtelseType,
+  SkjermlenkeType,
+  VurderÅrsak,
 } from '@navikt/fp-types';
 import type { FatterVedtakAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 
@@ -28,25 +30,25 @@ const sorterteSkjermlenkeCodesForTilbakekreving = [
   skjermlenkeCodes['VEDTAK'],
 ];
 
-const getArsaker = (apData: AksjonspunktGodkjenningData): string[] => {
-  const arsaker = [];
+const getArsaker = (apData: AksjonspunktGodkjenningData): VurderÅrsak[] => {
+  const arsaker = new Array<VurderÅrsak>();
   if (apData.feilFakta) {
-    arsaker.push(VurderÅrsak.FEIL_FAKTA);
+    arsaker.push('FEIL_FAKTA');
   }
   if (apData.feilLov) {
-    arsaker.push(VurderÅrsak.FEIL_LOV);
+    arsaker.push('FEIL_LOV');
   }
   if (apData.feilSkjønn) {
-    arsaker.push(VurderÅrsak.SKJØNN);
+    arsaker.push('SKJØNN');
   }
   if (apData.feilUtredning) {
-    arsaker.push(VurderÅrsak.UTREDNING);
+    arsaker.push('UTREDNING');
   }
   if (apData.feilSaksflyt) {
-    arsaker.push(VurderÅrsak.SAKSFLYT);
+    arsaker.push('SAKSFLYT');
   }
   if (apData.feilBegrunnelse) {
-    arsaker.push(VurderÅrsak.BEGRUNNELSE);
+    arsaker.push('BEGRUNNELSE');
   }
   return arsaker;
 };
@@ -55,7 +57,7 @@ const finnFaktaOmBeregningTilfeller = (alleKodeverk: AlleKodeverk | AlleKodeverk
 
 export type ApData = {
   fatterVedtakAksjonspunktDto: {
-    '@type': AksjonspunktKode.FATTER_VEDTAK | AksjonspunktKodeTilbakekreving.FATTER_VEDTAK;
+    '@type': AksjonspunktKode.FATTER_VEDTAK | '5005';
   } & FatterVedtakAp;
   erAlleAksjonspunktGodkjent: boolean;
 };
@@ -98,9 +100,7 @@ export const TotrinnskontrollSakIndex = ({
       arsaker: getArsaker(apData),
     }));
 
-    const kode = erTilbakekreving
-      ? (AksjonspunktKodeTilbakekreving.FATTER_VEDTAK as const)
-      : (AksjonspunktKode.FATTER_VEDTAK as const);
+    const kode = erTilbakekreving ? ('5005' as const) : (AksjonspunktKode.FATTER_VEDTAK as const);
     const fatterVedtakAksjonspunktDto = {
       '@type': kode,
       kode,

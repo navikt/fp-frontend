@@ -1,0 +1,1 @@
+export type VedtakResultatType = 'INGEN_TILBAKEBETALING' | 'DELVIS_TILBAKEBETALING';

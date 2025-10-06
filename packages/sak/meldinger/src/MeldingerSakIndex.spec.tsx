@@ -2,7 +2,6 @@ import { composeStories } from '@storybook/react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { RevurderingVarslingÅrsak } from '@navikt/fp-kodeverk';
 import type { DokumentMalType } from '@navikt/fp-types';
 
 import * as stories from './MeldingerSakIndex.stories';
@@ -47,16 +46,13 @@ describe('MeldingerSakIndex', () => {
     expect(await screen.findByText('Mal')).toBeInTheDocument();
 
     await userEvent.selectOptions(utils.getByLabelText('Mal'), 'VARREV' satisfies DokumentMalType);
-    await userEvent.selectOptions(
-      utils.getByLabelText('Årsak'),
-      RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
-    );
+    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'BARNIKKEREG');
 
     await userEvent.click(screen.getByText('Send brev'));
 
     await waitFor(() => expect(lagre).toHaveBeenCalledTimes(1));
     expect(lagre).toHaveBeenNthCalledWith(1, {
-      arsakskode: RevurderingVarslingÅrsak.BARN_IKKE_REGISTRERT_FOLKEREGISTER,
+      arsakskode: 'BARNIKKEREG',
       brevmalkode: 'VARREV',
       fritekst: ' ',
     });

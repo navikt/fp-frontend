@@ -6,7 +6,7 @@ import { Button, Heading, Label, VStack } from '@navikt/ds-react';
 import { RhfForm } from '@navikt/ft-form-hooks';
 import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
-import { AksjonspunktKode, TilbakekrevingVidereBehandling } from '@navikt/fp-kodeverk';
+import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import type {
   Aksjonspunkt,
   ArbeidsgiverOpplysningerPerId,
@@ -59,8 +59,7 @@ export const SimuleringPanel = ({
   const [showDetails, setShowDetails] = useState<Details[]>([]);
 
   const hasOpenTilbakekrevingsbehandling =
-    tilbakekrevingvalg !== undefined &&
-    tilbakekrevingvalg.videreBehandling === TilbakekrevingVidereBehandling.TILBAKEKR_OPPDATER;
+    tilbakekrevingvalg !== undefined && tilbakekrevingvalg.videreBehandling === 'TILBAKEKR_OPPDATER';
 
   const toggleDetaljer = hentToggleDetaljer(showDetails, setShowDetails);
 

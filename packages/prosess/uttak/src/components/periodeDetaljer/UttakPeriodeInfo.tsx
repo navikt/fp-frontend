@@ -7,7 +7,6 @@ import { RhfCheckbox, RhfNumericField, RhfSelect } from '@navikt/ft-form-hooks';
 import { hasValidDecimal, maxValue, notDash, required } from '@navikt/ft-form-validators';
 import { calcDaysAndWeeks, dateFormat, periodFormat } from '@navikt/ft-utils';
 
-import { PeriodeResultatType, UttakArbeidType as uttakArbeidTypeKodeverk } from '@navikt/fp-kodeverk';
 import type {
   AlleKodeverk,
   ArbeidsgiverOpplysningerPerId,
@@ -33,17 +32,16 @@ const OppholdArsakKontoNavn = {
 };
 
 const periodeStatusClassName = (valgtPeriode: PeriodeSoker, erTilknyttetStortinget: boolean) => {
-  if (valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET && !erTilknyttetStortinget) {
+  if (valgtPeriode.periodeResultatType === 'INNVILGET' && !erTilknyttetStortinget) {
     return styles['greenDetailsPeriod'];
   }
-  if (valgtPeriode.periodeResultatType === PeriodeResultatType.MANUELL_BEHANDLING || erTilknyttetStortinget) {
+  if (valgtPeriode.periodeResultatType === 'MANUELL_BEHANDLING' || erTilknyttetStortinget) {
     return styles['orangeDetailsPeriod'];
   }
   return styles['redDetailsPeriod'];
 };
 
-const periodeIsInnvilget = (valgtPeriode: PeriodeSoker): boolean =>
-  valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET;
+const periodeIsInnvilget = (valgtPeriode: PeriodeSoker): boolean => valgtPeriode.periodeResultatType === 'INNVILGET';
 
 const gradertArbforhold = (
   valgtPeriode: PeriodeSoker,
@@ -53,7 +51,7 @@ const gradertArbforhold = (
   if (valgtPeriode.gradertAktivitet) {
     const { arbeidsgiverReferanse, uttakArbeidType } = valgtPeriode.gradertAktivitet;
 
-    if (uttakArbeidType && uttakArbeidType !== uttakArbeidTypeKodeverk.ORDINÆRT_ARBEID) {
+    if (uttakArbeidType && uttakArbeidType !== 'ORDINÆRT_ARBEID') {
       return <FormattedMessage id={uttakArbeidTypeTekstCodes[uttakArbeidType]} />;
     }
 
@@ -146,7 +144,7 @@ const visGraderingIkkeInnvilget = (
   readOnly: boolean,
   graderingInnvilget?: boolean,
 ): boolean =>
-  valgtPeriode.periodeResultatType === PeriodeResultatType.INNVILGET &&
+  valgtPeriode.periodeResultatType === 'INNVILGET' &&
   !!valgtPeriode.gradertAktivitet &&
   graderingInnvilget === false &&
   readOnly;
