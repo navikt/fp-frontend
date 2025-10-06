@@ -17,12 +17,12 @@ type Props<AP_TYPE extends AksjonspunktType> = {
   isSubmittable: boolean;
 };
 
-const PanelDataContext = createContext<Props<AksjonspunktType> | null>(null);
+const PanelDataContext = createContext<unknown>(null);
 
-export const PanelDataProvider = (
+export const PanelDataProvider = <T extends AksjonspunktType>(
   props: {
     children: ReactElement | null;
-  } & Props<AksjonspunktType>,
+  } & Props<T>,
 ) => {
   const { children, ...otherProps } = props;
 
@@ -32,10 +32,9 @@ export const PanelDataProvider = (
 };
 
 export const usePanelDataContext = <AP_TYPE extends AksjonspunktType>() => {
-  // @ts-expect-error Johannes ser på denne - mismatch mellom type i ft-repo og generert type
-  const context = useContext<Props<AP_TYPE> | null>(PanelDataContext);
+  const context = useContext(PanelDataContext);
   if (!context) {
     throw new Error('PanelContext.Provider er ikke satt opp');
   }
-  return context;
+  return context as Props<AP_TYPE>;
 };
