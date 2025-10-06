@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import type { Theme } from '@navikt/ds-react';
 import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 
+import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import {
   ApiPollingStatus,
   AVDELINGSLEDER_URL_NAME,
@@ -13,7 +14,6 @@ import {
   SYSTEMRUTINE_URL,
 } from '@navikt/fp-konstanter';
 import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
-import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
 import type { InnloggetBruker } from '../typer/innloggetBruker';
 

@@ -9,9 +9,14 @@ import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery }
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
+import {
+  ErrorBoundary,
+  ErrorType,
+  type FpError,
+  useRestApiError,
+  useRestApiErrorDispatcher,
+} from '@navikt/fp-app-felles';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
-import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
-import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
 import { Dekorator } from './app/Dekorator';
 import { Home } from './app/Home';
@@ -24,7 +29,6 @@ import messages from '../i18n/nb_NO.json';
 import '@navikt/ds-css/darkside';
 import '@navikt/ds-css-internal';
 import '@navikt/ft-form-hooks/dist/style.css';
-import '@navikt/ft-plattform-komponenter/dist/style.css';
 import '@navikt/ft-ui-komponenter/dist/style.css';
 
 const intl = createIntl(messages);

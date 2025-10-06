@@ -6,13 +6,13 @@ import { HStack, VStack } from '@navikt/ds-react';
 import { useQuery } from '@tanstack/react-query';
 import type { Location } from 'history';
 
+import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ReservasjonsstatusPanel } from '@navikt/fp-los-saksbehandler';
 import { BehandlingVelgerSakIndex } from '@navikt/fp-sak-behandling-velger';
 import { FagsakProfilSakIndex } from '@navikt/fp-sak-fagsak-profil';
 import { UkjentAdresseMeldingIndex } from '@navikt/fp-sak-ukjent-adresse';
 import type { Behandling, BehandlingAppKontekst, Fagsak } from '@navikt/fp-types';
-import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
-import { notEmpty, useRestApiErrorDispatcher } from '@navikt/fp-utils';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { getLocationWithDefaultProsessStegAndFakta, pathToBehandling, pathToBehandlinger } from '../app/paths';
 import { BehandlingMenuIndex } from '../behandlingmenu/BehandlingMenuIndex';

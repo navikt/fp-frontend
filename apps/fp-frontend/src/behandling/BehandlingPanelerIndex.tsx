@@ -5,9 +5,9 @@ import { LoadingPanel } from '@navikt/ft-ui-komponenter';
 import { parseQueryString } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
+import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ErrorPage } from '@navikt/fp-sak-infosider';
-import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
-import { notEmpty, useRestApiErrorDispatcher } from '@navikt/fp-utils';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { useBehandlingApi } from '../data/behandlingApi';
 import { BehandlingDataContext } from './felles/context/BehandlingDataContext';

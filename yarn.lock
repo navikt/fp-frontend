@@ -1565,18 +1565,40 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@navikt/fp-app-felles@workspace:*, @navikt/fp-app-felles@workspace:packages/app-felles":
+  version: 0.0.0-use.local
+  resolution: "@navikt/fp-app-felles@workspace:packages/app-felles"
+  dependencies:
+    "@navikt/ds-react": 7.31.0
+    "@navikt/fp-config-eslint": "workspace:*"
+    "@navikt/fp-config-typescript": "workspace:*"
+    "@navikt/fp-config-vite": "workspace:*"
+    "@navikt/fp-sak-infosider": "workspace:*"
+    "@sentry/browser": 10.15.0
+    "@testing-library/react": 16.3.0
+    eslint: 9.36.0
+    react: 19.1.1
+    typescript: 5.9.2
+    vitest: 3.2.4
+  languageName: unknown
+  linkType: soft
+
 "@navikt/fp-avdelingsleder@workspace:apps/fp-avdelingsleder":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-avdelingsleder@workspace:apps/fp-avdelingsleder"
   dependencies:
     "@navikt/aksel-icons": 7.31.0
     "@navikt/ds-css": 7.31.0
+    "@navikt/ds-css-internal": 3.4.3
     "@navikt/ds-react": 7.31.0
+    "@navikt/fp-app-felles": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-los-felles": "workspace:*"
+    "@navikt/fp-sak-dekorator": "workspace:*"
+    "@navikt/fp-sak-infosider": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
@@ -1587,6 +1609,7 @@ __metadata:
     "@storybook/react": 9.1.8
     "@storybook/react-vite": 9.1.8
     "@tanstack/react-query": 5.90.2
+    "@tanstack/react-query-devtools": 5.90.2
     "@testing-library/dom": 10.4.1
     "@testing-library/react": 16.3.0
     "@testing-library/user-event": 14.6.1
@@ -1667,6 +1690,7 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
@@ -1741,7 +1765,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 6.2.8
@@ -1881,7 +1904,6 @@ __metadata:
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-fakta-felles": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
@@ -1954,6 +1976,7 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
@@ -2339,6 +2362,7 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
@@ -2393,6 +2417,7 @@ __metadata:
     "@navikt/ds-css": 7.31.0
     "@navikt/ds-css-internal": 3.4.3
     "@navikt/ds-react": 7.31.0
+    "@navikt/fp-app-felles": "workspace:*"
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
@@ -2469,6 +2494,7 @@ __metadata:
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-types-avklar-aksjonspunkter": "workspace:*"
+    "@navikt/fp-ui-komponenter": "workspace:*"
     "@navikt/fp-utbetalingsdata-is15": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-fakta-beregning": 12.1.20
@@ -2485,7 +2511,6 @@ __metadata:
     "@navikt/ft-ui-komponenter": 6.2.8
     "@navikt/ft-utils": 3.8.10
     "@popperjs/core": 2.11.8
-    "@sentry/browser": 10.15.0
     "@storybook/addon-a11y": 9.1.8
     "@storybook/react": 9.1.8
     "@storybook/react-vite": 9.1.8
@@ -2526,7 +2551,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-sak-infosider": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -2588,8 +2612,8 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
+    "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
     "@navikt/ft-ui-komponenter": 6.2.8
@@ -2623,7 +2647,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-konstanter": "workspace:*"
     "@navikt/fp-los-felles": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
@@ -2665,7 +2688,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
@@ -2699,7 +2721,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:^"
@@ -2735,7 +2756,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-papirsoknad-ui-komponenter": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -2764,7 +2784,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
@@ -2791,7 +2810,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
@@ -2818,7 +2836,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
@@ -2877,6 +2894,7 @@ __metadata:
     "@navikt/fp-config-vite": "workspace:*"
     "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
+    "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
     "@navikt/ft-ui-komponenter": 6.2.8
@@ -3633,7 +3651,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-sak-visittkort": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
@@ -3664,7 +3681,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 6.2.8
@@ -3727,7 +3743,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/fp-utils": "workspace:*"
     "@navikt/ft-ui-komponenter": 6.2.8
@@ -3757,7 +3772,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-ui-komponenter": 6.2.8
     "@navikt/ft-utils": 3.8.10
@@ -3784,7 +3799,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-utils": 3.8.10
@@ -3841,8 +3855,8 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-sak-ukjent-adresse": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
@@ -3901,7 +3915,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
@@ -3934,7 +3948,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
@@ -3992,7 +4006,7 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
     "@navikt/ft-form-validators": 4.2.11
@@ -4022,8 +4036,8 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-modal-sett-pa-vent": "workspace:*"
+    "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-utils": 3.8.10
     "@storybook/react": 9.1.8
@@ -4153,7 +4167,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     "@navikt/fp-storybook-utils": "workspace:*"
     "@navikt/fp-types": "workspace:*"
     "@navikt/ft-form-hooks": 9.2.2
@@ -4221,7 +4234,6 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@navikt/fp-sak-ukjent-adresse@workspace:packages/sak/ukjent-adresse"
   dependencies:
-    "@navikt/ds-css": 7.31.0
     "@navikt/ds-react": 7.31.0
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
@@ -4251,7 +4263,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:^"
     "@navikt/fp-types": "workspace:^"
     "@navikt/ft-plattform-komponenter": 10.1.12
     "@navikt/ft-utils": 3.8.10
@@ -4316,7 +4327,6 @@ __metadata:
   dependencies:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
-    "@navikt/fp-kodeverk": "workspace:*"
     eslint: 9.36.0
     typescript: 5.9.2
   languageName: unknown

@@ -19,10 +19,4 @@ export {
   validateMaxAntallBarn,
 } from './src/fødselOgTerminValidator';
 export { finnDager, finnUker } from './src/virkedagerUtil';
-export {
-  useRestApiError,
-  useRestApiErrorDispatcher,
-  RestApiErrorProvider,
-} from './src/context/error/RestApiErrorContext';
-export { ErrorType, type FpError } from './src/context/error/errorType';
 export { harAksjonspunkt, erAksjonspunktÅpent } from './src/aksjonspunktUtils';
