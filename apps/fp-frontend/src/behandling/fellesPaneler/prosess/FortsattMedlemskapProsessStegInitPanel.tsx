@@ -9,9 +9,9 @@ import { ProsessDefaultInitOverstyringPanel } from '../../felles/prosess/Prosess
 import { skalViseProsessPanel } from '../../felles/prosess/skalViseProsessPanel';
 import { useStandardProsessPanelProps } from '../../felles/prosess/useStandardProsessPanelProps';
 
-const AKSJONSPUNKT_KODE = '6012' satisfies AksjonspunktKode;
+const AKSJONSPUNKT_KODE: AksjonspunktKode = '6012';
 
-const VILKAR_KODER = ['FP_VK_2_L'] satisfies VilkårType[];
+const VILKAR_KODER: VilkårType[] = ['FP_VK_2_L'];
 
 export const FortsattMedlemskapProsessStegInitPanel = () => {
   const intl = useIntl();
