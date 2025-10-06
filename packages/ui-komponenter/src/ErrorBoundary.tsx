@@ -8,7 +8,7 @@ import { ErrorType, type FpError } from '@navikt/fp-utils';
 
 const isDevelopment = import.meta.env.MODE === 'development';
 
-interface OwnProps {
+interface Props {
   errorMessageCallback: (error: FpError) => void;
   children: ReactNode;
   errorMessage?: string;
@@ -19,12 +19,12 @@ interface State {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends Component<OwnProps, State> {
+export class ErrorBoundary extends Component<Props, State> {
   static defaultProps = {
     showChild: false,
   };
 
-  constructor(props: OwnProps) {
+  constructor(props: Props) {
     super(props);
     this.state = { hasError: false };
   }
