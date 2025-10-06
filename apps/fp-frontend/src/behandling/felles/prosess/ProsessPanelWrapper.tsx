@@ -11,12 +11,12 @@ import styles from './prosessPanelWrapper.module.css';
 
 const classNames = classnames.bind(styles);
 
-interface PanelContainerOwnProps {
+interface PanelContainerProps {
   skalSkjulePanel?: boolean;
   children: ReactElement | ReactElement[] | null;
 }
 
-const PanelContainer = ({ skalSkjulePanel = false, children }: PanelContainerOwnProps) => (
+const PanelContainer = ({ skalSkjulePanel = false, children }: PanelContainerProps) => (
   <div className={classNames('steg', { skalSkjulePanel })}>
     <FadingPanel>{children}</FadingPanel>
   </div>
