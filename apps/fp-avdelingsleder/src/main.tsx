@@ -2,10 +2,9 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 
-import { breadcrumbsIntegration, init } from '@sentry/browser';
 import dayjs from 'dayjs';
 
-import { RestApiErrorProvider } from '@navikt/fp-utils';
+import { initSentry, RestApiErrorProvider } from '@navikt/fp-app-felles';
 
 import { LosAppIndexWrapper } from './LosAppIndex';
 
@@ -18,18 +17,7 @@ if (app === null) {
   throw new Error('No app element');
 }
 
-const environment = globalThis.location.hostname;
-const isDevelopment = import.meta.env.MODE === 'development';
-
-if (!isDevelopment) {
-  init({
-    dsn: 'https://d1b7de8cc42949569da03849b47d3ea1@sentry.gc.nav.no/17',
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    release: import.meta.env['SENTRY_RELEASE'] ?? 'unknown',
-    environment,
-    integrations: [breadcrumbsIntegration({ console: false })],
-  });
-}
+initSentry();
 
 const root = createRoot(app);
 

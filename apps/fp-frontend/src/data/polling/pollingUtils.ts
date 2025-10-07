@@ -1,8 +1,8 @@
 import { HTTPError, type KyResponse } from 'ky';
 
+import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import type { Behandling } from '@navikt/fp-types';
-import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
 import { doGetRequest } from '../fagsakApi';
 

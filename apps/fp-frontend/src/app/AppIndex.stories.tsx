@@ -4,9 +4,9 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { cleanUrl, type JsonBodyType } from 'msw';
 import { http, HttpResponse } from 'msw';
 
+import { RestApiErrorProvider } from '@navikt/fp-app-felles';
 import { ApiPollingStatus } from '@navikt/fp-konstanter';
 import { alleKodeverk, alleKodeverkTilbakekreving } from '@navikt/fp-storybook-utils';
-import { RestApiErrorProvider } from '@navikt/fp-utils';
 
 import {
   alleInntektsmeldinger,

@@ -4,12 +4,13 @@ import { Link, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 import { useMutation } from '@tanstack/react-query';
 
+import { ErrorType, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { OppgaveJournalføringIndex } from '@navikt/fp-journalforing';
 import { SaksbehandlerIndex } from '@navikt/fp-los-saksbehandler';
 import { NotFoundPage } from '@navikt/fp-sak-infosider';
 import type { NavAnsatt } from '@navikt/fp-types';
 import { UtbetalingsdataIs15Index } from '@navikt/fp-utbetalingsdata-is15';
-import { ErrorType, notEmpty, useRestApiErrorDispatcher } from '@navikt/fp-utils';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { AktørIndex } from '../../aktoer/AktørIndex';
 import { useFagsakApi } from '../../data/fagsakApi';

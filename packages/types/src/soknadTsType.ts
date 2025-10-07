@@ -12,7 +12,7 @@ export type UtlandsoppholdPeriode = tjenester_behandling_søknad_UtlandsoppholdD
 
 export type Søknadsfrist = tjenester_behandling_søknad_SøknadsfristDto;
 
-export type SøknadFødsel = {
+type SøknadFødsel = {
   soknadType: 'ST-001';
 } & tjenester_behandling_søknad_SoknadFodselDto;
 

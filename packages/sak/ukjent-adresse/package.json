@@ -20,12 +20,11 @@
   },
   "dependencies": {
     "@navikt/ds-react": "7.31.0",
-    "@navikt/ft-utils": "3.8.9",
+    "@navikt/ft-utils": "3.8.10",
     "react": "19.1.1",
     "react-intl": "7.1.11"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.31.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",

@@ -8,9 +8,14 @@ import { MutationCache, QueryCache, QueryClient, QueryClientProvider, useQuery }
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { HTTPError } from 'ky';
 
+import {
+  ErrorBoundary,
+  ErrorType,
+  type FpError,
+  useRestApiError,
+  useRestApiErrorDispatcher,
+} from '@navikt/fp-app-felles';
 import { ForbiddenPage, UnauthorizedPage } from '@navikt/fp-sak-infosider';
-import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
-import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
 
 import { initFetchOptions } from '../data/fagsakApi';
 import { PollingTimeoutError } from '../data/polling/pollingUtils';

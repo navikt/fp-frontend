@@ -3,8 +3,7 @@ import { useIntl } from 'react-intl';
 
 import { Heading, HStack, VStack } from '@navikt/ds-react';
 
-import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
-import { useRestApiErrorDispatcher } from '@navikt/fp-utils';
+import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 
 import styles from './supportHeader.module.css';
 

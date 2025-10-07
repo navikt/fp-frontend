@@ -6,6 +6,7 @@ import type { Theme } from '@navikt/ds-react';
 import { dateFormat, decodeHtmlEntity, timeFormat } from '@navikt/ft-utils';
 import { useQuery } from '@tanstack/react-query';
 
+import { ErrorType, type FpError, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import {
   ApiPollingStatus,
   AVDELINGSLEDER_URL_NAME,
@@ -14,7 +15,7 @@ import {
   SYSTEMRUTINE_URL,
 } from '@navikt/fp-konstanter';
 import { type DekoratorLenke, DekoratorMedFeilviserSakIndex, type Feilmelding } from '@navikt/fp-sak-dekorator';
-import { ErrorType, type FpError, notEmpty, useRestApiError, useRestApiErrorDispatcher } from '@navikt/fp-utils';
+import { notEmpty } from '@navikt/fp-utils';
 
 import { initFetchOptions } from '../../data/fagsakApi';
 import { JOURNALFØRING_PATH, UTBETALINGSDATA_PATH } from '../paths';
