@@ -89,15 +89,9 @@ jobs:
         run: yarn build --filter=@navikt/${{ inputs.app }}
       - name: Run linting
         run: |
-          if [ "${{ github.ref_name }}" = "master" ]; then
-            yarn stylelint --filter=@navikt/${{ inputs.app }} &&
-            yarn eslint --filter=@navikt/${{ inputs.app }} &&
-            yarn tsc --filter=@navikt/${{ inputs.app }}
-          else
-            yarn stylelint --filter=@navikt/${{ inputs.app }} --filter=...[origin/master] &&
-            yarn eslint --filter=@navikt/${{ inputs.app }} --filter=...[origin/master] &&
-            yarn tsc --filter=@navikt/${{ inputs.app }} --filter=...[origin/master]
-          fi
+          yarn stylelint --filter=@navikt/${{ inputs.app }} --filter=...[origin/master] &&
+          yarn eslint --filter=@navikt/${{ inputs.app }} --filter=...[origin/master] &&
+          yarn tsc --filter=@navikt/${{ inputs.app }} --filter=...[origin/master]
       - name: Run tests
         id: run-tests
         run: |
