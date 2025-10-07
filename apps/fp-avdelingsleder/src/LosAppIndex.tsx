@@ -50,6 +50,7 @@ export const LosAppIndexWrapper = () => {
 const LosAppIndex = () => {
   const [headerHeight, setHeaderHeight] = useState(0);
   const [crashMessage, setCrashMessage] = useState<string>();
+
   const [theme, setTheme] = useState<ComponentProps<typeof Theme>['theme']>('light');
 
   const initFetchQuery = useQuery(initFetchOptions());
