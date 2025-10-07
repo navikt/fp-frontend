@@ -63,6 +63,7 @@ const AppIndex = () => {
   const { theme, setTheme } = useThemeFromLocalStorage();
 
   const initFetchQuery = useQuery(initFetchOptions());
+
   const navAnsatt = initFetchQuery.data?.innloggetBruker;
 
   const location = useLocation();
