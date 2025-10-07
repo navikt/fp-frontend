@@ -16,7 +16,7 @@
     "clean": "rm -rf ./dist ./node_modules ./coverage ./.storybook-static-build"
   },
   "dependencies": {
-    "@navikt/ds-react": "7.31.0",
+    "@navikt/ds-react": "7.32.0",
     "@navikt/fp-sak-infosider": "workspace:*",
     "@sentry/browser": "10.15.0",
     "react": "19.1.1"

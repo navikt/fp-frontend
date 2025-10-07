@@ -19,8 +19,8 @@
     "storybook": "storybook dev --quiet -p 7003"
   },
   "dependencies": {
-    "@navikt/aksel-icons": "7.31.0",
-    "@navikt/ds-react": "7.31.0",
+    "@navikt/aksel-icons": "7.32.0",
+    "@navikt/ds-react": "7.32.0",
     "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-modal-sett-pa-vent": "workspace:*",
     "@navikt/fp-types": "workspace:*",
@@ -38,7 +38,7 @@
     "react-intl": "7.1.11"
   },
   "devDependencies": {
-    "@navikt/ds-css": "7.31.0",
+    "@navikt/ds-css": "7.32.0",
     "@navikt/fp-config-eslint": "workspace:*",
     "@navikt/fp-config-typescript": "workspace:*",
     "@navikt/fp-config-vite": "workspace:*",
