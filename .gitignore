@@ -7,7 +7,6 @@ coverage/
 *.log*
 node_modules
 dist
-lerna-debug.log
 .storybook-static-build
 .vscode
 ssh.exe.stackdump
