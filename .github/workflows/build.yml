@@ -90,7 +90,7 @@ jobs:
       - name: Run linting
         run: |
           yarn stylelint --filter=@navikt/${{ inputs.app }}... &&
-          yarn eslint --filter=@navikt/${{ inputs.app }}... ...[origin/master] &&
+          yarn eslint --filter=@navikt/${{ inputs.app }}... --filter=...[origin/master] &&
           yarn tsc --filter=@navikt/${{ inputs.app }}... --filter=[master...${{ github.ref_name }}]
       - name: Run tests
         id: run-tests
