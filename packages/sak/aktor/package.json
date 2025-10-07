@@ -21,7 +21,6 @@
   "dependencies": {
     "@navikt/ds-css": "7.31.0",
     "@navikt/ds-react": "7.31.0",
-    "@navikt/fp-kodeverk": "workspace:*",
     "@navikt/fp-sak-visittkort": "workspace:*",
     "@navikt/fp-types": "workspace:*",
     "@navikt/ft-plattform-komponenter": "10.1.12",

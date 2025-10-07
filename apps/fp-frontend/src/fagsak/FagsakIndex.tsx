@@ -5,10 +5,10 @@ import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { DataFetchPendingModal, LoadingPanel } from '@navikt/ft-ui-komponenter';
 import type { Location } from 'history';
 
+import { ErrorBoundary, useRestApiErrorDispatcher } from '@navikt/fp-app-felles';
 import { VisittkortSakIndex } from '@navikt/fp-sak-visittkort';
 import type { AnnenPartBehandling, Behandling } from '@navikt/fp-types';
-import { ErrorBoundary } from '@navikt/fp-ui-komponenter';
-import { useRestApiErrorDispatcher, useTrackRouteParam } from '@navikt/fp-utils';
+import { useTrackRouteParam } from '@navikt/fp-utils';
 
 import {
   behandlingerRoutePath,
