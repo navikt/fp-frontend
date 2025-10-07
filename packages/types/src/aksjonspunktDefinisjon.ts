@@ -1,0 +1,3 @@
+import type { foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon } from './apiDtoGenerert';
+
+export type AksjonspunktDefinisjon = foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon;

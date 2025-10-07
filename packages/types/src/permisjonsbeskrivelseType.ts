@@ -1,3 +1,3 @@
-import type { foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType } from '@navikt/fp-types';
+import type { foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType } from './apiDtoGenerert';
 
 export type PermisjonsbeskrivelseType = foreldrepenger_domene_iay_modell_kodeverk_PermisjonsbeskrivelseType;

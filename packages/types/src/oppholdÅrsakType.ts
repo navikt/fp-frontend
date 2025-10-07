@@ -1,3 +1,3 @@
-import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak } from '@navikt/fp-types';
+import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak } from './apiDtoGenerert';
 
 export type OppholdÅrsakType = foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OppholdÅrsak;

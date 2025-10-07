@@ -9,18 +9,14 @@ import { FaktaGruppe, OverstyringKnapp } from '@navikt/ft-ui-komponenter';
 
 import { FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import {
-  type Aksjonspunkt,
-  type foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype,
-  type OmsorgOgRett,
-} from '@navikt/fp-types';
+import { type Aksjonspunkt, type OmsorgOgRett, type Rettighetstype } from '@navikt/fp-types';
 import type { OverstyringRettigheterAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { usePanelDataContext } from '@navikt/fp-utils';
 
 import styles from './overstyrRettigheterForm.module.css';
 
 type FormValues = {
-  rettighetstype: foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype;
+  rettighetstype: Rettighetstype;
   begrunnelse: string;
 };
 
@@ -37,7 +33,7 @@ const RETTIGHETSTYPER = {
   BARE_MOR_RETT: 'Rettighetstype.BareMorRett',
   BARE_FAR_RETT: 'Rettighetstype.BareFarRett',
   BARE_FAR_RETT_MOR_UFØR: 'Rettighetstype.BareFarRettMorUfør',
-} satisfies Record<foreldrepenger_behandlingslager_behandling_ytelsefordeling_Rettighetstype, string>;
+} satisfies Record<Rettighetstype, string>;
 
 export const RettighetstypeForm = ({ omsorgOgRett, aksjonspunkt, kanOverstyre }: Props) => {
   const { submitCallback, alleMerknaderFraBeslutter, isReadOnly, isSubmittable } =

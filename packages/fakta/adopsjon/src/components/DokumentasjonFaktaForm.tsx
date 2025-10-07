@@ -11,7 +11,7 @@ import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
 
 import { isNotEqual } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type { AdopsjonFamilieHendelse, tjenester_behandling_søknad_SoknadAdopsjonDto } from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, SøknadAdopsjon } from '@navikt/fp-types';
 import type { BekreftDokumentertDatoAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
@@ -30,7 +30,7 @@ interface Props {
   erForeldrepengerFagsak: boolean;
   hasEktefellesBarnAksjonspunkt: boolean;
   adopsjon: AdopsjonFamilieHendelse;
-  soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
+  soknad: SøknadAdopsjon;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
 }
 
@@ -158,7 +158,7 @@ DokumentasjonFaktaForm.transformValues = (values: FormValues): BekreftDokumenter
 });
 
 const isAdopsjonFodelsedatoerEdited =
-  (soknad: tjenester_behandling_søknad_SoknadAdopsjonDto, adopsjon: AdopsjonFamilieHendelse) =>
+  (soknad: SøknadAdopsjon, adopsjon: AdopsjonFamilieHendelse) =>
   (id: string): boolean => {
     const editedStatus = diff(soknad.adopsjonFodelsedatoer, adopsjon.fødselsdatoer);
     // @ts-expect-error -- usikker hva denne går ut på

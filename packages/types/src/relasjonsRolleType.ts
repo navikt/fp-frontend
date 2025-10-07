@@ -1,3 +1,3 @@
-import type { foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType } from '@navikt/fp-types';
+import type { foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType } from './apiDtoGenerert';
 
 export type RelasjonsRolleType = foreldrepenger_behandlingslager_behandling_personopplysning_RelasjonsRolleType;

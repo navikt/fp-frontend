@@ -18,6 +18,6 @@ export type ArbeidsforholdFodselOgTilrettelegging = tjenester_behandling_svp_Svp
 
 export type FodselOgTilrettelegging = tjenester_behandling_svp_SvpTilretteleggingDto;
 
-export type OppholdÅrsak = foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
+export type SvpOppholdÅrsak = foreldrepenger_behandlingslager_behandling_tilrettelegging_SvpOppholdÅrsak;
 
 export type TilretteleggingType = foreldrepenger_behandlingslager_behandling_tilrettelegging_TilretteleggingType;
