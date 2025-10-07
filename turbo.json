@@ -16,7 +16,14 @@
     "stylelint": {
       "inputs": ["$TURBO_DEFAULT$", "yarn.lock", "stylelint.config.cjs"]
     },
+    "prettier": {
+      "inputs": ["$TURBO_DEFAULT$", "yarn.lock"]
+    },
     "test": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "build-storybook": {
       "dependsOn": ["build"],
       "outputs": []
     },
