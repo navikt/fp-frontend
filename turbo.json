@@ -8,13 +8,13 @@
       "dependsOn": ["^build"]
     },
     "eslint": {
-      "outputs": []
+      "inputs": ["$TURBO_DEFAULT$", "yarn.lock"]
     },
     "tsc": {
-      "outputs": []
+      "inputs": ["$TURBO_DEFAULT$", "yarn.lock"]
     },
     "stylelint": {
-      "outputs": []
+      "inputs": ["$TURBO_DEFAULT$", "yarn.lock", "stylelint.config.cjs"]
     },
     "test": {
       "dependsOn": ["build"],
