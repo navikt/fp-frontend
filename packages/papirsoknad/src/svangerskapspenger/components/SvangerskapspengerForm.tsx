@@ -92,6 +92,7 @@ export const SvangerskapspengerForm = ({
         <BehovForTilretteleggingPanel readOnly={readOnly} />
         <SprakPapirsoknadIndex readOnly={readOnly} />
       </HGrid>
+
       <LagreSoknadPapirsoknadIndex
         readOnly={readOnly}
         onSubmitUfullstendigsoknad={onSubmitUfullstendigsoknad}
