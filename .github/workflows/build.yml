@@ -90,15 +90,15 @@ jobs:
       - name: Run linting
         run: |
           yarn stylelint --filter=@navikt/${{ inputs.app }}... &&
-          yarn eslint --filter=@navikt/${{ inputs.app }}... --filter=...[origin/master] &&
-          yarn tsc --filter=@navikt/${{ inputs.app }}... --filter=[master...${{ github.ref_name }}]
+          yarn eslint --filter=@navikt/${{ inputs.app }}... &&
+          yarn tsc --filter=@navikt/${{ inputs.app }}...
       - name: Run tests
         id: run-tests
         run: |
-          if [ "${{ github.ref_name }}" = "master" ]; then
+          if [ "${{ github.ref_name }}" = "master" ] || [ "${{ inputs.app }}" = "fp-avdelingsleder" ]; then
             yarn test --filter=@navikt/${{ inputs.app }}
           else
-            yarn test --filter=@navikt/${{ inputs.app }} --filter=...[origin/master]
+            yarn test --filter=...[origin/master]
           fi
       - name: Knip it
         if: inputs.run-knip
