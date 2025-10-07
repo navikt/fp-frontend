@@ -10,8 +10,8 @@ import dayjs from 'dayjs';
 import type {
   ArbeidsforholdFodselOgTilrettelegging,
   ArbeidsforholdTilretteleggingDato,
-  OppholdÅrsak,
   SvpAvklartOppholdPeriode,
+  SvpOppholdÅrsak,
   TilretteleggingType,
 } from '@navikt/fp-types';
 
@@ -67,7 +67,7 @@ export const TilretteleggingOgOppholdPerioderPanel = ({
     appendOpphold({
       fom: '',
       tom: '',
-      oppholdÅrsak: undefined as unknown as OppholdÅrsak,
+      oppholdÅrsak: undefined as unknown as SvpOppholdÅrsak,
       oppholdKilde: 'REGISTRERT_AV_SAKSBEHANDLER',
     });
   };

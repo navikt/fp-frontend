@@ -8,10 +8,10 @@ import { AksjonspunktKode } from '@navikt/fp-kodeverk';
 import { validerApKodeOgHentApEnum } from '@navikt/fp-prosess-felles';
 import type {
   Aksjonspunkt,
+  AksjonspunktDefinisjon,
   AnnenforelderUttakEøsPeriode,
   ArbeidsgiverOpplysningerPerId,
   FamilieHendelse,
-  foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon,
   PeriodeSoker,
   Personoversikt,
   Soknad,
@@ -26,9 +26,7 @@ import { UttakPeriodePanel } from './periodeDetaljer/UttakPeriodePanel';
 import { DisponibleStonadskontoerPanel } from './stonadsdagerOversikt/DisponibleStonadskontoerPanel';
 import { UttakTidslinjeIndex } from './tidslinje/UttakTidslinjeIndex';
 
-const UTTAK_PANEL_AKSJONSPUNKT_KODER: Partial<
-  Record<foreldrepenger_behandlingslager_behandling_aksjonspunkt_AksjonspunktDefinisjon, string>
-> = {
+const UTTAK_PANEL_AKSJONSPUNKT_KODER: Partial<Record<AksjonspunktDefinisjon, string>> = {
   5067: 'UttakPanel.Aksjonspunkt.5067',
   5069: 'UttakPanel.Aksjonspunkt.5069',
   5072: 'UttakPanel.Aksjonspunkt.5072',

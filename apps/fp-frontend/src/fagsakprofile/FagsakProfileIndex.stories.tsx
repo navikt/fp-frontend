@@ -16,8 +16,8 @@ import type {
   Behandling,
   BehandlingAppKontekst,
   BehandlingOppretting,
+  BehandlingTillatteOperasjoner,
   Fagsak,
-  tjenester_behandling_dto_BehandlingOperasjonerDto,
 } from '@navikt/fp-types';
 import { VergeBehandlingmenyValg } from '@navikt/fp-types';
 import { notEmpty } from '@navikt/fp-utils';
@@ -55,7 +55,7 @@ const BEHANDLING_TILLATTE_OPERASJONER = {
   vergeBehandlingsmeny: VergeBehandlingmenyValg.OPPRETT,
   uuid: '',
   behandlingKanMerkesHaster: false,
-} satisfies tjenester_behandling_dto_BehandlingOperasjonerDto;
+} satisfies BehandlingTillatteOperasjoner;
 
 const ALLE_BEHANDLINGER = [
   {

@@ -6,9 +6,8 @@ import { dateFormat } from '@navikt/ft-utils';
 import { AksjonspunktKode, isFaktaUttakAksjonspunkt, isUttakAksjonspunkt } from '@navikt/fp-kodeverk';
 import type {
   Behandlingsresultat,
-  foreldrepenger_behandlingslager_behandling_BehandlingStatus,
+  BehandlingStatus,
   KodeverkMedNavn,
-  tjenester_behandling_dto_behandling_BehandlingsresultatDto,
   TotrinnskontrollAksjonspunkt,
 } from '@navikt/fp-types';
 
@@ -146,7 +145,7 @@ const getTextForKlageHelper = (
 };
 
 const getTextForKlage = (
-  behandlingStaus: foreldrepenger_behandlingslager_behandling_BehandlingStatus,
+  behandlingStaus: BehandlingStatus,
   behandlingsresultat?: Behandlingsresultat,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (behandlingStaus === 'FVED') {
@@ -171,11 +170,11 @@ const erKlageAksjonspunkt = (aksjonspunkt: TotrinnskontrollAksjonspunkt): boolea
 
 export const getAksjonspunkttekst = (
   isForeldrepenger: boolean,
-  behandlingStatus: foreldrepenger_behandlingslager_behandling_BehandlingStatus,
+  behandlingStatus: BehandlingStatus,
   faktaOmBeregningTilfeller: KodeverkMedNavn<'FaktaOmBeregningTilfelle'>[],
   erTilbakekreving: boolean,
   aksjonspunkt: TotrinnskontrollAksjonspunkt,
-  behandlingsresultat?: tjenester_behandling_dto_behandling_BehandlingsresultatDto,
+  behandlingsresultat?: Behandlingsresultat,
 ): ReactElement<React.ComponentProps<typeof FormattedMessage>, typeof FormattedMessage>[] => {
   if (aksjonspunkt.aksjonspunktKode === AksjonspunktKode.VURDER_PERIODER_MED_OPPTJENING) {
     return buildOpptjeningText(aksjonspunkt);

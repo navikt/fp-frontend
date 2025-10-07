@@ -11,8 +11,8 @@ import type {
   BehandlingResultatType,
   BehandlingResultatTypeTilbakekreving,
   BehandlingType,
+  DokumentMalType,
   FagsakYtelseType,
-  foreldrepenger_dokumentbestiller_DokumentMalType,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
 } from '@navikt/fp-types';
@@ -23,7 +23,7 @@ const maxLength1500 = maxLength(1500);
 
 export type ForhåndsvisHenleggParams = {
   behandlingUuid: string;
-  dokumentMal: foreldrepenger_dokumentbestiller_DokumentMalType;
+  dokumentMal: DokumentMalType;
   fritekst?: string;
 };
 

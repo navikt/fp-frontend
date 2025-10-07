@@ -7,11 +7,7 @@ import { AksjonspunktHelpTextHTML } from '@navikt/ft-ui-komponenter';
 
 import { type FaktaBegrunnelseFormValues, FaktaBegrunnelseTextField, FaktaSubmitButton } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type {
-  AdopsjonFamilieHendelse,
-  Aksjonspunkt,
-  tjenester_behandling_søknad_SoknadAdopsjonDto,
-} from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, Aksjonspunkt, SøknadAdopsjon } from '@navikt/fp-types';
 import type {
   BekreftDokumentertDatoAksjonspunktAp,
   BekreftEktefelleAksjonspunktAp,
@@ -34,7 +30,7 @@ type AksjonspunktData =
 
 interface Props {
   isForeldrepengerFagsak: boolean;
-  soknad: tjenester_behandling_søknad_SoknadAdopsjonDto;
+  soknad: SøknadAdopsjon;
   adopsjon: AdopsjonFamilieHendelse;
 }
 

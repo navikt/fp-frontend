@@ -1,3 +1,3 @@
-import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OverføringÅrsak } from '@navikt/fp-types';
+import type { foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OverføringÅrsak } from './apiDtoGenerert';
 
 export type OverføringÅrsak = foreldrepenger_behandlingslager_behandling_ytelsefordeling_årsak_OverføringÅrsak;

@@ -9,11 +9,11 @@ import { type Location } from 'history';
 
 import type {
   BehandlingAppKontekst,
-  foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak,
   KodeverkMedNavn,
   KodeverkMedNavnTilbakekreving,
   SkjermlenkeType,
   TotrinnskontrollSkjermlenkeContext,
+  VurderÅrsak,
 } from '@navikt/fp-types';
 
 import { getAksjonspunkttekst } from './aksjonspunktTekster/aksjonspunktTekstUtleder';
@@ -24,7 +24,7 @@ const VurderPåNyttPunkter = ({
   vurderPaNyttArsaker,
   vurderArsaker,
 }: {
-  vurderPaNyttArsaker: foreldrepenger_behandlingslager_behandling_aksjonspunkt_VurderÅrsak[];
+  vurderPaNyttArsaker: VurderÅrsak[];
   vurderArsaker: KodeverkMedNavn<'VurderÅrsak'>[] | KodeverkMedNavnTilbakekreving<'VurderÅrsak'>[];
 }) => (
   <div className={styles['approvalItem']}>

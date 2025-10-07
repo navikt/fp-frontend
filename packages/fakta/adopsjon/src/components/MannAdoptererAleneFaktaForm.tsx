@@ -7,17 +7,13 @@ import { required } from '@navikt/ft-form-validators';
 
 import { hasValue } from '@navikt/fp-fakta-felles';
 import { AksjonspunktKode } from '@navikt/fp-kodeverk';
-import type {
-  AdopsjonFamilieHendelse,
-  AlleKodeverk,
-  foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType,
-} from '@navikt/fp-types';
+import type { AdopsjonFamilieHendelse, AlleKodeverk, FarSøkerType } from '@navikt/fp-types';
 import type { BekreftMannAdoptererAksjonspunktAp } from '@navikt/fp-types-avklar-aksjonspunkter';
 import { FaktaKort } from '@navikt/fp-ui-komponenter';
 
 interface Props {
   readOnly: boolean;
-  farSokerType: foreldrepenger_behandlingslager_behandling_søknad_FarSøkerType | undefined;
+  farSokerType: FarSøkerType | undefined;
   alleKodeverk: AlleKodeverk;
   alleMerknaderFraBeslutter: { [key: string]: { notAccepted?: boolean } };
   adopsjon: AdopsjonFamilieHendelse;

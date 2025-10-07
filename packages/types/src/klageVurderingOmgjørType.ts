@@ -1,3 +1,3 @@
-import type { foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør } from '@navikt/fp-types';
+import type { foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør } from './apiDtoGenerert';
 
 export type KlageVurderingOmgjørType = foreldrepenger_behandlingslager_behandling_klage_KlageVurderingOmgjør;
