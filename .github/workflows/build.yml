@@ -86,12 +86,26 @@ jobs:
       - name: Installere dependencies
         run: yarn install --immutable
       - name: Build
-        run: yarn build --scope=@navikt/${{ inputs.app }}
+        run: yarn build --filter=@navikt/${{ inputs.app }}
       - name: Run linting
-        run: yarn stylelint --scope=@navikt/${{ inputs.app }} && yarn eslint --scope=@navikt/${{ inputs.app }} && yarn tsc --scope=@navikt/${{ inputs.app }}
+        run: |
+          if [ "${{ github.ref_name }}" = "master" ]; then
+            yarn stylelint --filter='@navikt/${{ inputs.app }}...' &&
+            yarn eslint --filter='@navikt/${{ inputs.app }}...' &&
+            yarn tsc --filter='@navikt/${{ inputs.app }}...'
+          else
+            yarn stylelint --filter='@navikt/${{ inputs.app }}...[origin/master]' &&
+            yarn eslint --filter='@navikt/${{ inputs.app }}...[origin/master]' &&
+            yarn tsc --filter='@navikt/${{ inputs.app }}...[origin/master]'
+          fi
       - name: Run tests
         id: run-tests
-        run: yarn test --scope=@navikt/${{ inputs.app }}
+        run: |
+          if [ "${{ github.ref_name }}" = "master" ]; then
+            yarn test --filter=@navikt/${{ inputs.app }}...
+          else
+            yarn test --filter='@navikt/${{ inputs.app }}...[origin/master]'
+          fi
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"

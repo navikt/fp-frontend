@@ -3,7 +3,6 @@
 Monorepo for Frontend kode for foreldrepenger.
 
 [![Build](https://github.com/navikt/fp-frontend/workflows/Build,%20push%20and%20deploy%20Fpsak-frontend/badge.svg)](https://github.com/navikt/fp-frontend/workflows/Build,%20push%20and%20deploy%20Fpsak-frontend/badge.svg)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=navikt_fp-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=navikt_fp-frontend)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=navikt_fp-frontend&metric=coverage)](https://sonarcloud.io/dashboard?id=navikt_fp-frontend)
 [![Known Vulnerabilities](https://snyk.io/test/github/navikt/fp-frontend/badge.svg)](https://snyk.io/test/github/navikt/fp-frontend)
@@ -118,6 +117,7 @@ Alle DTO-er fra upstream-tjenester (f.eks. fpsak) er samlet i én generert fil m
 Synkroniser jevnlig for å holde typene oppdatert.
 
 - **Synkroniser typer i dev:**
+
 ```bash
 yarn generate-types
 ```
@@ -128,14 +128,10 @@ yarn generate-types
   yarn generate-types lokal
 ```
 
+## Turborepo
 
-
-## Workspaces
-
-- Common dev dependencies skal kun ligge på roten. ref
-  https://medium.com/@jsilvax/a-workflow-guide-for-lerna-with-yarn-workspaces-60f97481149d
-  > If you have common dev dependencies, it’s better to specify them in the workspace root package.json.
-  > For instance, this can be dependencies like Jest, Husky, Storybook, Eslint, Prettier, etc.
+- Hovedregelen ved bruk av Turborepo er at dependencies skal installeres i pakkene de blir brukt.
+  https://turborepo.com/docs/crafting-your-repository/managing-dependencies
 
 ### Licenses and attribution
 

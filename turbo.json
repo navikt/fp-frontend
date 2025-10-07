@@ -1,0 +1,31 @@
+{
+  "$schema": "https://turbo.build/schema.json",
+  "globalDependencies": ["turbo.json", "yarn.lock", "stylelint.config.cjs", "knip.ts", "Dockerfile", ".prettierrc"],
+  "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true,
+      "dependsOn": ["^build"]
+    },
+    "eslint": {
+      "outputs": []
+    },
+    "tsc": {
+      "outputs": []
+    },
+    "stylelint": {
+      "outputs": []
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "build": {
+      "dependsOn": ["^build", "eslint", "tsc", "stylelint"],
+      "outputs": ["{projectRoot}/dist"]
+    },
+    "clean": {
+      "cache": false
+    }
+  }
+}
