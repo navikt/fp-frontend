@@ -96,10 +96,10 @@ jobs:
         run: |
           yarn test --filter=@navikt/${{ inputs.app }}...
       - name: Save turbo cache
-          uses: actions/cache@v4
-          with:
-            path: .turbo
-            key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"
