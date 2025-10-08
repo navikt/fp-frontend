@@ -95,6 +95,7 @@ jobs:
         id: run-tests
         run: |
           yarn test --filter=@navikt/${{ inputs.app }}...
+      - run: du -sh .turbo
       - name: Save turbo cache
         uses: actions/cache@v4
         with:
