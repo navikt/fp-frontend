@@ -87,27 +87,12 @@ jobs:
           key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
           restore-keys: |
             turbo-${{ runner.os }}-
-      - name: Debug turbo folder
-        run: |
-          echo "Contents of .turbo:"
-          pwd && ls -la ~/work/fp-frontend/fp-frontend/.turbo || true
-          pwd && ls -la .turbo || true
-          ls -R .turbo || true
-          du -sh .turbo || true
       - name: Installere dependencies
         run: yarn install --immutable
-      - name: Build
+      - name: Build and linting
         run: yarn build --filter=@navikt/${{ inputs.app }}
-      - name: Run tests and linting
-        id: run-tests
-        run: |
-          yarn test --filter=@navikt/${{ inputs.app }}...
-      - name: Debug turbo folder
-        run: |
-          echo "Contents of .turbo:"
-          pwd && ls -la .turbo || true
-          ls -R .turbo || true
-          du -sh .turbo || true
+      - name: Run tests (linting always cached from build step)
+        run: yarn test --filter=@navikt/${{ inputs.app }}...
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"
