@@ -20,7 +20,6 @@ export type StandardFaktaPanelProps = Readonly<{
   isReadOnly: boolean;
   isSubmittable: boolean;
   harÅpentAksjonspunkt: boolean;
-
   submitCallback: (aksjonspunkterSomSkalLagres: FaktaAksjonspunkt | FaktaAksjonspunkt[]) => Promise<void>;
 }>;
 
