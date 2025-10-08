@@ -14,11 +14,12 @@ const {
 describe('UttakFaktaEøsIndex', () => {
   it('skal få aksjonspunkt uten eksisterende perioder og kan bekrefte AP uten å legge til noen perioder', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
+
+    render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
     expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -30,7 +31,8 @@ describe('UttakFaktaEøsIndex', () => {
 
   it('aksjonspunkt skal initielt ikke ha perioder registrert og saksbehandler kan bekrefte AP uten å legge til noen perioder', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
+
+    render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
     expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
@@ -51,7 +53,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -70,7 +72,7 @@ describe('UttakFaktaEøsIndex', () => {
 
   it('skal vise eksisterende perioder og kunne slette periode', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<ÅpentAksjonspunktMedPerioder submitCallback={lagre} />);
+    render(<ÅpentAksjonspunktMedPerioder submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
@@ -80,7 +82,7 @@ describe('UttakFaktaEøsIndex', () => {
     expect(screen.getByText('Vil du slette denne perioden?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('OK'));
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {
@@ -105,7 +107,8 @@ describe('UttakFaktaEøsIndex', () => {
 
   it('skal få feilmelding hvis en legger til overlappende perioder, rydder opp i overlapper og sender inn', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
+
+    render(<AksjonspunktOpprettetUtenTidligereVurderingSkalIkkeHaDefaultValg submitCallback={lagre} />);
 
     expect(await screen.findByText('Fakta om uttak til annen forelder i EØS')).toBeInTheDocument();
     expect(await screen.findByText('Ingen perioder lagt til.')).toBeInTheDocument();
@@ -136,7 +139,7 @@ describe('UttakFaktaEøsIndex', () => {
 
     expect(screen.queryByText('Ingen perioder lagt til.')).not.toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
     expect(screen.getByText('Du må rette disse feilene før du kan fortsette:')).toBeInTheDocument();
@@ -181,7 +184,8 @@ describe('UttakFaktaEøsIndex', () => {
 
   it('skal kunne overstyre og vil da sende inn med annen aksjonspunktkode enn ordinært aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
-    const utils = render(
+
+    render(
       <OverstyringSkalVæreMuligHvisDetForeliggerEnTidligereVurderingMedRegistrertePerioder submitCallback={lagre} />,
     );
 
@@ -192,7 +196,7 @@ describe('UttakFaktaEøsIndex', () => {
     await userEvent.click(screen.getByTitle('Overstyr'));
 
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(lagre).toHaveBeenNthCalledWith(1, {

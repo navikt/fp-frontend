@@ -11,7 +11,7 @@ describe('SvangerskapVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret ikke er oppfylt fordi en ikke har perioder som kan innvilges', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunktSkalIkkeKunneInnvilge submitCallback={lagre} />);
+    render(<ÅpentAksjonspunktSkalIkkeKunneInnvilge submitCallback={lagre} />);
 
     expect(await screen.findByText('Svangerskap')).toBeInTheDocument();
     expect(screen.getByText('Rett til svangerskapspenger')).toBeInTheDocument();
@@ -19,9 +19,9 @@ describe('SvangerskapVilkarProsessIndex', () => {
 
     await userEvent.click(screen.getByText(/Mor har ikke rett til svangerskapspenger, vilkåret er/));
 
-    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1065');
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), '1065');
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -38,7 +38,7 @@ describe('SvangerskapVilkarProsessIndex', () => {
   it('skal kunne bestemme at vilkåret er oppfylt når en har perioder som kan innvilges', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunktSkalKunneInnvilge submitCallback={lagre} />);
+    render(<ÅpentAksjonspunktSkalKunneInnvilge submitCallback={lagre} />);
 
     expect(await screen.findByText('Svangerskap')).toBeInTheDocument();
     expect(screen.getByText('Rett til svangerskapspenger')).toBeInTheDocument();
@@ -48,7 +48,7 @@ describe('SvangerskapVilkarProsessIndex', () => {
 
     await userEvent.click(screen.getByText('Mor har rett til svangerskapspenger, vilkåret er oppfylt'));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

@@ -17,14 +17,14 @@ describe('ForeldreansvarVilkarProsessIndex', () => {
   it('skal bestemme at 2-ledd er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt2Ledd submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt2Ledd submitCallback={lagre} />);
 
     expect(await screen.findByText('Foreldreansvaret')).toBeInTheDocument();
     expect(screen.getByText('Rett til stønad ved overtakelse av foreldreansvaret')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Far har rett til foreldrepenger, vilkåret er oppfylt'));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -42,20 +42,20 @@ describe('ForeldreansvarVilkarProsessIndex', () => {
   it('skal bestemme at 2-ledd ikke er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt2Ledd submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt2Ledd submitCallback={lagre} />);
 
     expect(await screen.findByText('Foreldreansvaret')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText(/Far har ikke rett til foreldrepenger, vilkåret er/));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1015');
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), '1015');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -73,14 +73,14 @@ describe('ForeldreansvarVilkarProsessIndex', () => {
   it('skal bestemme at 4-ledd er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt4Ledd submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt4Ledd submitCallback={lagre} />);
 
     expect(await screen.findByText('Foreldreansvaret')).toBeInTheDocument();
     expect(screen.getByText('Rett til stønad ved overtakelse av foreldreansvaret')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Far har rett til foreldrepenger, vilkåret er oppfylt'));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -98,20 +98,20 @@ describe('ForeldreansvarVilkarProsessIndex', () => {
   it('skal bestemme at 4-ledd ikke er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt4Ledd submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt4Ledd submitCallback={lagre} />);
 
     expect(await screen.findByText('Foreldreansvaret')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText(/Far har ikke rett til foreldrepenger, vilkåret er/));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1034');
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), '1034');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

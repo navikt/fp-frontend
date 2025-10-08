@@ -13,7 +13,7 @@ describe('KlagevurderingProsessIndex', () => {
     const mellomlagre = vi.fn();
     const forhåndsvise = vi.fn();
 
-    const utils = render(
+    render(
       <KlagevurderingMedAksjonspunktNfp
         submitCallback={lagre}
         saveKlage={mellomlagre}
@@ -26,16 +26,16 @@ describe('KlagevurderingProsessIndex', () => {
 
     await userEvent.click(screen.getByText('Omgjør vedtaket'));
 
-    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'ULIK_VURDERING');
+    await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'ULIK_VURDERING');
 
     await userEvent.click(screen.getByText('Til gunst'));
 
-    await userEvent.selectOptions(utils.getByLabelText('Hjemmel'), '14-17');
+    await userEvent.selectOptions(screen.getByLabelText('Hjemmel'), '14-17');
 
-    const vurderingInput = utils.getByLabelText('Begrunnelse');
+    const vurderingInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
-    const fritekstInput = utils.getByLabelText('Fritekst til brev');
+    const fritekstInput = screen.getByLabelText('Fritekst til brev');
     await userEvent.type(fritekstInput, 'Dette er en fritekst');
 
     await userEvent.click(screen.getByText('Lagre'));

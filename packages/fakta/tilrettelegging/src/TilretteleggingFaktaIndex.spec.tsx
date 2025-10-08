@@ -24,7 +24,7 @@ describe('TilretteleggingFaktaIndex', () => {
   it('skal vurdere velferdspermisjon og så bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -45,7 +45,7 @@ describe('TilretteleggingFaktaIndex', () => {
     expect(screen.getByText('17.03.2020 - 14.08.2020')).toBeInTheDocument();
     expect(screen.getByText('15.08.2020 - 15.10.2020')).toBeInTheDocument();
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -117,7 +117,7 @@ describe('TilretteleggingFaktaIndex', () => {
   });
 
   it('skal validere at en må velge minst ett arbeidsforhold og at alle velferdspermisjoner er vurdert', async () => {
-    const utils = render(<TilretteleggingMedVelferdspermisjon />);
+    render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -125,7 +125,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getByText('Skal ha svangerskapspenger for arbeidsforholdet'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -138,13 +138,13 @@ describe('TilretteleggingFaktaIndex', () => {
   it(
     'skal validere at en må ferdigstille tilretteleggingsperiode som er lagt til',
     async () => {
-      const utils = render(<HarOpphold />);
+      render(<HarOpphold />);
 
       expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
       await userEvent.click(screen.getByText('Periode med svangerskapspenger'));
 
-      await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+      await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
       await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -156,13 +156,13 @@ describe('TilretteleggingFaktaIndex', () => {
   );
 
   it('skal validere at en må ferdigstille oppholdsperiode som er lagt til', async () => {
-    const utils = render(<HarOpphold />);
+    render(<HarOpphold />);
 
     expect(await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Opphold'));
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -170,7 +170,7 @@ describe('TilretteleggingFaktaIndex', () => {
   });
 
   it('skal validere at dato for tilrettelegging fra lege eller jordmor må være før termindato', async () => {
-    const utils = render(<TilretteleggingMedVelferdspermisjon />);
+    render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -180,7 +180,7 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.type(dato, '{backspace}1');
     fireEvent.blur(dato);
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -247,7 +247,7 @@ describe('TilretteleggingFaktaIndex', () => {
   });
 
   it('skal legge til ny tilretteleggingsperiode', async () => {
-    const utils = render(<TilretteleggingMedVelferdspermisjon />);
+    render(<TilretteleggingMedVelferdspermisjon />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -274,7 +274,7 @@ describe('TilretteleggingFaktaIndex', () => {
     await userEvent.type(dato, lagNyDato('15.09.2020'));
     fireEvent.blur(dato);
 
-    await userEvent.type(utils.getByLabelText('Arbeidsprosent'), '40');
+    await userEvent.type(screen.getByLabelText('Arbeidsprosent'), '40');
 
     await userEvent.click(screen.getByText('Legg til ny periode'));
 
@@ -300,7 +300,7 @@ describe('TilretteleggingFaktaIndex', () => {
   it('skal legge til ny oppholdsperiode', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
+    render(<TilretteleggingMedVelferdspermisjon submitCallback={lagre} />);
 
     expect(
       await screen.findByText('Kontroller opplysninger fra jordmor og arbeidsgiver og om velferdspermisjonene stemmer'),
@@ -339,7 +339,7 @@ describe('TilretteleggingFaktaIndex', () => {
 
     await userEvent.click(screen.getAllByText('Oppdater')[0]!);
 
-    await userEvent.type(utils.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunn endringene'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

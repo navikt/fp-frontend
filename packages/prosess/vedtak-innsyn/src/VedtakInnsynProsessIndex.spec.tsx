@@ -46,7 +46,7 @@ describe('VedtakInnsynProsessIndex', () => {
     const lagre = vi.fn();
     const forhåndsvise = vi.fn();
 
-    const utils = render(<PanelForAvvistVedtak submitCallback={lagre} previewCallback={forhåndsvise} />);
+    render(<PanelForAvvistVedtak submitCallback={lagre} previewCallback={forhåndsvise} />);
 
     expect(await screen.findByText('Forslag til vedtak')).toBeInTheDocument();
     expect(screen.getByText('Resultat')).toBeInTheDocument();
@@ -54,7 +54,7 @@ describe('VedtakInnsynProsessIndex', () => {
     expect(screen.getByText('Vurdering')).toBeInTheDocument();
     expect(screen.getByText('Dette er utført')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Fritekst i brev');
+    const vurderingInput = screen.getByLabelText('Fritekst i brev');
     await userEvent.type(vurderingInput, 'Dette er en fritekst');
 
     await userEvent.click(screen.getByText('Forhåndsvis brev'));

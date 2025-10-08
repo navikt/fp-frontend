@@ -18,7 +18,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   it('skal velge å ha aleneomsorg for barnet', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
+    render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
 
     expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
     expect(await screen.findByText('Vurder om søker har aleneomsorg for barnet.')).toBeInTheDocument();
@@ -37,7 +37,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
 
     await userEvent.click(screen.getByLabelText('Søker har aleneomsorg for barnet'));
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -54,7 +54,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   it('skal velge å ikke ha aleneomsorg for barnet', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
+    render(<HarAksjonspunktForAvklarAleneomsorg submitCallback={lagreVurdering} />);
 
     expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
 
@@ -67,7 +67,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const jaElements = screen.getAllByText('Ja');
     await userEvent.click(jaElements.at(-1)!);
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -93,7 +93,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   it('skal vurdere at den andre forelderen har rett til foreldrepenger', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
+    render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
 
     expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
     expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
@@ -102,7 +102,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     const jaElements = screen.getAllByText('Ja');
     await userEvent.click(jaElements.at(-1)!);
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -118,7 +118,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
   it('skal vurdere at den andre forelderen ikke har rett til foreldrepenger', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
+    render(<HarAksjonspunktForAvklarAnnenForelderRett submitCallback={lagreVurdering} />);
 
     expect(await screen.findByText('Vurder om den andre forelderen har rett til foreldrepenger.')).toBeInTheDocument();
     expect(screen.queryByText('Rettighetstype')).not.toBeInTheDocument();
@@ -134,7 +134,7 @@ describe('OmsorgOgRettFaktaIndex', () => {
     expect(await screen.findByText('Mottar annen forelder uføretrygd, jf. § 14-14 tredje ledd?')).toBeInTheDocument();
     await userEvent.click(screen.getAllByText('Ja').at(-1)!);
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -219,12 +219,12 @@ describe('OmsorgOgRettFaktaIndex', () => {
   it('skal kunne ovestyre', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<KanOverstyreMor submitCallback={lagreVurdering} />);
+    render(<KanOverstyreMor submitCallback={lagreVurdering} />);
 
     await userEvent.click(screen.getByTitle('Overstyr'));
-    await userEvent.selectOptions(utils.getByLabelText('Rettighetstype'), 'BEGGE_RETT');
+    await userEvent.selectOptions(screen.getByLabelText('Rettighetstype'), 'BEGGE_RETT');
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
