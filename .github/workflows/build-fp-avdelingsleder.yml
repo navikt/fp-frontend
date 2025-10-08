@@ -20,7 +20,7 @@ jobs:
       contents: read
       packages: write
       id-token: write
-    uses: navikt/fp-frontend/.github/workflows/build.yml@master
+    uses: navikt/fp-frontend/.github/workflows/build.yml@turbo-fix
     with:
       runs-on: 'ubuntu-latest'
       node-version: '22.17.1'
