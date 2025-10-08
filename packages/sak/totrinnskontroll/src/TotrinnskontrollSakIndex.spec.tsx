@@ -56,7 +56,7 @@ describe('TotrinnskontrollSakIndex', () => {
   it('skal sende tilbake til saksbehandler fordi det er feil i fakta og feil i lovanvendelse', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForBeslutter onSubmit={lagre} />);
+    render(<ForBeslutter onSubmit={lagre} />);
 
     expect(await screen.findByText('Kontroller endrede opplysninger og faglige vurderinger')).toBeInTheDocument();
     expect(screen.getByText('Formkrav klage NFP')).toBeInTheDocument();
@@ -70,7 +70,7 @@ describe('TotrinnskontrollSakIndex', () => {
     await userEvent.click(screen.getByText('Fakta'));
     await userEvent.click(screen.getByText('Regel-/lovanvendelse'));
 
-    const begrunnelseInput = utils.getAllByLabelText('Begrunnelse');
+    const begrunnelseInput = screen.getAllByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput[1]!, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Send til saksbehandler'));

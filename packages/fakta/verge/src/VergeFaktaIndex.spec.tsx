@@ -12,28 +12,28 @@ describe('VergeFaktaIndex', () => {
   it('skal velge vergetype og bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default submitCallback={lagre} />);
+    render(<Default submitCallback={lagre} />);
 
     expect(await screen.findByText('Fyll ut og kontroller vergeopplysninger')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
 
-    await userEvent.selectOptions(utils.getByLabelText('Type verge'), 'ADVOKAT');
+    await userEvent.selectOptions(screen.getByLabelText('Type verge'), 'ADVOKAT');
 
-    const navnInput = utils.getByLabelText('Navn');
+    const navnInput = screen.getByLabelText('Navn');
     await userEvent.type(navnInput, 'Espen Utvikler');
 
-    const organisasjonsnummerInput = utils.getByLabelText('Organisasjonsnummer');
+    const organisasjonsnummerInput = screen.getByLabelText('Organisasjonsnummer');
     await userEvent.type(organisasjonsnummerInput, '232232323');
 
-    const fomInput = utils.getByLabelText('Fra og med');
+    const fomInput = screen.getByLabelText('Fra og med');
     await userEvent.type(fomInput, '14.09.2022');
     fireEvent.blur(fomInput);
 
-    const tomInput = utils.getByLabelText('Til og med');
+    const tomInput = screen.getByLabelText('Til og med');
     await userEvent.type(tomInput, '24.09.2022');
     fireEvent.blur(tomInput);
 
-    const begrunnelseInput = utils.getByLabelText('Begrunn endringene');
+    const begrunnelseInput = screen.getByLabelText('Begrunn endringene');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

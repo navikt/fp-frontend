@@ -14,16 +14,16 @@ describe('FormkravProsessIndex', () => {
   it('skal fylle ut og bekrefte skjema for NFP', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<FormkravPanelForAksjonspunktNfp submitCallback={lagre} />);
+    render(<FormkravPanelForAksjonspunktNfp submitCallback={lagre} />);
 
     expect(await screen.findByText('Vurder formkrav')).toBeInTheDocument();
     expect(screen.getByText('Fvl §§ 28, 31, 32, 33 og ftrl § 21-12')).toBeInTheDocument();
     expect(screen.getByText('Vurder om klagen oppfyller formkravene')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    await userEvent.selectOptions(utils.getByLabelText('Vedtaket som er påklagd'), '1');
+    await userEvent.selectOptions(screen.getByLabelText('Vedtaket som er påklagd'), '1');
 
     await userEvent.click(screen.getAllByText('Ja')[0]!);
     await userEvent.click(screen.getAllByText('Ja')[1]!);
@@ -53,21 +53,21 @@ describe('FormkravProsessIndex', () => {
   it('skal kunne fylle ut fritekst og mellomlagre når en velger nei på et spørsmål', async () => {
     const mellomlagre = vi.fn();
 
-    const utils = render(<FormkravPanelForAksjonspunktNfp lagreFormkravVurdering={mellomlagre} />);
+    render(<FormkravPanelForAksjonspunktNfp lagreFormkravVurdering={mellomlagre} />);
 
     expect(await screen.findByText('Vurder formkrav')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Vedtaket som er påklagd'), '1');
+    await userEvent.selectOptions(screen.getByLabelText('Vedtaket som er påklagd'), '1');
 
     await userEvent.click(screen.getAllByText('Nei')[0]!);
     await userEvent.click(screen.getAllByText('Ja')[1]!);
     await userEvent.click(screen.getAllByText('Ja')[2]!);
     await userEvent.click(screen.getAllByText('Ja')[3]!);
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
-    const fritekstInput = utils.getByLabelText('Fritekst');
+    const fritekstInput = screen.getByLabelText('Fritekst');
     await userEvent.type(fritekstInput, 'Dette er en fritekst');
 
     await userEvent.click(screen.getByText('Lagre'));

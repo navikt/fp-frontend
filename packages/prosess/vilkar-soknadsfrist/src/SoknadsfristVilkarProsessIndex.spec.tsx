@@ -10,7 +10,7 @@ describe('SoknadsfristVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Søknadsfrist')).toBeInTheDocument();
     expect(screen.getByText(/Søknaden ble mottatt/)).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe('SoknadsfristVilkarProsessIndex', () => {
 
     await userEvent.click(screen.getAllByText('Vilkåret er oppfylt')[0]!);
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

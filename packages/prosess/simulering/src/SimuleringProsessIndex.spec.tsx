@@ -11,7 +11,7 @@ describe('SimuleringProsessIndex', () => {
   it('skal velge ingen tilbakebetaling og så bekrefte', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<AksjonspunktVurderFeilutbetaling submitCallback={lagre} />);
+    render(<AksjonspunktVurderFeilutbetaling submitCallback={lagre} />);
 
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
     expect(screen.getByText('Vurder videre behandling av tilbakekreving')).toBeInTheDocument();
@@ -22,7 +22,7 @@ describe('SimuleringProsessIndex', () => {
     expect(screen.getByText('Resultat')).toBeInTheDocument();
     expect(screen.getByText('−26 486')).toBeInTheDocument();
 
-    const begrunnelseInput = utils.getByLabelText(
+    const begrunnelseInput = screen.getByLabelText(
       'Beskriv hvorfor det har oppstått en feilutbetaling og hvordan den skal behandles videre',
     );
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -45,11 +45,11 @@ describe('SimuleringProsessIndex', () => {
   it('skal velge å opprett tilbakekreving, sende varsel og så bekrefte', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<AksjonspunktVurderFeilutbetaling submitCallback={lagre} />);
+    render(<AksjonspunktVurderFeilutbetaling submitCallback={lagre} />);
 
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
 
-    const begrunnelseInput = utils.getByLabelText(
+    const begrunnelseInput = screen.getByLabelText(
       'Beskriv hvorfor det har oppstått en feilutbetaling og hvordan den skal behandles videre',
     );
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
@@ -58,7 +58,7 @@ describe('SimuleringProsessIndex', () => {
 
     expect(await screen.findByText('Send varsel om tilbakekreving')).toBeInTheDocument();
 
-    const fritekstVarselInput = utils.getByLabelText('Fritekst i varselet');
+    const fritekstVarselInput = screen.getByLabelText('Fritekst i varselet');
     await userEvent.type(fritekstVarselInput, 'Dette er en fritekst');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -94,12 +94,14 @@ describe('SimuleringProsessIndex', () => {
   });
 
   it('skal ikke vise aksjonspunkt-tekst og input-felter når en ikke har aksjonspunkt', async () => {
-    const utils = render(<SimuleringspanelUtenAksjonspunkt />);
+    render(<SimuleringspanelUtenAksjonspunkt />);
 
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
     expect(screen.queryByText('Vurder videre behandling av tilbakekreving')).not.toBeInTheDocument();
     expect(
-      utils.queryByLabelText('Beskriv hvorfor det har oppstått en feilutbetaling og hvordan den skal behandles videre'),
+      screen.queryByLabelText(
+        'Beskriv hvorfor det har oppstått en feilutbetaling og hvordan den skal behandles videre',
+      ),
     ).not.toBeInTheDocument();
     expect(screen.queryByText('Opprett tilbakekreving, send varsel')).not.toBeInTheDocument();
 
@@ -113,7 +115,7 @@ describe('SimuleringProsessIndex', () => {
   it('skal kunne løse aksjonspunkt for stor etterbetaling til søker', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<AksjonspunktKontrollerEtterbetaling submitCallback={lagre} />);
+    render(<AksjonspunktKontrollerEtterbetaling submitCallback={lagre} />);
 
     expect(await screen.findByText('Simulering')).toBeInTheDocument();
     expect(
@@ -121,7 +123,7 @@ describe('SimuleringProsessIndex', () => {
         'Ny inntektsmelding vil føre til en høy etterbetaling til bruker i en tidligere innvilget periode. Kontroller om dette er riktig',
       ),
     ).toBeInTheDocument();
-    const begrunnelse = utils.getByLabelText('Begrunn hvorfor du går videre med denne behandlingen.');
+    const begrunnelse = screen.getByLabelText('Begrunn hvorfor du går videre med denne behandlingen.');
     await userEvent.type(begrunnelse, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

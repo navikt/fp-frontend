@@ -12,14 +12,14 @@ describe('VarselOmRevurderingProsessIndex', () => {
   it('skal for førstegangsbehandling velge å ikke sende varsel til søker og så bekrefte', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForFørstegangsbehandling submitCallback={lagre} />);
+    render(<ForFørstegangsbehandling submitCallback={lagre} />);
 
     expect(await screen.findByText('Varsel om revurdering')).toBeInTheDocument();
     expect(screen.getByText('Vurder om varsel om revurdering skal sendes til søker')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Ikke send varsel til søker'));
 
-    const vurderingInput = utils.getByLabelText('Begrunnelse');
+    const vurderingInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -36,16 +36,16 @@ describe('VarselOmRevurderingProsessIndex', () => {
     const lagre = vi.fn();
     const forhåndsvis = vi.fn();
 
-    const utils = render(<ForFørstegangsbehandling submitCallback={lagre} previewCallback={forhåndsvis} />);
+    render(<ForFørstegangsbehandling submitCallback={lagre} previewCallback={forhåndsvis} />);
 
     expect(await screen.findByText('Varsel om revurdering')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Send varsel til søker'));
 
-    const fritekstInput = utils.getByLabelText('Fritekst i brev');
+    const fritekstInput = screen.getByLabelText('Fritekst i brev');
     await userEvent.type(fritekstInput, 'Dette er en fritekst');
 
-    const vurderingInput = utils.getByLabelText('Begrunnelse');
+    const vurderingInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Forhåndsvis'));
@@ -61,7 +61,7 @@ describe('VarselOmRevurderingProsessIndex', () => {
 
     expect(await screen.findByText('Behandlingen settes på vent')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Årsak'), 'AVV_DOK');
+    await userEvent.selectOptions(screen.getByLabelText('Årsak'), 'AVV_DOK');
 
     await userEvent.click(screen.getByText('OK'));
 
@@ -79,14 +79,14 @@ describe('VarselOmRevurderingProsessIndex', () => {
   it('skal for revurdering velge å ikke sende varsel til søker og så bekrefte', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ForRevurdering submitCallback={lagre} />);
+    render(<ForRevurdering submitCallback={lagre} />);
 
     expect(await screen.findByText('Varsel om revurdering')).toBeInTheDocument();
     expect(screen.getByText('Vurder om varsel om revurdering skal sendes til søker')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Ikke send varsel til søker'));
 
-    const vurderingInput = utils.getByLabelText('Begrunnelse');
+    const vurderingInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(vurderingInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

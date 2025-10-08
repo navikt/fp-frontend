@@ -17,7 +17,7 @@ describe('OpptjeningVilkarProsessIndex', () => {
   it('skal løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Opptjening')).toBeInTheDocument();
     expect(screen.getByText('Opptjent rett til foreldrepenger')).toBeInTheDocument();
@@ -27,7 +27,7 @@ describe('OpptjeningVilkarProsessIndex', () => {
 
     await userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -43,13 +43,13 @@ describe('OpptjeningVilkarProsessIndex', () => {
   it('skal validere at en ikke kan oppfylle vilkår når det ikke finnes aktiviteter', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunktMenUtenAktiviteter submitCallback={lagre} />);
+    render(<ÅpentAksjonspunktMenUtenAktiviteter submitCallback={lagre} />);
 
     expect(await screen.findByText('Opptjening')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Søker har oppfylt krav om 6 mnd opptjening, vilkåret er oppfylt.'));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

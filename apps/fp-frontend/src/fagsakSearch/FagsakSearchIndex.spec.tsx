@@ -10,11 +10,11 @@ const { Default } = composeStories(stories);
 describe('FagsakSearchIndex', () => {
   it('skal søke med saksnummer og få opp treff i liste', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    const utils = render(<Default />);
+    render(<Default />);
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
 
-    const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
+    const nrInput = screen.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     await userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();

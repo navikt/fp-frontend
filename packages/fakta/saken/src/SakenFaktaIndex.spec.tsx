@@ -17,7 +17,7 @@ describe('SakenFaktaIndex', () => {
   it('skal få aksjonspunkt om innehenting av dokumentasjon, svar at vil bli innhentet og bekreft', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
+    render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
     expect(
       await screen.findByText(
@@ -28,7 +28,7 @@ describe('SakenFaktaIndex', () => {
 
     await userEvent.click(screen.getAllByText('Dokumentasjon vil bli innhentet')[0]!);
 
-    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    const begrunnelseInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -44,7 +44,7 @@ describe('SakenFaktaIndex', () => {
   it('skal få feilmelding når en ikke har fylt ut alle feltene under Opptjening utland', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
+    render(<ApentAksjonspunktForInnhentingAvDokumentasjon submitCallback={lagre} />);
 
     expect(
       await screen.findByText(
@@ -52,7 +52,7 @@ describe('SakenFaktaIndex', () => {
       ),
     ).toBeInTheDocument();
 
-    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    const begrunnelseInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
