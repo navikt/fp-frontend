@@ -39,7 +39,7 @@ describe('AdopsjonFaktaIndex', () => {
       {
         begrunnelse: 'Dette er en begrunnelse',
         fodselsdatoer: {
-          1: '2018-01-01sdfsdfsfd',
+          1: '2018-01-01',
           2: '2000-01-02',
         },
         kode: '5004',
