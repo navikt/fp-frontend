@@ -15,7 +15,7 @@ describe('AdopsjonFaktaIndex', () => {
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og så bekrefte', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<AksjonspunktForAdopsjonsvilkåret submitCallback={lagre} />);
+    render(<AksjonspunktForAdopsjonsvilkåret submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen')).toBeInTheDocument();
     expect(screen.getByText('Adopsjonsopplysninger fra søknad')).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe('AdopsjonFaktaIndex', () => {
 
     expect(screen.getByText('Antall barn som fyller vilkåret')).toBeInTheDocument();
 
-    const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
+    const begrunnValgInput = screen.getByLabelText('Begrunn endringene');
     await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -51,7 +51,7 @@ describe('AdopsjonFaktaIndex', () => {
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og mann adopterer og så bekrefte', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<AksjonspunktForOmSøkerErMannSomAdoptererAlene submitCallback={lagre} />);
+    render(<AksjonspunktForOmSøkerErMannSomAdoptererAlene submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen')).toBeInTheDocument();
     expect(screen.getByText('Vurder om mann adopterer alene')).toBeInTheDocument();
@@ -62,7 +62,7 @@ describe('AdopsjonFaktaIndex', () => {
     expect(screen.getByText('Mann adopterer')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Ja, adopterer alene'));
 
-    const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
+    const begrunnValgInput = screen.getByLabelText('Begrunn endringene');
     await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -89,7 +89,7 @@ describe('AdopsjonFaktaIndex', () => {
   it('skal kontrollere opplysninger fra adopsjonsdokumentasjonen og ektefelles barn og så bekrefte', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<AksjonspunktForOmAdopsjonGjelderEktefellesBarn submitCallback={lagre} />);
+    render(<AksjonspunktForOmAdopsjonGjelderEktefellesBarn submitCallback={lagre} />);
 
     expect(await screen.findByText('Kontroller mot opplysningene fra adopsjonsdokumentasjonen')).toBeInTheDocument();
     expect(screen.getByText('Vurder om det er ektefelles/samboers barn som adopteres')).toBeInTheDocument();
@@ -101,7 +101,7 @@ describe('AdopsjonFaktaIndex', () => {
     expect(screen.getByText('Er det ektefelles/samboers barn som adopteres?')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Nei, det er ikke ektefelles/samboers barn'));
 
-    const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
+    const begrunnValgInput = screen.getByLabelText('Begrunn endringene');
     await userEvent.type(begrunnValgInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));

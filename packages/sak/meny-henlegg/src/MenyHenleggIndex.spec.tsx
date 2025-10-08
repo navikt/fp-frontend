@@ -10,7 +10,7 @@ const { ForFørstegangssøknad, ForKlage, ForInnsyn, ForTilbakekreving, ForTilba
 describe('MenyHenleggIndex', () => {
   it('skal velge henlegge behandling og så vise modal som viser at behandling er henlagt', async () => {
     const henleggBehandling = vi.fn(() => Promise.resolve());
-    const utils = render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);
+    render(<ForFørstegangssøknad henleggBehandling={henleggBehandling} />);
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
     expect(screen.getAllByText('Henlegg behandling')[1]!.closest('button')).toBeDisabled();
 
@@ -21,9 +21,9 @@ describe('MenyHenleggIndex', () => {
     expect(screen.queryByText('Klagen er trukket')).not.toBeInTheDocument();
     expect(screen.queryByText('Innsynskrav er trukket')).not.toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
+    await userEvent.selectOptions(screen.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
 
-    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    const begrunnelseInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getAllByText('Henlegg behandling')[1]!);
@@ -115,10 +115,12 @@ describe('MenyHenleggIndex', () => {
 
   it('skal vise lenke for forhåndsvisning når en har valgt årsak Søknaden er trukket', async () => {
     const forhandsvisHenleggBehandling = vi.fn(() => Promise.resolve());
-    const utils = render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
+
+    render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
+
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
 
-    await userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
+    await userEvent.selectOptions(screen.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_TRUKKET');
 
     expect(await screen.findByText('Informer søker')).toBeInTheDocument();
     await userEvent.click(screen.getByText('Forhåndsvis brev'));
@@ -133,10 +135,12 @@ describe('MenyHenleggIndex', () => {
 
   it('skal ikke vise lenke for forhåndsvisning når en har valgt årsak Søknaden mangler', async () => {
     const forhandsvisHenleggBehandling = vi.fn(() => Promise.resolve());
-    const utils = render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
+
+    render(<ForFørstegangssøknad forhandsvisHenleggBehandling={forhandsvisHenleggBehandling} />);
+
     expect(await screen.findAllByText('Henlegg behandling')).toHaveLength(2);
 
-    await userEvent.selectOptions(utils.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_MANGLER');
+    await userEvent.selectOptions(screen.getByLabelText('Velg årsak'), 'HENLAGT_SØKNAD_MANGLER');
 
     await waitFor(() => expect(screen.queryByText('Informer søker')).not.toBeInTheDocument());
   });

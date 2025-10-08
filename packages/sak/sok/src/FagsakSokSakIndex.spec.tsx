@@ -8,11 +8,11 @@ const { Default, IkkeAdgang, IngenTreff } = composeStories(stories);
 
 describe('FagsakSokSakIndex', () => {
   it('skal skrive inn ikke gyldig saksnummer og få feilmelding', async () => {
-    const utils = render(<Default />);
+    render(<Default />);
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
     expect(screen.getByText('Søk').closest('button')).toBeDisabled();
 
-    const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
+    const nrInput = screen.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     await userEvent.type(nrInput, 'TEST');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
@@ -23,11 +23,11 @@ describe('FagsakSokSakIndex', () => {
   });
 
   it('skal skrive inn gyldig saksnummer og få opp to treff', async () => {
-    const utils = render(<Default />);
+    render(<Default />);
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
     expect(screen.getByText('Søk').closest('button')).toBeDisabled();
 
-    const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
+    const nrInput = screen.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     await userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();
@@ -49,12 +49,12 @@ describe('FagsakSokSakIndex', () => {
   });
 
   it('skal ikke få noen treff på søk', async () => {
-    const utils = render(<IngenTreff />);
+    render(<IngenTreff />);
 
     expect(await screen.findByText('Søk på sak eller person')).toBeInTheDocument();
     expect(screen.getByText('Søk').closest('button')).toBeDisabled();
 
-    const nrInput = utils.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
+    const nrInput = screen.getByLabelText('Saksnummer eller fødselsnummer/D-nummer');
     await userEvent.type(nrInput, '123');
 
     expect(await screen.findByText('Søk')).toBeEnabled();

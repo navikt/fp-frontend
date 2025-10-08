@@ -10,7 +10,7 @@ describe('NotatSakIndex', () => {
   it('skal legge til notat', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<Default lagreNotat={lagre} />);
+    render(<Default lagreNotat={lagre} />);
 
     expect(await screen.findByText('Dette er et notat skrevet av Espen som nå er innlogget')).toBeInTheDocument();
     expect(screen.getByText('Du')).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe('NotatSakIndex', () => {
 
     expect(screen.getByText('Kun saksbehandlere får se notatet')).toBeInTheDocument();
 
-    const notatInput = utils.getByRole('textbox');
+    const notatInput = screen.getByRole('textbox');
     await userEvent.type(notatInput, 'Dette er et notat');
 
     await userEvent.click(screen.getByText('Legg til notat'));

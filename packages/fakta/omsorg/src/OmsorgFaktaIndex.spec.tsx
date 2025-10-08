@@ -10,7 +10,7 @@ describe('OmsorgFaktaIndex', () => {
   it('skal velge at søker har omsorg for barnet', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg submitCallback={lagreVurdering} />);
+    render(<ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg submitCallback={lagreVurdering} />);
 
     expect(await screen.findByText('Vurder om søker har omsorg for barnet i søknadsperioden')).toBeInTheDocument();
 
@@ -24,7 +24,7 @@ describe('OmsorgFaktaIndex', () => {
 
     await userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[0]!);
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
@@ -39,7 +39,7 @@ describe('OmsorgFaktaIndex', () => {
   it('skal velge at søker ikke har omsorg for barnet', async () => {
     const lagreVurdering = vi.fn(() => Promise.resolve());
 
-    const utils = render(<ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg submitCallback={lagreVurdering} />);
+    render(<ÅpentAksjonspunktForKontrollAvOmBrukerHarOmsorg submitCallback={lagreVurdering} />);
 
     expect(await screen.findByText('Vurder om søker har omsorg for barnet i søknadsperioden')).toBeInTheDocument();
 
@@ -49,7 +49,7 @@ describe('OmsorgFaktaIndex', () => {
 
     await userEvent.click(screen.getAllByText('Søker har omsorg for barnet')[1]!);
 
-    await userEvent.type(utils.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Vurdering'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

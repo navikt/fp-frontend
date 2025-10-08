@@ -10,14 +10,16 @@ describe('MenyEndreBehandlendeEnhetIndex', () => {
   it('skal velge og lagre ny enhet', async () => {
     const lagreNyBehandlendeEnhet = vi.fn();
     const lukkModal = vi.fn();
-    const utils = render(<Default nyBehandlendeEnhet={lagreNyBehandlendeEnhet} lukkModal={lukkModal} />);
+
+    render(<Default nyBehandlendeEnhet={lagreNyBehandlendeEnhet} lukkModal={lukkModal} />);
+
     expect(await screen.findByText('Endre behandlende enhet for valgt behandling')).toBeInTheDocument();
     expect(screen.getByText('OK').closest('button')).toBeDisabled();
 
-    const begrunnelseInput = utils.getByLabelText('Begrunnelse');
+    const begrunnelseInput = screen.getByLabelText('Begrunnelse');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
-    await userEvent.selectOptions(utils.getByLabelText('Ny enhet'), '0');
+    await userEvent.selectOptions(screen.getByLabelText('Ny enhet'), '0');
 
     expect(await screen.findByText('OK')).toBeEnabled();
     await userEvent.click(screen.getByText('OK'));

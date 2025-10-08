@@ -34,7 +34,7 @@ const lagOpptjeningAktivitet = (resultat: string): OpptjeningAktiviteter => ({
   godkjent: resultat === 'GODKJENT',
 });
 
-describe('OpptjeningTotrinnnText', () => {
+describe('OpptjeningTotrinnText', () => {
   it('skal vise korrekt tekst for opptjening med endring av arbeid med navn', async () => {
     render(
       <RawIntlProvider value={intlMock}>

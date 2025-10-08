@@ -16,7 +16,7 @@ describe('UttakDokumentasjonFaktaIndex', () => {
   it('skal avklare perioder og så bekrefte aksjonspunkt', async () => {
     const lagre = vi.fn(() => Promise.resolve());
 
-    const utils = render(<AksjonspunktMedUavklartePerioder submitCallback={lagre} />);
+    render(<AksjonspunktMedUavklartePerioder submitCallback={lagre} />);
 
     expect(screen.getByText('Kontroller dokumentasjon')).toBeInTheDocument();
     expect(screen.getByText('Bekreft og fortsett').closest('button')).toBeDisabled();
@@ -48,7 +48,7 @@ describe('UttakDokumentasjonFaktaIndex', () => {
     await userEvent.type(screen.getByLabelText('Hvor mange prosent jobber mor?'), '60');
     await userEvent.click(screen.getByText('Oppdater'));
 
-    await userEvent.type(utils.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
+    await userEvent.type(screen.getByLabelText('Begrunnelse'), 'Dette er en begrunnelse');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

@@ -10,11 +10,11 @@ const { Default, SaksbehandlerFinnesIkke } = composeStories(stories);
 describe('LeggTilSaksbehandlerForm', () => {
   it('skal vise at oppgitt brukerident ikke finnes', async () => {
     applyRequestHandlers(SaksbehandlerFinnesIkke.parameters['msw'] as MswParameters['msw']);
-    const utils = render(<SaksbehandlerFinnesIkke />);
+    render(<SaksbehandlerFinnesIkke />);
 
     expect(await screen.findByText('Legg til saksbehandler')).toBeInTheDocument();
 
-    const brukerIdentInput = utils.getByLabelText('Brukerident');
+    const brukerIdentInput = screen.getByLabelText('Brukerident');
     await userEvent.type(brukerIdentInput, 'TESTIDENT');
 
     expect(await screen.findByText('Søk')).toBeInTheDocument();
@@ -28,11 +28,11 @@ describe('LeggTilSaksbehandlerForm', () => {
 
   it('skal finne brukerident og så legge saksbehandler til listen', async () => {
     applyRequestHandlers(Default.parameters['msw'] as MswParameters['msw']);
-    const utils = render(<Default />);
+    render(<Default />);
 
     expect(await screen.findByText('Legg til saksbehandler')).toBeInTheDocument();
 
-    const brukerIdentInput = utils.getByLabelText('Brukerident');
+    const brukerIdentInput = screen.getByLabelText('Brukerident');
     await userEvent.type(brukerIdentInput, 'TESTIDENT');
 
     expect(await screen.findByText('Søk')).toBeInTheDocument();

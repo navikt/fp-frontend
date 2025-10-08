@@ -10,14 +10,14 @@ describe('OmsorgVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
     expect(screen.getByText('Far rett til engangsstønad')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText('Far har rett til engangsstønad, vilkåret er oppfylt'));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -35,20 +35,20 @@ describe('OmsorgVilkarProsessIndex', () => {
   it('skal bestemme at vilkåret ikke er oppfylt og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<ÅpentAksjonspunkt submitCallback={lagre} />);
+    render(<ÅpentAksjonspunkt submitCallback={lagre} />);
 
     expect(await screen.findByText('Omsorg')).toBeInTheDocument();
 
     await userEvent.click(screen.getByText(/Far har ikke rett til engangsstønad, vilkåret er/));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 
     expect(await screen.findByText('Feltet må fylles ut')).toBeInTheDocument();
 
-    await userEvent.selectOptions(utils.getByLabelText('Avslagsårsak'), '1011');
+    await userEvent.selectOptions(screen.getByLabelText('Avslagsårsak'), '1011');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
 

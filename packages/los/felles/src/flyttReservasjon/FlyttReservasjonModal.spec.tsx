@@ -17,11 +17,11 @@ describe('FlyttReservasjonModal', () => {
   });
 
   it('skal vise at oppgitt brukerident ikke finnes', async () => {
-    const utils = render(<Default />);
+    render(<Default />);
 
     expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
-    const brukerIdentInput = utils.getByLabelText('Brukerident');
+    const brukerIdentInput = screen.getByLabelText('Brukerident');
     await userEvent.type(brukerIdentInput, 'TESTTES');
 
     expect(await screen.findByText('Søk')).toBeInTheDocument();
@@ -35,11 +35,11 @@ describe('FlyttReservasjonModal', () => {
 
   it('skal vise finne brukerident og så lagre begrunnelse for flytting', async () => {
     const flyttOppgavereservasjon = vi.fn();
-    const utils = render(<MedTreffPåSøk flyttOppgavereservasjon={flyttOppgavereservasjon} />);
+    render(<MedTreffPåSøk flyttOppgavereservasjon={flyttOppgavereservasjon} />);
 
     expect(await screen.findByText('Flytt reservasjonen til annen saksbehandler')).toBeInTheDocument();
 
-    const brukerIdentInput = utils.getByLabelText('Brukerident');
+    const brukerIdentInput = screen.getByLabelText('Brukerident');
     await userEvent.type(brukerIdentInput, 'TESTTES');
 
     expect(await screen.findByText('Søk')).toBeInTheDocument();
@@ -50,7 +50,7 @@ describe('FlyttReservasjonModal', () => {
     expect(await screen.findByText('Espen Utvikler')).toBeInTheDocument();
     expect(screen.getByText('OK').closest('button')).toBeDisabled();
 
-    const begrunnelseInput = utils.getByLabelText('Begrunn flytting av reservasjonen');
+    const begrunnelseInput = screen.getByLabelText('Begrunn flytting av reservasjonen');
     await userEvent.type(begrunnelseInput, 'Dette er en begrunnelse');
 
     await waitFor(() => expect(screen.getByText('OK')).toBeEnabled());

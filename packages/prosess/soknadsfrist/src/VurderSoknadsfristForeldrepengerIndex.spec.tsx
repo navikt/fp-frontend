@@ -10,7 +10,7 @@ describe('VurderSoknadsfristForeldrepengerIndex', () => {
   it('skal velge ingen grunn og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<PanelForSoknadsfrist submitCallback={lagre} />);
+    render(<PanelForSoknadsfrist submitCallback={lagre} />);
 
     expect(await screen.findByText('Søknadsfrist')).toBeInTheDocument();
     expect(screen.getByText('Søknad ble mottatt 2 dager etter søknadsfrist (01.10.2019)')).toBeInTheDocument();
@@ -19,7 +19,7 @@ describe('VurderSoknadsfristForeldrepengerIndex', () => {
     expect(screen.getByText('Søknadsperiode')).toBeInTheDocument();
     expect(screen.getByText('01.01.2019 - 10.01.2019')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Ingen gyldig grunn for sen fremsetting av søknaden'));
@@ -38,7 +38,7 @@ describe('VurderSoknadsfristForeldrepengerIndex', () => {
   it('skal velge gyldig grunn og så løse aksjonspunkt', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<PanelForSoknadsfrist submitCallback={lagre} />);
+    render(<PanelForSoknadsfrist submitCallback={lagre} />);
 
     expect(await screen.findByText('Søknadsfrist')).toBeInTheDocument();
     expect(screen.getByText('Søknad ble mottatt 2 dager etter søknadsfrist (01.10.2019)')).toBeInTheDocument();
@@ -47,7 +47,7 @@ describe('VurderSoknadsfristForeldrepengerIndex', () => {
     expect(screen.getByText('Søknadsperiode')).toBeInTheDocument();
     expect(screen.getByText('01.01.2019 - 10.01.2019')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Gyldig grunn for sen fremsetting av søknaden'));

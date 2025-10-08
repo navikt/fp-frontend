@@ -12,19 +12,19 @@ describe('InnsynProsessIndex', () => {
   it('skal fylle ut og så bekrefte avslått innsyn', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<PanelForVurderingAvInnsyn submitCallback={lagre} />);
+    render(<PanelForVurderingAvInnsyn submitCallback={lagre} />);
 
     expect(await screen.findByText('Innsynsbehandling')).toBeInTheDocument();
     expect(screen.getByText('Følg manuelle rutiner for innsynsbehandling')).toBeInTheDocument();
 
-    const datoMottattKravInput = utils.getByLabelText('Dato for mottatt krav om innsyn');
+    const datoMottattKravInput = screen.getByLabelText('Dato for mottatt krav om innsyn');
     await userEvent.type(datoMottattKravInput, '23.12.2021');
     fireEvent.blur(datoMottattKravInput);
 
     expect(screen.getByText('Velg innsynsdokumentasjon til søker')).toBeInTheDocument();
     expect(screen.getByText('Dette er et dokument')).toBeInTheDocument();
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Bekreft og fortsett'));
@@ -68,24 +68,24 @@ describe('InnsynProsessIndex', () => {
   it('skal fylle ut og så bekrefte innvilget innsyn', async () => {
     const lagre = vi.fn();
 
-    const utils = render(<PanelForVurderingAvInnsyn submitCallback={lagre} />);
+    render(<PanelForVurderingAvInnsyn submitCallback={lagre} />);
 
     expect(await screen.findByText('Innsynsbehandling')).toBeInTheDocument();
 
-    const datoMottattKravInput = utils.getByLabelText('Dato for mottatt krav om innsyn');
+    const datoMottattKravInput = screen.getByLabelText('Dato for mottatt krav om innsyn');
     await userEvent.type(datoMottattKravInput, '23.12.2021');
     fireEvent.blur(datoMottattKravInput);
 
     await userEvent.click(screen.getByRole('checkbox'));
 
-    const vurderingInput = utils.getByLabelText('Vurdering');
+    const vurderingInput = screen.getByLabelText('Vurdering');
     await userEvent.type(vurderingInput, 'Dette er en vurdering');
 
     await userEvent.click(screen.getByText('Innvilget innsyn'));
 
     await userEvent.click(screen.getByText('Sett behandling på vent i påvente av skanning'));
 
-    const sattPaVentFristInput = utils.getByLabelText('Behandling blir satt på vent med frist');
+    const sattPaVentFristInput = screen.getByLabelText('Behandling blir satt på vent med frist');
     await userEvent.clear(sattPaVentFristInput);
     await userEvent.type(sattPaVentFristInput, '29.12.2021');
     fireEvent.blur(sattPaVentFristInput);
