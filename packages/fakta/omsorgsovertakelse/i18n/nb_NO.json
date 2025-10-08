@@ -1,0 +1,17 @@
+{
+  "FaktaFraFReg.Tittel": "Opplysninger fra Folkeregisteret",
+  "FaktaFraFReg.IngenBarn": "Det er ikke registrert noen fødselshendelse i Folkeregisteret",
+  "FaktaFraSøknad.Tittel": "Opplysninger oppgitt i søknaden",
+  "Situasjon.OpplysningerGjeldende": "Gjeldende opplysninger",
+  "Label.Barn": "Barn",
+  "Label.NummerertBarn": "Barn {nummer}",
+  "Label.Fødselsdato": "Fødselsdato",
+  "Label.Dødsdato": "Dødsdato",
+  "Label.AntallBarn": "Antall barn",
+  "Label.Omsorgsovertakelsesdato": "Omsorgsovertakelsesdato",
+  "Label.Ankomstdato": "Ankomstdato",
+  "Label.ErEktefellesBarn": "Er det ektefelles barn?",
+  "Label.Ja": "Ja",
+  "Label.Nei": "Nei",
+  "Label.Delvilkår": "Delvilkår"
+}

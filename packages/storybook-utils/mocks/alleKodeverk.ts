@@ -1934,19 +1934,39 @@ export const alleKodeverk: AlleKodeverk = {
   ],
   OmsorgsovertakelseVilkårType: [
     {
-      kode: 'FP_VK_8',
+      kode: 'FP_VK_8F',
       kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
-      navn: 'Foreldreansvarsvilkåret §14-17 andre ledd',
+      navn: 'Foreldreansvar §14-5 andre ledd',
     },
     {
-      kode: 'FP_VK_33',
+      kode: 'FP_VK_16S',
       kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
-      navn: 'Foreldreansvarsvilkåret §14-17 fjerde ledd',
+      navn: 'Stebarnsadopsjon §14-5 tredje ledd',
     },
     {
       kode: 'FP_VK_5',
       kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
-      navn: 'Omsorgsvilkår §14-17 tredje ledd',
+      navn: 'Omsorg §14-17 tredje ledd',
+    },
+    {
+      kode: 'FP_VK_8',
+      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
+      navn: 'Foreldreansvar §14-17 andre ledd',
+    },
+    {
+      kode: 'FP_VK_16',
+      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
+      navn: 'Adopsjon §14-5 første ledd',
+    },
+    {
+      kode: 'FP_VK_4',
+      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
+      navn: 'Adopsjon §14-17 første ledd',
+    },
+    {
+      kode: 'FP_VK_33',
+      kodeverk: 'OMSORGSOVERTAKELSE_VILKAR',
+      navn: 'Foreldreansvar §14-17 fjerde ledd',
     },
   ],
   FordelingPeriodeKilde: [
