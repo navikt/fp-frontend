@@ -25,6 +25,7 @@ export type { OverstyringRettigheterAp } from './src/fakta/OverstyringRettighete
 export type { AvklarDekningsgradAp } from './src/fakta/AvklarDekningsgradAp';
 export type { AvklarFaktaForForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForForeldreansvarAksjonspunktAp';
 export type { AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp } from './src/fakta/AvklarFaktaForOmsorgOgForeldreansvarAksjonspunktAp';
+export type { VurderOmsorgsovertakelseVilkåretAp } from './src/fakta/VurderOmsorgsovertakelseVilkåretAp';
 export type { AvklarAktivitetsPerioderAp, OpptjeningAktivitetAp } from './src/fakta/AvklarAktivitetsPerioderAp';
 export type { VurderDokumentasjonAp } from './src/fakta/VurderDokumentasjonAp';
 export type { VurderMedlemskapAp } from './src/fakta/VurderMedlemskapAp';

@@ -14,6 +14,7 @@ import { FordelingFaktaInitPanel } from '../fellesPaneler/fakta/FordelingFaktaIn
 import { InntektsmeldingerFaktaInitPanel } from '../fellesPaneler/fakta/InntektsmeldingerFaktaInitPanel';
 import { MedlemskapsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/MedlemskapsvilkaretFaktaInitPanel';
 import { OmsorgOgForeldreansvarFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgOgForeldreansvarFaktaInitPanel';
+import { OmsorgsovertakelseFaktaInitPanel } from '../fellesPaneler/fakta/OmsorgsovertakelseFaktaInitPanel';
 import { OpptjeningsvilkaretFaktaInitPanel } from '../fellesPaneler/fakta/OpptjeningsvilkaretFaktaInitPanel';
 import { PermisjonFaktaInitPanel } from '../fellesPaneler/fakta/PermisjonFaktaInitPanel';
 import { SakenFaktaInitPanel } from '../fellesPaneler/fakta/SakenFaktaInitPanel';
@@ -76,6 +77,7 @@ const ForeldrepengerPaneler = ({ valgtProsessSteg, valgtFaktaSteg, arbeidsgivere
         <VergeFaktaInitPanel />
         <OmsorgOgForeldreansvarFaktaInitPanel personoversikt={personoversikt} />
         <AdopsjonsvilkaretFaktaInitPanel />
+        <OmsorgsovertakelseFaktaInitPanel />
         <FodselvilkaretFaktaInitPanel />
         <MedlemskapsvilkaretFaktaInitPanel />
         <OpptjeningsvilkaretFaktaInitPanel arbeidsgiverOpplysningerPerId={arbeidsgivere} />
