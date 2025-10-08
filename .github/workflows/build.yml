@@ -99,7 +99,11 @@ jobs:
       - name: Run tests and linting
         id: run-tests
         run: |
-          yarn test --filter=@navikt/${{ inputs.app }}...
+          if [ "${{ github.ref_namegit }}" = "master" ]; then
+            yarn test --filter=...@navikt/${{ inputs.app }}
+          else
+            yarn test --filter='...@navikt/${{ inputs.app }}[origin/master]'
+          fi
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"
