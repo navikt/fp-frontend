@@ -80,26 +80,19 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: 'yarn'
-      - name: Restore Turborepo cache
+      - name: Use turbo cache
         uses: actions/cache@v4
         with:
-          path: .turbo
+          path: ~/work/fp-frontend/fp-frontend/.turbo
           key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
           restore-keys: |
             turbo-${{ runner.os }}-
       - name: Installere dependencies
         run: yarn install --immutable
-      - name: Build
+      - name: Build and linting
         run: yarn build --filter=@navikt/${{ inputs.app }}
-      - name: Save Turborepo cache
-        uses: actions/cache@v4
-        with:
-          path: .turbo
-          key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
-      - name: Run tests and linting
-        id: run-tests
-        run: |
-          yarn test --filter=@navikt/${{ inputs.app }}...
+      - name: Run tests (linting always cached from build step)
+        run: yarn test --filter=@navikt/${{ inputs.app }}...
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"

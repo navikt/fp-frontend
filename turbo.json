@@ -29,7 +29,7 @@
     },
     "build": {
       "dependsOn": ["^build", "eslint", "tsc", "stylelint"],
-      "outputs": ["{projectRoot}/dist"]
+      "outputs": ["dist"]
     },
     "clean": {
       "cache": false
