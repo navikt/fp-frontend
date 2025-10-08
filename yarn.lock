@@ -1392,7 +1392,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-adopsjon@workspace:*, @navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon":
+"@navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-adopsjon@workspace:packages/fakta/adopsjon"
   dependencies:
@@ -1681,7 +1681,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:*, @navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar":
+"@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar":
   version: 0.0.0-use.local
   resolution: "@navikt/fp-fakta-omsorg-og-foreldreansvar@workspace:packages/fakta/omsorg-og-foreldreansvar"
   dependencies:
@@ -2178,7 +2178,6 @@ __metadata:
     "@navikt/fp-config-eslint": "workspace:*"
     "@navikt/fp-config-typescript": "workspace:*"
     "@navikt/fp-config-vite": "workspace:*"
-    "@navikt/fp-fakta-adopsjon": "workspace:*"
     "@navikt/fp-fakta-arbeid-og-inntekt": "workspace:*"
     "@navikt/fp-fakta-arbeidsforhold": "workspace:*"
     "@navikt/fp-fakta-besteberegning": "workspace:*"
@@ -2186,7 +2185,6 @@ __metadata:
     "@navikt/fp-fakta-inntektsmelding": "workspace:*"
     "@navikt/fp-fakta-medlemskap": "workspace:*"
     "@navikt/fp-fakta-omsorg": "workspace:*"
-    "@navikt/fp-fakta-omsorg-og-foreldreansvar": "workspace:*"
     "@navikt/fp-fakta-omsorg-og-rett": "workspace:*"
     "@navikt/fp-fakta-opptjening": "workspace:*"
     "@navikt/fp-fakta-permisjon": "workspace:*"
