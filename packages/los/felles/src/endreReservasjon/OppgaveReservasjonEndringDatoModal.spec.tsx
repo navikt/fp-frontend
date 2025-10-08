@@ -20,6 +20,7 @@ describe('OppgaveReservasjonEndringDatoModal', () => {
     await userEvent.type(datoInput, dayjs().format(DDMMYYYY_DATE_FORMAT));
 
     expect(await screen.findByText('OK')).toBeInTheDocument();
+
     await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(endreOppgavereservasjon).toHaveBeenCalledTimes(1));
