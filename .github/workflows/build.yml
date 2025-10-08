@@ -68,8 +68,6 @@ jobs:
         with:
           ref: ${{ (inputs.branch != '' && inputs.branch) || '' }}
           fetch-depth: 0
-      - name: Fetch master for Turbo filters
-          run: git fetch origin master:origin/master --depth=1
       - name: Sette yarn-config
         run: |
           yarn config set npmScopes.navikt.npmRegistryServer "https://npm.pkg.github.com"
@@ -101,11 +99,7 @@ jobs:
       - name: Run tests and linting
         id: run-tests
         run: |
-          if [ "${{ github.ref_name }}" = "master" ]; then
-            yarn test --filter='^@navikt/${{ inputs.app }}...'
-          else
-            yarn test --filter='^@navikt/${{ inputs.app }}...[origin/master]'
-          fi
+          yarn test --filter=@navikt/${{ inputs.app }}...
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"
