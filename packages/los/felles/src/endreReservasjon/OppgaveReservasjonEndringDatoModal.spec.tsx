@@ -17,6 +17,7 @@ describe('OppgaveReservasjonEndringDatoModal', () => {
     expect(await screen.findByText('Velg dato som reservasjonen avsluttes')).toBeInTheDocument();
 
     const datoInput = screen.getByRole('textbox', { hidden: true });
+
     await userEvent.type(datoInput, dayjs().format(DDMMYYYY_DATE_FORMAT));
 
     expect(await screen.findByText('OK')).toBeInTheDocument();
