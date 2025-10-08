@@ -14,12 +14,13 @@ describe('OppgaveReservasjonEndringDatoModal', () => {
 
     render(<Default endreOppgavereservasjon={endreOppgavereservasjon} />);
 
-    expect(await screen.findByText('Velg dato som rdfeservasjonen avsluttes')).toBeInTheDocument();
+    expect(await screen.findByText('Velg dato som reservasjonen avsluttes')).toBeInTheDocument();
 
     const datoInput = screen.getByRole('textbox', { hidden: true });
     await userEvent.type(datoInput, dayjs().format(DDMMYYYY_DATE_FORMAT));
 
     expect(await screen.findByText('OK')).toBeInTheDocument();
+
     await userEvent.click(screen.getByText('OK'));
 
     await waitFor(() => expect(endreOppgavereservasjon).toHaveBeenCalledTimes(1));
