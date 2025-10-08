@@ -80,13 +80,19 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: 'yarn'
-      - name: Restore turbo cache
+      - name: Use turbo cache
         uses: actions/cache@v4
         with:
-          path: .turbo/cache
-          key: turbo-${{ runner.os }}-${{ inputs.app }}
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
           restore-keys: |
             turbo-${{ runner.os }}-
+      - name: Debug turbo folder
+        run: |
+          echo "Contents of .turbo:"
+          pwd && ls -la .turbo || true
+          ls -R .turbo || true
+          du -sh .turbo || true
       - name: Installere dependencies
         run: yarn install --immutable
       - name: Build
@@ -95,12 +101,12 @@ jobs:
         id: run-tests
         run: |
           yarn test --filter=@navikt/${{ inputs.app }}...
-      - run: du -sh .turbo
-      - name: Save turbo cache
-        uses: actions/cache@v4
-        with:
-          path: .turbo/cache
-          key: turbo-${{ runner.os }}-${{ inputs.app }}
+      - name: Debug turbo folder
+        run: |
+          echo "Contents of .turbo:"
+          pwd && ls -la .turbo || true
+          ls -R .turbo || true
+          du -sh .turbo || true
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"
