@@ -81,12 +81,12 @@ jobs:
           node-version: ${{ inputs.node-version }}
           cache: 'yarn'
       - name: Restore turbo cache
-          uses: actions/cache@v4
-          with:
-            path: .turbo
-            key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
-            restore-keys: |
-              turbo-${{ runner.os }}-
+        uses: actions/cache@v4
+        with:
+          path: .turbo
+          key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
+          restore-keys: |
+            turbo-${{ runner.os }}-
       - name: Installere dependencies
         run: yarn install --immutable
       - name: Build
