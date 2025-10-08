@@ -68,6 +68,8 @@ jobs:
         with:
           ref: ${{ (inputs.branch != '' && inputs.branch) || '' }}
           fetch-depth: 0
+      - name: Fetch master for Turbo filters
+          run: git fetch origin master:origin/master --depth=1
       - name: Sette yarn-config
         run: |
           yarn config set npmScopes.navikt.npmRegistryServer "https://npm.pkg.github.com"
