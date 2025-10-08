@@ -80,10 +80,10 @@ jobs:
         with:
           node-version: ${{ inputs.node-version }}
           cache: 'yarn'
-      - name: Restore Turborepo cache
+      - name: Cache turbo build setup
         uses: actions/cache@v4
         with:
-          path: ./.turbo
+          path: .turbo
           key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
           restore-keys: |
             turbo-${{ runner.os }}-
@@ -91,11 +91,6 @@ jobs:
         run: yarn install --immutable
       - name: Build
         run: yarn build --filter=@navikt/${{ inputs.app }}
-      - name: Save Turborepo cache
-        uses: actions/cache@v4
-        with:
-          path: ./.turbo
-          key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
       - name: Run tests and linting
         id: run-tests
         run: |
