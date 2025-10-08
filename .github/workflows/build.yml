@@ -96,25 +96,10 @@ jobs:
         with:
           path: .turbo
           key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
-      - name: Run linting
-        run: |
-          if [ "${{ github.ref_name }}" = "master" ]; then
-            yarn stylelint --filter='@navikt/${{ inputs.app }}...' &&
-            yarn eslint --filter='@navikt/${{ inputs.app }}...' &&
-            yarn tsc --filter='@navikt/${{ inputs.app }}...'
-          else
-            yarn stylelint --filter='@navikt/${{ inputs.app }}...[origin/master]' &&
-            yarn eslint --filter='@navikt/${{ inputs.app }}...[origin/master]' &&
-            yarn tsc --filter='@navikt/${{ inputs.app }}...[origin/master]'
-          fi
-      - name: Run tests
+      - name: Run tests and linting
         id: run-tests
         run: |
-          if [ "${{ github.ref_name }}" = "master" ]; then
-            yarn test --filter=@navikt/${{ inputs.app }}...
-          else
-            yarn test --filter='@navikt/${{ inputs.app }}...[origin/master]'
-          fi
+          yarn test --filter=@navikt/${{ inputs.app }}...
       - name: Knip it
         if: inputs.run-knip
         run: yarn knip --no-exit-code --reporter=markdown >> "$GITHUB_STEP_SUMMARY"
