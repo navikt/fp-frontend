@@ -1237,10 +1237,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@navikt/aksel-stylelint@npm:7.31.0":
-  version: 7.31.0
-  resolution: "@navikt/aksel-stylelint@npm:7.31.0::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.31.0%2Fbcaa4965fd4666a6ed7e8026ad231bafa21a74bd"
-  checksum: 8d3c1c14438d441e9ef73665ac3df4679db36c188744e3005f79e256b70c4433b23a9c014c4df3dbc2986e6829b794a23dc1c34dfa621b70955b836e2a3d0bd4
+"@navikt/aksel-stylelint@npm:7.32.1":
+  version: 7.32.1
+  resolution: "@navikt/aksel-stylelint@npm:7.32.1::__archiveUrl=https%3A%2F%2Fnpm.pkg.github.com%2Fdownload%2F%40navikt%2Faksel-stylelint%2F7.32.1%2F4263e87a30f3f7a20196a06adbf081e1e82a6052"
+  checksum: 4fc8144c4116d046c2a3d430ecdc88df16c9cf7c44cf81c32bbba42de17378d6272f3f90bb82e8432bcc8e87bca51dc0a7ea292b11b311643be6ebe5cdf8aff0
   languageName: node
   linkType: hard
 
@@ -4951,74 +4951,74 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/cli-darwin@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-darwin@npm:2.55.0"
+"@sentry/cli-darwin@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli-darwin@npm:2.56.0"
   conditions: os=darwin
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm64@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-linux-arm64@npm:2.55.0"
+"@sentry/cli-linux-arm64@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli-linux-arm64@npm:2.56.0"
   conditions: (os=linux | os=freebsd | os=android) & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-arm@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-linux-arm@npm:2.55.0"
+"@sentry/cli-linux-arm@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli-linux-arm@npm:2.56.0"
   conditions: (os=linux | os=freebsd | os=android) & cpu=arm
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-i686@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-linux-i686@npm:2.55.0"
+"@sentry/cli-linux-i686@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli-linux-i686@npm:2.56.0"
   conditions: (os=linux | os=freebsd | os=android) & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-linux-x64@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-linux-x64@npm:2.55.0"
+"@sentry/cli-linux-x64@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli-linux-x64@npm:2.56.0"
   conditions: (os=linux | os=freebsd | os=android) & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-arm64@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-win32-arm64@npm:2.55.0"
+"@sentry/cli-win32-arm64@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli-win32-arm64@npm:2.56.0"
   conditions: os=win32 & cpu=arm64
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-i686@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-win32-i686@npm:2.55.0"
+"@sentry/cli-win32-i686@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli-win32-i686@npm:2.56.0"
   conditions: os=win32 & (cpu=x86 | cpu=ia32)
   languageName: node
   linkType: hard
 
-"@sentry/cli-win32-x64@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli-win32-x64@npm:2.55.0"
+"@sentry/cli-win32-x64@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli-win32-x64@npm:2.56.0"
   conditions: os=win32 & cpu=x64
   languageName: node
   linkType: hard
 
-"@sentry/cli@npm:2.55.0":
-  version: 2.55.0
-  resolution: "@sentry/cli@npm:2.55.0"
+"@sentry/cli@npm:2.56.0":
+  version: 2.56.0
+  resolution: "@sentry/cli@npm:2.56.0"
   dependencies:
-    "@sentry/cli-darwin": 2.55.0
-    "@sentry/cli-linux-arm": 2.55.0
-    "@sentry/cli-linux-arm64": 2.55.0
-    "@sentry/cli-linux-i686": 2.55.0
-    "@sentry/cli-linux-x64": 2.55.0
-    "@sentry/cli-win32-arm64": 2.55.0
-    "@sentry/cli-win32-i686": 2.55.0
-    "@sentry/cli-win32-x64": 2.55.0
+    "@sentry/cli-darwin": 2.56.0
+    "@sentry/cli-linux-arm": 2.56.0
+    "@sentry/cli-linux-arm64": 2.56.0
+    "@sentry/cli-linux-i686": 2.56.0
+    "@sentry/cli-linux-x64": 2.56.0
+    "@sentry/cli-win32-arm64": 2.56.0
+    "@sentry/cli-win32-i686": 2.56.0
+    "@sentry/cli-win32-x64": 2.56.0
     https-proxy-agent: ^5.0.0
     node-fetch: ^2.6.7
     progress: ^2.0.3
@@ -5043,7 +5043,7 @@ __metadata:
       optional: true
   bin:
     sentry-cli: bin/sentry-cli
-  checksum: 9d42c3362f5849033207d2410b09e583db20598e956bd4d5d151e28b8a406663b363f27013387008d2673651ff0a1561b55cef2bec35720cd3165084bb8dd1c2
+  checksum: a16e96886720d74b3a5001bf27674e0f01f4a78247857dca88882ad29d8a3f0c33d941f742dc0bfad8d9d310b4097159f647bf2577eefc10b4f96855eb792ff1
   languageName: node
   linkType: hard
 
@@ -7909,8 +7909,8 @@ __metadata:
   resolution: "fp-frontend@workspace:."
   dependencies:
     "@hey-api/openapi-ts": 0.85.0
-    "@navikt/aksel-stylelint": 7.31.0
-    "@sentry/cli": 2.55.0
+    "@navikt/aksel-stylelint": 7.32.1
+    "@sentry/cli": 2.56.0
     "@storybook/addon-a11y": 9.1.10
     "@storybook/addon-links": 9.1.10
     "@storybook/react": 9.1.10
