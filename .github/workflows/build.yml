@@ -83,13 +83,14 @@ jobs:
       - name: Use turbo cache
         uses: actions/cache@v4
         with:
-          path: /home/runner/work/fp-frontend/fp-frontend/.turbo
+          path: ~/fp-frontend/.turbo
           key: turbo-${{ runner.os }}-${{ hashFiles('yarn.lock') }}-${{ inputs.app }}
           restore-keys: |
             turbo-${{ runner.os }}-
       - name: Debug turbo folder
         run: |
           echo "Contents of .turbo:"
+          pwd && ls -la ~/fp-frontend/.turbo || true
           pwd && ls -la .turbo || true
           ls -R .turbo || true
           du -sh .turbo || true
