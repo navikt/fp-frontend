@@ -99,6 +99,7 @@ describe('AdopsjonFaktaIndex', () => {
     expect(screen.queryByText('Mann adopterer')).not.toBeInTheDocument();
     expect(screen.getByText('Ektefelles/samboers barn')).toBeInTheDocument();
     expect(screen.getByText('Er det ektefelles/samboers barn som adopteres?')).toBeInTheDocument();
+
     await userEvent.click(screen.getByText('Nei, det er ikke ektefelles/samboers barn'));
 
     const begrunnValgInput = utils.getByLabelText('Begrunn endringene');
